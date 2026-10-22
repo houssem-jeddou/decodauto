@@ -1,0 +1,160 @@
+[
+  {
+    "nom": "valide-panne",
+    "type": "panne",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Page valide : ligne de la base, ligne saisie validée, élément unique présent."
+  },
+  {
+    "nom": "valide-tutoriel-fluide",
+    "type": "fluide",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Tutoriel valide : étapes en liste numérotée, ni symptôme ni arbre exigés."
+  },
+  {
+    "nom": "r1-verdict-saisi",
+    "type": "panne",
+    "erreurs": [
+      "R1-VERDICT-SAISI"
+    ],
+    "alertes": [],
+    "explication": "Verdict saisi sur une ligne de voyant : il doit venir de la base."
+  },
+  {
+    "nom": "r1-voyant-inconnu",
+    "type": "panne",
+    "erreurs": [
+      "R1-VOYANT-INCONNU"
+    ],
+    "alertes": [],
+    "explication": "Voyant absent de la base voyants."
+  },
+  {
+    "nom": "r1-voyant-non-declare",
+    "type": "panne",
+    "erreurs": [
+      "R1-VOYANT-NON-DECLARE"
+    ],
+    "alertes": [],
+    "explication": "Ligne de voyant dont le voyant n'est pas dans la liste « voyants »."
+  },
+  {
+    "nom": "r2-moins-grave",
+    "type": "panne",
+    "erreurs": [
+      "R2-MOINS-GRAVE"
+    ],
+    "alertes": [],
+    "explication": "Verdict saisi moins grave que celui de la base."
+  },
+  {
+    "nom": "r3-pas-premiere-main",
+    "type": "panne",
+    "erreurs": [
+      "R3-PREMIERE-MAIN"
+    ],
+    "alertes": [],
+    "explication": "Verdict qui ne cite qu'une source de seconde main."
+  },
+  {
+    "nom": "r3-source-inconnue",
+    "type": "panne",
+    "erreurs": [
+      "R3-SOURCE-INCONNUE"
+    ],
+    "alertes": [],
+    "explication": "Source absente du registre."
+  },
+  {
+    "nom": "r4-empreinte-differente",
+    "type": "panne",
+    "erreurs": [
+      "R4-EMPREINTE"
+    ],
+    "alertes": [],
+    "explication": "Action modifiée après validation : l'empreinte ne correspond plus."
+  },
+  {
+    "nom": "r4-validation-absente",
+    "type": "panne",
+    "erreurs": [
+      "R4-VALIDATION-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Verdict saisi sans empreinte de validation."
+  },
+  {
+    "nom": "r5-revue-depassee",
+    "type": "panne",
+    "erreurs": [],
+    "alertes": [
+      "R5-REVUE-DEPASSEE"
+    ],
+    "explication": "Revue dépassée : alerte, ne bloque pas."
+  },
+  {
+    "nom": "r7-champ-manquant",
+    "type": "panne",
+    "erreurs": [
+      "R7-CHAMP-MANQUANT"
+    ],
+    "alertes": [],
+    "explication": "Champ obligatoire manquant."
+  },
+  {
+    "nom": "r7-hors-liste",
+    "type": "panne",
+    "erreurs": [
+      "R7-HORS-LISTE"
+    ],
+    "alertes": [],
+    "explication": "Valeur hors liste fermée."
+  },
+  {
+    "nom": "r7-element-unique-absent",
+    "type": "panne",
+    "erreurs": [
+      "R7-ELEMENT-UNIQUE-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "Élément unique absent de la page construite."
+  },
+  {
+    "nom": "r7-tutoriel-sans-etapes",
+    "type": "fluide",
+    "erreurs": [
+      "R7-TUTORIEL-ETAPES"
+    ],
+    "alertes": [],
+    "explication": "Tutoriel sans liste numérotée dans la page construite."
+  },
+  {
+    "nom": "r7-requete-absente",
+    "type": "panne",
+    "erreurs": [
+      "R7-REQUETE-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "La requête principale du plan ne figure ni dans le title ni dans le H1."
+  },
+  {
+    "nom": "r7-champ-calcule-saisi",
+    "type": "panne",
+    "erreurs": [
+      "R7-CHAMP-CALCULE"
+    ],
+    "alertes": [],
+    "explication": "Champ calculé saisi à la main."
+  },
+  {
+    "nom": "r7-plan-absent",
+    "type": "panne",
+    "erreurs": [
+      "R7-PLAN-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "Page absente du plan du site."
+  }
+]

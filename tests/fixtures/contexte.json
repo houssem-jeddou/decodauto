@@ -1,0 +1,72 @@
+{
+  "plan": [
+    {
+      "id": "fixture-panne",
+      "type": "panne",
+      "theme": "pannes-et-symptomes",
+      "vague": "B",
+      "adresse": "/fixture-panne/",
+      "requete_principale": "voiture ne démarre pas",
+      "mots_cles": [
+        "voiture ne démarre pas"
+      ]
+    },
+    {
+      "id": "fixture-fluide",
+      "type": "fluide",
+      "theme": "niveaux-et-fluides",
+      "vague": "C",
+      "adresse": "/fixture-fluide/",
+      "requete_principale": "vérifier le niveau d'huile",
+      "mots_cles": [
+        "vérifier le niveau d'huile"
+      ]
+    }
+  ],
+  "voyants": [
+    {
+      "id": "fixture-voyant-batterie",
+      "nom": "Voyant de test fixture-voyant-batterie",
+      "couleur": "orange",
+      "categorie": "Test",
+      "page": "fixture-panne",
+      "situation": "Voyant fixture-voyant-batterie allumé",
+      "verdict": "non, arrêt dès que possible",
+      "urgence": "sous quelques jours",
+      "action": "Faire contrôler la charge de la batterie.",
+      "sources": [
+        "fixture-notice"
+      ],
+      "validation": "b8e85016cd154d2341e17696b06d9096215ce918eb1081eca056278f8f99d851"
+    }
+  ],
+  "sources": [
+    {
+      "id": "fixture-notice",
+      "titre": "Source de test fixture-notice",
+      "editeur": "Éditeur de test",
+      "categorie": "notice-constructeur",
+      "url": "https://exemple.test/source",
+      "date_consultation": "2026-10-01"
+    },
+    {
+      "id": "fixture-securite-routiere",
+      "titre": "Source de test fixture-securite-routiere",
+      "editeur": "Éditeur de test",
+      "categorie": "securite-routiere",
+      "url": "https://exemple.test/source",
+      "date_consultation": "2026-10-01"
+    },
+    {
+      "id": "fixture-forum",
+      "titre": "Source de test fixture-forum",
+      "editeur": "Éditeur de test",
+      "categorie": "secondaire",
+      "url": "https://exemple.test/source",
+      "date_consultation": "2026-10-01"
+    }
+  ],
+  "auteurs": [
+    "fixture-auteur"
+  ]
+}
