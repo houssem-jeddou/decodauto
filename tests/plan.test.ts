@@ -17,6 +17,7 @@ import {
   liensEnAttente,
 } from '../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv, signature, type LigneCsv } from '../src/lib/porte-plan.ts';
+import { genererVue, insererVue } from '../scripts/lib/vue-plan.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const codes = (constats: readonly Constat[]): string[] => [...new Set(constats.map((c) => c.regle))].sort();
@@ -60,6 +61,11 @@ describe('plan du site réel (data/plan-du-site.json) et mots-clés du périmèt
     const { informations } = controlerPortePlan(plan, motsCles);
     assert.equal(informations.length, 1);
     assert.match(informations[0] ?? '', /^10 mot\(s\)-clé\(s\)/);
+  });
+
+  test('docs/09 est à jour : ses parties générées correspondent au plan et à docs/05 (npm run plan:vue)', async () => {
+    const vue = await readFile(join(racine, 'docs', '09_plan_du_site.md'), 'utf8');
+    assert.equal(insererVue(vue, genererVue(plan, motsCles)), vue);
   });
 
   test('demande de changement n° 2 : remettre l\'ancienne précision sur une ligne AdBlue fait échouer la porte', () => {
@@ -136,6 +142,23 @@ describe('liens de l\'outil voyants et liens écrits dans le texte', () => {
       '<a href="/voyants/?a=1">outil</a> [externe](https://exemple.fr/x/) [protocole](//exemple.fr/) [ancre](#haut)',
     ].join('\n');
     assert.deepEqual(adressesDansLeTexte(corps).sort(), ['/bruit/', '/surchauffe/', '/voyants/', '/voyants/huile/']);
+  });
+
+  test('liens absolus vers decodauto.com (www compris) et liens relatifs : résolus et contrôlés comme internes', () => {
+    assert.deepEqual(adressesDansLeTexte('[x](https://decodauto.com/voyants/huile/) [y](https://www.decodauto.com/bruit/)'), ['/voyants/huile/', '/bruit/']);
+    assert.deepEqual(adressesDansLeTexte('[x](../huile/) [y](frein/)', '/voyants/moteur/'), ['/voyants/huile/', '/voyants/moteur/frein/']);
+  });
+
+  test('images, fichiers et code ne sont pas des liens vers des pages', () => {
+    const corps = [
+      '![Voyant huile](/images/voyant-huile.jpg) <a href="/images/grand.jpg">agrandir</a> [notice](/docs/notice.pdf)',
+      'En code : `[x](/bruit/)`.',
+      '```md',
+      '[y](/surchauffe/)',
+      '```',
+      '[z](/voyants/)',
+    ].join('\n');
+    assert.deepEqual(adressesDansLeTexte(corps), ['/voyants/']);
   });
 
   test('un lien du texte mène à une page liée, mère ou enfant ; sinon il bloque', () => {
@@ -232,6 +255,9 @@ describe('porte de l\'étape 4 sur des données de test', () => {
     assert.equal(resultat.informations.length, 1);
     const enB = [ligne('p', { vague: 'B', requete_principale: 'a1', mots_cles: ['a1', 'a2', 'b1'] })];
     assert.deepEqual(codes(controlerPortePlan(enB, mots).constats), ['PLAN-VAGUE-PAGE']);
+    // À égalité, aucune vague n'est dominante : bloquant.
+    const egalite = csv('a1,A,,', 'b1,B,,');
+    assert.deepEqual(codes(controlerPortePlan([ligne('p', { vague: 'A', requete_principale: 'a1', mots_cles: ['a1', 'b1'] })], egalite).constats), ['PLAN-VAGUE-PAGE']);
   });
 
   test('un docs/05 vide ou sans les colonnes attendues bloque', () => {

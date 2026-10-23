@@ -34,7 +34,7 @@ Le plan du site (`data/plan-du-site.json`) est la référence du maillage : `par
 | PLAN-PARENT-INCONNU / PLAN-PARENT-CYCLE | La page mère est dans le plan ; les pages mères ne forment pas de cycle | erreur |
 | PLAN-ADRESSE-PARENT | L'adresse d'une page enfant est sous celle de sa mère ; une page dont l'adresse est sous celle d'une autre page la déclare comme mère | erreur |
 | R7-LIEN-OUTIL | L'outil voyants (`voyants`) mène à la page de chaque voyant de la base : cette page est son enfant ou lui est liée dans le plan | erreur |
-| R7-LIEN-HORS-PLAN / R7-LIEN-INCONNU | Un lien écrit dans le texte d'une page mène à une page du plan liée à celle-ci (lien déclaré, mère ou enfant), à son adresse exacte | erreur |
+| R7-LIEN-HORS-PLAN / R7-LIEN-INCONNU | Un lien écrit dans le texte d'une page (socle compris) mène à une page du plan liée à celle-ci (lien déclaré, mère ou enfant), à son adresse exacte. Les liens relatifs sont résolus depuis l'adresse de la page ; les liens absolus vers decodauto.com (www compris) sont internes. Images, fichiers (contrôlés par `npm run liens`) et code sont ignorés | erreur |
 | PLAN-MOT-CLE-ABSENT / -INCONNU / -DOUBLE | Porte de l'étape 4 : chaque mot-clé de `docs/05` est sur une seule page ; aucun mot-clé inconnu | erreur |
 | PLAN-VARIANTE | Une variante (`variante_proche_de`) est sur la page de son mot-clé de référence | erreur |
 | PLAN-DOUBLON-INTENTION | Une même signature d'intention (mots normalisés, au singulier, sans mots vides ni ordre ; « sans », « ne », « pas » gardés) n'est jamais sur deux pages | erreur |
@@ -42,7 +42,9 @@ Le plan du site (`data/plan-du-site.json`) est la référence du maillage : `par
 | PLAN-PRECISION / PLAN-PRECISION-INCONNUE | La colonne `precision` de `docs/05` est respectée quand elle désigne une page ou un type de page ; une précision nouvelle doit être traduite dans `PRECISIONS_05` | erreur |
 | PLAN-VAGUE-PAGE | La vague d'une page est la vague dominante de ses mots-clés dans `docs/05` | erreur |
 | PLAN-05-ILLISIBLE / PLAN-05-DOUBLON | `docs/05` est lisible, avec ses colonnes, sans mot-clé en double | erreur |
-| INFO | Liens du plan en attente de leur page (ils s'affichent quand les deux pages sont écrites) ; mots-clés servis dans une autre vague que celle de `docs/05` | information |
+| INFO | Liens du plan en attente de leur page : paires déclarées et liens mère-enfant dont une page n'est pas écrite (ils s'affichent quand les deux pages le sont) ; mots-clés servis dans une autre vague que celle de `docs/05` | information |
+
+Vue lisible : `docs/09_plan_du_site.md`. Ses parties générées (chiffres clés, tableaux, détail des mots-clés) se mettent à jour avec `npm run plan:vue` ; un test vérifie qu'elles correspondent au plan.
 
 Non vérifiable par machine (liste de recette) : un recouvrement de sens entre deux pages voisines (comparer les dix premiers résultats Google de leurs requêtes) ; la liste des pages identique à `docs/02` (vérifiée à la porte de l'étape 4, puis protégée par le test « 42 pages : 22 A, 11 B, 9 C »).
 

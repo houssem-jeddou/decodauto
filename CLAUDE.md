@@ -42,7 +42,7 @@ Guide indépendant : voyant, code défaut, symptôme ou obligation → peut-on r
 - Catalogue des règles et des codes d'erreur : `CONTROLES.md`.
 
 ## Commandes
-`npm ci` · `npm run dev` · `npm run build` (construit + contrôle) · `npm test` · `npm run schemas` · `npm run liens` · `npm run lighthouse` (après `build`) · `npm run fixtures` (régénère les pages de test).
+`npm ci` · `npm run dev` · `npm run build` (construit + contrôle) · `npm test` · `npm run schemas` · `npm run liens` · `npm run lighthouse` (après `build`) · `npm run fixtures` (régénère les pages de test) · `npm run plan:vue` (met à jour les parties générées de `docs/09`).
 
 ## Git
 Commits en français, clairs, un sujet par commit. Travailler sur la branche indiquée par la tâche. Pas de réécriture d'historique sur une branche partagée.
