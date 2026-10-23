@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.23.4 <23"
+    "node": ">=22"
   },
   "scripts": {
     "dev": "astro dev",
@@ -16,7 +16,7 @@
     "lighthouse": "lhci autorun --config=lighthouserc.json",
     "fixtures": "node scripts/generer-fixtures.ts",
     "empreinte": "node scripts/empreinte.ts",
-    "deploy": "wrangler deploy"
+    "verifier:modes": "node scripts/verifier-modes.ts"
   },
   "dependencies": {
     "astro": "7.4.2"

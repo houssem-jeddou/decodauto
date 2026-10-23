@@ -4,6 +4,10 @@ on:
   pull_request:
   push:
     branches: [main]
+  # Contrôle hebdomadaire (lundi, 6 h 17 UTC) pour les alertes de revue dépassée. Jamais de déploiement.
+  # GitHub ne lance les déclenchements planifiés que depuis la branche par défaut (main).
+  schedule:
+    - cron: '17 6 * * 1'
 
 permissions:
   contents: read
@@ -14,7 +18,7 @@ concurrency:
 
 env:
   ASTRO_TELEMETRY_DISABLED: '1'
-  # Le site reste non indexable tant que la variable de dépôt SITE_INDEXABLE ne vaut pas exactement "true".
+  # Le site n'est indexable que si cette variable vaut exactement "true" ET si config/indexation.json vaut true.
   SITE_INDEXABLE: ${{ vars.SITE_INDEXABLE }}
 
 jobs:
@@ -38,15 +42,11 @@ jobs:
         run: npm run build
       - name: Liens cassés
         run: npm run liens
-      - name: Non-indexation, dans les deux sens (construction forcée dans chaque mode)
-        run: |
-          for mode in false true; do
-            echo "::group::SITE_INDEXABLE=$mode"
-            SITE_INDEXABLE=$mode npx astro build --outDir "dist-$mode"
-            SITE_INDEXABLE=$mode node scripts/controle.ts --dist "dist-$mode"
-            SITE_INDEXABLE=$mode node scripts/liens.ts --dist "dist-$mode"
-            echo "::endgroup::"
-          done
+      - name: Non-indexation, double clé (variable + drapeau) dans les quatre combinaisons
+        run: npm run verifier:modes
+      - name: Alertes de revue dépassée (contrôle hebdomadaire seulement)
+        if: ${{ github.event_name == 'schedule' }}
+        run: node scripts/controle.ts --echouer-sur R5-REVUE-DEPASSEE
       - name: Conserver le site vérifié
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -58,6 +58,7 @@ jobs:
   lighthouse:
     name: Lighthouse mobile (3 passages)
     needs: controles
+    if: ${{ github.event_name != 'schedule' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
