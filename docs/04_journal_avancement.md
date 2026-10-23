@@ -2,23 +2,33 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 23/10/2026 (14 h)
+Dernière mise à jour : 23/10/2026 (16 h 30)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
 |---|---|---|---|
-| 1 | Mots-clés | ✅ Figée (22/10) | 05_mots_cles_perimetre.csv (source de vérité ; v2 du 23/10 : précision de 5 lignes, demande de changement n° 2), 06_base_mots_cles_complete.csv ; base Excel v1.1 conservée hors projet par Houssem |
+| 1 | Mots-clés | ✅ Figée (22/10) | 05_mots_cles_perimetre_v2.csv (source de vérité ; v2 du 23/10 : précision de 5 lignes, demande de changement n° 2), 06_base_mots_cles_complete.csv ; base Excel v1.1 conservée hors projet par Houssem |
 | 2 | Périmètre | ✅ Figé (22/10) | 02_perimetre_lot_unique.md (formulation du nombre de pages corrigée le 23/10) |
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v3 depuis le 23/10) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
-| 4 | Plan du site | ✅ Validée par Houssem (23/10) · tag `etape-4-plan-du-site` sur demande, après fusion de la PR #3 | `data/plan-du-site.json` (fait foi) ; 09_plan_du_site_v1.md (vue lisible) ; PR #3 |
-| 5 | Sources et base voyants | À faire (prochaine étape) | – |
+| 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
+| 5 | Sources et base voyants | ▶ En cours : d'abord la demande de changement sur la structure (voir plus bas) | – |
 | 6 | Charte et modèles de pages | À faire | – |
-| 7 | Socle technique | À faire | – |
+| 7 | Socle technique | À faire, sur la piste technique (03, règle 12) ; condition d'entrée : statut juridique tranché | – |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
 | 10 | Vague B | À faire | – |
 | 11 | Vague C | À faire | – |
 | 12 | Boucle mensuelle | À faire | – |
+
+## Prévision (mise à jour à chaque session ; les dates de 03 sont des cibles)
+| Étape | Cible (03) | Prévision au 23/10 | Dépend de |
+|---|---|---|---|
+| 5. Sources et base voyants | 24–27/10 | demande de changement 24/10 ; registre et base 24–26/10 ; paquet de validation 26–27/10 | disponibilité de Houssem pour valider ; notices accessibles en ligne |
+| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes 24–25/10 ; étape 7 du 26 au 28/10 si le statut est tranché d'ici le 26/10 | statut juridique (condition d'entrée de l'étape 7) |
+| 6. Charte et modèles | 27–29/10 | 27–29/10 | porte de l'étape 5 ; source des résultats Google depuis la France choisie |
+| 8. Vague A | 29/10–01/11 | 29/10–02/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
+| 9. Mise en ligne du minimum | 31/10 | entre le 31/10 et le 03/11 | portes 7 et 8 ; sécurité des comptes |
+| 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 10–14/11 / ≈ 17–21/11 | mise en ligne de la vague A ; briefs des lots |
 
 ## Étape 4, Plan du site : livrables
 - [x] **Rattachement des mots-clés** : les 1 053 mots-clés de 05 (921 comptés, 132 variantes) sont rattachés chacun à une seule page. Le plan compte 42 pages (22 en vague A, 11 en B, 9 en C), comme dans 02. Douze cas limites sont tranchés (09).
@@ -42,9 +52,11 @@ Dernière mise à jour : 23/10/2026 (14 h)
 | Validation de Houssem | ✅ | 23/10/2026 |
 
 ## Décisions ouvertes (à trancher par Houssem)
-- **Fusion de la PR #3** et **tag `etape-4-plan-du-site`** : sur demande de Houssem.
-- **Relecteur :** mécanicien payé, ou uniquement des sources officielles citées. À trancher avant l'étape 5 ; ce choix décide aussi si les pages affichent « relu par ».
-- **Statut** pour les mentions légales, et encaissement d'AdSense depuis la Tunisie.
+- **Instructions du projet** : coller le texte v2 fourni le 23/10 (sources de vérité à jour, piste technique, sourçage multi-marques, transparence, circuit des documents).
+- **Statut juridique** pour les mentions légales : condition d'entrée de l'étape 7. À trancher d'ici le 26/10 pour tenir le minimum ; ou décider que la condition ne vise que les mentions légales, le reste de l'étape 7 avançant.
+- **Marques de référence** pour les verdicts (nombre et liste) : proposées dans la demande de changement du début de l'étape 5.
+- **Source des résultats Google relevés depuis la France** pour les briefs (Semrush base France, ou relevé manuel) : avant l'étape 6.
+- **Auteur** : nom réel acté le 23/10 ; parcours à fournir pour la page « à propos » (étape 7 ou 8).
 
 ## Historique des décisions
 - 22/10/2026 : niche voiture retenue ; base de mots-clés v1.1 figée ; périmètre lot unique figé (42 pages, outil voyants et socle compris, 4 thèmes) ; électrique hors périmètre ; pas d'achat de lecteurs OBD ; plan d'avancement validé avec publication en 3 vagues.
@@ -53,6 +65,14 @@ Dernière mise à jour : 23/10/2026 (14 h)
 - 23/10/2026 : porte de sortie de l'étape 3 validée par Houssem. Les schémas du dépôt font foi pour la structure des contenus (le 08 est archivé comme référence). Le projet Claude fait foi pour les documents, et docs/ du dépôt en est la copie mise à jour à chaque validation par PR (CLAUDE.md et docs/README.md corrigés). Tag `etape-3-fondations` posé sur la version validée.
 - 23/10/2026 (après-midi), étape 4 : plan du site validé par Houssem (42 pages, adresses, 49 paires de liens, requêtes principales, cas limites 1 à 12). Demandes de changement n° 1 (liens dans le plan) et n° 2 (précision de 5 lignes de 05) acceptées. Pas de pages « thème » pour l'instant. `data/plan-du-site.json` fait foi pour le plan ; 09 en est la vue lisible.
 - 23/10/2026 (14 h), après la revue globale des étapes 1 à 4 : porte de sortie de l'étape 4 validée. 03 passe en v2 : points de mise en ligne inscrits aux étapes 7 à 9 (canonical contrôlé, redirections www et http, politique de confidentialité, vague A préparée hors de `main`, mise en ligne par une seule PR avec le drapeau d'indexation, vérification en production), minimum du 31/10 (socle, outil voyants, loi montagne, pression des pneus, voyants validés ; le reste suit sans alléger les portes), plateforme de consentement déplacée à l'étape 12. Règle des liens allégée : un ajout de paire de liens se propose dans la PR du lot de pages et se valide avec le lot ; un retrait reste une demande de changement. Mesure des requêtes absentes de 06 : pas maintenant. 01 et 02 : formulations périmées corrigées (nom de domaine, nombre de pages).
+- 23/10/2026 (16 h), après la revue du planning et des règles : Houssem accepte les cinq changements et refuse le relecteur mécanicien. 03 passe en v3 :
+  1. méthode de l'étape 5 : plusieurs marques par verdict, verdict le plus prudent, citation à la page près, paquet de validation, sources pour toute la vague A, catégories de sources élargies ;
+  2. confiance et transparence : auteur identifié par son nom réel, ligne de transparence sur chaque page, méthode dans « à propos », encadré de décision relu par Houssem, pas de relecteur extérieur ;
+  3. une seule piste technique en parallèle (étape 7, ou livrable technique d'une autre étape : pictogrammes, partie technique de l'outil voyants), pictogrammes livrables de l'étape 5, dates devenues des cibles avec prévision au journal ;
+  4. requêtes absentes de 06 mesurées avant l'étape 8 ; briefs sur des résultats relevés depuis la France ;
+  5. statut avant l'étape 7, recette avant chaque fusion des vagues B et C, emplacements publicitaires non affichés avant AdSense, seuil Lighthouse avec publicité à l'étape 12, sécurité des comptes à l'étape 9, indicateurs et notoriété sans liens artificiels à l'étape 12.
+
+  01, 02, 08, CLAUDE.md et le texte des instructions du projet ont été alignés.
 
 ## Revues indépendantes : ce qu'elles ont changé
 - 22/10 : instructions du projet revues (champ de la revue précisé, format anti-complaisance avec preuves, deux revues maximum, alignement avec 03 et 04, rythme de mise à jour du journal).
@@ -87,23 +107,32 @@ Dernière mise à jour : 23/10/2026 (14 h)
   - texte du socle contrôlé lui aussi ;
   - branchements couverts par des tests (vérifiés par mutation) ;
   - parties de 09 générées par `npm run plan:vue` et vérifiées par un test.
+- 23/10, revue du planning et des règles (un relecteur, qui a lu les documents seul avant la proposition) : « à corriger » sur trois manques, la méthode de sourçage de l'étape 5, les pictogrammes et la transparence. Apports intégrés : méthode multi-marques et catégories de sources (règlement ONU n° 121, RappelConso, normes des codes défaut), règlement européen sur l'IA (article 50), encadré de décision relu par Houssem, recette avant chaque fusion après le lancement, seuil Lighthouse avec la publicité, alignement de 01, 02 et 03. Écartés : trois niveaux de procédure (déjà couverts), annuaires et liens dans les forums (liens artificiels selon Google).
 - 23/10, revue globale des étapes 1 à 4, deux relecteurs (trafic et utilité avec la base 06 ; fondations et production) : « acceptable », rien de bloquant. Exclusions, codes retenus, vagues, adresses et liens confirmés. Apports : 03 v2 (voir l'historique), règle des liens allégée, demandes de changement à ouvrir à l'étape 5 (empreinte, pictogrammes), notes pour l'étape 6, idées reportées complétées.
 
-## À ouvrir au début de l'étape 5 (demandes de changement sur la structure)
+## À ouvrir au début de l'étape 5 (une demande de changement sur la structure, avant toute validation)
+- **Catégories de sources** : ajouter le règlement ONU n° 121 (symboles et couleurs des voyants), RappelConso (rappels) et les normes qui définissent les codes défaut ; décider lesquelles sont de première main.
+- **Plusieurs marques par verdict** : contrôle automatique du nombre de marques distinctes parmi les notices citées par chaque ligne de la base voyants, nombre et liste fixés par Houssem.
+- **Registre et citations** : marque de chaque notice au registre ; chaque source citée par une ligne de la base avec sa page ou section et son extrait (contrôlés), pour que la porte de l'étape 5 soit vérifiable.
 - **Empreinte de validation** : verrouiller aussi la situation (et `voyant_lie`) des lignes saisies, et la situation, la couleur et le nom des lignes de la base voyants. Aujourd'hui, on peut changer la situation d'une ligne ou la couleur d'un voyant sans revalidation. Accents et ponctuation ignorés, pour qu'une coquille ne force pas de revalidation ; aligner la règle 4 de 08. Coût nul tant que la base est vide.
 - **Pictogrammes** : champ `pictogramme` dans la base voyants (un symbole partagé par plusieurs états), contrôle du fichier SVG, et dessin d'environ 15 à 20 symboles redessinés avant la vague A.
 
 ## Pour l'étape 6
+- Charte éditoriale : base de calcul du coût probable et ses tranches (la source doit exister dans le registre), ligne de transparence, section méthode de « à propos ».
+- Proposition, à décider : codage de la gravité lisible sans la seule couleur (accessibilité).
+- Brief de chaque page généré depuis le plan, avec les résultats Google relevés depuis la France.
+- Proposition, à décider : photos réelles pour les tutos des vagues B et C.
 - Contrôles peu coûteux : title, H1 ou description en double entre deux pages ; dates incohérentes ; verdict et urgence contradictoires (ex. « arrêt immédiat » avec urgence « aucune »).
-- Champs pour les données structurées : libellé court (fil d'Ariane, ancres), texte alternatif de l'image, lien du profil auteur ; relecteur en fiche si un mécanicien est retenu.
+- Champs pour les données structurées : libellé court (fil d'Ariane, ancres), texte alternatif de l'image, lien du profil auteur .
 - Élément unique en outil quand la réponse tient en un chiffre (usure, date de fabrication, délai de contre-visite), car l'aperçu IA la donne sans clic.
 - Avant rédaction : comparer les résultats Google de « voyant orange voiture » (outil) et « voyant moteur orange » ; titre des fumées avec la fumée noire, titre du bruit moteur avec le claquement.
 - Volumes à lire comme des plafonds : dossier PureTech (94 % de noms de moteur ou de modèle), viscosités (surtout intention d'achat), outil voyants (30 % de requêtes « + modèle »), batterie (34 % d'achat par capacité).
 
 ## Points ouverts (non bloquants)
-- **Requêtes absentes de 06** : une vingtaine de requêtes suggérées en premier par Google n'y figurent pas (« voyant moteur rouge », « fumée blanche voiture », « voiture qui fume blanc / noir », « pourquoi ma voiture chauffe », « direction assistée », « fap bouché », « puretech fiabilité / avis / chaîne »…). Toutes relèvent de pages prévues. Mesure reportée par Houssem ; à faire avant la rédaction des pages concernées, avec le rattachement des requêtes identiques classées hors périmètre (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture » et environ 38 lignes), dans une seule demande de changement.
-- **Statut et AdSense** : AdSense paie en Tunisie par virement ; reste à trancher le statut des mentions légales et à vérifier que l'activité déclarée du statut d'auto-entrepreneur couvre des recettes publicitaires.
-- **OVH** : activer la double authentification sur le compte ; vérifier que le renouvellement du domaine est automatique.
+- **Requêtes absentes de 06** : une vingtaine de requêtes suggérées en premier par Google n'y figurent pas (« voyant moteur rouge », « fumée blanche voiture », « voiture qui fume blanc / noir », « pourquoi ma voiture chauffe », « direction assistée », « fap bouché », « puretech fiabilité / avis / chaîne »…). Toutes relèvent de pages prévues. Mesure reportée par Houssem ; à faire juste avant l'étape 8 (03 v3), avec le rattachement des requêtes identiques classées hors périmètre (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture » et environ 38 lignes), dans une seule demande de changement.
+- **Statut et AdSense** : AdSense paie en Tunisie par virement. Le statut des mentions légales reste à trancher (condition d'entrée de l'étape 7), et il faut vérifier que l'activité déclarée du statut d'auto-entrepreneur couvre des recettes publicitaires.
+- **Règlement européen sur l'IA (article 50)** : obligation de signaler un texte généré par IA qui informe le public sur une question d'intérêt public, sauf relecture humaine et responsabilité éditoriale. Il est incertain que la relecture des seuls encadrés, avec la responsabilité éditoriale de Houssem, suffise à cette exception ; la ligne de transparence sur chaque page devrait couvrir l'obligation de signalement. Sa portée pour un éditeur établi en Tunisie reste aussi incertaine.
+- **OVH** : activer la double authentification sur le compte ; vérifier que le renouvellement du domaine est automatique. La sécurité des comptes est vérifiée à la porte de l'étape 9.
 - **DNSSEC** : désactivation chez OVH en cours. Au 23/10, aucun enregistrement DS n'est publié pour decodauto.com.
 - **Application GitHub de Claude** : une demande de mise à jour des permissions attend la décision de Houssem.
 - **Contrôle hebdomadaire** : il n'a encore jamais tourné. Premier passage le lundi 26/10.

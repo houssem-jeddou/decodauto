@@ -4,7 +4,7 @@ Figé le 22/10/2026 après trois revues indépendantes. Source : base « Perso_C
 
 ## Chiffres clés
 - 921 mots-clés comptés (variantes proches exclues), ≈ 1 019 100 recherches indicatives / mois, dont 316 000 sur des requêtes ≥ 10 000 / mois souvent tenues par de gros acteurs.
-- 42 pages, dont l'outil « identifier un voyant » et les 3 pages du socle (détail dans le plan du site, 09). Publication en 3 vagues : A (mise en ligne au plus tard le 31/10/2026), B (vers le 07/11/2026), C (vers le 14/11/2026).
+- 42 pages, dont l'outil « identifier un voyant » et les 3 pages du socle (détail dans le plan du site, 09). Publication en 3 vagues, dates cibles : A le 31/10/2026 (cible du minimum en ligne défini dans 03), B vers le 07/11/2026, C vers le 14/11/2026.
 - Les volumes sont des fourchettes Keyword Planner converties par moyenne géométrique (316 / 3 160 / 31 600 / 316 000) : ils servent à comparer, pas à prévoir un trafic.
 
 ## Les 4 thèmes du site
@@ -17,19 +17,19 @@ Figé le 22/10/2026 après trois revues indépendantes. Source : base « Perso_C
 
 ## Blocs retenus (dans l'ordre)
 ### Socle
-- Thème : Socle · Vague A (mise en ligne au plus tard le 31/10/2026)
+- Thème : Socle · Vague A (cible : 31/10/2026, minimum défini dans 03)
 - Pages prévues : Accueil, mentions légales, page « à propos, auteur et sources »
 - Mots-clés (comptés) : 0 · Volume indicatif : 0 / mois · dont requêtes ≥ 10 000 : 0
 - Requêtes phares : –
 
 ### Voyants
-- Thème : 1. Alertes et codes · Vague A (mise en ligne au plus tard le 31/10/2026)
+- Thème : 1. Alertes et codes · Vague A (cible : 31/10/2026, minimum défini dans 03)
 - Pages prévues : Page guide avec l'outil « identifier un voyant » (pictogrammes nommés), et 11 pages : moteur (antipollution inclus), huile, batterie, frein (frein à main, liquide, plaquettes), AdBlue, FAP (page de référence du FAP), préchauffage, airbag, ABS et ESP, pression des pneus, direction. Le voyant température est traité dans la page surchauffe.
 - Mots-clés (comptés) : 470 · Volume indicatif : 381 728 / mois · dont requêtes ≥ 10 000 : 158 000
 - Requêtes phares : moteur voyant (10k–100k), voyant moteur orange (10k–100k), voyant orange voiture (10k–100k), voiture voyants (10k–100k), huile moteur voyant (10k–100k), voyant fap (1k–10k)
 
 ### Codes OBD (5 fiches)
-- Thème : 1. Alertes et codes · Vague A (mise en ligne au plus tard le 31/10/2026)
+- Thème : 1. Alertes et codes · Vague A (cible : 31/10/2026, minimum défini dans 03)
 - Pages prévues : 5 fiches : P0420 (catalyseur, essence et diesel), P0087, P0299, P0380, P1351 (reliées au voyant moteur, à la perte de puissance et au voyant préchauffage)
 - Mots-clés (comptés) : 78 · Volume indicatif : 72 996 / mois · dont requêtes ≥ 10 000 : 0
 - Requêtes phares : p0420 (1k–10k), p0299 (1k–10k), p0380 renault (1k–10k), p0380 (1k–10k), p0087 (1k–10k), p1351 (1k–10k)
@@ -77,7 +77,7 @@ Figé le 22/10/2026 après trois revues indépendantes. Source : base « Perso_C
 - Requêtes phares : frein liquide (1k–10k), dot 4 liquide de frein (1k–10k), liquide de frein voiture (1k–10k), remplacement liquide de frein (100–1k)
 
 ### Pneus : pression
-- Thème : 4. Pneus et obligations · Vague A (mise en ligne au plus tard le 31/10/2026)
+- Thème : 4. Pneus et obligations · Vague A (cible : 31/10/2026, minimum défini dans 03)
 - Pages prévues : 1 page « bonne pression des pneus » (gonflage inclus)
 - Mots-clés (comptés) : 9 · Volume indicatif : 56 880 / mois · dont requêtes ≥ 10 000 : 31 600
 - Requêtes phares : pneu pression (10k–100k), gonflage pneu (1k–10k), gonflage de pneu voiture (1k–10k), gonfleur pneu de voiture (1k–10k), pneu gonflage (1k–10k), gonfler un pneu (1k–10k)
@@ -89,7 +89,7 @@ Figé le 22/10/2026 après trois revues indépendantes. Source : base « Perso_C
 - Requêtes phares : temoin usure pneu (1k–10k), témoin d usure pneu (1k–10k), temoin pneu (1k–10k), pneu usé (1k–10k), pneu usure (1k–10k), date fabrication pneu (100–1k)
 
 ### Pneus : hiver et loi montagne
-- Thème : 4. Pneus et obligations · Vague A (mise en ligne au plus tard le 31/10/2026)
+- Thème : 4. Pneus et obligations · Vague A (cible : 31/10/2026, minimum défini dans 03)
 - Pages prévues : 1 page réglementaire : obligations (1er novembre – 31 mars), zones concernées, pneus hiver ou 4 saisons (3PMSF). L'achat de chaînes et chaussettes est hors périmètre
 - Mots-clés (comptés) : 21 · Volume indicatif : 100 488 / mois · dont requêtes ≥ 10 000 : 63 200
 - Requêtes phares : loi montagne (10k–100k), obligation pneu neige (10k–100k), pneu m et s (1k–10k), pneu ete ou 4 saison (1k–10k), pneu 3pmsf (1k–10k), pneu 4 saisons ou hiver (1k–10k)
