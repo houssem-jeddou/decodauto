@@ -3,7 +3,9 @@ id: fixture-panne
 title: "Voiture ne démarre pas : que faire ? (page de test)"
 h1: "Ma voiture ne démarre pas : que faire ?"
 description: Page de test des contrôles, jamais publiée.
+libelle_court: Voiture qui ne démarre pas
 image: /images/fixture.jpg
+image_alt: Image de test
 question_decision: Puis-je rouler si ma voiture démarre difficilement ?
 cout_probable:
   tranche: à fixer à l'étape 6
@@ -30,7 +32,7 @@ contexte:
 causes:
   - cause: Batterie déchargée
     explication: Une batterie faible ne fournit pas assez de courant.
-validation: 2231994deebb47ee290b45f52a9317566a0fdd1bc0ec8818d06049e8beb722bc
+validation: 109c8318dc536a7a8a654c3467127d897016333300c5a01d2bdb6a39e8ccd8cc
 ---
 
 Page de test (r1-voyant-inconnu), jamais publiée.

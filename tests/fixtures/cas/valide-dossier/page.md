@@ -3,7 +3,9 @@ id: fixture-dossier
 title: Dossier de test (page de test)
 h1: "Dossier de test : problèmes connus"
 description: Page de test des contrôles, jamais publiée.
+libelle_court: Dossier de test
 image: /images/fixture.jpg
+image_alt: Image de test
 question_decision: Mon moteur est-il concerné par ce dossier ?
 cout_probable:
   tranche: à fixer à l'étape 6
@@ -22,13 +24,17 @@ situations:
     verdict: oui avec précautions
     urgence: sous quelques semaines
     action: Consulter le constructeur pour le rappel.
-    sources:
-      - fixture-notice
+    citations:
+      - source: fixture-notice
+        emplacement: p. 1, rubrique de test
+        extrait: Consigne de test de la source fixture-notice.
+        verdict: oui avec précautions
+        urgence: sous quelques semaines
 element_unique: tableau
 journal_modifications:
   - date: 2026-10-20
     resume: Création du dossier de test.
-validation: b1f6bef8e6c208db298eda032978d9ed9e64320139be4aa864c7bfc0616eec2d
+validation: 23bbf456074f257d41362e35bb5928b26da912ef7baa2a361a08f435c8b6f04d
 ---
 
 Page de test (valide-dossier), jamais publiée.

@@ -3,7 +3,9 @@ id: fixture-code
 title: "Code P0420 : que faire ? (page de test)"
 h1: "Code défaut P0420 : que faire ?"
 description: Page de test des contrôles, jamais publiée.
+libelle_court: Code P0420
 image: /images/fixture.jpg
+image_alt: Image de test
 question_decision: Puis-je rouler avec le code P0420 ?
 cout_probable:
   tranche: à fixer à l'étape 6
@@ -24,19 +26,23 @@ situations:
     verdict: non, arrêt immédiat
     urgence: immédiate
     action: S'arrêter et couper le moteur.
-    sources:
-      - fixture-securite-routiere
+    citations:
+      - source: fixture-securite-routiere
+        emplacement: p. 1, rubrique de test
+        extrait: Consigne de test de la source fixture-securite-routiere.
 voyants:
   - fixture-voyant-huile
 element_unique: tableau
 code: P0420
 libelle: Rendement du catalyseur inférieur au seuil
+libelle_sources:
+  - fixture-forum
 portee: generique
 carburant: essence et diesel
 causes:
   - cause: Catalyseur usé
     explication: Le catalyseur ne traite plus correctement les gaz.
-validation: 2876ca6e36d563b7c3e97f4a12af6ac68088bc86894ff995ee102e9534cdd638
+validation: df0171da44e83659f1c44264ac77e4f34fef9350ebe785da84cd57f3d15102ce
 ---
 
 Page de test (valide-code-defaut), jamais publiée.

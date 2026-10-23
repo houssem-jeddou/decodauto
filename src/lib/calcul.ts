@@ -1,5 +1,6 @@
 import { calculesSchema, type Calcules, type LigneSituation } from '../schemas/pages.ts';
 import type { PlanDuSite, VoyantBase } from '../schemas/donnees.ts';
+import type { Citation } from '../schemas/briques.ts';
 import { rangVerdict, type TypePage, type Urgence, type Verdict } from '../schemas/listes.ts';
 
 /** Une ligne de situation une fois résolue : les lignes { voyant } sont remplacées par celles de la base. */
@@ -8,10 +9,16 @@ export interface LigneResolue {
   verdict: Verdict;
   urgence: Urgence;
   action: string;
+  citations: readonly Citation[];
+  /** Sources citées, sans doublon (calculées depuis les citations). */
   sources: readonly string[];
+  ecart_marques?: string | undefined;
   origine: 'base' | 'page';
   voyant?: string;
+  voyant_lie?: string | undefined;
 }
+
+const sourcesCitees = (citations: readonly Citation[]): string[] => [...new Set(citations.map((c) => c.source))];
 
 export function resoudreLignes(
   situations: readonly LigneSituation[],
@@ -31,7 +38,9 @@ export function resoudreLignes(
         verdict: voyant.verdict,
         urgence: voyant.urgence,
         action: voyant.action,
-        sources: voyant.sources,
+        citations: voyant.citations,
+        sources: sourcesCitees(voyant.citations),
+        ecart_marques: voyant.ecart_marques,
         origine: 'base',
         voyant: voyant.id,
       });
@@ -40,15 +49,18 @@ export function resoudreLignes(
       ligne.verdict !== undefined &&
       ligne.urgence !== undefined &&
       ligne.action !== undefined &&
-      ligne.sources !== undefined
+      ligne.citations !== undefined
     ) {
       lignes.push({
         situation: ligne.situation,
         verdict: ligne.verdict,
         urgence: ligne.urgence,
         action: ligne.action,
-        sources: ligne.sources,
+        citations: ligne.citations,
+        sources: sourcesCitees(ligne.citations),
+        ecart_marques: ligne.ecart_marques,
         origine: 'page',
+        voyant_lie: ligne.voyant_lie,
       });
     }
   }
