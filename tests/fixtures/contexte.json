@@ -80,31 +80,73 @@
       "id": "fixture-voyant-batterie",
       "nom": "Voyant de test fixture-voyant-batterie",
       "couleur": "orange",
-      "categorie": "Test",
-      "page": "fixture-panne",
+      "pictogramme": "fixture-batterie",
       "situation": "Voyant fixture-voyant-batterie allumé",
       "verdict": "non, arrêt dès que possible",
-      "urgence": "sous quelques jours",
+      "urgence": "immédiate",
       "action": "Faire contrôler la charge de la batterie.",
-      "sources": [
-        "fixture-notice"
+      "citations": [
+        {
+          "source": "fixture-notice",
+          "emplacement": "p. 1, rubrique de test",
+          "extrait": "Consigne de test de la source fixture-notice.",
+          "verdict": "non, arrêt dès que possible",
+          "urgence": "immédiate"
+        },
+        {
+          "source": "fixture-notice-peugeot",
+          "emplacement": "p. 1, rubrique de test",
+          "extrait": "Consigne de test de la source fixture-notice-peugeot.",
+          "verdict": "non, arrêt dès que possible",
+          "urgence": "immédiate"
+        },
+        {
+          "source": "fixture-notice-volkswagen",
+          "emplacement": "p. 1, rubrique de test",
+          "extrait": "Consigne de test de la source fixture-notice-volkswagen.",
+          "verdict": "non, arrêt dès que possible",
+          "urgence": "immédiate"
+        }
       ],
-      "validation": "b8e85016cd154d2341e17696b06d9096215ce918eb1081eca056278f8f99d851"
+      "categorie": "Test",
+      "page": "fixture-panne",
+      "validation": "38c5493d3d0984e639d0c29fd5cbf5bf648942fa495b3edf6a4d67eb3605166d"
     },
     {
       "id": "fixture-voyant-huile",
       "nom": "Voyant de test fixture-voyant-huile",
       "couleur": "orange",
-      "categorie": "Test",
-      "page": "fixture-voyant",
+      "pictogramme": "fixture-huile",
       "situation": "Voyant fixture-voyant-huile allumé",
       "verdict": "non, arrêt immédiat",
       "urgence": "immédiate",
       "action": "S'arrêter et couper le moteur.",
-      "sources": [
-        "fixture-notice"
+      "citations": [
+        {
+          "source": "fixture-notice",
+          "emplacement": "p. 1, rubrique de test",
+          "extrait": "Consigne de test de la source fixture-notice.",
+          "verdict": "non, arrêt immédiat",
+          "urgence": "immédiate"
+        },
+        {
+          "source": "fixture-notice-peugeot",
+          "emplacement": "p. 1, rubrique de test",
+          "extrait": "Consigne de test de la source fixture-notice-peugeot.",
+          "verdict": "non, arrêt immédiat",
+          "urgence": "immédiate"
+        },
+        {
+          "source": "fixture-notice-volkswagen",
+          "emplacement": "p. 1, rubrique de test",
+          "extrait": "Consigne de test de la source fixture-notice-volkswagen.",
+          "verdict": "non, arrêt immédiat",
+          "urgence": "immédiate"
+        }
       ],
-      "validation": "b6b9aedf49e0b4d1d68a41d5b2977472ea7847bd033d4664e7c699fef01ce79c"
+      "categorie": "Test",
+      "page": "fixture-voyant",
+      "validation": "ad6c963a4386356264c08640d013c052ee1097f65d0b7f667071d55928e1b8c5"
     }
   ],
   "sources": [
@@ -114,7 +156,39 @@
       "editeur": "Éditeur de test",
       "categorie": "notice-constructeur",
       "url": "https://exemple.test/source",
-      "date_consultation": "2026-10-01"
+      "date_consultation": "2026-10-01",
+      "marque": "renault",
+      "modele": "Modèle de test"
+    },
+    {
+      "id": "fixture-notice-peugeot",
+      "titre": "Source de test fixture-notice-peugeot",
+      "editeur": "Éditeur de test",
+      "categorie": "notice-constructeur",
+      "url": "https://exemple.test/source",
+      "date_consultation": "2026-10-01",
+      "marque": "peugeot",
+      "modele": "Modèle de test"
+    },
+    {
+      "id": "fixture-notice-citroen",
+      "titre": "Source de test fixture-notice-citroen",
+      "editeur": "Éditeur de test",
+      "categorie": "notice-constructeur",
+      "url": "https://exemple.test/source",
+      "date_consultation": "2026-10-01",
+      "marque": "citroen",
+      "modele": "Modèle de test"
+    },
+    {
+      "id": "fixture-notice-volkswagen",
+      "titre": "Source de test fixture-notice-volkswagen",
+      "editeur": "Éditeur de test",
+      "categorie": "notice-constructeur",
+      "url": "https://exemple.test/source",
+      "date_consultation": "2026-10-01",
+      "marque": "volkswagen",
+      "modele": "Modèle de test"
     },
     {
       "id": "fixture-securite-routiere",
@@ -133,6 +207,14 @@
       "date_consultation": "2026-10-01"
     },
     {
+      "id": "fixture-onu",
+      "titre": "Source de test fixture-onu",
+      "editeur": "Éditeur de test",
+      "categorie": "reglement-onu",
+      "url": "https://exemple.test/source",
+      "date_consultation": "2026-10-01"
+    },
+    {
       "id": "fixture-forum",
       "titre": "Source de test fixture-forum",
       "editeur": "Éditeur de test",
@@ -143,5 +225,15 @@
   ],
   "auteurs": [
     "fixture-auteur"
+  ],
+  "pictogrammes": [
+    {
+      "id": "fixture-batterie",
+      "contenu": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" role=\"img\"><title>Batterie</title><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>\n"
+    },
+    {
+      "id": "fixture-huile",
+      "contenu": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" role=\"img\"><title>Huile</title><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>\n"
+    }
   ]
 }

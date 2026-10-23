@@ -3,7 +3,9 @@ id: fixture-panne
 title: "Voiture ne démarre pas : que faire ? (page de test)"
 h1: "Ma voiture ne démarre pas : que faire ?"
 description: Page de test des contrôles, jamais publiée.
+libelle_court: Voiture qui ne démarre pas
 image: /images/fixture.jpg
+image_alt: Image de test
 question_decision: Puis-je rouler si ma voiture démarre difficilement ?
 cout_probable:
   tranche: à fixer à l'étape 6
@@ -22,10 +24,12 @@ situations:
   - voyant_lie: fixture-voyant-batterie
     situation: Démarrage impossible après un arrêt prolongé
     verdict: non, arrêt dès que possible
-    urgence: sous quelques jours
+    urgence: immédiate
     action: Faire contrôler la batterie avant de reprendre la route.
-    sources:
-      - fixture-forum
+    citations:
+      - source: fixture-forum
+        emplacement: p. 1, rubrique de test
+        extrait: Consigne de test de la source fixture-forum.
 voyants:
   - fixture-voyant-batterie
 element_unique: arbre-de-decision
@@ -37,7 +41,7 @@ contexte:
 causes:
   - cause: Batterie déchargée
     explication: Une batterie faible ne fournit pas assez de courant.
-validation: b6baf7ec5eec594d823142d79f3f6431d17d4786db96fc8534c1ea2a6f3566cd
+validation: a551b30df141bc01e71572f52b14e2f61ce0d019ac892e99b39c3d801b99195f
 ---
 
 Page de test (r3-pas-premiere-main), jamais publiée.

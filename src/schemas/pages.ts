@@ -3,6 +3,7 @@ import {
   CARBURANTS,
   DIFFICULTES,
   ELEMENTS_UNIQUES,
+  LIBELLE_COURT_MAX,
   NATURES_TEXTE_REFERENCE,
   NIVEAUX_DEFAILLANCE,
   PORTEES_CODE,
@@ -13,7 +14,7 @@ import {
   VERDICTS,
   type TypePage,
 } from './listes.ts';
-import { dateIso, hashHex, identifiant, texte } from './briques.ts';
+import { citationSchema, dateIso, hashHex, identifiant, texte } from './briques.ts';
 
 // ---------------------------------------------------------------------------------------------
 // Schémas des pages éditoriales. Source de vérité : docs/08_structure_contenus.md.
@@ -29,12 +30,14 @@ function probleme(ctx: z.RefinementCtx, regle: string, chemin: (string | number)
 
 /**
  * Une ligne de la liste « situations ».
- *  - ligne issue de la base : { voyant } seul. Le verdict, l'urgence, l'action et les sources viennent
+ *  - ligne issue de la base : { voyant } seul. Le verdict, l'urgence, l'action et les citations viennent
  *    de la base voyants et ne peuvent pas être saisis (docs/08 §3, règle 1). Chaque voyant déclaré dans
  *    « voyants » a sa ligne de ce type, et seulement celle-là : aucune ligne écrite à la main sur ce voyant ;
- *  - ligne saisie : { situation, verdict, urgence, action, sources }, avec en option `voyant_lie` : le voyant
+ *  - ligne saisie : { situation, verdict, urgence, action, citations }, avec en option `voyant_lie` : le voyant
  *    déclaré auquel la situation se rattache (ex. un code défaut lié au voyant moteur). Son verdict ne peut pas
- *    être moins grave que celui de ce voyant dans la base (règle 2).
+ *    être moins grave que celui de ce voyant dans la base (règle 2). Chaque source est citée avec sa page ou
+ *    section et son extrait (demande de changement n° 3) ; `ecart_marques` dit l'écart quand les citations ne
+ *    donnent pas le même niveau.
  */
 export const ligneSituationSchema = z
   .strictObject({
@@ -44,12 +47,13 @@ export const ligneSituationSchema = z
     verdict: z.enum(VERDICTS).optional(),
     urgence: z.enum(URGENCES).optional(),
     action: texte.optional(),
-    sources: z.array(identifiant).min(1).optional(),
+    citations: z.array(citationSchema).min(1).optional(),
+    ecart_marques: texte.optional(),
   })
   .superRefine((ligne, ctx) => {
-    const champs = ['situation', 'verdict', 'urgence', 'action', 'sources'] as const;
+    const champs = ['situation', 'verdict', 'urgence', 'action', 'citations'] as const;
     if (ligne.voyant !== undefined) {
-      for (const champ of [...champs, 'voyant_lie'] as const) {
+      for (const champ of [...champs, 'voyant_lie', 'ecart_marques'] as const) {
         if (ligne[champ] !== undefined) {
           probleme(
             ctx,
@@ -86,13 +90,19 @@ const tutorielSchema = z.strictObject({
 
 const causesSchema = z.array(z.strictObject({ cause: texte, explication: texte })).min(1);
 
+const libelleCourt = texte.max(LIBELLE_COURT_MAX, `le libellé court fait au plus ${LIBELLE_COURT_MAX} caractères`);
+
 /** Champs communs à toutes les pages éditoriales hors socle (docs/08 §1). */
 const champsCommuns = {
   id: identifiant,
   title: texte,
   h1: texte,
   description: texte,
+  // Libellé court : fil d'Ariane, ancres et listes de pages (données structurées BreadcrumbList).
+  libelle_court: libelleCourt,
   image: texte.optional(),
+  // Texte alternatif de l'image, obligatoire quand il y a une image.
+  image_alt: texte.optional(),
   question_decision: texte,
   situations: z.array(ligneSituationSchema).min(1),
   voyants: z.array(identifiant).min(1).optional(),
@@ -100,11 +110,12 @@ const champsCommuns = {
   sources: z.array(identifiant).min(1),
   element_unique: z.enum(ELEMENTS_UNIQUES),
   auteur: identifiant,
-  relecteur: texte.optional(),
   date_publication: dateIso,
   date_modification: dateIso,
   date_revue: dateIso,
   prochaine_revue: dateIso,
+  // Empreinte de l'encadré de décision validé par Houssem : question, lignes de situation, coût probable
+  // (src/lib/empreinte.ts). Exigée sur toute page éditoriale par le contrôle R4-VALIDATION-ABSENTE.
   validation: hashHex.optional(),
   // Format « tutoriel », possible dans tous les types (docs/08 §2).
   tutoriel: tutorielSchema.optional(),
@@ -113,6 +124,8 @@ const champsCommuns = {
 type Commun = {
   date_revue: Date;
   prochaine_revue: Date;
+  image?: string | undefined;
+  image_alt?: string | undefined;
   question_decision: string;
   voyants?: string[] | undefined;
   element_unique: (typeof ELEMENTS_UNIQUES)[number];
@@ -129,6 +142,12 @@ function reglesCommunes(page: Commun, ctx: z.RefinementCtx): void {
   }
   if (page.voyants !== undefined && new Set(page.voyants).size !== page.voyants.length) {
     probleme(ctx, 'R7-FORMAT', ['voyants'], 'un voyant n\'est déclaré qu\'une seule fois');
+  }
+  if (page.image !== undefined && page.image_alt === undefined) {
+    probleme(ctx, 'R7-CHAMP-MANQUANT', ['image_alt'], 'une image a son texte alternatif (image_alt)');
+  }
+  if (page.image === undefined && page.image_alt !== undefined) {
+    probleme(ctx, 'R7-FORMAT', ['image_alt'], 'image_alt sans image');
   }
 }
 
@@ -177,6 +196,9 @@ export const codeDefautPageSchema = z
     ...champsCommuns,
     code: z.string().regex(/^[PCBU][0-9A-F]{4}$/, 'code défaut au format P0420'),
     libelle: texte,
+    // Source du libellé : secondaire admise (norme ISO 15031-6 non achetée). Le verdict, lui, vient des notices
+    // et du voyant lié (contrôle R2-CODE-SANS-VOYANT).
+    libelle_sources: z.array(identifiant).min(1),
     portee: z.enum(PORTEES_CODE),
     marques: z.array(texte).min(1).optional(),
     carburant: z.enum(CARBURANTS),
@@ -278,12 +300,23 @@ export const dossierPageSchema = z
 // ---- Socle ------------------------------------------------------------------------------------
 // Format simple : titre, adresse, date de mise à jour. Pas d'encadré de décision. L'adresse vient uniquement du
 // plan du site (comme pour les autres pages) : elle ne se saisit pas. La page « à propos » porte les fiches
-// auteur auxquelles renvoie le champ `auteur` des autres pages.
+// auteur auxquelles renvoie le champ `auteur` des autres pages ; `profils` : liens publics du profil de l'auteur
+// (données structurées Person, sameAs), facultatifs.
 export const soclePageSchema = z.strictObject({
   id: identifiant,
   title: texte,
+  libelle_court: libelleCourt.optional(),
   date_modification: dateIso,
-  auteurs: z.array(z.strictObject({ id: identifiant, nom: texte, presentation: texte })).optional(),
+  auteurs: z
+    .array(
+      z.strictObject({
+        id: identifiant,
+        nom: texte,
+        presentation: texte,
+        profils: z.array(z.url({ protocol: /^https$/ })).min(1).optional(),
+      }),
+    )
+    .optional(),
 });
 
 export const schemasPage = {

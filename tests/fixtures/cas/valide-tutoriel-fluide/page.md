@@ -3,7 +3,9 @@ id: fixture-fluide
 title: Vérifier le niveau d'huile (page de test)
 h1: Comment vérifier le niveau d'huile
 description: Page de test des contrôles, jamais publiée.
+libelle_court: Niveau d'huile
 image: /images/fixture.jpg
+image_alt: Image de test
 question_decision: Puis-je rouler si le niveau d'huile est bas ?
 cout_probable:
   tranche: à fixer à l'étape 6
@@ -20,10 +22,14 @@ prochaine_revue: 2027-01-20
 situations:
   - situation: Niveau d'huile sous le repère minimum
     verdict: non, arrêt dès que possible
-    urgence: sous quelques jours
+    urgence: immédiate
     action: Compléter le niveau avant de reprendre la route.
-    sources:
-      - fixture-notice
+    citations:
+      - source: fixture-notice
+        emplacement: p. 1, rubrique de test
+        extrait: Consigne de test de la source fixture-notice.
+        verdict: non, arrêt dès que possible
+        urgence: immédiate
 element_unique: tableau
 normes:
   - ACEA A3/B4
@@ -32,7 +38,7 @@ quand_changer:
   texte: Selon le carnet d'entretien.
   sources:
     - fixture-notice
-validation: cce568721941e8941dbd592c13734e26739c62ab1bed1b0fe93004841869e99f
+validation: 234b27a368fbb54dd710cbeff3a3c1d193bb1fd368a3c9401c6f4ec64999d33d
 tutoriel:
   outils:
     - chiffon

@@ -1,7 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
-import { join, relative } from 'node:path';
+import { basename, dirname, join, relative } from 'node:path';
 import { parse } from 'yaml';
-import type { DonneesBrutes } from '../../src/lib/controle.ts';
+import { DOSSIER_PICTOGRAMMES, type DonneesBrutes, type FichierPictogramme } from '../../src/lib/controle.ts';
 import { TYPES_AVEC_SOCLE, type TypeAvecSocle } from '../../src/schemas/listes.ts';
 import { soclePageSchema } from '../../src/schemas/pages.ts';
 
@@ -36,13 +36,21 @@ async function lireJson(chemin: string): Promise<unknown[]> {
   return valeur;
 }
 
+/** Pictogrammes de la base voyants : les fichiers SVG placés directement dans src/pictogrammes (dossier absent = aucun). */
+export async function chargerPictogrammes(racine: string): Promise<FichierPictogramme[]> {
+  const dossier = join(racine, DOSSIER_PICTOGRAMMES);
+  const fichiers = (await listerFichiers(dossier, '.svg')).filter((f) => dirname(f) === dossier);
+  return Promise.all(fichiers.map(async (f) => ({ id: basename(f, '.svg'), contenu: await readFile(f, 'utf8') })));
+}
+
 export async function chargerDonnees(racine: string): Promise<DonneesBrutes> {
-  const [plan, voyants, sources] = await Promise.all([
+  const [plan, voyants, sources, pictogrammes] = await Promise.all([
     lireJson(join(racine, 'data/plan-du-site.json')),
     lireJson(join(racine, 'data/voyants.json')),
     lireJson(join(racine, 'data/sources.json')),
+    chargerPictogrammes(racine),
   ]);
-  return { plan, voyants, sources };
+  return { plan, voyants, sources, pictogrammes };
 }
 
 export interface FichierPage {

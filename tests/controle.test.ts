@@ -7,13 +7,22 @@ import { fileURLToPath } from 'node:url';
 import {
   codeSortie,
   construireContexte,
+  controlerEncadre,
   controlerEnsemble,
+  controlerLigneDeVerdict,
   controlerPage,
+  controlerPictogramme,
+  PICTOGRAMME_OCTETS_MAX,
+  REGLE_MARQUES,
   type Constat,
   type DonneesBrutes,
   type PageControlee,
 } from '../src/lib/controle.ts';
-import { empreinte } from '../src/lib/empreinte.ts';
+import { empreintePage, empreinteVoyant, normaliserTexte, type EncadreValide, type VoyantValide } from '../src/lib/empreinte.ts';
+import { GRILLE_URGENCES, GRILLE_VERDICTS, URGENCES_ADMISES, urgenceAdmise } from '../src/schemas/grille.ts';
+import { MARQUES_REFERENCE, URGENCES, VERDICTS } from '../src/schemas/listes.ts';
+import { genererVueGrille, insererVueGrille } from '../scripts/lib/vue-grille.ts';
+import type { PageEditoriale } from '../src/schemas/pages.ts';
 import { lireFrontmatter } from '../scripts/lib/charger.ts';
 import { controler404, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler, noindexDansEnTetes } from '../scripts/lib/dist.ts';
 import { modeIndexation } from '../src/lib/indexation.ts';
@@ -56,9 +65,9 @@ describe('pages de test (docs/08 §3)', async () => {
     assert.deepEqual(constatsDonnees, []);
   });
 
-  test('il y a des pages valides et au moins une page invalide par règle R1, R2, R3, R4, R5 et R7', () => {
+  test('il y a des pages valides et au moins une page invalide par règle R1, R2, R3, R4, R5, R7, R8 et R9', () => {
     assert.ok(cas.some((c) => c.erreurs.length === 0 && c.alertes.length === 0));
-    for (const prefixe of ['R1', 'R2', 'R3', 'R4', 'R5', 'R7']) {
+    for (const prefixe of ['R1', 'R2', 'R3', 'R4', 'R5', 'R7', 'R8', 'R9']) {
       assert.ok(
         cas.some((c) => [...c.erreurs, ...c.alertes].some((code) => code.startsWith(prefixe))),
         `aucune page de test pour ${prefixe}`,
@@ -94,37 +103,278 @@ describe('pages de test (docs/08 §3)', async () => {
 
 // ---- Empreinte de validation ----------------------------------------------------------------------
 describe('empreinte de validation (R4)', () => {
-  const ligne = { verdict: 'oui avec précautions', urgence: 'aucune', action: "Vérifier l'état du pneu.", sources: ['b', 'a'] } as const;
+  const citations = [
+    { source: 'b', emplacement: 'p. 2.13', extrait: "Arrêtez-vous et consultez l'atelier.", verdict: 'non, arrêt immédiat', urgence: 'immédiate' },
+    { source: 'a', emplacement: '§ Témoins', extrait: "L'arrêt du véhicule est impératif." },
+  ] as const;
+  const voyant: VoyantValide = {
+    id: 'voyant-huile-rouge',
+    nom: 'Voyant de pression d\'huile',
+    couleur: 'rouge',
+    pictogramme: 'huile',
+    situation: 'Voyant allumé en roulant',
+    verdict: 'non, arrêt immédiat',
+    urgence: 'immédiate',
+    action: "S'arrêter et couper le moteur.",
+    citations,
+  };
+  const dessin = '<svg viewBox="0 0 24 24"><path d="M2 12h20"/></svg>';
 
-  test('un reformatage (casse, espaces, apostrophe typographique, ordre des sources) ne change pas l\'empreinte', () => {
-    const reformate = { ...ligne, action: "  vérifier L’état du  pneu. ", sources: ['a', 'b'] };
-    assert.equal(empreinte([ligne]), empreinte([reformate]));
+  test('normalisation : casse, accents, ligatures, ponctuation et espaces sont ignorés ; lettres, chiffres et signes porteurs de sens comptent', () => {
+    assert.equal(normaliserTexte("  Arrêtez-VOUS, puis   coupez le moteur ! "), 'arretez vous puis coupez le moteur');
+    const egaux: [string, string][] = [['Cœur', 'coeur'], ['2,5 bar', '2.5 bar'], ['5 %', '5%'], ['1 000 €', '1000 €'], ['90 °C', '90°C'], ['½ litre', '1/2 litre'], ['100-1 000 €', '100–1 000 €'], ['-10 °C', '– 10 °C'], ['arrêtez-vous', 'arrêtez vous']];
+    for (const [a, b] of egaux) assert.equal(normaliserTexte(a), normaliserTexte(b), `${a} / ${b}`);
+    const differents: [string, string][] = [
+      ['–10 °C', '10 °C'],
+      ['−  10 °C', '10 °C'],
+      ['<= 100', '< 100'],
+      ['2,5 bar', '25 bar'],
+      ['90 °C', '90 C'],
+      ['réduire de 5 %', 'réduire de 5'],
+      ['< 100 €', '> 100 €'],
+      ['< 100 €', '100'],
+      ['-10 °C', '10 °C'],
+      ['+0,3 bar', '-0,3 bar'],
+      ['≤ 1,8 bar', '< 1,8 bar'],
+      ['1,600 bar', '1 600 bar'],
+    ];
+    for (const [a, b] of differents) assert.notEqual(normaliserTexte(a), normaliserTexte(b), `${a} / ${b}`);
   });
 
-  test('changer le verdict, l\'urgence, l\'action ou les sources change l\'empreinte', () => {
-    const base = empreinte([ligne]);
-    assert.notEqual(base, empreinte([{ ...ligne, verdict: 'oui' }]));
-    assert.notEqual(base, empreinte([{ ...ligne, urgence: 'immédiate' }]));
-    assert.notEqual(base, empreinte([{ ...ligne, action: "Vérifier l'état du pneu avant de rouler." }]));
-    assert.notEqual(base, empreinte([{ ...ligne, sources: ['a'] }]));
+  test('ligne de la base : une coquille (accent, ponctuation, casse), l\'ordre des citations ou la mise en forme du dessin ne changent pas l\'empreinte', () => {
+    const coquille = { ...voyant, action: 'S’arreter  et couper le moteur', situation: 'voyant allume, en roulant', citations: [...citations].reverse() };
+    assert.equal(empreinteVoyant(voyant, dessin), empreinteVoyant(coquille, dessin.replace('><', '>\n  <')));
+  });
+
+  test('ligne de la base : identifiant, nom, couleur, pictogramme et dessin, situation, verdict, urgence, action, écart et citations sont verrouillés', () => {
+    const base = empreinteVoyant(voyant, dessin);
+    const variantes: Partial<VoyantValide>[] = [
+      { id: 'voyant-batterie' },
+      { nom: 'Voyant de température' },
+      { couleur: 'orange' },
+      { pictogramme: 'temperature' },
+      { situation: 'Voyant allumé au démarrage' },
+      { verdict: 'non, arrêt dès que possible' },
+      { urgence: 'sous quelques jours' },
+      { action: "S'arrêter puis repartir doucement." },
+      { ecart_marques: 'Écart entre marques.' },
+      { citations: [citations[0]] },
+      { citations: [{ ...citations[0], emplacement: 'p. 2.14' }, citations[1]] },
+      { citations: [{ ...citations[0], extrait: 'Consultez un atelier.' }, citations[1]] },
+      { citations: [{ ...citations[0], verdict: 'oui avec précautions', urgence: 'immédiate' }, citations[1]] },
+    ];
+    for (const variante of variantes) assert.notEqual(base, empreinteVoyant({ ...voyant, ...variante }, dessin), JSON.stringify(variante));
+    assert.notEqual(base, empreinteVoyant(voyant, dessin.replace('M2 12h20', 'M2 12h18')));
+    assert.notEqual(base, empreinteVoyant(voyant, undefined));
+  });
+
+  test('encadré de décision : question, lignes (voyant et ce que l\'encadré en affiche, ou ligne saisie complète) et coût sont verrouillés', () => {
+    const encadre: EncadreValide = {
+      question_decision: 'Puis-je rouler avec le voyant huile allumé ?',
+      situations: [{ voyant: 'huile' }, { voyant_lie: 'huile', situation: 'Code P0520', verdict: 'non, arrêt immédiat', urgence: 'immédiate', action: 'S\'arrêter.', citations }],
+      cout_probable: { tranche: 'de 100 à 1 000 €', base_de_calcul: 'Base de test', sources: ['b', 'a'] },
+    };
+    const huile = { ...voyant, id: 'huile' };
+    const empreintes = new Map([['huile', huile]]);
+    const base = empreintePage(encadre, empreintes);
+    assert.equal(base, empreintePage({ ...encadre, question_decision: 'puis je rouler avec le voyant huile allume', cout_probable: { ...encadre.cout_probable, sources: ['a', 'b'] } }, empreintes));
+    // Ce que l'encadré affiche d'une ligne de la base (situation, verdict, urgence, action, écart) est verrouillé ;
+    // corriger une citation de cette ligne, non.
+    for (const modif of [{ situation: 'Autre situation' }, { verdict: 'non, arrêt dès que possible' as const }, { urgence: 'sous quelques jours' as const }, { action: 'Autre action.' }, { ecart_marques: 'Écart.' }]) {
+      assert.notEqual(base, empreintePage(encadre, new Map([['huile', { ...huile, ...modif }]])), JSON.stringify(modif));
+    }
+    assert.equal(base, empreintePage(encadre, new Map([['huile', { ...huile, citations: [{ ...citations[0], emplacement: 'p. 2.14' }] }]])));
+    const [ligneBase, ligneSaisie] = encadre.situations;
+    assert.ok(ligneBase && ligneSaisie);
+    const variantes: Partial<EncadreValide>[] = [
+      { question_decision: 'Que veut dire le voyant huile ?' },
+      { situations: [ligneSaisie, ligneBase] },
+      { situations: [{ voyant: 'batterie' }, ligneSaisie] },
+      { situations: [ligneBase, { ...ligneSaisie, voyant_lie: undefined }] },
+      { situations: [ligneBase, { ...ligneSaisie, situation: 'Code P0521' }] },
+      { situations: [ligneBase, { ...ligneSaisie, citations: [citations[1]] }] },
+      { cout_probable: { ...encadre.cout_probable, tranche: 'de 1 000 à 3 000 €' } },
+      { cout_probable: { ...encadre.cout_probable, base_de_calcul: 'Autre base' } },
+      { cout_probable: { ...encadre.cout_probable, sources: ['a'] } },
+    ];
+    for (const variante of variantes) assert.notEqual(base, empreintePage({ ...encadre, ...variante }, empreintes), JSON.stringify(variante));
+  });
+});
+
+// ---- Grille des niveaux de verdict et d'urgence (R8) ------------------------------------------------
+describe('grille des niveaux de verdict et d\'urgence (R8)', () => {
+  test('chaque verdict et chaque urgence ont un libellé, une définition et au moins une consigne de notice', () => {
+    for (const verdict of VERDICTS) {
+      const niveau = GRILLE_VERDICTS[verdict];
+      assert.ok(niveau.libelle.length > 0 && niveau.definition.length > 0 && niveau.consignes_notice.length > 0, verdict);
+    }
+    for (const urgence of URGENCES) {
+      const niveau = GRILLE_URGENCES[urgence];
+      assert.ok(niveau.libelle.length > 0 && niveau.definition.length > 0 && niveau.consignes_notice.length > 0, urgence);
+    }
+  });
+  test('les libellés affichés sont tous différents', () => {
+    const libelles = [...VERDICTS.map((v) => GRILLE_VERDICTS[v].libelle), ...URGENCES.map((u) => GRILLE_URGENCES[u].libelle)];
+    assert.equal(new Set(libelles.map(normaliserTexte)).size, libelles.length);
+  });
+  test('ne pas pouvoir rouler impose une urgence immédiate ; rouler sans précaution l\'exclut', () => {
+    assert.deepEqual(URGENCES_ADMISES['non, arrêt immédiat'], ['immédiate']);
+    assert.deepEqual(URGENCES_ADMISES['non, arrêt dès que possible'], ['immédiate']);
+    assert.equal(urgenceAdmise('oui', 'immédiate'), false);
+    assert.equal(urgenceAdmise('non, arrêt immédiat', 'aucune'), false);
+    assert.equal(urgenceAdmise('oui avec précautions', 'immédiate'), true);
+  });
+  test('docs/08 est à jour : marques de référence et grille générées depuis le code (npm run grille:vue)', async () => {
+    const doc = await readFile(join(racine, 'docs', '08_structure_contenus.md'), 'utf8');
+    assert.equal(insererVueGrille(doc, genererVueGrille()), doc);
   });
 });
 
 // ---- Base voyants -----------------------------------------------------------------------------------
-describe('base voyants (R3, R4) et rattachement (R1)', async () => {
+describe('base voyants (R3, R4, R8, pictogrammes) et rattachement (R1)', async () => {
   const donnees = await lireJson<DonneesBrutes>(join(fixtures, 'contexte.json'));
   const voyantValide = donnees.voyants[0] as Record<string, unknown>;
+  type Citation = { source: string; emplacement: string; extrait: string; verdict?: string; urgence?: string };
+  const citer = (source: string, verdict?: string, urgence?: string): Citation => ({
+    source,
+    emplacement: 'p. 1',
+    extrait: `Consigne de ${source}.`,
+    ...(verdict !== undefined && urgence !== undefined && { verdict, urgence }),
+  });
+  const dessinDe = (id: unknown): string | undefined => donnees.pictogrammes?.find((p) => p.id === id)?.contenu;
+  /** Ligne de la base modifiée puis revalidée : seul le contrôle visé doit échouer. */
+  const revalide = (modif: Record<string, unknown>): Record<string, unknown> => {
+    const voyant = { ...voyantValide, ...modif };
+    return { ...voyant, validation: empreinteVoyant(voyant as unknown as VoyantValide, dessinDe(voyant['pictogramme'])) };
+  };
+  const erreursAvec = (voyant: Record<string, unknown>, extra: Partial<DonneesBrutes> = {}) =>
+    codes(construireContexte({ ...donnees, ...extra, voyants: [voyant] }, AUJOURDHUI).constats, 'erreur');
+  const niveau = ['non, arrêt dès que possible', 'immédiate'] as const;
 
   test('un voyant de la base dont l\'empreinte ne correspond plus bloque', () => {
-    const { constats } = construireContexte({ ...donnees, voyants: [{ ...voyantValide, action: 'Autre action.' }] }, AUJOURDHUI);
-    assert.deepEqual(codes(constats, 'erreur'), ['R4-EMPREINTE']);
+    assert.deepEqual(erreursAvec({ ...voyantValide, action: 'Autre action.' }), ['R4-EMPREINTE']);
+    assert.deepEqual(erreursAvec({ ...voyantValide, couleur: 'rouge' }), ['R4-EMPREINTE']);
+    assert.deepEqual(erreursAvec({ ...voyantValide, situation: 'Autre situation' }), ['R4-EMPREINTE']);
   });
 
-  test('un voyant de la base sans source de première main bloque', () => {
-    const ligne = { verdict: 'oui', urgence: 'aucune', action: 'Rien à faire.', sources: ['fixture-forum'] } as const;
-    const voyant = { ...voyantValide, ...ligne, validation: empreinte([ligne]) };
-    const { constats } = construireContexte({ ...donnees, voyants: [voyant] }, AUJOURDHUI);
-    assert.deepEqual(codes(constats, 'erreur'), ['R3-PREMIERE-MAIN']);
+  test('un voyant de la base sans source de première main bloque (et sans notice, le nombre de marques manque)', () => {
+    assert.deepEqual(erreursAvec(revalide({ citations: [citer('fixture-forum')] })), ['R3-MARQUES', 'R3-PREMIERE-MAIN']);
+  });
+
+  test('nombre de marques : au moins 3 marques de référence de 2 groupes', () => {
+    const renault = citer('fixture-notice', ...niveau);
+    const peugeot = citer('fixture-notice-peugeot', ...niveau);
+    const citroen = citer('fixture-notice-citroen', ...niveau);
+    const vw = citer('fixture-notice-volkswagen', ...niveau);
+    assert.deepEqual(erreursAvec(revalide({ citations: [renault, peugeot] })), ['R3-MARQUES']);
+    // Renault, Peugeot et Citroën : trois marques de deux groupes (Renault Group, Stellantis).
+    assert.deepEqual(erreursAvec(revalide({ citations: [renault, peugeot, citroen] })), []);
+    assert.deepEqual(erreursAvec(revalide({ citations: [renault, peugeot, vw] })), []);
+    // Deux notices de la même marque ne comptent qu'une fois.
+    assert.deepEqual(erreursAvec(revalide({ citations: [renault, renault, peugeot] })), ['R3-MARQUES']);
+    // Une notice sans niveau ne compte pas.
+    assert.ok(erreursAvec(revalide({ citations: [renault, peugeot, { ...citroen, verdict: undefined, urgence: undefined }] })).includes('R3-MARQUES'));
+  });
+
+  test('nombre de groupes : contrôlé par la machine ; avec la liste actuelle, 3 marques couvrent toujours au moins 2 groupes', () => {
+    // Aucun groupe n'a plus de 2 marques dans la liste : la vraie garantie de recoupement est de 2 groupes.
+    const parGroupe = new Map<string, number>();
+    for (const m of MARQUES_REFERENCE) parGroupe.set(m.groupe, (parGroupe.get(m.groupe) ?? 0) + 1);
+    assert.ok(Math.max(...parGroupe.values()) <= 2);
+    // La condition de groupes est bien appliquée : trois marques d'un même groupe (règle de test) ne suffisent pas.
+    const unGroupe = { liste: MARQUES_REFERENCE.map((m) => ({ id: m.id, groupe: 'groupe-unique' })), min: 3, groupesMin: 2 };
+    const { contexte } = construireContexte(donnees, AUJOURDHUI);
+    const ligne = { verdict: 'non, arrêt dès que possible', urgence: 'immédiate', citations: ['fixture-notice', 'fixture-notice-peugeot', 'fixture-notice-citroen'].map((id) => ({ ...citer(id, ...niveau) })) } as const;
+    assert.deepEqual(codes(controlerLigneDeVerdict(ligne as never, contexte.sources, 'l', 'f', { marques: unGroupe }), 'erreur'), ['R3-MARQUES']);
+    assert.deepEqual(codes(controlerLigneDeVerdict(ligne as never, contexte.sources, 'l', 'f', { marques: REGLE_MARQUES }), 'erreur'), []);
+  });
+
+  test('le verdict le plus prudent l\'emporte, et un écart entre citations est signalé (verdict ou urgence)', () => {
+    const prudente = citer('fixture-notice', 'non, arrêt immédiat', 'immédiate');
+    const autres = [citer('fixture-notice-peugeot', ...niveau), citer('fixture-notice-volkswagen', ...niveau)];
+    assert.deepEqual(erreursAvec(revalide({ citations: [prudente, ...autres] })), ['R3-ECART-NON-SIGNALE', 'R3-PLUS-PRUDENT']);
+    assert.deepEqual(erreursAvec(revalide({ citations: [prudente, ...autres], verdict: 'non, arrêt immédiat', ecart_marques: 'Renault impose l\'arrêt ; Peugeot et Volkswagen demandent de faire appel à un garage.' })), []);
+    // Même verdict, urgence plus forte dans une citation.
+    const precautions = (u: string) => ['fixture-notice', 'fixture-notice-peugeot', 'fixture-notice-volkswagen'].map((id, i) => citer(id, 'oui avec précautions', i === 0 ? u : 'sous quelques jours'));
+    assert.deepEqual(erreursAvec(revalide({ verdict: 'oui avec précautions', urgence: 'sous quelques jours', citations: precautions('immédiate') })), ['R3-ECART-NON-SIGNALE', 'R3-PLUS-PRUDENT']);
+    assert.deepEqual(erreursAvec(revalide({ verdict: 'oui avec précautions', urgence: 'immédiate', citations: precautions('immédiate'), ecart_marques: 'Renault demande d\'agir au plus tôt.' })), []);
+    // Un écart annoncé alors que tous les niveaux sont égaux.
+    assert.deepEqual(erreursAvec(revalide({ ecart_marques: 'Les marques divergent.' })), ['R3-ECART-SANS-OBJET']);
+  });
+
+  test('une citation de notice donne son niveau ; une source secondaire ou le règlement ONU n° 121 n\'en donnent jamais', () => {
+    const autres = [citer('fixture-notice-peugeot', ...niveau), citer('fixture-notice-volkswagen', ...niveau)];
+    assert.deepEqual(erreursAvec(revalide({ citations: [citer('fixture-notice'), ...autres] })), ['R3-CITATION-NIVEAU', 'R3-MARQUES']);
+    assert.deepEqual(erreursAvec(revalide({ citations: [citer('fixture-notice', ...niveau), ...autres, citer('fixture-forum', ...niveau)] })), ['R3-CITATION-NIVEAU']);
+    assert.deepEqual(erreursAvec(revalide({ citations: [citer('fixture-notice', ...niveau), ...autres, citer('fixture-onu', ...niveau)] })), ['R3-CITATION-NIVEAU']);
+    // Le règlement ONU n° 121 peut être cité pour le symbole ou la couleur, sans niveau.
+    assert.deepEqual(erreursAvec(revalide({ citations: [citer('fixture-notice', ...niveau), ...autres, citer('fixture-onu')] })), []);
+  });
+
+  test('couple verdict / urgence refusé par la grille, dans la ligne ou dans une citation (R8)', () => {
+    const notices = (v: string, u: string) => ['fixture-notice', 'fixture-notice-peugeot', 'fixture-notice-volkswagen'].map((id) => citer(id, v, u));
+    assert.deepEqual(erreursAvec(revalide({ verdict: 'non, arrêt immédiat', urgence: 'aucune', citations: notices('non, arrêt immédiat', 'aucune') })), ['R8-COHERENCE']);
+    assert.deepEqual(erreursAvec(revalide({ verdict: 'oui', urgence: 'immédiate', citations: notices('oui', 'immédiate') })), ['R8-COHERENCE']);
+  });
+
+  test('une ligne plus sévère que toutes ses citations n\'a pas de source pour ce niveau', () => {
+    assert.deepEqual(erreursAvec(revalide({ verdict: 'non, arrêt immédiat' })), ['R3-NIVEAU-SANS-SOURCE']);
+  });
+
+  test('rappel non bloquant : un mot repère de la grille dans l\'extrait avec un niveau moins prudent', () => {
+    const avec = (extrait: string, verdict: string, urgence: string) => {
+      const citations = ['fixture-notice', 'fixture-notice-peugeot', 'fixture-notice-volkswagen'].map((id, i) => ({ ...citer(id, verdict, urgence), ...(i === 0 && { extrait }) }));
+      return codes(construireContexte({ ...donnees, voyants: [revalide({ verdict, urgence, citations })] }, AUJOURDHUI).constats, 'alerte');
+    };
+    assert.deepEqual(avec("L'arrêt du véhicule est impératif.", 'non, arrêt dès que possible', 'immédiate'), ['R3-NIVEAU-A-VERIFIER']);
+    assert.deepEqual(avec('Faire appel au réseau.', 'oui avec précautions', 'immédiate'), ['R3-NIVEAU-A-VERIFIER']);
+    assert.deepEqual(avec('Consultez sans tarder un atelier.', 'oui avec précautions', 'sous quelques jours'), ['R3-NIVEAU-A-VERIFIER']);
+    // Entretien périodique « dès que possible » : exception de la grille, pas de rappel.
+    assert.deepEqual(avec('Effectuer la révision dès que possible.', 'oui', 'sous quelques jours'), []);
+    assert.deepEqual(avec("L'arrêt du véhicule est impératif.", 'non, arrêt immédiat', 'immédiate'), []);
+  });
+
+  test('pictogramme absent, invalide ou redessiné : la ligne de la base est bloquée', () => {
+    assert.deepEqual(erreursAvec(revalide({ pictogramme: 'fixture-inconnu' })), ['PICTO-ABSENT']);
+    const invalide = [{ id: 'fixture-batterie', contenu: '<svg><script>alert(1)</script></svg>' }, ...(donnees.pictogrammes ?? []).filter((p) => p.id !== 'fixture-batterie')];
+    assert.deepEqual(erreursAvec(voyantValide, { pictogrammes: invalide }), ['PICTO-ABSENT', 'PICTO-INVALIDE', 'R4-EMPREINTE']);
+    // Redessiner le pictogramme demande de revalider la ligne.
+    const redessine = (donnees.pictogrammes ?? []).map((p) => (p.id === 'fixture-batterie' ? { ...p, contenu: p.contenu.replace('r="9"', 'r="8"') } : p));
+    assert.deepEqual(erreursAvec(voyantValide, { pictogrammes: redessine }), ['R4-EMPREINTE']);
+  });
+
+  test('échanger le contenu de deux lignes, empreintes comprises, est détecté (identifiant verrouillé)', () => {
+    const [a, b] = donnees.voyants as Record<string, unknown>[];
+    assert.ok(a && b);
+    const echange = [{ ...b, id: a['id'], page: a['page'] }, { ...a, id: b['id'], page: b['page'] }];
+    const { constats } = construireContexte({ ...donnees, voyants: echange }, AUJOURDHUI);
+    assert.ok(codes(constats, 'erreur').includes('R4-EMPREINTE'));
+  });
+
+  test('R2 : une ligne saisie liée à un voyant n\'a ni un verdict ni une urgence moins forts que lui', async () => {
+    // Le voyant « batterie » devient « oui avec précautions / sous quelques jours » (revalidé).
+    const batterie = revalide({ verdict: 'oui avec précautions', urgence: 'sous quelques jours', citations: ['fixture-notice', 'fixture-notice-peugeot', 'fixture-notice-volkswagen'].map((id) => citer(id, 'oui avec précautions', 'sous quelques jours')) });
+    const { contexte } = construireContexte({ ...donnees, voyants: [batterie, ...donnees.voyants.slice(1)] }, AUJOURDHUI);
+    const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-panne', 'page.md'), 'utf8')) as Record<string, unknown>;
+    const situations = (brut['situations'] as Record<string, unknown>[]).map((l) =>
+      l['voyant'] !== undefined ? l : { ...l, verdict: 'oui avec précautions', urgence: 'sous quelques semaines', citations: [citer('fixture-securite-routiere', 'oui avec précautions', 'sous quelques semaines')] },
+    );
+    const page = { ...brut, situations };
+    const { constats } = controlerPage({ type: 'panne', brut: { ...page, validation: empreintePage(page as never, contexte.voyants) }, fichier: 'f' }, contexte);
+    assert.deepEqual(codes(constats, 'erreur'), ['R2-MOINS-GRAVE']);
+  });
+
+  test('registre : une notice indique sa marque ; marque et modèle ne concernent que les notices', () => {
+    const notice = { id: 'n', titre: 'Notice', editeur: 'Marque', categorie: 'notice-constructeur', url: 'https://exemple.test/n', date_consultation: '2026-10-01' };
+    assert.deepEqual(codes(construireContexte({ plan: [], voyants: [], sources: [notice] }, AUJOURDHUI).constats, 'erreur'), ['R7-CHAMP-MANQUANT']);
+    const autre = { ...notice, categorie: 'securite-routiere', marque: 'renault' };
+    assert.deepEqual(codes(construireContexte({ plan: [], voyants: [], sources: [autre] }, AUJOURDHUI).constats, 'erreur'), ['R7-FORMAT']);
+    const reglement = { ...notice, categorie: 'reglement-onu' };
+    assert.deepEqual(construireContexte({ plan: [], voyants: [], sources: [reglement] }, AUJOURDHUI).constats, []);
+  });
+
+  test('couleur : « jaune » n\'est plus une couleur de la base (rangé sous « orange ou jaune »)', () => {
+    assert.deepEqual(erreursAvec(revalide({ couleur: 'jaune' })), ['R7-HORS-LISTE']);
   });
 
   test('une valeur hors liste fermée dans la base voyants bloque', () => {
@@ -204,6 +454,104 @@ describe('base voyants (R3, R4) et rattachement (R1)', async () => {
     assert.deepEqual(ensemble(['/fixture-fluide/']), []);
     assert.deepEqual(codes(ensemble(['/fixture-code/']), 'erreur'), ['R7-LIEN-HORS-PLAN']);
     assert.deepEqual(codes(ensemble(['/introuvable/']), 'erreur'), ['R7-LIEN-INCONNU']);
+  });
+});
+
+// ---- Encadré de décision (R9) et pictogrammes ---------------------------------------------------------------
+describe('encadré de décision dans la page construite (R9)', async () => {
+  const donnees = await lireJson<DonneesBrutes>(join(fixtures, 'contexte.json'));
+  const { contexte } = construireContexte(donnees, AUJOURDHUI);
+  const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-fluide', 'page.md'), 'utf8'));
+  const { page } = controlerPage({ type: 'fluide', brut, fichier: 'f' }, contexte);
+  assert.ok(page);
+  const p: PageEditoriale = page;
+  const ligne = { situation: "Niveau d'huile sous le repère minimum", verdict: 'non, arrêt dès que possible', urgence: 'immédiate', action: 'Compléter le niveau avant de reprendre la route.', citations: [], sources: [], origine: 'page' } as const;
+  const ligneHtml = (verdict: string = ligne.verdict, libelle: string = GRILLE_VERDICTS[ligne.verdict].libelle, extra = '') =>
+    `<div data-encadre-ligne data-verdict="${verdict}" data-urgence="${ligne.urgence}"><p>${ligne.situation}</p><p>${libelle}, ${GRILLE_URGENCES[ligne.urgence].libelle}.</p><p>${ligne.action}</p>${extra}</div>`;
+  const encadreHtml = (lignesHtml: string, attributs = '') => `<section data-encadre-decision${attributs}><p>${p.question_decision}</p>${lignesHtml}<p>${p.cout_probable.tranche}</p></section>`;
+  const bloc = encadreHtml(ligneHtml());
+  const html = (corps: string) => `<html><head><title>t</title></head><body>${corps}</body></html>`;
+  const erreurs = (corps: string) => codes(controlerEncadre(p, [ligne], html(corps), 'f'), 'erreur');
+
+  test('premier bloc après le H1, malgré des balises englobantes, un commentaire ou des données structurées', () => {
+    assert.deepEqual(erreurs(`<main><header><h1>Titre</h1></header><!-- x --><script type="application/ld+json">{"a":"texte"}</script><div>${bloc}</div></main>`), []);
+  });
+  test('absent ou en double', () => {
+    assert.deepEqual(erreurs('<h1>Titre</h1><p>Texte</p>'), ['R9-ENCADRE-ABSENT']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${bloc}${bloc}`), ['R9-ENCADRE-ABSENT']);
+  });
+  test('avant le H1, ou après un texte ou une image', () => {
+    assert.deepEqual(erreurs(`${bloc}<h1>Titre</h1>`), ['R9-ENCADRE-POSITION']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1><p>Mis à jour le 20/10</p>${bloc}`), ['R9-ENCADRE-POSITION']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1><img src="/a.jpg" alt="a">${bloc}`), ['R9-ENCADRE-POSITION']);
+  });
+  test('aucun emplacement publicitaire avant l\'encadré (repère du site ou bloc AdSense)', () => {
+    assert.deepEqual(erreurs(`<div data-emplacement-pub></div><h1>Titre</h1>${bloc}`), ['R9-PUB-AVANT-ENCADRE']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1><ins class="adsbygoogle" data-ad-slot="1"></ins>${bloc}`), ['R9-ENCADRE-POSITION', 'R9-PUB-AVANT-ENCADRE']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${bloc}<div data-emplacement-pub></div>`), []);
+  });
+  test('il affiche la question, la tranche de coût et, ligne par ligne, la situation, les libellés du verdict et de l\'urgence et l\'action', () => {
+    const incomplet = bloc.replace(GRILLE_URGENCES[ligne.urgence].libelle, '');
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${incomplet}`), ['R9-ENCADRE-CONTENU']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${bloc.replace(p.cout_probable.tranche, '')}`), ['R9-ENCADRE-CONTENU']);
+    // Libellé d'un autre niveau, ou niveau déclaré différent : refusé.
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml(ligne.verdict, GRILLE_VERDICTS.oui.libelle))}`), ['R9-ENCADRE-CONTENU']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml('oui'))}`), ['R9-ENCADRE-CONTENU']);
+    // Une ligne de trop ou en moins.
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml() + ligneHtml())}`), ['R9-ENCADRE-CONTENU']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml('')}`), ['R9-ENCADRE-CONTENU']);
+  });
+  test('l\'écart entre marques est affiché dans sa ligne', () => {
+    const avecEcart = { ...ligne, ecart_marques: 'Renault impose l\'arrêt.' };
+    assert.deepEqual(codes(controlerEncadre(p, [avecEcart], html(`<h1>Titre</h1>${bloc}`), 'f'), 'erreur'), ['R9-ENCADRE-CONTENU']);
+    assert.deepEqual(codes(controlerEncadre(p, [avecEcart], html(`<h1>Titre</h1>${encadreHtml(ligneHtml(undefined, undefined, `<p>${avecEcart.ecart_marques}</p>`))}`), 'f'), 'erreur'), []);
+  });
+  test('rien de masqué dans l\'encadré ni autour : ni bloc à déplier, ni hidden, ni display:none, ni dialog', () => {
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(`<details><summary>Voir</summary>${ligneHtml()}</details>`)}`), ['R9-ENCADRE-MASQUE']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml().replace('<div data-encadre-ligne', '<div hidden data-encadre-ligne'))}`), ['R9-ENCADRE-MASQUE']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml(), ' style="display: none"')}`), ['R9-ENCADRE-MASQUE']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1><div style="visibility:hidden">${bloc}</div>`), ['R9-ENCADRE-MASQUE']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1><details><summary></summary>${bloc}</details>`), ['R9-ENCADRE-MASQUE']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(`<dialog>${ligneHtml()}</dialog>`)}`), ['R9-ENCADRE-MASQUE']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml(undefined, undefined, '<span aria-hidden="true">Texte caché aux lecteurs d\'écran</span>'))}`), ['R9-ENCADRE-MASQUE']);
+    // Une icône décorative sans texte peut porter aria-hidden.
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml(undefined, undefined, '<svg aria-hidden="true" viewBox="0 0 1 1"></svg>'))}`), []);
+  });
+  test('aucune publicité dans l\'encadré, et aucune ligne n\'affiche le libellé d\'un autre niveau', () => {
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(`<div data-emplacement-pub></div>${ligneHtml()}`)}`), ['R9-PUB-AVANT-ENCADRE']);
+    const tous = Object.values(GRILLE_VERDICTS).map((n) => n.libelle).join(' / ');
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml(undefined, undefined, `<p>${tous}</p>`))}`), ['R9-ENCADRE-CONTENU']);
+  });
+});
+
+describe('pictogrammes (src/pictogrammes)', () => {
+  const ok = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Huile</title><path d="M2 12h20" stroke="currentColor"/></svg>';
+  const defauts = (id: string, contenu: string) => controlerPictogramme({ id, contenu }).map((c) => c.message);
+  test('un SVG autonome avec viewBox passe', () => {
+    assert.deepEqual(defauts('huile', ok), []);
+    assert.deepEqual(defauts('huile', `<?xml version="1.0" encoding="UTF-8"?>\n${ok}\n`), []);
+  });
+  test('nom, viewBox, éléments admis, liens internes, gestionnaire d\'événement et taille sont contrôlés', () => {
+    const variantes = [
+      defauts('Huile', ok),
+      defauts('huile', ok.replace(' viewBox="0 0 24 24"', '')),
+      defauts('huile', ok.replace('<title>', '<script>alert(1)</script><title>')),
+      defauts('huile', ok.replace('<title>', '<image href="x.png"/><title>')),
+      defauts('huile', ok.replace('<title>', '<foreignObject><p>x</p></foreignObject><title>')),
+      defauts('huile', ok.replace('<title>', '<style>@import url(https://exemple.test/a.css);</style><title>')),
+      defauts('huile', ok.replace('<title>', '<a href="javascript:alert(1)"><circle r="1"/></a><title>')),
+      defauts('huile', ok.replace('<title>', '<use href="autre.svg#b"/><title>')),
+      defauts('huile', ok.replace('<title>', '<filter><feImage href="x.png"/></filter><title>')),
+      defauts('huile', ok.replace('<title>', '<set attributeName="href" to="javascript:alert(1)"/><title>')),
+      defauts('huile', ok.replace('<path ', '<path onclick="x()" ')),
+      defauts('huile', ok.replace('<path ', '<path fill="url(https://exemple.test/a.svg#g)" ')),
+      defauts('huile', ok.replace('<title>Huile</title>', `<title>${'x'.repeat(PICTOGRAMME_OCTETS_MAX)}</title>`)),
+      defauts('huile', ok.replace('<title>', `<!-- ${'x'.repeat(PICTOGRAMME_OCTETS_MAX)} --><title>`)),
+      defauts('huile', ok.replace('<path ', '<use href=autre.svg#b /><path ')),
+    ];
+    variantes.forEach((v, i) => assert.ok(v.length > 0, `variante ${i + 1} non détectée`));
+    // Un lien interne (#…) et un dégradé interne restent admis.
+    assert.deepEqual(defauts('huile', ok.replace('<path ', '<defs><linearGradient id="g"><stop offset="0"/></linearGradient></defs><use href="#g"/><path fill="url(#g)" ')), []);
   });
 });
 

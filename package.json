@@ -16,6 +16,7 @@
     "lighthouse": "lhci autorun --config=lighthouserc.json",
     "fixtures": "node scripts/generer-fixtures.ts",
     "plan:vue": "node scripts/vue-plan.ts",
+    "grille:vue": "node scripts/vue-grille.ts",
     "empreinte": "node scripts/empreinte.ts",
     "verifier:modes": "node scripts/verifier-modes.ts"
   },

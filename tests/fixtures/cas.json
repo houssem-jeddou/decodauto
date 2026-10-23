@@ -4,28 +4,28 @@
     "type": "panne",
     "erreurs": [],
     "alertes": [],
-    "explication": "Panne valide : ligne de la base, ligne saisie liée au voyant et validée, arbre de décision présent."
+    "explication": "Panne valide : ligne de la base, ligne saisie liée au voyant, encadré validé, arbre de décision présent."
   },
   {
     "nom": "valide-voyant",
     "type": "voyant",
     "erreurs": [],
     "alertes": [],
-    "explication": "Voyant valide : ligne reprise de la base uniquement, pas de validation à porter."
+    "explication": "Voyant valide : ligne reprise de la base uniquement ; l'encadré de décision est validé comme sur toute page."
   },
   {
     "nom": "valide-code-defaut",
     "type": "code-defaut",
     "erreurs": [],
     "alertes": [],
-    "explication": "Code défaut valide : ligne de la base, puis ligne saisie liée au voyant, au moins aussi grave."
+    "explication": "Code défaut valide : voyant déclaré, ligne saisie liée au voyant, au moins aussi grave, libellé sourcé."
   },
   {
     "nom": "valide-fluide",
     "type": "fluide",
     "erreurs": [],
     "alertes": [],
-    "explication": "Fluide valide : tableau avec une ligne de données."
+    "explication": "Fluide valide : tableau avec une ligne de données, citation de notice avec son niveau."
   },
   {
     "nom": "valide-pneus",
@@ -46,7 +46,7 @@
     "type": "socle",
     "erreurs": [],
     "alertes": [],
-    "explication": "Socle valide : adresse prise dans le plan du site, fiche auteur."
+    "explication": "Socle valide : adresse prise dans le plan du site, fiche auteur avec profil."
   },
   {
     "nom": "valide-tutoriel-fluide",
@@ -68,6 +68,13 @@
     "erreurs": [],
     "alertes": [],
     "explication": "Une ligne saisie non liée à un voyant peut être moins grave que la base : seules les lignes liées sont comparées."
+  },
+  {
+    "nom": "valide-ecart-signale",
+    "type": "fluide",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Deux notices donnent des niveaux différents : la ligne retient le plus prudent et signale l'écart."
   },
   {
     "nom": "r1-verdict-saisi",
@@ -121,7 +128,16 @@
       "R2-MOINS-GRAVE"
     ],
     "alertes": [],
-    "explication": "Ligne liée à un voyant, moins grave que ce voyant dans la base."
+    "explication": "Ligne liée à un voyant, moins grave que ce voyant dans la base (verdict et urgence)."
+  },
+  {
+    "nom": "r2-code-sans-voyant",
+    "type": "code-defaut",
+    "erreurs": [
+      "R2-CODE-SANS-VOYANT"
+    ],
+    "alertes": [],
+    "explication": "Ligne saisie d'un code défaut sans voyant lié : son verdict ne serait pas comparé au voyant."
   },
   {
     "nom": "r3-pas-premiere-main",
@@ -151,6 +167,60 @@
     "explication": "Texte de référence qui ne vient pas d'une source de première main."
   },
   {
+    "nom": "r3-citation-sans-niveau",
+    "type": "fluide",
+    "erreurs": [
+      "R3-CITATION-NIVEAU"
+    ],
+    "alertes": [],
+    "explication": "Citation de notice sans le niveau que la grille tire de sa consigne."
+  },
+  {
+    "nom": "r3-reglement-onu-seul",
+    "type": "fluide",
+    "erreurs": [
+      "R3-PREMIERE-MAIN"
+    ],
+    "alertes": [],
+    "explication": "Le règlement ONU n° 121 décrit le symbole, pas la conduite à tenir : il ne suffit pas à fonder un verdict."
+  },
+  {
+    "nom": "r3-ecart-sans-objet",
+    "type": "fluide",
+    "erreurs": [
+      "R3-ECART-SANS-OBJET"
+    ],
+    "alertes": [],
+    "explication": "Un écart est annoncé alors que toutes les citations donnent le même niveau."
+  },
+  {
+    "nom": "r3-niveau-secondaire",
+    "type": "fluide",
+    "erreurs": [
+      "R3-CITATION-NIVEAU"
+    ],
+    "alertes": [],
+    "explication": "Une source secondaire ne fixe jamais un niveau de verdict."
+  },
+  {
+    "nom": "r3-moins-prudent",
+    "type": "fluide",
+    "erreurs": [
+      "R3-PLUS-PRUDENT"
+    ],
+    "alertes": [],
+    "explication": "Verdict et urgence moins prudents que la notice citée : le plus prudent l'emporte."
+  },
+  {
+    "nom": "r3-ecart-non-signale",
+    "type": "fluide",
+    "erreurs": [
+      "R3-ECART-NON-SIGNALE"
+    ],
+    "alertes": [],
+    "explication": "Les notices citées ne donnent pas le même niveau et l'écart n'est pas signalé."
+  },
+  {
     "nom": "r4-empreinte-differente",
     "type": "panne",
     "erreurs": [
@@ -160,13 +230,31 @@
     "explication": "Action modifiée après validation : l'empreinte ne correspond plus."
   },
   {
+    "nom": "r4-question-modifiee",
+    "type": "voyant",
+    "erreurs": [
+      "R4-EMPREINTE"
+    ],
+    "alertes": [],
+    "explication": "Question de décision modifiée après validation : l'encadré de décision est à revalider."
+  },
+  {
     "nom": "r4-validation-absente",
     "type": "panne",
     "erreurs": [
       "R4-VALIDATION-ABSENTE"
     ],
     "alertes": [],
-    "explication": "Verdict saisi sans empreinte de validation."
+    "explication": "Page sans empreinte de validation."
+  },
+  {
+    "nom": "r4-validation-absente-voyant",
+    "type": "voyant",
+    "erreurs": [
+      "R4-VALIDATION-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Même une page dont toutes les lignes viennent de la base porte la validation de son encadré."
   },
   {
     "nom": "r5-revue-depassee",
@@ -185,6 +273,15 @@
     ],
     "alertes": [],
     "explication": "Champ obligatoire manquant."
+  },
+  {
+    "nom": "r7-image-sans-alt",
+    "type": "panne",
+    "erreurs": [
+      "R7-CHAMP-MANQUANT"
+    ],
+    "alertes": [],
+    "explication": "Image sans texte alternatif."
   },
   {
     "nom": "r7-hors-liste",
@@ -284,5 +381,77 @@
     ],
     "alertes": [],
     "explication": "prochaine_revue antérieure à date_revue."
+  },
+  {
+    "nom": "r7-relecteur",
+    "type": "panne",
+    "erreurs": [
+      "R7-CHAMP-INCONNU"
+    ],
+    "alertes": [],
+    "explication": "Le champ relecteur est retiré : pas de relecteur extérieur (décision du 23/10/2026)."
+  },
+  {
+    "nom": "r8-incoherent",
+    "type": "fluide",
+    "erreurs": [
+      "R8-COHERENCE"
+    ],
+    "alertes": [],
+    "explication": "« Oui, vous pouvez rouler » avec une urgence « immédiate » : couple refusé par la grille."
+  },
+  {
+    "nom": "r3-niveau-sans-source",
+    "type": "fluide",
+    "erreurs": [
+      "R3-NIVEAU-SANS-SOURCE"
+    ],
+    "alertes": [],
+    "explication": "Ligne plus sévère que toutes ses citations : aucun niveau cité ne la justifie (jamais de verdict inventé, même plus sévère)."
+  },
+  {
+    "nom": "r9-encadre-absent",
+    "type": "panne",
+    "erreurs": [
+      "R9-ENCADRE-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "Pas d'encadré de décision (data-encadre-decision) dans la page construite."
+  },
+  {
+    "nom": "r9-texte-avant-encadre",
+    "type": "panne",
+    "erreurs": [
+      "R9-ENCADRE-POSITION"
+    ],
+    "alertes": [],
+    "explication": "Une ligne de texte s'intercale entre le H1 et l'encadré : la page ne s'ouvre plus sur la décision."
+  },
+  {
+    "nom": "r9-pub-avant-encadre",
+    "type": "panne",
+    "erreurs": [
+      "R9-PUB-AVANT-ENCADRE"
+    ],
+    "alertes": [],
+    "explication": "Un emplacement publicitaire précède l'encadré de décision."
+  },
+  {
+    "nom": "r9-encadre-incomplet",
+    "type": "panne",
+    "erreurs": [
+      "R9-ENCADRE-CONTENU"
+    ],
+    "alertes": [],
+    "explication": "L'encadré n'affiche pas l'action de chaque situation."
+  },
+  {
+    "nom": "r9-encadre-masque",
+    "type": "panne",
+    "erreurs": [
+      "R9-ENCADRE-MASQUE"
+    ],
+    "alertes": [],
+    "explication": "Les lignes de l'encadré sont repliées dans un bloc à déplier : la décision doit être visible sans clic."
   }
 ]
