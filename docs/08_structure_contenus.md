@@ -80,7 +80,7 @@ Règles :
 ## 5. Base voyants et registre des sources (v4)
 **Base voyants** (`data/voyants.json`) : une ligne = un voyant dans un état donné. Champs : id, nom, couleur, catégorie, page (l'unique page rattachée), **pictogramme** (dessin partagé par les états d'un même symbole), situation, verdict, urgence, action, **citations**, **ecart_marques** (obligatoire si les citations ne donnent pas toutes le même niveau), validation.
 - Couleurs : rouge, **orange ou jaune** (une seule couleur : les notices disent « orange », le règlement ONU n° 121 dit « jaune » pour le même témoin), vert, bleu, blanc.
-- Marques de référence (03, règle 10, liste dans `src/schemas/listes.ts`) : les six premières marques des immatriculations de voitures particulières neuves en France en 2025 (PFA / AAA Data). Le groupe sert à ne pas compter comme indépendantes deux notices d'un même groupe, souvent rédigées sur le même modèle.
+- Marques de référence (03, règle 10, liste dans `src/schemas/listes.ts`) : les six premières marques des immatriculations de voitures particulières neuves en France en 2025 (PFA / AAA Data), plus Seat, ajoutée par Houssem (notice publiée en ligne par le constructeur, groupe Volkswagen). Le groupe sert à ne pas compter comme indépendantes deux notices d'un même groupe, souvent rédigées sur le même modèle.
 
 <!-- vue-grille:marques:debut (généré par npm run grille:vue : ne pas modifier à la main) -->
 | Marque | Groupe |
@@ -91,6 +91,7 @@ Règles :
 | Citroën | Stellantis |
 | Volkswagen | Volkswagen Group |
 | Toyota | Toyota |
+| Seat | Volkswagen Group |
 
 Règle : chaque ligne de la base voyants cite les notices d'au moins **3 marques** de cette liste, issues d'au moins **2 groupes** différents (4 groupes en tout). Deux notices d'une même marque comptent une fois.
 <!-- vue-grille:marques:fin -->

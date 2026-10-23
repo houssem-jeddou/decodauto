@@ -113,7 +113,8 @@ export const SOURCES_PREMIERE_MAIN: readonly CategorieSource[] = [
 /**
  * Marques de référence des verdicts de la base voyants (docs/03, règle 10), fixées au début de l'étape 5 par la
  * demande de changement n° 3 : les six premières marques des immatriculations de voitures particulières neuves en
- * France en 2025 (PFA / AAA Data). Le groupe sert à ne pas compter comme indépendantes deux notices d'un même
+ * France en 2025 (PFA / AAA Data), plus Seat, ajoutée par Houssem (sa notice d'utilisation est publiée en ligne
+ * par le constructeur, et elle couvre le groupe Volkswagen). Le groupe sert à ne pas compter comme indépendantes deux notices d'un même
  * groupe, souvent rédigées sur le même modèle (Peugeot et Citroën, Renault et Dacia). Aucun groupe n'ayant plus de
  * deux marques dans la liste, trois marques couvrent toujours au moins deux groupes.
  */
@@ -124,6 +125,7 @@ export const MARQUES_REFERENCE = [
   { id: 'citroen', nom: 'Citroën', groupe: 'stellantis' },
   { id: 'volkswagen', nom: 'Volkswagen', groupe: 'volkswagen-group' },
   { id: 'toyota', nom: 'Toyota', groupe: 'toyota' },
+  { id: 'seat', nom: 'Seat', groupe: 'volkswagen-group' },
 ] as const;
 /** Chaque ligne de la base voyants cite les notices d'au moins MARQUES_MIN marques de référence… */
 export const MARQUES_MIN = 3;
