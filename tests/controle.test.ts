@@ -160,21 +160,35 @@ describe('base voyants (R3, R4) et rattachement (R1)', async () => {
     assert.deepEqual(codes(controlerEnsemble([], contexte), 'alerte'), ['R1-RATTACHEMENT']);
   });
 
-  test('un lien n\'est déclaré qu\'une fois : les deux sens à la fois bloquent', async () => {
+  test('les liens viennent du plan du site : un lien déclaré des deux côtés dans le plan bloque', () => {
+    const plan = donnees.plan.map((l) => {
+      const ligne = l as Record<string, unknown>;
+      if (ligne['id'] === 'fixture-panne') return { ...ligne, liens: ['fixture-fluide'] };
+      if (ligne['id'] === 'fixture-fluide') return { ...ligne, liens: ['fixture-panne'] };
+      return ligne;
+    });
+    assert.deepEqual(codes(construireContexte({ ...donnees, plan }, AUJOURDHUI).constats, 'erreur'), ['R7-LIEN-DOUBLE']);
+    const unSeulCote = plan.map((l) => (l['id'] === 'fixture-fluide' ? { ...l, liens: undefined } : l));
+    assert.deepEqual(construireContexte({ ...donnees, plan: unSeulCote }, AUJOURDHUI).constats, []);
+  });
+
+  test('une page ne déclare plus de liens : le champ « liens » est inconnu des pages', async () => {
+    const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-panne', 'page.md'), 'utf8')) as Record<string, unknown>;
     const { contexte } = construireContexte(donnees, AUJOURDHUI);
+    const { constats } = controlerPage({ type: 'panne', brut: { ...brut, liens: ['fixture-fluide'] }, fichier: 'a' }, contexte);
+    assert.deepEqual(codes(constats, 'erreur'), ['R7-CHAMP-INCONNU']);
+  });
+
+  test('un lien écrit dans le texte ne mène qu\'à une page liée dans le plan', async () => {
+    const plan = donnees.plan.map((l) => ((l as Record<string, unknown>)['id'] === 'fixture-panne' ? { ...(l as Record<string, unknown>), liens: ['fixture-fluide'] } : l));
+    const { contexte: avecLien } = construireContexte({ ...donnees, plan }, AUJOURDHUI);
     const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-panne', 'page.md'), 'utf8'));
-    const { page } = controlerPage({ type: 'panne', brut, fichier: 'a' }, contexte);
+    const { page } = controlerPage({ type: 'panne', brut, fichier: 'a' }, avecLien);
     assert.ok(page);
-    const a = { ...page, id: 'fixture-panne', liens: ['fixture-fluide'] };
-    const b = { ...page, id: 'fixture-fluide', liens: ['fixture-panne'], voyants: [] };
-    const resultat = controlerEnsemble(
-      [
-        { type: 'panne', fichier: 'a', page: a },
-        { type: 'panne', fichier: 'b', page: b },
-      ],
-      contexte,
-    );
-    assert.deepEqual(codes(resultat, 'erreur'), ['R7-LIEN-DOUBLE']);
+    const ensemble = (adresses: string[]) => controlerEnsemble([{ type: 'panne', fichier: 'a', page, adressesTexte: adresses }], avecLien).filter((c) => c.gravite === 'erreur');
+    assert.deepEqual(ensemble(['/fixture-fluide/']), []);
+    assert.deepEqual(codes(ensemble(['/fixture-code/']), 'erreur'), ['R7-LIEN-HORS-PLAN']);
+    assert.deepEqual(codes(ensemble(['/introuvable/']), 'erreur'), ['R7-LIEN-INCONNU']);
   });
 });
 

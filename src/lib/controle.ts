@@ -2,6 +2,8 @@ import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreinte, type LigneValidee } from './empreinte.ts';
 import { calculerChamps, resoudreLignes, type LigneResolue } from './calcul.ts';
+import { controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
+import { normaliserRecherche } from './texte.ts';
 import {
   planDuSiteSchema,
   sourceSchema,
@@ -27,6 +29,8 @@ import {
 //   R2  pas moins grave que la base (ligne par ligne)     R5  revue dépassée (alerte, ne bloque pas)
 //   R3  source de première main                           R7  champs obligatoires, listes fermées,
 //   R6  ordre des causes : non vérifiable par machine          élément unique dans la page construite
+//
+// Plan du site (liens, pages mères, adresses) : src/lib/plan.ts. Porte de l'étape 4 : src/lib/porte-plan.ts.
 // ---------------------------------------------------------------------------------------------
 
 export type Gravite = 'erreur' | 'alerte';
@@ -175,6 +179,8 @@ export function construireContexte(
   const sources = lireListe(donnees.sources, sourceSchema, FICHIERS.sources, constats);
   const voyants = lireListe(donnees.voyants, voyantBaseSchema, FICHIERS.voyants, constats);
 
+  // Plan du site : liens déclarés une fois, pages mères cohérentes avec les adresses (src/lib/plan.ts).
+  constats.push(...controlerStructurePlan(plan));
   const adresses = new Map<string, string>();
   for (const ligne of plan.values()) {
     const autre = adresses.get(ligne.adresse);
@@ -183,6 +189,9 @@ export function construireContexte(
     }
     adresses.set(ligne.adresse, ligne.id);
   }
+
+  // La page de chaque voyant est dans le plan, et l'outil voyants y mène par un lien du plan.
+  constats.push(...controlerVoyantsDansLePlan(plan, voyants.values()));
 
   // La base voyants est soumise aux mêmes règles que les pages : sources (R3) et empreinte (R4).
   for (const voyant of voyants.values()) {
@@ -212,14 +221,7 @@ export function construireContexte(
 
 // ---- Pages --------------------------------------------------------------------------------------
 
-export function normaliserRecherche(texte: string): string {
-  return texte
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
-}
+export { normaliserRecherche };
 
 /** Toutes les sources citées par une page, hors lignes de situation (contrôlées une par une). */
 function sourcesDeLaPage(page: PageEditoriale): { libelle: string; ids: readonly string[] }[] {
@@ -446,6 +448,8 @@ export interface PageControlee {
   fichier: string;
   /** Page analysée (absente si le schéma a échoué). */
   page?: PageEditoriale;
+  /** Adresses internes citées dans le texte de la page (voir adressesDansLeTexte). */
+  adressesTexte?: readonly string[] | undefined;
 }
 
 /** Contrôles qui portent sur plusieurs pages à la fois. */
@@ -459,18 +463,12 @@ export function controlerEnsemble(pages: readonly PageControlee[], ctx: Contexte
     parId.set(p.page.id, p);
   }
 
+  // Les liens entre pages viennent du plan du site. Un lien écrit dans le texte ne mène qu'à une page liée
+  // dans le plan (lien déclaré, page mère ou page enfant).
+  const index = indexerPlan(ctx.plan);
   for (const p of pages) {
-    const page = p.page;
-    if (page === undefined) continue;
-    for (const cible of page.liens ?? []) {
-      if (!ctx.plan.has(cible)) {
-        constats.push(erreur('R7-LIEN-INCONNU', `lien vers « ${cible} » : cette page n'est pas dans le plan du site`, p.fichier));
-      }
-      // Un lien n'est déclaré qu'une fois ; le lien retour est calculé.
-      if (cible > page.id && parId.get(cible)?.page?.liens?.includes(page.id)) {
-        constats.push(erreur('R7-LIEN-DOUBLE', `« ${page.id} » et « ${cible} » se déclarent mutuellement : déclarer le lien d'un seul côté (le retour est calculé)`, p.fichier));
-      }
-    }
+    if (p.page === undefined) continue;
+    constats.push(...controlerLiensDuTexte(p.page.id, p.adressesTexte ?? [], index, p.fichier));
   }
 
   // Chaque voyant de la base est rattaché à une seule page, qui doit le déclarer.

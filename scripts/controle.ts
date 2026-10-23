@@ -17,6 +17,8 @@ import {
   type PageControlee,
 } from '../src/lib/controle.ts';
 import { modeIndexation } from '../src/lib/indexation.ts';
+import { adressesDansLeTexte, liensEnAttente } from '../src/lib/plan.ts';
+import { FICHIER_05, controlerPortePlan, lireCsv } from '../src/lib/porte-plan.ts';
 import { auteursDuSocle, chargerDonnees, chargerPages } from './lib/charger.ts';
 import { controler404, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './lib/dist.ts';
 
@@ -37,6 +39,8 @@ function aujourdhui(): Date {
 }
 
 const constats: Constat[] = [];
+/** Informations sans gravité (ni erreur ni alerte), affichées dans le bilan. */
+const informations: string[] = [];
 
 // 1. Fichiers de données et base voyants.
 const donnees = await chargerDonnees(racine);
@@ -46,6 +50,11 @@ const { contexte, constats: constatsDonnees } = construireContexte(
   aujourdhui(),
 );
 constats.push(...constatsDonnees);
+
+// 1 bis. Porte de l'étape 4 : le plan du site couvre exactement les mots-clés de docs/05, sans doublon d'intention.
+const porte = controlerPortePlan([...contexte.plan.values()], lireCsv(await readFile(join(racine, FICHIER_05), 'utf8')));
+constats.push(...porte.constats);
+informations.push(...porte.informations);
 
 // 2. Pages éditoriales : frontmatter et page construite.
 const controlees: PageControlee[] = [];
@@ -71,9 +80,17 @@ for (const lue of pagesLues) {
   }
   const resultat = controlerPage({ type: lue.type, brut: lue.brut, fichier: lue.fichier }, contexte, html);
   constats.push(...resultat.constats);
-  controlees.push({ type: lue.type, fichier: lue.fichier, ...(resultat.page !== undefined && { page: resultat.page }) });
+  controlees.push({
+    type: lue.type,
+    fichier: lue.fichier,
+    adressesTexte: adressesDansLeTexte(lue.corps ?? ''),
+    ...(resultat.page !== undefined && { page: resultat.page }),
+  });
 }
 constats.push(...controlerEnsemble(controlees, contexte));
+const ecrites = new Set(controlees.flatMap((p) => (p.page !== undefined ? [p.page.id] : [])));
+const enAttente = liensEnAttente(contexte.plan, ecrites);
+if (enAttente > 0) informations.push(`${enAttente} lien(s) du plan en attente de leur page : ils s'afficheront quand les deux pages seront écrites`);
 
 // 3. Site construit : non-indexation (dans les deux sens), page 404, fixtures, configuration Cloudflare.
 constats.push(...(await controlerIndexation(dist, mode.indexable)));
@@ -93,6 +110,7 @@ for (const c of constats) {
     stdout.write(`${etiquette} [${c.regle}] ${c.fichier ?? ''} : ${c.message}\n`);
   }
 }
+for (const info of informations) stdout.write(`INFO ${info}\n`);
 const erreurs = sontBloquants(constats).length;
 const alertes = constats.length - erreurs;
 const alertesAttendues = echouerSur === undefined ? 0 : constats.filter((c) => c.gravite === 'alerte' && c.regle === echouerSur).length;
@@ -103,6 +121,7 @@ if (alertesAttendues > 0) stdout.write(`${alertesAttendues} alerte(s) ${echouerS
 // Résumé visible dans l'onglet du run GitHub (alertes comprises).
 if (env['GITHUB_STEP_SUMMARY'] !== undefined) {
   const lignes = [`### ${bilan}`, '', `Mode d'indexation : ${mode.description}`, ''];
+  for (const info of informations) lignes.push(`- Information : ${info}`);
   for (const c of constats) lignes.push(`- **${c.gravite === 'erreur' ? 'Erreur' : 'Alerte'}** \`${c.regle}\` ${c.fichier ?? ''} : ${c.message}`);
   await appendFile(env['GITHUB_STEP_SUMMARY'], lignes.join('\n') + '\n');
 }
