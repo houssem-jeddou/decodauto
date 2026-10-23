@@ -1,0 +1,32 @@
+{
+  "name": "decodauto",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/controle.ts",
+    "controle": "node scripts/controle.ts",
+    "schemas": "astro check",
+    "test": "node --test tests/*.test.ts",
+    "liens": "node scripts/liens.ts",
+    "lighthouse": "lhci autorun --config=lighthouserc.json",
+    "fixtures": "node scripts/generer-fixtures.ts",
+    "empreinte": "node scripts/empreinte.ts",
+    "verifier:modes": "node scripts/verifier-modes.ts"
+  },
+  "dependencies": {
+    "astro": "7.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@lhci/cli": "0.15.1",
+    "cheerio": "1.2.0",
+    "typescript": "6.0.3",
+    "wrangler": "4.152.0",
+    "yaml": "2.9.1"
+  }
+}

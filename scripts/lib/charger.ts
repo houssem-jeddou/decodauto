@@ -1,0 +1,75 @@
+import { readFile, readdir } from 'node:fs/promises';
+import { join, relative } from 'node:path';
+import { parse } from 'yaml';
+import type { DonneesBrutes } from '../../src/lib/controle.ts';
+import { TYPES_AVEC_SOCLE, type TypeAvecSocle } from '../../src/schemas/listes.ts';
+import { soclePageSchema } from '../../src/schemas/pages.ts';
+
+/** Sépare le frontmatter YAML (entre deux lignes « --- ») du reste du fichier Markdown. */
+export function lireFrontmatter(contenu: string): unknown {
+  const correspondance = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(contenu);
+  if (correspondance === null) throw new Error('frontmatter absent (le fichier doit commencer par « --- »)');
+  return parse(correspondance[1] ?? '');
+}
+
+export async function listerFichiers(dossier: string, extension: string): Promise<string[]> {
+  let entrees;
+  try {
+    entrees = await readdir(dossier, { withFileTypes: true, recursive: true });
+  } catch {
+    return [];
+  }
+  return entrees
+    .filter((e) => e.isFile() && e.name.endsWith(extension))
+    .map((e) => join(e.parentPath, e.name))
+    .sort();
+}
+
+async function lireJson(chemin: string): Promise<unknown[]> {
+  const valeur: unknown = JSON.parse(await readFile(chemin, 'utf8'));
+  if (!Array.isArray(valeur)) throw new Error(`${chemin} : un tableau JSON est attendu`);
+  return valeur;
+}
+
+export async function chargerDonnees(racine: string): Promise<DonneesBrutes> {
+  const [plan, voyants, sources] = await Promise.all([
+    lireJson(join(racine, 'data/plan-du-site.json')),
+    lireJson(join(racine, 'data/voyants.json')),
+    lireJson(join(racine, 'data/sources.json')),
+  ]);
+  return { plan, voyants, sources };
+}
+
+export interface FichierPage {
+  type: TypeAvecSocle;
+  fichier: string;
+  /** Frontmatter, ou l'erreur de lecture. */
+  brut?: unknown;
+  erreurLecture?: string;
+}
+
+/** Pages Markdown de src/content/<type>/. */
+export async function chargerPages(racine: string): Promise<FichierPage[]> {
+  const pages: FichierPage[] = [];
+  for (const type of TYPES_AVEC_SOCLE) {
+    for (const chemin of await listerFichiers(join(racine, 'src/content', type), '.md')) {
+      const fichier = relative(racine, chemin);
+      try {
+        pages.push({ type, fichier, brut: lireFrontmatter(await readFile(chemin, 'utf8')) });
+      } catch (e) {
+        pages.push({ type, fichier, erreurLecture: e instanceof Error ? e.message : String(e) });
+      }
+    }
+  }
+  return pages;
+}
+
+/** Identifiants des fiches auteur déclarées par les pages du socle (page « à propos »). */
+export function auteursDuSocle(pages: readonly FichierPage[]): string[] {
+  return pages
+    .filter((p) => p.type === 'socle')
+    .flatMap((p) => {
+      const lecture = soclePageSchema.safeParse(p.brut);
+      return lecture.success ? (lecture.data.auteurs ?? []).map((a) => a.id) : [];
+    });
+}

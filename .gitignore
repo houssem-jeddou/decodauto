@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dist-indexable/
+.astro/
+.wrangler/
+.lighthouseci/
+.env
+.env.*
+*.log
+dist-*/
