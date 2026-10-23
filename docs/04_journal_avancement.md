@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 23/10/2026 (19 h)
+Dernière mise à jour : 23/10/2026 (20 h)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -99,6 +99,7 @@ Dernière mise à jour : 23/10/2026 (19 h)
   - libellés des codes défaut en source secondaire.
 
   Pas de compte GitHub séparé pour Claude.
+- 23/10/2026 (19 h 44), correction urgente : Houssem valide la règle de revue. Si la correction peut attendre une heure, revue indépendante avant la fusion ; si l'erreur est dangereuse, publication tout de suite après sa validation et les contrôles, puis revue dans les 24 heures. 03 passe en v5.
 
 ## Revues indépendantes : ce qu'elles ont changé
 - 23/10 (soir), audit final du plan et des règles (nouveau relecteur, sur la dernière version de tous les documents) : « à corriger » sur cinq manques importants (niveaux de verdict non définis, ouverture sur la décision non contrôlée, pas de correction urgente, `main` non protégée, réglages hors dépôt et découverte du domaine absents du plan). Tout est intégré dans 03 v4. Écarté : un compte GitHub séparé pour Claude (facultatif, la protection de `main` suffit).
