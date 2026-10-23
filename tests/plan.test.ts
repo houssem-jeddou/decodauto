@@ -147,6 +147,13 @@ describe('liens de l\'outil voyants et liens écrits dans le texte', () => {
   test('liens absolus vers decodauto.com (www compris) et liens relatifs : résolus et contrôlés comme internes', () => {
     assert.deepEqual(adressesDansLeTexte('[x](https://decodauto.com/voyants/huile/) [y](https://www.decodauto.com/bruit/)'), ['/voyants/huile/', '/bruit/']);
     assert.deepEqual(adressesDansLeTexte('[x](../huile/) [y](frein/)', '/voyants/moteur/'), ['/voyants/huile/', '/voyants/moteur/frein/']);
+    // Liens automatiques et adresses nues (GFM), « index.html », lien autour d'une image.
+    assert.deepEqual(adressesDansLeTexte('Voir https://decodauto.com/voyants/huile/.'), ['/voyants/huile/']);
+    assert.deepEqual(adressesDansLeTexte('www.decodauto.com/bruit/, <https://decodauto.com/surchauffe/>').sort(), ['/bruit/', '/surchauffe/']);
+    assert.deepEqual(adressesDansLeTexte('[x](/voyants/huile/index.html)'), ['/voyants/huile/']);
+    assert.deepEqual(adressesDansLeTexte('[![photo](/images/a.jpg)](/voyants/huile/)'), ['/voyants/huile/']);
+    // Le nom du site cité dans une phrase n'est pas un lien.
+    assert.deepEqual(adressesDansLeTexte('decodauto.com est un guide indépendant.'), []);
   });
 
   test('images, fichiers et code ne sont pas des liens vers des pages', () => {
@@ -156,9 +163,16 @@ describe('liens de l\'outil voyants et liens écrits dans le texte', () => {
       '```md',
       '[y](/surchauffe/)',
       '```',
+      '````',
+      '```',
+      '[w](/bruit/)',
+      '```',
+      '````',
+      'Une note[^1].',
+      '[^1]: Source : notice du constructeur.',
       '[z](/voyants/)',
     ].join('\n');
-    assert.deepEqual(adressesDansLeTexte(corps), ['/voyants/']);
+    assert.deepEqual(adressesDansLeTexte(corps, '/voyants/moteur/'), ['/voyants/']);
   });
 
   test('un lien du texte mène à une page liée, mère ou enfant ; sinon il bloque', () => {

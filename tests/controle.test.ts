@@ -188,7 +188,10 @@ describe('base voyants (R3, R4) et rattachement (R1)', async () => {
     const avecLiens = { ...outil, liens: ['fixture-panne', 'fixture-voyant'] };
     assert.deepEqual(construireContexte({ ...donnees, plan: [...donnees.plan, avecLiens] }, AUJOURDHUI).constats, []);
     const horsPlan = { ...voyantValide, page: 'page-absente' };
-    assert.deepEqual(codes(construireContexte({ ...donnees, voyants: [horsPlan] }, AUJOURDHUI).constats, 'erreur'), ['R1-RATTACHEMENT']);
+    const { contexte: ctxHorsPlan, constats } = construireContexte({ ...donnees, voyants: [horsPlan] }, AUJOURDHUI);
+    assert.deepEqual(codes(constats, 'erreur'), ['R1-RATTACHEMENT']);
+    // Pas d'alerte « page pas encore écrite » en plus de l'erreur.
+    assert.deepEqual(controlerEnsemble([], ctxHorsPlan), []);
   });
 
   test('un lien écrit dans le texte ne mène qu\'à une page liée dans le plan', async () => {
@@ -208,9 +211,15 @@ describe('base voyants (R3, R4) et rattachement (R1)', async () => {
 describe('construction : les liens du texte des pages sont lus et contrôlés', async () => {
   const donnees = await lireJson<DonneesBrutes>(join(fixtures, 'contexte.json'));
 
-  test('lien hors plan dans une page éditoriale et dans le socle : bloquant ; lien relatif vers une page liée : admis', async () => {
+  test('lien hors plan dans une page éditoriale et dans le socle : bloquant ; liens vers une page liée (relatif, enfant) : admis', async () => {
     const racineTest = await dossierTemporaire();
-    const plan = donnees.plan.map((l) => ((l as Record<string, unknown>)['id'] === 'fixture-panne' ? { ...(l as Record<string, unknown>), liens: ['fixture-fluide'] } : l));
+    // fixture-fluide devient l'enfant de fixture-panne ; le socle (fixture-a-propos) est lié à fixture-panne.
+    const plan = donnees.plan.map((l) => {
+      const ligne = l as Record<string, unknown>;
+      if (ligne['id'] === 'fixture-fluide') return { ...ligne, adresse: '/fixture-panne/fluide/', parent: 'fixture-panne' };
+      if (ligne['id'] === 'fixture-a-propos') return { ...ligne, liens: ['fixture-panne'] };
+      return ligne;
+    });
     await mkdir(join(racineTest, 'data'));
     await writeFile(join(racineTest, 'data', 'plan-du-site.json'), JSON.stringify(plan));
     await writeFile(join(racineTest, 'data', 'voyants.json'), JSON.stringify(donnees.voyants));
@@ -223,14 +232,15 @@ describe('construction : les liens du texte des pages sont lus et contrôlés', 
       const page = await readFile(join(fixtures, 'cas', cas, 'page.md'), 'utf8');
       await writeFile(join(racineTest, 'src', 'content', type, `${cas}.md`), `${page}\n${texte}\n`);
     };
-    await ajouter('panne', 'valide-panne', 'Voir [le code](/fixture-code/), [le fluide](../fixture-fluide/) et ![photo](/images/x.jpg).');
-    await ajouter('socle', 'valide-socle', 'Voir [le code](https://decodauto.com/fixture-code/).');
+    await ajouter('panne', 'valide-panne', 'Voir [le code](/fixture-code/), [le fluide](fluide/) et ![photo](/images/x.jpg).');
+    await ajouter('socle', 'valide-socle', 'Voir [le code](https://decodauto.com/fixture-code/) et [la panne](../fixture-panne/).');
     const bilan = await controlerSite({ racine: racineTest, dist: await dossierTemporaire(), aujourdhui: AUJOURDHUI, indexable: false });
     const horsPlan = bilan.constats.filter((c) => c.regle === 'R7-LIEN-HORS-PLAN');
     assert.deepEqual(horsPlan.map((c) => c.fichier).sort(), ['src/content/panne/valide-panne.md', 'src/content/socle/valide-socle.md']);
     assert.ok(horsPlan.every((c) => c.message.includes('fixture-code')));
     assert.equal(bilan.constats.filter((c) => c.regle === 'R7-LIEN-INCONNU').length, 0);
-    assert.ok(bilan.informations.some((i) => i.includes('en attente')));
+    // Paires du plan : socle ↔ panne (deux pages écrites) et panne ↔ fluide (fluide pas écrite) : 1 en attente.
+    assert.ok(bilan.informations.some((i) => i.startsWith('1 lien(s) du plan')), JSON.stringify(bilan.informations));
   });
 });
 

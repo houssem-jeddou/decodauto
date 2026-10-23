@@ -175,34 +175,45 @@ const HOTES_DU_SITE = new Set(['decodauto.com', 'www.decodauto.com']);
 
 /**
  * Adresses des pages du site citées dans le texte Markdown d'une page : liens [texte](cible), références
- * [texte]: cible et balises <a href="cible">. Les cibles relatives sont résolues depuis l'adresse de la page,
- * les liens absolus vers decodauto.com sont internes. Sont ignorés : les images, le code (blocs et `code`),
- * les ancres seules, les autres sites et protocoles, et les fichiers (image, PDF…), contrôlés par npm run liens.
+ * [texte]: cible, liens automatiques <https://…>, adresses nues en https:// ou www. (GFM) et balises
+ * <a href="cible">. Les cibles relatives sont résolues depuis l'adresse de la page, les liens absolus vers
+ * decodauto.com sont internes, « …/index.html » vaut « …/ ». Sont ignorés : les images (mais pas le lien qui
+ * les entoure), le code (blocs et `code`), les notes de bas de page, les ancres seules, les autres sites et
+ * protocoles, et les fichiers (image, PDF…), contrôlés par npm run liens.
  */
 export function adressesDansLeTexte(corps: string, adressePage = '/'): string[] {
-  const texte = corps.replace(/^(```|~~~)[\s\S]*?^\1[^\n]*$/gm, '').replace(/`[^`\n]*`/g, '');
+  const texte = corps
+    .replace(/^ {0,3}(`{3,}|~{3,})[^\n]*\n[\s\S]*?^ {0,3}\1[ \t]*$/gm, '') // blocs de code
+    .replace(/(`+)[^`\n]*?\1/g, '') // code en ligne
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, 'image'); // images (le lien qui entoure une image reste lisible)
   const motifs = [
-    /(?<!!)\[[^\]]*\]\(\s*<?([^)\s>]+)>?(?:\s+["'(][^)]*)?\)/g,
-    /^\s{0,3}\[[^\]]+\]:\s*<?([^\s>]+)>?/gm,
-    /<a\b[^>]*?\bhref\s*=\s*["']([^"']+)["']/gi,
+    /\[[^\]]*\]\(\s*<?([^)\s>]+)>?(?:\s+["'(][^)]*)?\)/g, // [texte](cible)
+    /^ {0,3}\[(?!\^)[^\]]+\]:\s*<?([^\s>]+)>?/gm, // [texte]: cible (hors notes de bas de page)
+    /<((?:https?:)?\/\/[^>\s]+)>/g, // <https://…>
+    /<a\b[^>]*?\bhref\s*=\s*["']([^"']+)["']/gi, // <a href="cible">
+  ];
+  // Adresse nue vers le site, que GFM transforme en lien ; la ponctuation finale n'en fait pas partie.
+  const adresseNue = /(?<![\w/(<"'=.-])((?:https?:\/\/|www\.)(?:www\.)?decodauto\.com(?:\/[^\s)\]>"'<]*)?)/gi;
+  const cibles = [
+    ...motifs.flatMap((motif) => [...texte.matchAll(motif)].map((c) => c[1] ?? '')),
+    ...[...texte.matchAll(adresseNue)].map((c) => (c[1] ?? '').replace(/[.,;:!?]+$/, '')),
   ];
   const base = new URL(adressePage, 'https://decodauto.com');
   const adresses: string[] = [];
-  for (const motif of motifs) {
-    for (const correspondance of texte.matchAll(motif)) {
-      const cible = correspondance[1] ?? '';
-      if (cible === '' || cible.startsWith('#')) continue;
-      let url: URL;
-      try {
-        url = new URL(cible, base);
-      } catch {
-        continue;
-      }
-      if ((url.protocol !== 'https:' && url.protocol !== 'http:') || !HOTES_DU_SITE.has(url.hostname)) continue;
-      const dernier = url.pathname.split('/').pop() ?? '';
-      if (dernier.includes('.')) continue; // fichier : contrôlé par npm run liens
-      adresses.push(url.pathname);
+  for (const brute of cibles) {
+    if (brute === '' || brute.startsWith('#')) continue;
+    const cible = /^www\./i.test(brute) ? `https://${brute}` : brute;
+    let url: URL;
+    try {
+      url = new URL(cible, base);
+    } catch {
+      continue;
     }
+    if ((url.protocol !== 'https:' && url.protocol !== 'http:') || !HOTES_DU_SITE.has(url.hostname)) continue;
+    const chemin = url.pathname.endsWith('/index.html') ? url.pathname.slice(0, -'index.html'.length) : url.pathname;
+    const dernier = chemin.split('/').pop() ?? '';
+    if (dernier.includes('.')) continue; // fichier : contrôlé par npm run liens
+    adresses.push(chemin);
   }
   return adresses;
 }
