@@ -1,7 +1,8 @@
-# Structure des contenus — decodauto.com (v2)
+# Structure des contenus — decodauto.com (v3)
 
 Validée par Houssem le 22/10/2026, après trois revues indépendantes. Étape 3, livrable « Structure des contenus ».
 v2 (23/10/2026, accord de Houssem) : ajout du champ facultatif `voyant_lie` dans une ligne de situation saisie (voir le champ situations et la règle 2).
+v3 (23/10/2026, demande de changement n° 1 de l'étape 4, acceptée par Houssem) : les liens entre pages passent dans le plan du site ; les pages ne déclarent plus de liens (voir le champ liens et la section 4).
 
 **Archivé le 23/10/2026 (décision de Houssem, porte de l'étape 3)** : la transposition en schémas est validée. Ce sont désormais **les schémas du dépôt (`src/schemas/`, contrôles dans `src/lib/controle.ts`) qui font foi** ; ce fichier reste la référence lisible. Toute modification de structure passe par une demande de changement (03) et met à jour les schémas, puis ce fichier.
 
@@ -21,7 +22,7 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 | cout_probable | ✅ | saisi | Échelle fermée en ordres de grandeur, avec une base de calcul et des sources du registre. Aucun prix d'enseigne, aucun prix de prestation (règle 5 de 01). Les tranches, et le niveau où le coût est porté (situation ou cause), seront fixés à l'étape 6. |
 | sources | ✅ | saisi | Identifiants du registre des sources (étape 5). Jamais de source recopiée dans la page. |
 | element_unique | ✅ | saisi | Arbre de décision, tableau, outil ou photo réelle. Sa présence est vérifiée **dans la page construite**. |
-| liens | facultatif | saisi | Chaque lien n'est déclaré qu'une seule fois ; le lien retour est calculé. Le plan du site (étape 4) reste la référence du maillage. |
+| liens | — | **calculé** depuis le plan du site | Champ supprimé des pages en v3. Les liens viennent du plan du site (section 4). |
 | auteur | ✅ | saisi | Renvoie à la fiche auteur de la page « à propos ». |
 | relecteur | conditionnel | saisi | Affiché seulement s'il existe. Dépend de la décision ouverte (mécanicien ou sources seules). |
 | date_publication, date_modification, date_revue, prochaine_revue | ✅ | saisies ou calculées | date_modification = dernière modification réelle, distincte de la revue. Piste à tester : la tirer de l'historique Git. |
@@ -58,3 +59,13 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 5. **Revue.** Une date de revue dépassée déclenche une alerte, pas un blocage.
 6. **Causes.** Elles sont présentées dans un ordre logique, jamais classées « par fréquence » sans donnée sourcée.
 7. **Champs obligatoires.** Un champ obligatoire manquant, une valeur hors liste fermée ou un élément unique absent de la page construite bloquent la construction.
+
+## 4. Plan du site et liens entre pages (v3)
+Le plan du site (`data/plan-du-site.json`) est la référence du maillage. Une ligne = une page : id, type, thème, vague, adresse, requête principale, mots-clés, et en option :
+- `parent` : la page mère. Elle est reprise dans l'adresse (l'adresse de l'enfant est sous celle de la mère) et dans le fil d'Ariane. **La page mère affiche ses pages enfants**, par un lien calculé.
+- `liens` : les pages liées. Chaque paire n'est déclarée qu'une fois ; le lien retour est calculé.
+
+Règles :
+1. Un lien du plan ne s'affiche que si les deux pages sont construites. Un lien vers une page pas encore écrite n'est ni une erreur ni une alerte : le contrôle l'indique en une ligne d'information.
+2. Un lien écrit dans le texte d'une page ne mène qu'à une page liée dans le plan (lien déclaré, page mère ou page enfant). Il en va de même pour les liens que l'outil voyants génère depuis la base voyants.
+3. Contrôles : lien vers une page inconnue ou vers soi-même, paire déclarée deux fois, page mère inconnue, cycle de pages mères, adresse de l'enfant hors de celle de sa mère. Détail et codes : `CONTROLES.md`.
