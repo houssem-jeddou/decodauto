@@ -24,7 +24,7 @@ import {
 // pages de test (tests/fixtures). Ce module ne lit aucun fichier : il reçoit des données.
 //
 //   R1  verdicts des voyants repris de la base            R4  empreinte de validation (bloque)
-//   R2  pas moins grave que la base                       R5  revue dépassée (alerte, ne bloque pas)
+//   R2  pas moins grave que la base (ligne par ligne)     R5  revue dépassée (alerte, ne bloque pas)
 //   R3  source de première main                           R7  champs obligatoires, listes fermées,
 //   R6  ordre des causes : non vérifiable par machine          élément unique dans la page construite
 // ---------------------------------------------------------------------------------------------
@@ -66,6 +66,15 @@ const alerte = (regle: string, message: string, fichier?: string): Constat => ({
   message,
   fichier,
 });
+
+/**
+ * Code de sortie du script de contrôle : 1 s'il y a une erreur bloquante, ou une alerte portant le code demandé
+ * par --echouer-sur (utilisé par le workflow hebdomadaire pour être prévenu des revues dépassées) ; sinon 0.
+ */
+export function codeSortie(constats: readonly Constat[], echouerSur?: string): 0 | 1 {
+  if (constats.some((c) => c.gravite === 'erreur')) return 1;
+  return echouerSur !== undefined && constats.some((c) => c.gravite === 'alerte' && c.regle === echouerSur) ? 1 : 0;
+}
 
 export const sontBloquants = (constats: readonly Constat[]): Constat[] => constats.filter((c) => c.gravite === 'erreur');
 
@@ -219,7 +228,6 @@ function sourcesDeLaPage(page: PageEditoriale): { libelle: string; ids: readonly
     { libelle: 'cout_probable.sources', ids: page.cout_probable.sources },
   ];
   if ('quand_changer' in page) liste.push({ libelle: 'quand_changer.sources', ids: page.quand_changer.sources });
-  if ('texte_reference' in page) liste.push({ libelle: 'texte_reference.source', ids: [page.texte_reference.source] });
   if ('precisions_par_marque' in page) {
     page.precisions_par_marque?.forEach((p, i) => liste.push({ libelle: `precisions_par_marque.${i}.sources`, ids: p.sources }));
   }
@@ -239,7 +247,19 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   const { type, brut, fichier } = entree;
   const lecture = schemasPage[type].safeParse(brut);
   const constats = constatsDepuisSchema(lecture, brut, fichier);
-  if (!lecture.success || type === 'socle') return { constats };
+  if (!lecture.success) return { constats };
+  if (type === 'socle') {
+    // L'adresse du socle vient uniquement du plan du site, comme pour les autres pages.
+    const socle = lecture.data as { id: string; title: string };
+    const ligne = ctx.plan.get(socle.id);
+    if (ligne === undefined) {
+      constats.push(erreur('R7-PLAN-ABSENT', `la page « ${socle.id} » n'est pas dans le plan du site (data/plan-du-site.json) : son adresse ne peut pas être calculée`, fichier));
+    } else if (ligne.type !== 'socle') {
+      constats.push(erreur('R7-PLAN-TYPE', `le plan du site range « ${socle.id} » dans le type « ${ligne.type} », la page est de type « socle »`, fichier));
+    }
+    if (html !== undefined) constats.push(...controlerHtmlSocle(socle.title, html, fichier));
+    return { constats };
+  }
 
   const page = lecture.data as PageEditoriale;
   const typeEditorial: TypePage = type;
@@ -263,14 +283,24 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
     if (!ctx.voyants.has(id)) constats.push(erreur('R1-VOYANT-INCONNU', `voyant « ${id} » absent de la base voyants`, fichier));
   }
   const { lignes, voyantsInconnus } = resoudreLignes(page.situations, ctx.voyants);
-  for (const id of voyantsInconnus) {
+  const reprises = page.situations.flatMap((l) => (l.voyant !== undefined ? [l.voyant] : []));
+  for (const id of new Set(voyantsInconnus)) {
     if (!declares.includes(id)) {
       constats.push(erreur('R1-VOYANT-INCONNU', `ligne de situation : voyant « ${id} » absent de la base voyants`, fichier));
     }
   }
-  for (const ligne of page.situations) {
-    if (ligne.voyant !== undefined && !declares.includes(ligne.voyant)) {
-      constats.push(erreur('R1-VOYANT-NON-DECLARE', `la ligne reprend le voyant « ${ligne.voyant} » qui n'est pas dans la liste « voyants » de la page`, fichier));
+  for (const id of reprises) {
+    if (!declares.includes(id)) {
+      constats.push(erreur('R1-VOYANT-NON-DECLARE', `la ligne reprend le voyant « ${id} » qui n'est pas dans la liste « voyants » de la page`, fichier));
+    }
+  }
+  if (new Set(reprises).size !== reprises.length) {
+    constats.push(erreur('R7-DOUBLON', 'une ligne de la base est reprise deux fois pour le même voyant', fichier));
+  }
+  // Chaque voyant déclaré a sa ligne reprise de la base : on ne l'écrit jamais à la main.
+  for (const id of declares) {
+    if (!reprises.includes(id)) {
+      constats.push(erreur('R1-LIGNE-BASE-ABSENTE', `le voyant « ${id} » est déclaré mais sa ligne de situation n'est pas reprise de la base (ajouter « - voyant: ${id} »)`, fichier));
     }
   }
 
@@ -278,6 +308,16 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   for (const { libelle, ids } of sourcesDeLaPage(page)) {
     for (const id of examinerSources(ids, ctx.sources).inconnues) {
       constats.push(erreur('R3-SOURCE-INCONNUE', `${libelle} : source « ${id} » absente du registre des sources`, fichier));
+    }
+  }
+  if ('texte_reference' in page) {
+    // Le texte de référence (Légifrance, arrêté préfectoral) est une source de première main par nature.
+    const { inconnues, premiereMain } = examinerSources([page.texte_reference.source], ctx.sources);
+    for (const id of inconnues) {
+      constats.push(erreur('R3-SOURCE-INCONNUE', `texte_reference : source « ${id} » absente du registre des sources`, fichier));
+    }
+    if (inconnues.length === 0 && !premiereMain) {
+      constats.push(erreur('R3-PREMIERE-MAIN', 'texte_reference : la source doit être de première main (Légifrance ou arrêté préfectoral)', fichier));
     }
   }
   const saisies: LigneResolue[] = lignes.filter((l) => l.origine === 'page');
@@ -291,17 +331,16 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
     }
   }
 
-  // R2 : une ligne saisie n'est jamais moins grave que la base pour les voyants déclarés.
-  const verdictsBase = declares.flatMap((id) => {
-    const voyant = ctx.voyants.get(id);
-    return voyant === undefined ? [] : [voyant.verdict];
-  });
-  if (verdictsBase.length > 0) {
-    const plusGraveDeLaBase = verdictsBase.reduce((a, b) => (rangVerdict(b) > rangVerdict(a) ? b : a));
-    for (const ligne of saisies) {
-      if (rangVerdict(ligne.verdict) < rangVerdict(plusGraveDeLaBase)) {
-        constats.push(erreur('R2-MOINS-GRAVE', `situation « ${ligne.situation} » : le verdict « ${ligne.verdict} » est moins grave que celui de la base voyants (« ${plusGraveDeLaBase} »)`, fichier));
-      }
+  // R2 : une ligne saisie rattachée à un voyant (voyant_lie) n'est jamais moins grave que ce voyant dans la base.
+  for (const ligne of page.situations) {
+    if (ligne.voyant_lie === undefined || ligne.verdict === undefined) continue;
+    if (!declares.includes(ligne.voyant_lie)) {
+      constats.push(erreur('R1-VOYANT-NON-DECLARE', `voyant_lie « ${ligne.voyant_lie} » n'est pas dans la liste « voyants » de la page`, fichier));
+      continue;
+    }
+    const base = ctx.voyants.get(ligne.voyant_lie);
+    if (base !== undefined && rangVerdict(ligne.verdict) < rangVerdict(base.verdict)) {
+      constats.push(erreur('R2-MOINS-GRAVE', `situation « ${ligne.situation ?? ''} » : le verdict « ${ligne.verdict} » est moins grave que celui du voyant « ${base.id} » dans la base voyants (« ${base.verdict} »)`, fichier));
     }
   }
 
@@ -366,20 +405,37 @@ export function controlerHtml(page: PageEditoriale, html: string, fichier: strin
   const element = $(`[data-element-unique="${page.element_unique}"]`).first();
   let manque = false;
   if (element.length === 0) manque = true;
-  else if (page.element_unique === 'tableau') manque = element.find('table tr').length < 2 && !element.is('table');
-  else if (page.element_unique === 'photo') {
+  else if (page.element_unique === 'tableau') {
+    // Un tableau contient au moins une ligne de données (cellules td), en plus d'éventuels en-têtes (th).
+    const tableau = element.is('table') ? element : element.find('table').first();
+    manque = tableau.length === 0 || tableau.find('tr').filter((_, tr) => $(tr).children('td').length > 0).length === 0;
+  } else if (page.element_unique === 'photo') {
     const images = element.is('img') ? element : element.find('img');
     manque = images.length === 0 || images.toArray().some((img) => ($(img).attr('alt') ?? '').trim() === '');
   } else manque = element.text().trim() === '' && element.children().length === 0;
   if (manque) {
-    constats.push(erreur('R7-ELEMENT-UNIQUE-ABSENT', `l'élément unique « ${page.element_unique} » est absent ou vide dans la page construite (attribut data-element-unique="${page.element_unique}")`, fichier));
+    constats.push(erreur('R7-ELEMENT-UNIQUE-ABSENT', `l'élément unique « ${page.element_unique} » est absent ou vide dans la page construite (attribut data-element-unique="${page.element_unique}"${page.element_unique === 'tableau' ? ', avec au moins une ligne de données' : ''})`, fichier));
   }
 
-  // Tutoriel : les étapes s'écrivent dans le texte, en liste numérotée.
-  if (page.tutoriel !== undefined && $('ol li').length === 0) {
-    constats.push(erreur('R7-TUTORIEL-ETAPES', 'un tutoriel présente ses étapes en liste numérotée (ol) dans la page construite', fichier));
+  // Tutoriel : les étapes s'écrivent dans le texte, en liste numérotée portant le marqueur data-tutoriel-etapes
+  // (n'importe quelle autre liste numérotée de la page ne compte pas).
+  if (page.tutoriel !== undefined && $('ol[data-tutoriel-etapes] > li').length === 0) {
+    constats.push(erreur('R7-TUTORIEL-ETAPES', 'un tutoriel présente ses étapes dans une liste numérotée portant l\'attribut data-tutoriel-etapes (<ol data-tutoriel-etapes>), avec au moins une étape', fichier));
   }
 
+  return constats;
+}
+
+/** Page du socle construite : le title et un seul H1 sont présents. */
+export function controlerHtmlSocle(titre: string, html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  if (!normaliserRecherche($('head > title').first().text()).includes(normaliserRecherche(titre))) {
+    constats.push(erreur('R7-HTML-TITLE', `la page construite n'a pas le title attendu « ${titre} »`, fichier));
+  }
+  if ($('h1').length !== 1) {
+    constats.push(erreur('R7-HTML-H1', `la page construite doit contenir exactement un H1 (trouvé : ${$('h1').length})`, fichier));
+  }
   return constats;
 }
 

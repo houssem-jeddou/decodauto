@@ -83,6 +83,24 @@ export async function controler404(dist: string): Promise<Constat[]> {
   return constats;
 }
 
+/**
+ * Toute page HTML du site construit correspond à une adresse du plan du site, ou est l'accueil ou la 404.
+ * Une page qui n'est pas dans le plan (donc sans mot-clé, sans thème, sans contrôle) ne part jamais en ligne.
+ */
+export async function controlerPagesDuPlan(dist: string, adressesDuPlan: Iterable<string>): Promise<Constat[]> {
+  const autorisees = new Set<string>(['/', ...adressesDuPlan]);
+  const constats: Constat[] = [];
+  for (const chemin of await listerFichiers(dist, '.html')) {
+    const fichier = relative(dist, chemin).split('\\').join('/');
+    if (fichier === 'index.html' || fichier === '404.html') continue;
+    const adresse = fichier.endsWith('/index.html') ? `/${fichier.slice(0, -'index.html'.length)}` : undefined;
+    if (adresse === undefined || !autorisees.has(adresse)) {
+      constats.push(erreur('PAGE-HORS-PLAN', `cette page ne correspond à aucune adresse du plan du site (data/plan-du-site.json), ni à l'accueil, ni à la 404`, fichier));
+    }
+  }
+  return constats;
+}
+
 /** Les pages de test (fixtures) ne doivent jamais être publiées. */
 export async function controlerFixturesNonPubliees(dist: string): Promise<Constat[]> {
   const constats: Constat[] = [];
@@ -119,6 +137,10 @@ export async function controlerWrangler(racine: string): Promise<Constat[]> {
   if (assets['not_found_handling'] !== '404-page') constats.push(erreur('WRANGLER-404', '« assets.not_found_handling » doit valoir "404-page"', fichier));
   if (assets['directory'] !== './dist') constats.push(erreur('WRANGLER-DOSSIER', '« assets.directory » doit pointer vers ./dist', fichier));
   if ('binding' in assets) constats.push(erreur('WRANGLER-BINDING', 'pas de « assets.binding » : aucun script ne lit les fichiers', fichier));
+  const routes = Array.isArray(conf['routes']) ? (conf['routes'] as Record<string, unknown>[]) : [];
+  if (!routes.some((r) => r['pattern'] === 'decodauto.com' && r['custom_domain'] === true)) {
+    constats.push(erreur('WRANGLER-DOMAINE', '« routes » doit lier le domaine personnalisé decodauto.com ({ "pattern": "decodauto.com", "custom_domain": true })', fichier));
+  }
   return constats;
 }
 

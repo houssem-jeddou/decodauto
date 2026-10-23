@@ -5,6 +5,7 @@ import { dirname, join } from 'node:path';
 import { after, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import {
+  codeSortie,
   construireContexte,
   controlerEnsemble,
   controlerPage,
@@ -14,7 +15,8 @@ import {
 } from '../src/lib/controle.ts';
 import { empreinte } from '../src/lib/empreinte.ts';
 import { lireFrontmatter } from '../scripts/lib/charger.ts';
-import { controler404, controlerFixturesNonPubliees, controlerIndexation, controlerWrangler, noindexDansEnTetes } from '../scripts/lib/dist.ts';
+import { controler404, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler, noindexDansEnTetes } from '../scripts/lib/dist.ts';
+import { modeIndexation } from '../src/lib/indexation.ts';
 import { retirerNoindexDesEnTetes } from '../scripts/integration-indexation.ts';
 import { verifierLiens } from '../scripts/liens.ts';
 import type { TypeAvecSocle } from '../src/schemas/listes.ts';
@@ -136,12 +138,23 @@ describe('base voyants (R3, R4) et rattachement (R1)', async () => {
 
   test('le voyant de la base doit être déclaré par la page à laquelle il est rattaché', async () => {
     const { contexte } = construireContexte(donnees, AUJOURDHUI);
-    const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-panne', 'page.md'), 'utf8'));
-    const { page } = controlerPage({ type: 'panne', brut, fichier: 'valide-panne' }, contexte);
-    assert.ok(page);
-    const ok: PageControlee[] = [{ type: 'panne', fichier: 'valide-panne', page }];
+    const lire = async (nom: string, type: TypeAvecSocle) => {
+      const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', nom, 'page.md'), 'utf8'));
+      const { page } = controlerPage({ type, brut, fichier: nom }, contexte);
+      assert.ok(page);
+      return page;
+    };
+    const panne = await lire('valide-panne', 'panne');
+    const voyant = await lire('valide-voyant', 'voyant');
+    const ok: PageControlee[] = [
+      { type: 'panne', fichier: 'valide-panne', page: panne },
+      { type: 'voyant', fichier: 'valide-voyant', page: voyant },
+    ];
     assert.deepEqual(controlerEnsemble(ok, contexte), []);
-    const sansDeclaration: PageControlee[] = [{ type: 'panne', fichier: 'valide-panne', page: { ...page, voyants: [] } }];
+    const sansDeclaration: PageControlee[] = [
+      { type: 'panne', fichier: 'valide-panne', page: { ...panne, voyants: [] } },
+      { type: 'voyant', fichier: 'valide-voyant', page: voyant },
+    ];
     assert.deepEqual(codes(controlerEnsemble(sansDeclaration, contexte), 'erreur'), ['R1-RATTACHEMENT']);
     // Page rattachée pas encore écrite : simple alerte.
     assert.deepEqual(codes(controlerEnsemble([], contexte), 'alerte'), ['R1-RATTACHEMENT']);
@@ -236,7 +249,7 @@ describe('page 404, fixtures, wrangler', () => {
   test('wrangler.json invalide : script, workers_dev, preview_urls et 404 sont contrôlés', async () => {
     const dossier = await dossierTemporaire();
     await writeFile(join(dossier, 'wrangler.json'), JSON.stringify({ main: 'x.js', workers_dev: true, assets: { directory: './dist' } }));
-    assert.deepEqual(codes(await controlerWrangler(dossier), 'erreur'), ['WRANGLER-404', 'WRANGLER-PREVIEW', 'WRANGLER-SCRIPT', 'WRANGLER-WORKERS-DEV']);
+    assert.deepEqual(codes(await controlerWrangler(dossier), 'erreur'), ['WRANGLER-404', 'WRANGLER-DOMAINE', 'WRANGLER-PREVIEW', 'WRANGLER-SCRIPT', 'WRANGLER-WORKERS-DEV']);
   });
 });
 
@@ -263,5 +276,65 @@ describe('liens cassés', () => {
       bilan.constats.map((c) => c.regle).sort(),
       ['LIEN-ANCRE', 'LIEN-CASSE', 'LIEN-CASSE', 'LIEN-SANS-BARRE'],
     );
+  });
+});
+
+// ---- Double clé d'indexation ---------------------------------------------------------------------------
+describe('double clé d\'indexation (variable SITE_INDEXABLE + drapeau versionné)', () => {
+  const cas = [
+    { env: {}, drapeau: false, attendu: false },
+    { env: {}, drapeau: true, attendu: false },
+    { env: { SITE_INDEXABLE: 'true' }, drapeau: false, attendu: false },
+    { env: { SITE_INDEXABLE: 'true' }, drapeau: true, attendu: true },
+    { env: { SITE_INDEXABLE: 'TRUE' }, drapeau: true, attendu: false },
+    { env: { SITE_INDEXABLE: '1' }, drapeau: true, attendu: false },
+  ];
+  for (const c of cas) {
+    test(`variable ${JSON.stringify(c.env['SITE_INDEXABLE'] ?? null)} + drapeau ${c.drapeau} → ${c.attendu ? 'indexable' : 'noindex'}`, () => {
+      const mode = modeIndexation(c.env, { indexable: c.drapeau });
+      assert.equal(mode.indexable, c.attendu);
+      assert.match(mode.description, c.attendu ? /^INDEXABLE/ : /^NON INDEXABLE/);
+    });
+  }
+  test('un drapeau illisible est une erreur, pas un état par défaut silencieux', () => {
+    assert.throws(() => modeIndexation({}, { indexable: 'oui' }));
+    assert.throws(() => modeIndexation({}, null));
+  });
+  test('le drapeau versionné du dépôt est un JSON { "indexable": booléen }', async () => {
+    const contenu = await lireJson<Record<string, unknown>>(join(racine, 'config', 'indexation.json'));
+    assert.deepEqual(Object.keys(contenu), ['indexable']);
+    assert.equal(typeof contenu['indexable'], 'boolean');
+  });
+});
+
+// ---- Toute page construite est dans le plan -------------------------------------------------------------
+describe('pages construites et plan du site', () => {
+  test('accueil et 404 sont toujours admises ; une page du plan aussi', async () => {
+    const site = await fabriquerSite({ meta: true, entete: true });
+    await mkdir(join(site, 'pannes'));
+    await writeFile(join(site, 'pannes', 'index.html'), '<html></html>');
+    assert.deepEqual(await controlerPagesDuPlan(site, ['/pannes/']), []);
+  });
+  test('une page absente du plan fait échouer', async () => {
+    const site = await fabriquerSite({ meta: true, entete: true });
+    await mkdir(join(site, 'brouillon'));
+    await writeFile(join(site, 'brouillon', 'index.html'), '<html></html>');
+    await writeFile(join(site, 'orpheline.html'), '<html></html>');
+    const constats = await controlerPagesDuPlan(site, ['/pannes/']);
+    assert.deepEqual(constats.map((c) => c.fichier).sort(), ['brouillon/index.html', 'orpheline.html']);
+    assert.deepEqual(codes(constats, 'erreur'), ['PAGE-HORS-PLAN']);
+  });
+});
+
+// ---- Code de sortie du script de contrôle ----------------------------------------------------------------
+describe('code de sortie', () => {
+  const alerteRevue: Constat = { regle: 'R5-REVUE-DEPASSEE', gravite: 'alerte', message: 'x' };
+  const alerteImage: Constat = { regle: 'R7-IMAGE-RECOMMANDEE', gravite: 'alerte', message: 'x' };
+  const erreur: Constat = { regle: 'R7-FORMAT', gravite: 'erreur', message: 'x' };
+  test('une alerte seule ne bloque pas', () => assert.equal(codeSortie([alerteRevue, alerteImage]), 0));
+  test('une erreur bloque', () => assert.equal(codeSortie([erreur]), 1));
+  test('--echouer-sur ne fait échouer que sur le code demandé', () => {
+    assert.equal(codeSortie([alerteImage], 'R5-REVUE-DEPASSEE'), 0);
+    assert.equal(codeSortie([alerteRevue], 'R5-REVUE-DEPASSEE'), 1);
   });
 });

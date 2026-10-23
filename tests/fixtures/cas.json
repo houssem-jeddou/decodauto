@@ -4,14 +4,70 @@
     "type": "panne",
     "erreurs": [],
     "alertes": [],
-    "explication": "Page valide : ligne de la base, ligne saisie validée, élément unique présent."
+    "explication": "Panne valide : ligne de la base, ligne saisie liée au voyant et validée, arbre de décision présent."
+  },
+  {
+    "nom": "valide-voyant",
+    "type": "voyant",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Voyant valide : ligne reprise de la base uniquement, pas de validation à porter."
+  },
+  {
+    "nom": "valide-code-defaut",
+    "type": "code-defaut",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Code défaut valide : ligne de la base, puis ligne saisie liée au voyant, au moins aussi grave."
+  },
+  {
+    "nom": "valide-fluide",
+    "type": "fluide",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Fluide valide : tableau avec une ligne de données."
+  },
+  {
+    "nom": "valide-pneus",
+    "type": "pneus",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Pneus valide : texte de référence de première main."
+  },
+  {
+    "nom": "valide-dossier",
+    "type": "dossier",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Dossier valide : journal des modifications, revue sous trois mois."
+  },
+  {
+    "nom": "valide-socle",
+    "type": "socle",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Socle valide : adresse prise dans le plan du site, fiche auteur."
   },
   {
     "nom": "valide-tutoriel-fluide",
     "type": "fluide",
     "erreurs": [],
     "alertes": [],
-    "explication": "Tutoriel valide : étapes en liste numérotée, ni symptôme ni arbre exigés."
+    "explication": "Tutoriel de fluide valide : le tableau reste exigé, étapes en liste numérotée marquée."
+  },
+  {
+    "nom": "valide-tutoriel-panne",
+    "type": "panne",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Tutoriel de panne valide : ni symptôme ni arbre de décision exigés."
+  },
+  {
+    "nom": "valide-ligne-non-liee",
+    "type": "panne",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Une ligne saisie non liée à un voyant peut être moins grave que la base : seules les lignes liées sont comparées."
   },
   {
     "nom": "r1-verdict-saisi",
@@ -41,13 +97,31 @@
     "explication": "Ligne de voyant dont le voyant n'est pas dans la liste « voyants »."
   },
   {
+    "nom": "r1-voyant-lie-non-declare",
+    "type": "panne",
+    "erreurs": [
+      "R1-VOYANT-NON-DECLARE"
+    ],
+    "alertes": [],
+    "explication": "Ligne saisie liée à un voyant qui n'est pas déclaré par la page."
+  },
+  {
+    "nom": "r1-ligne-base-absente",
+    "type": "panne",
+    "erreurs": [
+      "R1-LIGNE-BASE-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Voyant déclaré sans sa ligne reprise de la base (ligne écrite à la main à la place)."
+  },
+  {
     "nom": "r2-moins-grave",
     "type": "panne",
     "erreurs": [
       "R2-MOINS-GRAVE"
     ],
     "alertes": [],
-    "explication": "Verdict saisi moins grave que celui de la base."
+    "explication": "Ligne liée à un voyant, moins grave que ce voyant dans la base."
   },
   {
     "nom": "r3-pas-premiere-main",
@@ -66,6 +140,15 @@
     ],
     "alertes": [],
     "explication": "Source absente du registre."
+  },
+  {
+    "nom": "r3-texte-reference-seconde-main",
+    "type": "pneus",
+    "erreurs": [
+      "R3-PREMIERE-MAIN"
+    ],
+    "alertes": [],
+    "explication": "Texte de référence qui ne vient pas d'une source de première main."
   },
   {
     "nom": "r4-empreinte-differente",
@@ -122,13 +205,31 @@
     "explication": "Élément unique absent de la page construite."
   },
   {
+    "nom": "r7-tableau-sans-donnees",
+    "type": "fluide",
+    "erreurs": [
+      "R7-ELEMENT-UNIQUE-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "Tableau sans aucune ligne de données (en-tête seul)."
+  },
+  {
+    "nom": "r7-fluide-tutoriel-sans-tableau",
+    "type": "fluide",
+    "erreurs": [
+      "R7-ELEMENT-ATTENDU"
+    ],
+    "alertes": [],
+    "explication": "Le tutoriel ne dispense pas une page Fluide de son tableau."
+  },
+  {
     "nom": "r7-tutoriel-sans-etapes",
     "type": "fluide",
     "erreurs": [
       "R7-TUTORIEL-ETAPES"
     ],
     "alertes": [],
-    "explication": "Tutoriel sans liste numérotée dans la page construite."
+    "explication": "Étapes sans le marqueur data-tutoriel-etapes (une autre liste numérotée de la page ne compte pas)."
   },
   {
     "nom": "r7-requete-absente",
@@ -149,6 +250,15 @@
     "explication": "Champ calculé saisi à la main."
   },
   {
+    "nom": "r7-socle-adresse-saisie",
+    "type": "socle",
+    "erreurs": [
+      "R7-CHAMP-CALCULE"
+    ],
+    "alertes": [],
+    "explication": "L'adresse du socle vient uniquement du plan du site."
+  },
+  {
     "nom": "r7-plan-absent",
     "type": "panne",
     "erreurs": [
@@ -156,5 +266,23 @@
     ],
     "alertes": [],
     "explication": "Page absente du plan du site."
+  },
+  {
+    "nom": "r7-code-p1-generique",
+    "type": "code-defaut",
+    "erreurs": [
+      "R7-CODE-GENERIQUE"
+    ],
+    "alertes": [],
+    "explication": "Un code P1xxx ne peut pas être déclaré générique."
+  },
+  {
+    "nom": "r7-dates",
+    "type": "panne",
+    "erreurs": [
+      "R7-DATES"
+    ],
+    "alertes": [],
+    "explication": "prochaine_revue antérieure à date_revue."
   }
 ]

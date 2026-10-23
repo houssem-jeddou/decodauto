@@ -30,12 +30,16 @@ function probleme(ctx: z.RefinementCtx, regle: string, chemin: (string | number)
 /**
  * Une ligne de la liste « situations ».
  *  - ligne issue de la base : { voyant } seul. Le verdict, l'urgence, l'action et les sources viennent
- *    de la base voyants et ne peuvent pas être saisis (docs/08 §3, règle 1) ;
- *  - ligne saisie : { situation, verdict, urgence, action, sources }.
+ *    de la base voyants et ne peuvent pas être saisis (docs/08 §3, règle 1). Chaque voyant déclaré dans
+ *    « voyants » a sa ligne de ce type, et seulement celle-là : aucune ligne écrite à la main sur ce voyant ;
+ *  - ligne saisie : { situation, verdict, urgence, action, sources }, avec en option `voyant_lie` : le voyant
+ *    déclaré auquel la situation se rattache (ex. un code défaut lié au voyant moteur). Son verdict ne peut pas
+ *    être moins grave que celui de ce voyant dans la base (règle 2).
  */
 export const ligneSituationSchema = z
   .strictObject({
     voyant: identifiant.optional(),
+    voyant_lie: identifiant.optional(),
     situation: texte.optional(),
     verdict: z.enum(VERDICTS).optional(),
     urgence: z.enum(URGENCES).optional(),
@@ -45,7 +49,7 @@ export const ligneSituationSchema = z
   .superRefine((ligne, ctx) => {
     const champs = ['situation', 'verdict', 'urgence', 'action', 'sources'] as const;
     if (ligne.voyant !== undefined) {
-      for (const champ of champs) {
+      for (const champ of [...champs, 'voyant_lie'] as const) {
         if (ligne[champ] !== undefined) {
           probleme(
             ctx,
@@ -108,6 +112,8 @@ const champsCommuns = {
 };
 
 type Commun = {
+  date_revue: Date;
+  prochaine_revue: Date;
   question_decision: string;
   voyants?: string[] | undefined;
   liens?: string[] | undefined;
@@ -123,19 +129,27 @@ function reglesCommunes(page: Commun, ctx: z.RefinementCtx): void {
   if (page.liens !== undefined && new Set(page.liens).size !== page.liens.length) {
     probleme(ctx, 'R7-LIEN-DOUBLE', ['liens'], 'chaque lien n\'est déclaré qu\'une seule fois');
   }
+  if (page.prochaine_revue.getTime() <= page.date_revue.getTime()) {
+    probleme(ctx, 'R7-DATES', ['prochaine_revue'], 'prochaine_revue doit être postérieure à date_revue');
+  }
   if (page.voyants !== undefined && new Set(page.voyants).size !== page.voyants.length) {
     probleme(ctx, 'R7-FORMAT', ['voyants'], 'un voyant n\'est déclaré qu\'une seule fois');
   }
 }
 
-/** Valeur attendue de element_unique pour les pages qui ne sont pas des tutoriels (champ propre exigé). */
+/**
+ * Valeur attendue de element_unique quand le type de page exige son propre élément (arbre de décision pour une
+ * panne, tableau pour un fluide). Le format tutoriel ne dispense que du symptôme et de l'arbre de décision
+ * (docs/08 §2) : `dispenseTutoriel` n'est donc vrai que pour l'arbre.
+ */
 function exigerElement(
   page: Commun,
   ctx: z.RefinementCtx,
   attendu: (typeof ELEMENTS_UNIQUES)[number],
   nom: string,
+  dispenseTutoriel: boolean,
 ): void {
-  if (page.tutoriel === undefined && page.element_unique !== attendu) {
+  if (!(dispenseTutoriel && page.tutoriel !== undefined) && page.element_unique !== attendu) {
     probleme(ctx, 'R7-ELEMENT-ATTENDU', ['element_unique'], `${nom} est exigé : element_unique doit valoir « ${attendu} »`);
   }
 }
@@ -178,6 +192,9 @@ export const codeDefautPageSchema = z
   })
   .superRefine((page, ctx) => {
     reglesCommunes(page, ctx);
+    if (/^P1/.test(page.code) && page.portee === 'generique') {
+      probleme(ctx, 'R7-CODE-GENERIQUE', ['portee'], 'un code P1xxx est propre à un constructeur : il ne peut pas être déclaré générique');
+    }
     if (page.portee === 'constructeur' && page.marques === undefined) {
       probleme(ctx, 'R7-CHAMP-MANQUANT', ['marques'], 'un code constructeur précise les marques (docs/01, règle 9)');
     }
@@ -198,7 +215,7 @@ export const pannePageSchema = z
     if (page.tutoriel === undefined && page.symptome === undefined) {
       probleme(ctx, 'R7-CHAMP-MANQUANT', ['symptome'], '« symptome » est obligatoire hors tutoriel');
     }
-    exigerElement(page, ctx, 'arbre-de-decision', 'l\'arbre de décision');
+    exigerElement(page, ctx, 'arbre-de-decision', 'l\'arbre de décision', true);
   });
 
 // ---- Fluide -----------------------------------------------------------------------------------
@@ -211,7 +228,7 @@ export const fluidePageSchema = z
   })
   .superRefine((page, ctx) => {
     reglesCommunes(page, ctx);
-    exigerElement(page, ctx, 'tableau', 'le tableau');
+    exigerElement(page, ctx, 'tableau', 'le tableau', false);
   });
 
 // ---- Pneus et obligations ---------------------------------------------------------------------
@@ -264,12 +281,12 @@ export const dossierPageSchema = z
   });
 
 // ---- Socle ------------------------------------------------------------------------------------
-// Format simple : titre, adresse, date de mise à jour. Pas d'encadré de décision. La page « à propos »
-// porte les fiches auteur auxquelles renvoie le champ `auteur` des autres pages.
+// Format simple : titre, adresse, date de mise à jour. Pas d'encadré de décision. L'adresse vient uniquement du
+// plan du site (comme pour les autres pages) : elle ne se saisit pas. La page « à propos » porte les fiches
+// auteur auxquelles renvoie le champ `auteur` des autres pages.
 export const soclePageSchema = z.strictObject({
   id: identifiant,
   title: texte,
-  adresse: z.string().regex(/^\/([a-z0-9-]+\/)*$/, "l'adresse commence et se termine par « / »"),
   date_modification: dateIso,
   auteurs: z.array(z.strictObject({ id: identifiant, nom: texte, presentation: texte })).optional(),
 });
