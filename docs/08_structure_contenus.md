@@ -67,5 +67,5 @@ Le plan du site (`data/plan-du-site.json`) est la référence du maillage. Une l
 
 Règles :
 1. Un lien du plan ne s'affiche que si les deux pages sont construites. Un lien vers une page pas encore écrite n'est ni une erreur ni une alerte : le contrôle l'indique en une ligne d'information.
-2. Un lien écrit dans le texte d'une page ne mène qu'à une page liée dans le plan (lien déclaré, page mère ou page enfant). Il en va de même pour les liens que l'outil voyants génère depuis la base voyants.
+2. Un lien écrit dans le texte d'une page ne mène qu'à une page liée dans le plan (lien déclaré, page mère ou page enfant). Il en va de même pour les liens que l'outil voyants génère depuis la base voyants. Ajouter une paire de liens au plan se propose dans la pull request du lot de pages concerné, avec une ligne de justification, et Houssem la valide avec le lot (décision du 23/10/2026). Retirer un lien, ou toute autre modification du plan, passe par une demande de changement.
 3. Contrôles : lien vers une page inconnue ou vers soi-même, paire déclarée deux fois, page mère inconnue, cycle de pages mères, adresse de l'enfant hors de celle de sa mère. Détail et codes : `CONTROLES.md`.

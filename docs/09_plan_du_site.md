@@ -125,7 +125,7 @@ Les deux revues indépendantes recommandent de garder les cas 1 à 10, validés 
   1. Ajouter au plan un champ facultatif `liens` (liste d'identifiants de pages), et retirer le champ `liens` des pages.
   2. Un lien du plan ne s'affiche que si la page cible est construite. Un lien vers une page pas encore écrite n'est **ni une erreur ni une alerte** : le contrôle affiche une seule ligne d'information (« N liens en attente de leur page »). Une erreur bloquerait la vague A, car 24 paires relient une page A à une page B ou C, et 24 alertes permanentes masqueraient les vraies alertes.
   3. Une page mère affiche ses pages enfants, par un lien calculé comme le lien retour.
-  4. Les liens dans le texte des pages sont autorisés, mais uniquement vers une page liée dans le plan (lien, parent ou enfant). Il en va de même pour les liens que l'outil voyants génère depuis la base voyants vers la page d'un voyant. Un contrôle le vérifie.
+  4. Les liens dans le texte des pages sont autorisés, mais uniquement vers une page liée dans le plan (lien, parent ou enfant). Il en va de même pour les liens que l'outil voyants génère depuis la base voyants vers la page d'un voyant. Un contrôle le vérifie. Ajouter une paire de liens au plan se propose dans la pull request du lot de pages concerné, avec une ligne de justification, et Houssem la valide avec le lot (décision du 23/10/2026). Retirer un lien, ou toute autre modification du plan, passe par une demande de changement.
   5. Contrôles ajoutés :
      - lien vers une page inconnue, lien vers soi-même, paire déclarée deux fois ;
      - parent inconnu, cycle de parents ;
