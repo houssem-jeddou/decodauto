@@ -2,16 +2,16 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 23/10/2026 (20 h)
+Dernière mise à jour : 23/10/2026 (23 h 30)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
 |---|---|---|---|
 | 1 | Mots-clés | ✅ Figée (22/10) | 05_mots_cles_perimetre_v2.csv (source de vérité ; v2 du 23/10 : précision de 5 lignes, demande de changement n° 2), 06_base_mots_cles_complete.csv ; base Excel v1.1 conservée hors projet par Houssem |
 | 2 | Périmètre | ✅ Figé (22/10) | 02_perimetre_lot_unique.md (formulation du nombre de pages corrigée le 23/10) |
-| 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v3 depuis le 23/10) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
+| 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
-| 5 | Sources et base voyants | ▶ En cours : d'abord la demande de changement sur la structure (voir plus bas) | – |
+| 5 | Sources et base voyants | ▶ En cours : demande de changement n° 3 (structure v4) acceptée le 23/10, PR #6 à fusionner ; ensuite registre des sources et base voyants | Structure v4 : `src/schemas/` (marques dans `listes.ts`, grille dans `grille.ts`), 08 v4 |
 | 6 | Charte et modèles de pages | À faire | – |
 | 7 | Socle technique | À faire, sur la piste technique (03, règle 12) ; seules les mentions légales attendent le statut juridique | – |
 | 8 | Vague A | À faire | – |
@@ -23,7 +23,7 @@ Dernière mise à jour : 23/10/2026 (20 h)
 ## Prévision (mise à jour à chaque session ; les dates de 03 sont des cibles)
 | Étape | Cible (03) | Prévision au 23/10 | Dépend de |
 |---|---|---|---|
-| 5. Sources et base voyants | 24–27/10 | demande de changement 24/10 ; registre et base 24–26/10 ; paquet de validation 26–27/10 | disponibilité de Houssem pour valider ; notices accessibles en ligne |
+| 5. Sources et base voyants | 24–27/10 | demande de changement acceptée le 23/10 ; registre et base 24–26/10 ; paquet de validation 26–27/10 | fusion de la PR #6 ; notices Dacia lisibles ; disponibilité de Houssem pour valider |
 | Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes 24–25/10 ; étape 7 du 26 au 28/10 | statut juridique, pour les seules mentions légales |
 | 6. Charte et modèles | 27–29/10 | 27–29/10 | porte de l'étape 5 ; source des résultats Google depuis la France choisie |
 | 8. Vague A | 29/10–01/11 | 29/10–02/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
@@ -31,7 +31,7 @@ Dernière mise à jour : 23/10/2026 (20 h)
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 10–14/11 / ≈ 17–21/11 | mise en ligne de la vague A ; briefs des lots |
 
 **Séances de validation de Houssem** (le vrai goulot), d'ici le 03/11 :
-1. demande de changement de structure et marques de référence, vers le 24/10 ;
+1. ~~demande de changement de structure et marques de référence~~ : faite le 23/10 ;
 2. statut juridique, avant les mentions légales ;
 3. paquet de validation de la base voyants et porte 5, vers le 26–27/10 ;
 4. source des résultats Google, avant l'étape 6 ;
@@ -63,10 +63,8 @@ Dernière mise à jour : 23/10/2026 (20 h)
 | Validation de Houssem | ✅ | 23/10/2026 |
 
 ## Décisions ouvertes (à trancher par Houssem)
-- **Instructions du projet** : coller le texte v2 fourni le 23/10 (sources de vérité à jour, piste technique, correction urgente, sourçage multi-marques, transparence, circuit des documents).
 - **Statut juridique** : à trancher avant de rédiger les mentions légales (étape 7) ; le reste de l'étape 7 avance sans l'attendre (décision du 23/10, 19 h).
 - **GitHub Pro** : souscrire avant la porte de l'étape 9, puis protéger `main` (pull request obligatoire, contrôles exigés, aucun contournement).
-- **Marques de référence** pour les verdicts (nombre et liste) : proposées dans la demande de changement du début de l'étape 5.
 - **Source des résultats Google relevés depuis la France** pour les briefs (Semrush base France, ou relevé manuel) : avant l'étape 6.
 - **Auteur** : nom réel acté le 23/10 ; parcours à fournir pour la page « à propos » (étape 7 ou 8).
 
@@ -100,8 +98,40 @@ Dernière mise à jour : 23/10/2026 (20 h)
 
   Pas de compte GitHub séparé pour Claude.
 - 23/10/2026 (19 h 44), correction urgente : Houssem valide la règle de revue. Si la correction peut attendre une heure, revue indépendante avant la fusion ; si l'erreur est dangereuse, publication tout de suite après sa validation et les contrôles, puis revue dans les 24 heures. 03 passe en v5.
+- 23/10/2026 (19 h 50) : instructions du projet v2 collées par Houssem dans les réglages du projet, contenu vérifié par Claude.
+- 23/10/2026 (23 h 15), étape 5 : Houssem accepte la demande de changement n° 3 :
+  - la partie A (points décidés) ;
+  - les ajouts 9 à 17 ;
+  - les marques de référence : les six proposées, plus Seat.
+
+  Conséquences :
+  - la grille des niveaux de verdict et d'urgence est validée ;
+  - une page web générique d'une marque est une source secondaire ;
+  - 08 passe en v4.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 23/10 (soir), demande de changement n° 3, deux revues :
+  - **Première revue** (« à corriger », un point bloquant) :
+    - la grille rangeait « sans tarder » en « dans les jours qui viennent » ; ces mots valent maintenant une urgence immédiate ;
+    - consignes réelles de la Peugeot 208 mieux classées : entretien périodique, action du conducteur, arrêt suivi d'une reprise ;
+    - classement selon le sens, avec le libellé « Non, ne poursuivez pas votre trajet » ;
+    - encadré contrôlé ligne par ligne ;
+    - R2 compare aussi l'urgence ;
+    - le règlement ONU ne fixe pas de niveau ;
+    - signes gardés dans l'empreinte ;
+    - garantie réelle de la règle des marques dite : 2 groupes ;
+    - identifiant et dessin verrouillés ;
+    - liste blanche des pictogrammes.
+  - **Seconde revue** (« à corriger », un point bloquant) :
+    - les pages de volkswagen.fr demandent l'arrêt même pour des témoins jaunes : une page web générique de marque devient une source secondaire ;
+    - une ligne plus sévère que toutes ses citations est refusée (R3-NIVEAU-SANS-SOURCE) ;
+    - rappel R3-NIVEAU-A-VERIFIER ;
+    - ancêtres masqués de l'encadré détectés ;
+    - tirets lus comme signe moins ;
+    - la page reprend ce que l'encadré affiche des lignes de la base, pas leurs citations.
+  - **Écartés** :
+    - un classement automatique bloquant des extraits : le classement demande du jugement, c'est donc une alerte ;
+    - l'égalité « 5W-30 » = « 5W30 » dans l'empreinte : au pire, une revalidation de trop.
 - 23/10 (soir), audit final du plan et des règles (nouveau relecteur, sur la dernière version de tous les documents) : « à corriger » sur cinq manques importants (niveaux de verdict non définis, ouverture sur la décision non contrôlée, pas de correction urgente, `main` non protégée, réglages hors dépôt et découverte du domaine absents du plan). Tout est intégré dans 03 v4. Écarté : un compte GitHub séparé pour Claude (facultatif, la protection de `main` suffit).
 - 22/10 : instructions du projet revues (champ de la revue précisé, format anti-complaisance avec preuves, deux revues maximum, alignement avec 03 et 04, rythme de mise à jour du journal).
 - 22/10 (soir), choix technique, deux revues :
@@ -138,19 +168,36 @@ Dernière mise à jour : 23/10/2026 (20 h)
 - 23/10, revue du planning et des règles (un relecteur, qui a lu les documents seul avant la proposition) : « à corriger » sur trois manques, la méthode de sourçage de l'étape 5, les pictogrammes et la transparence. Apports intégrés : méthode multi-marques et catégories de sources (règlement ONU n° 121, RappelConso, normes des codes défaut), règlement européen sur l'IA (article 50), encadré de décision relu par Houssem, recette avant chaque fusion après le lancement, seuil Lighthouse avec la publicité, alignement de 01, 02 et 03. Écartés : trois niveaux de procédure (déjà couverts), annuaires et liens dans les forums (liens artificiels selon Google).
 - 23/10, revue globale des étapes 1 à 4, deux relecteurs (trafic et utilité avec la base 06 ; fondations et production) : « acceptable », rien de bloquant. Exclusions, codes retenus, vagues, adresses et liens confirmés. Apports : 03 v2 (voir l'historique), règle des liens allégée, demandes de changement à ouvrir à l'étape 5 (empreinte, pictogrammes), notes pour l'étape 6, idées reportées complétées.
 
-## À ouvrir au début de l'étape 5 (une demande de changement sur la structure, avant toute validation)
-- **Catégories de sources** : ajouter le règlement ONU n° 121 (symboles et couleurs des voyants) et RappelConso (rappels), comme sources de première main ; les libellés des codes défaut restent une source secondaire (voir plus bas).
-- **Plusieurs marques par verdict** : contrôle automatique du nombre de marques distinctes parmi les notices citées par chaque ligne de la base voyants, nombre et liste fixés par Houssem.
-- **Registre et citations** : marque de chaque notice au registre ; chaque source citée par une ligne de la base avec sa page ou section et son extrait (contrôlés), pour que la porte de l'étape 5 soit vérifiable.
-- **Niveaux de verdict et d'urgence** : une grille qui fait passer de la formulation de la notice au verdict et à l'urgence, avec une définition de chaque niveau pour le lecteur, et le contrôle de leur cohérence (ex. « arrêt immédiat » avec l'urgence « aucune » est refusé).
-- **Encadré de décision** : repère `data-encadre-decision` contrôlé dans la page construite (premier bloc après le H1, aucun emplacement publicitaire avant) ; empreinte étendue à la question de décision et au coût probable.
-- **Données structurées** : libellé court (fil d'Ariane, ancres), texte alternatif de l'image, lien du profil auteur.
-- **Codes défaut** : libellés en source secondaire (norme ISO 15031-6 non achetée) ; le verdict vient des notices et de la ligne « voyant moteur ».
-- **Empreinte de validation** : verrouiller aussi la situation (et `voyant_lie`) des lignes saisies, et la situation, la couleur et le nom des lignes de la base voyants. Aujourd'hui, on peut changer la situation d'une ligne ou la couleur d'un voyant sans revalidation. Accents et ponctuation ignorés, pour qu'une coquille ne force pas de revalidation ; aligner la règle 4 de 08. Coût nul tant que la base est vide.
-- **Pictogrammes** : champ `pictogramme` dans la base voyants (un symbole partagé par plusieurs états), contrôle du fichier SVG, et dessin d'environ 15 à 20 symboles redessinés avant la vague A.
+## Étape 5, Sources et base voyants : livrables
+- [x] **Demande de changement n° 3, structure v4** (acceptée le 23/10, PR #6) :
+  - citations précises ;
+  - marque de chaque notice ;
+  - nombre de marques ;
+  - catégories règlement ONU n° 121 et RappelConso ;
+  - grille des niveaux ;
+  - encadré de décision contrôlé et verrouillé ;
+  - empreinte étendue ;
+  - pictogramme ;
+  - champs des données structurées ;
+  - et les ajouts 9 à 17. Détail dans « Demandes de changement ».
+- [x] **Grille des niveaux de verdict et d'urgence** validée par Houssem avec la demande de changement (critère de la porte 5). Elle fait foi dans `src/schemas/grille.ts` ; 08 §6 en est la vue générée.
+- [x] **Marques de référence** :
+  - liste : Renault, Peugeot, Dacia, Citroën, Volkswagen, Toyota (les six premières des immatriculations de voitures particulières neuves en 2025, PFA / AAA Data), plus Seat (choix de Houssem, groupe Volkswagen, notice publiée sur seat.fr) ;
+  - règle : chaque ligne de la base cite les notices d'au moins 3 marques de 2 groupes ;
+  - une page web générique d'une marque est une source secondaire, pas une notice.
+- [ ] **Registre des sources** de première main pour toutes les pages éditoriales de la vague A : voyants, codes défaut, pression des pneus, loi montagne. Premier point : lire les notices Dacia et la notice Seat (témoins), pour confirmer que la règle des marques est tenable.
+- [ ] **Base voyants** : couleur, verdict, urgence, action, citations avec niveau, écart entre marques, pictogramme.
+- [ ] **Pictogrammes redessinés**, sur la piste technique (03, règle 12).
+- [ ] **Paquet de validation** généré depuis la base, puis validé par Houssem.
+- [ ] **Porte de sortie de l'étape 5.**
 
 ## Pour l'étape 6
 - Charte éditoriale : base de calcul du coût probable et ses tranches (la source doit exister dans le registre), ligne de transparence, section méthode de « à propos ».
+- Modèles de pages et encadré de décision (structure v4, contrôles R9) :
+  - l'encadré est le premier bloc après le H1 : la signature, la date et la ligne de transparence viennent après lui ; le fil d'Ariane peut précéder le H1 ;
+  - une ligne `data-encadre-ligne` par situation, avec `data-verdict` et `data-urgence`, les libellés de la grille, l'action et l'écart entre marques ;
+  - rien de masqué ni de repliable dans l'encadré ; une icône décorative sans texte peut porter `aria-hidden` ;
+  - aucune publicité dedans ni avant ; emplacements marqués `data-emplacement-pub`.
 - Gravité lisible sans la seule couleur (obligatoire, 03 v4) et lien « Signaler une erreur » dans chaque modèle.
 - Brief de chaque page généré depuis le plan, avec les résultats Google relevés depuis la France.
 - Proposition, à décider : photos réelles pour les tutos des vagues B et C.
@@ -160,6 +207,15 @@ Dernière mise à jour : 23/10/2026 (20 h)
 - Volumes à lire comme des plafonds : dossier PureTech (94 % de noms de moteur ou de modèle), viscosités (surtout intention d'achat), outil voyants (30 % de requêtes « + modèle »), batterie (34 % d'achat par capacité).
 
 ## Points ouverts (non bloquants)
+- **Notices des marques de référence** :
+  - Dacia : notices trouvées (user-manual.dacia.com, cdn.group.renault.com), à lire en premier ;
+  - Seat : notice Ibiza lisible sur seat.fr (témoins p. 76 et 93) ;
+  - Citroën : pas de serveur officiel trouvé ;
+  - Toyota : espace client de toyota.fr ;
+  - Volkswagen : notice complète par le carnet de bord numérique.
+- **Chiffre Volkswagen 2025** (110 960, 6,8 %) : tiré de La Tribune Auto citant PFA / AAA Data, sans source primaire trouvée. Sans effet sur le choix des marques.
+- **Parc par marque** : non publié par le SDES ; les immatriculations 2025 en tiennent lieu.
+- **Annonces automatiques AdSense** (étape 12) : insérées dans le navigateur, invisibles pour le contrôle ; vérifier à la recette qu'elles ne précèdent pas l'encadré.
 - **Requêtes absentes de 06** : une vingtaine de requêtes suggérées en premier par Google n'y figurent pas (« voyant moteur rouge », « fumée blanche voiture », « voiture qui fume blanc / noir », « pourquoi ma voiture chauffe », « direction assistée », « fap bouché », « puretech fiabilité / avis / chaîne »…). Toutes relèvent de pages prévues. Mesure reportée par Houssem ; à faire juste avant l'étape 8 (03 v3), avec le rattachement des requêtes identiques classées hors périmètre (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture » et environ 38 lignes), dans une seule demande de changement.
 - **Statut et AdSense** : AdSense paie en Tunisie par virement. Le statut juridique reste à trancher avant de rédiger les mentions légales (étape 7), et il faut vérifier que l'activité déclarée du statut d'auto-entrepreneur couvre des recettes publicitaires.
 - **Règlement européen sur l'IA (article 50)** : obligation de signaler un texte généré par IA qui informe le public sur une question d'intérêt public, sauf relecture humaine et responsabilité éditoriale. Il est incertain que la relecture des seuls encadrés, avec la responsabilité éditoriale de Houssem, suffise à cette exception ; la ligne de transparence sur chaque page devrait couvrir l'obligation de signalement. Sa portée pour un éditeur établi en Tunisie reste aussi incertaine.
@@ -183,6 +239,30 @@ Dernière mise à jour : 23/10/2026 (20 h)
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
+- 23/10/2026, acceptée : **n° 3 de l'étape 5, structure v4** (08 v4, PR #6).
+  - **Raison** : figer la structure avant la saisie, quand la revalidation ne coûte rien.
+  - **Partie A** :
+    - citations (page ou section, extrait) ;
+    - marque de chaque notice et nombre de marques ;
+    - catégories règlement ONU n° 121 et RappelConso, libellés des codes en source secondaire ;
+    - grille et cohérence verdict / urgence ;
+    - encadré de décision repéré, contrôlé et verrouillé ;
+    - empreinte étendue (nom, couleur, situation, `voyant_lie`, question, coût) ;
+    - pictogramme ;
+    - libellé court, texte alternatif, profils de l'auteur.
+  - **Ajouts 9 à 17** :
+    - niveau tiré de chaque notice : le plus prudent exactement, écart signalé ;
+    - mêmes citations pour les lignes saisies ;
+    - empreintes plus complètes ;
+    - encadré ligne par ligne ;
+    - code défaut lié à son voyant, R2 sur l'urgence ;
+    - couleur « orange ou jaune » ;
+    - champ relecteur retiré ;
+    - pages web génériques des marques en source secondaire ;
+    - longueurs maximales.
+  - **Marques** : Renault, Peugeot, Dacia, Citroën, Volkswagen, Toyota, Seat ; au moins 3 marques de 2 groupes par ligne.
+  - **Impact** : aucun contenu à revalider (base, registre et pages vides) ; plan inchangé.
+  - **Contrôles** : 151 tests en local, 53 pages de test, CI verte sur la PR #6.
 - 23/10/2026, acceptée : 08 v2, ajout du champ facultatif `voyant_lie` dans une ligne de situation saisie. Raison : relier la ligne à son voyant pour la comparer à la base. Impact : schémas déjà conformes (PR #1). Contrôles : CI verte.
 - 23/10/2026, acceptée : n° 1 de l'étape 4, les liens passent dans le plan du site (08 v3). Raison : 08 fait du plan la référence du maillage, mais son schéma n'avait pas de champ pour les liens. Impact : aucune page n'existait ; schémas, contrôles, tests et 08 mis à jour (PR #3). Contrôles : CI verte.
 - 23/10/2026, acceptée : n° 2 de l'étape 4, précision de 5 lignes de 05 (1 580 recherches par mois), qui contredisait leur propre sous-thème. Les mots-clés ne changent pas. Impact : 05 v2 (PR #3). Contrôles : porte de l'étape 4.
