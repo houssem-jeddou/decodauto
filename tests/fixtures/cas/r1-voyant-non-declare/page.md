@@ -29,6 +29,8 @@ situations:
       - source: fixture-securite-routiere
         emplacement: p. 1, rubrique de test
         extrait: Consigne de test de la source fixture-securite-routiere.
+        verdict: non, arrêt dès que possible
+        urgence: immédiate
 element_unique: arbre-de-decision
 symptome: Le moteur ne démarre pas ou démarre difficilement
 carburant: essence et diesel
@@ -38,7 +40,7 @@ contexte:
 causes:
   - cause: Batterie déchargée
     explication: Une batterie faible ne fournit pas assez de courant.
-validation: 49098d7e70429f6e843115d4a0a647c13e41cf3400f713292991a0e645bc01f1
+validation: 8764d1251cf273fa4dadcc3ccc769d695d3fe82a6592b78cf922315568a39b80
 ---
 
 Page de test (r1-voyant-non-declare), jamais publiée.

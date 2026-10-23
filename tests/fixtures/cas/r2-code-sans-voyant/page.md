@@ -29,6 +29,8 @@ situations:
       - source: fixture-securite-routiere
         emplacement: p. 1, rubrique de test
         extrait: Consigne de test de la source fixture-securite-routiere.
+        verdict: non, arrêt dès que possible
+        urgence: immédiate
 voyants:
   - fixture-voyant-huile
 element_unique: tableau
@@ -41,7 +43,7 @@ carburant: essence et diesel
 causes:
   - cause: Catalyseur usé
     explication: Le catalyseur ne traite plus correctement les gaz.
-validation: 335a5e3defcf1da22f7a818e7f9bc7385ac65b2f67b7613a44deb337d91b42af
+validation: 35d1ca2b166eaf708dba51bcbad04346d8073c67148ba688ab64dbd9522a0a00
 ---
 
 Page de test (r2-code-sans-voyant), jamais publiée.

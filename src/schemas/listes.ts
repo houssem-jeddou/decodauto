@@ -109,10 +109,11 @@ export const SOURCES_PREMIERE_MAIN: readonly CategorieSource[] = [
 ];
 
 /**
- * Marques de référence des verdicts de la base voyants (docs/03, règle 10), fixées par Houssem au début de
- * l'étape 5 (demande de changement n° 3) : les six premières marques des immatriculations de voitures particulières
- * neuves en France en 2025 (PFA / AAA Data). Le groupe sert à ne pas compter comme indépendantes deux notices
- * d'un même groupe, souvent rédigées sur le même modèle (Peugeot et Citroën, Renault et Dacia).
+ * Marques de référence des verdicts de la base voyants (docs/03, règle 10), fixées au début de l'étape 5 par la
+ * demande de changement n° 3 : les six premières marques des immatriculations de voitures particulières neuves en
+ * France en 2025 (PFA / AAA Data). Le groupe sert à ne pas compter comme indépendantes deux notices d'un même
+ * groupe, souvent rédigées sur le même modèle (Peugeot et Citroën, Renault et Dacia). Aucun groupe n'ayant plus de
+ * deux marques dans la liste, trois marques couvrent toujours au moins deux groupes.
  */
 export const MARQUES_REFERENCE = [
   { id: 'renault', nom: 'Renault', groupe: 'renault-group' },

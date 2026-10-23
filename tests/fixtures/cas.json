@@ -128,7 +128,7 @@
       "R2-MOINS-GRAVE"
     ],
     "alertes": [],
-    "explication": "Ligne liée à un voyant, moins grave que ce voyant dans la base."
+    "explication": "Ligne liée à un voyant, moins grave que ce voyant dans la base (verdict et urgence)."
   },
   {
     "nom": "r2-code-sans-voyant",
@@ -174,6 +174,24 @@
     ],
     "alertes": [],
     "explication": "Citation de notice sans le niveau que la grille tire de sa consigne."
+  },
+  {
+    "nom": "r3-reglement-onu-seul",
+    "type": "fluide",
+    "erreurs": [
+      "R3-PREMIERE-MAIN"
+    ],
+    "alertes": [],
+    "explication": "Le règlement ONU n° 121 décrit le symbole, pas la conduite à tenir : il ne suffit pas à fonder un verdict."
+  },
+  {
+    "nom": "r3-ecart-sans-objet",
+    "type": "fluide",
+    "erreurs": [
+      "R3-ECART-SANS-OBJET"
+    ],
+    "alertes": [],
+    "explication": "Un écart est annoncé alors que toutes les citations donnent le même niveau."
   },
   {
     "nom": "r3-niveau-secondaire",
@@ -380,7 +398,7 @@
       "R8-COHERENCE"
     ],
     "alertes": [],
-    "explication": "« Arrêt immédiat » avec une urgence « sous quelques jours » : couple refusé par la grille."
+    "explication": "« Oui, vous pouvez rouler » avec une urgence « immédiate » : couple refusé par la grille."
   },
   {
     "nom": "r9-encadre-absent",

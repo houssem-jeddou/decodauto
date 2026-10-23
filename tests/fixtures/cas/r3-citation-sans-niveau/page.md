@@ -28,6 +28,11 @@ situations:
       - source: fixture-notice
         emplacement: p. 1, rubrique de test
         extrait: Consigne de test de la source fixture-notice.
+      - source: fixture-securite-routiere
+        emplacement: p. 1, rubrique de test
+        extrait: Consigne de test de la source fixture-securite-routiere.
+        verdict: non, arrêt dès que possible
+        urgence: immédiate
 element_unique: tableau
 normes:
   - ACEA A3/B4
@@ -36,7 +41,7 @@ quand_changer:
   texte: Selon le carnet d'entretien.
   sources:
     - fixture-notice
-validation: 74cab279d07f51042d3cbdad5e8b16f811a354e4a76367bf0389c2c152780079
+validation: 28edb2004d01a2b089cdbc019281a7967fec39bc04bb39c283822027f7874784
 ---
 
 Page de test (r3-citation-sans-niveau), jamais publiée.

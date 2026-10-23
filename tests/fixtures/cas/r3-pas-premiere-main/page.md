@@ -41,7 +41,7 @@ contexte:
 causes:
   - cause: Batterie déchargée
     explication: Une batterie faible ne fournit pas assez de courant.
-validation: e8d2d669bfc5f06ff7824ac6a760b79548a805e817e2720ddef91944f4bc6102
+validation: 7e541d0a480af3a3b8b843a1b5c13d917e9c2472748f00150275bc7b3f600496
 ---
 
 Page de test (r3-pas-premiere-main), jamais publiée.

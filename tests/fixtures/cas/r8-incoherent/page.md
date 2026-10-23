@@ -21,13 +21,15 @@ date_revue: 2026-10-20
 prochaine_revue: 2027-01-20
 situations:
   - situation: Niveau d'huile sous le repère minimum
-    verdict: non, arrêt immédiat
-    urgence: sous quelques jours
+    verdict: oui
+    urgence: immédiate
     action: Compléter le niveau avant de reprendre la route.
     citations:
       - source: fixture-securite-routiere
         emplacement: p. 1, rubrique de test
         extrait: Consigne de test de la source fixture-securite-routiere.
+        verdict: oui
+        urgence: sous quelques jours
 element_unique: tableau
 normes:
   - ACEA A3/B4
@@ -36,7 +38,7 @@ quand_changer:
   texte: Selon le carnet d'entretien.
   sources:
     - fixture-notice
-validation: 3975ead29c16bcba9aeafb4d3c2f4ad5eb427d5464ab6a85a26670b2dc68a95b
+validation: 006115fb30710220764b3db450012e23d4dba61e146a2bd8a7d67da00ef8519d
 ---
 
 Page de test (r8-incoherent), jamais publiée.

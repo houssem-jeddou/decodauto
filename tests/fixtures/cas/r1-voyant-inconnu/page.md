@@ -32,7 +32,7 @@ contexte:
 causes:
   - cause: Batterie déchargée
     explication: Une batterie faible ne fournit pas assez de courant.
-validation: 109c8318dc536a7a8a654c3467127d897016333300c5a01d2bdb6a39e8ccd8cc
+validation: a038168d99dca587c8ced65ef0cd78d69b79cdb63d99bb5f38a5d743a203692d
 ---
 
 Page de test (r1-voyant-inconnu), jamais publiée.

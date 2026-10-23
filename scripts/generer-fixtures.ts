@@ -35,8 +35,16 @@ const citation = (id: string, niveau?: [string, string]): Objet => ({
 const NOTICES = ['fixture-notice', 'fixture-notice-peugeot', 'fixture-notice-volkswagen'];
 const citationsNotices = (verdict: string, urgence: string): Objet[] => NOTICES.map((id) => citation(id, [verdict, urgence]));
 
+const svg = (titre: string): string =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><title>${titre}</title><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg>\n`;
+const PICTOGRAMMES = [
+  { id: 'fixture-batterie', contenu: svg('Batterie') },
+  { id: 'fixture-huile', contenu: svg('Huile') },
+];
+
 const voyantBase = (id: string, verdict: string, urgence: string, action: string, page: string, pictogramme: string): Objet => {
   const ligne = {
+    id,
     nom: `Voyant de test ${id}`,
     couleur: 'orange',
     pictogramme,
@@ -46,11 +54,9 @@ const voyantBase = (id: string, verdict: string, urgence: string, action: string
     action,
     citations: citationsNotices(verdict, urgence),
   };
-  return { id, categorie: 'Test', page, ...ligne, validation: empreinteVoyant(ligne as never) };
+  const dessin = PICTOGRAMMES.find((p) => p.id === pictogramme)?.contenu;
+  return { ...ligne, categorie: 'Test', page, validation: empreinteVoyant(ligne as never, dessin) };
 };
-
-const svg = (titre: string): string =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><title>${titre}</title><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg>\n`;
 
 const ligneDuPlan = (id: string, type: string, theme: string, vague: string, requete?: string): Objet => ({
   id,
@@ -87,11 +93,9 @@ const contexte = {
     source('fixture-forum', 'secondaire'),
   ],
   auteurs: ['fixture-auteur'],
-  pictogrammes: [
-    { id: 'fixture-batterie', contenu: svg('Batterie') },
-    { id: 'fixture-huile', contenu: svg('Huile') },
-  ],
+  pictogrammes: PICTOGRAMMES,
 };
+const EMPREINTES_BASE = new Map((contexte.voyants as Objet[]).map((v) => [String(v['id']), String(v['validation'])]));
 
 // ---- Pages de base ------------------------------------------------------------------------------
 const dates = { date_publication: '2026-10-01', date_modification: '2026-10-20', date_revue: '2026-10-20', prochaine_revue: '2027-01-20' };
@@ -99,7 +103,7 @@ const cout = { tranche: "à fixer à l'étape 6", base_de_calcul: 'Base de calcu
 
 /** Empreinte de l'encadré de décision (question, lignes de situation, coût), recalculée après chaque changement. */
 function avecValidation(page: Objet): Objet {
-  return { ...page, validation: empreintePage(page as never) };
+  return { ...page, validation: empreintePage(page as never, EMPREINTES_BASE) };
 }
 
 /** Ligne de situation saisie, liée par défaut au voyant « batterie ». */
@@ -109,7 +113,7 @@ const ligneSaisie = (extra: Objet = {}): Objet => ({
   verdict: 'non, arrêt dès que possible',
   urgence: 'immédiate',
   action: 'Faire contrôler la batterie avant de reprendre la route.',
-  citations: [citation('fixture-securite-routiere')],
+  citations: [citation('fixture-securite-routiere', ['non, arrêt dès que possible', 'immédiate'])],
   ...extra,
 });
 const lignesPanne = (extra: Objet = {}): Objet[] => [{ voyant: 'fixture-voyant-batterie' }, ligneSaisie(extra)];
@@ -178,7 +182,15 @@ const voyantPage = (): Objet =>
     causes: [{ cause: "Niveau d'huile trop bas", explication: "Le circuit n'est plus assez alimenté." }],
   });
 
-const codeDefaut = (ligne: Objet = ligneSaisie({ voyant_lie: 'fixture-voyant-huile', situation: 'Code P0420 mémorisé, voyant huile allumé', verdict: 'non, arrêt immédiat', urgence: 'immédiate', action: "S'arrêter et couper le moteur." })): Objet =>
+const LIGNE_CODE = {
+  voyant_lie: 'fixture-voyant-huile',
+  situation: 'Code P0420 mémorisé, voyant huile allumé',
+  verdict: 'non, arrêt immédiat',
+  urgence: 'immédiate',
+  action: "S'arrêter et couper le moteur.",
+  citations: [citation('fixture-notice', ['non, arrêt immédiat', 'immédiate'])],
+};
+const codeDefaut = (ligne: Objet = ligneSaisie(LIGNE_CODE)): Objet =>
   avecValidation({
     ...communs('fixture-code', 'Code P0420 : que faire ? (page de test)', 'Code défaut P0420 : que faire ?', 'Code P0420', 'Puis-je rouler avec le code P0420 ?'),
     situations: [{ voyant: 'fixture-voyant-huile' }, ligne],
@@ -242,12 +254,13 @@ function encadre(page: Objet, options: OptionsHtml): string {
     .map((l) => {
       const verdict = GRILLE_VERDICTS[l['verdict'] as Verdict]?.libelle ?? String(l['verdict']);
       const urgence = GRILLE_URGENCES[l['urgence'] as Urgence]?.libelle ?? String(l['urgence']);
-      const action = options.encadreSansAction ? '' : `<dd>${String(l['action'])}</dd>`;
-      return `<dt>${String(l['situation'])}</dt><dd><strong>${verdict}</strong> · ${urgence}</dd>${action}`;
+      const action = options.encadreSansAction ? '' : `<p>${String(l['action'])}</p>`;
+      const ecart = l['ecart_marques'] !== undefined ? `<p>Selon les marques : ${String(l['ecart_marques'])}</p>` : '';
+      return `<div data-encadre-ligne data-verdict="${String(l['verdict'])}" data-urgence="${String(l['urgence'])}"><h2>${String(l['situation'])}</h2><p><strong>${verdict}</strong> · ${urgence}</p>${action}${ecart}</div>`;
     })
     .join('');
   const tranche = String((page['cout_probable'] as Objet | undefined)?.['tranche'] ?? '');
-  return `<section data-encadre-decision><p>${String(page['question_decision'])}</p><dl>${lignes}</dl><p>Coût probable : ${tranche}</p></section>`;
+  return `<section data-encadre-decision><p>${String(page['question_decision'])}</p>${lignes}<p>Coût probable : ${tranche}</p></section>`;
 }
 
 function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): string {
@@ -306,7 +319,7 @@ valide('valide-tutoriel-panne', 'panne', panneTutoriel(), 'Tutoriel de panne val
 valide(
   'valide-ligne-non-liee',
   'panne',
-  avecValidation({ ...panne(), situations: lignesPanne({ voyant_lie: undefined, verdict: 'oui', urgence: 'aucune', action: 'Rouler normalement.' }) }),
+  avecValidation({ ...panne(), situations: lignesPanne({ voyant_lie: undefined, verdict: 'oui', urgence: 'aucune', action: 'Rouler normalement.', citations: [citation('fixture-securite-routiere', ['oui', 'aucune'])] }) }),
   'Une ligne saisie non liée à un voyant peut être moins grave que la base : seules les lignes liées sont comparées.',
 );
 valide(
@@ -329,14 +342,16 @@ invalide('r1-voyant-lie-non-declare', 'panne', avecValidation({ ...panne(), situ
 invalide('r1-ligne-base-absente', 'panne', avecValidation({ ...panne(), situations: [ligneSaisie()] }), ['R1-LIGNE-BASE-ABSENTE'], "Voyant déclaré sans sa ligne reprise de la base (ligne écrite à la main à la place).");
 
 // R2 : le voyant « batterie » a le verdict « non, arrêt dès que possible » dans la base.
-invalide('r2-moins-grave', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ verdict: 'oui', urgence: 'aucune' }) }), ['R2-MOINS-GRAVE'], 'Ligne liée à un voyant, moins grave que ce voyant dans la base.');
+invalide('r2-moins-grave', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ verdict: 'oui', urgence: 'aucune', citations: [citation('fixture-securite-routiere', ['oui', 'aucune'])] }) }), ['R2-MOINS-GRAVE'], 'Ligne liée à un voyant, moins grave que ce voyant dans la base (verdict et urgence).');
 invalide('r2-code-sans-voyant', 'code-defaut', codeDefaut(ligneSaisie({ voyant_lie: undefined, situation: 'Code P0420 mémorisé', verdict: 'non, arrêt immédiat', urgence: 'immédiate', action: "S'arrêter et couper le moteur." })), ['R2-CODE-SANS-VOYANT'], "Ligne saisie d'un code défaut sans voyant lié : son verdict ne serait pas comparé au voyant.");
 
 // R3
 invalide('r3-pas-premiere-main', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ citations: [citation('fixture-forum')] }) }), ['R3-PREMIERE-MAIN'], "Verdict qui ne cite qu'une source de seconde main.");
 invalide('r3-source-inconnue', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ citations: [citation('fixture-introuvable')] }) }), ['R3-SOURCE-INCONNUE'], 'Source absente du registre.');
 invalide('r3-texte-reference-seconde-main', 'pneus', { ...pneus(), texte_reference: { nature: 'legifrance', reference: 'Référence de test', source: 'fixture-forum' } }, ['R3-PREMIERE-MAIN'], 'Texte de référence qui ne vient pas d\'une source de première main.');
-invalide('r3-citation-sans-niveau', 'fluide', fluide(ligneFluide({ citations: [citation('fixture-notice')] })), ['R3-CITATION-NIVEAU'], 'Citation de notice sans le niveau que la grille tire de sa consigne.');
+invalide('r3-citation-sans-niveau', 'fluide', fluide(ligneFluide({ citations: [citation('fixture-notice'), citation('fixture-securite-routiere', ['non, arrêt dès que possible', 'immédiate'])] })), ['R3-CITATION-NIVEAU'], 'Citation de notice sans le niveau que la grille tire de sa consigne.');
+invalide('r3-reglement-onu-seul', 'fluide', fluide(ligneFluide({ citations: [citation('fixture-onu')] })), ['R3-PREMIERE-MAIN'], 'Le règlement ONU n° 121 décrit le symbole, pas la conduite à tenir : il ne suffit pas à fonder un verdict.');
+invalide('r3-ecart-sans-objet', 'fluide', fluide(ligneFluide({ ecart_marques: 'Les marques divergent.' })), ['R3-ECART-SANS-OBJET'], "Un écart est annoncé alors que toutes les citations donnent le même niveau.");
 invalide('r3-niveau-secondaire', 'fluide', fluide(ligneFluide({ citations: [citation('fixture-notice', ['non, arrêt dès que possible', 'immédiate']), citation('fixture-forum', ['non, arrêt immédiat', 'immédiate'])] })), ['R3-CITATION-NIVEAU'], 'Une source secondaire ne fixe jamais un niveau de verdict.');
 invalide('r3-moins-prudent', 'fluide', fluide(ligneFluide({ verdict: 'oui avec précautions', urgence: 'sous quelques jours', citations: [citation('fixture-notice', ['non, arrêt immédiat', 'immédiate'])] })), ['R3-PLUS-PRUDENT'], 'Verdict et urgence moins prudents que la notice citée : le plus prudent l\'emporte.');
 invalide('r3-ecart-non-signale', 'fluide', fluide(ligneFluide({ citations: [citation('fixture-notice', ['non, arrêt dès que possible', 'immédiate']), citation('fixture-notice-peugeot', ['oui avec précautions', 'sous quelques jours'])] })), ['R3-ECART-NON-SIGNALE'], "Les notices citées ne donnent pas le même niveau et l'écart n'est pas signalé.");
@@ -367,7 +382,7 @@ invalide('r7-dates', 'panne', { ...panne(), date_revue: '2027-03-01', prochaine_
 invalide('r7-relecteur', 'panne', { ...panne(), relecteur: 'Un relecteur' }, ['R7-CHAMP-INCONNU'], 'Le champ relecteur est retiré : pas de relecteur extérieur (décision du 23/10/2026).');
 
 // R8 : grille des niveaux de verdict et d'urgence.
-invalide('r8-incoherent', 'fluide', fluide(ligneFluide({ verdict: 'non, arrêt immédiat', urgence: 'sous quelques jours', citations: [citation('fixture-securite-routiere')] })), ['R8-COHERENCE'], "« Arrêt immédiat » avec une urgence « sous quelques jours » : couple refusé par la grille.");
+invalide('r8-incoherent', 'fluide', fluide(ligneFluide({ verdict: 'oui', urgence: 'immédiate', citations: [citation('fixture-securite-routiere', ['oui', 'sous quelques jours'])] })), ['R8-COHERENCE'], "« Oui, vous pouvez rouler » avec une urgence « immédiate » : couple refusé par la grille.");
 
 // R9 : encadré de décision dans la page construite.
 invalide('r9-encadre-absent', 'panne', panne(), ['R9-ENCADRE-ABSENT'], 'Pas d\'encadré de décision (data-encadre-decision) dans la page construite.', { sansEncadre: true });

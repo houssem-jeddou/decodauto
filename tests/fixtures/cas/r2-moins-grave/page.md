@@ -30,6 +30,8 @@ situations:
       - source: fixture-securite-routiere
         emplacement: p. 1, rubrique de test
         extrait: Consigne de test de la source fixture-securite-routiere.
+        verdict: oui
+        urgence: aucune
 voyants:
   - fixture-voyant-batterie
 element_unique: arbre-de-decision
@@ -41,7 +43,7 @@ contexte:
 causes:
   - cause: Batterie déchargée
     explication: Une batterie faible ne fournit pas assez de courant.
-validation: 091bbb2bd40bc35c277549168a67582cf3ff3c1eb668dbb48be0cf109c1770f2
+validation: 2b817395e40e2bddf7d28f9163a52a6ac5b602a82caf3e3928d192ec10a85bbe
 ---
 
 Page de test (r2-moins-grave), jamais publiée.

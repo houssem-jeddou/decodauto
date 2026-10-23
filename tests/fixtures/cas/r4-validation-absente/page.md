@@ -30,6 +30,8 @@ situations:
       - source: fixture-securite-routiere
         emplacement: p. 1, rubrique de test
         extrait: Consigne de test de la source fixture-securite-routiere.
+        verdict: non, arrêt dès que possible
+        urgence: immédiate
 voyants:
   - fixture-voyant-batterie
 element_unique: arbre-de-decision

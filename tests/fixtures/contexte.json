@@ -78,8 +78,6 @@
   "voyants": [
     {
       "id": "fixture-voyant-batterie",
-      "categorie": "Test",
-      "page": "fixture-panne",
       "nom": "Voyant de test fixture-voyant-batterie",
       "couleur": "orange",
       "pictogramme": "fixture-batterie",
@@ -110,12 +108,12 @@
           "urgence": "immédiate"
         }
       ],
-      "validation": "cde940015812e20b7647241550223faf8e31b532561df9f3210c682857cf9a10"
+      "categorie": "Test",
+      "page": "fixture-panne",
+      "validation": "38c5493d3d0984e639d0c29fd5cbf5bf648942fa495b3edf6a4d67eb3605166d"
     },
     {
       "id": "fixture-voyant-huile",
-      "categorie": "Test",
-      "page": "fixture-voyant",
       "nom": "Voyant de test fixture-voyant-huile",
       "couleur": "orange",
       "pictogramme": "fixture-huile",
@@ -146,7 +144,9 @@
           "urgence": "immédiate"
         }
       ],
-      "validation": "a73c6db6945d2d928fd50fc46e378548c048a30d786dd9c7c110ab853a050fdf"
+      "categorie": "Test",
+      "page": "fixture-voyant",
+      "validation": "ad6c963a4386356264c08640d013c052ee1097f65d0b7f667071d55928e1b8c5"
     }
   ],
   "sources": [

@@ -1,7 +1,7 @@
 import type { Urgence, Verdict } from './listes.ts';
 
 // ---------------------------------------------------------------------------------------------
-// Grille des niveaux de verdict et d'urgence (demande de changement n° 3, étape 5 ; docs/08 §5).
+// Grille des niveaux de verdict et d'urgence (demande de changement n° 3, étape 5 ; docs/08 §6).
 // Elle sert à trois choses :
 //  1. passer de la consigne écrite dans une notice au verdict et à l'urgence. Chaque citation de notice porte le
 //     niveau que la grille tire de sa consigne ; la ligne retient le plus prudent (contrôles R3) ;
@@ -19,11 +19,13 @@ export interface NiveauGrille {
   consignes_notice: readonly string[];
 }
 
-/** Principes d'application de la grille (affichés dans docs/08 et dans la section méthode de « à propos »). */
+/** Principes d'application de la grille (repris dans docs/08 et dans la section méthode de « à propos »). */
 export const PRINCIPES_GRILLE: readonly string[] = [
-  'Chaque citation de notice est classée à partir de sa consigne écrite, citation par citation. Une consigne qui relève de deux niveaux prend le plus prudent.',
-  "Le verdict et l'urgence d'une ligne sont au moins aussi prudents que la citation la plus prudente. Si les citations ne donnent pas toutes le même niveau, l'écart est signalé dans la ligne.",
-  "Le couple verdict / urgence doit être admis par le tableau des urgences admises. Ne pas pouvoir rouler implique d'agir tout de suite ; pouvoir rouler sans précaution exclut une action immédiate.",
+  'Chaque citation de notice est classée à partir de sa consigne écrite, citation par citation, selon le sens et non le seul verbe.',
+  "Le verdict se trouve en posant les questions dans l'ordre : la notice impose-t-elle l'arrêt ? Sinon, empêche-t-elle de rouler jusqu'au garage, ou annonce-t-elle un dégât grave si l'on roule ? Sinon, demande-t-elle une action, une vérification, une visite au garage ou une conduite adaptée ? Sinon, c'est un fonctionnement normal, une information ou un entretien périodique.",
+  "Une consigne qui relève de deux niveaux, ou une formulation absente de la grille, prend le niveau le plus prudent qu'elle peut signifier.",
+  "Le verdict et l'urgence d'une ligne sont au moins aussi prudents que la citation la plus prudente. Si les citations ne donnent pas toutes le même niveau, l'écart est signalé dans la ligne et affiché au lecteur.",
+  "Le couple verdict / urgence doit être admis par le tableau des urgences admises : ne pas pouvoir rouler implique d'agir tout de suite ; pouvoir rouler sans précaution exclut une action immédiate.",
   "En cas de doute sur le classement d'une consigne, on retient le niveau le plus prudent et on recommande l'avis d'un professionnel.",
 ];
 
@@ -31,10 +33,10 @@ export const GRILLE_VERDICTS: Readonly<Record<Verdict, NiveauGrille>> = {
   oui: {
     libelle: 'Oui, vous pouvez rouler',
     definition:
-      "Rien n'impose d'arrêter ni de limiter la conduite : le voyant signale un fonctionnement normal, une information ou un entretien à prévoir.",
+      "Rien n'impose d'arrêter ni de limiter la conduite : le voyant signale un fonctionnement normal, une information ou un entretien périodique à faire.",
     consignes_notice: [
-      "La notice décrit un fonctionnement normal ou une information : témoin qui s'éteint après quelques secondes, « attendre l'extinction du témoin avant de démarrer ».",
-      "La notice signale un entretien à prévoir, sans autre consigne.",
+      "La notice décrit un fonctionnement normal ou une information, sans action à faire : témoin qui s'éteint après quelques secondes, « attendre l'extinction du témoin avant de démarrer », système en action ou désactivé.",
+      "La notice rappelle un entretien périodique, sans anomalie signalée : « la révision du véhicule doit être effectuée dès que possible ».",
     ],
   },
   'oui avec précautions': {
@@ -42,27 +44,27 @@ export const GRILLE_VERDICTS: Readonly<Record<Verdict, NiveauGrille>> = {
     definition:
       "Vous pouvez rouler en appliquant la précaution indiquée (allure modérée, vérification à faire, système d'aide indisponible) et en faisant ce qui est demandé dans le délai donné par l'urgence.",
     consignes_notice: [
-      "La notice permet de rouler mais demande d'aller dans un garage : « se rendre dans le réseau ou dans un atelier qualifié », « consultez un représentant de la marque ».",
-      "La notice demande une vérification ou une action sans arrêt : « contrôler la pression des pneumatiques », « faire un appoint ».",
-      "La notice demande d'adapter sa conduite : « rouler prudemment à allure modérée ».",
+      "La notice laisse rouler jusqu'au garage : « se rendre dans le réseau ou dans un atelier qualifié », « consultez un représentant de la marque », « faites vérifier », « faites contrôler ».",
+      "La notice demande au conducteur une vérification ou une action sans s'arrêter tout de suite : « contrôler la pression des pneumatiques », « faire un appoint », « compléter le niveau ».",
+      "La notice demande d'adapter sa conduite : « rouler prudemment à allure modérée », « régénérer le filtre en roulant à une vitesse d'au moins 60 km/h ».",
     ],
   },
   'non, arrêt dès que possible': {
-    libelle: 'Non, arrêtez-vous dès que possible',
+    libelle: 'Non, ne poursuivez pas votre trajet',
     definition:
       "Ne poursuivez pas votre trajet : rejoignez le premier endroit sûr et adapté (parking, aire, sortie suivante), arrêtez la voiture et faites-la contrôler avant de reprendre la route.",
     consignes_notice: [
-      "La notice demande de faire appel à un garage ou à l'assistance, sans dire de s'y rendre en voiture : « faire appel au réseau ou à un atelier qualifié ».",
-      "La notice avertit d'un dégât grave si l'on continue de rouler (« risque de destruction du catalyseur »), sans imposer l'arrêt.",
+      "La notice empêche de rouler jusqu'au garage, sans imposer l'arrêt : « faire appel au réseau ou à un atelier qualifié », « faites remorquer », « contactez l'assistance ».",
+      "La notice annonce un dégât grave si l'on continue de rouler, sans imposer l'arrêt : « risque de destruction du catalyseur ».",
     ],
   },
   'non, arrêt immédiat': {
     libelle: 'Non, arrêtez-vous immédiatement',
     definition:
-      "Arrêtez-vous dès que vous pouvez le faire sans danger, coupez le moteur et ne repartez pas. Faites appel à l'assistance ou à un garage.",
+      "Arrêtez-vous dès que vous pouvez le faire sans danger et coupez le moteur. Ne repartez pas, sauf si l'action indiquée le permet (par exemple après refroidissement et mise à niveau) ; sinon, faites appel à l'assistance ou à un garage.",
     consignes_notice: [
-      "La notice impose l'arrêt : « l'arrêt du véhicule est impératif », « arrêtez-vous », « ne continuez pas à rouler », « coupez le moteur ».",
-      "Le délai écrit ne change pas le niveau : « immédiatement », « dès que possible » ou « dès que les conditions de circulation le permettent » accompagnent toujours un arrêt à faire sans danger.",
+      "La notice impose l'arrêt : « l'arrêt du véhicule est impératif », « arrêtez-vous », « arrêtez le véhicule », « ne continuez pas à rouler », « coupez le moteur ».",
+      "Le délai écrit à côté de l'arrêt ne change pas le niveau : « immédiatement », « dès que possible et en toute sécurité », « dès que les conditions de circulation le permettent ».",
     ],
   },
 };
@@ -76,22 +78,24 @@ export const GRILLE_URGENCES: Readonly<Record<Urgence, NiveauGrille>> = {
   'sous quelques semaines': {
     libelle: 'À prévoir dans les semaines qui viennent',
     definition: "À faire lors d'un prochain passage au garage, dans les semaines qui viennent.",
-    consignes_notice: ['La notice renvoie à un entretien à prévoir : « lors de la prochaine révision », « au prochain entretien ».'],
+    consignes_notice: ["La notice renvoie à un entretien à prévoir, sans échéance dépassée : « lors de la prochaine révision », « au prochain entretien »."],
   },
   'sous quelques jours': {
     libelle: 'À faire dans les jours qui viennent',
-    definition: 'À faire contrôler dans les jours qui viennent, sans attendre le prochain entretien.',
+    definition: 'À faire dans les jours qui viennent, sans attendre le prochain entretien.',
     consignes_notice: [
-      'La notice demande de consulter un garage « rapidement » ou « sans tarder ».',
-      "La notice demande d'aller dans un garage sans préciser de délai : par prudence, l'absence de délai vaut quelques jours.",
+      "La notice demande d'aller au garage « rapidement », ou sans écrire de délai.",
+      "La notice demande une action du conducteur sans écrire de délai (« faire un appoint »).",
+      "La notice rappelle un entretien périodique, sans anomalie signalée, « dès que possible » ou après l'échéance : c'est la seule exception où « dès que possible » ne vaut pas « tout de suite ».",
     ],
   },
   immédiate: {
     libelle: 'À faire tout de suite',
-    definition: 'À faire tout de suite : avant de reprendre la route, ou au premier arrêt possible.',
+    definition: "Sans attendre : au premier arrêt possible, ou en allant directement au garage si la conduite est permise.",
     consignes_notice: [
-      "La notice impose l'arrêt, ou demande de faire appel à un garage.",
-      "La notice demande d'agir « immédiatement », « impérativement », « au plus tôt », « dès que possible » ou « le plus rapidement possible ».",
+      "La notice impose l'arrêt, ou empêche de rouler jusqu'au garage.",
+      "La notice demande d'agir « immédiatement », « impérativement », « sans tarder », « sans attendre », « sans délai », « au plus tôt », « au plus vite », « dès que possible », « dès que les conditions de circulation le permettent », « le plus rapidement possible » ou « dans les plus brefs délais ».",
+      "La notice demande au conducteur une action à faire « rapidement » (« compléter rapidement le niveau »).",
     ],
   },
 };

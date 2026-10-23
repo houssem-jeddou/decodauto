@@ -191,22 +191,28 @@ function examinerSources(
   return { inconnues, premiereMain };
 }
 
+/** Éléments admis dans un pictogramme : formes simples, sans texte, image, script ni style. */
+const ELEMENTS_SVG = new Set(['svg', 'g', 'path', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'rect', 'title', 'desc', 'defs', 'use', 'symbol', 'lineargradient', 'radialgradient', 'stop', 'clippath', 'mask']);
+
 /**
- * Pictogramme : un fichier SVG autonome et sûr, dessiné par nos soins (docs/01). La machine vérifie la forme ;
- * « redessiné, jamais copié » se vérifie à la recette.
+ * Pictogramme : un fichier SVG autonome et sûr, dessiné par nos soins (docs/01). La machine vérifie la forme (liste
+ * blanche d'éléments, liens internes seulement, aucun gestionnaire d'événement, taille) ; « redessiné, jamais copié »
+ * se vérifie à la recette.
  */
 export function controlerPictogramme(fichier: FichierPictogramme): Constat[] {
   const chemin = `${DOSSIER_PICTOGRAMMES}/${fichier.id}.svg`;
   const defauts: string[] = [];
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(fichier.id)) defauts.push('nom de fichier en minuscules, chiffres et tirets');
-  const contenu = fichier.contenu.replace(/^\uFEFF/, '');
+  const contenu = fichier.contenu.replace(/^\uFEFF/, '').replace(/<!--[\s\S]*?-->/g, '');
   if (!/^\s*(<\?xml[^>]*\?>\s*)?<svg\b[^>]*\sviewBox\s*=\s*["'][^"']+["'][^>]*>/i.test(contenu)) defauts.push('le fichier commence par une balise <svg> avec un attribut viewBox');
   if (!/<\/svg>\s*$/i.test(contenu)) defauts.push('le fichier se termine par </svg>');
-  if (/<(script|foreignObject|image|iframe|object|embed)\b/i.test(contenu)) defauts.push('ni script, ni image intégrée, ni objet étranger');
+  if (/<!DOCTYPE|<!ENTITY|<!\[CDATA\[/i.test(contenu)) defauts.push('ni DOCTYPE, ni entité, ni bloc CDATA');
+  const interdits = [...new Set([...contenu.matchAll(/<([a-zA-Z][\w:.-]*)/g)].map((m) => (m[1] ?? '').toLowerCase()).filter((nom) => !ELEMENTS_SVG.has(nom)))];
+  if (interdits.length > 0) defauts.push(`éléments non admis : ${interdits.join(', ')} (formes simples seulement)`);
   if (/\son[a-z]+\s*=/i.test(contenu)) defauts.push("aucun gestionnaire d'événement (attribut on…)");
-  if (/(?:href|src)\s*=\s*["']\s*(?:https?:|\/\/|data:)/i.test(contenu) || /url\(\s*["']?\s*(?:https?:|\/\/|data:)/i.test(contenu)) {
-    defauts.push('aucune ressource externe ou intégrée (http, //, data:)');
-  }
+  const liens = [...contenu.matchAll(/\s(?:xlink:)?href\s*=\s*["']([^"']*)["']/gi)].map((m) => (m[1] ?? '').trim());
+  if (liens.some((lien) => !lien.startsWith('#'))) defauts.push('liens internes seulement (href="#…")');
+  if ([...contenu.matchAll(/url\(\s*["']?\s*([^)"'\s]*)/gi)].some((m) => !(m[1] ?? '').startsWith('#'))) defauts.push('url(…) internes seulement (url(#…))');
   if (new TextEncoder().encode(contenu).length > PICTOGRAMME_OCTETS_MAX) defauts.push(`au plus ${PICTOGRAMME_OCTETS_MAX} octets`);
   return defauts.map((d) => erreur('PICTO-INVALIDE', `pictogramme « ${fichier.id} » : ${d}`, chemin));
 }
@@ -221,12 +227,28 @@ interface LigneDeVerdict {
 
 const nomMarque = (id: string): string => MARQUES_REFERENCE.find((m) => m.id === id)?.nom ?? id;
 
+/** Règle du nombre de marques (docs/03, règle 10). Paramétrable pour les tests ; par défaut, src/schemas/listes.ts. */
+export interface RegleMarques {
+  liste: readonly { id: string; groupe: string }[];
+  min: number;
+  groupesMin: number;
+}
+export const REGLE_MARQUES: RegleMarques = { liste: MARQUES_REFERENCE, min: MARQUES_MIN, groupesMin: GROUPES_MIN };
+
+/** Catégories qui ne fixent jamais un niveau de verdict : la presse, les forums… et le règlement ONU n° 121, qui
+ * définit les symboles et les couleurs des témoins, pas la conduite à tenir. */
+const SANS_NIVEAU: Readonly<Record<string, string>> = {
+  secondaire: 'une source secondaire ne fixe jamais un niveau de verdict',
+  'reglement-onu': 'le règlement ONU n° 121 définit les symboles et les couleurs, pas la conduite à tenir : il ne fixe pas un niveau de verdict',
+};
+
 /**
  * Contrôles d'une ligne de verdict (docs/03 règle 10, docs/08 §3 règles 3 et 8) :
- *  - R3 : sources connues ; au moins une de première main ; chaque citation de notice donne le niveau que la grille
- *    tire de sa consigne, une source secondaire n'en donne jamais ; le verdict et l'urgence de la ligne sont au moins
- *    aussi prudents que la citation la plus prudente ; un écart entre citations est signalé (`ecart_marques`) ;
- *    pour la base voyants, les notices d'au moins MARQUES_MIN marques de référence de GROUPES_MIN groupes ;
+ *  - R3 : sources connues ; au moins une citation de première main qui fixe un niveau (verdict et urgence) ; chaque
+ *    citation de notice donne ce niveau, une source secondaire ou le règlement ONU n° 121 n'en donne jamais ; le
+ *    verdict et l'urgence de la ligne sont au moins aussi prudents que la citation la plus prudente ; un écart entre
+ *    citations est signalé (`ecart_marques`), et seulement s'il existe ; pour la base voyants, les notices d'au moins
+ *    `min` marques de référence de `groupesMin` groupes ;
  *  - R8 : le couple verdict / urgence de la ligne et de chaque citation est admis par la grille.
  */
 export function controlerLigneDeVerdict(
@@ -234,32 +256,33 @@ export function controlerLigneDeVerdict(
   registre: ReadonlyMap<string, Source>,
   etiquette: string,
   fichier: string,
-  options: { exigerMarques: boolean },
+  options: { marques?: RegleMarques | undefined },
 ): Constat[] {
   const constats: Constat[] = [];
-  const { inconnues, premiereMain } = examinerSources(ligne.citations.map((c) => c.source), registre);
+  const { inconnues } = examinerSources(ligne.citations.map((c) => c.source), registre);
   for (const id of new Set(inconnues)) constats.push(erreur('R3-SOURCE-INCONNUE', `${etiquette} : source « ${id} » absente du registre des sources`, fichier));
-  if (inconnues.length === 0 && !premiereMain) {
-    constats.push(erreur('R3-PREMIERE-MAIN', `${etiquette} : le verdict ne cite aucune source de première main`, fichier));
-  }
 
-  const niveaux: { verdict: Verdict; urgence: Urgence; source: string }[] = [];
+  const niveaux: { verdict: Verdict; urgence: Urgence; source: string; marque?: string | undefined }[] = [];
   for (const citation of ligne.citations) {
     const source = registre.get(citation.source);
     if (source === undefined) continue;
+    const interdit = SANS_NIVEAU[source.categorie];
+    if (interdit !== undefined) {
+      if (citation.verdict !== undefined) constats.push(erreur('R3-CITATION-NIVEAU', `${etiquette} : « ${citation.source} » : ${interdit}`, fichier));
+      continue;
+    }
     if (source.categorie === 'notice-constructeur' && citation.verdict === undefined) {
       constats.push(erreur('R3-CITATION-NIVEAU', `${etiquette} : la citation de la notice « ${citation.source} » ne donne pas le niveau (verdict et urgence) que la grille tire de sa consigne`, fichier));
     }
-    if (source.categorie === 'secondaire' && citation.verdict !== undefined) {
-      constats.push(erreur('R3-CITATION-NIVEAU', `${etiquette} : la source secondaire « ${citation.source} » ne peut pas fixer un niveau de verdict`, fichier));
-      continue;
-    }
     if (citation.verdict !== undefined && citation.urgence !== undefined) {
-      niveaux.push({ verdict: citation.verdict, urgence: citation.urgence, source: citation.source });
+      niveaux.push({ verdict: citation.verdict, urgence: citation.urgence, source: citation.source, marque: source.categorie === 'notice-constructeur' ? source.marque : undefined });
       if (!urgenceAdmise(citation.verdict, citation.urgence)) {
         constats.push(erreur('R8-COHERENCE', `${etiquette} : la citation de « ${citation.source} » associe le verdict « ${citation.verdict} » et l'urgence « ${citation.urgence} », couple refusé par la grille`, fichier));
       }
     }
+  }
+  if (inconnues.length === 0 && niveaux.length === 0) {
+    constats.push(erreur('R3-PREMIERE-MAIN', `${etiquette} : le verdict ne s'appuie sur aucune citation de première main qui fixe un niveau (notice constructeur, Sécurité routière, Légifrance…)`, fichier));
   }
 
   // Le verdict le plus prudent l'emporte (docs/03 règle 10).
@@ -275,21 +298,23 @@ export function controlerLigneDeVerdict(
   if (differents && ligne.ecart_marques === undefined) {
     constats.push(erreur('R3-ECART-NON-SIGNALE', `${etiquette} : les citations ne donnent pas toutes le même niveau ; l'écart est à signaler dans « ecart_marques »`, fichier));
   }
+  if (!differents && ligne.ecart_marques !== undefined) {
+    constats.push(erreur('R3-ECART-SANS-OBJET', `${etiquette} : « ecart_marques » est rempli alors que les citations donnent toutes le même niveau`, fichier));
+  }
 
-  if (options.exigerMarques) {
+  if (options.marques !== undefined) {
+    const regle = options.marques;
     const marques = new Set<string>();
     const groupes = new Set<string>();
-    for (const citation of ligne.citations) {
-      const source = registre.get(citation.source);
-      if (source?.categorie !== 'notice-constructeur' || source.marque === undefined) continue;
-      const reference = MARQUES_REFERENCE.find((m) => m.id === source.marque);
+    for (const n of niveaux) {
+      const reference = regle.liste.find((m) => m.id === n.marque);
       if (reference === undefined) continue;
       marques.add(reference.id);
       groupes.add(reference.groupe);
     }
-    if (marques.size < MARQUES_MIN || groupes.size < GROUPES_MIN) {
+    if (marques.size < regle.min || groupes.size < regle.groupesMin) {
       const vues = marques.size === 0 ? 'aucune' : [...marques].map(nomMarque).join(', ');
-      constats.push(erreur('R3-MARQUES', `${etiquette} : notices de ${marques.size} marque(s) de référence (${vues}) et ${groupes.size} groupe(s) ; il en faut au moins ${MARQUES_MIN} marques de ${GROUPES_MIN} groupes différents (docs/03, règle 10)`, fichier));
+      constats.push(erreur('R3-MARQUES', `${etiquette} : notices de ${marques.size} marque(s) de référence (${vues}) et ${groupes.size} groupe(s) ; il en faut au moins ${regle.min} marques de ${regle.groupesMin} groupes différents (docs/03, règle 10)`, fichier));
     }
   }
 
@@ -323,9 +348,11 @@ export function construireContexte(
   // La page de chaque voyant est dans le plan, et l'outil voyants y mène par un lien du plan.
   constats.push(...controlerVoyantsDansLePlan(plan, voyants.values()));
 
-  // Pictogrammes : fichiers SVG valides de src/pictogrammes.
+  // Pictogrammes : fichiers SVG valides de src/pictogrammes. Le dessin entre dans l'empreinte des lignes de la base.
   const pictogrammes = new Set<string>();
+  const dessins = new Map<string, string>();
   for (const fichier of donnees.pictogrammes ?? []) {
+    dessins.set(fichier.id, fichier.contenu);
     const defauts = controlerPictogramme(fichier);
     constats.push(...defauts);
     if (defauts.length === 0) pictogrammes.add(fichier.id);
@@ -334,15 +361,15 @@ export function construireContexte(
   // La base voyants est soumise aux mêmes règles que les pages (R3, R4, R8), plus le nombre de marques et le
   // pictogramme.
   for (const voyant of voyants.values()) {
-    constats.push(...controlerLigneDeVerdict(voyant, sources, `voyant « ${voyant.id} »`, FICHIERS.voyants, { exigerMarques: true }));
+    constats.push(...controlerLigneDeVerdict(voyant, sources, `voyant « ${voyant.id} »`, FICHIERS.voyants, { marques: REGLE_MARQUES }));
     if (!pictogrammes.has(voyant.pictogramme)) {
       constats.push(erreur('PICTO-ABSENT', `voyant « ${voyant.id} » : pictogramme « ${voyant.pictogramme} » absent ou invalide (${DOSSIER_PICTOGRAMMES}/${voyant.pictogramme}.svg)`, FICHIERS.voyants));
     }
-    if (voyant.validation !== empreinteVoyant(voyant)) {
+    if (voyant.validation !== empreinteVoyant(voyant, dessins.get(voyant.pictogramme))) {
       constats.push(
         erreur(
           'R4-EMPREINTE',
-          `voyant « ${voyant.id} » : l'empreinte de validation ne correspond plus à la ligne (nom, couleur, pictogramme, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire`,
+          `voyant « ${voyant.id} » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire`,
           FICHIERS.voyants,
         ),
       );
@@ -464,7 +491,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   // R3 et R8 sur les lignes saisies : citations, niveau le plus prudent, écart signalé, cohérence verdict / urgence.
   const saisies: LigneResolue[] = lignes.filter((l) => l.origine === 'page');
   for (const ligne of saisies) {
-    constats.push(...controlerLigneDeVerdict(ligne, ctx.sources, `situation « ${ligne.situation} »`, fichier, { exigerMarques: false }));
+    constats.push(...controlerLigneDeVerdict(ligne, ctx.sources, `situation « ${ligne.situation} »`, fichier, {}));
   }
 
   // Code défaut : le verdict vient des notices et du voyant lié (docs/03, étape 5) ; chaque ligne saisie est donc
@@ -491,14 +518,18 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
     if (base !== undefined && rangVerdict(ligne.verdict) < rangVerdict(base.verdict)) {
       constats.push(erreur('R2-MOINS-GRAVE', `situation « ${ligne.situation ?? ''} » : le verdict « ${ligne.verdict} » est moins grave que celui du voyant « ${base.id} » dans la base voyants (« ${base.verdict} »)`, fichier));
     }
+    if (base !== undefined && ligne.urgence !== undefined && rangUrgence(ligne.urgence) < rangUrgence(base.urgence)) {
+      constats.push(erreur('R2-MOINS-GRAVE', `situation « ${ligne.situation ?? ''} » : l'urgence « ${ligne.urgence} » est moins forte que celle du voyant « ${base.id} » dans la base voyants (« ${base.urgence} »)`, fichier));
+    }
   }
 
   // R4 : empreinte de l'encadré de décision, validé par Houssem sur toute page éditoriale (docs/03 règle 7) :
   // question de décision, lignes de situation, coût probable. La base porte la validation de ses propres lignes.
+  const empreintesBase = new Map([...ctx.voyants.values()].map((v) => [v.id, v.validation]));
   if (page.validation === undefined) {
     constats.push(erreur('R4-VALIDATION-ABSENTE', "la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)", fichier));
-  } else if (page.validation !== empreintePage(page)) {
-    constats.push(erreur('R4-EMPREINTE', "l'empreinte de validation ne correspond plus à l'encadré de décision (question, lignes de situation, coût probable). Revalidation par Houssem nécessaire", fichier));
+  } else if (page.validation !== empreintePage(page, empreintesBase)) {
+    constats.push(erreur('R4-EMPREINTE', "l'empreinte de validation ne correspond plus à l'encadré de décision (question, lignes de situation, y compris une ligne de la base revalidée depuis, coût probable). Relecture et revalidation par Houssem nécessaires", fichier));
   }
 
   // R5 : revue dépassée = alerte.
@@ -581,10 +612,13 @@ const baliseAvecAttribut = (attribut: string): RegExp => new RegExp(`<[a-z][a-z0
 const EMPLACEMENT_PUB = /<[a-z][a-z0-9-]*\b[^>]*(?:\sdata-emplacement-pub(?=[\s=/>])|\sclass\s*=\s*["'][^"']*\badsbygoogle\b)[^>]*>/i;
 
 /**
- * Encadré de décision (docs/03 règle 7, docs/08 §3 règle 9) : un seul bloc `data-encadre-decision`, le premier bloc
- * après le H1 (aucun texte, image ou média entre les deux), aucun emplacement publicitaire avant lui, et il affiche
- * la question de décision, chaque situation avec le libellé de son verdict et de son urgence (grille) et son action,
- * et la tranche du coût probable. La position se lit sur le HTML brut, commentaires et scripts retirés.
+ * Encadré de décision (docs/03 règle 7, docs/08 §3 règle 9) :
+ *  - un seul bloc `data-encadre-decision`, le premier bloc après le H1 (aucun texte, image ou média entre les deux),
+ *    aucun emplacement publicitaire avant lui. La position se lit sur le HTML brut, commentaires et scripts retirés ;
+ *  - rien de masqué dedans (details, hidden, aria-hidden, display:none) ;
+ *  - il affiche la question de décision et la tranche du coût probable, puis une ligne par situation
+ *    (`data-encadre-ligne`, dans l'ordre des situations, avec `data-verdict` et `data-urgence`) qui affiche la
+ *    situation, le libellé de son verdict et de son urgence (grille), son action et, s'il existe, l'écart entre marques.
  */
 export function controlerEncadre(page: PageEditoriale, lignes: readonly LigneResolue[], html: string, fichier: string): Constat[] {
   const constats: Constat[] = [];
@@ -614,14 +648,40 @@ export function controlerEncadre(page: PageEditoriale, lignes: readonly LigneRes
   }
 
   const $ = cheerio.load(html);
-  const contenu = normaliserRecherche($('[data-encadre-decision]').first().text());
-  const attendus: string[] = [page.question_decision, page.cout_probable.tranche];
-  for (const ligne of lignes) {
-    attendus.push(ligne.situation, GRILLE_VERDICTS[ligne.verdict].libelle, GRILLE_URGENCES[ligne.urgence].libelle, ligne.action);
+  const encadre = $('[data-encadre-decision]').first();
+  const styleMasque = (style: string | undefined): boolean => /display\s*:\s*none|visibility\s*:\s*hidden/i.test(style ?? '');
+  if (
+    encadre.is('[hidden], [aria-hidden="true"]') ||
+    styleMasque(encadre.attr('style')) ||
+    encadre.find('details, [hidden], [aria-hidden="true"]').length > 0 ||
+    encadre.find('[style]').toArray().some((el) => styleMasque($(el).attr('style')))
+  ) {
+    constats.push(erreur('R9-ENCADRE-MASQUE', "l'encadré de décision affiche tout son contenu : ni bloc à déplier (details), ni contenu masqué (hidden, aria-hidden, display:none)", fichier));
   }
-  const manquants = [...new Set(attendus.filter((t) => !contenu.includes(normaliserRecherche(t))))];
+  const texteEncadre = normaliserRecherche(encadre.text());
+  const manquants = [page.question_decision, page.cout_probable.tranche].filter((t) => !texteEncadre.includes(normaliserRecherche(t)));
   if (manquants.length > 0) {
     constats.push(erreur('R9-ENCADRE-CONTENU', `l'encadré de décision n'affiche pas : ${manquants.map((t) => `« ${t} »`).join(', ')}`, fichier));
+  }
+  // Une ligne affichée par situation, dans l'ordre, avec son propre niveau (data-verdict, data-urgence) et ses textes.
+  const affichees = encadre.find('[data-encadre-ligne]').toArray();
+  if (affichees.length !== lignes.length) {
+    constats.push(erreur('R9-ENCADRE-CONTENU', `l'encadré de décision affiche ${affichees.length} ligne(s) de situation (data-encadre-ligne) pour ${lignes.length} attendue(s)`, fichier));
+  } else {
+    affichees.forEach((noeud, i) => {
+      const ligne = lignes[i];
+      if (ligne === undefined) return;
+      const element = $(noeud);
+      if (element.attr('data-verdict') !== ligne.verdict || element.attr('data-urgence') !== ligne.urgence) {
+        constats.push(erreur('R9-ENCADRE-CONTENU', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : data-verdict et data-urgence doivent valoir « ${ligne.verdict} » et « ${ligne.urgence} »`, fichier));
+      }
+      const texteLigne = normaliserRecherche(element.text());
+      const attendus = [ligne.situation, GRILLE_VERDICTS[ligne.verdict].libelle, GRILLE_URGENCES[ligne.urgence].libelle, ligne.action, ...(ligne.ecart_marques !== undefined ? [ligne.ecart_marques] : [])];
+      const absents = attendus.filter((t) => !texteLigne.includes(normaliserRecherche(t)));
+      if (absents.length > 0) {
+        constats.push(erreur('R9-ENCADRE-CONTENU', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : n'affiche pas ${absents.map((t) => `« ${t} »`).join(', ')}`, fichier));
+      }
+    });
   }
   return constats;
 }
