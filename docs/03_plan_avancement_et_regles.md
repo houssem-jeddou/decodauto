@@ -21,6 +21,7 @@
   - réglages Cloudflare et soumission du plan du site ;
   - ads.txt ;
   - libellés des codes défaut en source secondaire (norme ISO non achetée).
+- **v5, 23/10/2026** : décision de Houssem sur la revue d'une correction urgente (règle 13) : avant la fusion si la correction peut attendre une heure ; sinon après la publication, dans les 24 heures.
 
 L'état réel d'avancement et la prévision des étapes sont dans 04_journal_avancement.md.
 
@@ -54,6 +55,10 @@ L'état réel d'avancement et la prévision des étapes sont dans 04_journal_ava
     - Elle porte soit l'étape 7 (socle technique), qui a sa propre porte de sortie, soit un livrable technique d'une autre étape, contrôlé à la porte de cette étape : les pictogrammes de l'étape 5, ou la partie technique de l'outil voyants de l'étape 8.
     - Les dates du tableau sont des cibles. La prévision réaliste est tenue dans le journal et mise à jour à chaque session.
 13. **Correction urgente.** Une page en ligne fausse (verdict, fait ou chiffre) ou un incident en production (indexation, sécurité, site inaccessible) se traite tout de suite, quelle que soit l'étape en cours : une pull request dédiée, revalidée par Houssem, qui passe les contrôles. Chaque page porte un lien « Signaler une erreur ».
+   - **Revue indépendante d'une correction urgente** (décision du 23/10/2026) :
+     - si la correction peut attendre une heure (faute, chiffre approximatif sans danger) : revue avant la fusion, comme d'habitude ;
+     - si l'erreur est dangereuse (verdict de sécurité faux, consigne qui met en danger) : correction, validation de Houssem et publication tout de suite, puis revue de la correction dans les 24 heures. Si la revue trouve un problème, une nouvelle correction suit la même règle.
+   - Retirer vite une consigne dangereuse passe avant la revue ; la validation de Houssem et les contrôles automatiques ne sont jamais sautés.
 
 ## Étapes
 | # | Étape | Livrable | Porte de sortie | Cible |
