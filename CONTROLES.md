@@ -12,18 +12,32 @@ Le script affiche en tête le **mode d'indexation actif**. Chaque lundi, le work
 | R1-LIGNE-BASE-ABSENTE | Chaque voyant déclaré dans `voyants` a sa ligne `- voyant: id` reprise de la base (aucune ligne écrite à la main sur ce voyant) | erreur | `r1-ligne-base-absente` |
 | R1-RATTACHEMENT | La page rattachée à un voyant est dans le plan du site et le déclare (alerte tant que la page n'est pas écrite) | erreur / alerte | `tests/controle.test.ts`, `tests/plan.test.ts` |
 | R2-MOINS-GRAVE | Une ligne saisie liée à un voyant (`voyant_lie`) n'est pas moins grave que le verdict de ce voyant dans la base. Une ligne non liée n'est pas comparée | erreur | `r2-moins-grave`, `valide-ligne-non-liee` |
-| R3-PREMIERE-MAIN / R3-SOURCE-INCONNUE | Chaque verdict cite une source de première main du registre ; la source de `texte_reference` (pneus) aussi | erreur | `r3-pas-premiere-main`, `r3-source-inconnue`, `r3-texte-reference-seconde-main` |
-| R4-EMPREINTE / R4-VALIDATION-ABSENTE | L'empreinte de validation correspond au verdict, à l'urgence, à l'action et aux sources | erreur | `r4-empreinte-differente`, `r4-validation-absente` |
+| R2-CODE-SANS-VOYANT | Une page code défaut déclare au moins un voyant, et chacune de ses lignes saisies porte `voyant_lie` : son verdict vient des notices et du voyant, jamais moins grave que lui | erreur | `r2-code-sans-voyant` |
+| R3-PREMIERE-MAIN / R3-SOURCE-INCONNUE | Chaque verdict (base voyants et lignes saisies) cite une source de première main du registre ; la source de `texte_reference` (pneus) aussi ; les sources du libellé d'un code défaut (`libelle_sources`, secondaire admise) existent | erreur | `r3-pas-premiere-main`, `r3-source-inconnue`, `r3-texte-reference-seconde-main` |
+| R3-CITATION-NIVEAU | Chaque citation d'une notice constructeur donne le niveau (verdict et urgence) que la grille tire de sa consigne ; une source secondaire n'en donne jamais ; un niveau se donne en entier | erreur | `r3-citation-sans-niveau`, `r3-niveau-secondaire` |
+| R3-PLUS-PRUDENT | Le verdict et l'urgence d'une ligne sont au moins aussi prudents que la citation la plus prudente (docs/03, règle 10) | erreur | `r3-moins-prudent` |
+| R3-ECART-NON-SIGNALE | Si les citations d'une ligne ne donnent pas toutes le même niveau, `ecart_marques` dit l'écart | erreur | `r3-ecart-non-signale`, `valide-ecart-signale` |
+| R3-MARQUES | Une ligne de la base voyants cite les notices d'au moins 3 marques de référence, de 2 groupes différents (`MARQUES_REFERENCE`, `MARQUES_MIN`, `GROUPES_MIN` dans `src/schemas/listes.ts`) ; deux notices d'une même marque comptent une fois | erreur | `tests/controle.test.ts` |
+| R4-EMPREINTE / R4-VALIDATION-ABSENTE | Toute page éditoriale porte l'empreinte de son encadré de décision validé (question, lignes de situation, coût probable) ; chaque ligne de la base voyants porte celle de son contenu (voir plus bas) | erreur | `r4-empreinte-differente`, `r4-question-modifiee`, `r4-validation-absente`, `r4-validation-absente-voyant` |
 | R5-REVUE-DEPASSEE | `prochaine_revue` est dans le passé | **alerte** | `r5-revue-depassee` |
-| R7-CHAMP-MANQUANT / R7-HORS-LISTE / R7-CHAMP-INCONNU / R7-CHAMP-CALCULE / R7-FORMAT | Champs obligatoires, listes fermées, aucun champ calculé saisi | erreur | `r7-champ-manquant`, `r7-hors-liste`, `r7-champ-calcule-saisi` |
+| R7-CHAMP-MANQUANT / R7-HORS-LISTE / R7-CHAMP-INCONNU / R7-CHAMP-CALCULE / R7-FORMAT | Champs obligatoires (dont le libellé court, le texte alternatif d'une image, la marque d'une notice au registre), listes fermées, aucun champ calculé saisi, champ `relecteur` retiré (pas de relecteur extérieur) | erreur | `r7-champ-manquant`, `r7-image-sans-alt`, `r7-hors-liste`, `r7-champ-calcule-saisi`, `r7-relecteur` |
 | R7-ELEMENT-UNIQUE-ABSENT | L'élément unique est présent et non vide dans la page **construite** (`data-element-unique="…"`) ; un tableau a au moins une ligne de données | erreur | `r7-element-unique-absent`, `r7-tableau-sans-donnees` |
 | R7-ELEMENT-ATTENDU | Panne hors tutoriel : arbre de décision. Fluide (tutoriel compris) : tableau. Le tutoriel ne dispense que du symptôme et de l'arbre | erreur | `r7-fluide-tutoriel-sans-tableau`, `valide-tutoriel-panne` |
 | R7-HTML-* , R7-TUTORIEL-ETAPES | title, un seul H1, description présents dans la page construite ; étapes du tutoriel dans `<ol data-tutoriel-etapes>` (une autre liste numérotée ne compte pas) | erreur | `r7-tutoriel-sans-etapes` |
 | R7-DATES / R7-CODE-GENERIQUE | `prochaine_revue` postérieure à `date_revue` ; un code P1xxx n'est pas générique | erreur | `r7-dates`, `r7-code-p1-generique` |
 | R7-PLAN-ABSENT / R7-REQUETE-ABSENTE | La page (socle compris) est dans le plan du site, qui donne seul son adresse ; sa requête principale figure dans le title ou le H1 | erreur | `r7-plan-absent`, `r7-requete-absente`, `r7-socle-adresse-saisie` |
 | R7-AUTEUR-INCONNU, R7-DOUBLON | Fiche auteur existante ; identifiants et adresses uniques | erreur | `tests/controle.test.ts` |
+| R8-COHERENCE | Le couple verdict / urgence d'une ligne (base ou page) et de chaque citation est admis par la grille (`URGENCES_ADMISES`, `src/schemas/grille.ts`) : « non » impose une urgence immédiate, « oui » sans précaution l'exclut | erreur | `r8-incoherent` |
+| R9-ENCADRE-ABSENT | La page construite contient un seul encadré de décision (`data-encadre-decision`) | erreur | `r9-encadre-absent` |
+| R9-ENCADRE-POSITION | L'encadré est le premier bloc après le H1 : aucun texte, image ou média entre les deux (balises englobantes, commentaires et scripts ne comptent pas) | erreur | `r9-texte-avant-encadre` |
+| R9-PUB-AVANT-ENCADRE | Aucun emplacement publicitaire (`data-emplacement-pub`, ou bloc AdSense `adsbygoogle`) avant l'encadré | erreur | `r9-pub-avant-encadre` |
+| R9-ENCADRE-CONTENU | L'encadré affiche la question de décision, chaque situation avec le libellé de son verdict et de son urgence (grille) et son action, et la tranche du coût probable | erreur | `r9-encadre-incomplet` |
+| PICTO-ABSENT / PICTO-INVALIDE | Chaque ligne de la base voyants a son pictogramme `src/pictogrammes/<pictogramme>.svg` ; le fichier est un SVG autonome (balise `svg` avec `viewBox`, ni script, ni image intégrée, ni gestionnaire d'événement, ni ressource externe, 8 Ko au plus) | erreur | `tests/controle.test.ts` |
 
-Non vérifiable par machine (liste de recette) : R6, l'ordre des causes (jamais « par fréquence » sans donnée sourcée).
+Non vérifiable par machine (liste de recette) :
+- R6, l'ordre des causes (jamais « par fréquence » sans donnée sourcée) ;
+- le classement de chaque consigne de notice dans la grille, l'extrait fidèle à la source et le texte de l'écart entre marques : vérifiés par Houssem sur le paquet de validation (docs/03, règle 7) ;
+- un pictogramme redessiné par nos soins, jamais copié (docs/01).
 
 ## Plan du site et maillage (étape 4)
 Le plan du site (`data/plan-du-site.json`) est la référence du maillage : `parent` (page mère, qui affiche ses enfants) et `liens` (chaque paire déclarée une seule fois, le retour est calculé). Les pages ne déclarent plus de liens. Code : `src/lib/plan.ts`, `src/lib/porte-plan.ts` ; tests : `tests/plan.test.ts` (sans dépendance) et `tests/controle.test.ts`.
@@ -61,4 +75,7 @@ Non vérifiable par machine (liste de recette) : un recouvrement de sens entre d
 | LIEN-CASSE / LIEN-SANS-BARRE / LIEN-ANCRE | Liens internes (`npm run liens`) |
 
 ## Empreinte de validation
-`validation` = SHA-256 de la liste `{verdict, urgence, action, sources}` des lignes **saisies** de la page (`src/lib/empreinte.ts`). La casse, les espaces et les apostrophes typographiques de `action` n'ont pas d'effet ; toute autre modification de ces quatre champs demande une revalidation par Houssem. Le reste du texte de la page peut être corrigé librement, sauf l'encadré de décision, que Houssem relit avant publication (docs/03, règle 7).
+Code : `src/lib/empreinte.ts` ; calcul : `npm run empreinte -- <page.md>` ou `npm run empreinte -- --voyant <id>`. L'empreinte se copie après la validation de Houssem, jamais pour faire passer un contrôle.
+- **Ligne de la base voyants** (`validation` de `data/voyants.json`) : nom, couleur, pictogramme, situation, verdict, urgence, action, écart entre marques et citations (source, page ou section, extrait, niveau). L'ordre des citations n'a pas d'effet.
+- **Page éditoriale** (`validation` du frontmatter) : l'encadré de décision, c'est-à-dire la question de décision, les lignes de situation dans l'ordre (une ligne reprise de la base y figure par l'identifiant du voyant, verrouillé par sa propre empreinte ; une ligne saisie en entier, voyant lié compris) et le coût probable (tranche, base de calcul, sources). Exigée sur toute page éditoriale, même sans ligne saisie.
+- Casse, accents, ligatures, ponctuation et espaces n'ont pas d'effet : une coquille de ce type ne demande pas de revalidation. Un mot, une lettre, un chiffre, « % » ou « ° » changé demande une revalidation. Le reste du texte de la page se corrige librement.
