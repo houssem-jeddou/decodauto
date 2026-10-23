@@ -29,7 +29,7 @@ situations:
         emplacement: p. 1, rubrique de test
         extrait: Consigne de test de la source fixture-securite-routiere.
         verdict: oui
-        urgence: sous quelques jours
+        urgence: immédiate
 element_unique: tableau
 normes:
   - ACEA A3/B4
@@ -38,7 +38,7 @@ quand_changer:
   texte: Selon le carnet d'entretien.
   sources:
     - fixture-notice
-validation: 006115fb30710220764b3db450012e23d4dba61e146a2bd8a7d67da00ef8519d
+validation: d2de4e1c70636bf52fe2c60406cbe4ae4114d7a76eaa06047098089aa1dcf5fd
 ---
 
 Page de test (r8-incoherent), jamais publiée.

@@ -84,8 +84,10 @@ export const NATURES_TEXTE_REFERENCE = ['legifrance', 'arrete-prefectoral'] as c
  * demande de changement n° 3 : le règlement ONU n° 121 (symboles et couleurs des témoins) et RappelConso (rappels).
  * « secondaire » regroupe tout le reste (presse, forums, sites OBD, libellés des codes défaut tirés d'autres sources
  * que la norme ISO 15031-6, non achetée, relecture par une IA…). Une source secondaire ne fixe jamais un verdict.
- * « notice-constructeur » couvre la notice d'utilisation et la documentation officielle du constructeur sur ses
- * témoins (page officielle de la marque), publiées par le constructeur lui-même.
+ * « notice-constructeur » : la notice d'utilisation du véhicule (manuel du propriétaire), publiée par le constructeur.
+ * Une page web générique de la marque sur ses témoins n'en est pas une : elle se range en « secondaire » (elle peut
+ * être citée, sans fixer de niveau). Exemple : les pages de volkswagen.fr donnent la même consigne d'arrêt pour des
+ * témoins rouges et jaunes (demande de changement n° 3, point 16, recommandation).
  */
 export const CATEGORIES_SOURCE = [
   'notice-constructeur',

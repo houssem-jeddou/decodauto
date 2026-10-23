@@ -8,8 +8,9 @@ import type { Urgence, Verdict } from '../schemas/listes.ts';
 //  - Ligne de la base voyants : identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence,
 //    action, écart entre marques et citations (source, page ou section, extrait, niveau tiré de la notice).
 //  - Page éditoriale : l'encadré de décision, c'est-à-dire la question de décision, les lignes de situation (une
-//    ligne reprise de la base y figure par l'identifiant du voyant et l'empreinte de sa ligne : revalider la ligne
-//    oblige à relire l'encadré ; une ligne saisie y figure en entier, voyant lié compris) et le coût probable.
+//    ligne reprise de la base y figure par l'identifiant du voyant et ce que l'encadré en affiche : situation,
+//    verdict, urgence, action, écart ; changer l'un d'eux oblige à relire l'encadré, corriger une citation non ;
+//    une ligne saisie y figure en entier, voyant lié compris) et le coût probable.
 // ---------------------------------------------------------------------------------------------
 
 /**
@@ -28,13 +29,15 @@ export function normaliserTexte(texte: string): string {
     .replace(/æ/g, 'ae')
     .replace(/Æ/g, 'AE')
     .toLowerCase()
-    .replace(/≤/g, ' infeg ')
-    .replace(/≥/g, ' supeg ')
+    .replace(/≤|<=/g, ' infeg ')
+    .replace(/≥|>=/g, ' supeg ')
     .replace(/</g, ' inf ')
     .replace(/>/g, ' sup ')
     .replace(/±/g, ' plusmoins ')
     .replace(/\+/g, ' plus ')
-    .replace(/[−-](?=\s?\d)/g, ' moins ')
+    // Signe moins (trait d'union, tirets, signe moins) devant un nombre, sauf collé à une lettre ou un chiffre :
+    // « -10 °C » ≠ « 10 °C » ; « 100-1 000 » = « 100–1 000 » ; « 5W-30 » reste un nom.
+    .replace(/(?<![a-z0-9])[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D-]\s*(?=\d)/g, ' moins ')
     .replace(/€/g, ' eur ')
     .replace(/%/g, ' % ')
     .replace(/°/g, ' ° ')
@@ -79,6 +82,15 @@ export interface LigneDePage {
   ecart_marques?: string | undefined;
 }
 
+/** Ce que l'encadré de décision affiche d'une ligne de la base voyants. */
+export interface LigneAffichee {
+  situation: string;
+  verdict: Verdict;
+  urgence: Urgence;
+  action: string;
+  ecart_marques?: string | undefined;
+}
+
 /** Encadré de décision d'une page, tel que validé. */
 export interface EncadreValide {
   question_decision: string;
@@ -107,9 +119,11 @@ function hacher(valeur: unknown): string {
   return createHash('sha256').update(JSON.stringify(valeur)).digest('hex');
 }
 
-/** Le dessin du pictogramme compte, pas sa mise en forme (espaces, retours à la ligne). */
+/** Le dessin du pictogramme compte, pas les espaces, retours à la ligne et commentaires du fichier. */
 const empreinteDessin = (dessin: string | undefined): string | null =>
-  dessin === undefined ? null : createHash('sha256').update(dessin.replace(/>\s+</g, '><').replace(/\s+/g, ' ').trim()).digest('hex');
+  dessin === undefined
+    ? null
+    : createHash('sha256').update(dessin.replace(/<!--[\s\S]*?-->/g, '').replace(/>\s+</g, '><').replace(/\s+/g, ' ').trim()).digest('hex');
 
 /** Empreinte d'une ligne de la base voyants ; `dessin` : contenu du fichier SVG de son pictogramme. */
 export function empreinteVoyant(voyant: VoyantValide, dessin: string | undefined): string {
@@ -128,16 +142,21 @@ export function empreinteVoyant(voyant: VoyantValide, dessin: string | undefined
   });
 }
 
+const affichage = (l: LigneAffichee | undefined): unknown =>
+  l === undefined
+    ? null
+    : { situation: normaliserTexte(l.situation), verdict: l.verdict, urgence: l.urgence, action: normaliserTexte(l.action), ecart_marques: facultatif(l.ecart_marques) };
+
 /**
  * Empreinte de l'encadré de décision d'une page. L'ordre des lignes de situation compte (ordre d'affichage).
- * `empreintesBase` : identifiant de chaque voyant de la base → empreinte de validation de sa ligne.
+ * `base` : identifiant de chaque voyant de la base → sa ligne (seuls les champs affichés par l'encadré comptent).
  */
-export function empreintePage(encadre: EncadreValide, empreintesBase: ReadonlyMap<string, string>): string {
+export function empreintePage(encadre: EncadreValide, base: ReadonlyMap<string, LigneAffichee>): string {
   return hacher({
     question_decision: normaliserTexte(encadre.question_decision),
     situations: encadre.situations.map((l) =>
       l.voyant !== undefined
-        ? { voyant: l.voyant, validation: empreintesBase.get(l.voyant) ?? null }
+        ? { voyant: l.voyant, affiche: affichage(base.get(l.voyant)) }
         : {
             situation: facultatif(l.situation),
             voyant_lie: l.voyant_lie ?? null,

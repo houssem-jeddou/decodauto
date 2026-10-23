@@ -26,10 +26,10 @@ situations:
     urgence: immédiate
     action: S'arrêter et couper le moteur.
     citations:
-      - source: fixture-securite-routiere
+      - source: fixture-notice
         emplacement: p. 1, rubrique de test
-        extrait: Consigne de test de la source fixture-securite-routiere.
-        verdict: non, arrêt dès que possible
+        extrait: Consigne de test de la source fixture-notice.
+        verdict: non, arrêt immédiat
         urgence: immédiate
 voyants:
   - fixture-voyant-huile
@@ -43,7 +43,7 @@ carburant: essence et diesel
 causes:
   - cause: Catalyseur usé
     explication: Le catalyseur ne traite plus correctement les gaz.
-validation: 35d1ca2b166eaf708dba51bcbad04346d8073c67148ba688ab64dbd9522a0a00
+validation: f531db2fa3c6b25aaf5a4e52c5b58cfb538b03ed8a570e9959774b6b4bbb7799
 ---
 
 Page de test (r2-code-sans-voyant), jamais publiée.

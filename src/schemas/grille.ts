@@ -22,7 +22,7 @@ export interface NiveauGrille {
 /** Principes d'application de la grille (repris dans docs/08 et dans la section méthode de « à propos »). */
 export const PRINCIPES_GRILLE: readonly string[] = [
   'Chaque citation de notice est classée à partir de sa consigne écrite, citation par citation, selon le sens et non le seul verbe.',
-  "Le verdict se trouve en posant les questions dans l'ordre : la notice impose-t-elle l'arrêt ? Sinon, empêche-t-elle de rouler jusqu'au garage, ou annonce-t-elle un dégât grave si l'on roule ? Sinon, demande-t-elle une action, une vérification, une visite au garage ou une conduite adaptée ? Sinon, c'est un fonctionnement normal, une information ou un entretien périodique.",
+  "Le verdict se trouve en posant les questions dans l'ordre : la notice impose-t-elle l'arrêt ? Sinon, empêche-t-elle de rouler jusqu'au garage, ou annonce-t-elle un dégât grave si l'on roule ? Sinon, demande-t-elle, pour une anomalie, une action, une vérification, une visite au garage ou une conduite adaptée ? Sinon, c'est un fonctionnement normal (y compris attendre l'extinction d'un témoin avant de démarrer), une information ou un entretien périodique sans anomalie.",
   "Une consigne qui relève de deux niveaux, ou une formulation absente de la grille, prend le niveau le plus prudent qu'elle peut signifier.",
   "Le verdict et l'urgence d'une ligne sont au moins aussi prudents que la citation la plus prudente. Si les citations ne donnent pas toutes le même niveau, l'écart est signalé dans la ligne et affiché au lecteur.",
   "Le couple verdict / urgence doit être admis par le tableau des urgences admises : ne pas pouvoir rouler implique d'agir tout de suite ; pouvoir rouler sans précaution exclut une action immédiate.",
@@ -44,7 +44,7 @@ export const GRILLE_VERDICTS: Readonly<Record<Verdict, NiveauGrille>> = {
     definition:
       "Vous pouvez rouler en appliquant la précaution indiquée (allure modérée, vérification à faire, système d'aide indisponible) et en faisant ce qui est demandé dans le délai donné par l'urgence.",
     consignes_notice: [
-      "La notice laisse rouler jusqu'au garage : « se rendre dans le réseau ou dans un atelier qualifié », « consultez un représentant de la marque », « faites vérifier », « faites contrôler ».",
+      "Pour une anomalie, la notice laisse rouler jusqu'au garage : « se rendre dans le réseau ou dans un atelier qualifié », « consultez un représentant de la marque », « faites vérifier », « faites contrôler ». Un entretien périodique sans anomalie n'en fait pas partie (verdict « oui »).",
       "La notice demande au conducteur une vérification ou une action sans s'arrêter tout de suite : « contrôler la pression des pneumatiques », « faire un appoint », « compléter le niveau ».",
       "La notice demande d'adapter sa conduite : « rouler prudemment à allure modérée », « régénérer le filtre en roulant à une vitesse d'au moins 60 km/h ».",
     ],
@@ -111,3 +111,15 @@ export const URGENCES_ADMISES: Readonly<Record<Verdict, readonly Urgence[]>> = {
 export function urgenceAdmise(verdict: Verdict, urgence: Urgence): boolean {
   return URGENCES_ADMISES[verdict].includes(urgence);
 }
+
+/**
+ * Mots repères des consignes (comparés à l'extrait cité, sans accents ni ponctuation). Ils déclenchent une alerte,
+ * non bloquante, quand le niveau saisi pour une citation semble moins prudent que ce que la grille tire de ces mots
+ * (alerte R3-NIVEAU-A-VERIFIER) : un rappel pour le paquet de validation, pas un classement automatique.
+ */
+export const MOTS_REPERES = {
+  arret: ['arret du vehicule est imperatif', 'arret imperatif', 'arretez vous', 'arretez le vehicule', 'arreter le vehicule', 'arretez immediatement', 'ne continuez pas', 'ne pas continuer', 'coupez le moteur', 'couper le moteur'],
+  appel: ['faire appel', 'faites appel', 'remorquer', 'remorquage', 'depanneuse', 'contactez l assistance', 'appelez l assistance'],
+  immediat: ['immediatement', 'imperativement', 'sans tarder', 'sans attendre', 'sans delai', 'au plus tot', 'au plus vite', 'des que possible', 'le plus rapidement possible', 'dans les plus brefs delais', 'des que les conditions de circulation le permettent'],
+  entretien: ['revision', 'entretien', 'vidange'],
+} as const;

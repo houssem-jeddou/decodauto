@@ -401,6 +401,15 @@
     "explication": "« Oui, vous pouvez rouler » avec une urgence « immédiate » : couple refusé par la grille."
   },
   {
+    "nom": "r3-niveau-sans-source",
+    "type": "fluide",
+    "erreurs": [
+      "R3-NIVEAU-SANS-SOURCE"
+    ],
+    "alertes": [],
+    "explication": "Ligne plus sévère que toutes ses citations : aucun niveau cité ne la justifie (jamais de verdict inventé, même plus sévère)."
+  },
+  {
     "nom": "r9-encadre-absent",
     "type": "panne",
     "erreurs": [
@@ -435,5 +444,14 @@
     ],
     "alertes": [],
     "explication": "L'encadré n'affiche pas l'action de chaque situation."
+  },
+  {
+    "nom": "r9-encadre-masque",
+    "type": "panne",
+    "erreurs": [
+      "R9-ENCADRE-MASQUE"
+    ],
+    "alertes": [],
+    "explication": "Les lignes de l'encadré sont repliées dans un bloc à déplier : la décision doit être visible sans clic."
   }
 ]

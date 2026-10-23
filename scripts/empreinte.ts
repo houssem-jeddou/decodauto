@@ -9,7 +9,7 @@ import { empreintePage, empreinteVoyant, type EncadreValide, type VoyantValide }
 import { DOSSIER_PICTOGRAMMES } from '../src/lib/controle.ts';
 import { lireFrontmatter } from './lib/charger.ts';
 
-const base = JSON.parse(await readFile('data/voyants.json', 'utf8')) as (VoyantValide & { validation?: string })[];
+const base = JSON.parse(await readFile('data/voyants.json', 'utf8')) as VoyantValide[];
 const [, , premier, second] = argv;
 if (premier === '--voyant' && second !== undefined) {
   const voyant = base.find((v) => v.id === second);
@@ -26,8 +26,7 @@ if (premier === '--voyant' && second !== undefined) {
   stdout.write(`${empreinteVoyant(voyant, dessin)}\n`);
 } else if (premier !== undefined) {
   const page = lireFrontmatter(await readFile(premier, 'utf8')) as EncadreValide;
-  const empreintesBase = new Map(base.flatMap((v) => (v.validation !== undefined ? [[v.id, v.validation] as const] : [])));
-  stdout.write(`${empreintePage(page, empreintesBase)}\n`);
+  stdout.write(`${empreintePage(page, new Map(base.map((v) => [v.id, v])))}\n`);
 } else {
   stdout.write('Usage : node scripts/empreinte.ts <page.md> | --voyant <id>\n');
   exit(1);

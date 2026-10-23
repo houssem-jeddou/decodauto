@@ -40,7 +40,7 @@ contexte:
 causes:
   - cause: Batterie déchargée
     explication: Une batterie faible ne fournit pas assez de courant.
-validation: 8764d1251cf273fa4dadcc3ccc769d695d3fe82a6592b78cf922315568a39b80
+validation: 4c43b6e25ac7c3b94b64b1c49bb546e86428138727bc08d7753279e2fdeb8289
 ---
 
 Page de test (r1-voyant-non-declare), jamais publiée.

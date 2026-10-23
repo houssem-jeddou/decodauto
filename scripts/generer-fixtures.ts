@@ -95,7 +95,7 @@ const contexte = {
   auteurs: ['fixture-auteur'],
   pictogrammes: PICTOGRAMMES,
 };
-const EMPREINTES_BASE = new Map((contexte.voyants as Objet[]).map((v) => [String(v['id']), String(v['validation'])]));
+const LIGNES_BASE = new Map((contexte.voyants as Objet[]).map((v) => [String(v['id']), v]));
 
 // ---- Pages de base ------------------------------------------------------------------------------
 const dates = { date_publication: '2026-10-01', date_modification: '2026-10-20', date_revue: '2026-10-20', prochaine_revue: '2027-01-20' };
@@ -103,7 +103,7 @@ const cout = { tranche: "à fixer à l'étape 6", base_de_calcul: 'Base de calcu
 
 /** Empreinte de l'encadré de décision (question, lignes de situation, coût), recalculée après chaque changement. */
 function avecValidation(page: Objet): Objet {
-  return { ...page, validation: empreintePage(page as never, EMPREINTES_BASE) };
+  return { ...page, validation: empreintePage(page as never, LIGNES_BASE as never) };
 }
 
 /** Ligne de situation saisie, liée par défaut au voyant « batterie ». */
@@ -238,6 +238,7 @@ interface OptionsHtml {
   texteAvantEncadre?: boolean;
   pubAvantEncadre?: boolean;
   encadreSansAction?: boolean;
+  encadreMasque?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -260,7 +261,8 @@ function encadre(page: Objet, options: OptionsHtml): string {
     })
     .join('');
   const tranche = String((page['cout_probable'] as Objet | undefined)?.['tranche'] ?? '');
-  return `<section data-encadre-decision><p>${String(page['question_decision'])}</p>${lignes}<p>Coût probable : ${tranche}</p></section>`;
+  const contenu = options.encadreMasque ? `<details><summary>Voir le détail</summary>${lignes}</details>` : lignes;
+  return `<section data-encadre-decision><p>${String(page['question_decision'])}</p>${contenu}<p>Coût probable : ${tranche}</p></section>`;
 }
 
 function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): string {
@@ -338,12 +340,12 @@ valide(
 invalide('r1-verdict-saisi', 'panne', { ...panne(), situations: [{ voyant: 'fixture-voyant-batterie', verdict: 'oui' }] }, ['R1-VERDICT-SAISI'], 'Verdict saisi sur une ligne de voyant : il doit venir de la base.');
 invalide('r1-voyant-inconnu', 'panne', avecValidation({ ...panne(), voyants: ['fixture-voyant-fantome'], situations: [{ voyant: 'fixture-voyant-fantome' }] }), ['R1-VOYANT-INCONNU'], 'Voyant absent de la base voyants.');
 invalide('r1-voyant-non-declare', 'panne', avecValidation({ ...sans(panne(), 'voyants'), situations: [{ voyant: 'fixture-voyant-batterie' }, ligneSaisie({ voyant_lie: undefined })] }), ['R1-VOYANT-NON-DECLARE'], "Ligne de voyant dont le voyant n'est pas dans la liste « voyants ».");
-invalide('r1-voyant-lie-non-declare', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ voyant_lie: 'fixture-voyant-huile', verdict: 'non, arrêt immédiat', urgence: 'immédiate' }) }), ['R1-VOYANT-NON-DECLARE'], "Ligne saisie liée à un voyant qui n'est pas déclaré par la page.");
+invalide('r1-voyant-lie-non-declare', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ voyant_lie: 'fixture-voyant-huile', verdict: 'non, arrêt immédiat', urgence: 'immédiate', citations: [citation('fixture-securite-routiere', ['non, arrêt immédiat', 'immédiate'])] }) }), ['R1-VOYANT-NON-DECLARE'], "Ligne saisie liée à un voyant qui n'est pas déclaré par la page.");
 invalide('r1-ligne-base-absente', 'panne', avecValidation({ ...panne(), situations: [ligneSaisie()] }), ['R1-LIGNE-BASE-ABSENTE'], "Voyant déclaré sans sa ligne reprise de la base (ligne écrite à la main à la place).");
 
 // R2 : le voyant « batterie » a le verdict « non, arrêt dès que possible » dans la base.
 invalide('r2-moins-grave', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ verdict: 'oui', urgence: 'aucune', citations: [citation('fixture-securite-routiere', ['oui', 'aucune'])] }) }), ['R2-MOINS-GRAVE'], 'Ligne liée à un voyant, moins grave que ce voyant dans la base (verdict et urgence).');
-invalide('r2-code-sans-voyant', 'code-defaut', codeDefaut(ligneSaisie({ voyant_lie: undefined, situation: 'Code P0420 mémorisé', verdict: 'non, arrêt immédiat', urgence: 'immédiate', action: "S'arrêter et couper le moteur." })), ['R2-CODE-SANS-VOYANT'], "Ligne saisie d'un code défaut sans voyant lié : son verdict ne serait pas comparé au voyant.");
+invalide('r2-code-sans-voyant', 'code-defaut', codeDefaut(ligneSaisie({ ...LIGNE_CODE, voyant_lie: undefined, situation: 'Code P0420 mémorisé' })), ['R2-CODE-SANS-VOYANT'], "Ligne saisie d'un code défaut sans voyant lié : son verdict ne serait pas comparé au voyant.");
 
 // R3
 invalide('r3-pas-premiere-main', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ citations: [citation('fixture-forum')] }) }), ['R3-PREMIERE-MAIN'], "Verdict qui ne cite qu'une source de seconde main.");
@@ -382,13 +384,15 @@ invalide('r7-dates', 'panne', { ...panne(), date_revue: '2027-03-01', prochaine_
 invalide('r7-relecteur', 'panne', { ...panne(), relecteur: 'Un relecteur' }, ['R7-CHAMP-INCONNU'], 'Le champ relecteur est retiré : pas de relecteur extérieur (décision du 23/10/2026).');
 
 // R8 : grille des niveaux de verdict et d'urgence.
-invalide('r8-incoherent', 'fluide', fluide(ligneFluide({ verdict: 'oui', urgence: 'immédiate', citations: [citation('fixture-securite-routiere', ['oui', 'sous quelques jours'])] })), ['R8-COHERENCE'], "« Oui, vous pouvez rouler » avec une urgence « immédiate » : couple refusé par la grille.");
+invalide('r8-incoherent', 'fluide', fluide(ligneFluide({ verdict: 'oui', urgence: 'immédiate', citations: [citation('fixture-securite-routiere', ['oui', 'immédiate'])] })), ['R8-COHERENCE'], "« Oui, vous pouvez rouler » avec une urgence « immédiate » : couple refusé par la grille.");
+invalide('r3-niveau-sans-source', 'fluide', fluide(ligneFluide({ verdict: 'non, arrêt immédiat', urgence: 'immédiate' })), ['R3-NIVEAU-SANS-SOURCE'], "Ligne plus sévère que toutes ses citations : aucun niveau cité ne la justifie (jamais de verdict inventé, même plus sévère).");
 
 // R9 : encadré de décision dans la page construite.
 invalide('r9-encadre-absent', 'panne', panne(), ['R9-ENCADRE-ABSENT'], 'Pas d\'encadré de décision (data-encadre-decision) dans la page construite.', { sansEncadre: true });
 invalide('r9-texte-avant-encadre', 'panne', panne(), ['R9-ENCADRE-POSITION'], "Une ligne de texte s'intercale entre le H1 et l'encadré : la page ne s'ouvre plus sur la décision.", { texteAvantEncadre: true });
 invalide('r9-pub-avant-encadre', 'panne', panne(), ['R9-PUB-AVANT-ENCADRE'], "Un emplacement publicitaire précède l'encadré de décision.", { pubAvantEncadre: true });
 invalide('r9-encadre-incomplet', 'panne', panne(), ['R9-ENCADRE-CONTENU'], "L'encadré n'affiche pas l'action de chaque situation.", { encadreSansAction: true });
+invalide('r9-encadre-masque', 'panne', panne(), ['R9-ENCADRE-MASQUE'], "Les lignes de l'encadré sont repliées dans un bloc à déplier : la décision doit être visible sans clic.", { encadreMasque: true });
 
 // ---- Écriture ----------------------------------------------------------------------------------------
 await rm(join(racine, 'cas'), { recursive: true, force: true });

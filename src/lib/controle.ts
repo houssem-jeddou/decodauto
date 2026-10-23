@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
-import { empreintePage, empreinteVoyant } from './empreinte.ts';
+import { empreintePage, empreinteVoyant, normaliserTexte } from './empreinte.ts';
 import { calculerChamps, resoudreLignes, type LigneResolue } from './calcul.ts';
 import { controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
 import { normaliserRecherche } from './texte.ts';
@@ -14,7 +14,7 @@ import {
 } from '../schemas/donnees.ts';
 import { schemasPage, type PageEditoriale } from '../schemas/pages.ts';
 import type { Citation } from '../schemas/briques.ts';
-import { GRILLE_URGENCES, GRILLE_VERDICTS, urgenceAdmise } from '../schemas/grille.ts';
+import { GRILLE_URGENCES, GRILLE_VERDICTS, MOTS_REPERES, urgenceAdmise } from '../schemas/grille.ts';
 import {
   CHAMPS_CALCULES,
   GROUPES_MIN,
@@ -204,16 +204,17 @@ export function controlerPictogramme(fichier: FichierPictogramme): Constat[] {
   const defauts: string[] = [];
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(fichier.id)) defauts.push('nom de fichier en minuscules, chiffres et tirets');
   const contenu = fichier.contenu.replace(/^\uFEFF/, '').replace(/<!--[\s\S]*?-->/g, '');
+  const taille = new TextEncoder().encode(fichier.contenu).length;
   if (!/^\s*(<\?xml[^>]*\?>\s*)?<svg\b[^>]*\sviewBox\s*=\s*["'][^"']+["'][^>]*>/i.test(contenu)) defauts.push('le fichier commence par une balise <svg> avec un attribut viewBox');
   if (!/<\/svg>\s*$/i.test(contenu)) defauts.push('le fichier se termine par </svg>');
   if (/<!DOCTYPE|<!ENTITY|<!\[CDATA\[/i.test(contenu)) defauts.push('ni DOCTYPE, ni entité, ni bloc CDATA');
   const interdits = [...new Set([...contenu.matchAll(/<([a-zA-Z][\w:.-]*)/g)].map((m) => (m[1] ?? '').toLowerCase()).filter((nom) => !ELEMENTS_SVG.has(nom)))];
   if (interdits.length > 0) defauts.push(`éléments non admis : ${interdits.join(', ')} (formes simples seulement)`);
   if (/\son[a-z]+\s*=/i.test(contenu)) defauts.push("aucun gestionnaire d'événement (attribut on…)");
-  const liens = [...contenu.matchAll(/\s(?:xlink:)?href\s*=\s*["']([^"']*)["']/gi)].map((m) => (m[1] ?? '').trim());
+  const liens = [...contenu.matchAll(/\s(?:xlink:)?href\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi)].map((m) => (m[1] ?? m[2] ?? m[3] ?? '').trim());
   if (liens.some((lien) => !lien.startsWith('#'))) defauts.push('liens internes seulement (href="#…")');
   if ([...contenu.matchAll(/url\(\s*["']?\s*([^)"'\s]*)/gi)].some((m) => !(m[1] ?? '').startsWith('#'))) defauts.push('url(…) internes seulement (url(#…))');
-  if (new TextEncoder().encode(contenu).length > PICTOGRAMME_OCTETS_MAX) defauts.push(`au plus ${PICTOGRAMME_OCTETS_MAX} octets`);
+  if (taille > PICTOGRAMME_OCTETS_MAX) defauts.push(`au plus ${PICTOGRAMME_OCTETS_MAX} octets (fichier : ${taille})`);
   return defauts.map((d) => erreur('PICTO-INVALIDE', `pictogramme « ${fichier.id} » : ${d}`, chemin));
 }
 
@@ -283,6 +284,31 @@ export function controlerLigneDeVerdict(
   }
   if (inconnues.length === 0 && niveaux.length === 0) {
     constats.push(erreur('R3-PREMIERE-MAIN', `${etiquette} : le verdict ne s'appuie sur aucune citation de première main qui fixe un niveau (notice constructeur, Sécurité routière, Légifrance…)`, fichier));
+  }
+  // Une ligne plus prudente que toutes ses citations n'a pas de source pour ce niveau : le niveau retenu est celui
+  // de la citation la plus prudente (docs/01 : jamais de verdict inventé, même plus sévère).
+  if (niveaux.length > 0) {
+    const verdictMax = Math.max(...niveaux.map((n) => rangVerdict(n.verdict)));
+    const urgenceMax = Math.max(...niveaux.map((n) => rangUrgence(n.urgence)));
+    if (rangVerdict(ligne.verdict) > verdictMax || rangUrgence(ligne.urgence) > urgenceMax) {
+      constats.push(erreur('R3-NIVEAU-SANS-SOURCE', `${etiquette} : le verdict « ${ligne.verdict} » et l'urgence « ${ligne.urgence} » dépassent le niveau de toutes les citations ; le niveau retenu est celui de la citation la plus prudente`, fichier));
+    }
+  }
+  // Rappel non bloquant : un mot repère de la grille dans l'extrait, avec un niveau saisi moins prudent.
+  for (const citation of ligne.citations) {
+    if (citation.verdict === undefined || citation.urgence === undefined) continue;
+    const extrait = normaliserRecherche(citation.extrait);
+    const contient = (mots: readonly string[]): string | undefined => mots.find((m) => extrait.includes(m));
+    const arret = contient(MOTS_REPERES.arret);
+    const appel = contient(MOTS_REPERES.appel);
+    const immediat = contient(MOTS_REPERES.immediat);
+    const doutes: string[] = [];
+    if (arret !== undefined && citation.verdict !== 'non, arrêt immédiat') doutes.push(`« ${arret} » mène à « non, arrêt immédiat »`);
+    if (appel !== undefined && rangVerdict(citation.verdict) < rangVerdict('non, arrêt dès que possible')) doutes.push(`« ${appel} » mène au moins à « non, arrêt dès que possible »`);
+    if (immediat !== undefined && citation.urgence !== 'immédiate' && contient(MOTS_REPERES.entretien) === undefined) doutes.push(`« ${immediat} » mène à une urgence immédiate`);
+    if (doutes.length > 0) {
+      constats.push(alerte('R3-NIVEAU-A-VERIFIER', `${etiquette} : citation de « ${citation.source} » : ${doutes.join(' ; ')} selon la grille. Niveau saisi : « ${citation.verdict} », « ${citation.urgence} ». À vérifier sur le paquet de validation`, fichier));
+    }
   }
 
   // Le verdict le plus prudent l'emporte (docs/03 règle 10).
@@ -525,10 +551,9 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
 
   // R4 : empreinte de l'encadré de décision, validé par Houssem sur toute page éditoriale (docs/03 règle 7) :
   // question de décision, lignes de situation, coût probable. La base porte la validation de ses propres lignes.
-  const empreintesBase = new Map([...ctx.voyants.values()].map((v) => [v.id, v.validation]));
   if (page.validation === undefined) {
     constats.push(erreur('R4-VALIDATION-ABSENTE', "la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)", fichier));
-  } else if (page.validation !== empreintePage(page, empreintesBase)) {
+  } else if (page.validation !== empreintePage(page, ctx.voyants)) {
     constats.push(erreur('R4-EMPREINTE', "l'empreinte de validation ne correspond plus à l'encadré de décision (question, lignes de situation, y compris une ligne de la base revalidée depuis, coût probable). Relecture et revalidation par Houssem nécessaires", fichier));
   }
 
@@ -650,20 +675,25 @@ export function controlerEncadre(page: PageEditoriale, lignes: readonly LigneRes
   const $ = cheerio.load(html);
   const encadre = $('[data-encadre-decision]').first();
   const styleMasque = (style: string | undefined): boolean => /display\s*:\s*none|visibility\s*:\s*hidden/i.test(style ?? '');
-  if (
-    encadre.is('[hidden], [aria-hidden="true"]') ||
-    styleMasque(encadre.attr('style')) ||
-    encadre.find('details, [hidden], [aria-hidden="true"]').length > 0 ||
-    encadre.find('[style]').toArray().some((el) => styleMasque($(el).attr('style')))
-  ) {
-    constats.push(erreur('R9-ENCADRE-MASQUE', "l'encadré de décision affiche tout son contenu : ni bloc à déplier (details), ni contenu masqué (hidden, aria-hidden, display:none)", fichier));
+  const masque = (selection: { is(selecteur: string): boolean; attr(nom: string): string | undefined; text(): string }): boolean =>
+    selection.is('[hidden], details, dialog, template') ||
+    styleMasque(selection.attr('style')) ||
+    (selection.is('[aria-hidden="true"]') && selection.text().trim() !== '');
+  const ancetres = encadre.parents().toArray().map((el) => $(el));
+  const dedans = encadre.find('*').toArray().map((el) => $(el));
+  if ([encadre, ...ancetres, ...dedans].some(masque)) {
+    constats.push(erreur('R9-ENCADRE-MASQUE', "l'encadré de décision s'affiche en entier : ni lui ni un bloc qui le contient ou qu'il contient n'est masqué (hidden, display:none, visibility:hidden, details, dialog, template, aria-hidden sur du texte)", fichier));
   }
-  const texteEncadre = normaliserRecherche(encadre.text());
-  const manquants = [page.question_decision, page.cout_probable.tranche].filter((t) => !texteEncadre.includes(normaliserRecherche(t)));
+  if (encadre.find('[data-emplacement-pub], .adsbygoogle').length > 0) {
+    constats.push(erreur('R9-PUB-AVANT-ENCADRE', "un emplacement publicitaire est placé dans l'encadré de décision", fichier));
+  }
+  const texteEncadre = normaliserTexte(encadre.text());
+  const manquants = [page.question_decision, page.cout_probable.tranche].filter((t) => !texteEncadre.includes(normaliserTexte(t)));
   if (manquants.length > 0) {
     constats.push(erreur('R9-ENCADRE-CONTENU', `l'encadré de décision n'affiche pas : ${manquants.map((t) => `« ${t} »`).join(', ')}`, fichier));
   }
-  // Une ligne affichée par situation, dans l'ordre, avec son propre niveau (data-verdict, data-urgence) et ses textes.
+  // Une ligne affichée par situation, dans l'ordre, avec son propre niveau (data-verdict, data-urgence) et ses textes,
+  // sans le libellé d'un autre niveau.
   const affichees = encadre.find('[data-encadre-ligne]').toArray();
   if (affichees.length !== lignes.length) {
     constats.push(erreur('R9-ENCADRE-CONTENU', `l'encadré de décision affiche ${affichees.length} ligne(s) de situation (data-encadre-ligne) pour ${lignes.length} attendue(s)`, fichier));
@@ -675,11 +705,18 @@ export function controlerEncadre(page: PageEditoriale, lignes: readonly LigneRes
       if (element.attr('data-verdict') !== ligne.verdict || element.attr('data-urgence') !== ligne.urgence) {
         constats.push(erreur('R9-ENCADRE-CONTENU', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : data-verdict et data-urgence doivent valoir « ${ligne.verdict} » et « ${ligne.urgence} »`, fichier));
       }
-      const texteLigne = normaliserRecherche(element.text());
+      const texteLigne = normaliserTexte(element.text());
       const attendus = [ligne.situation, GRILLE_VERDICTS[ligne.verdict].libelle, GRILLE_URGENCES[ligne.urgence].libelle, ligne.action, ...(ligne.ecart_marques !== undefined ? [ligne.ecart_marques] : [])];
-      const absents = attendus.filter((t) => !texteLigne.includes(normaliserRecherche(t)));
+      const absents = attendus.filter((t) => !texteLigne.includes(normaliserTexte(t)));
       if (absents.length > 0) {
         constats.push(erreur('R9-ENCADRE-CONTENU', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : n'affiche pas ${absents.map((t) => `« ${t} »`).join(', ')}`, fichier));
+      }
+      const autres = [
+        ...Object.entries(GRILLE_VERDICTS).filter(([v]) => v !== ligne.verdict).map(([, n]) => n.libelle),
+        ...Object.entries(GRILLE_URGENCES).filter(([u]) => u !== ligne.urgence).map(([, n]) => n.libelle),
+      ].filter((libelle) => texteLigne.includes(normaliserTexte(libelle)));
+      if (autres.length > 0) {
+        constats.push(erreur('R9-ENCADRE-CONTENU', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : affiche aussi le libellé d'un autre niveau (${autres.map((t) => `« ${t} »`).join(', ')})`, fichier));
       }
     });
   }
