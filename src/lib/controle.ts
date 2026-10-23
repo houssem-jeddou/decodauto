@@ -239,6 +239,8 @@ function sourcesDeLaPage(page: PageEditoriale): { libelle: string; ids: readonly
 export interface ResultatPage {
   constats: Constat[];
   page?: PageEditoriale;
+  /** Identifiant de la page (socle compris), dès que son frontmatter passe le schéma. */
+  id?: string;
 }
 
 /**
@@ -260,7 +262,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
       constats.push(erreur('R7-PLAN-TYPE', `le plan du site range « ${socle.id} » dans le type « ${ligne.type} », la page est de type « socle »`, fichier));
     }
     if (html !== undefined) constats.push(...controlerHtmlSocle(socle.title, html, fichier));
-    return { constats };
+    return { constats, id: socle.id };
   }
 
   const page = lecture.data as PageEditoriale;
@@ -378,7 +380,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   // Page construite.
   if (html !== undefined) constats.push(...controlerHtml(page, html, fichier));
 
-  return { constats, page };
+  return { constats, page, id: page.id };
 }
 
 // ---- Page construite -----------------------------------------------------------------------------
@@ -446,9 +448,11 @@ export function controlerHtmlSocle(titre: string, html: string, fichier: string)
 export interface PageControlee {
   type: TypeAvecSocle;
   fichier: string;
-  /** Page analysée (absente si le schéma a échoué). */
+  /** Page analysée (absente si le schéma a échoué, et pour le socle). */
   page?: PageEditoriale;
-  /** Adresses internes citées dans le texte de la page (voir adressesDansLeTexte). */
+  /** Identifiant de la page, socle compris (absent si le schéma a échoué). */
+  id?: string | undefined;
+  /** Adresses des pages du site citées dans le texte de la page (voir adressesDansLeTexte). */
   adressesTexte?: readonly string[] | undefined;
 }
 
@@ -463,19 +467,21 @@ export function controlerEnsemble(pages: readonly PageControlee[], ctx: Contexte
     parId.set(p.page.id, p);
   }
 
-  // Les liens entre pages viennent du plan du site. Un lien écrit dans le texte ne mène qu'à une page liée
-  // dans le plan (lien déclaré, page mère ou page enfant).
+  // Les liens entre pages viennent du plan du site. Un lien écrit dans le texte d'une page, socle compris,
+  // ne mène qu'à une page liée dans le plan (lien déclaré, page mère ou page enfant).
   const index = indexerPlan(ctx.plan);
   for (const p of pages) {
-    if (p.page === undefined) continue;
-    constats.push(...controlerLiensDuTexte(p.page.id, p.adressesTexte ?? [], index, p.fichier));
+    const id = p.page?.id ?? p.id;
+    if (id === undefined) continue;
+    constats.push(...controlerLiensDuTexte(id, p.adressesTexte ?? [], index, p.fichier));
   }
 
   // Chaque voyant de la base est rattaché à une seule page, qui doit le déclarer.
   for (const voyant of ctx.voyants.values()) {
     const rattachee = parId.get(voyant.page);
     if (rattachee?.page === undefined) {
-      constats.push(alerte('R1-RATTACHEMENT', `voyant « ${voyant.id} » : la page rattachée « ${voyant.page} » n'est pas encore écrite`, 'data/voyants.json'));
+      // Page absente du plan : déjà une erreur (controlerVoyantsDansLePlan). Sinon, pas encore écrite : alerte.
+      if (ctx.plan.has(voyant.page)) constats.push(alerte('R1-RATTACHEMENT', `voyant « ${voyant.id} » : la page rattachée « ${voyant.page} » n'est pas encore écrite`, 'data/voyants.json'));
     } else if (!(rattachee.page.voyants ?? []).includes(voyant.id)) {
       constats.push(erreur('R1-RATTACHEMENT', `voyant « ${voyant.id} » : la page rattachée « ${voyant.page} » ne le déclare pas dans « voyants »`, rattachee.fichier));
     }

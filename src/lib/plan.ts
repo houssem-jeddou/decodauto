@@ -170,23 +170,38 @@ export function controlerVoyantsDansLePlan(plan: Plan, voyants: Iterable<{ id: s
   return constats;
 }
 
+/** Noms de domaine du site : un lien absolu vers l'un d'eux est un lien interne. */
+const HOTES_DU_SITE = new Set(['decodauto.com', 'www.decodauto.com']);
+
 /**
- * Adresses internes citées dans le texte Markdown d'une page : liens [texte](/adresse/), références
- * [texte]: /adresse/ et attributs href="/adresse/". Ancre et paramètres sont retirés.
+ * Adresses des pages du site citées dans le texte Markdown d'une page : liens [texte](cible), références
+ * [texte]: cible et balises <a href="cible">. Les cibles relatives sont résolues depuis l'adresse de la page,
+ * les liens absolus vers decodauto.com sont internes. Sont ignorés : les images, le code (blocs et `code`),
+ * les ancres seules, les autres sites et protocoles, et les fichiers (image, PDF…), contrôlés par npm run liens.
  */
-export function adressesDansLeTexte(corps: string): string[] {
+export function adressesDansLeTexte(corps: string, adressePage = '/'): string[] {
+  const texte = corps.replace(/^(```|~~~)[\s\S]*?^\1[^\n]*$/gm, '').replace(/`[^`\n]*`/g, '');
   const motifs = [
-    /\]\(\s*<?(\/[^)\s>]*)>?(?:\s+["'(][^)]*)?\)/g,
-    /^\s{0,3}\[[^\]]+\]:\s*<?(\/[^\s>]*)>?/gm,
-    /href\s*=\s*["'](\/[^"']*)["']/g,
+    /(?<!!)\[[^\]]*\]\(\s*<?([^)\s>]+)>?(?:\s+["'(][^)]*)?\)/g,
+    /^\s{0,3}\[[^\]]+\]:\s*<?([^\s>]+)>?/gm,
+    /<a\b[^>]*?\bhref\s*=\s*["']([^"']+)["']/gi,
   ];
+  const base = new URL(adressePage, 'https://decodauto.com');
   const adresses: string[] = [];
   for (const motif of motifs) {
-    for (const correspondance of corps.matchAll(motif)) {
-      const brut = correspondance[1] ?? '';
-      if (brut.startsWith('//')) continue; // adresse sans protocole : lien externe
-      const adresse = brut.split('#')[0]?.split('?')[0] ?? '';
-      if (adresse !== '') adresses.push(adresse);
+    for (const correspondance of texte.matchAll(motif)) {
+      const cible = correspondance[1] ?? '';
+      if (cible === '' || cible.startsWith('#')) continue;
+      let url: URL;
+      try {
+        url = new URL(cible, base);
+      } catch {
+        continue;
+      }
+      if ((url.protocol !== 'https:' && url.protocol !== 'http:') || !HOTES_DU_SITE.has(url.hostname)) continue;
+      const dernier = url.pathname.split('/').pop() ?? '';
+      if (dernier.includes('.')) continue; // fichier : contrôlé par npm run liens
+      adresses.push(url.pathname);
     }
   }
   return adresses;
