@@ -1,6 +1,7 @@
-# Structure des contenus — decodauto.com (v1)
+# Structure des contenus — decodauto.com (v2)
 
 Validée par Houssem le 22/10/2026, après trois revues indépendantes. Étape 3, livrable « Structure des contenus ».
+v2 (23/10/2026, accord de Houssem) : ajout du champ facultatif `voyant_lie` dans une ligne de situation saisie (voir le champ situations et la règle 2).
 
 Ce fichier est la source de vérité jusqu'à ce que Claude Code le transforme en schémas dans le dépôt. Ensuite, ce sont **les schémas du dépôt qui font foi**, et ce fichier est archivé. Toute modification passe par une demande de changement (03).
 
@@ -15,7 +16,7 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 | title, h1, description | ✅ | saisis | Référencement. |
 | image | recommandé | saisi | Image de la page. Google la recommande pour les articles. |
 | question_decision | ✅ | saisi | Exemple : « Puis-je rouler avec le voyant d'huile allumé ? ». « Sans objet » est interdit hors socle. |
-| situations | ✅ | saisi, ou repris de la base | Liste de {situation, verdict, urgence, **action**, sources}. Voir les règles 1 et 2 ci-dessous. |
+| situations | ✅ | saisi, ou repris de la base | Liste de {situation, verdict, urgence, **action**, sources}, avec en option `voyant_lie` (identifiant d'un voyant déclaré dans `voyants`) quand la ligne saisie concerne ce voyant. Voir les règles 1 et 2 ci-dessous. |
 | voyants | si la page traite un ou plusieurs voyants | saisi | Liste d'identifiants de la base voyants. Utilisable dans **tous** les types de page. |
 | cout_probable | ✅ | saisi | Échelle fermée en ordres de grandeur, avec une base de calcul et des sources du registre. Aucun prix d'enseigne, aucun prix de prestation (règle 5 de 01). Les tranches, et le niveau où le coût est porté (situation ou cause), seront fixés à l'étape 6. |
 | sources | ✅ | saisi | Identifiants du registre des sources (étape 5). Jamais de source recopiée dans la page. |
@@ -51,7 +52,7 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 
 ## 3. Règles de contrôle (contrôles automatiques)
 1. **Verdicts des voyants.** Les lignes de verdict qui portent sur un voyant déclaré viennent de la base voyants. Elles ne peuvent pas être saisies dans la page, quel que soit son type. Chaque voyant de la base est rattaché à une seule page, en plus de l'outil.
-2. **Cohérence avec la base.** Un code ou une panne lié à un voyant ne peut pas afficher un verdict moins grave que celui de la base.
+2. **Cohérence avec la base.** Une ligne saisie qui porte `voyant_lie` ne peut pas afficher un verdict moins grave que celui de ce voyant dans la base. Le voyant doit figurer dans la liste `voyants` de la page. Liste de recette : toute ligne saisie qui parle d'un voyant porte `voyant_lie` (vérification humaine).
 3. **Sources.** Chaque verdict de sécurité cite au moins une source de première main.
 4. **Validation.** Une empreinte de validation qui ne correspond plus bloque la construction. La version déjà en ligne reste en place : on ne retire jamais une page. Corriger une faute de frappe ne demande pas de revalidation.
 5. **Revue.** Une date de revue dépassée déclenche une alerte, pas un blocage.
