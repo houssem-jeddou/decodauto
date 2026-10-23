@@ -61,4 +61,4 @@ Non vérifiable par machine (liste de recette) : un recouvrement de sens entre d
 | LIEN-CASSE / LIEN-SANS-BARRE / LIEN-ANCRE | Liens internes (`npm run liens`) |
 
 ## Empreinte de validation
-`validation` = SHA-256 de la liste `{verdict, urgence, action, sources}` des lignes **saisies** de la page (`src/lib/empreinte.ts`). La casse, les espaces et les apostrophes typographiques de `action` n'ont pas d'effet ; toute autre modification de ces quatre champs demande une revalidation par Houssem. Le reste du texte de la page peut être corrigé librement.
+`validation` = SHA-256 de la liste `{verdict, urgence, action, sources}` des lignes **saisies** de la page (`src/lib/empreinte.ts`). La casse, les espaces et les apostrophes typographiques de `action` n'ont pas d'effet ; toute autre modification de ces quatre champs demande une revalidation par Houssem. Le reste du texte de la page peut être corrigé librement, sauf l'encadré de décision, que Houssem relit avant publication (docs/03, règle 7).

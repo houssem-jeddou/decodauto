@@ -24,7 +24,7 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 | element_unique | ✅ | saisi | Arbre de décision, tableau, outil ou photo réelle. Sa présence est vérifiée **dans la page construite**. |
 | liens | — | **calculé** depuis le plan du site | Champ supprimé des pages en v3. Les liens viennent du plan du site (section 4). |
 | auteur | ✅ | saisi | Renvoie à la fiche auteur de la page « à propos ». |
-| relecteur | conditionnel | saisi | Affiché seulement s'il existe. Dépend de la décision ouverte (mécanicien ou sources seules). |
+| relecteur | — | — | Décision du 23/10/2026 : pas de relecteur extérieur. Le champ facultatif reste dans le schéma mais n'est pas utilisé ; le retirer, ou contrôler son absence, passerait par une demande de changement. La fiabilité repose sur les sources citées et la validation de Houssem (03, règles 7 et 10). |
 | date_publication, date_modification, date_revue, prochaine_revue | ✅ | saisies ou calculées | date_modification = dernière modification réelle, distincte de la revue. Piste à tester : la tirer de l'historique Git. |
 | adresse, theme | ✅ | **calculés** depuis le plan du site | Jamais saisis. |
 | niveau_securite | ✅ | **calculé** | Reprend la situation la plus grave de la page. |

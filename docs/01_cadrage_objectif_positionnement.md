@@ -37,9 +37,9 @@ En tête des résultats aujourd'hui : enseignes qui vendent leur intervention, m
 - Périmètre figé : un seul lot de 42 pages (outil voyants et socle compris), 4 thèmes, après trois revues indépendantes.
 - Électrique et hybride hors périmètre (recherches d'achat de véhicule et de bornes, pas d'alertes).
 - Pas d'achat de lecteurs OBD : pas de comparatif de valises.
-- Plan d'avancement corrigé validé : fondations d'abord, base voyants comme source unique, publication en 3 vagues (A ≤ 31/10, B ≈ 07/11, C ≈ 14/11).
+- Plan d'avancement corrigé validé : fondations d'abord, base voyants comme source unique, publication en 3 vagues (A ≤ 31/10, B ≈ 07/11, C ≈ 14/11). Depuis le 23/10/2026 (03 v3), ces dates sont des cibles : 03 vise le 31/10 pour un minimum en ligne, et le journal tient la prévision.
+- Relecteur (23/10/2026) : pas de mécanicien. Les verdicts reposent sur des sources de première main citées (notices de plusieurs marques), validés par Houssem, qui relit l'encadré de décision de chaque page et porte la responsabilité éditoriale.
 - Nom de domaine : decodauto.com (22/10/2026 ; aucune antériorité trouvée sur TMview, aucune marque de constructeur).
 
 ## Décisions ouvertes
-- Relecteur mécanicien payé (quelques heures) pour les voyants et les pannes, ou uniquement des sources officielles citées.
 - Statut pour les mentions légales et encaissement d'AdSense depuis la Tunisie (à vérifier).
