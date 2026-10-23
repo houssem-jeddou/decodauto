@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 23/10/2026 (16 h 30)
+Dernière mise à jour : 23/10/2026 (19 h)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -13,7 +13,7 @@ Dernière mise à jour : 23/10/2026 (16 h 30)
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ▶ En cours : d'abord la demande de changement sur la structure (voir plus bas) | – |
 | 6 | Charte et modèles de pages | À faire | – |
-| 7 | Socle technique | À faire, sur la piste technique (03, règle 12) ; condition d'entrée : statut juridique tranché | – |
+| 7 | Socle technique | À faire, sur la piste technique (03, règle 12) ; seules les mentions légales attendent le statut juridique | – |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
 | 10 | Vague B | À faire | – |
@@ -24,11 +24,22 @@ Dernière mise à jour : 23/10/2026 (16 h 30)
 | Étape | Cible (03) | Prévision au 23/10 | Dépend de |
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | demande de changement 24/10 ; registre et base 24–26/10 ; paquet de validation 26–27/10 | disponibilité de Houssem pour valider ; notices accessibles en ligne |
-| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes 24–25/10 ; étape 7 du 26 au 28/10 si le statut est tranché d'ici le 26/10 | statut juridique (condition d'entrée de l'étape 7) |
+| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes 24–25/10 ; étape 7 du 26 au 28/10 | statut juridique, pour les seules mentions légales |
 | 6. Charte et modèles | 27–29/10 | 27–29/10 | porte de l'étape 5 ; source des résultats Google depuis la France choisie |
 | 8. Vague A | 29/10–01/11 | 29/10–02/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
 | 9. Mise en ligne du minimum | 31/10 | entre le 31/10 et le 03/11 | portes 7 et 8 ; sécurité des comptes |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 10–14/11 / ≈ 17–21/11 | mise en ligne de la vague A ; briefs des lots |
+
+**Séances de validation de Houssem** (le vrai goulot), d'ici le 03/11 :
+1. demande de changement de structure et marques de référence, vers le 24/10 ;
+2. statut juridique, avant les mentions légales ;
+3. paquet de validation de la base voyants et porte 5, vers le 26–27/10 ;
+4. source des résultats Google, avant l'étape 6 ;
+5. porte 6, vers le 29/10 ;
+6. porte 7 ;
+7. demande de changement des requêtes absentes, juste avant l'étape 8 ;
+8. paquet et encadrés de la vague A, et porte 8 ;
+9. go / no-go et porte 9, avec GitHub Pro, les comptes et le domaine sécurisés.
 
 ## Étape 4, Plan du site : livrables
 - [x] **Rattachement des mots-clés** : les 1 053 mots-clés de 05 (921 comptés, 132 variantes) sont rattachés chacun à une seule page. Le plan compte 42 pages (22 en vague A, 11 en B, 9 en C), comme dans 02. Douze cas limites sont tranchés (09).
@@ -52,8 +63,9 @@ Dernière mise à jour : 23/10/2026 (16 h 30)
 | Validation de Houssem | ✅ | 23/10/2026 |
 
 ## Décisions ouvertes (à trancher par Houssem)
-- **Instructions du projet** : coller le texte v2 fourni le 23/10 (sources de vérité à jour, piste technique, sourçage multi-marques, transparence, circuit des documents).
-- **Statut juridique** pour les mentions légales : condition d'entrée de l'étape 7. À trancher d'ici le 26/10 pour tenir le minimum ; ou décider que la condition ne vise que les mentions légales, le reste de l'étape 7 avançant.
+- **Instructions du projet** : coller le texte v2 fourni le 23/10 (sources de vérité à jour, piste technique, correction urgente, sourçage multi-marques, transparence, circuit des documents).
+- **Statut juridique** : à trancher avant de rédiger les mentions légales (étape 7) ; le reste de l'étape 7 avance sans l'attendre (décision du 23/10, 19 h).
+- **GitHub Pro** : souscrire avant la porte de l'étape 9, puis protéger `main` (pull request obligatoire, contrôles exigés, aucun contournement).
 - **Marques de référence** pour les verdicts (nombre et liste) : proposées dans la demande de changement du début de l'étape 5.
 - **Source des résultats Google relevés depuis la France** pour les briefs (Semrush base France, ou relevé manuel) : avant l'étape 6.
 - **Auteur** : nom réel acté le 23/10 ; parcours à fournir pour la page « à propos » (étape 7 ou 8).
@@ -73,8 +85,23 @@ Dernière mise à jour : 23/10/2026 (16 h 30)
   5. statut avant l'étape 7, recette avant chaque fusion des vagues B et C, emplacements publicitaires non affichés avant AdSense, seuil Lighthouse avec publicité à l'étape 12, sécurité des comptes à l'étape 9, indicateurs et notoriété sans liens artificiels à l'étape 12.
 
   01, 02, 08, CLAUDE.md et le texte des instructions du projet ont été alignés.
+- 23/10/2026 (19 h), après l'audit final du plan et des règles : Houssem accepte tout. 03 passe en v4 :
+  - grille des niveaux de verdict et d'urgence, avec leur contrôle de cohérence, dès l'étape 5 ;
+  - encadré de décision repéré et contrôlé, empreinte étendue à la question de décision et au coût ;
+  - règle 13 (correction urgente) et lien « Signaler une erreur » ;
+  - étape 7 qui n'attend le statut que pour les mentions légales ;
+  - gravité lisible sans la seule couleur ;
+  - GitHub Pro et `main` protégée avant la mise en ligne ;
+  - double authentification étendue aux comptes Claude et Microsoft ;
+  - renouvellement et verrou du domaine ;
+  - réglages Cloudflare et soumission du plan du site ;
+  - ads.txt ;
+  - libellés des codes défaut en source secondaire.
+
+  Pas de compte GitHub séparé pour Claude.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 23/10 (soir), audit final du plan et des règles (nouveau relecteur, sur la dernière version de tous les documents) : « à corriger » sur cinq manques importants (niveaux de verdict non définis, ouverture sur la décision non contrôlée, pas de correction urgente, `main` non protégée, réglages hors dépôt et découverte du domaine absents du plan). Tout est intégré dans 03 v4. Écarté : un compte GitHub séparé pour Claude (facultatif, la protection de `main` suffit).
 - 22/10 : instructions du projet revues (champ de la revue précisé, format anti-complaisance avec preuves, deux revues maximum, alignement avec 03 et 04, rythme de mise à jour du journal).
 - 22/10 (soir), choix technique, deux revues :
   - déploiement conditionné aux contrôles ;
@@ -111,28 +138,31 @@ Dernière mise à jour : 23/10/2026 (16 h 30)
 - 23/10, revue globale des étapes 1 à 4, deux relecteurs (trafic et utilité avec la base 06 ; fondations et production) : « acceptable », rien de bloquant. Exclusions, codes retenus, vagues, adresses et liens confirmés. Apports : 03 v2 (voir l'historique), règle des liens allégée, demandes de changement à ouvrir à l'étape 5 (empreinte, pictogrammes), notes pour l'étape 6, idées reportées complétées.
 
 ## À ouvrir au début de l'étape 5 (une demande de changement sur la structure, avant toute validation)
-- **Catégories de sources** : ajouter le règlement ONU n° 121 (symboles et couleurs des voyants), RappelConso (rappels) et les normes qui définissent les codes défaut ; décider lesquelles sont de première main.
+- **Catégories de sources** : ajouter le règlement ONU n° 121 (symboles et couleurs des voyants) et RappelConso (rappels), comme sources de première main ; les libellés des codes défaut restent une source secondaire (voir plus bas).
 - **Plusieurs marques par verdict** : contrôle automatique du nombre de marques distinctes parmi les notices citées par chaque ligne de la base voyants, nombre et liste fixés par Houssem.
 - **Registre et citations** : marque de chaque notice au registre ; chaque source citée par une ligne de la base avec sa page ou section et son extrait (contrôlés), pour que la porte de l'étape 5 soit vérifiable.
+- **Niveaux de verdict et d'urgence** : une grille qui fait passer de la formulation de la notice au verdict et à l'urgence, avec une définition de chaque niveau pour le lecteur, et le contrôle de leur cohérence (ex. « arrêt immédiat » avec l'urgence « aucune » est refusé).
+- **Encadré de décision** : repère `data-encadre-decision` contrôlé dans la page construite (premier bloc après le H1, aucun emplacement publicitaire avant) ; empreinte étendue à la question de décision et au coût probable.
+- **Données structurées** : libellé court (fil d'Ariane, ancres), texte alternatif de l'image, lien du profil auteur.
+- **Codes défaut** : libellés en source secondaire (norme ISO 15031-6 non achetée) ; le verdict vient des notices et de la ligne « voyant moteur ».
 - **Empreinte de validation** : verrouiller aussi la situation (et `voyant_lie`) des lignes saisies, et la situation, la couleur et le nom des lignes de la base voyants. Aujourd'hui, on peut changer la situation d'une ligne ou la couleur d'un voyant sans revalidation. Accents et ponctuation ignorés, pour qu'une coquille ne force pas de revalidation ; aligner la règle 4 de 08. Coût nul tant que la base est vide.
 - **Pictogrammes** : champ `pictogramme` dans la base voyants (un symbole partagé par plusieurs états), contrôle du fichier SVG, et dessin d'environ 15 à 20 symboles redessinés avant la vague A.
 
 ## Pour l'étape 6
 - Charte éditoriale : base de calcul du coût probable et ses tranches (la source doit exister dans le registre), ligne de transparence, section méthode de « à propos ».
-- Proposition, à décider : codage de la gravité lisible sans la seule couleur (accessibilité).
+- Gravité lisible sans la seule couleur (obligatoire, 03 v4) et lien « Signaler une erreur » dans chaque modèle.
 - Brief de chaque page généré depuis le plan, avec les résultats Google relevés depuis la France.
 - Proposition, à décider : photos réelles pour les tutos des vagues B et C.
-- Contrôles peu coûteux : title, H1 ou description en double entre deux pages ; dates incohérentes ; verdict et urgence contradictoires (ex. « arrêt immédiat » avec urgence « aucune »).
-- Champs pour les données structurées : libellé court (fil d'Ariane, ancres), texte alternatif de l'image, lien du profil auteur .
+- Contrôles peu coûteux : title, H1 ou description en double entre deux pages ; dates incohérentes (la cohérence entre verdict et urgence est avancée à l'étape 5).
 - Élément unique en outil quand la réponse tient en un chiffre (usure, date de fabrication, délai de contre-visite), car l'aperçu IA la donne sans clic.
 - Avant rédaction : comparer les résultats Google de « voyant orange voiture » (outil) et « voyant moteur orange » ; titre des fumées avec la fumée noire, titre du bruit moteur avec le claquement.
 - Volumes à lire comme des plafonds : dossier PureTech (94 % de noms de moteur ou de modèle), viscosités (surtout intention d'achat), outil voyants (30 % de requêtes « + modèle »), batterie (34 % d'achat par capacité).
 
 ## Points ouverts (non bloquants)
 - **Requêtes absentes de 06** : une vingtaine de requêtes suggérées en premier par Google n'y figurent pas (« voyant moteur rouge », « fumée blanche voiture », « voiture qui fume blanc / noir », « pourquoi ma voiture chauffe », « direction assistée », « fap bouché », « puretech fiabilité / avis / chaîne »…). Toutes relèvent de pages prévues. Mesure reportée par Houssem ; à faire juste avant l'étape 8 (03 v3), avec le rattachement des requêtes identiques classées hors périmètre (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture » et environ 38 lignes), dans une seule demande de changement.
-- **Statut et AdSense** : AdSense paie en Tunisie par virement. Le statut des mentions légales reste à trancher (condition d'entrée de l'étape 7), et il faut vérifier que l'activité déclarée du statut d'auto-entrepreneur couvre des recettes publicitaires.
+- **Statut et AdSense** : AdSense paie en Tunisie par virement. Le statut juridique reste à trancher avant de rédiger les mentions légales (étape 7), et il faut vérifier que l'activité déclarée du statut d'auto-entrepreneur couvre des recettes publicitaires.
 - **Règlement européen sur l'IA (article 50)** : obligation de signaler un texte généré par IA qui informe le public sur une question d'intérêt public, sauf relecture humaine et responsabilité éditoriale. Il est incertain que la relecture des seuls encadrés, avec la responsabilité éditoriale de Houssem, suffise à cette exception ; la ligne de transparence sur chaque page devrait couvrir l'obligation de signalement. Sa portée pour un éditeur établi en Tunisie reste aussi incertaine.
-- **OVH** : activer la double authentification sur le compte ; vérifier que le renouvellement du domaine est automatique. La sécurité des comptes est vérifiée à la porte de l'étape 9.
+- **OVH** : activer la double authentification sur le compte ; vérifier que le renouvellement du domaine est automatique et activer le verrou de transfert. Le tout est vérifié à la porte de l'étape 9 (03 v4).
 - **DNSSEC** : désactivation chez OVH en cours. Au 23/10, aucun enregistrement DS n'est publié pour decodauto.com.
 - **Application GitHub de Claude** : une demande de mise à jour des permissions attend la décision de Houssem.
 - **Contrôle hebdomadaire** : il n'a encore jamais tourné. Premier passage le lundi 26/10.
@@ -145,16 +175,11 @@ Dernière mise à jour : 23/10/2026 (16 h 30)
 
 ## Idées reportées
 - Ancien lot 2 (codes OBD supplémentaires, batterie et pression par modèle, freins, distribution, embrayage, AdBlue, Crit'Air, voiture qui tremble…) : à réévaluer avec les données de Search Console.
-- Frais kilométriques : décision avant février 2027.
+- Frais kilométriques : décision en décembre 2026 (aligné sur 02).
 - Pages « thème » : non retenues à l'étape 4 ; à réévaluer quand les thèmes compteront plus de pages.
 - Alertes présentes dans 06, hors périmètre (revue globale du 23/10) : voiture qui tremble (≈ 5 056 / mois), périodicité du contrôle technique (≈ 9 480), boîte de vitesse (≈ 3 476), bruit de courroie (≈ 2 212), embrayage qui patine (≈ 1 264). À réévaluer avec les données de Search Console.
 - Étape 7 : `fetch-depth: 0` dans la CI si `date_modification` est tirée de l'historique Git.
-- Réglages SEO et Cloudflare pour les étapes 7 et 9 :
-  - **Robots d'IA** : ne jamais bloquer l'entraînement « sur les pages avec pub » (Googlebot et Bingbot sont classés comme robots mixtes). Autoriser « Recherche » et « Agent ». Désactiver « Bot Fight Mode ».
-  - **Redirections, canonical, recette hors production** : désormais inscrits aux étapes 7 et 9 de 03 v2.
-  - **Outil voyants** : lisible sans JavaScript.
-  - **Indexation** : IndexNow pour Bing ; plan du site avec la date de dernière modification réelle.
-  - **Rocket Loader** : à ne pas activer.
+- Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
 - 23/10/2026, acceptée : 08 v2, ajout du champ facultatif `voyant_lie` dans une ligne de situation saisie. Raison : relier la ligne à son voyant pour la comparer à la base. Impact : schémas déjà conformes (PR #1). Contrôles : CI verte.

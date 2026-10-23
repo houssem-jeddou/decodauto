@@ -10,5 +10,6 @@ Copie des sources de vérité du projet (projet Claude « Site Voiture $$ »), d
 - 03_plan_avancement_et_regles.md : étapes, portes de sortie, règles anti-régression
 - 04_journal_avancement.md : état d'avancement
 - 05_mots_cles_perimetre.csv : mots-clés du périmètre
+- 07_resultats_google_serp_autocompletion.md : résultats et suggestions Google relevés (depuis la Tunisie, le 22/10/2026)
 - 08_structure_contenus.md : structure des contenus (types de pages et champs)
 - 09_plan_du_site.md : plan du site, vue lisible (pages, adresses, liens, règles de rattachement)
