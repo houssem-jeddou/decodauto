@@ -1,0 +1,181 @@
+SOURCE : Renault Clio 5 phase 2 — Notice d'utilisation (réf. 1457-3, FRA), PDF publié par Renault sur son site des notices :
+https://www.user-manual.renault.com/sites/renault/files/Clio_5_ph2_-_1457-3_FRA.pdf (424 pages)
+Trouvé depuis https://www.user-manual.renault.com/fr/notice/20010/pdf (« Télécharger le PDF »), lien « voir les notices » de renault.fr.
+Texte extrait du PDF par pdf.js (navigateur), sans retouche ; [...] = passage coupé. « PDF n » = page du fichier ; page imprimée = n − 2.
+Les symboles des témoins sont des glyphes non extraits (blancs dans le texte) : « accompagné du témoin  » = témoin STOP ou Service selon le contexte.
+
+##### PDF 138 (p. 136) Témoins lumineux : principes
+[témoin Service] Le témoin nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement .
+Le non-respect de cette préconisation risque d'entraîner un endommagement du véhicule.
+[témoin STOP] Le témoin vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation.
+Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.
+
+##### PDF 139-141 (p. 137-139) Témoins lumineux
+Témoin d' airbag
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint après quelques secondes.
+S'il ne s'allume pas à la mise sous contact ou s'il s'allume moteur allumé, il signale une défaillance du système.
+Consultez au plus tôt un Représentant de la marque.
+Témoin d'arrêt impératif
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint dès que le moteur tourne.
+Il s'allume conjointement à d'autres témoins et/ou messages, et est accompagné d'un signal sonore.
+Il vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation.
+Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.
+Témoin d'incident sur circuit de freinage
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint après quelques secondes.
+S'il s'allume au freinage, accompagné du témoin et d'un signal sonore, c'est l'indice d'une baisse de niveau dans les circuits ou
+d'un incident sur le système de freinage.
+Arrêtez-vous et faites appel à un Représentant de la marque.
+Témoin de charge de batterie
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint après quelques secondes.
+S'il s'allume sur route accompagné du témoin et d'un signal sonore, cela indique une surcharge ou une décharge du circuit électrique.
+Arrêtez-vous et faites appel à un Représentant de la marque.
+Témoin de pression d'huile
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint après quelques secondes.
+S'il s'allume sur route, accompagné du témoin et d'un signal sonore, arrêtez-vous impérativement et coupez le contact.
+Vérifiez le niveau d'huile.
+Si le niveau est normal, cela provient d'une autre cause.
+Faites appel à un Représentant de la marque.
+Témoin de direction à assistance variable
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint après quelques secondes.
+S'il s'allume en roulant accompagné du témoin , cela indique une défaillance du système.
+Faites appel à un Représentant de la marque.
+[...]
+Témoin d'alerte
+S'il s'allume en rouge en roulage accompagné du témoin , il vous impose, pour votre sécurité, un arrêt impératif et immédiat
+compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.
+S'il s'allume en jaune en roulage accompagné du témoin , il nécessite un arrêt au plus tôt chez un Représentant de la marque en
+conduisant avec ménagement . Le non-respect de cette préconisation risque d'entraîner un endommagement du véhicule.
+Témoin de serrage du frein à main et du frein de parking assisté 🡺 190
+[...]
+Témoin d'alerte [Service]
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint dès que le moteur tourne.
+Il peut s'allumer conjointement à d'autres témoins et/ou messages au tableau de bord.
+Il nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement .
+Le non-respect de cette préconisation risque d'entraîner un endommagement du véhicule.
+Témoin de contrôle dynamique de conduite ( ESC ) et système antipatinage
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint après quelques secondes.
+Il existe plusieurs cas d'allumage du témoin 🡺 212 .
+Témoin de non-disponibilité de contrôle dynamique de conduite ( ESC ) et système antipatinage
+Témoin antiblocage des roues
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint après quelques secondes.
+S'il s'allume en roulant, il signale une défaillance du système d'antiblocage des roues.
+Le système de freinage est alors assuré comme sur un véhicule non équipé du système ABS.
+Consultez rapidement un Représentant de la marque.
+(p. 139)
+Témoin d'alerte du système filtre à particules 🡺 188 🡺 186
+Témoin d'alerte de niveau de réactif et d'anomalie du système de réduction des gaz d'échappement 🡺 159
+Témoin d'alerte de sous-gonflage des pneumatiques
+Il s'allume à la mise sous contact ou au démarrage du moteur puis s'éteint après quelques secondes 🡺 206 .
+Témoin de préchauffage (version Diesel)
+Contact mis, il doit s'allumer.
+Il indique que les bougies de préchauffage sont en fonctionnement.
+Il s'éteint quand le préchauffage est obtenu.
+Le moteur peut démarrer.
+Témoin de contrôle du système antipollution
+Pour les véhicules qui en sont équipés, il s'allume au démarrage moteur et, suivant véhicule, à la coupure du contact alors que le
+véhicule est en phase de veille moteur 🡺 176 puis il s'éteint.
+– S'il s'allume de façon continue, consultez au plus tôt un Représentant de la marque ;
+– s'il clignote, réduisez le régime moteur jusqu'à disparition du clignotement. Consultez au plus tôt un Représentant de la marque 🡺 199 .
+[...]
+Témoin d'alerte de température du liquide de refroidissement
+Il s'allume en bleu à la mise sous contact ou au démarrage du moteur.
+S'il devient rouge, arrêtez-vous et laissez tourner le moteur au ralenti une ou deux minutes.
+La température doit s'abaisser et le témoin repasser au bleu.
+Sinon arrêtez le moteur.
+Laissez-le refroidir avant de vérifier le liquide de refroidissement.
+Faites appel à un Représentant de la marque.
+[...]
+(p. 140) Sur l'afficheur : Airbag passager ON 🡺 106 ; Airbag passager OFF 🡺 106 [...]
+
+##### PDF 126 (p. 124) Ordinateur de bord : messages d'anomalies de fonctionnement
+Ils apparaissent avec le témoin et nécessitent un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.
+Le non-respect de cette préconisation risque d'entraîner un endommagement du véhicule.
+[...]
+« Filtre à gazole à purger » Indique une présence d'eau dans le filtre à gazole, consultez au plus tôt un Représentant de la marque.
+« Véhicule à contrôler » Indique une défaillance d'un des capteurs des pédales, du système de gestion de la batterie ou d'un capteur du niveau d'huile.
+« Airbag à contrôler » Indique une défaillance des systèmes de retenue complémentaire aux ceintures. En cas d'accident, ils risquent de ne pas se déclencher.
+« Antipollution à contrôler » – Indique une défaillance dans le système de dépollution du véhicule.
+– Indique une défaillance du système de réduction des gaz d'échappement lorsqu'il est accompagné du témoin 🡺 163 .
+
+##### PDF 127 (p. 125) Ordinateur de bord : messages d'alerte
+Ils apparaissent avec le témoin et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions
+de circulation. Arrêtez votre moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.
+Des exemples de messages d'alerte sont donnés ci-après.
+[...]
+« Risque casse moteur » Indique une défaillance de l'injection, une surchauffe du moteur du véhicule ou un problème grave au niveau du moteur.
+« Panne du système de freinage » Indique un problème du système de freinage.
+« Panne électrique DANGER » Indique un problème dans le circuit de charge de la batterie du véhicule (alternateur…).
+« Crevaison » Indique qu'au moins une des roues est crevée ou fortement sous-gonflée.
+« Panne de la direction » Indique un problème dans la direction.
+[...]
+
+##### PDF 165-169 (p. 163-167) Réservoir réactif (AdBlue)
+(p. 163) En cas d'alerte « XXX KM BLOCAGE REMPLIR ADBLUE », faites le plein de réactif et reportez-vous aux consignes de remplissage.
+Risque d'immobilisation du véhicule.
+(p. 166) Entretien/Autonomie — Témoins / Message / Que faire ?
+- « Prévoir AdBlue avant 2400 km » Lorsque le message s'affiche à la mise sous contact du moteur, il vous reste moins de 2400 km
+d'autonomie. Prévoyez d'effectuer ou de faire effectuer par un Représentant de la marque, le remplissage de réactif dans le réservoir.
+[témoin] s'allume. « Remplir AdBlue avant 1200 km » Lorsque le message s'affiche à la mise sous contact du moteur, il vous reste entre
+1200 km et 800 km d'autonomie. Prévoyez d'effectuer ou de faire effectuer par un Représentant de la marque, le remplissage de réactif
+dans le réservoir.
+[témoin] clignote. « XXX KM blocage remplir AdBlue » Le message s'affiche à la mise sous contact et se répète : – tous les 100 km
+environ, il vous reste entre 800 km et 200 km d'autonomie ; – tous les 50 km environ, il vous reste moins de 200 km d'autonomie .
+« 0 KM blocage remplir AdBlue » Le démarrage du moteur est impossible. Pour redémarrer, vous devez faire vous-même le plein de réactif
+dans le réservoir.
+Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible.
+(p. 167) Anomalies de fonctionnement du système — Témoins / Message / Interprétations
+[témoins] et [témoins] s'allument. « Antipollution à contrôler » « Qualité AdBlue à contrôler » « Injection AdBlue à contrôler »
+Indique une défaillance du système. Consultez un Représentant de la marque le plus tôt possible.
+[témoins] s'allument. « XXX KM blocage antipollution » Indique une défaillance du système et qu'il vous reste moins de 800 km à parcourir
+avant que le redémarrage du véhicule soit impossible . [...] Consultez un Représentant de la marque le plus tôt possible.
+[témoins] s'allument. « 0 KM blocage antipollution » Indique qu'après coupure du contact, le redémarrage du véhicule est impossible .
+Faites appel à un Représentant de la marque.
+
+##### PDF 188-191 (p. 186-189) Particularités des versions Diesel et essence : filtre à particules
+(p. 186, Diesel) Si le message « Antipollution à contrôler » s'affiche accompagné des témoins et , consultez rapidement un Représentant
+de la marque. [...]
+Filtre à particules [...] Suivant véhicule, le témoin affiché au tableau de bord indique un début de saturation et la nécessité de votre
+intervention pour procéder à un nettoyage du filtre.
+Pour cela, à l'apparition du témoin , continuez à rouler suivant les conditions de circulation et le respect des limitations de vitesse
+jusqu'à l'extinction du témoin. Si possible, ne laissez pas le régime moteur descendre en dessous de 2000 tours/min.
+Le témoin doit s'éteindre au bout de 10 à 20 minutes environ 🡺 126 .
+(p. 187) [...] En cas de saturation du filtre, le témoin et, suivant véhicule, le témoin s'allument au tableau de bord accompagnés du
+message « Injection à contrôler ». Dans ce cas, consultez un Représentant de la marque.
+Si le témoin et, suivant véhicule, le témoin s'allument accompagnés du message « Risque casse moteur », stoppez le véhicule, arrêtez le
+moteur et faites appel à un Représentant de la marque.
+(p. 188, essence) [...] provoquent un échauffement excessif du pot catalytique, en diminuent l'efficacité, peuvent amener sa destruction
+et entraîner des dommages thermiques sur le véhicule.
+Si vous constatez les anomalies de fonctionnement ci-dessus, faites effectuer par un Représentant de la marque les réparations nécessaires
+au plus vite.
+[...] Filtre à particules [...] à l'apparition du témoin , roulez dès que possible à une vitesse comprise entre 50 km/h et 110 km/h environ
+compatible avec les conditions de circulation et le respect des limitations de vitesse jusqu'à l'extinction du témoin.
+(p. 189) Si le témoin et, suivant véhicule, le témoin s'allument accompagnés du message « Risque casse moteur », stoppez le véhicule,
+arrêtez le moteur et faites appel à un Représentant de la marque.
+
+##### PDF 192-193 (p. 190-191) Frein de parking assisté
+[...] Le serrage du frein de parking assisté est confirmé par le message « Frein de parking serré » et le témoin au tableau de bord [...]
+
+##### PDF 201 (p. 199) Contrôle des gaz d'échappement
+[...] Ce témoin au tableau de bord indique les éventuelles défaillances du système :
+Il s'allume à la mise sous contact puis s'éteint au démarrage moteur.
+– S'il s'allume de façon continue, consultez au plus tôt un Représentant de la marque ;
+– s'il clignote, réduisez le régime moteur jusqu'à disparition du clignotement. Consultez au plus tôt un Représentant de la marque.
+
+##### PDF 208-210 (p. 206-208) Avertisseur de perte de pression des pneumatiques
+Le témoin 2 s'allume fixe au tableau de bord pour alerter le conducteur en cas de pression insuffisante (roue dégonflée, roue crevée...).
+[...] La perte soudaine de pression d'un pneumatique (éclatement d'un pneumatique...) peut ne pas être immédiatement détectée par le système.
+[Pas de consigne propre à l'allumage du témoin sur les pages 206 à 208 ; le message « Crevaison » est un message d'alerte, p. 125.]
+
+##### PDF 214-215 (p. 212-213) Dispositifs de correction et d'assistance à la conduite
+Anomalies de fonctionnement :
+– [ABS] et [Service] allumés au tableau de bord accompagnés des messages « ABS à contrôler », « Système freinage à contrôler » et
+« ESC à contrôler » : cela indique que l' ABS, l' ESC et l'aide au freinage d'urgence sont désactivés. Le freinage est toujours assuré ;
+– [quatre témoins] allumés au tableau de bord accompagnés du message « Panne du système de freinage » : cela indique une défaillance des
+dispositifs de freinage.
+Dans les deux cas, consultez un Représentant de la marque.
+[encadré] Votre freinage est partiellement assuré. Toutefois, il est dangereux de freiner brusquement et ceci vous impose un arrêt impératif
+et immédiat compatible avec les conditions de circulation. Faites appel à un Représentant de la marque.
+[...] Anomalies de fonctionnement [ESC]
+Lorsque le système détecte une anomalie de fonctionnement, le message « ESC à contrôler » et les témoins et s'affichent au tableau de bord.
+Dans ce cas, l'ESC et le système antipatinage sont désactivés.
+Consultez un Représentant de la marque.
