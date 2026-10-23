@@ -4,21 +4,12 @@
 //   --echouer-sur CODE : en plus des erreurs, fait échouer le script si une alerte porte ce code
 //                        (le workflow hebdomadaire l'utilise avec R5-REVUE-DEPASSEE pour être prévenu).
 // Variables : SITE_INDEXABLE, CONTROLE_DATE (AAAA-MM-JJ, pour les tests).
-import { appendFile, readFile } from 'node:fs/promises';
-import { join, resolve } from 'node:path';
+import { appendFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { argv, cwd, env, exit, stdout } from 'node:process';
-import {
-  construireContexte,
-  controlerEnsemble,
-  codeSortie,
-  controlerPage,
-  sontBloquants,
-  type Constat,
-  type PageControlee,
-} from '../src/lib/controle.ts';
+import { codeSortie, sontBloquants } from '../src/lib/controle.ts';
 import { modeIndexation } from '../src/lib/indexation.ts';
-import { auteursDuSocle, chargerDonnees, chargerPages } from './lib/charger.ts';
-import { controler404, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './lib/dist.ts';
+import { controlerSite } from './lib/controler-site.ts';
 
 const racine = cwd();
 const indice = argv.indexOf('--dist');
@@ -36,51 +27,7 @@ function aujourdhui(): Date {
   return new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate()));
 }
 
-const constats: Constat[] = [];
-
-// 1. Fichiers de données et base voyants.
-const donnees = await chargerDonnees(racine);
-const pagesLues = await chargerPages(racine);
-const { contexte, constats: constatsDonnees } = construireContexte(
-  { ...donnees, auteurs: auteursDuSocle(pagesLues) },
-  aujourdhui(),
-);
-constats.push(...constatsDonnees);
-
-// 2. Pages éditoriales : frontmatter et page construite.
-const controlees: PageControlee[] = [];
-for (const lue of pagesLues) {
-  if (lue.erreurLecture !== undefined) {
-    constats.push({ regle: 'R7-FORMAT', gravite: 'erreur', message: lue.erreurLecture, fichier: lue.fichier });
-    controlees.push({ type: lue.type, fichier: lue.fichier });
-    continue;
-  }
-  const id = (lue.brut as { id?: unknown } | null)?.id;
-  const adressePlan = typeof id === 'string' ? contexte.plan.get(id)?.adresse : undefined;
-  if (/^fixture/i.test(String(id)) || /^\/fixture/i.test(String(adressePlan ?? ''))) {
-    constats.push({ regle: 'FIXTURE-PUBLIEE', gravite: 'erreur', message: 'une page de test (fixture) ne doit jamais être dans src/content ni dans le plan du site', fichier: lue.fichier });
-  }
-
-  let html: string | undefined;
-  if (adressePlan !== undefined) {
-    try {
-      html = await readFile(join(dist, adressePlan, 'index.html'), 'utf8');
-    } catch {
-      constats.push({ regle: 'R7-PAGE-NON-CONSTRUITE', gravite: 'erreur', message: `la page construite ${adressePlan} est introuvable dans ${dist}`, fichier: lue.fichier });
-    }
-  }
-  const resultat = controlerPage({ type: lue.type, brut: lue.brut, fichier: lue.fichier }, contexte, html);
-  constats.push(...resultat.constats);
-  controlees.push({ type: lue.type, fichier: lue.fichier, ...(resultat.page !== undefined && { page: resultat.page }) });
-}
-constats.push(...controlerEnsemble(controlees, contexte));
-
-// 3. Site construit : non-indexation (dans les deux sens), page 404, fixtures, configuration Cloudflare.
-constats.push(...(await controlerIndexation(dist, mode.indexable)));
-constats.push(...(await controlerPagesDuPlan(dist, [...contexte.plan.values()].map((ligne) => ligne.adresse))));
-constats.push(...(await controler404(dist)));
-constats.push(...(await controlerFixturesNonPubliees(dist)));
-constats.push(...(await controlerWrangler(racine)));
+const { constats, informations, pagesEditoriales } = await controlerSite({ racine, dist, aujourdhui: aujourdhui(), indexable: mode.indexable });
 
 // Rapport.
 const enGitHub = env['GITHUB_ACTIONS'] === 'true';
@@ -93,16 +40,18 @@ for (const c of constats) {
     stdout.write(`${etiquette} [${c.regle}] ${c.fichier ?? ''} : ${c.message}\n`);
   }
 }
+for (const info of informations) stdout.write(`INFO ${info}\n`);
 const erreurs = sontBloquants(constats).length;
 const alertes = constats.length - erreurs;
 const alertesAttendues = echouerSur === undefined ? 0 : constats.filter((c) => c.gravite === 'alerte' && c.regle === echouerSur).length;
-const bilan = `Contrôle : ${pagesLues.length} page(s) éditoriale(s), ${erreurs} erreur(s) bloquante(s), ${alertes} alerte(s). Mode d'indexation : ${mode.indexable ? 'INDEXABLE' : 'non indexable'}.`;
+const bilan = `Contrôle : ${pagesEditoriales} page(s) éditoriale(s), ${erreurs} erreur(s) bloquante(s), ${alertes} alerte(s). Mode d'indexation : ${mode.indexable ? 'INDEXABLE' : 'non indexable'}.`;
 stdout.write(`${bilan}\n`);
 if (alertesAttendues > 0) stdout.write(`${alertesAttendues} alerte(s) ${echouerSur} : échec demandé par --echouer-sur.\n`);
 
 // Résumé visible dans l'onglet du run GitHub (alertes comprises).
 if (env['GITHUB_STEP_SUMMARY'] !== undefined) {
   const lignes = [`### ${bilan}`, '', `Mode d'indexation : ${mode.description}`, ''];
+  for (const info of informations) lignes.push(`- Information : ${info}`);
   for (const c of constats) lignes.push(`- **${c.gravite === 'erreur' ? 'Erreur' : 'Alerte'}** \`${c.regle}\` ${c.fichier ?? ''} : ${c.message}`);
   await appendFile(env['GITHUB_STEP_SUMMARY'], lignes.join('\n') + '\n');
 }

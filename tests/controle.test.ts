@@ -19,6 +19,7 @@ import { controler404, controlerFixturesNonPubliees, controlerIndexation, contro
 import { modeIndexation } from '../src/lib/indexation.ts';
 import { retirerNoindexDesEnTetes } from '../scripts/integration-indexation.ts';
 import { verifierLiens } from '../scripts/liens.ts';
+import { controlerSite } from '../scripts/lib/controler-site.ts';
 import type { TypeAvecSocle } from '../src/schemas/listes.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -160,21 +161,86 @@ describe('base voyants (R3, R4) et rattachement (R1)', async () => {
     assert.deepEqual(codes(controlerEnsemble([], contexte), 'alerte'), ['R1-RATTACHEMENT']);
   });
 
-  test('un lien n\'est déclaré qu\'une fois : les deux sens à la fois bloquent', async () => {
+  test('les liens viennent du plan du site : un lien déclaré des deux côtés dans le plan bloque', () => {
+    const plan = donnees.plan.map((l) => {
+      const ligne = l as Record<string, unknown>;
+      if (ligne['id'] === 'fixture-panne') return { ...ligne, liens: ['fixture-fluide'] };
+      if (ligne['id'] === 'fixture-fluide') return { ...ligne, liens: ['fixture-panne'] };
+      return ligne;
+    });
+    assert.deepEqual(codes(construireContexte({ ...donnees, plan }, AUJOURDHUI).constats, 'erreur'), ['R7-LIEN-DOUBLE']);
+    const unSeulCote = plan.map((l) => (l['id'] === 'fixture-fluide' ? { ...l, liens: undefined } : l));
+    assert.deepEqual(construireContexte({ ...donnees, plan: unSeulCote }, AUJOURDHUI).constats, []);
+  });
+
+  test('une page ne déclare plus de liens : le champ « liens » est inconnu des pages', async () => {
+    const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-panne', 'page.md'), 'utf8')) as Record<string, unknown>;
     const { contexte } = construireContexte(donnees, AUJOURDHUI);
+    const { constats } = controlerPage({ type: 'panne', brut: { ...brut, liens: ['fixture-fluide'] }, fichier: 'a' }, contexte);
+    assert.deepEqual(codes(constats, 'erreur'), ['R7-CHAMP-INCONNU']);
+  });
+
+  test('la page d\'un voyant de la base est dans le plan, et l\'outil voyants n\'y mène que par un lien du plan', () => {
+    const outil = { id: 'voyants', type: 'voyant', theme: 'alertes-et-codes', vague: 'A', adresse: '/voyants/', requete_principale: 'voyant orange voiture', mots_cles: ['voyant orange voiture'] };
+    const sansLien = construireContexte({ ...donnees, plan: [...donnees.plan, outil] }, AUJOURDHUI).constats;
+    assert.deepEqual(codes(sansLien, 'erreur'), ['R7-LIEN-OUTIL']);
+    assert.equal(sansLien.length, 2); // les deux voyants de test : fixture-panne et fixture-voyant ne sont pas liées à l'outil
+    const avecLiens = { ...outil, liens: ['fixture-panne', 'fixture-voyant'] };
+    assert.deepEqual(construireContexte({ ...donnees, plan: [...donnees.plan, avecLiens] }, AUJOURDHUI).constats, []);
+    const horsPlan = { ...voyantValide, page: 'page-absente' };
+    const { contexte: ctxHorsPlan, constats } = construireContexte({ ...donnees, voyants: [horsPlan] }, AUJOURDHUI);
+    assert.deepEqual(codes(constats, 'erreur'), ['R1-RATTACHEMENT']);
+    // Pas d'alerte « page pas encore écrite » en plus de l'erreur.
+    assert.deepEqual(controlerEnsemble([], ctxHorsPlan), []);
+  });
+
+  test('un lien écrit dans le texte ne mène qu\'à une page liée dans le plan', async () => {
+    const plan = donnees.plan.map((l) => ((l as Record<string, unknown>)['id'] === 'fixture-panne' ? { ...(l as Record<string, unknown>), liens: ['fixture-fluide'] } : l));
+    const { contexte: avecLien } = construireContexte({ ...donnees, plan }, AUJOURDHUI);
     const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-panne', 'page.md'), 'utf8'));
-    const { page } = controlerPage({ type: 'panne', brut, fichier: 'a' }, contexte);
+    const { page } = controlerPage({ type: 'panne', brut, fichier: 'a' }, avecLien);
     assert.ok(page);
-    const a = { ...page, id: 'fixture-panne', liens: ['fixture-fluide'] };
-    const b = { ...page, id: 'fixture-fluide', liens: ['fixture-panne'], voyants: [] };
-    const resultat = controlerEnsemble(
-      [
-        { type: 'panne', fichier: 'a', page: a },
-        { type: 'panne', fichier: 'b', page: b },
-      ],
-      contexte,
-    );
-    assert.deepEqual(codes(resultat, 'erreur'), ['R7-LIEN-DOUBLE']);
+    const ensemble = (adresses: string[]) => controlerEnsemble([{ type: 'panne', fichier: 'a', page, adressesTexte: adresses }], avecLien).filter((c) => c.gravite === 'erreur');
+    assert.deepEqual(ensemble(['/fixture-fluide/']), []);
+    assert.deepEqual(codes(ensemble(['/fixture-code/']), 'erreur'), ['R7-LIEN-HORS-PLAN']);
+    assert.deepEqual(codes(ensemble(['/introuvable/']), 'erreur'), ['R7-LIEN-INCONNU']);
+  });
+});
+
+// ---- Construction complète : liens écrits dans le texte des pages (Markdown), socle compris ----------------
+describe('construction : les liens du texte des pages sont lus et contrôlés', async () => {
+  const donnees = await lireJson<DonneesBrutes>(join(fixtures, 'contexte.json'));
+
+  test('lien hors plan dans une page éditoriale et dans le socle : bloquant ; liens vers une page liée (relatif, enfant) : admis', async () => {
+    const racineTest = await dossierTemporaire();
+    // fixture-fluide devient l'enfant de fixture-panne ; le socle (fixture-a-propos) est lié à fixture-panne.
+    const plan = donnees.plan.map((l) => {
+      const ligne = l as Record<string, unknown>;
+      if (ligne['id'] === 'fixture-fluide') return { ...ligne, adresse: '/fixture-panne/fluide/', parent: 'fixture-panne' };
+      if (ligne['id'] === 'fixture-a-propos') return { ...ligne, liens: ['fixture-panne'] };
+      return ligne;
+    });
+    await mkdir(join(racineTest, 'data'));
+    await writeFile(join(racineTest, 'data', 'plan-du-site.json'), JSON.stringify(plan));
+    await writeFile(join(racineTest, 'data', 'voyants.json'), JSON.stringify(donnees.voyants));
+    await writeFile(join(racineTest, 'data', 'sources.json'), JSON.stringify(donnees.sources));
+    await mkdir(join(racineTest, 'docs'));
+    const lignes05 = (plan as { mots_cles: string[]; vague: string }[]).flatMap((l) => l.mots_cles.map((m) => `${m},${l.vague},,`));
+    await writeFile(join(racineTest, 'docs', '05_mots_cles_perimetre.csv'), ['mot_cle,vague,variante_proche_de,precision', ...lignes05].join('\r\n'));
+    const ajouter = async (type: string, cas: string, texte: string) => {
+      await mkdir(join(racineTest, 'src', 'content', type), { recursive: true });
+      const page = await readFile(join(fixtures, 'cas', cas, 'page.md'), 'utf8');
+      await writeFile(join(racineTest, 'src', 'content', type, `${cas}.md`), `${page}\n${texte}\n`);
+    };
+    await ajouter('panne', 'valide-panne', 'Voir [le code](/fixture-code/), [le fluide](fluide/) et ![photo](/images/x.jpg).');
+    await ajouter('socle', 'valide-socle', 'Voir [le code](https://decodauto.com/fixture-code/) et [la panne](../fixture-panne/).');
+    const bilan = await controlerSite({ racine: racineTest, dist: await dossierTemporaire(), aujourdhui: AUJOURDHUI, indexable: false });
+    const horsPlan = bilan.constats.filter((c) => c.regle === 'R7-LIEN-HORS-PLAN');
+    assert.deepEqual(horsPlan.map((c) => c.fichier).sort(), ['src/content/panne/valide-panne.md', 'src/content/socle/valide-socle.md']);
+    assert.ok(horsPlan.every((c) => c.message.includes('fixture-code')));
+    assert.equal(bilan.constats.filter((c) => c.regle === 'R7-LIEN-INCONNU').length, 0);
+    // Paires du plan : socle ↔ panne (deux pages écrites) et panne ↔ fluide (fluide pas écrite) : 1 en attente.
+    assert.ok(bilan.informations.some((i) => i.startsWith('1 lien(s) du plan')), JSON.stringify(bilan.informations));
   });
 });
 

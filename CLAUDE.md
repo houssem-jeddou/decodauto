@@ -4,10 +4,11 @@ Site en français pour la France : « Votre voiture vous alerte, on vous dit quo
 Guide indépendant : voyant, code défaut, symptôme ou obligation → peut-on rouler, gravité, coût probable, marche à suivre.
 
 ## Ce qui fait foi (décision de Houssem du 23/10/2026)
-- Les documents de pilotage (01 à 05, 07, 08) font foi dans le **projet Claude « Site Voiture $$ »**. Le dossier `docs/` en est une **copie**, mise à jour à chaque validation par une pull request. Lire `docs/04_journal_avancement.md` (étape en cours, décisions, ce qui est figé), puis `docs/01`, `docs/02`, `docs/03` et `docs/08_structure_contenus.md` avant toute tâche. Si `docs/` semble en retard ou en contradiction, le signaler : ne pas trancher seul. Ne pas modifier `docs/` sans demande explicite.
+- Les documents de pilotage (01 à 05, 07, 08) font foi dans le **projet Claude « Site Voiture $$ »**. Le dossier `docs/` en est une **copie**, mise à jour à chaque validation par une pull request. Lire `docs/04_journal_avancement.md` (étape en cours, décisions, ce qui est figé), puis `docs/01`, `docs/02`, `docs/03`, `docs/08_structure_contenus.md` et `docs/09_plan_du_site.md` avant toute tâche. Si `docs/` semble en retard ou en contradiction, le signaler : ne pas trancher seul. Ne pas modifier `docs/` sans demande explicite.
 - En cas d'écart entre le code et `docs/`, c'est `docs/` qui a raison : corriger le code, ou signaler l'écart.
 - **Structure des contenus** : la transposition de `docs/08` est validée (23/10/2026). Ce sont désormais **les schémas du dépôt** (`src/schemas/`, contrôles dans `src/lib/controle.ts`) qui font foi ; `docs/08` est archivé comme référence lisible. Une modification de structure passe par une demande de changement (format dans `docs/03`), puis met à jour les schémas et `docs/08`.
-- Ce qui est figé (périmètre, mots-clés, structure validée) ne bouge pas sans demande de changement acceptée par Houssem.
+- **Plan du site** : validé le 23/10/2026 (étape 4). C'est `data/plan-du-site.json` qui fait foi (pages, adresses, mots-clés, pages mères, liens) ; `docs/09` en est la vue lisible. Les liens entre pages viennent uniquement du plan : une page ne déclare pas de liens, et un lien écrit dans le texte ne mène qu'à une page liée dans le plan. Ajouter une paire de liens au plan se propose dans la pull request du lot de pages concerné, avec une ligne de justification, et Houssem la valide avec le lot (décision du 23/10/2026). Retirer un lien, ou toute autre modification du plan, passe par une demande de changement.
+- Ce qui est figé (périmètre, mots-clés, structure validée, plan du site) ne bouge pas sans demande de changement acceptée par Houssem.
 
 ## Méthode (docs/03)
 1. **Une branche et une pull request par tâche.** Ne jamais pousser sur `main`. Ne pas fusionner et ne rien déployer sans demande explicite.
@@ -41,7 +42,7 @@ Guide indépendant : voyant, code défaut, symptôme ou obligation → peut-on r
 - Catalogue des règles et des codes d'erreur : `CONTROLES.md`.
 
 ## Commandes
-`npm ci` · `npm run dev` · `npm run build` (construit + contrôle) · `npm test` · `npm run schemas` · `npm run liens` · `npm run lighthouse` (après `build`) · `npm run fixtures` (régénère les pages de test).
+`npm ci` · `npm run dev` · `npm run build` (construit + contrôle) · `npm test` · `npm run schemas` · `npm run liens` · `npm run lighthouse` (après `build`) · `npm run fixtures` (régénère les pages de test) · `npm run plan:vue` (met à jour les parties générées de `docs/09`).
 
 ## Git
 Commits en français, clairs, un sujet par commit. Travailler sur la branche indiquée par la tâche. Pas de réécriture d'historique sur une branche partagée.

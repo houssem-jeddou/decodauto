@@ -47,7 +47,7 @@ probleme abs,1. Alertes et codes,Voyants,A,"ABS, ESP et direction",Symptôme ou 
 problème abs,1. Alertes et codes,Voyants,A,"ABS, ESP et direction",Symptôme ou panne,100–1k,316,Faible,1.73,,probleme abs,0,
 voyant moteur qui clignote,1. Alertes et codes,Voyants,A,Moteur (général),Symptôme ou panne,100–1k,316,Faible,1.59,,,1,
 diagnostic voyant moteur,1. Alertes et codes,Voyants,A,Moteur (général),"Signification (voyant, code)",100–1k,316,Élevée,1.56,,,1,
-adblue défaut antipollution démarrage impossible dans 1100 km,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,1.49,,,1,Voyant antipollution : fusionné dans la page voyant moteur
+adblue défaut antipollution démarrage impossible dans 1100 km,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,1.49,,,1,Message AdBlue : traité dans la page voyant AdBlue
 defaut moteur c3,1. Alertes et codes,Voyants,A,Moteur (général),"Signification (voyant, code)",100–1k,316,Faible,1.48,c3,,1,"Couvert par la page du voyant, pas de page par modèle"
 système anti pollution défaillant c3,1. Alertes et codes,Voyants,A,"FAP, EGR et antipollution","Signification (voyant, code)",100–1k,316,Faible,1.18,c3,,1,Voyant antipollution : fusionné dans la page voyant moteur
 temoin usure plaquette frein,1. Alertes et codes,Voyants,A,Freins,"Signification (voyant, code)",100–1k,316,Moyenne,1.17,,,1,
@@ -73,7 +73,7 @@ voyant de voiture,1. Alertes et codes,Voyants,A,Voyants (général),"Significati
 different voyant voiture,1. Alertes et codes,Voyants,A,Voyants (général),"Signification (voyant, code)",100–1k,316,Faible,0.06,,,1,
 différents voyants voiture,1. Alertes et codes,Voyants,A,Voyants (général),"Signification (voyant, code)",100–1k,316,Faible,0.06,,different voyant voiture,0,
 208 voyant moteur,1. Alertes et codes,Voyants,A,Moteur (général),"Signification (voyant, code)",100–1k,316,Faible,,208,,1,"Couvert par la page du voyant, pas de page par modèle"
-adblue defaut antipollution,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,,,1,Voyant antipollution : fusionné dans la page voyant moteur
+adblue defaut antipollution,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,,,1,Message AdBlue : traité dans la page voyant AdBlue
 adblue voyant,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,,,1,
 alerte pression huile moteur,1. Alertes et codes,Voyants,A,Huile et vidange,"Signification (voyant, code)",100–1k,316,Faible,,,,1,
 anomalie antipollution 206,1. Alertes et codes,Voyants,A,"FAP, EGR et antipollution","Signification (voyant, code)",100–1k,316,Faible,,206,,1,Voyant antipollution : fusionné dans la page voyant moteur
@@ -92,7 +92,7 @@ dacia sandero voyant orange,1. Alertes et codes,Voyants,A,Voyants (général),"S
 defaut airbag,1. Alertes et codes,Voyants,A,Airbag,"Signification (voyant, code)",100–1k,316,Faible,,,,1,
 defaut anti pollution 3008,1. Alertes et codes,Voyants,A,"FAP, EGR et antipollution","Signification (voyant, code)",100–1k,316,Faible,,3008,,1,Voyant antipollution : fusionné dans la page voyant moteur
 defaut anti pollution 308,1. Alertes et codes,Voyants,A,"FAP, EGR et antipollution","Signification (voyant, code)",100–1k,316,Faible,,308,,1,Voyant antipollution : fusionné dans la page voyant moteur
-defaut anti pollution adblue,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,,,1,Voyant antipollution : fusionné dans la page voyant moteur
+defaut anti pollution adblue,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,,,1,Message AdBlue : traité dans la page voyant AdBlue
 defaut antipollution 308,1. Alertes et codes,Voyants,A,"FAP, EGR et antipollution","Signification (voyant, code)",100–1k,316,Faible,,308,,1,Voyant antipollution : fusionné dans la page voyant moteur
 defaut moteur 2008,1. Alertes et codes,Voyants,A,Moteur (général),"Signification (voyant, code)",100–1k,316,Faible,,2008,,1,"Couvert par la page du voyant, pas de page par modèle"
 defaut moteur 5008,1. Alertes et codes,Voyants,A,Moteur (général),"Signification (voyant, code)",100–1k,316,Faible,,5008,,1,"Couvert par la page du voyant, pas de page par modèle"
@@ -236,7 +236,7 @@ volkswagen polo tableau de bord,1. Alertes et codes,Voyants,A,Voyants (général
 voyant a voiture,1. Alertes et codes,Voyants,A,Voyants (général),"Signification (voyant, code)",100–1k,316,Faible,,,,1,
 voyant abs 206,1. Alertes et codes,Voyants,A,"ABS, ESP et direction","Signification (voyant, code)",100–1k,316,Faible,,206,,1,"Couvert par la page du voyant, pas de page par modèle"
 voyant ad blue,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,,,1,
-voyant adblue défaut antipollution,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,,,1,Voyant antipollution : fusionné dans la page voyant moteur
+voyant adblue défaut antipollution,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,,,1,Message AdBlue : traité dans la page voyant AdBlue
 voyant adblue et voyant moteur,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,,,1,
 voyant adblue peugeot,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,peugeot,,1,"Couvert par la page du voyant, pas de page par modèle"
 voyant adblue peugeot 208,1. Alertes et codes,Voyants,A,AdBlue,"Signification (voyant, code)",100–1k,316,Faible,,peugeot,,1,"Couvert par la page du voyant, pas de page par modèle"
@@ -466,7 +466,7 @@ voyant tableau de bord twingo 2,1. Alertes et codes,Voyants,A,Voyants (général
 voyant tableau de bord volkswagen,1. Alertes et codes,Voyants,A,Voyants (général),"Signification (voyant, code)",100–1k,316,Faible,,volkswagen,,1,"Couvert par la page du voyant, pas de page par modèle"
 voyant tableau de bord volkswagen polo,1. Alertes et codes,Voyants,A,Voyants (général),"Signification (voyant, code)",100–1k,316,Faible,,volkswagen,,1,"Couvert par la page du voyant, pas de page par modèle"
 voyant temperature voiture,1. Alertes et codes,Voyants,A,Voyants (général),"Signification (voyant, code)",100–1k,316,Faible,,,,1,Voyant température : traité dans la page surchauffe
-voyant température huile,1. Alertes et codes,Voyants,A,Huile et vidange,"Signification (voyant, code)",100–1k,316,Faible,,,,1,Voyant température : traité dans la page surchauffe
+voyant température huile,1. Alertes et codes,Voyants,A,Huile et vidange,"Signification (voyant, code)",100–1k,316,Faible,,,,1,Température d'huile : traitée dans la page voyant huile
 voyant triangle orange peugeot partner,1. Alertes et codes,Voyants,A,Suspension et train roulant,"Signification (voyant, code)",100–1k,316,Faible,,peugeot,,1,"Couvert par la page du voyant, pas de page par modèle"
 voyant triangle orange volkswagen,1. Alertes et codes,Voyants,A,Suspension et train roulant,"Signification (voyant, code)",100–1k,316,Faible,,volkswagen,,1,"Couvert par la page du voyant, pas de page par modèle"
 voyant turbo,1. Alertes et codes,Voyants,A,Turbo,"Signification (voyant, code)",100–1k,316,Faible,,,,1,

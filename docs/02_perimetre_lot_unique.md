@@ -4,7 +4,7 @@ Figé le 22/10/2026 après trois revues indépendantes. Source : base « Perso_C
 
 ## Chiffres clés
 - 921 mots-clés comptés (variantes proches exclues), ≈ 1 019 100 recherches indicatives / mois, dont 316 000 sur des requêtes ≥ 10 000 / mois souvent tenues par de gros acteurs.
-- Environ 42 pages + 1 outil « identifier un voyant ». Publication en 3 vagues : A (mise en ligne au plus tard le 31/10/2026), B (vers le 07/11/2026), C (vers le 14/11/2026).
+- 42 pages, dont l'outil « identifier un voyant » et les 3 pages du socle (détail dans le plan du site, 09). Publication en 3 vagues : A (mise en ligne au plus tard le 31/10/2026), B (vers le 07/11/2026), C (vers le 14/11/2026).
 - Les volumes sont des fourchettes Keyword Planner converties par moyenne géométrique (316 / 3 160 / 31 600 / 316 000) : ils servent à comparer, pas à prévoir un trafic.
 
 ## Les 4 thèmes du site

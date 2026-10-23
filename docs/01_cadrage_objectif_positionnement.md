@@ -34,12 +34,12 @@ En tête des résultats aujourd'hui : enseignes qui vendent leur intervention, m
 ## Décisions prises (22/10/2026)
 - Niche voiture retenue (préférée au site analyses de sang et aux simulateurs d'argent).
 - Base de mots-clés v1.0 puis v1.1 (passe complémentaire) figées.
-- Périmètre figé : un seul lot (~42 pages + outil voyants), 4 thèmes, après trois revues indépendantes.
+- Périmètre figé : un seul lot de 42 pages (outil voyants et socle compris), 4 thèmes, après trois revues indépendantes.
 - Électrique et hybride hors périmètre (recherches d'achat de véhicule et de bornes, pas d'alertes).
 - Pas d'achat de lecteurs OBD : pas de comparatif de valises.
 - Plan d'avancement corrigé validé : fondations d'abord, base voyants comme source unique, publication en 3 vagues (A ≤ 31/10, B ≈ 07/11, C ≈ 14/11).
+- Nom de domaine : decodauto.com (22/10/2026 ; aucune antériorité trouvée sur TMview, aucune marque de constructeur).
 
 ## Décisions ouvertes
 - Relecteur mécanicien payé (quelques heures) pour les voyants et les pannes, ou uniquement des sources officielles citées.
-- Nom de domaine (vérifier INPI / EUIPO, aucune marque de constructeur dans le nom).
 - Statut pour les mentions légales et encaissement d'AdSense depuis la Tunisie (à vérifier).

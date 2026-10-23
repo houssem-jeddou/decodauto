@@ -19,7 +19,12 @@ const adresse = z
   .string()
   .regex(/^\/([a-z0-9-]+\/)*$/, "l'adresse commence et se termine par « / » (minuscules, chiffres, tirets)");
 
-/** Une ligne du plan du site = une page. C'est la clé (id) avec les pages éditoriales. */
+/**
+ * Une ligne du plan du site = une page. C'est la clé (id) avec les pages éditoriales.
+ * Le plan est la référence du maillage (docs/08) : `parent` (page mère, reprise dans l'adresse et le fil d'Ariane ;
+ * la page mère affiche ses enfants) et `liens` (pages liées, chaque paire déclarée une seule fois, le retour est
+ * calculé). Contrôles de cohérence : src/lib/plan.ts ; couverture des mots-clés : src/lib/porte-plan.ts.
+ */
 export const planDuSiteSchema = z
   .strictObject({
     id: identifiant,
@@ -30,6 +35,7 @@ export const planDuSiteSchema = z
     requete_principale: texte.optional(),
     mots_cles: z.array(texte),
     parent: identifiant.optional(),
+    liens: z.array(identifiant).min(1).optional(),
   })
   .superRefine((ligne, ctx) => {
     if (ligne.type !== 'socle' && ligne.requete_principale === undefined) {

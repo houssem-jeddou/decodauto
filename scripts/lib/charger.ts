@@ -5,11 +5,16 @@ import type { DonneesBrutes } from '../../src/lib/controle.ts';
 import { TYPES_AVEC_SOCLE, type TypeAvecSocle } from '../../src/schemas/listes.ts';
 import { soclePageSchema } from '../../src/schemas/pages.ts';
 
-/** Sépare le frontmatter YAML (entre deux lignes « --- ») du reste du fichier Markdown. */
-export function lireFrontmatter(contenu: string): unknown {
+/** Sépare le frontmatter YAML (entre deux lignes « --- ») du texte de la page. */
+export function separerFrontmatter(contenu: string): { frontmatter: string; corps: string } {
   const correspondance = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(contenu);
   if (correspondance === null) throw new Error('frontmatter absent (le fichier doit commencer par « --- »)');
-  return parse(correspondance[1] ?? '');
+  return { frontmatter: correspondance[1] ?? '', corps: contenu.slice(correspondance[0].length) };
+}
+
+/** Frontmatter YAML d'un fichier Markdown, lu en objet. */
+export function lireFrontmatter(contenu: string): unknown {
+  return parse(separerFrontmatter(contenu).frontmatter);
 }
 
 export async function listerFichiers(dossier: string, extension: string): Promise<string[]> {
@@ -45,6 +50,8 @@ export interface FichierPage {
   fichier: string;
   /** Frontmatter, ou l'erreur de lecture. */
   brut?: unknown;
+  /** Texte de la page, après le frontmatter. */
+  corps?: string;
   erreurLecture?: string;
 }
 
@@ -55,7 +62,8 @@ export async function chargerPages(racine: string): Promise<FichierPage[]> {
     for (const chemin of await listerFichiers(join(racine, 'src/content', type), '.md')) {
       const fichier = relative(racine, chemin);
       try {
-        pages.push({ type, fichier, brut: lireFrontmatter(await readFile(chemin, 'utf8')) });
+        const contenu = await readFile(chemin, 'utf8');
+        pages.push({ type, fichier, brut: lireFrontmatter(contenu), corps: separerFrontmatter(contenu).corps });
       } catch (e) {
         pages.push({ type, fichier, erreurLecture: e instanceof Error ? e.message : String(e) });
       }

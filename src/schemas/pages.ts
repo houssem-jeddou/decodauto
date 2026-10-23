@@ -99,7 +99,6 @@ const champsCommuns = {
   cout_probable: coutProbableSchema,
   sources: z.array(identifiant).min(1),
   element_unique: z.enum(ELEMENTS_UNIQUES),
-  liens: z.array(identifiant).optional(),
   auteur: identifiant,
   relecteur: texte.optional(),
   date_publication: dateIso,
@@ -116,7 +115,6 @@ type Commun = {
   prochaine_revue: Date;
   question_decision: string;
   voyants?: string[] | undefined;
-  liens?: string[] | undefined;
   element_unique: (typeof ELEMENTS_UNIQUES)[number];
   tutoriel?: unknown;
 };
@@ -125,9 +123,6 @@ type Commun = {
 function reglesCommunes(page: Commun, ctx: z.RefinementCtx): void {
   if (/^sans objet\.?$/i.test(page.question_decision.trim())) {
     probleme(ctx, 'R7-SANS-OBJET', ['question_decision'], '« Sans objet » est interdit hors socle');
-  }
-  if (page.liens !== undefined && new Set(page.liens).size !== page.liens.length) {
-    probleme(ctx, 'R7-LIEN-DOUBLE', ['liens'], 'chaque lien n\'est déclaré qu\'une seule fois');
   }
   if (page.prochaine_revue.getTime() <= page.date_revue.getTime()) {
     probleme(ctx, 'R7-DATES', ['prochaine_revue'], 'prochaine_revue doit être postérieure à date_revue');
