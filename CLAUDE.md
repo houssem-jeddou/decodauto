@@ -3,9 +3,10 @@
 Site en français pour la France : « Votre voiture vous alerte, on vous dit quoi faire. »
 Guide indépendant : voyant, code défaut, symptôme ou obligation → peut-on rouler, gravité, coût probable, marche à suivre.
 
-## Ce qui fait foi
-- `docs/` fait foi : lire `docs/04_journal_avancement.md` (étape en cours, décisions, ce qui est figé), puis `docs/01`, `docs/02`, `docs/03` et `docs/08_structure_contenus.md` avant toute tâche. En cas d'écart entre le code et `docs/`, c'est `docs/` qui a raison : corriger le code, ou signaler l'écart. Ne pas modifier `docs/` sans demande explicite.
-- Les schémas du dépôt (`src/schemas/`) implémentent `docs/08`. Tant que Houssem n'a pas validé cette transposition, `docs/08` fait foi ; ensuite les schémas font foi (voir l'en-tête de `docs/08`). Une modification de structure passe par une demande de changement (format dans `docs/03`).
+## Ce qui fait foi (décision de Houssem du 23/10/2026)
+- Les documents de pilotage (01 à 05, 07, 08) font foi dans le **projet Claude « Site Voiture $$ »**. Le dossier `docs/` en est une **copie**, mise à jour à chaque validation par une pull request. Lire `docs/04_journal_avancement.md` (étape en cours, décisions, ce qui est figé), puis `docs/01`, `docs/02`, `docs/03` et `docs/08_structure_contenus.md` avant toute tâche. Si `docs/` semble en retard ou en contradiction, le signaler : ne pas trancher seul. Ne pas modifier `docs/` sans demande explicite.
+- En cas d'écart entre le code et `docs/`, c'est `docs/` qui a raison : corriger le code, ou signaler l'écart.
+- **Structure des contenus** : la transposition de `docs/08` est validée (23/10/2026). Ce sont désormais **les schémas du dépôt** (`src/schemas/`, contrôles dans `src/lib/controle.ts`) qui font foi ; `docs/08` est archivé comme référence lisible. Une modification de structure passe par une demande de changement (format dans `docs/03`), puis met à jour les schémas et `docs/08`.
 - Ce qui est figé (périmètre, mots-clés, structure validée) ne bouge pas sans demande de changement acceptée par Houssem.
 
 ## Méthode (docs/03)
