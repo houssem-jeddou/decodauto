@@ -240,8 +240,8 @@
     "pictogramme": "cle-entretien",
     "situation": "Le voyant clé s'allume, ou un message demande de faire la révision ou la vidange : l'échéance d'entretien est proche ou dépassée.",
     "verdict": "oui avec précautions",
-    "urgence": "sous quelques jours",
-    "action": "Vous pouvez rouler, avec ménagement si la notice le demande (Renault, Dacia). Faites faire la révision ou la vidange dans les jours qui viennent, puis remettre l'indicateur à zéro.",
+    "urgence": "immédiate",
+    "action": "Vous pouvez rouler. Si le message s'accompagne du témoin Service (Renault, Dacia), conduisez avec ménagement et faites faire la révision au plus tôt ; sinon, faites-la faire dans les jours qui viennent. Faites ensuite remettre l'indicateur à zéro.",
     "citations": [
       {
         "source": "notice-peugeot-208",
@@ -262,14 +262,14 @@
         "emplacement": "p. 122, « Ordinateur de bord », Autonomie de révision ; témoin Service p. 136",
         "extrait": "autonomie égale à 0 km ou date de révision atteinte : le message « Faire révision » s'affiche accompagné du témoin [Service]. Le véhicule nécessite alors une révision le plus rapidement possible. […] (p. 136) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "immédiate"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 98, « Ordinateur de bord », Autonomie de révision ; témoin Service p. 110",
         "extrait": "autonomie égale à 0 km ou date de révision atteinte : le message « Faire révision » s'affiche accompagné du témoin [Service]. Le véhicule nécessite alors une révision le plus rapidement possible. […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "immédiate"
       },
       {
         "source": "notice-toyota-yaris",
@@ -279,7 +279,7 @@
         "urgence": "sous quelques jours"
       }
     ],
-    "ecart_marques": "Chez Renault et Dacia, le message s'accompagne du témoin Service, dont la notice demande d'aller au plus tôt chez un représentant de la marque en conduisant avec ménagement ; Peugeot, Seat et Toyota rappellent un entretien à faire, sans précaution de conduite."
+    "ecart_marques": "Chez Renault et Dacia, le message s'accompagne du témoin Service, dont la notice demande d'aller au plus tôt chez un représentant de la marque en conduisant avec ménagement ; Peugeot, Seat et Toyota rappellent un entretien à faire, sans précaution de conduite (délai : quelques jours)."
   },
   {
     "id": "batterie-rouge",
@@ -963,14 +963,14 @@
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 213, « Contrôle dynamique de conduite ESC », Anomalies de fonctionnement ; témoin Service p. 136",
-        "extrait": "Lorsque le système détecte une anomalie de fonctionnement, le message « ESC à contrôler » et les témoins [Service] et [ESC] s'affichent au tableau de bord. Dans ce cas, l'ESC et le système antipatinage sont désactivés. Consultez un Représentant de la marque. (p. 136) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
+        "extrait": "Lorsque le système détecte une anomalie de fonctionnement, le message « ESC à contrôler » et les témoins [Service] et [ESC] s'affichent au tableau de bord. Dans ce cas, l'ESC et le système antipatinage sont désactivés. Consultez un Représentant de la marque. […] (p. 136) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
         "urgence": "immédiate"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 185, « Contrôle dynamique de conduite ESC », Anomalies de fonctionnement ; témoin Service p. 110",
-        "extrait": "Lorsque le système détecte une anomalie de fonctionnement, le message « ESC à contrôler » et les témoins [Service] et [ESC] s'affichent au tableau de bord. Dans ce cas, l'ESC et le système antipatinage sont désactivés. Consultez un Représentant de la marque. (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
+        "extrait": "Lorsque le système détecte une anomalie de fonctionnement, le message « ESC à contrôler » et les témoins [Service] et [ESC] s'affichent au tableau de bord. Dans ce cas, l'ESC et le système antipatinage sont désactivés. Consultez un Représentant de la marque. […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
         "urgence": "immédiate"
       },
@@ -1033,14 +1033,14 @@
       },
       {
         "source": "notice-renault-clio-5",
-        "emplacement": "p. 125, « Messages d'alerte » ; p. 206 et 348",
+        "emplacement": "p. 125, « Messages d'alerte »",
         "extrait": "Ils apparaissent avec le témoin [STOP] et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. […] « Crevaison » Indique qu'au moins une des roues est crevée ou fortement sous-gonflée.",
         "verdict": "non, arrêt immédiat",
         "urgence": "immédiate"
       },
       {
         "source": "notice-dacia-sandero-3",
-        "emplacement": "p. 102, « Messages d'alerte » ; p. 177",
+        "emplacement": "p. 102, « Messages d'alerte »",
         "extrait": "Ils apparaissent avec le témoin [STOP] et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. […] « Crevaison » Indique qu'au moins une des roues est crevée ou fortement sous-gonflée.",
         "verdict": "non, arrêt immédiat",
         "urgence": "immédiate"
@@ -1069,7 +1069,7 @@
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 177, Anomalies de gonflage possibles ; témoin Service p. 110",
-        "extrait": "clignote puis s'allume fixe accompagné du témoin [Service] « Capteurs pneus à contrôler » Une roue ne s'affiche plus. Cela indique qu'au moins une roue n'est pas équipée de capteur (roue de secours...) ou que le capteur est défaillant. Consultez un Représentant de la marque. (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
+        "extrait": "clignote puis s'allume fixe accompagné du témoin [Service] « Capteurs pneus à contrôler » Une roue ne s'affiche plus. Cela indique qu'au moins une roue n'est pas équipée de capteur […] ou que le capteur est défaillant. Consultez un Représentant de la marque. […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
         "urgence": "immédiate"
       },
@@ -1202,7 +1202,7 @@
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 298, MISE EN GARDE « Lorsque le voyant du système de direction assistée électrique s'allume »",
-        "extrait": "Lorsque le voyant s'allume en rouge, l'assistance à la direction assistée est perdue et il devient alors très difficile de manœuvrer le volant. Lorsque le volant est plus difficile à manœuvrer que d'habitude, tenez-le fermement et bougez-le avec plus de force que d'habitude.",
+        "extrait": "Lorsque le volant est plus difficile à manœuvrer que d'habitude, tenez-le fermement et bougez-le avec plus de force que d'habitude.",
         "verdict": "oui avec précautions",
         "urgence": "immédiate"
       }
@@ -1218,7 +1218,7 @@
     "situation": "Le voyant de température (thermomètre dans l'eau) s'allume en rouge ou clignote : le moteur surchauffe ou le liquide de refroidissement manque.",
     "verdict": "non, arrêt immédiat",
     "urgence": "immédiate",
-    "action": "Arrêtez-vous dès que vous pouvez le faire sans danger. Suivez la notice de votre voiture : moteur coupé (Peugeot, Seat), ou laissé une à deux minutes au ralenti, puis coupé si le voyant ne repasse pas au bleu (Renault, Dacia). Laissez refroidir le moteur avant de vérifier le liquide de refroidissement. Si le voyant reste allumé ou se rallume, ne repartez pas : faites appel à un garage.",
+    "action": "Arrêtez-vous dès que vous pouvez le faire sans danger. Suivez la notice de votre voiture : moteur coupé (Peugeot, Seat, Toyota), ou laissé une à deux minutes au ralenti, puis coupé si le voyant ne repasse pas au bleu (Renault, Dacia). Laissez refroidir le moteur avant de vérifier le liquide de refroidissement. Si le voyant reste allumé ou se rallume, ne repartez pas : faites appel à un garage.",
     "citations": [
       {
         "source": "notice-peugeot-208",
@@ -1252,6 +1252,13 @@
         "source": "notice-toyota-yaris",
         "emplacement": "p. 292, 7.2.4 « Si un voyant s'allume », Voyant de température élevée du liquide de refroidissement",
         "extrait": "Indique que la température du liquide de refroidissement du moteur est trop élevée. Arrêtez immédiatement le véhicule dans un endroit sûr.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-toyota-yaris",
+        "emplacement": "p. 322-323, 7.2.11 « Si votre véhicule surchauffe », Mesures correctives",
+        "extrait": "1.Arrêtez le véhicule dans un endroit sûr et désactivez le système de climatisation, puis arrêtez le moteur. […] 3.Après avoir laissé suffisamment refroidir le moteur, vérifiez que les durites et le faisceau de radiateur (radiateur) ne présentent pas de fuites.",
         "verdict": "non, arrêt immédiat",
         "urgence": "immédiate"
       }

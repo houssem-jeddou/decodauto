@@ -11,6 +11,7 @@ import {
   controlerRattachements,
   couvertureVagueA,
   empreinteBrouillon,
+  preparerValidation,
   FICHIER_BROUILLON,
   FICHIER_PAQUET,
   genererPaquet,
@@ -133,13 +134,29 @@ describe('brouillon de la base voyants (étape 5)', async () => {
     assert.equal(await readFile(join(racine, FICHIER_PAQUET), 'utf8'), texte);
   });
 
-  test('l’empreinte du brouillon change avec une citation, un niveau ou une notice sans consigne', () => {
+  test('l’empreinte du contenu change avec une ligne, un dessin, le registre ou le tableau page → sources', () => {
     const { lignes } = controlerBrouillon([ligne()], donnees, AUJOURDHUI, { pictogrammesObligatoires: true });
-    const reference = empreinteBrouillon(lignes);
+    const contenu = { lignes, pictogrammes: donnees.pictogrammes ?? [], sources: donnees.sources, rattachements: [] as unknown[] };
+    const reference = empreinteBrouillon(contenu);
+    assert.equal(empreinteBrouillon({ ...contenu }), reference);
     const autreNiveau = controlerBrouillon([ligne({ urgence: 'immédiate', verdict: 'non, arrêt immédiat', action: 'Arrêtez-vous tout de suite.' })], donnees, AUJOURDHUI, { pictogrammesObligatoires: true }).lignes;
-    assert.notEqual(empreinteBrouillon(autreNiveau), reference);
+    assert.notEqual(empreinteBrouillon({ ...contenu, lignes: autreNiveau }), reference);
     const avecSansConsigne = controlerBrouillon([ligne({ sans_consigne: [{ source: 'notice-toyota-yaris', emplacement: 'p. 1', constat: 'x' }] })], donnees, AUJOURDHUI, { pictogrammesObligatoires: true }).lignes;
-    assert.notEqual(empreinteBrouillon(avecSansConsigne), reference);
-    assert.equal(empreinteBrouillon(lignes), reference);
+    assert.notEqual(empreinteBrouillon({ ...contenu, lignes: avecSansConsigne }), reference);
+    const dessinModifie = contenu.pictogrammes.map((p) => (p.id === 'huile' ? { ...p, contenu: p.contenu.replace('</svg>', '<circle cx="1" cy="1" r="1"/></svg>') } : p));
+    assert.notEqual(empreinteBrouillon({ ...contenu, pictogrammes: dessinModifie }), reference);
+    assert.notEqual(empreinteBrouillon({ ...contenu, sources: contenu.sources.slice(1) }), reference);
+    assert.notEqual(empreinteBrouillon({ ...contenu, rattachements: [{ page: 'loi-montagne', sources: ['decret-2020-1264'], raison: 'x' }] }), reference);
+  });
+
+  test('après validation, l’écriture de la base est refusée si le contenu a changé, si une erreur demeure ou si la base existe', () => {
+    const { lignes, constats } = controlerBrouillon([ligne()], donnees, AUJOURDHUI, { pictogrammesObligatoires: true });
+    const contenu = { lignes, pictogrammes: donnees.pictogrammes ?? [], sources: donnees.sources, rattachements: [] as unknown[] };
+    const empreinte = empreinteBrouillon(contenu);
+    assert.equal(preparerValidation(contenu, { constats, baseExistante: 0 }, empreinte).ok, true);
+    assert.equal(preparerValidation(contenu, { constats, baseExistante: 0 }, '0'.repeat(64)).ok, false);
+    assert.equal(preparerValidation(contenu, { constats, baseExistante: 3 }, empreinte).ok, false);
+    const erreur = { regle: 'R3-MARQUES', gravite: 'erreur' as const, message: 'x' };
+    assert.equal(preparerValidation(contenu, { constats: [erreur], baseExistante: 0 }, empreinte).ok, false);
   });
 });

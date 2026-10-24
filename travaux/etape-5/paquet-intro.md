@@ -19,7 +19,7 @@ Brouillon du 24/10/2026, corrigé après la revue indépendante. Ce paquet est g
   - la ligne prend le niveau de la citation la plus prudente ;
   - l'écart entre marques est écrit dans la ligne.
 - **Notices sans consigne** : une notice consultée qui décrit l'état sans consigne propre est listée sous la ligne (« consultées sans consigne »), sans niveau.
-- **Revue indépendante** : 111 extraits comparés au texte des 5 PDF officiels, tous retrouvés. Ses corrections sont intégrées (voir l'encadré de la présentation).
+- **Revue indépendante** (deux passages) : toutes les citations ont été recherchées dans les 5 PDF officiels et retrouvées à la page indiquée. Les symboles notés entre crochets ont été vérifiés sur le rendu des pages. Les corrections sont intégrées (voir l'encadré de la présentation).
 - **Contrôles automatiques** : le brouillon passe tous les contrôles de la base (R3, R8, pictogrammes, rattachement au plan), sauf l'empreinte (R4), posée après la validation. Résultat : 0 erreur bloquante. Les 3 rappels R3-NIVEAU-A-VERIFIER sont expliqués en D5.
 
 ## Décisions à prendre
@@ -41,7 +41,7 @@ Brouillon du 24/10/2026, corrigé après la revue indépendante. Ce paquet est g
 - La notice Seat (p. 94) place, après la liste de tous les témoins, verts et bleus compris, l'avertissement « Arrêtez le véhicule de manière sûre dès que possible. ».
 - Appliqué à chaque témoin, il contredirait les consignes propres de la même notice. Par exemple, pour le filtre à particules, Seat demande au contraire de rouler entre 50 et 120 km/h. On retient donc la consigne propre au témoin.
 - Quand il n'y en a pas, la notice est listée « sans consigne » : Seat pour l'ABS et l'ESP, Renault et Dacia pour l'alerte de niveau d'huile.
-- Si D2 est refusée, les lignes `abs` et `esp-defaut` passent en arrêt immédiat, et toute ligne qui cite Seat aussi (airbag, direction orange, FAP, AdBlue, niveau d'huile).
+- Si D2 est refusée, toutes les lignes qui citent Seat ou la listent « sans consigne » passent en arrêt immédiat, même celles où Seat décrit un fonctionnement normal : ABS, ESP (fixe et clignotant), airbag, airbag passager désactivé, direction orange, FAP, AdBlue, niveau d'huile, entretien, frein de stationnement, préchauffage, défaut du système de pression des pneus. Cette absurdité confirme que l'encadré est général.
 - Proposition : accepter.
 
 **D3. Certaines lignes regroupent plusieurs affichages d'une même alerte.**
@@ -71,7 +71,7 @@ Brouillon du 24/10/2026, corrigé après la revue indépendante. Ce paquet est g
 3. **AdBlue, démarrage impossible** :
    - Renault et Dacia « 0 km », Seat rouge avec voyant moteur, Peugeot : rangés au niveau 2, car on ne peut plus rouler jusqu'au garage une fois le moteur coupé ;
    - Seat, réservoir vide : rangé en arrêt immédiat (« Arrêtez le véhicule dans un endroit adéquat, sûr et plat, puis faites l'appoint »).
-   - En pratique, le message apparaît le plus souvent au démarrage, voiture garée. L'action dit donc « ne repartez pas avant l'appoint ».
+   - Renault et Dacia affichent ces messages « à la mise sous contact » (Clio p. 166, Sandero p. 138), donc voiture garée. L'action dit donc « ne repartez pas avant l'appoint ».
 4. **Urgences** : « roulez prudemment jusqu'à l'atelier le plus proche » et « à l'apparition du témoin, continuez à rouler » sont rangés en urgence immédiate (principe 3 : formulation absente de la grille, niveau le plus prudent).
 5. **Seat, voyant ESP clignotant** : l'avertissement de la p. 255 (« Lorsque les systèmes entrent dans la plage de régulation, adaptez immédiatement votre vitesse ») concerne ce système. Il fait passer la ligne en « Oui, avec précautions · À faire tout de suite ».
 6. **Les 3 rappels R3-NIVEAU-A-VERIFIER** sont des faux positifs. Les mots relevés ne portent pas sur un délai :
@@ -102,9 +102,10 @@ Brouillon du 24/10/2026, corrigé après la revue indépendante. Ce paquet est g
 - Effets :
   - **direction** : le voyant de direction Renault et Dacia s'allume avec STOP. Ce cas est déplacé dans `direction-rouge` (arrêt immédiat). `direction-orange` repose maintenant sur Peugeot, Seat et Toyota (« Oui, avec précautions · À faire tout de suite »), et ne dit plus « Non, ne poursuivez pas votre trajet » ;
   - **ABS, ESP en défaut, capteurs de pression des pneus, message « Airbag à contrôler »** : avec le témoin Service, l'urgence passe à « tout de suite » ;
-  - **entretien** : « Faire révision » s'affiche avec le témoin Service. La ligne devient « Oui, avec précautions · À faire dans les jours qui viennent ». Ce délai suit l'exception de la grille pour l'entretien périodique (« dès que possible » ne vaut pas « tout de suite »).
-- Si D9 est refusée, la consigne propre au message l'emporte : l'entretien reste « Oui », et l'ABS reste immédiat (à cause de Toyota).
-- Proposition : accepter.
+  - **entretien** : « Faire révision » s'affiche avec le témoin Service, dont la consigne dit « au plus tôt ». La ligne devient « Oui, avec précautions · À faire tout de suite », avec l'écart : Peugeot, Seat et Toyota laissent quelques jours.
+- Variante possible pour l'entretien seul : appliquer à la consigne du témoin Service l'exception de la grille pour l'entretien périodique (« dès que possible » ne vaut pas « tout de suite »). La ligne serait alors « Oui, avec précautions · À faire dans les jours qui viennent ».
+- Si D9 est refusée, la consigne propre au message l'emporte : l'entretien reste « Oui · dans les jours qui viennent », et l'ABS et l'ESP restent immédiats (à cause de Toyota).
+- Proposition : accepter D9 telle qu'appliquée, sans la variante.
 
 **D10. Toyota et le voyant moteur clignotant.**
 - La notice Toyota ne distingue pas le voyant fixe du voyant clignotant. Son introduction dit : « Si un voyant quelconque s'allume ou clignote, […] effectuez les opérations suivantes », et la consigne du voyant de dysfonctionnement est l'arrêt immédiat. On l'applique donc au clignotement.

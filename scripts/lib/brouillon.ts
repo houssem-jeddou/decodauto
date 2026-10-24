@@ -194,12 +194,43 @@ export function genererPaquet(
   return `${s.join('\n')}\n`;
 }
 
+/** Ce que Houssem valide avec le paquet : les lignes, les dessins des pictogrammes, le registre et le tableau
+ * page → sources. */
+export interface ContenuValide {
+  lignes: readonly LigneBrouillon[];
+  pictogrammes: readonly { id: string; contenu: string }[];
+  sources: readonly unknown[];
+  rattachements: readonly unknown[];
+}
+
 /**
- * Empreinte du brouillon (lignes, citations, notices sans consigne) : imprimée dans le paquet, elle est redonnée à
- * scripts/valider-brouillon.ts, qui refuse d'écrire la base si le brouillon a changé depuis le paquet validé.
+ * Empreinte du contenu présenté (lignes et notices sans consigne, dessins, registre, tableau page → sources) :
+ * imprimée dans le paquet, elle est redonnée à scripts/valider-brouillon.ts, qui refuse d'écrire la base si l'un
+ * d'eux a changé depuis le paquet validé.
  */
-export function empreinteBrouillon(lignes: readonly LigneBrouillon[]): string {
-  return createHash('sha256').update(JSON.stringify(lignes)).digest('hex');
+export function empreinteBrouillon(contenu: ContenuValide): string {
+  const pictogrammes = [...contenu.pictogrammes].sort((a, b) => a.id.localeCompare(b.id)).map((p) => [p.id, p.contenu]);
+  return createHash('sha256')
+    .update(JSON.stringify({ lignes: contenu.lignes, pictogrammes, sources: contenu.sources, rattachements: contenu.rattachements }))
+    .digest('hex');
+}
+
+/**
+ * Prépare l'écriture de data/voyants.json après la validation de Houssem : refuse si le brouillon a une erreur
+ * bloquante, si la base contient déjà des lignes, ou si le contenu n'est plus celui du paquet validé.
+ */
+export function preparerValidation(
+  contenu: ContenuValide,
+  resultat: { constats: readonly Constat[]; baseExistante: number },
+  attendue: string,
+): { ok: true; base: unknown[]; empreinte: string } | { ok: false; raison: string } {
+  if (resultat.baseExistante > 0) return { ok: false, raison: 'data/voyants.json contient déjà des lignes : fusion non prévue.' };
+  const bloquants = resultat.constats.filter((c) => c.gravite === 'erreur');
+  if (bloquants.length > 0) return { ok: false, raison: bloquants.map((c) => `${c.regle} : ${c.message}`).join('\n') };
+  const empreinte = empreinteBrouillon(contenu);
+  if (empreinte !== attendue) return { ok: false, raison: `le contenu a changé depuis le paquet validé (empreinte ${empreinte}, attendue ${attendue}) : nouveau paquet à faire valider.` };
+  const dessins = new Map(contenu.pictogrammes.map((p) => [p.id, p.contenu]));
+  return { ok: true, base: lignesValidees(contenu.lignes, dessins), empreinte };
 }
 
 export const FICHIER_RATTACHEMENTS = 'travaux/etape-5/pages-sources.json';
@@ -227,8 +258,9 @@ export async function construirePaquet(
   } catch {
     // pas d'introduction : titre seul
   }
-  const empreinte = empreinteBrouillon(resultat.lignes);
-  const entete = `${intro.trim()}\n\nEmpreinte du brouillon présenté : \`${empreinte}\` (à redonner à \`scripts/valider-brouillon.ts\` après la validation).`;
+  const rattachementsBruts = JSON.parse(await readFile(join(racine, FICHIER_RATTACHEMENTS), 'utf8')) as unknown[];
+  const empreinte = empreinteBrouillon({ lignes: resultat.lignes, pictogrammes: donnees.pictogrammes ?? [], sources: donnees.sources, rattachements: rattachementsBruts });
+  const entete = `${intro.trim()}\n\nEmpreinte du brouillon présenté : \`${empreinte}\` (lignes, pictogrammes, registre et tableau page → sources ; à redonner à \`scripts/valider-brouillon.ts\` après la validation).`;
   return { texte: genererPaquet(resultat.lignes, resultat.sources, constats, couverture, entete), constats, lignes: resultat.lignes, empreinte };
 }
 

@@ -3,7 +3,14 @@
 Mis à jour le 23/10/2026, 23 h 50. Branche de travail : `etape-5/registre-brouillon` (aucune PR ouverte, rien à fusionner).
 Ce dossier `travaux/` n'est pas une source de vérité. Il garde le travail en cours pour la session suivante.
 
-## Où on en est
+## Où on en est (24/10/2026, 13 h 30)
+- Registre (`data/sources.json`), brouillon de la base (`data/voyants.brouillon.json`, 25 lignes, 5 marques, 4 groupes), 17 pictogrammes (`src/pictogrammes/`), tableau page → sources (`travaux/etape-5/pages-sources.json`) et paquet de validation (`travaux/etape-5/paquet-validation.md`, généré par `npm run paquet`) : faits.
+- Deux revues indépendantes : la première « à corriger » (2 bloquants), la seconde « acceptable », sans bloquant ; corrections intégrées.
+- Contrôles : `npm test` 164/164, `npm run paquet` 0 erreur et 3 alertes expliquées (D5.6). La CI fait foi pour la construction.
+- Prochaine étape : PR à ouvrir, puis présentation à Houssem. Il valide le paquet et tranche les décisions D1 à D13 ; ensuite, `node scripts/valider-brouillon.ts --valide-par-houssem AAAA-MM-JJ --empreinte <empreinte du paquet>`, journal, porte 5.
+
+## Historique (23/10, avant la reprise)
+
 - DC n° 3 fusionnée (PR #6, main = 7623e76). La grille est validée.
 - Prochain livrable : le registre des sources, puis la base voyants en brouillon (sans empreinte), le paquet de validation, la revue indépendante et la présentation à Houssem.
 - Notices relevées mot pour mot (texte pdf.js, page imprimée = page PDF − 2) dans `notices/` :

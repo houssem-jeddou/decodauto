@@ -119,3 +119,15 @@ en position ON). [...]
 MISE EN GARDE ! [...] Lorsqu'un système de retenue pour enfant n'est pas installé sur le siège du passager avant
 Assurez-vous que le système d'activation/désactivation manuelle de l'airbag est en position “ON”. S'il est laissé en position désactivée,
 il se peut que l'airbag ne se déploie pas en cas d'accident, ce qui peut causer des blessures graves, voire mortelles.
+
+##### p. 322-323 « 7.2.11 Si votre véhicule surchauffe » (lu le 24/10)
+Les situations suivantes peuvent indiquer que votre véhicule surchauffe. • La jauge de température du liquide de refroidissement du moteur
+( → P. 65) entre dans la zone rouge ou vous ressentez une perte de puissance du moteur. [...] • Le message “Temp. liquide refroid. moteur
+élevée. Arrêtez véhicule en lieu sûr. Consultez le manuel du propriétaire.” est affiché sur l'écran multifonction. • De la vapeur s'échappe
+de sous le capot.
+(p. 323) Mesures correctives
+1.Arrêtez le véhicule dans un endroit sûr et désactivez le système de climatisation, puis arrêtez le moteur.
+2.Si vous voyez de la vapeur : Soulevez le capot avec précaution une fois que la vapeur s'est dissipée. [...]
+3.Après avoir laissé suffisamment refroidir le moteur, vérifiez que les durites et le faisceau de radiateur (radiateur) ne présentent pas de
+fuites. [...] Si une grande quantité de liquide de refroidissement fuit, contactez immédiatement un concessionnaire [...]
+[...] 7.Si le ventilateur ne fonctionne pas : Arrêtez immédiatement le moteur et contactez un concessionnaire [...]
