@@ -1,0 +1,133 @@
+SOURCE : Toyota Yaris (génération 2020 à aujourd'hui, version non hybride) — Manuel du propriétaire, réf. PZ49X-9A592-FR, édition du 2024-01-15.
+Publié par Toyota sur son portail propriétaires (lien « Manuel du propriétaire » de toyota.fr → https://www.toyota.fr/client/manuel,
+contenu servi par https://customerportal.tweddle-aws.eu/?language=fr&brand=toyota → Yaris → Yaris → 2020 - Aujourd'hui → Manuel du
+propriétaire 2024-01-15 « PDF »). Visionneuse : https://customerportal.tweddle-aws.eu/pdf/PZ49X-9A592-FR ; fichier PDF (62 Mo, 440 pages) :
+https://s3.amazonaws.com/cd-content.cd-1.prod.tweddle.com/a52ddc5f-8f6d-4075-a2e8-a747e22c7e1c/pdf/fr_fr/5e1efb03_4b4b_4214_8ca9_29b85d6dcbaa.pdf
+Texte extrait par la bibliothèque pdf.js de la visionneuse, sans retouche ; [...] = passage coupé. Ici, « PDF n » = page imprimée n.
+Pas de version Diesel : pas de témoin FAP, AdBlue ni préchauffage.
+
+##### p. 62-64 Voyants et témoins (liste)
+Voyant du système de freinage (→ P. 292) ; Voyant de température élevée du liquide de refroidissement (→ P. 292) ; Voyant du système de
+charge (→ P. 292) ; Voyant de faible pression d'huile moteur (→ P. 292) ; Voyant de dysfonctionnement (→ P. 293) ; Voyant SRS (→ P. 293) ;
+Voyant ABS (→ P. 293) ; (Rouge) / (Jaune) Voyant du système de direction assistée électrique (→ P. 294) ; [...] Voyant de faible pression des
+pneus (→ P. 295) ; [...] Témoin de dérapage (→ P. 297) ; [...] (Clignote) Témoin de dérapage (→ P. 205) ; Témoin VSC OFF (→ P. 206) ; [...]
+Témoin de frein de stationnement (→ P. 118) ; [...] Témoin “PASSENGER AIR BAG” (→ P. 36) [...]
+
+##### p. 292-298 « 7.2.4 Si un voyant s'allume ou si un signal sonore d'avertissement retentit »
+Si un voyant quelconque s'allume ou clignote, gardez votre calme et effectuez les opérations suivantes. [...]
+Voyant du système de freinage (signal sonore d'avertissement)
+Indique ce qui suit : ■ Le niveau du liquide de frein est bas ; ou ■ Le système de freinage présente un dysfonctionnement
+Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre
+réparateur qualifié. Il pourrait être dangereux de continuer à conduire.
+Voyant de température élevée du liquide de refroidissement * (signal sonore)
+Indique que la température du liquide de refroidissement du moteur est trop élevée
+Arrêtez immédiatement le véhicule dans un endroit sûr. Méthode de manipulation ( → P. 322 )
+Voyant du système de charge *
+Indique un dysfonctionnement du système de charge du véhicule
+Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre
+réparateur qualifié.
+Voyant de faible pression d'huile moteur * (signal sonore)
+Indique que la pression d'huile moteur est trop basse ( → P. 247)
+Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre
+réparateur qualifié.
+(p. 293) Voyant de dysfonctionnement (signal sonore)
+Indique un dysfonctionnement dans : ■ Le système électronique de commande du moteur ; ■ Le système électronique de commande de papillon ;
+ou ■ Le système électronique de commande de Multidrive (si le véhicule en est équipé)
+Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre
+réparateur qualifié.
+Voyant SRS (signal sonore)
+Indique un dysfonctionnement dans : ■ Le système d'airbag SRS ; ou ■ Le système de prétensionneur de ceinture de sécurité
+Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.
+Voyant ABS
+Indique un dysfonctionnement dans : ■ L'ABS ; ou ■ Le système d'assistance au freinage
+Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.
+(p. 294) Voyant du système de direction assistée électrique (signal sonore d'avertissement)
+(Rouge) ou (Jaune) Indique un dysfonctionnement du système EPS (direction assistée électrique)
+Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.
+(p. 295) Voyant de faible pression des pneus
+Si le témoin reste allumé après avoir clignoté pendant environ 1 minute (un signal sonore ne retentit pas) :
+Dysfonctionnement dans le système de détection de pression des pneus
+Faites vérifier le système par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.
+Lorsque le témoin s'allume (un signal sonore retentit) :
+Faible pression des pneus due à des causes naturelles
+Réglez la pression de gonflage des pneus au niveau prescrit de pression de gonflage des pneus à froid. ( → P. 333 )
+Faible pression des pneus en raison d'un pneu crevé
+Arrêtez immédiatement le véhicule dans un endroit sûr. Méthode de manipulation ( → P. 297 )
+[...]
+(p. 297) Témoin de dérapage
+Indique un dysfonctionnement dans : ■ Le système VSC ; ■ Le système TRC ; ou ■ Le système de commande d'assistance au démarrage en côte
+Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.
+[...]
+Si le voyant de dysfonctionnement s'allume lors de la conduite
+Pour certains modèles, le voyant de dysfonctionnement s'allume si le réservoir à carburant devient complètement vide. Si le réservoir à
+carburant est vide, faites immédiatement le plein du véhicule. Le voyant de dysfonctionnement s'éteindra après avoir effectué plusieurs
+trajets. Si le voyant de dysfonctionnement ne s'éteint pas, contactez dès que possible un concessionnaire ou un réparateur Toyota agréé, ou
+tout autre réparateur qualifié.
+Voyant du système de direction assistée électrique (signal sonore)
+Lorsque la charge de la batterie devient insuffisante ou lorsque la tension chute provisoirement, il se peut que le voyant du système de
+direction assistée électrique s'allume et que le signal sonore retentisse.
+Lorsque le voyant de faible pression des pneus s'allume
+Vérifiez les pneus pour vous assurer qu'un pneu n'est pas crevé. [...]
+Si le voyant de faible pression des pneus clignote pendant 1 minute environ et reste allumé
+Il se peut que le système de détection de pression des pneus présente un dysfonctionnement. Faites immédiatement vérifier le véhicule par
+un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.
+Si le voyant de faible pression des pneus s'allume
+1.Une fois que la température des pneus a suffisamment diminué, vérifiez la pression de gonflage de chaque pneu et réglez-le au niveau prescrit.
+(p. 298) [...]
+MISE EN GARDE !
+Si le voyant ABS et le voyant du système de freinage restent allumés
+Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre
+réparateur qualifié. Le véhicule devient très instable pendant le freinage, et l'ABS risque de connaître une défaillance, ce qui peut
+provoquer un accident et causer des blessures graves voire mortelles.
+Lorsque le voyant du système de direction assistée électrique s'allume
+Lorsque le voyant s'allume en jaune, l'assistance à la direction assistée est limitée. Lorsque le voyant s'allume en rouge, l'assistance à
+la direction assistée est perdue et il devient alors très difficile de manœuvrer le volant. [...]
+Si le voyant de faible pression des pneus s'allume
+Veillez à respecter les mesures de précaution suivantes. Dans le cas contraire, vous risquez de perdre le contrôle du véhicule, avec pour
+conséquences des blessures graves, voire mortelles.
+• Arrêtez votre véhicule dans un endroit sûr dès que possible. Réglez immédiatement la pression de gonflage des pneus. [...]
+
+##### p. 299-301 « 7.2.5 Si un message d'avertissement est affiché »
+[...] Si “Niveau d'huile moteur faible. Ajoutez ou remplacez.” s'affiche
+Le niveau d'huile moteur est faible. Vérifiez le niveau d'huile moteur et faites l'appoint, si nécessaire. ( → P. 247) [...]
+(p. 300) Si “Entretien d'huile bientôt requis” s'affiche
+Indique qu'une vidange de l'huile moteur doit être programmée. Vérifiez le niveau d'huile moteur et effectuez la vidange si nécessaire. [...]
+Si “Entretien d'huile requis. Visitez votre concessionnaire.” s'affiche
+Indique qu'une vidange de l'huile moteur est requise. Faites vérifier et vidanger l'huile moteur et changer le filtre à huile par un
+concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié. [...]
+(p. 301) • Si l'un des messages suivants s'affiche sur l'écran multifonction, cela peut indiquer un dysfonctionnement. Arrêtez immédiatement
+le véhicule et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié.
+– “Puissance de freinage faible” – “Dysfonctionnement du système de charge batterie 12 V” – “Press. huile faible”
+
+##### p. 204-206 GPF et systèmes d'aide
+(p. 204) Si le message “Filtre d'échappement plein. Consultez le manuel du propriétaire.” s'affiche [...] Cependant, il est possible de
+conduire le véhicule sauf si le témoin de dysfonctionnement s'allume. [...] Si le témoin de dysfonctionnement s'allume ou si le message
+“Entretien du moteur requis. Consultez votre concessionnaire.” s'affiche sur l'écran multifonction La quantité de particules accumulées a
+dépassé un certain niveau. Faites immédiatement vérifier le véhicule [...] [message, pas de témoin FAP]
+(p. 205) Lorsque les systèmes TRC/VSC/de contrôle du roulis de remorque fonctionnent
+Le témoin de dérapage clignote lorsque les systèmes TRC/VSC/de contrôle du roulis de la remorque fonctionnent.
+
+##### p. 118 Frein de stationnement (levier)
+1.Engage le frein de stationnement [...] Le témoin de frein de stationnement s'allume.
+2.Relâche le frein de stationnement [...] Le témoin de frein de stationnement s'éteint. [...]
+Signal sonore de frein de stationnement engagé
+Un signal sonore retentit si le véhicule roule avec le frein de stationnement engagé. Le message “Relâchez le frein de stationnement” s'affiche [...]
+
+##### p. 37 Témoin « PASSENGER AIR BAG »
+[...] Insérez la clé dans le barillet et tournez-la sur la position “OFF”. Le témoin “OFF” s'allume (uniquement si le contacteur du moteur est
+en position ON). [...]
+MISE EN GARDE ! [...] Lorsqu'un système de retenue pour enfant n'est pas installé sur le siège du passager avant
+Assurez-vous que le système d'activation/désactivation manuelle de l'airbag est en position “ON”. S'il est laissé en position désactivée,
+il se peut que l'airbag ne se déploie pas en cas d'accident, ce qui peut causer des blessures graves, voire mortelles.
+
+##### p. 322-323 « 7.2.11 Si votre véhicule surchauffe » (lu le 24/10)
+Les situations suivantes peuvent indiquer que votre véhicule surchauffe. • La jauge de température du liquide de refroidissement du moteur
+( → P. 65) entre dans la zone rouge ou vous ressentez une perte de puissance du moteur. [...] • Le message “Temp. liquide refroid. moteur
+élevée. Arrêtez véhicule en lieu sûr. Consultez le manuel du propriétaire.” est affiché sur l'écran multifonction. • De la vapeur s'échappe
+de sous le capot.
+(p. 323) Mesures correctives
+1.Arrêtez le véhicule dans un endroit sûr et désactivez le système de climatisation, puis arrêtez le moteur.
+2.Si vous voyez de la vapeur : Soulevez le capot avec précaution une fois que la vapeur s'est dissipée. [...]
+3.Après avoir laissé suffisamment refroidir le moteur, vérifiez que les durites et le faisceau de radiateur (radiateur) ne présentent pas de
+fuites. [...] Si une grande quantité de liquide de refroidissement fuit, contactez immédiatement un concessionnaire [...]
+[...] 7.Si le ventilateur ne fonctionne pas : Arrêtez immédiatement le moteur et contactez un concessionnaire [...]

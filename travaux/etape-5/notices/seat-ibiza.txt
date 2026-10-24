@@ -1,0 +1,229 @@
+SOURCE : Seat Ibiza — Notice d'utilisation, édition 11/20 (« IBIZA_11_20_FR »), PDF publié par Seat :
+https://www.seat.fr/datamanual-manual/ibiza/my21_w48/fr-fr/IBIZA_11_20_FR.pdf (356 pages)
+Texte extrait du PDF par pdf.js (navigateur), sans retouche ; [...] = passage coupé. « PDF n » = page du fichier ; page imprimée = n − 2.
+Les symboles des témoins sont des glyphes non extraits (blancs dans le texte).
+
+##### PDF 95-96 (p. 93-94) Témoins : liste et renvois
+Témoins rouges : Voyant central d'alerte ; Frein de stationnement activé ››› page 251 ; Dysfonctionnement du système de freinage ››› page 251 ;
+Dysfonctionnement de la direction ››› page 227 ; ceinture ››› page 17 ; Liquide de refroidissement du moteur ››› page 89 ;
+Pression d'huile moteur ››› page 294 ; Dysfonctionnement de l'alternateur ››› page 302 ; Appuyez sur la pédale de frein ››› page 245 ;
+Niveau d'Adblue trop faible, OU défaut du système SCR ››› page 286 .
+Témoins jaunes : Voyant central d'alerte ; Dysfonctionnement de l'ESC ou désactivation provoquée par le système ; OU ESC ou ASR en action ››› page 254 ;
+ASR désactivé manuellement ; OU ESC en mode Sport ››› page 254 ; Dysfonctionnement de l'ABS ››› page 254 ; [...]
+Dysfonctionnement du système de contrôle des gaz d'échappement ››› page 288 ; Préchauffage du moteur diesel ; OU dysfonctionnement de la gestion
+du moteur diesel ››› page 288 ; Dysfonctionnement de gestion du moteur essence ››› page 288 ; Filtre à particules obstrué ››› page 288 ;
+Dysfonctionnement de la direction ››› page 227 ; Système de contrôle de la pression des pneus ››› page 311 ; [...] Niveau d'AdBlue faible, OU défaut
+du système SCR ››› page 286 ; Dysfonctionnement du système d'airbag et de rétracteurs des ceintures ››› page 26 ; Airbag frontal du passager désactivé
+››› page 26 ; [...] Niveau d'huile-moteur ››› page 294 ; [...] Autres témoins : [...] Indicateur de maintenance ››› page 90 .
+AVERTISSEMENT (p. 94, encadré général qui suit la liste de tous les témoins, verts et bleus compris)
+Si les témoins d'avertissement et les messages ne sont pas pris en compte, le véhicule pourrait être endommagé et arrêté
+dans la circulation, ou des accidents et des blessures graves pourraient en résulter.
+● Il ne faut jamais ignorer les témoins d'avertissement ni les messages de texte.
+● Arrêtez le véhicule de manière sûre dès que possible.
+[...]
+
+##### PDF 28-29 (p. 26-27) Airbags
+Témoins de contrôle du système d'airbags
+ S'allume sur le combiné d'instruments
+Dysfonctionnement du système d'airbag et de rétracteurs de ceintures.
+Faites contrôler immédiatement le système par un atelier spécialisé.
+  S'allume sur le combiné d'instruments
+Dysfonctionnement du système d'airbag.
+Faites contrôler immédiatement le système par un atelier spécialisé.
+Airbag frontal du passager désactivé.
+Vérifiez si l'airbag doit rester désactivé.
+  S'allume sur le combiné d'instruments
+Airbag frontal du passager activé.
+Le témoin s'éteint automatiquement 60 secondes après avoir mis le contact
+(p. 27) Si le témoin du système d'airbag et de rétracteurs de ceintures reste allumé ou clignote,
+cela indique une anomalie de ce système ››› . Faites contrôler immédiatement le système par un atelier spécialisé.
+[...]
+AVERTISSEMENT
+En cas de dysfonctionnement du système d'airbag et de rétracteurs de ceintures, ces équipements peuvent se déclencher
+difficilement, ne pas se déclencher du tout ou même se déclencher de manière inattendue.
+● Les occupants du véhicule courent des risques de blessures graves ou mortelles. Faites immédiatement contrôler le système
+dans un atelier spécialisé.
+● Ne montez pas un siège pour enfants sur le siège du passager avant ou retirez le siège pour enfants monté ! En cas d'accident,
+l'airbag frontal du passager avant risquerait de se déclencher malgré le défaut.
+
+##### PDF 91 (p. 89) Température du liquide de refroidissement
+Témoin d'alerte et de contrôle
+ S'allume en rouge
+ Arrêtez-vous immédiatement !
+Niveau de liquide de refroidissement trop faible, température du liquide de refroidissement trop élevée.
+ Il clignote en rouge
+Système de refroidissement du moteur défectueux.
+● Arrêtez le véhicule, coupez le moteur et laissez-le refroidir.
+● Vérifiez le niveau du liquide de refroidissement du moteur ››› page 297 .
+● Si le témoin ne s'éteint pas en présence d'un niveau de liquide de refroidissement correct, faites appel à un spécialiste
+en mesure de vous dépanner.
+
+##### PDF 92 (p. 90) Périodicité d'entretien
+[...] Date d'entretien
+Lorsqu'un entretien ou une inspection arrive à échéance, il est possible qu'un signal sonore retentisse après avoir mis le contact
+et que le symbole clé plate s'affiche à l'écran du combiné d'instruments, accompagné des messages suivants :
+● Entretien maintenant ! ● Faites inspecter le véhicule. ● Service de vidange d'huile nécessaire ! ● Vidange d'huile et entretien nécessaires !
+
+##### PDF 229 (p. 227) Direction
+Témoin de contrôle
+ S'allume en rouge
+Direction endommagée.
+Stoppez le véhicule dès que possible et en toute sécurité.
+Rendez-vous sans plus attendre dans un atelier spécialisé pour réparer la panne.
+ S'allume en jaune
+Fonctionnement limité de la direction.
+Rendez-vous avec prudence dans un atelier spécialisé pour effectuer une révision de la direction.
+Si le témoin ne s'allume plus après avoir redémarré le moteur et effectué un court trajet, il n'est pas nécessaire de faire une révision.
+OU : La batterie 12 volts était débranchée et a été rebranchée.
+Effectuez un bref parcours à 15-20 km/h (9-12 mph).
+ Il clignote en jaune
+La colonne de direction est coincée. [...]
+Arrêtez-vous si la colonne de direction reste bloquée après avoir mis le contact. Faites appel à un spécialiste en mesure de vous dépanner.
+Le témoin s'allume pendant quelques secondes au moment où vous mettez le contact d'allumage. Il doit s'éteindre après le démarrage du moteur.
+
+##### PDF 253 (p. 251) Système de freinage
+Témoins
+ S'allume en rouge
+Niveau de liquide de frein trop bas ››› page 299 ou dysfonctionnement du circuit de freinage.
+ Ne continuez pas de rouler !
+ S'allume en rouge
+Frein à main serré ››› page 253 .
+Le témoin s'éteint lorsque le frein à main est desserré.
+AVERTISSEMENT
+● Si le témoin du système de freinage ne s'éteint pas ou s'il s'allume en cours de route, le niveau du liquide de frein est trop bas
+ou il existe une panne du système, ce qui engendre un risque d'accident ››› page 299, Liquide de freins. Arrêtez-vous. Demandez
+de l'aide à un technicien.
+● Si le témoin du système de freinage s'allume en même temps que le témoin d'ABS , il se peut que le fonctionnement de l'ABS soit
+défaillant. Lorsque cette fonction est en panne, les roues arrière peuvent se bloquer. Dans certaines circonstances, l'arrière du
+véhicule peut déraper, au risque de perdre le contrôle. Arrêtez-vous et demandez de l'aide à un technicien.
+
+##### PDF 256 (p. 254) Systèmes de stabilisation et assistance au freinage
+Témoins*
+ Témoin allumé
+Anomalie de l'ESC ou l'ABS, ou déconnexion provoquée par le système.
+L'ESC fonctionne en combinaison avec l'ABS ; si le système ABS est défaillant, le voyant s'allume également.
+ Clignote
+ESC ou ASR en cours de fonctionnement.
+ Témoin allumé
+ASR désactivé manuellement.
+Ou : ESC en mode Sport ››› page 256 .
+ Témoin allumé
+Défaut sur l'ABS, ou il ne fonctionne pas.
+Les témoins s'allument simultanément après avoir mis le contact et doivent s'éteindre au bout de 2 secondes environ, durée
+nécessaire à la vérification de la fonction.
+[Pour les témoins ESC et ABS allumés (défaut), aucune consigne propre sur les pages 254 à 256.]
+(p. 255, fin de section) AVERTISSEMENT
+En conduisant rapidement sur chaussée gelée, glissante ou mouillée, il est possible de perdre le contrôle du véhicule, ce qui
+pourrait entraîner de graves blessures pour le conducteur et les passagers.
+● Les systèmes ESC, ABS, ASR, EDS ou la gestion électronique du couple-moteur ne sont pas non plus en mesure de dépasser les
+limites imposées par les lois de la physique. Pensez-y notamment lorsque les routes sont glissantes ou mouillées. Lorsque les systèmes
+entrent dans la plage de régulation, adaptez immédiatement votre vitesse à l'état de la route et aux conditions » [suite p. 256]
+
+##### PDF 288 (p. 286) AdBlue
+[...] Lorsque l'autonomie devient restante inférieure à 2 400 km , une indication s'affiche sur l'écran du combiné d'instruments
+pour indiquer qu'il est nécessaire de remplir le réservoir d'AdBlue®.
+Si ce message est ignoré, le témoin lumineux jaune s'allume après une autonomie restante de 1 000 km . L'écran du combiné
+d'instruments indique qu'il ne sera plus possible de redémarrer le moteur dans XXX km.
+Si le témoin lumineux jaune est ignoré, lorsqu'une autonomie restante de 0 km est affichée, il n'est plus possible de redémarrer le
+moteur. Le voyant d'avertissement rouge s'allume .
+[...]
+Témoins d'alerte et de contrôle
+ S'allume en rouge
+Il est impossible de redémarrer le moteur ! Le niveau d'AdBlue est trop faible.
+Arrêtez le véhicule dans un endroit adéquat, sûr et plat, puis faites l'appoint avec la quantité minimale nécessaire d'additif
+AdBlue ››› page 287 .
+ et  Il s'allume en rouge
+Il est impossible de redémarrer le moteur ! Dysfonctionnement du circuit d'Adblue.
+Adressez-vous à un atelier spécialisé. Faites réviser le système.
+ S'allume en jaune
+La réserve d'AdBlue est faible.
+Faites l'appoint d'additif AdBlue dans les prochains kilomètres (ou milles) indiqués ››› page 287 . SEAT recommande pour cela de
+vous rendre dans un atelier spécialisé.
+ et  Il s'allume en jaune
+Un dysfonctionnement a été détecté dans le circuit d'AdBlue ou le liquide AdBlue rajouté n'est pas conforme.
+Adressez-vous à un atelier spécialisé. Faites réviser le système.
+
+##### PDF 289 (p. 287) Charger l'AdBlue (relu le 24/10)
+[...] Si un message concernant le niveau d'additif AdBlue® s'affiche sur l'écran du combiné d'instruments, ajoutez au minimum la quantité
+minimale nécessaire (environ 5 litres) . [...]
+
+##### PDF 290-291 (p. 288-289) Gestion du moteur et système d'épuration des gaz d'échappement
+Témoins
+ Témoin allumé
+Dysfonctionnement du système de contrôle des gaz d'échappement.
+Levez le pied de l'accélérateur et roulez prudemment jusqu'à l'atelier spécialisé le plus proche pour y faire contrôler le moteur.
+ Clignote
+Dysfonctionnement de combustion susceptible d'endommager le catalyseur.
+Levez le pied de l'accélérateur et roulez prudemment jusqu'à l'atelier spécialisé le plus proche pour y faire contrôler le moteur.
+ Témoin allumé
+Filtre à particules obstrué ››› page 289 .
+ Témoin allumé
+Dysfonctionnement de la gestion du moteur essence.
+Faites immédiatement contrôler le moteur par un atelier spécialisé.
+Lorsque le contact est mis, le voyant (Electronic Power Control) s'allume et doit s'éteindre une fois le moteur démarré.
+(p. 289)
+ Témoin allumé
+Système de préchauffage du moteur diesel.
+Lorsque le témoin s'éteint, le moteur peut être démarré immédiatement.
+ Clignote
+Dysfonctionnement de la gestion du moteur diesel.
+Faites immédiatement contrôler le moteur par un atelier spécialisé.
+Nota
+Tant que les voyants , , ou restent allumés, il est possible que le moteur présente un dysfonctionnement, que la consommation
+de carburant augmente et que le moteur perde de la puissance.
+[...]
+Filtre à particules
+[...] il est obstrué par de la suie et l'indication destinée au conducteur apparaît : Filtre à particules : il se nettoie en cours
+de route. Voir Manuel. Le filtre à particules doit être nettoyé (régénération).
+Régénération du filtre à particules essence et diesel
+Condition pour la procédure de régénération : le moteur doit être à sa température de fonctionnement.
+● Conduisez à une vitesse comprise entre 50 et 120 km/h (31 et 75 mi/h). Cela augmente la température et brûle la suie dans le filtre ››› .
+● Respectez les limitations de vitesse légales ainsi que les rapports recommandés.
+● Terminer la régénération après l'extinction du témoin lumineux.
+(p. 290) Si le témoin reste allumé après 30 minutes de conduite en mode régénération, contactez un atelier spécialisé pour faire
+réparer le défaut
+
+##### PDF 296 (p. 294) Huile moteur
+Témoin d'alerte
+ S'allume en rouge
+ Arrêtez-vous immédiatement !
+La pression d'huile moteur est trop faible.
+Éteignez le moteur. Vérifiez le niveau d'huile moteur.
+Si le voyant clignote accompagné de trois signaux sonores d'avertissement , arrêtez le moteur et contrôlez le niveau d'huile. Le cas
+échéant, faites l'appoint d'huile ››› page 295 .
+Si le témoin clignote bien que le niveau d'huile soit correct, ne poursuivez pas votre route. Ne faites pas non plus tourner le moteur
+au ralenti. Demandez l'aide d'un professionnel.
+ S'allume en jaune
+Contrôlez immédiatement le niveau d'huile du moteur.
+Faites l'appoint d'huile dès que possible ››› page 295 .
+ Il clignote en jaune
+Dysfonctionnement du capteur de niveau d'huile.
+Adressez-vous à un atelier spécialisé pour le faire réviser. Par mesure de sécurité, il est recommandé de contrôler le niveau d'huile
+moteur à l'occasion de chaque passage à la pompe.
+
+##### PDF 304 (p. 302) Batterie
+Témoin d'alerte
+ S'allume en rouge
+Dysfonctionnement de l'alternateur.
+Le témoin s'allume après avoir mis le contact. Il doit s'éteindre après le démarrage du moteur.
+Si le témoin s'allume en cours de route, la batterie du véhicule n'est plus rechargée par l'alternateur. Rendez-vous immédiatement
+dans l'atelier spécialisé le plus proche.
+Mais comme la batterie se décharge, il est alors préférable d'éteindre tous les dispositifs électriques non absolument indispensables.
+
+##### PDF 313-314 (p. 311-312) Systèmes de contrôle de la pression des pneus
+Témoin de contrôle
+ Témoin allumé
+Pression de gonflage d'une roue bien inférieure à la valeur définie par le conducteur ››› au chapitre Indicateur de contrôle de la
+pression des pneus à la page 312 .
+Ou alors : Dysfonctionnement de l'indicateur de pression de gonflage des pneus.
+[...]
+(p. 312) AVERTISSEMENT
+Si les pneus sont gonflés à différentes pressions ou à une pression trop faible, ils risquent de s'endommager et de vous faire perdre
+le contrôle du véhicule, ce qui pourrait provoquer un accident grave, voire mortel.
+● Si le témoin s'allume, vous devez immédiatement réduire la vitesse et éviter toute manœuvre soudaine de virage ou de freinage.
+Arrêtez-vous le plus rapidement possible et contrôlez la pression et l'état de tous les pneus.
+● Le système de contrôle des pneus fonctionne correctement uniquement si tous les pneus à froid se trouvent à la pression correcte.
+● Si le pneu n'est pas crevé et que son remplacement immédiat n'est pas nécessaire, rendez-vous à l'atelier spécialisé le plus proche
+à faible vitesse et faites vérifier et corriger la pression de gonflage.
+Nota [...]
+● L'indicateur de contrôle de la pression des pneus ne fonctionne pas lorsque l'ESC ou l'ABS est défectueux ››› page 254.

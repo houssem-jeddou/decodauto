@@ -18,7 +18,8 @@
     "plan:vue": "node scripts/vue-plan.ts",
     "grille:vue": "node scripts/vue-grille.ts",
     "empreinte": "node scripts/empreinte.ts",
-    "verifier:modes": "node scripts/verifier-modes.ts"
+    "verifier:modes": "node scripts/verifier-modes.ts",
+    "paquet": "node scripts/paquet-validation.ts --pictogrammes-obligatoires"
   },
   "dependencies": {
     "astro": "7.4.2"

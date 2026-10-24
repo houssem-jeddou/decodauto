@@ -1,0 +1,83 @@
+[
+  {
+    "page": "voyants",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "l'outil voyants affiche toutes les lignes de la base, tirées de ces notices"
+  },
+  {
+    "page": "code-p0420",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire)"
+  },
+  {
+    "page": "code-p0087",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire)"
+  },
+  {
+    "page": "code-p0299",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire)"
+  },
+  {
+    "page": "code-p0380",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire ; la ligne « préchauffage » décrit un fonctionnement normal et ne porte pas le verdict d'un défaut)"
+  },
+  {
+    "page": "code-p1351",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire ; la ligne « préchauffage » décrit un fonctionnement normal et ne porte pas le verdict d'un défaut)"
+  },
+  {
+    "page": "pression-des-pneus",
+    "sources": [
+      "notice-renault-clio-5"
+    ],
+    "raison": "pressions de gonflage lues sur l'étiquette de la porte conducteur, vérifiées pneus froids, au moins une fois par mois (notice Renault Clio 5, p. 206 et 348)"
+  },
+  {
+    "page": "loi-montagne",
+    "sources": [
+      "code-de-la-route-d314-8",
+      "decret-2020-1264"
+    ],
+    "raison": "obligation d'équipement en période hivernale : code de la route, art. D314-8, créé par l'article 1er du décret n° 2020-1264 et modifié par son article 2 (version en vigueur depuis le 1er novembre 2024) ; les arrêtés préfectoraux listant les communes seront ajoutés au registre à l'étape 8"
+  }
+]

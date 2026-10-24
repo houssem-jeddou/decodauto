@@ -79,6 +79,16 @@ Non vérifiable par machine (liste de recette) : un recouvrement de sens entre d
 | WRANGLER-* | `wrangler.json` : pas de script, `workers_dev` et `preview_urls` à `false`, `not_found_handling` = `404-page`, domaine personnalisé decodauto.com (`custom_domain`) |
 | LIEN-CASSE / LIEN-SANS-BARRE / LIEN-ANCRE | Liens internes (`npm run liens`) |
 
+## Brouillon de la base voyants et paquet de validation (étape 5)
+Avant la validation de Houssem, les lignes de la base sont préparées dans `data/voyants.brouillon.json` : la forme d'une ligne de la base sans l'empreinte, plus `sans_consigne`, la liste des notices consultées qui décrivent l'état sans consigne propre (elles ne fixent aucun niveau ; le paquet les montre). `npm run paquet` contrôle le brouillon et génère le paquet de validation (`travaux/etape-5/paquet-validation.md`). Code : `scripts/lib/brouillon.ts` ; tests : `tests/brouillon.test.ts`. Après la validation notée au journal, `node scripts/valider-brouillon.ts --valide-par-houssem AAAA-MM-JJ --empreinte <empreinte du paquet>` vérifie que le brouillon est bien celui du paquet validé (empreinte affichée dans le paquet), écrit les lignes dans `data/voyants.json` avec leur empreinte, enregistre la validation dans `travaux/etape-5/validation.json` et supprime le brouillon.
+
+| Code | Règle | Gravité |
+|---|---|---|
+| R3-*, R8-COHERENCE, R1-RATTACHEMENT, R7-LIEN-OUTIL | Les règles de la base voyants, appliquées à chaque ligne du brouillon (toutes sauf R4) | erreur |
+| PICTO-ABSENT | Pictogramme manquant : alerte pendant le dessin, erreur avec `--pictogrammes-obligatoires` (`npm run paquet`) et pour la base finale | alerte / erreur |
+| R7-FORMAT (sans_consigne) | `sans_consigne` ne liste que des notices constructeur du registre, jamais une notice déjà citée avec un niveau dans la même ligne | erreur |
+| PORTE5-SOURCE | Porte de l'étape 5 : chaque page éditoriale de la vague A a au moins une source de première main, rattachée par la base (voyants) ou par le tableau `travaux/etape-5/pages-sources.json` | erreur |
+
 ## Empreinte de validation
 Code : `src/lib/empreinte.ts` ; calcul : `npm run empreinte -- <page.md>` ou `npm run empreinte -- --voyant <id>`. L'empreinte se copie après la validation de Houssem, jamais pour faire passer un contrôle.
 - **Ligne de la base voyants** (`validation` de `data/voyants.json`) : identifiant, nom, couleur, pictogramme et son dessin (contenu du fichier SVG ; espaces et commentaires ignorés), situation, verdict, urgence, action, écart entre marques et citations (source, page ou section, extrait, niveau). L'ordre des citations n'a pas d'effet.

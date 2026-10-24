@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "id": "notice-peugeot-208",
+    "titre": "Peugeot 208 — Guide d'utilisation (édition 01-20)",
+    "editeur": "Peugeot (Stellantis)",
+    "categorie": "notice-constructeur",
+    "url": "https://public.servicebox.peugeot.com/APddb/modeles/208.p2/eGuide_p21_ed01-20/pdfs/9999_9999_401_fr-FR.pdf",
+    "date_consultation": "2026-10-23",
+    "marque": "peugeot",
+    "modele": "208 (2e génération), guide d'utilisation édition 01-20"
+  },
+  {
+    "id": "notice-seat-ibiza",
+    "titre": "Seat Ibiza — Notice d'utilisation (édition 11/20)",
+    "editeur": "Seat (groupe Volkswagen)",
+    "categorie": "notice-constructeur",
+    "url": "https://www.seat.fr/datamanual-manual/ibiza/my21_w48/fr-fr/IBIZA_11_20_FR.pdf",
+    "date_consultation": "2026-10-23",
+    "marque": "seat",
+    "modele": "Ibiza (5e génération), notice édition 11/20"
+  },
+  {
+    "id": "notice-renault-clio-5",
+    "titre": "Renault Clio 5 phase 2 — Notice d'utilisation (réf. 1457-3)",
+    "editeur": "Renault (Renault Group)",
+    "categorie": "notice-constructeur",
+    "url": "https://www.user-manual.renault.com/sites/renault/files/Clio_5_ph2_-_1457-3_FRA.pdf",
+    "date_consultation": "2026-10-23",
+    "marque": "renault",
+    "modele": "Clio 5 phase 2, notice réf. 1457-3"
+  },
+  {
+    "id": "notice-dacia-sandero-3",
+    "titre": "Dacia Sandero 3 — Notice d'utilisation (réf. 1688-1)",
+    "editeur": "Dacia (Renault Group)",
+    "categorie": "notice-constructeur",
+    "url": "https://www.user-manual.dacia.com/sites/dacia/files/GUI_NU_DAC_BJI_1688_1_0_LHD-RHD_PRNT-fr-FR.pdf",
+    "date_consultation": "2026-10-24",
+    "marque": "dacia",
+    "modele": "Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1"
+  },
+  {
+    "id": "notice-toyota-yaris",
+    "titre": "Toyota Yaris — Manuel du propriétaire (réf. PZ49X-9A592-FR)",
+    "editeur": "Toyota",
+    "categorie": "notice-constructeur",
+    "url": "https://customerportal.tweddle-aws.eu/pdf/PZ49X-9A592-FR?modelType=Yaris&lineOffDate=2024-01-15",
+    "date_consultation": "2026-10-24",
+    "marque": "toyota",
+    "modele": "Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024"
+  },
+  {
+    "id": "code-de-la-route-d314-8",
+    "titre": "Code de la route, article D314-8 (équipements des véhicules en période hivernale)",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042436965",
+    "date_consultation": "2026-10-24"
+  },
+  {
+    "id": "decret-2020-1264",
+    "titre": "Décret n° 2020-1264 du 16 octobre 2020 relatif à l'obligation d'équipement de certains véhicules en période hivernale",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000042434406",
+    "date_consultation": "2026-10-24"
+  }
+]
