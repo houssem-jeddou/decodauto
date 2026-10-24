@@ -2,7 +2,10 @@ SOURCE : Renault Clio 5 phase 2 — Notice d'utilisation (réf. 1457-3, FRA), PD
 https://www.user-manual.renault.com/sites/renault/files/Clio_5_ph2_-_1457-3_FRA.pdf (424 pages)
 Trouvé depuis https://www.user-manual.renault.com/fr/notice/20010/pdf (« Télécharger le PDF »), lien « voir les notices » de renault.fr.
 Texte extrait du PDF par pdf.js (navigateur), sans retouche ; [...] = passage coupé. « PDF n » = page du fichier ; page imprimée = n − 2.
-Les symboles des témoins sont des glyphes non extraits (blancs dans le texte) : « accompagné du témoin  » = témoin STOP ou Service selon le contexte.
+Les symboles des témoins sont des images, absentes du texte extrait. Vérifié sur le rendu des pages (24/10) :
+- p. 136 : le témoin Service est une clé ; STOP est le pavé « STOP » ;
+- p. 137-138 : freinage, charge de batterie, pression d'huile et direction à assistance variable sont « accompagné du témoin STOP » ;
+- p. 212 : « [Service] et [ABS] allumés » ; p. 213 : « les témoins [Service] et [ESC] s'affichent » ; p. 122 : « Faire révision » avec le témoin Service.
 
 ##### PDF 138 (p. 136) Témoins lumineux : principes
 [témoin Service] Le témoin nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement .
@@ -190,3 +193,17 @@ Le véhicule nécessite alors une révision le plus rapidement possible.
 [...] À la mise sous contact, vérifiez impérativement que le témoin est bien allumé sur l'afficheur 2 .
 Ce voyant reste allumé en permanence pour vous confirmer que vous pouvez installer un siège enfant.
 [...] En cas de manipulation véhicule roulant, les témoins et s'allument.
+
+##### PDF 133 (p. 131) Alerte niveau d'huile moteur minimum (lu le 23/10)
+Au démarrage moteur, l'afficheur au tableau de bord vous alerte lorsque le niveau d'huile minimum est atteint 🡺 330 .
+À la première alerte, vous pouvez la faire disparaître en appuyant sur le contacteur 42 « OK ». Les alertes suivantes disparaîtront
+automatiquement au bout de 30 secondes environ.
+
+##### PDF 350 (p. 348) Pneumatiques : pressions de gonflage (lu le 23/10)
+[...] Etiquette A Pour la lire ouvrez la porte conducteur. Les pressions de gonflage doivent être vérifiées sur pneumatiques froids.
+Au cas où la vérification de la pression ne peut être effectuée sur les pneumatiques froids, il faut majorer les pressions indiquées de 0,2
+à 0,3 bar (ou 3 PSI). Il est impératif de ne jamais dégonfler un pneumatique chaud.
+Véhicule équipé d'un avertisseur de perte de pression des pneumatiques
+En cas de sous-gonflage (crevaison, sous-gonflage...), le témoin s'allume au tableau de bord 🡺 206 .
+(p. 206) Vérifiez la pression des pneumatiques, y compris la roue de secours, une fois par mois.
+[p. 330 (lecture du niveau d'huile) non relevée.]

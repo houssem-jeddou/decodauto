@@ -1,4 +1,8 @@
+import { createHash } from 'node:crypto';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { z } from 'astro/zod';
+import { chargerDonnees } from './charger.ts';
 import {
   construireContexte,
   controlerLigneDeVerdict,
@@ -188,6 +192,44 @@ export function genererPaquet(
     s.push('', 'Décision de Houssem : ☐ validée  ☐ à corriger : …', '');
   });
   return `${s.join('\n')}\n`;
+}
+
+/**
+ * Empreinte du brouillon (lignes, citations, notices sans consigne) : imprimée dans le paquet, elle est redonnée à
+ * scripts/valider-brouillon.ts, qui refuse d'écrire la base si le brouillon a changé depuis le paquet validé.
+ */
+export function empreinteBrouillon(lignes: readonly LigneBrouillon[]): string {
+  return createHash('sha256').update(JSON.stringify(lignes)).digest('hex');
+}
+
+export const FICHIER_RATTACHEMENTS = 'travaux/etape-5/pages-sources.json';
+export const FICHIER_PAQUET = 'travaux/etape-5/paquet-validation.md';
+const FICHIER_INTRO = 'travaux/etape-5/paquet-intro.md';
+
+/** Contrôle le brouillon et le tableau page → sources, puis rédige le paquet (sans écrire de fichier). */
+export async function construirePaquet(
+  racine: string,
+  aujourdhui: Date,
+  options: { pictogrammesObligatoires: boolean },
+): Promise<{ texte: string; constats: Constat[]; lignes: LigneBrouillon[]; empreinte: string }> {
+  const donnees = await chargerDonnees(racine);
+  const brouillon = JSON.parse(await readFile(join(racine, FICHIER_BROUILLON), 'utf8')) as unknown[];
+  const resultat = controlerBrouillon(brouillon, donnees, aujourdhui, options);
+  const rattachements = controlerRattachements(resultat.plan, resultat.sources, JSON.parse(await readFile(join(racine, FICHIER_RATTACHEMENTS), 'utf8')) as unknown[], FICHIER_RATTACHEMENTS);
+  const constats = [...resultat.constats, ...rattachements.constats];
+  const couverture = couvertureVagueA(resultat.plan, resultat.sources, resultat.lignes, rattachements.valides);
+  for (const c of couverture.filter((x) => x.sources.length === 0)) {
+    constats.push(erreur('PORTE5-SOURCE', `page de la vague A « ${c.page} » sans source de première main (base voyants ou tableau page → sources)`, FICHIER_RATTACHEMENTS));
+  }
+  let intro = '# Paquet de validation de la base voyants';
+  try {
+    intro = await readFile(join(racine, FICHIER_INTRO), 'utf8');
+  } catch {
+    // pas d'introduction : titre seul
+  }
+  const empreinte = empreinteBrouillon(resultat.lignes);
+  const entete = `${intro.trim()}\n\nEmpreinte du brouillon présenté : \`${empreinte}\` (à redonner à \`scripts/valider-brouillon.ts\` après la validation).`;
+  return { texte: genererPaquet(resultat.lignes, resultat.sources, constats, couverture, entete), constats, lignes: resultat.lignes, empreinte };
 }
 
 /** Lignes de la base après la validation de Houssem : la forme de data/voyants.json, avec l'empreinte. */

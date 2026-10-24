@@ -6,10 +6,13 @@ import { fileURLToPath } from 'node:url';
 import { construireContexte } from '../src/lib/controle.ts';
 import { chargerDonnees } from '../scripts/lib/charger.ts';
 import {
+  construirePaquet,
   controlerBrouillon,
   controlerRattachements,
   couvertureVagueA,
+  empreinteBrouillon,
   FICHIER_BROUILLON,
+  FICHIER_PAQUET,
   genererPaquet,
   lignesValidees,
 } from '../scripts/lib/brouillon.ts';
@@ -122,5 +125,21 @@ describe('brouillon de la base voyants (étape 5)', async () => {
     assert.ok(paquet.includes('Arrêtez-vous immédiatement !'));
     assert.ok(paquet.includes('état décrit sans consigne'));
     assert.ok(paquet.includes('Non, arrêtez-vous immédiatement'));
+  });
+
+  test('le paquet versionné est à jour avec le brouillon (npm run paquet relancé après chaque modification)', async () => {
+    if ((await lireBrouillon()) === undefined) return;
+    const { texte } = await construirePaquet(racine, AUJOURDHUI, { pictogrammesObligatoires: true });
+    assert.equal(await readFile(join(racine, FICHIER_PAQUET), 'utf8'), texte);
+  });
+
+  test('l’empreinte du brouillon change avec une citation, un niveau ou une notice sans consigne', () => {
+    const { lignes } = controlerBrouillon([ligne()], donnees, AUJOURDHUI, { pictogrammesObligatoires: true });
+    const reference = empreinteBrouillon(lignes);
+    const autreNiveau = controlerBrouillon([ligne({ urgence: 'immédiate', verdict: 'non, arrêt immédiat', action: 'Arrêtez-vous tout de suite.' })], donnees, AUJOURDHUI, { pictogrammesObligatoires: true }).lignes;
+    assert.notEqual(empreinteBrouillon(autreNiveau), reference);
+    const avecSansConsigne = controlerBrouillon([ligne({ sans_consigne: [{ source: 'notice-toyota-yaris', emplacement: 'p. 1', constat: 'x' }] })], donnees, AUJOURDHUI, { pictogrammesObligatoires: true }).lignes;
+    assert.notEqual(empreinteBrouillon(avecSansConsigne), reference);
+    assert.equal(empreinteBrouillon(lignes), reference);
   });
 });

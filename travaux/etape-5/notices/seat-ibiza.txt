@@ -111,7 +111,13 @@ Ou : ESC en mode Sport ››› page 256 .
 Défaut sur l'ABS, ou il ne fonctionne pas.
 Les témoins s'allument simultanément après avoir mis le contact et doivent s'éteindre au bout de 2 secondes environ, durée
 nécessaire à la vérification de la fonction.
-[Aucune consigne propre aux témoins ESC et ABS sur les pages 254 à 256.]
+[Pour les témoins ESC et ABS allumés (défaut), aucune consigne propre sur les pages 254 à 256.]
+(p. 255, fin de section) AVERTISSEMENT
+En conduisant rapidement sur chaussée gelée, glissante ou mouillée, il est possible de perdre le contrôle du véhicule, ce qui
+pourrait entraîner de graves blessures pour le conducteur et les passagers.
+● Les systèmes ESC, ABS, ASR, EDS ou la gestion électronique du couple-moteur ne sont pas non plus en mesure de dépasser les
+limites imposées par les lois de la physique. Pensez-y notamment lorsque les routes sont glissantes ou mouillées. Lorsque les systèmes
+entrent dans la plage de régulation, adaptez immédiatement votre vitesse à l'état de la route et aux conditions » [suite p. 256]
 
 ##### PDF 288 (p. 286) AdBlue
 [...] Lorsque l'autonomie devient restante inférieure à 2 400 km , une indication s'affiche sur l'écran du combiné d'instruments
@@ -136,6 +142,10 @@ vous rendre dans un atelier spécialisé.
  et  Il s'allume en jaune
 Un dysfonctionnement a été détecté dans le circuit d'AdBlue ou le liquide AdBlue rajouté n'est pas conforme.
 Adressez-vous à un atelier spécialisé. Faites réviser le système.
+
+##### PDF 289 (p. 287) Charger l'AdBlue (relu le 24/10)
+[...] Si un message concernant le niveau d'additif AdBlue® s'affiche sur l'écran du combiné d'instruments, ajoutez au minimum la quantité
+minimale nécessaire (environ 5 litres) . [...]
 
 ##### PDF 290-291 (p. 288-289) Gestion du moteur et système d'épuration des gaz d'échappement
 Témoins

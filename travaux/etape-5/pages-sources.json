@@ -49,9 +49,10 @@
       "notice-peugeot-208",
       "notice-seat-ibiza",
       "notice-renault-clio-5",
-      "notice-dacia-sandero-3"
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
     ],
-    "raison": "verdict tiré des lignes « voyant moteur » et « préchauffage » de la base (libellé du code : source secondaire)"
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire ; la ligne « préchauffage » décrit un fonctionnement normal et ne porte pas le verdict d'un défaut)"
   },
   {
     "page": "code-p1351",
@@ -59,9 +60,10 @@
       "notice-peugeot-208",
       "notice-seat-ibiza",
       "notice-renault-clio-5",
-      "notice-dacia-sandero-3"
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
     ],
-    "raison": "verdict tiré des lignes « voyant moteur » et « préchauffage » de la base (code constructeur : libellé par marque, source secondaire)"
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire ; la ligne « préchauffage » décrit un fonctionnement normal et ne porte pas le verdict d'un défaut)"
   },
   {
     "page": "pression-des-pneus",
@@ -76,6 +78,6 @@
       "code-de-la-route-d314-8",
       "decret-2020-1264"
     ],
-    "raison": "obligation d'équipement en période hivernale (code de la route, art. D314-8, créé par le décret n° 2020-1264)"
+    "raison": "obligation d'équipement en période hivernale : code de la route, art. D314-8, créé par l'article 1er du décret n° 2020-1264 et modifié par son article 2 (version en vigueur depuis le 1er novembre 2024) ; les arrêtés préfectoraux listant les communes seront ajoutés au registre à l'étape 8"
   }
 ]

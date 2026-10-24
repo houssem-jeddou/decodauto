@@ -2,7 +2,9 @@ SOURCE : Dacia Sandero 3 — Notice d'utilisation (réf. 1688-1, fr-FR, véhicul
 https://www.user-manual.dacia.com/sites/dacia/files/GUI_NU_DAC_BJI_1688_1_0_LHD-RHD_PRNT-fr-FR.pdf (384 pages)
 Trouvé depuis https://www.user-manual.dacia.com/fr/content/dacia-sandero → notice 2528 → https://www.user-manual.dacia.com/fr/notice/2528/pdf
 Texte extrait du PDF par pdf.js (navigateur), sans retouche ; [...] = passage coupé. « PDF n » = page du fichier ; page imprimée = n − 2.
-Les symboles des témoins sont des glyphes non extraits (blancs dans le texte). Notice rédigée sur le même modèle que celle de Renault (même groupe).
+Les symboles des témoins sont des glyphes non extraits (blancs dans le texte). Notice rédigée sur le même modèle que celle de Renault (même groupe). Symboles vérifiés sur le rendu des pages (24/10) : p. 110 témoin
+Service = clé, STOP = pavé « STOP » ; p. 111-113 : freinage, batterie, pression d'huile et direction « accompagné du témoin STOP » ;
+p. 185 : « les témoins [Service] et [ESC] s'affichent » ; p. 177 « Capteurs pneus à contrôler » avec le témoin Service.
 
 ##### PDF 112-116 (p. 110-114) Témoins lumineux
 (p. 110) L'absence de retour visuel ou sonore indique une défaillance du tableau de bord. Cela impose un arrêt immédiat [...]
@@ -151,3 +153,25 @@ impératif et immédiat compatible avec les conditions de circulation. Faites ap
 Lorsque le système détecte une anomalie de fonctionnement, le message « ESC à contrôler » et les témoins et s'affichent au tableau de bord.
 Dans ce cas, l'ESC et le système antipatinage sont désactivés.
 Consultez un Représentant de la marque.
+
+##### PDF 137-141 (p. 135-139) Réservoir réactif (AdBlue) (lu le 24/10)
+(p. 135) En cas d'alerte « xxxKM BLOCAGE REMPLIR ADBLUE », faites le plein de réactif et reportez ‑ vous aux consignes de remplissage.
+Risque d'immobilisation du véhicule.
+(p. 138) Entretien/Autonomie — Témoins / Message / Que faire ?
+- « PREVOIR ADBLUE AVANT 2400km » Lorsque le message s'affiche à la mise sous contact du moteur, il vous reste moins de 2400 km d'autonomie.
+Prévoyez d'effectuer ou de faire effectuer par un Représentant de la marque, le remplissage ou un appoint de réactif dans le réservoir.
+[témoin] s'allume. « REMPLIR ADBLUE AVANT 1200km » Lorsque le message s'affiche à la mise sous contact du moteur, il vous reste entre 1200 km
+et 800 km d'autonomie. Prévoyez d'effectuer ou de faire effectuer par un Représentant de la marque, le remplissage ou un appoint de réactif
+dans le réservoir.
+[témoin] s'allume. « xxxKM BLOCAGE REMPLIR ADBLUE » Le message s'affiche à la mise sous contact et se répète : - tous les 100 km environ, il
+vous reste entre 800 km et 200 km d'autonomie ; - tous les 50 km environ, il vous reste moins de 200 km d'autonomie . Dans tous les cas,
+effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible .
+[témoin] s'allume. « 0KM BLOCAGE REMPLIR ADBLUE » Le démarrage du moteur est impossible. Pour redémarrer, vous devez faire vous-même le plein
+de réactif dans le réservoir.
+(p. 139) Anomalies de fonctionnement du système — Témoins / Message / Interprétations
+[témoins] et [témoins] s'allument. « ANTIPOLLUTION A CONTROLER » « QUALITE ADBLUE A CONTROLER » « INJECTION ADBLUE A CONTROLER » Indique une
+défaillance du système. Consultez un Représentant de la marque le plus tôt possible.
+[témoins] s'allument. « xxxKM BLOCAGE ANTIPOLLUTION » Indique une défaillance du système et qu'il vous reste moins de 800 km à parcourir
+avant que le redémarrage du véhicule soit impossible . [...] Consultez un Représentant de la marque le plus tôt possible.
+[témoins] s'allument. « 0KM BLOCAGE ANTIPOLLUTION » Indique qu'après coupure du contact, le redémarrage du véhicule est impossible . Faites
+appel à un Représentant de la marque.
