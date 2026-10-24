@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 23/10/2026 (23 h 30)
+Dernière mise à jour : 24/10/2026 (14 h 45)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -11,7 +11,7 @@ Dernière mise à jour : 23/10/2026 (23 h 30)
 | 2 | Périmètre | ✅ Figé (22/10) | 02_perimetre_lot_unique.md (formulation du nombre de pages corrigée le 23/10) |
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
-| 5 | Sources et base voyants | ▶ En cours : demande de changement n° 3 (structure v4) acceptée le 23/10, PR #6 à fusionner ; ensuite registre des sources et base voyants | Structure v4 : `src/schemas/` (marques dans `listes.ts`, grille dans `grille.ts`), 08 v4 |
+| 5 | Sources et base voyants | ▶ En cours : PR #6 fusionnée. Registre, brouillon de la base (25 lignes), pictogrammes et paquet de validation faits, dans la PR #7 (CI verte). Décisions D1 à D13 tranchées par Claude sur délégation de Houssem (24/10). Reste : validation du paquet par Houssem, versement de la base, porte 5 | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.brouillon.json`, `travaux/etape-5/paquet-validation.md` (PR #7) |
 | 6 | Charte et modèles de pages | À faire | – |
 | 7 | Socle technique | À faire, sur la piste technique (03, règle 12) ; seules les mentions légales attendent le statut juridique | – |
 | 8 | Vague A | À faire | – |
@@ -23,9 +23,9 @@ Dernière mise à jour : 23/10/2026 (23 h 30)
 ## Prévision (mise à jour à chaque session ; les dates de 03 sont des cibles)
 | Étape | Cible (03) | Prévision au 23/10 | Dépend de |
 |---|---|---|---|
-| 5. Sources et base voyants | 24–27/10 | demande de changement acceptée le 23/10 ; registre et base 24–26/10 ; paquet de validation 26–27/10 | fusion de la PR #6 ; notices Dacia lisibles ; disponibilité de Houssem pour valider |
-| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes 24–25/10 ; étape 7 du 26 au 28/10 | statut juridique, pour les seules mentions légales |
-| 6. Charte et modèles | 27–29/10 | 27–29/10 | porte de l'étape 5 ; source des résultats Google depuis la France choisie |
+| 5. Sources et base voyants | 24–27/10 | paquet de validation prêt le 24/10 ; validation et porte 5 le 24 ou le 25/10 | disponibilité de Houssem pour valider le paquet |
+| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 (17, contrôlés) ; étape 7 du 25 au 28/10 | statut juridique, pour les seules mentions légales |
+| 6. Charte et modèles | 27–29/10 | 26–29/10, avec la demande de changement n° 4 (définition de l'urgence « immédiate ») au départ | porte de l'étape 5 ; source des résultats Google depuis la France choisie |
 | 8. Vague A | 29/10–01/11 | 29/10–02/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
 | 9. Mise en ligne du minimum | 31/10 | entre le 31/10 et le 03/11 | portes 7 et 8 ; sécurité des comptes |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 10–14/11 / ≈ 17–21/11 | mise en ligne de la vague A ; briefs des lots |
@@ -33,7 +33,7 @@ Dernière mise à jour : 23/10/2026 (23 h 30)
 **Séances de validation de Houssem** (le vrai goulot), d'ici le 03/11 :
 1. ~~demande de changement de structure et marques de référence~~ : faite le 23/10 ;
 2. statut juridique, avant les mentions légales ;
-3. paquet de validation de la base voyants et porte 5, vers le 26–27/10 ;
+3. paquet de validation de la base voyants et porte 5 : paquet prêt depuis le 24/10 (PR #7) ;
 4. source des résultats Google, avant l'étape 6 ;
 5. porte 6, vers le 29/10 ;
 6. porte 7 ;
@@ -108,8 +108,30 @@ Dernière mise à jour : 23/10/2026 (23 h 30)
   - la grille des niveaux de verdict et d'urgence est validée ;
   - une page web générique d'une marque est une source secondaire ;
   - 08 passe en v4.
+- 24/10/2026 (matin) : PR #6 fusionnée (structure v4 en vigueur).
+- 24/10/2026 (14 h 24), étape 5 : Houssem confie à Claude les décisions D1 à D13 du paquet de validation, avec pour critère son objectif (le plus de visiteurs possible et une réelle utilité). Décisions prises (détail dans `travaux/etape-5/paquet-intro.md`, PR #7) :
+  - D1 : la règle « le plus prudent l'emporte » est appliquée sans exception. Le voyant moteur orange passe en arrêt immédiat (notice Toyota), avec l'écart affiché par marque ;
+  - D2 : l'encadré général d'une notice ne fixe pas le niveau d'un témoin ;
+  - D3 : une ligne peut regrouper plusieurs affichages d'une même alerte ;
+  - D4 : le témoin d'usure des plaquettes est absent des 6 notices lues, donc pas de ligne dans la base ; il est traité à l'étape 8 dans la page « voyant frein », par une ligne saisie citée ;
+  - D5 à D8, D10, D11, D13 : propositions du paquet acceptées ;
+  - D9 : la consigne du témoin STOP ou Service qui accompagne un voyant vaut pour l'état. Exception : le rappel d'entretien suit l'exception de la grille pour l'entretien périodique (« à faire dans les jours qui viennent ») ;
+  - D12 : demande de changement n° 4 de la grille, à préparer avant l'étape 6, pour que la définition de l'urgence « immédiate » couvre les actions à faire en roulant.
+
+  La validation des verdicts eux-mêmes (25 lignes) reste celle de Houssem (03, règle 7).
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 24/10, étape 5, registre et brouillon de la base voyants, deux revues (même relecteur) :
+  - **Première revue** (« à corriger », deux points bloquants), avec 111 extraits comparés aux 5 PDF officiels, tous retrouvés :
+    - le voyant de direction Renault et Dacia s'allume avec le témoin STOP, non identifié dans le texte extrait : il passe dans la ligne `direction-rouge` ;
+    - Seat, plus prudente, avait été omise pour le défaut du système de pression des pneus : elle est listée « sans consigne » (D11) ;
+    - le témoin Service (clé) de Renault et Dacia a sa propre consigne : D9 ;
+    - les consignes AdBlue de Dacia sont ajoutées ;
+    - le message « Crevaison » est ajouté à la ligne de pression des pneus ;
+    - écarts réécrits ; actions débarrassées des précisions non sourcées ;
+    - l'empreinte du contenu validé est vérifiée avant de verser la base.
+  - **Seconde revue** (« acceptable », rien de bloquant) : urgence de l'entretien à trancher (fait en D9), jonctions d'extraits marquées, empreinte étendue aux pictogrammes, au registre et au tableau page → sources, test du refus de versement.
+  - **Écarté** : rien. Les options ouvertes ont été tranchées en D9 et D11.
 - 23/10 (soir), demande de changement n° 3, deux revues :
   - **Première revue** (« à corriger », un point bloquant) :
     - la grille rangeait « sans tarder » en « dans les jours qui viennent » ; ces mots valent maintenant une urgence immédiate ;
@@ -185,13 +207,17 @@ Dernière mise à jour : 23/10/2026 (23 h 30)
   - liste : Renault, Peugeot, Dacia, Citroën, Volkswagen, Toyota (les six premières des immatriculations de voitures particulières neuves en 2025, PFA / AAA Data), plus Seat (choix de Houssem, groupe Volkswagen, notice publiée sur seat.fr) ;
   - règle : chaque ligne de la base cite les notices d'au moins 3 marques de 2 groupes ;
   - une page web générique d'une marque est une source secondaire, pas une notice.
-- [ ] **Registre des sources** de première main pour toutes les pages éditoriales de la vague A : voyants, codes défaut, pression des pneus, loi montagne. Premier point : lire les notices Dacia et la notice Seat (témoins), pour confirmer que la règle des marques est tenable.
-- [ ] **Base voyants** : couleur, verdict, urgence, action, citations avec niveau, écart entre marques, pictogramme.
-- [ ] **Pictogrammes redessinés**, sur la piste technique (03, règle 12).
-- [ ] **Paquet de validation** généré depuis la base, puis validé par Houssem.
+- [x] **Registre des sources** (`data/sources.json`) : notices Peugeot 208, Renault Clio 5, Dacia Sandero 3, Seat Ibiza et Toyota Yaris (5 marques, 4 groupes), code de la route art. D314-8 et décret n° 2020-1264. Chaque page éditoriale de la vague A a une source de première main, par la base ou par le tableau page → sources (contrôle PORTE5-SOURCE).
+- [x] **Brouillon de la base voyants** (`data/voyants.brouillon.json`) : 25 lignes, 121 citations. Chaque ligne cite au moins 3 marques de 2 groupes et prend le niveau le plus prudent, avec l'écart signalé. 0 erreur bloquante.
+- [x] **Pictogrammes redessinés** : 17 SVG contrôlés dans `src/pictogrammes/` (piste technique).
+- [x] **Paquet de validation** généré (`npm run paquet`, PR #7) ; décisions D1 à D13 tranchées le 24/10.
+- [ ] **Validation du paquet par Houssem**, puis versement de la base (`node scripts/valider-brouillon.ts --valide-par-houssem AAAA-MM-JJ --empreinte <empreinte>`) et archivage du paquet validé dans le projet.
 - [ ] **Porte de sortie de l'étape 5.**
 
 ## Pour l'étape 6
+- Demande de changement n° 4 de la grille, au départ de l'étape 6 (D12) : la définition de l'urgence « À faire tout de suite » doit couvrir les actions à faire en roulant (FAP, ESP).
+- Élément unique des pages voyants : un tableau « ce que dit la notice de votre marque », tiré des citations de la base (sans recopie). Il montre l'écart entre marques (D1) et répond aux requêtes « voyant + modèle ».
+- Page « voyant frein » (étape 8) : témoin d'usure des plaquettes traité par une ligne saisie citée (D4).
 - Charte éditoriale : base de calcul du coût probable et ses tranches (la source doit exister dans le registre), ligne de transparence, section méthode de « à propos ».
 - Modèles de pages et encadré de décision (structure v4, contrôles R9) :
   - l'encadré est le premier bloc après le H1 : la signature, la date et la ligne de transparence viennent après lui ; le fil d'Ariane peut précéder le H1 ;
@@ -207,12 +233,8 @@ Dernière mise à jour : 23/10/2026 (23 h 30)
 - Volumes à lire comme des plafonds : dossier PureTech (94 % de noms de moteur ou de modèle), viscosités (surtout intention d'achat), outil voyants (30 % de requêtes « + modèle »), batterie (34 % d'achat par capacité).
 
 ## Points ouverts (non bloquants)
-- **Notices des marques de référence** :
-  - Dacia : notices trouvées (user-manual.dacia.com, cdn.group.renault.com), à lire en premier ;
-  - Seat : notice Ibiza lisible sur seat.fr (témoins p. 76 et 93) ;
-  - Citroën : pas de serveur officiel trouvé ;
-  - Toyota : espace client de toyota.fr ;
-  - Volkswagen : notice complète par le carnet de bord numérique.
+- **Notices des marques de référence** : 5 marques lues sur 7 (Citroën et Volkswagen non nécessaires). Les notices Renault et Dacia sont sur user-manual.renault.com et user-manual.dacia.com ; la notice Toyota est sur le portail de son prestataire, ouvert depuis toyota.fr. Le texte relevé est dans `travaux/etape-5/notices/`.
+- **Loi montagne** : les arrêtés préfectoraux listant les communes sont à ajouter au registre à l'étape 8. Aucune page de la Sécurité routière sur la pression des pneus n'a été trouvée.
 - **Chiffre Volkswagen 2025** (110 960, 6,8 %) : tiré de La Tribune Auto citant PFA / AAA Data, sans source primaire trouvée. Sans effet sur le choix des marques.
 - **Parc par marque** : non publié par le SDES ; les immatriculations 2025 en tiennent lieu.
 - **Annonces automatiques AdSense** (étape 12) : insérées dans le navigateur, invisibles pour le contrôle ; vérifier à la recette qu'elles ne précèdent pas l'encadré.
@@ -239,6 +261,7 @@ Dernière mise à jour : 23/10/2026 (23 h 30)
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
+- À préparer avant l'étape 6 : **n° 4, grille**, définition de l'urgence « immédiate » (D12).
 - 23/10/2026, acceptée : **n° 3 de l'étape 5, structure v4** (08 v4, PR #6).
   - **Raison** : figer la structure avant la saisie, quand la revalidation ne coûte rien.
   - **Partie A** :

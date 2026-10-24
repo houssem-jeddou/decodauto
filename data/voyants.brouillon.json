@@ -240,8 +240,8 @@
     "pictogramme": "cle-entretien",
     "situation": "Le voyant clé s'allume, ou un message demande de faire la révision ou la vidange : l'échéance d'entretien est proche ou dépassée.",
     "verdict": "oui avec précautions",
-    "urgence": "immédiate",
-    "action": "Vous pouvez rouler. Si le message s'accompagne du témoin Service (Renault, Dacia), conduisez avec ménagement et faites faire la révision au plus tôt ; sinon, faites-la faire dans les jours qui viennent. Faites ensuite remettre l'indicateur à zéro.",
+    "urgence": "sous quelques jours",
+    "action": "Vous pouvez rouler, avec ménagement si le message s'accompagne du témoin Service (Renault, Dacia). Faites faire la révision ou la vidange dans les jours qui viennent, puis remettre l'indicateur à zéro.",
     "citations": [
       {
         "source": "notice-peugeot-208",
@@ -262,14 +262,14 @@
         "emplacement": "p. 122, « Ordinateur de bord », Autonomie de révision ; témoin Service p. 136",
         "extrait": "autonomie égale à 0 km ou date de révision atteinte : le message « Faire révision » s'affiche accompagné du témoin [Service]. Le véhicule nécessite alors une révision le plus rapidement possible. […] (p. 136) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "sous quelques jours"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 98, « Ordinateur de bord », Autonomie de révision ; témoin Service p. 110",
         "extrait": "autonomie égale à 0 km ou date de révision atteinte : le message « Faire révision » s'affiche accompagné du témoin [Service]. Le véhicule nécessite alors une révision le plus rapidement possible. […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "sous quelques jours"
       },
       {
         "source": "notice-toyota-yaris",
@@ -279,7 +279,7 @@
         "urgence": "sous quelques jours"
       }
     ],
-    "ecart_marques": "Chez Renault et Dacia, le message s'accompagne du témoin Service, dont la notice demande d'aller au plus tôt chez un représentant de la marque en conduisant avec ménagement ; Peugeot, Seat et Toyota rappellent un entretien à faire, sans précaution de conduite (délai : quelques jours)."
+    "ecart_marques": "Chez Renault et Dacia, le message s'accompagne du témoin Service, dont la notice demande d'aller au plus tôt chez un représentant de la marque en conduisant avec ménagement ; Peugeot, Seat et Toyota rappellent un entretien à faire, sans précaution de conduite."
   },
   {
     "id": "batterie-rouge",

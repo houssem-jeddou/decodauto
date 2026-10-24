@@ -2,7 +2,7 @@
 
 Brouillon du 24/10/2026, corrigé après la revue indépendante. Ce paquet est généré par `npm run paquet` à partir de `data/voyants.brouillon.json`, `data/sources.json` et `travaux/etape-5/pages-sources.json`. Rien n'est validé tant que Houssem ne l'a pas dit.
 
-## Ce que Houssem valide
+## Ce que Houssem valide sur ce paquet
 - **25 lignes de la base voyants** : pour chacune, la situation, le verdict, l'urgence, l'action et l'écart entre marques. Chaque notice citée l'est avec sa page, l'extrait mot pour mot et le niveau que la grille tire de sa consigne.
 - **Le registre des sources** : 5 notices constructeur (Peugeot 208, Renault Clio 5, Dacia Sandero 3, Seat Ibiza, Toyota Yaris) et 2 textes Légifrance (loi montagne).
 - **Le tableau page → sources** des pages de la vague A sans ligne dans la base. C'est une pièce jointe à la porte ; à l'étape 8, chaque page déclarera ses propres sources.
@@ -22,7 +22,26 @@ Brouillon du 24/10/2026, corrigé après la revue indépendante. Ce paquet est g
 - **Revue indépendante** (deux passages) : toutes les citations ont été recherchées dans les 5 PDF officiels et retrouvées à la page indiquée. Les symboles notés entre crochets ont été vérifiés sur le rendu des pages. Les corrections sont intégrées (voir l'encadré de la présentation).
 - **Contrôles automatiques** : le brouillon passe tous les contrôles de la base (R3, R8, pictogrammes, rattachement au plan), sauf l'empreinte (R4), posée après la validation. Résultat : 0 erreur bloquante. Les 3 rappels R3-NIVEAU-A-VERIFIER sont expliqués en D5.
 
-## Décisions à prendre
+## Décisions D1 à D13 : tranchées par Claude, sur délégation de Houssem (24/10/2026, 14 h 24)
+Houssem a confié à Claude le choix des décisions D1 à D13, avec pour critère son objectif : un site qui attire le plus de visiteurs possible et qui leur est réellement utile. Ces choix fixent la méthode. La validation des 25 lignes (verdicts, extraits, niveaux) reste celle de Houssem (docs/03, règle 7).
+
+| Décision | Choix | Raison (utilité et trafic) |
+|---|---|---|
+| D1. Voyant moteur orange en arrêt immédiat (Toyota) | Règle appliquée telle quelle | Un verdict moins prudent que la notice Toyota serait faux pour un conducteur de Toyota. L'écart affiche ce que dit chaque marque. Pour l'étape 6, un tableau « ce que dit la notice de votre marque » tiré de la base est proposé comme élément unique des pages voyants : il répond aux nombreuses requêtes « voyant moteur + modèle » (Clio, 208, Dacia, Polo…). |
+| D2. Encadré général d'une notice | Accepté | Sinon, tous les témoins Seat passeraient en arrêt immédiat, y compris un fonctionnement normal : la page perdrait toute crédibilité. |
+| D3. Lignes regroupant plusieurs affichages | Accepté | Le lecteur cherche l'alerte (« voyant moteur rouge stop », « risque casse moteur »), pas le dessin exact de sa marque. |
+| D4. Témoin d'usure des plaquettes | Option (b) : traité à l'étape 8 dans la page « voyant frein », par une ligne saisie citée | Le témoin n'existe dans aucune des 5 notices. Une 6e notice lue le 24/10, le guide Peugeot 3008 et 5008 (édition 01-22), ne l'a pas non plus. La règle des 3 marques de 2 groupes est donc hors d'atteinte. Les requêtes « plaquettes » (environ 6 000 recherches par mois) restent servies par la page, sans ligne dans l'outil voyants. |
+| D5. Classements signalés | Acceptés tels quels | Ce sont les lectures les plus prudentes de la grille. |
+| D6. Couleurs | Acceptées | Une couleur par ligne ; la situation dit quand elle varie. |
+| D7. Adresse de la notice Toyota | Acceptée | Source officielle, ouverte depuis toyota.fr. |
+| D8. Pages hors base | Accepté | Chaque page de la vague A a une source de première main ; les arrêtés préfectoraux de la loi montagne seront ajoutés à l'étape 8. |
+| D9. Témoin STOP ou Service qui accompagne un voyant | Accepté, avec la variante pour l'entretien | Pour une anomalie (ABS, ESP, capteurs de pression, airbag), la consigne du témoin Service donne « tout de suite ». Pour le rappel d'entretien, l'exception de la grille sur l'entretien périodique s'applique : ce n'est pas une anomalie. La ligne `entretien-vidange` devient donc « Oui, avec précautions · À faire dans les jours qui viennent ». Un rappel de vidange présenté comme une urgence serait faux et ferait fuir le lecteur. |
+| D10. Toyota et le voyant moteur clignotant | Accepté | Lecture la plus prudente. Le clignotement est de toute façon l'état le plus grave du voyant moteur orange. |
+| D11. Seat et le défaut du système de pression | Seat listée « sans consigne » | Un conducteur de Seat trouve sa consigne (arrêt) dans la ligne `pression-pneus`, qui correspond à ce qu'il voit : un témoin allumé, sans clignotement. |
+| D12. Définition de l'urgence « À faire tout de suite » | Demande de changement de la grille à préparer avant l'étape 6 | La définition doit couvrir les actions à faire en roulant (FAP, ESP). Le texte de la demande sera soumis à Houssem. |
+| D13. Trace de la validation | Acceptée | Le paquet validé est archivé dans les documents du projet comme procès-verbal. La commande de versement vérifie l'empreinte du contenu validé. |
+
+## Détail des décisions
 
 **D1. Le voyant moteur orange passe en « Non, arrêtez-vous immédiatement ».**
 - Pour son voyant de dysfonctionnement, la notice Toyota dit : « Arrêtez immédiatement le véhicule dans un endroit sûr ». Le verdict le plus prudent l'emporte : les deux lignes du voyant moteur orange prennent ce niveau.
@@ -63,7 +82,7 @@ Brouillon du 24/10/2026, corrigé après la revue indépendante. Ce paquet est g
 - La page « voyant frein » vise aussi les plaquettes. Deux options :
   - (a) lire d'autres notices de marques de référence qui ont ce témoin (par exemple une Volkswagen Golf ou une Peugeot 3008) ;
   - (b) traiter les plaquettes dans le texte de la page, à l'étape 8, avec une ligne saisie citée.
-- Proposition : (a), si Houssem veut le témoin dans l'outil voyants ; sinon (b).
+- Décision : (b). Le guide Peugeot 3008 et 5008 (édition 01-22), lu le 24/10, n'a pas non plus ce témoin : la règle est hors d'atteinte.
 
 **D5. Classements à vérifier en priorité.**
 1. **Seat, voyant de pression des pneus** : « Arrêtez-vous le plus rapidement possible et contrôlez la pression et l'état de tous les pneus ». Rangé en arrêt immédiat ; avec Toyota, ce classement donne son verdict à la ligne.
@@ -102,10 +121,9 @@ Brouillon du 24/10/2026, corrigé après la revue indépendante. Ce paquet est g
 - Effets :
   - **direction** : le voyant de direction Renault et Dacia s'allume avec STOP. Ce cas est déplacé dans `direction-rouge` (arrêt immédiat). `direction-orange` repose maintenant sur Peugeot, Seat et Toyota (« Oui, avec précautions · À faire tout de suite »), et ne dit plus « Non, ne poursuivez pas votre trajet » ;
   - **ABS, ESP en défaut, capteurs de pression des pneus, message « Airbag à contrôler »** : avec le témoin Service, l'urgence passe à « tout de suite » ;
-  - **entretien** : « Faire révision » s'affiche avec le témoin Service, dont la consigne dit « au plus tôt ». La ligne devient « Oui, avec précautions · À faire tout de suite », avec l'écart : Peugeot, Seat et Toyota laissent quelques jours.
-- Variante possible pour l'entretien seul : appliquer à la consigne du témoin Service l'exception de la grille pour l'entretien périodique (« dès que possible » ne vaut pas « tout de suite »). La ligne serait alors « Oui, avec précautions · À faire dans les jours qui viennent ».
-- Si D9 est refusée, la consigne propre au message l'emporte : l'entretien reste « Oui · dans les jours qui viennent », et l'ABS et l'ESP restent immédiats (à cause de Toyota).
-- Proposition : accepter D9 telle qu'appliquée, sans la variante.
+  - **entretien** : « Faire révision » s'affiche avec le témoin Service. Le verdict passe à « Oui, avec précautions » (« en conduisant avec ménagement »). L'urgence suit l'exception de la grille pour l'entretien périodique : « À faire dans les jours qui viennent ».
+- Si D9 était refusée, la consigne propre au message l'emporterait : l'entretien resterait « Oui · dans les jours qui viennent », et l'ABS et l'ESP resteraient immédiats (à cause de Toyota).
+- Décision : acceptée, avec l'exception d'entretien périodique pour la ligne `entretien-vidange` (voir le tableau).
 
 **D10. Toyota et le voyant moteur clignotant.**
 - La notice Toyota ne distingue pas le voyant fixe du voyant clignotant. Son introduction dit : « Si un voyant quelconque s'allume ou clignote, […] effectuez les opérations suivantes », et la consigne du voyant de dysfonctionnement est l'arrêt immédiat. On l'applique donc au clignotement.
