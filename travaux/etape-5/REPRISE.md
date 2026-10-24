@@ -6,7 +6,7 @@ Ce dossier `travaux/` n'est pas une source de vérité. Il garde le travail de l
 ## Où on en est (24/10/2026, 14 h 40)
 - Paquet validé par Houssem le 24/10 à 14 h 30 (empreinte `ee98b8d476b6aa680b4939c002becc02babe1fddb5b0111f359dde0772a017f9`), point ouvert du rappel d'entretien compris.
 - Base versée dans `data/voyants.json` (25 lignes avec empreintes) ; brouillon supprimé ; trace dans `validation.json`. `paquet-validation.md` est le paquet tel que validé (archivé aussi dans le projet : `claude/etape5_paquet_valide.md`).
-- Porte 5 présentée (journal, section « Étape 5 : porte de sortie »). Reste : validation de la porte par Houssem, puis fusion et tag sur sa demande.
+- Porte 5 validée par Houssem le 24/10 (14 h 39) ; PR #7 fusionnée et tag `etape-5-base-voyants` posé à sa demande. Étape 5 terminée.
 - Ensuite : étape 6, en commençant par la demande de changement n° 4 (grille, D12) ; piste technique : étape 7.
 - Pour modifier ou ajouter une ligne plus tard : nouveau brouillon `data/voyants.brouillon.json` ne contenant que les lignes nouvelles ou modifiées, paquet, revue, validation de Houssem.
 

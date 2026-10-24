@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 24/10/2026 (14 h 40)
+Dernière mise à jour : 24/10/2026 (14 h 45)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -11,8 +11,8 @@ Dernière mise à jour : 24/10/2026 (14 h 40)
 | 2 | Périmètre | ✅ Figé (22/10) | 02_perimetre_lot_unique.md (formulation du nombre de pages corrigée le 23/10) |
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
-| 5 | Sources et base voyants | ▶ Porte de sortie présentée le 24/10, en attente de la validation de Houssem. Paquet validé par Houssem (24/10, 14 h 30) et base versée (25 lignes avec empreintes), dans la PR #7 | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | À faire | – |
+| 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
+| 6 | Charte et modèles de pages | ▶ Prochaine étape : commence par la demande de changement n° 4 (grille, D12) | – |
 | 7 | Socle technique | À faire, sur la piste technique (03, règle 12) ; seules les mentions légales attendent le statut juridique | – |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -23,9 +23,9 @@ Dernière mise à jour : 24/10/2026 (14 h 40)
 ## Prévision (mise à jour à chaque session ; les dates de 03 sont des cibles)
 | Étape | Cible (03) | Prévision au 23/10 | Dépend de |
 |---|---|---|---|
-| 5. Sources et base voyants | 24–27/10 | paquet validé le 24/10 ; porte 5 présentée le 24/10 | validation de la porte par Houssem |
+| 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
 | Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 (17, contrôlés) ; étape 7 du 25 au 28/10 | statut juridique, pour les seules mentions légales |
-| 6. Charte et modèles | 27–29/10 | 26–29/10, avec la demande de changement n° 4 (définition de l'urgence « immédiate ») au départ | porte de l'étape 5 ; source des résultats Google depuis la France choisie |
+| 6. Charte et modèles | 27–29/10 | 25–29/10, avec la demande de changement n° 4 (définition de l'urgence « immédiate ») au départ | source des résultats Google depuis la France choisie |
 | 8. Vague A | 29/10–01/11 | 29/10–02/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
 | 9. Mise en ligne du minimum | 31/10 | entre le 31/10 et le 03/11 | portes 7 et 8 ; sécurité des comptes |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 10–14/11 / ≈ 17–21/11 | mise en ligne de la vague A ; briefs des lots |
@@ -33,7 +33,7 @@ Dernière mise à jour : 24/10/2026 (14 h 40)
 **Séances de validation de Houssem** (le vrai goulot), d'ici le 03/11 :
 1. ~~demande de changement de structure et marques de référence~~ : faite le 23/10 ;
 2. statut juridique, avant les mentions légales ;
-3. ~~paquet de validation de la base voyants~~ : validé le 24/10 ; porte 5 présentée le 24/10, à valider ;
+3. ~~paquet de validation de la base voyants et porte 5~~ : faits le 24/10 ;
 4. source des résultats Google, avant l'étape 6 ;
 5. porte 6, vers le 29/10 ;
 6. porte 7 ;
@@ -120,6 +120,7 @@ Dernière mise à jour : 24/10/2026 (14 h 40)
 
   La validation des verdicts eux-mêmes (25 lignes) reste celle de Houssem (03, règle 7).
 - 24/10/2026 (14 h 30), étape 5 : Houssem valide le paquet de validation de la base voyants (25 lignes, 121 citations ; empreinte du contenu validé `ee98b8d476b6aa680b4939c002becc02babe1fddb5b0111f359dde0772a017f9`), y compris le point ouvert : rappel d'entretien en « Oui, avec précautions » et « À faire dans les jours qui viennent ». La base est versée dans `data/voyants.json` avec l'empreinte de chaque ligne (`travaux/etape-5/validation.json`) ; le paquet validé est archivé dans le projet (D13).
+- 24/10/2026 (14 h 39) : porte de sortie de l'étape 5 validée par Houssem. Il demande la fusion de la PR #7 et le tag `etape-5-base-voyants`. La base voyants (`data/voyants.json`) fait foi pour les couleurs, gravités, verdicts, urgences, actions et sources des voyants ; toute modification passe par un nouveau brouillon, un paquet et sa validation.
 
 ## Revues indépendantes : ce qu'elles ont changé
 - 24/10, étape 5, registre et brouillon de la base voyants, deux revues (même relecteur) :
@@ -214,9 +215,9 @@ Dernière mise à jour : 24/10/2026 (14 h 40)
 - [x] **Pictogrammes redessinés** : 17 SVG contrôlés dans `src/pictogrammes/` (piste technique).
 - [x] **Paquet de validation** généré (`npm run paquet`, PR #7) ; décisions D1 à D13 tranchées le 24/10.
 - [x] **Validation du paquet par Houssem** (24/10, 14 h 30), versement de la base (`node scripts/valider-brouillon.ts --valide-par-houssem 2026-10-24 --empreinte ee98b8d4…`) et archivage du paquet validé dans le projet.
-- [ ] **Porte de sortie de l'étape 5** : présentée le 24/10, en attente de la validation de Houssem.
+- [x] **Porte de sortie de l'étape 5** : validée par Houssem le 24/10 (14 h 39).
 
-## Étape 5 : porte de sortie (présentée le 24/10, à valider par Houssem)
+## Étape 5 : porte de sortie (vérifiée et validée le 24/10)
 | Critère (03) | Statut | Preuve |
 |---|---|---|
 | Demande de changement de structure faite d'abord | ✅ | Demande n° 3 acceptée le 23/10, PR #6 fusionnée le 24/10 (structure v4) |
@@ -227,7 +228,7 @@ Dernière mise à jour : 24/10/2026 (14 h 40)
 | Grille des niveaux validée par Houssem ; contrôles de cohérence verdict / urgence et de l'encadré actifs, avec pages de test | ✅ | Grille validée avec la demande n° 3 (23/10), `src/schemas/grille.ts` ; pages de test `r8-incoherent`, `r9-encadre-absent`, `r9-encadre-incomplet`, `r9-encadre-masque`, `r9-pub-avant-encadre`, `r9-texte-avant-encadre` (`tests/fixtures/cas`) |
 | Construction et contrôles en CI | ✅ | CI de la PR #7, run 40098750343 (commit 1dbeaf4, après le versement) : « Contrôles (schémas, règles, build, liens) » et « Lighthouse mobile (3 passages) » réussis ; déploiement non lancé (hors `main`) |
 | Revue indépendante | ✅ | Deux revues du livrable (registre, base, pictogrammes, paquet), le maximum ; seule modification ultérieure de fond, l'urgence du rappel d'entretien, acceptée expressément par Houssem |
-| Validation de Houssem | ⏳ | À donner |
+| Validation de Houssem | ✅ | 24/10/2026, 14 h 39 (« porte 5 validée ») |
 
 ## Pour l'étape 6
 - Demande de changement n° 4 de la grille, au départ de l'étape 6 (D12) : la définition de l'urgence « À faire tout de suite » doit couvrir les actions à faire en roulant (FAP, ESP).
