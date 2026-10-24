@@ -3,7 +3,9 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { z } from 'astro/zod';
 import { construireContexte } from '../src/lib/controle.ts';
+import { voyantBaseSchema } from '../src/schemas/donnees.ts';
 import { chargerDonnees } from '../scripts/lib/charger.ts';
 import {
   construirePaquet,
@@ -60,13 +62,25 @@ describe('brouillon de la base voyants (étape 5)', async () => {
   });
 
   test('porte 5 : chaque page éditoriale de la vague A a une source de première main', async () => {
-    const brouillon = (await lireBrouillon()) ?? [];
-    const resultat = controlerBrouillon(brouillon, donnees, AUJOURDHUI, { pictogrammesObligatoires: true });
+    const brouillon = await lireBrouillon();
+    const resultat = controlerBrouillon(brouillon ?? [], donnees, AUJOURDHUI, { pictogrammesObligatoires: true });
+    // Avant la validation : les lignes du brouillon ; après : la base validée (data/voyants.json).
+    const lignes = brouillon === undefined ? z.array(voyantBaseSchema).parse(donnees.voyants) : resultat.lignes;
+    assert.ok(lignes.length > 0);
     const fichier = 'travaux/etape-5/pages-sources.json';
     const rattachements = controlerRattachements(resultat.plan, resultat.sources, JSON.parse(await readFile(join(racine, fichier), 'utf8')) as unknown[], fichier);
     assert.deepEqual(rattachements.constats, []);
-    const sansSource = couvertureVagueA(resultat.plan, resultat.sources, resultat.lignes, rattachements.valides).filter((c) => c.sources.length === 0);
+    const sansSource = couvertureVagueA(resultat.plan, resultat.sources, lignes, rattachements.valides).filter((c) => c.sources.length === 0);
     assert.deepEqual(sansSource, []);
+  });
+
+  test('après la validation de Houssem, la base versée passe tous les contrôles, empreintes comprises (R4)', async () => {
+    if ((await lireBrouillon()) !== undefined) return;
+    const { constats } = construireContexte(donnees, AUJOURDHUI);
+    assert.deepEqual(constats.filter((c) => c.gravite === 'erreur'), []);
+    const trace = JSON.parse(await readFile(join(racine, 'travaux/etape-5/validation.json'), 'utf8')) as { lignes: number; empreinte: string };
+    assert.equal(trace.lignes, z.array(voyantBaseSchema).parse(donnees.voyants).length);
+    assert.match(trace.empreinte, /^[0-9a-f]{64}$/);
   });
 
   test('une ligne conforme ne donne aucune erreur', () => {

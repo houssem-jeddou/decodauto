@@ -1,13 +1,14 @@
-# Étape 5 : point de reprise (brouillon de travail, rien n'est validé)
+# Étape 5 : point de reprise
 
-Mis à jour le 24/10/2026. Branche : `etape-5/registre-brouillon`, PR #7 (à ne pas fusionner avant la validation de Houssem et la commande de D13).
-Ce dossier `travaux/` n'est pas une source de vérité. Il garde le travail en cours pour la session suivante.
+Mis à jour le 24/10/2026 (14 h 40). Branche : `etape-5/registre-brouillon`, PR #7 (ne pas fusionner sans la demande de Houssem).
+Ce dossier `travaux/` n'est pas une source de vérité. Il garde le travail de l'étape pour mémoire.
 
-## Où on en est (24/10/2026, 13 h 30)
-- Registre (`data/sources.json`), brouillon de la base (`data/voyants.brouillon.json`, 25 lignes, 5 marques, 4 groupes), 17 pictogrammes (`src/pictogrammes/`), tableau page → sources (`travaux/etape-5/pages-sources.json`) et paquet de validation (`travaux/etape-5/paquet-validation.md`, généré par `npm run paquet`) : faits.
-- Deux revues indépendantes : la première « à corriger » (2 bloquants), la seconde « acceptable », sans bloquant ; corrections intégrées.
-- Contrôles : `npm test` 164/164, `npm run paquet` 0 erreur et 3 alertes expliquées (D5.6). La CI fait foi pour la construction.
-- PR #7 ouverte, CI verte (Contrôles et Lighthouse). Présenté à Houssem le 24/10. Il valide le paquet et tranche les décisions D1 à D13 ; ensuite, `node scripts/valider-brouillon.ts --valide-par-houssem AAAA-MM-JJ --empreinte <empreinte du paquet>`, journal, porte 5.
+## Où on en est (24/10/2026, 14 h 40)
+- Paquet validé par Houssem le 24/10 à 14 h 30 (empreinte `ee98b8d476b6aa680b4939c002becc02babe1fddb5b0111f359dde0772a017f9`), point ouvert du rappel d'entretien compris.
+- Base versée dans `data/voyants.json` (25 lignes avec empreintes) ; brouillon supprimé ; trace dans `validation.json`. `paquet-validation.md` est le paquet tel que validé (archivé aussi dans le projet : `claude/etape5_paquet_valide.md`).
+- Porte 5 présentée (journal, section « Étape 5 : porte de sortie »). Reste : validation de la porte par Houssem, puis fusion et tag sur sa demande.
+- Ensuite : étape 6, en commençant par la demande de changement n° 4 (grille, D12) ; piste technique : étape 7.
+- Pour modifier ou ajouter une ligne plus tard : nouveau brouillon `data/voyants.brouillon.json` ne contenant que les lignes nouvelles ou modifiées, paquet, revue, validation de Houssem.
 
 ## Historique (23/10, avant la reprise)
 
