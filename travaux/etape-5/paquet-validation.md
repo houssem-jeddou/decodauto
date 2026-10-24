@@ -1,4 +1,96 @@
-# Paquet de validation de la base voyants
+# Paquet de validation : base voyants (étape 5)
+
+Brouillon du 24/10/2026. Ce paquet est généré par `npm run paquet` à partir de `data/voyants.brouillon.json`, `data/sources.json` et `travaux/etape-5/pages-sources.json`. Rien n'est validé tant que Houssem ne l'a pas dit.
+
+## Ce que Houssem valide
+- **25 lignes de la base voyants** : pour chacune, la situation, le verdict, l'urgence, l'action et l'écart entre marques. Chaque notice citée l'est avec sa page, l'extrait mot pour mot et le niveau que la grille tire de sa consigne.
+- **Le registre des sources** : 5 notices constructeur (Peugeot 208, Renault Clio 5, Dacia Sandero 3, Seat Ibiza, Toyota Yaris) et 2 textes Légifrance (loi montagne).
+- **Le tableau page → sources** des pages de la vague A sans ligne dans la base.
+- **Les 17 pictogrammes**, redessinés en formes simples (planche jointe à la présentation).
+- **Les décisions D1 à D8** ci-dessous.
+
+## Méthode suivie
+- **Notices** : 5 marques de référence sur 7, de 4 groupes sur 4.
+  - Citroën et Volkswagen n'ont pas été consultés : la règle des 3 marques de 2 groupes est tenue sans eux, et leurs groupes sont déjà représentés par Peugeot et Seat.
+  - Chaque notice est la notice d'utilisation publiée par le constructeur, lue dans le PDF officiel ; le texte relevé est conservé dans `travaux/etape-5/notices/`.
+- **Règle appliquée**, celle de la demande de changement n° 3, sans exception :
+  - chaque notice consultée qui donne une consigne pour l'état décrit est citée ;
+  - la ligne prend le niveau de la citation la plus prudente ;
+  - l'écart entre marques est écrit dans la ligne.
+- **Contrôles automatiques** : le brouillon passe tous les contrôles de la base (R3, R8, pictogrammes, rattachement au plan), sauf l'empreinte (R4), posée après la validation. Résultat : 0 erreur bloquante. Les 3 rappels R3-NIVEAU-A-VERIFIER sont expliqués en D5.
+
+## Décisions à prendre
+
+**D1. Le voyant moteur orange passe en « Non, arrêtez-vous immédiatement ».**
+- La notice Toyota demande, pour ce voyant, d'« arrêter immédiatement le véhicule dans un endroit sûr ». Le verdict le plus prudent l'emporte : les deux lignes du voyant moteur orange (fixe et clignotant) prennent donc ce niveau.
+- L'écart est affiché : Renault, Dacia et Seat laissent rouler prudemment jusqu'au garage ; Peugeot laisse rouler pour le voyant fixe.
+- L'action dit au lecteur de ne repartir que si la notice de sa voiture le permet.
+- Même effet ailleurs :
+  - **pression des pneus** : Seat et Toyota demandent de s'arrêter ;
+  - **batterie** : quatre marques sur cinq imposent l'arrêt ;
+  - **direction orange** : voir D5.
+- Proposition : appliquer la règle telle quelle. La changer (par exemple retenir le niveau de la majorité) demanderait une demande de changement, et irait contre « jamais de verdict moins prudent qu'une source ».
+
+**D2. Une notice qui décrit un état sans consigne propre n'est pas citée.**
+- Cas :
+  - Seat, pour l'ABS et l'ESP ;
+  - Renault et Dacia, pour l'alerte de niveau d'huile ;
+  - Renault, pour le voyant de pression des pneus.
+- Ces notices sont listées sous chaque ligne (« consultées sans consigne »), mais elles ne fixent aucun niveau.
+- L'encadré général de la notice Seat (p. 94 : « Arrêtez le véhicule de manière sûre dès que possible. ») suit la liste de tous les témoins, verts et bleus compris. Il ne fixe pas de niveau pour un témoin précis : c'est la même logique que pour les pages web génériques (demande de changement n° 3, point 16).
+- Proposition : accepter.
+
+**D3. Certaines lignes regroupent plusieurs affichages d'une même alerte.**
+- Lignes concernées :
+  - `moteur-rouge` : voyant moteur rouge (Peugeot), ou STOP avec « Risque casse moteur » (Renault, Dacia) ;
+  - `huile-niveau` : voyant orange (Seat), ou message (Peugeot, Toyota) ;
+  - `entretien-vidange` : clé, ou message de révision ;
+  - `direction-rouge` : voyant rouge, ou STOP avec « Panne de la direction » ;
+  - `adblue-demarrage-impossible` : réservoir vide, ou système bloqué.
+- Raison : le lecteur cherche l'alerte, pas le dessin exact de sa marque.
+- Proposition : accepter.
+
+**D4. Voyants impossibles à mettre dans la base avec la règle des 3 marques de 2 groupes.**
+- Ces voyants sont :
+  - le **témoin d'usure des plaquettes** : il est absent des 5 notices ; Toyota signale l'usure par un bruit, pas par un témoin ;
+  - le **préchauffage qui clignote** : seule la notice Seat le décrit (groupe Volkswagen) ;
+  - l'**EPC** (groupe Volkswagen) et l'**additif du FAP** (Stellantis).
+- La page « voyant frein » vise aussi « plaquettes ». Deux options :
+  - (a) lire d'autres notices de marques de référence qui ont ce témoin (par exemple une Volkswagen Golf ou une Peugeot 3008) ;
+  - (b) traiter les plaquettes dans le texte de la page, à l'étape 8, avec une ligne saisie citée.
+- Proposition : (a), si Houssem veut une ligne dans l'outil voyants ; sinon (b).
+
+**D5. Classements à vérifier en priorité.**
+1. **Renault et Dacia, voyant de direction orange** : « Faites appel à un Représentant de la marque ». La grille range « faire appel » au niveau « Non, ne poursuivez pas votre trajet ». C'est ce classement qui donne son verdict à la ligne `direction-orange`.
+2. **Seat, voyant de pression des pneus** : « Arrêtez-vous le plus rapidement possible et contrôlez la pression et l'état de tous les pneus ». Rangé en arrêt immédiat ; avec Toyota, il donne son verdict à la ligne.
+3. **Seat, voyant moteur clignotant** : « susceptible d'endommager le catalyseur », alors que la notice dit aussi de rouler prudemment jusqu'à l'atelier le plus proche. Rangé au niveau 2 (« annonce un dégât grave »), dans l'ordre des questions de la grille. Sans effet sur la ligne, qui suit Toyota.
+4. **AdBlue, démarrage impossible** :
+   - Renault « 0 KM » et Seat (rouge avec voyant moteur) : rangés au niveau 2, car on ne peut plus rouler jusqu'au garage une fois le moteur coupé ;
+   - Seat (rouge, réservoir vide) : rangé en arrêt immédiat (« Arrêtez le véhicule… »).
+5. **Urgences** : « roulez prudemment jusqu'à l'atelier le plus proche » et « à l'apparition du témoin, continuez à rouler » sont rangés en urgence immédiate (principe 3 : formulation absente de la grille, niveau le plus prudent).
+6. **Seat, voyant ESP clignotant** : l'avertissement de la p. 255 (« Lorsque les systèmes entrent dans la plage de régulation, adaptez immédiatement votre vitesse ») est propre à ce système. Il fait passer la ligne en « Oui, avec précautions · À faire tout de suite ».
+7. **Les 3 rappels R3-NIVEAU-A-VERIFIER** sont des faux positifs. Les mots relevés ne portent pas sur un délai :
+   - préchauffage Seat : « le moteur peut être démarré immédiatement » ;
+   - airbag passager Renault et Dacia : « vérifiez impérativement que le témoin est bien allumé ».
+
+**D6. Couleurs.**
+- La base n'a qu'une couleur par ligne. Le voyant airbag est rangé en « orange ou jaune » : c'est la couleur que donnent Peugeot et Seat. Il est rouge sur d'autres voitures, et la situation le dit.
+- `moteur-rouge` et `adblue-demarrage-impossible` sont en rouge, même si Peugeot affiche le second en orange clignotant.
+
+**D7. Adresse de la notice Toyota.**
+- Toyota publie ses manuels par la page « Manuel du propriétaire » de toyota.fr, qui ouvre le portail de son prestataire (customerportal.tweddle-aws.eu).
+- Le registre garde l'adresse de la visionneuse de ce portail.
+- Proposition : accepter (source officielle, ouverte depuis toyota.fr).
+
+**D8. Pages hors base voyants.**
+- Le tableau page → sources rattache :
+  - les codes défaut aux notices des lignes « voyant moteur » (et « préchauffage » pour P0380 et P1351) ;
+  - la loi montagne au code de la route (art. D314-8) et au décret n° 2020-1264 ;
+  - la pression des pneus à la notice Renault (pressions sur pneus froids, contrôle mensuel).
+- Aucune page de la Sécurité routière sur la pression des pneus n'a été trouvée.
+
+## Après la validation
+Une fois la validation de Houssem notée au journal, une seule commande verse le brouillon dans `data/voyants.json`, avec l'empreinte de chaque ligne : `node scripts/valider-brouillon.ts --valide-par-houssem AAAA-MM-JJ`. Le brouillon est ensuite supprimé, et les contrôles de la base (R4 compris) s'appliquent.
 
 ## Résumé des lignes
 
@@ -85,9 +177,6 @@
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 113, « Témoin de contrôle du système antipollution » | « S'il s'allume de façon continue, consultez au plus tôt un Représentant de la marque » | Oui, avec précautions · À faire tout de suite |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 293, 7.2.4 « Si un voyant s'allume », Voyant de dysfonctionnement | « Indique un dysfonctionnement dans : Le système électronique de commande du moteur ; Le système électronique de commande de papillon ; ou Le système électronique de commande de Multidrive (si le véhicule en est équipé). Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « moteur-orange-fixe » : pictogramme « moteur » absent ou invalide (src/pictogrammes/moteur.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 2. Voyant moteur orange clignotant
@@ -107,9 +196,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 113, « Témoin de contrôle du système antipollution » | « s'il clignote, réduisez le régime moteur jusqu'à disparition du clignotement. Consultez au plus tôt un Représentant de la marque » | Oui, avec précautions · À faire tout de suite |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 292-293, 7.2.4 « Si un voyant s'allume », Voyant de dysfonctionnement | « Si un voyant quelconque s'allume ou clignote, gardez votre calme et effectuez les opérations suivantes. […] Voyant de dysfonctionnement […] Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « moteur-orange-clignotant » : pictogramme « moteur » absent ou invalide (src/pictogrammes/moteur.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 3. Voyant moteur rouge, ou STOP avec « Risque casse moteur »
@@ -126,9 +212,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Peugeot (208 (2e génération), guide d'utilisation édition 01-20) | p. 13, « Témoins de couleur rouge », Système d'autodiagnostic moteur ; renvois (1) et (2) p. 13 | « Système d'autodiagnostic moteur (Essence ou Diesel) Fixes. Une défaillance majeure du moteur est détectée. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. Stationner dans les meilleures conditions de sécurité et couper le contact. (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 125, « Messages d'alerte » (et p. 187 et 189) | « Ils apparaissent avec le témoin et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez votre moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. […] « Risque casse moteur » Indique une défaillance de l'injection, une surchauffe du moteur du véhicule ou un problème grave au niveau du moteur. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 102, « Messages d'alerte » (et p. 161) | « Ils apparaissent avec le témoin et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez votre moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. […] « Risque casse moteur » Indique une défaillance de l'injection, une surchauffe du moteur du véhicule ou un problème grave au niveau du moteur. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « moteur-rouge » : pictogramme « moteur » absent ou invalide (src/pictogrammes/moteur.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -148,9 +231,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 137-138, « Témoin de pression d'huile » | « S'il s'allume sur route, accompagné du témoin et d'un signal sonore, arrêtez-vous impérativement et coupez le contact. Vérifiez le niveau d'huile. Si le niveau est normal, cela provient d'une autre cause. Faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 111, « Témoin de pression d'huile » | « S'il s'allume sur route accompagné du témoin et d'un signal sonore, arrêtez-vous impérativement et coupez le contact. Vérifiez le niveau d'huile. Si le niveau est normal, cela provient d'une autre cause : consultez rapidement un Représentant de la marque. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 292, 7.2.4 « Si un voyant s'allume », Voyant de faible pression d'huile moteur | « Indique que la pression d'huile moteur est trop basse. Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « huile-pression-rouge » : pictogramme « huile » absent ou invalide (src/pictogrammes/huile.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -173,9 +253,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 - Renault, p. 131, « Alerte niveau d'huile moteur minimum » : Alerte affichée au démarrage, sans consigne propre (renvoi à la lecture de la jauge, p. 330).
 - Dacia, p. 105 et 294, « Alerte niveau d'huile moteur minimum » : Alerte affichée au démarrage, sans consigne propre (méthode de lecture à la jauge, p. 294).
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « huile-niveau » : pictogramme « huile-niveau » absent ou invalide (src/pictogrammes/huile-niveau.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 6. Rappel d'entretien : voyant clé ou message de révision ou de vidange
@@ -194,9 +271,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 122, « Ordinateur de bord », Autonomie de révision | « autonomie égale à 0 km ou date de révision atteinte : le message « Faire révision » s'affiche accompagné du témoin. Le véhicule nécessite alors une révision le plus rapidement possible. » | Oui, vous pouvez rouler · À faire dans les jours qui viennent |
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 98, « Ordinateur de bord », Autonomie de révision | « autonomie égale à 0 km ou date de révision atteinte : le message « Faire révision » s'affiche accompagné du témoin. Le véhicule nécessite alors une révision le plus rapidement possible. » | Oui, vous pouvez rouler · À faire dans les jours qui viennent |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 300, 7.2.5 « Si un message d'avertissement est affiché » | « Si “Entretien d'huile requis. Visitez votre concessionnaire.” s'affiche. Indique qu'une vidange de l'huile moteur est requise. Faites vérifier et vidanger l'huile moteur et changer le filtre à huile par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié. » | Oui, vous pouvez rouler · À faire dans les jours qui viennent |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « entretien-vidange » : pictogramme « cle-entretien » absent ou invalide (src/pictogrammes/cle-entretien.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -217,9 +291,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 112, « Témoin de charge de batterie » | « S'il s'allume sur route accompagné du témoin et d'un signal sonore, cela indique une surcharge ou une décharge du circuit électrique. Arrêtez-vous et faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 292, 7.2.4 « Si un voyant s'allume », Voyant du système de charge | « Indique un dysfonctionnement du système de charge du véhicule. Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « batterie-rouge » : pictogramme « batterie » absent ou invalide (src/pictogrammes/batterie.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 8. Voyant de freinage rouge (liquide de frein ou circuit de freinage)
@@ -238,9 +309,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 137, « Témoin d'incident sur circuit de freinage » | « S'il s'allume au freinage, accompagné du témoin et d'un signal sonore, c'est l'indice d'une baisse de niveau dans les circuits ou d'un incident sur le système de freinage. Arrêtez-vous et faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 110-111, « Témoin d'incident sur circuit de freinage » | « S'il s'allume au freinage, accompagné du témoin et d'un signal sonore, c'est l'indice d'une baisse de niveau dans les circuits ou d'un incident sur le système de freinage. Arrêtez-vous et faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 292, 7.2.4 « Si un voyant s'allume », Voyant du système de freinage | « Indique ce qui suit : Le niveau du liquide de frein est bas ; ou Le système de freinage présente un dysfonctionnement. Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. Il pourrait être dangereux de continuer à conduire. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « frein-rouge » : pictogramme « frein » absent ou invalide (src/pictogrammes/frein.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -261,9 +329,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 155, « Frein de parking assisté » | « Le serrage du frein de parking assisté est confirmé par le message « Frein de parking serré » et le témoin au tableau de bord » | Oui, vous pouvez rouler · Aucune action nécessaire |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 118, 4.2.5 « Frein de stationnement » | « Engage le frein de stationnement […] Le témoin de frein de stationnement s'allume. Relâche le frein de stationnement […] Le témoin de frein de stationnement s'éteint. […] Un signal sonore retentit si le véhicule roule avec le frein de stationnement engagé. Le message “Relâchez le frein de stationnement” s'affiche » | Oui, vous pouvez rouler · Aucune action nécessaire |
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « frein-stationnement » : pictogramme « frein-stationnement » absent ou invalide (src/pictogrammes/frein-stationnement.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 10. Voyant AdBlue orange (réserve basse, démarrage bientôt bloqué)
@@ -283,9 +348,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 166, « Réservoir réactif », Entretien/Autonomie | « [témoin] s'allume. « Remplir AdBlue avant 1200 km » Lorsque le message s'affiche à la mise sous contact du moteur, il vous reste entre 1200 km et 800 km d'autonomie. Prévoyez d'effectuer ou de faire effectuer par un Représentant de la marque, le remplissage de réactif dans le réservoir. » | Oui, avec précautions · À faire dans les jours qui viennent |
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 166, « Réservoir réactif », Entretien/Autonomie | « [témoin] clignote. « XXX KM blocage remplir AdBlue » […] Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible. » | Oui, avec précautions · À faire tout de suite |
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « adblue-reserve » : pictogramme « adblue » absent ou invalide (src/pictogrammes/adblue.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 11. AdBlue : démarrage impossible (réservoir vide ou système bloqué)
@@ -304,9 +366,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Peugeot (208 (2e génération), guide d'utilisation édition 01-20) | p. 15-16, « AdBlue (BlueHDi) » et « Système d'antipollution SCR » ; renvoi (2) p. 13 | « Le réservoir d'AdBlue est vide : le dispositif d'antidémarrage réglementaire empêche le redémarrage du moteur. Pour redémarrer le moteur, faire un appoint en AdBlue, ou effectuer (2). […] Le dispositif d'antidémarrage empêche le redémarrage du moteur (…). Pour redémarrer le moteur, effectuer (2). […] (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié. » | Non, ne poursuivez pas votre trajet · À faire tout de suite |
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 166-167, « Réservoir réactif » | « « 0 KM blocage remplir AdBlue » Le démarrage du moteur est impossible. Pour redémarrer, vous devez faire vous-même le plein de réactif dans le réservoir. […] « 0 KM blocage antipollution » Indique qu'après coupure du contact, le redémarrage du véhicule est impossible. Faites appel à un Représentant de la marque. » | Non, ne poursuivez pas votre trajet · À faire tout de suite |
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « adblue-demarrage-impossible » : pictogramme « adblue » absent ou invalide (src/pictogrammes/adblue.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 12. Voyant AdBlue avec voyant moteur ou Service (système AdBlue défaillant)
@@ -323,9 +382,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Peugeot (208 (2e génération), guide d'utilisation édition 01-20) | p. 16, « Système d'antipollution SCR (BlueHDi) » ; renvoi (3) p. 13 | « Témoin d'AdBlue clignotant dès la mise du contact, associé au témoin d'Autodiagnostic moteur fixe, accompagnés d'un signal sonore et d'un message indiquant l'autonomie de roulage. Selon le message affiché, il est possible de parcourir jusqu'à 1 100 km avant le déclenchement du dispositif d'antidémarrage du moteur. Effectuer (3) au plus tôt pour éviter le blocage du démarrage. » | Oui, avec précautions · À faire tout de suite |
 | Seat (Ibiza (5e génération), notice édition 11/20) | p. 286, « AdBlue », Témoins d'alerte et de contrôle | « [deux témoins] Il s'allume en jaune. Un dysfonctionnement a été détecté dans le circuit d'AdBlue ou le liquide AdBlue rajouté n'est pas conforme. Adressez-vous à un atelier spécialisé. Faites réviser le système. » | Oui, avec précautions · À faire dans les jours qui viennent |
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 167, « Réservoir réactif », Anomalies de fonctionnement du système | « « Antipollution à contrôler » « Qualité AdBlue à contrôler » « Injection AdBlue à contrôler » Indique une défaillance du système. Consultez un Représentant de la marque le plus tôt possible. […] « XXX KM blocage antipollution » Indique une défaillance du système et qu'il vous reste moins de 800 km à parcourir avant que le redémarrage du véhicule soit impossible. » | Oui, avec précautions · À faire tout de suite |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « adblue-defaut » : pictogramme « adblue » absent ou invalide (src/pictogrammes/adblue.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -344,9 +400,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Seat (Ibiza (5e génération), notice édition 11/20) | p. 288-290, « Filtre à particules » | « Conduisez à une vitesse comprise entre 50 et 120 km/h (31 et 75 mi/h). Cela augmente la température et brûle la suie dans le filtre. […] Terminer la régénération après l'extinction du témoin lumineux. Si le témoin reste allumé après 30 minutes de conduite en mode régénération, contactez un atelier spécialisé pour faire réparer le défaut » | Oui, avec précautions · À faire dans les jours qui viennent |
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 186, « Particularités des versions Diesel », Filtre à particules | « Pour cela, à l'apparition du témoin, continuez à rouler suivant les conditions de circulation et le respect des limitations de vitesse jusqu'à l'extinction du témoin. Si possible, ne laissez pas le régime moteur descendre en dessous de 2000 tours/min. » | Oui, avec précautions · À faire tout de suite |
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 160, « Particularités des versions Diesel », Filtre à particules | « Pour cela, à l'apparition du témoin, continuez à rouler suivant les conditions de circulation et le respect des limitations de vitesse jusqu'à l'extinction du témoin. Si possible, ne laissez pas le régime moteur descendre en dessous de 2000 tours/mn. » | Oui, avec précautions · À faire tout de suite |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « fap » : pictogramme « fap » absent ou invalide (src/pictogrammes/fap.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -368,7 +421,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 **Rappels des contrôles** :
 - R3-NIVEAU-A-VERIFIER (alerte) : voyant « prechauffage » : citation de « notice-seat-ibiza » : « immediatement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
-- PICTO-ABSENT (alerte) : voyant « prechauffage » : pictogramme « prechauffage » absent ou invalide (src/pictogrammes/prechauffage.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -388,9 +440,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 137, « Témoin d'airbag » | « S'il ne s'allume pas à la mise sous contact ou s'il s'allume moteur allumé, il signale une défaillance du système. Consultez au plus tôt un Représentant de la marque. » | Oui, avec précautions · À faire tout de suite |
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 111, « Témoin d'Airbag » | « S'il ne s'allume pas à la mise sous contact, ou s'il s'allume moteur allumé ou s'il clignote, il signale une défaillance du système. Consultez rapidement un Représentant de la marque. » | Oui, avec précautions · À faire dans les jours qui viennent |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 293, 7.2.4 « Si un voyant s'allume », Voyant SRS | « Indique un dysfonctionnement dans : Le système d'airbag SRS ; ou Le système de prétensionneur de ceinture de sécurité. Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié. » | Oui, avec précautions · À faire tout de suite |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « airbag-defaut » : pictogramme « airbag » absent ou invalide (src/pictogrammes/airbag.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -414,7 +463,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 **Rappels des contrôles** :
 - R3-NIVEAU-A-VERIFIER (alerte) : voyant « airbag-passager-desactive » : citation de « notice-renault-clio-5 » : « imperativement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
 - R3-NIVEAU-A-VERIFIER (alerte) : voyant « airbag-passager-desactive » : citation de « notice-dacia-sandero-3 » : « imperativement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
-- PICTO-ABSENT (alerte) : voyant « airbag-passager-desactive » : pictogramme « airbag-passager-off » absent ou invalide (src/pictogrammes/airbag-passager-off.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -437,9 +485,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 **Notices consultées sans consigne propre à cet état** (non citées, aucun niveau) :
 - Seat, p. 254, « Systèmes de stabilisation et assistance au freinage », Témoins : « Défaut sur l'ABS, ou il ne fonctionne pas. » : état décrit sans consigne propre au témoin. L'encadré général de la p. 94 (« Arrêtez le véhicule de manière sûre dès que possible. ») vaut pour tous les témoins, verts et bleus compris : il ne fixe pas de niveau.
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « abs » : pictogramme « abs » absent ou invalide (src/pictogrammes/abs.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 18. Voyants ABS et freinage allumés ensemble
@@ -459,9 +504,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 184-185, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement | « [quatre témoins] allumés au tableau de bord accompagnés du message « Panne du système de freinage » : cela indique une défaillance des dispositifs de freinage. […] Votre freinage est partiellement assuré. Toutefois, il est dangereux de freiner brusquement et ceci vous impose un arrêt impératif et immédiat compatible avec les conditions de circulation. Faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 298, MISE EN GARDE « Si le voyant ABS et le voyant du système de freinage restent allumés » | « Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. Le véhicule devient très instable pendant le freinage, et l'ABS risque de connaître une défaillance, ce qui peut provoquer un accident et causer des blessures graves voire mortelles. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « abs-et-frein » : pictogramme « abs » absent ou invalide (src/pictogrammes/abs.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 19. Voyant ESP clignotant (système en action)
@@ -480,9 +522,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 213, « Contrôle dynamique de conduite ESC », Principe de fonctionnement | « Le système compare la volonté du conducteur à la trajectoire réelle du véhicule et corrige cette dernière, si nécessaire, en agissant sur le freinage de certaines roues et/ou sur la puissance du moteur, en cas de déclenchement du système, le témoin clignote au tableau de bord. » | Oui, vous pouvez rouler · Aucune action nécessaire |
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 185, « Contrôle dynamique de conduite ESC », Principe de fonctionnement | « Le système compare la volonté du conducteur à la trajectoire réelle du véhicule et corrige cette dernière, si nécessaire, en agissant sur le freinage de certaines roues et/ou sur la puissance du moteur, en cas de déclenchement du système, le témoin clignote au tableau de bord. » | Oui, vous pouvez rouler · Aucune action nécessaire |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 205, « Lorsque les systèmes TRC/VSC/de contrôle du roulis de remorque fonctionnent » | « Le témoin de dérapage clignote lorsque les systèmes TRC/VSC/de contrôle du roulis de la remorque fonctionnent. » | Oui, vous pouvez rouler · Aucune action nécessaire |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « esp-clignotant » : pictogramme « esp » absent ou invalide (src/pictogrammes/esp.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -505,9 +544,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 **Notices consultées sans consigne propre à cet état** (non citées, aucun niveau) :
 - Seat, p. 254, « Systèmes de stabilisation et assistance au freinage », Témoins : « Anomalie de l'ESC ou l'ABS, ou déconnexion provoquée par le système. » : état décrit sans consigne propre au témoin (même remarque que pour l'ABS sur l'encadré général de la p. 94).
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « esp-defaut » : pictogramme « esp » absent ou invalide (src/pictogrammes/esp.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 21. Voyant de pression des pneus allumé fixe
@@ -529,9 +565,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 **Notices consultées sans consigne propre à cet état** (non citées, aucun niveau) :
 - Renault, p. 206 et 348, « Avertisseur de perte de pression des pneumatiques » : « Le témoin s'allume fixe au tableau de bord pour alerter le conducteur en cas de pression insuffisante (roue dégonflée, roue crevée...). » : pas de consigne propre ; seul le message « Crevaison », message d'alerte avec le témoin STOP (p. 125), impose l'arrêt.
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « pression-pneus » : pictogramme « pression-pneus » absent ou invalide (src/pictogrammes/pression-pneus.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 22. Voyant de pression des pneus clignotant puis fixe (système défaillant)
@@ -548,9 +581,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Peugeot (208 (2e génération), guide d'utilisation édition 01-20) | p. 18, « Sous-gonflage » ; renvoi (3) p. 13 | « Témoin de sous-gonflage clignotant puis fixe et témoin de Service fixe. Le système de surveillance de la pression des pneumatiques est défaillant. La détection de sous-gonflage n'est plus assurée. Dès que possible, vérifier la pression des pneumatiques et effectuer (3). » | Oui, avec précautions · À faire tout de suite |
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 177, « Système de surveillance de pression des pneumatiques », Anomalies de gonflage possibles | « clignote puis s'allume fixe accompagné du témoin « Capteurs pneus à contrôler » Une roue ne s'affiche plus. Cela indique qu'au moins une roue n'est pas équipée de capteur (roue de secours...) ou que le capteur est défaillant. Consultez un Représentant de la marque. » | Oui, avec précautions · À faire dans les jours qui viennent |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 295 et 297, Voyant de faible pression des pneus | « Si le témoin reste allumé après avoir clignoté pendant environ 1 minute (un signal sonore ne retentit pas) : Dysfonctionnement dans le système de détection de pression des pneus. Faites vérifier le système […] Il se peut que le système de détection de pression des pneus présente un dysfonctionnement. Faites immédiatement vérifier le véhicule » | Oui, avec précautions · À faire tout de suite |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « pression-pneus-systeme » : pictogramme « pression-pneus » absent ou invalide (src/pictogrammes/pression-pneus.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
@@ -571,9 +601,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 113, « Témoin de direction à assistance variable » | « S'il s'allume en roulant accompagné du témoin, cela indique une défaillance du système. Faites appel à un Représentant de la marque. » | Non, ne poursuivez pas votre trajet · À faire tout de suite |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 294 et 298, Voyant du système de direction assistée électrique (jaune) | « Indique un dysfonctionnement du système EPS (direction assistée électrique). Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié. […] Lorsque le voyant s'allume en jaune, l'assistance à la direction assistée est limitée. » | Oui, avec précautions · À faire tout de suite |
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « direction-orange » : pictogramme « direction » absent ou invalide (src/pictogrammes/direction.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 24. Voyant de direction rouge, ou STOP avec une alerte de direction
@@ -593,9 +620,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 102, « Messages d'alerte » | « Ils apparaissent avec le témoin et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez votre moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. […] « Panne de la direction » Indique un problème sur la direction. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 294 et 298, Voyant du système de direction assistée électrique (rouge) | « Indique un dysfonctionnement du système EPS (direction assistée électrique). Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié. […] Lorsque le voyant s'allume en rouge, l'assistance à la direction assistée est perdue et il devient alors très difficile de manœuvrer le volant. » | Oui, avec précautions · À faire tout de suite |
 
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « direction-rouge » : pictogramme « direction » absent ou invalide (src/pictogrammes/direction.svg)
-
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
 ### 25. Voyant de température du liquide de refroidissement rouge
@@ -614,9 +638,6 @@ Décision de Houssem : ☐ validée  ☐ à corriger : …
 | Renault (Clio 5 phase 2, notice réf. 1457-3) | p. 139, « Témoin d'alerte de température du liquide de refroidissement » | « S'il devient rouge, arrêtez-vous et laissez tourner le moteur au ralenti une ou deux minutes. La température doit s'abaisser et le témoin repasser au bleu. Sinon arrêtez le moteur. Laissez-le refroidir avant de vérifier le liquide de refroidissement. Faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Dacia (Sandero 3, véhicules depuis le 15/10/2025, notice réf. 1688-1) | p. 111, « Témoin d'alerte de température du liquide de refroidissement » | « S'il devient rouge, arrêtez-vous et laissez tourner le moteur au ralenti une ou deux minutes. La température doit s'abaisser et le témoin s'éteindre ou repasser au bleu. Sinon arrêtez le moteur. Laissez-le refroidir avant de vérifier le liquide de refroidissement. Faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
 | Toyota (Yaris (génération 2020 à aujourd'hui, non hybride), manuel édition du 15/01/2024) | p. 292, 7.2.4 « Si un voyant s'allume », Voyant de température élevée du liquide de refroidissement | « Indique que la température du liquide de refroidissement du moteur est trop élevée. Arrêtez immédiatement le véhicule dans un endroit sûr. » | Non, arrêtez-vous immédiatement · À faire tout de suite |
-
-**Rappels des contrôles** :
-- PICTO-ABSENT (alerte) : voyant « temperature-rouge » : pictogramme « temperature » absent ou invalide (src/pictogrammes/temperature.svg)
 
 Décision de Houssem : ☐ validée  ☐ à corriger : …
 
