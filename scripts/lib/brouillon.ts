@@ -84,7 +84,7 @@ export function controlerBrouillon(
       const source = contexte.sources.get(s.source);
       if (source === undefined) constats.push(erreur('R3-SOURCE-INCONNUE', `${etiquette} : sans_consigne : source « ${s.source} » absente du registre des sources`));
       else if (source.categorie !== 'notice-constructeur') constats.push(erreur('R7-FORMAT', `${etiquette} : sans_consigne ne liste que des notices constructeur (« ${s.source} »)`));
-      else if (citees.has(source.marque)) constats.push(erreur('R7-FORMAT', `${etiquette} : la notice « ${s.source} » est à la fois citée avec un niveau et listée sans consigne`));
+      else if (source.marque !== undefined && citees.has(source.marque)) constats.push(erreur('R7-FORMAT', `${etiquette} : la notice « ${s.source} » est à la fois citée avec un niveau et listée sans consigne`));
     }
   });
   constats.push(...controlerVoyantsDansLePlan(contexte.plan, lignes).map((c) => ({ ...c, fichier: FICHIER_BROUILLON })));
