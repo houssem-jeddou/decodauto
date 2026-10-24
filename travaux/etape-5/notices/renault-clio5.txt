@@ -179,3 +179,14 @@ et immédiat compatible avec les conditions de circulation. Faites appel à un R
 Lorsque le système détecte une anomalie de fonctionnement, le message « ESC à contrôler » et les témoins et s'affichent au tableau de bord.
 Dans ce cas, l'ESC et le système antipatinage sont désactivés.
 Consultez un Représentant de la marque.
+
+##### PDF 124 (p. 122) Ordinateur de bord : autonomie de révision (lu le 24/10)
+[...] – autonomie inférieure à 1 500 km ou un mois : le message « Prévoir révision » s'affiche acompagné du terme le plus proche (distance
+ou temps) ;
+– autonomie égale à 0 km ou date de révision atteinte : le message « Faire révision » s'affiche accompagné du témoin .
+Le véhicule nécessite alors une révision le plus rapidement possible.
+
+##### PDF 108 (p. 106) Airbag passager avant (lu le 24/10)
+[...] À la mise sous contact, vérifiez impérativement que le témoin est bien allumé sur l'afficheur 2 .
+Ce voyant reste allumé en permanence pour vous confirmer que vous pouvez installer un siège enfant.
+[...] En cas de manipulation véhicule roulant, les témoins et s'allument.

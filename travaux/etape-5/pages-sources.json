@@ -1,0 +1,81 @@
+[
+  {
+    "page": "voyants",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "l'outil voyants affiche toutes les lignes de la base, tirées de ces notices"
+  },
+  {
+    "page": "code-p0420",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire)"
+  },
+  {
+    "page": "code-p0087",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire)"
+  },
+  {
+    "page": "code-p0299",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3",
+      "notice-toyota-yaris"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire)"
+  },
+  {
+    "page": "code-p0380",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » et « préchauffage » de la base (libellé du code : source secondaire)"
+  },
+  {
+    "page": "code-p1351",
+    "sources": [
+      "notice-peugeot-208",
+      "notice-seat-ibiza",
+      "notice-renault-clio-5",
+      "notice-dacia-sandero-3"
+    ],
+    "raison": "verdict tiré des lignes « voyant moteur » et « préchauffage » de la base (code constructeur : libellé par marque, source secondaire)"
+  },
+  {
+    "page": "pression-des-pneus",
+    "sources": [
+      "notice-renault-clio-5"
+    ],
+    "raison": "pressions de gonflage lues sur l'étiquette de la porte conducteur, vérifiées pneus froids, au moins une fois par mois (notice Renault Clio 5, p. 206 et 348)"
+  },
+  {
+    "page": "loi-montagne",
+    "sources": [
+      "code-de-la-route-d314-8",
+      "decret-2020-1264"
+    ],
+    "raison": "obligation d'équipement en période hivernale (code de la route, art. D314-8, créé par le décret n° 2020-1264)"
+  }
+]
