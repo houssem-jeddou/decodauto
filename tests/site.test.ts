@@ -17,9 +17,11 @@ import {
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 describe('adresse du site et plan du site (étape 7)', () => {
-  test('URL_SITE est égale à « site » dans astro.config.mjs', async () => {
+  test('astro.config.mjs prend l\'adresse du site dans src/lib/site.ts (source unique)', async () => {
     const config = await readFile(join(racine, 'astro.config.mjs'), 'utf8');
-    assert.match(config, new RegExp(`site:\\s*'${URL_SITE.replace(/[.]/g, '\\.')}'`));
+    assert.match(config, /import \{ URL_SITE \} from '\.\/src\/lib\/site\.ts'/);
+    assert.match(config, /site:\s*URL_SITE,/);
+    assert.equal(URL_SITE, 'https://decodauto.com');
   });
 
   test('adresse d\'une page depuis son fichier construit', () => {
@@ -66,6 +68,7 @@ const redirection = (location: string, statut = 301): Reponse => ({ statut, loca
 function reseauConforme(surcharges: Record<string, Reponse> = {}): Lire {
   const table: Record<string, Reponse> = {
     'http://decodauto.com/': redirection('https://decodauto.com/'),
+    'http://decodauto.com/voyants/?verification=1': redirection('https://decodauto.com/voyants/?verification=1'),
     'https://www.decodauto.com/': redirection('https://decodauto.com/'),
     'https://www.decodauto.com/voyants/?verification=1': redirection('https://decodauto.com/voyants/?verification=1'),
     'https://decodauto.com/voyants/?verification=1': ok('', { statut: 404 }),
@@ -101,6 +104,33 @@ describe('vérification de la production (redirections, noindex, robots.txt, pla
   test('redirection temporaire (302) ou 308 : refusée, docs/03 demande une 301', async () => {
     assert.deepEqual(await regles(reseauConforme({ 'http://decodauto.com/': redirection('https://decodauto.com/', 302) })), ['PROD-HTTP']);
     assert.deepEqual(await regles(reseauConforme({ 'https://www.decodauto.com/': redirection('https://decodauto.com/', 308) })), ['PROD-WWW']);
+  });
+
+  test('www sans enregistrement DNS (nom introuvable) : constats décrits, sans interrompre la vérification', async () => {
+    const conforme = reseauConforme();
+    const lire: Lire = async (url) => {
+      if (url.includes('www.')) throw new TypeError('fetch failed', { cause: Object.assign(new Error('getaddrinfo ENOTFOUND'), { code: 'ENOTFOUND' }) });
+      return conforme(url);
+    };
+    const constats = await verifierProduction({ lire, robotsDepot: ROBOTS, indexable: false });
+    assert.deepEqual([...new Set(constats.map((c) => c.regle))].sort(), ['PROD-HTTP-WWW', 'PROD-WWW', 'PROD-WWW-CHEMIN']);
+    assert.ok(constats.every((c) => c.message.includes('erreur réseau (ENOTFOUND)')), JSON.stringify(constats));
+  });
+
+  test('accueil injoignable : PROD-ACCUEIL décrit, sans constat de noindex', async () => {
+    const conforme = reseauConforme();
+    const lire: Lire = async (url) => {
+      if (url === 'https://decodauto.com/') throw new Error('délai dépassé');
+      return conforme(url);
+    };
+    const constats = await verifierProduction({ lire, robotsDepot: ROBOTS, indexable: false });
+    assert.deepEqual([...new Set(constats.map((c) => c.regle))].sort(), ['PROD-ACCUEIL', 'PROD-HTTP-WWW']);
+    assert.ok(constats.find((c) => c.regle === 'PROD-ACCUEIL')?.message.includes('erreur réseau (délai dépassé)'));
+  });
+
+  test('http qui renvoie vers l\'accueil sans garder le chemin : PROD-HTTP-CHEMIN', async () => {
+    const lire = reseauConforme({ 'http://decodauto.com/voyants/?verification=1': redirection('https://decodauto.com/') });
+    assert.deepEqual(await regles(lire), ['PROD-HTTP-CHEMIN']);
   });
 
   test('www qui renvoie vers l\'accueil sans garder le chemin : PROD-WWW-CHEMIN', async () => {

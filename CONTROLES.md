@@ -80,17 +80,17 @@ Non vérifiable par machine (liste de recette) : un recouvrement de sens entre d
 | LIEN-CASSE / LIEN-SANS-BARRE / LIEN-ANCRE | Liens internes (`npm run liens`) |
 | CANONICAL-ABSENT / CANONICAL-MULTIPLE / CANONICAL-ADRESSE | Chaque page construite, sauf la 404, porte une seule balise canonical, égale à sa propre adresse absolue (`https://decodauto.com` + adresse, barre finale comprise). Le gabarit la calcule ; elle n'est jamais saisie |
 | CANONICAL-404 | La page 404 ne porte pas de canonical |
-| SITEMAP-ABSENT / SITEMAP-FORMAT / SITEMAP-PAGE-ABSENTE / SITEMAP-ADRESSE-INCONNUE / SITEMAP-DOUBLON | `sitemap.xml` (généré à la construction par `scripts/integration-plan-du-site.ts`) est bien formé et liste exactement les pages construites, sans la 404, une fois chacune, à leur adresse canonique. Ni `priority` ni `changefreq` (ignorés par Google) ; pas de `lastmod` tant qu'aucune date de modification fiable n'existe |
+| SITEMAP-ABSENT / SITEMAP-FORMAT / SITEMAP-PAGE-ABSENTE / SITEMAP-ADRESSE-INCONNUE / SITEMAP-DOUBLON | `sitemap.xml` (généré à la construction par `scripts/integration-plan-du-site.ts`) est bien formé et liste exactement les pages construites, sans la 404, une fois chacune, à leur adresse canonique. Ni `priority` ni `changefreq` (ignorés par Google). Pas encore de `lastmod` : il sera ajouté avec les premières pages éditoriales (étape 8), tiré de `date_modification` (idée reportée du journal) |
 | ROBOTS-SITEMAP | `robots.txt` annonce le plan du site : `Sitemap: https://decodauto.com/sitemap.xml` |
 
 Tests : `tests/canonical.test.ts` (site construit de test), `tests/site.test.ts` (fonctions de `src/lib/site.ts`, robots.txt du dépôt, adresse du site égale à `site` dans `astro.config.mjs`).
 
 ## Production en ligne (`npm run production`, job « production » de la CI)
-Lancé après chaque déploiement réussi sur `main`, chaque lundi et à la demande (onglet Actions) : un écart fait échouer le run. Sur une pull request, il est informatif (`continue-on-error`) : la production dépend aussi des réglages Cloudflare, hors du dépôt. Aucun secret. Code : `scripts/lib/production.ts` ; tests : `tests/site.test.ts` (faux réseau).
+Sur `main` (après chaque déploiement réussi, chaque lundi, à la demande depuis l'onglet Actions) : un écart fait échouer le run. Sur une pull request ou une autre branche, il est informatif (`--information` : avertissements, job vert) : la production n'a pas encore les changements de la branche et dépend aussi des réglages Cloudflare, hors du dépôt. Une erreur réseau (nom introuvable, délai dépassé) devient un constat décrit, sans interrompre les autres vérifications. Aucun secret. Code : `scripts/lib/production.ts` ; tests : `tests/site.test.ts` (faux réseau).
 
 | Code | Contrôle |
 |---|---|
-| PROD-HTTP | `http://decodauto.com/` redirige en 301, en une fois, vers `https://decodauto.com/` |
+| PROD-HTTP / PROD-HTTP-CHEMIN | `http://decodauto.com/` redirige en 301, en une fois, vers `https://decodauto.com/`, chemin et paramètres conservés |
 | PROD-WWW / PROD-WWW-CHEMIN | `https://www.decodauto.com/` redirige en 301 vers `https://decodauto.com/`, chemin et paramètres conservés |
 | PROD-HTTP-WWW | `http://www.decodauto.com/` aboutit à `https://decodauto.com/` (réponse 200) en une ou deux redirections, toutes en 301 |
 | PROD-ACCUEIL | `https://decodauto.com/` répond 200 |

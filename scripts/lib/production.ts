@@ -13,6 +13,8 @@ export interface Reponse {
   /** En-tête Content-Type, sinon null. */
   typeContenu: string | null;
   corps: string;
+  /** Erreur réseau (nom introuvable, connexion refusée, délai dépassé) : statut 0. */
+  erreurReseau?: string | undefined;
 }
 
 /** Lit une adresse sans suivre les redirections. */
@@ -29,6 +31,20 @@ export interface Etape {
   url: string;
   statut: number;
   location: string | null;
+  erreurReseau?: string | undefined;
+}
+
+/** Une erreur réseau devient une réponse de statut 0, décrite, au lieu d'interrompre la vérification. */
+export function lectureSure(lire: Lire): Lire {
+  return async (url) => {
+    try {
+      return await lire(url);
+    } catch (e) {
+      const cause = (e as { cause?: { code?: unknown; message?: unknown } } | null)?.cause;
+      const description = String(cause?.code ?? cause?.message ?? (e instanceof Error ? e.message : e));
+      return { statut: 0, location: null, robotsTag: null, typeContenu: null, corps: '', erreurReseau: description };
+    }
+  };
 }
 
 /** Suit une chaîne de redirections (cinq au plus) et renvoie chaque étape. */
@@ -37,14 +53,18 @@ export async function suivre(url: string, lire: Lire, maximum = 5): Promise<Etap
   let courante = url;
   for (let i = 0; i <= maximum; i += 1) {
     const r = await lire(courante);
-    etapes.push({ url: courante, statut: r.statut, location: r.location });
+    etapes.push({ url: courante, statut: r.statut, location: r.location, erreurReseau: r.erreurReseau });
     if (r.statut < 300 || r.statut >= 400 || r.location === null) break;
     courante = new URL(r.location, courante).href;
   }
   return etapes;
 }
 
-const decrire = (etapes: Etape[]): string => etapes.map((e) => `${e.url} → ${e.statut}${e.location !== null ? ` (${e.location})` : ''}`).join(' ; ');
+const decrire = (etapes: Etape[]): string =>
+  etapes
+    .map((e) => (e.erreurReseau !== undefined ? `${e.url} → erreur réseau (${e.erreurReseau})` : `${e.url} → ${e.statut}${e.location !== null ? ` (${e.location})` : ''}`))
+    .join(' ; ');
+const decrireReponse = (r: Reponse): string => (r.erreurReseau !== undefined ? `erreur réseau (${r.erreurReseau})` : String(r.statut));
 
 /**
  * Redirection attendue de `depart` vers `arrivee` : une seule redirection, en 301, directement vers `arrivee`
@@ -71,12 +91,15 @@ export interface OptionsProduction {
   indexable: boolean;
 }
 
-export async function verifierProduction({ lire, robotsDepot, indexable }: OptionsProduction): Promise<Constat[]> {
+export async function verifierProduction(options: OptionsProduction): Promise<Constat[]> {
+  const { robotsDepot, indexable } = options;
+  const lire = lectureSure(options.lire);
   const constats: Constat[] = [];
   const www = `https://www.${HOTE}`;
 
   // Redirections 301 vers https://decodauto.com, chemin et paramètres conservés.
   constats.push(...(await verifierRedirection('PROD-HTTP', `http://${HOTE}/`, ACCUEIL, lire)));
+  constats.push(...(await verifierRedirection('PROD-HTTP-CHEMIN', `http://${HOTE}/voyants/?verification=1`, `${URL_SITE}/voyants/?verification=1`, lire)));
   constats.push(...(await verifierRedirection('PROD-WWW', `${www}/`, ACCUEIL, lire)));
   constats.push(...(await verifierRedirection('PROD-WWW-CHEMIN', `${www}/voyants/?verification=1`, `${URL_SITE}/voyants/?verification=1`, lire)));
   // http://www : au plus deux redirections 301, aboutissant à l'accueil.
@@ -95,21 +118,23 @@ export async function verifierProduction({ lire, robotsDepot, indexable }: Optio
 
   // Accueil en ligne, et non-indexation cohérente avec le mode du dépôt.
   const accueil = await lire(ACCUEIL);
-  if (accueil.statut !== 200) constats.push(erreur('PROD-ACCUEIL', `${ACCUEIL} répond ${accueil.statut} au lieu de 200`));
-  const noindex = /\bnoindex\b/i.test(accueil.robotsTag ?? '');
-  if (!indexable && !noindex) constats.push(erreur('PROD-NOINDEX-ABSENT', `le site n'est pas indexable mais ${ACCUEIL} n'envoie pas « X-Robots-Tag: noindex »`));
-  if (indexable && noindex) constats.push(erreur('PROD-NOINDEX-PRESENT', `le site est indexable mais ${ACCUEIL} envoie encore « X-Robots-Tag: noindex »`));
+  if (accueil.statut !== 200) constats.push(erreur('PROD-ACCUEIL', `${ACCUEIL} répond ${decrireReponse(accueil)} au lieu de 200`));
+  if (accueil.statut === 200) {
+    const noindex = /\bnoindex\b/i.test(accueil.robotsTag ?? '');
+    if (!indexable && !noindex) constats.push(erreur('PROD-NOINDEX-ABSENT', `le site n'est pas indexable mais ${ACCUEIL} n'envoie pas « X-Robots-Tag: noindex »`));
+    if (indexable && noindex) constats.push(erreur('PROD-NOINDEX-PRESENT', `le site est indexable mais ${ACCUEIL} envoie encore « X-Robots-Tag: noindex »`));
+  }
 
   // robots.txt servi identique à celui du dépôt (fins de ligne et espaces de fin ignorés).
   const robots = await lire(`${URL_SITE}/robots.txt`);
   const normaliser = (t: string): string => t.replace(/\r\n/g, '\n').split('\n').map((l) => l.trimEnd()).join('\n').trim();
-  if (robots.statut !== 200) constats.push(erreur('PROD-ROBOTS', `${URL_SITE}/robots.txt répond ${robots.statut} au lieu de 200`));
+  if (robots.statut !== 200) constats.push(erreur('PROD-ROBOTS', `${URL_SITE}/robots.txt répond ${decrireReponse(robots)} au lieu de 200`));
   else if (normaliser(robots.corps) !== normaliser(robotsDepot)) constats.push(erreur('PROD-ROBOTS', 'robots.txt en ligne diffère de public/robots.txt du dépôt'));
 
   // Plan du site en ligne.
   const plan = await lire(`${URL_SITE}/${FICHIER_PLAN_DU_SITE}`);
   if (plan.statut !== 200 || !/xml/i.test(plan.typeContenu ?? '')) {
-    constats.push(erreur('PROD-SITEMAP', `${URL_SITE}/${FICHIER_PLAN_DU_SITE} doit répondre 200 en XML. Constaté : ${plan.statut}, ${plan.typeContenu ?? 'sans type'}`));
+    constats.push(erreur('PROD-SITEMAP', `${URL_SITE}/${FICHIER_PLAN_DU_SITE} doit répondre 200 en XML. Constaté : ${decrireReponse(plan)}, ${plan.typeContenu ?? 'sans type'}`));
   }
   return constats;
 }

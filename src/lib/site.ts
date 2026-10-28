@@ -1,7 +1,7 @@
 // Adresse du site et plan du site pour les moteurs (sitemap.xml). Fonctions pures, sans dépendance : utilisées par
 // l'intégration de construction, le script de contrôle, la vérification de la production et les tests.
 
-/** Adresse du site, sans barre finale. Doit être égale à `site` dans astro.config.mjs (un test le vérifie). */
+/** Adresse du site, sans barre finale. Source unique : astro.config.mjs l'importe (`site`). */
 export const URL_SITE = 'https://decodauto.com';
 
 /** Nom du plan du site, à la racine. */
