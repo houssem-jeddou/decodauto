@@ -264,7 +264,8 @@
       "en_vigueur_le": "2026-01-01",
       "verifie_le": "2026-10-28",
       "reverifier_apres_jours": 90,
-      "automatique": "verdict-arret"
+      "automatique": "verdict-arret",
+      "validation": "13d09e3ecb22dbf47bc6e8d033e6189e9dccebe85dc3ce21d6f879bfa8206f03"
     },
     {
       "id": "aucune-amende-loi-montagne",
@@ -274,7 +275,8 @@
         "reponse-ministerielle-senat-2026-02-12"
       ],
       "verifie_le": "2026-10-28",
-      "reverifier_apres_jours": 30
+      "reverifier_apres_jours": 30,
+      "validation": "7ff3f6ac58e0efca69614c485c58a6586c5851d0c88768d1cf59b3a366e1c316"
     }
   ],
   "prises_en_charge": []

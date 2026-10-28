@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 28/10/2026 (15 h 30)
+Dernière mise à jour : 28/10/2026 (14 h 40, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,7 +12,7 @@ Dernière mise à jour : 28/10/2026 (15 h 30)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable : demande de changement n° 6 acceptée (28/10, 13 h 31) et appliquée (PR #11), en attente de la validation des deux montants et de la fusion | `travaux/etape-6/` |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée (PR #11), montants validés, fusion demandée par Houssem (28/10, 14 h 31) | `travaux/etape-6/` |
 | 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -66,7 +66,7 @@ Dernière mise à jour : 28/10/2026 (15 h 30)
 
 ## Étape 6, Charte et modèles de pages : livrables (découpage du 28/10)
 - [x] **6.0 Demande de changement n° 4 de la grille** (D12) : acceptée par Houssem le 28/10 (8 h 27). Seule la définition de l'urgence « À faire tout de suite » change ; les 25 empreintes de la base sont identiques. PR #8 fusionnée le 28/10 sur sa demande (1c2a608).
-- [ ] **6.1 Coût probable** : échelle fermée de tranches, base de calcul sourcée de chaque tranche, sources au registre.
+- [x] **6.1 Coût probable** : échelle fermée de tranches, base de calcul sourcée de chaque tranche, sources au registre. Verrouillé le 28/10 (14 h 31).
   - Recherche des sources faite le 28/10 (`travaux/etape-6/cout-probable/recherche-sources.md`).
   - Demande de changement n° 6 (`travaux/etape-6/demande-changement-6.md`), après deux revues indépendantes : acceptée par Houssem le 28/10 (13 h 29 et 13 h 31).
   - Appliquée sur la branche `etape-6/cout-probable`, PR #11 :
@@ -75,7 +75,7 @@ Dernière mise à jour : 28/10/2026 (15 h 30)
     - plage calculée ; contrôles COUT-* ;
     - règle 5 réécrite dans 01, 02, `CLAUDE.md` et 08 (v5).
   - Revue indépendante du code (« à corriger », un point bloquant), corrections intégrées ; CI de la PR #11 verte (« Contrôles »).
-  - Reste pour verrouiller 6.1 : validation par Houssem du texte des deux montants (empreintes), puis fusion sur sa demande.
+  - Texte des deux montants validé par Houssem le 28/10 (14 h 31), empreintes versées dans `data/couts.json` ; fusion de la PR #11 demandée.
 - [ ] **6.2 Charte éditoriale écrite**, avec le texte exact de la ligne de transparence et la section méthode de « à propos ».
 - [ ] **6.3 Composants communs** : encadré de décision (R9), gravité lisible sans la seule couleur, lien « Signaler une erreur », ligne de transparence, fil d'Ariane, liens et enfants tirés du plan. Les emplacements publicitaires restent à l'étape 7.
 - [ ] **6.4 Tableau « ce que dit la notice de votre marque »**, généré depuis les citations de la base (pages voyants).
@@ -180,6 +180,11 @@ Dernière mise à jour : 28/10/2026 (15 h 30)
   - **règle 5 de 01 réécrite** : « Pas de prix d'une enseigne en particulier ; pas de requêtes d'achat générique comme objectif. Un montant en euros est permis s'il est fixé par un texte officiel, ou comme ordre de grandeur tiré d'au moins deux sources publiques indépendantes, daté et revu chaque année. »
   - **accepte la décision 4** : libellés gardés, relus sur les exemples (6.6) ;
   - demande l'application sur la branche, avec la pull request et la CI, puis le verrouillage de 6.1 avant le livrable suivant.
+- 28/10/2026 (14 h 31), Houssem : **valide le texte des deux montants** de `data/couts.json` et **demande la fusion de la PR #11** :
+  - « Dépannage sur autoroute ou route express : forfait réglementé de 151 € à 280,08 € TTC selon l'heure et le poids, fournitures en plus » (en vigueur depuis le 01/01/2026) ;
+  - « Aucune amende n'est prévue à ce jour pour défaut d'équipement ».
+
+  Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 
 ## Revues indépendantes : ce qu'elles ont changé
 - 28/10, PR #11 (application de la demande n° 6), une revue du code : « à corriger », un point bloquant.
