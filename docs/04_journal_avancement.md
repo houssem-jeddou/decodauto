@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 24/10/2026 (14 h 45)
+Dernière mise à jour : 28/10/2026 (9 h 30)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,8 +12,8 @@ Dernière mise à jour : 24/10/2026 (14 h 45)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ Prochaine étape : commence par la demande de changement n° 4 (grille, D12) | – |
-| 7 | Socle technique | À faire, sur la piste technique (03, règle 12) ; seules les mentions légales attendent le statut juridique | – |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 acceptée (PR #8, CI verte, fusion sur demande) ; relevé Google France fait (6.7) ; demande de changement n° 5 en attente de l'accord de Houssem | `travaux/etape-6/` (branches `etape-6/*`) |
+| 7 | Socle technique | ▶ Piste technique en parallèle depuis le 28/10 (03, règle 12) : lot 7.1 en PR #9 ; redirection www à créer dans Cloudflare ; les mentions légales attendent le statut juridique | PR #9 (`etape-7/seo-technique`) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
 | 10 | Vague B | À faire | – |
@@ -21,25 +21,26 @@ Dernière mise à jour : 24/10/2026 (14 h 45)
 | 12 | Boucle mensuelle | À faire | – |
 
 ## Prévision (mise à jour à chaque session ; les dates de 03 sont des cibles)
-| Étape | Cible (03) | Prévision au 23/10 | Dépend de |
+| Étape | Cible (03) | Prévision au 28/10 | Dépend de |
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
-| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 (17, contrôlés) ; étape 7 du 25 au 28/10 | statut juridique, pour les seules mentions légales |
-| 6. Charte et modèles | 27–29/10 | 25–29/10, avec la demande de changement n° 4 (définition de l'urgence « immédiate ») au départ | source des résultats Google depuis la France choisie |
-| 8. Vague A | 29/10–01/11 | 29/10–02/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
-| 9. Mise en ligne du minimum | 31/10 | entre le 31/10 et le 03/11 | portes 7 et 8 ; sécurité des comptes |
-| 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 10–14/11 / ≈ 17–21/11 | mise en ligne de la vague A ; briefs des lots |
+| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), suite du 29 au 31/10 | statut juridique (mentions légales) ; réglages Cloudflare (redirection www) |
+| 6. Charte et modèles | 27–29/10 | 28/10–01/11 (aucun travail les 25, 26 et 27/10) | demande de changement n° 5 ; séance de validation des exemples |
+| 8. Vague A | 29/10–01/11 | 01–05/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
+| 9. Mise en ligne du minimum | 31/10 | 04–06/11 | portes 7 et 8 ; sécurité des comptes |
+| 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 12–16/11 / ≈ 19–23/11 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
 
-**Séances de validation de Houssem** (le vrai goulot), d'ici le 03/11 :
+**Séances de validation de Houssem** (le vrai goulot), d'ici le 06/11 :
 1. ~~demande de changement de structure et marques de référence~~ : faite le 23/10 ;
 2. statut juridique, avant les mentions légales ;
 3. ~~paquet de validation de la base voyants et porte 5~~ : faits le 24/10 ;
-4. source des résultats Google, avant l'étape 6 ;
-5. porte 6, vers le 29/10 ;
-6. porte 7 ;
-7. demande de changement des requêtes absentes, juste avant l'étape 8 ;
-8. paquet et encadrés de la vague A, et porte 8 ;
-9. go / no-go et porte 9, avec GitHub Pro, les comptes et le domaine sécurisés.
+4. ~~source des résultats Google et demande de changement n° 4~~ : faites le 28/10 ;
+5. texte de la demande de changement n° 5, et accord sur les redirections dans Cloudflare ;
+6. exemples des modèles voyant, code et pneus, puis porte 6, vers le 01/11 ;
+7. porte 7 ;
+8. demande de changement des requêtes absentes, juste avant l'étape 8 ;
+9. paquet et encadrés de la vague A, et porte 8 ;
+10. go / no-go et porte 9, avec GitHub Pro, les comptes et le domaine sécurisés.
 
 ## Étape 4, Plan du site : livrables
 - [x] **Rattachement des mots-clés** : les 1 053 mots-clés de 05 (921 comptés, 132 variantes) sont rattachés chacun à une seule page. Le plan compte 42 pages (22 en vague A, 11 en B, 9 en C), comme dans 02. Douze cas limites sont tranchés (09).
@@ -62,10 +63,38 @@ Dernière mise à jour : 24/10/2026 (14 h 45)
 | Revue indépendante | ✅ | Deux revues du plan, deux revues du code de la PR #3, puis une revue globale des étapes 1 à 4 par deux relecteurs (rien de bloquant ; apports ci-dessous) |
 | Validation de Houssem | ✅ | 23/10/2026 |
 
+## Étape 6, Charte et modèles de pages : livrables (découpage du 28/10)
+- [x] **6.0 Demande de changement n° 4 de la grille** (D12) : acceptée par Houssem le 28/10 (8 h 27). Seule la définition de l'urgence « À faire tout de suite » change ; les 25 empreintes de la base sont identiques. PR #8 : CI verte (contrôles et Lighthouse) ; fusion sur demande de Houssem.
+- [ ] **6.1 Coût probable** : échelle fermée de tranches, base de calcul sourcée de chaque tranche, sources au registre. Commence par une demande de changement de structure (`src/schemas/pages.ts` prévoit la liste fermée sans l'avoir encore).
+- [ ] **6.2 Charte éditoriale écrite**, avec le texte exact de la ligne de transparence et la section méthode de « à propos ».
+- [ ] **6.3 Composants communs** : encadré de décision (R9), gravité lisible sans la seule couleur, lien « Signaler une erreur », ligne de transparence, fil d'Ariane, liens et enfants tirés du plan. Les emplacements publicitaires restent à l'étape 7.
+- [ ] **6.4 Tableau « ce que dit la notice de votre marque »**, généré depuis les citations de la base (pages voyants).
+- [ ] **6.5 Contrôles peu coûteux** : title, H1 ou description en double ; dates incohérentes.
+- [ ] **6.6 Modèles et exemples rédigés** : voyant, code et pneus si la demande de changement n° 5 est acceptée ; sinon les 6 types.
+- [x] **6.7 Relevé des résultats Google depuis la France** (28/10) : 19 requêtes principales de la vague A, SerpApi (google.fr, gl=fr, hl=fr, localisation France), empreintes vérifiées après recopie. Branche `etape-6/releve-google-france`, `travaux/etape-6/releve-google-france/` ; constats pour les briefs dans son README. Revue indépendante prévue avec les briefs (6.8), en un seul lot.
+- [ ] **6.8 Briefs des 22 pages de la vague A**, générés depuis le plan et le relevé (les 3 pages du socle n'ont pas de mots-clés).
+- [ ] **6.9 Porte de sortie de l'étape 6.**
+
+## Étape 7, Socle technique (piste technique) : livrables
+- [x] **Lot 7.1** (PR #9, CI entièrement verte le 28/10 : contrôles, Lighthouse, production en mode informatif) :
+  - canonical absolue calculée par le gabarit pour chaque page, aucune sur la 404 ;
+  - `sitemap.xml` généré à la construction et ligne `Sitemap` dans robots.txt ;
+  - contrôles CANONICAL-*, SITEMAP-*, ROBOTS-SITEMAP ;
+  - job CI « production » : redirections 301, noindex, robots.txt et plan du site en ligne. Il bloque sur `main` et reste informatif sur les pull requests.
+- [ ] **Redirections**, absentes en production (job production du 28/10) :
+  - `http://decodauto.com/` répond 200 sans rediriger vers https : activer « Always Use HTTPS » dans Cloudflare ;
+  - `www.decodauto.com` n'a aucun enregistrement DNS (ENOTFOUND) : créer un enregistrement `www` proxifié et une redirection 301 vers https://decodauto.com, chemin et paramètres conservés (documentation Cloudflare « Redirecting www to domain apex »).
+
+  Ce sont des réglages du compte : accord de Houssem. Le job production dira ensuite si tout est conforme ; il a aussi confirmé que noindex et l'accueil sont conformes.
+- [ ] Politique de confidentialité, mesure d'audience exemptée de consentement, données structurées (Article, fil d'Ariane, auteur), réglages Cloudflare (robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow), emplacements publicitaires non affichés, Lighthouse sur les pages du socle.
+- [ ] Mentions légales : après le statut juridique.
+
 ## Décisions ouvertes (à trancher par Houssem)
 - **Statut juridique** : à trancher avant de rédiger les mentions légales (étape 7) ; le reste de l'étape 7 avance sans l'attendre (décision du 23/10, 19 h).
 - **GitHub Pro** : souscrire avant la porte de l'étape 9, puis protéger `main` (pull request obligatoire, contrôles exigés, aucun contournement).
-- **Source des résultats Google relevés depuis la France** pour les briefs (Semrush base France, ou relevé manuel) : avant l'étape 6.
+- **Demande de changement n° 5** (modèles panne, fluide et dossier aux étapes 10 et 11) : principe accepté le 28/10 (option 2) ; texte revu, en attente de son accord (`travaux/etape-6/demande-changement-5.md`, branche `etape-6/dc5-modeles-vagues-b-c`).
+- **Redirections dans Cloudflare** (« Always Use HTTPS », enregistrement `www` et redirection 301 vers le domaine nu) : les faire lui-même, ou les confier à Claude par le navigateur, avec son accord à chaque étape.
+- **Fusions** des PR #8 (demande n° 4) et #9 (lot 7.1) : sur sa demande.
 - **Auteur** : nom réel acté le 23/10 ; parcours à fournir pour la page « à propos » (étape 7 ou 8).
 
 ## Historique des décisions
@@ -121,8 +150,28 @@ Dernière mise à jour : 24/10/2026 (14 h 45)
   La validation des verdicts eux-mêmes (25 lignes) reste celle de Houssem (03, règle 7).
 - 24/10/2026 (14 h 30), étape 5 : Houssem valide le paquet de validation de la base voyants (25 lignes, 121 citations ; empreinte du contenu validé `ee98b8d476b6aa680b4939c002becc02babe1fddb5b0111f359dde0772a017f9`), y compris le point ouvert : rappel d'entretien en « Oui, avec précautions » et « À faire dans les jours qui viennent ». La base est versée dans `data/voyants.json` avec l'empreinte de chaque ligne (`travaux/etape-5/validation.json`) ; le paquet validé est archivé dans le projet (D13).
 - 24/10/2026 (14 h 39) : porte de sortie de l'étape 5 validée par Houssem. Il demande la fusion de la PR #7 et le tag `etape-5-base-voyants`. La base voyants (`data/voyants.json`) fait foi pour les couleurs, gravités, verdicts, urgences, actions et sources des voyants ; toute modification passe par un nouveau brouillon, un paquet et sa validation.
+- 28/10/2026 (8 h 27), étape 6 :
+  - **source des résultats Google relevés depuis la France** : SerpApi, offre gratuite (250 recherches par mois), utilisée par l'outil web de SerpApi dans le navigateur de Claude. Semrush est écarté pour son coût (abonnement et essai gratuit impossibles pour Houssem) ;
+  - **demande de changement n° 4 acceptée** : nouvelle définition de l'urgence « À faire tout de suite » (PR #8) ;
+  - **option 2 retenue** pour les modèles des types sans page en vague A : la demande de changement n° 5 est rédigée, son texte attend l'accord de Houssem ;
+  - **piste technique de l'étape 7 lancée** (PR #9).
+
+  Houssem rappelle l'objectif à chaque étape : un site qui attire beaucoup de visiteurs et que chaque visiteur trouve utile.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 28/10, demande de changement n° 4 : une revue, « à corriger », rien de bloquant.
+  - **Changé** : la définition suit l'ordre de l'action (gestes en roulant, arrêt ou appoint au premier endroit sûr, garage), au lieu d'opposer deux cas qui se recouvraient ; l'en-tête de la grille cite la demande n° 4.
+  - **Retiré** : une consigne de notice ajoutée « à faire en roulant », hors du champ de D12 et lisible trop largement. Le classement correspondant est déjà documenté en D5.
+- 28/10, demande de changement n° 5 : une revue, « à corriger », rien de bloquant. Ses formulations sont reprises :
+  - format tutoriel et arbre de décision livrés avec le modèle panne, tableau avec le modèle fluide ;
+  - exemples préparés sur la branche du lot et publiés seulement avec lui, après son paquet et sa recette ;
+  - une séance de validation de plus aux étapes 10 et 11 ;
+  - tranches de coût couvrant les 42 pages dès l'étape 6 ;
+  - raison corrigée : c'est le registre qui ne couvre que la vague A ;
+  - porte de l'étape 11 réécrite.
+- 28/10, lot 7.1 : une revue, « à corriger », rien de bloquant.
+  - **Changé** : une erreur réseau devient un constat décrit au lieu d'interrompre la vérification (c'est ce qui arrivait avec `www.decodauto.com` sans DNS) ; mode informatif sur les pull requests, avec avertissements et job vert, à la place de `continue-on-error` qui laissait le job rouge ; chemin conservé vérifié aussi pour http ; adresse du site importée par `astro.config.mjs` (source unique).
+  - **Noté** : `lastmod` sera ajouté à l'étape 8 depuis `date_modification`.
 - 24/10, étape 5, registre et brouillon de la base voyants, deux revues (même relecteur) :
   - **Première revue** (« à corriger », deux points bloquants), avec 111 extraits comparés aux 5 PDF officiels, tous retrouvés :
     - le voyant de direction Renault et Dacia s'allume avec le témoin STOP, non identifié dans le texte extrait : il passe dans la ligne `direction-rouge` ;
@@ -231,7 +280,12 @@ Dernière mise à jour : 24/10/2026 (14 h 45)
 | Validation de Houssem | ✅ | 24/10/2026, 14 h 39 (« porte 5 validée ») |
 
 ## Pour l'étape 6
-- Demande de changement n° 4 de la grille, au départ de l'étape 6 (D12) : la définition de l'urgence « À faire tout de suite » doit couvrir les actions à faire en roulant (FAP, ESP).
+- ~~Demande de changement n° 4 de la grille (D12)~~ : acceptée le 28/10.
+- Relevé Google France du 28/10 (`travaux/etape-6/releve-google-france/README.md`), constats pour les briefs :
+  - aperçu IA sur 18 requêtes sur 19 ;
+  - il contredit la base sur le voyant moteur orange (« pas immédiat ») : le tableau par marque doit rendre l'écart évident dès l'encadré ;
+  - 76 suggestions sur 213 portent une marque ou un modèle ;
+  - 13 portent sur « enlever ou effacer le voyant », 9 sur « peut-on rouler ».
 - Élément unique des pages voyants : un tableau « ce que dit la notice de votre marque », tiré des citations de la base (sans recopie). Il montre l'écart entre marques (D1) et répond aux requêtes « voyant + modèle ».
 - Page « voyant frein » (étape 8) : témoin d'usure des plaquettes traité par une ligne saisie citée (D4).
 - Charte éditoriale : base de calcul du coût probable et ses tranches (la source doit exister dans le registre), ligne de transparence, section méthode de « à propos ».
@@ -260,7 +314,14 @@ Dernière mise à jour : 24/10/2026 (14 h 45)
 - **OVH** : activer la double authentification sur le compte ; vérifier que le renouvellement du domaine est automatique et activer le verrou de transfert. Le tout est vérifié à la porte de l'étape 9 (03 v4).
 - **DNSSEC** : désactivation chez OVH en cours. Au 23/10, aucun enregistrement DS n'est publié pour decodauto.com.
 - **Application GitHub de Claude** : une demande de mise à jour des permissions attend la décision de Houssem.
-- **Contrôle hebdomadaire** : il n'a encore jamais tourné. Premier passage le lundi 26/10.
+- **Contrôle hebdomadaire** : premier passage le lundi 26/10, vert (run 40327062008, sans déploiement).
+- **Écarts entre la recherche et la base** (relevé du 28/10), à traiter avant la rédaction de l'étape 8, sans toucher à la base validée :
+  - la page préchauffage est dominée par « voyant qui clignote (en roulant) » (7 recherches associées sur 8), absent de la base ;
+  - « verbalisation abandonnée » pour la loi montagne : le régime des sanctions est à vérifier sur les textes officiels ;
+  - le témoin d'usure des plaquettes est en tête pour « voyant frein » (D4 confirmé) ;
+  - les requêtes de pression des pneus par modèle sont hors périmètre.
+- **SerpApi** : 20 recherches sur 250 utilisées en octobre. Recoupement avec Ahrefs non fait : la page demande une vérification humaine, que Claude ne remplit pas.
+- **Double authentification GitHub** : bandeau GitHub du 28/10, elle sera exigée sur le compte avant le 08/12/2026. Déjà prévue à la porte de l'étape 9.
 - **Images GitHub Actions** : `ubuntu-latest` passe à Ubuntu 26. Risque faible, car la version de Node est fixée.
 - **Liens du socle** : le texte de « à propos » et des mentions légales ne peut lier une page que si ce lien est déclaré dans le plan (demande de changement).
 - **Recette (étape 9)** : comparer les dix premiers résultats Google des requêtes de pages voisines (recouvrement de sens, non vérifiable par script).
@@ -274,10 +335,12 @@ Dernière mise à jour : 24/10/2026 (14 h 45)
 - Pages « thème » : non retenues à l'étape 4 ; à réévaluer quand les thèmes compteront plus de pages.
 - Alertes présentes dans 06, hors périmètre (revue globale du 23/10) : voiture qui tremble (≈ 5 056 / mois), périodicité du contrôle technique (≈ 9 480), boîte de vitesse (≈ 3 476), bruit de courroie (≈ 2 212), embrayage qui patine (≈ 1 264). À réévaluer avec les données de Search Console.
 - Étape 7 : `fetch-depth: 0` dans la CI si `date_modification` est tirée de l'historique Git.
+- Étape 8 : `lastmod` dans `sitemap.xml`, tiré de `date_modification` des pages éditoriales (revue du lot 7.1).
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
-- À préparer avant l'étape 6 : **n° 4, grille**, définition de l'urgence « immédiate » (D12).
+- 28/10/2026, proposée : **n° 5, modèles panne, fluide et dossier aux étapes 10 et 11** (03 v6). Principe accepté (option 2), texte en attente de l'accord de Houssem. Raison : aucune page de ces types en vague A ; le registre ne couvre que la vague A ; trois encadrés à valider au lieu de six avant la vague A, qui porte 60 % des volumes. Impact : 03, lignes 6, 10 et 11 ; une séance de validation de plus aux étapes 10 et 11 ; aucun critère retiré, un ajouté (tranches de coût couvrant les 42 pages).
+- 28/10/2026, acceptée : **n° 4, grille**, définition de l'urgence « À faire tout de suite » (D12). Avant : « Sans attendre : au premier arrêt possible, ou en allant directement au garage si la conduite est permise. » Après : « Sans attendre, dès que c'est sans danger et dans l'ordre indiqué par l'action : les gestes de conduite en roulant (lever le pied, ralentir, rouler pour nettoyer le filtre à particules) ; l'arrêt, la vérification ou l'appoint au premier endroit sûr ; le passage au garage en y allant directement, si l'action permet de rouler. » Raison : 21 lignes sur 25 en urgence immédiate, dont 2 actions à faire en roulant (FAP, ESP clignotant) que l'ancienne définition contredisait. Impact : aucun sur la base (25 empreintes identiques), ni sur les contrôles. PR #8.
 - 23/10/2026, acceptée : **n° 3 de l'étape 5, structure v4** (08 v4, PR #6).
   - **Raison** : figer la structure avant la saisie, quand la revalidation ne coûte rien.
   - **Partie A** :
