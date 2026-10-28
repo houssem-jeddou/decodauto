@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio';
 import { readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
+import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
@@ -97,6 +98,65 @@ export async function controlerPagesDuPlan(dist: string, adressesDuPlan: Iterabl
     if (adresse === undefined || !autorisees.has(adresse)) {
       constats.push(erreur('PAGE-HORS-PLAN', `cette page ne correspond à aucune adresse du plan du site (data/plan-du-site.json), ni à l'accueil, ni à la 404`, fichier));
     }
+  }
+  return constats;
+}
+
+/**
+ * Canonical et plan du site (étape 7, docs/03) :
+ *  - chaque page construite, sauf la 404, porte une seule balise canonical, égale à sa propre adresse absolue
+ *    (https://decodauto.com + adresse, barre finale comprise) ; la 404 n'en porte pas ;
+ *  - sitemap.xml existe, est bien formé et liste exactement les pages construites (sans la 404), une fois chacune,
+ *    à leur adresse canonique ;
+ *  - robots.txt annonce le plan du site (ligne « Sitemap: https://decodauto.com/sitemap.xml »).
+ */
+export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Constat[]> {
+  const constats: Constat[] = [];
+  const pages = new Set<string>();
+  for (const chemin of await listerFichiers(dist, '.html')) {
+    const fichier = relative(dist, chemin).split('\\').join('/');
+    const $ = cheerio.load(await readFile(chemin, 'utf8'));
+    const canonicals = $('link[rel~="canonical"]')
+      .toArray()
+      .map((l) => $(l).attr('href') ?? '');
+    if (fichier === '404.html') {
+      if (canonicals.length > 0) constats.push(erreur('CANONICAL-404', 'la page 404 ne doit pas porter de canonical', fichier));
+      continue;
+    }
+    const adresse = adresseDepuisFichier(fichier);
+    if (adresse === undefined) continue; // autre fichier HTML : refusé par PAGE-HORS-PLAN
+    pages.add(urlAbsolue(adresse));
+    if (canonicals.length === 0) {
+      constats.push(erreur('CANONICAL-ABSENT', `la page n'a pas de balise canonical (attendue : ${urlAbsolue(adresse)})`, fichier));
+    } else if (canonicals.length > 1) {
+      constats.push(erreur('CANONICAL-MULTIPLE', `la page a ${canonicals.length} balises canonical : une seule est admise`, fichier));
+    } else if (canonicals[0] !== urlAbsolue(adresse)) {
+      constats.push(erreur('CANONICAL-ADRESSE', `canonical « ${canonicals[0]} » : la page doit pointer vers sa propre adresse, ${urlAbsolue(adresse)}`, fichier));
+    }
+  }
+
+  const xml = await lire(join(dist, FICHIER_PLAN_DU_SITE));
+  if (xml === undefined) {
+    constats.push(erreur('SITEMAP-ABSENT', `${FICHIER_PLAN_DU_SITE} est absent du site construit`, FICHIER_PLAN_DU_SITE));
+  } else {
+    if (!planDuSiteBienForme(xml)) {
+      constats.push(erreur('SITEMAP-FORMAT', 'le plan du site doit commencer par la déclaration XML et contenir un <urlset> sitemaps.org', FICHIER_PLAN_DU_SITE));
+    }
+    const urls = lireUrlsDuPlanDuSite(xml);
+    const vues = new Set<string>();
+    for (const url of urls) {
+      if (vues.has(url)) constats.push(erreur('SITEMAP-DOUBLON', `${url} est listée plusieurs fois`, FICHIER_PLAN_DU_SITE));
+      vues.add(url);
+      if (!pages.has(url)) constats.push(erreur('SITEMAP-ADRESSE-INCONNUE', `${url} ne correspond à aucune page construite (ou à la 404)`, FICHIER_PLAN_DU_SITE));
+    }
+    for (const page of pages) {
+      if (!vues.has(page)) constats.push(erreur('SITEMAP-PAGE-ABSENTE', `${page} est construite mais absente du plan du site`, FICHIER_PLAN_DU_SITE));
+    }
+  }
+
+  const robots = await lire(join(dist, 'robots.txt'));
+  if (robots !== undefined && !robotsAnnoncePlanDuSite(robots)) {
+    constats.push(erreur('ROBOTS-SITEMAP', `robots.txt doit annoncer le plan du site : « ${LIGNE_SITEMAP} »`, 'robots.txt'));
   }
   return constats;
 }

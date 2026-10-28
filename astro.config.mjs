@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import { indexation } from './scripts/integration-indexation.ts';
+import { planDuSite } from './scripts/integration-plan-du-site.ts';
 
 export default defineConfig({
   site: 'https://decodauto.com',
@@ -7,5 +8,5 @@ export default defineConfig({
   trailingSlash: 'always',
   build: { format: 'directory' },
   devToolbar: { enabled: false },
-  integrations: [indexation()],
+  integrations: [indexation(), planDuSite()],
 });
