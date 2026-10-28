@@ -1,7 +1,7 @@
 import type { Urgence, Verdict } from './listes.ts';
 
 // ---------------------------------------------------------------------------------------------
-// Grille des niveaux de verdict et d'urgence (demande de changement n° 3, étape 5 ; docs/08 §6).
+// Grille des niveaux de verdict et d'urgence (demandes de changement n° 3, étape 5, et n° 4, étape 6 ; docs/08 §6).
 // Elle sert à trois choses :
 //  1. passer de la consigne écrite dans une notice au verdict et à l'urgence. Chaque citation de notice porte le
 //     niveau que la grille tire de sa consigne ; la ligne retient le plus prudent (contrôles R3) ;
@@ -91,7 +91,8 @@ export const GRILLE_URGENCES: Readonly<Record<Urgence, NiveauGrille>> = {
   },
   immédiate: {
     libelle: 'À faire tout de suite',
-    definition: "Sans attendre : au premier arrêt possible, ou en allant directement au garage si la conduite est permise.",
+    definition:
+      "Sans attendre, dès que c'est sans danger et dans l'ordre indiqué par l'action : les gestes de conduite en roulant (lever le pied, ralentir, rouler pour nettoyer le filtre à particules) ; l'arrêt, la vérification ou l'appoint au premier endroit sûr ; le passage au garage en y allant directement, si l'action permet de rouler.",
     consignes_notice: [
       "La notice impose l'arrêt, ou empêche de rouler jusqu'au garage.",
       "La notice demande d'agir « immédiatement », « impérativement », « sans tarder », « sans attendre », « sans délai », « au plus tôt », « au plus vite », « dès que possible », « dès que les conditions de circulation le permettent », « le plus rapidement possible » ou « dans les plus brefs délais ».",
