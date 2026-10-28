@@ -30,6 +30,12 @@ Recherche du 28/10/2026, avant la demande de changement n° 6 (`travaux/etape-6/
 | Code de la consommation, art. L217-3, L217-7 et L217-11 | Le vendeur professionnel répond des défauts qui apparaissent dans les deux ans ; présomption de 24 mois (12 mois pour un bien d'occasion) ; mise en conformité « sans aucun frais pour le consommateur » | Légifrance, chapitre « Obligation de conformité » |
 | Les 5 notices du registre, citées dans la base voyants validée | La nature de la dépense : fonctionnement normal, geste du conducteur, révision, visite à l'atelier, dégât sur un organe (« Risque de destruction du catalyseur », Peugeot 208 p. 15) | `data/voyants.json` |
 
+Les textes de Légifrance ont été lus dans le navigateur ; la relecture indépendante n'a pas pu les ouvrir (Légifrance hors de sa liste autorisée) et les a recoupés par des sources secondaires.
+
+**Le tarif du dépannage ne suit pas l'année civile.** D'après des sources secondaires relevées par la relecture (WebLex, ATMB, Lexis Veille), il a changé au 25/09/2022, au 05/07/2023, au 01/12/2024 et au 01/01/2026. Un nouvel arrêté peut donc paraître en cours d'année.
+
+**Point non lu :** l'article L217-3 dans son entier, pour savoir si le délai de deux ans vaut aussi pour une voiture d'occasion. Légifrance a bloqué la seconde lecture (vérification anti-robot). À lire avant d'afficher la garantie légale.
+
 ## 3. Sources examinées et écartées
 
 - **SRA (statistiques des assureurs)** : panel des réparateurs, paniers de pièces, observatoire des sinistres. Documents non lus : le site refuse l'outil de lecture et le navigateur affiche une page d'erreur. D'après leurs titres, ce sont des statistiques de prix de prestations (taux horaires, prix des pièces) liées aux sinistres, sans coût par réparation. Écartées : règle 5, et elles ne couvrent pas nos réparations.
@@ -41,16 +47,22 @@ Recherche du 28/10/2026, avant la demande de changement n° 6 (`travaux/etape-6/
 
 ## 4. Ce que disent les données sur l'attente des lecteurs
 
-- **Mots-clés du périmètre (05)** : 0 sur 1 053 contient « prix », « coût », « tarif » ou « amende ». C'est voulu : les 95 mots-clés « prix des prestations et enseignes » sont hors périmètre (02). Le coût sert la décision du lecteur ; ce n'est pas une source de trafic.
-- **Relevé Google France du 28/10** (19 requêtes principales de la vague A, `travaux/etape-6/releve-google-france/`) : 6 suggestions ou questions sur 213 (2,8 %) parlent d'argent :
-  - 2 de l'amende de la loi montagne ;
-  - 3 d'un prix (AdBlue, bloc ABS, nettoyage du FAP) ;
-  - 1 d'un gonflage gratuit.
-- **Aperçu IA de Google** : aucun montant en euros sur 19. Un seul classement qualitatif (P0087 : filtre à carburant, « la moins coûteuse » des causes).
+- **Mots-clés.**
+  - Périmètre (05) : 0 mot-clé sur 1 053 contient « prix », « coût », « tarif » ou « amende ». C'est un effet du périmètre, pas une absence de demande : 02 a exclu le bloc « prix des prestations et enseignes ».
+  - Base complète (06) : 565 mots-clés sur 3 491 contiennent « prix », « coût » (« coûte » compris), « tarif » ou « amende », tous hors périmètre. Exemples : « combien coute une contre visite », « combien coute un nettoyage de fap ».
+  - Le coût n'est donc pas un objectif de trafic (règle 5, périmètre 02). Les lecteurs le cherchent pourtant.
+- **Relevé Google France du 28/10** (19 requêtes principales de la vague A, `travaux/etape-6/releve-google-france/`). Ce relevé n'a pas encore eu sa revue indépendante, prévue avec les briefs (6.8).
+  - 7 suggestions ou questions sur 213 (3,3 %) parlent d'argent ou de sanction :
+    - 3 de la loi montagne (« amende », « 2026 verbalisation », « Quelle amende… ? ») ;
+    - 3 d'un prix (AdBlue, bloc ABS, nettoyage du FAP) ;
+    - 1 d'un gonflage gratuit.
+  - 7 résultats naturels sur 126 en parlent. 5 annoncent un coût dès leur titre : mister-turbo.com (P0420, P0087, voyant moteur), mister-auto.com (capteur ABS), valuemycar.fr (FAP, « De 80 € … à plus de » dans l'extrait).
+  - Aperçu IA : aucun montant en euros dans les 700 premiers caractères relevés (le relevé coupe le texte à cette longueur). Un seul classement qualitatif : P0087, filtre à carburant, « la moins coûteuse » des causes.
+  - **Conséquence** : des concurrents de la première page affichent des montants. Une échelle sans euros perd ce point face à eux ; elle gagne en fiabilité.
 
 ## 5. Conclusion
 
-1. **Aucune source neutre ne donne le coût d'une réparation en euros.** Afficher des montants pour les réparations obligerait à reprendre des prix d'enseignes ou de comparateurs, ce que la règle 5 de 01 interdit.
+1. **Aucune source neutre trouvée qui donne le coût d'une réparation en euros** (documents de la SRA non lus). Afficher des montants pour les réparations obligerait à reprendre des prix d'enseignes ou de comparateurs, ce que la règle 5 de 01 interdit.
 2. **Ce qui peut être sourcé :**
    - la **nature de la dépense**, tirée de la consigne de la notice, déjà citée dans la base voyants validée ;
    - les **montants fixés par un texte** : l'amende forfaitaire (135 €) et le tarif réglementé du dépannage sur autoroute (151 € à 280,08 € TTC en 2026) ;
