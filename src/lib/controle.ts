@@ -1,17 +1,33 @@
 import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
-import { empreintePage, empreinteVoyant, normaliserTexte } from './empreinte.ts';
-import { calculerChamps, resoudreLignes, type LigneResolue } from './calcul.ts';
+import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
+import { calculerChamps, niveauSecurite, resoudreLignes, type LigneResolue } from './calcul.ts';
+import {
+  COUTS_VIDES,
+  estReference,
+  joursEntre,
+  resoudreCout,
+  textesAttendusCout,
+  trouverCitation,
+  type DonneesCouts,
+  type PieceCout,
+  type TexteDeCout,
+} from './cout.ts';
 import { controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
 import { normaliserRecherche } from './texte.ts';
 import {
+  coutsSchema,
+  montantSchema,
+  pieceSchema,
   planDuSiteSchema,
+  priseEnChargeSchema,
   sourceSchema,
   voyantBaseSchema,
   type PlanDuSite,
   type Source,
   type VoyantBase,
 } from '../schemas/donnees.ts';
+import { FOURCHETTE_SOURCES_MIN, FOURCHETTE_VALIDITE_JOURS, GRILLE_COUTS, rangTranche, TRANCHE_MIN_PRISE_EN_CHARGE, type TrancheCout, type TrancheGrille } from '../schemas/cout.ts';
 import { schemasPage, type PageEditoriale } from '../schemas/pages.ts';
 import type { Citation } from '../schemas/briques.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS, MOTS_REPERES, urgenceAdmise } from '../schemas/grille.ts';
@@ -39,6 +55,7 @@ import {
 //       verdict le plus prudent, écart signalé                élément unique dans la page construite
 //   R6  ordre des causes : non vérifiable par machine     R8  cohérence verdict / urgence (grille)
 //   R9  encadré de décision dans la page construite       PICTO  pictogrammes de la base voyants
+//   COUT  coût probable : pièces, montants, prises en charge, risque, fourchettes, grille (demande n° 6)
 //
 // Plan du site (liens, pages mères, adresses) : src/lib/plan.ts. Porte de l'étape 4 : src/lib/porte-plan.ts.
 // ---------------------------------------------------------------------------------------------
@@ -60,6 +77,8 @@ export interface Contexte {
   auteurs: ReadonlySet<string>;
   /** Noms des pictogrammes valides de src/pictogrammes (sans « .svg »). */
   pictogrammes: ReadonlySet<string>;
+  /** Pièces, montants fixés par un texte et prises en charge (data/couts.json). */
+  couts: DonneesCouts;
   aujourdhui: Date;
 }
 
@@ -83,13 +102,19 @@ const alerte = (regle: string, message: string, fichier?: string): Constat => ({
   fichier,
 });
 
+/** Codes d'alerte demandés par --echouer-sur : un code, ou plusieurs séparés par des virgules. */
+export const codesEchec = (echouerSur: string | undefined): string[] =>
+  (echouerSur ?? '').split(',').map((code) => code.trim()).filter((code) => code !== '');
+
 /**
- * Code de sortie du script de contrôle : 1 s'il y a une erreur bloquante, ou une alerte portant le code demandé
- * par --echouer-sur (utilisé par le workflow hebdomadaire pour être prévenu des revues dépassées) ; sinon 0.
+ * Code de sortie du script de contrôle : 1 s'il y a une erreur bloquante, ou une alerte portant l'un des codes
+ * demandés par --echouer-sur (le workflow hebdomadaire s'en sert pour être prévenu des revues dépassées et des
+ * montants à revérifier) ; sinon 0.
  */
 export function codeSortie(constats: readonly Constat[], echouerSur?: string): 0 | 1 {
   if (constats.some((c) => c.gravite === 'erreur')) return 1;
-  return echouerSur !== undefined && constats.some((c) => c.gravite === 'alerte' && c.regle === echouerSur) ? 1 : 0;
+  const codes = codesEchec(echouerSur);
+  return constats.some((c) => c.gravite === 'alerte' && codes.includes(c.regle)) ? 1 : 0;
 }
 
 export const sontBloquants = (constats: readonly Constat[]): Constat[] => constats.filter((c) => c.gravite === 'erreur');
@@ -147,9 +172,11 @@ export interface DonneesBrutes {
   sources: readonly unknown[];
   auteurs?: readonly string[];
   pictogrammes?: readonly FichierPictogramme[];
+  /** Contenu de data/couts.json (objet { pieces, montants, prises_en_charge }) ; absent : aucune donnée de coût. */
+  couts?: unknown;
 }
 
-const FICHIERS = { plan: 'data/plan-du-site.json', voyants: 'data/voyants.json', sources: 'data/sources.json' };
+const FICHIERS = { plan: 'data/plan-du-site.json', voyants: 'data/voyants.json', sources: 'data/sources.json', couts: 'data/couts.json' };
 export const DOSSIER_PICTOGRAMMES = 'src/pictogrammes';
 /** Taille maximale d'un pictogramme : un symbole simple, affiché sans ralentir la page. */
 export const PICTOGRAMME_OCTETS_MAX = 8192;
@@ -402,10 +429,187 @@ export function construireContexte(
     }
   }
 
+  const couts = lireCouts(donnees.couts, sources, aujourdhui, constats);
+
   return {
-    contexte: { plan, voyants, sources, auteurs: new Set(donnees.auteurs ?? []), pictogrammes, aujourdhui },
+    contexte: { plan, voyants, sources, auteurs: new Set(donnees.auteurs ?? []), pictogrammes, couts, aujourdhui },
     constats,
   };
+}
+
+// ---- Coût probable : données (data/couts.json) et grille des coûts -----------------------------------
+
+/**
+ * Lit data/couts.json (demande de changement n° 6) et contrôle :
+ *  - les sources (registre) ; une fourchette en euros tirée de FOURCHETTE_SOURCES_MIN sources d'éditeurs différents
+ *    (COUT-FOURCHETTE-SOURCES) ; un montant fixé par un texte cite au moins une source de Légifrance
+ *    (COUT-MONTANT-SOURCE) ;
+ *  - l'empreinte du texte validé par Houssem : absente, une alerte (une page qui l'affiche est bloquée) ; différente,
+ *    une erreur (R4) ;
+ *  - les dates : un montant ou une prise en charge à revérifier (COUT-A-REVERIFIER), une fourchette relevée il y a
+ *    plus de FOURCHETTE_VALIDITE_JOURS jours (COUT-FOURCHETTE-A-REVOIR). Ce sont des alertes : elles ne bloquent
+ *    jamais une construction ; le contrôle du lundi échoue sur elles (--echouer-sur).
+ */
+function lireCouts(brut: unknown, sources: ReadonlyMap<string, Source>, aujourdhui: Date, constats: Constat[]): DonneesCouts {
+  if (brut === undefined) return COUTS_VIDES;
+  const enveloppe = coutsSchema.safeParse(brut);
+  if (!enveloppe.success) {
+    constats.push(...constatsDepuisSchema(enveloppe, brut, FICHIERS.couts));
+    return COUTS_VIDES;
+  }
+  const fichier = FICHIERS.couts;
+  const pieces = lireListe(enveloppe.data.pieces, pieceSchema, fichier, constats);
+  const montants = lireListe(enveloppe.data.montants, montantSchema, fichier, constats);
+  const prises = lireListe(enveloppe.data.prises_en_charge, priseEnChargeSchema, fichier, constats);
+  const inconnues = (ids: readonly string[], etiquette: string): void => {
+    for (const id of ids.filter((s) => !sources.has(s))) constats.push(erreur('R3-SOURCE-INCONNUE', `${etiquette} : source « ${id} » absente du registre des sources`, fichier));
+  };
+
+  for (const piece of pieces.values()) {
+    if (piece.fourchette === undefined) continue;
+    const etiquette = `pièce « ${piece.id} », fourchette`;
+    inconnues(piece.fourchette.sources, etiquette);
+    const editeurs = new Set(piece.fourchette.sources.flatMap((id) => { const s = sources.get(id); return s === undefined ? [] : [s.editeur]; }));
+    if (editeurs.size < FOURCHETTE_SOURCES_MIN) {
+      constats.push(erreur('COUT-FOURCHETTE-SOURCES', `${etiquette} : il faut au moins ${FOURCHETTE_SOURCES_MIN} sources d'éditeurs différents (trouvé : ${editeurs.size})`, fichier));
+    }
+    if (joursEntre(piece.fourchette.releve_le, aujourdhui) > FOURCHETTE_VALIDITE_JOURS) {
+      constats.push(alerte('COUT-FOURCHETTE-A-REVOIR', `${etiquette} : relevée le ${piece.fourchette.releve_le.toISOString().slice(0, 10)}, il y a plus de ${FOURCHETTE_VALIDITE_JOURS} jours : à revoir`, fichier));
+    }
+  }
+
+  const controlerTexte = (entree: TexteDeCout, nature: string): void => {
+    const etiquette = `${nature} « ${entree.id} »`;
+    inconnues(entree.sources, etiquette);
+    if (entree.validation === undefined) {
+      constats.push(alerte('R4-VALIDATION-ABSENTE', `${etiquette} : texte pas encore validé par Houssem (empreinte absente) ; une page qui l'afficherait est bloquée`, fichier));
+    } else if (entree.validation !== empreinteTexteDeCout(entree)) {
+      constats.push(erreur('R4-EMPREINTE', `${etiquette} : l'empreinte de validation ne correspond plus au texte, aux sources ou à l'affichage. Revalidation par Houssem nécessaire`, fichier));
+    }
+    if (joursEntre(entree.verifie_le, aujourdhui) > entree.reverifier_apres_jours) {
+      constats.push(alerte('COUT-A-REVERIFIER', `${etiquette} : vérifié le ${entree.verifie_le.toISOString().slice(0, 10)}, à revérifier tous les ${entree.reverifier_apres_jours} jours (Journal officiel, Légifrance)`, fichier));
+    }
+  };
+  for (const montant of montants.values()) {
+    controlerTexte(montant, 'montant');
+    if (!montant.sources.some((id) => sources.get(id)?.categorie === 'legifrance')) {
+      constats.push(erreur('COUT-MONTANT-SOURCE', `montant « ${montant.id} » : un montant fixé par un texte cite au moins une source de Légifrance`, fichier));
+    }
+  }
+  for (const prise of prises.values()) controlerTexte(prise, 'prise en charge');
+
+  return { pieces: pieces as ReadonlyMap<string, PieceCout>, montants: montants as ReadonlyMap<string, TexteDeCout>, prises_en_charge: prises as ReadonlyMap<string, TexteDeCout> };
+}
+
+/**
+ * Grille des coûts (src/schemas/cout.ts) face aux données réelles : chaque citation référencée désigne une seule
+ * citation de la base voyants (COUT-CITATION-INTROUVABLE, COUT-CITATION-AMBIGUE), et chaque tranche s'appuie sur
+ * les notices d'au moins `groupesMin` groupes de constructeurs (COUT-GROUPES). Lancé sur les données réelles
+ * (construction et tests), pas sur les données de test, dont la base voyants est fictive.
+ */
+export function controlerGrilleCouts(
+  voyants: ReadonlyMap<string, VoyantBase>,
+  sources: ReadonlyMap<string, Source>,
+  grille: Readonly<Record<TrancheCout, TrancheGrille>> = GRILLE_COUTS,
+  groupesMin: number = GROUPES_MIN,
+): Constat[] {
+  const constats: Constat[] = [];
+  const fichier = 'src/schemas/cout.ts';
+  for (const [tranche, niveau] of Object.entries(grille) as [TrancheCout, TrancheGrille][]) {
+    const groupes = new Set<string>();
+    for (const reference of niveau.citations) {
+      const trouvee = trouverCitation(reference, voyants);
+      const nom = `${reference.voyant}, ${reference.source}, ${reference.emplacement}`;
+      if ('probleme' in trouvee) {
+        constats.push(erreur(trouvee.probleme === 'introuvable' ? 'COUT-CITATION-INTROUVABLE' : 'COUT-CITATION-AMBIGUE', `tranche « ${tranche} » : citation ${trouvee.probleme === 'introuvable' ? 'introuvable' : 'ambiguë (ajouter le début de l\'extrait)'} dans la base voyants (${nom})`, fichier));
+        continue;
+      }
+      const marque = sources.get(reference.source)?.marque;
+      const groupe = MARQUES_REFERENCE.find((m) => m.id === marque)?.groupe;
+      if (groupe !== undefined) groupes.add(groupe);
+    }
+    if (groupes.size < groupesMin) {
+      constats.push(erreur('COUT-GROUPES', `tranche « ${tranche} » : citations de ${groupes.size} groupe(s) de constructeurs ; il en faut au moins ${groupesMin}`, fichier));
+    }
+  }
+  return constats;
+}
+
+/**
+ * Coût probable d'une page : pièces, montants, prises en charge et risque (demande de changement n° 6). Renvoie les
+ * constats et les textes que l'encadré doit afficher (undefined si le coût ne se résout pas : erreurs déjà signalées).
+ */
+function controlerCout(
+  page: PageEditoriale,
+  lignes: readonly LigneResolue[],
+  ctx: Contexte,
+  fichier: string,
+): { constats: Constat[]; textes: string[] | undefined } {
+  const constats: Constat[] = [];
+  const cout = page.cout_probable;
+  const outil = 'outil' in page && page.outil === true;
+  const causes = 'causes' in page ? page.causes : undefined;
+  if (outil && cout.pieces !== undefined) {
+    constats.push(erreur('COUT-PIECES-DOUBLE', 'la page outil n\'a pas de plage propre (« Selon le voyant ») : elle ne déclare pas de pièces', fichier));
+  } else if (causes !== undefined && cout.pieces !== undefined) {
+    constats.push(erreur('COUT-PIECES-DOUBLE', 'la plage se calcule sur les pièces des causes : cout_probable.pieces ne se déclare que sur une page sans causes', fichier));
+  } else if (!outil && causes === undefined && cout.pieces === undefined) {
+    constats.push(erreur('COUT-PIECES-ABSENTES', 'une page sans causes déclare ses pièces (cout_probable.pieces) : la plage du coût en est calculée', fichier));
+  }
+
+  const niveau = niveauSecurite(lignes);
+  const resolu = resoudreCout({ outil, causes, cout }, ctx.couts, niveau !== undefined && niveau.startsWith('non'));
+  for (const id of resolu.piecesInconnues) constats.push(erreur('COUT-PIECE-INCONNUE', `pièce « ${id} » absente de la liste (data/couts.json) : l'ajouter dans la pull request du lot, avec sa tranche`, fichier));
+
+  for (const id of cout.montants ?? []) {
+    const montant = ctx.couts.montants.get(id);
+    if (montant === undefined) constats.push(erreur('COUT-MONTANT-INCONNU', `montant « ${id} » absent de data/couts.json`, fichier));
+    else if (montant.automatique !== undefined) constats.push(erreur('COUT-MONTANT-AUTOMATIQUE', `le montant « ${id} » s'affiche de lui-même (${montant.automatique}) : ne pas le déclarer`, fichier));
+  }
+  for (const id of cout.prise_en_charge ?? []) {
+    if (!ctx.couts.prises_en_charge.has(id)) constats.push(erreur('COUT-PRISE-EN-CHARGE-INCONNUE', `prise en charge « ${id} » absente de data/couts.json`, fichier));
+  }
+  if (resolu.prisesEnCharge.length > 0 && resolu.a !== undefined && rangTranche(resolu.a) < rangTranche(TRANCHE_MIN_PRISE_EN_CHARGE)) {
+    constats.push(erreur('COUT-PRISE-EN-CHARGE', `une prise en charge ne s'affiche que si la plage va au moins jusqu'à « ${GRILLE_COUTS[TRANCHE_MIN_PRISE_EN_CHARGE].libelle} »`, fichier));
+  }
+  // Montants et prises en charge affichés : textes validés par Houssem.
+  for (const [ids, liste, nature] of [[resolu.montants, ctx.couts.montants, 'montant'], [resolu.prisesEnCharge, ctx.couts.prises_en_charge, 'prise en charge']] as const) {
+    for (const id of ids) {
+      const entree = liste.get(id);
+      if (entree !== undefined && (entree.validation === undefined || entree.validation !== empreinteTexteDeCout(entree))) {
+        constats.push(erreur('R4-MONTANT-NON-VALIDE', `${nature} « ${id} » : son texte n'est pas validé par Houssem (empreinte absente ou différente) ; la page ne peut pas l'afficher`, fichier));
+      }
+    }
+  }
+
+  // Risque si l'on continue : au moins aussi lourd que le début de la plage, cité d'une source de première main.
+  const risque = cout.si_vous_continuez;
+  if (risque !== undefined) {
+    if (resolu.de !== undefined && rangTranche(risque.tranche) < rangTranche(resolu.de)) {
+      constats.push(erreur('COUT-RISQUE', `le risque si l'on continue (« ${GRILLE_COUTS[risque.tranche].libelle} ») est plus léger que le début de la plage (« ${GRILLE_COUTS[resolu.de].libelle} »)`, fichier));
+    }
+    let premiereMain = false;
+    for (const citation of risque.citations) {
+      if (estReference(citation)) {
+        const trouvee = trouverCitation(citation, ctx.voyants);
+        if ('probleme' in trouvee) {
+          constats.push(erreur(trouvee.probleme === 'introuvable' ? 'COUT-CITATION-INTROUVABLE' : 'COUT-CITATION-AMBIGUE', `si_vous_continuez : citation ${trouvee.probleme === 'introuvable' ? 'introuvable' : 'ambiguë'} dans la base voyants (${citation.voyant}, ${citation.source}, ${citation.emplacement})`, fichier));
+          continue;
+        }
+      } else if (!ctx.sources.has(citation.source)) {
+        constats.push(erreur('R3-SOURCE-INCONNUE', `si_vous_continuez : source « ${citation.source} » absente du registre des sources`, fichier));
+        continue;
+      }
+      const source = ctx.sources.get(citation.source);
+      if (source !== undefined && SOURCES_PREMIERE_MAIN.includes(source.categorie)) premiereMain = true;
+    }
+    if (!premiereMain && !constats.some((c) => c.regle.startsWith('COUT-CITATION') || c.regle === 'R3-SOURCE-INCONNUE')) {
+      constats.push(erreur('COUT-RISQUE-SOURCE', 'le risque si l\'on continue est cité d\'au moins une source de première main (notice constructeur)', fichier));
+    }
+  }
+
+  const bloquant = constats.some((c) => c.gravite === 'erreur' && c.regle !== 'R4-MONTANT-NON-VALIDE' && c.regle !== 'COUT-RISQUE' && c.regle !== 'COUT-PRISE-EN-CHARGE');
+  return { constats, textes: bloquant ? undefined : textesAttendusCout(resolu, ctx.couts) };
 }
 
 // ---- Pages --------------------------------------------------------------------------------------
@@ -549,6 +753,10 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
     }
   }
 
+  // Coût probable : pièces, montants, prises en charge, risque (demande de changement n° 6).
+  const cout = controlerCout(page, lignes, ctx, fichier);
+  constats.push(...cout.constats);
+
   // R4 : empreinte de l'encadré de décision, validé par Houssem sur toute page éditoriale (docs/03 règle 7) :
   // question de décision, lignes de situation, coût probable. La base porte la validation de ses propres lignes.
   if (page.validation === undefined) {
@@ -578,7 +786,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   }
 
   // Page construite.
-  if (html !== undefined) constats.push(...controlerHtml(page, html, fichier, lignes));
+  if (html !== undefined) constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes));
 
   return { constats, page, id: page.id };
 }
@@ -586,7 +794,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
 // ---- Page construite -----------------------------------------------------------------------------
 
 /** Le contrôle porte sur le HTML réellement produit : c'est lui que lisent les visiteurs et Google. */
-export function controlerHtml(page: PageEditoriale, html: string, fichier: string, lignes: readonly LigneResolue[] = []): Constat[] {
+export function controlerHtml(page: PageEditoriale, html: string, fichier: string, lignes: readonly LigneResolue[] = [], textesCout?: readonly string[]): Constat[] {
   const constats: Constat[] = [];
   const $ = cheerio.load(html);
 
@@ -627,7 +835,7 @@ export function controlerHtml(page: PageEditoriale, html: string, fichier: strin
     constats.push(erreur('R7-TUTORIEL-ETAPES', 'un tutoriel présente ses étapes dans une liste numérotée portant l\'attribut data-tutoriel-etapes (<ol data-tutoriel-etapes>), avec au moins une étape', fichier));
   }
 
-  constats.push(...controlerEncadre(page, lignes, html, fichier));
+  constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout));
   return constats;
 }
 
@@ -641,11 +849,12 @@ const EMPLACEMENT_PUB = /<[a-z][a-z0-9-]*\b[^>]*(?:\sdata-emplacement-pub(?=[\s=
  *  - un seul bloc `data-encadre-decision`, le premier bloc après le H1 (aucun texte, image ou média entre les deux),
  *    aucun emplacement publicitaire avant lui. La position se lit sur le HTML brut, commentaires et scripts retirés ;
  *  - rien de masqué dedans (details, hidden, aria-hidden, display:none) ;
- *  - il affiche la question de décision et la tranche du coût probable, puis une ligne par situation
+ *  - il affiche la question de décision et le coût probable (libellés de la plage, risque si l'on continue, texte des
+ *    montants et des prises en charge : `textesCout`, calculés par controlerCout), puis une ligne par situation
  *    (`data-encadre-ligne`, dans l'ordre des situations, avec `data-verdict` et `data-urgence`) qui affiche la
  *    situation, le libellé de son verdict et de son urgence (grille), son action et, s'il existe, l'écart entre marques.
  */
-export function controlerEncadre(page: PageEditoriale, lignes: readonly LigneResolue[], html: string, fichier: string): Constat[] {
+export function controlerEncadre(page: PageEditoriale, lignes: readonly LigneResolue[], html: string, fichier: string, textesCout: readonly string[] = []): Constat[] {
   const constats: Constat[] = [];
   const brut = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|template)\b[\s\S]*?<\/\1\s*>/gi, '');
   const ouvertures = [...brut.matchAll(baliseAvecAttribut('data-encadre-decision'))];
@@ -688,7 +897,7 @@ export function controlerEncadre(page: PageEditoriale, lignes: readonly LigneRes
     constats.push(erreur('R9-PUB-AVANT-ENCADRE', "un emplacement publicitaire est placé dans l'encadré de décision", fichier));
   }
   const texteEncadre = normaliserTexte(encadre.text());
-  const manquants = [page.question_decision, page.cout_probable.tranche].filter((t) => !texteEncadre.includes(normaliserTexte(t)));
+  const manquants = [page.question_decision, ...textesCout].filter((t) => !texteEncadre.includes(normaliserTexte(t)));
   if (manquants.length > 0) {
     constats.push(erreur('R9-ENCADRE-CONTENU', `l'encadré de décision n'affiche pas : ${manquants.map((t) => `« ${t} »`).join(', ')}`, fichier));
   }

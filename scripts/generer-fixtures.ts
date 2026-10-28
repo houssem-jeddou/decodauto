@@ -5,18 +5,20 @@ import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { stringify } from 'yaml';
-import { empreintePage, empreinteVoyant } from '../src/lib/empreinte.ts';
+import { empreintePage, empreinteTexteDeCout, empreinteVoyant } from '../src/lib/empreinte.ts';
+import { libellePlage, libelleRisque, resoudreCout, type DonneesCouts } from '../src/lib/cout.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
+import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
 
 type Objet = Record<string, unknown>;
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..', 'tests', 'fixtures');
 
 // ---- Contexte commun : plan du site, base voyants, registre des sources, pictogrammes, fiches auteur ------
-const source = (id: string, categorie: string, marque?: string): Objet => ({
+const source = (id: string, categorie: string, marque?: string, editeur = 'Éditeur de test'): Objet => ({
   id,
   titre: `Source de test ${id}`,
-  editeur: 'Éditeur de test',
+  editeur,
   categorie,
   url: 'https://exemple.test/source',
   date_consultation: '2026-10-01',
@@ -71,6 +73,29 @@ const ligneDuPlan = (id: string, type: string, theme: string, vague: string, req
 const VOYANT_BATTERIE = voyantBase('fixture-voyant-batterie', 'non, arrêt dès que possible', 'immédiate', 'Faire contrôler la charge de la batterie.', 'fixture-panne', 'fixture-batterie');
 const VOYANT_HUILE = voyantBase('fixture-voyant-huile', 'non, arrêt immédiat', 'immédiate', "S'arrêter et couper le moteur.", 'fixture-voyant', 'fixture-huile');
 
+// Coût probable (demande de changement n° 6) : pièces, montants fixés par un texte et prises en charge de test.
+const piece = (id: string, tranche: TrancheCout, fourchette?: Objet): Objet => ({ id, libelle: `Pièce de test ${id}`, tranche, ...(fourchette !== undefined && { fourchette }) });
+const texteDeCout = (id: string, texte: string, extra: Objet = {}): Objet => {
+  const entree = { id, texte, sources: ['fixture-legifrance'], verifie_le: '2026-10-20', reverifier_apres_jours: 90, ...extra };
+  return { ...entree, validation: empreinteTexteDeCout(entree as never) };
+};
+const COUTS = {
+  pieces: [
+    piece('fixture-recharge-batterie', 'geste'),
+    piece('fixture-appoint-huile', 'geste'),
+    piece('fixture-regonflage', 'geste'),
+    piece('fixture-vidange', 'entretien'),
+    piece('fixture-demarreur', 'reparation'),
+    piece('fixture-sonde', 'reparation'),
+    piece('fixture-catalyseur', 'organe', { valeur: '1000-3000', sources: ['fixture-forum', 'fixture-comparateur'], releve_le: '2026-10-20' }),
+  ],
+  montants: [
+    texteDeCout('fixture-depannage', 'Dépannage de test au tarif réglementé de test', { automatique: 'verdict-arret' }),
+    texteDeCout('fixture-amende', 'Amende forfaitaire de test de 135 €'),
+  ],
+  prises_en_charge: [texteDeCout('fixture-garantie', 'Prise en charge de test par la garantie légale', { reverifier_apres_jours: 365 })],
+};
+
 const contexte = {
   plan: [
     ligneDuPlan('fixture-panne', 'panne', 'pannes-et-symptomes', 'B', 'voiture ne démarre pas'),
@@ -91,15 +116,17 @@ const contexte = {
     source('fixture-legifrance', 'legifrance'),
     source('fixture-onu', 'reglement-onu'),
     source('fixture-forum', 'secondaire'),
+    source('fixture-comparateur', 'secondaire', undefined, 'Comparateur de test'),
   ],
   auteurs: ['fixture-auteur'],
   pictogrammes: PICTOGRAMMES,
+  couts: COUTS,
 };
 const LIGNES_BASE = new Map((contexte.voyants as Objet[]).map((v) => [String(v['id']), v]));
 
 // ---- Pages de base ------------------------------------------------------------------------------
 const dates = { date_publication: '2026-10-01', date_modification: '2026-10-20', date_revue: '2026-10-20', prochaine_revue: '2027-01-20' };
-const cout = { tranche: "à fixer à l'étape 6", base_de_calcul: 'Base de calcul de test', sources: ['fixture-notice'] };
+const cout = (extra: Objet = {}): Objet => ({ base_de_calcul: 'Base de calcul de test', sources: ['fixture-notice'], ...extra });
 
 /** Empreinte de l'encadré de décision (question, lignes de situation, coût), recalculée après chaque changement. */
 function avecValidation(page: Objet): Objet {
@@ -127,7 +154,7 @@ const communs = (id: string, title: string, h1: string, libelle: string, questio
   image: '/images/fixture.jpg',
   image_alt: 'Image de test',
   question_decision: question,
-  cout_probable: cout,
+  cout_probable: cout(),
   sources: ['fixture-notice'],
   auteur: 'fixture-auteur',
   ...dates,
@@ -142,7 +169,10 @@ const panne = (): Objet =>
     symptome: 'Le moteur ne démarre pas ou démarre difficilement',
     carburant: 'essence et diesel',
     contexte: ['démarrage', 'à froid'],
-    causes: [{ cause: 'Batterie déchargée', explication: 'Une batterie faible ne fournit pas assez de courant.' }],
+    causes: [
+      { cause: 'Batterie déchargée', explication: 'Une batterie faible ne fournit pas assez de courant.', pieces: ['fixture-recharge-batterie'] },
+      { cause: 'Démarreur défaillant', explication: 'Le démarreur ne lance plus le moteur.', pieces: ['fixture-demarreur'] },
+    ],
   });
 
 const tutorielDef = { outils: ['chiffon'], duree: '5 minutes', difficulte: 'facile', quand_ne_pas_le_faire_soi_meme: 'Si le niveau dépasse le repère maximum.' };
@@ -170,6 +200,7 @@ const fluide = (ligne: Objet = ligneFluide()): Objet =>
     normes: ['ACEA A3/B4'],
     comment_verifier: 'Moteur froid, véhicule à plat, jauge essuyée puis replongée.',
     quand_changer: { texte: "Selon le carnet d'entretien.", sources: ['fixture-notice'] },
+    cout_probable: cout({ pieces: ['fixture-appoint-huile', 'fixture-vidange'] }),
   });
 const fluideTutoriel = (): Objet => ({ ...fluide(), tutoriel: tutorielDef });
 
@@ -179,7 +210,8 @@ const voyantPage = (): Objet =>
     situations: [{ voyant: 'fixture-voyant-huile' }],
     voyants: ['fixture-voyant-huile'],
     element_unique: 'photo',
-    causes: [{ cause: "Niveau d'huile trop bas", explication: "Le circuit n'est plus assez alimenté." }],
+    causes: [{ cause: "Niveau d'huile trop bas", explication: "Le circuit n'est plus assez alimenté.", pieces: ['fixture-appoint-huile'] }],
+    cout_probable: cout({ si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 1, rubrique de test' }] } }),
   });
 
 const LIGNE_CODE = {
@@ -201,7 +233,10 @@ const codeDefaut = (ligne: Objet = ligneSaisie(LIGNE_CODE)): Objet =>
     libelle_sources: ['fixture-forum'],
     portee: 'generique',
     carburant: 'essence et diesel',
-    causes: [{ cause: 'Catalyseur usé', explication: 'Le catalyseur ne traite plus correctement les gaz.' }],
+    causes: [
+      { cause: 'Catalyseur usé', explication: 'Le catalyseur ne traite plus correctement les gaz.', pieces: ['fixture-catalyseur'] },
+      { cause: 'Sonde défaillante', explication: 'La sonde mesure mal les gaz.', pieces: ['fixture-sonde'] },
+    ],
   });
 
 const pneus = (): Objet =>
@@ -211,6 +246,7 @@ const pneus = (): Objet =>
     element_unique: 'tableau',
     sujet: 'pression',
     texte_reference: { nature: 'legifrance', reference: 'Référence de test', source: 'fixture-legifrance' },
+    cout_probable: cout({ pieces: ['fixture-regonflage'], montants: ['fixture-amende'] }),
   });
 
 const dossier = (): Objet =>
@@ -219,6 +255,7 @@ const dossier = (): Objet =>
     situations: [{ situation: 'Moteur concerné par un rappel', verdict: 'oui avec précautions', urgence: 'sous quelques semaines', action: 'Consulter le constructeur pour le rappel.', citations: [citation('fixture-notice', ['oui avec précautions', 'sous quelques semaines'])] }],
     element_unique: 'tableau',
     journal_modifications: [{ date: '2026-10-20', resume: 'Création du dossier de test.' }],
+    cout_probable: cout({ pieces: ['fixture-vidange', 'fixture-sonde'], prise_en_charge: ['fixture-garantie'] }),
   });
 
 const socle = (): Objet => ({
@@ -239,6 +276,7 @@ interface OptionsHtml {
   pubAvantEncadre?: boolean;
   encadreSansAction?: boolean;
   encadreMasque?: boolean;
+  encadreSansCout?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -260,9 +298,35 @@ function encadre(page: Objet, options: OptionsHtml): string {
       return `<div data-encadre-ligne data-verdict="${String(l['verdict'])}" data-urgence="${String(l['urgence'])}"><h2>${String(l['situation'])}</h2><p><strong>${verdict}</strong> · ${urgence}</p>${action}${ecart}</div>`;
     })
     .join('');
-  const tranche = String((page['cout_probable'] as Objet | undefined)?.['tranche'] ?? '');
   const contenu = options.encadreMasque ? `<details><summary>Voir le détail</summary>${lignes}</details>` : lignes;
-  return `<section data-encadre-decision><p>${String(page['question_decision'])}</p>${contenu}<p>Coût probable : ${tranche}</p></section>`;
+  const coutHtml = options.encadreSansCout ? '' : coutAffiche(page);
+  return `<section data-encadre-decision><p>${String(page['question_decision'])}</p>${contenu}${coutHtml}</section>`;
+}
+
+/** Données de coût de test, sous la forme qu'attend le calcul (src/lib/cout.ts). */
+const DONNEES_COUTS = {
+  pieces: new Map(COUTS.pieces.map((p) => [String(p['id']), p])),
+  montants: new Map(COUTS.montants.map((m) => [String(m['id']), m])),
+  prises_en_charge: new Map(COUTS.prises_en_charge.map((m) => [String(m['id']), m])),
+} as unknown as DonneesCouts;
+
+/** Coût affiché dans l'encadré, calculé comme le fera le gabarit : plage, risque, montants, prises en charge. */
+function coutAffiche(page: Objet): string {
+  const declare = (page['cout_probable'] as Objet | undefined) ?? {};
+  const causes = page['causes'] as { pieces: string[] }[] | undefined;
+  const arret = lignesAffichees(page).some((l) => String(l['verdict']).startsWith('non'));
+  const resolu = resoudreCout({ outil: page['outil'] === true, causes, cout: declare as never }, DONNEES_COUTS, arret);
+  const morceaux = [`<p>Coût probable : ${libellePlage(resolu) ?? ''}</p>`];
+  if (resolu.risque !== undefined) morceaux.push(`<p>${libelleRisque(resolu.risque)}</p>`);
+  for (const id of resolu.montants) {
+    const montant = DONNEES_COUTS.montants.get(id);
+    if (montant !== undefined) morceaux.push(`<p>${montant.texte} (vérifié le 20/10/2026)</p>`);
+  }
+  for (const id of resolu.prisesEnCharge) {
+    const prise = DONNEES_COUTS.prises_en_charge.get(id);
+    if (prise !== undefined) morceaux.push(`<p>${prise.texte}</p>`);
+  }
+  return morceaux.join('');
 }
 
 function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): string {
@@ -393,6 +457,23 @@ invalide('r9-texte-avant-encadre', 'panne', panne(), ['R9-ENCADRE-POSITION'], "U
 invalide('r9-pub-avant-encadre', 'panne', panne(), ['R9-PUB-AVANT-ENCADRE'], "Un emplacement publicitaire précède l'encadré de décision.", { pubAvantEncadre: true });
 invalide('r9-encadre-incomplet', 'panne', panne(), ['R9-ENCADRE-CONTENU'], "L'encadré n'affiche pas l'action de chaque situation.", { encadreSansAction: true });
 invalide('r9-encadre-masque', 'panne', panne(), ['R9-ENCADRE-MASQUE'], "Les lignes de l'encadré sont repliées dans un bloc à déplier : la décision doit être visible sans clic.", { encadreMasque: true });
+
+// Coût probable (demande de changement n° 6).
+const avecCout = (page: Objet, extra: Objet): Objet => avecValidation({ ...page, cout_probable: { ...(page['cout_probable'] as Objet), ...extra } });
+const causesPanne = (pieces: string[]): Objet[] => [{ cause: 'Batterie déchargée', explication: 'Une batterie faible ne fournit pas assez de courant.', pieces }];
+invalide('cout-piece-inconnue', 'panne', avecValidation({ ...panne(), causes: causesPanne(['fixture-piece-fantome']) }), ['COUT-PIECE-INCONNUE'], 'Une cause cite une pièce absente de data/couts.json.');
+invalide('cout-pieces-double', 'panne', avecCout(panne(), { pieces: ['fixture-vidange'] }), ['COUT-PIECES-DOUBLE'], 'Une page à causes déclare aussi des pièces : la plage se calcule sur les causes.');
+invalide('cout-pieces-absentes', 'fluide', avecValidation({ ...fluide(), cout_probable: cout() }), ['COUT-PIECES-ABSENTES'], 'Une page sans causes ne déclare pas ses pièces : sa plage ne peut pas se calculer.');
+invalide('cout-cause-sans-piece', 'panne', avecValidation({ ...panne(), causes: [{ cause: 'Batterie déchargée', explication: 'Une batterie faible ne fournit pas assez de courant.' }] }), ['R7-CHAMP-MANQUANT'], 'Une cause sans pièce : sa tranche ne peut pas se calculer.');
+invalide('cout-montant-inconnu', 'pneus', avecCout(pneus(), { montants: ['fixture-montant-fantome'] }), ['COUT-MONTANT-INCONNU'], 'Montant absent de data/couts.json.');
+invalide('cout-montant-automatique', 'pneus', avecCout(pneus(), { montants: ['fixture-depannage'] }), ['COUT-MONTANT-AUTOMATIQUE'], 'Le dépannage s\'affiche de lui-même sur les pages à verdict d\'arrêt : il ne se déclare pas.');
+invalide('cout-prise-en-charge-inconnue', 'dossier', avecCout(dossier(), { prise_en_charge: ['fixture-prise-fantome'] }), ['COUT-PRISE-EN-CHARGE-INCONNUE'], 'Prise en charge absente de data/couts.json.');
+invalide('cout-prise-en-charge-hors-plage', 'fluide', avecCout(fluide(), { prise_en_charge: ['fixture-garantie'] }), ['COUT-PRISE-EN-CHARGE'], 'Une prise en charge sur une page dont la plage ne va pas jusqu\'à la réparation au garage.');
+invalide('cout-risque-plus-leger', 'panne', avecCout(panne(), { si_vous_continuez: { tranche: 'aucun', citations: [{ voyant: 'fixture-voyant-batterie', source: 'fixture-notice', emplacement: 'p. 1, rubrique de test' }] } }), ['COUT-RISQUE'], 'Le risque si l\'on continue est plus léger que le début de la plage.');
+invalide('cout-risque-sans-premiere-main', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [citation('fixture-forum')] } }), ['COUT-RISQUE-SOURCE'], 'Le risque si l\'on continue n\'est cité que d\'une source secondaire.');
+invalide('cout-citation-introuvable', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 99' }] } }), ['COUT-CITATION-INTROUVABLE'], 'La citation référencée n\'existe pas dans la base voyants.');
+invalide('r9-encadre-sans-cout', 'panne', panne(), ['R9-ENCADRE-CONTENU'], "L'encadré n'affiche pas le coût probable (plage, montant automatique).", { encadreSansCout: true });
+invalide('r4-pieces-modifiees', 'panne', { ...panne(), causes: causesPanne(['fixture-demarreur']) }, ['R4-EMPREINTE'], "Les pièces d'une cause ont changé après validation : la tranche affichée a pu changer, l'encadré est à revalider.");
 
 // ---- Écriture ----------------------------------------------------------------------------------------
 await rm(join(racine, 'cas'), { recursive: true, force: true });

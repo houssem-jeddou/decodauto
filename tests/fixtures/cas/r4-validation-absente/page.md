@@ -8,7 +8,6 @@ image: /images/fixture.jpg
 image_alt: Image de test
 question_decision: Puis-je rouler si ma voiture démarre difficilement ?
 cout_probable:
-  tranche: à fixer à l'étape 6
   base_de_calcul: Base de calcul de test
   sources:
     - fixture-notice
@@ -43,6 +42,12 @@ contexte:
 causes:
   - cause: Batterie déchargée
     explication: Une batterie faible ne fournit pas assez de courant.
+    pieces:
+      - fixture-recharge-batterie
+  - cause: Démarreur défaillant
+    explication: Le démarreur ne lance plus le moteur.
+    pieces:
+      - fixture-demarreur
 ---
 
 Page de test (r4-validation-absente), jamais publiée.

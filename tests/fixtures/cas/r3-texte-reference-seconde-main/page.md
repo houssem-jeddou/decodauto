@@ -8,10 +8,13 @@ image: /images/fixture.jpg
 image_alt: Image de test
 question_decision: Puis-je rouler avec des pneus sous-gonflés ?
 cout_probable:
-  tranche: à fixer à l'étape 6
   base_de_calcul: Base de calcul de test
   sources:
     - fixture-notice
+  pieces:
+    - fixture-regonflage
+  montants:
+    - fixture-amende
 sources:
   - fixture-notice
 auteur: fixture-auteur
@@ -36,7 +39,7 @@ texte_reference:
   nature: legifrance
   reference: Référence de test
   source: fixture-forum
-validation: 7cc18df06ab3d7072b85156618512a5fb95fb1f8e5f04c5ec3282c134081c5cf
+validation: c8c8b8da0deeced71240b39d3f3d1c3e72d6f8c58003c79a82b19c04916d1f8a
 ---
 
 Page de test (r3-texte-reference-seconde-main), jamais publiée.

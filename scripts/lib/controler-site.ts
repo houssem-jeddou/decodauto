@@ -2,7 +2,7 @@
 // construite), puis site construit. Utilisé par scripts/controle.ts, qui affiche le bilan, et par les tests.
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { construireContexte, controlerEnsemble, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
+import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
 import { adressesDansLeTexte, liensEnAttente } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
 import { auteursDuSocle, chargerDonnees, chargerPages } from './charger.ts';
@@ -25,6 +25,8 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   const pagesLues = await chargerPages(racine);
   const { contexte, constats: constatsDonnees } = construireContexte({ ...donnees, auteurs: auteursDuSocle(pagesLues) }, aujourdhui);
   constats.push(...constatsDonnees);
+  // Grille des coûts : ses citations désignent des citations de la base voyants réelle (demande n° 6).
+  constats.push(...controlerGrilleCouts(contexte.voyants, contexte.sources));
 
   // 1 bis. Porte de l'étape 4 : le plan du site couvre exactement les mots-clés de docs/05, sans doublon d'intention.
   const porte = controlerPortePlan([...contexte.plan.values()], lireCsv(await readFile(join(racine, FICHIER_05), 'utf8')));

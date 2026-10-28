@@ -1,13 +1,14 @@
 // Script de contrôle lancé à chaque construction (npm run build).
 // Applique les règles de docs/08 §3, la cohérence de non-indexation et les garde-fous du dépôt.
-// Usage : node scripts/controle.ts [--dist dist] [--echouer-sur CODE]
-//   --echouer-sur CODE : en plus des erreurs, fait échouer le script si une alerte porte ce code
-//                        (le workflow hebdomadaire l'utilise avec R5-REVUE-DEPASSEE pour être prévenu).
+// Usage : node scripts/controle.ts [--dist dist] [--echouer-sur CODE[,CODE…]]
+//   --echouer-sur CODES : en plus des erreurs, fait échouer le script si une alerte porte l'un de ces codes
+//                         (le workflow hebdomadaire l'utilise avec R5-REVUE-DEPASSEE, COUT-A-REVERIFIER et
+//                         COUT-FOURCHETTE-A-REVOIR pour être prévenu).
 // Variables : SITE_INDEXABLE, CONTROLE_DATE (AAAA-MM-JJ, pour les tests).
 import { appendFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { argv, cwd, env, exit, stdout } from 'node:process';
-import { codeSortie, sontBloquants } from '../src/lib/controle.ts';
+import { codeSortie, codesEchec, sontBloquants } from '../src/lib/controle.ts';
 import { modeIndexation } from '../src/lib/indexation.ts';
 import { controlerSite } from './lib/controler-site.ts';
 
@@ -43,7 +44,7 @@ for (const c of constats) {
 for (const info of informations) stdout.write(`INFO ${info}\n`);
 const erreurs = sontBloquants(constats).length;
 const alertes = constats.length - erreurs;
-const alertesAttendues = echouerSur === undefined ? 0 : constats.filter((c) => c.gravite === 'alerte' && c.regle === echouerSur).length;
+const alertesAttendues = constats.filter((c) => c.gravite === 'alerte' && codesEchec(echouerSur).includes(c.regle)).length;
 const bilan = `Contrôle : ${pagesEditoriales} page(s) éditoriale(s), ${erreurs} erreur(s) bloquante(s), ${alertes} alerte(s). Mode d'indexation : ${mode.indexable ? 'INDEXABLE' : 'non indexable'}.`;
 stdout.write(`${bilan}\n`);
 if (alertesAttendues > 0) stdout.write(`${alertesAttendues} alerte(s) ${echouerSur} : échec demandé par --echouer-sur.\n`);

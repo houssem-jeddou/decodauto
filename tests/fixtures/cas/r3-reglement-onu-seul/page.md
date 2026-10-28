@@ -8,10 +8,12 @@ image: /images/fixture.jpg
 image_alt: Image de test
 question_decision: Puis-je rouler si le niveau d'huile est bas ?
 cout_probable:
-  tranche: à fixer à l'étape 6
   base_de_calcul: Base de calcul de test
   sources:
     - fixture-notice
+  pieces:
+    - fixture-appoint-huile
+    - fixture-vidange
 sources:
   - fixture-notice
 auteur: fixture-auteur
@@ -36,7 +38,7 @@ quand_changer:
   texte: Selon le carnet d'entretien.
   sources:
     - fixture-notice
-validation: bd78f99f16bfd1115f67871d4917d1bec618bdc9df2325c67f67eea24a6e2dac
+validation: b5a8581afa52631476abbe64de0044b6b1f80204075786e52eb17634ffabbbf8
 ---
 
 Page de test (r3-reglement-onu-seul), jamais publiée.

@@ -1,6 +1,8 @@
 # Demande de changement n° 6 : échelle du coût probable (étape 6, livrable 6.1)
 
-Proposée le 28/10/2026, après la recherche des sources (`travaux/etape-6/cout-probable/recherche-sources.md`). Deux revues indépendantes, le maximum : chacune a conclu « à corriger », rien de bloquant ; leurs corrections sont intégrées. **Rien n'est appliqué avant l'accord de Houssem.**
+Proposée le 28/10/2026, après la recherche des sources (`travaux/etape-6/cout-probable/recherche-sources.md`). Deux revues indépendantes, le maximum : chacune a conclu « à corriger », rien de bloquant ; leurs corrections sont intégrées.
+
+**Acceptée par Houssem le 28/10/2026** : décisions 2 et 3 à 13 h 29 ; décisions 1 et 4 à 13 h 31, dans la version du point 2 bis ci-dessous (ordre de grandeur en euros par pièce, sourcé). Ce complément est venu après les deux revues : il n'a pas eu de troisième revue (maximum atteint) ; chaque fourchette est contrôlée par la machine (deux sources d'éditeurs différents) et validée par Houssem avec son lot. Précisions de l'application à la fin du document.
 
 ## Élément concerné
 Structure des contenus, champ `cout_probable` des pages éditoriales, et ce qui en dépend :
@@ -54,6 +56,24 @@ Liste initiale (à valider par Houssem, décision 3) :
 - Une pièce inconnue de la liste bloque la construction.
 - Une pièce manquante s'ajoute dans la pull request du lot de pages qui en a besoin, avec sa tranche ; Houssem la valide avec le lot (même principe que les paires de liens du plan). En cas de doute, la tranche la plus lourde plausible.
 
+### 2 bis. Ordre de grandeur en euros, par pièce (accepté le 28/10, 13 h 31)
+Une pièce de la liste peut porter une **fourchette en euros**, pièce et main-d'œuvre, choisie dans une liste fermée :
+
+| Fourchette | Texte affiché |
+|---|---|
+| `moins-de-100` | moins de 100 € |
+| `100-300` | de 100 à 300 € |
+| `300-1000` | de 300 à 1 000 € |
+| `1000-3000` | de 1 000 à 3 000 € |
+| `plus-de-3000` | plus de 3 000 € |
+
+- **Sources** : au moins deux sources publiques du registre, d'**éditeurs différents**, qui placent le prix habituel de la pièce dans la même fourchette (moyennes publiées sur beaucoup de garages, association de consommateurs, statistiques). Jamais le tarif d'une seule enseigne.
+- **Sinon, pas de montant** : seule la tranche s'affiche.
+- **Affichage** : « souvent de 1 000 à 3 000 €, pièce et main-d'œuvre, selon le modèle et le garage (relevé le JJ/MM/AAAA) ; demandez un devis ».
+- **Date** : chaque fourchette porte sa date de relevé ; au-delà d'un an, une alerte (le contrôle du lundi échoue).
+- **Validation** : les fourchettes se remplissent lot par lot, dans `data/couts.json`, et Houssem les valide avec le lot.
+- **Fourchette d'une cause** : celle de sa pièce la plus lourde.
+
 ### 3. « Si vous continuez de rouler » (facultatif)
 Quand une notice dit qu'un dégât grave suit si l'on continue de rouler, l'encadré l'affiche : « Si vous continuez de rouler : risque de grosse réparation ». C'est l'information de coût qui sert le plus la décision. Elle porte une tranche et ses citations (référence à la base ou citation saisie).
 
@@ -102,18 +122,17 @@ La prise en charge du constructeur pour le PureTech se traitera avec le dossier 
 ### 6. Où le coût est porté
 - **Pages qui ont des causes** (voyant, code défaut, panne) : plage calculée sur les causes, de la plus légère à la plus lourde. La saisir est une erreur, comme pour les autres champs calculés.
 - **Page outil des voyants** : texte fixe « Selon le voyant » dans l'encadré ; l'outil affiche la plage de chaque voyant, calculée sur sa page.
-- **Autres pages** (fluide, pneus, dossier) : plage saisie (`de`, `a`).
+- **Autres pages** (fluide, pneus, dossier) : la page déclare ses pièces (`cout_probable.pieces`) et la plage se calcule de la même façon (précision de l'application : aucune plage n'est saisie).
 
 Schéma proposé :
 ```yaml
 cout_probable:
-  de: geste                    # saisi seulement sur une page sans causes (hors outil)
-  a: organe                    # idem ; jamais plus léger que « de »
+  pieces: [vidange]            # seulement sur une page sans causes (hors outil) ; plage calculée
   base_de_calcul: "…"          # ce qui fait passer d'une tranche à l'autre
   sources: [ … ]               # au moins une, toutes au registre
   si_vous_continuez:           # facultatif (point 3)
     tranche: organe
-    citations: [ … ]
+    citations: [ … ]           # référence à la base (voyant, source, emplacement) ou citation saisie
   montants: [aucune-amende-loi-montagne]  # facultatif, identifiants de data/couts.json (le dépannage est calculé)
   prise_en_charge: [garantie-legale]      # facultatif (point 5)
 causes:
@@ -138,12 +157,12 @@ causes:
 
 ### 8. Contrôles (catalogue `CONTROLES.md`)
 - **Sur les pages**, chacun avec sa page de test dans `tests/fixtures` :
-  - plage inversée ;
-  - plage saisie sur une page à causes ;
+  - pièces déclarées sur une page à causes, ou sur la page outil ;
   - cause sans pièce ;
   - pièce inconnue ;
-  - page sans causes et sans plage, hors outil ;
-  - montant inconnu ;
+  - page sans causes et sans pièces, hors outil ;
+  - montant inconnu, ou montant automatique (dépannage) déclaré à la main ;
+  - risque sans source de première main, ou citation référencée introuvable ;
   - risque plus léger que le début de la plage ;
   - prise en charge sur une page dont la plage ne va pas jusqu'à « Réparation au garage » ;
   - libellés absents de l'encadré (R9).
@@ -151,8 +170,9 @@ causes:
   - citation référencée introuvable ou ambiguë ;
   - moins de deux groupes de constructeurs pour une tranche ;
   - montant sans source de Légifrance ;
-  - empreinte d'un montant absente ou différente (R4).
-- **Dans le contrôle du site seulement** : montant à revérifier. C'est une alerte, et le contrôle du lundi échoue.
+  - empreinte d'un montant absente (alerte ; erreur dès qu'une page l'affiche) ou différente (erreur) ;
+  - fourchette en euros dont les sources ne viennent pas de deux éditeurs différents.
+- **Alertes datées** (montant à revérifier, fourchette de plus d'un an) : elles font échouer le contrôle du lundi, jamais une pull request.
 
 ## Couverture des 42 pages (prévision, à sourcer et valider avec chaque page)
 Les 39 pages éditoriales entrent dans l'échelle ; les 3 pages du socle n'ont pas d'encadré. Cette prévision montre la couverture ; elle ne vaut pas validation. 9 pages ont une plage large (4 tranches ou plus) : pour elles, le risque si l'on continue et le tableau cause par cause, juste sous l'encadré, portent l'essentiel (composant à prévoir en 6.3).
@@ -240,6 +260,8 @@ Les 39 pages éditoriales entrent dans l'échelle ; les 3 pages du socle n'ont p
 - Par la CI de la pull request, le registre npm n'étant pas joignable depuis cette session : `npm run schemas`, `npm test` (dont « docs/08 à jour » et les empreintes de la base, R4), `npm run build` (dont `scripts/controle.ts` et R9), `npm run liens`.
 
 ## Décisions qui reviennent à Houssem
+Tranchées le 28/10/2026 : 2 et 3 acceptées (13 h 29) ; 1 et 4 acceptées (13 h 31) dans la version du point 2 bis (ordre de grandeur en euros par pièce), libellés gardés tels quels.
+
 1. **Sens de « ordres de grandeur »** (décision du 22/10).
    - **Recommandation** : 5 tranches de nature de dépense, sans montant en euros pour les réparations, plus les montants fixés par un texte.
    - **Ce que ça coûte** : des concurrents de la première page affichent des montants (5 titres sur 126), et le lecteur qui veut un chiffre ira les lire.
@@ -252,6 +274,16 @@ Les 39 pages éditoriales entrent dans l'échelle ; les 3 pages du socle n'ont p
    - la page pour les autres ;
    - la liste initiale du §2. Elle a un effet éditorial : par exemple, les injecteurs et l'embrayage y sont des « Grosses réparations », et la courroie de distribution à l'échéance est un « Entretien ».
 4. **Libellés des 5 tranches** : ils peuvent être corrigés librement. Une simple reformulation ne relance pas de revue.
+
+## Règle 5 de 01, nouvelle rédaction (acceptée le 28/10)
+« Pas de prix d'une enseigne en particulier ; pas de requête d'achat générique comme objectif. Un montant en euros est permis s'il est fixé par un texte officiel (arrêté, code, sourcé sur Légifrance), ou comme ordre de grandeur tiré d'au moins deux sources publiques indépendantes, daté et revu chaque année. »
+
+La même règle est reprise dans 02 (règles de périmètre), `CLAUDE.md` et 08 §1. Le périmètre ne change pas : les mots-clés « prix » restent hors des cibles (à réévaluer avec Search Console). « Ni prix ni centres » pour le contrôle technique (02) reste : ni prix d'un centre, ni liste de centres.
+
+## Précisions de l'application
+- Une page sans causes déclare ses pièces au lieu d'une plage saisie : la plage se calcule partout, rien n'est recopié.
+- Le contrôle des citations de la grille des coûts tourne sur les données réelles (construction et test), pas sur les données de test.
+- Les deux montants créés attendent la validation de Houssem (empreinte) : tant qu'elle manque, une alerte le rappelle, et une page qui les afficherait serait bloquée.
 
 ## Suite, après l'accord
 - Branche `etape-6/cout-probable` :

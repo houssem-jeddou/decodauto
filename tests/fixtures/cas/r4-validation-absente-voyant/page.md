@@ -8,10 +8,15 @@ image: /images/fixture.jpg
 image_alt: Image de test
 question_decision: Puis-je rouler avec le voyant huile allumé ?
 cout_probable:
-  tranche: à fixer à l'étape 6
   base_de_calcul: Base de calcul de test
   sources:
     - fixture-notice
+  si_vous_continuez:
+    tranche: organe
+    citations:
+      - voyant: fixture-voyant-huile
+        source: fixture-notice
+        emplacement: p. 1, rubrique de test
 sources:
   - fixture-notice
 auteur: fixture-auteur
@@ -27,6 +32,8 @@ element_unique: photo
 causes:
   - cause: Niveau d'huile trop bas
     explication: Le circuit n'est plus assez alimenté.
+    pieces:
+      - fixture-appoint-huile
 ---
 
 Page de test (r4-validation-absente-voyant), jamais publiée.

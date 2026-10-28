@@ -8,10 +8,14 @@ image: /images/fixture.jpg
 image_alt: Image de test
 question_decision: Mon moteur est-il concerné par ce dossier ?
 cout_probable:
-  tranche: à fixer à l'étape 6
   base_de_calcul: Base de calcul de test
   sources:
     - fixture-notice
+  pieces:
+    - fixture-vidange
+    - fixture-sonde
+  prise_en_charge:
+    - fixture-garantie
 sources:
   - fixture-notice
 auteur: fixture-auteur
@@ -34,7 +38,7 @@ element_unique: tableau
 journal_modifications:
   - date: 2026-10-20
     resume: Création du dossier de test.
-validation: 23bbf456074f257d41362e35bb5928b26da912ef7baa2a361a08f435c8b6f04d
+validation: 979b00cc0ab778202e9a7d74f33c22cf5be7bc2367aa7dd65292e8270513bfef
 ---
 
 Page de test (valide-dossier), jamais publiée.

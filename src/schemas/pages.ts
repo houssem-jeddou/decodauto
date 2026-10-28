@@ -15,6 +15,7 @@ import {
   type TypePage,
 } from './listes.ts';
 import { citationSchema, dateIso, hashHex, identifiant, texte } from './briques.ts';
+import { TRANCHES_COUT } from './cout.ts';
 
 // ---------------------------------------------------------------------------------------------
 // Schémas des pages éditoriales. Source de vérité : docs/08_structure_contenus.md.
@@ -73,12 +74,33 @@ export const ligneSituationSchema = z
   });
 export type LigneSituation = z.infer<typeof ligneSituationSchema>;
 
+/** Référence à une citation de la base voyants (voyant, source, emplacement ; début de l'extrait si ambigu). */
+const referenceCitationSchema = z.strictObject({
+  voyant: identifiant,
+  source: identifiant,
+  emplacement: texte,
+  debut_extrait: texte.optional(),
+});
+
+/**
+ * Coût probable (demande de changement n° 6 ; docs/08 §1 et §7). La plage n'est jamais saisie : elle se calcule
+ * depuis les pièces des causes (voyant, code défaut, panne) ou, sur une page sans causes, depuis `pieces`.
+ *  - `pieces` : identifiants de data/couts.json, seulement sur une page sans causes (hors page outil) ;
+ *  - `si_vous_continuez` : le risque si l'on continue de rouler, cité d'une notice (référence à la base ou citation) ;
+ *  - `montants`, `prise_en_charge` : identifiants de data/couts.json ; le dépannage sur autoroute est automatique.
+ */
 const coutProbableSchema = z.strictObject({
-  // Échelle fermée en ordres de grandeur : les tranches seront fixées à l'étape 6 (docs/04, 22/10).
-  // En attendant, texte libre non vide ; aucun prix d'enseigne ni de prestation (docs/01, règle 5).
-  tranche: texte,
+  pieces: z.array(identifiant).min(1).optional(),
   base_de_calcul: texte,
   sources: z.array(identifiant).min(1),
+  si_vous_continuez: z
+    .strictObject({
+      tranche: z.enum(TRANCHES_COUT),
+      citations: z.array(z.union([referenceCitationSchema, citationSchema])).min(1),
+    })
+    .optional(),
+  montants: z.array(identifiant).min(1).optional(),
+  prise_en_charge: z.array(identifiant).min(1).optional(),
 });
 
 const tutorielSchema = z.strictObject({
@@ -88,7 +110,8 @@ const tutorielSchema = z.strictObject({
   quand_ne_pas_le_faire_soi_meme: texte,
 });
 
-const causesSchema = z.array(z.strictObject({ cause: texte, explication: texte })).min(1);
+/** Causes : chaque cause cite ses pièces ou opérations (data/couts.json) ; sa tranche de coût en est calculée. */
+const causesSchema = z.array(z.strictObject({ cause: texte, explication: texte, pieces: z.array(identifiant).min(1) })).min(1);
 
 const libelleCourt = texte.max(LIBELLE_COURT_MAX, `le libellé court fait au plus ${LIBELLE_COURT_MAX} caractères`);
 

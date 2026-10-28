@@ -7,7 +7,6 @@ libelle_court: Voiture qui ne démarre pas
 image: /images/fixture.jpg
 image_alt: Image de test
 cout_probable:
-  tranche: à fixer à l'étape 6
   base_de_calcul: Base de calcul de test
   sources:
     - fixture-notice
@@ -42,7 +41,13 @@ contexte:
 causes:
   - cause: Batterie déchargée
     explication: Une batterie faible ne fournit pas assez de courant.
-validation: 50aa1baa6bb287310aa11b40e385b1cba97399b84108aff101edc19ca93bb282
+    pieces:
+      - fixture-recharge-batterie
+  - cause: Démarreur défaillant
+    explication: Le démarreur ne lance plus le moteur.
+    pieces:
+      - fixture-demarreur
+validation: 245b2d72ca5839e8a7469155648ad66db9aba319a5ad1b37c1aea34df0524029
 ---
 
 Page de test (r7-champ-manquant), jamais publiée.

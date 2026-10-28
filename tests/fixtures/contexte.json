@@ -221,6 +221,14 @@
       "categorie": "secondaire",
       "url": "https://exemple.test/source",
       "date_consultation": "2026-10-01"
+    },
+    {
+      "id": "fixture-comparateur",
+      "titre": "Source de test fixture-comparateur",
+      "editeur": "Comparateur de test",
+      "categorie": "secondaire",
+      "url": "https://exemple.test/source",
+      "date_consultation": "2026-10-01"
     }
   ],
   "auteurs": [
@@ -235,5 +243,87 @@
       "id": "fixture-huile",
       "contenu": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" role=\"img\"><title>Huile</title><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>\n"
     }
-  ]
+  ],
+  "couts": {
+    "pieces": [
+      {
+        "id": "fixture-recharge-batterie",
+        "libelle": "Pièce de test fixture-recharge-batterie",
+        "tranche": "geste"
+      },
+      {
+        "id": "fixture-appoint-huile",
+        "libelle": "Pièce de test fixture-appoint-huile",
+        "tranche": "geste"
+      },
+      {
+        "id": "fixture-regonflage",
+        "libelle": "Pièce de test fixture-regonflage",
+        "tranche": "geste"
+      },
+      {
+        "id": "fixture-vidange",
+        "libelle": "Pièce de test fixture-vidange",
+        "tranche": "entretien"
+      },
+      {
+        "id": "fixture-demarreur",
+        "libelle": "Pièce de test fixture-demarreur",
+        "tranche": "reparation"
+      },
+      {
+        "id": "fixture-sonde",
+        "libelle": "Pièce de test fixture-sonde",
+        "tranche": "reparation"
+      },
+      {
+        "id": "fixture-catalyseur",
+        "libelle": "Pièce de test fixture-catalyseur",
+        "tranche": "organe",
+        "fourchette": {
+          "valeur": "1000-3000",
+          "sources": [
+            "fixture-forum",
+            "fixture-comparateur"
+          ],
+          "releve_le": "2026-10-20"
+        }
+      }
+    ],
+    "montants": [
+      {
+        "id": "fixture-depannage",
+        "texte": "Dépannage de test au tarif réglementé de test",
+        "sources": [
+          "fixture-legifrance"
+        ],
+        "verifie_le": "2026-10-20",
+        "reverifier_apres_jours": 90,
+        "automatique": "verdict-arret",
+        "validation": "79048021ff39095ad82dbbf5034743c1fa69be6fbc41703f6e410de968b12250"
+      },
+      {
+        "id": "fixture-amende",
+        "texte": "Amende forfaitaire de test de 135 €",
+        "sources": [
+          "fixture-legifrance"
+        ],
+        "verifie_le": "2026-10-20",
+        "reverifier_apres_jours": 90,
+        "validation": "2ef7a44573a2b86badd6ac035d1dbd80b632bccf4bb34767b2bc794a0bae972b"
+      }
+    ],
+    "prises_en_charge": [
+      {
+        "id": "fixture-garantie",
+        "texte": "Prise en charge de test par la garantie légale",
+        "sources": [
+          "fixture-legifrance"
+        ],
+        "verifie_le": "2026-10-20",
+        "reverifier_apres_jours": 365,
+        "validation": "2cf5c0f31f0263f19b5e6d7e342f5504cfcce7ddaec661541095a058bce3e452"
+      }
+    ]
+  }
 }

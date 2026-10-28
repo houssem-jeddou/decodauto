@@ -22,7 +22,7 @@ Quatre thèmes : 1. Alertes et codes · 2. Pannes et symptômes · 3. Niveaux et
 2. Chaque page s'ouvre sur la décision : rouler ou non, urgence, coût probable, quoi faire.
 3. Chaque page contient au moins un élément que le résumé IA de Google ne remplace pas : arbre de décision, tableau, photo réelle, outil.
 4. Tout verdict de sécurité s'appuie sur une source de première main citée (notice constructeur, Sécurité routière, Légifrance, textes du contrôle technique). Une relecture par une IA n'est pas une vérification.
-5. Ni prix de prestations ni enseignes ; pas de requêtes d'achat générique comme objectif.
+5. Pas de prix d'une enseigne en particulier ; pas de requêtes d'achat générique comme objectif. Un montant en euros est permis s'il est fixé par un texte officiel (arrêté, code, sourcé sur Légifrance), ou comme ordre de grandeur tiré d'au moins deux sources publiques indépendantes, daté et revu chaque année (règle du 28/10/2026, demande de changement n° 6).
 6. Une intention de recherche = une seule page.
 7. Prudence et honnêteté : en cas de doute, recommander l'avis d'un professionnel ; dire ce qu'on ne sait pas.
 8. Pictogrammes redessinés par nos soins d'après les symboles normalisés, jamais copiés depuis des notices ou des banques d'images.
@@ -40,6 +40,7 @@ En tête des résultats aujourd'hui : enseignes qui vendent leur intervention, m
 - Plan d'avancement corrigé validé : fondations d'abord, base voyants comme source unique, publication en 3 vagues (A ≤ 31/10, B ≈ 07/11, C ≈ 14/11). Depuis le 23/10/2026 (03 v3), ces dates sont des cibles : 03 vise le 31/10 pour un minimum en ligne, et le journal tient la prévision.
 - Relecteur (23/10/2026) : pas de mécanicien. Les verdicts reposent sur des sources de première main citées (notices de plusieurs marques), validés par Houssem, qui relit l'encadré de décision de chaque page et porte la responsabilité éditoriale.
 - Nom de domaine : decodauto.com (22/10/2026 ; aucune antériorité trouvée sur TMview, aucune marque de constructeur).
+- Coût probable (28/10/2026, demande de changement n° 6) : échelle fermée de 5 tranches qui disent la nature de la dépense, montants fixés par un texte officiel, ordres de grandeur en euros par pièce tirés de deux sources indépendantes ; la règle 5 est réécrite en conséquence.
 
 ## Décisions ouvertes
 - Statut pour les mentions légales et encaissement d'AdSense depuis la Tunisie (à vérifier).

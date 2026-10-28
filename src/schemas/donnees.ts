@@ -9,6 +9,7 @@ import {
   VERDICTS,
 } from './listes.ts';
 import { citationSchema, dateIso, hashHex, identifiant, texte } from './briques.ts';
+import { AFFICHAGES_AUTOMATIQUES, FOURCHETTE_SOURCES_MIN, FOURCHETTES_EUROS, TRANCHES_COUT } from './cout.ts';
 
 // ---------------------------------------------------------------------------------------------
 // Fichiers de données : data/plan-du-site.json (étape 4), data/voyants.json (étape 5, base voyants),
@@ -110,5 +111,48 @@ export const voyantBaseSchema = z.strictObject({
   validation: hashHex,
 });
 export type VoyantBase = z.infer<typeof voyantBaseSchema>;
+
+/**
+ * Données du coût probable (data/couts.json, demande de changement n° 6 ; structure dans src/schemas/cout.ts) :
+ *  - `pieces` : liste fermée des pièces et opérations, avec leur tranche ; une fourchette en euros facultative,
+ *    tirée d'au moins FOURCHETTE_SOURCES_MIN sources d'éditeurs différents, datée (`releve_le`) ;
+ *  - `montants` : montants fixés par un texte officiel (au moins une source de Légifrance), datés et revérifiés ;
+ *    `automatique` : affiché de lui-même sur les pages concernées (verdict d'arrêt pour le dépannage) ;
+ *  - `prises_en_charge` : mentions de prise en charge possible (garantie légale…), même forme que les montants.
+ * `validation` : empreinte du texte validé par Houssem (src/lib/empreinte.ts, empreinteTexteDeCout).
+ */
+export const pieceSchema = z.strictObject({
+  id: identifiant,
+  libelle: texte,
+  tranche: z.enum(TRANCHES_COUT),
+  fourchette: z
+    .strictObject({
+      valeur: z.enum(FOURCHETTES_EUROS),
+      sources: z.array(identifiant).min(FOURCHETTE_SOURCES_MIN),
+      releve_le: dateIso,
+    })
+    .optional(),
+});
+export type Piece = z.infer<typeof pieceSchema>;
+
+const champsTexteDeCout = {
+  id: identifiant,
+  texte,
+  sources: z.array(identifiant).min(1),
+  verifie_le: dateIso,
+  reverifier_apres_jours: z.number().int().min(1).max(366),
+  validation: hashHex.optional(),
+};
+export const montantSchema = z.strictObject({ ...champsTexteDeCout, automatique: z.enum(AFFICHAGES_AUTOMATIQUES).optional() });
+export type Montant = z.infer<typeof montantSchema>;
+export const priseEnChargeSchema = z.strictObject(champsTexteDeCout);
+export type PriseEnCharge = z.infer<typeof priseEnChargeSchema>;
+
+/** Enveloppe de data/couts.json ; chaque liste est lue ligne par ligne (erreurs localisées). */
+export const coutsSchema = z.strictObject({
+  pieces: z.array(z.unknown()),
+  montants: z.array(z.unknown()),
+  prises_en_charge: z.array(z.unknown()),
+});
 
 export { dateIso };

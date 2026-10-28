@@ -8,6 +8,7 @@ import {
   codeSortie,
   construireContexte,
   controlerEncadre,
+  controlerGrilleCouts,
   controlerEnsemble,
   controlerLigneDeVerdict,
   controlerPage,
@@ -18,7 +19,10 @@ import {
   type DonneesBrutes,
   type PageControlee,
 } from '../src/lib/controle.ts';
-import { empreintePage, empreinteVoyant, normaliserTexte, type EncadreValide, type VoyantValide } from '../src/lib/empreinte.ts';
+import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte, type EncadreValide, type VoyantValide } from '../src/lib/empreinte.ts';
+import { fourchetteDesPieces, libellePlage, resoudreCout, textesAttendusCout, trancheDesPieces, type DonneesCouts, type PieceCout, type TexteDeCout } from '../src/lib/cout.ts';
+import { GRILLE_COUTS, LIBELLE_SELON_LE_VOYANT, TRANCHES_COUT, type TrancheGrille } from '../src/schemas/cout.ts';
+import { chargerDonnees } from '../scripts/lib/charger.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS, URGENCES_ADMISES, urgenceAdmise } from '../src/schemas/grille.ts';
 import { MARQUES_REFERENCE, URGENCES, VERDICTS } from '../src/schemas/listes.ts';
 import { genererVueGrille, insererVueGrille } from '../scripts/lib/vue-grille.ts';
@@ -93,7 +97,7 @@ describe('pages de test (docs/08 §3)', async () => {
   });
 
   test('les pages de test ne sont jamais dans le contenu du site ni dans les données réelles', async () => {
-    for (const fichier of ['plan-du-site', 'voyants', 'sources']) {
+    for (const fichier of ['plan-du-site', 'voyants', 'sources', 'couts']) {
       assert.doesNotMatch(await readFile(join(racine, 'data', `${fichier}.json`), 'utf8'), /fixture/i);
     }
     const { listerFichiers } = await import('../scripts/lib/charger.ts');
@@ -172,12 +176,28 @@ describe('empreinte de validation (R4)', () => {
     const encadre: EncadreValide = {
       question_decision: 'Puis-je rouler avec le voyant huile allumé ?',
       situations: [{ voyant: 'huile' }, { voyant_lie: 'huile', situation: 'Code P0520', verdict: 'non, arrêt immédiat', urgence: 'immédiate', action: 'S\'arrêter.', citations }],
-      cout_probable: { tranche: 'de 100 à 1 000 €', base_de_calcul: 'Base de test', sources: ['b', 'a'] },
+      cout_probable: { base_de_calcul: 'Base de test', sources: ['b', 'a'], montants: ['m2', 'm1'] },
+      causes: [
+        { cause: 'Niveau d\'huile trop bas', pieces: ['appoint-huile'] },
+        { cause: 'Pompe à huile défaillante', pieces: ['moteur', 'pompe'] },
+      ],
     };
     const huile = { ...voyant, id: 'huile' };
     const empreintes = new Map([['huile', huile]]);
     const base = empreintePage(encadre, empreintes);
-    assert.equal(base, empreintePage({ ...encadre, question_decision: 'puis je rouler avec le voyant huile allume', cout_probable: { ...encadre.cout_probable, sources: ['a', 'b'] } }, empreintes));
+    // Coquilles et ordre des sources, des montants et des pièces d'une cause : sans effet.
+    assert.equal(
+      base,
+      empreintePage(
+        {
+          ...encadre,
+          question_decision: 'puis je rouler avec le voyant huile allume',
+          cout_probable: { ...encadre.cout_probable, sources: ['a', 'b'], montants: ['m1', 'm2'] },
+          causes: [{ cause: 'niveau d huile trop bas', pieces: ['appoint-huile'] }, { cause: 'Pompe à huile défaillante', pieces: ['pompe', 'moteur'] }],
+        },
+        empreintes,
+      ),
+    );
     // Ce que l'encadré affiche d'une ligne de la base (situation, verdict, urgence, action, écart) est verrouillé ;
     // corriger une citation de cette ligne, non.
     for (const modif of [{ situation: 'Autre situation' }, { verdict: 'non, arrêt dès que possible' as const }, { urgence: 'sous quelques jours' as const }, { action: 'Autre action.' }, { ecart_marques: 'Écart.' }]) {
@@ -193,9 +213,15 @@ describe('empreinte de validation (R4)', () => {
       { situations: [ligneBase, { ...ligneSaisie, voyant_lie: undefined }] },
       { situations: [ligneBase, { ...ligneSaisie, situation: 'Code P0521' }] },
       { situations: [ligneBase, { ...ligneSaisie, citations: [citations[1]] }] },
-      { cout_probable: { ...encadre.cout_probable, tranche: 'de 1 000 à 3 000 €' } },
       { cout_probable: { ...encadre.cout_probable, base_de_calcul: 'Autre base' } },
       { cout_probable: { ...encadre.cout_probable, sources: ['a'] } },
+      { cout_probable: { ...encadre.cout_probable, montants: ['m1'] } },
+      { cout_probable: { ...encadre.cout_probable, pieces: ['vidange'] } },
+      { cout_probable: { ...encadre.cout_probable, prise_en_charge: ['garantie-legale'] } },
+      { cout_probable: { ...encadre.cout_probable, si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'huile', source: 'b', emplacement: 'p. 2.13' }] } } },
+      { causes: [{ cause: 'Niveau d\'huile trop bas', pieces: ['vidange'] }, { cause: 'Pompe à huile défaillante', pieces: ['moteur', 'pompe'] }] },
+      { causes: [{ cause: 'Pompe à huile défaillante', pieces: ['moteur', 'pompe'] }, { cause: 'Niveau d\'huile trop bas', pieces: ['appoint-huile'] }] },
+      { causes: undefined },
     ];
     for (const variante of variantes) assert.notEqual(base, empreintePage({ ...encadre, ...variante }, empreintes), JSON.stringify(variante));
   });
@@ -468,10 +494,13 @@ describe('encadré de décision dans la page construite (R9)', async () => {
   const ligne = { situation: "Niveau d'huile sous le repère minimum", verdict: 'non, arrêt dès que possible', urgence: 'immédiate', action: 'Compléter le niveau avant de reprendre la route.', citations: [], sources: [], origine: 'page' } as const;
   const ligneHtml = (verdict: string = ligne.verdict, libelle: string = GRILLE_VERDICTS[ligne.verdict].libelle, extra = '') =>
     `<div data-encadre-ligne data-verdict="${verdict}" data-urgence="${ligne.urgence}"><p>${ligne.situation}</p><p>${libelle}, ${GRILLE_URGENCES[ligne.urgence].libelle}.</p><p>${ligne.action}</p>${extra}</div>`;
-  const encadreHtml = (lignesHtml: string, attributs = '') => `<section data-encadre-decision${attributs}><p>${p.question_decision}</p>${lignesHtml}<p>${p.cout_probable.tranche}</p></section>`;
+  // Coût de la page de test « fluide » : appoint d'huile ou vidange (demande de changement n° 6).
+  const textesCout = [GRILLE_COUTS.geste.libelle, GRILLE_COUTS.entretien.libelle];
+  const coutHtml = `<p>Coût probable : de « ${GRILLE_COUTS.geste.libelle} » à « ${GRILLE_COUTS.entretien.libelle} »</p>`;
+  const encadreHtml = (lignesHtml: string, attributs = '') => `<section data-encadre-decision${attributs}><p>${p.question_decision}</p>${lignesHtml}${coutHtml}</section>`;
   const bloc = encadreHtml(ligneHtml());
   const html = (corps: string) => `<html><head><title>t</title></head><body>${corps}</body></html>`;
-  const erreurs = (corps: string) => codes(controlerEncadre(p, [ligne], html(corps), 'f'), 'erreur');
+  const erreurs = (corps: string) => codes(controlerEncadre(p, [ligne], html(corps), 'f', textesCout), 'erreur');
 
   test('premier bloc après le H1, malgré des balises englobantes, un commentaire ou des données structurées', () => {
     assert.deepEqual(erreurs(`<main><header><h1>Titre</h1></header><!-- x --><script type="application/ld+json">{"a":"texte"}</script><div>${bloc}</div></main>`), []);
@@ -493,7 +522,8 @@ describe('encadré de décision dans la page construite (R9)', async () => {
   test('il affiche la question, la tranche de coût et, ligne par ligne, la situation, les libellés du verdict et de l\'urgence et l\'action', () => {
     const incomplet = bloc.replace(GRILLE_URGENCES[ligne.urgence].libelle, '');
     assert.deepEqual(erreurs(`<h1>Titre</h1>${incomplet}`), ['R9-ENCADRE-CONTENU']);
-    assert.deepEqual(erreurs(`<h1>Titre</h1>${bloc.replace(p.cout_probable.tranche, '')}`), ['R9-ENCADRE-CONTENU']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${bloc.replace(`« ${GRILLE_COUTS.entretien.libelle} »`, '')}`), ['R9-ENCADRE-CONTENU']);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${bloc.replace(coutHtml, '')}`), ['R9-ENCADRE-CONTENU']);
     // Libellé d'un autre niveau, ou niveau déclaré différent : refusé.
     assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml(ligne.verdict, GRILLE_VERDICTS.oui.libelle))}`), ['R9-ENCADRE-CONTENU']);
     assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml('oui'))}`), ['R9-ENCADRE-CONTENU']);
@@ -503,8 +533,8 @@ describe('encadré de décision dans la page construite (R9)', async () => {
   });
   test('l\'écart entre marques est affiché dans sa ligne', () => {
     const avecEcart = { ...ligne, ecart_marques: 'Renault impose l\'arrêt.' };
-    assert.deepEqual(codes(controlerEncadre(p, [avecEcart], html(`<h1>Titre</h1>${bloc}`), 'f'), 'erreur'), ['R9-ENCADRE-CONTENU']);
-    assert.deepEqual(codes(controlerEncadre(p, [avecEcart], html(`<h1>Titre</h1>${encadreHtml(ligneHtml(undefined, undefined, `<p>${avecEcart.ecart_marques}</p>`))}`), 'f'), 'erreur'), []);
+    assert.deepEqual(codes(controlerEncadre(p, [avecEcart], html(`<h1>Titre</h1>${bloc}`), 'f', textesCout), 'erreur'), ['R9-ENCADRE-CONTENU']);
+    assert.deepEqual(codes(controlerEncadre(p, [avecEcart], html(`<h1>Titre</h1>${encadreHtml(ligneHtml(undefined, undefined, `<p>${avecEcart.ecart_marques}</p>`))}`), 'f', textesCout), 'erreur'), []);
   });
   test('rien de masqué dans l\'encadré ni autour : ni bloc à déplier, ni hidden, ni display:none, ni dialog', () => {
     assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(`<details><summary>Voir</summary>${ligneHtml()}</details>`)}`), ['R9-ENCADRE-MASQUE']);
@@ -572,6 +602,7 @@ describe('construction : les liens du texte des pages sont lus et contrôlés', 
     await writeFile(join(racineTest, 'data', 'plan-du-site.json'), JSON.stringify(plan));
     await writeFile(join(racineTest, 'data', 'voyants.json'), JSON.stringify(donnees.voyants));
     await writeFile(join(racineTest, 'data', 'sources.json'), JSON.stringify(donnees.sources));
+    await writeFile(join(racineTest, 'data', 'couts.json'), JSON.stringify(donnees.couts));
     await mkdir(join(racineTest, 'docs'));
     const lignes05 = (plan as { mots_cles: string[]; vague: string }[]).flatMap((l) => l.mots_cles.map((m) => `${m},${l.vague},,`));
     await writeFile(join(racineTest, 'docs', '05_mots_cles_perimetre.csv'), ['mot_cle,vague,variante_proche_de,precision', ...lignes05].join('\r\n'));
@@ -750,5 +781,147 @@ describe('code de sortie', () => {
   test('--echouer-sur ne fait échouer que sur le code demandé', () => {
     assert.equal(codeSortie([alerteImage], 'R5-REVUE-DEPASSEE'), 0);
     assert.equal(codeSortie([alerteRevue], 'R5-REVUE-DEPASSEE'), 1);
+  });
+  test('--echouer-sur accepte plusieurs codes séparés par des virgules (contrôle du lundi)', () => {
+    const aReverifier: Constat = { regle: 'COUT-A-REVERIFIER', gravite: 'alerte', message: 'x' };
+    const codesLundi = 'R5-REVUE-DEPASSEE, COUT-A-REVERIFIER,COUT-FOURCHETTE-A-REVOIR';
+    assert.equal(codeSortie([aReverifier], codesLundi), 1);
+    assert.equal(codeSortie([alerteRevue], codesLundi), 1);
+    assert.equal(codeSortie([alerteImage], codesLundi), 0);
+    assert.equal(codeSortie([aReverifier]), 0);
+  });
+});
+
+// ---- Coût probable (demande de changement n° 6) -----------------------------------------------------------
+describe('coût probable : calcul, données et grille (demande de changement n° 6)', async () => {
+  const pieces = new Map<string, PieceCout>([
+    ['appoint', { id: 'appoint', libelle: 'Appoint', tranche: 'geste' }],
+    ['vidange', { id: 'vidange', libelle: 'Vidange', tranche: 'entretien', fourchette: { valeur: '100-300', sources: ['a', 'b'], releve_le: new Date('2026-10-20') } }],
+    ['bougies', { id: 'bougies', libelle: 'Bougies', tranche: 'entretien' }],
+    ['sonde', { id: 'sonde', libelle: 'Sonde', tranche: 'reparation', fourchette: { valeur: '100-300', sources: ['a', 'b'], releve_le: new Date('2026-10-20') } }],
+    ['catalyseur', { id: 'catalyseur', libelle: 'Catalyseur', tranche: 'organe', fourchette: { valeur: '1000-3000', sources: ['a', 'b'], releve_le: new Date('2026-10-20') } }],
+    ['turbo', { id: 'turbo', libelle: 'Turbo', tranche: 'organe', fourchette: { valeur: '300-1000', sources: ['a', 'b'], releve_le: new Date('2026-10-20') } }],
+  ]);
+  const depannage: TexteDeCout = { id: 'depannage', texte: 'Dépannage réglementé', sources: ['l'], verifie_le: new Date('2026-10-20'), reverifier_apres_jours: 90, automatique: 'verdict-arret' };
+  const amende: TexteDeCout = { id: 'amende', texte: 'Amende de 135 €', sources: ['l'], verifie_le: new Date('2026-10-20'), reverifier_apres_jours: 90 };
+  const couts: DonneesCouts = { pieces, montants: new Map([['depannage', depannage], ['amende', amende]]), prises_en_charge: new Map() };
+
+  test('tranche et fourchette d\'une cause : celles de sa pièce la plus lourde', () => {
+    assert.equal(trancheDesPieces(['appoint', 'sonde'], pieces), 'reparation');
+    assert.equal(trancheDesPieces(['appoint', 'inconnue'], pieces), undefined);
+    assert.equal(trancheDesPieces([], pieces), undefined);
+    assert.equal(fourchetteDesPieces(['appoint', 'sonde'], pieces), '100-300');
+    assert.equal(fourchetteDesPieces(['catalyseur', 'turbo'], pieces), '1000-3000');
+    // Une pièce de la tranche la plus lourde sans fourchette : aucun montant (jamais un montant incomplet).
+    assert.equal(fourchetteDesPieces(['vidange', 'bougies'], pieces), undefined);
+    assert.equal(fourchetteDesPieces(['appoint'], pieces), undefined);
+  });
+
+  test('plage : des causes (chaque cause, sa pièce la plus lourde), ou des pièces d\'une page sans causes ; jamais saisie', () => {
+    const causes = resoudreCout({ outil: false, causes: [{ pieces: ['appoint'] }, { pieces: ['vidange', 'catalyseur'] }], cout: {} }, couts, false);
+    assert.equal(causes.de, 'geste');
+    assert.equal(causes.a, 'organe');
+    assert.equal(libellePlage(causes), `de « ${GRILLE_COUTS.geste.libelle} » à « ${GRILLE_COUTS.organe.libelle} »`);
+    const page = resoudreCout({ outil: false, cout: { pieces: ['appoint', 'vidange'] } }, couts, false);
+    assert.deepEqual([page.de, page.a], ['geste', 'entretien']);
+    const une = resoudreCout({ outil: false, cout: { pieces: ['sonde'] } }, couts, false);
+    assert.equal(libellePlage(une), GRILLE_COUTS.reparation.libelle);
+    const outil = resoudreCout({ outil: true, cout: {} }, couts, true);
+    assert.equal(libellePlage(outil), LIBELLE_SELON_LE_VOYANT);
+    const inconnue = resoudreCout({ outil: false, causes: [{ pieces: ['fantome'] }], cout: {} }, couts, false);
+    assert.deepEqual(inconnue.piecesInconnues, ['fantome']);
+    assert.equal(libellePlage(inconnue), undefined);
+  });
+
+  test('le dépannage s\'ajoute de lui-même sur une page à verdict d\'arrêt, et seulement là', () => {
+    const arret = resoudreCout({ outil: false, cout: { pieces: ['appoint'], montants: ['amende'] } }, couts, true);
+    assert.deepEqual(arret.montants, ['amende', 'depannage']);
+    assert.deepEqual(resoudreCout({ outil: false, cout: { pieces: ['appoint'] } }, couts, false).montants, []);
+    assert.deepEqual(textesAttendusCout(arret, couts), [GRILLE_COUTS.geste.libelle, 'Amende de 135 €', 'Dépannage réglementé']);
+    const risque = resoudreCout({ outil: false, cout: { pieces: ['appoint'], si_vous_continuez: { tranche: 'organe' } } }, couts, false);
+    assert.deepEqual(textesAttendusCout(risque, couts), [GRILLE_COUTS.geste.libelle, 'Si vous continuez de rouler', GRILLE_COUTS.organe.libelle]);
+  });
+
+  test('les tranches sont ordonnées et ont un libellé, une définition, une consigne et des citations', () => {
+    assert.deepEqual([...TRANCHES_COUT], ['aucun', 'geste', 'entretien', 'reparation', 'organe']);
+    for (const tranche of TRANCHES_COUT) {
+      const n = GRILLE_COUTS[tranche];
+      assert.ok(n.libelle !== '' && n.definition !== '' && n.consigne !== '' && n.citations.length > 0, tranche);
+    }
+    assert.equal(new Set(TRANCHES_COUT.map((t) => GRILLE_COUTS[t].libelle)).size, TRANCHES_COUT.length);
+  });
+
+  // Données de coût de test, modifiées une à une.
+  const donnees = await lireJson<DonneesBrutes>(join(fixtures, 'contexte.json'));
+  const coutsTest = donnees.couts as { pieces: Record<string, unknown>[]; montants: Record<string, unknown>[]; prises_en_charge: Record<string, unknown>[] };
+  const avec = (modif: Partial<typeof coutsTest>) => construireContexte({ ...donnees, couts: { ...coutsTest, ...modif } }, AUJOURDHUI);
+  const montantDe = (entree: Record<string, unknown>): Record<string, unknown> => ({ ...entree, validation: empreinteTexteDeCout(entree as never) });
+  const [depannageTest, amendeTest] = coutsTest.montants as [Record<string, unknown>, Record<string, unknown>];
+  const catalyseur = coutsTest.pieces.find((p) => p['id'] === 'fixture-catalyseur') as Record<string, unknown>;
+
+  test('fourchette en euros : sources du registre, d\'éditeurs différents, relevé de moins d\'un an', () => {
+    const remplacer = (fourchette: Record<string, unknown>) => coutsTest.pieces.map((p) => (p === catalyseur ? { ...p, fourchette } : p));
+    const memeEditeur = avec({ pieces: remplacer({ valeur: '1000-3000', sources: ['fixture-forum', 'fixture-onu'], releve_le: '2026-10-20' }) });
+    assert.deepEqual(codes(memeEditeur.constats, 'erreur'), ['COUT-FOURCHETTE-SOURCES']);
+    const inconnue = avec({ pieces: remplacer({ valeur: '1000-3000', sources: ['fixture-forum', 'fixture-introuvable'], releve_le: '2026-10-20' }) });
+    assert.deepEqual(codes(inconnue.constats, 'erreur'), ['COUT-FOURCHETTE-SOURCES', 'R3-SOURCE-INCONNUE']);
+    const uneSource = avec({ pieces: remplacer({ valeur: '1000-3000', sources: ['fixture-forum'], releve_le: '2026-10-20' }) });
+    assert.deepEqual(codes(uneSource.constats, 'erreur'), ['R7-FORMAT']);
+    const ancienne = avec({ pieces: remplacer({ valeur: '1000-3000', sources: ['fixture-forum', 'fixture-comparateur'], releve_le: '2025-10-01' }) });
+    assert.deepEqual(codes(ancienne.constats, 'alerte'), ['COUT-FOURCHETTE-A-REVOIR']);
+    assert.deepEqual(codes(ancienne.constats, 'erreur'), []);
+    const horsListe = avec({ pieces: remplacer({ valeur: '50-150', sources: ['fixture-forum', 'fixture-comparateur'], releve_le: '2026-10-20' }) });
+    assert.deepEqual(codes(horsListe.constats, 'erreur'), ['R7-HORS-LISTE']);
+  });
+
+  test('montant fixé par un texte : source de Légifrance, texte validé (empreinte), revérification datée', () => {
+    const sansLegifrance = montantDe({ ...amendeTest, sources: ['fixture-forum'], validation: undefined });
+    assert.deepEqual(codes(avec({ montants: [depannageTest, sansLegifrance] }).constats, 'erreur'), ['COUT-MONTANT-SOURCE']);
+    const nonValide = { ...amendeTest, validation: undefined };
+    assert.deepEqual(codes(avec({ montants: [depannageTest, nonValide] }).constats, 'alerte'), ['R4-VALIDATION-ABSENTE']);
+    const texteChange = { ...amendeTest, texte: 'Amende forfaitaire de test de 150 €' };
+    assert.deepEqual(codes(avec({ montants: [depannageTest, texteChange] }).constats, 'erreur'), ['R4-EMPREINTE']);
+    // La date de vérification n'entre pas dans l'empreinte ; dépassée, elle donne une alerte, jamais une erreur.
+    const aReverifier = { ...amendeTest, verifie_le: '2026-06-01' };
+    const constats = avec({ montants: [depannageTest, aReverifier] }).constats;
+    assert.deepEqual(codes(constats, 'erreur'), []);
+    assert.deepEqual(codes(constats, 'alerte'), ['COUT-A-REVERIFIER']);
+  });
+
+  test('une page ne peut pas afficher un montant dont le texte n\'est pas validé', async () => {
+    const { contexte } = avec({ montants: [{ ...depannageTest, validation: undefined }, amendeTest] });
+    const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-fluide', 'page.md'), 'utf8'));
+    assert.deepEqual(codes(controlerPage({ type: 'fluide', brut, fichier: 'f' }, contexte).constats, 'erreur'), ['R4-MONTANT-NON-VALIDE']);
+    const pneus = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-pneus', 'page.md'), 'utf8'));
+    assert.deepEqual(codes(controlerPage({ type: 'pneus', brut: pneus, fichier: 'p' }, contexte).constats, 'erreur'), []);
+  });
+
+  test('données réelles : data/couts.json et la grille des coûts passent les contrôles (citations de la base, deux groupes)', async () => {
+    const reelles = await chargerDonnees(racine);
+    const { contexte, constats } = construireContexte(reelles, AUJOURDHUI);
+    assert.deepEqual(constats.filter((c) => c.gravite === 'erreur'), []);
+    assert.ok(contexte.couts.pieces.size > 0);
+    for (const montant of contexte.couts.montants.values()) {
+      assert.ok(montant.sources.some((id) => contexte.sources.get(id)?.categorie === 'legifrance'), montant.id);
+    }
+    assert.deepEqual(controlerGrilleCouts(contexte.voyants, contexte.sources), []);
+  });
+
+  test('grille des coûts : citation introuvable ou ambiguë, moins de deux groupes de constructeurs', async () => {
+    const reelles = await chargerDonnees(racine);
+    const { contexte } = construireContexte(reelles, AUJOURDHUI);
+    const grille = (citations: TrancheGrille['citations']) => ({ ...GRILLE_COUTS, aucun: { ...GRILLE_COUTS.aucun, citations } });
+    const introuvable = grille([{ voyant: 'prechauffage', source: 'notice-renault-clio-5', emplacement: 'p. 999' }]);
+    assert.ok(codes(controlerGrilleCouts(contexte.voyants, contexte.sources, introuvable), 'erreur').includes('COUT-CITATION-INTROUVABLE'));
+    // Deux citations Renault de la ligne adblue-reserve partagent leur emplacement : il faut le début de l'extrait.
+    const ambigue = grille([{ voyant: 'adblue-reserve', source: 'notice-renault-clio-5', emplacement: 'p. 166, « Réservoir réactif », Entretien/Autonomie' }]);
+    assert.ok(codes(controlerGrilleCouts(contexte.voyants, contexte.sources, ambigue), 'erreur').includes('COUT-CITATION-AMBIGUE'));
+    const precise = grille([
+      { voyant: 'adblue-reserve', source: 'notice-renault-clio-5', emplacement: 'p. 166, « Réservoir réactif », Entretien/Autonomie', debut_extrait: '[témoin] s\'allume' },
+      { voyant: 'prechauffage', source: 'notice-seat-ibiza', emplacement: 'p. 289, « Gestion du moteur », Témoins' },
+    ]);
+    assert.deepEqual(controlerGrilleCouts(contexte.voyants, contexte.sources, precise), []);
+    const unGroupe = grille([{ voyant: 'prechauffage', source: 'notice-renault-clio-5', emplacement: 'p. 139, « Témoin de préchauffage (version Diesel) »' }]);
+    assert.deepEqual(codes(controlerGrilleCouts(contexte.voyants, contexte.sources, unGroupe), 'erreur'), ['COUT-GROUPES']);
   });
 });

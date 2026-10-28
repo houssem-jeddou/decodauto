@@ -46,9 +46,9 @@ jobs:
         run: npm run liens
       - name: Non-indexation, double clé (variable + drapeau) dans les quatre combinaisons
         run: npm run verifier:modes
-      - name: Alertes de revue dépassée (contrôle hebdomadaire seulement)
+      - name: Alertes datées (revue dépassée, montant à revérifier, fourchette à revoir), contrôle hebdomadaire seulement
         if: ${{ github.event_name == 'schedule' }}
-        run: node scripts/controle.ts --echouer-sur R5-REVUE-DEPASSEE
+        run: node scripts/controle.ts --echouer-sur R5-REVUE-DEPASSEE,COUT-A-REVERIFIER,COUT-FOURCHETTE-A-REVOIR
       - name: Conserver le site vérifié
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

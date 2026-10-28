@@ -1,5 +1,5 @@
-// Met à jour les parties générées de docs/08_structure_contenus.md (marques de référence, grille des niveaux)
-// depuis src/schemas/listes.ts et src/schemas/grille.ts. Usage : npm run grille:vue (après une demande de
+// Met à jour les parties générées de docs/08_structure_contenus.md (marques de référence, grille des niveaux,
+// échelle du coût probable) depuis src/schemas/listes.ts, src/schemas/grille.ts et src/schemas/cout.ts. Usage : npm run grille:vue (après une demande de
 // changement acceptée sur la grille ou les marques).
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -14,5 +14,5 @@ const apres = insererVueGrille(avant, genererVueGrille());
 if (apres === avant) stdout.write('docs/08 est déjà à jour.\n');
 else {
   await writeFile(chemin, apres);
-  stdout.write('docs/08 mis à jour depuis src/schemas/listes.ts et src/schemas/grille.ts.\n');
+  stdout.write('docs/08 mis à jour depuis src/schemas/listes.ts, src/schemas/grille.ts et src/schemas/cout.ts.\n');
 }
