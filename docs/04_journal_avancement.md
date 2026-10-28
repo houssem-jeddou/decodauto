@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 28/10/2026 (15 h)
+Dernière mise à jour : 28/10/2026 (15 h 30)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -74,7 +74,8 @@ Dernière mise à jour : 28/10/2026 (15 h)
     - `data/couts.json` : 50 pièces, 2 montants ;
     - plage calculée ; contrôles COUT-* ;
     - règle 5 réécrite dans 01, 02, `CLAUDE.md` et 08 (v5).
-  - Reste pour verrouiller 6.1 : CI verte, validation par Houssem du texte des deux montants (empreintes), fusion sur sa demande.
+  - Revue indépendante du code (« à corriger », un point bloquant), corrections intégrées ; CI de la PR #11 verte (« Contrôles »).
+  - Reste pour verrouiller 6.1 : validation par Houssem du texte des deux montants (empreintes), puis fusion sur sa demande.
 - [ ] **6.2 Charte éditoriale écrite**, avec le texte exact de la ligne de transparence et la section méthode de « à propos ».
 - [ ] **6.3 Composants communs** : encadré de décision (R9), gravité lisible sans la seule couleur, lien « Signaler une erreur », ligne de transparence, fil d'Ariane, liens et enfants tirés du plan. Les emplacements publicitaires restent à l'étape 7.
 - [ ] **6.4 Tableau « ce que dit la notice de votre marque »**, généré depuis les citations de la base (pages voyants).
@@ -181,6 +182,17 @@ Dernière mise à jour : 28/10/2026 (15 h)
   - demande l'application sur la branche, avec la pull request et la CI, puis le verrouillage de 6.1 avant le livrable suivant.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 28/10, PR #11 (application de la demande n° 6), une revue du code : « à corriger », un point bloquant.
+  - **Changé** :
+    - l'empreinte de l'encadré porte la plage calculée : reclasser une pièce fait revalider (point bloquant) ;
+    - R9 exige les phrases entières (plage dans son ordre, risque, dates des montants) ;
+    - date d'entrée en vigueur des montants, textes alignés sur la demande acceptée ;
+    - page outil sans dépannage automatique, avec ses pages de test ;
+    - doublons refusés, alerte de date future, catalogue réordonné.
+  - **Écarté ou reporté** :
+    - limiter le risque « si vous continuez » aux tranches lourdes : changement de structure, à proposer à Houssem ;
+    - phrase d'affichage des fourchettes (« souvent de … € ») et « selon la cause » : composants communs (6.3) ;
+    - deux mentions locales de 02 (« Sans prix de prestations », « Ni prix ni centres ») : laissées telles quelles, alignement à décider par Houssem.
 - 28/10, demande de changement n° 6 (coût probable), deux revues (deux relecteurs), le maximum. Chacune « à corriger », rien de bloquant.
   - **Première revue, changé** :
     - le classement d'une cause par une liste de pièces est présenté comme une convention, pas comme un coût sourcé ;
