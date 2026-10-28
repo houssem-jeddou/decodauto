@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 28/10/2026 (11 h)
+Dernière mise à jour : 28/10/2026 (15 h)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,8 +12,8 @@ Dernière mise à jour : 28/10/2026 (11 h)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) | `travaux/etape-6/` |
-| 7 | Socle technique | ▶ Piste technique en parallèle depuis le 28/10 (03, règle 12) : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable : demande de changement n° 6 acceptée (28/10, 13 h 31) et appliquée (PR #11), en attente de la validation des deux montants et de la fusion | `travaux/etape-6/` |
+| 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
 | 10 | Vague B | À faire | – |
@@ -24,8 +24,8 @@ Dernière mise à jour : 28/10/2026 (11 h)
 | Étape | Cible (03) | Prévision au 28/10 | Dépend de |
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
-| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), suite du 29 au 31/10 | statut juridique (mentions légales) |
-| 6. Charte et modèles | 27–29/10 | 28/10–01/11 (aucun travail les 25, 26 et 27/10) | séance de validation des exemples voyant, code et pneus |
+| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause depuis 12 h 10 ; reprise quand Houssem la redemande | statut juridique (mentions légales) |
+| 6. Charte et modèles | 27–29/10 | 28/10–02/11 (aucun travail les 25, 26 et 27/10 ; livrables un par un depuis le 28/10) | décision sur la demande n° 6 ; séance de validation des exemples voyant, code et pneus |
 | 8. Vague A | 29/10–01/11 | 01–05/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
 | 9. Mise en ligne du minimum | 31/10 | 04–06/11 | portes 7 et 8 ; sécurité des comptes |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 12–16/11 / ≈ 19–23/11 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
@@ -36,11 +36,12 @@ Dernière mise à jour : 28/10/2026 (11 h)
 3. ~~paquet de validation de la base voyants et porte 5~~ : faits le 24/10 ;
 4. ~~source des résultats Google et demande de changement n° 4~~ : faites le 28/10 ;
 5. ~~texte de la demande de changement n° 5 et redirections Cloudflare~~ : faits le 28/10 (10 h 25) ;
-6. exemples des modèles voyant, code et pneus, puis porte 6, vers le 01/11 ;
-7. porte 7 ;
-8. demande de changement des requêtes absentes, juste avant l'étape 8 ;
-9. paquet et encadrés de la vague A, et porte 8 ;
-10. go / no-go et porte 9, avec GitHub Pro, les comptes et le domaine sécurisés.
+6. demande de changement n° 6 (coût probable), le 28/10 ;
+7. exemples des modèles voyant, code et pneus, puis porte 6, vers le 02/11 ;
+8. porte 7 ;
+9. demande de changement des requêtes absentes, juste avant l'étape 8 ;
+10. paquet et encadrés de la vague A, et porte 8 ;
+11. go / no-go et porte 9, avec GitHub Pro, les comptes et le domaine sécurisés.
 
 ## Étape 4, Plan du site : livrables
 - [x] **Rattachement des mots-clés** : les 1 053 mots-clés de 05 (921 comptés, 132 variantes) sont rattachés chacun à une seule page. Le plan compte 42 pages (22 en vague A, 11 en B, 9 en C), comme dans 02. Douze cas limites sont tranchés (09).
@@ -65,7 +66,15 @@ Dernière mise à jour : 28/10/2026 (11 h)
 
 ## Étape 6, Charte et modèles de pages : livrables (découpage du 28/10)
 - [x] **6.0 Demande de changement n° 4 de la grille** (D12) : acceptée par Houssem le 28/10 (8 h 27). Seule la définition de l'urgence « À faire tout de suite » change ; les 25 empreintes de la base sont identiques. PR #8 fusionnée le 28/10 sur sa demande (1c2a608).
-- [ ] **6.1 Coût probable** : échelle fermée de tranches, base de calcul sourcée de chaque tranche, sources au registre. Commence par une demande de changement de structure (`src/schemas/pages.ts` prévoit la liste fermée sans l'avoir encore).
+- [ ] **6.1 Coût probable** : échelle fermée de tranches, base de calcul sourcée de chaque tranche, sources au registre.
+  - Recherche des sources faite le 28/10 (`travaux/etape-6/cout-probable/recherche-sources.md`).
+  - Demande de changement n° 6 (`travaux/etape-6/demande-changement-6.md`), après deux revues indépendantes : acceptée par Houssem le 28/10 (13 h 29 et 13 h 31).
+  - Appliquée sur la branche `etape-6/cout-probable`, PR #11 :
+    - échelle de 5 tranches (`src/schemas/cout.ts`) ;
+    - `data/couts.json` : 50 pièces, 2 montants ;
+    - plage calculée ; contrôles COUT-* ;
+    - règle 5 réécrite dans 01, 02, `CLAUDE.md` et 08 (v5).
+  - Reste pour verrouiller 6.1 : CI verte, validation par Houssem du texte des deux montants (empreintes), fusion sur sa demande.
 - [ ] **6.2 Charte éditoriale écrite**, avec le texte exact de la ligne de transparence et la section méthode de « à propos ».
 - [ ] **6.3 Composants communs** : encadré de décision (R9), gravité lisible sans la seule couleur, lien « Signaler une erreur », ligne de transparence, fil d'Ariane, liens et enfants tirés du plan. Les emplacements publicitaires restent à l'étape 7.
 - [ ] **6.4 Tableau « ce que dit la notice de votre marque »**, généré depuis les citations de la base (pages voyants).
@@ -159,8 +168,35 @@ Dernière mise à jour : 28/10/2026 (11 h)
   - **accepte le texte de la demande de changement n° 5** : 03 passe en v6 (projet et `docs/03`) ;
   - **confie à Claude les réglages Cloudflare des redirections**, faits et vérifiés le jour même ;
   - **demande la fusion des PR #8, #9 et #10**.
+- 28/10/2026 (12 h 10), Houssem : **on avance livrable par livrable**. On travaille un livrable, on le verrouille, puis on passe au suivant, en gardant à chaque pas l'objectif global (le plus de visiteurs possible, un site vraiment utile). Premier livrable : le coût probable (recherche des sources, puis demande de changement). La piste technique de l'étape 7 est en pause.
+- 28/10/2026 (13 h 29), Houssem, sur la demande de changement n° 6 (coût probable) :
+  - **décision 2 acceptée** : le tarif réglementé du dépannage sur autoroute est affiché ; exception à la règle 5 pour un montant fixé par un texte officiel. Il accepte de modifier, voire d'abandonner, la règle 5 si c'est nécessaire à l'objectif : une information fiable sur un montant est la bienvenue ;
+  - **décision 3 acceptée** : coût porté par la cause (plage calculée, pièces de chaque cause dans l'empreinte) et liste initiale des pièces ;
+  - **décision 1** : la règle 5 peut changer ; le critère est l'objectif (beaucoup de visiteurs, une information cherchée et fiable). Claude propose en retour un ordre de grandeur en euros par pièce, sourcé ; en attente de son accord ;
+  - **décision 4** (libellés) : il demande la recommandation de Claude.
+- 28/10/2026 (13 h 31), Houssem : **accepte la décision 1** dans la version de Claude :
+  - les 5 tranches, plus un ordre de grandeur en euros par pièce (liste fermée de fourchettes), affiché seulement si au moins deux sources publiques d'éditeurs différents concordent, daté et revu chaque année ;
+  - **règle 5 de 01 réécrite** : « Pas de prix d'une enseigne en particulier ; pas de requêtes d'achat générique comme objectif. Un montant en euros est permis s'il est fixé par un texte officiel, ou comme ordre de grandeur tiré d'au moins deux sources publiques indépendantes, daté et revu chaque année. »
+  - **accepte la décision 4** : libellés gardés, relus sur les exemples (6.6) ;
+  - demande l'application sur la branche, avec la pull request et la CI, puis le verrouillage de 6.1 avant le livrable suivant.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 28/10, demande de changement n° 6 (coût probable), deux revues (deux relecteurs), le maximum. Chacune « à corriger », rien de bloquant.
+  - **Première revue, changé** :
+    - le classement d'une cause par une liste de pièces est présenté comme une convention, pas comme un coût sourcé ;
+    - l'ordre des tranches suit la lourdeur de l'intervention, avec l'avertissement qu'un entretien peut coûter plus qu'une petite réparation ;
+    - l'exception à la règle 5 pour le tarif du dépannage est écrite dans l'impact ;
+    - chiffres corrigés : 7 suggestions sur 213, 565 mots-clés « prix » hors périmètre dans 06, aperçu IA coupé à 700 caractères, SRA non lue ;
+    - « si vous continuez de rouler » ajouté ; citations désignées sans ambiguïté ; contrôles des groupes et des sources des montants ajoutés.
+  - **Seconde revue, changé** :
+    - la tranche d'une cause est calculée depuis la liste des pièces (`data/couts.json`), au lieu d'être saisie ;
+    - les montants vivent dans `data/couts.json` avec leur empreinte validée par Houssem (R4), hors des schémas ;
+    - plus de masquage automatique d'un montant : le site est statique, la date de vérification est affichée et une alerte fait échouer le contrôle du lundi ;
+    - « aucune amende loi montagne » devient un montant daté, revérifié chaque mois ;
+    - 02 ajouté à l'impact de la décision 2 ; dépannage calculé sur les pages à verdict d'arrêt ; page outil « Selon le voyant ».
+  - **Écarté ou reporté** :
+    - amende minorée et majorée : articles non lus, à voir avec la page des pneus (étape 11) ;
+    - recompte à 8 résultats parlant d'argent : la recherche garde 7, avec la liste et le critère de recompte.
 - 28/10, demande de changement n° 4 : une revue, « à corriger », rien de bloquant.
   - **Changé** : la définition suit l'ordre de l'action (gestes en roulant, arrêt ou appoint au premier endroit sûr, garage), au lieu d'opposer deux cas qui se recouvraient ; l'en-tête de la grille cite la demande n° 4.
   - **Retiré** : une consigne de notice ajoutée « à faire en roulant », hors du champ de D12 et lisible trop largement. Le classement correspondant est déjà documenté en D5.
@@ -329,6 +365,12 @@ Dernière mise à jour : 28/10/2026 (11 h)
 - **Recette (étape 9)** : comparer les dix premiers résultats Google des requêtes de pages voisines (recouvrement de sens, non vérifiable par script).
 - **Étape 6** : afficher depuis le plan les liens d'une page (vers les pages construites seulement), le fil d'Ariane et la liste des enfants d'une page mère.
 - **Signature d'intention** : « 5w-30 » et « 5w30 » donnent deux signatures différentes. Aucun cas dans les données aujourd'hui.
+- **Coût probable, points à suivre** (demande n° 6) :
+  - loi montagne : aucune amende à ce jour (D314-8 ; réponse ministérielle du 12/02/2026). Un décret de sanction est annoncé : revérifier au Journal officiel avant la mise en ligne de la page, puis chaque mois ;
+  - amende pour pneus usés (R314-1, 4e classe) : vérifier si elle est comptée par pneu avant de l'afficher ;
+  - défaut de contrôle technique : lire la version de R323-1 en vigueur depuis le 01/01/2026 ;
+  - garantie légale : lire l'article L217-3 en entier (voitures d'occasion) ;
+  - documents de la SRA non lus (accès refusé).
 - **Branches anciennes** du dépôt (`claude/great-fermat-txuonc`, `docs/porte-etape-3`) : peuvent être supprimées.
 
 ## Idées reportées
@@ -341,6 +383,7 @@ Dernière mise à jour : 28/10/2026 (11 h)
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
+- 28/10/2026 (13 h 31), acceptée : **n° 6, coût probable** (`travaux/etape-6/demande-changement-6.md`). Une échelle fermée de 5 tranches qui disent la nature de la dépense (aucun frais, geste, entretien ou équipement, réparation au garage, grosse réparation), sans montant en euros pour les réparations ; la tranche d'une cause calculée depuis une liste de pièces ; « si vous continuez de rouler » ; les montants fixés par un texte (dépannage sur autoroute, aucune amende loi montagne) dans `data/couts.json`. Décisions : ordre de grandeur en euros par pièce (deux sources d'éditeurs différents), règle 5 réécrite (montants fixés par un texte ou ordres de grandeur sourcés), coût porté par la cause, liste des pièces, libellés gardés. Impact : structure v5 (08), 01, 02, `CLAUDE.md` ; aucun sur la base voyants. PR #11.
 - 28/10/2026 (10 h 25), acceptée : **n° 5, modèles panne, fluide et dossier aux étapes 10 et 11** (03 v6, `travaux/etape-6/demande-changement-5.md`). Raison : aucune page de ces types en vague A ; le registre ne couvre que la vague A ; trois encadrés à valider au lieu de six avant la vague A, qui porte 60 % des volumes. Impact : 03, lignes 6, 10 et 11 ; une séance de validation de plus aux étapes 10 et 11 ; aucun critère retiré, un ajouté (tranches de coût couvrant les 42 pages).
 - 28/10/2026, acceptée : **n° 4, grille**, définition de l'urgence « À faire tout de suite » (D12). Avant : « Sans attendre : au premier arrêt possible, ou en allant directement au garage si la conduite est permise. » Après : « Sans attendre, dès que c'est sans danger et dans l'ordre indiqué par l'action : les gestes de conduite en roulant (lever le pied, ralentir, rouler pour nettoyer le filtre à particules) ; l'arrêt, la vérification ou l'appoint au premier endroit sûr ; le passage au garage en y allant directement, si l'action permet de rouler. » Raison : 21 lignes sur 25 en urgence immédiate, dont 2 actions à faire en roulant (FAP, ESP clignotant) que l'ancienne définition contredisait. Impact : aucun sur la base (25 empreintes identiques), ni sur les contrôles. PR #8.
 - 23/10/2026, acceptée : **n° 3 de l'étape 5, structure v4** (08 v4, PR #6).
