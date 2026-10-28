@@ -56,7 +56,10 @@ Les textes de Légifrance ont été lus dans le navigateur ; la relecture indép
     - 3 de la loi montagne (« amende », « 2026 verbalisation », « Quelle amende… ? ») ;
     - 3 d'un prix (AdBlue, bloc ABS, nettoyage du FAP) ;
     - 1 d'un gonflage gratuit.
-  - 7 résultats naturels sur 126 en parlent. 5 annoncent un coût dès leur titre : mister-turbo.com (P0420, P0087, voyant moteur), mister-auto.com (capteur ABS), valuemycar.fr (FAP, « De 80 € … à plus de » dans l'extrait).
+  - 7 résultats naturels sur 126 contiennent « € », « prix », « coût », « tarif », « amende » ou « verbalisation » :
+    - 5 annoncent un coût dès leur titre : mister-turbo.com (P0420, P0087, voyant moteur), mister-auto.com (capteur ABS), valuemycar.fr (FAP, « De 80 € … à plus de » dans l'extrait) ;
+    - icarsoft-france.fr (P0420) parle de « coûts de réparation élevés » dans son extrait ;
+    - ewigo.com titre sur la « verbalisation abandonnée » de la loi montagne.
   - Aperçu IA : aucun montant en euros dans les 700 premiers caractères relevés (le relevé coupe le texte à cette longueur). Un seul classement qualitatif : P0087, filtre à carburant, « la moins coûteuse » des causes.
   - **Conséquence** : des concurrents de la première page affichent des montants. Une échelle sans euros perd ce point face à eux ; elle gagne en fiabilité.
 
