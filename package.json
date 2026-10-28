@@ -19,6 +19,7 @@
     "grille:vue": "node scripts/vue-grille.ts",
     "empreinte": "node scripts/empreinte.ts",
     "verifier:modes": "node scripts/verifier-modes.ts",
+    "production": "node scripts/verifier-production.ts",
     "paquet": "node scripts/paquet-validation.ts --pictogrammes-obligatoires"
   },
   "dependencies": {

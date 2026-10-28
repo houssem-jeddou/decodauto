@@ -8,6 +8,8 @@ on:
   # GitHub ne lance les déclenchements planifiés que depuis la branche par défaut (main).
   schedule:
     - cron: '17 6 * * 1'
+  # Lancement à la demande (onglet Actions) : contrôles et vérification de la production, jamais de déploiement.
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -131,3 +133,22 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  production:
+    name: Production en ligne (redirections, noindex, robots.txt, plan du site)
+    # Sur main (après un déploiement réussi, chaque semaine, à la demande) : un écart fait échouer le run
+    # (notification GitHub). Sur une pull request ou une autre branche, la vérification est informative
+    # (avertissements, job vert) : la production n'a pas encore les changements de la branche et dépend aussi des
+    # réglages Cloudflare, hors du dépôt.
+    needs: deploiement
+    if: ${{ !cancelled() && (needs.deploiement.result == 'success' || github.event_name != 'push') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      # Aucune dépendance : le script n'utilise que Node. Aucun secret.
+      - name: Vérifier la production
+        run: node scripts/verifier-production.ts ${{ (github.event_name == 'pull_request' || github.ref != 'refs/heads/main') && '--information' || '' }}

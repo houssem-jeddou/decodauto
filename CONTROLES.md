@@ -78,6 +78,27 @@ Non vérifiable par machine (liste de recette) : un recouvrement de sens entre d
 | FIXTURE-PUBLIEE | Aucune page de test dans `src/content`, le plan du site ou `dist` |
 | WRANGLER-* | `wrangler.json` : pas de script, `workers_dev` et `preview_urls` à `false`, `not_found_handling` = `404-page`, domaine personnalisé decodauto.com (`custom_domain`) |
 | LIEN-CASSE / LIEN-SANS-BARRE / LIEN-ANCRE | Liens internes (`npm run liens`) |
+| CANONICAL-ABSENT / CANONICAL-MULTIPLE / CANONICAL-ADRESSE | Chaque page construite, sauf la 404, porte une seule balise canonical, égale à sa propre adresse absolue (`https://decodauto.com` + adresse, barre finale comprise). Le gabarit la calcule ; elle n'est jamais saisie |
+| CANONICAL-404 | La page 404 ne porte pas de canonical |
+| SITEMAP-ABSENT / SITEMAP-FORMAT / SITEMAP-PAGE-ABSENTE / SITEMAP-ADRESSE-INCONNUE / SITEMAP-DOUBLON | `sitemap.xml` (généré à la construction par `scripts/integration-plan-du-site.ts`) est bien formé et liste exactement les pages construites, sans la 404, une fois chacune, à leur adresse canonique. Ni `priority` ni `changefreq` (ignorés par Google). Pas encore de `lastmod` : il sera ajouté avec les premières pages éditoriales (étape 8), tiré de `date_modification` (idée reportée du journal) |
+| ROBOTS-SITEMAP | `robots.txt` annonce le plan du site : `Sitemap: https://decodauto.com/sitemap.xml` |
+
+Tests : `tests/canonical.test.ts` (site construit de test), `tests/site.test.ts` (fonctions de `src/lib/site.ts`, robots.txt du dépôt, adresse du site égale à `site` dans `astro.config.mjs`).
+
+## Production en ligne (`npm run production`, job « production » de la CI)
+Sur `main` (après chaque déploiement réussi, chaque lundi, à la demande depuis l'onglet Actions) : un écart fait échouer le run. Sur une pull request ou une autre branche, il est informatif (`--information` : avertissements, job vert) : la production n'a pas encore les changements de la branche et dépend aussi des réglages Cloudflare, hors du dépôt. Une erreur réseau (nom introuvable, délai dépassé) devient un constat décrit, sans interrompre les autres vérifications. Aucun secret. Code : `scripts/lib/production.ts` ; tests : `tests/site.test.ts` (faux réseau).
+
+| Code | Contrôle |
+|---|---|
+| PROD-HTTP / PROD-HTTP-CHEMIN | `http://decodauto.com/` redirige en 301, en une fois, vers `https://decodauto.com/`, chemin et paramètres conservés |
+| PROD-WWW / PROD-WWW-CHEMIN | `https://www.decodauto.com/` redirige en 301 vers `https://decodauto.com/`, chemin et paramètres conservés |
+| PROD-HTTP-WWW | `http://www.decodauto.com/` aboutit à `https://decodauto.com/` (réponse 200) en une ou deux redirections, toutes en 301 |
+| PROD-ACCUEIL | `https://decodauto.com/` répond 200 |
+| PROD-NOINDEX-ABSENT / PROD-NOINDEX-PRESENT | L'en-tête `X-Robots-Tag: noindex` est servi si et seulement si le dépôt n'est pas indexable (même double clé que la construction) |
+| PROD-ROBOTS | `robots.txt` en ligne identique à `public/robots.txt` |
+| PROD-SITEMAP | `sitemap.xml` en ligne répond 200, en XML |
+
+Non vérifiable par machine (liste de recette de l'étape 9) : réglages Cloudflare eux-mêmes (robots d'IA, Bot Fight Mode, Rocket Loader), soumission du plan du site dans Search Console et Bing Webmaster Tools.
 
 ## Brouillon de la base voyants et paquet de validation (étape 5)
 Avant la validation de Houssem, les lignes de la base sont préparées dans `data/voyants.brouillon.json` : la forme d'une ligne de la base sans l'empreinte, plus `sans_consigne`, la liste des notices consultées qui décrivent l'état sans consigne propre (elles ne fixent aucun niveau ; le paquet les montre). `npm run paquet` contrôle le brouillon et génère le paquet de validation (`travaux/etape-5/paquet-validation.md`). Code : `scripts/lib/brouillon.ts` ; tests : `tests/brouillon.test.ts`. Après la validation notée au journal, `node scripts/valider-brouillon.ts --valide-par-houssem AAAA-MM-JJ --empreinte <empreinte du paquet>` vérifie que le brouillon est bien celui du paquet validé (empreinte affichée dans le paquet), écrit les lignes dans `data/voyants.json` avec leur empreinte, enregistre la validation dans `travaux/etape-5/validation.json` et supprime le brouillon.

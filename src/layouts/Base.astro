@@ -4,11 +4,14 @@ import { estIndexable } from '../lib/indexation.ts';
 interface Props {
   titre: string;
   description: string;
-  canonical?: string;
+  /** Seule la page 404 n'a pas de canonical. Toute autre page porte la sienne, calculée depuis son adresse. */
+  sansCanonical?: boolean;
 }
 
-const { titre, description, canonical } = Astro.props;
+const { titre, description, sansCanonical = false } = Astro.props;
 const indexable = estIndexable();
+// Canonical : l'adresse de la page elle-même, absolue (contrôles CANONICAL-*). Jamais saisie à la main.
+const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -19,7 +22,7 @@ const indexable = estIndexable();
     <title>{titre}</title>
     <meta name="description" content={description} />
     {!indexable && <meta name="robots" content="noindex" />}
-    {canonical && <link rel="canonical" href={new URL(canonical, Astro.site).href} />}
+    {canonical && <link rel="canonical" href={canonical} />}
     <link rel="icon" href="data:," />
     <style>
       :root {
