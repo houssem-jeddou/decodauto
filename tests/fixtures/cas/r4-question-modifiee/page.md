@@ -8,10 +8,15 @@ image: /images/fixture.jpg
 image_alt: Image de test
 question_decision: Que veut dire le voyant huile ?
 cout_probable:
-  tranche: à fixer à l'étape 6
   base_de_calcul: Base de calcul de test
   sources:
     - fixture-notice
+  si_vous_continuez:
+    tranche: organe
+    citations:
+      - voyant: fixture-voyant-huile
+        source: fixture-notice
+        emplacement: p. 1, rubrique de test
 sources:
   - fixture-notice
 auteur: fixture-auteur
@@ -27,7 +32,9 @@ element_unique: photo
 causes:
   - cause: Niveau d'huile trop bas
     explication: Le circuit n'est plus assez alimenté.
-validation: e272f7b4bc57d7aa5129e22e5c7cc5ece181c53b7daa382d3663feef792bf4eb
+    pieces:
+      - fixture-appoint-huile
+validation: c19fc8abf64f2fdc80ec7513a6a700f829544be65ff1f54e23f401b90b6ea798
 ---
 
 Page de test (r4-question-modifiee), jamais publiée.

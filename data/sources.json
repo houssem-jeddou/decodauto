@@ -64,5 +64,45 @@
     "categorie": "legifrance",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000042434406",
     "date_consultation": "2026-10-24"
+  },
+  {
+    "id": "arrete-2025-12-08-depannage-autoroute",
+    "titre": "Arrêté du 8 décembre 2025 modifiant l'arrêté du 12 juillet 2016 relatif au tarif de dépannage des véhicules légers sur autoroutes et routes express (tarifs 2026)",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053165360",
+    "date_consultation": "2026-10-28"
+  },
+  {
+    "id": "arrete-2016-07-12-depannage-autoroute",
+    "titre": "Arrêté du 12 juillet 2016 relatif au tarif de dépannage des véhicules légers sur autoroutes et routes express",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000032932990",
+    "date_consultation": "2026-10-28"
+  },
+  {
+    "id": "decret-89-477",
+    "titre": "Décret n° 89-477 du 11 juillet 1989 relatif au tarif de dépannage des véhicules sur les autoroutes et routes express",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000332287",
+    "date_consultation": "2026-10-28"
+  },
+  {
+    "id": "reponse-ministerielle-senat-2026-02-12",
+    "titre": "Réponse du ministre de l'Intérieur à la question écrite n° 06613 sur les sanctions de l'obligation d'équipement hivernal (JO Sénat du 12/02/2026)",
+    "editeur": "Sénat",
+    "categorie": "secondaire",
+    "url": "https://www.senat.fr/questions/base/2025/qSEQ251106613.html",
+    "date_consultation": "2026-10-28"
+  },
+  {
+    "id": "service-public-depannage-autoroute",
+    "titre": "Service-public.fr — Dépannage sur autoroute : quelles sont les règles et les tarifs ? (fiche F11056, vérifiée le 1er janvier 2026)",
+    "editeur": "Direction de l'information légale et administrative (Service-public.fr)",
+    "categorie": "secondaire",
+    "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11056",
+    "date_consultation": "2026-10-28"
   }
 ]

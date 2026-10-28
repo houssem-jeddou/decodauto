@@ -118,6 +118,6 @@ Figé le 22/10/2026 après trois revues indépendantes. Source : base « Perso_C
 
 ## Règles de périmètre appliquées
 - Chaque sujet répond à une alerte (voyant, témoin, code, symptôme ou obligation).
-- Ni prix de prestations ni enseignes ; pas de requêtes d'achat générique comme objectif (on traite « quel liquide, quel niveau, quelle pression »).
+- Pas de prix d'une enseigne en particulier ; pas de requêtes d'achat générique comme objectif (on traite « quel liquide, quel niveau, quelle pression »). Un montant en euros est permis s'il est fixé par un texte officiel (arrêté, code, sourcé sur Légifrance), ou comme ordre de grandeur tiré d'au moins deux sources publiques indépendantes, daté et revu chaque année (règle du 28/10/2026, demande de changement n° 6). Les mots-clés « prix » restent hors du périmètre.
 - Pas de page par modèle sans donnée constructeur sourcée ; pas de page « voyant par modèle ».
 - Une intention de recherche = une seule page (pas de cannibalisation).

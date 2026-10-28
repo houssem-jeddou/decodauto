@@ -10,7 +10,10 @@ import type { Urgence, Verdict } from '../schemas/listes.ts';
 //  - Page éditoriale : l'encadré de décision, c'est-à-dire la question de décision, les lignes de situation (une
 //    ligne reprise de la base y figure par l'identifiant du voyant et ce que l'encadré en affiche : situation,
 //    verdict, urgence, action, écart ; changer l'un d'eux oblige à relire l'encadré, corriger une citation non ;
-//    une ligne saisie y figure en entier, voyant lié compris) et le coût probable.
+//    une ligne saisie y figure en entier, voyant lié compris) et le coût probable : pièces des causes (ou de la
+//    page), risque si l'on continue, montants et prises en charge par leur identifiant, base de calcul et sources
+//    (demande de changement n° 6). Le texte d'un montant a sa propre empreinte (empreinteTexteDeCout) : le mettre à
+//    jour fait valider l'entrée une fois, pas chaque encadré.
 // ---------------------------------------------------------------------------------------------
 
 /**
@@ -91,11 +94,44 @@ export interface LigneAffichee {
   ecart_marques?: string | undefined;
 }
 
-/** Encadré de décision d'une page, tel que validé. */
+/** Citation du risque si l'on continue : référence à la base voyants, ou citation saisie. */
+export type CitationDeRisque =
+  | { voyant: string; source: string; emplacement: string; debut_extrait?: string | undefined }
+  | CitationValidee;
+
+/** Coût probable d'une page, tel que validé (la plage se calcule ; les montants sont des identifiants). */
+export interface CoutValide {
+  pieces?: readonly string[] | undefined;
+  base_de_calcul: string;
+  sources: readonly string[];
+  si_vous_continuez?: { tranche: string; citations: readonly CitationDeRisque[] } | undefined;
+  montants?: readonly string[] | undefined;
+  prise_en_charge?: readonly string[] | undefined;
+}
+
+/** Encadré de décision d'une page, tel que validé ; les causes y comptent par leurs pièces (tranche du coût). */
 export interface EncadreValide {
   question_decision: string;
   situations: readonly LigneDePage[];
-  cout_probable: { tranche: string; base_de_calcul: string; sources: readonly string[] };
+  cout_probable: CoutValide;
+  causes?: readonly { cause: string; pieces: readonly string[] }[] | undefined;
+}
+
+/** Montant fixé par un texte, ou prise en charge, tel que validé : identifiant, texte, date d'entrée en vigueur,
+ * sources, affichage automatique. La date de vérification n'y entre pas. */
+export interface TexteDeCoutValide {
+  id: string;
+  texte: string;
+  sources: readonly string[];
+  en_vigueur_le?: Date | string | undefined;
+  automatique?: string | undefined;
+}
+
+/** Plage calculée du coût probable (identifiants des tranches), telle que l'encadré l'affiche. */
+export interface PlageValidee {
+  selonLeVoyant: boolean;
+  de?: string | undefined;
+  a?: string | undefined;
 }
 
 const facultatif = (texte: string | undefined): string | null => (texte === undefined ? null : normaliserTexte(texte));
@@ -111,6 +147,19 @@ function citationsCanoniques(citations: readonly CitationValidee[]): string[] {
         verdict: c.verdict ?? null,
         urgence: c.urgence ?? null,
       }),
+    )
+    .sort();
+}
+
+const trie = (ids: readonly string[] | undefined): string[] | null => (ids === undefined ? null : [...ids].sort());
+
+/** Citations du risque en forme canonique, triées. */
+function citationsDeRisqueCanoniques(citations: readonly CitationDeRisque[]): string[] {
+  return citations
+    .map((c) =>
+      'voyant' in c
+        ? JSON.stringify({ voyant: c.voyant, source: c.source, emplacement: normaliserTexte(c.emplacement), debut_extrait: facultatif(c.debut_extrait) })
+        : JSON.stringify({ source: c.source, emplacement: normaliserTexte(c.emplacement), extrait: normaliserTexte(c.extrait), verdict: c.verdict ?? null, urgence: c.urgence ?? null }),
     )
     .sort();
 }
@@ -150,8 +199,9 @@ const affichage = (l: LigneAffichee | undefined): unknown =>
 /**
  * Empreinte de l'encadré de décision d'une page. L'ordre des lignes de situation compte (ordre d'affichage).
  * `base` : identifiant de chaque voyant de la base → sa ligne (seuls les champs affichés par l'encadré comptent).
+ * `plage` : la plage du coût calculée depuis les pièces (src/lib/cout.ts, plageValidee).
  */
-export function empreintePage(encadre: EncadreValide, base: ReadonlyMap<string, LigneAffichee>): string {
+export function empreintePage(encadre: EncadreValide, base: ReadonlyMap<string, LigneAffichee>, plage: PlageValidee): string {
   return hacher({
     question_decision: normaliserTexte(encadre.question_decision),
     situations: encadre.situations.map((l) =>
@@ -167,10 +217,33 @@ export function empreintePage(encadre: EncadreValide, base: ReadonlyMap<string, 
             citations: citationsCanoniques(l.citations ?? []),
           },
     ),
+    // Plage calculée : reclasser une pièce dans data/couts.json change ce que l'encadré affiche, donc l'empreinte.
+    plage: { selon_le_voyant: plage.selonLeVoyant, de: plage.de ?? null, a: plage.a ?? null },
     cout_probable: {
-      tranche: normaliserTexte(encadre.cout_probable.tranche),
+      pieces: trie(encadre.cout_probable.pieces),
       base_de_calcul: normaliserTexte(encadre.cout_probable.base_de_calcul),
       sources: [...encadre.cout_probable.sources].sort(),
+      si_vous_continuez:
+        encadre.cout_probable.si_vous_continuez === undefined
+          ? null
+          : { tranche: encadre.cout_probable.si_vous_continuez.tranche, citations: citationsDeRisqueCanoniques(encadre.cout_probable.si_vous_continuez.citations) },
+      montants: trie(encadre.cout_probable.montants),
+      prise_en_charge: trie(encadre.cout_probable.prise_en_charge),
     },
+    // L'ordre des causes compte (ordre d'affichage du tableau) ; l'ordre des pièces d'une cause, non.
+    // (Une cause sans pièces, refusée par le schéma, garde une empreinte calculable pour les pages de test.)
+    causes: (encadre.causes ?? []).map((c) => ({ cause: normaliserTexte(c.cause), pieces: Array.isArray(c.pieces) ? [...c.pieces].sort() : null })),
+  });
+}
+
+/** Empreinte d'un montant fixé par un texte, ou d'une prise en charge (data/couts.json) ; les dates n'y entrent pas. */
+export function empreinteTexteDeCout(entree: TexteDeCoutValide): string {
+  const enVigueur = entree.en_vigueur_le === undefined ? null : entree.en_vigueur_le instanceof Date ? entree.en_vigueur_le.toISOString().slice(0, 10) : String(entree.en_vigueur_le);
+  return hacher({
+    id: entree.id,
+    texte: normaliserTexte(entree.texte),
+    en_vigueur_le: enVigueur,
+    sources: [...entree.sources].sort(),
+    automatique: entree.automatique ?? null,
   });
 }

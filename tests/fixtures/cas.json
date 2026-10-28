@@ -453,5 +453,138 @@
     ],
     "alertes": [],
     "explication": "Les lignes de l'encadré sont repliées dans un bloc à déplier : la décision doit être visible sans clic."
+  },
+  {
+    "nom": "cout-piece-inconnue",
+    "type": "panne",
+    "erreurs": [
+      "COUT-PIECE-INCONNUE"
+    ],
+    "alertes": [],
+    "explication": "Une cause cite une pièce absente de data/couts.json."
+  },
+  {
+    "nom": "cout-pieces-double",
+    "type": "panne",
+    "erreurs": [
+      "COUT-PIECES-DOUBLE"
+    ],
+    "alertes": [],
+    "explication": "Une page à causes déclare aussi des pièces : la plage se calcule sur les causes."
+  },
+  {
+    "nom": "cout-pieces-absentes",
+    "type": "fluide",
+    "erreurs": [
+      "COUT-PIECES-ABSENTES"
+    ],
+    "alertes": [],
+    "explication": "Une page sans causes ne déclare pas ses pièces : sa plage ne peut pas se calculer."
+  },
+  {
+    "nom": "cout-cause-sans-piece",
+    "type": "panne",
+    "erreurs": [
+      "R7-CHAMP-MANQUANT"
+    ],
+    "alertes": [],
+    "explication": "Une cause sans pièce : sa tranche ne peut pas se calculer."
+  },
+  {
+    "nom": "cout-montant-inconnu",
+    "type": "pneus",
+    "erreurs": [
+      "COUT-MONTANT-INCONNU"
+    ],
+    "alertes": [],
+    "explication": "Montant absent de data/couts.json."
+  },
+  {
+    "nom": "cout-montant-automatique",
+    "type": "pneus",
+    "erreurs": [
+      "COUT-MONTANT-AUTOMATIQUE"
+    ],
+    "alertes": [],
+    "explication": "Le dépannage s'affiche de lui-même sur les pages à verdict d'arrêt : il ne se déclare pas."
+  },
+  {
+    "nom": "cout-prise-en-charge-inconnue",
+    "type": "dossier",
+    "erreurs": [
+      "COUT-PRISE-EN-CHARGE-INCONNUE"
+    ],
+    "alertes": [],
+    "explication": "Prise en charge absente de data/couts.json."
+  },
+  {
+    "nom": "cout-prise-en-charge-hors-plage",
+    "type": "fluide",
+    "erreurs": [
+      "COUT-PRISE-EN-CHARGE"
+    ],
+    "alertes": [],
+    "explication": "Une prise en charge sur une page dont la plage ne va pas jusqu'à la réparation au garage."
+  },
+  {
+    "nom": "cout-risque-plus-leger",
+    "type": "panne",
+    "erreurs": [
+      "COUT-RISQUE"
+    ],
+    "alertes": [],
+    "explication": "Le risque si l'on continue est plus léger que le début de la plage."
+  },
+  {
+    "nom": "cout-risque-sans-premiere-main",
+    "type": "voyant",
+    "erreurs": [
+      "COUT-RISQUE-SOURCE"
+    ],
+    "alertes": [],
+    "explication": "Le risque si l'on continue n'est cité que d'une source secondaire."
+  },
+  {
+    "nom": "cout-citation-introuvable",
+    "type": "voyant",
+    "erreurs": [
+      "COUT-CITATION-INTROUVABLE"
+    ],
+    "alertes": [],
+    "explication": "La citation référencée n'existe pas dans la base voyants."
+  },
+  {
+    "nom": "r9-encadre-sans-cout",
+    "type": "panne",
+    "erreurs": [
+      "R9-ENCADRE-CONTENU"
+    ],
+    "alertes": [],
+    "explication": "L'encadré n'affiche pas le coût probable (plage, montant automatique)."
+  },
+  {
+    "nom": "r4-pieces-modifiees",
+    "type": "panne",
+    "erreurs": [
+      "R4-EMPREINTE"
+    ],
+    "alertes": [],
+    "explication": "Les pièces d'une cause ont changé après validation, même sans changer la plage : l'encadré est à revalider."
+  },
+  {
+    "nom": "valide-outil",
+    "type": "voyant",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Page outil des voyants : « Selon le voyant » dans l'encadré, sans pièces ni montant automatique."
+  },
+  {
+    "nom": "cout-pieces-outil",
+    "type": "voyant",
+    "erreurs": [
+      "COUT-PIECES-DOUBLE"
+    ],
+    "alertes": [],
+    "explication": "La page outil n'a pas de plage propre : elle ne déclare pas de pièces."
   }
 ]

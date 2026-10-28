@@ -1,9 +1,10 @@
-# Structure des contenus — decodauto.com (v4)
+# Structure des contenus — decodauto.com (v5)
 
 Validée par Houssem le 22/10/2026, après trois revues indépendantes. Étape 3, livrable « Structure des contenus ».
 v2 (23/10/2026, accord de Houssem) : ajout du champ facultatif `voyant_lie` dans une ligne de situation saisie (voir le champ situations et la règle 2).
 v3 (23/10/2026, demande de changement n° 1 de l'étape 4, acceptée par Houssem) : les liens entre pages passent dans le plan du site ; les pages ne déclarent plus de liens (voir le champ liens et la section 4).
 v4 (demande de changement n° 3, début de l'étape 5) : citations précises et niveau tiré de chaque notice, plusieurs marques par verdict, grille des niveaux de verdict et d'urgence, encadré de décision contrôlé et verrouillé, pictogrammes, libellé court, texte alternatif de l'image, profil de l'auteur, couleur « orange ou jaune », champ `relecteur` retiré (sections 1, 2, 3, 5 et 6).
+v5 (demande de changement n° 6, étape 6, acceptée par Houssem le 28/10/2026) : échelle du coût probable, pièces des causes, montants fixés par un texte, fourchettes en euros (sections 1, 2, 3 et 7).
 
 **Archivé le 23/10/2026 (décision de Houssem, porte de l'étape 3)** : la transposition en schémas est validée. Ce sont désormais **les schémas du dépôt (`src/schemas/`, contrôles dans `src/lib/controle.ts`) qui font foi** ; ce fichier reste la référence lisible. Toute modification de structure passe par une demande de changement (03) et met à jour les schémas, puis ce fichier.
 
@@ -22,7 +23,7 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 | question_decision | ✅ | saisi | Exemple : « Puis-je rouler avec le voyant d'huile allumé ? ». « Sans objet » est interdit hors socle. |
 | situations | ✅ | saisi, ou repris de la base | Liste de {situation, verdict, urgence, **action**, citations}, avec en option `voyant_lie` (identifiant d'un voyant déclaré dans `voyants`) quand la ligne saisie concerne ce voyant, et `ecart_marques` (v4). Chaque citation donne la source du registre, la page ou la section, l'extrait cité mot pour mot (400 caractères au plus) et, pour une notice constructeur, le niveau (verdict, urgence) que la grille tire de sa consigne (section 6). Voir les règles 1, 2, 3 et 8 ci-dessous. |
 | voyants | si la page traite un ou plusieurs voyants | saisi | Liste d'identifiants de la base voyants. Utilisable dans **tous** les types de page. |
-| cout_probable | ✅ | saisi | Échelle fermée en ordres de grandeur, avec une base de calcul et des sources du registre. Aucun prix d'enseigne, aucun prix de prestation (règle 5 de 01). Les tranches, et le niveau où le coût est porté (situation ou cause), seront fixés à l'étape 6. |
+| cout_probable | ✅ | saisi, plage **calculée** | v5. Échelle fermée de 5 tranches qui disent la nature de la dépense (section 7). La plage n'est jamais saisie : elle se calcule depuis les pièces des causes (voyant, code défaut, panne) ou, sur une page sans causes, depuis `pieces` (identifiants de `data/couts.json`) ; la page outil affiche « Selon le voyant ». Champs : `pieces` (page sans causes seulement), `base_de_calcul`, `sources` (registre), `si_vous_continuez` (facultatif : tranche du risque si l'on continue de rouler, cité d'une notice, par référence à la base voyants ou en citation), `montants` et `prise_en_charge` (facultatifs, identifiants de `data/couts.json`). Le dépannage sur autoroute s'affiche de lui-même sur une page dont le niveau de sécurité est un verdict d'arrêt (pas sur la page outil). Montants en euros (règle 5 de 01, v. 28/10/2026) : fixés par un texte officiel, ou ordre de grandeur par pièce tiré d'au moins deux sources publiques d'éditeurs différents, daté et revu chaque année ; jamais le prix d'une enseigne en particulier. |
 | sources | ✅ | saisi | Identifiants du registre des sources (étape 5). Jamais de source recopiée dans la page. |
 | element_unique | ✅ | saisi | Arbre de décision, tableau, outil ou photo réelle. Sa présence est vérifiée **dans la page construite**. |
 | liens | — | **calculé** depuis le plan du site | Champ supprimé des pages en v3. Les liens viennent du plan du site (section 4). |
@@ -31,7 +32,7 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 | date_publication, date_modification, date_revue, prochaine_revue | ✅ | saisies ou calculées | date_modification = dernière modification réelle, distincte de la revue. Piste à tester : la tirer de l'historique Git. |
 | adresse, theme | ✅ | **calculés** depuis le plan du site | Jamais saisis. |
 | niveau_securite | ✅ | **calculé** | Reprend la situation la plus grave de la page. |
-| validation | ✅ | saisi après la validation de Houssem | v4. Empreinte de l'**encadré de décision** : question de décision, lignes de situation (une ligne reprise de la base par l'identifiant du voyant et ce que l'encadré en affiche : situation, verdict, urgence, action, écart, de sorte que les changer oblige à relire l'encadré ; une ligne saisie en entier) et coût probable. Exigée sur toute page éditoriale. Les lignes de la base voyants portent leur propre empreinte (section 5). |
+| validation | ✅ | saisi après la validation de Houssem | v4. Empreinte de l'**encadré de décision** : question de décision, lignes de situation (une ligne reprise de la base par l'identifiant du voyant et ce que l'encadré en affiche : situation, verdict, urgence, action, écart, de sorte que les changer oblige à relire l'encadré ; une ligne saisie en entier) et coût probable (v5 : plage calculée, par les identifiants de ses tranches ; pièces de chaque cause ou de la page ; risque, montants et prises en charge par leur identifiant ; base de calcul et sources ; reclasser une pièce fait donc revalider). Exigée sur toute page éditoriale. Les lignes de la base voyants portent leur propre empreinte (section 5), comme le texte de chaque montant de `data/couts.json` (section 7). |
 
 **Listes fermées**
 - verdict, du moins grave au plus grave : `oui` / `oui avec précautions` / `non, arrêt dès que possible` / `non, arrêt immédiat`.
@@ -50,6 +51,8 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 | Dossier | PureTech | journal des modifications ; revue trimestrielle |
 | Socle | accueil, mentions légales, à propos (avec la fiche auteur) | format simple : titre, libellé court (facultatif), adresse, date de mise à jour. Pas d'encadré de décision. Fiche auteur : identifiant, nom, présentation, et en option les liens publics de son profil (`profils`, v4, données structurées). |
 
+**Causes (v5)** : chaque cause porte `cause`, `explication` et `pieces` (identifiants de `data/couts.json`) ; sa tranche de coût est celle de sa pièce la plus lourde.
+
 **Format « tutoriel »**, possible dans tous les types (changer et recharger la batterie, nettoyer le FAP, vérifier le niveau d'huile) :
 - champs : outils, durée, difficulté, quand ne pas le faire soi-même ;
 - les étapes s'écrivent dans le texte, en liste numérotée ;
@@ -64,8 +67,9 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 6. **Causes.** Elles sont présentées dans un ordre logique, jamais classées « par fréquence » sans donnée sourcée.
 7. **Champs obligatoires.** Un champ obligatoire manquant, une valeur hors liste fermée ou un élément unique absent de la page construite bloquent la construction.
 8. **Grille (v4).** Le couple verdict / urgence de chaque ligne et de chaque citation est admis par la grille (section 6).
-9. **Encadré de décision (v4).** La page construite contient un seul encadré de décision (`data-encadre-decision`), premier bloc après le H1 (rien entre les deux : la signature, la date et la ligne de transparence viennent après l'encadré ; le fil d'Ariane peut précéder le H1), sans emplacement publicitaire avant lui ni dedans, et sans rien de masqué, ni dedans ni autour (une icône décorative sans texte peut porter `aria-hidden`). Il affiche la question de décision et la tranche du coût probable, puis une ligne par situation (`data-encadre-ligne`, avec `data-verdict` et `data-urgence`, dans l'ordre des situations) : la situation, le libellé de son verdict et de son urgence (grille), son action et, s'il existe, l'écart entre marques. Houssem le relit avant publication ; son empreinte le verrouille (champ validation). Liste de recette (étape 12) : les annonces automatiques AdSense, insérées dans le navigateur, ne se placent pas avant l'encadré.
+9. **Encadré de décision (v4).** La page construite contient un seul encadré de décision (`data-encadre-decision`), premier bloc après le H1 (rien entre les deux : la signature, la date et la ligne de transparence viennent après l'encadré ; le fil d'Ariane peut précéder le H1), sans emplacement publicitaire avant lui ni dedans, et sans rien de masqué, ni dedans ni autour (une icône décorative sans texte peut porter `aria-hidden`). Il affiche la question de décision et le coût probable (v5, chaque phrase en entier : la plage « de « X » à « Y » » dans son ordre, ou « Selon le voyant » sur la page outil ; le risque « Si vous continuez de rouler : risque de « … » » ; le texte de chaque montant avec ses dates, « en vigueur depuis le … » et « vérifié le … » ; le texte de chaque prise en charge), puis une ligne par situation (`data-encadre-ligne`, avec `data-verdict` et `data-urgence`, dans l'ordre des situations) : la situation, le libellé de son verdict et de son urgence (grille), son action et, s'il existe, l'écart entre marques. Houssem le relit avant publication ; son empreinte le verrouille (champ validation). Liste de recette (étape 12) : les annonces automatiques AdSense, insérées dans le navigateur, ne se placent pas avant l'encadré.
 10. **Pictogrammes (v4).** Chaque ligne de la base voyants a son pictogramme, un fichier SVG autonome de `src/pictogrammes`, redessiné par nos soins (recette : jamais copié).
+11. **Coût probable (v5).** La plage se calcule (pièces des causes, ou pièces d'une page sans causes) et n'est jamais saisie ; chaque pièce, montant et prise en charge existe dans `data/couts.json` ; le dépannage automatique ne se déclare pas ; le risque si l'on continue n'est pas plus léger que le début de la plage et cite une source de première main ; une prise en charge ne s'affiche que si la plage va au moins jusqu'à « Réparation au garage » ; un montant affiché a son texte validé par Houssem. Une fourchette en euros cite au moins deux sources d'éditeurs différents. Les citations de la grille désignent chacune une seule citation de la base voyants, et chaque tranche s'appuie sur au moins deux groupes de constructeurs.
 
 ## 4. Plan du site et liens entre pages (v3)
 Le plan du site (`data/plan-du-site.json`) est la référence du maillage. Une ligne = une page : id, type, thème, vague, adresse, requête principale, mots-clés, et en option :
@@ -130,3 +134,36 @@ Principes :
 | sous quelques semaines | À prévoir dans les semaines qui viennent | À faire lors d'un prochain passage au garage, dans les semaines qui viennent. | La notice renvoie à un entretien à prévoir, sans échéance dépassée : « lors de la prochaine révision », « au prochain entretien ». |
 | aucune | Aucune action nécessaire | Il n'y a rien à faire contrôler ni à réparer. | La notice décrit un fonctionnement normal ou une simple information. |
 <!-- vue-grille:grille:fin -->
+
+## 7. Coût probable (v5)
+Demande de changement n° 6 (étape 6), acceptée par Houssem le 28/10/2026. La structure fait foi dans `src/schemas/cout.ts` (la partie ci-dessous en est générée par `npm run grille:vue`) ; les données font foi dans `data/couts.json` :
+- `pieces` : liste fermée des pièces et opérations, avec leur tranche et, en option, une fourchette en euros (deux sources d'éditeurs différents, date de relevé). Une pièce manquante s'ajoute dans la pull request du lot qui en a besoin et se valide avec lui ;
+- `montants` : montants fixés par un texte officiel (au moins une source de Légifrance), avec leur date d'entrée en vigueur (`en_vigueur_le`, si elle existe), leur date de vérification et leur délai de revérification ; texte validé par Houssem (empreinte, contrôle R4 : texte, date d'entrée en vigueur, sources, affichage automatique) ; `automatique` pour le dépannage sur autoroute ;
+- `prises_en_charge` : même forme que les montants (garantie légale, à créer avec sa première page).
+
+Contrôles : COUT-* (pièces, montants, prises en charge, risque, fourchettes, citations de la grille, groupes de constructeurs), R4 pour les montants, R9 pour l'affichage ; alertes datées COUT-A-REVERIFIER et COUT-FOURCHETTE-A-REVOIR, qui font échouer le contrôle du lundi (catalogue : `CONTROLES.md`).
+
+<!-- vue-grille:couts:debut (généré par npm run grille:vue : ne pas modifier à la main) -->
+Principes :
+1. La tranche dit la nature de la dépense. Les tranches sont classées par lourdeur habituelle de l'intervention : c'est une convention, pas un montant.
+2. Une cause cite des pièces ou des opérations de la liste fermée (data/couts.json) ; sa tranche est celle de sa pièce la plus lourde. La plage de la page va de la cause la plus légère à la plus lourde ; une page sans causes déclare ses pièces. Rien n'est saisi à la main.
+3. Une pièce absente de la liste s'ajoute dans la pull request du lot qui en a besoin et se valide avec lui ; en cas de doute, la tranche la plus lourde plausible.
+4. Une fourchette en euros (pièce et main-d'œuvre) n'est affichée que si au moins 2 sources publiques d'éditeurs différents placent le prix habituel dans la même fourchette ; jamais le tarif d'une seule enseigne. Elle est datée et revue au moins tous les 365 jours.
+5. Un montant fixé par un texte officiel (amende, tarif réglementé) est cité avec sa source sur Légifrance, daté et revérifié à intervalle fixe ; son texte est validé par Houssem (empreinte).
+
+| Tranche (de la plus légère à la plus lourde) | Libellé affiché | Définition affichée au lecteur | Consigne de notice qui y mène | Citations de la base voyants (voyant : source, emplacement) |
+|---|---|---|---|---|
+| aucun | Aucun frais | Fonctionnement normal ou simple information : rien à réparer. | La notice décrit un fonctionnement normal. | prechauffage : notice-renault-clio-5, p. 139, « Témoin de préchauffage (version Diesel) » ; prechauffage : notice-seat-ibiza, p. 289, « Gestion du moteur », Témoins ; frein-stationnement : notice-seat-ibiza, p. 251, « Système de freinage », Témoins ; frein-stationnement : notice-toyota-yaris, p. 118, 4.2.5 « Frein de stationnement » |
+| geste | Geste à faire vous-même | Regonfler, faire un appoint, rouler pour régénérer le filtre à particules : gratuit, ou le prix d'un produit (huile, AdBlue). | La notice demande une action au conducteur. | huile-niveau : notice-seat-ibiza, p. 294, « Huile moteur », Témoin d'alerte ; huile-niveau : notice-toyota-yaris, p. 299, 7.2.5 « Si un message d'avertissement est affiché » ; adblue-reserve : notice-peugeot-208, p. 15, « AdBlue (BlueHDi) » ; fap : notice-seat-ibiza, p. 288-290, « Filtre à particules » |
+| entretien | Entretien ou équipement courant | Une révision, une pièce d'usure ou un équipement prévu. Peut coûter plus qu'une petite réparation. | La notice renvoie à une révision ou à l'entretien périodique. | entretien-vidange : notice-peugeot-208, p. 19-20, « Indicateur d'entretien », Clé d'entretien ; entretien-vidange : notice-renault-clio-5, p. 122, « Ordinateur de bord », Autonomie de révision ; témoin Service p. 136 ; entretien-vidange : notice-toyota-yaris, p. 300, 7.2.5 « Si un message d'avertissement est affiché » |
+| reparation | Réparation au garage | Une pièce défaillante à diagnostiquer puis à réparer ou remplacer, hors organe principal. | La notice demande de faire vérifier ou réparer par un atelier. | abs : notice-peugeot-208, p. 17, « Antiblocage des roues (ABS) » ; renvoi (3) p. 13 ; abs : notice-renault-clio-5, p. 138, « Témoin antiblocage des roues » ; abs : notice-toyota-yaris, p. 293, 7.2.4 « Si un voyant s'allume », Voyant ABS |
+| organe | Grosse réparation | Le remplacement ou la remise en état d'un organe ou d'un système lourd. | La notice annonce un dégât grave sur un organe si l'on continue. | moteur-orange-clignotant : notice-peugeot-208, p. 15, « Système d'autodiagnostic moteur » ; renvoi (2) p. 13 ; moteur-orange-clignotant : notice-seat-ibiza, p. 288, « Gestion du moteur et système d'épuration des gaz d'échappement », Témoins ; moteur-rouge : notice-renault-clio-5, p. 125, « Messages d'alerte » (et p. 187 et 189) |
+
+| Fourchette en euros (pièce et main-d'œuvre) | Texte affiché |
+|---|---|
+| moins-de-100 | moins de 100 € |
+| 100-300 | de 100 à 300 € |
+| 300-1000 | de 300 à 1 000 € |
+| 1000-3000 | de 1 000 à 3 000 € |
+| plus-de-3000 | plus de 3 000 € |
+<!-- vue-grille:couts:fin -->

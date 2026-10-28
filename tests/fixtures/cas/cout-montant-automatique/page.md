@@ -1,0 +1,45 @@
+---
+id: fixture-pneus
+title: Pression des pneus (page de test)
+h1: Quelle est la bonne pression des pneus ?
+description: Page de test des contrôles, jamais publiée.
+libelle_court: Pression des pneus
+image: /images/fixture.jpg
+image_alt: Image de test
+question_decision: Puis-je rouler avec des pneus sous-gonflés ?
+cout_probable:
+  base_de_calcul: Base de calcul de test
+  sources:
+    - fixture-notice
+  pieces:
+    - fixture-regonflage
+  montants:
+    - fixture-depannage
+sources:
+  - fixture-notice
+auteur: fixture-auteur
+date_publication: 2026-10-01
+date_modification: 2026-10-20
+date_revue: 2026-10-20
+prochaine_revue: 2027-01-20
+situations:
+  - situation: Pneus sous-gonflés
+    verdict: oui avec précautions
+    urgence: sous quelques jours
+    action: Corriger la pression à la prochaine station.
+    citations:
+      - source: fixture-notice
+        emplacement: p. 1, rubrique de test
+        extrait: Consigne de test de la source fixture-notice.
+        verdict: oui avec précautions
+        urgence: sous quelques jours
+element_unique: tableau
+sujet: pression
+texte_reference:
+  nature: legifrance
+  reference: Référence de test
+  source: fixture-legifrance
+validation: 77c37971dffb994948b09d7f1f5ebddd082cf39aaa9655e115a14aa5294f7e31
+---
+
+Page de test (cout-montant-automatique), jamais publiée.

@@ -8,7 +8,6 @@ image: /images/fixture.jpg
 image_alt: Image de test
 question_decision: Puis-je rouler avec le code P0420 ?
 cout_probable:
-  tranche: à fixer à l'étape 6
   base_de_calcul: Base de calcul de test
   sources:
     - fixture-notice
@@ -43,7 +42,13 @@ carburant: essence et diesel
 causes:
   - cause: Catalyseur usé
     explication: Le catalyseur ne traite plus correctement les gaz.
-validation: f531db2fa3c6b25aaf5a4e52c5b58cfb538b03ed8a570e9959774b6b4bbb7799
+    pieces:
+      - fixture-catalyseur
+  - cause: Sonde défaillante
+    explication: La sonde mesure mal les gaz.
+    pieces:
+      - fixture-sonde
+validation: a8ba51ffd62f34832301c6f5c2e7e59cf9497fbf64e829af651906e9b83ef88e
 ---
 
 Page de test (r2-code-sans-voyant), jamais publiée.

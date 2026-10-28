@@ -73,6 +73,17 @@
       "vague": "A",
       "adresse": "/fixture-a-propos/",
       "mots_cles": []
+    },
+    {
+      "id": "fixture-outil",
+      "type": "voyant",
+      "theme": "alertes-et-codes",
+      "vague": "A",
+      "adresse": "/fixture-outil/",
+      "requete_principale": "voyant orange",
+      "mots_cles": [
+        "voyant orange"
+      ]
     }
   ],
   "voyants": [
@@ -221,6 +232,14 @@
       "categorie": "secondaire",
       "url": "https://exemple.test/source",
       "date_consultation": "2026-10-01"
+    },
+    {
+      "id": "fixture-comparateur",
+      "titre": "Source de test fixture-comparateur",
+      "editeur": "Comparateur de test",
+      "categorie": "secondaire",
+      "url": "https://exemple.test/source",
+      "date_consultation": "2026-10-01"
     }
   ],
   "auteurs": [
@@ -235,5 +254,88 @@
       "id": "fixture-huile",
       "contenu": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" role=\"img\"><title>Huile</title><circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>\n"
     }
-  ]
+  ],
+  "couts": {
+    "pieces": [
+      {
+        "id": "fixture-recharge-batterie",
+        "libelle": "Pièce de test fixture-recharge-batterie",
+        "tranche": "geste"
+      },
+      {
+        "id": "fixture-appoint-huile",
+        "libelle": "Pièce de test fixture-appoint-huile",
+        "tranche": "geste"
+      },
+      {
+        "id": "fixture-regonflage",
+        "libelle": "Pièce de test fixture-regonflage",
+        "tranche": "geste"
+      },
+      {
+        "id": "fixture-vidange",
+        "libelle": "Pièce de test fixture-vidange",
+        "tranche": "entretien"
+      },
+      {
+        "id": "fixture-demarreur",
+        "libelle": "Pièce de test fixture-demarreur",
+        "tranche": "reparation"
+      },
+      {
+        "id": "fixture-sonde",
+        "libelle": "Pièce de test fixture-sonde",
+        "tranche": "reparation"
+      },
+      {
+        "id": "fixture-catalyseur",
+        "libelle": "Pièce de test fixture-catalyseur",
+        "tranche": "organe",
+        "fourchette": {
+          "valeur": "1000-3000",
+          "sources": [
+            "fixture-forum",
+            "fixture-comparateur"
+          ],
+          "releve_le": "2026-10-20"
+        }
+      }
+    ],
+    "montants": [
+      {
+        "id": "fixture-depannage",
+        "texte": "Dépannage de test au tarif réglementé de test",
+        "sources": [
+          "fixture-legifrance"
+        ],
+        "verifie_le": "2026-10-20",
+        "reverifier_apres_jours": 90,
+        "automatique": "verdict-arret",
+        "en_vigueur_le": "2026-01-01",
+        "validation": "30adec8e24e9180eaae1118cd8d66b3b71abc5b89a5ac04bf83e2b332b7205e1"
+      },
+      {
+        "id": "fixture-amende",
+        "texte": "Amende forfaitaire de test de 135 €",
+        "sources": [
+          "fixture-legifrance"
+        ],
+        "verifie_le": "2026-10-20",
+        "reverifier_apres_jours": 90,
+        "validation": "0f2c8a9aa6036fa5a0ab59189fd47219b8d9b24a64476edb7ef6ac52c0e1e9ed"
+      }
+    ],
+    "prises_en_charge": [
+      {
+        "id": "fixture-garantie",
+        "texte": "Prise en charge de test par la garantie légale",
+        "sources": [
+          "fixture-legifrance"
+        ],
+        "verifie_le": "2026-10-20",
+        "reverifier_apres_jours": 365,
+        "validation": "60aa930da5b72cbeeb11f4be082dc4a667044fd8bc3d4d6025f62c105a29f8bd"
+      }
+    ]
+  }
 }

@@ -44,13 +44,14 @@ export async function chargerPictogrammes(racine: string): Promise<FichierPictog
 }
 
 export async function chargerDonnees(racine: string): Promise<DonneesBrutes> {
-  const [plan, voyants, sources, pictogrammes] = await Promise.all([
+  const [plan, voyants, sources, pictogrammes, couts] = await Promise.all([
     lireJson(join(racine, 'data/plan-du-site.json')),
     lireJson(join(racine, 'data/voyants.json')),
     lireJson(join(racine, 'data/sources.json')),
     chargerPictogrammes(racine),
+    readFile(join(racine, 'data/couts.json'), 'utf8').then((texte) => JSON.parse(texte) as unknown),
   ]);
-  return { plan, voyants, sources, pictogrammes };
+  return { plan, voyants, sources, pictogrammes, couts };
 }
 
 export interface FichierPage {

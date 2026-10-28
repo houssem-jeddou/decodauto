@@ -1,0 +1,283 @@
+{
+  "pieces": [
+    {
+      "id": "fonctionnement-normal",
+      "libelle": "Fonctionnement normal",
+      "tranche": "aucun"
+    },
+    {
+      "id": "information",
+      "libelle": "Simple information",
+      "tranche": "aucun"
+    },
+    {
+      "id": "frein-de-stationnement-serre",
+      "libelle": "Frein de stationnement serré",
+      "tranche": "aucun"
+    },
+    {
+      "id": "systeme-desactive",
+      "libelle": "Système désactivé par le conducteur",
+      "tranche": "aucun"
+    },
+    {
+      "id": "appoint-huile",
+      "libelle": "Appoint d'huile moteur",
+      "tranche": "geste"
+    },
+    {
+      "id": "appoint-adblue",
+      "libelle": "Appoint d'AdBlue",
+      "tranche": "geste"
+    },
+    {
+      "id": "appoint-liquide-de-refroidissement",
+      "libelle": "Appoint de liquide de refroidissement",
+      "tranche": "geste"
+    },
+    {
+      "id": "appoint-lave-glace",
+      "libelle": "Appoint de lave-glace",
+      "tranche": "geste"
+    },
+    {
+      "id": "regonflage",
+      "libelle": "Regonflage des pneus",
+      "tranche": "geste"
+    },
+    {
+      "id": "regeneration-fap",
+      "libelle": "Régénération du filtre à particules en roulant",
+      "tranche": "geste"
+    },
+    {
+      "id": "recharge-batterie",
+      "libelle": "Recharge de la batterie",
+      "tranche": "geste"
+    },
+    {
+      "id": "revision",
+      "libelle": "Révision",
+      "tranche": "entretien"
+    },
+    {
+      "id": "vidange",
+      "libelle": "Vidange",
+      "tranche": "entretien"
+    },
+    {
+      "id": "filtre-a-air",
+      "libelle": "Filtre à air",
+      "tranche": "entretien"
+    },
+    {
+      "id": "filtre-a-huile",
+      "libelle": "Filtre à huile",
+      "tranche": "entretien"
+    },
+    {
+      "id": "filtre-a-carburant",
+      "libelle": "Filtre à carburant",
+      "tranche": "entretien"
+    },
+    {
+      "id": "filtre-d-habitacle",
+      "libelle": "Filtre d'habitacle",
+      "tranche": "entretien"
+    },
+    {
+      "id": "bougies-d-allumage",
+      "libelle": "Bougies d'allumage",
+      "tranche": "entretien"
+    },
+    {
+      "id": "bougies-de-prechauffage",
+      "libelle": "Bougies de préchauffage",
+      "tranche": "entretien"
+    },
+    {
+      "id": "plaquettes-et-disques",
+      "libelle": "Plaquettes et disques de frein",
+      "tranche": "entretien"
+    },
+    {
+      "id": "batterie",
+      "libelle": "Batterie à remplacer",
+      "tranche": "entretien"
+    },
+    {
+      "id": "liquide-de-frein",
+      "libelle": "Remplacement du liquide de frein",
+      "tranche": "entretien"
+    },
+    {
+      "id": "pneus",
+      "libelle": "Pneus à remplacer",
+      "tranche": "entretien"
+    },
+    {
+      "id": "balais-d-essuie-glace",
+      "libelle": "Balais d'essuie-glace",
+      "tranche": "entretien"
+    },
+    {
+      "id": "courroie-de-distribution-a-l-echeance",
+      "libelle": "Courroie de distribution remplacée à l'échéance du plan d'entretien",
+      "tranche": "entretien"
+    },
+    {
+      "id": "chaines-ou-chaussettes",
+      "libelle": "Chaînes ou chaussettes à neige",
+      "tranche": "entretien"
+    },
+    {
+      "id": "pneus-hiver",
+      "libelle": "Pneus hiver",
+      "tranche": "entretien"
+    },
+    {
+      "id": "capteur-ou-sonde",
+      "libelle": "Capteur ou sonde",
+      "tranche": "reparation"
+    },
+    {
+      "id": "sonde-lambda",
+      "libelle": "Sonde lambda",
+      "tranche": "reparation"
+    },
+    {
+      "id": "capteur-abs",
+      "libelle": "Capteur ABS",
+      "tranche": "reparation"
+    },
+    {
+      "id": "capteur-de-pression-des-pneus",
+      "libelle": "Capteur de pression des pneus",
+      "tranche": "reparation"
+    },
+    {
+      "id": "calculateur",
+      "libelle": "Calculateur",
+      "tranche": "reparation"
+    },
+    {
+      "id": "faisceau-et-connecteurs",
+      "libelle": "Faisceau et connecteurs",
+      "tranche": "reparation"
+    },
+    {
+      "id": "alternateur",
+      "libelle": "Alternateur",
+      "tranche": "reparation"
+    },
+    {
+      "id": "demarreur",
+      "libelle": "Démarreur",
+      "tranche": "reparation"
+    },
+    {
+      "id": "durites-et-colliers",
+      "libelle": "Durites et colliers",
+      "tranche": "reparation"
+    },
+    {
+      "id": "vanne-egr",
+      "libelle": "Vanne EGR",
+      "tranche": "reparation"
+    },
+    {
+      "id": "boitier-de-prechauffage",
+      "libelle": "Boîtier de préchauffage",
+      "tranche": "reparation"
+    },
+    {
+      "id": "module-d-airbag",
+      "libelle": "Module d'airbag",
+      "tranche": "reparation"
+    },
+    {
+      "id": "catalyseur",
+      "libelle": "Catalyseur",
+      "tranche": "organe"
+    },
+    {
+      "id": "filtre-a-particules",
+      "libelle": "Filtre à particules à remplacer",
+      "tranche": "organe"
+    },
+    {
+      "id": "systeme-adblue",
+      "libelle": "Système AdBlue (réservoir, pompe, injecteur)",
+      "tranche": "organe"
+    },
+    {
+      "id": "turbo",
+      "libelle": "Turbo",
+      "tranche": "organe"
+    },
+    {
+      "id": "pompe-haute-pression",
+      "libelle": "Pompe haute pression d'injection",
+      "tranche": "organe"
+    },
+    {
+      "id": "injecteurs",
+      "libelle": "Injecteurs",
+      "tranche": "organe"
+    },
+    {
+      "id": "embrayage",
+      "libelle": "Embrayage",
+      "tranche": "organe"
+    },
+    {
+      "id": "distribution-cassee-ou-usee",
+      "libelle": "Distribution cassée ou usée avant l'échéance",
+      "tranche": "organe"
+    },
+    {
+      "id": "direction-assistee",
+      "libelle": "Direction assistée (crémaillère, moteur d'assistance)",
+      "tranche": "organe"
+    },
+    {
+      "id": "moteur",
+      "libelle": "Moteur",
+      "tranche": "organe"
+    },
+    {
+      "id": "boite-de-vitesses",
+      "libelle": "Boîte de vitesses",
+      "tranche": "organe"
+    }
+  ],
+  "montants": [
+    {
+      "id": "depannage-autoroute",
+      "texte": "Dépannage sur autoroute ou route express : forfait réglementé de 151 € à 280,08 € TTC selon l'heure et le poids, fournitures en plus",
+      "sources": [
+        "arrete-2025-12-08-depannage-autoroute",
+        "arrete-2016-07-12-depannage-autoroute",
+        "decret-89-477",
+        "service-public-depannage-autoroute"
+      ],
+      "en_vigueur_le": "2026-01-01",
+      "verifie_le": "2026-10-28",
+      "reverifier_apres_jours": 90,
+      "automatique": "verdict-arret",
+      "validation": "13d09e3ecb22dbf47bc6e8d033e6189e9dccebe85dc3ce21d6f879bfa8206f03"
+    },
+    {
+      "id": "aucune-amende-loi-montagne",
+      "texte": "Aucune amende n'est prévue à ce jour pour défaut d'équipement",
+      "sources": [
+        "code-de-la-route-d314-8",
+        "reponse-ministerielle-senat-2026-02-12"
+      ],
+      "verifie_le": "2026-10-28",
+      "reverifier_apres_jours": 30,
+      "validation": "7ff3f6ac58e0efca69614c485c58a6586c5851d0c88768d1cf59b3a366e1c316"
+    }
+  ],
+  "prises_en_charge": []
+}
