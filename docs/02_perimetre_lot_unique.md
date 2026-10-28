@@ -60,7 +60,7 @@ Figé le 22/10/2026 après trois revues indépendantes. Source : base « Perso_C
 
 ### Huile et vidange
 - Thème : 3. Niveaux et fluides · Vague C (vers le 14/11/2026)
-- Pages prévues : Page organe (quand faire la vidange, essence ou diesel) + 3 pages viscosité (5W30, 5W40, 10W40) + « vérifier le niveau d'huile ». Sans prix d'enseigne (coût en ordre de grandeur selon la règle 5 de 01)
+- Pages prévues : Page organe (quand faire la vidange, essence ou diesel) + 3 pages viscosité (5W30, 5W40, 10W40) + « vérifier le niveau d'huile ». Sans prix de prestations
 - Mots-clés (comptés) : 59 · Volume indicatif : 95 432 / mois · dont requêtes ≥ 10 000 : 0
 - Requêtes phares : huile moteur vidange (1k–10k), 20w50 huile (1k–10k), 15w40 huile (1k–10k), 10w40 huile moteur (1k–10k), huile sae 30 (1k–10k), 10w40 huile (1k–10k)
 
@@ -96,7 +96,7 @@ Figé le 22/10/2026 après trois revues indépendantes. Source : base « Perso_C
 
 ### Contrôle technique : défaillances et contre-visite
 - Thème : 4. Pneus et obligations · Vague C (vers le 14/11/2026)
-- Pages prévues : 1 page : traduire les défaillances du procès-verbal (mineures, majeures, critiques) et la contre-visite (délais, démarche). Ni prix d'un centre ni liste de centres
+- Pages prévues : 1 page : traduire les défaillances du procès-verbal (mineures, majeures, critiques) et la contre-visite (délais, démarche). Ni prix ni centres
 - Mots-clés (comptés) : 29 · Volume indicatif : 14 852 / mois · dont requêtes ≥ 10 000 : 0
 - Requêtes phares : contre visite controle technique (1k–10k), contre visite (1k–10k), contre visite ct (100–1k), contre visite voiture (100–1k), delais contre visite (100–1k), point controle technique voiture (100–1k)
 

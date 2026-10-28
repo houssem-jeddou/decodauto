@@ -39,7 +39,7 @@ texte_reference:
   nature: legifrance
   reference: Référence de test
   source: fixture-legifrance
-validation: 060e06315bdfa6448795e892480411bcd094a5dd244a4b19848ac93d8cb08bfb
+validation: 77c37971dffb994948b09d7f1f5ebddd082cf39aaa9655e115a14aa5294f7e31
 ---
 
 Page de test (cout-montant-automatique), jamais publiée.

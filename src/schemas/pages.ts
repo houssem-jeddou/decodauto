@@ -74,6 +74,14 @@ export const ligneSituationSchema = z
   });
 export type LigneSituation = z.infer<typeof ligneSituationSchema>;
 
+/** Liste d'identifiants, au moins un, sans doublon. */
+const identifiantsSansDoublon = z
+  .array(identifiant)
+  .min(1)
+  .superRefine((ids, ctx) => {
+    if (new Set(ids).size !== ids.length) ctx.addIssue({ code: 'custom', message: 'identifiant en double', params: { regle: 'R7-DOUBLON' } });
+  });
+
 /** Référence à une citation de la base voyants (voyant, source, emplacement ; début de l'extrait si ambigu). */
 const referenceCitationSchema = z.strictObject({
   voyant: identifiant,
@@ -90,7 +98,7 @@ const referenceCitationSchema = z.strictObject({
  *  - `montants`, `prise_en_charge` : identifiants de data/couts.json ; le dépannage sur autoroute est automatique.
  */
 const coutProbableSchema = z.strictObject({
-  pieces: z.array(identifiant).min(1).optional(),
+  pieces: identifiantsSansDoublon.optional(),
   base_de_calcul: texte,
   sources: z.array(identifiant).min(1),
   si_vous_continuez: z
@@ -99,8 +107,8 @@ const coutProbableSchema = z.strictObject({
       citations: z.array(z.union([referenceCitationSchema, citationSchema])).min(1),
     })
     .optional(),
-  montants: z.array(identifiant).min(1).optional(),
-  prise_en_charge: z.array(identifiant).min(1).optional(),
+  montants: identifiantsSansDoublon.optional(),
+  prise_en_charge: identifiantsSansDoublon.optional(),
 });
 
 const tutorielSchema = z.strictObject({
@@ -111,7 +119,7 @@ const tutorielSchema = z.strictObject({
 });
 
 /** Causes : chaque cause cite ses pièces ou opérations (data/couts.json) ; sa tranche de coût en est calculée. */
-const causesSchema = z.array(z.strictObject({ cause: texte, explication: texte, pieces: z.array(identifiant).min(1) })).min(1);
+const causesSchema = z.array(z.strictObject({ cause: texte, explication: texte, pieces: identifiantsSansDoublon })).min(1);
 
 const libelleCourt = texte.max(LIBELLE_COURT_MAX, `le libellé court fait au plus ${LIBELLE_COURT_MAX} caractères`);
 

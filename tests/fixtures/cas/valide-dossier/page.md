@@ -38,7 +38,7 @@ element_unique: tableau
 journal_modifications:
   - date: 2026-10-20
     resume: Création du dossier de test.
-validation: 979b00cc0ab778202e9a7d74f33c22cf5be7bc2367aa7dd65292e8270513bfef
+validation: c002274fbff507a627ff4617447335bc648a3c540ed659d638704c4f7311857e
 ---
 
 Page de test (valide-dossier), jamais publiée.

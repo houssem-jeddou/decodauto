@@ -44,7 +44,7 @@ causes:
     explication: Une batterie faible ne fournit pas assez de courant.
     pieces:
       - fixture-piece-fantome
-validation: bb7d5d74cdbbd1ed31488c80cb18b374e168a336456ec5bc006df5c64b0c988c
+validation: 2067c9e4ad3c34dd75bc82e29f40851c2513f0758c5ad8cc542920a04accf3c6
 ---
 
 Page de test (cout-piece-inconnue), jamais publiée.

@@ -20,7 +20,7 @@ import {
   type PageControlee,
 } from '../src/lib/controle.ts';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte, type EncadreValide, type VoyantValide } from '../src/lib/empreinte.ts';
-import { fourchetteDesPieces, libellePlage, resoudreCout, textesAttendusCout, trancheDesPieces, type DonneesCouts, type PieceCout, type TexteDeCout } from '../src/lib/cout.ts';
+import { fourchetteDesPieces, libellePlage, libelleRisque, plageValidee, resoudreCout, textesAttendusCout, trancheDesPieces, type DonneesCouts, type PieceCout, type TexteDeCout } from '../src/lib/cout.ts';
 import { GRILLE_COUTS, LIBELLE_SELON_LE_VOYANT, TRANCHES_COUT, type TrancheGrille } from '../src/schemas/cout.ts';
 import { chargerDonnees } from '../scripts/lib/charger.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS, URGENCES_ADMISES, urgenceAdmise } from '../src/schemas/grille.ts';
@@ -184,7 +184,8 @@ describe('empreinte de validation (R4)', () => {
     };
     const huile = { ...voyant, id: 'huile' };
     const empreintes = new Map([['huile', huile]]);
-    const base = empreintePage(encadre, empreintes);
+    const plage = { selonLeVoyant: false, de: 'geste', a: 'organe' };
+    const base = empreintePage(encadre, empreintes, plage);
     // Coquilles et ordre des sources, des montants et des pièces d'une cause : sans effet.
     assert.equal(
       base,
@@ -196,14 +197,18 @@ describe('empreinte de validation (R4)', () => {
           causes: [{ cause: 'niveau d huile trop bas', pieces: ['appoint-huile'] }, { cause: 'Pompe à huile défaillante', pieces: ['pompe', 'moteur'] }],
         },
         empreintes,
+        plage,
       ),
     );
+    // La plage calculée compte : reclasser une pièce dans data/couts.json fait revalider l'encadré.
+    assert.notEqual(base, empreintePage(encadre, empreintes, { ...plage, a: 'reparation' }));
+    assert.notEqual(base, empreintePage(encadre, empreintes, { selonLeVoyant: true }));
     // Ce que l'encadré affiche d'une ligne de la base (situation, verdict, urgence, action, écart) est verrouillé ;
     // corriger une citation de cette ligne, non.
     for (const modif of [{ situation: 'Autre situation' }, { verdict: 'non, arrêt dès que possible' as const }, { urgence: 'sous quelques jours' as const }, { action: 'Autre action.' }, { ecart_marques: 'Écart.' }]) {
-      assert.notEqual(base, empreintePage(encadre, new Map([['huile', { ...huile, ...modif }]])), JSON.stringify(modif));
+      assert.notEqual(base, empreintePage(encadre, new Map([['huile', { ...huile, ...modif }]]), plage), JSON.stringify(modif));
     }
-    assert.equal(base, empreintePage(encadre, new Map([['huile', { ...huile, citations: [{ ...citations[0], emplacement: 'p. 2.14' }] }]])));
+    assert.equal(base, empreintePage(encadre, new Map([['huile', { ...huile, citations: [{ ...citations[0], emplacement: 'p. 2.14' }] }]]), plage));
     const [ligneBase, ligneSaisie] = encadre.situations;
     assert.ok(ligneBase && ligneSaisie);
     const variantes: Partial<EncadreValide>[] = [
@@ -223,7 +228,7 @@ describe('empreinte de validation (R4)', () => {
       { causes: [{ cause: 'Pompe à huile défaillante', pieces: ['moteur', 'pompe'] }, { cause: 'Niveau d\'huile trop bas', pieces: ['appoint-huile'] }] },
       { causes: undefined },
     ];
-    for (const variante of variantes) assert.notEqual(base, empreintePage({ ...encadre, ...variante }, empreintes), JSON.stringify(variante));
+    for (const variante of variantes) assert.notEqual(base, empreintePage({ ...encadre, ...variante }, empreintes, plage), JSON.stringify(variante));
   });
 });
 
@@ -386,7 +391,8 @@ describe('base voyants (R3, R4, R8, pictogrammes) et rattachement (R1)', async (
       l['voyant'] !== undefined ? l : { ...l, verdict: 'oui avec précautions', urgence: 'sous quelques semaines', citations: [citer('fixture-securite-routiere', 'oui avec précautions', 'sous quelques semaines')] },
     );
     const page = { ...brut, situations };
-    const { constats } = controlerPage({ type: 'panne', brut: { ...page, validation: empreintePage(page as never, contexte.voyants) }, fichier: 'f' }, contexte);
+    const plage = plageValidee(resoudreCout({ outil: false, causes: brut['causes'] as never, cout: brut['cout_probable'] as never }, contexte.couts, false));
+    const { constats } = controlerPage({ type: 'panne', brut: { ...page, validation: empreintePage(page as never, contexte.voyants, plage) }, fichier: 'f' }, contexte);
     assert.deepEqual(codes(constats, 'erreur'), ['R2-MOINS-GRAVE']);
   });
 
@@ -495,7 +501,7 @@ describe('encadré de décision dans la page construite (R9)', async () => {
   const ligneHtml = (verdict: string = ligne.verdict, libelle: string = GRILLE_VERDICTS[ligne.verdict].libelle, extra = '') =>
     `<div data-encadre-ligne data-verdict="${verdict}" data-urgence="${ligne.urgence}"><p>${ligne.situation}</p><p>${libelle}, ${GRILLE_URGENCES[ligne.urgence].libelle}.</p><p>${ligne.action}</p>${extra}</div>`;
   // Coût de la page de test « fluide » : appoint d'huile ou vidange (demande de changement n° 6).
-  const textesCout = [GRILLE_COUTS.geste.libelle, GRILLE_COUTS.entretien.libelle];
+  const textesCout = [`de « ${GRILLE_COUTS.geste.libelle} » à « ${GRILLE_COUTS.entretien.libelle} »`];
   const coutHtml = `<p>Coût probable : de « ${GRILLE_COUTS.geste.libelle} » à « ${GRILLE_COUTS.entretien.libelle} »</p>`;
   const encadreHtml = (lignesHtml: string, attributs = '') => `<section data-encadre-decision${attributs}><p>${p.question_decision}</p>${lignesHtml}${coutHtml}</section>`;
   const bloc = encadreHtml(ligneHtml());
@@ -519,11 +525,14 @@ describe('encadré de décision dans la page construite (R9)', async () => {
     assert.deepEqual(erreurs(`<h1>Titre</h1><ins class="adsbygoogle" data-ad-slot="1"></ins>${bloc}`), ['R9-ENCADRE-POSITION', 'R9-PUB-AVANT-ENCADRE']);
     assert.deepEqual(erreurs(`<h1>Titre</h1>${bloc}<div data-emplacement-pub></div>`), []);
   });
-  test('il affiche la question, la tranche de coût et, ligne par ligne, la situation, les libellés du verdict et de l\'urgence et l\'action', () => {
+  test('il affiche la question, le coût probable et, ligne par ligne, la situation, les libellés du verdict et de l\'urgence et l\'action', () => {
     const incomplet = bloc.replace(GRILLE_URGENCES[ligne.urgence].libelle, '');
     assert.deepEqual(erreurs(`<h1>Titre</h1>${incomplet}`), ['R9-ENCADRE-CONTENU']);
     assert.deepEqual(erreurs(`<h1>Titre</h1>${bloc.replace(`« ${GRILLE_COUTS.entretien.libelle} »`, '')}`), ['R9-ENCADRE-CONTENU']);
     assert.deepEqual(erreurs(`<h1>Titre</h1>${bloc.replace(coutHtml, '')}`), ['R9-ENCADRE-CONTENU']);
+    // La plage s'affiche dans son ordre : inversée, elle est refusée.
+    const inversee = bloc.replace(coutHtml, `<p>Coût probable : de « ${GRILLE_COUTS.entretien.libelle} » à « ${GRILLE_COUTS.geste.libelle} »</p>`);
+    assert.deepEqual(erreurs(`<h1>Titre</h1>${inversee}`), ['R9-ENCADRE-CONTENU']);
     // Libellé d'un autre niveau, ou niveau déclaré différent : refusé.
     assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml(ligne.verdict, GRILLE_VERDICTS.oui.libelle))}`), ['R9-ENCADRE-CONTENU']);
     assert.deepEqual(erreurs(`<h1>Titre</h1>${encadreHtml(ligneHtml('oui'))}`), ['R9-ENCADRE-CONTENU']);
@@ -837,9 +846,13 @@ describe('coût probable : calcul, données et grille (demande de changement n°
     const arret = resoudreCout({ outil: false, cout: { pieces: ['appoint'], montants: ['amende'] } }, couts, true);
     assert.deepEqual(arret.montants, ['amende', 'depannage']);
     assert.deepEqual(resoudreCout({ outil: false, cout: { pieces: ['appoint'] } }, couts, false).montants, []);
-    assert.deepEqual(textesAttendusCout(arret, couts), [GRILLE_COUTS.geste.libelle, 'Amende de 135 €', 'Dépannage réglementé']);
+    assert.deepEqual(textesAttendusCout(arret, couts), [GRILLE_COUTS.geste.libelle, 'Amende de 135 €', 'vérifié le 20/10/2026', 'Dépannage réglementé']);
     const risque = resoudreCout({ outil: false, cout: { pieces: ['appoint'], si_vous_continuez: { tranche: 'organe' } } }, couts, false);
-    assert.deepEqual(textesAttendusCout(risque, couts), [GRILLE_COUTS.geste.libelle, 'Si vous continuez de rouler', GRILLE_COUTS.organe.libelle]);
+    assert.deepEqual(textesAttendusCout(risque, couts), [GRILLE_COUTS.geste.libelle, libelleRisque('organe')]);
+    // La page outil (« Selon le voyant ») ne reçoit pas le dépannage automatique.
+    assert.deepEqual(resoudreCout({ outil: true, cout: {} }, couts, true).montants, []);
+    const enVigueur = { ...couts, montants: new Map([['depannage', { ...depannage, en_vigueur_le: new Date('2026-01-01') }]]) };
+    assert.deepEqual(textesAttendusCout(resoudreCout({ outil: false, cout: { pieces: ['sonde'] } }, enVigueur, true), enVigueur), [GRILLE_COUTS.reparation.libelle, 'Dépannage réglementé', 'en vigueur depuis le 01/01/2026', 'vérifié le 20/10/2026']);
   });
 
   test('les tranches sont ordonnées et ont un libellé, une définition, une consigne et des citations', () => {
@@ -878,9 +891,13 @@ describe('coût probable : calcul, données et grille (demande de changement n°
     const sansLegifrance = montantDe({ ...amendeTest, sources: ['fixture-forum'], validation: undefined });
     assert.deepEqual(codes(avec({ montants: [depannageTest, sansLegifrance] }).constats, 'erreur'), ['COUT-MONTANT-SOURCE']);
     const nonValide = { ...amendeTest, validation: undefined };
-    assert.deepEqual(codes(avec({ montants: [depannageTest, nonValide] }).constats, 'alerte'), ['R4-VALIDATION-ABSENTE']);
+    assert.deepEqual(codes(avec({ montants: [depannageTest, nonValide] }).constats, 'alerte'), ['R4-MONTANT-VALIDATION-ABSENTE']);
     const texteChange = { ...amendeTest, texte: 'Amende forfaitaire de test de 150 €' };
-    assert.deepEqual(codes(avec({ montants: [depannageTest, texteChange] }).constats, 'erreur'), ['R4-EMPREINTE']);
+    assert.deepEqual(codes(avec({ montants: [depannageTest, texteChange] }).constats, 'erreur'), ['R4-MONTANT-EMPREINTE']);
+    const enVigueurChangee = { ...depannageTest, en_vigueur_le: '2027-01-01' };
+    assert.deepEqual(codes(avec({ montants: [enVigueurChangee, amendeTest] }).constats, 'erreur'), ['R4-MONTANT-EMPREINTE']);
+    const futur = { ...amendeTest, verifie_le: '2027-06-01' };
+    assert.deepEqual(codes(avec({ montants: [depannageTest, futur] }).constats, 'alerte'), ['COUT-DATE-FUTURE']);
     // La date de vérification n'entre pas dans l'empreinte ; dépassée, elle donne une alerte, jamais une erreur.
     const aReverifier = { ...amendeTest, verifie_le: '2026-06-01' };
     const constats = avec({ montants: [depannageTest, aReverifier] }).constats;
@@ -894,6 +911,21 @@ describe('coût probable : calcul, données et grille (demande de changement n°
     assert.deepEqual(codes(controlerPage({ type: 'fluide', brut, fichier: 'f' }, contexte).constats, 'erreur'), ['R4-MONTANT-NON-VALIDE']);
     const pneus = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-pneus', 'page.md'), 'utf8'));
     assert.deepEqual(codes(controlerPage({ type: 'pneus', brut: pneus, fichier: 'p' }, contexte).constats, 'erreur'), []);
+  });
+
+  test('une pièce reclassée dans data/couts.json fait revalider les encadrés qui l\'affichent (R4)', async () => {
+    const reclassees = coutsTest.pieces.map((p) => (p['id'] === 'fixture-demarreur' ? { ...p, tranche: 'organe' } : p));
+    const { contexte } = avec({ pieces: reclassees });
+    const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-panne', 'page.md'), 'utf8'));
+    assert.deepEqual(codes(controlerPage({ type: 'panne', brut, fichier: 'p' }, contexte).constats, 'erreur'), ['R4-EMPREINTE']);
+  });
+
+  test('pièces, montants et prises en charge : pas de doublon dans une page', async () => {
+    const { contexte } = avec({});
+    const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-fluide', 'page.md'), 'utf8')) as Record<string, unknown>;
+    const cout = brut['cout_probable'] as Record<string, unknown>;
+    const enDouble = { ...brut, cout_probable: { ...cout, pieces: ['fixture-vidange', 'fixture-vidange'] } };
+    assert.deepEqual(codes(controlerPage({ type: 'fluide', brut: enDouble, fichier: 'f' }, contexte).constats, 'erreur'), ['R7-DOUBLON']);
   });
 
   test('données réelles : data/couts.json et la grille des coûts passent les contrôles (citations de la base, deux groupes)', async () => {

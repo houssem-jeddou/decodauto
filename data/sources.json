@@ -96,5 +96,13 @@
     "categorie": "secondaire",
     "url": "https://www.senat.fr/questions/base/2025/qSEQ251106613.html",
     "date_consultation": "2026-10-28"
+  },
+  {
+    "id": "service-public-depannage-autoroute",
+    "titre": "Service-public.fr — Dépannage sur autoroute : quelles sont les règles et les tarifs ? (fiche F11056, vérifiée le 1er janvier 2026)",
+    "editeur": "Direction de l'information légale et administrative (Service-public.fr)",
+    "categorie": "secondaire",
+    "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11056",
+    "date_consultation": "2026-10-28"
   }
 ]

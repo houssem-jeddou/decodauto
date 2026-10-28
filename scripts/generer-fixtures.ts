@@ -6,7 +6,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { stringify } from 'yaml';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant } from '../src/lib/empreinte.ts';
-import { libellePlage, libelleRisque, resoudreCout, type DonneesCouts } from '../src/lib/cout.ts';
+import { datesAffichees, libellePlage, libelleRisque, plageValidee, resoudreCout, type DonneesCouts } from '../src/lib/cout.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
@@ -90,11 +90,18 @@ const COUTS = {
     piece('fixture-catalyseur', 'organe', { valeur: '1000-3000', sources: ['fixture-forum', 'fixture-comparateur'], releve_le: '2026-10-20' }),
   ],
   montants: [
-    texteDeCout('fixture-depannage', 'Dépannage de test au tarif réglementé de test', { automatique: 'verdict-arret' }),
+    texteDeCout('fixture-depannage', 'Dépannage de test au tarif réglementé de test', { automatique: 'verdict-arret', en_vigueur_le: '2026-01-01' }),
     texteDeCout('fixture-amende', 'Amende forfaitaire de test de 135 €'),
   ],
   prises_en_charge: [texteDeCout('fixture-garantie', 'Prise en charge de test par la garantie légale', { reverifier_apres_jours: 365 })],
 };
+/** Données de coût de test, sous la forme qu'attend le calcul (src/lib/cout.ts) ; dates lues comme des dates. */
+const avecDates = (m: Objet): Objet => ({ ...m, verifie_le: new Date(String(m['verifie_le'])), ...(m['en_vigueur_le'] !== undefined && { en_vigueur_le: new Date(String(m['en_vigueur_le'])) }) });
+const DONNEES_COUTS = {
+  pieces: new Map(COUTS.pieces.map((p) => [String(p['id']), p])),
+  montants: new Map(COUTS.montants.map((m) => [String(m['id']), avecDates(m)])),
+  prises_en_charge: new Map(COUTS.prises_en_charge.map((m) => [String(m['id']), avecDates(m)])),
+} as unknown as DonneesCouts;
 
 const contexte = {
   plan: [
@@ -105,6 +112,7 @@ const contexte = {
     ligneDuPlan('fixture-pneus', 'pneus', 'pneus-et-obligations', 'A', 'pression des pneus'),
     ligneDuPlan('fixture-dossier', 'dossier', 'pannes-et-symptomes', 'B', 'dossier de test'),
     ligneDuPlan('fixture-a-propos', 'socle', 'socle', 'A'),
+    ligneDuPlan('fixture-outil', 'voyant', 'alertes-et-codes', 'A', 'voyant orange'),
   ],
   voyants: [VOYANT_BATTERIE, VOYANT_HUILE],
   sources: [
@@ -128,9 +136,10 @@ const LIGNES_BASE = new Map((contexte.voyants as Objet[]).map((v) => [String(v['
 const dates = { date_publication: '2026-10-01', date_modification: '2026-10-20', date_revue: '2026-10-20', prochaine_revue: '2027-01-20' };
 const cout = (extra: Objet = {}): Objet => ({ base_de_calcul: 'Base de calcul de test', sources: ['fixture-notice'], ...extra });
 
-/** Empreinte de l'encadré de décision (question, lignes de situation, coût), recalculée après chaque changement. */
+/** Empreinte de l'encadré de décision (question, lignes de situation, coût et sa plage calculée), recalculée après
+ * chaque changement. */
 function avecValidation(page: Objet): Objet {
-  return { ...page, validation: empreintePage(page as never, LIGNES_BASE as never) };
+  return { ...page, validation: empreintePage(page as never, LIGNES_BASE as never, plageValidee(coutResolu(page))) };
 }
 
 /** Ligne de situation saisie, liée par défaut au voyant « batterie ». */
@@ -213,6 +222,17 @@ const voyantPage = (): Objet =>
     causes: [{ cause: "Niveau d'huile trop bas", explication: "Le circuit n'est plus assez alimenté.", pieces: ['fixture-appoint-huile'] }],
     cout_probable: cout({ si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 1, rubrique de test' }] } }),
   });
+
+const outilPage = (): Objet => {
+  const page: Objet = {
+    ...communs('fixture-outil', 'Voyant orange : identifier un voyant (page de test)', 'Voyant orange : quel voyant est allumé ?', 'Identifier un voyant', 'Que veut dire le voyant allumé ?'),
+    situations: [{ voyant: 'fixture-voyant-huile' }],
+    voyants: ['fixture-voyant-huile'],
+    element_unique: 'outil',
+    outil: true,
+  };
+  return avecValidation(page);
+};
 
 const LIGNE_CODE = {
   voyant_lie: 'fixture-voyant-huile',
@@ -303,24 +323,23 @@ function encadre(page: Objet, options: OptionsHtml): string {
   return `<section data-encadre-decision><p>${String(page['question_decision'])}</p>${contenu}${coutHtml}</section>`;
 }
 
-/** Données de coût de test, sous la forme qu'attend le calcul (src/lib/cout.ts). */
-const DONNEES_COUTS = {
-  pieces: new Map(COUTS.pieces.map((p) => [String(p['id']), p])),
-  montants: new Map(COUTS.montants.map((m) => [String(m['id']), m])),
-  prises_en_charge: new Map(COUTS.prises_en_charge.map((m) => [String(m['id']), m])),
-} as unknown as DonneesCouts;
-
-/** Coût affiché dans l'encadré, calculé comme le fera le gabarit : plage, risque, montants, prises en charge. */
-function coutAffiche(page: Objet): string {
+/** Coût résolu d'une page de test, comme le calculent les contrôles. */
+function coutResolu(page: Objet) {
   const declare = (page['cout_probable'] as Objet | undefined) ?? {};
-  const causes = page['causes'] as { pieces: string[] }[] | undefined;
+  const causes = Array.isArray(page['causes']) ? (page['causes'] as Objet[]).map((c) => ({ pieces: Array.isArray(c['pieces']) ? (c['pieces'] as string[]) : [] })) : undefined;
   const arret = lignesAffichees(page).some((l) => String(l['verdict']).startsWith('non'));
-  const resolu = resoudreCout({ outil: page['outil'] === true, causes, cout: declare as never }, DONNEES_COUTS, arret);
-  const morceaux = [`<p>Coût probable : ${libellePlage(resolu) ?? ''}</p>`];
+  return resoudreCout({ outil: page['outil'] === true, causes, cout: declare as never }, DONNEES_COUTS, arret);
+}
+
+/** Coût affiché dans l'encadré, calculé comme le fera le gabarit : plage, risque, montants et leurs dates, prises en charge. */
+function coutAffiche(page: Objet): string {
+  const resolu = coutResolu(page);
+  const selonLaCause = page['causes'] !== undefined && resolu.de !== resolu.a ? ', selon la cause' : '';
+  const morceaux = [`<p>Coût probable : ${libellePlage(resolu) ?? ''}${selonLaCause}</p>`];
   if (resolu.risque !== undefined) morceaux.push(`<p>${libelleRisque(resolu.risque)}</p>`);
   for (const id of resolu.montants) {
     const montant = DONNEES_COUTS.montants.get(id);
-    if (montant !== undefined) morceaux.push(`<p>${montant.texte} (vérifié le 20/10/2026)</p>`);
+    if (montant !== undefined) morceaux.push(`<p>${montant.texte} (${datesAffichees(montant).join(', ')})</p>`);
   }
   for (const id of resolu.prisesEnCharge) {
     const prise = DONNEES_COUTS.prises_en_charge.get(id);
@@ -473,7 +492,15 @@ invalide('cout-risque-plus-leger', 'panne', avecCout(panne(), { si_vous_continue
 invalide('cout-risque-sans-premiere-main', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [citation('fixture-forum')] } }), ['COUT-RISQUE-SOURCE'], 'Le risque si l\'on continue n\'est cité que d\'une source secondaire.');
 invalide('cout-citation-introuvable', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 99' }] } }), ['COUT-CITATION-INTROUVABLE'], 'La citation référencée n\'existe pas dans la base voyants.');
 invalide('r9-encadre-sans-cout', 'panne', panne(), ['R9-ENCADRE-CONTENU'], "L'encadré n'affiche pas le coût probable (plage, montant automatique).", { encadreSansCout: true });
-invalide('r4-pieces-modifiees', 'panne', { ...panne(), causes: causesPanne(['fixture-demarreur']) }, ['R4-EMPREINTE'], "Les pièces d'une cause ont changé après validation : la tranche affichée a pu changer, l'encadré est à revalider.");
+invalide(
+  'r4-pieces-modifiees',
+  'panne',
+  { ...panne(), causes: [{ cause: 'Batterie déchargée', explication: 'Une batterie faible ne fournit pas assez de courant.', pieces: ['fixture-recharge-batterie'] }, { cause: 'Démarreur défaillant', explication: 'Le démarreur ne lance plus le moteur.', pieces: ['fixture-sonde'] }] },
+  ['R4-EMPREINTE'],
+  "Les pièces d'une cause ont changé après validation, même sans changer la plage : l'encadré est à revalider.",
+);
+valide('valide-outil', 'voyant', outilPage(), "Page outil des voyants : « Selon le voyant » dans l'encadré, sans pièces ni montant automatique.");
+invalide('cout-pieces-outil', 'voyant', avecCout(outilPage(), { pieces: ['fixture-vidange'] }), ['COUT-PIECES-DOUBLE'], "La page outil n'a pas de plage propre : elle ne déclare pas de pièces.");
 
 // ---- Écriture ----------------------------------------------------------------------------------------
 await rm(join(racine, 'cas'), { recursive: true, force: true });

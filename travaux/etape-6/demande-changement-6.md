@@ -282,8 +282,13 @@ La même règle est reprise dans 02 (règles de périmètre), `CLAUDE.md` et 08 
 
 ## Précisions de l'application
 - Une page sans causes déclare ses pièces au lieu d'une plage saisie : la plage se calcule partout, rien n'est recopié.
+- L'empreinte de l'encadré porte aussi la plage calculée (identifiants des tranches) : reclasser une pièce dans `data/couts.json` fait revalider les encadrés qui l'affichent.
+- Le contrôle R9 exige chaque phrase en entier : la plage dans son ordre, le risque, le texte de chaque montant avec ses dates (« en vigueur depuis le … », « vérifié le … »).
+- La page outil (« Selon le voyant ») n'affiche pas le dépannage automatique : il dépend du voyant.
 - Le contrôle des citations de la grille des coûts tourne sur les données réelles (construction et test), pas sur les données de test.
 - Les deux montants créés attendent la validation de Houssem (empreinte) : tant qu'elle manque, une alerte le rappelle, et une page qui les afficherait serait bloquée.
+- La fiche Service-public F11056 est ajoutée au registre (source secondaire) : elle écrit en clair les quatre montants 2026, dont les deux de nuit et de week-end que les textes donnent par la majoration de 50 %.
+- 02 garde deux mentions locales écrites avant la nouvelle règle 5 : « Sans prix de prestations » (pages huile) et « Ni prix ni centres » (contrôle technique). Elles ne sont pas modifiées sans l'accord de Houssem.
 
 ## Suite, après l'accord
 - Branche `etape-6/cout-probable` :

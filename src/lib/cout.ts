@@ -36,6 +36,8 @@ export interface TexteDeCout {
   id: string;
   texte: string;
   sources: readonly string[];
+  /** Date d'entrée en vigueur du texte qui fixe le montant (affichée), s'il y en a une. */
+  en_vigueur_le?: Date | undefined;
   verifie_le: Date;
   reverifier_apres_jours: number;
   automatique?: AffichageAutomatique | undefined;
@@ -126,7 +128,8 @@ export function resoudreCout(
     }
   }
   const montants = [...(entree.cout.montants ?? [])];
-  if (verdictArret) {
+  // La page outil n'a pas de coût propre (« Selon le voyant ») : pas de montant automatique.
+  if (verdictArret && !entree.outil) {
     for (const montant of couts.montants.values()) {
       if (montant.automatique === 'verdict-arret' && !montants.includes(montant.id)) montants.push(montant.id);
     }
@@ -142,6 +145,21 @@ export function resoudreCout(
   };
 }
 
+/** Ce que l'empreinte de l'encadré retient de la plage calculée : les identifiants des tranches (demande n° 6, §7). */
+export const plageValidee = (resolu: CoutResolu): { selonLeVoyant: boolean; de?: TrancheCout | undefined; a?: TrancheCout | undefined } => ({
+  selonLeVoyant: resolu.selonLeVoyant,
+  de: resolu.de,
+  a: resolu.a,
+});
+
+/** Date au format affiché (JJ/MM/AAAA). */
+export const dateAffichee = (date: Date): string => date.toISOString().slice(0, 10).split('-').reverse().join('/');
+
+/** Dates affichées avec un montant : entrée en vigueur (s'il y en a une) et dernière vérification. */
+export function datesAffichees(montant: TexteDeCout): string[] {
+  return [...(montant.en_vigueur_le !== undefined ? [`en vigueur depuis le ${dateAffichee(montant.en_vigueur_le)}`] : []), `vérifié le ${dateAffichee(montant.verifie_le)}`];
+}
+
 /** La plage telle qu'affichée : « Selon le voyant », un libellé, ou « de « X » à « Y » ». */
 export function libellePlage(resolu: CoutResolu): string | undefined {
   if (resolu.selonLeVoyant) return LIBELLE_SELON_LE_VOYANT;
@@ -155,23 +173,20 @@ export function libellePlage(resolu: CoutResolu): string | undefined {
 export const libelleRisque = (tranche: TrancheCout): string => `${LIBELLE_SI_VOUS_CONTINUEZ} : risque de « ${GRILLE_COUTS[tranche].libelle} »`;
 
 /**
- * Textes que l'encadré de décision doit afficher pour le coût (contrôle R9) : les libellés de la plage, le risque,
- * le texte de chaque montant et de chaque prise en charge. `undefined` si le coût ne peut pas être résolu (pièce,
- * montant ou prise en charge inconnus : ces erreurs sont signalées par ailleurs).
+ * Textes que l'encadré de décision doit afficher pour le coût (contrôle R9), chacun en entier : la plage
+ * (« de « X » à « Y » », dans cet ordre), le risque si l'on continue, le texte de chaque montant avec ses dates
+ * (entrée en vigueur, vérification), le texte de chaque prise en charge. `undefined` si le coût ne peut pas être
+ * résolu (pièce, montant ou prise en charge inconnus : ces erreurs sont signalées par ailleurs).
  */
 export function textesAttendusCout(resolu: CoutResolu, couts: DonneesCouts): string[] | undefined {
-  const textes: string[] = [];
-  if (resolu.selonLeVoyant) textes.push(LIBELLE_SELON_LE_VOYANT);
-  else {
-    if (resolu.de === undefined || resolu.a === undefined) return undefined;
-    textes.push(GRILLE_COUTS[resolu.de].libelle);
-    if (resolu.a !== resolu.de) textes.push(GRILLE_COUTS[resolu.a].libelle);
-  }
-  if (resolu.risque !== undefined) textes.push(LIBELLE_SI_VOUS_CONTINUEZ, GRILLE_COUTS[resolu.risque].libelle);
+  const plage = libellePlage(resolu);
+  if (plage === undefined) return undefined;
+  const textes: string[] = [plage];
+  if (resolu.risque !== undefined) textes.push(libelleRisque(resolu.risque));
   for (const id of resolu.montants) {
     const montant = couts.montants.get(id);
     if (montant === undefined) return undefined;
-    textes.push(montant.texte);
+    textes.push(montant.texte, ...datesAffichees(montant));
   }
   for (const id of resolu.prisesEnCharge) {
     const prise = couts.prises_en_charge.get(id);

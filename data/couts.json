@@ -254,19 +254,21 @@
   "montants": [
     {
       "id": "depannage-autoroute",
-      "texte": "Dépannage sur autoroute ou route express : forfait réglementé de 151 € à 280,08 € TTC selon l'heure et le poids (tarif 2026), fournitures en plus",
+      "texte": "Dépannage sur autoroute ou route express : forfait réglementé de 151 € à 280,08 € TTC selon l'heure et le poids, fournitures en plus",
       "sources": [
         "arrete-2025-12-08-depannage-autoroute",
         "arrete-2016-07-12-depannage-autoroute",
-        "decret-89-477"
+        "decret-89-477",
+        "service-public-depannage-autoroute"
       ],
+      "en_vigueur_le": "2026-01-01",
       "verifie_le": "2026-10-28",
       "reverifier_apres_jours": 90,
       "automatique": "verdict-arret"
     },
     {
       "id": "aucune-amende-loi-montagne",
-      "texte": "Aucune amende n'est prévue à ce jour pour défaut d'équipement en période hivernale",
+      "texte": "Aucune amende n'est prévue à ce jour pour défaut d'équipement",
       "sources": [
         "code-de-la-route-d314-8",
         "reponse-ministerielle-senat-2026-02-12"

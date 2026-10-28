@@ -38,7 +38,7 @@ quand_changer:
   texte: Selon le carnet d'entretien.
   sources:
     - fixture-notice
-validation: b5a8581afa52631476abbe64de0044b6b1f80204075786e52eb17634ffabbbf8
+validation: 767d74ff308e0d3c9ddc7421fce7f90519def703c40ccf63734876cc9bb7ce01
 ---
 
 Page de test (r3-reglement-onu-seul), jamais publiée.

@@ -50,7 +50,7 @@ causes:
     explication: Le démarreur ne lance plus le moteur.
     pieces:
       - fixture-demarreur
-validation: 7d8d01a2f8da64e4f35a119a76d13504d6ef8c3609b30d19713b1e4c1a311c80
+validation: 16d35a09a9d7b5400512ec0c1bf077e4618cd0fc4d37f793aa51b760939d36f7
 ---
 
 Page de test (cout-pieces-double), jamais publiée.

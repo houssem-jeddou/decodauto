@@ -38,7 +38,7 @@ element_unique: tableau
 journal_modifications:
   - date: 2026-10-20
     resume: Création du dossier de test.
-validation: 4943e223b27a1155677f663e95af218d315386fc54ac009801b57e653e599480
+validation: d0507cb359715a1bf88371e860c966f0dc450da9a1e768c16b75f3b897827535
 ---
 
 Page de test (cout-prise-en-charge-inconnue), jamais publiée.

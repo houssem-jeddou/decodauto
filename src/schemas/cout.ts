@@ -60,7 +60,7 @@ export const GRILLE_COUTS: Readonly<Record<TrancheCout, TrancheGrille>> = {
   },
   entretien: {
     libelle: 'Entretien ou équipement courant',
-    definition: 'Une révision, une pièce d\'usure ou un équipement prévu (plaquettes, batterie, pneus, chaînes). Peut coûter plus qu\'une petite réparation.',
+    definition: 'Une révision, une pièce d\'usure ou un équipement prévu. Peut coûter plus qu\'une petite réparation.',
     consigne: 'La notice renvoie à une révision ou à l\'entretien périodique.',
     citations: [
       { voyant: 'entretien-vidange', source: 'notice-peugeot-208', emplacement: 'p. 19-20, « Indicateur d\'entretien », Clé d\'entretien' },
@@ -70,7 +70,7 @@ export const GRILLE_COUTS: Readonly<Record<TrancheCout, TrancheGrille>> = {
   },
   reparation: {
     libelle: 'Réparation au garage',
-    definition: 'Une pièce défaillante à diagnostiquer puis à réparer ou remplacer (capteur, sonde, calculateur, alternateur), hors organe principal.',
+    definition: 'Une pièce défaillante à diagnostiquer puis à réparer ou remplacer, hors organe principal.',
     consigne: 'La notice demande de faire vérifier ou réparer par un atelier.',
     citations: [
       { voyant: 'abs', source: 'notice-peugeot-208', emplacement: 'p. 17, « Antiblocage des roues (ABS) » ; renvoi (3) p. 13' },
@@ -80,7 +80,7 @@ export const GRILLE_COUTS: Readonly<Record<TrancheCout, TrancheGrille>> = {
   },
   organe: {
     libelle: 'Grosse réparation',
-    definition: 'Le remplacement ou la remise en état d\'un organe ou d\'un système lourd : catalyseur, filtre à particules, turbo, injection, embrayage, moteur, boîte de vitesses.',
+    definition: 'Le remplacement ou la remise en état d\'un organe ou d\'un système lourd.',
     consigne: 'La notice annonce un dégât grave sur un organe si l\'on continue.',
     citations: [
       { voyant: 'moteur-orange-clignotant', source: 'notice-peugeot-208', emplacement: 'p. 15, « Système d\'autodiagnostic moteur » ; renvoi (2) p. 13' },

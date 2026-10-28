@@ -139,6 +139,8 @@ const champsTexteDeCout = {
   id: identifiant,
   texte,
   sources: z.array(identifiant).min(1),
+  // Date d'entrée en vigueur du texte qui fixe le montant (affichée avec lui), s'il y en a une.
+  en_vigueur_le: dateIso.optional(),
   verifie_le: dateIso,
   reverifier_apres_jours: z.number().int().min(1).max(366),
   validation: hashHex.optional(),

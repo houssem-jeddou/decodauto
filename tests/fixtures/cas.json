@@ -569,6 +569,22 @@
       "R4-EMPREINTE"
     ],
     "alertes": [],
-    "explication": "Les pièces d'une cause ont changé après validation : la tranche affichée a pu changer, l'encadré est à revalider."
+    "explication": "Les pièces d'une cause ont changé après validation, même sans changer la plage : l'encadré est à revalider."
+  },
+  {
+    "nom": "valide-outil",
+    "type": "voyant",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Page outil des voyants : « Selon le voyant » dans l'encadré, sans pièces ni montant automatique."
+  },
+  {
+    "nom": "cout-pieces-outil",
+    "type": "voyant",
+    "erreurs": [
+      "COUT-PIECES-DOUBLE"
+    ],
+    "alertes": [],
+    "explication": "La page outil n'a pas de plage propre : elle ne déclare pas de pièces."
   }
 ]

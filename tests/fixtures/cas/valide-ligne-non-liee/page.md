@@ -47,7 +47,7 @@ causes:
     explication: Le démarreur ne lance plus le moteur.
     pieces:
       - fixture-demarreur
-validation: 1106c19038b051129369b4f675de0f305e7c492b6ae770b21866c30bd254d3a1
+validation: a15439b7dcb429558902a5795bfbb2d95571b0c8112ccfa10e4010439a8cf6ca
 ---
 
 Page de test (valide-ligne-non-liee), jamais publiée.

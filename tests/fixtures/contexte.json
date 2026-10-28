@@ -73,6 +73,17 @@
       "vague": "A",
       "adresse": "/fixture-a-propos/",
       "mots_cles": []
+    },
+    {
+      "id": "fixture-outil",
+      "type": "voyant",
+      "theme": "alertes-et-codes",
+      "vague": "A",
+      "adresse": "/fixture-outil/",
+      "requete_principale": "voyant orange",
+      "mots_cles": [
+        "voyant orange"
+      ]
     }
   ],
   "voyants": [
@@ -300,7 +311,8 @@
         "verifie_le": "2026-10-20",
         "reverifier_apres_jours": 90,
         "automatique": "verdict-arret",
-        "validation": "79048021ff39095ad82dbbf5034743c1fa69be6fbc41703f6e410de968b12250"
+        "en_vigueur_le": "2026-01-01",
+        "validation": "30adec8e24e9180eaae1118cd8d66b3b71abc5b89a5ac04bf83e2b332b7205e1"
       },
       {
         "id": "fixture-amende",
@@ -310,7 +322,7 @@
         ],
         "verifie_le": "2026-10-20",
         "reverifier_apres_jours": 90,
-        "validation": "2ef7a44573a2b86badd6ac035d1dbd80b632bccf4bb34767b2bc794a0bae972b"
+        "validation": "0f2c8a9aa6036fa5a0ab59189fd47219b8d9b24a64476edb7ef6ac52c0e1e9ed"
       }
     ],
     "prises_en_charge": [
@@ -322,7 +334,7 @@
         ],
         "verifie_le": "2026-10-20",
         "reverifier_apres_jours": 365,
-        "validation": "2cf5c0f31f0263f19b5e6d7e342f5504cfcce7ddaec661541095a058bce3e452"
+        "validation": "60aa930da5b72cbeeb11f4be082dc4a667044fd8bc3d4d6025f62c105a29f8bd"
       }
     ]
   }

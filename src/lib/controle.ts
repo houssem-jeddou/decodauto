@@ -6,9 +6,11 @@ import {
   COUTS_VIDES,
   estReference,
   joursEntre,
+  plageValidee,
   resoudreCout,
   textesAttendusCout,
   trouverCitation,
+  type CoutResolu,
   type DonneesCouts,
   type PieceCout,
   type TexteDeCout,
@@ -444,11 +446,12 @@ export function construireContexte(
  *  - les sources (registre) ; une fourchette en euros tirée de FOURCHETTE_SOURCES_MIN sources d'éditeurs différents
  *    (COUT-FOURCHETTE-SOURCES) ; un montant fixé par un texte cite au moins une source de Légifrance
  *    (COUT-MONTANT-SOURCE) ;
- *  - l'empreinte du texte validé par Houssem : absente, une alerte (une page qui l'affiche est bloquée) ; différente,
- *    une erreur (R4) ;
+ *  - l'empreinte du texte validé par Houssem : absente, une alerte (R4-MONTANT-VALIDATION-ABSENTE ; une page qui
+ *    l'affiche est bloquée) ; différente, une erreur (R4-MONTANT-EMPREINTE) ;
  *  - les dates : un montant ou une prise en charge à revérifier (COUT-A-REVERIFIER), une fourchette relevée il y a
- *    plus de FOURCHETTE_VALIDITE_JOURS jours (COUT-FOURCHETTE-A-REVOIR). Ce sont des alertes : elles ne bloquent
- *    jamais une construction ; le contrôle du lundi échoue sur elles (--echouer-sur).
+ *    plus de FOURCHETTE_VALIDITE_JOURS jours (COUT-FOURCHETTE-A-REVOIR), une date de vérification ou de relevé dans
+ *    le futur (COUT-DATE-FUTURE, qui couperait les deux autres). Ce sont des alertes : elles ne bloquent jamais une
+ *    construction ; le contrôle du lundi échoue sur les deux premières (--echouer-sur).
  */
 function lireCouts(brut: unknown, sources: ReadonlyMap<string, Source>, aujourdhui: Date, constats: Constat[]): DonneesCouts {
   if (brut === undefined) return COUTS_VIDES;
@@ -473,6 +476,9 @@ function lireCouts(brut: unknown, sources: ReadonlyMap<string, Source>, aujourdh
     if (editeurs.size < FOURCHETTE_SOURCES_MIN) {
       constats.push(erreur('COUT-FOURCHETTE-SOURCES', `${etiquette} : il faut au moins ${FOURCHETTE_SOURCES_MIN} sources d'éditeurs différents (trouvé : ${editeurs.size})`, fichier));
     }
+    if (piece.fourchette.releve_le.getTime() > aujourdhui.getTime()) {
+      constats.push(alerte('COUT-DATE-FUTURE', `${etiquette} : date de relevé dans le futur (${piece.fourchette.releve_le.toISOString().slice(0, 10)})`, fichier));
+    }
     if (joursEntre(piece.fourchette.releve_le, aujourdhui) > FOURCHETTE_VALIDITE_JOURS) {
       constats.push(alerte('COUT-FOURCHETTE-A-REVOIR', `${etiquette} : relevée le ${piece.fourchette.releve_le.toISOString().slice(0, 10)}, il y a plus de ${FOURCHETTE_VALIDITE_JOURS} jours : à revoir`, fichier));
     }
@@ -482,9 +488,12 @@ function lireCouts(brut: unknown, sources: ReadonlyMap<string, Source>, aujourdh
     const etiquette = `${nature} « ${entree.id} »`;
     inconnues(entree.sources, etiquette);
     if (entree.validation === undefined) {
-      constats.push(alerte('R4-VALIDATION-ABSENTE', `${etiquette} : texte pas encore validé par Houssem (empreinte absente) ; une page qui l'afficherait est bloquée`, fichier));
+      constats.push(alerte('R4-MONTANT-VALIDATION-ABSENTE', `${etiquette} : texte pas encore validé par Houssem (empreinte absente) ; une page qui l'afficherait est bloquée`, fichier));
     } else if (entree.validation !== empreinteTexteDeCout(entree)) {
-      constats.push(erreur('R4-EMPREINTE', `${etiquette} : l'empreinte de validation ne correspond plus au texte, aux sources ou à l'affichage. Revalidation par Houssem nécessaire`, fichier));
+      constats.push(erreur('R4-MONTANT-EMPREINTE', `${etiquette} : l'empreinte de validation ne correspond plus au texte, à la date d'entrée en vigueur, aux sources ou à l'affichage. Revalidation par Houssem nécessaire`, fichier));
+    }
+    if (entree.verifie_le.getTime() > aujourdhui.getTime()) {
+      constats.push(alerte('COUT-DATE-FUTURE', `${etiquette} : date de vérification dans le futur (${entree.verifie_le.toISOString().slice(0, 10)})`, fichier));
     }
     if (joursEntre(entree.verifie_le, aujourdhui) > entree.reverifier_apres_jours) {
       constats.push(alerte('COUT-A-REVERIFIER', `${etiquette} : vérifié le ${entree.verifie_le.toISOString().slice(0, 10)}, à revérifier tous les ${entree.reverifier_apres_jours} jours (Journal officiel, Légifrance)`, fichier));
@@ -537,14 +546,15 @@ export function controlerGrilleCouts(
 
 /**
  * Coût probable d'une page : pièces, montants, prises en charge et risque (demande de changement n° 6). Renvoie les
- * constats et les textes que l'encadré doit afficher (undefined si le coût ne se résout pas : erreurs déjà signalées).
+ * constats, le coût résolu et les textes que l'encadré doit afficher (undefined si le coût ne se résout pas : erreurs
+ * déjà signalées).
  */
 function controlerCout(
   page: PageEditoriale,
   lignes: readonly LigneResolue[],
   ctx: Contexte,
   fichier: string,
-): { constats: Constat[]; textes: string[] | undefined } {
+): { constats: Constat[]; resolu: CoutResolu; textes: string[] | undefined } {
   const constats: Constat[] = [];
   const cout = page.cout_probable;
   const outil = 'outil' in page && page.outil === true;
@@ -609,7 +619,7 @@ function controlerCout(
   }
 
   const bloquant = constats.some((c) => c.gravite === 'erreur' && c.regle !== 'R4-MONTANT-NON-VALIDE' && c.regle !== 'COUT-RISQUE' && c.regle !== 'COUT-PRISE-EN-CHARGE');
-  return { constats, textes: bloquant ? undefined : textesAttendusCout(resolu, ctx.couts) };
+  return { constats, resolu, textes: bloquant ? undefined : textesAttendusCout(resolu, ctx.couts) };
 }
 
 // ---- Pages --------------------------------------------------------------------------------------
@@ -761,8 +771,8 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   // question de décision, lignes de situation, coût probable. La base porte la validation de ses propres lignes.
   if (page.validation === undefined) {
     constats.push(erreur('R4-VALIDATION-ABSENTE', "la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)", fichier));
-  } else if (page.validation !== empreintePage(page, ctx.voyants)) {
-    constats.push(erreur('R4-EMPREINTE', "l'empreinte de validation ne correspond plus à l'encadré de décision (question, lignes de situation, y compris une ligne de la base revalidée depuis, coût probable). Relecture et revalidation par Houssem nécessaires", fichier));
+  } else if (page.validation !== empreintePage(page, ctx.voyants, plageValidee(cout.resolu))) {
+    constats.push(erreur('R4-EMPREINTE', "l'empreinte de validation ne correspond plus à l'encadré de décision (question, lignes de situation, y compris une ligne de la base revalidée depuis, coût probable, y compris une pièce reclassée depuis). Relecture et revalidation par Houssem nécessaires", fichier));
   }
 
   // R5 : revue dépassée = alerte.

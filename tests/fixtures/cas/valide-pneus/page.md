@@ -39,7 +39,7 @@ texte_reference:
   nature: legifrance
   reference: Référence de test
   source: fixture-legifrance
-validation: c8c8b8da0deeced71240b39d3f3d1c3e72d6f8c58003c79a82b19c04916d1f8a
+validation: d4c94543109bfcb6472c33e0ea80a520ed115c89b001bf036663efadee4cb8b8
 ---
 
 Page de test (valide-pneus), jamais publiée.

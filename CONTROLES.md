@@ -36,13 +36,21 @@ Le script affiche en tête le **mode d'indexation actif**. Chaque lundi, le work
 | R9-ENCADRE-MASQUE | Rien de masqué : ni l'encadré, ni un bloc qui le contient ou qu'il contient (`hidden`, `display:none`, `visibility:hidden`, `details`, `dialog`, `template`, `aria-hidden="true"` sur du texte). Une icône décorative sans texte peut porter `aria-hidden` | erreur | `r9-encadre-masque`, `tests/controle.test.ts` |
 | PICTO-ABSENT / PICTO-INVALIDE | Chaque ligne de la base voyants a son pictogramme `src/pictogrammes/<pictogramme>.svg` ; le fichier est un SVG autonome : balise `svg` avec `viewBox`, éléments de forme seulement (liste blanche : pas de texte, d'image, de script, de style, d'animation), liens et `url()` internes (`#…`), aucun gestionnaire d'événement, 8 Ko au plus (fichier entier, commentaires compris) | erreur | `tests/controle.test.ts` |
 
+Non vérifiable par machine (liste de recette) :
+- R6, l'ordre des causes (jamais « par fréquence » sans donnée sourcée) ;
+- le classement de chaque consigne de notice dans la grille, l'extrait fidèle à la source et le texte de l'écart entre marques : vérifiés par Houssem sur le paquet de validation (docs/03, règle 7) ;
+- toutes les notices consultées pour une ligne sont citées, y compris celles qui donnent un niveau plus prudent ;
+- une source « notice constructeur » est bien la notice d'utilisation du véhicule, pas une page web générique de la marque (rangée en « secondaire ») ;
+- un pictogramme redessiné par nos soins, jamais copié (docs/01) ;
+- étape 12 : les annonces automatiques AdSense, insérées dans le navigateur, ne se placent pas avant l'encadré de décision (invisible pour le contrôle de la page construite).
+
 ## Coût probable (demande de changement n° 6, docs/08 §7)
 Structure : `src/schemas/cout.ts` ; données : `data/couts.json` ; calcul : `src/lib/cout.ts`.
 
 | Code | Règle | Gravité | Test |
 |---|---|---|---|
 | COUT-PIECES-ABSENTES | Une page sans causes (hors page outil) déclare ses pièces (`cout_probable.pieces`) : sa plage en est calculée | erreur | `cout-pieces-absentes` |
-| COUT-PIECES-DOUBLE | Une page à causes, ou la page outil, ne déclare pas de pièces : la plage se calcule sur les causes (« Selon le voyant » pour l'outil). Une cause sans pièce est refusée par le schéma (R7-CHAMP-MANQUANT) | erreur | `cout-pieces-double`, `cout-cause-sans-piece` |
+| COUT-PIECES-DOUBLE | Une page à causes, ou la page outil, ne déclare pas de pièces : la plage se calcule sur les causes (« Selon le voyant » pour l'outil, qui n'affiche pas non plus le dépannage automatique). Une cause sans pièce est refusée par le schéma (R7-CHAMP-MANQUANT) ; un identifiant en double dans une liste, aussi (R7-DOUBLON) | erreur | `cout-pieces-double`, `cout-pieces-outil`, `cout-cause-sans-piece`, `valide-outil` |
 | COUT-PIECE-INCONNUE | Chaque pièce citée existe dans `data/couts.json` ; une pièce manquante s'y ajoute dans la pull request du lot | erreur | `cout-piece-inconnue` |
 | COUT-MONTANT-INCONNU / COUT-MONTANT-AUTOMATIQUE | Chaque montant déclaré existe ; un montant automatique (dépannage sur autoroute, affiché sur toute page à verdict d'arrêt) ne se déclare pas | erreur | `cout-montant-inconnu`, `cout-montant-automatique` |
 | COUT-PRISE-EN-CHARGE-INCONNUE / COUT-PRISE-EN-CHARGE | Chaque prise en charge existe ; elle ne s'affiche que si la plage va au moins jusqu'à « Réparation au garage » | erreur | `cout-prise-en-charge-inconnue`, `cout-prise-en-charge-hors-plage` |
@@ -51,20 +59,15 @@ Structure : `src/schemas/cout.ts` ; données : `data/couts.json` ; calcul : `src
 | COUT-GROUPES | Chaque tranche de la grille s'appuie sur les notices d'au moins 2 groupes de constructeurs (données réelles) | erreur | `tests/controle.test.ts` |
 | COUT-FOURCHETTE-SOURCES | Une fourchette en euros cite au moins 2 sources du registre, d'éditeurs différents | erreur | `tests/controle.test.ts` |
 | COUT-MONTANT-SOURCE | Un montant fixé par un texte cite au moins une source de Légifrance | erreur | `tests/controle.test.ts` |
-| R4-VALIDATION-ABSENTE / R4-EMPREINTE (montants) | Le texte de chaque montant et de chaque prise en charge porte l'empreinte validée par Houssem : absente, une alerte ; différente, une erreur | alerte / erreur | `tests/controle.test.ts` |
+| R4-MONTANT-VALIDATION-ABSENTE / R4-MONTANT-EMPREINTE | Le texte de chaque montant et de chaque prise en charge (avec sa date d'entrée en vigueur, ses sources et son affichage automatique) porte l'empreinte validée par Houssem : absente, une alerte ; différente, une erreur | alerte / erreur | `tests/controle.test.ts` |
 | R4-MONTANT-NON-VALIDE | Une page n'affiche un montant ou une prise en charge que si son texte est validé (empreinte présente et juste) | erreur | `tests/controle.test.ts` |
 | COUT-A-REVERIFIER | Un montant ou une prise en charge dont la dernière vérification dépasse son délai (`reverifier_apres_jours`) | alerte (échec le lundi) | `tests/controle.test.ts` |
 | COUT-FOURCHETTE-A-REVOIR | Une fourchette en euros relevée il y a plus de 365 jours | alerte (échec le lundi) | `tests/controle.test.ts` |
+| COUT-DATE-FUTURE | Une date de vérification ou de relevé dans le futur (elle couperait les deux alertes précédentes) | alerte | `tests/controle.test.ts` |
 
-Non vérifiable par machine (liste de recette) : la tranche donnée à une nouvelle pièce (validée par Houssem avec le lot) ; la fidélité d'une fourchette à ses sources ; le texte d'un montant au Journal officiel, revérifié avant de fusionner un lot qui l'affiche.
+R9 (affichage) : l'encadré affiche la plage en entier et dans l'ordre (« de « X » à « Y » »), le risque (« Si vous continuez de rouler : risque de « … » »), le texte de chaque montant avec ses dates (« en vigueur depuis le … », « vérifié le … ») et le texte de chaque prise en charge (page de test `r9-encadre-sans-cout`).
 
-Non vérifiable par machine (liste de recette) :
-- R6, l'ordre des causes (jamais « par fréquence » sans donnée sourcée) ;
-- le classement de chaque consigne de notice dans la grille, l'extrait fidèle à la source et le texte de l'écart entre marques : vérifiés par Houssem sur le paquet de validation (docs/03, règle 7) ;
-- toutes les notices consultées pour une ligne sont citées, y compris celles qui donnent un niveau plus prudent ;
-- une source « notice constructeur » est bien la notice d'utilisation du véhicule, pas une page web générique de la marque (rangée en « secondaire ») ;
-- un pictogramme redessiné par nos soins, jamais copié (docs/01) ;
-- étape 12 : les annonces automatiques AdSense, insérées dans le navigateur, ne se placent pas avant l'encadré de décision (invisible pour le contrôle de la page construite).
+Non vérifiable par machine (liste de recette) : la tranche donnée à une nouvelle pièce (validée par Houssem avec le lot) ; la fidélité d'une fourchette à ses sources et l'indépendance réelle de ses deux sources (pas le même groupe, pas l'une qui reprend l'autre) ; le texte d'un montant au Journal officiel, revérifié avant de fusionner un lot qui l'affiche.
 
 ## Plan du site et maillage (étape 4)
 Le plan du site (`data/plan-du-site.json`) est la référence du maillage : `parent` (page mère, qui affiche ses enfants) et `liens` (chaque paire déclarée une seule fois, le retour est calculé). Les pages ne déclarent plus de liens. Code : `src/lib/plan.ts`, `src/lib/porte-plan.ts` ; tests : `tests/plan.test.ts` (sans dépendance) et `tests/controle.test.ts`.
@@ -135,6 +138,6 @@ Avant la validation de Houssem, les lignes de la base sont préparées dans `dat
 ## Empreinte de validation
 Code : `src/lib/empreinte.ts` ; calcul : `npm run empreinte -- <page.md>`, `npm run empreinte -- --voyant <id>` ou `npm run empreinte -- --montant <id>` (montant ou prise en charge de `data/couts.json`). L'empreinte se copie après la validation de Houssem, jamais pour faire passer un contrôle.
 - **Ligne de la base voyants** (`validation` de `data/voyants.json`) : identifiant, nom, couleur, pictogramme et son dessin (contenu du fichier SVG ; espaces et commentaires ignorés), situation, verdict, urgence, action, écart entre marques et citations (source, page ou section, extrait, niveau). L'ordre des citations n'a pas d'effet.
-- **Page éditoriale** (`validation` du frontmatter) : l'encadré de décision, c'est-à-dire la question de décision, les lignes de situation dans l'ordre (une ligne reprise de la base y figure par l'identifiant du voyant et ce que l'encadré en affiche : situation, verdict, urgence, action, écart ; les changer oblige à relire l'encadré, corriger une citation non ; une ligne saisie en entier, voyant lié compris) et le coût probable (v5 : pièces de chaque cause, dans l'ordre des causes, ou pièces de la page ; risque si l'on continue et ses citations ; montants et prises en charge par leur identifiant ; base de calcul ; sources). Exigée sur toute page éditoriale, même sans ligne saisie.
-- **Montant ou prise en charge** (`validation` dans `data/couts.json`) : identifiant, texte, sources et affichage automatique. La date de vérification n'y entre pas : la mettre à jour ne demande pas de revalidation. Mettre à jour un texte (nouveau tarif) fait valider l'entrée une fois, sans revalider les encadrés qui l'affichent.
+- **Page éditoriale** (`validation` du frontmatter) : l'encadré de décision, c'est-à-dire la question de décision, les lignes de situation dans l'ordre (une ligne reprise de la base y figure par l'identifiant du voyant et ce que l'encadré en affiche : situation, verdict, urgence, action, écart ; les changer oblige à relire l'encadré, corriger une citation non ; une ligne saisie en entier, voyant lié compris) et le coût probable (v5 : plage calculée, par les identifiants de ses tranches ; pièces de chaque cause, dans l'ordre des causes, ou pièces de la page ; risque si l'on continue et ses citations ; montants et prises en charge par leur identifiant ; base de calcul ; sources). Reclasser une pièce dans `data/couts.json` change la plage, donc l'empreinte des encadrés qui l'affichent. Exigée sur toute page éditoriale, même sans ligne saisie.
+- **Montant ou prise en charge** (`validation` dans `data/couts.json`) : identifiant, texte, date d'entrée en vigueur, sources et affichage automatique. La date de vérification n'y entre pas : la mettre à jour ne demande pas de revalidation. Mettre à jour un texte (nouveau tarif) fait valider l'entrée une fois, sans revalider les encadrés qui l'affichent.
 - Casse, accents, ligatures, ponctuation et espaces n'ont pas d'effet : une coquille de ce type ne demande pas de revalidation (« 5 % » = « 5% », « 1 000 » = « 1000 », « 2,5 » = « 2.5 »). Un mot, une lettre, un chiffre ou un signe qui porte un sens (−, +, <, >, ≤, ≥, ±, €, %, °) changé demande une revalidation. Le reste du texte de la page se corrige librement.
