@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 28/10/2026 (14 h 40, heure de Tunis)
+Dernière mise à jour : 02/11/2026 (20 h 30, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,7 +12,7 @@ Dernière mise à jour : 28/10/2026 (14 h 40, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée (PR #11), montants validés, fusion demandée par Houssem (28/10, 14 h 31) | `travaux/etape-6/` |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12, fusion demandée ; suivant : 6.3 composants communs | `travaux/etape-6/` |
 | 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -21,27 +21,28 @@ Dernière mise à jour : 28/10/2026 (14 h 40, heure de Tunis)
 | 12 | Boucle mensuelle | À faire | – |
 
 ## Prévision (mise à jour à chaque session ; les dates de 03 sont des cibles)
-| Étape | Cible (03) | Prévision au 28/10 | Dépend de |
+| Étape | Cible (03) | Prévision au 02/11 | Dépend de |
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
 | Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause depuis 12 h 10 ; reprise quand Houssem la redemande | statut juridique (mentions légales) |
-| 6. Charte et modèles | 27–29/10 | 28/10–02/11 (aucun travail les 25, 26 et 27/10 ; livrables un par un depuis le 28/10) | décision sur la demande n° 6 ; séance de validation des exemples voyant, code et pneus |
-| 8. Vague A | 29/10–01/11 | 01–05/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
-| 9. Mise en ligne du minimum | 31/10 | 04–06/11 | portes 7 et 8 ; sécurité des comptes |
-| 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 12–16/11 / ≈ 19–23/11 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
+| 6. Charte et modèles | 27–29/10 | 28/10–≈ 07/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 validé le 02/11) | séance de validation des exemples voyant, code et pneus |
+| 8. Vague A | 29/10–01/11 | ≈ 08–12/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
+| 9. Mise en ligne du minimum | 31/10 | ≈ 11–13/11 | portes 7 et 8 ; sécurité des comptes |
+| 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 18–22/11 / ≈ 25–29/11 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
 
-**Séances de validation de Houssem** (le vrai goulot), d'ici le 06/11 :
+**Séances de validation de Houssem** (le vrai goulot), d'ici le 13/11 :
 1. ~~demande de changement de structure et marques de référence~~ : faite le 23/10 ;
 2. statut juridique, avant les mentions légales ;
 3. ~~paquet de validation de la base voyants et porte 5~~ : faits le 24/10 ;
 4. ~~source des résultats Google et demande de changement n° 4~~ : faites le 28/10 ;
 5. ~~texte de la demande de changement n° 5 et redirections Cloudflare~~ : faits le 28/10 (10 h 25) ;
-6. demande de changement n° 6 (coût probable), le 28/10 ;
-7. exemples des modèles voyant, code et pneus, puis porte 6, vers le 02/11 ;
-8. porte 7 ;
-9. demande de changement des requêtes absentes, juste avant l'étape 8 ;
-10. paquet et encadrés de la vague A, et porte 8 ;
-11. go / no-go et porte 9, avec GitHub Pro, les comptes et le domaine sécurisés.
+6. ~~demande de changement n° 6 (coût probable)~~ : faite le 28/10 ;
+7. ~~charte éditoriale (6.2)~~ : validée le 02/11 ;
+8. exemples des modèles voyant, code et pneus, puis porte 6, vers le 07/11 ;
+9. porte 7 ;
+10. demande de changement des requêtes absentes, juste avant l'étape 8 ;
+11. paquet et encadrés de la vague A, et porte 8 ;
+12. go / no-go et porte 9, avec GitHub Pro, les comptes et le domaine sécurisés.
 
 ## Étape 4, Plan du site : livrables
 - [x] **Rattachement des mots-clés** : les 1 053 mots-clés de 05 (921 comptés, 132 variantes) sont rattachés chacun à une seule page. Le plan compte 42 pages (22 en vague A, 11 en B, 9 en C), comme dans 02. Douze cas limites sont tranchés (09).
@@ -76,7 +77,12 @@ Dernière mise à jour : 28/10/2026 (14 h 40, heure de Tunis)
     - règle 5 réécrite dans 01, 02, `CLAUDE.md` et 08 (v5).
   - Revue indépendante du code (« à corriger », un point bloquant), corrections intégrées ; CI de la PR #11 verte (« Contrôles »).
   - Texte des deux montants validé par Houssem le 28/10 (14 h 31), empreintes versées dans `data/couts.json` ; fusion de la PR #11 demandée.
-- [ ] **6.2 Charte éditoriale écrite**, avec le texte exact de la ligne de transparence et la section méthode de « à propos ».
+- [x] **6.2 Charte éditoriale écrite**, avec le texte exact de la ligne de transparence et la section méthode de « à propos ». Validée par Houssem le 02/11 (20 h 19), avec toutes les recommandations ; verrouillée.
+  - Branche `etape-6/charte-editoriale`, PR #12 en brouillon (00c1b2d) ; CI verte (run 41497722419 : « Contrôles », « Lighthouse » et « Production » réussis, déploiement non lancé hors `main`).
+  - `docs/10_charte_editoriale.md` (charte, v1 proposée) ; `src/lib/charte.ts` (mention en tête, signature, ligne de transparence, section « Méthode », calculées depuis le registre, la grille et l'échelle du coût) ; vue générée `npm run charte:vue` ; empreinte des textes `npm run empreinte -- --charte` (`data/charte-validation.json`, vide avant la validation) ; `tests/charte.test.ts` (16 tests).
+  - Deux revues indépendantes (le maximum), corrections intégrées.
+  - Décisions validées (section 10 de la charte) : mention en tête sur toutes les pages et ligne complète après l'encadré ; « Texte rédigé par une IA » ; signature « Responsable éditorial » ; socle avec la mention seule ; recette par Claude relue par l'agent indépendant ; règle des marques et modèles ; annonces automatiques sans pleine page ni ancrage en haut, engagement sur les liens rémunérés ; délais de revue ; textes exacts.
+  - Empreinte des textes validés versée dans `data/charte-validation.json` (09e73435…) ; règle 11 de 03 (v7) et `CLAUDE.md` alignés ; charte ajoutée aux documents du projet (`claude/10_charte_editoriale.md`).
 - [ ] **6.3 Composants communs** : encadré de décision (R9), gravité lisible sans la seule couleur, lien « Signaler une erreur », ligne de transparence, fil d'Ariane, liens et enfants tirés du plan. Les emplacements publicitaires restent à l'étape 7.
 - [ ] **6.4 Tableau « ce que dit la notice de votre marque »**, généré depuis les citations de la base (pages voyants).
 - [ ] **6.5 Contrôles peu coûteux** : title, H1 ou description en double ; dates incohérentes.
@@ -184,9 +190,28 @@ Dernière mise à jour : 28/10/2026 (14 h 40, heure de Tunis)
   - « Dépannage sur autoroute ou route express : forfait réglementé de 151 € à 280,08 € TTC selon l'heure et le poids, fournitures en plus » (en vigueur depuis le 01/01/2026) ;
   - « Aucune amende n'est prévue à ce jour pour défaut d'équipement ».
 
-  Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
+  PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
+- 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 02/11/2026 (20 h 19), Houssem : **valide la charte éditoriale avec toutes les recommandations** de sa section 10, **donne son accord sur les textes exacts** (mention en tête, signature, ligne de transparence, section « Méthode ») et **demande la fusion de la PR #12** si tout va bien. 03 passe en v7 (règle 11 alignée). Le livrable 6.2 est verrouillé ; suivant : 6.3, composants communs.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 02/11, livrable 6.2 (charte éditoriale), deux revues (deux relecteurs), le maximum.
+  - **Première revue** (« à corriger », un point bloquant) :
+    - la méthode affirmait que tout verdict reposait sur 3 marques de 2 groupes : faux pour les lignes saisies ; le cas d'une alerte décrite dans une ou deux notices est dit (point bloquant) ;
+    - mention courte en tête de toutes les pages, pour informer dès la première exposition (article 50(5) du règlement sur l'IA) ;
+    - « Texte rédigé par une IA », sources « citées », lien « Méthode », signature « Responsable éditorial » proposés ;
+    - indépendance réécrite (régie publicitaire, lien rémunéré signalé) ;
+    - règles ajoutées : modèle et édition de la notice, textes d'autrui, courte citation, photos réelles, accessibilité, distance non sourcée ;
+    - nombres calculés depuis leur source ; tests du registre sans Toyota et des expressions interdites.
+  - **Seconde revue** (« à corriger », rien de bloquant) :
+    - l'IA propose le niveau de chaque citation, Houssem le valide (la méthode disait que l'IA ne fixe aucun verdict) ;
+    - dates de revue limitées aux pages de conseil ; exemple des plaquettes corrigé (D4 : décrit dans aucune des six notices lues) ;
+    - pictogramme permis dans l'encadré s'il double un texte (08 §3, règle 9) ;
+    - expressions interdites précisées : « garantie légale », « extension de garantie », « Peugeot Expert » restent permis ;
+    - empreinte des textes affichés : tout changement de sens après la validation de Houssem fait échouer le test ;
+    - sources juridiques précisées (lignes directrices C(2026) 5054 lues dans un résumé ; report limité au marquage des fournisseurs) ;
+    - annonces automatiques sans pleine page ni ancrage en haut, pour tenir « jamais avant la décision ».
+  - **Écarté ou laissé ouvert** : la compétence exigée pour la relecture humaine n'a pas été retrouvée dans un texte officiel ; elle ne change pas la conclusion (signaler l'IA sur toutes les pages). L'article L122-5 (courte citation) est à relire avant 6.4.
 - 28/10, PR #11 (application de la demande n° 6), une revue du code : « à corriger », un point bloquant.
   - **Changé** :
     - l'empreinte de l'encadré porte la plage calculée : reclasser une pièce fait revalider (point bloquant) ;
@@ -365,7 +390,7 @@ Dernière mise à jour : 28/10/2026 (14 h 40, heure de Tunis)
 - **Annonces automatiques AdSense** (étape 12) : insérées dans le navigateur, invisibles pour le contrôle ; vérifier à la recette qu'elles ne précèdent pas l'encadré.
 - **Requêtes absentes de 06** : une vingtaine de requêtes suggérées en premier par Google n'y figurent pas (« voyant moteur rouge », « fumée blanche voiture », « voiture qui fume blanc / noir », « pourquoi ma voiture chauffe », « direction assistée », « fap bouché », « puretech fiabilité / avis / chaîne »…). Toutes relèvent de pages prévues. Mesure reportée par Houssem ; à faire juste avant l'étape 8 (03 v3), avec le rattachement des requêtes identiques classées hors périmètre (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture » et environ 38 lignes), dans une seule demande de changement.
 - **Statut et AdSense** : AdSense paie en Tunisie par virement. Le statut juridique reste à trancher avant de rédiger les mentions légales (étape 7), et il faut vérifier que l'activité déclarée du statut d'auto-entrepreneur couvre des recettes publicitaires.
-- **Règlement européen sur l'IA (article 50)** : obligation de signaler un texte généré par IA qui informe le public sur une question d'intérêt public, sauf relecture humaine et responsabilité éditoriale. Il est incertain que la relecture des seuls encadrés, avec la responsabilité éditoriale de Houssem, suffise à cette exception ; la ligne de transparence sur chaque page devrait couvrir l'obligation de signalement. Sa portée pour un éditeur établi en Tunisie reste aussi incertaine.
+- **Règlement européen sur l'IA (article 50)** : traité par la charte (6.2, §5.1) : l'IA est signalée sur toutes les pages, sans s'appuyer sur l'exception de relecture humaine. La portée pour un éditeur hors de l'Union est réglée par les lignes directrices C(2026) 5054, §13 (lues dans un résumé). Restent incertains : la « question d'intérêt public », la date d'application des lignes directrices et le texte officiel sur la compétence du relecteur.
 - **OVH** : activer la double authentification sur le compte ; vérifier que le renouvellement du domaine est automatique et activer le verrou de transfert. Le tout est vérifié à la porte de l'étape 9 (03 v4).
 - **DNSSEC** : désactivation chez OVH en cours. Au 23/10, aucun enregistrement DS n'est publié pour decodauto.com.
 - **Application GitHub de Claude** : une demande de mise à jour des permissions attend la décision de Houssem.

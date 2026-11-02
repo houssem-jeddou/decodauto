@@ -22,6 +22,7 @@
   - ads.txt ;
   - libellés des codes défaut en source secondaire (norme ISO non achetée).
 - **v5, 23/10/2026** : décision de Houssem sur la revue d'une correction urgente (règle 13) : avant la fusion si la correction peut attendre une heure ; sinon après la publication, dans les 24 heures.
+- **v7, 02/11/2026** : charte éditoriale validée par Houssem (étape 6, livrable 6.2). Règle 11 alignée : mention en tête sur toutes les pages, ligne de transparence sur les pages éditoriales, « texte rédigé par une IA ».
 - **v6, 28/10/2026** : demande de changement n° 5 acceptée par Houssem. Les modèles panne, dossier et fluide, avec leur exemple validé, passent au début des étapes 10 et 11 (l'étape 6 livre les modèles des types de la vague A : voyant, code, pneus). Aucun critère retiré ; l'étape 6 doit fixer des tranches de coût qui couvrent les 42 pages.
 
 L'état réel d'avancement et la prévision des étapes sont dans 04_journal_avancement.md.
@@ -49,7 +50,7 @@ L'état réel d'avancement et la prévision des étapes sont dans 04_journal_ava
     - Chaque citation donne la page ou la section.
 11. **Transparence.**
     - L'auteur est identifié : nom réel et parcours, sur la page « à propos ».
-    - Chaque page dit en une ligne comment elle est produite : rédaction assistée par une IA, sources de première main, verdicts et encadré de décision vérifiés par Houssem.
+    - Chaque page signale dès son début que son texte est rédigé par une IA (mention en tête, règlement européen sur l'IA, article 50). Chaque page éditoriale dit aussi en une ligne comment elle est produite : texte rédigé par une IA, sources de première main, verdicts et encadré de décision vérifiés par Houssem. Textes exacts : charte éditoriale (10), `src/lib/charte.ts`.
     - La méthode détaillée est une section de la page « à propos ».
 12. **Une piste technique en parallèle.** On ne travaille que sur l'étape en cours, avec deux exceptions : la piste technique ci-dessous et la correction urgente (règle 13).
     - Une seule piste technique à la fois peut avancer en parallèle, si elle ne dépend d'aucun contenu non validé.

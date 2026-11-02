@@ -116,7 +116,7 @@ export type AffichageAutomatique = (typeof AFFICHAGES_AUTOMATIQUES)[number];
 /** Une prise en charge ne s'affiche que si la plage de la page va au moins jusqu'à cette tranche. */
 export const TRANCHE_MIN_PRISE_EN_CHARGE: TrancheCout = 'reparation';
 
-/** Principes de l'échelle, repris dans docs/08 §7 et la section méthode de « à propos ». */
+/** Principes de l'échelle, repris dans docs/08 §7 (la section méthode de « à propos » a son propre texte, src/lib/charte.ts). */
 export const PRINCIPES_COUT: readonly string[] = [
   'La tranche dit la nature de la dépense. Les tranches sont classées par lourdeur habituelle de l\'intervention : c\'est une convention, pas un montant.',
   'Une cause cite des pièces ou des opérations de la liste fermée (data/couts.json) ; sa tranche est celle de sa pièce la plus lourde. La plage de la page va de la cause la plus légère à la plus lourde ; une page sans causes déclare ses pièces. Rien n\'est saisi à la main.',

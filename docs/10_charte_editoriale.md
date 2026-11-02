@@ -1,0 +1,320 @@
+# Charte éditoriale — decodauto.com (v1)
+
+Étape 6, livrable 6.2. Proposée le 02/11/2026 ; **validée par Houssem le 02/11/2026 (20 h 19)**, avec toutes les recommandations de la section 10. Empreinte des textes affichés : `data/charte-validation.json`.
+
+## 0. Ce qui fait foi
+- **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
+- **Textes affichés tels quels** (mention en tête, signature, ligne de transparence, section « Méthode » de « à propos ») : `src/lib/charte.ts`. Leurs parties qui dépendent des données (notices lues, nombre de marques et de groupes, libellés des verdicts, des urgences et des tranches de coût) sont calculées depuis leurs sources de vérité. La section 7 en est la vue générée (`npm run charte:vue`), vérifiée par un test.
+- **Déjà fixés ailleurs, repris sans recopie** :
+  - verdicts et urgences : grille (`src/schemas/grille.ts`, 08 §6) ;
+  - coût probable : échelle, pièces et montants (`src/schemas/cout.ts`, `data/couts.json`, 08 §7) ;
+  - liens entre pages : plan du site (`data/plan-du-site.json`) ;
+  - structure de chaque type de page : schémas (`src/schemas/`, 08).
+- Toute modification passe par Houssem : une retouche de forme se valide dans la pull request ; une règle nouvelle ou retirée, par une demande de changement (03).
+
+## 1. Pour qui, pour quoi
+- **Le lecteur** : un conducteur qui voit une alerte (voyant, code défaut, symptôme, obligation) et doit décider vite. Il lit souvent sur téléphone, parfois arrêté au bord de la route.
+- **La promesse** : « Votre voiture vous alerte, on vous dit quoi faire. » Chaque page répond d'abord à « puis-je rouler ? », puis à « avec quelle urgence ? », « combien ça risque de coûter ? », « que faire ? ».
+- **Le critère de chaque phrase** : elle aide le lecteur à décider ou à agir, et elle est vraie selon une source citée. Sinon, on la retire.
+
+## 2. Règles de fond
+### 2.1 Verdicts
+- Un verdict (rouler ou non, urgence, action) vient de la base voyants ou d'une ligne saisie citant une source de première main (règle 4 de 01, contrôles R1 à R3).
+- Les libellés des verdicts et des urgences sont ceux de la grille, jamais reformulés ni adoucis dans le texte (« pas de panique », « rien de grave »).
+- Le texte ne contredit jamais l'encadré de décision. S'il nuance (selon la marque, selon la cause), il le fait avec la source.
+- Quand les marques divergent, la page le montre (écart entre marques, tableau « ce que dit la notice de votre marque » des pages voyants, 6.4).
+- **Nombre de notices.** Un voyant de la base s'appuie sur au moins 3 marques de 2 groupes (R8). Une ligne saisie peut reposer sur moins de notices, quand une alerte n'est décrite que dans une ou deux notices : la page le dit (« selon la notice <marque et modèle>, <édition> ») et le composant de l'encadré affiche le nombre de notices sur lequel repose chaque ligne (6.3).
+- **Cas connu** : le témoin d'usure des plaquettes n'est décrit dans aucune des six notices lues (décision D4 de l'étape 5). Sa ligne saisie (page « voyant frein », étape 8) exige d'abord d'ajouter au registre une source de première main qui le décrit.
+
+### 2.2 Faits et chiffres
+- **Tout fait de sécurité et tout chiffre** (pression, distance, délai, quantité, température, montant) a une source au registre, citée sur la page. Pas de source : on ne l'écrit pas, ou on dit qu'on ne sait pas.
+- Les faits de sécurité et les chiffres de chaque lot de pages passent dans le paquet de validation de Houssem (03, règle 7).
+- Pas de « dans la plupart des cas », « souvent », « en général » pour habiller un chiffre non sourcé.
+- **« Combien de kilomètres puis-je faire ? »** Si aucune notice lue ne donne de distance, la page le dit en ces termes, et donne ce que la notice demande à la place (délai, précaution). Jamais une distance estimée.
+- Les causes sont présentées dans un ordre logique, jamais « par fréquence » sans donnée sourcée (R6).
+- Une relecture par une IA n'est pas une vérification.
+
+### 2.3 Coût probable
+- Il vient de l'échelle (tranches de `src/schemas/cout.ts`) et des pièces de `data/couts.json` : jamais une tranche ou un montant écrit à la main dans le texte.
+- Un montant en euros n'apparaît que s'il est fixé par un texte officiel ou tiré d'une fourchette de `data/couts.json` (deux sources d'éditeurs différents, datée) ; jamais le prix d'une enseigne ou d'un garage (règle 5 de 01).
+- Le texte peut expliquer ce qui fait varier le coût (cause, modèle, pièce), sans chiffre inventé, et renvoyer au devis.
+
+### 2.4 Prudence
+- En cas de doute : recommander l'avis d'un professionnel, et dire ce qu'on ne sait pas.
+- La notice du véhicule du lecteur fait foi pour son véhicule : le dire quand le verdict dépend de la marque.
+- Jamais de méthode pour masquer ou éteindre un voyant sans traiter sa cause (effacer un code défaut, débrancher un témoin, désactiver un airbag hors du cas prévu par la notice). On répond à la question « comment enlever le voyant ? » en disant ce qu'il faut traiter, et ce que la notice prévoit.
+- Ni alarmisme ni minimisation : on dit le risque que la source dit, avec ses mots.
+
+### 2.5 Marques, modèles, codes
+- Une consigne de notice est citée avec la marque, le modèle et l'édition de la notice (registre des sources). Elle n'est jamais attribuée à un autre modèle, ni à une autre génération du même modèle, que celui de la notice citée. Le verdict de la base, lui, vaut pour toutes les voitures : c'est le plus prudent des notices lues, et l'écart entre marques est affiché.
+- Pour une marque dont la notice n'a pas été lue, la page ne dit rien de sa consigne : elle renvoie à la notice du véhicule.
+- Pas de page par modèle sans donnée constructeur sourcée.
+- Un code constructeur (P1xxx) est toujours précisé par marque (règle 9 de 01).
+- Les pictogrammes sont redessinés pour le site, jamais copiés.
+
+### 2.6 Textes d'autrui, citations et images
+- **Citations.** Une citation de notice ou de texte reste courte (400 caractères au plus, contrôlé), entre guillemets, avec son auteur et sa source ; elle sert l'explication de la page. Le volume cité reste limité : le tableau des notices (6.4) et l'outil ne reprennent que l'extrait utile de chaque consigne, jamais une notice entière. Cadre légal visé : l'exception de courte citation (code de la propriété intellectuelle, art. L122-5) ; texte à relire sur Légifrance avant le tableau des notices (6.4).
+- **Résultats de Google, aperçu IA, autres sites.** Ils servent seulement à connaître les questions des lecteurs (relevé Google). Leurs textes ne sont jamais repris ni reformulés. Quand une idée répandue contredit la notice, la page le dit et cite la notice.
+- **Photos.** Une photo présentée comme réelle est une vraie photo, avec son auteur ou sa source. Jamais une image générée par une IA présentée comme une photo réelle.
+
+### 2.7 Ce qu'on n'écrit jamais
+- Une expertise, une équipe, une garantie ou une certification qu'on n'a pas : « nos experts », « nos mécaniciens », « notre équipe », « testé par nos soins », « résultat garanti », « contenu certifié ». Restent permis les mots qui désignent autre chose : la garantie légale ou constructeur, l'extension de garantie, l'expert de l'assurance, le modèle Peugeot Expert. La liste est dans le code (`EXPRESSIONS_INTERDITES`, `src/lib/charte.ts`), testée sur les textes affichés de la charte, avec ses cas permis ; sur les pages, hors citations, contrôle prévu en 6.5.
+- Une promesse de résultat (« ça va régler le problème »), un « toujours » ou un « jamais » sans source.
+- Un dénigrement de marque, de garage ou de concurrent.
+- Un lien écrit dans le texte vers une page qui n'est pas liée dans le plan du site (contrôle R7-LIEN-HORS-PLAN).
+
+## 3. Règles de forme
+### 3.1 Ton
+- **Vouvoiement**, phrases courtes, une idée par phrase. Les actions à l'impératif, comme dans la base voyants : « Arrêtez-vous dès que vous pouvez le faire sans danger. »
+- Direct et calme : pas d'introduction de remplissage (« Dans cet article, nous allons voir… »), pas d'humour sur la sécurité, pas de familiarité.
+- Le site ne parle pas en « nous » d'une équipe qui n'existe pas : tournures impersonnelles, ou « on » comme dans la promesse. D'où le lien « Méthode », et non « Notre méthode ».
+
+### 3.2 Vocabulaire
+- Le mot du lecteur d'abord, le mot de la notice ensuite : « voyant » (que cherchent les lecteurs), avec « témoin » (mot des notices) cité une fois.
+- Chaque sigle est expliqué à sa première apparition dans la page : FAP (filtre à particules), ESP (contrôle de stabilité), ABS (antiblocage des roues), OBD (diagnostic embarqué).
+- Les unités toujours écrites : bar, km, km/h, °C, litres.
+
+### 3.3 Typographie
+- Guillemets français « … » ; espace insécable avant « : ; ! ? » et à l'intérieur des guillemets ; espace insécable entre un nombre et son unité (2,5 bar, 135 €).
+- Virgule décimale (2,5) ; séparateur de milliers par espace (1 000).
+- Dates affichées au format JJ/MM/AAAA, comme les dates de vérification des montants.
+- Apostrophe typographique (’) à l'affichage.
+- Les espaces insécables et l'apostrophe sont posés par le gabarit (6.3), quelle que soit la saisie des données, et un test le vérifie sur la page construite.
+
+### 3.4 Titres et description
+- Le title ou le H1 contient la requête principale du plan (contrôle R7-REQUETE-ABSENTE) ; le H1 est la question ou le sujet du lecteur, pas un slogan.
+- Title, H1 et description ne sont jamais repris d'une autre page (contrôle prévu en 6.5).
+- La description dit la réponse en une phrase ; elle ne promet rien que la page ne donne pas.
+
+### 3.5 Longueur
+- La réponse tient dans l'encadré de décision. Le texte qui suit sert à vérifier, comprendre et agir : il s'arrête quand il n'aide plus.
+- Pas de FAQ artificielle (Google n'en accorde plus les résultats enrichis à ce type de site, 03) ; les questions des lecteurs relevées sur Google sont traitées dans le corps de la page.
+
+### 3.6 Accessibilité
+- Le texte d'un lien dit où il mène (jamais « cliquez ici »).
+- Les titres se suivent sans saut de niveau (H1, puis H2, puis H3).
+- Un tableau a des cellules d'en-tête ; un verdict ne repose jamais sur la couleur seule (le libellé est toujours écrit).
+- Une image a un texte alternatif qui dit ce qu'elle montre ; un pictogramme de voyant porte le nom du voyant.
+
+## 4. Structure d'une page éditoriale
+Dans cet ordre (contrôles R9 pour l'encadré) :
+1. **Mention en tête** (section 7), avant le H1, sur toutes les pages, socle compris.
+2. **Fil d'Ariane**, tiré du plan du site.
+3. **H1.**
+4. **Encadré de décision** : premier bloc après le H1 ; rien de masqué ; aucune publicité avant ni dedans ; aucun texte, image ni média entre le H1 et l'encadré (R9-ENCADRE-POSITION) ; dedans, une icône ou un pictogramme seulement s'il double un texte écrit (verdict, nom du voyant). Il affiche la question de décision, formulée avec les mots du lecteur (« Puis-je rouler avec le voyant moteur allumé ? »), une ligne par situation (situation, verdict, urgence, action, écart entre marques, nombre de notices) et le coût probable (plage calculée, risque si l'on continue, montants et leurs dates).
+5. **Signature et dates** (section 7) : responsable éditorial, date de modification réelle et date de la dernière revue.
+6. **Ligne de transparence** (section 7), avec le lien « Méthode ».
+7. **Corps**, selon le type de page (08 §2) :
+   - pages voyants : « ce que dit la notice de votre marque » (tableau tiré de la base, 6.4), causes, marche à suivre ;
+   - pages codes défaut : signification par marque, voyant qui s'allume, causes, marche à suivre ;
+   - pages pannes : symptômes, causes, marche à suivre ;
+   - pages fluides : rôle, niveau, appoint, marche à suivre ;
+   - pages pneus et obligations : texte de référence, ce qui est exigé, période et zones (loi montagne), marche à suivre ;
+   - dans tous les cas : l'élément unique (arbre de décision, tableau, outil ou photo réelle) et les questions des lecteurs relevées sur Google (« peut-on rouler », « combien de kilomètres », « comment enlever le voyant »…) ; sur les pages qui ont des causes (voyant, code défaut, panne), chaque cause avec sa tranche de coût.
+8. **Sources** : toute source citée sur la page (lignes de la base, lignes saisies, coût, texte de référence), avec son titre, son éditeur, la page ou la section, et sa date de consultation.
+9. **Lien « Signaler une erreur ».**
+
+Les emplacements publicitaires, quand il y en aura, ne sont jamais avant l'encadré (R9-PUB-AVANT-ENCADRE).
+
+## 5. Transparence
+### 5.1 Mention en tête et ligne de transparence
+- **Où** :
+  - la **mention en tête**, courte, sur toutes les pages, avant le H1 ;
+  - la **ligne de transparence**, complète, sur chaque page éditoriale, une fois, juste après l'encadré et la signature, avant le corps.
+- **Pourquoi deux textes** :
+  - **Règlement européen sur l'IA, article 50.**
+    - Il s'applique depuis le 02/08/2026. Le report publié au Journal officiel le 24/07/2026 ne touche que le marquage technique dû par les fournisseurs d'IA (50(2)), et seulement pour les systèmes mis sur le marché avant le 02/08/2026 (jusqu'au 02/12/2026).
+    - L'article 50(4) impose à celui qui publie un texte généré par IA, pour informer le public sur une question d'intérêt public, de le signaler. Il en est dispensé si le texte a fait l'objet d'une relecture humaine ou d'un contrôle éditorial, et si une personne en porte la responsabilité éditoriale.
+    - L'article 50(5) exige que l'information soit claire, reconnaissable et donnée **au plus tard à la première exposition** au contenu.
+  - **Pourquoi on ne s'appuie pas sur la dispense** :
+    - selon les lignes directrices de la Commission sur l'article 50 (C(2026) 5054, §133 à 138, lues dans un résumé secondaire), la relecture humaine est un examen délibéré du fond, vérification des faits comprise ; des résumés du projet de lignes directrices y ajoutent une compétence sur le sujet (non vérifié sur le texte officiel) ;
+    - Houssem relit sur le fond la décision en haut de page, les verdicts, les faits de sécurité et les chiffres, sur leurs sources ; il ne relit pas toujours tout le reste du texte et n'est pas mécanicien ;
+    - le site signale donc l'IA sur toutes les pages.
+  - **Pourquoi en tête** : l'encadré est un texte rédigé par l'IA, même s'il est vérifié. Placée après lui, la seule ligne de transparence arriverait après la première exposition. La mention en tête, avant le H1, y répond ; elle ne change pas l'ordre H1 puis encadré imposé par 08 (§3, règle 9), qui ne contraint que l'espace entre le H1 et l'encadré.
+  - **Pourquoi aussi la ligne complète** : elle dit ce que la mention ne peut pas dire en quelques mots (sources de première main, ce qui est vérifié) et mène à la méthode. D'après un résumé secondaire des lignes directrices (§141 à 144), une information en tête ne suffit pas toujours quand le lecteur peut arriver au milieu du texte : la ligne la répète au début du corps.
+  - **Portée** : les lignes directrices (C(2026) 5054, §13) appliquent l'article à un éditeur établi hors de l'Union dont les contenus sont destinés au public de l'Union : c'est le cas du site. Restent incertains : que la sécurité automobile soit une « question d'intérêt public » au sens de l'article ; la date à laquelle les lignes directrices s'appliquent (la Commission les dit applicables après leur adoption formelle dans toutes les langues). Les deux textes couvrent l'obligation dans tous les cas.
+  - **Google**, guide « Creating helpful, reliable, people-first content » (mis à jour le 05/10/2026) : il recommande de dire qui a écrit (« Who ») et, quand le lecteur peut raisonnablement se le demander, comment le contenu a été produit, IA comprise (« How »).
+- **Ce que garantit chaque affirmation de la ligne** :
+  - verdicts tirés de sources de première main : R3 ;
+  - sources citées sur la page : contrôle prévu en 6.3 (section 9) ;
+  - verdicts et décision vérifiés par Houssem : son accord écrit dans la pull request du lot (03, règle 7) ; l'empreinte (R4) bloque ensuite toute modification de l'encadré non revalidée.
+- **Limites de l'empreinte** : les valeurs des fourchettes en euros n'y entrent pas (les pièces y entrent par leur identifiant) ; le texte hors encadré se corrige sans revalidation. Une correction qui touche un chiffre ou un fait de sécurité repasse par Houssem parce qu'elle est listée dans la pull request (section 9) et que lui seul décide de la fusion.
+
+### 5.2 Auteur
+- L'auteur est identifié par son nom réel, avec son parcours, sur la page « à propos » (règle 11 de 03). Le parcours reste à fournir par Houssem (décision ouverte, pour l'étape 8).
+- Aucune fausse identité, photo générée ou compétence inventée (Google le compte comme une tromperie).
+- Les données structurées de l'auteur (étape 7) reprendront le même nom et le même rôle que la signature.
+
+### 5.3 Corrections
+- Chaque page porte le lien « Signaler une erreur » (adresse à fixer en 6.3).
+- Une erreur qui touche la sécurité (verdict, consigne, chiffre) est corrigée en priorité, selon la règle 13 de 03 ; la date de mise à jour de la page change.
+
+### 5.4 Indépendance
+- Le site ne vend ni pièces ni réparations ; aucun garage, constructeur ou vendeur ne paie pour un contenu, un classement ou un verdict.
+- Une publicité, quand il y en aura, est choisie par une régie publicitaire, séparée du contenu et jamais avant la décision. Annonces automatiques : formats pleine page et ancrage en haut d'écran désactivés, vérifié à la recette de l'étape 12.
+- Un lien rémunéré (affiliation) est signalé comme tel. Aucun n'est prévu (décision 7, section 10).
+
+## 6. Usage de l'IA dans la production
+| Étape | Qui | Ce qui est fait |
+|---|---|---|
+| Brief | Claude, depuis le plan et le relevé Google | Requête, intention, questions des lecteurs, sources disponibles |
+| Sources | Claude | Lecture des notices et textes officiels ; citation à la page près au registre |
+| Verdicts | Claude propose, Houssem valide | Claude propose le niveau de chaque citation selon la grille ; Houssem le valide sur le paquet ; le plus prudent l'emporte ; jamais de verdict écrit de mémoire |
+| Rédaction | Claude | Texte rédigé depuis le brief et les sources, selon cette charte |
+| Contrôles | Machine | R1 à R5, R7 à R9, COUT-*, liens, plan, page construite (R6 relève de la recette) |
+| Recette | Claude, puis un agent indépendant | Liste de recette passée page par page (section 9) ; l'agent relit le lot avec preuves |
+| Validation | Houssem | Paquet (verdicts, faits de sécurité, chiffres) et encadré de chaque page, sur leurs sources, avant publication |
+
+## 7. Textes affichés (vue générée depuis `src/lib/charte.ts`)
+### 7.1 Mention en tête, signature et ligne de transparence
+<!-- vue-charte:transparence:debut (généré par npm run charte:vue : ne pas modifier à la main) -->
+| Texte | Où | Texte affiché |
+|---|---|---|
+| Mention en tête | Toutes les pages, avant le H1 | Texte rédigé par une IA, sous la responsabilité de Houssem Jeddou |
+| Signature (exemple de dates) | Pages éditoriales, juste après l'encadré de décision | Responsable éditorial : Houssem Jeddou · Mis à jour le 02/11/2026 · Revu le 02/11/2026 |
+| Ligne de transparence | Pages éditoriales, sous la signature | Texte rédigé par une IA. Verdicts tirés des notices des constructeurs ou de sources officielles, citées sur cette page ; verdicts et décision en haut de page vérifiés par Houssem Jeddou. [Méthode] |
+<!-- vue-charte:transparence:fin -->
+
+Le lien « Méthode » mène à l'ancre `#methode` de la page « à propos ». Ces liens (« Méthode », « Signaler une erreur ») sont posés par le gabarit, pas écrits dans le texte des pages : R7-LIEN-HORS-PLAN ne les concerne pas ; `npm run liens` vérifie que l'ancre existe (LIEN-ANCRE).
+
+### 7.2 Section « Méthode » de la page « à propos »
+<!-- vue-charte:methode:debut (généré par npm run charte:vue : ne pas modifier à la main) -->
+### Méthode (ancre `#methode`)
+
+Votre voiture vous alerte : voyant, code défaut, symptôme ou obligation. Chaque page commence par la décision : pouvez-vous rouler, avec quelle urgence, ce que cela risque de coûter et quoi faire. Voici comment ces réponses sont établies.
+
+#### Qui écrit et qui vérifie
+
+Le site est édité par Houssem Jeddou, qui en porte la responsabilité éditoriale. Les textes sont rédigés par une intelligence artificielle (Claude, d’Anthropic), à partir d’un plan, des questions que posent les conducteurs et des sources citées sur chaque page. L’IA lit les sources, propose pour chaque consigne de notice un niveau selon une grille fixe, et rédige. Aucun verdict n’est publié sans la validation de Houssem Jeddou.
+
+Houssem Jeddou vérifie lui-même chaque verdict, ainsi que la décision affichée en haut de chaque page (question, verdicts, urgence, action, coût probable), avant sa publication. Avant la publication de chaque lot de pages, il valide aussi, sur leurs sources, les faits de sécurité et les chiffres qu’elles contiennent ; toute correction qui les touche repasse par lui.
+
+Le site n’est pas relu par un mécanicien et ne répare pas de voitures : sa fiabilité repose sur les sources citées et sur cette vérification.
+
+#### D’où viennent les verdicts
+
+Un verdict (pouvez-vous rouler, avec quelle urgence, quoi faire) n’est jamais écrit de mémoire. Il est tiré d’une de ces sources, citée à la page ou à la section près :
+
+- les notices d’utilisation des constructeurs
+- la Sécurité routière
+- les textes officiels publiés sur Légifrance (lois, décrets, arrêtés)
+- les textes du contrôle technique
+- les arrêtés préfectoraux
+- RappelConso, le site officiel des rappels de produits
+
+#### Plusieurs marques pour les voyants
+
+Pour les voyants, les notices de plusieurs grandes marques vendues en France sont lues et comparées. Notices citées aujourd’hui : Dacia Sandero 3, Peugeot 208, Renault Clio 5 phase 2, Seat Ibiza et Toyota Yaris, soit cinq marques de quatre groupes. Chaque citation nomme le modèle et l’édition de la notice ; une consigne n’est jamais attribuée à un autre modèle que celui de la notice citée.
+
+Chaque voyant de la base du site s’appuie sur au moins trois marques de deux groupes différents. Quand les notices ne disent pas la même chose, la consigne la plus prudente est retenue, et la page vous montre l’écart, marque par marque. Quand une alerte n’est décrite que dans une ou deux notices, la page le dit et nomme la notice citée.
+
+La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.
+
+#### Ce que veulent dire les verdicts
+
+Les verdicts sont toujours formulés avec les mêmes mots :
+
+| Terme | Ce que cela veut dire |
+|---|---|
+| Non, arrêtez-vous immédiatement | Arrêtez-vous dès que vous pouvez le faire sans danger et coupez le moteur. Ne repartez pas, sauf si l'action indiquée le permet (par exemple après refroidissement et mise à niveau) ; sinon, faites appel à l'assistance ou à un garage. |
+| Non, ne poursuivez pas votre trajet | Ne poursuivez pas votre trajet : rejoignez le premier endroit sûr et adapté (parking, aire, sortie suivante), arrêtez la voiture et faites-la contrôler avant de reprendre la route. |
+| Oui, avec précautions | Vous pouvez rouler en appliquant la précaution indiquée (allure modérée, vérification à faire, système d'aide indisponible) et en faisant ce qui est demandé dans le délai donné par l'urgence. |
+| Oui, vous pouvez rouler | Rien n'impose d'arrêter ni de limiter la conduite : le voyant signale un fonctionnement normal, une information ou un entretien périodique à faire. |
+
+#### Ce que veulent dire les urgences
+
+L’urgence dit quand agir :
+
+| Terme | Ce que cela veut dire |
+|---|---|
+| À faire tout de suite | Sans attendre, dès que c'est sans danger et dans l'ordre indiqué par l'action : les gestes de conduite en roulant (lever le pied, ralentir, rouler pour nettoyer le filtre à particules) ; l'arrêt, la vérification ou l'appoint au premier endroit sûr ; le passage au garage en y allant directement, si l'action permet de rouler. |
+| À faire dans les jours qui viennent | À faire dans les jours qui viennent, sans attendre le prochain entretien. |
+| À prévoir dans les semaines qui viennent | À faire lors d'un prochain passage au garage, dans les semaines qui viennent. |
+| Aucune action nécessaire | Il n'y a rien à faire contrôler ni à réparer. |
+
+#### Le coût probable
+
+Le coût est donné en cinq tranches qui disent la nature de la dépense, de la plus légère à la plus lourde. Ce classement suit la lourdeur habituelle de l’intervention, pas un prix : un entretien peut coûter plus qu’une petite réparation.
+
+| Terme | Ce que cela veut dire |
+|---|---|
+| Aucun frais | Fonctionnement normal ou simple information : rien à réparer. |
+| Geste à faire vous-même | Regonfler, faire un appoint, rouler pour régénérer le filtre à particules : gratuit, ou le prix d'un produit (huile, AdBlue). |
+| Entretien ou équipement courant | Une révision, une pièce d'usure ou un équipement prévu. Peut coûter plus qu'une petite réparation. |
+| Réparation au garage | Une pièce défaillante à diagnostiquer puis à réparer ou remplacer, hors organe principal. |
+| Grosse réparation | Le remplacement ou la remise en état d'un organe ou d'un système lourd. |
+
+#### Les montants en euros
+
+Un montant en euros n’est donné que dans deux cas : s’il est fixé par un texte officiel (une amende, le tarif réglementé du dépannage sur autoroute), ou comme ordre de grandeur relevé dans au moins deux sources publiques indépendantes. Chaque montant est daté et revérifié.
+
+Le tarif d’un garage ou d’une enseigne n’est jamais cité : pour un prix précis, demandez un devis.
+
+#### Ce que ces pages ne remplacent pas
+
+Ces pages vous aident à décider ; elles ne remplacent ni un diagnostic ni la notice de votre voiture. En cas de doute, demandez l’avis d’un professionnel.
+
+#### Corrections et mises à jour
+
+Chaque page de conseil indique la date de sa dernière mise à jour et celle de sa dernière revue. Chaque page de conseil a une date limite de revue, suivie automatiquement : une revue en retard déclenche une alerte. Les montants fixés par un texte sont revérifiés à intervalle fixe.
+
+Si vous repérez une erreur, utilisez le lien « Signaler une erreur » présent sur toutes les pages : une erreur qui touche votre sécurité est corrigée en priorité.
+
+#### Indépendance
+
+Le site ne vend ni pièces ni réparations. Aucun garage, constructeur ou vendeur ne paie pour un contenu, un classement ou un verdict.
+
+Si de la publicité est affichée, elle est choisie par une régie publicitaire, séparée du contenu et jamais placée avant la décision. Un lien rémunéré est signalé comme tel.
+
+Les marques citées appartiennent à leurs propriétaires ; le site n’est lié à aucun constructeur. Les pictogrammes des voyants sont redessinés pour le site, jamais copiés.
+<!-- vue-charte:methode:fin -->
+
+## 8. Revue et mise à jour des pages
+| Pages | Prochaine revue au plus tard | Pourquoi |
+|---|---|---|
+| Voyant, code défaut, panne, fluide | 12 mois après la dernière revue | Les notices changent peu ; liens et sources à revérifier une fois par an |
+| Pneus et obligations | 6 mois ; loi montagne revue avant chaque 1er novembre | Les textes changent ; la saison d'hiver commence le 1er novembre |
+| Dossier PureTech | 3 mois (déjà contrôlé) | Sujet qui évolue (08) |
+| Montants fixés par un texte | Délai propre à chaque montant, fixé dans `data/couts.json` (contrôlé : COUT-A-REVERIFIER) | Un texte peut changer en cours d'année |
+| Fourchettes en euros | Délai de `src/schemas/cout.ts` (contrôlé : COUT-FOURCHETTE-A-REVOIR) | Prix qui évoluent |
+
+Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5). Le délai maximal par type serait contrôlé avec les contrôles de dates (6.5).
+
+## 9. Ce que la machine contrôle, et ce qui reste à la recette
+- **Contrôlé aujourd'hui** (catalogue `CONTROLES.md`) :
+  - verdicts et sources (R1 à R3, R8) ;
+  - empreinte de l'encadré (R4) : elle détecte toute modification après la validation ; la preuve de la validation elle-même est l'accord écrit de Houssem dans la pull request ;
+  - revue (R5), champs et élément unique (R7), encadré (R9) ;
+  - coût (COUT-*) : COUT-CITATION-* et COUT-GROUPES prouvent que chaque tranche de l'échelle repose sur des citations de la base validée, donc sur des sources du registre ;
+  - liens du plan, ancres (`npm run liens`), page construite ;
+  - textes affichés de la charte (`tests/charte.test.ts`) : à jour, calculés depuis le registre, sans expression interdite ; leur empreinte (CHARTE-VALIDATION-ABSENTE, alerte, puis CHARTE-EMPREINTE, erreur) bloque tout changement de sens après la validation de Houssem.
+- **À ajouter en 6.3** (composants) :
+  - mention en tête et lien « Signaler une erreur » sur toutes les pages, socle compris ; signature et ligne de transparence sur chaque page éditoriale ;
+  - mention en tête visible : ni masquée ni `aria-hidden` (article 50(5) : information accessible), comme R9-ENCADRE-MASQUE ;
+  - toute source citée (lignes de la base, lignes saisies, coût, texte de référence) figure dans la section « Sources » de la page ;
+  - nombre de notices affiché pour chaque ligne de l'encadré ;
+  - espaces insécables et apostrophe posés par le gabarit (3.3).
+- **À ajouter en 6.5** (contrôles peu coûteux) : title, H1 et description uniques ; cohérence des dates ; expressions interdites dans le texte des pages, hors citations.
+- **Recette** (passée par Claude page par page, puis relue par l'agent indépendant avec le lot) :
+  - ton et vocabulaire (section 3) ;
+  - aucune phrase sans source ni utilité (1 et 2.2) ;
+  - questions des lecteurs traitées ; distance non sourcée dite comme telle (2.2) ;
+  - aucune méthode pour masquer un voyant (2.4) ;
+  - aucune consigne transposée à un autre modèle (2.5) ;
+  - aucun texte d'autrui repris ; citations courtes et sourcées ; photos réelles (2.6) ;
+  - accessibilité (3.6) ;
+  - toute pull request qui change un chiffre ou un fait de sécurité d'une page le liste dans sa description.
+
+## 10. Décisions (validées par Houssem le 02/11/2026, avec les recommandations)
+1. **Où signaler l'IA** : mention courte en tête de toutes les pages et ligne complète après l'encadré (recommandé, section 5.1, sans demande de changement) ; ou ligne complète seule, placée avant l'encadré, ce qui demande une demande de changement sur 08 (§3, règle 9).
+2. **Formulation** : « Texte rédigé par une IA » (recommandé : c'est ce qui se passe, et la vérification de Houssem est dite à côté) ou « Rédaction assistée par une IA » (formulation de la règle 11 de 03). Variante de la mention en tête pour les pages éditoriales : « Texte rédigé par une IA · décision vérifiée par Houssem Jeddou » (plus rassurante, vraie sur ces pages ; le socle garde la mention actuelle).
+3. **Signature** : « Responsable éditorial : Houssem Jeddou · Mis à jour le … · Revu le … » (recommandé) ou « Par Houssem Jeddou · … ».
+4. **Pages du socle** (accueil, à propos, mentions légales) : mention en tête seulement, sans ligne complète (recommandé : elles n'ont pas d'encadré, et « à propos » porte la méthode).
+
+Les décisions 2 et 4 s'écartaient de la lettre de la règle 11 de 03 (« chaque page dit en une ligne… rédaction assistée par une IA ») : 03 (v7) et `CLAUDE.md` sont alignés dans la même pull request, sur l'accord de Houssem du 02/11.
+5. **Recette** : passée par Claude page par page, relue par l'agent indépendant ; Houssem valide le paquet et les encadrés (recommandé, section 6).
+6. **Marques et modèles** : règle 2.5, et affichage du nombre de notices pour une ligne qui repose sur moins de 3 marques (2.1).
+7. **Publicité et liens rémunérés** : annonces automatiques sans format pleine page ni ancrage en haut (5.4, recommandé : sinon la promesse « jamais avant la décision » serait fausse) ; aucun lien rémunéré n'est prévu : garder la phrase « Un lien rémunéré est signalé comme tel » comme engagement (recommandé) ou la retirer.
+8. **Délais de revue** par type de page (section 8).
+9. **Texte exact** de la mention, de la signature, de la ligne et de la section « Méthode » (section 7), dont l'outil d'IA nommé (Claude, d'Anthropic). Après la validation, l'empreinte des textes (`npm run empreinte -- --charte`) est copiée dans `data/charte-validation.json` : tout changement de sens demandera ensuite une nouvelle validation.
+10. Le reste de la charte (règles de fond et de forme).
