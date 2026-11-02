@@ -6,7 +6,8 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { stringify } from 'yaml';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant } from '../src/lib/empreinte.ts';
-import { datesAffichees, libellePlage, libelleRisque, plageValidee, resoudreCout, type DonneesCouts } from '../src/lib/cout.ts';
+import { datesAffichees, fourchetteAffichee, libellePlage, libelleRisque, plageValidee, resoudreCout, type DonneesCouts } from '../src/lib/cout.ts';
+import { LIGNE_TRANSPARENCE, signature } from '../src/lib/charte.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
@@ -98,7 +99,12 @@ const COUTS = {
 /** Données de coût de test, sous la forme qu'attend le calcul (src/lib/cout.ts) ; dates lues comme des dates. */
 const avecDates = (m: Objet): Objet => ({ ...m, verifie_le: new Date(String(m['verifie_le'])), ...(m['en_vigueur_le'] !== undefined && { en_vigueur_le: new Date(String(m['en_vigueur_le'])) }) });
 const DONNEES_COUTS = {
-  pieces: new Map(COUTS.pieces.map((p) => [String(p['id']), p])),
+  pieces: new Map(
+    COUTS.pieces.map((p) => {
+      const f = p['fourchette'] as Objet | undefined;
+      return [String(p['id']), f === undefined ? p : { ...p, fourchette: { ...f, releve_le: new Date(String(f['releve_le'])) } }];
+    }),
+  ),
   montants: new Map(COUTS.montants.map((m) => [String(m['id']), avecDates(m)])),
   prises_en_charge: new Map(COUTS.prises_en_charge.map((m) => [String(m['id']), avecDates(m)])),
 } as unknown as DonneesCouts;
@@ -297,6 +303,12 @@ interface OptionsHtml {
   encadreSansAction?: boolean;
   encadreMasque?: boolean;
   encadreSansCout?: boolean;
+  /** Composants communs (livrable 6.3). */
+  sansSignature?: boolean;
+  signatureAvantEncadre?: boolean;
+  sansLigneTransparence?: boolean;
+  sourceManquante?: boolean;
+  noticesFausses?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -315,7 +327,8 @@ function encadre(page: Objet, options: OptionsHtml): string {
       const urgence = GRILLE_URGENCES[l['urgence'] as Urgence]?.libelle ?? String(l['urgence']);
       const action = options.encadreSansAction ? '' : `<p>${String(l['action'])}</p>`;
       const ecart = l['ecart_marques'] !== undefined ? `<p>Selon les marques : ${String(l['ecart_marques'])}</p>` : '';
-      return `<div data-encadre-ligne data-verdict="${String(l['verdict'])}" data-urgence="${String(l['urgence'])}"><h2>${String(l['situation'])}</h2><p><strong>${verdict}</strong> · ${urgence}</p>${action}${ecart}</div>`;
+      const notices = new Set(((l['citations'] as Objet[] | undefined) ?? []).map((c) => String(c['source'])).filter((id) => (contexte.sources as Objet[]).some((s) => s['id'] === id && s['categorie'] === 'notice-constructeur'))).size;
+      return `<div data-encadre-ligne data-verdict="${String(l['verdict'])}" data-urgence="${String(l['urgence'])}" data-notices="${options.noticesFausses ? notices + 1 : notices}"><h2>${String(l['situation'])}</h2><p><strong>${verdict}</strong> · ${urgence}</p>${action}${ecart}</div>`;
     })
     .join('');
   const contenu = options.encadreMasque ? `<details><summary>Voir le détail</summary>${lignes}</details>` : lignes;
@@ -348,6 +361,45 @@ function coutAffiche(page: Objet): string {
   return morceaux.join('');
 }
 
+/** Toutes les sources que la page cite (au sens large : il suffit qu'elles soient toutes listées). */
+function sourcesAffichees(page: Objet): string[] {
+  const ids = new Set<string>();
+  const parcourir = (valeur: unknown, cle?: string): void => {
+    if (Array.isArray(valeur)) {
+      for (const x of valeur) {
+        if (typeof x === 'string' && (cle === 'sources' || cle === 'libelle_sources')) ids.add(x);
+        else parcourir(x, cle);
+      }
+    } else if (valeur !== null && typeof valeur === 'object') {
+      for (const [k, x] of Object.entries(valeur)) {
+        if (k === 'source' && typeof x === 'string') ids.add(x);
+        else parcourir(x, k);
+      }
+    }
+  };
+  parcourir(page);
+  for (const l of lignesAffichees(page)) parcourir(l['citations'], 'citations');
+  const resolu = coutResolu(page);
+  for (const id of resolu.montants) for (const s of DONNEES_COUTS.montants.get(id)?.sources ?? []) ids.add(s);
+  for (const id of resolu.prisesEnCharge) for (const s of DONNEES_COUTS.prises_en_charge.get(id)?.sources ?? []) ids.add(s);
+  for (const c of Array.isArray(page['causes']) ? (page['causes'] as Objet[]) : []) {
+    for (const s of fourchetteAffichee(Array.isArray(c['pieces']) ? (c['pieces'] as string[]) : [], DONNEES_COUTS.pieces)?.sources ?? []) ids.add(s);
+  }
+  return [...ids];
+}
+
+/** Signature, ligne de transparence et section « Sources » (composants communs, livrable 6.3). */
+function composantsCommuns(page: Objet, options: OptionsHtml): { signature: string; ligne: string; sources: string } {
+  const date = (v: unknown): Date => new Date(`${String(v)}T00:00:00Z`);
+  const texteSignature = page['date_modification'] !== undefined && page['date_revue'] !== undefined ? signature(date(page['date_modification']), date(page['date_revue'])) : '';
+  const ids = sourcesAffichees(page).slice(options.sourceManquante ? 1 : 0);
+  return {
+    signature: options.sansSignature ? '' : `<p data-signature>${texteSignature}</p>`,
+    ligne: options.sansLigneTransparence ? '' : `<p data-ligne-transparence>${LIGNE_TRANSPARENCE.texte} <a href="/a-propos/#methode">${LIGNE_TRANSPARENCE.libelleLien}</a></p>`,
+    sources: `<section data-sources><h2>Sources</h2><ol>${ids.map((id) => `<li data-source-id="${id}">Source ${id}</li>`).join('')}</ol></section>`,
+  };
+}
+
 function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): string {
   const entete = `<!doctype html>\n<html lang="fr"><head><meta charset="utf-8"><title>${String(page['title'])}</title>`;
   if (type === 'socle') return `${entete}</head><body><main><h1>${String(page['title'])}</h1></main></body></html>\n`;
@@ -366,7 +418,10 @@ function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): st
   // Un commentaire et des données structurées entre le H1 et l'encadré ne comptent pas comme un bloc.
   const entreH1EtEncadre = options.texteAvantEncadre ? '<p>Par Auteur de test, mis à jour le 20/10/2026</p>' : '<!-- encadré --><script type="application/ld+json">{"@type":"Article"}</script>';
   const blocEncadre = options.sansEncadre ? '' : encadre(page, options);
-  return `${entete}<meta name="description" content="${String(page['description'])}"></head><body>${pub}<main><header><h1>${String(page['h1'])}</h1></header>${entreH1EtEncadre}${blocEncadre}${options.sansElement ? '' : blocs[String(page['element_unique'])]}${etapes}${autreListe}</main></body></html>\n`;
+  const communs = composantsCommuns(page, options);
+  const avant = options.signatureAvantEncadre ? communs.signature : '';
+  const apres = options.signatureAvantEncadre ? communs.ligne : `${communs.signature}${communs.ligne}`;
+  return `${entete}<meta name="description" content="${String(page['description'])}"></head><body>${pub}${avant}<main><header><h1>${String(page['h1'])}</h1></header>${entreH1EtEncadre}${blocEncadre}${apres}${options.sansElement ? '' : blocs[String(page['element_unique'])]}${etapes}${autreListe}${communs.sources}</main></body></html>\n`;
 }
 
 // ---- Cas -------------------------------------------------------------------------------------------
@@ -492,6 +547,13 @@ invalide('cout-risque-plus-leger', 'panne', avecCout(panne(), { si_vous_continue
 invalide('cout-risque-sans-premiere-main', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [citation('fixture-forum')] } }), ['COUT-RISQUE-SOURCE'], 'Le risque si l\'on continue n\'est cité que d\'une source secondaire.');
 invalide('cout-citation-introuvable', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 99' }] } }), ['COUT-CITATION-INTROUVABLE'], 'La citation référencée n\'existe pas dans la base voyants.');
 invalide('r9-encadre-sans-cout', 'panne', panne(), ['R9-ENCADRE-CONTENU'], "L'encadré n'affiche pas le coût probable (plage, montant automatique).", { encadreSansCout: true });
+invalide('r9-encadre-sources', 'voyant', voyantPage(), ['R9-ENCADRE-SOURCES'], "Une ligne de l'encadré annonce un autre nombre de notices que celles qu'elle cite (charte §2.1).", { noticesFausses: true });
+
+// Composants communs (livrable 6.3) : signature, ligne de transparence, sources.
+invalide('composants-sans-signature', 'panne', panne(), ['SIGNATURE-ABSENTE'], "Pas de signature (responsable éditorial et dates) après l'encadré.", { sansSignature: true });
+invalide('composants-signature-avant-encadre', 'panne', panne(), ['SIGNATURE-POSITION'], "La signature précède l'encadré : la page doit s'ouvrir sur la décision.", { signatureAvantEncadre: true });
+invalide('composants-sans-ligne-transparence', 'voyant', voyantPage(), ['TRANSPARENCE-LIGNE-ABSENTE'], 'Pas de ligne de transparence (texte rédigé par une IA, sources, vérification) sur une page éditoriale.', { sansLigneTransparence: true });
+invalide('composants-source-manquante', 'pneus', pneus(), ['SOURCES-ABSENTE'], 'Une source citée par la page manque dans la section « Sources ».', { sourceManquante: true });
 invalide(
   'r4-pieces-modifiees',
   'panne',

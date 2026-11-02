@@ -81,6 +81,25 @@ export function fourchetteDesPieces(ids: readonly string[], pieces: ReadonlyMap<
   return haute;
 }
 
+/**
+ * Fourchette affichée pour un ensemble de pièces (une cause) : la valeur (voir fourchetteDesPieces), la date de
+ * relevé la plus ancienne et les sources des pièces qui la portent (elles vont dans la section « Sources »).
+ */
+export function fourchetteAffichee(
+  ids: readonly string[],
+  pieces: ReadonlyMap<string, PieceCout>,
+): { valeur: FourchetteEuros; releve_le: Date; sources: string[] } | undefined {
+  const valeur = fourchetteDesPieces(ids, pieces);
+  const tranche = trancheDesPieces(ids, pieces);
+  if (valeur === undefined || tranche === undefined) return undefined;
+  const portees = ids.flatMap((id) => {
+    const piece = pieces.get(id);
+    return piece !== undefined && piece.tranche === tranche && piece.fourchette !== undefined ? [piece.fourchette] : [];
+  });
+  const releve_le = new Date(Math.min(...portees.map((f) => f.releve_le.getTime())));
+  return { valeur, releve_le, sources: [...new Set(portees.flatMap((f) => f.sources))] };
+}
+
 /** Ce que la page déclare de son coût (champ cout_probable), réduit à ce dont le calcul a besoin. */
 export interface CoutDeclare {
   pieces?: readonly string[] | undefined;

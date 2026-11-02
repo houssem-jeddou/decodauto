@@ -4,6 +4,9 @@ import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
+import { MENTION_EN_TETE } from '../../src/lib/charte.ts';
+import { normaliserTexte } from '../../src/lib/empreinte.ts';
+import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
 
@@ -157,6 +160,80 @@ export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Cons
   const robots = await lire(join(dist, 'robots.txt'));
   if (robots !== undefined && !robotsAnnoncePlanDuSite(robots)) {
     constats.push(erreur('ROBOTS-SITEMAP', `robots.txt doit annoncer le plan du site : « ${LIGNE_SITEMAP} »`, 'robots.txt'));
+  }
+  return constats;
+}
+
+/**
+ * Composants présents sur toutes les pages (livrable 6.3, charte §5.1 et §5.3), pour une page construite :
+ *  - une seule mention en tête (data-mention-ia), au texte exact de la charte, avant le H1, visible : ni elle ni un
+ *    bloc qui la contient n'est masqué (hidden, aria-hidden, display:none, visibility:hidden, details, dialog) ;
+ *  - un lien « Signaler une erreur » (data-signaler-erreur) vers l'adresse de signalement.
+ */
+export function constatsMentionEtSignalement(html: string, fichier: string): Constat[] {
+  const constats: Constat[] = [];
+  const $ = cheerio.load(html);
+  const mentions = $('[data-mention-ia]');
+  if (mentions.length !== 1) {
+    constats.push(erreur('MENTION-IA-ABSENTE', `la page affiche une seule mention en tête (data-mention-ia) « ${MENTION_EN_TETE} » ; trouvé : ${mentions.length}`, fichier));
+  } else {
+    const mention = mentions.first();
+    if (normaliserTexte(mention.text()) !== normaliserTexte(MENTION_EN_TETE)) {
+      constats.push(erreur('MENTION-IA-TEXTE', `la mention en tête est « ${MENTION_EN_TETE} » ; affichée : « ${mention.text().trim()} »`, fichier));
+    }
+    const masque = [mention, ...mention.parents().toArray().map((el) => $(el))].some(
+      (el) => el.is('[hidden], [aria-hidden="true"], details, dialog, template') || /display\s*:\s*none|visibility\s*:\s*hidden/i.test(el.attr('style') ?? ''),
+    );
+    if (masque) constats.push(erreur('MENTION-IA-MASQUEE', 'la mention en tête est visible et lue par les lecteurs d\'écran (ni hidden, ni aria-hidden, ni display:none)', fichier));
+    const brut = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|template)\b[\s\S]*?<\/\1\s*>/gi, '');
+    const positionMention = brut.search(/<[a-z][a-z0-9-]*\b[^>]*\sdata-mention-ia(?=[\s=/>])/i);
+    const positionH1 = brut.search(/<h1\b/i);
+    if (positionH1 >= 0 && positionMention > positionH1) {
+      constats.push(erreur('MENTION-IA-POSITION', 'la mention en tête précède le H1 (information dès la première exposition, règlement européen sur l\'IA, article 50(5))', fichier));
+    }
+  }
+  const liens = $(`[data-signaler-erreur] a[href^="mailto:${ADRESSE_SIGNALEMENT}"]`);
+  if (liens.length !== 1) {
+    constats.push(erreur('SIGNALER-ERREUR-ABSENT', `la page affiche un lien « Signaler une erreur » vers ${ADRESSE_SIGNALEMENT} (data-signaler-erreur) ; trouvé : ${liens.length}`, fichier));
+  }
+  return constats;
+}
+
+/**
+ * Typographie du texte affiché (charte §3.3), posée par le gabarit : pas d'apostrophe droite, pas d'espace ordinaire
+ * avant « : ; ! ? » ni à l'intérieur des guillemets « … ». Le code, les scripts et les styles sont ignorés.
+ */
+export function constatsTypographie(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const textes = $('body')
+    .find('*')
+    .addBack()
+    .contents()
+    .toArray()
+    .filter((n) => n.type === 'text' && $(n).parents('script, style, code, pre, textarea, template, svg').length === 0)
+    .map((n) => (n as unknown as { data: string }).data);
+  const constats: Constat[] = [];
+  const extrait = (texte: string, i: number): string => texte.slice(Math.max(0, i - 25), i + 10).replace(/\s+/g, ' ').trim();
+  for (const texte of textes) {
+    const apostrophe = texte.indexOf("'");
+    if (apostrophe >= 0) {
+      constats.push(erreur('TYPO-APOSTROPHE', `apostrophe droite dans le texte affiché : « ${extrait(texte, apostrophe)} » (le gabarit pose l'apostrophe typographique ’)`, fichier));
+    }
+    const espace = /[ \t\n\r]+[:;!?»]|«[ \t\n\r]/.exec(texte);
+    if (espace !== null) {
+      constats.push(erreur('TYPO-ESPACE', `espace ordinaire avant « : ; ! ? » ou dans des guillemets : « ${extrait(texte, espace.index)} » (le gabarit pose une espace insécable)`, fichier));
+    }
+  }
+  return constats;
+}
+
+/** Mention en tête, lien de signalement et typographie, sur toutes les pages du site construit. */
+export async function controlerComposantsCommuns(dist: string): Promise<Constat[]> {
+  const constats: Constat[] = [];
+  for (const chemin of await listerFichiers(dist, '.html')) {
+    const fichier = relative(dist, chemin).split('\\').join('/');
+    const html = await readFile(chemin, 'utf8');
+    constats.push(...constatsMentionEtSignalement(html, fichier), ...constatsTypographie(html, fichier));
   }
   return constats;
 }

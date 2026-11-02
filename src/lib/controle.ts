@@ -1,13 +1,13 @@
 import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
-import { calculerChamps, niveauSecurite, resoudreLignes, type LigneResolue } from './calcul.ts';
+import { ANCRE_METHODE, LIGNE_TRANSPARENCE, PAGE_METHODE, signature } from './charte.ts';
+import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
   estReference,
   joursEntre,
   plageValidee,
-  resoudreCout,
   textesAttendusCout,
   trouverCitation,
   type CoutResolu,
@@ -567,8 +567,8 @@ function controlerCout(
     constats.push(erreur('COUT-PIECES-ABSENTES', 'une page sans causes déclare ses pièces (cout_probable.pieces) : la plage du coût en est calculée', fichier));
   }
 
-  const niveau = niveauSecurite(lignes);
-  const resolu = resoudreCout({ outil, causes, cout }, ctx.couts, niveau !== undefined && niveau.startsWith('non'));
+  // Même calcul que le gabarit (src/lib/calcul.ts) : plage, risque, montant automatique sur une page d'arrêt.
+  const resolu = coutDeLaPage(page, lignes, ctx.couts);
   for (const id of resolu.piecesInconnues) constats.push(erreur('COUT-PIECE-INCONNUE', `pièce « ${id} » absente de la liste (data/couts.json) : l'ajouter dans la pull request du lot, avec sa tranche`, fichier));
 
   for (const id of cout.montants ?? []) {
@@ -795,8 +795,16 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
     }
   }
 
-  // Page construite.
-  if (html !== undefined) constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes));
+  // Page construite : composants communs (livrable 6.3) en plus de l'encadré.
+  if (html !== undefined) {
+    const methode = ctx.plan.get(PAGE_METHODE);
+    const attendus: AttendusPage = {
+      sources: [...sourcesDeLaPageCitees(page, lignes, ctx.couts, cout.resolu).keys()],
+      notices: lignes.map((l) => l.sources.filter((id) => ctx.sources.get(id)?.categorie === 'notice-constructeur').length),
+      lienMethode: methode !== undefined ? `${methode.adresse}#${ANCRE_METHODE}` : undefined,
+    };
+    constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus));
+  }
 
   return { constats, page, id: page.id };
 }
@@ -804,7 +812,80 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
 // ---- Page construite -----------------------------------------------------------------------------
 
 /** Le contrôle porte sur le HTML réellement produit : c'est lui que lisent les visiteurs et Google. */
-export function controlerHtml(page: PageEditoriale, html: string, fichier: string, lignes: readonly LigneResolue[] = [], textesCout?: readonly string[]): Constat[] {
+/** Ce que la page construite doit afficher en plus de l'encadré (composants communs, livrable 6.3). */
+export interface AttendusPage {
+  /** Identifiants des sources citées par la page (calcul.ts, sourcesDeLaPageCitees) : chacune dans la section « Sources ». */
+  sources: readonly string[];
+  /** Nombre de notices de constructeurs citées par chaque ligne de situation, dans l'ordre (data-notices). */
+  notices: readonly number[];
+  /** Adresse attendue du lien « Méthode » (page « à propos » du plan, ancre de la méthode), si elle est dans le plan. */
+  lienMethode?: string | undefined;
+}
+
+/** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
+function positionAttribut(brut: string, attribut: string): number {
+  return [...brut.matchAll(baliseAvecAttribut(attribut))][0]?.index ?? -1;
+}
+
+/**
+ * Composants communs d'une page éditoriale construite (livrable 6.3, charte §4 et §5) :
+ *  - signature (responsable éditorial, date de mise à jour et date de revue de la page) et ligne de transparence
+ *    (texte exact de la charte, lien « Méthode » vers la section méthode de « à propos »), après l'encadré ;
+ *  - section « Sources » qui liste toute source citée par la page (attribut data-source-id).
+ * La mention en tête et le lien « Signaler une erreur », présents sur toutes les pages, sont contrôlés sur le site
+ * construit (scripts/lib/dist.ts).
+ */
+export function controlerComposants(page: PageEditoriale, html: string, fichier: string, attendus: AttendusPage): Constat[] {
+  const constats: Constat[] = [];
+  const $ = cheerio.load(html);
+  const brut = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|template)\b[\s\S]*?<\/\1\s*>/gi, '');
+  const encadre = positionAttribut(brut, 'data-encadre-decision');
+
+  const signatures = $('[data-signature]');
+  const attendue = signature(page.date_modification, page.date_revue);
+  if (signatures.length !== 1) {
+    constats.push(erreur('SIGNATURE-ABSENTE', `la page construite affiche une signature (data-signature) : « ${attendue} » ; trouvé : ${signatures.length}`, fichier));
+  } else if (normaliserTexte(signatures.first().text()) !== normaliserTexte(attendue)) {
+    constats.push(erreur('SIGNATURE-TEXTE', `la signature doit être « ${attendue} » (dates de la page) ; affichée : « ${signatures.first().text().trim()} »`, fichier));
+  } else if (encadre >= 0 && positionAttribut(brut, 'data-signature') < encadre) {
+    constats.push(erreur('SIGNATURE-POSITION', 'la signature vient après l\'encadré de décision (docs/08 §3, règle 9)', fichier));
+  }
+
+  const lignesTransparence = $('[data-ligne-transparence]');
+  if (lignesTransparence.length !== 1) {
+    constats.push(erreur('TRANSPARENCE-LIGNE-ABSENTE', `la page construite affiche une ligne de transparence (data-ligne-transparence) ; trouvé : ${lignesTransparence.length}`, fichier));
+  } else {
+    const ligne = lignesTransparence.first();
+    const lien = ligne.find('a').toArray().map((a) => $(a));
+    const versMethode = lien.some((a) => (attendus.lienMethode !== undefined ? a.attr('href') === attendus.lienMethode : /#methode$/.test(a.attr('href') ?? '')) && normaliserTexte(a.text()) === normaliserTexte(LIGNE_TRANSPARENCE.libelleLien));
+    if (!normaliserTexte(ligne.text()).includes(normaliserTexte(LIGNE_TRANSPARENCE.texte)) || !versMethode) {
+      constats.push(erreur('TRANSPARENCE-LIGNE-TEXTE', `la ligne de transparence affiche le texte de la charte et le lien « ${LIGNE_TRANSPARENCE.libelleLien} » vers ${attendus.lienMethode ?? 'la section méthode (#methode)'}`, fichier));
+    } else if (encadre >= 0 && positionAttribut(brut, 'data-ligne-transparence') < encadre) {
+      constats.push(erreur('TRANSPARENCE-LIGNE-POSITION', 'la ligne de transparence vient après l\'encadré de décision (docs/08 §3, règle 9)', fichier));
+    }
+  }
+
+  const section = $('[data-sources]');
+  if (section.length !== 1) {
+    constats.push(erreur('SOURCES-ABSENTE', `la page construite a une section « Sources » (data-sources) ; trouvé : ${section.length}`, fichier));
+  } else {
+    const affichees = new Set(section.find('[data-source-id]').toArray().map((el) => $(el).attr('data-source-id') ?? ''));
+    const manquantes = attendus.sources.filter((id) => !affichees.has(id));
+    if (manquantes.length > 0) {
+      constats.push(erreur('SOURCES-ABSENTE', `la section « Sources » ne liste pas : ${manquantes.join(', ')} (toute source citée sur la page y figure)`, fichier));
+    }
+  }
+  return constats;
+}
+
+export function controlerHtml(
+  page: PageEditoriale,
+  html: string,
+  fichier: string,
+  lignes: readonly LigneResolue[] = [],
+  textesCout?: readonly string[],
+  attendus?: AttendusPage,
+): Constat[] {
   const constats: Constat[] = [];
   const $ = cheerio.load(html);
 
@@ -845,7 +926,8 @@ export function controlerHtml(page: PageEditoriale, html: string, fichier: strin
     constats.push(erreur('R7-TUTORIEL-ETAPES', 'un tutoriel présente ses étapes dans une liste numérotée portant l\'attribut data-tutoriel-etapes (<ol data-tutoriel-etapes>), avec au moins une étape', fichier));
   }
 
-  constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout));
+  constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout, attendus?.notices));
+  if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
   return constats;
 }
 
@@ -864,7 +946,14 @@ const EMPLACEMENT_PUB = /<[a-z][a-z0-9-]*\b[^>]*(?:\sdata-emplacement-pub(?=[\s=
  *    (`data-encadre-ligne`, dans l'ordre des situations, avec `data-verdict` et `data-urgence`) qui affiche la
  *    situation, le libellé de son verdict et de son urgence (grille), son action et, s'il existe, l'écart entre marques.
  */
-export function controlerEncadre(page: PageEditoriale, lignes: readonly LigneResolue[], html: string, fichier: string, textesCout: readonly string[] = []): Constat[] {
+export function controlerEncadre(
+  page: PageEditoriale,
+  lignes: readonly LigneResolue[],
+  html: string,
+  fichier: string,
+  textesCout: readonly string[] = [],
+  notices?: readonly number[],
+): Constat[] {
   const constats: Constat[] = [];
   const brut = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|template)\b[\s\S]*?<\/\1\s*>/gi, '');
   const ouvertures = [...brut.matchAll(baliseAvecAttribut('data-encadre-decision'))];
@@ -923,6 +1012,11 @@ export function controlerEncadre(page: PageEditoriale, lignes: readonly LigneRes
       const element = $(noeud);
       if (element.attr('data-verdict') !== ligne.verdict || element.attr('data-urgence') !== ligne.urgence) {
         constats.push(erreur('R9-ENCADRE-CONTENU', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : data-verdict et data-urgence doivent valoir « ${ligne.verdict} » et « ${ligne.urgence} »`, fichier));
+      }
+      // Nombre de notices sur lequel repose la ligne (charte §2.1), affiché et porté par data-notices.
+      const n = notices?.[i];
+      if (n !== undefined && element.attr('data-notices') !== String(n)) {
+        constats.push(erreur('R9-ENCADRE-SOURCES', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : data-notices doit valoir ${n} (notices de constructeurs citées par la ligne)`, fichier));
       }
       const texteLigne = normaliserTexte(element.text());
       const attendus = [ligne.situation, GRILLE_VERDICTS[ligne.verdict].libelle, GRILLE_URGENCES[ligne.urgence].libelle, ligne.action, ...(ligne.ecart_marques !== undefined ? [ligne.ecart_marques] : [])];

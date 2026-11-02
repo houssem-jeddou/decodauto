@@ -6,7 +6,7 @@ import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerP
 import { adressesDansLeTexte, liensEnAttente } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
 import { auteursDuSocle, chargerDonnees, chargerPages } from './charger.ts';
-import { controler404, controlerCanonicalEtPlanDuSite, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
+import { controler404, controlerCanonicalEtPlanDuSite, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
   constats: Constat[];
@@ -73,11 +73,12 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   }
 
   // 3. Site construit : non-indexation (dans les deux sens), pages du plan, canonical et plan du site, page 404,
-  //    fixtures, configuration Cloudflare.
+  //    composants communs (mention en tête, signalement, typographie), fixtures, configuration Cloudflare.
   constats.push(...(await controlerIndexation(dist, indexable)));
   constats.push(...(await controlerPagesDuPlan(dist, [...contexte.plan.values()].map((ligne) => ligne.adresse))));
   constats.push(...(await controlerCanonicalEtPlanDuSite(dist)));
   constats.push(...(await controler404(dist)));
+  constats.push(...(await controlerComposantsCommuns(dist)));
   constats.push(...(await controlerFixturesNonPubliees(dist)));
   constats.push(...(await controlerWrangler(racine)));
 

@@ -563,6 +563,51 @@
     "explication": "L'encadré n'affiche pas le coût probable (plage, montant automatique)."
   },
   {
+    "nom": "r9-encadre-sources",
+    "type": "voyant",
+    "erreurs": [
+      "R9-ENCADRE-SOURCES"
+    ],
+    "alertes": [],
+    "explication": "Une ligne de l'encadré annonce un autre nombre de notices que celles qu'elle cite (charte §2.1)."
+  },
+  {
+    "nom": "composants-sans-signature",
+    "type": "panne",
+    "erreurs": [
+      "SIGNATURE-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Pas de signature (responsable éditorial et dates) après l'encadré."
+  },
+  {
+    "nom": "composants-signature-avant-encadre",
+    "type": "panne",
+    "erreurs": [
+      "SIGNATURE-POSITION"
+    ],
+    "alertes": [],
+    "explication": "La signature précède l'encadré : la page doit s'ouvrir sur la décision."
+  },
+  {
+    "nom": "composants-sans-ligne-transparence",
+    "type": "voyant",
+    "erreurs": [
+      "TRANSPARENCE-LIGNE-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Pas de ligne de transparence (texte rédigé par une IA, sources, vérification) sur une page éditoriale."
+  },
+  {
+    "nom": "composants-source-manquante",
+    "type": "pneus",
+    "erreurs": [
+      "SOURCES-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Une source citée par la page manque dans la section « Sources »."
+  },
+  {
     "nom": "r4-pieces-modifiees",
     "type": "panne",
     "erreurs": [

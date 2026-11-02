@@ -35,6 +35,8 @@ export const PAGE_METHODE = 'a-propos';
 export const ANCRE_METHODE = 'methode';
 /** Texte du lien vers la section méthode (sans « notre » : le site n'est pas une équipe, charte §3.1). */
 export const LIBELLE_LIEN_METHODE = 'Méthode';
+/** Texte du lien de signalement d'une erreur, présent sur toutes les pages (charte §5.3). */
+export const LIBELLE_SIGNALER_ERREUR = 'Signaler une erreur';
 
 /**
  * Mention en tête de page, avant le H1, sur toutes les pages (socle compris) : le lecteur sait dès la première
@@ -226,7 +228,7 @@ export function sectionMethode(registre: readonly NoticeLue[], regle: RegleMarqu
         titre: 'Corrections et mises à jour',
         paragraphes: [
           'Chaque page de conseil indique la date de sa dernière mise à jour et celle de sa dernière revue. Chaque page de conseil a une date limite de revue, suivie automatiquement : une revue en retard déclenche une alerte. Les montants fixés par un texte sont revérifiés à intervalle fixe.',
-          'Si vous repérez une erreur, utilisez le lien « Signaler une erreur » présent sur toutes les pages : une erreur qui touche votre sécurité est corrigée en priorité.',
+          `Si vous repérez une erreur, utilisez le lien « ${LIBELLE_SIGNALER_ERREUR} » présent sur toutes les pages : une erreur qui touche votre sécurité est corrigée en priorité.`,
         ],
       },
       {

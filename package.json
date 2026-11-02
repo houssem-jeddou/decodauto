@@ -18,6 +18,7 @@
     "plan:vue": "node scripts/vue-plan.ts",
     "grille:vue": "node scripts/vue-grille.ts",
     "charte:vue": "node scripts/vue-charte.ts",
+    "demo": "node scripts/demo-composants.ts",
     "empreinte": "node scripts/empreinte.ts",
     "verifier:modes": "node scripts/verifier-modes.ts",
     "production": "node scripts/verifier-production.ts",

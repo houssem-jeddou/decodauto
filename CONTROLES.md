@@ -34,6 +34,7 @@ Le script affiche en tête le **mode d'indexation actif**. Chaque lundi, le work
 | R9-PUB-AVANT-ENCADRE | Aucun emplacement publicitaire (`data-emplacement-pub`, ou bloc AdSense `adsbygoogle`) avant l'encadré ni dedans | erreur | `r9-pub-avant-encadre`, `tests/controle.test.ts` |
 | R9-ENCADRE-CONTENU | L'encadré affiche la question de décision et le coût probable (v5 : libellés de la plage calculée ou « Selon le voyant », risque si l'on continue, texte des montants et des prises en charge), puis une ligne par situation (`data-encadre-ligne`, dans l'ordre, avec `data-verdict` et `data-urgence` égaux au niveau de la situation) qui affiche la situation, le libellé de son verdict et de son urgence (grille), son action et, s'il existe, l'écart entre marques, sans le libellé d'un autre niveau. Les signes qui portent un sens comptent (−, +, <, >, €…) | erreur | `r9-encadre-incomplet`, `tests/controle.test.ts` |
 | R9-ENCADRE-MASQUE | Rien de masqué : ni l'encadré, ni un bloc qui le contient ou qu'il contient (`hidden`, `display:none`, `visibility:hidden`, `details`, `dialog`, `template`, `aria-hidden="true"` sur du texte). Une icône décorative sans texte peut porter `aria-hidden` | erreur | `r9-encadre-masque`, `tests/controle.test.ts` |
+| R9-ENCADRE-SOURCES | Chaque ligne de l'encadré porte `data-notices`, le nombre de notices de constructeurs qu'elle cite, et l'affiche avec leurs noms (charte §2.1) | erreur | `r9-encadre-sources`, `tests/composants.test.ts` |
 | PICTO-ABSENT / PICTO-INVALIDE | Chaque ligne de la base voyants a son pictogramme `src/pictogrammes/<pictogramme>.svg` ; le fichier est un SVG autonome : balise `svg` avec `viewBox`, éléments de forme seulement (liste blanche : pas de texte, d'image, de script, de style, d'animation), liens et `url()` internes (`#…`), aucun gestionnaire d'événement, 8 Ko au plus (fichier entier, commentaires compris) | erreur | `tests/controle.test.ts` |
 
 Non vérifiable par machine (liste de recette) :
@@ -134,6 +135,22 @@ Avant la validation de Houssem, les lignes de la base sont préparées dans `dat
 | PICTO-ABSENT | Pictogramme manquant : alerte pendant le dessin, erreur avec `--pictogrammes-obligatoires` (`npm run paquet`) et pour la base finale | alerte / erreur |
 | R7-FORMAT (sans_consigne) | `sans_consigne` ne liste que des notices constructeur du registre, jamais une notice déjà citée avec un niveau dans la même ligne | erreur |
 | PORTE5-SOURCE | Porte de l'étape 5 : chaque page éditoriale de la vague A a au moins une source de première main, rattachée par la base (voyants) ou par le tableau `travaux/etape-5/pages-sources.json` | erreur |
+
+## Composants communs des pages (étape 6, livrable 6.3)
+Composants : `src/lib/composants.ts`, assemblés par `src/lib/gabarit.ts` (le gabarit commun `src/layouts/Base.astro` y prend le bandeau et le pied). Page de démonstration avec les vraies données : `tests/demo/voyant-huile.md`, aperçu par `npm run demo` (dans `dist-demo/`, jamais déployé). Tests : `tests/composants.test.ts`.
+
+| Code | Règle | Gravité | Test |
+|---|---|---|---|
+| MENTION-IA-ABSENTE / MENTION-IA-TEXTE | Toute page construite (socle, accueil et 404 compris) affiche une seule mention en tête (`data-mention-ia`), au texte exact de la charte | erreur | `tests/composants.test.ts` |
+| MENTION-IA-POSITION | La mention précède le H1 (information dès la première exposition, règlement européen sur l'IA, article 50(5)) | erreur | `tests/composants.test.ts` |
+| MENTION-IA-MASQUEE | La mention est visible et lue par les lecteurs d'écran : ni elle ni un bloc qui la contient n'est `hidden`, `aria-hidden`, `display:none`, `visibility:hidden`, `details`, `dialog` | erreur | `tests/composants.test.ts` |
+| SIGNALER-ERREUR-ABSENT | Toute page construite a un lien « Signaler une erreur » (`data-signaler-erreur`) vers l'adresse de signalement (`ADRESSE_SIGNALEMENT`, `src/lib/site.ts`) | erreur | `tests/composants.test.ts` |
+| TYPO-APOSTROPHE / TYPO-ESPACE | Texte affiché de toute page construite : pas d'apostrophe droite, pas d'espace ordinaire avant « : ; ! ? » ni dans des guillemets (charte §3.3 ; le gabarit pose l'apostrophe ’ et les espaces insécables). Code, scripts, styles et SVG ignorés | erreur | `tests/composants.test.ts` |
+| SIGNATURE-ABSENTE / SIGNATURE-TEXTE / SIGNATURE-POSITION | Page éditoriale : une signature (`data-signature`) « Responsable éditorial : … · Mis à jour le … · Revu le … », aux dates de la page, après l'encadré | erreur | `composants-sans-signature`, `composants-signature-avant-encadre` |
+| TRANSPARENCE-LIGNE-ABSENTE / -TEXTE / -POSITION | Page éditoriale : une ligne de transparence (`data-ligne-transparence`) au texte exact de la charte, avec le lien « Méthode » vers la section méthode de « à propos » (adresse du plan, ancre `#methode`), après l'encadré | erreur | `composants-sans-ligne-transparence` |
+| SOURCES-ABSENTE | Page éditoriale : une section « Sources » (`data-sources`) qui liste (`data-source-id`) toute source citée : lignes de situation, risque si l'on continue, texte de référence, sources de la page et du coût, montants et prises en charge affichés, fourchettes affichées (`sourcesDeLaPageCitees`, `src/lib/calcul.ts`) | erreur | `composants-source-manquante` |
+
+Gravité lisible sans la seule couleur (WCAG 1.4.1) : chaque ligne de l'encadré écrit le libellé de son verdict (R9-ENCADRE-CONTENU) et porte une icône de forme propre à chaque verdict (coche, cercle avec point d'exclamation, triangle, octogone), testée dans `tests/composants.test.ts` ; la couleur s'y ajoute.
 
 ## Charte éditoriale (étape 6)
 Textes affichés tels quels (mention en tête, signature, ligne de transparence, section « Méthode » de « à propos ») : `src/lib/charte.ts` ; vue générée dans `docs/10_charte_editoriale.md` (`npm run charte:vue`). Tests : `tests/charte.test.ts` (sans dépendance).
