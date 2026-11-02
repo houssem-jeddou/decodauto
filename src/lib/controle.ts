@@ -978,9 +978,10 @@ export function controlerHtml(
  *    sur une page voyant hors outil, c'est son élément unique (data-element-unique="tableau") et la page en a au moins
  *    un voyant (TABLEAU-NOTICES-ABSENT) ;
  *  - une partie par voyant rattaché (data-voyant, dans l'ordre de l'encadré), titrée du nom du voyant ; une rangée par
- *    notice citée avec un niveau (data-source-id), ni plus ni moins, qui affiche le nom de la notice, chaque extrait et
- *    sa page, le libellé du niveau (data-verdict, data-urgence) et « Consigne retenue » (data-retenue) quand ce niveau
- *    est celui de la ligne ; sinon, la note qui dit d'où vient le verdict (TABLEAU-NOTICES-INCOMPLET) ;
+ *    consigne citée d'une notice avec un niveau (data-source-id), ni plus ni moins, dans l'ordre du modèle : le nom de la
+ *    notice, l'extrait et sa page (texte exact), le libellé de son propre niveau (data-verdict, data-urgence) et
+ *    « Consigne retenue » (data-retenue) si et seulement si ce niveau est celui de la ligne ; la note qui dit d'où vient
+ *    le niveau si et seulement si aucune consigne ne le donne en entier (TABLEAU-NOTICES-INCOMPLET) ;
  *  - la ligne de l'encadré de chaque voyant renvoie à sa partie (lien « Ce que dit chaque notice ») ; l'ancre existe
  *    (TABLEAU-NOTICES-LIEN).
  * Le texte se compare normalisé (normaliserTexte) : la typographie affichée (guillemets, apostrophes, espaces) ne
@@ -1029,30 +1030,34 @@ export function controlerTableauNotices(
     if (titre.attr('id') !== ancre) {
       constats.push(erreur('TABLEAU-NOTICES-LIEN', `voyant « ${t.voyant} » : le titre de sa partie dans le tableau des notices porte l'ancre « ${ancre} » (lien de l'encadré)`, fichier));
     }
-    const rangees = partie.find('tr[data-source-id]');
-    const ids = rangees.toArray().map((el) => $(el).attr('data-source-id') ?? '');
-    const attendues = new Set(t.rangees.map((r) => r.source));
-    const manquantes = [...attendues].filter((id) => !ids.includes(id));
-    const enTrop = ids.filter((id, i) => !attendues.has(id) || ids.indexOf(id) !== i);
-    if (manquantes.length > 0) problemes.push(`notice(s) manquante(s) : ${manquantes.join(', ')}`);
-    if (enTrop.length > 0) problemes.push(`rangée(s) en trop ou en double : ${enTrop.join(', ')}`);
-    for (const r of t.rangees) {
-      const rangee = rangees.filter((_, el) => $(el).attr('data-source-id') === r.source).first();
-      if (rangee.length === 0) continue;
-      const texte = n(rangee.text());
+    // Une rangée par consigne citée, dans l'ordre du modèle : chacune affiche sa notice, son extrait et sa page (texte
+    // exact, normalisé), son propre niveau et « Consigne retenue » si et seulement si ce niveau est celui de la ligne.
+    const rangees = partie.find('tr[data-source-id]').toArray();
+    if (rangees.length !== t.rangees.length) {
+      problemes.push(`${t.rangees.length} consigne(s) citée(s) attendue(s) (une rangée par citation), ${rangees.length} affichée(s)`);
+    }
+    t.rangees.forEach((r, i) => {
+      const noeud = rangees[i];
+      if (noeud === undefined) return;
+      const rangee = $(noeud);
       const ecarts: string[] = [];
-      if (!texte.includes(n(r.nom))) ecarts.push('nom de la notice');
-      if (r.citations.some((c) => !texte.includes(n(c.extrait)) || !texte.includes(n(c.emplacement)))) ecarts.push('extrait ou page');
+      if (rangee.attr('data-source-id') !== r.source) ecarts.push(`notice « ${rangee.attr('data-source-id') ?? ''} » au lieu de « ${r.source} »`);
+      if (!n(rangee.find('th').first().text()).includes(n(r.nom))) ecarts.push('nom de la notice');
+      if (n(rangee.find('.notices-citation').text()) !== n(r.extrait)) ecarts.push('extrait');
+      if (n(rangee.find('.notices-page').text()) !== n(r.emplacement)) ecarts.push('page ou section');
       if (rangee.attr('data-verdict') !== r.verdict || rangee.attr('data-urgence') !== r.urgence) ecarts.push(`niveau (attendu : ${r.verdict} · ${r.urgence})`);
-      if (!texte.includes(n(GRILLE_VERDICTS[r.verdict].libelle)) || !texte.includes(n(GRILLE_URGENCES[r.urgence].libelle))) ecarts.push('libellés du niveau');
-      const retenueAffichee = rangee.is('[data-retenue]') && texte.includes(n(LIBELLE_CONSIGNE_RETENUE));
-      const retenueMarquee = rangee.is('[data-retenue]') || texte.includes(n(LIBELLE_CONSIGNE_RETENUE));
+      const niveau = n(rangee.find('.notices-niveau').text());
+      if (!niveau.includes(n(GRILLE_VERDICTS[r.verdict].libelle)) || !niveau.includes(n(GRILLE_URGENCES[r.urgence].libelle))) ecarts.push('libellés du niveau');
+      const marque = n(LIBELLE_CONSIGNE_RETENUE);
+      const retenueAffichee = rangee.is('[data-retenue]') && niveau.includes(marque);
+      const retenueMarquee = rangee.is('[data-retenue]') || n(rangee.text()).includes(marque);
       if (r.retenue ? !retenueAffichee : retenueMarquee) ecarts.push(r.retenue ? `« ${LIBELLE_CONSIGNE_RETENUE} » absente` : `« ${LIBELLE_CONSIGNE_RETENUE} » marquée à tort`);
-      if (ecarts.length > 0) problemes.push(`${r.source} : ${ecarts.join(', ')}`);
-    }
-    if (!t.rangees.some((r) => r.retenue) && !n(partie.text()).includes(n(NOTE_SANS_CONSIGNE_RETENUE))) {
-      problemes.push(`aucune notice ne donne le niveau retenu : la note « ${NOTE_SANS_CONSIGNE_RETENUE} » manque`);
-    }
+      if (ecarts.length > 0) problemes.push(`rangée ${i + 1} (${r.source}, ${r.emplacement}) : ${ecarts.join(', ')}`);
+    });
+    // La note « aucune consigne ne donne à elle seule le niveau » : présente si et seulement si aucune n'est retenue.
+    const note = n(partie.text()).includes(n(NOTE_SANS_CONSIGNE_RETENUE));
+    if (!t.rangees.some((r) => r.retenue) && !note) problemes.push(`aucune consigne ne donne le niveau retenu : la note « ${NOTE_SANS_CONSIGNE_RETENUE} » manque`);
+    if (t.rangees.some((r) => r.retenue) && note) problemes.push('la note « aucune consigne ne donne à elle seule le niveau » est affichée alors qu\'une consigne le donne');
     if (problemes.length > 0) {
       constats.push(erreur('TABLEAU-NOTICES-INCOMPLET', `tableau des notices, voyant « ${t.voyant} » : ${problemes.join(' ; ')}`, fichier));
     }

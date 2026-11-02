@@ -1,18 +1,23 @@
 // ---------------------------------------------------------------------------------------------
 // Tableau « Ce que dit la notice de votre marque » (étape 6, livrable 6.4 ; décision D1 de l'étape 5) : pour chaque
-// voyant de la base rattaché à la page, chaque notice citée, son extrait mot pour mot avec sa page, et le niveau que
-// la grille tire de sa consigne. Le verdict de l'encadré est le plus prudent de ces niveaux (« consigne retenue ») :
-// le tableau rend l'écart entre marques visible et répond aux recherches « voyant + modèle ».
+// voyant de la base rattaché à la page, chaque consigne citée d'une notice, mot pour mot avec sa page, et le niveau que
+// la grille tire de cette consigne. Le verdict de l'encadré retient le verdict le plus prudent et l'urgence la plus
+// forte des sources citées (R3) ; « Consigne retenue » marque chaque consigne qui donne ce niveau en entier. Le tableau
+// rend l'écart entre marques visible et répond aux recherches « voyant + modèle ».
+// Une rangée par citation, jamais par notice : deux consignes d'une même notice (deux cas, deux pages) gardent chacune
+// leur propre niveau (revue indépendante de 6.4).
 // Tout vient de la base voyants validée et du registre des sources : rien n'est saisi dans la page. Une citation reste
-// courte (400 caractères au plus, contrôlé dans la base), entre guillemets, avec sa notice et sa page (charte §2.6).
+// courte (400 caractères au plus, contrôlé dans la base), entre guillemets, avec sa notice et sa page (charte §2.6 ;
+// code de la propriété intellectuelle, art. L122-5, 3° a : nom de l'auteur et source indiqués clairement).
 // Le tableau d'un voyant n'est affiché que sur sa page de rattachement (champ `page` de la base) : une autre page qui
 // reprend sa ligne (code défaut, panne) ne le recopie pas (une intention de recherche, une page).
 // Module sans dépendance à l'exécution : testé sans installation (tests/tableau-notices.test.ts).
 // ---------------------------------------------------------------------------------------------
 import { INSECABLE, attributHtml, texteHtml } from './html.ts';
 import { IDENTIFIANTS, ancreNotices, graviteDuVerdict, iconeGravite, nomCourtSource, type SourceDuRegistre } from './composants.ts';
+import { NOTICE_FAIT_FOI } from './charte.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
-import { rangUrgence, rangVerdict, type Urgence, type Verdict } from '../schemas/listes.ts';
+import type { Urgence, Verdict } from '../schemas/listes.ts';
 
 /** Ce que le tableau lit d'une ligne de situation résolue (calcul.ts, LigneResolue). */
 export interface LigneAvecCitations {
@@ -22,17 +27,19 @@ export interface LigneAvecCitations {
   citations: readonly { source: string; emplacement: string; extrait: string; verdict?: Verdict | undefined; urgence?: Urgence | undefined }[];
 }
 
+/** Une consigne citée d'une notice de constructeur, avec son propre niveau. */
 export interface RangeeNotice {
   source: string;
   /** Marque et modèle (« Peugeot 208 »), édition de la notice (« édition 01-20 »), adresse de la notice. */
   nom: string;
   edition?: string | undefined;
   url?: string | undefined;
-  citations: readonly { emplacement: string; extrait: string }[];
-  /** Niveau que la grille tire de la consigne de cette notice (le plus prudent de ses citations dans la ligne). */
+  emplacement: string;
+  extrait: string;
+  /** Niveau que la grille tire de cette consigne (champ de la citation dans la base). */
   verdict: Verdict;
   urgence: Urgence;
-  /** Le niveau de cette notice est celui de la ligne (consigne retenue, la plus prudente). */
+  /** Cette consigne donne en entier le niveau de la ligne (verdict et urgence) : « Consigne retenue ». */
   retenue: boolean;
 }
 
@@ -42,14 +49,11 @@ export interface TableauVoyant {
   rangees: readonly RangeeNotice[];
 }
 
-
-const plusPrudent = (a: { verdict: Verdict; urgence: Urgence }, b: { verdict: Verdict; urgence: Urgence }): boolean =>
-  rangVerdict(a.verdict) > rangVerdict(b.verdict) || (a.verdict === b.verdict && rangUrgence(a.urgence) > rangUrgence(b.urgence));
-
 /**
  * Modèle du tableau de la page `pageId` : une partie par ligne reprise de la base dont le voyant est rattaché à cette
- * page (dans l'ordre de l'encadré), une rangée par notice de constructeur citée avec un niveau, triées par nom. Les
- * lignes saisies ne sont pas reprises : elles n'ont pas les notices de plusieurs marques (charte §2.1).
+ * page (dans l'ordre de l'encadré), une rangée par citation d'une notice de constructeur avec un niveau, triées par nom
+ * de notice (ordre de la base pour les citations d'une même notice). Les lignes saisies ne sont pas reprises : elles
+ * n'ont pas les notices de plusieurs marques (charte §2.1).
  */
 export function modeleTableauNotices(
   lignes: readonly LigneAvecCitations[],
@@ -59,39 +63,44 @@ export function modeleTableauNotices(
 ): TableauVoyant[] {
   return lignes.flatMap((ligne) => {
     if (ligne.voyant === undefined || voyants.get(ligne.voyant)?.page !== pageId) return [];
-    const parSource = new Map<string, RangeeNotice>();
-    for (const c of ligne.citations) {
+    const rangees = ligne.citations.flatMap((c): RangeeNotice[] => {
       const source = registre.get(c.source);
-      if (source === undefined || source.categorie !== 'notice-constructeur' || c.verdict === undefined || c.urgence === undefined) continue;
-      const niveau = { verdict: c.verdict, urgence: c.urgence };
-      const deja = parSource.get(c.source);
-      if (deja === undefined) {
-        parSource.set(c.source, {
+      if (source === undefined || source.categorie !== 'notice-constructeur' || c.verdict === undefined || c.urgence === undefined) return [];
+      return [
+        {
           source: c.source,
           nom: nomCourtSource(source),
           edition: /\(([^)]*)\)\s*$/.exec(source.titre)?.[1],
           url: source.url,
-          citations: [{ emplacement: c.emplacement, extrait: c.extrait }],
-          ...niveau,
-          retenue: false,
-        });
-      } else {
-        parSource.set(c.source, { ...deja, citations: [...deja.citations, { emplacement: c.emplacement, extrait: c.extrait }], ...(plusPrudent(niveau, deja) ? niveau : {}) });
-      }
-    }
-    const rangees = [...parSource.values()]
-      .map((r) => ({ ...r, retenue: r.verdict === ligne.verdict && r.urgence === ligne.urgence }))
-      .sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
-    return rangees.length === 0 ? [] : [{ voyant: ligne.voyant, titre: voyants.get(ligne.voyant)?.nom ?? ligne.voyant, rangees }];
+          emplacement: c.emplacement,
+          extrait: c.extrait,
+          verdict: c.verdict,
+          urgence: c.urgence,
+          retenue: c.verdict === ligne.verdict && c.urgence === ligne.urgence,
+        },
+      ];
+    });
+    // Tri stable : par nom de notice, les citations d'une même notice dans l'ordre de la base.
+    const triees = rangees.map((r, i) => ({ r, i })).sort((a, b) => a.r.nom.localeCompare(b.r.nom, 'fr') || a.i - b.i).map(({ r }) => r);
+    return triees.length === 0 ? [] : [{ voyant: ligne.voyant, titre: voyants.get(ligne.voyant)?.nom ?? ligne.voyant, rangees: triees }];
   });
 }
 
-/** Libellé de la consigne retenue (le verdict de l'encadré), à côté du niveau de chaque notice qui la donne. */
+/** Libellé de la consigne retenue (le niveau de l'encadré), à côté du niveau de chaque consigne qui le donne en entier. */
 export const LIBELLE_CONSIGNE_RETENUE = 'Consigne retenue';
 
-/** Quand aucune notice ne donne le niveau retenu : il vient d'une autre source de première main, plus prudente. */
+/**
+ * Quand aucune consigne de notice ne donne en entier le niveau retenu : il vient d'une autre source de première main,
+ * ou combine le verdict le plus prudent et l'urgence la plus forte de consignes différentes (R3).
+ */
 export const NOTE_SANS_CONSIGNE_RETENUE =
-  'Le verdict en haut de page vient d’une autre source, plus prudente que ces notices : elle est citée dans l’encadré et dans « Sources ».';
+  'Aucune de ces consignes ne donne à elle seule le niveau affiché en haut de page : il retient le verdict le plus prudent et l’urgence la plus forte de toutes les sources citées pour ce voyant (voir « Sources »).';
+
+/** Introduction du tableau. */
+export const INTRODUCTION_TABLEAU_NOTICES = `Chaque consigne est citée mot pour mot, avec sa page. Le verdict en haut de page reprend la plus prudente : elle est marquée « ${LIBELLE_CONSIGNE_RETENUE} ».`;
+
+/** Fin du tableau : la notice du lecteur fait foi (texte de la section « Méthode », charte.ts). */
+export const FIN_TABLEAU_NOTICES = `Votre marque n’est pas dans ce tableau, ou votre modèle n’est pas le même ? ${NOTICE_FAIT_FOI}`;
 
 /**
  * Extrait cité mot pour mot, entre guillemets français ; les guillemets de la notice à l'intérieur deviennent des
@@ -105,14 +114,11 @@ function citation(extrait: string): string {
 function rangeeHtml(r: RangeeNotice): string {
   const nom = r.url !== undefined ? `<a href="${attributHtml(r.url)}" rel="noopener">${texteHtml(r.nom)}</a>` : texteHtml(r.nom);
   const edition = r.edition !== undefined ? `<span class="notices-edition">${texteHtml(r.edition)}</span>` : '';
-  const citations = r.citations
-    .map((c) => `<p class="notices-citation">${citation(c.extrait)} <span class="notices-page">${texteHtml(`(${c.emplacement})`)}</span></p>`)
-    .join('');
   const retenue = r.retenue ? ` <span class="notices-retenue">${texteHtml(LIBELLE_CONSIGNE_RETENUE)}</span>` : '';
   return [
     `<tr role="row" data-source-id="${attributHtml(r.source)}" data-verdict="${attributHtml(r.verdict)}" data-urgence="${attributHtml(r.urgence)}" data-gravite="${graviteDuVerdict(r.verdict)}"${r.retenue ? ' data-retenue' : ''}>`,
     `<th scope="row" role="rowheader">${nom}${edition}</th>`,
-    `<td role="cell">${citations}</td>`,
+    `<td role="cell"><p class="notices-citation">${citation(r.extrait)}</p><p class="notices-page">${texteHtml(r.emplacement)}</p></td>`,
     `<td role="cell" class="notices-niveau">${iconeGravite(r.verdict)}<span><strong>${texteHtml(GRILLE_VERDICTS[r.verdict].libelle)}</strong> · ${texteHtml(GRILLE_URGENCES[r.urgence].libelle)}${retenue}</span></td>`,
     '</tr>',
   ].join('');
@@ -134,8 +140,8 @@ export function tableauNotices(tableaux: readonly TableauVoyant[], options: { el
       // alors la sémantique de tableau ; les rôles la conservent pour les lecteurs d'écran.
       `<table role="table" aria-labelledby="${attributHtml(ancre)}"><thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Notice</th><th scope="col" role="columnheader">${texteHtml('Ce qu’elle demande')}</th><th scope="col" role="columnheader">Niveau</th></tr></thead>`,
       `<tbody role="rowgroup">${t.rangees.map(rangeeHtml).join('')}</tbody></table>`,
-      // Le verdict retenu peut venir d'une source plus prudente que toutes les notices (texte officiel, Sécurité
-      // routière) : le tableau le dit, plutôt que de laisser croire qu'une notice le donne.
+      // Le niveau retenu peut venir d'une source plus prudente que toutes les notices (texte officiel, Sécurité
+      // routière), ou combiner deux consignes : le tableau le dit, plutôt que de laisser croire qu'une notice le donne.
       t.rangees.some((r) => r.retenue) ? '' : `<p class="notices-note">${texteHtml(NOTE_SANS_CONSIGNE_RETENUE)}</p>`,
       '</div>',
     ].join('');
@@ -143,9 +149,9 @@ export function tableauNotices(tableaux: readonly TableauVoyant[], options: { el
   return [
     `<section class="notices"${options.elementUnique ? ' data-element-unique="tableau"' : ''} data-tableau-notices aria-labelledby="${IDENTIFIANTS.notices}">`,
     `<h2 id="${IDENTIFIANTS.notices}">${texteHtml('Ce que dit la notice de votre marque')}</h2>`,
-    `<p>${texteHtml(`Chaque consigne est citée mot pour mot, avec sa page. Le verdict en haut de page reprend la plus prudente : elle est marquée « ${LIBELLE_CONSIGNE_RETENUE} ».`)}</p>`,
+    `<p>${texteHtml(INTRODUCTION_TABLEAU_NOTICES)}</p>`,
     ...parties,
-    `<p class="notices-autres">${texteHtml('Votre marque n’est pas dans ce tableau, ou votre modèle n’est pas le même ? Suivez la notice de votre véhicule : elle fait foi pour votre voiture.')}</p>`,
+    `<p class="notices-autres">${texteHtml(FIN_TABLEAU_NOTICES)}</p>`,
     '</section>',
   ].join('');
 }

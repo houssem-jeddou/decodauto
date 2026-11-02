@@ -241,8 +241,8 @@ h3 {
   background: var(--fond-doux);
 }
 
-/* Tableau « Ce que dit la notice de votre marque » (livrable 6.4) : une rangée par notice, filet et icône de la
-   gravité du niveau de cette notice ; la consigne retenue (la plus prudente) sur le fond de sa gravité. Sur téléphone,
+/* Tableau « Ce que dit la notice de votre marque » (livrable 6.4) : une rangée par consigne citée, filet et icône de
+   la gravité de son niveau ; la consigne retenue (la plus prudente) sur le fond de sa gravité. Sur téléphone,
    chaque rangée devient une carte ; seuls les en-têtes de colonnes sont alors masqués à l'écran (lus par les lecteurs
    d'écran), jamais une citation ni un niveau. */
 .notices table {
@@ -294,10 +294,10 @@ h3 {
   color: var(--texte-doux);
 }
 .notices-citation {
-  margin: 0 0 0.5rem;
+  margin: 0;
 }
-.notices-citation:last-child {
-  margin-bottom: 0;
+.notices-page {
+  margin: 0.25rem 0 0;
 }
 .notices-page,
 .notices-autres,

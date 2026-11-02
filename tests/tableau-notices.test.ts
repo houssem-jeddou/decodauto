@@ -12,6 +12,7 @@ import { hautDePage, tableauNoticesDeLaPage } from '../src/lib/gabarit.ts';
 import { coutDeLaPage, resoudreLignes } from '../src/lib/calcul.ts';
 import { controlerTableauNotices } from '../src/lib/controle.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
+import { texteHtml } from '../src/lib/html.ts';
 import { rangUrgence, rangVerdict } from '../src/schemas/listes.ts';
 import { schemasPage } from '../src/schemas/pages.ts';
 import { construireDemo } from '../scripts/lib/demo.ts';
@@ -62,17 +63,30 @@ describe('tableau des notices : modèle tiré de la base', () => {
     assert.deepEqual(modeleTableauNotices([moteur], VOYANTS, REGISTRE, 'voyant-huile'), []);
   });
 
-  test('une rangée par notice (pas les autres sources), triée par nom ; deux citations d’une notice : le niveau le plus prudent', () => {
+  test('une rangée par consigne citée d’une notice (pas les autres sources), triée par notice ; chacune garde son niveau', () => {
     const [partie] = modeleTableauNotices([LIGNE_HUILE], VOYANTS, REGISTRE, 'voyant-huile');
     assert.ok(partie !== undefined);
-    assert.deepEqual(partie.rangees.map((r) => r.source), ['n-dacia', 'n-peugeot', 'n-renault']);
-    assert.deepEqual(partie.rangees.map((r) => r.nom), ['Dacia Sandero 3', 'Peugeot 208', 'Renault Clio 5']);
-    assert.deepEqual(partie.rangees.map((r) => r.edition), ['réf. 1688-1', 'édition 01-20', 'réf. 1457-3']);
-    const peugeot = partie.rangees[1];
-    assert.equal(peugeot?.citations.length, 2);
-    assert.equal(peugeot?.verdict, 'non, arrêt immédiat');
-    // Consigne retenue : le niveau de la notice est celui de la ligne (le plus prudent).
-    assert.deepEqual(partie.rangees.map((r) => r.retenue), [true, true, false]);
+    assert.deepEqual(partie.rangees.map((r) => r.source), ['n-dacia', 'n-peugeot', 'n-peugeot', 'n-renault']);
+    assert.deepEqual(partie.rangees.map((r) => r.nom), ['Dacia Sandero 3', 'Peugeot 208', 'Peugeot 208', 'Renault Clio 5']);
+    assert.deepEqual(partie.rangees.map((r) => r.edition), ['réf. 1688-1', 'édition 01-20', 'édition 01-20', 'réf. 1457-3']);
+    // Deux consignes de la même notice : deux rangées, dans l'ordre de la base, chacune avec son propre niveau.
+    assert.deepEqual(partie.rangees.filter((r) => r.source === 'n-peugeot').map((r) => [r.emplacement, r.verdict]), [['p. 13', 'non, arrêt immédiat'], ['p. 14', 'oui avec précautions']]);
+    // Consigne retenue : la consigne donne en entier le niveau de la ligne.
+    assert.deepEqual(partie.rangees.map((r) => r.retenue), [true, true, false, false]);
+  });
+
+  test('niveau de la ligne fait du verdict d’une consigne et de l’urgence d’une autre (R3) : aucune consigne marquée, note', () => {
+    const ligne: LigneAvecCitations = {
+      voyant: 'huile',
+      verdict: 'oui avec précautions',
+      urgence: 'sous quelques jours',
+      citations: [cite('n-peugeot', 'oui avec précautions', 'sous quelques semaines'), cite('n-renault', 'oui', 'sous quelques jours')],
+    };
+    const tableaux = modeleTableauNotices([ligne], VOYANTS, REGISTRE, 'voyant-huile');
+    assert.deepEqual(tableaux[0]?.rangees.map((r) => r.retenue), [false, false]);
+    const html = tableauNotices(tableaux, { elementUnique: true });
+    assert.doesNotMatch(html, /data-retenue/);
+    assert.ok(html.includes('Aucune de ces consignes ne donne à elle seule le niveau affiché en haut de page'));
   });
 
   test('base réelle : chaque voyant a sa partie sur sa page de rattachement ; aucune notice plus prudente que la ligne', async () => {
@@ -84,12 +98,16 @@ describe('tableau des notices : modèle tiré de la base', () => {
       const [partie] = modeleTableauNotices([ligne], demo.contexte.voyants, demo.contexte.sources, voyant.page);
       assert.ok(partie !== undefined, voyant.id);
       parties += 1;
-      // Au moins trois notices (règle 10 de 03) ; aucune ne donne un niveau plus prudent que la ligne (R3).
-      assert.ok(partie.rangees.length >= 3, `${voyant.id} : ${partie.rangees.length} notices`);
+      // Au moins trois notices (règle 10 de 03) ; aucune consigne plus prudente que la ligne (R3) ; une rangée par
+      // citation de notice de la base ; au moins une consigne retenue (sinon, la note s'affiche : aucun cas aujourd'hui).
+      assert.ok(new Set(partie.rangees.map((r) => r.source)).size >= 3, `${voyant.id} : moins de trois notices`);
+      const citationsNotices = voyant.citations.filter((c) => demo.contexte.sources.get(c.source)?.categorie === 'notice-constructeur');
+      assert.equal(partie.rangees.length, citationsNotices.length, voyant.id);
+      assert.ok(partie.rangees.some((r) => r.retenue), voyant.id);
       for (const r of partie.rangees) {
         assert.ok(rangVerdict(r.verdict) <= rangVerdict(voyant.verdict), `${voyant.id} / ${r.source}`);
-        if (r.verdict === voyant.verdict) assert.ok(rangUrgence(r.urgence) <= rangUrgence(voyant.urgence), `${voyant.id} / ${r.source}`);
-        for (const c of r.citations) assert.ok(c.extrait.length <= 400, `${voyant.id} / ${r.source} : citation courte`);
+        assert.ok(rangUrgence(r.urgence) <= rangUrgence(voyant.urgence), `${voyant.id} / ${r.source}`);
+        assert.ok(r.extrait.length <= 400, `${voyant.id} / ${r.source} : citation courte`);
       }
       // Sur une autre page, le voyant n'a pas de partie (pas de recopie du tableau).
       assert.deepEqual(modeleTableauNotices([ligne], demo.contexte.voyants, demo.contexte.sources, 'autre-page'), []);
@@ -113,17 +131,21 @@ describe('tableau des notices : rendu', () => {
     assert.equal(ancreNotices('huile'), 'da-notices-huile');
   });
 
-  test('chaque rangée : notice (lien, édition), extraits entre guillemets avec leur page, niveau écrit, consigne retenue', () => {
+  test('chaque rangée : notice (lien, édition), extrait entre guillemets, sa page, son niveau écrit, consigne retenue', () => {
     const html = tableauNotices(modele, { elementUnique: true });
     const rangees = html.match(/<tr role="row" data-source-id[\s\S]*?<\/tr>/g) ?? [];
-    assert.equal(rangees.length, 3);
-    const peugeot = rangees.find((r) => r.includes('data-source-id="n-peugeot"')) ?? '';
-    assert.match(peugeot, /data-verdict="non, arrêt immédiat" data-urgence="immédiate" data-gravite="3" data-retenue>/);
-    assert.match(peugeot, /<th scope="row" role="rowheader"><a href="https:\/\/exemple\.test\/notice\.pdf" rel="noopener">Peugeot 208<\/a><span class="notices-edition">édition 01-20<\/span><\/th>/);
-    assert.match(peugeot, /« Arrêtez-vous impérativement\. » <span class="notices-page">\(p\. 13\)<\/span>/);
-    assert.match(peugeot, /« Vérifiez le niveau\. »/);
-    assert.ok(peugeot.includes(GRILLE_VERDICTS['non, arrêt immédiat'].libelle.replace(/'/g, '’')) || peugeot.includes(GRILLE_VERDICTS['non, arrêt immédiat'].libelle));
-    assert.ok(peugeot.includes(LIBELLE_CONSIGNE_RETENUE));
+    assert.equal(rangees.length, 4);
+    const [p13, p14] = rangees.filter((r) => r.includes('data-source-id="n-peugeot"'));
+    assert.ok(p13 !== undefined && p14 !== undefined);
+    assert.match(p13, /data-verdict="non, arrêt immédiat" data-urgence="immédiate" data-gravite="3" data-retenue>/);
+    assert.match(p13, /<th scope="row" role="rowheader"><a href="https:\/\/exemple\.test\/notice\.pdf" rel="noopener">Peugeot 208<\/a><span class="notices-edition">édition 01-20<\/span><\/th>/);
+    assert.match(p13, /<p class="notices-citation">«\u00a0Arrêtez-vous impérativement\.\u00a0»<\/p><p class="notices-page">p\. 13<\/p>/);
+    assert.ok(p13.includes(LIBELLE_CONSIGNE_RETENUE));
+    // La seconde consigne de la même notice garde son propre niveau, sans « Consigne retenue ».
+    assert.match(p14, /data-verdict="oui avec précautions" data-urgence="immédiate" data-gravite="1">/);
+    assert.match(p14, /«\u00a0Vérifiez le niveau\.\u00a0»/);
+    assert.doesNotMatch(p14, /Consigne retenue/);
+    assert.ok(p13.includes(GRILLE_VERDICTS['non, arrêt immédiat'].libelle.replace(/'/g, '’')) || p13.includes(GRILLE_VERDICTS['non, arrêt immédiat'].libelle));
     const renault = rangees.find((r) => r.includes('data-source-id="n-renault"')) ?? '';
     assert.doesNotMatch(renault, /data-retenue|Consigne retenue/);
     assert.match(renault, /data-gravite="2"/);
@@ -132,11 +154,11 @@ describe('tableau des notices : rendu', () => {
     assert.match(renault, /<td role="cell" class="notices-niveau"><svg class="icone-gravite"[^>]*aria-hidden="true"/);
   });
 
-  test('aucune notice ne donne le niveau retenu (source officielle plus prudente) : la note le dit, rien n’est marqué', () => {
+  test('aucune consigne de notice ne donne le niveau retenu (source officielle plus prudente) : la note le dit, rien n’est marqué', () => {
     const ligne: LigneAvecCitations = { ...LIGNE_HUILE, citations: LIGNE_HUILE.citations.filter((c) => c.source !== 'n-dacia' && c.source !== 'n-peugeot') };
     const html = tableauNotices(modeleTableauNotices([ligne], VOYANTS, REGISTRE, 'voyant-huile'), { elementUnique: true });
     assert.doesNotMatch(html, /data-retenue/);
-    assert.ok(html.includes('Le verdict en haut de page vient d’une autre source'));
+    assert.ok(html.includes('Aucune de ces consignes ne donne à elle seule le niveau affiché en haut de page'));
     assert.ok(NOTE_SANS_CONSIGNE_RETENUE.length > 0);
     assert.doesNotMatch(tableauNotices(modele, { elementUnique: true }), /notices-note/);
   });
@@ -244,6 +266,18 @@ describe('tableau des notices : page de démonstration et gabarit', async () => 
     const nonRetenue = /<tr role="row" data-source-id="[^"]+" data-verdict="[^"]+" data-urgence="[^"]+" data-gravite="\d">/.exec(demo.html)?.[0] ?? '';
     assert.ok(nonRetenue !== '', 'la démonstration a une notice moins prudente que la ligne');
     assert.deepEqual(codes(demo.html.replace(nonRetenue, nonRetenue.replace('>', ' data-retenue>'))), ['TABLEAU-NOTICES-INCOMPLET']);
+  });
+
+  test('[CI] page d’une consigne attribuée à une autre, note affichée alors qu’une consigne est retenue : TABLEAU-NOTICES-INCOMPLET', () => {
+    // Les deux premières pages citées du tableau, échangées : chaque extrait garde son texte, mais pas sa page.
+    const pages = [...demo.html.matchAll(/<p class="notices-page">([^<]*)<\/p>/g)].map((m) => m[0]);
+    assert.ok(pages.length >= 2 && pages[0] !== pages[1]);
+    const [a, b] = pages as [string, string];
+    const echange = demo.html.replace(a, '\u0000').replace(b, a).replace('\u0000', b);
+    assert.deepEqual(codes(echange), ['TABLEAU-NOTICES-INCOMPLET']);
+    // Note « aucune consigne ne donne à elle seule le niveau » sous une partie qui a une consigne retenue.
+    const note = `<p class="notices-note">${texteHtml(NOTE_SANS_CONSIGNE_RETENUE)}</p>`;
+    assert.deepEqual(codes(demo.html.replace('</tbody></table></div>', `</tbody></table>${note}</div>`)), ['TABLEAU-NOTICES-INCOMPLET']);
   });
 
   test('[CI] lien de l’encadré absent ou ancre manquante : TABLEAU-NOTICES-LIEN', () => {
