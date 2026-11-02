@@ -8,6 +8,7 @@ import { stringify } from 'yaml';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant } from '../src/lib/empreinte.ts';
 import { datesAffichees, fourchetteAffichee, libellePlage, libelleRisque, plageValidee, resoudreCout, type DonneesCouts } from '../src/lib/cout.ts';
 import { LIGNE_TRANSPARENCE, signature } from '../src/lib/charte.ts';
+import { phraseSources, sourcesDeLaLigne } from '../src/lib/composants.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
@@ -309,6 +310,7 @@ interface OptionsHtml {
   sansLigneTransparence?: boolean;
   sourceManquante?: boolean;
   noticesFausses?: boolean;
+  sansPhraseSources?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -320,6 +322,9 @@ function lignesAffichees(page: Objet): Objet[] {
   });
 }
 
+/** Registre de test réduit à ce que l'encadré nomme (titre, catégorie). */
+const REGISTRE_TEST = new Map((contexte.sources as Objet[]).map((s) => [String(s['id']), { titre: String(s['titre']), categorie: String(s['categorie']) }]));
+
 function encadre(page: Objet, options: OptionsHtml): string {
   const lignes = lignesAffichees(page)
     .map((l) => {
@@ -327,8 +332,11 @@ function encadre(page: Objet, options: OptionsHtml): string {
       const urgence = GRILLE_URGENCES[l['urgence'] as Urgence]?.libelle ?? String(l['urgence']);
       const action = options.encadreSansAction ? '' : `<p>${String(l['action'])}</p>`;
       const ecart = l['ecart_marques'] !== undefined ? `<p>Selon les marques : ${String(l['ecart_marques'])}</p>` : '';
-      const notices = new Set(((l['citations'] as Objet[] | undefined) ?? []).map((c) => String(c['source'])).filter((id) => (contexte.sources as Objet[]).some((s) => s['id'] === id && s['categorie'] === 'notice-constructeur'))).size;
-      return `<div data-encadre-ligne data-verdict="${String(l['verdict'])}" data-urgence="${String(l['urgence'])}" data-notices="${options.noticesFausses ? notices + 1 : notices}"><h2>${String(l['situation'])}</h2><p><strong>${verdict}</strong> · ${urgence}</p>${action}${ecart}</div>`;
+      const ids = [...new Set(((l['citations'] as Objet[] | undefined) ?? []).map((c) => String(c['source'])))];
+      const nommees = sourcesDeLaLigne(ids, REGISTRE_TEST);
+      const notices = nommees.notices.length;
+      const phrase = options.sansPhraseSources ? '' : `<p>${phraseSources(nommees)}</p>`;
+      return `<div data-encadre-ligne data-verdict="${String(l['verdict'])}" data-urgence="${String(l['urgence'])}" data-notices="${options.noticesFausses ? notices + 1 : notices}"><h2>${String(l['situation'])}</h2><p><strong>${verdict}</strong> · ${urgence}</p>${action}${ecart}${phrase}</div>`;
     })
     .join('');
   const contenu = options.encadreMasque ? `<details><summary>Voir le détail</summary>${lignes}</details>` : lignes;
@@ -548,6 +556,7 @@ invalide('cout-risque-sans-premiere-main', 'voyant', avecCout(voyantPage(), { si
 invalide('cout-citation-introuvable', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 99' }] } }), ['COUT-CITATION-INTROUVABLE'], 'La citation référencée n\'existe pas dans la base voyants.');
 invalide('r9-encadre-sans-cout', 'panne', panne(), ['R9-ENCADRE-CONTENU'], "L'encadré n'affiche pas le coût probable (plage, montant automatique).", { encadreSansCout: true });
 invalide('r9-encadre-sources', 'voyant', voyantPage(), ['R9-ENCADRE-SOURCES'], "Une ligne de l'encadré annonce un autre nombre de notices que celles qu'elle cite (charte §2.1).", { noticesFausses: true });
+invalide('r9-encadre-sans-phrase-sources', 'voyant', voyantPage(), ['R9-ENCADRE-SOURCES'], "Une ligne de l'encadré n'écrit pas sur combien de notices elle repose, ni leurs noms (charte §2.1).", { sansPhraseSources: true });
 
 // Composants communs (livrable 6.3) : signature, ligne de transparence, sources.
 invalide('composants-sans-signature', 'panne', panne(), ['SIGNATURE-ABSENTE'], "Pas de signature (responsable éditorial et dates) après l'encadré.", { sansSignature: true });

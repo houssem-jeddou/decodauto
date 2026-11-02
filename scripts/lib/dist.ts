@@ -4,9 +4,10 @@ import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
-import { MENTION_EN_TETE } from '../../src/lib/charte.ts';
+import { LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE } from '../../src/lib/charte.ts';
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
+import { lienSignalement } from '../../src/lib/composants.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
 
@@ -168,9 +169,10 @@ export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Cons
  * Composants présents sur toutes les pages (livrable 6.3, charte §5.1 et §5.3), pour une page construite :
  *  - une seule mention en tête (data-mention-ia), au texte exact de la charte, avant le H1, visible : ni elle ni un
  *    bloc qui la contient n'est masqué (hidden, aria-hidden, display:none, visibility:hidden, details, dialog) ;
- *  - un lien « Signaler une erreur » (data-signaler-erreur) vers l'adresse de signalement.
+ *  - un lien « Signaler une erreur » (data-signaler-erreur), à ce texte, vers l'adresse de signalement, avec l'adresse
+ *    de la page (`adressePage`, absente pour la 404) dans le message.
  */
-export function constatsMentionEtSignalement(html: string, fichier: string): Constat[] {
+export function constatsMentionEtSignalement(html: string, fichier: string, adressePage?: string): Constat[] {
   const constats: Constat[] = [];
   const $ = cheerio.load(html);
   const mentions = $('[data-mention-ia]');
@@ -194,14 +196,21 @@ export function constatsMentionEtSignalement(html: string, fichier: string): Con
   }
   const liens = $(`[data-signaler-erreur] a[href^="mailto:${ADRESSE_SIGNALEMENT}"]`);
   if (liens.length !== 1) {
-    constats.push(erreur('SIGNALER-ERREUR-ABSENT', `la page affiche un lien « Signaler une erreur » vers ${ADRESSE_SIGNALEMENT} (data-signaler-erreur) ; trouvé : ${liens.length}`, fichier));
+    constats.push(erreur('SIGNALER-ERREUR-ABSENT', `la page affiche un lien « ${LIBELLE_SIGNALER_ERREUR} » vers ${ADRESSE_SIGNALEMENT} (data-signaler-erreur) ; trouvé : ${liens.length}`, fichier));
+  } else {
+    const lien = liens.first();
+    const attendu = lienSignalement(adressePage);
+    if (normaliserTexte(lien.text()) !== normaliserTexte(LIBELLE_SIGNALER_ERREUR) || lien.attr('href') !== attendu) {
+      constats.push(erreur('SIGNALER-ERREUR-ABSENT', `le lien de signalement a le texte « ${LIBELLE_SIGNALER_ERREUR} » et l'adresse de la page dans son message (attendu : ${attendu})`, fichier));
+    }
   }
   return constats;
 }
 
 /**
- * Typographie du texte affiché (charte §3.3), posée par le gabarit : pas d'apostrophe droite, pas d'espace ordinaire
- * avant « : ; ! ? » ni à l'intérieur des guillemets « … ». Le code, les scripts et les styles sont ignorés.
+ * Typographie du texte affiché (charte §3.3), posée par le gabarit : pas d'apostrophe droite, pas de guillemet droit,
+ * pas d'espace ordinaire avant « : ; ! ? » ni à l'intérieur des guillemets « … ». Le code, les scripts, les styles et
+ * les dessins (SVG) sont ignorés.
  */
 export function constatsTypographie(html: string, fichier: string): Constat[] {
   const $ = cheerio.load(html);
@@ -219,6 +228,10 @@ export function constatsTypographie(html: string, fichier: string): Constat[] {
     if (apostrophe >= 0) {
       constats.push(erreur('TYPO-APOSTROPHE', `apostrophe droite dans le texte affiché : « ${extrait(texte, apostrophe)} » (le gabarit pose l'apostrophe typographique ’)`, fichier));
     }
+    const guillemet = texte.indexOf('"');
+    if (guillemet >= 0) {
+      constats.push(erreur('TYPO-GUILLEMETS', `guillemet droit dans le texte affiché : « ${extrait(texte, guillemet)} » (guillemets français « … »)`, fichier));
+    }
     const espace = /[ \t\n\r]+[:;!?»]|«[ \t\n\r]/.exec(texte);
     if (espace !== null) {
       constats.push(erreur('TYPO-ESPACE', `espace ordinaire avant « : ; ! ? » ou dans des guillemets : « ${extrait(texte, espace.index)} » (le gabarit pose une espace insécable)`, fichier));
@@ -233,7 +246,43 @@ export async function controlerComposantsCommuns(dist: string): Promise<Constat[
   for (const chemin of await listerFichiers(dist, '.html')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
     const html = await readFile(chemin, 'utf8');
-    constats.push(...constatsMentionEtSignalement(html, fichier), ...constatsTypographie(html, fichier));
+    constats.push(...constatsMentionEtSignalement(html, fichier, adresseDepuisFichier(fichier)), ...constatsTypographie(html, fichier));
+  }
+  return constats;
+}
+
+export interface MaillageAttendu {
+  /** Adresse de la page mère, si elle est construite : lien dans le fil d'Ariane. */
+  parent?: string | undefined;
+  /** Adresses des pages enfants construites : listées par la page mère (docs/08 §4). */
+  enfants: readonly string[];
+  /** Adresses des autres pages liées dans le plan et construites. */
+  liees: readonly string[];
+}
+
+/**
+ * Maillage d'une page éditoriale construite (docs/08 §4, livrable 6.3) : un fil d'Ariane (data-fil-ariane) avec le lien
+ * vers la page mère construite, la liste des pages enfants construites (data-pages-enfants) et des autres pages liées
+ * construites (data-pages-liees). Un lien manquant n'est pas vu par `npm run liens`, qui ne voit que les liens cassés.
+ */
+export function constatsMaillage(html: string, fichier: string, attendu: MaillageAttendu): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const liensDe = (selecteur: string): Set<string> => new Set($(`${selecteur} a[href]`).toArray().map((a) => $(a).attr('href') ?? ''));
+  if ($('[data-fil-ariane]').length !== 1) {
+    constats.push(erreur('FIL-ARIANE-ABSENT', 'la page affiche un fil d\'Ariane (data-fil-ariane) avant le H1', fichier));
+  } else if (attendu.parent !== undefined && !liensDe('[data-fil-ariane]').has(attendu.parent)) {
+    constats.push(erreur('FIL-ARIANE-ABSENT', `le fil d'Ariane mène à la page mère (${attendu.parent})`, fichier));
+  }
+  const enfants = liensDe('[data-pages-enfants]');
+  const enfantsManquants = attendu.enfants.filter((a) => !enfants.has(a));
+  if (enfantsManquants.length > 0) {
+    constats.push(erreur('PAGES-ENFANTS-ABSENTES', `la page mère liste ses pages enfants construites (data-pages-enfants) ; manquent : ${enfantsManquants.join(', ')}`, fichier));
+  }
+  const liees = liensDe('[data-pages-liees]');
+  const lieesManquantes = attendu.liees.filter((a) => !liees.has(a));
+  if (lieesManquantes.length > 0) {
+    constats.push(erreur('PAGES-LIEES-ABSENTES', `la page affiche les pages liées dans le plan et construites (data-pages-liees) ; manquent : ${lieesManquantes.join(', ')}`, fichier));
   }
   return constats;
 }

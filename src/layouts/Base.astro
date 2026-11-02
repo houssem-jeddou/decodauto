@@ -17,7 +17,8 @@ const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.
 // Composants communs à toutes les pages (livrable 6.3, src/lib/gabarit.ts) : nom du site et mention en tête avant le
 // H1, lien de signalement en pied de page (contrôles MENTION-IA-* et SIGNALER-ERREUR-ABSENT).
 const haut = bandeau();
-const bas = pied(Astro.url.pathname);
+// Sur la page 404, l'adresse demandée n'est pas connue du site statique : le lecteur la complète dans son courriel.
+const bas = pied(sansCanonical ? undefined : Astro.url.pathname);
 ---
 
 <!doctype html>

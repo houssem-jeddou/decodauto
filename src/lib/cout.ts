@@ -82,8 +82,8 @@ export function fourchetteDesPieces(ids: readonly string[], pieces: ReadonlyMap<
 }
 
 /**
- * Fourchette affichée pour un ensemble de pièces (une cause) : la valeur (voir fourchetteDesPieces), la date de
- * relevé la plus ancienne et les sources des pièces qui la portent (elles vont dans la section « Sources »).
+ * Fourchette affichée pour un ensemble de pièces (une cause) : la valeur (voir fourchetteDesPieces), puis la date de
+ * relevé la plus ancienne et les sources des pièces qui portent cette valeur (elles vont dans la section « Sources »).
  */
 export function fourchetteAffichee(
   ids: readonly string[],
@@ -92,9 +92,10 @@ export function fourchetteAffichee(
   const valeur = fourchetteDesPieces(ids, pieces);
   const tranche = trancheDesPieces(ids, pieces);
   if (valeur === undefined || tranche === undefined) return undefined;
+  // Seules les pièces dont la fourchette est celle affichée en donnent la date et les sources.
   const portees = ids.flatMap((id) => {
     const piece = pieces.get(id);
-    return piece !== undefined && piece.tranche === tranche && piece.fourchette !== undefined ? [piece.fourchette] : [];
+    return piece !== undefined && piece.tranche === tranche && piece.fourchette !== undefined && piece.fourchette.valeur === valeur ? [piece.fourchette] : [];
   });
   const releve_le = new Date(Math.min(...portees.map((f) => f.releve_le.getTime())));
   return { valeur, releve_le, sources: [...new Set(portees.flatMap((f) => f.sources))] };

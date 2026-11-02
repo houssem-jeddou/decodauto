@@ -22,6 +22,7 @@ import { attributHtml, echapper, texteHtml } from './html.ts';
 import {
   ANCRE_METHODE,
   LIBELLE_SIGNALER_ERREUR,
+  categoriesQuiFixentUnVerdict,
   LIGNE_TRANSPARENCE,
   MENTION_EN_TETE,
   PAGE_METHODE,
@@ -60,15 +61,18 @@ export interface LigneDuPlan {
 /** Mention en tête, avant le H1, sur toutes les pages : visible, jamais masquée (article 50(5) du règlement sur l'IA). */
 export const mentionEnTete = (): string => `<p class="mention-ia" data-mention-ia>${texteHtml(MENTION_EN_TETE)}</p>`;
 
-/** Lien de signalement d'une erreur : courriel à l'adresse du site, avec l'adresse de la page et un modèle de message. */
-export function lienSignalement(adressePage: string): string {
-  const url = urlAbsolue(adressePage);
-  const sujet = `Erreur sur la page ${url}`;
-  const corps = `Page : ${url}\nCe qui est faux :\nCe qui serait juste, et votre source si vous en avez une :\n`;
+/**
+ * Lien de signalement d'une erreur : courriel à l'adresse du site, avec l'adresse de la page et un modèle de message.
+ * Sans adresse (page 404 : l'adresse demandée n'est pas connue du site statique), le lecteur la complète.
+ */
+export function lienSignalement(adressePage?: string): string {
+  const url = adressePage !== undefined ? urlAbsolue(adressePage) : undefined;
+  const sujet = url !== undefined ? `Erreur sur la page ${url}` : 'Erreur sur decodauto.com';
+  const corps = `Page : ${url ?? ''}\nCe qui est faux :\nCe qui serait juste, et votre source si vous en avez une :\n`;
   return `mailto:${ADRESSE_SIGNALEMENT}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
 }
 
-export const signalerErreur = (adressePage: string): string =>
+export const signalerErreur = (adressePage?: string): string =>
   `<p class="signaler-erreur" data-signaler-erreur><a href="${attributHtml(lienSignalement(adressePage))}">${texteHtml(LIBELLE_SIGNALER_ERREUR)}</a></p>`;
 
 // ---- Fil d'Ariane ----------------------------------------------------------------------------------
@@ -152,8 +156,9 @@ export interface LigneEncadre {
   /** Notices de constructeurs citées par la ligne (noms courts) et autres sources (noms courts). */
   notices: readonly string[];
   autres: readonly string[];
-  /** Pictogramme du voyant (SVG), pour une ligne reprise de la base. */
+  /** Pictogramme du voyant (SVG) et sa couleur dans la base (rouge, orange…), pour une ligne reprise de la base. */
   pictogramme?: string | undefined;
+  couleur?: string | undefined;
 }
 
 export interface CoutEncadre {
@@ -181,24 +186,20 @@ export function modeleEncadre(entree: {
   baseDeCalcul: string;
   couts: DonneesCouts;
   sources: ReadonlyMap<string, SourceDuRegistre>;
-  voyants: ReadonlyMap<string, { pictogramme: string }>;
+  voyants: ReadonlyMap<string, { pictogramme: string; couleur: string }>;
   pictogrammes: ReadonlyMap<string, string>;
 }): ModeleEncadre {
   const lignes = entree.lignes.map((ligne): LigneEncadre => {
-    const sources = ligne.sources.flatMap((id) => {
-      const source = entree.sources.get(id);
-      return source === undefined ? [] : [source];
-    });
-    const nomPicto = ligne.voyant !== undefined ? entree.voyants.get(ligne.voyant)?.pictogramme : undefined;
+    const voyant = ligne.voyant !== undefined ? entree.voyants.get(ligne.voyant) : undefined;
     return {
       situation: ligne.situation,
       verdict: ligne.verdict,
       urgence: ligne.urgence,
       action: ligne.action,
       ecart: ligne.ecart_marques,
-      notices: sources.filter((s) => s.categorie === 'notice-constructeur').map(nomCourtSource).sort((a, b) => a.localeCompare(b, 'fr')),
-      autres: sources.filter((s) => s.categorie !== 'notice-constructeur').map(nomCourtSource),
-      pictogramme: nomPicto !== undefined ? entree.pictogrammes.get(nomPicto) : undefined,
+      ...sourcesDeLaLigne(ligne.sources, entree.sources),
+      pictogramme: voyant !== undefined ? entree.pictogrammes.get(voyant.pictogramme) : undefined,
+      couleur: voyant?.couleur,
     };
   });
   const plage = libellePlage(entree.cout);
@@ -223,19 +224,43 @@ export function modeleEncadre(entree: {
 
 const etiquette = (texte: string): string => `<span class="encadre-etiquette">${texteHtml(texte)}</span> `;
 
-/** Phrase des sources d'une ligne : le nombre de notices et leurs noms, puis les autres sources (charte §2.1). */
+/**
+ * Sources d'une ligne, telles que l'encadré les nomme : les notices de constructeurs (noms courts, ordre alphabétique)
+ * et les autres sources qui peuvent fixer un verdict (texte officiel, Sécurité routière…). Une source secondaire ou le
+ * règlement ONU n° 121 ne fondent jamais un verdict (docs/08 §3, règle 3) : ils ne sont nommés que dans « Sources ».
+ */
+export function sourcesDeLaLigne(ids: readonly string[], registre: ReadonlyMap<string, Pick<SourceDuRegistre, 'titre' | 'categorie'>>): { notices: string[]; autres: string[] } {
+  const qualifiees = categoriesQuiFixentUnVerdict() as readonly string[];
+  const sources = ids.flatMap((id) => {
+    const source = registre.get(id);
+    return source === undefined ? [] : [source];
+  });
+  return {
+    notices: sources.filter((s) => s.categorie === 'notice-constructeur').map(nomCourtSource).sort((a, b) => a.localeCompare(b, 'fr')),
+    autres: sources.filter((s) => s.categorie !== 'notice-constructeur' && qualifiees.includes(s.categorie)).map(nomCourtSource),
+  };
+}
+
+/**
+ * Phrase des sources d'une ligne (charte §2.1) : le nombre de notices, en lettres, et leurs noms ; puis, à part, les
+ * autres sources de première main (« Autre source : … »).
+ */
 export function phraseSources(ligne: Pick<LigneEncadre, 'notices' | 'autres'>): string {
-  const morceaux: string[] = [];
+  const phrases: string[] = [];
   const n = ligne.notices.length;
   // « une notice » (féminin) ; au-delà, le nombre en lettres (enLettres).
-  if (n > 0) morceaux.push(`${n === 1 ? 'une' : enLettres(n)} notice${n > 1 ? 's' : ''} de constructeur${n > 1 ? 's' : ''} (${enumerer(ligne.notices)})`);
-  morceaux.push(...ligne.autres);
-  return morceaux.length === 0 ? '' : `D'après ${enumerer(morceaux)}.`;
+  if (n > 0) phrases.push(`D'après ${n === 1 ? 'une' : enLettres(n)} notice${n > 1 ? 's' : ''} de constructeur${n > 1 ? 's' : ''} (${enumerer(ligne.notices)}).`);
+  const a = ligne.autres.length;
+  if (a > 0) phrases.push(`${n > 0 ? (a > 1 ? 'Autres sources' : 'Autre source') : a > 1 ? 'Sources' : 'Source'} : ${enumerer(ligne.autres)}.`);
+  return phrases.join(' ');
 }
 
 function ligneEncadreHtml(ligne: LigneEncadre): string {
   const gravite = graviteDuVerdict(ligne.verdict);
-  const picto = ligne.pictogramme !== undefined ? pictogrammeDecoratif(ligne.pictogramme) : '';
+  // Pictogramme dans la couleur du voyant fixée par la base (règle 6 de 03), sur un fond sombre comme au tableau de
+  // bord : la couleur du verdict ne s'applique qu'à l'icône de gravité et au filet.
+  const picto =
+    ligne.pictogramme !== undefined ? `<span class="voyant" data-couleur="${attributHtml(ligne.couleur ?? 'neutre')}">${pictogrammeDecoratif(ligne.pictogramme)}</span>` : '';
   const sources = phraseSources(ligne);
   return [
     `<li class="encadre-ligne" data-encadre-ligne data-verdict="${attributHtml(ligne.verdict)}" data-urgence="${attributHtml(ligne.urgence)}" data-gravite="${gravite}" data-notices="${ligne.notices.length}">`,
@@ -266,7 +291,8 @@ export function encadreDecision(modele: ModeleEncadre): string {
   return [
     '<section class="encadre" data-encadre-decision aria-labelledby="decision">',
     `<h2 class="encadre-question" id="decision">${texteHtml(modele.question)}</h2>`,
-    `<ul class="encadre-lignes">${modele.lignes.map(ligneEncadreHtml).join('')}</ul>`,
+    // role="list" : une liste sans puces garde sa nature de liste pour VoiceOver (Safari).
+    `<ul class="encadre-lignes" role="list">${modele.lignes.map(ligneEncadreHtml).join('')}</ul>`,
     modele.cout !== undefined ? coutEncadreHtml(modele.cout) : '',
     '</section>',
   ].join('');

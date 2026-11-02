@@ -91,6 +91,8 @@ h3 {
 }
 .fil-ariane li + li::before {
   content: '›';
+  /* Séparateur décoratif : non lu par les lecteurs d'écran (texte de remplacement vide). */
+  content: '›' / '';
   margin-right: 0.25rem;
 }
 
@@ -142,11 +144,37 @@ h3 {
   gap: 0.5rem;
   align-items: flex-start;
 }
-.pictogramme {
+/* Pictogramme du voyant : dans la couleur du voyant fixée par la base (règle 6 de 03), sur un fond sombre comme au
+   tableau de bord (le blanc reste visible). Jamais la couleur du verdict. */
+.voyant {
   flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.375rem;
+  background: #1a1d21;
+  color: #e8eaed;
+}
+.voyant[data-couleur='rouge'] {
+  color: #ff6b5e;
+}
+.voyant[data-couleur='orange'] {
+  color: #ffb02e;
+}
+.voyant[data-couleur='vert'] {
+  color: #4cc26e;
+}
+.voyant[data-couleur='bleu'] {
+  color: #5aa9ff;
+}
+.voyant[data-couleur='blanc'] {
+  color: #ffffff;
+}
+.pictogramme {
   width: 2rem;
   height: 2rem;
-  color: var(--gravite);
 }
 .encadre-verdict {
   display: flex;

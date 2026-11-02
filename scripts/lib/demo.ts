@@ -8,7 +8,7 @@ import { construireContexte, type Constat, type Contexte } from '../../src/lib/c
 import { empreintePage } from '../../src/lib/empreinte.ts';
 import { coutDeLaPage, resoudreLignes } from '../../src/lib/calcul.ts';
 import { plageValidee } from '../../src/lib/cout.ts';
-import { bandeau, basDePage, hautDePage, pied, type DonneesSite } from '../../src/lib/gabarit.ts';
+import { bandeau, basDePage, causesDeLaPage, hautDePage, pied, type DonneesSite } from '../../src/lib/gabarit.ts';
 import { sectionMethodeHtml } from '../../src/lib/composants.ts';
 import { echapper, texteHtml } from '../../src/lib/html.ts';
 import { sectionMethode } from '../../src/lib/charte.ts';
@@ -79,7 +79,7 @@ export async function construireDemo(racine: string, aujourdhui: Date): Promise<
     `<p><em>${texteHtml('Corps de la page : rédigé avec le modèle de page voyant (livrable 6.6). Cette page de démonstration montre les composants communs.')}</em></p>`,
     '<div data-element-unique="tableau"><table><thead><tr><th scope="col">Marque</th><th scope="col">Ce que dit la notice</th></tr></thead><tbody><tr><td>Tableau des notices</td><td>Livrable 6.4</td></tr></tbody></table></div>',
   ].join('');
-  const html = documentHtml({ titre: page.title, description: page.description, adresse, contenu: `${hautDePage(page, site)}${corps}${basDePage(page, site)}`, css });
+  const html = documentHtml({ titre: page.title, description: page.description, adresse, contenu: `${hautDePage(page, site)}${corps}${causesDeLaPage(page, site)}${basDePage(page, site)}`, css });
   const htmlMethode = documentHtml({
     titre: 'À propos : méthode (démonstration)',
     description: 'Section « Méthode » de la page « à propos », démonstration.',

@@ -572,6 +572,15 @@
     "explication": "Une ligne de l'encadré annonce un autre nombre de notices que celles qu'elle cite (charte §2.1)."
   },
   {
+    "nom": "r9-encadre-sans-phrase-sources",
+    "type": "voyant",
+    "erreurs": [
+      "R9-ENCADRE-SOURCES"
+    ],
+    "alertes": [],
+    "explication": "Une ligne de l'encadré n'écrit pas sur combien de notices elle repose, ni leurs noms (charte §2.1)."
+  },
+  {
     "nom": "composants-sans-signature",
     "type": "panne",
     "erreurs": [

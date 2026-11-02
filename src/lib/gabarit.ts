@@ -4,7 +4,8 @@
 // `basDePage` ; le gabarit commun (src/layouts/Base.astro) place `bandeau` et `pied` sur toutes les pages.
 // Ordre d'une page éditoriale (charte §4, docs/08 §3 règle 9) :
 //   bandeau (nom du site, mention en tête) · fil d'Ariane · H1 · encadré de décision · signature · ligne de
-//   transparence · [corps de la page] · causes · pages liées · sources · pied (signaler une erreur)
+//   transparence · [corps de la page, où le modèle place `causesDeLaPage`] · pages liées · sources · pied
+//   (signaler une erreur)
 // Module sans dépendance à l'exécution : la page de démonstration et les tests l'utilisent tel quel.
 // ---------------------------------------------------------------------------------------------
 import {
@@ -45,8 +46,8 @@ export interface DonneesSite {
 /** Bandeau de toutes les pages : nom du site (lien vers l'accueil) et mention en tête, avant le H1. */
 export const bandeau = (): string => `<a class="nom-du-site" href="/">decodauto.com</a>${mentionEnTete()}`;
 
-/** Pied de toutes les pages : lien « Signaler une erreur » avec l'adresse de la page. */
-export const pied = (adressePage: string): string => signalerErreur(adressePage);
+/** Pied de toutes les pages : lien « Signaler une erreur » avec l'adresse de la page (absente sur la page 404). */
+export const pied = (adressePage?: string): string => signalerErreur(adressePage);
 
 function lignesDeLaPage(page: PageEditoriale, site: DonneesSite) {
   const { lignes, voyantsInconnus } = resoudreLignes(page.situations, site.voyants);
@@ -77,14 +78,18 @@ export function hautDePage(page: PageEditoriale, site: DonneesSite): string {
   ].join('');
 }
 
-/** Bas d'une page éditoriale : causes et leur coût, pages liées du plan (construites), sources citées. */
+/** Causes et leur coût (pages voyant, code défaut, panne) : le modèle de page les place dans son corps (charte §4). */
+export function causesDeLaPage(page: PageEditoriale, site: DonneesSite): string {
+  return 'causes' in page && page.causes !== undefined ? causesAvecCout(page.causes, site.couts) : '';
+}
+
+/** Bas d'une page éditoriale : pages liées du plan (construites seulement), sources citées. */
 export function basDePage(page: PageEditoriale, site: DonneesSite): string {
   const lignes = lignesDeLaPage(page, site);
   const cout = coutDeLaPage(page, lignes, site.couts);
   const index = indexerPlan(site.plan);
   const construites = (ids: Iterable<string>): string[] => [...ids].filter((id) => site.libelles.has(id));
   return [
-    'causes' in page && page.causes !== undefined ? causesAvecCout(page.causes, site.couts) : '',
     pagesLiees({
       id: page.id,
       plan: site.plan,

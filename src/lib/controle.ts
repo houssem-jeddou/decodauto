@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
 import { ANCRE_METHODE, LIGNE_TRANSPARENCE, PAGE_METHODE, signature } from './charte.ts';
+import { phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -800,7 +801,10 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
     const methode = ctx.plan.get(PAGE_METHODE);
     const attendus: AttendusPage = {
       sources: [...sourcesDeLaPageCitees(page, lignes, ctx.couts, cout.resolu).keys()],
-      notices: lignes.map((l) => l.sources.filter((id) => ctx.sources.get(id)?.categorie === 'notice-constructeur').length),
+      lignes: lignes.map((l) => {
+        const nommees = sourcesDeLaLigne(l.sources, ctx.sources);
+        return { notices: nommees.notices.length, phrase: phraseSources(nommees) };
+      }),
       lienMethode: methode !== undefined ? `${methode.adresse}#${ANCRE_METHODE}` : undefined,
     };
     constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus));
@@ -812,12 +816,20 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
 // ---- Page construite -----------------------------------------------------------------------------
 
 /** Le contrôle porte sur le HTML réellement produit : c'est lui que lisent les visiteurs et Google. */
+export interface SourcesDeLigne {
+  notices: number;
+  phrase: string;
+}
+
 /** Ce que la page construite doit afficher en plus de l'encadré (composants communs, livrable 6.3). */
 export interface AttendusPage {
   /** Identifiants des sources citées par la page (calcul.ts, sourcesDeLaPageCitees) : chacune dans la section « Sources ». */
   sources: readonly string[];
-  /** Nombre de notices de constructeurs citées par chaque ligne de situation, dans l'ordre (data-notices). */
-  notices: readonly number[];
+  /**
+   * Pour chaque ligne de situation, dans l'ordre : nombre de notices de constructeurs citées (data-notices) et phrase
+   * des sources affichée (composants.ts, phraseSources).
+   */
+  lignes: readonly SourcesDeLigne[];
   /** Adresse attendue du lien « Méthode » (page « à propos » du plan, ancre de la méthode), si elle est dans le plan. */
   lienMethode?: string | undefined;
 }
@@ -926,7 +938,7 @@ export function controlerHtml(
     constats.push(erreur('R7-TUTORIEL-ETAPES', 'un tutoriel présente ses étapes dans une liste numérotée portant l\'attribut data-tutoriel-etapes (<ol data-tutoriel-etapes>), avec au moins une étape', fichier));
   }
 
-  constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout, attendus?.notices));
+  constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout, attendus?.lignes));
   if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
   return constats;
 }
@@ -952,7 +964,7 @@ export function controlerEncadre(
   html: string,
   fichier: string,
   textesCout: readonly string[] = [],
-  notices?: readonly number[],
+  sourcesLignes?: readonly SourcesDeLigne[],
 ): Constat[] {
   const constats: Constat[] = [];
   const brut = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|template)\b[\s\S]*?<\/\1\s*>/gi, '');
@@ -1013,10 +1025,14 @@ export function controlerEncadre(
       if (element.attr('data-verdict') !== ligne.verdict || element.attr('data-urgence') !== ligne.urgence) {
         constats.push(erreur('R9-ENCADRE-CONTENU', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : data-verdict et data-urgence doivent valoir « ${ligne.verdict} » et « ${ligne.urgence} »`, fichier));
       }
-      // Nombre de notices sur lequel repose la ligne (charte §2.1), affiché et porté par data-notices.
-      const n = notices?.[i];
-      if (n !== undefined && element.attr('data-notices') !== String(n)) {
-        constats.push(erreur('R9-ENCADRE-SOURCES', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : data-notices doit valoir ${n} (notices de constructeurs citées par la ligne)`, fichier));
+      // Nombre de notices sur lequel repose la ligne (charte §2.1) : porté par data-notices et écrit dans la phrase des
+      // sources, avec le nom des notices.
+      const attendu = sourcesLignes?.[i];
+      if (attendu !== undefined && element.attr('data-notices') !== String(attendu.notices)) {
+        constats.push(erreur('R9-ENCADRE-SOURCES', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : data-notices doit valoir ${attendu.notices} (notices de constructeurs citées par la ligne)`, fichier));
+      }
+      if (attendu !== undefined && attendu.phrase !== '' && !normaliserTexte(element.text()).includes(normaliserTexte(attendu.phrase))) {
+        constats.push(erreur('R9-ENCADRE-SOURCES', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : n'affiche pas « ${attendu.phrase} »`, fichier));
       }
       const texteLigne = normaliserTexte(element.text());
       const attendus = [ligne.situation, GRILLE_VERDICTS[ligne.verdict].libelle, GRILLE_URGENCES[ligne.urgence].libelle, ligne.action, ...(ligne.ecart_marques !== undefined ? [ligne.ecart_marques] : [])];
