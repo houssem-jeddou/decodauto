@@ -1,0 +1,5 @@
+{
+  "description": "Empreinte des textes affichés de la charte éditoriale (src/lib/charte.ts : mention en tête, signature, ligne de transparence, section « Méthode »). Calcul : npm run empreinte -- --charte. Copiée après la validation de Houssem, jamais pour faire passer un contrôle.",
+  "validation": null,
+  "valide_le": null
+}

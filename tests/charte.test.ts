@@ -14,6 +14,7 @@ import {
   LIGNE_TRANSPARENCE,
   MENTION_EN_TETE,
   PAGE_METHODE,
+  REGISTRE_EMPREINTE,
   RESPONSABLE_EDITORIAL,
   SOURCES_SANS_VERDICT,
   categoriesQuiFixentUnVerdict,
@@ -22,9 +23,11 @@ import {
   noticesLues,
   sectionMethode,
   signature,
+  textesAffiches,
   type NoticeLue,
   type SectionMethode,
 } from '../src/lib/charte.ts';
+import { empreinteCharte } from '../src/lib/empreinte.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import { GRILLE_COUTS, TRANCHES_COUT } from '../src/schemas/cout.ts';
 import { CATEGORIES_SOURCE, GROUPES_MIN, MARQUES_MIN, SOURCES_PREMIERE_MAIN, URGENCES, VERDICTS } from '../src/schemas/listes.ts';
@@ -80,10 +83,21 @@ describe('charte éditoriale (étape 6.2)', async () => {
     const textes = [MENTION_EN_TETE, LIGNE_TRANSPARENCE.texte, LIGNE_TRANSPARENCE.libelleLien, texteMethode];
     for (const expression of EXPRESSIONS_INTERDITES) for (const texte of textes) assert.doesNotMatch(texte, expression);
     // La liste attrape bien ce qu'elle doit attraper.
-    for (const exemple of ['nos experts', 'Notre équipe', 'testé par un garage', 'résultat garanti', 'certifié', 'nous vérifions']) {
+    for (const exemple of ['nos experts', 'Notre équipe', 'nos mécaniciens', 'testé par nos soins', 'résultat garanti', 'efficacité garantie à 100 %', 'contenu certifié', 'nous vérifions']) {
       assert.ok(EXPRESSIONS_INTERDITES.some((e) => e.test(exemple)), exemple);
     }
-    for (const permis of ['la garantie légale de conformité', 'une expertise', 'noustique']) {
+    for (const permis of [
+      'la garantie légale de conformité',
+      'extension de garantie PureTech',
+      'votre voiture est sous garantie',
+      'la garantie constructeur',
+      'voyant tableau de bord Peugeot Expert',
+      'l’expert de votre assurance',
+      'une expertise',
+      'une pièce certifiée',
+      'le système est testé par le calculateur',
+      'noustique',
+    ]) {
       assert.ok(!EXPRESSIONS_INTERDITES.some((e) => e.test(permis)), permis);
     }
   });
@@ -133,7 +147,7 @@ describe('charte éditoriale (étape 6.2)', async () => {
     const bloc = section.blocs.find((b) => b.titre === 'Plusieurs marques pour les voyants');
     assert.ok(bloc);
     assert.match(bloc.paragraphes.join(' '), /Chaque voyant de la base du site/);
-    assert.match(bloc.paragraphes.join(' '), /une ou deux des notices lues, la page le dit et nomme la notice citée/);
+    assert.match(bloc.paragraphes.join(' '), /une ou deux notices, la page le dit et nomme la notice citée/);
   });
 
   test('la méthode reprend les libellés et définitions de la grille et de l’échelle du coût, sans les recopier', () => {
@@ -144,6 +158,33 @@ describe('charte éditoriale (étape 6.2)', async () => {
     assert.ok(texteMethode.includes(`en ${enLettres(TRANCHES_COUT.length)} tranches`));
     assert.ok(texteMethode.includes(RESPONSABLE_EDITORIAL));
     assert.match(texteMethode, /Signaler une erreur/);
+  });
+
+  test('recompte indépendant : registre fixe de trois notices (deux de Renault Group, une de Stellantis)', () => {
+    const texte = texteDe(sectionMethode(REGISTRE_EMPREINTE));
+    assert.ok(texte.includes('Notices citées aujourd’hui : Dacia Modèle B, Peugeot Modèle C et Renault Modèle A, soit trois marques de deux groupes.'));
+  });
+
+  test('empreinte des textes affichés : CHARTE-VALIDATION-ABSENTE (alerte) avant la validation de Houssem, CHARTE-EMPREINTE (erreur) si un texte validé change', async (t) => {
+    const { validation } = await lireJson<{ validation: string | null }>('data/charte-validation.json');
+    const calculee = empreinteCharte(textesAffiches(REGISTRE_EMPREINTE));
+    if (validation === null) {
+      t.diagnostic(`CHARTE-VALIDATION-ABSENTE : textes de la charte non encore validés par Houssem (empreinte proposée ${calculee})`);
+      return;
+    }
+    assert.equal(calculee, validation, 'CHARTE-EMPREINTE : un texte affiché de la charte a changé depuis la validation de Houssem');
+  });
+
+  test('l’empreinte change avec le sens d’un texte, pas avec une coquille de ponctuation ou de casse', () => {
+    const textes = textesAffiches(REGISTRE_EMPREINTE);
+    const reference = empreinteCharte(textes);
+    const i = textes.indexOf(MENTION_EN_TETE);
+    const avec = (texte: string): string[] => textes.map((x, j) => (j === i ? texte : x));
+    assert.equal(empreinteCharte(avec(MENTION_EN_TETE.toUpperCase().replace(',', ' ;'))), reference);
+    assert.notEqual(empreinteCharte(avec(MENTION_EN_TETE.replace('rédigé', 'relu'))), reference);
+    // Ajouter une notice au vrai registre ne change pas l'empreinte : elle est calculée sur le registre fixe.
+    assert.equal(empreinteCharte(textesAffiches(REGISTRE_EMPREINTE)), reference);
+    assert.ok(textesAffiches(registre).join('\n') !== textes.join('\n'));
   });
 
   test('énumération et nombres en lettres', () => {

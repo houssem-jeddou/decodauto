@@ -21,7 +21,9 @@ import {
 // Les parties qui dépendent des données (notices lues, nombre de marques et de groupes, libellés des verdicts, des
 // urgences et des tranches de coût) sont calculées depuis leurs sources de vérité. Les règles de rédaction sont
 // écrites dans la charte (docs/10_charte_editoriale.md), dont la section 7 est générée d'ici (npm run charte:vue).
-// Toute modification de ces textes est validée par Houssem. Module sans dépendance à l'exécution.
+// Toute modification de ces textes est validée par Houssem : leur empreinte (empreinteCharte, sur le registre fixe
+// REGISTRE_EMPREINTE) est copiée dans data/charte-validation.json après sa validation, et un test la vérifie.
+// Module sans dépendance à l'exécution.
 // ---------------------------------------------------------------------------------------------
 
 /** Responsable éditorial du site : il valide les verdicts et la décision en haut de chaque page (docs/03 règle 7). */
@@ -77,14 +79,19 @@ export const SOURCES_SANS_VERDICT: readonly CategorieSource[] = ['reglement-onu'
 
 /** Un mot ou une expression entière, insensible à la casse ; \b ne sait pas border un mot accentué (« certifié »). */
 const mot = (motif: string): RegExp => new RegExp(`(?<!\\p{L})(?:${motif})(?!\\p{L})`, 'iu');
-/** Expressions interdites dans les textes affichés (charte §2.7 et §3.1) : expertise ou équipe qui n'existent pas. */
+/** Expressions interdites dans les textes affichés (charte §2.7 et §3.1) : expertise, équipe, garantie ou certification inventées. */
 export const EXPRESSIONS_INTERDITES: readonly RegExp[] = [
-  mot('experts?'),
-  mot('nos mécaniciens|mécaniciens? (?:du site|de l’équipe|de l\'équipe|maison)'),
-  mot('certifiée?s?'),
-  mot('garantie?s?(?! légale)'), // « la garantie légale de conformité » reste permise (coût, prise en charge)
-  mot('testée?s? par'),
-  mot('(?:notre|nos) (?:équipe|rédaction|experts?)'),
+  // Une expertise ou une équipe qui n'existent pas. « Peugeot Expert » (un modèle), « l’expert de votre assurance »,
+  // « une expertise » restent permis.
+  mot('experts? (?:du site|de decodauto|maison)'),
+  mot('(?:notre|nos) (?:équipe|rédaction|experts?|mécaniciens?|spécialistes?)'),
+  mot('mécaniciens? (?:du site|de l’équipe|de l\'équipe|maison)'),
+  mot('testée?s? par (?:nos|notre|nous|un mécanicien|des mécaniciens)'),
+  // Une garantie ou une certification promises par le site. « La garantie légale », « l’extension de garantie »,
+  // « sous garantie », « une pièce certifiée » restent permis.
+  mot('(?:est|sont|c’est|c\'est|résultats?|succès|efficacité|réparation) garantie?s?|100 ?% garantie?s?|garantie?s? à 100 ?%'),
+  mot('(?:site|contenu|texte|page|information)s? certifiée?s?|certifiée?s? par (?:nos|notre|nous|un mécanicien|des mécaniciens)'),
+  // Le site ne parle pas en « nous » (charte §3.1) ; sur les pages, les citations de notices sont exclues (6.5).
   mot('nous'),
 ];
 
@@ -165,7 +172,7 @@ export function sectionMethode(registre: readonly NoticeLue[], regle: RegleMarqu
       {
         titre: 'Qui écrit et qui vérifie',
         paragraphes: [
-          `Le site est édité par ${RESPONSABLE_EDITORIAL}, qui en porte la responsabilité éditoriale. Les textes sont rédigés par une intelligence artificielle (${OUTIL_IA}), à partir d’un plan, des questions que posent les conducteurs et des sources citées sur chaque page. L’IA lit les sources et rédige ; elle ne fixe aucun verdict.`,
+          `Le site est édité par ${RESPONSABLE_EDITORIAL}, qui en porte la responsabilité éditoriale. Les textes sont rédigés par une intelligence artificielle (${OUTIL_IA}), à partir d’un plan, des questions que posent les conducteurs et des sources citées sur chaque page. L’IA lit les sources, propose pour chaque consigne de notice un niveau selon une grille fixe, et rédige. Aucun verdict n’est publié sans la validation de ${RESPONSABLE_EDITORIAL}.`,
           `${RESPONSABLE_EDITORIAL} vérifie lui-même chaque verdict, ainsi que la décision affichée en haut de chaque page (question, verdicts, urgence, action, coût probable), avant sa publication. Avant la publication de chaque lot de pages, il valide aussi, sur leurs sources, les faits de sécurité et les chiffres qu’elles contiennent ; toute correction qui les touche repasse par lui.`,
           'Le site n’est pas relu par un mécanicien et ne répare pas de voitures : sa fiabilité repose sur les sources citées et sur cette vérification.',
         ],
@@ -180,8 +187,8 @@ export function sectionMethode(registre: readonly NoticeLue[], regle: RegleMarqu
       {
         titre: 'Plusieurs marques pour les voyants',
         paragraphes: [
-          `Pour les voyants, les notices de plusieurs grandes marques vendues en France sont lues et comparées. Notices lues aujourd’hui : ${enumerer(notices.noms)}, soit ${enLettres(notices.marques)} marques de ${enLettres(notices.groupes)} groupes. Chaque citation nomme le modèle et l’édition de la notice ; une consigne n’est jamais transposée à un autre modèle.`,
-          `Chaque voyant de la base du site s’appuie sur au moins ${enLettres(regle.marquesMin)} marques de ${enLettres(regle.groupesMin)} groupes différents. Quand les notices ne disent pas la même chose, la consigne la plus prudente est retenue, et la page vous montre l’écart, marque par marque. Quand une alerte n’est décrite que dans une ou deux des notices lues, la page le dit et nomme la notice citée.`,
+          `Pour les voyants, les notices de plusieurs grandes marques vendues en France sont lues et comparées. Notices citées aujourd’hui : ${enumerer(notices.noms)}, soit ${enLettres(notices.marques)} marques de ${enLettres(notices.groupes)} groupes. Chaque citation nomme le modèle et l’édition de la notice ; une consigne n’est jamais attribuée à un autre modèle que celui de la notice citée.`,
+          `Chaque voyant de la base du site s’appuie sur au moins ${enLettres(regle.marquesMin)} marques de ${enLettres(regle.groupesMin)} groupes différents. Quand les notices ne disent pas la même chose, la consigne la plus prudente est retenue, et la page vous montre l’écart, marque par marque. Quand une alerte n’est décrite que dans une ou deux notices, la page le dit et nomme la notice citée.`,
           'La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.',
         ],
       },
@@ -218,8 +225,8 @@ export function sectionMethode(registre: readonly NoticeLue[], regle: RegleMarqu
       {
         titre: 'Corrections et mises à jour',
         paragraphes: [
-          'Chaque page indique la date de sa dernière mise à jour et celle de sa dernière revue. Les pages sont revues à date fixe, et les montants fixés par un texte sont revérifiés régulièrement.',
-          'Si vous repérez une erreur, utilisez le lien « Signaler une erreur » présent sur chaque page : une erreur qui touche votre sécurité est corrigée en priorité.',
+          'Chaque page de conseil indique la date de sa dernière mise à jour et celle de sa dernière revue. Chaque page de conseil a une date limite de revue, suivie automatiquement : une revue en retard déclenche une alerte. Les montants fixés par un texte sont revérifiés à intervalle fixe.',
+          'Si vous repérez une erreur, utilisez le lien « Signaler une erreur » présent sur toutes les pages : une erreur qui touche votre sécurité est corrigée en priorité.',
         ],
       },
       {
@@ -232,4 +239,30 @@ export function sectionMethode(registre: readonly NoticeLue[], regle: RegleMarqu
       },
     ],
   };
+}
+
+/**
+ * Registre fixe qui sert à l'empreinte des textes affichés : ajouter une notice au vrai registre change la liste
+ * affichée (calculée) sans demander de revalidation ; changer une phrase en demande une. Trois marques de deux
+ * groupes (deux de Renault Group, une de Stellantis).
+ */
+export const REGISTRE_EMPREINTE: readonly NoticeLue[] = [
+  { titre: 'Renault Modèle A — Notice', categorie: 'notice-constructeur', marque: 'renault' },
+  { titre: 'Dacia Modèle B — Notice', categorie: 'notice-constructeur', marque: 'dacia' },
+  { titre: 'Peugeot Modèle C — Notice', categorie: 'notice-constructeur', marque: 'peugeot' },
+];
+
+/** Tous les textes affichés par la charte, dans l'ordre : ce que Houssem valide et que l'empreinte verrouille. */
+export function textesAffiches(registre: readonly NoticeLue[]): string[] {
+  const section = sectionMethode(registre);
+  return [
+    MENTION_EN_TETE,
+    signature(new Date('2000-01-01T00:00:00Z'), new Date('2000-01-01T00:00:00Z')),
+    LIGNE_TRANSPARENCE.texte,
+    LIGNE_TRANSPARENCE.libelleLien,
+    section.titre,
+    section.ancre,
+    section.introduction,
+    ...section.blocs.flatMap((b) => [b.titre, ...b.paragraphes, ...(b.liste ?? []), ...(b.definitions ?? []).flatMap((d) => [d.terme, d.sens])]),
+  ];
 }

@@ -2,12 +2,14 @@
 // Usage : node scripts/empreinte.ts src/content/panne/ma-page.md     (encadré de décision de la page)
 //         node scripts/empreinte.ts --voyant <id>                    (une ligne de data/voyants.json)
 //         node scripts/empreinte.ts --montant <id>                   (un montant ou une prise en charge de data/couts.json)
+//         node scripts/empreinte.ts --charte                         (textes affichés de la charte éditoriale)
 // L'empreinte ne se recalcule jamais pour faire passer un contrôle : elle se copie après la validation de Houssem.
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { argv, exit, stdout } from 'node:process';
-import { empreintePage, empreinteTexteDeCout, empreinteVoyant, type EncadreValide, type TexteDeCoutValide, type VoyantValide } from '../src/lib/empreinte.ts';
+import { empreinteCharte, empreintePage, empreinteTexteDeCout, empreinteVoyant, type EncadreValide, type TexteDeCoutValide, type VoyantValide } from '../src/lib/empreinte.ts';
 import { DOSSIER_PICTOGRAMMES } from '../src/lib/controle.ts';
+import { REGISTRE_EMPREINTE, textesAffiches } from '../src/lib/charte.ts';
 import { lireFrontmatter } from './lib/charger.ts';
 import { plageValidee, resoudreCout, type PieceCout } from '../src/lib/cout.ts';
 
@@ -34,6 +36,8 @@ if (premier === '--voyant' && second !== undefined) {
     exit(1);
   }
   stdout.write(`${empreinteTexteDeCout(entree)}\n`);
+} else if (premier === '--charte') {
+  stdout.write(`${empreinteCharte(textesAffiches(REGISTRE_EMPREINTE))}\n`);
 } else if (premier !== undefined) {
   const page = lireFrontmatter(await readFile(premier, 'utf8')) as EncadreValide & { outil?: boolean };
   // La plage du coût se calcule depuis les pièces de data/couts.json : elle entre dans l'empreinte.
@@ -46,6 +50,6 @@ if (premier === '--voyant' && second !== undefined) {
   if (resolu.piecesInconnues.length > 0) stdout.write(`Attention : pièces absentes de data/couts.json : ${resolu.piecesInconnues.join(', ')}\n`);
   stdout.write(`${empreintePage(page, new Map(base.map((v) => [v.id, v])), plageValidee(resolu))}\n`);
 } else {
-  stdout.write('Usage : node scripts/empreinte.ts <page.md> | --voyant <id> | --montant <id>\n');
+  stdout.write('Usage : node scripts/empreinte.ts <page.md> | --voyant <id> | --montant <id> | --charte\n');
   exit(1);
 }

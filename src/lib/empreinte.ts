@@ -247,3 +247,12 @@ export function empreinteTexteDeCout(entree: TexteDeCoutValide): string {
     automatique: entree.automatique ?? null,
   });
 }
+
+/**
+ * Empreinte des textes affichés de la charte éditoriale (mention en tête, signature, ligne de transparence, section
+ * « Méthode »), calculée sur le registre fixe REGISTRE_EMPREINTE (src/lib/charte.ts). Mêmes règles de normalisation
+ * que les autres empreintes : une coquille ne demande pas de revalidation, un mot changé si.
+ */
+export function empreinteCharte(textes: readonly string[]): string {
+  return hacher(textes.map(normaliserTexte));
+}
