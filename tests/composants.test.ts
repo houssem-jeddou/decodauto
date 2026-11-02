@@ -334,8 +334,10 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
   });
 
   test('[CI] mention en tête, signalement et typographie : la démonstration passe, une page sans eux échoue', () => {
-    assert.deepEqual([...constatsMentionEtSignalement(demo.html, 'demo'), ...constatsTypographie(demo.html, 'demo')], []);
-    assert.deepEqual([...constatsMentionEtSignalement(demo.htmlMethode, 'methode'), ...constatsTypographie(demo.htmlMethode, 'methode')], []);
+    const adresseDemo = demo.contexte.plan.get(demo.page.id)?.adresse;
+    const adresseMethode = demo.contexte.plan.get('a-propos')?.adresse;
+    assert.deepEqual([...constatsMentionEtSignalement(demo.html, 'demo', adresseDemo), ...constatsTypographie(demo.html, 'demo')], []);
+    assert.deepEqual([...constatsMentionEtSignalement(demo.htmlMethode, 'methode', adresseMethode), ...constatsTypographie(demo.htmlMethode, 'methode')], []);
     const codes = (html: string): string[] => [...new Set([...constatsMentionEtSignalement(html, 'f'), ...constatsTypographie(html, 'f')].map((c) => c.regle))].sort();
     assert.deepEqual(codes('<html><body><h1>Titre</h1><p>Texte</p></body></html>'), ['MENTION-IA-ABSENTE', 'SIGNALER-ERREUR-ABSENT']);
     const mention = mentionEnTete();
