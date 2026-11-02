@@ -4,6 +4,11 @@ import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
+import { LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE } from '../../src/lib/charte.ts';
+import { normaliserTexte } from '../../src/lib/empreinte.ts';
+import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
+import { lienSignalement } from '../../src/lib/composants.ts';
+import { ELEMENTS_SANS_TYPOGRAPHIE } from '../../src/lib/html.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
 
@@ -157,6 +162,146 @@ export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Cons
   const robots = await lire(join(dist, 'robots.txt'));
   if (robots !== undefined && !robotsAnnoncePlanDuSite(robots)) {
     constats.push(erreur('ROBOTS-SITEMAP', `robots.txt doit annoncer le plan du site : « ${LIGNE_SITEMAP} »`, 'robots.txt'));
+  }
+  return constats;
+}
+
+/**
+ * Composants présents sur toutes les pages (livrable 6.3, charte §5.1 et §5.3), pour une page construite :
+ *  - une seule mention en tête (data-mention-ia), au texte exact de la charte, avant le H1, visible : ni elle ni un
+ *    bloc qui la contient n'est masqué (hidden, aria-hidden, display:none, visibility:hidden, details, dialog) ;
+ *  - un lien « Signaler une erreur » (data-signaler-erreur), à ce texte, vers l'adresse de signalement, avec l'adresse
+ *    de la page (`adressePage`, absente pour la 404) dans le message.
+ */
+export function constatsMentionEtSignalement(html: string, fichier: string, adressePage?: string): Constat[] {
+  const constats: Constat[] = [];
+  const $ = cheerio.load(html);
+  const mentions = $('[data-mention-ia]');
+  if (mentions.length !== 1) {
+    constats.push(erreur('MENTION-IA-ABSENTE', `la page affiche une seule mention en tête (data-mention-ia) « ${MENTION_EN_TETE} » ; trouvé : ${mentions.length}`, fichier));
+  } else {
+    const mention = mentions.first();
+    if (normaliserTexte(mention.text()) !== normaliserTexte(MENTION_EN_TETE)) {
+      constats.push(erreur('MENTION-IA-TEXTE', `la mention en tête est « ${MENTION_EN_TETE} » ; affichée : « ${mention.text().trim()} »`, fichier));
+    }
+    const masque = [mention, ...mention.parents().toArray().map((el) => $(el))].some(
+      (el) => el.is('[hidden], [aria-hidden="true"], details, dialog, template') || /display\s*:\s*none|visibility\s*:\s*hidden/i.test(el.attr('style') ?? ''),
+    );
+    if (masque) constats.push(erreur('MENTION-IA-MASQUEE', 'la mention en tête est visible et lue par les lecteurs d\'écran (ni hidden, ni aria-hidden, ni display:none)', fichier));
+    const brut = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|template)\b[\s\S]*?<\/\1\s*>/gi, '');
+    const positionMention = brut.search(/<[a-z][a-z0-9-]*\b[^>]*\sdata-mention-ia(?=[\s=/>])/i);
+    const positionH1 = brut.search(/<h1\b/i);
+    if (positionH1 >= 0 && positionMention > positionH1) {
+      constats.push(erreur('MENTION-IA-POSITION', 'la mention en tête précède le H1 (information dès la première exposition, règlement européen sur l\'IA, article 50(5))', fichier));
+    }
+  }
+  const liens = $(`[data-signaler-erreur] a[href^="mailto:${ADRESSE_SIGNALEMENT}"]`);
+  if (liens.length !== 1) {
+    constats.push(erreur('SIGNALER-ERREUR-ABSENT', `la page affiche un lien « ${LIBELLE_SIGNALER_ERREUR} » vers ${ADRESSE_SIGNALEMENT} (data-signaler-erreur) ; trouvé : ${liens.length}`, fichier));
+  } else {
+    const lien = liens.first();
+    const attendu = lienSignalement(adressePage);
+    if (normaliserTexte(lien.text()) !== normaliserTexte(LIBELLE_SIGNALER_ERREUR) || lien.attr('href') !== attendu) {
+      constats.push(erreur('SIGNALER-ERREUR-ABSENT', `le lien de signalement a le texte « ${LIBELLE_SIGNALER_ERREUR} » et l'adresse de la page dans son message (attendu : ${attendu})`, fichier));
+    }
+  }
+  return constats;
+}
+
+/**
+ * Typographie du texte affiché (charte §3.3), posée par le gabarit : pas d'apostrophe droite, pas de guillemet droit,
+ * pas d'espace ordinaire avant « : ; ! ? » ni à l'intérieur des guillemets « … ». Le code, les scripts, les styles et
+ * les dessins (SVG) sont ignorés.
+ */
+export function constatsTypographie(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const textes = $('body')
+    .find('*')
+    .addBack()
+    .contents()
+    .toArray()
+    .filter((n) => n.type === 'text' && $(n).parents(ELEMENTS_SANS_TYPOGRAPHIE.join(', ')).length === 0)
+    .map((n) => (n as unknown as { data: string }).data);
+  const constats: Constat[] = [];
+  const extrait = (texte: string, i: number): string => texte.slice(Math.max(0, i - 25), i + 10).replace(/\s+/g, ' ').trim();
+  for (const texte of textes) {
+    const apostrophe = texte.indexOf("'");
+    if (apostrophe >= 0) {
+      constats.push(erreur('TYPO-APOSTROPHE', `apostrophe droite dans le texte affiché : « ${extrait(texte, apostrophe)} » (le gabarit pose l'apostrophe typographique ’)`, fichier));
+    }
+    const guillemet = texte.indexOf('"');
+    if (guillemet >= 0) {
+      constats.push(erreur('TYPO-GUILLEMETS', `guillemet droit dans le texte affiché : « ${extrait(texte, guillemet)} » (guillemets français « … »)`, fichier));
+    }
+    // Espace ordinaire (ou saut de ligne) avant « : ; ! ? » ou dans des guillemets ; ponctuation collée à une lettre et
+    // suivie d'une espace ou de la fin du texte (« Attention: »).
+    const espace = /[ \t\n\r]+[:;!?»]|«[ \t\n\r]|\p{L}[:;!?](?=[ \t\n\r]|$)/u.exec(texte);
+    if (espace !== null) {
+      constats.push(erreur('TYPO-ESPACE', `espace ordinaire avant « : ; ! ? » ou dans des guillemets : « ${extrait(texte, espace.index)} » (le gabarit pose une espace insécable)`, fichier));
+    }
+  }
+  return constats;
+}
+
+/** Identifiants en double dans une page (ancres ambiguës, aria-labelledby faussé). */
+export function constatsIdentifiants(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const vus = new Map<string, number>();
+  for (const el of $('[id]').toArray()) {
+    const id = $(el).attr('id') ?? '';
+    vus.set(id, (vus.get(id) ?? 0) + 1);
+  }
+  const doublons = [...vus].filter(([, n]) => n > 1).map(([id]) => id);
+  return doublons.length > 0 ? [erreur('ID-DOUBLON', `identifiant(s) en double dans la page : ${doublons.join(', ')}`, fichier)] : [];
+}
+
+/** Mention en tête, lien de signalement, typographie et identifiants, sur toutes les pages du site construit. */
+export async function controlerComposantsCommuns(dist: string): Promise<Constat[]> {
+  const constats: Constat[] = [];
+  for (const chemin of await listerFichiers(dist, '.html')) {
+    const fichier = relative(dist, chemin).split('\\').join('/');
+    const html = await readFile(chemin, 'utf8');
+    constats.push(...constatsMentionEtSignalement(html, fichier, adresseDepuisFichier(fichier)), ...constatsTypographie(html, fichier), ...constatsIdentifiants(html, fichier));
+  }
+  return constats;
+}
+
+export interface MaillageAttendu {
+  /** Adresse de la page mère, si elle est construite : lien dans le fil d'Ariane. */
+  parent?: string | undefined;
+  /** Adresses des pages enfants construites : listées par la page mère (docs/08 §4). */
+  enfants: readonly string[];
+  /** Adresses des autres pages liées dans le plan et construites. */
+  liees: readonly string[];
+}
+
+/**
+ * Maillage d'une page éditoriale construite (docs/08 §4, livrable 6.3) : un fil d'Ariane (data-fil-ariane) avec le lien
+ * vers la page mère construite, la liste des pages enfants construites (data-pages-enfants) et des autres pages liées
+ * construites (data-pages-liees). Un lien manquant n'est pas vu par `npm run liens`, qui ne voit que les liens cassés.
+ */
+export function constatsMaillage(html: string, fichier: string, attendu: MaillageAttendu): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const liensDe = (selecteur: string): Set<string> => new Set($(`${selecteur} a[href]`).toArray().map((a) => $(a).attr('href') ?? ''));
+  const brut = html.replace(/<!--[\s\S]*?-->/g, '');
+  const positionFil = brut.search(/<[a-z][a-z0-9-]*\b[^>]*\sdata-fil-ariane(?=[\s=/>])/i);
+  if ($('[data-fil-ariane]').length !== 1) {
+    constats.push(erreur('FIL-ARIANE-ABSENT', 'la page affiche un fil d\'Ariane (data-fil-ariane) avant le H1', fichier));
+  } else if (brut.search(/<h1\b/i) >= 0 && positionFil > brut.search(/<h1\b/i)) {
+    constats.push(erreur('FIL-ARIANE-ABSENT', 'le fil d\'Ariane précède le H1', fichier));
+  } else if (attendu.parent !== undefined && !liensDe('[data-fil-ariane]').has(attendu.parent)) {
+    constats.push(erreur('FIL-ARIANE-ABSENT', `le fil d'Ariane mène à la page mère (${attendu.parent})`, fichier));
+  }
+  const enfants = liensDe('[data-pages-enfants]');
+  const enfantsManquants = attendu.enfants.filter((a) => !enfants.has(a));
+  if (enfantsManquants.length > 0) {
+    constats.push(erreur('PAGES-ENFANTS-ABSENTES', `la page mère liste ses pages enfants construites (data-pages-enfants) ; manquent : ${enfantsManquants.join(', ')}`, fichier));
+  }
+  const liees = liensDe('[data-pages-liees]');
+  const lieesManquantes = attendu.liees.filter((a) => !liees.has(a));
+  if (lieesManquantes.length > 0) {
+    constats.push(erreur('PAGES-LIEES-ABSENTES', `la page affiche les pages liées dans le plan et construites (data-pages-liees) ; manquent : ${lieesManquantes.join(', ')}`, fichier));
   }
   return constats;
 }

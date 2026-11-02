@@ -2,7 +2,7 @@
 // identique à celui du dépôt, en-tête X-Robots-Tag vérifié en production). Fonctions pures : la lecture du réseau
 // est injectée, ce qui permet de tester chaque cas sans toucher au site.
 import type { Constat } from '../../src/lib/controle.ts';
-import { FICHIER_PLAN_DU_SITE, URL_SITE } from '../../src/lib/site.ts';
+import { ADRESSE_SIGNALEMENT, FICHIER_PLAN_DU_SITE, URL_SITE } from '../../src/lib/site.ts';
 
 export interface Reponse {
   statut: number;
@@ -123,6 +123,10 @@ export async function verifierProduction(options: OptionsProduction): Promise<Co
     const noindex = /\bnoindex\b/i.test(accueil.robotsTag ?? '');
     if (!indexable && !noindex) constats.push(erreur('PROD-NOINDEX-ABSENT', `le site n'est pas indexable mais ${ACCUEIL} n'envoie pas « X-Robots-Tag: noindex »`));
     if (indexable && noindex) constats.push(erreur('PROD-NOINDEX-PRESENT', `le site est indexable mais ${ACCUEIL} envoie encore « X-Robots-Tag: noindex »`));
+    // Lien de signalement servi tel quel : le masquage des adresses de Cloudflare le réécrirait et ajouterait un script.
+    if (!accueil.corps.includes(`mailto:${ADRESSE_SIGNALEMENT}`) || accueil.corps.includes('/cdn-cgi/l/email-protection')) {
+      constats.push(erreur('PROD-SIGNALEMENT', `${ACCUEIL} doit servir le lien « Signaler une erreur » vers mailto:${ADRESSE_SIGNALEMENT}, sans masquage d'adresse par Cloudflare (/cdn-cgi/l/email-protection)`));
+    }
   }
 
   // robots.txt servi identique à celui du dépôt (fins de ligne et espaces de fin ignorés).

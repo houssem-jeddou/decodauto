@@ -1,4 +1,5 @@
-import { calculesSchema, type Calcules, type LigneSituation } from '../schemas/pages.ts';
+import { calculesSchema, type Calcules, type LigneSituation, type PageEditoriale } from '../schemas/pages.ts';
+import { fourchetteAffichee, resoudreCout, type CoutResolu, type DonneesCouts } from './cout.ts';
 import type { PlanDuSite, VoyantBase } from '../schemas/donnees.ts';
 import type { Citation } from '../schemas/briques.ts';
 import { rangVerdict, type TypePage, type Urgence, type Verdict } from '../schemas/listes.ts';
@@ -92,4 +93,49 @@ export function calculerChamps(
     niveau_securite: niveau,
   });
   return resultat.success ? resultat.data : undefined;
+}
+
+/** Ce que le calcul du coût reçoit d'une page : page outil ou non, causes (voyant, code défaut, panne), coût déclaré. */
+export function entreeCout(page: PageEditoriale): Parameters<typeof resoudreCout>[0] {
+  return {
+    outil: 'outil' in page && page.outil === true,
+    causes: 'causes' in page ? page.causes : undefined,
+    cout: page.cout_probable,
+  };
+}
+
+/** Coût résolu d'une page : le même calcul pour les contrôles et pour le gabarit (montant automatique si arrêt). */
+export function coutDeLaPage(page: PageEditoriale, lignes: readonly LigneResolue[], couts: DonneesCouts): CoutResolu {
+  const niveau = niveauSecurite(lignes);
+  return resoudreCout(entreeCout(page), couts, niveau !== undefined && niveau.startsWith('non'));
+}
+
+/**
+ * Sources citées par une page, dans l'ordre de la section « Sources » (charte §4), chacune avec les emplacements
+ * cités sur la page (page ou section) :
+ *  1. citations des lignes de situation (reprises de la base ou saisies) ;
+ *  2. citations du risque si l'on continue (une référence à la base garde son emplacement) ;
+ *  3. texte de référence (pages pneus et obligations) ;
+ *  4. sources de la page, du coût, du libellé d'un code, de « quand changer », des précisions par marque ;
+ *  5. sources des montants et prises en charge affichés, et des fourchettes en euros affichées dans les causes.
+ */
+export function sourcesDeLaPageCitees(page: PageEditoriale, lignes: readonly LigneResolue[], couts: DonneesCouts, cout: CoutResolu): Map<string, string[]> {
+  const sources = new Map<string, string[]>();
+  const ajouter = (id: string, emplacement?: string): void => {
+    const emplacements = sources.get(id) ?? [];
+    if (emplacement !== undefined && !emplacements.includes(emplacement)) emplacements.push(emplacement);
+    sources.set(id, emplacements);
+  };
+  for (const ligne of lignes) for (const c of ligne.citations) ajouter(c.source, c.emplacement);
+  for (const c of page.cout_probable.si_vous_continuez?.citations ?? []) ajouter(c.source, c.emplacement);
+  if ('texte_reference' in page) ajouter(page.texte_reference.source, page.texte_reference.reference);
+  for (const id of page.sources) ajouter(id);
+  for (const id of page.cout_probable.sources) ajouter(id);
+  if ('libelle_sources' in page) for (const id of page.libelle_sources) ajouter(id);
+  if ('quand_changer' in page) for (const id of page.quand_changer.sources) ajouter(id);
+  if ('precisions_par_marque' in page) for (const p of page.precisions_par_marque ?? []) for (const id of p.sources) ajouter(id);
+  for (const id of cout.montants) for (const s of couts.montants.get(id)?.sources ?? []) ajouter(s);
+  for (const id of cout.prisesEnCharge) for (const s of couts.prises_en_charge.get(id)?.sources ?? []) ajouter(s);
+  if ('causes' in page) for (const cause of page.causes ?? []) for (const s of fourchetteAffichee(cause.pieces, couts.pieces)?.sources ?? []) ajouter(s);
+  return sources;
 }

@@ -14,6 +14,12 @@ export const LIGNE_SITEMAP = `Sitemap: ${URL_SITE}/${FICHIER_PLAN_DU_SITE}`;
 export const urlAbsolue = (adresse: string): string => `${URL_SITE}${adresse}`;
 
 /**
+ * Adresse de signalement des erreurs (décision de Houssem du 02/11/2026, livrable 6.3) : une adresse du domaine,
+ * redirigée vers sa boîte. Le lien « Signaler une erreur » de chaque page l'ouvre avec l'adresse de la page.
+ */
+export const ADRESSE_SIGNALEMENT = 'erreur@decodauto.com';
+
+/**
  * Adresse d'une page à partir de son fichier dans le site construit (chemin relatif, séparateur « / ») :
  * « index.html » → « / », « voyants/moteur/index.html » → « /voyants/moteur/ ». Tout autre fichier (404.html…) → undefined.
  */

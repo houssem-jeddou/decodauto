@@ -3,10 +3,10 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
-import { adressesDansLeTexte, liensEnAttente } from '../../src/lib/plan.ts';
+import { adressesDansLeTexte, indexerPlan, liensEnAttente } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
 import { auteursDuSocle, chargerDonnees, chargerPages } from './charger.ts';
-import { controler404, controlerCanonicalEtPlanDuSite, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
+import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
   constats: Constat[];
@@ -35,6 +35,7 @@ export async function controlerSite(options: { racine: string; dist: string; auj
 
   // 2. Pages : frontmatter, liens écrits dans le texte, page construite.
   const controlees: PageControlee[] = [];
+  const construitesEditoriales: { id: string; fichier: string; html: string }[] = [];
   for (const lue of pagesLues) {
     if (lue.erreurLecture !== undefined) {
       constats.push({ regle: 'R7-FORMAT', gravite: 'erreur', message: lue.erreurLecture, fichier: lue.fichier });
@@ -56,6 +57,7 @@ export async function controlerSite(options: { racine: string; dist: string; auj
       }
     }
     const resultat = controlerPage({ type: lue.type, brut: lue.brut, fichier: lue.fichier }, contexte, html);
+    if (html !== undefined && lue.type !== 'socle' && typeof id === 'string') construitesEditoriales.push({ id, fichier: lue.fichier, html });
     constats.push(...resultat.constats);
     controlees.push({
       type: lue.type,
@@ -67,17 +69,33 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   }
   constats.push(...controlerEnsemble(controlees, contexte));
   const ecrites = new Set(controlees.flatMap((p) => (p.id !== undefined ? [p.id] : [])));
+  // Maillage des pages construites (docs/08 §4) : fil d'Ariane vers la mère, enfants et pages liées construits.
+  const index = indexerPlan(contexte.plan);
+  const adresse = (pageId: string): string | undefined => contexte.plan.get(pageId)?.adresse;
+  for (const p of construitesEditoriales) {
+    const parent = contexte.plan.get(p.id)?.parent;
+    const enfants = (index.enfants.get(p.id) ?? []).filter((e) => ecrites.has(e));
+    const liees = [...(index.voisins.get(p.id) ?? [])].filter((v) => ecrites.has(v) && v !== parent && !enfants.includes(v));
+    constats.push(
+      ...constatsMaillage(p.html, p.fichier, {
+        parent: parent !== undefined && ecrites.has(parent) ? adresse(parent) : undefined,
+        enfants: enfants.flatMap((e) => adresse(e) ?? []),
+        liees: liees.flatMap((v) => adresse(v) ?? []),
+      }),
+    );
+  }
   const enAttente = liensEnAttente(contexte.plan, ecrites);
   if (enAttente > 0) {
     informations.push(`${enAttente} lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites`);
   }
 
   // 3. Site construit : non-indexation (dans les deux sens), pages du plan, canonical et plan du site, page 404,
-  //    fixtures, configuration Cloudflare.
+  //    composants communs (mention en tête, signalement, typographie), fixtures, configuration Cloudflare.
   constats.push(...(await controlerIndexation(dist, indexable)));
   constats.push(...(await controlerPagesDuPlan(dist, [...contexte.plan.values()].map((ligne) => ligne.adresse))));
   constats.push(...(await controlerCanonicalEtPlanDuSite(dist)));
   constats.push(...(await controler404(dist)));
+  constats.push(...(await controlerComposantsCommuns(dist)));
   constats.push(...(await controlerFixturesNonPubliees(dist)));
   constats.push(...(await controlerWrangler(racine)));
 

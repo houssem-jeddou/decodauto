@@ -1,6 +1,7 @@
 # Charte éditoriale — decodauto.com (v1)
 
 Étape 6, livrable 6.2. Proposée le 02/11/2026 ; **validée par Houssem le 02/11/2026 (20 h 19)**, avec toutes les recommandations de la section 10. Empreinte des textes affichés : `data/charte-validation.json`.
+Précisions validées avec le livrable 6.3 (02/11/2026, 22 h 28) : adresse de signalement (§5.3), pictogramme d'un voyant (§3.6).
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -94,7 +95,7 @@
 - Le texte d'un lien dit où il mène (jamais « cliquez ici »).
 - Les titres se suivent sans saut de niveau (H1, puis H2, puis H3).
 - Un tableau a des cellules d'en-tête ; un verdict ne repose jamais sur la couleur seule (le libellé est toujours écrit).
-- Une image a un texte alternatif qui dit ce qu'elle montre ; un pictogramme de voyant porte le nom du voyant.
+- Une image a un texte alternatif qui dit ce qu'elle montre. Un pictogramme de voyant porte le nom du voyant, sauf quand un texte écrit à côté le nomme déjà (situation d'une ligne de l'encadré) : il est alors décoratif, masqué aux lecteurs d'écran, pour que le nom ne soit pas lu deux fois.
 
 ## 4. Structure d'une page éditoriale
 Dans cet ordre (contrôles R9 pour l'encadré) :
@@ -146,7 +147,7 @@ Les emplacements publicitaires, quand il y en aura, ne sont jamais avant l'encad
 - Les données structurées de l'auteur (étape 7) reprendront le même nom et le même rôle que la signature.
 
 ### 5.3 Corrections
-- Chaque page porte le lien « Signaler une erreur » (adresse à fixer en 6.3).
+- Chaque page porte le lien « Signaler une erreur », vers `erreur@decodauto.com` (décision de Houssem du 02/11/2026), redirigée vers sa boîte ; l'adresse est aussi écrite en clair, et le message reprend l'adresse de la page (sauf sur la 404).
 - Une erreur qui touche la sécurité (verdict, consigne, chiffre) est corrigée en priorité, selon la règle 13 de 03 ; la date de mise à jour de la page change.
 
 ### 5.4 Indépendance

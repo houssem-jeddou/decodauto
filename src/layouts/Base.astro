@@ -1,5 +1,7 @@
 ---
+import '../styles/site.css';
 import { estIndexable } from '../lib/indexation.ts';
+import { bandeau, pied } from '../lib/gabarit.ts';
 
 interface Props {
   titre: string;
@@ -12,6 +14,11 @@ const { titre, description, sansCanonical = false } = Astro.props;
 const indexable = estIndexable();
 // Canonical : l'adresse de la page elle-même, absolue (contrôles CANONICAL-*). Jamais saisie à la main.
 const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.site).href;
+// Composants communs à toutes les pages (livrable 6.3, src/lib/gabarit.ts) : nom du site et mention en tête avant le
+// H1, lien de signalement en pied de page (contrôles MENTION-IA-* et SIGNALER-ERREUR-ABSENT).
+const haut = bandeau();
+// Sur la page 404, l'adresse demandée n'est pas connue du site statique : le lecteur la complète dans son courriel.
+const bas = pied(sansCanonical ? undefined : Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -24,41 +31,16 @@ const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.
     {!indexable && <meta name="robots" content="noindex" />}
     {canonical && <link rel="canonical" href={canonical} />}
     <link rel="icon" href="data:," />
-    <style>
-      :root {
-        color-scheme: light;
-        --texte: #1a1d21;
-        --fond: #ffffff;
-        --accent: #0b5cad;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-        line-height: 1.6;
-        color: var(--texte);
-        background: var(--fond);
-      }
-      main {
-        max-width: 40rem;
-        margin: 0 auto;
-        padding: 4rem 1rem;
-      }
-      h1 {
-        font-size: 1.75rem;
-        line-height: 1.25;
-        margin: 0 0 1rem;
-      }
-      a {
-        color: var(--accent);
-      }
-    </style>
   </head>
   <body>
+    <header class="bandeau">
+      <Fragment set:html={haut} />
+    </header>
     <main>
       <slot />
     </main>
+    <footer class="pied">
+      <Fragment set:html={bas} />
+    </footer>
   </body>
 </html>
