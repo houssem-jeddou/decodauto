@@ -1,4 +1,4 @@
-// Met à jour les parties générées de la charte éditoriale (ligne de transparence, section « Notre méthode ») depuis
+// Met à jour les parties générées de la charte éditoriale (mention en tête, signature, ligne de transparence, section « Méthode ») depuis
 // src/lib/charte.ts et data/sources.json. Usage : npm run charte:vue (après une modification validée par Houssem).
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';

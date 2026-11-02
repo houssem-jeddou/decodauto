@@ -11,38 +11,57 @@ import {
 } from '../schemas/listes.ts';
 
 // ---------------------------------------------------------------------------------------------
-// Charte éditoriale (étape 6, livrable 6.2) : les deux textes exacts que le site affiche et qui ne doivent jamais
-// être recopiés à la main :
-//  - la ligne de transparence, sur chaque page éditoriale, juste après l'encadré de décision (docs/03 règle 11) ;
-//  - la section « Notre méthode » de la page « à propos ».
-// Les parties qui dépendent des données (notices lues, nombre de marques, libellés des verdicts, des urgences et
-// des tranches de coût) sont calculées depuis leurs sources de vérité. Les règles de rédaction, elles, sont
-// écrites dans la charte (docs/10_charte_editoriale.md), dont les parties générées viennent d'ici
-// (npm run charte:vue). Toute modification de ces textes est validée par Houssem.
-// Module sans dépendance à l'exécution.
+// Charte éditoriale (étape 6, livrable 6.2) : les textes que le site affiche tels quels, jamais recopiés à la main :
+//  - la mention en tête de page, avant le H1, sur toutes les pages (règlement européen sur l'IA, article 50(5) :
+//    information au plus tard à la première exposition) ;
+//  - la ligne de transparence, sur chaque page éditoriale, après l'encadré de décision et la signature (docs/03
+//    règle 11, docs/08 §3 règle 9) ;
+//  - la signature et les dates ;
+//  - la section « Méthode » de la page « à propos ».
+// Les parties qui dépendent des données (notices lues, nombre de marques et de groupes, libellés des verdicts, des
+// urgences et des tranches de coût) sont calculées depuis leurs sources de vérité. Les règles de rédaction sont
+// écrites dans la charte (docs/10_charte_editoriale.md), dont la section 7 est générée d'ici (npm run charte:vue).
+// Toute modification de ces textes est validée par Houssem. Module sans dépendance à l'exécution.
 // ---------------------------------------------------------------------------------------------
 
 /** Responsable éditorial du site : il valide les verdicts et la décision en haut de chaque page (docs/03 règle 7). */
 export const RESPONSABLE_EDITORIAL = 'Houssem Jeddou';
-/** Outil d'IA utilisé pour la rédaction, nommé dans la section méthode (transparence). */
+/** Outil d'IA qui rédige les textes, nommé dans la section méthode (transparence). */
 export const OUTIL_IA = 'Claude, d’Anthropic';
 /** Page qui porte la section méthode (identifiant du plan du site) et ancre de la section. */
 export const PAGE_METHODE = 'a-propos';
 export const ANCRE_METHODE = 'methode';
+/** Texte du lien vers la section méthode (sans « notre » : le site n'est pas une équipe, charte §3.1). */
+export const LIBELLE_LIEN_METHODE = 'Méthode';
 
 /**
- * Ligne de transparence (docs/03 règle 11) : une ligne sur chaque page éditoriale, qui dit comment la page est
- * produite. Chaque affirmation est garantie par un contrôle :
- *  - « Rédaction assistée par une IA » : vrai de toute page ;
+ * Mention en tête de page, avant le H1, sur toutes les pages (socle compris) : le lecteur sait dès la première
+ * exposition que le texte est rédigé par une IA (article 50(5) du règlement européen sur l'IA). Elle ne dit pas
+ * « vérifié » : Houssem vérifie les verdicts, la décision, les faits de sécurité et les chiffres, pas chaque phrase
+ * (charte §5.1) ; la ligne de transparence dit ce qui est vérifié.
+ */
+export const MENTION_EN_TETE = `Texte rédigé par une IA, sous la responsabilité de ${RESPONSABLE_EDITORIAL}`;
+
+/**
+ * Ligne de transparence (docs/03 règle 11), sur chaque page éditoriale. Ce que garantit chaque affirmation :
+ *  - « Texte rédigé par une IA » : vrai de toute page (charte §6) ;
  *  - « Verdicts tirés des notices des constructeurs ou de sources officielles » : R3 (au moins une citation de
  *    première main qui fixe le niveau de chaque verdict) ;
- *  - « cités sur cette page » : les sources de chaque page sont affichées (composant de l'étape 6.3) ;
- *  - « décision en haut de page vérifiée » : R4 (empreinte de l'encadré validée par le responsable éditorial).
+ *  - « citées sur cette page » : contrôle prévu en 6.3 (toute source citée figure dans la section « Sources ») ;
+ *  - « vérifiés par » : validation écrite de Houssem dans la pull request du lot (docs/03 règle 7) ; R4 bloque
+ *    toute modification de l'encadré après cette validation.
  */
 export const LIGNE_TRANSPARENCE = {
-  texte: `Rédaction assistée par une IA. Verdicts tirés des notices des constructeurs ou de sources officielles, cités sur cette page ; décision en haut de page vérifiée par ${RESPONSABLE_EDITORIAL}.`,
-  libelleLien: 'Notre méthode',
+  texte: `Texte rédigé par une IA. Verdicts tirés des notices des constructeurs ou de sources officielles, citées sur cette page ; verdicts et décision en haut de page vérifiés par ${RESPONSABLE_EDITORIAL}.`,
+  libelleLien: LIBELLE_LIEN_METHODE,
 } as const;
+
+/** Date affichée (JJ/MM/AAAA), comme les dates des montants (src/lib/cout.ts). */
+const date = (d: Date): string => d.toISOString().slice(0, 10).split('-').reverse().join('/');
+
+/** Signature d'une page éditoriale, après l'encadré : responsable, date de mise à jour réelle, date de revue. */
+export const signature = (miseAJour: Date, revue: Date): string =>
+  `Responsable éditorial : ${RESPONSABLE_EDITORIAL} · Mis à jour le ${date(miseAJour)} · Revu le ${date(revue)}`;
 
 /** Libellés lus par le lecteur des catégories de sources qui peuvent fixer un verdict (docs/01 règle 4). */
 export const LIBELLES_SOURCES_VERDICT: Readonly<Partial<Record<CategorieSource, string>>> = {
@@ -56,6 +75,19 @@ export const LIBELLES_SOURCES_VERDICT: Readonly<Partial<Record<CategorieSource, 
 /** Catégories de première main qui ne fixent jamais un verdict (le règlement ONU n° 121 : symboles et couleurs). */
 export const SOURCES_SANS_VERDICT: readonly CategorieSource[] = ['reglement-onu'];
 
+/** Un mot ou une expression entière, insensible à la casse ; \b ne sait pas border un mot accentué (« certifié »). */
+const mot = (motif: string): RegExp => new RegExp(`(?<!\\p{L})(?:${motif})(?!\\p{L})`, 'iu');
+/** Expressions interdites dans les textes affichés (charte §2.7 et §3.1) : expertise ou équipe qui n'existent pas. */
+export const EXPRESSIONS_INTERDITES: readonly RegExp[] = [
+  mot('experts?'),
+  mot('nos mécaniciens|mécaniciens? (?:du site|de l’équipe|de l\'équipe|maison)'),
+  mot('certifiée?s?'),
+  mot('garantie?s?(?! légale)'), // « la garantie légale de conformité » reste permise (coût, prise en charge)
+  mot('testée?s? par'),
+  mot('(?:notre|nos) (?:équipe|rédaction|experts?)'),
+  mot('nous'),
+];
+
 /** Une notice du registre, réduite à ce que la section méthode affiche. */
 export interface NoticeLue {
   titre: string;
@@ -63,10 +95,17 @@ export interface NoticeLue {
   marque?: string | undefined;
 }
 
+/** Un terme et ce qu'il veut dire (verdicts, urgences, tranches de coût), affichés en tableau à deux colonnes. */
+export interface Definition {
+  terme: string;
+  sens: string;
+}
+
 export interface BlocMethode {
   titre: string;
   paragraphes: readonly string[];
   liste?: readonly string[];
+  definitions?: readonly Definition[];
 }
 
 export interface SectionMethode {
@@ -76,8 +115,9 @@ export interface SectionMethode {
   blocs: readonly BlocMethode[];
 }
 
-/** Définition affichée après « libellé : » : première lettre en minuscule (typographie française). */
-export const apresDeuxPoints = (texte: string): string => texte.charAt(0).toLocaleLowerCase('fr') + texte.slice(1);
+const NOMBRES_EN_LETTRES = ['zéro', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf', 'dix'];
+/** Nombre écrit en lettres dans le texte courant (jusqu'à dix), en chiffres au-delà. */
+export const enLettres = (n: number): string => NOMBRES_EN_LETTRES[n] ?? String(n);
 
 /** « a, b et c ». */
 export function enumerer(elements: readonly string[]): string {
@@ -88,7 +128,7 @@ export function enumerer(elements: readonly string[]): string {
 /** Nom court d'une notice : le titre du registre avant « — » (« Peugeot 208 — Guide d'utilisation » → « Peugeot 208 »). */
 export const nomCourtNotice = (titre: string): string => (titre.split(' — ')[0] ?? titre).trim();
 
-/** Notices du registre (data/sources.json) lues pour les verdicts, triées par marque. */
+/** Notices du registre (data/sources.json) lues pour les verdicts, triées par nom. */
 export function noticesLues(registre: readonly NoticeLue[]): { noms: string[]; marques: number; groupes: number } {
   const notices = registre.filter((s) => s.categorie === 'notice-constructeur').sort((a, b) => a.titre.localeCompare(b.titre, 'fr'));
   const marques = new Set(notices.flatMap((n) => (n.marque === undefined ? [] : [n.marque])));
@@ -100,18 +140,24 @@ export function noticesLues(registre: readonly NoticeLue[]): { noms: string[]; m
 export const categoriesQuiFixentUnVerdict = (): CategorieSource[] =>
   SOURCES_PREMIERE_MAIN.filter((c) => !SOURCES_SANS_VERDICT.includes(c));
 
+/** Règle du nombre de marques (paramétrable pour les tests ; par défaut, src/schemas/listes.ts). */
+export interface RegleMarquesMethode {
+  marquesMin: number;
+  groupesMin: number;
+}
+
 /**
- * Section « Notre méthode » de la page « à propos » (docs/03 règle 11). `registre` : data/sources.json (les notices
+ * Section « Méthode » de la page « à propos » (docs/03 règle 11). `registre` : data/sources.json (les notices
  * lues y sont prises, jamais recopiées).
  */
-export function sectionMethode(registre: readonly NoticeLue[]): SectionMethode {
+export function sectionMethode(registre: readonly NoticeLue[], regle: RegleMarquesMethode = { marquesMin: MARQUES_MIN, groupesMin: GROUPES_MIN }): SectionMethode {
   const notices = noticesLues(registre);
   const sourcesVerdict = categoriesQuiFixentUnVerdict().map((c) => LIBELLES_SOURCES_VERDICT[c] ?? c);
-  const niveaux = [...VERDICTS].reverse().map((v) => `« ${GRILLE_VERDICTS[v].libelle} » : ${apresDeuxPoints(GRILLE_VERDICTS[v].definition)}`);
-  const urgences = [...URGENCES].reverse().map((u) => `« ${GRILLE_URGENCES[u].libelle} » : ${apresDeuxPoints(GRILLE_URGENCES[u].definition)}`);
-  const tranches = TRANCHES_COUT.map((t) => `« ${GRILLE_COUTS[t].libelle} » : ${apresDeuxPoints(GRILLE_COUTS[t].definition)}`);
+  const verdicts = [...VERDICTS].reverse().map((v) => ({ terme: GRILLE_VERDICTS[v].libelle, sens: GRILLE_VERDICTS[v].definition }));
+  const urgences = [...URGENCES].reverse().map((u) => ({ terme: GRILLE_URGENCES[u].libelle, sens: GRILLE_URGENCES[u].definition }));
+  const tranches = TRANCHES_COUT.map((t) => ({ terme: GRILLE_COUTS[t].libelle, sens: GRILLE_COUTS[t].definition }));
   return {
-    titre: 'Notre méthode',
+    titre: 'Méthode',
     ancre: ANCRE_METHODE,
     introduction:
       'Votre voiture vous alerte : voyant, code défaut, symptôme ou obligation. Chaque page commence par la décision : pouvez-vous rouler, avec quelle urgence, ce que cela risque de coûter et quoi faire. Voici comment ces réponses sont établies.',
@@ -119,8 +165,8 @@ export function sectionMethode(registre: readonly NoticeLue[]): SectionMethode {
       {
         titre: 'Qui écrit et qui vérifie',
         paragraphes: [
-          `Le site est édité par ${RESPONSABLE_EDITORIAL}, qui en porte la responsabilité éditoriale. Les textes sont rédigés avec l’aide d’une intelligence artificielle (${OUTIL_IA}), à partir des sources citées sur chaque page.`,
-          `${RESPONSABLE_EDITORIAL} vérifie lui-même chaque verdict, ainsi que la décision affichée en haut de chaque page (question, verdicts, urgence, action, coût probable), avant sa publication. Il valide aussi, sur leurs sources, les faits de sécurité et les chiffres de chaque page.`,
+          `Le site est édité par ${RESPONSABLE_EDITORIAL}, qui en porte la responsabilité éditoriale. Les textes sont rédigés par une intelligence artificielle (${OUTIL_IA}), à partir d’un plan, des questions que posent les conducteurs et des sources citées sur chaque page. L’IA lit les sources et rédige ; elle ne fixe aucun verdict.`,
+          `${RESPONSABLE_EDITORIAL} vérifie lui-même chaque verdict, ainsi que la décision affichée en haut de chaque page (question, verdicts, urgence, action, coût probable), avant sa publication. Avant la publication de chaque lot de pages, il valide aussi, sur leurs sources, les faits de sécurité et les chiffres qu’elles contiennent ; toute correction qui les touche repasse par lui.`,
           'Le site n’est pas relu par un mécanicien et ne répare pas de voitures : sa fiabilité repose sur les sources citées et sur cette vérification.',
         ],
       },
@@ -132,34 +178,34 @@ export function sectionMethode(registre: readonly NoticeLue[]): SectionMethode {
         liste: sourcesVerdict,
       },
       {
-        titre: 'Plusieurs marques pour chaque voyant',
+        titre: 'Plusieurs marques pour les voyants',
         paragraphes: [
-          `Pour un voyant, les notices de plusieurs marques parmi les plus vendues en France sont lues et comparées. Notices lues aujourd’hui : ${enumerer(notices.noms)}, soit ${notices.marques} marques de ${notices.groupes} groupes.`,
-          `Chaque verdict sur un voyant s’appuie sur au moins ${MARQUES_MIN} marques de ${GROUPES_MIN} groupes différents. Quand les notices ne disent pas la même chose, la consigne la plus prudente est retenue, et la page vous montre l’écart, marque par marque.`,
+          `Pour les voyants, les notices de plusieurs grandes marques vendues en France sont lues et comparées. Notices lues aujourd’hui : ${enumerer(notices.noms)}, soit ${enLettres(notices.marques)} marques de ${enLettres(notices.groupes)} groupes. Chaque citation nomme le modèle et l’édition de la notice ; une consigne n’est jamais transposée à un autre modèle.`,
+          `Chaque voyant de la base du site s’appuie sur au moins ${enLettres(regle.marquesMin)} marques de ${enLettres(regle.groupesMin)} groupes différents. Quand les notices ne disent pas la même chose, la consigne la plus prudente est retenue, et la page vous montre l’écart, marque par marque. Quand une alerte n’est décrite que dans une ou deux des notices lues, la page le dit et nomme la notice citée.`,
           'La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.',
         ],
       },
       {
         titre: 'Ce que veulent dire les verdicts',
         paragraphes: ['Les verdicts sont toujours formulés avec les mêmes mots :'],
-        liste: niveaux,
+        definitions: verdicts,
       },
       {
         titre: 'Ce que veulent dire les urgences',
         paragraphes: ['L’urgence dit quand agir :'],
-        liste: urgences,
+        definitions: urgences,
       },
       {
         titre: 'Le coût probable',
         paragraphes: [
-          'Le coût est donné en cinq tranches qui disent la nature de la dépense, de la plus légère à la plus lourde. Ce classement suit la lourdeur habituelle de l’intervention, pas un prix : un entretien peut coûter plus qu’une petite réparation.',
+          `Le coût est donné en ${enLettres(TRANCHES_COUT.length)} tranches qui disent la nature de la dépense, de la plus légère à la plus lourde. Ce classement suit la lourdeur habituelle de l’intervention, pas un prix : un entretien peut coûter plus qu’une petite réparation.`,
         ],
-        liste: tranches,
+        definitions: tranches,
       },
       {
         titre: 'Les montants en euros',
         paragraphes: [
-          `Un montant en euros n’est donné que dans deux cas : s’il est fixé par un texte officiel (une amende, le tarif réglementé du dépannage sur autoroute), ou comme ordre de grandeur relevé dans au moins ${FOURCHETTE_SOURCES_MIN} sources publiques indépendantes. Chaque montant est daté et revérifié.`,
+          `Un montant en euros n’est donné que dans deux cas : s’il est fixé par un texte officiel (une amende, le tarif réglementé du dépannage sur autoroute), ou comme ordre de grandeur relevé dans au moins ${enLettres(FOURCHETTE_SOURCES_MIN)} sources publiques indépendantes. Chaque montant est daté et revérifié.`,
           'Le tarif d’un garage ou d’une enseigne n’est jamais cité : pour un prix précis, demandez un devis.',
         ],
       },
@@ -172,16 +218,16 @@ export function sectionMethode(registre: readonly NoticeLue[]): SectionMethode {
       {
         titre: 'Corrections et mises à jour',
         paragraphes: [
-          'Chaque page indique la date de sa dernière mise à jour et celle de sa dernière vérification. Les pages sont revues à date fixe, et les montants fixés par un texte sont revérifiés régulièrement.',
+          'Chaque page indique la date de sa dernière mise à jour et celle de sa dernière revue. Les pages sont revues à date fixe, et les montants fixés par un texte sont revérifiés régulièrement.',
           'Si vous repérez une erreur, utilisez le lien « Signaler une erreur » présent sur chaque page : une erreur qui touche votre sécurité est corrigée en priorité.',
         ],
       },
       {
         titre: 'Indépendance',
         paragraphes: [
-          'Le site ne vend ni pièces ni réparations. Aucun garage, constructeur, vendeur ou annonceur ne paie pour figurer sur le site ou pour influencer un verdict.',
-          'Si de la publicité est affichée, elle est séparée du contenu et jamais placée avant la décision. Un lien rémunéré serait signalé comme tel.',
-          'Les noms de marques et de modèles servent à vous orienter vers la bonne notice. Les pictogrammes des voyants sont redessinés pour le site, jamais copiés.',
+          'Le site ne vend ni pièces ni réparations. Aucun garage, constructeur ou vendeur ne paie pour un contenu, un classement ou un verdict.',
+          'Si de la publicité est affichée, elle est choisie par une régie publicitaire, séparée du contenu et jamais placée avant la décision. Un lien rémunéré est signalé comme tel.',
+          'Les marques citées appartiennent à leurs propriétaires ; le site n’est lié à aucun constructeur. Les pictogrammes des voyants sont redessinés pour le site, jamais copiés.',
         ],
       },
     ],

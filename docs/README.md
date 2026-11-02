@@ -13,4 +13,4 @@ Copie des sources de vérité du projet (projet Claude « Site Voiture $$ »), d
 - 07_resultats_google_serp_autocompletion.md : résultats et suggestions Google relevés (depuis la Tunisie, le 22/10/2026)
 - 08_structure_contenus.md : structure des contenus (types de pages et champs)
 - 09_plan_du_site.md : plan du site, vue lisible (pages, adresses, liens, règles de rattachement)
-- 10_charte_editoriale.md : charte éditoriale (règles de rédaction, transparence) ; la ligne de transparence et la section « Notre méthode » font foi dans `src/lib/charte.ts` (parties générées par `npm run charte:vue`, vérifiées par un test)
+- 10_charte_editoriale.md : charte éditoriale (règles de rédaction, transparence) ; la mention en tête, la signature, la ligne de transparence et la section « Méthode » font foi dans `src/lib/charte.ts` (parties générées par `npm run charte:vue`, vérifiées par un test)

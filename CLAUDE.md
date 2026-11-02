@@ -30,7 +30,7 @@ Guide indépendant : voyant, code défaut, symptôme ou obligation → peut-on r
 - Chaque page s'ouvre sur la décision et contient un élément unique (arbre de décision, tableau, outil, photo réelle).
 - Une intention de recherche = une seule page. Pas de page par modèle sans donnée constructeur sourcée.
 - Pictogrammes redessinés par nos soins, jamais copiés. Codes défaut constructeur précisés par marque.
-- **Transparence** : auteur identifié (page « à propos ») ; chaque page dit en une ligne comment elle est produite (rédaction assistée par une IA, sources de première main, verdicts et encadré de décision vérifiés par Houssem) ; la méthode détaillée est une section de « à propos » (docs/03, règle 11). Textes exacts dans `src/lib/charte.ts` (ligne de transparence, section « Notre méthode »), jamais recopiés ; règles de rédaction dans `docs/10_charte_editoriale.md`.
+- **Transparence** : auteur identifié (page « à propos ») ; chaque page dit en une ligne comment elle est produite (rédaction assistée par une IA, sources de première main, verdicts et encadré de décision vérifiés par Houssem) ; la méthode détaillée est une section de « à propos » (docs/03, règle 11). Textes exacts dans `src/lib/charte.ts` (mention en tête, signature, ligne de transparence, section « Méthode »), jamais recopiés ; règles de rédaction dans `docs/10_charte_editoriale.md`.
 - Électrique, hybride, valises OBD, démarches administratives : hors périmètre (`docs/02`).
 
 ## Technique
@@ -46,7 +46,7 @@ Guide indépendant : voyant, code défaut, symptôme ou obligation → peut-on r
 - Catalogue des règles et des codes d'erreur : `CONTROLES.md`.
 
 ## Commandes
-`npm ci` · `npm run dev` · `npm run build` (construit + contrôle) · `npm test` · `npm run schemas` · `npm run liens` · `npm run lighthouse` (après `build`) · `npm run fixtures` (régénère les pages de test) · `npm run plan:vue` (met à jour les parties générées de `docs/09`) · `npm run grille:vue` (parties générées de `docs/08` : marques de référence, grille, échelle du coût probable) · `npm run charte:vue` (parties générées de `docs/10` : ligne de transparence, section « Notre méthode ») · `npm run empreinte -- <page.md> | --voyant <id> | --montant <id>` (empreinte à copier après la validation de Houssem) · `npm run paquet` (contrôle le brouillon de la base voyants et génère le paquet de validation ; après la validation de Houssem : `node scripts/valider-brouillon.ts --valide-par-houssem AAAA-MM-JJ --empreinte <empreinte du paquet>`).
+`npm ci` · `npm run dev` · `npm run build` (construit + contrôle) · `npm test` · `npm run schemas` · `npm run liens` · `npm run lighthouse` (après `build`) · `npm run fixtures` (régénère les pages de test) · `npm run plan:vue` (met à jour les parties générées de `docs/09`) · `npm run grille:vue` (parties générées de `docs/08` : marques de référence, grille, échelle du coût probable) · `npm run charte:vue` (parties générées de `docs/10` : mention en tête, signature, ligne de transparence, section « Méthode ») · `npm run empreinte -- <page.md> | --voyant <id> | --montant <id>` (empreinte à copier après la validation de Houssem) · `npm run paquet` (contrôle le brouillon de la base voyants et génère le paquet de validation ; après la validation de Houssem : `node scripts/valider-brouillon.ts --valide-par-houssem AAAA-MM-JJ --empreinte <empreinte du paquet>`).
 
 ## Git
 Commits en français, clairs, un sujet par commit. Travailler sur la branche indiquée par la tâche. Pas de réécriture d'historique sur une branche partagée.
