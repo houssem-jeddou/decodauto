@@ -73,7 +73,7 @@ function reseauConforme(surcharges: Record<string, Reponse> = {}): Lire {
     'https://www.decodauto.com/voyants/?verification=1': redirection('https://decodauto.com/voyants/?verification=1'),
     'https://decodauto.com/voyants/?verification=1': ok('', { statut: 404 }),
     'http://www.decodauto.com/': redirection('https://decodauto.com/'),
-    'https://decodauto.com/': ok('<html></html>'),
+    'https://decodauto.com/': ok('<html><a href="mailto:erreur@decodauto.com?subject=x">Signaler une erreur</a></html>'),
     'https://decodauto.com/robots.txt': ok(ROBOTS, { typeContenu: 'text/plain' }),
     'https://decodauto.com/sitemap.xml': ok('<?xml version="1.0"?>', { typeContenu: 'application/xml' }),
     ...surcharges,
@@ -90,6 +90,12 @@ const regles = async (lire: Lire, indexable = false): Promise<string[]> =>
 describe('vérification de la production (redirections, noindex, robots.txt, plan du site)', () => {
   test('production conforme : aucun écart', async () => {
     assert.deepEqual(await regles(reseauConforme()), []);
+  });
+
+  test('lien de signalement absent ou masqué par Cloudflare : PROD-SIGNALEMENT', async () => {
+    assert.deepEqual(await regles(reseauConforme({ 'https://decodauto.com/': ok('<html></html>') })), ['PROD-SIGNALEMENT']);
+    const masque = '<html><a href="/cdn-cgi/l/email-protection#abc">Signaler une erreur</a><a href="mailto:erreur@decodauto.com">x</a></html>';
+    assert.deepEqual(await regles(reseauConforme({ 'https://decodauto.com/': ok(masque) })), ['PROD-SIGNALEMENT']);
   });
 
   test('www servi sans redirection : PROD-WWW, PROD-WWW-CHEMIN et PROD-HTTP-WWW', async () => {
@@ -167,7 +173,7 @@ describe('vérification de la production (redirections, noindex, robots.txt, pla
   });
 
   test('noindex cohérent avec le mode du dépôt, dans les deux sens', async () => {
-    const sansNoindex = reseauConforme({ 'https://decodauto.com/': ok('<html></html>', { robotsTag: null }) });
+    const sansNoindex = reseauConforme({ 'https://decodauto.com/': ok('<html><a href="mailto:erreur@decodauto.com">Signaler une erreur</a></html>', { robotsTag: null }) });
     assert.deepEqual(await regles(sansNoindex, false), ['PROD-NOINDEX-ABSENT']);
     assert.deepEqual(await regles(sansNoindex, true), []);
     assert.deepEqual(await regles(reseauConforme(), true), ['PROD-NOINDEX-PRESENT']);

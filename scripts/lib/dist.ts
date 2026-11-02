@@ -8,6 +8,7 @@ import { LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE } from '../../src/lib/charte.t
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
 import { lienSignalement } from '../../src/lib/composants.ts';
+import { ELEMENTS_SANS_TYPOGRAPHIE } from '../../src/lib/html.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
 
@@ -219,7 +220,7 @@ export function constatsTypographie(html: string, fichier: string): Constat[] {
     .addBack()
     .contents()
     .toArray()
-    .filter((n) => n.type === 'text' && $(n).parents('script, style, code, pre, textarea, template, svg').length === 0)
+    .filter((n) => n.type === 'text' && $(n).parents(ELEMENTS_SANS_TYPOGRAPHIE.join(', ')).length === 0)
     .map((n) => (n as unknown as { data: string }).data);
   const constats: Constat[] = [];
   const extrait = (texte: string, i: number): string => texte.slice(Math.max(0, i - 25), i + 10).replace(/\s+/g, ' ').trim();
@@ -232,7 +233,9 @@ export function constatsTypographie(html: string, fichier: string): Constat[] {
     if (guillemet >= 0) {
       constats.push(erreur('TYPO-GUILLEMETS', `guillemet droit dans le texte affiché : « ${extrait(texte, guillemet)} » (guillemets français « … »)`, fichier));
     }
-    const espace = /[ \t\n\r]+[:;!?»]|«[ \t\n\r]/.exec(texte);
+    // Espace ordinaire (ou saut de ligne) avant « : ; ! ? » ou dans des guillemets ; ponctuation collée à une lettre et
+    // suivie d'une espace ou de la fin du texte (« Attention: »).
+    const espace = /[ \t\n\r]+[:;!?»]|«[ \t\n\r]|\p{L}[:;!?](?=[ \t\n\r]|$)/u.exec(texte);
     if (espace !== null) {
       constats.push(erreur('TYPO-ESPACE', `espace ordinaire avant « : ; ! ? » ou dans des guillemets : « ${extrait(texte, espace.index)} » (le gabarit pose une espace insécable)`, fichier));
     }
@@ -240,13 +243,25 @@ export function constatsTypographie(html: string, fichier: string): Constat[] {
   return constats;
 }
 
-/** Mention en tête, lien de signalement et typographie, sur toutes les pages du site construit. */
+/** Identifiants en double dans une page (ancres ambiguës, aria-labelledby faussé). */
+export function constatsIdentifiants(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const vus = new Map<string, number>();
+  for (const el of $('[id]').toArray()) {
+    const id = $(el).attr('id') ?? '';
+    vus.set(id, (vus.get(id) ?? 0) + 1);
+  }
+  const doublons = [...vus].filter(([, n]) => n > 1).map(([id]) => id);
+  return doublons.length > 0 ? [erreur('ID-DOUBLON', `identifiant(s) en double dans la page : ${doublons.join(', ')}`, fichier)] : [];
+}
+
+/** Mention en tête, lien de signalement, typographie et identifiants, sur toutes les pages du site construit. */
 export async function controlerComposantsCommuns(dist: string): Promise<Constat[]> {
   const constats: Constat[] = [];
   for (const chemin of await listerFichiers(dist, '.html')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
     const html = await readFile(chemin, 'utf8');
-    constats.push(...constatsMentionEtSignalement(html, fichier, adresseDepuisFichier(fichier)), ...constatsTypographie(html, fichier));
+    constats.push(...constatsMentionEtSignalement(html, fichier, adresseDepuisFichier(fichier)), ...constatsTypographie(html, fichier), ...constatsIdentifiants(html, fichier));
   }
   return constats;
 }
@@ -269,8 +284,12 @@ export function constatsMaillage(html: string, fichier: string, attendu: Maillag
   const $ = cheerio.load(html);
   const constats: Constat[] = [];
   const liensDe = (selecteur: string): Set<string> => new Set($(`${selecteur} a[href]`).toArray().map((a) => $(a).attr('href') ?? ''));
+  const brut = html.replace(/<!--[\s\S]*?-->/g, '');
+  const positionFil = brut.search(/<[a-z][a-z0-9-]*\b[^>]*\sdata-fil-ariane(?=[\s=/>])/i);
   if ($('[data-fil-ariane]').length !== 1) {
     constats.push(erreur('FIL-ARIANE-ABSENT', 'la page affiche un fil d\'Ariane (data-fil-ariane) avant le H1', fichier));
+  } else if (brut.search(/<h1\b/i) >= 0 && positionFil > brut.search(/<h1\b/i)) {
+    constats.push(erreur('FIL-ARIANE-ABSENT', 'le fil d\'Ariane précède le H1', fichier));
   } else if (attendu.parent !== undefined && !liensDe('[data-fil-ariane]').has(attendu.parent)) {
     constats.push(erreur('FIL-ARIANE-ABSENT', `le fil d'Ariane mène à la page mère (${attendu.parent})`, fichier));
   }

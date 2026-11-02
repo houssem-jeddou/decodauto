@@ -32,13 +32,13 @@ import {
 import { LIBELLE_SIGNALER_ERREUR, LIGNE_TRANSPARENCE, MENTION_EN_TETE, sectionMethode, signature } from '../src/lib/charte.ts';
 import { ADRESSE_SIGNALEMENT } from '../src/lib/site.ts';
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees } from '../src/lib/calcul.ts';
-import { textesAttendusCout, type DonneesCouts, type PieceCout } from '../src/lib/cout.ts';
+import { dateAffichee, textesAttendusCout, type DonneesCouts, type PieceCout } from '../src/lib/cout.ts';
 import { normaliserTexte } from '../src/lib/empreinte.ts';
 import { controlerComposants, controlerPage, type AttendusPage } from '../src/lib/controle.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import { COULEURS_VOYANT, VERDICTS } from '../src/schemas/listes.ts';
 import { construireDemo } from '../scripts/lib/demo.ts';
-import { constatsMaillage, constatsMentionEtSignalement, constatsTypographie } from '../scripts/lib/dist.ts';
+import { constatsIdentifiants, constatsMaillage, constatsMentionEtSignalement, constatsTypographie } from '../scripts/lib/dist.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const AUJOURDHUI = new Date('2026-11-02T00:00:00Z');
@@ -72,6 +72,13 @@ describe('typographie et échappement (charte §3.3)', () => {
   test('guillemets français à la place des guillemets droits ou anglais', () => {
     assert.equal(typographier('le message "STOP"'), `le message «${INSECABLE}STOP${INSECABLE}»`);
     assert.equal(typographier('le message “STOP”'), `le message «${INSECABLE}STOP${INSECABLE}»`);
+  });
+  test('typographie d\'un fragment HTML : attributs contenant « > », scripts, guillemets autour d\'un gras, pouces, sauts de ligne', () => {
+    assert.equal(typographierHtml('<img alt="Pression > 2 bar" src="a.png"><a title="a > b" href="/x/">x</a>'), '<img alt="Pression > 2 bar" src="a.png"><a title="a > b" href="/x/">x</a>');
+    assert.equal(typographierHtml("<script>if (a < b) {x='y'}</script><p>L'huile : ok</p>"), `<script>if (a < b) {x='y'}</script><p>L’huile${INSECABLE}: ok</p>`);
+    assert.equal(typographierHtml('<p>Le message "<strong>STOP</strong>" apparaît</p>'), `<p>Le message «${INSECABLE}<strong>STOP</strong>${INSECABLE}» apparaît</p>`);
+    assert.equal(typographierHtml('<p>Jantes de 15" ou 16"</p>'), '<p>Jantes de 15″ ou 16″</p>');
+    assert.equal(typographierHtml('<p>Que faire\n: ok. Attention: chaud</p><samp>x : y</samp><!-- a " b -->'), `<p>Que faire${INSECABLE}: ok. Attention${INSECABLE}: chaud</p><samp>x : y</samp><!-- a " b -->`);
   });
   test('typographie d\'un fragment HTML (corps rendu depuis le Markdown) : texte retouché, code et balises intacts', () => {
     const html = '<p class="a">L&#39;huile : voir <code>a : b\'</code> et "là"</p><pre>x ; y</pre><a href="https://x.fr/?a=1">lien</a>';
@@ -129,6 +136,12 @@ describe('fil d\'Ariane', () => {
 });
 
 describe('encadré de décision : gravité lisible sans la seule couleur (WCAG 1.4.1)', () => {
+  test('chaque verdict a sa forme : coche (oui), cercle et point d\'exclamation (précautions), triangle (arrêt dès que possible), octogone (arrêt immédiat)', () => {
+    assert.match(iconeGravite('oui'), /<circle[^>]*\/><path d="M7 12\.5l3\.2 3\.2L17 9"/);
+    assert.match(iconeGravite('oui avec précautions'), /<circle cx="12" cy="12" r="10"[^>]*\/><path d="M12 6\.5v7"/);
+    assert.match(iconeGravite('non, arrêt dès que possible'), /<path d="M12 2\.5L22\.5 21h-21z"/);
+    assert.match(iconeGravite('non, arrêt immédiat'), /<path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/);
+  });
   test('chaque verdict a une icône de forme différente, décorative, et une gravité croissante', () => {
     const icones = VERDICTS.map((v) => iconeGravite(v));
     assert.equal(new Set(icones).size, VERDICTS.length);
@@ -143,6 +156,16 @@ describe('encadré de décision : gravité lisible sans la seule couleur (WCAG 1
     const decoratif = pictogrammeDecoratif(svg);
     assert.doesNotMatch(decoratif, /<title|role=/);
     assert.match(decoratif, /<svg class="pictogramme" aria-hidden="true" focusable="false"/);
+  });
+  test('phrase des sources : écart entre notices (consigne la plus prudente), édition d\'une ou deux notices', () => {
+    assert.equal(phraseSources({ notices: ['Peugeot 208', 'Toyota Yaris'], autres: [], ecart: 'Toyota ne donne pas de délai.' }), "D'après deux notices de constructeurs (Peugeot 208 et Toyota Yaris) : la consigne la plus prudente est retenue.");
+    const registre = new Map([
+      ['s', { titre: 'Seat Ibiza — Notice d\'utilisation (édition 11/20)', categorie: 'notice-constructeur' }],
+      ['p', { titre: 'Peugeot 208 — Guide d\'utilisation (édition 01-20)', categorie: 'notice-constructeur' }],
+      ['t', { titre: 'Toyota Yaris — Manuel du propriétaire (réf. PZ49X-9A592-FR)', categorie: 'notice-constructeur' }],
+    ]);
+    assert.deepEqual(sourcesDeLaLigne(['s'], registre).notices, ['Seat Ibiza, édition 11/20']);
+    assert.deepEqual(sourcesDeLaLigne(['s', 'p', 't'], registre).notices, ['Peugeot 208', 'Seat Ibiza', 'Toyota Yaris']);
   });
   test('phrase des sources : nombre de notices en lettres et leurs noms, puis les autres sources à part', () => {
     assert.equal(phraseSources({ notices: ['Peugeot 208', 'Seat Ibiza', 'Toyota Yaris'], autres: [] }), "D'après trois notices de constructeurs (Peugeot 208, Seat Ibiza et Toyota Yaris).");
@@ -188,7 +211,13 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
 
   test('styles : rien ne masque la mention en tête, l\'encadré, la signature, la ligne de transparence ni le lien de signalement', async () => {
     const css = await readFile(join(racine, 'src/styles/site.css'), 'utf8');
-    const regles = css.replace(/\/\*[\s\S]*?\*\//g, '').match(/[^{}]+\{[^}]*\}/g) ?? [];
+    // Règles de premier niveau et règles contenues dans un @media ou un @supports (un masquage sur téléphone compte).
+    const sansCommentaires = css.replace(/\/\*[\s\S]*?\*\//g, '');
+    const internes = [...sansCommentaires.matchAll(/@(?:media|supports)[^{]*\{((?:[^{}]*\{[^}]*\})*)\s*\}/g)].map((m) => m[1] ?? '');
+    const regles = [sansCommentaires.replace(/@(?:media|supports)[^{]*\{(?:[^{}]*\{[^}]*\})*\s*\}/g, ''), ...internes].flatMap((bloc) => bloc.match(/[^{}]+\{[^}]*\}/g) ?? []);
+    const masquee = `${sansCommentaires}\n@media (max-width: 40rem) { .mention-ia { display: none; } }`;
+    const internesMasquee = [...masquee.matchAll(/@(?:media|supports)[^{]*\{((?:[^{}]*\{[^}]*\})*)\s*\}/g)].flatMap((m) => (m[1] ?? '').match(/[^{}]+\{[^}]*\}/g) ?? []);
+    assert.ok(internesMasquee.some((r) => /mention-ia/.test(r) && /display\s*:\s*none/.test(r)), 'une règle dans un @media est bien lue');
     const visees = regles.filter((r) => /mention-ia|bandeau|encadre|signature|ligne-transparence|signaler-erreur|pied|\bmain\b|\bbody\b|\*/.test(r.split('{')[0] ?? ''));
     assert.ok(visees.length > 5);
     for (const regle of visees) {
@@ -310,8 +339,8 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
   test('[CI] composants : signature aux mauvaises dates, lien « Méthode » faux, ligne avant l\'encadré, source manquante', () => {
     const nommees = lignes.map((l) => sourcesDeLaLigne(l.sources, demo.contexte.sources));
     const attendus: AttendusPage = {
-      sources: [...sourcesDeLaPageCitees(demo.page, lignes, demo.contexte.couts, cout).keys()],
-      lignes: nommees.map((n) => ({ notices: n.notices.length, phrase: phraseSources(n) })),
+      sources: [...sourcesDeLaPageCitees(demo.page, lignes, demo.contexte.couts, cout).keys()].map((id) => ({ id, titre: demo.contexte.sources.get(id)?.titre, consulte: dateAffichee(demo.contexte.sources.get(id)?.date_consultation ?? new Date(0)) })),
+      lignes: nommees.map((n, i) => ({ notices: n.notices.length, phrase: phraseSources({ ...n, ecart: lignes[i]?.ecart_marques }) })),
       lienMethode: '/a-propos/#methode',
     };
     const codes = (html: string): string[] => [...new Set(controlerComposants(demo.page, html, 'f', attendus).map((c) => c.regle))].sort();
@@ -322,6 +351,16 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     assert.ok(ligne !== '');
     assert.deepEqual(codes(demo.html.replace(ligne, '').replace('<h1>', `${ligne}<h1>`)), ['TRANSPARENCE-LIGNE-POSITION']);
     assert.deepEqual(codes(demo.html.replace(/<li data-source-id="notice-toyota-yaris">[\s\S]*?<\/li>/, '')), ['SOURCES-ABSENTE']);
+    // Source listée sans sa date de consultation.
+    assert.deepEqual(codes(demo.html.replace(/(<li data-source-id="notice-toyota-yaris">[\s\S]*?)Consulté le [^<]*/, '$1')), ['SOURCES-ABSENTE']);
+    // Ligne de transparence rejetée tout en bas de la page : elle doit suivre l'encadré et la signature.
+    assert.deepEqual(codes(demo.html.replace(ligne, '').replace('</main>', `${ligne}</main>`)), ['TRANSPARENCE-LIGNE-POSITION']);
+  });
+
+  test('[CI] identifiants en double refusés ; ceux des composants sont préfixés', () => {
+    assert.deepEqual(constatsIdentifiants(demo.html, 'demo'), []);
+    assert.deepEqual(constatsIdentifiants('<html><body><h2 id="a">A</h2><h2 id="a">B</h2></body></html>', 'f').map((c) => c.regle), ['ID-DOUBLON']);
+    assert.match(demo.html, /id="da-decision"/);
   });
 
   test('[CI] maillage : fil d\'Ariane vers la page mère, pages enfants et pages liées construites', () => {
@@ -331,6 +370,8 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     const codes = (html: string, attendu: Parameters<typeof constatsMaillage>[2]): string[] => constatsMaillage(html, 'f', attendu).map((c) => c.regle).sort();
     assert.deepEqual(codes(demo.html, { parent: '/autre-mere/', enfants: ['/enfant/'], liees: [...liees, '/autre/'] }), ['FIL-ARIANE-ABSENT', 'PAGES-ENFANTS-ABSENTES', 'PAGES-LIEES-ABSENTES']);
     assert.deepEqual(codes(demo.html.replace('data-fil-ariane', 'data-autre'), { parent, enfants: [], liees }), ['FIL-ARIANE-ABSENT']);
+    const fil = /<nav class="fil-ariane"[\s\S]*?<\/nav>/.exec(demo.html)?.[0] ?? '';
+    assert.deepEqual(codes(demo.html.replace(fil, '').replace('</main>', `${fil}</main>`), { parent, enfants: [], liees }), ['FIL-ARIANE-ABSENT']);
   });
 
   test('[CI] mention en tête, signalement et typographie : la démonstration passe, une page sans eux échoue', () => {
@@ -341,7 +382,8 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     const codes = (html: string): string[] => [...new Set([...constatsMentionEtSignalement(html, 'f'), ...constatsTypographie(html, 'f')].map((c) => c.regle))].sort();
     assert.deepEqual(codes('<html><body><h1>Titre</h1><p>Texte</p></body></html>'), ['MENTION-IA-ABSENTE', 'SIGNALER-ERREUR-ABSENT']);
     const mention = mentionEnTete();
-    const pied = signalerErreur('/');
+    // Sans adresse de page (comme la 404) : le lien attendu par codes(), qui ne donne pas d'adresse.
+    const pied = signalerErreur();
     assert.deepEqual(codes(`<html><body><h1>Titre</h1>${mention}${pied}</body></html>`), ['MENTION-IA-POSITION']);
     assert.deepEqual(codes(`<html><body><div aria-hidden="true">${mention}</div><h1>Titre</h1>${pied}</body></html>`), ['MENTION-IA-MASQUEE']);
     assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><p>L'huile : niveau</p>${pied}</body></html>`), ['TYPO-APOSTROPHE', 'TYPO-ESPACE']);

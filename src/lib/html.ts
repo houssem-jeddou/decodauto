@@ -19,22 +19,36 @@ const UNITES = ['bar', 'km/h', 'km', '°C', '€', '%', 'litres', 'litre', 'l', 
 const NOMBRE_UNITE = new RegExp(`(\\d) (?=(?:${UNITES.map((u) => u.replace(/[/.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})(?![\\p{L}\\d’']))`, 'gu');
 
 /**
+ * Guillemets droits ou anglais d'un texte : « ouvrant, puis » fermant, en alternance (l'état se poursuit d'un morceau
+ * de texte au suivant, pour des guillemets autour d'un mot en gras ou d'un lien). Un guillemet droit collé à un
+ * chiffre est la marque des pouces (15") : il devient le double prime ″, pas un guillemet.
+ */
+export function guillemetsFrancais(texte: string, etat: { ouvert: boolean } = { ouvert: false }): string {
+  return texte.replace(/(\d)"|["“”]/g, (trouve, chiffre: string | undefined) => {
+    if (chiffre !== undefined) return `${chiffre}″`;
+    const ouvrant = trouve === '“' ? true : trouve === '”' ? false : !etat.ouvert;
+    etat.ouvert = ouvrant;
+    return ouvrant ? '«' : '»';
+  });
+}
+
+/**
  * Typographie française du texte affiché (charte §3.3), quelle que soit la saisie :
- *  - apostrophe typographique (’) à la place de l'apostrophe droite ;
  *  - guillemets français « … » à la place des guillemets droits "…" ou anglais “…” ;
- *  - espace insécable avant « : ; ! ? » (une espace ordinaire saisie devient insécable ; rien n'est ajouté s'il n'y
- *    en avait pas, pour ne pas toucher une adresse ou une heure) ;
+ *  - apostrophe typographique (’) à la place de l'apostrophe droite ;
+ *  - espace insécable avant « : ; ! ? » : l'espace saisie (ou le saut de ligne) devient insécable ; s'il n'y en avait
+ *    pas, une insécable est ajoutée entre une lettre et la ponctuation suivie d'une espace ou de la fin du texte
+ *    (« Attention: » ; une adresse ou une heure ne sont pas touchées) ;
  *  - espace insécable à l'intérieur des guillemets « … » (ajoutée si elle manque) ;
  *  - espace insécable entre un nombre et son unité (2,5 bar, 135 €) et dans les milliers (1 000).
  */
-export function typographier(texte: string): string {
-  return texte
-    .replace(/"([^"]*)"/g, '«$1»')
-    .replace(/“([^”]*)”/g, '«$1»')
+export function typographier(texte: string, etat?: { ouvert: boolean }): string {
+  return guillemetsFrancais(texte, etat)
     .replace(/'/g, '’')
-    .replace(/[ \t]+([:;!?])/g, `${INSECABLE}$1`)
-    .replace(/«[ \t ]*/g, `«${INSECABLE}`)
-    .replace(/[ \t ]*»/g, `${INSECABLE}»`)
+    .replace(/\s+([:;!?])/g, `${INSECABLE}$1`)
+    .replace(/(\p{L})([:;!?])(?=\s|$)/gu, `$1${INSECABLE}$2`)
+    .replace(/«\s*/g, `«${INSECABLE}`)
+    .replace(/\s*»/g, `${INSECABLE}»`)
     .replace(/(\d) (?=\d{3}(?!\d))/g, `$1${INSECABLE}`)
     .replace(NOMBRE_UNITE, `$1${INSECABLE}`);
 }
@@ -45,34 +59,56 @@ export const texteHtml = (texte: string): string => echapper(typographier(texte)
 /** Valeur d'attribut : échappée, sans typographie (identifiants, adresses, niveaux de la grille). */
 export const attributHtml = (valeur: string): string => echapper(valeur);
 
-/** Éléments dont le texte n'est jamais retouché : code, préformaté, scripts, styles, saisie, dessins. */
-const SANS_TYPOGRAPHIE = /^(code|pre|kbd|samp|script|style|textarea|svg|math)$/i;
+/** Éléments dont le texte n'est jamais retouché : code, préformaté, scripts, styles, saisie, dessins. Repris par TYPO-*. */
+export const ELEMENTS_SANS_TYPOGRAPHIE = ['code', 'pre', 'kbd', 'samp', 'script', 'style', 'textarea', 'template', 'svg', 'math'] as const;
+const SANS_TYPOGRAPHIE = new RegExp(`^(?:${ELEMENTS_SANS_TYPOGRAPHIE.join('|')})$`, 'i');
+
+/**
+ * Découpe d'un fragment HTML en jetons : commentaires, éléments à contenu brut (script, style, textarea) en entier,
+ * balises (dont les attributs entre guillemets peuvent contenir « > »), et textes entre deux balises.
+ */
+const JETONS = /(<!--[\s\S]*?-->|<(script|style|textarea)\b(?:[^>"']|"[^"]*"|'[^']*')*>[\s\S]*?<\/\2\s*>|<\/?[a-zA-Z](?:[^>"']|"[^"]*"|'[^']*')*>)/;
 
 /**
  * Typographie d'un fragment HTML déjà produit (le corps d'une page rendu depuis son Markdown) : `typographier` est
- * appliqué à chaque texte entre deux balises, sauf dans le code, les scripts, les styles et les dessins. Les entités
- * d'apostrophe et de guillemet sont lues comme les caractères qu'elles représentent. Les modèles de pages (6.6)
- * l'appliquent au corps ; les composants, eux, typographient leurs textes avant de les échapper.
+ * appliqué à chaque texte entre deux balises, sauf dans le code, les scripts, les styles et les dessins ; les balises et
+ * leurs attributs ne sont jamais retouchés. Les entités d'apostrophe et de guillemet sont lues comme les caractères
+ * qu'elles représentent. Les modèles de pages (6.6) l'appliquent au corps ; les composants, eux, typographient leurs
+ * textes avant de les échapper.
  */
 export function typographierHtml(html: string): string {
-  const morceaux = html.split(/(<[^>]*>)/);
   const ouverts: string[] = [];
-  return morceaux
-    .map((morceau) => {
-      const balise = /^<(\/?)([a-zA-Z][a-zA-Z0-9-]*)/.exec(morceau);
-      if (balise !== null) {
-        const nom = (balise[2] ?? '').toLowerCase();
-        if (SANS_TYPOGRAPHIE.test(nom) && !morceau.endsWith('/>')) {
-          if (balise[1] === '/') {
-            const i = ouverts.lastIndexOf(nom);
-            if (i >= 0) ouverts.splice(i, 1);
-          } else ouverts.push(nom);
-        }
-        return morceau;
+  const guillemets = { ouvert: false };
+  const morceaux: string[] = [];
+  const decoupe = html.split(JETONS);
+  // split avec deux groupes capturants : [texte, jeton, nom d'élément brut, texte, jeton, nom, …]
+  for (let i = 0; i < decoupe.length; i += 3) {
+    const texte = decoupe[i] ?? '';
+    if (texte !== '') {
+      if (ouverts.length > 0) morceaux.push(texte);
+      else {
+        const lu = texte
+          .replace(/&#39;|&#x27;|&apos;|&rsquo;/gi, "'")
+          .replace(/&quot;|&#34;|&#x22;/gi, '"')
+          .replace(/&ldquo;/gi, '“')
+          .replace(/&rdquo;/gi, '”')
+          .replace(/&nbsp;|&#160;|&#xa0;/gi, INSECABLE);
+        morceaux.push(typographier(lu, guillemets).replace(/"/g, '&quot;'));
       }
-      if (morceau.startsWith('<') || ouverts.length > 0 || morceau === '') return morceau;
-      const lu = morceau.replace(/&#39;|&#x27;|&apos;/gi, "'").replace(/&quot;|&#34;|&#x22;/gi, '"').replace(/&nbsp;|&#160;|&#xa0;/gi, INSECABLE);
-      return typographier(lu).replace(/"/g, '&quot;');
-    })
-    .join('');
+    }
+    const jeton = decoupe[i + 1];
+    if (jeton === undefined) continue;
+    const balise = /^<(\/?)([a-zA-Z][a-zA-Z0-9-]*)/.exec(jeton);
+    if (balise !== null && decoupe[i + 2] === undefined) {
+      const nom = (balise[2] ?? '').toLowerCase();
+      if (SANS_TYPOGRAPHIE.test(nom) && !jeton.endsWith('/>')) {
+        if (balise[1] === '/') {
+          const j = ouverts.lastIndexOf(nom);
+          if (j >= 0) ouverts.splice(j, 1);
+        } else ouverts.push(nom);
+      }
+    }
+    morceaux.push(jeton);
+  }
+  return morceaux.join('');
 }

@@ -335,7 +335,7 @@ function encadre(page: Objet, options: OptionsHtml): string {
       const ids = [...new Set(((l['citations'] as Objet[] | undefined) ?? []).map((c) => String(c['source'])))];
       const nommees = sourcesDeLaLigne(ids, REGISTRE_TEST);
       const notices = nommees.notices.length;
-      const phrase = options.sansPhraseSources ? '' : `<p>${phraseSources(nommees)}</p>`;
+      const phrase = options.sansPhraseSources ? '' : `<p>${phraseSources({ ...nommees, ecart: l['ecart_marques'] as string | undefined })}</p>`;
       return `<div data-encadre-ligne data-verdict="${String(l['verdict'])}" data-urgence="${String(l['urgence'])}" data-notices="${options.noticesFausses ? notices + 1 : notices}"><h2>${String(l['situation'])}</h2><p><strong>${verdict}</strong> · ${urgence}</p>${action}${ecart}${phrase}</div>`;
     })
     .join('');
@@ -404,7 +404,13 @@ function composantsCommuns(page: Objet, options: OptionsHtml): { signature: stri
   return {
     signature: options.sansSignature ? '' : `<p data-signature>${texteSignature}</p>`,
     ligne: options.sansLigneTransparence ? '' : `<p data-ligne-transparence>${LIGNE_TRANSPARENCE.texte} <a href="/a-propos/#methode">${LIGNE_TRANSPARENCE.libelleLien}</a></p>`,
-    sources: `<section data-sources><h2>Sources</h2><ol>${ids.map((id) => `<li data-source-id="${id}">Source ${id}</li>`).join('')}</ol></section>`,
+    sources: `<section data-sources><h2>Sources</h2><ol>${ids
+      .map((id) => {
+        const source = (contexte.sources as Objet[]).find((s) => s['id'] === id);
+        const consulte = source !== undefined ? String(source['date_consultation']).split('-').reverse().join('/') : '';
+        return `<li data-source-id="${id}">${source !== undefined ? `${String(source['titre'])}. Consulté le ${consulte}.` : `Source ${id}`}</li>`;
+      })
+      .join('')}</ol></section>`,
   };
 }
 

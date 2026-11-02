@@ -39,6 +39,18 @@ import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { GRILLE_COUTS, LIBELLES_FOURCHETTES } from '../schemas/cout.ts';
 import { rangVerdict, type Urgence, type Verdict } from '../schemas/listes.ts';
 
+/**
+ * Identifiants posés par les composants, préfixés pour ne jamais rencontrer ceux que le rendu du Markdown donne aux
+ * titres du corps (contrôle ID-DOUBLON).
+ */
+export const IDENTIFIANTS = {
+  decision: 'da-decision',
+  causes: 'da-causes',
+  enfants: 'da-dans-cette-rubrique',
+  liees: 'da-a-lire-aussi',
+  sources: 'da-sources',
+} as const;
+
 /** Ce que les composants lisent d'une source du registre (data/sources.json). */
 export interface SourceDuRegistre {
   id: string;
@@ -68,12 +80,17 @@ export const mentionEnTete = (): string => `<p class="mention-ia" data-mention-i
 export function lienSignalement(adressePage?: string): string {
   const url = adressePage !== undefined ? urlAbsolue(adressePage) : undefined;
   const sujet = url !== undefined ? `Erreur sur la page ${url}` : 'Erreur sur decodauto.com';
-  const corps = `Page : ${url ?? ''}\nCe qui est faux :\nCe qui serait juste, et votre source si vous en avez une :\n`;
+  // Fins de ligne CRLF dans un lien mailto (RFC 6068, §5).
+  const corps = `Page : ${url ?? ''}\r\nCe qui est faux :\r\nCe qui serait juste, et votre source si vous en avez une :\r\n`;
   return `mailto:${ADRESSE_SIGNALEMENT}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
 }
 
+/**
+ * Lien « Signaler une erreur », suivi de l'adresse en clair (pour un lecteur sans logiciel de messagerie). Les
+ * commentaires email_off demandent à Cloudflare de ne pas masquer l'adresse (ce masquage ajouterait un script).
+ */
 export const signalerErreur = (adressePage?: string): string =>
-  `<p class="signaler-erreur" data-signaler-erreur><a href="${attributHtml(lienSignalement(adressePage))}">${texteHtml(LIBELLE_SIGNALER_ERREUR)}</a></p>`;
+  `<p class="signaler-erreur" data-signaler-erreur><!--email_off--><a href="${attributHtml(lienSignalement(adressePage))}">${texteHtml(LIBELLE_SIGNALER_ERREUR)}</a> (${texteHtml(ADRESSE_SIGNALEMENT)})<!--/email_off--></p>`;
 
 // ---- Fil d'Ariane ----------------------------------------------------------------------------------
 
@@ -235,8 +252,14 @@ export function sourcesDeLaLigne(ids: readonly string[], registre: ReadonlyMap<s
     const source = registre.get(id);
     return source === undefined ? [] : [source];
   });
+  const notices = sources.filter((s) => s.categorie === 'notice-constructeur');
+  // Une ou deux notices : leur édition est nommée (charte §2.1 et §2.5, « selon la notice <modèle>, <édition> »).
+  const nom = (s: Pick<SourceDuRegistre, 'titre' | 'categorie'>): string => {
+    const edition = notices.length <= 2 ? /\(([^)]*)\)\s*$/.exec(s.titre)?.[1] : undefined;
+    return edition !== undefined ? `${nomCourtSource(s)}, ${edition}` : nomCourtSource(s);
+  };
   return {
-    notices: sources.filter((s) => s.categorie === 'notice-constructeur').map(nomCourtSource).sort((a, b) => a.localeCompare(b, 'fr')),
+    notices: notices.map(nom).sort((a, b) => a.localeCompare(b, 'fr')),
     autres: sources.filter((s) => s.categorie !== 'notice-constructeur' && qualifiees.includes(s.categorie)).map(nomCourtSource),
   };
 }
@@ -245,11 +268,13 @@ export function sourcesDeLaLigne(ids: readonly string[], registre: ReadonlyMap<s
  * Phrase des sources d'une ligne (charte §2.1) : le nombre de notices, en lettres, et leurs noms ; puis, à part, les
  * autres sources de première main (« Autre source : … »).
  */
-export function phraseSources(ligne: Pick<LigneEncadre, 'notices' | 'autres'>): string {
+export function phraseSources(ligne: Pick<LigneEncadre, 'notices' | 'autres'> & { ecart?: string | undefined }): string {
   const phrases: string[] = [];
   const n = ligne.notices.length;
-  // « une notice » (féminin) ; au-delà, le nombre en lettres (enLettres).
-  if (n > 0) phrases.push(`D'après ${n === 1 ? 'une' : enLettres(n)} notice${n > 1 ? 's' : ''} de constructeur${n > 1 ? 's' : ''} (${enumerer(ligne.notices)}).`);
+  // « une notice » (féminin) ; au-delà, le nombre en lettres (enLettres). Quand les notices divergent (écart),
+  // la phrase rappelle que la consigne affichée est la plus prudente, pas celle de chaque notice nommée.
+  const prudente = ligne.ecart !== undefined && n > 1 ? ' : la consigne la plus prudente est retenue' : '';
+  if (n > 0) phrases.push(`D'après ${n === 1 ? 'une' : enLettres(n)} notice${n > 1 ? 's' : ''} de constructeur${n > 1 ? 's' : ''} (${enumerer(ligne.notices)})${prudente}.`);
   const a = ligne.autres.length;
   if (a > 0) phrases.push(`${n > 0 ? (a > 1 ? 'Autres sources' : 'Autre source') : a > 1 ? 'Sources' : 'Source'} : ${enumerer(ligne.autres)}.`);
   return phrases.join(' ');
@@ -289,8 +314,8 @@ function coutEncadreHtml(cout: CoutEncadre): string {
 /** Encadré de décision : la question, une ligne par situation dans l'ordre, puis le coût probable. */
 export function encadreDecision(modele: ModeleEncadre): string {
   return [
-    '<section class="encadre" data-encadre-decision aria-labelledby="decision">',
-    `<h2 class="encadre-question" id="decision">${texteHtml(modele.question)}</h2>`,
+    `<section class="encadre" data-encadre-decision aria-labelledby="${IDENTIFIANTS.decision}">`,
+    `<h2 class="encadre-question" id="${IDENTIFIANTS.decision}">${texteHtml(modele.question)}</h2>`,
     // role="list" : une liste sans puces garde sa nature de liste pour VoiceOver (Safari).
     `<ul class="encadre-lignes" role="list">${modele.lignes.map(ligneEncadreHtml).join('')}</ul>`,
     modele.cout !== undefined ? coutEncadreHtml(modele.cout) : '',
@@ -330,7 +355,7 @@ export function causesAvecCout(causes: readonly { cause: string; explication: st
           }</p>`;
     return `<li class="cause"><h3>${texteHtml(c.cause)}</h3><p>${texteHtml(c.explication)}</p>${coutTexte}</li>`;
   });
-  return `<section class="causes" data-causes aria-labelledby="causes"><h2 id="causes">Causes possibles</h2><ol>${elements.join('')}</ol></section>`;
+  return `<section class="causes" data-causes aria-labelledby="${IDENTIFIANTS.causes}"><h2 id="${IDENTIFIANTS.causes}">Causes possibles</h2><ol>${elements.join('')}</ol></section>`;
 }
 
 // ---- Pages liées (plan du site) ---------------------------------------------------------------------
@@ -355,8 +380,8 @@ export function pagesLiees(entree: {
   const enfants = entree.enfants.map(lien).filter((l) => l !== '');
   const autres = [...entree.voisins].filter((id) => id !== parent && !entree.enfants.includes(id)).map(lien).filter((l) => l !== '');
   const blocs: string[] = [];
-  if (enfants.length > 0) blocs.push(`<section class="pages-enfants" data-pages-enfants aria-labelledby="dans-cette-rubrique"><h2 id="dans-cette-rubrique">Dans cette rubrique</h2><ul>${enfants.join('')}</ul></section>`);
-  if (autres.length > 0) blocs.push(`<nav class="pages-liees" data-pages-liees aria-labelledby="a-lire-aussi"><h2 id="a-lire-aussi">À lire aussi</h2><ul>${autres.join('')}</ul></nav>`);
+  if (enfants.length > 0) blocs.push(`<section class="pages-enfants" data-pages-enfants aria-labelledby="${IDENTIFIANTS.enfants}"><h2 id="${IDENTIFIANTS.enfants}">Dans cette rubrique</h2><ul>${enfants.join('')}</ul></section>`);
+  if (autres.length > 0) blocs.push(`<nav class="pages-liees" data-pages-liees aria-labelledby="${IDENTIFIANTS.liees}"><h2 id="${IDENTIFIANTS.liees}">${texteHtml('À lire aussi')}</h2><ul>${autres.join('')}</ul></nav>`);
   return blocs.join('');
 }
 
@@ -372,7 +397,7 @@ export function sectionSources(citees: ReadonlyMap<string, readonly string[]>, r
       `<li data-source-id="${attributHtml(id)}"><a href="${attributHtml(source.url)}" rel="noopener">${texteHtml(source.titre)}</a>, ${texteHtml(source.editeur)}.${ou} ${texteHtml(`Consulté le ${dateAffichee(source.date_consultation)}.`)}</li>`,
     ];
   });
-  return `<section class="sources" data-sources aria-labelledby="sources"><h2 id="sources">Sources</h2><ol>${elements.join('')}</ol></section>`;
+  return `<section class="sources" data-sources aria-labelledby="${IDENTIFIANTS.sources}"><h2 id="${IDENTIFIANTS.sources}">Sources</h2><ol>${elements.join('')}</ol></section>`;
 }
 
 // ---- Section « Méthode » de la page « à propos » ------------------------------------------------------

@@ -6,6 +6,7 @@ import { phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
+  dateAffichee,
   estReference,
   joursEntre,
   plageValidee,
@@ -800,10 +801,13 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   if (html !== undefined) {
     const methode = ctx.plan.get(PAGE_METHODE);
     const attendus: AttendusPage = {
-      sources: [...sourcesDeLaPageCitees(page, lignes, ctx.couts, cout.resolu).keys()],
+      sources: [...sourcesDeLaPageCitees(page, lignes, ctx.couts, cout.resolu).keys()].map((id) => {
+        const source = ctx.sources.get(id);
+        return { id, titre: source?.titre, consulte: source !== undefined ? dateAffichee(source.date_consultation) : undefined };
+      }),
       lignes: lignes.map((l) => {
         const nommees = sourcesDeLaLigne(l.sources, ctx.sources);
-        return { notices: nommees.notices.length, phrase: phraseSources(nommees) };
+        return { notices: nommees.notices.length, phrase: phraseSources({ ...nommees, ecart: l.ecart_marques }) };
       }),
       lienMethode: methode !== undefined ? `${methode.adresse}#${ANCRE_METHODE}` : undefined,
     };
@@ -823,8 +827,11 @@ export interface SourcesDeLigne {
 
 /** Ce que la page construite doit afficher en plus de l'encadré (composants communs, livrable 6.3). */
 export interface AttendusPage {
-  /** Identifiants des sources citées par la page (calcul.ts, sourcesDeLaPageCitees) : chacune dans la section « Sources ». */
-  sources: readonly string[];
+  /**
+   * Sources citées par la page (calcul.ts, sourcesDeLaPageCitees) : chacune dans la section « Sources », avec son titre
+   * et sa date de consultation (registre ; absents pour une source inconnue, déjà en erreur R3-SOURCE-INCONNUE).
+   */
+  sources: readonly { id: string; titre?: string | undefined; consulte?: string | undefined }[];
   /**
    * Pour chaque ligne de situation, dans l'ordre : nombre de notices de constructeurs citées (data-notices) et phrase
    * des sources affichée (composants.ts, phraseSources).
@@ -853,14 +860,16 @@ export function controlerComposants(page: PageEditoriale, html: string, fichier:
   const brut = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|template)\b[\s\S]*?<\/\1\s*>/gi, '');
   const encadre = positionAttribut(brut, 'data-encadre-decision');
 
+  // Éléments qui suivent l'encadré (1 : le suivant, 2 : celui d'après) : signature, puis ligne de transparence.
+  const apresEncadre = (rang: 1 | 2) => (rang === 1 ? $('[data-encadre-decision]').first().next() : $('[data-encadre-decision]').first().next().next());
   const signatures = $('[data-signature]');
   const attendue = signature(page.date_modification, page.date_revue);
   if (signatures.length !== 1) {
     constats.push(erreur('SIGNATURE-ABSENTE', `la page construite affiche une signature (data-signature) : « ${attendue} » ; trouvé : ${signatures.length}`, fichier));
   } else if (normaliserTexte(signatures.first().text()) !== normaliserTexte(attendue)) {
     constats.push(erreur('SIGNATURE-TEXTE', `la signature doit être « ${attendue} » (dates de la page) ; affichée : « ${signatures.first().text().trim()} »`, fichier));
-  } else if (encadre >= 0 && positionAttribut(brut, 'data-signature') < encadre) {
-    constats.push(erreur('SIGNATURE-POSITION', 'la signature vient après l\'encadré de décision (docs/08 §3, règle 9)', fichier));
+  } else if (encadre >= 0 && !apresEncadre(1).is('[data-signature]')) {
+    constats.push(erreur('SIGNATURE-POSITION', 'la signature suit immédiatement l\'encadré de décision (charte §4, docs/08 §3 règle 9)', fichier));
   }
 
   const lignesTransparence = $('[data-ligne-transparence]');
@@ -872,8 +881,8 @@ export function controlerComposants(page: PageEditoriale, html: string, fichier:
     const versMethode = lien.some((a) => (attendus.lienMethode !== undefined ? a.attr('href') === attendus.lienMethode : /#methode$/.test(a.attr('href') ?? '')) && normaliserTexte(a.text()) === normaliserTexte(LIGNE_TRANSPARENCE.libelleLien));
     if (!normaliserTexte(ligne.text()).includes(normaliserTexte(LIGNE_TRANSPARENCE.texte)) || !versMethode) {
       constats.push(erreur('TRANSPARENCE-LIGNE-TEXTE', `la ligne de transparence affiche le texte de la charte et le lien « ${LIGNE_TRANSPARENCE.libelleLien} » vers ${attendus.lienMethode ?? 'la section méthode (#methode)'}`, fichier));
-    } else if (encadre >= 0 && positionAttribut(brut, 'data-ligne-transparence') < encadre) {
-      constats.push(erreur('TRANSPARENCE-LIGNE-POSITION', 'la ligne de transparence vient après l\'encadré de décision (docs/08 §3, règle 9)', fichier));
+    } else if (encadre >= 0 && !apresEncadre(1).is('[data-ligne-transparence]') && !(apresEncadre(1).is('[data-signature]') && apresEncadre(2).is('[data-ligne-transparence]'))) {
+      constats.push(erreur('TRANSPARENCE-LIGNE-POSITION', 'la ligne de transparence suit l\'encadré et la signature, avant le corps de la page (charte §4 et §5.1)', fichier));
     }
   }
 
@@ -881,10 +890,18 @@ export function controlerComposants(page: PageEditoriale, html: string, fichier:
   if (section.length !== 1) {
     constats.push(erreur('SOURCES-ABSENTE', `la page construite a une section « Sources » (data-sources) ; trouvé : ${section.length}`, fichier));
   } else {
-    const affichees = new Set(section.find('[data-source-id]').toArray().map((el) => $(el).attr('data-source-id') ?? ''));
-    const manquantes = attendus.sources.filter((id) => !affichees.has(id));
+    const affichees = new Map<string, string>(section.find('[data-source-id]').toArray().map((el): [string, string] => [$(el).attr('data-source-id') ?? '', normaliserTexte($(el).text())]));
+    const manquantes = attendus.sources.filter((s) => !affichees.has(s.id)).map((s) => s.id);
     if (manquantes.length > 0) {
       constats.push(erreur('SOURCES-ABSENTE', `la section « Sources » ne liste pas : ${manquantes.join(', ')} (toute source citée sur la page y figure)`, fichier));
+    }
+    // Chaque source listée donne son titre et sa date de consultation (charte §4, point 8).
+    const incompletes = attendus.sources.filter((s) => {
+      const texte = affichees.get(s.id);
+      return texte !== undefined && ((s.titre !== undefined && !texte.includes(normaliserTexte(s.titre))) || (s.consulte !== undefined && !texte.includes(normaliserTexte(`consulté le ${s.consulte}`))));
+    });
+    if (incompletes.length > 0) {
+      constats.push(erreur('SOURCES-ABSENTE', `la section « Sources » donne le titre et la date de consultation de chaque source ; incomplètes : ${incompletes.map((s) => s.id).join(', ')}`, fichier));
     }
   }
   return constats;
