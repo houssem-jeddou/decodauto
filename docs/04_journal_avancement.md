@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 02/11/2026 (20 h 30, heure de Tunis)
+Dernière mise à jour : 02/11/2026 (22 h 40, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,7 +12,7 @@ Dernière mise à jour : 02/11/2026 (20 h 30, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12, fusion demandée ; suivant : 6.3 composants communs | `travaux/etape-6/` |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 ; fusion après la création de `erreur@decodauto.com` et sur sa demande ; suivant : 6.4 tableau des notices | `travaux/etape-6/` |
 | 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -83,7 +83,11 @@ Dernière mise à jour : 02/11/2026 (20 h 30, heure de Tunis)
   - Deux revues indépendantes (le maximum), corrections intégrées.
   - Décisions validées (section 10 de la charte) : mention en tête sur toutes les pages et ligne complète après l'encadré ; « Texte rédigé par une IA » ; signature « Responsable éditorial » ; socle avec la mention seule ; recette par Claude relue par l'agent indépendant ; règle des marques et modèles ; annonces automatiques sans pleine page ni ancrage en haut, engagement sur les liens rémunérés ; délais de revue ; textes exacts.
   - Empreinte des textes validés versée dans `data/charte-validation.json` (09e73435…) ; règle 11 de 03 (v7) et `CLAUDE.md` alignés ; charte ajoutée aux documents du projet (`claude/10_charte_editoriale.md`).
-- [ ] **6.3 Composants communs** : encadré de décision (R9), gravité lisible sans la seule couleur, lien « Signaler une erreur », ligne de transparence, fil d'Ariane, liens et enfants tirés du plan. Les emplacements publicitaires restent à l'étape 7.
+- [x] **6.3 Composants communs** : encadré de décision (R9), gravité lisible sans la seule couleur, lien « Signaler une erreur », ligne de transparence, fil d'Ariane, liens et enfants tirés du plan. Les emplacements publicitaires restent à l'étape 7. Validé par Houssem le 02/11 (22 h 28), avec les recommandations : demande de changement n° 7 (ordre de l'encadré, 08 v6), précisions de la charte (§3.6 et §5.3). Verrouillé ; fusion de la PR #13 en attente.
+  - Branche `etape-6/composants-communs`, PR #13 en brouillon (54c4d15) ; CI verte (run 41520004592 : contrôles, construction, liens, modes, Lighthouse ; 0 erreur bloquante).
+  - Composants `src/lib/composants.ts`, assemblés par `src/lib/gabarit.ts` ; typographie `src/lib/html.ts` ; styles `src/styles/site.css` ; gabarit commun avec la mention en tête et le lien de signalement ; page de démonstration avec les vraies données (`tests/demo/voyant-huile.md`, `npm run demo`).
+  - Contrôles ajoutés : MENTION-IA-*, SIGNALER-ERREUR-ABSENT, TYPO-*, SIGNATURE-*, TRANSPARENCE-LIGNE-*, SOURCES-ABSENTE, R9-ENCADRE-SOURCES, FIL-ARIANE-ABSENT, PAGES-ENFANTS-ABSENTES, PAGES-LIEES-ABSENTES, ID-DOUBLON, PROD-SIGNALEMENT ; 6 pages de test.
+  - Deux revues indépendantes (le maximum), corrections intégrées.
 - [ ] **6.4 Tableau « ce que dit la notice de votre marque »**, généré depuis les citations de la base (pages voyants).
 - [ ] **6.5 Contrôles peu coûteux** : title, H1 ou description en double ; dates incohérentes.
 - [ ] **6.6 Modèles et exemples rédigés** des types de la vague A : voyant, code et pneus (demande de changement n° 5, 03 v6). Les modèles panne, dossier et fluide ouvrent les étapes 10 et 11.
@@ -110,6 +114,7 @@ Dernière mise à jour : 02/11/2026 (20 h 30, heure de Tunis)
 - **Statut juridique** : à trancher avant de rédiger les mentions légales (étape 7) ; le reste de l'étape 7 avance sans l'attendre (décision du 23/10, 19 h).
 - **GitHub Pro** : souscrire avant la porte de l'étape 9, puis protéger `main` (pull request obligatoire, contrôles exigés, aucun contournement).
 - **Auteur** : nom réel acté le 23/10 ; parcours à fournir pour la page « à propos » (étape 7 ou 8).
+- **Adresse de signalement** : créer `erreur@decodauto.com` (redirection vers la boîte de Houssem, chez OVH) avant la fusion de la PR #13. Après la fusion, le contrôle PROD-SIGNALEMENT vérifie en ligne que Cloudflare ne masque pas l'adresse ; un premier courriel de test confirmera la réception.
 
 ## Historique des décisions
 - 22/10/2026 : niche voiture retenue ; base de mots-clés v1.1 figée ; périmètre lot unique figé (42 pages, outil voyants et socle compris, 4 thèmes) ; électrique hors périmètre ; pas d'achat de lecteurs OBD ; plan d'avancement validé avec publication en 3 vagues.
@@ -192,9 +197,26 @@ Dernière mise à jour : 02/11/2026 (20 h 30, heure de Tunis)
 
   PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 - 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 02/11/2026 (22 h 28), Houssem : **valide le livrable 6.3 avec les recommandations** :
+  - **demande de changement n° 7 acceptée** : l'encadré affiche la question, puis les lignes de situation, puis le coût probable (08 passe en v6, `travaux/etape-6/demande-changement-7.md`) ;
+  - **charte précisée** : §5.3, adresse de signalement `erreur@decodauto.com` ; §3.6, pictogramme décoratif quand la situation écrite à côté nomme déjà le voyant ;
+  - la fusion de la PR #13 attend la création de l'adresse `erreur@decodauto.com` (redirection OVH, par Houssem) et sa demande : elle publie le lien sur l'accueil et la 404 en ligne. Suivant : 6.4, tableau « ce que dit la notice de votre marque ».
+- 02/11/2026 (20 h 34), Houssem : **lance le livrable 6.3** (composants communs) et **choisit l'adresse du domaine pour « Signaler une erreur »** (`erreur@decodauto.com`, redirigée vers sa boîte ; lien mailto sur chaque page).
 - 02/11/2026 (20 h 19), Houssem : **valide la charte éditoriale avec toutes les recommandations** de sa section 10, **donne son accord sur les textes exacts** (mention en tête, signature, ligne de transparence, section « Méthode ») et **demande la fusion de la PR #12** si tout va bien. 03 passe en v7 (règle 11 alignée). Le livrable 6.2 est verrouillé ; suivant : 6.3, composants communs.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 02/11, livrable 6.3 (composants communs), deux revues (deux relecteurs), le maximum.
+  - **Première revue** (« à corriger », un point bloquant) :
+    - le pictogramme prenait la couleur du verdict (frein de stationnement rouge affiché en vert) : il prend la couleur du voyant fixée par la base, sur fond sombre (point bloquant) ;
+    - la phrase des sources est contrôlée, pas seulement le nombre de notices ; une source secondaire n'est jamais présentée comme fondant un verdict ;
+    - tests des codes qui n'en avaient pas ; test des styles ; typographie du corps des pages (Astro 7 rend le Markdown avec Sätteri : fonction `typographierHtml` au lieu d'un greffon) ;
+    - contrôles du maillage construit (fil d'Ariane, pages enfants, pages liées) ; lien de signalement de la 404 sans adresse de page.
+  - **Seconde revue** (« à corriger », un point bloquant : CI rouge sur un test, corrigé) :
+    - typographie du HTML qui respecte les attributs, les scripts et les commentaires ; guillemets autour d'un gras, pouces, « Attention: » ;
+    - positions exactes de la signature et de la ligne de transparence, fil d'Ariane avant le H1, sources avec titre et date ;
+    - « la consigne la plus prudente est retenue » quand les notices divergent ; édition nommée pour une ou deux notices ;
+    - lien mailto en CRLF, adresse affichée et protégée du masquage de Cloudflare (contrôle en production) ; identifiants préfixés et contrôle des doublons.
+  - **Laissé à la recette ou à décider** : visibilité réelle à l'écran (rendu) ; ordre « lignes puis coût » dans l'encadré (08 dit « question et coût, puis lignes ») ; pictogramme décoratif (charte §3.6) ; réception effective des courriels à `erreur@decodauto.com`.
 - 02/11, livrable 6.2 (charte éditoriale), deux revues (deux relecteurs), le maximum.
   - **Première revue** (« à corriger », un point bloquant) :
     - la méthode affirmait que tout verdict reposait sur 3 marques de 2 groupes : faux pour les lignes saisies ; le cas d'une alerte décrite dans une ou deux notices est dit (point bloquant) ;
@@ -425,6 +447,7 @@ Dernière mise à jour : 02/11/2026 (20 h 30, heure de Tunis)
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
+- 02/11/2026 (22 h 28), acceptée : **n° 7, ordre de l'encadré de décision** (`travaux/etape-6/demande-changement-7.md`). 08 §3 règle 9 : « la question et le coût, puis une ligne par situation » devient « la question, une ligne par situation, puis le coût ». Raison : le verdict passe avant le coût pour le lecteur ; la charte et le composant suivaient déjà cet ordre. Impact : aucun contenu ni contrôle touché (08 v6, PR #13).
 - 28/10/2026 (13 h 31), acceptée : **n° 6, coût probable** (`travaux/etape-6/demande-changement-6.md`). Une échelle fermée de 5 tranches qui disent la nature de la dépense (aucun frais, geste, entretien ou équipement, réparation au garage, grosse réparation), sans montant en euros pour les réparations ; la tranche d'une cause calculée depuis une liste de pièces ; « si vous continuez de rouler » ; les montants fixés par un texte (dépannage sur autoroute, aucune amende loi montagne) dans `data/couts.json`. Décisions : ordre de grandeur en euros par pièce (deux sources d'éditeurs différents), règle 5 réécrite (montants fixés par un texte ou ordres de grandeur sourcés), coût porté par la cause, liste des pièces, libellés gardés. Impact : structure v5 (08), 01, 02, `CLAUDE.md` ; aucun sur la base voyants. PR #11.
 - 28/10/2026 (10 h 25), acceptée : **n° 5, modèles panne, fluide et dossier aux étapes 10 et 11** (03 v6, `travaux/etape-6/demande-changement-5.md`). Raison : aucune page de ces types en vague A ; le registre ne couvre que la vague A ; trois encadrés à valider au lieu de six avant la vague A, qui porte 60 % des volumes. Impact : 03, lignes 6, 10 et 11 ; une séance de validation de plus aux étapes 10 et 11 ; aucun critère retiré, un ajouté (tranches de coût couvrant les 42 pages).
 - 28/10/2026, acceptée : **n° 4, grille**, définition de l'urgence « À faire tout de suite » (D12). Avant : « Sans attendre : au premier arrêt possible, ou en allant directement au garage si la conduite est permise. » Après : « Sans attendre, dès que c'est sans danger et dans l'ordre indiqué par l'action : les gestes de conduite en roulant (lever le pied, ralentir, rouler pour nettoyer le filtre à particules) ; l'arrêt, la vérification ou l'appoint au premier endroit sûr ; le passage au garage en y allant directement, si l'action permet de rouler. » Raison : 21 lignes sur 25 en urgence immédiate, dont 2 actions à faire en roulant (FAP, ESP clignotant) que l'ancienne définition contredisait. Impact : aucun sur la base (25 empreintes identiques), ni sur les contrôles. PR #8.
