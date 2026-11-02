@@ -2,7 +2,8 @@ import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
 import { ANCRE_METHODE, LIGNE_TRANSPARENCE, PAGE_METHODE, signature } from './charte.ts';
-import { phraseSources, sourcesDeLaLigne } from './composants.ts';
+import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from './composants.ts';
+import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -810,6 +811,11 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         return { notices: nommees.notices.length, phrase: phraseSources({ ...nommees, ecart: l.ecart_marques }) };
       }),
       lienMethode: methode !== undefined ? `${methode.adresse}#${ANCRE_METHODE}` : undefined,
+      notices: {
+        tableaux: modeleTableauNotices(lignes, ctx.voyants, ctx.sources, page.id),
+        // Demande de changement n° 8 : sur une page voyant (hors outil), l'élément unique est le tableau des notices.
+        elementUnique: typeEditorial === 'voyant' && !('outil' in page && page.outil === true),
+      },
     };
     constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus));
   }
@@ -839,6 +845,11 @@ export interface AttendusPage {
   lignes: readonly SourcesDeLigne[];
   /** Adresse attendue du lien « Méthode » (page « à propos » du plan, ancre de la méthode), si elle est dans le plan. */
   lienMethode?: string | undefined;
+  /**
+   * Tableau « Ce que dit la notice de votre marque » attendu (livrable 6.4, tableau-notices.ts) : une partie par voyant
+   * de la base rattaché à la page ; `elementUnique` : la page est une page voyant hors outil (demande de changement n° 8).
+   */
+  notices?: { tableaux: readonly TableauVoyant[]; elementUnique: boolean } | undefined;
 }
 
 /** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
@@ -957,6 +968,111 @@ export function controlerHtml(
 
   constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout, attendus?.lignes));
   if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
+  if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, attendus.notices));
+  return constats;
+}
+
+/**
+ * Tableau « Ce que dit la notice de votre marque » (livrable 6.4, demande de changement n° 8) :
+ *  - toute page à laquelle un voyant de la base est rattaché affiche un seul tableau des notices (data-tableau-notices) ;
+ *    sur une page voyant hors outil, c'est son élément unique (data-element-unique="tableau") et la page en a au moins
+ *    un voyant (TABLEAU-NOTICES-ABSENT) ;
+ *  - une partie par voyant rattaché (data-voyant, dans l'ordre de l'encadré), titrée du nom du voyant ; une rangée par
+ *    notice citée avec un niveau (data-source-id), ni plus ni moins, qui affiche le nom de la notice, chaque extrait et
+ *    sa page, le libellé du niveau (data-verdict, data-urgence) et « Consigne retenue » (data-retenue) quand ce niveau
+ *    est celui de la ligne ; sinon, la note qui dit d'où vient le verdict (TABLEAU-NOTICES-INCOMPLET) ;
+ *  - la ligne de l'encadré de chaque voyant renvoie à sa partie (lien « Ce que dit chaque notice ») ; l'ancre existe
+ *    (TABLEAU-NOTICES-LIEN).
+ * Le texte se compare normalisé (normaliserTexte) : la typographie affichée (guillemets, apostrophes, espaces) ne
+ * compte pas, les mots et les chiffres comptent.
+ */
+export function controlerTableauNotices(
+  html: string,
+  fichier: string,
+  lignes: readonly LigneResolue[],
+  attendu: { tableaux: readonly TableauVoyant[]; elementUnique: boolean },
+): Constat[] {
+  const constats: Constat[] = [];
+  const $ = cheerio.load(html);
+  const affiches = $('[data-tableau-notices]');
+  const voyantsAttendus = attendu.tableaux.map((t) => t.voyant);
+  if (voyantsAttendus.length === 0) {
+    if (attendu.elementUnique) {
+      constats.push(erreur('TABLEAU-NOTICES-ABSENT', "une page voyant affiche le tableau « Ce que dit la notice de votre marque » des voyants qui lui sont rattachés : aucune ligne reprise de la base n'a cette page pour page de rattachement (champ « page » de data/voyants.json)", fichier));
+    }
+    if (affiches.length > 0) {
+      constats.push(erreur('TABLEAU-NOTICES-INCOMPLET', "la page affiche un tableau des notices alors qu'aucun voyant de la base ne lui est rattaché : ce tableau est celui de la page de rattachement du voyant", fichier));
+    }
+    return constats;
+  }
+  if (affiches.length !== 1) {
+    constats.push(erreur('TABLEAU-NOTICES-ABSENT', `la page affiche un tableau « Ce que dit la notice de votre marque » (data-tableau-notices) pour : ${voyantsAttendus.join(', ')} ; trouvé : ${affiches.length}`, fichier));
+    return constats;
+  }
+  const tableau = affiches.first();
+  if (attendu.elementUnique && !tableau.is('[data-element-unique="tableau"]')) {
+    constats.push(erreur('TABLEAU-NOTICES-ABSENT', 'sur une page voyant, l\'élément unique est le tableau des notices : il porte data-element-unique="tableau" (demande de changement n° 8)', fichier));
+  }
+
+  const parties = tableau.find('[data-voyant]').toArray().map((el) => $(el).attr('data-voyant') ?? '');
+  if (parties.join('|') !== voyantsAttendus.join('|')) {
+    constats.push(erreur('TABLEAU-NOTICES-INCOMPLET', `le tableau des notices a une partie par voyant rattaché à la page, dans l'ordre de l'encadré : ${voyantsAttendus.join(', ')} ; affichées : ${parties.join(', ') || 'aucune'}`, fichier));
+  }
+  const n = normaliserTexte;
+  for (const t of attendu.tableaux) {
+    const partie = tableau.find('[data-voyant]').filter((_, el) => $(el).attr('data-voyant') === t.voyant).first();
+    if (partie.length === 0) continue;
+    const ancre = ancreNotices(t.voyant);
+    const titre = partie.find('h3').first();
+    const problemes: string[] = [];
+    if (titre.length === 0 || !n(titre.text()).includes(n(t.titre))) problemes.push(`titre « ${t.titre} » absent`);
+    if (titre.attr('id') !== ancre) {
+      constats.push(erreur('TABLEAU-NOTICES-LIEN', `voyant « ${t.voyant} » : le titre de sa partie dans le tableau des notices porte l'ancre « ${ancre} » (lien de l'encadré)`, fichier));
+    }
+    const rangees = partie.find('tr[data-source-id]');
+    const ids = rangees.toArray().map((el) => $(el).attr('data-source-id') ?? '');
+    const attendues = new Set(t.rangees.map((r) => r.source));
+    const manquantes = [...attendues].filter((id) => !ids.includes(id));
+    const enTrop = ids.filter((id, i) => !attendues.has(id) || ids.indexOf(id) !== i);
+    if (manquantes.length > 0) problemes.push(`notice(s) manquante(s) : ${manquantes.join(', ')}`);
+    if (enTrop.length > 0) problemes.push(`rangée(s) en trop ou en double : ${enTrop.join(', ')}`);
+    for (const r of t.rangees) {
+      const rangee = rangees.filter((_, el) => $(el).attr('data-source-id') === r.source).first();
+      if (rangee.length === 0) continue;
+      const texte = n(rangee.text());
+      const ecarts: string[] = [];
+      if (!texte.includes(n(r.nom))) ecarts.push('nom de la notice');
+      if (r.citations.some((c) => !texte.includes(n(c.extrait)) || !texte.includes(n(c.emplacement)))) ecarts.push('extrait ou page');
+      if (rangee.attr('data-verdict') !== r.verdict || rangee.attr('data-urgence') !== r.urgence) ecarts.push(`niveau (attendu : ${r.verdict} · ${r.urgence})`);
+      if (!texte.includes(n(GRILLE_VERDICTS[r.verdict].libelle)) || !texte.includes(n(GRILLE_URGENCES[r.urgence].libelle))) ecarts.push('libellés du niveau');
+      const retenueAffichee = rangee.is('[data-retenue]') && texte.includes(n(LIBELLE_CONSIGNE_RETENUE));
+      const retenueMarquee = rangee.is('[data-retenue]') || texte.includes(n(LIBELLE_CONSIGNE_RETENUE));
+      if (r.retenue ? !retenueAffichee : retenueMarquee) ecarts.push(r.retenue ? `« ${LIBELLE_CONSIGNE_RETENUE} » absente` : `« ${LIBELLE_CONSIGNE_RETENUE} » marquée à tort`);
+      if (ecarts.length > 0) problemes.push(`${r.source} : ${ecarts.join(', ')}`);
+    }
+    if (!t.rangees.some((r) => r.retenue) && !n(partie.text()).includes(n(NOTE_SANS_CONSIGNE_RETENUE))) {
+      problemes.push(`aucune notice ne donne le niveau retenu : la note « ${NOTE_SANS_CONSIGNE_RETENUE} » manque`);
+    }
+    if (problemes.length > 0) {
+      constats.push(erreur('TABLEAU-NOTICES-INCOMPLET', `tableau des notices, voyant « ${t.voyant} » : ${problemes.join(' ; ')}`, fichier));
+    }
+  }
+
+  // Lien de l'encadré vers la partie du voyant : la ligne de situation reprise de la base renvoie au détail par notice.
+  // Sans encadré, ou avec un autre nombre de lignes, R9-ENCADRE-ABSENT ou R9-ENCADRE-CONTENU le signale déjà.
+  const lignesEncadre = $('[data-encadre-decision]').first().find('[data-encadre-ligne]');
+  if (lignesEncadre.length !== lignes.length) return constats;
+  lignes.forEach((ligne, i) => {
+    if (ligne.voyant === undefined || !voyantsAttendus.includes(ligne.voyant)) return;
+    const ancre = ancreNotices(ligne.voyant);
+    const lien = lignesEncadre
+      .eq(i)
+      .find('a')
+      .filter((_, a) => $(a).attr('href') === `#${ancre}` && n($(a).text()) === n(LIBELLE_LIEN_NOTICES));
+    if (lien.length === 0) {
+      constats.push(erreur('TABLEAU-NOTICES-LIEN', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : lien « ${LIBELLE_LIEN_NOTICES} » vers #${ancre} absent`, fichier));
+    }
+  });
   return constats;
 }
 

@@ -8,7 +8,8 @@ import { stringify } from 'yaml';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant } from '../src/lib/empreinte.ts';
 import { datesAffichees, fourchetteAffichee, libellePlage, libelleRisque, plageValidee, resoudreCout, type DonneesCouts } from '../src/lib/cout.ts';
 import { LIGNE_TRANSPARENCE, signature } from '../src/lib/charte.ts';
-import { phraseSources, sourcesDeLaLigne } from '../src/lib/composants.ts';
+import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from '../src/lib/composants.ts';
+import { modeleTableauNotices, tableauNotices } from '../src/lib/tableau-notices.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
@@ -225,7 +226,7 @@ const voyantPage = (): Objet =>
     ...communs('fixture-voyant', 'Voyant huile allumé : que faire ? (page de test)', 'Voyant huile allumé : que faire ?', 'Voyant huile', 'Puis-je rouler avec le voyant huile allumé ?'),
     situations: [{ voyant: 'fixture-voyant-huile' }],
     voyants: ['fixture-voyant-huile'],
-    element_unique: 'photo',
+    element_unique: 'tableau',
     causes: [{ cause: "Niveau d'huile trop bas", explication: "Le circuit n'est plus assez alimenté.", pieces: ['fixture-appoint-huile'] }],
     cout_probable: cout({ si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 1, rubrique de test' }] } }),
   });
@@ -311,6 +312,10 @@ interface OptionsHtml {
   sourceManquante?: boolean;
   noticesFausses?: boolean;
   sansPhraseSources?: boolean;
+  /** Tableau des notices (livrable 6.4). */
+  sansTableauNotices?: boolean;
+  noticeManquante?: boolean;
+  sansLienNotices?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -325,6 +330,23 @@ function lignesAffichees(page: Objet): Objet[] {
 /** Registre de test réduit à ce que l'encadré nomme (titre, catégorie). */
 const REGISTRE_TEST = new Map((contexte.sources as Objet[]).map((s) => [String(s['id']), { titre: String(s['titre']), categorie: String(s['categorie']) }]));
 
+/** Ligne reprise de la base dont le voyant est rattaché à la page : elle a sa partie dans le tableau des notices. */
+const auTableau = (ligne: Objet, page: Objet): boolean => ligne['page'] !== undefined && ligne['page'] === page['id'];
+
+/** Tableau des notices (livrable 6.4), produit par le vrai composant depuis la base et le registre de test. */
+function tableauDesNotices(page: Objet, type: string, options: OptionsHtml): string {
+  const registre = new Map((contexte.sources as Objet[]).map((s) => [String(s['id']), { titre: String(s['titre']), categorie: String(s['categorie']), url: String(s['url']) }]));
+  const voyants = new Map((contexte.voyants as Objet[]).map((v) => [String(v['id']), { nom: String(v['nom']), page: String(v['page']) }]));
+  const lignes = lignesAffichees(page).map((l) => ({
+    voyant: l['page'] !== undefined ? String(l['id']) : undefined,
+    verdict: l['verdict'] as Verdict,
+    urgence: l['urgence'] as Urgence,
+    citations: ((l['citations'] as Objet[] | undefined) ?? []) as never,
+  }));
+  const tableaux = modeleTableauNotices(lignes, voyants, registre, String(page['id'])).map((t) => (options.noticeManquante ? { ...t, rangees: t.rangees.slice(1) } : t));
+  return tableauNotices(tableaux, { elementUnique: type === 'voyant' && page['outil'] !== true });
+}
+
 function encadre(page: Objet, options: OptionsHtml): string {
   const lignes = lignesAffichees(page)
     .map((l) => {
@@ -336,7 +358,8 @@ function encadre(page: Objet, options: OptionsHtml): string {
       const nommees = sourcesDeLaLigne(ids, REGISTRE_TEST);
       const notices = nommees.notices.length;
       const phrase = options.sansPhraseSources ? '' : `<p>${phraseSources({ ...nommees, ecart: l['ecart_marques'] as string | undefined })}</p>`;
-      return `<div data-encadre-ligne data-verdict="${String(l['verdict'])}" data-urgence="${String(l['urgence'])}" data-notices="${options.noticesFausses ? notices + 1 : notices}"><h2>${String(l['situation'])}</h2><p><strong>${verdict}</strong> · ${urgence}</p>${action}${ecart}${phrase}</div>`;
+      const lien = auTableau(l, page) && !options.sansLienNotices ? `<p><a href="#${ancreNotices(String(l['id']))}">${LIBELLE_LIEN_NOTICES}</a></p>` : '';
+      return `<div data-encadre-ligne data-verdict="${String(l['verdict'])}" data-urgence="${String(l['urgence'])}" data-notices="${options.noticesFausses ? notices + 1 : notices}"><h2>${String(l['situation'])}</h2><p><strong>${verdict}</strong> · ${urgence}</p>${action}${ecart}${phrase}${lien}</div>`;
     })
     .join('');
   const contenu = options.encadreMasque ? `<details><summary>Voir le détail</summary>${lignes}</details>` : lignes;
@@ -435,7 +458,13 @@ function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): st
   const communs = composantsCommuns(page, options);
   const avant = options.signatureAvantEncadre ? communs.signature : '';
   const apres = options.signatureAvantEncadre ? communs.ligne : `${communs.signature}${communs.ligne}`;
-  return `${entete}<meta name="description" content="${String(page['description'])}"></head><body>${pub}${avant}<main><header><h1>${String(page['h1'])}</h1></header>${entreH1EtEncadre}${blocEncadre}${apres}${options.sansElement ? '' : blocs[String(page['element_unique'])]}${etapes}${autreListe}${communs.sources}</main></body></html>\n`;
+  // Tableau des notices : élément unique d'une page voyant (demande de changement n° 8) ; sur une autre page de
+  // rattachement (la panne de test, page du voyant batterie), il s'ajoute à l'élément unique.
+  const notices = options.sansTableauNotices ? '' : tableauDesNotices(page, type, options);
+  const pageVoyant = type === 'voyant' && page['outil'] !== true && page['element_unique'] === 'tableau';
+  // Sans élément unique : seul l'élément unique manque (sur une page voyant, c'est le tableau des notices).
+  const element = pageVoyant && notices !== '' ? (options.sansElement ? '' : notices) : `${options.sansElement ? '' : (blocs[String(page['element_unique'])] ?? '')}${notices}`;
+  return `${entete}<meta name="description" content="${String(page['description'])}"></head><body>${pub}${avant}<main><header><h1>${String(page['h1'])}</h1></header>${entreH1EtEncadre}${blocEncadre}${apres}${element}${etapes}${autreListe}${communs.sources}</main></body></html>\n`;
 }
 
 // ---- Cas -------------------------------------------------------------------------------------------
@@ -462,7 +491,7 @@ const sans = (page: Objet, champ: string): Objet => {
 
 // Pages valides : une par type de page, plus des variantes qui doivent passer.
 valide('valide-panne', 'panne', panne(), 'Panne valide : ligne de la base, ligne saisie liée au voyant, encadré validé, arbre de décision présent.');
-valide('valide-voyant', 'voyant', voyantPage(), "Voyant valide : ligne reprise de la base uniquement ; l'encadré de décision est validé comme sur toute page.");
+valide('valide-voyant', 'voyant', voyantPage(), "Voyant valide : ligne reprise de la base uniquement ; l'encadré de décision est validé comme sur toute page ; l'élément unique est le tableau des notices.");
 valide('valide-code-defaut', 'code-defaut', codeDefaut(), 'Code défaut valide : voyant déclaré, ligne saisie liée au voyant, au moins aussi grave, libellé sourcé.');
 valide('valide-fluide', 'fluide', fluide(), 'Fluide valide : tableau avec une ligne de données, citation de notice avec son niveau.');
 valide('valide-pneus', 'pneus', pneus(), 'Pneus valide : texte de référence de première main.');
@@ -568,6 +597,13 @@ invalide('r9-encadre-sans-phrase-sources', 'voyant', voyantPage(), ['R9-ENCADRE-
 invalide('composants-sans-signature', 'panne', panne(), ['SIGNATURE-ABSENTE'], "Pas de signature (responsable éditorial et dates) après l'encadré.", { sansSignature: true });
 invalide('composants-signature-avant-encadre', 'panne', panne(), ['SIGNATURE-POSITION'], "La signature précède l'encadré : la page doit s'ouvrir sur la décision.", { signatureAvantEncadre: true });
 invalide('composants-sans-ligne-transparence', 'voyant', voyantPage(), ['TRANSPARENCE-LIGNE-ABSENTE'], 'Pas de ligne de transparence (texte rédigé par une IA, sources, vérification) sur une page éditoriale.', { sansLigneTransparence: true });
+
+// ---- Tableau des notices (livrable 6.4, demande de changement n° 8) --------------------------------
+invalide('r7-voyant-sans-tableau-notices', 'voyant', avecValidation({ ...voyantPage(), element_unique: 'photo' }), ['R7-ELEMENT-ATTENDU'], "Page voyant dont l'élément unique n'est pas le tableau « Ce que dit la notice de votre marque ».");
+invalide('tableau-notices-absent', 'voyant', voyantPage(), ['TABLEAU-NOTICES-ABSENT'], "Page voyant dont le tableau n'est pas celui des notices : un tableau quelconque ne montre pas l'écart entre marques.", { sansTableauNotices: true });
+invalide('tableau-notices-absent-panne', 'panne', panne(), ['TABLEAU-NOTICES-ABSENT'], "Page de rattachement d'un voyant (panne) qui n'affiche pas le tableau des notices de ce voyant.", { sansTableauNotices: true });
+invalide('tableau-notices-incomplet', 'voyant', voyantPage(), ['TABLEAU-NOTICES-INCOMPLET'], 'Une notice citée par la ligne de la base manque au tableau.', { noticeManquante: true });
+invalide('tableau-notices-sans-lien', 'voyant', voyantPage(), ['TABLEAU-NOTICES-LIEN'], "La ligne de l'encadré ne renvoie pas au détail par notice du voyant.", { sansLienNotices: true });
 invalide('composants-source-manquante', 'pneus', pneus(), ['SOURCES-ABSENTE'], 'Une source citée par la page manque dans la section « Sources ».', { sourceManquante: true });
 invalide(
   'r4-pieces-modifiees',
