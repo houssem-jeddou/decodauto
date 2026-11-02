@@ -30,7 +30,7 @@ Guide indépendant : voyant, code défaut, symptôme ou obligation → peut-on r
 - Chaque page s'ouvre sur la décision et contient un élément unique (arbre de décision, tableau, outil, photo réelle).
 - Une intention de recherche = une seule page. Pas de page par modèle sans donnée constructeur sourcée.
 - Pictogrammes redessinés par nos soins, jamais copiés. Codes défaut constructeur précisés par marque.
-- **Transparence** : auteur identifié (page « à propos ») ; chaque page dit en une ligne comment elle est produite (rédaction assistée par une IA, sources de première main, verdicts et encadré de décision vérifiés par Houssem) ; la méthode détaillée est une section de « à propos » (docs/03, règle 11). Textes exacts dans `src/lib/charte.ts` (mention en tête, signature, ligne de transparence, section « Méthode »), jamais recopiés ; règles de rédaction dans `docs/10_charte_editoriale.md`.
+- **Transparence** : auteur identifié (page « à propos ») ; chaque page s'ouvre sur une mention en tête (texte rédigé par une IA) et chaque page éditoriale dit en une ligne comment elle est produite (texte rédigé par une IA, sources de première main, verdicts et encadré de décision vérifiés par Houssem) ; la méthode détaillée est une section de « à propos » (docs/03, règle 11). Textes exacts dans `src/lib/charte.ts` (mention en tête, signature, ligne de transparence, section « Méthode »), jamais recopiés ; règles de rédaction dans `docs/10_charte_editoriale.md`.
 - Électrique, hybride, valises OBD, démarches administratives : hors périmètre (`docs/02`).
 
 ## Technique

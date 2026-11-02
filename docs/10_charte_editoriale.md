@@ -1,6 +1,6 @@
-# Charte éditoriale — decodauto.com (v1, proposée)
+# Charte éditoriale — decodauto.com (v1)
 
-Étape 6, livrable 6.2. Proposée le 02/11/2026 ; **à valider par Houssem**.
+Étape 6, livrable 6.2. Proposée le 02/11/2026 ; **validée par Houssem le 02/11/2026 (20 h 19)**, avec toutes les recommandations de la section 10. Empreinte des textes affichés : `data/charte-validation.json`.
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -269,7 +269,7 @@ Si de la publicité est affichée, elle est choisie par une régie publicitaire,
 Les marques citées appartiennent à leurs propriétaires ; le site n’est lié à aucun constructeur. Les pictogrammes des voyants sont redessinés pour le site, jamais copiés.
 <!-- vue-charte:methode:fin -->
 
-## 8. Revue et mise à jour des pages (proposition)
+## 8. Revue et mise à jour des pages
 | Pages | Prochaine revue au plus tard | Pourquoi |
 |---|---|---|
 | Voyant, code défaut, panne, fluide | 12 mois après la dernière revue | Les notices changent peu ; liens et sources à revérifier une fois par an |
@@ -305,13 +305,13 @@ Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5
   - accessibilité (3.6) ;
   - toute pull request qui change un chiffre ou un fait de sécurité d'une page le liste dans sa description.
 
-## 10. Décisions à valider (02/11/2026)
+## 10. Décisions (validées par Houssem le 02/11/2026, avec les recommandations)
 1. **Où signaler l'IA** : mention courte en tête de toutes les pages et ligne complète après l'encadré (recommandé, section 5.1, sans demande de changement) ; ou ligne complète seule, placée avant l'encadré, ce qui demande une demande de changement sur 08 (§3, règle 9).
 2. **Formulation** : « Texte rédigé par une IA » (recommandé : c'est ce qui se passe, et la vérification de Houssem est dite à côté) ou « Rédaction assistée par une IA » (formulation de la règle 11 de 03). Variante de la mention en tête pour les pages éditoriales : « Texte rédigé par une IA · décision vérifiée par Houssem Jeddou » (plus rassurante, vraie sur ces pages ; le socle garde la mention actuelle).
 3. **Signature** : « Responsable éditorial : Houssem Jeddou · Mis à jour le … · Revu le … » (recommandé) ou « Par Houssem Jeddou · … ».
 4. **Pages du socle** (accueil, à propos, mentions légales) : mention en tête seulement, sans ligne complète (recommandé : elles n'ont pas d'encadré, et « à propos » porte la méthode).
 
-Les décisions 2 et 4 s'écartent de la lettre de la règle 11 de 03 (« chaque page dit en une ligne… rédaction assistée par une IA ») : elles seront notées au journal, et 03 comme `CLAUDE.md` alignés dans la même pull request (ou par une demande de changement, si Houssem considère 03 comme figé).
+Les décisions 2 et 4 s'écartaient de la lettre de la règle 11 de 03 (« chaque page dit en une ligne… rédaction assistée par une IA ») : 03 (v7) et `CLAUDE.md` sont alignés dans la même pull request, sur l'accord de Houssem du 02/11.
 5. **Recette** : passée par Claude page par page, relue par l'agent indépendant ; Houssem valide le paquet et les encadrés (recommandé, section 6).
 6. **Marques et modèles** : règle 2.5, et affichage du nombre de notices pour une ligne qui repose sur moins de 3 marques (2.1).
 7. **Publicité et liens rémunérés** : annonces automatiques sans format pleine page ni ancrage en haut (5.4, recommandé : sinon la promesse « jamais avant la décision » serait fausse) ; aucun lien rémunéré n'est prévu : garder la phrase « Un lien rémunéré est signalé comme tel » comme engagement (recommandé) ou la retirer.
