@@ -930,7 +930,9 @@ describe('coût probable : calcul, données et grille (demande de changement n°
 
   test('données réelles : data/couts.json et la grille des coûts passent les contrôles (citations de la base, deux groupes)', async () => {
     const reelles = await chargerDonnees(racine);
-    const { contexte, constats } = construireContexte(reelles, AUJOURDHUI);
+    // Données réelles : la date du jour, comme la construction (DATES-FUTUR sur le registre).
+    const maintenant = new Date();
+    const { contexte, constats } = construireContexte(reelles, new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate())));
     assert.deepEqual(constats.filter((c) => c.gravite === 'erreur'), []);
     assert.ok(contexte.couts.pieces.size > 0);
     for (const montant of contexte.couts.montants.values()) {

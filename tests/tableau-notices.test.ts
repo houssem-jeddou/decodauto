@@ -18,7 +18,9 @@ import { schemasPage } from '../src/schemas/pages.ts';
 import { construireDemo } from '../scripts/lib/demo.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-const AUJOURDHUI = new Date('2026-11-02T00:00:00Z');
+// Données réelles : la date du contrôle est celle du jour (jour UTC), comme pour la construction (DATES-FUTUR, 6.5).
+const maintenant = new Date();
+const AUJOURDHUI = new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate()));
 
 const notice = (titre: string, url = 'https://exemple.test/notice.pdf') => ({ titre, categorie: 'notice-constructeur', url });
 const REGISTRE = new Map([

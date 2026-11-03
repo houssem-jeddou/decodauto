@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
-import { ANCRE_METHODE, LIGNE_TRANSPARENCE, PAGE_METHODE, signature } from './charte.ts';
+import { ANCRE_METHODE, DELAI_REVUE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature } from './charte.ts';
 import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
@@ -391,6 +391,12 @@ export function construireContexte(
   const plan = lireListe(donnees.plan, planDuSiteSchema, FICHIERS.plan, constats);
   const sources = lireListe(donnees.sources, sourceSchema, FICHIERS.sources, constats);
   const voyants = lireListe(donnees.voyants, voyantBaseSchema, FICHIERS.voyants, constats);
+  // Dates (livrable 6.5) : une source n'est pas consultée dans le futur (la page afficherait « consulté le » faux).
+  for (const source of sources.values()) {
+    if (dansLeFutur(source.date_consultation, aujourdhui)) {
+      constats.push(erreur('DATES-FUTUR', `source « ${source.id} » : date_consultation (${jourIso(source.date_consultation)}) dans le futur`, FICHIERS.sources));
+    }
+  }
 
   // Plan du site : liens déclarés une fois, pages mères cohérentes avec les adresses (src/lib/plan.ts).
   constats.push(...controlerStructurePlan(plan));
@@ -661,7 +667,10 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   if (!lecture.success) return { constats };
   if (type === 'socle') {
     // L'adresse du socle vient uniquement du plan du site, comme pour les autres pages.
-    const socle = lecture.data as { id: string; title: string };
+    const socle = lecture.data as { id: string; title: string; date_modification: Date };
+    if (dansLeFutur(socle.date_modification, ctx.aujourdhui)) {
+      constats.push(erreur('DATES-FUTUR', `date_modification (${jourIso(socle.date_modification)}) dans le futur : la page afficherait une date fausse`, fichier));
+    }
     const ligne = ctx.plan.get(socle.id);
     if (ligne === undefined) {
       constats.push(erreur('R7-PLAN-ABSENT', `la page « ${socle.id} » n'est pas dans le plan du site (data/plan-du-site.json) : son adresse ne peut pas être calculée`, fichier));
@@ -782,6 +791,8 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   if (page.prochaine_revue.getTime() < ctx.aujourdhui.getTime()) {
     constats.push(alerte('R5-REVUE-DEPASSEE', `la revue était prévue le ${page.prochaine_revue.toISOString().slice(0, 10)}`, fichier));
   }
+  // Dates cohérentes et délai de revue du type (livrable 6.5, charte §8).
+  constats.push(...controlerDates(page, typeEditorial, ctx.aujourdhui, fichier));
 
   // R7 : fiche auteur, image recommandée.
   if (!ctx.auteurs.has(page.auteur)) {
@@ -821,6 +832,74 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   }
 
   return { constats, page, id: page.id };
+}
+
+// ---- Dates (étape 6, livrable 6.5) ----------------------------------------------------------------
+
+const JOUR_MS = 86_400_000;
+/**
+ * Une date est dans le futur si elle dépasse la date du contrôle (jour UTC) de plus d'un jour : en France, la journée
+ * commence une ou deux heures avant le jour UTC, et une page datée du jour même ne doit pas échouer.
+ */
+export const dansLeFutur = (date: Date, aujourdhui: Date): boolean => date.getTime() > aujourdhui.getTime() + JOUR_MS;
+const jourIso = (date: Date): string => date.toISOString().slice(0, 10);
+const plusMois = (date: Date, mois: number): Date => {
+  const resultat = new Date(date);
+  resultat.setUTCMonth(resultat.getUTCMonth() + mois);
+  return resultat;
+};
+
+/**
+ * Date limite de la prochaine revue d'une page (charte §8) : délai du type (DELAI_REVUE_MOIS) et, pour la loi montagne,
+ * le 31 octobre qui précède la saison suivante (REVUE_LOI_MONTAGNE). Undefined pour le dossier (contrôlé par son schéma).
+ */
+export function limiteProchaineRevue(type: TypePage, dateRevue: Date, sujet?: string): Date | undefined {
+  const mois = (DELAI_REVUE_MOIS as Partial<Record<TypePage, number>>)[type];
+  if (mois === undefined) return undefined;
+  const parDelai = plusMois(dateRevue, mois);
+  if (type !== 'pneus' || sujet !== 'loi-montagne') return parDelai;
+  const { moisDebutFenetre, moisLimite, jourLimite } = REVUE_LOI_MONTAGNE;
+  const annee = dateRevue.getUTCFullYear() + (dateRevue.getUTCMonth() + 1 >= moisDebutFenetre ? 1 : 0);
+  const saison = new Date(Date.UTC(annee, moisLimite - 1, jourLimite));
+  return saison.getTime() < parDelai.getTime() ? saison : parDelai;
+}
+
+/**
+ * Dates d'une page éditoriale (livrable 6.5) :
+ *  - DATES-FUTUR : date de publication, de modification, de revue ou d'une entrée du journal dans le futur ;
+ *  - DATES-ORDRE : modification avant la publication ; entrée du journal d'un dossier hors de la période qui va de la
+ *    publication à la dernière modification ;
+ *  - DATES-REVUE-DELAI : prochaine revue au-delà du délai du type (charte §8).
+ * prochaine_revue après date_revue (R7-DATES) et le délai du dossier (R7-FORMAT) sont contrôlés par les schémas ; une
+ * revue faite avant la publication reste permise (relecture avant mise en ligne).
+ */
+export function controlerDates(page: PageEditoriale, type: TypePage, aujourdhui: Date, fichier: string): Constat[] {
+  const constats: Constat[] = [];
+  const datees: readonly (readonly [string, Date])[] = [
+    ['date_publication', page.date_publication],
+    ['date_modification', page.date_modification],
+    ['date_revue', page.date_revue],
+    ...('journal_modifications' in page ? page.journal_modifications.map((e, i): readonly [string, Date] => [`journal_modifications[${i}]`, e.date]) : []),
+  ];
+  for (const [champ, date] of datees) {
+    if (dansLeFutur(date, aujourdhui)) constats.push(erreur('DATES-FUTUR', `${champ} (${jourIso(date)}) dans le futur : la page afficherait une date fausse`, fichier));
+  }
+  if (page.date_modification.getTime() < page.date_publication.getTime()) {
+    constats.push(erreur('DATES-ORDRE', `date_modification (${jourIso(page.date_modification)}) antérieure à date_publication (${jourIso(page.date_publication)}) : une page n'est pas modifiée avant d'être publiée`, fichier));
+  }
+  if ('journal_modifications' in page) {
+    page.journal_modifications.forEach((entree, i) => {
+      if (entree.date.getTime() < page.date_publication.getTime() || entree.date.getTime() > page.date_modification.getTime()) {
+        constats.push(erreur('DATES-ORDRE', `journal_modifications[${i}] (${jourIso(entree.date)}) hors de la période de la page, de date_publication (${jourIso(page.date_publication)}) à date_modification (${jourIso(page.date_modification)})`, fichier));
+      }
+    });
+  }
+  const limite = limiteProchaineRevue(type, page.date_revue, 'sujet' in page ? page.sujet : undefined);
+  if (limite !== undefined && page.prochaine_revue.getTime() > limite.getTime()) {
+    const loiMontagne = 'sujet' in page && page.sujet === 'loi-montagne' ? ', revue avant chaque 1er novembre' : '';
+    constats.push(erreur('DATES-REVUE-DELAI', `prochaine_revue (${jourIso(page.prochaine_revue)}) au-delà du délai de revue des pages « ${type} » : au plus tard le ${jourIso(limite)} (charte §8${loiMontagne})`, fichier));
+  }
+  return constats;
 }
 
 // ---- Page construite -----------------------------------------------------------------------------

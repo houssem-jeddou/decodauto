@@ -4,7 +4,8 @@ import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
-import { LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE } from '../../src/lib/charte.ts';
+import { EXPRESSIONS_INTERDITES, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE } from '../../src/lib/charte.ts';
+import { normaliserRecherche } from '../../src/lib/texte.ts';
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
 import { lienSignalement } from '../../src/lib/composants.ts';
@@ -255,14 +256,111 @@ export function constatsIdentifiants(html: string, fichier: string): Constat[] {
   return doublons.length > 0 ? [erreur('ID-DOUBLON', `identifiant(s) en double dans la page : ${doublons.join(', ')}`, fichier)] : [];
 }
 
-/** Mention en tête, lien de signalement, typographie et identifiants, sur toutes les pages du site construit. */
+// ---- Contrôles peu coûteux (étape 6, livrable 6.5) -----------------------------------------------
+
+/** Ce que Google affiche d'une page : son title, son H1 et sa meta description (texte brut, sans retouche). */
+export interface EnTetesDePage {
+  fichier: string;
+  title: string;
+  h1: string;
+  description: string;
+}
+
+export function enTetesDePage(html: string, fichier: string): EnTetesDePage {
+  const $ = cheerio.load(html);
+  return {
+    fichier,
+    title: $('head > title').first().text().trim(),
+    h1: $('h1').first().text().trim(),
+    description: ($('meta[name="description"]').first().attr('content') ?? '').trim(),
+  };
+}
+
+const CHAMPS_UNIQUES = [
+  { champ: 'title', regle: 'TITLE-DOUBLON', nom: 'le même title' },
+  { champ: 'h1', regle: 'H1-DOUBLON', nom: 'le même H1' },
+  { champ: 'description', regle: 'DESCRIPTION-DOUBLON', nom: 'la même meta description' },
+] as const;
+
+/**
+ * Title, H1 et meta description uniques sur tout le site construit (charte §3.4) : deux pages qui affichent le même
+ * texte, à la casse, aux accents et à la ponctuation près (normaliserRecherche), se concurrencent dans Google et
+ * trompent le lecteur. Une valeur vide n'est pas comparée (son absence est contrôlée ailleurs : R7-HTML-*).
+ */
+export function constatsDoublons(pages: readonly EnTetesDePage[]): Constat[] {
+  const constats: Constat[] = [];
+  for (const { champ, regle, nom } of CHAMPS_UNIQUES) {
+    const groupes = new Map<string, EnTetesDePage[]>();
+    for (const page of pages) {
+      const cle = normaliserRecherche(page[champ]);
+      if (cle === '') continue;
+      groupes.set(cle, [...(groupes.get(cle) ?? []), page]);
+    }
+    for (const groupe of groupes.values()) {
+      if (groupe.length < 2) continue;
+      const [premiere] = groupe;
+      constats.push(erreur(regle, `${groupe.length} pages ont ${nom} « ${premiere?.[champ] ?? ''} » : ${groupe.map((p) => p.fichier).join(', ')}`, premiere?.fichier));
+    }
+  }
+  return constats;
+}
+
+/**
+ * Éléments dont le texte n'est pas celui du site, exclus du contrôle des expressions interdites (charte §2.6 et §2.7) :
+ * citations (blockquote, q, cite, extraits du tableau des notices, repère data-citation), en plus du code, des scripts,
+ * des styles et des dessins. Le texte entre guillemets « … » est lui aussi une citation.
+ */
+export const CITATIONS = ['blockquote', 'q', 'cite', '.notices-citation', '[data-citation]'] as const;
+
+/**
+ * Expressions interdites (charte §2.7 et §3.1 : expertise, équipe, garantie ou certification inventées, « nous ») dans
+ * le texte affiché de toute page construite, title et meta description compris, hors citations. Liste et cas permis :
+ * EXPRESSIONS_INTERDITES (src/lib/charte.ts).
+ */
+export function constatsExpressionsInterdites(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const exclus = [...ELEMENTS_SANS_TYPOGRAPHIE, ...CITATIONS].join(', ');
+  // Textes dans l'ordre du document (une expression coupée par une balise en ligne reste lisible), sans descendre dans
+  // les éléments exclus. Les éléments script et style ne sont pas de type « tag » : ils sont ignorés.
+  const corps: string[] = [];
+  const parcourir = (noeuds: readonly { type: string }[]): void => {
+    for (const noeud of noeuds) {
+      if (noeud.type === 'text') corps.push((noeud as unknown as { data: string }).data);
+      else if (noeud.type === 'tag' && !$(noeud as never).is(exclus)) parcourir($(noeud as never).contents().toArray());
+    }
+  };
+  parcourir($('body').contents().toArray());
+  const texte = [$('head > title').first().text(), $('meta[name="description"]').first().attr('content') ?? '', ...corps]
+    .join(' ')
+    .replace(/«[^«»]{0,800}»/g, ' ')
+    .replace(/\s+/g, ' ');
+  return EXPRESSIONS_INTERDITES.flatMap((expression) => {
+    const trouve = expression.exec(texte);
+    if (trouve === null) return [];
+    const extrait = texte.slice(Math.max(0, trouve.index - 30), trouve.index + trouve[0].length + 30).trim();
+    return [erreur('EXPRESSION-INTERDITE', `expression interdite par la charte (§2.7, §3.1) : « ${trouve[0]} » dans « … ${extrait} … » ; une citation se met entre guillemets « … » ou dans un élément de citation`, fichier)];
+  });
+}
+
+/**
+ * Sur toutes les pages du site construit : mention en tête, lien de signalement, typographie et identifiants
+ * (livrable 6.3) ; expressions interdites, et title, H1 et meta description uniques (livrable 6.5).
+ */
 export async function controlerComposantsCommuns(dist: string): Promise<Constat[]> {
   const constats: Constat[] = [];
+  const enTetes: EnTetesDePage[] = [];
   for (const chemin of await listerFichiers(dist, '.html')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
     const html = await readFile(chemin, 'utf8');
-    constats.push(...constatsMentionEtSignalement(html, fichier, adresseDepuisFichier(fichier)), ...constatsTypographie(html, fichier), ...constatsIdentifiants(html, fichier));
+    constats.push(
+      ...constatsMentionEtSignalement(html, fichier, adresseDepuisFichier(fichier)),
+      ...constatsTypographie(html, fichier),
+      ...constatsIdentifiants(html, fichier),
+      ...constatsExpressionsInterdites(html, fichier),
+    );
+    enTetes.push(enTetesDePage(html, fichier));
   }
+  constats.push(...constatsDoublons(enTetes));
   return constats;
 }
 

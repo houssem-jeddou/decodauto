@@ -653,6 +653,76 @@
     "explication": "La ligne de l'encadré ne renvoie pas au détail par notice du voyant."
   },
   {
+    "nom": "valide-loi-montagne",
+    "type": "pneus",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Loi montagne valide : revue en octobre, prochaine dans les 6 mois (et avant le 31 octobre suivant)."
+  },
+  {
+    "nom": "dates-modification-avant-publication",
+    "type": "fluide",
+    "erreurs": [
+      "DATES-ORDRE"
+    ],
+    "alertes": [],
+    "explication": "Date de modification antérieure à la date de publication."
+  },
+  {
+    "nom": "dates-futur",
+    "type": "fluide",
+    "erreurs": [
+      "DATES-FUTUR"
+    ],
+    "alertes": [],
+    "explication": "Date de modification dans le futur : la signature afficherait une date fausse."
+  },
+  {
+    "nom": "dates-revue-delai",
+    "type": "fluide",
+    "erreurs": [
+      "DATES-REVUE-DELAI"
+    ],
+    "alertes": [],
+    "explication": "Prochaine revue à plus de 12 mois de la dernière (charte §8)."
+  },
+  {
+    "nom": "dates-revue-delai-pneus",
+    "type": "pneus",
+    "erreurs": [
+      "DATES-REVUE-DELAI"
+    ],
+    "alertes": [],
+    "explication": "Page pneus : prochaine revue à plus de 6 mois (charte §8)."
+  },
+  {
+    "nom": "dates-revue-loi-montagne",
+    "type": "pneus",
+    "erreurs": [
+      "DATES-REVUE-DELAI"
+    ],
+    "alertes": [],
+    "explication": "Loi montagne revue en juin : la suivante tombe avant le 1er novembre, début de la saison (charte §8)."
+  },
+  {
+    "nom": "dates-journal-hors-periode",
+    "type": "dossier",
+    "erreurs": [
+      "DATES-ORDRE"
+    ],
+    "alertes": [],
+    "explication": "Entrée du journal d'un dossier hors de la période de la page."
+  },
+  {
+    "nom": "dates-socle-futur",
+    "type": "socle",
+    "erreurs": [
+      "DATES-FUTUR"
+    ],
+    "alertes": [],
+    "explication": "Page du socle datée dans le futur."
+  },
+  {
     "nom": "composants-source-manquante",
     "type": "pneus",
     "erreurs": [

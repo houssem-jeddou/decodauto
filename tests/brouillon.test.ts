@@ -21,7 +21,10 @@ import {
 } from '../scripts/lib/brouillon.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-const AUJOURDHUI = new Date('2026-10-24T00:00:00Z');
+// Ces tests portent sur les données réelles : la date du contrôle est celle du jour (jour UTC), comme pour la
+// construction. Une date figée plus ancienne que le registre ferait échouer DATES-FUTUR (livrable 6.5).
+const maintenant = new Date();
+const AUJOURDHUI = new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate()));
 
 async function lireBrouillon(): Promise<unknown[] | undefined> {
   try {
