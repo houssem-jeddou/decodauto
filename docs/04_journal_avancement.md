@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 03/11/2026 (15 h 15, heure de Tunis)
+Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,7 +12,7 @@ Dernière mise à jour : 03/11/2026 (15 h 15, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux lancé le 03/11 (14 h 43), PR #15 en revue | `travaux/etape-6/` |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 ; suivant : 6.6 modèles et exemples, sur le feu vert de Houssem | `travaux/etape-6/` |
 | 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -25,7 +25,7 @@ Dernière mise à jour : 03/11/2026 (15 h 15, heure de Tunis)
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
 | Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause depuis 12 h 10 ; reprise quand Houssem la redemande | statut juridique (mentions légales) |
-| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 le 03/11 ; restent 6.5, 6.6, 6.8 et la porte) | séance de validation des exemples voyant, code et pneus |
+| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 et 6.5 le 03/11 ; restent 6.6, 6.8 et la porte) | séance de validation des exemples voyant, code et pneus |
 | 8. Vague A | 29/10–01/11 | ≈ 11–15/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
 | 9. Mise en ligne du minimum | 31/10 | ≈ 14–16/11 | portes 7 et 8 ; sécurité des comptes |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 21–25/11 / ≈ 28/11–02/12 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
@@ -37,7 +37,7 @@ Dernière mise à jour : 03/11/2026 (15 h 15, heure de Tunis)
 4. ~~source des résultats Google et demande de changement n° 4~~ : faites le 28/10 ;
 5. ~~texte de la demande de changement n° 5 et redirections Cloudflare~~ : faits le 28/10 (10 h 25) ;
 6. ~~demande de changement n° 6 (coût probable)~~ : faite le 28/10 ;
-7. ~~charte éditoriale (6.2), composants communs (6.3), tableau des notices et demande de changement n° 8 (6.4)~~ : validés le 02/11 et le 03/11 ;
+7. ~~charte éditoriale (6.2), composants communs (6.3), tableau des notices et demande de changement n° 8 (6.4), contrôles peu coûteux (6.5)~~ : validés le 02/11 et le 03/11 ;
 8. exemples des modèles voyant, code et pneus, puis porte 6, vers le 10/11 ;
 9. porte 7 ;
 10. demande de changement des requêtes absentes, juste avant l'étape 8 ;
@@ -95,10 +95,11 @@ Dernière mise à jour : 03/11/2026 (15 h 15, heure de Tunis)
   - Article L122-5 du code de la propriété intellectuelle relu sur Légifrance le 02/11 (version en vigueur depuis le 01/01/2023) : charte §2.6 précisée.
   - Une revue indépendante, corrections intégrées.
   - PR #14 fusionnée le 03/11 (14 h 44) sur la demande de Houssem (5d9a8e0) ; CI de `main` verte (run n° 58, déploiement compris).
-- [ ] **6.5 Contrôles peu coûteux** : title, H1 ou description en double ; dates incohérentes. Lancé le 03/11 (14 h 43) ; proposition prête, en attente de la validation de Houssem.
-  - Branche `etape-6/controles-peu-couteux`, PR #15 en brouillon ; CI verte (runs 41648233767, 41649674249 et 41651075988).
+- [x] **6.5 Contrôles peu coûteux** : title, H1 ou description en double ; dates incohérentes. Lancé le 03/11 (14 h 43) ; validé par Houssem le 03/11 (15 h 14), avec les deux recommandations ; verrouillé.
+  - Branche `etape-6/controles-peu-couteux`, PR #15 ; CI verte (runs 41648233767, 41649674249 et 41651075988).
   - Site construit : title, H1 et meta description uniques et présents (TITLE-, H1-, DESCRIPTION-, TITLE-H1-DOUBLON ; TITLE-ABSENT, DESCRIPTION-ABSENTE) ; expressions interdites de la charte hors citations (EXPRESSION-INTERDITE). Dates : DATES-FUTUR, DATES-ORDRE, DATES-REVUE-DELAI (charte §8).
-  - À valider : lecture de « loi montagne : revue avant chaque 1er novembre » ; « nos équipes » et « nos rédactions » ajoutés aux expressions interdites.
+  - Validés avec le livrable : lecture de « loi montagne : revue avant chaque 1er novembre » (charte §8 précisée) ; « nos équipes » et « nos rédactions » ajoutés aux expressions interdites (charte §2.7) ; charte §9 mise à jour (contrôles ajoutés en 6.3 et 6.5).
+  - Tests sur les données réelles datés de la plus récente de leurs dates (`tests/date-des-donnees.ts`) : ni date figée, ni dépendance au calendrier.
   - Deux revues indépendantes (le maximum), corrections intégrées.
 - [ ] **6.6 Modèles et exemples rédigés** des types de la vague A : voyant, code et pneus (demande de changement n° 5, 03 v6). Les modèles panne, dossier et fluide ouvrent les étapes 10 et 11.
 - [x] **6.7 Relevé des résultats Google depuis la France** (28/10) : 19 requêtes principales de la vague A, SerpApi (google.fr, gl=fr, hl=fr, localisation France), empreintes vérifiées après recopie. Branche `etape-6/releve-google-france`, `travaux/etape-6/releve-google-france/` ; constats pour les briefs dans son README. Revue indépendante prévue avec les briefs (6.8), en un seul lot.
@@ -206,6 +207,11 @@ Dernière mise à jour : 03/11/2026 (15 h 15, heure de Tunis)
 
   PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 - 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 03/11/2026 (15 h 14), Houssem : **valide le livrable 6.5** et **accepte les deux recommandations** :
+  - loi montagne : une revue faite à partir du 1er septembre vaut pour la saison qui commence ; une revue faite avant le 1er septembre appelle la suivante au plus tard le 31 octobre de la même année (charte §8) ;
+  - « nos équipes » et « nos rédactions » ajoutés aux expressions interdites (charte §2.7).
+
+  Il demande la fusion de la PR #15. Le livrable 6.6 attend son feu vert.
 - 03/11/2026 (14 h 43), Houssem : **demande la fusion de la PR #14** (faite, 5d9a8e0) et **lance le livrable 6.5**.
 - 03/11/2026 (13 h 48), Houssem : **valide le livrable 6.4** (tableau « Ce que dit la notice de votre marque », avec ses textes) et **accepte la demande de changement n° 8** : le tableau des notices est l'élément unique des pages voyants et s'affiche sur toute page de rattachement d'un voyant (08 v7). La part de texte cité par page et l'ordre du corps des pages voyants se décident en 6.6, sur les vraies pages. Le livrable 6.5 attend son feu vert.
 - 02/11/2026 (soir), Houssem : **lance le livrable 6.4**.
@@ -218,6 +224,18 @@ Dernière mise à jour : 03/11/2026 (15 h 15, heure de Tunis)
 - 02/11/2026 (20 h 19), Houssem : **valide la charte éditoriale avec toutes les recommandations** de sa section 10, **donne son accord sur les textes exacts** (mention en tête, signature, ligne de transparence, section « Méthode ») et **demande la fusion de la PR #12** si tout va bien. 03 passe en v7 (règle 11 alignée). Le livrable 6.2 est verrouillé ; suivant : 6.3, composants communs.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 03/11, livrable 6.5 (contrôles peu coûteux), deux revues (deux relecteurs), le maximum ; chacune « à corriger », rien de bloquant.
+  - **Première revue, changé** :
+    - un `blockquote` ou un `q` sans source n'est plus une citation (encadré « À retenir » contrôlé) ;
+    - guillemets imbriqués ; un guillemet non fermé ne déborde plus sur les blocs suivants ;
+    - textes alternatifs et libellés lus ; title et description présents sur toutes les pages (TITLE-ABSENT, DESCRIPTION-ABSENTE) ;
+    - calcul des mois borné au dernier jour du mois ; « nos équipes », « nos rédactions » ;
+    - tests sur données réelles qui auraient échoué à partir du 03/11/2027 (revue de la démonstration dépassée) : date des tests tirée des données.
+  - **Seconde revue, changé** :
+    - un saut de ligne dans un paragraphe cachait une expression, une citation contenant un sigle expliqué était refusée : blancs ramenés à une espace, blocs séparés par un caractère hors texte, attributs lus à part ;
+    - citation en bloc reconnue seulement si sa source (`data-source-id`) est listée dans « Sources » ; `cite` retiré ;
+    - title d'une page repris comme H1 d'une autre (TITLE-H1-DOUBLON) ; même calcul des mois pour le dossier.
+  - **Écarté ou laissé ouvert** : alerte des dates futures des montants (COUT-DATE-FUTURE, validée en 6.1) non alignée ; source d'un texte entre guillemets non vérifiable par la machine (recette) ; attribution par `figure` et `cite` non reconnue (les modèles n'en ont pas) ; longueur des title et descriptions (idée reportée).
 - 03/11, livrable 6.4 (tableau des notices), une revue (« à corriger », rien de bloquant) ; pas de seconde revue, aucune correction ne traitant un point bloquant ni n'ajoutant de contenu.
   - **Changé** :
     - une rangée par consigne, et non par notice : deux consignes d'une même notice regroupées affichaient un extrait sous le niveau de l'autre (8 rangées sur 110) ;
@@ -427,6 +445,7 @@ Dernière mise à jour : 03/11/2026 (15 h 15, heure de Tunis)
 - Volumes à lire comme des plafonds : dossier PureTech (94 % de noms de moteur ou de modèle), viscosités (surtout intention d'achat), outil voyants (30 % de requêtes « + modèle »), batterie (34 % d'achat par capacité).
 
 ## Points ouverts (non bloquants)
+- **Description des pages du socle** : le schéma du socle n'a pas de champ `description`, et DESCRIPTION-ABSENTE (6.5) l'exige sur toute page construite. Une demande de changement ajoutera ce champ avant de construire « à propos » ou les mentions légales (étape 7).
 - **Adresse de signalement** : `erreur@decodauto.com` créée le 02/11 (redirection OVH vers la boîte de Houssem, sans copie) et publiée sur le site. Réception à confirmer par un courriel de test envoyé depuis une autre adresse.
 - **À trancher en 6.6, sur les vraies pages** (revue de 6.4) :
   - part de texte cité par page : la loi (L122-5) ne fixe aucun seuil. Page de démonstration : 51 % du texte, avec un corps provisoire ; page ABS/ESP : environ 1 600 mots cités ;
@@ -465,6 +484,7 @@ Dernière mise à jour : 03/11/2026 (15 h 15, heure de Tunis)
 - **Branches anciennes** du dépôt (`claude/great-fermat-txuonc`, `docs/porte-etape-3`) : peuvent être supprimées.
 
 ## Idées reportées
+- Longueur des title et des meta descriptions (contrôle ou alerte), proposée par la revue de 6.5 ; la charte ne la fixe pas.
 - Ancien lot 2 (codes OBD supplémentaires, batterie et pression par modèle, freins, distribution, embrayage, AdBlue, Crit'Air, voiture qui tremble…) : à réévaluer avec les données de Search Console.
 - Frais kilométriques : décision en décembre 2026 (aligné sur 02).
 - Pages « thème » : non retenues à l'étape 4 ; à réévaluer quand les thèmes compteront plus de pages.
