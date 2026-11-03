@@ -99,7 +99,7 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.equal(fiche.lignes[1]?.valeur, LIBELLE_PORTEE.generique);
     assert.equal(fiche.lignes[2]?.valeur, LIBELLE_CARBURANT['essence et diesel']);
     assert.ok(fiche.lignes[3]?.valeur.startsWith(site.voyants.get('moteur-orange-fixe')?.nom ?? '?'));
-    assert.deepEqual(modeleParMarque(page).map((r) => r.marque), ['Audi', 'Kia', 'Peugeot et Citroën', 'Volkswagen et Audi']);
+    assert.deepEqual(modeleParMarque(page).map((r) => r.marque), ['Audi', 'Groupe Volkswagen (Volkswagen et Audi)', 'Kia', 'Peugeot et Citroën']);
     // Code constructeur : les marques sont nommées dans la portée.
     const constructeur = modeleFicheCode({ ...page, portee: 'constructeur', marques: ['Peugeot', 'Citroën'] }, site.voyants, site.sources);
     assert.equal(constructeur.lignes[1]?.valeur, `${LIBELLE_PORTEE.constructeur} (Peugeot, Citroën)`);
