@@ -85,7 +85,7 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.ok(ordre.every((i) => i >= 0), JSON.stringify(ordre));
     assert.deepEqual([...ordre].sort((a, b) => a - b), ordre);
     assert.equal(html.match(/data-element-unique=/g)?.length, 1);
-    assert.match(html, /data-cas-par-marque[^>]*>|data-element-unique="tableau" data-cas-par-marque/);
+    assert.match(html, /<section class="par-marque" data-element-unique="tableau" data-cas-par-marque /);
     // Pas de tableau des notices : le voyant moteur est rattaché à sa propre page (demande de changement n° 8).
     assert.ok(!html.includes('data-tableau-notices'));
   });
@@ -99,7 +99,7 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.equal(fiche.lignes[1]?.valeur, LIBELLE_PORTEE.generique);
     assert.equal(fiche.lignes[2]?.valeur, LIBELLE_CARBURANT['essence et diesel']);
     assert.ok(fiche.lignes[3]?.valeur.startsWith(site.voyants.get('moteur-orange-fixe')?.nom ?? '?'));
-    assert.deepEqual(modeleParMarque(page).map((r) => r.marque), ['Audi', 'Kia', 'Peugeot et Citroën']);
+    assert.deepEqual(modeleParMarque(page).map((r) => r.marque), ['Audi', 'Kia', 'Peugeot et Citroën', 'Volkswagen et Audi']);
     // Code constructeur : les marques sont nommées dans la portée.
     const constructeur = modeleFicheCode({ ...page, portee: 'constructeur', marques: ['Peugeot', 'Citroën'] }, site.voyants, site.sources);
     assert.equal(constructeur.lignes[1]?.valeur, `${LIBELLE_PORTEE.constructeur} (Peugeot, Citroën)`);
