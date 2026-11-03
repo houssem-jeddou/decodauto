@@ -28,7 +28,7 @@
 //   un voyant de la base est rattaché à la page · pages liées · sources
 // ---------------------------------------------------------------------------------------------
 import { basDePage, causesDeLaPage, hautDePage, tableauNoticesDeLaPage, type DonneesSite } from './gabarit.ts';
-import { echapper, typographierHtml } from './html.ts';
+import { attributHtml, echapper, typographierHtml } from './html.ts';
 import { nomCourtSource, type SourceDuRegistre } from './composants.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
@@ -145,7 +145,13 @@ function tableauDuTexte(
   if (!permis) echec('« {{tableau}} » : sur ce type de page, l\'élément unique est construit par le modèle');
   if (page.element_unique !== 'tableau') echec('« {{tableau}} » : la page ne déclare pas un tableau comme élément unique (element_unique)');
   if (marqueurs.length > 1) echec('« {{tableau}} » : un seul tableau par page est l\'élément unique');
-  const resultat = html.replace(/<p>\s*\{\{tableau\}\}\s*<\/p>\s*(<table[\s\S]*?<\/table>)/, '<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Tableau" tabindex="0">$1</div>');
+  // Nom de la région : le titre (H2 ou H3) qui précède le tableau, sinon « Tableau ».
+  const avant = html.slice(0, html.search(MARQUEUR_TABLEAU));
+  const titres = [...avant.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/g)];
+  const entites: Readonly<Record<string, string>> = { '&amp;': '&', '&#39;': "'", '&#x27;': "'", '&quot;': '"', '&lt;': '<', '&gt;': '>' };
+  const titre = (titres.at(-1)?.[1] ?? '').replace(/<[^>]+>/g, '').replace(/&(amp|#39|#x27|quot|lt|gt);/g, (e) => entites[e] ?? e).trim();
+  const nom = attributHtml(titre !== '' ? titre : 'Tableau');
+  const resultat = html.replace(/<p>\s*\{\{tableau\}\}\s*<\/p>\s*(<table[\s\S]*?<\/table>)/, `<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="${nom}" tabindex="0">$1</div>`);
   if (resultat === html) echec('« {{tableau}} » doit précéder immédiatement un tableau');
   return resultat;
 }

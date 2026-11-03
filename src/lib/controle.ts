@@ -741,6 +741,11 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
     if (inconnues.length === 0 && !premiereMain) {
       constats.push(erreur('R3-PREMIERE-MAIN', 'texte_reference : la source doit être de première main (Légifrance ou arrêté préfectoral)', fichier));
     }
+    // La nature affichée par la fiche « Le texte en bref » (livrable 6.6c) est celle de la source au registre.
+    const categorie = ctx.sources.get(page.texte_reference.source)?.categorie;
+    if (categorie !== undefined && premiereMain && categorie !== page.texte_reference.nature) {
+      constats.push(erreur('R7-TEXTE-REFERENCE-NATURE', `texte_reference : nature « ${page.texte_reference.nature} », alors que la source est de catégorie « ${categorie} » au registre`, fichier));
+    }
   }
   // R3 et R8 sur les lignes saisies : citations, niveau le plus prudent, écart signalé, cohérence verdict / urgence.
   const saisies: LigneResolue[] = lignes.filter((l) => l.origine === 'page');

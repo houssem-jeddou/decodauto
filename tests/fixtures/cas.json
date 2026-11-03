@@ -158,6 +158,15 @@
     "explication": "Source absente du registre."
   },
   {
+    "nom": "r7-texte-reference-nature",
+    "type": "pneus",
+    "erreurs": [
+      "R7-TEXTE-REFERENCE-NATURE"
+    ],
+    "alertes": [],
+    "explication": "Texte de référence déclaré « arrêté préfectoral » alors que sa source est de catégorie « legifrance » au registre (la fiche afficherait une nature fausse)."
+  },
+  {
     "nom": "r3-texte-reference-seconde-main",
     "type": "pneus",
     "erreurs": [

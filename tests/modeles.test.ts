@@ -97,7 +97,8 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.ok(ordre.every((i) => i >= 0), JSON.stringify(ordre));
     assert.deepEqual([...ordre].sort((a, b) => a - b), ordre);
     assert.equal(html.match(/data-element-unique=/g)?.length, 1);
-    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Tableau" tabindex="0"><table>/);
+    // Région nommée par le titre qui précède le tableau, atteignable au clavier.
+    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Équipement" tabindex="0"><table>/);
     assert.ok(!html.includes('{{'));
   });
 
@@ -301,7 +302,7 @@ describe('page exemple « loi montagne » (exemples/, jamais publiée)', () => {
     assert.deepEqual(constatsTexteRedige(html, EXEMPLE_PNEUS), []);
     assert.deepEqual(constatsPartCitee(html, EXEMPLE_PNEUS), []);
     assert.ok(!html.includes('{{'), 'référence non remplacée');
-    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Tableau" tabindex="0"><table>/);
+    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Quel équipement pour la loi montagne \?" tabindex="0"><table>/);
   });
 });
 
