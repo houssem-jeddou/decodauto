@@ -1,5 +1,7 @@
 # Paquet de validation 6.6a : page exemple « voyant moteur »
 
+**Validé par Houssem le 03/11/2026 (17 h 32)**, les quatre points acceptés (« J'accepte les 4 points ») : encadré et pièces des causes, faits du texte, demande de changement n° 9, seuil d'un tiers. Empreinte de l'encadré versée dans la page : `ceaa32fa…` (`npm run empreinte -- exemples/voyant/voyant-moteur.md`).
+
 Étape 6, livrable 6.6a (modèle de page voyant).
 
 - **Page** : `exemples/voyant/voyant-moteur.md`, adresse du plan `/voyants/moteur/`.

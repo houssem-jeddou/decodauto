@@ -42,6 +42,9 @@ date_publication: 2026-11-03
 date_modification: 2026-11-03
 date_revue: 2026-11-03
 prochaine_revue: 2027-11-03
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 03/11/2026 (17 h 32),
+# avec les faits du texte (paquet travaux/etape-6/paquet-6.6a-voyant-moteur.md).
+validation: ceaa32fa0a950647b8b04773dd6d19119eb701a6bdf11ee94044e2f789f46b1f
 causes:
   - cause: Défaut du système antipollution
     explication: "Pour le voyant orange fixe, les notices Peugeot 208, Seat Ibiza, Renault Clio 5 phase 2 et Dacia Sandero 3 désignent le système qui contrôle les gaz d'échappement ; la notice Peugeot 208 cite aussi une défaillance mineure du moteur. Elles ne nomment pas de pièce : elles demandent de consulter un réparateur ou le réseau de la marque."
