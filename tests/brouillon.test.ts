@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { dateDesDonnees } from './date-des-donnees.ts';
 import { z } from 'astro/zod';
 import { construireContexte } from '../src/lib/controle.ts';
 import { voyantBaseSchema } from '../src/schemas/donnees.ts';
@@ -21,10 +22,8 @@ import {
 } from '../scripts/lib/brouillon.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-// Ces tests portent sur les données réelles : la date du contrôle est celle du jour (jour UTC), comme pour la
-// construction. Une date figée plus ancienne que le registre ferait échouer DATES-FUTUR (livrable 6.5).
-const maintenant = new Date();
-const AUJOURDHUI = new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate()));
+// Données réelles : la date du contrôle est la plus récente des données (tests/date-des-donnees.ts, DATES-FUTUR).
+const AUJOURDHUI = await dateDesDonnees(racine);
 
 async function lireBrouillon(): Promise<unknown[] | undefined> {
   try {

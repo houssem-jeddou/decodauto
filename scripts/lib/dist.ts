@@ -10,6 +10,7 @@ import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
 import { lienSignalement } from '../../src/lib/composants.ts';
 import { ELEMENTS_SANS_TYPOGRAPHIE } from '../../src/lib/html.ts';
+import { CLASSE_CITATION_NOTICE } from '../../src/lib/tableau-notices.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
 
@@ -285,7 +286,7 @@ const CHAMPS_UNIQUES = [
 /**
  * Title, H1 et meta description uniques sur tout le site construit (charte §3.4) : deux pages qui affichent le même
  * texte, à la casse, aux accents et à la ponctuation près (normaliserRecherche), se concurrencent dans Google et
- * trompent le lecteur. Une valeur vide n'est pas comparée (son absence est contrôlée ailleurs : R7-HTML-*).
+ * trompent le lecteur. Une valeur vide n'est pas comparée (son absence : TITLE-ABSENT, DESCRIPTION-ABSENTE).
  */
 export function constatsDoublons(pages: readonly EnTetesDePage[]): Constat[] {
   const constats: Constat[] = [];
@@ -306,45 +307,79 @@ export function constatsDoublons(pages: readonly EnTetesDePage[]): Constat[] {
 }
 
 /**
- * Éléments dont le texte n'est pas celui du site, exclus du contrôle des expressions interdites (charte §2.6 et §2.7) :
- * citations (blockquote, q, cite, extraits du tableau des notices, repère data-citation), en plus du code, des scripts,
- * des styles et des dessins. Le texte entre guillemets « … » est lui aussi une citation.
+ * Citations exclues du contrôle des expressions interdites (charte §2.6 : une citation donne son auteur et sa source) :
+ * extraits du tableau des notices, et `blockquote` ou `q` qui portent leur source (attribut `data-source-id` du registre,
+ * ou `cite`). Un `blockquote` sans source (encadré « À retenir », par exemple) reste du texte du site. Le texte entre
+ * guillemets « … » est lui aussi traité comme une citation.
  */
-export const CITATIONS = ['blockquote', 'q', 'cite', '.notices-citation', '[data-citation]'] as const;
+export const CITATIONS = [`.${CLASSE_CITATION_NOTICE}`, 'blockquote[data-source-id]', 'blockquote[cite]', 'q[data-source-id]', 'q[cite]'] as const;
+
+/** Éléments de bloc : leur texte ne se lit pas d'un seul tenant avec le bloc voisin (guillemets, expressions). */
+const BLOCS = new Set(['p', 'li', 'dt', 'dd', 'td', 'th', 'caption', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'section', 'article', 'aside', 'header', 'footer', 'nav', 'main', 'blockquote', 'figure', 'figcaption', 'ul', 'ol', 'table', 'tr', 'details', 'summary', 'br']);
+
+/** Retire le texte entre guillemets « … », d'un même bloc, en commençant par les plus intérieurs (citation dans une citation). */
+function sansGuillemets(texte: string): string {
+  let avant = '';
+  let apres = texte;
+  for (let i = 0; i < 10 && apres !== avant; i += 1) {
+    avant = apres;
+    apres = apres.replace(/«[^«»\n]{0,800}»/g, ' ');
+  }
+  return apres;
+}
 
 /**
  * Expressions interdites (charte §2.7 et §3.1 : expertise, équipe, garantie ou certification inventées, « nous ») dans
- * le texte affiché de toute page construite, title et meta description compris, hors citations. Liste et cas permis :
- * EXPRESSIONS_INTERDITES (src/lib/charte.ts).
+ * le texte affiché de toute page construite, title, meta description, textes alternatifs (`alt`) et libellés
+ * (`aria-label`) compris, hors citations. Liste et cas permis : EXPRESSIONS_INTERDITES (src/lib/charte.ts).
  */
 export function constatsExpressionsInterdites(html: string, fichier: string): Constat[] {
   const $ = cheerio.load(html);
   const exclus = [...ELEMENTS_SANS_TYPOGRAPHIE, ...CITATIONS].join(', ');
-  // Textes dans l'ordre du document (une expression coupée par une balise en ligne reste lisible), sans descendre dans
-  // les éléments exclus. Les éléments script et style ne sont pas de type « tag » : ils sont ignorés.
-  const corps: string[] = [];
+  // Textes dans l'ordre du document (une expression coupée par une balise en ligne reste lisible), un bloc par ligne,
+  // sans descendre dans les éléments exclus. Les éléments script et style ne sont pas de type « tag » : ignorés.
+  const morceaux: string[] = [$('head > title').first().text(), '\n', $('meta[name="description"]').first().attr('content') ?? '', '\n'];
   const parcourir = (noeuds: readonly { type: string }[]): void => {
     for (const noeud of noeuds) {
-      if (noeud.type === 'text') corps.push((noeud as unknown as { data: string }).data);
-      else if (noeud.type === 'tag' && !$(noeud as never).is(exclus)) parcourir($(noeud as never).contents().toArray());
+      if (noeud.type === 'text') morceaux.push((noeud as unknown as { data: string }).data);
+      else if (noeud.type === 'tag' && !$(noeud as never).is(exclus)) {
+        const element = $(noeud as never);
+        const bloc = BLOCS.has(((noeud as unknown as { name?: string }).name ?? '').toLowerCase());
+        if (bloc) morceaux.push('\n');
+        for (const attribut of ['alt', 'aria-label', 'title']) {
+          const valeur = element.attr(attribut);
+          if (valeur !== undefined && valeur.trim() !== '') morceaux.push('\n', valeur, '\n');
+        }
+        parcourir(element.contents().toArray());
+        if (bloc) morceaux.push('\n');
+      }
     }
   };
   parcourir($('body').contents().toArray());
-  const texte = [$('head > title').first().text(), $('meta[name="description"]').first().attr('content') ?? '', ...corps]
-    .join(' ')
-    .replace(/«[^«»]{0,800}»/g, ' ')
-    .replace(/\s+/g, ' ');
+  const texte = sansGuillemets(morceaux.join(' ').replace(/[^\S\n]+/g, ' '));
   return EXPRESSIONS_INTERDITES.flatMap((expression) => {
     const trouve = expression.exec(texte);
     if (trouve === null) return [];
-    const extrait = texte.slice(Math.max(0, trouve.index - 30), trouve.index + trouve[0].length + 30).trim();
-    return [erreur('EXPRESSION-INTERDITE', `expression interdite par la charte (§2.7, §3.1) : « ${trouve[0]} » dans « … ${extrait} … » ; une citation se met entre guillemets « … » ou dans un élément de citation`, fichier)];
+    const extrait = texte.slice(Math.max(0, trouve.index - 30), trouve.index + trouve[0].length + 30).replace(/\s+/g, ' ').trim();
+    return [erreur('EXPRESSION-INTERDITE', `expression interdite par la charte (§2.7, §3.1) : « ${trouve[0]} » dans « … ${extrait} … » ; une citation se met entre guillemets « … », ou dans un blockquote ou un q qui porte sa source (data-source-id ou cite)`, fichier)];
   });
 }
 
 /**
+ * Title et meta description présents sur toutes les pages du site construit (accueil, 404, socle et pages
+ * éditoriales ; charte §3.4) : sans eux, Google les compose lui-même et le doublon n'est plus contrôlable.
+ */
+export function constatsEnTetesPresents(enTetes: EnTetesDePage): Constat[] {
+  const constats: Constat[] = [];
+  if (enTetes.title === '') constats.push(erreur('TITLE-ABSENT', 'la page construite n\'a pas de title', enTetes.fichier));
+  if (enTetes.description === '') constats.push(erreur('DESCRIPTION-ABSENTE', 'la page construite n\'a pas de meta description (charte §3.4 : la description dit la réponse en une phrase)', enTetes.fichier));
+  return constats;
+}
+
+/**
  * Sur toutes les pages du site construit : mention en tête, lien de signalement, typographie et identifiants
- * (livrable 6.3) ; expressions interdites, et title, H1 et meta description uniques (livrable 6.5).
+ * (livrable 6.3) ; expressions interdites, title et meta description présents, title, H1 et meta description uniques
+ * (livrable 6.5).
  */
 export async function controlerComposantsCommuns(dist: string): Promise<Constat[]> {
   const constats: Constat[] = [];
@@ -358,7 +393,9 @@ export async function controlerComposantsCommuns(dist: string): Promise<Constat[
       ...constatsIdentifiants(html, fichier),
       ...constatsExpressionsInterdites(html, fichier),
     );
-    enTetes.push(enTetesDePage(html, fichier));
+    const lus = enTetesDePage(html, fichier);
+    constats.push(...constatsEnTetesPresents(lus));
+    enTetes.push(lus);
   }
   constats.push(...constatsDoublons(enTetes));
   return constats;

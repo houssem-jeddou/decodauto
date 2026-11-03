@@ -87,7 +87,7 @@ export const EXPRESSIONS_INTERDITES: readonly RegExp[] = [
   // Une expertise ou une équipe qui n'existent pas. « Peugeot Expert » (un modèle), « l’expert de votre assurance »,
   // « une expertise » restent permis.
   mot('experts? (?:du site|de decodauto|maison)'),
-  mot('(?:notre|nos) (?:équipe|rédaction|experts?|mécaniciens?|spécialistes?)'),
+  mot('(?:notre|nos) (?:équipes?|rédactions?|experts?|mécaniciens?|spécialistes?)'),
   mot('mécaniciens? (?:du site|de l’équipe|de l\'équipe|maison)'),
   mot('testée?s? par (?:nos|notre|nous|un mécanicien|des mécaniciens)'),
   // Une garantie ou une certification promises par le site. « La garantie légale », « l’extension de garantie »,

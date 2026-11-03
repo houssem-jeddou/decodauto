@@ -843,10 +843,12 @@ const JOUR_MS = 86_400_000;
  */
 export const dansLeFutur = (date: Date, aujourdhui: Date): boolean => date.getTime() > aujourdhui.getTime() + JOUR_MS;
 const jourIso = (date: Date): string => date.toISOString().slice(0, 10);
-const plusMois = (date: Date, mois: number): Date => {
-  const resultat = new Date(date);
-  resultat.setUTCMonth(resultat.getUTCMonth() + mois);
-  return resultat;
+/** Même jour, `mois` mois plus tard ; le dernier jour du mois quand ce jour n'existe pas (31/08 + 6 mois → 28/02). */
+export const plusMois = (date: Date, mois: number): Date => {
+  const annee = date.getUTCFullYear();
+  const cible = date.getUTCMonth() + mois;
+  const dernierJour = new Date(Date.UTC(annee, cible + 1, 0)).getUTCDate();
+  return new Date(Date.UTC(annee, cible, Math.min(date.getUTCDate(), dernierJour)));
 };
 
 /**

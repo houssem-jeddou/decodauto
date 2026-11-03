@@ -6,15 +6,17 @@ import assert from 'node:assert/strict';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { constatsDoublons, constatsExpressionsInterdites, enTetesDePage, type EnTetesDePage } from '../scripts/lib/dist.ts';
+import { readFile } from 'node:fs/promises';
+import { dateDesDonnees } from './date-des-donnees.ts';
+import { constatsDoublons, constatsEnTetesPresents, constatsExpressionsInterdites, enTetesDePage, type EnTetesDePage } from '../scripts/lib/dist.ts';
 import { chargerDonnees } from '../scripts/lib/charger.ts';
 import { construireDemo } from '../scripts/lib/demo.ts';
-import { construireContexte, dansLeFutur, limiteProchaineRevue } from '../src/lib/controle.ts';
+import { construireContexte, dansLeFutur, limiteProchaineRevue, plusMois } from '../src/lib/controle.ts';
 import { DELAI_REVUE_MOIS, MENTION_EN_TETE } from '../src/lib/charte.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-const maintenant = new Date();
-const AUJOURDHUI = new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate()));
+// Données réelles : la date du contrôle est la plus récente des données (tests/date-des-donnees.ts, DATES-FUTUR).
+const AUJOURDHUI = await dateDesDonnees(racine);
 const jour = (iso: string): Date => new Date(`${iso}T00:00:00Z`);
 const iso = (date: Date | undefined): string | undefined => date?.toISOString().slice(0, 10);
 
@@ -45,21 +47,30 @@ describe('title, H1 et meta description uniques (charte §3.4)', () => {
 describe('expressions interdites dans le texte affiché, hors citations (charte §2.7, §3.1)', () => {
   const codes = (html: string): string[] => constatsExpressionsInterdites(html, 'f').map((c) => c.regle);
 
-  test('[CI] refusées dans le texte, le title et la meta description', () => {
+  test('[CI] refusées dans le texte, le title, la meta description, les textes alternatifs et les libellés', () => {
     assert.deepEqual(codes(document('<p>Nos experts ont vérifié cette page.</p>')), ['EXPRESSION-INTERDITE']);
     assert.deepEqual(codes(document('<p>Une réparation garantie.</p>')), ['EXPRESSION-INTERDITE']);
+    assert.deepEqual(codes(document('<p>Nos équipes vous répondent.</p>')), ['EXPRESSION-INTERDITE']);
     assert.deepEqual(codes(document('<p>Texte.</p>', '<title>Ce que nous conseillons</title>')), ['EXPRESSION-INTERDITE']);
     assert.deepEqual(codes(document('<p>Texte.</p>', '<title>T</title><meta name="description" content="Testé par nos soins.">')), ['EXPRESSION-INTERDITE']);
+    assert.deepEqual(codes(document('<img src="a.jpg" alt="Photo prise par notre équipe">')), ['EXPRESSION-INTERDITE']);
+    assert.deepEqual(codes(document('<a href="/" aria-label="Contacter nos mécaniciens">Contact</a>')), ['EXPRESSION-INTERDITE']);
     // Une expression coupée par une balise en ligne reste vue.
     assert.deepEqual(codes(document('<p>Nos <strong>experts</strong> le disent.</p>')), ['EXPRESSION-INTERDITE']);
+    // Un blockquote ou un q sans source n'est pas une citation : encadré « À retenir » rédigé par le site.
+    assert.deepEqual(codes(document('<blockquote><p>À retenir : nos experts recommandent.</p></blockquote>')), ['EXPRESSION-INTERDITE']);
+    assert.deepEqual(codes(document('<p><q>nous recommandons</q></p>')), ['EXPRESSION-INTERDITE']);
+    // Un guillemet ouvert sans fin n'avale pas les blocs suivants.
+    assert.deepEqual(codes(document('<p>La notice dit : «\u00a0arrêtez-vous.</p><p>Nos experts le confirment.</p><p>Fin\u00a0»</p>')), ['EXPRESSION-INTERDITE']);
   });
 
-  test('[CI] permises dans une citation : guillemets, blockquote, q, cite, extrait du tableau des notices, data-citation', () => {
-    assert.deepEqual(codes(document('<p>La notice dit : « nous vous recommandons de vous arrêter ».</p>')), []);
-    assert.deepEqual(codes(document('<blockquote>Nous vous recommandons de vous arrêter.</blockquote>')), []);
-    assert.deepEqual(codes(document('<p><q>nous recommandons</q></p>')), []);
+  test('[CI] permises dans une citation : guillemets (même imbriqués), blockquote ou q avec leur source, extrait du tableau des notices', () => {
+    assert.deepEqual(codes(document('<p>La notice dit : «\u00a0nous vous recommandons de vous arrêter\u00a0».</p>')), []);
+    assert.deepEqual(codes(document('<p>«\u00a0Si le témoin «\u00a0STOP\u00a0» s’allume, nous vous recommandons de vous arrêter.\u00a0»</p>')), []);
+    assert.deepEqual(codes(document('<blockquote data-source-id="notice-toyota-yaris">Nous vous recommandons de vous arrêter.</blockquote>')), []);
+    assert.deepEqual(codes(document('<blockquote cite="https://exemple.test/notice.pdf">Nous vous recommandons.</blockquote>')), []);
+    assert.deepEqual(codes(document('<p><q data-source-id="notice-toyota-yaris">nous recommandons</q></p>')), []);
     assert.deepEqual(codes(document('<p class="notices-citation">Nous recommandons.</p>')), []);
-    assert.deepEqual(codes(document('<div data-citation><p>Notre équipe technique.</p></div>')), []);
     // Le code et les dessins ne comptent pas non plus.
     assert.deepEqual(codes(document('<p><code>nous</code></p><svg><title>nous</title></svg>')), []);
   });
@@ -73,6 +84,14 @@ describe('expressions interdites dans le texte affiché, hors citations (charte 
     assert.deepEqual(constatsExpressionsInterdites(demo.html, 'demo'), []);
     assert.deepEqual(constatsExpressionsInterdites(demo.htmlMethode, 'methode'), []);
     assert.deepEqual(codes(document(`<p>${MENTION_EN_TETE}</p>`)), []);
+  });
+});
+
+describe('title et meta description présents sur toutes les pages (charte §3.4)', () => {
+  test('title ou meta description vides : TITLE-ABSENT, DESCRIPTION-ABSENTE', () => {
+    const codes = (p: EnTetesDePage): string[] => constatsEnTetesPresents(p).map((c) => c.regle);
+    assert.deepEqual(codes(page('a', 'Titre', 'H1', 'Description.')), []);
+    assert.deepEqual(codes(page('a', '', 'H1', '')), ['TITLE-ABSENT', 'DESCRIPTION-ABSENTE']);
   });
 });
 
@@ -96,6 +115,22 @@ describe('dates cohérentes et délai de revue (charte §8)', () => {
     assert.equal(iso(limiteProchaineRevue('pneus', jour('2026-08-31'), 'loi-montagne')), '2026-10-31');
     // Revue d'avril : 6 mois mènent au 4 octobre, avant le 31 octobre.
     assert.equal(iso(limiteProchaineRevue('pneus', jour('2027-04-04'), 'loi-montagne')), '2027-10-04');
+  });
+
+  test('ajout de mois : le dernier jour du mois quand le jour n’existe pas', () => {
+    assert.equal(iso(plusMois(jour('2026-08-31'), 6)), '2027-02-28');
+    assert.equal(iso(plusMois(jour('2027-08-31'), 6)), '2028-02-29');
+    assert.equal(iso(plusMois(jour('2026-01-31'), 1)), '2026-02-28');
+    assert.equal(iso(plusMois(jour('2026-10-20'), 12)), '2027-10-20');
+  });
+
+  test('le tableau des délais de la charte (docs/10 §8) dit les mêmes délais que le contrôle', async () => {
+    const charte = await readFile(join(racine, 'docs/10_charte_editoriale.md'), 'utf8');
+    const section = charte.slice(charte.indexOf('## 8.'), charte.indexOf('## 9.'));
+    assert.match(section, new RegExp(`\\| Voyant, code défaut, panne, fluide \\| ${DELAI_REVUE_MOIS.voyant} mois`));
+    assert.match(section, new RegExp(`\\| Pneus et obligations \\| ${DELAI_REVUE_MOIS.pneus} mois ; loi montagne revue avant chaque 1er novembre`));
+    assert.match(section, /\| Dossier PureTech \| 3 mois/);
+    for (const type of ['code-defaut', 'panne', 'fluide'] as const) assert.equal(DELAI_REVUE_MOIS[type], DELAI_REVUE_MOIS.voyant);
   });
 
   test('« dans le futur » : un jour de marge sur la date du contrôle (la journée commence plus tôt en France)', () => {

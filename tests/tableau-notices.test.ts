@@ -6,6 +6,7 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { dateDesDonnees } from './date-des-donnees.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, tableauNotices, type LigneAvecCitations } from '../src/lib/tableau-notices.ts';
 import { LIBELLE_LIEN_NOTICES, ancreNotices, encadreDecision, modeleEncadre } from '../src/lib/composants.ts';
 import { hautDePage, tableauNoticesDeLaPage } from '../src/lib/gabarit.ts';
@@ -18,9 +19,8 @@ import { schemasPage } from '../src/schemas/pages.ts';
 import { construireDemo } from '../scripts/lib/demo.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-// Données réelles : la date du contrôle est celle du jour (jour UTC), comme pour la construction (DATES-FUTUR, 6.5).
-const maintenant = new Date();
-const AUJOURDHUI = new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate()));
+// Données réelles : la date du contrôle est la plus récente des données (tests/date-des-donnees.ts, DATES-FUTUR).
+const AUJOURDHUI = await dateDesDonnees(racine);
 
 const notice = (titre: string, url = 'https://exemple.test/notice.pdf') => ({ titre, categorie: 'notice-constructeur', url });
 const REGISTRE = new Map([
