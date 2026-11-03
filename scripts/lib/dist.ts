@@ -463,7 +463,11 @@ export function partCitee(html: string): PartCitee {
 export function constatsTexteRedige(html: string, fichier: string): Constat[] {
   if (!/data-encadre-decision/.test(html)) return [];
   const $ = cheerio.load(html);
-  if (compterMots($('[data-corps]').text()) > 0) return [];
+  const texte = $('[data-corps]').text();
+  // Référence à une notice ({{notice:…}}) restée telle quelle : le rendu Markdown l'a transformée (entités, par
+  // exemple), et le modèle ne l'a pas reconnue.
+  if (texte.includes('{{')) return [erreur('TEXTE-REFERENCE-NON-REMPLACEE', 'texte rédigé : une référence « {{ … }} » est affichée telle quelle (référence à une notice non remplacée)', fichier)];
+  if (compterMots(texte) > 0) return [];
   return [erreur('TEXTE-REDIGE-ABSENT', 'page éditoriale sans texte rédigé (bloc data-corps vide ou absent) : la charte (§4, point 7) demande les réponses aux questions des lecteurs ; le corps Markdown est-il vide, ou son rendu absent ?', fichier)];
 }
 

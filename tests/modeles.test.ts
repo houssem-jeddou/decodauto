@@ -167,6 +167,9 @@ describe('part de texte cité (CITATIONS-PART, charte §2.6)', () => {
     assert.deepEqual(erreurs(constatsTexteRedige(page('<div class="corps" data-corps> </div>'), 'f')), ['TEXTE-REDIGE-ABSENT']);
     assert.deepEqual(constatsTexteRedige(page(`<div class="corps" data-corps><p>${mots(3)}</p></div>`), 'f'), []);
     assert.deepEqual(constatsTexteRedige(page('').replace(' data-encadre-decision', ''), 'f'), []);
+    // Référence restée telle quelle, en clair ou en entités : erreur.
+    assert.deepEqual(erreurs(constatsTexteRedige(page('<div class="corps" data-corps><p>Voir {{notice:notice-peugeot-208}}</p></div>'), 'f')), ['TEXTE-REFERENCE-NON-REMPLACEE']);
+    assert.deepEqual(erreurs(constatsTexteRedige(page('<div class="corps" data-corps><p>Voir &#123;&#123;notice:x&#125;&#125;</p></div>'), 'f')), ['TEXTE-REFERENCE-NON-REMPLACEE']);
   });
 });
 
