@@ -22,7 +22,8 @@
     "empreinte": "node scripts/empreinte.ts",
     "verifier:modes": "node scripts/verifier-modes.ts",
     "production": "node scripts/verifier-production.ts",
-    "paquet": "node scripts/paquet-validation.ts --pictogrammes-obligatoires"
+    "paquet": "node scripts/paquet-validation.ts --pictogrammes-obligatoires",
+    "briefs": "node scripts/briefs.ts"
   },
   "dependencies": {
     "astro": "7.4.2"

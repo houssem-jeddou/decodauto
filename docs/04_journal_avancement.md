@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
+Dernière mise à jour : 03/11/2026 (22 h 45, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,7 +12,7 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 fusionnée (99819a1) ; 6.6 lancé le 03/11 en trois sous-livrables : 6.6a (modèle de page voyant, exemple « voyant moteur ») validé par Houssem le 03/11 (17 h 32), demande de changement n° 9 acceptée, PR #16 fusionnée sur sa demande (06c9c74) ; 6.6b (modèle code défaut, exemple P0087) validé par Houssem le 03/11 (20 h 06), les cinq décisions acceptées, PR #17 fusionnée sur sa demande (89cf208) ; 6.6c (modèle pneus et obligations, exemple loi montagne) lancé le 03/11 (20 h 25), validé par Houssem le 03/11 (21 h 44) avec les recommandations des sept décisions, demande de changement n° 10 acceptée (08 v8), fusion de la PR #18 demandée ; 6.6 terminé ; suivant : 6.8 (briefs de la vague A) | `travaux/etape-6/` |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 fusionnée (99819a1) ; 6.6 lancé le 03/11 en trois sous-livrables : 6.6a (modèle de page voyant, exemple « voyant moteur ») validé par Houssem le 03/11 (17 h 32), demande de changement n° 9 acceptée, PR #16 fusionnée sur sa demande (06c9c74) ; 6.6b (modèle code défaut, exemple P0087) validé par Houssem le 03/11 (20 h 06), les cinq décisions acceptées, PR #17 fusionnée sur sa demande (89cf208) ; 6.6c (modèle pneus et obligations, exemple loi montagne) lancé le 03/11 (20 h 25), validé par Houssem le 03/11 (21 h 44) avec les recommandations des sept décisions, demande de changement n° 10 acceptée (08 v8), PR #18 fusionnée sur sa demande (b98575c) ; 6.6 terminé ; 6.8 (briefs des 22 pages de la vague A, avec la revue du relevé 6.7) validé par Houssem le 03/11 (22 h 41), fusion de la PR #19 demandée ; suivant : 6.9 (porte de sortie) | `travaux/etape-6/` |
 | 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -25,7 +25,7 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
 | Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause depuis 12 h 10 ; reprise quand Houssem la redemande | statut juridique (mentions légales) |
-| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 et 6.5 le 03/11 ; 6.6 lancé et terminé le 03/11 (6.6a, 6.6b et 6.6c validés) ; restent 6.8 et la porte) | séance de validation des exemples voyant, code et pneus |
+| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 et 6.5 le 03/11 ; 6.6 lancé et terminé le 03/11 (6.6a, 6.6b et 6.6c validés) ; 6.8 validé le 03/11 ; reste la porte 6.9) | séance de validation des exemples voyant, code et pneus |
 | 8. Vague A | 29/10–01/11 | ≈ 11–15/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
 | 9. Mise en ligne du minimum | 31/10 | ≈ 14–16/11 | portes 7 et 8 ; sécurité des comptes |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 21–25/11 / ≈ 28/11–02/12 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
@@ -38,7 +38,7 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
 5. ~~texte de la demande de changement n° 5 et redirections Cloudflare~~ : faits le 28/10 (10 h 25) ;
 6. ~~demande de changement n° 6 (coût probable)~~ : faite le 28/10 ;
 7. ~~charte éditoriale (6.2), composants communs (6.3), tableau des notices et demande de changement n° 8 (6.4), contrôles peu coûteux (6.5)~~ : validés le 02/11 et le 03/11 ;
-8. ~~exemples des modèles voyant, code et pneus~~ : validés le 03/11 ; porte 6 vers le 10/11 ;
+8. ~~exemples des modèles voyant, code et pneus~~ : validés le 03/11 ; ~~consignes des briefs (6.8)~~ : validées le 03/11 ; porte 6 vers le 10/11 ;
 9. porte 7 ;
 10. demande de changement des requêtes absentes, juste avant l'étape 8 ;
 11. paquet et encadrés de la vague A, et porte 8 ;
@@ -121,7 +121,7 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
       - page exemple `exemples/code-defaut/code-p0087.md`, construite seulement par la recette.
     - Paquet de validation : `travaux/etape-6/paquet-6.6b-code-p0087.md` (encadré et pièces, sources, fiche, cas par marque, faits du texte, cinq décisions).
     - Deux revues indépendantes (le maximum), corrections intégrées.
-  - [x] **6.6c Modèle de page pneus et obligations**, exemple loi montagne. Lancé le 03/11 (20 h 25) sur le feu vert de Houssem ; présenté le 03/11 (21 h 40) ; validé par Houssem le 03/11 (21 h 44), avec les recommandations des sept décisions ; verrouillé. Empreinte de l'encadré versée (`75abb315…`) après la demande de changement n° 10, attendu R4 retiré, liens vers la carte et les arrêtés ajoutés (contrôle R7-LIEN-EXTERNE), charte §2.3, §2.7, §4 et §9 mises à jour. Fusion de la PR #18 demandée par Houssem.
+  - [x] **6.6c Modèle de page pneus et obligations**, exemple loi montagne. Lancé le 03/11 (20 h 25) sur le feu vert de Houssem ; présenté le 03/11 (21 h 40) ; validé par Houssem le 03/11 (21 h 44), avec les recommandations des sept décisions ; verrouillé. Empreinte de l'encadré versée (`75abb315…`) après la demande de changement n° 10, attendu R4 retiré, liens vers la carte et les arrêtés ajoutés (contrôle R7-LIEN-EXTERNE), charte §2.3, §2.7, §4 et §9 mises à jour. PR #18 fusionnée le 03/11 (21 h 56) sur la demande de Houssem (b98575c) ; CI de `main` verte (run 41717167748 : contrôles, recette des exemples, Lighthouse, déploiement et vérification en production ; aucune page éditoriale publiée).
     - Branche `etape-6/modele-pneus-obligations`, PR #18 (brouillon).
     - Livré :
       - modèle de page pneus et obligations (`src/lib/modeles.ts`, `src/lib/fiche-texte.ts`) : encadré, signature, transparence, fiche « Le texte en bref » (texte de référence et où le lire, période et zones, défaillances et contre-visite), texte rédigé, tableau des notices si un voyant de la base est rattaché, pages liées, sources ;
@@ -131,8 +131,15 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
       - page exemple `exemples/pneus/loi-montagne.md` ; textes relevés le 03/11 dans Chrome (`travaux/etape-6/textes/` : article D314-8 en entier, Sécurité routière, loi n° 85-30 art. 5).
     - Paquet de validation : `travaux/etape-6/paquet-6.6c-loi-montagne.md` (quatre lignes saisies et leurs extraits, coût et pièce nouvelle, sources, fiche, tableau, faits du texte, sept décisions).
     - Deux revues indépendantes (le maximum), corrections intégrées.
-- [x] **6.7 Relevé des résultats Google depuis la France** (28/10) : 19 requêtes principales de la vague A, SerpApi (google.fr, gl=fr, hl=fr, localisation France), empreintes vérifiées après recopie. Branche `etape-6/releve-google-france`, `travaux/etape-6/releve-google-france/` ; constats pour les briefs dans son README. Revue indépendante prévue avec les briefs (6.8), en un seul lot.
-- [ ] **6.8 Briefs des 22 pages de la vague A**, générés depuis le plan et le relevé (les 3 pages du socle n'ont pas de mots-clés).
+- [x] **6.7 Relevé des résultats Google depuis la France** (28/10) : 19 requêtes principales de la vague A, SerpApi (google.fr, gl=fr, hl=fr, localisation France), empreintes vérifiées après recopie. Branche `etape-6/releve-google-france`, `travaux/etape-6/releve-google-france/` ; constats pour les briefs dans son README. Relu avec les briefs (6.8), en un seul lot : trois constats précisés (3, 5 et 7), fichiers et empreintes inchangés ; repris dans la branche des briefs (PR #19).
+- [x] **6.8 Briefs des 22 pages de la vague A**, générés depuis le plan et le relevé. Lancé le 03/11 sur le feu vert de Houssem ; présenté le 03/11 ; consignes validées par Houssem le 03/11 (22 h 41) ; verrouillé. Fusion de la PR #19 demandée.
+  - Branche `etape-6/briefs-vague-a`, PR #19 (brouillon) ; CI verte (run 41723300284 : contrôles, recette des exemples, Lighthouse, production).
+  - Livré :
+    - générateur `npm run briefs` (`scripts/lib/briefs.ts`, `scripts/lib/briefs-donnees.ts`) : plan du site (pages liées dans les deux sens, page mère, pages enfants, avec leur vague), mots-clés et volumes de docs/05, lignes de la base voyants (verdict, urgence, action, notices, écart), sources prévues à l'étape 5, relevé Google France (aperçu IA, résultats, questions des lecteurs et leurs repères), question et lignes des pages exemples ;
+    - briefs `travaux/etape-6/briefs/` (sommaire et un brief par page) ; données internes, jamais publiées ;
+    - consignes de rédaction validées (`consignes.json`, seule partie écrite à la main) : question de décision, angle, élément unique, questions à traiter, sources à trouver avant la rédaction, hors périmètre ; aucun volume, lien, vague ni verdict recopié ;
+    - `tests/briefs.test.ts` (17 tests) : briefs à jour, consignes des 22 pages, question des exemples lue dans l'exemple, ni volume ni vague recopiés (vérifié par mutation), liens dans les deux sens, relevé sur la requête principale et identique à ses empreintes ; `npm test` 379 tests.
+  - Une revue indépendante (« à corriger », rien de bloquant), corrections intégrées.
 - [ ] **6.9 Porte de sortie de l'étape 6.**
 
 ## Étape 7, Socle technique (piste technique) : livrables
@@ -236,6 +243,8 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
 
   PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 - 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 03/11/2026 (22 h 41), Houssem : **valide le livrable 6.8** (« Oui, je valide les consignes ») : les consignes de rédaction des 22 briefs de la vague A (`travaux/etape-6/briefs/consignes.json`), avec le relevé Google France relu (6.7). Il demande la fusion de la PR #19. Restent ouverts, sans décision : le modèle de l'outil voyants (proposition de Claude : piste technique, contrôlée à la porte de l'étape 8 ; à trancher à la porte 6.9) et le texte de référence de la page « pression des pneus » (à chercher au début de l'étape 8 ; demande de changement si aucun ne convient). Suivant : 6.9, porte de sortie de l'étape 6.
+- 03/11/2026 (après 21 h 56), Houssem : **lance le livrable 6.8** (« Lance 6.8 Feu vert »).
 - 03/11/2026 (21 h 44), Houssem : **valide le livrable 6.6c** avec les recommandations des sept décisions (« je te donne le go pour partir avec ta recommandation, avec ce que tu recommandes pour chaque point ») :
   - l'encadré de la page exemple « loi montagne » (quatre lignes saisies et le niveau tiré de chaque citation), avec le coût et la pièce `chaines-a-neige` ; les trois sources ajoutées ; la fiche, le tableau et les faits du texte ;
   - décision 1 : une obligation légale donne « Non, ne poursuivez pas votre trajet », avec une action écrite pour le conducteur en route ; la définition du verdict est notée dans les idées reportées ;
@@ -246,7 +255,7 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
   - décision 6 : ordre de la page pneus et obligations écrit dans la charte §4 ;
   - décision 7 : lien permis dans le texte vers une source de première main citée sur la page (charte §2.7, contrôle R7-LIEN-EXTERNE).
 
-  Il demande la fusion de la PR #18. Le livrable 6.6 est terminé ; suivant : 6.8.
+  Il demande la fusion de la PR #18 (faite à 21 h 56, b98575c). Le livrable 6.6 est terminé ; suivant : 6.8.
 - 03/11/2026 (20 h 25), Houssem : **lance le livrable 6.6c** (« Go, je te donne le feu vert »).
 - 03/11/2026 (20 h 06), Houssem : **valide le livrable 6.6b** avec les recommandations des cinq décisions (« Je valide ta recommandation pour les 5 points ») :
   - l'encadré de la page exemple « code P0087 », avec les pièces des causes et la pièce nouvelle `pompe-a-carburant` ; les six sources secondaires ; la fiche, les cas par marque et les faits du texte ;
@@ -286,6 +295,16 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
 - 02/11/2026 (20 h 19), Houssem : **valide la charte éditoriale avec toutes les recommandations** de sa section 10, **donne son accord sur les textes exacts** (mention en tête, signature, ligne de transparence, section « Méthode ») et **demande la fusion de la PR #12** si tout va bien. 03 passe en v7 (règle 11 alignée). Le livrable 6.2 est verrouillé ; suivant : 6.3, composants communs.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 03/11, livrable 6.8 (briefs de la vague A, avec le relevé 6.7), une revue (« à corriger », rien de bloquant) ; pas de seconde revue, aucune correction ne traitant un point bloquant. Le relecteur a recompté le relevé avec son propre script (213 suggestions et questions, 126 positions, aperçu IA sur 18 requêtes sur 19, domaines) et recalculé les 19 empreintes et les volumes des 22 briefs : conformes.
+  - **Changé** :
+    - liens du plan lus dans un seul sens : 11 briefs sur 22 incomplets ; ils sont lus comme le contrôle du texte les lit, avec un test ;
+    - deux consignes reformulaient une action de la base (frein de stationnement, airbag passager, dont la condition de sécurité disparaissait) : l'action est affichée depuis la base, et aucune consigne ne la reformule ;
+    - pages codes défaut : la ligne de l'encadré n'est attribuée que d'après un document qui cite le voyant (seconde revue de 6.6b) ; pour P0380 et P1351, la notice Seat Ibiza p. 289 relie le témoin de préchauffage qui clignote à un défaut du moteur diesel ; lignes reprises dans l'exemple P0087 affichées ;
+    - pression des pneus : la notice Renault Clio 5 traite la pression à chaud (p. 348) et dit « une fois par mois » (p. 206) ; l'aperçu IA cite le domaine de la Sécurité routière, piste notée ;
+    - volumes, nombres de mots-clés et vagues recopiés dans les consignes : retirés, test ajouté ;
+    - repères (« désactiver », « combien de km », modèles), génération des notices, « ESP et frein à main », questions oubliées (P0087, batterie, outil voyants), exclusions de l'outil (hybrides, deux-roues), champ `carburant` des codes ;
+    - README du relevé : constats 3 (77 avec « frein mini »), 5 (5 questions et 4 recherches associées) et 7 (sites de constructeurs et de manufacturiers de pneus) précisés ; commentaires « validées » corrigés.
+  - **Laissé ouvert** : modèle de l'outil voyants non livré (porte 6.9) ; texte de référence de la page « pression des pneus » ; PDF des notices, Légifrance et textes du contrôle technique non relus (listés dans « Sources à trouver » de chaque brief) ; fidélité du relevé à la réponse de SerpApi (empreintes calculées dans le navigateur).
 - 03/11, livrable 6.6c (modèle de page pneus et obligations, exemple « loi montagne »), deux revues (deux relecteurs), le maximum. Chacune « à corriger », rien de bloquant ; aucun fait faux trouvé.
   - **Première revue, changé** :
     - trois faits sur les chaussettes et les chaînes n'étaient pas dans le relevé : relus sur la page de la Sécurité routière et recopiés ;
@@ -550,21 +569,24 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
   - rien de masqué ni de repliable dans l'encadré ; une icône décorative sans texte peut porter `aria-hidden` ;
   - aucune publicité dedans ni avant ; emplacements marqués `data-emplacement-pub`.
 - Gravité lisible sans la seule couleur (obligatoire, 03 v4) et lien « Signaler une erreur » dans chaque modèle.
-- Brief de chaque page généré depuis le plan, avec les résultats Google relevés depuis la France.
+- ~~Brief de chaque page généré depuis le plan, avec les résultats Google relevés depuis la France~~ : fait en 6.8.
 - Proposition, à décider : photos réelles pour les tutos des vagues B et C.
 - Contrôles peu coûteux : title, H1 ou description en double entre deux pages ; dates incohérentes (la cohérence entre verdict et urgence est avancée à l'étape 5).
 - Élément unique en outil quand la réponse tient en un chiffre (usure, date de fabrication, délai de contre-visite), car l'aperçu IA la donne sans clic.
-- Avant rédaction : comparer les résultats Google de « voyant orange voiture » (outil) et « voyant moteur orange » ; titre des fumées avec la fumée noire, titre du bruit moteur avec le claquement.
+- Avant rédaction : ~~comparer les résultats Google de « voyant orange voiture » (outil) et « voyant moteur orange »~~ (fait en 6.8 : aucune adresse commune, 2 domaines et 1 question communs, deux intentions) ; titre des fumées avec la fumée noire, titre du bruit moteur avec le claquement.
 - Volumes à lire comme des plafonds : dossier PureTech (94 % de noms de moteur ou de modèle), viscosités (surtout intention d'achat), outil voyants (30 % de requêtes « + modèle »), batterie (34 % d'achat par capacité).
 
 ## Points ouverts (non bloquants)
 - **Description des pages du socle** : le schéma du socle n'a pas de champ `description`, et DESCRIPTION-ABSENTE (6.5) l'exige sur toute page construite. Une demande de changement ajoutera ce champ avant de construire « à propos » ou les mentions légales (étape 7).
 - **Adresse de signalement** : `erreur@decodauto.com` créée le 02/11 (redirection OVH vers la boîte de Houssem, sans copie) et publiée sur le site. Réception à confirmer par un courriel de test envoyé depuis une autre adresse.
 - **Texte rédigé des pages voyants (étape 8)** : seuil d'un tiers validé le 03/11. La page ABS/ESP, estimée à 42 % sans texte rédigé, en demandera environ 570 mots ; la page AdBlue environ 280.
-- **Mots-clés de la page voyant moteur à traiter au brief 6.8**, avec leurs sources : « défaut moteur » (message des notices Peugeot et Citroën à lire), perte de puissance (Seat Ibiza p. 289, voyants à vérifier sur le PDF), contrôle technique (texte du contrôle technique sur Légifrance). Vérifications sur les PDF : Toyota p. 297, témoins des messages AdBlue de Renault, Dacia et Peugeot.
-- **Relevé Google France (6.7)** : sur la branche `etape-6/releve-google-france`, pas encore fusionnée ; revue et fusion avec les briefs (6.8).
+- **Mots-clés de la page voyant moteur** (« défaut moteur », perte de puissance, contrôle technique) et vérifications sur les PDF (Seat Ibiza p. 289, Toyota p. 297, témoins des messages AdBlue de Renault, Dacia et Peugeot) : inscrits dans les briefs `voyant-moteur` et `voyant-adblue` (6.8), sources à trouver avant la rédaction de l'étape 8.
+- **Modèle de l'outil voyants** : non livré (`src/lib/modeles.ts`), alors que l'outil est la page de la vague A au plus fort volume ; décision à la porte 6.9 (proposition : piste technique, contrôlée à la porte de l'étape 8).
+- **Page « pression des pneus »** : aucun texte de référence identifié (champ obligatoire du schéma pneus). Pistes à vérifier sur Légifrance : arrêté du 24/10/1994 relatif aux pneumatiques ; contrôle du système de surveillance de la pression au contrôle technique. À chercher au début de l'étape 8 ; demande de changement si aucun ne convient.
+- **`travaux/etape-5/pages-sources.json`** (pression des pneus) dit « au moins une fois par mois » ; la notice Renault Clio 5 p. 206 dit « une fois par mois ». À corriger avec le lot de la page.
+- **Relevé Google France (6.7)** : relu avec les briefs (6.8) et repris dans la PR #19 ; la branche `etape-6/releve-google-france` peut être supprimée après sa fusion.
 - **Notices des marques de référence** : 5 marques lues sur 7 (Citroën et Volkswagen non nécessaires). Les notices Renault et Dacia sont sur user-manual.renault.com et user-manual.dacia.com ; la notice Toyota est sur le portail de son prestataire, ouvert depuis toyota.fr. Le texte relevé est dans `travaux/etape-5/notices/`.
-- **Loi montagne** : les arrêtés préfectoraux listant les communes sont à ajouter au registre à l'étape 8. Aucune page de la Sécurité routière sur la pression des pneus n'a été trouvée.
+- **Loi montagne** : les arrêtés préfectoraux listant les communes sont à ajouter au registre à l'étape 8. Aucune page de la Sécurité routière sur la pression des pneus n'a été trouvée (l'aperçu IA du relevé cite le domaine securite-routiere.gouv.fr : piste notée au brief, 6.8).
 - **Chiffre Volkswagen 2025** (110 960, 6,8 %) : tiré de La Tribune Auto citant PFA / AAA Data, sans source primaire trouvée. Sans effet sur le choix des marques.
 - **Parc par marque** : non publié par le SDES ; les immatriculations 2025 en tiennent lieu.
 - **Annonces automatiques AdSense** (étape 12) : insérées dans le navigateur, invisibles pour le contrôle ; vérifier à la recette qu'elles ne précèdent pas l'encadré.
@@ -575,7 +597,7 @@ Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
 - **DNSSEC** : désactivation chez OVH en cours. Au 23/10, aucun enregistrement DS n'est publié pour decodauto.com.
 - **Application GitHub de Claude** : une demande de mise à jour des permissions attend la décision de Houssem.
 - **Contrôle hebdomadaire** : premier passage le lundi 26/10, vert (run 40327062008, sans déploiement).
-- **Écarts entre la recherche et la base** (relevé du 28/10), à traiter avant la rédaction de l'étape 8, sans toucher à la base validée :
+- **Écarts entre la recherche et la base** (relevé du 28/10), à traiter avant la rédaction de l'étape 8, sans toucher à la base validée (consignes dans les briefs, 6.8) :
   - la page préchauffage est dominée par « voyant qui clignote (en roulant) » (7 recherches associées sur 8), absent de la base ;
   - « verbalisation abandonnée » pour la loi montagne : le régime des sanctions est à vérifier sur les textes officiels ;
   - le témoin d'usure des plaquettes est en tête pour « voyant frein » (D4 confirmé) ;
