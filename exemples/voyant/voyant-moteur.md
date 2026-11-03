@@ -3,9 +3,9 @@
 # src/content et n'est construit que par la construction de recette (AVEC_EXEMPLES=1, dist-exemples). Il deviendra la
 # page « voyant moteur » de la vague A (étape 8). Les lignes de l'encadré viennent de la base voyants validée.
 id: voyant-moteur
-title: "Voyant moteur orange allumé : peut-on rouler ? Que faire"
+title: "Voyant moteur orange allumé : peut-on rouler ? Que faire ?"
 h1: "Voyant moteur orange, fixe ou clignotant : que faire ?"
-description: "Voyant moteur orange, fixe ou clignotant, ou rouge : la consigne la plus prudente des cinq notices lues est de s'arrêter dès que possible sans danger. Consigne de chaque marque, causes et coût probable."
+description: "Voyant moteur orange, fixe ou clignotant, ou rouge : la consigne la plus prudente des notices lues est de s'arrêter dès que possible sans danger. Consigne de chaque marque et coût probable."
 libelle_court: Voyant moteur
 question_decision: Puis-je continuer à rouler avec le voyant moteur allumé ?
 situations:
@@ -44,7 +44,7 @@ date_revue: 2026-11-03
 prochaine_revue: 2027-11-03
 causes:
   - cause: Défaut du système antipollution
-    explication: "Pour le voyant orange fixe, les notices Peugeot 208, Seat Ibiza, Renault Clio 5 phase 2 et Dacia Sandero 3 désignent le système qui contrôle les gaz d'échappement. Elles ne nomment pas de pièce : elles demandent de faire contrôler le moteur."
+    explication: "Pour le voyant orange fixe, les notices Peugeot 208, Seat Ibiza, Renault Clio 5 phase 2 et Dacia Sandero 3 désignent le système qui contrôle les gaz d'échappement ; la notice Peugeot 208 cite aussi une défaillance mineure du moteur. Elles ne nomment pas de pièce : elles demandent de consulter un réparateur ou le réseau de la marque."
     pieces:
       - capteur-ou-sonde
   - cause: Défaut d'une commande électronique (moteur, papillon, boîte)
@@ -54,11 +54,11 @@ causes:
       - capteur-ou-sonde
       - faisceau-et-connecteurs
   - cause: Défaut de combustion qui menace le catalyseur (voyant qui clignote)
-    explication: "Quand le voyant clignote, la notice Seat Ibiza signale un dysfonctionnement de combustion susceptible d'endommager le catalyseur, et la notice Peugeot 208 un risque de destruction du catalyseur. Le coût probable de cette cause est celui du catalyseur, la pièce menacée."
+    explication: "Quand le voyant clignote, la notice Seat Ibiza signale un dysfonctionnement de combustion susceptible d'endommager le catalyseur, et la notice Peugeot 208 un risque de destruction du catalyseur. Elles ne nomment pas la pièce en défaut : la tranche de coût de cette cause est celle du catalyseur, que le défaut peut endommager."
     pieces:
       - catalyseur
   - cause: Défaillance grave du moteur (voyant rouge ou STOP)
-    explication: "La notice Peugeot 208 l'annonce par le voyant rouge (« défaillance majeure du moteur ») ; les notices Renault Clio 5 phase 2 et Dacia Sandero 3, par le témoin STOP et le message « Risque casse moteur » : défaillance de l'injection, surchauffe du moteur ou problème grave au niveau du moteur."
+    explication: "La notice Peugeot 208 l'annonce par le voyant rouge (« défaillance majeure du moteur ») ; les notices Renault Clio 5 phase 2 et Dacia Sandero 3, par le message « Risque casse moteur » : défaillance de l'injection, surchauffe du moteur ou problème grave au niveau du moteur."
     pieces:
       - injecteurs
       - moteur
@@ -66,24 +66,55 @@ causes:
 
 ## Peut-on rouler avec le voyant moteur orange allumé ?
 
-Une idée répandue veut qu'on puisse continuer à rouler avec le voyant moteur orange fixe. Quatre des cinq notices lues permettent en effet de rouler jusqu'au garage, à consulter rapidement ou au plus tôt selon la marque. La notice Toyota Yaris demande, elle, d'arrêter immédiatement le véhicule dans un endroit sûr. Le verdict en haut de page retient cette consigne, la plus prudente.
+Le verdict en haut de page retient la consigne la plus prudente des notices lues : celle de la Toyota Yaris, qui demande d'arrêter immédiatement le véhicule dans un endroit sûr. Une idée répandue veut pourtant qu'on puisse continuer à rouler avec le voyant orange fixe : les autres notices lues le permettent, pour aller au garage au plus tôt ou rapidement selon la marque (détail dans l'encadré et dans le tableau plus bas).
 
-Si la notice de votre voiture permet de rouler jusqu'au garage, faites-le sans attendre, en roulant prudemment. Le tableau plus bas cite la consigne de chaque notice lue, avec son édition et sa page.
+Arrêtez-vous donc dès que vous pouvez le faire sans danger, puis regardez la notice de votre voiture : ne repartez que si elle permet de rouler jusqu'au garage, et faites alors contrôler le moteur sans attendre.
+
+Les notices lues pour cette page sont celles de ces modèles ; pour une autre génération ou un autre modèle, c'est la notice de votre voiture qui fait foi :
+
+- {{notice:notice-dacia-sandero-3}}
+- {{notice:notice-peugeot-208}}
+- {{notice:notice-renault-clio-5}}
+- {{notice:notice-seat-ibiza}}
+- {{notice:notice-toyota-yaris}}
+
+Le nom du voyant change d'une notice à l'autre : le tableau plus bas donne, avec chaque consigne, la section de la notice où la trouver.
+
+## Le voyant s'allume au démarrage, puis s'éteint
+
+Selon les notices Renault Clio 5 phase 2 (p. 139) et Dacia Sandero 3 (p. 113), le témoin de contrôle du système antipollution s'allume au démarrage du moteur, puis s'éteint. La notice Peugeot 208 précise que le témoin doit s'éteindre au démarrage du moteur (p. 15). La consigne de l'encadré vaut quand il reste allumé, ou quand il s'allume en roulant.
 
 ## Voyant moteur qui clignote
 
-Pour les notices Peugeot 208 et Seat Ibiza, le clignotement est plus grave que le voyant fixe : la première annonce un risque de destruction du catalyseur, la seconde un dysfonctionnement de combustion susceptible de l'endommager. C'est le risque si vous continuez de rouler, affiché avec le coût probable en haut de page.
+Pour les notices Peugeot 208 et Seat Ibiza, le clignotement annonce une conséquence plus grave que le voyant fixe : un risque de destruction du catalyseur (Peugeot 208, p. 15), un dysfonctionnement de combustion susceptible de l'endommager (Seat Ibiza, p. 288).
+
+Les notices Renault Clio 5 phase 2 et Dacia Sandero 3 demandent de réduire le régime moteur jusqu'à ce que le clignotement cesse, puis de consulter au plus tôt un représentant de la marque (p. 139 et p. 113) : le clignotement qui cesse ne dispense pas de cette visite.
+
+## Voyant moteur rouge ou message « Risque casse moteur »
+
+C'est une alerte d'arrêt dans les notices lues. La notice Peugeot 208 l'annonce par le voyant d'autodiagnostic moteur rouge : une défaillance majeure du moteur est détectée, et l'arrêt du véhicule est impératif (p. 13). Sur les Renault Clio 5 phase 2 et Dacia Sandero 3, le message « Risque casse moteur » indique une défaillance de l'injection, une surchauffe du moteur ou un problème grave au niveau du moteur ; ces notices demandent un arrêt immédiat, moteur coupé et sans le redémarrer (p. 125 et p. 102).
+
+Pour un autre modèle de ces marques, une Clio 4 ou une Mégane par exemple, c'est la notice de votre voiture qui fait foi.
+
+## « Antipollution à contrôler » ou système d'antipollution défaillant
+
+Sur la Renault Clio 5 phase 2, le message « Antipollution à contrôler » indique une défaillance du système de dépollution. Il fait partie des messages qui demandent de s'arrêter au plus tôt chez un représentant de la marque, en conduisant avec ménagement (p. 124). La notice Peugeot 208 dit, pour le voyant moteur orange fixe, que le système d'antipollution est défaillant (p. 15).
 
 ## Combien de kilomètres peut-on faire ?
 
-Les passages des cinq notices lues sur ce voyant ne donnent aucune distance. Ils donnent un délai à la place : immédiatement, au plus tôt, rapidement, ou jusqu'à l'atelier le plus proche, selon la marque et selon que le voyant est fixe ou clignote.
+Pour le voyant moteur, les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : s'arrêter, ou consulter au plus tôt ou rapidement, selon la marque et selon que le voyant est fixe ou clignote.
+
+Les seules distances trouvées concernent les moteurs diesel équipés d'AdBlue, et ce qui reste à parcourir avant que le moteur ne puisse plus démarrer :
+
+- notice Peugeot 208 : quand le témoin AdBlue clignote avec le témoin d'autodiagnostic moteur fixe, il est possible, selon le message affiché, de parcourir jusqu'à 1 100 km avant le blocage du démarrage. La notice demande d'aller au plus tôt dans le réseau de la marque ou dans un atelier qualifié pour l'éviter (p. 16) ;
+- notices Renault Clio 5 phase 2 et Dacia Sandero 3 : le message « XXX KM blocage antipollution » indique une défaillance du système et qu'il reste moins de 800 km avant que le redémarrage soit impossible. Elles demandent de consulter un représentant de la marque le plus tôt possible (p. 167 et p. 139).
 
 ## Comment éteindre le voyant moteur ?
 
-Les notices lues ne donnent aucune manipulation pour éteindre ce voyant : elles demandent de faire contrôler le moteur. La notice Peugeot 208 précise que le témoin doit s'éteindre au démarrage du moteur ; s'il reste allumé, le système d'antipollution est défaillant.
+Aucune des notices lues ne donne de manipulation pour éteindre ce voyant : elles demandent de consulter un réparateur ou le réseau de la marque.
 
-Quand le voyant clignote, les notices Renault Clio 5 phase 2 et Dacia Sandero 3 demandent de réduire le régime moteur jusqu'à ce que le clignotement cesse, puis de consulter au plus tôt un représentant de la marque : le clignotement qui cesse ne dispense pas du contrôle.
+Un seul cas où il s'éteint de lui-même est décrit, par la notice Toyota Yaris : sur certains modèles, le voyant s'allume si le réservoir de carburant devient complètement vide. Il faut alors faire le plein, et le voyant s'éteint après plusieurs trajets ; s'il ne s'éteint pas, la notice demande de contacter un réparateur dès que possible (p. 297).
 
 ## La voiture roule normalement, mais le voyant est allumé
 
-Les notices lues ne font pas d'exception quand la voiture semble rouler normalement : la consigne reste celle du voyant, fixe ou clignotant.
+Les notices lues ne font pas d'exception quand la voiture semble rouler normalement, hormis le cas du réservoir vidé décrit plus haut : la consigne reste celle du voyant, fixe ou clignotant.
