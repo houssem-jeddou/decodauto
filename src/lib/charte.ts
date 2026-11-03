@@ -171,6 +171,15 @@ export const DELAI_REVUE_MOIS = { voyant: 12, 'code-defaut': 12, panne: 12, flui
  */
 export const REVUE_LOI_MONTAGNE = { moisDebutFenetre: 9, jourLimite: 31, moisLimite: 10 } as const;
 
+/**
+ * Part maximale de texte cité sur une page éditoriale (charte §2.6, livrable 6.6) : mots des extraits de notices, des
+ * citations sourcées (`blockquote`, `q`) et du texte entre guillemets « … », sur les mots du texte affiché hors fil
+ * d'Ariane, « Sources », renvois de page et liens de navigation (contrôle CITATIONS-PART). La loi ne fixe aucun seuil
+ * (article L122-5, 3° a, du code de la propriété intellectuelle) : la page doit rester d'abord un texte du site, que les
+ * citations servent. Seuil proposé à Houssem avec le livrable 6.6a, mesuré sur la page exemple « voyant moteur ».
+ */
+export const PART_CITEE_MAX = 1 / 3;
+
 /** La notice du lecteur fait foi pour son véhicule (section « Méthode », repris par le tableau des notices, 6.4). */
 export const NOTICE_FAIT_FOI = 'La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.';
 
