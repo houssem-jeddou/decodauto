@@ -66,6 +66,30 @@
     "date_consultation": "2026-10-24"
   },
   {
+    "id": "loi-85-30-art-5",
+    "titre": "Loi n° 85-30 du 9 janvier 1985 relative au développement et à la protection de la montagne, article 5 (massifs)",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000033745623",
+    "date_consultation": "2026-11-03"
+  },
+  {
+    "id": "securite-routiere-equipements-hivernaux",
+    "titre": "Sécurité routière — Nouveaux équipements hivernaux",
+    "editeur": "Délégation à la sécurité routière (securite-routiere.gouv.fr)",
+    "categorie": "securite-routiere",
+    "url": "https://www.securite-routiere.gouv.fr/chacun-son-mode-de-deplacement/dangers-de-la-route-en-voiture/equipement-de-la-voiture/nouveaux",
+    "date_consultation": "2026-11-03"
+  },
+  {
+    "id": "securite-routiere-equipements-hivernaux-departements",
+    "titre": "Sécurité routière — Équipements hivernaux : départements et communes (arrêtés préfectoraux)",
+    "editeur": "Délégation à la sécurité routière (securite-routiere.gouv.fr)",
+    "categorie": "securite-routiere",
+    "url": "https://www.securite-routiere.gouv.fr/equipements-hivernaux-departements-et-communes",
+    "date_consultation": "2026-11-03"
+  },
+  {
     "id": "arrete-2025-12-08-depannage-autoroute",
     "titre": "Arrêté du 8 décembre 2025 modifiant l'arrêté du 12 juillet 2016 relatif au tarif de dépannage des véhicules légers sur autoroutes et routes express (tarifs 2026)",
     "editeur": "Légifrance",
