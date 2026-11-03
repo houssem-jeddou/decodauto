@@ -812,6 +812,13 @@
     "explication": "Page pneus : prochaine revue à plus de 6 mois (charte §8)."
   },
   {
+    "nom": "valide-loi-montagne-arret",
+    "type": "pneus",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Loi montagne avec un verdict « non » (obligation d'équipement) : le dépannage sur autoroute ne s'affiche pas de lui-même (demande de changement n° 10)."
+  },
+  {
     "nom": "dates-revue-loi-montagne",
     "type": "pneus",
     "erreurs": [

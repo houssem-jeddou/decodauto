@@ -95,10 +95,14 @@ export function calculerChamps(
   return resultat.success ? resultat.data : undefined;
 }
 
-/** Ce que le calcul du coût reçoit d'une page : page outil ou non, causes (voyant, code défaut, panne), coût déclaré. */
+/**
+ * Ce que le calcul du coût reçoit d'une page : page outil ou non, page loi montagne (sans montant automatique,
+ * demande de changement n° 10), causes (voyant, code défaut, panne), coût déclaré.
+ */
 export function entreeCout(page: PageEditoriale): Parameters<typeof resoudreCout>[0] {
   return {
     outil: 'outil' in page && page.outil === true,
+    sansMontantAutomatique: 'sujet' in page && page.sujet === 'loi-montagne',
     causes: 'causes' in page ? page.causes : undefined,
     cout: page.cout_probable,
   };

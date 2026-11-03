@@ -410,7 +410,7 @@ function coutResolu(page: Objet) {
   const declare = (page['cout_probable'] as Objet | undefined) ?? {};
   const causes = Array.isArray(page['causes']) ? (page['causes'] as Objet[]).map((c) => ({ pieces: Array.isArray(c['pieces']) ? (c['pieces'] as string[]) : [] })) : undefined;
   const arret = lignesAffichees(page).some((l) => String(l['verdict']).startsWith('non'));
-  return resoudreCout({ outil: page['outil'] === true, causes, cout: declare as never }, DONNEES_COUTS, arret);
+  return resoudreCout({ outil: page['outil'] === true, sansMontantAutomatique: page['sujet'] === 'loi-montagne', causes, cout: declare as never }, DONNEES_COUTS, arret);
 }
 
 /** Coût affiché dans l'encadré, calculé comme le fera le gabarit : plage, risque, montants et leurs dates, prises en charge. */
@@ -673,6 +673,14 @@ invalide('dates-modification-avant-publication', 'fluide', { ...fluide(), date_p
 invalide('dates-futur', 'fluide', { ...fluide(), date_modification: '2026-11-15' }, ['DATES-FUTUR'], 'Date de modification dans le futur : la signature afficherait une date fausse.');
 invalide('dates-revue-delai', 'fluide', { ...fluide(), prochaine_revue: '2027-12-01' }, ['DATES-REVUE-DELAI'], 'Prochaine revue à plus de 12 mois de la dernière (charte §8).');
 invalide('dates-revue-delai-pneus', 'pneus', { ...pneus(), prochaine_revue: '2027-05-01' }, ['DATES-REVUE-DELAI'], 'Page pneus : prochaine revue à plus de 6 mois (charte §8).');
+valide(
+  'valide-loi-montagne-arret',
+  'pneus',
+  loiMontagne({
+    situations: [{ situation: 'Sans équipement, dans une commune soumise à l\'obligation', verdict: 'non, arrêt dès que possible', urgence: 'immédiate', action: 'S\'équiper avant d\'entrer dans la zone.', citations: [citation('fixture-legifrance', ['non, arrêt dès que possible', 'immédiate'])] }],
+  }),
+  'Loi montagne avec un verdict « non » (obligation d\'équipement) : le dépannage sur autoroute ne s\'affiche pas de lui-même (demande de changement n° 10).',
+);
 invalide('dates-revue-loi-montagne', 'pneus', loiMontagne({ date_revue: '2026-06-01', prochaine_revue: '2026-11-15' }), ['DATES-REVUE-DELAI'], 'Loi montagne revue en juin : la suivante tombe avant le 1er novembre, début de la saison (charte §8).');
 invalide('dates-journal-hors-periode', 'dossier', { ...dossier(), journal_modifications: [{ date: '2026-09-15', resume: 'Entrée antérieure à la publication.' }] }, ['DATES-ORDRE'], "Entrée du journal d'un dossier hors de la période de la page.");
 invalide('dates-socle-futur', 'socle', { ...socle(), date_modification: '2026-12-01' }, ['DATES-FUTUR'], 'Page du socle datée dans le futur.');
