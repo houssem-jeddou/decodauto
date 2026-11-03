@@ -6,6 +6,7 @@ Précision validée avec le livrable 6.4 (03/11/2026, 13 h 48) : article L122-5 
 Précisions validées avec le livrable 6.5 (03/11/2026, 15 h 14) : revue de la loi montagne avant chaque 1er novembre (§8) ; « nos équipes » et « nos rédactions » parmi les expressions interdites (§2.7).
 Précisions validées avec le livrable 6.6a (03/11/2026, 17 h 32) : part de texte cité au plus un tiers et texte rédigé exigé (§2.6) ; ordre du corps des pages voyants et marche à suivre (§4, demande de changement n° 9) ; contrôles ajoutés (§9).
 Précisions validées avec le livrable 6.6b (03/11/2026, 20 h 06) : sources techniques secondaires des pages codes défaut (§2.2) ; cas d'un autre marché (§2.5) ; sources secondaires distinguées des « autres sites » (§2.6) ; noms de moteur (§3.3) ; corps des pages codes défaut et consigne d'un code lu sans voyant (§4) ; contrôles ajoutés (§9).
+Précisions validées avec le livrable 6.6c (03/11/2026, 21 h 44) : montant cité par sa référence (§2.3) ; lien vers une source officielle citée (§2.7) ; corps des pages pneus et obligations (§4) ; contrôles ajoutés (§9).
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -47,6 +48,7 @@ Précisions validées avec le livrable 6.6b (03/11/2026, 20 h 06) : sources tech
 - Il vient de l'échelle (tranches de `src/schemas/cout.ts`) et des pièces de `data/couts.json` : jamais une tranche ou un montant écrit à la main dans le texte.
 - Un montant en euros n'apparaît que s'il est fixé par un texte officiel ou tiré d'une fourchette de `data/couts.json` (deux sources d'éditeurs différents, datée) ; jamais le prix d'une enseigne ou d'un garage (règle 5 de 01).
 - Le texte peut expliquer ce qui fait varier le coût (cause, modèle, pièce), sans chiffre inventé, et renvoyer au devis.
+- Un montant cité dans le texte rédigé l'est par sa référence (`{{montant:…}}`, montant déclaré dans le coût de la page), jamais recopié ; de même, un verdict s'y cite par sa référence (`{{verdict:…}}`, ou `{{verdict:ligne-n}}` pour la n-ième ligne de l'encadré) (validé avec le livrable 6.6c).
 
 ### 2.4 Prudence
 - En cas de doute : recommander l'avis d'un professionnel, et dire ce qu'on ne sait pas.
@@ -71,7 +73,7 @@ Précisions validées avec le livrable 6.6b (03/11/2026, 20 h 06) : sources tech
 - Une expertise, une équipe, une garantie ou une certification qu'on n'a pas : « nos experts », « nos mécaniciens », « notre équipe », « nos équipes », « testé par nos soins », « résultat garanti », « contenu certifié ». Restent permis les mots qui désignent autre chose : la garantie légale ou constructeur, l'extension de garantie, l'expert de l'assurance, le modèle Peugeot Expert. La liste est dans le code (`EXPRESSIONS_INTERDITES`, `src/lib/charte.ts`), testée sur les textes affichés de la charte, avec ses cas permis ; sur les pages, hors citations, contrôlée depuis 6.5 (EXPRESSION-INTERDITE).
 - Une promesse de résultat (« ça va régler le problème »), un « toujours » ou un « jamais » sans source.
 - Un dénigrement de marque, de garage ou de concurrent.
-- Un lien écrit dans le texte vers une page qui n'est pas liée dans le plan du site (contrôle R7-LIEN-HORS-PLAN).
+- Un lien écrit dans le texte vers une page qui n'est pas liée dans le plan du site (contrôle R7-LIEN-HORS-PLAN). Un lien vers un autre site n'est permis que vers une source de première main citée sur la page, à son adresse du registre, avec un texte qui dit où il mène (validé avec le livrable 6.6c ; contrôle R7-LIEN-EXTERNE).
 
 ## 3. Règles de forme
 ### 3.1 Ton
@@ -119,7 +121,7 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
    - pages codes défaut (modèle validé avec le livrable 6.6b) : fiche du code (signification, portée, moteurs concernés, voyant qui s'allume, puis la consigne d'un code lu sans ce voyant allumé, « Demandez l'avis d'un professionnel », et la source de la signification) ; cas décrits par marque, élément unique quand c'est un tableau ; causes ; texte rédigé, avec la marche à suivre ;
    - pages pannes : symptômes, causes, marche à suivre ;
    - pages fluides : rôle, niveau, appoint, marche à suivre ;
-   - pages pneus et obligations : texte de référence, ce qui est exigé, période et zones (loi montagne), marche à suivre ;
+   - pages pneus et obligations (modèle validé avec le livrable 6.6c) : fiche « Le texte en bref », en haut de page (texte de référence et où le lire ; selon le sujet, période et zones, ou défaillances et contre-visite), puis texte rédigé : ce qui est exigé (avec l'élément unique quand c'est un tableau du texte, marqué `{{tableau}}`), questions des lecteurs, marche à suivre ;
    - dans tous les cas : l'élément unique (arbre de décision, tableau, outil ou photo réelle) et les questions des lecteurs relevées sur Google (« peut-on rouler », « combien de kilomètres », « comment enlever le voyant »…) ; sur les pages qui ont des causes (voyant, code défaut, panne), chaque cause avec sa tranche de coût.
 8. **Sources** : toute source citée sur la page (lignes de la base, lignes saisies, coût, texte de référence), avec son titre, son éditeur, la page ou la section, et sa date de consultation.
 9. **Lien « Signaler une erreur ».**
@@ -307,6 +309,7 @@ Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5
 - **Ajouté en 6.5** (contrôles peu coûteux, validé le 03/11) : title, H1 et description uniques et présents ; dates cohérentes (jamais dans le futur, modification après publication, délai de revue du type) ; expressions interdites dans le texte des pages, hors citations. Limite laissée à la recette : la source d'un texte entre guillemets n'est pas vérifiable par la machine.
 - **Ajouté en 6.6a** (modèle de page voyant, validé le 03/11) : texte rédigé présent (TEXTE-REDIGE-ABSENT) ; part de texte cité au plus un tiers (CITATIONS-PART) ; références du texte rédigé tirées des sources de vérité (notice avec sa génération et son édition, libellé du verdict, page citée ajoutée à « Sources ») et refusées si elles sont fausses ; aucune page construite sans fichier de contenu (R7-PAGE-SANS-CONTENU).
 - **Ajouté en 6.6b** (modèle de page code défaut, validé le 03/11) : fiche du code au texte exact (CODE-FICHE-ABSENTE, CODE-FICHE-INCOMPLETE) ; cas décrits par marque, une rangée par précision du contenu, triées par marque, au texte exact, avec leurs sources, et l'élément unique « tableau » porté par ce tableau (CODE-CAS-MARQUE-INCOMPLET).
+- **Ajouté en 6.6c** (modèle de page pneus et obligations, validé le 03/11) : fiche « Le texte en bref » au texte exact (FICHE-TEXTE-ABSENTE, FICHE-TEXTE-INCOMPLETE) et nature du texte de référence conforme au registre (R7-TEXTE-REFERENCE-NATURE) ; références du texte rédigé (verdict d'une ligne de l'encadré, montant validé, tableau du texte comme élément unique) refusées si elles sont mal placées ; lien vers un autre site seulement vers une source officielle citée (R7-LIEN-EXTERNE) ; pas de dépannage automatique sur une page loi montagne (demande de changement n° 10). Limite laissée à la recette : une phrase qui cite le verdict d'une ligne par son numéro est relue si l'ordre de l'encadré change.
 - **Recette** (passée par Claude page par page, puis relue par l'agent indépendant avec le lot) :
   - ton et vocabulaire (section 3) ;
   - aucune phrase sans source ni utilité (1 et 2.2) ;
