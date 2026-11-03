@@ -1,8 +1,9 @@
 // Modèles de pages et exemples rédigés (étape 6, livrable 6.6) : modèle de chaque type, ordre des blocs d'une page
 // voyant, page exemple « voyant moteur » (exemples/, jamais publiée), part de texte cité (CITATIONS-PART), construction
-// de recette (--exemples) et page construite sans fichier de contenu (R7-PAGE-SANS-CONTENU). Les tests marqués [CI]
-// lisent le HTML avec cheerio. Le rendu Markdown réel est celui d'Astro (job « Recette des exemples » de la CI) : ici,
-// le corps de l'exemple est converti par une fonction minimale, suffisante pour ses titres et paragraphes.
+// de recette (--exemples, erreurs attendues), texte rédigé présent (TEXTE-REDIGE-ABSENT) et page construite sans fichier
+// de contenu (R7-PAGE-SANS-CONTENU). Les tests marqués [CI] lisent le HTML avec cheerio. Le rendu Markdown réel est celui
+// d'Astro (job « Recette des exemples » de la CI) : ici, le corps de l'exemple est converti par une fonction minimale,
+// suffisante pour ses titres, paragraphes et listes à puces.
 import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -10,12 +11,13 @@ import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { dateDesDonnees } from './date-des-donnees.ts';
-import { MODELES, corpsRedige, modeleDeLaPage, pageVoyant } from '../src/lib/modeles.ts';
+import { MODELES, corpsRedige, modeleDeLaPage, nomCompletNotice, pageVoyant } from '../src/lib/modeles.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
 import { DOSSIER_EXEMPLES, chargerPages, lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
 import { documentHtml } from '../scripts/lib/demo.ts';
 import { AUTEUR_DES_EXEMPLES, controlerSite } from '../scripts/lib/controler-site.ts';
-import { compterMots, constatsExpressionsInterdites, constatsIdentifiants, constatsPartCitee, constatsTypographie, partCitee } from '../scripts/lib/dist.ts';
+import { compterMots, constatsExpressionsInterdites, constatsIdentifiants, constatsPartCitee, constatsTexteRedige, constatsTypographie, partCitee } from '../scripts/lib/dist.ts';
+import { appliquerAttendus, lireAttendus } from '../scripts/lib/attendus.ts';
 import { controlerPage, type Constat } from '../src/lib/controle.ts';
 import { PART_CITEE_MAX } from '../src/lib/charte.ts';
 import { INSECABLE } from '../src/lib/html.ts';
@@ -29,16 +31,18 @@ const EXEMPLE = 'exemples/voyant/voyant-moteur.md';
 const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', 'tests/demo/voyant-huile.md', EXEMPLE]);
 const erreurs = (constats: readonly Constat[]): string[] => constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle).sort();
 
-/** Conversion minimale du corps Markdown de l'exemple : titres « ## » et paragraphes (le vrai rendu est celui d'Astro). */
+/** Conversion minimale du corps Markdown de l'exemple : titres « ## », paragraphes et listes à puces « - » (le vrai rendu est celui d'Astro). */
 function corpsMinimal(markdown: string): string {
   return markdown
     .trim()
     .split(/\n{2,}/)
     .map((bloc) => {
-      const titre = /^(#{2,4}) (.+)$/.exec(bloc.trim());
+      const texte = bloc.trim();
+      const titre = /^(#{2,4}) (.+)$/.exec(texte);
       if (titre !== null) return `<h${titre[1]?.length}>${titre[2]}</h${titre[1]?.length}>`;
-      assert.ok(!/^[-*\d]/.test(bloc.trim()), `bloc non pris en charge par la conversion minimale : ${bloc.slice(0, 40)}`);
-      return `<p>${bloc.replace(/\s*\n\s*/g, ' ')}</p>`;
+      if (texte.startsWith('- ')) return `<ul>${texte.split(/\n- /).map((item) => `<li>${item.replace(/^- /, '').replace(/\s*\n\s*/g, ' ')}</li>`).join('')}</ul>`;
+      assert.ok(!/^[*\d#>]/.test(texte), `bloc non pris en charge par la conversion minimale : ${texte.slice(0, 40)}`);
+      return `<p>${texte.replace(/\s*\n\s*/g, ' ')}</p>`;
     })
     .join('');
 }
@@ -64,12 +68,25 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.deepEqual(Object.keys(MODELES), ['voyant']);
   });
 
-  test('texte rédigé : vide → rien ; sinon un bloc data-corps, typographié (espace insécable avant « ? », apostrophe)', () => {
-    assert.equal(corpsRedige('  '), '');
-    const html = corpsRedige("<h2>Peut-on rouler ?</h2><p>L'huile.</p>");
+  test('texte rédigé : vide → rien ; sinon un bloc data-corps, typographié (espace insécable avant « ? », apostrophe)', async () => {
+    const { page, site } = await exemple();
+    assert.equal(corpsRedige('  ', page, site), '');
+    const html = corpsRedige("<h2>Peut-on rouler ?</h2><p>L'huile.</p>", page, site);
     assert.match(html, /^<div class="corps" data-corps>/);
-    assert.match(html, /rouler ? ?\?|rouler&nbsp;\?/);
+    assert.ok(html.includes(`rouler${INSECABLE}?`), html);
     assert.match(html, /L’huile/);
+  });
+
+  test('références aux notices : marque, modèle, génération et édition tirées du registre ; notice inconnue ou hors des sources de la page : la construction échoue', async () => {
+    const { page, site } = await exemple();
+    const peugeot = site.sources.get('notice-peugeot-208');
+    assert.ok(peugeot !== undefined);
+    assert.equal(nomCompletNotice(peugeot), "Peugeot 208 (2e génération), guide d'utilisation édition 01-20");
+    const html = corpsRedige('<ul><li>{{notice:notice-peugeot-208}}</li></ul>', page, site);
+    assert.ok(html.includes('Peugeot 208 (2e génération), guide d’utilisation édition 01-20'), html);
+    assert.throws(() => corpsRedige('<p>{{notice:notice-inconnue}}</p>', page, site), /aucune notice de constructeur/);
+    assert.throws(() => corpsRedige('<p>{{notice:notice-peugeot-208}}</p>', { ...page, sources: ['notice-seat-ibiza'] }, site), /pas dans les sources de la page/);
+    assert.throws(() => corpsRedige('<p>{{notice: notice-peugeot-208}}</p>', page, site), /référence illisible/);
   });
 
   test('page voyant : encadré, signature, transparence, texte rédigé, causes, tableau des notices (élément unique), sources, dans cet ordre', async () => {
@@ -93,11 +110,11 @@ describe('page exemple « voyant moteur » (exemples/, jamais publiée)', () => 
     assert.ok(avecExemples.some((p) => p.fichier === EXEMPLE));
   });
 
-  test('[CI] frontmatter valide ; page construite : seule manque l’empreinte de validation de son encadré (R4), donnée après la validation de Houssem', async () => {
+  test('[CI] frontmatter valide ; page construite : sans erreur, hormis l’empreinte de validation tant que Houssem n’a pas validé l’encadré (R4)', async () => {
     const { brut, contexte, constats, html } = await exemple();
     assert.deepEqual(erreurs(constats), []);
     const resultat = controlerPage({ type: 'voyant', brut, fichier: EXEMPLE }, contexte, html);
-    assert.deepEqual(erreurs(resultat.constats), ['R4-VALIDATION-ABSENTE']);
+    assert.deepEqual(erreurs(resultat.constats), brut['validation'] === undefined ? ['R4-VALIDATION-ABSENTE'] : []);
   });
 
   test('[CI] composants de la page construite : typographie, identifiants, expressions interdites, part de texte cité', async () => {
@@ -105,7 +122,9 @@ describe('page exemple « voyant moteur » (exemples/, jamais publiée)', () => 
     assert.deepEqual(constatsTypographie(html, EXEMPLE), []);
     assert.deepEqual(constatsIdentifiants(html, EXEMPLE), []);
     assert.deepEqual(constatsExpressionsInterdites(html, EXEMPLE), []);
+    assert.deepEqual(constatsTexteRedige(html, EXEMPLE), []);
     assert.deepEqual(constatsPartCitee(html, EXEMPLE), []);
+    assert.ok(!html.includes('{{'), 'référence non remplacée');
     const { part, cites } = partCitee(html);
     assert.ok(cites > 0 && part <= PART_CITEE_MAX, `part citée ${part}`);
   });
@@ -141,6 +160,45 @@ describe('part de texte cité (CITATIONS-PART, charte §2.6)', () => {
     assert.match(constatsPartCitee(lourde, 'f')[0]?.message ?? '', /40 mots sur 52/);
     assert.deepEqual(constatsPartCitee(page(`<p>${mots(40)}</p><p class="notices-citation">${mots(10, 'cite')}</p>`), 'f'), []);
     assert.deepEqual(constatsPartCitee(lourde.replace(' data-encadre-decision', ''), 'f'), []);
+  });
+
+  test('[CI] texte rédigé absent ou vide sur une page éditoriale : erreur (TEXTE-REDIGE-ABSENT) ; page sans encadré : non contrôlée', () => {
+    assert.deepEqual(erreurs(constatsTexteRedige(page(`<p>${mots(10)}</p>`), 'f')), ['TEXTE-REDIGE-ABSENT']);
+    assert.deepEqual(erreurs(constatsTexteRedige(page('<div class="corps" data-corps> </div>'), 'f')), ['TEXTE-REDIGE-ABSENT']);
+    assert.deepEqual(constatsTexteRedige(page(`<div class="corps" data-corps><p>${mots(3)}</p></div>`), 'f'), []);
+    assert.deepEqual(constatsTexteRedige(page('').replace(' data-encadre-decision', ''), 'f'), []);
+  });
+});
+
+describe('erreurs attendues de la construction de recette (--attendu)', () => {
+  const constat = (regle: string, fichier: string, message = 'm'): Constat => ({ regle, gravite: 'erreur', message, fichier });
+
+  test('lecture : CODE@fichier[@extrait], répétable ; format faux refusé', () => {
+    const lus = lireAttendus(['--exemples', '--attendu', 'R4-VALIDATION-ABSENTE@exemples/voyant/a.md', '--attendu', 'LIEN-CASSE@voyants/a/index.html@/a-propos/#methode']);
+    assert.deepEqual(
+      lus.map((a) => [a.regle, a.fichier, a.extrait]),
+      [
+        ['R4-VALIDATION-ABSENTE', 'exemples/voyant/a.md', undefined],
+        ['LIEN-CASSE', 'voyants/a/index.html', '/a-propos/#methode'],
+      ],
+    );
+    assert.throws(() => lireAttendus(['--attendu', 'R4']), /format attendu/);
+  });
+
+  test('une erreur absorbée par attendu (code, fichier, extrait) ; les autres restent ; un attendu sans erreur échoue (ATTENDU-ABSENT)', () => {
+    const attendus = lireAttendus(['--attendu', 'LIEN-CASSE@p.html@/a-propos/#methode', '--attendu', 'R4-VALIDATION-ABSENTE@e.md']);
+    const { constats, absorbes } = appliquerAttendus(
+      [constat('LIEN-CASSE', 'p.html', 'lien cassé : « /a-propos/#methode »'), constat('LIEN-CASSE', 'p.html', 'lien cassé : « /autre/ »'), constat('R4-VALIDATION-ABSENTE', 'autre.md')],
+      attendus,
+    );
+    assert.deepEqual(absorbes.map((c) => c.message), ['lien cassé : « /a-propos/#methode »']);
+    assert.deepEqual(constats.map((c) => c.regle).sort(), ['ATTENDU-ABSENT', 'LIEN-CASSE', 'R4-VALIDATION-ABSENTE']);
+    // Deux erreurs identiques pour un seul attendu : une seule est absorbée.
+    const doubles = appliquerAttendus([constat('R4-VALIDATION-ABSENTE', 'e.md'), constat('R4-VALIDATION-ABSENTE', 'e.md')], lireAttendus(['--attendu', 'R4-VALIDATION-ABSENTE@e.md']));
+    assert.equal(doubles.constats.length, 1);
+    // Une alerte n'est jamais absorbée.
+    const alerte = appliquerAttendus([{ ...constat('R4-VALIDATION-ABSENTE', 'e.md'), gravite: 'alerte' }], lireAttendus(['--attendu', 'R4-VALIDATION-ABSENTE@e.md']));
+    assert.deepEqual(alerte.constats.map((c) => c.regle).sort(), ['ATTENDU-ABSENT', 'R4-VALIDATION-ABSENTE']);
   });
 });
 
