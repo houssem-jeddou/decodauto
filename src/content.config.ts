@@ -6,11 +6,15 @@ import { TYPES_AVEC_SOCLE } from './schemas/listes.ts';
 
 // Une collection par type de page (docs/08 §2) : les fichiers Markdown de src/content/<type>/.
 // Les schémas sont stricts : un champ inconnu, ou un champ calculé saisi à la main, bloque la construction.
+// Construction de recette (AVEC_EXEMPLES=1, livrable 6.6) : les exemples rédigés de exemples/<type>/ s'y ajoutent ; elle
+// écrit dans dist-exemples (astro.config.mjs) et n'est jamais déployée. Sans la variable, exemples/ n'est jamais lu.
+const AVEC_EXEMPLES = process.env['AVEC_EXEMPLES'] === '1';
+
 function collectionDePages<T extends (typeof TYPES_AVEC_SOCLE)[number]>(type: T) {
   return defineCollection({
     loader: glob({
-      pattern: '**/*.md',
-      base: `./src/content/${type}`,
+      pattern: AVEC_EXEMPLES ? [`src/content/${type}/**/*.md`, `exemples/${type}/**/*.md`] : `src/content/${type}/**/*.md`,
+      base: '.',
       generateId: ({ data }) => String(data['id']),
     }),
     schema: schemasPage[type],

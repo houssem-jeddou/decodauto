@@ -64,17 +64,23 @@ export interface FichierPage {
   erreurLecture?: string;
 }
 
-/** Pages Markdown de src/content/<type>/. */
-export async function chargerPages(racine: string): Promise<FichierPage[]> {
+/** Dossier des pages publiées (une collection par type) et dossier des exemples rédigés (livrable 6.6, jamais publiés). */
+export const DOSSIER_CONTENU = 'src/content';
+export const DOSSIER_EXEMPLES = 'exemples';
+
+/** Pages Markdown de <dossier>/<type>/ (src/content par défaut). */
+export async function chargerPages(racine: string, dossiers: readonly string[] = [DOSSIER_CONTENU]): Promise<FichierPage[]> {
   const pages: FichierPage[] = [];
-  for (const type of TYPES_AVEC_SOCLE) {
-    for (const chemin of await listerFichiers(join(racine, 'src/content', type), '.md')) {
-      const fichier = relative(racine, chemin);
-      try {
-        const contenu = await readFile(chemin, 'utf8');
-        pages.push({ type, fichier, brut: lireFrontmatter(contenu), corps: separerFrontmatter(contenu).corps });
-      } catch (e) {
-        pages.push({ type, fichier, erreurLecture: e instanceof Error ? e.message : String(e) });
+  for (const dossier of dossiers) {
+    for (const type of TYPES_AVEC_SOCLE) {
+      for (const chemin of await listerFichiers(join(racine, dossier, type), '.md')) {
+        const fichier = relative(racine, chemin);
+        try {
+          const contenu = await readFile(chemin, 'utf8');
+          pages.push({ type, fichier, brut: lireFrontmatter(contenu), corps: separerFrontmatter(contenu).corps });
+        } catch (e) {
+          pages.push({ type, fichier, erreurLecture: e instanceof Error ? e.message : String(e) });
+        }
       }
     }
   }

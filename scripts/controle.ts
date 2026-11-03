@@ -1,6 +1,7 @@
 // Script de contrôle lancé à chaque construction (npm run build).
 // Applique les règles de docs/08 §3, la cohérence de non-indexation et les garde-fous du dépôt.
-// Usage : node scripts/controle.ts [--dist dist] [--echouer-sur CODE[,CODE…]]
+// Usage : node scripts/controle.ts [--dist dist] [--exemples] [--echouer-sur CODE[,CODE…]]
+//   --exemples : construction de recette des exemples rédigés (exemples/, dist-exemples ; jamais déployée).
 //   --echouer-sur CODES : en plus des erreurs, fait échouer le script si une alerte porte l'un de ces codes
 //                         (le workflow hebdomadaire l'utilise avec R5-REVUE-DEPASSEE, COUT-A-REVERIFIER et
 //                         COUT-FOURCHETTE-A-REVOIR pour être prévenu).
@@ -28,7 +29,9 @@ function aujourdhui(): Date {
   return new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate()));
 }
 
-const { constats, informations, pagesEditoriales } = await controlerSite({ racine, dist, aujourdhui: aujourdhui(), indexable: mode.indexable });
+// --exemples : construction de recette des exemples rédigés (AVEC_EXEMPLES=1, dist-exemples, livrable 6.6).
+const exemples = argv.includes('--exemples');
+const { constats, informations, pagesEditoriales } = await controlerSite({ racine, dist, aujourdhui: aujourdhui(), indexable: mode.indexable, exemples });
 
 // Rapport.
 const enGitHub = env['GITHUB_ACTIONS'] === 'true';
