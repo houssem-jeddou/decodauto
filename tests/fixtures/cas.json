@@ -374,6 +374,31 @@
     "explication": "Un code P1xxx ne peut pas être déclaré générique."
   },
   {
+    "nom": "valide-code-par-marque",
+    "type": "code-defaut",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Code défaut valide avec des cas par marque : le tableau des cas, trié par marque, est l'élément unique."
+  },
+  {
+    "nom": "code-sans-fiche",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-FICHE-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Page code défaut construite sans la fiche du code (signification, portée, moteurs, voyant qui s'allume)."
+  },
+  {
+    "nom": "code-cas-marque-incomplet",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Un cas par marque du contenu manque dans le tableau construit."
+  },
+  {
     "nom": "r7-dates",
     "type": "panne",
     "erreurs": [

@@ -10,6 +10,7 @@ import { datesAffichees, fourchetteAffichee, libellePlage, libelleRisque, plageV
 import { LIGNE_TRANSPARENCE, signature } from '../src/lib/charte.ts';
 import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from '../src/lib/composants.ts';
 import { modeleTableauNotices, tableauNotices } from '../src/lib/tableau-notices.ts';
+import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml, type PageCode } from '../src/lib/fiche-code.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
@@ -316,6 +317,9 @@ interface OptionsHtml {
   sansTableauNotices?: boolean;
   noticeManquante?: boolean;
   sansLienNotices?: boolean;
+  /** Page code défaut (livrable 6.6b). */
+  sansFicheCode?: boolean;
+  casMarqueManquant?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -345,6 +349,14 @@ function tableauDesNotices(page: Objet, type: string, options: OptionsHtml): str
   }));
   const tableaux = modeleTableauNotices(lignes, voyants, registre, String(page['id'])).map((t) => (options.noticeManquante ? { ...t, rangees: t.rangees.slice(1) } : t));
   return tableauNotices(tableaux, { elementUnique: type === 'voyant' && page['outil'] !== true });
+}
+
+/** Fiche du code et cas par marque (livrable 6.6b), produits par les vrais composants depuis la base et le registre de test. */
+function blocsCode(page: Objet, options: OptionsHtml): string {
+  const voyants = new Map((contexte.voyants as Objet[]).map((v) => [String(v['id']), { nom: String(v['nom']) }]));
+  const fiche = options.sansFicheCode ? '' : ficheCodeHtml(modeleFicheCode(page as unknown as PageCode, voyants, REGISTRE_TEST));
+  const rangees = modeleParMarque(page as unknown as PageCode);
+  return fiche + parMarqueHtml(options.casMarqueManquant ? rangees.slice(1) : rangees, REGISTRE_TEST, { elementUnique: page['element_unique'] === 'tableau' });
 }
 
 function encadre(page: Objet, options: OptionsHtml): string {
@@ -463,7 +475,10 @@ function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): st
   const notices = options.sansTableauNotices ? '' : tableauDesNotices(page, type, options);
   const pageVoyant = type === 'voyant' && page['outil'] !== true && page['element_unique'] === 'tableau';
   // Sans élément unique : seul l'élément unique manque (sur une page voyant, c'est le tableau des notices).
-  const element = pageVoyant && notices !== '' ? (options.sansElement ? '' : notices) : `${options.sansElement ? '' : (blocs[String(page['element_unique'])] ?? '')}${notices}`;
+  // Page code défaut : fiche du code, puis cas par marque ; ce tableau est l'élément unique quand la page en a.
+  const code = type === 'code-defaut' ? blocsCode(page, options) : '';
+  const parMarque = type === 'code-defaut' && Array.isArray(page['precisions_par_marque']) && page['element_unique'] === 'tableau';
+  const element = pageVoyant && notices !== '' ? (options.sansElement ? '' : notices) : `${code}${options.sansElement || parMarque ? '' : (blocs[String(page['element_unique'])] ?? '')}${notices}`;
   return `${entete}<meta name="description" content="${String(page['description'])}"></head><body>${pub}${avant}<main><header><h1>${String(page['h1'])}</h1></header>${entreH1EtEncadre}${blocEncadre}${apres}${element}${etapes}${autreListe}${communs.sources}</main></body></html>\n`;
 }
 
@@ -561,6 +576,14 @@ invalide('r7-champ-calcule-saisi', 'panne', { ...panne(), adresse: '/fixture-pan
 invalide('r7-socle-adresse-saisie', 'socle', { ...socle(), adresse: '/fixture-a-propos/' }, ['R7-CHAMP-CALCULE'], "L'adresse du socle vient uniquement du plan du site.");
 invalide('r7-plan-absent', 'panne', { ...panne(), id: 'fixture-hors-plan' }, ['R7-PLAN-ABSENT'], 'Page absente du plan du site.');
 invalide('r7-code-p1-generique', 'code-defaut', { ...codeDefaut(), code: 'P1351' }, ['R7-CODE-GENERIQUE'], 'Un code P1xxx ne peut pas être déclaré générique.');
+// Page code défaut construite (livrable 6.6b) : fiche du code et cas par marque tirés du contenu.
+const PRECISIONS_TEST = [
+  { marque: 'Marque B', precision: 'Cas de test de la marque B.', sources: ['fixture-forum'] },
+  { marque: 'Marque A', precision: 'Cas de test de la marque A.', sources: ['fixture-forum'] },
+];
+valide('valide-code-par-marque', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), 'Code défaut valide avec des cas par marque : le tableau des cas, trié par marque, est l\'élément unique.');
+invalide('code-sans-fiche', 'code-defaut', codeDefaut(), ['CODE-FICHE-ABSENTE'], 'Page code défaut construite sans la fiche du code (signification, portée, moteurs, voyant qui s\'allume).', { sansFicheCode: true });
+invalide('code-cas-marque-incomplet', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un cas par marque du contenu manque dans le tableau construit.', { casMarqueManquant: true });
 invalide('r7-dates', 'panne', { ...panne(), date_revue: '2027-03-01', prochaine_revue: '2027-02-01' }, ['R7-DATES'], 'prochaine_revue antérieure à date_revue.');
 invalide('r7-relecteur', 'panne', { ...panne(), relecteur: 'Un relecteur' }, ['R7-CHAMP-INCONNU'], 'Le champ relecteur est retiré : pas de relecteur extérieur (décision du 23/10/2026).');
 
