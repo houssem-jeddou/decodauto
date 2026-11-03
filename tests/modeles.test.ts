@@ -17,7 +17,8 @@ import { DOSSIER_EXEMPLES, chargerPages, lireFrontmatter, separerFrontmatter } f
 import { documentHtml } from '../scripts/lib/demo.ts';
 import { AUTEUR_DES_EXEMPLES, controlerSite } from '../scripts/lib/controler-site.ts';
 import { compterMots, constatsExpressionsInterdites, constatsIdentifiants, constatsPartCitee, constatsTexteRedige, constatsTypographie, partCitee } from '../scripts/lib/dist.ts';
-import { appliquerAttendus, lireAttendus } from '../scripts/lib/attendus.ts';
+import { appliquerAttendus, lireAttendus, refusRecette } from '../scripts/lib/attendus.ts';
+import { spawnSync } from 'node:child_process';
 import { controlerPage, type Constat } from '../src/lib/controle.ts';
 import { PART_CITEE_MAX } from '../src/lib/charte.ts';
 import { INSECABLE } from '../src/lib/html.ts';
@@ -77,16 +78,28 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.match(html, /L’huile/);
   });
 
-  test('références aux notices : marque, modèle, génération et édition tirées du registre ; notice inconnue ou hors des sources de la page : la construction échoue', async () => {
+  test('références : notice (marque, modèle, génération, édition), verdict (libellé de la grille), page citée (ajoutée à « Sources ») ; inconnue, hors de la page ou illisible : la construction échoue', async () => {
     const { page, site } = await exemple();
     const peugeot = site.sources.get('notice-peugeot-208');
     assert.ok(peugeot !== undefined);
     assert.equal(nomCompletNotice(peugeot), "Peugeot 208 (2e génération), guide d'utilisation édition 01-20");
-    const html = corpsRedige('<ul><li>{{notice:notice-peugeot-208}}</li></ul>', page, site);
+    const html = corpsRedige('<ul><li>{{notice:notice-peugeot-208}}</li></ul><p>{{verdict:moteur-rouge}} ({{cite:notice-toyota-yaris|p. 297}})</p>', page, site);
     assert.ok(html.includes('Peugeot 208 (2e génération), guide d’utilisation édition 01-20'), html);
-    assert.throws(() => corpsRedige('<p>{{notice:notice-inconnue}}</p>', page, site), /aucune notice de constructeur/);
+    assert.ok(html.includes('Non, arrêtez-vous immédiatement'), html);
+    assert.ok(html.includes(`(p.${' '}297)`) || html.includes('(p. 297)'), html);
+    // La page citée dans le texte seulement apparaît dans « Sources ».
+    const complete = pageVoyant(page, site, '<p>Voir ({{cite:notice-toyota-yaris|p. 297, cas du réservoir vide}}).</p>');
+    const sources = complete.slice(complete.indexOf('data-sources'));
+    assert.ok(sources.includes('réservoir vide'), 'emplacement ajouté à « Sources »');
+    const refus: Array<[string, RegExp]> = [
+      ['<p>{{notice:notice-inconnue}}</p>', /aucune source de ce nom/],
+      ['<p>{{notice:code-de-la-route-d314-8}}</p>', /pas dans les sources de la page|pas une notice/],
+      ['<p>{{verdict:huile-pression-rouge}}</p>', /n'est pas une ligne de l'encadré/],
+      ['<p>{{cite:notice-toyota-yaris}}</p>', /page ou section manquante/],
+      ['<p>{{notice: notice-peugeot-208}}</p>', /référence illisible/],
+    ];
+    for (const [texte, motif] of refus) assert.throws(() => corpsRedige(texte, page, site), motif, texte);
     assert.throws(() => corpsRedige('<p>{{notice:notice-peugeot-208}}</p>', { ...page, sources: ['notice-seat-ibiza'] }, site), /pas dans les sources de la page/);
-    assert.throws(() => corpsRedige('<p>{{notice: notice-peugeot-208}}</p>', page, site), /référence illisible/);
   });
 
   test('page voyant : encadré, signature, transparence, texte rédigé, causes, tableau des notices (élément unique), sources, dans cet ordre', async () => {
@@ -174,6 +187,24 @@ describe('part de texte cité (CITATIONS-PART, charte §2.6)', () => {
 });
 
 describe('erreurs attendues de la construction de recette (--attendu)', () => {
+  test('--exemples seulement sur dist-exemples construit avec AVEC_EXEMPLES=1 ; --attendu seulement avec --exemples', () => {
+    assert.equal(refusRecette(['--exemples'], '/x/dist-exemples', { AVEC_EXEMPLES: '1' }), undefined);
+    assert.match(refusRecette(['--exemples'], '/x/dist', { AVEC_EXEMPLES: '1' }) ?? '', /dist-exemples/);
+    assert.match(refusRecette(['--exemples'], '/x/dist-exemples', {}) ?? '', /AVEC_EXEMPLES=1/);
+    assert.match(refusRecette(['--attendu', 'R4@a'], '/x/dist', {}) ?? '', /--attendu/);
+    assert.equal(refusRecette([], '/x/dist', {}), undefined);
+  });
+
+  test('en ligne de commande : le contrôle et les liens refusent ces options sur la construction de production (sortie 2)', () => {
+    const env = { ...process.env, AVEC_EXEMPLES: '' };
+    for (const script of ['scripts/controle.ts', 'scripts/liens.ts']) {
+      const sansRecette = spawnSync(process.execPath, [script, '--dist', 'dist', '--exemples'], { cwd: racine, env, encoding: 'utf8' });
+      assert.equal(sansRecette.status, 2, `${script} : ${sansRecette.stdout}${sansRecette.stderr}`);
+      const attendu = spawnSync(process.execPath, [script, '--dist', 'dist', '--attendu', 'R4-VALIDATION-ABSENTE@x.md'], { cwd: racine, env, encoding: 'utf8' });
+      assert.equal(attendu.status, 2, `${script} : ${attendu.stdout}${attendu.stderr}`);
+    }
+  });
+
   const constat = (regle: string, fichier: string, message = 'm'): Constat => ({ regle, gravite: 'erreur', message, fichier });
 
   test('lecture : CODE@fichier[@extrait], répétable ; format faux refusé', () => {
