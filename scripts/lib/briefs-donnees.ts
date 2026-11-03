@@ -4,7 +4,7 @@
 import { access, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { FICHIER_05, lireCsv } from '../../src/lib/porte-plan.ts';
-import { genererBrief, genererSommaire, type Consignes, type EntreeBrief, type PageDuPlan, type Releve, type VoyantDeLaBase } from './briefs.ts';
+import { genererBrief, genererSommaire, questionDeLExemple, voyantsDeLExemple, type Consignes, type EntreeBrief, type PageDuPlan, type Releve, type VoyantDeLaBase } from './briefs.ts';
 
 export const DOSSIER_BRIEFS = 'travaux/etape-6/briefs';
 export const DOSSIER_RELEVE = 'travaux/etape-6/releve-google-france';
@@ -17,11 +17,12 @@ const existe = async (chemin: string): Promise<boolean> =>
     () => false,
   );
 
-/** Page exemple validée en 6.6 et sa question de décision (ligne `question_decision:` de son en-tête). */
-async function exempleDeLaPage(racine: string, chemin: string): Promise<{ exemple?: string; questionExemple?: string }> {
+/** Page exemple validée en 6.6 : sa question de décision et les voyants de la base repris dans son encadré. */
+async function exempleDeLaPage(racine: string, chemin: string): Promise<{ exemple?: string; questionExemple?: string; voyantsExemple?: string[] }> {
   if (!(await existe(join(racine, chemin)))) return {};
-  const question = /^question_decision: *(.+)$/m.exec(await readFile(join(racine, chemin), 'utf8'))?.[1]?.trim().replace(/^"(.*)"$/, '$1');
-  return question === undefined ? { exemple: chemin } : { exemple: chemin, questionExemple: question };
+  const texte = await readFile(join(racine, chemin), 'utf8');
+  const question = questionDeLExemple(texte);
+  return { exemple: chemin, voyantsExemple: voyantsDeLExemple(texte), ...(question === undefined ? {} : { questionExemple: question }) };
 }
 
 /** Briefs attendus de la vague A : chemin relatif → contenu généré. */

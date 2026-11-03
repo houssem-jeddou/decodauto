@@ -1,10 +1,12 @@
 // ---------------------------------------------------------------------------------------------
 // Briefs des pages de la vague A (étape 6, livrable 6.8). Un brief est généré, jamais écrit à la main : il assemble
 // le plan du site (data/plan-du-site.json), les mots-clés et leurs volumes (docs/05), la base voyants, le registre et le
-// tableau page → sources de l'étape 5, le relevé Google France de 6.7, et les consignes de rédaction proposées par Claude
-// et validées par Houssem (travaux/etape-6/briefs/consignes.json, seule partie rédigée). Données internes : jamais
-// publiées. Module sans dépendance à l'exécution : testé sans installation (tests/briefs.test.ts).
+// tableau page → sources de l'étape 5, le relevé Google France de 6.7, les pages exemples validées en 6.6, et les
+// consignes de rédaction proposées par Claude à la validation de Houssem, notée au journal
+// (travaux/etape-6/briefs/consignes.json, seule partie rédigée : ni volume, ni lien, ni verdict recopié). Données
+// internes : jamais publiées. Module sans dépendance à l'exécution : testé sans installation (tests/briefs.test.ts).
 // ---------------------------------------------------------------------------------------------
+import { indexerPlan } from '../../src/lib/plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../../src/schemas/grille.ts';
 import type { Urgence, Verdict } from '../../src/schemas/listes.ts';
 
@@ -15,9 +17,9 @@ export interface PageDuPlan {
   vague: string;
   adresse: string;
   requete_principale?: string | undefined;
-  mots_cles?: readonly string[] | undefined;
+  mots_cles?: string[] | undefined;
   parent?: string | undefined;
-  liens?: readonly string[] | undefined;
+  liens?: string[] | undefined;
 }
 
 export type LigneMotCle = Readonly<Record<string, string>>;
@@ -29,6 +31,7 @@ export interface VoyantDeLaBase {
   page: string;
   verdict: Verdict;
   urgence: Urgence;
+  action: string;
   citations: readonly { source: string }[];
   ecart_marques?: string | undefined;
 }
@@ -45,7 +48,7 @@ export interface Releve {
 }
 
 /**
- * Consignes de rédaction d'une page, proposées par Claude et validées par Houssem (seule partie rédigée du brief).
+ * Consignes de rédaction d'une page, proposées par Claude à la validation de Houssem (seule partie rédigée du brief).
  * `question_decision` et `element_unique` : obligatoires pour une page éditoriale, absents pour une page du socle (pas
  * d'encadré de décision, docs/08 §2) ; la question d'une page qui a son exemple validé en 6.6 est lue dans l'exemple,
  * jamais recopiée ici (tests/briefs.test.ts).
@@ -68,21 +71,36 @@ export interface EntreeBrief {
   sourcesDeLaPage?: { sources: readonly string[]; raison: string } | undefined;
   releve?: Releve | undefined;
   consignes?: Consignes | undefined;
-  /** Chemin de la page exemple rédigée en 6.6, si elle existe, et sa question de décision validée. */
+  /** Chemin de la page exemple rédigée en 6.6, si elle existe, sa question de décision validée et les voyants de la base
+   *  repris dans son encadré. */
   exemple?: string | undefined;
   questionExemple?: string | undefined;
+  voyantsExemple?: readonly string[] | undefined;
+}
+
+/** Question de décision d'une page exemple : ligne `question_decision:` de son en-tête, guillemets retirés. */
+export function questionDeLExemple(texte: string): string | undefined {
+  const brute = /^question_decision: *(.+)$/m.exec(texte)?.[1]?.trim();
+  return brute?.replace(/^"(.*)"$/, '$1').replace(/^'(.*)'$/, '$1');
+}
+
+/** Voyants de la base repris dans l'encadré d'une page exemple (lignes `- voyant: <id>` de `situations`). */
+export function voyantsDeLExemple(texte: string): string[] {
+  const situations = /^situations:\n((?:[ \t]+.*\n)+)/m.exec(texte)?.[1] ?? '';
+  return [...situations.matchAll(/^[ \t]+- voyant: *([a-z0-9-]+)/gm)].map((m) => m[1] ?? '');
 }
 
 /** Repères des questions des lecteurs (constats du relevé 6.7, README §4 et §5) : détectés, jamais classés à la main. */
 export const REPERES_QUESTIONS: readonly { id: string; libelle: string; motif: RegExp }[] = [
-  { id: 'rouler', libelle: 'Peut-on rouler, combien de kilomètres', motif: /\brouler\b|kilom|\bkm\b|dangereux/i },
-  { id: 'enlever', libelle: 'Enlever, effacer ou éteindre le voyant', motif: /enlever|effacer|[ée]teindre|dispara[iî]tre|r[ée]initialis|supprimer|reset/i },
+  { id: 'rouler', libelle: 'Peut-on rouler, combien de kilomètres', motif: /\brouler\b|combien de (?:km|kilom)|dangereux/i },
+  { id: 'enlever', libelle: 'Enlever, effacer ou éteindre le voyant', motif: /enlever|effacer|[ée]teindre|dispara[iî]tre|r[ée]initialis|supprimer|d[ée]sactiv|reset/i },
   { id: 'clignote', libelle: 'Voyant qui clignote', motif: /clignot/i },
   { id: 'cout', libelle: 'Prix, coût, amende', motif: /\bprix\b|co[uû]t|tarif|amende|verbalisation|€/i },
   {
     id: 'marque',
     libelle: 'Marque ou modèle cité',
-    motif: /peugeot|renault|citro[eë]n|dacia|volkswagen|\bvw\b|toyota|seat|audi|bmw|mercedes|ford|opel|fiat|kia|hyundai|skoda|nissan|clio|\b208\b|\b308\b|\b2008\b|\b3008\b|sandero|duster|golf|polo|ibiza|yaris|c3\b|c4\b|megane|mégane|captur|scenic|scénic|hdi|tdi|puretech/i,
+    motif:
+      /peugeot|renault|citro[eë]n|dacia|volkswagen|\bvw\b|toyota|seat|audi|bmw|mercedes|ford|opel|fiat|kia|hyundai|skoda|nissan|mazda|\bmini\b|clio|\b20[0-9]\b|\b30[0-9]\b|\b2008\b|\b3008\b|\b5008\b|sandero|duster|golf|polo|ibiza|yaris|corolla|land cruiser|qashqai|berlingo|touran|\bc[1-8]\b|xsara|picasso|megane|mégane|captur|scenic|scénic|trafic|\brs ?3\b|\ba[1-8]\b|hdi|tdi|dci|puretech/i,
   },
 ];
 
@@ -116,8 +134,12 @@ export function genererBrief(e: EntreeBrief): string {
   const { page } = e;
   const l: string[] = [];
   const libelle = (id: string): string => e.plan.get(id)?.adresse ?? id;
-  // Une page liée d'une vague plus tardive n'est pas construite à la publication de cette page : pas de lien vers elle
-  // dans le texte avant sa propre publication (LIEN-CASSE ; les liens affichés viennent du plan, pages construites).
+  // Pages liées : liens déclarés dans un sens ou dans l'autre (chaque paire n'est déclarée qu'une fois), lus comme le
+  // contrôle du texte les lit (indexerPlan, src/lib/plan.ts). Une page liée d'une vague plus tardive n'est pas
+  // construite à la publication de cette page : pas de lien vers elle dans le texte avant sa propre publication.
+  const index = indexerPlan(e.plan);
+  const enfants = index.enfants.get(page.id) ?? [];
+  const liees = [...(index.voisins.get(page.id) ?? [])].filter((id) => id !== page.parent && !enfants.includes(id)).sort();
   const lien = (id: string): string => {
     const cible = e.plan.get(id);
     if (cible === undefined) return `\`${id}\` (absente du plan)`;
@@ -131,9 +153,9 @@ export function genererBrief(e: EntreeBrief): string {
   l.push('## Page', '');
   l.push(`- **Type** : ${page.type} ; **thème** : ${page.theme} ; **vague** : ${page.vague}.`);
   l.push(`- **Adresse** : \`${page.adresse}\`${page.parent !== undefined ? ` ; page mère : \`${libelle(page.parent)}\`` : ''}.`);
-  if ((page.liens ?? []).length > 0) l.push(`- **Pages liées dans le plan** : ${(page.liens ?? []).map(lien).join(' ; ')}.`);
-  const enfants = [...e.plan.values()].filter((p) => p.parent === page.id);
-  if (enfants.length > 0) l.push(`- **Pages enfants** : ${enfants.length} (${enfants.map((p) => p.id).join(', ')}).`);
+  if (liees.length > 0) l.push(`- **Pages liées dans le plan** (dans un sens ou dans l'autre) : ${liees.map(lien).join(' ; ')}.`);
+  if (enfants.length > 0) l.push(`- **Pages enfants** : ${enfants.map(lien).join(' ; ')}.`);
+  if (page.type !== 'socle') l.push("- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).");
   if (e.exemple !== undefined) l.push(`- **Page exemple rédigée et validée en 6.6** : \`${e.exemple}\`. Elle sert de point de départ à la page de l'étape 8.`);
   l.push('');
 
@@ -159,15 +181,25 @@ export function genererBrief(e: EntreeBrief): string {
 
   // Décision : voyants de la base et sources.
   const rattaches = e.voyants.filter((v) => v.page === page.id);
-  if (rattaches.length > 0 || e.sourcesDeLaPage !== undefined) {
+  const reprisExemple = e.voyants.filter((v) => v.page !== page.id && (e.voyantsExemple ?? []).includes(v.id));
+  const tableauVoyants = (voyants: readonly VoyantDeLaBase[]): void => {
+    l.push('| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |', '|---|---|---|---|---|---|---|');
+    for (const v of voyants) {
+      l.push(
+        `| \`${v.id}\` ${echapperTableau(v.nom)} | ${v.couleur} | ${GRILLE_VERDICTS[v.verdict].libelle} | ${GRILLE_URGENCES[v.urgence].libelle} | ${echapperTableau(v.action)} | ${new Set(v.citations.map((c) => c.source)).size} | ${v.ecart_marques !== undefined ? 'oui' : 'non'} |`,
+      );
+    }
+    l.push('');
+  };
+  if (rattaches.length > 0 || reprisExemple.length > 0 || e.sourcesDeLaPage !== undefined) {
     l.push('## Décision et sources disponibles', '');
     if (rattaches.length > 0) {
-      l.push('Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :', '');
-      l.push('| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |', '|---|---|---|---|---|---|');
-      for (const v of rattaches) {
-        l.push(`| \`${v.id}\` ${echapperTableau(v.nom)} | ${v.couleur} | ${GRILLE_VERDICTS[v.verdict].libelle} | ${GRILLE_URGENCES[v.urgence].libelle} | ${new Set(v.citations.map((c) => c.source)).size} | ${v.ecart_marques !== undefined ? 'oui' : 'non'} |`);
-      }
-      l.push('');
+      l.push('Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :', '');
+      tableauVoyants(rattaches);
+    }
+    if (reprisExemple.length > 0) {
+      l.push("Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à une autre page : pas de tableau des notices ici) :", '');
+      tableauVoyants(reprisExemple);
     }
     if (e.sourcesDeLaPage !== undefined) {
       l.push(`Sources de première main prévues à l'étape 5 (\`travaux/etape-5/pages-sources.json\`) : ${e.sourcesDeLaPage.raison}.`, '');
