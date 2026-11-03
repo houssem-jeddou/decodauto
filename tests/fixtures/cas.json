@@ -390,6 +390,33 @@
     "explication": "Page code défaut construite sans la fiche du code (signification, portée, moteurs, voyant qui s'allume)."
   },
   {
+    "nom": "code-fiche-incomplete",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-FICHE-INCOMPLETE"
+    ],
+    "alertes": [],
+    "explication": "La fiche du code construite n'affiche pas la signification du contenu."
+  },
+  {
+    "nom": "code-cas-marque-sources",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Un cas par marque est affiché sans sa source."
+  },
+  {
+    "nom": "code-cas-sans-precision",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Un tableau des cas par marque est affiché alors que le contenu n'a aucune précision par marque."
+  },
+  {
     "nom": "code-cas-marque-incomplet",
     "type": "code-defaut",
     "erreurs": [

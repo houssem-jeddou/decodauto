@@ -319,7 +319,10 @@ interface OptionsHtml {
   sansLienNotices?: boolean;
   /** Page code défaut (livrable 6.6b). */
   sansFicheCode?: boolean;
+  ficheFausse?: boolean;
   casMarqueManquant?: boolean;
+  casSourceManquante?: boolean;
+  casSansPrecision?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -354,9 +357,14 @@ function tableauDesNotices(page: Objet, type: string, options: OptionsHtml): str
 /** Fiche du code et cas par marque (livrable 6.6b), produits par les vrais composants depuis la base et le registre de test. */
 function blocsCode(page: Objet, options: OptionsHtml): string {
   const voyants = new Map((contexte.voyants as Objet[]).map((v) => [String(v['id']), { nom: String(v['nom']) }]));
-  const fiche = options.sansFicheCode ? '' : ficheCodeHtml(modeleFicheCode(page as unknown as PageCode, voyants, REGISTRE_TEST));
-  const rangees = modeleParMarque(page as unknown as PageCode);
-  return fiche + parMarqueHtml(options.casMarqueManquant ? rangees.slice(1) : rangees, REGISTRE_TEST, { elementUnique: page['element_unique'] === 'tableau' });
+  const modele = modeleFicheCode(page as unknown as PageCode, voyants, REGISTRE_TEST);
+  const ficheAffichee = options.ficheFausse ? { ...modele, lignes: modele.lignes.map((l, i) => (i === 0 ? { ...l, valeur: 'Autre signification' } : l)) } : modele;
+  const fiche = options.sansFicheCode ? '' : ficheCodeHtml(ficheAffichee);
+  let rangees = modeleParMarque(page as unknown as PageCode);
+  if (options.casMarqueManquant) rangees = rangees.slice(1);
+  if (options.casSourceManquante) rangees = rangees.map((r, i) => (i === 0 ? { ...r, sources: [] } : r));
+  if (options.casSansPrecision) rangees = [{ marque: 'Marque A', precision: 'Cas affiché sans précision dans le contenu.', sources: ['fixture-forum'] }];
+  return fiche + parMarqueHtml(rangees, REGISTRE_TEST, { elementUnique: page['element_unique'] === 'tableau' });
 }
 
 function encadre(page: Objet, options: OptionsHtml): string {
@@ -583,6 +591,9 @@ const PRECISIONS_TEST = [
 ];
 valide('valide-code-par-marque', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), 'Code défaut valide avec des cas par marque : le tableau des cas, trié par marque, est l\'élément unique.');
 invalide('code-sans-fiche', 'code-defaut', codeDefaut(), ['CODE-FICHE-ABSENTE'], 'Page code défaut construite sans la fiche du code (signification, portée, moteurs, voyant qui s\'allume).', { sansFicheCode: true });
+invalide('code-fiche-incomplete', 'code-defaut', codeDefaut(), ['CODE-FICHE-INCOMPLETE'], 'La fiche du code construite n\'affiche pas la signification du contenu.', { ficheFausse: true });
+invalide('code-cas-marque-sources', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un cas par marque est affiché sans sa source.', { casSourceManquante: true });
+invalide('code-cas-sans-precision', 'code-defaut', codeDefaut(), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un tableau des cas par marque est affiché alors que le contenu n\'a aucune précision par marque.', { casSansPrecision: true });
 invalide('code-cas-marque-incomplet', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un cas par marque du contenu manque dans le tableau construit.', { casMarqueManquant: true });
 invalide('r7-dates', 'panne', { ...panne(), date_revue: '2027-03-01', prochaine_revue: '2027-02-01' }, ['R7-DATES'], 'prochaine_revue antérieure à date_revue.');
 invalide('r7-relecteur', 'panne', { ...panne(), relecteur: 'Un relecteur' }, ['R7-CHAMP-INCONNU'], 'Le champ relecteur est retiré : pas de relecteur extérieur (décision du 23/10/2026).');
