@@ -5,6 +5,7 @@ Précisions validées avec le livrable 6.3 (02/11/2026, 22 h 28) : adresse de si
 Précision validée avec le livrable 6.4 (03/11/2026, 13 h 48) : article L122-5 relu sur Légifrance, conditions de la courte citation (§2.6).
 Précisions validées avec le livrable 6.5 (03/11/2026, 15 h 14) : revue de la loi montagne avant chaque 1er novembre (§8) ; « nos équipes » et « nos rédactions » parmi les expressions interdites (§2.7).
 Précisions validées avec le livrable 6.6a (03/11/2026, 17 h 32) : part de texte cité au plus un tiers et texte rédigé exigé (§2.6) ; ordre du corps des pages voyants et marche à suivre (§4, demande de changement n° 9) ; contrôles ajoutés (§9).
+Précisions validées avec le livrable 6.6b (03/11/2026, 20 h 06) : sources techniques secondaires des pages codes défaut (§2.2) ; cas d'un autre marché (§2.5) ; sources secondaires distinguées des « autres sites » (§2.6) ; noms de moteur (§3.3) ; corps des pages codes défaut et consigne d'un code lu sans voyant (§4) ; contrôles ajoutés (§9).
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -36,6 +37,10 @@ Précisions validées avec le livrable 6.6a (03/11/2026, 17 h 32) : part de text
 - Pas de « dans la plupart des cas », « souvent », « en général » pour habiller un chiffre non sourcé.
 - **« Combien de kilomètres puis-je faire ? »** Si aucune notice lue ne donne de distance, la page le dit en ces termes, et donne ce que la notice demande à la place (délai, précaution). Jamais une distance estimée.
 - Les causes sont présentées dans un ordre logique, jamais « par fréquence » sans donnée sourcée (R6).
+- **Pages codes défaut : sources techniques secondaires** (validé avec le livrable 6.6b). Les notices d'utilisation ne parlent pas des codes défaut. La signification d'un code, ses causes et ses cas par marque peuvent donc venir de sources secondaires, inscrites au registre et citées sur la page :
+  - sont admis les bulletins et fiches techniques de constructeur, les documents techniques d'équipementier et la documentation d'un éditeur d'outil de diagnostic ;
+  - sont exclus les blogs commerciaux, les sites qui vendent un appareil ou un service, et les forums ;
+  - une source admise ne vaut que pour les modèles, moteurs et marchés qu'elle nomme, et ne fixe jamais de verdict : le verdict vient de la base voyants, par la ligne du voyant qui s'allume avec le code.
 - Une relecture par une IA n'est pas une vérification.
 
 ### 2.3 Coût probable
@@ -54,11 +59,12 @@ Précisions validées avec le livrable 6.6a (03/11/2026, 17 h 32) : part de text
 - Pour une marque dont la notice n'a pas été lue, la page ne dit rien de sa consigne : elle renvoie à la notice du véhicule.
 - Pas de page par modèle sans donnée constructeur sourcée.
 - Un code constructeur (P1xxx) est toujours précisé par marque (règle 9 de 01).
+- Un cas décrit par un document d'un autre marché (par exemple un bulletin de constructeur publié aux États-Unis) est présenté avec ce marché (« vendues aux États-Unis ») ; il n'est jamais transposé aux versions vendues en France sans source (validé avec le livrable 6.6b).
 - Les pictogrammes sont redessinés pour le site, jamais copiés.
 
 ### 2.6 Textes d'autrui, citations et images
 - **Citations.** Une citation de notice ou de texte reste courte (400 caractères au plus, contrôlé), entre guillemets, avec son auteur et sa source ; elle sert l'explication de la page. Le volume cité reste limité : le tableau des notices (6.4) et l'outil ne reprennent que l'extrait utile de chaque consigne, jamais une notice entière. Cadre légal visé : l'exception de courte citation (code de la propriété intellectuelle, art. L122-5, 3° a, relu sur Légifrance le 02/11/2026, version en vigueur depuis le 01/01/2023) : le nom de l'auteur et la source sont indiqués clairement ; les citations sont courtes ; elles sont justifiées par le caractère pédagogique ou d'information de la page qui les cite. La loi ne fixe aucun seuil. Seuil du site (validé avec le livrable 6.6a) : sur une page éditoriale, le texte cité (extraits de notices, citations sourcées, texte entre guillemets) ne dépasse pas un tiers du texte affiché (`PART_CITEE_MAX`, contrôle CITATIONS-PART) ; et la page a toujours un texte rédigé qui répond aux questions des lecteurs (TEXTE-REDIGE-ABSENT). Mesure sur la page exemple « voyant moteur » : 22 % (32 % sans texte rédigé).
-- **Résultats de Google, aperçu IA, autres sites.** Ils servent seulement à connaître les questions des lecteurs (relevé Google). Leurs textes ne sont jamais repris ni reformulés. Quand une idée répandue contredit la notice, la page le dit et cite la notice.
+- **Résultats de Google, aperçu IA, autres sites.** Ils servent seulement à connaître les questions des lecteurs (relevé Google). Leurs textes ne sont jamais repris ni reformulés. Quand une idée répandue contredit la notice, la page le dit et cite la notice. Les sources techniques secondaires admises par le §2.2 (pages codes défaut) ne sont pas des « autres sites » : elles sont inscrites au registre et citées.
 - **Photos.** Une photo présentée comme réelle est une vraie photo, avec son auteur ou sa source. Jamais une image générée par une IA présentée comme une photo réelle.
 
 ### 2.7 Ce qu'on n'écrit jamais
@@ -80,7 +86,7 @@ Précisions validées avec le livrable 6.6a (03/11/2026, 17 h 32) : part de text
 
 ### 3.3 Typographie
 - Guillemets français « … » ; espace insécable avant « : ; ! ? » et à l'intérieur des guillemets ; espace insécable entre un nombre et son unité (2,5 bar, 135 €).
-- Virgule décimale (2,5) ; séparateur de milliers par espace (1 000).
+- Virgule décimale (2,5) ; séparateur de milliers par espace (1 000). Exception validée avec le livrable 6.6b : un nom de moteur est un nom de produit, écrit comme dans sa source (« 2,2 HDi », « 2.0 TFSI », « 1.6 HDi »).
 - Dates affichées au format JJ/MM/AAAA, comme les dates de vérification des montants.
 - Apostrophe typographique (’) à l'affichage.
 - Les espaces insécables et l'apostrophe sont posés par le gabarit (6.3), quelle que soit la saisie des données, et un test le vérifie sur la page construite.
@@ -110,7 +116,7 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
 6. **Ligne de transparence** (section 7), avec le lien « Méthode ».
 7. **Corps**, selon le type de page (08 §2) :
    - pages voyants (demande de changement n° 9, 6.6a) : texte rédigé (questions des lecteurs relevées sur Google ; chaque partie qui répond à une question redit le verdict retenu), causes, puis tableau « Ce que dit la notice de votre marque » (6.4). La marche à suivre est l'action de chaque ligne de l'encadré de décision : le corps ne la recopie pas ;
-   - pages codes défaut : signification par marque, voyant qui s'allume, causes, marche à suivre ;
+   - pages codes défaut (modèle validé avec le livrable 6.6b) : fiche du code (signification, portée, moteurs concernés, voyant qui s'allume, puis la consigne d'un code lu sans ce voyant allumé, « Demandez l'avis d'un professionnel », et la source de la signification) ; cas décrits par marque, élément unique quand c'est un tableau ; causes ; texte rédigé, avec la marche à suivre ;
    - pages pannes : symptômes, causes, marche à suivre ;
    - pages fluides : rôle, niveau, appoint, marche à suivre ;
    - pages pneus et obligations : texte de référence, ce qui est exigé, période et zones (loi montagne), marche à suivre ;
@@ -300,6 +306,7 @@ Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5
   - espaces insécables et apostrophe posés par le gabarit (3.3).
 - **Ajouté en 6.5** (contrôles peu coûteux, validé le 03/11) : title, H1 et description uniques et présents ; dates cohérentes (jamais dans le futur, modification après publication, délai de revue du type) ; expressions interdites dans le texte des pages, hors citations. Limite laissée à la recette : la source d'un texte entre guillemets n'est pas vérifiable par la machine.
 - **Ajouté en 6.6a** (modèle de page voyant, validé le 03/11) : texte rédigé présent (TEXTE-REDIGE-ABSENT) ; part de texte cité au plus un tiers (CITATIONS-PART) ; références du texte rédigé tirées des sources de vérité (notice avec sa génération et son édition, libellé du verdict, page citée ajoutée à « Sources ») et refusées si elles sont fausses ; aucune page construite sans fichier de contenu (R7-PAGE-SANS-CONTENU).
+- **Ajouté en 6.6b** (modèle de page code défaut, validé le 03/11) : fiche du code au texte exact (CODE-FICHE-ABSENTE, CODE-FICHE-INCOMPLETE) ; cas décrits par marque, une rangée par précision du contenu, triées par marque, au texte exact, avec leurs sources, et l'élément unique « tableau » porté par ce tableau (CODE-CAS-MARQUE-INCOMPLET).
 - **Recette** (passée par Claude page par page, puis relue par l'agent indépendant avec le lot) :
   - ton et vocabulaire (section 3) ;
   - aucune phrase sans source ni utilité (1 et 2.2) ;
