@@ -60,6 +60,8 @@ export interface SourceDuRegistre {
   categorie: string;
   url: string;
   date_consultation: Date;
+  /** Notice constructeur : modèle, génération et édition (« 208 (2e génération), guide d'utilisation édition 01-20 »). */
+  modele?: string | undefined;
 }
 
 /** Ce que les composants lisent d'une ligne du plan du site. */

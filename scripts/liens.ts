@@ -1,5 +1,7 @@
 // Contrôle des liens cassés : chaque lien interne du site construit doit mener à un fichier existant.
-// Usage : node scripts/liens.ts [--dist dist]
+// Usage : node scripts/liens.ts [--dist dist] [--exemples [--attendu CODE@fichier[@extrait]]…]
+//   --exemples : construction de recette des exemples rédigés (dist-exemples, jamais déployée) ; seule à accepter
+//                --attendu (erreur attendue, scripts/lib/attendus.ts).
 import * as cheerio from 'cheerio';
 import { readFile } from 'node:fs/promises';
 import { extname, join, posix, relative, resolve } from 'node:path';
@@ -8,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import type { Constat } from '../src/lib/controle.ts';
 import { existe } from './lib/dist.ts';
 import { listerFichiers } from './lib/charger.ts';
+import { appliquerAttendus, lireAttendus, refusRecette } from './lib/attendus.ts';
 
 const ORIGINE = 'https://decodauto.com';
 const ATTRIBUTS = [
@@ -100,7 +103,16 @@ export async function verifierLiens(dist: string): Promise<BilanLiens> {
 if (argv[1] !== undefined && resolve(argv[1]) === fileURLToPath(import.meta.url)) {
   const indice = argv.indexOf('--dist');
   const dist = resolve(indice >= 0 ? (argv[indice + 1] ?? 'dist') : 'dist');
-  const bilan = await verifierLiens(dist);
+  const refus = refusRecette(argv, dist, process.env);
+  if (refus !== undefined) {
+    stdout.write(`ERREUR ${refus}\n`);
+    exit(2);
+  }
+  const attendus = lireAttendus(argv);
+  const verifie = await verifierLiens(dist);
+  const { constats, absorbes } = appliquerAttendus(verifie.constats, attendus);
+  const bilan = { ...verifie, constats };
+  for (const c of absorbes) stdout.write(`ATTENDU [${c.regle}] ${c.fichier ?? ''} : ${c.message}\n`);
   for (const c of bilan.constats) {
     const ligne = `ERREUR [${c.regle}] ${c.fichier ?? ''} : ${c.message}`;
     stdout.write(process.env['GITHUB_ACTIONS'] === 'true' ? `::error file=${c.fichier ?? ''},title=${c.regle}::${c.message}\n` : ligne + '\n');

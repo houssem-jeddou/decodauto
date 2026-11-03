@@ -1,11 +1,12 @@
 // Ensemble des contrôles d'une construction : données, porte de l'étape 4, pages (frontmatter, texte et page
 // construite), puis site construit. Utilisé par scripts/controle.ts, qui affiche le bilan, et par les tests.
 import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
 import { adressesDansLeTexte, indexerPlan, liensEnAttente } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
-import { auteursDuSocle, chargerDonnees, chargerPages } from './charger.ts';
+import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
+import { adresseDepuisFichier } from '../../src/lib/site.ts';
 import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
@@ -15,15 +16,24 @@ export interface BilanControle {
   pagesEditoriales: number;
 }
 
-export async function controlerSite(options: { racine: string; dist: string; aujourdhui: Date; indexable: boolean }): Promise<BilanControle> {
-  const { racine, dist, aujourdhui, indexable } = options;
+/**
+ * Fiche auteur supposée pour la construction de recette des exemples (livrable 6.6) : la page « à propos », qui porte la
+ * fiche, est écrite à l'étape 7. Jamais utilisée par la construction de production.
+ */
+export const AUTEUR_DES_EXEMPLES = AUTEUR_SUPPOSE;
+
+export async function controlerSite(options: { racine: string; dist: string; aujourdhui: Date; indexable: boolean; exemples?: boolean }): Promise<BilanControle> {
+  const { racine, dist, aujourdhui, indexable, exemples = false } = options;
   const constats: Constat[] = [];
   const informations: string[] = [];
 
-  // 1. Fichiers de données et base voyants.
+  // 1. Fichiers de données et base voyants. Construction de recette (--exemples) : les exemples rédigés s'ajoutent aux
+  //    pages, avec la fiche auteur supposée.
   const donnees = await chargerDonnees(racine);
-  const pagesLues = await chargerPages(racine);
-  const { contexte, constats: constatsDonnees } = construireContexte({ ...donnees, auteurs: auteursDuSocle(pagesLues) }, aujourdhui);
+  const pagesLues = await chargerPages(racine, exemples ? [DOSSIER_CONTENU, DOSSIER_EXEMPLES] : [DOSSIER_CONTENU]);
+  const auteurs = [...auteursDuSocle(pagesLues), ...(exemples ? [AUTEUR_DES_EXEMPLES] : [])];
+  if (exemples) informations.push(`construction de recette des exemples (${DOSSIER_EXEMPLES}/) : fiche auteur « ${AUTEUR_DES_EXEMPLES} » supposée, la page « à propos » est écrite à l'étape 7 ; jamais déployée`);
+  const { contexte, constats: constatsDonnees } = construireContexte({ ...donnees, auteurs }, aujourdhui);
   constats.push(...constatsDonnees);
   // Grille des coûts : ses citations désignent des citations de la base voyants réelle (demande n° 6).
   constats.push(...controlerGrilleCouts(contexte.voyants, contexte.sources));
@@ -68,6 +78,16 @@ export async function controlerSite(options: { racine: string; dist: string; auj
     });
   }
   constats.push(...controlerEnsemble(controlees, contexte));
+  // Une page éditoriale construite a son fichier de contenu : un exemple (exemples/), une page de test ou une page
+  // supprimée ne se retrouvent jamais dans le site construit (livrable 6.6 : aucune vraie page sur main avant l'étape 9).
+  const adressesDuPlan = new Set([...contexte.plan.values()].map((l) => l.adresse));
+  const adressesEcrites = new Set(controlees.flatMap((p) => (p.id !== undefined ? [contexte.plan.get(p.id)?.adresse ?? ''] : [])));
+  for (const chemin of await listerFichiers(dist, '.html')) {
+    const fichier = relative(dist, chemin).split('\\').join('/');
+    const adresseConstruite = adresseDepuisFichier(fichier);
+    if (adresseConstruite === undefined || adresseConstruite === '/' || !adressesDuPlan.has(adresseConstruite) || adressesEcrites.has(adresseConstruite)) continue;
+    constats.push({ regle: 'R7-PAGE-SANS-CONTENU', gravite: 'erreur', message: `la page ${adresseConstruite} est construite sans fichier de contenu dans ${exemples ? `${DOSSIER_CONTENU} ni ${DOSSIER_EXEMPLES}` : DOSSIER_CONTENU} (un exemple ne se publie qu'avec son lot)`, fichier });
+  }
   const ecrites = new Set(controlees.flatMap((p) => (p.id !== undefined ? [p.id] : [])));
   // Maillage des pages construites (docs/08 §4) : fil d'Ariane vers la mère, enfants et pages liées construits.
   const index = indexerPlan(contexte.plan);

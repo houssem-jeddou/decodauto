@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
+Dernière mise à jour : 03/11/2026 (17 h 45, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,7 +12,7 @@ Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 ; suivant : 6.6 modèles et exemples, sur le feu vert de Houssem | `travaux/etape-6/` |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 fusionnée (99819a1) ; 6.6 lancé le 03/11 en trois sous-livrables : 6.6a (modèle de page voyant, exemple « voyant moteur ») validé par Houssem le 03/11 (17 h 32), demande de changement n° 9 acceptée, PR #16 fusionnée sur sa demande ; suivant : 6.6b (modèle code défaut, exemple P0087) | `travaux/etape-6/` |
 | 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -25,7 +25,7 @@ Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
 | Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause depuis 12 h 10 ; reprise quand Houssem la redemande | statut juridique (mentions légales) |
-| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 et 6.5 le 03/11 ; restent 6.6, 6.8 et la porte) | séance de validation des exemples voyant, code et pneus |
+| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 et 6.5 le 03/11 ; 6.6 lancé le 03/11, 6.6a validé le même jour ; restent 6.6b, 6.6c, 6.8 et la porte) | séance de validation des exemples voyant, code et pneus |
 | 8. Vague A | 29/10–01/11 | ≈ 11–15/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
 | 9. Mise en ligne du minimum | 31/10 | ≈ 14–16/11 | portes 7 et 8 ; sécurité des comptes |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 21–25/11 / ≈ 28/11–02/12 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
@@ -38,7 +38,7 @@ Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
 5. ~~texte de la demande de changement n° 5 et redirections Cloudflare~~ : faits le 28/10 (10 h 25) ;
 6. ~~demande de changement n° 6 (coût probable)~~ : faite le 28/10 ;
 7. ~~charte éditoriale (6.2), composants communs (6.3), tableau des notices et demande de changement n° 8 (6.4), contrôles peu coûteux (6.5)~~ : validés le 02/11 et le 03/11 ;
-8. exemples des modèles voyant, code et pneus, puis porte 6, vers le 10/11 ;
+8. exemples des modèles voyant (validé le 03/11), code et pneus, puis porte 6, vers le 10/11 ;
 9. porte 7 ;
 10. demande de changement des requêtes absentes, juste avant l'étape 8 ;
 11. paquet et encadrés de la vague A, et porte 8 ;
@@ -96,12 +96,24 @@ Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
   - Une revue indépendante, corrections intégrées.
   - PR #14 fusionnée le 03/11 (14 h 44) sur la demande de Houssem (5d9a8e0) ; CI de `main` verte (run n° 58, déploiement compris).
 - [x] **6.5 Contrôles peu coûteux** : title, H1 ou description en double ; dates incohérentes. Lancé le 03/11 (14 h 43) ; validé par Houssem le 03/11 (15 h 14), avec les deux recommandations ; verrouillé.
-  - Branche `etape-6/controles-peu-couteux`, PR #15 ; CI verte (runs 41648233767, 41649674249 et 41651075988).
+  - Branche `etape-6/controles-peu-couteux`, PR #15 ; CI verte (runs 41648233767, 41649674249 et 41651075988) ; fusionnée le 03/11 sur la demande de Houssem (99819a1), CI de `main` verte (run 41652767551 : contrôles, Lighthouse, déploiement et vérification en production).
   - Site construit : title, H1 et meta description uniques et présents (TITLE-, H1-, DESCRIPTION-, TITLE-H1-DOUBLON ; TITLE-ABSENT, DESCRIPTION-ABSENTE) ; expressions interdites de la charte hors citations (EXPRESSION-INTERDITE). Dates : DATES-FUTUR, DATES-ORDRE, DATES-REVUE-DELAI (charte §8).
   - Validés avec le livrable : lecture de « loi montagne : revue avant chaque 1er novembre » (charte §8 précisée) ; « nos équipes » et « nos rédactions » ajoutés aux expressions interdites (charte §2.7) ; charte §9 mise à jour (contrôles ajoutés en 6.3 et 6.5).
   - Tests sur les données réelles datés de la plus récente de leurs dates (`tests/date-des-donnees.ts`) : ni date figée, ni dépendance au calendrier.
   - Deux revues indépendantes (le maximum), corrections intégrées.
-- [ ] **6.6 Modèles et exemples rédigés** des types de la vague A : voyant, code et pneus (demande de changement n° 5, 03 v6). Les modèles panne, dossier et fluide ouvrent les étapes 10 et 11.
+- [ ] **6.6 Modèles et exemples rédigés** des types de la vague A : voyant, code et pneus (demande de changement n° 5, 03 v6). Les modèles panne, dossier et fluide ouvrent les étapes 10 et 11. Lancé le 03/11 sur le feu vert de Houssem, en trois sous-livrables, chacun relu, présenté, validé et fusionné avant le suivant ; exemples choisis par Houssem : voyant moteur, P0087, loi montagne.
+  - [x] **6.6a Modèle de page voyant et mécanismes communs**, exemple « voyant moteur ». Présenté le 03/11 ; validé par Houssem le 03/11 (17 h 32), les quatre points acceptés (encadré et pièces des causes, faits du texte, demande de changement n° 9, seuil d'un tiers) ; verrouillé. Empreinte de l'encadré versée (`ceaa32fa…`), attendu R4 retiré du job de recette, charte §2.6, §4 et §9 mises à jour ; fusion de la PR #16 demandée.
+    - Branche `etape-6/modeles-exemples`, PR #16 (brouillon) ; CI verte, y compris le job « Recette des exemples ».
+    - Livré :
+      - route des pages éditoriales et modèle de page voyant (`src/lib/modeles.ts`) ;
+      - références du texte rédigé tirées des sources de vérité : `{{notice:…}}`, `{{verdict:…}}`, `{{cite:…}}` ;
+      - exemples dans `exemples/`, jamais publiés, construits seulement par la construction de recette (`dist-exemples`, job CI « Recette des exemples ») ;
+      - erreurs attendues de la recette déclarées dans le workflow (`--attendu`, ATTENDU-ABSENT) ;
+      - contrôles R7-PAGE-SANS-CONTENU, TEXTE-REDIGE-ABSENT, TEXTE-REFERENCE-NON-REMPLACEE et CITATIONS-PART.
+    - Paquet de validation : `travaux/etape-6/paquet-6.6a-voyant-moteur.md` ; demande de changement n° 9 : `travaux/etape-6/demande-changement-9.md`.
+    - Deux revues indépendantes (le maximum), corrections intégrées.
+  - [ ] **6.6b Modèle de page code défaut**, exemple P0087.
+  - [ ] **6.6c Modèle de page pneus et obligations**, exemple loi montagne.
 - [x] **6.7 Relevé des résultats Google depuis la France** (28/10) : 19 requêtes principales de la vague A, SerpApi (google.fr, gl=fr, hl=fr, localisation France), empreintes vérifiées après recopie. Branche `etape-6/releve-google-france`, `travaux/etape-6/releve-google-france/` ; constats pour les briefs dans son README. Revue indépendante prévue avec les briefs (6.8), en un seul lot.
 - [ ] **6.8 Briefs des 22 pages de la vague A**, générés depuis le plan et le relevé (les 3 pages du socle n'ont pas de mots-clés).
 - [ ] **6.9 Porte de sortie de l'étape 6.**
@@ -207,6 +219,18 @@ Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
 
   PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 - 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 03/11/2026 (17 h 32), Houssem : **valide le livrable 6.6a** et accepte les quatre points :
+  - l'encadré de la page exemple « voyant moteur », avec les pièces de chaque cause ;
+  - les faits de sécurité du texte ;
+  - la **demande de changement n° 9** : texte rédigé, causes, puis tableau ; la marche à suivre est l'action de l'encadré (charte §4) ;
+  - le **seuil de texte cité** : un tiers au plus, avec un texte rédigé exigé (charte §2.6).
+
+  Il demande la fusion de la PR #16. Suivant : 6.6b (P0087).
+- 03/11/2026 (après-midi), Houssem : **lance le livrable 6.6** (« Go pour 6.6 ») et choisit :
+  - les exemples : voyant moteur, P0087, loi montagne ;
+  - trois sous-livrables (6.6a voyant, 6.6b code défaut, 6.6c pneus), chacun relu, présenté, validé et fusionné avant le suivant.
+
+  La PR #15 est fusionnée (99819a1) avant le lancement.
 - 03/11/2026 (15 h 14), Houssem : **valide le livrable 6.5** et **accepte les deux recommandations** :
   - loi montagne : une revue faite à partir du 1er septembre vaut pour la saison qui commence ; une revue faite avant le 1er septembre appelle la suivante au plus tard le 31 octobre de la même année (charte §8) ;
   - « nos équipes » et « nos rédactions » ajoutés aux expressions interdites (charte §2.7).
@@ -224,6 +248,28 @@ Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
 - 02/11/2026 (20 h 19), Houssem : **valide la charte éditoriale avec toutes les recommandations** de sa section 10, **donne son accord sur les textes exacts** (mention en tête, signature, ligne de transparence, section « Méthode ») et **demande la fusion de la PR #12** si tout va bien. 03 passe en v7 (règle 11 alignée). Le livrable 6.2 est verrouillé ; suivant : 6.3, composants communs.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 03/11, livrable 6.6a (modèle de page voyant, exemple « voyant moteur »), deux revues (deux relecteurs), le maximum.
+  - **Première revue** (« à corriger », un point bloquant) :
+    - trois phrases de fait étaient contredites par les notices relevées : aucune distance (la Peugeot 208 en donne une, cas AdBlue), aucune manipulation pour éteindre le voyant et aucune exception (Toyota Yaris p. 297, réservoir vidé). Elles sont réécrites (point bloquant) ;
+    - CITATIONS-PART ne voyait pas une page sans texte rédigé (32 %) : contrôle TEXTE-REDIGE-ABSENT ajouté, et un rendu Markdown absent fait échouer la construction ;
+    - le job de recette restait rouge à cause du lien « Méthode » (page « à propos », étape 7) : erreurs attendues déclarées dans le workflow, chacune désignée par son code, son fichier et un extrait ; un attendu qui ne se produit plus fait échouer (ATTENDU-ABSENT) ;
+    - verdict d'abord, action non adoucie ;
+    - génération et édition des notices tirées du registre (`{{notice:…}}`) ;
+    - réponses ajoutées : voyant au démarrage, voyant rouge et « Risque casse moteur », « Antipollution à contrôler » ;
+    - date de la base corrigée (24/10) ; description raccourcie ;
+    - identifiant de l'auteur supposé défini une seule fois.
+  - **Seconde revue** (« à corriger », rien de bloquant ; chaque fait et chaque chiffre relu exact) :
+    - les distances AdBlue (1 100 km, 800 km) relèvent de la page AdBlue (cas 11 du plan) : retirées, avec un renvoi à cette page ;
+    - chaque partie qui répond à une question redit le verdict retenu, par son libellé tiré de la base (`{{verdict:…}}`) ;
+    - la description ne reformule plus le verdict (« dès que possible » est un autre niveau de la grille) ;
+    - partie « défaut moteur, vanne EGR, sonde » ajoutée ; doublons réduits ; noms du voyant dans chaque notice ; « jaune » (Seat Ibiza) ;
+    - pages citées dans le texte seulement ajoutées à « Sources » (`{{cite:…}}`) ;
+    - `--exemples` n'est accepté que sur `dist-exemples` construit avec `AVEC_EXEMPLES=1` ;
+    - « Marche à suivre » retirée du corps : c'est une règle de la charte, d'où la demande de changement n° 9.
+  - **Laissé ouvert** :
+    - mots-clés « défaut moteur », vanne EGR, perte de puissance et contrôle technique : à traiter au brief 6.8, avec leurs sources ;
+    - vérifications sur les PDF : Seat Ibiza p. 289, Toyota p. 297, témoins des messages AdBlue ;
+    - le rendu réel n'est contrôlé que par le job de recette, qui n'est pas requis pour fusionner.
 - 03/11, livrable 6.5 (contrôles peu coûteux), deux revues (deux relecteurs), le maximum ; chacune « à corriger », rien de bloquant.
   - **Première revue, changé** :
     - un `blockquote` ou un `q` sans source n'est plus une citation (encadré « À retenir » contrôlé) ;
@@ -447,9 +493,8 @@ Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
 ## Points ouverts (non bloquants)
 - **Description des pages du socle** : le schéma du socle n'a pas de champ `description`, et DESCRIPTION-ABSENTE (6.5) l'exige sur toute page construite. Une demande de changement ajoutera ce champ avant de construire « à propos » ou les mentions légales (étape 7).
 - **Adresse de signalement** : `erreur@decodauto.com` créée le 02/11 (redirection OVH vers la boîte de Houssem, sans copie) et publiée sur le site. Réception à confirmer par un courriel de test envoyé depuis une autre adresse.
-- **À trancher en 6.6, sur les vraies pages** (revue de 6.4) :
-  - part de texte cité par page : la loi (L122-5) ne fixe aucun seuil. Page de démonstration : 51 % du texte, avec un corps provisoire ; page ABS/ESP : environ 1 600 mots cités ;
-  - longueur et ordre du corps des pages voyants : tableau de 4 900 px sur téléphone pour la page huile, environ 7 500 px pour ABS/ESP.
+- **Texte rédigé des pages voyants (étape 8)** : seuil d'un tiers validé le 03/11. La page ABS/ESP, estimée à 42 % sans texte rédigé, en demandera environ 570 mots ; la page AdBlue environ 280.
+- **Mots-clés de la page voyant moteur à traiter au brief 6.8**, avec leurs sources : « défaut moteur » (message des notices Peugeot et Citroën à lire), perte de puissance (Seat Ibiza p. 289, voyants à vérifier sur le PDF), contrôle technique (texte du contrôle technique sur Légifrance). Vérifications sur les PDF : Toyota p. 297, témoins des messages AdBlue de Renault, Dacia et Peugeot.
 - **Relevé Google France (6.7)** : sur la branche `etape-6/releve-google-france`, pas encore fusionnée ; revue et fusion avec les briefs (6.8).
 - **Notices des marques de référence** : 5 marques lues sur 7 (Citroën et Volkswagen non nécessaires). Les notices Renault et Dacia sont sur user-manual.renault.com et user-manual.dacia.com ; la notice Toyota est sur le portail de son prestataire, ouvert depuis toyota.fr. Le texte relevé est dans `travaux/etape-5/notices/`.
 - **Loi montagne** : les arrêtés préfectoraux listant les communes sont à ajouter au registre à l'étape 8. Aucune page de la Sécurité routière sur la pression des pneus n'a été trouvée.
@@ -484,6 +529,7 @@ Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
 - **Branches anciennes** du dépôt (`claude/great-fermat-txuonc`, `docs/porte-etape-3`) : peuvent être supprimées.
 
 ## Idées reportées
+- Espace insécable après « p. » devant un numéro de page (« p. 139 » se coupe en fin de ligne), relevée en 6.6a ; typographie du gabarit (6.3), à proposer.
 - Longueur des title et des meta descriptions (contrôle ou alerte), proposée par la revue de 6.5 ; la charte ne la fixe pas.
 - Ancien lot 2 (codes OBD supplémentaires, batterie et pression par modèle, freins, distribution, embrayage, AdBlue, Crit'Air, voiture qui tremble…) : à réévaluer avec les données de Search Console.
 - Frais kilométriques : décision en décembre 2026 (aligné sur 02).
@@ -494,6 +540,11 @@ Dernière mise à jour : 03/11/2026 (15 h 25, heure de Tunis)
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
+- 03/11/2026 (17 h 32), acceptée : **n° 9, ordre du corps des pages voyants et marche à suivre** (`travaux/etape-6/demande-changement-9.md`, PR #16).
+  - **Changement** : texte rédigé, causes, puis tableau des notices. La marche à suivre est l'action de chaque ligne de l'encadré, que le corps ne recopie pas ; chaque partie qui répond à une question redit le verdict retenu.
+  - **Raison** : sur téléphone, les réponses aux questions arriveraient plus de 6 000 px plus bas dans l'ordre de la charte ; une section « marche à suivre » recopierait les actions de l'encadré.
+  - **Impact** : charte §4, point 7 ; aucun contenu validé touché.
+  - **Appliquée** dans la PR #16 : charte §4, point 7.
 - 03/11/2026 (13 h 48), acceptée : **n° 8, tableau des notices** (`travaux/etape-6/demande-changement-8.md`). Une page voyant (hors outil) a pour élément unique le tableau « Ce que dit la notice de votre marque » ; toute page de rattachement d'un voyant de la base l'affiche ; une page qui reprend la ligne d'un voyant rattaché ailleurs ne le recopie pas. Raison : écart entre notices sur 16 lignes de la base sur 25 ; aperçu IA sur 18 requêtes sur 19, qui contredit la base sur le voyant moteur orange ; recherches par marque sur les pages voyants. Impact : 08 v7 (sections 2 et 3, règle 12), schéma voyant, lien ajouté dans l'encadré ; aucun contenu validé touché. PR #14.
 - 02/11/2026 (22 h 28), acceptée : **n° 7, ordre de l'encadré de décision** (`travaux/etape-6/demande-changement-7.md`). 08 §3 règle 9 : « la question et le coût, puis une ligne par situation » devient « la question, une ligne par situation, puis le coût ». Raison : le verdict passe avant le coût pour le lecteur ; la charte et le composant suivaient déjà cet ordre. Impact : aucun contenu ni contrôle touché (08 v6, PR #13).
 - 28/10/2026 (13 h 31), acceptée : **n° 6, coût probable** (`travaux/etape-6/demande-changement-6.md`). Une échelle fermée de 5 tranches qui disent la nature de la dépense (aucun frais, geste, entretien ou équipement, réparation au garage, grosse réparation), sans montant en euros pour les réparations ; la tranche d'une cause calculée depuis une liste de pièces ; « si vous continuez de rouler » ; les montants fixés par un texte (dépannage sur autoroute, aucune amende loi montagne) dans `data/couts.json`. Décisions : ordre de grandeur en euros par pièce (deux sources d'éditeurs différents), règle 5 réécrite (montants fixés par un texte ou ordres de grandeur sourcés), coût porté par la cause, liste des pièces, libellés gardés. Impact : structure v5 (08), 01, 02, `CLAUDE.md` ; aucun sur la base voyants. PR #11.

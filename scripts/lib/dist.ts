@@ -4,7 +4,7 @@ import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
-import { EXPRESSIONS_INTERDITES, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE } from '../../src/lib/charte.ts';
+import { EXPRESSIONS_INTERDITES, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
 import { normaliserRecherche } from '../../src/lib/texte.ts';
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
@@ -395,6 +395,97 @@ export function constatsExpressionsInterdites(html: string, fichier: string): Co
   });
 }
 
+/** Mots d'un texte : suites de lettres ou de chiffres, apostrophe ou trait d'union intérieurs compris (« l’huile » : 1). */
+export function compterMots(texte: string): number {
+  return texte.match(/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu)?.length ?? 0;
+}
+
+/**
+ * Blocs hors du décompte de la part citée : navigation (fil d'Ariane, pages liées, pages enfants), mention en tête,
+ * lien de signalement, section « Sources » et renvois de page du tableau des notices (« p. 15, « … » ») : ce sont des
+ * références, pas du texte cité ni du texte du site.
+ */
+export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page'] as const;
+
+export interface PartCitee {
+  /** Mots du texte affiché dans le contenu principal (main), hors HORS_PART_CITEE. */
+  mots: number;
+  /** Dont : mots cités (extraits de notices, blockquote et q sourcés, texte entre guillemets « … »). */
+  cites: number;
+  part: number;
+}
+
+/**
+ * Part de texte cité d'une page construite (charte §2.6, livrable 6.6). Le numérateur est compté large : tout texte
+ * entre guillemets « … » compte comme cité, même un libellé du site (« Consigne retenue »). Le dénominateur compte tout
+ * le texte du site affiché, blocs générés compris (encadré, causes, libellés du tableau) : la présence du texte rédigé
+ * est contrôlée à part (TEXTE-REDIGE-ABSENT).
+ */
+export function partCitee(html: string): PartCitee {
+  const $ = cheerio.load(html);
+  const main = $('main').first();
+  const zone = main.length > 0 ? main : $('body').first();
+  const exclus = [...HORS_PART_CITEE, ...ELEMENTS_SANS_TYPOGRAPHIE].join(', ');
+  const citations = [...CITATIONS_TOUJOURS, ...CITATIONS_AVEC_SOURCE].join(', ');
+  let motsCitations = 0;
+  const texte: string[] = [];
+  const parcourir = (noeuds: readonly { type: string }[]): void => {
+    for (const noeud of noeuds) {
+      if (noeud.type === 'text') texte.push((noeud as unknown as { data: string }).data.replace(/\s+/g, ' '));
+      else if (noeud.type === 'tag') {
+        const element = $(noeud as never);
+        if (element.is(exclus)) continue;
+        if (element.is(citations)) {
+          motsCitations += compterMots(element.text());
+          continue;
+        }
+        const bloc = BLOCS.has(((noeud as unknown as { name?: string }).name ?? '').toLowerCase());
+        if (bloc) texte.push(SEPARATEUR);
+        parcourir(element.contents().toArray());
+        if (bloc) texte.push(SEPARATEUR);
+      }
+    }
+  };
+  parcourir(zone.contents().toArray());
+  const propre = texte.join('');
+  const motsPropres = compterMots(propre);
+  const motsEntreGuillemets = motsPropres - compterMots(sansGuillemets(propre));
+  const mots = motsPropres + motsCitations;
+  const cites = motsCitations + motsEntreGuillemets;
+  return { mots, cites, part: mots === 0 ? 0 : cites / mots };
+}
+
+/**
+ * Texte rédigé présent sur une page éditoriale (repérée par son encadré) : un bloc `data-corps` non vide (charte §4,
+ * point 7 : questions des lecteurs). Sans lui, la page n'est faite que de blocs générés et de citations ; CITATIONS-PART
+ * ne suffit pas à le voir (revue de 6.6a : la page exemple sans texte rédigé reste sous le seuil).
+ */
+export function constatsTexteRedige(html: string, fichier: string): Constat[] {
+  if (!/data-encadre-decision/.test(html)) return [];
+  const $ = cheerio.load(html);
+  const texte = $('[data-corps]').text();
+  // Référence à une notice ({{notice:…}}) restée telle quelle : le rendu Markdown l'a transformée (entités, par
+  // exemple), et le modèle ne l'a pas reconnue.
+  if (texte.includes('{{')) return [erreur('TEXTE-REFERENCE-NON-REMPLACEE', 'texte rédigé : une référence « {{ … }} » est affichée telle quelle (référence à une notice non remplacée)', fichier)];
+  if (compterMots(texte) > 0) return [];
+  return [erreur('TEXTE-REDIGE-ABSENT', 'page éditoriale sans texte rédigé (bloc data-corps vide ou absent) : la charte (§4, point 7) demande les réponses aux questions des lecteurs ; le corps Markdown est-il vide, ou son rendu absent ?', fichier)];
+}
+
+/** Part de texte cité d'une page éditoriale (repérée par son encadré de décision) au plus PART_CITEE_MAX (charte §2.6). */
+export function constatsPartCitee(html: string, fichier: string, partMax: number = PART_CITEE_MAX): Constat[] {
+  if (!/data-encadre-decision/.test(html)) return [];
+  const { mots, cites, part } = partCitee(html);
+  if (part <= partMax) return [];
+  const pourcent = (x: number): string => `${Math.round(x * 100)} %`;
+  return [
+    erreur(
+      'CITATIONS-PART',
+      `texte cité : ${cites} mots sur ${mots} (${pourcent(part)}), au-delà de ${pourcent(partMax)} (charte §2.6 : la page reste d'abord un texte du site, que les citations servent) ; raccourcir les extraits ou étoffer le texte rédigé`,
+      fichier,
+    ),
+  ];
+}
+
 /**
  * Title et meta description présents sur toutes les pages du site construit (accueil, 404, socle et pages
  * éditoriales ; charte §3.4) : sans eux, Google les compose lui-même et le doublon n'est plus contrôlable.
@@ -422,6 +513,8 @@ export async function controlerComposantsCommuns(dist: string): Promise<Constat[
       ...constatsTypographie(html, fichier),
       ...constatsIdentifiants(html, fichier),
       ...constatsExpressionsInterdites(html, fichier),
+      ...constatsTexteRedige(html, fichier),
+      ...constatsPartCitee(html, fichier),
     );
     const lus = enTetesDePage(html, fichier);
     constats.push(...constatsEnTetesPresents(lus));
