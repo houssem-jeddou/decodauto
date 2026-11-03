@@ -838,6 +838,13 @@ describe('coût probable : calcul, données et grille (demande de changement n°
     assert.equal(libellePlage(une), GRILLE_COUTS.reparation.libelle);
     const outil = resoudreCout({ outil: true, cout: {} }, couts, true);
     assert.equal(libellePlage(outil), LIBELLE_SELON_LE_VOYANT);
+    // Demande de changement n° 10 : une page loi montagne à verdict « non » n'a pas de montant automatique ; une autre
+    // page pneus, si.
+    const automatiques = [...couts.montants.values()].filter((m) => m.automatique !== undefined).map((m) => m.id);
+    const montagne = resoudreCout({ outil: false, sansMontantAutomatique: true, cout: { pieces: ['pneus-hiver'] } }, couts, true);
+    assert.ok(automatiques.every((id) => !montagne.montants.includes(id)));
+    const pression = resoudreCout({ outil: false, cout: { pieces: ['pneus'] } }, couts, true);
+    assert.ok(automatiques.length > 0 && automatiques.every((id) => pression.montants.includes(id)));
     const inconnue = resoudreCout({ outil: false, causes: [{ pieces: ['fantome'] }], cout: {} }, couts, false);
     assert.deepEqual(inconnue.piecesInconnues, ['fantome']);
     assert.equal(libellePlage(inconnue), undefined);

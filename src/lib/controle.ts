@@ -5,6 +5,7 @@ import { ANCRE_METHODE, DELAI_REVUE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVU
 import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
+import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -740,6 +741,11 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
     if (inconnues.length === 0 && !premiereMain) {
       constats.push(erreur('R3-PREMIERE-MAIN', 'texte_reference : la source doit être de première main (Légifrance ou arrêté préfectoral)', fichier));
     }
+    // La nature affichée par la fiche « Le texte en bref » (livrable 6.6c) est celle de la source au registre.
+    const categorie = ctx.sources.get(page.texte_reference.source)?.categorie;
+    if (categorie !== undefined && premiereMain && categorie !== page.texte_reference.nature) {
+      constats.push(erreur('R7-TEXTE-REFERENCE-NATURE', `texte_reference : nature « ${page.texte_reference.nature} », alors que la source est de catégorie « ${categorie} » au registre`, fichier));
+    }
   }
   // R3 et R8 sur les lignes saisies : citations, niveau le plus prudent, écart signalé, cohérence verdict / urgence.
   const saisies: LigneResolue[] = lignes.filter((l) => l.origine === 'page');
@@ -831,6 +837,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
       ...('code' in page && {
         code: { fiche: modeleFicheCode(page, ctx.voyants, ctx.sources), parMarque: modeleParMarque(page), elementUnique: page.element_unique === 'tableau' },
       }),
+      ...('texte_reference' in page && { texte: { fiche: modeleFicheTexte(page, ctx.sources) } }),
     };
     constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus));
   }
@@ -934,6 +941,8 @@ export interface AttendusPage {
    * l'élément unique de la page est un tableau, porté alors par le tableau des cas par marque.
    */
   code?: { fiche: FicheCode; parMarque: readonly RangeeParMarque[]; elementUnique: boolean } | undefined;
+  /** Page pneus et obligations (livrable 6.6c, fiche-texte.ts) : fiche « Le texte en bref » attendue. */
+  texte?: { fiche: FicheTexte } | undefined;
 }
 
 /** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
@@ -1054,7 +1063,27 @@ export function controlerHtml(
   if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
   if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, attendus.notices));
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
+  if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
   return constats;
+}
+
+/**
+ * Page pneus et obligations (livrable 6.6c) : la fiche « Le texte en bref » (data-texte-reference) affiche, dans
+ * l'ordre, chaque ligne du modèle (texte de référence, où le lire, période, zones, défaillances, contre-visite, selon le
+ * contenu) au texte exact. Texte comparé normalisé (normaliserTexte).
+ */
+export function controlerFicheTexte(html: string, fichier: string, attendu: { fiche: FicheTexte }): Constat[] {
+  const $ = cheerio.load(html);
+  const fiches = $('[data-texte-reference]');
+  if (fiches.length !== 1) {
+    return [erreur('FICHE-TEXTE-ABSENTE', `une page pneus et obligations affiche la fiche « Le texte en bref » (data-texte-reference) ; trouvé : ${fiches.length}`, fichier)];
+  }
+  const lues = fiches.find('[data-fiche-ligne]').toArray().map((el) => `${normaliserTexte($(el).find('dt').text())} : ${normaliserTexte($(el).find('dd').text())}`);
+  const voulues = attendu.fiche.lignes.map((l) => `${normaliserTexte(l.intitule)} : ${normaliserTexte(l.valeur)}`);
+  if (lues.join('\n') !== voulues.join('\n')) {
+    return [erreur('FICHE-TEXTE-INCOMPLETE', `la fiche « Le texte en bref » n'affiche pas, dans l'ordre : ${attendu.fiche.lignes.map((l) => l.intitule).join(', ')} (texte tiré du contenu et du registre)`, fichier)];
+  }
+  return [];
 }
 
 /**
@@ -1351,6 +1380,8 @@ export interface PageControlee {
   id?: string | undefined;
   /** Adresses des pages du site citées dans le texte de la page (voir adressesDansLeTexte). */
   adressesTexte?: readonly string[] | undefined;
+  /** Liens vers d'autres sites écrits dans le texte de la page (voir liensExternesDuTexte). */
+  liensExternes?: readonly string[] | undefined;
 }
 
 /** Contrôles qui portent sur plusieurs pages à la fois. */
@@ -1371,6 +1402,23 @@ export function controlerEnsemble(pages: readonly PageControlee[], ctx: Contexte
     const id = p.page?.id ?? p.id;
     if (id === undefined) continue;
     constats.push(...controlerLiensDuTexte(id, p.adressesTexte ?? [], index, p.fichier));
+  }
+
+  // Un lien vers un autre site, dans le texte d'une page éditoriale, ne mène qu'à une source officielle (de première
+  // main) citée sur la page : son adresse est celle du registre (livrable 6.6c, charte §2.7).
+  for (const p of pages) {
+    if (p.page === undefined || p.type === 'socle') continue;
+    const permises = new Set(
+      p.page.sources.flatMap((id) => {
+        const source = ctx.sources.get(id);
+        return source !== undefined && SOURCES_PREMIERE_MAIN.includes(source.categorie) ? [source.url] : [];
+      }),
+    );
+    for (const lien of p.liensExternes ?? []) {
+      if (!permises.has(lien)) {
+        constats.push(erreur('R7-LIEN-EXTERNE', `lien dans le texte vers ${lien} : un lien vers un autre site ne mène qu'à une source officielle citée sur la page (adresse exacte du registre, liste « sources »)`, p.fichier));
+      }
+    }
   }
 
   // Chaque voyant de la base est rattaché à une seule page, qui doit le déclarer.

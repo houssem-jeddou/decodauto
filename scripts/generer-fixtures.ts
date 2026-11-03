@@ -11,6 +11,7 @@ import { LIGNE_TRANSPARENCE, signature } from '../src/lib/charte.ts';
 import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from '../src/lib/composants.ts';
 import { modeleTableauNotices, tableauNotices } from '../src/lib/tableau-notices.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml, type PageCode } from '../src/lib/fiche-code.ts';
+import { ficheTexteHtml, modeleFicheTexte, type PageTexte } from '../src/lib/fiche-texte.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
@@ -326,6 +327,9 @@ interface OptionsHtml {
   casPrecisionModifiee?: boolean;
   casDesordre?: boolean;
   casMarqueModifiee?: boolean;
+  /** Page pneus et obligations (livrable 6.6c). */
+  sansFicheTexte?: boolean;
+  ficheTexteFausse?: boolean;
   casSansElementUnique?: boolean;
 }
 
@@ -374,6 +378,13 @@ function blocsCode(page: Objet, options: OptionsHtml): string {
   return fiche + parMarqueHtml(rangees, REGISTRE_TEST, { elementUnique: page['element_unique'] === 'tableau' && !options.casSansElementUnique });
 }
 
+/** Fiche « Le texte en bref » (livrable 6.6c), produite par le vrai composant depuis le contenu et le registre de test. */
+function blocsTexte(page: Objet, options: OptionsHtml): string {
+  if (options.sansFicheTexte) return '';
+  const modele = modeleFicheTexte(page as unknown as PageTexte, REGISTRE_TEST);
+  return ficheTexteHtml(options.ficheTexteFausse ? { ...modele, lignes: modele.lignes.slice(1) } : modele);
+}
+
 function encadre(page: Objet, options: OptionsHtml): string {
   const lignes = lignesAffichees(page)
     .map((l) => {
@@ -399,7 +410,7 @@ function coutResolu(page: Objet) {
   const declare = (page['cout_probable'] as Objet | undefined) ?? {};
   const causes = Array.isArray(page['causes']) ? (page['causes'] as Objet[]).map((c) => ({ pieces: Array.isArray(c['pieces']) ? (c['pieces'] as string[]) : [] })) : undefined;
   const arret = lignesAffichees(page).some((l) => String(l['verdict']).startsWith('non'));
-  return resoudreCout({ outil: page['outil'] === true, causes, cout: declare as never }, DONNEES_COUTS, arret);
+  return resoudreCout({ outil: page['outil'] === true, sansMontantAutomatique: page['sujet'] === 'loi-montagne', causes, cout: declare as never }, DONNEES_COUTS, arret);
 }
 
 /** Coût affiché dans l'encadré, calculé comme le fera le gabarit : plage, risque, montants et leurs dates, prises en charge. */
@@ -491,7 +502,8 @@ function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): st
   const pageVoyant = type === 'voyant' && page['outil'] !== true && page['element_unique'] === 'tableau';
   // Sans élément unique : seul l'élément unique manque (sur une page voyant, c'est le tableau des notices).
   // Page code défaut : fiche du code, puis cas par marque ; ce tableau est l'élément unique quand la page en a.
-  const code = type === 'code-defaut' ? blocsCode(page, options) : '';
+  // Page pneus et obligations : fiche « Le texte en bref » avant le corps (livrable 6.6c).
+  const code = type === 'code-defaut' ? blocsCode(page, options) : type === 'pneus' ? blocsTexte(page, options) : '';
   const parMarque = type === 'code-defaut' && Array.isArray(page['precisions_par_marque']) && page['element_unique'] === 'tableau';
   const element = pageVoyant && notices !== '' ? (options.sansElement ? '' : notices) : `${code}${options.sansElement || parMarque ? '' : (blocs[String(page['element_unique'])] ?? '')}${notices}`;
   return `${entete}<meta name="description" content="${String(page['description'])}"></head><body>${pub}${avant}<main><header><h1>${String(page['h1'])}</h1></header>${entreH1EtEncadre}${blocEncadre}${apres}${element}${etapes}${autreListe}${communs.sources}</main></body></html>\n`;
@@ -561,6 +573,7 @@ invalide('r2-code-sans-voyant', 'code-defaut', codeDefaut(ligneSaisie({ ...LIGNE
 // R3
 invalide('r3-pas-premiere-main', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ citations: [citation('fixture-forum')] }) }), ['R3-PREMIERE-MAIN'], "Verdict qui ne cite qu'une source de seconde main.");
 invalide('r3-source-inconnue', 'panne', avecValidation({ ...panne(), situations: lignesPanne({ citations: [citation('fixture-introuvable')] }) }), ['R3-SOURCE-INCONNUE'], 'Source absente du registre.');
+invalide('r7-texte-reference-nature', 'pneus', { ...pneus(), texte_reference: { nature: 'arrete-prefectoral', reference: 'Référence de test', source: 'fixture-legifrance' } }, ['R7-TEXTE-REFERENCE-NATURE'], 'Texte de référence déclaré « arrêté préfectoral » alors que sa source est de catégorie « legifrance » au registre (la fiche afficherait une nature fausse).');
 invalide('r3-texte-reference-seconde-main', 'pneus', { ...pneus(), texte_reference: { nature: 'legifrance', reference: 'Référence de test', source: 'fixture-forum' } }, ['R3-PREMIERE-MAIN'], 'Texte de référence qui ne vient pas d\'une source de première main.');
 invalide('r3-citation-sans-niveau', 'fluide', fluide(ligneFluide({ citations: [citation('fixture-notice'), citation('fixture-securite-routiere', ['non, arrêt dès que possible', 'immédiate'])] })), ['R3-CITATION-NIVEAU'], 'Citation de notice sans le niveau que la grille tire de sa consigne.');
 invalide('r3-reglement-onu-seul', 'fluide', fluide(ligneFluide({ citations: [citation('fixture-onu')] })), ['R3-PREMIERE-MAIN'], 'Le règlement ONU n° 121 décrit le symbole, pas la conduite à tenir : il ne suffit pas à fonder un verdict.');
@@ -606,6 +619,8 @@ invalide('code-cas-texte-modifie', 'code-defaut', avecValidation({ ...codeDefaut
 invalide('code-cas-marque-modifiee', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un cas par marque est affiché sous une autre marque que celle du contenu.', { casMarqueModifiee: true });
 invalide('code-cas-desordre', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Les cas par marque sont affichés dans un autre ordre que celui du modèle (tri par marque).', { casDesordre: true });
 invalide('code-cas-sans-element-unique', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET', 'R7-ELEMENT-UNIQUE-ABSENT'], 'L\'élément unique de la page est un tableau, mais le tableau des cas par marque ne le porte pas.', { casSansElementUnique: true });
+invalide('texte-sans-fiche', 'pneus', pneus(), ['FICHE-TEXTE-ABSENTE'], 'Page pneus et obligations construite sans la fiche « Le texte en bref ».', { sansFicheTexte: true });
+invalide('texte-fiche-incomplete', 'pneus', pneus(), ['FICHE-TEXTE-INCOMPLETE'], 'La fiche « Le texte en bref » construite n\'affiche pas le texte de référence du contenu.', { ficheTexteFausse: true });
 invalide('r7-dates', 'panne', { ...panne(), date_revue: '2027-03-01', prochaine_revue: '2027-02-01' }, ['R7-DATES'], 'prochaine_revue antérieure à date_revue.');
 invalide('r7-relecteur', 'panne', { ...panne(), relecteur: 'Un relecteur' }, ['R7-CHAMP-INCONNU'], 'Le champ relecteur est retiré : pas de relecteur extérieur (décision du 23/10/2026).');
 
@@ -658,6 +673,14 @@ invalide('dates-modification-avant-publication', 'fluide', { ...fluide(), date_p
 invalide('dates-futur', 'fluide', { ...fluide(), date_modification: '2026-11-15' }, ['DATES-FUTUR'], 'Date de modification dans le futur : la signature afficherait une date fausse.');
 invalide('dates-revue-delai', 'fluide', { ...fluide(), prochaine_revue: '2027-12-01' }, ['DATES-REVUE-DELAI'], 'Prochaine revue à plus de 12 mois de la dernière (charte §8).');
 invalide('dates-revue-delai-pneus', 'pneus', { ...pneus(), prochaine_revue: '2027-05-01' }, ['DATES-REVUE-DELAI'], 'Page pneus : prochaine revue à plus de 6 mois (charte §8).');
+valide(
+  'valide-loi-montagne-arret',
+  'pneus',
+  loiMontagne({
+    situations: [{ situation: 'Sans équipement, dans une commune soumise à l\'obligation', verdict: 'non, arrêt dès que possible', urgence: 'immédiate', action: 'S\'équiper avant d\'entrer dans la zone.', citations: [citation('fixture-legifrance', ['non, arrêt dès que possible', 'immédiate'])] }],
+  }),
+  'Loi montagne avec un verdict « non » (obligation d\'équipement) : le dépannage sur autoroute ne s\'affiche pas de lui-même (demande de changement n° 10).',
+);
 invalide('dates-revue-loi-montagne', 'pneus', loiMontagne({ date_revue: '2026-06-01', prochaine_revue: '2026-11-15' }), ['DATES-REVUE-DELAI'], 'Loi montagne revue en juin : la suivante tombe avant le 1er novembre, début de la saison (charte §8).');
 invalide('dates-journal-hors-periode', 'dossier', { ...dossier(), journal_modifications: [{ date: '2026-09-15', resume: 'Entrée antérieure à la publication.' }] }, ['DATES-ORDRE'], "Entrée du journal d'un dossier hors de la période de la page.");
 invalide('dates-socle-futur', 'socle', { ...socle(), date_modification: '2026-12-01' }, ['DATES-FUTUR'], 'Page du socle datée dans le futur.');

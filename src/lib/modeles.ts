@@ -19,12 +19,20 @@
 //   transparence · fiche du code (signification et ses sources, portée, moteurs, voyant qui s'allume) · cas décrits par
 //   marque (élément unique quand la page le déclare) · causes et coût · texte rédigé (questions des lecteurs, marche à
 //   suivre) · pages liées · sources
+//
+// Ordre d'une page pneus et obligations (charte §4, point 7 : texte de référence, ce qui est exigé, période et zones,
+// marche à suivre ; livrable 6.6c) :
+//   fil d'Ariane · H1 · encadré de décision · signature · ligne de transparence · fiche « Le texte en bref » (texte de
+//   référence et où le lire, période et zones, défaillances et contre-visite) · texte rédigé (ce qui est exigé, avec
+//   l'élément unique quand c'est un tableau du texte, questions des lecteurs, marche à suivre) · tableau des notices si
+//   un voyant de la base est rattaché à la page · pages liées · sources
 // ---------------------------------------------------------------------------------------------
 import { basDePage, causesDeLaPage, hautDePage, tableauNoticesDeLaPage, type DonneesSite } from './gabarit.ts';
-import { echapper, typographierHtml } from './html.ts';
+import { attributHtml, echapper, typographierHtml } from './html.ts';
 import { nomCourtSource, type SourceDuRegistre } from './composants.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
+import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
 import type { TypePage } from '../schemas/listes.ts';
 
@@ -37,12 +45,21 @@ export type Modele = (page: PageEditoriale, site: DonneesSite, corpsHtml: string
  *    qu'une consigne ne soit jamais lue comme valant pour une autre génération (charte §2.5) ;
  *  - « {{verdict:<voyant>}} » : libellé du verdict retenu pour ce voyant (base voyants, grille), quand une partie du texte
  *    répond à une question et doit redire le verdict de l'encadré (charte §2.1 : libellé jamais reformulé) ; le voyant
- *    est une ligne de l'encadré de la page ;
+ *    est une ligne de l'encadré de la page. « {{verdict:ligne-<n>}} » : libellé du verdict de la n-ième ligne de
+ *    l'encadré (ligne saisie ou reprise de la base ; livrable 6.6c) ;
  *  - « {{cite:<source>|<page ou section>}} » : page ou section d'une source de la page citée dans le texte seulement ;
- *    affichée telle quelle et ajoutée à la section « Sources » (charte §4, point 8).
+ *    affichée telle quelle et ajoutée à la section « Sources » (charte §4, point 8) ;
+ *  - « {{montant:<id>}} » : texte d'un montant de data/couts.json déclaré dans le coût probable de la page (charte §2.3 :
+ *    jamais un montant écrit à la main ; livrable 6.6c) ;
+ *  - « {{tableau}} », seul dans son paragraphe, juste avant un tableau Markdown : ce tableau est l'élément unique de la
+ *    page (data-element-unique="tableau"). Permis seulement si le modèle n'en construit pas (pages pneus et obligations)
+ *    et si la page déclare un tableau comme élément unique ; un seul par page (livrable 6.6c).
  * Une référence inconnue, hors des sources ou des lignes de la page, ou illisible, fait échouer la construction.
  */
-export const REFERENCE = /\{\{(notice|verdict|cite):([a-z0-9-]+)(?:\|([^{}|]+))?\}\}/g;
+export const REFERENCE = /\{\{(notice|verdict|cite|montant):([a-z0-9-]+)(?:\|([^{}|]+))?\}\}/g;
+
+/** Marqueur du tableau du texte qui sert d'élément unique, tel que le rend le Markdown (paragraphe seul). */
+export const MARQUEUR_TABLEAU = /<p>\s*\{\{tableau\}\}\s*<\/p>\s*/g;
 
 /** « Peugeot 208 (2e génération), guide d'utilisation édition 01-20 » ; sans `modele` au registre : « Peugeot 208 ». */
 export function nomCompletNotice(source: Pick<SourceDuRegistre, 'titre' | 'categorie' | 'modele'>): string {
@@ -63,8 +80,9 @@ export interface CitationDuTexte {
  */
 export function texteRedige(
   corpsHtml: string,
-  page: Pick<PageEditoriale, 'id' | 'sources' | 'situations'>,
-  site: Pick<DonneesSite, 'sources' | 'voyants'>,
+  page: Pick<PageEditoriale, 'id' | 'sources' | 'situations' | 'cout_probable' | 'element_unique'>,
+  site: Pick<DonneesSite, 'sources' | 'voyants' | 'couts'>,
+  options: { tableauDuTexte: boolean } = { tableauDuTexte: false },
 ): { html: string; citations: CitationDuTexte[] } {
   const html = corpsHtml.trim();
   if (html === '') return { html: '', citations: [] };
@@ -72,12 +90,28 @@ export function texteRedige(
   const echec = (message: string): never => {
     throw new Error(`page « ${page.id} », texte rédigé : ${message}`);
   };
-  const avecReferences = html.replace(REFERENCE, (tout, genre: string, id: string, complement: string | undefined) => {
+  const avecTableau = tableauDuTexte(html, page, options.tableauDuTexte, echec);
+  const avecReferences = avecTableau.replace(REFERENCE, (tout, genre: string, id: string, complement: string | undefined) => {
     if (genre === 'verdict') {
       if (complement !== undefined) echec(`${tout} : pas de complément après le voyant`);
+      const numero = /^ligne-(\d+)$/.exec(id);
+      if (numero !== null) {
+        const ligne = page.situations[Number(numero[1]) - 1] ?? echec(`${tout} : l'encadré de la page n'a pas de ligne ${numero[1]}`);
+        if ('voyant' in ligne && ligne.voyant !== undefined) {
+          const voyant = site.voyants.get(ligne.voyant) ?? echec(`${tout} : voyant absent de la base`);
+          return echapper(GRILLE_VERDICTS[voyant.verdict].libelle);
+        }
+        return echapper(GRILLE_VERDICTS[ligne.verdict ?? echec(`${tout} : ligne sans verdict`)].libelle);
+      }
       if (!page.situations.some((ligne) => 'voyant' in ligne && ligne.voyant === id)) echec(`${tout} : le voyant « ${id} » n'est pas une ligne de l'encadré de la page`);
       const voyant = site.voyants.get(id) ?? echec(`${tout} : voyant absent de la base`);
       return echapper(GRILLE_VERDICTS[voyant.verdict].libelle);
+    }
+    if (genre === 'montant') {
+      if (complement !== undefined) echec(`${tout} : pas de complément après le montant`);
+      if (!(page.cout_probable.montants ?? []).includes(id)) echec(`${tout} : le montant « ${id} » n'est pas déclaré dans le coût probable de la page`);
+      const montant = site.couts.montants.get(id) ?? echec(`${tout} : montant absent de data/couts.json`);
+      return echapper(montant.texte);
     }
     const source = site.sources.get(id) ?? echec(`${tout} : aucune source de ce nom au registre`);
     if (!page.sources.includes(id)) echec(`${tout} : « ${id} » n'est pas dans les sources de la page (« Sources » ne la listerait pas)`);
@@ -95,8 +129,39 @@ export function texteRedige(
   return { html: `<div class="corps" data-corps>${typographierHtml(avecReferences)}</div>`, citations };
 }
 
+/**
+ * Marqueur « {{tableau}} » (voir REFERENCE) : le tableau qui le suit devient l'élément unique de la page, dans un bloc
+ * qui défile en largeur s'il est trop large (atteignable au clavier : région nommée, tabindex="0"). Refusé si le modèle construit lui-même l'élément unique, si la page ne déclare pas
+ * un tableau, s'il y en a plus d'un, ou s'il n'est pas suivi d'un tableau.
+ */
+function tableauDuTexte(
+  html: string,
+  page: Pick<PageEditoriale, 'element_unique'>,
+  permis: boolean,
+  echec: (message: string) => never,
+): string {
+  const marqueurs = html.match(MARQUEUR_TABLEAU) ?? [];
+  if (marqueurs.length === 0) return html;
+  if (!permis) echec('« {{tableau}} » : sur ce type de page, l\'élément unique est construit par le modèle');
+  if (page.element_unique !== 'tableau') echec('« {{tableau}} » : la page ne déclare pas un tableau comme élément unique (element_unique)');
+  if (marqueurs.length > 1) echec('« {{tableau}} » : un seul tableau par page est l\'élément unique');
+  // Nom de la région : le titre (H2 ou H3) qui précède le tableau, sinon « Tableau ».
+  const avant = html.slice(0, html.search(MARQUEUR_TABLEAU));
+  const titres = [...avant.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/g)];
+  const entites: Readonly<Record<string, string>> = { '&amp;': '&', '&#39;': "'", '&#x27;': "'", '&quot;': '"', '&lt;': '<', '&gt;': '>' };
+  const titre = (titres.at(-1)?.[1] ?? '').replace(/<[^>]+>/g, '').replace(/&(amp|#39|#x27|quot|lt|gt);/g, (e) => entites[e] ?? e).trim();
+  const nom = attributHtml(titre !== '' ? titre : 'Tableau');
+  const resultat = html.replace(/<p>\s*\{\{tableau\}\}\s*<\/p>\s*(<table[\s\S]*?<\/table>)/, `<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="${nom}" tabindex="0">$1</div>`);
+  if (resultat === html) echec('« {{tableau}} » doit précéder immédiatement un tableau');
+  return resultat;
+}
+
 /** Texte rédigé seul (voir texteRedige). */
-export function corpsRedige(corpsHtml: string, page: Pick<PageEditoriale, 'id' | 'sources' | 'situations'>, site: Pick<DonneesSite, 'sources' | 'voyants'>): string {
+export function corpsRedige(
+  corpsHtml: string,
+  page: Pick<PageEditoriale, 'id' | 'sources' | 'situations' | 'cout_probable' | 'element_unique'>,
+  site: Pick<DonneesSite, 'sources' | 'voyants' | 'couts'>,
+): string {
   return texteRedige(corpsHtml, page, site).html;
 }
 
@@ -121,8 +186,21 @@ export const pageCodeDefaut: Modele = (page, site, corpsHtml) => {
   ].join('');
 };
 
+/** Page pneus et obligations : voir l'ordre en tête de ce fichier. */
+export const pagePneus: Modele = (page, site, corpsHtml) => {
+  if (!('texte_reference' in page)) throw new Error(`page « ${page.id} » : le modèle pneus et obligations s'applique à une page pneus et obligations`);
+  const texte = texteRedige(corpsHtml, page, site, { tableauDuTexte: true });
+  return [
+    hautDePage(page, site),
+    ficheTexteHtml(modeleFicheTexte(page, site.sources)),
+    texte.html,
+    tableauNoticesDeLaPage(page, site, { elementUnique: false }),
+    basDePage(page, site, texte.citations),
+  ].join('');
+};
+
 /** Modèles livrés, par type. L'outil voyants et les types des vagues B et C n'en ont pas encore. */
-export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut };
+export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut, pneus: pagePneus };
 
 /** Modèle d'une page, ou la raison pour laquelle il n'existe pas encore (la construction échoue alors). */
 export function modeleDeLaPage(type: TypePage, page: PageEditoriale): { modele: Modele } | { absent: string } {

@@ -158,6 +158,15 @@
     "explication": "Source absente du registre."
   },
   {
+    "nom": "r7-texte-reference-nature",
+    "type": "pneus",
+    "erreurs": [
+      "R7-TEXTE-REFERENCE-NATURE"
+    ],
+    "alertes": [],
+    "explication": "Texte de référence déclaré « arrêté préfectoral » alors que sa source est de catégorie « legifrance » au registre (la fiche afficherait une nature fausse)."
+  },
+  {
     "nom": "r3-texte-reference-seconde-main",
     "type": "pneus",
     "erreurs": [
@@ -461,6 +470,24 @@
     ],
     "alertes": [],
     "explication": "L'élément unique de la page est un tableau, mais le tableau des cas par marque ne le porte pas."
+  },
+  {
+    "nom": "texte-sans-fiche",
+    "type": "pneus",
+    "erreurs": [
+      "FICHE-TEXTE-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Page pneus et obligations construite sans la fiche « Le texte en bref »."
+  },
+  {
+    "nom": "texte-fiche-incomplete",
+    "type": "pneus",
+    "erreurs": [
+      "FICHE-TEXTE-INCOMPLETE"
+    ],
+    "alertes": [],
+    "explication": "La fiche « Le texte en bref » construite n'affiche pas le texte de référence du contenu."
   },
   {
     "nom": "r7-dates",
@@ -783,6 +810,13 @@
     ],
     "alertes": [],
     "explication": "Page pneus : prochaine revue à plus de 6 mois (charte §8)."
+  },
+  {
+    "nom": "valide-loi-montagne-arret",
+    "type": "pneus",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Loi montagne avec un verdict « non » (obligation d'équipement) : le dépannage sur autoroute ne s'affiche pas de lui-même (demande de changement n° 10)."
   },
   {
     "nom": "dates-revue-loi-montagne",

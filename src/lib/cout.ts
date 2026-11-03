@@ -13,7 +13,9 @@ import {
 // ---------------------------------------------------------------------------------------------
 // Calcul du coût probable d'une page (demande de changement n° 6) : la plage (tranches) se calcule depuis les
 // pièces des causes, ou depuis les pièces déclarées par une page sans causes ; le montant automatique (dépannage
-// sur autoroute) s'ajoute sur une page dont le niveau de sécurité est un verdict d'arrêt. Ce module ne lit aucun
+// sur autoroute) s'ajoute sur une page dont le niveau de sécurité est un verdict d'arrêt, sauf sur la page outil et sur
+// une page loi montagne, dont le verdict « non » vient d'une obligation d'équipement et non d'une panne (demande de
+// changement n° 10, acceptée par Houssem le 03/11/2026). Ce module ne lit aucun
 // fichier et n'a aucune dépendance : il sert aux contrôles, au gabarit des pages et aux pages de test.
 // ---------------------------------------------------------------------------------------------
 
@@ -126,10 +128,11 @@ export interface CoutResolu {
 /**
  * Résout le coût d'une page.
  *  - `causes` : les causes de la page (voyant hors outil, code défaut, panne) ; sinon `undefined` ;
- *  - `verdictArret` : le niveau de sécurité de la page est un verdict d'arrêt (« non, … »).
+ *  - `verdictArret` : le niveau de sécurité de la page est un verdict d'arrêt (« non, … ») ;
+ *  - `sansMontantAutomatique` : page loi montagne (demande de changement n° 10) : pas de montant automatique.
  */
 export function resoudreCout(
-  entree: { outil: boolean; causes?: readonly { pieces: readonly string[] }[] | undefined; cout: CoutDeclare },
+  entree: { outil: boolean; sansMontantAutomatique?: boolean | undefined; causes?: readonly { pieces: readonly string[] }[] | undefined; cout: CoutDeclare },
   couts: DonneesCouts,
   verdictArret: boolean,
 ): CoutResolu {
@@ -148,8 +151,9 @@ export function resoudreCout(
     }
   }
   const montants = [...(entree.cout.montants ?? [])];
-  // La page outil n'a pas de coût propre (« Selon le voyant ») : pas de montant automatique.
-  if (verdictArret && !entree.outil) {
+  // La page outil n'a pas de coût propre (« Selon le voyant ») : pas de montant automatique. Une page loi montagne non
+  // plus (demande de changement n° 10) : son verdict « non » vient d'une obligation d'équipement, pas d'une panne.
+  if (verdictArret && !entree.outil && entree.sansMontantAutomatique !== true) {
     for (const montant of couts.montants.values()) {
       if (montant.automatique === 'verdict-arret' && !montants.includes(montant.id)) montants.push(montant.id);
     }

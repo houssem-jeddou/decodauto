@@ -218,6 +218,36 @@ export function adressesDansLeTexte(corps: string, adressePage = '/'): string[] 
   return adresses;
 }
 
+/**
+ * Liens vers d'autres sites écrits dans le texte Markdown d'une page (livrable 6.6c, charte §2.7) : mêmes formes que
+ * adressesDansLeTexte ([texte](cible), références, <https://…>, <a href>, adresses nues en https://), hors code et
+ * images ; seulement http(s) vers un autre hôte que decodauto.com. Adresses telles qu'écrites, ponctuation finale ôtée.
+ */
+export function liensExternesDuTexte(corps: string): string[] {
+  const texte = corps
+    .replace(/^ {0,3}(`{3,}|~{3,})[^\n]*\n[\s\S]*?^ {0,3}\1[ \t]*$/gm, '')
+    .replace(/(`+)[^`\n]*?\1/g, '')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, 'image');
+  const motifs = [
+    /\[[^\]]*\]\(\s*<?([^)\s>]+)>?(?:\s+["'(][^)]*)?\)/g,
+    /^ {0,3}\[(?!\^)[^\]]+\]:\s*<?([^\s>]+)>?/gm,
+    /<((?:https?:)?\/\/[^>\s]+)>/g,
+    /<a\b[^>]*?\bhref\s*=\s*["']([^"']+)["']/gi,
+    /(?<![\w/(<"'=.\]-])(https?:\/\/[^\s)\]>"'<]+)/gi,
+  ];
+  const liens: string[] = [];
+  for (const brute of motifs.flatMap((motif) => [...texte.matchAll(motif)].map((c) => (c[1] ?? '').replace(/[.,;:!?]+$/, '')))) {
+    let url: URL;
+    try {
+      url = new URL(brute);
+    } catch {
+      continue;
+    }
+    if ((url.protocol === 'https:' || url.protocol === 'http:') && !HOTES_DU_SITE.has(url.hostname)) liens.push(brute);
+  }
+  return [...new Set(liens)];
+}
+
 /** Un lien écrit dans le texte ne mène qu'à une page liée dans le plan : lien déclaré, page mère ou page enfant. */
 export function controlerLiensDuTexte(id: string, adresses: readonly string[], index: IndexPlan, fichier: string): Constat[] {
   const constats: Constat[] = [];

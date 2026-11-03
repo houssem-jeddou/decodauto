@@ -136,6 +136,11 @@
       "tranche": "entretien"
     },
     {
+      "id": "chaines-a-neige",
+      "libelle": "Chaînes ou chaussettes à neige",
+      "tranche": "entretien"
+    },
+    {
       "id": "capteur-ou-sonde",
       "libelle": "Capteur ou sonde",
       "tranche": "reparation"

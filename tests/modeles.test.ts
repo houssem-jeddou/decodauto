@@ -11,7 +11,8 @@ import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { dateDesDonnees } from './date-des-donnees.ts';
-import { MODELES, corpsRedige, modeleDeLaPage, nomCompletNotice, pageCodeDefaut, pageVoyant } from '../src/lib/modeles.ts';
+import { MODELES, corpsRedige, modeleDeLaPage, nomCompletNotice, pageCodeDefaut, pagePneus, pageVoyant, texteRedige } from '../src/lib/modeles.ts';
+import { TITRE_FICHE_TEXTE, modeleFicheTexte } from '../src/lib/fiche-texte.ts';
 import { CONSIGNE_SANS_VOYANT, LIBELLE_CARBURANT, LIBELLE_PORTEE, modeleFicheCode, modeleParMarque } from '../src/lib/fiche-code.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
 import { DOSSIER_EXEMPLES, chargerPages, lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
@@ -20,7 +21,8 @@ import { AUTEUR_DES_EXEMPLES, controlerSite } from '../scripts/lib/controler-sit
 import { compterMots, constatsExpressionsInterdites, constatsIdentifiants, constatsPartCitee, constatsTexteRedige, constatsTypographie, partCitee } from '../scripts/lib/dist.ts';
 import { appliquerAttendus, lireAttendus, refusRecette } from '../scripts/lib/attendus.ts';
 import { spawnSync } from 'node:child_process';
-import { controlerPage, type Constat } from '../src/lib/controle.ts';
+import { controlerEnsemble, controlerPage, type Constat } from '../src/lib/controle.ts';
+import { liensExternesDuTexte } from '../src/lib/plan.ts';
 import { PART_CITEE_MAX } from '../src/lib/charte.ts';
 import { INSECABLE } from '../src/lib/html.ts';
 import { schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
@@ -30,11 +32,15 @@ const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const fixtures = join(racine, 'tests', 'fixtures');
 const EXEMPLE = 'exemples/voyant/voyant-moteur.md';
 const EXEMPLE_CODE = 'exemples/code-defaut/code-p0087.md';
+const EXEMPLE_PNEUS = 'exemples/pneus/loi-montagne.md';
 // Données réelles et exemples : la date du contrôle est la plus récente de leurs dates (tests/date-des-donnees.ts).
-const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', 'tests/demo/voyant-huile.md', EXEMPLE, EXEMPLE_CODE]);
+const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', 'tests/demo/voyant-huile.md', EXEMPLE, EXEMPLE_CODE, EXEMPLE_PNEUS]);
 const erreurs = (constats: readonly Constat[]): string[] => constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle).sort();
 
-/** Conversion minimale du corps Markdown des exemples : titres « ## », paragraphes, listes à puces « - » et numérotées « 1. » (le vrai rendu est celui d'Astro). */
+/**
+ * Conversion minimale du corps Markdown des exemples : titres « ## », paragraphes, listes à puces « - » et numérotées
+ * « 1. », tableaux « | … | » avec leur ligne d'en-tête (le vrai rendu est celui d'Astro).
+ */
 function corpsMinimal(markdown: string): string {
   return markdown
     .trim()
@@ -45,37 +51,119 @@ function corpsMinimal(markdown: string): string {
       if (titre !== null) return `<h${titre[1]?.length}>${titre[2]}</h${titre[1]?.length}>`;
       if (texte.startsWith('- ')) return `<ul>${texte.split(/\n- /).map((item) => `<li>${item.replace(/^- /, '').replace(/\s*\n\s*/g, ' ')}</li>`).join('')}</ul>`;
       if (/^1\. /.test(texte)) return `<ol>${texte.split(/\n\d+\. /).map((item) => `<li>${item.replace(/^1\. /, '').replace(/\s*\n\s*/g, ' ')}</li>`).join('')}</ol>`;
+      if (texte.startsWith('|')) {
+        const cellules = (ligne: string): string[] => ligne.replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
+        const [entete, , ...rangees] = texte.split('\n');
+        return `<table><thead><tr>${cellules(entete ?? '').map((c) => `<th>${c}</th>`).join('')}</tr></thead><tbody>${rangees.map((r) => `<tr>${cellules(r).map((c) => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+      }
       assert.ok(!/^[*\d#>]/.test(texte), `bloc non pris en charge par la conversion minimale : ${texte.slice(0, 40)}`);
       return `<p>${texte.replace(/\s*\n\s*/g, ' ')}</p>`;
     })
     .join('');
 }
 
-async function exemple(fichier = EXEMPLE, type: 'voyant' | 'code-defaut' = 'voyant') {
+async function exemple(fichier = EXEMPLE, type: 'voyant' | 'code-defaut' | 'pneus' = 'voyant') {
   const contenu = await readFile(join(racine, fichier), 'utf8');
   const brut = lireFrontmatter(contenu) as Record<string, unknown>;
   const page = schemasPage[type].parse(brut) as PageEditoriale;
   const { site, contexte, constats } = await donneesDuSite(racine, new Map([[page.id, page.libelle_court]]), AUJOURDHUI, [AUTEUR_DES_EXEMPLES]);
   const css = await readFile(join(racine, 'src/styles/site.css'), 'utf8');
   const adresse = contexte.plan.get(page.id)?.adresse ?? '/';
-  const modele = type === 'voyant' ? pageVoyant : pageCodeDefaut;
+  const modele = type === 'voyant' ? pageVoyant : type === 'code-defaut' ? pageCodeDefaut : pagePneus;
   const contenuHtml = modele(page, site, corpsMinimal(separerFrontmatter(contenu).corps));
   const html = documentHtml({ titre: page.title, description: page.description, adresse, contenu: contenuHtml, css });
   return { brut, page, site, contexte, constats, html };
 }
 const exempleCode = () => exemple(EXEMPLE_CODE, 'code-defaut');
+const exemplePneus = () => exemple(EXEMPLE_PNEUS, 'pneus');
 
 describe('modèles de pages (livrable 6.6)', () => {
-  test('modèle de chaque type : pages voyant et code défaut livrées ; outil voyants et autres types pas encore (la construction échoue alors)', async () => {
+  test('modèle de chaque type : pages voyant, code défaut, pneus et obligations livrées ; outil voyants et autres types pas encore (la construction échoue alors)', async () => {
     const { page } = await exemple();
-    assert.ok('modele' in modeleDeLaPage('voyant', page));
-    assert.ok('modele' in modeleDeLaPage('code-defaut', page));
+    const livres = ['voyant', 'code-defaut', 'pneus'];
+    for (const type of livres) assert.ok('modele' in modeleDeLaPage(type as never, page), type);
     assert.ok('absent' in modeleDeLaPage('voyant', { ...page, outil: true } as PageEditoriale));
-    for (const type of TYPES_PAGE.filter((t) => t !== 'voyant' && t !== 'code-defaut')) assert.ok('absent' in modeleDeLaPage(type, page), type);
-    assert.deepEqual(Object.keys(MODELES), ['voyant', 'code-defaut']);
-    // Le modèle code défaut refuse une page d'un autre type.
+    for (const type of TYPES_PAGE.filter((t) => !livres.includes(t))) assert.ok('absent' in modeleDeLaPage(type, page), type);
+    assert.deepEqual(Object.keys(MODELES), livres);
+    // Les modèles code défaut et pneus refusent une page d'un autre type.
     const { site } = await exemple();
     assert.throws(() => pageCodeDefaut(page, site, ''), /page code défaut/);
+    assert.throws(() => pagePneus(page, site, ''), /page pneus et obligations/);
+  });
+
+  test('page pneus et obligations : encadré, signature, transparence, fiche « Le texte en bref », texte rédigé (avec le tableau élément unique), sources, dans cet ordre', async () => {
+    const { page, site } = await exemplePneus();
+    const html = pagePneus(page, site, '<h2>Équipement</h2><p>{{tableau}}</p><table><thead><tr><th>A</th></tr></thead><tbody><tr><td>B</td></tr></tbody></table>');
+    const ordre = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-texte-reference', 'data-corps', 'data-element-unique="tableau"', 'data-sources'].map((m) => html.indexOf(m));
+    assert.ok(ordre.every((i) => i >= 0), JSON.stringify(ordre));
+    assert.deepEqual([...ordre].sort((a, b) => a - b), ordre);
+    assert.equal(html.match(/data-element-unique=/g)?.length, 1);
+    // Région nommée par le titre qui précède le tableau, atteignable au clavier.
+    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Équipement" tabindex="0"><table>/);
+    assert.ok(!html.includes('{{'));
+  });
+
+  test('page pneus et obligations avec un voyant de la base rattaché : tableau des notices après le texte rédigé, sans être l’élément unique', async () => {
+    const { page, site } = await exemplePneus();
+    const [id, voyant] = [...site.voyants].find(([, v]) => v.page !== undefined) ?? [];
+    assert.ok(id !== undefined && voyant !== undefined);
+    const rattachee = { ...page, id: voyant.page, voyants: [id], situations: [{ voyant: id }] } as PageEditoriale;
+    const html = pagePneus(rattachee, site, '<p>{{tableau}}</p><table><tbody><tr><td>x</td></tr></tbody></table>');
+    assert.ok(html.indexOf('data-corps') < html.indexOf('data-tableau-notices'), 'tableau des notices après le texte');
+    assert.equal(html.match(/data-element-unique=/g)?.length, 1);
+    assert.ok(!/<section class="notices"[^>]*data-element-unique/.test(html));
+  });
+
+  test('fiche « Le texte en bref » : texte de référence, où le lire (titre du registre), période, zones ; contrôle technique : défaillances dans l’ordre, contre-visite', async () => {
+    const { page, site } = await exemplePneus();
+    assert.ok('texte_reference' in page);
+    const fiche = modeleFicheTexte(page, site.sources);
+    assert.equal(fiche.titre, TITRE_FICHE_TEXTE);
+    assert.deepEqual(fiche.lignes.map((l) => l.intitule), ['Texte de référence', 'Où le lire', 'Période', 'Zones']);
+    assert.equal(fiche.lignes[1]?.valeur, `Légifrance : ${site.sources.get('code-de-la-route-d314-8')?.titre}`);
+    assert.equal(fiche.lignes[2]?.valeur, 'Du 1er novembre au 31 mars de l\'année suivante');
+    const ct = modeleFicheTexte(
+      {
+        texte_reference: { nature: 'arrete-prefectoral', reference: 'Arrêté de test', source: 'source-inconnue' },
+        defaillances: [
+          { niveau: 'critique', signification: 'C' },
+          { niveau: 'mineure', signification: 'A' },
+          { niveau: 'majeure', signification: 'B' },
+        ],
+        contre_visite: { delai: 'Deux mois', demarche: 'Retour au centre' },
+      },
+      site.sources,
+    );
+    assert.deepEqual(ct.lignes.map((l) => `${l.intitule}=${l.valeur}`), [
+      'Texte de référence=Arrêté de test',
+      'Où le lire=Arrêté préfectoral : source-inconnue',
+      'Défaillance mineure=A',
+      'Défaillance majeure=B',
+      'Défaillance critique=C',
+      'Contre-visite=Deux mois : Retour au centre',
+    ]);
+  });
+
+  test('références de 6.6c : verdict d’une ligne de l’encadré (« ligne-n »), montant déclaré, tableau élément unique ; mal placées : la construction échoue', async () => {
+    const { page, site } = await exemplePneus();
+    const html = corpsRedige('<p>{{verdict:ligne-1}} ; {{verdict:ligne-2}} ; {{montant:aucune-amende-loi-montagne}}</p>', page, site);
+    assert.ok(html.includes('Non, ne poursuivez pas votre trajet') && html.includes('Oui, avec précautions'), html);
+    assert.ok(html.includes('Aucune amende n’est prévue'), html);
+    const tableau = '<p>{{tableau}}</p><table><tbody><tr><td>x</td></tr></tbody></table>';
+    const permis = { tableauDuTexte: true };
+    assert.match(texteRedige(tableau, page, site, permis).html, /data-element-unique="tableau"/);
+    const refus: Array<[() => unknown, RegExp]> = [
+      [() => corpsRedige('<p>{{verdict:ligne-9}}</p>', page, site), /pas de ligne 9/],
+      [() => corpsRedige('<p>{{montant:depannage-autoroute}}</p>', page, site), /pas déclaré dans le coût probable/],
+      [() => corpsRedige(tableau, page, site), /construit par le modèle/],
+      [() => texteRedige(tableau, { ...page, element_unique: 'outil' }, site, permis), /ne déclare pas un tableau/],
+      [() => texteRedige(`${tableau}${tableau}`, page, site, permis), /un seul tableau/],
+      [() => texteRedige('<p>{{tableau}}</p><p>Texte</p>', page, site, permis), /précéder immédiatement un tableau/],
+    ];
+    for (const [appel, motif] of refus) assert.throws(appel, motif);
+    // Une ligne reprise de la base : libellé du verdict de la base.
+    const voyant = await exemple();
+    assert.ok(corpsRedige('<p>{{verdict:ligne-1}}</p>', voyant.page, voyant.site).includes('Non, arrêtez-vous immédiatement'));
   });
 
   test('page code défaut : encadré, signature, transparence, fiche du code, cas par marque (élément unique), causes, texte rédigé, sources, dans cet ordre', async () => {
@@ -196,6 +284,53 @@ describe('page exemple « code P0087 » (exemples/, jamais publiée)', () => {
     assert.deepEqual(constatsTexteRedige(html, EXEMPLE_CODE), []);
     assert.deepEqual(constatsPartCitee(html, EXEMPLE_CODE), []);
     assert.ok(!html.includes('{{'), 'référence non remplacée');
+  });
+});
+
+describe('page exemple « loi montagne » (exemples/, jamais publiée)', () => {
+  test('[CI] frontmatter valide ; page construite sans erreur, hormis l’empreinte de validation tant que Houssem n’a pas validé l’encadré (R4)', async () => {
+    const { brut, contexte, constats, html } = await exemplePneus();
+    assert.deepEqual(erreurs(constats), []);
+    const resultat = controlerPage({ type: 'pneus', brut, fichier: EXEMPLE_PNEUS }, contexte, html);
+    assert.deepEqual(erreurs(resultat.constats), brut['validation'] === undefined ? ['R4-VALIDATION-ABSENTE'] : []);
+  });
+
+  test('[CI] composants de la page construite : typographie, identifiants, expressions interdites, texte rédigé, part de texte cité ; le tableau du texte est l’élément unique', async () => {
+    const { html } = await exemplePneus();
+    assert.deepEqual(constatsTypographie(html, EXEMPLE_PNEUS), []);
+    assert.deepEqual(constatsIdentifiants(html, EXEMPLE_PNEUS), []);
+    assert.deepEqual(constatsExpressionsInterdites(html, EXEMPLE_PNEUS), []);
+    assert.deepEqual(constatsTexteRedige(html, EXEMPLE_PNEUS), []);
+    assert.deepEqual(constatsPartCitee(html, EXEMPLE_PNEUS), []);
+    assert.ok(!html.includes('{{'), 'référence non remplacée');
+    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Quel équipement pour la loi montagne \?" tabindex="0"><table>/);
+  });
+});
+
+describe('liens vers une source officielle dans le texte (R7-LIEN-EXTERNE, livrable 6.6c, charte §2.7)', () => {
+  test('liens vers d’autres sites lus sous toutes leurs formes ; liens internes, code et images ignorés', () => {
+    const corps = [
+      'Voir [la carte](https://exemple.gouv.fr/carte) et <https://autre.fr/a>.',
+      'Adresse nue https://nue.fr/page, et [interne](/loi-montagne/) ou https://decodauto.com/voyants/.',
+      '[ref]: https://reference.fr/x',
+      '<a href="https://balise.fr/">balise</a> `https://code.fr/` ![image](https://image.fr/i.png)',
+    ].join('\n\n');
+    assert.deepEqual(liensExternesDuTexte(corps).sort(), ['https://autre.fr/a', 'https://balise.fr/', 'https://exemple.gouv.fr/carte', 'https://nue.fr/page', 'https://reference.fr/x']);
+  });
+
+  test('[CI] un lien vers un autre site ne mène qu’à une source de première main citée sur la page, à son adresse du registre', async () => {
+    const { page, contexte } = await exemplePneus();
+    const sr = contexte.sources.get('securite-routiere-equipements-hivernaux-departements');
+    assert.ok(sr !== undefined);
+    const regles = (liens: string[]) => controlerEnsemble([{ type: 'pneus', fichier: 'f', page, id: page.id, liensExternes: liens }], contexte).filter((c) => c.regle === 'R7-LIEN-EXTERNE').length;
+    assert.equal(regles([sr.url]), 0);
+    assert.equal(regles(['https://www.ewigo.com/loi-montagne/']), 1);
+    assert.equal(regles([`${sr.url}?autre`]), 1);
+    // Une source secondaire citée sur la page ne suffit pas.
+    const { page: code, contexte: ctxCode } = await exempleCode();
+    const rossTech = ctxCode.sources.get('ross-tech-p0087');
+    assert.ok(rossTech !== undefined);
+    assert.equal(controlerEnsemble([{ type: 'code-defaut', fichier: 'f', page: code, id: code.id, liensExternes: [rossTech.url] }], ctxCode).filter((c) => c.regle === 'R7-LIEN-EXTERNE').length, 1);
   });
 });
 

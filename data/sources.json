@@ -55,7 +55,7 @@
     "editeur": "Légifrance",
     "categorie": "legifrance",
     "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042436965",
-    "date_consultation": "2026-10-24"
+    "date_consultation": "2026-11-03"
   },
   {
     "id": "decret-2020-1264",
@@ -64,6 +64,30 @@
     "categorie": "legifrance",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000042434406",
     "date_consultation": "2026-10-24"
+  },
+  {
+    "id": "loi-85-30-art-5",
+    "titre": "Loi n° 85-30 du 9 janvier 1985 relative au développement et à la protection de la montagne, article 5 (massifs)",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000033745623",
+    "date_consultation": "2026-11-03"
+  },
+  {
+    "id": "securite-routiere-equipements-hivernaux",
+    "titre": "Sécurité routière — Nouveaux équipements hivernaux",
+    "editeur": "Délégation à la sécurité routière (securite-routiere.gouv.fr)",
+    "categorie": "securite-routiere",
+    "url": "https://www.securite-routiere.gouv.fr/chacun-son-mode-de-deplacement/dangers-de-la-route-en-voiture/equipement-de-la-voiture/nouveaux",
+    "date_consultation": "2026-11-03"
+  },
+  {
+    "id": "securite-routiere-equipements-hivernaux-departements",
+    "titre": "Sécurité routière — Équipements hivernaux : départements et communes (arrêtés préfectoraux)",
+    "editeur": "Délégation à la sécurité routière (securite-routiere.gouv.fr)",
+    "categorie": "securite-routiere",
+    "url": "https://www.securite-routiere.gouv.fr/equipements-hivernaux-departements-et-communes",
+    "date_consultation": "2026-11-03"
   },
   {
     "id": "arrete-2025-12-08-depannage-autoroute",

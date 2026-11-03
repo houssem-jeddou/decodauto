@@ -91,6 +91,7 @@ jobs:
           node scripts/liens.ts --dist dist-exemples --exemples
           --attendu 'LIEN-CASSE@voyants/moteur/index.html@/a-propos/#methode'
           --attendu 'LIEN-CASSE@codes-defaut/p0087/index.html@/a-propos/#methode'
+          --attendu 'LIEN-CASSE@loi-montagne/index.html@/a-propos/#methode'
       - name: Texte rédigé des exemples, tel que rendu (lecture dans ce journal)
         if: ${{ !cancelled() }}
         run: node scripts/texte-exemples.ts dist-exemples
