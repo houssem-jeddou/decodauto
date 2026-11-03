@@ -4,6 +4,7 @@ import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte }
 import { ANCRE_METHODE, DELAI_REVUE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature } from './charte.ts';
 import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
+import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -827,6 +828,9 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         // Demande de changement n° 8 : sur une page voyant (hors outil), l'élément unique est le tableau des notices.
         elementUnique: typeEditorial === 'voyant' && !('outil' in page && page.outil === true),
       },
+      ...('code' in page && {
+        code: { fiche: modeleFicheCode(page, ctx.voyants, ctx.sources), parMarque: modeleParMarque(page), elementUnique: page.element_unique === 'tableau' },
+      }),
     };
     constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus));
   }
@@ -925,6 +929,11 @@ export interface AttendusPage {
    * de la base rattaché à la page ; `elementUnique` : la page est une page voyant hors outil (demande de changement n° 8).
    */
   notices?: { tableaux: readonly TableauVoyant[]; elementUnique: boolean } | undefined;
+  /**
+   * Page code défaut (livrable 6.6b, fiche-code.ts) : fiche du code et cas décrits par marque attendus ; elementUnique si
+   * l'élément unique de la page est un tableau, porté alors par le tableau des cas par marque.
+   */
+  code?: { fiche: FicheCode; parMarque: readonly RangeeParMarque[]; elementUnique: boolean } | undefined;
 }
 
 /** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
@@ -1044,6 +1053,59 @@ export function controlerHtml(
   constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout, attendus?.lignes));
   if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
   if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, attendus.notices));
+  if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
+  return constats;
+}
+
+/**
+ * Page code défaut (livrable 6.6b) : la fiche du code (data-fiche-code) affiche, dans l'ordre, chaque ligne du modèle
+ * (signification, portée, moteurs, voyant qui s'allume et consigne sans ce voyant, source de la signification) au
+ * texte exact ; le tableau des cas par marque (data-cas-par-marque) a une rangée par précision de la page, dans l'ordre
+ * du modèle, avec sa marque, son texte et ses sources ; pas de tableau sans précision ; si l'élément unique de la page est un tableau, c'est ce tableau
+ * (data-element-unique="tableau"), comme le construit le modèle. Texte comparé normalisé (normaliserTexte).
+ */
+export function controlerFicheCode(
+  html: string,
+  fichier: string,
+  attendu: { fiche: FicheCode; parMarque: readonly RangeeParMarque[]; elementUnique?: boolean },
+): Constat[] {
+  const constats: Constat[] = [];
+  const $ = cheerio.load(html);
+  const fiches = $('[data-fiche-code]');
+  if (fiches.length !== 1) {
+    constats.push(erreur('CODE-FICHE-ABSENTE', `une page code défaut affiche la fiche du code (data-fiche-code) ; trouvé : ${fiches.length}`, fichier));
+  } else {
+    const lues = fiches.find('[data-fiche-ligne]').toArray().map((el) => `${normaliserTexte($(el).find('dt').text())} : ${normaliserTexte($(el).find('dd').text())}`);
+    const voulues = attendu.fiche.lignes.map((l) => `${normaliserTexte(l.intitule)} : ${normaliserTexte(l.valeur)}`);
+    if (lues.join('\n') !== voulues.join('\n')) {
+      constats.push(erreur('CODE-FICHE-INCOMPLETE', `la fiche du code n'affiche pas, dans l'ordre : ${attendu.fiche.lignes.map((l) => l.intitule).join(', ')} (texte tiré du contenu et de la base)`, fichier));
+    }
+  }
+  const tableaux = $('[data-cas-par-marque]');
+  if (attendu.parMarque.length === 0) {
+    if (tableaux.length > 0) constats.push(erreur('CODE-CAS-MARQUE-INCOMPLET', 'tableau des cas par marque sans précision par marque dans le contenu', fichier));
+    return constats;
+  }
+  if (tableaux.length !== 1) {
+    constats.push(erreur('CODE-CAS-MARQUE-INCOMPLET', `la page affiche un tableau des cas par marque (data-cas-par-marque) ; trouvé : ${tableaux.length}`, fichier));
+    return constats;
+  }
+  const rangees = tableaux.find('tr[data-cas-marque]').toArray();
+  const ecarts: string[] = [];
+  if (attendu.elementUnique === true && tableaux.attr('data-element-unique') !== 'tableau') {
+    ecarts.push('l\'élément unique de la page (tableau) doit être ce tableau (data-element-unique="tableau")');
+  }
+  if (rangees.length !== attendu.parMarque.length) ecarts.push(`${rangees.length} rangée(s) au lieu de ${attendu.parMarque.length}`);
+  attendu.parMarque.forEach((r, i) => {
+    const el = rangees[i];
+    if (el === undefined) return;
+    const rangee = $(el);
+    if (normaliserTexte(rangee.find('th').first().text()) !== normaliserTexte(r.marque)) ecarts.push(`rangée ${i + 1} : marque « ${r.marque} » attendue`);
+    if (normaliserTexte(rangee.find('td').first().text()) !== normaliserTexte(r.precision)) ecarts.push(`rangée ${i + 1} : texte de la précision différent`);
+    const sources = rangee.find('[data-source-id]').toArray().map((s) => $(s).attr('data-source-id') ?? '');
+    if (sources.join(',') !== r.sources.join(',')) ecarts.push(`rangée ${i + 1} : sources ${sources.join(', ')} au lieu de ${r.sources.join(', ')}`);
+  });
+  if (ecarts.length > 0) constats.push(erreur('CODE-CAS-MARQUE-INCOMPLET', `tableau des cas par marque : ${ecarts.join(' ; ')}`, fichier));
   return constats;
 }
 

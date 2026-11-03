@@ -196,6 +196,11 @@
       "tranche": "reparation"
     },
     {
+      "id": "pompe-a-carburant",
+      "libelle": "Pompe à carburant (basse pression)",
+      "tranche": "reparation"
+    },
+    {
       "id": "catalyseur",
       "libelle": "Catalyseur",
       "tranche": "organe"

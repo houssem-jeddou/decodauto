@@ -11,7 +11,8 @@ import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { dateDesDonnees } from './date-des-donnees.ts';
-import { MODELES, corpsRedige, modeleDeLaPage, nomCompletNotice, pageVoyant } from '../src/lib/modeles.ts';
+import { MODELES, corpsRedige, modeleDeLaPage, nomCompletNotice, pageCodeDefaut, pageVoyant } from '../src/lib/modeles.ts';
+import { CONSIGNE_SANS_VOYANT, LIBELLE_CARBURANT, LIBELLE_PORTEE, modeleFicheCode, modeleParMarque } from '../src/lib/fiche-code.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
 import { DOSSIER_EXEMPLES, chargerPages, lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
 import { documentHtml } from '../scripts/lib/demo.ts';
@@ -28,11 +29,12 @@ import { TYPES_PAGE } from '../src/schemas/listes.ts';
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const fixtures = join(racine, 'tests', 'fixtures');
 const EXEMPLE = 'exemples/voyant/voyant-moteur.md';
-// Données réelles et exemple : la date du contrôle est la plus récente de leurs dates (tests/date-des-donnees.ts).
-const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', 'tests/demo/voyant-huile.md', EXEMPLE]);
+const EXEMPLE_CODE = 'exemples/code-defaut/code-p0087.md';
+// Données réelles et exemples : la date du contrôle est la plus récente de leurs dates (tests/date-des-donnees.ts).
+const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', 'tests/demo/voyant-huile.md', EXEMPLE, EXEMPLE_CODE]);
 const erreurs = (constats: readonly Constat[]): string[] => constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle).sort();
 
-/** Conversion minimale du corps Markdown de l'exemple : titres « ## », paragraphes et listes à puces « - » (le vrai rendu est celui d'Astro). */
+/** Conversion minimale du corps Markdown des exemples : titres « ## », paragraphes, listes à puces « - » et numérotées « 1. » (le vrai rendu est celui d'Astro). */
 function corpsMinimal(markdown: string): string {
   return markdown
     .trim()
@@ -42,31 +44,66 @@ function corpsMinimal(markdown: string): string {
       const titre = /^(#{2,4}) (.+)$/.exec(texte);
       if (titre !== null) return `<h${titre[1]?.length}>${titre[2]}</h${titre[1]?.length}>`;
       if (texte.startsWith('- ')) return `<ul>${texte.split(/\n- /).map((item) => `<li>${item.replace(/^- /, '').replace(/\s*\n\s*/g, ' ')}</li>`).join('')}</ul>`;
+      if (/^1\. /.test(texte)) return `<ol>${texte.split(/\n\d+\. /).map((item) => `<li>${item.replace(/^1\. /, '').replace(/\s*\n\s*/g, ' ')}</li>`).join('')}</ol>`;
       assert.ok(!/^[*\d#>]/.test(texte), `bloc non pris en charge par la conversion minimale : ${texte.slice(0, 40)}`);
       return `<p>${texte.replace(/\s*\n\s*/g, ' ')}</p>`;
     })
     .join('');
 }
 
-async function exemple() {
-  const contenu = await readFile(join(racine, EXEMPLE), 'utf8');
+async function exemple(fichier = EXEMPLE, type: 'voyant' | 'code-defaut' = 'voyant') {
+  const contenu = await readFile(join(racine, fichier), 'utf8');
   const brut = lireFrontmatter(contenu) as Record<string, unknown>;
-  const page = schemasPage.voyant.parse(brut) as PageEditoriale;
+  const page = schemasPage[type].parse(brut) as PageEditoriale;
   const { site, contexte, constats } = await donneesDuSite(racine, new Map([[page.id, page.libelle_court]]), AUJOURDHUI, [AUTEUR_DES_EXEMPLES]);
   const css = await readFile(join(racine, 'src/styles/site.css'), 'utf8');
   const adresse = contexte.plan.get(page.id)?.adresse ?? '/';
-  const contenuHtml = pageVoyant(page, site, corpsMinimal(separerFrontmatter(contenu).corps));
+  const modele = type === 'voyant' ? pageVoyant : pageCodeDefaut;
+  const contenuHtml = modele(page, site, corpsMinimal(separerFrontmatter(contenu).corps));
   const html = documentHtml({ titre: page.title, description: page.description, adresse, contenu: contenuHtml, css });
   return { brut, page, site, contexte, constats, html };
 }
+const exempleCode = () => exemple(EXEMPLE_CODE, 'code-defaut');
 
 describe('modèles de pages (livrable 6.6)', () => {
-  test('modèle de chaque type : page voyant livrée ; outil voyants et autres types pas encore (la construction échoue alors)', async () => {
+  test('modèle de chaque type : pages voyant et code défaut livrées ; outil voyants et autres types pas encore (la construction échoue alors)', async () => {
     const { page } = await exemple();
     assert.ok('modele' in modeleDeLaPage('voyant', page));
+    assert.ok('modele' in modeleDeLaPage('code-defaut', page));
     assert.ok('absent' in modeleDeLaPage('voyant', { ...page, outil: true } as PageEditoriale));
-    for (const type of TYPES_PAGE.filter((t) => t !== 'voyant')) assert.ok('absent' in modeleDeLaPage(type, page), type);
-    assert.deepEqual(Object.keys(MODELES), ['voyant']);
+    for (const type of TYPES_PAGE.filter((t) => t !== 'voyant' && t !== 'code-defaut')) assert.ok('absent' in modeleDeLaPage(type, page), type);
+    assert.deepEqual(Object.keys(MODELES), ['voyant', 'code-defaut']);
+    // Le modèle code défaut refuse une page d'un autre type.
+    const { site } = await exemple();
+    assert.throws(() => pageCodeDefaut(page, site, ''), /page code défaut/);
+  });
+
+  test('page code défaut : encadré, signature, transparence, fiche du code, cas par marque (élément unique), causes, texte rédigé, sources, dans cet ordre', async () => {
+    const { page, site } = await exempleCode();
+    const html = pageCodeDefaut(page, site, '<h2>Question</h2><p>Réponse.</p>');
+    const ordre = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-fiche-code', 'data-cas-par-marque', 'data-causes', 'data-corps', 'data-sources'].map((m) => html.indexOf(m));
+    assert.ok(ordre.every((i) => i >= 0), JSON.stringify(ordre));
+    assert.deepEqual([...ordre].sort((a, b) => a - b), ordre);
+    assert.equal(html.match(/data-element-unique=/g)?.length, 1);
+    assert.match(html, /<section class="par-marque" data-element-unique="tableau" data-cas-par-marque /);
+    // Pas de tableau des notices : le voyant moteur est rattaché à sa propre page (demande de changement n° 8).
+    assert.ok(!html.includes('data-tableau-notices'));
+  });
+
+  test('fiche du code : signification, portée, moteurs, voyant qui s’allume (nom tiré de la base), consigne sans voyant, source de la signification ; cas par marque triés par marque', async () => {
+    const { page, site } = await exempleCode();
+    assert.ok('code' in page);
+    const fiche = modeleFicheCode(page, site.voyants, site.sources);
+    assert.equal(fiche.titre, 'Le code P0087 en bref');
+    assert.deepEqual(fiche.lignes.map((l) => l.intitule), ['Signification', 'Portée', 'Moteurs concernés', 'Voyant qui s’allume', CONSIGNE_SANS_VOYANT.intitule, 'Source de la signification']);
+    assert.equal(fiche.lignes[4]?.valeur, CONSIGNE_SANS_VOYANT.valeur);
+    assert.equal(fiche.lignes[1]?.valeur, LIBELLE_PORTEE.generique);
+    assert.equal(fiche.lignes[2]?.valeur, LIBELLE_CARBURANT['essence et diesel']);
+    assert.ok(fiche.lignes[3]?.valeur.startsWith(site.voyants.get('moteur-orange-fixe')?.nom ?? '?'));
+    assert.deepEqual(modeleParMarque(page).map((r) => r.marque), ['Audi', 'Groupe Volkswagen (Volkswagen et Audi)', 'Kia', 'Peugeot et Citroën']);
+    // Code constructeur : les marques sont nommées dans la portée.
+    const constructeur = modeleFicheCode({ ...page, portee: 'constructeur', marques: ['Peugeot', 'Citroën'] }, site.voyants, site.sources);
+    assert.equal(constructeur.lignes[1]?.valeur, `${LIBELLE_PORTEE.constructeur} (Peugeot, Citroën)`);
   });
 
   test('texte rédigé : vide → rien ; sinon un bloc data-corps, typographié (espace insécable avant « ? », apostrophe)', async () => {
@@ -140,6 +177,25 @@ describe('page exemple « voyant moteur » (exemples/, jamais publiée)', () => 
     assert.ok(!html.includes('{{'), 'référence non remplacée');
     const { part, cites } = partCitee(html);
     assert.ok(cites > 0 && part <= PART_CITEE_MAX, `part citée ${part}`);
+  });
+});
+
+describe('page exemple « code P0087 » (exemples/, jamais publiée)', () => {
+  test('[CI] frontmatter valide ; page construite sans erreur, hormis l’empreinte de validation tant que Houssem n’a pas validé l’encadré (R4)', async () => {
+    const { brut, contexte, constats, html } = await exempleCode();
+    assert.deepEqual(erreurs(constats), []);
+    const resultat = controlerPage({ type: 'code-defaut', brut, fichier: EXEMPLE_CODE }, contexte, html);
+    assert.deepEqual(erreurs(resultat.constats), brut['validation'] === undefined ? ['R4-VALIDATION-ABSENTE'] : []);
+  });
+
+  test('[CI] composants de la page construite : typographie, identifiants, expressions interdites, texte rédigé, part de texte cité', async () => {
+    const { html } = await exempleCode();
+    assert.deepEqual(constatsTypographie(html, EXEMPLE_CODE), []);
+    assert.deepEqual(constatsIdentifiants(html, EXEMPLE_CODE), []);
+    assert.deepEqual(constatsExpressionsInterdites(html, EXEMPLE_CODE), []);
+    assert.deepEqual(constatsTexteRedige(html, EXEMPLE_CODE), []);
+    assert.deepEqual(constatsPartCitee(html, EXEMPLE_CODE), []);
+    assert.ok(!html.includes('{{'), 'référence non remplacée');
   });
 });
 

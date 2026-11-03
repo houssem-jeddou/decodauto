@@ -374,6 +374,95 @@
     "explication": "Un code P1xxx ne peut pas être déclaré générique."
   },
   {
+    "nom": "valide-code-par-marque",
+    "type": "code-defaut",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Code défaut valide avec des cas par marque : le tableau des cas, trié par marque, est l'élément unique."
+  },
+  {
+    "nom": "code-sans-fiche",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-FICHE-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Page code défaut construite sans la fiche du code (signification, portée, moteurs, voyant qui s'allume)."
+  },
+  {
+    "nom": "code-fiche-incomplete",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-FICHE-INCOMPLETE"
+    ],
+    "alertes": [],
+    "explication": "La fiche du code construite n'affiche pas la signification du contenu."
+  },
+  {
+    "nom": "code-cas-marque-sources",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Un cas par marque est affiché sans sa source."
+  },
+  {
+    "nom": "code-cas-sans-precision",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Un tableau des cas par marque est affiché alors que le contenu n'a aucune précision par marque."
+  },
+  {
+    "nom": "code-cas-marque-incomplet",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Un cas par marque du contenu manque dans le tableau construit."
+  },
+  {
+    "nom": "code-cas-texte-modifie",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Le texte d'un cas par marque affiché diffère de la précision du contenu."
+  },
+  {
+    "nom": "code-cas-marque-modifiee",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Un cas par marque est affiché sous une autre marque que celle du contenu."
+  },
+  {
+    "nom": "code-cas-desordre",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Les cas par marque sont affichés dans un autre ordre que celui du modèle (tri par marque)."
+  },
+  {
+    "nom": "code-cas-sans-element-unique",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET",
+      "R7-ELEMENT-UNIQUE-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "L'élément unique de la page est un tableau, mais le tableau des cas par marque ne le porte pas."
+  },
+  {
     "nom": "r7-dates",
     "type": "panne",
     "erreurs": [
