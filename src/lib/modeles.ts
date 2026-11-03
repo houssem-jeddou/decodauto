@@ -131,7 +131,7 @@ export function texteRedige(
 
 /**
  * Marqueur « {{tableau}} » (voir REFERENCE) : le tableau qui le suit devient l'élément unique de la page, dans un bloc
- * qui défile en largeur sur téléphone. Refusé si le modèle construit lui-même l'élément unique, si la page ne déclare pas
+ * qui défile en largeur s'il est trop large (atteignable au clavier : région nommée, tabindex="0"). Refusé si le modèle construit lui-même l'élément unique, si la page ne déclare pas
  * un tableau, s'il y en a plus d'un, ou s'il n'est pas suivi d'un tableau.
  */
 function tableauDuTexte(
@@ -145,7 +145,7 @@ function tableauDuTexte(
   if (!permis) echec('« {{tableau}} » : sur ce type de page, l\'élément unique est construit par le modèle');
   if (page.element_unique !== 'tableau') echec('« {{tableau}} » : la page ne déclare pas un tableau comme élément unique (element_unique)');
   if (marqueurs.length > 1) echec('« {{tableau}} » : un seul tableau par page est l\'élément unique');
-  const resultat = html.replace(/<p>\s*\{\{tableau\}\}\s*<\/p>\s*(<table[\s\S]*?<\/table>)/, '<div class="tableau-corps" data-element-unique="tableau">$1</div>');
+  const resultat = html.replace(/<p>\s*\{\{tableau\}\}\s*<\/p>\s*(<table[\s\S]*?<\/table>)/, '<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Tableau" tabindex="0">$1</div>');
   if (resultat === html) echec('« {{tableau}} » doit précéder immédiatement un tableau');
   return resultat;
 }

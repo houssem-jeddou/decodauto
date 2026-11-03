@@ -97,8 +97,19 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.ok(ordre.every((i) => i >= 0), JSON.stringify(ordre));
     assert.deepEqual([...ordre].sort((a, b) => a - b), ordre);
     assert.equal(html.match(/data-element-unique=/g)?.length, 1);
-    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau"><table>/);
+    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Tableau" tabindex="0"><table>/);
     assert.ok(!html.includes('{{'));
+  });
+
+  test('page pneus et obligations avec un voyant de la base rattaché : tableau des notices après le texte rédigé, sans être l’élément unique', async () => {
+    const { page, site } = await exemplePneus();
+    const [id, voyant] = [...site.voyants].find(([, v]) => v.page !== undefined) ?? [];
+    assert.ok(id !== undefined && voyant !== undefined);
+    const rattachee = { ...page, id: voyant.page, voyants: [id], situations: [{ voyant: id }] } as PageEditoriale;
+    const html = pagePneus(rattachee, site, '<p>{{tableau}}</p><table><tbody><tr><td>x</td></tr></tbody></table>');
+    assert.ok(html.indexOf('data-corps') < html.indexOf('data-tableau-notices'), 'tableau des notices après le texte');
+    assert.equal(html.match(/data-element-unique=/g)?.length, 1);
+    assert.ok(!/<section class="notices"[^>]*data-element-unique/.test(html));
   });
 
   test('fiche « Le texte en bref » : texte de référence, où le lire (titre du registre), période, zones ; contrôle technique : défaillances dans l’ordre, contre-visite', async () => {
@@ -290,7 +301,7 @@ describe('page exemple « loi montagne » (exemples/, jamais publiée)', () => {
     assert.deepEqual(constatsTexteRedige(html, EXEMPLE_PNEUS), []);
     assert.deepEqual(constatsPartCitee(html, EXEMPLE_PNEUS), []);
     assert.ok(!html.includes('{{'), 'référence non remplacée');
-    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau"><table>/);
+    assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Tableau" tabindex="0"><table>/);
   });
 });
 
