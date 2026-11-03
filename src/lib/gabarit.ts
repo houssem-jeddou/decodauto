@@ -98,9 +98,16 @@ export function causesDeLaPage(page: PageEditoriale, site: DonneesSite): string 
 }
 
 /** Bas d'une page éditoriale : pages liées du plan (construites seulement), sources citées. */
-export function basDePage(page: PageEditoriale, site: DonneesSite): string {
+export function basDePage(page: PageEditoriale, site: DonneesSite, citationsDuTexte: readonly { source: string; emplacement: string }[] = []): string {
   const lignes = lignesDeLaPage(page, site);
   const cout = coutDeLaPage(page, lignes, site.couts);
+  // Pages ou sections citées dans le texte rédigé seulement (« {{cite:…}} », livrable 6.6) : ajoutées à « Sources ».
+  const citees = sourcesDeLaPageCitees(page, lignes, site.couts, cout);
+  for (const c of citationsDuTexte) {
+    const emplacements = citees.get(c.source) ?? [];
+    if (!emplacements.includes(c.emplacement)) emplacements.push(c.emplacement);
+    citees.set(c.source, emplacements);
+  }
   const index = indexerPlan(site.plan);
   const construites = (ids: Iterable<string>): string[] => [...ids].filter((id) => site.libelles.has(id));
   return [
@@ -111,6 +118,6 @@ export function basDePage(page: PageEditoriale, site: DonneesSite): string {
       enfants: construites(index.enfants.get(page.id) ?? []),
       libelles: site.libelles,
     }),
-    sectionSources(sourcesDeLaPageCitees(page, lignes, site.couts, cout), site.sources),
+    sectionSources(citees, site.sources),
   ].join('');
 }
