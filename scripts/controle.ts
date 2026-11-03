@@ -1,7 +1,8 @@
 // Script de contrôle lancé à chaque construction (npm run build).
 // Applique les règles de docs/08 §3, la cohérence de non-indexation et les garde-fous du dépôt.
-// Usage : node scripts/controle.ts [--dist dist] [--exemples] [--echouer-sur CODE[,CODE…]]
+// Usage : node scripts/controle.ts [--dist dist] [--exemples [--attendu CODE@fichier[@extrait]]…] [--echouer-sur CODE[,CODE…]]
 //   --exemples : construction de recette des exemples rédigés (exemples/, dist-exemples ; jamais déployée).
+//   --attendu : erreur attendue de la construction de recette (scripts/lib/attendus.ts) ; refusé sans --exemples.
 //   --echouer-sur CODES : en plus des erreurs, fait échouer le script si une alerte porte l'un de ces codes
 //                         (le workflow hebdomadaire l'utilise avec R5-REVUE-DEPASSEE, COUT-A-REVERIFIER et
 //                         COUT-FOURCHETTE-A-REVOIR pour être prévenu).
@@ -12,6 +13,7 @@ import { argv, cwd, env, exit, stdout } from 'node:process';
 import { codeSortie, codesEchec, sontBloquants } from '../src/lib/controle.ts';
 import { modeIndexation } from '../src/lib/indexation.ts';
 import { controlerSite } from './lib/controler-site.ts';
+import { appliquerAttendus, lireAttendus } from './lib/attendus.ts';
 
 const racine = cwd();
 const indice = argv.indexOf('--dist');
@@ -31,7 +33,14 @@ function aujourdhui(): Date {
 
 // --exemples : construction de recette des exemples rédigés (AVEC_EXEMPLES=1, dist-exemples, livrable 6.6).
 const exemples = argv.includes('--exemples');
-const { constats, informations, pagesEditoriales } = await controlerSite({ racine, dist, aujourdhui: aujourdhui(), indexable: mode.indexable, exemples });
+const attendus = lireAttendus(argv);
+if (attendus.length > 0 && !exemples) {
+  stdout.write('ERREUR --attendu n\'est accepté que pour la construction de recette (--exemples)\n');
+  exit(2);
+}
+const bilanSite = await controlerSite({ racine, dist, aujourdhui: aujourdhui(), indexable: mode.indexable, exemples });
+const { informations, pagesEditoriales } = bilanSite;
+const { constats, absorbes } = appliquerAttendus(bilanSite.constats, attendus);
 
 // Rapport.
 const enGitHub = env['GITHUB_ACTIONS'] === 'true';
@@ -44,6 +53,7 @@ for (const c of constats) {
     stdout.write(`${etiquette} [${c.regle}] ${c.fichier ?? ''} : ${c.message}\n`);
   }
 }
+for (const c of absorbes) stdout.write(`ATTENDU [${c.regle}] ${c.fichier ?? ''} : ${c.message}\n`);
 for (const info of informations) stdout.write(`INFO ${info}\n`);
 const erreurs = sontBloquants(constats).length;
 const alertes = constats.length - erreurs;
@@ -56,6 +66,7 @@ if (alertesAttendues > 0) stdout.write(`${alertesAttendues} alerte(s) ${echouerS
 if (env['GITHUB_STEP_SUMMARY'] !== undefined) {
   const lignes = [`### ${bilan}`, '', `Mode d'indexation : ${mode.description}`, ''];
   for (const info of informations) lignes.push(`- Information : ${info}`);
+  for (const c of absorbes) lignes.push(`- **Attendue** \`${c.regle}\` ${c.fichier ?? ''} : ${c.message}`);
   for (const c of constats) lignes.push(`- **${c.gravite === 'erreur' ? 'Erreur' : 'Alerte'}** \`${c.regle}\` ${c.fichier ?? ''} : ${c.message}`);
   await appendFile(env['GITHUB_STEP_SUMMARY'], lignes.join('\n') + '\n');
 }

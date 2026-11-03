@@ -61,8 +61,13 @@ jobs:
     name: Recette des exemples rédigés (jamais déployée)
     # Livrable 6.6 : les pages exemples de exemples/ (une par modèle de page) sont construites avec le site dans
     # dist-exemples, contrôlées comme de vraies pages, puis conservées pour la recette. Ce job ne conditionne pas le
-    # déploiement et rien de dist-exemples n'est jamais déployé. Tant que Houssem n'a pas validé l'encadré d'un exemple,
-    # R4-VALIDATION-ABSENTE le fait échouer : l'empreinte n'est ajoutée qu'après sa validation, jamais pour le faire passer.
+    # déploiement et rien de dist-exemples n'est jamais déployé.
+    # Erreurs attendues (--attendu, scripts/lib/attendus.ts), une par ligne, chacune désignée par son code, son fichier
+    # et au besoin un extrait ; toute autre erreur fait échouer le job, et un attendu qui ne se produit plus aussi
+    # (ATTENDU-ABSENT) :
+    #  - R4-VALIDATION-ABSENTE d'un exemple tant que Houssem n'a pas validé son encadré : l'empreinte n'est versée
+    #    qu'après sa validation, jamais pour faire passer le contrôle, et l'attendu est retiré dans le même commit ;
+    #  - lien « Méthode » vers /a-propos/#methode : la page « à propos » est écrite à l'étape 7.
     if: ${{ github.event_name != 'schedule' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -79,10 +84,14 @@ jobs:
       - name: Construction avec les exemples (dist-exemples)
         run: npx astro build
       - name: Script de contrôle, exemples compris
-        run: node scripts/controle.ts --dist dist-exemples --exemples
+        run: >-
+          node scripts/controle.ts --dist dist-exemples --exemples
+          --attendu 'R4-VALIDATION-ABSENTE@exemples/voyant/voyant-moteur.md'
       - name: Liens cassés
         if: ${{ !cancelled() }}
-        run: node scripts/liens.ts --dist dist-exemples
+        run: >-
+          node scripts/liens.ts --dist dist-exemples --exemples
+          --attendu 'LIEN-CASSE@voyants/moteur/index.html@/a-propos/#methode'
       - name: Conserver la construction de recette
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
