@@ -15,7 +15,7 @@ En tête :
 > Tous les véhicules à quatre roues et plus, sont concernés par cette évolution réglementaire : véhicules légers, utilitaires, bus et poids-lourds.
 > De nouveaux panneaux de signalisation informeront de l'entrée dans une zone à équipement obligatoire. En cas d'absence de neige ou de verglas, les dispositifs amovibles – chaînes ou chaussettes à neige – sont conservés à bord du véhicule.
 
-« Quelles sont les zones concernées ? » :
+« Quelles sont les zones concernées ? » (la rubrique affiche une « Carte des équipements hivernaux », légende « Obligation d’équipements hivernaux totale » et « Obligation d’équipements hivernaux partielle ») :
 > A l'issue des consultations locales, menées à l’échelle de chaque massif, les préfets ont arrêté la liste des communes sur lesquelles les obligations d'équipement des véhicules en circulation s'appliquent.
 
 Liens de la page : « Liste des arrêtés préfectoraux » (page « départements et communes » ci-dessous) ; « Liste des communes » (fichier `221022_liste_communes_equipements_hivernaux.xlsx`, daté d'octobre 2022 par son chemin, non lu).
@@ -28,7 +28,17 @@ Liens de la page : « Liste des arrêtés préfectoraux » (page « département
 « Chaînes et pneus hiver » :
 > Il faut au choix, ou détenir des dispositifs antidérapants amovibles (chaînes et chaussettes), ou équiper son véhicule de pneus hiver.
 > La réglementation permet de choisir entre chaînes métalliques et « chaînes textiles » communément appelées « chaussettes à neige ». Il en faut au moins deux, pour équiper les roues motrices.
+> Les chaînes métalliques ( pour un usage fréquent)
+> - Avantages : dispositif très efficace, résistant, présentant la meilleure adhérence et tenue de route en cas de fort enneigement ou de route verglacée.
+> - Inconvénients : elles sont plus onéreuses que les chaussettes textiles, et plus difficiles à poser.
+> Il faut tenir compte de cette difficulté potentielle de pose, en situation réelle, sur le bas-côté d'une route enneigée, par temps froid. Les fabricants ont amélioré leurs dispositifs pour en simplifier l’usage, mais il est recommandé de s’exercer avant, dans des conditions plus aisées.
+> Les chaussettes à neige textiles (pour un usage occasionnel)
+> - Avantages : elles sont plus simples à poser, et moins onéreuses.
+> - Inconvénients : Elles sont moins efficaces que les chaînes en cas de fort enneigement, et ont une durée de vie plus courte.
+> Bien vérifier que les dispositifs amovibles sont adaptés à la taille de vos roues, et à l'espace entre la roue et la carrosserie.
 > Chaînes ou chaussettes doivent être stockées à bord du véhicule, et prêtes à servir, dès lors que le trajet emprunte un axe dans les zones concernées par la nouvelle réglementation.
+
+(Passages des chaînes métalliques et des chaussettes relus et recopiés le 03/11/2026 après la revue indépendante, qui ne les trouvait pas dans le relevé.)
 
 « Les pneus hiver » :
 > Les pneus hiver, au sens du décret, sont les pneus relevant de l'appellation “3PMSF” (3 Peak Mountain Snow Flake), identifiables par la présence du marquage du “symbole alpin”, illustré par une montagne à 3 pics contenant un flocon de neige.
