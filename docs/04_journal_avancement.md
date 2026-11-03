@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 03/11/2026 (20 h 05, heure de Tunis)
+Dernière mise à jour : 03/11/2026 (20 h 20, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,7 +12,7 @@ Dernière mise à jour : 03/11/2026 (20 h 05, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 fusionnée (99819a1) ; 6.6 lancé le 03/11 en trois sous-livrables : 6.6a (modèle de page voyant, exemple « voyant moteur ») validé par Houssem le 03/11 (17 h 32), demande de changement n° 9 acceptée, PR #16 fusionnée sur sa demande (06c9c74) ; 6.6b (modèle code défaut, exemple P0087) présenté le 03/11 (20 h), PR #17 en brouillon, en attente de la validation de Houssem | `travaux/etape-6/` |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 fusionnée (99819a1) ; 6.6 lancé le 03/11 en trois sous-livrables : 6.6a (modèle de page voyant, exemple « voyant moteur ») validé par Houssem le 03/11 (17 h 32), demande de changement n° 9 acceptée, PR #16 fusionnée sur sa demande (06c9c74) ; 6.6b (modèle code défaut, exemple P0087) validé par Houssem le 03/11 (20 h 06), les cinq décisions acceptées, fusion de la PR #17 demandée ; suivant : 6.6c (modèle pneus et obligations, exemple loi montagne) | `travaux/etape-6/` |
 | 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -25,7 +25,7 @@ Dernière mise à jour : 03/11/2026 (20 h 05, heure de Tunis)
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
 | Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause depuis 12 h 10 ; reprise quand Houssem la redemande | statut juridique (mentions légales) |
-| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 et 6.5 le 03/11 ; 6.6 lancé le 03/11, 6.6a validé le même jour ; restent 6.6b, 6.6c, 6.8 et la porte) | séance de validation des exemples voyant, code et pneus |
+| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 et 6.5 le 03/11 ; 6.6 lancé le 03/11, 6.6a et 6.6b validés le même jour ; restent 6.6c, 6.8 et la porte) | séance de validation des exemples voyant, code et pneus |
 | 8. Vague A | 29/10–01/11 | ≈ 11–15/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
 | 9. Mise en ligne du minimum | 31/10 | ≈ 14–16/11 | portes 7 et 8 ; sécurité des comptes |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 21–25/11 / ≈ 28/11–02/12 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
@@ -38,7 +38,7 @@ Dernière mise à jour : 03/11/2026 (20 h 05, heure de Tunis)
 5. ~~texte de la demande de changement n° 5 et redirections Cloudflare~~ : faits le 28/10 (10 h 25) ;
 6. ~~demande de changement n° 6 (coût probable)~~ : faite le 28/10 ;
 7. ~~charte éditoriale (6.2), composants communs (6.3), tableau des notices et demande de changement n° 8 (6.4), contrôles peu coûteux (6.5)~~ : validés le 02/11 et le 03/11 ;
-8. exemples des modèles voyant (validé le 03/11), code et pneus, puis porte 6, vers le 10/11 ;
+8. exemples des modèles voyant et code (validés le 03/11) et pneus, puis porte 6, vers le 10/11 ;
 9. porte 7 ;
 10. demande de changement des requêtes absentes, juste avant l'étape 8 ;
 11. paquet et encadrés de la vague A, et porte 8 ;
@@ -112,7 +112,7 @@ Dernière mise à jour : 03/11/2026 (20 h 05, heure de Tunis)
       - contrôles R7-PAGE-SANS-CONTENU, TEXTE-REDIGE-ABSENT, TEXTE-REFERENCE-NON-REMPLACEE et CITATIONS-PART.
     - Paquet de validation : `travaux/etape-6/paquet-6.6a-voyant-moteur.md` ; demande de changement n° 9 : `travaux/etape-6/demande-changement-9.md`.
     - Deux revues indépendantes (le maximum), corrections intégrées.
-  - [ ] **6.6b Modèle de page code défaut**, exemple P0087. Présenté le 03/11 (20 h) ; en attente de la validation de Houssem.
+  - [x] **6.6b Modèle de page code défaut**, exemple P0087. Présenté le 03/11 (20 h) ; validé par Houssem le 03/11 (20 h 06), avec les recommandations des cinq décisions ; verrouillé. Empreinte de l'encadré versée (`14dd328d…`), attendu R4 retiré du job de recette, ligne « Code lu sans voyant allumé » ajoutée à la fiche (décision 5), charte §2.2, §2.5, §2.6, §3.3, §4 et §9 mises à jour (décisions 1, 2 et 4). Fusion de la PR #17 demandée par Houssem.
     - Branche `etape-6/modele-code-defaut`, PR #17 (brouillon).
     - Livré :
       - modèle de page code défaut (`src/lib/modeles.ts`, `src/lib/fiche-code.ts`) : encadré avec la ligne du voyant qui s'allume, signature, transparence, fiche du code, cas décrits par marque (élément unique), causes, texte rédigé, pages liées, sources ;
@@ -227,6 +227,15 @@ Dernière mise à jour : 03/11/2026 (20 h 05, heure de Tunis)
 
   PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 - 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 03/11/2026 (20 h 06), Houssem : **valide le livrable 6.6b** avec les recommandations des cinq décisions (« Je valide ta recommandation pour les 5 points ») :
+  - l'encadré de la page exemple « code P0087 », avec les pièces des causes et la pièce nouvelle `pompe-a-carburant` ; les six sources secondaires ; la fiche, les cas par marque et les faits du texte ;
+  - décision 1 : signification, causes et cas des pages codes défaut tirés de sources techniques secondaires, selon un critère inscrit dans la charte (§2.2) : documents de constructeur, d'équipementier ou d'éditeur d'outil de diagnostic ; ni blogs commerciaux, ni vendeurs, ni forums ; jamais de verdict ;
+  - décision 2 : bulletins de constructeurs publiés aux États-Unis comme cas par marque, présentés avec leur marché (charte §2.5) ;
+  - décision 3 : ordre de la charte gardé pour les pages codes défaut, sans demande de changement ;
+  - décision 4 : noms de moteur écrits comme dans leur source (charte §3.3) ;
+  - décision 5 : ligne « Code lu sans voyant allumé : demandez l'avis d'un professionnel » dans la fiche du code.
+
+  Il demande la fusion de la PR #17. Suivant : 6.6c (loi montagne).
 - 03/11/2026 (17 h 32), Houssem : **valide le livrable 6.6a** et accepte les quatre points :
   - l'encadré de la page exemple « voyant moteur », avec les pièces de chaque cause ;
   - les faits de sécurité du texte ;
