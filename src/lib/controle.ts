@@ -929,8 +929,11 @@ export interface AttendusPage {
    * de la base rattaché à la page ; `elementUnique` : la page est une page voyant hors outil (demande de changement n° 8).
    */
   notices?: { tableaux: readonly TableauVoyant[]; elementUnique: boolean } | undefined;
-  /** Page code défaut (livrable 6.6b, fiche-code.ts) : fiche du code et cas décrits par marque attendus. */
-  code?: { fiche: FicheCode; parMarque: readonly RangeeParMarque[] } | undefined;
+  /**
+   * Page code défaut (livrable 6.6b, fiche-code.ts) : fiche du code et cas décrits par marque attendus ; elementUnique si
+   * l'élément unique de la page est un tableau, porté alors par le tableau des cas par marque.
+   */
+  code?: { fiche: FicheCode; parMarque: readonly RangeeParMarque[]; elementUnique: boolean } | undefined;
 }
 
 /** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
