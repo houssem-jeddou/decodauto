@@ -426,6 +426,43 @@
     "explication": "Un cas par marque du contenu manque dans le tableau construit."
   },
   {
+    "nom": "code-cas-texte-modifie",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Le texte d'un cas par marque affiché diffère de la précision du contenu."
+  },
+  {
+    "nom": "code-cas-marque-modifiee",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Un cas par marque est affiché sous une autre marque que celle du contenu."
+  },
+  {
+    "nom": "code-cas-desordre",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Les cas par marque sont affichés dans un autre ordre que celui du modèle (tri par marque)."
+  },
+  {
+    "nom": "code-cas-sans-element-unique",
+    "type": "code-defaut",
+    "erreurs": [
+      "CODE-CAS-MARQUE-INCOMPLET",
+      "R7-ELEMENT-UNIQUE-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "L'élément unique de la page est un tableau, mais le tableau des cas par marque ne le porte pas."
+  },
+  {
     "nom": "r7-dates",
     "type": "panne",
     "erreurs": [

@@ -323,6 +323,10 @@ interface OptionsHtml {
   casMarqueManquant?: boolean;
   casSourceManquante?: boolean;
   casSansPrecision?: boolean;
+  casPrecisionModifiee?: boolean;
+  casDesordre?: boolean;
+  casMarqueModifiee?: boolean;
+  casSansElementUnique?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -364,7 +368,10 @@ function blocsCode(page: Objet, options: OptionsHtml): string {
   if (options.casMarqueManquant) rangees = rangees.slice(1);
   if (options.casSourceManquante) rangees = rangees.map((r, i) => (i === 0 ? { ...r, sources: [] } : r));
   if (options.casSansPrecision) rangees = [{ marque: 'Marque A', precision: 'Cas affiché sans précision dans le contenu.', sources: ['fixture-forum'] }];
-  return fiche + parMarqueHtml(rangees, REGISTRE_TEST, { elementUnique: page['element_unique'] === 'tableau' });
+  if (options.casPrecisionModifiee) rangees = rangees.map((r, i) => (i === 0 ? { ...r, precision: `${r.precision} Phrase ajoutée hors du contenu.` } : r));
+  if (options.casDesordre) rangees = [...rangees].reverse();
+  if (options.casMarqueModifiee) rangees = rangees.map((r, i) => (i === 0 ? { ...r, marque: 'Autre marque' } : r));
+  return fiche + parMarqueHtml(rangees, REGISTRE_TEST, { elementUnique: page['element_unique'] === 'tableau' && !options.casSansElementUnique });
 }
 
 function encadre(page: Objet, options: OptionsHtml): string {
@@ -595,6 +602,10 @@ invalide('code-fiche-incomplete', 'code-defaut', codeDefaut(), ['CODE-FICHE-INCO
 invalide('code-cas-marque-sources', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un cas par marque est affiché sans sa source.', { casSourceManquante: true });
 invalide('code-cas-sans-precision', 'code-defaut', codeDefaut(), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un tableau des cas par marque est affiché alors que le contenu n\'a aucune précision par marque.', { casSansPrecision: true });
 invalide('code-cas-marque-incomplet', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un cas par marque du contenu manque dans le tableau construit.', { casMarqueManquant: true });
+invalide('code-cas-texte-modifie', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Le texte d\'un cas par marque affiché diffère de la précision du contenu.', { casPrecisionModifiee: true });
+invalide('code-cas-marque-modifiee', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un cas par marque est affiché sous une autre marque que celle du contenu.', { casMarqueModifiee: true });
+invalide('code-cas-desordre', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Les cas par marque sont affichés dans un autre ordre que celui du modèle (tri par marque).', { casDesordre: true });
+invalide('code-cas-sans-element-unique', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET', 'R7-ELEMENT-UNIQUE-ABSENT'], 'L\'élément unique de la page est un tableau, mais le tableau des cas par marque ne le porte pas.', { casSansElementUnique: true });
 invalide('r7-dates', 'panne', { ...panne(), date_revue: '2027-03-01', prochaine_revue: '2027-02-01' }, ['R7-DATES'], 'prochaine_revue antérieure à date_revue.');
 invalide('r7-relecteur', 'panne', { ...panne(), relecteur: 'Un relecteur' }, ['R7-CHAMP-INCONNU'], 'Le champ relecteur est retiré : pas de relecteur extérieur (décision du 23/10/2026).');
 
