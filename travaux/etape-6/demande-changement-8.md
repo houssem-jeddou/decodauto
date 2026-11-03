@@ -1,6 +1,6 @@
 # Demande de changement n° 8 : le tableau des notices, élément unique des pages voyants
 
-Étape 6, livrable 6.4 (tableau « Ce que dit la notice de votre marque »). Proposée le 02/11/2026 avec le livrable ; **en attente de la décision de Houssem**. Appliquée sur la branche `etape-6/tableau-notices` (pull request brouillon #14, à ne pas fusionner avant la décision) pour être contrôlée en CI ; `docs/08` n'est mis à jour qu'après acceptation.
+Étape 6, livrable 6.4 (tableau « Ce que dit la notice de votre marque »). Proposée le 02/11/2026 avec le livrable ; **acceptée par Houssem le 03/11/2026 (13 h 48)** (« je valide 6.4 et la demande n° 8 »). Appliquée sur la branche `etape-6/tableau-notices` (pull request #14) ; `docs/08` passe en v7.
 
 | Rubrique | Contenu |
 |---|---|
@@ -10,7 +10,7 @@
 | Impact | Aucun contenu validé touché : aucune page éditoriale n'existe encore ; la base voyants, ses empreintes, le plan du site et les empreintes de l'encadré sont inchangés (le tableau n'entre pas dans l'empreinte : il est tiré de lignes déjà validées). Ce qui change ailleurs : (1) l'encadré de décision (composant validé en 6.3) gagne, sous la phrase des sources de chaque ligne reprise de la base, un lien « Ce que dit chaque notice » vers la partie du voyant dans le tableau ; (2) `CLAUDE.md` décrit le tableau et ses repères ; (3) la page voyant de test passe de `photo` à `tableau`, cinq pages de test ajoutées. Le modèle de page voyant (6.6) placera le tableau dans le corps. Si la demande est refusée : retirer l'appel à `exigerElement` du schéma voyant, le contrôle de l'élément unique dans TABLEAU-NOTICES-ABSENT, la page de test `r7-voyant-sans-tableau-notices` et la mention « élément unique » de `CLAUDE.md` ; le tableau lui-même (livrable 6.4) reste un bloc du corps des pages voyants. |
 | Contrôles à relancer | Nouveaux : TABLEAU-NOTICES-ABSENT, TABLEAU-NOTICES-INCOMPLET, TABLEAU-NOTICES-LIEN (`CONTROLES.md`) ; R7-ELEMENT-ATTENDU étendu aux pages voyants. Relancés : `npm run schemas`, `npm test`, `npm run build`, `npm run liens` (CI de la pull request du livrable 6.4). |
 
-## Texte proposé pour docs/08 (après acceptation)
+## Texte appliqué dans docs/08 (v7)
 
 - §2, ligne « Voyant », champs propres : « causes ; tableau « Ce que dit la notice de votre marque » (élément unique, tiré de la base). L'outil a en plus… » (suite inchangée).
 - §3, nouvelle règle : « **Tableau des notices (v7).** Toute page à laquelle un voyant de la base est rattaché affiche le tableau « Ce que dit la notice de votre marque » de ce voyant (`data-tableau-notices`) : une rangée par consigne citée d'une notice de constructeur, avec l'extrait mot pour mot, sa page et le niveau que la grille tire de cette consigne ; « Consigne retenue » marque les consignes qui donnent en entier le niveau de la ligne. Sur une page voyant (hors outil), ce tableau est l'élément unique. Une page qui reprend la ligne d'un voyant rattaché ailleurs n'affiche pas son tableau. »

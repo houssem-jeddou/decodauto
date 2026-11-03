@@ -2,6 +2,7 @@
 
 Étape 6, livrable 6.2. Proposée le 02/11/2026 ; **validée par Houssem le 02/11/2026 (20 h 19)**, avec toutes les recommandations de la section 10. Empreinte des textes affichés : `data/charte-validation.json`.
 Précisions validées avec le livrable 6.3 (02/11/2026, 22 h 28) : adresse de signalement (§5.3), pictogramme d'un voyant (§3.6).
+Précision validée avec le livrable 6.4 (03/11/2026, 13 h 48) : article L122-5 relu sur Légifrance, conditions de la courte citation (§2.6).
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -54,7 +55,7 @@ Précisions validées avec le livrable 6.3 (02/11/2026, 22 h 28) : adresse de si
 - Les pictogrammes sont redessinés pour le site, jamais copiés.
 
 ### 2.6 Textes d'autrui, citations et images
-- **Citations.** Une citation de notice ou de texte reste courte (400 caractères au plus, contrôlé), entre guillemets, avec son auteur et sa source ; elle sert l'explication de la page. Le volume cité reste limité : le tableau des notices (6.4) et l'outil ne reprennent que l'extrait utile de chaque consigne, jamais une notice entière. Cadre légal visé : l'exception de courte citation (code de la propriété intellectuelle, art. L122-5) ; texte à relire sur Légifrance avant le tableau des notices (6.4).
+- **Citations.** Une citation de notice ou de texte reste courte (400 caractères au plus, contrôlé), entre guillemets, avec son auteur et sa source ; elle sert l'explication de la page. Le volume cité reste limité : le tableau des notices (6.4) et l'outil ne reprennent que l'extrait utile de chaque consigne, jamais une notice entière. Cadre légal visé : l'exception de courte citation (code de la propriété intellectuelle, art. L122-5, 3° a, relu sur Légifrance le 02/11/2026, version en vigueur depuis le 01/01/2023) : le nom de l'auteur et la source sont indiqués clairement ; les citations sont courtes ; elles sont justifiées par le caractère pédagogique ou d'information de la page qui les cite. La loi ne fixe aucun seuil : la part de texte cité par page est à fixer avec les modèles de pages (6.6).
 - **Résultats de Google, aperçu IA, autres sites.** Ils servent seulement à connaître les questions des lecteurs (relevé Google). Leurs textes ne sont jamais repris ni reformulés. Quand une idée répandue contredit la notice, la page le dit et cite la notice.
 - **Photos.** Une photo présentée comme réelle est une vraie photo, avec son auteur ou sa source. Jamais une image générée par une IA présentée comme une photo réelle.
 
