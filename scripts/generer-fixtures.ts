@@ -11,6 +11,7 @@ import { LIGNE_TRANSPARENCE, signature } from '../src/lib/charte.ts';
 import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from '../src/lib/composants.ts';
 import { modeleTableauNotices, tableauNotices } from '../src/lib/tableau-notices.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml, type PageCode } from '../src/lib/fiche-code.ts';
+import { ficheTexteHtml, modeleFicheTexte, type PageTexte } from '../src/lib/fiche-texte.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
@@ -326,6 +327,9 @@ interface OptionsHtml {
   casPrecisionModifiee?: boolean;
   casDesordre?: boolean;
   casMarqueModifiee?: boolean;
+  /** Page pneus et obligations (livrable 6.6c). */
+  sansFicheTexte?: boolean;
+  ficheTexteFausse?: boolean;
   casSansElementUnique?: boolean;
 }
 
@@ -372,6 +376,13 @@ function blocsCode(page: Objet, options: OptionsHtml): string {
   if (options.casDesordre) rangees = [...rangees].reverse();
   if (options.casMarqueModifiee) rangees = rangees.map((r, i) => (i === 0 ? { ...r, marque: 'Autre marque' } : r));
   return fiche + parMarqueHtml(rangees, REGISTRE_TEST, { elementUnique: page['element_unique'] === 'tableau' && !options.casSansElementUnique });
+}
+
+/** Fiche « Le texte en bref » (livrable 6.6c), produite par le vrai composant depuis le contenu et le registre de test. */
+function blocsTexte(page: Objet, options: OptionsHtml): string {
+  if (options.sansFicheTexte) return '';
+  const modele = modeleFicheTexte(page as unknown as PageTexte, REGISTRE_TEST);
+  return ficheTexteHtml(options.ficheTexteFausse ? { ...modele, lignes: modele.lignes.slice(1) } : modele);
 }
 
 function encadre(page: Objet, options: OptionsHtml): string {
@@ -491,7 +502,8 @@ function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): st
   const pageVoyant = type === 'voyant' && page['outil'] !== true && page['element_unique'] === 'tableau';
   // Sans élément unique : seul l'élément unique manque (sur une page voyant, c'est le tableau des notices).
   // Page code défaut : fiche du code, puis cas par marque ; ce tableau est l'élément unique quand la page en a.
-  const code = type === 'code-defaut' ? blocsCode(page, options) : '';
+  // Page pneus et obligations : fiche « Le texte en bref » avant le corps (livrable 6.6c).
+  const code = type === 'code-defaut' ? blocsCode(page, options) : type === 'pneus' ? blocsTexte(page, options) : '';
   const parMarque = type === 'code-defaut' && Array.isArray(page['precisions_par_marque']) && page['element_unique'] === 'tableau';
   const element = pageVoyant && notices !== '' ? (options.sansElement ? '' : notices) : `${code}${options.sansElement || parMarque ? '' : (blocs[String(page['element_unique'])] ?? '')}${notices}`;
   return `${entete}<meta name="description" content="${String(page['description'])}"></head><body>${pub}${avant}<main><header><h1>${String(page['h1'])}</h1></header>${entreH1EtEncadre}${blocEncadre}${apres}${element}${etapes}${autreListe}${communs.sources}</main></body></html>\n`;
@@ -606,6 +618,8 @@ invalide('code-cas-texte-modifie', 'code-defaut', avecValidation({ ...codeDefaut
 invalide('code-cas-marque-modifiee', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Un cas par marque est affiché sous une autre marque que celle du contenu.', { casMarqueModifiee: true });
 invalide('code-cas-desordre', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET'], 'Les cas par marque sont affichés dans un autre ordre que celui du modèle (tri par marque).', { casDesordre: true });
 invalide('code-cas-sans-element-unique', 'code-defaut', avecValidation({ ...codeDefaut(), precisions_par_marque: PRECISIONS_TEST }), ['CODE-CAS-MARQUE-INCOMPLET', 'R7-ELEMENT-UNIQUE-ABSENT'], 'L\'élément unique de la page est un tableau, mais le tableau des cas par marque ne le porte pas.', { casSansElementUnique: true });
+invalide('texte-sans-fiche', 'pneus', pneus(), ['FICHE-TEXTE-ABSENTE'], 'Page pneus et obligations construite sans la fiche « Le texte en bref ».', { sansFicheTexte: true });
+invalide('texte-fiche-incomplete', 'pneus', pneus(), ['FICHE-TEXTE-INCOMPLETE'], 'La fiche « Le texte en bref » construite n\'affiche pas le texte de référence du contenu.', { ficheTexteFausse: true });
 invalide('r7-dates', 'panne', { ...panne(), date_revue: '2027-03-01', prochaine_revue: '2027-02-01' }, ['R7-DATES'], 'prochaine_revue antérieure à date_revue.');
 invalide('r7-relecteur', 'panne', { ...panne(), relecteur: 'Un relecteur' }, ['R7-CHAMP-INCONNU'], 'Le champ relecteur est retiré : pas de relecteur extérieur (décision du 23/10/2026).');
 

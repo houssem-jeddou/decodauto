@@ -463,6 +463,24 @@
     "explication": "L'élément unique de la page est un tableau, mais le tableau des cas par marque ne le porte pas."
   },
   {
+    "nom": "texte-sans-fiche",
+    "type": "pneus",
+    "erreurs": [
+      "FICHE-TEXTE-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Page pneus et obligations construite sans la fiche « Le texte en bref »."
+  },
+  {
+    "nom": "texte-fiche-incomplete",
+    "type": "pneus",
+    "erreurs": [
+      "FICHE-TEXTE-INCOMPLETE"
+    ],
+    "alertes": [],
+    "explication": "La fiche « Le texte en bref » construite n'affiche pas le texte de référence du contenu."
+  },
+  {
     "nom": "r7-dates",
     "type": "panne",
     "erreurs": [
