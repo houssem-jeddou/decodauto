@@ -8,7 +8,22 @@
 //  - un attendu qui ne correspond plus à aucune erreur fait échouer le contrôle (ATTENDU-ABSENT) : la liste, écrite dans
 //    le workflow, se vide d'elle-même (par exemple, R4 d'un exemple dès que son empreinte de validation est versée) ;
 //  - les erreurs absorbées restent affichées, comme attendues.
+import { basename } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
+
+/** Dossier de la construction de recette (astro.config.mjs, AVEC_EXEMPLES=1). */
+export const DOSSIER_RECETTE = 'dist-exemples';
+
+/**
+ * Options de la construction de recette : `--exemples` n'est accepté que sur le dossier de recette construit avec
+ * AVEC_EXEMPLES=1, et `--attendu` seulement avec `--exemples`. Rend le motif du refus, ou undefined.
+ */
+export function refusRecette(args: readonly string[], dist: string, env: Readonly<Record<string, string | undefined>>): string | undefined {
+  const exemples = args.includes('--exemples');
+  if (exemples && (basename(dist) !== DOSSIER_RECETTE || env['AVEC_EXEMPLES'] !== '1')) return `--exemples n'est accepté que sur le dossier ${DOSSIER_RECETTE}, construit avec AVEC_EXEMPLES=1`;
+  if (!exemples && args.includes('--attendu')) return "--attendu n'est accepté que pour la construction de recette (--exemples)";
+  return undefined;
+}
 
 export interface Attendu {
   regle: string;

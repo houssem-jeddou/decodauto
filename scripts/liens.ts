@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import type { Constat } from '../src/lib/controle.ts';
 import { existe } from './lib/dist.ts';
 import { listerFichiers } from './lib/charger.ts';
-import { appliquerAttendus, lireAttendus } from './lib/attendus.ts';
+import { appliquerAttendus, lireAttendus, refusRecette } from './lib/attendus.ts';
 
 const ORIGINE = 'https://decodauto.com';
 const ATTRIBUTS = [
@@ -103,11 +103,12 @@ export async function verifierLiens(dist: string): Promise<BilanLiens> {
 if (argv[1] !== undefined && resolve(argv[1]) === fileURLToPath(import.meta.url)) {
   const indice = argv.indexOf('--dist');
   const dist = resolve(indice >= 0 ? (argv[indice + 1] ?? 'dist') : 'dist');
-  const attendus = lireAttendus(argv);
-  if (attendus.length > 0 && !argv.includes('--exemples')) {
-    stdout.write('ERREUR --attendu n\'est accepté que pour la construction de recette (--exemples)\n');
+  const refus = refusRecette(argv, dist, process.env);
+  if (refus !== undefined) {
+    stdout.write(`ERREUR ${refus}\n`);
     exit(2);
   }
+  const attendus = lireAttendus(argv);
   const verifie = await verifierLiens(dist);
   const { constats, absorbes } = appliquerAttendus(verifie.constats, attendus);
   const bilan = { ...verifie, constats };
