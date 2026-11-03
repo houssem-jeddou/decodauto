@@ -40,7 +40,7 @@ situations:
         extrait: "Sauf port exclusif de chaînes précisé sur panonceau, les véhicules possédant les équipements prévus par la nouvelle réglementation, seront réputés satisfaire à l’obligation instaurée par le panneau B26."
         verdict: oui avec précautions
         urgence: aucune
-  - situation: "Avec des chaînes ou chaussettes à neige à bord, sans pneus hiver"
+  - situation: "Avec des chaînes ou chaussettes à neige à bord, sans pneus hiver, sur route sans neige ni verglas"
     verdict: oui avec précautions
     urgence: aucune
     action: "Vous respectez l'obligation. Gardez-les à bord, prêtes à servir : sans neige ni verglas, elles restent dans le coffre."
@@ -55,14 +55,14 @@ situations:
         extrait: "En cas d'absence de neige ou de verglas, les dispositifs amovibles – chaînes ou chaussettes à neige – sont conservés à bord du véhicule."
         verdict: oui avec précautions
         urgence: aucune
-  - situation: "Sur route enneigée, devant un panneau B26, avec des chaînes ou chaussettes à neige à bord"
+  - situation: "Sur route enneigée, devant le panneau qui rend les chaînes obligatoires (B26), avec des chaînes ou chaussettes à neige à bord"
     verdict: oui avec précautions
     urgence: immédiate
     action: "Montez les chaînes ou chaussettes au premier endroit sûr, avant de continuer."
     citations:
       - source: securite-routiere-equipements-hivernaux
         emplacement: rubrique « Le panneau de signalisation B26 »
-        extrait: "Le panneau de signalisation B26 continue de signifier que, sur des routes enneigées, y compris hors période hivernale, le port – et non la simple détention – de chaînes est obligatoire."
+        extrait: "sur des routes enneigées, y compris hors période hivernale, le port – et non la simple détention – de chaînes est obligatoire."
         verdict: oui avec précautions
         urgence: immédiate
 element_unique: tableau
@@ -75,7 +75,7 @@ periode:
   debut: 1er novembre
   fin: 31 mars de l'année suivante
 zones:
-  - "Communes listées par arrêté du préfet de département, dans les massifs de métropole : Alpes, Corse, Massif central, Massif jurassien, Pyrénées et Massif vosgien ; le préfet peut prévoir des dérogations sur certaines routes"
+  - "Communes listées par arrêté du préfet de département, dans les massifs de montagne (pour la Sécurité routière : Alpes, Corse, Massif central, Massif jurassien, Pyrénées, Massif vosgien) ; le préfet peut prévoir des dérogations sur certaines routes"
 cout_probable:
   pieces:
     - pneus-hiver
@@ -99,7 +99,7 @@ prochaine_revue: 2027-05-03
 
 ## Loi montagne : où et quand faut-il s'équiper ?
 
-Du 1er novembre au 31 mars, l'article D314-8 du code de la route impose un équipement d'hiver dans certaines communes de montagne ({{cite:code-de-la-route-d314-8|I et IV}}). Le préfet de chaque département concerné en fixe la liste par arrêté, dans les massifs de métropole : Alpes, Corse, Massif central, Massif jurassien, Pyrénées et Massif vosgien. Il peut aussi prévoir des dérogations sur certaines sections de route.
+Du 1er novembre au 31 mars, l'article D314-8 du code de la route impose un équipement d'hiver dans certaines communes de montagne ({{cite:code-de-la-route-d314-8|article D314-8, I et IV}}). Le préfet de chaque département concerné en fixe la liste par arrêté : « Le texte en bref », ci-dessus, en donne les massifs.
 
 Un panneau signale l'entrée dans une zone où l'équipement est obligatoire, avec un panonceau qui rappelle la période. Selon la Sécurité routière, cette signalisation est nécessaire pour que l'obligation puisse vous être opposée ({{cite:securite-routiere-equipements-hivernaux|rubrique « Les panneaux de signalisation »}}).
 
@@ -119,15 +119,17 @@ Pour une voiture ou un utilitaire léger, le texte laisse le choix : des pneus h
 | Pneus été, sans ces marquages | Non | Gardez des chaînes ou chaussettes à neige à bord |
 | Chaînes à neige métalliques | Oui | À bord, au moins deux, pour les roues motrices |
 | Chaussettes à neige (chaînes textiles) | Oui | À bord, au moins deux, pour les roues motrices |
-| Pneus à clous | Obligation non applicable | Les voitures qui en portent en sont exonérées |
+| Pneus à clous | Obligation non applicable | Les voitures qui en portent en sont exonérées ; leur usage a ses propres règles, non traitées ici |
 
-Ce tableau reprend l'article D314-8 ({{cite:code-de-la-route-d314-8|V}}) et la Sécurité routière ({{cite:securite-routiere-equipements-hivernaux|rubriques « Chaînes et pneus hiver » et « Les pneus hiver »}}).
+Ce tableau reprend l'article D314-8 ({{cite:code-de-la-route-d314-8|article D314-8, V}}) et la Sécurité routière ({{cite:securite-routiere-equipements-hivernaux|rubriques « Chaînes et pneus hiver » et « Les pneus hiver »}}).
 
 ## Peut-on rouler sans pneus hiver ni chaînes en zone de montagne ?
 
 Dans une commune soumise à l'obligation, du 1er novembre au 31 mars, sans pneus hiver ni chaînes à bord, le verdict retenu en haut de page est : {{verdict:ligne-1}}. L'encadré dit comment vous équiper.
 
-Hors de ces communes, ou du 1er avril au 31 octobre, l'article D314-8 n'impose aucun équipement. Mais sur une route enneigée, un panneau B26 impose les chaînes, y compris hors de la période d'hiver. Selon la Sécurité routière, des pneus hiver y suffisent, sauf si un panonceau exige les chaînes.
+Hors de ces communes, ou du 1er avril au 31 octobre, l'article D314-8 n'impose aucun équipement. Mais sur une route enneigée, le panneau qui rend les chaînes obligatoires (B26) les impose, y compris hors de la période d'hiver. Selon la Sécurité routière, des pneus hiver y suffisent, sauf si un panonceau exige les chaînes.
+
+Sur neige ou verglas sans ce panneau, aucun des textes lus n'impose de monter les chaînes. La Sécurité routière ne prévoit de les laisser dans le coffre qu'en l'absence de neige ou de verglas.
 
 ## Deux chaussettes à neige suffisent-elles ?
 
@@ -137,7 +139,7 @@ Vérifiez qu'elles sont adaptées à la taille de vos roues et à l'espace entre
 
 ## Pneus neige, 4 saisons, M+S ou 3PMSF : lesquels sont acceptés ?
 
-Depuis le 01/11/2024, un pneu compte comme pneu hiver s'il porte à la fois le symbole alpin et l'un des marquages M+S, M.S ou M&S. Le symbole alpin est une montagne à trois pics avec un flocon : la Sécurité routière l'appelle 3PMSF.
+Depuis le 01/11/2024, un pneu compte comme pneu hiver s'il porte à la fois le symbole alpin et l'un des marquages M+S, M.S ou M&S. La Sécurité routière appelle ces pneus 3PMSF, pour 3 Peak Mountain Snow Flake : on les reconnaît au symbole alpin, une montagne à trois pics avec un flocon.
 
 Un pneu 4 saisons, ou toutes saisons, n'a pas de définition réglementaire : il n'est accepté que s'il porte ces deux marquages. Un pneu vendu comme pneu neige mais marqué M+S seulement ne suffit plus : la Sécurité routière le compte comme un pneu classique, et il faut alors des chaînes ou chaussettes à neige à bord.
 
@@ -149,10 +151,10 @@ Le panneau B26, qui impose les chaînes sur route enneigée, relève d'une autre
 
 ## Quels véhicules sont concernés ?
 
-Selon la Sécurité routière, tous les véhicules à quatre roues et plus : voitures, utilitaires, bus et poids lourds. Les voitures sans permis ne sont pas concernées. Les poids lourds avec remorque ou semi-remorque doivent avoir des chaînes à bord, même avec des pneus hiver ({{cite:code-de-la-route-d314-8|II, 4°}}).
+Selon la Sécurité routière, tous les véhicules à quatre roues et plus : voitures, utilitaires, bus et poids lourds. Les voitures sans permis ne sont pas concernées. Les poids lourds avec remorque ou semi-remorque doivent avoir des chaînes à bord, même avec des pneus hiver ({{cite:code-de-la-route-d314-8|article D314-8, II, 4°}}).
 
 ## Que faire avant de partir en montagne ?
 
 1. Vérifiez si votre trajet passe par une commune soumise à l'obligation : carte et arrêtés publiés par la Sécurité routière, ou panneau à l'entrée de la zone.
 2. Équipez la voiture : quatre pneus hiver (symbole alpin et M+S), ou des chaînes ou chaussettes à neige à bord, adaptées à vos roues.
-3. Gardez les chaînes ou chaussettes prêtes à servir. Sur route enneigée, montez-les là où un panneau B26 l'impose ; avec des pneus hiver, seulement si un panonceau exige les chaînes.
+3. Gardez les chaînes ou chaussettes prêtes à servir, et montez-les là où le panneau B26 les rend obligatoires. Avec des pneus hiver, elles ne sont obligatoires que si un panonceau exige les chaînes.

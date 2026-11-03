@@ -11,7 +11,7 @@ Ce que Houssem valide :
 1. **L'encadré** (section 1) : quatre lignes saisies, le niveau tiré de chaque citation, le coût et une pièce nouvelle.
 2. **Les sources ajoutées au registre** (section 2).
 3. **La fiche, le tableau et les faits du texte** (section 3).
-4. **Six décisions** (section 4).
+4. **Sept décisions** (section 4).
 
 Une fois la validation donnée, et pas avant, il restera à verser l'empreinte de l'encadré avec `npm run empreinte -- exemples/pneus/loi-montagne.md`. Dans le même commit, l'attendu R4 de cette page sera retiré du job de recette.
 
@@ -32,14 +32,14 @@ Les quatre lignes sont **saisies** : aucun voyant n'est en jeu. Chacune cite des
 - Code de la route, art. D314-8, VI → Oui, avec précautions · aucune : « Le présent article s'applique sans préjudice des interdictions, restrictions et conditions de circulation prises par le préfet de département ou par l'autorité détentrice du pouvoir de police de la circulation ».
 - Sécurité routière, rubrique « Le panneau de signalisation B26 » → même niveau : « Sauf port exclusif de chaînes précisé sur panonceau, les véhicules possédant les équipements prévus par la nouvelle réglementation, seront réputés satisfaire à l’obligation instaurée par le panneau B26. »
 
-**Ligne 3. Avec des chaînes ou chaussettes à neige à bord, sans pneus hiver** → **Oui, avec précautions** · Aucune action nécessaire.
+**Ligne 3. Avec des chaînes ou chaussettes à neige à bord, sans pneus hiver, sur route sans neige ni verglas** → **Oui, avec précautions** · Aucune action nécessaire.
 - Action : « Vous respectez l'obligation. Gardez-les à bord, prêtes à servir : sans neige ni verglas, elles restent dans le coffre. »
 - Sécurité routière, rubrique « Chaînes et pneus hiver » → Oui, avec précautions · aucune : « Chaînes ou chaussettes doivent être stockées à bord du véhicule, et prêtes à servir, dès lors que le trajet emprunte un axe dans les zones concernées par la nouvelle réglementation. »
 - Sécurité routière, rubrique « Pourquoi cette réglementation ? » → même niveau : « En cas d'absence de neige ou de verglas, les dispositifs amovibles – chaînes ou chaussettes à neige – sont conservés à bord du véhicule. »
 
-**Ligne 4. Sur route enneigée, devant un panneau B26, avec des chaînes ou chaussettes à neige à bord** → **Oui, avec précautions** · À faire tout de suite.
+**Ligne 4. Sur route enneigée, devant le panneau qui rend les chaînes obligatoires (B26), avec des chaînes ou chaussettes à neige à bord** → **Oui, avec précautions** · À faire tout de suite.
 - Action : « Montez les chaînes ou chaussettes au premier endroit sûr, avant de continuer. »
-- Sécurité routière, rubrique « Le panneau de signalisation B26 » → Oui, avec précautions · tout de suite : « Le panneau de signalisation B26 continue de signifier que, sur des routes enneigées, y compris hors période hivernale, le port – et non la simple détention – de chaînes est obligatoire. »
+- Sécurité routière, rubrique « Le panneau de signalisation B26 » (la phrase commence par « continue de signifier que », sous l'intertitre) → Oui, avec précautions · tout de suite : « sur des routes enneigées, y compris hors période hivernale, le port – et non la simple détention – de chaînes est obligatoire. »
 - Voir la décision 2.
 
 Hors de la période ou des communes listées, l'article D314-8 n'impose rien : ce cas n'est pas une ligne de l'encadré, la question portant sur une commune soumise à l'obligation. Il est traité dans le texte rédigé.
@@ -74,19 +74,19 @@ Déjà au registre et cités : `code-de-la-route-d314-8` (relu en entier le 03/1
 - **Texte de référence** : « Code de la route, article D314-8 (version en vigueur depuis le 01/11/2024) ».
 - **Où le lire** : « Légifrance : » suivi du titre du registre.
 - **Période** : « Du 1er novembre au 31 mars de l'année suivante » (D314-8, IV).
-- **Zones** : « Communes listées par arrêté du préfet de département, dans les massifs de métropole : Alpes, Corse, Massif central, Massif jurassien, Pyrénées et Massif vosgien ; le préfet peut prévoir des dérogations sur certaines routes » (D314-8, I ; loi n° 85-30, art. 5 ; Sécurité routière).
+- **Zones** : « Communes listées par arrêté du préfet de département, dans les massifs de montagne (pour la Sécurité routière : Alpes, Corse, Massif central, Massif jurassien, Pyrénées, Massif vosgien) ; le préfet peut prévoir des dérogations sur certaines routes » (D314-8, I ; loi n° 85-30, art. 5, qui compte aussi un massif par département d'outre-mer ; Sécurité routière).
 
-**Tableau « Quel équipement pour la loi montagne ? »** (élément unique de la page) :
+**Tableau « Quel équipement pour la loi montagne ? »** (élément unique de la page ; cellules telles qu'affichées, avec leurs sources) :
 
 | Équipement | Accepté ? | Ce qu'il faut savoir | Source |
 |---|---|---|---|
-| Pneus hiver marqués du symbole alpin et de M+S | Oui | Quatre pneus, sur au moins deux roues de chaque essieu | D314-8, II, 1° et V ; Sécurité routière (« au moins 4 pneumatiques hiver ») |
-| Pneus 4 saisons ou toutes saisons | Seulement avec le symbole alpin et M+S | Pas de définition réglementaire | Sécurité routière, « Les pneus hiver » (« 4S, All Weather, All Season ») ; D314-8, V |
-| Pneus neige marqués M+S seulement | Non, depuis le 01/11/2024 | Comptés comme des pneus classiques : chaînes ou chaussettes à bord | D314-8, V et sa note d'entrée en vigueur ; Sécurité routière (« comme des pneus classiques ») |
-| Pneus été, sans ces marquages | Non | Chaînes ou chaussettes à bord | D314-8, II, 1° et V ; Sécurité routière (« comme des pneus classiques, ils doivent s'accompagner de la détention de chaînes/chaussettes ») |
-| Chaînes métalliques | Oui | À bord, au moins deux, pour les roues motrices | D314-8, II, 1° ; Sécurité routière |
-| Chaussettes à neige | Oui | Même règle | Sécurité routière, « Chaînes et pneus hiver » |
-| Pneus à clous | Obligation non applicable | Exonérés | Sécurité routière, « Les pneus hiver » |
+| Pneus hiver marqués du symbole alpin (montagne à trois pics avec un flocon) et de M+S | Oui | Quatre pneus, sur au moins deux roues de chaque essieu | D314-8, II, 1° et V ; Sécurité routière (« au moins 4 pneumatiques hiver ») |
+| Pneus 4 saisons ou toutes saisons | Seulement s'ils portent le symbole alpin et M+S | Ce nom n'a pas de définition réglementaire | Sécurité routière, « Les pneus hiver » (« 4S, All Weather, All Season ») ; D314-8, V |
+| Pneus neige marqués M+S seulement, sans symbole alpin | Non, depuis le 01/11/2024 | Comptés comme des pneus classiques : gardez des chaînes ou chaussettes à neige à bord | D314-8, V et sa note d'entrée en vigueur ; Sécurité routière (« comme des pneus classiques ») |
+| Pneus été, sans ces marquages | Non | Gardez des chaînes ou chaussettes à neige à bord | D314-8, II, 1° et V ; Sécurité routière |
+| Chaînes à neige métalliques | Oui | À bord, au moins deux, pour les roues motrices | D314-8, II, 1° ; Sécurité routière |
+| Chaussettes à neige (chaînes textiles) | Oui | À bord, au moins deux, pour les roues motrices | Sécurité routière, « Chaînes et pneus hiver » |
+| Pneus à clous | Obligation non applicable | Les voitures qui en portent en sont exonérées ; leur usage a ses propres règles, non traitées ici | Sécurité routière, « Les pneus hiver » |
 
 **Faits du texte rédigé** :
 
@@ -96,9 +96,9 @@ Déjà au registre et cités : `code-de-la-route-d314-8` (relu en entier le 03/1
 | Où et quand | Un panneau signale l'entrée de zone, un panonceau la période ; la signalisation est nécessaire pour que la mesure soit opposable | Sécurité routière, « Les panneaux de signalisation » |
 | Où et quand | La Sécurité routière publie une carte et les arrêtés, département par département | Sécurité routière, « Quelles sont les zones concernées ? » et page « départements et communes » |
 | Équipement | Le choix pour une voiture ou un utilitaire léger ; la Sécurité routière range chaînes et chaussettes parmi les dispositifs antidérapants amovibles | D314-8, II, 1° ; Sécurité routière |
-| Peut-on rouler | Verdict de la ligne 1 (libellé généré, `{{verdict:ligne-1}}`) ; hors zone ou hors période, le texte n'impose rien ; sur route enneigée, le panneau B26 impose les chaînes, y compris hors période, et des pneus hiver y suffisent sauf panonceau | D314-8 ; Sécurité routière, « B26 » |
+| Peut-on rouler | Verdict de la ligne 1 (libellé généré, `{{verdict:ligne-1}}`) ; hors zone ou hors période, le texte n'impose rien ; sur route enneigée, le panneau B26 impose les chaînes, y compris hors période, et des pneus hiver y suffisent sauf panonceau ; sur neige ou verglas sans ce panneau, aucun texte lu n'impose de les monter, et la Sécurité routière ne prévoit de les laisser dans le coffre qu'en l'absence de neige ou de verglas | D314-8 ; Sécurité routière, « B26 » et « Pourquoi cette réglementation ? » |
 | Chaussettes | Au moins deux, pour les roues motrices ; plus simples à poser, moins efficaces par fort enneigement ; adaptées à la taille des roues et à l'espace avec la carrosserie ; s'exercer à poser les chaînes métalliques | Sécurité routière, « Chaînes et pneus hiver » (passages recopiés dans le relevé après la revue) |
-| Pneus neige, 4 saisons, M+S, 3PMSF | Double marquage exigé depuis le 01/11/2024 ; le symbole alpin est appelé 3PMSF ; un pneu neige marqué M+S seulement compte comme un pneu classique | D314-8, V ; Sécurité routière |
+| Pneus neige, 4 saisons, M+S, 3PMSF | Double marquage exigé depuis le 01/11/2024 ; la Sécurité routière appelle ces pneus 3PMSF (3 Peak Mountain Snow Flake), reconnaissables au symbole alpin ; un pneu neige marqué M+S seulement compte comme un pneu classique | D314-8, V ; Sécurité routière |
 | Amende | Texte du montant validé (`{{montant:…}}`), date de vérification en haut de page ; le panneau B26 relève d'une autre règle, dont la sanction n'est pas traitée | `data/couts.json` ; Sécurité routière |
 | Véhicules | Quatre roues et plus ; voitures sans permis non concernées ; poids lourds avec remorque : chaînes à bord, même avec des pneus hiver | Sécurité routière ; D314-8, II, 4° |
 | Que faire | Vérifier la commune (carte, arrêtés, panneau), s'équiper, garder les chaînes prêtes à servir, les monter au panneau B26 (avec des pneus hiver, seulement sur panonceau) | Sécurité routière ; D314-8 |
@@ -108,7 +108,7 @@ Déjà au registre et cités : `code-de-la-route-d314-8` (relu en entier le 03/1
 - **en partie** : « departement pneu neige obligatoire », « zone(s) pneu(s) neige obligatoire » (la page renvoie aux arrêtés, sans liste des départements : décision 5) ; « pneu 4 saisons ou hiver », « pneus 4 saisons ou hiver », « pneus hiver ou 4 saisons », « pneu quatre saison », « pneu toute saison », « pneus quatre saisons » (la page dit ce que la loi accepte, 4 saisons et toutes saisons compris, pas lequel choisir) ;
 - **non visé** : « meilleur pneu 4 saisons homologué hiver » (intention d'achat, hors objectif : règle 5 de 01).
 
-**Questions de Google** (relevé du 28/10) traitées : « Quel équipement pour la loi montagne ? », « Est-ce que 2 chaussettes de neige suffisent ? », « Quelles sont les obligations concernant les pneus neige en France en 2026 ? », « Quelle amende pour la loi montagne ? » ; recherches associées : date, amende, verbalisation, communes concernées, pneu. « Carte » : en partie, la page renvoie à la carte de la Sécurité routière (rubrique « Quelles sont les zones concernées ? »), sans en publier une.
+**Questions de Google** (relevé du 28/10) traitées : « Quel équipement pour la loi montagne ? », « Est-ce que 2 chaussettes de neige suffisent ? », « Quelles sont les obligations concernant les pneus neige en France en 2026 ? », « Quelle amende pour la loi montagne ? » ; recherches associées traitées : date, amende, verbalisation, pneu ; en partie : communes concernées (renvoi aux arrêtés) ; non visées : « Loi montagne 2 2016 » et « Loi Montagne 3 » (les lois sur l'aménagement de la montagne, hors du sujet de la page). « Carte » : en partie, la page renvoie à la carte de la Sécurité routière (rubrique « Quelles sont les zones concernées ? »), sans en publier une.
 
 ## 4. Décisions
 
@@ -119,16 +119,20 @@ Déjà au registre et cités : `code-de-la-route-d314-8` (relu en entier le 03/1
 2. **Cas du panneau B26 : une ligne à part.** La première version mettait « À faire tout de suite » sur la ligne « chaînes à bord », à cause du panneau B26 ; la revue a montré que le lecteur pouvait comprendre « montez vos chaînes maintenant », alors que la Sécurité routière dit de les garder à bord sans neige ni verglas. Désormais :
    - ligne 3, chaînes à bord : « Oui, avec précautions » · « Aucune action nécessaire » ;
    - ligne 4, route enneigée devant un panneau B26 : « Oui, avec précautions » · « À faire tout de suite », monter les chaînes au premier endroit sûr.
-   - **Ma recommandation** : accepter ces deux lignes.
+   - Ligne 3, précisée après la seconde revue : « sur route sans neige ni verglas ». Le cas « neige ou verglas sans panneau B26 » n'a pas de ligne : aucun texte lu n'impose alors de monter les chaînes. Le texte rédigé le dit, et rappelle que la Sécurité routière ne prévoit de les laisser dans le coffre qu'en l'absence de neige ou de verglas. Une ligne tirée de cette phrase, lue a contrario, est possible si tu la veux.
+   - **Ma recommandation** : accepter ces deux lignes, sans ligne pour le cas « neige sans panneau » tant qu'aucun texte ne l'impose.
 3. **Dépannage sur autoroute affiché de lui-même.** La règle de la demande de changement n° 6 l'affiche sur toute page dont une ligne a un verdict « non ». Ici, « non » veut dire « ne roulez pas dans la zone sans équipement », pas une panne. Le tarif du dépannage sur autoroute (151 € à 280,08 €) et ses quatre sources n'aident pas ce lecteur.
    - **(a)** Le garder.
-   - **(b)** Demande de changement n° 10 : le dépannage ne s'affiche de lui-même que sur les pages voyant, code défaut et panne. Impact : `src/lib/calcul.ts`, docs/08 §1 (ligne `cout_probable`) et règle 11, `CONTROLES.md` (COUT-MONTANT-AUTOMATIQUE), `CLAUDE.md`, pages de test pneus ; aucun contenu validé touché (les pages voyant et code défaut gardent l'affichage).
+   - **(b)** Demande de changement n° 10, étroite (la seconde revue a montré qu'exclure tout le type « pneus » priverait du dépannage une page « pression » ou « usure » où un pneu à plat impose l'arrêt) : le dépannage ne s'affiche pas de lui-même sur une page loi montagne (`sujet: loi-montagne`), dont le verdict « non » vient d'une obligation d'équipement. Impact : `src/lib/calcul.ts`, docs/08 §1 (ligne `cout_probable`) et règle 11, `CONTROLES.md` (COUT-MONTANT-AUTOMATIQUE), `CLAUDE.md`, une page de test ; aucun contenu validé touché.
    - **Ma recommandation** : (b).
 4. **Élément unique : un tableau du texte rédigé**, marqué `{{tableau}}`. Le modèle pneus ne construit pas d'élément unique ; le tableau des équipements est écrit dans le texte, et le marqueur en fait l'élément unique (sans changer la structure : `element_unique: tableau`). Le même marqueur servira aux pages fluides (étape 11).
    - **Limite relevée par la revue** : l'aperçu IA de Google donne déjà la période, un nombre de départements et les véhicules concernés ; les recherches « département » ou « zone pneu neige obligatoire », « communes concernées » et « carte » demandent la liste des communes.
    - **Ma recommandation** : accepter le tableau pour le modèle, et inscrire en priorité au brief de l'étape 8 un tableau des départements avec leur arrêté, ou un outil « ma commune est-elle concernée ? », après lecture des arrêtés (décision 5).
 5. **Nombre de départements.** La Sécurité routière écrit « 34 départements sont soumis à l'obligation », mais sa page des arrêtés en liste 48. Les arrêtés n'ont pas été lus : certains peuvent ne retenir aucune commune. **Ma recommandation** : ne donner aucun nombre pour l'instant, et lire les arrêtés au brief 6.8 ou à l'étape 8 avant de publier la liste.
 6. **Ordre de la page.** La charte §4 cite, pour les pages pneus et obligations : texte de référence, ce qui est exigé, période et zones, marche à suivre. Le modèle regroupe le texte de référence, la période et les zones dans la fiche « Le texte en bref », en haut de page, puis donne ce qui est exigé (tableau) et la marche à suivre dans le texte rédigé. **Ma recommandation** : accepter cet ordre et l'écrire dans la charte §4 avec la validation, sans demande de changement (même cas que l'ordre de la page code défaut en 6.6b).
+
+7. **Liens vers la carte et les arrêtés dans le texte.** Tant que la liste des communes n'est pas sur la page (décisions 4 et 5), le lien vers la carte et les arrêtés de la Sécurité routière est la seule réponse à « communes concernées », « carte » et « département pneu neige obligatoire ». Aujourd'hui, ces liens ne sont que dans « Sources », en bas de page. La règle « un lien écrit dans le texte ne mène qu'à une page liée dans le plan » vise les pages du site (contrôle R7-LIEN-HORS-PLAN), mais sa lettre peut se lire comme une interdiction de tout lien.
+   - **Ma recommandation** : permettre dans le texte un lien vers une source officielle citée sur la page (écrit pour dire où il mène, charte §3.6), et l'ajouter ici à deux endroits (« Où et quand » et l'étape 1 de « Que faire »). À écrire dans la charte §2.7 avec la validation.
 
 Trois mécanismes du modèle sont aussi soumis avec ce livrable, comme `{{cite:…}}` en 6.6a : `{{verdict:ligne-n}}` (verdict d'une ligne saisie, jamais recopié), `{{montant:…}}` (montant validé, jamais recopié) et `{{tableau}}`. Après la validation, ils seront écrits dans la charte (§4 et §9).
 
@@ -142,4 +146,9 @@ Trois mécanismes du modèle sont aussi soumis avec ce livrable, comme `{{cite:�
 - **Page info.gouv.fr** (gouvernement, 20/12/2022) : lue, non citée ; ses dates de transition sont dépassées.
 - **`{{verdict:ligne-n}}`** suit le numéro de la ligne : si l'ordre de l'encadré change, l'empreinte change (revalidation) et la recette relit les phrases qui citent un verdict.
 - **Registre** : la date de consultation de l'article D314-8 passe au 03/11/2026 (relu ce jour-là).
-- **Mesure sur téléphone** (360 px) : page d'environ 9 470 px ; encadré 2 010 px (quatre lignes et le dépannage, voir la décision 3) ; tableau 1 130 px, lisible sans défilement en largeur.
+- **Chaussettes devant le panneau B26** : la Sécurité routière dit que les équipements de la nouvelle réglementation, chaussettes comprises, sont « réputés satisfaire » au panneau B26, sauf panonceau ; aucun texte officiel lu ne le confirme pour les chaussettes. La ligne 4 en dépend.
+- **Pneus à clous** : leur période d'usage (arrêté du 18/07/1985, d'après une préfecture) n'est pas traitée : la page le dit.
+- **Sigle M+S** : non développé, aucune source lue ne le fait.
+- **« Sources »** : la référence du texte (« Code de la route, article D314-8 (version…) ») est affichée parmi les emplacements cités : comportement de `src/lib/calcul.ts` antérieur au livrable, à revoir au besoin.
+- **Contrôle de la nature du texte** : ajouté après la seconde revue (R7-TEXTE-REFERENCE-NATURE) : la fiche ne peut plus afficher « Légifrance » pour une autre catégorie de source.
+- **Mesure sur téléphone** (360 px) : page d'environ 9 900 px ; encadré 2 090 px (quatre lignes et le dépannage, voir la décision 3) ; tableau 1 230 px, lisible sans défilement en largeur, région nommée par son titre et atteignable au clavier.
