@@ -210,6 +210,9 @@ Briefs des 22 pages de la vague A : `travaux/etape-6/briefs/`, générés par `n
 
 Non vérifiable par machine (revue et validation de Houssem) : la justesse des consignes, leur fidélité au relevé et aux documents cités ; la fidélité du relevé à la page de résultats de Google (une seule recherche par requête, robot réglé sur la France).
 
+## Porte de sortie de l'étape 6 (livrable 6.9)
+`tests/porte6.test.ts` (échec de `npm test`) garde vrai ce que la porte a vérifié (`travaux/etape-6/porte-de-sortie.md`) : les types de page de la vague A (voyant, code défaut, pneus) ont chacun leur modèle (`MODELES`, `src/lib/modeles.ts`) et au moins un exemple rédigé dans `exemples/<type>/` ; l'encadré de chaque exemple porte une empreinte de validation égale à celle que recalcule `npm run empreinte` ; les textes affichés de la charte portent l'empreinte de `data/charte-validation.json`.
+
 ## Charte éditoriale (étape 6)
 Textes affichés tels quels (mention en tête, signature, ligne de transparence, section « Méthode » de « à propos ») : `src/lib/charte.ts` ; vue générée dans `docs/10_charte_editoriale.md` (`npm run charte:vue`). Tests : `tests/charte.test.ts` (sans dépendance).
 
