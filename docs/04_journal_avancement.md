@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 03/11/2026 (17 h 50, heure de Tunis)
+Dernière mise à jour : 03/11/2026 (20 h 05, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,7 +12,7 @@ Dernière mise à jour : 03/11/2026 (17 h 50, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 fusionnée (99819a1) ; 6.6 lancé le 03/11 en trois sous-livrables : 6.6a (modèle de page voyant, exemple « voyant moteur ») validé par Houssem le 03/11 (17 h 32), demande de changement n° 9 acceptée, PR #16 fusionnée sur sa demande (06c9c74) ; suivant : 6.6b (modèle code défaut, exemple P0087) | `travaux/etape-6/` |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 fusionnée (99819a1) ; 6.6 lancé le 03/11 en trois sous-livrables : 6.6a (modèle de page voyant, exemple « voyant moteur ») validé par Houssem le 03/11 (17 h 32), demande de changement n° 9 acceptée, PR #16 fusionnée sur sa demande (06c9c74) ; 6.6b (modèle code défaut, exemple P0087) présenté le 03/11 (20 h), PR #17 en brouillon, en attente de la validation de Houssem | `travaux/etape-6/` |
 | 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -112,7 +112,15 @@ Dernière mise à jour : 03/11/2026 (17 h 50, heure de Tunis)
       - contrôles R7-PAGE-SANS-CONTENU, TEXTE-REDIGE-ABSENT, TEXTE-REFERENCE-NON-REMPLACEE et CITATIONS-PART.
     - Paquet de validation : `travaux/etape-6/paquet-6.6a-voyant-moteur.md` ; demande de changement n° 9 : `travaux/etape-6/demande-changement-9.md`.
     - Deux revues indépendantes (le maximum), corrections intégrées.
-  - [ ] **6.6b Modèle de page code défaut**, exemple P0087.
+  - [ ] **6.6b Modèle de page code défaut**, exemple P0087. Présenté le 03/11 (20 h) ; en attente de la validation de Houssem.
+    - Branche `etape-6/modele-code-defaut`, PR #17 (brouillon).
+    - Livré :
+      - modèle de page code défaut (`src/lib/modeles.ts`, `src/lib/fiche-code.ts`) : encadré avec la ligne du voyant qui s'allume, signature, transparence, fiche du code, cas décrits par marque (élément unique), causes, texte rédigé, pages liées, sources ;
+      - contrôles CODE-FICHE-ABSENTE, CODE-FICHE-INCOMPLETE, CODE-CAS-MARQUE-INCOMPLET ; 10 pages de test (97 au total) ;
+      - six sources secondaires au registre (Ross-Tech, fiche technique Kia, bulletin Audi, deux fiches Hella, Bosch) et pièce `pompe-a-carburant` ;
+      - page exemple `exemples/code-defaut/code-p0087.md`, construite seulement par la recette.
+    - Paquet de validation : `travaux/etape-6/paquet-6.6b-code-p0087.md` (encadré et pièces, sources, fiche, cas par marque, faits du texte, cinq décisions).
+    - Deux revues indépendantes (le maximum), corrections intégrées.
   - [ ] **6.6c Modèle de page pneus et obligations**, exemple loi montagne.
 - [x] **6.7 Relevé des résultats Google depuis la France** (28/10) : 19 requêtes principales de la vague A, SerpApi (google.fr, gl=fr, hl=fr, localisation France), empreintes vérifiées après recopie. Branche `etape-6/releve-google-france`, `travaux/etape-6/releve-google-france/` ; constats pour les briefs dans son README. Revue indépendante prévue avec les briefs (6.8), en un seul lot.
 - [ ] **6.8 Briefs des 22 pages de la vague A**, générés depuis le plan et le relevé (les 3 pages du socle n'ont pas de mots-clés).
@@ -248,6 +256,20 @@ Dernière mise à jour : 03/11/2026 (17 h 50, heure de Tunis)
 - 02/11/2026 (20 h 19), Houssem : **valide la charte éditoriale avec toutes les recommandations** de sa section 10, **donne son accord sur les textes exacts** (mention en tête, signature, ligne de transparence, section « Méthode ») et **demande la fusion de la PR #12** si tout va bien. 03 passe en v7 (règle 11 alignée). Le livrable 6.2 est verrouillé ; suivant : 6.3, composants communs.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 03/11, livrable 6.6b (modèle de page code défaut, exemple P0087), deux revues (deux relecteurs), le maximum.
+  - **Première revue** (« à corriger », un point bloquant) :
+    - une phrase sur Volkswagen était contredite par les notes de Ross-Tech (2.0 TFSI, TDI) : rangée « Groupe Volkswagen » ajoutée, phrase retirée (point bloquant) ;
+    - description de Bosch limitée aux systèmes diesel à rampe commune ; cause « capteur de pression (G410) » ajoutée ; portée de Ross-Tech dite ;
+    - causes dans l'ordre du circuit du carburant, doublons réduits ; autre ordre de page proposé à Houssem (décision 3) ;
+    - trois pages de test ; « fiche technique » Kia ; désignation des moteurs (décision 4) ; intitulé « Source » sur téléphone.
+  - **Seconde revue** (« à corriger », rien de bloquant) :
+    - bulletin Audi rendu fidèlement, vérifié sur le document : ne remplacer aucune pièce ni mettre à jour le logiciel ; la modification du logiciel était à l'étude pour la production ;
+    - cas Kia borné aux voitures vendues aux États-Unis, dans les causes aussi ;
+    - Bosch : une vanne de régulation ou un limiteur, toujours présent (vérifié sur la page) ; voyant moteur attribué aux seuls documents qui le citent ; lien entre arbre à cames et pompe haute pression retiré ;
+    - quatre pages de test : chaque comparaison du tableau par marque est prouvée seule (essai par mutation) ; l'élément unique « tableau » doit être le tableau par marque ;
+    - sigle DTC expliqué (mots-clés « dtc p0087 ») ; rubriques citées pour Ross-Tech et Audi ; autres moteurs : même signification, même marche à suivre ;
+    - ajoutés au paquet : critère des sources secondaires à inscrire dans la charte (décision 1) ; consigne pour un code lu sans voyant (décision 5).
+  - **Laissé ouvert** : sources lues par WebFetch seulement ; « C-Crosser » interprété ; bulletins Volkswagen cités par Ross-Tech non lus ; marché français non vérifié ; pas de rubrique ni de page pour Hella, Kia et Bosch (documents d'une page ou sans rubrique).
 - 03/11, livrable 6.6a (modèle de page voyant, exemple « voyant moteur »), deux revues (deux relecteurs), le maximum.
   - **Première revue** (« à corriger », un point bloquant) :
     - trois phrases de fait étaient contredites par les notices relevées : aucune distance (la Peugeot 208 en donne une, cas AdBlue), aucune manipulation pour éteindre le voyant et aucune exception (Toyota Yaris p. 297, réservoir vidé). Elles sont réécrites (point bloquant) ;
