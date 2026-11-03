@@ -4,7 +4,8 @@
 // `basDePage` ; le gabarit commun (src/layouts/Base.astro) place `bandeau` et `pied` sur toutes les pages.
 // Ordre d'une page éditoriale (charte §4, docs/08 §3 règle 9) :
 //   bandeau (nom du site, mention en tête) · fil d'Ariane · H1 · encadré de décision · signature · ligne de
-//   transparence · [corps de la page, où le modèle place `causesDeLaPage`] · pages liées · sources · pied
+//   transparence · [corps de la page, où le modèle place `tableauNoticesDeLaPage` et `causesDeLaPage`] · pages liées ·
+//   sources · pied
 //   (signaler une erreur)
 // Module sans dépendance à l'exécution : la page de démonstration et les tests l'utilisent tel quel.
 // ---------------------------------------------------------------------------------------------
@@ -25,6 +26,7 @@ import {
   type SourceDuRegistre,
 } from './composants.ts';
 import { texteHtml } from './html.ts';
+import { modeleTableauNotices, tableauNotices } from './tableau-notices.ts';
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees } from './calcul.ts';
 import { indexerPlan } from './plan.ts';
 import type { DonneesCouts } from './cout.ts';
@@ -59,6 +61,7 @@ function lignesDeLaPage(page: PageEditoriale, site: DonneesSite) {
 export function hautDePage(page: PageEditoriale, site: DonneesSite): string {
   const lignes = lignesDeLaPage(page, site);
   const cout = coutDeLaPage(page, lignes, site.couts);
+  const auTableau = new Set(modeleTableauNotices(lignes, site.voyants, site.sources, page.id).map((t) => t.voyant));
   const modele = modeleEncadre({
     question: page.question_decision,
     lignes,
@@ -68,6 +71,7 @@ export function hautDePage(page: PageEditoriale, site: DonneesSite): string {
     sources: site.sources,
     voyants: site.voyants,
     pictogrammes: site.pictogrammes,
+    voyantsAuTableau: auTableau,
   });
   return [
     filDAriane(cheminDAriane(page.id, site.plan, site.libelles)),
@@ -76,6 +80,16 @@ export function hautDePage(page: PageEditoriale, site: DonneesSite): string {
     signaturePage({ modification: page.date_modification, revue: page.date_revue }),
     ligneTransparence(adresseMethode(site.plan)),
   ].join('');
+}
+
+/**
+ * Tableau « Ce que dit la notice de votre marque » (livrable 6.4), tiré des citations de la base voyants pour chaque
+ * voyant rattaché à la page. Sur une page voyant (hors outil), il est l'élément unique (`elementUnique`, demande de
+ * changement n° 8) ; sur une autre page de rattachement (panne), il est affiché sans l'être. Vide si aucun voyant de la
+ * base n'est rattaché à la page.
+ */
+export function tableauNoticesDeLaPage(page: PageEditoriale, site: DonneesSite, options: { elementUnique: boolean }): string {
+  return tableauNotices(modeleTableauNotices(lignesDeLaPage(page, site), site.voyants, site.sources, page.id), options);
 }
 
 /** Causes et leur coût (pages voyant, code défaut, panne) : le modèle de page les place dans son corps (charte §4). */

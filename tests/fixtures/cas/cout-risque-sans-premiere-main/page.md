@@ -28,7 +28,7 @@ situations:
   - voyant: fixture-voyant-huile
 voyants:
   - fixture-voyant-huile
-element_unique: photo
+element_unique: tableau
 causes:
   - cause: Niveau d'huile trop bas
     explication: Le circuit n'est plus assez alimenté.

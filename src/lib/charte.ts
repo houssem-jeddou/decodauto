@@ -155,6 +155,9 @@ export interface RegleMarquesMethode {
   groupesMin: number;
 }
 
+/** La notice du lecteur fait foi pour son véhicule (section « Méthode », repris par le tableau des notices, 6.4). */
+export const NOTICE_FAIT_FOI = 'La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.';
+
 /**
  * Section « Méthode » de la page « à propos » (docs/03 règle 11). `registre` : data/sources.json (les notices
  * lues y sont prises, jamais recopiées).
@@ -191,7 +194,7 @@ export function sectionMethode(registre: readonly NoticeLue[], regle: RegleMarqu
         paragraphes: [
           `Pour les voyants, les notices de plusieurs grandes marques vendues en France sont lues et comparées. Notices citées aujourd’hui : ${enumerer(notices.noms)}, soit ${enLettres(notices.marques)} marques de ${enLettres(notices.groupes)} groupes. Chaque citation nomme le modèle et l’édition de la notice ; une consigne n’est jamais attribuée à un autre modèle que celui de la notice citée.`,
           `Chaque voyant de la base du site s’appuie sur au moins ${enLettres(regle.marquesMin)} marques de ${enLettres(regle.groupesMin)} groupes différents. Quand les notices ne disent pas la même chose, la consigne la plus prudente est retenue, et la page vous montre l’écart, marque par marque. Quand une alerte n’est décrite que dans une ou deux notices, la page le dit et nomme la notice citée.`,
-          'La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.',
+          NOTICE_FAIT_FOI,
         ],
       },
       {

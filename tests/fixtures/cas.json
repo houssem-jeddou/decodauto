@@ -11,7 +11,7 @@
     "type": "voyant",
     "erreurs": [],
     "alertes": [],
-    "explication": "Voyant valide : ligne reprise de la base uniquement ; l'encadré de décision est validé comme sur toute page."
+    "explication": "Voyant valide : ligne reprise de la base uniquement ; l'encadré de décision est validé comme sur toute page ; l'élément unique est le tableau des notices."
   },
   {
     "nom": "valide-code-defaut",
@@ -606,6 +606,51 @@
     ],
     "alertes": [],
     "explication": "Pas de ligne de transparence (texte rédigé par une IA, sources, vérification) sur une page éditoriale."
+  },
+  {
+    "nom": "r7-voyant-sans-tableau-notices",
+    "type": "voyant",
+    "erreurs": [
+      "R7-ELEMENT-ATTENDU"
+    ],
+    "alertes": [],
+    "explication": "Page voyant dont l'élément unique n'est pas le tableau « Ce que dit la notice de votre marque »."
+  },
+  {
+    "nom": "tableau-notices-absent",
+    "type": "voyant",
+    "erreurs": [
+      "TABLEAU-NOTICES-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "Page voyant dont le tableau n'est pas celui des notices : un tableau quelconque ne montre pas l'écart entre marques."
+  },
+  {
+    "nom": "tableau-notices-absent-panne",
+    "type": "panne",
+    "erreurs": [
+      "TABLEAU-NOTICES-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "Page de rattachement d'un voyant (panne) qui n'affiche pas le tableau des notices de ce voyant."
+  },
+  {
+    "nom": "tableau-notices-incomplet",
+    "type": "voyant",
+    "erreurs": [
+      "TABLEAU-NOTICES-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Une notice citée par la ligne de la base manque au tableau."
+  },
+  {
+    "nom": "tableau-notices-sans-lien",
+    "type": "voyant",
+    "erreurs": [
+      "TABLEAU-NOTICES-LIEN"
+    ],
+    "alertes": [],
+    "explication": "La ligne de l'encadré ne renvoie pas au détail par notice du voyant."
   },
   {
     "nom": "composants-source-manquante",

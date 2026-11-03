@@ -1,5 +1,5 @@
 ---
-# Page de démonstration des composants communs (livrable 6.3) : jamais publiée (hors de src/content et du plan).
+# Page de démonstration des composants communs (livrable 6.3) et du tableau des notices (6.4) : jamais publiée.
 # Les lignes de l'encadré viennent de la base voyants validée ; la question, les causes et le texte sont
 # provisoires : la vraie page est rédigée et validée avec la vague A (étape 8).
 id: voyant-huile

@@ -49,6 +49,7 @@ export const IDENTIFIANTS = {
   enfants: 'da-dans-cette-rubrique',
   liees: 'da-a-lire-aussi',
   sources: 'da-sources',
+  notices: 'da-notices',
 } as const;
 
 /** Ce que les composants lisent d'une source du registre (data/sources.json). */
@@ -164,6 +165,12 @@ export function nomCourtSource(source: Pick<SourceDuRegistre, 'titre' | 'categor
   return titre.replace(/\s+relati(?:f|ve|fs|ves)\s.*$/u, '').trim();
 }
 
+/** Ancre de la partie d'un voyant dans le tableau des notices (livrable 6.4) : l'encadré de décision y renvoie. */
+export const ancreNotices = (voyant: string): string => `${IDENTIFIANTS.notices}-${voyant}`;
+
+/** Libellé du lien de l'encadré vers la partie du voyant dans le tableau des notices (livrable 6.4). */
+export const LIBELLE_LIEN_NOTICES = 'Ce que dit chaque notice';
+
 export interface LigneEncadre {
   situation: string;
   verdict: Verdict;
@@ -176,6 +183,8 @@ export interface LigneEncadre {
   /** Pictogramme du voyant (SVG) et sa couleur dans la base (rouge, orange…), pour une ligne reprise de la base. */
   pictogramme?: string | undefined;
   couleur?: string | undefined;
+  /** Ancre de la partie du voyant dans le tableau des notices de la page, s'il y figure (lien sous les sources). */
+  detailNotices?: string | undefined;
 }
 
 export interface CoutEncadre {
@@ -205,6 +214,8 @@ export function modeleEncadre(entree: {
   sources: ReadonlyMap<string, SourceDuRegistre>;
   voyants: ReadonlyMap<string, { pictogramme: string; couleur: string }>;
   pictogrammes: ReadonlyMap<string, string>;
+  /** Voyants qui ont leur partie dans le tableau des notices de la page (tableau-notices.ts). */
+  voyantsAuTableau?: ReadonlySet<string> | undefined;
 }): ModeleEncadre {
   const lignes = entree.lignes.map((ligne): LigneEncadre => {
     const voyant = ligne.voyant !== undefined ? entree.voyants.get(ligne.voyant) : undefined;
@@ -217,6 +228,7 @@ export function modeleEncadre(entree: {
       ...sourcesDeLaLigne(ligne.sources, entree.sources),
       pictogramme: voyant !== undefined ? entree.pictogrammes.get(voyant.pictogramme) : undefined,
       couleur: voyant?.couleur,
+      detailNotices: ligne.voyant !== undefined && entree.voyantsAuTableau?.has(ligne.voyant) === true ? ancreNotices(ligne.voyant) : undefined,
     };
   });
   const plage = libellePlage(entree.cout);
@@ -294,7 +306,9 @@ function ligneEncadreHtml(ligne: LigneEncadre): string {
     `<p class="encadre-urgence">${etiquette('Quand agir :')}${texteHtml(GRILLE_URGENCES[ligne.urgence].libelle)}</p>`,
     `<p class="encadre-action">${etiquette('Que faire :')}${texteHtml(ligne.action)}</p>`,
     ligne.ecart !== undefined ? `<p class="encadre-ecart">${etiquette('Selon les marques :')}${texteHtml(ligne.ecart)}</p>` : '',
-    sources !== '' ? `<p class="encadre-sources">${texteHtml(sources)}</p>` : '',
+    sources !== '' || ligne.detailNotices !== undefined
+      ? `<p class="encadre-sources">${texteHtml(sources)}${ligne.detailNotices !== undefined ? `${sources !== '' ? ' ' : ''}<a href="#${attributHtml(ligne.detailNotices)}" data-lien-notices>${texteHtml(LIBELLE_LIEN_NOTICES)}</a>` : ''}</p>`
+      : '',
     '</li>',
   ].join('');
 }

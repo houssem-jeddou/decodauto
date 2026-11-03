@@ -241,6 +241,121 @@ h3 {
   background: var(--fond-doux);
 }
 
+/* Tableau « Ce que dit la notice de votre marque » (livrable 6.4) : une rangée par consigne citée, filet et icône de
+   la gravité de son niveau ; la consigne retenue (la plus prudente) sur le fond de sa gravité. Sur téléphone,
+   chaque rangée devient une carte ; seuls les en-têtes de colonnes sont alors masqués à l'écran (lus par les lecteurs
+   d'écran), jamais une citation ni un niveau. */
+.notices table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+.notices th,
+.notices td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--bord);
+}
+.notices thead th {
+  background: var(--fond-doux);
+  font-size: 0.875rem;
+}
+.notices tbody tr {
+  border-left: 6px solid var(--gravite);
+}
+.notices tbody tr[data-gravite='0'] {
+  --gravite: var(--gravite-0);
+  --gravite-fond: var(--gravite-0-fond);
+}
+.notices tbody tr[data-gravite='1'] {
+  --gravite: var(--gravite-1);
+  --gravite-fond: var(--gravite-1-fond);
+}
+.notices tbody tr[data-gravite='2'] {
+  --gravite: var(--gravite-2);
+  --gravite-fond: var(--gravite-2-fond);
+}
+.notices tbody tr[data-gravite='3'] {
+  --gravite: var(--gravite-3);
+  --gravite-fond: var(--gravite-3-fond);
+}
+.notices tbody tr[data-retenue] {
+  background: var(--gravite-fond);
+}
+.notices tbody th {
+  width: 9rem;
+}
+.notices-edition {
+  display: block;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: var(--texte-doux);
+}
+.notices-citation {
+  margin: 0;
+}
+.notices-page {
+  margin: 0.25rem 0 0;
+}
+.notices-page,
+.notices-autres,
+.notices-note {
+  font-size: 0.875rem;
+  color: var(--texte-doux);
+}
+.notices-niveau {
+  width: 11rem;
+}
+.notices-niveau .icone-gravite {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.notices-retenue {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0 0.375rem;
+  border: 1px solid var(--gravite);
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+@media (max-width: 40rem) {
+  .notices thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .notices table,
+  .notices tbody,
+  .notices tr,
+  .notices tbody th,
+  .notices td {
+    display: block;
+    width: auto;
+  }
+  .notices tbody tr {
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--bord);
+    border-left: 6px solid var(--gravite);
+    border-radius: 0.25rem;
+  }
+  .notices tbody th,
+  .notices td {
+    border-bottom: none;
+    padding: 0.375rem 0.75rem;
+  }
+  .notices-niveau .icone-gravite {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 0.375rem 0 0;
+  }
+}
+
 /* Pied de page : lien de signalement (toutes les pages). */
 .pied {
   max-width: 44rem;

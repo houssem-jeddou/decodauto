@@ -219,6 +219,9 @@ export const voyantPageSchema = z
     if (page.voyants === undefined) {
       probleme(ctx, 'R7-CHAMP-MANQUANT', ['voyants'], 'une page voyant déclare au moins un voyant de la base');
     }
+    // Demande de changement n° 8 : l'élément unique d'une page voyant est le tableau « Ce que dit la notice de votre
+    // marque », tiré de la base (contrôles TABLEAU-NOTICES-* sur la page construite).
+    exigerElement(page, ctx, 'tableau', 'le tableau « Ce que dit la notice de votre marque »', false);
   });
 
 // ---- Code défaut ------------------------------------------------------------------------------

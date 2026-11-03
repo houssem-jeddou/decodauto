@@ -1,4 +1,4 @@
-// Page de démonstration des composants communs (livrable 6.3) : la page de test tests/demo/voyant-huile.md, rendue
+// Page de démonstration des composants communs (livrable 6.3) et du tableau des notices (livrable 6.4) : la page de test tests/demo/voyant-huile.md, rendue
 // avec les vraies données (plan, base voyants, registre, coûts, pictogrammes) et le gabarit (src/lib/gabarit.ts).
 // Elle sert aux tests (tests/composants.test.ts) et à l'aperçu (npm run demo). Jamais publiée : elle n'est ni dans
 // src/content ni dans le plan du site, et l'aperçu est écrit dans dist-demo/ (ignoré par Git et par le déploiement).
@@ -8,7 +8,7 @@ import { construireContexte, type Constat, type Contexte } from '../../src/lib/c
 import { empreintePage } from '../../src/lib/empreinte.ts';
 import { coutDeLaPage, resoudreLignes } from '../../src/lib/calcul.ts';
 import { plageValidee } from '../../src/lib/cout.ts';
-import { bandeau, basDePage, causesDeLaPage, hautDePage, pied, type DonneesSite } from '../../src/lib/gabarit.ts';
+import { bandeau, basDePage, causesDeLaPage, hautDePage, pied, tableauNoticesDeLaPage, type DonneesSite } from '../../src/lib/gabarit.ts';
 import { sectionMethodeHtml } from '../../src/lib/composants.ts';
 import { echapper, texteHtml } from '../../src/lib/html.ts';
 import { sectionMethode } from '../../src/lib/charte.ts';
@@ -75,9 +75,11 @@ export async function construireDemo(racine: string, aujourdhui: Date): Promise<
   const css = await readFile(join(racine, 'src/styles/site.css'), 'utf8');
   const ligne = contexte.plan.get(page.id);
   const adresse = ligne?.adresse ?? '/';
+  // Corps : le tableau des notices (élément unique d'une page voyant, demande de changement n° 8), puis une note à la
+  // place du texte que le modèle de page voyant rédigera (livrable 6.6).
   const corps = [
-    `<p><em>${texteHtml('Corps de la page : rédigé avec le modèle de page voyant (livrable 6.6). Cette page de démonstration montre les composants communs.')}</em></p>`,
-    '<div data-element-unique="tableau"><table><thead><tr><th scope="col">Marque</th><th scope="col">Ce que dit la notice</th></tr></thead><tbody><tr><td>Tableau des notices</td><td>Livrable 6.4</td></tr></tbody></table></div>',
+    tableauNoticesDeLaPage(page, site, { elementUnique: true }),
+    `<p><em>${texteHtml('Corps de la page : rédigé avec le modèle de page voyant (livrable 6.6). Cette page de démonstration montre les composants communs et le tableau des notices.')}</em></p>`,
   ].join('');
   const html = documentHtml({ titre: page.title, description: page.description, adresse, contenu: `${hautDePage(page, site)}${corps}${causesDeLaPage(page, site)}${basDePage(page, site)}`, css });
   const htmlMethode = documentHtml({
