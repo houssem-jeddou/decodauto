@@ -405,6 +405,9 @@ h3 {
   font-size: 0.875rem;
   color: var(--texte-doux);
 }
+.cas-intitule {
+  display: none;
+}
 @media (max-width: 40rem) {
   .fiche-code dl > div {
     grid-template-columns: 1fr;
@@ -435,6 +438,9 @@ h3 {
   .par-marque td {
     border-bottom: none;
     padding: 0.375rem 0.75rem;
+  }
+  .cas-intitule {
+    display: inline;
   }
 }
 

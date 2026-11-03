@@ -80,8 +80,10 @@ export function ficheCodeHtml(fiche: FicheCode): string {
 }
 
 /** Introduction du tableau par marque : un cas ne vaut que pour les modèles nommés (charte §2.5). */
-export const INTRODUCTION_PAR_MARQUE =
-  'Chaque cas vient d’un document technique cité, et ne vaut que pour les modèles et moteurs nommés. Pour une autre voiture, seul un diagnostic dit d’où vient le défaut.';
+export const INTRODUCTION_PAR_MARQUE = 'Chaque cas vient d’un document technique cité, et ne vaut que pour les modèles et moteurs nommés.';
+
+/** Intitulé de la cellule des sources, affiché seul sur téléphone (les en-têtes de colonnes y sont masqués). */
+export const INTITULE_SOURCE_CAS = 'Source : ';
 
 /** Une rangée du tableau par marque, triée par marque. */
 export interface RangeeParMarque {
@@ -105,7 +107,7 @@ export function parMarqueHtml(rangees: readonly RangeeParMarque[], registre: Reg
       `<tr role="row" data-cas-marque>`,
       `<th scope="row" role="rowheader">${texteHtml(r.marque)}</th>`,
       `<td role="cell">${texteHtml(r.precision)}</td>`,
-      `<td role="cell" class="cas-sources">${r.sources.map((id) => `<span data-source-id="${attributHtml(id)}">${texteHtml(nomsSources([id], registre))}</span>`).join(`${INSECABLE}; `)}</td>`,
+      `<td role="cell" class="cas-sources"><span class="cas-intitule">${texteHtml(INTITULE_SOURCE_CAS.trim())}${INSECABLE}</span>${r.sources.map((id) => `<span data-source-id="${attributHtml(id)}">${texteHtml(nomsSources([id], registre))}</span>`).join(`${INSECABLE}; `)}</td>`,
       '</tr>',
     ].join(''),
   );

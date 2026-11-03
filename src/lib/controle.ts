@@ -1053,21 +1053,6 @@ export function controlerHtml(
 }
 
 /**
- * Tableau « Ce que dit la notice de votre marque » (livrable 6.4, demande de changement n° 8) :
- *  - toute page à laquelle un voyant de la base est rattaché affiche un seul tableau des notices (data-tableau-notices) ;
- *    sur une page voyant hors outil, c'est son élément unique (data-element-unique="tableau") et la page en a au moins
- *    un voyant (TABLEAU-NOTICES-ABSENT) ;
- *  - une partie par voyant rattaché (data-voyant, dans l'ordre de l'encadré), titrée du nom du voyant ; une rangée par
- *    consigne citée d'une notice avec un niveau (data-source-id), ni plus ni moins, dans l'ordre du modèle : le nom de la
- *    notice, l'extrait et sa page (texte exact), le libellé de son propre niveau (data-verdict, data-urgence) et
- *    « Consigne retenue » (data-retenue) si et seulement si ce niveau est celui de la ligne ; la note qui dit d'où vient
- *    le niveau si et seulement si aucune consigne ne le donne en entier (TABLEAU-NOTICES-INCOMPLET) ;
- *  - la ligne de l'encadré de chaque voyant renvoie à sa partie (lien « Ce que dit chaque notice ») ; l'ancre existe
- *    (TABLEAU-NOTICES-LIEN).
- * Le texte se compare normalisé (normaliserTexte) : la typographie affichée (guillemets, apostrophes, espaces) ne
- * compte pas, les mots et les chiffres comptent.
- */
-/**
  * Page code défaut (livrable 6.6b) : la fiche du code (data-fiche-code) affiche, dans l'ordre, chaque ligne du modèle
  * (signification, portée, moteurs, voyant qui s'allume, source de la signification) au texte exact ; le tableau des cas
  * par marque (data-cas-par-marque) a une rangée par précision de la page, dans l'ordre du modèle, avec sa marque, son
@@ -1111,6 +1096,21 @@ export function controlerFicheCode(html: string, fichier: string, attendu: { fic
   return constats;
 }
 
+/**
+ * Tableau « Ce que dit la notice de votre marque » (livrable 6.4, demande de changement n° 8) :
+ *  - toute page à laquelle un voyant de la base est rattaché affiche un seul tableau des notices (data-tableau-notices) ;
+ *    sur une page voyant hors outil, c'est son élément unique (data-element-unique="tableau") et la page en a au moins
+ *    un voyant (TABLEAU-NOTICES-ABSENT) ;
+ *  - une partie par voyant rattaché (data-voyant, dans l'ordre de l'encadré), titrée du nom du voyant ; une rangée par
+ *    consigne citée d'une notice avec un niveau (data-source-id), ni plus ni moins, dans l'ordre du modèle : le nom de la
+ *    notice, l'extrait et sa page (texte exact), le libellé de son propre niveau (data-verdict, data-urgence) et
+ *    « Consigne retenue » (data-retenue) si et seulement si ce niveau est celui de la ligne ; la note qui dit d'où vient
+ *    le niveau si et seulement si aucune consigne ne le donne en entier (TABLEAU-NOTICES-INCOMPLET) ;
+ *  - la ligne de l'encadré de chaque voyant renvoie à sa partie (lien « Ce que dit chaque notice ») ; l'ancre existe
+ *    (TABLEAU-NOTICES-LIEN).
+ * Le texte se compare normalisé (normaliserTexte) : la typographie affichée (guillemets, apostrophes, espaces) ne
+ * compte pas, les mots et les chiffres comptent.
+ */
 export function controlerTableauNotices(
   html: string,
   fichier: string,
