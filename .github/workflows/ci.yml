@@ -84,9 +84,7 @@ jobs:
       - name: Construction avec les exemples (dist-exemples)
         run: npx astro build
       - name: Script de contrôle, exemples compris
-        run: >-
-          node scripts/controle.ts --dist dist-exemples --exemples
-          --attendu 'R4-VALIDATION-ABSENTE@exemples/code-defaut/code-p0087.md'
+        run: node scripts/controle.ts --dist dist-exemples --exemples
       - name: Liens cassés
         if: ${{ !cancelled() }}
         run: >-

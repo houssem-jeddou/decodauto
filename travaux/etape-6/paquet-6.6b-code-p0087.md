@@ -1,5 +1,7 @@
 # Paquet de validation 6.6b : page exemple « code P0087 »
 
+**Validé par Houssem le 03/11/2026 (20 h 06)**, avec les recommandations des cinq décisions (« Je valide ta recommandation pour les 5 points ») : encadré et pièces des causes, pièce `pompe-a-carburant`, sources ajoutées, fiche, cas par marque, faits du texte ; décisions 1 à 5. Empreinte de l'encadré versée dans la page : `14dd328d…` (`npm run empreinte -- exemples/code-defaut/code-p0087.md`). Appliqué : ligne « Code lu sans voyant allumé » dans la fiche (décision 5) ; charte §2.2, §2.5, §2.6, §3.3, §4 et §9 (décisions 1, 2 et 4).
+
 Étape 6, livrable 6.6b (modèle de page code défaut).
 
 - **Page** : `exemples/code-defaut/code-p0087.md`, adresse du plan `/codes-defaut/p0087/`.
@@ -12,7 +14,7 @@ Ce que Houssem valide :
 3. **La fiche du code, les cas par marque et les faits du texte** (section 3).
 4. **Cinq décisions** (section 4).
 
-Une fois la validation donnée, et pas avant, il restera à verser l'empreinte de l'encadré avec `npm run empreinte -- exemples/code-defaut/code-p0087.md`. Dans le même commit, l'attendu R4 de cette page sera retiré du job de recette.
+L'empreinte de l'encadré a été versée après la validation, et l'attendu R4 de cette page retiré du job de recette dans le même commit.
 
 ## 1. Encadré de décision
 
@@ -70,6 +72,7 @@ Les six sources sont toutes en catégorie « secondaire ». Aucune ne fixe de ve
   - Diesel : 2,2 HDi (fiches Hella).
   - Essence : 2.0 TFSI, que Ross-Tech range sous « Gasoline » (le bulletin d'Audi vise aussi ce moteur). La Kia n'est pas citée comme essence : sa fiche ne le dit pas.
 - **Voyant qui s'allume** : « Voyant moteur orange allumé fixe » (nom tiré de la base).
+- **Code lu sans voyant allumé** : « Demandez l'avis d'un professionnel » (ligne du modèle, décision 5).
 
 **Cas par marque** (élément unique de la page). Un cas ne vaut que pour les modèles nommés (charte §2.5) :
 
