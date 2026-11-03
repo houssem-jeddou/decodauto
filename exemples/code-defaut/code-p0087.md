@@ -22,20 +22,24 @@ portee: generique
 carburant: essence et diesel
 precisions_par_marque:
   - marque: Peugeot et Citroën
-    precision: "Peugeot 4007, 407 et 807, Citroën C5, C6, C8 et C-Crosser 2,2 HDi FAP (moteur DW12, codes 4HX et 4HY), à partir de 2006 : démarrage et puissance insuffisants, voyant moteur allumé, codes P0087/135 et P0093/147. Les fiches Hella désignent comme cause possible un filtre à carburant colmaté par l'additif Eolys 176, à remplacer."
+    precision: "Peugeot 4007, 407 et 807, Citroën C5, C6, C8 et C-Crosser 2,2 HDi FAP (filtre à particules ; moteur DW12, codes 4HX et 4HY), à partir de 2006 : démarrage et puissance insuffisants, voyant moteur allumé, codes P0087/135 (pression trop basse) et P0093/147 (fuite importante détectée). Les fiches Hella désignent comme cause possible un filtre à carburant colmaté par l'additif Eolys 176 : le filtre est à remplacer."
     sources:
       - hella-peugeot-2-2-hdi-p0087
       - hella-citroen-2-2-hdi-p0087
   - marque: Audi
-    precision: "A4, allroad, A5, A6 et Q5 2.0 TFSI de l'année-modèle 2013, vendues aux États-Unis : voyant moteur allumé et perte de performances, code P008700. Le bulletin d'Audi l'explique par la chaleur dans la rampe en conduite difficile (ralenti prolongé, circulation en accordéon), qui forme des bulles de vapeur dans le carburant, et demande de ne remplacer aucune pièce pour ce cas."
+    precision: "A4, allroad, A5, A6 et Q5 2.0 TFSI de l'année-modèle 2013, vendues aux États-Unis : voyant moteur allumé et perte de performances, code P008700. Le bulletin d'Audi du 12/03/2013 l'explique par la chaleur dans la rampe en conduite difficile (ralenti prolongé, circulation en accordéon), qui forme des bulles de vapeur dans le carburant. Il demande de ne remplacer aucune pièce pour ce cas, signale que la climatisation l'atténue, et annonçait une mise à jour du logiciel en préparation."
     sources:
       - bulletin-audi-2033211-p0087
   - marque: Kia
-    precision: "Optima 2.0 et 2.4 de 2011-2012, vendues aux États-Unis : puissance réduite et voyant moteur allumé, code P0087. Le bulletin de Kia recommande de remplacer la pompe haute pression et la conduite métallique de carburant."
+    precision: "Optima 2.0 et 2.4 de 2011-2012, vendues aux États-Unis : puissance réduite et voyant moteur allumé, code P0087. La fiche technique de Kia recommande de remplacer la pompe haute pression et la conduite métallique de carburant."
     sources:
       - bulletin-kia-ti017-p0087
+  - marque: Volkswagen et Audi
+    precision: "Selon Ross-Tech, éditeur d'un logiciel de diagnostic des voitures du groupe Volkswagen : sur les moteurs essence 2.0 TFSI (AXX, BGB, BPJ, BPY, BWA), des bulletins du constructeur visent un capteur de pression de carburant amélioré (G410, Amérique du Nord) et un arbre à cames d'admission usé (Amérique du Nord et reste du monde) ; sur les diesel TDI à rampe commune, des bulletins visent un carburant contaminé ou mal adapté au froid. Ces bulletins n'ont pas été lus."
+    sources:
+      - ross-tech-p0087
 cout_probable:
-  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site). Les causes viennent des documents techniques cités : aucune notice d'utilisation lue ne parle de ce code."
+  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site). Les causes viennent des documents techniques cités : aucun des passages lus des notices d'utilisation ne parle de ce code."
   sources:
     - ross-tech-p0087
     - bulletin-kia-ti017-p0087
@@ -58,22 +62,26 @@ date_modification: 2026-11-03
 date_revue: 2026-11-03
 prochaine_revue: 2027-11-03
 causes:
+  - cause: Pompe à carburant qui ne débite pas assez
+    explication: "Pour les voitures du groupe Volkswagen, Ross-Tech demande de contrôler la quantité de carburant fournie par la pompe à carburant."
+    pieces:
+      - pompe-a-carburant
+  - cause: Fuite ou conduite écrasée sur le circuit basse pression
+    explication: "Pour les voitures du groupe Volkswagen, Ross-Tech demande de chercher une conduite de carburant pliée ou écrasée, et une fuite sur le circuit basse pression."
+    pieces:
+      - durites-et-colliers
   - cause: Filtre à carburant colmaté
     explication: "Les fiches Hella des Peugeot 4007, 407, 807 et Citroën C5, C6, C8, C-Crosser 2,2 HDi en font une cause possible du code sur ces voitures ; Ross-Tech demande de vérifier le filtre à carburant."
     pieces:
       - filtre-a-carburant
-  - cause: Fuite ou conduite écrasée sur le circuit basse pression
-    explication: "Ross-Tech demande de chercher une conduite de carburant pliée ou écrasée, et une fuite sur le circuit basse pression."
-    pieces:
-      - durites-et-colliers
-  - cause: Pompe à carburant qui ne débite pas assez
-    explication: "Ross-Tech demande de contrôler la quantité de carburant fournie par la pompe à carburant."
-    pieces:
-      - pompe-a-carburant
   - cause: Pompe haute pression défaillante
-    explication: "Pour les Kia Optima 2.0 et 2.4 de 2011-2012, le bulletin de Kia recommande de remplacer la pompe haute pression et sa conduite métallique. Ross-Tech demande aussi d'inspecter les pièces mécaniques (arbre à cames, poussoir), pour une usure ou une pièce manquante."
+    explication: "Pour les Kia Optima 2.0 et 2.4 de 2011-2012, la fiche technique de Kia recommande de remplacer la pompe haute pression et sa conduite métallique. Ross-Tech demande aussi d'inspecter les pièces mécaniques (arbre à cames, poussoir), pour une usure ou une pièce manquante."
     pieces:
       - pompe-haute-pression
+  - cause: Capteur de pression de carburant
+    explication: "Pour les 2.0 TFSI du groupe Volkswagen vendues en Amérique du Nord, Ross-Tech renvoie à un bulletin du constructeur sur un capteur de pression de carburant amélioré (G410)."
+    pieces:
+      - capteur-ou-sonde
   - cause: Injecteur qui fuit
     explication: "Ross-Tech cite une perte de pression par un injecteur qui fuit."
     pieces:
@@ -82,41 +90,36 @@ causes:
 
 ## Peut-on rouler avec le code P0087 ?
 
-Le code P0087 se lit avec un appareil de diagnostic. Dans les documents cités, il s'accompagne du voyant moteur allumé et d'une perte de puissance (bulletins de Kia et d'Audi, fiches Hella).
-
-Avec le voyant moteur allumé, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice Toyota Yaris, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
+Le code P0087 se lit avec un appareil de diagnostic. Dans les documents cités, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
 
 Si le code est lu sans que le voyant moteur soit allumé, aucune des notices lues ne donne de consigne : demandez l'avis d'un professionnel.
 
 ## Que signifie le code P0087 ?
 
-Il signale une pression trop basse dans la rampe ou dans le circuit de carburant. Sur un système à rampe commune, le capteur de pression de la rampe transmet la pression au calculateur, qui s'en sert pour la régler, et un régulateur fixe dans la rampe la pression que demande le calculateur (Bosch).
-
-Le code est générique : il a le même sens pour toutes les marques. Les documents cités le décrivent sur des moteurs diesel (2,2 HDi, fiches Hella) comme sur des moteurs essence (2.0 TFSI d'Audi, 2.0 et 2.4 de Kia).
+Il signale une pression trop basse dans la rampe ou dans le circuit de carburant. Sur les systèmes diesel à rampe commune décrits par Bosch, le capteur de pression de la rampe transmet la pression au calculateur, qui s'en sert pour la régler. Les documents cités le décrivent sur des moteurs diesel (2,2 HDi, fiches Hella) comme sur des moteurs essence (2.0 TFSI, bulletin d'Audi et Ross-Tech).
 
 ## P0087 ou P008700 ?
 
-Dans le bulletin d'Audi, le même défaut est écrit P0087 dans le titre et P008700 dans le texte. Le wiki de Ross-Tech, éditeur de l'outil de diagnostic VCDS, le range sous la référence 16471/P0087/000135.
+Dans le bulletin d'Audi, le même défaut est écrit P0087 dans le titre et P008700 dans le texte. Le wiki de Ross-Tech, éditeur d'un logiciel de diagnostic des voitures du groupe Volkswagen, le range sous la référence 16471/P0087/000135.
 
 ## Symptômes du code P0087
 
 Les documents cités décrivent :
 
-- une perte de puissance (bulletins de Kia et d'Audi, Ross-Tech, fiches Hella) ;
+- une perte de puissance (Kia, Audi, Ross-Tech, fiches Hella) ;
 - des difficultés de démarrage (fiches Hella, 2,2 HDi) ;
-- le voyant moteur allumé (bulletins de Kia et d'Audi, fiches Hella).
+- le voyant moteur allumé (Kia, Audi, fiches Hella).
 
 ## Que faire avec le code P0087 ?
 
 1. Si le voyant moteur est allumé, suivez d'abord la consigne de l'encadré, en haut de page.
-2. Au garage, le diagnostic commence par les valeurs mesurées de la pression de carburant (Ross-Tech).
-3. Les points de contrôle cités par Ross-Tech sont : conduites pliées ou écrasées, fuites du circuit basse pression, filtre à carburant et filtre de la pompe, débit de la pompe à carburant, injecteur qui fuit, inspection des pièces mécaniques (arbre à cames, poussoir).
-4. Le code seul ne désigne pas la pièce à changer : le bulletin de Kia rappelle qu'une fiche technique ne remplace pas un vrai diagnostic, et celui d'Audi demande, pour son cas, de ne remplacer aucune pièce.
+2. Au garage, le diagnostic commence par les valeurs mesurées de la pression de carburant, puis passe par les points de contrôle des causes ci-dessus (Ross-Tech, pour le groupe Volkswagen).
+3. Le code seul ne désigne pas la pièce à changer : la fiche technique de Kia rappelle qu'elle ne remplace pas un vrai diagnostic, et le bulletin d'Audi demande, pour son cas, de ne remplacer aucune pièce.
 
 ## Régulateur de pression : comment savoir s'il est en cause ?
 
-Le régulateur fixe dans la rampe la pression que demande le calculateur (Bosch). Aucune des sources citées ne donne de test à faire soi-même : c'est la lecture des valeurs au diagnostic qui le dit.
+Selon Bosch, sur les systèmes diesel à rampe commune, une vanne de régulation fixe la pression que demande le calculateur, et un limiteur la réduit en cas de surcharge, selon le montage. Ross-Tech montre aussi une vanne de dosage du carburant (N290) sur des moteurs TDI. Aucune des sources citées ne donne de test à faire soi-même : c'est la lecture des valeurs au diagnostic qui le dit.
 
-## Mon moteur n'est pas dans le tableau
+## P0087 sur un autre moteur (1.4 HDi, 1.6 HDi, Mercedes)
 
-Les documents lus ne décrivent pas d'autre moteur, par exemple une Peugeot 1.6 HDi, une Volkswagen ou une Mercedes. Pour ces voitures, seul le diagnostic dit d'où vient le défaut ; les causes plus haut sont celles que citent les documents lus.
+Les documents lus ne décrivent pas ces moteurs. Pour eux, seul le diagnostic dit d'où vient le défaut.
