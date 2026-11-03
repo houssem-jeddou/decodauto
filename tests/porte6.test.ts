@@ -22,8 +22,9 @@ const typesVagueA = [...new Set(editorialesA.map((p) => p.type))].sort();
 const empreinte = (...args: string[]): string => execFileSync(execPath, ['scripts/empreinte.ts', ...args], { cwd: racine, encoding: 'utf8' }).trim().split('\n').at(-1) ?? '';
 
 describe("porte de sortie de l'étape 6", () => {
-  test('chaque page éditoriale de la vague A a son modèle, sauf l’outil voyants (demande de changement n° 11)', () => {
+  test('chaque page éditoriale de la vague A a un modèle pour son type, sauf l’outil voyants (demande de changement n° 11)', () => {
     assert.deepEqual(typesVagueA, ['code-defaut', 'pneus', 'voyant']);
+    assert.ok(editorialesA.some((p) => p.id === ID_OUTIL_VOYANTS && p.type === 'voyant'), "l'outil voyants n'est plus une page voyant de la vague A");
     for (const p of editorialesA) {
       const outil = p.id === ID_OUTIL_VOYANTS;
       const resultat = modeleDeLaPage(p.type, (outil ? { outil: true } : {}) as unknown as PageEditoriale);
@@ -32,7 +33,7 @@ describe("porte de sortie de l'étape 6", () => {
     }
   });
 
-  test("chaque type de la vague A a un exemple rédigé, du bon type, dont l'encadré est validé par Houssem (empreinte recalculée identique)", async () => {
+  test("chaque type de la vague A a un exemple rédigé, du bon type, dont l'encadré n'a pas changé depuis l'empreinte versée après la validation de Houssem", async () => {
     const parId = new Map(plan.map((p) => [p.id, p]));
     for (const type of typesVagueA) {
       const fichiers = (await readdir(join(racine, 'exemples', type))).filter((f) => f.endsWith('.md'));
