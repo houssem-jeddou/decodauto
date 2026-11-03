@@ -30,13 +30,13 @@ Relevé du 28/10/2026, entre 07:30 et 07:45 UTC, pour les requêtes principales 
    - Pour « voyant orange voiture », il dit aussi : un voyant orange s'allume « sans imposer un arrêt immédiat » (`voyants.json`).
    - La base, elle, retient « Non, arrêtez-vous immédiatement » (D1, notice Toyota) et affiche l'écart par marque.
    - Le tableau « ce que dit la notice de votre marque » (livrable 6.4) doit donc rendre l'écart évident dès l'encadré. Sinon, le lecteur croira à une erreur de notre part.
-3. **Recherches par marque ou modèle : 76 suggestions et questions sur 213.**
+3. **Recherches par marque ou modèle : 76 suggestions et questions sur 213** (77 si « voyant frein mini » désigne la marque Mini).
    - Exemples : « Voyant volant orange Seat Ibiza », « Voyant orange voiture Dacia », « Voyant pression pneu Clio 4 », « Voyant AdBlue Peugeot », « P0420 Toyota », « P1351 Peugeot 1.6 HDI ».
    - Le tableau par marque y répond pour les 5 marques citées dans la base. Il ne faut pas promettre plus.
 4. **« Comment enlever ou effacer le voyant » : 13 suggestions sur 7 pages** (airbag, ABS, moteur, direction, pression des pneus, frein, FAP).
    - C'est une intention forte, à traiter honnêtement : on n'efface pas un voyant sans corriger la cause.
    - Pour la pression des pneus, la réinitialisation après regonflage est une consigne des notices.
-5. **« Peut-on rouler » et « combien de kilomètres » : 9 questions** (huile, moteur, ABS, frein). C'est exactement l'encadré de décision ; la question de décision de chaque page doit reprendre ces mots.
+5. **« Peut-on rouler » et « combien de kilomètres » : 9 questions ou recherches associées** (5 « Autres questions posées », 4 recherches associées ; pages huile, moteur, ABS, frein, et outil voyants, qui reprend une question du voyant moteur). C'est exactement l'encadré de décision ; la question de décision de chaque page doit reprendre ces mots.
 6. **Écarts entre la recherche et notre base**, à traiter avant la rédaction (étape 8), sans rien changer à la base ici :
    - **Préchauffage** : la page est dominée par « voyant préchauffage qui clignote (en roulant) + perte de puissance » (7 recherches associées sur 8 parlent du clignotement). La base n'a que la ligne `prechauffage` (fonctionnement normal) ; le clignotement n'y est pas.
    - **Frein** : les 2 premiers résultats parlent du témoin d'usure des plaquettes, traité par une ligne saisie à l'étape 8 (D4). Le relevé confirme ce besoin.
@@ -46,7 +46,8 @@ Relevé du 28/10/2026, entre 07:30 et 07:45 UTC, pour les requêtes principales 
    - Réseaux de garages et centres auto : ad.fr 7, points.fr 3, idgarages, norauto, midas, feuvert, speedy.
    - Vendeurs de pièces ou d'outils de diagnostic : mister-auto, oscaro, piecesetpneus, outilsobdfacile, icarsoft.
    - Forums et réseaux sociaux : youtube 6, facebook 6, forum Caradisiac 4.
-   - Aucune page de la Sécurité routière ni de notice constructeur dans les résultats naturels. Un guide indépendant qui cite les notices à la page près se distingue.
+   - Constructeurs et manufacturiers de pneus, sans notice ni consigne de sécurité : renault.fr (1ᵉʳ sur « loi montagne »), michelin.fr 2, ford.fr, volvocars.com, stellantisandyou.com, hankooktire.com.
+   - Aucune page de la Sécurité routière ni de notice constructeur dans les résultats naturels (l'aperçu IA de « pression des pneus » cite le domaine securite-routiere.gouv.fr, sans l'adresse de la page). Un guide indépendant qui cite les notices à la page près se distingue.
 8. **Vidéos sur 16 requêtes sur 19.** Elles ne sont pas dans le périmètre : à noter seulement.
 
 ## Fichiers
