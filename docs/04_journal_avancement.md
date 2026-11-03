@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 03/11/2026 (21 h 45, heure de Tunis)
+Dernière mise à jour : 03/11/2026 (22 h 30, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,7 +12,7 @@ Dernière mise à jour : 03/11/2026 (21 h 45, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 fusionnée (99819a1) ; 6.6 lancé le 03/11 en trois sous-livrables : 6.6a (modèle de page voyant, exemple « voyant moteur ») validé par Houssem le 03/11 (17 h 32), demande de changement n° 9 acceptée, PR #16 fusionnée sur sa demande (06c9c74) ; 6.6b (modèle code défaut, exemple P0087) validé par Houssem le 03/11 (20 h 06), les cinq décisions acceptées, PR #17 fusionnée sur sa demande (89cf208) ; 6.6c (modèle pneus et obligations, exemple loi montagne) lancé le 03/11 (20 h 25), présenté le 03/11 (21 h 45), PR #18 en brouillon, en attente de la validation de Houssem | `travaux/etape-6/` |
+| 6 | Charte et modèles de pages | ▶ En cours depuis le 28/10 : demande de changement n° 4 appliquée (PR #8 fusionnée) ; demande de changement n° 5 acceptée (03 v6) ; relevé Google France fait (6.7) ; 6.1 coût probable verrouillé : demande de changement n° 6 acceptée et appliquée, montants validés, PR #11 fusionnée (0292716) ; 6.2 charte éditoriale validée par Houssem le 02/11 (20 h 19), PR #12 fusionnée (e602842) ; 6.3 composants communs validé par Houssem le 02/11 (22 h 28), PR #13 fusionnée (6746982) ; 6.4 tableau des notices validé par Houssem le 03/11 (13 h 48), demande de changement n° 8 acceptée (08 v7), PR #14 fusionnée (5d9a8e0) ; 6.5 contrôles peu coûteux validé par Houssem le 03/11 (15 h 14), PR #15 fusionnée (99819a1) ; 6.6 lancé le 03/11 en trois sous-livrables : 6.6a (modèle de page voyant, exemple « voyant moteur ») validé par Houssem le 03/11 (17 h 32), demande de changement n° 9 acceptée, PR #16 fusionnée sur sa demande (06c9c74) ; 6.6b (modèle code défaut, exemple P0087) validé par Houssem le 03/11 (20 h 06), les cinq décisions acceptées, PR #17 fusionnée sur sa demande (89cf208) ; 6.6c (modèle pneus et obligations, exemple loi montagne) lancé le 03/11 (20 h 25), validé par Houssem le 03/11 (21 h 44) avec les recommandations des sept décisions, demande de changement n° 10 acceptée (08 v8), fusion de la PR #18 demandée ; 6.6 terminé ; suivant : 6.8 (briefs de la vague A) | `travaux/etape-6/` |
 | 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
 | 8 | Vague A | À faire | – |
 | 9 | Recette et mise en ligne A | À faire | – |
@@ -25,7 +25,7 @@ Dernière mise à jour : 03/11/2026 (21 h 45, heure de Tunis)
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
 | Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause depuis 12 h 10 ; reprise quand Houssem la redemande | statut juridique (mentions légales) |
-| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 et 6.5 le 03/11 ; 6.6 lancé le 03/11, 6.6a et 6.6b validés le même jour, 6.6c présenté le même soir ; restent la validation de 6.6c, 6.8 et la porte) | séance de validation des exemples voyant, code et pneus |
+| 6. Charte et modèles | 27–29/10 | 28/10–≈ 10/11 (aucun travail du 25 au 27/10 ni du 29/10 au 01/11 ; livrables un par un depuis le 28/10 ; 6.2 et 6.3 validés le 02/11, 6.4 et 6.5 le 03/11 ; 6.6 lancé et terminé le 03/11 (6.6a, 6.6b et 6.6c validés) ; restent 6.8 et la porte) | séance de validation des exemples voyant, code et pneus |
 | 8. Vague A | 29/10–01/11 | ≈ 11–15/11 (minimum d'abord) | portes 5 et 6 ; requêtes absentes mesurées |
 | 9. Mise en ligne du minimum | 31/10 | ≈ 14–16/11 | portes 7 et 8 ; sécurité des comptes |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 21–25/11 / ≈ 28/11–02/12 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
@@ -38,7 +38,7 @@ Dernière mise à jour : 03/11/2026 (21 h 45, heure de Tunis)
 5. ~~texte de la demande de changement n° 5 et redirections Cloudflare~~ : faits le 28/10 (10 h 25) ;
 6. ~~demande de changement n° 6 (coût probable)~~ : faite le 28/10 ;
 7. ~~charte éditoriale (6.2), composants communs (6.3), tableau des notices et demande de changement n° 8 (6.4), contrôles peu coûteux (6.5)~~ : validés le 02/11 et le 03/11 ;
-8. exemples des modèles voyant et code (validés le 03/11) et pneus, puis porte 6, vers le 10/11 ;
+8. ~~exemples des modèles voyant, code et pneus~~ : validés le 03/11 ; porte 6 vers le 10/11 ;
 9. porte 7 ;
 10. demande de changement des requêtes absentes, juste avant l'étape 8 ;
 11. paquet et encadrés de la vague A, et porte 8 ;
@@ -101,7 +101,7 @@ Dernière mise à jour : 03/11/2026 (21 h 45, heure de Tunis)
   - Validés avec le livrable : lecture de « loi montagne : revue avant chaque 1er novembre » (charte §8 précisée) ; « nos équipes » et « nos rédactions » ajoutés aux expressions interdites (charte §2.7) ; charte §9 mise à jour (contrôles ajoutés en 6.3 et 6.5).
   - Tests sur les données réelles datés de la plus récente de leurs dates (`tests/date-des-donnees.ts`) : ni date figée, ni dépendance au calendrier.
   - Deux revues indépendantes (le maximum), corrections intégrées.
-- [ ] **6.6 Modèles et exemples rédigés** des types de la vague A : voyant, code et pneus (demande de changement n° 5, 03 v6). Les modèles panne, dossier et fluide ouvrent les étapes 10 et 11. Lancé le 03/11 sur le feu vert de Houssem, en trois sous-livrables, chacun relu, présenté, validé et fusionné avant le suivant ; exemples choisis par Houssem : voyant moteur, P0087, loi montagne.
+- [x] **6.6 Modèles et exemples rédigés** des types de la vague A : voyant, code et pneus (demande de changement n° 5, 03 v6). Les modèles panne, dossier et fluide ouvrent les étapes 10 et 11. Lancé le 03/11 sur le feu vert de Houssem, en trois sous-livrables, chacun relu, présenté, validé et fusionné avant le suivant ; exemples choisis par Houssem : voyant moteur, P0087, loi montagne.
   - [x] **6.6a Modèle de page voyant et mécanismes communs**, exemple « voyant moteur ». Présenté le 03/11 ; validé par Houssem le 03/11 (17 h 32), les quatre points acceptés (encadré et pièces des causes, faits du texte, demande de changement n° 9, seuil d'un tiers) ; verrouillé. Empreinte de l'encadré versée (`ceaa32fa…`), attendu R4 retiré du job de recette, charte §2.6, §4 et §9 mises à jour. PR #16 fusionnée le 03/11 (17 h 38) sur la demande de Houssem (06c9c74) ; CI de `main` verte (run 41676348159 : contrôles, recette des exemples, Lighthouse, déploiement et vérification en production ; aucune page éditoriale publiée).
     - Branche `etape-6/modeles-exemples`, PR #16 (brouillon) ; CI verte, y compris le job « Recette des exemples ».
     - Livré :
@@ -121,7 +121,7 @@ Dernière mise à jour : 03/11/2026 (21 h 45, heure de Tunis)
       - page exemple `exemples/code-defaut/code-p0087.md`, construite seulement par la recette.
     - Paquet de validation : `travaux/etape-6/paquet-6.6b-code-p0087.md` (encadré et pièces, sources, fiche, cas par marque, faits du texte, cinq décisions).
     - Deux revues indépendantes (le maximum), corrections intégrées.
-  - [ ] **6.6c Modèle de page pneus et obligations**, exemple loi montagne. Lancé le 03/11 (20 h 25) sur le feu vert de Houssem ; présenté le 03/11 (21 h 45) ; en attente de sa validation.
+  - [x] **6.6c Modèle de page pneus et obligations**, exemple loi montagne. Lancé le 03/11 (20 h 25) sur le feu vert de Houssem ; présenté le 03/11 (21 h 40) ; validé par Houssem le 03/11 (21 h 44), avec les recommandations des sept décisions ; verrouillé. Empreinte de l'encadré versée (`75abb315…`) après la demande de changement n° 10, attendu R4 retiré, liens vers la carte et les arrêtés ajoutés (contrôle R7-LIEN-EXTERNE), charte §2.3, §2.7, §4 et §9 mises à jour. Fusion de la PR #18 demandée par Houssem.
     - Branche `etape-6/modele-pneus-obligations`, PR #18 (brouillon).
     - Livré :
       - modèle de page pneus et obligations (`src/lib/modeles.ts`, `src/lib/fiche-texte.ts`) : encadré, signature, transparence, fiche « Le texte en bref » (texte de référence et où le lire, période et zones, défaillances et contre-visite), texte rédigé, tableau des notices si un voyant de la base est rattaché, pages liées, sources ;
@@ -236,6 +236,18 @@ Dernière mise à jour : 03/11/2026 (21 h 45, heure de Tunis)
 
   PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 - 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 03/11/2026 (21 h 44), Houssem : **valide le livrable 6.6c** avec les recommandations des sept décisions (« je te donne le go pour partir avec ta recommandation, avec ce que tu recommandes pour chaque point ») :
+  - l'encadré de la page exemple « loi montagne » (quatre lignes saisies et le niveau tiré de chaque citation), avec le coût et la pièce `chaines-a-neige` ; les trois sources ajoutées ; la fiche, le tableau et les faits du texte ;
+  - décision 1 : une obligation légale donne « Non, ne poursuivez pas votre trajet », avec une action écrite pour le conducteur en route ; la définition du verdict est notée dans les idées reportées ;
+  - décision 2 : le panneau B26 a sa propre ligne ; pas de ligne « neige sans panneau » tant qu'aucun texte ne l'impose ;
+  - décision 3 : **demande de changement n° 10 acceptée** : pas de dépannage automatique sur une page loi montagne (08 v8) ;
+  - décision 4 : le tableau du texte rédigé sert d'élément unique (`{{tableau}}`) ; liste des départements ou outil « ma commune » en priorité à l'étape 8 ;
+  - décision 5 : aucun nombre de départements avant la lecture des arrêtés ;
+  - décision 6 : ordre de la page pneus et obligations écrit dans la charte §4 ;
+  - décision 7 : lien permis dans le texte vers une source de première main citée sur la page (charte §2.7, contrôle R7-LIEN-EXTERNE).
+
+  Il demande la fusion de la PR #18. Le livrable 6.6 est terminé ; suivant : 6.8.
+- 03/11/2026 (20 h 25), Houssem : **lance le livrable 6.6c** (« Go, je te donne le feu vert »).
 - 03/11/2026 (20 h 06), Houssem : **valide le livrable 6.6b** avec les recommandations des cinq décisions (« Je valide ta recommandation pour les 5 points ») :
   - l'encadré de la page exemple « code P0087 », avec les pièces des causes et la pièce nouvelle `pompe-a-carburant` ; les six sources secondaires ; la fiche, les cas par marque et les faits du texte ;
   - décision 1 : signification, causes et cas des pages codes défaut tirés de sources techniques secondaires, selon un critère inscrit dans la charte (§2.2) : documents de constructeur, d'équipementier ou d'éditeur d'outil de diagnostic ; ni blogs commerciaux, ni vendeurs, ni forums ; jamais de verdict ;
@@ -597,6 +609,10 @@ Dernière mise à jour : 03/11/2026 (21 h 45, heure de Tunis)
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
+- 03/11/2026 (21 h 44), acceptée : **n° 10, pas de dépannage automatique sur une page loi montagne** (`travaux/etape-6/demande-changement-10.md`, PR #18).
+  - **Changement** : le dépannage sur autoroute ne s'affiche plus de lui-même sur une page loi montagne (`sujet: loi-montagne`) ; les autres pages à verdict d'arrêt le gardent.
+  - **Raison** : sur cette page, le verdict « non » vient d'une obligation d'équipement (code de la route, art. D314-8), pas d'une panne ; le forfait (151 € à 280,08 €) et ses quatre sources n'aidaient pas le lecteur. Exclure tout le type « pneus » aurait été trop large (un pneu à plat impose l'arrêt).
+  - **Impact** : `src/lib/cout.ts`, `src/lib/calcul.ts`, 08 v8 (§1 et règle 11), `CONTROLES.md`, `CLAUDE.md`, une page de test ; aucun contenu validé touché.
 - 03/11/2026 (17 h 32), acceptée : **n° 9, ordre du corps des pages voyants et marche à suivre** (`travaux/etape-6/demande-changement-9.md`, PR #16).
   - **Changement** : texte rédigé, causes, puis tableau des notices. La marche à suivre est l'action de chaque ligne de l'encadré, que le corps ne recopie pas ; chaque partie qui répond à une question redit le verdict retenu.
   - **Raison** : sur téléphone, les réponses aux questions arriveraient plus de 6 000 px plus bas dans l'ordre de la charte ; une section « marche à suivre » recopierait les actions de l'encadré.
