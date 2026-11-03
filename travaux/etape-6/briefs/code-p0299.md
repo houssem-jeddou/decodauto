@@ -6,7 +6,8 @@
 
 - **Type** : code-defaut ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/codes-defaut/p0299/`.
-- **Pages liées dans le plan** : `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/moteur/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -71,7 +72,7 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 | P0299 Mercedes | Recherches associées | Marque ou modèle cité |
 | P0299 Hyundai | Recherches associées | Marque ou modèle cité |
 | P0299 2.0 TDI | Recherches associées | Marque ou modèle cité |
-| P0299 Mazda | Recherches associées |  |
+| P0299 Mazda | Recherches associées | Marque ou modèle cité |
 | P0299 Peugeot | Recherches associées | Marque ou modèle cité |
 | P0299 pression de suralimentation faible | Recherches associées |  |
 | P0299 a chaud | Recherches associées |  |
@@ -79,14 +80,16 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le code P0299 ? »
-- **Angle** : Pression de suralimentation (turbo) trop faible ; les lecteurs cherchent les symptômes et la marque. Verdict : ligne du voyant moteur de la base ; le reste vient de sources admises (charte §2.2).
+- **Angle** : Pression de suralimentation (turbo) trop faible ; les lecteurs cherchent les symptômes et la marque. Le reste vient de sources admises (charte §2.2) ; le verdict, de la ligne du voyant qui s'allume avec le code.
 - **Élément unique** : Tableau des cas décrits par marque (modèle 6.6b).
 - **À traiter** :
-  - « Symptômes d'une pression turbo trop faible », « défaut du turbocompresseur » : ce que disent les sources admises ; la perte de puissance a sa page en vague B.
-  - « P0299 Peugeot » et « P0299 VW » (3 160 chacun), « 2.0 TDI », « Renault 1.5 dCi », « Mercedes », « Hyundai », « Mazda » : cas par marque sourcés seulement.
+  - Ligne de l'encadré : celle du voyant qui s'allume avec le code, attribuée seulement d'après un document qui le cite (journal, seconde revue de 6.6b) ; pages-sources.json prévoit les lignes du voyant moteur.
+  - Champ carburant (essence, diesel ou les deux) : d'après les sources admises.
+  - « Symptômes d'une pression turbo trop faible », « défaut du turbocompresseur » : ce que disent les sources admises ; la perte de puissance a sa page (page liée).
+  - « P0299 Peugeot », « P0299 VW », « 2.0 TDI », « Renault 1.5 dCi », « Mercedes », « Hyundai », « Mazda » : cas par marque sourcés seulement.
   - « P0299 à chaud » : seulement si une source admise le décrit.
   - Code lu sans voyant allumé : consigne de la charte (§4).
 - **Sources à trouver avant la rédaction** :
-  - Sources admises par la charte §2.2 pour le libellé, les causes et chaque cas par marque.
+  - Sources admises par la charte §2.2 pour le libellé, les causes, chaque cas par marque et le voyant qui s'allume.
 - **Hors périmètre, à ne pas traiter** :
   - Valises OBD (docs/02) ; prix d'un turbo (tranche du coût probable seulement).

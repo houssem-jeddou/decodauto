@@ -6,8 +6,9 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/`.
-- **Pages liées dans le plan** : `/moteur-qui-surchauffe/` (vague B : pas de lien dans le texte avant sa publication).
-- **Pages enfants** : 11 (voyant-moteur, voyant-huile, voyant-batterie, voyant-frein, voyant-adblue, voyant-fap, voyant-prechauffage, voyant-airbag, voyant-abs-esp, voyant-pression-pneus, voyant-direction).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/moteur-qui-surchauffe/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages enfants** : `/voyants/moteur/` (vague A) ; `/voyants/huile/` (vague A) ; `/voyants/batterie/` (vague A) ; `/voyants/frein/` (vague A) ; `/voyants/adblue/` (vague A) ; `/voyants/fap/` (vague A) ; `/voyants/prechauffage/` (vague A) ; `/voyants/airbag/` (vague A) ; `/voyants/abs-esp/` (vague A) ; `/voyants/pression-pneus/` (vague A) ; `/voyants/direction/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -80,16 +81,19 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Quel voyant s'est allumé, et pouvez-vous continuer à rouler ? »
-- **Angle** : Identifier le voyant par son pictogramme et sa couleur, puis donner pour chacun le verdict de la base. Ce que l'aperçu IA ne dit pas : la couleur ne suffit pas, des voyants orange de la base imposent l'arrêt (voyant moteur, pression des pneus), et l'écart entre marques est affiché.
-- **Élément unique** : Outil : liste des voyants générée depuis la base (pictogramme redessiné, couleur, verdict, urgence, page du voyant), filtre par couleur, lisible sans JavaScript (docs/08 §2). Son modèle n'est pas encore livré (src/lib/modeles.ts) : à construire avant la rédaction.
+- **Angle** : Identifier le voyant par son pictogramme et sa couleur, puis donner pour chacun le verdict de la base. Ce que l'aperçu IA ne dit pas : la couleur ne suffit pas, des voyants orange de la base imposent l'arrêt, et l'écart entre marques est affiché (relevé, constat 2).
+- **Élément unique** : Outil : liste des voyants générée depuis la base (pictogramme redessiné, couleur, verdict, urgence, page du voyant), filtre par couleur, lisible sans JavaScript (docs/08 §2). Son modèle n'est pas encore livré (src/lib/modeles.ts) : décision à prendre à la porte de l'étape 6 (6.9).
 - **À traiter** :
-  - « Voyant orange voiture » : l'aperçu IA dit qu'un voyant orange n'impose pas d'arrêt immédiat ; l'outil montre, depuis la base, les voyants orange dont une notice impose l'arrêt (relevé, constat 2).
+  - « Voyant orange voiture » : l'aperçu IA dit qu'un voyant orange n'impose pas d'arrêt immédiat ; l'outil montre, depuis la base, les voyants orange dont une notice impose l'arrêt.
   - « Liste voyant orange voiture », « Quels sont les voyants orange ? » : le filtre par couleur.
   - « Point d'exclamation », « zig zag », « clé », « huile » : relier chaque description à la ligne de la base qui la porte ; si aucune ne correspond (triangle d'alerte, par exemple), le dire et renvoyer à la notice du véhicule, sans verdict (01, charte §2.5).
+  - « Est-ce dangereux de rouler avec le voyant moteur orange allumé ? » : renvoi vers la page voyant moteur (page enfant).
+  - Comparaison demandée par le journal avec « voyant moteur orange », faite sur le relevé : aucune adresse commune, 2 domaines communs (ad.fr, points.fr), 1 question commune ; deux intentions, deux pages.
   - Contenu de guide (docs/08 §2) : comment lire symbole et couleur, d'après le règlement ONU n° 121 (symbole et couleur seulement, jamais un verdict).
-  - Voyant de température : sa ligne est rattachée à la page « moteur qui surchauffe » (vague B) ; l'outil l'affiche, avec un lien seulement quand cette page est publiée.
-  - « Voyant orange voiture Dacia » : les pages voyants répondent pour les 5 marques des notices lues, pas au-delà (relevé, constat 3).
+  - Voyant de température : sa ligne est rattachée à la page « moteur qui surchauffe » ; l'outil l'affiche, avec un lien seulement quand cette page est publiée.
+  - « Voyant orange voiture Dacia » : les pages voyants répondent pour les modèles des notices lues, pas au-delà (relevé, constat 3 ; charte §2.5).
 - **Sources à trouver avant la rédaction** :
   - Règlement ONU n° 121, absent du registre : à y ajouter pour le symbole et la couleur.
 - **Hors périmètre, à ne pas traiter** :
-  - Tableaux de bord par modèle (« tableau de bord xsara picasso », « c4 picasso tableau de bord ») : pas de page par modèle sans donnée constructeur sourcée ; 30 % des requêtes de l'outil citent un modèle (journal, volumes à lire comme des plafonds).
+  - Tableaux de bord par modèle (« tableau de bord xsara picasso », « c4 picasso tableau de bord ») : pas de page par modèle sans donnée constructeur sourcée ; une large part des requêtes de l'outil cite un modèle (journal, volumes à lire comme des plafonds).
+  - Hybrides (« voyant tableau de bord toyota yaris hybride », « ford puma hybride »), deux-roues (« piaggio mp3 500 ») et voiturette (« ligier js50 ») : hors périmètre (docs/02) ou sans notice lue ; rien à promettre pour eux.

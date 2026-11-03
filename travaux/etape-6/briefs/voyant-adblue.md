@@ -6,6 +6,8 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/adblue/` ; page mère : `/voyants/`.
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/voyants/moteur/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -33,13 +35,13 @@
 
 ## Décision et sources disponibles
 
-Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :
+Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :
 
-| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |
-|---|---|---|---|---|---|
-| `adblue-reserve` Voyant AdBlue orange (réserve basse, démarrage bientôt bloqué) | orange | Oui, avec précautions | À faire tout de suite | 4 | oui |
-| `adblue-demarrage-impossible` AdBlue : démarrage impossible (réservoir vide ou système bloqué) | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | 4 | oui |
-| `adblue-defaut` Voyant AdBlue avec voyant moteur ou Service (système AdBlue défaillant) | orange | Oui, avec précautions | À faire tout de suite | 4 | oui |
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `adblue-reserve` Voyant AdBlue orange (réserve basse, démarrage bientôt bloqué) | orange | Oui, avec précautions | À faire tout de suite | Faites l'appoint d'AdBlue sans attendre, à la pompe ou avec un bidon (au moins la quantité minimale indiquée par la notice), avant la fin de l'autonomie affichée : à zéro, le moteur ne redémarre plus. | 4 | oui |
+| `adblue-demarrage-impossible` AdBlue : démarrage impossible (réservoir vide ou système bloqué) | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | Ne repartez pas avant d'avoir fait l'appoint d'AdBlue (au moins la quantité minimale indiquée par la notice), voiture garée dans un endroit sûr et plat. Si c'est un défaut du système AdBlue et non un réservoir vide, faites appel à un garage ou à l'assistance. | 4 | oui |
+| `adblue-defaut` Voyant AdBlue avec voyant moteur ou Service (système AdBlue défaillant) | orange | Oui, avec précautions | À faire tout de suite | Allez au garage au plus tôt, avant la fin des kilomètres affichés : une fois à zéro, le moteur ne redémarre plus. Si de l'AdBlue vient d'être ajouté, signalez-le : un liquide non conforme peut déclencher l'alerte. | 4 | oui |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:36 UTC, requête « voyant adblue »)
 
@@ -61,7 +63,7 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Question ou recherche | Origine | Repères |
 |---|---|---|
 | Que signifie l'allumage du voyant AdBlue® ? | Autres questions posées |  |
-| Que signifie le message "défaut de consommation du réactif démarrage impossible dans 1100 km" ? | Autres questions posées | Peut-on rouler, combien de kilomètres |
+| Que signifie le message "défaut de consommation du réactif démarrage impossible dans 1100 km" ? | Autres questions posées |  |
 | Qu'est-ce que l'AdBlue ? | Autres questions posées |  |
 | Comment savoir combien il reste d'AdBlue ? | Autres questions posées |  |
 | Voyant AdBlue Peugeot | Recherches associées | Marque ou modèle cité |
@@ -76,7 +78,7 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant AdBlue allumé ? »
-- **Angle** : Trois situations de la base : réserve basse (appoint dans les kilomètres affichés), démarrage impossible, système défaillant. Les distances des messages viennent des notices, marque par marque, jamais d'une estimation.
+- **Angle** : Trois lignes de la base (réserve basse, démarrage impossible, système défaillant ; tableau des voyants du brief). Les distances des messages viennent des notices, marque par marque, jamais d'une estimation (charte §2.2).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
   - « Défaut de consommation du réactif, démarrage impossible dans 1100 km », « adblue défaut antipollution démarrage impossible dans 1100 km » : message expliqué d'après les notices qui l'affichent ; ces distances ont été retirées de la page voyant moteur pour cette page (journal, revue de 6.6a).

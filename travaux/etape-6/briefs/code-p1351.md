@@ -6,6 +6,8 @@
 
 - **Type** : code-defaut ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/codes-defaut/p1351/`.
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/voyants/moteur/` (vague A) ; `/voyants/prechauffage/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -78,10 +80,11 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 - **Élément unique** : Tableau des cas décrits par marque (modèle 6.6b).
 - **À traiter** :
   - Portée « constructeur » (champ portee ; R7-CODE-GENERIQUE refuse « générique » pour un P1xxx) ; une signification par marque, chacune tirée d'une source admise qui nomme la marque, sinon pas écrite.
+  - Ligne de l'encadré : celle du voyant qui s'allume avec le code, d'après un document qui le cite, marque par marque (journal, seconde revue de 6.6b) ; même question que P0380 pour le témoin de préchauffage qui clignote.
+  - Champ carburant (essence, diesel ou les deux) : d'après les sources admises, pour chaque marque.
   - Peugeot et Citroën (« circuit d'entrée IDM » dans les questions du relevé, qui n'est pas une source), « 1.6 HDi », « 1.4 HDi », « 2.0 HDi », « Citroën C3 », Toyota, Mercedes : cas par marque sourcés seulement.
-  - Verdict : ligne du voyant moteur de la base ; la ligne « préchauffage » ne porte pas le verdict d'un défaut (travaux/etape-5/pages-sources.json).
   - Code lu sans voyant allumé : consigne de la charte (§4).
 - **Sources à trouver avant la rédaction** :
-  - Source admise par la charte §2.2 pour chaque marque dont la signification est donnée.
+  - Source admise par la charte §2.2 pour chaque marque dont la signification est donnée, et pour le voyant qui s'allume.
 - **Hors périmètre, à ne pas traiter** :
   - Valises OBD (docs/02).

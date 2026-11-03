@@ -6,7 +6,8 @@
 
 - **Type** : code-defaut ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/codes-defaut/p0420/`.
-- **Pages liées dans le plan** : `/nettoyer-fap/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/moteur-puretech/` (vague B : pas de lien dans le texte avant sa publication) ; `/nettoyer-fap/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/fap/` (vague A) ; `/voyants/moteur/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -71,21 +72,22 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 | P0420 résolu | Recherches associées |  |
 | P0420 Ford | Recherches associées | Marque ou modèle cité |
 | P0420 Citroen | Recherches associées | Marque ou modèle cité |
-| P0420 rs3 | Recherches associées |  |
+| P0420 rs3 | Recherches associées | Marque ou modèle cité |
 | P0420 Circuit de catalyseur rendement inférieur au seuil ligne 1 | Recherches associées |  |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le code P0420 ? »
-- **Angle** : Code générique du catalyseur (rendement sous le seuil). Verdict : ligne du voyant moteur de la base ; signification, causes et cas par marque tirés de sources techniques admises (charte §2.2), comme l'exemple P0087.
+- **Angle** : Code générique du catalyseur (rendement sous le seuil). Signification, causes et cas par marque tirés de sources techniques admises (charte §2.2), comme l'exemple P0087 ; le verdict vient de la ligne du voyant qui s'allume avec le code.
 - **Élément unique** : Tableau des cas décrits par marque (modèle 6.6b).
 - **À traiter** :
+  - Ligne de l'encadré : celle du voyant qui s'allume avec le code, attribuée seulement d'après un document qui le cite (journal, seconde revue de 6.6b) ; pages-sources.json prévoit les lignes du voyant moteur, et l'exemple P0087 reprend celle du voyant moteur orange fixe.
+  - Champ carburant (essence, diesel ou les deux) : d'après les sources admises.
   - « Comment résoudre le code P0420 ? », « P0420 résolu » : causes dans un ordre logique, jamais par fréquence (charte §2.2), sans mode opératoire.
-  - « P0420 Peugeot » (3 160), « Citroën », « Toyota », « VW », « Ford », « Renault », « 1.2 PureTech » : cas par marque, seulement ceux qu'une source admise nomme (charte §2.5).
+  - « P0420 Peugeot », « Citroën », « Toyota », « VW », « Ford », « Renault », « 1.2 PureTech » : cas par marque, seulement ceux qu'une source admise nomme (charte §2.5).
   - « Conséquences d'un catalyseur défectueux » : ce que disent les notices du voyant moteur qui clignote (risque pour le catalyseur, lignes de la base).
   - Code lu sans voyant allumé : consigne de la charte (§4), comme P0087.
-  - Pages liées : « nettoyer le FAP » (vague B) ; le dossier PureTech (vague B) lie vers cette page.
 - **Sources à trouver avant la rédaction** :
-  - Sources admises par la charte §2.2 (bulletin ou fiche de constructeur, document d'équipementier, documentation d'éditeur d'outil de diagnostic) pour le libellé, les causes et les cas par marque ; les premiers résultats du relevé (vendeurs d'outils ou de pièces, services de garage) sont à classer selon ce critère avant tout usage.
+  - Sources admises par la charte §2.2 (bulletin ou fiche de constructeur, document d'équipementier, documentation d'éditeur d'outil de diagnostic) pour le libellé, les causes, chaque cas par marque et le voyant qui s'allume ; les premiers résultats du relevé (vendeurs d'outils ou de pièces, services de garage) sont à classer selon ce critère avant tout usage.
 - **Hors périmètre, à ne pas traiter** :
   - Valises OBD (docs/02) ; prix d'un catalyseur ou de son remplacement (tranche du coût probable seulement).

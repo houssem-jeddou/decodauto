@@ -6,6 +6,7 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/direction/` ; page mère : `/voyants/`.
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -20,12 +21,12 @@
 
 ## Décision et sources disponibles
 
-Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :
+Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :
 
-| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |
-|---|---|---|---|---|---|
-| `direction-orange` Voyant de direction assistée orange ou jaune (volant et point d'exclamation) | orange | Oui, avec précautions | À faire tout de suite | 3 | oui |
-| `direction-rouge` Voyant de direction rouge, ou STOP avec une alerte de direction | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | 5 | oui |
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `direction-orange` Voyant de direction assistée orange ou jaune (volant et point d'exclamation) | orange | Oui, avec précautions | À faire tout de suite | Vous pouvez rouler prudemment, à allure modérée : le volant peut être plus dur. Faites vérifier la direction sans attendre. Si le voyant passe au rouge ou s'accompagne du témoin STOP, arrêtez-vous. | 3 | oui |
+| `direction-rouge` Voyant de direction rouge, ou STOP avec une alerte de direction | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | Tenez fermement le volant et arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez pas : faites appel à un garage ou à l'assistance. | 5 | oui |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:40 UTC, requête « voyant volant orange »)
 
@@ -58,17 +59,17 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Voyant volant orange golf 5 | Recherches associées | Marque ou modèle cité |
 | Voyant volant orange Seat Ibiza | Recherches associées | Marque ou modèle cité |
 | Voyant volant orange Clio 2 | Recherches associées | Marque ou modèle cité |
-| Voyant volant orange touran | Recherches associées |  |
+| Voyant volant orange touran | Recherches associées | Marque ou modèle cité |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de direction assistée allumé ? »
-- **Angle** : La couleur décide : orange (rouler prudemment jusqu'au garage) ou rouge (arrêt ; Toyota demande seulement une vérification immédiate, écart affiché). Page courte : 2 mots-clés, des recherches surtout par modèle.
+- **Angle** : La couleur décide entre les deux lignes de la base (tableau des voyants du brief), avec un écart entre marques sur le rouge. Page courte : peu de mots-clés, des recherches surtout par modèle.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
   - « Pourquoi le voyant volant s'allume-t-il ? », « Que faire si le voyant de direction assistée s'allume ? » : encadré et causes citées d'une source au registre.
-  - « Voyant volant orange Seat Ibiza » : la notice Seat Ibiza lue y répond, pour ce modèle.
+  - « Voyant volant orange Seat Ibiza » : la notice Seat Ibiza lue y répond, pour le modèle et la génération qu'elle couvre (registre).
   - « Comment éteindre le voyant direction assistée ? » : relevé, constat 4.
-  - « C'est quoi le voyant triangle orange ? » : autre voyant ; renvoi vers l'outil voyants.
+  - « C'est quoi le voyant triangle orange ? » : autre voyant ; renvoi vers l'outil voyants (page mère).
 - **Hors périmètre, à ne pas traiter** :
   - Volkswagen, Audi, BMW, Polo, Golf 5, Clio 2, Touran : marques ou modèles hors notices lues, renvoi à la notice du véhicule (charte §2.5).

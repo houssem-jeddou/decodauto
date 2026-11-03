@@ -6,6 +6,8 @@
 
 - **Type** : pneus ; **thème** : pneus-et-obligations ; **vague** : A.
 - **Adresse** : `/loi-montagne/`.
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/pression-des-pneus/` (vague A) ; `/usure-des-pneus/` (vague C : pas de lien dans le texte avant sa publication).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 - **Page exemple rédigée et validée en 6.6** : `exemples/pneus/loi-montagne.md`. Elle sert de point de départ à la page de l'étape 8.
 
 ## Requête et mots-clés (plan du site, docs/05)
@@ -80,11 +82,12 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 - **Élément unique** : Tableau du texte, déjà dans l'exemple.
 - **À traiter** :
   - Point de départ : l'exemple validé ; son encadré et son empreinte ne changent pas sans nouvelle validation de Houssem.
-  - « Loi Montagne communes concernées », « carte », « departement pneu neige obligatoire », « zone pneu neige obligatoire » (3 160 chacun pour les deux derniers) : liste des départements avec leur arrêté, ou outil « ma commune est-elle concernée ? », en priorité à l'étape 8 (idée reportée, décisions 4 et 5 de 6.6c).
+  - « Loi Montagne communes concernées », « carte », « departement pneu neige obligatoire », « zone pneu neige obligatoire » : liste des départements avec leur arrêté, ou outil « ma commune est-elle concernée ? », en priorité à l'étape 8 (idée reportée, décisions 4 et 5 de 6.6c).
   - « Quelle amende pour la loi montagne ? », « Loi Montagne amende », « 2026 verbalisation », « verbalisation abandonnée » (2ᵉ résultat) : aucune amende à ce jour (D314-8, réponse ministérielle du 12/02/2026) ; décret de sanction annoncé, à revérifier au Journal officiel avant la mise en ligne, puis chaque mois ; sanction du panneau B26 à lire sur Légifrance (journal).
   - « Est-ce que 2 chaussettes de neige suffisent ? » : faits de la Sécurité routière relus en 6.6c (travaux/etape-6/textes/).
   - « Loi Montagne date », « Loi montagne 2 2016 », « Loi Montagne 3 » : seulement ce que disent les textes du registre.
   - « Pneu m et s », « pneu 3pmsf », « pneu 4 saisons homologué hiver » : marquages, d'après le texte.
+  - Pression et usure des pneus : pages liées.
   - Revue avant chaque 1er novembre (charte §8, DATES-REVUE-DELAI).
 - **Sources à trouver avant la rédaction** :
   - Arrêtés préfectoraux des départements concernés, à ajouter au registre (journal, points ouverts).

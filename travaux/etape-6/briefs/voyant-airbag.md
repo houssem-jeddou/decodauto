@@ -6,7 +6,8 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/airbag/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** : `/contre-visite-controle-technique/` (vague C : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/contre-visite-controle-technique/` (vague C : pas de lien dans le texte avant sa publication).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -34,12 +35,12 @@
 
 ## Décision et sources disponibles
 
-Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :
+Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :
 
-| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |
-|---|---|---|---|---|---|
-| `airbag-defaut` Voyant airbag allumé (défaut des airbags ou des prétensionneurs) | orange | Oui, avec précautions | À faire tout de suite | 5 | oui |
-| `airbag-passager-desactive` Témoin « airbag passager désactivé » (OFF) allumé | orange | Oui, vous pouvez rouler | Aucune action nécessaire | 5 | non |
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `airbag-defaut` Voyant airbag allumé (défaut des airbags ou des prétensionneurs) | orange | Oui, avec précautions | À faire tout de suite | Vous pouvez rouler, mais faites contrôler le système sans attendre : en cas de choc, les airbags risquent de ne pas se déclencher, ou de se déclencher sans raison. En attendant, n'installez pas de siège enfant sur le siège passager avant. | 5 | oui |
+| `airbag-passager-desactive` Témoin « airbag passager désactivé » (OFF) allumé | orange | Oui, vous pouvez rouler | Aucune action nécessaire | C'est normal si un siège enfant dos à la route est installé à l'avant. Sinon, réactivez l'airbag (position ON) voiture à l'arrêt et contact coupé, car il ne se déclencherait pas en cas de choc. | 5 | non |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:37 UTC, requête « voyant airbag »)
 
@@ -68,22 +69,22 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Voyant airbag orange allumé | Recherches associées |  |
 | Voyant airbag allumé rouge | Recherches associées |  |
 | Voyant airbag allumé contrôle technique | Recherches associées |  |
-| Voyant airbag 206 reste allumé | Recherches associées |  |
-| Voyant airbag 307 | Recherches associées |  |
-| Voyant airbag 206 allumé pour contrôle technique | Recherches associées |  |
-| Comment enlever le voyant airbag sur 206 | Recherches associées | Enlever, effacer ou éteindre le voyant |
+| Voyant airbag 206 reste allumé | Recherches associées | Marque ou modèle cité |
+| Voyant airbag 307 | Recherches associées | Marque ou modèle cité |
+| Voyant airbag 206 allumé pour contrôle technique | Recherches associées | Marque ou modèle cité |
+| Comment enlever le voyant airbag sur 206 | Recherches associées | Enlever, effacer ou éteindre le voyant ; Marque ou modèle cité |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant airbag allumé ? »
-- **Angle** : Deux témoins de la base : défaut des airbags ou des prétensionneurs (à faire contrôler sans attendre) et airbag passager désactivé (aucune action). La recherche veut surtout éteindre le voyant : la page dit honnêtement pourquoi on ne le fait pas soi-même.
+- **Angle** : Deux témoins de la base, aux actions très différentes (tableau des voyants du brief : défaut des airbags ou des prétensionneurs ; airbag passager désactivé, avec sa condition). La recherche veut surtout éteindre le voyant : la page dit honnêtement pourquoi on ne le fait pas soi-même.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
   - « Comment éteindre le voyant airbag », « effacer sans valise », « astuce pour enlever » : on ne l'efface pas sans corriger la cause (relevé, constat 4) ; ce que les notices disent des interventions sur les airbags, cité à la page près.
   - « Connecteur airbag sous siège », « contacteur airbag », « défaut contacteur tournant », « tester un prétensionneur » : causes citées d'une source au registre, sans mode opératoire.
-  - « Voyant airbag allumé contrôle technique » : texte du contrôle technique à lire sur Légifrance ; page « contre-visite » (vague C).
+  - « Voyant airbag allumé contrôle technique » : texte du contrôle technique à lire sur Légifrance.
   - « Orange » ou « rouge » : ce que les notices disent des couleurs.
-  - « Dacia Sandero » : la notice Sandero 3 lue répond pour ce modèle.
+  - « Dacia Sandero » : la notice Sandero 3 lue répond, pour le modèle et la génération qu'elle couvre (registre).
 - **Sources à trouver avant la rédaction** :
   - Texte du contrôle technique sur Légifrance : point des airbags et de leur témoin.
 - **Hors périmètre, à ne pas traiter** :

@@ -6,7 +6,8 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/frein/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** : `/liquide-de-frein/` (vague C : pas de lien dans le texte avant sa publication) ; `/voyants/abs-esp/` (vague A).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/liquide-de-frein/` (vague C : pas de lien dans le texte avant sa publication) ; `/voyants/abs-esp/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -36,12 +37,12 @@ Et 5 autres : « voyant plaquette », « voyant plaquette de frein bmw », « vo
 
 ## Décision et sources disponibles
 
-Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :
+Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :
 
-| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |
-|---|---|---|---|---|---|
-| `frein-rouge` Voyant de freinage rouge (liquide de frein ou circuit de freinage) | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | 5 | non |
-| `frein-stationnement` Voyant de frein de stationnement (frein à main serré) | rouge | Oui, vous pouvez rouler | Aucune action nécessaire | 5 | non |
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `frein-rouge` Voyant de freinage rouge (liquide de frein ou circuit de freinage) | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez pas : faites appel à un garage ou à l'assistance. Le niveau de liquide de frein peut être complété avec le liquide préconisé, mais si le voyant reste allumé, le véhicule ne doit pas rouler. | 5 | non |
+| `frein-stationnement` Voyant de frein de stationnement (frein à main serré) | rouge | Oui, vous pouvez rouler | Aucune action nécessaire | Desserrez complètement le frein de stationnement avant de rouler : le voyant doit s'éteindre. | 5 | non |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:35 UTC, requête « voyant frein »)
 
@@ -63,7 +64,7 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Question ou recherche | Origine | Repères |
 |---|---|---|
 | Que signifie un voyant de frein orange allumé ? | Autres questions posées |  |
-| Comment enlever le voyant frein mini ? | Autres questions posées | Enlever, effacer ou éteindre le voyant |
+| Comment enlever le voyant frein mini ? | Autres questions posées | Enlever, effacer ou éteindre le voyant ; Marque ou modèle cité |
 | Que signifie le message "système de freinage défaillant" ? | Autres questions posées |  |
 | Puis-je rouler avec le voyant liquide de frein ? | Autres questions posées | Peut-on rouler, combien de kilomètres |
 | Voyant plaquette de frein | Recherches associées |  |
@@ -78,14 +79,14 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de frein allumé ? »
-- **Angle** : Trois voyants sous un même nom : freinage rouge (arrêt), frein de stationnement (aucune action s'il est serré), et témoin d'usure des plaquettes, en tête des résultats mais absent des notices lues (D4, relevé constat 6).
+- **Angle** : Trois voyants sous un même nom : les deux lignes de la base (freinage, frein de stationnement ; tableau des voyants du brief) et le témoin d'usure des plaquettes, en tête des résultats mais absent des notices lues (D4 ; relevé, constat 6).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
-  - Témoin d'usure des plaquettes (« voyant plaquette de frein », 3 160 ; « peut-on rouler avec le voyant plaquette de frein » ; « reste allumé ») : ligne saisie citée (D4), dont la source reste à trouver.
-  - « Puis-je rouler avec le voyant liquide de frein ? », « liquide de frein insuffisant », « système de freinage défaillant » : ligne de freinage rouge de la base.
-  - « Voyant frein orange » : lire ce que les notices décrivent en orange avant d'écrire ; ABS et freinage allumés ensemble : page ABS et ESP (vague A, liée).
+  - Témoin d'usure des plaquettes (« voyant plaquette de frein », « peut-on rouler avec le voyant plaquette de frein », « reste allumé ») : ligne saisie citée (D4), dont la source reste à trouver.
+  - « Puis-je rouler avec le voyant liquide de frein ? », « liquide de frein insuffisant », « système de freinage défaillant » : ligne de freinage de la base.
+  - « Voyant frein orange » : lire ce que les notices décrivent en orange avant d'écrire ; ABS et freinage allumés ensemble : ligne de la page ABS et ESP (page liée).
   - « Comment enlever le voyant frein mini ? » : on ne l'éteint pas sans corriger la cause (relevé, constat 4).
-  - Liquide de frein (appoint, purge) : page « liquide de frein » (vague C).
+  - Liquide de frein (appoint, purge) : page « liquide de frein » (page liée).
 - **Sources à trouver avant la rédaction** :
   - Notice de constructeur qui décrit le témoin d'usure des plaquettes, à la page près : absent des notices lues à l'étape 5 (D4).
 - **Hors périmètre, à ne pas traiter** :

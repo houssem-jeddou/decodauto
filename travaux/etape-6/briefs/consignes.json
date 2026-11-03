@@ -4,7 +4,7 @@
     "a_traiter": [
       "Accroche : le positionnement de 01, sans promesse ni chiffre non sourcé (charte §2.7).",
       "Liste des pages publiées, rangées par les 4 thèmes de docs/02, générée depuis le plan par le gabarit : jamais écrite à la main, jamais vers une page non construite. L'accueil n'a aucun lien déclaré dans le plan : son texte rédigé n'en contient pas.",
-      "Accès à l'outil voyants, la page de la vague A au plus fort volume (voir son brief).",
+      "Accès à l'outil voyants, la page de la vague au plus fort volume (voir le sommaire des briefs).",
       "Mention en tête de la charte (src/lib/charte.ts), sans signature ni ligne de transparence (page du socle, décision de 6.2).",
       "Title et meta description : le schéma du socle n'a pas de champ description, que DESCRIPTION-ABSENTE exige ; demande de changement à ouvrir avant de construire la page (journal, points ouverts)."
     ]
@@ -12,7 +12,7 @@
   "mentions-legales": {
     "angle": "Obligations légales de l'éditeur : identité, statut, hébergeur, contact. Page courte, sans contenu éditorial.",
     "a_traiter": [
-      "Attend le statut juridique, à trancher par Houssem avant la rédaction (journal, étape 7).",
+      "Statut juridique : à trancher par Houssem avant la rédaction, avec l'activité déclarée qui doit couvrir des recettes publicitaires (journal, points ouverts).",
       "Éditeur identifié par son nom réel (décision du 23/10) ; contact : erreur@decodauto.com (charte §5.3).",
       "Hébergeur : Cloudflare (wrangler.json), avec les coordonnées de sa page officielle.",
       "Publicité (étape 12) et mesure d'audience : renvoyer à la politique de confidentialité (étape 7), sans affirmation juridique qui ne vienne d'un texte lu.",
@@ -39,35 +39,38 @@
   },
   "voyants": {
     "question_decision": "Quel voyant s'est allumé, et pouvez-vous continuer à rouler ?",
-    "angle": "Identifier le voyant par son pictogramme et sa couleur, puis donner pour chacun le verdict de la base. Ce que l'aperçu IA ne dit pas : la couleur ne suffit pas, des voyants orange de la base imposent l'arrêt (voyant moteur, pression des pneus), et l'écart entre marques est affiché.",
-    "element_unique": "Outil : liste des voyants générée depuis la base (pictogramme redessiné, couleur, verdict, urgence, page du voyant), filtre par couleur, lisible sans JavaScript (docs/08 §2). Son modèle n'est pas encore livré (src/lib/modeles.ts) : à construire avant la rédaction.",
+    "angle": "Identifier le voyant par son pictogramme et sa couleur, puis donner pour chacun le verdict de la base. Ce que l'aperçu IA ne dit pas : la couleur ne suffit pas, des voyants orange de la base imposent l'arrêt, et l'écart entre marques est affiché (relevé, constat 2).",
+    "element_unique": "Outil : liste des voyants générée depuis la base (pictogramme redessiné, couleur, verdict, urgence, page du voyant), filtre par couleur, lisible sans JavaScript (docs/08 §2). Son modèle n'est pas encore livré (src/lib/modeles.ts) : décision à prendre à la porte de l'étape 6 (6.9).",
     "a_traiter": [
-      "« Voyant orange voiture » : l'aperçu IA dit qu'un voyant orange n'impose pas d'arrêt immédiat ; l'outil montre, depuis la base, les voyants orange dont une notice impose l'arrêt (relevé, constat 2).",
+      "« Voyant orange voiture » : l'aperçu IA dit qu'un voyant orange n'impose pas d'arrêt immédiat ; l'outil montre, depuis la base, les voyants orange dont une notice impose l'arrêt.",
       "« Liste voyant orange voiture », « Quels sont les voyants orange ? » : le filtre par couleur.",
       "« Point d'exclamation », « zig zag », « clé », « huile » : relier chaque description à la ligne de la base qui la porte ; si aucune ne correspond (triangle d'alerte, par exemple), le dire et renvoyer à la notice du véhicule, sans verdict (01, charte §2.5).",
+      "« Est-ce dangereux de rouler avec le voyant moteur orange allumé ? » : renvoi vers la page voyant moteur (page enfant).",
+      "Comparaison demandée par le journal avec « voyant moteur orange », faite sur le relevé : aucune adresse commune, 2 domaines communs (ad.fr, points.fr), 1 question commune ; deux intentions, deux pages.",
       "Contenu de guide (docs/08 §2) : comment lire symbole et couleur, d'après le règlement ONU n° 121 (symbole et couleur seulement, jamais un verdict).",
-      "Voyant de température : sa ligne est rattachée à la page « moteur qui surchauffe » (vague B) ; l'outil l'affiche, avec un lien seulement quand cette page est publiée.",
-      "« Voyant orange voiture Dacia » : les pages voyants répondent pour les 5 marques des notices lues, pas au-delà (relevé, constat 3)."
+      "Voyant de température : sa ligne est rattachée à la page « moteur qui surchauffe » ; l'outil l'affiche, avec un lien seulement quand cette page est publiée.",
+      "« Voyant orange voiture Dacia » : les pages voyants répondent pour les modèles des notices lues, pas au-delà (relevé, constat 3 ; charte §2.5)."
     ],
     "sources_a_trouver": [
       "Règlement ONU n° 121, absent du registre : à y ajouter pour le symbole et la couleur."
     ],
     "hors_perimetre": [
-      "Tableaux de bord par modèle (« tableau de bord xsara picasso », « c4 picasso tableau de bord ») : pas de page par modèle sans donnée constructeur sourcée ; 30 % des requêtes de l'outil citent un modèle (journal, volumes à lire comme des plafonds)."
+      "Tableaux de bord par modèle (« tableau de bord xsara picasso », « c4 picasso tableau de bord ») : pas de page par modèle sans donnée constructeur sourcée ; une large part des requêtes de l'outil cite un modèle (journal, volumes à lire comme des plafonds).",
+      "Hybrides (« voyant tableau de bord toyota yaris hybride », « ford puma hybride »), deux-roues (« piaggio mp3 500 ») et voiturette (« ligier js50 ») : hors périmètre (docs/02) ou sans notice lue ; rien à promettre pour eux."
     ]
   },
   "voyant-moteur": {
-    "angle": "Exemple validé en 6.6a : verdict de la base (une notice impose l'arrêt) et écart entre marques affiché dès l'encadré, face à l'aperçu IA qui dit le contraire (relevé, constat 2).",
+    "angle": "Exemple validé en 6.6a : verdict de la base et écart entre marques affiché dès l'encadré, face à l'aperçu IA qui dit le contraire (relevé, constat 2).",
     "element_unique": "Tableau « Ce que dit la notice de votre marque » (demande de changement n° 8), déjà dans l'exemple.",
     "a_traiter": [
       "Point de départ : l'exemple validé ; son encadré et son empreinte ne changent pas sans nouvelle validation de Houssem.",
-      "« Défaut moteur » (3 160), « défaut antipollution », « système anti pollution défaillant » (C3, 206, 308, 3008, 2008, 5008) : message des notices Peugeot et Citroën, à lire avant d'en parler.",
-      "Vanne EGR (« vanne egr voyant », 3 160 ; « vanne egr 1.6 hdi ») : cause possible, citée d'une source au registre ; aucune page du plan ne traite la vanne EGR à part.",
-      "Perte de puissance : Seat Ibiza p. 289 (« Nota » sur les témoins qui restent allumés), à vérifier sur le PDF ; la page « perte de puissance » est de la vague B.",
-      "« Controle technique voyant moteur » : texte du contrôle technique à lire sur Légifrance ; la page « contre-visite » est de la vague C.",
+      "« Défaut moteur », « défaut antipollution », « système anti pollution défaillant » (C3, 206, 308, 3008, 2008, 5008) : message des notices Peugeot et Citroën, à lire avant d'en parler.",
+      "Vanne EGR (« vanne egr voyant », « vanne egr 1.6 hdi ») : cause possible, citée d'une source au registre ; aucune page du plan ne traite la vanne EGR à part.",
+      "Perte de puissance : Seat Ibiza p. 289 (« Nota » sur les témoins qui restent allumés), à vérifier sur le PDF.",
+      "« Controle technique voyant moteur » : texte du contrôle technique à lire sur Légifrance.",
       "« Comment faire disparaître le voyant moteur orange ? » : on ne l'éteint pas sans corriger la cause (relevé, constat 4) ; le cas de Toyota Yaris p. 297 (réservoir vidé) est à vérifier sur le PDF.",
       "« Combien de km », « que faire », « fixe », « clignotant », « allumé mais pas de problème », « diesel » : encadré, ou texte rédigé (charte §2.2 pour les distances).",
-      "« 208 voyant moteur » : la notice Peugeot 208 lue y répond, pour ce modèle (charte §2.5)."
+      "« 208 voyant moteur » : la notice Peugeot 208 lue y répond, pour le modèle et la génération de la notice (registre, charte §2.5)."
     ],
     "sources_a_trouver": [
       "Notices Peugeot et Citroën : messages « défaut moteur » et « antipollution » (la notice Citroën n'a pas été lue à l'étape 5).",
@@ -81,46 +84,47 @@
   },
   "voyant-huile": {
     "question_decision": "Puis-je continuer à rouler avec le voyant d'huile allumé ?",
-    "angle": "Trois lignes de la base, trois décisions : pression d'huile rouge (arrêt), niveau bas orange (appoint), clé de rappel d'entretien (vidange à prévoir). La couleur et le pictogramme décident.",
+    "angle": "Trois lignes de la base, trois décisions différentes (tableau des voyants du brief) : la couleur et le pictogramme décident, entre pression d'huile, niveau d'huile et rappel d'entretien.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque », une partie par voyant rattaché.",
     "a_traiter": [
       "« Puis-je rouler avec le voyant d'huile allumé ? », « Que faire si le voyant d'huile moteur est allumé ? » : l'encadré, ligne par ligne (relevé, constat 5).",
       "« Combien de kilomètres peut-on rouler avec le voyant d'huile allumé ? » : si aucune notice lue ne donne de distance, le dire en ces termes (charte §2.2).",
-      "« Orange » ou « rouge », « Quel voyant s'allume quand il manque de l'huile ? » : niveau (orange) et pression (rouge), d'après la base.",
-      "« Voyant d'huile qui s'allume mais niveau ok », « rouge s'allume et s'éteint », « rouge clignote », « rouge stop » : répondre d'après la ligne de pression rouge et les passages des notices ; aucun verdict hors de la base.",
+      "« Orange » ou « rouge », « Quel voyant s'allume quand il manque de l'huile ? » : niveau et pression, d'après la base.",
+      "« Voyant d'huile qui s'allume mais niveau ok », « rouge s'allume et s'éteint », « rouge clignote », « rouge stop » : répondre d'après la ligne de pression d'huile et les passages des notices ; aucun verdict hors de la base.",
       "« Logo huile moteur », « signe huile moteur » : pictogrammes redessinés de la base.",
       "« Voyant huile moteur Volkswagen » : seule la notice Seat du groupe est lue ; rien n'est dit des autres marques du groupe (charte §2.5).",
-      "Niveau, appoint et choix de l'huile : pages « niveau d'huile » et « huile moteur » (vague C) ; ici, seulement ce que demandent les notices."
+      "Niveau, appoint et choix de l'huile : pages « niveau d'huile » et « huile moteur » (pages liées) ; ici, seulement ce que demandent les notices."
     ],
     "hors_perimetre": [
-      "Viscosités et marques d'huile : intention d'achat, pages de la vague C."
+      "Viscosités et marques d'huile : intention d'achat, traitée par les pages huile."
     ]
   },
   "voyant-batterie": {
     "question_decision": "Puis-je continuer à rouler avec le voyant de batterie allumé ?",
-    "angle": "Voyant de charge rouge : la base impose l'arrêt, et l'écart est affiché (Seat laisse rouler jusqu'à l'atelier le plus proche). Les lecteurs cherchent surtout pourquoi il reste allumé avec une batterie neuve ou un alternateur en bon état.",
+    "angle": "Une seule ligne de la base, le voyant de charge rouge, avec un écart entre marques à afficher. Les lecteurs cherchent surtout pourquoi il reste allumé avec une batterie neuve ou un alternateur en bon état.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
       "« Voyant batterie allumé avec batterie neuve », « après le changement de batterie », « alternateur ok », « alternateur par intermittence » : causes citées d'une source au registre, sinon recommander l'avis d'un professionnel.",
       "« Voyant batterie clignote » (mot-clé du plan) : la base n'a pas de ligne pour le clignotement ; lire les notices avant d'écrire, sans verdict hors de la base.",
       "« Voyant batterie rouge avant démarrage » : ce que disent les notices du témoin contact mis, à lire avant d'écrire.",
-      "« Voiture ne démarre pas malgré une batterie en bon état » : page « voiture ne démarre pas » (vague B) ; une phrase ici, le lien après sa publication.",
+      "« Voyant batterie faible voiture », « Problème de batterie voiture symptôme » : la batterie elle-même a sa page (« voltage batterie voiture », page liée) ; ici, seulement ce que signale le voyant de charge.",
+      "« Voiture ne démarre pas malgré une batterie en bon état » : page « voiture ne démarre pas » (page liée) ; une phrase ici.",
       "« Stop et batterie sur une Clio 3 » : la notice lue est celle de la Clio 5, qui ne vaut pas pour la Clio 3 (charte §2.5)."
     ],
     "hors_perimetre": [
-      "Achat de batterie par capacité (34 % d'achat dans le thème batterie, journal) et prix d'enseignes (docs/02)."
+      "Achat de batterie par capacité (journal, volumes à lire comme des plafonds) et prix d'enseignes (docs/02)."
     ]
   },
   "voyant-frein": {
     "question_decision": "Puis-je continuer à rouler avec le voyant de frein allumé ?",
-    "angle": "Trois voyants sous un même nom : freinage rouge (arrêt), frein de stationnement (aucune action s'il est serré), et témoin d'usure des plaquettes, en tête des résultats mais absent des notices lues (D4, relevé constat 6).",
+    "angle": "Trois voyants sous un même nom : les deux lignes de la base (freinage, frein de stationnement ; tableau des voyants du brief) et le témoin d'usure des plaquettes, en tête des résultats mais absent des notices lues (D4 ; relevé, constat 6).",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
-      "Témoin d'usure des plaquettes (« voyant plaquette de frein », 3 160 ; « peut-on rouler avec le voyant plaquette de frein » ; « reste allumé ») : ligne saisie citée (D4), dont la source reste à trouver.",
-      "« Puis-je rouler avec le voyant liquide de frein ? », « liquide de frein insuffisant », « système de freinage défaillant » : ligne de freinage rouge de la base.",
-      "« Voyant frein orange » : lire ce que les notices décrivent en orange avant d'écrire ; ABS et freinage allumés ensemble : page ABS et ESP (vague A, liée).",
+      "Témoin d'usure des plaquettes (« voyant plaquette de frein », « peut-on rouler avec le voyant plaquette de frein », « reste allumé ») : ligne saisie citée (D4), dont la source reste à trouver.",
+      "« Puis-je rouler avec le voyant liquide de frein ? », « liquide de frein insuffisant », « système de freinage défaillant » : ligne de freinage de la base.",
+      "« Voyant frein orange » : lire ce que les notices décrivent en orange avant d'écrire ; ABS et freinage allumés ensemble : ligne de la page ABS et ESP (page liée).",
       "« Comment enlever le voyant frein mini ? » : on ne l'éteint pas sans corriger la cause (relevé, constat 4).",
-      "Liquide de frein (appoint, purge) : page « liquide de frein » (vague C)."
+      "Liquide de frein (appoint, purge) : page « liquide de frein » (page liée)."
     ],
     "sources_a_trouver": [
       "Notice de constructeur qui décrit le témoin d'usure des plaquettes, à la page près : absent des notices lues à l'étape 5 (D4)."
@@ -132,7 +136,7 @@
   },
   "voyant-adblue": {
     "question_decision": "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
-    "angle": "Trois situations de la base : réserve basse (appoint dans les kilomètres affichés), démarrage impossible, système défaillant. Les distances des messages viennent des notices, marque par marque, jamais d'une estimation.",
+    "angle": "Trois lignes de la base (réserve basse, démarrage impossible, système défaillant ; tableau des voyants du brief). Les distances des messages viennent des notices, marque par marque, jamais d'une estimation (charte §2.2).",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
       "« Défaut de consommation du réactif, démarrage impossible dans 1100 km », « adblue défaut antipollution démarrage impossible dans 1100 km » : message expliqué d'après les notices qui l'affichent ; ces distances ont été retirées de la page voyant moteur pour cette page (journal, revue de 6.6a).",
@@ -151,14 +155,14 @@
   },
   "voyant-fap": {
     "question_decision": "Puis-je continuer à rouler avec le voyant du filtre à particules allumé ?",
-    "angle": "Les notices demandent une régénération en roulant (Peugeot, Renault et Dacia : dès que la circulation le permet) : c'est l'action de l'encadré, avant le garage. Page de référence du FAP (docs/02 : pas de page organe).",
+    "angle": "La consigne des notices passe par une régénération en roulant avant le garage (ligne de la base et son écart entre marques). Page de référence du FAP (docs/02 : pas de page organe).",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
-      "Page de référence du FAP (docs/02, « la page voyant FAP sert de page de référence ») : ce qu'est le filtre et sa régénération, d'après les notices ; le nettoyage reste au tuto « nettoyer le FAP » (vague B).",
+      "Page de référence du FAP (docs/02, « la page voyant FAP sert de page de référence ») : ce qu'est le filtre et sa régénération, d'après les notices ; le nettoyage reste au tuto « nettoyer le FAP » (page liée).",
       "« Comment enlever le voyant additif FAP ? » : lire si une notice lue décrit un témoin d'additif ; sinon le dire (relevé, constat 4).",
-      "« Voyant FAP allumé lors d'un contrôle technique » : texte du contrôle technique à lire sur Légifrance ; page « contre-visite » (vague C).",
-      "« Comment nettoyer le FAP d'une 308 » : tuto de la vague B, sans page par modèle.",
-      "Code P0420 (catalyseur) : page liée de la vague A."
+      "« Voyant FAP allumé lors d'un contrôle technique » : texte du contrôle technique à lire sur Légifrance.",
+      "« Comment nettoyer le FAP d'une 308 » : tuto « nettoyer le FAP », sans page par modèle.",
+      "Code P0420 (catalyseur) et voyant moteur : pages liées."
     ],
     "sources_a_trouver": [
       "Texte du contrôle technique sur Légifrance : point du filtre à particules et des témoins, s'il existe."
@@ -170,14 +174,14 @@
   },
   "voyant-prechauffage": {
     "question_decision": "Puis-je continuer à rouler avec le voyant de préchauffage allumé ou qui clignote ?",
-    "angle": "La recherche porte sur le clignotement en roulant, avec perte de puissance (7 recherches associées sur 8), alors que la base ne décrit que l'allumage normal au démarrage (relevé, constat 6). La notice Seat Ibiza p. 289 décrit le clignotement comme un défaut de la gestion du moteur diesel.",
+    "angle": "La recherche porte sur le clignotement en roulant, avec perte de puissance, alors que la base ne décrit que l'allumage au démarrage (relevé, constat 6). La notice Seat Ibiza p. 289 relevée décrit le clignotement comme un défaut de la gestion du moteur diesel.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
       "Ligne « préchauffage qui clignote », sans toucher à la base validée : ligne saisie citée liée au voyant prechauffage (voyant_lie, jamais moins grave que lui), comme D4, ou nouvelle ligne de la base par demande de changement (3 marques de 2 groupes). Le choix et le verdict se décident au paquet de validation de l'étape 8.",
-      "« Clignote et perte de puissance » (Audi, VW, 2.0 TDI 140, Audi A3) : la notice Seat lue ne vaut que pour la Seat Ibiza (charte §2.5).",
+      "« Clignote et perte de puissance » (Audi, VW, 2.0 TDI 140, Audi A3) : la notice Seat lue ne vaut que pour le modèle et la génération qu'elle couvre (charte §2.5).",
       "« Que signifie un voyant orange clignotant ? » : renvoi vers l'outil voyants (page mère).",
-      "Bougies de préchauffage (« voyant bougie », « bougie de préchauffage voyant ») : codes P0380 et P1351, pages liées de la vague A.",
-      "« Voiture ne démarre pas » et « perte de puissance » : pages de la vague B, liens après leur publication."
+      "Bougies de préchauffage (« voyant bougie », « bougie de préchauffage voyant ») : codes P0380 et P1351 (pages liées).",
+      "« Voiture ne démarre pas » et « perte de puissance » : pages liées, une phrase ici."
     ],
     "sources_a_trouver": [
       "Consigne du témoin de préchauffage qui clignote dans les notices Peugeot 208, Renault Clio 5 et Dacia Sandero 3 (versions diesel), à la page près ; Seat Ibiza p. 289 est déjà relevée (travaux/etape-5/notices/seat-ibiza.txt)."
@@ -188,14 +192,14 @@
   },
   "voyant-airbag": {
     "question_decision": "Puis-je continuer à rouler avec le voyant airbag allumé ?",
-    "angle": "Deux témoins de la base : défaut des airbags ou des prétensionneurs (à faire contrôler sans attendre) et airbag passager désactivé (aucune action). La recherche veut surtout éteindre le voyant : la page dit honnêtement pourquoi on ne le fait pas soi-même.",
+    "angle": "Deux témoins de la base, aux actions très différentes (tableau des voyants du brief : défaut des airbags ou des prétensionneurs ; airbag passager désactivé, avec sa condition). La recherche veut surtout éteindre le voyant : la page dit honnêtement pourquoi on ne le fait pas soi-même.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
       "« Comment éteindre le voyant airbag », « effacer sans valise », « astuce pour enlever » : on ne l'efface pas sans corriger la cause (relevé, constat 4) ; ce que les notices disent des interventions sur les airbags, cité à la page près.",
       "« Connecteur airbag sous siège », « contacteur airbag », « défaut contacteur tournant », « tester un prétensionneur » : causes citées d'une source au registre, sans mode opératoire.",
-      "« Voyant airbag allumé contrôle technique » : texte du contrôle technique à lire sur Légifrance ; page « contre-visite » (vague C).",
+      "« Voyant airbag allumé contrôle technique » : texte du contrôle technique à lire sur Légifrance.",
       "« Orange » ou « rouge » : ce que les notices disent des couleurs.",
-      "« Dacia Sandero » : la notice Sandero 3 lue répond pour ce modèle."
+      "« Dacia Sandero » : la notice Sandero 3 lue répond, pour le modèle et la génération qu'elle couvre (registre)."
     ],
     "sources_a_trouver": [
       "Texte du contrôle technique sur Légifrance : point des airbags et de leur témoin."
@@ -206,15 +210,16 @@
   },
   "voyant-abs-esp": {
     "question_decision": "Puis-je continuer à rouler avec le voyant ABS ou ESP allumé ?",
-    "angle": "Quatre situations de la base : ABS seul (rouler prudemment jusqu'au garage), ABS avec freinage (arrêt), ESP qui clignote (système en action), ESP fixe (défaut). « Peut-on rouler sans ABS » est exactement l'encadré.",
+    "angle": "Quatre lignes de la base (tableau des voyants du brief), de l'ESP qui clignote parce qu'il agit aux voyants ABS et freinage allumés ensemble. « Peut-on rouler sans ABS » est exactement l'encadré.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
       "« Est-il possible de rouler sans ABS ? », « ABS allumé peut-on rouler », « que faire », « reste allumé en circulation » : l'encadré (relevé, constat 5).",
-      "« ABS et ESP allumés », « ESP et frein à main » : seulement les combinaisons que les notices décrivent (ligne ABS et freinage de la base).",
+      "« ABS et ESP allumés » : seulement ce que les notices décrivent de cette combinaison.",
+      "« ESP et frein à main » : combinaison à lire dans les notices avant d'écrire ; elle ne relève pas de la ligne « ABS et freinage ».",
       "« Comment désactiver, supprimer ou effacer le voyant ABS (sans valise) » : on ne l'efface pas sans corriger la cause (relevé, constat 4).",
       "« Problème ABS », « ABS défaillant » : causes citées d'une source au registre.",
       "Texte rédigé d'environ 570 mots : part citée estimée à 42 % sans texte rédigé (journal, CITATIONS-PART).",
-      "Contrôle technique : page « contre-visite » (vague C), lien après sa publication."
+      "Contrôle technique : page « contre-visite » (page liée)."
     ],
     "hors_perimetre": [
       "« Prix d'un bloc ABS » : ni prix de pièce ni enseigne ; le coût probable donne la tranche (01).",
@@ -223,14 +228,14 @@
   },
   "voyant-pression-pneus": {
     "question_decision": "Puis-je continuer à rouler avec le voyant de pression des pneus allumé ?",
-    "angle": "Voyant orange, mais la base impose l'arrêt pour contrôler les pneus, avec l'écart entre marques. La réinitialisation après regonflage, consigne des notices, répond à « toujours allumé » et « comment l'enlever » (relevé, constat 4).",
+    "angle": "Voyant orange dont la ligne de la base impose pourtant l'arrêt, avec l'écart entre marques (tableau des voyants du brief). La réinitialisation après regonflage, consigne des notices, répond à « toujours allumé » et « comment l'enlever » (relevé, constat 4).",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
       "« Voyant pression pneu toujours allumé », « mais bonne pression », « comment enlever le voyant » : réinitialisation de chaque notice lue, citée à la page près.",
       "« Voyant pression pneu orange », « combien de temps » : l'encadré (charte §2.2 pour les distances).",
       "« Voyant pression pneu Renault », « Clio 4 », « Volkswagen » : tableau par marque ; la notice Clio 5 ne vaut pas pour la Clio 4 (charte §2.5).",
       "Système défaillant (voyant qui clignote puis reste fixe) : ligne de la base.",
-      "Bonne pression et gonflage : page « pression des pneus » (vague A, liée)."
+      "Bonne pression et gonflage : page « pression des pneus » (page liée)."
     ],
     "hors_perimetre": [
       "Modèles et marques hors notices lues : renvoi à la notice du véhicule."
@@ -238,13 +243,13 @@
   },
   "voyant-direction": {
     "question_decision": "Puis-je continuer à rouler avec le voyant de direction assistée allumé ?",
-    "angle": "La couleur décide : orange (rouler prudemment jusqu'au garage) ou rouge (arrêt ; Toyota demande seulement une vérification immédiate, écart affiché). Page courte : 2 mots-clés, des recherches surtout par modèle.",
+    "angle": "La couleur décide entre les deux lignes de la base (tableau des voyants du brief), avec un écart entre marques sur le rouge. Page courte : peu de mots-clés, des recherches surtout par modèle.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
       "« Pourquoi le voyant volant s'allume-t-il ? », « Que faire si le voyant de direction assistée s'allume ? » : encadré et causes citées d'une source au registre.",
-      "« Voyant volant orange Seat Ibiza » : la notice Seat Ibiza lue y répond, pour ce modèle.",
+      "« Voyant volant orange Seat Ibiza » : la notice Seat Ibiza lue y répond, pour le modèle et la génération qu'elle couvre (registre).",
       "« Comment éteindre le voyant direction assistée ? » : relevé, constat 4.",
-      "« C'est quoi le voyant triangle orange ? » : autre voyant ; renvoi vers l'outil voyants."
+      "« C'est quoi le voyant triangle orange ? » : autre voyant ; renvoi vers l'outil voyants (page mère)."
     ],
     "hors_perimetre": [
       "Volkswagen, Audi, BMW, Polo, Golf 5, Clio 2, Touran : marques ou modèles hors notices lues, renvoi à la notice du véhicule (charte §2.5)."
@@ -252,17 +257,18 @@
   },
   "code-p0420": {
     "question_decision": "Puis-je continuer à rouler avec le code P0420 ?",
-    "angle": "Code générique du catalyseur (rendement sous le seuil). Verdict : ligne du voyant moteur de la base ; signification, causes et cas par marque tirés de sources techniques admises (charte §2.2), comme l'exemple P0087.",
+    "angle": "Code générique du catalyseur (rendement sous le seuil). Signification, causes et cas par marque tirés de sources techniques admises (charte §2.2), comme l'exemple P0087 ; le verdict vient de la ligne du voyant qui s'allume avec le code.",
     "element_unique": "Tableau des cas décrits par marque (modèle 6.6b).",
     "a_traiter": [
+      "Ligne de l'encadré : celle du voyant qui s'allume avec le code, attribuée seulement d'après un document qui le cite (journal, seconde revue de 6.6b) ; pages-sources.json prévoit les lignes du voyant moteur, et l'exemple P0087 reprend celle du voyant moteur orange fixe.",
+      "Champ carburant (essence, diesel ou les deux) : d'après les sources admises.",
       "« Comment résoudre le code P0420 ? », « P0420 résolu » : causes dans un ordre logique, jamais par fréquence (charte §2.2), sans mode opératoire.",
-      "« P0420 Peugeot » (3 160), « Citroën », « Toyota », « VW », « Ford », « Renault », « 1.2 PureTech » : cas par marque, seulement ceux qu'une source admise nomme (charte §2.5).",
+      "« P0420 Peugeot », « Citroën », « Toyota », « VW », « Ford », « Renault », « 1.2 PureTech » : cas par marque, seulement ceux qu'une source admise nomme (charte §2.5).",
       "« Conséquences d'un catalyseur défectueux » : ce que disent les notices du voyant moteur qui clignote (risque pour le catalyseur, lignes de la base).",
-      "Code lu sans voyant allumé : consigne de la charte (§4), comme P0087.",
-      "Pages liées : « nettoyer le FAP » (vague B) ; le dossier PureTech (vague B) lie vers cette page."
+      "Code lu sans voyant allumé : consigne de la charte (§4), comme P0087."
     ],
     "sources_a_trouver": [
-      "Sources admises par la charte §2.2 (bulletin ou fiche de constructeur, document d'équipementier, documentation d'éditeur d'outil de diagnostic) pour le libellé, les causes et les cas par marque ; les premiers résultats du relevé (vendeurs d'outils ou de pièces, services de garage) sont à classer selon ce critère avant tout usage."
+      "Sources admises par la charte §2.2 (bulletin ou fiche de constructeur, document d'équipementier, documentation d'éditeur d'outil de diagnostic) pour le libellé, les causes, chaque cas par marque et le voyant qui s'allume ; les premiers résultats du relevé (vendeurs d'outils ou de pièces, services de garage) sont à classer selon ce critère avant tout usage."
     ],
     "hors_perimetre": [
       "Valises OBD (docs/02) ; prix d'un catalyseur ou de son remplacement (tranche du coût probable seulement)."
@@ -270,16 +276,18 @@
   },
   "code-p0299": {
     "question_decision": "Puis-je continuer à rouler avec le code P0299 ?",
-    "angle": "Pression de suralimentation (turbo) trop faible ; les lecteurs cherchent les symptômes et la marque. Verdict : ligne du voyant moteur de la base ; le reste vient de sources admises (charte §2.2).",
+    "angle": "Pression de suralimentation (turbo) trop faible ; les lecteurs cherchent les symptômes et la marque. Le reste vient de sources admises (charte §2.2) ; le verdict, de la ligne du voyant qui s'allume avec le code.",
     "element_unique": "Tableau des cas décrits par marque (modèle 6.6b).",
     "a_traiter": [
-      "« Symptômes d'une pression turbo trop faible », « défaut du turbocompresseur » : ce que disent les sources admises ; la perte de puissance a sa page en vague B.",
-      "« P0299 Peugeot » et « P0299 VW » (3 160 chacun), « 2.0 TDI », « Renault 1.5 dCi », « Mercedes », « Hyundai », « Mazda » : cas par marque sourcés seulement.",
+      "Ligne de l'encadré : celle du voyant qui s'allume avec le code, attribuée seulement d'après un document qui le cite (journal, seconde revue de 6.6b) ; pages-sources.json prévoit les lignes du voyant moteur.",
+      "Champ carburant (essence, diesel ou les deux) : d'après les sources admises.",
+      "« Symptômes d'une pression turbo trop faible », « défaut du turbocompresseur » : ce que disent les sources admises ; la perte de puissance a sa page (page liée).",
+      "« P0299 Peugeot », « P0299 VW », « 2.0 TDI », « Renault 1.5 dCi », « Mercedes », « Hyundai », « Mazda » : cas par marque sourcés seulement.",
       "« P0299 à chaud » : seulement si une source admise le décrit.",
       "Code lu sans voyant allumé : consigne de la charte (§4)."
     ],
     "sources_a_trouver": [
-      "Sources admises par la charte §2.2 pour le libellé, les causes et chaque cas par marque."
+      "Sources admises par la charte §2.2 pour le libellé, les causes, chaque cas par marque et le voyant qui s'allume."
     ],
     "hors_perimetre": [
       "Valises OBD (docs/02) ; prix d'un turbo (tranche du coût probable seulement)."
@@ -287,17 +295,18 @@
   },
   "code-p0380": {
     "question_decision": "Puis-je continuer à rouler avec le code P0380 ?",
-    "angle": "Circuit des bougies de préchauffage (diesel). Recherche très Renault (« p0380 renault » et « dtc p0380 renault », 3 160 chacun) et seule requête de la vague A sans aperçu IA (relevé, constat 1) : une fiche sourcée par marque a sa place.",
+    "angle": "Circuit des bougies de préchauffage (diesel). Recherche très Renault et seule requête de la vague sans aperçu IA (relevé, constat 1) : une fiche sourcée par marque a sa place.",
     "element_unique": "Tableau des cas décrits par marque (modèle 6.6b).",
     "a_traiter": [
-      "Verdict : ligne du voyant moteur de la base ; la ligne « préchauffage » décrit le fonctionnement normal et ne porte pas le verdict d'un défaut (travaux/etape-5/pages-sources.json).",
+      "Ligne de l'encadré : celle du voyant qui s'allume avec le code, attribuée seulement d'après un document qui le cite (journal, seconde revue de 6.6b). pages-sources.json prévoit les lignes du voyant moteur (la ligne « préchauffage » décrit le fonctionnement normal) ; mais la notice Seat Ibiza p. 289 relevée associe le témoin de préchauffage qui clignote à un défaut de la gestion du moteur diesel. Le choix de la ligne se fait au paquet de l'étape 8, avec celui de la ligne « préchauffage qui clignote ».",
+      "Champ carburant : diesel d'après le libellé du code, à confirmer par les sources admises.",
       "« P0380 Renault 1.5 dCi », « Peugeot 1.6 HDi », « Peugeot 307 2.0 HDi », « Nissan », « Toyota Corolla D4D », « Dacia », « Ford », « Opel » : cas par marque sourcés seulement.",
-      "« P0380 lors d'un contrôle technique » : texte du contrôle technique à lire sur Légifrance ; page « contre-visite » (vague C).",
-      "Voyant de préchauffage qui clignote : voir le brief de la page « voyant préchauffage » (liée, vague A).",
+      "« P0380 lors d'un contrôle technique » : texte du contrôle technique à lire sur Légifrance.",
+      "Voyant de préchauffage qui clignote : voir le brief de la page « voyant préchauffage » (page liée).",
       "Code lu sans voyant allumé : consigne de la charte (§4)."
     ],
     "sources_a_trouver": [
-      "Sources admises par la charte §2.2 pour le libellé, les causes et chaque cas par marque."
+      "Sources admises par la charte §2.2 pour le libellé, les causes, chaque cas par marque et le voyant qui s'allume."
     ],
     "hors_perimetre": [
       "Autres codes des recherches (P0381, P0400, P0101) : pas de page dans le plan.",
@@ -310,28 +319,30 @@
     "element_unique": "Tableau des cas décrits par marque (modèle 6.6b).",
     "a_traiter": [
       "Portée « constructeur » (champ portee ; R7-CODE-GENERIQUE refuse « générique » pour un P1xxx) ; une signification par marque, chacune tirée d'une source admise qui nomme la marque, sinon pas écrite.",
+      "Ligne de l'encadré : celle du voyant qui s'allume avec le code, d'après un document qui le cite, marque par marque (journal, seconde revue de 6.6b) ; même question que P0380 pour le témoin de préchauffage qui clignote.",
+      "Champ carburant (essence, diesel ou les deux) : d'après les sources admises, pour chaque marque.",
       "Peugeot et Citroën (« circuit d'entrée IDM » dans les questions du relevé, qui n'est pas une source), « 1.6 HDi », « 1.4 HDi », « 2.0 HDi », « Citroën C3 », Toyota, Mercedes : cas par marque sourcés seulement.",
-      "Verdict : ligne du voyant moteur de la base ; la ligne « préchauffage » ne porte pas le verdict d'un défaut (travaux/etape-5/pages-sources.json).",
       "Code lu sans voyant allumé : consigne de la charte (§4)."
     ],
     "sources_a_trouver": [
-      "Source admise par la charte §2.2 pour chaque marque dont la signification est donnée."
+      "Source admise par la charte §2.2 pour chaque marque dont la signification est donnée, et pour le voyant qui s'allume."
     ],
     "hors_perimetre": [
       "Valises OBD (docs/02)."
     ]
   },
   "code-p0087": {
-    "angle": "Exemple validé en 6.6b : fiche, cas par marque et causes tirés de sources admises ; verdict de la ligne du voyant moteur.",
+    "angle": "Exemple validé en 6.6b : fiche, cas par marque et causes tirés de sources admises ; ligne de l'encadré reprise de la base (tableau des voyants du brief).",
     "element_unique": "Tableau des cas décrits par marque, déjà dans l'exemple.",
     "a_traiter": [
       "Point de départ : l'exemple validé ; son encadré et son empreinte ne changent pas sans nouvelle validation de Houssem.",
-      "« P0087 Peugeot 1.6 HDi » (3 160), « 1.4 HDI », « Renault », « Ford », « Mercedes » : cas seulement si une source admise les nomme ; sinon la page ne les promet pas.",
+      "« P0087 Peugeot 1.6 HDi », « 1.4 HDI », « Renault », « Ford », « Mercedes » : cas seulement si une source admise les nomme ; sinon la page ne les promet pas.",
+      "« Quels sont les symptômes d'une pression de rampe de carburant trop faible ? » : seulement les symptômes que nomment les sources admises.",
       "« Comment savoir si le régulateur de pression de carburant est HS ? » : cause, sans mode opératoire.",
-      "Perte de puissance : page de la vague B, lien après sa publication."
+      "Perte de puissance : page liée, une phrase ici."
     ],
     "sources_a_trouver": [
-      "Source admise pour le 1.6 HDi, premier cas cherché et absent de l'exemple, si elle existe."
+      "Source admise pour le 1.6 HDi, cas le plus cherché et absent de l'exemple, si elle existe."
     ]
   },
   "pression-des-pneus": {
@@ -340,17 +351,19 @@
     "element_unique": "Tableau du texte ({{tableau}}) « Où lire la pression et quand la vérifier, selon la notice de chaque marque » : emplacement de l'étiquette, pneus froids, fréquence de contrôle, réinitialisation du système de surveillance, chaque case citée à la page près.",
     "a_traiter": [
       "Texte de référence (fiche « Le texte en bref ») : obligatoire pour une page pneus et obligations (schéma), à trouver avant la rédaction.",
-      "« Comment savoir la pression à mettre dans un pneu ? » : étiquette et notice (Renault Clio 5 p. 348 : porte conducteur, pneus froids).",
-      "« Pression des pneus à chaud » (3 mots-clés à 3 160) : pression lue à froid ; conduite à tenir à chaud seulement si une notice la donne.",
-      "« Vérifier la pression des pneus tous les combien » : au moins une fois par mois selon la notice Renault Clio 5 (p. 206 et 348) ; les autres notices à lire.",
+      "« Comment savoir la pression à mettre dans un pneu ? » : étiquette et notice (Renault Clio 5 p. 348, relevée : porte conducteur, pneus froids).",
+      "« Pression des pneus à chaud » : la notice Renault Clio 5 (p. 348, relevée) dit quoi faire ; les autres notices à lire.",
+      "« Vérifier la pression des pneus tous les combien » : « une fois par mois » selon la notice Renault Clio 5 (p. 206, relevée) ; les autres notices à lire.",
       "« Pression des pneus avant et arrière », en charge : valeurs de l'étiquette du véhicule, sans chiffre écrit sur la page.",
-      "Remorque (5 mots-clés du plan, « pression pneu remorque ») : dire où se lit la pression des pneus de la remorque, seulement si une notice ou un texte le dit ; sinon le dire.",
+      "Lignes de l'encadré au-delà du voyant (pneus sous-gonflés, pneu à plat) : chacune avec sa citation de première main, sinon pas de ligne.",
+      "Remorque (mots-clés du plan, « pression pneu remorque ») : dire où se lit la pression des pneus de la remorque, seulement si une notice ou un texte le dit ; sinon le dire.",
       "Gonflage (« gonfler un pneu », « gonfleur pneu de voiture ») : comment gonfler, sans produit ni prix recommandé (01).",
-      "« Pression des pneus voyant » : la ligne de la base peut être reprise dans l'encadré (- voyant: pression-pneus), sans son tableau des notices (docs/08 §3, règle 12) ; page « voyant pression pneus » liée (vague A)."
+      "« Pression des pneus voyant » : la ligne de la base peut être reprise dans l'encadré (- voyant: pression-pneus), sans son tableau des notices (docs/08 §3, règle 12) ; page « voyant pression pneus » (page liée)."
     ],
     "sources_a_trouver": [
       "Texte de référence sur Légifrance pour le champ texte_reference : aucun n'est identifié. Pistes à vérifier : arrêté du 24 octobre 1994 relatif aux pneumatiques ; contrôle du système de surveillance de la pression au contrôle technique (arrêté du 18 juin 1991 modifié). Si aucun texte ne convient, le signaler à Houssem avant la rédaction : le schéma l'exige.",
-      "Passages des 4 autres notices sur la pression (Peugeot 208, Seat Ibiza p. 311-312, Dacia Sandero 3 p. 177-178, Toyota Yaris p. 333), à relever à la page près ; aucune page de la Sécurité routière sur la pression n'a été trouvée (journal)."
+      "Sécurité routière : l'aperçu IA du relevé cite le domaine securite-routiere.gouv.fr (adresse non relevée), alors que le journal note qu'aucune page sur la pression n'a été trouvée à l'étape 5 ; piste à rechercher pour sourcer une ligne « pneus sous-gonflés ».",
+      "Passages des 4 autres notices sur la pression (Peugeot 208, Seat Ibiza p. 311-312, Dacia Sandero 3 p. 177-178, Toyota Yaris p. 333), à relever à la page près."
     ],
     "hors_perimetre": [
       "Pression par modèle ou par dimension (« tableau pression pneu voiture », « 205/55 R17 », « Clio 3 ») : ni page ni tableau par modèle sans donnée constructeur sourcée (relevé, constat 6 ; idée reportée de l'ancien lot 2).",
@@ -362,11 +375,12 @@
     "element_unique": "Tableau du texte, déjà dans l'exemple.",
     "a_traiter": [
       "Point de départ : l'exemple validé ; son encadré et son empreinte ne changent pas sans nouvelle validation de Houssem.",
-      "« Loi Montagne communes concernées », « carte », « departement pneu neige obligatoire », « zone pneu neige obligatoire » (3 160 chacun pour les deux derniers) : liste des départements avec leur arrêté, ou outil « ma commune est-elle concernée ? », en priorité à l'étape 8 (idée reportée, décisions 4 et 5 de 6.6c).",
+      "« Loi Montagne communes concernées », « carte », « departement pneu neige obligatoire », « zone pneu neige obligatoire » : liste des départements avec leur arrêté, ou outil « ma commune est-elle concernée ? », en priorité à l'étape 8 (idée reportée, décisions 4 et 5 de 6.6c).",
       "« Quelle amende pour la loi montagne ? », « Loi Montagne amende », « 2026 verbalisation », « verbalisation abandonnée » (2ᵉ résultat) : aucune amende à ce jour (D314-8, réponse ministérielle du 12/02/2026) ; décret de sanction annoncé, à revérifier au Journal officiel avant la mise en ligne, puis chaque mois ; sanction du panneau B26 à lire sur Légifrance (journal).",
       "« Est-ce que 2 chaussettes de neige suffisent ? » : faits de la Sécurité routière relus en 6.6c (travaux/etape-6/textes/).",
       "« Loi Montagne date », « Loi montagne 2 2016 », « Loi Montagne 3 » : seulement ce que disent les textes du registre.",
       "« Pneu m et s », « pneu 3pmsf », « pneu 4 saisons homologué hiver » : marquages, d'après le texte.",
+      "Pression et usure des pneus : pages liées.",
       "Revue avant chaque 1er novembre (charte §8, DATES-REVUE-DELAI)."
     ],
     "sources_a_trouver": [

@@ -6,7 +6,8 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/prechauffage/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** : `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication) ; `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -31,11 +32,11 @@
 
 ## Décision et sources disponibles
 
-Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :
+Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :
 
-| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |
-|---|---|---|---|---|---|
-| `prechauffage` Voyant de préchauffage (diesel) allumé au démarrage | orange | Oui, vous pouvez rouler | Aucune action nécessaire | 4 | non |
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `prechauffage` Voyant de préchauffage (diesel) allumé au démarrage | orange | Oui, vous pouvez rouler | Aucune action nécessaire | C'est normal : attendez que le voyant s'éteigne avant de démarrer. | 4 | non |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:36 UTC, requête « voyant préchauffage »)
 
@@ -72,14 +73,14 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de préchauffage allumé ou qui clignote ? »
-- **Angle** : La recherche porte sur le clignotement en roulant, avec perte de puissance (7 recherches associées sur 8), alors que la base ne décrit que l'allumage normal au démarrage (relevé, constat 6). La notice Seat Ibiza p. 289 décrit le clignotement comme un défaut de la gestion du moteur diesel.
+- **Angle** : La recherche porte sur le clignotement en roulant, avec perte de puissance, alors que la base ne décrit que l'allumage au démarrage (relevé, constat 6). La notice Seat Ibiza p. 289 relevée décrit le clignotement comme un défaut de la gestion du moteur diesel.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
   - Ligne « préchauffage qui clignote », sans toucher à la base validée : ligne saisie citée liée au voyant prechauffage (voyant_lie, jamais moins grave que lui), comme D4, ou nouvelle ligne de la base par demande de changement (3 marques de 2 groupes). Le choix et le verdict se décident au paquet de validation de l'étape 8.
-  - « Clignote et perte de puissance » (Audi, VW, 2.0 TDI 140, Audi A3) : la notice Seat lue ne vaut que pour la Seat Ibiza (charte §2.5).
+  - « Clignote et perte de puissance » (Audi, VW, 2.0 TDI 140, Audi A3) : la notice Seat lue ne vaut que pour le modèle et la génération qu'elle couvre (charte §2.5).
   - « Que signifie un voyant orange clignotant ? » : renvoi vers l'outil voyants (page mère).
-  - Bougies de préchauffage (« voyant bougie », « bougie de préchauffage voyant ») : codes P0380 et P1351, pages liées de la vague A.
-  - « Voiture ne démarre pas » et « perte de puissance » : pages de la vague B, liens après leur publication.
+  - Bougies de préchauffage (« voyant bougie », « bougie de préchauffage voyant ») : codes P0380 et P1351 (pages liées).
+  - « Voiture ne démarre pas » et « perte de puissance » : pages liées, une phrase ici.
 - **Sources à trouver avant la rédaction** :
   - Consigne du témoin de préchauffage qui clignote dans les notices Peugeot 208, Renault Clio 5 et Dacia Sandero 3 (versions diesel), à la page près ; Seat Ibiza p. 289 est déjà relevée (travaux/etape-5/notices/seat-ibiza.txt).
 - **Hors périmètre, à ne pas traiter** :

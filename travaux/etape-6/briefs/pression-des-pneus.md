@@ -6,7 +6,8 @@
 
 - **Type** : pneus ; **thème** : pneus-et-obligations ; **vague** : A.
 - **Adresse** : `/pression-des-pneus/`.
-- **Pages liées dans le plan** : `/usure-des-pneus/` (vague C : pas de lien dans le texte avant sa publication) ; `/loi-montagne/` (vague A).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/loi-montagne/` (vague A) ; `/usure-des-pneus/` (vague C : pas de lien dans le texte avant sa publication) ; `/voyants/pression-pneus/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -63,7 +64,7 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 | Question ou recherche | Origine | Repères |
 |---|---|---|
 | Comment savoir la pression à mettre dans un pneu ? | Autres questions posées |  |
-| Quelle est la pression de gonflage recommandée pour un pneu 205/55 R17 ? | Autres questions posées |  |
+| Quelle est la pression de gonflage recommandée pour un pneu 205/55 R17 ? | Autres questions posées | Marque ou modèle cité |
 | Quelle est la pression des pneus recommandée pour une Clio 3 ? | Autres questions posées | Marque ou modèle cité |
 | Où faire vérifier ses pneus ? | Autres questions posées |  |
 | Tableau pression pneu voiture | Recherches associées |  |
@@ -82,16 +83,18 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 - **Élément unique** : Tableau du texte ({{tableau}}) « Où lire la pression et quand la vérifier, selon la notice de chaque marque » : emplacement de l'étiquette, pneus froids, fréquence de contrôle, réinitialisation du système de surveillance, chaque case citée à la page près.
 - **À traiter** :
   - Texte de référence (fiche « Le texte en bref ») : obligatoire pour une page pneus et obligations (schéma), à trouver avant la rédaction.
-  - « Comment savoir la pression à mettre dans un pneu ? » : étiquette et notice (Renault Clio 5 p. 348 : porte conducteur, pneus froids).
-  - « Pression des pneus à chaud » (3 mots-clés à 3 160) : pression lue à froid ; conduite à tenir à chaud seulement si une notice la donne.
-  - « Vérifier la pression des pneus tous les combien » : au moins une fois par mois selon la notice Renault Clio 5 (p. 206 et 348) ; les autres notices à lire.
+  - « Comment savoir la pression à mettre dans un pneu ? » : étiquette et notice (Renault Clio 5 p. 348, relevée : porte conducteur, pneus froids).
+  - « Pression des pneus à chaud » : la notice Renault Clio 5 (p. 348, relevée) dit quoi faire ; les autres notices à lire.
+  - « Vérifier la pression des pneus tous les combien » : « une fois par mois » selon la notice Renault Clio 5 (p. 206, relevée) ; les autres notices à lire.
   - « Pression des pneus avant et arrière », en charge : valeurs de l'étiquette du véhicule, sans chiffre écrit sur la page.
-  - Remorque (5 mots-clés du plan, « pression pneu remorque ») : dire où se lit la pression des pneus de la remorque, seulement si une notice ou un texte le dit ; sinon le dire.
+  - Lignes de l'encadré au-delà du voyant (pneus sous-gonflés, pneu à plat) : chacune avec sa citation de première main, sinon pas de ligne.
+  - Remorque (mots-clés du plan, « pression pneu remorque ») : dire où se lit la pression des pneus de la remorque, seulement si une notice ou un texte le dit ; sinon le dire.
   - Gonflage (« gonfler un pneu », « gonfleur pneu de voiture ») : comment gonfler, sans produit ni prix recommandé (01).
-  - « Pression des pneus voyant » : la ligne de la base peut être reprise dans l'encadré (- voyant: pression-pneus), sans son tableau des notices (docs/08 §3, règle 12) ; page « voyant pression pneus » liée (vague A).
+  - « Pression des pneus voyant » : la ligne de la base peut être reprise dans l'encadré (- voyant: pression-pneus), sans son tableau des notices (docs/08 §3, règle 12) ; page « voyant pression pneus » (page liée).
 - **Sources à trouver avant la rédaction** :
   - Texte de référence sur Légifrance pour le champ texte_reference : aucun n'est identifié. Pistes à vérifier : arrêté du 24 octobre 1994 relatif aux pneumatiques ; contrôle du système de surveillance de la pression au contrôle technique (arrêté du 18 juin 1991 modifié). Si aucun texte ne convient, le signaler à Houssem avant la rédaction : le schéma l'exige.
-  - Passages des 4 autres notices sur la pression (Peugeot 208, Seat Ibiza p. 311-312, Dacia Sandero 3 p. 177-178, Toyota Yaris p. 333), à relever à la page près ; aucune page de la Sécurité routière sur la pression n'a été trouvée (journal).
+  - Sécurité routière : l'aperçu IA du relevé cite le domaine securite-routiere.gouv.fr (adresse non relevée), alors que le journal note qu'aucune page sur la pression n'a été trouvée à l'étape 5 ; piste à rechercher pour sourcer une ligne « pneus sous-gonflés ».
+  - Passages des 4 autres notices sur la pression (Peugeot 208, Seat Ibiza p. 311-312, Dacia Sandero 3 p. 177-178, Toyota Yaris p. 333), à relever à la page près.
 - **Hors périmètre, à ne pas traiter** :
   - Pression par modèle ou par dimension (« tableau pression pneu voiture », « 205/55 R17 », « Clio 3 ») : ni page ni tableau par modèle sans donnée constructeur sourcée (relevé, constat 6 ; idée reportée de l'ancien lot 2).
   - « Où vérifier la pression gratuitement », « autour de moi » : recherche locale ou d'enseigne (docs/02).

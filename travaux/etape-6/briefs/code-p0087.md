@@ -6,7 +6,8 @@
 
 - **Type** : code-defaut ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/codes-defaut/p0087/`.
-- **Pages liées dans le plan** : `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/moteur/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 - **Page exemple rédigée et validée en 6.6** : `exemples/code-defaut/code-p0087.md`. Elle sert de point de départ à la page de l'étape 8.
 
 ## Requête et mots-clés (plan du site, docs/05)
@@ -34,6 +35,12 @@
 | vw p008700 | 316 | Signification (voyant, code) | vw |  |
 
 ## Décision et sources disponibles
+
+Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à une autre page : pas de tableau des notices ici) :
+
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `moteur-orange-fixe` Voyant moteur orange allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez que si la notice de votre voiture permet de rouler jusqu'au garage, et faites alors contrôler le moteur sans attendre en roulant prudemment ; sinon, faites appel à un garage ou à l'assistance. | 5 | oui |
 
 Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources.json`) : verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire).
 
@@ -79,12 +86,13 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le code P0087 ? »
-- **Angle** : Exemple validé en 6.6b : fiche, cas par marque et causes tirés de sources admises ; verdict de la ligne du voyant moteur.
+- **Angle** : Exemple validé en 6.6b : fiche, cas par marque et causes tirés de sources admises ; ligne de l'encadré reprise de la base (tableau des voyants du brief).
 - **Élément unique** : Tableau des cas décrits par marque, déjà dans l'exemple.
 - **À traiter** :
   - Point de départ : l'exemple validé ; son encadré et son empreinte ne changent pas sans nouvelle validation de Houssem.
-  - « P0087 Peugeot 1.6 HDi » (3 160), « 1.4 HDI », « Renault », « Ford », « Mercedes » : cas seulement si une source admise les nomme ; sinon la page ne les promet pas.
+  - « P0087 Peugeot 1.6 HDi », « 1.4 HDI », « Renault », « Ford », « Mercedes » : cas seulement si une source admise les nomme ; sinon la page ne les promet pas.
+  - « Quels sont les symptômes d'une pression de rampe de carburant trop faible ? » : seulement les symptômes que nomment les sources admises.
   - « Comment savoir si le régulateur de pression de carburant est HS ? » : cause, sans mode opératoire.
-  - Perte de puissance : page de la vague B, lien après sa publication.
+  - Perte de puissance : page liée, une phrase ici.
 - **Sources à trouver avant la rédaction** :
-  - Source admise pour le 1.6 HDi, premier cas cherché et absent de l'exemple, si elle existe.
+  - Source admise pour le 1.6 HDi, cas le plus cherché et absent de l'exemple, si elle existe.

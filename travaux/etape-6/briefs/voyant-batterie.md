@@ -6,7 +6,8 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/batterie/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** : `/batterie-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/batterie-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -23,11 +24,11 @@
 
 ## Décision et sources disponibles
 
-Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :
+Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :
 
-| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |
-|---|---|---|---|---|---|
-| `batterie-rouge` Voyant de charge de la batterie rouge | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | 5 | oui |
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `batterie-rouge` Voyant de charge de la batterie rouge | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger et coupez le contact. Ne repartez pas si la notice de votre voiture l'interdit : faites appel à un garage ou à l'assistance. Si elle permet de rejoindre l'atelier le plus proche (Seat), éteignez les équipements électriques non indispensables. | 5 | oui |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:35 UTC, requête « voyant batterie »)
 
@@ -60,18 +61,19 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Voyant batterie allumé avec batterie neuve | Recherches associées |  |
 | Voyant batterie allumé alternateur ok | Recherches associées |  |
 | Problème de batterie voiture symptôme | Recherches associées |  |
-| Voyant batterie berlingo | Recherches associées |  |
+| Voyant batterie berlingo | Recherches associées | Marque ou modèle cité |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de batterie allumé ? »
-- **Angle** : Voyant de charge rouge : la base impose l'arrêt, et l'écart est affiché (Seat laisse rouler jusqu'à l'atelier le plus proche). Les lecteurs cherchent surtout pourquoi il reste allumé avec une batterie neuve ou un alternateur en bon état.
+- **Angle** : Une seule ligne de la base, le voyant de charge rouge, avec un écart entre marques à afficher. Les lecteurs cherchent surtout pourquoi il reste allumé avec une batterie neuve ou un alternateur en bon état.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
   - « Voyant batterie allumé avec batterie neuve », « après le changement de batterie », « alternateur ok », « alternateur par intermittence » : causes citées d'une source au registre, sinon recommander l'avis d'un professionnel.
   - « Voyant batterie clignote » (mot-clé du plan) : la base n'a pas de ligne pour le clignotement ; lire les notices avant d'écrire, sans verdict hors de la base.
   - « Voyant batterie rouge avant démarrage » : ce que disent les notices du témoin contact mis, à lire avant d'écrire.
-  - « Voiture ne démarre pas malgré une batterie en bon état » : page « voiture ne démarre pas » (vague B) ; une phrase ici, le lien après sa publication.
+  - « Voyant batterie faible voiture », « Problème de batterie voiture symptôme » : la batterie elle-même a sa page (« voltage batterie voiture », page liée) ; ici, seulement ce que signale le voyant de charge.
+  - « Voiture ne démarre pas malgré une batterie en bon état » : page « voiture ne démarre pas » (page liée) ; une phrase ici.
   - « Stop et batterie sur une Clio 3 » : la notice lue est celle de la Clio 5, qui ne vaut pas pour la Clio 3 (charte §2.5).
 - **Hors périmètre, à ne pas traiter** :
-  - Achat de batterie par capacité (34 % d'achat dans le thème batterie, journal) et prix d'enseignes (docs/02).
+  - Achat de batterie par capacité (journal, volumes à lire comme des plafonds) et prix d'enseignes (docs/02).

@@ -6,7 +6,8 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/fap/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** : `/nettoyer-fap/` (vague B : pas de lien dans le texte avant sa publication) ; `/fumee-echappement/` (vague B : pas de lien dans le texte avant sa publication) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/codes-defaut/p0420/` (vague A).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0420/` (vague A) ; `/fumee-echappement/` (vague B : pas de lien dans le texte avant sa publication) ; `/nettoyer-fap/` (vague B : pas de lien dans le texte avant sa publication) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/moteur/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -36,11 +37,11 @@ Et 3 autres : « voyant filtre a particule golf 7 », « voyant moteur fap », �
 
 ## Décision et sources disponibles
 
-Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :
+Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :
 
-| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |
-|---|---|---|---|---|---|
-| `fap` Voyant du filtre à particules (FAP) orange | orange | Oui, avec précautions | À faire tout de suite | 4 | oui |
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `fap` Voyant du filtre à particules (FAP) orange | orange | Oui, avec précautions | À faire tout de suite | Dès que la circulation le permet, roulez une vingtaine de minutes à allure soutenue et régulière (par exemple à plus de 60 km/h sur voie rapide, régime moteur pas trop bas), sans couper le moteur, jusqu'à l'extinction du voyant. S'il ne s'éteint pas, ou s'il s'accompagne du voyant moteur ou Service, allez au garage. | 4 | oui |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:30 UTC, requête « voyant fap »)
 
@@ -69,14 +70,14 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant du filtre à particules allumé ? »
-- **Angle** : Les notices demandent une régénération en roulant (Peugeot, Renault et Dacia : dès que la circulation le permet) : c'est l'action de l'encadré, avant le garage. Page de référence du FAP (docs/02 : pas de page organe).
+- **Angle** : La consigne des notices passe par une régénération en roulant avant le garage (ligne de la base et son écart entre marques). Page de référence du FAP (docs/02 : pas de page organe).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
-  - Page de référence du FAP (docs/02, « la page voyant FAP sert de page de référence ») : ce qu'est le filtre et sa régénération, d'après les notices ; le nettoyage reste au tuto « nettoyer le FAP » (vague B).
+  - Page de référence du FAP (docs/02, « la page voyant FAP sert de page de référence ») : ce qu'est le filtre et sa régénération, d'après les notices ; le nettoyage reste au tuto « nettoyer le FAP » (page liée).
   - « Comment enlever le voyant additif FAP ? » : lire si une notice lue décrit un témoin d'additif ; sinon le dire (relevé, constat 4).
-  - « Voyant FAP allumé lors d'un contrôle technique » : texte du contrôle technique à lire sur Légifrance ; page « contre-visite » (vague C).
-  - « Comment nettoyer le FAP d'une 308 » : tuto de la vague B, sans page par modèle.
-  - Code P0420 (catalyseur) : page liée de la vague A.
+  - « Voyant FAP allumé lors d'un contrôle technique » : texte du contrôle technique à lire sur Légifrance.
+  - « Comment nettoyer le FAP d'une 308 » : tuto « nettoyer le FAP », sans page par modèle.
+  - Code P0420 (catalyseur) et voyant moteur : pages liées.
 - **Sources à trouver avant la rédaction** :
   - Texte du contrôle technique sur Légifrance : point du filtre à particules et des témoins, s'il existe.
 - **Hors périmètre, à ne pas traiter** :

@@ -6,6 +6,8 @@
 
 - **Type** : code-defaut ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/codes-defaut/p0380/`.
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/voyants/moteur/` (vague A) ; `/voyants/prechauffage/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -76,16 +78,17 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le code P0380 ? »
-- **Angle** : Circuit des bougies de préchauffage (diesel). Recherche très Renault (« p0380 renault » et « dtc p0380 renault », 3 160 chacun) et seule requête de la vague A sans aperçu IA (relevé, constat 1) : une fiche sourcée par marque a sa place.
+- **Angle** : Circuit des bougies de préchauffage (diesel). Recherche très Renault et seule requête de la vague sans aperçu IA (relevé, constat 1) : une fiche sourcée par marque a sa place.
 - **Élément unique** : Tableau des cas décrits par marque (modèle 6.6b).
 - **À traiter** :
-  - Verdict : ligne du voyant moteur de la base ; la ligne « préchauffage » décrit le fonctionnement normal et ne porte pas le verdict d'un défaut (travaux/etape-5/pages-sources.json).
+  - Ligne de l'encadré : celle du voyant qui s'allume avec le code, attribuée seulement d'après un document qui le cite (journal, seconde revue de 6.6b). pages-sources.json prévoit les lignes du voyant moteur (la ligne « préchauffage » décrit le fonctionnement normal) ; mais la notice Seat Ibiza p. 289 relevée associe le témoin de préchauffage qui clignote à un défaut de la gestion du moteur diesel. Le choix de la ligne se fait au paquet de l'étape 8, avec celui de la ligne « préchauffage qui clignote ».
+  - Champ carburant : diesel d'après le libellé du code, à confirmer par les sources admises.
   - « P0380 Renault 1.5 dCi », « Peugeot 1.6 HDi », « Peugeot 307 2.0 HDi », « Nissan », « Toyota Corolla D4D », « Dacia », « Ford », « Opel » : cas par marque sourcés seulement.
-  - « P0380 lors d'un contrôle technique » : texte du contrôle technique à lire sur Légifrance ; page « contre-visite » (vague C).
-  - Voyant de préchauffage qui clignote : voir le brief de la page « voyant préchauffage » (liée, vague A).
+  - « P0380 lors d'un contrôle technique » : texte du contrôle technique à lire sur Légifrance.
+  - Voyant de préchauffage qui clignote : voir le brief de la page « voyant préchauffage » (page liée).
   - Code lu sans voyant allumé : consigne de la charte (§4).
 - **Sources à trouver avant la rédaction** :
-  - Sources admises par la charte §2.2 pour le libellé, les causes et chaque cas par marque.
+  - Sources admises par la charte §2.2 pour le libellé, les causes, chaque cas par marque et le voyant qui s'allume.
 - **Hors périmètre, à ne pas traiter** :
   - Autres codes des recherches (P0381, P0400, P0101) : pas de page dans le plan.
   - Valises OBD (docs/02).

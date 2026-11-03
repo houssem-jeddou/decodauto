@@ -6,7 +6,8 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/moteur/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** : `/codes-defaut/p0420/` (vague A) ; `/codes-defaut/p0087/` (vague A) ; `/codes-defaut/p0299/` (vague A) ; `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-qui-broute/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/fap/` (vague A) ; `/voyants/adblue/` (vague A) ; `/contre-visite-controle-technique/` (vague C : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0087/` (vague A) ; `/codes-defaut/p0299/` (vague A) ; `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p0420/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/contre-visite-controle-technique/` (vague C : pas de lien dans le texte avant sa publication) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-qui-broute/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/adblue/` (vague A) ; `/voyants/fap/` (vague A).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 - **Page exemple rédigée et validée en 6.6** : `exemples/voyant/voyant-moteur.md`. Elle sert de point de départ à la page de l'étape 8.
 
 ## Requête et mots-clés (plan du site, docs/05)
@@ -37,13 +38,13 @@ Et 136 autres : « défaut antipollution », « defaut antipollution 308 », « 
 
 ## Décision et sources disponibles
 
-Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :
+Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :
 
-| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |
-|---|---|---|---|---|---|
-| `moteur-orange-fixe` Voyant moteur orange allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | 5 | oui |
-| `moteur-orange-clignotant` Voyant moteur orange clignotant | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | 5 | oui |
-| `moteur-rouge` Voyant moteur rouge, ou STOP avec « Risque casse moteur » | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | 3 | non |
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `moteur-orange-fixe` Voyant moteur orange allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez que si la notice de votre voiture permet de rouler jusqu'au garage, et faites alors contrôler le moteur sans attendre en roulant prudemment ; sinon, faites appel à un garage ou à l'assistance. | 5 | oui |
+| `moteur-orange-clignotant` Voyant moteur orange clignotant | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Levez le pied, puis arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez que si la notice de votre voiture le permet, en réduisant le régime moteur et jusqu'au garage le plus proche ; sinon, faites appel à un garage ou à l'assistance. | 5 | oui |
+| `moteur-rouge` Voyant moteur rouge, ou STOP avec « Risque casse moteur » | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger, coupez le moteur et ne le redémarrez pas. Faites appel à un garage ou à l'assistance. | 3 | non |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:33 UTC, requête « voyant moteur orange »)
 
@@ -81,17 +82,17 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant moteur allumé ? »
-- **Angle** : Exemple validé en 6.6a : verdict de la base (une notice impose l'arrêt) et écart entre marques affiché dès l'encadré, face à l'aperçu IA qui dit le contraire (relevé, constat 2).
+- **Angle** : Exemple validé en 6.6a : verdict de la base et écart entre marques affiché dès l'encadré, face à l'aperçu IA qui dit le contraire (relevé, constat 2).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque » (demande de changement n° 8), déjà dans l'exemple.
 - **À traiter** :
   - Point de départ : l'exemple validé ; son encadré et son empreinte ne changent pas sans nouvelle validation de Houssem.
-  - « Défaut moteur » (3 160), « défaut antipollution », « système anti pollution défaillant » (C3, 206, 308, 3008, 2008, 5008) : message des notices Peugeot et Citroën, à lire avant d'en parler.
-  - Vanne EGR (« vanne egr voyant », 3 160 ; « vanne egr 1.6 hdi ») : cause possible, citée d'une source au registre ; aucune page du plan ne traite la vanne EGR à part.
-  - Perte de puissance : Seat Ibiza p. 289 (« Nota » sur les témoins qui restent allumés), à vérifier sur le PDF ; la page « perte de puissance » est de la vague B.
-  - « Controle technique voyant moteur » : texte du contrôle technique à lire sur Légifrance ; la page « contre-visite » est de la vague C.
+  - « Défaut moteur », « défaut antipollution », « système anti pollution défaillant » (C3, 206, 308, 3008, 2008, 5008) : message des notices Peugeot et Citroën, à lire avant d'en parler.
+  - Vanne EGR (« vanne egr voyant », « vanne egr 1.6 hdi ») : cause possible, citée d'une source au registre ; aucune page du plan ne traite la vanne EGR à part.
+  - Perte de puissance : Seat Ibiza p. 289 (« Nota » sur les témoins qui restent allumés), à vérifier sur le PDF.
+  - « Controle technique voyant moteur » : texte du contrôle technique à lire sur Légifrance.
   - « Comment faire disparaître le voyant moteur orange ? » : on ne l'éteint pas sans corriger la cause (relevé, constat 4) ; le cas de Toyota Yaris p. 297 (réservoir vidé) est à vérifier sur le PDF.
   - « Combien de km », « que faire », « fixe », « clignotant », « allumé mais pas de problème », « diesel » : encadré, ou texte rédigé (charte §2.2 pour les distances).
-  - « 208 voyant moteur » : la notice Peugeot 208 lue y répond, pour ce modèle (charte §2.5).
+  - « 208 voyant moteur » : la notice Peugeot 208 lue y répond, pour le modèle et la génération de la notice (registre, charte §2.5).
 - **Sources à trouver avant la rédaction** :
   - Notices Peugeot et Citroën : messages « défaut moteur » et « antipollution » (la notice Citroën n'a pas été lue à l'étape 5).
   - Texte du contrôle technique sur Légifrance : point du témoin de dysfonctionnement du moteur.

@@ -6,7 +6,8 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/pression-pneus/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** : `/pression-des-pneus/` (vague A).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/pression-des-pneus/` (vague A) ; `/usure-des-pneus/` (vague C : pas de lien dans le texte avant sa publication).
+- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -33,12 +34,12 @@
 
 ## Décision et sources disponibles
 
-Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites) :
+Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :
 
-| Voyant | Couleur | Verdict | Urgence | Notices citées | Écart entre marques |
-|---|---|---|---|---|---|
-| `pression-pneus` Voyant de pression des pneus allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | 5 | oui |
-| `pression-pneus-systeme` Voyant de pression des pneus clignotant puis fixe (système défaillant) | orange | Oui, avec précautions | À faire tout de suite | 3 | non |
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `pression-pneus` Voyant de pression des pneus allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Ralentissez, évitez les manœuvres brusques et arrêtez-vous dès que possible en lieu sûr pour regarder l'état des pneus. Pneu crevé ou à plat : ne roulez pas avec, changez la roue ou utilisez le kit de réparation. Sinon, regonflez à la pression indiquée par la voiture (de préférence pneus froids), puis réinitialisez le système. | 5 | oui |
+| `pression-pneus-systeme` Voyant de pression des pneus clignotant puis fixe (système défaillant) | orange | Oui, avec précautions | À faire tout de suite | Vérifiez vous-même la pression des quatre pneus dès que possible, car le système ne vous préviendra plus, puis faites contrôler le système (capteur défaillant, roue sans capteur…). | 3 | non |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:39 UTC, requête « voyant pression pneu »)
 
@@ -72,13 +73,13 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de pression des pneus allumé ? »
-- **Angle** : Voyant orange, mais la base impose l'arrêt pour contrôler les pneus, avec l'écart entre marques. La réinitialisation après regonflage, consigne des notices, répond à « toujours allumé » et « comment l'enlever » (relevé, constat 4).
+- **Angle** : Voyant orange dont la ligne de la base impose pourtant l'arrêt, avec l'écart entre marques (tableau des voyants du brief). La réinitialisation après regonflage, consigne des notices, répond à « toujours allumé » et « comment l'enlever » (relevé, constat 4).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
   - « Voyant pression pneu toujours allumé », « mais bonne pression », « comment enlever le voyant » : réinitialisation de chaque notice lue, citée à la page près.
   - « Voyant pression pneu orange », « combien de temps » : l'encadré (charte §2.2 pour les distances).
   - « Voyant pression pneu Renault », « Clio 4 », « Volkswagen » : tableau par marque ; la notice Clio 5 ne vaut pas pour la Clio 4 (charte §2.5).
   - Système défaillant (voyant qui clignote puis reste fixe) : ligne de la base.
-  - Bonne pression et gonflage : page « pression des pneus » (vague A, liée).
+  - Bonne pression et gonflage : page « pression des pneus » (page liée).
 - **Hors périmètre, à ne pas traiter** :
   - Modèles et marques hors notices lues : renvoi à la notice du véhicule.
