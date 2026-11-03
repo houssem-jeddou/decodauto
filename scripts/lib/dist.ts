@@ -416,8 +416,10 @@ export interface PartCitee {
 }
 
 /**
- * Part de texte cité d'une page construite (charte §2.6, livrable 6.6). Compte large, du côté prudent : tout texte
- * entre guillemets « … » compte comme cité, même un libellé du site (« Consigne retenue »).
+ * Part de texte cité d'une page construite (charte §2.6, livrable 6.6). Le numérateur est compté large : tout texte
+ * entre guillemets « … » compte comme cité, même un libellé du site (« Consigne retenue »). Le dénominateur compte tout
+ * le texte du site affiché, blocs générés compris (encadré, causes, libellés du tableau) : la présence du texte rédigé
+ * est contrôlée à part (TEXTE-REDIGE-ABSENT).
  */
 export function partCitee(html: string): PartCitee {
   const $ = cheerio.load(html);
@@ -451,6 +453,18 @@ export function partCitee(html: string): PartCitee {
   const mots = motsPropres + motsCitations;
   const cites = motsCitations + motsEntreGuillemets;
   return { mots, cites, part: mots === 0 ? 0 : cites / mots };
+}
+
+/**
+ * Texte rédigé présent sur une page éditoriale (repérée par son encadré) : un bloc `data-corps` non vide (charte §4,
+ * point 7 : questions des lecteurs). Sans lui, la page n'est faite que de blocs générés et de citations ; CITATIONS-PART
+ * ne suffit pas à le voir (revue de 6.6a : la page exemple sans texte rédigé reste sous le seuil).
+ */
+export function constatsTexteRedige(html: string, fichier: string): Constat[] {
+  if (!/data-encadre-decision/.test(html)) return [];
+  const $ = cheerio.load(html);
+  if (compterMots($('[data-corps]').text()) > 0) return [];
+  return [erreur('TEXTE-REDIGE-ABSENT', 'page éditoriale sans texte rédigé (bloc data-corps vide ou absent) : la charte (§4, point 7) demande les réponses aux questions des lecteurs ; le corps Markdown est-il vide, ou son rendu absent ?', fichier)];
 }
 
 /** Part de texte cité d'une page éditoriale (repérée par son encadré de décision) au plus PART_CITEE_MAX (charte §2.6). */
@@ -495,6 +509,7 @@ export async function controlerComposantsCommuns(dist: string): Promise<Constat[
       ...constatsTypographie(html, fichier),
       ...constatsIdentifiants(html, fichier),
       ...constatsExpressionsInterdites(html, fichier),
+      ...constatsTexteRedige(html, fichier),
       ...constatsPartCitee(html, fichier),
     );
     const lus = enTetesDePage(html, fichier);

@@ -13,7 +13,7 @@ import type { TypePage } from '../schemas/listes.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
 
 export async function getStaticPaths() {
-  const parType: ReadonlyArray<readonly [TypePage, ReadonlyArray<{ data: unknown; rendered?: { html: string } | undefined }>]> = [
+  const parType: ReadonlyArray<readonly [TypePage, ReadonlyArray<{ data: unknown; body?: string | undefined; rendered?: { html: string } | undefined }>]> = [
     ['voyant', await getCollection('voyant')],
     ['code-defaut', await getCollection('code-defaut')],
     ['panne', await getCollection('panne')],
@@ -21,7 +21,14 @@ export async function getStaticPaths() {
     ['pneus', await getCollection('pneus')],
     ['dossier', await getCollection('dossier')],
   ];
-  const entrees = parType.flatMap(([type, liste]) => liste.map((entree) => ({ type, page: entree.data as PageEditoriale, corps: entree.rendered?.html ?? '' })));
+  const entrees = parType.flatMap(([type, liste]) =>
+    liste.map((entree) => {
+      const page = entree.data as PageEditoriale;
+      // Un corps Markdown sans rendu ne doit pas donner une page sans texte : la construction échoue (revue de 6.6a).
+      if ((entree.body ?? '').trim() !== '' && entree.rendered?.html === undefined) throw new Error(`page « ${page.id} » : le texte rédigé (corps Markdown) n'a pas été rendu`);
+      return { type, page, corps: entree.rendered?.html ?? '' };
+    }),
+  );
   // Libellé court de chaque page construite : fil d'Ariane et pages liées ne mènent qu'à des pages construites.
   const libelles = new Map(entrees.map(({ page }) => [page.id, page.libelle_court]));
   const { site } = await donneesDuSite(cwd(), libelles, new Date());

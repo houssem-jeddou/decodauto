@@ -13,11 +13,11 @@ import { sectionMethodeHtml } from '../../src/lib/composants.ts';
 import { echapper, texteHtml } from '../../src/lib/html.ts';
 import { sectionMethode } from '../../src/lib/charte.ts';
 import { schemasPage, type PageEditoriale } from '../../src/schemas/pages.ts';
-import { chargerDonnees, lireFrontmatter } from './charger.ts';
+import { AUTEUR_SUPPOSE, chargerDonnees, lireFrontmatter } from './charger.ts';
 
 export const FICHIER_DEMO = 'tests/demo/voyant-huile.md';
 /** Auteur de la page de démonstration (la fiche auteur de « à propos » est écrite plus tard, étape 7 ou 8). */
-const AUTEUR_DEMO = 'houssem-jeddou';
+const AUTEUR_DEMO = AUTEUR_SUPPOSE;
 /**
  * Pages supposées construites pour la démonstration, avec leur libellé : la page mère (outil voyants) et des pages
  * liées dans le plan. Libellés provisoires : les vrais sont ceux des pages, écrits avec elles.

@@ -5,7 +5,7 @@ import { join, relative } from 'node:path';
 import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
 import { adressesDansLeTexte, indexerPlan, liensEnAttente } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
-import { DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
+import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
 import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
@@ -20,7 +20,7 @@ export interface BilanControle {
  * Fiche auteur supposée pour la construction de recette des exemples (livrable 6.6) : la page « à propos », qui porte la
  * fiche, est écrite à l'étape 7. Jamais utilisée par la construction de production.
  */
-export const AUTEUR_DES_EXEMPLES = 'houssem-jeddou';
+export const AUTEUR_DES_EXEMPLES = AUTEUR_SUPPOSE;
 
 export async function controlerSite(options: { racine: string; dist: string; aujourdhui: Date; indexable: boolean; exemples?: boolean }): Promise<BilanControle> {
   const { racine, dist, aujourdhui, indexable, exemples = false } = options;
