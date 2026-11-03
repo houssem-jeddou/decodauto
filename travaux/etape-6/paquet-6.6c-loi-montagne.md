@@ -1,5 +1,7 @@
 # Paquet de validation 6.6c : page exemple « loi montagne »
 
+**Validé par Houssem le 03/11/2026 (21 h 44)**, avec les recommandations des sept décisions (« je te donne le go pour partir avec ta recommandation, avec ce que tu recommandes pour chaque point ») : encadré (quatre lignes et le niveau tiré de chaque citation), coût et pièce `chaines-a-neige`, sources ajoutées, fiche, tableau, faits du texte ; décisions 1 à 7. Empreinte de l'encadré versée dans la page : `75abb315…` (`npm run empreinte -- exemples/pneus/loi-montagne.md`). Appliqué : demande de changement n° 10 (`travaux/etape-6/demande-changement-10.md`, 08 v8) ; liens vers la carte et les arrêtés dans le texte, contrôle R7-LIEN-EXTERNE (décision 7) ; charte §2.3, §2.7, §4 et §9 (décisions 6 et 7, références du texte) ; idées reportées notées au journal (décisions 1 et 4).
+
 Étape 6, livrable 6.6c (modèle de page pneus et obligations).
 
 - **Page** : `exemples/pneus/loi-montagne.md`, adresse du plan `/loi-montagne/`.
@@ -13,7 +15,7 @@ Ce que Houssem valide :
 3. **La fiche, le tableau et les faits du texte** (section 3).
 4. **Sept décisions** (section 4).
 
-Une fois la validation donnée, et pas avant, il restera à verser l'empreinte de l'encadré avec `npm run empreinte -- exemples/pneus/loi-montagne.md`. Dans le même commit, l'attendu R4 de cette page sera retiré du job de recette.
+L'empreinte de l'encadré a été versée après la validation (et après la demande de changement n° 10, qui retire le dépannage de l'encadré), et l'attendu R4 de cette page retiré du job de recette dans le même commit.
 
 ## 1. Encadré de décision
 

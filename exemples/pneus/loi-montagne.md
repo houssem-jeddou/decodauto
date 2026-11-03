@@ -95,6 +95,10 @@ date_publication: 2026-11-03
 date_modification: 2026-11-03
 date_revue: 2026-11-03
 prochaine_revue: 2027-05-03
+# Encadré de décision (question, quatre lignes et leurs citations, coût probable et pièces) validé par Houssem le
+# 03/11/2026 (21 h 44), avec les sources, la fiche, le tableau, les faits du texte et les sept décisions du paquet
+# (travaux/etape-6/paquet-6.6c-loi-montagne.md), demande de changement n° 10 comprise.
+validation: 75abb315d6c38686d9171d0b75a2289ecf5d643e261d1c7b5bf05ea8a6733a46
 ---
 
 ## Loi montagne : où et quand faut-il s'équiper ?
