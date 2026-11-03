@@ -108,15 +108,15 @@
   {
     "id": "ross-tech-p0087",
     "titre": "Ross-Tech Wiki — 16471/P0087/000135 : Fuel Rail/System Pressure: Too Low",
-    "editeur": "Ross-Tech LLC (outil de diagnostic VCDS)",
+    "editeur": "Ross-Tech LLC (logiciel de diagnostic VCDS des voitures du groupe Volkswagen)",
     "categorie": "secondaire",
     "url": "https://wiki.ross-tech.com/wiki/index.php/16471/P0087/000135",
     "date_consultation": "2026-11-03"
   },
   {
     "id": "bulletin-kia-ti017-p0087",
-    "titre": "Bulletin Kia TI017 — Optima 2011-2012 2.0 et 2.4 : puissance réduite, voyant moteur, code P0087 (15/11/2013)",
-    "editeur": "Kia (document publié par la NHTSA, États-Unis)",
+    "titre": "Fiche technique Kia TI017 (Tech Tip) — Optima 2011-2012 2.0 et 2.4 : puissance réduite, voyant moteur, code P0087 (15/11/2013)",
+    "editeur": "Kia Motors America (document publié par la NHTSA, États-Unis)",
     "categorie": "secondaire",
     "url": "https://static.nhtsa.gov/odi/tsbs/2013/SB-10060653-2280.pdf",
     "date_consultation": "2026-11-03"
@@ -132,7 +132,7 @@
   {
     "id": "hella-peugeot-2-2-hdi-p0087",
     "titre": "Info véhicule Hella : Peugeot 4007, 407, 807 2,2 HDi — démarrage et puissance insuffisants, voyant moteur allumé (2015)",
-    "editeur": "HELLA KGaA Hueck & Co.",
+    "editeur": "Hella (HELLA KGaA Hueck & Co., Lippstadt)",
     "categorie": "secondaire",
     "url": "https://hella.com/tibi/bi/fr/electronics/bi_fr_electronics_hgs_peugeot_4007_407_807_2_2l_hdi_motor_fehlerlampe_leuchtet.pdf",
     "date_consultation": "2026-11-03"
@@ -140,14 +140,14 @@
   {
     "id": "hella-citroen-2-2-hdi-p0087",
     "titre": "Info véhicule Hella : Citroën C5, C6, C8, C-Crosser 2,2 HDi — démarrage et puissance insuffisants, témoin défaut moteur allumé (2015)",
-    "editeur": "HELLA KGaA Hueck & Co.",
+    "editeur": "Hella (HELLA KGaA Hueck & Co., Lippstadt)",
     "categorie": "secondaire",
     "url": "https://hella.com/tibi/bi/fr/electronics/bi_fr_electronics_hgs_citroen_c5_c6_c8_crosser_2_2l_hdi_motor_fehlerlampe_leuchtet.pdf",
     "date_consultation": "2026-11-03"
   },
   {
     "id": "bosch-rampe-common-rail",
-    "titre": "Bosch Mobility — Rampe haute pression des systèmes à rampe commune (High-pressure rail for common-rail systems)",
+    "titre": "Bosch Mobility — Rampe haute pression des systèmes diesel à rampe commune (High-pressure rail for common-rail systems)",
     "editeur": "Robert Bosch GmbH",
     "categorie": "secondaire",
     "url": "https://www.bosch-mobility.com/en/solutions/fuel-supply/high-pressure-rail-for-common-rail-systems/",
