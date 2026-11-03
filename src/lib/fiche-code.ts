@@ -26,6 +26,12 @@ export const LIBELLE_CARBURANT: Readonly<Record<Carburant, string>> = {
   'essence et diesel': 'Essence et diesel',
 };
 
+/**
+ * Consigne d'un code lu sans que le voyant de l'encadré soit allumé (décision 5 du paquet 6.6b, validée par Houssem le
+ * 03/11/2026) : règle du doute de la charte (§2.4), sans verdict nouveau. Affichée avec la ligne du voyant qui s'allume.
+ */
+export const CONSIGNE_SANS_VOYANT = { intitule: 'Code lu sans voyant allumé', valeur: 'Demandez l’avis d’un professionnel' } as const;
+
 /** Ce que la fiche lit d'une page code défaut. */
 export interface PageCode {
   code: string;
@@ -62,7 +68,9 @@ export function modeleFicheCode(page: PageCode, voyants: ReadonlyMap<string, { n
       { intitule: 'Signification', valeur: page.libelle },
       { intitule: 'Portée', valeur: portee },
       { intitule: 'Moteurs concernés', valeur: LIBELLE_CARBURANT[page.carburant] },
-      ...(nomsVoyants.length > 0 ? [{ intitule: 'Voyant qui s’allume', valeur: `${nomsVoyants.join(' ; ')} : consigne en haut de page` }] : []),
+      ...(nomsVoyants.length > 0
+        ? [{ intitule: 'Voyant qui s’allume', valeur: `${nomsVoyants.join(' ; ')} : consigne en haut de page` }, { ...CONSIGNE_SANS_VOYANT }]
+        : []),
       { intitule: 'Source de la signification', valeur: nomsSources(page.libelle_sources, registre) },
     ],
   };

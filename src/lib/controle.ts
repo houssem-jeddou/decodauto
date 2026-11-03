@@ -1059,9 +1059,9 @@ export function controlerHtml(
 
 /**
  * Page code défaut (livrable 6.6b) : la fiche du code (data-fiche-code) affiche, dans l'ordre, chaque ligne du modèle
- * (signification, portée, moteurs, voyant qui s'allume, source de la signification) au texte exact ; le tableau des cas
- * par marque (data-cas-par-marque) a une rangée par précision de la page, dans l'ordre du modèle, avec sa marque, son
- * texte et ses sources ; pas de tableau sans précision ; si l'élément unique de la page est un tableau, c'est ce tableau
+ * (signification, portée, moteurs, voyant qui s'allume et consigne sans ce voyant, source de la signification) au
+ * texte exact ; le tableau des cas par marque (data-cas-par-marque) a une rangée par précision de la page, dans l'ordre
+ * du modèle, avec sa marque, son texte et ses sources ; pas de tableau sans précision ; si l'élément unique de la page est un tableau, c'est ce tableau
  * (data-element-unique="tableau"), comme le construit le modèle. Texte comparé normalisé (normaliserTexte).
  */
 export function controlerFicheCode(

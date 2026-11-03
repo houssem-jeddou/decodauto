@@ -12,7 +12,7 @@ import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { dateDesDonnees } from './date-des-donnees.ts';
 import { MODELES, corpsRedige, modeleDeLaPage, nomCompletNotice, pageCodeDefaut, pageVoyant } from '../src/lib/modeles.ts';
-import { LIBELLE_CARBURANT, LIBELLE_PORTEE, modeleFicheCode, modeleParMarque } from '../src/lib/fiche-code.ts';
+import { CONSIGNE_SANS_VOYANT, LIBELLE_CARBURANT, LIBELLE_PORTEE, modeleFicheCode, modeleParMarque } from '../src/lib/fiche-code.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
 import { DOSSIER_EXEMPLES, chargerPages, lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
 import { documentHtml } from '../scripts/lib/demo.ts';
@@ -90,12 +90,13 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.ok(!html.includes('data-tableau-notices'));
   });
 
-  test('fiche du code : signification, portée, moteurs, voyant qui s’allume (nom tiré de la base), source de la signification ; cas par marque triés par marque', async () => {
+  test('fiche du code : signification, portée, moteurs, voyant qui s’allume (nom tiré de la base), consigne sans voyant, source de la signification ; cas par marque triés par marque', async () => {
     const { page, site } = await exempleCode();
     assert.ok('code' in page);
     const fiche = modeleFicheCode(page, site.voyants, site.sources);
     assert.equal(fiche.titre, 'Le code P0087 en bref');
-    assert.deepEqual(fiche.lignes.map((l) => l.intitule), ['Signification', 'Portée', 'Moteurs concernés', 'Voyant qui s’allume', 'Source de la signification']);
+    assert.deepEqual(fiche.lignes.map((l) => l.intitule), ['Signification', 'Portée', 'Moteurs concernés', 'Voyant qui s’allume', CONSIGNE_SANS_VOYANT.intitule, 'Source de la signification']);
+    assert.equal(fiche.lignes[4]?.valeur, CONSIGNE_SANS_VOYANT.valeur);
     assert.equal(fiche.lignes[1]?.valeur, LIBELLE_PORTEE.generique);
     assert.equal(fiche.lignes[2]?.valeur, LIBELLE_CARBURANT['essence et diesel']);
     assert.ok(fiche.lignes[3]?.valeur.startsWith(site.voyants.get('moteur-orange-fixe')?.nom ?? '?'));
