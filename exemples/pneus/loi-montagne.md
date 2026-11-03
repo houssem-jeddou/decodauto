@@ -103,7 +103,7 @@ Du 1er novembre au 31 mars, l'article D314-8 du code de la route impose un équi
 
 Un panneau signale l'entrée dans une zone où l'équipement est obligatoire, avec un panonceau qui rappelle la période. Selon la Sécurité routière, cette signalisation est nécessaire pour que l'obligation puisse vous être opposée ({{cite:securite-routiere-equipements-hivernaux|rubrique « Les panneaux de signalisation »}}).
 
-Pour savoir si une commune est concernée, la Sécurité routière publie une carte ({{cite:securite-routiere-equipements-hivernaux|rubrique « Quelles sont les zones concernées ? »}}) et les arrêtés des préfets, département par département ({{cite:securite-routiere-equipements-hivernaux-departements|rubrique « arrêtés préfectoraux dans les départements concernés »}}).
+Pour savoir si une commune est concernée, la Sécurité routière publie [une carte des zones où l'équipement est obligatoire](https://www.securite-routiere.gouv.fr/chacun-son-mode-de-deplacement/dangers-de-la-route-en-voiture/equipement-de-la-voiture/nouveaux) ({{cite:securite-routiere-equipements-hivernaux|rubrique « Quelles sont les zones concernées ? »}}) et [les arrêtés des préfets, département par département](https://www.securite-routiere.gouv.fr/equipements-hivernaux-departements-et-communes) ({{cite:securite-routiere-equipements-hivernaux-departements|rubrique « arrêtés préfectoraux dans les départements concernés »}}).
 
 ## Quel équipement pour la loi montagne ?
 
@@ -155,6 +155,6 @@ Selon la Sécurité routière, tous les véhicules à quatre roues et plus : voi
 
 ## Que faire avant de partir en montagne ?
 
-1. Vérifiez si votre trajet passe par une commune soumise à l'obligation : carte et arrêtés publiés par la Sécurité routière, ou panneau à l'entrée de la zone.
+1. Vérifiez si votre trajet passe par une commune soumise à l'obligation : [arrêtés des préfets publiés par la Sécurité routière](https://www.securite-routiere.gouv.fr/equipements-hivernaux-departements-et-communes), ou panneau à l'entrée de la zone.
 2. Équipez la voiture : quatre pneus hiver (symbole alpin et M+S), ou des chaînes ou chaussettes à neige à bord, adaptées à vos roues.
 3. Gardez les chaînes ou chaussettes prêtes à servir, et montez-les là où le panneau B26 les rend obligatoires. Avec des pneus hiver, elles ne sont obligatoires que si un panonceau exige les chaînes.

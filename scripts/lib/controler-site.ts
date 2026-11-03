@@ -3,7 +3,7 @@
 import { readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
-import { adressesDansLeTexte, indexerPlan, liensEnAttente } from '../../src/lib/plan.ts';
+import { adressesDansLeTexte, indexerPlan, liensEnAttente, liensExternesDuTexte } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
 import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
@@ -74,6 +74,7 @@ export async function controlerSite(options: { racine: string; dist: string; auj
       fichier: lue.fichier,
       id: resultat.id,
       adressesTexte: adressesDansLeTexte(lue.corps ?? '', adressePlan ?? '/'),
+      liensExternes: liensExternesDuTexte(lue.corps ?? ''),
       ...(resultat.page !== undefined && { page: resultat.page }),
     });
   }

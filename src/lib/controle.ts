@@ -1380,6 +1380,8 @@ export interface PageControlee {
   id?: string | undefined;
   /** Adresses des pages du site citées dans le texte de la page (voir adressesDansLeTexte). */
   adressesTexte?: readonly string[] | undefined;
+  /** Liens vers d'autres sites écrits dans le texte de la page (voir liensExternesDuTexte). */
+  liensExternes?: readonly string[] | undefined;
 }
 
 /** Contrôles qui portent sur plusieurs pages à la fois. */
@@ -1400,6 +1402,23 @@ export function controlerEnsemble(pages: readonly PageControlee[], ctx: Contexte
     const id = p.page?.id ?? p.id;
     if (id === undefined) continue;
     constats.push(...controlerLiensDuTexte(id, p.adressesTexte ?? [], index, p.fichier));
+  }
+
+  // Un lien vers un autre site, dans le texte d'une page éditoriale, ne mène qu'à une source officielle (de première
+  // main) citée sur la page : son adresse est celle du registre (livrable 6.6c, charte §2.7).
+  for (const p of pages) {
+    if (p.page === undefined || p.type === 'socle') continue;
+    const permises = new Set(
+      p.page.sources.flatMap((id) => {
+        const source = ctx.sources.get(id);
+        return source !== undefined && SOURCES_PREMIERE_MAIN.includes(source.categorie) ? [source.url] : [];
+      }),
+    );
+    for (const lien of p.liensExternes ?? []) {
+      if (!permises.has(lien)) {
+        constats.push(erreur('R7-LIEN-EXTERNE', `lien dans le texte vers ${lien} : un lien vers un autre site ne mène qu'à une source officielle citée sur la page (adresse exacte du registre, liste « sources »)`, p.fichier));
+      }
+    }
   }
 
   // Chaque voyant de la base est rattaché à une seule page, qui doit le déclarer.

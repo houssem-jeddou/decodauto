@@ -21,7 +21,8 @@ import { AUTEUR_DES_EXEMPLES, controlerSite } from '../scripts/lib/controler-sit
 import { compterMots, constatsExpressionsInterdites, constatsIdentifiants, constatsPartCitee, constatsTexteRedige, constatsTypographie, partCitee } from '../scripts/lib/dist.ts';
 import { appliquerAttendus, lireAttendus, refusRecette } from '../scripts/lib/attendus.ts';
 import { spawnSync } from 'node:child_process';
-import { controlerPage, type Constat } from '../src/lib/controle.ts';
+import { controlerEnsemble, controlerPage, type Constat } from '../src/lib/controle.ts';
+import { liensExternesDuTexte } from '../src/lib/plan.ts';
 import { PART_CITEE_MAX } from '../src/lib/charte.ts';
 import { INSECABLE } from '../src/lib/html.ts';
 import { schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
@@ -303,6 +304,33 @@ describe('page exemple « loi montagne » (exemples/, jamais publiée)', () => {
     assert.deepEqual(constatsPartCitee(html, EXEMPLE_PNEUS), []);
     assert.ok(!html.includes('{{'), 'référence non remplacée');
     assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Quel équipement pour la loi montagne \?" tabindex="0"><table>/);
+  });
+});
+
+describe('liens vers une source officielle dans le texte (R7-LIEN-EXTERNE, livrable 6.6c, charte §2.7)', () => {
+  test('liens vers d’autres sites lus sous toutes leurs formes ; liens internes, code et images ignorés', () => {
+    const corps = [
+      'Voir [la carte](https://exemple.gouv.fr/carte) et <https://autre.fr/a>.',
+      'Adresse nue https://nue.fr/page, et [interne](/loi-montagne/) ou https://decodauto.com/voyants/.',
+      '[ref]: https://reference.fr/x',
+      '<a href="https://balise.fr/">balise</a> `https://code.fr/` ![image](https://image.fr/i.png)',
+    ].join('\n\n');
+    assert.deepEqual(liensExternesDuTexte(corps).sort(), ['https://autre.fr/a', 'https://balise.fr/', 'https://exemple.gouv.fr/carte', 'https://nue.fr/page', 'https://reference.fr/x']);
+  });
+
+  test('[CI] un lien vers un autre site ne mène qu’à une source de première main citée sur la page, à son adresse du registre', async () => {
+    const { page, contexte } = await exemplePneus();
+    const sr = contexte.sources.get('securite-routiere-equipements-hivernaux-departements');
+    assert.ok(sr !== undefined);
+    const regles = (liens: string[]) => controlerEnsemble([{ type: 'pneus', fichier: 'f', page, id: page.id, liensExternes: liens }], contexte).filter((c) => c.regle === 'R7-LIEN-EXTERNE').length;
+    assert.equal(regles([sr.url]), 0);
+    assert.equal(regles(['https://www.ewigo.com/loi-montagne/']), 1);
+    assert.equal(regles([`${sr.url}?autre`]), 1);
+    // Une source secondaire citée sur la page ne suffit pas.
+    const { page: code, contexte: ctxCode } = await exempleCode();
+    const rossTech = ctxCode.sources.get('ross-tech-p0087');
+    assert.ok(rossTech !== undefined);
+    assert.equal(controlerEnsemble([{ type: 'code-defaut', fichier: 'f', page: code, id: code.id, liensExternes: [rossTech.url] }], ctxCode).filter((c) => c.regle === 'R7-LIEN-EXTERNE').length, 1);
   });
 });
 
