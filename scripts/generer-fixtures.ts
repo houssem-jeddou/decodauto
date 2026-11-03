@@ -604,6 +604,18 @@ invalide('tableau-notices-absent', 'voyant', voyantPage(), ['TABLEAU-NOTICES-ABS
 invalide('tableau-notices-absent-panne', 'panne', panne(), ['TABLEAU-NOTICES-ABSENT'], "Page de rattachement d'un voyant (panne) qui n'affiche pas le tableau des notices de ce voyant.", { sansTableauNotices: true });
 invalide('tableau-notices-incomplet', 'voyant', voyantPage(), ['TABLEAU-NOTICES-INCOMPLET'], 'Une notice citée par la ligne de la base manque au tableau.', { noticeManquante: true });
 invalide('tableau-notices-sans-lien', 'voyant', voyantPage(), ['TABLEAU-NOTICES-LIEN'], "La ligne de l'encadré ne renvoie pas au détail par notice du voyant.", { sansLienNotices: true });
+
+// ---- Contrôles peu coûteux : dates (livrable 6.5, charte §8) -------------------------------------
+const loiMontagne = (extra: Objet = {}): Objet =>
+  avecValidation({ ...pneus(), sujet: 'loi-montagne', periode: { debut: '1er novembre', fin: '31 mars' }, zones: ['Communes de test'], ...extra });
+valide('valide-loi-montagne', 'pneus', loiMontagne(), 'Loi montagne valide : revue en octobre, prochaine dans les 6 mois (et avant le 31 octobre suivant).');
+invalide('dates-modification-avant-publication', 'fluide', { ...fluide(), date_publication: '2026-10-15', date_modification: '2026-10-10' }, ['DATES-ORDRE'], "Date de modification antérieure à la date de publication.");
+invalide('dates-futur', 'fluide', { ...fluide(), date_modification: '2026-11-15' }, ['DATES-FUTUR'], 'Date de modification dans le futur : la signature afficherait une date fausse.');
+invalide('dates-revue-delai', 'fluide', { ...fluide(), prochaine_revue: '2027-12-01' }, ['DATES-REVUE-DELAI'], 'Prochaine revue à plus de 12 mois de la dernière (charte §8).');
+invalide('dates-revue-delai-pneus', 'pneus', { ...pneus(), prochaine_revue: '2027-05-01' }, ['DATES-REVUE-DELAI'], 'Page pneus : prochaine revue à plus de 6 mois (charte §8).');
+invalide('dates-revue-loi-montagne', 'pneus', loiMontagne({ date_revue: '2026-06-01', prochaine_revue: '2026-11-15' }), ['DATES-REVUE-DELAI'], 'Loi montagne revue en juin : la suivante tombe avant le 1er novembre, début de la saison (charte §8).');
+invalide('dates-journal-hors-periode', 'dossier', { ...dossier(), journal_modifications: [{ date: '2026-09-15', resume: 'Entrée antérieure à la publication.' }] }, ['DATES-ORDRE'], "Entrée du journal d'un dossier hors de la période de la page.");
+invalide('dates-socle-futur', 'socle', { ...socle(), date_modification: '2026-12-01' }, ['DATES-FUTUR'], 'Page du socle datée dans le futur.');
 invalide('composants-source-manquante', 'pneus', pneus(), ['SOURCES-ABSENTE'], 'Une source citée par la page manque dans la section « Sources ».', { sourceManquante: true });
 invalide(
   'r4-pieces-modifiees',

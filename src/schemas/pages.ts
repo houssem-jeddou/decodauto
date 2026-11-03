@@ -14,7 +14,7 @@ import {
   VERDICTS,
   type TypePage,
 } from './listes.ts';
-import { citationSchema, dateIso, hashHex, identifiant, texte } from './briques.ts';
+import { citationSchema, dateIso, hashHex, identifiant, plusMois, texte } from './briques.ts';
 import { TRANCHES_COUT } from './cout.ts';
 
 // ---------------------------------------------------------------------------------------------
@@ -324,8 +324,7 @@ export const dossierPageSchema = z
   .superRefine((page, ctx) => {
     reglesCommunes(page, ctx);
     // Revue trimestrielle (docs/02 : dossier PureTech à mise à jour régulière ; docs/04 : revue trimestrielle).
-    const limite = new Date(page.date_revue);
-    limite.setUTCMonth(limite.getUTCMonth() + 3);
+    const limite = plusMois(page.date_revue, 3);
     if (page.prochaine_revue.getTime() > limite.getTime()) {
       probleme(ctx, 'R7-FORMAT', ['prochaine_revue'], 'un dossier est revu au moins tous les trois mois');
     }

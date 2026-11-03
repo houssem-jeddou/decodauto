@@ -3,6 +3,7 @@
 Étape 6, livrable 6.2. Proposée le 02/11/2026 ; **validée par Houssem le 02/11/2026 (20 h 19)**, avec toutes les recommandations de la section 10. Empreinte des textes affichés : `data/charte-validation.json`.
 Précisions validées avec le livrable 6.3 (02/11/2026, 22 h 28) : adresse de signalement (§5.3), pictogramme d'un voyant (§3.6).
 Précision validée avec le livrable 6.4 (03/11/2026, 13 h 48) : article L122-5 relu sur Légifrance, conditions de la courte citation (§2.6).
+Précisions validées avec le livrable 6.5 (03/11/2026, 15 h 14) : revue de la loi montagne avant chaque 1er novembre (§8) ; « nos équipes » et « nos rédactions » parmi les expressions interdites (§2.7).
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -60,7 +61,7 @@ Précision validée avec le livrable 6.4 (03/11/2026, 13 h 48) : article L122-5 
 - **Photos.** Une photo présentée comme réelle est une vraie photo, avec son auteur ou sa source. Jamais une image générée par une IA présentée comme une photo réelle.
 
 ### 2.7 Ce qu'on n'écrit jamais
-- Une expertise, une équipe, une garantie ou une certification qu'on n'a pas : « nos experts », « nos mécaniciens », « notre équipe », « testé par nos soins », « résultat garanti », « contenu certifié ». Restent permis les mots qui désignent autre chose : la garantie légale ou constructeur, l'extension de garantie, l'expert de l'assurance, le modèle Peugeot Expert. La liste est dans le code (`EXPRESSIONS_INTERDITES`, `src/lib/charte.ts`), testée sur les textes affichés de la charte, avec ses cas permis ; sur les pages, hors citations, contrôle prévu en 6.5.
+- Une expertise, une équipe, une garantie ou une certification qu'on n'a pas : « nos experts », « nos mécaniciens », « notre équipe », « nos équipes », « testé par nos soins », « résultat garanti », « contenu certifié ». Restent permis les mots qui désignent autre chose : la garantie légale ou constructeur, l'extension de garantie, l'expert de l'assurance, le modèle Peugeot Expert. La liste est dans le code (`EXPRESSIONS_INTERDITES`, `src/lib/charte.ts`), testée sur les textes affichés de la charte, avec ses cas permis ; sur les pages, hors citations, contrôlée depuis 6.5 (EXPRESSION-INTERDITE).
 - Une promesse de résultat (« ça va régler le problème »), un « toujours » ou un « jamais » sans source.
 - Un dénigrement de marque, de garage ou de concurrent.
 - Un lien écrit dans le texte vers une page qui n'est pas liée dans le plan du site (contrôle R7-LIEN-HORS-PLAN).
@@ -85,7 +86,7 @@ Précision validée avec le livrable 6.4 (03/11/2026, 13 h 48) : article L122-5 
 
 ### 3.4 Titres et description
 - Le title ou le H1 contient la requête principale du plan (contrôle R7-REQUETE-ABSENTE) ; le H1 est la question ou le sujet du lecteur, pas un slogan.
-- Title, H1 et description ne sont jamais repris d'une autre page (contrôle prévu en 6.5).
+- Title, H1 et description ne sont jamais repris d'une autre page, et le title d'une page n'est pas le H1 d'une autre ; title et description sont toujours présents (contrôlés depuis 6.5 : TITLE-, H1-, DESCRIPTION-, TITLE-H1-DOUBLON, TITLE-ABSENT, DESCRIPTION-ABSENTE).
 - La description dit la réponse en une phrase ; elle ne promet rien que la page ne donne pas.
 
 ### 3.5 Longueur
@@ -280,7 +281,7 @@ Les marques citées appartiennent à leurs propriétaires ; le site n’est lié
 | Montants fixés par un texte | Délai propre à chaque montant, fixé dans `data/couts.json` (contrôlé : COUT-A-REVERIFIER) | Un texte peut changer en cours d'année |
 | Fourchettes en euros | Délai de `src/schemas/cout.ts` (contrôlé : COUT-FOURCHETTE-A-REVOIR) | Prix qui évoluent |
 
-Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5). Le délai maximal par type serait contrôlé avec les contrôles de dates (6.5).
+Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5). Le délai maximal par type est contrôlé depuis 6.5 (DATES-REVUE-DELAI). Loi montagne : une revue faite à partir du 1er septembre vaut pour la saison qui commence ; une revue faite avant le 1er septembre appelle la suivante au plus tard le 31 octobre de la même année (précision validée le 03/11/2026).
 
 ## 9. Ce que la machine contrôle, et ce qui reste à la recette
 - **Contrôlé aujourd'hui** (catalogue `CONTROLES.md`) :
@@ -290,13 +291,13 @@ Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5
   - coût (COUT-*) : COUT-CITATION-* et COUT-GROUPES prouvent que chaque tranche de l'échelle repose sur des citations de la base validée, donc sur des sources du registre ;
   - liens du plan, ancres (`npm run liens`), page construite ;
   - textes affichés de la charte (`tests/charte.test.ts`) : à jour, calculés depuis le registre, sans expression interdite ; leur empreinte (CHARTE-VALIDATION-ABSENTE, alerte, puis CHARTE-EMPREINTE, erreur) bloque tout changement de sens après la validation de Houssem.
-- **À ajouter en 6.3** (composants) :
+- **Ajouté en 6.3** (composants, validé le 02/11) :
   - mention en tête et lien « Signaler une erreur » sur toutes les pages, socle compris ; signature et ligne de transparence sur chaque page éditoriale ;
   - mention en tête visible : ni masquée ni `aria-hidden` (article 50(5) : information accessible), comme R9-ENCADRE-MASQUE ;
   - toute source citée (lignes de la base, lignes saisies, coût, texte de référence) figure dans la section « Sources » de la page ;
   - nombre de notices affiché pour chaque ligne de l'encadré ;
   - espaces insécables et apostrophe posés par le gabarit (3.3).
-- **À ajouter en 6.5** (contrôles peu coûteux) : title, H1 et description uniques ; cohérence des dates ; expressions interdites dans le texte des pages, hors citations.
+- **Ajouté en 6.5** (contrôles peu coûteux, validé le 03/11) : title, H1 et description uniques et présents ; dates cohérentes (jamais dans le futur, modification après publication, délai de revue du type) ; expressions interdites dans le texte des pages, hors citations. Limite laissée à la recette : la source d'un texte entre guillemets n'est pas vérifiable par la machine.
 - **Recette** (passée par Claude page par page, puis relue par l'agent indépendant avec le lot) :
   - ton et vocabulaire (section 3) ;
   - aucune phrase sans source ni utilité (1 et 2.2) ;

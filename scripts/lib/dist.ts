@@ -4,11 +4,13 @@ import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
-import { LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE } from '../../src/lib/charte.ts';
+import { EXPRESSIONS_INTERDITES, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE } from '../../src/lib/charte.ts';
+import { normaliserRecherche } from '../../src/lib/texte.ts';
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
 import { lienSignalement } from '../../src/lib/composants.ts';
 import { ELEMENTS_SANS_TYPOGRAPHIE } from '../../src/lib/html.ts';
+import { CLASSE_CITATION_NOTICE } from '../../src/lib/tableau-notices.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
 
@@ -255,14 +257,177 @@ export function constatsIdentifiants(html: string, fichier: string): Constat[] {
   return doublons.length > 0 ? [erreur('ID-DOUBLON', `identifiant(s) en double dans la page : ${doublons.join(', ')}`, fichier)] : [];
 }
 
-/** Mention en tête, lien de signalement, typographie et identifiants, sur toutes les pages du site construit. */
+// ---- Contrôles peu coûteux (étape 6, livrable 6.5) -----------------------------------------------
+
+/** Ce que Google affiche d'une page : son title, son H1 et sa meta description (texte brut, sans retouche). */
+export interface EnTetesDePage {
+  fichier: string;
+  title: string;
+  h1: string;
+  description: string;
+}
+
+export function enTetesDePage(html: string, fichier: string): EnTetesDePage {
+  const $ = cheerio.load(html);
+  return {
+    fichier,
+    title: $('head > title').first().text().trim(),
+    h1: $('h1').first().text().trim(),
+    description: ($('meta[name="description"]').first().attr('content') ?? '').trim(),
+  };
+}
+
+const CHAMPS_UNIQUES = [
+  { champ: 'title', regle: 'TITLE-DOUBLON', nom: 'le même title' },
+  { champ: 'h1', regle: 'H1-DOUBLON', nom: 'le même H1' },
+  { champ: 'description', regle: 'DESCRIPTION-DOUBLON', nom: 'la même meta description' },
+] as const;
+
+/**
+ * Title, H1 et meta description uniques sur tout le site construit (charte §3.4) : deux pages qui affichent le même
+ * texte, à la casse, aux accents et à la ponctuation près (normaliserRecherche), se concurrencent dans Google et
+ * trompent le lecteur. Une valeur vide n'est pas comparée (son absence : TITLE-ABSENT, DESCRIPTION-ABSENTE).
+ */
+export function constatsDoublons(pages: readonly EnTetesDePage[]): Constat[] {
+  const constats: Constat[] = [];
+  for (const { champ, regle, nom } of CHAMPS_UNIQUES) {
+    const groupes = new Map<string, EnTetesDePage[]>();
+    for (const page of pages) {
+      const cle = normaliserRecherche(page[champ]);
+      if (cle === '') continue;
+      groupes.set(cle, [...(groupes.get(cle) ?? []), page]);
+    }
+    for (const groupe of groupes.values()) {
+      if (groupe.length < 2) continue;
+      const [premiere] = groupe;
+      constats.push(erreur(regle, `${groupe.length} pages ont ${nom} « ${premiere?.[champ] ?? ''} » : ${groupe.map((p) => p.fichier).join(', ')}`, premiere?.fichier));
+    }
+  }
+  // Title d'une page repris comme H1 d'une autre : deux pages sur la même requête (signalé une fois par paire, sauf si
+  // les deux titles ou les deux H1 sont déjà en double).
+  const n = (texte: string): string => normaliserRecherche(texte);
+  for (const a of pages) {
+    for (const b of pages) {
+      if (a === b || n(a.title) === '' || n(a.title) !== n(b.h1) || n(a.title) === n(b.title) || n(a.h1) === n(b.h1)) continue;
+      constats.push(erreur('TITLE-H1-DOUBLON', `le title de ${a.fichier} (« ${a.title} ») est le H1 de ${b.fichier} : deux pages sur la même requête`, a.fichier));
+    }
+  }
+  return constats;
+}
+
+/**
+ * Citations exclues du contrôle des expressions interdites (charte §2.6 : une citation donne son auteur et sa source,
+ * citée sur la page) : extraits du tableau des notices, et `blockquote` ou `q` dont l'attribut `data-source-id` désigne
+ * une source listée dans la section « Sources » de la page. Un `blockquote` sans source affichée (encadré « À retenir »,
+ * par exemple) reste du texte du site. Le texte entre guillemets « … » du corps est lui aussi traité comme une citation :
+ * sa source n'est pas vérifiable par la machine (limite laissée à la recette, charte §9).
+ */
+export const CITATIONS_TOUJOURS = [`.${CLASSE_CITATION_NOTICE}`] as const;
+export const CITATIONS_AVEC_SOURCE = ['blockquote[data-source-id]', 'q[data-source-id]'] as const;
+
+/** Éléments de bloc : leur texte ne se lit pas d'un seul tenant avec le bloc voisin (guillemets, expressions). */
+const BLOCS = new Set(['p', 'li', 'dt', 'dd', 'td', 'th', 'caption', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'section', 'article', 'aside', 'header', 'footer', 'nav', 'main', 'blockquote', 'figure', 'figcaption', 'ul', 'ol', 'table', 'tr', 'details', 'summary', 'br']);
+/** Séparateur de blocs : un caractère qui n'apparaît jamais dans le texte (les blancs du texte deviennent des espaces). */
+const SEPARATEUR = '\u2029';
+
+/** Retire le texte entre guillemets « … » d'un même bloc, en commençant par les plus intérieurs (citation dans une citation). */
+function sansGuillemets(texte: string): string {
+  let avant = '';
+  let apres = texte;
+  for (let i = 0; i < 10 && apres !== avant; i += 1) {
+    avant = apres;
+    apres = apres.replace(/«[^«»\u2029]{0,800}»/g, ' ');
+  }
+  return apres;
+}
+
+/**
+ * Expressions interdites (charte §2.7 et §3.1 : expertise, équipe, garantie ou certification inventées, « nous ») dans
+ * le texte affiché de toute page construite, hors citations, et dans son title, sa meta description, ses textes
+ * alternatifs (`alt`), libellés (`aria-label`) et infobulles (`title`), lus chacun à part et sans exclusion.
+ * Liste et cas permis : EXPRESSIONS_INTERDITES (src/lib/charte.ts).
+ */
+export function constatsExpressionsInterdites(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const sourcesAffichees = new Set($('[data-sources] [data-source-id]').toArray().map((el) => $(el).attr('data-source-id') ?? ''));
+  const estCitation = (element: { is(selecteur: string): boolean; attr(nom: string): string | undefined }): boolean =>
+    element.is(CITATIONS_TOUJOURS.join(', ')) || (element.is(CITATIONS_AVEC_SOURCE.join(', ')) && sourcesAffichees.has(element.attr('data-source-id') ?? ''));
+  const ignores = ELEMENTS_SANS_TYPOGRAPHIE.join(', ');
+  const blanc = (texte: string): string => texte.replace(/\s+/g, ' ');
+  // Texte du corps dans l'ordre du document (une expression coupée par une balise en ligne reste lisible), blocs séparés,
+  // sans descendre dans le code, les dessins ni les citations ; attributs lus à part. Les éléments script et style ne
+  // sont pas de type « tag » : ignorés.
+  const corps: string[] = [];
+  const attributs: string[] = [];
+  const parcourir = (noeuds: readonly { type: string }[]): void => {
+    for (const noeud of noeuds) {
+      if (noeud.type === 'text') corps.push(blanc((noeud as unknown as { data: string }).data));
+      else if (noeud.type === 'tag') {
+        const element = $(noeud as never);
+        if (element.is(ignores)) continue;
+        for (const attribut of ['alt', 'aria-label', 'title']) {
+          const valeur = element.attr(attribut);
+          if (valeur !== undefined && valeur.trim() !== '') attributs.push(blanc(valeur));
+        }
+        if (estCitation(element)) continue;
+        const bloc = BLOCS.has(((noeud as unknown as { name?: string }).name ?? '').toLowerCase());
+        if (bloc) corps.push(SEPARATEUR);
+        parcourir(element.contents().toArray());
+        if (bloc) corps.push(SEPARATEUR);
+      }
+    }
+  };
+  parcourir($('body').contents().toArray());
+  const textes = [
+    blanc($('head > title').first().text()),
+    blanc($('meta[name="description"]').first().attr('content') ?? ''),
+    ...attributs,
+    sansGuillemets(corps.join('').replace(/ {2,}/g, ' ')),
+  ];
+  return EXPRESSIONS_INTERDITES.flatMap((expression) => {
+    for (const texte of textes) {
+      const trouve = expression.exec(texte);
+      if (trouve === null) continue;
+      const extrait = texte.slice(Math.max(0, trouve.index - 30), trouve.index + trouve[0].length + 30).replace(/[\s\u2029]+/g, ' ').trim();
+      return [erreur('EXPRESSION-INTERDITE', `expression interdite par la charte (§2.7, §3.1) : « ${trouve[0]} » dans « … ${extrait} … » ; une citation se met entre guillemets « … », ou dans un blockquote ou un q dont le data-source-id est listé dans « Sources »`, fichier)];
+    }
+    return [];
+  });
+}
+
+/**
+ * Title et meta description présents sur toutes les pages du site construit (accueil, 404, socle et pages
+ * éditoriales ; charte §3.4) : sans eux, Google les compose lui-même et le doublon n'est plus contrôlable.
+ */
+export function constatsEnTetesPresents(enTetes: EnTetesDePage): Constat[] {
+  const constats: Constat[] = [];
+  if (enTetes.title === '') constats.push(erreur('TITLE-ABSENT', 'la page construite n\'a pas de title', enTetes.fichier));
+  if (enTetes.description === '') constats.push(erreur('DESCRIPTION-ABSENTE', 'la page construite n\'a pas de meta description (charte §3.4 : la description dit la réponse en une phrase)', enTetes.fichier));
+  return constats;
+}
+
+/**
+ * Sur toutes les pages du site construit : mention en tête, lien de signalement, typographie et identifiants
+ * (livrable 6.3) ; expressions interdites, title et meta description présents, title, H1 et meta description uniques
+ * (livrable 6.5).
+ */
 export async function controlerComposantsCommuns(dist: string): Promise<Constat[]> {
   const constats: Constat[] = [];
+  const enTetes: EnTetesDePage[] = [];
   for (const chemin of await listerFichiers(dist, '.html')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
     const html = await readFile(chemin, 'utf8');
-    constats.push(...constatsMentionEtSignalement(html, fichier, adresseDepuisFichier(fichier)), ...constatsTypographie(html, fichier), ...constatsIdentifiants(html, fichier));
+    constats.push(
+      ...constatsMentionEtSignalement(html, fichier, adresseDepuisFichier(fichier)),
+      ...constatsTypographie(html, fichier),
+      ...constatsIdentifiants(html, fichier),
+      ...constatsExpressionsInterdites(html, fichier),
+    );
+    const lus = enTetesDePage(html, fichier);
+    constats.push(...constatsEnTetesPresents(lus));
+    enTetes.push(lus);
   }
+  constats.push(...constatsDoublons(enTetes));
   return constats;
 }
 

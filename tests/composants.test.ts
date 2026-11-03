@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { dateDesDonnees } from './date-des-donnees.ts';
 import { readFile } from 'node:fs/promises';
 import { INSECABLE, echapper, texteHtml, typographier, typographierHtml } from '../src/lib/html.ts';
 import {
@@ -41,7 +42,8 @@ import { construireDemo } from '../scripts/lib/demo.ts';
 import { constatsIdentifiants, constatsMaillage, constatsMentionEtSignalement, constatsTypographie } from '../scripts/lib/dist.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-const AUJOURDHUI = new Date('2026-11-02T00:00:00Z');
+// Données réelles : la date du contrôle est la plus récente des données (tests/date-des-donnees.ts, DATES-FUTUR).
+const AUJOURDHUI = await dateDesDonnees(racine);
 /** Texte d'un fragment HTML, sans balises ni entités (assez pour ces tests). */
 const texte = (html: string): string =>
   html

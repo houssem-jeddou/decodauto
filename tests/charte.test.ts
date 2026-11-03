@@ -83,7 +83,7 @@ describe('charte éditoriale (étape 6.2)', async () => {
     const textes = [MENTION_EN_TETE, LIGNE_TRANSPARENCE.texte, LIGNE_TRANSPARENCE.libelleLien, texteMethode];
     for (const expression of EXPRESSIONS_INTERDITES) for (const texte of textes) assert.doesNotMatch(texte, expression);
     // La liste attrape bien ce qu'elle doit attraper.
-    for (const exemple of ['nos experts', 'Notre équipe', 'nos mécaniciens', 'testé par nos soins', 'résultat garanti', 'efficacité garantie à 100 %', 'contenu certifié', 'nous vérifions']) {
+    for (const exemple of ['nos experts', 'Notre équipe', 'nos équipes', 'nos rédactions', 'nos mécaniciens', 'testé par nos soins', 'résultat garanti', 'efficacité garantie à 100 %', 'contenu certifié', 'nous vérifions']) {
       assert.ok(EXPRESSIONS_INTERDITES.some((e) => e.test(exemple)), exemple);
     }
     for (const permis of [

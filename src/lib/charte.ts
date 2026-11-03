@@ -8,6 +8,7 @@ import {
   URGENCES,
   VERDICTS,
   type CategorieSource,
+  type TypePage,
 } from '../schemas/listes.ts';
 
 // ---------------------------------------------------------------------------------------------
@@ -86,7 +87,7 @@ export const EXPRESSIONS_INTERDITES: readonly RegExp[] = [
   // Une expertise ou une équipe qui n'existent pas. « Peugeot Expert » (un modèle), « l’expert de votre assurance »,
   // « une expertise » restent permis.
   mot('experts? (?:du site|de decodauto|maison)'),
-  mot('(?:notre|nos) (?:équipe|rédaction|experts?|mécaniciens?|spécialistes?)'),
+  mot('(?:notre|nos) (?:équipes?|rédactions?|experts?|mécaniciens?|spécialistes?)'),
   mot('mécaniciens? (?:du site|de l’équipe|de l\'équipe|maison)'),
   mot('testée?s? par (?:nos|notre|nous|un mécanicien|des mécaniciens)'),
   // Une garantie ou une certification promises par le site. « La garantie légale », « l’extension de garantie »,
@@ -154,6 +155,21 @@ export interface RegleMarquesMethode {
   marquesMin: number;
   groupesMin: number;
 }
+
+/**
+ * Délai maximal entre deux revues d'une page, par type (charte §8), en mois : contrôle DATES-REVUE-DELAI (6.5). Le
+ * dossier (3 mois) est déjà contrôlé par son schéma (R7-FORMAT) ; la loi montagne a en plus sa revue avant chaque
+ * 1er novembre (REVUE_LOI_MONTAGNE).
+ */
+export const DELAI_REVUE_MOIS = { voyant: 12, 'code-defaut': 12, panne: 12, fluide: 12, pneus: 6 } as const satisfies Partial<Record<TypePage, number>>;
+
+/**
+ * Loi montagne (charte §8) : une revue avant chaque 1er novembre, début de la saison d'hiver. Lecture retenue : une
+ * revue faite à partir du 1er septembre vaut pour la saison qui commence ; la prochaine tombe au plus tard le 31 octobre
+ * de l'année suivante. Une revue faite avant le 1er septembre appelle la suivante au plus tard le 31 octobre de la même
+ * année. Le délai de 6 mois des pages pneus s'applique aussi.
+ */
+export const REVUE_LOI_MONTAGNE = { moisDebutFenetre: 9, jourLimite: 31, moisLimite: 10 } as const;
 
 /** La notice du lecteur fait foi pour son véhicule (section « Méthode », repris par le tableau des notices, 6.4). */
 export const NOTICE_FAIT_FOI = 'La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.';

@@ -86,6 +86,9 @@ export function modeleTableauNotices(
   });
 }
 
+/** Classe de l'extrait cité d'une notice : citation exclue du contrôle des expressions interdites (6.5). */
+export const CLASSE_CITATION_NOTICE = 'notices-citation';
+
 /** Libellé de la consigne retenue (le niveau de l'encadré), à côté du niveau de chaque consigne qui le donne en entier. */
 export const LIBELLE_CONSIGNE_RETENUE = 'Consigne retenue';
 
@@ -118,7 +121,7 @@ function rangeeHtml(r: RangeeNotice): string {
   return [
     `<tr role="row" data-source-id="${attributHtml(r.source)}" data-verdict="${attributHtml(r.verdict)}" data-urgence="${attributHtml(r.urgence)}" data-gravite="${graviteDuVerdict(r.verdict)}"${r.retenue ? ' data-retenue' : ''}>`,
     `<th scope="row" role="rowheader">${nom}${edition}</th>`,
-    `<td role="cell"><p class="notices-citation">${citation(r.extrait)}</p><p class="notices-page">${texteHtml(r.emplacement)}</p></td>`,
+    `<td role="cell"><p class="${CLASSE_CITATION_NOTICE}">${citation(r.extrait)}</p><p class="notices-page">${texteHtml(r.emplacement)}</p></td>`,
     `<td role="cell" class="notices-niveau">${iconeGravite(r.verdict)}<span><strong>${texteHtml(GRILLE_VERDICTS[r.verdict].libelle)}</strong> · ${texteHtml(GRILLE_URGENCES[r.urgence].libelle)}${retenue}</span></td>`,
     '</tr>',
   ].join('');

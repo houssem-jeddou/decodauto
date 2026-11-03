@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { after, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { dateDesDonnees } from './date-des-donnees.ts';
 import {
   codeSortie,
   construireContexte,
@@ -930,7 +931,8 @@ describe('coût probable : calcul, données et grille (demande de changement n°
 
   test('données réelles : data/couts.json et la grille des coûts passent les contrôles (citations de la base, deux groupes)', async () => {
     const reelles = await chargerDonnees(racine);
-    const { contexte, constats } = construireContexte(reelles, AUJOURDHUI);
+    // Données réelles : la plus récente de leurs dates (DATES-FUTUR sur le registre).
+    const { contexte, constats } = construireContexte(reelles, await dateDesDonnees(racine));
     assert.deepEqual(constats.filter((c) => c.gravite === 'erreur'), []);
     assert.ok(contexte.couts.pieces.size > 0);
     for (const montant of contexte.couts.montants.values()) {
