@@ -10,9 +10,9 @@ export async function dateDesDonnees(racine: string, fichiers: readonly string[]
   let plusRecente = '0000-00-00';
   for (const fichier of fichiers) {
     const texte = await readFile(join(racine, fichier), 'utf8');
-    // Dates de consultation, de vérification, de relevé, d'entrée en vigueur, de publication, de modification et de
-    // revue ; jamais la date de la prochaine revue, qui est dans le futur par nature.
-    for (const [, cle, date] of texte.matchAll(/"?(date_consultation|verifie_le|releve_le|en_vigueur_le|date_publication|date_modification|date_revue)"?\s*:\s*"?(\d{4}-\d{2}-\d{2})/g)) {
+    // Dates de consultation, de vérification, de relevé, de publication, de modification et de revue ; jamais la date
+    // de la prochaine revue ni celle d'entrée en vigueur d'un texte, qui peuvent être dans le futur à bon droit.
+    for (const [, cle, date] of texte.matchAll(/"?(date_consultation|verifie_le|releve_le|date_publication|date_modification|date_revue)"?\s*:\s*"?(\d{4}-\d{2}-\d{2})/g)) {
       if (cle !== undefined && date !== undefined && date > plusRecente) plusRecente = date;
     }
   }

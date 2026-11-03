@@ -303,65 +303,95 @@ export function constatsDoublons(pages: readonly EnTetesDePage[]): Constat[] {
       constats.push(erreur(regle, `${groupe.length} pages ont ${nom} « ${premiere?.[champ] ?? ''} » : ${groupe.map((p) => p.fichier).join(', ')}`, premiere?.fichier));
     }
   }
+  // Title d'une page repris comme H1 d'une autre : deux pages sur la même requête (signalé une fois par paire, sauf si
+  // les deux titles ou les deux H1 sont déjà en double).
+  const n = (texte: string): string => normaliserRecherche(texte);
+  for (const a of pages) {
+    for (const b of pages) {
+      if (a === b || n(a.title) === '' || n(a.title) !== n(b.h1) || n(a.title) === n(b.title) || n(a.h1) === n(b.h1)) continue;
+      constats.push(erreur('TITLE-H1-DOUBLON', `le title de ${a.fichier} (« ${a.title} ») est le H1 de ${b.fichier} : deux pages sur la même requête`, a.fichier));
+    }
+  }
   return constats;
 }
 
 /**
- * Citations exclues du contrôle des expressions interdites (charte §2.6 : une citation donne son auteur et sa source) :
- * extraits du tableau des notices, et `blockquote` ou `q` qui portent leur source (attribut `data-source-id` du registre,
- * ou `cite`). Un `blockquote` sans source (encadré « À retenir », par exemple) reste du texte du site. Le texte entre
- * guillemets « … » est lui aussi traité comme une citation.
+ * Citations exclues du contrôle des expressions interdites (charte §2.6 : une citation donne son auteur et sa source,
+ * citée sur la page) : extraits du tableau des notices, et `blockquote` ou `q` dont l'attribut `data-source-id` désigne
+ * une source listée dans la section « Sources » de la page. Un `blockquote` sans source affichée (encadré « À retenir »,
+ * par exemple) reste du texte du site. Le texte entre guillemets « … » du corps est lui aussi traité comme une citation :
+ * sa source n'est pas vérifiable par la machine (limite laissée à la recette, charte §9).
  */
-export const CITATIONS = [`.${CLASSE_CITATION_NOTICE}`, 'blockquote[data-source-id]', 'blockquote[cite]', 'q[data-source-id]', 'q[cite]'] as const;
+export const CITATIONS_TOUJOURS = [`.${CLASSE_CITATION_NOTICE}`] as const;
+export const CITATIONS_AVEC_SOURCE = ['blockquote[data-source-id]', 'q[data-source-id]'] as const;
 
 /** Éléments de bloc : leur texte ne se lit pas d'un seul tenant avec le bloc voisin (guillemets, expressions). */
 const BLOCS = new Set(['p', 'li', 'dt', 'dd', 'td', 'th', 'caption', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'section', 'article', 'aside', 'header', 'footer', 'nav', 'main', 'blockquote', 'figure', 'figcaption', 'ul', 'ol', 'table', 'tr', 'details', 'summary', 'br']);
+/** Séparateur de blocs : un caractère qui n'apparaît jamais dans le texte (les blancs du texte deviennent des espaces). */
+const SEPARATEUR = '\u2029';
 
-/** Retire le texte entre guillemets « … », d'un même bloc, en commençant par les plus intérieurs (citation dans une citation). */
+/** Retire le texte entre guillemets « … » d'un même bloc, en commençant par les plus intérieurs (citation dans une citation). */
 function sansGuillemets(texte: string): string {
   let avant = '';
   let apres = texte;
   for (let i = 0; i < 10 && apres !== avant; i += 1) {
     avant = apres;
-    apres = apres.replace(/«[^«»\n]{0,800}»/g, ' ');
+    apres = apres.replace(/«[^«»\u2029]{0,800}»/g, ' ');
   }
   return apres;
 }
 
 /**
  * Expressions interdites (charte §2.7 et §3.1 : expertise, équipe, garantie ou certification inventées, « nous ») dans
- * le texte affiché de toute page construite, title, meta description, textes alternatifs (`alt`) et libellés
- * (`aria-label`) compris, hors citations. Liste et cas permis : EXPRESSIONS_INTERDITES (src/lib/charte.ts).
+ * le texte affiché de toute page construite, hors citations, et dans son title, sa meta description, ses textes
+ * alternatifs (`alt`), libellés (`aria-label`) et infobulles (`title`), lus chacun à part et sans exclusion.
+ * Liste et cas permis : EXPRESSIONS_INTERDITES (src/lib/charte.ts).
  */
 export function constatsExpressionsInterdites(html: string, fichier: string): Constat[] {
   const $ = cheerio.load(html);
-  const exclus = [...ELEMENTS_SANS_TYPOGRAPHIE, ...CITATIONS].join(', ');
-  // Textes dans l'ordre du document (une expression coupée par une balise en ligne reste lisible), un bloc par ligne,
-  // sans descendre dans les éléments exclus. Les éléments script et style ne sont pas de type « tag » : ignorés.
-  const morceaux: string[] = [$('head > title').first().text(), '\n', $('meta[name="description"]').first().attr('content') ?? '', '\n'];
+  const sourcesAffichees = new Set($('[data-sources] [data-source-id]').toArray().map((el) => $(el).attr('data-source-id') ?? ''));
+  const estCitation = (element: { is(selecteur: string): boolean; attr(nom: string): string | undefined }): boolean =>
+    element.is(CITATIONS_TOUJOURS.join(', ')) || (element.is(CITATIONS_AVEC_SOURCE.join(', ')) && sourcesAffichees.has(element.attr('data-source-id') ?? ''));
+  const ignores = ELEMENTS_SANS_TYPOGRAPHIE.join(', ');
+  const blanc = (texte: string): string => texte.replace(/\s+/g, ' ');
+  // Texte du corps dans l'ordre du document (une expression coupée par une balise en ligne reste lisible), blocs séparés,
+  // sans descendre dans le code, les dessins ni les citations ; attributs lus à part. Les éléments script et style ne
+  // sont pas de type « tag » : ignorés.
+  const corps: string[] = [];
+  const attributs: string[] = [];
   const parcourir = (noeuds: readonly { type: string }[]): void => {
     for (const noeud of noeuds) {
-      if (noeud.type === 'text') morceaux.push((noeud as unknown as { data: string }).data);
-      else if (noeud.type === 'tag' && !$(noeud as never).is(exclus)) {
+      if (noeud.type === 'text') corps.push(blanc((noeud as unknown as { data: string }).data));
+      else if (noeud.type === 'tag') {
         const element = $(noeud as never);
-        const bloc = BLOCS.has(((noeud as unknown as { name?: string }).name ?? '').toLowerCase());
-        if (bloc) morceaux.push('\n');
+        if (element.is(ignores)) continue;
         for (const attribut of ['alt', 'aria-label', 'title']) {
           const valeur = element.attr(attribut);
-          if (valeur !== undefined && valeur.trim() !== '') morceaux.push('\n', valeur, '\n');
+          if (valeur !== undefined && valeur.trim() !== '') attributs.push(blanc(valeur));
         }
+        if (estCitation(element)) continue;
+        const bloc = BLOCS.has(((noeud as unknown as { name?: string }).name ?? '').toLowerCase());
+        if (bloc) corps.push(SEPARATEUR);
         parcourir(element.contents().toArray());
-        if (bloc) morceaux.push('\n');
+        if (bloc) corps.push(SEPARATEUR);
       }
     }
   };
   parcourir($('body').contents().toArray());
-  const texte = sansGuillemets(morceaux.join(' ').replace(/[^\S\n]+/g, ' '));
+  const textes = [
+    blanc($('head > title').first().text()),
+    blanc($('meta[name="description"]').first().attr('content') ?? ''),
+    ...attributs,
+    sansGuillemets(corps.join('').replace(/ {2,}/g, ' ')),
+  ];
   return EXPRESSIONS_INTERDITES.flatMap((expression) => {
-    const trouve = expression.exec(texte);
-    if (trouve === null) return [];
-    const extrait = texte.slice(Math.max(0, trouve.index - 30), trouve.index + trouve[0].length + 30).replace(/\s+/g, ' ').trim();
-    return [erreur('EXPRESSION-INTERDITE', `expression interdite par la charte (§2.7, §3.1) : « ${trouve[0]} » dans « … ${extrait} … » ; une citation se met entre guillemets « … », ou dans un blockquote ou un q qui porte sa source (data-source-id ou cite)`, fichier)];
+    for (const texte of textes) {
+      const trouve = expression.exec(texte);
+      if (trouve === null) continue;
+      const extrait = texte.slice(Math.max(0, trouve.index - 30), trouve.index + trouve[0].length + 30).replace(/[\s\u2029]+/g, ' ').trim();
+      return [erreur('EXPRESSION-INTERDITE', `expression interdite par la charte (§2.7, §3.1) : « ${trouve[0]} » dans « … ${extrait} … » ; une citation se met entre guillemets « … », ou dans un blockquote ou un q dont le data-source-id est listé dans « Sources »`, fichier)];
+    }
+    return [];
   });
 }
 

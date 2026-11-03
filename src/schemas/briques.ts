@@ -42,3 +42,14 @@ export const dateIso = z.preprocess((valeur) => {
   if (typeof valeur === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(valeur)) return new Date(`${valeur}T00:00:00Z`);
   return valeur;
 }, z.date());
+
+/**
+ * Même jour, `mois` mois plus tard (dates UTC) ; le dernier jour du mois quand ce jour n'existe pas (31/08 + 6 mois →
+ * 28/02). Sert aux délais de revue : dossier (schéma) et DATES-REVUE-DELAI (src/lib/controle.ts).
+ */
+export const plusMois = (date: Date, mois: number): Date => {
+  const annee = date.getUTCFullYear();
+  const cible = date.getUTCMonth() + mois;
+  const dernierJour = new Date(Date.UTC(annee, cible + 1, 0)).getUTCDate();
+  return new Date(Date.UTC(annee, cible, Math.min(date.getUTCDate(), dernierJour)));
+};

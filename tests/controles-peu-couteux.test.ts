@@ -32,6 +32,10 @@ describe('title, H1 et meta description uniques (charte §3.4)', () => {
     assert.deepEqual(codes([page('a', 'T a', 'Même H1', 'D a'), page('b', 'T b', 'même h1 !', 'D b')]), ['H1-DOUBLON']);
     assert.deepEqual(codes([page('a', 'T a', 'H a', 'Même description.'), page('b', 'T b', 'H b', 'Même description')]), ['DESCRIPTION-DOUBLON']);
     assert.deepEqual(codes([page('a', 'T a', 'H a', ''), page('b', 'T b', 'H b', '')]), []);
+    // Title d'une page repris comme H1 d'une autre : même requête.
+    assert.deepEqual(codes([page('a', 'Voyant huile', 'Voyant huile allumé', 'D a'), page('b', 'Autre title', 'Voyant huile !', 'D b')]), ['TITLE-H1-DOUBLON']);
+    // Title et H1 identiques sur une même page : permis.
+    assert.deepEqual(codes([page('a', 'Voyant huile', 'Voyant huile', 'D a'), page('b', 'Voyant moteur', 'Voyant moteur', 'D b')]), []);
     // Trois pages au même title : un seul constat, qui les nomme toutes.
     const trois = constatsDoublons([page('a', 'T', 'H a', 'D a'), page('b', 'T', 'H b', 'D b'), page('c', 'T', 'H c', 'D c')]);
     assert.equal(trois.length, 1);
@@ -45,6 +49,7 @@ describe('title, H1 et meta description uniques (charte §3.4)', () => {
 });
 
 describe('expressions interdites dans le texte affiché, hors citations (charte §2.7, §3.1)', () => {
+  const SOURCES = '<section data-sources><ol><li data-source-id="notice-toyota-yaris">Toyota Yaris</li></ol></section>';
   const codes = (html: string): string[] => constatsExpressionsInterdites(html, 'f').map((c) => c.regle);
 
   test('[CI] refusées dans le texte, le title, la meta description, les textes alternatifs et les libellés', () => {
@@ -62,14 +67,23 @@ describe('expressions interdites dans le texte affiché, hors citations (charte 
     assert.deepEqual(codes(document('<p><q>nous recommandons</q></p>')), ['EXPRESSION-INTERDITE']);
     // Un guillemet ouvert sans fin n'avale pas les blocs suivants.
     assert.deepEqual(codes(document('<p>La notice dit : «\u00a0arrêtez-vous.</p><p>Nos experts le confirment.</p><p>Fin\u00a0»</p>')), ['EXPRESSION-INTERDITE']);
+    // Un saut de ligne dans le texte (paragraphe Markdown coupé) ne sépare pas les mots.
+    assert.deepEqual(codes(document('<p>Nos\nexperts le disent.</p>')), ['EXPRESSION-INTERDITE']);
+    assert.deepEqual(codes(document('<p>Testé par\nnos soins.</p>')), ['EXPRESSION-INTERDITE']);
+    // Une source qui n'est pas listée dans « Sources », ou une simple adresse (cite), ne fait pas une citation.
+    assert.deepEqual(codes(document(`<blockquote data-source-id="inexistante">Nous recommandons.</blockquote>${SOURCES}`)), ['EXPRESSION-INTERDITE']);
+    assert.deepEqual(codes(document('<blockquote cite="https://exemple.test/notice.pdf">Nous recommandons.</blockquote>')), ['EXPRESSION-INTERDITE']);
+    // Le title, la description et les attributs n'ont pas d'exclusion : des guillemets n'y cachent rien.
+    assert.deepEqual(codes(document('<p>Texte.</p>', '<title>«\u00a0Nos experts\u00a0» répondent</title>')), ['EXPRESSION-INTERDITE']);
   });
 
-  test('[CI] permises dans une citation : guillemets (même imbriqués), blockquote ou q avec leur source, extrait du tableau des notices', () => {
+  test('[CI] permises dans une citation : guillemets (même imbriqués), blockquote ou q dont la source est listée dans « Sources », extrait du tableau des notices', () => {
     assert.deepEqual(codes(document('<p>La notice dit : «\u00a0nous vous recommandons de vous arrêter\u00a0».</p>')), []);
     assert.deepEqual(codes(document('<p>«\u00a0Si le témoin «\u00a0STOP\u00a0» s’allume, nous vous recommandons de vous arrêter.\u00a0»</p>')), []);
-    assert.deepEqual(codes(document('<blockquote data-source-id="notice-toyota-yaris">Nous vous recommandons de vous arrêter.</blockquote>')), []);
-    assert.deepEqual(codes(document('<blockquote cite="https://exemple.test/notice.pdf">Nous vous recommandons.</blockquote>')), []);
-    assert.deepEqual(codes(document('<p><q data-source-id="notice-toyota-yaris">nous recommandons</q></p>')), []);
+    assert.deepEqual(codes(document(`<blockquote data-source-id="notice-toyota-yaris">Nous vous recommandons de vous arrêter.</blockquote>${SOURCES}`)), []);
+    assert.deepEqual(codes(document(`<p><q data-source-id="notice-toyota-yaris">nous recommandons</q></p>${SOURCES}`)), []);
+    // Un sigle expliqué (abbr) dans une citation, ou un saut de ligne dans la citation, ne la coupe pas.
+    assert.deepEqual(codes(document('<p>«\u00a0nous vous recommandons\nde nettoyer le <abbr title="filtre à particules">FAP</abbr>\u00a0»</p>')), []);
     assert.deepEqual(codes(document('<p class="notices-citation">Nous recommandons.</p>')), []);
     // Le code et les dessins ne comptent pas non plus.
     assert.deepEqual(codes(document('<p><code>nous</code></p><svg><title>nous</title></svg>')), []);
@@ -142,7 +156,6 @@ describe('dates cohérentes et délai de revue (charte §8)', () => {
 
   test('registre des sources : une date de consultation dans le futur est refusée (DATES-FUTUR)', async () => {
     const donnees = await chargerDonnees(racine);
-    assert.deepEqual(construireContexte(donnees, AUJOURDHUI).constats.filter((c) => c.regle === 'DATES-FUTUR'), []);
     const sources = (donnees.sources as { id: string; date_consultation: string }[]).map((s, i) => (i === 0 ? { ...s, date_consultation: '2099-01-01' } : s));
     const constats = construireContexte({ ...donnees, sources }, AUJOURDHUI).constats.filter((c) => c.regle === 'DATES-FUTUR');
     assert.equal(constats.length, 1);

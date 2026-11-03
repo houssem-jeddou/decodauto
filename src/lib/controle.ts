@@ -34,7 +34,7 @@ import {
 } from '../schemas/donnees.ts';
 import { FOURCHETTE_SOURCES_MIN, FOURCHETTE_VALIDITE_JOURS, GRILLE_COUTS, rangTranche, TRANCHE_MIN_PRISE_EN_CHARGE, type TrancheCout, type TrancheGrille } from '../schemas/cout.ts';
 import { schemasPage, type PageEditoriale } from '../schemas/pages.ts';
-import type { Citation } from '../schemas/briques.ts';
+import { plusMois, type Citation } from '../schemas/briques.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS, MOTS_REPERES, urgenceAdmise } from '../schemas/grille.ts';
 import {
   CHAMPS_CALCULES,
@@ -843,13 +843,7 @@ const JOUR_MS = 86_400_000;
  */
 export const dansLeFutur = (date: Date, aujourdhui: Date): boolean => date.getTime() > aujourdhui.getTime() + JOUR_MS;
 const jourIso = (date: Date): string => date.toISOString().slice(0, 10);
-/** Même jour, `mois` mois plus tard ; le dernier jour du mois quand ce jour n'existe pas (31/08 + 6 mois → 28/02). */
-export const plusMois = (date: Date, mois: number): Date => {
-  const annee = date.getUTCFullYear();
-  const cible = date.getUTCMonth() + mois;
-  const dernierJour = new Date(Date.UTC(annee, cible + 1, 0)).getUTCDate();
-  return new Date(Date.UTC(annee, cible, Math.min(date.getUTCDate(), dernierJour)));
-};
+export { plusMois } from '../schemas/briques.ts';
 
 /**
  * Date limite de la prochaine revue d'une page (charte §8) : délai du type (DELAI_REVUE_MOIS) et, pour la loi montagne,
