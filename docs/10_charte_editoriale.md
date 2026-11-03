@@ -4,6 +4,7 @@
 Précisions validées avec le livrable 6.3 (02/11/2026, 22 h 28) : adresse de signalement (§5.3), pictogramme d'un voyant (§3.6).
 Précision validée avec le livrable 6.4 (03/11/2026, 13 h 48) : article L122-5 relu sur Légifrance, conditions de la courte citation (§2.6).
 Précisions validées avec le livrable 6.5 (03/11/2026, 15 h 14) : revue de la loi montagne avant chaque 1er novembre (§8) ; « nos équipes » et « nos rédactions » parmi les expressions interdites (§2.7).
+Précisions validées avec le livrable 6.6a (03/11/2026, 17 h 32) : part de texte cité au plus un tiers et texte rédigé exigé (§2.6) ; ordre du corps des pages voyants et marche à suivre (§4, demande de changement n° 9) ; contrôles ajoutés (§9).
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -56,7 +57,7 @@ Précisions validées avec le livrable 6.5 (03/11/2026, 15 h 14) : revue de la l
 - Les pictogrammes sont redessinés pour le site, jamais copiés.
 
 ### 2.6 Textes d'autrui, citations et images
-- **Citations.** Une citation de notice ou de texte reste courte (400 caractères au plus, contrôlé), entre guillemets, avec son auteur et sa source ; elle sert l'explication de la page. Le volume cité reste limité : le tableau des notices (6.4) et l'outil ne reprennent que l'extrait utile de chaque consigne, jamais une notice entière. Cadre légal visé : l'exception de courte citation (code de la propriété intellectuelle, art. L122-5, 3° a, relu sur Légifrance le 02/11/2026, version en vigueur depuis le 01/01/2023) : le nom de l'auteur et la source sont indiqués clairement ; les citations sont courtes ; elles sont justifiées par le caractère pédagogique ou d'information de la page qui les cite. La loi ne fixe aucun seuil : la part de texte cité par page est à fixer avec les modèles de pages (6.6).
+- **Citations.** Une citation de notice ou de texte reste courte (400 caractères au plus, contrôlé), entre guillemets, avec son auteur et sa source ; elle sert l'explication de la page. Le volume cité reste limité : le tableau des notices (6.4) et l'outil ne reprennent que l'extrait utile de chaque consigne, jamais une notice entière. Cadre légal visé : l'exception de courte citation (code de la propriété intellectuelle, art. L122-5, 3° a, relu sur Légifrance le 02/11/2026, version en vigueur depuis le 01/01/2023) : le nom de l'auteur et la source sont indiqués clairement ; les citations sont courtes ; elles sont justifiées par le caractère pédagogique ou d'information de la page qui les cite. La loi ne fixe aucun seuil. Seuil du site (validé avec le livrable 6.6a) : sur une page éditoriale, le texte cité (extraits de notices, citations sourcées, texte entre guillemets) ne dépasse pas un tiers du texte affiché (`PART_CITEE_MAX`, contrôle CITATIONS-PART) ; et la page a toujours un texte rédigé qui répond aux questions des lecteurs (TEXTE-REDIGE-ABSENT). Mesure sur la page exemple « voyant moteur » : 22 % (32 % sans texte rédigé).
 - **Résultats de Google, aperçu IA, autres sites.** Ils servent seulement à connaître les questions des lecteurs (relevé Google). Leurs textes ne sont jamais repris ni reformulés. Quand une idée répandue contredit la notice, la page le dit et cite la notice.
 - **Photos.** Une photo présentée comme réelle est une vraie photo, avec son auteur ou sa source. Jamais une image générée par une IA présentée comme une photo réelle.
 
@@ -108,7 +109,7 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
 5. **Signature et dates** (section 7) : responsable éditorial, date de modification réelle et date de la dernière revue.
 6. **Ligne de transparence** (section 7), avec le lien « Méthode ».
 7. **Corps**, selon le type de page (08 §2) :
-   - pages voyants : « ce que dit la notice de votre marque » (tableau tiré de la base, 6.4), causes, marche à suivre ;
+   - pages voyants (demande de changement n° 9, 6.6a) : texte rédigé (questions des lecteurs relevées sur Google ; chaque partie qui répond à une question redit le verdict retenu), causes, puis tableau « Ce que dit la notice de votre marque » (6.4). La marche à suivre est l'action de chaque ligne de l'encadré de décision : le corps ne la recopie pas ;
    - pages codes défaut : signification par marque, voyant qui s'allume, causes, marche à suivre ;
    - pages pannes : symptômes, causes, marche à suivre ;
    - pages fluides : rôle, niveau, appoint, marche à suivre ;
@@ -298,6 +299,7 @@ Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5
   - nombre de notices affiché pour chaque ligne de l'encadré ;
   - espaces insécables et apostrophe posés par le gabarit (3.3).
 - **Ajouté en 6.5** (contrôles peu coûteux, validé le 03/11) : title, H1 et description uniques et présents ; dates cohérentes (jamais dans le futur, modification après publication, délai de revue du type) ; expressions interdites dans le texte des pages, hors citations. Limite laissée à la recette : la source d'un texte entre guillemets n'est pas vérifiable par la machine.
+- **Ajouté en 6.6a** (modèle de page voyant, validé le 03/11) : texte rédigé présent (TEXTE-REDIGE-ABSENT) ; part de texte cité au plus un tiers (CITATIONS-PART) ; références du texte rédigé tirées des sources de vérité (notice avec sa génération et son édition, libellé du verdict, page citée ajoutée à « Sources ») et refusées si elles sont fausses ; aucune page construite sans fichier de contenu (R7-PAGE-SANS-CONTENU).
 - **Recette** (passée par Claude page par page, puis relue par l'agent indépendant avec le lot) :
   - ton et vocabulaire (section 3) ;
   - aucune phrase sans source ni utilité (1 et 2.2) ;

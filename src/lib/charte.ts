@@ -176,7 +176,7 @@ export const REVUE_LOI_MONTAGNE = { moisDebutFenetre: 9, jourLimite: 31, moisLim
  * citations sourcées (`blockquote`, `q`) et du texte entre guillemets « … », sur les mots du texte affiché hors fil
  * d'Ariane, « Sources », renvois de page et liens de navigation (contrôle CITATIONS-PART). La loi ne fixe aucun seuil
  * (article L122-5, 3° a, du code de la propriété intellectuelle) : la page doit rester d'abord un texte du site, que les
- * citations servent. Seuil proposé à Houssem avec le livrable 6.6a, mesuré sur la page exemple « voyant moteur ».
+ * citations servent. Seuil validé par Houssem avec le livrable 6.6a (03/11/2026) ; page exemple « voyant moteur » : 22 %.
  */
 export const PART_CITEE_MAX = 1 / 3;
 

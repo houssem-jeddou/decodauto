@@ -5,8 +5,7 @@
 // La route src/pages/[...adresse].astro appelle le modèle du type de chaque page ; la démonstration et l'aperçu des
 // exemples l'appellent tel quel. Module sans dépendance à l'exécution : testé sans installation.
 //
-// Ordre d'une page voyant (proposé au livrable 6.6a, en attente de la validation de Houssem ; la charte §4, point 7,
-// cite pour les pages voyants « tableau, causes, marche à suivre ») :
+// Ordre d'une page voyant (charte §4, point 7 ; demande de changement n° 9, acceptée par Houssem le 03/11/2026) :
 //   fil d'Ariane · H1 · encadré de décision · signature · ligne de transparence ·
 //   texte rédigé (questions des lecteurs relevées sur Google) · causes et coût · tableau « Ce que dit la notice de votre
 //   marque » (élément unique, demande de changement n° 8) · pages liées · sources
