@@ -359,25 +359,30 @@ h3 {
 /* Page code défaut (livrable 6.6b) : fiche du code (intitulé, puis valeur) et tableau des cas par marque, qui devient
    une carte par marque sur téléphone (seuls les en-têtes de colonnes sont alors masqués à l'écran, lus par les lecteurs
    d'écran ; jamais un cas ni sa source). */
-.fiche-code dl {
+.fiche-code dl,
+.fiche-texte dl {
   margin: 0 0 1rem;
   border: 1px solid var(--bord);
   border-radius: 0.375rem;
 }
-.fiche-code dl > div {
+.fiche-code dl > div,
+.fiche-texte dl > div {
   display: grid;
   grid-template-columns: 11rem 1fr;
   gap: 0.75rem;
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--bord);
 }
-.fiche-code dl > div:last-child {
+.fiche-code dl > div:last-child,
+.fiche-texte dl > div:last-child {
   border-bottom: none;
 }
-.fiche-code dt {
+.fiche-code dt,
+.fiche-texte dt {
   font-weight: 600;
 }
-.fiche-code dd {
+.fiche-code dd,
+.fiche-texte dd {
   margin: 0;
 }
 .par-marque table {
@@ -409,7 +414,8 @@ h3 {
   display: none;
 }
 @media (max-width: 40rem) {
-  .fiche-code dl > div {
+  .fiche-code dl > div,
+  .fiche-texte dl > div {
     grid-template-columns: 1fr;
     gap: 0.125rem;
   }
@@ -442,6 +448,29 @@ h3 {
   .cas-intitule {
     display: inline;
   }
+}
+
+/* Page pneus et obligations (livrable 6.6c) : la fiche « Le texte en bref » reprend la mise en forme de la fiche du code ;
+   le tableau du texte rédigé qui sert d'élément unique (marqueur « tableau » du texte rédigé) garde ses en-têtes de colonnes ; ses
+   cellules passent à la ligne, et s'il reste trop large sur téléphone, il défile seul, sans que la page défile. */
+.tableau-corps {
+  overflow-x: auto;
+  margin: 0 0 1rem;
+}
+.tableau-corps table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95rem;
+}
+.tableau-corps th,
+.tableau-corps td {
+  border: 1px solid var(--bord);
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+.tableau-corps thead th {
+  background: var(--fond-doux);
 }
 
 /* Pied de page : lien de signalement (toutes les pages). */

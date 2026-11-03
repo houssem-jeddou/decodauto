@@ -5,6 +5,7 @@ import { ANCRE_METHODE, DELAI_REVUE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVU
 import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
+import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -831,6 +832,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
       ...('code' in page && {
         code: { fiche: modeleFicheCode(page, ctx.voyants, ctx.sources), parMarque: modeleParMarque(page), elementUnique: page.element_unique === 'tableau' },
       }),
+      ...('texte_reference' in page && { texte: { fiche: modeleFicheTexte(page, ctx.sources) } }),
     };
     constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus));
   }
@@ -934,6 +936,8 @@ export interface AttendusPage {
    * l'élément unique de la page est un tableau, porté alors par le tableau des cas par marque.
    */
   code?: { fiche: FicheCode; parMarque: readonly RangeeParMarque[]; elementUnique: boolean } | undefined;
+  /** Page pneus et obligations (livrable 6.6c, fiche-texte.ts) : fiche « Le texte en bref » attendue. */
+  texte?: { fiche: FicheTexte } | undefined;
 }
 
 /** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
@@ -1054,7 +1058,27 @@ export function controlerHtml(
   if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
   if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, attendus.notices));
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
+  if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
   return constats;
+}
+
+/**
+ * Page pneus et obligations (livrable 6.6c) : la fiche « Le texte en bref » (data-texte-reference) affiche, dans
+ * l'ordre, chaque ligne du modèle (texte de référence, où le lire, période, zones, défaillances, contre-visite, selon le
+ * contenu) au texte exact. Texte comparé normalisé (normaliserTexte).
+ */
+export function controlerFicheTexte(html: string, fichier: string, attendu: { fiche: FicheTexte }): Constat[] {
+  const $ = cheerio.load(html);
+  const fiches = $('[data-texte-reference]');
+  if (fiches.length !== 1) {
+    return [erreur('FICHE-TEXTE-ABSENTE', `une page pneus et obligations affiche la fiche « Le texte en bref » (data-texte-reference) ; trouvé : ${fiches.length}`, fichier)];
+  }
+  const lues = fiches.find('[data-fiche-ligne]').toArray().map((el) => `${normaliserTexte($(el).find('dt').text())} : ${normaliserTexte($(el).find('dd').text())}`);
+  const voulues = attendu.fiche.lignes.map((l) => `${normaliserTexte(l.intitule)} : ${normaliserTexte(l.valeur)}`);
+  if (lues.join('\n') !== voulues.join('\n')) {
+    return [erreur('FICHE-TEXTE-INCOMPLETE', `la fiche « Le texte en bref » n'affiche pas, dans l'ordre : ${attendu.fiche.lignes.map((l) => l.intitule).join(', ')} (texte tiré du contenu et du registre)`, fichier)];
+  }
+  return [];
 }
 
 /**
