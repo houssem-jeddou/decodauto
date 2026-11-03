@@ -12,11 +12,19 @@
 // Le texte rédigé vient d'abord : le lecteur qui a la décision cherche ensuite la réponse à sa question (rouler, fixe ou
 // clignotant, kilomètres, éteindre le voyant). Le tableau, long sur téléphone (une rangée par consigne citée), vient
 // après les causes, et l'encadré y renvoie par le lien « Ce que dit chaque notice ».
+//
+// Ordre d'une page code défaut (charte §4, point 7 : signification par marque, voyant qui s'allume, causes, marche à
+// suivre ; livrable 6.6b) :
+//   fil d'Ariane · H1 · encadré de décision (ligne du voyant qui s'allume, reprise de la base) · signature · ligne de
+//   transparence · fiche du code (signification et ses sources, portée, moteurs, voyant qui s'allume) · cas décrits par
+//   marque (élément unique quand la page le déclare) · causes et coût · texte rédigé (questions des lecteurs, marche à
+//   suivre) · pages liées · sources
 // ---------------------------------------------------------------------------------------------
 import { basDePage, causesDeLaPage, hautDePage, tableauNoticesDeLaPage, type DonneesSite } from './gabarit.ts';
 import { echapper, typographierHtml } from './html.ts';
 import { nomCourtSource, type SourceDuRegistre } from './composants.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
+import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
 import type { TypePage } from '../schemas/listes.ts';
 
@@ -98,8 +106,23 @@ export const pageVoyant: Modele = (page, site, corpsHtml) => {
   return [hautDePage(page, site), texte.html, causesDeLaPage(page, site), tableauNoticesDeLaPage(page, site, { elementUnique: true }), basDePage(page, site, texte.citations)].join('');
 };
 
+/** Page code défaut : voir l'ordre en tête de ce fichier. */
+export const pageCodeDefaut: Modele = (page, site, corpsHtml) => {
+  if (!('code' in page)) throw new Error(`page « ${page.id} » : le modèle code défaut s'applique à une page code défaut`);
+  const texte = texteRedige(corpsHtml, page, site);
+  return [
+    hautDePage(page, site),
+    ficheCodeHtml(modeleFicheCode(page, site.voyants, site.sources)),
+    parMarqueHtml(modeleParMarque(page), site.sources, { elementUnique: page.element_unique === 'tableau' }),
+    causesDeLaPage(page, site),
+    texte.html,
+    tableauNoticesDeLaPage(page, site, { elementUnique: false }),
+    basDePage(page, site, texte.citations),
+  ].join('');
+};
+
 /** Modèles livrés, par type. L'outil voyants et les types des vagues B et C n'en ont pas encore. */
-export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant };
+export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut };
 
 /** Modèle d'une page, ou la raison pour laquelle il n'existe pas encore (la construction échoue alors). */
 export function modeleDeLaPage(type: TypePage, page: PageEditoriale): { modele: Modele } | { absent: string } {

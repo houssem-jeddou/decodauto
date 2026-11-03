@@ -356,6 +356,88 @@ h3 {
   }
 }
 
+/* Page code défaut (livrable 6.6b) : fiche du code (intitulé, puis valeur) et tableau des cas par marque, qui devient
+   une carte par marque sur téléphone (seuls les en-têtes de colonnes sont alors masqués à l'écran, lus par les lecteurs
+   d'écran ; jamais un cas ni sa source). */
+.fiche-code dl {
+  margin: 0 0 1rem;
+  border: 1px solid var(--bord);
+  border-radius: 0.375rem;
+}
+.fiche-code dl > div {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--bord);
+}
+.fiche-code dl > div:last-child {
+  border-bottom: none;
+}
+.fiche-code dt {
+  font-weight: 600;
+}
+.fiche-code dd {
+  margin: 0;
+}
+.par-marque table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+.par-marque th,
+.par-marque td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--bord);
+}
+.par-marque thead th {
+  background: var(--fond-doux);
+  font-size: 0.875rem;
+}
+.par-marque tbody th {
+  width: 8rem;
+}
+.cas-sources {
+  width: 11rem;
+  font-size: 0.875rem;
+  color: var(--texte-doux);
+}
+@media (max-width: 40rem) {
+  .fiche-code dl > div {
+    grid-template-columns: 1fr;
+    gap: 0.125rem;
+  }
+  .par-marque thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .par-marque table,
+  .par-marque tbody,
+  .par-marque tr,
+  .par-marque tbody th,
+  .par-marque td {
+    display: block;
+    width: auto;
+  }
+  .par-marque tbody tr {
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--bord);
+    border-radius: 0.25rem;
+  }
+  .par-marque tbody th,
+  .par-marque td {
+    border-bottom: none;
+    padding: 0.375rem 0.75rem;
+  }
+}
+
 /* Pied de page : lien de signalement (toutes les pages). */
 .pied {
   max-width: 44rem;
