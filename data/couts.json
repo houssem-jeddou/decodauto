@@ -216,6 +216,11 @@
       "tranche": "organe"
     },
     {
+      "id": "pompe-a-carburant",
+      "libelle": "Pompe à carburant (basse pression)",
+      "tranche": "reparation"
+    },
+    {
       "id": "pompe-haute-pression",
       "libelle": "Pompe haute pression d'injection",
       "tranche": "organe"
