@@ -828,7 +828,9 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         // Demande de changement n° 8 : sur une page voyant (hors outil), l'élément unique est le tableau des notices.
         elementUnique: typeEditorial === 'voyant' && !('outil' in page && page.outil === true),
       },
-      ...('code' in page && { code: { fiche: modeleFicheCode(page, ctx.voyants, ctx.sources), parMarque: modeleParMarque(page) } }),
+      ...('code' in page && {
+        code: { fiche: modeleFicheCode(page, ctx.voyants, ctx.sources), parMarque: modeleParMarque(page), elementUnique: page.element_unique === 'tableau' },
+      }),
     };
     constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus));
   }
@@ -1056,9 +1058,14 @@ export function controlerHtml(
  * Page code défaut (livrable 6.6b) : la fiche du code (data-fiche-code) affiche, dans l'ordre, chaque ligne du modèle
  * (signification, portée, moteurs, voyant qui s'allume, source de la signification) au texte exact ; le tableau des cas
  * par marque (data-cas-par-marque) a une rangée par précision de la page, dans l'ordre du modèle, avec sa marque, son
- * texte et ses sources ; pas de tableau sans précision. Texte comparé normalisé (normaliserTexte).
+ * texte et ses sources ; pas de tableau sans précision ; si l'élément unique de la page est un tableau, c'est ce tableau
+ * (data-element-unique="tableau"), comme le construit le modèle. Texte comparé normalisé (normaliserTexte).
  */
-export function controlerFicheCode(html: string, fichier: string, attendu: { fiche: FicheCode; parMarque: readonly RangeeParMarque[] }): Constat[] {
+export function controlerFicheCode(
+  html: string,
+  fichier: string,
+  attendu: { fiche: FicheCode; parMarque: readonly RangeeParMarque[]; elementUnique?: boolean },
+): Constat[] {
   const constats: Constat[] = [];
   const $ = cheerio.load(html);
   const fiches = $('[data-fiche-code]');
@@ -1082,6 +1089,9 @@ export function controlerFicheCode(html: string, fichier: string, attendu: { fic
   }
   const rangees = tableaux.find('tr[data-cas-marque]').toArray();
   const ecarts: string[] = [];
+  if (attendu.elementUnique === true && tableaux.attr('data-element-unique') !== 'tableau') {
+    ecarts.push('l\'élément unique de la page (tableau) doit être ce tableau (data-element-unique="tableau")');
+  }
   if (rangees.length !== attendu.parMarque.length) ecarts.push(`${rangees.length} rangée(s) au lieu de ${attendu.parMarque.length}`);
   attendu.parMarque.forEach((r, i) => {
     const el = rangees[i];

@@ -21,9 +21,9 @@ export const LIBELLE_PORTEE: Readonly<Record<PorteeCode, string>> = {
 };
 
 export const LIBELLE_CARBURANT: Readonly<Record<Carburant, string>> = {
-  essence: 'Moteurs essence',
-  diesel: 'Moteurs diesel',
-  'essence et diesel': 'Moteurs essence et diesel',
+  essence: 'Essence',
+  diesel: 'Diesel',
+  'essence et diesel': 'Essence et diesel',
 };
 
 /** Ce que la fiche lit d'une page code défaut. */
@@ -107,7 +107,7 @@ export function parMarqueHtml(rangees: readonly RangeeParMarque[], registre: Reg
       `<tr role="row" data-cas-marque>`,
       `<th scope="row" role="rowheader">${texteHtml(r.marque)}</th>`,
       `<td role="cell">${texteHtml(r.precision)}</td>`,
-      `<td role="cell" class="cas-sources"><span class="cas-intitule">${texteHtml(INTITULE_SOURCE_CAS.trim())}${INSECABLE}</span>${r.sources.map((id) => `<span data-source-id="${attributHtml(id)}">${texteHtml(nomsSources([id], registre))}</span>`).join(`${INSECABLE}; `)}</td>`,
+      `<td role="cell" class="cas-sources"><span class="cas-intitule" aria-hidden="true">${texteHtml(INTITULE_SOURCE_CAS.trim())}${INSECABLE}</span>${r.sources.map((id) => `<span data-source-id="${attributHtml(id)}">${texteHtml(nomsSources([id], registre))}</span>`).join(`${INSECABLE}; `)}</td>`,
       '</tr>',
     ].join(''),
   );
