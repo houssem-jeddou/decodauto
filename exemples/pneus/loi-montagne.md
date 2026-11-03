@@ -101,6 +101,7 @@ Pour une voiture ou un utilitaire léger, le texte laisse le choix : des pneus h
 | Pneus hiver marqués du symbole alpin (montagne à trois pics avec un flocon) et de M+S | Oui | Quatre pneus, sur au moins deux roues de chaque essieu |
 | Pneus 4 saisons | Seulement s'ils portent le symbole alpin et M+S | Ce nom n'a pas de définition réglementaire |
 | Pneus marqués M+S seulement, sans symbole alpin | Non, depuis le 1er novembre 2024 | Gardez alors des chaînes ou chaussettes à neige à bord |
+| Pneus été, sans ces marquages | Non | Gardez des chaînes ou chaussettes à neige à bord |
 | Chaînes à neige métalliques | Oui | À bord, au moins deux, pour les roues motrices |
 | Chaussettes à neige (chaînes textiles) | Oui | À bord, au moins deux, pour les roues motrices |
 | Pneus à clous | Obligation non applicable | Les voitures qui en portent en sont exonérées |
