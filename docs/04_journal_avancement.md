@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 04/11/2026 (15 h 30, heure de Tunis)
+Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -188,13 +188,16 @@ Dernière mise à jour : 04/11/2026 (15 h 30, heure de Tunis)
   - règle de redirection 301 « Redirect from WWW to root » : `https://www.*` vers `https://${1}`, avec la conservation des paramètres activée, comme dans la documentation Cloudflare.
 
   Vérifié par le job production relancé à 9 h 31 UTC : PROD-HTTP, PROD-HTTP-CHEMIN, PROD-WWW, PROD-WWW-CHEMIN et PROD-HTTP-WWW conformes.
-- [ ] Politique de confidentialité, mesure d'audience exemptée de consentement, données structurées (Article, fil d'Ariane, auteur), réglages Cloudflare (robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow), emplacements publicitaires non affichés, Lighthouse sur les pages du socle.
+- [ ] **7.2 Description du socle, politique de confidentialité, mesure d'audience** : prêt à valider (PR #22, brouillon ; `travaux/etape-7/paquet-7.2-confidentialite.md`, neuf décisions). Conditions de la CNIL lues le 04/11. Demandes de changement n° 13 (description et revue du socle) et n° 14 (mesure d'audience sans traceur) proposées, non acceptées.
+- [ ] Données structurées (Article, fil d'Ariane, auteur), réglages Cloudflare (robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow), emplacements publicitaires non affichés, Lighthouse sur les pages du socle.
 - [ ] Mentions légales : après le statut juridique.
 
 ## Décisions ouvertes (à trancher par Houssem)
 - **Statut juridique** : à trancher avant de rédiger les mentions légales (étape 7) ; le reste de l'étape 7 avance sans l'attendre (décision du 23/10, 19 h).
 - **GitHub Pro** : souscrire avant la porte de l'étape 9, puis protéger `main` (pull request obligatoire, contrôles exigés, aucun contournement).
 - **Auteur** : nom réel acté le 23/10 ; parcours à fournir pour la page « à propos » (étape 7 ou 8).
+- **Livrable 7.2** : neuf décisions du paquet, dont le choix de la mesure d'audience. Le script Cloudflare déjà actif en production dépend de la décision 1.
+- **Avant la mise en ligne, avec le statut juridique** (paquet 7.2, décision 7) : représentant dans l'Union (RGPD, art. 27), transfert vers la Tunisie, totaux de Cloudflare, contrat de sous-traitance, durée des journaux : à poser à un professionnel et à Cloudflare.
 
 ## Historique des décisions
 - 22/10/2026 : niche voiture retenue ; base de mots-clés v1.1 figée ; périmètre lot unique figé (42 pages, outil voyants et socle compris, 4 thèmes) ; électrique hors périmètre ; pas d'achat de lecteurs OBD ; plan d'avancement validé avec publication en 3 vagues.
@@ -356,6 +359,11 @@ Dernière mise à jour : 04/11/2026 (15 h 30, heure de Tunis)
 - 02/11/2026 (20 h 19), Houssem : **valide la charte éditoriale avec toutes les recommandations** de sa section 10, **donne son accord sur les textes exacts** (mention en tête, signature, ligne de transparence, section « Méthode ») et **demande la fusion de la PR #12** si tout va bien. 03 passe en v7 (règle 11 alignée). Le livrable 6.2 est verrouillé ; suivant : 6.3, composants communs.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 04/11, livrable 7.2, une revue (un relecteur) ; « à corriger », deux bloquants, onze importants, dix mineurs.
+  - **Bloquants, corrigés et vérifiés par la CI** : la route du socle ne passait pas `astro check` ; PROD-TRACEUR ne voyait pas le script de Cloudflare, injecté seulement si la demande accepte du HTML. Le test ne lisait qu'une réponse simulée.
+  - **Autres corrections** : durée des journaux donnée en critère et signalée comme point ouvert ; droit d'opposition présenté à part ; demandes sur les journaux expliquées ; absence de décision d'adéquation pour la Tunisie dite (liste de la Commission lue) ; dates de revue du socle (dans la demande n° 13) ; TIERS-RESSOURCE étendu aux styles et aux feuilles CSS ; exception des liens du socle à inscrire à la charte ; demande n° 14 pour 03 ; cookie : « un cas connu » ; jargon expliqué ; promesse sur la publicité retirée.
+  - **Laissé** : la seconde revue n'a pas été lancée. Les deux bloquants sont prouvés fermés par la CI, et le reste est un texte que Houssem valide, ou des questions pour un professionnel, qu'une autre IA ne trancherait pas.
+  - **Reste à vérifier** : réglages du compte Cloudflare ; ce que reçoit un lecteur en France ; réception de `erreur@decodauto.com` ; plusieurs sources lues par résumé (relevé) ; aucun avis de juriste.
 - 04/11, livrable 8.1 (modèle de l'outil voyants), deux revues (deux relecteurs), le maximum ; chacune « à corriger ».
   - **Première revue, changé** :
     - bloquant : le voyant de freinage manquait parmi les dessins avec un point d'exclamation ; la clé renvoyait au seul rappel d'entretien, alors que c'est le témoin Service sur la Clio 5 et la Sandero 3 ;
