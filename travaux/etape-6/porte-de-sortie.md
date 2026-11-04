@@ -30,9 +30,11 @@ Reste hors de ces livrables : la variante « outil voyants » du modèle voyant 
 | Brief de chaque page de la vague A produit | ✅ | 22 briefs (19 pages éditoriales et 3 du socle) dans `travaux/etape-6/briefs/`, générés par `npm run briefs` ; consignes validées par Houssem le 03/11 (22 h 41) ; `tests/briefs.test.ts` (17 tests). |
 | Contrôles au vert | ✅ | CI de `main` après la fusion de la PR #19 (run 41725160827) : contrôles (379 tests), recette des exemples, Lighthouse mobile, déploiement et vérification en production réussis ; site non indexable, aucune page éditoriale publiée. Branche de la porte : CI de la PR #20, dernier commit (voir la pull request ; run 41728817223 sur c5df594 : 382 tests, contrôles, recette, Lighthouse et production verts, déploiement sauté hors `main`). |
 | Revue indépendante de l'ensemble | ✅ | Deux revues (le maximum), chacune « à corriger », rien de bloquant ; corrections intégrées (voir ci-dessous). La seconde a porté sur les contenus nouveaux : demande de changement n° 11, complément de la méthode, test. |
-| Validation de Houssem | à faire | — |
+| Validation de Houssem | ✅ | 04/11/2026 (12 h 03) : « Oui je valide », avec les quatre décisions ci-dessous telles que recommandées ; fusion de la PR #20 demandée. |
 
-## Décisions à prendre avec la porte
+## Décisions prises avec la porte (validées par Houssem le 04/11/2026, 12 h 03)
+Appliquées dans la PR #20 : demande de changement n° 11 acceptée, option (a) (03 v8) ; complément de la section « Méthode » versé dans `src/lib/charte.ts`, vue de la charte régénérée, nouvelle empreinte des textes affichés `509c4356…` (`data/charte-validation.json`, 04/11) ; précisions du §2.2 et du §2.7 dans la charte ; tag à poser seulement sur la demande de Houssem.
+
 1. **Demande de changement n° 11 : modèle de l'outil voyants livré à l'étape 8** (`travaux/etape-6/demande-changement-11.md`). La porte de l'étape 6 n'a pas de critère sur l'outil, mais sa colonne « Livrable » dit « un modèle par type » et docs/08 range l'outil dans le type voyant ; 03 rattache par ailleurs l'outil à l'étape 8 (« Outil et guide voyants », règle 12). La demande l'écrit dans 03 et ajoute à la porte de l'étape 8 un critère sur l'outil (généré depuis la base, filtre par couleur, lisible sans JavaScript, contrôlés). Moment : (a) premier livrable de l'étape 8 ou (b) piste technique dès maintenant. Recommandation : (a), qui respecte la décision du 28/10 (un livrable à la fois) ; elle remplace la piste technique proposée au journal à 22 h 45. Si la demande est refusée, la porte reste ouverte jusqu'à un livrable 6.10.
 2. **Complément de la section « Méthode »** (texte affiché, à valider mot pour mot). Nouvelle partie, après « Plusieurs marques pour les voyants » :
    > **Les codes défaut**
