@@ -7,6 +7,7 @@ Précisions validées avec le livrable 6.5 (03/11/2026, 15 h 14) : revue de la l
 Précisions validées avec le livrable 6.6a (03/11/2026, 17 h 32) : part de texte cité au plus un tiers et texte rédigé exigé (§2.6) ; ordre du corps des pages voyants et marche à suivre (§4, demande de changement n° 9) ; contrôles ajoutés (§9).
 Précisions validées avec le livrable 6.6b (03/11/2026, 20 h 06) : sources techniques secondaires des pages codes défaut (§2.2) ; cas d'un autre marché (§2.5) ; sources secondaires distinguées des « autres sites » (§2.6) ; noms de moteur (§3.3) ; corps des pages codes défaut et consigne d'un code lu sans voyant (§4) ; contrôles ajoutés (§9).
 Précisions validées avec le livrable 6.6c (03/11/2026, 21 h 44) : montant cité par sa référence (§2.3) ; lien vers une source officielle citée (§2.7) ; corps des pages pneus et obligations (§4) ; contrôles ajoutés (§9).
+Précisions validées avec la porte de l'étape 6 (04/11/2026, 12 h 03) : partie « Les codes défaut » de la section « Méthode » (§7.2, nouvelle empreinte des textes affichés) ; « pages écrites pour vendre un appareil ou un service » (§2.2) ; « nos rédactions » dans la liste du §2.7.
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -40,7 +41,7 @@ Précisions validées avec le livrable 6.6c (03/11/2026, 21 h 44) : montant cit�
 - Les causes sont présentées dans un ordre logique, jamais « par fréquence » sans donnée sourcée (R6).
 - **Pages codes défaut : sources techniques secondaires** (validé avec le livrable 6.6b). Les notices d'utilisation ne parlent pas des codes défaut. La signification d'un code, ses causes et ses cas par marque peuvent donc venir de sources secondaires, inscrites au registre et citées sur la page :
   - sont admis les bulletins et fiches techniques de constructeur, les documents techniques d'équipementier et la documentation d'un éditeur d'outil de diagnostic ;
-  - sont exclus les blogs commerciaux, les sites qui vendent un appareil ou un service, et les forums ;
+  - sont exclus les blogs commerciaux, les pages écrites pour vendre un appareil ou un service, et les forums (précisé avec la porte de l'étape 6 : un éditeur d'outil de diagnostic vend son logiciel, sa documentation technique reste admise) ;
   - une source admise ne vaut que pour les modèles, moteurs et marchés qu'elle nomme, et ne fixe jamais de verdict : le verdict vient de la base voyants, par la ligne du voyant qui s'allume avec le code.
 - Une relecture par une IA n'est pas une vérification.
 
@@ -221,6 +222,12 @@ Pour les voyants, les notices de plusieurs grandes marques vendues en France son
 Chaque voyant de la base du site s’appuie sur au moins trois marques de deux groupes différents. Quand les notices ne disent pas la même chose, la consigne la plus prudente est retenue, et la page vous montre l’écart, marque par marque. Quand une alerte n’est décrite que dans une ou deux notices, la page le dit et nomme la notice citée.
 
 La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.
+
+#### Les codes défaut
+
+Les notices d’utilisation lues pour le site ne donnent pas la signification des codes défaut. La signification d’un code, ses causes possibles et les cas décrits par marque viennent donc de documents techniques, cités sur chaque page : bulletins et fiches techniques des constructeurs, documents des équipementiers, documentation des éditeurs d’outils de diagnostic. Les blogs commerciaux, les pages écrites pour vendre un appareil ou un service et les forums n’en font pas partie. Un code propre à un constructeur (P1xxx) est expliqué marque par marque.
+
+Chaque document ne vaut que pour les modèles, les moteurs et le marché qu’il nomme : un cas décrit pour un autre marché (par exemple les États-Unis) est présenté avec ce marché, et n’est pas appliqué aux voitures vendues en France sans autre source. Ces documents ne fixent jamais un verdict : celui de la page vient de la consigne du voyant qui s’allume avec le code. Si le code est lu sans qu’aucun voyant soit allumé, la page vous conseille de demander l’avis d’un professionnel.
 
 #### Ce que veulent dire les verdicts
 

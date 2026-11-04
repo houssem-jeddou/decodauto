@@ -223,6 +223,14 @@ export function sectionMethode(registre: readonly NoticeLue[], regle: RegleMarqu
         ],
       },
       {
+        // Validé par Houssem avec la porte de l'étape 6 (04/11/2026) : charte §2.2, §2.5 et §4 (décisions 1, 2 et 5 de 6.6b).
+        titre: 'Les codes défaut',
+        paragraphes: [
+          'Les notices d’utilisation lues pour le site ne donnent pas la signification des codes défaut. La signification d’un code, ses causes possibles et les cas décrits par marque viennent donc de documents techniques, cités sur chaque page : bulletins et fiches techniques des constructeurs, documents des équipementiers, documentation des éditeurs d’outils de diagnostic. Les blogs commerciaux, les pages écrites pour vendre un appareil ou un service et les forums n’en font pas partie. Un code propre à un constructeur (P1xxx) est expliqué marque par marque.',
+          'Chaque document ne vaut que pour les modèles, les moteurs et le marché qu’il nomme : un cas décrit pour un autre marché (par exemple les États-Unis) est présenté avec ce marché, et n’est pas appliqué aux voitures vendues en France sans autre source. Ces documents ne fixent jamais un verdict : celui de la page vient de la consigne du voyant qui s’allume avec le code. Si le code est lu sans qu’aucun voyant soit allumé, la page vous conseille de demander l’avis d’un professionnel.',
+        ],
+      },
+      {
         titre: 'Ce que veulent dire les verdicts',
         paragraphes: ['Les verdicts sont toujours formulés avec les mêmes mots :'],
         definitions: verdicts,
