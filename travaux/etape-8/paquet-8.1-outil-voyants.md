@@ -1,13 +1,13 @@
 # Paquet de validation 8.1 : modèle de l'outil voyants et page outil
 
-**À valider par Houssem.** Étape 8, livrable 8.1 (demande de changement n° 11, 03 v8).
+**Validé par Houssem le 04/11/2026 (13 h 48)** : « Pour les 9 decisions part avec ta recommandation. Fais les actions necessaires et fusionne la PR ». Étape 8, livrable 8.1 (demande de changement n° 11, 03 v8). L'index des dessins (décision 9) a été construit après ce message : son titre est dans la section 2.
 
 - **Page** : `exemples/voyant/voyants.md`, adresse du plan `/voyants/`. Elle tient lieu d'exemple du modèle (03 v8).
 - **Publication** : jamais avant son lot. Elle n'est construite que par la construction de recette.
 - **Liste** : générée depuis la base voyants validée le 24/10 (`data/voyants.json`). Aucun verdict n'est saisi dans la page.
 - **Texte du règlement relevé le 04/11/2026** : `travaux/etape-8/textes/reglement-onu-121.md`.
 
-Ce que Houssem valide :
+Ce que Houssem a validé :
 1. **L'encadré** (section 1) : question, trois lignes reprises de la base, renvoi vers la liste, coût. Après la validation, l'empreinte est versée et l'attendu R4 de cette page retiré du job de recette, dans le même commit.
 2. **Les textes fixes de l'outil** (section 2).
 3. **La source ajoutée au registre** (section 3).
@@ -38,6 +38,7 @@ Ce que Houssem valide :
 | Introduction | La couleur ne suffit pas à décider : un voyant orange peut imposer l'arrêt, un voyant rouge peut signaler le frein à main serré. Repérez votre voyant à son dessin, à sa couleur et à la façon dont il s'allume (fixe ou clignotant). Chaque verdict est le plus prudent des notices lues ; les pages citées sont sous chaque voyant. Cette liste ne couvre pas tous les voyants d'un tableau de bord. |
 | Filtre | Afficher les voyants : · Tous (25) · Orange ou jaune (16) · Rouge (9) |
 | Aide du filtre | Un même voyant peut changer de couleur selon la voiture : si vous ne le trouvez pas sous une couleur, affichez « Tous ». |
+| Titre de l'index des dessins (décision 9) | Cherchez le dessin de votre voyant. Puis une entrée par ligne : pictogramme et nom de la base, sans autre texte. |
 | Titres des groupes | Voyants orange ou jaunes (16 cas) · Voyants rouges (9 cas) |
 | Compte d'un groupe (calculé) | Sur ces 16 cas : 3 « Non, arrêtez-vous immédiatement », 11 « Oui, avec précautions » et 2 « Oui, vous pouvez rouler ». Sur ces 9 cas : 8 « Non, arrêtez-vous immédiatement » et 1 « Oui, vous pouvez rouler ». |
 | Ligne | Nom du voyant · situation · verdict · Quand agir : … · Que faire : … · Selon les marques : … (s'il y a un écart) |
@@ -91,6 +92,8 @@ Les nombres sont calculés depuis la base. Les affirmations de l'introduction et
 
 ## 5. Décisions
 
+**Les neuf recommandations sont retenues (Houssem, 04/11/2026, 13 h 48).** Décision 7 : le champ « autres couleurs » est noté aux idées reportées. Décision 8 : court paquet de lignes à ajouter à la base avec le lot 8.3, avant la mise en ligne de l'outil. Décision 9 : index construit dans ce livrable.
+
 1. **Lignes de l'encadré.** Recommandé : `moteur-orange-fixe`, `abs`, `prechauffage`. Le lecteur voit que la même couleur va de l'arrêt à « vous pouvez rouler ». `abs` représente son niveau : 10 lignes orange « Oui, avec précautions » sur 11 sont « À faire tout de suite ». `prechauffage` ne vaut que pour le voyant allumé quelques secondes au contact : le cas où il clignote n'est pas dans la base (décision 8), et le texte le dit. Le coût : sur téléphone (390 px), l'encadré mesure environ 2 200 px. Autre option : une seule ligne, plus courte, mais qui se lirait comme « orange = arrêt ».
 2. **Demande de changement n° 12 : renvoi dans l'encadré** (`travaux/etape-8/demande-changement-12.md`). Recommandé : l'accepter. Sans lui, les trois exemples se liraient comme la réponse complète, et la liste commence à plus de trois écrans. Il modifie ce que fixe 08 §3, règle 9 : c'est pour cela qu'il passe par une demande.
 3. **Ordre de la page.** Recommandé : outil, puis texte rédigé. Le lecteur cherche son voyant ; il ne doit pas lire un guide avant. Le coût : sur téléphone, avec « Tous » affiché, le texte commence vers 18 000 px.
@@ -99,19 +102,19 @@ Les nombres sont calculés depuis la base. Les affirmations de l'introduction et
 6. **« Zig zag ».** Le mot vient des lecteurs (recherche associée de Google), pas d'une notice. Recommandé : le garder, avec « voiture qui dérape » : c'est une aide pour reconnaître le dessin, pas un fait de sécurité. Autre option : le retirer, et perdre cette requête.
 7. **Voyants dont la couleur varie.** Une ligne de la base n'a qu'une couleur (demande n° 3). Or `airbag-defaut` dit « orange ou rouge selon la voiture » et `adblue-demarrage-impossible` « rouge ou clignote » : avec le filtre « Rouge », le voyant airbag n'apparaît pas. Recommandé pour 8.1 : l'aide du filtre, déjà en place. Option plus solide, pour plus tard : un champ « autres couleurs » dans la base, par une demande de changement, pour que la ligne apparaisse sous les deux filtres.
 8. **Voyants et états décrits par les notices, sans ligne dans la base.** La base compte 25 cas validés, pas tous les voyants. Sont lus dans les notices sans ligne propre, liste non exhaustive : STOP seul (3 marques sur 5, arrêt impératif), témoin d'alerte en triangle (Renault), voyant central d'alerte (Seat), Service (Peugeot), préchauffage qui clignote (Seat), frein de stationnement électrique qui clignote (Peugeot), direction jaune qui clignote, colonne coincée (Seat, p. 227), absence de retour visuel ou sonore au tableau de bord, arrêt immédiat (Dacia, p. 110), carburant, ceintures, portes, eau dans le gazole (Peugeot). Recommandé : ajouter au moins STOP et le triangle à la base, et traiter le préchauffage qui clignote, par un court paquet avec le lot 8.3, **avant la mise en ligne de l'outil**. En attendant, l'introduction dit que la liste n'est pas complète et le texte cite ces cas avec leurs sources ; mais sur téléphone, ce texte est loin sous la liste.
-9. **Index des dessins, en haut de l'outil (non construit).** La liste mesure environ 15 000 px sur téléphone (18 écrans), triée par gravité, alors que le lecteur cherche un dessin. Recommandé : un index généré, sans script, avec le pictogramme et le nom de chaque cas, chaque entrée menant à sa ligne, et filtré comme la liste. Il rendrait le voyant trouvable en un coup d'œil. Je ne l'ai pas construit pour rester dans ce que les deux revues ont relu : dis-moi si je l'ajoute à ce livrable, ou si je le note pour plus tard.
+9. **Index des dessins, en haut de l'outil (non construit).** La liste mesure environ 15 000 px sur téléphone (18 écrans), triée par gravité, alors que le lecteur cherche un dessin. Recommandé : un index généré, sans script, avec le pictogramme et le nom de chaque cas, chaque entrée menant à sa ligne, et filtré comme la liste. Il rendrait le voyant trouvable en un coup d'œil. **Construit après la validation** (contrôle OUTIL-INDEX) ; il mesure environ 1 180 px à 390 px et n'a pas été relu par une revue indépendante : le maximum de deux était atteint, et il n'ajoute ni fait ni verdict.
 
-## 6. Précisions à inscrire à la validation
+## 6. Précisions inscrites à la validation
 - 08 §3, règle 9 et charte §4, point 4 : renvoi de la page outil (demande de changement n° 12).
 - Charte §4, point 7 : ordre du corps de la page outil. Charte §4, point 8 et §2.6 : sur la page outil, les pages citées sont sous chaque ligne. Charte §9 : contrôles OUTIL-*.
 - Journal, projet et `docs/` : livrable 8.1 fait, critère de la porte de l'étape 8.
 
 ## 7. Limites acceptées et ce qui reste à la recette
-**Limites acceptées si tu valides** :
+**Limites acceptées** :
 - Avec un filtre choisi, un lien du texte vers une ligne d'un groupe masqué ne fait rien tant que le filtre n'est pas changé. Le corriger par CSS bloquait le filtre (première revue).
 - La machine voit le nom du pictogramme d'une ligne, pas son dessin (vérifié par un test sur le rendu du modèle) ; une phrase ajoutée dans l'encadré n'est pas refusée (R9 vérifie la présence, pas l'absence, sur toutes les pages).
 
 **À la recette** :
-- Filtre dans Safari et Firefox (vérifié en Chromium, avec JavaScript coupé : 25, 16, 9 lignes ; flèches du clavier ; pas de débordement à 390 px).
+- Filtre dans Safari et Firefox (vérifié en Chromium : 25, 16, 9 lignes et autant d'entrées dans l'index ; flèches du clavier et JavaScript coupé avant l'index ; pas de débordement à 390 px).
 - Lecteur d'écran.
 - Emplacements publicitaires factices (étape 7) : le Lighthouse de la recette ne les a pas encore.

@@ -167,25 +167,23 @@ describe('outil voyants : modèle généré depuis la base', () => {
 });
 
 describe('outil voyants : page construite', () => {
-  test('la vraie page passe tous les contrôles, sauf l’empreinte que Houssem verse après sa validation', () => {
+  test('la vraie page passe tous les contrôles, empreinte de la validation de Houssem comprise', () => {
     assert.deepEqual(controler(html), []);
     const { constats } = controlerPage({ type: 'voyant', brut, fichier: EXEMPLE }, contexteOutil, html);
     const erreurs = constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle);
-    assert.deepEqual(erreurs.filter((r) => r !== 'R4-VALIDATION-ABSENTE'), [], JSON.stringify(constats, null, 1));
+    assert.deepEqual(erreurs, [], JSON.stringify(constats, null, 1));
     assert.deepEqual(
       [...constatsMentionEtSignalement(html, 'x', '/voyants/'), ...constatsTypographie(html, 'x'), ...constatsIdentifiants(html, 'x'), ...constatsExpressionsInterdites(html, 'x'), ...constatsTexteRedige(html, 'x'), ...constatsPartCitee(html, 'x')],
       [],
     );
   });
 
-  test('l’empreinte, quand elle est versée, est vérifiée (R4) ; une fois versée, elle reste celle de la commande officielle', () => {
+  test('l’empreinte est vérifiée (R4), et reste celle de la commande officielle', () => {
     const { constats } = controlerPage({ type: 'voyant', brut: { ...brut, validation: '0'.repeat(64) }, fichier: EXEMPLE }, contexteOutil, html);
     assert.ok(constats.some((c) => c.regle === 'R4-EMPREINTE'));
-    // Après la validation de Houssem : un texte fixe de l'outil changé fait échouer ce test (npm test), pas seulement la recette.
-    if (brut['validation'] !== undefined) {
-      const officielle = execFileSync(execPath, ['scripts/empreinte.ts', EXEMPLE], { cwd: racine, encoding: 'utf8' }).trim().split('\n').at(-1);
-      assert.equal(officielle, brut['validation'], 'le texte fixe ou l’encadré a changé depuis la validation de Houssem');
-    }
+    // Un texte fixe de l'outil changé fait échouer ce test (npm test), pas seulement la recette.
+    const officielle = execFileSync(execPath, ['scripts/empreinte.ts', EXEMPLE], { cwd: racine, encoding: 'utf8' }).trim().split('\n').at(-1);
+    assert.equal(officielle, brut['validation'], 'le texte fixe ou l’encadré a changé depuis la validation de Houssem');
   });
 
   test('les textes fixes de l’outil entrent dans l’empreinte de la page outil, et seulement de celle-là', () => {

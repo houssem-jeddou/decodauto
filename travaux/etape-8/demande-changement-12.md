@@ -1,6 +1,6 @@
 # Demande de changement n° 12 : renvoi vers la liste dans l'encadré de la page outil
 
-Étape 8, livrable 8.1. Proposée le 04/11/2026 avec le paquet `travaux/etape-8/paquet-8.1-outil-voyants.md`. **À décider par Houssem.**
+Étape 8, livrable 8.1. Proposée le 04/11/2026 avec le paquet `travaux/etape-8/paquet-8.1-outil-voyants.md`. **Acceptée par Houssem le 04/11/2026 (13 h 48), avec le livrable 8.1.**
 
 | Rubrique | Contenu |
 |---|---|

@@ -2,9 +2,8 @@
 // vrai. Chaque page éditoriale de la vague A a son modèle, outil voyants compris depuis le livrable 8.1 (demande de
 // changement n° 11) ; chaque type de la vague A a un exemple rédigé, du bon type d'après le plan, dont l'encadré porte
 // l'empreinte validée par Houssem (recalculée par la commande officielle, npm run empreinte) ; textes de la charte
-// validés. L'exemple de la page outil relève de la porte de l'étape 8 (03 v8) : son empreinte est contrôlée par R4, dans
-// le job de recette et par tests/outil-voyants.test.ts. Les briefs (6.8) sont contrôlés par tests/briefs.test.ts. Sans
-// dépendance : ce fichier tourne sans installation.
+// validés ; l'exemple de la page outil, validé avec le livrable 8.1, est contrôlé comme les autres. Les briefs (6.8) sont
+// contrôlés par tests/briefs.test.ts. Sans dépendance : ce fichier tourne sans installation.
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readdir, readFile } from 'node:fs/promises';
@@ -42,9 +41,6 @@ describe("porte de sortie de l'étape 6", () => {
       for (const f of fichiers) {
         const chemin = `exemples/${type}/${f}`;
         const texte = await readFile(join(racine, chemin), 'utf8');
-        // Page outil : hors du champ de cette porte (03 v8, étape 6 : « hors la variante outil voyants ») ; son encadré se
-        // valide à l'étape 8 (R4 dans le job de recette, tests/outil-voyants.test.ts).
-        if (/^outil: *true\s*$/m.test(texte)) continue;
         controles += 1;
         const id = /^id: *(\S+)\s*$/m.exec(texte)?.[1];
         const page = id === undefined ? undefined : parId.get(id);

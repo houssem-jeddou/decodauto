@@ -38,6 +38,9 @@ date_publication: 2026-11-04
 date_modification: 2026-11-04
 date_revue: 2026-11-04
 prochaine_revue: 2027-11-04
+# Encadré de décision (question, renvoi, lignes, coût probable) et textes fixes de l'outil validés par Houssem le 04/11/2026
+# (13 h 48), avec les faits du texte (paquet travaux/etape-8/paquet-8.1-outil-voyants.md).
+validation: 4555601ad20e230a8fcdd82f70c3cb530810752127eb22f8514d2febb21cc5b2
 ---
 
 ## Comment lire un voyant
