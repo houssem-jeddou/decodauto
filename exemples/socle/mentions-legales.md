@@ -8,11 +8,13 @@ title: "Mentions légales et confidentialité"
 description: "Qui édite decodauto.com et ce que le site fait de vos données : aucun compte, aucune publicité, aucun cookie du site, et vos droits."
 libelle_court: Mentions légales et confidentialité
 date_modification: 2026-11-04
+date_revue: 2026-11-04
+prochaine_revue: 2027-11-04
 ---
 
 ## Confidentialité
 
-**En bref.** decodauto.com ne vous demande aucun compte, n'affiche aucune publicité, ne dépose aucun cookie et ne contient aucun script de mesure d'audience. Vos données ne sont traitées que dans deux cas : quand votre navigateur demande une page, et quand vous écrivez par courriel.
+**En bref.** decodauto.com ne vous demande aucun compte et n'affiche aucune publicité. Le site ne dépose lui-même aucun cookie et ne contient aucun script de mesure d'audience. Vos données ne sont traitées que dans deux cas : quand votre navigateur demande une page, et quand vous écrivez par courriel.
 
 ### Qui est responsable
 
@@ -20,19 +22,19 @@ Houssem Jeddou, éditeur du site, est responsable de ces traitements. Pour toute
 
 ### Quand votre navigateur demande une page
 
-- **Données** : votre adresse IP et les informations techniques de la demande (page demandée, date et heure, navigateur).
+- **Données** : votre adresse IP et les informations techniques de la demande (page demandée, date et heure, navigateur). Sans elles, la page ne peut pas vous être envoyée.
 - **Pourquoi** : afficher la page, protéger le site contre les attaques et connaître sa fréquentation globale.
 - **Base légale** : l'intérêt légitime de l'éditeur à faire fonctionner et à protéger son site, et à connaître sa fréquentation.
 - **Qui les reçoit** : Cloudflare, Inc., hébergeur du site, qui publie sa propre [politique de confidentialité](https://www.cloudflare.com/privacypolicy/).
-- **Durée** : Cloudflare indique les conserver pour une durée limitée, sans publier de chiffre.
+- **Durée** : le temps nécessaire à Cloudflare pour faire fonctionner et protéger son service, qu'il décrit comme une durée limitée. Les totaux de fréquentation restent consultables au moins 30 jours.
 
 ### Comment la fréquentation est mesurée
 
-Rien n'est placé sur votre appareil pour cela : ni cookie, ni script, ni identifiant. L'éditeur consulte seulement des totaux : ceux de Cloudflare (nombre de demandes et de visiteurs, principaux pays) et ceux que Google Search Console et Bing Webmaster Tools donnent à tout éditeur sur la présence de ses pages dans leurs résultats.
+Rien n'est placé sur votre appareil pour cela : ni cookie, ni script, ni identifiant. L'éditeur consulte des totaux : ceux de Cloudflare (nombre de demandes et de visiteurs, principaux pays) et ceux que Google Search Console et Bing Webmaster Tools donnent à tout éditeur sur la présence de ses pages dans leurs résultats.
 
 ### Cookies
 
-Le site n'en dépose aucun. Un seul cas peut en faire apparaître un : si Cloudflare vous présente une vérification de sécurité, il peut déposer un cookie technique pour s'en souvenir. Il ne sert ni à la publicité ni à la mesure d'audience.
+Le site n'en dépose aucun. Cloudflare peut en déposer un dans un cas connu : s'il vous présente une vérification de sécurité, il en garde ainsi le résultat. Ce cookie ne sert ni à la publicité ni à la mesure d'audience.
 
 ### Quand vous écrivez par courriel
 
@@ -46,14 +48,22 @@ Rien ne vous oblige à écrire : le site se lit sans cela. Ne mettez dans votre 
 
 ### Hors de l'Union européenne
 
-Cloudflare et Google sont établis aux États-Unis. Ils sont inscrits au Data Privacy Framework, couvert par la décision d'adéquation de la Commission européenne du 10 juillet 2023. Houssem Jeddou lit les messages depuis la Tunisie.
+Cloudflare et Google sont établis aux États-Unis. Ils sont inscrits au Data Privacy Framework, le cadre de protection des données entre l'Union européenne et les États-Unis, que la Commission européenne a reconnu comme suffisant par sa décision d'adéquation du 10 juillet 2023. Houssem Jeddou lit les messages depuis la Tunisie, pays qui n'a pas de décision d'adéquation de la Commission européenne.
 
 ### Vos droits
 
-Vous pouvez demander l'accès à vos données, leur rectification, leur effacement ou la limitation de leur traitement, et vous opposer à leur traitement, en écrivant à {{contact}}. La réponse arrive au plus tard sous un mois ; ce délai peut être prolongé de deux mois si la demande est complexe, et vous en êtes alors informé. Vous pouvez aussi déposer une réclamation auprès de la [CNIL](https://www.cnil.fr/fr/plaintes).
+Vous pouvez demander l'accès à vos données, leur rectification, leur effacement ou la limitation de leur traitement, en écrivant à {{contact}}. La réponse arrive au plus tard sous un mois ; ce délai peut être prolongé de deux mois si la demande est complexe, et vous en êtes alors informé.
 
-Aucune décision automatisée ni aucun profilage ne vous concerne sur ce site.
+Pour les journaux tenus par Cloudflare, indiquez votre adresse IP, ainsi que la date et l'heure de votre visite : Houssem Jeddou ne peut pas vous retrouver autrement, et il transmettra votre demande à Cloudflare.
+
+Vous pouvez aussi déposer une réclamation auprès de la [CNIL](https://www.cnil.fr/fr/plaintes).
+
+Aucune décision entièrement automatisée ayant un effet important pour vous n'est prise sur ce site.
+
+### Votre droit d'opposition
+
+Ces traitements reposent sur l'intérêt légitime de l'éditeur. Vous pouvez donc vous y opposer à tout moment, pour des raisons tenant à votre situation particulière, en écrivant à {{contact}}.
 
 ### Publicité
 
-Le site n'en affiche pas. S'il en affiche un jour, cette page sera mise à jour d'abord, et votre choix vous sera demandé avant tout cookie publicitaire.
+Le site n'en affiche pas. S'il en affiche un jour, cette page sera mise à jour d'abord.

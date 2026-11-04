@@ -4,6 +4,8 @@ title: À propos (page de test)
 description: Fiche auteur et méthode (page de test).
 libelle_court: À propos
 date_modification: 2026-10-20
+date_revue: 2026-10-20
+prochaine_revue: 2027-10-20
 auteurs:
   - id: fixture-auteur
     nom: Auteur de test

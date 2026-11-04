@@ -295,6 +295,8 @@ const socle = (): Objet => ({
   description: 'Fiche auteur et méthode (page de test).',
   libelle_court: 'À propos',
   date_modification: '2026-10-20',
+  date_revue: '2026-10-20',
+  prochaine_revue: '2027-10-20',
   auteurs: [{ id: 'fixture-auteur', nom: 'Auteur de test', presentation: "Fiche auteur d'une page de test.", profils: ['https://exemple.test/profil'] }],
 });
 
@@ -722,6 +724,8 @@ invalide('dates-revue-loi-montagne', 'pneus', loiMontagne({ date_revue: '2026-06
 invalide('dates-journal-hors-periode', 'dossier', { ...dossier(), journal_modifications: [{ date: '2026-09-15', resume: 'Entrée antérieure à la publication.' }] }, ['DATES-ORDRE'], "Entrée du journal d'un dossier hors de la période de la page.");
 invalide('socle-sans-description', 'socle', (() => { const { description: _, ...reste } = socle(); return reste; })(), ['R7-CHAMP-MANQUANT'], "Page du socle sans description : la meta description manquerait (demande de changement n° 13).");
 invalide('socle-html-sans-description', 'socle', socle(), ['R7-HTML-DESCRIPTION'], 'Page du socle construite sans la meta description de son contenu.', { socleSansDescription: true });
+invalide('dates-socle-revue-delai', 'socle', { ...socle(), prochaine_revue: '2027-12-01' }, ['DATES-REVUE-DELAI'], 'Page du socle dont la prochaine revue dépasse 12 mois (demande de changement n° 13).');
+invalide('dates-socle-revue-ordre', 'socle', { ...socle(), prochaine_revue: '2026-10-20' }, ['R7-DATES'], 'Page du socle dont la prochaine revue ne suit pas la dernière.', undefined, ['R5-REVUE-DEPASSEE']);
 invalide('dates-socle-futur', 'socle', { ...socle(), date_modification: '2026-12-01' }, ['DATES-FUTUR'], 'Page du socle datée dans le futur.');
 invalide('composants-source-manquante', 'pneus', pneus(), ['SOURCES-ABSENTE'], 'Une source citée par la page manque dans la section « Sources ».', { sourceManquante: true });
 invalide(

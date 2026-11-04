@@ -29,9 +29,18 @@ Notes de travail, jamais publiées. Extraits courts ; le texte complet est à l'
 - **Cookies**, https://developers.cloudflare.com/fundamentals/reference/policies-compliances/cloudflare-cookies/ (lue dans le navigateur) : `__cf_bm` avec Bot Fight Mode ; `cf_clearance` pour les vérifications ; Cloudflare encourage ses clients à les signaler à leurs lecteurs.
 - **Pas trouvé** : aucune auto-évaluation CNIL publiée par Cloudflare pour Web Analytics (recherche du 04/11/2026).
 
+- **Comportement de l'injection** (vu par la revue indépendante dans le navigateur, depuis la page du site) : `Accept: text/html` renvoie le script, `Accept: */*` non. D'où `Accept` dans la vérification de production.
+
 ## Data Privacy Framework
 - Liste officielle lue dans le navigateur le 04/11/2026 : Cloudflare, Inc. (https://www.dataprivacyframework.gov/participant/5666) et Google LLC (https://www.dataprivacyframework.gov/participant/5780) : EU-U.S. DPF « Active », prochaine échéance 09/2027.
 - Décision d'adéquation du 10/07/2023 : confirmée par le Tribunal de l'Union en septembre 2025, pourvoi en cours devant la Cour de justice d'après des articles d'avocats (non lu à la source) : à revoir à chaque revue de la page.
+
+- **Liste des décisions d'adéquation**, https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/adequacy-decisions_en, lue par WebFetch : la Tunisie n'y figure pas (16 pays et territoires, dont les États-Unis pour les organisations inscrites).
+
+## Points signalés par la revue, lus par elle à travers des résumés
+- **Lignes directrices 2/2023 du CEPD** (article 5, paragraphe 3, de la directive vie privée), §§ 54-56 : un suivi fondé sur la seule adresse IP peut en relever, à apprécier au cas par cas. Question à poser au professionnel.
+- **Lignes directrices 05/2021**, d'après un résumé d'avocats : un sous-traitant de l'Union qui renvoie des données à son responsable hors de l'Union fait un transfert. Or le message passe par OVHcloud et Google avant d'être lu en Tunisie. Question à poser au professionnel.
+- **RGPD, article 21, paragraphe 4** : le droit d'opposition est présenté « clairement et séparément de toute autre information ».
 
 ## Autres outils
 - **Matomo Cloud**, https://matomo.org/pricing/, lu par WebFetch : offre la moins chère 29 par mois hors taxes pour 50 000 hits (devise non affichée dans ce qui a été lu), hébergé à Francfort. Matomo On-Premise : gratuit, serveur à fournir. Guide de configuration publié sur le site de la CNIL : https://www.cnil.fr/sites/cnil/files/atoms/files/matomo_analytics_-_exemption_-_guide_de_configuration.pdf.

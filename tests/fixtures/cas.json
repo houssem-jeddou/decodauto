@@ -855,6 +855,26 @@
     "explication": "Page du socle construite sans la meta description de son contenu."
   },
   {
+    "nom": "dates-socle-revue-delai",
+    "type": "socle",
+    "erreurs": [
+      "DATES-REVUE-DELAI"
+    ],
+    "alertes": [],
+    "explication": "Page du socle dont la prochaine revue dépasse 12 mois (demande de changement n° 13)."
+  },
+  {
+    "nom": "dates-socle-revue-ordre",
+    "type": "socle",
+    "erreurs": [
+      "R7-DATES"
+    ],
+    "alertes": [
+      "R5-REVUE-DEPASSEE"
+    ],
+    "explication": "Page du socle dont la prochaine revue ne suit pas la dernière."
+  },
+  {
     "nom": "dates-socle-futur",
     "type": "socle",
     "erreurs": [

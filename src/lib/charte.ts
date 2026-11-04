@@ -169,6 +169,8 @@ export interface RegleMarquesMethode {
  * dossier (3 mois) est déjà contrôlé par son schéma (R7-FORMAT) ; la loi montagne a en plus sa revue avant chaque
  * 1er novembre (REVUE_LOI_MONTAGNE).
  */
+/** Pages du socle (demande de changement n° 13) : ce qu'elles disent des prestataires et du droit se relit chaque année. */
+export const DELAI_REVUE_SOCLE_MOIS = 12;
 export const DELAI_REVUE_MOIS = { voyant: 12, 'code-defaut': 12, panne: 12, fluide: 12, pneus: 6 } as const satisfies Partial<Record<TypePage, number>>;
 
 /**

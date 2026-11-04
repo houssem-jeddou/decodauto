@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import { readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
-import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
+import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, URL_SITE, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
 import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, PAGE_CONFIDENTIALITE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
 import { normaliserRecherche } from '../../src/lib/texte.ts';
@@ -502,6 +502,24 @@ export function constatsEnTetesPresents(enTetes: EnTetesDePage): Constat[] {
  * (livrable 6.3) ; expressions interdites, title et meta description présents, title, H1 et meta description uniques
  * (livrable 6.5).
  */
+/** Adresse absolue d'un autre hôte que le site, écritures détournées comprises (antislash, identifiant avant l'hôte). */
+export function adresseTierce(url: string): boolean {
+  try {
+    const lue = new URL(url.trim(), URL_SITE);
+    return (lue.protocol === 'http:' || lue.protocol === 'https:') && lue.host !== new URL(URL_SITE).host;
+  } catch {
+    return false;
+  }
+}
+
+/** Adresses d'autres hôtes dans une feuille de style : url(…) et @import. */
+export function adressesDuCss(css: string): string[] {
+  const sansCommentaires = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  const adresses = [...sansCommentaires.matchAll(/url\(\s*(?:"([^"]*)"|'([^']*)'|([^)\s]*))\s*\)/gi)].map((m) => m[1] ?? m[2] ?? m[3] ?? '');
+  const imports = [...sansCommentaires.matchAll(/@import\s+(?:"([^"]*)"|'([^']*)')/gi)].map((m) => m[1] ?? m[2] ?? '');
+  return [...adresses, ...imports].filter((u) => adresseTierce(u));
+}
+
 /**
  * Aucun traceur ni ressource d'un autre site (livrable 7.2) : la politique de confidentialité dit que le site ne dépose aucun
  * cookie et ne contient aucun script de mesure d'audience. Une page construite n'a donc ni script (seules les données
@@ -512,31 +530,47 @@ export function constatsEnTetesPresents(enTetes: EnTetesDePage): Constat[] {
 export function constatsRessourcesTierces(html: string, fichier: string): Constat[] {
   const $ = cheerio.load(html);
   const constats: Constat[] = [];
-  const tierce = (url: string | undefined): boolean => {
-    if (url === undefined) return false;
-    const adresse = url.trim().toLowerCase();
-    if (!/^(?:https?:)?\/\//.test(adresse)) return false;
-    return !/^(?:https?:)?\/\/decodauto\.com(?:[/:?#]|$)/.test(adresse);
+  const signaler = (quoi: string, url: string): void => {
+    constats.push(erreur('TIERS-RESSOURCE', `${quoi} servi par un autre site (${url}) : le site ne charge rien d'un autre service, et sa politique de confidentialité le dit`, fichier));
   };
   for (const el of $('script').toArray()) {
-    const s = $(el);
-    if ((s.attr('type') ?? '').trim().toLowerCase() === 'application/ld+json' && s.attr('src') === undefined) continue;
-    constats.push(erreur('TIERS-RESSOURCE', `script dans la page (${s.attr('src') ?? 'en ligne'}) : le site n'en a aucun, et sa politique de confidentialité le dit`, fichier));
+    const script = $(el);
+    if ((script.attr('type') ?? '').trim().toLowerCase() === 'application/ld+json' && script.attr('src') === undefined) continue;
+    constats.push(erreur('TIERS-RESSOURCE', `script dans la page (${script.attr('src') ?? 'en ligne'}) : le site n'en a aucun, et sa politique de confidentialité le dit`, fichier));
   }
-  if ($('iframe, object, embed').length > 0) constats.push(erreur('TIERS-RESSOURCE', 'cadre, objet ou intégration dans la page : le site ne charge rien d\'un autre service', fichier));
-  for (const el of $('img, source, video, audio, track').toArray()) {
-    const media = $(el);
-    if (tierce(media.attr('src')) || (media.attr('srcset') ?? '').split(',').some((c) => tierce(c.trim().split(/\s+/)[0]))) {
-      constats.push(erreur('TIERS-RESSOURCE', `média servi par un autre site (${media.attr('src') ?? media.attr('srcset') ?? ''})`, fichier));
+  if ($('iframe, frame, object, embed, applet').length > 0) constats.push(erreur('TIERS-RESSOURCE', "cadre, objet ou intégration dans la page : le site ne charge rien d'un autre service", fichier));
+  if ($('a[ping], area[ping]').length > 0) constats.push(erreur('TIERS-RESSOURCE', 'attribut ping sur un lien : il signale le clic à un service', fichier));
+  // Toute adresse chargée sans action du lecteur. <base> changerait l'hôte de toutes les adresses relatives de la page.
+  const ATTRIBUTS: readonly (readonly [string, string])[] = [
+    ['img, source, video, audio, track, input', 'src'],
+    ['video', 'poster'],
+    ['image, use', 'href'],
+    ['image, use', 'xlink:href'],
+    ['base', 'href'],
+  ];
+  for (const [selecteur, attribut] of ATTRIBUTS) {
+    for (const el of $(selecteur).toArray()) {
+      const url = $(el).attr(attribut);
+      if (url !== undefined && adresseTierce(url)) signaler('ressource', url);
     }
   }
+  for (const el of $('img, source').toArray()) {
+    for (const candidat of ($(el).attr('srcset') ?? '').split(',')) {
+      const url = candidat.trim().split(/\s+/)[0] ?? '';
+      if (adresseTierce(url)) signaler('image', url);
+    }
+  }
+  // Seuls canonical et alternate désignent une adresse sans la charger.
   for (const el of $('link[href]').toArray()) {
     const lien = $(el);
-    const rel = (lien.attr('rel') ?? '').toLowerCase();
-    if (/\b(stylesheet|preload|modulepreload|prefetch|preconnect|dns-prefetch|icon)\b/.test(rel) && tierce(lien.attr('href'))) {
-      constats.push(erreur('TIERS-RESSOURCE', `ressource chargée depuis un autre site (${lien.attr('href') ?? ''})`, fichier));
-    }
+    const rel = (lien.attr('rel') ?? '').trim().toLowerCase().split(/\s+/);
+    if (!rel.every((r) => r === 'canonical' || r === 'alternate') && adresseTierce(lien.attr('href') ?? '')) signaler('ressource', lien.attr('href') ?? '');
   }
+  if ($('meta[http-equiv]').toArray().some((el) => ($(el).attr('http-equiv') ?? '').trim().toLowerCase() === 'refresh')) {
+    constats.push(erreur('TIERS-RESSOURCE', 'redirection automatique dans la page (meta refresh)', fichier));
+  }
+  for (const el of $('style').toArray()) for (const url of adressesDuCss($(el).text())) signaler('ressource de feuille de style', url);
+  for (const el of $('[style]').toArray()) for (const url of adressesDuCss($(el).attr('style') ?? '')) signaler('ressource de style', url);
   return constats;
 }
 
@@ -568,6 +602,13 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
     constats.push(erreur('CONFIDENTIALITE-ANCRE', `la page ${adressePolitique} porte une seule section #${ANCRE_CONFIDENTIALITE}`, `${adressePolitique.replace(/^\//, '')}index.html`));
   }
   const adresseAttendue = politiqueConstruite !== undefined ? adressePolitique : undefined;
+  // Les feuilles de style du site : une police ou une image d'un autre site y passerait inaperçue.
+  for (const chemin of await listerFichiers(dist, '.css')) {
+    const fichier = relative(dist, chemin).split('\\').join('/');
+    for (const url of adressesDuCss(await readFile(chemin, 'utf8'))) {
+      constats.push(erreur('TIERS-RESSOURCE', `ressource servie par un autre site (${url}) dans la feuille de style : le site ne charge rien d'un autre service`, fichier));
+    }
+  }
   for (const chemin of await listerFichiers(dist, '.html')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
     const html = await readFile(chemin, 'utf8');

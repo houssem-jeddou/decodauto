@@ -10,7 +10,7 @@ import Base from '../layouts/Base.astro';
 import { modeleDeLaPage, pageSocle } from '../lib/modeles.ts';
 import { donneesDuSite } from '../../scripts/lib/donnees-site.ts';
 import type { TypePage } from '../schemas/listes.ts';
-import type { PageEditoriale } from '../schemas/pages.ts';
+import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
 
 export async function getStaticPaths() {
   const parType: ReadonlyArray<readonly [TypePage, ReadonlyArray<{ data: unknown; body?: string | undefined; rendered?: { html: string } | undefined }>]> = [
@@ -33,14 +33,18 @@ export async function getStaticPaths() {
   const libelles = new Map(entrees.map(({ page }) => [page.id, page.libelle_court]));
   const { site } = await donneesDuSite(cwd(), libelles, new Date());
   // Pages du socle (livrable 7.2), sauf l'accueil, qui a sa propre route (src/pages/index.astro).
-  const socle = (await getCollection('socle')).filter((entree) => entree.data.id !== 'accueil').map((entree) => {
-    const ligne = site.plan.get(entree.data.id);
-    if (ligne === undefined) throw new Error(`page « ${entree.data.id} » absente du plan du site (data/plan-du-site.json)`);
-    if ((entree.body ?? '').trim() !== '' && entree.rendered?.html === undefined) throw new Error(`page « ${entree.data.id} » : le texte rédigé (corps Markdown) n'a pas été rendu`);
-    return {
-      params: { adresse: ligne.adresse.replace(/^\/+|\/+$/g, '') },
-      props: { titre: entree.data.title, description: entree.data.description, html: pageSocle(entree.data, entree.rendered?.html ?? '') },
-    };
+  const socle = (await getCollection('socle')).flatMap((entree) => {
+    const page = entree.data as PageSaisie<'socle'>;
+    if (page.id === 'accueil') return [];
+    const ligne = site.plan.get(page.id);
+    if (ligne === undefined) throw new Error(`page « ${page.id} » absente du plan du site (data/plan-du-site.json)`);
+    if ((entree.body ?? '').trim() !== '' && entree.rendered?.html === undefined) throw new Error(`page « ${page.id} » : le texte rédigé (corps Markdown) n'a pas été rendu`);
+    return [
+      {
+        params: { adresse: ligne.adresse.replace(/^\/+|\/+$/g, '') },
+        props: { titre: page.title, description: page.description, html: pageSocle(page, entree.rendered?.html ?? '') },
+      },
+    ];
   });
   const editoriales = entrees.map(({ type, page, corps }) => {
     const ligne = site.plan.get(page.id);

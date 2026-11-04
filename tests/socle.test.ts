@@ -17,7 +17,7 @@ import { MARQUEUR_CONTACT, pageSocle } from '../src/lib/modeles.ts';
 import { ADRESSE_SIGNALEMENT } from '../src/lib/site.ts';
 import { soclePageSchema } from '../src/schemas/pages.ts';
 import { lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
-import { constatsExpressionsInterdites, constatsIdentifiants, constatsLienConfidentialite, constatsRessourcesTierces, constatsTypographie, controlerComposantsCommuns } from '../scripts/lib/dist.ts';
+import { adressesDuCss, constatsExpressionsInterdites, constatsIdentifiants, constatsLienConfidentialite, constatsRessourcesTierces, constatsTypographie, controlerComposantsCommuns } from '../scripts/lib/dist.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const EXEMPLE = 'exemples/socle/mentions-legales.md';
@@ -48,9 +48,11 @@ const docu = (contenuPage: string, tete = '<title>T</title><meta name="descripti
 const codes = (constats: readonly { regle: string }[]): string[] => [...new Set(constats.map((c) => c.regle))].sort();
 
 describe('page du socle : schéma et modèle', () => {
-  test('la description est obligatoire (demande de changement n° 13)', () => {
-    const { description: _retiree, ...sans } = brut;
-    assert.equal(soclePageSchema.safeParse(sans).success, false);
+  test('la description et les dates de revue sont obligatoires (demande de changement n° 13)', () => {
+    for (const champ of ['description', 'date_revue', 'prochaine_revue']) {
+      const { [champ]: _retire, ...sans } = brut;
+      assert.equal(soclePageSchema.safeParse(sans).success, false, champ);
+    }
     assert.equal(soclePageSchema.safeParse(brut).success, true);
   });
 
@@ -95,11 +97,18 @@ describe('politique de confidentialité : texte', () => {
     assert.equal(plan.length, 42);
   });
 
-  test('elle donne ce qu’exige l’article 13 du RGPD pour les deux traitements', () => {
-    for (const attendu of [/Qui est responsable/, /Houssem Jeddou/, /\*\*Pourquoi\*\*/, /\*\*Base légale\*\*/, /intérêt légitime/, /\*\*Qui les reçoit\*\*/, /\*\*Durée\*\*/, /Hors de l'Union européenne/, /décision d'adéquation/, /accès/, /rectification/, /effacement/, /limitation/, /vous opposer/, /réclamation auprès de la \[CNIL\]/, /Rien ne vous oblige/, /décision automatisée/]) {
+  test('elle garde les rubriques de l’article 13 du RGPD (la présence d’un mot, pas la justesse du texte, que Houssem valide)', () => {
+    for (const attendu of [/Qui est responsable/, /Houssem Jeddou/, /\*\*Pourquoi\*\*/, /\*\*Base légale\*\*/, /intérêt légitime/, /\*\*Qui les reçoit\*\*/, /\*\*Durée\*\*/, /Hors de l'Union européenne/, /décision d'adéquation/, /accès/, /rectification/, /effacement/, /limitation/, /réclamation auprès de la \[CNIL\]/, /Rien ne vous oblige/, /Sans elles, la page ne peut pas/, /décision entièrement automatisée/]) {
       assert.match(corpsMarkdown, attendu);
     }
     assert.equal(corpsMarkdown.match(/\*\*Durée\*\*/g)?.length, 2, 'une durée par traitement');
+  });
+
+  test('le droit d’opposition est présenté à part, sous son propre titre (RGPD, art. 21, par. 4)', () => {
+    const section = corpsMarkdown.slice(corpsMarkdown.indexOf('### Votre droit d'), corpsMarkdown.indexOf('### Publicité'));
+    assert.match(section, /vous y opposer à tout moment, pour des raisons tenant à votre situation particulière/);
+    assert.ok(section.includes(MARQUEUR_CONTACT));
+    assert.doesNotMatch(section, /rectification|effacement|réclamation/);
   });
 
   test('elle ne parle ni en « nous » ni en promesse interdite, et respecte la typographie du site', () => {
@@ -127,12 +136,23 @@ describe('ce que la politique affirme : aucun script ni ressource d’un autre s
     ['variante d’image d’un autre site', '<img src="/a.png" srcset="/a.png 1x, https://x.test/b.png 2x" alt="">'],
     ['domaine qui imite le site', '<img src="https://decodauto.com.x.test/p.png" alt="">'],
     ['vidéo d’un autre site', '<video src="https://x.test/v.mp4"></video>'],
+    ['affiche de vidéo d’un autre site', '<video poster="https://x.test/p.png"></video>'],
+    ['bouton image d’un autre site', '<input type="image" src="https://x.test/p.png" alt="">'],
+    ['image SVG d’un autre site', '<svg><image href="https://x.test/p.png"></image></svg>'],
+    ['base d’un autre site', '<base href="https://x.test/">'],
+    ['redirection automatique', '<meta http-equiv="refresh" content="0;url=https://x.test/">'],
+    ['ping sur un lien', '<a href="/x/" ping="https://x.test/p">x</a>'],
+    ['police dans une balise style', '<style>@font-face{font-family:a;src:url(https://fonts.gstatic.com/a.woff2)}</style>'],
+    ['import dans une balise style', '<style>@import "https://x.test/a.css";</style>'],
+    ['image dans un attribut style', '<div style="background:url(\'https://x.test/p.png\')"></div>'],
+    ['écriture détournée par un antislash', '<img src="https:\\\\x.test\\p.png" alt="">'],
+    ['identifiant avant l’hôte', '<img src="https://decodauto.com:80@x.test/p.png" alt="">'],
   ];
   for (const [nom, bloc] of cas) {
     test(`refusé : ${nom}`, () => assert.deepEqual(codes(constatsRessourcesTierces(docu(bloc), 'x')), ['TIERS-RESSOURCE']));
   }
   test('refusé : police ou feuille de style d’un autre site', () => {
-    for (const rel of ['stylesheet', 'preload', 'preconnect', 'dns-prefetch', 'icon']) {
+    for (const rel of ['stylesheet', 'preload', 'preconnect', 'dns-prefetch', 'icon', 'manifest', 'prerender']) {
       assert.deepEqual(codes(constatsRessourcesTierces(docu('', `<title>T</title><link rel="${rel}" href="https://fonts.googleapis.com/x">`), 'x')), ['TIERS-RESSOURCE'], rel);
     }
   });
@@ -140,6 +160,23 @@ describe('ce que la politique affirme : aucun script ni ressource d’un autre s
     const permis = '<script type="application/ld+json">{}</script><img src="/p.png" alt=""><img src="https://decodauto.com/p.png" alt=""><a href="https://www.cnil.fr/fr/plaintes">CNIL</a>';
     assert.deepEqual(constatsRessourcesTierces(docu(permis, '<title>T</title><link rel="canonical" href="https://decodauto.com/"><link rel="icon" href="data:,"><link rel="stylesheet" href="/_astro/a.css">'), 'x'), []);
     assert.deepEqual(constatsRessourcesTierces(docu(principal), 'x'), []);
+    // Le style du site reste permis dans la page (Astro peut l'y placer), tant qu'il ne charge rien d'un autre site.
+    assert.deepEqual(constatsRessourcesTierces(docu('<style>a{color:red}b{background:url(/p.png)}c{background:url(data:,x)}</style>'), 'x'), []);
+    assert.deepEqual(constatsRessourcesTierces(docu('<script type="application/ld+json">{"url":"https://schema.org"}</script>'), 'x'), []);
+  });
+
+  test('les feuilles de style du site construit sont lues aussi, et la vraie feuille n’a aucune ressource d’un autre site', async () => {
+    assert.deepEqual(adressesDuCss(await readFile(join(racine, 'src/styles/site.css'), 'utf8')), []);
+    assert.deepEqual(adressesDuCss('/* url(https://x.test/a) */ a{background:url(/p.png)}'), []);
+    assert.deepEqual(adressesDuCss('a{background:url( "https://x.test/p.png" )}'), ['https://x.test/p.png']);
+    const dist = await mkdtemp(join(tmpdir(), 'dist-css-'));
+    try {
+      await writeFile(join(dist, 'index.html'), docu('<h1>Accueil</h1>'));
+      await writeFile(join(dist, 'a.css'), '@font-face{src:url(https://fonts.gstatic.com/a.woff2)}');
+      assert.ok(codes(await controlerComposantsCommuns(dist)).includes('TIERS-RESSOURCE'));
+    } finally {
+      await rm(dist, { recursive: true, force: true });
+    }
   });
 });
 

@@ -7,10 +7,10 @@
 import { appendFile, readFile } from 'node:fs/promises';
 import { argv, env, exit, stdout } from 'node:process';
 import { modeIndexation } from '../src/lib/indexation.ts';
-import { verifierProduction, type Lire } from './lib/production.ts';
+import { ENTETES_LECTURE, verifierProduction, type Lire } from './lib/production.ts';
 
 const lire: Lire = async (url) => {
-  const r = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(20_000), headers: { 'user-agent': 'decodauto-verification-production' } });
+  const r = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(20_000), headers: ENTETES_LECTURE });
   return {
     statut: r.status,
     location: r.headers.get('location'),

@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
-import { ANCRE_METHODE, DELAI_REVUE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature } from './charte.ts';
+import { ANCRE_METHODE, DELAI_REVUE_MOIS, DELAI_REVUE_SOCLE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature } from './charte.ts';
 import { LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
@@ -675,9 +675,19 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   if (!lecture.success) return { constats };
   if (type === 'socle') {
     // L'adresse du socle vient uniquement du plan du site, comme pour les autres pages.
-    const socle = lecture.data as { id: string; title: string; description: string; date_modification: Date };
-    if (dansLeFutur(socle.date_modification, ctx.aujourdhui)) {
-      constats.push(erreur('DATES-FUTUR', `date_modification (${jourIso(socle.date_modification)}) dans le futur : la page afficherait une date fausse`, fichier));
+    const socle = lecture.data as { id: string; title: string; description: string; date_modification: Date; date_revue: Date; prochaine_revue: Date };
+    for (const [champ, date] of [['date_modification', socle.date_modification], ['date_revue', socle.date_revue]] as const) {
+      if (dansLeFutur(date, ctx.aujourdhui)) constats.push(erreur('DATES-FUTUR', `${champ} (${jourIso(date)}) dans le futur : la page afficherait une date fausse`, fichier));
+    }
+    if (socle.prochaine_revue.getTime() <= socle.date_revue.getTime()) {
+      constats.push(erreur('R7-DATES', 'prochaine_revue doit être postérieure à date_revue', fichier));
+    }
+    const limiteRevue = plusMois(socle.date_revue, DELAI_REVUE_SOCLE_MOIS);
+    if (socle.prochaine_revue.getTime() > limiteRevue.getTime()) {
+      constats.push(erreur('DATES-REVUE-DELAI', `prochaine_revue (${jourIso(socle.prochaine_revue)}) au-delà du délai de revue des pages du socle : au plus tard le ${jourIso(limiteRevue)}`, fichier));
+    }
+    if (socle.prochaine_revue.getTime() < ctx.aujourdhui.getTime()) {
+      constats.push(alerte('R5-REVUE-DEPASSEE', `la revue était prévue le ${jourIso(socle.prochaine_revue)}`, fichier));
     }
     const ligne = ctx.plan.get(socle.id);
     if (ligne === undefined) {

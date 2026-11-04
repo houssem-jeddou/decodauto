@@ -19,6 +19,15 @@ export interface Reponse {
   erreurReseau?: string | undefined;
 }
 
+/**
+ * En-têtes de lecture : ceux d'un navigateur qui demande une page. Cloudflare n'injecte son script de mesure que si la demande
+ * accepte du HTML : avec `Accept: *\/*`, la valeur par défaut de fetch, PROD-TRACEUR ne le voyait pas (revue du livrable 7.2).
+ */
+export const ENTETES_LECTURE = {
+  'user-agent': 'decodauto-verification-production',
+  accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+} as const;
+
 /** Lit une adresse sans suivre les redirections. */
 export type Lire = (url: string) => Promise<Reponse>;
 

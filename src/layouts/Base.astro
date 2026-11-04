@@ -20,7 +20,7 @@ const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.
 // H1, lien de signalement en pied de page (contrôles MENTION-IA-* et SIGNALER-ERREUR-ABSENT).
 const haut = bandeau();
 // Lien vers la politique de confidentialité : dès que sa page est construite, sur toutes les pages, à son adresse du plan.
-const pageConfidentialite = (await getCollection('socle')).some((page) => page.data.id === PAGE_CONFIDENTIALITE);
+const pageConfidentialite = (await getCollection('socle')).some((page) => (page.data as { id: string }).id === PAGE_CONFIDENTIALITE);
 const adresseConfidentialite = pageConfidentialite ? (await getEntry('plan-du-site', PAGE_CONFIDENTIALITE))?.data.adresse : undefined;
 // Sur la page 404, l'adresse demandée n'est pas connue du site statique : le lecteur la complète dans son courriel.
 const bas = pied(sansCanonical ? undefined : Astro.url.pathname, adresseConfidentialite);

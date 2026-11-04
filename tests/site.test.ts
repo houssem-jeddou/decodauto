@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { verifierProduction, suivre, type Lire, type Reponse } from '../scripts/lib/production.ts';
+import { ENTETES_LECTURE, verifierProduction, suivre, type Lire, type Reponse } from '../scripts/lib/production.ts';
 import {
   LIGNE_SITEMAP,
   URL_SITE,
@@ -88,6 +88,10 @@ const regles = async (lire: Lire, indexable = false): Promise<string[]> =>
   [...new Set((await verifierProduction({ lire, robotsDepot: ROBOTS, indexable })).map((c) => c.regle))].sort();
 
 describe('vérification de la production (redirections, noindex, robots.txt, plan du site)', () => {
+  test('la lecture demande du HTML, comme un navigateur : sinon Cloudflare n’injecte pas son script, et PROD-TRACEUR ne le verrait pas', () => {
+    assert.match(ENTETES_LECTURE.accept, /^text\/html/);
+  });
+
   test('la page servie n’a ni script ni cookie, comme le dit la politique de confidentialité (PROD-TRACEUR, PROD-COOKIE)', async () => {
     const page = '<a href="mailto:erreur@decodauto.com?subject=x">Signaler une erreur</a>';
     const avec = (corps: string, extra: Partial<Reponse> = {}): Lire => reseauConforme({ 'https://decodauto.com/': ok(`<html>${corps}${page}</html>`, extra) });
