@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
+Dernière mise à jour : 04/11/2026 (12 h 30, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,9 +12,9 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ✅ Validée par Houssem (04/11, 12 h 03) · porte vérifiée et relue (deux revues) · PR #20 (fusion demandée) · tag à poser sur demande. Livrables 6.0 à 6.9 (PR #8, #11 à #20) ; demandes de changement n° 4 à 11 acceptées (03 v8) | `docs/10_charte_editoriale.md` (charte) ; modèles `src/lib/modeles.ts` ; exemples `exemples/` ; `travaux/etape-6/` (porte : `porte-de-sortie.md`, briefs : `briefs/`) |
-| 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
-| 8 | Vague A | Suivante. Premier livrable : modèle de l'outil voyants (demande de changement n° 11) ; juste avant la rédaction : demande de changement des requêtes absentes de 06 | `travaux/etape-6/briefs/` |
+| 6 | Charte et modèles de pages | ✅ Validée par Houssem (04/11, 12 h 03) · porte vérifiée et relue (deux revues) · PR #20 fusionnée (77bea5e) · tag à poser sur demande. Livrables 6.0 à 6.9 (PR #8, #11 à #20) ; demandes de changement n° 4 à 11 acceptées (03 v8) | `docs/10_charte_editoriale.md` (charte) ; modèles `src/lib/modeles.ts` ; exemples `exemples/` ; `travaux/etape-6/` (porte : `porte-de-sortie.md`, briefs : `briefs/`) |
+| 7 | Socle technique | ▶ Piste technique reprise le 04/11 (12 h 25, décision de Houssem), en alternance avec l'étape 8 : un seul livrable présenté à la fois. Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées. Prochain : 7.2 (description des pages du socle, politique de confidentialité, mesure d'audience) ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
+| 8 | Vague A | ▶ Étape principale depuis le 04/11. Ordre décidé le 04/11 : 8.1 modèle de l'outil voyants (demande de changement n° 11) ; puis 7.2 ; 8.2 demande de changement des requêtes absentes de 06, juste avant la rédaction ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants) ; livrables 7.x intercalés | `travaux/etape-6/briefs/` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
 | 9 | Recette et mise en ligne A | À faire | – |
 | 10 | Vague B | À faire | – |
 | 11 | Vague C | À faire | – |
@@ -24,7 +24,7 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 | Étape | Cible (03) | Prévision au 03/11 | Dépend de |
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
-| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause depuis 12 h 10 ; reprise quand Houssem la redemande | statut juridique (mentions légales) |
+| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause du 28/10 (12 h 10) au 04/11 ; reprise le 04/11, en alternance avec l'étape 8 ; ≈ 05–15/11 | statut juridique (mentions légales) ; parcours de l'auteur (« à propos ») |
 | 6. Charte et modèles | 27–29/10 | ✅ terminée le 04/11 (porte validée à 12 h 03 ; aucun travail du 25 au 27/10 ni du 29/10 au 01/11) | – |
 | 8. Vague A | 29/10–01/11 | ≈ 05–15/11 (outil voyants d'abord, puis le minimum) | portes 5 et 6 ✅ ; requêtes absentes mesurées ; sources des briefs trouvées |
 | 9. Mise en ligne du minimum | 31/10 | ≈ 14–16/11 | portes 7 et 8 ; sécurité des comptes |
@@ -140,7 +140,7 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
     - consignes de rédaction validées (`consignes.json`, seule partie écrite à la main) : question de décision, angle, élément unique, questions à traiter, sources à trouver avant la rédaction, hors périmètre ; aucun volume, lien, vague ni verdict recopié ;
     - `tests/briefs.test.ts` (17 tests) : briefs à jour, consignes des 22 pages, question des exemples lue dans l'exemple, ni volume ni vague recopiés (vérifié par mutation), liens dans les deux sens, relevé sur la requête principale et identique à ses empreintes ; `npm test` 379 tests.
   - Une revue indépendante (« à corriger », rien de bloquant), corrections intégrées.
-- [x] **6.9 Porte de sortie de l'étape 6.** Lancée le 03/11 (22 h 53) sur le feu vert de Houssem ; présentée le 03/11 ; validée par Houssem le 04/11 (12 h 03), avec les quatre décisions telles que recommandées ; fusion de la PR #20 demandée.
+- [x] **6.9 Porte de sortie de l'étape 6.** Lancée le 03/11 (22 h 53) sur le feu vert de Houssem ; présentée le 03/11 ; validée par Houssem le 04/11 (12 h 03), avec les quatre décisions telles que recommandées. PR #20 fusionnée le 04/11 (12 h 10) sur la demande de Houssem (77bea5e) ; CI de `main` verte (run 41819136266 : contrôles, recette des exemples, Lighthouse, déploiement et vérification en production ; aucune page éditoriale publiée).
   - Branche `etape-6/porte-de-sortie`, PR #20 ; `travaux/etape-6/porte-de-sortie.md` (critères, preuves, décisions) ; `tests/porte6.test.ts` (3 tests, vérifiés par mutation).
   - Décisions validées : demande de changement n° 11 (modèle de l'outil voyants, premier livrable de l'étape 8 ; 03 v8) ; partie « Les codes défaut » ajoutée à la section « Méthode » (nouvelle empreinte des textes affichés `509c4356…`, `data/charte-validation.json`) ; « pages écrites pour vendre un appareil ou un service » (charte §2.2) ; « nos rédactions » dans la liste du §2.7 ; tag `etape-6-charte-modeles` proposé, à poser sur sa demande.
   - Deux revues indépendantes (le maximum), corrections intégrées.
@@ -259,13 +259,18 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 
   PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 - 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 04/11/2026 (12 h 25), Houssem : **lance l'étape 8 et reprend la piste technique de l'étape 7** (« Ok […] pour avancer dans ce sens »), sur la proposition de Claude :
+  - l'étape 8 est l'étape principale ; l'étape 7 avance en piste technique (règle 12 de 03), en alternance, un seul livrable présenté à la fois (la décision du 28/10, un livrable à la fois, reste la règle de présentation) ;
+  - ordre : 8.1 modèle de l'outil voyants ; 7.2 description des pages du socle (demande de changement), politique de confidentialité et mesure d'audience (conditions d'exemption vérifiées sur le site de la CNIL) ; 8.2 demande de changement des requêtes absentes de 06 ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants) ; livrables 7.x (données structurées, réglages Cloudflare, emplacements factices, Lighthouse du socle) intercalés ;
+  - à lancer de son côté, car ils prennent du temps : statut juridique (activité qui couvre des recettes publicitaires), parcours pour « à propos », préalables de l'étape 9 (GitHub Pro, double authentification, verrou du domaine) ;
+  - le travail reprend dans une nouvelle conversation du projet, avec un point de reprise (`claude/etape8_point_de_reprise.md`).
 - 04/11/2026 (12 h 03), Houssem : **valide la porte de sortie de l'étape 6** (« Oui je valide, fais le nécessaire et fusionne la PR 20 »), avec les quatre décisions telles que recommandées :
   - **demande de changement n° 11 acceptée**, option (a) : le modèle de l'outil voyants est le premier livrable de l'étape 8, et la porte de l'étape 8 gagne un critère sur l'outil (03 v8) ;
   - partie « Les codes défaut » ajoutée à la section « Méthode », mot pour mot comme proposée ; nouvelle empreinte des textes affichés versée (`509c4356…`) ;
   - charte : « pages écrites pour vendre un appareil ou un service » (§2.2) ; « nos rédactions » dans la liste du §2.7 ;
   - tag `etape-6-charte-modeles` proposé, à poser sur sa demande.
 
-  Il demande la fusion de la PR #20. L'étape 6 est terminée ; suivant : étape 8, en commençant par le modèle de l'outil voyants.
+  Il demande la fusion de la PR #20 (faite à 12 h 10, 77bea5e). L'étape 6 est terminée ; suivant : étape 8, en commençant par le modèle de l'outil voyants.
 - 03/11/2026 (22 h 53), Houssem : **lance la porte de sortie de l'étape 6** (« je te donne le go pour la porte de sortie de l'étape 6 »).
 - 03/11/2026 (22 h 41), Houssem : **valide le livrable 6.8** (« Oui, je valide les consignes ») : les consignes de rédaction des 22 briefs de la vague A (`travaux/etape-6/briefs/consignes.json`), avec le relevé Google France relu (6.7). Il demande la fusion de la PR #19 (faite à 22 h 48, 5f7dcd3). Restent ouverts, sans décision : le modèle de l'outil voyants (proposition de Claude : piste technique, contrôlée à la porte de l'étape 8 ; à trancher à la porte 6.9) et le texte de référence de la page « pression des pneus » (à chercher au début de l'étape 8 ; demande de changement si aucun ne convient). Suivant : 6.9, porte de sortie de l'étape 6.
 - 03/11/2026 (après 21 h 56), Houssem : **lance le livrable 6.8** (« Lance 6.8 Feu vert »).
@@ -641,7 +646,9 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
   - défaut de contrôle technique : lire la version de R323-1 en vigueur depuis le 01/01/2026 ;
   - garantie légale : lire l'article L217-3 en entier (voitures d'occasion) ;
   - documents de la SRA non lus (accès refusé).
-- **Branches anciennes** du dépôt (`claude/great-fermat-txuonc`, `docs/porte-etape-3`) : peuvent être supprimées.
+- **Branches anciennes** du dépôt (`claude/great-fermat-txuonc`, `docs/porte-etape-3`, et les branches fusionnées de l'étape 6, dont `etape-6/releve-google-france`) : peuvent être supprimées.
+- **Tag de l'étape 6** : `etape-6-charte-modeles` proposé sur 77bea5e (fusion de la PR #20) ; à poser seulement sur la demande explicite de Houssem.
+- **Copie `docs/04`** : celle de `main` s'arrête à la validation de la porte 6 ; les lignes de la fusion de la PR #20 et de la décision du 04/11 (12 h 25) partent avec la prochaine pull request.
 
 ## Idées reportées
 - Loi montagne (étape 8) : liste des départements avec leur arrêté, ou outil « ma commune est-elle concernée ? », après lecture des arrêtés (paquet 6.6c, décisions 4 et 5) ; sanction du panneau B26 à lire sur Légifrance.
