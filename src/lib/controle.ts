@@ -6,7 +6,7 @@ import { LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, so
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
-import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_OUTIL, idFiltre, libelleDetail, modeleOutilVoyants, outilVoyants, type ModeleOutil } from './outil-voyants.ts';
+import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_INDEX_OUTIL, TITRE_OUTIL, ancreLigneOutil, idFiltre, libelleDetail, modeleOutilVoyants, outilVoyants, type ModeleOutil } from './outil-voyants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -1103,6 +1103,9 @@ export function controlerHtml(
  *    l'encadré vers la liste, au texte exact ;
  *  - OUTIL-FILTRE : un bouton radio actif par couleur présente, plus « tous », seul coché, chacun avec l'identifiant que lit
  *    le CSS et son libellé exact ;
+ *  - OUTIL-INDEX : un seul index des dessins, entre le filtre et le premier groupe, au titre exact ; une entrée par ligne de
+ *    la base, une fois, dans l'ordre de la liste : le pictogramme de la ligne et son nom, sans autre texte, un seul lien vers
+ *    cette ligne, et la couleur de la base (le filtre la lit) ;
  *  - OUTIL-SANS-JS : contenu présent dans le HTML sans JavaScript : ni script, ni noscript, ni style, ni template dans
  *    l'outil ; rien de masqué (hidden, display:none, visibility:hidden, aria-hidden sur du texte, inert), ni l'outil, ni un
  *    bloc qui le contient, ni un bloc qu'il contient. Seules les références sont dans un bloc dépliable, ouvert sans script.
@@ -1227,6 +1230,40 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
 
   if (!n($('[data-sources]').first().text()).includes(n(NOTE_SOURCES_OUTIL))) {
     constats.push(erreur('OUTIL-LIBELLES', `la section « Sources » dit où sont les pages citées : « ${NOTE_SOURCES_OUTIL} »`, fichier));
+  }
+
+  // Index des dessins (décision 9 du paquet 8.1) : comparé au modèle. Une ligne absente de la liste relève d'OUTIL-LIGNES.
+  const index = outil.find('[data-outil-index]');
+  if (index.length !== 1) {
+    constats.push(erreur('OUTIL-INDEX', `l'outil a un seul index des dessins (data-outil-index), généré depuis la base ; trouvé : ${index.length}`, fichier));
+  } else {
+    const blocs = outil.children().toArray().map((el) => $(el));
+    const rang = (selecteur: string): number => blocs.findIndex((el) => el.is(selecteur));
+    const place = rang('[data-outil-index]');
+    const premierGroupe = rang('[data-outil-groupe]');
+    if (place < 0 || place < rang('[data-outil-filtre]') || (premierGroupe >= 0 && place > premierGroupe)) {
+      constats.push(erreur('OUTIL-INDEX', "l'index des dessins se place dans l'outil, entre le filtre et le premier groupe", fichier));
+    }
+    if (n(index.find('h3').first().text()) !== n(TITRE_INDEX_OUTIL)) constats.push(erreur('OUTIL-INDEX', `le titre de l'index est « ${TITRE_INDEX_OUTIL} »`, fichier));
+    const entrees = index.find('[data-outil-index-entree]').toArray().map((el) => $(el));
+    const lues = entrees.map((e) => e.attr('data-outil-index-entree') ?? '');
+    if (lues.join('|') !== voulus.join('|')) {
+      constats.push(erreur('OUTIL-INDEX', `l'index a une entrée par ligne de la base, une fois, dans l'ordre de la liste ; manquantes : ${voulus.filter((id) => !lues.includes(id)).join(', ') || 'aucune'} ; inconnues : ${lues.filter((id) => !voulus.includes(id)).join(', ') || 'aucune'}`, fichier));
+    }
+    const parVoyant = new Map(attendues.map((l) => [l.voyant, l]));
+    for (const entree of entrees) {
+      const id = entree.attr('data-outil-index-entree') ?? '';
+      const l = parVoyant.get(id);
+      if (l === undefined) continue;
+      const problemes: string[] = [];
+      if (entree.attr('data-couleur') !== l.couleur) problemes.push(`data-couleur (attendu : ${l.couleur}, le filtre le lit)`);
+      const liens = entree.find('a');
+      if (liens.length !== 1 || liens.first().attr('href') !== `#${ancreLigneOutil(id)}`) problemes.push(`un seul lien, vers sa ligne (#${ancreLigneOutil(id)})`);
+      if (n(entree.text()) !== n(l.nom)) problemes.push(`le nom de la ligne, sans autre texte (« ${l.nom} »)`);
+      const picto = entree.find('.voyant').first();
+      if (picto.find('svg').length === 0 || picto.attr('data-pictogramme') !== l.pictogramme || picto.attr('data-couleur') !== l.couleur) problemes.push(`pictogramme (attendu : « ${l.pictogramme} », couleur ${l.couleur})`);
+      if (problemes.length > 0) constats.push(erreur('OUTIL-INDEX', `index, entrée « ${id} » : ${problemes.join(' ; ')}`, fichier));
+    }
   }
 
   // Filtre par couleur : boutons radio, sans script ; « tous » coché au départ, pour que tout s'affiche.

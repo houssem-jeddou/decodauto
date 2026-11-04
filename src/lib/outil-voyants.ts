@@ -8,7 +8,10 @@
 //    quand elle est construite ; notices et pages citées dans un bloc dépliable sous la ligne ;
 //  - groupes par couleur, avec le compte des verdicts du groupe : la couleur ne suffit pas à décider (brief `voyants`) ;
 //  - filtre par couleur sans JavaScript : boutons radio et règles CSS (`:has(:checked)`, src/styles/site.css). Tout le
-//    contenu est dans le HTML, « Tous » est coché au départ ; un navigateur sans `:has()` affiche simplement toute la liste.
+//    contenu est dans le HTML, « Tous » est coché au départ ; un navigateur sans `:has()` affiche simplement toute la liste ;
+//  - index des dessins en tête de la liste (décision 9 du paquet 8.1) : pictogramme et nom de chaque ligne, dans l'ordre de la
+//    liste, chaque entrée menant à sa ligne, sans verdict : celui-ci se lit sur la ligne. Le filtre s'y applique aussi, si bien
+//    qu'une entrée affichée mène toujours à une ligne affichée.
 //
 // Textes affichés fixes : src/lib/outil-textes.ts, validés par Houssem avec le livrable et verrouillés par l'empreinte de la
 // page outil. Contrôles de la page construite : OUTIL-* (src/lib/controle.ts, CONTROLES.md). Module sans dépendance à
@@ -29,9 +32,9 @@ import {
 import { enLettres, enumerer } from './charte.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { COULEURS_VOYANT, LIBELLES_COULEURS, rangUrgence, rangVerdict, type Urgence, type Verdict } from '../schemas/listes.ts';
-import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, INTRODUCTION_OUTIL, LEGENDE_FILTRE, LIBELLE_FILTRE_TOUS, LIBELLE_LIEN_PAGE, TITRE_OUTIL } from './outil-textes.ts';
+import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, INTRODUCTION_OUTIL, LEGENDE_FILTRE, LIBELLE_FILTRE_TOUS, LIBELLE_LIEN_PAGE, TITRE_INDEX_OUTIL, TITRE_OUTIL } from './outil-textes.ts';
 
-export { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, INTRODUCTION_OUTIL, LEGENDE_FILTRE, LIBELLE_FILTRE_TOUS, LIBELLE_LIEN_PAGE, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_OUTIL } from './outil-textes.ts';
+export { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, INTRODUCTION_OUTIL, LEGENDE_FILTRE, LIBELLE_FILTRE_TOUS, LIBELLE_LIEN_PAGE, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_INDEX_OUTIL, TITRE_OUTIL } from './outil-textes.ts';
 
 export type CouleurVoyant = (typeof COULEURS_VOYANT)[number];
 
@@ -237,6 +240,28 @@ function filtreHtml(modele: ModeleOutil): string {
   ].join('');
 }
 
+/**
+ * Index des dessins : une entrée par ligne, dans l'ordre de la liste, sans niveau ni action. Le pictogramme garde la couleur
+ * de la base ; le nom écrit à côté le rend décoratif (charte §3.6).
+ */
+function indexHtml(modele: ModeleOutil, pictogrammes: ReadonlyMap<string, string>): string {
+  const titre = `${ANCRE_OUTIL}-index`;
+  const entree = (l: LigneOutil): string => {
+    const dessin = pictogrammes.get(l.pictogramme);
+    return [
+      `<li data-outil-index-entree="${attributHtml(l.voyant)}" data-couleur="${attributHtml(l.couleur)}"><a href="#${attributHtml(ancreLigneOutil(l.voyant))}">`,
+      dessin !== undefined ? `<span class="voyant" data-couleur="${attributHtml(l.couleur)}" data-pictogramme="${attributHtml(l.pictogramme)}">${pictogrammeDecoratif(dessin)}</span>` : '',
+      `<span>${texteHtml(l.nom)}</span></a></li>`,
+    ].join('');
+  };
+  return [
+    `<nav class="outil-index" data-outil-index aria-labelledby="${attributHtml(titre)}">`,
+    `<h3 id="${attributHtml(titre)}">${texteHtml(TITRE_INDEX_OUTIL)}</h3>`,
+    `<ul role="list">${modele.groupes.flatMap((g) => g.lignes).map(entree).join('')}</ul>`,
+    '</nav>',
+  ].join('');
+}
+
 /** Outil voyants : élément unique de la page outil, lisible et filtrable sans JavaScript. */
 export function outilVoyants(modele: ModeleOutil, pictogrammes: ReadonlyMap<string, string>): string {
   return [
@@ -244,6 +269,7 @@ export function outilVoyants(modele: ModeleOutil, pictogrammes: ReadonlyMap<stri
     `<h2 id="${ANCRE_OUTIL}-titre">${texteHtml(TITRE_OUTIL)}</h2>`,
     `<p data-outil-intro>${texteHtml(INTRODUCTION_OUTIL)}</p>`,
     filtreHtml(modele),
+    indexHtml(modele, pictogrammes),
     ...modele.groupes.map((g) => groupeHtml(g, pictogrammes)),
     `<p class="outil-absent" data-outil-absent>${texteHtml(modele.couleursAbsentes !== '' ? `${ABSENT_OUTIL} ${modele.couleursAbsentes}` : ABSENT_OUTIL)}</p>`,
     '</section>',

@@ -943,6 +943,15 @@
     "explication": "« Tous » n'est pas coché au départ : une partie de la liste serait cachée."
   },
   {
+    "nom": "outil-index-entree-manquante",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-INDEX"
+    ],
+    "alertes": [],
+    "explication": "Une ligne de la base n'a pas son entrée dans l'index des dessins : le lecteur n'y trouverait pas ce dessin."
+  },
+  {
     "nom": "outil-ligne-masquee",
     "type": "voyant",
     "erreurs": [

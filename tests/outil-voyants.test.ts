@@ -10,7 +10,7 @@ import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { dateDesDonnees } from './date-des-donnees.ts';
 import { pageOutilVoyants, pageVoyant, texteRedige } from '../src/lib/modeles.ts';
-import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, NOTE_SOURCES_OUTIL, ORDRE_GROUPES, RENVOI_ENCADRE_OUTIL, ancreLigneOutil, idFiltre, modeleOutilVoyants, outilVoyants } from '../src/lib/outil-voyants.ts';
+import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, NOTE_SOURCES_OUTIL, ORDRE_GROUPES, RENVOI_ENCADRE_OUTIL, TITRE_INDEX_OUTIL, ancreLigneOutil, idFiltre, modeleOutilVoyants, outilVoyants } from '../src/lib/outil-voyants.ts';
 import { controlerOutilVoyants, controlerPage } from '../src/lib/controle.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
 import { AUTEUR_SUPPOSE, lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
@@ -122,6 +122,25 @@ describe('outil voyants : modèle généré depuis la base', () => {
     assert.equal(base.filter((v) => /^[^,]*\bSTOP\b/.test(v.nom) && !/moteur|direction/i.test(v.nom)).length, 0);
   });
 
+  test('l’index des dessins : une entrée par ligne, dans l’ordre de la liste, avec son dessin et un lien vers sa ligne, sans verdict', () => {
+    const rendu = outilVoyants(modele, site.pictogrammes);
+    const debut = rendu.indexOf('data-outil-index');
+    const fin = rendu.indexOf('</nav>');
+    assert.ok(debut > rendu.indexOf('data-outil-filtre') && fin < rendu.indexOf('data-outil-groupe'), 'index entre le filtre et le premier groupe');
+    const index = rendu.slice(debut, fin);
+    assert.ok(index.includes(TITRE_INDEX_OUTIL));
+    const ordre = modele.groupes.flatMap((g) => g.lignes);
+    assert.deepEqual([...index.matchAll(/data-outil-index-entree="([^"]+)"/g)].map((m) => m[1]), ordre.map((l) => l.voyant));
+    for (const l of ordre) {
+      const entree = new RegExp(`<li data-outil-index-entree="${l.voyant}"[\\s\\S]*?</li>`).exec(index)?.[0] ?? '';
+      assert.ok(entree.includes(`href="#${ancreLigneOutil(l.voyant)}"`), l.voyant);
+      assert.ok(rendu.includes(`id="${ancreLigneOutil(l.voyant)}"`), l.voyant);
+      const trace = /\sd="([^"]+)"/.exec(site.pictogrammes.get(l.pictogramme) ?? '')?.[1] ?? '';
+      assert.ok(trace !== '' && entree.includes(trace), `${l.voyant} : dessin absent`);
+    }
+    for (const libelle of [...Object.values(GRILLE_VERDICTS), ...Object.values(GRILLE_URGENCES)].map((g) => g.libelle)) assert.ok(!index.includes(libelle), `${libelle} dans l'index`);
+  });
+
   test('un lien vers la page du voyant seulement quand elle est construite (voyant de température : page de la vague B)', () => {
     const lignes = modele.groupes.flatMap((g) => g.lignes);
     assert.equal(lignes.find((l) => l.voyant === 'temperature-rouge')?.page, undefined);
@@ -133,12 +152,14 @@ describe('outil voyants : modèle généré depuis la base', () => {
     assert.deepEqual([...ORDRE_GROUPES].sort(), [...COULEURS_VOYANT].sort());
     for (const couleur of COULEURS_VOYANT) {
       assert.ok(css.includes(`.outil-voyants:has(#${idFiltre(couleur)}:checked) [data-outil-groupe]:not([data-outil-groupe='${couleur}'])`), `règle de filtre absente pour ${couleur}`);
+      assert.ok(css.includes(`.outil-voyants:has(#${idFiltre(couleur)}:checked) [data-outil-index-entree]:not([data-couleur='${couleur}'])`), `règle de filtre de l'index absente pour ${couleur}`);
     }
   });
 
   test('site.css ne masque rien de l’outil en dehors du filtre, et n’affiche pas un filtre inopérant', () => {
     const regles = [...css.matchAll(/([^{}]*)\{[^{}]*display:\s*none[^{}]*\}/g)].map((m) => m[1] ?? '').filter((s) => /outil/.test(s));
-    assert.deepEqual(regles.map((s) => s.trim().replace(/\s+/g, ' ').split(', ').length).sort(), [1, COULEURS_VOYANT.length].sort());
+    // Le filtre masque les groupes et les entrées de l'index ; sans :has(), c'est le filtre lui-même qui est masqué.
+    assert.deepEqual(regles.map((s) => s.trim().replace(/\s+/g, ' ').split(', ').length).sort(), [1, COULEURS_VOYANT.length, COULEURS_VOYANT.length].sort());
     assert.ok(regles.some((s) => s.includes('.outil-filtre')), 'filtre masqué sans :has()');
     assert.match(css, /@supports not selector\(:has\(\*\)\)/);
     assert.doesNotMatch(css, /:has\(:target\)/, 'bloque le filtre tant que l’adresse garde l’ancre (revue de 8.1)');
@@ -168,7 +189,7 @@ describe('outil voyants : page construite', () => {
   });
 
   test('les textes fixes de l’outil entrent dans l’empreinte de la page outil, et seulement de celle-là', () => {
-    assert.ok(TEXTES_OUTIL.includes(RENVOI_ENCADRE_OUTIL.texte) && TEXTES_OUTIL.includes(INTRODUCTION_OUTIL) && TEXTES_OUTIL.includes(ABSENT_OUTIL) && TEXTES_OUTIL.includes(AIDE_FILTRE) && TEXTES_OUTIL.includes(NOTE_SOURCES_OUTIL));
+    assert.ok(TEXTES_OUTIL.includes(RENVOI_ENCADRE_OUTIL.texte) && TEXTES_OUTIL.includes(INTRODUCTION_OUTIL) && TEXTES_OUTIL.includes(ABSENT_OUTIL) && TEXTES_OUTIL.includes(AIDE_FILTRE) && TEXTES_OUTIL.includes(NOTE_SOURCES_OUTIL) && TEXTES_OUTIL.includes(TITRE_INDEX_OUTIL));
     const encadre = page as unknown as EncadreValide;
     const plage = { selonLeVoyant: true };
     assert.notEqual(empreintePage({ ...encadre, outil: true }, site.voyants, plage), empreintePage({ ...encadre, outil: undefined }, site.voyants, plage));
@@ -236,6 +257,7 @@ describe('outil voyants : page construite', () => {
 
 describe('outil voyants : ce que les contrôles refusent (vérifié sur la vraie page, par mutation)', () => {
   const ligne = (id: string): RegExp => new RegExp(`<li class="outil-ligne" id="${ancreLigneOutil(id)}"[\\s\\S]*?</details></li>`);
+  const entree = (id: string): RegExp => new RegExp(`<li data-outil-index-entree="${id}"[\\s\\S]*?</li>`);
   const cas: ReadonlyArray<readonly [string, (h: string) => string, string]> = [
     ['outil retiré', (h) => h.replaceAll('data-outil-voyants', 'data-autre'), 'OUTIL-ABSENT'],
     ['élément unique retiré', (h) => h.replace('data-element-unique="outil" ', ''), 'OUTIL-ABSENT'],
@@ -293,6 +315,27 @@ describe('outil voyants : ce que les contrôles refusent (vérifié sur la vraie
     ['ligne masquée', (h) => h.replace('data-outil-ligne', 'hidden data-outil-ligne'), 'OUTIL-SANS-JS'],
     ['groupe masqué', (h) => h.replace('data-outil-groupe="rouge"', 'style="display:none" data-outil-groupe="rouge"'), 'OUTIL-SANS-JS'],
     ['outil masqué', (h) => h.replace('data-outil-voyants', 'hidden data-outil-voyants'), 'OUTIL-SANS-JS'],
+    ['index retiré', (h) => h.replace(/<nav class="outil-index"[\s\S]*?<\/nav>/, ''), 'OUTIL-INDEX'],
+    ['index après la liste', (h) => {
+      const index = /<nav class="outil-index"[\s\S]*?<\/nav>/.exec(h)?.[0] ?? '';
+      return h.replace(index, '').replace('<p class="outil-absent"', `${index}<p class="outil-absent"`);
+    }, 'OUTIL-INDEX'],
+    ['titre de l’index changé', (h) => h.replace(/(<h3 id="da-outil-index">)[^<]*/, '$1Tous ces voyants sont sans danger'), 'OUTIL-INDEX'],
+    ['entrée retirée', (h) => h.replace(entree('huile-niveau'), ''), 'OUTIL-INDEX'],
+    ['entrée en double', (h) => h.replace(entree('huile-niveau'), (t) => `${t}${t}`), 'OUTIL-INDEX'],
+    ['deux entrées échangées', (h) => {
+      const a = entree('moteur-orange-fixe').exec(h)?.[0] ?? '';
+      const b = entree('moteur-orange-clignotant').exec(h)?.[0] ?? '';
+      return h.replace(a, '@@').replace(b, a).replace('@@', b);
+    }, 'OUTIL-INDEX'],
+    ['entrée qui mène à une autre ligne', (h) => h.replace(entree('moteur-rouge'), (t) => t.replace(`#${ancreLigneOutil('moteur-rouge')}`, `#${ancreLigneOutil('frein-stationnement')}`)), 'OUTIL-INDEX'],
+    ['nom changé dans l’index', (h) => h.replace(entree('moteur-rouge'), (t) => t.replace(/<span>[^<]*<\/span><\/a>/, '<span>Voyant sans gravité</span></a>')), 'OUTIL-INDEX'],
+    ['verdict ajouté à une entrée', (h) => h.replace(entree('moteur-rouge'), (t) => t.replace('</a>', '</a> Vous pouvez rouler.')), 'OUTIL-INDEX'],
+    ['pictogramme d’un autre voyant dans l’index', (h) => h.replace(entree('moteur-rouge'), (t) => t.replace('data-pictogramme="moteur"', 'data-pictogramme="huile"')), 'OUTIL-INDEX'],
+    ['pictogramme retiré de l’index', (h) => h.replace(entree('moteur-rouge'), (t) => t.replace(/<svg[\s\S]*?<\/svg>/, '')), 'OUTIL-INDEX'],
+    ['couleur fausse sur une entrée, lue par le filtre', (h) => h.replace(entree('moteur-rouge'), (t) => t.replace('data-couleur="rouge"><a', 'data-couleur="orange"><a')), 'OUTIL-INDEX'],
+    ['phrase ajoutée dans l’index', (h) => h.replace('<ul role="list"><li data-outil-index-entree', '<p>Aucun de ces voyants n’impose l’arrêt.</p><ul role="list"><li data-outil-index-entree'), 'OUTIL-LIBELLES'],
+    ['index masqué', (h) => h.replace('data-outil-index ', 'hidden data-outil-index '), 'OUTIL-SANS-JS'],
   ];
   for (const [nom, muter, code] of cas) {
     test(`${nom} : ${code}`, () => {

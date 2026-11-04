@@ -24,7 +24,7 @@ voyants:
   - fixture-voyant-huile
 element_unique: outil
 outil: true
-validation: 14d369e1a230f89e02d580763a470bf207916b4d8508e2cfcc6f507fb6c28c84
+validation: 8bc2e1ec636ff609c11f6e95ee0b383e463ac09132ed27c3edd8adbf0aa12f60
 ---
 
 Page de test (outil-sans-filtre), jamais publiée.

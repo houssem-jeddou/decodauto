@@ -8,6 +8,8 @@
 export const ANCRE_OUTIL = 'da-outil';
 
 export const TITRE_OUTIL = 'Trouvez votre voyant';
+/** Titre de l'index des dessins, en tête de la liste (décision 9 du paquet 8.1). */
+export const TITRE_INDEX_OUTIL = 'Cherchez le dessin de votre voyant';
 export const INTRODUCTION_OUTIL =
   'La couleur ne suffit pas à décider : un voyant orange peut imposer l’arrêt, un voyant rouge peut signaler le frein à main serré. Repérez votre voyant à son dessin, à sa couleur et à la façon dont il s’allume (fixe ou clignotant). Chaque verdict est le plus prudent des notices lues ; les pages citées sont sous chaque voyant. Cette liste ne couvre pas tous les voyants d’un tableau de bord.';
 export const LEGENDE_FILTRE = 'Afficher les voyants :';
@@ -33,6 +35,7 @@ export const TEXTES_OUTIL: readonly string[] = [
   INTRODUCTION_OUTIL,
   LEGENDE_FILTRE,
   AIDE_FILTRE,
+  TITRE_INDEX_OUTIL,
   LIBELLE_FILTRE_TOUS,
   LIBELLE_LIEN_PAGE,
   ABSENT_OUTIL,

@@ -539,6 +539,13 @@ h3 {
 .outil-voyants:has(#da-filtre-blanc:checked) [data-outil-groupe]:not([data-outil-groupe='blanc']) {
   display: none;
 }
+.outil-voyants:has(#da-filtre-orange:checked) [data-outil-index-entree]:not([data-couleur='orange']),
+.outil-voyants:has(#da-filtre-rouge:checked) [data-outil-index-entree]:not([data-couleur='rouge']),
+.outil-voyants:has(#da-filtre-vert:checked) [data-outil-index-entree]:not([data-couleur='vert']),
+.outil-voyants:has(#da-filtre-bleu:checked) [data-outil-index-entree]:not([data-couleur='bleu']),
+.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-index-entree]:not([data-couleur='blanc']) {
+  display: none;
+}
 /* Sans :has(), le filtre ne ferait rien : il n'est pas affiché, et toute la liste reste visible. */
 @supports not selector(:has(*)) {
   .outil-filtre {
@@ -549,6 +556,30 @@ h3 {
   margin: 0.5rem 0 0;
   font-size: 0.875rem;
   color: var(--texte-doux);
+}
+/* Index des dessins : pictogramme et nom de chaque cas, chaque entrée mène à sa ligne. Le filtre s'y applique aussi. */
+.outil-index {
+  margin: 1rem 0 1.5rem;
+}
+.outil-index h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+.outil-index ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: 0.125rem 1rem;
+}
+.outil-index a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.125rem 0;
+  line-height: 1.25;
 }
 .outil-resume {
   margin: 0 0 0.75rem;
@@ -566,6 +597,11 @@ h3 {
   border-radius: 0.25rem;
   padding: 0.75rem 0.875rem;
   scroll-margin-top: 1rem;
+}
+/* La ligne atteinte depuis l'index ou un lien du texte se repère sans la couleur (contour épais). */
+.outil-ligne:target {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
 .outil-nom {
   display: flex;

@@ -342,6 +342,7 @@ interface OptionsHtml {
   outilLigneMasquee?: boolean;
   outilScript?: boolean;
   outilSansRenvoi?: boolean;
+  outilIndexIncomplet?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -403,6 +404,7 @@ function blocOutil(options: OptionsHtml): string {
   if (options.outilFiltreSansTous) html = html.replace(' checked', '');
   if (options.outilLigneMasquee) html = html.replace('data-outil-ligne', 'hidden data-outil-ligne');
   if (options.outilScript) html = html.replace('<fieldset', '<script>document.title = "x";</script><fieldset');
+  if (options.outilIndexIncomplet) html = html.replace(/<li data-outil-index-entree[\s\S]*?<\/li>/, '');
   return html;
 }
 
@@ -734,6 +736,7 @@ invalide('outil-lien-page-non-construite', 'voyant', outilPage(), ['OUTIL-LIEN']
 invalide('outil-sans-renvoi', 'voyant', outilPage(), ['OUTIL-LIEN'], "L'encadré de la page outil ne renvoie pas à la liste : ses lignes se liraient comme la réponse complète.", { outilSansRenvoi: true });
 invalide('outil-sans-filtre', 'voyant', outilPage(), ['OUTIL-FILTRE'], "L'outil n'a pas de filtre par couleur.", { outilSansFiltre: true });
 invalide('outil-filtre-sans-tous', 'voyant', outilPage(), ['OUTIL-FILTRE'], "« Tous » n'est pas coché au départ : une partie de la liste serait cachée.", { outilFiltreSansTous: true });
+invalide('outil-index-entree-manquante', 'voyant', outilPage(), ['OUTIL-INDEX'], "Une ligne de la base n'a pas son entrée dans l'index des dessins : le lecteur n'y trouverait pas ce dessin.", { outilIndexIncomplet: true });
 invalide('outil-ligne-masquee', 'voyant', outilPage(), ['OUTIL-SANS-JS'], "Une ligne masquée dans le HTML (hidden) : elle n'apparaîtrait qu'avec un script.", { outilLigneMasquee: true });
 invalide('outil-script', 'voyant', outilPage(), ['OUTIL-SANS-JS'], "Un script dans l'outil : l'outil et son filtre fonctionnent sans JavaScript.", { outilScript: true });
 
