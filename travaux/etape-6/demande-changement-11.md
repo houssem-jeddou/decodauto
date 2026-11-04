@@ -1,6 +1,6 @@
 # Demande de changement n° 11 : modèle de l'outil voyants livré à l'étape 8
 
-Étape 6, porte de sortie (livrable 6.9). Proposée le 03/11/2026 avec la porte (pull request #20). **À accepter ou refuser par Houssem.**
+Étape 6, porte de sortie (livrable 6.9). Proposée le 03/11/2026 avec la porte (pull request #20) ; **acceptée par Houssem le 04/11/2026 (12 h 03)**, avec l'option (a) recommandée (« Oui je valide »). Appliquée dans la même pull request : 03 v8 (projet et `docs/03`).
 
 | Rubrique | Contenu |
 |---|---|
