@@ -156,7 +156,7 @@ export function genererBrief(e: EntreeBrief): string {
   if (liees.length > 0) l.push(`- **Pages liées dans le plan** (dans un sens ou dans l'autre) : ${liees.map(lien).join(' ; ')}.`);
   if (enfants.length > 0) l.push(`- **Pages enfants** : ${enfants.map(lien).join(' ; ')}.`);
   if (page.type !== 'socle') l.push("- Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).");
-  if (e.exemple !== undefined) l.push(`- **Page exemple rédigée et validée en 6.6** : \`${e.exemple}\`. Elle sert de point de départ à la page de l'étape 8.`);
+  if (e.exemple !== undefined) l.push(`- **Page exemple rédigée** (sa validation est notée au journal) : \`${e.exemple}\`. Elle sert de point de départ à la page de l'étape 8.`);
   l.push('');
 
   // Mots-clés.

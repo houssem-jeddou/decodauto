@@ -33,7 +33,17 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   const pagesLues = await chargerPages(racine, exemples ? [DOSSIER_CONTENU, DOSSIER_EXEMPLES] : [DOSSIER_CONTENU]);
   const auteurs = [...auteursDuSocle(pagesLues), ...(exemples ? [AUTEUR_DES_EXEMPLES] : [])];
   if (exemples) informations.push(`construction de recette des exemples (${DOSSIER_EXEMPLES}/) : fiche auteur « ${AUTEUR_DES_EXEMPLES} » supposée, la page « à propos » est écrite à l'étape 7 ; jamais déployée`);
-  const { contexte, constats: constatsDonnees } = construireContexte({ ...donnees, auteurs }, aujourdhui);
+  const { contexte: contexteDonnees, constats: constatsDonnees } = construireContexte({ ...donnees, auteurs }, aujourdhui);
+  // Pages écrites et leur libellé court : l'outil voyants ne mène qu'à une page construite (livrable 8.1).
+  const contexte = {
+    ...contexteDonnees,
+    pagesEcrites: new Map(
+      pagesLues.flatMap((p): [string, string][] => {
+        const brut = p.brut as { id?: unknown; libelle_court?: unknown } | null | undefined;
+        return typeof brut?.id === 'string' && typeof brut.libelle_court === 'string' ? [[brut.id, brut.libelle_court]] : [];
+      }),
+    ),
+  };
   constats.push(...constatsDonnees);
   // Grille des coûts : ses citations désignent des citations de la base voyants réelle (demande n° 6).
   constats.push(...controlerGrilleCouts(contexte.voyants, contexte.sources));

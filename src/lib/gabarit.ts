@@ -27,6 +27,7 @@ import {
 } from './composants.ts';
 import { texteHtml } from './html.ts';
 import { modeleTableauNotices, tableauNotices } from './tableau-notices.ts';
+import { RENVOI_ENCADRE_OUTIL } from './outil-voyants.ts';
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees } from './calcul.ts';
 import { indexerPlan } from './plan.ts';
 import type { DonneesCouts } from './cout.ts';
@@ -73,10 +74,12 @@ export function hautDePage(page: PageEditoriale, site: DonneesSite): string {
     pictogrammes: site.pictogrammes,
     voyantsAuTableau: auTableau,
   });
+  // Page outil voyants (livrable 8.1) : les lignes de l'encadré sont des exemples, il renvoie à la liste complète.
+  const renvoi = 'outil' in page && page.outil === true ? RENVOI_ENCADRE_OUTIL : undefined;
   return [
     filDAriane(cheminDAriane(page.id, site.plan, site.libelles)),
     `<h1>${texteHtml(page.h1)}</h1>`,
-    encadreDecision(modele),
+    encadreDecision({ ...modele, renvoi }),
     signaturePage({ modification: page.date_modification, revue: page.date_revue }),
     ligneTransparence(adresseMethode(site.plan)),
   ].join('');
@@ -97,15 +100,19 @@ export function causesDeLaPage(page: PageEditoriale, site: DonneesSite): string 
   return 'causes' in page && page.causes !== undefined ? causesAvecCout(page.causes, site.couts) : '';
 }
 
-/** Bas d'une page éditoriale : pages liées du plan (construites seulement), sources citées. */
-export function basDePage(page: PageEditoriale, site: DonneesSite, citationsDuTexte: readonly { source: string; emplacement: string }[] = []): string {
+/**
+ * Bas d'une page éditoriale : pages liées du plan (construites seulement), sources citées. `citationsDuTexte` : sources
+ * citées hors de l'encadré (texte rédigé, avec leur page ou section ; outil voyants, sans emplacement : il est sous chaque
+ * ligne) ; `noteSources` : phrase affichée sous le titre de la section.
+ */
+export function basDePage(page: PageEditoriale, site: DonneesSite, citationsDuTexte: readonly { source: string; emplacement?: string | undefined }[] = [], noteSources?: string): string {
   const lignes = lignesDeLaPage(page, site);
   const cout = coutDeLaPage(page, lignes, site.couts);
   // Pages ou sections citées dans le texte rédigé seulement (« {{cite:…}} », livrable 6.6) : ajoutées à « Sources ».
   const citees = sourcesDeLaPageCitees(page, lignes, site.couts, cout);
   for (const c of citationsDuTexte) {
     const emplacements = citees.get(c.source) ?? [];
-    if (!emplacements.includes(c.emplacement)) emplacements.push(c.emplacement);
+    if (c.emplacement !== undefined && !emplacements.includes(c.emplacement)) emplacements.push(c.emplacement);
     citees.set(c.source, emplacements);
   }
   const index = indexerPlan(site.plan);
@@ -118,6 +125,6 @@ export function basDePage(page: PageEditoriale, site: DonneesSite, citationsDuTe
       enfants: construites(index.enfants.get(page.id) ?? []),
       libelles: site.libelles,
     }),
-    sectionSources(citees, site.sources),
+    sectionSources(citees, site.sources, noteSources),
   ].join('');
 }

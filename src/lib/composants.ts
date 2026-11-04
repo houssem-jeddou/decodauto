@@ -201,6 +201,15 @@ export interface ModeleEncadre {
   question: string;
   lignes: readonly LigneEncadre[];
   cout?: CoutEncadre | undefined;
+  /** Page outil voyants (livrable 8.1) : les lignes sont des exemples, l'encadré renvoie à la liste complète. */
+  renvoi?: RenvoiEncadre | undefined;
+}
+
+/** Renvoi affiché sous la question de l'encadré : une phrase et un lien vers une ancre de la page. */
+export interface RenvoiEncadre {
+  texte: string;
+  lien: string;
+  ancre: string;
 }
 
 /**
@@ -253,7 +262,7 @@ export function modeleEncadre(entree: {
   return { question: entree.question, lignes, cout };
 }
 
-const etiquette = (texte: string): string => `<span class="encadre-etiquette">${texteHtml(texte)}</span> `;
+export const etiquette = (texte: string): string => `<span class="encadre-etiquette">${texteHtml(texte)}</span> `;
 
 /**
  * Sources d'une ligne, telles que l'encadré les nomme : les notices de constructeurs (noms courts, ordre alphabétique)
@@ -332,6 +341,9 @@ export function encadreDecision(modele: ModeleEncadre): string {
   return [
     `<section class="encadre" data-encadre-decision aria-labelledby="${IDENTIFIANTS.decision}">`,
     `<h2 class="encadre-question" id="${IDENTIFIANTS.decision}">${texteHtml(modele.question)}</h2>`,
+    modele.renvoi !== undefined
+      ? `<p class="encadre-renvoi" data-encadre-renvoi>${texteHtml(modele.renvoi.texte)} <a href="#${attributHtml(modele.renvoi.ancre)}">${texteHtml(modele.renvoi.lien)}</a></p>`
+      : '',
     // role="list" : une liste sans puces garde sa nature de liste pour VoiceOver (Safari).
     `<ul class="encadre-lignes" role="list">${modele.lignes.map(ligneEncadreHtml).join('')}</ul>`,
     modele.cout !== undefined ? coutEncadreHtml(modele.cout) : '',
@@ -403,8 +415,11 @@ export function pagesLiees(entree: {
 
 // ---- Sources ------------------------------------------------------------------------------------------
 
-/** Section « Sources » : chaque source citée, avec son titre, son éditeur, les emplacements cités et sa date de consultation. */
-export function sectionSources(citees: ReadonlyMap<string, readonly string[]>, registre: ReadonlyMap<string, SourceDuRegistre>): string {
+/**
+ * Section « Sources » : chaque source citée, avec son titre, son éditeur, les emplacements cités et sa date de
+ * consultation. `note` : phrase affichée sous le titre (page outil voyants : les pages citées sont sous chaque ligne).
+ */
+export function sectionSources(citees: ReadonlyMap<string, readonly string[]>, registre: ReadonlyMap<string, SourceDuRegistre>, note?: string): string {
   const elements = [...citees].flatMap(([id, emplacements]) => {
     const source = registre.get(id);
     if (source === undefined) return [];
@@ -413,7 +428,7 @@ export function sectionSources(citees: ReadonlyMap<string, readonly string[]>, r
       `<li data-source-id="${attributHtml(id)}"><a href="${attributHtml(source.url)}" rel="noopener">${texteHtml(source.titre)}</a>, ${texteHtml(source.editeur)}.${ou} ${texteHtml(`Consulté le ${dateAffichee(source.date_consultation)}.`)}</li>`,
     ];
   });
-  return `<section class="sources" data-sources aria-labelledby="${IDENTIFIANTS.sources}"><h2 id="${IDENTIFIANTS.sources}">Sources</h2><ol>${elements.join('')}</ol></section>`;
+  return `<section class="sources" data-sources aria-labelledby="${IDENTIFIANTS.sources}"><h2 id="${IDENTIFIANTS.sources}">Sources</h2>${note !== undefined ? `<p>${texteHtml(note)}</p>` : ''}<ol>${elements.join('')}</ol></section>`;
 }
 
 // ---- Section « Méthode » de la page « à propos » ------------------------------------------------------

@@ -1,0 +1,86 @@
+---
+# Page outil voyants (étape 8, livrable 8.1 ; demande de changement n° 11) : variante du type voyant, qui tient lieu
+# d'exemple de son modèle. Jamais publiée avant son lot : hors de src/content, construite seulement par la construction de
+# recette (AVEC_EXEMPLES=1, dist-exemples). Les lignes de l'encadré et toute la liste viennent de la base voyants validée.
+id: voyants
+title: "Voyant orange voiture : signification et liste des voyants"
+h1: "Voyants du tableau de bord : lequel est allumé, et pouvez-vous rouler ?"
+description: "Un voyant orange peut imposer l'arrêt : la couleur ne suffit pas. Trouvez votre voyant dans la liste : pouvez-vous rouler, quand agir, que faire, d'après les notices des constructeurs."
+libelle_court: Identifier un voyant
+question_decision: "Quel voyant s'est allumé, et pouvez-vous continuer à rouler ?"
+situations:
+  - voyant: moteur-orange-fixe
+  - voyant: entretien-vidange
+  - voyant: prechauffage
+voyants:
+  - moteur-orange-fixe
+  - entretien-vidange
+  - prechauffage
+cout_probable:
+  base_de_calcul: "Le coût dépend du voyant : il est donné sur la page du voyant, quand elle est publiée."
+  sources:
+    - notice-dacia-sandero-3
+    - notice-peugeot-208
+    - notice-renault-clio-5
+    - notice-seat-ibiza
+    - notice-toyota-yaris
+sources:
+  - notice-dacia-sandero-3
+  - notice-peugeot-208
+  - notice-renault-clio-5
+  - notice-seat-ibiza
+  - notice-toyota-yaris
+  - reglement-onu-121
+element_unique: outil
+outil: true
+auteur: houssem-jeddou
+date_publication: 2026-11-04
+date_modification: 2026-11-04
+date_revue: 2026-11-04
+prochaine_revue: 2027-11-04
+---
+
+## Comment lire un voyant
+
+Regardez le dessin, puis la couleur, puis la façon dont le voyant s'allume : fixe ou clignotant. Les notices l'appellent « témoin » : c'est la même chose.
+
+Un même dessin peut avoir plusieurs lignes dans la liste. Le voyant moteur en a trois : orange fixe, orange clignotant, rouge. Le voyant de pression des pneus en a deux : allumé fixe, ou qui clignote puis reste allumé. Lisez aussi le message affiché à côté du voyant : il peut changer la consigne, comme « Risque casse moteur » chez Renault et Dacia.
+
+Pour ne voir que les voyants orange ou jaunes, ou que les rouges, utilisez le filtre de la liste.
+
+## Que veut dire la couleur d'un voyant ?
+
+Le règlement ONU n° 121, qui porte sur l'homologation des véhicules, fixe la couleur de certains voyants ({{cite:reglement-onu-121|§ 5.4.1 et tableau, colonne 5}}) : rouge pour la pression d'huile, la température du liquide de refroidissement et l'état de charge de la batterie ; jaune pour l'antiblocage des freins (ABS), l'autodiagnostic du moteur, le préchauffage diesel et le sous-gonflage des pneus ; vert pour les feux de croisement et les clignotants ; bleu pour les feux de route. Pour un voyant que ce tableau n'énumère pas, le constructeur choisit la couleur ({{cite:reglement-onu-121|§ 5.4.2}}).
+
+Ce règlement fixe un symbole et une couleur : il ne dit pas si vous pouvez rouler. La consigne vient de la notice de chaque voiture, et c'est elle que reprend la liste.
+
+Le règlement écrit « jaune », la notice {{notice:notice-peugeot-208}} écrit « orange » ({{cite:notice-peugeot-208|p. 14}}) et la notice {{notice:notice-seat-ibiza}} « jaunes » ({{cite:notice-seat-ibiza|p. 93-94}}) : la liste les range sous une seule couleur.
+
+## Un voyant orange permet-il toujours de rouler ?
+
+Non. On lit souvent qu'un voyant orange n'impose pas d'arrêt immédiat ; ce n'est pas ce que disent toutes les notices lues. Pour le voyant moteur orange allumé fixe, la notice {{notice:notice-toyota-yaris}} demande d'arrêter immédiatement le véhicule dans un endroit sûr (p. 293). D'où le verdict retenu, « {{verdict:moteur-orange-fixe}} », et l'écart entre les marques affiché dans l'encadré. Pour le voyant de pression des pneus allumé fixe, orange lui aussi, le verdict retenu est le même : « {{verdict:pression-pneus}} ».
+
+À l'inverse, un voyant rouge n'impose pas toujours l'arrêt. Le voyant de frein de stationnement, rouge, signale le frein à main serré : « {{verdict:frein-stationnement}} », une fois le frein complètement desserré.
+
+Chaque groupe de la liste compte ses verdicts : c'est la ligne de votre voyant qui décide, pas sa couleur.
+
+## Est-ce dangereux de rouler avec le voyant moteur orange allumé ?
+
+Le verdict retenu est « {{verdict:moteur-orange-fixe}} ». La [page Voyant moteur](/voyants/moteur/) donne ses causes possibles et ce que dit chaque notice, y compris quand le voyant clignote.
+
+## « Point d'exclamation », « zig zag », « clé », « huile » : quel voyant est-ce ?
+
+- **Fer à cheval avec un point d'exclamation** : le [voyant de pression des pneus](#da-voyant-pression-pneus).
+- **Volant avec un point d'exclamation** : le voyant de direction, [orange](#da-voyant-direction-orange) ou [rouge](#da-voyant-direction-rouge).
+- **Voiture qui dérape, avec des traces en zig zag** : le voyant ESP (contrôle de stabilité), [qui clignote](#da-voyant-esp-clignotant) ou [allumé fixe](#da-voyant-esp-defaut).
+- **Clé** : le [rappel d'entretien](#da-voyant-entretien-vidange).
+- **Huile** : en rouge, la [pression d'huile](#da-voyant-huile-pression-rouge) ; en orange ou par un message, le [niveau d'huile](#da-voyant-huile-niveau).
+- **Triangle avec un point d'exclamation, courroie de distribution** : aucune ligne de la liste. Le site ne donne pas de verdict pour ces voyants : cherchez-les dans la notice de votre voiture.
+
+## « Voyant orange Dacia », « tableau de bord Clio » : et votre voiture ?
+
+Le verdict de chaque ligne vaut pour toutes les voitures : c'est le plus prudent des notices lues, celles de {{notice:notice-dacia-sandero-3}}, {{notice:notice-peugeot-208}}, {{notice:notice-renault-clio-5}}, {{notice:notice-seat-ibiza}} et {{notice:notice-toyota-yaris}}.
+
+Une consigne citée ne vaut que pour le modèle de sa notice : une autre Dacia, ou une autre génération de Clio, peut donner une consigne différente. La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.
+
+Le site ne propose pas de tableau de bord modèle par modèle. Cette liste ne couvre ni les voitures hybrides ou électriques, ni les deux-roues.

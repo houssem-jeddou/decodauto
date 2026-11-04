@@ -12,6 +12,7 @@ import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } f
 import { modeleTableauNotices, tableauNotices } from '../src/lib/tableau-notices.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml, type PageCode } from '../src/lib/fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte, type PageTexte } from '../src/lib/fiche-texte.ts';
+import { ANCRE_OUTIL, RENVOI_ENCADRE_OUTIL, modeleOutilVoyants, outilVoyants, type VoyantPourOutil } from '../src/lib/outil-voyants.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
@@ -331,6 +332,16 @@ interface OptionsHtml {
   sansFicheTexte?: boolean;
   ficheTexteFausse?: boolean;
   casSansElementUnique?: boolean;
+  /** Page outil voyants (livrable 8.1). */
+  outilFactice?: boolean;
+  outilLigneManquante?: boolean;
+  outilSansLibelle?: boolean;
+  outilLienEnTrop?: boolean;
+  outilSansFiltre?: boolean;
+  outilFiltreSansTous?: boolean;
+  outilLigneMasquee?: boolean;
+  outilScript?: boolean;
+  outilSansRenvoi?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -378,6 +389,23 @@ function blocsCode(page: Objet, options: OptionsHtml): string {
   return fiche + parMarqueHtml(rangees, REGISTRE_TEST, { elementUnique: page['element_unique'] === 'tableau' && !options.casSansElementUnique });
 }
 
+/** Outil voyants (livrable 8.1), produit par le vrai composant depuis la base et le registre de test ; aucune page construite. */
+function blocOutil(options: OptionsHtml): string {
+  if (options.outilFactice) return '<div data-element-unique="outil"><p>Outil de test</p></div>';
+  const plan = new Map((contexte.plan as Objet[]).map((l) => [String(l['id']), { id: String(l['id']), adresse: String(l['adresse']) }]));
+  const modele = modeleOutilVoyants({ voyants: contexte.voyants as unknown as VoyantPourOutil[], sources: REGISTRE_TEST, plan, libelles: new Map() });
+  const pictogrammes = new Map((contexte.pictogrammes as Objet[]).map((p) => [String(p['id']), String(p['contenu'])]));
+  let html = outilVoyants(modele, pictogrammes);
+  if (options.outilLigneManquante) html = html.replace(/<li class="outil-ligne"[\s\S]*?<\/details><\/li>/, '');
+  if (options.outilSansLibelle) html = html.replace(/<p class="encadre-verdict">[\s\S]*?<\/p>/, '<p class="encadre-verdict"></p>');
+  if (options.outilLienEnTrop) html = html.replace('<details', '<p><a href="/fixture-voyant/">Page non construite</a></p><details');
+  if (options.outilSansFiltre) html = html.replace(/<fieldset[\s\S]*?<\/fieldset>/, '');
+  if (options.outilFiltreSansTous) html = html.replace(' checked', '');
+  if (options.outilLigneMasquee) html = html.replace('data-outil-ligne', 'hidden data-outil-ligne');
+  if (options.outilScript) html = html.replace('<fieldset', '<script>document.title = "x";</script><fieldset');
+  return html;
+}
+
 /** Fiche « Le texte en bref » (livrable 6.6c), produite par le vrai composant depuis le contenu et le registre de test. */
 function blocsTexte(page: Objet, options: OptionsHtml): string {
   if (options.sansFicheTexte) return '';
@@ -402,7 +430,8 @@ function encadre(page: Objet, options: OptionsHtml): string {
     .join('');
   const contenu = options.encadreMasque ? `<details><summary>Voir le détail</summary>${lignes}</details>` : lignes;
   const coutHtml = options.encadreSansCout ? '' : coutAffiche(page);
-  return `<section data-encadre-decision><p>${String(page['question_decision'])}</p>${contenu}${coutHtml}</section>`;
+  const renvoi = page['outil'] === true && !options.outilSansRenvoi ? `<p>${RENVOI_ENCADRE_OUTIL.texte} <a href="#${ANCRE_OUTIL}">${RENVOI_ENCADRE_OUTIL.lien}</a></p>` : '';
+  return `<section data-encadre-decision><p>${String(page['question_decision'])}</p>${renvoi}${contenu}${coutHtml}</section>`;
 }
 
 /** Coût résolu d'une page de test, comme le calculent les contrôles. */
@@ -448,6 +477,8 @@ function sourcesAffichees(page: Objet): string[] {
   };
   parcourir(page);
   for (const l of lignesAffichees(page)) parcourir(l['citations'], 'citations');
+  // Page outil voyants : les sources de toutes les lignes de la base, affichées par l'outil (livrable 8.1).
+  if (page['outil'] === true) for (const v of contexte.voyants as Objet[]) parcourir(v['citations'], 'citations');
   const resolu = coutResolu(page);
   for (const id of resolu.montants) for (const s of DONNEES_COUTS.montants.get(id)?.sources ?? []) ids.add(s);
   for (const id of resolu.prisesEnCharge) for (const s of DONNEES_COUTS.prises_en_charge.get(id)?.sources ?? []) ids.add(s);
@@ -483,7 +514,7 @@ function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): st
     'arbre-de-decision': '<div data-element-unique="arbre-de-decision"><ul><li>Le démarreur tourne-t-il ? Oui : batterie probablement bonne.</li></ul></div>',
     tableau: `<div data-element-unique="tableau"><table><tr><th>Norme</th></tr>${ligneDonnees}</table></div>`,
     photo: '<img data-element-unique="photo" src="/images/fixture.jpg" alt="Photo de test" />',
-    outil: '<div data-element-unique="outil"><p>Outil de test</p></div>',
+    outil: page['outil'] === true ? blocOutil(options) : '<div data-element-unique="outil"><p>Outil de test</p></div>',
   };
   const attribut = options.etapesNonMarquees ? '' : ' data-tutoriel-etapes';
   const etapes = page['tutoriel'] !== undefined ? `<ol${attribut}><li>Garer la voiture à plat.</li><li>Retirer la jauge.</li></ol>` : '';
@@ -694,6 +725,16 @@ invalide(
 );
 valide('valide-outil', 'voyant', outilPage(), "Page outil des voyants : « Selon le voyant » dans l'encadré, sans pièces ni montant automatique.");
 invalide('cout-pieces-outil', 'voyant', avecCout(outilPage(), { pieces: ['fixture-vidange'] }), ['COUT-PIECES-DOUBLE'], "La page outil n'a pas de plage propre : elle ne déclare pas de pièces.");
+// Outil voyants (livrable 8.1 ; porte de l'étape 8, 03 v8) : lignes, liens, libellés et contenu sans JavaScript.
+invalide('outil-absent', 'voyant', outilPage(), ['OUTIL-ABSENT'], "Un bloc « outil » qui n'est pas généré depuis la base : l'élément unique existe, l'outil non.", { outilFactice: true });
+invalide('outil-ligne-manquante', 'voyant', outilPage(), ['OUTIL-LIGNES'], "Une ligne de la base n'est pas affichée par l'outil.", { outilLigneManquante: true });
+invalide('outil-gravite-seule-couleur', 'voyant', outilPage(), ['OUTIL-LIBELLES'], "Une ligne sans le libellé écrit de son verdict : la gravité ne se lirait que par la couleur.", { outilSansLibelle: true });
+invalide('outil-lien-page-non-construite', 'voyant', outilPage(), ['OUTIL-LIEN'], "Une ligne mène à une page qui n'est pas construite.", { outilLienEnTrop: true });
+invalide('outil-sans-renvoi', 'voyant', outilPage(), ['OUTIL-LIEN'], "L'encadré de la page outil ne renvoie pas à la liste : ses lignes se liraient comme la réponse complète.", { outilSansRenvoi: true });
+invalide('outil-sans-filtre', 'voyant', outilPage(), ['OUTIL-FILTRE'], "L'outil n'a pas de filtre par couleur.", { outilSansFiltre: true });
+invalide('outil-filtre-sans-tous', 'voyant', outilPage(), ['OUTIL-FILTRE'], "« Tous » n'est pas coché au départ : une partie de la liste serait cachée.", { outilFiltreSansTous: true });
+invalide('outil-ligne-masquee', 'voyant', outilPage(), ['OUTIL-SANS-JS'], "Une ligne masquée dans le HTML (hidden) : elle n'apparaîtrait qu'avec un script.", { outilLigneMasquee: true });
+invalide('outil-script', 'voyant', outilPage(), ['OUTIL-SANS-JS'], "Un script dans l'outil : l'outil et son filtre fonctionnent sans JavaScript.", { outilScript: true });
 
 // ---- Écriture ----------------------------------------------------------------------------------------
 await rm(join(racine, 'cas'), { recursive: true, force: true });

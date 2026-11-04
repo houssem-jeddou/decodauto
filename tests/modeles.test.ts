@@ -11,7 +11,7 @@ import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { dateDesDonnees } from './date-des-donnees.ts';
-import { MODELES, corpsRedige, modeleDeLaPage, nomCompletNotice, pageCodeDefaut, pagePneus, pageVoyant, texteRedige } from '../src/lib/modeles.ts';
+import { MODELES, corpsRedige, modeleDeLaPage, nomCompletNotice, pageCodeDefaut, pageOutilVoyants, pagePneus, pageVoyant, texteRedige } from '../src/lib/modeles.ts';
 import { TITRE_FICHE_TEXTE, modeleFicheTexte } from '../src/lib/fiche-texte.ts';
 import { CONSIGNE_SANS_VOYANT, LIBELLE_CARBURANT, LIBELLE_PORTEE, modeleFicheCode, modeleParMarque } from '../src/lib/fiche-code.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
@@ -78,11 +78,11 @@ const exempleCode = () => exemple(EXEMPLE_CODE, 'code-defaut');
 const exemplePneus = () => exemple(EXEMPLE_PNEUS, 'pneus');
 
 describe('modèles de pages (livrable 6.6)', () => {
-  test('modèle de chaque type : pages voyant, code défaut, pneus et obligations livrées ; outil voyants et autres types pas encore (la construction échoue alors)', async () => {
+  test('modèle de chaque type : pages voyant, code défaut, pneus et obligations et outil voyants livrés ; autres types pas encore (la construction échoue alors)', async () => {
     const { page } = await exemple();
     const livres = ['voyant', 'code-defaut', 'pneus'];
     for (const type of livres) assert.ok('modele' in modeleDeLaPage(type as never, page), type);
-    assert.ok('absent' in modeleDeLaPage('voyant', { ...page, outil: true } as PageEditoriale));
+    assert.deepEqual(modeleDeLaPage('voyant', { ...page, outil: true } as PageEditoriale), { modele: pageOutilVoyants });
     for (const type of TYPES_PAGE.filter((t) => !livres.includes(t))) assert.ok('absent' in modeleDeLaPage(type, page), type);
     assert.deepEqual(Object.keys(MODELES), livres);
     // Les modèles code défaut et pneus refusent une page d'un autre type.

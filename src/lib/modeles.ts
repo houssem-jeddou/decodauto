@@ -26,6 +26,12 @@
 //   référence et où le lire, période et zones, défaillances et contre-visite) · texte rédigé (ce qui est exigé, avec
 //   l'élément unique quand c'est un tableau du texte, questions des lecteurs, marche à suivre) · tableau des notices si
 //   un voyant de la base est rattaché à la page · pages liées · sources
+//
+// Ordre de la page outil voyants (variante du type voyant ; livrable 8.1, demande de changement n° 11) :
+//   fil d'Ariane · H1 · encadré de décision (exemples, renvoi vers la liste ; coût « Selon le voyant ») · signature · ligne
+//   de transparence · outil (élément unique, généré depuis la base) · texte rédigé (contenu de guide, questions des
+//   lecteurs) · pages enfants et pages liées · sources
+// L'outil vient avant le texte : le lecteur qui cherche son voyant ne doit pas d'abord lire un guide.
 // ---------------------------------------------------------------------------------------------
 import { basDePage, causesDeLaPage, hautDePage, tableauNoticesDeLaPage, type DonneesSite } from './gabarit.ts';
 import { attributHtml, echapper, typographierHtml } from './html.ts';
@@ -33,6 +39,7 @@ import { nomCourtSource, type SourceDuRegistre } from './composants.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
+import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-voyants.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
 import type { TypePage } from '../schemas/listes.ts';
 
@@ -45,8 +52,9 @@ export type Modele = (page: PageEditoriale, site: DonneesSite, corpsHtml: string
  *    qu'une consigne ne soit jamais lue comme valant pour une autre génération (charte §2.5) ;
  *  - « {{verdict:<voyant>}} » : libellé du verdict retenu pour ce voyant (base voyants, grille), quand une partie du texte
  *    répond à une question et doit redire le verdict de l'encadré (charte §2.1 : libellé jamais reformulé) ; le voyant
- *    est une ligne de l'encadré de la page. « {{verdict:ligne-<n>}} » : libellé du verdict de la n-ième ligne de
- *    l'encadré (ligne saisie ou reprise de la base ; livrable 6.6c) ;
+ *    est une ligne de l'encadré de la page, ou, sur la page outil, n'importe quelle ligne de la base, toutes affichées par
+ *    l'outil (livrable 8.1). « {{verdict:ligne-<n>}} » : libellé du verdict de la n-ième ligne de l'encadré (ligne saisie
+ *    ou reprise de la base ; livrable 6.6c) ;
  *  - « {{cite:<source>|<page ou section>}} » : page ou section d'une source de la page citée dans le texte seulement ;
  *    affichée telle quelle et ajoutée à la section « Sources » (charte §4, point 8) ;
  *  - « {{montant:<id>}} » : texte d'un montant de data/couts.json déclaré dans le coût probable de la page (charte §2.3 :
@@ -103,7 +111,8 @@ export function texteRedige(
         }
         return echapper(GRILLE_VERDICTS[ligne.verdict ?? echec(`${tout} : ligne sans verdict`)].libelle);
       }
-      if (!page.situations.some((ligne) => 'voyant' in ligne && ligne.voyant === id)) echec(`${tout} : le voyant « ${id} » n'est pas une ligne de l'encadré de la page`);
+      const pageOutil = 'outil' in page && page.outil === true;
+      if (!pageOutil && !page.situations.some((ligne) => 'voyant' in ligne && ligne.voyant === id)) echec(`${tout} : le voyant « ${id} » n'est pas une ligne de l'encadré de la page`);
       const voyant = site.voyants.get(id) ?? echec(`${tout} : voyant absent de la base`);
       return echapper(GRILLE_VERDICTS[voyant.verdict].libelle);
     }
@@ -199,12 +208,25 @@ export const pagePneus: Modele = (page, site, corpsHtml) => {
   ].join('');
 };
 
-/** Modèles livrés, par type. L'outil voyants et les types des vagues B et C n'en ont pas encore. */
+/** Page outil voyants : voir l'ordre en tête de ce fichier. Tout l'outil est généré depuis la base (outil-voyants.ts). */
+export const pageOutilVoyants: Modele = (page, site, corpsHtml) => {
+  if (!('outil' in page) || page.outil !== true) throw new Error(`page « ${page.id} » : le modèle de l'outil voyants s'applique à la page outil (outil: true)`);
+  const texte = texteRedige(corpsHtml, page, site);
+  const modele = modeleOutilVoyants({ voyants: site.voyants.values(), sources: site.sources, plan: site.plan, libelles: site.libelles });
+  return [
+    hautDePage(page, site),
+    outilVoyants(modele, site.pictogrammes),
+    texte.html,
+    basDePage(page, site, [...texte.citations, ...modele.sources.map((source) => ({ source }))], NOTE_SOURCES_OUTIL),
+  ].join('');
+};
+
+/** Modèles livrés, par type. La variante outil du type voyant : pageOutilVoyants. Les types des vagues B et C n'en ont pas encore. */
 export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut, pneus: pagePneus };
 
 /** Modèle d'une page, ou la raison pour laquelle il n'existe pas encore (la construction échoue alors). */
 export function modeleDeLaPage(type: TypePage, page: PageEditoriale): { modele: Modele } | { absent: string } {
-  if (type === 'voyant' && 'outil' in page && page.outil === true) return { absent: "le modèle de l'outil voyants n'est pas encore livré" };
+  if (type === 'voyant' && 'outil' in page && page.outil === true) return { modele: pageOutilVoyants };
   const modele = MODELES[type];
   return modele !== undefined ? { modele } : { absent: `le modèle des pages « ${type} » n'est pas encore livré (étape 6, 10 ou 11)` };
 }

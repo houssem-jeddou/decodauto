@@ -1,8 +1,10 @@
 // Porte de sortie de l'étape 6 (livrable 6.9, travaux/etape-6/porte-de-sortie.md) : ce que la porte a vérifié reste
-// vrai. Chaque page éditoriale de la vague A a son modèle, sauf l'outil voyants (seule exception, nommée : demande de
+// vrai. Chaque page éditoriale de la vague A a son modèle, outil voyants compris depuis le livrable 8.1 (demande de
 // changement n° 11) ; chaque type de la vague A a un exemple rédigé, du bon type d'après le plan, dont l'encadré porte
 // l'empreinte validée par Houssem (recalculée par la commande officielle, npm run empreinte) ; textes de la charte
-// validés. Les briefs (6.8) sont contrôlés par tests/briefs.test.ts. Sans dépendance : ce fichier tourne sans installation.
+// validés. L'exemple de la page outil relève de la porte de l'étape 8 (03 v8) : son empreinte est contrôlée par R4, dans
+// le job de recette et par tests/outil-voyants.test.ts. Les briefs (6.8) sont contrôlés par tests/briefs.test.ts. Sans
+// dépendance : ce fichier tourne sans installation.
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readdir, readFile } from 'node:fs/promises';
@@ -22,14 +24,13 @@ const typesVagueA = [...new Set(editorialesA.map((p) => p.type))].sort();
 const empreinte = (...args: string[]): string => execFileSync(execPath, ['scripts/empreinte.ts', ...args], { cwd: racine, encoding: 'utf8' }).trim().split('\n').at(-1) ?? '';
 
 describe("porte de sortie de l'étape 6", () => {
-  test('chaque page éditoriale de la vague A a un modèle pour son type, sauf l’outil voyants (demande de changement n° 11)', () => {
+  test('chaque page éditoriale de la vague A a un modèle pour son type, outil voyants compris (demande de changement n° 11)', () => {
     assert.deepEqual(typesVagueA, ['code-defaut', 'pneus', 'voyant']);
     assert.ok(editorialesA.some((p) => p.id === ID_OUTIL_VOYANTS && p.type === 'voyant'), "l'outil voyants n'est plus une page voyant de la vague A");
     for (const p of editorialesA) {
       const outil = p.id === ID_OUTIL_VOYANTS;
       const resultat = modeleDeLaPage(p.type, (outil ? { outil: true } : {}) as unknown as PageEditoriale);
-      if (outil) assert.ok('absent' in resultat, "l'outil voyants a maintenant un modèle : retirer l'exception de ce test");
-      else assert.ok('modele' in resultat, `${p.id} : aucun modèle pour le type ${p.type}`);
+      assert.ok('modele' in resultat, `${p.id} : aucun modèle pour le type ${p.type}`);
     }
   });
 
@@ -37,10 +38,14 @@ describe("porte de sortie de l'étape 6", () => {
     const parId = new Map(plan.map((p) => [p.id, p]));
     for (const type of typesVagueA) {
       const fichiers = (await readdir(join(racine, 'exemples', type))).filter((f) => f.endsWith('.md'));
-      assert.ok(fichiers.length > 0, `${type} : aucun exemple rédigé`);
+      let controles = 0;
       for (const f of fichiers) {
         const chemin = `exemples/${type}/${f}`;
         const texte = await readFile(join(racine, chemin), 'utf8');
+        // Page outil : hors du champ de cette porte (03 v8, étape 6 : « hors la variante outil voyants ») ; son encadré se
+        // valide à l'étape 8 (R4 dans le job de recette, tests/outil-voyants.test.ts).
+        if (/^outil: *true\s*$/m.test(texte)) continue;
+        controles += 1;
         const id = /^id: *(\S+)\s*$/m.exec(texte)?.[1];
         const page = id === undefined ? undefined : parId.get(id);
         assert.ok(page !== undefined, `${chemin} : identifiant absent du plan`);
@@ -50,6 +55,7 @@ describe("porte de sortie de l'étape 6", () => {
         assert.ok(validation !== undefined, `${chemin} : encadré sans empreinte de validation`);
         assert.equal(empreinte(chemin), validation, `${chemin} : l'encadré a changé depuis la validation de Houssem`);
       }
+      assert.ok(controles > 0, `${type} : aucun exemple rédigé`);
     }
   });
 
