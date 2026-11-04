@@ -19,6 +19,10 @@ import { constatsExpressionsInterdites, constatsIdentifiants, constatsMentionEtS
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import { COULEURS_VOYANT, rangUrgence, rangVerdict } from '../src/schemas/listes.ts';
 import { schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
+import { empreintePage, type EncadreValide } from '../src/lib/empreinte.ts';
+import { TEXTES_OUTIL } from '../src/lib/outil-textes.ts';
+import { execFileSync } from 'node:child_process';
+import { execPath } from 'node:process';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const EXEMPLE = 'exemples/voyant/voyants.md';
@@ -100,6 +104,24 @@ describe('outil voyants : modèle généré depuis la base', () => {
     assert.match(base.find((v) => v.id === 'airbag-defaut')?.situation ?? '', /orange ou rouge selon la voiture/);
   });
 
+  test('les faits de la base que le texte rédigé nomme restent vrais', () => {
+    const corps = separerFrontmatter(contenu).corps;
+    assert.match(corps, /Le voyant moteur en a trois : orange fixe, orange clignotant, rouge/);
+    assert.deepEqual(base.filter((v) => v.pictogramme === 'moteur').map((v) => v.couleur).sort(), ['orange', 'orange', 'rouge']);
+    assert.match(corps, /Le voyant de pression des pneus en a deux/);
+    assert.equal(base.filter((v) => v.pictogramme === 'pression-pneus').length, 2);
+    assert.equal(site.voyants.get('pression-pneus')?.couleur, 'orange');
+    assert.equal(site.voyants.get('frein-stationnement')?.couleur, 'rouge');
+    assert.match(site.voyants.get('frein-stationnement')?.action ?? '', /le voyant doit s'éteindre/);
+    assert.match(site.voyants.get('frein-rouge')?.situation ?? '', /reste allumé/);
+    assert.match(site.voyants.get('entretien-vidange')?.nom ?? '', /voyant clé/);
+    // Aucune ligne pour ce que le texte dit absent de la liste.
+    for (const absent of [/\btriangle\b/i, /courroie de distribution/i, /clignot.*pr[ée]chauffage|pr[ée]chauffage.*clignot/i]) {
+      assert.equal(base.filter((v) => absent.test(`${v.nom} ${v.situation}`)).length, 0, String(absent));
+    }
+    assert.equal(base.filter((v) => /^[^,]*\bSTOP\b/.test(v.nom) && !/moteur|direction/i.test(v.nom)).length, 0);
+  });
+
   test('un lien vers la page du voyant seulement quand elle est construite (voyant de température : page de la vague B)', () => {
     const lignes = modele.groupes.flatMap((g) => g.lignes);
     assert.equal(lignes.find((l) => l.voyant === 'temperature-rouge')?.page, undefined);
@@ -112,6 +134,14 @@ describe('outil voyants : modèle généré depuis la base', () => {
     for (const couleur of COULEURS_VOYANT) {
       assert.ok(css.includes(`.outil-voyants:has(#${idFiltre(couleur)}:checked) [data-outil-groupe]:not([data-outil-groupe='${couleur}'])`), `règle de filtre absente pour ${couleur}`);
     }
+  });
+
+  test('site.css ne masque rien de l’outil en dehors du filtre, et n’affiche pas un filtre inopérant', () => {
+    const regles = [...css.matchAll(/([^{}]*)\{[^{}]*display:\s*none[^{}]*\}/g)].map((m) => m[1] ?? '').filter((s) => /outil/.test(s));
+    assert.deepEqual(regles.map((s) => s.trim().replace(/\s+/g, ' ').split(', ').length).sort(), [1, COULEURS_VOYANT.length].sort());
+    assert.ok(regles.some((s) => s.includes('.outil-filtre')), 'filtre masqué sans :has()');
+    assert.match(css, /@supports not selector\(:has\(\*\)\)/);
+    assert.doesNotMatch(css, /:has\(:target\)/, 'bloque le filtre tant que l’adresse garde l’ancre (revue de 8.1)');
   });
 });
 
@@ -127,9 +157,21 @@ describe('outil voyants : page construite', () => {
     );
   });
 
-  test('l’empreinte, quand elle est versée, est vérifiée (R4)', () => {
+  test('l’empreinte, quand elle est versée, est vérifiée (R4) ; une fois versée, elle reste celle de la commande officielle', () => {
     const { constats } = controlerPage({ type: 'voyant', brut: { ...brut, validation: '0'.repeat(64) }, fichier: EXEMPLE }, contexteOutil, html);
     assert.ok(constats.some((c) => c.regle === 'R4-EMPREINTE'));
+    // Après la validation de Houssem : un texte fixe de l'outil changé fait échouer ce test (npm test), pas seulement la recette.
+    if (brut['validation'] !== undefined) {
+      const officielle = execFileSync(execPath, ['scripts/empreinte.ts', EXEMPLE], { cwd: racine, encoding: 'utf8' }).trim().split('\n').at(-1);
+      assert.equal(officielle, brut['validation'], 'le texte fixe ou l’encadré a changé depuis la validation de Houssem');
+    }
+  });
+
+  test('les textes fixes de l’outil entrent dans l’empreinte de la page outil, et seulement de celle-là', () => {
+    assert.ok(TEXTES_OUTIL.includes(RENVOI_ENCADRE_OUTIL.texte) && TEXTES_OUTIL.includes(INTRODUCTION_OUTIL) && TEXTES_OUTIL.includes(ABSENT_OUTIL) && TEXTES_OUTIL.includes(AIDE_FILTRE) && TEXTES_OUTIL.includes(NOTE_SOURCES_OUTIL));
+    const encadre = page as unknown as EncadreValide;
+    const plage = { selonLeVoyant: true };
+    assert.notEqual(empreintePage({ ...encadre, outil: true }, site.voyants, plage), empreintePage({ ...encadre, outil: undefined }, site.voyants, plage));
   });
 
   test('ordre de la page : encadré, signature, transparence, outil, texte rédigé, pages enfants, sources', () => {
@@ -230,6 +272,15 @@ describe('outil voyants : ce que les contrôles refusent (vérifié sur la vraie
     ['bouton désactivé', (h) => h.replace('value="rouge">', 'value="rouge" disabled>'), 'OUTIL-FILTRE'],
     ['liste masquée dans un groupe', (h) => h.replace('<ul class="outil-lignes"', '<ul hidden class="outil-lignes"'), 'OUTIL-SANS-JS'],
     ['verdict masqué dans une ligne', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace('<p class="encadre-verdict">', '<p style="display:none" class="encadre-verdict">')), 'OUTIL-SANS-JS'],
+    ['action prolongée', (h) => h.replace(ligne('frein-rouge'), (t) => t.replace(/(<p class="encadre-action">[\s\S]*?)<\/p>/, '$1 Sinon, roulez normalement jusqu’au garage.</p>')), 'OUTIL-LIBELLES'],
+    ['phrase ajoutée entre deux groupes', (h) => h.replace('<section class="outil-groupe" data-outil-groupe="rouge"', '<p>Tous les voyants orange permettent de rouler sans danger.</p><section class="outil-groupe" data-outil-groupe="rouge"'), 'OUTIL-LIBELLES'],
+    ['libellé du lien changé', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace(/(<p class="outil-page"><a [^>]*>)[^<]*/, '$1Rien de grave : Voyant moteur')), 'OUTIL-LIBELLES'],
+    ['verdict plié dans un bloc imbriqué', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace('<p class="encadre-verdict">', '<div><details><summary>Voir</summary><p class="encadre-verdict">').replace('<p class="encadre-urgence">', '</details></div><p class="encadre-urgence">')), 'OUTIL-LIBELLES'],
+    ['note de « Sources » retirée', (h) => h.replace(/<p>[^<]*sous sa ligne\.<\/p>/, ''), 'OUTIL-LIBELLES'],
+    ['icône « ok » sur un verdict d’arrêt', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace('data-icone-gravite="3"', 'data-icone-gravite="0"')), 'OUTIL-LIBELLES'],
+    ['filtre désactivé', (h) => h.replace('data-outil-filtre>', 'data-outil-filtre disabled>'), 'OUTIL-FILTRE'],
+    ['verdict de taille nulle', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace('<p class="encadre-verdict">', '<p style="font-size:0" class="encadre-verdict">')), 'OUTIL-SANS-JS'],
+    ['groupe transparent et sans hauteur', (h) => h.replace('data-outil-groupe="rouge"', 'style="opacity:0;height:0" data-outil-groupe="rouge"'), 'OUTIL-SANS-JS'],
     ['style dans l’outil qui masque un groupe', (h) => h.replace('<fieldset', '<style>[data-outil-groupe]{display:none}</style><fieldset'), 'OUTIL-SANS-JS'],
     ['lien vers une page construite retiré', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace(/<p class="outil-page">[\s\S]*?<\/p>/, '')), 'OUTIL-LIEN'],
     ['lien vers une page non construite', (h) => h.replace(ligne('huile-niveau'), (t) => t.replace('<details', '<p><a href="/voyants/huile/">Voyant huile</a></p><details')), 'OUTIL-LIEN'],

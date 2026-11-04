@@ -26,7 +26,7 @@ voyants:
   - fixture-voyant-huile
 element_unique: outil
 outil: true
-validation: 4801085ea599c27a51bb060f6287f1ff3a30afd2325304b051ea46a29ed0ed7b
+validation: fe63baa1724a33dc7369ddf95f5945899a1defdebb09b3b6301b9b46ab2280a5
 ---
 
 Page de test (cout-pieces-outil), jamais publiée.

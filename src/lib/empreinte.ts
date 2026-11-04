@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import type { Urgence, Verdict } from '../schemas/listes.ts';
+import { TEXTES_OUTIL } from './outil-textes.ts';
 
 // ---------------------------------------------------------------------------------------------
 // Empreinte de validation (docs/08 §1, champ « validation » ; demande de changement n° 3).
@@ -115,6 +116,8 @@ export interface EncadreValide {
   situations: readonly LigneDePage[];
   cout_probable: CoutValide;
   causes?: readonly { cause: string; pieces: readonly string[] }[] | undefined;
+  /** Page outil voyants : ses textes fixes (renvoi de l'encadré compris) entrent dans l'empreinte (livrable 8.1). */
+  outil?: boolean | undefined;
 }
 
 /** Montant fixé par un texte, ou prise en charge, tel que validé : identifiant, texte, date d'entrée en vigueur,
@@ -233,6 +236,8 @@ export function empreintePage(encadre: EncadreValide, base: ReadonlyMap<string, 
     // L'ordre des causes compte (ordre d'affichage du tableau) ; l'ordre des pièces d'une cause, non.
     // (Une cause sans pièces, refusée par le schéma, garde une empreinte calculable pour les pages de test.)
     causes: (encadre.causes ?? []).map((c) => ({ cause: normaliserTexte(c.cause), pieces: Array.isArray(c.pieces) ? [...c.pieces].sort() : null })),
+    // Page outil seulement : les autres empreintes ne changent pas (demande de changement n° 12, livrable 8.1).
+    ...(encadre.outil === true ? { textes_outil: TEXTES_OUTIL.map(normaliserTexte) } : {}),
   });
 }
 

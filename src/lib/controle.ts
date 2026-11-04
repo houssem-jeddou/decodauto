@@ -6,7 +6,7 @@ import { LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, so
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
-import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, RENVOI_ENCADRE_OUTIL, TITRE_OUTIL, idFiltre, libelleDetail, modeleOutilVoyants, type ModeleOutil } from './outil-voyants.ts';
+import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_OUTIL, idFiltre, libelleDetail, modeleOutilVoyants, outilVoyants, type ModeleOutil } from './outil-voyants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -1097,7 +1097,8 @@ export function controlerHtml(
  *  - OUTIL-LIBELLES : gravité écrite, jamais la seule couleur : hors du bloc dépliable, chaque ligne affiche son nom, sa
  *    situation, le libellé de son verdict et de son urgence (et d'aucun autre niveau), son action et son écart, avec son
  *    pictogramme dans la couleur de la base ; le bloc dépliable nomme les notices et donne chaque page citée ; textes fixes
- *    de l'outil et compte des verdicts de chaque groupe, au texte exact ;
+ *    de l'outil et compte des verdicts de chaque groupe, au texte exact ; note de la section « Sources » ; enfin, tout le
+ *    texte de l'outil est celui que génère le modèle (aucune phrase ajoutée, ni dans une ligne ni entre deux groupes) ;
  *  - OUTIL-LIEN : un lien vers la page du voyant si et seulement si elle est construite, à son adresse du plan ; renvoi de
  *    l'encadré vers la liste, au texte exact ;
  *  - OUTIL-FILTRE : un bouton radio actif par couleur présente, plus « tous », seul coché, chacun avec l'identifiant que lit
@@ -1147,7 +1148,7 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
   }
 
   const SELECTEUR_MASQUE = '[hidden], [inert], template, dialog';
-  const styleMasque = (style: string | undefined): boolean => /display\s*:\s*none|visibility\s*:\s*hidden/i.test(style ?? '');
+  const styleMasque = (style: string | undefined): boolean => /display\s*:\s*none|visibility\s*:\s*hidden|font-size\s*:\s*0(?![.\d])|opacity\s*:\s*0(?![.\d])|(?:^|[;\s])height\s*:\s*0(?![.\d])/i.test(style ?? '');
   const masque = (el: { is(s: string): boolean; attr(a: string): string | undefined; text(): string }): boolean =>
     el.is(SELECTEUR_MASQUE) || styleMasque(el.attr('style')) || (el.is('[aria-hidden="true"]') && el.text().trim() !== '');
 
@@ -1189,11 +1190,12 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     if (autres.length > 0) problemes.push(`affiche aussi le libellé d'un autre niveau (${autres.map((t) => `« ${t} »`).join(', ')})`);
     if (l.ecart === undefined && texteVisible.includes(n('Selon les marques'))) problemes.push("un écart est affiché alors que la base n'en signale pas");
     const picto = ligne.find('.voyant').first();
+    if (ligne.find('.icone-gravite').first().attr('data-icone-gravite') !== String(graviteDuVerdict(l.verdict))) problemes.push(`icône de gravité (attendue : ${graviteDuVerdict(l.verdict)})`);
     if (picto.find('svg').length === 0) problemes.push('pictogramme absent');
     else if (picto.attr('data-pictogramme') !== l.pictogramme || picto.attr('data-couleur') !== l.couleur) problemes.push(`pictogramme (attendu : « ${l.pictogramme} », couleur ${l.couleur})`);
     // Bloc dépliable : le nombre de notices, les notices nommées, chaque page citée.
     const detail = ligne.children('details').first();
-    if (detail.length === 0) problemes.push('bloc dépliable (écart et sources) absent');
+    if (detail.length === 0 || ligne.find('details').length !== 1) problemes.push('un seul bloc dépliable (sources), directement sous la ligne : verdict, urgence et action se lisent sans rien ouvrir');
     else {
       if (n(detail.find('summary').first().text()) !== n(libelleDetail(l))) problemes.push(`titre du bloc dépliable (attendu : « ${libelleDetail(l)} »)`);
       const texteDetail = n(detail.text());
@@ -1223,12 +1225,18 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     constats.push(erreur('OUTIL-LIEN', `l'encadré de décision renvoie à la liste (« ${RENVOI_ENCADRE_OUTIL.texte} ${RENVOI_ENCADRE_OUTIL.lien} », #${ANCRE_OUTIL}), et l'outil porte cet identifiant`, fichier));
   }
 
+  if (!n($('[data-sources]').first().text()).includes(n(NOTE_SOURCES_OUTIL))) {
+    constats.push(erreur('OUTIL-LIBELLES', `la section « Sources » dit où sont les pages citées : « ${NOTE_SOURCES_OUTIL} »`, fichier));
+  }
+
   // Filtre par couleur : boutons radio, sans script ; « tous » coché au départ, pour que tout s'affiche.
   const valeurs = [FILTRE_TOUS, ...attendu.groupes.map((g) => g.couleur as string)];
   const boutons = outil.find('[data-outil-filtre] input').toArray().map((el) => $(el));
   const lues = boutons.map((b) => b.attr('value') ?? '');
   if (lues.join('|') !== valeurs.join('|') || boutons.some((b) => b.attr('type') !== 'radio')) {
     constats.push(erreur('OUTIL-FILTRE', `le filtre (data-outil-filtre) a un bouton radio par couleur présente, plus « ${FILTRE_TOUS} » : ${valeurs.join(', ')} ; affichés : ${lues.join(', ') || 'aucun'}`, fichier));
+  } else if (outil.find('[data-outil-filtre]').first().attr('disabled') !== undefined) {
+    constats.push(erreur('OUTIL-FILTRE', 'le filtre (data-outil-filtre) est actif : ni lui ni ses boutons ne sont désactivés', fichier));
   } else {
     const noms = new Set(boutons.map((b) => b.attr('name')));
     const coches = boutons.filter((b) => b.attr('checked') !== undefined).map((b) => b.attr('value'));
@@ -1257,6 +1265,14 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
   const masques = outil.find('*').toArray().map((el) => $(el)).filter(masque);
   if (masques.length > 0) {
     constats.push(erreur('OUTIL-SANS-JS', `${masques.length} bloc(s) de l'outil masqué(s) dans le HTML (par exemple « ${masques[0]?.text().trim().slice(0, 60) ?? ''} ») : tout le contenu s'affiche sans JavaScript, « Tous » coché`, fichier));
+  }
+  // Pour finir, tout le texte de l'outil : celui que génère le modèle, ni plus ni moins. Les pictogrammes décoratifs et les
+  // icônes n'ont pas de texte : le rendu sans dessin suffit à la comparaison.
+  if (constats.length === 0) {
+    // Sans les blancs : un dessin peut laisser un saut de ligne entre deux textes, qui ne compte pas.
+    const sansBlancs = (texte: string): string => n(texte).replace(/\s+/g, '');
+    const genere = sansBlancs(cheerio.load(outilVoyants(attendu, new Map()))('[data-outil-voyants]').first().text());
+    if (sansBlancs(outil.text()) !== genere) constats.push(erreur('OUTIL-LIBELLES', "le texte de l'outil n'est pas celui que génère le modèle depuis la base : une phrase a été ajoutée, retirée ou changée", fichier));
   }
   return constats;
 }

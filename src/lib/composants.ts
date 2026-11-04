@@ -145,7 +145,7 @@ export function iconeGravite(verdict: Verdict): string {
     2: '<path d="M12 2.5L22.5 21h-21z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 9v5.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="17.6" r="1.4" fill="#fff"/>',
     3: '<path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z" fill="currentColor"/><path d="M7 12h10" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/>',
   };
-  return `<svg class="icone-gravite" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">${formes[graviteDuVerdict(verdict)] ?? ''}</svg>`;
+  return `<svg class="icone-gravite" data-icone-gravite="${graviteDuVerdict(verdict)}" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">${formes[graviteDuVerdict(verdict)] ?? ''}</svg>`;
 }
 
 /**

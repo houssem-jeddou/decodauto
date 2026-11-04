@@ -12,7 +12,7 @@ import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } f
 import { modeleTableauNotices, tableauNotices } from '../src/lib/tableau-notices.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml, type PageCode } from '../src/lib/fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte, type PageTexte } from '../src/lib/fiche-texte.ts';
-import { ANCRE_OUTIL, RENVOI_ENCADRE_OUTIL, modeleOutilVoyants, outilVoyants, type VoyantPourOutil } from '../src/lib/outil-voyants.ts';
+import { ANCRE_OUTIL, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, modeleOutilVoyants, outilVoyants, type VoyantPourOutil } from '../src/lib/outil-voyants.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
 import type { Urgence, Verdict } from '../src/schemas/listes.ts';
@@ -493,10 +493,11 @@ function composantsCommuns(page: Objet, options: OptionsHtml): { signature: stri
   const date = (v: unknown): Date => new Date(`${String(v)}T00:00:00Z`);
   const texteSignature = page['date_modification'] !== undefined && page['date_revue'] !== undefined ? signature(date(page['date_modification']), date(page['date_revue'])) : '';
   const ids = sourcesAffichees(page).slice(options.sourceManquante ? 1 : 0);
+  const noteOutil = page['outil'] === true ? `<p>${NOTE_SOURCES_OUTIL}</p>` : '';
   return {
     signature: options.sansSignature ? '' : `<p data-signature>${texteSignature}</p>`,
     ligne: options.sansLigneTransparence ? '' : `<p data-ligne-transparence>${LIGNE_TRANSPARENCE.texte} <a href="/a-propos/#methode">${LIGNE_TRANSPARENCE.libelleLien}</a></p>`,
-    sources: `<section data-sources><h2>Sources</h2><ol>${ids
+    sources: `<section data-sources><h2>Sources</h2>${noteOutil}<ol>${ids
       .map((id) => {
         const source = (contexte.sources as Objet[]).find((s) => s['id'] === id);
         const consulte = source !== undefined ? String(source['date_consultation']).split('-').reverse().join('/') : '';
