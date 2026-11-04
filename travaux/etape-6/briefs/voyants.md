@@ -44,8 +44,8 @@ Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à un
 | Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
 |---|---|---|---|---|---|---|
 | `moteur-orange-fixe` Voyant moteur orange allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez que si la notice de votre voiture permet de rouler jusqu'au garage, et faites alors contrôler le moteur sans attendre en roulant prudemment ; sinon, faites appel à un garage ou à l'assistance. | 5 | oui |
-| `entretien-vidange` Rappel d'entretien : voyant clé ou message de révision ou de vidange | orange | Oui, avec précautions | À faire dans les jours qui viennent | Vous pouvez rouler, avec ménagement si le message s'accompagne du témoin Service (Renault, Dacia). Faites faire la révision ou la vidange dans les jours qui viennent, puis remettre l'indicateur à zéro. | 5 | oui |
 | `prechauffage` Voyant de préchauffage (diesel) allumé au démarrage | orange | Oui, vous pouvez rouler | Aucune action nécessaire | C'est normal : attendez que le voyant s'éteigne avant de démarrer. | 4 | non |
+| `abs` Voyant ABS orange allumé | orange | Oui, avec précautions | À faire tout de suite | Vous pouvez rouler prudemment, à allure modérée : les roues peuvent se bloquer en cas de freinage fort. Faites vérifier le système sans attendre. Si le voyant de freinage rouge s'allume aussi, arrêtez-vous (ligne « ABS et freinage »). | 4 | oui |
 
 Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources.json`) : l'outil voyants affiche toutes les lignes de la base, tirées de ces notices.
 

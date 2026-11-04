@@ -10,7 +10,7 @@ import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { dateDesDonnees } from './date-des-donnees.ts';
 import { pageOutilVoyants, pageVoyant, texteRedige } from '../src/lib/modeles.ts';
-import { ABSENT_OUTIL, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, NOTE_SOURCES_OUTIL, ORDRE_GROUPES, RENVOI_ENCADRE_OUTIL, ancreLigneOutil, idFiltre, modeleOutilVoyants, outilVoyants } from '../src/lib/outil-voyants.ts';
+import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, NOTE_SOURCES_OUTIL, ORDRE_GROUPES, RENVOI_ENCADRE_OUTIL, ancreLigneOutil, idFiltre, modeleOutilVoyants, outilVoyants } from '../src/lib/outil-voyants.ts';
 import { controlerOutilVoyants, controlerPage } from '../src/lib/controle.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
 import { AUTEUR_SUPPOSE, lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
@@ -92,9 +92,12 @@ describe('outil voyants : modèle généré depuis la base', () => {
   });
 
   test('les phrases fixes de l’introduction restent vraies : un voyant orange impose l’arrêt, un voyant rouge non', () => {
-    assert.match(INTRODUCTION_OUTIL, /un voyant orange peut imposer l’arrêt, un voyant rouge peut simplement signaler le frein à main serré/);
+    assert.match(INTRODUCTION_OUTIL, /un voyant orange peut imposer l’arrêt, un voyant rouge peut signaler le frein à main serré/);
     assert.ok(base.some((v) => v.couleur === 'orange' && v.verdict === 'non, arrêt immédiat'));
     assert.ok(base.some((v) => v.id === 'frein-stationnement' && v.couleur === 'rouge' && v.verdict === 'oui'));
+    // L'aide du filtre : au moins une ligne dit que la couleur d'un même voyant change selon la voiture.
+    assert.match(AIDE_FILTRE, /peut changer de couleur selon la voiture/);
+    assert.match(base.find((v) => v.id === 'airbag-defaut')?.situation ?? '', /orange ou rouge selon la voiture/);
   });
 
   test('un lien vers la page du voyant seulement quand elle est construite (voyant de température : page de la vague B)', () => {
@@ -176,6 +179,17 @@ describe('outil voyants : page construite', () => {
     assert.ok(modele.couleursAbsentes.startsWith('Cette liste ne contient aucun voyant '));
     assert.doesNotMatch(ABSENT_OUTIL, /arrêtez|vous pouvez rouler/i);
   });
+
+  test('chaque ligne porte le dessin de son pictogramme, dans la couleur de la base, et son écart reste visible hors du bloc dépliable', () => {
+    for (const v of base) {
+      const ligne = new RegExp(`<li class="outil-ligne" id="${ancreLigneOutil(v.id)}"[\\s\\S]*?</details></li>`).exec(principal)?.[0] ?? '';
+      assert.ok(ligne !== '', v.id);
+      assert.ok(ligne.includes(`data-couleur="${v.couleur}" data-pictogramme="${v.pictogramme}"`), v.id);
+      const trace = /\sd="([^"]+)"/.exec(site.pictogrammes.get(v.pictogramme) ?? '')?.[1] ?? '';
+      assert.ok(trace !== '' && ligne.includes(trace), `${v.id} : dessin du pictogramme absent`);
+      if (v.ecart_marques !== undefined) assert.ok(ligne.indexOf('encadre-ecart') > 0 && ligne.indexOf('encadre-ecart') < ligne.indexOf('<details'), `${v.id} : écart dans le bloc dépliable`);
+    }
+  });
 });
 
 describe('outil voyants : ce que les contrôles refusent (vérifié sur la vraie page, par mutation)', () => {
@@ -200,6 +214,23 @@ describe('outil voyants : ce que les contrôles refusent (vérifié sur la vraie
     ['écart retiré', (h) => h.replace(ligne('huile-niveau'), (t) => t.replace(/<p class="encadre-ecart">[\s\S]*?<\/p>/, '')), 'OUTIL-LIBELLES'],
     ['page citée retirée', (h) => h.replace(ligne('huile-niveau'), (t) => t.replace(/<li data-source-id[\s\S]*?<\/li>/, '')), 'OUTIL-LIBELLES'],
     ['compte des verdicts faussé', (h) => h.replace(/Sur ces \d+ cas/, 'Sur ces 99 cas'), 'OUTIL-LIBELLES'],
+    ['introduction changée', (h) => h.replace(/(data-outil-intro>)[^<]*/, '$1Un voyant orange laisse toujours rouler.'), 'OUTIL-LIBELLES'],
+    ['aide du filtre retirée', (h) => h.replace(/<p class="outil-aide"[\s\S]*?<\/p>/, ''), 'OUTIL-LIBELLES'],
+    ['fin de la liste changée', (h) => h.replace(/(data-outil-absent>)[^<]*/, '$1Roulez sans crainte.'), 'OUTIL-LIBELLES'],
+    ['filet de gravité faux', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace('data-gravite="3"', 'data-gravite="0"')), 'OUTIL-LIBELLES'],
+    ['pictogramme d’un autre voyant', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace('data-pictogramme="moteur"', 'data-pictogramme="huile"')), 'OUTIL-LIBELLES'],
+    ['couleur du pictogramme fausse', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace('class="voyant" data-couleur="rouge"', 'class="voyant" data-couleur="vert"')), 'OUTIL-LIBELLES'],
+    ['écart rangé dans le bloc dépliable', (h) => h.replace(ligne('huile-niveau'), (t) => {
+      const ecart = /<p class="encadre-ecart">[\s\S]*?<\/p>/.exec(t)?.[0] ?? '';
+      return t.replace(ecart, '').replace('</summary>', `</summary>${ecart}`);
+    }), 'OUTIL-LIBELLES'],
+    ['phrase du renvoi changée', (h) => h.replace(/(data-encadre-renvoi>)[^<]*/, '$1Ces lignes suffisent à décider. '), 'OUTIL-LIEN'],
+    ['libellés du filtre inversés', (h) => h.replace('>Orange ou jaune (16)<', '>@@<').replace('>Rouge (9)<', '>Orange ou jaune (16)<').replace('>@@<', '>Rouge (9)<'), 'OUTIL-FILTRE'],
+    ['identifiant du filtre changé', (h) => h.replace(`id="${idFiltre('rouge')}"`, 'id="autre"').replace(`for="${idFiltre('rouge')}"`, 'for="autre"'), 'OUTIL-FILTRE'],
+    ['bouton désactivé', (h) => h.replace('value="rouge">', 'value="rouge" disabled>'), 'OUTIL-FILTRE'],
+    ['liste masquée dans un groupe', (h) => h.replace('<ul class="outil-lignes"', '<ul hidden class="outil-lignes"'), 'OUTIL-SANS-JS'],
+    ['verdict masqué dans une ligne', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace('<p class="encadre-verdict">', '<p style="display:none" class="encadre-verdict">')), 'OUTIL-SANS-JS'],
+    ['style dans l’outil qui masque un groupe', (h) => h.replace('<fieldset', '<style>[data-outil-groupe]{display:none}</style><fieldset'), 'OUTIL-SANS-JS'],
     ['lien vers une page construite retiré', (h) => h.replace(ligne('moteur-rouge'), (t) => t.replace(/<p class="outil-page">[\s\S]*?<\/p>/, '')), 'OUTIL-LIEN'],
     ['lien vers une page non construite', (h) => h.replace(ligne('huile-niveau'), (t) => t.replace('<details', '<p><a href="/voyants/huile/">Voyant huile</a></p><details')), 'OUTIL-LIEN'],
     ['renvoi de l’encadré retiré', (h) => h.replace(/<p class="encadre-renvoi"[\s\S]*?<\/p>/, ''), 'OUTIL-LIEN'],

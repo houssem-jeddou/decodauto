@@ -2,11 +2,11 @@ import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
 import { ANCRE_METHODE, DELAI_REVUE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature } from './charte.ts';
-import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from './composants.ts';
+import { LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
-import { ANCRE_OUTIL, FILTRE_TOUS, RENVOI_ENCADRE_OUTIL, libelleDetail, modeleOutilVoyants, type ModeleOutil } from './outil-voyants.ts';
+import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, RENVOI_ENCADRE_OUTIL, TITRE_OUTIL, idFiltre, libelleDetail, modeleOutilVoyants, type ModeleOutil } from './outil-voyants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -1093,17 +1093,18 @@ export function controlerHtml(
  * Outil voyants de la page construite (livrable 8.1 ; porte de l'étape 8, 03 v8). Ce que la machine vérifie (le filtre en
  * action et le rendu à l'écran restent à la recette) :
  *  - OUTIL-ABSENT : un seul outil (data-outil-voyants), qui porte data-element-unique="outil" ;
- *  - OUTIL-LIGNES : chaque ligne de la base, une fois et une seule, dans le groupe de sa couleur et dans l'ordre du modèle,
- *    avec son pictogramme ;
+ *  - OUTIL-LIGNES : chaque ligne de la base, une fois et une seule, dans le groupe de sa couleur et dans l'ordre du modèle ;
  *  - OUTIL-LIBELLES : gravité écrite, jamais la seule couleur : hors du bloc dépliable, chaque ligne affiche son nom, sa
- *    situation, le libellé de son verdict et de son urgence (et d'aucun autre niveau) et son action ; le bloc dépliable
- *    annonce l'écart, l'affiche, nomme les notices et donne chaque page citée ; le compte des verdicts de chaque groupe ;
+ *    situation, le libellé de son verdict et de son urgence (et d'aucun autre niveau), son action et son écart, avec son
+ *    pictogramme dans la couleur de la base ; le bloc dépliable nomme les notices et donne chaque page citée ; textes fixes
+ *    de l'outil et compte des verdicts de chaque groupe, au texte exact ;
  *  - OUTIL-LIEN : un lien vers la page du voyant si et seulement si elle est construite, à son adresse du plan ; renvoi de
- *    l'encadré vers la liste ;
- *  - OUTIL-FILTRE : un bouton radio par couleur présente, plus « tous », seul coché, chacun avec son libellé ;
- *  - OUTIL-SANS-JS : contenu présent dans le HTML sans JavaScript : ni script, ni noscript, ni template dans l'outil ; rien
- *    de masqué (hidden, display:none, visibility:hidden, aria-hidden sur du texte, inert), ni l'outil, ni un bloc qui le
- *    contient, ni un groupe, ni une ligne. Seuls l'écart et les références sont dans un bloc dépliable, ouvert sans script.
+ *    l'encadré vers la liste, au texte exact ;
+ *  - OUTIL-FILTRE : un bouton radio actif par couleur présente, plus « tous », seul coché, chacun avec l'identifiant que lit
+ *    le CSS et son libellé exact ;
+ *  - OUTIL-SANS-JS : contenu présent dans le HTML sans JavaScript : ni script, ni noscript, ni style, ni template dans
+ *    l'outil ; rien de masqué (hidden, display:none, visibility:hidden, aria-hidden sur du texte, inert), ni l'outil, ni un
+ *    bloc qui le contient, ni un bloc qu'il contient. Seules les références sont dans un bloc dépliable, ouvert sans script.
  * Texte comparé normalisé (normaliserTexte) : la typographie ne compte pas, les mots et les chiffres comptent.
  */
 export function controlerOutilVoyants(html: string, fichier: string, attendu: ModeleOutil): Constat[] {
@@ -1116,6 +1117,16 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
   }
   const outil = outils.first();
   if (!outil.is('[data-element-unique="outil"]')) constats.push(erreur('OUTIL-ABSENT', 'l\'outil voyants porte data-element-unique="outil" : c\'est l\'élément unique de la page', fichier));
+  // Textes fixes (validés avec le livrable) : une phrase changée dans la page construite est refusée.
+  const textesFixes: readonly [string, string, string][] = [
+    ['h2', TITRE_OUTIL, 'titre'],
+    ['[data-outil-intro]', INTRODUCTION_OUTIL, 'introduction'],
+    ['[data-outil-aide]', AIDE_FILTRE, 'aide du filtre'],
+    ['[data-outil-absent]', attendu.couleursAbsentes !== '' ? `${ABSENT_OUTIL} ${attendu.couleursAbsentes}` : ABSENT_OUTIL, 'fin de la liste'],
+  ];
+  for (const [selecteur, texte, nom] of textesFixes) {
+    if (n(outil.find(selecteur).first().text()) !== n(texte)) constats.push(erreur('OUTIL-LIBELLES', `outil, ${nom} : le texte attendu est « ${texte} »`, fichier));
+  }
 
   // Lignes : chacune une fois, dans l'ordre du modèle, dans le groupe de sa couleur.
   const attendues = attendu.groupes.flatMap((g) => g.lignes);
@@ -1156,7 +1167,6 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     const dansLeGroupe = new Set(bloc.find('[data-outil-ligne]').toArray().map((el) => $(el).attr('data-voyant') ?? ''));
     const ailleurs = groupe.lignes.filter((l) => ids.includes(l.voyant) && !dansLeGroupe.has(l.voyant)).map((l) => l.voyant);
     if (ailleurs.length > 0) constats.push(erreur('OUTIL-LIGNES', `groupe « ${groupe.couleur} » : ${ailleurs.join(', ')} ${ailleurs.length > 1 ? 'sont rangées' : 'est rangée'} dans un autre groupe que celui de leur couleur (data/voyants.json)`, fichier));
-    if (masque(bloc)) constats.push(erreur('OUTIL-SANS-JS', `le groupe « ${groupe.couleur} » est masqué dans le HTML : tout le contenu s'affiche sans JavaScript, « Tous » coché`, fichier));
   }
 
   const parId = new Map(affichees.map((l) => [l.attr('data-voyant') ?? '', l]));
@@ -1169,22 +1179,24 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     if (ligne.attr('data-couleur') !== l.couleur) problemes.push(`data-couleur (attendu : ${l.couleur})`);
     if (ligne.attr('data-verdict') !== l.verdict || ligne.attr('data-urgence') !== l.urgence) problemes.push(`data-verdict et data-urgence (attendus : ${l.verdict} · ${l.urgence})`);
     if (ligne.attr('data-notices') !== String(l.notices.length)) problemes.push(`data-notices (attendu : ${l.notices.length})`);
+    if (ligne.attr('data-gravite') !== String(graviteDuVerdict(l.verdict))) problemes.push(`data-gravite (attendu : ${graviteDuVerdict(l.verdict)}, le filet et le fond de la ligne en dépendent)`);
     // Texte hors du bloc dépliable : ce que le lecteur voit sans ouvrir quoi que ce soit.
     const visibles = ligne.children().toArray().map((el) => $(el)).filter((el) => !el.is('details'));
     const texteVisible = n(visibles.map((el) => el.text()).join(' '));
-    const absents = [l.nom, l.situation, GRILLE_VERDICTS[l.verdict].libelle, GRILLE_URGENCES[l.urgence].libelle, l.action].filter((t) => !texteVisible.includes(n(t)));
+    const absents = [l.nom, l.situation, GRILLE_VERDICTS[l.verdict].libelle, GRILLE_URGENCES[l.urgence].libelle, l.action, ...(l.ecart !== undefined ? [l.ecart] : [])].filter((t) => !texteVisible.includes(n(t)));
     if (absents.length > 0) problemes.push(`n'affiche pas ${absents.map((t) => `« ${t} »`).join(', ')}`);
     const autres = libellesNiveaux.filter((e) => e.cle !== (e.genre === 'verdict' ? l.verdict : l.urgence) && texteVisible.includes(n(e.libelle))).map((e) => e.libelle);
     if (autres.length > 0) problemes.push(`affiche aussi le libellé d'un autre niveau (${autres.map((t) => `« ${t} »`).join(', ')})`);
-    if (ligne.find('svg').length === 0) problemes.push('pictogramme absent');
-    // Bloc dépliable : l'écart (annoncé dans son titre), le nombre de notices, les notices nommées, chaque page citée.
+    if (l.ecart === undefined && texteVisible.includes(n('Selon les marques'))) problemes.push("un écart est affiché alors que la base n'en signale pas");
+    const picto = ligne.find('.voyant').first();
+    if (picto.find('svg').length === 0) problemes.push('pictogramme absent');
+    else if (picto.attr('data-pictogramme') !== l.pictogramme || picto.attr('data-couleur') !== l.couleur) problemes.push(`pictogramme (attendu : « ${l.pictogramme} », couleur ${l.couleur})`);
+    // Bloc dépliable : le nombre de notices, les notices nommées, chaque page citée.
     const detail = ligne.children('details').first();
     if (detail.length === 0) problemes.push('bloc dépliable (écart et sources) absent');
     else {
       if (n(detail.find('summary').first().text()) !== n(libelleDetail(l))) problemes.push(`titre du bloc dépliable (attendu : « ${libelleDetail(l)} »)`);
       const texteDetail = n(detail.text());
-      if (l.ecart !== undefined && !texteDetail.includes(n(l.ecart))) problemes.push(`écart entre marques absent (« ${l.ecart} »)`);
-      if (l.ecart === undefined && texteDetail.includes(n('Selon les marques'))) problemes.push("un écart est affiché alors que la base n'en signale pas");
       const phrase = phraseSources(l);
       if (phrase !== '' && !texteDetail.includes(n(phrase))) problemes.push(`phrase des sources absente (« ${phrase} »)`);
       const references = detail.find('.outil-references li').toArray().map((el) => n($(el).text()));
@@ -1203,11 +1215,12 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     const permis = l.page !== undefined ? [l.page.adresse] : [];
     const enTrop = liens.filter((h) => !permis.includes(h));
     if (enTrop.length > 0) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : lien(s) inattendu(s) ${enTrop.join(', ')} : une ligne ne mène qu'à la page construite du voyant`, fichier));
-    if (masque(ligne) || ligne.parents('details').length > 0) constats.push(erreur('OUTIL-SANS-JS', `ligne « ${l.voyant} » masquée dans le HTML : tout le contenu s'affiche sans JavaScript`, fichier));
+    if (ligne.parents('details').length > 0) constats.push(erreur('OUTIL-SANS-JS', `ligne « ${l.voyant} » dans un bloc dépliable : verdict et action se lisent sans rien ouvrir`, fichier));
   }
-  const renvoi = $('[data-encadre-decision]').first().find(`a[href="#${ANCRE_OUTIL}"]`);
-  if (renvoi.length !== 1 || !n(renvoi.text()).includes(n(RENVOI_ENCADRE_OUTIL.lien)) || outil.attr('id') !== ANCRE_OUTIL) {
-    constats.push(erreur('OUTIL-LIEN', `l'encadré de décision renvoie à la liste (« ${RENVOI_ENCADRE_OUTIL.lien} », #${ANCRE_OUTIL}), et l'outil porte cet identifiant`, fichier));
+  const blocRenvoi = $('[data-encadre-decision]').first().find('[data-encadre-renvoi]');
+  const renvoi = blocRenvoi.find(`a[href="#${ANCRE_OUTIL}"]`);
+  if (renvoi.length !== 1 || n(blocRenvoi.text()) !== n(`${RENVOI_ENCADRE_OUTIL.texte} ${RENVOI_ENCADRE_OUTIL.lien}`) || outil.attr('id') !== ANCRE_OUTIL) {
+    constats.push(erreur('OUTIL-LIEN', `l'encadré de décision renvoie à la liste (« ${RENVOI_ENCADRE_OUTIL.texte} ${RENVOI_ENCADRE_OUTIL.lien} », #${ANCRE_OUTIL}), et l'outil porte cet identifiant`, fichier));
   }
 
   // Filtre par couleur : boutons radio, sans script ; « tous » coché au départ, pour que tout s'affiche.
@@ -1221,23 +1234,29 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     const coches = boutons.filter((b) => b.attr('checked') !== undefined).map((b) => b.attr('value'));
     if (noms.size !== 1) constats.push(erreur('OUTIL-FILTRE', 'les boutons du filtre partagent le même nom : un seul choix à la fois', fichier));
     if (coches.join('|') !== FILTRE_TOUS) constats.push(erreur('OUTIL-FILTRE', `seul « ${FILTRE_TOUS} » est coché au départ, pour que tout le contenu s'affiche ; cochés : ${coches.join(', ') || 'aucun'}`, fichier));
-    const comptes = new Map<string, number>([[FILTRE_TOUS, attendu.total], ...attendu.groupes.map((g): [string, number] => [g.couleur, g.lignes.length])]);
+    const libelles = new Map<string, string>([[FILTRE_TOUS, `${LIBELLE_FILTRE_TOUS} (${attendu.total})`], ...attendu.groupes.map((g): [string, string] => [g.couleur, `${g.libelleFiltre} (${g.lignes.length})`])]);
     for (const b of boutons) {
-      const id = b.attr('id') ?? '';
+      const valeur = b.attr('value') ?? '';
+      const voulu = libelles.get(valeur) ?? '';
+      const id = idFiltre(valeur);
       const libelle = outil.find('[data-outil-filtre] label').toArray().map((el) => $(el)).find((el) => el.attr('for') === id);
-      const compte = comptes.get(b.attr('value') ?? '');
-      if (id === '' || libelle === undefined || !n(libelle.text()).includes(String(compte))) {
-        constats.push(erreur('OUTIL-FILTRE', `bouton « ${b.attr('value') ?? ''} » : un libellé (label for) avec son nombre de lignes (${compte})`, fichier));
+      // L'identifiant est celui que lit le CSS (site.css) : un autre, et le filtre ne filtre plus rien.
+      if (b.attr('id') !== id || b.attr('disabled') !== undefined || libelle === undefined || n(libelle.text()) !== n(voulu)) {
+        constats.push(erreur('OUTIL-FILTRE', `bouton « ${valeur} » : identifiant ${id}, actif, avec le libellé « ${voulu} » (label for)`, fichier));
       }
     }
   }
 
   // Contenu présent sans JavaScript : ni script dans l'outil, ni outil masqué.
-  if (outil.find('script, noscript, template, iframe').length > 0) {
-    constats.push(erreur('OUTIL-SANS-JS', "l'outil ne dépend d'aucun script : ni script, ni noscript, ni template, ni iframe dans son bloc", fichier));
+  if (outil.find('script, noscript, template, iframe, style').length > 0) {
+    constats.push(erreur('OUTIL-SANS-JS', "l'outil ne dépend d'aucun script ni d'une règle propre à la page : ni script, ni noscript, ni style, ni template, ni iframe dans son bloc", fichier));
   }
   if ([outil, ...outil.parents().toArray().map((el) => $(el))].some(masque)) {
     constats.push(erreur('OUTIL-SANS-JS', "l'outil, ou un bloc qui le contient, est masqué dans le HTML", fichier));
+  }
+  const masques = outil.find('*').toArray().map((el) => $(el)).filter(masque);
+  if (masques.length > 0) {
+    constats.push(erreur('OUTIL-SANS-JS', `${masques.length} bloc(s) de l'outil masqué(s) dans le HTML (par exemple « ${masques[0]?.text().trim().slice(0, 60) ?? ''} ») : tout le contenu s'affiche sans JavaScript, « Tous » coché`, fichier));
   }
   return constats;
 }

@@ -5,19 +5,19 @@
 id: voyants
 title: "Voyant orange voiture : signification et liste des voyants"
 h1: "Voyants du tableau de bord : lequel est allumé, et pouvez-vous rouler ?"
-description: "Un voyant orange peut imposer l'arrêt : la couleur ne suffit pas. Trouvez votre voyant dans la liste : pouvez-vous rouler, quand agir, que faire, d'après les notices des constructeurs."
+description: "Un voyant orange peut imposer l'arrêt : trouvez le vôtre par couleur et lisez si vous pouvez rouler, quand agir et que faire, d'après les notices des constructeurs."
 libelle_court: Identifier un voyant
 question_decision: "Quel voyant s'est allumé, et pouvez-vous continuer à rouler ?"
 situations:
   - voyant: moteur-orange-fixe
-  - voyant: entretien-vidange
+  - voyant: abs
   - voyant: prechauffage
 voyants:
   - moteur-orange-fixe
-  - entretien-vidange
+  - abs
   - prechauffage
 cout_probable:
-  base_de_calcul: "Le coût dépend du voyant : il est donné sur la page du voyant, quand elle est publiée."
+  base_de_calcul: "Le coût dépend du voyant et de sa cause : chaque page de voyant donne sa plage."
   sources:
     - notice-dacia-sandero-3
     - notice-peugeot-208
@@ -42,25 +42,31 @@ prochaine_revue: 2027-11-04
 
 ## Comment lire un voyant
 
-Regardez le dessin, puis la couleur, puis la façon dont le voyant s'allume : fixe ou clignotant. Les notices l'appellent « témoin » : c'est la même chose.
+Regardez le dessin, puis la couleur, puis la façon dont le voyant s'allume : fixe ou clignotant. Plusieurs notices l'appellent « témoin » : c'est la même chose.
 
-Un même dessin peut avoir plusieurs lignes dans la liste. Le voyant moteur en a trois : orange fixe, orange clignotant, rouge. Le voyant de pression des pneus en a deux : allumé fixe, ou qui clignote puis reste allumé. Lisez aussi le message affiché à côté du voyant : il peut changer la consigne, comme « Risque casse moteur » chez Renault et Dacia.
+Un même dessin peut avoir plusieurs lignes dans la liste. Le voyant moteur en a trois : orange fixe, orange clignotant, rouge. Le voyant de pression des pneus en a deux : allumé fixe, ou qui clignote puis reste allumé. Lisez aussi le message affiché à côté du voyant : il peut changer la consigne, comme « Risque casse moteur » dans les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}.
 
 Pour ne voir que les voyants orange ou jaunes, ou que les rouges, utilisez le filtre de la liste.
 
+## Un voyant s'allume à la mise du contact, puis s'éteint
+
+Dans la notice {{notice:notice-peugeot-208}}, certains témoins d'alerte, rouges ou orange, s'allument quelques secondes à la mise du contact, et doivent s'éteindre dès le démarrage du moteur ({{cite:notice-peugeot-208|p. 12}}). S'il reste allumé après le démarrage, ou s'il s'allume en roulant, cherchez sa ligne dans la liste.
+
 ## Que veut dire la couleur d'un voyant ?
 
-Le règlement ONU n° 121, qui porte sur l'homologation des véhicules, fixe la couleur de certains voyants ({{cite:reglement-onu-121|§ 5.4.1 et tableau, colonne 5}}) : rouge pour la pression d'huile, la température du liquide de refroidissement et l'état de charge de la batterie ; jaune pour l'antiblocage des freins (ABS), l'autodiagnostic du moteur, le préchauffage diesel et le sous-gonflage des pneus ; vert pour les feux de croisement et les clignotants ; bleu pour les feux de route. Pour un voyant que ce tableau n'énumère pas, le constructeur choisit la couleur ({{cite:reglement-onu-121|§ 5.4.2}}).
+La couleur seule ne dit pas quoi faire. « L'allumage d'un témoin d'alerte (rouge ou orange) peut indiquer l'apparition d'une anomalie nécessitant un diagnostic complémentaire », dit la même notice ({{cite:notice-peugeot-208|p. 12}}) : c'est la consigne de chaque voyant qui décide, et la liste la donne.
 
-Ce règlement fixe un symbole et une couleur : il ne dit pas si vous pouvez rouler. La consigne vient de la notice de chaque voiture, et c'est elle que reprend la liste.
+Le règlement ONU n° 121, qui porte sur l'homologation des véhicules, fixe la couleur de certains voyants ({{cite:reglement-onu-121|§ 5.4.1 et tableau, colonne 5}}) : rouge pour la pression d'huile, la température du liquide de refroidissement et l'état de charge de la batterie ; jaune pour l'antiblocage des freins (ABS), l'autodiagnostic du moteur, le préchauffage diesel et le sous-gonflage des pneus ; vert pour les feux de croisement et les clignotants ; bleu pour les feux de route. Pour un voyant que ce tableau n'énumère pas, le constructeur choisit la couleur, selon les directives d'une norme, ISO 2575 ({{cite:reglement-onu-121|§ 5.4.2}}).
 
-Le règlement écrit « jaune », la notice {{notice:notice-peugeot-208}} écrit « orange » ({{cite:notice-peugeot-208|p. 14}}) et la notice {{notice:notice-seat-ibiza}} « jaunes » ({{cite:notice-seat-ibiza|p. 93-94}}) : la liste les range sous une seule couleur.
+Ce règlement fixe un symbole et une couleur : il ne dit pas si vous pouvez rouler.
+
+Le règlement dit « jaune ». {{notice:notice-peugeot-208}} parle de témoins « de couleur orange » ({{cite:notice-peugeot-208|p. 14}}), {{notice:notice-seat-ibiza}} de témoins « jaunes » ({{cite:notice-seat-ibiza|p. 93-94}}) : la liste les range sous une seule couleur.
 
 ## Un voyant orange permet-il toujours de rouler ?
 
-Non. On lit souvent qu'un voyant orange n'impose pas d'arrêt immédiat ; ce n'est pas ce que disent toutes les notices lues. Pour le voyant moteur orange allumé fixe, la notice {{notice:notice-toyota-yaris}} demande d'arrêter immédiatement le véhicule dans un endroit sûr (p. 293). D'où le verdict retenu, « {{verdict:moteur-orange-fixe}} », et l'écart entre les marques affiché dans l'encadré. Pour le voyant de pression des pneus allumé fixe, orange lui aussi, le verdict retenu est le même : « {{verdict:pression-pneus}} ».
+Non. Une idée répandue veut qu'un voyant orange laisse rouler sans s'arrêter ; ce n'est pas ce que disent toutes les notices lues. Pour le voyant moteur orange allumé fixe, {{notice:notice-toyota-yaris}} demande d'arrêter immédiatement le véhicule dans un endroit sûr ({{cite:notice-toyota-yaris|p. 293}}). D'où le verdict retenu, « {{verdict:moteur-orange-fixe}} », et l'écart entre les marques affiché dans l'encadré. Pour le voyant de pression des pneus allumé fixe, orange lui aussi, le verdict retenu est le même : « {{verdict:pression-pneus}} ».
 
-À l'inverse, un voyant rouge n'impose pas toujours l'arrêt. Le voyant de frein de stationnement, rouge, signale le frein à main serré : « {{verdict:frein-stationnement}} », une fois le frein complètement desserré.
+À l'inverse, un voyant rouge n'impose pas toujours l'arrêt. Le voyant de frein de stationnement, rouge, signale le frein à main serré : « {{verdict:frein-stationnement}} », une fois le frein complètement desserré ; le voyant doit alors s'éteindre. S'il reste allumé, ce n'est plus ce cas : voyez le [voyant de freinage rouge](#da-voyant-frein-rouge).
 
 Chaque groupe de la liste compte ses verdicts : c'est la ligne de votre voyant qui décide, pas sa couleur.
 
@@ -70,16 +76,18 @@ Le verdict retenu est « {{verdict:moteur-orange-fixe}} ». La [page Voyant mote
 
 ## « Point d'exclamation », « zig zag », « clé », « huile » : quel voyant est-ce ?
 
+- **Cercle avec un point d'exclamation** : le [voyant de freinage rouge](#da-voyant-frein-rouge).
 - **Fer à cheval avec un point d'exclamation** : le [voyant de pression des pneus](#da-voyant-pression-pneus).
 - **Volant avec un point d'exclamation** : le voyant de direction, [orange](#da-voyant-direction-orange) ou [rouge](#da-voyant-direction-rouge).
 - **Voiture qui dérape, avec des traces en zig zag** : le voyant ESP (contrôle de stabilité), [qui clignote](#da-voyant-esp-clignotant) ou [allumé fixe](#da-voyant-esp-defaut).
-- **Clé** : le [rappel d'entretien](#da-voyant-entretien-vidange).
+- **Clé** : le [rappel d'entretien](#da-voyant-entretien-vidange). Attention : dans les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, la clé est le témoin Service, et ces notices demandent « un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement » ({{cite:notice-renault-clio-5|p. 136}}, {{cite:notice-dacia-sandero-3|p. 110}}).
 - **Huile** : en rouge, la [pression d'huile](#da-voyant-huile-pression-rouge) ; en orange ou par un message, le [niveau d'huile](#da-voyant-huile-niveau).
-- **Triangle avec un point d'exclamation, courroie de distribution** : aucune ligne de la liste. Le site ne donne pas de verdict pour ces voyants : cherchez-les dans la notice de votre voiture.
+- **STOP** : pas encore de ligne propre dans la liste. Les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} disent que ce témoin « vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation » ({{cite:notice-renault-clio-5|p. 136}}, {{cite:notice-dacia-sandero-3|p. 110}}), et {{notice:notice-peugeot-208}} : « L'arrêt du véhicule est impératif » ({{cite:notice-peugeot-208|p. 13}}).
+- **Triangle avec un point d'exclamation, courroie de distribution** : aucune ligne de la liste. Le site ne donne pas de verdict pour ces voyants : cherchez-les dans la notice de votre voiture et, en cas de doute, demandez l'avis d'un professionnel.
 
 ## « Voyant orange Dacia », « tableau de bord Clio » : et votre voiture ?
 
-Le verdict de chaque ligne vaut pour toutes les voitures : c'est le plus prudent des notices lues, celles de {{notice:notice-dacia-sandero-3}}, {{notice:notice-peugeot-208}}, {{notice:notice-renault-clio-5}}, {{notice:notice-seat-ibiza}} et {{notice:notice-toyota-yaris}}.
+Le verdict de chaque ligne ne dépend pas de votre marque : c'est le plus prudent des notices lues, celles de {{notice:notice-dacia-sandero-3}}, {{notice:notice-peugeot-208}}, {{notice:notice-renault-clio-5}}, {{notice:notice-seat-ibiza}} et {{notice:notice-toyota-yaris}}.
 
 Une consigne citée ne vaut que pour le modèle de sa notice : une autre Dacia, ou une autre génération de Clio, peut donner une consigne différente. La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.
 

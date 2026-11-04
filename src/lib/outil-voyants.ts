@@ -4,8 +4,8 @@
 // n'est saisi dans la page, et une ligne ajoutée à la base apparaît d'elle-même, dans le groupe de sa couleur.
 //
 //  - une ligne par ligne de la base (un voyant dans un état donné) : pictogramme, nom, situation, verdict et urgence écrits
-//    (libellés de la grille, jamais la seule couleur), action ; lien vers la page du voyant seulement quand elle est
-//    construite ; écart entre marques et pages citées dans un bloc dépliable sous la ligne ;
+//    (libellés de la grille, jamais la seule couleur), action, écart entre marques ; lien vers la page du voyant seulement
+//    quand elle est construite ; notices et pages citées dans un bloc dépliable sous la ligne ;
 //  - groupes par couleur, avec le compte des verdicts du groupe : la couleur ne suffit pas à décider (brief `voyants`) ;
 //  - filtre par couleur sans JavaScript : boutons radio et règles CSS (`:has(:checked)`, src/styles/site.css). Tout le
 //    contenu est dans le HTML, « Tous » est coché au départ ; un navigateur sans `:has()` affiche simplement toute la liste.
@@ -55,11 +55,13 @@ const TITRES_GROUPES: Readonly<Record<CouleurVoyant, string>> = {
 
 export const TITRE_OUTIL = 'Trouvez votre voyant';
 export const INTRODUCTION_OUTIL =
-  'La couleur ne suffit pas à décider : un voyant orange peut imposer l’arrêt, un voyant rouge peut simplement signaler le frein à main serré. Repérez votre voyant à son dessin, à sa couleur et à la façon dont il s’allume (fixe ou clignotant). Chaque verdict est le plus prudent des notices lues : l’écart entre les marques et les pages citées sont sous chaque voyant.';
+  'La couleur ne suffit pas à décider : un voyant orange peut imposer l’arrêt, un voyant rouge peut signaler le frein à main serré. Repérez votre voyant à son dessin, à sa couleur et à la façon dont il s’allume (fixe ou clignotant). Chaque verdict est le plus prudent des notices lues ; les pages citées sont sous chaque voyant. Cette liste ne couvre pas tous les voyants d’un tableau de bord.';
 export const LEGENDE_FILTRE = 'Afficher les voyants :';
+/** Une ligne de la base n'a qu'une couleur, or celle d'un même voyant peut changer selon la voiture (airbag, AdBlue). */
+export const AIDE_FILTRE = 'Un même voyant peut changer de couleur selon la voiture : si vous ne le trouvez pas sous une couleur, affichez « Tous ».';
 export const LIBELLE_FILTRE_TOUS = 'Tous';
 export const LIBELLE_LIEN_PAGE = 'Causes et consigne de chaque notice';
-export const ABSENT_OUTIL = 'Votre voyant n’est pas dans cette liste ? Le site ne donne pas de verdict pour lui : cherchez-le dans la notice de votre voiture et, en cas de doute, demandez l’avis d’un professionnel.';
+export const ABSENT_OUTIL = 'Votre voyant n’est pas dans cette liste, avec « Tous » affiché ? Le site ne donne pas de verdict pour lui : cherchez-le dans la notice de votre voiture et, en cas de doute, demandez l’avis d’un professionnel.';
 
 /** Renvoi de l'encadré de décision de la page outil vers la liste : ses lignes ne sont que des exemples. */
 export const RENVOI_ENCADRE_OUTIL = {
@@ -194,12 +196,10 @@ export function modeleOutilVoyants(entree: {
   };
 }
 
-/** Libellé du bloc dépliable d'une ligne : écart entre marques (s'il existe) et nombre de notices citées. */
-export function libelleDetail(ligne: Pick<LigneOutil, 'ecart' | 'notices'>): string {
+/** Libellé du bloc dépliable d'une ligne : ses sources, avec le nombre de notices citées. */
+export function libelleDetail(ligne: Pick<LigneOutil, 'notices'>): string {
   const n = ligne.notices.length;
-  const base = ligne.ecart !== undefined ? 'Écart entre les marques et sources' : 'Sources';
-  if (n === 0) return base;
-  return `${base} (${n === 1 ? 'une' : enLettres(n)} notice${n > 1 ? 's' : ''})`;
+  return n === 0 ? 'Sources' : `Sources (${n === 1 ? 'une' : enLettres(n)} notice${n > 1 ? 's' : ''})`;
 }
 
 function ligneHtml(l: LigneOutil, pictogrammes: ReadonlyMap<string, string>): string {
@@ -208,14 +208,14 @@ function ligneHtml(l: LigneOutil, pictogrammes: ReadonlyMap<string, string>): st
   return [
     `<li class="outil-ligne" id="${attributHtml(ancreLigneOutil(l.voyant))}" data-outil-ligne data-voyant="${attributHtml(l.voyant)}" data-couleur="${attributHtml(l.couleur)}" data-verdict="${attributHtml(l.verdict)}" data-urgence="${attributHtml(l.urgence)}" data-gravite="${graviteDuVerdict(l.verdict)}" data-notices="${l.notices.length}">`,
     // Le pictogramme garde la couleur du voyant fixée par la base ; le nom écrit à côté le rend décoratif (charte §3.6).
-    `<h4 class="outil-nom">${dessin !== undefined ? `<span class="voyant" data-couleur="${attributHtml(l.couleur)}">${pictogrammeDecoratif(dessin)}</span>` : ''}<span>${texteHtml(l.nom)}</span></h4>`,
+    `<h4 class="outil-nom">${dessin !== undefined ? `<span class="voyant" data-couleur="${attributHtml(l.couleur)}" data-pictogramme="${attributHtml(l.pictogramme)}">${pictogrammeDecoratif(dessin)}</span>` : ''}<span>${texteHtml(l.nom)}</span></h4>`,
     `<p class="outil-situation">${texteHtml(l.situation)}</p>`,
     `<p class="encadre-verdict">${iconeGravite(l.verdict)}<strong>${texteHtml(GRILLE_VERDICTS[l.verdict].libelle)}</strong></p>`,
     `<p class="encadre-urgence">${etiquette('Quand agir :')}${texteHtml(GRILLE_URGENCES[l.urgence].libelle)}</p>`,
     `<p class="encadre-action">${etiquette('Que faire :')}${texteHtml(l.action)}</p>`,
+    l.ecart !== undefined ? `<p class="encadre-ecart">${etiquette('Selon les marques :')}${texteHtml(l.ecart)}</p>` : '',
     l.page !== undefined ? `<p class="outil-page"><a href="${attributHtml(l.page.adresse)}">${texteHtml(`${LIBELLE_LIEN_PAGE} : ${l.page.libelle}`)}</a></p>` : '',
     `<details class="outil-detail"><summary>${texteHtml(libelleDetail(l))}</summary>`,
-    l.ecart !== undefined ? `<p class="encadre-ecart">${etiquette('Selon les marques :')}${texteHtml(l.ecart)}</p>` : '',
     sources !== '' ? `<p class="encadre-sources">${texteHtml(sources)}</p>` : '',
     `<ul class="outil-references">${l.references.map((r) => `<li data-source-id="${attributHtml(r.source)}">${texteHtml(`${r.nom} : ${r.emplacement}`)}</li>`).join('')}</ul>`,
     '</details>',
@@ -249,6 +249,7 @@ function filtreHtml(modele: ModeleOutil): string {
         `<input type="radio" name="${NOM_FILTRE}" id="${attributHtml(idFiltre(c.valeur))}" value="${attributHtml(c.valeur)}"${c.coche ? ' checked' : ''}><label for="${attributHtml(idFiltre(c.valeur))}">${texteHtml(c.libelle)}</label>`,
     ),
     '</div>',
+    `<p class="outil-aide" data-outil-aide>${texteHtml(AIDE_FILTRE)}</p>`,
     '</fieldset>',
   ].join('');
 }
@@ -258,7 +259,7 @@ export function outilVoyants(modele: ModeleOutil, pictogrammes: ReadonlyMap<stri
   return [
     `<section class="outil-voyants" id="${ANCRE_OUTIL}" data-element-unique="outil" data-outil-voyants aria-labelledby="${ANCRE_OUTIL}-titre">`,
     `<h2 id="${ANCRE_OUTIL}-titre">${texteHtml(TITRE_OUTIL)}</h2>`,
-    `<p>${texteHtml(INTRODUCTION_OUTIL)}</p>`,
+    `<p data-outil-intro>${texteHtml(INTRODUCTION_OUTIL)}</p>`,
     filtreHtml(modele),
     ...modele.groupes.map((g) => groupeHtml(g, pictogrammes)),
     `<p class="outil-absent" data-outil-absent>${texteHtml(modele.couleursAbsentes !== '' ? `${ABSENT_OUTIL} ${modele.couleursAbsentes}` : ABSENT_OUTIL)}</p>`,

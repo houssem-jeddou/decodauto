@@ -483,8 +483,7 @@ h3 {
 }
 
 /* Outil voyants (livrable 8.1) : chaque ligne reprend la forme d'une ligne de l'encadré (filet et icône de gravité, libellés
-   écrits). Filtre par couleur sans JavaScript : un bouton radio par couleur ; le choix masque les autres groupes. Sans
-   `:has()`, toute la liste reste affichée. Le bouton coché se lit sans la couleur (coche et bordure épaisse). Les boutons
+   écrits). Filtre par couleur sans JavaScript : un bouton radio par couleur ; le choix masque les autres groupes. Le bouton coché se lit sans la couleur (coche et bordure épaisse). Les boutons
    restent atteignables au clavier : seuls leurs libellés se voient. */
 .outil-filtre {
   border: 0;
@@ -540,9 +539,16 @@ h3 {
 .outil-voyants:has(#da-filtre-blanc:checked) [data-outil-groupe]:not([data-outil-groupe='blanc']) {
   display: none;
 }
-/* Un lien vers une ligne (texte rédigé) la montre, quel que soit le filtre choisi. */
-.outil-voyants [data-outil-groupe]:has(:target) {
-  display: block !important;
+/* Sans :has(), le filtre ne ferait rien : il n'est pas affiché, et toute la liste reste visible. */
+@supports not selector(:has(*)) {
+  .outil-filtre {
+    display: none;
+  }
+}
+.outil-aide {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--texte-doux);
 }
 .outil-resume {
   margin: 0 0 0.75rem;

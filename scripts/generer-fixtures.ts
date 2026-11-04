@@ -399,7 +399,7 @@ function blocOutil(options: OptionsHtml): string {
   if (options.outilLigneManquante) html = html.replace(/<li class="outil-ligne"[\s\S]*?<\/details><\/li>/, '');
   if (options.outilSansLibelle) html = html.replace(/<p class="encadre-verdict">[\s\S]*?<\/p>/, '<p class="encadre-verdict"></p>');
   if (options.outilLienEnTrop) html = html.replace('<details', '<p><a href="/fixture-voyant/">Page non construite</a></p><details');
-  if (options.outilSansFiltre) html = html.replace(/<fieldset[\s\S]*?<\/fieldset>/, '');
+  if (options.outilSansFiltre) html = html.replace(/<div class="outil-choix">[\s\S]*?<\/div>/, '');
   if (options.outilFiltreSansTous) html = html.replace(' checked', '');
   if (options.outilLigneMasquee) html = html.replace('data-outil-ligne', 'hidden data-outil-ligne');
   if (options.outilScript) html = html.replace('<fieldset', '<script>document.title = "x";</script><fieldset');
@@ -430,7 +430,7 @@ function encadre(page: Objet, options: OptionsHtml): string {
     .join('');
   const contenu = options.encadreMasque ? `<details><summary>Voir le détail</summary>${lignes}</details>` : lignes;
   const coutHtml = options.encadreSansCout ? '' : coutAffiche(page);
-  const renvoi = page['outil'] === true && !options.outilSansRenvoi ? `<p>${RENVOI_ENCADRE_OUTIL.texte} <a href="#${ANCRE_OUTIL}">${RENVOI_ENCADRE_OUTIL.lien}</a></p>` : '';
+  const renvoi = page['outil'] === true && !options.outilSansRenvoi ? `<p data-encadre-renvoi>${RENVOI_ENCADRE_OUTIL.texte} <a href="#${ANCRE_OUTIL}">${RENVOI_ENCADRE_OUTIL.lien}</a></p>` : '';
   return `<section data-encadre-decision><p>${String(page['question_decision'])}</p>${renvoi}${contenu}${coutHtml}</section>`;
 }
 
