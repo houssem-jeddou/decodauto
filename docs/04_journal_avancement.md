@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
+Dernière mise à jour : 04/11/2026 (14 h, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,9 +12,9 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ✅ Validée par Houssem (04/11, 12 h 03) · porte vérifiée et relue (deux revues) · PR #20 (fusion demandée) · tag à poser sur demande. Livrables 6.0 à 6.9 (PR #8, #11 à #20) ; demandes de changement n° 4 à 11 acceptées (03 v8) | `docs/10_charte_editoriale.md` (charte) ; modèles `src/lib/modeles.ts` ; exemples `exemples/` ; `travaux/etape-6/` (porte : `porte-de-sortie.md`, briefs : `briefs/`) |
-| 7 | Socle technique | ⏸ Piste technique en pause depuis le 28/10 (12 h 10), sur décision de Houssem (un livrable à la fois). Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
-| 8 | Vague A | Suivante. Premier livrable : modèle de l'outil voyants (demande de changement n° 11) ; juste avant la rédaction : demande de changement des requêtes absentes de 06 | `travaux/etape-6/briefs/` |
+| 6 | Charte et modèles de pages | ✅ Validée par Houssem (04/11, 12 h 03) · porte vérifiée et relue (deux revues) · PR #20 fusionnée (77bea5e) · tag à poser sur demande. Livrables 6.0 à 6.9 (PR #8, #11 à #20) ; demandes de changement n° 4 à 11 acceptées (03 v8) | `docs/10_charte_editoriale.md` (charte) ; modèles `src/lib/modeles.ts` ; exemples `exemples/` ; `travaux/etape-6/` (porte : `porte-de-sortie.md`, briefs : `briefs/`) |
+| 7 | Socle technique | ▶ Piste technique reprise le 04/11 (12 h 25, décision de Houssem), en alternance avec l'étape 8 : un seul livrable présenté à la fois. Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées. Prochain : 7.2 (description des pages du socle, politique de confidentialité, mesure d'audience) ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
+| 8 | Vague A | ▶ Étape principale depuis le 04/11. Fait : 8.1 modèle de l'outil voyants, validé le 04/11 (13 h 48), PR #21. Ordre décidé le 04/11, suite : 7.2 ; 8.2 demande de changement des requêtes absentes de 06, juste avant la rédaction ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants), avec le court paquet de lignes à ajouter à la base ; livrables 7.x intercalés | `travaux/etape-6/briefs/` ; `travaux/etape-8/paquet-8.1-outil-voyants.md` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
 | 9 | Recette et mise en ligne A | À faire | – |
 | 10 | Vague B | À faire | – |
 | 11 | Vague C | À faire | – |
@@ -24,7 +24,7 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 | Étape | Cible (03) | Prévision au 03/11 | Dépend de |
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
-| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause depuis 12 h 10 ; reprise quand Houssem la redemande | statut juridique (mentions légales) |
+| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause du 28/10 (12 h 10) au 04/11 ; reprise le 04/11, en alternance avec l'étape 8 ; ≈ 05–15/11 | statut juridique (mentions légales) ; parcours de l'auteur (« à propos ») |
 | 6. Charte et modèles | 27–29/10 | ✅ terminée le 04/11 (porte validée à 12 h 03 ; aucun travail du 25 au 27/10 ni du 29/10 au 01/11) | – |
 | 8. Vague A | 29/10–01/11 | ≈ 05–15/11 (outil voyants d'abord, puis le minimum) | portes 5 et 6 ✅ ; requêtes absentes mesurées ; sources des briefs trouvées |
 | 9. Mise en ligne du minimum | 31/10 | ≈ 14–16/11 | portes 7 et 8 ; sécurité des comptes |
@@ -39,6 +39,7 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 6. ~~demande de changement n° 6 (coût probable)~~ : faite le 28/10 ;
 7. ~~charte éditoriale (6.2), composants communs (6.3), tableau des notices et demande de changement n° 8 (6.4), contrôles peu coûteux (6.5)~~ : validés le 02/11 et le 03/11 ;
 8. ~~exemples des modèles voyant, code et pneus~~ : validés le 03/11 ; ~~consignes des briefs (6.8)~~ : validées le 03/11 ; ~~porte 6~~ : validée le 04/11 ;
+   ~~modèle de l'outil voyants (8.1) et demande de changement n° 12~~ : validés le 04/11 ;
 9. porte 7 ;
 10. demande de changement des requêtes absentes, juste avant l'étape 8 ;
 11. paquet et encadrés de la vague A, et porte 8 ;
@@ -140,7 +141,7 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
     - consignes de rédaction validées (`consignes.json`, seule partie écrite à la main) : question de décision, angle, élément unique, questions à traiter, sources à trouver avant la rédaction, hors périmètre ; aucun volume, lien, vague ni verdict recopié ;
     - `tests/briefs.test.ts` (17 tests) : briefs à jour, consignes des 22 pages, question des exemples lue dans l'exemple, ni volume ni vague recopiés (vérifié par mutation), liens dans les deux sens, relevé sur la requête principale et identique à ses empreintes ; `npm test` 379 tests.
   - Une revue indépendante (« à corriger », rien de bloquant), corrections intégrées.
-- [x] **6.9 Porte de sortie de l'étape 6.** Lancée le 03/11 (22 h 53) sur le feu vert de Houssem ; présentée le 03/11 ; validée par Houssem le 04/11 (12 h 03), avec les quatre décisions telles que recommandées ; fusion de la PR #20 demandée.
+- [x] **6.9 Porte de sortie de l'étape 6.** Lancée le 03/11 (22 h 53) sur le feu vert de Houssem ; présentée le 03/11 ; validée par Houssem le 04/11 (12 h 03), avec les quatre décisions telles que recommandées. PR #20 fusionnée le 04/11 (12 h 10) sur la demande de Houssem (77bea5e) ; CI de `main` verte (run 41819136266 : contrôles, recette des exemples, Lighthouse, déploiement et vérification en production ; aucune page éditoriale publiée).
   - Branche `etape-6/porte-de-sortie`, PR #20 ; `travaux/etape-6/porte-de-sortie.md` (critères, preuves, décisions) ; `tests/porte6.test.ts` (3 tests, vérifiés par mutation).
   - Décisions validées : demande de changement n° 11 (modèle de l'outil voyants, premier livrable de l'étape 8 ; 03 v8) ; partie « Les codes défaut » ajoutée à la section « Méthode » (nouvelle empreinte des textes affichés `509c4356…`, `data/charte-validation.json`) ; « pages écrites pour vendre un appareil ou un service » (charte §2.2) ; « nos rédactions » dans la liste du §2.7 ; tag `etape-6-charte-modeles` proposé, à poser sur sa demande.
   - Deux revues indépendantes (le maximum), corrections intégrées.
@@ -157,6 +158,22 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 | Contrôles au vert | ✅ | CI de `main` (run 41725160827) et de la PR #20 |
 | Revue indépendante | ✅ | Deux revues de la porte (le maximum), rien de bloquant |
 | Validation de Houssem | ✅ | 04/11/2026, 12 h 03 (« Oui je valide ») |
+
+## Étape 8, Vague A : livrables
+- [x] **8.1 Modèle de l'outil voyants** (demande de changement n° 11, PR #21), validé par Houssem le 04/11 (13 h 48) :
+  - `src/lib/outil-voyants.ts`, `src/lib/outil-textes.ts`, modèle `pageOutilVoyants` ; page outil `exemples/voyant/voyants.md`, jamais publiée avant son lot ;
+  - liste générée depuis la base, 25 cas : 16 orange ou jaunes, 9 rouges ; filtre par couleur et index des dessins sans JavaScript ;
+  - contrôles OUTIL-ABSENT, OUTIL-LIGNES, OUTIL-LIBELLES, OUTIL-LIEN, OUTIL-FILTRE, OUTIL-INDEX, OUTIL-SANS-JS ;
+  - règlement ONU n° 121 ajouté au registre (symbole et couleur seulement) ;
+  - demande de changement n° 12 acceptée : 08 v9, charte §4 ;
+  - exception de l'outil retirée de `tests/porte6.test.ts` ; lignes manquantes de `docs/04` recopiées.
+- [ ] 8.2 Demande de changement des requêtes absentes de 06, juste avant la rédaction.
+- [ ] 8.3 Lot du minimum : loi montagne, pression des pneus, puis les voyants ; avec le court paquet de lignes à ajouter à la base (décision 8 de 8.1).
+- **Critère de l'outil à la porte de l'étape 8, état au 04/11** :
+  - lignes, liens, libellés écrits, lien « Signaler une erreur », contenu sans JavaScript : contrôlés automatiquement ;
+  - encadré de la page outil : validé, empreinte versée ;
+  - filtre par couleur : présence contrôlée ; essayé dans Chromium seulement. Safari, Firefox, lecteur d'écran et vrai téléphone restent à la recette ;
+  - Lighthouse de la page outil : passe dans la recette, sans les emplacements publicitaires factices de l'étape 7. À repasser avec eux.
 
 ## Étape 7, Socle technique (piste technique) : livrables
 - [x] **Lot 7.1** (PR #9, CI entièrement verte, fusionnée le 28/10 sur demande de Houssem, b59e848) :
@@ -259,13 +276,30 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 
   PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 - 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 04/11/2026 (13 h 48), Houssem : **valide le livrable 8.1** avec les recommandations des neuf décisions et **demande la fusion de la PR #21** (« Pour les 9 decisions part avec ta recommandation. Fais les actions necessaires et fusionne la PR ») :
+  1. lignes de l'encadré : `moteur-orange-fixe`, `abs`, `prechauffage` ;
+  2. demande de changement n° 12 acceptée : renvoi vers la liste dans l'encadré de la page outil ;
+  3. ordre de la page : outil, puis texte rédigé ;
+  4. orange avant rouge dans la liste ;
+  5. écart entre marques visible, pages citées pliées ;
+  6. « zig zag » gardé, avec « voiture qui dérape » : aide pour reconnaître le dessin, pas un fait de sécurité ;
+  7. voyants dont la couleur varie : aide du filtre pour l'instant ; champ « autres couleurs » aux idées reportées ;
+  8. voyants sans ligne dans la base : ajouter au moins STOP et le triangle, et traiter le préchauffage qui clignote, par un court paquet avec le lot 8.3, **avant la mise en ligne de l'outil** ;
+  9. index des dessins en haut de l'outil : construit dans ce livrable.
+
+  Claude a pris ce message pour la validation de l'encadré, des textes fixes de l'outil, de la source ajoutée et des faits du texte (paquet 8.1). L'index a été construit après ce message : son titre, « Cherchez le dessin de votre voyant », est dans l'empreinte, et Houssem peut le faire changer. Suivant : 7.2.
+- 04/11/2026 (12 h 25), Houssem : **lance l'étape 8 et reprend la piste technique de l'étape 7** (« Ok […] pour avancer dans ce sens »), sur la proposition de Claude :
+  - l'étape 8 est l'étape principale ; l'étape 7 avance en piste technique (règle 12 de 03), en alternance, un seul livrable présenté à la fois (la décision du 28/10, un livrable à la fois, reste la règle de présentation) ;
+  - ordre : 8.1 modèle de l'outil voyants ; 7.2 description des pages du socle (demande de changement), politique de confidentialité et mesure d'audience (conditions d'exemption vérifiées sur le site de la CNIL) ; 8.2 demande de changement des requêtes absentes de 06 ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants) ; livrables 7.x (données structurées, réglages Cloudflare, emplacements factices, Lighthouse du socle) intercalés ;
+  - à lancer de son côté, car ils prennent du temps : statut juridique (activité qui couvre des recettes publicitaires), parcours pour « à propos », préalables de l'étape 9 (GitHub Pro, double authentification, verrou du domaine) ;
+  - le travail reprend dans une nouvelle conversation du projet, avec un point de reprise (`claude/etape8_point_de_reprise.md`).
 - 04/11/2026 (12 h 03), Houssem : **valide la porte de sortie de l'étape 6** (« Oui je valide, fais le nécessaire et fusionne la PR 20 »), avec les quatre décisions telles que recommandées :
   - **demande de changement n° 11 acceptée**, option (a) : le modèle de l'outil voyants est le premier livrable de l'étape 8, et la porte de l'étape 8 gagne un critère sur l'outil (03 v8) ;
   - partie « Les codes défaut » ajoutée à la section « Méthode », mot pour mot comme proposée ; nouvelle empreinte des textes affichés versée (`509c4356…`) ;
   - charte : « pages écrites pour vendre un appareil ou un service » (§2.2) ; « nos rédactions » dans la liste du §2.7 ;
   - tag `etape-6-charte-modeles` proposé, à poser sur sa demande.
 
-  Il demande la fusion de la PR #20. L'étape 6 est terminée ; suivant : étape 8, en commençant par le modèle de l'outil voyants.
+  Il demande la fusion de la PR #20 (faite à 12 h 10, 77bea5e). L'étape 6 est terminée ; suivant : étape 8, en commençant par le modèle de l'outil voyants.
 - 03/11/2026 (22 h 53), Houssem : **lance la porte de sortie de l'étape 6** (« je te donne le go pour la porte de sortie de l'étape 6 »).
 - 03/11/2026 (22 h 41), Houssem : **valide le livrable 6.8** (« Oui, je valide les consignes ») : les consignes de rédaction des 22 briefs de la vague A (`travaux/etape-6/briefs/consignes.json`), avec le relevé Google France relu (6.7). Il demande la fusion de la PR #19 (faite à 22 h 48, 5f7dcd3). Restent ouverts, sans décision : le modèle de l'outil voyants (proposition de Claude : piste technique, contrôlée à la porte de l'étape 8 ; à trancher à la porte 6.9) et le texte de référence de la page « pression des pneus » (à chercher au début de l'étape 8 ; demande de changement si aucun ne convient). Suivant : 6.9, porte de sortie de l'étape 6.
 - 03/11/2026 (après 21 h 56), Houssem : **lance le livrable 6.8** (« Lance 6.8 Feu vert »).
@@ -319,6 +353,20 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 - 02/11/2026 (20 h 19), Houssem : **valide la charte éditoriale avec toutes les recommandations** de sa section 10, **donne son accord sur les textes exacts** (mention en tête, signature, ligne de transparence, section « Méthode ») et **demande la fusion de la PR #12** si tout va bien. 03 passe en v7 (règle 11 alignée). Le livrable 6.2 est verrouillé ; suivant : 6.3, composants communs.
 
 ## Revues indépendantes : ce qu'elles ont changé
+- 04/11, livrable 8.1 (modèle de l'outil voyants), deux revues (deux relecteurs), le maximum ; chacune « à corriger ».
+  - **Première revue, changé** :
+    - bloquant : le voyant de freinage manquait parmi les dessins avec un point d'exclamation ; la clé renvoyait au seul rappel d'entretien, alors que c'est le témoin Service sur la Clio 5 et la Sandero 3 ;
+    - filtre bloqué après un lien du texte (`:has(:target)` retiré) ; aide du filtre (airbag, AdBlue) ;
+    - ligne `abs` à la place de `entretien-vidange` dans l'encadré, qui ne représentait pas les autres lignes orange ; écart entre marques rendu visible ;
+    - renvoi de l'encadré passé en demande de changement (n° 12) ; contrôles resserrés ; liste dite incomplète ; attribution de chaque fait à sa notice.
+  - **Seconde revue, changé** :
+    - bloquant : la consigne STOP était coupée avant « ne le redémarrez pas » ;
+    - préchauffage et frein de stationnement électrique qui clignotent ajoutés au texte ; décision 8 élargie ;
+    - texte complet de l'outil comparé au modèle ; textes fixes et renvoi dans l'empreinte ; test des faits du texte ;
+    - triangle vérifié par Claude sur la page du PDF de la Clio 5 (p. 138) ; index des dessins proposé (décision 9).
+  - **Écarté** : bannir tout `<style>` de la page, car Astro peut y placer le CSS du site : une règle ajoutée hors de `site.css` n'est donc pas lue par la machine. Lien vers une ligne masquée par le filtre : limite acceptée.
+  - **Non relu** : les corrections de la seconde revue et l'index des dessins, le maximum de deux revues étant atteint ; l'index n'ajoute ni fait ni verdict. Contrôlés par `npm test` et la CI.
+  - **Reste à vérifier** : Safari, Firefox, lecteur d'écran, vrai téléphone ; notices non rouvertes, sauf la Clio 5 p. 137-138 ; point d'exclamation du symbole de frein non confirmé sur la notice ; amendements du règlement n° 121 et ISO 2575 non lus.
 - 03-04/11, porte de sortie de l'étape 6 (6.9), deux revues (deux relecteurs), le maximum ; chacune « à corriger », rien de bloquant. Empreintes, journaux de CI, numéros de PR, couverture des 42 pages et grille des coûts revérifiés par les relecteurs : conformes.
   - **Première revue, changé** :
     - l'outil voyants, simple réserve, devient la demande de changement n° 11, avec un critère à la porte de l'étape 8 et le changement de recommandation dit (piste technique au journal à 22 h 45, puis premier livrable de l'étape 8) ;
@@ -590,7 +638,7 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 | Validation de Houssem | ✅ | 24/10/2026, 14 h 39 (« porte 5 validée ») |
 
 ## Pour l'étape 8 et les suivantes (repris à la porte 6)
-- **Modèle de l'outil voyants** : premier livrable de l'étape 8 (demande de changement n° 11) ; critère ajouté à la porte de l'étape 8 (03 v8).
+- **Base voyants, avant la mise en ligne de l'outil** (décision 8 de 8.1, paquet §5) : court paquet avec le lot 8.3 pour ajouter au moins STOP et le triangle, et traiter le préchauffage qui clignote. Autres cas lus dans les notices sans ligne propre : voyant central (Seat), Service (Peugeot), frein de stationnement électrique qui clignote (Peugeot), direction jaune qui clignote (Seat), absence de retour au tableau de bord (Dacia), carburant, ceintures, portes, eau dans le gazole (Peugeot).
 - **Juste avant la rédaction** : demande de changement des requêtes absentes de 06 (voir les points ouverts).
 - **Briefs** (`travaux/etape-6/briefs/`, consignes validées le 03/11) : trouver les sources listées dans chaque brief avant de rédiger la page.
 - Page « voyant frein » : témoin d'usure des plaquettes traité par une ligne saisie citée (D4) ; source à trouver.
@@ -641,9 +689,12 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
   - défaut de contrôle technique : lire la version de R323-1 en vigueur depuis le 01/01/2026 ;
   - garantie légale : lire l'article L217-3 en entier (voitures d'occasion) ;
   - documents de la SRA non lus (accès refusé).
-- **Branches anciennes** du dépôt (`claude/great-fermat-txuonc`, `docs/porte-etape-3`) : peuvent être supprimées.
+- **Branches anciennes** du dépôt (`claude/great-fermat-txuonc`, `docs/porte-etape-3`, et les branches fusionnées de l'étape 6, dont `etape-6/releve-google-france`) : peuvent être supprimées.
+- **Tag de l'étape 6** : `etape-6-charte-modeles` proposé sur 77bea5e (fusion de la PR #20) ; à poser seulement sur la demande explicite de Houssem.
+- **Copie `docs/04`** : celle de `main` s'arrête à la validation de la porte 6 ; les lignes de la fusion de la PR #20 et de la décision du 04/11 (12 h 25) partent avec la prochaine pull request.
 
 ## Idées reportées
+- Champ « autres couleurs » dans la base voyants, pour qu'une ligne dont la couleur varie selon la voiture (airbag, AdBlue) apparaisse sous les deux filtres de l'outil : par une demande de changement (paquet 8.1, décision 7). En attendant, l'aide du filtre le dit.
 - Loi montagne (étape 8) : liste des départements avec leur arrêté, ou outil « ma commune est-elle concernée ? », après lecture des arrêtés (paquet 6.6c, décisions 4 et 5) ; sanction du panneau B26 à lire sur Légifrance.
 - Définition du verdict « Non, ne poursuivez pas votre trajet » pour une obligation légale (« faites-la contrôler » ne convient pas) : demande de changement de la grille si les pages contrôle technique ou usure en ont besoin (paquet 6.6c, décision 1).
 - Espace insécable après « p. » devant un numéro de page (« p. 139 » se coupe en fin de ligne), relevée en 6.6a ; typographie du gabarit (6.3), à proposer.
@@ -657,6 +708,10 @@ Dernière mise à jour : 04/11/2026 (12 h 15, heure de Tunis)
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
+- 04/11/2026 (13 h 48), acceptée : **n° 12, renvoi vers la liste dans l'encadré de la page outil** (`travaux/etape-8/demande-changement-12.md`, PR #21).
+  - **Changement** : sur la seule page outil, l'encadré affiche, entre la question et les lignes, « Ces lignes sont des exemples : la couleur ne suffit pas à décider. » et le lien « Trouvez votre voyant dans la liste ».
+  - **Raison** : ces lignes sont trois exemples sur 25 cas ; sur téléphone (390 px), l'encadré mesure environ 2 200 px et la liste commence plus de trois écrans plus bas ; rien n'est permis entre le H1 et l'encadré.
+  - **Impact** : 08 v9 (§3, règle 9) ; charte §4, point 4 ; texte dans l'empreinte de la page outil ; empreintes des autres pages inchangées ; aucun contenu validé touché.
 - 04/11/2026 (12 h 03), acceptée : **n° 11, modèle de l'outil voyants livré à l'étape 8** (`travaux/etape-6/demande-changement-11.md`, PR #20).
   - **Changement** : l'étape 6 livre un modèle par type de la vague A, hors la variante outil voyants ; celle-ci est le premier livrable de l'étape 8, dont la porte gagne un critère (outil généré depuis la base, gravité écrite, lien « Signaler une erreur », filtre par couleur, lisible sans JavaScript, page validée).
   - **Raison** : page de la vague A au plus fort volume (193 mots-clés, 130 824 recherches indicatives par mois, plafond) ; 03 la rattachait déjà à l'étape 8 (« Outil et guide voyants », règle 12) ; aucun contrôle n'en vérifiait les exigences.

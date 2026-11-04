@@ -2,10 +2,11 @@ import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
 import { ANCRE_METHODE, DELAI_REVUE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature } from './charte.ts';
-import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } from './composants.ts';
+import { LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
+import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_INDEX_OUTIL, TITRE_OUTIL, ancreLigneOutil, idFiltre, libelleDetail, modeleOutilVoyants, outilVoyants, type ModeleOutil } from './outil-voyants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -87,6 +88,11 @@ export interface Contexte {
   /** Pièces, montants fixés par un texte et prises en charge (data/couts.json). */
   couts: DonneesCouts;
   aujourdhui: Date;
+  /**
+   * Libellé court de chaque page écrite (identifiant → libellé) : l'outil voyants ne mène qu'à une page construite
+   * (livrable 8.1). Renseigné par le contrôle du site ; absent : aucune page n'est tenue pour construite.
+   */
+  pagesEcrites?: ReadonlyMap<string, string> | undefined;
 }
 
 export interface EntreePage {
@@ -839,6 +845,19 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
       }),
       ...('texte_reference' in page && { texte: { fiche: modeleFicheTexte(page, ctx.sources) } }),
     };
+    // Page outil voyants (livrable 8.1) : l'outil généré depuis la base, et les sources de toutes ses lignes dans « Sources ».
+    if ('outil' in page && page.outil === true) {
+      const outil = modeleOutilVoyants({ voyants: ctx.voyants.values(), sources: ctx.sources, plan: ctx.plan, libelles: ctx.pagesEcrites ?? new Map<string, string>() });
+      attendus.outil = outil;
+      const dejaListees = new Set(attendus.sources.map((s) => s.id));
+      attendus.sources = [
+        ...attendus.sources,
+        ...outil.sources.filter((id) => !dejaListees.has(id)).map((id) => {
+          const source = ctx.sources.get(id);
+          return { id, titre: source?.titre, consulte: source !== undefined ? dateAffichee(source.date_consultation) : undefined };
+        }),
+      ];
+    }
     constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus));
   }
 
@@ -943,6 +962,8 @@ export interface AttendusPage {
   code?: { fiche: FicheCode; parMarque: readonly RangeeParMarque[]; elementUnique: boolean } | undefined;
   /** Page pneus et obligations (livrable 6.6c, fiche-texte.ts) : fiche « Le texte en bref » attendue. */
   texte?: { fiche: FicheTexte } | undefined;
+  /** Page outil voyants (livrable 8.1, outil-voyants.ts) : l'outil attendu, généré depuis la base. */
+  outil?: ModeleOutil | undefined;
 }
 
 /** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
@@ -1064,6 +1085,232 @@ export function controlerHtml(
   if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, attendus.notices));
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
   if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
+  if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil));
+  return constats;
+}
+
+/**
+ * Outil voyants de la page construite (livrable 8.1 ; porte de l'étape 8, 03 v8). Ce que la machine vérifie (le filtre en
+ * action et le rendu à l'écran restent à la recette) :
+ *  - OUTIL-ABSENT : un seul outil (data-outil-voyants), qui porte data-element-unique="outil" ;
+ *  - OUTIL-LIGNES : chaque ligne de la base, une fois et une seule, dans le groupe de sa couleur et dans l'ordre du modèle ;
+ *  - OUTIL-LIBELLES : gravité écrite, jamais la seule couleur : hors du bloc dépliable, chaque ligne affiche son nom, sa
+ *    situation, le libellé de son verdict et de son urgence (et d'aucun autre niveau), son action et son écart, avec son
+ *    pictogramme dans la couleur de la base ; le bloc dépliable nomme les notices et donne chaque page citée ; textes fixes
+ *    de l'outil et compte des verdicts de chaque groupe, au texte exact ; note de la section « Sources » ; enfin, tout le
+ *    texte de l'outil est celui que génère le modèle (aucune phrase ajoutée, ni dans une ligne ni entre deux groupes) ;
+ *  - OUTIL-LIEN : un lien vers la page du voyant si et seulement si elle est construite, à son adresse du plan ; renvoi de
+ *    l'encadré vers la liste, au texte exact ;
+ *  - OUTIL-FILTRE : un bouton radio actif par couleur présente, plus « tous », seul coché, chacun avec l'identifiant que lit
+ *    le CSS et son libellé exact ;
+ *  - OUTIL-INDEX : un seul index des dessins, entre le filtre et le premier groupe, au titre exact ; une entrée par ligne de
+ *    la base, une fois, dans l'ordre de la liste : le pictogramme de la ligne et son nom, sans autre texte, un seul lien vers
+ *    cette ligne, et la couleur de la base (le filtre la lit) ;
+ *  - OUTIL-SANS-JS : contenu présent dans le HTML sans JavaScript : ni script, ni noscript, ni style, ni template dans
+ *    l'outil ; rien de masqué (hidden, display:none, visibility:hidden, aria-hidden sur du texte, inert), ni l'outil, ni un
+ *    bloc qui le contient, ni un bloc qu'il contient. Seules les références sont dans un bloc dépliable, ouvert sans script.
+ * Texte comparé normalisé (normaliserTexte) : la typographie ne compte pas, les mots et les chiffres comptent.
+ */
+export function controlerOutilVoyants(html: string, fichier: string, attendu: ModeleOutil): Constat[] {
+  const constats: Constat[] = [];
+  const $ = cheerio.load(html);
+  const n = normaliserTexte;
+  const outils = $('[data-outil-voyants]');
+  if (outils.length !== 1) {
+    return [erreur('OUTIL-ABSENT', `la page outil affiche un seul outil voyants (data-outil-voyants), généré depuis la base ; trouvé : ${outils.length}`, fichier)];
+  }
+  const outil = outils.first();
+  if (!outil.is('[data-element-unique="outil"]')) constats.push(erreur('OUTIL-ABSENT', 'l\'outil voyants porte data-element-unique="outil" : c\'est l\'élément unique de la page', fichier));
+  // Textes fixes (validés avec le livrable) : une phrase changée dans la page construite est refusée.
+  const textesFixes: readonly [string, string, string][] = [
+    ['h2', TITRE_OUTIL, 'titre'],
+    ['[data-outil-intro]', INTRODUCTION_OUTIL, 'introduction'],
+    ['[data-outil-aide]', AIDE_FILTRE, 'aide du filtre'],
+    ['[data-outil-absent]', attendu.couleursAbsentes !== '' ? `${ABSENT_OUTIL} ${attendu.couleursAbsentes}` : ABSENT_OUTIL, 'fin de la liste'],
+  ];
+  for (const [selecteur, texte, nom] of textesFixes) {
+    if (n(outil.find(selecteur).first().text()) !== n(texte)) constats.push(erreur('OUTIL-LIBELLES', `outil, ${nom} : le texte attendu est « ${texte} »`, fichier));
+  }
+
+  // Lignes : chacune une fois, dans l'ordre du modèle, dans le groupe de sa couleur.
+  const attendues = attendu.groupes.flatMap((g) => g.lignes);
+  const affichees = outil.find('[data-outil-ligne]').toArray().map((el) => $(el));
+  const ids = affichees.map((l) => l.attr('data-voyant') ?? '');
+  const voulus = attendues.map((l) => l.voyant);
+  if (ids.join('|') !== voulus.join('|')) {
+    const manquantes = voulus.filter((id) => !ids.includes(id));
+    const enTrop = ids.filter((id) => !voulus.includes(id));
+    const doubles = ids.filter((id, i) => ids.indexOf(id) !== i);
+    constats.push(
+      erreur(
+        'OUTIL-LIGNES',
+        `l'outil affiche chaque ligne de la base, une fois, dans l'ordre (groupe de couleur, gravité) ; ${manquantes.length > 0 ? `manquantes : ${manquantes.join(', ')} ; ` : ''}${enTrop.length > 0 ? `inconnues de la base : ${enTrop.join(', ')} ; ` : ''}${doubles.length > 0 ? `en double : ${doubles.join(', ')} ; ` : ''}${manquantes.length + enTrop.length + doubles.length === 0 ? 'ordre différent' : ''}`,
+        fichier,
+      ),
+    );
+  }
+
+  const SELECTEUR_MASQUE = '[hidden], [inert], template, dialog';
+  const styleMasque = (style: string | undefined): boolean => /display\s*:\s*none|visibility\s*:\s*hidden|font-size\s*:\s*0(?![.\d])|opacity\s*:\s*0(?![.\d])|(?:^|[;\s])height\s*:\s*0(?![.\d])/i.test(style ?? '');
+  const masque = (el: { is(s: string): boolean; attr(a: string): string | undefined; text(): string }): boolean =>
+    el.is(SELECTEUR_MASQUE) || styleMasque(el.attr('style')) || (el.is('[aria-hidden="true"]') && el.text().trim() !== '');
+
+  for (const groupe of attendu.groupes) {
+    const bloc = outil.find(`[data-outil-groupe="${groupe.couleur}"]`);
+    if (bloc.length !== 1) {
+      constats.push(erreur('OUTIL-LIGNES', `l'outil a un groupe par couleur présente dans la base : groupe « ${groupe.couleur} » ${bloc.length === 0 ? 'absent' : 'en double'}`, fichier));
+      continue;
+    }
+    const titre = bloc.find('h3').first().text();
+    if (!n(titre).includes(n(groupe.titre)) || !n(titre).includes(n(`${groupe.lignes.length} cas`))) {
+      constats.push(erreur('OUTIL-LIBELLES', `groupe « ${groupe.couleur} » : le titre affiche « ${groupe.titre} (${groupe.lignes.length} cas) » ; affiché : « ${titre.trim()} »`, fichier));
+    }
+    if (n(bloc.find('[data-outil-resume]').first().text()) !== n(groupe.resume)) {
+      constats.push(erreur('OUTIL-LIBELLES', `groupe « ${groupe.couleur} » : le compte des verdicts est « ${groupe.resume} »`, fichier));
+    }
+    const dansLeGroupe = new Set(bloc.find('[data-outil-ligne]').toArray().map((el) => $(el).attr('data-voyant') ?? ''));
+    const ailleurs = groupe.lignes.filter((l) => ids.includes(l.voyant) && !dansLeGroupe.has(l.voyant)).map((l) => l.voyant);
+    if (ailleurs.length > 0) constats.push(erreur('OUTIL-LIGNES', `groupe « ${groupe.couleur} » : ${ailleurs.join(', ')} ${ailleurs.length > 1 ? 'sont rangées' : 'est rangée'} dans un autre groupe que celui de leur couleur (data/voyants.json)`, fichier));
+  }
+
+  const parId = new Map(affichees.map((l) => [l.attr('data-voyant') ?? '', l]));
+  const libellesNiveaux = [...Object.entries(GRILLE_VERDICTS).map(([v, g]) => ({ cle: v, libelle: g.libelle, genre: 'verdict' as const })), ...Object.entries(GRILLE_URGENCES).map(([u, g]) => ({ cle: u, libelle: g.libelle, genre: 'urgence' as const }))];
+  for (const l of attendues) {
+    const ligne = parId.get(l.voyant);
+    if (ligne === undefined) continue;
+    const problemes: string[] = [];
+    const liens: string[] = [];
+    if (ligne.attr('data-couleur') !== l.couleur) problemes.push(`data-couleur (attendu : ${l.couleur})`);
+    if (ligne.attr('data-verdict') !== l.verdict || ligne.attr('data-urgence') !== l.urgence) problemes.push(`data-verdict et data-urgence (attendus : ${l.verdict} · ${l.urgence})`);
+    if (ligne.attr('data-notices') !== String(l.notices.length)) problemes.push(`data-notices (attendu : ${l.notices.length})`);
+    if (ligne.attr('data-gravite') !== String(graviteDuVerdict(l.verdict))) problemes.push(`data-gravite (attendu : ${graviteDuVerdict(l.verdict)}, le filet et le fond de la ligne en dépendent)`);
+    // Texte hors du bloc dépliable : ce que le lecteur voit sans ouvrir quoi que ce soit.
+    const visibles = ligne.children().toArray().map((el) => $(el)).filter((el) => !el.is('details'));
+    const texteVisible = n(visibles.map((el) => el.text()).join(' '));
+    const absents = [l.nom, l.situation, GRILLE_VERDICTS[l.verdict].libelle, GRILLE_URGENCES[l.urgence].libelle, l.action, ...(l.ecart !== undefined ? [l.ecart] : [])].filter((t) => !texteVisible.includes(n(t)));
+    if (absents.length > 0) problemes.push(`n'affiche pas ${absents.map((t) => `« ${t} »`).join(', ')}`);
+    const autres = libellesNiveaux.filter((e) => e.cle !== (e.genre === 'verdict' ? l.verdict : l.urgence) && texteVisible.includes(n(e.libelle))).map((e) => e.libelle);
+    if (autres.length > 0) problemes.push(`affiche aussi le libellé d'un autre niveau (${autres.map((t) => `« ${t} »`).join(', ')})`);
+    if (l.ecart === undefined && texteVisible.includes(n('Selon les marques'))) problemes.push("un écart est affiché alors que la base n'en signale pas");
+    const picto = ligne.find('.voyant').first();
+    if (ligne.find('.icone-gravite').first().attr('data-icone-gravite') !== String(graviteDuVerdict(l.verdict))) problemes.push(`icône de gravité (attendue : ${graviteDuVerdict(l.verdict)})`);
+    if (picto.find('svg').length === 0) problemes.push('pictogramme absent');
+    else if (picto.attr('data-pictogramme') !== l.pictogramme || picto.attr('data-couleur') !== l.couleur) problemes.push(`pictogramme (attendu : « ${l.pictogramme} », couleur ${l.couleur})`);
+    // Bloc dépliable : le nombre de notices, les notices nommées, chaque page citée.
+    const detail = ligne.children('details').first();
+    if (detail.length === 0 || ligne.find('details').length !== 1) problemes.push('un seul bloc dépliable (sources), directement sous la ligne : verdict, urgence et action se lisent sans rien ouvrir');
+    else {
+      if (n(detail.find('summary').first().text()) !== n(libelleDetail(l))) problemes.push(`titre du bloc dépliable (attendu : « ${libelleDetail(l)} »)`);
+      const texteDetail = n(detail.text());
+      const phrase = phraseSources(l);
+      if (phrase !== '' && !texteDetail.includes(n(phrase))) problemes.push(`phrase des sources absente (« ${phrase} »)`);
+      const references = detail.find('.outil-references li').toArray().map((el) => n($(el).text()));
+      const manquees = l.references.filter((r) => !references.some((t) => t === n(`${r.nom} : ${r.emplacement}`)));
+      if (manquees.length > 0 || references.length !== l.references.length) problemes.push(`pages citées : ${l.references.length} attendue(s), ${references.length} affichée(s)${manquees.length > 0 ? `, manquent : ${manquees.map((r) => `${r.nom} : ${r.emplacement}`).join(' ; ')}` : ''}`);
+    }
+    if (problemes.length > 0) constats.push(erreur('OUTIL-LIBELLES', `ligne « ${l.voyant} » : ${problemes.join(' ; ')}`, fichier));
+
+    // Lien vers la page du voyant, si et seulement si elle est construite (docs/08 §4, règle 1).
+    for (const a of ligne.find('a').toArray()) liens.push($(a).attr('href') ?? '');
+    if (l.page !== undefined) {
+      const lien = ligne.find('a').toArray().map((a) => $(a)).find((a) => a.attr('href') === l.page?.adresse);
+      if (lien === undefined) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : la page ${l.page.adresse} est construite, le lien vers elle manque`, fichier));
+      else if (!n(lien.text()).includes(n(l.page.libelle))) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : le lien vers ${l.page.adresse} nomme la page (« ${l.page.libelle} »)`, fichier));
+    }
+    const permis = l.page !== undefined ? [l.page.adresse] : [];
+    const enTrop = liens.filter((h) => !permis.includes(h));
+    if (enTrop.length > 0) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : lien(s) inattendu(s) ${enTrop.join(', ')} : une ligne ne mène qu'à la page construite du voyant`, fichier));
+    if (ligne.parents('details').length > 0) constats.push(erreur('OUTIL-SANS-JS', `ligne « ${l.voyant} » dans un bloc dépliable : verdict et action se lisent sans rien ouvrir`, fichier));
+  }
+  const blocRenvoi = $('[data-encadre-decision]').first().find('[data-encadre-renvoi]');
+  const renvoi = blocRenvoi.find(`a[href="#${ANCRE_OUTIL}"]`);
+  if (renvoi.length !== 1 || n(blocRenvoi.text()) !== n(`${RENVOI_ENCADRE_OUTIL.texte} ${RENVOI_ENCADRE_OUTIL.lien}`) || outil.attr('id') !== ANCRE_OUTIL) {
+    constats.push(erreur('OUTIL-LIEN', `l'encadré de décision renvoie à la liste (« ${RENVOI_ENCADRE_OUTIL.texte} ${RENVOI_ENCADRE_OUTIL.lien} », #${ANCRE_OUTIL}), et l'outil porte cet identifiant`, fichier));
+  }
+
+  if (!n($('[data-sources]').first().text()).includes(n(NOTE_SOURCES_OUTIL))) {
+    constats.push(erreur('OUTIL-LIBELLES', `la section « Sources » dit où sont les pages citées : « ${NOTE_SOURCES_OUTIL} »`, fichier));
+  }
+
+  // Index des dessins (décision 9 du paquet 8.1) : comparé au modèle. Une ligne absente de la liste relève d'OUTIL-LIGNES.
+  const index = outil.find('[data-outil-index]');
+  if (index.length !== 1) {
+    constats.push(erreur('OUTIL-INDEX', `l'outil a un seul index des dessins (data-outil-index), généré depuis la base ; trouvé : ${index.length}`, fichier));
+  } else {
+    const blocs = outil.children().toArray().map((el) => $(el));
+    const rang = (selecteur: string): number => blocs.findIndex((el) => el.is(selecteur));
+    const place = rang('[data-outil-index]');
+    const premierGroupe = rang('[data-outil-groupe]');
+    if (place < 0 || place < rang('[data-outil-filtre]') || (premierGroupe >= 0 && place > premierGroupe)) {
+      constats.push(erreur('OUTIL-INDEX', "l'index des dessins se place dans l'outil, entre le filtre et le premier groupe", fichier));
+    }
+    if (n(index.find('h3').first().text()) !== n(TITRE_INDEX_OUTIL)) constats.push(erreur('OUTIL-INDEX', `le titre de l'index est « ${TITRE_INDEX_OUTIL} »`, fichier));
+    const entrees = index.find('[data-outil-index-entree]').toArray().map((el) => $(el));
+    const lues = entrees.map((e) => e.attr('data-outil-index-entree') ?? '');
+    if (lues.join('|') !== voulus.join('|')) {
+      constats.push(erreur('OUTIL-INDEX', `l'index a une entrée par ligne de la base, une fois, dans l'ordre de la liste ; manquantes : ${voulus.filter((id) => !lues.includes(id)).join(', ') || 'aucune'} ; inconnues : ${lues.filter((id) => !voulus.includes(id)).join(', ') || 'aucune'}`, fichier));
+    }
+    const parVoyant = new Map(attendues.map((l) => [l.voyant, l]));
+    for (const entree of entrees) {
+      const id = entree.attr('data-outil-index-entree') ?? '';
+      const l = parVoyant.get(id);
+      if (l === undefined) continue;
+      const problemes: string[] = [];
+      if (entree.attr('data-couleur') !== l.couleur) problemes.push(`data-couleur (attendu : ${l.couleur}, le filtre le lit)`);
+      const liens = entree.find('a');
+      if (liens.length !== 1 || liens.first().attr('href') !== `#${ancreLigneOutil(id)}`) problemes.push(`un seul lien, vers sa ligne (#${ancreLigneOutil(id)})`);
+      if (n(entree.text()) !== n(l.nom)) problemes.push(`le nom de la ligne, sans autre texte (« ${l.nom} »)`);
+      const picto = entree.find('.voyant').first();
+      if (picto.find('svg').length === 0 || picto.attr('data-pictogramme') !== l.pictogramme || picto.attr('data-couleur') !== l.couleur) problemes.push(`pictogramme (attendu : « ${l.pictogramme} », couleur ${l.couleur})`);
+      if (problemes.length > 0) constats.push(erreur('OUTIL-INDEX', `index, entrée « ${id} » : ${problemes.join(' ; ')}`, fichier));
+    }
+  }
+
+  // Filtre par couleur : boutons radio, sans script ; « tous » coché au départ, pour que tout s'affiche.
+  const valeurs = [FILTRE_TOUS, ...attendu.groupes.map((g) => g.couleur as string)];
+  const boutons = outil.find('[data-outil-filtre] input').toArray().map((el) => $(el));
+  const lues = boutons.map((b) => b.attr('value') ?? '');
+  if (lues.join('|') !== valeurs.join('|') || boutons.some((b) => b.attr('type') !== 'radio')) {
+    constats.push(erreur('OUTIL-FILTRE', `le filtre (data-outil-filtre) a un bouton radio par couleur présente, plus « ${FILTRE_TOUS} » : ${valeurs.join(', ')} ; affichés : ${lues.join(', ') || 'aucun'}`, fichier));
+  } else if (outil.find('[data-outil-filtre]').first().attr('disabled') !== undefined) {
+    constats.push(erreur('OUTIL-FILTRE', 'le filtre (data-outil-filtre) est actif : ni lui ni ses boutons ne sont désactivés', fichier));
+  } else {
+    const noms = new Set(boutons.map((b) => b.attr('name')));
+    const coches = boutons.filter((b) => b.attr('checked') !== undefined).map((b) => b.attr('value'));
+    if (noms.size !== 1) constats.push(erreur('OUTIL-FILTRE', 'les boutons du filtre partagent le même nom : un seul choix à la fois', fichier));
+    if (coches.join('|') !== FILTRE_TOUS) constats.push(erreur('OUTIL-FILTRE', `seul « ${FILTRE_TOUS} » est coché au départ, pour que tout le contenu s'affiche ; cochés : ${coches.join(', ') || 'aucun'}`, fichier));
+    const libelles = new Map<string, string>([[FILTRE_TOUS, `${LIBELLE_FILTRE_TOUS} (${attendu.total})`], ...attendu.groupes.map((g): [string, string] => [g.couleur, `${g.libelleFiltre} (${g.lignes.length})`])]);
+    for (const b of boutons) {
+      const valeur = b.attr('value') ?? '';
+      const voulu = libelles.get(valeur) ?? '';
+      const id = idFiltre(valeur);
+      const libelle = outil.find('[data-outil-filtre] label').toArray().map((el) => $(el)).find((el) => el.attr('for') === id);
+      // L'identifiant est celui que lit le CSS (site.css) : un autre, et le filtre ne filtre plus rien.
+      if (b.attr('id') !== id || b.attr('disabled') !== undefined || libelle === undefined || n(libelle.text()) !== n(voulu)) {
+        constats.push(erreur('OUTIL-FILTRE', `bouton « ${valeur} » : identifiant ${id}, actif, avec le libellé « ${voulu} » (label for)`, fichier));
+      }
+    }
+  }
+
+  // Contenu présent sans JavaScript : ni script dans l'outil, ni outil masqué.
+  if (outil.find('script, noscript, template, iframe, style').length > 0) {
+    constats.push(erreur('OUTIL-SANS-JS', "l'outil ne dépend d'aucun script ni d'une règle propre à la page : ni script, ni noscript, ni style, ni template, ni iframe dans son bloc", fichier));
+  }
+  if ([outil, ...outil.parents().toArray().map((el) => $(el))].some(masque)) {
+    constats.push(erreur('OUTIL-SANS-JS', "l'outil, ou un bloc qui le contient, est masqué dans le HTML", fichier));
+  }
+  const masques = outil.find('*').toArray().map((el) => $(el)).filter(masque);
+  if (masques.length > 0) {
+    constats.push(erreur('OUTIL-SANS-JS', `${masques.length} bloc(s) de l'outil masqué(s) dans le HTML (par exemple « ${masques[0]?.text().trim().slice(0, 60) ?? ''} ») : tout le contenu s'affiche sans JavaScript, « Tous » coché`, fichier));
+  }
+  // Pour finir, tout le texte de l'outil : celui que génère le modèle, ni plus ni moins. Les pictogrammes décoratifs et les
+  // icônes n'ont pas de texte : le rendu sans dessin suffit à la comparaison.
+  if (constats.length === 0) {
+    // Sans les blancs : un dessin peut laisser un saut de ligne entre deux textes, qui ne compte pas.
+    const sansBlancs = (texte: string): string => n(texte).replace(/\s+/g, '');
+    const genere = sansBlancs(cheerio.load(outilVoyants(attendu, new Map()))('[data-outil-voyants]').first().text());
+    if (sansBlancs(outil.text()) !== genere) constats.push(erreur('OUTIL-LIBELLES', "le texte de l'outil n'est pas celui que génère le modèle depuis la base : une phrase a été ajoutée, retirée ou changée", fichier));
+  }
   return constats;
 }
 

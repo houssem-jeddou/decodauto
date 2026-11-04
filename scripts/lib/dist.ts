@@ -402,10 +402,10 @@ export function compterMots(texte: string): number {
 
 /**
  * Blocs hors du décompte de la part citée : navigation (fil d'Ariane, pages liées, pages enfants), mention en tête,
- * lien de signalement, section « Sources » et renvois de page du tableau des notices (« p. 15, « … » ») : ce sont des
- * références, pas du texte cité ni du texte du site.
+ * lien de signalement, section « Sources », renvois de page du tableau des notices (« p. 15, « … » ») et de l'outil voyants :
+ * ce sont des références, pas du texte cité ni du texte du site.
  */
-export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page'] as const;
+export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references'] as const;
 
 export interface PartCitee {
   /** Mots du texte affiché dans le contenu principal (main), hors HORS_PART_CITEE. */

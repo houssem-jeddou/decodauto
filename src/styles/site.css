@@ -120,23 +120,28 @@ h3 {
   border-radius: 0.25rem;
   padding: 0.75rem 0.875rem;
 }
-.encadre-ligne[data-gravite='0'] {
+.encadre-ligne[data-gravite='0'],
+.outil-ligne[data-gravite='0'] {
   --gravite: var(--gravite-0);
   --gravite-fond: var(--gravite-0-fond);
 }
-.encadre-ligne[data-gravite='1'] {
+.encadre-ligne[data-gravite='1'],
+.outil-ligne[data-gravite='1'] {
   --gravite: var(--gravite-1);
   --gravite-fond: var(--gravite-1-fond);
 }
-.encadre-ligne[data-gravite='2'] {
+.encadre-ligne[data-gravite='2'],
+.outil-ligne[data-gravite='2'] {
   --gravite: var(--gravite-2);
   --gravite-fond: var(--gravite-2-fond);
 }
-.encadre-ligne[data-gravite='3'] {
+.encadre-ligne[data-gravite='3'],
+.outil-ligne[data-gravite='3'] {
   --gravite: var(--gravite-3);
   --gravite-fond: var(--gravite-3-fond);
 }
-.encadre-ligne p {
+.encadre-ligne p,
+.outil-ligne p {
   margin: 0.25rem 0;
 }
 .encadre-situation {
@@ -202,6 +207,10 @@ h3 {
 }
 .encadre-cout p {
   margin: 0.25rem 0;
+}
+
+.encadre-renvoi {
+  margin: 0 0 0.75rem;
 }
 
 /* Signature et ligne de transparence, juste après l'encadré. */
@@ -471,6 +480,161 @@ h3 {
 }
 .tableau-corps thead th {
   background: var(--fond-doux);
+}
+
+/* Outil voyants (livrable 8.1) : chaque ligne reprend la forme d'une ligne de l'encadré (filet et icône de gravité, libellés
+   écrits). Filtre par couleur sans JavaScript : un bouton radio par couleur ; le choix masque les autres groupes. Le bouton coché se lit sans la couleur (coche et bordure épaisse). Les boutons
+   restent atteignables au clavier : seuls leurs libellés se voient. */
+.outil-filtre {
+  border: 0;
+  margin: 1rem 0;
+  padding: 0;
+}
+.outil-filtre legend {
+  padding: 0;
+  font-weight: 600;
+}
+.outil-choix {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.outil-choix input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+}
+.outil-choix label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 0.875rem;
+  border: 1px solid var(--texte-doux);
+  border-radius: 1.375rem;
+  background: var(--fond);
+  cursor: pointer;
+}
+.outil-choix input:checked + label {
+  border-width: 3px;
+  border-color: var(--texte);
+  font-weight: 700;
+}
+.outil-choix input:checked + label::before {
+  content: '✓';
+  content: '✓' / '';
+  margin-right: 0.375rem;
+}
+.outil-choix input:focus-visible + label {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.outil-voyants:has(#da-filtre-orange:checked) [data-outil-groupe]:not([data-outil-groupe='orange']),
+.outil-voyants:has(#da-filtre-rouge:checked) [data-outil-groupe]:not([data-outil-groupe='rouge']),
+.outil-voyants:has(#da-filtre-vert:checked) [data-outil-groupe]:not([data-outil-groupe='vert']),
+.outil-voyants:has(#da-filtre-bleu:checked) [data-outil-groupe]:not([data-outil-groupe='bleu']),
+.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-groupe]:not([data-outil-groupe='blanc']) {
+  display: none;
+}
+.outil-voyants:has(#da-filtre-orange:checked) [data-outil-index-entree]:not([data-couleur='orange']),
+.outil-voyants:has(#da-filtre-rouge:checked) [data-outil-index-entree]:not([data-couleur='rouge']),
+.outil-voyants:has(#da-filtre-vert:checked) [data-outil-index-entree]:not([data-couleur='vert']),
+.outil-voyants:has(#da-filtre-bleu:checked) [data-outil-index-entree]:not([data-couleur='bleu']),
+.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-index-entree]:not([data-couleur='blanc']) {
+  display: none;
+}
+/* Sans :has(), le filtre ne ferait rien : il n'est pas affiché, et toute la liste reste visible. */
+@supports not selector(:has(*)) {
+  .outil-filtre {
+    display: none;
+  }
+}
+.outil-aide {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--texte-doux);
+}
+/* Index des dessins : pictogramme et nom de chaque cas, chaque entrée mène à sa ligne. Le filtre s'y applique aussi. */
+.outil-index {
+  margin: 1rem 0 1.5rem;
+}
+.outil-index h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+.outil-index ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: 0.125rem 1rem;
+}
+.outil-index a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.125rem 0;
+  line-height: 1.25;
+}
+.outil-resume {
+  margin: 0 0 0.75rem;
+}
+.outil-lignes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.outil-ligne {
+  border-left: 6px solid var(--gravite);
+  background: var(--gravite-fond);
+  border-radius: 0.25rem;
+  padding: 0.75rem 0.875rem;
+  scroll-margin-top: 1rem;
+}
+/* La ligne atteinte depuis l'index ou un lien du texte se repère sans la couleur (contour épais). */
+.outil-ligne:target {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.outil-nom {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+.outil-detail {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+}
+.outil-detail summary {
+  display: list-item;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  color: var(--accent);
+  overflow-wrap: anywhere;
+}
+.outil-detail summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.outil-references {
+  margin: 0.25rem 0 0.5rem;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--texte-doux);
+  overflow-wrap: anywhere;
+}
+.outil-absent {
+  margin: 1.25rem 0 0;
 }
 
 /* Pied de page : lien de signalement (toutes les pages). */

@@ -878,5 +878,95 @@
     ],
     "alertes": [],
     "explication": "La page outil n'a pas de plage propre : elle ne déclare pas de pièces."
+  },
+  {
+    "nom": "outil-absent",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "Un bloc « outil » qui n'est pas généré depuis la base : l'élément unique existe, l'outil non."
+  },
+  {
+    "nom": "outil-ligne-manquante",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-LIGNES"
+    ],
+    "alertes": [],
+    "explication": "Une ligne de la base n'est pas affichée par l'outil."
+  },
+  {
+    "nom": "outil-gravite-seule-couleur",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-LIBELLES"
+    ],
+    "alertes": [],
+    "explication": "Une ligne sans le libellé écrit de son verdict : la gravité ne se lirait que par la couleur."
+  },
+  {
+    "nom": "outil-lien-page-non-construite",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-LIEN"
+    ],
+    "alertes": [],
+    "explication": "Une ligne mène à une page qui n'est pas construite."
+  },
+  {
+    "nom": "outil-sans-renvoi",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-LIEN"
+    ],
+    "alertes": [],
+    "explication": "L'encadré de la page outil ne renvoie pas à la liste : ses lignes se liraient comme la réponse complète."
+  },
+  {
+    "nom": "outil-sans-filtre",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-FILTRE"
+    ],
+    "alertes": [],
+    "explication": "L'outil n'a pas de filtre par couleur."
+  },
+  {
+    "nom": "outil-filtre-sans-tous",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-FILTRE"
+    ],
+    "alertes": [],
+    "explication": "« Tous » n'est pas coché au départ : une partie de la liste serait cachée."
+  },
+  {
+    "nom": "outil-index-entree-manquante",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-INDEX"
+    ],
+    "alertes": [],
+    "explication": "Une ligne de la base n'a pas son entrée dans l'index des dessins : le lecteur n'y trouverait pas ce dessin."
+  },
+  {
+    "nom": "outil-ligne-masquee",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-SANS-JS"
+    ],
+    "alertes": [],
+    "explication": "Une ligne masquée dans le HTML (hidden) : elle n'apparaîtrait qu'avec un script."
+  },
+  {
+    "nom": "outil-script",
+    "type": "voyant",
+    "erreurs": [
+      "OUTIL-SANS-JS"
+    ],
+    "alertes": [],
+    "explication": "Un script dans l'outil : l'outil et son filtre fonctionnent sans JavaScript."
   }
 ]

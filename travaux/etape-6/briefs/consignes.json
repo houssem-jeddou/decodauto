@@ -38,9 +38,8 @@
     ]
   },
   "voyants": {
-    "question_decision": "Quel voyant s'est allumé, et pouvez-vous continuer à rouler ?",
     "angle": "Identifier le voyant par son pictogramme et sa couleur, puis donner pour chacun le verdict de la base. Ce que l'aperçu IA ne dit pas : la couleur ne suffit pas, des voyants orange de la base imposent l'arrêt, et l'écart entre marques est affiché (relevé, constat 2).",
-    "element_unique": "Outil : liste des voyants générée depuis la base (pictogramme redessiné, couleur, verdict, urgence, page du voyant), filtre par couleur, lisible sans JavaScript (docs/08 §2). Son modèle n'est pas encore livré (src/lib/modeles.ts) : décision à prendre à la porte de l'étape 6 (6.9).",
+    "element_unique": "Outil : liste des voyants générée depuis la base (pictogramme redessiné, couleur, verdict, urgence, page du voyant), filtre par couleur, lisible sans JavaScript (docs/08 §2). Modèle livré en 8.1 (src/lib/outil-voyants.ts).",
     "a_traiter": [
       "« Voyant orange voiture » : l'aperçu IA dit qu'un voyant orange n'impose pas d'arrêt immédiat ; l'outil montre, depuis la base, les voyants orange dont une notice impose l'arrêt.",
       "« Liste voyant orange voiture », « Quels sont les voyants orange ? » : le filtre par couleur.",
@@ -50,9 +49,6 @@
       "Contenu de guide (docs/08 §2) : comment lire symbole et couleur, d'après le règlement ONU n° 121 (symbole et couleur seulement, jamais un verdict).",
       "Voyant de température : sa ligne est rattachée à la page « moteur qui surchauffe » ; l'outil l'affiche, avec un lien seulement quand cette page est publiée.",
       "« Voyant orange voiture Dacia » : les pages voyants répondent pour les modèles des notices lues, pas au-delà (relevé, constat 3 ; charte §2.5)."
-    ],
-    "sources_a_trouver": [
-      "Règlement ONU n° 121, absent du registre : à y ajouter pour le symbole et la couleur."
     ],
     "hors_perimetre": [
       "Tableaux de bord par modèle (« tableau de bord xsara picasso », « c4 picasso tableau de bord ») : pas de page par modèle sans donnée constructeur sourcée ; une large part des requêtes de l'outil cite un modèle (journal, volumes à lire comme des plafonds).",

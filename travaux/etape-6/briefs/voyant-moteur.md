@@ -8,7 +8,7 @@
 - **Adresse** : `/voyants/moteur/` ; page mère : `/voyants/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0087/` (vague A) ; `/codes-defaut/p0299/` (vague A) ; `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p0420/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/contre-visite-controle-technique/` (vague C : pas de lien dans le texte avant sa publication) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-qui-broute/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/adblue/` (vague A) ; `/voyants/fap/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
-- **Page exemple rédigée et validée en 6.6** : `exemples/voyant/voyant-moteur.md`. Elle sert de point de départ à la page de l'étape 8.
+- **Page exemple rédigée** (sa validation est notée au journal) : `exemples/voyant/voyant-moteur.md`. Elle sert de point de départ à la page de l'étape 8.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
