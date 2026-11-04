@@ -331,13 +331,14 @@ export const dossierPageSchema = z
   });
 
 // ---- Socle ------------------------------------------------------------------------------------
-// Format simple : titre, adresse, date de mise à jour. Pas d'encadré de décision. L'adresse vient uniquement du
-// plan du site (comme pour les autres pages) : elle ne se saisit pas. La page « à propos » porte les fiches
+// Format simple : titre, description (demande de changement n° 13), adresse, date de mise à jour. Pas d'encadré de
+// décision. L'adresse vient uniquement du plan du site (comme pour les autres pages) : elle ne se saisit pas. La page « à propos » porte les fiches
 // auteur auxquelles renvoie le champ `auteur` des autres pages ; `profils` : liens publics du profil de l'auteur
 // (données structurées Person, sameAs), facultatifs.
 export const soclePageSchema = z.strictObject({
   id: identifiant,
   title: texte,
+  description: texte,
   libelle_court: libelleCourt.optional(),
   date_modification: dateIso,
   auteurs: z

@@ -675,7 +675,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   if (!lecture.success) return { constats };
   if (type === 'socle') {
     // L'adresse du socle vient uniquement du plan du site, comme pour les autres pages.
-    const socle = lecture.data as { id: string; title: string; date_modification: Date };
+    const socle = lecture.data as { id: string; title: string; description: string; date_modification: Date };
     if (dansLeFutur(socle.date_modification, ctx.aujourdhui)) {
       constats.push(erreur('DATES-FUTUR', `date_modification (${jourIso(socle.date_modification)}) dans le futur : la page afficherait une date fausse`, fichier));
     }
@@ -685,7 +685,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
     } else if (ligne.type !== 'socle') {
       constats.push(erreur('R7-PLAN-TYPE', `le plan du site range « ${socle.id} » dans le type « ${ligne.type} », la page est de type « socle »`, fichier));
     }
-    if (html !== undefined) constats.push(...controlerHtmlSocle(socle.title, html, fichier));
+    if (html !== undefined) constats.push(...controlerHtmlSocle(socle, html, fichier));
     return { constats, id: socle.id };
   }
 
@@ -1603,12 +1603,15 @@ export function controlerEncadre(
   return constats;
 }
 
-/** Page du socle construite : le title et un seul H1 sont présents. */
-export function controlerHtmlSocle(titre: string, html: string, fichier: string): Constat[] {
+/** Page du socle construite : le title, la meta description de son contenu et un seul H1 sont présents. */
+export function controlerHtmlSocle(page: { title: string; description: string }, html: string, fichier: string): Constat[] {
   const $ = cheerio.load(html);
   const constats: Constat[] = [];
-  if (!normaliserRecherche($('head > title').first().text()).includes(normaliserRecherche(titre))) {
-    constats.push(erreur('R7-HTML-TITLE', `la page construite n'a pas le title attendu « ${titre} »`, fichier));
+  if (!normaliserRecherche($('head > title').first().text()).includes(normaliserRecherche(page.title))) {
+    constats.push(erreur('R7-HTML-TITLE', `la page construite n'a pas le title attendu « ${page.title} »`, fichier));
+  }
+  if (normaliserRecherche($('meta[name="description"]').attr('content') ?? '') !== normaliserRecherche(page.description)) {
+    constats.push(erreur('R7-HTML-DESCRIPTION', 'la meta description de la page construite est absente ou différente de celle du contenu', fichier));
   }
   if ($('h1').length !== 1) {
     constats.push(erreur('R7-HTML-H1', `la page construite doit contenir exactement un H1 (trouvé : ${$('h1').length})`, fichier));

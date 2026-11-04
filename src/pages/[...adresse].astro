@@ -1,13 +1,13 @@
 ---
-// Route des pages éditoriales (étape 6, livrable 6.6) : une page par fichier de contenu, à l'adresse du plan du site,
-// rendue par le modèle de son type (src/lib/modeles.ts). Sur main, src/content n'a pas encore de vraie page (étape 8 :
+// Route des pages (étape 6, livrable 6.6 ; socle, livrable 7.2) : une page par fichier de contenu, à l'adresse du plan du
+// site, rendue par le modèle de son type (src/lib/modeles.ts). Sur main, src/content n'a pas encore de vraie page (étape 8 :
 // aucune vraie page sur main avant la mise en ligne) : la route ne produit rien. Les exemples rédigés (exemples/) ne
 // sont lus qu'avec AVEC_EXEMPLES=1, pour la construction de recette (dist-exemples, jamais déployée).
 import type { InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
 import { cwd } from 'node:process';
 import Base from '../layouts/Base.astro';
-import { modeleDeLaPage } from '../lib/modeles.ts';
+import { modeleDeLaPage, pageSocle } from '../lib/modeles.ts';
 import { donneesDuSite } from '../../scripts/lib/donnees-site.ts';
 import type { TypePage } from '../schemas/listes.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
@@ -32,7 +32,17 @@ export async function getStaticPaths() {
   // Libellé court de chaque page construite : fil d'Ariane et pages liées ne mènent qu'à des pages construites.
   const libelles = new Map(entrees.map(({ page }) => [page.id, page.libelle_court]));
   const { site } = await donneesDuSite(cwd(), libelles, new Date());
-  return entrees.map(({ type, page, corps }) => {
+  // Pages du socle (livrable 7.2), sauf l'accueil, qui a sa propre route (src/pages/index.astro).
+  const socle = (await getCollection('socle')).filter((entree) => entree.data.id !== 'accueil').map((entree) => {
+    const ligne = site.plan.get(entree.data.id);
+    if (ligne === undefined) throw new Error(`page « ${entree.data.id} » absente du plan du site (data/plan-du-site.json)`);
+    if ((entree.body ?? '').trim() !== '' && entree.rendered?.html === undefined) throw new Error(`page « ${entree.data.id} » : le texte rédigé (corps Markdown) n'a pas été rendu`);
+    return {
+      params: { adresse: ligne.adresse.replace(/^\/+|\/+$/g, '') },
+      props: { titre: entree.data.title, description: entree.data.description, html: pageSocle(entree.data, entree.rendered?.html ?? '') },
+    };
+  });
+  const editoriales = entrees.map(({ type, page, corps }) => {
     const ligne = site.plan.get(page.id);
     if (ligne === undefined) throw new Error(`page « ${page.id} » absente du plan du site (data/plan-du-site.json)`);
     const choix = modeleDeLaPage(type, page);
@@ -42,6 +52,7 @@ export async function getStaticPaths() {
       props: { titre: page.title, description: page.description, html: choix.modele(page, site, corps) },
     };
   });
+  return [...editoriales, ...socle];
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;

@@ -21,6 +21,8 @@
 import { attributHtml, echapper, texteHtml } from './html.ts';
 import {
   ANCRE_METHODE,
+  ANCRE_CONFIDENTIALITE,
+  LIBELLE_LIEN_CONFIDENTIALITE,
   LIBELLE_SIGNALER_ERREUR,
   categoriesQuiFixentUnVerdict,
   LIGNE_TRANSPARENCE,
@@ -94,6 +96,13 @@ export function lienSignalement(adressePage?: string): string {
  */
 export const signalerErreur = (adressePage?: string): string =>
   `<p class="signaler-erreur" data-signaler-erreur><!--email_off--><a href="${attributHtml(lienSignalement(adressePage))}">${texteHtml(LIBELLE_SIGNALER_ERREUR)}</a> (${texteHtml(ADRESSE_SIGNALEMENT)})<!--/email_off--></p>`;
+
+/**
+ * Lien de pied de page vers les mentions légales et la politique de confidentialité, affiché dès que la page est construite
+ * (contrôle CONFIDENTIALITE-LIEN) : jamais un lien vers une page qui n'existe pas.
+ */
+export const lienConfidentialite = (adresse: string): string =>
+  `<p class="lien-confidentialite" data-lien-confidentialite><a href="${attributHtml(adresse)}#${ANCRE_CONFIDENTIALITE}">${texteHtml(LIBELLE_LIEN_CONFIDENTIALITE)}</a></p>`;
 
 // ---- Fil d'Ariane ----------------------------------------------------------------------------------
 

@@ -88,6 +88,17 @@ const regles = async (lire: Lire, indexable = false): Promise<string[]> =>
   [...new Set((await verifierProduction({ lire, robotsDepot: ROBOTS, indexable })).map((c) => c.regle))].sort();
 
 describe('vérification de la production (redirections, noindex, robots.txt, plan du site)', () => {
+  test('la page servie n’a ni script ni cookie, comme le dit la politique de confidentialité (PROD-TRACEUR, PROD-COOKIE)', async () => {
+    const page = '<a href="mailto:erreur@decodauto.com?subject=x">Signaler une erreur</a>';
+    const avec = (corps: string, extra: Partial<Reponse> = {}): Lire => reseauConforme({ 'https://decodauto.com/': ok(`<html>${corps}${page}</html>`, extra) });
+    const balise = '<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v1" data-cf-beacon=\'{"token":"x"}\'></script>';
+    assert.deepEqual(await regles(avec(balise)), ['PROD-TRACEUR']);
+    assert.deepEqual(await regles(avec('<script>1</script>')), ['PROD-TRACEUR']);
+    assert.deepEqual(await regles(avec('<script type="application/ld+json">{}</script>')), []);
+    assert.deepEqual(await regles(avec('', { cookie: '__cf_bm=abc; path=/; HttpOnly' })), ['PROD-COOKIE']);
+    assert.deepEqual(await regles(avec('', { cookie: null })), []);
+  });
+
   test('production conforme : aucun écart', async () => {
     assert.deepEqual(await regles(reseauConforme()), []);
   });

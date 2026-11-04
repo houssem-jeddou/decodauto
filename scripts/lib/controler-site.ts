@@ -1,5 +1,6 @@
 // Ensemble des contrôles d'une construction : données, porte de l'étape 4, pages (frontmatter, texte et page
 // construite), puis site construit. Utilisé par scripts/controle.ts, qui affiche le bilan, et par les tests.
+import { PAGE_CONFIDENTIALITE } from '../../src/lib/charte.ts';
 import { readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
@@ -126,7 +127,7 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   constats.push(...(await controlerPagesDuPlan(dist, [...contexte.plan.values()].map((ligne) => ligne.adresse))));
   constats.push(...(await controlerCanonicalEtPlanDuSite(dist)));
   constats.push(...(await controler404(dist)));
-  constats.push(...(await controlerComposantsCommuns(dist)));
+  constats.push(...(await controlerComposantsCommuns(dist, contexte.plan.get(PAGE_CONFIDENTIALITE)?.adresse)));
   constats.push(...(await controlerFixturesNonPubliees(dist)));
   constats.push(...(await controlerWrangler(racine)));
 

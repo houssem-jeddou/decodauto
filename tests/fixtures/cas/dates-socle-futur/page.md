@@ -1,6 +1,7 @@
 ---
 id: fixture-a-propos
 title: À propos (page de test)
+description: Fiche auteur et méthode (page de test).
 libelle_court: À propos
 date_modification: 2026-12-01
 auteurs:

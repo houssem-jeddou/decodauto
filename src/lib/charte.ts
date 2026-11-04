@@ -38,6 +38,14 @@ export const ANCRE_METHODE = 'methode';
 export const LIBELLE_LIEN_METHODE = 'Méthode';
 /** Texte du lien de signalement d'une erreur, présent sur toutes les pages (charte §5.3). */
 export const LIBELLE_SIGNALER_ERREUR = 'Signaler une erreur';
+/**
+ * Page du socle qui porte les mentions légales et la politique de confidentialité (livrable 7.2, 03 : « section des
+ * mentions légales »), ancre de la politique et texte du lien de pied de page. La CNIL recommande un lien visible sur chaque
+ * page, intitulé clairement.
+ */
+export const PAGE_CONFIDENTIALITE = 'mentions-legales';
+export const ANCRE_CONFIDENTIALITE = 'confidentialite';
+export const LIBELLE_LIEN_CONFIDENTIALITE = 'Mentions légales et confidentialité';
 
 /**
  * Mention en tête de page, avant le H1, sur toutes les pages (socle compris) : le lecteur sait dès la première

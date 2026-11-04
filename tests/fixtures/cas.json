@@ -837,6 +837,24 @@
     "explication": "Entrée du journal d'un dossier hors de la période de la page."
   },
   {
+    "nom": "socle-sans-description",
+    "type": "socle",
+    "erreurs": [
+      "R7-CHAMP-MANQUANT"
+    ],
+    "alertes": [],
+    "explication": "Page du socle sans description : la meta description manquerait (demande de changement n° 13)."
+  },
+  {
+    "nom": "socle-html-sans-description",
+    "type": "socle",
+    "erreurs": [
+      "R7-HTML-DESCRIPTION"
+    ],
+    "alertes": [],
+    "explication": "Page du socle construite sans la meta description de son contenu."
+  },
+  {
     "nom": "dates-socle-futur",
     "type": "socle",
     "erreurs": [

@@ -4,7 +4,7 @@ import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
-import { EXPRESSIONS_INTERDITES, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
+import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, PAGE_CONFIDENTIALITE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
 import { normaliserRecherche } from '../../src/lib/texte.ts';
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
@@ -502,9 +502,72 @@ export function constatsEnTetesPresents(enTetes: EnTetesDePage): Constat[] {
  * (livrable 6.3) ; expressions interdites, title et meta description présents, title, H1 et meta description uniques
  * (livrable 6.5).
  */
-export async function controlerComposantsCommuns(dist: string): Promise<Constat[]> {
+/**
+ * Aucun traceur ni ressource d'un autre site (livrable 7.2) : la politique de confidentialité dit que le site ne dépose aucun
+ * cookie et ne contient aucun script de mesure d'audience. Une page construite n'a donc ni script (seules les données
+ * structurées, `application/ld+json`, sont permises), ni cadre, objet ou intégration, ni image, média, feuille de style ou
+ * préchargement servis par un autre hôte. L'injection par Cloudflare ne passe pas par ici : PROD-TRACEUR la voit en ligne.
+ * Ajouter un outil, une publicité ou une police externe impose donc de mettre d'abord à jour la politique et ce contrôle.
+ */
+export function constatsRessourcesTierces(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const tierce = (url: string | undefined): boolean => {
+    if (url === undefined) return false;
+    const adresse = url.trim().toLowerCase();
+    if (!/^(?:https?:)?\/\//.test(adresse)) return false;
+    return !/^(?:https?:)?\/\/decodauto\.com(?:[/:?#]|$)/.test(adresse);
+  };
+  for (const el of $('script').toArray()) {
+    const s = $(el);
+    if ((s.attr('type') ?? '').trim().toLowerCase() === 'application/ld+json' && s.attr('src') === undefined) continue;
+    constats.push(erreur('TIERS-RESSOURCE', `script dans la page (${s.attr('src') ?? 'en ligne'}) : le site n'en a aucun, et sa politique de confidentialité le dit`, fichier));
+  }
+  if ($('iframe, object, embed').length > 0) constats.push(erreur('TIERS-RESSOURCE', 'cadre, objet ou intégration dans la page : le site ne charge rien d\'un autre service', fichier));
+  for (const el of $('img, source, video, audio, track').toArray()) {
+    const media = $(el);
+    if (tierce(media.attr('src')) || (media.attr('srcset') ?? '').split(',').some((c) => tierce(c.trim().split(/\s+/)[0]))) {
+      constats.push(erreur('TIERS-RESSOURCE', `média servi par un autre site (${media.attr('src') ?? media.attr('srcset') ?? ''})`, fichier));
+    }
+  }
+  for (const el of $('link[href]').toArray()) {
+    const lien = $(el);
+    const rel = (lien.attr('rel') ?? '').toLowerCase();
+    if (/\b(stylesheet|preload|modulepreload|prefetch|preconnect|dns-prefetch|icon)\b/.test(rel) && tierce(lien.attr('href'))) {
+      constats.push(erreur('TIERS-RESSOURCE', `ressource chargée depuis un autre site (${lien.attr('href') ?? ''})`, fichier));
+    }
+  }
+  return constats;
+}
+
+/**
+ * Lien vers la politique de confidentialité (livrable 7.2) : dès que la page qui la porte est construite, toute page du site
+ * affiche le lien de pied de page, à l'adresse et au texte exacts ; tant qu'elle ne l'est pas, aucune page ne l'affiche.
+ * La CNIL recommande un lien visible sur chaque page, intitulé clairement.
+ */
+export function constatsLienConfidentialite(html: string, fichier: string, adresse: string | undefined): Constat[] {
+  const $ = cheerio.load(html);
+  const blocs = $('[data-lien-confidentialite]');
+  if (adresse === undefined) {
+    return blocs.length > 0 ? [erreur('CONFIDENTIALITE-LIEN', 'lien vers la politique de confidentialité alors que sa page n\'est pas construite', fichier)] : [];
+  }
+  const cible = `${adresse}#${ANCRE_CONFIDENTIALITE}`;
+  const liens = blocs.find('a');
+  if (blocs.length !== 1 || liens.length !== 1 || liens.first().attr('href') !== cible || normaliserTexte(liens.first().text()) !== normaliserTexte(LIBELLE_LIEN_CONFIDENTIALITE)) {
+    return [erreur('CONFIDENTIALITE-LIEN', `chaque page affiche une fois le lien « ${LIBELLE_LIEN_CONFIDENTIALITE} » vers ${cible}`, fichier)];
+  }
+  return [];
+}
+
+export async function controlerComposantsCommuns(dist: string, adressePolitique = `/${PAGE_CONFIDENTIALITE}/`): Promise<Constat[]> {
   const constats: Constat[] = [];
   const enTetes: EnTetesDePage[] = [];
+  // Page qui porte la politique de confidentialité : construite ou non, le lien de pied de page suit.
+  const politiqueConstruite = await readFile(join(dist, adressePolitique, 'index.html'), 'utf8').catch(() => undefined);
+  if (politiqueConstruite !== undefined && cheerio.load(politiqueConstruite)(`#${ANCRE_CONFIDENTIALITE}`).length !== 1) {
+    constats.push(erreur('CONFIDENTIALITE-ANCRE', `la page ${adressePolitique} porte une seule section #${ANCRE_CONFIDENTIALITE}`, `${adressePolitique.replace(/^\//, '')}index.html`));
+  }
+  const adresseAttendue = politiqueConstruite !== undefined ? adressePolitique : undefined;
   for (const chemin of await listerFichiers(dist, '.html')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
     const html = await readFile(chemin, 'utf8');
@@ -515,6 +578,8 @@ export async function controlerComposantsCommuns(dist: string): Promise<Constat[
       ...constatsExpressionsInterdites(html, fichier),
       ...constatsTexteRedige(html, fichier),
       ...constatsPartCitee(html, fichier),
+      ...constatsRessourcesTierces(html, fichier),
+      ...constatsLienConfidentialite(html, fichier, adresseAttendue),
     );
     const lus = enTetesDePage(html, fichier);
     constats.push(...constatsEnTetesPresents(lus));

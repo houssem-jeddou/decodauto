@@ -1,5 +1,7 @@
 ---
+import { getCollection, getEntry } from 'astro:content';
 import '../styles/site.css';
+import { PAGE_CONFIDENTIALITE } from '../lib/charte.ts';
 import { estIndexable } from '../lib/indexation.ts';
 import { bandeau, pied } from '../lib/gabarit.ts';
 
@@ -17,8 +19,11 @@ const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.
 // Composants communs à toutes les pages (livrable 6.3, src/lib/gabarit.ts) : nom du site et mention en tête avant le
 // H1, lien de signalement en pied de page (contrôles MENTION-IA-* et SIGNALER-ERREUR-ABSENT).
 const haut = bandeau();
+// Lien vers la politique de confidentialité : dès que sa page est construite, sur toutes les pages, à son adresse du plan.
+const pageConfidentialite = (await getCollection('socle')).some((page) => page.data.id === PAGE_CONFIDENTIALITE);
+const adresseConfidentialite = pageConfidentialite ? (await getEntry('plan-du-site', PAGE_CONFIDENTIALITE))?.data.adresse : undefined;
 // Sur la page 404, l'adresse demandée n'est pas connue du site statique : le lecteur la complète dans son courriel.
-const bas = pied(sansCanonical ? undefined : Astro.url.pathname);
+const bas = pied(sansCanonical ? undefined : Astro.url.pathname, adresseConfidentialite);
 ---
 
 <!doctype html>

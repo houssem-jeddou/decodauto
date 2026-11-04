@@ -1,5 +1,6 @@
 // Vérifie le site en ligne : redirections 301 (http → https, www → domaine nu, chemin conservé), accueil en ligne,
-// X-Robots-Tag cohérent avec le mode d'indexation du dépôt, robots.txt identique au dépôt, plan du site servi en XML.
+// X-Robots-Tag cohérent avec le mode d'indexation du dépôt, ni script ni cookie sur la page servie, robots.txt identique au
+// dépôt, plan du site servi en XML.
 // Lancé par la CI (job « production ») ; aucun secret, aucune écriture. Usage : npm run production [-- --information]
 //   --information : les écarts sont affichés comme des avertissements et le script réussit (pull request, branche
 //                   autre que main : la production n'a pas encore les changements de la branche).
@@ -15,6 +16,7 @@ const lire: Lire = async (url) => {
     location: r.headers.get('location'),
     robotsTag: r.headers.get('x-robots-tag'),
     typeContenu: r.headers.get('content-type'),
+    cookie: r.headers.get('set-cookie'),
     corps: r.status >= 300 && r.status < 400 ? '' : await r.text(),
   };
 };

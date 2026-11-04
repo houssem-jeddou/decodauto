@@ -12,6 +12,8 @@ export interface Reponse {
   robotsTag: string | null;
   /** En-tête Content-Type, sinon null. */
   typeContenu: string | null;
+  /** En-tête Set-Cookie, sinon null ou absent. */
+  cookie?: string | null | undefined;
   corps: string;
   /** Erreur réseau (nom introuvable, connexion refusée, délai dépassé) : statut 0. */
   erreurReseau?: string | undefined;
@@ -127,6 +129,16 @@ export async function verifierProduction(options: OptionsProduction): Promise<Co
     if (!accueil.corps.includes(`mailto:${ADRESSE_SIGNALEMENT}`) || accueil.corps.includes('/cdn-cgi/l/email-protection')) {
       constats.push(erreur('PROD-SIGNALEMENT', `${ACCUEIL} doit servir le lien « Signaler une erreur » vers mailto:${ADRESSE_SIGNALEMENT}, sans masquage d'adresse par Cloudflare (/cdn-cgi/l/email-protection)`));
     }
+  }
+
+  // Ce que dit la politique de confidentialité, sur la page réellement servie : Cloudflare peut injecter dans le HTML un script
+  // de mesure (Web Analytics, réglage du compte) que la construction ne voit pas, et déposer un cookie (Bot Fight Mode).
+  if (accueil.statut === 200) {
+    const scripts = [...accueil.corps.matchAll(/<script\b([^>]*)>/gi)].map((m) => m[1] ?? '').filter((a) => !/type\s*=\s*["']?application\/ld\+json/i.test(a));
+    if (scripts.length > 0 || /cloudflareinsights|\/cdn-cgi\/rum/i.test(accueil.corps)) {
+      constats.push(erreur('PROD-TRACEUR', `${ACCUEIL} sert un script (par exemple la mesure d'audience Cloudflare Web Analytics, à désactiver dans le compte) : la politique de confidentialité dit qu'il n'y en a aucun`));
+    }
+    if ((accueil.cookie ?? '') !== '') constats.push(erreur('PROD-COOKIE', `${ACCUEIL} dépose un cookie (${(accueil.cookie ?? '').split('=')[0] ?? ''}) : la politique de confidentialité dit que le site n'en dépose aucun`));
   }
 
   // robots.txt servi identique à celui du dépôt (fins de ligne et espaces de fin ignorés).
