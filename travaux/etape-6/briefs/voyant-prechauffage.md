@@ -12,8 +12,8 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant préchauffage ».
-- **12 mots-clés**, dont 12 comptés dans les totaux ; volume indicatif cumulé : 6 636 recherches par mois (plafond, docs/05). 5 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 5 688 ; Symptôme ou panne 948.
+- **15 mots-clés**, dont 15 comptés dans les totaux ; volume indicatif cumulé : 7 584 recherches par mois (plafond, docs/05). 6 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 6 636 ; Symptôme ou panne 948.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
@@ -26,8 +26,11 @@
 | voyant de prechauffage | 316 | Signification (voyant, code) |  |  |
 | voyant préchauffage clignote et perte de puissance volkswagen | 316 | Symptôme ou panne | volkswagen |  |
 | voyant préchauffage clignote volkswagen | 316 | Symptôme ou panne | volkswagen |  |
+| voyant préchauffage clignote vw | 316 | Signification (voyant, code) | vw |  |
 | voyant prechauffage clio 2 | 316 | Signification (voyant, code) | clio 2 |  |
 | voyant préchauffage diesel | 316 | Signification (voyant, code) |  |  |
+| voyant préchauffage diesel clignote perte de puissance | 316 | Signification (voyant, code) |  |  |
+| voyant préchauffage qui clignote | 316 | Signification (voyant, code) |  |  |
 | voyant prechauffage trafic 2 | 316 | Signification (voyant, code) | trafic |  |
 
 ## Décision et sources disponibles
@@ -69,6 +72,17 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Audi voyant préchauffage clignote perte puissance | Recherches associées | Voyant qui clignote ; Marque ou modèle cité |
 | Voyant préchauffage clignote 2.0 TDI 140 | Recherches associées | Voyant qui clignote ; Marque ou modèle cité |
 | Voyant préchauffage clignote et perte de puissance Audi A3 | Recherches associées | Voyant qui clignote ; Marque ou modèle cité |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| voyant préchauffage allumé | sans donnée | titre de partie ou question possible |
+| voyant préchauffage clignote 2.0 tdi 140 | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant préchauffage clignote et perte de puissance audi a3 | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant préchauffage qui clignote en roulant | 10–100 | titre de partie ou question possible |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

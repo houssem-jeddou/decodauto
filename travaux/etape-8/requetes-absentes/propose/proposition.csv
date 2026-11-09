@@ -1,0 +1,189 @@
+requete,volume_fourchette,page_du_tri_initial,page_retenue,decision,mot_cle_05_meme_signature,motif,source
+problème de batterie voiture symptôme,100–1k,batterie-voiture,batterie-voiture,"ajout à 05, nouveau mot-clé",,,FR:voyant-batterie#7
+bruit moteur après coupure contact,10–100,bruit-moteur,bruit-moteur,"formulation du lecteur, moins de 100 recherches",,,07:bruit moteur#5
+bruit moteur au ralenti,100–1k,bruit-moteur,bruit-moteur,"ajout à 05, nouveau mot-clé",,,07:bruit moteur#3
+bruit moteur diesel,10–100,bruit-moteur,bruit-moteur,"formulation du lecteur, moins de 100 recherches",,,07:bruit moteur#4
+bruit moteur qui claque,10–100,bruit-moteur,bruit-moteur,"formulation du lecteur, moins de 100 recherches",,,07:bruit moteur#8
+code défaut p0087,100–1k,code-p0087,code-p0087,"ajout à 05, nouveau mot-clé",,,07:code défaut p0#6
+code défaut p0087 peugeot,100–1k,code-p0087,code-p0087,"ajout à 05, nouveau mot-clé",,,07:code défaut p0#4
+p0087 audi,100–1k,code-p0087,code-p0087,"ajout à 05, variante",audi p0087,,FR:code-p0087#6
+p0087 citroën,100–1k,code-p0087,code-p0087,"ajout à 05, variante",citroen p0087,,FR:code-p0087#8
+p0087 ford,100–1k,code-p0087,code-p0087,"ajout à 05, nouveau mot-clé",,,FR:code-p0087#5
+p0087 renault,10–100,code-p0087,code-p0087,"formulation du lecteur, moins de 100 recherches",,,FR:code-p0087#7
+p0087 vw,100–1k,code-p0087,code-p0087,"ajout à 05, nouveau mot-clé",,,FR:code-p0087#2
+code défaut p0299 peugeot,100–1k,code-p0299,code-p0299,"ajout à 05, nouveau mot-clé",,,07:code défaut p0#7
+code défaut p0299 vw,100–1k,code-p0299,code-p0299,"ajout à 05, nouveau mot-clé",,,07:code défaut p0#5
+p0299 2.0 tdi,10–100,code-p0299,code-p0299,"formulation du lecteur, moins de 100 recherches",,,FR:code-p0299#4
+p0299 a chaud,sans donnée,code-p0299,code-p0299,"formulation du lecteur, sans volume",,,FR:code-p0299#8
+p0299 hyundai,10–100,code-p0299,code-p0299,"formulation du lecteur, moins de 100 recherches",,,FR:code-p0299#3
+p0299 mazda,10–100,code-p0299,code-p0299,"formulation du lecteur, moins de 100 recherches",,,FR:code-p0299#5
+p0299 mercedes,100–1k,code-p0299,code-p0299,"ajout à 05, variante",mercedes p0299,,FR:code-p0299#2
+code défaut p0380,100–1k,code-p0380,code-p0380,"ajout à 05, nouveau mot-clé",,,07:code défaut p0#3
+code défaut p0380 renault,100–1k,code-p0380,code-p0380,"ajout à 05, nouveau mot-clé",,,07:code défaut p0#1
+p0380 peugeot 1.6 hdi,sans donnée,code-p0380,code-p0380,"formulation du lecteur, sans volume",,,FR:code-p0380#5
+p0380 peugeot 307 2.0 hdi,10–100,code-p0380,code-p0380,"formulation du lecteur, moins de 100 recherches",,,FR:code-p0380#6
+p0420 circuit de catalyseur rendement inférieur au seuil ligne 1,100–1k,code-p0420,code-p0420,"ajout à 05, nouveau mot-clé",,,FR:code-p0420#8
+p0420 citroen,100–1k,code-p0420,code-p0420,"ajout à 05, variante",citroen p0420,,FR:code-p0420#6
+p0420 toyota,100–1k,code-p0420,code-p0420,"ajout à 05, nouveau mot-clé",,,FR:code-p0420#2
+code défaut p1351 citroën,100–1k,code-p1351,code-p1351,"ajout à 05, nouveau mot-clé",,,07:code défaut#5
+p1351 1.4 hdi,10–100,code-p1351,code-p1351,"formulation du lecteur, moins de 100 recherches",,,FR:code-p1351#5
+p1351 2.0 hdi,10–100,code-p1351,code-p1351,"formulation du lecteur, moins de 100 recherches",,,FR:code-p1351#7
+p1351 citroën,1k–10k,code-p1351,code-p1351,"ajout à 05, variante",citroen p1351,,FR:code-p1351#1
+p1351 citroën c3,10–100,code-p1351,code-p1351,"formulation du lecteur, moins de 100 recherches",,,FR:code-p1351#6
+p1351 mercedes,10–100,code-p1351,code-p1351,"formulation du lecteur, moins de 100 recherches",,,FR:code-p1351#4
+p1351 toyota,10–100,code-p1351,code-p1351,"formulation du lecteur, moins de 100 recherches",,,FR:code-p1351#8
+fumée blanche,1k–10k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:fumée blanche#2
+fumée blanche au démarrage,100–1k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:fumée blanche#10
+fumée blanche et odeur de brûlé voiture diesel,100–1k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:fumée blanche#6
+fumée blanche moteur diesel,100–1k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:fumée blanche#3
+fumée blanche voiture,1k–10k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:fumée blanche#1
+fumée blanche voiture diesel,100–1k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:fumée blanche#5
+fumée blanche voiture essence,100–1k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:fumée blanche#9
+pourquoi ma voiture fume blanc,100–1k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:pourquoi ma voiture#2
+pourquoi ma voiture fume noir,100–1k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:pourquoi ma voiture#3
+voiture qui fume blanc,100–1k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:voiture qui#6
+voiture qui fume noir,100–1k,fumee-echappement,fumee-echappement,"ajout à 05, nouveau mot-clé",,,07:voiture qui#7
+huile 5w30 c2,100–1k,huile-5w30,huile-5w30,"ajout à 05, nouveau mot-clé",,,07:huile 5w30#4
+huile 5w30 c3,100–1k,huile-5w30,huile-5w30,"ajout à 05, nouveau mot-clé",,,07:huile 5w30#6
+huile 5w30 c4,100–1k,huile-5w30,huile-5w30,"ajout à 05, nouveau mot-clé",,,07:huile 5w30#9
+pourquoi ma voiture consomme du liquide de refroidissement,100–1k,liquide-de-refroidissement,liquide-de-refroidissement,"ajout à 05, nouveau mot-clé",,,07:pourquoi ma voiture#4
+loi montagne 2 2016,sans donnée,loi-montagne,loi-montagne,"formulation du lecteur, sans volume",,,FR:loi-montagne#3
+loi montagne 2026 verbalisation,10–100,loi-montagne,loi-montagne,"formulation du lecteur, moins de 100 recherches",,,FR:loi-montagne#5
+loi montagne 3,10–100,loi-montagne,loi-montagne,"formulation du lecteur, moins de 100 recherches",,,FR:loi-montagne#2
+loi montagne amende,100–1k,loi-montagne,loi-montagne,"ajout à 05, nouveau mot-clé",,,FR:loi-montagne#4
+loi montagne carte,100–1k,loi-montagne,loi-montagne,"ajout à 05, nouveau mot-clé",,,FR:loi-montagne#7
+loi montagne communes concernées,100–1k,loi-montagne,loi-montagne,"ajout à 05, nouveau mot-clé",,,FR:loi-montagne#6
+loi montagne date,100–1k,loi-montagne,loi-montagne,"ajout à 05, nouveau mot-clé",,,FR:loi-montagne#1
+problème moteur puretech,1k–10k,moteur-puretech,moteur-puretech,"ajout à 05, nouveau mot-clé",,,07:problème moteur#1
+problème moteur puretech essence,10–100,moteur-puretech,moteur-puretech,"formulation du lecteur, moins de 100 recherches",,,07:problème moteur#9
+puretech,10k–100k,moteur-puretech,moteur-puretech,"ajout à 05, nouveau mot-clé",,,07:puretech#1
+puretech 1.2,1k–10k,moteur-puretech,moteur-puretech,"ajout à 05, variante",1.2 puretech | 1 2 puretech | 1.2 l puretech,,07:puretech#2
+puretech avis,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, nouveau mot-clé",,,07:puretech#10
+puretech chaine,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, nouveau mot-clé",,,07:puretech#7
+puretech diesel,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, nouveau mot-clé",,,07:puretech#4
+puretech essence ou diesel,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, nouveau mot-clé",,,07:puretech#5
+puretech fiabilité,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, nouveau mot-clé",,,07:puretech#9
+puretech moteur,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, variante",moteurs puretech,,07:puretech#8
+puretech peugeot,1k–10k,moteur-puretech,moteur-puretech,"ajout à 05, variante",peugeot puretech,,07:puretech#6
+puretech probleme,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, variante",problème puretech,,07:puretech#3
+fap 1.6 hdi,100–1k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#3
+fap 308 1.6 hdi,100–1k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#10
+fap bouché,1k–10k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#2
+fap peugeot 308,100–1k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#8
+fap voiture,1k–10k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#1
+fap voiture essence,100–1k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#7
+fap voiture prix,100–1k,nettoyer-fap,nettoyer-fap,écartée,,"requête de prix : les 10 lignes « prix » du FAP de 06 sont hors périmètre (02, règle des prix)",07:fap#6
+pourquoi ma voiture consomme de l'huile,100–1k,niveau-huile,niveau-huile,"ajout à 05, nouveau mot-clé",,,07:pourquoi ma voiture#8
+perte de puissance,100–1k,perte-de-puissance,perte-de-puissance,"ajout à 05, nouveau mot-clé",,,07:perte de puissance#3
+perte de puissance c4 picasso 1.6 hdi 110,10–100,perte-de-puissance,perte-de-puissance,"formulation du lecteur, moins de 100 recherches",,,07:perte de puissance#8
+perte de puissance kangoo 1.5 dci,10–100,perte-de-puissance,perte-de-puissance,"formulation du lecteur, moins de 100 recherches",,,07:perte de puissance#9
+comment vérifier la pression des pneus en station-service,10–100,pression-des-pneus,pression-des-pneus,"formulation du lecteur, moins de 100 recherches",,,FR:pression-des-pneus#4
+pression des pneus avant et arrière,10–100,pression-des-pneus,pression-des-pneus,"formulation du lecteur, moins de 100 recherches",,,FR:pression-des-pneus#8
+pression pneu,10k–100k,pression-des-pneus,pression-des-pneus,"ajout à 05, variante",pneu pression | pression d un pneu | pression dans les pneus | pression des pneus | pression du pneu | pression pneus | pression pour pneu,,07:pression pneu#1
+tableau pression pneu voiture,1k–10k,pression-des-pneus,pression-des-pneus,"formulation du lecteur, hors périmètre du brief",,consigne validée le 03/11 du brief pression-des-pneus : « ni page ni tableau par modèle sans donnée constructeur sourcée » ; la requête y est citée comme hors périmètre,FR:pression-des-pneus#1
+vérifier la pression des pneus tous les combien,100–1k,pression-des-pneus,pression-des-pneus,"ajout à 05, nouveau mot-clé",,,FR:pression-des-pneus#7
+pourquoi ma voiture chauffe,10–100,surchauffe-moteur,surchauffe-moteur,"formulation du lecteur, moins de 100 recherches",,,07:pourquoi ma voiture#9
+voyant liquide de refroidissement,1k–10k,surchauffe-moteur,surchauffe-moteur,"ajout à 05, variante",liquide de refroidissement voyant | voyant liquide refroidissement,,07:voyant#9
+pourquoi ma voiture ne démarre pas,100–1k,voiture-ne-demarre-pas,voiture-ne-demarre-pas,"ajout à 05, nouveau mot-clé",,,07:pourquoi ma voiture#1
+pourquoi ma voiture ne démarre pas malgré une batterie neuve,100–1k,voiture-ne-demarre-pas,voiture-ne-demarre-pas,"ajout à 05, nouveau mot-clé",,,07:pourquoi ma voiture#5
+pourquoi ma voiture broute,100–1k,voiture-qui-broute,voiture-qui-broute,"ajout à 05, nouveau mot-clé",,,07:pourquoi ma voiture#6
+effacer voyant abs sans valise,100–1k,voyant-abs-esp,voyant-abs-esp,"ajout à 05, nouveau mot-clé",,,FR:voyant-abs-esp#5
+si le voyant abs reste allumé en circulation,sans donnée,voyant-abs-esp,voyant-abs-esp,"formulation du lecteur, sans volume",,,FR:voyant-abs-esp#8
+supprimer voyant abs,100–1k,voyant-abs-esp,voyant-abs-esp,"ajout à 05, nouveau mot-clé",,,FR:voyant-abs-esp#4
+supprimer voyant abs 206,10–100,voyant-abs-esp,voyant-abs-esp,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-abs-esp#6
+voyant abs allumé : que faire,sans donnée,voyant-abs-esp,voyant-abs-esp,"formulation du lecteur, sans volume",,,FR:voyant-abs-esp#2
+voyant abs allumé peut on rouler,sans donnée,voyant-abs-esp,voyant-abs-esp,"formulation du lecteur, sans volume",,,FR:voyant-abs-esp#1
+voyant abs et esp allumé,sans donnée,voyant-abs-esp,voyant-abs-esp,"formulation du lecteur, sans volume",,,FR:voyant-abs-esp#3
+voyant orange voiture qui glisse,100–1k,voyant-abs-esp,voyant-abs-esp,"ajout à 05, nouveau mot-clé",,,07:voyant orange#10
+voyant orange voiture zig zag,100–1k,voyant-abs-esp,voyant-abs-esp,"ajout à 05, nouveau mot-clé",,,FR:voyants#4
+voyant adblue renault,100–1k,voyant-adblue,voyant-adblue,"ajout à 05, nouveau mot-clé",,,FR:voyant-adblue#4
+voyant adblue reste allumé après remplissage,sans donnée,voyant-adblue,voyant-adblue,"formulation du lecteur, sans volume",,,FR:voyant-adblue#2
+astuce pour enlever voyant airbag,1k–10k,voyant-airbag,voyant-airbag,"ajout à 05, nouveau mot-clé",,,FR:voyant-airbag#1
+comment enlever le voyant airbag sur 206,10–100,voyant-airbag,voyant-airbag,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-airbag#8
+voyant airbag 206 allumé pour contrôle technique,sans donnée,voyant-airbag,voyant-airbag,"formulation du lecteur, sans volume",,,FR:voyant-airbag#7
+voyant airbag 206 reste allumé,sans donnée,voyant-airbag,voyant-airbag,"formulation du lecteur, sans volume",,,FR:voyant-airbag#5
+voyant airbag 307,10–100,voyant-airbag,voyant-airbag,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-airbag#6
+voyant airbag allumé contrôle technique,sans donnée,voyant-airbag,voyant-airbag,"formulation du lecteur, sans volume",,,FR:voyant-airbag#4
+voyant airbag allumé rouge,sans donnée,voyant-airbag,voyant-airbag,"formulation du lecteur, sans volume",,,FR:voyant-airbag#3
+voyant airbag orange allumé,sans donnée,voyant-airbag,voyant-airbag,"formulation du lecteur, sans volume",,,FR:voyant-airbag#2
+voyant batterie allumé,sans donnée,voyant-batterie,voyant-batterie,"formulation du lecteur, sans volume",,,FR:voyant-batterie#2
+voyant batterie allumé alternateur ok,sans donnée,voyant-batterie,voyant-batterie,"formulation du lecteur, sans volume",,,FR:voyant-batterie#6
+voyant batterie allumé avec batterie neuve,sans donnée,voyant-batterie,voyant-batterie,"formulation du lecteur, sans volume",,,FR:voyant-batterie#5
+voyant batterie berlingo,sans donnée,voyant-batterie,voyant-batterie,"formulation du lecteur, sans volume",,,FR:voyant-batterie#8
+voyant batterie faible voiture,10–100,voyant-batterie,voyant-batterie,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-batterie#4
+voyant batterie rouge avant démarrage,100–1k,voyant-batterie,voyant-batterie,"ajout à 05, nouveau mot-clé",,,FR:voyant-batterie#3
+voyant volant orange audi,sans donnée,voyant-direction,voyant-direction,"formulation du lecteur, sans volume",,,FR:voyant-direction#2
+voyant volant orange bmw,10–100,voyant-direction,voyant-direction,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-direction#3
+voyant volant orange clio 2,10–100,voyant-direction,voyant-direction,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-direction#7
+voyant volant orange golf 5,10–100,voyant-direction,voyant-direction,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-direction#5
+voyant volant orange polo,10–100,voyant-direction,voyant-direction,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-direction#4
+voyant volant orange seat ibiza,10–100,voyant-direction,voyant-direction,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-direction#6
+voyant volant orange touran,10–100,voyant-direction,voyant-direction,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-direction#8
+voyant volant orange volkswagen,100–1k,voyant-direction,voyant-direction,"ajout à 05, nouveau mot-clé",,,FR:voyant-direction#1
+peut on rouler avec le voyant plaquette de frein,10–100,voyant-frein,voyant-frein,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-frein#6
+voyant frein bmw,10–100,voyant-frein,voyant-frein,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-frein#8
+voyant frein orange,100–1k,voyant-frein,voyant-frein,"ajout à 05, nouveau mot-clé",,,FR:voyant-frein#7
+voyant liquide de frein insuffisant,10–100,voyant-frein,voyant-frein,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-frein#3
+voyant plaquette de frein reste allumé,sans donnée,voyant-frein,voyant-frein,"formulation du lecteur, sans volume",,,FR:voyant-frein#5
+voyant d'huile qui s'allume mais niveau ok,sans donnée,voyant-huile,voyant-huile,"formulation du lecteur, sans volume",,,FR:voyant-huile#6
+voyant huile moteur orange,1k–10k,voyant-huile,voyant-huile,"ajout à 05, nouveau mot-clé",,,FR:voyant-huile#1
+voyant huile moteur rouge,1k–10k,voyant-huile,voyant-huile,"ajout à 05, nouveau mot-clé",,,FR:voyant-huile#2
+voyant huile moteur rouge clignote,100–1k,voyant-huile,voyant-huile,"ajout à 05, nouveau mot-clé",,,FR:voyant-huile#5
+voyant huile moteur rouge stop,100–1k,voyant-huile,voyant-huile,"ajout à 05, nouveau mot-clé",,,FR:voyant-huile#8
+voyant huile moteur volkswagen,10–100,voyant-huile,voyant-huile,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-huile#7
+voyant huile rouge s'allume et s'éteint,sans donnée,voyant-huile,voyant-huile,"formulation du lecteur, sans volume",,,FR:voyant-huile#3
+voyant orange voiture huile,100–1k,voyant-huile,voyant-huile,"ajout à 05, nouveau mot-clé",,,FR:voyants#6
+voyant moteur allumé,sans donnée,voyant-moteur,voyant-moteur,"formulation du lecteur, sans volume",,,07:voyant moteur#4
+voyant moteur allumé avec perte de puissance,sans donnée,voyant-moteur,voyant-moteur,"formulation du lecteur, sans volume",,,07:voyant moteur#9
+voyant moteur orange allumé,sans donnée,voyant-moteur,voyant-moteur,"formulation du lecteur, sans volume",,,07:voyant moteur#3
+voyant moteur orange allumé mais pas de problème,sans donnée,voyant-moteur,voyant-moteur,"formulation du lecteur, sans volume",,,FR:voyant-moteur#1
+voyant moteur orange bmw,10–100,voyant-moteur,voyant-moteur,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-moteur#6
+voyant moteur orange clignotant,100–1k,voyant-moteur,voyant-moteur,"ajout à 05, nouveau mot-clé",,,FR:voyant-moteur#2
+voyant moteur orange combien de km,100–1k,voyant-moteur,voyant-moteur,"ajout à 05, nouveau mot-clé",,,FR:voyant-moteur#3
+voyant moteur orange diesel,10–100,voyant-moteur,voyant-moteur,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-moteur#4
+voyant moteur orange que faire,10–100,voyant-moteur,voyant-moteur,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-moteur#7
+voyant moteur orange signification,100–1k,voyant-moteur,voyant-moteur,"ajout à 05, nouveau mot-clé",,,FR:voyant-moteur#5
+voyant moteur rouge,1k–10k,voyant-moteur,voyant-moteur,"ajout à 05, variante",voyant rouge moteur,,07:voyant moteur#5
+voyant orange voiture moteur signification,100–1k,voyant-moteur,voyant-moteur,"ajout à 05, nouveau mot-clé",,,FR:voyants#2
+voyant tableau de bord voiture signification moteur,100–1k,voyant-moteur,voyant-moteur,"ajout à 05, nouveau mot-clé",,,07:voyant tableau de bord#3
+voyant préchauffage allumé,sans donnée,voyant-prechauffage,voyant-prechauffage,"formulation du lecteur, sans volume",,,FR:voyant-prechauffage#4
+voyant préchauffage clignote 2.0 tdi 140,10–100,voyant-prechauffage,voyant-prechauffage,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-prechauffage#7
+voyant préchauffage clignote et perte de puissance audi a3,10–100,voyant-prechauffage,voyant-prechauffage,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-prechauffage#8
+voyant préchauffage clignote vw,100–1k,voyant-prechauffage,voyant-prechauffage,"ajout à 05, nouveau mot-clé",,,FR:voyant-prechauffage#5
+voyant préchauffage diesel clignote perte de puissance,100–1k,voyant-prechauffage,voyant-prechauffage,"ajout à 05, nouveau mot-clé",,,FR:voyant-prechauffage#1
+voyant préchauffage qui clignote,100–1k,voyant-prechauffage,voyant-prechauffage,"ajout à 05, nouveau mot-clé",,,FR:voyant-prechauffage#2
+voyant préchauffage qui clignote en roulant,10–100,voyant-prechauffage,voyant-prechauffage,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-prechauffage#3
+comment enlever le voyant pression pneu,100–1k,voyant-pression-pneus,voyant-pression-pneus,"ajout à 05, nouveau mot-clé",,,FR:voyant-pression-pneus#5
+voyant pression pneu clio 4,100–1k,voyant-pression-pneus,voyant-pression-pneus,"ajout à 05, nouveau mot-clé",,,FR:voyant-pression-pneus#7
+voyant pression pneu combien de temps,10–100,voyant-pression-pneus,voyant-pression-pneus,"formulation du lecteur, moins de 100 recherches",,,FR:voyant-pression-pneus#8
+voyant pression pneu orange,100–1k,voyant-pression-pneus,voyant-pression-pneus,"ajout à 05, variante",voyant orange pression pneu,,FR:voyant-pression-pneus#3
+voyant pression pneu renault,100–1k,voyant-pression-pneus,voyant-pression-pneus,"ajout à 05, nouveau mot-clé",,,FR:voyant-pression-pneus#1
+voyant pression pneu toujours allumé,sans donnée,voyant-pression-pneus,voyant-pression-pneus,"formulation du lecteur, sans volume",,,FR:voyant-pression-pneus#2
+voyant pression pneu toujours allumé volkswagen,sans donnée,voyant-pression-pneus,voyant-pression-pneus,"formulation du lecteur, sans volume",,,FR:voyant-pression-pneus#6
+liste voyant orange voiture,1k–10k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,FR:voyants#1
+perte de puissance 1.6 hdi 110 sans voyant,100–1k,voyants,perte-de-puissance,"ajout à 05, nouveau mot-clé",,"la requête porte sur la perte de puissance sans voyant, pas sur l'outil voyants",07:perte de puissance#10
+perte de puissance voiture avec voyant allumé,sans donnée,voyants,voyant-moteur,"formulation du lecteur, sans volume",,"même intention que « voyant moteur et perte de puissance », déjà sur voyant-moteur dans 05",07:perte de puissance#7
+perte de puissance voiture diesel sans voyant allumé,sans donnée,voyants,perte-de-puissance,"formulation du lecteur, sans volume",,même raison,07:perte de puissance#6
+voiture qui ne démarre plus mais les voyants s'allument,100–1k,voyants,voiture-ne-demarre-pas,"ajout à 05, variante",ma voiture ne démarre plus mais les voyants s allument,"page du mot-clé de 05 de même signature (variante de « ma voiture ne démarre plus mais les voyants s allument », déjà sur cette page dans 05)",07:voiture qui#10
+voyant orange,1k–10k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,07:voyant orange#2
+voyant orange dacia duster signification,100–1k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,07:voyant orange#9
+voyant orange dacia sandero,100–1k,voyants,voyants,"ajout à 05, variante",dacia sandero voyant orange,,07:voyant orange#6
+voyant orange point d'exclamation,1k–10k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,07:voyant orange#4
+voyant orange voiture clé,100–1k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,FR:voyants#7
+voyant orange voiture point d'exclamation,100–1k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,07:voyant orange#7 ; FR:voyants#3
+voyant tableau de bord renault captur 2,100–1k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,07:voyant tableau de bord#10
+voyant tableau de bord voiture signification peugeot,100–1k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,07:voyant tableau de bord#4
+voyant tableau de bord voiture signification renault,100–1k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,07:voyant tableau de bord#9
+voyant tableau de bord voiture signification volkswagen,100–1k,voyants,voyants,"ajout à 05, nouveau mot-clé",,,07:voyant tableau de bord#6
+voyant voiture,10k–100k,voyants,voyants,"ajout à 05, variante",voiture voyants | voyant des voitures | voyant sur une voiture | voyant sur voiture | voyant voitures | voyant de voiture | les voyant de voiture | les voyant voiture | voyant a voiture,,07:voyant#4
+liquide de refroid,10k–100k,,liquide-de-refroidissement,"ajout à 05, ligne de 06 rattachée par le critère",liquide refroid,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
+liquide de refroidissement,10k–100k,,liquide-de-refroidissement,"ajout à 05, ligne de 06 rattachée par le critère",liquide refroidissement | liquide de refroidissement pour voiture | liquide de refroidissement voiture | voiture liquide de refroidissement | liquide refroidissement voiture,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
+gonflement pneu voiture,10k–100k,,pression-des-pneus,"ajout à 05, ligne de 06 rattachée par jugement",,même fourchette que « gonfler pneu voiture » et même mot sous une autre forme (nom et verbe) : seul cas ajouté par jugement,06
+gonfler les pneus voiture,10k–100k,,pression-des-pneus,"ajout à 05, ligne de 06 rattachée par le critère",gonfler les pneu | gonfler les pneus | gonfler un pneu,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
+gonfler pneu voiture,10k–100k,,pression-des-pneus,"ajout à 05, ligne de 06 rattachée par le critère",gonfler les pneu | gonfler les pneus | gonfler un pneu,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
+liquide de frein,10k–100k,,liquide-de-frein,"ajout à 05, ligne de 06 rattachée par le critère",frein liquide | liquide des freins | liquide frein | liquide pour frein | liquide de frein pour voiture | liquide de frein voiture,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
+pneu hivers ou 4 saisons,1k–10k,,loi-montagne,"ajout à 05, ligne de 06 rattachée par le critère",pneu 4 saisons ou hiver | pneus 4 saisons ou hiver | pneus hiver ou 4 saisons,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
+pneus toutes saisons,100–1k,,loi-montagne,"ajout à 05, ligne de 06 rattachée par le critère",pneu toute saison,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
+point pour controle technique,100–1k,,contre-visite-controle-technique,"ajout à 05, ligne de 06 rattachée par le critère",point controle technique voiture | points de contrôle technique | controle technique les points | contrôle technique les points | contrôle technique point | point controle technique | point du controle technique | controle technique points de controle | contrôle technique point de contrôle | point de controle controle technique | controle technique les points de controle | controle technique point de controle | contrôle technique point de controle | point de controle au controle technique | point de controle du controle technique | point de contrôle du contrôle technique | points de controle controle technique | points de contrôle contrôle technique | point de controle technique auto | points de contrôle technique automobile | point de contrôle technique voiture,"06 la classait « Après le lot 1 (à réévaluer) », intention « Information générale »",06
+defaut moteur 208,100–1k,,voyant-moteur,"ajout à 05, ligne de 06 rattachée par le critère",défaut moteur 208,"06 la classait « Fiabilité par modèle », intention « Fiabilité d'un modèle »",06
+defaut moteur peugeot 2008,100–1k,,voyant-moteur,"ajout à 05, ligne de 06 rattachée par le critère",défaut moteur peugeot 2008,"06 la classait « Fiabilité par modèle », intention « Fiabilité d'un modèle »",06

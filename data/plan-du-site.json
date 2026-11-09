@@ -223,7 +223,19 @@
       "voyants tableau de bord nissan micra",
       "voyants tableau de bord peugeot 3008",
       "voyants tableau de bord scenic 4",
-      "voyants vehicule"
+      "voyants vehicule",
+      "liste voyant orange voiture",
+      "voyant orange",
+      "voyant orange dacia duster signification",
+      "voyant orange dacia sandero",
+      "voyant orange point d'exclamation",
+      "voyant orange voiture clé",
+      "voyant orange voiture point d'exclamation",
+      "voyant tableau de bord renault captur 2",
+      "voyant tableau de bord voiture signification peugeot",
+      "voyant tableau de bord voiture signification renault",
+      "voyant tableau de bord voiture signification volkswagen",
+      "voyant voiture"
     ],
     "liens": [
       "surchauffe-moteur"
@@ -387,7 +399,15 @@
       "voyant turbo",
       "voyant vanne egr",
       "voyant voiture moteur",
-      "voyant voiture orange moteur"
+      "voyant voiture orange moteur",
+      "voyant moteur orange clignotant",
+      "voyant moteur orange combien de km",
+      "voyant moteur orange signification",
+      "voyant moteur rouge",
+      "voyant orange voiture moteur signification",
+      "voyant tableau de bord voiture signification moteur",
+      "defaut moteur 208",
+      "defaut moteur peugeot 2008"
     ],
     "parent": "voyants",
     "liens": [
@@ -434,7 +454,12 @@
       "voyant pression huile moteur",
       "voyant rouge huile",
       "voyant température huile",
-      "voyant vidange huile moteur"
+      "voyant vidange huile moteur",
+      "voyant huile moteur orange",
+      "voyant huile moteur rouge",
+      "voyant huile moteur rouge clignote",
+      "voyant huile moteur rouge stop",
+      "voyant orange voiture huile"
     ],
     "parent": "voyants",
     "liens": [
@@ -454,7 +479,8 @@
       "voyant batterie",
       "voyant alternateur",
       "voyant batterie clignote",
-      "voyant batterie voiture"
+      "voyant batterie voiture",
+      "voyant batterie rouge avant démarrage"
     ],
     "parent": "voyants",
     "liens": [
@@ -489,7 +515,8 @@
       "voyant plaquette de frein bmw",
       "voyant plaquette de frein rouge",
       "voyant plaquette de frein volkswagen",
-      "voyant usure plaquette de frein"
+      "voyant usure plaquette de frein",
+      "voyant frein orange"
     ],
     "parent": "voyants",
     "liens": [
@@ -519,7 +546,8 @@
       "voyant moteur adblue",
       "voyant urea défaut moteur",
       "voyant urea peugeot",
-      "voyant urea peugeot 308"
+      "voyant urea peugeot 308",
+      "voyant adblue renault"
     ],
     "parent": "voyants"
   },
@@ -548,7 +576,13 @@
       "voyant filtre a particule golf 7",
       "voyant moteur fap",
       "voyant regeneration fap",
-      "fap moteur essence"
+      "fap moteur essence",
+      "fap 1.6 hdi",
+      "fap 308 1.6 hdi",
+      "fap bouché",
+      "fap peugeot 308",
+      "fap voiture",
+      "fap voiture essence"
     ],
     "parent": "voyants",
     "liens": [
@@ -577,7 +611,10 @@
       "voyant prechauffage trafic 2",
       "voyant préchauffage clignote et perte de puissance volkswagen",
       "voyant préchauffage clignote volkswagen",
-      "voyant préchauffage diesel"
+      "voyant préchauffage diesel",
+      "voyant préchauffage clignote vw",
+      "voyant préchauffage diesel clignote perte de puissance",
+      "voyant préchauffage qui clignote"
     ],
     "parent": "voyants",
     "liens": [
@@ -609,7 +646,8 @@
       "voyant airbag 206",
       "voyant airbag désactivé",
       "voyant airbag orange",
-      "voyant airbag twingo 1"
+      "voyant airbag twingo 1",
+      "astuce pour enlever voyant airbag"
     ],
     "parent": "voyants",
     "liens": [
@@ -636,7 +674,11 @@
       "esp voyant",
       "logo abs",
       "temoin abs",
-      "voyant abs 206"
+      "voyant abs 206",
+      "effacer voyant abs sans valise",
+      "supprimer voyant abs",
+      "voyant orange voiture qui glisse",
+      "voyant orange voiture zig zag"
     ],
     "parent": "voyants",
     "liens": [
@@ -664,7 +706,11 @@
       "voyant orange pression pneu",
       "voyant pneu crevé",
       "voyant pression de pneu",
-      "voyant pression pneu mais bonne pression"
+      "voyant pression pneu mais bonne pression",
+      "comment enlever le voyant pression pneu",
+      "voyant pression pneu clio 4",
+      "voyant pression pneu orange",
+      "voyant pression pneu renault"
     ],
     "parent": "voyants",
     "liens": [
@@ -680,7 +726,8 @@
     "requete_principale": "voyant volant orange",
     "mots_cles": [
       "voyant volant orange",
-      "voyant rouge volant"
+      "voyant rouge volant",
+      "voyant volant orange volkswagen"
     ],
     "parent": "voyants"
   },
@@ -705,7 +752,10 @@
       "p0420 résolu",
       "p0420 vw",
       "p0420nissan",
-      "peugeot 208 p0420"
+      "peugeot 208 p0420",
+      "p0420 circuit de catalyseur rendement inférieur au seuil ligne 1",
+      "p0420 citroen",
+      "p0420 toyota"
     ],
     "liens": [
       "nettoyer-fap"
@@ -733,7 +783,13 @@
       "p008700",
       "p008700 audi",
       "peugeot dtc p0087",
-      "vw p008700"
+      "vw p008700",
+      "code défaut p0087",
+      "code défaut p0087 peugeot",
+      "p0087 audi",
+      "p0087 citroën",
+      "p0087 ford",
+      "p0087 vw"
     ],
     "liens": [
       "perte-de-puissance"
@@ -765,7 +821,10 @@
       "p029900",
       "p029900 audi",
       "p029900 volkswagen",
-      "vw p029900"
+      "vw p029900",
+      "code défaut p0299 peugeot",
+      "code défaut p0299 vw",
+      "p0299 mercedes"
     ],
     "liens": [
       "perte-de-puissance"
@@ -793,7 +852,9 @@
       "p0380 nissan",
       "p0380 nissan qashqai",
       "p0380 peugeot",
-      "p0380 renault 1.5 dci"
+      "p0380 renault 1.5 dci",
+      "code défaut p0380",
+      "code défaut p0380 renault"
     ]
   },
   {
@@ -818,7 +879,9 @@
       "p1351 citroen 1.6 hdi",
       "p1351 citroen c3 1.4 hdi",
       "p1351 peugeot 1.4 hdi",
-      "p1351 peugeot 2.0 hdi"
+      "p1351 peugeot 2.0 hdi",
+      "code défaut p1351 citroën",
+      "p1351 citroën"
     ]
   },
   {
@@ -880,7 +943,10 @@
       "moteur qui ne demarre pas",
       "voiture a du mal a demarrer",
       "voiture ne démarre pas tableau de bord éteint",
-      "voiture qui a du mal à démarrer"
+      "voiture qui a du mal à démarrer",
+      "pourquoi ma voiture ne démarre pas",
+      "pourquoi ma voiture ne démarre pas malgré une batterie neuve",
+      "voiture qui ne démarre plus mais les voyants s'allument"
     ],
     "liens": [
       "batterie-voiture",
@@ -905,7 +971,8 @@
       "voiture qui broute en roulant essence",
       "voiture qui broute et perte de puissance",
       "voiture qui broute à bas régime",
-      "voiture qui broute à l accélération diesel"
+      "voiture qui broute à l accélération diesel",
+      "pourquoi ma voiture broute"
     ],
     "liens": [
       "perte-de-puissance"
@@ -930,7 +997,9 @@
       "voiture manque de puissance",
       "voiture perte de puissance",
       "voiture perte de puissance essence",
-      "voyant epc perte de puissance"
+      "voyant epc perte de puissance",
+      "perte de puissance",
+      "perte de puissance 1.6 hdi 110 sans voyant"
     ]
   },
   {
@@ -964,7 +1033,8 @@
       "voiture qui chauffe en roulant",
       "voiture qui surchauffe",
       "voiture surchauffe",
-      "voyant surchauffe moteur"
+      "voyant surchauffe moteur",
+      "voyant liquide de refroidissement"
     ],
     "liens": [
       "liquide-de-refroidissement",
@@ -1001,7 +1071,8 @@
       "cliquetis moteur essence",
       "injecteur claque",
       "turbo siffle sans perte de puissance",
-      "ventilateur voiture qui fait du bruit"
+      "ventilateur voiture qui fait du bruit",
+      "bruit moteur au ralenti"
     ],
     "liens": [
       "niveau-huile",
@@ -1032,7 +1103,18 @@
       "fumée blanche pot echappement",
       "fumée blanche qui sort du pot d échappement",
       "fumée blanche échappement",
-      "ma voiture fume blanche et perte de puissance"
+      "ma voiture fume blanche et perte de puissance",
+      "fumée blanche",
+      "fumée blanche au démarrage",
+      "fumée blanche et odeur de brûlé voiture diesel",
+      "fumée blanche moteur diesel",
+      "fumée blanche voiture",
+      "fumée blanche voiture diesel",
+      "fumée blanche voiture essence",
+      "pourquoi ma voiture fume blanc",
+      "pourquoi ma voiture fume noir",
+      "voiture qui fume blanc",
+      "voiture qui fume noir"
     ],
     "liens": [
       "perte-de-puissance"
@@ -1056,7 +1138,8 @@
       "batterie 6 volts",
       "batterie voiture 60ah",
       "batterie 24 volts",
-      "batterie 3008 diesel"
+      "batterie 3008 diesel",
+      "problème de batterie voiture symptôme"
     ]
   },
   {
@@ -1220,7 +1303,18 @@
       "nettoyage crepine 1.2 puretech",
       "opel puretech",
       "peugeot 1.2 puretech",
-      "peugeot 3008 1.2 puretech 130"
+      "peugeot 3008 1.2 puretech 130",
+      "problème moteur puretech",
+      "puretech",
+      "puretech 1.2",
+      "puretech avis",
+      "puretech chaine",
+      "puretech diesel",
+      "puretech essence ou diesel",
+      "puretech fiabilité",
+      "puretech moteur",
+      "puretech peugeot",
+      "puretech probleme"
     ],
     "liens": [
       "huile-moteur",
@@ -1288,7 +1382,10 @@
       "huile long life 5w30",
       "5w30 c3",
       "5w30 c4",
-      "5w30 rn17"
+      "5w30 rn17",
+      "huile 5w30 c2",
+      "huile 5w30 c3",
+      "huile 5w30 c4"
     ],
     "parent": "huile-moteur",
     "liens": [
@@ -1360,7 +1457,8 @@
       "verifier niveau d huile",
       "verifier niveau huile moteur",
       "verifier niveau huile voiture",
-      "vérifier niveau huile"
+      "vérifier niveau huile",
+      "pourquoi ma voiture consomme de l'huile"
     ],
     "parent": "huile-moteur"
   },
@@ -1390,7 +1488,10 @@
       "durit liquide de refroidissement",
       "bmw liquide de refroidissement",
       "liquide de refroidissement bmw",
-      "liquide de refroidissement pour bmw"
+      "liquide de refroidissement pour bmw",
+      "pourquoi ma voiture consomme du liquide de refroidissement",
+      "liquide de refroid",
+      "liquide de refroidissement"
     ]
   },
   {
@@ -1409,7 +1510,8 @@
       "liquide de frein dot 4",
       "liquide de frein pour voiture",
       "liquide de frein voiture",
-      "remplacement liquide de frein"
+      "remplacement liquide de frein",
+      "liquide de frein"
     ]
   },
   {
@@ -1444,7 +1546,12 @@
       "pression des pneus pour une remorque",
       "pression des pneus remorque",
       "pression pneu pour remorque",
-      "pression pneu remorque"
+      "pression pneu remorque",
+      "pression pneu",
+      "vérifier la pression des pneus tous les combien",
+      "gonflement pneu voiture",
+      "gonfler les pneus voiture",
+      "gonfler pneu voiture"
     ],
     "liens": [
       "usure-des-pneus",
@@ -1514,7 +1621,13 @@
       "pneu 4 saison loi montagne",
       "loi montagne pneus 4 saisons",
       "loi pneu neige",
-      "reglementation pneu neige"
+      "reglementation pneu neige",
+      "loi montagne amende",
+      "loi montagne carte",
+      "loi montagne communes concernées",
+      "loi montagne date",
+      "pneu hivers ou 4 saisons",
+      "pneus toutes saisons"
     ]
   },
   {
@@ -1573,7 +1686,8 @@
       "défaillance majeure contrôle technique",
       "peut on faire plusieurs contre visite",
       "points de contrôle technique véhicule de collection",
-      "une contre visite"
+      "une contre visite",
+      "point pour controle technique"
     ]
   }
 ]

@@ -12,8 +12,8 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant abs ».
-- **13 mots-clés**, dont 11 comptés dans les totaux ; volume indicatif cumulé : 9 164 recherches par mois (plafond, docs/05). 1 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 8 848 ; Symptôme ou panne 316.
+- **17 mots-clés**, dont 15 comptés dans les totaux ; volume indicatif cumulé : 10 428 recherches par mois (plafond, docs/05). 1 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 10 112 ; Symptôme ou panne 316.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
@@ -22,14 +22,18 @@
 | voyant esp | 3 160 | Signification (voyant, code) |  |  |
 | abs defaillant | 316 | Signification (voyant, code) |  |  |
 | defaut abs | 316 | Signification (voyant, code) |  |  |
+| effacer voyant abs sans valise | 316 | Signification (voyant, code) |  |  |
 | esp voiture voyant | 316 | Signification (voyant, code) |  |  |
 | esp voyant | 316 | Signification (voyant, code) |  |  |
 | logo abs | 316 | Signification (voyant, code) |  |  |
 | probleme abs | 316 | Symptôme ou panne |  |  |
 | problème abs | 316 | Symptôme ou panne |  | probleme abs |
+| supprimer voyant abs | 316 | Signification (voyant, code) |  |  |
 | système abs défaillant | 316 | Signification (voyant, code) |  |  |
 | temoin abs | 316 | Signification (voyant, code) |  |  |
 | voyant abs 206 | 316 | Signification (voyant, code) | 206 |  |
+
+Et 2 autres : « voyant orange voiture qui glisse », « voyant orange voiture zig zag ».
 
 ## Décision et sources disponibles
 
@@ -73,6 +77,18 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Supprimer voyant ABS 206 | Recherches associées | Enlever, effacer ou éteindre le voyant ; Marque ou modèle cité |
 | Voyant ABS Toyota Land Cruiser | Recherches associées | Marque ou modèle cité |
 | Si le voyant ABS reste allumé en circulation | Recherches associées |  |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| si le voyant abs reste allumé en circulation | sans donnée | titre de partie ou question possible |
+| supprimer voyant abs 206 | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant abs allumé : que faire | sans donnée | titre de partie ou question possible |
+| voyant abs allumé peut on rouler | sans donnée | titre de partie ou question possible |
+| voyant abs et esp allumé | sans donnée | titre de partie ou question possible |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

@@ -12,11 +12,12 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant airbag ».
-- **15 mots-clés**, dont 15 comptés dans les totaux ; volume indicatif cumulé : 7 584 recherches par mois (plafond, docs/05). 5 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 6 952 ; Symptôme ou panne 316 ; Tutoriel (faire soi-même) 316.
+- **16 mots-clés**, dont 16 comptés dans les totaux ; volume indicatif cumulé : 10 744 recherches par mois (plafond, docs/05). 5 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 10 112 ; Symptôme ou panne 316 ; Tutoriel (faire soi-même) 316.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
+| astuce pour enlever voyant airbag | 3 160 | Signification (voyant, code) |  |  |
 | voyant airbag | 3 160 | Signification (voyant, code) |  |  |
 | connecteur airbag | 316 | Signification (voyant, code) |  |  |
 | connecteur airbag sous siege clio 3 | 316 | Signification (voyant, code) | clio 3 |  |
@@ -31,7 +32,8 @@
 | voyant airbag 206 | 316 | Signification (voyant, code) | 206 |  |
 | voyant airbag désactivé | 316 | Tutoriel (faire soi-même) |  |  |
 | voyant airbag orange | 316 | Signification (voyant, code) |  |  |
-| voyant airbag twingo 1 | 316 | Signification (voyant, code) | twingo |  |
+
+Et 1 autres : « voyant airbag twingo 1 ».
 
 ## Décision et sources disponibles
 
@@ -73,6 +75,20 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Voyant airbag 307 | Recherches associées | Marque ou modèle cité |
 | Voyant airbag 206 allumé pour contrôle technique | Recherches associées | Marque ou modèle cité |
 | Comment enlever le voyant airbag sur 206 | Recherches associées | Enlever, effacer ou éteindre le voyant ; Marque ou modèle cité |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| comment enlever le voyant airbag sur 206 | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant airbag 206 allumé pour contrôle technique | sans donnée | marque ou modèle : ni titre ni partie par modèle |
+| voyant airbag 206 reste allumé | sans donnée | marque ou modèle : ni titre ni partie par modèle |
+| voyant airbag 307 | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant airbag allumé contrôle technique | sans donnée | titre de partie ou question possible |
+| voyant airbag allumé rouge | sans donnée | titre de partie ou question possible |
+| voyant airbag orange allumé | sans donnée | titre de partie ou question possible |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

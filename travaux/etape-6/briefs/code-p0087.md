@@ -13,8 +13,8 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « p0087 ».
-- **15 mots-clés**, dont 15 comptés dans les totaux ; volume indicatif cumulé : 16 116 recherches par mois (plafond, docs/05). 13 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 16 116.
+- **21 mots-clés**, dont 19 comptés dans les totaux ; volume indicatif cumulé : 17 380 recherches par mois (plafond, docs/05). 18 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 17 380.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
@@ -25,14 +25,16 @@
 | audi p0087 | 316 | Signification (voyant, code) | audi |  |
 | audi p008700 | 316 | Signification (voyant, code) | audi |  |
 | citroen p0087 | 316 | Signification (voyant, code) | citroen |  |
+| code défaut p0087 | 316 | Signification (voyant, code) |  |  |
+| code défaut p0087 peugeot | 316 | Signification (voyant, code) | peugeot |  |
 | dtc p0087 citroen | 316 | Signification (voyant, code) | citroen |  |
 | dtc p0087 peugeot | 316 | Signification (voyant, code) | peugeot |  |
+| p0087 audi | 316 | Signification (voyant, code) | audi | audi p0087 |
+| p0087 citroën | 316 | Signification (voyant, code) | citroen | citroen p0087 |
+| p0087 ford | 316 | Signification (voyant, code) | ford |  |
 | p0087 mercedes | 316 | Signification (voyant, code) | mercedes |  |
-| p0087 volkswagen | 316 | Signification (voyant, code) | volkswagen |  |
-| p008700 | 316 | Signification (voyant, code) |  |  |
-| p008700 audi | 316 | Signification (voyant, code) | audi |  |
-| peugeot dtc p0087 | 316 | Signification (voyant, code) | peugeot |  |
-| vw p008700 | 316 | Signification (voyant, code) | vw |  |
+
+Et 6 autres : « p0087 volkswagen », « p0087 vw », « p008700 », « p008700 audi », « peugeot dtc p0087 », « vw p008700 ».
 
 ## Décision et sources disponibles
 
@@ -82,6 +84,14 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 | P0087 Audi | Recherches associées | Marque ou modèle cité |
 | P0087 Renault | Recherches associées | Marque ou modèle cité |
 | P0087 Citroën | Recherches associées | Marque ou modèle cité |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| p0087 renault | 10–100 | marque ou modèle : ni titre ni partie par modèle |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

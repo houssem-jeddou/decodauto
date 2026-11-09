@@ -1,0 +1,75 @@
+{
+  "pages_corrigees": {
+    "perte de puissance 1.6 hdi 110 sans voyant": [
+      "perte-de-puissance",
+      "la requête porte sur la perte de puissance sans voyant, pas sur l'outil voyants"
+    ],
+    "perte de puissance voiture diesel sans voyant allumé": [
+      "perte-de-puissance",
+      "même raison"
+    ],
+    "perte de puissance voiture avec voyant allumé": [
+      "voyant-moteur",
+      "même intention que « voyant moteur et perte de puissance », déjà sur voyant-moteur dans 05"
+    ],
+    "voiture qui ne démarre plus mais les voyants s'allument": [
+      "voiture-ne-demarre-pas",
+      "variante de « ma voiture ne démarre plus mais les voyants s allument », déjà sur cette page dans 05"
+    ],
+    "fap voiture": [
+      "voyant-fap",
+      "FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage"
+    ],
+    "fap voiture essence": [
+      "voyant-fap",
+      "FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage"
+    ],
+    "fap bouché": [
+      "voyant-fap",
+      "FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage"
+    ],
+    "fap 1.6 hdi": [
+      "voyant-fap",
+      "FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage"
+    ],
+    "fap 308 1.6 hdi": [
+      "voyant-fap",
+      "FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage"
+    ],
+    "fap peugeot 308": [
+      "voyant-fap",
+      "FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage"
+    ]
+  },
+  "ecartees": {
+    "fap voiture prix": "requête de prix : les 10 lignes « prix » du FAP de 06 sont hors périmètre (02, règle des prix)"
+  },
+  "mots_generiques": [
+    "voiture",
+    "auto",
+    "automobile",
+    "vehicule"
+  ],
+  "ajout_hors_critere_06": {
+    "gonflement pneu voiture": [
+      "pression-des-pneus",
+      "même fourchette que « gonfler pneu voiture » et même mot sous une autre forme (nom et verbe) : seul cas ajouté par jugement"
+    ]
+  },
+  "formulations_forcees": {
+    "tableau pression pneu voiture": "consigne validée le 03/11 du brief pression-des-pneus : « ni page ni tableau par modèle sans donnée constructeur sourcée » ; la requête y est citée comme hors périmètre"
+  },
+  "intentions": {
+    "problème de batterie voiture symptôme": "Symptôme ou panne",
+    "pourquoi ma voiture consomme du liquide de refroidissement": "Symptôme ou panne",
+    "pourquoi ma voiture consomme de l'huile": "Symptôme ou panne",
+    "fap bouché": "Symptôme ou panne"
+  },
+  "references_06": {
+    "gonflement pneu voiture": "gonfler pneu voiture",
+    "gonfler les pneus voiture": "gonfler pneu voiture"
+  },
+  "modele_par_defaut": {
+    "moteur-puretech": "puretech"
+  }
+}

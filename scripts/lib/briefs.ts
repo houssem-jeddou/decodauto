@@ -62,6 +62,15 @@ export interface Consignes {
   hors_perimetre?: readonly string[] | undefined;
 }
 
+/** Requête suggérée par Google pour la page, hors de docs/05 (demande de changement n° 16) : sans volume mesuré, sous
+ *  100 recherches par mois, ou hors périmètre du brief. Son usage dit ce que le rédacteur peut en faire. */
+export interface Formulation {
+  requete: string;
+  page: string;
+  volume_fourchette: string;
+  usage: string;
+}
+
 export interface EntreeBrief {
   page: PageDuPlan;
   plan: ReadonlyMap<string, PageDuPlan>;
@@ -71,6 +80,7 @@ export interface EntreeBrief {
   sourcesDeLaPage?: { sources: readonly string[]; raison: string } | undefined;
   releve?: Releve | undefined;
   consignes?: Consignes | undefined;
+  formulations?: readonly Formulation[] | undefined;
   /** Chemin de la page exemple rédigée en 6.6, si elle existe, sa question de décision validée et les voyants de la base
    *  repris dans son encadré. */
   exemple?: string | undefined;
@@ -227,6 +237,15 @@ export function genererBrief(e: EntreeBrief): string {
       for (const q of questions) l.push(`| ${echapperTableau(q.texte)} | ${q.origine} | ${q.reperes.map((id) => REPERES_QUESTIONS.find((x) => x.id === id)?.libelle ?? id).join(' ; ')} |`);
       l.push('');
     }
+  }
+
+  // Formulations du lecteur : jamais un objectif de page, et jamais dans docs/05.
+  if ((e.formulations ?? []).length > 0) {
+    l.push('## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)', '');
+    l.push("Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.", '');
+    l.push('| Formulation | Mesure du 09/11/2026 | Usage |', '|---|---|---|');
+    for (const f of e.formulations ?? []) l.push(`| ${echapperTableau(f.requete)} | ${f.volume_fourchette} | ${echapperTableau(f.usage)} |`);
+    l.push('');
   }
 
   // Consignes.

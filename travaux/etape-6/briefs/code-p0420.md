@@ -12,8 +12,8 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « p0420 ».
-- **14 mots-clés**, dont 14 comptés dans les totaux ; volume indicatif cumulé : 10 112 recherches par mois (plafond, docs/05). 10 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 10 112.
+- **17 mots-clés**, dont 16 comptés dans les totaux ; volume indicatif cumulé : 10 744 recherches par mois (plafond, docs/05). 12 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 10 744.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
@@ -24,13 +24,16 @@
 | dtc p0420 ford | 316 | Signification (voyant, code) | ford |  |
 | dtc p0420 renault | 316 | Signification (voyant, code) | renault |  |
 | dtc p0420 toyota | 316 | Signification (voyant, code) | toyota |  |
+| p0420 circuit de catalyseur rendement inférieur au seuil ligne 1 | 316 | Signification (voyant, code) |  |  |
+| p0420 citroen | 316 | Signification (voyant, code) | citroen | citroen p0420 |
 | p0420 ford | 316 | Signification (voyant, code) | ford |  |
 | p0420 peugeot 208 | 316 | Signification (voyant, code) | peugeot |  |
 | p0420 renault | 316 | Signification (voyant, code) | renault |  |
 | p0420 résolu | 316 | Signification (voyant, code) |  |  |
+| p0420 toyota | 316 | Signification (voyant, code) | toyota |  |
 | p0420 vw | 316 | Signification (voyant, code) | vw |  |
-| p0420nissan | 316 | Signification (voyant, code) |  |  |
-| peugeot 208 p0420 | 316 | Signification (voyant, code) | peugeot |  |
+
+Et 2 autres : « p0420nissan », « peugeot 208 p0420 ».
 
 ## Décision et sources disponibles
 

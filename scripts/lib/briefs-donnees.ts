@@ -4,11 +4,22 @@
 import { access, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { FICHIER_05, lireCsv } from '../../src/lib/porte-plan.ts';
-import { genererBrief, genererSommaire, questionDeLExemple, voyantsDeLExemple, type Consignes, type EntreeBrief, type PageDuPlan, type Releve, type VoyantDeLaBase } from './briefs.ts';
+import { genererBrief, genererSommaire, questionDeLExemple, voyantsDeLExemple, type Consignes, type EntreeBrief, type Formulation, type PageDuPlan, type Releve, type VoyantDeLaBase } from './briefs.ts';
 
 export const DOSSIER_BRIEFS = 'travaux/etape-6/briefs';
 export const DOSSIER_RELEVE = 'travaux/etape-6/releve-google-france';
 export const FICHIER_CONSIGNES = `${DOSSIER_BRIEFS}/consignes.json`;
+/** Formulations du lecteur (demande de changement n° 16) : requête, page, mesure et usage ; hors de docs/05. */
+export const FICHIER_FORMULATIONS = `${DOSSIER_BRIEFS}/formulations-du-lecteur.csv`;
+
+export async function lireFormulations(racine: string): Promise<Formulation[]> {
+  return lireCsv(await readFile(join(racine, FICHIER_FORMULATIONS), 'utf8')).map((l) => ({
+    requete: l['requete'] ?? '',
+    page: l['page'] ?? '',
+    volume_fourchette: l['volume_fourchette'] ?? '',
+    usage: l['usage'] ?? '',
+  }));
+}
 
 const lireJson = async <T>(racine: string, chemin: string): Promise<T> => JSON.parse(await readFile(join(racine, chemin), 'utf8')) as T;
 const existe = async (chemin: string): Promise<boolean> =>
@@ -35,6 +46,7 @@ export async function briefsAttendus(racine: string): Promise<{ fichiers: Map<st
   const registre = new Map(sources.map((s) => [s.id, s]));
   const pagesSources = new Map((await lireJson<{ page: string; sources: string[]; raison: string }[]>(racine, 'travaux/etape-5/pages-sources.json')).map((p) => [p.page, p]));
   const consignes = await lireJson<Record<string, Consignes>>(racine, FICHIER_CONSIGNES);
+  const formulations = await lireFormulations(racine);
   const pages = plan.filter((p) => p.vague === 'A');
   const fichiers = new Map<string, string>();
   const releves = new Set<string>();
@@ -52,6 +64,7 @@ export async function briefsAttendus(racine: string): Promise<{ fichiers: Map<st
       sourcesDeLaPage: pagesSources.get(page.id),
       releve,
       consignes: consignes[page.id],
+      formulations: formulations.filter((f) => f.page === page.id),
       ...(await exempleDeLaPage(racine, exemple)),
     };
     fichiers.set(`${DOSSIER_BRIEFS}/${page.id}.md`, genererBrief(entree));

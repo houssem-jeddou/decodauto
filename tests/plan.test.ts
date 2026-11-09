@@ -60,7 +60,7 @@ describe('plan du site réel (data/plan-du-site.json) et mots-clés du périmèt
   test('les mots-clés servis dans une autre vague que celle de docs/05 sont une information, pas une erreur', () => {
     const { informations } = controlerPortePlan(plan, motsCles);
     assert.equal(informations.length, 1);
-    assert.match(informations[0] ?? '', /^10 mot\(s\)-clé\(s\)/);
+    assert.match(informations[0] ?? '', /^11 mot\(s\)-clé\(s\)/);
   });
 
   test('docs/09 est à jour : ses parties générées correspondent au plan et à docs/05 (npm run plan:vue)', async () => {

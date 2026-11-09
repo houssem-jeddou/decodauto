@@ -12,8 +12,8 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « p0299 ».
-- **19 mots-clés**, dont 19 comptés dans les totaux ; volume indicatif cumulé : 14 536 recherches par mois (plafond, docs/05). 15 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 14 536.
+- **22 mots-clés**, dont 21 comptés dans les totaux ; volume indicatif cumulé : 15 168 recherches par mois (plafond, docs/05). 18 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 15 168.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
@@ -23,17 +23,17 @@
 | audi p029900 | 316 | Signification (voyant, code) | audi |  |
 | citroen p0299 | 316 | Signification (voyant, code) | citroen |  |
 | code défaut p0299 | 316 | Signification (voyant, code) |  |  |
+| code défaut p0299 peugeot | 316 | Signification (voyant, code) | peugeot |  |
 | code défaut p0299 volkswagen | 316 | Signification (voyant, code) | volkswagen |  |
+| code défaut p0299 vw | 316 | Signification (voyant, code) | vw |  |
 | ford p0299 | 316 | Signification (voyant, code) | ford |  |
 | mercedes p0299 | 316 | Signification (voyant, code) | mercedes |  |
 | opel p0299 | 316 | Signification (voyant, code) | opel |  |
 | p0299 audi | 316 | Signification (voyant, code) | audi |  |
+| p0299 mercedes | 316 | Signification (voyant, code) | mercedes | mercedes p0299 |
 | p0299 peugeot 1.6 hdi | 316 | Signification (voyant, code) | peugeot |  |
-| p0299 pression de suralimentation faible | 316 | Signification (voyant, code) |  |  |
-| p0299 renault | 316 | Signification (voyant, code) | renault |  |
-| p0299 renault 1.5 dci | 316 | Signification (voyant, code) | renault |  |
 
-Et 4 autres : « p029900 », « p029900 audi », « p029900 volkswagen », « vw p029900 ».
+Et 7 autres : « p0299 pression de suralimentation faible », « p0299 renault », « p0299 renault 1.5 dci », « p029900 », « p029900 audi », « p029900 volkswagen », « vw p029900 ».
 
 ## Décision et sources disponibles
 
@@ -76,6 +76,17 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 | P0299 Peugeot | Recherches associées | Marque ou modèle cité |
 | P0299 pression de suralimentation faible | Recherches associées |  |
 | P0299 a chaud | Recherches associées |  |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| p0299 2.0 tdi | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| p0299 a chaud | sans donnée | titre de partie ou question possible |
+| p0299 hyundai | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| p0299 mazda | 10–100 | marque ou modèle : ni titre ni partie par modèle |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

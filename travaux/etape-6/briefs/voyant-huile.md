@@ -12,8 +12,8 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant huile moteur ».
-- **24 mots-clés**, dont 23 comptés dans les totaux ; volume indicatif cumulé : 44 240 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 43 292 ; Tutoriel (faire soi-même) 948.
+- **29 mots-clés**, dont 28 comptés dans les totaux ; volume indicatif cumulé : 51 508 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 50 560 ; Tutoriel (faire soi-même) 948.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
@@ -21,6 +21,8 @@
 | voyant huile moteur | 31 600 | Signification (voyant, code) |  | huile moteur voyant |
 | logo huile moteur | 3 160 | Signification (voyant, code) |  |  |
 | voyant huile | 3 160 | Signification (voyant, code) |  |  |
+| voyant huile moteur orange | 3 160 | Signification (voyant, code) |  |  |
+| voyant huile moteur rouge | 3 160 | Signification (voyant, code) |  |  |
 | alerte pression huile moteur | 316 | Signification (voyant, code) |  |  |
 | defaut pression huile moteur | 316 | Signification (voyant, code) |  |  |
 | pression huile moteur voyant | 316 | Signification (voyant, code) |  |  |
@@ -30,10 +32,8 @@
 | temoin huile moteur | 316 | Signification (voyant, code) |  |  |
 | voyant d huile | 316 | Signification (voyant, code) |  |  |
 | voyant d huile moteur | 316 | Signification (voyant, code) |  |  |
-| voyant huile rouge | 316 | Signification (voyant, code) |  |  |
-| voyant niveau d huile | 316 | Tutoriel (faire soi-même) |  |  |
 
-Et 9 autres : « voyant niveau huile », « voyant niveau huile moteur », « voyant pression d huile », « voyant pression d huile moteur », « voyant pression huile », « voyant pression huile moteur », « voyant rouge huile », « voyant température huile », « voyant vidange huile moteur ».
+Et 14 autres : « voyant huile moteur rouge clignote », « voyant huile moteur rouge stop », « voyant huile rouge », « voyant niveau d huile », « voyant niveau huile », « voyant niveau huile moteur », « voyant orange voiture huile », « voyant pression d huile », « voyant pression d huile moteur », « voyant pression huile », « voyant pression huile moteur », « voyant rouge huile », « voyant température huile », « voyant vidange huile moteur ».
 
 ## Décision et sources disponibles
 
@@ -77,6 +77,16 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Voyant d'huile qui s'allume mais niveau ok | Recherches associées |  |
 | Voyant huile moteur Volkswagen | Recherches associées | Marque ou modèle cité |
 | Voyant huile moteur rouge stop | Recherches associées |  |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| voyant d'huile qui s'allume mais niveau ok | sans donnée | titre de partie ou question possible |
+| voyant huile moteur volkswagen | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant huile rouge s'allume et s'éteint | sans donnée | titre de partie ou question possible |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

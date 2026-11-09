@@ -9,6 +9,7 @@ Copie des sources de vérité du projet (projet Claude « Site Voiture $$ »), d
 - 02_perimetre_lot_unique.md : périmètre figé
 - 03_plan_avancement_et_regles.md : étapes, portes de sortie, règles anti-régression
 - 04_journal_avancement.md : état d'avancement
+- 04a_archives_livrables_etapes_4_5_6.md, 04b_archives_decisions_jusqu_a_la_porte_6.md, 04c_archives_revues_jusqu_a_la_porte_6.md, 04d_archives_decisions_et_revues_du_04_11.md : archives du journal (sections déplacées le 09/11 et le 10/11/2026 par `travaux/journal/alleger.py` et `archiver.py`, lignes inchangées)
 - 05_mots_cles_perimetre.csv : mots-clés du périmètre
 - 07_resultats_google_serp_autocompletion.md : résultats et suggestions Google relevés (depuis la Tunisie, le 22/10/2026)
 - 08_structure_contenus.md : structure des contenus (types de pages et champs)

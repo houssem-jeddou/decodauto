@@ -12,28 +12,28 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « pression des pneus ».
-- **25 mots-clés**, dont 9 comptés dans les totaux ; volume indicatif cumulé : 56 880 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Information générale 41 080 ; Produit (achat, choix) 15 800.
+- **30 mots-clés**, dont 11 comptés dans les totaux ; volume indicatif cumulé : 88 796 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Produit (achat, choix) 47 400 ; Information générale 41 396.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
+| gonflement pneu voiture | 31 600 | Produit (achat, choix) |  | gonfler pneu voiture |
+| gonfler les pneus voiture | 31 600 | Produit (achat, choix) |  | gonfler pneu voiture |
+| gonfler pneu voiture | 31 600 | Produit (achat, choix) |  |  |
 | pneu pression | 31 600 | Information générale |  |  |
 | pression d un pneu | 31 600 | Information générale |  | pneu pression |
 | pression dans les pneus | 31 600 | Information générale |  | pneu pression |
 | pression des pneus | 31 600 | Information générale |  | pneu pression |
 | pression du pneu | 31 600 | Information générale |  | pneu pression |
+| pression pneu | 31 600 | Information générale |  | pneu pression |
 | pression pneus | 31 600 | Information générale |  | pneu pression |
 | pression pour pneu | 31 600 | Information générale |  | pneu pression |
 | gonflage de pneu voiture | 3 160 | Produit (achat, choix) |  |  |
 | gonflage des pneus | 3 160 | Produit (achat, choix) |  | pneu gonflage |
 | gonflage pneu | 3 160 | Produit (achat, choix) |  |  |
 | gonfler les pneu | 3 160 | Produit (achat, choix) |  | gonfler un pneu |
-| gonfler les pneus | 3 160 | Produit (achat, choix) |  | gonfler un pneu |
-| gonfler un pneu | 3 160 | Produit (achat, choix) |  |  |
-| gonfleur pneu de voiture | 3 160 | Produit (achat, choix) |  |  |
-| pneu gonflage | 3 160 | Produit (achat, choix) |  |  |
 
-Et 10 autres : « pneu remorque pression », « pression des pneu voiture », « pression des pneus à chaud », « pression des pneus pour une remorque », « pression des pneus remorque », « pression pneu à chaud », « pression pneu chaud », « pression pneu pour remorque », « pression pneu remorque », « pression pneu voiture ».
+Et 15 autres : « gonfler les pneus », « gonfler un pneu », « gonfleur pneu de voiture », « pneu gonflage », « pneu remorque pression », « pression des pneu voiture », « pression des pneus à chaud », « pression des pneus pour une remorque », « pression des pneus remorque », « pression pneu à chaud », « pression pneu chaud », « pression pneu pour remorque », « pression pneu remorque », « pression pneu voiture », « vérifier la pression des pneus tous les combien ».
 
 ## Décision et sources disponibles
 
@@ -75,6 +75,16 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 | Pression des pneus autour de moi | Recherches associées |  |
 | Vérifier la pression des pneus tous les combien | Recherches associées |  |
 | Pression des pneus avant et arrière | Recherches associées |  |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| comment vérifier la pression des pneus en station-service | 10–100 | titre de partie ou question possible |
+| pression des pneus avant et arrière | 10–100 | titre de partie ou question possible |
+| tableau pression pneu voiture | 1k–10k | hors périmètre du brief : consigne validée le 03/11 du brief pression-des-pneus : « ni page ni tableau par modèle sans donnée constructeur sourcée » ; la requête y est citée comme hors périmètre |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

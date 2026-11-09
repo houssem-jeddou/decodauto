@@ -13,8 +13,8 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « loi montagne ».
-- **32 mots-clés**, dont 21 comptés dans les totaux ; volume indicatif cumulé : 100 488 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Démarche administrative 83 424 ; Information générale 17 064.
+- **38 mots-clés**, dont 25 comptés dans les totaux ; volume indicatif cumulé : 101 752 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Démarche administrative 84 688 ; Information générale 17 064.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
@@ -34,7 +34,7 @@
 | pneu ete ou 4 saison | 3 160 | Information générale |  |  |
 | pneu hiver obligatoire | 3 160 | Démarche administrative |  | obligation pneu hiver |
 
-Et 17 autres : « pneu hiver reglementation », « pneu m et s », « pneus 4 saison homologué hiver », « pneus 4 saisons ou hiver », « pneus hiver obligation », « pneus hiver ou 4 saisons », « reglementation pneu hiver », « zone pneu neige obligatoire », « zones pneus neige obligatoire », « loi montagne pneus 4 saisons », « loi pneu neige », « meilleur pneu 4 saisons homologué hiver », « pneu 4 saison loi montagne », « pneu quatre saison », « pneu toute saison », « pneus quatre saisons », « reglementation pneu neige ».
+Et 23 autres : « pneu hiver reglementation », « pneu hivers ou 4 saisons », « pneu m et s », « pneus 4 saison homologué hiver », « pneus 4 saisons ou hiver », « pneus hiver obligation », « pneus hiver ou 4 saisons », « reglementation pneu hiver », « zone pneu neige obligatoire », « zones pneus neige obligatoire », « loi montagne amende », « loi montagne carte », « loi montagne communes concernées », « loi montagne date », « loi montagne pneus 4 saisons », « loi pneu neige », « meilleur pneu 4 saisons homologué hiver », « pneu 4 saison loi montagne », « pneu quatre saison », « pneu toute saison », « pneus quatre saisons », « pneus toutes saisons », « reglementation pneu neige ».
 
 ## Décision et sources disponibles
 
@@ -74,6 +74,16 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 | Loi Montagne communes concernées | Recherches associées |  |
 | Loi Montagne carte | Recherches associées |  |
 | Loi Montagne pneu | Recherches associées |  |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| loi montagne 2 2016 | sans donnée | titre de partie ou question possible |
+| loi montagne 2026 verbalisation | 10–100 | titre de partie ou question possible |
+| loi montagne 3 | 10–100 | titre de partie ou question possible |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
