@@ -709,6 +709,7 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
 - **Parc par marque** : non publié par le SDES ; les immatriculations 2025 en tiennent lieu.
 - **Annonces automatiques AdSense** (étape 12) : insérées dans le navigateur, invisibles pour le contrôle ; vérifier à la recette qu'elles ne précèdent pas l'encadré.
 - **Requêtes absentes de 06** : livrable 8.2 lancé le 09/11. 325 suggestions et recherches associées relevées absentes de 06, 177 à mesurer, 147 écartées (`travaux/etape-8/requetes-absentes/`). La mesure attend un export Keyword Planner. Le rattachement des requêtes identiques classées hors périmètre (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture » et environ 38 lignes) se fait dans la même demande ; son critère reste à écrire.
+- **Journal du projet** (09/11) : le fichier pèse environ 53 000 jetons et n'a pas pu être envoyé au projet (une lecture est limitée à 25 000 jetons, et l'envoi exige une lecture en une fois). Le journal du projet en est resté à 22 h 30 ; cette copie `docs/04` est la version à jour, signalée dans le point de reprise du projet. Proposé à Houssem : déplacer les étapes closes, l'historique ancien et les revues dans des documents d'archives.
 - **Semrush** (09/11) : un connecteur est présent dans la session ; le compte a un abonnement actif mais pas d'unités d'API, donc aucune mesure par ce moyen.
 - **Statut et AdSense** : AdSense paie en Tunisie par virement. Statut juridique tranché par Houssem le 09/11 (22 h 49) : il déclare l'avoir vérifié, recettes publicitaires comprises ; Claude ne l'a pas contrôlé.
 - **Règlement européen sur l'IA (article 50)** : traité par la charte (6.2, §5.1) : l'IA est signalée sur toutes les pages, sans s'appuyer sur l'exception de relecture humaine. La portée pour un éditeur hors de l'Union est réglée par les lignes directrices C(2026) 5054, §13 (lues dans un résumé). Restent incertains : la « question d'intérêt public », la date d'application des lignes directrices et le texte officiel sur la compétence du relecteur.
@@ -734,7 +735,6 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
   - garantie légale : lire l'article L217-3 en entier (voitures d'occasion) ;
   - documents de la SRA non lus (accès refusé).
 - **Branches anciennes** du dépôt (`claude/great-fermat-txuonc`, `docs/porte-etape-3`, et les branches fusionnées de l'étape 6, dont `etape-6/releve-google-france`) : peuvent être supprimées.
-- **Tag de l'étape 6** : `etape-6-charte-modeles`, sur 77bea5e (fusion de la PR #20), demandé par Houssem le 04/11 ; refusé par le proxy de la session : posé par Houssem depuis son poste (mode d'emploi du 09/11). À vérifier à la prochaine session.
 
 ## Idées reportées
 - Champ « autres couleurs » dans la base voyants, pour qu'une ligne dont la couleur varie selon la voiture (airbag, AdBlue) apparaisse sous les deux filtres de l'outil : par une demande de changement (paquet 8.1, décision 7). En attendant, l'aide du filtre le dit.
