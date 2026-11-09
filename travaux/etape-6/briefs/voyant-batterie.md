@@ -12,14 +12,15 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant batterie ».
-- **4 mots-clés**, dont 4 comptés dans les totaux ; volume indicatif cumulé : 4 108 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 3 792 ; Symptôme ou panne 316.
+- **5 mots-clés**, dont 5 comptés dans les totaux ; volume indicatif cumulé : 4 424 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 4 108 ; Symptôme ou panne 316.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
 | voyant batterie | 3 160 | Signification (voyant, code) |  |  |
 | voyant alternateur | 316 | Signification (voyant, code) |  |  |
 | voyant batterie clignote | 316 | Symptôme ou panne |  |  |
+| voyant batterie rouge avant démarrage | 316 | Signification (voyant, code) |  |  |
 | voyant batterie voiture | 316 | Signification (voyant, code) |  |  |
 
 ## Décision et sources disponibles
@@ -62,6 +63,18 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Voyant batterie allumé alternateur ok | Recherches associées |  |
 | Problème de batterie voiture symptôme | Recherches associées |  |
 | Voyant batterie berlingo | Recherches associées | Marque ou modèle cité |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| voyant batterie allumé | sans donnée | titre de partie ou question possible |
+| voyant batterie allumé alternateur ok | sans donnée | titre de partie ou question possible |
+| voyant batterie allumé avec batterie neuve | sans donnée | titre de partie ou question possible |
+| voyant batterie berlingo | sans donnée | marque ou modèle : ni titre ni partie par modèle |
+| voyant batterie faible voiture | 10–100 | titre de partie ou question possible |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

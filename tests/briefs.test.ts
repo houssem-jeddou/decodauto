@@ -7,8 +7,8 @@ import { readdir, readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { DOSSIER_BRIEFS, DOSSIER_RELEVE, briefsAttendus } from '../scripts/lib/briefs-donnees.ts';
-import { lireCsv, FICHIER_05 } from '../src/lib/porte-plan.ts';
+import { DOSSIER_BRIEFS, DOSSIER_RELEVE, briefsAttendus, lireFormulations } from '../scripts/lib/briefs-donnees.ts';
+import { lireCsv, FICHIER_05, signature } from '../src/lib/porte-plan.ts';
 import {
   dateDuReleve,
   genererBrief,
@@ -31,9 +31,27 @@ describe('briefs de la vague A (6.8)', () => {
     }
   });
 
-  test('le dossier ne contient que les briefs générés et consignes.json', async () => {
+  test('formulations du lecteur : page du plan, usage écrit, hors de docs/05, jamais l\'intention d\'une autre page (demande n° 16)', async () => {
+    const formulations = await lireFormulations(racine);
+    const plan = JSON.parse(await readFile(join(racine, 'data', 'plan-du-site.json'), 'utf8')) as { id: string; mots_cles: string[] }[];
+    const pageDuMot = new Map(plan.flatMap((p) => p.mots_cles.map((m) => [m, p.id] as const)));
+    const pagesDeLaSignature = new Map<string, Set<string>>();
+    for (const [mot, page] of pageDuMot) pagesDeLaSignature.set(signature(mot), new Set([...(pagesDeLaSignature.get(signature(mot)) ?? []), page]));
+    assert.ok(formulations.length > 0);
+    assert.equal(new Set(formulations.map((f) => f.requete)).size, formulations.length, 'formulation en double');
+    for (const f of formulations) {
+      assert.ok(plan.some((p) => p.id === f.page), `« ${f.requete} » : page inconnue du plan (${f.page})`);
+      assert.notEqual(f.usage, '', `« ${f.requete} » : usage absent`);
+      assert.notEqual(f.volume_fourchette, '', `« ${f.requete} » : mesure absente`);
+      assert.ok(!pageDuMot.has(f.requete), `« ${f.requete} » est un mot-clé de docs/05 : elle n'a pas sa place parmi les formulations`);
+      const ailleurs = [...(pagesDeLaSignature.get(signature(f.requete)) ?? [])].filter((p) => p !== f.page);
+      assert.deepEqual(ailleurs, [], `« ${f.requete} » (${f.page}) a l'intention d'un mot-clé rangé sur une autre page`);
+    }
+  });
+
+  test('le dossier ne contient que les briefs générés, consignes.json et les formulations du lecteur', async () => {
     const presents = (await readdir(join(racine, DOSSIER_BRIEFS))).sort();
-    const prevus = [...[...attendus.fichiers.keys()].map((c) => c.slice(DOSSIER_BRIEFS.length + 1)), 'consignes.json'].sort();
+    const prevus = [...[...attendus.fichiers.keys()].map((c) => c.slice(DOSSIER_BRIEFS.length + 1)), 'consignes.json', 'formulations-du-lecteur.csv'].sort();
     assert.deepEqual(presents, prevus);
   });
 

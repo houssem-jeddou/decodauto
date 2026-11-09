@@ -12,14 +12,16 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « p0380 ».
-- **15 mots-clés**, dont 15 comptés dans les totaux ; volume indicatif cumulé : 13 272 recherches par mois (plafond, docs/05). 13 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 13 272.
+- **17 mots-clés**, dont 17 comptés dans les totaux ; volume indicatif cumulé : 13 904 recherches par mois (plafond, docs/05). 14 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 13 904.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
 | dtc p0380 renault | 3 160 | Signification (voyant, code) | renault |  |
 | p0380 | 3 160 | Signification (voyant, code) |  |  |
 | p0380 renault | 3 160 | Signification (voyant, code) | renault |  |
+| code défaut p0380 | 316 | Signification (voyant, code) |  |  |
+| code défaut p0380 renault | 316 | Signification (voyant, code) | renault |  |
 | code p0380 | 316 | Signification (voyant, code) |  |  |
 | dtc p0380 dacia | 316 | Signification (voyant, code) | dacia |  |
 | dtc p0380 ford | 316 | Signification (voyant, code) | ford |  |
@@ -30,8 +32,8 @@
 | p0380 ford | 316 | Signification (voyant, code) | ford |  |
 | p0380 nissan | 316 | Signification (voyant, code) | nissan |  |
 | p0380 nissan qashqai | 316 | Signification (voyant, code) | nissan |  |
-| p0380 peugeot | 316 | Signification (voyant, code) | peugeot |  |
-| p0380 renault 1.5 dci | 316 | Signification (voyant, code) | renault |  |
+
+Et 2 autres : « p0380 peugeot », « p0380 renault 1.5 dci ».
 
 ## Décision et sources disponibles
 
@@ -74,6 +76,15 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 | P0380 Peugeot 307 2.0 HDi | Recherches associées | Marque ou modèle cité |
 | P0400 peugeot | Recherches associées | Marque ou modèle cité |
 | DTC P0101 peugeot | Recherches associées | Marque ou modèle cité |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| p0380 peugeot 1.6 hdi | sans donnée | marque ou modèle : ni titre ni partie par modèle |
+| p0380 peugeot 307 2.0 hdi | 10–100 | marque ou modèle : ni titre ni partie par modèle |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

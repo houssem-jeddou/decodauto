@@ -12,8 +12,8 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant adblue ».
-- **15 mots-clés**, dont 15 comptés dans les totaux ; volume indicatif cumulé : 7 584 recherches par mois (plafond, docs/05). 4 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 7 584.
+- **16 mots-clés**, dont 16 comptés dans les totaux ; volume indicatif cumulé : 7 900 recherches par mois (plafond, docs/05). 5 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 7 900.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
@@ -28,10 +28,12 @@
 | voyant adblue et voyant moteur | 316 | Signification (voyant, code) |  |  |
 | voyant adblue peugeot | 316 | Signification (voyant, code) | peugeot |  |
 | voyant adblue peugeot 208 | 316 | Signification (voyant, code) | peugeot |  |
+| voyant adblue renault | 316 | Signification (voyant, code) | renault |  |
 | voyant moteur adblue | 316 | Signification (voyant, code) |  |  |
 | voyant urea défaut moteur | 316 | Signification (voyant, code) |  |  |
 | voyant urea peugeot | 316 | Signification (voyant, code) | peugeot |  |
-| voyant urea peugeot 308 | 316 | Signification (voyant, code) | peugeot |  |
+
+Et 1 autres : « voyant urea peugeot 308 ».
 
 ## Décision et sources disponibles
 
@@ -74,6 +76,14 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | AdBlue ça sert à quoi | Recherches associées |  |
 | AdBlue voiture | Recherches associées |  |
 | AdBlue station | Recherches associées |  |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| voyant adblue reste allumé après remplissage | sans donnée | titre de partie ou question possible |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

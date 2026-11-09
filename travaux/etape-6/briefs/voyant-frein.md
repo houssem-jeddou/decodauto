@@ -12,8 +12,8 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant frein ».
-- **20 mots-clés**, dont 19 comptés dans les totaux ; volume indicatif cumulé : 20 224 recherches par mois (plafond, docs/05). 3 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 20 224.
+- **21 mots-clés**, dont 20 comptés dans les totaux ; volume indicatif cumulé : 20 540 recherches par mois (plafond, docs/05). 3 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 20 540.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
@@ -31,9 +31,9 @@
 | temoin usure plaquette | 316 | Signification (voyant, code) |  |  |
 | temoin usure plaquette frein | 316 | Signification (voyant, code) |  |  |
 | voyant frein à main | 316 | Signification (voyant, code) |  |  |
-| voyant frein voiture | 316 | Signification (voyant, code) |  |  |
+| voyant frein orange | 316 | Signification (voyant, code) |  |  |
 
-Et 5 autres : « voyant plaquette », « voyant plaquette de frein bmw », « voyant plaquette de frein rouge », « voyant plaquette de frein volkswagen », « voyant usure plaquette de frein ».
+Et 6 autres : « voyant frein voiture », « voyant plaquette », « voyant plaquette de frein bmw », « voyant plaquette de frein rouge », « voyant plaquette de frein volkswagen », « voyant usure plaquette de frein ».
 
 ## Décision et sources disponibles
 
@@ -75,6 +75,17 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Peut on rouler avec le voyant plaquette de frein | Recherches associées | Peut-on rouler, combien de kilomètres |
 | Voyant frein orange | Recherches associées |  |
 | Voyant frein BMW | Recherches associées | Marque ou modèle cité |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| peut on rouler avec le voyant plaquette de frein | 10–100 | titre de partie ou question possible |
+| voyant frein bmw | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant liquide de frein insuffisant | 10–100 | titre de partie ou question possible |
+| voyant plaquette de frein reste allumé | sans donnée | titre de partie ou question possible |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

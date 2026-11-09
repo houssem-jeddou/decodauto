@@ -12,26 +12,28 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « p1351 ».
-- **15 mots-clés**, dont 15 comptés dans les totaux ; volume indicatif cumulé : 18 960 recherches par mois (plafond, docs/05). 11 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 18 960.
+- **17 mots-clés**, dont 16 comptés dans les totaux ; volume indicatif cumulé : 19 276 recherches par mois (plafond, docs/05). 13 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 19 276.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
 | citroen p1351 | 3 160 | Signification (voyant, code) | citroen |  |
 | dtc p1351 peugeot | 3 160 | Signification (voyant, code) | peugeot |  |
 | p1351 | 3 160 | Signification (voyant, code) |  |  |
+| p1351 citroën | 3 160 | Signification (voyant, code) | citroen | citroen p1351 |
 | p1351 peugeot | 3 160 | Signification (voyant, code) | peugeot |  |
 | p1351 peugeot 1.6 hdi | 3 160 | Signification (voyant, code) | peugeot |  |
 | citroen code p1351 | 316 | Signification (voyant, code) | citroen |  |
 | code defaut p1351 | 316 | Signification (voyant, code) |  |  |
 | code défaut p1351 | 316 | Signification (voyant, code) |  |  |
+| code défaut p1351 citroën | 316 | Signification (voyant, code) | citroën |  |
 | code défaut p1351 peugeot | 316 | Signification (voyant, code) | peugeot |  |
 | dtc p1351 | 316 | Signification (voyant, code) |  |  |
 | dtc p1351 citroen | 316 | Signification (voyant, code) | citroen |  |
 | p1351 citroen 1.6 hdi | 316 | Signification (voyant, code) | citroen |  |
 | p1351 citroen c3 1.4 hdi | 316 | Signification (voyant, code) | citroen |  |
-| p1351 peugeot 1.4 hdi | 316 | Signification (voyant, code) | peugeot |  |
-| p1351 peugeot 2.0 hdi | 316 | Signification (voyant, code) | peugeot |  |
+
+Et 2 autres : « p1351 peugeot 1.4 hdi », « p1351 peugeot 2.0 hdi ».
 
 ## Décision et sources disponibles
 
@@ -72,6 +74,18 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 | P1351 Citroën C3 | Recherches associées | Marque ou modèle cité |
 | P1351 2.0 hdi | Recherches associées | Marque ou modèle cité |
 | P1351 Toyota | Recherches associées | Marque ou modèle cité |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| p1351 1.4 hdi | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| p1351 2.0 hdi | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| p1351 citroën c3 | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| p1351 mercedes | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| p1351 toyota | 10–100 | marque ou modèle : ni titre ni partie par modèle |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

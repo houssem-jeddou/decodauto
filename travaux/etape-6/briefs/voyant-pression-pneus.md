@@ -12,13 +12,14 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant pression pneu ».
-- **14 mots-clés**, dont 14 comptés dans les totaux ; volume indicatif cumulé : 10 112 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 10 112.
+- **18 mots-clés**, dont 17 comptés dans les totaux ; volume indicatif cumulé : 11 060 recherches par mois (plafond, docs/05). 2 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 11 060.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
 | voyant pneumatique | 3 160 | Signification (voyant, code) |  |  |
 | voyant pression pneu | 3 160 | Signification (voyant, code) |  |  |
+| comment enlever le voyant pression pneu | 316 | Signification (voyant, code) |  |  |
 | logo pression des pneus | 316 | Signification (voyant, code) |  |  |
 | pneu sous gonflé voyant | 316 | Signification (voyant, code) |  |  |
 | pression des pneus voyant | 316 | Signification (voyant, code) |  |  |
@@ -30,7 +31,9 @@
 | voyant orange pression pneu | 316 | Signification (voyant, code) |  |  |
 | voyant pneu crevé | 316 | Signification (voyant, code) |  |  |
 | voyant pression de pneu | 316 | Signification (voyant, code) |  |  |
-| voyant pression pneu mais bonne pression | 316 | Signification (voyant, code) |  |  |
+| voyant pression pneu clio 4 | 316 | Signification (voyant, code) | clio 4 |  |
+
+Et 3 autres : « voyant pression pneu mais bonne pression », « voyant pression pneu orange », « voyant pression pneu renault ».
 
 ## Décision et sources disponibles
 
@@ -69,6 +72,16 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Voyant pression pneu toujours allumé Volkswagen | Recherches associées | Marque ou modèle cité |
 | Voyant pression pneu Clio 4 | Recherches associées | Marque ou modèle cité |
 | Voyant pression pneu combien de temps | Recherches associées |  |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| voyant pression pneu combien de temps | 10–100 | titre de partie ou question possible |
+| voyant pression pneu toujours allumé | sans donnée | titre de partie ou question possible |
+| voyant pression pneu toujours allumé volkswagen | sans donnée | marque ou modèle : ni titre ni partie par modèle |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

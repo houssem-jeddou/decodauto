@@ -27,11 +27,12 @@
 - **v9, 09/11/2026** : demande de changement n° 14 acceptée par Houssem avec le livrable 7.2. Étape 7 : mesure d'audience sans traceur à la mise en ligne (Search Console, Bing Webmaster Tools, statistiques de Cloudflare) ; un outil dédié, exempté de consentement d'après les critères de la CNIL, ne s'ajoute que si le besoin apparaît, politique de confidentialité mise à jour d'abord ; Web Analytics de Cloudflare désactivé ; la porte gagne un critère : aucun script ni cookie sur la page servie. Aucun critère retiré.
 - **v8, 04/11/2026** : demande de changement n° 11 acceptée par Houssem avec la porte de l'étape 6. Le modèle de l'outil voyants (variante du type voyant) est livré à l'étape 8, comme premier livrable ; la porte de l'étape 8 gagne un critère sur l'outil (généré depuis la base, gravité écrite, lien « Signaler une erreur », filtre par couleur, lisible sans JavaScript, page validée). Aucun critère retiré.
 - **v10, 09/11/2026** : demande de changement n° 15 acceptée par Houssem (option A). Porte de l'étape 9, critères « Avant » : restent le go / no-go, la double authentification de Google, GitHub, OVH et Cloudflare, et le verrou de transfert du domaine ; s'ajoute un contrôle de la CI qui refuse de déployer un commit de `main` ne venant pas d'une pull request fusionnée. Sont reportés après la mise en ligne, à trancher par Houssem (journal, « Reporté après la mise en ligne ») : GitHub Pro et la branche `main` protégée, la double authentification Microsoft (Bing), le renouvellement automatique du domaine. Chaque report a son motif et son risque écrits dans la demande ; la date n'en est pas un (règle 2).
+- **v11, 10/11/2026** : demande de changement n° 16 acceptée par Houssem (requêtes absentes de 06, livrable 8.2). Règle 1 et ligne de l'étape 1 : 05 passe en v3 (1 167 mots-clés) et 06 en v2 ; les fichiers CSV du projet sont la source des mots-clés, la base Excel v1.1 en est la version d'origine. Aucune étape, aucune porte et aucune autre règle ne change.
 
 L'état réel d'avancement et la prévision des étapes sont dans 04_journal_avancement.md.
 
 ## Règles anti-régression (non négociables)
-1. **Une source de vérité par sujet.** Mots-clés et périmètre : 02_perimetre_lot_unique.md et 05_mots_cles_perimetre.csv, issus de la base Excel v1.1. Chaque étape crée sa propre source : plan du site, registre des sources, base voyants, charte éditoriale. Tout le reste en découle ; rien n'est recopié à la main.
+1. **Une source de vérité par sujet.** Mots-clés et périmètre : 02_perimetre_lot_unique.md et 05_mots_cles_perimetre.csv, issus de la base Excel v1.1 et complétés par la demande de changement n° 16 (05 v3 et 06 v2 : les fichiers CSV du projet sont désormais la source des mots-clés). Chaque étape crée sa propre source : plan du site, registre des sources, base voyants, charte éditoriale. Tout le reste en découle ; rien n'est recopié à la main.
 2. **Une porte de sortie par étape** : critères mesurables vérifiés avec preuve, revue par un agent indépendant, validation de Houssem.
    - On ne passe pas à l'étape suivante sans ces trois éléments.
    - Une date ne justifie jamais d'alléger une porte.
@@ -68,7 +69,7 @@ L'état réel d'avancement et la prévision des étapes sont dans 04_journal_ava
 ## Étapes
 | # | Étape | Livrable | Porte de sortie | Cible |
 |---|---|---|---|---|
-| 1 | Mots-clés | Base Excel v1.1 | Figée | ✅ 22/10 |
+| 1 | Mots-clés | Base Excel v1.1 ; 05 v3 et 06 v2 depuis la demande de changement n° 16 (10/11) | Figée | ✅ 22/10 |
 | 2 | Périmètre | Périmètre lot unique | Figé | ✅ 22/10 |
 | 3 | Fondations | Nom de domaine et marque vérifiés, choix technique et hébergement, structure des contenus (champs de chaque type de page), dépôt Git distant privé, Search Console et Bing | Site vide en ligne et non indexable, contrôles automatiques au vert | ✅ 23/10 |
 | 4 | Plan du site | Chaque mot-clé du périmètre rattaché à une seule page ; adresses (URL), hiérarchie des 4 thèmes, liens entre pages | 100 % des mots-clés rattachés, zéro doublon d'intention (vérifié par script), revue indépendante | ✅ 23/10 |

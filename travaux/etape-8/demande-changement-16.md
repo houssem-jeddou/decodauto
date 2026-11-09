@@ -1,6 +1,6 @@
 # Demande de changement n° 16 : requêtes absentes de 06 (livrable 8.2)
 
-Proposée le 10/11/2026, après une revue indépendante. **Rien n'est appliqué** : 05, 06, le plan et les briefs sont inchangés tant que Houssem n'a pas accepté.
+**Acceptée par Houssem le 10/11/2026 (0 h 26)** : « oui aux cinq, selon tes recommandations ». Proposée le même jour, après une revue indépendante. Appliquée sur la branche `etape-8/requetes-absentes` (PR #23) : voir « Application » en fin de document.
 
 ## Élément concerné
 - `05_mots_cles_perimetre_v2.csv` (figé le 22/10, v2 du 23/10) et `06_base_mots_cles_complete.csv` ;
@@ -129,3 +129,11 @@ C'est la demande prévue par 03 (étape 8 : « requêtes absentes de 06 mesurée
 3. Critère des lignes de 06 (10 lignes) et ajout par jugement de « gonflement pneu voiture ».
 4. Comptage selon la convention de 05 : aucune variante comptée (totaux prudents).
 5. Requêtes principales inchangées ; trois pages des vagues B et C revues à leur brief.
+
+## Application (10/11/2026)
+- `docs/05_mots_cles_perimetre.csv` : v3 (1 167 mots-clés) ; `data/plan-du-site.json` : mots-clés ajoutés à 32 pages ; `docs/09` régénéré (`npm run plan:vue`), cas limite 1 corrigé à la main (9 mots-clés).
+- `docs/02` : comptes et volumes recalculés par `requetes-absentes/chiffres_02.py`, qui retrouve d'abord les chiffres d'avant depuis les fichiers d'avant (ligne des chiffres clés, 9 blocs, 2 lignes du tableau « Hors périmètre »). Les « requêtes phares » ne sont pas régénérées (l'ordre des égalités de la base Excel ne se retrouve pas) : « puretech » et « gonfler pneu voiture » y sont ajoutées à la main, le reste est inchangé.
+- `docs/03` : v11 (règle 1 et ligne de l'étape 1 : les CSV sont la source des mots-clés).
+- Briefs : `travaux/etape-6/briefs/formulations-du-lecteur.csv` (73 lignes), section « Formulations du lecteur » du générateur, briefs régénérés ; un test de plus (`tests/briefs.test.ts`). `tests/plan.test.ts` : 11 mots-clés servis dans une autre vague.
+- 05 v3 et 06 v2 sont à charger dans le projet par Houssem (fichiers de `requetes-absentes/propose/`).
+- `proposer.ts` se lance sur l'état d'avant l'application (commit d4ff0a0) : après elle, 05 contient déjà les ajouts.

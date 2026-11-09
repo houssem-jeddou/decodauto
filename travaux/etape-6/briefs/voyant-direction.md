@@ -11,13 +11,14 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant volant orange ».
-- **2 mots-clés**, dont 2 comptés dans les totaux ; volume indicatif cumulé : 3 476 recherches par mois (plafond, docs/05). 0 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 3 476.
+- **3 mots-clés**, dont 3 comptés dans les totaux ; volume indicatif cumulé : 3 792 recherches par mois (plafond, docs/05). 1 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 3 792.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
 | voyant volant orange | 3 160 | Signification (voyant, code) |  |  |
 | voyant rouge volant | 316 | Signification (voyant, code) |  |  |
+| voyant volant orange volkswagen | 316 | Signification (voyant, code) | volkswagen |  |
 
 ## Décision et sources disponibles
 
@@ -60,6 +61,20 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Voyant volant orange Seat Ibiza | Recherches associées | Marque ou modèle cité |
 | Voyant volant orange Clio 2 | Recherches associées | Marque ou modèle cité |
 | Voyant volant orange touran | Recherches associées | Marque ou modèle cité |
+
+## Formulations du lecteur, hors de docs/05 (demande de changement n° 16)
+
+Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherches par mois. Elles ne sont pas un objectif de page : leur usage dit ce que le rédacteur peut en faire.
+
+| Formulation | Mesure du 09/11/2026 | Usage |
+|---|---|---|
+| voyant volant orange audi | sans donnée | marque ou modèle : ni titre ni partie par modèle |
+| voyant volant orange bmw | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant volant orange clio 2 | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant volant orange golf 5 | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant volant orange polo | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant volant orange seat ibiza | 10–100 | marque ou modèle : ni titre ni partie par modèle |
+| voyant volant orange touran | 10–100 | marque ou modèle : ni titre ni partie par modèle |
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

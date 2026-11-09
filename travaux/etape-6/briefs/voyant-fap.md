@@ -12,28 +12,28 @@
 ## Requête et mots-clés (plan du site, docs/05)
 
 - **Requête principale** : « voyant fap ».
-- **18 mots-clés**, dont 18 comptés dans les totaux ; volume indicatif cumulé : 11 376 recherches par mois (plafond, docs/05). 8 citent une marque ou un modèle.
-- **Intentions** (volume compté) : Signification (voyant, code) 11 060 ; Tutoriel (faire soi-même) 316.
+- **24 mots-clés**, dont 24 comptés dans les totaux ; volume indicatif cumulé : 18 960 recherches par mois (plafond, docs/05). 11 citent une marque ou un modèle.
+- **Intentions** (volume compté) : Signification (voyant, code) 15 484 ; Symptôme ou panne 3 160 ; Tutoriel (faire soi-même) 316.
 
 | Mot-clé | Volume indicatif | Intention | Modèle cité | Variante de |
 |---|---|---|---|---|
+| fap bouché | 3 160 | Symptôme ou panne |  |  |
+| fap voiture | 3 160 | Signification (voyant, code) |  |  |
 | filtre a particule voyant | 3 160 | Signification (voyant, code) |  |  |
 | voyant fap | 3 160 | Signification (voyant, code) |  |  |
+| fap 1.6 hdi | 316 | Signification (voyant, code) | 1.6 hdi |  |
+| fap 308 1.6 hdi | 316 | Signification (voyant, code) | 308 |  |
 | fap moteur essence | 316 | Tutoriel (faire soi-même) |  |  |
+| fap peugeot 308 | 316 | Signification (voyant, code) | peugeot |  |
+| fap voiture essence | 316 | Signification (voyant, code) |  |  |
 | fap voiture voyant | 316 | Signification (voyant, code) |  |  |
 | fap voyant | 316 | Signification (voyant, code) |  |  |
 | temoin fap | 316 | Signification (voyant, code) |  |  |
 | témoin fap | 316 | Signification (voyant, code) |  |  |
 | voyant fap audi a3 | 316 | Signification (voyant, code) | audi |  |
 | voyant fap bmw | 316 | Signification (voyant, code) | bmw |  |
-| voyant fap bmw serie 1 | 316 | Signification (voyant, code) | bmw |  |
-| voyant fap golf 6 | 316 | Signification (voyant, code) | golf |  |
-| voyant fap peugeot | 316 | Signification (voyant, code) | peugeot |  |
-| voyant fap renault | 316 | Signification (voyant, code) | renault |  |
-| voyant fap voiture | 316 | Signification (voyant, code) |  |  |
-| voyant fap volkswagen | 316 | Signification (voyant, code) | volkswagen |  |
 
-Et 3 autres : « voyant filtre a particule golf 7 », « voyant moteur fap », « voyant regeneration fap ».
+Et 9 autres : « voyant fap bmw serie 1 », « voyant fap golf 6 », « voyant fap peugeot », « voyant fap renault », « voyant fap voiture », « voyant fap volkswagen », « voyant filtre a particule golf 7 », « voyant moteur fap », « voyant regeneration fap ».
 
 ## Décision et sources disponibles
 
