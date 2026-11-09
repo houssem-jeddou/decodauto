@@ -1,0 +1,325 @@
+07	voyant moteur	3	voyant moteur orange allumé
+07	voyant moteur	4	voyant moteur allumé
+07	voyant moteur	5	voyant moteur rouge
+07	voyant moteur	9	voyant moteur allumé avec perte de puissance
+07	voyant	4	voyant voiture
+07	voyant	5	voyante autour de moi
+07	voyant	6	voyante tunis
+07	voyant	9	voyant liquide de refroidissement
+07	voyant	10	voyante
+07	code défaut p0	1	code défaut p0380 renault
+07	code défaut p0	3	code défaut p0380
+07	code défaut p0	4	code défaut p0087 peugeot
+07	code défaut p0	5	code défaut p0299 vw
+07	code défaut p0	6	code défaut p0087
+07	code défaut p0	7	code défaut p0299 peugeot
+07	code défaut p0	8	code défaut p0101
+07	code défaut p0	9	code défaut p0670 renault
+07	code défaut p0	10	code défaut p0113 peugeot
+07	code défaut	5	code défaut p1351 citroën
+07	code défaut	7	code défaut daikin
+07	code défaut	10	code défaut hitachi climatisation
+07	voiture qui	6	voiture qui fume blanc
+07	voiture qui	7	voiture qui fume noir
+07	voiture qui	10	voiture qui ne démarre plus mais les voyants s'allument
+07	voiture ne	1	voiture neuve pas cher
+07	voiture ne	2	voiture neuve
+07	voiture ne	3	voiture neuve la moins chère
+07	voiture ne	5	voiture nemo
+07	voiture ne	6	voiture neuve 10000 euros
+07	voiture ne	7	voiture new beetle
+07	voiture ne	8	voiture neuve la moins chère 2026
+07	voiture ne	9	voiture neuve la moins chère sans apport
+07	voiture ne	10	voiture neuf
+07	vidange	2	vidange
+07	vidange	3	vidange boite automatique
+07	vidange	4	vidange carter cash
+07	vidange	6	vidange autour de moi
+07	vidange	7	vidange ariana
+07	vidange	8	vidange machine à laver
+07	vidange	10	vidange boite de vitesse
+07	courroie de distribution	1	courroie de distribution
+07	courroie de distribution	3	courroie de distribution quand changer
+07	courroie de distribution	4	courroie de distribution tous les combien
+07	courroie de distribution	7	courroie de distribution c3
+07	courroie de distribution	8	courroie de distribution changement
+07	courroie de distribution	9	courroie de distribution clio 3
+07	batterie voiture	2	batterie voiture ariana
+07	batterie voiture	6	batterie voiture leclerc
+07	batterie voiture	9	batterie voiture electrique enfant
+07	fap	1	fap voiture
+07	fap	2	fap bouché
+07	fap	3	fap 1.6 hdi
+07	fap	4	fapim
+07	fap	6	fap voiture prix
+07	fap	7	fap voiture essence
+07	fap	8	fap peugeot 308
+07	fap	9	fapagau gauchy
+07	fap	10	fap 308 1.6 hdi
+07	adblue	3	adblue autour de moi
+07	adblue	5	adblue c'est quoi
+07	adblue	7	adblue anti cristallisation
+07	adblue	8	adblue norauto
+07	adblue	9	adblue désherbant
+07	adblue	10	adblue station
+07	pression pneu	1	pression pneu
+07	pression pneu	4	pression pneu velo route
+07	crit air	2	crit air paris
+07	crit air	4	crit air strasbourg
+07	crit air	6	crit air lyon
+07	crit air	8	crit air 1
+07	crit air	9	crit air toulouse
+07	crit air	10	crit air jaune
+07	carte grise	1	carte grise
+07	carte grise	3	carte grise autour de moi
+07	carte grise	4	carte grise tunis
+07	carte grise	5	carte grise ants
+07	carte grise	6	carte grise changement d'adresse
+07	carte grise	7	carte grise minute
+07	carte grise	8	carte grise perdue
+07	carte grise	9	carte grise prix
+07	carte grise	10	carte grise gouv
+07	controle technique	1	contrôle technique tunis
+07	controle technique	3	controle technique moto
+07	controle technique	5	controle technique dekra
+07	controle technique	6	controle technique scooter
+07	controle technique	10	controle technique prix
+07	problème moteur	1	problème moteur puretech
+07	problème moteur	2	problème moteur vélo électrique nakamura
+07	problème moteur	3	problème moteur mahle x20
+07	problème moteur	4	problème moteur citroën c3 essence
+07	problème moteur	5	problème moteur 1.5 bluehdi 100
+07	problème moteur	6	problème moteur c3 aircross essence
+07	problème moteur	7	problème moteur fiat ducato 2.3 multijet
+07	problème moteur	8	problème moteur 1.5 bluehdi 130
+07	problème moteur	9	problème moteur puretech essence
+07	problème moteur	10	problème moteur 1.6 bluehdi 120
+07	bruit moteur	3	bruit moteur au ralenti
+07	bruit moteur	4	bruit moteur diesel
+07	bruit moteur	5	bruit moteur après coupure contact
+07	bruit moteur	6	bruit moteur tesla
+07	bruit moteur	7	bruit moteur frigo
+07	bruit moteur	8	bruit moteur qui claque
+07	bruit moteur	9	bruit moteur nakamura
+07	bruit moteur	10	bruit moteur climatisation
+07	huile 5w30	4	huile 5w30 c2
+07	huile 5w30	5	huile 5w30 diesel 5l
+07	huile 5w30	6	huile 5w30 c3
+07	huile 5w30	7	huile 5w30 leclerc
+07	huile 5w30	8	huile 5w30 action
+07	huile 5w30	9	huile 5w30 c4
+07	huile 5w30	10	huile 5w30 diesel leclerc
+07	voyant tableau de bord	3	voyant tableau de bord voiture signification moteur
+07	voyant tableau de bord	4	voyant tableau de bord voiture signification peugeot
+07	voyant tableau de bord	5	voyant tableau de bord c3 essence
+07	voyant tableau de bord	6	voyant tableau de bord voiture signification volkswagen
+07	voyant tableau de bord	9	voyant tableau de bord voiture signification renault
+07	voyant tableau de bord	10	voyant tableau de bord renault captur 2
+07	voyant orange	2	voyant orange
+07	voyant orange	4	voyant orange point d'exclamation
+07	voyant orange	6	voyant orange dacia sandero
+07	voyant orange	7	voyant orange voiture point d'exclamation
+07	voyant orange	9	voyant orange dacia duster signification
+07	voyant orange	10	voyant orange voiture qui glisse
+07	perte de puissance	3	perte de puissance
+07	perte de puissance	6	perte de puissance voiture diesel sans voyant allumé
+07	perte de puissance	7	perte de puissance voiture avec voyant allumé
+07	perte de puissance	8	perte de puissance c4 picasso 1.6 hdi 110
+07	perte de puissance	9	perte de puissance kangoo 1.5 dci
+07	perte de puissance	10	perte de puissance 1.6 hdi 110 sans voyant
+07	fumée blanche	1	fumée blanche voiture
+07	fumée blanche	2	fumée blanche
+07	fumée blanche	3	fumée blanche moteur diesel
+07	fumée blanche	5	fumée blanche voiture diesel
+07	fumée blanche	6	fumée blanche et odeur de brûlé voiture diesel
+07	fumée blanche	7	fumée blanche pape
+07	fumée blanche	8	fumée blanche incendie
+07	fumée blanche	9	fumée blanche voiture essence
+07	fumée blanche	10	fumée blanche au démarrage
+07	embrayage	1	embrayage
+07	embrayage	2	embrayage voiture
+07	embrayage	3	embrayage clio 3
+07	embrayage	4	embrayage compresseur clim
+07	embrayage	7	embrayage moto
+07	embrayage	8	embrayage hydraulique
+07	embrayage	9	embrayage clio 4
+07	embrayage	10	embrayage renforcé
+07	plaquette de frein	1	plaquette de frein
+07	plaquette de frein	2	plaquette de frein prix
+07	plaquette de frein	3	plaquette de frein arriere
+07	plaquette de frein	5	plaquette de frein velo
+07	plaquette de frein	6	plaquette de frein trottinette électrique
+07	plaquette de frein	7	plaquette de frein kukirin g2
+07	plaquette de frein	8	plaquette de frein shimano
+07	plaquette de frein	9	plaquette de frein norauto
+07	plaquette de frein	10	plaquette de frein clio 4
+07	prix	1	prix carburant tunis
+07	prix	2	prix carburant
+07	prix	3	prix du fioul domestique
+07	prix	4	prix
+07	prix	5	prix du fioul
+07	prix	6	prix essence
+07	prix	7	prix du baril
+07	prix	8	prix carburant autour de moi
+07	prix	9	prix gasoil
+07	prix	10	prix du carburant aujourd'hui autour de moi
+07	combien coute	1	combien coute un passeport
+07	combien coute	2	combien coute l'installation d'une climatisation
+07	combien coute	4	combien coute le permis
+07	combien coute	5	combien coute une climatisation
+07	combien coute	6	combien coute un paquet de cigarette
+07	combien coute	7	combien coute le bsr
+07	combien coute	8	combien coute un controle technique
+07	combien coute	9	combien coute un divorce
+07	combien coute	10	combien coute le permis moto
+07	pourquoi ma voiture	1	pourquoi ma voiture ne démarre pas
+07	pourquoi ma voiture	2	pourquoi ma voiture fume blanc
+07	pourquoi ma voiture	3	pourquoi ma voiture fume noir
+07	pourquoi ma voiture	4	pourquoi ma voiture consomme du liquide de refroidissement
+07	pourquoi ma voiture	5	pourquoi ma voiture ne démarre pas malgré une batterie neuve
+07	pourquoi ma voiture	6	pourquoi ma voiture broute
+07	pourquoi ma voiture	7	pourquoi ma voiture tremble quand je freine
+07	pourquoi ma voiture	8	pourquoi ma voiture consomme de l'huile
+07	pourquoi ma voiture	9	pourquoi ma voiture chauffe
+07	pourquoi ma voiture	10	pourquoi ma voiture tremble quand je roule
+07	comment changer	1	comment changer son nom sur facebook
+07	comment changer	2	comment changer de nom sur facebook
+07	comment changer	3	comment changer son pseudo fortnite
+07	comment changer	4	comment changer de medecin traitant
+07	comment changer	5	comment changer de banque
+07	comment changer	6	comment changer l'adresse sur la carte grise
+07	comment changer	7	comment changer le code pin
+07	comment changer	8	comment changer de nom de famille
+07	comment changer	10	comment changer sa photo de profil sur whatsapp
+07	puretech	1	puretech
+07	puretech	2	puretech 1.2
+07	puretech	3	puretech probleme
+07	puretech	4	puretech diesel
+07	puretech	5	puretech essence ou diesel
+07	puretech	6	puretech peugeot
+07	puretech	7	puretech chaine
+07	puretech	8	puretech moteur
+07	puretech	9	puretech fiabilité
+07	puretech	10	puretech avis
+07	boite automatique	1	boîte automatique
+07	boite automatique	2	boite automatique voiture
+07	boite automatique	3	boite automatique occasion
+07	boite automatique	4	boite automatique fonctionnement
+07	boite automatique	5	boite automatique b
+07	boite automatique	6	boite automatique lettre
+07	boite automatique	7	boite automatique toyota yaris
+07	boite automatique	8	boite automatique robotisée
+07	boite automatique	9	boite automatique voiture signification des lettres
+07	boite automatique	10	boite automatique signification lettre
+FR	code-p0087	2	P0087 VW
+FR	code-p0087	5	P0087 Ford
+FR	code-p0087	6	P0087 Audi
+FR	code-p0087	7	P0087 Renault
+FR	code-p0087	8	P0087 Citroën
+FR	code-p0299	2	P0299 Mercedes
+FR	code-p0299	3	P0299 Hyundai
+FR	code-p0299	4	P0299 2.0 TDI
+FR	code-p0299	5	P0299 Mazda
+FR	code-p0299	8	P0299 a chaud
+FR	code-p0380	5	P0380 peugeot 1.6 hdi
+FR	code-p0380	6	P0380 Peugeot 307 2.0 HDi
+FR	code-p0380	7	P0400 peugeot
+FR	code-p0380	8	DTC P0101 peugeot
+FR	code-p0420	2	P0420 Toyota
+FR	code-p0420	6	P0420 Citroen
+FR	code-p0420	7	P0420 rs3
+FR	code-p0420	8	P0420 Circuit de catalyseur rendement inférieur au seuil ligne 1
+FR	code-p1351	1	P1351 Citroën
+FR	code-p1351	4	P1351 mercedes
+FR	code-p1351	5	P1351 1.4 HDI
+FR	code-p1351	6	P1351 Citroën C3
+FR	code-p1351	7	P1351 2.0 hdi
+FR	code-p1351	8	P1351 Toyota
+FR	loi-montagne	1	Loi Montagne date
+FR	loi-montagne	2	Loi Montagne 3
+FR	loi-montagne	3	Loi montagne 2 2016
+FR	loi-montagne	4	Loi Montagne amende
+FR	loi-montagne	5	Loi Montagne 2026 verbalisation
+FR	loi-montagne	6	Loi Montagne communes concernées
+FR	loi-montagne	7	Loi Montagne carte
+FR	pression-des-pneus	1	Tableau pression pneu voiture
+FR	pression-des-pneus	3	Ou vérifier la pression des pneus gratuitement
+FR	pression-des-pneus	4	Comment vérifier la pression des pneus en station-service
+FR	pression-des-pneus	6	Pression des pneus autour de moi
+FR	pression-des-pneus	7	Vérifier la pression des pneus tous les combien
+FR	pression-des-pneus	8	Pression des pneus avant et arrière
+FR	voyant-abs-esp	1	Voyant ABS allumé peut on rouler
+FR	voyant-abs-esp	2	Voyant ABS allumé : que faire
+FR	voyant-abs-esp	3	Voyant ABS et ESP allumé
+FR	voyant-abs-esp	4	Supprimer voyant ABS
+FR	voyant-abs-esp	5	Effacer voyant ABS sans valise
+FR	voyant-abs-esp	6	Supprimer voyant ABS 206
+FR	voyant-abs-esp	7	Voyant ABS Toyota Land Cruiser
+FR	voyant-abs-esp	8	Si le voyant ABS reste allumé en circulation
+FR	voyant-adblue	2	Voyant AdBlue reste allumé après remplissage
+FR	voyant-adblue	4	Voyant AdBlue Renault
+FR	voyant-adblue	5	AdBlue danger
+FR	voyant-adblue	6	AdBlue ça sert à quoi
+FR	voyant-adblue	8	AdBlue station
+FR	voyant-airbag	1	Astuce pour enlever voyant airbag
+FR	voyant-airbag	2	Voyant airbag orange allumé
+FR	voyant-airbag	3	Voyant airbag allumé rouge
+FR	voyant-airbag	4	Voyant airbag allumé contrôle technique
+FR	voyant-airbag	5	Voyant airbag 206 reste allumé
+FR	voyant-airbag	6	Voyant airbag 307
+FR	voyant-airbag	7	Voyant airbag 206 allumé pour contrôle technique
+FR	voyant-airbag	8	Comment enlever le voyant airbag sur 206
+FR	voyant-batterie	2	Voyant batterie allumé
+FR	voyant-batterie	3	Voyant batterie rouge avant démarrage
+FR	voyant-batterie	4	Voyant batterie faible voiture
+FR	voyant-batterie	5	Voyant batterie allumé avec batterie neuve
+FR	voyant-batterie	6	Voyant batterie allumé alternateur ok
+FR	voyant-batterie	7	Problème de batterie voiture symptôme
+FR	voyant-batterie	8	Voyant batterie berlingo
+FR	voyant-direction	1	Voyant volant orange Volkswagen
+FR	voyant-direction	2	Voyant volant orange Audi
+FR	voyant-direction	3	Voyant volant orange BMW
+FR	voyant-direction	4	Voyant volant orange polo
+FR	voyant-direction	5	Voyant volant orange golf 5
+FR	voyant-direction	6	Voyant volant orange Seat Ibiza
+FR	voyant-direction	7	Voyant volant orange Clio 2
+FR	voyant-direction	8	Voyant volant orange touran
+FR	voyant-frein	3	Voyant liquide de frein insuffisant
+FR	voyant-frein	5	Voyant plaquette de frein reste allumé
+FR	voyant-frein	6	Peut on rouler avec le voyant plaquette de frein
+FR	voyant-frein	7	Voyant frein orange
+FR	voyant-frein	8	Voyant frein BMW
+FR	voyant-huile	1	Voyant huile moteur orange
+FR	voyant-huile	2	Voyant huile moteur rouge
+FR	voyant-huile	3	Voyant huile rouge s'allume et s'éteint
+FR	voyant-huile	5	Voyant huile moteur rouge clignote
+FR	voyant-huile	6	Voyant d'huile qui s'allume mais niveau ok
+FR	voyant-huile	7	Voyant huile moteur Volkswagen
+FR	voyant-huile	8	Voyant huile moteur rouge stop
+FR	voyant-moteur	1	Voyant moteur orange allumé mais pas de problème
+FR	voyant-moteur	2	Voyant moteur orange clignotant
+FR	voyant-moteur	3	Voyant moteur orange combien de km
+FR	voyant-moteur	4	Voyant moteur orange diesel
+FR	voyant-moteur	5	Voyant moteur orange signification
+FR	voyant-moteur	6	Voyant moteur orange BMW
+FR	voyant-moteur	7	Voyant moteur orange que faire
+FR	voyant-prechauffage	1	Voyant préchauffage diesel clignote perte de puissance
+FR	voyant-prechauffage	2	Voyant préchauffage qui clignote
+FR	voyant-prechauffage	3	Voyant préchauffage qui clignote en roulant
+FR	voyant-prechauffage	4	Voyant préchauffage allumé
+FR	voyant-prechauffage	5	Voyant préchauffage clignote VW
+FR	voyant-prechauffage	7	Voyant préchauffage clignote 2.0 TDI 140
+FR	voyant-prechauffage	8	Voyant préchauffage clignote et perte de puissance Audi A3
+FR	voyant-pression-pneus	1	Voyant pression pneu Renault
+FR	voyant-pression-pneus	2	Voyant pression pneu toujours allumé
+FR	voyant-pression-pneus	3	Voyant pression pneu orange
+FR	voyant-pression-pneus	5	Comment enlever le voyant pression pneu
+FR	voyant-pression-pneus	6	Voyant pression pneu toujours allumé Volkswagen
+FR	voyant-pression-pneus	7	Voyant pression pneu Clio 4
+FR	voyant-pression-pneus	8	Voyant pression pneu combien de temps
+FR	voyants	1	Liste voyant orange voiture
+FR	voyants	2	Voyant orange voiture moteur signification
+FR	voyants	3	Voyant orange voiture point d'exclamation
+FR	voyants	4	Voyant orange voiture zig zag
+FR	voyants	6	Voyant orange voiture huile
+FR	voyants	7	Voyant orange voiture clé
