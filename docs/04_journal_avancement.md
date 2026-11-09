@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
+Dernière mise à jour : 09/11/2026 (22 h, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -12,25 +12,25 @@ Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
-| 6 | Charte et modèles de pages | ✅ Validée par Houssem (04/11, 12 h 03) · porte vérifiée et relue (deux revues) · PR #20 fusionnée (77bea5e) · tag `etape-6-charte-modeles` demandé le 04/11 (14 h 33), refusé par le proxy de la session : à poser par Houssem. Livrables 6.0 à 6.9 (PR #8, #11 à #20) ; demandes de changement n° 4 à 11 acceptées (03 v8) | `docs/10_charte_editoriale.md` (charte) ; modèles `src/lib/modeles.ts` ; exemples `exemples/` ; `travaux/etape-6/` (porte : `porte-de-sortie.md`, briefs : `briefs/`) |
-| 7 | Socle technique | ▶ Piste technique reprise le 04/11 (12 h 25, décision de Houssem), en alternance avec l'étape 8 : un seul livrable présenté à la fois. Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées. En cours : 7.2 (description des pages du socle, politique de confidentialité, mesure d'audience), à valider ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
-| 8 | Vague A | ▶ Étape principale depuis le 04/11. Fait : 8.1 modèle de l'outil voyants, validé le 04/11 (13 h 48), PR #21 fusionnée (2dcec63). Ordre décidé le 04/11, suite : 7.2 ; 8.2 demande de changement des requêtes absentes de 06, juste avant la rédaction ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants), avec le court paquet de lignes à ajouter à la base ; livrables 7.x intercalés | `travaux/etape-6/briefs/` ; `travaux/etape-8/paquet-8.1-outil-voyants.md` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
+| 6 | Charte et modèles de pages | ✅ Validée par Houssem (04/11, 12 h 03) · porte vérifiée et relue (deux revues) · PR #20 fusionnée (77bea5e) · tag `etape-6-charte-modeles` demandé le 04/11 (14 h 33), refusé par le proxy de la session : à poser par Houssem (mode d'emploi donné le 09/11). Livrables 6.0 à 6.9 (PR #8, #11 à #20) ; demandes de changement n° 4 à 11 acceptées (03 v8) | `docs/10_charte_editoriale.md` (charte) ; modèles `src/lib/modeles.ts` ; exemples `exemples/` ; `travaux/etape-6/` (porte : `porte-de-sortie.md`, briefs : `briefs/`) |
+| 7 | Socle technique | ▶ Piste technique reprise le 04/11 (12 h 25, décision de Houssem), en alternance avec l'étape 8 : un seul livrable présenté à la fois. Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; 7.2 (description et revue du socle, politique de confidentialité, mesure d'audience sans traceur) validé le 09/11 (21 h 41), PR #22, Web Analytics de Cloudflare désactivé. Reste : livrables 7.x (données structurées, autres réglages Cloudflare, emplacements factices, Lighthouse du socle) ; les mentions légales attendent le statut juridique | `CONTROLES.md` (canonical, plan du site, production) |
+| 8 | Vague A | ▶ Étape principale depuis le 04/11. Fait : 8.1 modèle de l'outil voyants, validé le 04/11 (13 h 48), PR #21 fusionnée (2dcec63). Ordre décidé le 04/11, suite : 8.2 demande de changement des requêtes absentes de 06, juste avant la rédaction ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants), avec le court paquet de lignes à ajouter à la base ; livrables 7.x intercalés | `travaux/etape-6/briefs/` ; `travaux/etape-8/paquet-8.1-outil-voyants.md` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
 | 9 | Recette et mise en ligne A | À faire | – |
 | 10 | Vague B | À faire | – |
 | 11 | Vague C | À faire | – |
 | 12 | Boucle mensuelle | À faire | – |
 
 ## Prévision (mise à jour à chaque session ; les dates de 03 sont des cibles)
-| Étape | Cible (03) | Prévision au 03/11 | Dépend de |
+| Étape | Cible (03) | Prévision au 09/11 | Dépend de |
 |---|---|---|---|
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
-| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause du 28/10 (12 h 10) au 04/11 ; reprise le 04/11, en alternance avec l'étape 8 ; ≈ 05–15/11 | statut juridique (mentions légales) ; parcours de l'auteur (« à propos ») |
+| Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause du 28/10 (12 h 10) au 04/11 ; reprise le 04/11, en alternance avec l'étape 8 ; aucun travail du 05 au 08/11 ; ≈ 10–22/11 | statut juridique (mentions légales) ; parcours de l'auteur (« à propos ») |
 | 6. Charte et modèles | 27–29/10 | ✅ terminée le 04/11 (porte validée à 12 h 03 ; aucun travail du 25 au 27/10 ni du 29/10 au 01/11) | – |
-| 8. Vague A | 29/10–01/11 | ≈ 05–15/11 (outil voyants d'abord, puis le minimum) | portes 5 et 6 ✅ ; requêtes absentes mesurées ; sources des briefs trouvées |
-| 9. Mise en ligne du minimum | 31/10 | ≈ 14–16/11 | portes 7 et 8 ; sécurité des comptes |
-| 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 21–25/11 / ≈ 28/11–02/12 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
+| 8. Vague A | 29/10–01/11 | ≈ 10–22/11 (outil voyants fait le 04/11 ; 8.2, puis le minimum) | portes 5 et 6 ✅ ; requêtes absentes mesurées ; sources des briefs trouvées |
+| 9. Mise en ligne du minimum | 31/10 | ≈ 20–25/11 | portes 7 et 8 ; sécurité des comptes |
+| 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 28/11–02/12 / ≈ 05–09/12 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
 
-**Séances de validation de Houssem** (le vrai goulot), d'ici le 16/11 :
+**Séances de validation de Houssem** (le vrai goulot), d'ici le 25/11 :
 1. ~~demande de changement de structure et marques de référence~~ : faite le 23/10 ;
 2. statut juridique, avant les mentions légales ;
 3. ~~paquet de validation de la base voyants et porte 5~~ : faits le 24/10 ;
@@ -40,6 +40,7 @@ Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
 7. ~~charte éditoriale (6.2), composants communs (6.3), tableau des notices et demande de changement n° 8 (6.4), contrôles peu coûteux (6.5)~~ : validés le 02/11 et le 03/11 ;
 8. ~~exemples des modèles voyant, code et pneus~~ : validés le 03/11 ; ~~consignes des briefs (6.8)~~ : validées le 03/11 ; ~~porte 6~~ : validée le 04/11 ;
    ~~modèle de l'outil voyants (8.1) et demande de changement n° 12~~ : validés le 04/11 ;
+   ~~politique de confidentialité et mesure d'audience (7.2), demandes de changement n° 13 et 14~~ : validées le 09/11 ;
 9. porte 7 ;
 10. demande de changement des requêtes absentes, juste avant l'étape 8 ;
 11. paquet et encadrés de la vague A, et porte 8 ;
@@ -188,7 +189,13 @@ Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
   - règle de redirection 301 « Redirect from WWW to root » : `https://www.*` vers `https://${1}`, avec la conservation des paramètres activée, comme dans la documentation Cloudflare.
 
   Vérifié par le job production relancé à 9 h 31 UTC : PROD-HTTP, PROD-HTTP-CHEMIN, PROD-WWW, PROD-WWW-CHEMIN et PROD-HTTP-WWW conformes.
-- [ ] **7.2 Description du socle, politique de confidentialité, mesure d'audience** : prêt à valider (PR #22, brouillon ; `travaux/etape-7/paquet-7.2-confidentialite.md`, neuf décisions). Conditions de la CNIL lues le 04/11. Demandes de changement n° 13 (description et revue du socle) et n° 14 (mesure d'audience sans traceur) proposées, non acceptées.
+- [x] **7.2 Description du socle, politique de confidentialité, mesure d'audience** (PR #22), validé par Houssem le 09/11 (21 h 41), avec les recommandations des neuf décisions :
+  - demandes de changement n° 13 (description et dates de revue du socle : 08 v10) et n° 14 (mesure d'audience sans traceur : 03 v9) acceptées ;
+  - modèle `pageSocle` et route des pages du socle ; politique de confidentialité, section `#confidentialite` de la page exemple `exemples/socle/mentions-legales.md`, jamais publiée avant son lot ; lien de pied de page dès que la page est construite ;
+  - contrôles R7-HTML-DESCRIPTION, CONFIDENTIALITE-LIEN, CONFIDENTIALITE-ANCRE, TIERS-RESSOURCE, PROD-TRACEUR, PROD-COOKIE ; revue du socle (DATES-REVUE-DELAI, R5) ;
+  - Cloudflare, le 09/11, par Claude dans le Chrome de Houssem, sur sa demande : Web Analytics désactivé (il était sur « Enable, excluding visitor data in the EU ») ; Bot Fight Mode déjà désactivé ; page servie relue sans script ;
+  - charte §2.7, §4, §8 et §9 précisées ;
+  - sources lues : `travaux/etape-7/textes/mesure-audience-et-rgpd.md` ; paquet : `travaux/etape-7/paquet-7.2-confidentialite.md`.
 - [ ] Données structurées (Article, fil d'Ariane, auteur), réglages Cloudflare (robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow), emplacements publicitaires non affichés, Lighthouse sur les pages du socle.
 - [ ] Mentions légales : après le statut juridique.
 
@@ -196,8 +203,7 @@ Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
 - **Statut juridique** : à trancher avant de rédiger les mentions légales (étape 7) ; le reste de l'étape 7 avance sans l'attendre (décision du 23/10, 19 h).
 - **GitHub Pro** : souscrire avant la porte de l'étape 9, puis protéger `main` (pull request obligatoire, contrôles exigés, aucun contournement).
 - **Auteur** : nom réel acté le 23/10 ; parcours à fournir pour la page « à propos » (étape 7 ou 8).
-- **Livrable 7.2** : neuf décisions du paquet, dont le choix de la mesure d'audience. Le script Cloudflare déjà actif en production dépend de la décision 1.
-- **Avant la mise en ligne, avec le statut juridique** (paquet 7.2, décision 7) : représentant dans l'Union (RGPD, art. 27), transfert vers la Tunisie, totaux de Cloudflare, contrat de sous-traitance, durée des journaux : à poser à un professionnel et à Cloudflare.
+- **Avant la mise en ligne, avec le statut juridique** (paquet 7.2, décision 7) : représentant dans l'Union (RGPD, art. 27), transfert vers la Tunisie, statistiques de Cloudflare fondées sur l'adresse IP, contrat de sous-traitance (Cloudflare en offre gratuite ; boîte Gmail gratuite ou boîte avec contrat), durée des journaux : à poser à un professionnel et à Cloudflare.
 
 ## Historique des décisions
 - 22/10/2026 : niche voiture retenue ; base de mots-clés v1.1 figée ; périmètre lot unique figé (42 pages, outil voyants et socle compris, 4 thèmes) ; électrique hors périmètre ; pas d'achat de lecteurs OBD ; plan d'avancement validé avec publication en 3 vagues.
@@ -280,6 +286,13 @@ Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
 
   PR #11 fusionnée le 28/10 (0292716) : contrôles, Lighthouse, déploiement et vérification de la production verts ; le site reste non indexable. Le livrable 6.1 est verrouillé ; suivant : 6.2, charte éditoriale écrite.
 - 02/11/2026 (18 h 22), Houssem : **lance le livrable 6.2** (charte éditoriale). Aucun travail du 29/10 au 01/11.
+- 09/11/2026 (21 h 41), Houssem : **valide le livrable 7.2** (« OK pour tes recommandations ») :
+  - les neuf décisions du paquet telles que recommandées : mesure d'audience sans traceur (demande n° 14, 03 v9) ; demande n° 13 (description et revue du socle, 08 v10) ; politique dans `/mentions-legales/` ; contact `erreur@decodauto.com` ; messages gardés 12 mois après la dernière réponse ; phrase sur la Tunisie gardée ; questions pour un professionnel avant la mise en ligne ; aucun nom ni adresse de lecteur dans Claude ; liens de la politique vers la CNIL et l'hébergeur (charte §2.7) ;
+  - **courriel de test** envoyé à `erreur@decodauto.com` et reçu dans sa boîte Gmail : réception confirmée (point ouvert depuis le 02/11) ;
+  - **go pour les réglages Cloudflare**, depuis son Chrome connecté : faits par Claude le soir même (Web Analytics désactivé ; Bot Fight Mode déjà désactivé) ;
+  - il demande le mode d'emploi du tag `etape-6-charte-modeles`, qu'il pose lui-même.
+
+  En réglant Cloudflare, Claude a vu que le tableau de bord montre les demandes par page, par pays, par navigateur, par système et les adresses IP les plus fréquentes, sur 30 jours au plus. La politique disait « des totaux » : la phrase est corrigée après la validation, à relire par Houssem. La fusion de la PR #22 attend sa demande.
 - 04/11/2026 (14 h 33), Houssem : **demande le tag `etape-6-charte-modeles` et lance le livrable 7.2** (« pose le tag et lance 7.2 »). Le tag n'a pas pu être posé : le proxy de la session refuse la création (API : « Write access to this GitHub API path is not permitted through this proxy » ; `git push` : 403). Claude ne contourne pas ce refus. À poser par Houssem : `git fetch origin && git tag etape-6-charte-modeles 77bea5e && git push origin etape-6-charte-modeles`.
 - 04/11/2026 (14 h 01) : PR #21 fusionnée sur la demande de Houssem (2dcec63). CI de `main` verte (run 41834349908). Le tag `etape-6-charte-modeles` reste à poser sur sa demande.
 - 04/11/2026 (13 h 48), Houssem : **valide le livrable 8.1** avec les recommandations des neuf décisions et **demande la fusion de la PR #21** (« Pour les 9 decisions part avec ta recommandation. Fais les actions necessaires et fusionne la PR ») :
@@ -363,7 +376,7 @@ Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
   - **Bloquants, corrigés et vérifiés par la CI** : la route du socle ne passait pas `astro check` ; PROD-TRACEUR ne voyait pas le script de Cloudflare, injecté seulement si la demande accepte du HTML. Le test ne lisait qu'une réponse simulée.
   - **Autres corrections** : durée des journaux donnée en critère et signalée comme point ouvert ; droit d'opposition présenté à part ; demandes sur les journaux expliquées ; absence de décision d'adéquation pour la Tunisie dite (liste de la Commission lue) ; dates de revue du socle (dans la demande n° 13) ; TIERS-RESSOURCE étendu aux styles et aux feuilles CSS ; exception des liens du socle à inscrire à la charte ; demande n° 14 pour 03 ; cookie : « un cas connu » ; jargon expliqué ; promesse sur la publicité retirée.
   - **Laissé** : la seconde revue n'a pas été lancée. Les deux bloquants sont prouvés fermés par la CI, et le reste est un texte que Houssem valide, ou des questions pour un professionnel, qu'une autre IA ne trancherait pas.
-  - **Reste à vérifier** : réglages du compte Cloudflare ; ce que reçoit un lecteur en France ; réception de `erreur@decodauto.com` ; plusieurs sources lues par résumé (relevé) ; aucun avis de juriste.
+  - **Reste à vérifier** : plusieurs sources lues par résumé (relevé) ; aucun avis de juriste. Vérifiés depuis, le 09/11 : réglages du compte Cloudflare (Web Analytics désactivé, Bot Fight Mode désactivé) ; lecteurs de l'Union exclus du script quand il était actif ; réception de `erreur@decodauto.com`.
 - 04/11, livrable 8.1 (modèle de l'outil voyants), deux revues (deux relecteurs), le maximum ; chacune « à corriger ».
   - **Première revue, changé** :
     - bloquant : le voyant de freinage manquait parmi les dessins avec un point d'exclamation ; la clé renvoyait au seul rappel d'entretien, alors que c'est le témoin Service sur la Clio 5 et la Sandero 3 ;
@@ -663,8 +676,7 @@ Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
 - Volumes à lire comme des plafonds : dossier PureTech (94 % de noms de moteur ou de modèle), viscosités (surtout intention d'achat), outil voyants (30 % de requêtes « + modèle »), batterie (34 % d'achat par capacité).
 
 ## Points ouverts (non bloquants)
-- **Description des pages du socle** : le schéma du socle n'a pas de champ `description`, et DESCRIPTION-ABSENTE (6.5) l'exige sur toute page construite. Une demande de changement ajoutera ce champ avant de construire « à propos » ou les mentions légales (étape 7).
-- **Adresse de signalement** : `erreur@decodauto.com` créée le 02/11 (redirection OVH vers la boîte de Houssem, sans copie) et publiée sur le site. Réception à confirmer par un courriel de test envoyé depuis une autre adresse (signalé aussi à la porte 6).
+- **Adresse de signalement** : `erreur@decodauto.com` créée le 02/11 (redirection OVH vers la boîte Gmail de Houssem, sans copie) et publiée sur le site. Réception confirmée par Houssem le 09/11 (courriel de test reçu).
 - **Texte rédigé des pages voyants (étape 8)** : seuil d'un tiers validé le 03/11. La page ABS/ESP, estimée à 42 % sans texte rédigé, en demandera environ 570 mots ; la page AdBlue environ 280.
 - **Mots-clés de la page voyant moteur** (« défaut moteur », perte de puissance, contrôle technique) et vérifications sur les PDF (Seat Ibiza p. 289, Toyota p. 297, témoins des messages AdBlue de Renault, Dacia et Peugeot) : inscrits dans les briefs `voyant-moteur` et `voyant-adblue` (6.8), sources à trouver avant la rédaction de l'étape 8.
 - **Modèle de l'outil voyants** : non livré (`src/lib/modeles.ts`) ; premier livrable de l'étape 8 (demande de changement n° 11, acceptée le 04/11), avec son critère à la porte de l'étape 8 ; `tests/porte6.test.ts` nomme l'outil comme seule exception, à retirer quand il aura son modèle.
@@ -701,9 +713,7 @@ Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
   - garantie légale : lire l'article L217-3 en entier (voitures d'occasion) ;
   - documents de la SRA non lus (accès refusé).
 - **Branches anciennes** du dépôt (`claude/great-fermat-txuonc`, `docs/porte-etape-3`, et les branches fusionnées de l'étape 6, dont `etape-6/releve-google-france`) : peuvent être supprimées.
-- **Tag de l'étape 6** : `etape-6-charte-modeles`, sur 77bea5e (fusion de la PR #20), demandé par Houssem le 04/11 ; refusé par le proxy de la session : à poser par Houssem.
-- **Mesure Cloudflare déjà active en production** (constaté le 04/11, livrable 7.2) : le site en ligne charge `static.cloudflareinsights.com/beacon.min.js`, injecté par Cloudflare, absent du dépôt, invisible pour les contrôles et Lighthouse. Traité par la décision 1 du paquet 7.2.
-- **Copie `docs/04`** : celle de `main` s'arrête à la validation de la porte 6 ; les lignes de la fusion de la PR #20 et de la décision du 04/11 (12 h 25) partent avec la prochaine pull request.
+- **Tag de l'étape 6** : `etape-6-charte-modeles`, sur 77bea5e (fusion de la PR #20), demandé par Houssem le 04/11 ; refusé par le proxy de la session : posé par Houssem depuis son poste (mode d'emploi du 09/11). À vérifier à la prochaine session.
 
 ## Idées reportées
 - Champ « autres couleurs » dans la base voyants, pour qu'une ligne dont la couleur varie selon la voiture (airbag, AdBlue) apparaisse sous les deux filtres de l'outil : par une demande de changement (paquet 8.1, décision 7). En attendant, l'aide du filtre le dit.
@@ -720,6 +730,14 @@ Dernière mise à jour : 04/11/2026 (15 h 45, heure de Tunis)
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
+- 09/11/2026 (21 h 41), acceptée : **n° 14, mesure d'audience sans traceur à la mise en ligne** (`travaux/etape-7/demande-changement-14.md`, PR #22).
+  - **Changement** : étape 7 de 03 : mesure d'audience sans traceur (Search Console, Bing Webmaster Tools, statistiques de Cloudflare) ; un outil dédié, exempté de consentement d'après les critères de la CNIL, ne s'ajoute que si le besoin apparaît, politique mise à jour d'abord ; Web Analytics désactivé ; porte : aucun script ni cookie sur la page servie.
+  - **Raison** : Cloudflare Web Analytics remplit 4 des 12 critères de l'outil d'auto-évaluation de la CNIL d'après sa documentation ; l'outil dédié le moins cher relevé coûte 29 par mois hors taxes ; les indicateurs de l'étape 12 viennent de Search Console.
+  - **Impact** : 03 v9 ; aucun contenu validé touché ; aucun critère retiré.
+- 09/11/2026 (21 h 41), acceptée : **n° 13, description et revue des pages du socle** (`travaux/etape-7/demande-changement-13.md`, PR #22).
+  - **Changement** : `description`, `date_revue` et `prochaine_revue` (au plus 12 mois après) obligatoires sur une page du socle.
+  - **Raison** : DESCRIPTION-ABSENTE exige une meta description sur toute page construite ; la politique décrit des prestataires et une décision d'adéquation attaquée en justice, à relire chaque année.
+  - **Impact** : 08 v10, charte §8 ; aucun contenu validé touché ; plan inchangé (42 pages).
 - 04/11/2026 (13 h 48), acceptée : **n° 12, renvoi vers la liste dans l'encadré de la page outil** (`travaux/etape-8/demande-changement-12.md`, PR #21).
   - **Changement** : sur la seule page outil, l'encadré affiche, entre la question et les lignes, « Ces lignes sont des exemples : la couleur ne suffit pas à décider. » et le lien « Trouvez votre voyant dans la liste ».
   - **Raison** : ces lignes sont trois exemples sur 25 cas ; sur téléphone (390 px), l'encadré mesure environ 2 200 px et la liste commence plus de trois écrans plus bas ; rien n'est permis entre le H1 et l'encadré.
