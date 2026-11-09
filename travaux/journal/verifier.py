@@ -30,7 +30,8 @@ for nom in noms:
             continue
         if l == "## Archives":
             dans_archives = True
-        if dans_archives or (l.startswith("#") and l not in ancien):
+        # Ajoutée : une ligne absente de l'ancien journal, qui est un titre ou une ligne de la section « Archives ».
+        if l not in ancien and (dans_archives or l.startswith("#")):
             ajoutees.append((nom, l))
             continue
         total[l] += 1

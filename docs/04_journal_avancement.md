@@ -2,19 +2,19 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 10/11/2026 (0 h 20, heure de Tunis)
+Dernière mise à jour : 10/11/2026 (1 h, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
 |---|---|---|---|
-| 1 | Mots-clés | ✅ Figée (22/10) | 05_mots_cles_perimetre_v2.csv (source de vérité ; v2 du 23/10 : précision de 5 lignes, demande de changement n° 2), 06_base_mots_cles_complete.csv ; base Excel v1.1 conservée hors projet par Houssem |
+| 1 | Mots-clés | ✅ Figée (22/10) | 05_mots_cles_perimetre_v3.csv (source de vérité ; v3 du 10/11 : 1 167 mots-clés, demande de changement n° 16 ; v2 du 23/10 : précision de 5 lignes, demande n° 2), 06_base_mots_cles_complete_v2.csv ; les deux fichiers sont à charger dans le projet par Houssem, `docs/05` est déjà en v3 sur la PR #23 ; base Excel v1.1 conservée hors projet par Houssem |
 | 2 | Périmètre | ✅ Figé (22/10) | 02_perimetre_lot_unique.md (formulation du nombre de pages corrigée le 23/10) |
 | 3 | Fondations | ✅ Validée par Houssem (23/10) · tag `etape-3-fondations` | 08_structure_contenus (v4 acceptée le 23/10 par la demande de changement n° 3, effective à la fusion de la PR #6) ; dépôt github.com/houssem-jeddou/decodauto ; site https://decodauto.com |
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
 | 6 | Charte et modèles de pages | ✅ Validée par Houssem (04/11, 12 h 03) · porte vérifiée et relue (deux revues) · PR #20 fusionnée (77bea5e) · tag `etape-6-charte-modeles` posé par Houssem le 09/11 sur 77bea5e (formulaire de release GitHub). Livrables 6.0 à 6.9 (PR #8, #11 à #20) ; demandes de changement n° 4 à 11 acceptées (03 v8) | `docs/10_charte_editoriale.md` (charte) ; modèles `src/lib/modeles.ts` ; exemples `exemples/` ; `travaux/etape-6/` (porte : `porte-de-sortie.md`, briefs : `briefs/`) |
 | 7 | Socle technique | ▶ Piste technique reprise le 04/11 (12 h 25, décision de Houssem), en alternance avec l'étape 8 : un seul livrable présenté à la fois. Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; 7.2 (description et revue du socle, politique de confidentialité, mesure d'audience sans traceur) validé le 09/11 (21 h 41), PR #22 fusionnée (55db514), Web Analytics de Cloudflare désactivé. Statut juridique tranché par Houssem le 09/11 (22 h 49) : les mentions légales n'attendent plus. Reste : livrables 7.x (données structurées, autres réglages Cloudflare, emplacements factices, Lighthouse du socle, mentions légales, garde-fou de déploiement de la demande n° 15) | `CONTROLES.md` (canonical, plan du site, production) |
-| 8 | Vague A | ▶ Étape principale depuis le 04/11. Fait : 8.1 modèle de l'outil voyants, validé le 04/11 (13 h 48), PR #21 fusionnée (2dcec63). Ordre décidé le 04/11, suite : 8.2 demande de changement des requêtes absentes de 06, lancée le 09/11 (22 h 58) : 177 requêtes mesurées dans Keyword Planner le 09/11 (105 à au moins 100 recherches par mois) ; demande de changement n° 16 présentée le 10/11, en attente de la décision de Houssem ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants), avec le court paquet de lignes à ajouter à la base ; livrables 7.x intercalés | `travaux/etape-6/briefs/` ; `travaux/etape-8/paquet-8.1-outil-voyants.md` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
+| 8 | Vague A | ▶ Étape principale depuis le 04/11. Fait : 8.1 modèle de l'outil voyants, validé le 04/11 (13 h 48), PR #21 fusionnée (2dcec63). Ordre décidé le 04/11, suite : 8.2 demande de changement des requêtes absentes de 06, lancée le 09/11 (22 h 58) : 177 requêtes mesurées dans Keyword Planner le 09/11 (105 à au moins 100 recherches par mois) ; demande de changement n° 16 acceptée le 10/11 (0 h 26) et appliquée sur la PR #23, à fusionner sur la demande de Houssem ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants), avec le court paquet de lignes à ajouter à la base ; livrables 7.x intercalés | `travaux/etape-6/briefs/` ; `travaux/etape-8/paquet-8.1-outil-voyants.md` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
 | 9 | Recette et mise en ligne A | À faire | – |
 | 10 | Vague B | À faire | – |
 | 11 | Vague C | À faire | – |
@@ -42,7 +42,7 @@ Dernière mise à jour : 10/11/2026 (0 h 20, heure de Tunis)
    ~~modèle de l'outil voyants (8.1) et demande de changement n° 12~~ : validés le 04/11 ;
    ~~politique de confidentialité et mesure d'audience (7.2), demandes de changement n° 13 et 14~~ : validées le 09/11 ;
 9. porte 7 ;
-10. demande de changement n° 16 des requêtes absentes (8.2) : présentée le 10/11, à trancher ;
+10. ~~demande de changement n° 16 des requêtes absentes (8.2)~~ : acceptée le 10/11 (0 h 26) ;
 11. paquet et encadrés de la vague A, et porte 8 ;
 12. go / no-go et porte 9, avec la double authentification de Google, GitHub, OVH et Cloudflare et le verrou du domaine (demande n° 15).
 
@@ -58,8 +58,9 @@ Dernière mise à jour : 10/11/2026 (0 h 20, heure de Tunis)
 - [ ] **8.2 Demande de changement des requêtes absentes de 06**, lancée le 09/11 (22 h 58), branche `etape-8/requetes-absentes` :
   - fait : 325 suggestions et recherches associées absentes de 06 relevées (213 dans 07, 112 dans le relevé Google France) ; 177 à mesurer, chacune avec la page proposée, 147 écartées (hors sujet, hors périmètre de 02, enseignes, autres codes), une en double (`travaux/etape-8/requetes-absentes/`) ;
   - mesuré le 09/11 (23 h 30) dans le Keyword Planner du compte Google Ads de Houssem, par Claude dans son Chrome, sur sa demande (« Tu as accès dans chrome, fais le nécessaire et avance ») : zone France, toutes les langues, octobre 2025 à septembre 2026. 3 requêtes à 10 k – 100 k, 17 à 1 k – 10 k, 85 à 100 – 1 k, 42 à 10 – 100, 30 sans donnée, dont 25 en « allumé » ou « s'allume » (06 n'en contient aucune : Keyword Planner ne semble pas leur donner de volume propre ; cause non établie). Sur les 105 requêtes d'au moins 100 recherches, un tri approché en trouve 15 qui sont la variante d'un mot-clé de 05 (`mesures_keyword_planner.csv`, README du dossier) ;
-  - tri fait le 10/11 avec la fonction `signature` du dépôt (16 variantes de 05, 89 nouvelles) ; **demande de changement n° 16 présentée le 10/11** (`travaux/etape-8/demande-changement-16.md`, fichiers proposés dans `requetes-absentes/propose/`), après une revue indépendante : 114 ajouts à 05 (103 requêtes mesurées, 11 lignes de 06), 73 formulations du lecteur hors de 05, 1 requête écartée ; porte de l'étape 4 relancée sur la proposition : 0 constat. Rien n'est appliqué ;
-  - reste : décision de Houssem ; puis application (05 v3 et 06 v2 chargés par lui, plan, `docs/09`, `docs/02`, briefs, test du plan), CI, fusion de la PR #23 sur sa demande.
+  - tri fait le 10/11 avec la fonction `signature` du dépôt (16 variantes de 05, 89 nouvelles) ; **demande de changement n° 16 présentée le 10/11** (`travaux/etape-8/demande-changement-16.md`, fichiers proposés dans `requetes-absentes/propose/`), après une revue indépendante : 114 ajouts à 05 (103 requêtes mesurées, 11 lignes de 06), 73 formulations du lecteur hors de 05, 1 requête écartée ; porte de l'étape 4 relancée sur la proposition : 0 constat ;
+  - **acceptée par Houssem le 10/11 (0 h 26) et appliquée** (commit 2fb73d4) : `docs/05` en v3 (1 167 mots-clés), mots-clés ajoutés à 32 pages du plan, `docs/09` régénéré, `docs/02` recalculé (1 009 mots-clés comptés, ≈ 1 140 760 recherches), 03 v11, briefs régénérés avec la section « Formulations du lecteur » (73 lignes) ; preuves : tests du plan et des briefs 43 sur 43 en local, CI de la PR (run 42720891306) : voir l'historique ;
+  - reste : 05 v3 et 06 v2 à charger dans le projet par Houssem ; fusion de la PR #23 sur sa demande.
 - [ ] 8.3 Lot du minimum : loi montagne, pression des pneus, puis les voyants ; avec le court paquet de lignes à ajouter à la base (décision 8 de 8.1).
 - **Critère de l'outil à la porte de l'étape 8, état au 04/11** :
   - lignes, liens, libellés écrits, lien « Signaler une erreur », contenu sans JavaScript : contrôlés automatiquement ;
@@ -92,7 +93,7 @@ Dernière mise à jour : 10/11/2026 (0 h 20, heure de Tunis)
 - [ ] Garde-fou de déploiement (demande de changement n° 15) : la CI refuse de déployer si un commit de `main`, depuis le dernier déploiement, ne vient pas d'une pull request fusionnée.
 
 ## Décisions ouvertes (à trancher par Houssem)
-- **Demande de changement n° 16** (8.2), présentée le 10/11 : cinq décisions regroupées (ajouts et rattachements, formulations du lecteur, critère des lignes de 06, comptage, requêtes principales). Elle précède la rédaction du lot 8.3.
+- **Fin de 8.2** : charger dans le projet `05_mots_cles_perimetre_v3.csv` et `06_base_mots_cles_complete_v2.csv` (envoyés le 10/11), retirer les anciennes versions, corriger le nom du fichier 05 dans les instructions du projet (v2 → v3) ; demander la fusion de la PR #23.
 - **Auteur** : nom réel acté le 23/10 ; parcours à fournir pour la page « à propos » (étape 7 ou 8).
 - **Avant la mise en ligne** (paquet 7.2, décision 7 ; maintenu le 09/11 à 22 h 58 sur la recommandation de Claude, que Houssem avait demandée ; il peut en décider autrement au go / no-go) : représentant dans l'Union (RGPD, art. 27), transfert vers la Tunisie, statistiques de Cloudflare fondées sur l'adresse IP, contrat de sous-traitance (Cloudflare en offre gratuite ; boîte Gmail gratuite ou boîte avec contrat), durée des journaux : à poser à un professionnel et à Cloudflare.
 
@@ -104,7 +105,9 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
 - **Renouvellement automatique du domaine** : domaine acheté le 22/10/2026, échéance attendue en octobre 2027, à constater chez OVH. Risque faible avant l'automne 2027.
 
 ## Historique des décisions
-Les décisions du 22/10 à la porte de sortie de l'étape 6 (04/11, 12 h 03) sont dans `04b_archives_decisions_jusqu_a_la_porte_6.md`.
+Les décisions du 22/10 à la porte de sortie de l'étape 6 (04/11, 12 h 03) sont dans `04b_archives_decisions_jusqu_a_la_porte_6.md` ; celles du 04/11 dans `04d_archives_decisions_et_revues_du_04_11.md`.
+- 10/11/2026 (1 h) : demande n° 16 appliquée sur la branche de la PR #23 (2fb73d4) ; CI de ce commit verte (run 42720891306 : contrôles, recette des exemples, Lighthouse, production). Journal allégé une seconde fois, par script vérifié : décisions et revues du 04/11 déplacées dans une quatrième archive (journal : environ 40 000 caractères).
+- 10/11/2026 (0 h 26), Houssem : **accepte la demande de changement n° 16** (« oui aux cinq, selon tes recommandations ») : les 114 ajouts à 05 et leur rattachement, avec les 10 pages corrigées et les cas limites recommandés ; les 73 formulations du lecteur dans les briefs ; le critère des lignes de 06 et « gonflement pneu voiture » ; le comptage sans variante ; les requêtes principales inchangées, trois pages des vagues B et C étant revues à leur brief.
 - 10/11/2026 (0 h 20) : demande de changement n° 16 présentée à Houssem ; aucune décision de sa part dans cette session. Journal et archives envoyés au projet (les archives sous `claude/`).
 - 09/11/2026 (23 h 58) : **journal allégé**, sur l'accord de 23 h 28. Sections déplacées par script, sans réécriture, dans trois archives (voir « Archives ») : livrables et portes des étapes 4, 5 et 6 ; historique des décisions et revues jusqu'à la porte 6 ; demandes de changement n° 1 à 11. Écart avec la procédure du point de reprise, qui gardait toutes les demandes de changement au journal : sans ce déplacement, le journal dépassait 20 000 jetons (48 000 caractères). Vérifié par script : 781 lignes non vides reprises une fois, dans un seul document ; journal environ 42 000 caractères, archives 24 600, 27 400 et 29 000.
 - 09/11/2026 (23 h 28), Houssem : **donne son accord pour alléger le journal** (« je te donne mon accord pour alléger le journal (archives à part) ») : les étapes closes, l'historique ancien et les revues passent dans des documents d'archives, déplacés par script ; à faire en premier à la prochaine session. Il demande le texte pour continuer dans une nouvelle conversation.
@@ -123,28 +126,9 @@ Les décisions du 22/10 à la porte de sortie de l'étape 6 (04/11, 12 h 03) son
   - il demande le mode d'emploi du tag `etape-6-charte-modeles`, qu'il pose lui-même.
 
   En réglant Cloudflare, Claude a vu que le tableau de bord montre les demandes par page, par pays, par navigateur, par système et les adresses IP les plus fréquentes, sur 30 jours au plus. La politique disait « des totaux » : la phrase est corrigée après la validation, à relire par Houssem. La fusion de la PR #22 attend sa demande.
-- 04/11/2026 (14 h 33), Houssem : **demande le tag `etape-6-charte-modeles` et lance le livrable 7.2** (« pose le tag et lance 7.2 »). Le tag n'a pas pu être posé : le proxy de la session refuse la création (API : « Write access to this GitHub API path is not permitted through this proxy » ; `git push` : 403). Claude ne contourne pas ce refus. À poser par Houssem : `git fetch origin && git tag etape-6-charte-modeles 77bea5e && git push origin etape-6-charte-modeles`.
-- 04/11/2026 (14 h 01) : PR #21 fusionnée sur la demande de Houssem (2dcec63). CI de `main` verte (run 41834349908). Le tag `etape-6-charte-modeles` reste à poser sur sa demande.
-- 04/11/2026 (13 h 48), Houssem : **valide le livrable 8.1** avec les recommandations des neuf décisions et **demande la fusion de la PR #21** (« Pour les 9 decisions part avec ta recommandation. Fais les actions necessaires et fusionne la PR ») :
-  1. lignes de l'encadré : `moteur-orange-fixe`, `abs`, `prechauffage` ;
-  2. demande de changement n° 12 acceptée : renvoi vers la liste dans l'encadré de la page outil ;
-  3. ordre de la page : outil, puis texte rédigé ;
-  4. orange avant rouge dans la liste ;
-  5. écart entre marques visible, pages citées pliées ;
-  6. « zig zag » gardé, avec « voiture qui dérape » : aide pour reconnaître le dessin, pas un fait de sécurité ;
-  7. voyants dont la couleur varie : aide du filtre pour l'instant ; champ « autres couleurs » aux idées reportées ;
-  8. voyants sans ligne dans la base : ajouter au moins STOP et le triangle, et traiter le préchauffage qui clignote, par un court paquet avec le lot 8.3, **avant la mise en ligne de l'outil** ;
-  9. index des dessins en haut de l'outil : construit dans ce livrable.
-
-  Claude a pris ce message pour la validation de l'encadré, des textes fixes de l'outil, de la source ajoutée et des faits du texte (paquet 8.1). L'index a été construit après ce message : son titre, « Cherchez le dessin de votre voyant », est dans l'empreinte, et Houssem peut le faire changer. Suivant : 7.2.
-- 04/11/2026 (12 h 25), Houssem : **lance l'étape 8 et reprend la piste technique de l'étape 7** (« Ok […] pour avancer dans ce sens »), sur la proposition de Claude :
-  - l'étape 8 est l'étape principale ; l'étape 7 avance en piste technique (règle 12 de 03), en alternance, un seul livrable présenté à la fois (la décision du 28/10, un livrable à la fois, reste la règle de présentation) ;
-  - ordre : 8.1 modèle de l'outil voyants ; 7.2 description des pages du socle (demande de changement), politique de confidentialité et mesure d'audience (conditions d'exemption vérifiées sur le site de la CNIL) ; 8.2 demande de changement des requêtes absentes de 06 ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants) ; livrables 7.x (données structurées, réglages Cloudflare, emplacements factices, Lighthouse du socle) intercalés ;
-  - à lancer de son côté, car ils prennent du temps : statut juridique (activité qui couvre des recettes publicitaires), parcours pour « à propos », préalables de l'étape 9 (GitHub Pro, double authentification, verrou du domaine) ;
-  - le travail reprend dans une nouvelle conversation du projet, avec un point de reprise (`claude/etape8_point_de_reprise.md`).
 
 ## Revues indépendantes : ce qu'elles ont changé
-Les revues du 22/10 à la porte de sortie de l'étape 6 sont dans `04c_archives_revues_jusqu_a_la_porte_6.md`.
+Les revues du 22/10 à la porte de sortie de l'étape 6 sont dans `04c_archives_revues_jusqu_a_la_porte_6.md` ; celles du 04/11 (7.2 et 8.1) dans `04d_archives_decisions_et_revues_du_04_11.md`.
 - 10/11, demande de changement n° 16 (8.2), une revue, comme demandé par Houssem ; « à corriger », un bloquant, cinq importants. Chiffres, signatures, critère de 06 et porte de l'étape 4 recomptés par le relecteur : exacts.
   - **Changé** : comptage ramené à la convention de 05 (aucune variante comptée : + 121 660 au lieu de + 191 180), 05 v3 et 06 v2 rendus identiques sur le lot 1, deux vérifications ajoutées au script ; « tableau pression pneu voiture » sortie de 05 (une consigne validée la dit hors périmètre) ; formulations avec leur usage (32 citent une marque ou un modèle) ; six requêtes FAP passées sur voyant-fap ; intention de 06 gardée pour ses lignes ; impact complété (`docs/02`, cas limite 1 de `docs/09`, test du plan : 10 → 11) ; gain présenté avec et sans les requêtes courtes.
   - **Écarté** : « voyant orange voiture clé » sur voyant-huile (la clé a deux sens selon la marque, texte validé de l'outil) ; remesure des lignes de 06 (une seule reste comptée ; notée comme non vérifiée).
@@ -153,29 +137,10 @@ Les revues du 22/10 à la porte de sortie de l'étape 6 sont dans `04c_archives_
   - **Changé** : un motif par critère reporté, autre que la date (règle 2 de 03) ; la double authentification de Google, GitHub, OVH et Cloudflare et le verrou de transfert restent dans la porte (le brouillon reportait Google tout en écrivant « Claude couvert par Google », alors que le compte Claude agit sur GitHub, Cloudflare et OVH) ; limites du garde-fou écrites ; impacts ajoutés (compte GitHub séparé et permissions de l'application rouverts, décisions ouvertes, séance 12, « Dépend de »).
   - **Écarté** : rien. Pas de seconde revue : les deux bloquants étaient un arbitrage de Houssem, qui a choisi l'option A.
   - **Reste à vérifier** : workflow réel du dépôt pour le garde-fou ; échéance et verrou du domaine chez OVH ; état de la double authentification de chaque compte ; prix de GitHub Pro ; le droit (RGPD).
-- 04/11, livrable 7.2, une revue (un relecteur) ; « à corriger », deux bloquants, onze importants, dix mineurs.
-  - **Bloquants, corrigés et vérifiés par la CI** : la route du socle ne passait pas `astro check` ; PROD-TRACEUR ne voyait pas le script de Cloudflare, injecté seulement si la demande accepte du HTML. Le test ne lisait qu'une réponse simulée.
-  - **Autres corrections** : durée des journaux donnée en critère et signalée comme point ouvert ; droit d'opposition présenté à part ; demandes sur les journaux expliquées ; absence de décision d'adéquation pour la Tunisie dite (liste de la Commission lue) ; dates de revue du socle (dans la demande n° 13) ; TIERS-RESSOURCE étendu aux styles et aux feuilles CSS ; exception des liens du socle à inscrire à la charte ; demande n° 14 pour 03 ; cookie : « un cas connu » ; jargon expliqué ; promesse sur la publicité retirée.
-  - **Laissé** : la seconde revue n'a pas été lancée. Les deux bloquants sont prouvés fermés par la CI, et le reste est un texte que Houssem valide, ou des questions pour un professionnel, qu'une autre IA ne trancherait pas.
-  - **Reste à vérifier** : plusieurs sources lues par résumé (relevé) ; aucun avis de juriste. Vérifiés depuis, le 09/11 : réglages du compte Cloudflare (Web Analytics désactivé, Bot Fight Mode désactivé) ; lecteurs de l'Union exclus du script quand il était actif ; réception de `erreur@decodauto.com`.
-- 04/11, livrable 8.1 (modèle de l'outil voyants), deux revues (deux relecteurs), le maximum ; chacune « à corriger ».
-  - **Première revue, changé** :
-    - bloquant : le voyant de freinage manquait parmi les dessins avec un point d'exclamation ; la clé renvoyait au seul rappel d'entretien, alors que c'est le témoin Service sur la Clio 5 et la Sandero 3 ;
-    - filtre bloqué après un lien du texte (`:has(:target)` retiré) ; aide du filtre (airbag, AdBlue) ;
-    - ligne `abs` à la place de `entretien-vidange` dans l'encadré, qui ne représentait pas les autres lignes orange ; écart entre marques rendu visible ;
-    - renvoi de l'encadré passé en demande de changement (n° 12) ; contrôles resserrés ; liste dite incomplète ; attribution de chaque fait à sa notice.
-  - **Seconde revue, changé** :
-    - bloquant : la consigne STOP était coupée avant « ne le redémarrez pas » ;
-    - préchauffage et frein de stationnement électrique qui clignotent ajoutés au texte ; décision 8 élargie ;
-    - texte complet de l'outil comparé au modèle ; textes fixes et renvoi dans l'empreinte ; test des faits du texte ;
-    - triangle vérifié par Claude sur la page du PDF de la Clio 5 (p. 138) ; index des dessins proposé (décision 9).
-  - **Écarté** : bannir tout `<style>` de la page, car Astro peut y placer le CSS du site : une règle ajoutée hors de `site.css` n'est donc pas lue par la machine. Lien vers une ligne masquée par le filtre : limite acceptée.
-  - **Non relu** : les corrections de la seconde revue et l'index des dessins, le maximum de deux revues étant atteint ; l'index n'ajoute ni fait ni verdict. Contrôlés par `npm test` et la CI.
-  - **Reste à vérifier** : Safari, Firefox, lecteur d'écran, vrai téléphone ; notices non rouvertes, sauf la Clio 5 p. 137-138 ; point d'exclamation du symbole de frein non confirmé sur la notice ; amendements du règlement n° 121 et ISO 2575 non lus.
 
 ## Pour l'étape 8 et les suivantes (repris à la porte 6)
 - **Base voyants, avant la mise en ligne de l'outil** (décision 8 de 8.1, paquet §5) : court paquet avec le lot 8.3 pour ajouter au moins STOP et le triangle, et traiter le préchauffage qui clignote. Autres cas lus dans les notices sans ligne propre : voyant central (Seat), Service (Peugeot), frein de stationnement électrique qui clignote (Peugeot), direction jaune qui clignote (Seat), absence de retour au tableau de bord (Dacia), carburant, ceintures, portes, eau dans le gazole (Peugeot).
-- **Juste avant la rédaction** : demande de changement des requêtes absentes de 06 (voir les points ouverts).
+- **Requêtes absentes de 06** : faites (demande de changement n° 16, 10/11). Les briefs portent les mots-clés ajoutés et les formulations du lecteur ; trois requêtes principales des vagues B et C sont à revoir à leur brief (fumée, liquide de frein, liquide de refroidissement).
 - **Briefs** (`travaux/etape-6/briefs/`, consignes validées le 03/11) : trouver les sources listées dans chaque brief avant de rédiger la page.
 - Page « voyant frein » : témoin d'usure des plaquettes traité par une ligne saisie citée (D4) ; source à trouver.
 - Page « voyant préchauffage » : ligne « qui clignote » (ligne saisie liée ou demande de changement de la base), choisie au paquet de l'étape 8.
@@ -199,7 +164,7 @@ Les revues du 22/10 à la porte de sortie de l'étape 6 sont dans `04c_archives_
 - **Chiffre Volkswagen 2025** (110 960, 6,8 %) : tiré de La Tribune Auto citant PFA / AAA Data, sans source primaire trouvée. Sans effet sur le choix des marques.
 - **Parc par marque** : non publié par le SDES ; les immatriculations 2025 en tiennent lieu.
 - **Annonces automatiques AdSense** (étape 12) : insérées dans le navigateur, invisibles pour le contrôle ; vérifier à la recette qu'elles ne précèdent pas l'encadré.
-- **Requêtes absentes de 06** : livrable 8.2, demande de changement n° 16 présentée le 10/11 (voir le livrable). Restent non vérifiés : cause de l'absence de volume des requêtes en « allumé » ; fourchettes des 11 lignes de 06, non remesurées ; quatre suggestions écartées sans mesure.
+- **Requêtes absentes de 06** : demande de changement n° 16 acceptée et appliquée le 10/11. Restent non vérifiés : cause de l'absence de volume des requêtes en « allumé » ; fourchettes des 11 lignes de 06, non remesurées ; quatre suggestions écartées sans mesure ; « requêtes phares » de `docs/02`, non régénérées (deux ajoutées à la main).
 - **Journal du projet** : allégé le 09/11 (23 h 58) et envoyé au projet avec ses trois archives (voir « Archives »). Il doit rester sous 20 000 jetons (environ 45 000 caractères) pour être lu puis envoyé en une fois : `travaux/journal/verifier.py` contrôle cette limite ; au-delà, déplacer de nouveau les sections closes par `travaux/journal/alleger.py`.
 - **Semrush** (09/11) : un connecteur est présent dans la session, sans unités d'API ; Houssem précise qu'il n'a pas d'abonnement. Non utilisé.
 - **Statut et AdSense** : AdSense paie en Tunisie par virement. Statut juridique tranché par Houssem le 09/11 (22 h 49) : il déclare l'avoir vérifié, recettes publicitaires comprises ; Claude ne l'a pas contrôlé.
@@ -243,7 +208,11 @@ Les revues du 22/10 à la porte de sortie de l'étape 6 sont dans `04c_archives_
 
 ## Demandes de changement
 Les demandes n° 1 à 11 sont dans `04b_archives_decisions_jusqu_a_la_porte_6.md`.
-- 10/11/2026, **proposée, non décidée** : **n° 16, requêtes absentes de 06** (`travaux/etape-8/demande-changement-16.md`) : 05 v3 (1 053 → 1 167 mots-clés), 06 v2, `mots_cles` de 32 pages du plan, briefs régénérés avec les formulations du lecteur, chiffres de `docs/02` et `docs/09`. Rien n'est appliqué.
+- 10/11/2026 (0 h 26), acceptée : **n° 16, requêtes absentes de 06** (`travaux/etape-8/demande-changement-16.md`, PR #23).
+  - **Changement** : 05 v3 (1 053 → 1 167 mots-clés : 103 requêtes mesurées, 11 lignes de 06), 06 v2 (3 491 → 3 594) ; mots-clés ajoutés à 32 pages du plan ; 73 formulations du lecteur dans les briefs, hors de 05.
+  - **Raison** : 105 requêtes suggérées par Google à au moins 100 recherches par mois n'étaient dans aucune base ; volume indicatif compté + 121 660 (plafonds), dont la moitié sur « puretech » et « gonfler pneu voiture ».
+  - **Impact** : `docs/02` (chiffres), 03 v11 (les CSV sont la source des mots-clés), `docs/09` régénéré, briefs régénérés, test du plan (11 mots-clés servis dans une autre vague) ; pages, adresses, liens, requêtes principales, base voyants et consignes validées inchangés.
+  - **Contrôles** : porte de l'étape 4, 0 constat ; CI de la PR #23.
 - 09/11/2026 (22 h 58), acceptée, option A : **n° 15, préalables de la porte de l'étape 9** (`travaux/etape-9/demande-changement-15.md`).
   - **Changement** : sortent de la porte et sont reportés après la mise en ligne : GitHub Pro et `main` protégée, double authentification Microsoft (Bing), renouvellement automatique du domaine. Restent : go / no-go, double authentification de Google, GitHub, OVH et Cloudflare, verrou de transfert. S'ajoute : un garde-fou de déploiement dans la CI. Compte Claude : couvert par le compte Google.
   - **Raison** : un motif par critère, la date n'en étant pas un (règle 2). GitHub Pro est payant et sans équivalent gratuit sur un dépôt privé ; le compte Microsoft ne publie rien ; le domaine n'arrive à échéance qu'à l'automne 2027.
@@ -267,3 +236,4 @@ Sections déplacées du journal le 09/11/2026, sans réécriture (script `travau
 - `04a_archives_livrables_etapes_4_5_6.md` : livrables et portes de sortie des étapes 4, 5 et 6.
 - `04b_archives_decisions_jusqu_a_la_porte_6.md` : historique des décisions du 22/10 à la porte de sortie de l'étape 6 (04/11, 12 h 03) ; demandes de changement n° 1 à 11.
 - `04c_archives_revues_jusqu_a_la_porte_6.md` : revues indépendantes du 22/10 à la porte de sortie de l'étape 6.
+- `04d_archives_decisions_et_revues_du_04_11.md` : décisions du 04/11 (12 h 25 à 14 h 33) et revues des livrables 7.2 et 8.1, déplacées le 10/11/2026.
