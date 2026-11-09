@@ -9,6 +9,7 @@ Précisions validées avec le livrable 6.6b (03/11/2026, 20 h 06) : sources tech
 Précisions validées avec le livrable 6.6c (03/11/2026, 21 h 44) : montant cité par sa référence (§2.3) ; lien vers une source officielle citée (§2.7) ; corps des pages pneus et obligations (§4) ; contrôles ajoutés (§9).
 Précisions validées avec la porte de l'étape 6 (04/11/2026, 12 h 03) : partie « Les codes défaut » de la section « Méthode » (§7.2, nouvelle empreinte des textes affichés) ; « pages écrites pour vendre un appareil ou un service » (§2.2) ; « nos rédactions » dans la liste du §2.7.
 Précisions validées avec le livrable 8.1 (04/11/2026, 13 h 48) : pages citées de la page outil (§2.6) ; renvoi de son encadré (§4, point 4, demande de changement n° 12) ; son corps et ses sources (§4, points 7 et 8) ; contrôles ajoutés (§9).
+Précisions validées avec le livrable 7.2 (09/11/2026, 21 h 41) : liens d'une page du socle vers d'autres sites (§2.7) ; lien « Mentions légales et confidentialité » en pied de page (§4) ; revue des pages du socle (§8) ; contrôles ajoutés (§9).
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -75,7 +76,7 @@ Précisions validées avec le livrable 8.1 (04/11/2026, 13 h 48) : pages citées
 - Une expertise, une équipe, une garantie ou une certification qu'on n'a pas : « nos experts », « nos mécaniciens », « notre équipe », « nos équipes », « nos rédactions », « testé par nos soins », « résultat garanti », « contenu certifié ». Restent permis les mots qui désignent autre chose : la garantie légale ou constructeur, l'extension de garantie, l'expert de l'assurance, le modèle Peugeot Expert. La liste est dans le code (`EXPRESSIONS_INTERDITES`, `src/lib/charte.ts`), testée sur les textes affichés de la charte, avec ses cas permis ; sur les pages, hors citations, contrôlée depuis 6.5 (EXPRESSION-INTERDITE).
 - Une promesse de résultat (« ça va régler le problème »), un « toujours » ou un « jamais » sans source.
 - Un dénigrement de marque, de garage ou de concurrent.
-- Un lien écrit dans le texte vers une page qui n'est pas liée dans le plan du site (contrôle R7-LIEN-HORS-PLAN). Un lien vers un autre site n'est permis que vers une source de première main citée sur la page, à son adresse du registre, avec un texte qui dit où il mène (validé avec le livrable 6.6c ; contrôle R7-LIEN-EXTERNE).
+- Un lien écrit dans le texte vers une page qui n'est pas liée dans le plan du site (contrôle R7-LIEN-HORS-PLAN). Un lien vers un autre site n'est permis que vers une source de première main citée sur la page, à son adresse du registre, avec un texte qui dit où il mène (validé avec le livrable 6.6c ; contrôle R7-LIEN-EXTERNE). Exception, les pages du socle (validée avec le livrable 7.2) : elles n'ont pas de section « Sources » ; la politique de confidentialité peut renvoyer à la page de la CNIL pour une réclamation et à la politique de confidentialité de l'hébergeur, en https, avec un texte qui dit où le lien mène.
 
 ## 3. Règles de forme
 ### 3.1 Ton
@@ -127,7 +128,7 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
    - page outil voyants (modèle validé avec le livrable 8.1) : outil (filtre par couleur, index des dessins, liste par couleur), puis texte rédigé (questions des lecteurs), pages enfants et liées. La liste vient avant le texte : le lecteur cherche d'abord son voyant ;
    - dans tous les cas : l'élément unique (arbre de décision, tableau, outil ou photo réelle) et les questions des lecteurs relevées sur Google (« peut-on rouler », « combien de kilomètres », « comment enlever le voyant »…) ; sur les pages qui ont des causes (voyant, code défaut, panne), chaque cause avec sa tranche de coût.
 8. **Sources** : toute source citée sur la page (lignes de la base, lignes saisies, coût, texte de référence), avec son titre, son éditeur, la page ou la section, et sa date de consultation. Sur la page outil, la section liste les sources de toutes les lignes de la liste et dit que les pages citées sont sous chaque ligne.
-9. **Lien « Signaler une erreur ».**
+9. **Lien « Signaler une erreur »**, puis, dès que la page des mentions légales est construite, le lien « Mentions légales et confidentialité » vers sa section `#confidentialite` (validé avec le livrable 7.2) : en pied de toutes les pages, socle compris.
 
 Les emplacements publicitaires, quand il y en aura, ne sont jamais avant l'encadré (R9-PUB-AVANT-ENCADRE).
 
@@ -298,6 +299,7 @@ Les marques citées appartiennent à leurs propriétaires ; le site n’est lié
 | Dossier PureTech | 3 mois (déjà contrôlé) | Sujet qui évolue (08) |
 | Montants fixés par un texte | Délai propre à chaque montant, fixé dans `data/couts.json` (contrôlé : COUT-A-REVERIFIER) | Un texte peut changer en cours d'année |
 | Fourchettes en euros | Délai de `src/schemas/cout.ts` (contrôlé : COUT-FOURCHETTE-A-REVOIR) | Prix qui évoluent |
+| Socle (mentions légales et confidentialité, à propos) | 12 mois (contrôlé, demande de changement n° 13) | Prestataires, droit et décision d'adéquation peuvent changer |
 
 Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5). Le délai maximal par type est contrôlé depuis 6.5 (DATES-REVUE-DELAI). Loi montagne : une revue faite à partir du 1er septembre vaut pour la saison qui commence ; une revue faite avant le 1er septembre appelle la suivante au plus tard le 31 octobre de la même année (précision validée le 03/11/2026).
 
@@ -320,6 +322,7 @@ Une revue dépassée donne une alerte et fait échouer le contrôle du lundi (R5
 - **Ajouté en 6.6b** (modèle de page code défaut, validé le 03/11) : fiche du code au texte exact (CODE-FICHE-ABSENTE, CODE-FICHE-INCOMPLETE) ; cas décrits par marque, une rangée par précision du contenu, triées par marque, au texte exact, avec leurs sources, et l'élément unique « tableau » porté par ce tableau (CODE-CAS-MARQUE-INCOMPLET).
 - **Ajouté en 6.6c** (modèle de page pneus et obligations, validé le 03/11) : fiche « Le texte en bref » au texte exact (FICHE-TEXTE-ABSENTE, FICHE-TEXTE-INCOMPLETE) et nature du texte de référence conforme au registre (R7-TEXTE-REFERENCE-NATURE) ; références du texte rédigé (verdict d'une ligne de l'encadré, montant validé, tableau du texte comme élément unique) refusées si elles sont mal placées ; lien vers un autre site seulement vers une source officielle citée (R7-LIEN-EXTERNE) ; pas de dépannage automatique sur une page loi montagne (demande de changement n° 10). Limite laissée à la recette : une phrase qui cite le verdict d'une ligne par son numéro est relue si l'ordre de l'encadré change.
 - **Ajouté en 8.1** (modèle de l'outil voyants, validé le 04/11) : outil généré depuis la base (lignes, libellés écrits, liens, index des dessins, filtre, contenu sans JavaScript : OUTIL-*) ; textes fixes de l'outil dans l'empreinte de la page outil ; références sous chaque ligne hors de la part citée. À la recette : filtre dans Safari et Firefox, lecteur d'écran, rendu sur un vrai téléphone.
+- **Ajouté en 7.2** (socle et politique de confidentialité, validé le 09/11) : meta description et dates de revue du socle (R7-HTML-DESCRIPTION, DATES-REVUE-DELAI, R5) ; lien vers la politique sur toutes les pages dès qu'elle est construite, et sa section unique (CONFIDENTIALITE-*) ; aucun script ni ressource d'un autre site dans le site construit, pages et feuilles de style (TIERS-RESSOURCE) ; ni script injecté ni cookie sur la page servie (PROD-TRACEUR, PROD-COOKIE). À la recette : réglages du compte Cloudflare après chaque changement ; cookie possible d'une vérification de sécurité de Cloudflare.
 - **Recette** (passée par Claude page par page, puis relue par l'agent indépendant avec le lot) :
   - ton et vocabulaire (section 3) ;
   - aucune phrase sans source ni utilité (1 et 2.2) ;

@@ -6,7 +6,8 @@
         "http://localhost/voyants/index.html",
         "http://localhost/voyants/moteur/index.html",
         "http://localhost/codes-defaut/p0087/index.html",
-        "http://localhost/loi-montagne/index.html"
+        "http://localhost/loi-montagne/index.html",
+        "http://localhost/mentions-legales/index.html"
       ],
       "numberOfRuns": 3,
       "settings": {

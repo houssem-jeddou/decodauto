@@ -1,4 +1,4 @@
-# Structure des contenus — decodauto.com (v9)
+# Structure des contenus — decodauto.com (v10)
 
 Validée par Houssem le 22/10/2026, après trois revues indépendantes. Étape 3, livrable « Structure des contenus ».
 v2 (23/10/2026, accord de Houssem) : ajout du champ facultatif `voyant_lie` dans une ligne de situation saisie (voir le champ situations et la règle 2).
@@ -9,6 +9,7 @@ v6 (demande de changement n° 7, étape 6, acceptée par Houssem le 02/11/2026) 
 v7 (demande de changement n° 8, étape 6, acceptée par Houssem le 03/11/2026) : tableau « Ce que dit la notice de votre marque », élément unique des pages voyants et affiché sur toute page de rattachement d'un voyant de la base (sections 2 et 3, règle 12).
 v8 (demande de changement n° 10, étape 6, acceptée par Houssem le 03/11/2026) : pas de dépannage automatique sur une page loi montagne, dont le verdict « non » vient d'une obligation d'équipement (section 1, ligne `cout_probable` ; règle 11).
 v9 (demande de changement n° 12, étape 8, acceptée par Houssem le 04/11/2026) : renvoi vers la liste dans l'encadré de la seule page outil (section 3, règle 9).
+v10 (demande de changement n° 13, étape 7, acceptée par Houssem le 09/11/2026) : description et dates de revue des pages du socle (section 2, ligne « Socle »).
 
 **Archivé le 23/10/2026 (décision de Houssem, porte de l'étape 3)** : la transposition en schémas est validée. Ce sont désormais **les schémas du dépôt (`src/schemas/`, contrôles dans `src/lib/controle.ts`) qui font foi** ; ce fichier reste la référence lisible. Toute modification de structure passe par une demande de changement (03) et met à jour les schémas, puis ce fichier.
 
@@ -53,7 +54,7 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 | Fluide | page huile (vidange), 5W30, 5W40, 10W40, vérifier le niveau d'huile, liquide de refroidissement, liquide de frein | normes et spécifications ; comment vérifier ; quand changer (sourcé) ; tableau |
 | Pneus et obligations | pression, usure, loi montagne, contrôle technique | texte de référence : Légifrance ou arrêté préfectoral. Contrôle technique : défaillances (mineures, majeures, critiques) et contre-visite. Loi montagne : période et zones. |
 | Dossier | PureTech | journal des modifications ; revue trimestrielle |
-| Socle | accueil, mentions légales, à propos (avec la fiche auteur) | format simple : titre, libellé court (facultatif), adresse, date de mise à jour. Pas d'encadré de décision. Fiche auteur : identifiant, nom, présentation, et en option les liens publics de son profil (`profils`, v4, données structurées). |
+| Socle | accueil, mentions légales, à propos (avec la fiche auteur) | format simple : titre, description (meta description), libellé court (facultatif), adresse, date de mise à jour, date de revue et prochaine revue, au plus 12 mois après (v10). Pas d'encadré de décision. Fiche auteur : identifiant, nom, présentation, et en option les liens publics de son profil (`profils`, v4, données structurées). |
 
 **Causes (v5)** : chaque cause porte `cause`, `explication` et `pieces` (identifiants de `data/couts.json`) ; sa tranche de coût est celle de sa pièce la plus lourde.
 

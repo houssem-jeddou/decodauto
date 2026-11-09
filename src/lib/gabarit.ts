@@ -15,6 +15,7 @@ import {
   cheminDAriane,
   encadreDecision,
   filDAriane,
+  lienConfidentialite,
   ligneTransparence,
   mentionEnTete,
   modeleEncadre,
@@ -50,7 +51,8 @@ export interface DonneesSite {
 export const bandeau = (): string => `<a class="nom-du-site" href="/">decodauto.com</a>${mentionEnTete()}`;
 
 /** Pied de toutes les pages : lien « Signaler une erreur » avec l'adresse de la page (absente sur la page 404). */
-export const pied = (adressePage?: string): string => signalerErreur(adressePage);
+export const pied = (adressePage?: string, adresseConfidentialite?: string): string =>
+  `${signalerErreur(adressePage)}${adresseConfidentialite !== undefined ? lienConfidentialite(adresseConfidentialite) : ''}`;
 
 function lignesDeLaPage(page: PageEditoriale, site: DonneesSite) {
   const { lignes, voyantsInconnus } = resoudreLignes(page.situations, site.voyants);

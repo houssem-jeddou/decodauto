@@ -292,8 +292,11 @@ const dossier = (): Objet =>
 const socle = (): Objet => ({
   id: 'fixture-a-propos',
   title: 'À propos (page de test)',
+  description: 'Fiche auteur et méthode (page de test).',
   libelle_court: 'À propos',
   date_modification: '2026-10-20',
+  date_revue: '2026-10-20',
+  prochaine_revue: '2027-10-20',
   auteurs: [{ id: 'fixture-auteur', nom: 'Auteur de test', presentation: "Fiche auteur d'une page de test.", profils: ['https://exemple.test/profil'] }],
 });
 
@@ -343,6 +346,8 @@ interface OptionsHtml {
   outilScript?: boolean;
   outilSansRenvoi?: boolean;
   outilIndexIncomplet?: boolean;
+  /** Page du socle construite sans sa meta description (livrable 7.2). */
+  socleSansDescription?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -511,7 +516,7 @@ function composantsCommuns(page: Objet, options: OptionsHtml): { signature: stri
 
 function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): string {
   const entete = `<!doctype html>\n<html lang="fr"><head><meta charset="utf-8"><title>${String(page['title'])}</title>`;
-  if (type === 'socle') return `${entete}</head><body><main><h1>${String(page['title'])}</h1></main></body></html>\n`;
+  if (type === 'socle') return `${entete}${options.socleSansDescription ? '' : `<meta name="description" content="${String(page['description'])}">`}</head><body><main><h1>${String(page['title'])}</h1></main></body></html>\n`;
   const ligneDonnees = options.tableauSansDonnees ? '' : '<tr><td>ACEA A3/B4</td></tr>';
   const blocs: Record<string, string> = {
     'arbre-de-decision': '<div data-element-unique="arbre-de-decision"><ul><li>Le démarreur tourne-t-il ? Oui : batterie probablement bonne.</li></ul></div>',
@@ -717,6 +722,10 @@ valide(
 );
 invalide('dates-revue-loi-montagne', 'pneus', loiMontagne({ date_revue: '2026-06-01', prochaine_revue: '2026-11-15' }), ['DATES-REVUE-DELAI'], 'Loi montagne revue en juin : la suivante tombe avant le 1er novembre, début de la saison (charte §8).');
 invalide('dates-journal-hors-periode', 'dossier', { ...dossier(), journal_modifications: [{ date: '2026-09-15', resume: 'Entrée antérieure à la publication.' }] }, ['DATES-ORDRE'], "Entrée du journal d'un dossier hors de la période de la page.");
+invalide('socle-sans-description', 'socle', (() => { const { description: _, ...reste } = socle(); return reste; })(), ['R7-CHAMP-MANQUANT'], "Page du socle sans description : la meta description manquerait (demande de changement n° 13).");
+invalide('socle-html-sans-description', 'socle', socle(), ['R7-HTML-DESCRIPTION'], 'Page du socle construite sans la meta description de son contenu.', { socleSansDescription: true });
+invalide('dates-socle-revue-delai', 'socle', { ...socle(), prochaine_revue: '2027-12-01' }, ['DATES-REVUE-DELAI'], 'Page du socle dont la prochaine revue dépasse 12 mois (demande de changement n° 13).');
+invalide('dates-socle-revue-ordre', 'socle', { ...socle(), prochaine_revue: '2026-10-20' }, ['R7-DATES'], 'Page du socle dont la prochaine revue ne suit pas la dernière.', undefined, ['R5-REVUE-DEPASSEE']);
 invalide('dates-socle-futur', 'socle', { ...socle(), date_modification: '2026-12-01' }, ['DATES-FUTUR'], 'Page du socle datée dans le futur.');
 invalide('composants-source-manquante', 'pneus', pneus(), ['SOURCES-ABSENTE'], 'Une source citée par la page manque dans la section « Sources ».', { sourceManquante: true });
 invalide(

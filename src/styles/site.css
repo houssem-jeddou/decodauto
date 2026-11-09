@@ -637,11 +637,21 @@ h3 {
   margin: 1.25rem 0 0;
 }
 
-/* Pied de page : lien de signalement (toutes les pages). */
+/* Date de mise à jour d'une page du socle. */
+.socle-date {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--texte-doux);
+}
+
+/* Pied de page : lien de signalement et lien vers la politique de confidentialité (toutes les pages). */
 .pied {
   max-width: 44rem;
   margin: 0 auto;
   padding: 1rem 1rem 2rem;
   border-top: 1px solid var(--bord);
   font-size: 0.9rem;
+}
+.lien-confidentialite {
+  margin-top: 0.5rem;
 }

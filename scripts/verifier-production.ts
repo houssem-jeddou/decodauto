@@ -1,20 +1,22 @@
 // Vérifie le site en ligne : redirections 301 (http → https, www → domaine nu, chemin conservé), accueil en ligne,
-// X-Robots-Tag cohérent avec le mode d'indexation du dépôt, robots.txt identique au dépôt, plan du site servi en XML.
+// X-Robots-Tag cohérent avec le mode d'indexation du dépôt, ni script ni cookie sur la page servie, robots.txt identique au
+// dépôt, plan du site servi en XML.
 // Lancé par la CI (job « production ») ; aucun secret, aucune écriture. Usage : npm run production [-- --information]
 //   --information : les écarts sont affichés comme des avertissements et le script réussit (pull request, branche
 //                   autre que main : la production n'a pas encore les changements de la branche).
 import { appendFile, readFile } from 'node:fs/promises';
 import { argv, env, exit, stdout } from 'node:process';
 import { modeIndexation } from '../src/lib/indexation.ts';
-import { verifierProduction, type Lire } from './lib/production.ts';
+import { ENTETES_LECTURE, verifierProduction, type Lire } from './lib/production.ts';
 
 const lire: Lire = async (url) => {
-  const r = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(20_000), headers: { 'user-agent': 'decodauto-verification-production' } });
+  const r = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(20_000), headers: ENTETES_LECTURE });
   return {
     statut: r.status,
     location: r.headers.get('location'),
     robotsTag: r.headers.get('x-robots-tag'),
     typeContenu: r.headers.get('content-type'),
+    cookie: r.headers.get('set-cookie'),
     corps: r.status >= 300 && r.status < 400 ? '' : await r.text(),
   };
 };

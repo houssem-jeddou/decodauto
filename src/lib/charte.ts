@@ -38,6 +38,14 @@ export const ANCRE_METHODE = 'methode';
 export const LIBELLE_LIEN_METHODE = 'Méthode';
 /** Texte du lien de signalement d'une erreur, présent sur toutes les pages (charte §5.3). */
 export const LIBELLE_SIGNALER_ERREUR = 'Signaler une erreur';
+/**
+ * Page du socle qui porte les mentions légales et la politique de confidentialité (livrable 7.2, 03 : « section des
+ * mentions légales »), ancre de la politique et texte du lien de pied de page. La CNIL recommande un lien visible sur chaque
+ * page, intitulé clairement.
+ */
+export const PAGE_CONFIDENTIALITE = 'mentions-legales';
+export const ANCRE_CONFIDENTIALITE = 'confidentialite';
+export const LIBELLE_LIEN_CONFIDENTIALITE = 'Mentions légales et confidentialité';
 
 /**
  * Mention en tête de page, avant le H1, sur toutes les pages (socle compris) : le lecteur sait dès la première
@@ -161,6 +169,8 @@ export interface RegleMarquesMethode {
  * dossier (3 mois) est déjà contrôlé par son schéma (R7-FORMAT) ; la loi montagne a en plus sa revue avant chaque
  * 1er novembre (REVUE_LOI_MONTAGNE).
  */
+/** Pages du socle (demande de changement n° 13) : ce qu'elles disent des prestataires et du droit se relit chaque année. */
+export const DELAI_REVUE_SOCLE_MOIS = 12;
 export const DELAI_REVUE_MOIS = { voyant: 12, 'code-defaut': 12, panne: 12, fluide: 12, pneus: 6 } as const satisfies Partial<Record<TypePage, number>>;
 
 /**

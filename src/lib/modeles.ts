@@ -34,13 +34,16 @@
 // L'outil vient avant le texte : le lecteur qui cherche son voyant ne doit pas d'abord lire un guide.
 // ---------------------------------------------------------------------------------------------
 import { basDePage, causesDeLaPage, hautDePage, tableauNoticesDeLaPage, type DonneesSite } from './gabarit.ts';
-import { attributHtml, echapper, typographierHtml } from './html.ts';
+import { attributHtml, echapper, texteHtml, typographierHtml } from './html.ts';
+import { ANCRE_CONFIDENTIALITE, PAGE_CONFIDENTIALITE } from './charte.ts';
+import { dateAffichee } from './cout.ts';
+import { ADRESSE_SIGNALEMENT } from './site.ts';
 import { nomCourtSource, type SourceDuRegistre } from './composants.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
 import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-voyants.ts';
-import type { PageEditoriale } from '../schemas/pages.ts';
+import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
 import type { TypePage } from '../schemas/listes.ts';
 
 /** Un modèle : la page (frontmatter validé), les données du site et le corps rendu depuis le Markdown (HTML). */
@@ -220,6 +223,32 @@ export const pageOutilVoyants: Modele = (page, site, corpsHtml) => {
     basDePage(page, site, [...texte.citations, ...modele.sources.map((source) => ({ source }))], NOTE_SOURCES_OUTIL),
   ].join('');
 };
+
+/** Dans le texte d'une page du socle : l'adresse de contact, tirée de site.ts, jamais recopiée (livrable 7.2). */
+export const MARQUEUR_CONTACT = '{{contact}}';
+
+/**
+ * Page du socle (livrable 7.2) : H1, texte rédigé, date de mise à jour. Ni encadré, ni signature, ni élément unique
+ * (docs/08 §2) ; la mention en tête et le pied viennent du gabarit commun. Sur la page qui porte la politique de
+ * confidentialité, le titre de la section reçoit son ancre stable, quel que soit le rendu du Markdown. Une référence
+ * inconnue, ou une section de confidentialité absente, fait échouer la construction.
+ */
+export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date_modification'>, corpsHtml: string): string {
+  const contact = `<!--email_off--><a href="mailto:${ADRESSE_SIGNALEMENT}">${texteHtml(ADRESSE_SIGNALEMENT)}</a><!--/email_off-->`;
+  let corps = corpsHtml.replaceAll(MARQUEUR_CONTACT, contact);
+  const inconnue = /\{\{[^}]*\}\}/.exec(corps);
+  if (inconnue !== null) throw new Error(`page « ${page.id} » : référence inconnue dans le texte : ${inconnue[0]}`);
+  if (page.id === PAGE_CONFIDENTIALITE) {
+    const titre = /<h2(?:\s[^>]*)?>\s*Confidentialité\s*<\/h2>/;
+    if (!titre.test(corps)) throw new Error(`page « ${page.id} » : le titre de niveau 2 « Confidentialité » est absent`);
+    corps = corps.replace(titre, `<h2 id="${ANCRE_CONFIDENTIALITE}">Confidentialité</h2>`);
+  }
+  return [
+    `<h1>${texteHtml(page.title)}</h1>`,
+    `<div class="corps" data-corps>${typographierHtml(corps)}</div>`,
+    `<p class="socle-date" data-socle-date>${texteHtml(`Mis à jour le ${dateAffichee(page.date_modification)}`)}</p>`,
+  ].join('');
+}
 
 /** Modèles livrés, par type. La variante outil du type voyant : pageOutilVoyants. Les types des vagues B et C n'en ont pas encore. */
 export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut, pneus: pagePneus };
