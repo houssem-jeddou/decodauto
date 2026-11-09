@@ -1,0 +1,235 @@
+# Archives du journal : revues indépendantes jusqu'à la porte de sortie de l'étape 6 (lignes déplacées du journal le 09/11/2026, inchangées)
+
+## Revues indépendantes, du 04/11 au 22/10/2026 : ce qu'elles ont changé
+- 03-04/11, porte de sortie de l'étape 6 (6.9), deux revues (deux relecteurs), le maximum ; chacune « à corriger », rien de bloquant. Empreintes, journaux de CI, numéros de PR, couverture des 42 pages et grille des coûts revérifiés par les relecteurs : conformes.
+  - **Première revue, changé** :
+    - l'outil voyants, simple réserve, devient la demande de changement n° 11, avec un critère à la porte de l'étape 8 et le changement de recommandation dit (piste technique au journal à 22 h 45, puis premier livrable de l'étape 8) ;
+    - la section « Méthode » ne disait pas d'où viennent la signification et les causes des codes défaut : complément proposé ;
+    - le test de la porte passait à tort avec un exemple copié dans le mauvais dossier : type contrôlé contre le plan ; l'outil nommé comme seule exception ;
+    - écart de la plage prévue du voyant moteur dit ; « nos rédactions » manquait au §2.7 ; réception de `erreur@decodauto.com` non confirmée signalée.
+  - **Seconde revue, changé** :
+    - demande n° 11 : aucun critère retiré (gravité lisible, lien « Signaler une erreur », exemple validé exigés de l'outil à la porte 8) ; part de la machine et de la recette ; option (b) à la place de l'étape 7 ; R7-ELEMENT-ATTENDU cité ;
+    - complément de la méthode : « pages écrites pour vendre » (un éditeur d'outil de diagnostic vend son logiciel), sources citées sur chaque page, cas d'un autre marché non appliqué en France, codes constructeur, code lu sans voyant, « notices lues » ; même précision au §2.2 ;
+    - test : l'identifiant de l'outil doit rester une page voyant de la vague A ; intitulé ramené à ce que prouve l'empreinte.
+  - **Laissé** : le test vérifie un modèle par type, pas qu'une page saura le remplir ; la PR #16 n'a pas de section « Validation » (prouvée par le commit et le journal).
+  - **Non vérifié par les relecteurs** : rendu HTML (pas de construction Astro), scores Lighthouse, mots exacts de Houssem, comparaison complète projet / `docs/`, messagerie de `erreur@decodauto.com`.
+- 03/11, livrable 6.8 (briefs de la vague A, avec le relevé 6.7), une revue (« à corriger », rien de bloquant) ; pas de seconde revue, aucune correction ne traitant un point bloquant. Le relecteur a recompté le relevé avec son propre script (213 suggestions et questions, 126 positions, aperçu IA sur 18 requêtes sur 19, domaines) et recalculé les 19 empreintes et les volumes des 22 briefs : conformes.
+  - **Changé** :
+    - liens du plan lus dans un seul sens : 11 briefs sur 22 incomplets ; ils sont lus comme le contrôle du texte les lit, avec un test ;
+    - deux consignes reformulaient une action de la base (frein de stationnement, airbag passager, dont la condition de sécurité disparaissait) : l'action est affichée depuis la base, et aucune consigne ne la reformule ;
+    - pages codes défaut : la ligne de l'encadré n'est attribuée que d'après un document qui cite le voyant (seconde revue de 6.6b) ; pour P0380 et P1351, la notice Seat Ibiza p. 289 relie le témoin de préchauffage qui clignote à un défaut du moteur diesel ; lignes reprises dans l'exemple P0087 affichées ;
+    - pression des pneus : la notice Renault Clio 5 traite la pression à chaud (p. 348) et dit « une fois par mois » (p. 206) ; l'aperçu IA cite le domaine de la Sécurité routière, piste notée ;
+    - volumes, nombres de mots-clés et vagues recopiés dans les consignes : retirés, test ajouté ;
+    - repères (« désactiver », « combien de km », modèles), génération des notices, « ESP et frein à main », questions oubliées (P0087, batterie, outil voyants), exclusions de l'outil (hybrides, deux-roues), champ `carburant` des codes ;
+    - README du relevé : constats 3 (77 avec « frein mini »), 5 (5 questions et 4 recherches associées) et 7 (sites de constructeurs et de manufacturiers de pneus) précisés ; commentaires « validées » corrigés.
+  - **Laissé ouvert** : modèle de l'outil voyants non livré (porte 6.9) ; texte de référence de la page « pression des pneus » ; PDF des notices, Légifrance et textes du contrôle technique non relus (listés dans « Sources à trouver » de chaque brief) ; fidélité du relevé à la réponse de SerpApi (empreintes calculées dans le navigateur).
+- 03/11, livrable 6.6c (modèle de page pneus et obligations, exemple « loi montagne »), deux revues (deux relecteurs), le maximum. Chacune « à corriger », rien de bloquant ; aucun fait faux trouvé.
+  - **Première revue, changé** :
+    - trois faits sur les chaussettes et les chaînes n'étaient pas dans le relevé : relus sur la page de la Sécurité routière et recopiés ;
+    - le panneau B26 rendait « À faire tout de suite » la ligne « chaînes à bord » : ligne B26 à part, chaînes à bord en « Aucune action nécessaire » ;
+    - action de la ligne 1 écrite pour le conducteur déjà en route ; limite de la définition du verdict (« faites-la contrôler ») dite dans la décision 1 ;
+    - extraits recopiés en entier dans le paquet ; le mot « pneus neige » employé, avec la règle de la Sécurité routière ;
+    - amende : le panneau B26 relève d'une autre règle ; carte de la Sécurité routière citée ; dérogations ; dates au format JJ/MM/AAAA ; tableau atteignable au clavier ; test d'une page pneus avec un voyant rattaché ; date de consultation de D314-8.
+  - **Seconde revue, changé** :
+    - ligne 3 précisée « sur route sans neige ni verglas », et le texte dit qu'aucun texte lu n'impose les chaînes sur neige sans panneau B26 ;
+    - « le panneau qui rend les chaînes obligatoires (B26) », mot du lecteur ;
+    - option (b) de la décision 3 resserrée à la loi montagne (une page « pression » ou « usure » garde le dépannage) ;
+    - décision 7 ajoutée : liens vers la carte et les arrêtés dans le texte ;
+    - contrôle R7-TEXTE-REFERENCE-NATURE (nature affichée = catégorie du registre) ; tableau nommé par son titre ; 3PMSF expliqué ; doublons réduits ; paquet fidèle à la page.
+  - **Écarté** : citer l'article D314-8, II, 1° sur les lignes 2 et 3 (son niveau, « oui », créerait un écart à signaler sans rien changer au verdict) ; développer le sigle M+S (aucune source lue ne le fait).
+  - **Laissé ouvert** : pages de la Sécurité routière et Légifrance illisibles pour les relecteurs (relevé seul) ; sanction du panneau B26 ; arrêtés préfectoraux non lus (nombre de départements, liste des communes) ; chaussettes devant le panneau B26 (Sécurité routière seule) ; arrêté du 30/10/2025 à suivre avec le montant.
+- 03/11, livrable 6.6b (modèle de page code défaut, exemple P0087), deux revues (deux relecteurs), le maximum.
+  - **Première revue** (« à corriger », un point bloquant) :
+    - une phrase sur Volkswagen était contredite par les notes de Ross-Tech (2.0 TFSI, TDI) : rangée « Groupe Volkswagen » ajoutée, phrase retirée (point bloquant) ;
+    - description de Bosch limitée aux systèmes diesel à rampe commune ; cause « capteur de pression (G410) » ajoutée ; portée de Ross-Tech dite ;
+    - causes dans l'ordre du circuit du carburant, doublons réduits ; autre ordre de page proposé à Houssem (décision 3) ;
+    - trois pages de test ; « fiche technique » Kia ; désignation des moteurs (décision 4) ; intitulé « Source » sur téléphone.
+  - **Seconde revue** (« à corriger », rien de bloquant) :
+    - bulletin Audi rendu fidèlement, vérifié sur le document : ne remplacer aucune pièce ni mettre à jour le logiciel ; la modification du logiciel était à l'étude pour la production ;
+    - cas Kia borné aux voitures vendues aux États-Unis, dans les causes aussi ;
+    - Bosch : une vanne de régulation ou un limiteur, toujours présent (vérifié sur la page) ; voyant moteur attribué aux seuls documents qui le citent ; lien entre arbre à cames et pompe haute pression retiré ;
+    - quatre pages de test : chaque comparaison du tableau par marque est prouvée seule (essai par mutation) ; l'élément unique « tableau » doit être le tableau par marque ;
+    - sigle DTC expliqué (mots-clés « dtc p0087 ») ; rubriques citées pour Ross-Tech et Audi ; autres moteurs : même signification, même marche à suivre ;
+    - ajoutés au paquet : critère des sources secondaires à inscrire dans la charte (décision 1) ; consigne pour un code lu sans voyant (décision 5).
+  - **Laissé ouvert** : sources lues par WebFetch seulement ; « C-Crosser » interprété ; bulletins Volkswagen cités par Ross-Tech non lus ; marché français non vérifié ; pas de rubrique ni de page pour Hella, Kia et Bosch (documents d'une page ou sans rubrique).
+- 03/11, livrable 6.6a (modèle de page voyant, exemple « voyant moteur »), deux revues (deux relecteurs), le maximum.
+  - **Première revue** (« à corriger », un point bloquant) :
+    - trois phrases de fait étaient contredites par les notices relevées : aucune distance (la Peugeot 208 en donne une, cas AdBlue), aucune manipulation pour éteindre le voyant et aucune exception (Toyota Yaris p. 297, réservoir vidé). Elles sont réécrites (point bloquant) ;
+    - CITATIONS-PART ne voyait pas une page sans texte rédigé (32 %) : contrôle TEXTE-REDIGE-ABSENT ajouté, et un rendu Markdown absent fait échouer la construction ;
+    - le job de recette restait rouge à cause du lien « Méthode » (page « à propos », étape 7) : erreurs attendues déclarées dans le workflow, chacune désignée par son code, son fichier et un extrait ; un attendu qui ne se produit plus fait échouer (ATTENDU-ABSENT) ;
+    - verdict d'abord, action non adoucie ;
+    - génération et édition des notices tirées du registre (`{{notice:…}}`) ;
+    - réponses ajoutées : voyant au démarrage, voyant rouge et « Risque casse moteur », « Antipollution à contrôler » ;
+    - date de la base corrigée (24/10) ; description raccourcie ;
+    - identifiant de l'auteur supposé défini une seule fois.
+  - **Seconde revue** (« à corriger », rien de bloquant ; chaque fait et chaque chiffre relu exact) :
+    - les distances AdBlue (1 100 km, 800 km) relèvent de la page AdBlue (cas 11 du plan) : retirées, avec un renvoi à cette page ;
+    - chaque partie qui répond à une question redit le verdict retenu, par son libellé tiré de la base (`{{verdict:…}}`) ;
+    - la description ne reformule plus le verdict (« dès que possible » est un autre niveau de la grille) ;
+    - partie « défaut moteur, vanne EGR, sonde » ajoutée ; doublons réduits ; noms du voyant dans chaque notice ; « jaune » (Seat Ibiza) ;
+    - pages citées dans le texte seulement ajoutées à « Sources » (`{{cite:…}}`) ;
+    - `--exemples` n'est accepté que sur `dist-exemples` construit avec `AVEC_EXEMPLES=1` ;
+    - « Marche à suivre » retirée du corps : c'est une règle de la charte, d'où la demande de changement n° 9.
+  - **Laissé ouvert** :
+    - mots-clés « défaut moteur », vanne EGR, perte de puissance et contrôle technique : à traiter au brief 6.8, avec leurs sources ;
+    - vérifications sur les PDF : Seat Ibiza p. 289, Toyota p. 297, témoins des messages AdBlue ;
+    - le rendu réel n'est contrôlé que par le job de recette, qui n'est pas requis pour fusionner.
+- 03/11, livrable 6.5 (contrôles peu coûteux), deux revues (deux relecteurs), le maximum ; chacune « à corriger », rien de bloquant.
+  - **Première revue, changé** :
+    - un `blockquote` ou un `q` sans source n'est plus une citation (encadré « À retenir » contrôlé) ;
+    - guillemets imbriqués ; un guillemet non fermé ne déborde plus sur les blocs suivants ;
+    - textes alternatifs et libellés lus ; title et description présents sur toutes les pages (TITLE-ABSENT, DESCRIPTION-ABSENTE) ;
+    - calcul des mois borné au dernier jour du mois ; « nos équipes », « nos rédactions » ;
+    - tests sur données réelles qui auraient échoué à partir du 03/11/2027 (revue de la démonstration dépassée) : date des tests tirée des données.
+  - **Seconde revue, changé** :
+    - un saut de ligne dans un paragraphe cachait une expression, une citation contenant un sigle expliqué était refusée : blancs ramenés à une espace, blocs séparés par un caractère hors texte, attributs lus à part ;
+    - citation en bloc reconnue seulement si sa source (`data-source-id`) est listée dans « Sources » ; `cite` retiré ;
+    - title d'une page repris comme H1 d'une autre (TITLE-H1-DOUBLON) ; même calcul des mois pour le dossier.
+  - **Écarté ou laissé ouvert** : alerte des dates futures des montants (COUT-DATE-FUTURE, validée en 6.1) non alignée ; source d'un texte entre guillemets non vérifiable par la machine (recette) ; attribution par `figure` et `cite` non reconnue (les modèles n'en ont pas) ; longueur des title et descriptions (idée reportée).
+- 03/11, livrable 6.4 (tableau des notices), une revue (« à corriger », rien de bloquant) ; pas de seconde revue, aucune correction ne traitant un point bloquant ni n'ajoutant de contenu.
+  - **Changé** :
+    - une rangée par consigne, et non par notice : deux consignes d'une même notice regroupées affichaient un extrait sous le niveau de l'autre (8 rangées sur 110) ;
+    - « Consigne retenue » calculée comme R3 (verdict le plus prudent et urgence la plus forte, pris séparément) : une note fausse aurait pu s'afficher après une révision de la base ;
+    - contrôles rangée par rangée (extrait et page au texte exact) ; note refusée quand une consigne est retenue ;
+    - phrase « la notice de votre voiture fait foi » reprise de la charte, sans recopie (empreinte inchangée) ;
+    - demande de changement n° 8 : recherches par marque recomptées (sur les pages voyants, 30 à 32 suggestions sur 140, dont 10 à 15 avec une des cinq marques citées ; les 42 autres sont sur les codes défaut) ; impact complété (lien dans l'encadré, `CLAUDE.md`, retour arrière en cas de refus).
+  - **Écarté** : ranger les trois textes du tableau dans la charte ; ils sont validés avec le livrable, comme les autres libellés des composants.
+  - **Laissé ouvert** : part de texte cité par page (L122-5) et longueur du tableau sur téléphone, à fixer en 6.6 ; rendu sous Safari et avec un lecteur d'écran, à la recette.
+- 02/11, livrable 6.3 (composants communs), deux revues (deux relecteurs), le maximum.
+  - **Première revue** (« à corriger », un point bloquant) :
+    - le pictogramme prenait la couleur du verdict (frein de stationnement rouge affiché en vert) : il prend la couleur du voyant fixée par la base, sur fond sombre (point bloquant) ;
+    - la phrase des sources est contrôlée, pas seulement le nombre de notices ; une source secondaire n'est jamais présentée comme fondant un verdict ;
+    - tests des codes qui n'en avaient pas ; test des styles ; typographie du corps des pages (Astro 7 rend le Markdown avec Sätteri : fonction `typographierHtml` au lieu d'un greffon) ;
+    - contrôles du maillage construit (fil d'Ariane, pages enfants, pages liées) ; lien de signalement de la 404 sans adresse de page.
+  - **Seconde revue** (« à corriger », un point bloquant : CI rouge sur un test, corrigé) :
+    - typographie du HTML qui respecte les attributs, les scripts et les commentaires ; guillemets autour d'un gras, pouces, « Attention: » ;
+    - positions exactes de la signature et de la ligne de transparence, fil d'Ariane avant le H1, sources avec titre et date ;
+    - « la consigne la plus prudente est retenue » quand les notices divergent ; édition nommée pour une ou deux notices ;
+    - lien mailto en CRLF, adresse affichée et protégée du masquage de Cloudflare (contrôle en production) ; identifiants préfixés et contrôle des doublons.
+  - **Laissé à la recette ou à décider** : visibilité réelle à l'écran (rendu) ; ordre « lignes puis coût » dans l'encadré (08 dit « question et coût, puis lignes ») ; pictogramme décoratif (charte §3.6) ; réception effective des courriels à `erreur@decodauto.com`.
+- 02/11, livrable 6.2 (charte éditoriale), deux revues (deux relecteurs), le maximum.
+  - **Première revue** (« à corriger », un point bloquant) :
+    - la méthode affirmait que tout verdict reposait sur 3 marques de 2 groupes : faux pour les lignes saisies ; le cas d'une alerte décrite dans une ou deux notices est dit (point bloquant) ;
+    - mention courte en tête de toutes les pages, pour informer dès la première exposition (article 50(5) du règlement sur l'IA) ;
+    - « Texte rédigé par une IA », sources « citées », lien « Méthode », signature « Responsable éditorial » proposés ;
+    - indépendance réécrite (régie publicitaire, lien rémunéré signalé) ;
+    - règles ajoutées : modèle et édition de la notice, textes d'autrui, courte citation, photos réelles, accessibilité, distance non sourcée ;
+    - nombres calculés depuis leur source ; tests du registre sans Toyota et des expressions interdites.
+  - **Seconde revue** (« à corriger », rien de bloquant) :
+    - l'IA propose le niveau de chaque citation, Houssem le valide (la méthode disait que l'IA ne fixe aucun verdict) ;
+    - dates de revue limitées aux pages de conseil ; exemple des plaquettes corrigé (D4 : décrit dans aucune des six notices lues) ;
+    - pictogramme permis dans l'encadré s'il double un texte (08 §3, règle 9) ;
+    - expressions interdites précisées : « garantie légale », « extension de garantie », « Peugeot Expert » restent permis ;
+    - empreinte des textes affichés : tout changement de sens après la validation de Houssem fait échouer le test ;
+    - sources juridiques précisées (lignes directrices C(2026) 5054 lues dans un résumé ; report limité au marquage des fournisseurs) ;
+    - annonces automatiques sans pleine page ni ancrage en haut, pour tenir « jamais avant la décision ».
+  - **Écarté ou laissé ouvert** : la compétence exigée pour la relecture humaine n'a pas été retrouvée dans un texte officiel ; elle ne change pas la conclusion (signaler l'IA sur toutes les pages). L'article L122-5 (courte citation) est à relire avant 6.4.
+- 28/10, PR #11 (application de la demande n° 6), une revue du code : « à corriger », un point bloquant.
+  - **Changé** :
+    - l'empreinte de l'encadré porte la plage calculée : reclasser une pièce fait revalider (point bloquant) ;
+    - R9 exige les phrases entières (plage dans son ordre, risque, dates des montants) ;
+    - date d'entrée en vigueur des montants, textes alignés sur la demande acceptée ;
+    - page outil sans dépannage automatique, avec ses pages de test ;
+    - doublons refusés, alerte de date future, catalogue réordonné.
+  - **Écarté ou reporté** :
+    - limiter le risque « si vous continuez » aux tranches lourdes : changement de structure, à proposer à Houssem ;
+    - phrase d'affichage des fourchettes (« souvent de … € ») et « selon la cause » : composants communs (6.3) ;
+    - deux mentions locales de 02 (« Sans prix de prestations », « Ni prix ni centres ») : laissées telles quelles, alignement à décider par Houssem.
+- 28/10, demande de changement n° 6 (coût probable), deux revues (deux relecteurs), le maximum. Chacune « à corriger », rien de bloquant.
+  - **Première revue, changé** :
+    - le classement d'une cause par une liste de pièces est présenté comme une convention, pas comme un coût sourcé ;
+    - l'ordre des tranches suit la lourdeur de l'intervention, avec l'avertissement qu'un entretien peut coûter plus qu'une petite réparation ;
+    - l'exception à la règle 5 pour le tarif du dépannage est écrite dans l'impact ;
+    - chiffres corrigés : 7 suggestions sur 213, 565 mots-clés « prix » hors périmètre dans 06, aperçu IA coupé à 700 caractères, SRA non lue ;
+    - « si vous continuez de rouler » ajouté ; citations désignées sans ambiguïté ; contrôles des groupes et des sources des montants ajoutés.
+  - **Seconde revue, changé** :
+    - la tranche d'une cause est calculée depuis la liste des pièces (`data/couts.json`), au lieu d'être saisie ;
+    - les montants vivent dans `data/couts.json` avec leur empreinte validée par Houssem (R4), hors des schémas ;
+    - plus de masquage automatique d'un montant : le site est statique, la date de vérification est affichée et une alerte fait échouer le contrôle du lundi ;
+    - « aucune amende loi montagne » devient un montant daté, revérifié chaque mois ;
+    - 02 ajouté à l'impact de la décision 2 ; dépannage calculé sur les pages à verdict d'arrêt ; page outil « Selon le voyant ».
+  - **Écarté ou reporté** :
+    - amende minorée et majorée : articles non lus, à voir avec la page des pneus (étape 11) ;
+    - recompte à 8 résultats parlant d'argent : la recherche garde 7, avec la liste et le critère de recompte.
+- 28/10, demande de changement n° 4 : une revue, « à corriger », rien de bloquant.
+  - **Changé** : la définition suit l'ordre de l'action (gestes en roulant, arrêt ou appoint au premier endroit sûr, garage), au lieu d'opposer deux cas qui se recouvraient ; l'en-tête de la grille cite la demande n° 4.
+  - **Retiré** : une consigne de notice ajoutée « à faire en roulant », hors du champ de D12 et lisible trop largement. Le classement correspondant est déjà documenté en D5.
+- 28/10, demande de changement n° 5 : une revue, « à corriger », rien de bloquant. Ses formulations sont reprises :
+  - format tutoriel et arbre de décision livrés avec le modèle panne, tableau avec le modèle fluide ;
+  - exemples préparés sur la branche du lot et publiés seulement avec lui, après son paquet et sa recette ;
+  - une séance de validation de plus aux étapes 10 et 11 ;
+  - tranches de coût couvrant les 42 pages dès l'étape 6 ;
+  - raison corrigée : c'est le registre qui ne couvre que la vague A ;
+  - porte de l'étape 11 réécrite.
+- 28/10, lot 7.1 : une revue, « à corriger », rien de bloquant.
+  - **Changé** : une erreur réseau devient un constat décrit au lieu d'interrompre la vérification (c'est ce qui arrivait avec `www.decodauto.com` sans DNS) ; mode informatif sur les pull requests, avec avertissements et job vert, à la place de `continue-on-error` qui laissait le job rouge ; chemin conservé vérifié aussi pour http ; adresse du site importée par `astro.config.mjs` (source unique).
+  - **Noté** : `lastmod` sera ajouté à l'étape 8 depuis `date_modification`.
+- 24/10, étape 5, registre et brouillon de la base voyants, deux revues (même relecteur) :
+  - **Première revue** (« à corriger », deux points bloquants), avec 111 extraits comparés aux 5 PDF officiels, tous retrouvés :
+    - le voyant de direction Renault et Dacia s'allume avec le témoin STOP, non identifié dans le texte extrait : il passe dans la ligne `direction-rouge` ;
+    - Seat, plus prudente, avait été omise pour le défaut du système de pression des pneus : elle est listée « sans consigne » (D11) ;
+    - le témoin Service (clé) de Renault et Dacia a sa propre consigne : D9 ;
+    - les consignes AdBlue de Dacia sont ajoutées ;
+    - le message « Crevaison » est ajouté à la ligne de pression des pneus ;
+    - écarts réécrits ; actions débarrassées des précisions non sourcées ;
+    - l'empreinte du contenu validé est vérifiée avant de verser la base.
+  - **Seconde revue** (« acceptable », rien de bloquant) : urgence de l'entretien à trancher (fait en D9), jonctions d'extraits marquées, empreinte étendue aux pictogrammes, au registre et au tableau page → sources, test du refus de versement.
+  - **Écarté** : rien. Les options ouvertes ont été tranchées en D9 et D11.
+  - **Après les deux revues** : l'urgence du rappel d'entretien a été changée (D9, exception de la grille pour l'entretien périodique) sans troisième revue, le maximum étant atteint. Signalée comme point ouvert, elle a été acceptée expressément par Houssem le 24/10.
+- 23/10 (soir), demande de changement n° 3, deux revues :
+  - **Première revue** (« à corriger », un point bloquant) :
+    - la grille rangeait « sans tarder » en « dans les jours qui viennent » ; ces mots valent maintenant une urgence immédiate ;
+    - consignes réelles de la Peugeot 208 mieux classées : entretien périodique, action du conducteur, arrêt suivi d'une reprise ;
+    - classement selon le sens, avec le libellé « Non, ne poursuivez pas votre trajet » ;
+    - encadré contrôlé ligne par ligne ;
+    - R2 compare aussi l'urgence ;
+    - le règlement ONU ne fixe pas de niveau ;
+    - signes gardés dans l'empreinte ;
+    - garantie réelle de la règle des marques dite : 2 groupes ;
+    - identifiant et dessin verrouillés ;
+    - liste blanche des pictogrammes.
+  - **Seconde revue** (« à corriger », un point bloquant) :
+    - les pages de volkswagen.fr demandent l'arrêt même pour des témoins jaunes : une page web générique de marque devient une source secondaire ;
+    - une ligne plus sévère que toutes ses citations est refusée (R3-NIVEAU-SANS-SOURCE) ;
+    - rappel R3-NIVEAU-A-VERIFIER ;
+    - ancêtres masqués de l'encadré détectés ;
+    - tirets lus comme signe moins ;
+    - la page reprend ce que l'encadré affiche des lignes de la base, pas leurs citations.
+  - **Écartés** :
+    - un classement automatique bloquant des extraits : le classement demande du jugement, c'est donc une alerte ;
+    - l'égalité « 5W-30 » = « 5W30 » dans l'empreinte : au pire, une revalidation de trop.
+- 23/10 (soir), audit final du plan et des règles (nouveau relecteur, sur la dernière version de tous les documents) : « à corriger » sur cinq manques importants (niveaux de verdict non définis, ouverture sur la décision non contrôlée, pas de correction urgente, `main` non protégée, réglages hors dépôt et découverte du domaine absents du plan). Tout est intégré dans 03 v4. Écarté : un compte GitHub séparé pour Claude (facultatif, la protection de `main` suffit).
+- 22/10 : instructions du projet revues (champ de la revue précisé, format anti-complaisance avec preuves, deux revues maximum, alignement avec 03 et 04, rythme de mise à jour du journal).
+- 22/10 (soir), choix technique, deux revues :
+  - déploiement conditionné aux contrôles ;
+  - stack confirmée, sans impact négatif pour le SEO ;
+  - réglages Cloudflare reportés (voir « Idées reportées »).
+- 22/10 (soir), structure des contenus, trois revues (la troisième à la demande de Houssem) :
+  - verdicts des voyants pris dans la base ;
+  - sources tirées du registre ;
+  - voyant température rattaché à toute page ;
+  - colonne « action » ;
+  - champs calculés ;
+  - format tutoriel.
+- 23/10, PR #1, deux revues du code :
+  - la première a demandé 9 corrections : lignes de voyants reprises de la base, pages hors plan, tableau non vide, marqueur tutoriel, indexation à double clé, domaine personnalisé, suppression du déploiement manuel, contrôle hebdomadaire, CLAUDE.md complété ;
+  - la seconde : 9 corrections faites, fusion possible.
+- 23/10, revue de porte de l'étape 3 : rien de bloquant. Elle a relevé :
+  - le projet Claude n'était pas à jour (08 absent, 04 ancien) ;
+  - deux sources de vérité se contredisaient (CLAUDE.md et docs/README.md) ;
+  - un commit de documentation a été poussé directement sur main sans PR (9c46886, par Claude, contraire à CLAUDE.md ; sans dégât, contrôles verts). Désormais, toute modification passe par une PR.
+- 23/10, plan du site, deux revues (la seconde à la demande de Houssem) :
+  - requête de la page usure : « pneu usé » ;
+  - 7 liens ajoutés, dont l'outil voyants vers la page surchauffe (voyant température) ;
+  - une page mère affiche ses enfants ;
+  - les cas 11 et 12, écarts à la colonne précision de 05, sont devenus la demande de changement n° 2 ;
+  - un lien vers une page pas encore écrite est une information, pas une alerte ;
+  - contrôles de la porte précisés (précision de 05, singulier, « sans / ne / pas ») ;
+  - notes pour les étapes 5 et 6 (voyant moteur rouge, AdBlue, voyant vidange, 85W140, titres fumées et bruit moteur).
+- 23/10, PR #3, deux revues du code :
+  - liens du texte lus sous toutes leurs formes (relatifs, absolus vers decodauto.com, liens automatiques, adresses nues), sans faux positifs (images, fichiers, code, notes de bas de page) ;
+  - texte du socle contrôlé lui aussi ;
+  - branchements couverts par des tests (vérifiés par mutation) ;
+  - parties de 09 générées par `npm run plan:vue` et vérifiées par un test.
+- 23/10, revue du planning et des règles (un relecteur, qui a lu les documents seul avant la proposition) : « à corriger » sur trois manques, la méthode de sourçage de l'étape 5, les pictogrammes et la transparence. Apports intégrés : méthode multi-marques et catégories de sources (règlement ONU n° 121, RappelConso, normes des codes défaut), règlement européen sur l'IA (article 50), encadré de décision relu par Houssem, recette avant chaque fusion après le lancement, seuil Lighthouse avec la publicité, alignement de 01, 02 et 03. Écartés : trois niveaux de procédure (déjà couverts), annuaires et liens dans les forums (liens artificiels selon Google).
+- 23/10, revue globale des étapes 1 à 4, deux relecteurs (trafic et utilité avec la base 06 ; fondations et production) : « acceptable », rien de bloquant. Exclusions, codes retenus, vagues, adresses et liens confirmés. Apports : 03 v2 (voir l'historique), règle des liens allégée, demandes de changement à ouvrir à l'étape 5 (empreinte, pictogrammes), notes pour l'étape 6, idées reportées complétées.
