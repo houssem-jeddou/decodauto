@@ -196,6 +196,7 @@ Dernière mise à jour : 09/11/2026 (22 h, heure de Tunis)
   - Cloudflare, le 09/11, par Claude dans le Chrome de Houssem, sur sa demande : Web Analytics désactivé (il était sur « Enable, excluding visitor data in the EU ») ; Bot Fight Mode déjà désactivé ; page servie relue sans script ;
   - charte §2.7, §4, §8 et §9 précisées ;
   - sources lues : `travaux/etape-7/textes/mesure-audience-et-rgpd.md` ; paquet : `travaux/etape-7/paquet-7.2-confidentialite.md`.
+  - preuves : `npm test` 522 sur 522 ; CI de la PR verte sur 41e2b60 (run 42696736322 : contrôles, recette des exemples avec 0 erreur bloquante, Lighthouse conforme sur 5 pages dont `/mentions-legales/`, vérification en production « tout est conforme », sans l'avertissement PROD-TRACEUR du 04/11) ; une revue indépendante.
 - [ ] Données structurées (Article, fil d'Ariane, auteur), réglages Cloudflare (robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow), emplacements publicitaires non affichés, Lighthouse sur les pages du socle.
 - [ ] Mentions légales : après le statut juridique.
 
