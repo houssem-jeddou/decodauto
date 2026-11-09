@@ -1,0 +1,17 @@
+{
+  "pages_corrigees": {
+    "perte de puissance 1.6 hdi 110 sans voyant": ["perte-de-puissance", "la requête porte sur la perte de puissance sans voyant, pas sur l'outil voyants"],
+    "perte de puissance voiture diesel sans voyant allumé": ["perte-de-puissance", "même raison"],
+    "perte de puissance voiture avec voyant allumé": ["voyant-moteur", "même intention que « voyant moteur et perte de puissance », déjà sur voyant-moteur dans 05"],
+    "voiture qui ne démarre plus mais les voyants s'allument": ["voiture-ne-demarre-pas", "variante de « ma voiture ne démarre plus mais les voyants s allument », déjà sur cette page dans 05"],
+    "fap voiture": ["voyant-fap", "question générale sur le filtre à particules : même page que « fap moteur essence » et « fap voiture voyant » dans 05"],
+    "fap voiture essence": ["voyant-fap", "même intention que « fap moteur essence », déjà sur voyant-fap dans 05"]
+  },
+  "ecartees": {
+    "fap voiture prix": "requête de prix : les 10 lignes « prix » du FAP de 06 sont hors périmètre (02, règle des prix)"
+  },
+  "mots_generiques": ["voiture", "auto", "automobile", "vehicule"],
+  "ajout_hors_critere_06": {
+    "gonflement pneu voiture": ["pression-des-pneus", "même fourchette et même intention que « gonfler pneu voiture » ; seule ligne ajoutée par jugement, le critère ne la voit pas (« gonflement » et « gonfler »)"]
+  }
+}
