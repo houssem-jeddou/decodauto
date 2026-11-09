@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 09/11/2026 (23 h 45, heure de Tunis)
+Dernière mise à jour : 09/11/2026 (23 h 58, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -102,6 +102,8 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
 - **Renouvellement automatique du domaine** : domaine acheté le 22/10/2026, échéance attendue en octobre 2027, à constater chez OVH. Risque faible avant l'automne 2027.
 
 ## Historique des décisions
+Les décisions du 22/10 à la porte de sortie de l'étape 6 (04/11, 12 h 03) sont dans `04b_archives_decisions_jusqu_a_la_porte_6.md`.
+- 09/11/2026 (23 h 58) : **journal allégé**, sur l'accord de 23 h 28. Sections déplacées par script, sans réécriture, dans trois archives (voir « Archives ») : livrables et portes des étapes 4, 5 et 6 ; historique des décisions et revues jusqu'à la porte 6 ; demandes de changement n° 1 à 11. Écart avec la procédure du point de reprise, qui gardait toutes les demandes de changement au journal : sans ce déplacement, le journal dépassait 20 000 jetons (48 000 caractères). Vérifié par script : 781 lignes non vides reprises une fois, dans un seul document ; journal environ 42 000 caractères, archives 24 600, 27 400 et 29 000.
 - 09/11/2026 (23 h 28), Houssem : **donne son accord pour alléger le journal** (« je te donne mon accord pour alléger le journal (archives à part) ») : les étapes closes, l'historique ancien et les revues passent dans des documents d'archives, déplacés par script ; à faire en premier à la prochaine session. Il demande le texte pour continuer dans une nouvelle conversation.
 - 09/11/2026 (23 h 16), Houssem : **demande à Claude de faire la mesure dans son Chrome** (« Tu as accès dans chrome, fais le nécessaire et avance ») et précise qu'il n'a pas d'abonnement Semrush. Mesure faite dans son compte Google Ads (plan de mots-clés enregistré, zone France ; aucune campagne créée).
 - 09/11/2026 (22 h 58), Houssem : **accepte la demande de changement n° 15, option A** (« A »), **demande la recommandation de Claude pour les questions juridiques du paquet 7.2** et **lance le livrable 8.2** (« go pour 8.2 »).
@@ -139,6 +141,7 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
   - le travail reprend dans une nouvelle conversation du projet, avec un point de reprise (`claude/etape8_point_de_reprise.md`).
 
 ## Revues indépendantes : ce qu'elles ont changé
+Les revues du 22/10 à la porte de sortie de l'étape 6 sont dans `04c_archives_revues_jusqu_a_la_porte_6.md`.
 - 09/11, demande de changement n° 15 (préalables de la porte 9), une revue ; « à corriger », deux bloquants.
   - **Changé** : un motif par critère reporté, autre que la date (règle 2 de 03) ; la double authentification de Google, GitHub, OVH et Cloudflare et le verrou de transfert restent dans la porte (le brouillon reportait Google tout en écrivant « Claude couvert par Google », alors que le compte Claude agit sur GitHub, Cloudflare et OVH) ; limites du garde-fou écrites ; impacts ajoutés (compte GitHub séparé et permissions de l'application rouverts, décisions ouvertes, séance 12, « Dépend de »).
   - **Écarté** : rien. Pas de seconde revue : les deux bloquants étaient un arbitrage de Houssem, qui a choisi l'option A.
@@ -190,7 +193,7 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
 - **Parc par marque** : non publié par le SDES ; les immatriculations 2025 en tiennent lieu.
 - **Annonces automatiques AdSense** (étape 12) : insérées dans le navigateur, invisibles pour le contrôle ; vérifier à la recette qu'elles ne précèdent pas l'encadré.
 - **Requêtes absentes de 06** : livrable 8.2. Mesure faite le 09/11 (105 requêtes sur 177 à au moins 100 recherches par mois ; 30 sans donnée, presque toutes en « allumé »). Reste le tri, le rattachement des requêtes identiques classées hors périmètre (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture » et environ 38 lignes) et la demande. « voyant moteur rouge », citée comme absente, est la variante de « voyant rouge moteur », déjà dans 05.
-- **Journal du projet** (09/11) : le fichier pèse environ 53 000 jetons et n'a pas pu être envoyé au projet (une lecture est limitée à 25 000 jetons, et l'envoi exige une lecture en une fois). Le journal du projet en est resté à 22 h 30 ; cette copie `docs/04` est la version à jour, signalée dans le point de reprise du projet. Accord de Houssem le 09/11 (23 h 28) pour déplacer les étapes closes, l'historique ancien et les revues dans des documents d'archives : à faire en premier à la prochaine session (procédure dans le point de reprise du projet).
+- **Journal du projet** : allégé le 09/11 (23 h 58) et envoyé au projet avec ses trois archives (voir « Archives »). Il doit rester sous 20 000 jetons (environ 45 000 caractères) pour être lu puis envoyé en une fois : `travaux/journal/verifier.py` contrôle cette limite ; au-delà, déplacer de nouveau les sections closes par `travaux/journal/alleger.py`.
 - **Semrush** (09/11) : un connecteur est présent dans la session, sans unités d'API ; Houssem précise qu'il n'a pas d'abonnement. Non utilisé.
 - **Statut et AdSense** : AdSense paie en Tunisie par virement. Statut juridique tranché par Houssem le 09/11 (22 h 49) : il déclare l'avoir vérifié, recettes publicitaires comprises ; Claude ne l'a pas contrôlé.
 - **Règlement européen sur l'IA (article 50)** : traité par la charte (6.2, §5.1) : l'IA est signalée sur toutes les pages, sans s'appuyer sur l'exception de relecture humaine. La portée pour un éditeur hors de l'Union est réglée par les lignes directrices C(2026) 5054, §13 (lues dans un résumé). Restent incertains : la « question d'intérêt public », la date d'application des lignes directrices et le texte officiel sur la compétence du relecteur.
@@ -232,6 +235,7 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
 - Réglages SEO et Cloudflare : robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow, redirections, canonical et recette hors production sont désormais inscrits aux étapes 7 et 9 de 03 v4. Restent à appliquer en rédaction : outil voyants lisible sans JavaScript ; plan du site avec la date de dernière modification réelle.
 
 ## Demandes de changement
+Les demandes n° 1 à 11 sont dans `04b_archives_decisions_jusqu_a_la_porte_6.md`.
 - 09/11/2026 (22 h 58), acceptée, option A : **n° 15, préalables de la porte de l'étape 9** (`travaux/etape-9/demande-changement-15.md`).
   - **Changement** : sortent de la porte et sont reportés après la mise en ligne : GitHub Pro et `main` protégée, double authentification Microsoft (Bing), renouvellement automatique du domaine. Restent : go / no-go, double authentification de Google, GitHub, OVH et Cloudflare, verrou de transfert. S'ajoute : un garde-fou de déploiement dans la CI. Compte Claude : couvert par le compte Google.
   - **Raison** : un motif par critère, la date n'en étant pas un (règle 2). GitHub Pro est payant et sans équivalent gratuit sur un dépôt privé ; le compte Microsoft ne publie rien ; le domaine n'arrive à échéance qu'à l'automne 2027.
