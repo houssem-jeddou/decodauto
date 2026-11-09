@@ -66,12 +66,12 @@ puretech fiabilité,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, nouve
 puretech moteur,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, variante",moteurs puretech,,07:puretech#8
 puretech peugeot,1k–10k,moteur-puretech,moteur-puretech,"ajout à 05, variante",peugeot puretech,,07:puretech#6
 puretech probleme,100–1k,moteur-puretech,moteur-puretech,"ajout à 05, variante",problème puretech,,07:puretech#3
-fap 1.6 hdi,100–1k,nettoyer-fap,nettoyer-fap,"ajout à 05, nouveau mot-clé",,,07:fap#3
-fap 308 1.6 hdi,100–1k,nettoyer-fap,nettoyer-fap,"ajout à 05, nouveau mot-clé",,,07:fap#10
-fap bouché,1k–10k,nettoyer-fap,nettoyer-fap,"ajout à 05, nouveau mot-clé",,,07:fap#2
-fap peugeot 308,100–1k,nettoyer-fap,nettoyer-fap,"ajout à 05, nouveau mot-clé",,,07:fap#8
-fap voiture,1k–10k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,question générale sur le filtre à particules : même page que « fap moteur essence » et « fap voiture voyant » dans 05,07:fap#1
-fap voiture essence,100–1k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"même intention que « fap moteur essence », déjà sur voyant-fap dans 05",07:fap#7
+fap 1.6 hdi,100–1k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#3
+fap 308 1.6 hdi,100–1k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#10
+fap bouché,1k–10k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#2
+fap peugeot 308,100–1k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#8
+fap voiture,1k–10k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#1
+fap voiture essence,100–1k,nettoyer-fap,voyant-fap,"ajout à 05, nouveau mot-clé",,"FAP sans verbe de nettoyage : 02 fait de la page voyant FAP la page de référence du FAP, et les 22 mots-clés de nettoyer-fap dans 05 contiennent tous un verbe de nettoyage ou de démontage",07:fap#7
 fap voiture prix,100–1k,nettoyer-fap,nettoyer-fap,écartée,,"requête de prix : les 10 lignes « prix » du FAP de 06 sont hors périmètre (02, règle des prix)",07:fap#6
 pourquoi ma voiture consomme de l'huile,100–1k,niveau-huile,niveau-huile,"ajout à 05, nouveau mot-clé",,,07:pourquoi ma voiture#8
 perte de puissance,100–1k,perte-de-puissance,perte-de-puissance,"ajout à 05, nouveau mot-clé",,,07:perte de puissance#3
@@ -80,7 +80,7 @@ perte de puissance kangoo 1.5 dci,10–100,perte-de-puissance,perte-de-puissance
 comment vérifier la pression des pneus en station-service,10–100,pression-des-pneus,pression-des-pneus,"formulation du lecteur, moins de 100 recherches",,,FR:pression-des-pneus#4
 pression des pneus avant et arrière,10–100,pression-des-pneus,pression-des-pneus,"formulation du lecteur, moins de 100 recherches",,,FR:pression-des-pneus#8
 pression pneu,10k–100k,pression-des-pneus,pression-des-pneus,"ajout à 05, variante",pneu pression | pression d un pneu | pression dans les pneus | pression des pneus | pression du pneu | pression pneus | pression pour pneu,,07:pression pneu#1
-tableau pression pneu voiture,1k–10k,pression-des-pneus,pression-des-pneus,"ajout à 05, nouveau mot-clé",,,FR:pression-des-pneus#1
+tableau pression pneu voiture,1k–10k,pression-des-pneus,pression-des-pneus,"formulation du lecteur, hors périmètre du brief",,consigne validée le 03/11 du brief pression-des-pneus : « ni page ni tableau par modèle sans donnée constructeur sourcée » ; la requête y est citée comme hors périmètre,FR:pression-des-pneus#1
 vérifier la pression des pneus tous les combien,100–1k,pression-des-pneus,pression-des-pneus,"ajout à 05, nouveau mot-clé",,,FR:pression-des-pneus#7
 pourquoi ma voiture chauffe,10–100,surchauffe-moteur,surchauffe-moteur,"formulation du lecteur, moins de 100 recherches",,,07:pourquoi ma voiture#9
 voyant liquide de refroidissement,1k–10k,surchauffe-moteur,surchauffe-moteur,"ajout à 05, variante",liquide de refroidissement voyant | voyant liquide refroidissement,,07:voyant#9
@@ -178,7 +178,7 @@ voyant tableau de bord voiture signification volkswagen,100–1k,voyants,voyants
 voyant voiture,10k–100k,voyants,voyants,"ajout à 05, variante",voiture voyants | voyant des voitures | voyant sur une voiture | voyant sur voiture | voyant voitures | voyant de voiture | les voyant de voiture | les voyant voiture | voyant a voiture,,07:voyant#4
 liquide de refroid,10k–100k,,liquide-de-refroidissement,"ajout à 05, ligne de 06 rattachée par le critère",liquide refroid,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
 liquide de refroidissement,10k–100k,,liquide-de-refroidissement,"ajout à 05, ligne de 06 rattachée par le critère",liquide refroidissement | liquide de refroidissement pour voiture | liquide de refroidissement voiture | voiture liquide de refroidissement | liquide refroidissement voiture,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
-gonflement pneu voiture,10k–100k,,pression-des-pneus,"ajout à 05, ligne de 06 rattachée par jugement",,"même fourchette et même intention que « gonfler pneu voiture » ; seule ligne ajoutée par jugement, le critère ne la voit pas (« gonflement » et « gonfler »)",06
+gonflement pneu voiture,10k–100k,,pression-des-pneus,"ajout à 05, ligne de 06 rattachée par jugement",,même fourchette que « gonfler pneu voiture » et même mot sous une autre forme (nom et verbe) : seul cas ajouté par jugement,06
 gonfler les pneus voiture,10k–100k,,pression-des-pneus,"ajout à 05, ligne de 06 rattachée par le critère",gonfler les pneu | gonfler les pneus | gonfler un pneu,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
 gonfler pneu voiture,10k–100k,,pression-des-pneus,"ajout à 05, ligne de 06 rattachée par le critère",gonfler les pneu | gonfler les pneus | gonfler un pneu,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06
 liquide de frein,10k–100k,,liquide-de-frein,"ajout à 05, ligne de 06 rattachée par le critère",frein liquide | liquide des freins | liquide frein | liquide pour frein | liquide de frein pour voiture | liquide de frein voiture,"06 la classait « Achat générique (pièces, pneus) », intention « Produit (achat, choix) »",06

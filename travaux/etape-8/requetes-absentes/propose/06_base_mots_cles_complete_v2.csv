@@ -1068,7 +1068,7 @@ pneus neige,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",1
 pneu 4 saison,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",10k–100k,1.1,1
 pneu 4 saisons,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",10k–100k,1.1,0
 pneus 4 saison,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",10k–100k,1.1,0
-liquide de refroid,Lot 1,Refroidissement,"Produit (achat, choix)",10k–100k,1.09,1
+liquide de refroid,Lot 1,Refroidissement,"Produit (achat, choix)",10k–100k,1.09,0
 liquide de refroidissement,Lot 1,Refroidissement,"Produit (achat, choix)",10k–100k,1.09,0
 batterie pour voiture,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",10k–100k,1.05,0
 batterie voiture,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",10k–100k,1.05,1
@@ -1078,7 +1078,7 @@ voiture batterie,Hors,"Achat générique (pièces, pneus)","Produit (achat, choi
 gonflement pneu voiture,Lot 1,Pneus : pression,"Produit (achat, choix)",10k–100k,0.84,0
 gonfler les pneus voiture,Lot 1,Pneus : pression,"Produit (achat, choix)",10k–100k,0.84,0
 gonfler pneu voiture,Lot 1,Pneus : pression,"Produit (achat, choix)",10k–100k,0.84,1
-liquide de frein,Lot 1,Liquide de frein,"Produit (achat, choix)",10k–100k,0.7,1
+liquide de frein,Lot 1,Liquide de frein,"Produit (achat, choix)",10k–100k,0.7,0
 chaine neige,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",10k–100k,0.55,1
 chaine pour la neige,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",10k–100k,0.55,0
 chaine pour neige,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",10k–100k,0.55,0
@@ -1318,7 +1318,7 @@ meilleur pneu hiver,Hors,"Achat générique (pièces, pneus)","Produit (achat, c
 michelin 4 saisons,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",100–1k,1.13,1
 promo pneu hiver,Hors,"Achat générique (pièces, pneus)",Prix et coût,100–1k,1.12,1
 pneu d été,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",100–1k,1.1,1
-pneus toutes saisons,Lot 1,Pneus : hiver et loi montagne,"Produit (achat, choix)",100–1k,1.09,1
+pneus toutes saisons,Lot 1,Pneus : hiver et loi montagne,"Produit (achat, choix)",100–1k,1.09,0
 pneu 215 55 r18 99v,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",100–1k,1.06,1
 pneu michelin 4 saisons crossclimate 2,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",100–1k,1.06,1
 pneu michelin alpin 6,Hors,"Achat générique (pièces, pneus)","Produit (achat, choix)",100–1k,1.06,1
@@ -2267,8 +2267,8 @@ clio 4 1.5 dci 75 fiabilité,Hors,Fiabilité par modèle,Fiabilité d'un modèle
 clio 4 1.5 dci 90 fiabilité,Hors,Fiabilité par modèle,Fiabilité d'un modèle,100–1k,,1
 clio 4 tce 120 fiabilité,Hors,Fiabilité par modèle,Fiabilité d'un modèle,100–1k,,1
 dacia sandero avis fiabilité,Hors,Fiabilité par modèle,"Produit (achat, choix)",100–1k,,1
-defaut moteur 208,Lot 1,Voyants,Fiabilité d'un modèle,100–1k,,1
-defaut moteur peugeot 2008,Lot 1,Voyants,Fiabilité d'un modèle,100–1k,,1
+defaut moteur 208,Lot 1,Voyants,Fiabilité d'un modèle,100–1k,,0
+defaut moteur peugeot 2008,Lot 1,Voyants,Fiabilité d'un modèle,100–1k,,0
 défaut boîte de vitesse automatique,Hors,Fiabilité par modèle,Fiabilité d'un modèle,100–1k,,1
 fiabilité clio 4,Hors,Fiabilité par modèle,Fiabilité d'un modèle,100–1k,,1
 moteur 1.0 sce 75 fiabilité,Hors,Fiabilité par modèle,Fiabilité d'un modèle,100–1k,,1
@@ -3490,7 +3490,7 @@ voiture électrique d occasion,Hors,Électrique et hybride,Achat d'un véhicule,
 changer batterie voiture electrique,Hors,Électrique et hybride,Tutoriel (faire soi-même),100–1k,2.02,1
 chargeur solaire voiture,Hors,Électrique et hybride,Tutoriel (faire soi-même),100–1k,1.03,1
 chargeur portable voiture electrique,Hors,Électrique et hybride,Tutoriel (faire soi-même),100–1k,0.85,1
-problème de batterie voiture symptôme,Lot 1,Batterie,"Produit (achat, choix)",100–1k,,1
+problème de batterie voiture symptôme,Lot 1,Batterie,Symptôme ou panne,100–1k,,1
 bruit moteur au ralenti,Lot 1,Pannes,Symptôme ou panne,100–1k,,1
 code défaut p0087,Lot 1,Codes OBD (5 fiches),"Signification (voyant, code)",100–1k,,1
 code défaut p0087 peugeot,Lot 1,Codes OBD (5 fiches),"Signification (voyant, code)",100–1k,,1
@@ -3522,7 +3522,7 @@ voiture qui fume noir,Lot 1,Pannes,Symptôme ou panne,100–1k,,1
 huile 5w30 c2,Lot 1,Huile et vidange,"Produit (achat, choix)",100–1k,,1
 huile 5w30 c3,Lot 1,Huile et vidange,"Produit (achat, choix)",100–1k,,1
 huile 5w30 c4,Lot 1,Huile et vidange,"Produit (achat, choix)",100–1k,,1
-pourquoi ma voiture consomme du liquide de refroidissement,Lot 1,Refroidissement,"Produit (achat, choix)",100–1k,,1
+pourquoi ma voiture consomme du liquide de refroidissement,Lot 1,Refroidissement,Symptôme ou panne,100–1k,,1
 loi montagne amende,Lot 1,Pneus : hiver et loi montagne,Démarche administrative,100–1k,,1
 loi montagne carte,Lot 1,Pneus : hiver et loi montagne,Démarche administrative,100–1k,,1
 loi montagne communes concernées,Lot 1,Pneus : hiver et loi montagne,Démarche administrative,100–1k,,1
@@ -3538,16 +3538,15 @@ puretech fiabilité,Lot 1,Pannes moteur : dossier PureTech,Fiabilité d'un modè
 puretech moteur,Lot 1,Pannes moteur : dossier PureTech,Fiabilité d'un modèle,100–1k,,0
 puretech peugeot,Lot 1,Pannes moteur : dossier PureTech,Fiabilité d'un modèle,1k–10k,,0
 puretech probleme,Lot 1,Pannes moteur : dossier PureTech,Symptôme ou panne,100–1k,,0
-fap 1.6 hdi,Lot 1,FAP / EGR,Tutoriel (faire soi-même),100–1k,,1
-fap 308 1.6 hdi,Lot 1,FAP / EGR,Tutoriel (faire soi-même),100–1k,,1
-fap bouché,Lot 1,FAP / EGR,Tutoriel (faire soi-même),1k–10k,,1
-fap peugeot 308,Lot 1,FAP / EGR,Tutoriel (faire soi-même),100–1k,,1
+fap 1.6 hdi,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1
+fap 308 1.6 hdi,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1
+fap bouché,Lot 1,Voyants,Symptôme ou panne,1k–10k,,1
+fap peugeot 308,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1
 fap voiture,Lot 1,Voyants,"Signification (voyant, code)",1k–10k,,1
 fap voiture essence,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1
-pourquoi ma voiture consomme de l'huile,Lot 1,Huile et vidange,Tutoriel (faire soi-même),100–1k,,1
+pourquoi ma voiture consomme de l'huile,Lot 1,Huile et vidange,Symptôme ou panne,100–1k,,1
 perte de puissance,Lot 1,Pannes,Symptôme ou panne,100–1k,,1
 pression pneu,Lot 1,Pneus : pression,Information générale,10k–100k,,0
-tableau pression pneu voiture,Lot 1,Pneus : pression,Information générale,1k–10k,,1
 vérifier la pression des pneus tous les combien,Lot 1,Pneus : pression,Information générale,100–1k,,1
 voyant liquide de refroidissement,Lot 1,Voyants,"Signification (voyant, code)",1k–10k,,0
 pourquoi ma voiture ne démarre pas,Lot 1,Pannes,Symptôme ou panne,100–1k,,1
@@ -3570,7 +3569,7 @@ voyant orange voiture huile,Lot 1,Voyants,"Signification (voyant, code)",100–1
 voyant moteur orange clignotant,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1
 voyant moteur orange combien de km,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1
 voyant moteur orange signification,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1
-voyant moteur rouge,Lot 1,Voyants,"Signification (voyant, code)",1k–10k,,1
+voyant moteur rouge,Lot 1,Voyants,"Signification (voyant, code)",1k–10k,,0
 voyant orange voiture moteur signification,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1
 voyant tableau de bord voiture signification moteur,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1
 voyant préchauffage clignote vw,Lot 1,Voyants,"Signification (voyant, code)",100–1k,,1

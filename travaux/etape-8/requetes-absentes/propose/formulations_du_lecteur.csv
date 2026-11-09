@@ -1,73 +1,74 @@
-requete,page,volume_fourchette,source
-bruit moteur après coupure contact,bruit-moteur,10–100,07:bruit moteur#5
-bruit moteur diesel,bruit-moteur,10–100,07:bruit moteur#4
-bruit moteur qui claque,bruit-moteur,10–100,07:bruit moteur#8
-p0087 renault,code-p0087,10–100,FR:code-p0087#7
-p0299 2.0 tdi,code-p0299,10–100,FR:code-p0299#4
-p0299 a chaud,code-p0299,sans donnée,FR:code-p0299#8
-p0299 hyundai,code-p0299,10–100,FR:code-p0299#3
-p0299 mazda,code-p0299,10–100,FR:code-p0299#5
-p0380 peugeot 1.6 hdi,code-p0380,sans donnée,FR:code-p0380#5
-p0380 peugeot 307 2.0 hdi,code-p0380,10–100,FR:code-p0380#6
-p1351 1.4 hdi,code-p1351,10–100,FR:code-p1351#5
-p1351 2.0 hdi,code-p1351,10–100,FR:code-p1351#7
-p1351 citroën c3,code-p1351,10–100,FR:code-p1351#6
-p1351 mercedes,code-p1351,10–100,FR:code-p1351#4
-p1351 toyota,code-p1351,10–100,FR:code-p1351#8
-loi montagne 2 2016,loi-montagne,sans donnée,FR:loi-montagne#3
-loi montagne 2026 verbalisation,loi-montagne,10–100,FR:loi-montagne#5
-loi montagne 3,loi-montagne,10–100,FR:loi-montagne#2
-problème moteur puretech essence,moteur-puretech,10–100,07:problème moteur#9
-perte de puissance c4 picasso 1.6 hdi 110,perte-de-puissance,10–100,07:perte de puissance#8
-perte de puissance kangoo 1.5 dci,perte-de-puissance,10–100,07:perte de puissance#9
-comment vérifier la pression des pneus en station-service,pression-des-pneus,10–100,FR:pression-des-pneus#4
-pression des pneus avant et arrière,pression-des-pneus,10–100,FR:pression-des-pneus#8
-pourquoi ma voiture chauffe,surchauffe-moteur,10–100,07:pourquoi ma voiture#9
-si le voyant abs reste allumé en circulation,voyant-abs-esp,sans donnée,FR:voyant-abs-esp#8
-supprimer voyant abs 206,voyant-abs-esp,10–100,FR:voyant-abs-esp#6
-voyant abs allumé : que faire,voyant-abs-esp,sans donnée,FR:voyant-abs-esp#2
-voyant abs allumé peut on rouler,voyant-abs-esp,sans donnée,FR:voyant-abs-esp#1
-voyant abs et esp allumé,voyant-abs-esp,sans donnée,FR:voyant-abs-esp#3
-voyant adblue reste allumé après remplissage,voyant-adblue,sans donnée,FR:voyant-adblue#2
-comment enlever le voyant airbag sur 206,voyant-airbag,10–100,FR:voyant-airbag#8
-voyant airbag 206 allumé pour contrôle technique,voyant-airbag,sans donnée,FR:voyant-airbag#7
-voyant airbag 206 reste allumé,voyant-airbag,sans donnée,FR:voyant-airbag#5
-voyant airbag 307,voyant-airbag,10–100,FR:voyant-airbag#6
-voyant airbag allumé contrôle technique,voyant-airbag,sans donnée,FR:voyant-airbag#4
-voyant airbag allumé rouge,voyant-airbag,sans donnée,FR:voyant-airbag#3
-voyant airbag orange allumé,voyant-airbag,sans donnée,FR:voyant-airbag#2
-voyant batterie allumé,voyant-batterie,sans donnée,FR:voyant-batterie#2
-voyant batterie allumé alternateur ok,voyant-batterie,sans donnée,FR:voyant-batterie#6
-voyant batterie allumé avec batterie neuve,voyant-batterie,sans donnée,FR:voyant-batterie#5
-voyant batterie berlingo,voyant-batterie,sans donnée,FR:voyant-batterie#8
-voyant batterie faible voiture,voyant-batterie,10–100,FR:voyant-batterie#4
-voyant volant orange audi,voyant-direction,sans donnée,FR:voyant-direction#2
-voyant volant orange bmw,voyant-direction,10–100,FR:voyant-direction#3
-voyant volant orange clio 2,voyant-direction,10–100,FR:voyant-direction#7
-voyant volant orange golf 5,voyant-direction,10–100,FR:voyant-direction#5
-voyant volant orange polo,voyant-direction,10–100,FR:voyant-direction#4
-voyant volant orange seat ibiza,voyant-direction,10–100,FR:voyant-direction#6
-voyant volant orange touran,voyant-direction,10–100,FR:voyant-direction#8
-peut on rouler avec le voyant plaquette de frein,voyant-frein,10–100,FR:voyant-frein#6
-voyant frein bmw,voyant-frein,10–100,FR:voyant-frein#8
-voyant liquide de frein insuffisant,voyant-frein,10–100,FR:voyant-frein#3
-voyant plaquette de frein reste allumé,voyant-frein,sans donnée,FR:voyant-frein#5
-voyant d'huile qui s'allume mais niveau ok,voyant-huile,sans donnée,FR:voyant-huile#6
-voyant huile moteur volkswagen,voyant-huile,10–100,FR:voyant-huile#7
-voyant huile rouge s'allume et s'éteint,voyant-huile,sans donnée,FR:voyant-huile#3
-voyant moteur allumé,voyant-moteur,sans donnée,07:voyant moteur#4
-voyant moteur allumé avec perte de puissance,voyant-moteur,sans donnée,07:voyant moteur#9
-voyant moteur orange allumé,voyant-moteur,sans donnée,07:voyant moteur#3
-voyant moteur orange allumé mais pas de problème,voyant-moteur,sans donnée,FR:voyant-moteur#1
-voyant moteur orange bmw,voyant-moteur,10–100,FR:voyant-moteur#6
-voyant moteur orange diesel,voyant-moteur,10–100,FR:voyant-moteur#4
-voyant moteur orange que faire,voyant-moteur,10–100,FR:voyant-moteur#7
-voyant préchauffage allumé,voyant-prechauffage,sans donnée,FR:voyant-prechauffage#4
-voyant préchauffage clignote 2.0 tdi 140,voyant-prechauffage,10–100,FR:voyant-prechauffage#7
-voyant préchauffage clignote et perte de puissance audi a3,voyant-prechauffage,10–100,FR:voyant-prechauffage#8
-voyant préchauffage qui clignote en roulant,voyant-prechauffage,10–100,FR:voyant-prechauffage#3
-voyant pression pneu combien de temps,voyant-pression-pneus,10–100,FR:voyant-pression-pneus#8
-voyant pression pneu toujours allumé,voyant-pression-pneus,sans donnée,FR:voyant-pression-pneus#2
-voyant pression pneu toujours allumé volkswagen,voyant-pression-pneus,sans donnée,FR:voyant-pression-pneus#6
-perte de puissance voiture avec voyant allumé,voyant-moteur,sans donnée,07:perte de puissance#7
-perte de puissance voiture diesel sans voyant allumé,perte-de-puissance,sans donnée,07:perte de puissance#6
+requete,page,volume_fourchette,usage,source
+bruit moteur après coupure contact,bruit-moteur,10–100,titre de partie ou question possible,07:bruit moteur#5
+bruit moteur diesel,bruit-moteur,10–100,titre de partie ou question possible,07:bruit moteur#4
+bruit moteur qui claque,bruit-moteur,10–100,titre de partie ou question possible,07:bruit moteur#8
+p0087 renault,code-p0087,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p0087#7
+p0299 2.0 tdi,code-p0299,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p0299#4
+p0299 a chaud,code-p0299,sans donnée,titre de partie ou question possible,FR:code-p0299#8
+p0299 hyundai,code-p0299,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p0299#3
+p0299 mazda,code-p0299,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p0299#5
+p0380 peugeot 1.6 hdi,code-p0380,sans donnée,marque ou modèle : ni titre ni partie par modèle,FR:code-p0380#5
+p0380 peugeot 307 2.0 hdi,code-p0380,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p0380#6
+p1351 1.4 hdi,code-p1351,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p1351#5
+p1351 2.0 hdi,code-p1351,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p1351#7
+p1351 citroën c3,code-p1351,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p1351#6
+p1351 mercedes,code-p1351,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p1351#4
+p1351 toyota,code-p1351,10–100,marque ou modèle : ni titre ni partie par modèle,FR:code-p1351#8
+loi montagne 2 2016,loi-montagne,sans donnée,titre de partie ou question possible,FR:loi-montagne#3
+loi montagne 2026 verbalisation,loi-montagne,10–100,titre de partie ou question possible,FR:loi-montagne#5
+loi montagne 3,loi-montagne,10–100,titre de partie ou question possible,FR:loi-montagne#2
+problème moteur puretech essence,moteur-puretech,10–100,titre de partie ou question possible,07:problème moteur#9
+perte de puissance c4 picasso 1.6 hdi 110,perte-de-puissance,10–100,marque ou modèle : ni titre ni partie par modèle,07:perte de puissance#8
+perte de puissance kangoo 1.5 dci,perte-de-puissance,10–100,marque ou modèle : ni titre ni partie par modèle,07:perte de puissance#9
+comment vérifier la pression des pneus en station-service,pression-des-pneus,10–100,titre de partie ou question possible,FR:pression-des-pneus#4
+pression des pneus avant et arrière,pression-des-pneus,10–100,titre de partie ou question possible,FR:pression-des-pneus#8
+tableau pression pneu voiture,pression-des-pneus,1k–10k,hors périmètre du brief : consigne validée le 03/11 du brief pression-des-pneus : « ni page ni tableau par modèle sans donnée constructeur sourcée » ; la requête y est citée comme hors périmètre,FR:pression-des-pneus#1
+pourquoi ma voiture chauffe,surchauffe-moteur,10–100,titre de partie ou question possible,07:pourquoi ma voiture#9
+si le voyant abs reste allumé en circulation,voyant-abs-esp,sans donnée,titre de partie ou question possible,FR:voyant-abs-esp#8
+supprimer voyant abs 206,voyant-abs-esp,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-abs-esp#6
+voyant abs allumé : que faire,voyant-abs-esp,sans donnée,titre de partie ou question possible,FR:voyant-abs-esp#2
+voyant abs allumé peut on rouler,voyant-abs-esp,sans donnée,titre de partie ou question possible,FR:voyant-abs-esp#1
+voyant abs et esp allumé,voyant-abs-esp,sans donnée,titre de partie ou question possible,FR:voyant-abs-esp#3
+voyant adblue reste allumé après remplissage,voyant-adblue,sans donnée,titre de partie ou question possible,FR:voyant-adblue#2
+comment enlever le voyant airbag sur 206,voyant-airbag,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-airbag#8
+voyant airbag 206 allumé pour contrôle technique,voyant-airbag,sans donnée,marque ou modèle : ni titre ni partie par modèle,FR:voyant-airbag#7
+voyant airbag 206 reste allumé,voyant-airbag,sans donnée,marque ou modèle : ni titre ni partie par modèle,FR:voyant-airbag#5
+voyant airbag 307,voyant-airbag,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-airbag#6
+voyant airbag allumé contrôle technique,voyant-airbag,sans donnée,titre de partie ou question possible,FR:voyant-airbag#4
+voyant airbag allumé rouge,voyant-airbag,sans donnée,titre de partie ou question possible,FR:voyant-airbag#3
+voyant airbag orange allumé,voyant-airbag,sans donnée,titre de partie ou question possible,FR:voyant-airbag#2
+voyant batterie allumé,voyant-batterie,sans donnée,titre de partie ou question possible,FR:voyant-batterie#2
+voyant batterie allumé alternateur ok,voyant-batterie,sans donnée,titre de partie ou question possible,FR:voyant-batterie#6
+voyant batterie allumé avec batterie neuve,voyant-batterie,sans donnée,titre de partie ou question possible,FR:voyant-batterie#5
+voyant batterie berlingo,voyant-batterie,sans donnée,marque ou modèle : ni titre ni partie par modèle,FR:voyant-batterie#8
+voyant batterie faible voiture,voyant-batterie,10–100,titre de partie ou question possible,FR:voyant-batterie#4
+voyant volant orange audi,voyant-direction,sans donnée,marque ou modèle : ni titre ni partie par modèle,FR:voyant-direction#2
+voyant volant orange bmw,voyant-direction,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-direction#3
+voyant volant orange clio 2,voyant-direction,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-direction#7
+voyant volant orange golf 5,voyant-direction,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-direction#5
+voyant volant orange polo,voyant-direction,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-direction#4
+voyant volant orange seat ibiza,voyant-direction,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-direction#6
+voyant volant orange touran,voyant-direction,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-direction#8
+peut on rouler avec le voyant plaquette de frein,voyant-frein,10–100,titre de partie ou question possible,FR:voyant-frein#6
+voyant frein bmw,voyant-frein,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-frein#8
+voyant liquide de frein insuffisant,voyant-frein,10–100,titre de partie ou question possible,FR:voyant-frein#3
+voyant plaquette de frein reste allumé,voyant-frein,sans donnée,titre de partie ou question possible,FR:voyant-frein#5
+voyant d'huile qui s'allume mais niveau ok,voyant-huile,sans donnée,titre de partie ou question possible,FR:voyant-huile#6
+voyant huile moteur volkswagen,voyant-huile,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-huile#7
+voyant huile rouge s'allume et s'éteint,voyant-huile,sans donnée,titre de partie ou question possible,FR:voyant-huile#3
+voyant moteur allumé,voyant-moteur,sans donnée,titre de partie ou question possible,07:voyant moteur#4
+voyant moteur allumé avec perte de puissance,voyant-moteur,sans donnée,titre de partie ou question possible,07:voyant moteur#9
+voyant moteur orange allumé,voyant-moteur,sans donnée,titre de partie ou question possible,07:voyant moteur#3
+voyant moteur orange allumé mais pas de problème,voyant-moteur,sans donnée,titre de partie ou question possible,FR:voyant-moteur#1
+voyant moteur orange bmw,voyant-moteur,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-moteur#6
+voyant moteur orange diesel,voyant-moteur,10–100,titre de partie ou question possible,FR:voyant-moteur#4
+voyant moteur orange que faire,voyant-moteur,10–100,titre de partie ou question possible,FR:voyant-moteur#7
+voyant préchauffage allumé,voyant-prechauffage,sans donnée,titre de partie ou question possible,FR:voyant-prechauffage#4
+voyant préchauffage clignote 2.0 tdi 140,voyant-prechauffage,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-prechauffage#7
+voyant préchauffage clignote et perte de puissance audi a3,voyant-prechauffage,10–100,marque ou modèle : ni titre ni partie par modèle,FR:voyant-prechauffage#8
+voyant préchauffage qui clignote en roulant,voyant-prechauffage,10–100,titre de partie ou question possible,FR:voyant-prechauffage#3
+voyant pression pneu combien de temps,voyant-pression-pneus,10–100,titre de partie ou question possible,FR:voyant-pression-pneus#8
+voyant pression pneu toujours allumé,voyant-pression-pneus,sans donnée,titre de partie ou question possible,FR:voyant-pression-pneus#2
+voyant pression pneu toujours allumé volkswagen,voyant-pression-pneus,sans donnée,marque ou modèle : ni titre ni partie par modèle,FR:voyant-pression-pneus#6
+perte de puissance voiture avec voyant allumé,voyant-moteur,sans donnée,titre de partie ou question possible,07:perte de puissance#7
+perte de puissance voiture diesel sans voyant allumé,perte-de-puissance,sans donnée,titre de partie ou question possible,07:perte de puissance#6

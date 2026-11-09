@@ -577,6 +577,10 @@
       "voyant moteur fap",
       "voyant regeneration fap",
       "fap moteur essence",
+      "fap 1.6 hdi",
+      "fap 308 1.6 hdi",
+      "fap bouché",
+      "fap peugeot 308",
       "fap voiture",
       "fap voiture essence"
     ],
@@ -1221,11 +1225,7 @@
       "peut on nettoyer un fap",
       "catalyseur bouché nettoyage fap karcher",
       "nettoyage fap karcher",
-      "nettoyer un fap au karcher",
-      "fap 1.6 hdi",
-      "fap 308 1.6 hdi",
-      "fap bouché",
-      "fap peugeot 308"
+      "nettoyer un fap au karcher"
     ]
   },
   {
@@ -1548,7 +1548,6 @@
       "pression pneu pour remorque",
       "pression pneu remorque",
       "pression pneu",
-      "tableau pression pneu voiture",
       "vérifier la pression des pneus tous les combien",
       "gonflement pneu voiture",
       "gonfler les pneus voiture",

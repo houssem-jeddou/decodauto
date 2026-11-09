@@ -1,6 +1,6 @@
 # Livrable 8.2 : requêtes absentes de 06 (travail en cours)
 
-État au 09/11/2026 (23 h 45) : mesure faite ; tri et demande de changement à faire. Rien n'est validé.
+État au 10/11/2026 : mesure faite, tri fait, demande de changement n° 16 rédigée et présentée à Houssem. Rien n'est validé ni appliqué.
 
 ## Ce qui est fait
 - `absentes_de_06.tsv` : les 325 suggestions de saisie (docs/07, relevé du 22/10) et recherches associées (relevé Google France du 28/10, `travaux/etape-6/releve-google-france/`) qui ne sont pas, mot pour mot, un mot-clé de 06 (comparaison sans majuscules, accents, apostrophes ni tirets). 213 viennent de 07, 112 du relevé France.
@@ -26,7 +26,8 @@
 - **30 requêtes sans donnée**, dont 25 contiennent « allumé » ou « s'allume » (« voyant moteur allumé », « voyant batterie allumé »…). Le résultat est stable après rechargement de la page. 06 ne contient aucun mot-clé en « allumé » sur ses 680 mots-clés « voyant » : Keyword Planner ne semble pas donner de volume propre à ces formulations. Cause non établie. Ces requêtes sont pourtant suggérées en tête par Google : à traiter dans les pages comme des formulations du lecteur, sans volume.
 - Les volumes indicatifs (316 / 3 160 / 31 600, docs/02) sont des plafonds qui servent à comparer.
 
-## Ce qui reste
-1. **Le tri** : variantes et doublons d'intention avec la fonction du dépôt ; page proposée de chacune à vérifier (les requêtes par marque ou par modèle suivent la règle de 02) ; concurrence et enchère à relever dans le plan enregistré si 05 en a besoin.
-2. **Les lignes de 06 classées hors périmètre** dont la requête est celle d'une page prévue (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture »…) : écrire le critère, lister les lignes, les rattacher.
-3. **La demande de changement** (05 v3, 06, plan du site, briefs régénérés, contrôles de la porte 4 relancés), une revue indépendante, la validation de Houssem.
+## Tri et proposition (10/11/2026)
+- `trier.ts` : tri des 177 requêtes mesurées avec la fonction `signature` du dépôt (`src/lib/porte-plan.ts`) ; résultat dans `tri_signature.csv`. Sur les 105 requêtes d'au moins 100 recherches, 16 ont la signature d'un mot-clé de 05 (le tri approché en trouvait 15) et 89 sont nouvelles.
+- `decisions.json` : les décisions prises à la main (pages corrigées, requête écartée, mots génériques du critère de 06, ligne de 06 ajoutée par jugement), chacune avec sa raison.
+- `proposer.ts` : construit la proposition dans `propose/` et relance la porte de l'étape 4 dessus. À lancer depuis la racine : `node travaux/etape-8/requetes-absentes/proposer.ts <chemin de 06>`.
+- `propose/` : `proposition.csv` (le sort de chaque requête), `ajouts_05.csv`, `05_mots_cles_perimetre_v3.csv`, `06_base_mots_cles_complete_v2.csv`, `plan-du-site.json`, `formulations_du_lecteur.csv`. **Rien n'est appliqué** : ces fichiers ne remplacent rien tant que la demande de changement n° 16 (`travaux/etape-8/demande-changement-16.md`) n'est pas acceptée par Houssem.
