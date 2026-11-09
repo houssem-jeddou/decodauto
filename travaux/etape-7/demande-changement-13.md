@@ -1,6 +1,6 @@
 # Demande de changement n° 13 : description et revue des pages du socle
 
-Étape 7, livrable 7.2. Proposée le 04/11/2026 avec le paquet `travaux/etape-7/paquet-7.2-confidentialite.md`. **À décider par Houssem.**
+Étape 7, livrable 7.2. Proposée le 04/11/2026 avec le paquet `travaux/etape-7/paquet-7.2-confidentialite.md`. **Acceptée par Houssem le 09/11/2026 (21 h 41)**, avec le livrable 7.2.
 
 | Rubrique | Contenu |
 |---|---|
