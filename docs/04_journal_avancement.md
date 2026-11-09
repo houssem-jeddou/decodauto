@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 09/11/2026 (23 h 15, heure de Tunis)
+Dernière mise à jour : 09/11/2026 (23 h 45, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -14,7 +14,7 @@ Dernière mise à jour : 09/11/2026 (23 h 15, heure de Tunis)
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
 | 6 | Charte et modèles de pages | ✅ Validée par Houssem (04/11, 12 h 03) · porte vérifiée et relue (deux revues) · PR #20 fusionnée (77bea5e) · tag `etape-6-charte-modeles` posé par Houssem le 09/11 sur 77bea5e (formulaire de release GitHub). Livrables 6.0 à 6.9 (PR #8, #11 à #20) ; demandes de changement n° 4 à 11 acceptées (03 v8) | `docs/10_charte_editoriale.md` (charte) ; modèles `src/lib/modeles.ts` ; exemples `exemples/` ; `travaux/etape-6/` (porte : `porte-de-sortie.md`, briefs : `briefs/`) |
 | 7 | Socle technique | ▶ Piste technique reprise le 04/11 (12 h 25, décision de Houssem), en alternance avec l'étape 8 : un seul livrable présenté à la fois. Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; 7.2 (description et revue du socle, politique de confidentialité, mesure d'audience sans traceur) validé le 09/11 (21 h 41), PR #22 fusionnée (55db514), Web Analytics de Cloudflare désactivé. Statut juridique tranché par Houssem le 09/11 (22 h 49) : les mentions légales n'attendent plus. Reste : livrables 7.x (données structurées, autres réglages Cloudflare, emplacements factices, Lighthouse du socle, mentions légales, garde-fou de déploiement de la demande n° 15) | `CONTROLES.md` (canonical, plan du site, production) |
-| 8 | Vague A | ▶ Étape principale depuis le 04/11. Fait : 8.1 modèle de l'outil voyants, validé le 04/11 (13 h 48), PR #21 fusionnée (2dcec63). Ordre décidé le 04/11, suite : 8.2 demande de changement des requêtes absentes de 06, lancée le 09/11 (22 h 58) : liste des 177 requêtes à mesurer prête, mesure dans Keyword Planner à fournir par Houssem ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants), avec le court paquet de lignes à ajouter à la base ; livrables 7.x intercalés | `travaux/etape-6/briefs/` ; `travaux/etape-8/paquet-8.1-outil-voyants.md` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
+| 8 | Vague A | ▶ Étape principale depuis le 04/11. Fait : 8.1 modèle de l'outil voyants, validé le 04/11 (13 h 48), PR #21 fusionnée (2dcec63). Ordre décidé le 04/11, suite : 8.2 demande de changement des requêtes absentes de 06, lancée le 09/11 (22 h 58) : 177 requêtes mesurées dans Keyword Planner le 09/11 (105 à au moins 100 recherches par mois) ; tri et demande à faire ; 8.3 lot du minimum (loi montagne, pression des pneus, voyants), avec le court paquet de lignes à ajouter à la base ; livrables 7.x intercalés | `travaux/etape-6/briefs/` ; `travaux/etape-8/paquet-8.1-outil-voyants.md` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
 | 9 | Recette et mise en ligne A | À faire | – |
 | 10 | Vague B | À faire | – |
 | 11 | Vague C | À faire | – |
@@ -42,7 +42,7 @@ Dernière mise à jour : 09/11/2026 (23 h 15, heure de Tunis)
    ~~modèle de l'outil voyants (8.1) et demande de changement n° 12~~ : validés le 04/11 ;
    ~~politique de confidentialité et mesure d'audience (7.2), demandes de changement n° 13 et 14~~ : validées le 09/11 ;
 9. porte 7 ;
-10. demande de changement des requêtes absentes (8.2) : d'abord l'export Keyword Planner des 177 requêtes, à fournir par Houssem ;
+10. demande de changement des requêtes absentes (8.2) : mesure faite le 09/11 ; demande à présenter ;
 11. paquet et encadrés de la vague A, et porte 8 ;
 12. go / no-go et porte 9, avec la double authentification de Google, GitHub, OVH et Cloudflare et le verrou du domaine (demande n° 15).
 
@@ -171,8 +171,8 @@ Dernière mise à jour : 09/11/2026 (23 h 15, heure de Tunis)
   - preuves : `npm test` 477 sur 477 ; CI de la PR verte (run 41833790115) ; recette : 0 erreur bloquante, 29 alertes, liens 0 problème ; Lighthouse conforme sur les 4 pages de recette ; CI de `main` verte après la fusion (run 41834349908 : contrôles, recette, Lighthouse, déploiement, production). Site non indexable, aucune page éditoriale publiée.
 - [ ] **8.2 Demande de changement des requêtes absentes de 06**, lancée le 09/11 (22 h 58), branche `etape-8/requetes-absentes` :
   - fait : 325 suggestions et recherches associées absentes de 06 relevées (213 dans 07, 112 dans le relevé Google France) ; 177 à mesurer, chacune avec la page proposée, 147 écartées (hors sujet, hors périmètre de 02, enseignes, autres codes), une en double (`travaux/etape-8/requetes-absentes/`) ;
-  - bloqué : les volumes de 06 sont des fourchettes de Keyword Planner (02). Le connecteur Semrush de la session n'a pas d'unités d'API. Il faut l'export Keyword Planner des 177 requêtes (France, français), par Houssem ou par Claude dans son navigateur sur sa demande ;
-  - reste : mesure, rattachement des lignes identiques classées hors périmètre (critère à écrire dans la demande), demande de changement, revue indépendante, validation.
+  - mesuré le 09/11 (23 h 30) dans le Keyword Planner du compte Google Ads de Houssem, par Claude dans son Chrome, sur sa demande (« Tu as accès dans chrome, fais le nécessaire et avance ») : zone France, toutes les langues, octobre 2025 à septembre 2026. 3 requêtes à 10 k – 100 k, 17 à 1 k – 10 k, 85 à 100 – 1 k, 42 à 10 – 100, 30 sans donnée, dont 25 en « allumé » ou « s'allume » (06 n'en contient aucune : Keyword Planner ne semble pas leur donner de volume propre ; cause non établie). Sur les 105 requêtes d'au moins 100 recherches, un tri approché en trouve 15 qui sont la variante d'un mot-clé de 05 (`mesures_keyword_planner.csv`, README du dossier) ;
+  - reste : tri avec la fonction `signature` du dépôt, page de chaque requête, rattachement des lignes identiques classées hors périmètre (critère à écrire dans la demande), demande de changement, revue indépendante, validation.
 - [ ] 8.3 Lot du minimum : loi montagne, pression des pneus, puis les voyants ; avec le court paquet de lignes à ajouter à la base (décision 8 de 8.1).
 - **Critère de l'outil à la porte de l'étape 8, état au 04/11** :
   - lignes, liens, libellés écrits, lien « Signaler une erreur », contenu sans JavaScript : contrôlés automatiquement ;
@@ -708,9 +708,9 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
 - **Chiffre Volkswagen 2025** (110 960, 6,8 %) : tiré de La Tribune Auto citant PFA / AAA Data, sans source primaire trouvée. Sans effet sur le choix des marques.
 - **Parc par marque** : non publié par le SDES ; les immatriculations 2025 en tiennent lieu.
 - **Annonces automatiques AdSense** (étape 12) : insérées dans le navigateur, invisibles pour le contrôle ; vérifier à la recette qu'elles ne précèdent pas l'encadré.
-- **Requêtes absentes de 06** : livrable 8.2 lancé le 09/11. 325 suggestions et recherches associées relevées absentes de 06, 177 à mesurer, 147 écartées (`travaux/etape-8/requetes-absentes/`). La mesure attend un export Keyword Planner. Le rattachement des requêtes identiques classées hors périmètre (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture » et environ 38 lignes) se fait dans la même demande ; son critère reste à écrire.
+- **Requêtes absentes de 06** : livrable 8.2. Mesure faite le 09/11 (105 requêtes sur 177 à au moins 100 recherches par mois ; 30 sans donnée, presque toutes en « allumé »). Reste le tri, le rattachement des requêtes identiques classées hors périmètre (« liquide de frein », « liquide de refroidissement », « gonfler pneu voiture » et environ 38 lignes) et la demande. « voyant moteur rouge », citée comme absente, est la variante de « voyant rouge moteur », déjà dans 05.
 - **Journal du projet** (09/11) : le fichier pèse environ 53 000 jetons et n'a pas pu être envoyé au projet (une lecture est limitée à 25 000 jetons, et l'envoi exige une lecture en une fois). Le journal du projet en est resté à 22 h 30 ; cette copie `docs/04` est la version à jour, signalée dans le point de reprise du projet. Proposé à Houssem : déplacer les étapes closes, l'historique ancien et les revues dans des documents d'archives.
-- **Semrush** (09/11) : un connecteur est présent dans la session ; le compte a un abonnement actif mais pas d'unités d'API, donc aucune mesure par ce moyen.
+- **Semrush** (09/11) : un connecteur est présent dans la session, sans unités d'API ; Houssem précise qu'il n'a pas d'abonnement. Non utilisé.
 - **Statut et AdSense** : AdSense paie en Tunisie par virement. Statut juridique tranché par Houssem le 09/11 (22 h 49) : il déclare l'avoir vérifié, recettes publicitaires comprises ; Claude ne l'a pas contrôlé.
 - **Règlement européen sur l'IA (article 50)** : traité par la charte (6.2, §5.1) : l'IA est signalée sur toutes les pages, sans s'appuyer sur l'exception de relecture humaine. La portée pour un éditeur hors de l'Union est réglée par les lignes directrices C(2026) 5054, §13 (lues dans un résumé). Restent incertains : la « question d'intérêt public », la date d'application des lignes directrices et le texte officiel sur la compétence du relecteur.
 - **OVH** : activer la double authentification sur le compte et constater le verrou de transfert (actif par défaut d'après la documentation d'OVH) : vérifiés à la porte de l'étape 9. Renouvellement automatique reporté (demande n° 15).
