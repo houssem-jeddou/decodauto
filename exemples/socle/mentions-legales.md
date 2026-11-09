@@ -7,9 +7,9 @@ id: mentions-legales
 title: "Mentions légales et confidentialité"
 description: "Qui édite decodauto.com et ce que le site fait de vos données : aucun compte, aucune publicité, aucun cookie du site, et vos droits."
 libelle_court: Mentions légales et confidentialité
-date_modification: 2026-11-04
-date_revue: 2026-11-04
-prochaine_revue: 2027-11-04
+date_modification: 2026-11-09
+date_revue: 2026-11-09
+prochaine_revue: 2027-11-09
 ---
 
 ## Confidentialité
@@ -23,14 +23,14 @@ Houssem Jeddou, éditeur du site, est responsable de ces traitements. Pour toute
 ### Quand votre navigateur demande une page
 
 - **Données** : votre adresse IP et les informations techniques de la demande (page demandée, date et heure, navigateur). Sans elles, la page ne peut pas vous être envoyée.
-- **Pourquoi** : afficher la page, protéger le site contre les attaques et connaître sa fréquentation globale.
+- **Pourquoi** : afficher la page, protéger le site contre les attaques et connaître sa fréquentation.
 - **Base légale** : l'intérêt légitime de l'éditeur à faire fonctionner et à protéger son site, et à connaître sa fréquentation.
 - **Qui les reçoit** : Cloudflare, Inc., hébergeur du site, qui publie sa propre [politique de confidentialité](https://www.cloudflare.com/privacypolicy/).
-- **Durée** : le temps nécessaire à Cloudflare pour faire fonctionner et protéger son service, qu'il décrit comme une durée limitée. Les totaux de fréquentation restent consultables au moins 30 jours.
+- **Durée** : le temps nécessaire à Cloudflare pour faire fonctionner et protéger son service, qu'il décrit comme une durée limitée. Les statistiques que l'éditeur consulte portent sur les 30 derniers jours au plus.
 
 ### Comment la fréquentation est mesurée
 
-Rien n'est placé sur votre appareil pour cela : ni cookie, ni script, ni identifiant. L'éditeur consulte des totaux : ceux de Cloudflare (nombre de demandes et de visiteurs, principaux pays) et ceux que Google Search Console et Bing Webmaster Tools donnent à tout éditeur sur la présence de ses pages dans leurs résultats.
+Rien n'est placé sur votre appareil pour cela : ni cookie, ni script, ni identifiant. L'éditeur consulte les statistiques que Cloudflare tire de ses journaux : nombre de demandes par page, par pays, par navigateur et par système, et les adresses IP qui envoient le plus de demandes, utiles pour repérer les robots et les attaques. Il consulte aussi celles que Google Search Console et Bing Webmaster Tools donnent à tout éditeur sur la présence de ses pages dans leurs résultats.
 
 ### Cookies
 

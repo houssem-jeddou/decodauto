@@ -14,6 +14,7 @@ import { lienConfidentialite } from '../src/lib/composants.ts';
 import { controlerHtmlSocle } from '../src/lib/controle.ts';
 import { pied } from '../src/lib/gabarit.ts';
 import { MARQUEUR_CONTACT, pageSocle } from '../src/lib/modeles.ts';
+import { dateAffichee } from '../src/lib/cout.ts';
 import { ADRESSE_SIGNALEMENT } from '../src/lib/site.ts';
 import { soclePageSchema } from '../src/schemas/pages.ts';
 import { lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
@@ -66,7 +67,7 @@ describe('page du socle : schéma et modèle', () => {
   test('le modèle affiche le H1, le texte et la date de mise à jour, sans encadré ni signature', () => {
     assert.match(principal, /^<h1>/);
     assert.match(principal, /data-corps/);
-    assert.match(principal, /data-socle-date>Mis à jour le 04\/11\/2026</);
+    assert.ok(principal.includes(`data-socle-date>Mis à jour le ${dateAffichee(page.date_modification)}<`), 'date de mise à jour tirée de la page');
     assert.doesNotMatch(principal, /data-encadre-decision|data-signature|data-element-unique/);
   });
 
