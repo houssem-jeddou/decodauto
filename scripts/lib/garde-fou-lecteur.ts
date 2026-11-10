@@ -1,5 +1,5 @@
 // Lecteur réel du garde-fou de déploiement (livrable 7.6) : API GitHub et Git, injectés pour pouvoir être testés sans réseau.
-import { BRANCHE_PRODUCTION, EXECUTIONS_EXAMINEES, NOM_TRAVAIL_DEPLOIEMENT, type CommitExamine, type Lecteur, type PullAssociee } from './garde-fou.ts';
+import { BRANCHE_PRODUCTION, EXECUTIONS_PAR_PAGE, NOM_TRAVAIL_DEPLOIEMENT, PAGES_EXAMINEES_MAX, type CommitExamine, type Lecteur, type PullAssociee } from './garde-fou.ts';
 
 /** GET sur l'API GitHub (chemin commençant par /repos/…), renvoie le JSON. Lève une erreur si la réponse n'est pas 2xx. */
 export type AppelApi = (chemin: string) => Promise<unknown>;
@@ -36,25 +36,33 @@ export function lecteurReel(options: OptionsLecteur): Lecteur {
   const attente = options.attenteMs ?? 4000;
 
   const dernierDeploiement = async (): Promise<string | null> => {
-    const executions = liste(
-      await api(`/repos/${depot}/actions/workflows/${fichierWorkflow}/runs?branch=${BRANCHE_PRODUCTION}&event=push&status=completed&per_page=${EXECUTIONS_EXAMINEES}`),
-      'workflow_runs',
-      'exécutions du workflow',
-    );
-    for (const brute of executions) {
-      const execution = enregistrement(brute, 'exécution');
-      const id = String(execution['id']);
-      if (id === executionEnCours) continue;
-      const sha = texte(execution['head_sha']);
-      if (sha === null) continue;
-      const travaux = liste(await api(`/repos/${depot}/actions/runs/${id}/jobs?filter=latest&per_page=100`), 'jobs', `travaux de l'exécution ${id}`);
-      const deploye = travaux.some((t) => {
-        const travail = enregistrement(t, 'travail');
-        return travail['name'] === NOM_TRAVAIL_DEPLOIEMENT && travail['conclusion'] === 'success';
-      });
-      if (deploye) return sha;
+    // Les exécutions sont lues page par page, de la plus récente à la plus ancienne. Si aucun déploiement réussi n'est trouvé
+    // avant la fin de la liste, on rend null (aucun déploiement). Si la lecture s'arrête au plafond de pages avant la fin, on
+    // ne sait pas : erreur, donc refus (revue du livrable 7.6 : le repli sur « avant » aurait laissé passer des commits).
+    for (let page = 1; page <= PAGES_EXAMINEES_MAX; page += 1) {
+      const executions = liste(
+        await api(
+          `/repos/${depot}/actions/workflows/${fichierWorkflow}/runs?branch=${BRANCHE_PRODUCTION}&event=push&status=completed&per_page=${EXECUTIONS_PAR_PAGE}&page=${page}`,
+        ),
+        'workflow_runs',
+        'exécutions du workflow',
+      );
+      for (const brute of executions) {
+        const execution = enregistrement(brute, 'exécution');
+        const id = String(execution['id']);
+        if (id === executionEnCours) continue;
+        const sha = texte(execution['head_sha']);
+        if (sha === null) continue;
+        const travaux = liste(await api(`/repos/${depot}/actions/runs/${id}/jobs?filter=latest&per_page=100`), 'jobs', `travaux de l'exécution ${id}`);
+        const deploye = travaux.some((t) => {
+          const travail = enregistrement(t, 'travail');
+          return travail['name'] === NOM_TRAVAIL_DEPLOIEMENT && travail['conclusion'] === 'success';
+        });
+        if (deploye) return sha;
+      }
+      if (executions.length < EXECUTIONS_PAR_PAGE) return null;
     }
-    return null;
+    throw new Error(`Aucun déploiement réussi parmi les ${PAGES_EXAMINEES_MAX * EXECUTIONS_PAR_PAGE} dernières exécutions sur ${BRANCHE_PRODUCTION} : dernier déploiement introuvable.`);
   };
 
   const commitsPremiereParente = async (depuis: string, jusqua: string): Promise<CommitExamine[]> => {

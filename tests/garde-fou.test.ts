@@ -7,8 +7,10 @@ import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import {
+  EXECUTIONS_PAR_PAGE,
   FICHIER_COMMITS_ACCEPTES,
   NOM_TRAVAIL_DEPLOIEMENT,
+  PAGES_EXAMINEES_MAX,
   lireCommitsAcceptes,
   verifierOrigineMain,
   vientDUnePullRequestFusionnee,
@@ -210,6 +212,43 @@ describe('lecteurReel : dernier déploiement', () => {
     assert.equal(await lecteurReel(options(appel)).dernierDeploiement(), null);
   });
 
+  test('un déploiement échoué, annulé ou ignoré ne compte pas', async () => {
+    const { appel } = api(
+      [execution(99, sha('e')), execution(98, sha('d')), execution(97, sha('c'))],
+      { 99: travaux(NOM_TRAVAIL_DEPLOIEMENT, 'failure'), 98: travaux(NOM_TRAVAIL_DEPLOIEMENT, 'cancelled'), 97: travaux(NOM_TRAVAIL_DEPLOIEMENT, 'success') },
+    );
+    assert.equal(await lecteurReel(options(appel)).dernierDeploiement(), sha('c'));
+  });
+
+  test('lit les pages suivantes quand la première est pleine', async () => {
+    const pleine = Array.from({ length: EXECUTIONS_PAR_PAGE }, (_, i) => execution(1000 + i, sha('1')));
+    const parExecution: Record<number, { jobs: Record<string, unknown>[] }> = {};
+    for (const e of pleine) parExecution[Number(e['id'])] = travaux('Autre travail', 'skipped');
+    parExecution[5] = travaux(NOM_TRAVAIL_DEPLOIEMENT, 'success');
+    const chemins: string[] = [];
+    const appel: AppelApi = async (chemin) => {
+      chemins.push(chemin);
+      if (chemin.includes('/workflows/ci.yml/runs')) return { workflow_runs: chemin.includes('page=1') ? pleine : [execution(5, sha('9'))] };
+      return parExecution[Number(/\/runs\/(\d+)\/jobs/.exec(chemin)?.[1])];
+    };
+    assert.equal(await lecteurReel(options(appel)).dernierDeploiement(), sha('9'));
+    assert.ok(chemins.some((c) => c.includes('page=2')));
+  });
+
+  test('aucun déploiement et liste jamais épuisée (plafond de pages) : erreur, jamais « aucun déploiement »', async () => {
+    const pleine = Array.from({ length: EXECUTIONS_PAR_PAGE }, (_, i) => execution(1000 + i, sha('1')));
+    let pages = 0;
+    const appel: AppelApi = async (chemin) => {
+      if (chemin.includes('/workflows/ci.yml/runs')) {
+        pages += 1;
+        return { workflow_runs: pleine };
+      }
+      return travaux('Autre travail', 'skipped');
+    };
+    await assert.rejects(lecteurReel(options(appel)).dernierDeploiement(), /introuvable/);
+    assert.equal(pages, PAGES_EXAMINEES_MAX);
+  });
+
   test('une réponse inattendue ou une erreur de l’API est propagée', async () => {
     await assert.rejects(lecteurReel(options(async () => ({}))).dernierDeploiement(), /workflow_runs/);
     const { appel } = api([execution(99, sha('e'))], {});
@@ -314,5 +353,8 @@ describe('workflow .github/workflows/ci.yml', () => {
     assert.match(origine, /fetch-depth: 0/);
     assert.match(origine, /node scripts\/verifier-origine-main\.ts/);
     assert.doesNotMatch(origine, /continue-on-error/);
+    assert.match(origine, /needs: controles/);
+    assert.match(origine, /permissions:\n\s+contents: read\n\s+pull-requests: read\n\s+actions: read/);
+    assert.match(origine, /GITHUB_TOKEN: \$\{\{ github\.token \}\}/);
   });
 });

@@ -12,8 +12,9 @@ import type { Constat } from '../../src/lib/controle.ts';
 export const NOM_TRAVAIL_DEPLOIEMENT = 'Déploiement Cloudflare (wrangler deploy)';
 /** Branche de production. */
 export const BRANCHE_PRODUCTION = 'main';
-/** Nombre maximal d'exécutions récentes examinées pour retrouver le dernier déploiement. */
-export const EXECUTIONS_EXAMINEES = 50;
+/** Lecture des exécutions du workflow : taille d'une page et nombre maximal de pages (au-delà : erreur, refus). */
+export const EXECUTIONS_PAR_PAGE = 50;
+export const PAGES_EXAMINEES_MAX = 10;
 
 export interface PullAssociee {
   numero: number;

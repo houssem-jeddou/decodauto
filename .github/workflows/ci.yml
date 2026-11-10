@@ -138,6 +138,9 @@ jobs:
     # compte compromis : qui pousse sur main peut retirer ce contrôle dans le même envoi (le workflow exécuté est celui du
     # commit poussé). Un commit direct, relu par Houssem, s'accepte dans config/commits-directs-acceptes.json.
     # Le déploiement en dépend : un échec de lecture bloque, dans le doute on ne déploie pas.
+    # Il attend les contrôles : l'association d'un commit à sa pull request peut mettre quelques secondes à apparaître après
+    # la fusion, et un déploiement refusé par les contrôles n'a pas besoin d'être vérifié.
+    needs: controles
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
