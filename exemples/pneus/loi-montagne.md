@@ -101,8 +101,8 @@ sources:
 auteur: houssem-jeddou
 date_publication: 2026-11-03
 date_modification: 2026-11-10
-date_revue: 2026-11-03
-prochaine_revue: 2027-05-03
+date_revue: 2026-11-10
+prochaine_revue: 2027-05-10
 # Encadré de décision (question, quatre lignes et leurs citations, coût probable et pièces) validé par Houssem le
 # 03/11/2026 (21 h 44), avec les sources, la fiche, le tableau, les faits du texte et les sept décisions du paquet
 # (travaux/etape-6/paquet-6.6c-loi-montagne.md), demande de changement n° 10 comprise.

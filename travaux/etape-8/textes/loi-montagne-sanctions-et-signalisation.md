@@ -1,6 +1,6 @@
 # Loi montagne : sanctions, signalisation et loi Montagne III (relevé du 10/11/2026, livrable 8.3.1a)
 
-**Comment ces textes ont été lus.** Légifrance a refusé le navigateur de Claude (vérification anti-robot, jamais remplie). Les textes ci-dessous sont des **extraits de pages Légifrance renvoyés par la recherche web** (domaine legifrance.gouv.fr), recopiés tels qu'affichés. Ce n'est pas une lecture de la page en ligne : Houssem les vérifie dans son Chrome (liste dans `travaux/etape-8/paquet-8.3.1a-loi-montagne.md`).
+**Comment ces textes ont été lus.** Le navigateur intégré de Claude est refusé par Légifrance (vérification anti-robot, jamais remplie). Les textes ci-dessous ont d'abord été relevés dans des extraits de recherche web, puis **relus en ligne dans le Chrome de Houssem le 10/11/2026** (vérification de sécurité passée seule, sans clic) : D314-8, chapitre IV, R411-26, arrêté du 23/06/2021 (art. 2 et 7), loi n° 2026-797, recherches dans le Journal officiel, réponse n° 3489 sur le site de l'Assemblée. Reste lu par extrait de recherche seulement : l'arrêté du 24/11/1967 art. 4 (la phrase sur le B26 figure dans l'art. 2 de l'arrêté de 2021, relu en ligne).
 
 ---
 
@@ -48,7 +48,7 @@ Références : « pris pour l'application de l'article 27 de la loi n° 2016-188
 
 - Réponse du ministère de l'Intérieur publiée au JO Sénat le 12/02/2026 (question écrite n° 06613, registre : `reponse-ministerielle-senat-2026-02-12`, déjà utilisée par le montant validé) : la mise en place d'une sanction nécessite un décret.
 - Légifrance, extraits du 20/10/2026 au 04/11/2026 : le chapitre IV du titre Ier du livre III du code de la route reste intitulé « Pneumatiques (Articles R314-1 à D314-8) » ; D314-8 « en vigueur depuis le 01 novembre 2024 », sans modification postérieure affichée. **Aucun article de sanction (R314-x) n'y apparaît.** Presse spécialisée, fin octobre 2026 : aucun décret de sanction paru.
-- **Non vérifié** : le sommaire du Journal officiel du 12/02/2026 au 10/11/2026 (à faire dans le Chrome de Houssem, recherche « équipements hivernaux » / « pneumatiques » sur legifrance.gouv.fr, rubrique JORF).
+- **Vérifié en ligne le 10/11/2026 (Chrome)** : D314-8 « en vigueur depuis le 01 novembre 2024 », texte identique à celui relevé le 03/11 ; chapitre IV « Pneumatiques » : articles R314-1 à R314-7 et D314-8, aucun article de sanction ; recherches dans les Journaux officiels (« équipements hivernaux » : seul résultat le décret n° 2020-1264 ; « dispositifs antidérapants » : dernier texte = arrêté du 30/10/2025 ; « période hivernale » + véhicules : aucun texte de 2026 sur le sujet). **Aucun décret de sanction publié.**
 
 ## Arrêté du 30 octobre 2025 (JORFTEXT000052486490, JORF n° 0259 du 04/11/2025)
 
@@ -56,10 +56,10 @@ Modifie l'arrêté du 18 juillet 1985 relatif aux dispositifs antidérapants : a
 
 ## Réponse du ministre de l'Intérieur à la question écrite n° 3489 (Assemblée nationale, JO du 21/03/2023, p. 2703) (registre : `reponse-ministerielle-an-2023-03-21`, catégorie secondaire)
 
-https://www.assemblee-nationale.fr/dyn/16/questions/QANR5L16QE3489.pdf. Lue deux fois via WebFetch (résumé automatique, pas le texte brut) : le non-respect du panneau B26 est puni de l'amende de 2e classe, plafonnée à 150 euros ; pour le défaut d'équipement hivernal, il n'existe « pas de sanctions spécifiques » pour le moment, elles doivent être fixées par un décret soumis à l'avis du Conseil d'État. À confirmer par Houssem sur le PDF.
+https://www.assemblee-nationale.fr/dyn/16/questions/QANR5L16QE3489.pdf. Lue deux fois via WebFetch (résumé automatique, pas le texte brut) : le non-respect du panneau B26 est puni de l'amende de 2e classe, plafonnée à 150 euros ; pour le défaut d'équipement hivernal, il n'existe « pas de sanctions spécifiques » pour le moment, elles doivent être fixées par un décret soumis à l'avis du Conseil d'État. Relue en ligne le 10/11/2026 sur le site de l'Assemblée : texte conforme (« Le non-respect de cette signalisation est puni de l'amende prévue pour les contraventions de la deuxième classe (150 euros maximum) »).
 
-## Loi Montagne III : loi n° 2026-797 du 18 août 2026 (registre : `loi-2026-797-montagne-vivante-souveraine`, catégorie secondaire)
+## Loi Montagne III : loi n° 2026-797 du 18 août 2026 (registre : `loi-2026-797-montagne-vivante-souveraine`, catégorie legifrance)
 
 - Promulguée le 18/08/2026, JO n° 192 du 19/08/2026, après la décision du Conseil constitutionnel n° 2026-912 DC du 14/08/2026 (texte reproduit par la base AIDA de l'Ineris : https://aida.ineris.fr/reglementation/loi-ndeg-2026-797-180826-montagne-vivante-souveraine-1 ; promulgation confirmée par ecologie.gouv.fr, lemondedudroit.fr, le JORF du 19/08 listé sur plusieurs sites). Adoptée définitivement par le Parlement le 21/07/2026.
 - Contenu (texte adopté n° 336 de l'Assemblée, 20/07/2026, identique au texte de CMP) : lu trois fois (deux lectures de Claude, une du relecteur indépendant) : aucune occurrence de « pneu », « chaîne », « code de la route », « circulation » ; « véhicules » seulement dans l'article sur les bornes de recharge (code de l'énergie). La page cite la loi promulguée ; sa numérotation d'articles diffère du texte adopté (par exemple recharge à l'article 6).
-- **À confirmer par Houssem** sur Légifrance (loi n° 2026-797, première main) : Ctrl+F « pneu », « chaîne », « circulation ».
+- **Vérifié en ligne le 10/11/2026 (Chrome)** sur Légifrance, loi n° 2026-797 (JORFTEXT000054707261, 20 articles) : « pneu », « chaîne », « code de la route », « circulation », « hivern », « antidérapant » : 0 occurrence ; « véhicule » : 2 (recharge électrique et véhicules utilitaires, code de l'énergie).
