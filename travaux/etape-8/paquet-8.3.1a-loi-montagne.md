@@ -1,5 +1,7 @@
 # Paquet de validation 8.3.1a : loi montagne, page publiable
 
+**Validé par Houssem le 10/11/2026** (« ok pour ta recommandation » : phrase sur le B26 conservée ; « je te valide ça » : validation écrite de la page, du montant daté du 10/11/2026 et des six sources ajoutées). Encadré inchangé. La page reste dans `exemples/` jusqu'à 8.3.0 ; aucune fusion sur `main`.
+
 Étape 8, vague A, livrable 8.3.1a (premier du découpage validé : `travaux/etape-8/decoupage-8.3.md`).
 
 - **Page** : `exemples/pneus/loi-montagne.md` (adresse du plan `/loi-montagne/`). Elle reste dans `exemples/` : son passage dans `src/content` est le livrable 8.3.0. Aucune page réelle sur `main`.
