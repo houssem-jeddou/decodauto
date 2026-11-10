@@ -43,4 +43,4 @@ Verdict : **à corriger** (un point bloquant mécanique, corrigé), le reste acc
 
 ## 7. Validation
 
-À écrire par Houssem : « Validé par Houssem le … », avec ses réponses aux points 1 à 5.
+Validé par Houssem le 10/11/2026 (« Suit ta recommandation pour tous les points, tu as mon accord pour valider »). Réponses retenues : la fiche reste telle que rédigée en 2 (points 1 à 4 : « depuis 2020 », « responsable technique d'une équipe de consultants », « Il travaille depuis la Tunisie », « Diplômé en génie logiciel (ISSAT de Sousse) ») ; le lien LinkedIn n'est pas publié dans ce livrable et se tranche avec les données structurées (7.5).
