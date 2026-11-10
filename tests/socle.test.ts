@@ -19,9 +19,10 @@ import { ADRESSE_SIGNALEMENT } from '../src/lib/site.ts';
 import { soclePageSchema } from '../src/schemas/pages.ts';
 import { lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
 import { adressesDuCss, constatsExpressionsInterdites, constatsIdentifiants, constatsLienConfidentialite, constatsRessourcesTierces, constatsTypographie, controlerComposantsCommuns } from '../scripts/lib/dist.ts';
+import { pageRedigee } from '../scripts/lib/pages-redigees.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-const EXEMPLE = 'exemples/socle/mentions-legales.md';
+const EXEMPLE = await pageRedigee(racine, 'socle', 'mentions-legales');
 const contenu = await readFile(join(racine, EXEMPLE), 'utf8');
 const brut = lireFrontmatter(contenu) as Record<string, unknown>;
 const page = soclePageSchema.parse(brut);

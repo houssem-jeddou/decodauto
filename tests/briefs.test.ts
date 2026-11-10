@@ -9,6 +9,7 @@ import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { DOSSIER_BRIEFS, DOSSIER_RELEVE, briefsAttendus, lireFormulations } from '../scripts/lib/briefs-donnees.ts';
 import { lireCsv, FICHIER_05, signature } from '../src/lib/porte-plan.ts';
+import { localiserPage } from '../scripts/lib/pages-redigees.ts';
 import {
   dateDuReleve,
   genererBrief,
@@ -82,7 +83,8 @@ describe('briefs de la vague A (6.8)', () => {
         continue;
       }
       assert.ok((c.element_unique ?? '').trim() !== '', `${p.id} : élément unique manquant`);
-      const exemple = await readFile(join(racine, `exemples/${p.type}/${p.id}.md`), 'utf8').catch(() => undefined);
+      const chemin = await localiserPage(racine, p.type, p.id);
+      const exemple = chemin === undefined ? undefined : await readFile(join(racine, chemin), 'utf8');
       if (exemple !== undefined) {
         // La question validée dans l'exemple n'est jamais recopiée dans les consignes : le brief la lit dans l'exemple.
         assert.equal(c.question_decision, undefined, `${p.id} : question à lire dans l'exemple, pas à recopier`);
