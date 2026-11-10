@@ -47,7 +47,7 @@ describe('mentions légales construites', () => {
 });
 
 describe('page des mentions légales rendue par le modèle', () => {
-  const page = { id: 'mentions-legales', title: 'Mentions légales et confidentialité', date_modification: '2026-11-10' } as const;
+  const page = { id: 'mentions-legales', title: 'Mentions légales et confidentialité', date_modification: new Date('2026-11-10') };
   const corps = '<h2>Confidentialité</h2><p>Texte.</p>';
   const rendu = pageSocle(page, corps);
 
