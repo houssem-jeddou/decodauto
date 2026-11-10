@@ -86,3 +86,7 @@ Une revue, verdict **acceptable**, aucun bloquant. 25 tests relancés par le rel
 - **Impact sur ce qui est validé** : aucun contenu ni contrôle ; `docs/03` (v11) et le journal ajoutent IndexNow aux préalables de la mise en ligne, après la validation de Houssem.
 - **Contrôles à relancer** : aucun.
 - **Accord** : la validation de ce paquet par Houssem vaut accord ; sans accord, IndexNow reste un livrable de l'étape 7 et la porte 7 attend son activation.
+
+## 8. Validation
+
+Houssem a validé le livrable 7.6 le 10/11/2026 à 15 h 20 (Africa/Tunis) : « Je valide ». Elle couvre le garde-fou et sa sortie de secours (§1), les deux réglages Cloudflare changés (§3), la porte de l'étape 7 critère par critère (§4) et le report d'IndexNow à la mise en ligne (§7, accord de la demande de changement). **Non couvert** : le livrable 7.4b (mentions légales), dont la validation reste en attente et qui garde la porte 7 ouverte ; aucun tag Git (sur demande explicite de Houssem seulement).
