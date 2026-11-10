@@ -14,6 +14,8 @@ prochaine_revue: 2027-11-10
 auteurs:
   - id: houssem-jeddou
     nom: Houssem Jeddou
+    profils:
+      - https://www.linkedin.com/in/houssem-jeddou
     presentation: "Diplômé en génie logiciel (ISSAT de Sousse), consultant technique sur Microsoft Dynamics 365 et Power Platform depuis 2020, aujourd'hui responsable technique d'une équipe de consultants. Il construit et vérifie des logiciels de gestion d'entreprise : il n'est pas mécanicien. Sur ce site, il fixe la méthode, vérifie chaque verdict sur sa source et en porte la responsabilité éditoriale. Il travaille depuis la Tunisie."
 ---
 
