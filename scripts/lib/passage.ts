@@ -124,10 +124,8 @@ export function ajouterUrlLighthouse(contenu: string, url: string): string {
 /** Rappels à traiter dans le même commit que le déplacement (gestes qui ne se font pas par script : texte libre de la CI et de la page). */
 export function rappelsDePassage(p: Passage): string[] {
   const rappels = [`${p.cible} : retirer du commentaire d'en-tête la mention « exemple » ou « jamais publiée » s'il y en a une`];
-  // Dès que « à propos » existe, les attendus LIEN-CASSE vers /a-propos/#methode de la recette ne se produisent plus (ATTENDU-ABSENT) :
-  // c'est le passage de « à propos » qui les retire tous ; pour une autre page, ils ont déjà disparu.
-  if (p.id === ID_A_PROPOS) rappels.unshift('.github/workflows/ci.yml : retirer toutes les lignes --attendu \'LIEN-CASSE@…@/a-propos/#methode\' de la recette (elles deviennent ATTENDU-ABSENT)');
-  else rappels.unshift('.github/workflows/ci.yml : vérifier qu\'aucune ligne --attendu ne vise encore cette page');
+  // La recette n'a plus d'erreur attendue depuis le livrable 7.3 : une ligne --attendu qui viserait la page ferait échouer le job.
+  rappels.unshift('.github/workflows/ci.yml : vérifier qu\'aucune ligne --attendu ne vise encore cette page');
   rappels.push(`lighthouserc-exemples.json : laisser ${p.urlLighthouse} (la recette des exemples continue de construire la page)`);
   return rappels;
 }

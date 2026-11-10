@@ -9,7 +9,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { ANCRE_CONFIDENTIALITE, ANCRE_METHODE, LIBELLE_LIEN_CONFIDENTIALITE, PAGE_CONFIDENTIALITE, PAGE_METHODE, REGISTRE_EMPREINTE, sectionMethode } from '../src/lib/charte.ts';
+import { ANCRE_CONFIDENTIALITE, ANCRE_METHODE, LIBELLE_LIEN_CONFIDENTIALITE, PAGE_CONFIDENTIALITE, PAGE_METHODE, REGISTRE_EMPREINTE, RESPONSABLE_EDITORIAL, sectionMethode } from '../src/lib/charte.ts';
 import { lienConfidentialite, sectionMethodeHtml } from '../src/lib/composants.ts';
 import { controlerHtmlSocle } from '../src/lib/controle.ts';
 import { pied } from '../src/lib/gabarit.ts';
@@ -239,7 +239,7 @@ describe('page « à propos » : fiche auteur et section « Méthode »', () => 
     assert.equal(plan.find((p) => p.id === PAGE_METHODE)?.type, 'socle');
     assert.equal(aPropos.auteurs?.length, 1);
     assert.equal(aPropos.auteurs?.[0]?.id, 'houssem-jeddou');
-    assert.equal(aPropos.auteurs?.[0]?.nom, 'Houssem Jeddou');
+    assert.equal(aPropos.auteurs?.[0]?.nom, RESPONSABLE_EDITORIAL, 'la fiche porte le nom du responsable éditorial des signatures');
     assert.ok((aPropos.auteurs?.[0]?.presentation ?? '').length > 100, 'parcours trop court pour identifier l’auteur');
   });
 
@@ -249,7 +249,7 @@ describe('page « à propos » : fiche auteur et section « Méthode »', () => 
     const iMethode = pageAPropos.indexOf('data-methode');
     const iDate = pageAPropos.indexOf('data-socle-date');
     assert.ok(iTexte >= 0 && iTexte < iFiche && iFiche < iMethode && iMethode < iDate, 'ordre texte, fiche, méthode, date');
-    assert.ok(pageAPropos.includes('<h2>Houssem Jeddou</h2>'));
+    assert.ok(pageAPropos.includes(`<h2>${RESPONSABLE_EDITORIAL}</h2>`));
     assert.ok(pageAPropos.includes(`id="${ANCRE_METHODE}"`));
   });
 
@@ -264,7 +264,7 @@ describe('page « à propos » : fiche auteur et section « Méthode »', () => 
     assert.deepEqual(codes(constatsPageAPropos(docu(pageAPropos.replace(methodeHtml, '')), 'x')), ['METHODE-SECTION']);
     assert.deepEqual(codes(constatsPageAPropos(docu(pageAPropos.replace(methodeHtml, `${methodeHtml}${methodeHtml}`)), 'x')), ['METHODE-SECTION']);
     assert.deepEqual(codes(constatsPageAPropos(docu(pageAPropos.replace(/<section class="auteur".*?<\/section>/s, '')), 'x')), ['AUTEUR-FICHE']);
-    assert.deepEqual(codes(constatsPageAPropos(docu(pageAPropos.replace(/<h2>Houssem Jeddou<\/h2>/, '<h2></h2>')), 'x')), ['AUTEUR-FICHE']);
+    assert.deepEqual(codes(constatsPageAPropos(docu(pageAPropos.replace(`<h2>${RESPONSABLE_EDITORIAL}</h2>`, '<h2></h2>')), 'x')), ['AUTEUR-FICHE']);
   });
 
   test('le texte ne parle pas en « nous », respecte la typographie, n’écrit ni l’adresse de contact ni aucun lien', () => {
@@ -276,8 +276,8 @@ describe('page « à propos » : fiche auteur et section « Méthode »', () => 
 
   test('la fiche et le texte restent fidèles à la charte : texte rédigé par une IA, sous la responsabilité de l’éditeur, jamais relu par un mécanicien', () => {
     assert.match(corpsAPropos, /rédigés par une intelligence artificielle/);
-    assert.match(corpsAPropos, /Houssem Jeddou vérifie lui-même chaque verdict/);
-    assert.match(corpsAPropos, /Il n'est relu par aucun mécanicien/);
+    assert.match(corpsAPropos, /L'éditeur vérifie lui-même chaque verdict/);
+    assert.match(corpsAPropos, /Il n'est relu par aucun mécanicien et ne répare pas de voitures/);
     assert.match(aPropos.auteurs?.[0]?.presentation ?? '', /n'est pas mécanicien/);
   });
 });

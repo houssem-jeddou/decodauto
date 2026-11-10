@@ -18,8 +18,8 @@ export interface BilanControle {
 }
 
 /**
- * Fiche auteur supposée pour la construction de recette des exemples (livrable 6.6) : la page « à propos », qui porte la
- * fiche, est écrite à l'étape 7. Jamais utilisée par la construction de production.
+ * Identifiant de la fiche auteur pour les tests qui construisent une page sans la page « à propos » (tests/modeles.test.ts).
+ * La construction de recette lit la fiche de la page « à propos » (livrable 7.3) ; jamais utilisée par la production.
  */
 export const AUTEUR_DES_EXEMPLES = AUTEUR_SUPPOSE;
 
