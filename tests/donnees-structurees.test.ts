@@ -16,7 +16,11 @@ import {
   type ArticleDeclare,
 } from '../src/lib/donnees-structurees.ts';
 import { cheminDAriane } from '../src/lib/composants.ts';
-import { dateDeMiseAJour, genererPlanDuSite, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite } from '../src/lib/site.ts';
+import { dateDansTexte, dateDeMiseAJour, genererPlanDuSite, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite } from '../src/lib/site.ts';
+import { pagesConstruites } from '../scripts/integration-plan-du-site.ts';
+import { mkdir, mkdtemp, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 const AUTEUR = { id: 'houssem-jeddou', nom: 'Houssem Jeddou', profils: ['https://www.linkedin.com/in/houssem-jeddou'] };
 const ARTICLE: ArticleDeclare = {
@@ -91,9 +95,35 @@ describe('JSON-LD : pages', () => {
 
 describe('plan du site : lastmod', () => {
   test('dateDeMiseAJour : signature ou pied du socle, espaces insécables comprises, AAAA-MM-JJ', () => {
-    assert.equal(dateDeMiseAJour('<p class="signature">Responsable éditorial : X · Mis à jour le 10/11/2026 · Revu le 10/11/2026</p>'), '2026-11-10');
-    assert.equal(dateDeMiseAJour('<p class="socle-date">Mis à jour le 02/11/2026</p>'), '2026-11-02');
+    assert.equal(dateDeMiseAJour('<p class="signature" data-signature>Responsable éditorial : X · Mis à jour le 10/11/2026 · Revu le 10/11/2026</p>'), '2026-11-10');
+    assert.equal(dateDeMiseAJour('<p class="socle-date" data-socle-date>Mis à jour le 02/11/2026</p>'), '2026-11-02');
     assert.equal(dateDeMiseAJour('<p>Aucune date ici</p>'), undefined);
+  });
+
+  test('dateDeMiseAJour ne lit que l’élément qui porte la date : ni le titre, ni le balisage, ni le texte rédigé', () => {
+    const html =
+      '<head><title>Mis à jour le 01/01/2020</title><script type="application/ld+json">{"description":"Mis à jour le 01/01/2020"}</script></head>' +
+      '<body><p>Texte : Mis à jour le 01/01/2021</p><p class="signature" data-signature>Responsable : X · Mis à jour le\u00a010/11/2026 · Revu le 10/11/2026</p></body>';
+    assert.equal(dateDeMiseAJour(html), '2026-11-10');
+    assert.equal(dateDeMiseAJour('<p class="socle-date" data-socle-date>Mis à jour le 02/11/2026</p>'), '2026-11-02');
+    assert.equal(dateDeMiseAJour('<head><title>Mis à jour le 01/01/2020</title></head><body><p>Mis à jour le 01/01/2021</p></body>'), undefined);
+    assert.equal(dateDansTexte('Mis à jour le 03/11/2026'), '2026-11-03');
+  });
+
+  test('pagesConstruites : lastmod = date affichée, aucune sur l’accueil ni sur une page sans date, la 404 est ignorée', async () => {
+    const dist = await mkdtemp(join(tmpdir(), 'decodauto-lastmod-'));
+    await mkdir(join(dist, 'voyants', 'moteur'), { recursive: true });
+    await mkdir(join(dist, 'mentions-legales'), { recursive: true });
+    await writeFile(join(dist, 'index.html'), '<p data-signature>Mis à jour le 01/01/2020</p>');
+    await writeFile(join(dist, '404.html'), '<p data-socle-date>Mis à jour le 01/01/2020</p>');
+    await writeFile(join(dist, 'voyants', 'moteur', 'index.html'), '<head><title>Mis à jour le 01/01/2019</title></head><p class="signature" data-signature>Mis à jour le 10/11/2026</p>');
+    await writeFile(join(dist, 'mentions-legales', 'index.html'), '<p>aucune date</p>');
+    const pages = (await pagesConstruites(dist)).sort((a, b) => a.adresse.localeCompare(b.adresse));
+    assert.deepEqual(pages, [
+      { adresse: '/', lastmod: undefined },
+      { adresse: '/mentions-legales/', lastmod: undefined },
+      { adresse: '/voyants/moteur/', lastmod: '2026-11-10' },
+    ]);
   });
 
   test('genererPlanDuSite : lastmod quand il est donné ; les adresses seules restent acceptées', () => {

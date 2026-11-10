@@ -2,8 +2,8 @@ import * as cheerio from 'cheerio';
 import { readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
-import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, URL_SITE, adresseDepuisFichier, dateDeMiseAJour, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
-import { CONTEXTE_SCHEMA, NOM_DU_SITE, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
+import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_DU_SITE, URL_SITE, adresseDepuisFichier, dateDansTexte, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
+import { CONTEXTE_SCHEMA, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
 import { listerFichiers } from './charger.ts';
 import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, ANCRE_METHODE, PAGE_CONFIDENTIALITE, PAGE_METHODE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
 import { normaliserRecherche } from '../../src/lib/texte.ts';
@@ -112,14 +112,6 @@ export async function controlerPagesDuPlan(dist: string, adressesDuPlan: Iterabl
 }
 
 /**
- * Canonical et plan du site (étape 7, docs/03) :
- *  - chaque page construite, sauf la 404, porte une seule balise canonical, égale à sa propre adresse absolue
- *    (https://decodauto.com + adresse, barre finale comprise) ; la 404 n'en porte pas ;
- *  - sitemap.xml existe, est bien formé et liste exactement les pages construites (sans la 404), une fois chacune,
- *    à leur adresse canonique ;
- *  - robots.txt annonce le plan du site (ligne « Sitemap: https://decodauto.com/sitemap.xml »).
- */
-/**
  * <lastmod> du plan du site (livrable 7.5) : une page qui affiche sa date de mise à jour (« Mis à jour le jj/mm/aaaa »)
  * la porte en AAAA-MM-JJ, égale à celle de la page, jour pour jour ; une page qui n'en affiche pas (l'accueil) n'en porte pas.
  * Google n'utilise lastmod que s'il est exact : une date inventée ou périmée ferait ignorer toutes les autres.
@@ -138,6 +130,14 @@ export function constatsLastmod(lastmod: ReadonlyMap<string, string>, affichees:
   return constats;
 }
 
+/**
+ * Canonical et plan du site (étape 7, docs/03) :
+ *  - chaque page construite, sauf la 404, porte une seule balise canonical, égale à sa propre adresse absolue
+ *    (https://decodauto.com + adresse, barre finale comprise) ; la 404 n'en porte pas ;
+ *  - sitemap.xml existe, est bien formé et liste exactement les pages construites (sans la 404), une fois chacune,
+ *    à leur adresse canonique ;
+ *  - robots.txt annonce le plan du site (ligne « Sitemap: https://decodauto.com/sitemap.xml »).
+ */
 export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Constat[]> {
   const constats: Constat[] = [];
   const pages = new Set<string>();
@@ -157,7 +157,7 @@ export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Cons
     const adresse = adresseDepuisFichier(fichier);
     if (adresse === undefined) continue; // autre fichier HTML : refusé par PAGE-HORS-PLAN
     pages.add(urlAbsolue(adresse));
-    datesAffichees.set(urlAbsolue(adresse), adresse === '/' ? undefined : dateDeMiseAJour(html));
+    datesAffichees.set(urlAbsolue(adresse), adresse === '/' ? undefined : dateDansTexte($('[data-signature], [data-socle-date]').first().text()));
     if (canonicals.length === 0) {
       constats.push(erreur('CANONICAL-ABSENT', `la page n'a pas de balise canonical (attendue : ${urlAbsolue(adresse)})`, fichier));
     } else if (canonicals.length > 1) {
@@ -709,7 +709,11 @@ export function constatsDonneesStructurees(html: string, fichier: string, adress
   const $ = cheerio.load(html);
   const constats: Constat[] = [];
   const e = (regle: string, message: string): void => void constats.push(erreur(regle, message, fichier));
-  const nature: NatureDePage = adresse === '/' ? 'accueil' : $('[data-socle-date]').length > 0 ? (adresse === attendu.adresseAPropos ? 'a-propos' : 'aucune') : 'editoriale';
+  // Nature de la page : éditoriale = signature (`data-signature`), socle = pied daté (`data-socle-date`) ; ni l'un ni l'autre, ou les deux : erreur.
+  const editoriale = $('[data-signature]').length > 0;
+  const socle = $('[data-socle-date]').length > 0;
+  if (adresse !== '/' && editoriale === socle) e('DONNEES-STRUCTUREES-TYPE', `la page porte ${editoriale ? 'une signature et un pied daté du socle' : 'ni signature (page éditoriale) ni pied daté (page du socle)'} : sa nature n'est pas établie`);
+  const nature: NatureDePage = adresse === '/' ? 'accueil' : socle && !editoriale ? (adresse === attendu.adresseAPropos ? 'a-propos' : 'aucune') : 'editoriale';
   const objets: Record<string, unknown>[] = [];
   for (const el of $(`script[type="${TYPE_SCRIPT_JSON_LD}"]`).toArray()) {
     try {
@@ -750,7 +754,7 @@ export function constatsDonneesStructurees(html: string, fichier: string, adress
       const description = $('meta[name="description"]').attr('content') ?? '';
       if (o['description'] !== description) e('DONNEES-STRUCTUREES-CONTENU', 'Article : description ≠ meta description de la page');
       if (absolue(o['mainEntityOfPage'], 'Article.mainEntityOfPage') !== undefined && o['mainEntityOfPage'] !== urlPage) e('DONNEES-STRUCTUREES-CONTENU', `Article : mainEntityOfPage « ${String(o['mainEntityOfPage'])} » ≠ adresse de la page ${urlPage}`);
-      const affichee = dateDeMiseAJour($('[data-signature]').text());
+      const affichee = dateDansTexte($('[data-signature]').text());
       if (affichee === undefined) e('DONNEES-STRUCTUREES-CONTENU', "Article : la page n'affiche pas de date de mise à jour (signature)");
       else if (o['dateModified'] !== affichee) e('DONNEES-STRUCTUREES-CONTENU', `Article : dateModified « ${String(o['dateModified'])} » ≠ date affichée ${affichee}`);
       if ('datePublished' in o) e('DONNEES-STRUCTUREES-CONTENU', "Article : datePublished n'est pas déclarée (la page n'affiche pas de date de publication)");

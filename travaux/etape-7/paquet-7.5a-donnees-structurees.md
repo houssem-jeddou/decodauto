@@ -39,7 +39,14 @@ Le profil LinkedIn n'est **pas affiché comme lien** : la règle R7-LIEN-EXTERNE
 - CI du commit `c076060` : Contrôles (schémas, tests, build, liens), Recette des exemples rédigés (pages construites avec leur balisage, contrôlées par les nouveaux contrôles, sans erreur attendue), Lighthouse mobile, Production : tous verts.
 - Local, sans dépendance : `node --test tests/donnees-structurees.test.ts` (9 passent). Les tests de contrôle (cheerio) ne tournent qu'en CI.
 
-## 6. Limites connues
+## 6. Revue indépendante (une revue, verdict « acceptable », rien de bloquant)
+
+- **Important, corrigé** : `dateDeMiseAJour` lisait la première occurrence de « Mis à jour le » dans tout le HTML (titre, balisage, texte rédigé) et le contrôle SITEMAP-LASTMOD relisait la page avec la même fonction, donc ne pouvait rien détecter. Désormais : le plan du site lit la date seulement dans `data-signature` ou `data-socle-date` (expression régulière), et le contrôle la relit avec cheerio dans les mêmes éléments (deux lectures indépendantes) ; tests avec une page à plusieurs « Mis à jour le ».
+- **Mineurs, corrigés** : nature de la page établie par `data-signature` (éditoriale) ou `data-socle-date` (socle), erreur si aucun ou les deux ; commentaire sur `sameAs` corrigé (R7-LIEN-EXTERNE ne vise que les pages éditoriales : c'est la règle du plan du site de CLAUDE.md qui réserve les liens externes aux sources citées) ; docblock du contrôle du plan du site remis en place ; `NOM_DU_SITE` en source unique (`src/lib/site.ts`, repris par le bandeau et le balisage) ; adresse de « à propos » du plan transmise aux contrôles ; tests de `pagesConstruites`.
+- **Écartés** : `dateModified` sans fuseau (Google le recommande ; une date seule est valide, et ajouter un fuseau inventerait une heure que la page n'affiche pas) ; date de mise à jour après l'encadré (position fixée par la charte §4 ; à regarder en recette).
+- **Reste à vérifier** : `lastmod` inexact si la base voyants ou le registre des sources changent sans que `date_modification` bouge (non vérifiable par machine : règle de rédaction) ; Rich Results Test après mise en ligne.
+
+## 7. Limites connues
 
 - Le balisage n'a pas été passé dans le Rich Results Test de Google (aucun accès depuis l'environnement) : à faire sur une page en ligne après la mise en ligne (liste de recette de l'étape 9).
 - Les contrôles vérifient la cohérence page ↔ balisage ; ils ne vérifient pas que Google affichera un résultat enrichi (Article n'en promet aucun).

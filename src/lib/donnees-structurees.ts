@@ -14,13 +14,12 @@
 // avant le livrable 7.5b), pas de FAQPage ni de HowTo (extraits de résultats que Google n'affiche plus pour la plupart des
 // sites ; un balisage sans extrait attendu n'apporte rien).
 
-import { URL_SITE, urlAbsolue } from './site.ts';
+import { NOM_DU_SITE, URL_SITE, urlAbsolue } from './site.ts';
 import { typographier } from './html.ts';
 import type { Miette } from './composants.ts';
 
 export const TYPE_SCRIPT_JSON_LD = 'application/ld+json';
 export const CONTEXTE_SCHEMA = 'https://schema.org';
-export const NOM_DU_SITE = 'decodauto.com';
 
 /** Types admis par nature de page (contrôle DONNEES-STRUCTUREES-TYPE). */
 export const TYPES_ATTENDUS = {
@@ -37,7 +36,7 @@ export const ancreAuteur = (id: string): string => `auteur-${id}`;
 export interface AuteurDeclare {
   id: string;
   nom: string;
-  /** Liens publics du profil (https) : `sameAs`. Jamais affichés comme liens (R7-LIEN-EXTERNE). */
+  /** Liens publics du profil (https) : `sameAs`. Non affichés comme liens : la règle du plan du site (CLAUDE.md) réserve les liens vers un autre site aux sources citées. */
   profils?: readonly string[] | undefined;
 }
 

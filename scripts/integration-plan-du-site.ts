@@ -6,7 +6,7 @@ import { FICHIER_PLAN_DU_SITE, adresseDepuisFichier, dateDeMiseAJour, genererPla
 
 // Écrit sitemap.xml à la fin de la construction : exactement les pages construites (accueil et pages du plan),
 // sans la 404. Le script de contrôle vérifie ensuite qu'il correspond aux pages et à leur canonical.
-async function pagesConstruites(dossier: string): Promise<EntreeDuPlan[]> {
+export async function pagesConstruites(dossier: string): Promise<EntreeDuPlan[]> {
   const entrees = await readdir(dossier, { withFileTypes: true, recursive: true });
   const pages = await Promise.all(
     entrees

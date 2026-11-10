@@ -33,10 +33,23 @@ export function adresseDepuisFichier(fichier: string): string | undefined {
 const echapperXml = (texte: string): string =>
   texte.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 
-/** Date de mise à jour affichée sur une page (« Mis à jour le 02/11/2026 », signature ou pied du socle), au format AAAA-MM-JJ. */
-export function dateDeMiseAJour(html: string): string | undefined {
-  const m = /Mis à jour le[\s\u00a0\u202f]+(\d{2})\/(\d{2})\/(\d{4})/.exec(html.replace(/<[^>]*>/g, ' '));
+/** Nom du site, tel que l'affichent le bandeau de toutes les pages et le balisage WebSite. Source unique. */
+export const NOM_DU_SITE = 'decodauto.com';
+
+/** Date « Mis à jour le jj/mm/aaaa » dans un texte, au format AAAA-MM-JJ (espaces insécables admises). */
+export function dateDansTexte(texte: string): string | undefined {
+  const m = /Mis à jour le[\s\u00a0\u202f]+(\d{2})\/(\d{2})\/(\d{4})/.exec(texte);
   return m === null ? undefined : `${m[3]}-${m[2]}-${m[1]}`;
+}
+
+/**
+ * Date de mise à jour qu'une page affiche, AAAA-MM-JJ : lue seulement dans l'élément qui la porte (signature d'une page
+ * éditoriale `data-signature`, pied d'une page du socle `data-socle-date`), jamais ailleurs (titre, balisage, texte
+ * rédigé : revue du livrable 7.5a). Sans ces éléments : undefined.
+ */
+export function dateDeMiseAJour(html: string): string | undefined {
+  const m = /<p\b[^>]*\sdata-(?:signature|socle-date)(?=[\s=>/])[^>]*>([\s\S]*?)<\/p>/.exec(html);
+  return m === null ? undefined : dateDansTexte((m[1] ?? '').replace(/<[^>]*>/g, ' '));
 }
 
 export interface EntreeDuPlan {

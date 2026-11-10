@@ -64,6 +64,11 @@ describe('données structurées : défauts', () => {
     assert.deepEqual(codes(constatsDonneesStructurees404(doc(scriptsAccueil().join(''), 'x'), '404.html')), ['DONNEES-STRUCTUREES-TYPE']);
   });
 
+  test('nature de la page non établie (ni signature ni pied daté, ou les deux) : DONNEES-STRUCTUREES-TYPE', () => {
+    assert.ok(controle(doc(scriptsPageEditoriale(ARTICLE, MIETTES).join(''), `${filDAriane(MIETTES)}<h1>${texteHtml(ARTICLE.titre)}</h1>`)).includes('DONNEES-STRUCTUREES-TYPE'));
+    assert.ok(controle(editoriale(undefined, `${corpsEditorial()}<p data-socle-date>Mis à jour le 10/11/2026</p>`)).includes('DONNEES-STRUCTUREES-TYPE'));
+  });
+
   test('Article qui ne dit pas ce que la page affiche : DONNEES-STRUCTUREES-CONTENU', () => {
     const faux = (changement: Partial<ArticleDeclare>): string[] => controle(editoriale(scriptsPageEditoriale({ ...ARTICLE, ...changement }, MIETTES)));
     assert.deepEqual(faux({ titre: 'Un autre titre' }), ['DONNEES-STRUCTUREES-CONTENU']);
