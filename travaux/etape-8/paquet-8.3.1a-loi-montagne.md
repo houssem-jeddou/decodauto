@@ -65,7 +65,7 @@ Le paquet contient aussi `travaux/etape-8/decoupage-8.3.md` (découpage que tu a
 
 ## 6. Contrôles
 
-À remplir à la fin du livrable (CI de la pull request) : Contrôles, Recette des exemples, Lighthouse, Production.
+CI de la pull request n° 25, commit 87e3139 (tous verts) : Contrôles (schémas, règles, build, liens), Recette des exemples rédigés, Lighthouse mobile (3 passages), Production en ligne ; déploiement Cloudflare ignoré (hors `main`). Recette : https://github.com/houssem-jeddou/decodauto/actions/runs/42728951976
 
 ## 7. Revue indépendante (une seule, faite avant présentation)
 
