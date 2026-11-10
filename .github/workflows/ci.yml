@@ -91,7 +91,7 @@ jobs:
       - name: Texte rédigé des exemples, tel que rendu (lecture dans ce journal)
         if: ${{ !cancelled() }}
         run: node scripts/texte-exemples.ts dist-exemples
-      - name: Lighthouse mobile de la page de chaque modèle (porte de l'étape 8 ; emplacements factices à venir, étape 7)
+      - name: Lighthouse mobile de la page de chaque modèle (porte de l'étape 8 ; avec les emplacements publicitaires factices de la construction de recette, livrable 7.5b)
         if: ${{ !cancelled() }}
         run: npx lhci autorun --config=lighthouserc-exemples.json
       - name: Conserver la construction de recette

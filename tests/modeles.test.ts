@@ -105,6 +105,19 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.ok(!html.includes('{{'));
   });
 
+  test('emplacement publicitaire (livrable 7.5b) : aucun en production ; en recette (pubFactice), un seul, après le texte et avant les pages liées et « Sources »', async () => {
+    const { page, site } = await exemplePneus();
+    const corps = '<h2>Équipement</h2><p>{{tableau}}</p><table><thead><tr><th>A</th></tr></thead><tbody><tr><td>B</td></tr></tbody></table>';
+    const production = pagePneus(page, site, corps);
+    assert.ok(!production.includes('emplacement-pub') && !production.includes('data-emplacement-pub'));
+    assert.equal(pagePneus(page, { ...site, pubFactice: false }, corps), production, 'pubFactice faux : même HTML octet pour octet');
+    const recette = pagePneus(page, { ...site, pubFactice: true }, corps);
+    assert.equal(recette.match(/data-emplacement-pub=/g)?.length, 1);
+    const pub = recette.indexOf('data-emplacement-pub');
+    assert.ok(pub > recette.indexOf('data-corps') && pub > recette.indexOf('data-signature') && pub < recette.indexOf('data-sources'));
+    assert.equal(recette.replace(/<div class="emplacement-pub"[\s\S]*?<\/div>/, ''), production, 'le bloc est la seule différence');
+  });
+
   test('page pneus et obligations avec un voyant de la base rattaché : tableau des notices après le texte rédigé, sans être l’élément unique', async () => {
     const { page, site } = await exemplePneus();
     const [id, voyant] = [...site.voyants].find(([, v]) => v.page !== undefined) ?? [];

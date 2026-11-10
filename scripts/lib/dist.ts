@@ -3,6 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_DU_SITE, URL_SITE, adresseDepuisFichier, dateDansTexte, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
+import { CLASSE_EMPLACEMENT_PUB, EMPLACEMENTS_PUB, HAUTEUR_RESERVEE_PX } from '../../src/lib/emplacements-pub.ts';
 import { CONTEXTE_SCHEMA, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
 import { listerFichiers } from './charger.ts';
 import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, ANCRE_METHODE, PAGE_CONFIDENTIALITE, PAGE_METHODE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
@@ -431,7 +432,7 @@ export function compterMots(texte: string): number {
  * lien de signalement, section « Sources », renvois de page du tableau des notices (« p. 15, « … » ») et de l'outil voyants :
  * ce sont des références, pas du texte cité ni du texte du site.
  */
-export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references'] as const;
+export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-emplacement-pub]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references'] as const;
 
 export interface PartCitee {
   /** Mots du texte affiché dans le contenu principal (main), hors HORS_PART_CITEE. */
@@ -797,6 +798,87 @@ export function constatsDonneesStructurees(html: string, fichier: string, adress
   return constats;
 }
 
+/** Repère d'une publicité dans une page : emplacement du site, bloc AdSense ou script AdSense. */
+const SELECTEUR_PUB = `[data-emplacement-pub], .adsbygoogle, ins.adsbygoogle, script[src*="adsbygoogle"], script[src*="googlesyndication"]`;
+
+/**
+ * Emplacements publicitaires (livrable 7.5b, src/lib/emplacements-pub.ts) :
+ *  - PUB-PRODUCTION : la construction de production ne porte aucun emplacement ni script de publicité (aucune publicité
+ *    avant AdSense, étape 12) ;
+ *  - PUB-EMPLACEMENT : dans la construction de recette (emplacements factices), chaque page éditoriale (`data-signature`)
+ *    porte exactement les emplacements prévus (EMPLACEMENTS_PUB), après l'encadré de décision et avant « Sources », avec son
+ *    étiquette « Publicité » ; l'accueil, la 404 et les pages du socle n'en portent aucun.
+ */
+export function constatsEmplacementsPub(html: string, fichier: string, recette: boolean): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const emplacements = $('[data-emplacement-pub]');
+  if (!recette) {
+    if ($(SELECTEUR_PUB).length > 0) constats.push(erreur('PUB-PRODUCTION', "publicité ou emplacement publicitaire dans la construction de production : aucune publicité avant AdSense (étape 12)", fichier));
+    return constats;
+  }
+  const editoriale = $('[data-signature]').length > 0;
+  if (!editoriale) {
+    if (emplacements.length > 0) constats.push(erreur('PUB-EMPLACEMENT', "seules les pages éditoriales portent un emplacement publicitaire (ni l'accueil, ni la 404, ni les pages du socle)", fichier));
+    return constats;
+  }
+  const positions = emplacements.toArray().map((el) => $(el).attr('data-emplacement-pub') ?? '');
+  if (positions.length !== EMPLACEMENTS_PUB.length || !EMPLACEMENTS_PUB.every((p) => positions.includes(p))) {
+    constats.push(erreur('PUB-EMPLACEMENT', `la page éditoriale porte les emplacements prévus (${EMPLACEMENTS_PUB.join(', ')}), chacun une fois ; trouvés : ${positions.join(', ') || 'aucun'}`, fichier));
+    return constats;
+  }
+  const ordre = $('*').toArray();
+  const rang = (selecteur: string): number => {
+    const el = $(selecteur).first().get(0);
+    return el === undefined ? -1 : ordre.indexOf(el);
+  };
+  for (const el of emplacements.toArray()) {
+    const emplacement = $(el);
+    const position = ordre.indexOf(el);
+    const debutEncadre = rang('[data-encadre-decision]');
+    const dernierDeLEncadre = $('[data-encadre-decision]').first().find('*').last().get(0);
+    const finEncadre = dernierDeLEncadre !== undefined ? ordre.indexOf(dernierDeLEncadre) : debutEncadre;
+    if (debutEncadre < 0 || position <= Math.max(debutEncadre, finEncadre)) constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire vient après l'encadré de décision, jamais avant ni dedans", fichier));
+    const sources = rang('[data-sources]');
+    if (sources >= 0 && position > sources) constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire (fin de contenu) précède la section « Sources »", fichier));
+    const liees = Math.min(...['[data-pages-liees]', '[data-pages-enfants]'].map(rang).filter((r) => r >= 0));
+    if (Number.isFinite(liees) && position > liees) constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire (fin de contenu) précède les pages liées", fichier));
+    if (!emplacement.hasClass(CLASSE_EMPLACEMENT_PUB)) constats.push(erreur('PUB-EMPLACEMENT', `l'emplacement publicitaire porte la classe ${CLASSE_EMPLACEMENT_PUB} (hauteur réservée dans la feuille de style)`, fichier));
+    if (brut(emplacement.attr('aria-label') ?? '') !== 'Publicité') constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire est étiqueté « Publicité » (aria-label)", fichier));
+  }
+  return constats;
+}
+
+/**
+ * Feuilles de style (livrable 7.5b) : la règle `.emplacement-pub` réserve au moins HAUTEUR_RESERVEE_PX de hauteur
+ * (min-height) : sans elle, une publicité qui se charge déplacerait le texte (CLS). PUB-HAUTEUR-RESERVEE.
+ */
+export function constatsHauteurReservee(css: string, fichier: string): Constat[] {
+  const regles = [...css.matchAll(new RegExp(`\\.${CLASSE_EMPLACEMENT_PUB}\\s*\\{([^}]*)\\}`, 'g'))].map((m) => m[1] ?? '');
+  const hauteurs = regles.flatMap((r) => [...r.matchAll(/min-height\s*:\s*(\d+(?:\.\d+)?)px/g)].map((m) => Number(m[1])));
+  return hauteurs.some((h) => h >= HAUTEUR_RESERVEE_PX) ? [] : [erreur('PUB-HAUTEUR-RESERVEE', `la règle .${CLASSE_EMPLACEMENT_PUB} réserve au moins ${HAUTEUR_RESERVEE_PX}px de hauteur (min-height) : une publicité qui se charge ne déplace pas le texte`, fichier)];
+}
+
+/**
+ * Images (livrable 7.5b) : chaque image du site construit porte un texte alternatif (attribut `alt`, vide seulement si elle est
+ * décorative : `role="presentation"`), ses dimensions (`width` et `height`, entiers : la place est réservée, pas de CLS) et
+ * `loading="lazy"`, sauf l'image principale de la page (`fetchpriority="high"`). Adresse d'un autre site : TIERS-RESSOURCE.
+ * IMAGE-ALT, IMAGE-DIMENSIONS, IMAGE-CHARGEMENT.
+ */
+export function constatsImages(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  for (const el of $('img').toArray()) {
+    const img = $(el);
+    const nom = img.attr('src') ?? '(sans src)';
+    const alt = img.attr('alt');
+    if (alt === undefined || (alt.trim() === '' && img.attr('role') !== 'presentation')) constats.push(erreur('IMAGE-ALT', `image ${nom} : texte alternatif absent ou vide (vide seulement avec role="presentation")`, fichier));
+    if (!/^\d+$/.test(img.attr('width') ?? '') || !/^\d+$/.test(img.attr('height') ?? '')) constats.push(erreur('IMAGE-DIMENSIONS', `image ${nom} : width et height (entiers) réservent la place et évitent le décalage de mise en page`, fichier));
+    if (img.attr('loading') !== 'lazy' && img.attr('fetchpriority') !== 'high') constats.push(erreur('IMAGE-CHARGEMENT', `image ${nom} : loading="lazy", sauf l'image principale de la page (fetchpriority="high")`, fichier));
+  }
+  return constats;
+}
+
 /** La 404 ne porte aucun balisage (livrable 7.5a). */
 export function constatsDonneesStructurees404(html: string, fichier: string): Constat[] {
   return cheerio.load(html)(`script[type="${TYPE_SCRIPT_JSON_LD}"]`).length > 0 ? [erreur('DONNEES-STRUCTUREES-TYPE', 'la page 404 ne porte aucun balisage JSON-LD', fichier)] : [];
@@ -855,7 +937,7 @@ export async function controlerAccueil(dist: string, attendu: AccueilAttendu): P
   return html === undefined ? [] : constatsAccueil(html, 'index.html', attendu);
 }
 
-export async function controlerComposantsCommuns(dist: string, adressePolitique = `/${PAGE_CONFIDENTIALITE}/`, adresseAPropos = `/${PAGE_METHODE}/`): Promise<Constat[]> {
+export async function controlerComposantsCommuns(dist: string, adressePolitique = `/${PAGE_CONFIDENTIALITE}/`, adresseAPropos = `/${PAGE_METHODE}/`, recette = false): Promise<Constat[]> {
   const constats: Constat[] = [];
   const enTetes: EnTetesDePage[] = [];
   // Page qui porte la politique de confidentialité : construite ou non, le lien de pied de page suit.
@@ -870,6 +952,9 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
   // Fiches auteur : celles que le balisage des pages doit reprendre (livrable 7.5a) ; sans « à propos », aucun auteur n'est affichable.
   const donneesAttendues: DonneesStructureesAttendues = { adresseAPropos, auteurs: aProposConstruite !== undefined ? auteursAffiches(aProposConstruite) : new Map() };
   // Les feuilles de style du site : une police ou une image d'un autre site y passerait inaperçue.
+  // Hauteur réservée à l'emplacement publicitaire (livrable 7.5b) : au moins une feuille de style du site la porte.
+  // Feuilles .css et balises <style> des pages (Astro peut y placer la feuille) : sans aucune source de style, le contrôle échoue.
+  const feuilles = await Promise.all((await listerFichiers(dist, '.css')).map((chemin) => readFile(chemin, 'utf8')));
   for (const chemin of await listerFichiers(dist, '.css')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
     for (const url of adressesDuCss(await readFile(chemin, 'utf8'))) {
@@ -889,12 +974,17 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
       ...constatsRessourcesTierces(html, fichier),
       ...constatsLienConfidentialite(html, fichier, adresseAttendue),
       ...constatsMentionsLegales(html, fichier, adresseAttendue !== undefined && fichier === `${adressePolitique.replace(/^\//, '')}index.html`),
+      ...constatsEmplacementsPub(html, fichier, recette),
+      ...constatsImages(html, fichier),
       ...(adresseDepuisFichier(fichier) !== undefined ? constatsDonneesStructurees(html, fichier, adresseDepuisFichier(fichier) ?? '/', donneesAttendues) : constatsDonneesStructurees404(html, fichier)),
     );
     const lus = enTetesDePage(html, fichier);
     constats.push(...constatsEnTetesPresents(lus));
     enTetes.push(lus);
+    const $page = cheerio.load(html);
+    feuilles.push(...$page('style').toArray().map((s) => $page(s).text()));
   }
+  if (enTetes.length > 0) constats.push(...constatsHauteurReservee(feuilles.join('\n'), 'feuille de style ou balises <style>'));
   constats.push(...constatsDoublons(enTetes));
   return constats;
 }

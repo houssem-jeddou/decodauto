@@ -127,7 +127,7 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   constats.push(...(await controlerPagesDuPlan(dist, [...contexte.plan.values()].map((ligne) => ligne.adresse))));
   constats.push(...(await controlerCanonicalEtPlanDuSite(dist)));
   constats.push(...(await controler404(dist)));
-  constats.push(...(await controlerComposantsCommuns(dist, contexte.plan.get(PAGE_CONFIDENTIALITE)?.adresse, contexte.plan.get(PAGE_METHODE)?.adresse)));
+  constats.push(...(await controlerComposantsCommuns(dist, contexte.plan.get(PAGE_CONFIDENTIALITE)?.adresse, contexte.plan.get(PAGE_METHODE)?.adresse, exemples)));
   // Accueil (livrable 7.4a) : liste générée depuis le plan, exactement les pages éditoriales construites.
   const adresseOutil = construitesEditoriales.find((p) => p.id === ID_OUTIL_VOYANTS) !== undefined ? contexte.plan.get(ID_OUTIL_VOYANTS)?.adresse : undefined;
   const adresseAPropos = contexte.plan.get(PAGE_METHODE)?.adresse;

@@ -696,3 +696,24 @@ h3 {
     margin-bottom: 0.5rem;
   }
 }
+
+/* Emplacement publicitaire (livrable 7.5b) : hauteur réservée, pour qu'une publicité qui se charge ne déplace pas le texte (CLS).
+   Affiché seulement dans la construction de recette (factice) ; en production, rien avant AdSense. */
+.emplacement-pub {
+  box-sizing: border-box;
+  min-height: 340px;
+  margin: 1.5rem 0;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--texte-doux);
+  text-align: center;
+}
+.emplacement-pub p {
+  margin: 0.25rem 0;
+}
+.emplacement-pub-etiquette {
+  font-size: 0.85rem;
+}
