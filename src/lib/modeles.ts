@@ -37,6 +37,7 @@ import { basDePage, causesDeLaPage, hautDePage, tableauNoticesDeLaPage, type Don
 import { attributHtml, echapper, texteHtml, typographierHtml } from './html.ts';
 import { ANCRE_CONFIDENTIALITE, PAGE_CONFIDENTIALITE, PAGE_METHODE } from './charte.ts';
 import { dateAffichee } from './cout.ts';
+import { mentionsLegalesHtml } from './editeur.ts';
 import { ADRESSE_SIGNALEMENT } from './site.ts';
 import { nomCourtSource, type SourceDuRegistre } from './composants.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
@@ -257,6 +258,9 @@ export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date
   } else if (fiches.length > 0) throw new Error(`page « ${page.id} » : les fiches auteur ne se saisissent que sur la page « ${PAGE_METHODE} »`);
   return [
     `<h1>${texteHtml(page.title)}</h1>`,
+    // Page des mentions légales (livrable 7.4b) : le bloc d'identification de l'éditeur et de l'hébergeur, généré depuis
+    // src/lib/editeur.ts, passe avant la politique de confidentialité ; il échoue si une mention manque.
+    ...(page.id === PAGE_CONFIDENTIALITE ? [mentionsLegalesHtml(contact)] : []),
     `<div class="corps" data-corps>${typographierHtml(corps)}</div>`,
     ...fiches,
     ...(page.id === PAGE_METHODE ? [methodeHtml ?? ''] : []),

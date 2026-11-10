@@ -13,9 +13,9 @@
 - **Encadré de décision et élément unique** : aucun (page du socle, docs/08 §2).
 - **Angle** : Obligations légales de l'éditeur : identité, statut, hébergeur, contact. Page courte, sans contenu éditorial.
 - **À traiter** :
-  - Statut juridique : à trancher par Houssem avant la rédaction, avec l'activité déclarée qui doit couvrir des recettes publicitaires (journal, points ouverts).
+  - Statut juridique tranché par Houssem le 09/11 ; mentions de l'éditeur et de l'hébergeur dans `src/lib/editeur.ts` (livrable 7.4b), bloc généré par le modèle : il ne s'écrit pas dans le texte.
   - Éditeur identifié par son nom réel (décision du 23/10) ; contact : erreur@decodauto.com (charte §5.3).
-  - Hébergeur : Cloudflare (wrangler.json), avec les coordonnées de sa page officielle.
+  - Hébergeur : Cloudflare (wrangler.json), coordonnées de sa page « Terms of Use », à relire avant la mise en ligne.
   - Publicité (étape 12) et mesure d'audience : renvoyer à la politique de confidentialité (étape 7), sans affirmation juridique qui ne vienne d'un texte lu.
   - Description du socle : même demande de changement que l'accueil.
 - **Sources à trouver avant la rédaction** :
