@@ -655,3 +655,21 @@ h3 {
 .lien-confidentialite {
   margin-top: 0.5rem;
 }
+
+/* Accueil (livrable 7.4a) : accès à l'outil voyants, pages par thème, lien vers « à propos ». */
+.accueil-outil {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--bord);
+  border-left: 6px solid var(--accent);
+  background: var(--fond-doux);
+  font-weight: 600;
+}
+.accueil-theme ul {
+  margin: 0.25rem 0 1rem;
+  padding-left: 1.25rem;
+}
+.accueil-a-propos {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
