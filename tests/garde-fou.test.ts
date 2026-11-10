@@ -162,7 +162,7 @@ describe('lireCommitsAcceptes', () => {
       entree({ accepte_le: '10/11/2026' }),
       JSON.stringify({ acceptes: [{ sha: sha('a'), motif: 'Commit relu par Houssem.', accepte_le: '2026-11-10' }, { sha: sha('a'), motif: 'Commit relu par Houssem.', accepte_le: '2026-11-10' }] }),
     ]) {
-      assert.throws(() => lireCommitsAcceptes(mauvais), undefined, mauvais);
+      assert.throws(() => lireCommitsAcceptes(mauvais), Error, mauvais);
     }
   });
 
