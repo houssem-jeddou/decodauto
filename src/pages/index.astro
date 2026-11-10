@@ -7,6 +7,7 @@ import { cwd } from 'node:process';
 import Base from '../layouts/Base.astro';
 import { PAGE_METHODE } from '../lib/charte.ts';
 import { DESCRIPTION_ACCUEIL, TITLE_ACCUEIL, accueilHtml, pagesListees } from '../lib/accueil.ts';
+import { scriptsAccueil } from '../lib/donnees-structurees.ts';
 import { donneesDuSite } from '../../scripts/lib/donnees-site.ts';
 import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
 
@@ -25,6 +26,6 @@ const aPropos = aProposEcrite !== undefined ? { adresse: site.plan.get(PAGE_METH
 const html = accueilHtml({ pages: pagesListees(site.plan, libelles), aPropos: aPropos !== undefined && aPropos.adresse !== '' ? aPropos : undefined });
 ---
 
-<Base titre={TITLE_ACCUEIL} description={DESCRIPTION_ACCUEIL}>
+<Base titre={TITLE_ACCUEIL} description={DESCRIPTION_ACCUEIL} donneesStructurees={scriptsAccueil()}>
   <Fragment set:html={html} />
 </Base>

@@ -27,6 +27,7 @@ import {
   type SourceDuRegistre,
 } from './composants.ts';
 import { texteHtml } from './html.ts';
+import { NOM_DU_SITE } from './site.ts';
 import { modeleTableauNotices, tableauNotices } from './tableau-notices.ts';
 import { RENVOI_ENCADRE_OUTIL } from './outil-voyants.ts';
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees } from './calcul.ts';
@@ -48,7 +49,7 @@ export interface DonneesSite {
 }
 
 /** Bandeau de toutes les pages : nom du site (lien vers l'accueil) et mention en tête, avant le H1. */
-export const bandeau = (): string => `<a class="nom-du-site" href="/">decodauto.com</a>${mentionEnTete()}`;
+export const bandeau = (): string => `<a class="nom-du-site" href="/">${NOM_DU_SITE}</a>${mentionEnTete()}`;
 
 /** Pied de toutes les pages : lien « Signaler une erreur » avec l'adresse de la page (absente sur la page 404). */
 export const pied = (adressePage?: string, adresseConfidentialite?: string): string =>

@@ -2,7 +2,8 @@ import * as cheerio from 'cheerio';
 import { readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
-import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, URL_SITE, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
+import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_DU_SITE, URL_SITE, adresseDepuisFichier, dateDansTexte, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
+import { CONTEXTE_SCHEMA, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
 import { listerFichiers } from './charger.ts';
 import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, ANCRE_METHODE, PAGE_CONFIDENTIALITE, PAGE_METHODE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
 import { normaliserRecherche } from '../../src/lib/texte.ts';
@@ -111,6 +112,25 @@ export async function controlerPagesDuPlan(dist: string, adressesDuPlan: Iterabl
 }
 
 /**
+ * <lastmod> du plan du site (livrable 7.5) : une page qui affiche sa date de mise à jour (« Mis à jour le jj/mm/aaaa »)
+ * la porte en AAAA-MM-JJ, égale à celle de la page, jour pour jour ; une page qui n'en affiche pas (l'accueil) n'en porte pas.
+ * Google n'utilise lastmod que s'il est exact : une date inventée ou périmée ferait ignorer toutes les autres.
+ */
+export function constatsLastmod(lastmod: ReadonlyMap<string, string>, affichees: ReadonlyMap<string, string | undefined>): Constat[] {
+  const constats: Constat[] = [];
+  for (const [url, date] of lastmod) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(date))) constats.push(erreur('SITEMAP-LASTMOD', `${url} : lastmod « ${date} » n'est pas une date AAAA-MM-JJ`, FICHIER_PLAN_DU_SITE));
+    else if (!affichees.has(url)) continue; // adresse inconnue : SITEMAP-ADRESSE-INCONNUE
+    else if (affichees.get(url) === undefined) constats.push(erreur('SITEMAP-LASTMOD', `${url} : la page n'affiche aucune date de mise à jour, elle ne porte pas de lastmod`, FICHIER_PLAN_DU_SITE));
+    else if (affichees.get(url) !== date) constats.push(erreur('SITEMAP-LASTMOD', `${url} : lastmod ${date}, mais la page affiche ${affichees.get(url)} : le plan du site reprend la date affichée`, FICHIER_PLAN_DU_SITE));
+  }
+  for (const [url, affichee] of affichees) {
+    if (affichee !== undefined && !lastmod.has(url)) constats.push(erreur('SITEMAP-LASTMOD', `${url} : la page affiche une date de mise à jour (${affichee}), le plan du site doit la porter en lastmod`, FICHIER_PLAN_DU_SITE));
+  }
+  return constats;
+}
+
+/**
  * Canonical et plan du site (étape 7, docs/03) :
  *  - chaque page construite, sauf la 404, porte une seule balise canonical, égale à sa propre adresse absolue
  *    (https://decodauto.com + adresse, barre finale comprise) ; la 404 n'en porte pas ;
@@ -121,9 +141,12 @@ export async function controlerPagesDuPlan(dist: string, adressesDuPlan: Iterabl
 export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Constat[]> {
   const constats: Constat[] = [];
   const pages = new Set<string>();
+  /** Date de mise à jour affichée par chaque page, par adresse absolue (SITEMAP-LASTMOD). */
+  const datesAffichees = new Map<string, string | undefined>();
   for (const chemin of await listerFichiers(dist, '.html')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
-    const $ = cheerio.load(await readFile(chemin, 'utf8'));
+    const html = await readFile(chemin, 'utf8');
+    const $ = cheerio.load(html);
     const canonicals = $('link[rel~="canonical"]')
       .toArray()
       .map((l) => $(l).attr('href') ?? '');
@@ -134,6 +157,7 @@ export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Cons
     const adresse = adresseDepuisFichier(fichier);
     if (adresse === undefined) continue; // autre fichier HTML : refusé par PAGE-HORS-PLAN
     pages.add(urlAbsolue(adresse));
+    datesAffichees.set(urlAbsolue(adresse), adresse === '/' ? undefined : dateDansTexte($('[data-signature], [data-socle-date]').first().text()));
     if (canonicals.length === 0) {
       constats.push(erreur('CANONICAL-ABSENT', `la page n'a pas de balise canonical (attendue : ${urlAbsolue(adresse)})`, fichier));
     } else if (canonicals.length > 1) {
@@ -160,6 +184,7 @@ export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Cons
     for (const page of pages) {
       if (!vues.has(page)) constats.push(erreur('SITEMAP-PAGE-ABSENTE', `${page} est construite mais absente du plan du site`, FICHIER_PLAN_DU_SITE));
     }
+    constats.push(...constatsLastmod(lireLastmodDuPlanDuSite(xml), datesAffichees));
   }
 
   const robots = await lire(join(dist, 'robots.txt'));
@@ -654,6 +679,129 @@ export function constatsMentionsLegales(html: string, fichier: string, attendu: 
   return constats;
 }
 
+export interface DonneesStructureesAttendues {
+  /** Adresse de la page « à propos » (fiches auteur). */
+  adresseAPropos: string;
+  /** Fiches auteur affichées sur « à propos » : identifiant → nom affiché. */
+  auteurs: ReadonlyMap<string, string>;
+}
+
+/** Fiches auteur affichées par une page « à propos » construite (`data-auteur-id` et titre de la fiche). */
+export function auteursAffiches(html: string): Map<string, string> {
+  const $ = cheerio.load(html);
+  return new Map($('[data-auteur]').toArray().map((el) => [$(el).attr('data-auteur-id') ?? '', brut($(el).find('h2').first().text())]));
+}
+
+/**
+ * Données structurées JSON-LD (livrable 7.5a, src/lib/donnees-structurees.ts) : le balisage reprend ce que la page affiche,
+ * et seulement cela.
+ *  - DONNEES-STRUCTUREES-JSON : chaque script application/ld+json est un JSON valide, de contexte https://schema.org ;
+ *  - DONNEES-STRUCTUREES-TYPE : seuls les types attendus pour la nature de la page, une fois chacun (accueil : WebSite ;
+ *    page éditoriale : Article et BreadcrumbList ; « à propos » : une Person par fiche ; mentions légales et autres pages
+ *    du socle : aucun) ;
+ *  - DONNEES-STRUCTUREES-CONTENU : Article (titre = H1, description = meta description, dateModified = date affichée,
+ *    adresse = canonical, auteur = fiche de « à propos »), fil d'Ariane (mêmes noms, mêmes adresses, même ordre que le
+ *    fil affiché, la dernière miette étant la page), WebSite (nom et adresse du site), Person (nom de la fiche, ancre
+ *    de la fiche) ;
+ *  - DONNEES-STRUCTUREES-ADRESSE : toute adresse du balisage est une adresse absolue du site, sauf `sameAs` (https).
+ */
+export function constatsDonneesStructurees(html: string, fichier: string, adresse: string, attendu: DonneesStructureesAttendues): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const e = (regle: string, message: string): void => void constats.push(erreur(regle, message, fichier));
+  // Nature de la page : éditoriale = signature (`data-signature`), socle = pied daté (`data-socle-date`) ; ni l'un ni l'autre, ou les deux : erreur.
+  const editoriale = $('[data-signature]').length > 0;
+  const socle = $('[data-socle-date]').length > 0;
+  if (adresse !== '/' && editoriale === socle) e('DONNEES-STRUCTUREES-TYPE', `la page porte ${editoriale ? 'une signature et un pied daté du socle' : 'ni signature (page éditoriale) ni pied daté (page du socle)'} : sa nature n'est pas établie`);
+  const nature: NatureDePage = adresse === '/' ? 'accueil' : socle && !editoriale ? (adresse === attendu.adresseAPropos ? 'a-propos' : 'aucune') : 'editoriale';
+  const objets: Record<string, unknown>[] = [];
+  for (const el of $(`script[type="${TYPE_SCRIPT_JSON_LD}"]`).toArray()) {
+    try {
+      const valeur: unknown = JSON.parse($(el).text());
+      if (typeof valeur !== 'object' || valeur === null || Array.isArray(valeur)) throw new Error('un objet est attendu');
+      objets.push(valeur as Record<string, unknown>);
+    } catch (err) {
+      e('DONNEES-STRUCTUREES-JSON', `script JSON-LD illisible : ${(err as Error).message}`);
+    }
+  }
+  for (const o of objets) {
+    if (o['@context'] !== CONTEXTE_SCHEMA) e('DONNEES-STRUCTUREES-JSON', `@context « ${String(o['@context'])} » : ${CONTEXTE_SCHEMA} est attendu`);
+  }
+  const types = objets.map((o) => String(o['@type']));
+  const attendus: readonly string[] = TYPES_ATTENDUS[nature];
+  const nombreDePersonnes = nature === 'a-propos' ? $('[data-auteur]').length : 0;
+  for (const t of attendus) {
+    const voulus = t === 'Person' ? nombreDePersonnes : 1;
+    if (types.filter((x) => x === t).length !== voulus) e('DONNEES-STRUCTUREES-TYPE', `la page porte ${voulus} balisage(s) ${t} (nature : ${nature})`);
+  }
+  for (const t of new Set(types)) {
+    if (!attendus.includes(t)) e('DONNEES-STRUCTUREES-TYPE', `type ${t} non attendu sur une page de nature « ${nature} » (types admis : ${attendus.join(', ') || 'aucun'})`);
+  }
+  const absolue = (valeur: unknown, ou: string): string | undefined => {
+    if (typeof valeur !== 'string' || !valeur.startsWith(`${URL_SITE}/`)) {
+      e('DONNEES-STRUCTUREES-ADRESSE', `${ou} : adresse absolue du site (${URL_SITE}/…) attendue, trouvée « ${String(valeur)} »`);
+      return undefined;
+    }
+    return valeur;
+  };
+  const urlPage = urlAbsolue(adresse);
+  const auteurAttendu = (id: string): string => `${urlAbsolue(attendu.adresseAPropos)}#${ancreAuteur(id)}`;
+  const texte = (selecteur: string): string => brut($(selecteur).first().text());
+  for (const o of objets) {
+    const type = String(o['@type']);
+    if (type === 'Article') {
+      if (brut(String(o['headline'])) !== texte('h1')) e('DONNEES-STRUCTUREES-CONTENU', `Article : headline « ${String(o['headline'])} » ≠ H1 affiché « ${texte('h1')} »`);
+      const description = $('meta[name="description"]').attr('content') ?? '';
+      if (o['description'] !== description) e('DONNEES-STRUCTUREES-CONTENU', 'Article : description ≠ meta description de la page');
+      if (absolue(o['mainEntityOfPage'], 'Article.mainEntityOfPage') !== undefined && o['mainEntityOfPage'] !== urlPage) e('DONNEES-STRUCTUREES-CONTENU', `Article : mainEntityOfPage « ${String(o['mainEntityOfPage'])} » ≠ adresse de la page ${urlPage}`);
+      const affichee = dateDansTexte($('[data-signature]').text());
+      if (affichee === undefined) e('DONNEES-STRUCTUREES-CONTENU', "Article : la page n'affiche pas de date de mise à jour (signature)");
+      else if (o['dateModified'] !== affichee) e('DONNEES-STRUCTUREES-CONTENU', `Article : dateModified « ${String(o['dateModified'])} » ≠ date affichée ${affichee}`);
+      if ('datePublished' in o) e('DONNEES-STRUCTUREES-CONTENU', "Article : datePublished n'est pas déclarée (la page n'affiche pas de date de publication)");
+      if (o['inLanguage'] !== 'fr') e('DONNEES-STRUCTUREES-CONTENU', 'Article : inLanguage vaut « fr »');
+      const auteur = (o['author'] ?? {}) as Record<string, unknown>;
+      const id = typeof auteur['url'] === 'string' ? auteur['url'].split('#auteur-')[1] : undefined;
+      absolue(auteur['url'], 'Article.author.url');
+      if (auteur['@type'] !== 'Person' || id === undefined || !attendu.auteurs.has(id) || auteur['url'] !== auteurAttendu(id) || brut(String(auteur['name'])) !== attendu.auteurs.get(id)) {
+        e('DONNEES-STRUCTUREES-CONTENU', `Article : l'auteur (« ${String(auteur['name'])} », ${String(auteur['url'])}) est une fiche de la page « à propos » (nom et ancre ${auteurAttendu('<id>')})`);
+      }
+    } else if (type === 'BreadcrumbList') {
+      const affiches = $('[data-fil-ariane] li')
+        .toArray()
+        .map((li) => ({ nom: brut($(li).text()), href: $(li).find('a[href]').attr('href') }));
+      const items = Array.isArray(o['itemListElement']) ? (o['itemListElement'] as Record<string, unknown>[]) : [];
+      const memes =
+        items.length === affiches.length &&
+        items.every((it, i) => {
+          const a = affiches[i];
+          const derniere = i === affiches.length - 1;
+          return a !== undefined && it['@type'] === 'ListItem' && it['position'] === i + 1 && brut(String(it['name'])) === a.nom && it['item'] === urlAbsolue(derniere ? adresse : (a.href ?? ''));
+        });
+      if (!memes) e('DONNEES-STRUCTUREES-CONTENU', "BreadcrumbList : mêmes miettes que le fil d'Ariane affiché (nom, position, adresse absolue ; la dernière miette est la page)");
+      for (const it of items) absolue(it['item'], 'BreadcrumbList.item');
+    } else if (type === 'WebSite') {
+      if (o['name'] !== NOM_DU_SITE || o['url'] !== `${URL_SITE}/`) e('DONNEES-STRUCTUREES-CONTENU', `WebSite : nom « ${NOM_DU_SITE} » et adresse ${URL_SITE}/`);
+    } else if (type === 'Person') {
+      const id = typeof o['url'] === 'string' ? o['url'].split('#auteur-')[1] : undefined;
+      if (id === undefined || !attendu.auteurs.has(id) || o['url'] !== urlPage + `#${ancreAuteur(id)}` || o['@id'] !== o['url'] || brut(String(o['name'])) !== attendu.auteurs.get(id)) {
+        e('DONNEES-STRUCTUREES-CONTENU', `Person : nom et ancre (${urlPage}#auteur-<id>) d'une fiche affichée sur la page (« ${String(o['name'])} », ${String(o['url'])})`);
+      }
+      absolue(o['url'], 'Person.url');
+      if (id !== undefined && $(`#${ancreAuteur(id)}`).length !== 1) e('DONNEES-STRUCTUREES-CONTENU', `Person : la fiche #${ancreAuteur(id)} est affichée sur la page`);
+      if ('sameAs' in o) {
+        const liens = Array.isArray(o['sameAs']) ? o['sameAs'] : [];
+        if (liens.length === 0 || !liens.every((l) => typeof l === 'string' && /^https:\/\/[^\s/]+\.[^\s/]+/.test(l))) e('DONNEES-STRUCTUREES-ADRESSE', 'Person.sameAs : liste non vide d\'adresses https');
+      }
+    }
+  }
+  return constats;
+}
+
+/** La 404 ne porte aucun balisage (livrable 7.5a). */
+export function constatsDonneesStructurees404(html: string, fichier: string): Constat[] {
+  return cheerio.load(html)(`script[type="${TYPE_SCRIPT_JSON_LD}"]`).length > 0 ? [erreur('DONNEES-STRUCTUREES-TYPE', 'la page 404 ne porte aucun balisage JSON-LD', fichier)] : [];
+}
+
 export interface AccueilAttendu {
   /** Pages éditoriales construites, avec leur thème d'après le plan. */
   pages: readonly { adresse: string; theme: string }[];
@@ -719,6 +867,8 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
   // Page « à propos » : construite ou non, ses fiches et sa section « Méthode » sont contrôlées dès qu'elle l'est.
   const aProposConstruite = await readFile(join(dist, adresseAPropos, 'index.html'), 'utf8').catch(() => undefined);
   if (aProposConstruite !== undefined) constats.push(...constatsPageAPropos(aProposConstruite, `${adresseAPropos.replace(/^\//, '')}index.html`));
+  // Fiches auteur : celles que le balisage des pages doit reprendre (livrable 7.5a) ; sans « à propos », aucun auteur n'est affichable.
+  const donneesAttendues: DonneesStructureesAttendues = { adresseAPropos, auteurs: aProposConstruite !== undefined ? auteursAffiches(aProposConstruite) : new Map() };
   // Les feuilles de style du site : une police ou une image d'un autre site y passerait inaperçue.
   for (const chemin of await listerFichiers(dist, '.css')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
@@ -739,6 +889,7 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
       ...constatsRessourcesTierces(html, fichier),
       ...constatsLienConfidentialite(html, fichier, adresseAttendue),
       ...constatsMentionsLegales(html, fichier, adresseAttendue !== undefined && fichier === `${adressePolitique.replace(/^\//, '')}index.html`),
+      ...(adresseDepuisFichier(fichier) !== undefined ? constatsDonneesStructurees(html, fichier, adresseDepuisFichier(fichier) ?? '/', donneesAttendues) : constatsDonneesStructurees404(html, fichier)),
     );
     const lus = enTetesDePage(html, fichier);
     constats.push(...constatsEnTetesPresents(lus));
