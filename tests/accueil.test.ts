@@ -74,8 +74,8 @@ describe('liste des pages de l’accueil', () => {
 describe('texte de l’accueil', () => {
   test('le H1 est le positionnement de 01, le title et la description sont renseignés', () => {
     assert.equal(TITRE_ACCUEIL, 'Votre voiture vous alerte, on vous dit quoi faire.');
-    assert.ok(TITLE_ACCUEIL.length > 10 && TITLE_ACCUEIL.length <= 70, `title de ${TITLE_ACCUEIL.length} caractères`);
-    assert.ok(DESCRIPTION_ACCUEIL.length >= 70 && DESCRIPTION_ACCUEIL.length <= 160, `description de ${DESCRIPTION_ACCUEIL.length} caractères`);
+    assert.ok(TITLE_ACCUEIL.length > 10 && TITLE_ACCUEIL.length <= 60, `title de ${TITLE_ACCUEIL.length} caractères`);
+    assert.ok(DESCRIPTION_ACCUEIL.length >= 70 && DESCRIPTION_ACCUEIL.length <= 155, `description de ${DESCRIPTION_ACCUEIL.length} caractères`);
   });
 
   test('ni « nous », ni promesse interdite, ni chiffre, ni lien dans le texte (le plan ne déclare aucun lien pour l’accueil)', () => {
@@ -94,5 +94,7 @@ describe('texte de l’accueil', () => {
     const accueil = planReel.find((p) => p.id === 'accueil');
     assert.equal(accueil?.type, 'socle');
     assert.equal(accueil?.adresse, '/');
+    assert.deepEqual(accueil?.mots_cles, []);
+    assert.equal(accueil?.parent, undefined);
   });
 });
