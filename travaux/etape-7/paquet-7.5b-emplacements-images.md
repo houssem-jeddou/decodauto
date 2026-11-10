@@ -37,3 +37,7 @@ Le critère de `docs/03` dit : « Lighthouse mobile ≥ 95 et CLS < 0,1 sur les 
 
 - Les valeurs Lighthouse ne sont pas imprimées dans le journal de la CI (seuils vérifiés, pas de score affiché) ; les rapports sont conservés par le job de production, pas par la recette.
 - Une publicité réelle (AdSense) peut avoir une autre hauteur : 340 px couvre 336 × 280 et 300 × 250 ; un format plus haut demandera de revoir la hauteur réservée (étape 12). La mesure de CLS en recette est triviale (bloc statique) : la mesure utile se fera avec de vraies annonces à l'étape 12.
+
+## 7. Validation
+
+Validé par Houssem le 10/11/2026 à 14:18 (« Je valide »), y compris l'interprétation de la porte de l'étape 7 (§3) : emplacements sur les pages éditoriales seulement, mesure avec emplacements factices sur celles-ci.
