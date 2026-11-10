@@ -36,7 +36,7 @@ Le profil LinkedIn n'est **pas affiché comme lien** : la règle R7-LIEN-EXTERNE
 
 ## 5. Preuves
 
-- CI du commit `c076060` : Contrôles (schémas, tests, build, liens), Recette des exemples rédigés (pages construites avec leur balisage, contrôlées par les nouveaux contrôles, sans erreur attendue), Lighthouse mobile, Production : tous verts.
+- CI du commit `c076060` (avant la revue) ; CI du commit de correction `43552ab` : les mêmes quatre jobs, tous verts : Contrôles (schémas, tests, build, liens), Recette des exemples rédigés (pages construites avec leur balisage, contrôlées par les nouveaux contrôles, sans erreur attendue), Lighthouse mobile, Production : tous verts.
 - Local, sans dépendance : `node --test tests/donnees-structurees.test.ts` (9 passent). Les tests de contrôle (cheerio) ne tournent qu'en CI.
 
 ## 6. Revue indépendante (une revue, verdict « acceptable », rien de bloquant)
