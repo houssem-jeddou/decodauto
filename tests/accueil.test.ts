@@ -12,7 +12,7 @@ import { ID_OUTIL_VOYANTS } from '../src/lib/plan.ts';
 import { LIBELLES_THEMES, THEMES, type Theme } from '../src/schemas/listes.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-const planReel = JSON.parse(await readFile(join(racine, 'data/plan-du-site.json'), 'utf8')) as LigneDuPlanAccueil[];
+const planReel = JSON.parse(await readFile(join(racine, 'data/plan-du-site.json'), 'utf8')) as (LigneDuPlanAccueil & { mots_cles: string[]; parent?: string })[];
 const ligne = (id: string, theme: Theme, adresse: string, type = 'voyant'): LigneDuPlanAccueil => ({ id, theme, adresse, type });
 const PLAN = new Map<string, LigneDuPlanAccueil>(
   [
