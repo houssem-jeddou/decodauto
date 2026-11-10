@@ -184,5 +184,45 @@
     "categorie": "secondaire",
     "url": "https://www.bosch-mobility.com/en/solutions/fuel-supply/high-pressure-rail-for-common-rail-systems/",
     "date_consultation": "2026-11-03"
+  },
+  {
+    "id": "code-de-la-route-r411-26",
+    "titre": "Code de la route, article R411-26 (sanction du non-respect de la signalisation routière)",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006842088",
+    "date_consultation": "2026-11-10"
+  },
+  {
+    "id": "code-penal-131-13",
+    "titre": "Code pénal, article 131-13 (montant des amendes des contraventions)",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006417259",
+    "date_consultation": "2026-11-10"
+  },
+  {
+    "id": "arrete-1967-11-24-signalisation",
+    "titre": "Arrêté du 24 novembre 1967 relatif à la signalisation des routes et des autoroutes, article 4 (panneau B26)",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000829916",
+    "date_consultation": "2026-11-10"
+  },
+  {
+    "id": "arrete-2021-06-23-signalisation",
+    "titre": "Arrêté du 23 juin 2021 relatif à la modification de la signalisation routière (panneaux B58, B59, B26)",
+    "editeur": "Légifrance",
+    "categorie": "legifrance",
+    "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043775737",
+    "date_consultation": "2026-11-10"
+  },
+  {
+    "id": "loi-montagne-iii-texte-adopte-an-336",
+    "titre": "Assemblée nationale — Texte adopté n° 336, proposition de loi pour une montagne vivante et souveraine (20/07/2026)",
+    "editeur": "Assemblée nationale",
+    "categorie": "secondaire",
+    "url": "https://www.assemblee-nationale.fr/dyn/opendata/PIONANR5L17BTA0336.html",
+    "date_consultation": "2026-11-10"
   }
 ]
