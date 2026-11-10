@@ -27,9 +27,10 @@ stdout.write(`  liste Lighthouse de production : + ${passage.urlLighthouse}\n`);
 if (option !== '--appliquer') {
   stdout.write('Essai à blanc : rien n\'a été modifié. Relancer avec --appliquer pour déplacer la page.\n');
 } else {
+  // Tout ce qui peut échouer est préparé avant le premier geste : pas de page déplacée à moitié.
+  const lighthouse = ajouterUrlLighthouse(await readFile(FICHIER_LIGHTHOUSE, 'utf8'), passage.urlLighthouse);
   execFileSync('git', ['mv', passage.source, passage.cible], { cwd: racine, stdio: 'inherit' });
-  const lighthouse = await readFile(FICHIER_LIGHTHOUSE, 'utf8');
-  await writeFile(FICHIER_LIGHTHOUSE, ajouterUrlLighthouse(lighthouse, passage.urlLighthouse));
+  await writeFile(FICHIER_LIGHTHOUSE, lighthouse);
   execFileSync(execPath, ['scripts/briefs.ts'], { cwd: racine, stdio: 'inherit' });
   stdout.write('Page déplacée, briefs régénérés, liste Lighthouse mise à jour.\n');
 }

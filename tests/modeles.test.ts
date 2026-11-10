@@ -1,5 +1,5 @@
 // Modèles de pages et exemples rédigés (étape 6, livrable 6.6) : modèle de chaque type, ordre des blocs d'une page
-// voyant, page exemple « voyant moteur » (exemples/, jamais publiée), part de texte cité (CITATIONS-PART), construction
+// voyant, page rédigée « voyant moteur » (exemples/ jusqu'au passage, livrable 8.3.0), part de texte cité (CITATIONS-PART), construction
 // de recette (--exemples, erreurs attendues), texte rédigé présent (TEXTE-REDIGE-ABSENT) et page construite sans fichier
 // de contenu (R7-PAGE-SANS-CONTENU). Les tests marqués [CI] lisent le HTML avec cheerio. Le rendu Markdown réel est celui
 // d'Astro (job « Recette des exemples » de la CI) : ici, le corps de l'exemple est converti par une fonction minimale,
@@ -243,7 +243,7 @@ describe('modèles de pages (livrable 6.6)', () => {
 });
 
 describe('page exemple « voyant moteur » (exemples/, jamais publiée)', () => {
-  test('hors de src/content : jamais lue par la construction de production', async () => {
+  test('chargerPages (construction de production) ne lit jamais exemples/', async () => {
     const publiees = await chargerPages(racine);
     assert.ok(publiees.every((p) => !p.fichier.startsWith(`${DOSSIER_EXEMPLES}/`)));
     const avecExemples = await chargerPages(racine, ['src/content', DOSSIER_EXEMPLES]);
@@ -270,7 +270,7 @@ describe('page exemple « voyant moteur » (exemples/, jamais publiée)', () => 
   });
 });
 
-describe('page exemple « code P0087 » (exemples/, jamais publiée)', () => {
+describe('page rédigée « code P0087 » (exemples/ jusqu'au passage, livrable 8.3.0)', () => {
   test('[CI] frontmatter valide ; page construite sans erreur, hormis l’empreinte de validation tant que Houssem n’a pas validé l’encadré (R4)', async () => {
     const { brut, contexte, constats, html } = await exempleCode();
     assert.deepEqual(erreurs(constats), []);
@@ -289,7 +289,7 @@ describe('page exemple « code P0087 » (exemples/, jamais publiée)', () => {
   });
 });
 
-describe('page exemple « loi montagne » (exemples/, jamais publiée)', () => {
+describe('page rédigée « loi montagne » (exemples/ jusqu'au passage, livrable 8.3.0)', () => {
   test('[CI] frontmatter valide ; page construite sans erreur, hormis l’empreinte de validation tant que Houssem n’a pas validé l’encadré (R4)', async () => {
     const { brut, contexte, constats, html } = await exemplePneus();
     assert.deepEqual(erreurs(constats), []);

@@ -34,7 +34,8 @@ async function depot(fichiers: Record<string, string>): Promise<string> {
   }
   return racine;
 }
-const page = (id: string, validation = EMPREINTE): string => `---\nid: ${id}\nvalidation: ${validation}\n---\nTexte\n`;
+const page = (id: string, validation = EMPREINTE): string => `---\nid: ${id}\nauteur: houssem-jeddou\nvalidation: ${validation}\n---\nTexte\n`;
+const A_PROPOS = `---\nid: a-propos\nauteurs:\n  - id: houssem-jeddou\n    nom: Houssem Jeddou\n---\nTexte\n`;
 
 describe('où vit une page rédigée', () => {
   test("localiserPage trouve la page dans exemples/ puis dans src/content, et rend undefined si elle n'existe pas", async () => {
@@ -61,7 +62,7 @@ describe('conditions du passage', () => {
   const accord = (): string => EMPREINTE;
 
   test('toutes les conditions réunies : le passage est décrit, rien n\'est déplacé', async () => {
-    const racine = await depot({ 'exemples/pneus/loi-montagne.md': page('loi-montagne'), 'src/content/socle/a-propos.md': page('a-propos') });
+    const racine = await depot({ 'exemples/pneus/loi-montagne.md': page('loi-montagne'), 'src/content/socle/a-propos.md': A_PROPOS });
     const { passage, erreurs } = await verifierPassage(racine, 'loi-montagne', accord);
     assert.deepEqual(erreurs, []);
     assert.equal(passage?.source, 'exemples/pneus/loi-montagne.md');
@@ -71,14 +72,14 @@ describe('conditions du passage', () => {
   });
 
   test("un encadré modifié depuis la validation refuse le passage : l'empreinte n'est jamais recalculée pour passer", async () => {
-    const racine = await depot({ 'exemples/pneus/loi-montagne.md': page('loi-montagne'), 'src/content/socle/a-propos.md': page('a-propos') });
+    const racine = await depot({ 'exemples/pneus/loi-montagne.md': page('loi-montagne'), 'src/content/socle/a-propos.md': A_PROPOS });
     const { erreurs } = await verifierPassage(racine, 'loi-montagne', () => 'b'.repeat(64));
     assert.equal(erreurs.length, 1);
     assert.match(erreurs[0] ?? '', /encadré a changé/);
   });
 
   test("une page éditoriale sans empreinte de validation est refusée", async () => {
-    const racine = await depot({ 'exemples/pneus/loi-montagne.md': '---\nid: loi-montagne\n---\nTexte\n', 'src/content/socle/a-propos.md': page('a-propos') });
+    const racine = await depot({ 'exemples/pneus/loi-montagne.md': '---\nid: loi-montagne\n---\nTexte\n', 'src/content/socle/a-propos.md': A_PROPOS });
     const { erreurs } = await verifierPassage(racine, 'loi-montagne', accord);
     assert.match(erreurs.join('\n'), /sans empreinte/);
   });
@@ -87,6 +88,14 @@ describe('conditions du passage', () => {
     const racine = await depot({ 'exemples/pneus/loi-montagne.md': page('loi-montagne') });
     const { erreurs } = await verifierPassage(racine, 'loi-montagne', accord);
     assert.match(erreurs.join('\n'), /à propos/);
+  });
+
+  test("« à propos » sans la fiche de l'auteur de la page : refus (R7-AUTEUR-INCONNU échouerait à la construction)", async () => {
+    const sansFiche = '---\nid: a-propos\n---\nTexte\n';
+    const racine = await depot({ 'exemples/pneus/loi-montagne.md': page('loi-montagne'), 'src/content/socle/a-propos.md': sansFiche });
+    assert.match((await verifierPassage(racine, 'loi-montagne', accord)).erreurs.join(), /pas de fiche auteur « houssem-jeddou »/);
+    const autre = await depot({ 'exemples/pneus/loi-montagne.md': page('loi-montagne'), 'src/content/socle/a-propos.md': A_PROPOS.replace('houssem-jeddou', 'quelquun-d-autre') });
+    assert.match((await verifierPassage(autre, 'loi-montagne', accord)).erreurs.join(), /pas de fiche auteur/);
   });
 
   test("la page « à propos » passe la première, sans empreinte (page du socle : pas d'encadré de décision)", async () => {
@@ -105,18 +114,18 @@ describe('conditions du passage', () => {
   });
 
   test('identifiant inconnu du plan, fichier absent, page déjà en ligne, identifiant du fichier différent : refus', async () => {
-    const racine = await depot({ 'src/content/socle/a-propos.md': page('a-propos'), 'src/content/pneus/loi-montagne.md': page('loi-montagne') });
+    const racine = await depot({ 'src/content/socle/a-propos.md': A_PROPOS, 'src/content/pneus/loi-montagne.md': page('loi-montagne') });
     assert.match((await verifierPassage(racine, 'inconnue', accord)).erreurs.join(), /absent de data\/plan-du-site/);
     assert.match((await verifierPassage(racine, 'loi-montagne', accord)).erreurs.join(), /déjà dans src\/content/);
-    const racine2 = await depot({ 'src/content/socle/a-propos.md': page('a-propos') });
+    const racine2 = await depot({ 'src/content/socle/a-propos.md': A_PROPOS });
     assert.match((await verifierPassage(racine2, 'loi-montagne', accord)).erreurs.join(), /aucun fichier exemples\/pneus\/loi-montagne\.md/);
-    const racine3 = await depot({ 'exemples/pneus/loi-montagne.md': page('autre-id'), 'src/content/socle/a-propos.md': page('a-propos') });
+    const racine3 = await depot({ 'exemples/pneus/loi-montagne.md': page('autre-id'), 'src/content/socle/a-propos.md': A_PROPOS });
     assert.match((await verifierPassage(racine3, 'loi-montagne', accord)).erreurs.join(), /n'est pas loi-montagne/);
   });
 
   test("une adresse déjà dans la liste Lighthouse de production est refusée (pas de doublon)", async () => {
     const lh = LIGHTHOUSE.replace('"http://localhost/index.html"', '"http://localhost/index.html", "http://localhost/loi-montagne/index.html"');
-    const racine = await depot({ 'exemples/pneus/loi-montagne.md': page('loi-montagne'), 'src/content/socle/a-propos.md': page('a-propos'), 'lighthouserc.json': lh });
+    const racine = await depot({ 'exemples/pneus/loi-montagne.md': page('loi-montagne'), 'src/content/socle/a-propos.md': A_PROPOS, 'lighthouserc.json': lh });
     assert.match((await verifierPassage(racine, 'loi-montagne', accord)).erreurs.join(), /figure déjà/);
   });
 });
@@ -135,10 +144,13 @@ describe('gestes du passage', () => {
     assert.match(suivant, /"numberOfRuns": 3/);
   });
 
-  test('les rappels désignent les lignes --attendu de la recette et le fichier déplacé', () => {
-    const rappels = rappelsDePassage({ id: 'loi-montagne', source: 'exemples/pneus/loi-montagne.md', cible: 'src/content/pneus/loi-montagne.md', adresse: '/loi-montagne/', urlLighthouse: 'http://localhost/loi-montagne/index.html', sansEmpreinte: false });
-    assert.match(rappels.join('\n'), /--attendu.*loi-montagne\//);
-    assert.match(rappels.join('\n'), /src\/content\/pneus\/loi-montagne\.md/);
+  test("les rappels : « à propos » retire tous les attendus LIEN-CASSE ; une autre page vérifie seulement qu'aucun attendu ne la vise", () => {
+    const base = { source: 'x', adresse: '/x/', urlLighthouse: 'http://localhost/x/index.html', sansEmpreinte: false };
+    const aPropos = rappelsDePassage({ ...base, id: 'a-propos', cible: 'src/content/socle/a-propos.md' }).join('\n');
+    assert.match(aPropos, /retirer toutes les lignes --attendu/);
+    const autre = rappelsDePassage({ ...base, id: 'loi-montagne', cible: 'src/content/pneus/loi-montagne.md' }).join('\n');
+    assert.match(autre, /aucune ligne --attendu ne vise encore/);
+    assert.match(autre, /src\/content\/pneus\/loi-montagne\.md/);
   });
 });
 

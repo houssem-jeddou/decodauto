@@ -84,8 +84,18 @@ export async function verifierPassage(racine: string, id: string, empreinteDe: (
 
   // Une page en ligne renvoie vers « Méthode » : sans la page « à propos », la vérification des liens de production échoue
   // (l'attendu LIEN-CASSE n'existe que dans la recette des exemples).
-  if (id !== ID_A_PROPOS && (await lire(racine, CHEMIN_A_PROPOS)) === undefined) {
-    erreurs.push(`${CHEMIN_A_PROPOS} n'existe pas : mettre « à propos » en ligne d'abord (ses liens « Méthode » sont cassés sans elle)`);
+  if (id !== ID_A_PROPOS) {
+    const aPropos = await lire(racine, CHEMIN_A_PROPOS);
+    if (aPropos === undefined) {
+      erreurs.push(`${CHEMIN_A_PROPOS} n'existe pas : mettre « à propos » en ligne d'abord (ses liens « Méthode » sont cassés sans elle)`);
+    } else if (!sansEmpreinte) {
+      // R7-AUTEUR-INCONNU : l'auteur de la page doit avoir sa fiche dans « à propos » (champ auteurs), sinon la construction échoue.
+      const auteur = /^auteur: *(\S+)\s*$/m.exec(texte)?.[1];
+      if (auteur === undefined) erreurs.push(`${source} : champ auteur absent`);
+      else if (!new RegExp(`^\\s*- id: *${auteur.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`, 'm').test(aPropos)) {
+        erreurs.push(`${CHEMIN_A_PROPOS} : pas de fiche auteur « ${auteur} » (champ auteurs) : R7-AUTEUR-INCONNU échouerait à la construction`);
+      }
+    }
   }
 
   const lighthouse = JSON.parse((await lire(racine, FICHIER_LIGHTHOUSE)) ?? '{}') as { ci?: { collect?: { url?: string[] } } };
@@ -113,10 +123,11 @@ export function ajouterUrlLighthouse(contenu: string, url: string): string {
 
 /** Rappels à traiter dans le même commit que le déplacement (gestes qui ne se font pas par script : texte libre de la CI et de la page). */
 export function rappelsDePassage(p: Passage): string[] {
-  const dossier = p.adresse.replace(/^\/|\/$/g, '');
-  return [
-    `.github/workflows/ci.yml : retirer les lignes --attendu de la recette qui visent ${dossier}/ (un attendu qui ne se produit plus fait échouer le job)`,
-    `${p.cible} : retirer du commentaire d'en-tête la mention « exemple » ou « jamais publiée » s'il y en a une`,
-    `lighthouserc-exemples.json : laisser ${p.urlLighthouse} (la recette des exemples continue de construire la page)`,
-  ];
+  const rappels = [`${p.cible} : retirer du commentaire d'en-tête la mention « exemple » ou « jamais publiée » s'il y en a une`];
+  // Dès que « à propos » existe, les attendus LIEN-CASSE vers /a-propos/#methode de la recette ne se produisent plus (ATTENDU-ABSENT) :
+  // c'est le passage de « à propos » qui les retire tous ; pour une autre page, ils ont déjà disparu.
+  if (p.id === ID_A_PROPOS) rappels.unshift('.github/workflows/ci.yml : retirer toutes les lignes --attendu \'LIEN-CASSE@…@/a-propos/#methode\' de la recette (elles deviennent ATTENDU-ABSENT)');
+  else rappels.unshift('.github/workflows/ci.yml : vérifier qu\'aucune ligne --attendu ne vise encore cette page');
+  rappels.push(`lighthouserc-exemples.json : laisser ${p.urlLighthouse} (la recette des exemples continue de construire la page)`);
+  return rappels;
 }
