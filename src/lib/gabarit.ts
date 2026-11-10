@@ -28,6 +28,7 @@ import {
 } from './composants.ts';
 import { texteHtml } from './html.ts';
 import { NOM_DU_SITE } from './site.ts';
+import { emplacementPub } from './emplacements-pub.ts';
 import { modeleTableauNotices, tableauNotices } from './tableau-notices.ts';
 import { RENVOI_ENCADRE_OUTIL } from './outil-voyants.ts';
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees } from './calcul.ts';
@@ -46,6 +47,8 @@ export interface DonneesSite {
   pictogrammes: ReadonlyMap<string, string>;
   /** Libellé court de chaque page construite (identifiant → libellé) : fil d'Ariane et pages liées. */
   libelles: ReadonlyMap<string, string>;
+  /** Emplacements publicitaires factices (construction de recette seulement, livrable 7.5b) : absents en production. */
+  pubFactice?: boolean;
 }
 
 /** Bandeau de toutes les pages : nom du site (lien vers l'accueil) et mention en tête, avant le H1. */
@@ -121,6 +124,8 @@ export function basDePage(page: PageEditoriale, site: DonneesSite, citationsDuTe
   const index = indexerPlan(site.plan);
   const construites = (ids: Iterable<string>): string[] => [...ids].filter((id) => site.libelles.has(id));
   return [
+    // Emplacement publicitaire (livrable 7.5b) : au bas du contenu, jamais avant l'encadré ; vide en production.
+    emplacementPub('fin-de-contenu', site.pubFactice === true),
     pagesLiees({
       id: page.id,
       plan: site.plan,
