@@ -1,0 +1,45 @@
+[
+ {
+  "dep": "Ain (01)",
+  "arrete": "Arrêté du 05/07/2021, modifié le 20/09/2021, rectifié le 18/10/2021",
+  "perimetre": "communes",
+  "url": "https://www.ain.gouv.fr/Actions-de-l-Etat/Securite-et-education-routieres.-transports-et-deplacements/Infrastructures-routieres-et-transports/Transports-et-deplacements/Obligation-d-equipement-de-certains-vehicules-en-periode-hivernale",
+  "note": "Communiqué de la préfecture du 23/10/2026 (hiver 2026-2027) : « l'arrêté préfectoral du 5 juillet 2021 fixe la liste des communes »"
+ },
+ {
+  "dep": "Alpes-Maritimes (06)",
+  "arrete": "AP n° 73-2021 du 04/10/2021, modifié par l'AP n° 59-2022 du 10/10/2022",
+  "perimetre": "communes",
+  "url": "https://www.alpes-maritimes.gouv.fr/Actions-de-l-Etat/Securite-routiere-et-deplacements/La-Securite-Routiere/Obligation-d-equipement-de-certains-vehicules-en-periode-hivernale/Obligation-d-equipement-de-certains-vehicules-en-periode-hivernale",
+  "note": "fichiers mis en ligne le 26/10/2022"
+ },
+ {
+  "dep": "Ardèche (07)",
+  "arrete": "Arrêté du 01/10/2021",
+  "perimetre": "communes",
+  "nb": 169,
+  "url": "https://www.ardeche.gouv.fr/Actions-de-l-Etat/Transports.-deplacements-et-securite-routiere/Securite-routiere-et-circulation/Obligation-d-equipement-de-certains-vehicules-en-periode-hivernale",
+  "note": "page : 169 communes ; liste et carte jointes"
+ },
+ {
+  "dep": "Aude (11)",
+  "arrete": "AP n° 2021-051 du 01/10/2021",
+  "perimetre": "a-lire",
+  "url": "https://www.aude.gouv.fr/Actions-de-l-Etat/Transport.-deplacement-et-securite-routiere/Securite-routiere/Actualites/Rappel-obligation-d-equipements-en-periode-hivernale-du-1er-novembre-au-31-mars",
+  "note": "page mise à jour le 11/12/2023 ; PDF /contenu/telechargement/26906/185793/file/AP2021-051_equipements-hivernaux.pdf"
+ },
+ {
+  "dep": "Lozère (48)",
+  "arrete": "AP n° PREF/CAB/SIDPC/2021-288-001 du 15/10/2021",
+  "perimetre": "tout",
+  "url": "https://www.lozere.gouv.fr/contenu/telechargement/27189/194894/file/arret%C3%A9-pneus-hiverv-Sign%C3%A9.pdf",
+  "note": "art. 1er : « obligatoire sur l'ensemble des communes du département de la Lozère », chaque année à partir de 2021 ; un autre arrêté de 2022 est à vérifier (/content/download/27799/198335/file/arrêté.pdf)"
+ },
+ {
+  "dep": "Ariège (09)",
+  "arrete": "à identifier (PDF « AP_équipements spéciaux_09 », recueil n° 09-2021-149)",
+  "perimetre": "a-lire",
+  "url": "https://www.ariege.gouv.fr/content/download/24415/147881/file/AP_%C3%A9quipements%20sp%C3%A9ciaux_09.pdf",
+  "note": "la page de la préfecture ne cite pas l'arrêté ; PDF repéré par la recherche, non lu"
+ }
+]
