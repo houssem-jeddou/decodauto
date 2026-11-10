@@ -136,6 +136,10 @@ Les décisions du 22/10 à la porte de sortie de l'étape 6 (04/11, 12 h 03) son
 
 ## Revues indépendantes : ce qu'elles ont changé
 Les revues du 22/10 à la porte de sortie de l'étape 6 sont dans `04c_archives_revues_jusqu_a_la_porte_6.md` ; celles du 04/11 (7.2 et 8.1) dans `04d_archives_decisions_et_revues_du_04_11.md`.
+- 10/11, demande de changement n° 17 (porte 8 par lot), une revue ; « à corriger », un bloquant, sept importants.
+  - **Changé** : règle 12 ajoutée (sans elle 03 v12 se contredisait) ; étape 9 complétée (drapeau au premier lot, fin de l'étape, cible) ; parades réécrites sans surévaluation (l'empreinte ne verrouille que l'encadré : la parade est procédurale) ; critère Lighthouse ramené à la formule de 03 ; tableau critère → lot ; revue de lot sur le diff complet ; accueil du premier lot traité ; impacts complétés ; effet d'un site de quatre pages dit non mesuré.
+  - **Écarté** : une revue indépendante par page (la revue de lot la remplace) ; renvoyer la fermeture de l'étape au seul tableau (la porte complète est refaite).
+  - **Reste à vérifier** : fond juridique des mentions ; protection de `main` chez GitHub (reportée).
 - 10/11, demande de changement n° 16 (8.2), une revue, comme demandé par Houssem ; « à corriger », un bloquant, cinq importants. Chiffres, signatures, critère de 06 et porte de l'étape 4 recomptés par le relecteur : exacts.
   - **Changé** : comptage ramené à la convention de 05 (aucune variante comptée : + 121 660 au lieu de + 191 180), 05 v3 et 06 v2 rendus identiques sur le lot 1, deux vérifications ajoutées au script ; « tableau pression pneu voiture » sortie de 05 (une consigne validée la dit hors périmètre) ; formulations avec leur usage (32 citent une marque ou un modèle) ; six requêtes FAP passées sur voyant-fap ; intention de 06 gardée pour ses lignes ; impact complété (`docs/02`, cas limite 1 de `docs/09`, test du plan : 10 → 11) ; gain présenté avec et sans les requêtes courtes.
   - **Écarté** : « voyant orange voiture clé » sur voyant-huile (la clé a deux sens selon la marque, texte validé de l'outil) ; remesure des lignes de 06 (une seule reste comptée ; notée comme non vérifiée).
