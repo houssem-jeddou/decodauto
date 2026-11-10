@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 10/11/2026 (1 h 05, heure de Tunis)
+Dernière mise à jour : 10/11/2026 (15 h 45, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -13,9 +13,9 @@ Dernière mise à jour : 10/11/2026 (1 h 05, heure de Tunis)
 | 4 | Plan du site | ✅ Validée par Houssem (23/10) · PR #3 fusionnée · tag `etape-4-plan-du-site` (715b856) | `data/plan-du-site.json` (fait foi) ; claude/09_plan_du_site.md (vue lisible) |
 | 5 | Sources et base voyants | ✅ Validée par Houssem (24/10, 14 h 39) · PR #7 fusionnée · tag `etape-5-base-voyants` | Structure v4 : `src/schemas/` ; `data/sources.json`, `data/voyants.json` (base validée), `travaux/etape-5/paquet-validation.md` et `validation.json` (PR #7) ; paquet validé archivé dans le projet (`claude/etape5_paquet_valide.md`) |
 | 6 | Charte et modèles de pages | ✅ Validée par Houssem (04/11, 12 h 03) · porte vérifiée et relue (deux revues) · PR #20 fusionnée (77bea5e) · tag `etape-6-charte-modeles` posé par Houssem le 09/11 sur 77bea5e (formulaire de release GitHub). Livrables 6.0 à 6.9 (PR #8, #11 à #20) ; demandes de changement n° 4 à 11 acceptées (03 v8) | `docs/10_charte_editoriale.md` (charte) ; modèles `src/lib/modeles.ts` ; exemples `exemples/` ; `travaux/etape-6/` (porte : `porte-de-sortie.md`, briefs : `briefs/`) |
-| 7 | Socle technique | ▶ Piste technique reprise le 04/11 (12 h 25, décision de Houssem), en alternance avec l'étape 8 : un seul livrable présenté à la fois. Fait : lot 7.1 fusionné (PR #9) ; redirections http et www réglées dans Cloudflare et vérifiées ; 7.2 (description et revue du socle, politique de confidentialité, mesure d'audience sans traceur) validé le 09/11 (21 h 41), PR #22 fusionnée (55db514), Web Analytics de Cloudflare désactivé. Statut juridique tranché par Houssem le 09/11 (22 h 49) : les mentions légales n'attendent plus. Reste : livrables 7.x (données structurées, autres réglages Cloudflare, emplacements factices, Lighthouse du socle, mentions légales, garde-fou de déploiement de la demande n° 15) | `CONTROLES.md` (canonical, plan du site, production) |
-| 8 | Vague A | ▶ Étape principale depuis le 04/11. Fait : 8.1 modèle de l'outil voyants, validé le 04/11 (13 h 48), PR #21 fusionnée (2dcec63). Ordre décidé le 04/11, suite : 8.2 demande de changement des requêtes absentes de 06, lancée le 09/11 (22 h 58) : 177 requêtes mesurées dans Keyword Planner le 09/11 (105 à au moins 100 recherches par mois) ; 8.2 terminé le 10/11 (demande de changement n° 16, PR #23 fusionnée, 0e21cb6) ; suivant : 8.3 lot du minimum (loi montagne, pression des pneus, voyants), avec le court paquet de lignes à ajouter à la base ; livrables 7.x intercalés | `travaux/etape-6/briefs/` ; `travaux/etape-8/paquet-8.1-outil-voyants.md` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
-| 9 | Recette et mise en ligne A | À faire | – |
+| 7 | Socle technique | ✅ **Porte vérifiée, fermée le 10/11 à 15 h 31** (validation de 7.4b après celle de 7.6 à 15 h 20), pistes en alternance avec l'étape 8. Livrables validés : 7.1 (PR #9 fusionnée), redirections, 7.2 (09/11, PR #22 fusionnée), 7.3 « à propos » et 7.4a accueil (10/11), 7.5a données structurées et `lastmod` (13 h 53), 7.5b emplacements factices et images (14 h 18), 7.6 garde-fou de déploiement, réglages Cloudflare et critères de la porte (15 h 20), 7.4b mentions légales (15 h 31). Branches du lot sur des pull requests empilées #27 à #32 (brouillons, base `etape-7/…`), pas fusionnées. Revue indépendante : une par livrable (dont 7.6, qui relit la porte). Reste, à la mise en ligne : IndexNow, Search Console, Bing Webmaster Tools, premier passage du garde-fou sur `main` (demande n° 15), mesure d'audience sans traceur | `CONTROLES.md` ; `travaux/etape-7/` (paquets 7.2 à 7.6, porte : paquet 7.6 §4) |
+| 8 | Vague A | ▶ Étape principale depuis le 04/11. Fait : 8.1 modèle de l'outil voyants, validé le 04/11 (13 h 48), PR #21 fusionnée (2dcec63). Ordre décidé le 04/11, suite : 8.2 demande de changement des requêtes absentes de 06, lancée le 09/11 (22 h 58) : 177 requêtes mesurées dans Keyword Planner le 09/11 (105 à au moins 100 recherches par mois) ; 8.2 terminé le 10/11 (demande de changement n° 16, PR #23 fusionnée, 0e21cb6) ; 8.3 lot du minimum : **8.3.1a** loi montagne (page publiable) et **8.3.0** règle de passage validés le 10/11 ; **demande de changement n° 17 acceptée le 10/11 (15 h 31)** : porte 8 par lot de mise en ligne, premier lot = socle et loi montagne (03 v12) ; suivant : go / no-go de la loi montagne (étape 9, « Avant »), puis 8.3.1b (tableau des départements), 8.3.2 pression des pneus, 8.3.3 base voyants (demande de changement), 8.3.4 outil, 8.3.5 à 8.3.8 voyants | `travaux/etape-6/briefs/` ; `travaux/etape-8/paquet-8.1-outil-voyants.md` ; point de reprise `claude/etape8_point_de_reprise.md` (projet) |
+| 9 | Recette et mise en ligne A | À faire, **lot par lot dès la demande n° 17** : premier lot = socle (accueil, mentions légales avec la politique de confidentialité, « à propos ») et loi montagne ; critères « Avant » : go / no-go, double authentification Google, GitHub, OVH, Cloudflare, verrou de transfert du domaine, garde-fou actif ; Journal officiel revérifié le jour du go / no-go | – |
 | 10 | Vague B | À faire | – |
 | 11 | Vague C | À faire | – |
 | 12 | Boucle mensuelle | À faire | – |
@@ -26,8 +26,8 @@ Dernière mise à jour : 10/11/2026 (1 h 05, heure de Tunis)
 | 5. Sources et base voyants | 24–27/10 | ✅ terminée le 24/10 | – |
 | Piste technique (une à la fois) : pictogrammes de l'étape 5, puis étape 7 | 24–28/10 | pictogrammes faits le 24/10 ; étape 7 commencée le 28/10 (lot 7.1), en pause du 28/10 (12 h 10) au 04/11 ; reprise le 04/11, en alternance avec l'étape 8 ; aucun travail du 05 au 08/11 ; ≈ 10–22/11 | parcours de l'auteur (« à propos ») ; informations à publier dans les mentions légales |
 | 6. Charte et modèles | 27–29/10 | ✅ terminée le 04/11 (porte validée à 12 h 03 ; aucun travail du 25 au 27/10 ni du 29/10 au 01/11) | – |
-| 8. Vague A | 29/10–01/11 | ≈ 10–22/11 (outil voyants fait le 04/11 ; 8.2 fait le 10/11 ; puis le minimum, 8.3) | portes 5 et 6 ✅ ; requêtes absentes mesurées ; sources des briefs trouvées |
-| 9. Mise en ligne du minimum | 31/10 | ≈ 20–25/11 | portes 7 et 8 ; double authentification de Google, GitHub, OVH et Cloudflare, verrou du domaine, garde-fou de déploiement (demande n° 15) |
+| 8. Vague A | 29/10–01/11 | ≈ 10–22/11 (outil voyants fait le 04/11 ; 8.2, 8.3.1a et 8.3.0 faits le 10/11 ; porte 8 par lot depuis la demande n° 17 ; puis le reste de 8.3) | portes 5 et 6 ✅ ; requêtes absentes mesurées ; sources des briefs trouvées |
+| 9. Mise en ligne, premier lot (socle et loi montagne) | 31/10 | ≈ 20–25/11 (à revoir au go / no-go) | porte 7 ✅ (10/11) ; porte 8 sur les pages du lot (demande n° 17) ; double authentification de Google, GitHub, OVH et Cloudflare, verrou du domaine, garde-fou de déploiement (demande n° 15) |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 28/11–02/12 / ≈ 05–09/12 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
 
 **Séances de validation de Houssem** (le vrai goulot), d'ici le 25/11 :
@@ -41,9 +41,9 @@ Dernière mise à jour : 10/11/2026 (1 h 05, heure de Tunis)
 8. ~~exemples des modèles voyant, code et pneus~~ : validés le 03/11 ; ~~consignes des briefs (6.8)~~ : validées le 03/11 ; ~~porte 6~~ : validée le 04/11 ;
    ~~modèle de l'outil voyants (8.1) et demande de changement n° 12~~ : validés le 04/11 ;
    ~~politique de confidentialité et mesure d'audience (7.2), demandes de changement n° 13 et 14~~ : validées le 09/11 ;
-9. porte 7 ;
+9. ~~porte 7~~ : validée le 10/11 (7.6 à 15 h 20, 7.4b à 15 h 31) ; ~~demande de changement n° 17~~ : acceptée le 10/11 (15 h 31) ;
 10. ~~demande de changement n° 16 des requêtes absentes (8.2)~~ : acceptée le 10/11 (0 h 26) ;
-11. paquet et encadrés de la vague A, et porte 8 ;
+11. paquet et encadrés de chaque lot de la vague A, avec la porte 8 par lot (n° 17), puis la porte 8 complète ;
 12. go / no-go et porte 9, avec la double authentification de Google, GitHub, OVH et Cloudflare et le verrou du domaine (demande n° 15).
 
 ## Étape 8, Vague A : livrables
@@ -61,7 +61,10 @@ Dernière mise à jour : 10/11/2026 (1 h 05, heure de Tunis)
   - tri fait le 10/11 avec la fonction `signature` du dépôt (16 variantes de 05, 89 nouvelles) ; **demande de changement n° 16 présentée le 10/11** (`travaux/etape-8/demande-changement-16.md`, fichiers proposés dans `requetes-absentes/propose/`), après une revue indépendante : 114 ajouts à 05 (103 requêtes mesurées, 11 lignes de 06), 73 formulations du lecteur hors de 05, 1 requête écartée ; porte de l'étape 4 relancée sur la proposition : 0 constat ;
   - **acceptée par Houssem le 10/11 (0 h 26) et appliquée** (commit 2fb73d4) : `docs/05` en v3 (1 167 mots-clés), mots-clés ajoutés à 32 pages du plan, `docs/09` régénéré, `docs/02` recalculé (1 009 mots-clés comptés, ≈ 1 140 760 recherches), 03 v11, briefs régénérés avec la section « Formulations du lecteur » (73 lignes) ; preuves : tests du plan et des briefs 43 sur 43 en local, CI de la PR (run 42720891306) : voir l'historique ;
   - clos le 10/11 : PR #23 fusionnée sur la demande de Houssem (« Fusionne la pr », 0e21cb6), CI de `main` verte (contrôles, recette des exemples, Lighthouse, déploiement, production ; site non indexable, aucune page éditoriale publiée) ; 05 v3 et 06 v2 chargés dans le projet par Houssem, instructions du projet mises à jour ; `claude/09_plan_du_site.md` du projet remplacé par la vue à jour (1 167 mots-clés).
-- [ ] 8.3 Lot du minimum : loi montagne, pression des pneus, puis les voyants ; avec le court paquet de lignes à ajouter à la base (décision 8 de 8.1).
+- [ ] **8.3 Lot du minimum** (découpage `travaux/etape-8/decoupage-8.3.md`, ordre A : loi montagne d'abord) :
+  - [x] **8.3.1a Loi montagne, page publiable** (PR #25), validé le 10/11 ; **8.3.0 Règle de passage** d'une page rédigée (PR #26), validé le 10/11 (`regle-de-passage.md`, `npm run passage`).
+  - [x] **Demande de changement n° 17** acceptée le 10/11 (voir « Demandes de changement ») : 03 v12.
+  - [ ] Suite : go / no-go de la loi montagne (porte 9 « Avant » ; Journal officiel revérifié le jour même), 8.3.1b tableau des départements, 8.3.2 pression des pneus, 8.3.3 lignes à ajouter à la base voyants (STOP, triangle, préchauffage clignotant ; demande de changement, décision 8 de 8.1), 8.3.4 outil, 8.3.5 à 8.3.8 voyants.
 - **Critère de l'outil à la porte de l'étape 8, état au 04/11** :
   - lignes, liens, libellés écrits, lien « Signaler une erreur », contenu sans JavaScript : contrôlés automatiquement ;
   - encadré de la page outil : validé, empreinte versée ;
@@ -88,12 +91,14 @@ Dernière mise à jour : 10/11/2026 (1 h 05, heure de Tunis)
   - charte §2.7, §4, §8 et §9 précisées ;
   - sources lues : `travaux/etape-7/textes/mesure-audience-et-rgpd.md` ; paquet : `travaux/etape-7/paquet-7.2-confidentialite.md`.
   - preuves : `npm test` 522 sur 522 ; CI de la PR verte sur 41e2b60 (run 42696736322 : contrôles, recette des exemples avec 0 erreur bloquante, Lighthouse conforme sur 5 pages dont `/mentions-legales/`, vérification en production « tout est conforme », sans l'avertissement PROD-TRACEUR du 04/11) ; une revue indépendante.
-- [ ] Données structurées (Article, fil d'Ariane, auteur), réglages Cloudflare (robots d'IA, Bot Fight Mode, Rocket Loader, IndexNow), emplacements publicitaires non affichés, Lighthouse sur les pages du socle.
-- [ ] Mentions légales : statut juridique tranché par Houssem le 09/11 (22 h 49) ; informations à publier à lui demander, après lecture du texte officiel.
-- [ ] Garde-fou de déploiement (demande de changement n° 15) : la CI refuse de déployer si un commit de `main`, depuis le dernier déploiement, ne vient pas d'une pull request fusionnée.
+- [x] **7.3 « À propos »** (PR #27, validé le 10/11), **7.4a accueil** (PR #28, validé le 10/11) : fiche auteur, section « Méthode », accueil généré depuis le plan ; paquets `paquet-7.3-a-propos.md`, `paquet-7.4a-accueil.md`.
+- [x] **7.4b Mentions légales** (PR #29), **validé le 10/11 à 15 h 31** : bloc généré depuis `src/lib/editeur.ts` (éditeur à titre professionnel, domiciliation d'Ariana, téléphone, directeur de la publication, hébergeur, droit de réponse, aucun numéro d'inscription publié), politique de confidentialité mise à jour ; contrôles MENTIONS-LEGALES-* ; paquet `paquet-7.4b-mentions-legales.md`. À confirmer avant la mise en ligne : coordonnées de l'hébergeur, hypothèse sur l'immatriculation (comptable).
+- [x] **7.5a Données structurées JSON-LD et `lastmod`** (PR #30, validé le 10/11 à 13 h 53) ; **7.5b Emplacements publicitaires factices, hauteur réservée, règle des images** (PR #31, validé à 14 h 18).
+- [x] **7.6 Garde-fou de déploiement, réglages Cloudflare, porte 7** (PR #32, validé le 10/11 à 15 h 20) : job `origine-main` (GARDE-FOU-*), sortie de secours `config/commits-directs-acceptes.json` ; réglages Cloudflare vérifiés (deux corrigés) ; IndexNow reporté à la mise en ligne ; porte 7 critère par critère (paquet §4).
+- **À la mise en ligne (étape 9)** : premier passage réel du garde-fou sur `main` ; IndexNow (acceptation par Houssem des conditions de Cloudflare) ; Search Console et Bing Webmaster Tools ; page du socle lue en ligne (aucun script ni cookie, courriel en clair) ; Rich Results Test ; fusions par commit de fusion seulement tant que la fusion par rebase n'est pas testée.
 
 ## Décisions ouvertes (à trancher par Houssem)
-- **Auteur** : nom réel acté le 23/10 ; parcours à fournir pour la page « à propos » (étape 7 ou 8).
+- **Auteur** : nom réel acté le 23/10 ; parcours fourni et page « à propos » validée le 10/11 (7.3).
 - **Avant la mise en ligne** (paquet 7.2, décision 7 ; maintenu le 09/11 à 22 h 58 sur la recommandation de Claude, que Houssem avait demandée ; il peut en décider autrement au go / no-go) : représentant dans l'Union (RGPD, art. 27), transfert vers la Tunisie, statistiques de Cloudflare fondées sur l'adresse IP, contrat de sous-traitance (Cloudflare en offre gratuite ; boîte Gmail gratuite ou boîte avec contrat), durée des journaux : à poser à un professionnel et à Cloudflare.
 
 ## Reporté après la mise en ligne (à trancher par Houssem)
@@ -105,6 +110,8 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
 
 ## Historique des décisions
 Les décisions du 22/10 à la porte de sortie de l'étape 6 (04/11, 12 h 03) sont dans `04b_archives_decisions_jusqu_a_la_porte_6.md` ; celles du 04/11 dans `04d_archives_decisions_et_revues_du_04_11.md`.
+- 10/11/2026 (15 h 31), Houssem : **accepte la demande de changement n° 17** (« Oui j'accepte la demande n° 17 ») et **valide 7.4b** (« Valide 7.4b »). 03 passe en v12 ; `CLAUDE.md`, règle de passage et commentaires du code alignés ; la porte 7 est fermée. Les instructions du projet Claude (règles 2 et « Déroulé ») restent à mettre à jour par Houssem (texte fourni). Aucun tag.
+- 10/11/2026 (15 h 20), Houssem : « Je valide » : **7.6** (garde-fou de déploiement, réglages Cloudflare corrigés, porte 7 critère par critère, IndexNow reporté à la mise en ligne). Jusque-là le 10/11 : **8.3.1a** et **8.3.0**, **7.3** et **7.4a**, **7.5a** (13 h 53), **7.5b** (14 h 18) validés ; règle de projet de 13 h 30 : on part toujours de la recommandation de Claude, sauf point qui dépend de Houssem et qui bloque.
 - 10/11/2026 (1 h 05) : **8.2 terminé**. Houssem demande la fusion de la PR #23 (« Fusionne la pr ») : faite (0e21cb6), CI de `main` verte, déploiement compris. Il charge dans le projet 05 v3 et 06 v2, retire les anciennes versions et colle les instructions du projet mises à jour (noms des fichiers 05 et 06). `claude/09_plan_du_site.md` du projet mis à jour par Claude. Suivant : 8.3, dans une nouvelle conversation.
 - 10/11/2026 (1 h) : demande n° 16 appliquée sur la branche de la PR #23 (2fb73d4) ; CI de ce commit verte (run 42720891306 : contrôles, recette des exemples, Lighthouse, production). Journal allégé une seconde fois, par script vérifié : décisions et revues du 04/11 déplacées dans une quatrième archive (journal : environ 40 000 caractères).
 - 10/11/2026 (0 h 26), Houssem : **accepte la demande de changement n° 16** (« oui aux cinq, selon tes recommandations ») : les 114 ajouts à 05 et leur rattachement, avec les 10 pages corrigées et les cas limites recommandés ; les 73 formulations du lecteur dans les briefs ; le critère des lignes de 06 et « gonflement pneu voiture » ; le comptage sans variante ; les requêtes principales inchangées, trois pages des vagues B et C étant revues à leur brief.
@@ -208,6 +215,11 @@ Les revues du 22/10 à la porte de sortie de l'étape 6 sont dans `04c_archives_
 
 ## Demandes de changement
 Les demandes n° 1 à 11 sont dans `04b_archives_decisions_jusqu_a_la_porte_6.md`.
+- 10/11/2026 (15 h 31), acceptée : **n° 17, porte de l'étape 8 par lot de mise en ligne** (`travaux/etape-8/demande-changement-17.md`, PR #33).
+  - **Changement** : la porte 8 se vérifie par lot de mise en ligne (critères applicables aux pages du lot avec preuve, revue indépendante sur le diff complet, ligne de validation de Houssem par page), puis en entier sur l'ensemble avant l'étape 10 ; l'étape 9 s'exécute lot par lot pendant l'étape 8 (troisième exception de la règle 12) ; premier lot = socle et loi montagne ; drapeau d'indexation porté par le premier lot seulement (décision de Houssem).
+  - **Raison** : 03 faisait dépendre l'étape 9 de la porte 8 tout en prévoyant un minimum avant la fin de la vague A ; loi montagne 101 752 recherches par mois, obligation du 1er novembre au 31 mars ; aucun critère n'est retiré (la date n'est pas le motif).
+  - **Impact** : 03 v12 (règles 2 et 12, étapes 8 et 9), `CLAUDE.md`, règle de passage, journal ; instructions du projet à mettre à jour par Houssem ; accueil du premier lot publié tel que validé en 7.4a (recommandation de Claude, à revoir au go / no-go).
+  - **Contrôles** : aucun à relancer.
 - 10/11/2026 (0 h 26), acceptée : **n° 16, requêtes absentes de 06** (`travaux/etape-8/demande-changement-16.md`, PR #23).
   - **Changement** : 05 v3 (1 053 → 1 167 mots-clés : 103 requêtes mesurées, 11 lignes de 06), 06 v2 (3 491 → 3 594) ; mots-clés ajoutés à 32 pages du plan ; 73 formulations du lecteur dans les briefs, hors de 05.
   - **Raison** : 105 requêtes suggérées par Google à au moins 100 recherches par mois n'étaient dans aucune base ; volume indicatif compté + 121 660 (plafonds), dont la moitié sur « puretech » et « gonfler pneu voiture ».
