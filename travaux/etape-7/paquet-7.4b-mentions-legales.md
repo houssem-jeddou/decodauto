@@ -43,4 +43,13 @@ Non publié, volontairement : l'identifiant unique de ta carte (2004234A). La lo
 
 ## 5. Preuves
 
-CI de la PR : voir plus bas. Tests locaux sans dépendance : `node --test tests/editeur.test.ts` (11 passent).
+CI du commit `8e26c06` : Contrôles (schémas, tests, build, liens), Recette des exemples (page construite avec le bloc, sans erreur attendue), Lighthouse mobile et Production : tous verts. Tests locaux sans dépendance : `node --test tests/editeur.test.ts` (13 passent). Deux premiers essais de CI avaient échoué : contrôles écrits sur du texte normalisé (revue), puis un type de test ; corrigés.
+
+## 6. Revue indépendante
+
+Verdict : **à corriger** (trois points bloquants, corrigés), fond juridique conforme à l'article 1-1 relu sur Légifrance.
+- **Bloquants, corrigés** : le contrôle du téléphone et celui des marques provisoires lisaient un texte normalisé (« + » devenu « plus », « À compléter » devenu « a completer ») et auraient fait échouer toute construction ; espace ordinaire avant « : » dans le droit de réponse (contrôle TYPO-ESPACE).
+- **Importants, corrigés** : la politique de confidentialité disait « deux cas » alors que le téléphone en ouvre un troisième (point 7 du §4, à revalider) ; sanctions citées à l'article 1-2 et non « article 1er » ; hypothèse sur le RCS et le RNE écrite comme telle (point 6) ; risque de l'adresse de domiciliation laissé ouvert (point 1).
+- **Mineurs, corrigés** : numéros de téléphone sans espaces insécables ajoutés au hasard ; tests du rendu réel (bloc avant le texte, contrôles de typographie, d'identifiants et d'expressions interdites) ; mots entiers dans le test des numéros d'inscription ; dates de la page ; point 5° de l'article noté (point 8).
+- **Écarté** : le lien de pied de page mène à `#confidentialite`, sous le bloc des mentions : changer l'ancre demande une demande de changement ; le libellé « Mentions légales et confidentialité » reste vrai, le bloc est juste au-dessus.
+- **Non vérifié** : texte intégral du 5° de l'article 1-1 ; décret d'application du droit de réponse.
