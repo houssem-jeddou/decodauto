@@ -9,8 +9,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { ANCRE_CONFIDENTIALITE, LIBELLE_LIEN_CONFIDENTIALITE, PAGE_CONFIDENTIALITE } from '../src/lib/charte.ts';
-import { lienConfidentialite } from '../src/lib/composants.ts';
+import { ANCRE_CONFIDENTIALITE, ANCRE_METHODE, LIBELLE_LIEN_CONFIDENTIALITE, PAGE_CONFIDENTIALITE, PAGE_METHODE, REGISTRE_EMPREINTE, RESPONSABLE_EDITORIAL, sectionMethode } from '../src/lib/charte.ts';
+import { lienConfidentialite, sectionMethodeHtml } from '../src/lib/composants.ts';
 import { controlerHtmlSocle } from '../src/lib/controle.ts';
 import { pied } from '../src/lib/gabarit.ts';
 import { MARQUEUR_CONTACT, pageSocle } from '../src/lib/modeles.ts';
@@ -18,7 +18,7 @@ import { dateAffichee } from '../src/lib/cout.ts';
 import { ADRESSE_SIGNALEMENT } from '../src/lib/site.ts';
 import { soclePageSchema } from '../src/schemas/pages.ts';
 import { lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
-import { adressesDuCss, constatsExpressionsInterdites, constatsIdentifiants, constatsLienConfidentialite, constatsRessourcesTierces, constatsTypographie, controlerComposantsCommuns } from '../scripts/lib/dist.ts';
+import { adressesDuCss, constatsExpressionsInterdites, constatsIdentifiants, constatsLienConfidentialite, constatsPageAPropos, constatsRessourcesTierces, constatsTypographie, controlerComposantsCommuns } from '../scripts/lib/dist.ts';
 import { pageRedigee } from '../scripts/lib/pages-redigees.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -82,7 +82,7 @@ describe('page du socle : schéma et modèle', () => {
   test('une référence inconnue et une section de confidentialité absente font échouer la construction', () => {
     assert.throws(() => pageSocle(page, '<h2>Confidentialité</h2><p>{{inconnue}}</p>'), /référence inconnue/);
     assert.throws(() => pageSocle(page, '<h2>Autre titre</h2>'), /« Confidentialité » est absent/);
-    assert.doesNotThrow(() => pageSocle({ ...page, id: 'a-propos' }, '<h2>Autre titre</h2>'));
+    assert.doesNotThrow(() => pageSocle({ ...page, id: 'contact' }, '<h2>Autre titre</h2>'));
   });
 
   test('le titre de la section reçoit son ancre, quel que soit l’identifiant posé par le rendu du Markdown', () => {
@@ -220,5 +220,64 @@ describe('lien de pied de page vers la politique (CONFIDENTIALITE-*)', () => {
     } finally {
       await rm(dist, { recursive: true, force: true });
     }
+  });
+});
+
+// ---- Page « à propos » (livrable 7.3) -------------------------------------------------------------------------------
+
+const cheminAPropos = await pageRedigee(racine, 'socle', PAGE_METHODE);
+const contenuAPropos = await readFile(join(racine, cheminAPropos), 'utf8');
+const brutAPropos = lireFrontmatter(contenuAPropos) as Record<string, unknown>;
+const aPropos = soclePageSchema.parse(brutAPropos);
+const corpsAPropos = separerFrontmatter(contenuAPropos).corps;
+const methodeHtml = sectionMethodeHtml(sectionMethode(REGISTRE_EMPREINTE));
+const pageAPropos = pageSocle(aPropos, corpsHtml(corpsAPropos), methodeHtml);
+
+describe('page « à propos » : fiche auteur et section « Méthode »', () => {
+  test('c’est la page du plan qui porte la méthode, de type socle ; elle a une fiche auteur au nom réel et un parcours', () => {
+    assert.equal(brutAPropos['id'], PAGE_METHODE);
+    assert.equal(plan.find((p) => p.id === PAGE_METHODE)?.type, 'socle');
+    assert.equal(aPropos.auteurs?.length, 1);
+    assert.equal(aPropos.auteurs?.[0]?.id, 'houssem-jeddou');
+    assert.equal(aPropos.auteurs?.[0]?.nom, RESPONSABLE_EDITORIAL, 'la fiche porte le nom du responsable éditorial des signatures');
+    assert.ok((aPropos.auteurs?.[0]?.presentation ?? '').length > 100, 'parcours trop court pour identifier l’auteur');
+  });
+
+  test('le modèle affiche le texte, la fiche de l’auteur puis la section « Méthode », avant la date', () => {
+    const iTexte = pageAPropos.indexOf('data-corps');
+    const iFiche = pageAPropos.indexOf('data-auteur ');
+    const iMethode = pageAPropos.indexOf('data-methode');
+    const iDate = pageAPropos.indexOf('data-socle-date');
+    assert.ok(iTexte >= 0 && iTexte < iFiche && iFiche < iMethode && iMethode < iDate, 'ordre texte, fiche, méthode, date');
+    assert.ok(pageAPropos.includes(`<h2>${RESPONSABLE_EDITORIAL}</h2>`));
+    assert.ok(pageAPropos.includes(`id="${ANCRE_METHODE}"`));
+  });
+
+  test('sans fiche auteur ou sans section « Méthode », la construction échoue ; une fiche ailleurs que sur « à propos » aussi', () => {
+    assert.throws(() => pageSocle({ ...aPropos, auteurs: undefined }, '<p>x</p>', methodeHtml), /aucune fiche auteur/);
+    assert.throws(() => pageSocle(aPropos, '<p>x</p>'), /section « Méthode » est absente/);
+    assert.throws(() => pageSocle({ ...page, auteurs: aPropos.auteurs }, '<h2>Confidentialité</h2>'), /ne se saisissent que sur la page/);
+  });
+
+  test('la page construite passe le contrôle des composants communs de « à propos » (METHODE-SECTION, AUTEUR-FICHE)', () => {
+    assert.deepEqual(constatsPageAPropos(docu(pageAPropos), 'a-propos/index.html'), []);
+    assert.deepEqual(codes(constatsPageAPropos(docu(pageAPropos.replace(methodeHtml, '')), 'x')), ['METHODE-SECTION']);
+    assert.deepEqual(codes(constatsPageAPropos(docu(pageAPropos.replace(methodeHtml, `${methodeHtml}${methodeHtml}`)), 'x')), ['METHODE-SECTION']);
+    assert.deepEqual(codes(constatsPageAPropos(docu(pageAPropos.replace(/<section class="auteur".*?<\/section>/s, '')), 'x')), ['AUTEUR-FICHE']);
+    assert.deepEqual(codes(constatsPageAPropos(docu(pageAPropos.replace(`<h2>${RESPONSABLE_EDITORIAL}</h2>`, '<h2></h2>')), 'x')), ['AUTEUR-FICHE']);
+  });
+
+  test('le texte ne parle pas en « nous », respecte la typographie, n’écrit ni l’adresse de contact ni aucun lien', () => {
+    const html = docu(pageAPropos);
+    assert.deepEqual([...constatsExpressionsInterdites(html, 'x'), ...constatsTypographie(html, 'x'), ...constatsIdentifiants(html, 'x')], []);
+    assert.ok(!corpsAPropos.includes(ADRESSE_SIGNALEMENT));
+    assert.doesNotMatch(corpsAPropos, /\]\(|https?:/, 'un lien dans le texte doit venir du plan (aucun n’est déclaré pour « à propos »)');
+  });
+
+  test('la fiche et le texte restent fidèles à la charte : texte rédigé par une IA, sous la responsabilité de l’éditeur, jamais relu par un mécanicien', () => {
+    assert.match(corpsAPropos, /rédigés par une intelligence artificielle/);
+    assert.match(corpsAPropos, /L'éditeur vérifie lui-même chaque verdict/);
+    assert.match(corpsAPropos, /Il n'est relu par aucun mécanicien et ne répare pas de voitures/);
+    assert.match(aPropos.auteurs?.[0]?.presentation ?? '', /n'est pas mécanicien/);
   });
 });

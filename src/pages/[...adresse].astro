@@ -8,6 +8,8 @@ import { getCollection } from 'astro:content';
 import { cwd } from 'node:process';
 import Base from '../layouts/Base.astro';
 import { modeleDeLaPage, pageSocle } from '../lib/modeles.ts';
+import { sectionMethodeHtml } from '../lib/composants.ts';
+import { PAGE_METHODE, sectionMethode } from '../lib/charte.ts';
 import { donneesDuSite } from '../../scripts/lib/donnees-site.ts';
 import type { TypePage } from '../schemas/listes.ts';
 import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
@@ -31,7 +33,7 @@ export async function getStaticPaths() {
   );
   // Libellé court de chaque page construite : fil d'Ariane et pages liées ne mènent qu'à des pages construites.
   const libelles = new Map(entrees.map(({ page }) => [page.id, page.libelle_court]));
-  const { site } = await donneesDuSite(cwd(), libelles, new Date());
+  const { site, contexte } = await donneesDuSite(cwd(), libelles, new Date());
   // Pages du socle (livrable 7.2), sauf l'accueil, qui a sa propre route (src/pages/index.astro).
   const socle = (await getCollection('socle')).flatMap((entree) => {
     const page = entree.data as PageSaisie<'socle'>;
@@ -42,7 +44,7 @@ export async function getStaticPaths() {
     return [
       {
         params: { adresse: ligne.adresse.replace(/^\/+|\/+$/g, '') },
-        props: { titre: page.title, description: page.description, html: pageSocle(page, entree.rendered?.html ?? '') },
+        props: { titre: page.title, description: page.description, html: pageSocle(page, entree.rendered?.html ?? '', page.id === PAGE_METHODE ? sectionMethodeHtml(sectionMethode([...contexte.sources.values()])) : undefined) },
       },
     ];
   });

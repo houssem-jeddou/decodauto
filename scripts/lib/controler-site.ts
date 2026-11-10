@@ -18,8 +18,8 @@ export interface BilanControle {
 }
 
 /**
- * Fiche auteur supposée pour la construction de recette des exemples (livrable 6.6) : la page « à propos », qui porte la
- * fiche, est écrite à l'étape 7. Jamais utilisée par la construction de production.
+ * Identifiant de la fiche auteur pour les tests qui construisent une page sans la page « à propos » (tests/modeles.test.ts).
+ * La construction de recette lit la fiche de la page « à propos » (livrable 7.3) ; jamais utilisée par la production.
  */
 export const AUTEUR_DES_EXEMPLES = AUTEUR_SUPPOSE;
 
@@ -29,11 +29,11 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   const informations: string[] = [];
 
   // 1. Fichiers de données et base voyants. Construction de recette (--exemples) : les exemples rédigés s'ajoutent aux
-  //    pages, avec la fiche auteur supposée.
+  //    pages (dont la page « à propos » et sa fiche auteur, livrable 7.3).
   const donnees = await chargerDonnees(racine);
   const pagesLues = await chargerPages(racine, exemples ? [DOSSIER_CONTENU, DOSSIER_EXEMPLES] : [DOSSIER_CONTENU]);
-  const auteurs = [...auteursDuSocle(pagesLues), ...(exemples ? [AUTEUR_DES_EXEMPLES] : [])];
-  if (exemples) informations.push(`construction de recette des exemples (${DOSSIER_EXEMPLES}/) : fiche auteur « ${AUTEUR_DES_EXEMPLES} » supposée, la page « à propos » est écrite à l'étape 7 ; jamais déployée`);
+  const auteurs = auteursDuSocle(pagesLues);
+  if (exemples) informations.push(`construction de recette des exemples (${DOSSIER_EXEMPLES}/) : jamais déployée`);
   const { contexte: contexteDonnees, constats: constatsDonnees } = construireContexte({ ...donnees, auteurs }, aujourdhui);
   // Pages écrites et leur libellé court : l'outil voyants ne mène qu'à une page construite (livrable 8.1).
   const contexte = {

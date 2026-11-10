@@ -1,6 +1,6 @@
 // Erreurs attendues de la construction de recette des exemples (livrable 6.6) : une page exemple attend la validation
-// de son encadré par Houssem (R4-VALIDATION-ABSENTE) ; le lien « Méthode » mène à la page « à propos », écrite à
-// l'étape 7. Sans cette liste, le job de recette resterait rouge et ne signalerait plus une erreur nouvelle.
+// de son encadré par Houssem (R4-VALIDATION-ABSENTE) ; le lien « Méthode » menait à la page « à propos » avant le
+// livrable 7.3 (plus d'attendu aujourd'hui). Sans cette liste, le job de recette resterait rouge et ne signalerait plus une erreur nouvelle.
 // Garde-fous :
 //  - seulement avec --exemples (construction de recette, jamais déployée) : la construction de production ne l'accepte
 //    pas ;

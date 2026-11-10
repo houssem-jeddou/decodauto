@@ -144,13 +144,11 @@ describe('gestes du passage', () => {
     assert.match(suivant, /"numberOfRuns": 3/);
   });
 
-  test("les rappels : « à propos » retire tous les attendus LIEN-CASSE ; une autre page vérifie seulement qu'aucun attendu ne la vise", () => {
+  test("les rappels demandent de vérifier qu'aucun --attendu de la CI ne vise la page, et désignent le fichier déplacé", () => {
     const base = { source: 'x', adresse: '/x/', urlLighthouse: 'http://localhost/x/index.html', sansEmpreinte: false };
-    const aPropos = rappelsDePassage({ ...base, id: 'a-propos', cible: 'src/content/socle/a-propos.md' }).join('\n');
-    assert.match(aPropos, /retirer toutes les lignes --attendu/);
-    const autre = rappelsDePassage({ ...base, id: 'loi-montagne', cible: 'src/content/pneus/loi-montagne.md' }).join('\n');
-    assert.match(autre, /aucune ligne --attendu ne vise encore/);
-    assert.match(autre, /src\/content\/pneus\/loi-montagne\.md/);
+    const rappels = rappelsDePassage({ ...base, id: 'loi-montagne', cible: 'src/content/pneus/loi-montagne.md' }).join('\n');
+    assert.match(rappels, /aucune ligne --attendu ne vise encore/);
+    assert.match(rappels, /src\/content\/pneus\/loi-montagne\.md/);
   });
 });
 

@@ -66,8 +66,8 @@ export interface FichierPage {
 }
 
 /**
- * Fiche auteur supposée tant que la page « à propos », qui porte les fiches auteur, n'est pas écrite (étape 7) : page de
- * démonstration et construction de recette des exemples seulement, jamais la construction de production.
+ * Fiche auteur de la page de démonstration (npm run demo) : identifiant de la fiche de la page « à propos » (livrable 7.3).
+ * Jamais utilisée par la construction de production.
  */
 export const AUTEUR_SUPPOSE = 'houssem-jeddou';
 

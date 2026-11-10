@@ -4,7 +4,7 @@ import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, URL_SITE, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { listerFichiers } from './charger.ts';
-import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, PAGE_CONFIDENTIALITE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
+import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, ANCRE_METHODE, PAGE_CONFIDENTIALITE, PAGE_METHODE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
 import { normaliserRecherche } from '../../src/lib/texte.ts';
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
@@ -593,7 +593,32 @@ export function constatsLienConfidentialite(html: string, fichier: string, adres
   return [];
 }
 
-export async function controlerComposantsCommuns(dist: string, adressePolitique = `/${PAGE_CONFIDENTIALITE}/`): Promise<Constat[]> {
+/**
+ * Page « à propos » construite (livrable 7.3) : une seule section « Méthode » (`data-methode`, ancre `#methode`), vers laquelle
+ * renvoie la ligne de transparence de chaque page éditoriale, et au moins une fiche auteur (`data-auteur`) avec son nom et
+ * son parcours : « auteur identifié, nom réel et parcours » (docs/03 règle 11). Le texte de la section est celui de la charte
+ * (empreinte validée, tests/porte6.test.ts) ; ce contrôle vérifie qu'elle est bien dans la page.
+ */
+export function constatsPageAPropos(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const sections = $(`section[data-methode]#${ANCRE_METHODE}`);
+  if (sections.length !== 1 || $(`#${ANCRE_METHODE}`).length !== 1) {
+    constats.push(erreur('METHODE-SECTION', `la page « à propos » porte une seule section « Méthode » (data-methode, #${ANCRE_METHODE}) : les liens « Méthode » de toutes les pages y mènent`, fichier));
+  }
+  const fiches = $('[data-auteur]').toArray();
+  if (fiches.length === 0) {
+    constats.push(erreur('AUTEUR-FICHE', 'la page « à propos » affiche la fiche de l\'auteur (data-auteur) : nom réel et parcours', fichier));
+  }
+  for (const fiche of fiches) {
+    const nom = normaliserTexte($(fiche).find('h2').first().text());
+    const parcours = normaliserTexte($(fiche).find('p').first().text());
+    if (nom === '' || parcours === '') constats.push(erreur('AUTEUR-FICHE', 'chaque fiche auteur a un nom (h2) et un parcours (p), non vides', fichier));
+  }
+  return constats;
+}
+
+export async function controlerComposantsCommuns(dist: string, adressePolitique = `/${PAGE_CONFIDENTIALITE}/`, adresseAPropos = `/${PAGE_METHODE}/`): Promise<Constat[]> {
   const constats: Constat[] = [];
   const enTetes: EnTetesDePage[] = [];
   // Page qui porte la politique de confidentialité : construite ou non, le lien de pied de page suit.
@@ -602,6 +627,9 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
     constats.push(erreur('CONFIDENTIALITE-ANCRE', `la page ${adressePolitique} porte une seule section #${ANCRE_CONFIDENTIALITE}`, `${adressePolitique.replace(/^\//, '')}index.html`));
   }
   const adresseAttendue = politiqueConstruite !== undefined ? adressePolitique : undefined;
+  // Page « à propos » : construite ou non, ses fiches et sa section « Méthode » sont contrôlées dès qu'elle l'est.
+  const aProposConstruite = await readFile(join(dist, adresseAPropos, 'index.html'), 'utf8').catch(() => undefined);
+  if (aProposConstruite !== undefined) constats.push(...constatsPageAPropos(aProposConstruite, `${adresseAPropos.replace(/^\//, '')}index.html`));
   // Les feuilles de style du site : une police ou une image d'un autre site y passerait inaperçue.
   for (const chemin of await listerFichiers(dist, '.css')) {
     const fichier = relative(dist, chemin).split('\\').join('/');

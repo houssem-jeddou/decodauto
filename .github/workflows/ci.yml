@@ -67,7 +67,7 @@ jobs:
     # (ATTENDU-ABSENT) :
     #  - R4-VALIDATION-ABSENTE d'un exemple tant que Houssem n'a pas validé son encadré : l'empreinte n'est versée
     #    qu'après sa validation, jamais pour faire passer le contrôle, et l'attendu est retiré dans le même commit ;
-    #  - lien « Méthode » vers /a-propos/#methode : la page « à propos » est écrite à l'étape 7.
+    # Aucun attendu aujourd'hui : la page « à propos » (livrable 7.3) existe dans exemples/, les liens « Méthode » mènent à elle.
     if: ${{ github.event_name != 'schedule' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -87,12 +87,7 @@ jobs:
         run: node scripts/controle.ts --dist dist-exemples --exemples
       - name: Liens cassés
         if: ${{ !cancelled() }}
-        run: >-
-          node scripts/liens.ts --dist dist-exemples --exemples
-          --attendu 'LIEN-CASSE@voyants/index.html@/a-propos/#methode'
-          --attendu 'LIEN-CASSE@voyants/moteur/index.html@/a-propos/#methode'
-          --attendu 'LIEN-CASSE@codes-defaut/p0087/index.html@/a-propos/#methode'
-          --attendu 'LIEN-CASSE@loi-montagne/index.html@/a-propos/#methode'
+        run: node scripts/liens.ts --dist dist-exemples --exemples
       - name: Texte rédigé des exemples, tel que rendu (lecture dans ce journal)
         if: ${{ !cancelled() }}
         run: node scripts/texte-exemples.ts dist-exemples
