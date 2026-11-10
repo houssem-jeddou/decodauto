@@ -131,6 +131,36 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
+  origine-main:
+    name: Origine des commits de main (garde-fou de déploiement)
+    # Livrable 7.6, demande de changement n° 15 : refuse de déployer si un commit de main, depuis le dernier déploiement,
+    # ne vient pas d'une pull request fusionnée dans main (scripts/verifier-origine-main.ts). Couvre l'accident, pas un
+    # compte compromis : qui pousse sur main peut retirer ce contrôle dans le même envoi (le workflow exécuté est celui du
+    # commit poussé). Un commit direct, relu par Houssem, s'accepte dans config/commits-directs-acceptes.json.
+    # Le déploiement en dépend : un échec de lecture bloque, dans le doute on ne déploie pas.
+    # Il attend les contrôles : l'association d'un commit à sa pull request peut mettre quelques secondes à apparaître après
+    # la fusion, et un déploiement refusé par les contrôles n'a pas besoin d'être vérifié.
+    needs: controles
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      # Aucune dépendance : le script n'utilise que Node, Git et l'API GitHub.
+      - name: Vérifier l'origine des commits
+        run: node scripts/verifier-origine-main.ts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
   secrets-cloudflare:
     name: Secrets Cloudflare présents ?
     needs: [controles, lighthouse]
@@ -154,8 +184,9 @@ jobs:
 
   deploiement:
     name: Déploiement Cloudflare (wrangler deploy)
-    # Uniquement si tous les contrôles sont verts ET si les deux secrets existent.
-    needs: [controles, lighthouse, secrets-cloudflare]
+    # Uniquement si tous les contrôles sont verts, si l'origine des commits de main est vérifiée (garde-fou, livrable 7.6)
+    # ET si les deux secrets existent.
+    needs: [controles, lighthouse, secrets-cloudflare, origine-main]
     if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.secrets-cloudflare.outputs.disponibles == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
