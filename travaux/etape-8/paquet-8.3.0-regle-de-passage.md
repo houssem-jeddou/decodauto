@@ -20,7 +20,7 @@ PR #26 (brouillon, vers `integration/vague-a`). Ce que Houssem valide : **la rè
 
 - CI du commit `dbb957c` (avant corrections de revue) : Contrôles, Recette des exemples, Lighthouse, Production : tous verts (https://github.com/houssem-jeddou/decodauto/actions/runs/42795292149).
 - En local : `node --test tests/passage.test.ts` 17/17 ; `tests/briefs.test.ts` 18/18 ; `node scripts/briefs.ts` : « Briefs déjà à jour (23 fichiers) ».
-- Les tests `porte6`, `modeles`, `outil-voyants`, `socle` ne tournent qu'en CI (astro, cheerio, yaml absents ici). Résultat de la CI après les corrections de revue : voir la PR.
+- Les tests `porte6`, `modeles`, `outil-voyants`, `socle` ne tournent qu'en CI (astro, cheerio, yaml absents ici). CI du commit `4a3e0b5` (après corrections de revue) : Contrôles (schémas, tests, build, liens), Recette des exemples, Lighthouse, Production : tous verts. Un premier essai (`ac01165`) avait échoué sur une faute de guillemets dans un titre de test que j'avais introduite ; corrigée, rien d'autre n'a changé.
 
 ## 4. Revue indépendante
 
