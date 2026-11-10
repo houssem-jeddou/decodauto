@@ -701,7 +701,7 @@ h3 {
    Affiché seulement dans la construction de recette (factice) ; en production, rien avant AdSense. */
 .emplacement-pub {
   box-sizing: border-box;
-  min-height: 280px;
+  min-height: 340px;
   margin: 1.5rem 0;
   padding: 0.5rem;
   display: flex;

@@ -30,6 +30,8 @@ describe('PUB-PRODUCTION et PUB-EMPLACEMENT', () => {
     const dedans = doc(`<h1>T</h1><div data-encadre-decision><p>D</p>${PUB}</div><p data-signature>Mis à jour le 10/11/2026</p><section data-sources></section>`);
     assert.deepEqual(codes(constatsEmplacementsPub(dedans, 'x', true)), ['PUB-EMPLACEMENT']);
     assert.deepEqual(codes(constatsEmplacementsPub(editoriale('', PUB), 'x', true)), ['PUB-EMPLACEMENT']);
+    const apresLiees = doc(`<h1>T</h1><div data-encadre-decision><p>D</p></div><p data-signature>Mis à jour le 10/11/2026</p><nav data-pages-liees><a href="/a/">A</a></nav>${PUB}<section data-sources></section>`);
+    assert.deepEqual(codes(constatsEmplacementsPub(apresLiees, 'x', true)), ['PUB-EMPLACEMENT']);
   });
 
   test('recette : étiquette « Publicité » et classe de hauteur réservée obligatoires', () => {
@@ -46,12 +48,13 @@ describe('PUB-PRODUCTION et PUB-EMPLACEMENT', () => {
 });
 
 describe('PUB-HAUTEUR-RESERVEE', () => {
-  test('la règle .emplacement-pub réserve au moins 280px, minifiée ou non', () => {
-    assert.deepEqual(constatsHauteurReservee('.emplacement-pub{box-sizing:border-box;min-height:280px;margin:1.5rem 0}', 'x'), []);
+  test('la règle .emplacement-pub réserve au moins 340px, minifiée ou non', () => {
+    assert.deepEqual(constatsHauteurReservee('.emplacement-pub{box-sizing:border-box;min-height:340px;margin:1.5rem 0}', 'x'), []);
     assert.deepEqual(constatsHauteurReservee('.emplacement-pub {\n  min-height: 300px;\n}', 'x'), []);
-    assert.deepEqual(codes(constatsHauteurReservee('.emplacement-pub{min-height:100px}', 'x')), ['PUB-HAUTEUR-RESERVEE']);
+    assert.deepEqual(codes(constatsHauteurReservee('.emplacement-pub{min-height:280px}', 'x')), ['PUB-HAUTEUR-RESERVEE']);
     assert.deepEqual(codes(constatsHauteurReservee('.emplacement-pub{margin:0}', 'x')), ['PUB-HAUTEUR-RESERVEE']);
     assert.deepEqual(codes(constatsHauteurReservee('.emplacement-pub-etiquette{min-height:400px}', 'x')), ['PUB-HAUTEUR-RESERVEE']);
+    assert.deepEqual(codes(constatsHauteurReservee('', 'x')), ['PUB-HAUTEUR-RESERVEE'], 'aucune source de style : le contrôle échoue au lieu de se taire');
   });
 });
 

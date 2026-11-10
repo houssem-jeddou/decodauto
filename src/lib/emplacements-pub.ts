@@ -17,9 +17,14 @@ import { attributHtml } from './html.ts';
 export const EMPLACEMENTS_PUB = ['fin-de-contenu'] as const;
 export type EmplacementPub = (typeof EMPLACEMENTS_PUB)[number];
 
-/** Classe du bloc, et hauteur minimale réservée (px) : un rectangle moyen de 300 × 250 et son étiquette. */
+/**
+ * Classe du bloc, et hauteur minimale réservée (px) : celle du plus grand format courant (grand rectangle 336 × 280) plus
+ * l'étiquette (environ 22 px), les marges de ses paragraphes (environ 18 px), le remplissage et la bordure (18 px) du bloc,
+ * soit environ 338 px ; un rectangle moyen de 300 × 250 y tient avec de la marge. Réserver la hauteur ne supprime pas le
+ * décalage d'un format plus haut (web.dev, « Optimize CLS ») : la mesure avec des annonces réelles se fait à l'étape 12.
+ */
 export const CLASSE_EMPLACEMENT_PUB = 'emplacement-pub';
-export const HAUTEUR_RESERVEE_PX = 280;
+export const HAUTEUR_RESERVEE_PX = 340;
 
 /** Étiquette affichée au-dessus d'une publicité (le lecteur sait ce qui est de la publicité). */
 export const ETIQUETTE_PUB = 'Publicité';

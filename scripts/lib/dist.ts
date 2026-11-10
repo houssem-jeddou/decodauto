@@ -432,7 +432,7 @@ export function compterMots(texte: string): number {
  * lien de signalement, section « Sources », renvois de page du tableau des notices (« p. 15, « … » ») et de l'outil voyants :
  * ce sont des références, pas du texte cité ni du texte du site.
  */
-export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references'] as const;
+export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-emplacement-pub]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references'] as const;
 
 export interface PartCitee {
   /** Mots du texte affiché dans le contenu principal (main), hors HORS_PART_CITEE. */
@@ -841,6 +841,8 @@ export function constatsEmplacementsPub(html: string, fichier: string, recette: 
     if (debutEncadre < 0 || position <= Math.max(debutEncadre, finEncadre)) constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire vient après l'encadré de décision, jamais avant ni dedans", fichier));
     const sources = rang('[data-sources]');
     if (sources >= 0 && position > sources) constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire (fin de contenu) précède la section « Sources »", fichier));
+    const liees = Math.min(...['[data-pages-liees]', '[data-pages-enfants]'].map(rang).filter((r) => r >= 0));
+    if (Number.isFinite(liees) && position > liees) constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire (fin de contenu) précède les pages liées", fichier));
     if (!emplacement.hasClass(CLASSE_EMPLACEMENT_PUB)) constats.push(erreur('PUB-EMPLACEMENT', `l'emplacement publicitaire porte la classe ${CLASSE_EMPLACEMENT_PUB} (hauteur réservée dans la feuille de style)`, fichier));
     if (brut(emplacement.attr('aria-label') ?? '') !== 'Publicité') constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire est étiqueté « Publicité » (aria-label)", fichier));
   }
@@ -951,8 +953,8 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
   const donneesAttendues: DonneesStructureesAttendues = { adresseAPropos, auteurs: aProposConstruite !== undefined ? auteursAffiches(aProposConstruite) : new Map() };
   // Les feuilles de style du site : une police ou une image d'un autre site y passerait inaperçue.
   // Hauteur réservée à l'emplacement publicitaire (livrable 7.5b) : au moins une feuille de style du site la porte.
+  // Feuilles .css et balises <style> des pages (Astro peut y placer la feuille) : sans aucune source de style, le contrôle échoue.
   const feuilles = await Promise.all((await listerFichiers(dist, '.css')).map((chemin) => readFile(chemin, 'utf8')));
-  if (feuilles.length > 0) constats.push(...constatsHauteurReservee(feuilles.join('\n'), 'feuille de style'));
   for (const chemin of await listerFichiers(dist, '.css')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
     for (const url of adressesDuCss(await readFile(chemin, 'utf8'))) {
@@ -979,7 +981,10 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
     const lus = enTetesDePage(html, fichier);
     constats.push(...constatsEnTetesPresents(lus));
     enTetes.push(lus);
+    const $page = cheerio.load(html);
+    feuilles.push(...$page('style').toArray().map((s) => $page(s).text()));
   }
+  if (enTetes.length > 0) constats.push(...constatsHauteurReservee(feuilles.join('\n'), 'feuille de style ou balises <style>'));
   constats.push(...constatsDoublons(enTetes));
   return constats;
 }
