@@ -3,10 +3,10 @@
 // changement n° 11) ; chaque type de la vague A a un exemple rédigé, du bon type d'après le plan, dont l'encadré porte
 // l'empreinte validée par Houssem (recalculée par la commande officielle, npm run empreinte) ; textes de la charte
 // validés ; l'exemple de la page outil, validé avec le livrable 8.1, est contrôlé comme les autres. Les briefs (6.8) sont
-// contrôlés par tests/briefs.test.ts. Sans dépendance : ce fichier tourne sans installation.
+// contrôlés par tests/briefs.test.ts. Une page rédigée est dans exemples/ ou, après le passage (livrable 8.3.0), dans src/content. Sans dépendance : ce fichier tourne sans installation.
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { readdir, readFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { execPath } from 'node:process';
 import { describe, test } from 'node:test';
@@ -15,6 +15,7 @@ import { modeleDeLaPage } from '../src/lib/modeles.ts';
 import { ID_OUTIL_VOYANTS } from '../src/lib/plan.ts';
 import type { PageEditoriale } from '../src/schemas/pages.ts';
 import type { TypePage } from '../src/schemas/listes.ts';
+import { pagesDuType } from '../scripts/lib/pages-redigees.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const plan = JSON.parse(await readFile(join(racine, 'data/plan-du-site.json'), 'utf8')) as { id: string; type: TypePage | 'socle'; vague: string }[];
@@ -36,10 +37,10 @@ describe("porte de sortie de l'étape 6", () => {
   test("chaque type de la vague A a un exemple rédigé, du bon type, dont l'encadré n'a pas changé depuis l'empreinte versée après la validation de Houssem", async () => {
     const parId = new Map(plan.map((p) => [p.id, p]));
     for (const type of typesVagueA) {
-      const fichiers = (await readdir(join(racine, 'exemples', type))).filter((f) => f.endsWith('.md'));
+      // Une page rédigée est dans exemples/ ou, après le passage (livrable 8.3.0), dans src/content : même contrôle des deux côtés.
+      const fichiers = await pagesDuType(racine, type);
       let controles = 0;
-      for (const f of fichiers) {
-        const chemin = `exemples/${type}/${f}`;
+      for (const chemin of fichiers) {
         const texte = await readFile(join(racine, chemin), 'utf8');
         controles += 1;
         const id = /^id: *(\S+)\s*$/m.exec(texte)?.[1];
@@ -47,6 +48,7 @@ describe("porte de sortie de l'étape 6", () => {
         assert.ok(page !== undefined, `${chemin} : identifiant absent du plan`);
         assert.equal(page.type, type, `${chemin} : la page ${id} est de type ${page.type} dans le plan`);
         assert.equal(page.vague, 'A', `${chemin} : la page ${id} n'est pas de la vague A`);
+        assert.equal(chemin, `${chemin.startsWith('exemples/') ? 'exemples' : 'src/content'}/${type}/${id}.md`, `${chemin} : le nom du fichier doit être l'identifiant de la page`);
         const validation = /^validation: *([0-9a-f]{64})\s*$/m.exec(texte)?.[1];
         assert.ok(validation !== undefined, `${chemin} : encadré sans empreinte de validation`);
         assert.equal(empreinte(chemin), validation, `${chemin} : l'encadré a changé depuis la validation de Houssem`);

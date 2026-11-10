@@ -27,12 +27,14 @@ import { PART_CITEE_MAX } from '../src/lib/charte.ts';
 import { INSECABLE } from '../src/lib/html.ts';
 import { schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
 import { TYPES_PAGE } from '../src/schemas/listes.ts';
+import { pageRedigee } from '../scripts/lib/pages-redigees.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const fixtures = join(racine, 'tests', 'fixtures');
-const EXEMPLE = 'exemples/voyant/voyant-moteur.md';
-const EXEMPLE_CODE = 'exemples/code-defaut/code-p0087.md';
-const EXEMPLE_PNEUS = 'exemples/pneus/loi-montagne.md';
+// Pages rédigées : dans exemples/ tant qu'elles ne sont pas en ligne, dans src/content après le passage (livrable 8.3.0).
+const EXEMPLE = await pageRedigee(racine, 'voyant', 'voyant-moteur');
+const EXEMPLE_CODE = await pageRedigee(racine, 'code-defaut', 'code-p0087');
+const EXEMPLE_PNEUS = await pageRedigee(racine, 'pneus', 'loi-montagne');
 // Données réelles et exemples : la date du contrôle est la plus récente de leurs dates (tests/date-des-donnees.ts).
 const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', 'tests/demo/voyant-huile.md', EXEMPLE, EXEMPLE_CODE, EXEMPLE_PNEUS]);
 const erreurs = (constats: readonly Constat[]): string[] => constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle).sort();

@@ -5,6 +5,7 @@ import { access, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { FICHIER_05, lireCsv } from '../../src/lib/porte-plan.ts';
 import { genererBrief, genererSommaire, questionDeLExemple, voyantsDeLExemple, type Consignes, type EntreeBrief, type Formulation, type PageDuPlan, type Releve, type VoyantDeLaBase } from './briefs.ts';
+import { localiserPage } from './pages-redigees.ts';
 
 export const DOSSIER_BRIEFS = 'travaux/etape-6/briefs';
 export const DOSSIER_RELEVE = 'travaux/etape-6/releve-google-france';
@@ -54,7 +55,7 @@ export async function briefsAttendus(racine: string): Promise<{ fichiers: Map<st
     const cheminReleve = join(racine, DOSSIER_RELEVE, `${page.id}.json`);
     const releve = (await existe(cheminReleve)) ? (JSON.parse(await readFile(cheminReleve, 'utf8')) as Releve) : undefined;
     if (releve !== undefined) releves.add(page.id);
-    const exemple = `exemples/${page.type}/${page.id}.md`;
+    const exemple = (await localiserPage(racine, page.type, page.id)) ?? `exemples/${page.type}/${page.id}.md`;
     const entree: EntreeBrief = {
       page,
       plan: parId,

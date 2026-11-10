@@ -23,9 +23,10 @@ import { empreintePage, type EncadreValide } from '../src/lib/empreinte.ts';
 import { TEXTES_OUTIL } from '../src/lib/outil-textes.ts';
 import { execFileSync } from 'node:child_process';
 import { execPath } from 'node:process';
+import { pageRedigee } from '../scripts/lib/pages-redigees.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-const EXEMPLE = 'exemples/voyant/voyants.md';
+const EXEMPLE = await pageRedigee(racine, 'voyant', 'voyants');
 const contenu = await readFile(join(racine, EXEMPLE), 'utf8');
 const brut = lireFrontmatter(contenu) as Record<string, unknown>;
 const page = schemasPage.voyant.parse(brut) as PageEditoriale;

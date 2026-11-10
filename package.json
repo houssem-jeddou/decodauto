@@ -23,7 +23,8 @@
     "verifier:modes": "node scripts/verifier-modes.ts",
     "production": "node scripts/verifier-production.ts",
     "paquet": "node scripts/paquet-validation.ts --pictogrammes-obligatoires",
-    "briefs": "node scripts/briefs.ts"
+    "briefs": "node scripts/briefs.ts",
+    "passage": "node scripts/passage.ts"
   },
   "dependencies": {
     "astro": "7.4.2"
