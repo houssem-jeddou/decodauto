@@ -50,3 +50,7 @@ Le profil LinkedIn n'est **pas affiché comme lien** : la règle R7-LIEN-EXTERNE
 
 - Le balisage n'a pas été passé dans le Rich Results Test de Google (aucun accès depuis l'environnement) : à faire sur une page en ligne après la mise en ligne (liste de recette de l'étape 9).
 - Les contrôles vérifient la cohérence page ↔ balisage ; ils ne vérifient pas que Google affichera un résultat enrichi (Article n'en promet aucun).
+
+## 8. Validation
+
+Validé par Houssem le 10/11/2026 à 13:53 (« Je valide »), y compris le rattachement du profil LinkedIn à la fiche auteur.
