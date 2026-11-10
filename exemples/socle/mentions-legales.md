@@ -1,20 +1,21 @@
 ---
-# Page exemple du socle (étape 7, livrable 7.2) : politique de confidentialité, section de la page des mentions légales
-# (03, étape 7). Jamais publiée avant son lot : hors de src/content, construite seulement par la construction de recette
-# (AVEC_EXEMPLES=1, dist-exemples). Les mentions légales s'ajouteront au-dessus, une fois le statut juridique tranché.
+# Page exemple du socle (étape 7, livrables 7.2 et 7.4b) : mentions légales et politique de confidentialité (03, étape 7).
+# Jamais publiée avant son lot : hors de src/content, construite seulement par la construction de recette (AVEC_EXEMPLES=1,
+# dist-exemples). Le bloc « Mentions légales » (éditeur, directeur de la publication, hébergeur, droit de réponse) est généré
+# par le modèle depuis src/lib/editeur.ts et passe avant ce texte : il ne s'écrit pas ici.
 # Le texte décrit la mesure d'audience sans traceur (décision 1 du paquet 7.2) : TIERS-RESSOURCE et PROD-TRACEUR le tiennent vrai.
 id: mentions-legales
 title: "Mentions légales et confidentialité"
 description: "Qui édite decodauto.com et ce que le site fait de vos données : aucun compte, aucune publicité, aucun cookie du site, et vos droits."
 libelle_court: Mentions légales et confidentialité
-date_modification: 2026-11-09
-date_revue: 2026-11-09
-prochaine_revue: 2027-11-09
+date_modification: 2026-11-10
+date_revue: 2026-11-10
+prochaine_revue: 2027-11-10
 ---
 
 ## Confidentialité
 
-**En bref.** decodauto.com ne vous demande aucun compte et n'affiche aucune publicité. Le site ne dépose lui-même aucun cookie et ne contient aucun script de mesure d'audience. Vos données ne sont traitées que dans deux cas : quand votre navigateur demande une page, et quand vous écrivez par courriel.
+**En bref.** decodauto.com ne vous demande aucun compte et n'affiche aucune publicité. Le site ne dépose lui-même aucun cookie et ne contient aucun script de mesure d'audience. Vos données ne sont traitées que dans deux cas : quand votre navigateur demande une page, et quand vous contactez l'éditeur, par courriel ou par téléphone.
 
 ### Qui est responsable
 
@@ -36,11 +37,11 @@ Rien n'est placé sur votre appareil pour cela : ni cookie, ni script, ni identi
 
 Le site n'en dépose aucun. Cloudflare peut en déposer un dans un cas connu : s'il vous présente une vérification de sécurité, il en garde ainsi le résultat. Ce cookie ne sert ni à la publicité ni à la mesure d'audience.
 
-### Quand vous écrivez par courriel
+### Quand vous contactez l'éditeur
 
-Rien ne vous oblige à écrire : le site se lit sans cela. Ne mettez dans votre message que ce qui est utile.
+Rien ne vous oblige à écrire ni à téléphoner : le site se lit sans cela. Ne mettez dans votre message que ce qui est utile. Le numéro de téléphone des mentions légales est publié parce que la loi l'exige ; si vous l'appelez ou lui écrivez, l'éditeur n'utilise votre numéro et votre message que pour vous répondre, et les traite comme un courriel (durée comprise) ; votre opérateur reçoit les données de l'appel.
 
-- **Données** : votre adresse, votre nom si vous le donnez, le contenu de votre message.
+- **Données** : votre adresse ou votre numéro, votre nom si vous le donnez, le contenu de votre message.
 - **Pourquoi** : corriger une page et vous répondre.
 - **Base légale** : l'intérêt légitime de l'éditeur à corriger son site et à répondre aux lecteurs.
 - **Qui les reçoit** : OVHcloud, qui redirige le courriel, et Google, qui héberge la boîte de réception de Houssem Jeddou. Personne d'autre.

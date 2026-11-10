@@ -673,3 +673,26 @@ h3 {
   margin-top: 1.5rem;
   font-size: 0.95rem;
 }
+
+/* Mentions légales (livrable 7.4b) : liste de définitions de l'éditeur et de l'hébergeur. */
+.mentions-legales dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0.5rem 0 1rem;
+}
+.mentions-legales dt {
+  font-weight: 600;
+}
+.mentions-legales dd {
+  margin: 0;
+}
+@media (max-width: 30rem) {
+  .mentions-legales dl {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .mentions-legales dd {
+    margin-bottom: 0.5rem;
+  }
+}
