@@ -28,7 +28,7 @@ Trois sections, sans lien et sans « nous » : « Ce que le site fait » (la dé
 
 ## 5. Preuves
 
-- CI de la PR #27 : voir le résultat ci-dessous.
+- CI du commit `36f0385` (après corrections de revue) : Contrôles (schémas, tests, build, liens), Recette des exemples (liens « Méthode » sans erreur attendue), Lighthouse mobile (dont `/a-propos/`), Production : tous verts. Un premier essai (`4f949b0`) avait échoué sur le brief de « à propos » non régénéré, relevé aussi par la revue ; corrigé.
 - Avant la mise en ligne : la réception de `erreur@decodauto.com` reste à confirmer par un courriel de test (journal, consigne de la charte §5.3) : la page promet que le lien ouvre un courriel.
 
 ## 6. Revue indépendante
