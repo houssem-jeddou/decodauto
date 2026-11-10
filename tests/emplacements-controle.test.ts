@@ -50,7 +50,7 @@ describe('PUB-PRODUCTION et PUB-EMPLACEMENT', () => {
 describe('PUB-HAUTEUR-RESERVEE', () => {
   test('la règle .emplacement-pub réserve au moins 340px, minifiée ou non', () => {
     assert.deepEqual(constatsHauteurReservee('.emplacement-pub{box-sizing:border-box;min-height:340px;margin:1.5rem 0}', 'x'), []);
-    assert.deepEqual(constatsHauteurReservee('.emplacement-pub {\n  min-height: 300px;\n}', 'x'), []);
+    assert.deepEqual(constatsHauteurReservee('.emplacement-pub {\n  min-height: 360px;\n}', 'x'), []);
     assert.deepEqual(codes(constatsHauteurReservee('.emplacement-pub{min-height:280px}', 'x')), ['PUB-HAUTEUR-RESERVEE']);
     assert.deepEqual(codes(constatsHauteurReservee('.emplacement-pub{margin:0}', 'x')), ['PUB-HAUTEUR-RESERVEE']);
     assert.deepEqual(codes(constatsHauteurReservee('.emplacement-pub-etiquette{min-height:400px}', 'x')), ['PUB-HAUTEUR-RESERVEE']);
