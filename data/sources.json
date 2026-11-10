@@ -218,11 +218,19 @@
     "date_consultation": "2026-11-10"
   },
   {
-    "id": "loi-montagne-iii-texte-adopte-an-336",
-    "titre": "Assemblée nationale — Texte adopté n° 336, proposition de loi pour une montagne vivante et souveraine (20/07/2026)",
+    "id": "loi-2026-797-montagne-vivante-souveraine",
+    "titre": "Loi n° 2026-797 du 18 août 2026 pour une montagne vivante et souveraine (JO n° 192 du 19 août 2026), texte reproduit par la base AIDA de l'Ineris",
+    "editeur": "Ineris (base AIDA), texte du Journal officiel",
+    "categorie": "secondaire",
+    "url": "https://aida.ineris.fr/reglementation/loi-ndeg-2026-797-180826-montagne-vivante-souveraine-1",
+    "date_consultation": "2026-11-10"
+  },
+  {
+    "id": "reponse-ministerielle-an-2023-03-21",
+    "titre": "Réponse du ministre de l'Intérieur à la question écrite n° 3489 sur les équipements hivernaux et le panneau B26 (JO Assemblée nationale du 21/03/2023, p. 2703)",
     "editeur": "Assemblée nationale",
     "categorie": "secondaire",
-    "url": "https://www.assemblee-nationale.fr/dyn/opendata/PIONANR5L17BTA0336.html",
+    "url": "https://www.assemblee-nationale.fr/dyn/16/questions/QANR5L16QE3489.pdf",
     "date_consultation": "2026-11-10"
   }
 ]

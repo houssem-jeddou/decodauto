@@ -54,6 +54,12 @@ Références : « pris pour l'application de l'article 27 de la loi n° 2016-188
 
 Modifie l'arrêté du 18 juillet 1985 relatif aux dispositifs antidérapants : ajoute les pneus POR comme dispositifs antidérapants inamovibles ; en vigueur le lendemain de sa publication. Il ne touche ni D314-8 ni le panneau B26 ni la sanction ; hors du sujet de la page (professionnels, pneus à clous).
 
-## Loi Montagne III (non citée comme verdict)
+## Réponse du ministre de l'Intérieur à la question écrite n° 3489 (Assemblée nationale, JO du 21/03/2023, p. 2703) (registre : `reponse-ministerielle-an-2023-03-21`, catégorie secondaire)
 
-Proposition de loi « pour une montagne vivante et souveraine », texte adopté n° 336 de l'Assemblée nationale (20/07/2026) : https://www.assemblee-nationale.fr/dyn/opendata/PIONANR5L17BTA0336.html. Deux lectures du texte (articles 1 à 11 bis A) : aucune occurrence de « pneu », « chaîne », « code de la route » ni « circulation » ; « véhicules » n'apparaît qu'à l'article 5 (bornes de recharge, code de l'énergie). Lecture faite par un modèle sur la page, **à confirmer par Houssem** (recherche de ces mots dans le texte).
+https://www.assemblee-nationale.fr/dyn/16/questions/QANR5L16QE3489.pdf. Lue deux fois via WebFetch (résumé automatique, pas le texte brut) : le non-respect du panneau B26 est puni de l'amende de 2e classe, plafonnée à 150 euros ; pour le défaut d'équipement hivernal, il n'existe « pas de sanctions spécifiques » pour le moment, elles doivent être fixées par un décret soumis à l'avis du Conseil d'État. À confirmer par Houssem sur le PDF.
+
+## Loi Montagne III : loi n° 2026-797 du 18 août 2026 (registre : `loi-2026-797-montagne-vivante-souveraine`, catégorie secondaire)
+
+- Promulguée le 18/08/2026, JO n° 192 du 19/08/2026, après la décision du Conseil constitutionnel n° 2026-912 DC du 14/08/2026 (texte reproduit par la base AIDA de l'Ineris : https://aida.ineris.fr/reglementation/loi-ndeg-2026-797-180826-montagne-vivante-souveraine-1 ; promulgation confirmée par ecologie.gouv.fr, lemondedudroit.fr, le JORF du 19/08 listé sur plusieurs sites). Adoptée définitivement par le Parlement le 21/07/2026.
+- Contenu (texte adopté n° 336 de l'Assemblée, 20/07/2026, identique au texte de CMP) : lu trois fois (deux lectures de Claude, une du relecteur indépendant) : aucune occurrence de « pneu », « chaîne », « code de la route », « circulation » ; « véhicules » seulement dans l'article sur les bornes de recharge (code de l'énergie). La page cite la loi promulguée ; sa numérotation d'articles diffère du texte adopté (par exemple recharge à l'article 6).
+- **À confirmer par Houssem** sur Légifrance (loi n° 2026-797, première main) : Ctrl+F « pneu », « chaîne », « circulation ».
