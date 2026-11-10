@@ -618,6 +618,59 @@ export function constatsPageAPropos(html: string, fichier: string): Constat[] {
   return constats;
 }
 
+export interface AccueilAttendu {
+  /** Pages éditoriales construites, avec leur thème d'après le plan. */
+  pages: readonly { adresse: string; theme: string }[];
+  /** Adresse de l'outil voyants, s'il est construit. */
+  outil?: string | undefined;
+  /** Adresse de la page « à propos », si elle est construite. */
+  aPropos?: string | undefined;
+}
+
+/**
+ * Accueil (livrable 7.4a) : la liste des pages (`data-accueil-pages`) contient exactement les pages éditoriales construites,
+ * chacune une fois, dans la section de son thème ; aucune liste tant qu'aucune page n'est construite ; l'accès à l'outil
+ * voyants et le lien vers « à propos » n'existent que si leur page est construite (jamais un lien vers une page absente :
+ * `npm run liens` voit les liens cassés, pas les oublis ni les doublons).
+ */
+export function constatsAccueil(html: string, fichier: string, attendu: AccueilAttendu): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const liste = $('[data-accueil-pages]');
+  if (attendu.pages.length === 0) {
+    if (liste.length > 0) constats.push(erreur('ACCUEIL-LISTE', 'aucune page n\'est construite : l\'accueil n\'affiche pas de liste de pages', fichier));
+  } else if (liste.length !== 1) {
+    constats.push(erreur('ACCUEIL-LISTE', 'l\'accueil affiche une liste des pages construites (data-accueil-pages)', fichier));
+  } else {
+    const liens = liste.find('a[href]').toArray().map((a) => $(a).attr('href') ?? '');
+    const manquantes = attendu.pages.filter((p) => !liens.includes(p.adresse)).map((p) => p.adresse);
+    const inconnues = liens.filter((l) => !attendu.pages.some((p) => p.adresse === l));
+    const doublons = liens.filter((l, i) => liens.indexOf(l) !== i);
+    if (manquantes.length > 0 || inconnues.length > 0 || doublons.length > 0) {
+      constats.push(erreur('ACCUEIL-LISTE', `la liste de l'accueil porte chaque page construite une fois, et elle seule ; manquent : ${manquantes.join(', ') || 'aucune'} ; en trop : ${[...new Set([...inconnues, ...doublons])].join(', ') || 'aucune'}`, fichier));
+    }
+    for (const p of attendu.pages) {
+      const dansTheme = liste.find(`[data-accueil-theme="${p.theme}"] a[href="${p.adresse}"]`).length;
+      if (liens.includes(p.adresse) && dansTheme !== 1) constats.push(erreur('ACCUEIL-LISTE', `${p.adresse} est rangée sous son thème (${p.theme}) dans la liste de l'accueil`, fichier));
+    }
+  }
+  const outil = $('[data-accueil-outil] a[href]');
+  if (attendu.outil === undefined ? $('[data-accueil-outil]').length > 0 : outil.length !== 1 || outil.attr('href') !== attendu.outil) {
+    constats.push(erreur('ACCUEIL-LIEN', `l'accès à l'outil voyants n'existe que si l'outil est construit, et mène à lui${attendu.outil !== undefined ? ` (${attendu.outil})` : ''}`, fichier));
+  }
+  const aPropos = $('[data-accueil-a-propos] a[href]');
+  if (attendu.aPropos === undefined ? $('[data-accueil-a-propos]').length > 0 : aPropos.length !== 1 || aPropos.attr('href') !== attendu.aPropos) {
+    constats.push(erreur('ACCUEIL-LIEN', `le lien vers « à propos » n'existe que si la page est construite, et mène à elle${attendu.aPropos !== undefined ? ` (${attendu.aPropos})` : ''}`, fichier));
+  }
+  return constats;
+}
+
+/** Contrôle l'accueil construit (dist/index.html) ; sans accueil, les autres contrôles du site le signalent. */
+export async function controlerAccueil(dist: string, attendu: AccueilAttendu): Promise<Constat[]> {
+  const html = await readFile(join(dist, 'index.html'), 'utf8').catch(() => undefined);
+  return html === undefined ? [] : constatsAccueil(html, 'index.html', attendu);
+}
+
 export async function controlerComposantsCommuns(dist: string, adressePolitique = `/${PAGE_CONFIDENTIALITE}/`, adresseAPropos = `/${PAGE_METHODE}/`): Promise<Constat[]> {
   const constats: Constat[] = [];
   const enTetes: EnTetesDePage[] = [];

@@ -1,14 +1,30 @@
 ---
+// Accueil (étape 7, livrable 7.4a ; src/lib/accueil.ts) : le positionnement, l'accès à l'outil voyants et la liste des
+// pages construites par thème, générée depuis le plan du site. Sur main, src/content n'a pas encore de vraie page : la
+// liste est vide tant qu'aucune page n'est publiée.
+import { getCollection } from 'astro:content';
+import { cwd } from 'node:process';
 import Base from '../layouts/Base.astro';
+import { PAGE_METHODE } from '../lib/charte.ts';
+import { DESCRIPTION_ACCUEIL, TITLE_ACCUEIL, accueilHtml, pagesListees } from '../lib/accueil.ts';
+import { donneesDuSite } from '../../scripts/lib/donnees-site.ts';
+import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
+
+const collections = [
+  await getCollection('voyant'),
+  await getCollection('code-defaut'),
+  await getCollection('panne'),
+  await getCollection('fluide'),
+  await getCollection('pneus'),
+  await getCollection('dossier'),
+];
+const libelles = new Map(collections.flat().map((entree) => [(entree.data as PageEditoriale).id, (entree.data as PageEditoriale).libelle_court]));
+const { site } = await donneesDuSite(cwd(), libelles, new Date());
+const aProposEcrite = (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).find((page) => page.id === PAGE_METHODE);
+const aPropos = aProposEcrite !== undefined ? { adresse: site.plan.get(PAGE_METHODE)?.adresse ?? '', libelle: aProposEcrite.libelle_court ?? aProposEcrite.title } : undefined;
+const html = accueilHtml({ pages: pagesListees(site.plan, libelles), aPropos: aPropos !== undefined && aPropos.adresse !== '' ? aPropos : undefined });
 ---
 
-<Base
-  titre="decodauto.com : bientôt en ligne"
-  description="Votre voiture vous alerte, on vous dit quoi faire. Le site arrive bientôt."
->
-  <h1>Votre voiture vous alerte, on vous dit quoi faire.</h1>
-  <p>
-    decodauto.com sera bientôt en ligne&nbsp;: voyants, codes défaut, pannes, fluides, pneus. Pour chaque alerte&nbsp;:
-    pouvez-vous rouler, avec quelle urgence, ce que cela risque de coûter et quoi faire.
-  </p>
+<Base titre={TITLE_ACCUEIL} description={DESCRIPTION_ACCUEIL}>
+  <Fragment set:html={html} />
 </Base>

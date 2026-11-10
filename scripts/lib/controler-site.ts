@@ -1,14 +1,14 @@
 // Ensemble des contrôles d'une construction : données, porte de l'étape 4, pages (frontmatter, texte et page
 // construite), puis site construit. Utilisé par scripts/controle.ts, qui affiche le bilan, et par les tests.
-import { PAGE_CONFIDENTIALITE } from '../../src/lib/charte.ts';
+import { PAGE_CONFIDENTIALITE, PAGE_METHODE } from '../../src/lib/charte.ts';
 import { readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
-import { adressesDansLeTexte, indexerPlan, liensEnAttente, liensExternesDuTexte } from '../../src/lib/plan.ts';
+import { ID_OUTIL_VOYANTS, adressesDansLeTexte, indexerPlan, liensEnAttente, liensExternesDuTexte } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
 import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
-import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
+import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
   constats: Constat[];
@@ -128,6 +128,20 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   constats.push(...(await controlerCanonicalEtPlanDuSite(dist)));
   constats.push(...(await controler404(dist)));
   constats.push(...(await controlerComposantsCommuns(dist, contexte.plan.get(PAGE_CONFIDENTIALITE)?.adresse)));
+  // Accueil (livrable 7.4a) : liste générée depuis le plan, exactement les pages éditoriales construites.
+  const adresseOutil = construitesEditoriales.find((p) => p.id === ID_OUTIL_VOYANTS) !== undefined ? contexte.plan.get(ID_OUTIL_VOYANTS)?.adresse : undefined;
+  const adresseAPropos = contexte.plan.get(PAGE_METHODE)?.adresse;
+  const aProposConstruite = adresseAPropos !== undefined && (await listerFichiers(dist, '.html')).some((c) => adresseDepuisFichier(relative(dist, c).split('\\').join('/')) === adresseAPropos);
+  constats.push(
+    ...(await controlerAccueil(dist, {
+      pages: construitesEditoriales.flatMap((p) => {
+        const ligne = contexte.plan.get(p.id);
+        return ligne === undefined ? [] : [{ adresse: ligne.adresse, theme: ligne.theme }];
+      }),
+      outil: adresseOutil,
+      aPropos: aProposConstruite ? adresseAPropos : undefined,
+    })),
+  );
   constats.push(...(await controlerFixturesNonPubliees(dist)));
   constats.push(...(await controlerWrangler(racine)));
 
