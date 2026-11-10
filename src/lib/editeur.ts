@@ -3,8 +3,9 @@
 // vigueur depuis le 23 mai 2024 (Légifrance, lu le 10/11/2026). Le texte demande, pour une personne physique éditant à titre
 // professionnel : nom, prénoms, domicile et numéro de téléphone (1°), le nom du directeur de la publication (3°), le nom,
 // l'adresse et le numéro de téléphone de l'hébergeur (4°) ; un numéro d'inscription seulement si elle est assujettie aux
-// formalités d'inscription au registre du commerce et des sociétés ou au registre national des entreprises (RCS, RNE) : un
-// auto-entrepreneur tunisien n'en dépend pas, aucun numéro n'est publié (décision de Houssem du 10/11/2026). Le III donne un
+// formalités d'inscription au registre du commerce et des sociétés ou au registre national des entreprises (RCS, RNE).
+// Hypothèse (aucun texte lu ne la fixe, à faire confirmer) : un auto-entrepreneur tunisien non immatriculé en France n'y est
+// pas assujetti ; aucun numéro n'est publié (décision de Houssem du 10/11/2026). Le III donne un
 // droit de réponse, à demander au directeur de la publication dans les trois mois.
 // Choix de Houssem (10/11/2026) : édition à titre professionnel (recettes publicitaires prévues à l'étape 12), adresse de
 // domiciliation de son activité, téléphone ci-dessous, statut mentionné sans numéro.
@@ -13,7 +14,7 @@
 // texte) et contrôlé à la construction (MENTIONS-LEGALES-*).
 // Module sans dépendance à l'exécution : tests et construction l'utilisent tel quel.
 import { RESPONSABLE_EDITORIAL } from './charte.ts';
-import { attributHtml, texteHtml } from './html.ts';
+import { attributHtml, echapper, texteHtml } from './html.ts';
 
 export interface Editeur {
   /** Nom et prénoms de l'éditeur, personne physique. */
@@ -54,7 +55,8 @@ export const MENTIONS_OBLIGATOIRES = [
   { id: 'hebergeur-telephone', article: '1-1, I, 4° : numéro de téléphone de l\'hébergeur' },
 ] as const;
 
-const MARQUE_A_COMPLETER = /à compléter|à fournir|todo|xxx|\.\.\./i;
+/** Valeur provisoire : refusée à la construction (verifierEditeur) et dans la page construite (MENTIONS-LEGALES-CHAMP). */
+export const MARQUE_PROVISOIRE = /à compléter|à fournir|\btodo\b|\bxxx\b|\.\.\./i;
 
 /** Champs vides ou provisoires : la construction échoue plutôt que de publier une mention incomplète. */
 export function verifierEditeur(e: Editeur = EDITEUR): void {
@@ -63,7 +65,7 @@ export function verifierEditeur(e: Editeur = EDITEUR): void {
     ['nom de l\'hébergeur', e.hebergeur.nom], ['adresse de l\'hébergeur', e.hebergeur.adresse], ['téléphone de l\'hébergeur', e.hebergeur.telephone],
   ];
   for (const [libelle, valeur] of champs) {
-    if (valeur.trim() === '' || MARQUE_A_COMPLETER.test(valeur)) throw new Error(`mentions légales : ${libelle} absent ou provisoire (src/lib/editeur.ts)`);
+    if (valeur.trim() === '' || MARQUE_PROVISOIRE.test(valeur)) throw new Error(`mentions légales : ${libelle} absent ou provisoire (src/lib/editeur.ts)`);
   }
   for (const [libelle, tel] of [['téléphone', e.telephone], ['téléphone de l\'hébergeur', e.hebergeur.telephone]] as const) {
     if (!/^\+\d[\d ]{7,}$/.test(tel)) throw new Error(`mentions légales : ${libelle} au format international (+33 6 12 34 56 78)`);
@@ -77,6 +79,8 @@ export function verifierEditeur(e: Editeur = EDITEUR): void {
 export function mentionsLegalesHtml(contactHtml: string, e: Editeur = EDITEUR): string {
   verifierEditeur(e);
   const ligne = (id: string, terme: string, valeur: string): string => `<dt>${texteHtml(terme)}</dt><dd data-mention="${attributHtml(id)}">${texteHtml(valeur)}</dd>`;
+  // Un numéro de téléphone s'écrit tel quel : la typographie des grands nombres y poserait des espaces insécables au hasard.
+  const numero = (id: string, terme: string, valeur: string): string => `<dt>${texteHtml(terme)}</dt><dd data-mention="${attributHtml(id)}">${echapper(valeur)}</dd>`;
   return [
     `<section class="mentions-legales" id="${ID_MENTIONS_LEGALES}" data-mentions-legales aria-labelledby="${ID_MENTIONS_LEGALES}-titre">`,
     `<h2 id="${ID_MENTIONS_LEGALES}-titre">Mentions légales</h2>`,
@@ -84,14 +88,14 @@ export function mentionsLegalesHtml(contactHtml: string, e: Editeur = EDITEUR): 
     ligne('editeur-nom', 'Éditeur', e.nom),
     `<dt>Statut</dt><dd data-mention="editeur-statut">${texteHtml(e.statut.charAt(0).toUpperCase() + e.statut.slice(1))}</dd>`,
     ligne('editeur-adresse', 'Adresse', e.adresse),
-    ligne('editeur-telephone', 'Téléphone', e.telephone),
+    numero('editeur-telephone', 'Téléphone', e.telephone),
     `<dt>Courriel</dt><dd data-mention="editeur-courriel">${contactHtml}</dd>`,
     ligne('directeur-publication', 'Directeur de la publication', e.directeur_publication),
     ligne('hebergeur-nom', 'Hébergeur', e.hebergeur.nom),
     ligne('hebergeur-adresse', 'Adresse de l’hébergeur', e.hebergeur.adresse),
-    ligne('hebergeur-telephone', 'Téléphone de l’hébergeur', e.hebergeur.telephone),
+    numero('hebergeur-telephone', 'Téléphone de l’hébergeur', e.hebergeur.telephone),
     '</dl>',
-    `<p>Droit de réponse : toute personne nommée ou désignée sur le site peut demander l’insertion d’une réponse, en écrivant au directeur de la publication (${contactHtml}) dans un délai de trois mois à compter de la mise à disposition du message qui la justifie.</p>`,
+    `<p>${texteHtml('Droit de réponse : toute personne nommée ou désignée sur le site peut demander l’insertion d’une réponse, en écrivant au directeur de la publication (')}${contactHtml}${texteHtml(') dans un délai de trois mois à compter de la mise à disposition du message qui la justifie.')}</p>`,
     '</section>',
   ].join('');
 }

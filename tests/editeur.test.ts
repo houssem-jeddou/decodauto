@@ -28,7 +28,7 @@ describe('informations de l’éditeur', () => {
   });
 
   test('aucun numéro d’inscription n’est publié : l’éditeur n’est assujetti ni au RCS ni au RNE', () => {
-    assert.doesNotMatch(texte(mentionsLegalesHtml(CONTACT, COMPLET)), /siret|siren|rcs|rne|matricule/i);
+    assert.doesNotMatch(texte(mentionsLegalesHtml(CONTACT, COMPLET)), /\b(siret|siren|rcs|rne|matricule)\b/i);
   });
 
   test('un champ vide ou provisoire, ou un téléphone sans indicatif, fait échouer', () => {
@@ -73,6 +73,15 @@ describe('bloc « Mentions légales »', () => {
     const affiche = texte(html);
     for (const re of EXPRESSIONS_INTERDITES) assert.doesNotMatch(affiche, re);
     assert.doesNotMatch(affiche, /'/);
+  });
+
+  test('les numéros de téléphone s’écrivent tels quels, sans espace insécable ajoutée', () => {
+    assert.match(html, /data-mention="hebergeur-telephone">\+1 650 319 8930</);
+    assert.match(html, /data-mention="editeur-telephone">\+33 6 05 98 44 30</);
+  });
+
+  test('l’espace avant « : » du droit de réponse est insécable', () => {
+    assert.match(html, /Droit de réponse\u00a0:/);
   });
 
   test('une valeur à caractères spéciaux est échappée', () => {

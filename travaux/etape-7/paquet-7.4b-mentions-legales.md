@@ -21,7 +21,7 @@ Branche `etape-7/mentions-legales` (PR empilée sur #28). **Ce que Houssem valid
 | Hébergeur | Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, États-Unis ; +1 650 319 8930 |
 | Droit de réponse | Toute personne nommée ou désignée sur le site peut demander l'insertion d'une réponse, en écrivant au directeur de la publication, dans un délai de trois mois à compter de la mise à disposition du message qui la justifie. |
 
-Non publié, volontairement : l'identifiant unique de ta carte (2004234A). La loi ne demande un numéro d'inscription que pour le registre du commerce et des sociétés ou le registre national des entreprises français ; tu n'en dépends pas.
+Non publié, volontairement : l'identifiant unique de ta carte (2004234A). La loi ne demande un numéro d'inscription que pour les personnes assujetties au registre du commerce et des sociétés ou au registre national des entreprises (français) ; voir le point 6 du §4.
 
 ## 3. Ce que disent les textes (sources lues le 10/11/2026)
 
@@ -36,6 +36,10 @@ Non publié, volontairement : l'identifiant unique de ta carte (2004234A). La lo
 3. **Activité déclarée** : ta carte dit « services administratifs et logistiques » ; tu as indiqué le 09/11 avoir vérifié que le statut couvre le site, recettes publicitaires comprises. Claude ne l'a pas contrôlé. La page dit seulement « entrepreneur individuel, régime auto-entrepreneur ».
 4. **Courriel** : la réception de `erreur@decodauto.com` reste à confirmer par un courriel de test avant la mise en ligne (journal).
 5. **Publicité** : la page n'affirme rien sur la publicité au-delà de la politique de confidentialité validée en 7.2 (« mise à jour d'abord »).
+
+6. **Numéro d'inscription** : je pars du principe que, non immatriculé en France, tu n'es assujetti ni au RCS ni au RNE ; aucun texte lu ne le dit. La page de service-public.fr lue demande, pour un entrepreneur individuel français, ce numéro ; à faire confirmer par ton comptable en même temps que l'adresse.
+7. **Politique de confidentialité modifiée** (texte validé en 7.2, à revalider par toi) : le téléphone publié est un troisième canal de contact ; la phrase « Vos données ne sont traitées que dans deux cas » devenait fausse. J'ai écrit : « quand vous contactez l'éditeur, par courriel ou par téléphone », et une phrase qui dit que le numéro est publié parce que la loi l'exige, que l'éditeur ne s'en sert que pour répondre, qu'il traite un appel ou un message comme un courriel (même durée) et que l'opérateur reçoit les données de l'appel. **Vrai à ton sens ?**
+8. **Point 5° de l'article 1-1** (personnes qui stockent des données traitées par l'éditeur pour le site) : sans objet à mon sens pour un site statique ; les courriels passent par OVHcloud et Google, nommés dans la politique. Non vérifié sur le texte intégral du 5°.
 
 ## 5. Preuves
 

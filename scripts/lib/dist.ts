@@ -10,7 +10,7 @@ import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
 import { lienSignalement } from '../../src/lib/composants.ts';
 import { ELEMENTS_SANS_TYPOGRAPHIE } from '../../src/lib/html.ts';
-import { ID_MENTIONS_LEGALES, MENTIONS_OBLIGATOIRES } from '../../src/lib/editeur.ts';
+import { ID_MENTIONS_LEGALES, MARQUE_PROVISOIRE, MENTIONS_OBLIGATOIRES } from '../../src/lib/editeur.ts';
 import { CLASSE_CITATION_NOTICE } from '../../src/lib/tableau-notices.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
@@ -625,6 +625,9 @@ export function constatsPageAPropos(html: string, fichier: string): Constat[] {
  * nom, domicile, téléphone, directeur de la publication, nom, adresse et téléphone de l'hébergeur), non vides et sans marque
  * provisoire, et un courriel de contact ; aucune autre page ne porte le bloc.
  */
+/** Texte brut d'un champ : espaces (insécables comprises) ramenées à une espace, sans normalisation (« + » et accents restent). */
+const brut = (texte: string): string => texte.replace(/[\s\u00a0\u202f]+/g, ' ').trim();
+
 export function constatsMentionsLegales(html: string, fichier: string, attendu: boolean): Constat[] {
   const $ = cheerio.load(html);
   const blocs = $('[data-mentions-legales]');
@@ -637,8 +640,8 @@ export function constatsMentionsLegales(html: string, fichier: string, attendu: 
   const constats: Constat[] = [];
   for (const m of MENTIONS_OBLIGATOIRES) {
     const champs = blocs.find(`[data-mention="${m.id}"]`);
-    const texte = normaliserTexte(champs.first().text());
-    if (champs.length !== 1 || texte === '' || /à compléter|à fournir|todo|xxx/i.test(texte)) {
+    const texte = brut(champs.first().text());
+    if (champs.length !== 1 || texte === '' || MARQUE_PROVISOIRE.test(texte)) {
       constats.push(erreur('MENTIONS-LEGALES-CHAMP', `mention absente, vide ou provisoire : ${m.id} (loi n° 2004-575, article ${m.article})`, fichier));
     }
   }
@@ -646,7 +649,7 @@ export function constatsMentionsLegales(html: string, fichier: string, attendu: 
   if (courriel.length !== 1 || (courriel.attr('href') ?? '') !== `mailto:${ADRESSE_SIGNALEMENT}`) {
     constats.push(erreur('MENTIONS-LEGALES-CHAMP', `le courriel de contact des mentions légales est ${ADRESSE_SIGNALEMENT} (lien mailto)`, fichier));
   }
-  const tel = normaliserTexte(blocs.find('[data-mention="editeur-telephone"]').first().text());
+  const tel = brut(blocs.find('[data-mention="editeur-telephone"]').first().text());
   if (tel !== '' && !/^\+\d[\d ]{7,}$/.test(tel)) constats.push(erreur('MENTIONS-LEGALES-CHAMP', 'le téléphone de l\'éditeur est au format international (+33 6 12 34 56 78)', fichier));
   return constats;
 }

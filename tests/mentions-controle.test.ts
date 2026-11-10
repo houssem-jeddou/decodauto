@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 import { EDITEUR, mentionsLegalesHtml, type Editeur } from '../src/lib/editeur.ts';
 import { ADRESSE_SIGNALEMENT } from '../src/lib/site.ts';
-import { constatsMentionsLegales } from '../scripts/lib/dist.ts';
+import { pageSocle } from '../src/lib/modeles.ts';
+import { constatsExpressionsInterdites, constatsIdentifiants, constatsMentionsLegales, constatsTypographie } from '../scripts/lib/dist.ts';
 
 const COMPLET: Editeur = { ...EDITEUR, adresse: '12 rue de l’Exemple, 2080 Ariana, Tunisie' };
-const CONTACT = `<a href="mailto:${ADRESSE_SIGNALEMENT}">${ADRESSE_SIGNALEMENT}</a>`;
+const CONTACT = `<!--email_off--><a href="mailto:${ADRESSE_SIGNALEMENT}">${ADRESSE_SIGNALEMENT}</a><!--/email_off-->`;
 const doc = (corps: string): string => `<!doctype html><html lang="fr"><head><title>T</title></head><body><main>${corps}</main></body></html>`;
 const codes = (constats: readonly { regle: string }[]): string[] => [...new Set(constats.map((c) => c.regle))].sort();
 const bloc = mentionsLegalesHtml(CONTACT, COMPLET);
@@ -42,5 +43,25 @@ describe('mentions légales construites', () => {
     assert.ok(codes(constatsMentionsLegales(doc(autre), 'x', true)).includes('MENTIONS-LEGALES-CHAMP'));
     const sansIndicatif = bloc.replace('+33 6 05 98 44 30', '06 05 98 44 30');
     assert.deepEqual(codes(constatsMentionsLegales(doc(sansIndicatif), 'x', true)), ['MENTIONS-LEGALES-CHAMP']);
+  });
+});
+
+describe('page des mentions légales rendue par le modèle', () => {
+  const page = { id: 'mentions-legales', title: 'Mentions légales et confidentialité', date_modification: '2026-11-10' } as const;
+  const corps = '<h2>Confidentialité</h2><p>Texte.</p>';
+  const rendu = pageSocle(page, corps);
+
+  test('le bloc passe avant le texte, sur cette page seulement', () => {
+    assert.ok(rendu.indexOf('data-mentions-legales') > rendu.indexOf('</h1>'));
+    assert.ok(rendu.indexOf('data-mentions-legales') < rendu.indexOf('data-corps'));
+    assert.doesNotMatch(pageSocle({ ...page, id: 'contact' }, '<p>x</p>'), /data-mentions-legales/);
+  });
+
+  test('le rendu réel passe les contrôles de la page construite : mentions, typographie, identifiants, expressions interdites', () => {
+    const html = doc(rendu);
+    assert.deepEqual(constatsMentionsLegales(html, 'mentions-legales/index.html', true), []);
+    assert.deepEqual(constatsTypographie(html, 'x'), []);
+    assert.deepEqual(constatsIdentifiants(html, 'x'), []);
+    assert.deepEqual(constatsExpressionsInterdites(html, 'x'), []);
   });
 });
