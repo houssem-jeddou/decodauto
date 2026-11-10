@@ -36,3 +36,7 @@ Verdict : **acceptable, à corriger avant fusion** (rien de bloquant dans le cod
 - **Corrigé** : documentation qui annonçait un écran « bientôt en ligne » sur `main` sans préciser que le changement vit sur la branche d'intégration ; « validés par Houssem » écrit avant validation (CLAUDE.md) ; « dans l'ordre du plan » promis par le catalogue sans contrôle (retiré : l'ordre est celui du générateur) ; test du plan de l'accueil élargi (mots-clés vides, pas de page mère) ; title ramené à 55 caractères avec les mots de la requête (le précédent faisait 65) et description à 149 caractères, mieux enchaînée ; styles minimaux des blocs de l'accueil.
 - **Écarté / à noter** : le H1 reste le positionnement (prescrit par le brief ; la charte §3.4 préfère la question du lecteur, mais l'accueil n'est pas une page de décision) ; l'espace avant « : » dans `title` et `description` n'est pas insécable, comme sur toutes les pages du dépôt (écart commun, hors de ce livrable, à proposer en idée reportée) ; la phrase d'ouverture de l'accueil et celle de « à propos » se ressemblent, deux textes courts validés séparément, sans risque de verdict.
 - **Non vérifié** : build Astro et tests avec dépendances (la CI tranche).
+
+## 6. Validation
+
+Validé par Houssem le 10/11/2026 (12 h 57, heure locale) : title, description, paragraphes et phrase d'accès à l'outil, tels que présentés au §2 (« Je valide »). La CI du commit `defda1a` est verte (Contrôles, Recette des exemples, Lighthouse mobile, Production).
