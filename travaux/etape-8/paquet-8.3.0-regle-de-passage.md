@@ -36,4 +36,4 @@ Le lot 8.3 est bloqué à la mise en ligne tant que « à propos » (7.3, qui de
 
 ## 6. Validation
 
-À écrire par Houssem : « Validé par Houssem le … ».
+Validé par Houssem le 10/11/2026 (« Je valide, on enchaîne sur la partie suivante »).
