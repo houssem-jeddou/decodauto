@@ -3,9 +3,9 @@
 // pull request et, en comparaison, sa base), les tests les appellent tel quel.
 //  - INDEXATION-VARIABLE : drapeau d'indexation à true et variable SITE_INDEXABLE différente de "true" : la construction
 //    passerait tout le site en noindex sans rien dire ; refusé à chaque construction, déploiement compris.
-//  - INDEXATION-RETOUR : la base est indexable (drapeau true) et la pull request remet le drapeau à false, sans le retour
-//    décidé par une demande de changement acceptée (champ `retour` de config/indexation.json : numéro et date) ; un retour
-//    décidé suspend les autres comparaisons (le site entier sort de l'index).
+//  - INDEXATION-RETOUR : la base est indexable (drapeau true) et la pull request remet le drapeau à false. Un retour au
+//    non-indexé ne se fait que par une demande de changement acceptée, appliquée dans une pull request qui modifie aussi
+//    ce contrôle (visible dans le diff) ; le retour arrière de la pull request qui l'a introduit le retire avec elle.
 //  - ADRESSE-SANS-REDIRECTION : une adresse publiée par la base (accueil, ou page du plan qui a son fichier dans
 //    src/content) n'est plus construite et n'a pas de redirection 301 dans public/_redirects.
 //  - REDIRECTION-FORMAT / REDIRECTION-RETIREE : une ligne de public/_redirects est « source cible 301 », la source n'est
@@ -13,7 +13,7 @@
 //    page publiée (page republiée à son adresse).
 //  - DATE-SANS-MODIFICATION / DATE-RECULEE : date_modification (date « Mis à jour le » et lastmod du plan du site)
 //    changée alors que rien d'autre ne change, ni dans le fichier de la page (hors commentaires et dates de revue), ni dans
-//    les données qu'affichent les pages (base voyants, registre des sources, coûts) ; ou reculée.
+//    les fichiers dont les pages tirent du texte affiché (FICHIERS_AFFICHES) ; ou reculée.
 //  - TITRE-MODIFIE / TITRE-TROP-FREQUENT / TITRES-REGISTRE : title ou H1 d'une page publiée changés sans ligne dans
 //    config/changements-de-titre.json (qui donne les nouveaux textes, la date et la raison), ou moins de 90 jours après le
 //    changement précédent de la même page, sauf exception notée dans la ligne (`regle-13` : correction urgente ;
@@ -21,6 +21,12 @@
 import type { Constat } from '../../src/lib/controle.ts';
 
 export const FICHIER_REDIRECTIONS = 'public/_redirects';
+/**
+ * Fichiers dont les pages tirent du texte affiché, hors de leur propre fichier : base voyants, registre des sources, coûts,
+ * plan (libellés, liens), éditeur (mentions légales), charte (signature, transparence, « Méthode »), grille (libellés des
+ * verdicts). Un changement de l'un d'eux peut justifier une nouvelle date ; qu'il concerne la page se juge à la recette.
+ */
+export const FICHIERS_AFFICHES = ['data/voyants.json', 'data/sources.json', 'data/couts.json', 'data/plan-du-site.json', 'src/lib/editeur.ts', 'src/lib/charte.ts', 'src/schemas/grille.ts'] as const;
 export const FICHIER_CHANGEMENTS_DE_TITRE = 'config/changements-de-titre.json';
 /** Écart minimal entre deux changements du title ou du H1 d'une même page. */
 export const DELAI_TITRE_JOURS = 90;
@@ -38,20 +44,12 @@ export interface ChangementDeTitre {
   exception?: string | undefined;
 }
 
-/** Retour au non-indexé décidé (config/indexation.json, champ `retour`) : demande de changement acceptée et date. */
-export interface RetourDecide {
-  demande: number;
-  date: string;
-}
-
 const EXCEPTION_TITRE = /^(regle-13|demande-\d+)$/;
 
 export interface EtatDuSite {
   /** config/indexation.json */
   drapeau: boolean;
-  /** config/indexation.json, champ `retour` (seulement avec un drapeau à false). */
-  retour?: RetourDecide | undefined;
-  /** Données qu'affichent les pages, hors de leur fichier : base voyants, registre des sources, coûts (texte brut). */
+  /** Texte brut des fichiers dont les pages tirent du texte affiché, hors de leur propre fichier (FICHIERS_AFFICHES). */
   donnees?: string | undefined;
   /** Plan du site : identifiant → adresse. */
   plan: ReadonlyMap<string, string>;
@@ -157,16 +155,10 @@ const memeChangement = (a: ChangementDeTitre, b: ChangementDeTitre): boolean =>
   a.id === b.id && a.date === b.date && a.title === b.title && a.h1 === b.h1 && a.raison === b.raison && (a.exception ?? '') === (b.exception ?? '');
 
 /** Comparaison de la pull request (tête) avec sa base (main) : ce qui pénaliserait un site déjà indexé. */
-export function retourDecideValide(retour: RetourDecide | undefined): boolean {
-  return retour !== undefined && Number.isInteger(retour.demande) && retour.demande > 0 && /^\d{4}-\d{2}-\d{2}$/.test(retour.date);
-}
-
 export function constatsComparaison(base: EtatDuSite, tete: EtatDuSite): Constat[] {
   const constats: Constat[] = [];
   if (base.drapeau && !tete.drapeau) {
-    // Retour décidé par une demande de changement acceptée : le site entier sort de l'index, le reste ne se compare plus.
-    if (retourDecideValide(tete.retour)) return [];
-    constats.push(erreur('INDEXATION-RETOUR', "la base est indexable et la pull request remet config/indexation.json à false : jamais de retour au non-indexé sans demande de changement acceptée (champ « retour » : { demande, date }) ; pour retirer une page en urgence : outil « Suppressions » de Search Console, puis correction ou redirection", 'config/indexation.json'));
+    constats.push(erreur('INDEXATION-RETOUR', "la base est indexable et la pull request remet config/indexation.json à false : jamais de retour au non-indexé, sauf par une demande de changement acceptée qui modifie aussi ce contrôle ; pour retirer une page en urgence : outil « Suppressions » de Search Console, puis correction ou redirection", 'config/indexation.json'));
   }
 
   // Adresses : rien de publié ne disparaît sans redirection 301, aucune redirection ne disparaît.

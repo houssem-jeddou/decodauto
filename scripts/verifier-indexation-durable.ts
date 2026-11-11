@@ -8,6 +8,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { argv, env, exit, stdout } from 'node:process';
 import {
+  FICHIERS_AFFICHES,
   FICHIER_CHANGEMENTS_DE_TITRE,
   FICHIER_REDIRECTIONS,
   constatsComparaison,
@@ -49,15 +50,9 @@ const git = (ref: string): Lecteur => ({
 
 const constante = (source: string, nom: string): string | undefined => new RegExp(`export const ${nom} = '([^']*)';`).exec(source)?.[1];
 
-/** Données qu'affichent les pages hors de leur fichier : un changement de l'une d'elles peut justifier une nouvelle date. */
-const FICHIERS_DONNEES = ['data/voyants.json', 'data/sources.json', 'data/couts.json'] as const;
-
 async function lireEtat(lecteur: Lecteur, ou: string): Promise<EtatDuSite> {
-  const indexation = JSON.parse((await lecteur.fichier('config/indexation.json')) ?? '{"indexable":false}') as { indexable?: unknown; retour?: unknown };
-  const drapeau = indexation.indexable === true;
-  const retourBrut = indexation.retour as { demande?: unknown; date?: unknown } | undefined;
-  const retour = retourBrut !== undefined && typeof retourBrut.demande === 'number' && typeof retourBrut.date === 'string' ? { demande: retourBrut.demande, date: retourBrut.date } : undefined;
-  const donnees = (await Promise.all(FICHIERS_DONNEES.map(async (f) => `${f}\n${(await lecteur.fichier(f)) ?? ''}`))).join('\n');
+  const drapeau = (JSON.parse((await lecteur.fichier('config/indexation.json')) ?? '{"indexable":false}') as { indexable?: unknown }).indexable === true;
+  const donnees = (await Promise.all(FICHIERS_AFFICHES.map(async (f) => `${f}\n${(await lecteur.fichier(f)) ?? ''}`))).join('\n');
   const plan = new Map((JSON.parse((await lecteur.fichier('data/plan-du-site.json')) ?? '[]') as { id: string; adresse: string }[]).map((l) => [l.id, l.adresse]));
   const pages = new Map<string, string>();
   for (const chemin of await lecteur.pages()) {
@@ -76,7 +71,7 @@ async function lireEtat(lecteur: Lecteur, ou: string): Promise<EtatDuSite> {
   }
   const changements = JSON.parse((await lecteur.fichier(FICHIER_CHANGEMENTS_DE_TITRE)) ?? '[]') as ChangementDeTitre[];
   if (!Array.isArray(changements)) throw new Error(`${ou} : ${FICHIER_CHANGEMENTS_DE_TITRE} doit être une liste`);
-  return { drapeau, retour, donnees, plan, pages, redirections: (await lecteur.fichier(FICHIER_REDIRECTIONS)) ?? '', accueil, changementsDeTitre: changements };
+  return { drapeau, donnees, plan, pages, redirections: (await lecteur.fichier(FICHIER_REDIRECTIONS)) ?? '', accueil, changementsDeTitre: changements };
 }
 
 const indexBase = argv.indexOf('--base');

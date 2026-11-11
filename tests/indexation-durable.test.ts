@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 import {
+  FICHIERS_AFFICHES,
   constatsComparaison,
   constatsRedirections,
   constatsVariable,
@@ -48,12 +49,9 @@ describe('retour au non-indexé', () => {
     assert.deepEqual(regles(constatsComparaison({ ...BASE, drapeau: false }, BASE)), [], 'premier passage à true');
   });
 
-  test('retour décidé par une demande de changement acceptée : admis, et le reste ne se compare plus (retour arrière du lot)', () => {
-    const retourArriere = etat({}, { drapeau: false, retour: { demande: 21, date: '2026-12-01' } });
-    assert.deepEqual(regles(constatsComparaison(BASE, retourArriere)), []);
-    for (const retour of [{ demande: 0, date: '2026-12-01' }, { demande: 21, date: '01/12/2026' }]) {
-      assert.deepEqual(regles(constatsComparaison(BASE, { ...retourArriere, retour })), ['INDEXATION-RETOUR', 'ADRESSE-SANS-REDIRECTION', 'ADRESSE-SANS-REDIRECTION'], JSON.stringify(retour));
-    }
+  test('aucune issue par un champ de configuration : un retour se décide par une demande qui modifie aussi ce contrôle', () => {
+    const retour = etat({ 'a-propos': page('a-propos'), 'loi-montagne': page('loi-montagne') }, { drapeau: false });
+    assert.deepEqual(regles(constatsComparaison(BASE, retour)), ['INDEXATION-RETOUR']);
   });
 });
 
@@ -101,9 +99,10 @@ describe('dates de mise à jour (« Mis à jour le », lastmod du plan du site)'
     assert.deepEqual(regles(constatsComparaison(BASE, recul)), ['DATE-RECULEE']);
   });
 
-  test('date changée parce qu’une donnée affichée a changé (base voyants, sources, coûts) : admis', () => {
-    const memeTexte = etat({ 'a-propos': page('a-propos', { date_modification: '2026-12-01' }), 'loi-montagne': page('loi-montagne') }, { donnees: 'data/couts.json\n{ "fourchette": 2 }' });
-    assert.deepEqual(regles(constatsComparaison({ ...BASE, donnees: 'data/couts.json\n{ "fourchette": 1 }' }, memeTexte)), []);
+  test('date changée parce qu’un texte affiché venu d’un autre fichier a changé (éditeur, coûts…) : admis', () => {
+    const memeTexte = etat({ 'a-propos': page('a-propos', { date_modification: '2026-12-01' }), 'loi-montagne': page('loi-montagne') }, { donnees: 'src/lib/editeur.ts\ntelephone: 2' });
+    assert.deepEqual(regles(constatsComparaison({ ...BASE, donnees: 'src/lib/editeur.ts\ntelephone: 1' }, memeTexte)), []);
+    assert.ok(FICHIERS_AFFICHES.includes('src/lib/editeur.ts') && FICHIERS_AFFICHES.includes('src/lib/charte.ts'), 'mentions légales et « Méthode »');
   });
 
   test('vraie modification : date changée admise ; revue sans modification : seule la date de revue bouge', () => {
