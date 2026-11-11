@@ -1,4 +1,4 @@
-# Essai (11/11/2026, livrable 8.3.1b) : les sites des préfectures répondent-ils depuis un serveur de GitHub ?
+# Essai (11/11/2026, livrable 8.3.1b) : lire un PDF de préfecture avec un vrai navigateur sur un serveur de GitHub.
 # Branche jetable, jamais fusionnée. Ne touche ni au site ni au déploiement.
 name: Essai relevé des arrêtés
 on:
@@ -9,20 +9,16 @@ permissions:
 jobs:
   essai:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
-      - name: Lire quelques pages officielles
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Navigateur
         run: |
           sudo apt-get install -y -qq poppler-utils >/dev/null
-          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
-          C="curl -sS -L -A '$UA' -b /tmp/jar -c /tmp/jar -H 'Accept-Language: fr-FR,fr;q=0.9' --max-time 40"
-          page="https://www.isere.gouv.fr/Actions-de-l-Etat/Securites/Securite-routiere/Equipements-hivernaux-obligatoires-les-regles-a-connaitre-en-Isere"
-          eval $C -o /tmp/p.html -w "'PAGE %{http_code} %{size_download}\n'" "'$page'"
-          echo "COOKIES:"; grep -v '^#' /tmp/jar | awk '{print $6}' | tr '\n' ' '; echo
-          pdf=$(grep -o 'href="[^"]*telechargement[^"]*"' /tmp/p.html | head -1 | sed 's/href="//;s/"$//')
-          echo "LIEN: $pdf"
-          sleep 10
-          eval $C -e "'$page'" -o /tmp/a.pdf -w "'PDF %{http_code} %{size_download} %{content_type}\n'" "'https://www.isere.gouv.fr$pdf'" || echo "PDF ECHEC"
-          file /tmp/a.pdf; pdftotext -l 1 /tmp/a.pdf - 2>/dev/null | tr -s ' \n' ' ' | cut -c1-500; echo
-          sleep 10
-          echo "SR:"; curl -sS -L -A "$UA" "https://www.securite-routiere.gouv.fr/equipements-hivernaux-departements-et-communes" | head -c 1500
+          mkdir -p /tmp/e && cd /tmp/e && npm init -y >/dev/null && npm i -s playwright@1.48.2 && npx playwright install --with-deps chromium >/dev/null 2>&1
+          cp $GITHUB_WORKSPACE/travaux/outils/essai-navigateur.mjs .
+          node essai-navigateur.mjs "https://www.isere.gouv.fr/Actions-de-l-Etat/Securites/Securite-routiere/Equipements-hivernaux-obligatoires-les-regles-a-connaitre-en-Isere" /tmp/isere.pdf || echo ECHEC
+          file /tmp/isere.pdf && pdftotext -l 1 /tmp/isere.pdf - | tr -s ' \n' ' ' | cut -c1-700; echo
