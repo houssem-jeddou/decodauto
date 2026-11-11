@@ -1,5 +1,5 @@
 """Application de la demande de changement n° 18, seulement après l'accord de Houssem : 03 v13, CLAUDE.md, CONTROLES.md.
-Usage : python3 travaux/etape-9/appliquer-demande-18.py . <date AAAA-MM-JJ> "<heure, ex. 9 h 30>""""
+Usage : python3 travaux/etape-9/appliquer-demande-18.py . AAAA-MM-JJ "9 h 30" (racine du dépôt, date et heure de l accord)."""
 import sys
 from pathlib import Path
 
