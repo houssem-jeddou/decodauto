@@ -102,9 +102,15 @@ describe('données structurées : défauts', () => {
     assert.ok(controle(aPropos([]), A_PROPOS).includes('DONNEES-STRUCTUREES-TYPE'), 'une Person par fiche affichée');
   });
 
-  test('WebSite : nom et adresse du site', () => {
-    const faux = scriptsAccueil().map((s) => s.replace('"name":"decodauto.com"', '"name":"autre"'));
-    assert.deepEqual(controle(doc(faux.join(''), '<h1>A</h1>'), '/'), ['DONNEES-STRUCTUREES-CONTENU']);
+  test('WebSite : nom, nom alternatif et adresse du site', () => {
+    for (const [avant, apres] of [
+      ['"name":"decodauto"', '"name":"autre"'],
+      ['"alternateName":"decodauto.com"', '"alternateName":"autre"'],
+    ] as const) {
+      const faux = scriptsAccueil().map((s) => s.replace(avant, apres));
+      assert.notDeepEqual(faux, scriptsAccueil(), `${avant} présent dans le balisage`);
+      assert.deepEqual(controle(doc(faux.join(''), '<h1>A</h1>'), '/'), ['DONNEES-STRUCTUREES-CONTENU']);
+    }
   });
 });
 

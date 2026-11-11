@@ -33,8 +33,14 @@ export function adresseDepuisFichier(fichier: string): string | undefined {
 const echapperXml = (texte: string): string =>
   texte.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 
-/** Nom du site, tel que l'affichent le bandeau de toutes les pages et le balisage WebSite. Source unique. */
-export const NOM_DU_SITE = 'decodauto.com';
+/**
+ * Nom du site, tel que l'affichent le bandeau de toutes les pages (en deux parties, « decod » et « auto », mises en
+ * forme : piste A choisie par Houssem le 11/11/2026) et le balisage WebSite de l'accueil. Source unique.
+ */
+export const PARTIES_DU_NOM = ['decod', 'auto'] as const;
+export const NOM_DU_SITE = PARTIES_DU_NOM.join('');
+/** Autre nom du site pour Google (propriété alternateName du balisage WebSite) : son nom de domaine, tiré de URL_SITE. */
+export const NOM_ALTERNATIF_DU_SITE = new URL(URL_SITE).host;
 
 /** Date « Mis à jour le jj/mm/aaaa » dans un texte, au format AAAA-MM-JJ (espaces insécables admises). */
 export function dateDansTexte(texte: string): string | undefined {

@@ -14,7 +14,7 @@
 // avant le livrable 7.5b), pas de FAQPage ni de HowTo (extraits de résultats que Google n'affiche plus pour la plupart des
 // sites ; un balisage sans extrait attendu n'apporte rien).
 
-import { NOM_DU_SITE, URL_SITE, urlAbsolue } from './site.ts';
+import { NOM_ALTERNATIF_DU_SITE, NOM_DU_SITE, URL_SITE, urlAbsolue } from './site.ts';
 import { typographier } from './html.ts';
 import type { Miette } from './composants.ts';
 
@@ -102,9 +102,13 @@ export function articleJsonLd(a: ArticleDeclare): Record<string, unknown> {
   };
 }
 
-/** WebSite de l'accueil. Pas de SearchAction : le site n'a pas de moteur de recherche interne. */
+/**
+ * WebSite de l'accueil : nom préféré (celui du bandeau) et nom de domaine en nom alternatif (Google Search Central,
+ * « Provide a site name to Google Search », lu le 11/11/2026). Pas de SearchAction : le site n'a pas de moteur de
+ * recherche interne.
+ */
 export function siteJsonLd(): Record<string, unknown> {
-  return { '@context': CONTEXTE_SCHEMA, '@type': 'WebSite', name: NOM_DU_SITE, url: `${URL_SITE}/`, inLanguage: 'fr' };
+  return { '@context': CONTEXTE_SCHEMA, '@type': 'WebSite', name: NOM_DU_SITE, alternateName: NOM_ALTERNATIF_DU_SITE, url: `${URL_SITE}/`, inLanguage: 'fr' };
 }
 
 /** Person de la fiche d'un auteur sur « à propos » ; `sameAs` = ses profils publics déclarés dans la fiche. */

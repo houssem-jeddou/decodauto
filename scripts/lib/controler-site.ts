@@ -8,6 +8,7 @@ import { ID_OUTIL_VOYANTS, adressesDansLeTexte, indexerPlan, liensEnAttente, lie
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
 import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
+import { controlerFavicon } from './favicon.ts';
 import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
@@ -144,6 +145,8 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   );
   constats.push(...(await controlerFixturesNonPubliees(dist)));
   constats.push(...(await controlerWrangler(racine)));
+  // Favicon et icône de la marque (premier lot) : liens de chaque page et fichiers servis (FAVICON-*).
+  constats.push(...(await controlerFavicon(dist)));
 
   return { constats, informations, pagesEditoriales: pagesLues.length };
 }

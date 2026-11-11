@@ -4,13 +4,13 @@
 // professionnel : nom, prénoms, domicile et numéro de téléphone (1°), le nom du directeur de la publication (3°), le nom,
 // l'adresse et le numéro de téléphone de l'hébergeur (4°) ; un numéro d'inscription seulement si elle est assujettie aux
 // formalités d'inscription au registre du commerce et des sociétés ou au registre national des entreprises (RCS, RNE).
-// Hypothèse (aucun texte lu ne la fixe, à faire confirmer) : un auto-entrepreneur tunisien non immatriculé en France n'y est
-// pas assujetti ; aucun numéro n'est publié (décision de Houssem du 10/11/2026). Le III donne un
+// Aucun numéro n'est publié (décision de Houssem du 10/11/2026, confirmée le 11/11/2026 : il ne relève d'aucun registre
+// français ; l'avis d'un comptable reste facultatif). Le III donne un
 // droit de réponse, à demander au directeur de la publication dans les trois mois.
 // Choix de Houssem (10/11/2026) : édition à titre professionnel (recettes publicitaires prévues à l'étape 12), adresse de
 // domiciliation de son activité, téléphone ci-dessous, statut mentionné sans numéro.
 // Hébergeur : Cloudflare, Inc., coordonnées de sa page « Terms of Use » (cloudflare.com/website-terms/, consultée le
-// 10/11/2026), à relire avant la mise en ligne. Le bloc est généré dans la page des mentions légales (jamais recopié dans son
+// 10/11/2026), revérifiées par Houssem le 11/11/2026 : conformes. Le bloc est généré dans la page des mentions légales (jamais recopié dans son
 // texte) et contrôlé à la construction (MENTIONS-LEGALES-*).
 // Module sans dépendance à l'exécution : tests et construction l'utilisent tel quel.
 import { RESPONSABLE_EDITORIAL } from './charte.ts';

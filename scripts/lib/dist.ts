@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import { readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
-import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_DU_SITE, URL_SITE, adresseDepuisFichier, dateDansTexte, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
+import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_ALTERNATIF_DU_SITE, NOM_DU_SITE, URL_SITE, adresseDepuisFichier, dateDansTexte, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { CLASSE_EMPLACEMENT_PUB, EMPLACEMENTS_PUB, HAUTEUR_RESERVEE_PX } from '../../src/lib/emplacements-pub.ts';
 import { CONTEXTE_SCHEMA, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
 import { listerFichiers } from './charger.ts';
@@ -781,7 +781,9 @@ export function constatsDonneesStructurees(html: string, fichier: string, adress
       if (!memes) e('DONNEES-STRUCTUREES-CONTENU', "BreadcrumbList : mêmes miettes que le fil d'Ariane affiché (nom, position, adresse absolue ; la dernière miette est la page)");
       for (const it of items) absolue(it['item'], 'BreadcrumbList.item');
     } else if (type === 'WebSite') {
-      if (o['name'] !== NOM_DU_SITE || o['url'] !== `${URL_SITE}/`) e('DONNEES-STRUCTUREES-CONTENU', `WebSite : nom « ${NOM_DU_SITE} » et adresse ${URL_SITE}/`);
+      if (o['name'] !== NOM_DU_SITE || o['alternateName'] !== NOM_ALTERNATIF_DU_SITE || o['url'] !== `${URL_SITE}/`) {
+        e('DONNEES-STRUCTUREES-CONTENU', `WebSite : nom « ${NOM_DU_SITE} », nom alternatif « ${NOM_ALTERNATIF_DU_SITE} » et adresse ${URL_SITE}/`);
+      }
     } else if (type === 'Person') {
       const id = typeof o['url'] === 'string' ? o['url'].split('#auteur-')[1] : undefined;
       if (id === undefined || !attendu.auteurs.has(id) || o['url'] !== urlPage + `#${ancreAuteur(id)}` || o['@id'] !== o['url'] || brut(String(o['name'])) !== attendu.auteurs.get(id)) {

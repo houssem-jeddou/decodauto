@@ -27,7 +27,8 @@ import {
   type SourceDuRegistre,
 } from './composants.ts';
 import { texteHtml } from './html.ts';
-import { NOM_DU_SITE } from './site.ts';
+import { PARTIES_DU_NOM } from './site.ts';
+import { logoEnLigne } from './marque.ts';
 import { emplacementPub } from './emplacements-pub.ts';
 import { modeleTableauNotices, tableauNotices } from './tableau-notices.ts';
 import { RENVOI_ENCADRE_OUTIL } from './outil-voyants.ts';
@@ -51,8 +52,12 @@ export interface DonneesSite {
   pubFactice?: boolean;
 }
 
-/** Bandeau de toutes les pages : nom du site (lien vers l'accueil) et mention en tête, avant le H1. */
-export const bandeau = (): string => `<a class="nom-du-site" href="/">${NOM_DU_SITE}</a>${mentionEnTete()}`;
+/**
+ * Bandeau de toutes les pages : marque (dessin décoratif et nom du site en deux parties mises en forme, lien vers
+ * l'accueil ; src/lib/marque.ts) et mention en tête, avant le H1. Le nom lu par un lecteur d'écran est NOM_DU_SITE.
+ */
+export const bandeau = (): string =>
+  `<a class="nom-du-site" href="/">${logoEnLigne()}<span class="nom-du-site-texte">${PARTIES_DU_NOM.map((partie, i) => `<span class="nom-du-site-${i + 1}">${partie}</span>`).join('')}</span></a>${mentionEnTete()}`;
 
 /** Pied de toutes les pages : lien « Signaler une erreur » avec l'adresse de la page (absente sur la page 404). */
 export const pied = (adressePage?: string, adresseConfidentialite?: string): string =>

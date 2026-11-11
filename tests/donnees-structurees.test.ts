@@ -77,7 +77,7 @@ describe('JSON-LD : pages', () => {
   });
 
   test('WebSite de l’accueil ; Person de « à propos » avec sameAs seulement si la fiche a des profils', () => {
-    assert.deepEqual(siteJsonLd(), { '@context': CONTEXTE_SCHEMA, '@type': 'WebSite', name: 'decodauto.com', url: 'https://decodauto.com/', inLanguage: 'fr' });
+    assert.deepEqual(siteJsonLd(), { '@context': CONTEXTE_SCHEMA, '@type': 'WebSite', name: 'decodauto', alternateName: 'decodauto.com', url: 'https://decodauto.com/', inLanguage: 'fr' });
     const p = personneJsonLd(AUTEUR, '/a-propos/');
     assert.equal(p['@id'], 'https://decodauto.com/a-propos/#auteur-houssem-jeddou');
     assert.equal(p['url'], p['@id']);

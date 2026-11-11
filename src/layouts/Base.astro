@@ -4,6 +4,7 @@ import '../styles/site.css';
 import { PAGE_CONFIDENTIALITE } from '../lib/charte.ts';
 import { estIndexable } from '../lib/indexation.ts';
 import { bandeau, pied } from '../lib/gabarit.ts';
+import { liensFavicon } from '../lib/marque.ts';
 
 interface Props {
   titre: string;
@@ -37,7 +38,7 @@ const bas = pied(sansCanonical ? undefined : Astro.url.pathname, adresseConfiden
     <meta name="description" content={description} />
     {!indexable && <meta name="robots" content="noindex" />}
     {canonical && <link rel="canonical" href={canonical} />}
-    <link rel="icon" href="data:," />
+    <Fragment set:html={liensFavicon()} />
     {donneesStructurees.length > 0 && <Fragment set:html={donneesStructurees.join('')} />}
   </head>
   <body>
