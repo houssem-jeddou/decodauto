@@ -1,0 +1,28 @@
+# Essai (11/11/2026, livrable 8.3.1b) : les sites des préfectures répondent-ils depuis un serveur de GitHub ?
+# Branche jetable, jamais fusionnée. Ne touche ni au site ni au déploiement.
+name: Essai relevé des arrêtés
+on:
+  push:
+    branches: [outils/essai-releve-arretes]
+permissions:
+  contents: read
+jobs:
+  essai:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Lire quelques pages officielles
+        run: |
+          sudo apt-get install -y -qq poppler-utils >/dev/null
+          UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
+          lire() {
+            code=$(curl -sS -L -A "$UA" -o /tmp/f --max-time 30 -w '%{http_code} %{size_download} %{content_type}' "$1" || echo "ECHEC")
+            echo "== $code  $1"
+            case "$code" in *pdf*) pdftotext -l 2 /tmp/f - | tr -s ' \n' ' ' | cut -c1-400; echo;; *html*) sed 's/<[^>]*>/ /g' /tmp/f | tr -s ' \n' ' ' | grep -o -i '.\{0,80\}arr[êe]t[ée] .\{0,120\}' | head -3;; esac
+            sleep 20
+          }
+          lire "https://www.doubs.gouv.fr/Actualites/Actualites-2026/Les-equipements-obligatoires-en-periode-hivernale"
+          lire "https://www.securite-routiere.gouv.fr/equipements-hivernaux-departements-et-communes"
+          lire "https://www.ain.gouv.fr/contenu/telechargement/37711/263176/file/2026-10-23%20BRECI%20CP%20Obligation%20d'%C3%A9quipements%20hivernaux.pdf"
+          lire "https://www.pyrenees-orientales.gouv.fr/contenu/telechargement/50606/384023/file/2026-273-0001_avec_annexes.pdf"
+          lire "https://www.isere.gouv.fr/Actions-de-l-Etat/Securites/Securite-routiere/Equipements-hivernaux-obligatoires-les-regles-a-connaitre-en-Isere"
