@@ -8,7 +8,7 @@
 - **Adresse** : `/loi-montagne/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/pression-des-pneus/` (vague A) ; `/usure-des-pneus/` (vague C : pas de lien dans le texte avant sa publication).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
-- **Page exemple rédigée** (sa validation est notée au journal) : `exemples/pneus/loi-montagne.md`. Elle sert de point de départ à la page de l'étape 8.
+- **Page exemple rédigée** (sa validation est notée au journal) : `src/content/pneus/loi-montagne.md`. Elle sert de point de départ à la page de l'étape 8.
 
 ## Requête et mots-clés (plan du site, docs/05)
 

@@ -1,7 +1,7 @@
 ---
-# Exemple rédigé du modèle de page pneus et obligations (étape 6, livrable 6.6c). Jamais publié avant son lot : il est
-# hors de src/content et n'est construit que par la construction de recette (AVEC_EXEMPLES=1, dist-exemples). Il deviendra
-# la page « loi montagne » de la vague A (étape 8). Les lignes de l'encadré sont saisies : elles citent le code de la route
+# Page « loi montagne » de la vague A (modèle pneus et obligations, livrable 6.6c ; page publiable 8.3.1a, validée par
+# Houssem le 10/11/2026). Passée de exemples/ à src/content par la pull request du premier lot (règle de passage,
+# travaux/etape-8/regle-de-passage.md). Les lignes de l'encadré sont saisies : elles citent le code de la route
 # (Légifrance) et la Sécurité routière, sources de première main (règle 4 de 01). Textes relevés : travaux/etape-6/textes/.
 id: loi-montagne
 title: "Loi montagne : pneus hiver ou chaînes, où et quand c'est obligatoire"
