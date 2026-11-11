@@ -48,7 +48,7 @@ a:focus-visible {
   gap: 0.25rem 1rem;
 }
 /* Marque (src/lib/marque.ts, piste A « Cadran ») : dessin de taille fixe (aucun décalage de mise en page), nom en
-   deux parties, « auto » dans la couleur d'accent (contraste 6,6:1 sur blanc). */
+   deux parties, « auto » dans la couleur d'accent (contraste 6,7:1 sur blanc). */
 .nom-du-site {
   display: inline-flex;
   align-items: center;

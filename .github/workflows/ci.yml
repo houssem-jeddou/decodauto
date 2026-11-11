@@ -109,6 +109,9 @@ jobs:
       - name: Lighthouse mobile de la page de chaque modèle (porte de l'étape 8 ; avec les emplacements publicitaires factices de la construction de recette, livrable 7.5b)
         if: ${{ !cancelled() }}
         run: npx lhci autorun --config=lighthouserc-exemples.json
+      - name: Scores par page de la recette (médiane de chaque mesure, lecture dans ce journal)
+        if: ${{ !cancelled() }}
+        run: node scripts/scores-lighthouse.ts .lighthouseci
       - name: Conserver la construction de recette
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -137,12 +140,17 @@ jobs:
           path: dist
       - name: Lighthouse (mobile, médiane de 3 passages)
         run: npm run lighthouse
+      - name: Scores par page (médiane de chaque mesure, lecture dans ce journal)
+        if: ${{ !cancelled() }}
+        run: node scripts/scores-lighthouse.ts .lighthouseci
       - name: Conserver les rapports
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: rapports-lighthouse
           path: .lighthouseci
+          # Dossier caché : sans cette option, upload-artifact ne le conserve pas (« No files were found »).
+          include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 7
 
