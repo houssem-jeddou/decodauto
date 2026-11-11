@@ -16,6 +16,7 @@ import {
   type ChangementDeTitre,
   type EtatDuSite,
 } from './lib/indexation-durable.ts';
+import type { Constat } from '../src/lib/controle.ts';
 
 type Lecteur = { fichier: (chemin: string) => Promise<string | undefined>; pages: () => Promise<string[]> };
 
@@ -77,8 +78,8 @@ if (indexBase !== -1 && (ref === undefined || ref.startsWith('--'))) {
   exit(2);
 }
 
-let constats;
-let bilan: string;
+let constats: Constat[] = [];
+let bilan = '';
 try {
   const tete = await lireEtat(disque, 'pull request');
   constats = [...constatsVariable(tete.drapeau, env['SITE_INDEXABLE']), ...constatsRedirections(tete)];
