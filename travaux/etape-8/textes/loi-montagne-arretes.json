@@ -41,5 +41,12 @@
   "perimetre": "a-lire",
   "url": "https://www.ariege.gouv.fr/content/download/24415/147881/file/AP_%C3%A9quipements%20sp%C3%A9ciaux_09.pdf",
   "note": "la page de la préfecture ne cite pas l'arrêté ; PDF repéré par la recherche, non lu"
+ },
+ {
+  "dep": "Isère (38)",
+  "arrete": "Arrêté préfectoral du 12/01/2026 (actualise la liste des communes)",
+  "perimetre": "communes",
+  "url": "https://www.isere.gouv.fr/Actions-de-l-Etat/Securites/Securite-routiere/Equipements-hivernaux-obligatoires-les-regles-a-connaitre-en-Isere",
+  "note": "page lue le 11/11/2026 depuis un serveur de GitHub : « L'arrêté préfectoral du 12 janvier 2026 actualise la liste des communes concernées. En 2026, deux nouvelles communes intègrent le [périmètre] » ; PDF 2026_AP_PneuHiver_038.pdf non lu (téléchargement refusé)"
  }
 ]
