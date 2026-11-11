@@ -55,3 +55,7 @@ Verdict : **à corriger** (trois points bloquants, corrigés), fond juridique co
 - **Mineurs, corrigés** : numéros de téléphone sans espaces insécables ajoutés au hasard ; tests du rendu réel (bloc avant le texte, contrôles de typographie, d'identifiants et d'expressions interdites) ; mots entiers dans le test des numéros d'inscription ; dates de la page ; point 5° de l'article noté (point 8).
 - **Écarté** : le lien de pied de page mène à `#confidentialite`, sous le bloc des mentions : changer l'ancre demande une demande de changement ; le libellé « Mentions légales et confidentialité » reste vrai, le bloc est juste au-dessus.
 - **Non vérifié** : texte intégral du 5° de l'article 1-1 ; décret d'application du droit de réponse.
+
+## 7. Validation
+
+Houssem a validé le livrable 7.4b le 10/11/2026 à 15 h 31 (Africa/Tunis) : « Valide 7.4b ». Elle couvre le bloc des mentions légales (éditeur à titre professionnel, domiciliation d'Ariana, téléphone, directeur de la publication, hébergeur, droit de réponse, aucun numéro d'inscription publié), la politique de confidentialité mise à jour (troisième cas : le téléphone) et les recommandations du §4 retenues le 10/11. Les points du §4 « à confirmer ou incertain » restent à traiter avant la mise en ligne (journal : « Avant la mise en ligne »). Aucun tag.

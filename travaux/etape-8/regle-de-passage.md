@@ -4,8 +4,8 @@ Où vit une page rédigée avant et après sa mise en ligne, et ce qui la suit q
 
 ## La règle
 
-1. **Avant la mise en ligne** : une page rédigée et validée vit dans `exemples/<type>/<id>.md` (branche d'intégration `integration/vague-a`). Elle n'est construite que par la recette des exemples (`AVEC_EXEMPLES=1`, `dist-exemples`, jamais déployée). Aucune vraie page n'est dans `src/content` avant la mise en ligne.
-2. **Le passage** est un déplacement de fichier sans autre changement de contenu : `exemples/<type>/<id>.md` → `src/content/<type>/<id>.md`. Il se fait **seulement dans la pull request de mise en ligne**, sur demande de Houssem, par `npm run passage -- <id> --appliquer` (sans `--appliquer` : essai à blanc).
+1. **Avant la mise en ligne** : une page rédigée et validée vit dans `exemples/<type>/<id>.md` (branche d'intégration `integration/vague-a`). Elle n'est construite que par la recette des exemples (`AVEC_EXEMPLES=1`, `dist-exemples`, jamais déployée). Aucune vraie page n'est dans `src/content` avant la mise en ligne de son lot.
+2. **Le passage** est un déplacement de fichier sans autre changement de contenu : `exemples/<type>/<id>.md` → `src/content/<type>/<id>.md`. Il se fait **seulement dans la pull request de mise en ligne du lot concerné** (demande de changement n° 17 : une pull request par lot), sur demande de Houssem, par `npm run passage -- <id> --appliquer` (sans `--appliquer` : essai à blanc).
 3. **Conditions contrôlées avant tout déplacement** (`scripts/lib/passage.ts`, refus avec la liste des écarts) :
    - l'identifiant est dans `data/plan-du-site.json` et le fichier source porte ce même identifiant ;
    - la page n'existe pas déjà dans `src/content` (un identifiant, un seul fichier) ;
