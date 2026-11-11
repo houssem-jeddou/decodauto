@@ -1,7 +1,7 @@
 ---
-# Page exemple du socle (étape 7, livrables 7.2 et 7.4b) : mentions légales et politique de confidentialité (03, étape 7).
-# Jamais publiée avant son lot : hors de src/content, construite seulement par la construction de recette (AVEC_EXEMPLES=1,
-# dist-exemples). Le bloc « Mentions légales » (éditeur, directeur de la publication, hébergeur, droit de réponse) est généré
+# Page du socle (étape 7, livrables 7.2 et 7.4b) : mentions légales et politique de confidentialité (03, étape 7).
+# Passée de exemples/ à src/content par la pull request du premier lot (travaux/etape-8/regle-de-passage.md), texte validé
+# par Houssem (7.2 le 09/11/2026, 7.4b le 10/11/2026). Le bloc « Mentions légales » (éditeur, directeur de la publication, hébergeur, droit de réponse) est généré
 # par le modèle depuis src/lib/editeur.ts et passe avant ce texte : il ne s'écrit pas ici.
 # Le texte décrit la mesure d'audience sans traceur (décision 1 du paquet 7.2) : TIERS-RESSOURCE et PROD-TRACEUR le tiennent vrai.
 id: mentions-legales

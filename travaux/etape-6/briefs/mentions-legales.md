@@ -6,7 +6,7 @@
 
 - **Type** : socle ; **thème** : socle ; **vague** : A.
 - **Adresse** : `/mentions-legales/`.
-- **Page exemple rédigée** (sa validation est notée au journal) : `exemples/socle/mentions-legales.md`. Elle sert de point de départ à la page de l'étape 8.
+- **Page exemple rédigée** (sa validation est notée au journal) : `src/content/socle/mentions-legales.md`. Elle sert de point de départ à la page de l'étape 8.
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
