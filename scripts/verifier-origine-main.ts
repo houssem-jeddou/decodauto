@@ -59,6 +59,9 @@ try {
   if (env['GITHUB_STEP_SUMMARY'] !== undefined) {
     await appendFile(env['GITHUB_STEP_SUMMARY'], [`### ${bilan}`, '', ...constats.map((c) => `- \`${c.regle}\` ${c.message}`), ''].join('\n'));
   }
+  // Point de départ (dernier déploiement, à défaut la base de l'envoi) : l'étape suivante y compare l'indexation durable
+  // (demande de changement n° 18).
+  if (env['GITHUB_OUTPUT'] !== undefined) await appendFile(env['GITHUB_OUTPUT'], `depuis=${depuis ?? ''}\n`);
   exit(erreurs.length === 0 ? 0 : 1);
 } catch (e) {
   stdout.write(`::error title=GARDE-FOU-LECTURE::${e instanceof Error ? e.message : String(e)} Déploiement refusé : l'origine des commits n'a pas pu être vérifiée.\n`);

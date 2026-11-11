@@ -1,9 +1,10 @@
 // Marque du site (premier lot, étape 9) : favicon et logo de l'en-tête, piste A « Cadran » choisie par Houssem le
 // 11/11/2026 (un « d » dont la boucle est un cadran de tableau de bord, aiguille ambre). Un seul dessin, ci-dessous :
 // le bandeau l'affiche en ligne (src/lib/gabarit.ts) et les fichiers de public/ en sont tirés par
-// travaux/marque/generer-favicons.mjs (hors construction : il faut un navigateur). EMPREINTE_DESSIN_FAVICONS est
-// l'empreinte du dessin au moment de cette génération : si le dessin change sans que les fichiers soient régénérés,
-// les tests échouent (tests/marque.test.ts).
+// travaux/marque/generer-favicons.mjs (hors construction : il faut un navigateur). EMPREINTE_DESSIN_FAVICONS et
+// EMPREINTES_FICHIERS_MARQUE sont les empreintes du dessin et des fichiers produits à cette génération : un dessin changé
+// sans régénération, ou un fichier remplacé à la main, fait échouer les tests (tests/marque.test.ts). Seul le générateur
+// les produit ensemble ; les recopier à la main sans régénérer reste possible (limite : règle de relecture).
 //
 // Règles de Google (Search Central, « Define a favicon to show in search results », page mise à jour le 27/10/2026,
 // lue le 11/11/2026) : lien rel="icon" (ou apple-touch-icon) sur la page d'accueil ; un favicon par nom d'hôte ;
@@ -22,6 +23,12 @@ export const DESSIN_MARQUE =
 
 /** Empreinte SHA-256 de DESSIN_MARQUE quand les fichiers de public/ en ont été tirés : recopiée à chaque régénération. */
 export const EMPREINTE_DESSIN_FAVICONS = 'e02147fbf36b58e5e80c0a5dc1a845616cf5117ee3eadbe2c6add0cbac70e51c';
+/** Empreinte SHA-256 de chaque fichier produit à cette génération : un fichier remplacé à la main fait échouer les tests. */
+export const EMPREINTES_FICHIERS_MARQUE: Readonly<Record<string, string>> = {
+  '/favicon.png': '22b0c1c0b6922875a468c47db7598b954b354687bedd3b0ebe531469e2bc0a9b',
+  '/apple-touch-icon.png': '381f980672437b8bb1eef68f212393f29d510141bb9e38daac1f960cd1abee56',
+  '/favicon.ico': '985c3e5f47ef8c3908dd2cf01b6c472467943cd019ac3ae2aa37723aa0f79ef9',
+};
 
 /** Fichiers servis, à adresse fixe (Google : « The favicon URL must be stable »). Ne jamais renommer. */
 export const FAVICON = '/favicon.png';

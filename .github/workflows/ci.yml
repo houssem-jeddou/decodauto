@@ -40,7 +40,8 @@ jobs:
       # => variable SITE_INDEXABLE = "true" (sinon tout le site passerait en noindex) et redirections bien formées ; sur
       # une pull request, comparaison avec sa base : jamais de retour au non-indexé, aucune adresse publiée sans
       # redirection 301, date « Mis à jour le » changée seulement avec le contenu, title et H1 changés seulement avec
-      # une ligne de config/changements-de-titre.json, 90 jours au moins après le changement précédent.
+      # une ligne de config/changements-de-titre.json, 90 jours au moins après le changement précédent. Sur main, la même
+      # comparaison se fait avec le dernier déploiement, dans le travail « origine-main » (dont dépend le déploiement).
       - name: Indexation durable (variable, retour au non-indexé, adresses, dates, titres)
         env:
           BASE_REF: ${{ github.base_ref }}
@@ -180,9 +181,22 @@ jobs:
           node-version-file: .nvmrc
       # Aucune dépendance : le script n'utilise que Node, Git et l'API GitHub.
       - name: Vérifier l'origine des commits
+        id: origine
         run: node scripts/verifier-origine-main.ts
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      # Demande de changement n° 18 : sur main, l'indexation durable se compare avec le dernier déploiement (ce qui est en
+      # ligne), pas avec l'envoi précédent : une fusion faite sans attendre la CI de sa pull request reste contrôlée, et un
+      # envoi refusé ne devient pas la nouvelle référence. Le déploiement dépend de ce travail.
+      - name: Indexation durable depuis le dernier déploiement
+        env:
+          DEPUIS: ${{ steps.origine.outputs.depuis }}
+        run: |
+          if [ -z "$DEPUIS" ]; then
+            echo "::error title=INDEXATION-LECTURE::point de départ introuvable : comparaison impossible, déploiement refusé"
+            exit 1
+          fi
+          node scripts/verifier-indexation-durable.ts --base "$DEPUIS"
 
   secrets-cloudflare:
     name: Secrets Cloudflare présents ?

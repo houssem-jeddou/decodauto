@@ -3,16 +3,21 @@
 // pull request et, en comparaison, sa base), les tests les appellent tel quel.
 //  - INDEXATION-VARIABLE : drapeau d'indexation à true et variable SITE_INDEXABLE différente de "true" : la construction
 //    passerait tout le site en noindex sans rien dire ; refusé à chaque construction, déploiement compris.
-//  - INDEXATION-RETOUR : la base est indexable (drapeau true) et la pull request remet le drapeau à false.
+//  - INDEXATION-RETOUR : la base est indexable (drapeau true) et la pull request remet le drapeau à false, sans le retour
+//    décidé par une demande de changement acceptée (champ `retour` de config/indexation.json : numéro et date) ; un retour
+//    décidé suspend les autres comparaisons (le site entier sort de l'index).
 //  - ADRESSE-SANS-REDIRECTION : une adresse publiée par la base (accueil, ou page du plan qui a son fichier dans
 //    src/content) n'est plus construite et n'a pas de redirection 301 dans public/_redirects.
 //  - REDIRECTION-FORMAT / REDIRECTION-RETIREE : une ligne de public/_redirects est « source cible 301 », la source n'est
-//    pas une page publiée, la cible en est une ; une redirection de la base n'est jamais retirée.
+//    pas une page publiée, la cible en est une ; une redirection de la base n'est retirée que si sa source redevient une
+//    page publiée (page republiée à son adresse).
 //  - DATE-SANS-MODIFICATION / DATE-RECULEE : date_modification (date « Mis à jour le » et lastmod du plan du site)
-//    changée sans que rien d'autre ne change dans le fichier de la page (hors commentaires et dates de revue), ou reculée.
+//    changée alors que rien d'autre ne change, ni dans le fichier de la page (hors commentaires et dates de revue), ni dans
+//    les données qu'affichent les pages (base voyants, registre des sources, coûts) ; ou reculée.
 //  - TITRE-MODIFIE / TITRE-TROP-FREQUENT / TITRES-REGISTRE : title ou H1 d'une page publiée changés sans ligne dans
 //    config/changements-de-titre.json (qui donne les nouveaux textes, la date et la raison), ou moins de 90 jours après le
-//    changement précédent de la même page ; le registre ne perd jamais une ligne.
+//    changement précédent de la même page, sauf exception notée dans la ligne (`regle-13` : correction urgente ;
+//    `demande-<n>` : demande de changement acceptée) ; le registre ne perd jamais une ligne.
 import type { Constat } from '../../src/lib/controle.ts';
 
 export const FICHIER_REDIRECTIONS = 'public/_redirects';
@@ -29,11 +34,25 @@ export interface ChangementDeTitre {
   title: string;
   h1: string;
   raison: string;
+  /** Hors délai de 90 jours : `regle-13` (correction urgente, 03 règle 13) ou `demande-<n>` (demande de changement acceptée). */
+  exception?: string | undefined;
 }
+
+/** Retour au non-indexé décidé (config/indexation.json, champ `retour`) : demande de changement acceptée et date. */
+export interface RetourDecide {
+  demande: number;
+  date: string;
+}
+
+const EXCEPTION_TITRE = /^(regle-13|demande-\d+)$/;
 
 export interface EtatDuSite {
   /** config/indexation.json */
   drapeau: boolean;
+  /** config/indexation.json, champ `retour` (seulement avec un drapeau à false). */
+  retour?: RetourDecide | undefined;
+  /** Données qu'affichent les pages, hors de leur fichier : base voyants, registre des sources, coûts (texte brut). */
+  donnees?: string | undefined;
   /** Plan du site : identifiant → adresse. */
   plan: ReadonlyMap<string, string>;
   /** Fichiers de src/content : identifiant → texte brut du fichier. */
@@ -134,13 +153,20 @@ export function constatsRedirections(etat: Pick<EtatDuSite, 'plan' | 'pages' | '
 }
 
 const joursEntre = (a: string, b: string): number => (Date.parse(`${b}T00:00:00Z`) - Date.parse(`${a}T00:00:00Z`)) / 86_400_000;
-const memeChangement = (a: ChangementDeTitre, b: ChangementDeTitre): boolean => a.id === b.id && a.date === b.date && a.title === b.title && a.h1 === b.h1 && a.raison === b.raison;
+const memeChangement = (a: ChangementDeTitre, b: ChangementDeTitre): boolean =>
+  a.id === b.id && a.date === b.date && a.title === b.title && a.h1 === b.h1 && a.raison === b.raison && (a.exception ?? '') === (b.exception ?? '');
 
 /** Comparaison de la pull request (tête) avec sa base (main) : ce qui pénaliserait un site déjà indexé. */
+export function retourDecideValide(retour: RetourDecide | undefined): boolean {
+  return retour !== undefined && Number.isInteger(retour.demande) && retour.demande > 0 && /^\d{4}-\d{2}-\d{2}$/.test(retour.date);
+}
+
 export function constatsComparaison(base: EtatDuSite, tete: EtatDuSite): Constat[] {
   const constats: Constat[] = [];
   if (base.drapeau && !tete.drapeau) {
-    constats.push(erreur('INDEXATION-RETOUR', "la base est indexable et la pull request remet config/indexation.json à false : jamais de retour au non-indexé (pour retirer une page en urgence : outil « Suppressions » de Search Console, puis correction ou redirection)", 'config/indexation.json'));
+    // Retour décidé par une demande de changement acceptée : le site entier sort de l'index, le reste ne se compare plus.
+    if (retourDecideValide(tete.retour)) return [];
+    constats.push(erreur('INDEXATION-RETOUR', "la base est indexable et la pull request remet config/indexation.json à false : jamais de retour au non-indexé sans demande de changement acceptée (champ « retour » : { demande, date }) ; pour retirer une page en urgence : outil « Suppressions » de Search Console, puis correction ou redirection", 'config/indexation.json'));
   }
 
   // Adresses : rien de publié ne disparaît sans redirection 301, aucune redirection ne disparaît.
@@ -152,7 +178,10 @@ export function constatsComparaison(base: EtatDuSite, tete: EtatDuSite): Constat
     }
   }
   for (const r of lireRedirections(base.redirections).regles) {
-    if (!sourcesTete.has(r.source)) constats.push(erreur('REDIRECTION-RETIREE', `la redirection de ${r.source} (base, ligne ${r.ligne}) est retirée : une redirection reste en place`, FICHIER_REDIRECTIONS));
+    // Seule exception : la source redevient une page publiée (page republiée à son adresse) ; la redirection doit alors partir.
+    if (!sourcesTete.has(r.source) && !publieesTete.has(r.source)) {
+      constats.push(erreur('REDIRECTION-RETIREE', `la redirection de ${r.source} (base, ligne ${r.ligne}) est retirée : une redirection reste en place, sauf si la page est republiée à cette adresse`, FICHIER_REDIRECTIONS));
+    }
   }
 
   // Dates et titres des pages publiées dans la base et toujours présentes.
@@ -163,8 +192,8 @@ export function constatsComparaison(base: EtatDuSite, tete: EtatDuSite): Constat
     const apres = valeurDeTete(texteTete, 'date_modification');
     if (avant !== undefined && apres !== undefined && avant !== apres) {
       if (apres < avant) constats.push(erreur('DATE-RECULEE', `page « ${id} » : date_modification reculée (${avant} → ${apres})`));
-      else if (contenuSansDates(texteBase) === contenuSansDates(texteTete)) {
-        constats.push(erreur('DATE-SANS-MODIFICATION', `page « ${id} » : date_modification changée (${avant} → ${apres}) sans modification du contenu : la date « Mis à jour le » et le lastmod du plan du site ne bougent que pour une vraie modification`));
+      else if (contenuSansDates(texteBase) === contenuSansDates(texteTete) && (base.donnees ?? '') === (tete.donnees ?? '')) {
+        constats.push(erreur('DATE-SANS-MODIFICATION', `page « ${id} » : date_modification changée (${avant} → ${apres}) sans modification du contenu ni des données affichées : la date « Mis à jour le » et le lastmod du plan du site ne bougent que pour une vraie modification`));
       }
     }
   }
@@ -185,7 +214,8 @@ export function constatsComparaison(base: EtatDuSite, tete: EtatDuSite): Constat
       continue;
     }
     const precedente = base.changementsDeTitre.filter((c) => c.id === id).map((c) => c.date).sort().at(-1);
-    if (precedente !== undefined && joursEntre(precedente, ligne.date) < DELAI_TITRE_JOURS) {
+    const exception = ligne.exception !== undefined && EXCEPTION_TITRE.test(ligne.exception);
+    if (!exception && precedente !== undefined && joursEntre(precedente, ligne.date) < DELAI_TITRE_JOURS) {
       constats.push(erreur('TITRE-TROP-FREQUENT', `page « ${id} » : title ou H1 changé le ${ligne.date}, moins de ${DELAI_TITRE_JOURS} jours après le changement du ${precedente}`, FICHIER_CHANGEMENTS_DE_TITRE));
     }
   }

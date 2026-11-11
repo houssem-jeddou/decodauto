@@ -12,6 +12,7 @@ import {
   COTE_FAVICON,
   DESSIN_MARQUE,
   EMPREINTE_DESSIN_FAVICONS,
+  EMPREINTES_FICHIERS_MARQUE,
   FAVICON,
   FAVICON_ICO,
   ICONE_APPLE,
@@ -30,8 +31,12 @@ const fichierPublic = async (adresse: string): Promise<Uint8Array> => new Uint8A
 const regles = (constats: readonly { regle: string }[]): string[] => constats.map((c) => c.regle);
 
 describe('marque : dessin unique et fichiers servis', () => {
-  test('les fichiers de public/ sont tirés du dessin actuel (sinon : node travaux/marque/generer-favicons.mjs)', () => {
-    assert.equal(createHash('sha256').update(DESSIN_MARQUE).digest('hex'), EMPREINTE_DESSIN_FAVICONS);
+  test('les fichiers de public/ sont ceux tirés du dessin actuel (sinon : node travaux/marque/generer-favicons.mjs)', async () => {
+    assert.equal(createHash('sha256').update(DESSIN_MARQUE).digest('hex'), EMPREINTE_DESSIN_FAVICONS, 'dessin changé sans régénération');
+    assert.deepEqual(Object.keys(EMPREINTES_FICHIERS_MARQUE).sort(), [FAVICON, ICONE_APPLE, FAVICON_ICO].sort());
+    for (const [adresse, attendue] of Object.entries(EMPREINTES_FICHIERS_MARQUE)) {
+      assert.equal(createHash('sha256').update(await fichierPublic(adresse)).digest('hex'), attendue, `${adresse} remplacé sans régénération`);
+    }
   });
 
   test('adresses fixes : ne jamais les renommer (Google : « The favicon URL must be stable »)', () => {

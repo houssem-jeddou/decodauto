@@ -10,7 +10,7 @@ import { LIBELLES_THEMES, THEMES, type Theme } from '../schemas/listes.ts';
 
 /** Le positionnement du site (docs/01) : le H1 de l'accueil. */
 export const TITRE_ACCUEIL = 'Votre voiture vous alerte, on vous dit quoi faire.';
-export const TITLE_ACCUEIL = 'decodauto.com : voyant allumé, code défaut, que faire ?';
+export const TITLE_ACCUEIL = 'decodauto : voyant allumé, code défaut, que faire ?';
 export const DESCRIPTION_ACCUEIL = 'Voyant allumé, code défaut, bruit suspect ou obligation : peut-on rouler, avec quelle urgence, que faire. Un guide indépendant, sans pièces à vendre.';
 
 /** Texte de l'accueil, à valider par Houssem. Aucun chiffre, aucune promesse, aucun lien (charte §2.7). */

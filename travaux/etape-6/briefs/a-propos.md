@@ -6,7 +6,7 @@
 
 - **Type** : socle ; **thème** : socle ; **vague** : A.
 - **Adresse** : `/a-propos/`.
-- **Page exemple rédigée** (sa validation est notée au journal) : `src/content/socle/a-propos.md`. Elle sert de point de départ à la page de l'étape 8.
+- **Page publiée** (sa validation est notée au journal) : `src/content/socle/a-propos.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

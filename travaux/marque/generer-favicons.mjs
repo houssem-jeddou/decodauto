@@ -2,11 +2,11 @@
 //   public/favicon.png          192 × 192, coins transparents (rel="icon")
 //   public/apple-touch-icon.png 192 × 192, carré plein sans coins arrondis (iOS arrondit lui-même)
 //   public/favicon.ico          48 × 48 et 96 × 96 (PNG dans un ICO), jamais déclaré : repli pour /favicon.ico
-// puis affiche l'empreinte du dessin, à recopier dans EMPREINTE_DESSIN_FAVICONS (tests/marque.test.ts la vérifie).
+// puis affiche les empreintes du dessin et des fichiers, à recopier dans src/lib/marque.ts (tests/marque.test.ts les vérifie).
 // Hors construction et hors CI : il faut Chrome et puppeteer (aucune dépendance ajoutée au site).
 // Usage : node travaux/marque/generer-favicons.mjs [chemin du module puppeteer] [chemin de Chrome]
 import { createHash } from 'node:crypto';
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { argv } from 'node:process';
 import { COTES_ICO, COTE_FAVICON, DESSIN_MARQUE } from '../../src/lib/marque.ts';
 
@@ -56,4 +56,7 @@ try {
 } finally {
   await navigateur.close();
 }
-process.stdout.write(`Fichiers écrits. EMPREINTE_DESSIN_FAVICONS = '${createHash('sha256').update(DESSIN_MARQUE).digest('hex')}'\n`);
+const empreinte = (octets) => createHash('sha256').update(octets).digest('hex');
+const fichiers = {};
+for (const f of ['favicon.png', 'apple-touch-icon.png', 'favicon.ico']) fichiers[`/${f}`] = empreinte(await readFile(`public/${f}`));
+process.stdout.write(`Fichiers écrits. À recopier dans src/lib/marque.ts :\nEMPREINTE_DESSIN_FAVICONS = '${empreinte(DESSIN_MARQUE)}'\nEMPREINTES_FICHIERS_MARQUE = ${JSON.stringify(fichiers, null, 2)}\n`);

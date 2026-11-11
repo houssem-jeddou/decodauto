@@ -47,6 +47,14 @@ describe('retour au non-indexé', () => {
     assert.deepEqual(regles(constatsComparaison(BASE, { ...BASE, drapeau: false })), ['INDEXATION-RETOUR']);
     assert.deepEqual(regles(constatsComparaison({ ...BASE, drapeau: false }, BASE)), [], 'premier passage à true');
   });
+
+  test('retour décidé par une demande de changement acceptée : admis, et le reste ne se compare plus (retour arrière du lot)', () => {
+    const retourArriere = etat({}, { drapeau: false, retour: { demande: 21, date: '2026-12-01' } });
+    assert.deepEqual(regles(constatsComparaison(BASE, retourArriere)), []);
+    for (const retour of [{ demande: 0, date: '2026-12-01' }, { demande: 21, date: '01/12/2026' }]) {
+      assert.deepEqual(regles(constatsComparaison(BASE, { ...retourArriere, retour })), ['INDEXATION-RETOUR', 'ADRESSE-SANS-REDIRECTION', 'ADRESSE-SANS-REDIRECTION'], JSON.stringify(retour));
+    }
+  });
 });
 
 describe('adresses et redirections', () => {
@@ -60,10 +68,14 @@ describe('adresses et redirections', () => {
     assert.deepEqual(regles(constatsRedirections(redirige)), []);
   });
 
-  test('une redirection de la base n’est jamais retirée', () => {
+  test('une redirection de la base n’est retirée que si la page est republiée à son adresse', () => {
     const avec = { ...BASE, redirections: '/ancienne/ /loi-montagne/ 301\n' };
     assert.deepEqual(regles(constatsComparaison(avec, BASE)), ['REDIRECTION-RETIREE']);
     assert.deepEqual(regles(constatsComparaison(avec, avec)), []);
+    const retiree = etat({ 'a-propos': page('a-propos') }, { redirections: '/loi-montagne/ / 301\n' });
+    assert.deepEqual(regles(constatsComparaison(BASE, retiree)), [], 'page retirée avec sa redirection');
+    assert.deepEqual(regles(constatsComparaison(retiree, BASE)), [], 'republiée : la redirection part');
+    assert.deepEqual(regles(constatsRedirections({ ...BASE, redirections: retiree.redirections })), ['REDIRECTION-FORMAT'], 'garder la redirection d’une page republiée la rendrait inaccessible');
   });
 
   test('format de public/_redirects : 301, source du site non publiée, cible publiée, pas de doublon', () => {
@@ -87,6 +99,11 @@ describe('dates de mise à jour (« Mis à jour le », lastmod du plan du site)'
     assert.deepEqual(regles(constatsComparaison(BASE, memeTexte)), ['DATE-SANS-MODIFICATION']);
     const recul = etat({ 'a-propos': page('a-propos', { date_modification: '2026-11-01' }, 'Autre texte.'), 'loi-montagne': page('loi-montagne') });
     assert.deepEqual(regles(constatsComparaison(BASE, recul)), ['DATE-RECULEE']);
+  });
+
+  test('date changée parce qu’une donnée affichée a changé (base voyants, sources, coûts) : admis', () => {
+    const memeTexte = etat({ 'a-propos': page('a-propos', { date_modification: '2026-12-01' }), 'loi-montagne': page('loi-montagne') }, { donnees: 'data/couts.json\n{ "fourchette": 2 }' });
+    assert.deepEqual(regles(constatsComparaison({ ...BASE, donnees: 'data/couts.json\n{ "fourchette": 1 }' }, memeTexte)), []);
   });
 
   test('vraie modification : date changée admise ; revue sans modification : seule la date de revue bouge', () => {
@@ -119,11 +136,15 @@ describe('title et H1 des pages publiées', () => {
     assert.deepEqual(regles(constatsComparaison(BASE, titreChange([{ ...nouveau('loi-montagne', '2026-12-01'), title: 'Autre' }]))), ['TITRE-MODIFIE'], 'la ligne donne les nouveaux textes');
   });
 
-  test('moins de 90 jours après le changement précédent : TITRE-TROP-FREQUENT', () => {
+  test('moins de 90 jours après le changement précédent : TITRE-TROP-FREQUENT, sauf correction urgente ou demande acceptée', () => {
     const precedent = { ...nouveau('loi-montagne', '2026-11-20'), title: 'Titre loi-montagne', h1: 'H1 loi-montagne' };
     const base = { ...BASE, changementsDeTitre: [precedent] };
     assert.deepEqual(regles(constatsComparaison(base, titreChange([precedent, nouveau('loi-montagne', '2026-12-01')]))), ['TITRE-TROP-FREQUENT']);
     assert.deepEqual(regles(constatsComparaison(base, titreChange([precedent, nouveau('loi-montagne', '2027-02-18')]))), []);
+    for (const exception of ['regle-13', 'demande-19']) {
+      assert.deepEqual(regles(constatsComparaison(base, titreChange([precedent, { ...nouveau('loi-montagne', '2026-12-01'), exception }]))), [], exception);
+    }
+    assert.deepEqual(regles(constatsComparaison(base, titreChange([precedent, { ...nouveau('loi-montagne', '2026-12-01'), exception: 'urgent' }]))), ['TITRE-TROP-FREQUENT'], 'exception inconnue');
   });
 
   test('H1 de la page, title et H1 de l’accueil comptent aussi ; le registre ne perd jamais une ligne', () => {
