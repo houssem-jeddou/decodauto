@@ -1,9 +1,9 @@
 ---
 # Page du socle (étape 7, livrable 7.3) : qui écrit decodauto.com et comment. Elle porte la fiche de l'auteur (champ
 # `auteurs`, affichée par le modèle du socle, jamais recopiée dans le texte) et la section « Méthode » (src/lib/charte.ts,
-# ajoutée par le modèle, jamais recopiée ici). Reste dans exemples/ jusqu'à la pull request de mise en ligne : elle passe
-# la première (travaux/etape-8/regle-de-passage.md), puisque toutes les autres pages renvoient vers sa section « Méthode ».
-# Texte à valider par Houssem : la fiche dit ce qu'il accepte de publier sur lui.
+# ajoutée par le modèle, jamais recopiée ici). Passée de exemples/ à src/content par la pull request du premier lot, la
+# première (travaux/etape-8/regle-de-passage.md), puisque toutes les autres pages renvoient vers sa section « Méthode ».
+# Texte validé par Houssem le 10/11/2026 (livrable 7.3) : la fiche dit ce qu'il accepte de publier sur lui.
 id: a-propos
 title: "À propos de decodauto.com"
 description: "Qui édite decodauto.com, ce que le site est et n'est pas, et comment les verdicts « rouler ou non » sont établis et vérifiés."
