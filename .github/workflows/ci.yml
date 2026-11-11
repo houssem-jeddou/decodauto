@@ -36,6 +36,21 @@ jobs:
           cache: npm
       - name: Installer les dépendances
         run: npm ci
+      # Demande de changement n° 18 (scripts/verifier-indexation-durable.ts) : à chaque construction, drapeau à true
+      # => variable SITE_INDEXABLE = "true" (sinon tout le site passerait en noindex) et redirections bien formées ; sur
+      # une pull request, comparaison avec sa base : jamais de retour au non-indexé, aucune adresse publiée sans
+      # redirection 301, date « Mis à jour le » changée seulement avec le contenu, title et H1 changés seulement avec
+      # une ligne de config/changements-de-titre.json, 90 jours au moins après le changement précédent.
+      - name: Indexation durable (variable, retour au non-indexé, adresses, dates, titres)
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            git fetch --no-tags --depth=1 origin "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"
+            node scripts/verifier-indexation-durable.ts --base "origin/$BASE_REF"
+          else
+            node scripts/verifier-indexation-durable.ts
+          fi
       - name: Schémas et types
         run: npm run schemas
       - name: Tests des règles (pages de test valide et invalides)

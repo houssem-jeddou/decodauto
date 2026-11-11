@@ -131,6 +131,19 @@ Sur `main` (après chaque déploiement réussi, chaque lundi, à la demande depu
 
 Non vérifiable par machine (liste de recette de l'étape 9) : réglages Cloudflare eux-mêmes (robots d'IA, Bot Fight Mode, Rocket Loader), soumission du plan du site dans Search Console et Bing Webmaster Tools.
 
+## Indexation durable (premier lot, demande de changement n° 18)
+Script `scripts/verifier-indexation-durable.ts` (fonctions `scripts/lib/indexation-durable.ts`, sans dépendance), lancé par la CI avant la construction : à chaque construction (déploiement compris), et, sur une pull request, en comparant le résultat de la fusion avec sa base (`main`). Ce qu'une modification future ne doit jamais faire à un site indexé. Tests : `tests/indexation-durable.test.ts`.
+
+| Code | Règle | Gravité | Quand |
+|---|---|---|---|
+| INDEXATION-VARIABLE | Drapeau `config/indexation.json` à `true` et variable `SITE_INDEXABLE` différente de `"true"` : la construction passerait tout le site en noindex sans rien dire ; refusé, donc aucun déploiement | erreur | toute construction |
+| INDEXATION-RETOUR | La base est indexable et la pull request remet le drapeau à `false` (urgence : outil « Suppressions » de Search Console, puis correction ou redirection) | erreur | pull request |
+| ADRESSE-SANS-REDIRECTION | Une adresse publiée par la base (accueil, page du plan qui a son fichier dans `src/content`) n'est plus construite et n'a pas de redirection 301 dans `public/_redirects` (adresse changée dans le plan, page supprimée) | erreur | pull request |
+| REDIRECTION-FORMAT / REDIRECTION-RETIREE | Chaque ligne de `public/_redirects` : « source cible 301 », source = adresse du site avec barre finale, sans joker ni paramètre, jamais une page publiée, une seule fois ; cible = page publiée (pas de chaîne, pas d'autre site). Une redirection de la base n'est jamais retirée | erreur | toute construction / pull request |
+| DATE-SANS-MODIFICATION / DATE-RECULEE | `date_modification` (date « Mis à jour le » et `lastmod` du plan du site) changée alors que rien d'autre ne change dans le fichier de la page (hors commentaires, `date_revue`, `prochaine_revue`) ; ou reculée. Une coquille corrigée sans changer la date reste admise (règle de recette : la date ne bouge que pour une vraie modification) | erreur | pull request |
+| TITRE-MODIFIE / TITRE-TROP-FREQUENT / TITRES-REGISTRE | Title ou H1 d'une page publiée (accueil compris) changés sans nouvelle ligne `{ id, date, title, h1, raison }` dans `config/changements-de-titre.json` qui donne les nouveaux textes et une raison ; moins de 90 jours après le changement précédent de la même page ; une ligne du registre retirée ou modifiée | erreur | pull request |
+| INDEXATION-LECTURE | Fichier illisible (base ou pull request) : dans le doute, refus | erreur | toute construction |
+
 ## Brouillon de la base voyants et paquet de validation (étape 5)
 Avant la validation de Houssem, les lignes de la base sont préparées dans `data/voyants.brouillon.json` : la forme d'une ligne de la base sans l'empreinte, plus `sans_consigne`, la liste des notices consultées qui décrivent l'état sans consigne propre (elles ne fixent aucun niveau ; le paquet les montre). `npm run paquet` contrôle le brouillon et génère le paquet de validation (`travaux/etape-5/paquet-validation.md`). Code : `scripts/lib/brouillon.ts` ; tests : `tests/brouillon.test.ts`. Après la validation notée au journal, `node scripts/valider-brouillon.ts --valide-par-houssem AAAA-MM-JJ --empreinte <empreinte du paquet>` vérifie que le brouillon est bien celui du paquet validé (empreinte affichée dans le paquet), écrit les lignes dans `data/voyants.json` avec leur empreinte, enregistre la validation dans `travaux/etape-5/validation.json` et supprime le brouillon.
 
