@@ -1,6 +1,6 @@
 # Demande de changement n° 19 : marque du site (favicon, nom dans l'en-tête, nom du site pour Google, title de l'accueil)
 
-Proposée le 11/11/2026 avec la pull request du premier lot (étape 9), à la demande de Houssem (« Un favicon conforme aux règles de Google […] et le nom « decodauto » mis en forme dans l'en-tête. Propose-moi 2 ou 3 pistes originales, et fais-moi choisir »). Piste A « Cadran » **choisie par Houssem le 11/11/2026**. Elle touche des livrables validés (bandeau du livrable 6.3, balisage WebSite du 7.5a, title de l'accueil du 7.4a) : **à accepter par Houssem**, avec la ligne de validation de l'accueil.
+Proposée le 11/11/2026 avec la pull request du premier lot (étape 9), à la demande de Houssem (« Un favicon conforme aux règles de Google […] et le nom « decodauto » mis en forme dans l'en-tête. Propose-moi 2 ou 3 pistes originales, et fais-moi choisir »). Piste A « Cadran » **choisie par Houssem le 11/11/2026**. Elle touche des livrables validés (bandeau du livrable 6.3, balisage WebSite du 7.5a, title de l'accueil du 7.4a). **Acceptée par Houssem le 12/11/2026 (8 h 23)**, avec la ligne de validation de l'accueil (« pour des 6 points, pars avec ta recommandation »).
 
 | Rubrique | Contenu |
 |---|---|

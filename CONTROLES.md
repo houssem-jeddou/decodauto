@@ -131,8 +131,8 @@ Sur `main` (après chaque déploiement réussi, chaque lundi, à la demande depu
 
 Non vérifiable par machine (liste de recette de l'étape 9) : réglages Cloudflare eux-mêmes (robots d'IA, Bot Fight Mode, Rocket Loader), soumission du plan du site dans Search Console et Bing Webmaster Tools.
 
-## Indexation durable (premier lot, demande de changement n° 18, à accepter par Houssem)
-Script `scripts/verifier-indexation-durable.ts` (fonctions `scripts/lib/indexation-durable.ts`, sans dépendance), lancé par la CI : dans le travail « Contrôles », avant la construction, à chaque construction et, sur une pull request, en comparant le résultat de la fusion avec sa base (`main`) ; sur un envoi sur `main`, dans le travail « origine-main », après les contrôles et avant le déploiement, en comparant avec le dernier déploiement. Ce qu'une modification future ne doit jamais faire à un site indexé. Tests : `tests/indexation-durable.test.ts`. Le contrôle s'applique dès l'acceptation de la demande n° 18 ; refusée, il est retiré avant la fusion du premier lot.
+## Indexation durable (premier lot, demande de changement n° 18, acceptée le 12/11/2026)
+Script `scripts/verifier-indexation-durable.ts` (fonctions `scripts/lib/indexation-durable.ts`, sans dépendance), lancé par la CI : dans le travail « Contrôles », avant la construction, à chaque construction et, sur une pull request, en comparant le résultat de la fusion avec sa base (`main`) ; sur un envoi sur `main`, dans le travail « origine-main », après les contrôles et avant le déploiement, en comparant avec le dernier déploiement. Ce qu'une modification future ne doit jamais faire à un site indexé. Tests : `tests/indexation-durable.test.ts`. Règle 14 de `docs/03` (v13).
 
 | Code | Règle | Gravité | Quand |
 |---|---|---|---|
