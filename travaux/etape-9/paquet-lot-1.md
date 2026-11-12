@@ -1,12 +1,12 @@
 # Paquet du premier lot (étape 9, porte 8 par lot) : accueil, « à propos », mentions légales, loi montagne
 
-Pull request #35 (`lot-1/mise-en-ligne` → `main`), brouillon, préparée le 11/11/2026. **Rien n'est fusionné : le go et la fusion sont la décision de Houssem.** La fusion déploie et rend le site indexable.
+Pull request #35 (`lot-1/mise-en-ligne` → `main`), préparée le 11/11/2026 ; lignes de validation et décisions données le 12/11/2026 à 8 h 23 (§6). **Rien n'est fusionné : le go et la fusion sont la décision de Houssem.** La fusion déploie et rend le site indexable.
 
 ## Ce que Houssem décide
 
-1. Une **ligne de validation par page** (§6).
-2. **Demande de changement n° 18** (indexation durable : règle 14 de 03, contrôles) : accepter ou refuser. Acceptée, le texte est appliqué à `docs/03` et `CLAUDE.md` dans la pull request ; refusée, ses commits en sont retirés.
-3. **Demande de changement n° 19** (marque : favicon, nom dans l'en-tête, nom du site pour Google, title de l'accueil) : accepter ou refuser.
+1. ~~Une **ligne de validation par page** (§6)~~ : données le 12/11 (8 h 23).
+2. ~~**Demande de changement n° 18** (indexation durable : règle 14 de 03, contrôles)~~ : acceptée le 12/11 (8 h 23) ; texte appliqué à `docs/03` (v13), `CLAUDE.md` et `CONTROLES.md` dans la pull request.
+3. ~~**Demande de changement n° 19** (marque : favicon, nom dans l'en-tête, nom du site pour Google, title de l'accueil)~~ : acceptée le 12/11 (8 h 23).
 4. Le **go**, après la checklist (§7).
 
 ## 1. Contenu de la pull request
@@ -23,7 +23,7 @@ Pull request #35 (`lot-1/mise-en-ligne` → `main`), brouillon, préparée le 11
 
 | Critère | Pages | Preuve | Statut |
 |---|---|---|---|
-| Faits vérifiés sur sources, verdicts validés | Loi montagne (le socle n'a pas de verdict) | Paquet `travaux/etape-8/paquet-8.3.1a-loi-montagne.md`, validé le 10/11 ; textes relus en ligne le 10/11 | Validé ; **Journal officiel à revérifier le jour du go** (§7) |
+| Faits vérifiés sur sources, verdicts validés | Loi montagne (le socle n'a pas de verdict) | Paquet `travaux/etape-8/paquet-8.3.1a-loi-montagne.md`, validé le 10/11 ; textes relus en ligne le 10/11 | Validé ; Journal officiel revérifié le 12/11 (§7, point 1) |
 | Faits de sécurité et chiffres dans le paquet validé | Loi montagne | Même paquet : aucune amende (vérifié le 10/11), panneau B26 (amende de 2e classe, plafond 150 €), période du 1er novembre au 31 mars | Validé |
 | Encadré relu et empreinte | Loi montagne | Empreinte recalculée au passage = `validation` (`75abb315d6c3…`) ; même assertion dans `tests/porte6.test.ts` (CI) | Validé ; ligne de validation à écrire (§6) |
 | Lien « Signaler une erreur » | 4 pages | Contrôle SIGNALER-ERREUR-ABSENT (CI) ; vu sur le site construit : `mailto:erreur@decodauto.com` sur chaque page | Validé |
@@ -58,9 +58,11 @@ Captures (téléphone 390 px et ordinateur 1366 px, pages entières) : `accueil`
 - **Rien ne change à chaque déploiement** : `lastmod` et `dateModified` viennent de `date_modification` (date affichée), aucune date de construction (code et site construit).
 - **Manquait** : redirections, dates, titres, retour au non-indexé : demande n° 18 (contrôles dans cette pull request, règle 14 proposée pour 03 et `CLAUDE.md`).
 - **Search Console** (Chrome de Houssem, lecture seule, 11/11) : propriété **de domaine** `sc-domain:decodauto.com` (tout le domaine, `www` et `http` compris), « Vous êtes un propriétaire confirmé », ajoutée le 23/10/2026 ; robots.txt valide ; 23 demandes d'exploration en 90 jours ; **aucun plan du site soumis** ; réglage « IA générative dans la Recherche » sur « Inclure » (gardé : visibilité dans les réponses générées).
-- **Bing Webmaster Tools** : le Chrome de Houssem n'y est pas connecté (page « Sign in ») : non vérifié. À faire avant la soumission (§7).
+- **Bing Webmaster Tools** : le Chrome de Houssem n'y est pas connecté (page « Sign in ») : non vérifié. À faire après le déploiement (§7, point 9).
 
-## 6. Lignes de validation à confirmer (une par page)
+## 6. Lignes de validation (une par page)
+
+**Données par Houssem le 12/11/2026 à 8 h 23**, avec les demandes n° 18 et n° 19 : « pour des 6 points, pars avec ta recommandation » (la recommandation de Claude : valider les quatre lignes telles qu'écrites ci-dessous et accepter les deux demandes).
 
 1. **Accueil** : « Je valide l'accueil : texte validé en 7.4a, title « decodauto : voyant allumé, code défaut, que faire ? » (demande n° 19), liste générée (Loi montagne), en-tête et favicon de la piste A. »
 2. **À propos** : « Je valide « à propos » telle que validée en 7.3 (texte et fiche auteur), publiée sans changement. »
@@ -70,9 +72,11 @@ Captures (téléphone 390 px et ordinateur 1366 px, pages entières) : `accueil`
 ## 7. Checklist du go
 
 **Avant la fusion**
-1. **Journal officiel revérifié le jour même** (Légifrance, dans le Chrome de Houssem) : D314-8 inchangé ; recherches « équipements hivernaux », « dispositifs antidérapants », « période hivernale » avec « véhicules » depuis le 10/11. Un décret de sanction paru : pas de go pour la loi montagne (coût de l'encadré à revalider). Rien de nouveau : la page dit vrai (« vérifié le 10/11/2026 ») ; la date affichée se met à jour à la vérification mensuelle.
-2. Lignes de validation (§6) et décisions sur les demandes n° 18 et n° 19 ; si la n° 18 est acceptée, application de `docs/03` v13 et de `CLAUDE.md` dans la pull request, CI verte de nouveau.
-3. **Bing Webmaster Tools** : Houssem se connecte dans son Chrome ; vérification que decodauto.com y est ajouté et validé (sinon : import depuis Search Console).
+1. **Journal officiel revérifié le jour même** (Légifrance) : D314-8 inchangé ; recherches « équipements hivernaux », « dispositifs antidérapants », « période hivernale » avec « véhicules » depuis le 10/11. Un décret de sanction paru : pas de go pour la loi montagne (coût de l'encadré à revalider). Rien de nouveau : la page dit vrai (« vérifié le 10/11/2026 ») ; la date affichée se met à jour à la vérification mensuelle.
+   - **Fait le 12/11/2026 (vers 8 h 30), depuis la session** (le Chrome de Houssem ne répondait pas) : chapitre IV « Pneumatiques » du code de la route, **« Version en vigueur au 12/11/2026 »** sur Légifrance : articles R314-1 à D314-8, **aucun article R. 314-9** (l'article de sanction que prévoyait la fiche d'impact INTS1920190D : contravention de la quatrième classe) ; D314-8 **« En vigueur depuis le 01 novembre 2024 »**, modifié par le décret n° 2020-1264, art. 2, sans amende ni contravention. **Rien de nouveau : la page dit vrai.**
+   - **Non fait** : la recherche par mots du Journal officiel depuis le 10/11 (les pages de recherche de Légifrance ne sont pas lisibles depuis la session). Un décret paru le 10, le 11 ou le 12/11 et pas encore consolidé échapperait à la lecture du code ; la presse automobile du début novembre (dernier relevé : 6/11) écrit qu'aucun décret n'est paru. Cette recherche se fait dans le Chrome de Houssem à la première occasion ; un décret trouvé : correction urgente (règle 13).
+2. ~~Lignes de validation (§6) et décisions sur les demandes n° 18 et n° 19~~ : données le 12/11 (8 h 23) ; `docs/03` v13, `CLAUDE.md` et `CONTROLES.md` mis à jour dans la pull request ; CI verte de nouveau exigée (point 4).
+3. ~~**Bing Webmaster Tools** avant la fusion~~ : déplacé après le déploiement (point 9). L'import depuis Search Console vérifie le site automatiquement, sans fichier ni balise dans le dépôt (blog officiel de Bing Webmaster Tools, mis à jour en juin 2025) : rien dans la pull request n'en dépend.
 4. CI entièrement verte sur le dernier commit ; pull request sortie du brouillon.
 
 **Fusion** : par **commit de fusion** (« Create a merge commit »), jamais par rebase ni squash (garde-fou 7.6), par Houssem, ou par Claude sur sa demande.
@@ -82,7 +86,7 @@ Captures (téléphone 390 px et ordinateur 1366 px, pages entières) : `accueil`
 6. Réglages Cloudflare revus : robots d'IA (recherche et agents autorisés), Bot Fight Mode, Rocket Loader et Web Analytics désactivés, « Always Use HTTPS », règle `www`.
 7. Test des résultats enrichis (Google) sur `/loi-montagne/` (Article, fil d'Ariane) ; validateur de schema.org sur l'accueil (WebSite : Google ne teste pas le nom du site).
 8. **Search Console**, une seule fois, dans le Chrome de Houssem : Sitemaps → `https://decodauto.com/sitemap.xml` ; Inspection de l'URL des 4 adresses → « Demander une indexation ».
-9. **Bing Webmaster Tools**, une seule fois : plan du site soumis ; envoi des 4 adresses.
+9. **Bing Webmaster Tools**, une seule fois, dans le Chrome de Houssem : connexion (son compte Microsoft), « Import » depuis Search Console (vérification automatique), plan du site soumis ; envoi des 4 adresses.
 10. **IndexNow** : Cloudflare → Caching → Configuration → Crawler Hints ; Houssem accepte lui-même les conditions.
 11. **Suivi à J+7 et J+14** : pages indexées (Search Console › Pages ; inspection des 4 adresses) ; rappels dans la conversation si Houssem le souhaite.
 
