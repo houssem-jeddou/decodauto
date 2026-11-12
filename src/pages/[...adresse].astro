@@ -1,13 +1,16 @@
 ---
 // Route des pages (étape 6, livrable 6.6 ; socle, livrable 7.2) : une page par fichier de contenu, à l'adresse du plan du
-// site, rendue par le modèle de son type (src/lib/modeles.ts). Sur main, src/content n'a pas encore de vraie page (étape 8 :
-// aucune vraie page sur main avant la mise en ligne) : la route ne produit rien. Les exemples rédigés (exemples/) ne
+// site, rendue par le modèle de son type (src/lib/modeles.ts). Une page n'est dans src/content qu'à partir de la mise en ligne
+// de son lot (étape 8, demande de changement n° 17 ; premier lot : socle et loi montagne). Les exemples rédigés (exemples/) ne
 // sont lus qu'avec AVEC_EXEMPLES=1, pour la construction de recette (dist-exemples, jamais déployée).
 import type { InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
 import { cwd } from 'node:process';
 import Base from '../layouts/Base.astro';
 import { modeleDeLaPage, pageSocle } from '../lib/modeles.ts';
+import { cheminDAriane, sectionMethodeHtml } from '../lib/composants.ts';
+import { scriptsAPropos, scriptsPageEditoriale, type AuteurDeclare } from '../lib/donnees-structurees.ts';
+import { PAGE_METHODE, sectionMethode } from '../lib/charte.ts';
 import { donneesDuSite } from '../../scripts/lib/donnees-site.ts';
 import type { TypePage } from '../schemas/listes.ts';
 import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
@@ -31,9 +34,13 @@ export async function getStaticPaths() {
   );
   // Libellé court de chaque page construite : fil d'Ariane et pages liées ne mènent qu'à des pages construites.
   const libelles = new Map(entrees.map(({ page }) => [page.id, page.libelle_court]));
-  const { site } = await donneesDuSite(cwd(), libelles, new Date());
+  const { site, contexte } = await donneesDuSite(cwd(), libelles, new Date());
+  // Fiches auteur (page « à propos ») : l'auteur d'une page éditoriale est celui de sa fiche (données structurées, livrable 7.5a).
+  const entreesSocle = await getCollection('socle');
+  const adresseAPropos = site.plan.get(PAGE_METHODE)?.adresse;
+  const auteurs: AuteurDeclare[] = entreesSocle.flatMap((e) => ((e.data as PageSaisie<'socle'>).id === PAGE_METHODE ? ((e.data as PageSaisie<'socle'>).auteurs ?? []) : []));
   // Pages du socle (livrable 7.2), sauf l'accueil, qui a sa propre route (src/pages/index.astro).
-  const socle = (await getCollection('socle')).flatMap((entree) => {
+  const socle = entreesSocle.flatMap((entree) => {
     const page = entree.data as PageSaisie<'socle'>;
     if (page.id === 'accueil') return [];
     const ligne = site.plan.get(page.id);
@@ -42,7 +49,12 @@ export async function getStaticPaths() {
     return [
       {
         params: { adresse: ligne.adresse.replace(/^\/+|\/+$/g, '') },
-        props: { titre: page.title, description: page.description, html: pageSocle(page, entree.rendered?.html ?? '') },
+        props: {
+          titre: page.title,
+          description: page.description,
+          html: pageSocle(page, entree.rendered?.html ?? '', page.id === PAGE_METHODE ? sectionMethodeHtml(sectionMethode([...contexte.sources.values()])) : undefined),
+          donneesStructurees: page.id === PAGE_METHODE ? scriptsAPropos(auteurs, ligne.adresse) : [],
+        },
       },
     ];
   });
@@ -51,18 +63,29 @@ export async function getStaticPaths() {
     if (ligne === undefined) throw new Error(`page « ${page.id} » absente du plan du site (data/plan-du-site.json)`);
     const choix = modeleDeLaPage(type, page);
     if ('absent' in choix) throw new Error(`page « ${page.id} » : ${choix.absent}`);
+    // Données structurées (livrable 7.5a) : l'auteur est celui de la fiche de « à propos » (champ `auteur`).
+    const auteur = auteurs.find((a) => a.id === page.auteur);
+    if (auteur === undefined || adresseAPropos === undefined) throw new Error(`page « ${page.id} » : auteur « ${page.auteur} » sans fiche sur la page « ${PAGE_METHODE} » (données structurées)`);
     return {
       params: { adresse: ligne.adresse.replace(/^\/+|\/+$/g, '') },
-      props: { titre: page.title, description: page.description, html: choix.modele(page, site, corps) },
+      props: {
+        titre: page.title,
+        description: page.description,
+        html: choix.modele(page, site, corps),
+        donneesStructurees: scriptsPageEditoriale(
+          { titre: page.h1, description: page.description, adresse: ligne.adresse, modification: page.date_modification, auteur, adresseAPropos },
+          cheminDAriane(page.id, site.plan, site.libelles),
+        ),
+      },
     };
   });
   return [...editoriales, ...socle];
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { titre, description, html } = Astro.props as Props;
+const { titre, description, html, donneesStructurees } = Astro.props as Props;
 ---
 
-<Base titre={titre} description={description}>
+<Base titre={titre} description={description} donneesStructurees={donneesStructurees}>
   <Fragment set:html={html} />
 </Base>

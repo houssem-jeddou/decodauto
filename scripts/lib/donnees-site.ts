@@ -4,6 +4,7 @@
 // démonstration et l'aperçu des exemples.
 import { construireContexte, type Constat, type Contexte } from '../../src/lib/controle.ts';
 import type { DonneesSite } from '../../src/lib/gabarit.ts';
+import { emplacementsFactices } from '../../src/lib/emplacements-pub.ts';
 import { chargerDonnees } from './charger.ts';
 
 export interface DonneesDuSite {
@@ -26,6 +27,8 @@ export async function donneesDuSite(racine: string, libelles: ReadonlyMap<string
     couts: contexte.couts,
     pictogrammes: new Map((donnees.pictogrammes ?? []).map((p) => [p.id, p.contenu])),
     libelles: new Map(libelles),
+    // Emplacements publicitaires factices : construction de recette seulement (livrable 7.5b), jamais en production.
+    pubFactice: emplacementsFactices(process.env),
   };
   return { site, contexte, constats };
 }

@@ -36,6 +36,22 @@ jobs:
           cache: npm
       - name: Installer les dépendances
         run: npm ci
+      # Demande de changement n° 18 (scripts/verifier-indexation-durable.ts) : à chaque construction, drapeau à true
+      # => variable SITE_INDEXABLE = "true" (sinon tout le site passerait en noindex) et redirections bien formées ; sur
+      # une pull request, comparaison avec sa base : jamais de retour au non-indexé, aucune adresse publiée sans
+      # redirection 301, date « Mis à jour le » changée seulement avec le contenu, title et H1 changés seulement avec
+      # une ligne de config/changements-de-titre.json, 90 jours au moins après le changement précédent. Sur main, la même
+      # comparaison se fait avec le dernier déploiement, dans le travail « origine-main » (dont dépend le déploiement).
+      - name: Indexation durable (variable, retour au non-indexé, adresses, dates, titres)
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            git fetch --no-tags --depth=1 origin "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"
+            node scripts/verifier-indexation-durable.ts --base "origin/$BASE_REF"
+          else
+            node scripts/verifier-indexation-durable.ts
+          fi
       - name: Schémas et types
         run: npm run schemas
       - name: Tests des règles (pages de test valide et invalides)
@@ -67,7 +83,7 @@ jobs:
     # (ATTENDU-ABSENT) :
     #  - R4-VALIDATION-ABSENTE d'un exemple tant que Houssem n'a pas validé son encadré : l'empreinte n'est versée
     #    qu'après sa validation, jamais pour faire passer le contrôle, et l'attendu est retiré dans le même commit ;
-    #  - lien « Méthode » vers /a-propos/#methode : la page « à propos » est écrite à l'étape 7.
+    # Aucun attendu aujourd'hui : la page « à propos » (livrable 7.3) est dans src/content depuis le premier lot, les liens « Méthode » mènent à elle.
     if: ${{ github.event_name != 'schedule' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -87,18 +103,16 @@ jobs:
         run: node scripts/controle.ts --dist dist-exemples --exemples
       - name: Liens cassés
         if: ${{ !cancelled() }}
-        run: >-
-          node scripts/liens.ts --dist dist-exemples --exemples
-          --attendu 'LIEN-CASSE@voyants/index.html@/a-propos/#methode'
-          --attendu 'LIEN-CASSE@voyants/moteur/index.html@/a-propos/#methode'
-          --attendu 'LIEN-CASSE@codes-defaut/p0087/index.html@/a-propos/#methode'
-          --attendu 'LIEN-CASSE@loi-montagne/index.html@/a-propos/#methode'
+        run: node scripts/liens.ts --dist dist-exemples --exemples
       - name: Texte rédigé des exemples, tel que rendu (lecture dans ce journal)
         if: ${{ !cancelled() }}
         run: node scripts/texte-exemples.ts dist-exemples
-      - name: Lighthouse mobile de la page de chaque modèle (porte de l'étape 8 ; emplacements factices à venir, étape 7)
+      - name: Lighthouse mobile de la page de chaque modèle (porte de l'étape 8 ; avec les emplacements publicitaires factices de la construction de recette, livrable 7.5b)
         if: ${{ !cancelled() }}
         run: npx lhci autorun --config=lighthouserc-exemples.json
+      - name: Scores par page de la recette (médiane de chaque mesure, lecture dans ce journal)
+        if: ${{ !cancelled() }}
+        run: node scripts/scores-lighthouse.ts .lighthouseci
       - name: Conserver la construction de recette
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -127,14 +141,62 @@ jobs:
           path: dist
       - name: Lighthouse (mobile, médiane de 3 passages)
         run: npm run lighthouse
+      - name: Scores par page (médiane de chaque mesure, lecture dans ce journal)
+        if: ${{ !cancelled() }}
+        run: node scripts/scores-lighthouse.ts .lighthouseci
       - name: Conserver les rapports
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: rapports-lighthouse
           path: .lighthouseci
+          # Dossier caché : sans cette option, upload-artifact ne le conserve pas (« No files were found »).
+          include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 7
+
+  origine-main:
+    name: Origine des commits de main (garde-fou de déploiement)
+    # Livrable 7.6, demande de changement n° 15 : refuse de déployer si un commit de main, depuis le dernier déploiement,
+    # ne vient pas d'une pull request fusionnée dans main (scripts/verifier-origine-main.ts). Couvre l'accident, pas un
+    # compte compromis : qui pousse sur main peut retirer ce contrôle dans le même envoi (le workflow exécuté est celui du
+    # commit poussé). Un commit direct, relu par Houssem, s'accepte dans config/commits-directs-acceptes.json.
+    # Le déploiement en dépend : un échec de lecture bloque, dans le doute on ne déploie pas.
+    # Il attend les contrôles : l'association d'un commit à sa pull request peut mettre quelques secondes à apparaître après
+    # la fusion, et un déploiement refusé par les contrôles n'a pas besoin d'être vérifié.
+    needs: controles
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      # Aucune dépendance : le script n'utilise que Node, Git et l'API GitHub.
+      - name: Vérifier l'origine des commits
+        id: origine
+        run: node scripts/verifier-origine-main.ts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      # Demande de changement n° 18 : sur main, l'indexation durable se compare avec le dernier déploiement (ce qui est en
+      # ligne), pas avec l'envoi précédent : une fusion faite sans attendre la CI de sa pull request reste contrôlée, et un
+      # envoi refusé ne devient pas la nouvelle référence. Le déploiement dépend de ce travail.
+      - name: Indexation durable depuis le dernier déploiement
+        env:
+          DEPUIS: ${{ steps.origine.outputs.depuis }}
+        run: |
+          if [ -z "$DEPUIS" ]; then
+            echo "::error title=INDEXATION-LECTURE::point de départ introuvable : comparaison impossible, déploiement refusé"
+            exit 1
+          fi
+          node scripts/verifier-indexation-durable.ts --base "$DEPUIS"
 
   secrets-cloudflare:
     name: Secrets Cloudflare présents ?
@@ -159,8 +221,9 @@ jobs:
 
   deploiement:
     name: Déploiement Cloudflare (wrangler deploy)
-    # Uniquement si tous les contrôles sont verts ET si les deux secrets existent.
-    needs: [controles, lighthouse, secrets-cloudflare]
+    # Uniquement si tous les contrôles sont verts, si l'origine des commits de main est vérifiée (garde-fou, livrable 7.6)
+    # ET si les deux secrets existent.
+    needs: [controles, lighthouse, secrets-cloudflare, origine-main]
     if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.secrets-cloudflare.outputs.disponibles == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10

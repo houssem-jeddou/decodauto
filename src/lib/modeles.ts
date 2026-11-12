@@ -35,8 +35,9 @@
 // ---------------------------------------------------------------------------------------------
 import { basDePage, causesDeLaPage, hautDePage, tableauNoticesDeLaPage, type DonneesSite } from './gabarit.ts';
 import { attributHtml, echapper, texteHtml, typographierHtml } from './html.ts';
-import { ANCRE_CONFIDENTIALITE, PAGE_CONFIDENTIALITE } from './charte.ts';
+import { ANCRE_CONFIDENTIALITE, PAGE_CONFIDENTIALITE, PAGE_METHODE } from './charte.ts';
 import { dateAffichee } from './cout.ts';
+import { mentionsLegalesHtml } from './editeur.ts';
 import { ADRESSE_SIGNALEMENT } from './site.ts';
 import { nomCourtSource, type SourceDuRegistre } from './composants.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
@@ -224,6 +225,11 @@ export const pageOutilVoyants: Modele = (page, site, corpsHtml) => {
   ].join('');
 };
 
+/** Fiche d'un auteur (identité et parcours), affichée sur la page « à propos » depuis le champ `auteurs`. */
+export function fichesAuteur(auteur: { id: string; nom: string; presentation: string }): string {
+  return `<section class="auteur" id="auteur-${attributHtml(auteur.id)}" data-auteur data-auteur-id="${attributHtml(auteur.id)}"><h2>${texteHtml(auteur.nom)}</h2><p>${texteHtml(auteur.presentation)}</p></section>`;
+}
+
 /** Dans le texte d'une page du socle : l'adresse de contact, tirée de site.ts, jamais recopiée (livrable 7.2). */
 export const MARQUEUR_CONTACT = '{{contact}}';
 
@@ -233,7 +239,7 @@ export const MARQUEUR_CONTACT = '{{contact}}';
  * confidentialité, le titre de la section reçoit son ancre stable, quel que soit le rendu du Markdown. Une référence
  * inconnue, ou une section de confidentialité absente, fait échouer la construction.
  */
-export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date_modification'>, corpsHtml: string): string {
+export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date_modification' | 'auteurs'>, corpsHtml: string, methodeHtml?: string): string {
   const contact = `<!--email_off--><a href="mailto:${ADRESSE_SIGNALEMENT}">${texteHtml(ADRESSE_SIGNALEMENT)}</a><!--/email_off-->`;
   let corps = corpsHtml.replaceAll(MARQUEUR_CONTACT, contact);
   const inconnue = /\{\{[^}]*\}\}/.exec(corps);
@@ -243,9 +249,21 @@ export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date
     if (!titre.test(corps)) throw new Error(`page « ${page.id} » : le titre de niveau 2 « Confidentialité » est absent`);
     corps = corps.replace(titre, `<h2 id="${ANCRE_CONFIDENTIALITE}">Confidentialité</h2>`);
   }
+  // Page « à propos » (livrable 7.3) : fiche de chaque auteur (champ `auteurs`, jamais recopiée dans le texte) puis section
+  // « Méthode » (charte §7.2). Sans elle, les liens « Méthode » de toutes les pages seraient cassés : la construction échoue.
+  const fiches = (page.auteurs ?? []).map((a) => fichesAuteur(a));
+  if (page.id === PAGE_METHODE) {
+    if (fiches.length === 0) throw new Error(`page « ${page.id} » : aucune fiche auteur (champ auteurs) : l'auteur est identifié sur cette page`);
+    if (methodeHtml === undefined) throw new Error(`page « ${page.id} » : la section « Méthode » est absente`);
+  } else if (fiches.length > 0) throw new Error(`page « ${page.id} » : les fiches auteur ne se saisissent que sur la page « ${PAGE_METHODE} »`);
   return [
     `<h1>${texteHtml(page.title)}</h1>`,
+    // Page des mentions légales (livrable 7.4b) : le bloc d'identification de l'éditeur et de l'hébergeur, généré depuis
+    // src/lib/editeur.ts, passe avant la politique de confidentialité ; il échoue si une mention manque.
+    ...(page.id === PAGE_CONFIDENTIALITE ? [mentionsLegalesHtml(contact)] : []),
     `<div class="corps" data-corps>${typographierHtml(corps)}</div>`,
+    ...fiches,
+    ...(page.id === PAGE_METHODE ? [methodeHtml ?? ''] : []),
     `<p class="socle-date" data-socle-date>${texteHtml(`Mis à jour le ${dateAffichee(page.date_modification)}`)}</p>`,
   ].join('');
 }

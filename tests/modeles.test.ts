@@ -1,5 +1,5 @@
 // Modèles de pages et exemples rédigés (étape 6, livrable 6.6) : modèle de chaque type, ordre des blocs d'une page
-// voyant, page exemple « voyant moteur » (exemples/, jamais publiée), part de texte cité (CITATIONS-PART), construction
+// voyant, page exemple « voyant moteur » (exemples/ jusqu'au passage), part de texte cité (CITATIONS-PART), construction
 // de recette (--exemples, erreurs attendues), texte rédigé présent (TEXTE-REDIGE-ABSENT) et page construite sans fichier
 // de contenu (R7-PAGE-SANS-CONTENU). Les tests marqués [CI] lisent le HTML avec cheerio. Le rendu Markdown réel est celui
 // d'Astro (job « Recette des exemples » de la CI) : ici, le corps de l'exemple est converti par une fonction minimale,
@@ -27,12 +27,14 @@ import { PART_CITEE_MAX } from '../src/lib/charte.ts';
 import { INSECABLE } from '../src/lib/html.ts';
 import { schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
 import { TYPES_PAGE } from '../src/schemas/listes.ts';
+import { pageRedigee } from '../scripts/lib/pages-redigees.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const fixtures = join(racine, 'tests', 'fixtures');
-const EXEMPLE = 'exemples/voyant/voyant-moteur.md';
-const EXEMPLE_CODE = 'exemples/code-defaut/code-p0087.md';
-const EXEMPLE_PNEUS = 'exemples/pneus/loi-montagne.md';
+// Pages rédigées : dans exemples/ tant qu'elles ne sont pas en ligne, dans src/content après le passage (livrable 8.3.0).
+const EXEMPLE = await pageRedigee(racine, 'voyant', 'voyant-moteur');
+const EXEMPLE_CODE = await pageRedigee(racine, 'code-defaut', 'code-p0087');
+const EXEMPLE_PNEUS = await pageRedigee(racine, 'pneus', 'loi-montagne');
 // Données réelles et exemples : la date du contrôle est la plus récente de leurs dates (tests/date-des-donnees.ts).
 const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', 'tests/demo/voyant-huile.md', EXEMPLE, EXEMPLE_CODE, EXEMPLE_PNEUS]);
 const erreurs = (constats: readonly Constat[]): string[] => constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle).sort();
@@ -101,6 +103,19 @@ describe('modèles de pages (livrable 6.6)', () => {
     // Région nommée par le titre qui précède le tableau, atteignable au clavier.
     assert.match(html, /<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="Équipement" tabindex="0"><table>/);
     assert.ok(!html.includes('{{'));
+  });
+
+  test('emplacement publicitaire (livrable 7.5b) : aucun en production ; en recette (pubFactice), un seul, après le texte et avant les pages liées et « Sources »', async () => {
+    const { page, site } = await exemplePneus();
+    const corps = '<h2>Équipement</h2><p>{{tableau}}</p><table><thead><tr><th>A</th></tr></thead><tbody><tr><td>B</td></tr></tbody></table>';
+    const production = pagePneus(page, site, corps);
+    assert.ok(!production.includes('emplacement-pub') && !production.includes('data-emplacement-pub'));
+    assert.equal(pagePneus(page, { ...site, pubFactice: false }, corps), production, 'pubFactice faux : même HTML octet pour octet');
+    const recette = pagePneus(page, { ...site, pubFactice: true }, corps);
+    assert.equal(recette.match(/data-emplacement-pub=/g)?.length, 1);
+    const pub = recette.indexOf('data-emplacement-pub');
+    assert.ok(pub > recette.indexOf('data-corps') && pub > recette.indexOf('data-signature') && pub < recette.indexOf('data-sources'));
+    assert.equal(recette.replace(/<div class="emplacement-pub"[\s\S]*?<\/div>/, ''), production, 'le bloc est la seule différence');
   });
 
   test('page pneus et obligations avec un voyant de la base rattaché : tableau des notices après le texte rédigé, sans être l’élément unique', async () => {
@@ -240,8 +255,8 @@ describe('modèles de pages (livrable 6.6)', () => {
   });
 });
 
-describe('page exemple « voyant moteur » (exemples/, jamais publiée)', () => {
-  test('hors de src/content : jamais lue par la construction de production', async () => {
+describe("page rédigée « voyant moteur » (exemples/ jusqu'au passage, livrable 8.3.0)", () => {
+  test('chargerPages (construction de production) ne lit jamais exemples/', async () => {
     const publiees = await chargerPages(racine);
     assert.ok(publiees.every((p) => !p.fichier.startsWith(`${DOSSIER_EXEMPLES}/`)));
     const avecExemples = await chargerPages(racine, ['src/content', DOSSIER_EXEMPLES]);
@@ -268,7 +283,7 @@ describe('page exemple « voyant moteur » (exemples/, jamais publiée)', () => 
   });
 });
 
-describe('page exemple « code P0087 » (exemples/, jamais publiée)', () => {
+describe("page rédigée « code P0087 » (exemples/ jusqu'au passage, livrable 8.3.0)", () => {
   test('[CI] frontmatter valide ; page construite sans erreur, hormis l’empreinte de validation tant que Houssem n’a pas validé l’encadré (R4)', async () => {
     const { brut, contexte, constats, html } = await exempleCode();
     assert.deepEqual(erreurs(constats), []);
@@ -287,7 +302,7 @@ describe('page exemple « code P0087 » (exemples/, jamais publiée)', () => {
   });
 });
 
-describe('page exemple « loi montagne » (exemples/, jamais publiée)', () => {
+describe("page rédigée « loi montagne » (exemples/ jusqu'au passage, livrable 8.3.0)", () => {
   test('[CI] frontmatter valide ; page construite sans erreur, hormis l’empreinte de validation tant que Houssem n’a pas validé l’encadré (R4)', async () => {
     const { brut, contexte, constats, html } = await exemplePneus();
     assert.deepEqual(erreurs(constats), []);

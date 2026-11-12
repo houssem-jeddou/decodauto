@@ -44,13 +44,30 @@ a:focus-visible {
   padding: 0.75rem 1rem 0;
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   gap: 0.25rem 1rem;
 }
+/* Marque (src/lib/marque.ts, piste A « Cadran ») : dessin de taille fixe (aucun décalage de mise en page), nom en
+   deux parties, « auto » dans la couleur d'accent (contraste 6,7:1 sur blanc). */
 .nom-du-site {
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--texte);
   text-decoration: none;
+}
+.nom-du-site .logo {
+  flex: none;
+  display: block;
+}
+.nom-du-site-texte {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.nom-du-site-2 {
+  color: var(--accent);
 }
 .mention-ia {
   margin: 0;
@@ -654,4 +671,66 @@ h3 {
 }
 .lien-confidentialite {
   margin-top: 0.5rem;
+}
+
+/* Accueil (livrable 7.4a) : accès à l'outil voyants, pages par thème, lien vers « à propos ». */
+.accueil-outil {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--bord);
+  border-left: 6px solid var(--accent);
+  background: var(--fond-doux);
+  font-weight: 600;
+}
+.accueil-theme ul {
+  margin: 0.25rem 0 1rem;
+  padding-left: 1.25rem;
+}
+.accueil-a-propos {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* Mentions légales (livrable 7.4b) : liste de définitions de l'éditeur et de l'hébergeur. */
+.mentions-legales dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0.5rem 0 1rem;
+}
+.mentions-legales dt {
+  font-weight: 600;
+}
+.mentions-legales dd {
+  margin: 0;
+}
+@media (max-width: 30rem) {
+  .mentions-legales dl {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .mentions-legales dd {
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Emplacement publicitaire (livrable 7.5b) : hauteur réservée, pour qu'une publicité qui se charge ne déplace pas le texte (CLS).
+   Affiché seulement dans la construction de recette (factice) ; en production, rien avant AdSense. */
+.emplacement-pub {
+  box-sizing: border-box;
+  min-height: 340px;
+  margin: 1.5rem 0;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--texte-doux);
+  text-align: center;
+}
+.emplacement-pub p {
+  margin: 0.25rem 0;
+}
+.emplacement-pub-etiquette {
+  font-size: 0.85rem;
 }

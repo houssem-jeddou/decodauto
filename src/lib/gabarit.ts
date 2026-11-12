@@ -27,6 +27,9 @@ import {
   type SourceDuRegistre,
 } from './composants.ts';
 import { texteHtml } from './html.ts';
+import { PARTIES_DU_NOM } from './site.ts';
+import { logoEnLigne } from './marque.ts';
+import { emplacementPub } from './emplacements-pub.ts';
 import { modeleTableauNotices, tableauNotices } from './tableau-notices.ts';
 import { RENVOI_ENCADRE_OUTIL } from './outil-voyants.ts';
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees } from './calcul.ts';
@@ -45,10 +48,16 @@ export interface DonneesSite {
   pictogrammes: ReadonlyMap<string, string>;
   /** Libellé court de chaque page construite (identifiant → libellé) : fil d'Ariane et pages liées. */
   libelles: ReadonlyMap<string, string>;
+  /** Emplacements publicitaires factices (construction de recette seulement, livrable 7.5b) : absents en production. */
+  pubFactice?: boolean;
 }
 
-/** Bandeau de toutes les pages : nom du site (lien vers l'accueil) et mention en tête, avant le H1. */
-export const bandeau = (): string => `<a class="nom-du-site" href="/">decodauto.com</a>${mentionEnTete()}`;
+/**
+ * Bandeau de toutes les pages : marque (dessin décoratif et nom du site en deux parties mises en forme, lien vers
+ * l'accueil ; src/lib/marque.ts) et mention en tête, avant le H1. Le nom lu par un lecteur d'écran est NOM_DU_SITE.
+ */
+export const bandeau = (): string =>
+  `<a class="nom-du-site" href="/">${logoEnLigne()}<span class="nom-du-site-texte">${PARTIES_DU_NOM.map((partie, i) => `<span class="nom-du-site-${i + 1}">${partie}</span>`).join('')}</span></a>${mentionEnTete()}`;
 
 /** Pied de toutes les pages : lien « Signaler une erreur » avec l'adresse de la page (absente sur la page 404). */
 export const pied = (adressePage?: string, adresseConfidentialite?: string): string =>
@@ -120,6 +129,8 @@ export function basDePage(page: PageEditoriale, site: DonneesSite, citationsDuTe
   const index = indexerPlan(site.plan);
   const construites = (ids: Iterable<string>): string[] => [...ids].filter((id) => site.libelles.has(id));
   return [
+    // Emplacement publicitaire (livrable 7.5b) : au bas du contenu, jamais avant l'encadré ; vide en production.
+    emplacementPub('fin-de-contenu', site.pubFactice === true),
     pagesLiees({
       id: page.id,
       plan: site.plan,

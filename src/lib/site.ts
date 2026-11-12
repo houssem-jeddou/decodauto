@@ -34,14 +34,60 @@ const echapperXml = (texte: string): string =>
   texte.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 
 /**
- * Plan du site au format sitemaps.org : une entrée <loc> par page construite, adresse absolue et canonique.
- * Ni <priority> ni <changefreq> (Google les ignore) ; pas de <lastmod> tant qu'aucune date de modification fiable
- * n'existe (Google ne l'utilise que si elle est exacte de façon vérifiable).
+ * Nom du site, tel que l'affichent le bandeau de toutes les pages (en deux parties, « decod » et « auto », mises en
+ * forme : piste A choisie par Houssem le 11/11/2026) et le balisage WebSite de l'accueil. Source unique.
  */
-export function genererPlanDuSite(adresses: Iterable<string>): string {
-  const triees = [...new Set(adresses)].sort((a, b) => (a === '/' ? -1 : b === '/' ? 1 : a.localeCompare(b, 'fr')));
-  const lignes = triees.map((adresse) => `  <url><loc>${echapperXml(urlAbsolue(adresse))}</loc></url>`);
+export const PARTIES_DU_NOM = ['decod', 'auto'] as const;
+export const NOM_DU_SITE = PARTIES_DU_NOM.join('');
+/** Autre nom du site pour Google (propriété alternateName du balisage WebSite) : son nom de domaine, tiré de URL_SITE. */
+export const NOM_ALTERNATIF_DU_SITE = new URL(URL_SITE).host;
+
+/** Date « Mis à jour le jj/mm/aaaa » dans un texte, au format AAAA-MM-JJ (espaces insécables admises). */
+export function dateDansTexte(texte: string): string | undefined {
+  const m = /Mis à jour le[\s\u00a0\u202f]+(\d{2})\/(\d{2})\/(\d{4})/.exec(texte);
+  return m === null ? undefined : `${m[3]}-${m[2]}-${m[1]}`;
+}
+
+/**
+ * Date de mise à jour qu'une page affiche, AAAA-MM-JJ : lue seulement dans l'élément qui la porte (signature d'une page
+ * éditoriale `data-signature`, pied d'une page du socle `data-socle-date`), jamais ailleurs (titre, balisage, texte
+ * rédigé : revue du livrable 7.5a). Sans ces éléments : undefined.
+ */
+export function dateDeMiseAJour(html: string): string | undefined {
+  const m = /<p\b[^>]*\sdata-(?:signature|socle-date)(?=[\s=>/])[^>]*>([\s\S]*?)<\/p>/.exec(html);
+  return m === null ? undefined : dateDansTexte((m[1] ?? '').replace(/<[^>]*>/g, ' '));
+}
+
+export interface EntreeDuPlan {
+  adresse: string;
+  /** Date de dernière modification, AAAA-MM-JJ : celle que la page affiche, jamais une autre (contrôle SITEMAP-LASTMOD). */
+  lastmod?: string | undefined;
+}
+
+/**
+ * Plan du site au format sitemaps.org : une entrée <loc> par page construite, adresse absolue et canonique. Ni <priority>
+ * ni <changefreq> (Google les ignore). <lastmod> (livrable 7.5) seulement quand la page affiche sa date de mise à jour :
+ * c'est cette date, vérifiable par le lecteur, qui est reprise (Google n'utilise lastmod que si elle est exacte). L'accueil
+ * n'en a pas : il n'affiche aucune date.
+ */
+export function genererPlanDuSite(entrees: Iterable<string | EntreeDuPlan>): string {
+  const normalisees = new Map<string, EntreeDuPlan>();
+  for (const e of entrees) {
+    const entree = typeof e === 'string' ? { adresse: e } : e;
+    if (!normalisees.has(entree.adresse)) normalisees.set(entree.adresse, entree);
+  }
+  const triees = [...normalisees.values()].sort((a, b) => (a.adresse === '/' ? -1 : b.adresse === '/' ? 1 : a.adresse.localeCompare(b.adresse, 'fr')));
+  const lignes = triees.map((e) => `  <url><loc>${echapperXml(urlAbsolue(e.adresse))}</loc>${e.lastmod !== undefined ? `<lastmod>${echapperXml(e.lastmod)}</lastmod>` : ''}</url>`);
   return ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', ...lignes, '</urlset>', ''].join('\n');
+}
+
+/** Dates <lastmod> d'un plan du site, par adresse absolue. */
+export function lireLastmodDuPlanDuSite(xml: string): Map<string, string> {
+  const dates = new Map<string, string>();
+  for (const m of xml.matchAll(/<url>\s*<loc>\s*([^<]*?)\s*<\/loc>\s*(?:<lastmod>\s*([^<]*?)\s*<\/lastmod>)?/g)) {
+    if (m[2] !== undefined) dates.set((m[1] ?? '').replace(/&amp;/g, '&'), m[2]);
+  }
+  return dates;
 }
 
 /** Adresses absolues listées dans un plan du site (contenu des balises <loc>, dans l'ordre). */

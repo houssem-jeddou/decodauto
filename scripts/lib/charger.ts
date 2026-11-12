@@ -4,6 +4,7 @@ import { parse } from 'yaml';
 import { DOSSIER_PICTOGRAMMES, type DonneesBrutes, type FichierPictogramme } from '../../src/lib/controle.ts';
 import { TYPES_AVEC_SOCLE, type TypeAvecSocle } from '../../src/schemas/listes.ts';
 import { soclePageSchema } from '../../src/schemas/pages.ts';
+import { DOSSIER_CONTENU, DOSSIER_EXEMPLES } from './pages-redigees.ts';
 
 /** Sépare le frontmatter YAML (entre deux lignes « --- ») du texte de la page. */
 export function separerFrontmatter(contenu: string): { frontmatter: string; corps: string } {
@@ -65,14 +66,13 @@ export interface FichierPage {
 }
 
 /**
- * Fiche auteur supposée tant que la page « à propos », qui porte les fiches auteur, n'est pas écrite (étape 7) : page de
- * démonstration et construction de recette des exemples seulement, jamais la construction de production.
+ * Fiche auteur de la page de démonstration (npm run demo) : identifiant de la fiche de la page « à propos » (livrable 7.3).
+ * Jamais utilisée par la construction de production.
  */
 export const AUTEUR_SUPPOSE = 'houssem-jeddou';
 
-/** Dossier des pages publiées (une collection par type) et dossier des exemples rédigés (livrable 6.6, jamais publiés). */
-export const DOSSIER_CONTENU = 'src/content';
-export const DOSSIER_EXEMPLES = 'exemples';
+/** Dossier des pages publiées (une collection par type) et dossier des pages rédigées pas encore en ligne (livrable 8.3.0). */
+export { DOSSIER_CONTENU, DOSSIER_EXEMPLES };
 
 /** Pages Markdown de <dossier>/<type>/ (src/content par défaut). */
 export async function chargerPages(racine: string, dossiers: readonly string[] = [DOSSIER_CONTENU]): Promise<FichierPage[]> {

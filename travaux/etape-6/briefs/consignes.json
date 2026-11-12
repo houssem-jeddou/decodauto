@@ -6,15 +6,15 @@
       "Liste des pages publiées, rangées par les 4 thèmes de docs/02, générée depuis le plan par le gabarit : jamais écrite à la main, jamais vers une page non construite. L'accueil n'a aucun lien déclaré dans le plan : son texte rédigé n'en contient pas.",
       "Accès à l'outil voyants, la page de la vague au plus fort volume (voir le sommaire des briefs).",
       "Mention en tête de la charte (src/lib/charte.ts), sans signature ni ligne de transparence (page du socle, décision de 6.2).",
-      "Title et meta description : le schéma du socle n'a pas de champ description, que DESCRIPTION-ABSENTE exige ; demande de changement à ouvrir avant de construire la page (journal, points ouverts)."
+      "Title et meta description : constantes de `src/lib/accueil.ts` (`TITLE_ACCUEIL`, `DESCRIPTION_ACCUEIL`), validées avec le texte ; le champ `description` du socle existe depuis la demande de changement n° 13 (livrable 7.4a)."
     ]
   },
   "mentions-legales": {
     "angle": "Obligations légales de l'éditeur : identité, statut, hébergeur, contact. Page courte, sans contenu éditorial.",
     "a_traiter": [
-      "Statut juridique : à trancher par Houssem avant la rédaction, avec l'activité déclarée qui doit couvrir des recettes publicitaires (journal, points ouverts).",
+      "Statut juridique tranché par Houssem le 09/11 ; mentions de l'éditeur et de l'hébergeur dans `src/lib/editeur.ts` (livrable 7.4b), bloc généré par le modèle : il ne s'écrit pas dans le texte.",
       "Éditeur identifié par son nom réel (décision du 23/10) ; contact : erreur@decodauto.com (charte §5.3).",
-      "Hébergeur : Cloudflare (wrangler.json), avec les coordonnées de sa page officielle.",
+      "Hébergeur : Cloudflare (wrangler.json), coordonnées de sa page « Terms of Use », à relire avant la mise en ligne.",
       "Publicité (étape 12) et mesure d'audience : renvoyer à la politique de confidentialité (étape 7), sans affirmation juridique qui ne vienne d'un texte lu.",
       "Description du socle : même demande de changement que l'accueil."
     ],
@@ -27,7 +27,7 @@
     "angle": "Qui écrit le site et comment : l'auteur (nom réel et parcours), la méthode (notices, grille, base voyants, validation par Houssem), l'indépendance (ni garage, ni pièces à vendre).",
     "a_traiter": [
       "Fiche auteur : nom réel (acté le 23/10), présentation et parcours fournis par Houssem (charte §5.2) ; liens publics de profil facultatifs (champ profils, docs/08 v4).",
-      "Section « Méthode » : texte exact de src/lib/charte.ts, affiché tel quel, jamais recopié ni reformulé (charte §0 et §7.2) ; c'est la cible du lien « Méthode » de la ligne de transparence, attendu comme LIEN-CASSE dans la recette des exemples.",
+      "Section « Méthode » : texte exact de src/lib/charte.ts, affiché tel quel, jamais recopié ni reformulé (charte §0 et §7.2) ; c'est la cible du lien « Méthode » de la ligne de transparence ; ajoutée par le modèle du socle (livrable 7.3).",
       "Indépendance (charte §5.4) et corrections (charte §5.3, adresse erreur@decodauto.com ; réception à confirmer par un courriel de test, journal).",
       "Expressions interdites (charte §2.7) : ni « nos experts » ni « notre équipe ».",
       "Liens dans le texte : seulement vers une page liée dans le plan ; « à propos » n'en a aucun, un ajout passe par une demande de changement (journal, liens du socle).",

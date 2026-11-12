@@ -1,14 +1,15 @@
 // Ensemble des contrôles d'une construction : données, porte de l'étape 4, pages (frontmatter, texte et page
 // construite), puis site construit. Utilisé par scripts/controle.ts, qui affiche le bilan, et par les tests.
-import { PAGE_CONFIDENTIALITE } from '../../src/lib/charte.ts';
+import { PAGE_CONFIDENTIALITE, PAGE_METHODE } from '../../src/lib/charte.ts';
 import { readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
-import { adressesDansLeTexte, indexerPlan, liensEnAttente, liensExternesDuTexte } from '../../src/lib/plan.ts';
+import { ID_OUTIL_VOYANTS, adressesDansLeTexte, indexerPlan, liensEnAttente, liensExternesDuTexte } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
 import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
-import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
+import { controlerFavicon } from './favicon.ts';
+import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
   constats: Constat[];
@@ -18,8 +19,8 @@ export interface BilanControle {
 }
 
 /**
- * Fiche auteur supposée pour la construction de recette des exemples (livrable 6.6) : la page « à propos », qui porte la
- * fiche, est écrite à l'étape 7. Jamais utilisée par la construction de production.
+ * Identifiant de la fiche auteur pour les tests qui construisent une page sans la page « à propos » (tests/modeles.test.ts).
+ * La construction de recette lit la fiche de la page « à propos » (livrable 7.3) ; jamais utilisée par la production.
  */
 export const AUTEUR_DES_EXEMPLES = AUTEUR_SUPPOSE;
 
@@ -29,11 +30,11 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   const informations: string[] = [];
 
   // 1. Fichiers de données et base voyants. Construction de recette (--exemples) : les exemples rédigés s'ajoutent aux
-  //    pages, avec la fiche auteur supposée.
+  //    pages (dont la page « à propos » et sa fiche auteur, livrable 7.3).
   const donnees = await chargerDonnees(racine);
   const pagesLues = await chargerPages(racine, exemples ? [DOSSIER_CONTENU, DOSSIER_EXEMPLES] : [DOSSIER_CONTENU]);
-  const auteurs = [...auteursDuSocle(pagesLues), ...(exemples ? [AUTEUR_DES_EXEMPLES] : [])];
-  if (exemples) informations.push(`construction de recette des exemples (${DOSSIER_EXEMPLES}/) : fiche auteur « ${AUTEUR_DES_EXEMPLES} » supposée, la page « à propos » est écrite à l'étape 7 ; jamais déployée`);
+  const auteurs = auteursDuSocle(pagesLues);
+  if (exemples) informations.push(`construction de recette des exemples (${DOSSIER_EXEMPLES}/) : jamais déployée`);
   const { contexte: contexteDonnees, constats: constatsDonnees } = construireContexte({ ...donnees, auteurs }, aujourdhui);
   // Pages écrites et leur libellé court : l'outil voyants ne mène qu'à une page construite (livrable 8.1).
   const contexte = {
@@ -127,9 +128,25 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   constats.push(...(await controlerPagesDuPlan(dist, [...contexte.plan.values()].map((ligne) => ligne.adresse))));
   constats.push(...(await controlerCanonicalEtPlanDuSite(dist)));
   constats.push(...(await controler404(dist)));
-  constats.push(...(await controlerComposantsCommuns(dist, contexte.plan.get(PAGE_CONFIDENTIALITE)?.adresse)));
+  constats.push(...(await controlerComposantsCommuns(dist, contexte.plan.get(PAGE_CONFIDENTIALITE)?.adresse, contexte.plan.get(PAGE_METHODE)?.adresse, exemples)));
+  // Accueil (livrable 7.4a) : liste générée depuis le plan, exactement les pages éditoriales construites.
+  const adresseOutil = construitesEditoriales.find((p) => p.id === ID_OUTIL_VOYANTS) !== undefined ? contexte.plan.get(ID_OUTIL_VOYANTS)?.adresse : undefined;
+  const adresseAPropos = contexte.plan.get(PAGE_METHODE)?.adresse;
+  const aProposConstruite = adresseAPropos !== undefined && (await listerFichiers(dist, '.html')).some((c) => adresseDepuisFichier(relative(dist, c).split('\\').join('/')) === adresseAPropos);
+  constats.push(
+    ...(await controlerAccueil(dist, {
+      pages: construitesEditoriales.flatMap((p) => {
+        const ligne = contexte.plan.get(p.id);
+        return ligne === undefined ? [] : [{ adresse: ligne.adresse, theme: ligne.theme }];
+      }),
+      outil: adresseOutil,
+      aPropos: aProposConstruite ? adresseAPropos : undefined,
+    })),
+  );
   constats.push(...(await controlerFixturesNonPubliees(dist)));
   constats.push(...(await controlerWrangler(racine)));
+  // Favicon et icône de la marque (premier lot) : liens de chaque page et fichiers servis (FAVICON-*).
+  constats.push(...(await controlerFavicon(dist)));
 
   return { constats, informations, pagesEditoriales: pagesLues.length };
 }

@@ -2,14 +2,17 @@ import * as cheerio from 'cheerio';
 import { readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
-import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, URL_SITE, adresseDepuisFichier, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
+import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_ALTERNATIF_DU_SITE, NOM_DU_SITE, URL_SITE, adresseDepuisFichier, dateDansTexte, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
+import { CLASSE_EMPLACEMENT_PUB, EMPLACEMENTS_PUB, HAUTEUR_RESERVEE_PX } from '../../src/lib/emplacements-pub.ts';
+import { CONTEXTE_SCHEMA, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
 import { listerFichiers } from './charger.ts';
-import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, PAGE_CONFIDENTIALITE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
+import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, ANCRE_METHODE, PAGE_CONFIDENTIALITE, PAGE_METHODE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
 import { normaliserRecherche } from '../../src/lib/texte.ts';
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
 import { lienSignalement } from '../../src/lib/composants.ts';
 import { ELEMENTS_SANS_TYPOGRAPHIE } from '../../src/lib/html.ts';
+import { ID_MENTIONS_LEGALES, MARQUE_PROVISOIRE, MENTIONS_OBLIGATOIRES } from '../../src/lib/editeur.ts';
 import { CLASSE_CITATION_NOTICE } from '../../src/lib/tableau-notices.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
@@ -110,6 +113,25 @@ export async function controlerPagesDuPlan(dist: string, adressesDuPlan: Iterabl
 }
 
 /**
+ * <lastmod> du plan du site (livrable 7.5) : une page qui affiche sa date de mise à jour (« Mis à jour le jj/mm/aaaa »)
+ * la porte en AAAA-MM-JJ, égale à celle de la page, jour pour jour ; une page qui n'en affiche pas (l'accueil) n'en porte pas.
+ * Google n'utilise lastmod que s'il est exact : une date inventée ou périmée ferait ignorer toutes les autres.
+ */
+export function constatsLastmod(lastmod: ReadonlyMap<string, string>, affichees: ReadonlyMap<string, string | undefined>): Constat[] {
+  const constats: Constat[] = [];
+  for (const [url, date] of lastmod) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(Date.parse(date))) constats.push(erreur('SITEMAP-LASTMOD', `${url} : lastmod « ${date} » n'est pas une date AAAA-MM-JJ`, FICHIER_PLAN_DU_SITE));
+    else if (!affichees.has(url)) continue; // adresse inconnue : SITEMAP-ADRESSE-INCONNUE
+    else if (affichees.get(url) === undefined) constats.push(erreur('SITEMAP-LASTMOD', `${url} : la page n'affiche aucune date de mise à jour, elle ne porte pas de lastmod`, FICHIER_PLAN_DU_SITE));
+    else if (affichees.get(url) !== date) constats.push(erreur('SITEMAP-LASTMOD', `${url} : lastmod ${date}, mais la page affiche ${affichees.get(url)} : le plan du site reprend la date affichée`, FICHIER_PLAN_DU_SITE));
+  }
+  for (const [url, affichee] of affichees) {
+    if (affichee !== undefined && !lastmod.has(url)) constats.push(erreur('SITEMAP-LASTMOD', `${url} : la page affiche une date de mise à jour (${affichee}), le plan du site doit la porter en lastmod`, FICHIER_PLAN_DU_SITE));
+  }
+  return constats;
+}
+
+/**
  * Canonical et plan du site (étape 7, docs/03) :
  *  - chaque page construite, sauf la 404, porte une seule balise canonical, égale à sa propre adresse absolue
  *    (https://decodauto.com + adresse, barre finale comprise) ; la 404 n'en porte pas ;
@@ -120,9 +142,12 @@ export async function controlerPagesDuPlan(dist: string, adressesDuPlan: Iterabl
 export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Constat[]> {
   const constats: Constat[] = [];
   const pages = new Set<string>();
+  /** Date de mise à jour affichée par chaque page, par adresse absolue (SITEMAP-LASTMOD). */
+  const datesAffichees = new Map<string, string | undefined>();
   for (const chemin of await listerFichiers(dist, '.html')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
-    const $ = cheerio.load(await readFile(chemin, 'utf8'));
+    const html = await readFile(chemin, 'utf8');
+    const $ = cheerio.load(html);
     const canonicals = $('link[rel~="canonical"]')
       .toArray()
       .map((l) => $(l).attr('href') ?? '');
@@ -133,6 +158,7 @@ export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Cons
     const adresse = adresseDepuisFichier(fichier);
     if (adresse === undefined) continue; // autre fichier HTML : refusé par PAGE-HORS-PLAN
     pages.add(urlAbsolue(adresse));
+    datesAffichees.set(urlAbsolue(adresse), adresse === '/' ? undefined : dateDansTexte($('[data-signature], [data-socle-date]').first().text()));
     if (canonicals.length === 0) {
       constats.push(erreur('CANONICAL-ABSENT', `la page n'a pas de balise canonical (attendue : ${urlAbsolue(adresse)})`, fichier));
     } else if (canonicals.length > 1) {
@@ -159,6 +185,7 @@ export async function controlerCanonicalEtPlanDuSite(dist: string): Promise<Cons
     for (const page of pages) {
       if (!vues.has(page)) constats.push(erreur('SITEMAP-PAGE-ABSENTE', `${page} est construite mais absente du plan du site`, FICHIER_PLAN_DU_SITE));
     }
+    constats.push(...constatsLastmod(lireLastmodDuPlanDuSite(xml), datesAffichees));
   }
 
   const robots = await lire(join(dist, 'robots.txt'));
@@ -405,7 +432,7 @@ export function compterMots(texte: string): number {
  * lien de signalement, section « Sources », renvois de page du tableau des notices (« p. 15, « … » ») et de l'outil voyants :
  * ce sont des références, pas du texte cité ni du texte du site.
  */
-export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references'] as const;
+export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-emplacement-pub]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references'] as const;
 
 export interface PartCitee {
   /** Mots du texte affiché dans le contenu principal (main), hors HORS_PART_CITEE. */
@@ -593,7 +620,326 @@ export function constatsLienConfidentialite(html: string, fichier: string, adres
   return [];
 }
 
-export async function controlerComposantsCommuns(dist: string, adressePolitique = `/${PAGE_CONFIDENTIALITE}/`): Promise<Constat[]> {
+/**
+ * Page « à propos » construite (livrable 7.3) : une seule section « Méthode » (`data-methode`, ancre `#methode`), vers laquelle
+ * renvoie la ligne de transparence de chaque page éditoriale, et au moins une fiche auteur (`data-auteur`) avec son nom et
+ * son parcours : « auteur identifié, nom réel et parcours » (docs/03 règle 11). Le texte de la section est celui de la charte
+ * (empreinte validée, tests/porte6.test.ts) ; ce contrôle vérifie qu'elle est bien dans la page.
+ */
+export function constatsPageAPropos(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const sections = $(`section[data-methode]#${ANCRE_METHODE}`);
+  if (sections.length !== 1 || $(`#${ANCRE_METHODE}`).length !== 1) {
+    constats.push(erreur('METHODE-SECTION', `la page « à propos » porte une seule section « Méthode » (data-methode, #${ANCRE_METHODE}) : les liens « Méthode » de toutes les pages y mènent`, fichier));
+  }
+  const fiches = $('[data-auteur]').toArray();
+  if (fiches.length === 0) {
+    constats.push(erreur('AUTEUR-FICHE', 'la page « à propos » affiche la fiche de l\'auteur (data-auteur) : nom réel et parcours', fichier));
+  }
+  for (const fiche of fiches) {
+    const nom = normaliserTexte($(fiche).find('h2').first().text());
+    const parcours = normaliserTexte($(fiche).find('p').first().text());
+    if (nom === '' || parcours === '') constats.push(erreur('AUTEUR-FICHE', 'chaque fiche auteur a un nom (h2) et un parcours (p), non vides', fichier));
+  }
+  return constats;
+}
+
+/**
+ * Mentions légales de l'éditeur (livrable 7.4b) : la page qui porte la politique de confidentialité affiche une seule fois le
+ * bloc `data-mentions-legales`, avec chacune des mentions que demande l'article 1-1 de la loi n° 2004-575 (`MENTIONS_OBLIGATOIRES` :
+ * nom, domicile, téléphone, directeur de la publication, nom, adresse et téléphone de l'hébergeur), non vides et sans marque
+ * provisoire, et un courriel de contact ; aucune autre page ne porte le bloc.
+ */
+/** Texte brut d'un champ : espaces (insécables comprises) ramenées à une espace, sans normalisation (« + » et accents restent). */
+const brut = (texte: string): string => texte.replace(/[\s\u00a0\u202f]+/g, ' ').trim();
+
+export function constatsMentionsLegales(html: string, fichier: string, attendu: boolean): Constat[] {
+  const $ = cheerio.load(html);
+  const blocs = $('[data-mentions-legales]');
+  if (!attendu) {
+    return blocs.length > 0 ? [erreur('MENTIONS-LEGALES-BLOC', 'le bloc des mentions légales ne figure que sur la page des mentions légales', fichier)] : [];
+  }
+  if (blocs.length !== 1 || $(`#${ID_MENTIONS_LEGALES}`).length !== 1) {
+    return [erreur('MENTIONS-LEGALES-BLOC', `la page des mentions légales porte une seule fois le bloc des mentions (data-mentions-legales, #${ID_MENTIONS_LEGALES})`, fichier)];
+  }
+  const constats: Constat[] = [];
+  for (const m of MENTIONS_OBLIGATOIRES) {
+    const champs = blocs.find(`[data-mention="${m.id}"]`);
+    const texte = brut(champs.first().text());
+    if (champs.length !== 1 || texte === '' || MARQUE_PROVISOIRE.test(texte)) {
+      constats.push(erreur('MENTIONS-LEGALES-CHAMP', `mention absente, vide ou provisoire : ${m.id} (loi n° 2004-575, article ${m.article})`, fichier));
+    }
+  }
+  const courriel = blocs.find('[data-mention="editeur-courriel"] a[href^="mailto:"]');
+  if (courriel.length !== 1 || (courriel.attr('href') ?? '') !== `mailto:${ADRESSE_SIGNALEMENT}`) {
+    constats.push(erreur('MENTIONS-LEGALES-CHAMP', `le courriel de contact des mentions légales est ${ADRESSE_SIGNALEMENT} (lien mailto)`, fichier));
+  }
+  const tel = brut(blocs.find('[data-mention="editeur-telephone"]').first().text());
+  if (tel !== '' && !/^\+\d[\d ]{7,}$/.test(tel)) constats.push(erreur('MENTIONS-LEGALES-CHAMP', 'le téléphone de l\'éditeur est au format international (+33 6 12 34 56 78)', fichier));
+  return constats;
+}
+
+export interface DonneesStructureesAttendues {
+  /** Adresse de la page « à propos » (fiches auteur). */
+  adresseAPropos: string;
+  /** Fiches auteur affichées sur « à propos » : identifiant → nom affiché. */
+  auteurs: ReadonlyMap<string, string>;
+}
+
+/** Fiches auteur affichées par une page « à propos » construite (`data-auteur-id` et titre de la fiche). */
+export function auteursAffiches(html: string): Map<string, string> {
+  const $ = cheerio.load(html);
+  return new Map($('[data-auteur]').toArray().map((el) => [$(el).attr('data-auteur-id') ?? '', brut($(el).find('h2').first().text())]));
+}
+
+/**
+ * Données structurées JSON-LD (livrable 7.5a, src/lib/donnees-structurees.ts) : le balisage reprend ce que la page affiche,
+ * et seulement cela.
+ *  - DONNEES-STRUCTUREES-JSON : chaque script application/ld+json est un JSON valide, de contexte https://schema.org ;
+ *  - DONNEES-STRUCTUREES-TYPE : seuls les types attendus pour la nature de la page, une fois chacun (accueil : WebSite ;
+ *    page éditoriale : Article et BreadcrumbList ; « à propos » : une Person par fiche ; mentions légales et autres pages
+ *    du socle : aucun) ;
+ *  - DONNEES-STRUCTUREES-CONTENU : Article (titre = H1, description = meta description, dateModified = date affichée,
+ *    adresse = canonical, auteur = fiche de « à propos »), fil d'Ariane (mêmes noms, mêmes adresses, même ordre que le
+ *    fil affiché, la dernière miette étant la page), WebSite (nom et adresse du site), Person (nom de la fiche, ancre
+ *    de la fiche) ;
+ *  - DONNEES-STRUCTUREES-ADRESSE : toute adresse du balisage est une adresse absolue du site, sauf `sameAs` (https).
+ */
+export function constatsDonneesStructurees(html: string, fichier: string, adresse: string, attendu: DonneesStructureesAttendues): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const e = (regle: string, message: string): void => void constats.push(erreur(regle, message, fichier));
+  // Nature de la page : éditoriale = signature (`data-signature`), socle = pied daté (`data-socle-date`) ; ni l'un ni l'autre, ou les deux : erreur.
+  const editoriale = $('[data-signature]').length > 0;
+  const socle = $('[data-socle-date]').length > 0;
+  if (adresse !== '/' && editoriale === socle) e('DONNEES-STRUCTUREES-TYPE', `la page porte ${editoriale ? 'une signature et un pied daté du socle' : 'ni signature (page éditoriale) ni pied daté (page du socle)'} : sa nature n'est pas établie`);
+  const nature: NatureDePage = adresse === '/' ? 'accueil' : socle && !editoriale ? (adresse === attendu.adresseAPropos ? 'a-propos' : 'aucune') : 'editoriale';
+  const objets: Record<string, unknown>[] = [];
+  for (const el of $(`script[type="${TYPE_SCRIPT_JSON_LD}"]`).toArray()) {
+    try {
+      const valeur: unknown = JSON.parse($(el).text());
+      if (typeof valeur !== 'object' || valeur === null || Array.isArray(valeur)) throw new Error('un objet est attendu');
+      objets.push(valeur as Record<string, unknown>);
+    } catch (err) {
+      e('DONNEES-STRUCTUREES-JSON', `script JSON-LD illisible : ${(err as Error).message}`);
+    }
+  }
+  for (const o of objets) {
+    if (o['@context'] !== CONTEXTE_SCHEMA) e('DONNEES-STRUCTUREES-JSON', `@context « ${String(o['@context'])} » : ${CONTEXTE_SCHEMA} est attendu`);
+  }
+  const types = objets.map((o) => String(o['@type']));
+  const attendus: readonly string[] = TYPES_ATTENDUS[nature];
+  const nombreDePersonnes = nature === 'a-propos' ? $('[data-auteur]').length : 0;
+  for (const t of attendus) {
+    const voulus = t === 'Person' ? nombreDePersonnes : 1;
+    if (types.filter((x) => x === t).length !== voulus) e('DONNEES-STRUCTUREES-TYPE', `la page porte ${voulus} balisage(s) ${t} (nature : ${nature})`);
+  }
+  for (const t of new Set(types)) {
+    if (!attendus.includes(t)) e('DONNEES-STRUCTUREES-TYPE', `type ${t} non attendu sur une page de nature « ${nature} » (types admis : ${attendus.join(', ') || 'aucun'})`);
+  }
+  const absolue = (valeur: unknown, ou: string): string | undefined => {
+    if (typeof valeur !== 'string' || !valeur.startsWith(`${URL_SITE}/`)) {
+      e('DONNEES-STRUCTUREES-ADRESSE', `${ou} : adresse absolue du site (${URL_SITE}/…) attendue, trouvée « ${String(valeur)} »`);
+      return undefined;
+    }
+    return valeur;
+  };
+  const urlPage = urlAbsolue(adresse);
+  const auteurAttendu = (id: string): string => `${urlAbsolue(attendu.adresseAPropos)}#${ancreAuteur(id)}`;
+  const texte = (selecteur: string): string => brut($(selecteur).first().text());
+  for (const o of objets) {
+    const type = String(o['@type']);
+    if (type === 'Article') {
+      if (brut(String(o['headline'])) !== texte('h1')) e('DONNEES-STRUCTUREES-CONTENU', `Article : headline « ${String(o['headline'])} » ≠ H1 affiché « ${texte('h1')} »`);
+      const description = $('meta[name="description"]').attr('content') ?? '';
+      if (o['description'] !== description) e('DONNEES-STRUCTUREES-CONTENU', 'Article : description ≠ meta description de la page');
+      if (absolue(o['mainEntityOfPage'], 'Article.mainEntityOfPage') !== undefined && o['mainEntityOfPage'] !== urlPage) e('DONNEES-STRUCTUREES-CONTENU', `Article : mainEntityOfPage « ${String(o['mainEntityOfPage'])} » ≠ adresse de la page ${urlPage}`);
+      const affichee = dateDansTexte($('[data-signature]').text());
+      if (affichee === undefined) e('DONNEES-STRUCTUREES-CONTENU', "Article : la page n'affiche pas de date de mise à jour (signature)");
+      else if (o['dateModified'] !== affichee) e('DONNEES-STRUCTUREES-CONTENU', `Article : dateModified « ${String(o['dateModified'])} » ≠ date affichée ${affichee}`);
+      if ('datePublished' in o) e('DONNEES-STRUCTUREES-CONTENU', "Article : datePublished n'est pas déclarée (la page n'affiche pas de date de publication)");
+      if (o['inLanguage'] !== 'fr') e('DONNEES-STRUCTUREES-CONTENU', 'Article : inLanguage vaut « fr »');
+      const auteur = (o['author'] ?? {}) as Record<string, unknown>;
+      const id = typeof auteur['url'] === 'string' ? auteur['url'].split('#auteur-')[1] : undefined;
+      absolue(auteur['url'], 'Article.author.url');
+      if (auteur['@type'] !== 'Person' || id === undefined || !attendu.auteurs.has(id) || auteur['url'] !== auteurAttendu(id) || brut(String(auteur['name'])) !== attendu.auteurs.get(id)) {
+        e('DONNEES-STRUCTUREES-CONTENU', `Article : l'auteur (« ${String(auteur['name'])} », ${String(auteur['url'])}) est une fiche de la page « à propos » (nom et ancre ${auteurAttendu('<id>')})`);
+      }
+    } else if (type === 'BreadcrumbList') {
+      const affiches = $('[data-fil-ariane] li')
+        .toArray()
+        .map((li) => ({ nom: brut($(li).text()), href: $(li).find('a[href]').attr('href') }));
+      const items = Array.isArray(o['itemListElement']) ? (o['itemListElement'] as Record<string, unknown>[]) : [];
+      const memes =
+        items.length === affiches.length &&
+        items.every((it, i) => {
+          const a = affiches[i];
+          const derniere = i === affiches.length - 1;
+          return a !== undefined && it['@type'] === 'ListItem' && it['position'] === i + 1 && brut(String(it['name'])) === a.nom && it['item'] === urlAbsolue(derniere ? adresse : (a.href ?? ''));
+        });
+      if (!memes) e('DONNEES-STRUCTUREES-CONTENU', "BreadcrumbList : mêmes miettes que le fil d'Ariane affiché (nom, position, adresse absolue ; la dernière miette est la page)");
+      for (const it of items) absolue(it['item'], 'BreadcrumbList.item');
+    } else if (type === 'WebSite') {
+      if (o['name'] !== NOM_DU_SITE || o['alternateName'] !== NOM_ALTERNATIF_DU_SITE || o['url'] !== `${URL_SITE}/`) {
+        e('DONNEES-STRUCTUREES-CONTENU', `WebSite : nom « ${NOM_DU_SITE} », nom alternatif « ${NOM_ALTERNATIF_DU_SITE} » et adresse ${URL_SITE}/`);
+      }
+    } else if (type === 'Person') {
+      const id = typeof o['url'] === 'string' ? o['url'].split('#auteur-')[1] : undefined;
+      if (id === undefined || !attendu.auteurs.has(id) || o['url'] !== urlPage + `#${ancreAuteur(id)}` || o['@id'] !== o['url'] || brut(String(o['name'])) !== attendu.auteurs.get(id)) {
+        e('DONNEES-STRUCTUREES-CONTENU', `Person : nom et ancre (${urlPage}#auteur-<id>) d'une fiche affichée sur la page (« ${String(o['name'])} », ${String(o['url'])})`);
+      }
+      absolue(o['url'], 'Person.url');
+      if (id !== undefined && $(`#${ancreAuteur(id)}`).length !== 1) e('DONNEES-STRUCTUREES-CONTENU', `Person : la fiche #${ancreAuteur(id)} est affichée sur la page`);
+      if ('sameAs' in o) {
+        const liens = Array.isArray(o['sameAs']) ? o['sameAs'] : [];
+        if (liens.length === 0 || !liens.every((l) => typeof l === 'string' && /^https:\/\/[^\s/]+\.[^\s/]+/.test(l))) e('DONNEES-STRUCTUREES-ADRESSE', 'Person.sameAs : liste non vide d\'adresses https');
+      }
+    }
+  }
+  return constats;
+}
+
+/** Repère d'une publicité dans une page : emplacement du site, bloc AdSense ou script AdSense. */
+const SELECTEUR_PUB = `[data-emplacement-pub], .adsbygoogle, ins.adsbygoogle, script[src*="adsbygoogle"], script[src*="googlesyndication"]`;
+
+/**
+ * Emplacements publicitaires (livrable 7.5b, src/lib/emplacements-pub.ts) :
+ *  - PUB-PRODUCTION : la construction de production ne porte aucun emplacement ni script de publicité (aucune publicité
+ *    avant AdSense, étape 12) ;
+ *  - PUB-EMPLACEMENT : dans la construction de recette (emplacements factices), chaque page éditoriale (`data-signature`)
+ *    porte exactement les emplacements prévus (EMPLACEMENTS_PUB), après l'encadré de décision et avant « Sources », avec son
+ *    étiquette « Publicité » ; l'accueil, la 404 et les pages du socle n'en portent aucun.
+ */
+export function constatsEmplacementsPub(html: string, fichier: string, recette: boolean): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const emplacements = $('[data-emplacement-pub]');
+  if (!recette) {
+    if ($(SELECTEUR_PUB).length > 0) constats.push(erreur('PUB-PRODUCTION', "publicité ou emplacement publicitaire dans la construction de production : aucune publicité avant AdSense (étape 12)", fichier));
+    return constats;
+  }
+  const editoriale = $('[data-signature]').length > 0;
+  if (!editoriale) {
+    if (emplacements.length > 0) constats.push(erreur('PUB-EMPLACEMENT', "seules les pages éditoriales portent un emplacement publicitaire (ni l'accueil, ni la 404, ni les pages du socle)", fichier));
+    return constats;
+  }
+  const positions = emplacements.toArray().map((el) => $(el).attr('data-emplacement-pub') ?? '');
+  if (positions.length !== EMPLACEMENTS_PUB.length || !EMPLACEMENTS_PUB.every((p) => positions.includes(p))) {
+    constats.push(erreur('PUB-EMPLACEMENT', `la page éditoriale porte les emplacements prévus (${EMPLACEMENTS_PUB.join(', ')}), chacun une fois ; trouvés : ${positions.join(', ') || 'aucun'}`, fichier));
+    return constats;
+  }
+  const ordre = $('*').toArray();
+  const rang = (selecteur: string): number => {
+    const el = $(selecteur).first().get(0);
+    return el === undefined ? -1 : ordre.indexOf(el);
+  };
+  for (const el of emplacements.toArray()) {
+    const emplacement = $(el);
+    const position = ordre.indexOf(el);
+    const debutEncadre = rang('[data-encadre-decision]');
+    const dernierDeLEncadre = $('[data-encadre-decision]').first().find('*').last().get(0);
+    const finEncadre = dernierDeLEncadre !== undefined ? ordre.indexOf(dernierDeLEncadre) : debutEncadre;
+    if (debutEncadre < 0 || position <= Math.max(debutEncadre, finEncadre)) constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire vient après l'encadré de décision, jamais avant ni dedans", fichier));
+    const sources = rang('[data-sources]');
+    if (sources >= 0 && position > sources) constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire (fin de contenu) précède la section « Sources »", fichier));
+    const liees = Math.min(...['[data-pages-liees]', '[data-pages-enfants]'].map(rang).filter((r) => r >= 0));
+    if (Number.isFinite(liees) && position > liees) constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire (fin de contenu) précède les pages liées", fichier));
+    if (!emplacement.hasClass(CLASSE_EMPLACEMENT_PUB)) constats.push(erreur('PUB-EMPLACEMENT', `l'emplacement publicitaire porte la classe ${CLASSE_EMPLACEMENT_PUB} (hauteur réservée dans la feuille de style)`, fichier));
+    if (brut(emplacement.attr('aria-label') ?? '') !== 'Publicité') constats.push(erreur('PUB-EMPLACEMENT', "l'emplacement publicitaire est étiqueté « Publicité » (aria-label)", fichier));
+  }
+  return constats;
+}
+
+/**
+ * Feuilles de style (livrable 7.5b) : la règle `.emplacement-pub` réserve au moins HAUTEUR_RESERVEE_PX de hauteur
+ * (min-height) : sans elle, une publicité qui se charge déplacerait le texte (CLS). PUB-HAUTEUR-RESERVEE.
+ */
+export function constatsHauteurReservee(css: string, fichier: string): Constat[] {
+  const regles = [...css.matchAll(new RegExp(`\\.${CLASSE_EMPLACEMENT_PUB}\\s*\\{([^}]*)\\}`, 'g'))].map((m) => m[1] ?? '');
+  const hauteurs = regles.flatMap((r) => [...r.matchAll(/min-height\s*:\s*(\d+(?:\.\d+)?)px/g)].map((m) => Number(m[1])));
+  return hauteurs.some((h) => h >= HAUTEUR_RESERVEE_PX) ? [] : [erreur('PUB-HAUTEUR-RESERVEE', `la règle .${CLASSE_EMPLACEMENT_PUB} réserve au moins ${HAUTEUR_RESERVEE_PX}px de hauteur (min-height) : une publicité qui se charge ne déplace pas le texte`, fichier)];
+}
+
+/**
+ * Images (livrable 7.5b) : chaque image du site construit porte un texte alternatif (attribut `alt`, vide seulement si elle est
+ * décorative : `role="presentation"`), ses dimensions (`width` et `height`, entiers : la place est réservée, pas de CLS) et
+ * `loading="lazy"`, sauf l'image principale de la page (`fetchpriority="high"`). Adresse d'un autre site : TIERS-RESSOURCE.
+ * IMAGE-ALT, IMAGE-DIMENSIONS, IMAGE-CHARGEMENT.
+ */
+export function constatsImages(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  for (const el of $('img').toArray()) {
+    const img = $(el);
+    const nom = img.attr('src') ?? '(sans src)';
+    const alt = img.attr('alt');
+    if (alt === undefined || (alt.trim() === '' && img.attr('role') !== 'presentation')) constats.push(erreur('IMAGE-ALT', `image ${nom} : texte alternatif absent ou vide (vide seulement avec role="presentation")`, fichier));
+    if (!/^\d+$/.test(img.attr('width') ?? '') || !/^\d+$/.test(img.attr('height') ?? '')) constats.push(erreur('IMAGE-DIMENSIONS', `image ${nom} : width et height (entiers) réservent la place et évitent le décalage de mise en page`, fichier));
+    if (img.attr('loading') !== 'lazy' && img.attr('fetchpriority') !== 'high') constats.push(erreur('IMAGE-CHARGEMENT', `image ${nom} : loading="lazy", sauf l'image principale de la page (fetchpriority="high")`, fichier));
+  }
+  return constats;
+}
+
+/** La 404 ne porte aucun balisage (livrable 7.5a). */
+export function constatsDonneesStructurees404(html: string, fichier: string): Constat[] {
+  return cheerio.load(html)(`script[type="${TYPE_SCRIPT_JSON_LD}"]`).length > 0 ? [erreur('DONNEES-STRUCTUREES-TYPE', 'la page 404 ne porte aucun balisage JSON-LD', fichier)] : [];
+}
+
+export interface AccueilAttendu {
+  /** Pages éditoriales construites, avec leur thème d'après le plan. */
+  pages: readonly { adresse: string; theme: string }[];
+  /** Adresse de l'outil voyants, s'il est construit. */
+  outil?: string | undefined;
+  /** Adresse de la page « à propos », si elle est construite. */
+  aPropos?: string | undefined;
+}
+
+/**
+ * Accueil (livrable 7.4a) : la liste des pages (`data-accueil-pages`) contient exactement les pages éditoriales construites,
+ * chacune une fois, dans la section de son thème ; aucune liste tant qu'aucune page n'est construite ; l'accès à l'outil
+ * voyants et le lien vers « à propos » n'existent que si leur page est construite (jamais un lien vers une page absente :
+ * `npm run liens` voit les liens cassés, pas les oublis ni les doublons).
+ */
+export function constatsAccueil(html: string, fichier: string, attendu: AccueilAttendu): Constat[] {
+  const $ = cheerio.load(html);
+  const constats: Constat[] = [];
+  const liste = $('[data-accueil-pages]');
+  if (attendu.pages.length === 0) {
+    if (liste.length > 0) constats.push(erreur('ACCUEIL-LISTE', 'aucune page n\'est construite : l\'accueil n\'affiche pas de liste de pages', fichier));
+  } else if (liste.length !== 1) {
+    constats.push(erreur('ACCUEIL-LISTE', 'l\'accueil affiche une liste des pages construites (data-accueil-pages)', fichier));
+  } else {
+    const liens = liste.find('a[href]').toArray().map((a) => $(a).attr('href') ?? '');
+    const manquantes = attendu.pages.filter((p) => !liens.includes(p.adresse)).map((p) => p.adresse);
+    const inconnues = liens.filter((l) => !attendu.pages.some((p) => p.adresse === l));
+    const doublons = liens.filter((l, i) => liens.indexOf(l) !== i);
+    if (manquantes.length > 0 || inconnues.length > 0 || doublons.length > 0) {
+      constats.push(erreur('ACCUEIL-LISTE', `la liste de l'accueil porte chaque page construite une fois, et elle seule ; manquent : ${manquantes.join(', ') || 'aucune'} ; en trop : ${[...new Set([...inconnues, ...doublons])].join(', ') || 'aucune'}`, fichier));
+    }
+    for (const p of attendu.pages) {
+      const dansTheme = liste.find(`[data-accueil-theme="${p.theme}"] a[href="${p.adresse}"]`).length;
+      if (liens.includes(p.adresse) && dansTheme !== 1) constats.push(erreur('ACCUEIL-LISTE', `${p.adresse} est rangée sous son thème (${p.theme}) dans la liste de l'accueil`, fichier));
+    }
+  }
+  const outil = $('[data-accueil-outil] a[href]');
+  if (attendu.outil === undefined ? $('[data-accueil-outil]').length > 0 : outil.length !== 1 || outil.attr('href') !== attendu.outil) {
+    constats.push(erreur('ACCUEIL-LIEN', `l'accès à l'outil voyants n'existe que si l'outil est construit, et mène à lui${attendu.outil !== undefined ? ` (${attendu.outil})` : ''}`, fichier));
+  }
+  const aPropos = $('[data-accueil-a-propos] a[href]');
+  if (attendu.aPropos === undefined ? $('[data-accueil-a-propos]').length > 0 : aPropos.length !== 1 || aPropos.attr('href') !== attendu.aPropos) {
+    constats.push(erreur('ACCUEIL-LIEN', `le lien vers « à propos » n'existe que si la page est construite, et mène à elle${attendu.aPropos !== undefined ? ` (${attendu.aPropos})` : ''}`, fichier));
+  }
+  return constats;
+}
+
+/** Contrôle l'accueil construit (dist/index.html) ; sans accueil, les autres contrôles du site le signalent. */
+export async function controlerAccueil(dist: string, attendu: AccueilAttendu): Promise<Constat[]> {
+  const html = await readFile(join(dist, 'index.html'), 'utf8').catch(() => undefined);
+  return html === undefined ? [] : constatsAccueil(html, 'index.html', attendu);
+}
+
+export async function controlerComposantsCommuns(dist: string, adressePolitique = `/${PAGE_CONFIDENTIALITE}/`, adresseAPropos = `/${PAGE_METHODE}/`, recette = false): Promise<Constat[]> {
   const constats: Constat[] = [];
   const enTetes: EnTetesDePage[] = [];
   // Page qui porte la politique de confidentialité : construite ou non, le lien de pied de page suit.
@@ -602,7 +948,15 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
     constats.push(erreur('CONFIDENTIALITE-ANCRE', `la page ${adressePolitique} porte une seule section #${ANCRE_CONFIDENTIALITE}`, `${adressePolitique.replace(/^\//, '')}index.html`));
   }
   const adresseAttendue = politiqueConstruite !== undefined ? adressePolitique : undefined;
+  // Page « à propos » : construite ou non, ses fiches et sa section « Méthode » sont contrôlées dès qu'elle l'est.
+  const aProposConstruite = await readFile(join(dist, adresseAPropos, 'index.html'), 'utf8').catch(() => undefined);
+  if (aProposConstruite !== undefined) constats.push(...constatsPageAPropos(aProposConstruite, `${adresseAPropos.replace(/^\//, '')}index.html`));
+  // Fiches auteur : celles que le balisage des pages doit reprendre (livrable 7.5a) ; sans « à propos », aucun auteur n'est affichable.
+  const donneesAttendues: DonneesStructureesAttendues = { adresseAPropos, auteurs: aProposConstruite !== undefined ? auteursAffiches(aProposConstruite) : new Map() };
   // Les feuilles de style du site : une police ou une image d'un autre site y passerait inaperçue.
+  // Hauteur réservée à l'emplacement publicitaire (livrable 7.5b) : au moins une feuille de style du site la porte.
+  // Feuilles .css et balises <style> des pages (Astro peut y placer la feuille) : sans aucune source de style, le contrôle échoue.
+  const feuilles = await Promise.all((await listerFichiers(dist, '.css')).map((chemin) => readFile(chemin, 'utf8')));
   for (const chemin of await listerFichiers(dist, '.css')) {
     const fichier = relative(dist, chemin).split('\\').join('/');
     for (const url of adressesDuCss(await readFile(chemin, 'utf8'))) {
@@ -621,11 +975,18 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
       ...constatsPartCitee(html, fichier),
       ...constatsRessourcesTierces(html, fichier),
       ...constatsLienConfidentialite(html, fichier, adresseAttendue),
+      ...constatsMentionsLegales(html, fichier, adresseAttendue !== undefined && fichier === `${adressePolitique.replace(/^\//, '')}index.html`),
+      ...constatsEmplacementsPub(html, fichier, recette),
+      ...constatsImages(html, fichier),
+      ...(adresseDepuisFichier(fichier) !== undefined ? constatsDonneesStructurees(html, fichier, adresseDepuisFichier(fichier) ?? '/', donneesAttendues) : constatsDonneesStructurees404(html, fichier)),
     );
     const lus = enTetesDePage(html, fichier);
     constats.push(...constatsEnTetesPresents(lus));
     enTetes.push(lus);
+    const $page = cheerio.load(html);
+    feuilles.push(...$page('style').toArray().map((s) => $page(s).text()));
   }
+  if (enTetes.length > 0) constats.push(...constatsHauteurReservee(feuilles.join('\n'), 'feuille de style ou balises <style>'));
   constats.push(...constatsDoublons(enTetes));
   return constats;
 }

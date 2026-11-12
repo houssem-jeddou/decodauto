@@ -41,6 +41,7 @@ En tête des résultats aujourd'hui : enseignes qui vendent leur intervention, m
 - Relecteur (23/10/2026) : pas de mécanicien. Les verdicts reposent sur des sources de première main citées (notices de plusieurs marques), validés par Houssem, qui relit l'encadré de décision de chaque page et porte la responsabilité éditoriale.
 - Nom de domaine : decodauto.com (22/10/2026 ; aucune antériorité trouvée sur TMview, aucune marque de constructeur).
 - Coût probable (28/10/2026, demande de changement n° 6) : échelle fermée de 5 tranches qui disent la nature de la dépense, montants fixés par un texte officiel, ordres de grandeur en euros par pièce tirés de deux sources indépendantes ; la règle 5 est réécrite en conséquence.
+- Statut juridique (09/11/2026) : Houssem déclare l'avoir vérifié, aucun blocage, recettes publicitaires comprises (AdSense paie en Tunisie par virement) ; Claude ne l'a pas contrôlé. Mentions légales (11/11/2026) : aucun numéro d'immatriculation publié, Houssem ne relevant d'aucun registre français ; l'avis d'un comptable reste facultatif.
 
 ## Décisions ouvertes
-- Statut pour les mentions légales et encaissement d'AdSense depuis la Tunisie (à vérifier).
+- Aucune à ce jour (le journal tient les décisions à venir).

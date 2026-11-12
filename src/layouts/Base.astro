@@ -4,15 +4,18 @@ import '../styles/site.css';
 import { PAGE_CONFIDENTIALITE } from '../lib/charte.ts';
 import { estIndexable } from '../lib/indexation.ts';
 import { bandeau, pied } from '../lib/gabarit.ts';
+import { liensFavicon } from '../lib/marque.ts';
 
 interface Props {
   titre: string;
   description: string;
   /** Seule la page 404 n'a pas de canonical. Toute autre page porte la sienne, calculée depuis son adresse. */
   sansCanonical?: boolean;
+  /** Scripts JSON-LD de la page (src/lib/donnees-structurees.ts, livrable 7.5a) : déjà échappés, générés depuis la page. */
+  donneesStructurees?: readonly string[];
 }
 
-const { titre, description, sansCanonical = false } = Astro.props;
+const { titre, description, sansCanonical = false, donneesStructurees = [] } = Astro.props;
 const indexable = estIndexable();
 // Canonical : l'adresse de la page elle-même, absolue (contrôles CANONICAL-*). Jamais saisie à la main.
 const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.site).href;
@@ -35,7 +38,8 @@ const bas = pied(sansCanonical ? undefined : Astro.url.pathname, adresseConfiden
     <meta name="description" content={description} />
     {!indexable && <meta name="robots" content="noindex" />}
     {canonical && <link rel="canonical" href={canonical} />}
-    <link rel="icon" href="data:," />
+    <Fragment set:html={liensFavicon()} />
+    {donneesStructurees.length > 0 && <Fragment set:html={donneesStructurees.join('')} />}
   </head>
   <body>
     <header class="bandeau">

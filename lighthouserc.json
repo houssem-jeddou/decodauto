@@ -2,7 +2,12 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
-      "url": ["http://localhost/index.html"],
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/a-propos/index.html",
+        "http://localhost/mentions-legales/index.html",
+        "http://localhost/loi-montagne/index.html"
+      ],
       "numberOfRuns": 3,
       "settings": {
         "formFactor": "mobile",
