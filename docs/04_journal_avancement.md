@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 12/11/2026 (8 h 55, heure de Tunis)
+Dernière mise à jour : 12/11/2026 (9 h 10, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
@@ -18,7 +18,8 @@ Dernière mise à jour : 12/11/2026 (8 h 55, heure de Tunis)
 | 9 | Recette et mise en ligne A | ▶ **Premier lot en ligne et indexable depuis le 12/11 (8 h 43)** : PR #35 fusionnée par commit de fusion (f69543a) au go de Houssem (8 h 39) ; CI de `main` (run 43176846306) : garde-fou et indexation durable verts, déploiement Cloudflare (version 5d3f9196), contrôle de production conforme au second passage (le premier, une minute après le déploiement, voyait encore l'ancien en-tête noindex). Reste : vérifications d'après déploiement dans le Chrome de Houssem (recherche par mots au Journal officiel, Search Console, Bing, IndexNow, réglages Cloudflare, Rich Results Test), validation de la porte 9 et tag sur sa demande, suivi à J+7 (19/11) et J+14 (26/11). Contenu de la PR #35 : PR #24 à #34 réunies, trois pages passées par `npm run passage` (« à propos » d'abord), drapeau d'indexation à true (variable `SITE_INDEXABLE` posée le 11/11), favicon et nom « decodauto » (demande n° 19), indexation durable (demande n° 18, 03 v13), scores Lighthouse dans la CI ; porte 8 du lot et recette : `travaux/etape-9/paquet-lot-1.md` (Lighthouse mobile 100 partout, CLS 0,000) ; deux revues indépendantes. Critères « Avant » : double authentification **faite** (11/11, 21 h 09), verrou **constaté** (11/11), garde-fou dans la CI, **lignes de validation des quatre pages et demandes n° 18 et n° 19 données le 12/11 (8 h 23)**, Journal officiel **revérifié le 12/11** (code consolidé). Go donné le 12/11 (8 h 39) | `travaux/etape-9/paquet-lot-1.md` ; demandes n° 18 et 19 |
 | 10 | Vague B | À faire | – |
 | 11 | Vague C | À faire | – |
-| 12 | Boucle mensuelle | À faire | – |
+| 12 | Boucle mensuelle | À faire, après l'étape 13 (demande AdSense comprise) | – |
+| 13 | Identité visuelle | À faire, quand le site est complet (après la vague C, avant l'étape 12) : demande de changement n° 20, acceptée sur le principe, texte à confirmer | `travaux/etape-13/demande-changement-20.md` |
 
 ## Prévision (mise à jour à chaque session ; les dates de 03 sont des cibles)
 | Étape | Cible (03) | Prévision au 09/11 | Dépend de |
@@ -29,6 +30,7 @@ Dernière mise à jour : 12/11/2026 (8 h 55, heure de Tunis)
 | 8. Vague A | 29/10–01/11 | ≈ 10–22/11 (outil voyants fait le 04/11 ; 8.2, 8.3.1a et 8.3.0 faits le 10/11 ; porte 8 par lot depuis la demande n° 17 ; puis le reste de 8.3) | portes 5 et 6 ✅ ; requêtes absentes mesurées ; sources des briefs trouvées |
 | 9. Mise en ligne, premier lot (socle et loi montagne) | 31/10 | ✅ **en ligne le 12/11 (8 h 43)** ; porte 9 à valider après les vérifications d'après déploiement | porte 7 ✅ (10/11) ; porte 8 sur les pages du lot (demande n° 17) ; double authentification de Google, GitHub, OVH et Cloudflare, verrou du domaine, garde-fou de déploiement (demande n° 15) |
 | 10. Vague B / 11. Vague C | ≈ 07/11 / ≈ 14/11 | ≈ 28/11–02/12 / ≈ 05–09/12 | mise en ligne de la vague A ; briefs et modèles des lots (demande n° 5) |
+| 13. Identité visuelle | après la vague C | ≈ mi-décembre (après la vague C) | site complet ; choix de Houssem parmi trois pistes |
 
 **Séances de validation de Houssem** (le vrai goulot), d'ici le 25/11 :
 1. ~~demande de changement de structure et marques de référence~~ : faite le 23/10 ;
@@ -67,6 +69,7 @@ Dernière mise à jour : 12/11/2026 (8 h 55, heure de Tunis)
 
 ## Décisions ouvertes (à trancher par Houssem)
 - **Auteur** : nom réel acté le 23/10 ; parcours fourni et page « à propos » validée le 10/11 (7.3).
+- **Demande n° 20 (identité visuelle)** : confirmer le texte, dont la demande AdSense placée après l'étape 13.
 - **Porte 9 et tag du premier lot** : à valider par Houssem après les vérifications d'après déploiement (paquet du lot, §7, points 5 à 11) ; tag posé seulement sur sa demande.
 
 ## Reporté après la mise en ligne (à trancher par Houssem)
@@ -79,6 +82,7 @@ Section créée par la demande de changement n° 15 (09/11). Chaque point a son 
 
 ## Historique des décisions
 Les décisions du 22/10 à la porte de sortie de l'étape 6 (04/11, 12 h 03) sont dans `04b_archives_decisions_jusqu_a_la_porte_6.md` ; celles du 04/11 dans `04d_archives_decisions_et_revues_du_04_11.md`.
+- 12/11/2026 (9 h 03), Houssem : le site en ligne est visuellement pauvre ; **demande de changement n° 20 acceptée sur le principe** : étape 13 « identité visuelle » ajoutée à la fin du plan (après la vague C, avant la boucle mensuelle et la demande AdSense : choix de Claude à confirmer) ; « on continue sur notre plan normalement ». 03 passe en v14 ; une revue indépendante (« à corriger », aucun bloquant, corrections intégrées).
 - 12/11/2026 (8 h 39), Houssem : « Go, fusionne la PR #35 ». PR #35 fusionnée par Claude par commit de fusion (f69543a, tête f564e50 épinglée) ; déploiement à 8 h 43 ; contrôle de production conforme à 8 h 45 après relance (premier passage en échec : en-tête noindex encore servi une minute après le déploiement, délai de propagation). **Le site est indexable.**
 - 12/11/2026 (vers 8 h 30), Claude : **Journal officiel revérifié** sur Légifrance, lu depuis la session (le Chrome de Houssem ne répondait pas) : chapitre « Pneumatiques » du code de la route en vigueur au 12/11/2026 : articles R314-1 à D314-8, pas d'article R. 314-9 (l'article de sanction prévu par la fiche d'impact INTS1920190D) ; D314-8 en vigueur depuis le 01/11/2024 (décret n° 2020-1264), sans amende. Non fait : la recherche par mots du Journal officiel depuis le 10/11 (pages de recherche de Légifrance hors de portée de la session) ; la presse du début novembre ne signale aucun décret. Bing déplacé après le déploiement (import depuis Search Console, sans fichier dans le dépôt).
 - 12/11/2026 (8 h 23), Houssem : « pour des 6 points, pars avec ta recommandation » : **quatre lignes de validation du premier lot données telles que proposées** (paquet §6 ; loi montagne sous réserve du Journal officiel revérifié le jour du go) ; **demandes n° 18 et n° 19 acceptées** : 03 v13 (règle 14), `CLAUDE.md` et `CONTROLES.md` mis à jour dans la PR #35 par `appliquer-demande-18.py` (texte relu par la seconde revue). Il demande ce qu'il lui faut faire pour fusionner.
@@ -184,6 +188,7 @@ Les revues du 22/10 à la porte de sortie de l'étape 6 sont dans `04c_archives_
 
 ## Demandes de changement
 Les demandes n° 1 à 11 sont dans `04b_archives_decisions_jusqu_a_la_porte_6.md` ; les n° 12 à 17 dans `04f_archives_demandes_de_changement_12_a_17.md`.
+- 12/11/2026 (9 h 03), acceptée sur le principe, texte à confirmer : **n° 20, identité visuelle** (`travaux/etape-13/demande-changement-20.md`) : étape 13 ajoutée à 03 (v14), quand le site est complet, après la vague C et avant la boucle mensuelle (demande AdSense comprise) ; trois pistes, choix de Houssem ; garde-fous de la règle 14, Lighthouse ≥ 95, CLS < 0,1, aucune ressource d'un autre site. Aucun livrable validé touché.
 - 12/11/2026 (8 h 23), acceptée : **n° 19, marque du site** (`travaux/etape-9/demande-changement-19.md`, PR #35) : favicon PNG 192 px et icône Apple, ICO 48 et 96 ; nom « decodauto » mis en forme dans l'en-tête ; balisage WebSite `decodauto` (nom alternatif `decodauto.com`) ; title de l'accueil « decodauto : voyant allumé, code défaut, que faire ? » ; contrôles FAVICON-*. Touche les livrables 6.3, 7.4a et 7.5a.
 - 12/11/2026 (8 h 23), acceptée : **n° 18, indexation durable** (`travaux/etape-9/demande-changement-18.md`, PR #35) : règle 14 de 03 (adresses et pages jamais retirées sans 301, date « Mis à jour le » seulement pour une vraie modification, title et H1 au plus une fois par 90 jours avec registre, jamais de retour au non-indexé sans demande acceptée) ; contrôles INDEXATION-*, ADRESSE-SANS-REDIRECTION, REDIRECTION-*, DATE-*, TITRE-* sur chaque pull request et avant chaque déploiement. Appliquée dans la PR #35 : 03 v13 (règle 14), `CLAUDE.md`, `CONTROLES.md`.
 
