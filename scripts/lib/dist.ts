@@ -4,7 +4,7 @@ import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_ALTERNATIF_DU_SITE, NOM_DU_SITE, URL_SITE, adresseDepuisFichier, dateDansTexte, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { CLASSE_EMPLACEMENT_PUB, EMPLACEMENTS_PUB, HAUTEUR_RESERVEE_PX } from '../../src/lib/emplacements-pub.ts';
-import { CONTEXTE_SCHEMA, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
+import { CONTEXTE_SCHEMA, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, estDateHeureDuJour, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
 import { listerFichiers } from './charger.ts';
 import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, ANCRE_METHODE, PAGE_CONFIDENTIALITE, PAGE_METHODE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
 import { normaliserRecherche } from '../../src/lib/texte.ts';
@@ -700,7 +700,7 @@ export function auteursAffiches(html: string): Map<string, string> {
  *  - DONNEES-STRUCTUREES-TYPE : seuls les types attendus pour la nature de la page, une fois chacun (accueil : WebSite ;
  *    page éditoriale : Article et BreadcrumbList ; « à propos » : une Person par fiche ; mentions légales et autres pages
  *    du socle : aucun) ;
- *  - DONNEES-STRUCTUREES-CONTENU : Article (titre = H1, description = meta description, dateModified = date affichée,
+ *  - DONNEES-STRUCTUREES-CONTENU : Article (titre = H1, description = meta description, dateModified = minuit, heure de Paris, de la date affichée,
  *    adresse = canonical, auteur = fiche de « à propos »), fil d'Ariane (mêmes noms, mêmes adresses, même ordre que le
  *    fil affiché, la dernière miette étant la page), WebSite (nom et adresse du site), Person (nom de la fiche, ancre
  *    de la fiche) ;
@@ -757,7 +757,7 @@ export function constatsDonneesStructurees(html: string, fichier: string, adress
       if (absolue(o['mainEntityOfPage'], 'Article.mainEntityOfPage') !== undefined && o['mainEntityOfPage'] !== urlPage) e('DONNEES-STRUCTUREES-CONTENU', `Article : mainEntityOfPage « ${String(o['mainEntityOfPage'])} » ≠ adresse de la page ${urlPage}`);
       const affichee = dateDansTexte($('[data-signature]').text());
       if (affichee === undefined) e('DONNEES-STRUCTUREES-CONTENU', "Article : la page n'affiche pas de date de mise à jour (signature)");
-      else if (o['dateModified'] !== affichee) e('DONNEES-STRUCTUREES-CONTENU', `Article : dateModified « ${String(o['dateModified'])} » ≠ date affichée ${affichee}`);
+      else if (!estDateHeureDuJour(o['dateModified'], affichee)) e('DONNEES-STRUCTUREES-CONTENU', `Article : dateModified « ${String(o['dateModified'])} » ≠ minuit, heure de Paris, de la date affichée ${affichee}`);
       if ('datePublished' in o) e('DONNEES-STRUCTUREES-CONTENU', "Article : datePublished n'est pas déclarée (la page n'affiche pas de date de publication)");
       if (o['inLanguage'] !== 'fr') e('DONNEES-STRUCTUREES-CONTENU', 'Article : inLanguage vaut « fr »');
       const auteur = (o['author'] ?? {}) as Record<string, unknown>;
