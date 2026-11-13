@@ -25,13 +25,13 @@ Pull request #35 (`lot-1/mise-en-ligne` → `main`), préparée le 11/11/2026 ; 
 |---|---|---|---|
 | Faits vérifiés sur sources, verdicts validés | Loi montagne (le socle n'a pas de verdict) | Paquet `travaux/etape-8/paquet-8.3.1a-loi-montagne.md`, validé le 10/11 ; textes relus en ligne le 10/11 | Validé ; Journal officiel revérifié le 12/11 (§7, point 1) |
 | Faits de sécurité et chiffres dans le paquet validé | Loi montagne | Même paquet : aucune amende (vérifié le 10/11), panneau B26 (amende de 2e classe, plafond 150 €), période du 1er novembre au 31 mars | Validé |
-| Encadré relu et empreinte | Loi montagne | Empreinte recalculée au passage = `validation` (`75abb315d6c3…`) ; même assertion dans `tests/porte6.test.ts` (CI) | Validé ; ligne de validation à écrire (§6) |
+| Encadré relu et empreinte | Loi montagne | Empreinte recalculée au passage = `validation` (`75abb315d6c3…`) ; même assertion dans `tests/porte6.test.ts` (CI) | Validé ; ligne de validation donnée le 12/11 (§6) |
 | Lien « Signaler une erreur » | 4 pages | Contrôle SIGNALER-ERREUR-ABSENT (CI) ; vu sur le site construit : `mailto:erreur@decodauto.com` sur chaque page | Validé |
 | Contrôles au vert | Tout le site | CI de la pull request (§3) | Validé |
 | Adresse dans la liste Lighthouse de production | 3 pages (l'accueil y était) | `lighthouserc.json` : 4 adresses ; `tests/passage.test.ts` | Validé |
 | Lighthouse mobile ≥ 95 et CLS < 0,1, une page de chaque modèle (pneus, socle), avec emplacements factices | Loi montagne, « à propos », mentions légales | Recette des exemples, run 43101967291 : performance, accessibilité, bonnes pratiques, SEO = 100 ; CLS 0,000 ; LCP ≈ 0,9 s (médianes de 3 passages) | Validé |
 | Revue indépendante du diff complet | Pull request | Deux revues (§8) | Faite |
-| Ligne de validation de Houssem par page | 4 pages | §6 | **À écrire** |
+| Ligne de validation de Houssem par page | 4 pages | §6 | Validé : données le 12/11 à 8 h 23 |
 
 ## 3. Preuves de la CI
 
