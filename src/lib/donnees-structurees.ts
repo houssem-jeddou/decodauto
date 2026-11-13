@@ -49,6 +49,31 @@ export const texteVisible = (texte: string): string => typographier(texte).repla
 /** Date au format AAAA-MM-JJ (la même que celle que la page affiche, jour pour jour). */
 export const dateIsoJour = (date: Date): string => date.toISOString().slice(0, 10);
 
+/** Fuseau horaire des dates du site (site pour la France). */
+export const FUSEAU_DU_SITE = 'Europe/Paris';
+
+/**
+ * Date et heure ISO 8601 avec fuseau : minuit, heure de Paris, le jour que la page affiche (« 2026-11-10T00:00:00+01:00 »).
+ * Google recommande le fuseau pour dateModified, faute de quoi il prend celui de Googlebot (documentation des données
+ * structurées Article, relevée le 13/11/2026). Le décalage est celui en vigueur à minuit heure de Paris : on le lit une
+ * heure avant minuit UTC (23 h UTC la veille), instant où l'heure d'été n'a jamais encore changé (changement à 1 h UTC).
+ */
+export function dateHeureIsoParis(date: Date): string {
+  const jour = dateIsoJour(date);
+  const instant = new Date(`${jour}T00:00:00Z`).getTime() - 3_600_000;
+  const nom = new Intl.DateTimeFormat('en-US', { timeZone: FUSEAU_DU_SITE, timeZoneName: 'longOffset' })
+    .formatToParts(new Date(instant))
+    .find((p) => p.type === 'timeZoneName')?.value;
+  const decalage = /^GMT([+-]\d{2}:\d{2})$/.exec(nom ?? '')?.[1];
+  if (decalage === undefined) throw new Error(`Décalage horaire illisible pour ${FUSEAU_DU_SITE} : « ${String(nom)} »`);
+  return `${jour}T00:00:00${decalage}`;
+}
+
+/** Vrai si la valeur est une date et heure produite par dateHeureIsoParis pour ce jour (AAAA-MM-JJ). */
+export const estDateHeureDuJour = (valeur: unknown, jour: string): boolean =>
+  typeof valeur === 'string' && /^\d{4}-\d{2}-\d{2}T00:00:00[+-]\d{2}:\d{2}$/.test(valeur) && valeur.startsWith(`${jour}T`) &&
+  valeur === dateHeureIsoParis(new Date(jour));
+
 /**
  * Balise <script type="application/ld+json"> d'un objet. Les caractères qui pourraient fermer la balise ou casser le
  * script (« < », « > », « & », séparateurs de ligne Unicode) sont écrits en \uXXXX : le JSON reste identique une fois lu.
@@ -97,7 +122,7 @@ export function articleJsonLd(a: ArticleDeclare): Record<string, unknown> {
     description: a.description,
     inLanguage: 'fr',
     mainEntityOfPage: urlAbsolue(a.adresse),
-    dateModified: dateIsoJour(a.modification),
+    dateModified: dateHeureIsoParis(a.modification),
     author: { '@type': 'Person', name: texteVisible(a.auteur.nom), url: `${urlAbsolue(a.adresseAPropos)}#${ancreAuteur(a.auteur.id)}` },
   };
 }

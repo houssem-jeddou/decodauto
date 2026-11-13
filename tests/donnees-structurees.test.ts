@@ -14,6 +14,8 @@ import {
   siteJsonLd,
   texteVisible,
   type ArticleDeclare,
+  dateHeureIsoParis,
+  estDateHeureDuJour,
 } from '../src/lib/donnees-structurees.ts';
 import { cheminDAriane } from '../src/lib/composants.ts';
 import { dateDansTexte, dateDeMiseAJour, genererPlanDuSite, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite } from '../src/lib/site.ts';
@@ -55,7 +57,7 @@ describe('JSON-LD : pages', () => {
     assert.equal(a['@context'], CONTEXTE_SCHEMA);
     assert.equal(a['@type'], 'Article');
     assert.equal(a['headline'], 'Voyant moteur allumé : peut-on rouler ?');
-    assert.equal(a['dateModified'], '2026-11-10');
+    assert.equal(a['dateModified'], '2026-11-10T00:00:00+01:00');
     assert.equal(a['mainEntityOfPage'], 'https://decodauto.com/voyants/moteur/');
     assert.equal(a['inLanguage'], 'fr');
     assert.deepEqual(a['author'], { '@type': 'Person', name: 'Houssem Jeddou', url: 'https://decodauto.com/a-propos/#auteur-houssem-jeddou' });
@@ -138,5 +140,26 @@ describe('plan du site : lastmod', () => {
   test('une adresse en double garde sa première entrée', () => {
     const xml = genererPlanDuSite([{ adresse: '/a/', lastmod: '2026-01-01' }, { adresse: '/a/', lastmod: '2026-02-02' }]);
     assert.deepEqual([...lireLastmodDuPlanDuSite(xml)], [['https://decodauto.com/a/', '2026-01-01']]);
+  });
+});
+
+describe('JSON-LD : date de modification avec fuseau (heure de Paris)', () => {
+  test('heure d’hiver, heure d’été et jours de changement d’heure', () => {
+    assert.equal(dateHeureIsoParis(new Date('2026-11-10')), '2026-11-10T00:00:00+01:00');
+    assert.equal(dateHeureIsoParis(new Date('2026-07-14')), '2026-07-14T00:00:00+02:00');
+    // 29/03/2026 : passage à l’heure d’été à 2 h ; minuit est encore en heure d’hiver.
+    assert.equal(dateHeureIsoParis(new Date('2026-03-29')), '2026-03-29T00:00:00+01:00');
+    assert.equal(dateHeureIsoParis(new Date('2026-03-30')), '2026-03-30T00:00:00+02:00');
+    // 25/10/2026 : retour à l’heure d’hiver à 3 h ; minuit est encore en heure d’été.
+    assert.equal(dateHeureIsoParis(new Date('2026-10-25')), '2026-10-25T00:00:00+02:00');
+    assert.equal(dateHeureIsoParis(new Date('2026-10-26')), '2026-10-26T00:00:00+01:00');
+  });
+
+  test('estDateHeureDuJour : seulement minuit, heure de Paris, du jour affiché', () => {
+    assert.ok(estDateHeureDuJour('2026-11-10T00:00:00+01:00', '2026-11-10'));
+    assert.ok(!estDateHeureDuJour('2026-11-10', '2026-11-10'), 'date sans heure ni fuseau');
+    assert.ok(!estDateHeureDuJour('2026-11-10T00:00:00Z', '2026-11-10'), 'fuseau UTC');
+    assert.ok(!estDateHeureDuJour('2026-11-10T00:00:00+02:00', '2026-11-10'), 'mauvais décalage');
+    assert.ok(!estDateHeureDuJour('2026-11-09T00:00:00+01:00', '2026-11-10'), 'autre jour');
   });
 });
