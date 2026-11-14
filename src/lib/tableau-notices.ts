@@ -11,7 +11,7 @@
 // code de la propriété intellectuelle, art. L122-5, 3° a : nom de l'auteur et source indiqués clairement).
 // Le tableau d'un voyant n'est affiché que sur sa page de rattachement (champ `page` de la base) : une autre page qui
 // reprend sa ligne (code défaut, panne) ne le recopie pas (une intention de recherche, une page). Seule exception, la page
-// outil (demande de changement n° 23) : une ligne qui lui est rattachée (STOP, triangle d'alerte) est affichée par l'outil,
+// outil (demande de changement n° 23) : une ligne qui lui est rattachée (le voyant STOP) est affichée par l'outil,
 // avec les pages citées sous la ligne ; la page outil n'a pas de tableau des notices.
 // Module sans dépendance à l'exécution : testé sans installation (tests/tableau-notices.test.ts).
 // ---------------------------------------------------------------------------------------------

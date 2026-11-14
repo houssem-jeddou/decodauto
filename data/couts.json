@@ -171,6 +171,11 @@
       "tranche": "reparation"
     },
     {
+      "id": "bloc-abs",
+      "libelle": "Bloc ABS (groupe hydraulique et calculateur)",
+      "tranche": "organe"
+    },
+    {
       "id": "capteur-de-pression-des-pneus",
       "libelle": "Capteur de pression des pneus",
       "tranche": "reparation"
