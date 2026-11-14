@@ -72,7 +72,7 @@ Les notices lues le décrivent comme un témoin du circuit de charge : circuit d
 
 Les notices Renault et Dacia ont aussi un message d'alerte, « Panne électrique DANGER » chez Renault, « Panne électrique » chez Dacia, qui indique un problème dans le circuit de charge de la batterie (alternateur…). Il s'affiche avec le témoin STOP, qui impose un arrêt impératif et immédiat : arrêtez le moteur et ne le redémarrez pas ({{cite:notice-renault-clio-5|p. 125}}, {{cite:notice-dacia-sandero-3|p. 102}}).
 
-Selon la notice Toyota Yaris, une charge insuffisante de la batterie, ou une chute provisoire de sa tension, peut aussi allumer le voyant de [direction assistée](/voyants/direction/) ({{cite:notice-toyota-yaris|p. 297}}).
+Selon la notice Toyota Yaris, une charge insuffisante de la batterie, ou une chute provisoire de sa tension, peut aussi allumer le voyant de [direction assistée](/voyants/direction/) ({{cite:notice-toyota-yaris|p. 297}}). Pour la direction assistée, les notices Renault Clio 5 phase 2 et Dacia Sandero 3 demandent de ne jamais rouler avec une batterie faiblement chargée ({{cite:notice-renault-clio-5|p. 143}}, {{cite:notice-dacia-sandero-3|p. 115}}).
 
 ## Voyant batterie allumé avec une batterie neuve ou un alternateur en bon état
 
@@ -84,7 +84,7 @@ Si les cosses sont propres et serrées, les autres causes citées sont la courro
 
 Aucune des notices lues ne décrit de clignotement propre à ce voyant. La notice Toyota Yaris applique ses consignes à tout voyant qui « s'allume ou clignote » : pour le voyant du système de charge, arrêter immédiatement le véhicule dans un endroit sûr. Elle précise qu'un voyant qui s'allume ou clignote, puis s'éteint aussitôt, ne signale pas forcément un dysfonctionnement ; si cela se reproduit, elle demande de faire vérifier la voiture ({{cite:notice-toyota-yaris|p. 292}}).
 
-Pour une autre voiture, demandez l'avis d'un professionnel. Dès que le voyant reste allumé moteur tournant, c'est la consigne de l'encadré qui s'applique : {{verdict:batterie-rouge}}.
+Pour une autre voiture, un voyant de charge qui clignote ou se rallume moteur tournant relève de la consigne de l'encadré : {{verdict:batterie-rouge}}. S'il s'est allumé puis éteint aussitôt, demandez l'avis d'un professionnel.
 
 ## Voyants STOP et batterie allumés ensemble
 

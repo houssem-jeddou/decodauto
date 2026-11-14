@@ -61,8 +61,8 @@
       "tranche": "geste"
     },
     {
-      "id": "bref-parcours",
-      "libelle": "Bref parcours demandé par la notice",
+      "id": "reinitialisation-demandee-par-la-notice",
+      "libelle": "Réinitialisation demandée par la notice (bref parcours ou braquage du volant)",
       "tranche": "geste"
     },
     {

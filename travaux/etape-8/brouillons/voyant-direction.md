@@ -14,7 +14,7 @@ voyants:
   - direction-orange
   - direction-rouge
 cout_probable:
-  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site) : du bref parcours que demande la notice Seat Ibiza après un rebranchement de la batterie, à la réparation de la direction assistée."
+  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site) : de la réinitialisation que demandent les notices Seat Ibiza et Dacia Sandero 3 après une intervention sur la batterie, à la réparation de la direction assistée."
   sources:
     - notice-peugeot-208
     - notice-seat-ibiza
@@ -34,9 +34,9 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 causes:
   - cause: Batterie débranchée puis rebranchée, ou dépannée
-    explication: "Selon la notice Seat Ibiza, le témoin jaune peut s'allumer quand la batterie 12 volts a été débranchée puis rebranchée : elle demande alors un bref parcours à 15-20 km/h. Selon la notice Dacia Sandero 3, il s'allume, suivant le véhicule, lors d'un dépannage de la batterie."
+    explication: "Selon la notice Seat Ibiza, le témoin jaune peut s'allumer quand la batterie 12 volts a été débranchée puis rebranchée : elle demande alors un bref parcours à 15-20 km/h. Selon la notice Dacia Sandero 3, il s'allume, suivant le véhicule, lors d'un dépannage de la batterie, et elle demande alors une réinitialisation de l'angle du volant, à faire soi-même."
     pieces:
-      - bref-parcours
+      - reinitialisation-demandee-par-la-notice
   - cause: Charge de la batterie insuffisante
     explication: "Selon la notice Toyota Yaris (p. 297), une charge insuffisante de la batterie, ou une chute provisoire de sa tension, peut allumer le voyant de direction assistée."
     pieces:
@@ -75,19 +75,21 @@ Pour une autre marque, Volkswagen, Audi ou BMW par exemple, cherchez « directio
 À la mise du contact, il s'allume quelques secondes, puis s'éteint : c'est le contrôle normal (notices Seat Ibiza, Renault Clio 5 phase 2 et Dacia Sandero 3). En dehors de ce contrôle, les notices lues donnent trois cas :
 
 - **une défaillance de la direction assistée** : direction défaillante (Peugeot 208), fonctionnement limité ou direction endommagée (Seat Ibiza), dysfonctionnement de la direction assistée électrique (Toyota Yaris) ;
-- **une batterie trop faible** : selon la notice Toyota Yaris, une charge insuffisante de la batterie, ou une chute provisoire de sa tension, peut allumer ce voyant ({{cite:notice-toyota-yaris|p. 297}}) ; le [voyant batterie](/voyants/batterie/) signale, lui, un défaut du circuit de charge ;
+- **une batterie trop faible** : selon la notice Toyota Yaris, une charge insuffisante de la batterie, ou une chute provisoire de sa tension, peut allumer ce voyant ({{cite:notice-toyota-yaris|p. 297}}) ; les notices Renault Clio 5 phase 2 et Dacia Sandero 3 demandent de ne jamais rouler avec une batterie faiblement chargée ({{cite:notice-renault-clio-5|p. 143}}, {{cite:notice-dacia-sandero-3|p. 115}}) ; le [voyant batterie](/voyants/batterie/) signale, lui, un défaut du circuit de charge ;
 - **une batterie débranchée, rebranchée ou dépannée** : selon la notice Seat Ibiza, le témoin jaune peut s'allumer après le rebranchement de la batterie 12 volts, et il faut alors faire un bref parcours à 15-20 km/h ({{cite:notice-seat-ibiza|p. 227}}) ; selon la notice Dacia Sandero 3, il s'allume, suivant le véhicule, lors d'un dépannage de la batterie ({{cite:notice-dacia-sandero-3|p. 113}}).
 
 Le triangle orange est un autre voyant : la [liste des voyants](/voyants/) l'explique.
 
 ## Comment éteindre le voyant de direction assistée ?
 
-Seule la notice Seat Ibiza décrit un cas où il s'éteint de lui-même : si le témoin jaune ne s'allume plus après avoir redémarré le moteur et fait un court trajet, une révision de la direction n'est pas nécessaire ; après le rebranchement de la batterie, elle demande un bref parcours à 15-20 km/h ({{cite:notice-seat-ibiza|p. 227}}). Pour une autre voiture, c'est la consigne de l'encadré qui s'applique. Hors du cas de la colonne coincée (plus bas), les notices lues ne décrivent aucune autre manipulation : le voyant s'éteint quand le défaut est réparé.
+Deux notices décrivent ce qu'il faut faire après une intervention sur la batterie. Selon la notice Seat Ibiza, si le témoin jaune ne s'allume plus après avoir redémarré le moteur et fait un court trajet, une révision de la direction n'est pas nécessaire ; après le rebranchement de la batterie, elle demande un bref parcours à 15-20 km/h ({{cite:notice-seat-ibiza|p. 227}}). Selon la notice Dacia Sandero 3, suivant le véhicule, après un dépannage de la batterie (batterie débranchée ou déchargée), il faut réinitialiser l'angle du volant : voiture à l'arrêt sur un sol horizontal, conducteur seul à bord, moteur démarré, le témoin ou le message « Tourner volant max droite-gche » s'affiche ; tournez le volant à fond vers la gauche et maintenez-le environ une seconde en butée, faites de même vers la droite, puis remettez les roues droites ({{cite:notice-dacia-sandero-3|p. 115-116}}). Elle demande de ne pas laisser la direction braquée à fond, en butée, à l'arrêt. La notice Renault Clio 5 phase 2 demande, elle, de ne jamais tourner le volant quand la batterie est débranchée ({{cite:notice-renault-clio-5|p. 144}}).
+
+Pour une autre voiture, c'est la consigne de l'encadré qui s'applique. Hors de ces cas et de celui de la colonne coincée (plus bas), les notices lues ne décrivent aucune manipulation : le voyant s'éteint quand le défaut est réparé.
 
 ## Voyant volant orange qui clignote
 
-La notice Seat Ibiza décrit un témoin jaune clignotant : la colonne de direction est coincée ; à l'arrêt, tournez le volant d'un côté et de l'autre. Ou bien la colonne ne se verrouille pas ou ne se déverrouille pas : retirez la clé du contact et remettez le contact, en tenant compte des messages du combiné. Elle demande de s'arrêter si la colonne reste bloquée après la mise du contact, et de faire appel à un spécialiste ({{cite:notice-seat-ibiza|p. 227}}). Les autres notices lues ne décrivent pas ce clignotement : pour une autre voiture, c'est sa notice qui fait foi.
+La notice Seat Ibiza décrit un témoin jaune clignotant : la colonne de direction est coincée ; à l'arrêt, tournez le volant d'un côté et de l'autre. Ou bien la colonne ne se verrouille pas ou ne se déverrouille pas : retirez la clé du contact et remettez le contact, en tenant compte des messages du combiné. Elle demande de s'arrêter si la colonne reste bloquée après la mise du contact, et de faire appel à un spécialiste ({{cite:notice-seat-ibiza|p. 227}}). Les autres notices lues ne décrivent pas ce clignotement : pour une autre voiture, c'est sa notice qui fait foi, et à défaut la consigne de l'encadré.
 
 ## Voyant de direction assistée au contrôle technique
 
-L'annexe I de l'arrêté du 18 juin 1991 classe en défaillance majeure la direction assistée électronique dont l'indicateur de dysfonctionnement fait état d'une défaillance du système, ainsi que l'assistance qui ne fonctionne pas ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 2.6.1}}). Une défaillance majeure impose une contre-visite dans les deux mois ({{cite:arrete-1991-06-18-controle-technique|article 7}}). La consigne de l'encadré ne change pas : {{verdict:direction-orange}} pour le voyant orange, {{verdict:direction-rouge}} pour le voyant rouge ou avec le témoin STOP.
+L'annexe I de l'arrêté du 18 juin 1991 classe en défaillance majeure la direction assistée électronique dont l'indicateur de dysfonctionnement fait état d'une défaillance du système, ainsi que l'assistance qui ne fonctionne pas ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 2.6.1}}). Une défaillance majeure impose une contre-visite dans les deux mois ({{cite:arrete-1991-06-18-controle-technique|article 7}}). La consigne de l'encadré ne change pas. Voyant orange : {{verdict:direction-orange}}. Voyant rouge, ou avec le témoin STOP : {{verdict:direction-rouge}}.
