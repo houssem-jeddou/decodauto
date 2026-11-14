@@ -5,6 +5,7 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { DOSSIER_CONTENU, DOSSIER_EXEMPLES, localiserPage } from './pages-redigees.ts';
+import { FICHIER_VAGUES_OUVERTES, lireVaguesOuvertes, messageVagueNonOuverte } from './vagues.ts';
 
 /** Page dont l'accès à « Méthode » (/a-propos/#methode) conditionne la construction de production (R7-LIEN, liens de l'encadré). */
 export const ID_A_PROPOS = 'a-propos';
@@ -53,6 +54,14 @@ export async function verifierPassage(racine: string, id: string, empreinteDe: (
   const plan = JSON.parse((await lire(racine, 'data/plan-du-site.json')) ?? '[]') as PageDuPlan[];
   const page = plan.find((p) => p.id === id);
   if (page === undefined) return { erreurs: [`${id} : identifiant absent de data/plan-du-site.json`] };
+
+  // Vagues ouvertes (demande de changement n° 21) : une page d'une vague non ouverte ne passe pas dans src/content.
+  try {
+    const ouvertes = lireVaguesOuvertes((await lire(racine, FICHIER_VAGUES_OUVERTES)) ?? '');
+    if (!ouvertes.includes(page.vague)) erreurs.push(`${id} : ${messageVagueNonOuverte(id, page.vague, ouvertes)}`);
+  } catch (e) {
+    erreurs.push((e as Error).message);
+  }
 
   let source: string | undefined;
   try {
