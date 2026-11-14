@@ -6,11 +6,12 @@
 // Sans dépendance : ce module tourne sans installation.
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { VAGUES } from '../../src/schemas/listes.ts';
 
 export const FICHIER_VAGUES_OUVERTES = 'config/vagues-ouvertes.json';
 
-/** Vagues du plan du site, recopiées de src/schemas/listes.ts (VAGUES) pour rester sans dépendance ; un test vérifie l'égalité. */
-export const VAGUES_CONNUES: readonly string[] = ['A', 'B', 'C'];
+/** Vagues du plan du site (src/schemas/listes.ts, fichier sans dépendance). */
+export const VAGUES_CONNUES: readonly string[] = VAGUES;
 
 /** Lit la liste des vagues ouvertes : une liste JSON non vide de vagues connues, sans doublon (par exemple ["A"]). */
 export function lireVaguesOuvertes(texte: string): string[] {

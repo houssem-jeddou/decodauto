@@ -69,7 +69,7 @@ describe('contrôle VAGUE-NON-OUVERTE', () => {
     assert.deepEqual(controlerVaguesOuvertes([{ id: 'inconnue', fichier: 'src/content/voyant/inconnue.md' }, { fichier: 'src/content/voyant/sans-id.md' }], vagueDe, ['A']), []);
   });
 
-  test('le contrôle du site construit appelle ce contrôle sur les pages lues', async () => {
+  test('le source du contrôle du site appelle ce contrôle (la construction de bout en bout est testée dans tests/controle.test.ts)', async () => {
     const source = await readFile(join(racineDepot, 'scripts/lib/controler-site.ts'), 'utf8');
     assert.match(source, /controlerVaguesOuvertes\(pagesPubliees,/);
     assert.match(source, /chargerVaguesOuvertes\(racine\)/);
@@ -104,6 +104,23 @@ describe('règle de passage : une page d’une vague non ouverte ne passe pas', 
     const racine = await depot('["A", "B"]\n');
     const { erreurs } = await verifierPassage(racine, 'moteur-surchauffe', () => 'a'.repeat(64));
     assert.deepEqual(erreurs, []);
+  });
+
+  test('liste absente : refus, annoncé comme absent', async () => {
+    const racine = await depot('["A"]\n');
+    await rm(join(racine, FICHIER_VAGUES_OUVERTES));
+    const { erreurs } = await verifierPassage(racine, 'moteur-surchauffe', () => 'a'.repeat(64));
+    assert.ok(erreurs.some((e) => e.includes(`${FICHIER_VAGUES_OUVERTES} introuvable`)), erreurs.join('\n'));
+  });
+
+  test('un retour anticipé (page déjà dans src/content) garde l’erreur de vague', async () => {
+    const racine = await depot('["A"]\n');
+    await mkdir(join(racine, 'src/content/panne'), { recursive: true });
+    await writeFile(join(racine, 'src/content/panne/moteur-surchauffe.md'), await readFile(join(racine, 'exemples/panne/moteur-surchauffe.md'), 'utf8'));
+    await rm(join(racine, 'exemples/panne/moteur-surchauffe.md'));
+    const { erreurs } = await verifierPassage(racine, 'moteur-surchauffe', () => 'a'.repeat(64));
+    assert.ok(erreurs.some((e) => /vague B/.test(e)), erreurs.join('\n'));
+    assert.ok(erreurs.some((e) => /déjà dans src\/content/.test(e)), erreurs.join('\n'));
   });
 
   test('liste illisible : refus', async () => {

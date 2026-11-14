@@ -455,6 +455,9 @@ describe('construction de recette des exemples et page sans contenu (R7-PAGE-SAN
     await mkdir(join(racineTest, 'docs'));
     const lignes05 = donnees.plan.flatMap((l) => l.mots_cles.map((m) => `${m},${l.vague},,`));
     await writeFile(join(racineTest, 'docs', '05_mots_cles_perimetre.csv'), ['mot_cle,vague,variante_proche_de,precision', ...lignes05].join('\r\n'));
+    // Vagues ouvertes (demande de changement n° 21) : toutes, ce test porte sur la recette.
+    await mkdir(join(racineTest, 'config'));
+    await writeFile(join(racineTest, 'config', 'vagues-ouvertes.json'), '["A", "B", "C"]\n');
     // Un exemple rédigé (exemples/panne/) et sa page construite à l'adresse du plan.
     await mkdir(join(racineTest, DOSSIER_EXEMPLES, 'panne'), { recursive: true });
     await writeFile(join(racineTest, DOSSIER_EXEMPLES, 'panne', 'valide-panne.md'), await readFile(join(fixtures, 'cas', 'valide-panne', 'page.md'), 'utf8'));

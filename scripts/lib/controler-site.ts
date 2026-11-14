@@ -8,7 +8,7 @@ import { ID_OUTIL_VOYANTS, adressesDansLeTexte, indexerPlan, liensEnAttente, lie
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
 import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
-import { chargerVaguesOuvertes, controlerVaguesOuvertes } from './vagues.ts';
+import { FICHIER_VAGUES_OUVERTES, chargerVaguesOuvertes, controlerVaguesOuvertes } from './vagues.ts';
 import { controlerFavicon } from './favicon.ts';
 import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
@@ -98,7 +98,7 @@ export async function controlerSite(options: { racine: string; dist: string; auj
     const pagesPubliees = pagesLues.map((l) => ({ id: typeof (l.brut as { id?: unknown } | null)?.id === 'string' ? ((l.brut as { id: string }).id) : undefined, fichier: l.fichier }));
     constats.push(...controlerVaguesOuvertes(pagesPubliees, (id) => contexte.plan.get(id)?.vague, ouvertes, DOSSIER_CONTENU));
   } catch (e) {
-    constats.push({ regle: 'VAGUE-NON-OUVERTE', gravite: 'erreur', message: e instanceof Error ? e.message : String(e), fichier: 'config/vagues-ouvertes.json' });
+    constats.push({ regle: 'VAGUE-NON-OUVERTE', gravite: 'erreur', message: e instanceof Error ? e.message : String(e), fichier: FICHIER_VAGUES_OUVERTES });
   }
   // Une page éditoriale construite a son fichier de contenu : un exemple (exemples/), une page de test ou une page
   // supprimée ne se retrouvent jamais dans le site construit (livrable 6.6 : aucune vraie page sur main avant l'étape 9).

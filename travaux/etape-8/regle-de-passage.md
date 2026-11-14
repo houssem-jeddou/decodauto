@@ -8,6 +8,7 @@ Où vit une page rédigée avant et après sa mise en ligne, et ce qui la suit q
 2. **Le passage** est un déplacement de fichier sans autre changement de contenu : `exemples/<type>/<id>.md` → `src/content/<type>/<id>.md`. Il se fait **seulement dans la pull request de mise en ligne du lot concerné** (demande de changement n° 17 : une pull request par lot), sur demande de Houssem, par `npm run passage -- <id> --appliquer` (sans `--appliquer` : essai à blanc).
 3. **Conditions contrôlées avant tout déplacement** (`scripts/lib/passage.ts`, refus avec la liste des écarts) :
    - l'identifiant est dans `data/plan-du-site.json` et le fichier source porte ce même identifiant ;
+   - la vague de la page (plan du site) est ouverte : elle figure dans `config/vagues-ouvertes.json` (demande de changement n° 21 ; le contrôle VAGUE-NON-OUVERTE refuse aussi, à la construction, une page de `src/content` d'une vague non ouverte) ;
    - la page n'existe pas déjà dans `src/content` (un identifiant, un seul fichier) ;
    - pour une page éditoriale, l'empreinte recalculée par `scripts/empreinte.ts` est celle du champ `validation` : la même assertion que la porte 6, jamais recalculée pour passer ;
    - `src/content/socle/a-propos.md` existe (sauf pour « à propos » elle-même) : sans elle, les liens « Méthode » de la page en ligne sont cassés et `npm run liens` échoue en production, car `--attendu` n'existe que dans la recette ; et elle porte la fiche de l'auteur de la page (champ `auteurs`), sinon R7-AUTEUR-INCONNU échouerait à la construction ;
