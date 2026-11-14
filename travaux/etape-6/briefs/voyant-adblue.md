@@ -8,6 +8,7 @@
 - **Adresse** : `/voyants/adblue/` ; page mère : `/voyants/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/voyants/moteur/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page publiée** (sa validation est notée au journal) : `src/content/voyant/voyant-adblue.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -44,6 +45,12 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | `adblue-reserve` Voyant AdBlue orange (réserve basse, démarrage bientôt bloqué) | orange | Oui, avec précautions | À faire tout de suite | Faites l'appoint d'AdBlue sans attendre, à la pompe ou avec un bidon (au moins la quantité minimale indiquée par la notice), avant la fin de l'autonomie affichée : à zéro, le moteur ne redémarre plus. | 4 | oui |
 | `adblue-demarrage-impossible` AdBlue : démarrage impossible (réservoir vide ou système bloqué) | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | Ne repartez pas avant d'avoir fait l'appoint d'AdBlue (au moins la quantité minimale indiquée par la notice), voiture garée dans un endroit sûr et plat. Si c'est un défaut du système AdBlue et non un réservoir vide, faites appel à un garage ou à l'assistance. | 4 | oui |
 | `adblue-defaut` Voyant AdBlue avec voyant moteur ou Service (système AdBlue défaillant) | orange | Oui, avec précautions | À faire tout de suite | Allez au garage au plus tôt, avant la fin des kilomètres affichés : une fois à zéro, le moteur ne redémarre plus. Si de l'AdBlue vient d'être ajouté, signalez-le : un liquide non conforme peut déclencher l'alerte. | 4 | oui |
+
+Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à une autre page : pas de tableau des notices ici) :
+
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `moteur-orange-fixe` Voyant moteur orange allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez que si la notice de votre voiture permet de rouler jusqu'au garage, et faites alors contrôler le moteur sans attendre en roulant prudemment ; sinon, faites appel à un garage ou à l'assistance. | 5 | oui |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:36 UTC, requête « voyant adblue »)
 
@@ -87,7 +94,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant AdBlue allumé ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant AdBlue allumé ? »
 - **Angle** : Trois lignes de la base (réserve basse, démarrage impossible, système défaillant ; tableau des voyants du brief). Les distances des messages viennent des notices, marque par marque, jamais d'une estimation (charte §2.2).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

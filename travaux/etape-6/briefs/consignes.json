@@ -129,7 +129,6 @@
     ]
   },
   "voyant-adblue": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
     "angle": "Trois lignes de la base (réserve basse, démarrage impossible, système défaillant ; tableau des voyants du brief). Les distances des messages viennent des notices, marque par marque, jamais d'une estimation (charte §2.2).",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
@@ -166,7 +165,6 @@
     ]
   },
   "voyant-prechauffage": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant de préchauffage allumé ou qui clignote ?",
     "angle": "La recherche porte sur le clignotement en roulant, avec perte de puissance, alors que la base ne décrit que l'allumage au démarrage (relevé, constat 6). La notice Seat Ibiza p. 289 relevée décrit le clignotement comme un défaut de la gestion du moteur diesel.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [

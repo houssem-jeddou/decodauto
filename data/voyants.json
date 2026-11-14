@@ -512,7 +512,7 @@
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 166, « Réservoir réactif », Entretien/Autonomie",
-        "extrait": "[témoin] clignote. « XXX KM blocage remplir AdBlue » […] Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible.",
+        "extrait": "[témoin] s'allume. « XXX KM blocage remplir AdBlue » […] Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible.",
         "verdict": "oui avec précautions",
         "urgence": "immédiate"
       },
@@ -532,7 +532,7 @@
       }
     ],
     "ecart_marques": "Seat laisse faire l'appoint dans les kilomètres indiqués (le voyant s'allume à 1 000 km d'autonomie) ; Renault et Dacia laissent prévoir l'appoint entre 1 200 et 800 km, puis le demandent dès que possible ; Peugeot demande un appoint rapide sous 800 km d'autonomie, impératif sous 100 km.",
-    "validation": "46a339ad9c5f242548da638794fe8871bd055d2bfc79371707bd62dc7b2e0e69"
+    "validation": "003b8d8936d6fd50d8ce314806a34097319f8b1cba7d7ed7a27f80909ec38930"
   },
   {
     "id": "adblue-demarrage-impossible",

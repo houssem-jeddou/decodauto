@@ -6,8 +6,9 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/prechauffage/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/moteur/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page publiée** (sa validation est notée au journal) : `src/content/voyant/voyant-prechauffage.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -40,6 +41,12 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 | Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
 |---|---|---|---|---|---|---|
 | `prechauffage` Voyant de préchauffage (diesel) allumé au démarrage | orange | Oui, vous pouvez rouler | Aucune action nécessaire | C'est normal : attendez que le voyant s'éteigne avant de démarrer. | 4 | non |
+
+Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à une autre page : pas de tableau des notices ici) :
+
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `moteur-orange-fixe` Voyant moteur orange allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez que si la notice de votre voiture permet de rouler jusqu'au garage, et faites alors contrôler le moteur sans attendre en roulant prudemment ; sinon, faites appel à un garage ou à l'assistance. | 5 | oui |
 
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:36 UTC, requête « voyant préchauffage »)
 
@@ -86,7 +93,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de préchauffage allumé ou qui clignote ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant de préchauffage allumé ou qui clignote ? »
 - **Angle** : La recherche porte sur le clignotement en roulant, avec perte de puissance, alors que la base ne décrit que l'allumage au démarrage (relevé, constat 6). La notice Seat Ibiza p. 289 relevée décrit le clignotement comme un défaut de la gestion du moteur diesel.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
