@@ -6,7 +6,10 @@
         "http://localhost/index.html",
         "http://localhost/a-propos/index.html",
         "http://localhost/mentions-legales/index.html",
-        "http://localhost/loi-montagne/index.html"
+        "http://localhost/loi-montagne/index.html",
+        "http://localhost/voyants/moteur/index.html",
+        "http://localhost/voyants/huile/index.html",
+        "http://localhost/codes-defaut/p0087/index.html"
       ],
       "numberOfRuns": 3,
       "settings": {
