@@ -16,7 +16,7 @@ voyants:
   - pression-pneus
   - pression-pneus-systeme
 cout_probable:
-  base_de_calcul: "Chaque cause est classée d'après la pièce ou l'opération la plus lourde qu'elle peut toucher (liste des pièces du site) : du regonflage, que vous faites vous-même, au capteur de pression à remplacer."
+  base_de_calcul: "Chaque cause est classée d'après la pièce ou l'opération la plus lourde qu'elle peut toucher (liste des pièces du site) : du regonflage, que vous faites vous-même, à la réparation du système de surveillance au garage."
   sources:
     - notice-dacia-sandero-3
     - notice-peugeot-208
@@ -35,7 +35,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 causes:
   - cause: Pneu sous-gonflé
-    explication: "Le cas le plus courant selon les notices : la pression d'un ou plusieurs pneus a baissé. Les notices Peugeot 208 et Dacia Sandero 3 demandent de contrôler et d'ajuster à froid la pression des quatre pneus, puis de réinitialiser le système."
+    explication: "La pression d'un ou plusieurs pneus a baissé. Les notices Peugeot 208 et Dacia Sandero 3 demandent de contrôler et d'ajuster à froid la pression des quatre pneus, puis de réinitialiser le système."
     pieces:
       - regonflage
   - cause: Pneu crevé ou endommagé
@@ -60,38 +60,40 @@ Les notices lues pour cette page sont celles de ces modèles ; pour une autre g�
 - {{notice:notice-seat-ibiza}}
 - {{notice:notice-toyota-yaris}}
 
-La notice de la Clio 5 ne vaut pas pour une Clio 4, ni celle de la Seat Ibiza pour une Volkswagen ou une Audi : leur manipulation de réinitialisation peut être différente.
+La notice de la Clio 5 phase 2 ne vaut pas pour une Clio 4, ni celle de la Seat Ibiza pour une Volkswagen ou une Audi : leur manipulation de réinitialisation peut être différente.
 
 ## Que faire quand le voyant s'allume en roulant
 
-La notice {{notice:notice-peugeot-208}} donne la marche à suivre la plus détaillée ({{cite:notice-peugeot-208|p. 110, « Alerte de sous-gonflage »}}) : réduire immédiatement la vitesse, éviter les coups de volant et les freinages brusques, s'arrêter dès que la circulation le permet, puis contrôler à froid la pression des quatre pneus, par exemple avec le compresseur du kit de dépannage. Elle prévient qu'une perte de pression ne déforme pas toujours le pneu de façon visible : un coup d'œil ne suffit pas. Si le contrôle n'est pas possible tout de suite, elle demande de rouler prudemment, à vitesse réduite ; en cas de crevaison, d'utiliser le kit ou la roue de secours.
+La notice Peugeot 208 donne la marche à suivre la plus détaillée ({{cite:notice-peugeot-208|p. 110, « Alerte de sous-gonflage »}}) : réduire immédiatement la vitesse, éviter les coups de volant et les freinages brusques, s'arrêter dès que la circulation le permet, puis contrôler à froid la pression des quatre pneus, par exemple avec le compresseur du kit de dépannage. Elle prévient qu'une perte de pression ne déforme pas toujours le pneu de façon visible : un coup d'œil ne suffit pas. Si le contrôle n'est pas possible tout de suite, elle demande de rouler prudemment, à vitesse réduite ; en cas de crevaison, d'utiliser le kit ou la roue de secours.
 
-La notice {{notice:notice-seat-ibiza}} demande aussi de réduire immédiatement la vitesse, d'éviter les virages et freinages brusques, de s'arrêter le plus rapidement possible et de contrôler la pression et l'état de tous les pneus. Elle prévient que des pneus trop peu gonflés peuvent s'endommager et faire perdre le contrôle de la voiture ({{cite:notice-seat-ibiza|p. 312}}).
+La notice Seat Ibiza demande aussi de réduire immédiatement la vitesse, d'éviter les virages et freinages brusques, de s'arrêter le plus rapidement possible et de contrôler la pression et l'état de tous les pneus. Elle prévient que des pneus trop peu gonflés peuvent s'endommager et faire perdre le contrôle de la voiture ({{cite:notice-seat-ibiza|p. 312}}).
 
-Dans les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, le message « Crevaison », affiché avec le témoin STOP, impose un arrêt impératif et immédiat ; la notice Dacia demande, pour le message « Pression pneus à réajuster », de vérifier et d'ajuster la pression à froid des quatre pneus, puis de réinitialiser le système ({{cite:notice-dacia-sandero-3|p. 177}}).
+Dans les notices Renault Clio 5 phase 2 et Dacia Sandero 3, le message « Crevaison », affiché avec le témoin STOP, impose un arrêt impératif et immédiat ; la notice Dacia demande, pour le message « Pression pneus à réajuster », de vérifier et d'ajuster la pression à froid des quatre pneus, puis de réinitialiser le système ({{cite:notice-dacia-sandero-3|p. 177}}).
+
+Verdict retenu en haut de page : {{verdict:pression-pneus}}.
 
 ## Regonfler, puis réinitialiser : la manipulation de chaque notice
 
 Une fois les pneus regonflés à la pression du constructeur, pneus froids, le système doit en général être réinitialisé : sinon, il garde ses anciennes valeurs de référence, comme l'explique la notice Peugeot 208. La bonne pression et où la lire sont sur la page [pression des pneus](/pression-des-pneus/).
 
 - **Peugeot 208** : réinitialiser après chaque ajustement de la pression d'un pneu et après chaque changement de roue, voiture à l'arrêt, par le menu Conduite / Véhicule de l'écran tactile. La notice demande de vérifier d'abord la pression des quatre pneus : le système ne prévient pas si elle est fausse au moment de la réinitialisation ({{cite:notice-peugeot-208|p. 111}}).
-- **Renault Clio 5 phase 2 et Dacia Sandero 3** : réinitialiser après chaque regonflage, changement ou permutation de roue, toujours après avoir vérifié à froid la pression des quatre pneus. Contact mis et voiture à l'arrêt, elle se lance par les commandes au volant ou par l'écran multimédia ; la notice Renault détaille la manipulation au volant : page « Pression pneus init. », puis appui long sur « OK » jusqu'au message « Opération terminée » ({{cite:notice-renault-clio-5|p. 207-208}} ; {{cite:notice-dacia-sandero-3|p. 179-180}}).
+- **Renault Clio 5 phase 2 et Dacia Sandero 3** : réinitialiser après chaque regonflage, changement ou permutation de roue, toujours après avoir vérifié à froid la pression des quatre pneus. Contact mis et voiture à l'arrêt, la réinitialisation se lance par les commandes au volant ou par l'écran multimédia ; la notice Renault détaille la manipulation au volant : page « Pression pneus init. », puis appui long sur « OK » jusqu'au message « Opération terminée » ({{cite:notice-renault-clio-5|p. 207-208}} ; {{cite:notice-dacia-sandero-3|p. 179-180}}).
 - **Seat Ibiza** : après une modification de la pression ou un changement de roue, le système doit être de nouveau calibré : mémoriser la nouvelle pression dans le système d'infodivertissement, ou, sans ce système, appuyer sur la touche du système jusqu'au signal sonore ({{cite:notice-seat-ibiza|p. 312}}).
 - **Toyota Yaris** : le système, à capteurs, s'initialise dans des cas précis, par exemple une permutation de pneus avant et arrière de pressions différentes, un changement de dimension des pneus, ou une pression changée pour une vitesse ou une charge différente. Voiture garée et moteur coupé depuis au moins 15 minutes, pression réglée à froid, contacteur sur ON : par le menu des réglages du véhicule, réglage du système de surveillance ; l'initialisation est impossible en roulant ({{cite:notice-toyota-yaris|p. 261-262}}).
 
 ## Le voyant reste allumé alors que la pression est bonne
 
-Selon la notice {{notice:notice-peugeot-208}}, l'alerte reste affichée jusqu'à la réinitialisation du système ({{cite:notice-peugeot-208|p. 111}}) : regonfler ne suffit pas, il faut ensuite réinitialiser. La notice {{notice:notice-renault-clio-5}} cite aussi les cas où le système peut réagir en retard ou mal fonctionner : système non réinitialisé après un regonflage, réinitialisé avec des pressions différentes de celles recommandées, charge très changée, conduite sportive, route enneigée ou glissante, chaînes, un seul pneu neuf, pneus non homologués ({{cite:notice-renault-clio-5|p. 207}}).
+Selon la notice Peugeot 208, l'alerte reste affichée jusqu'à la réinitialisation du système ({{cite:notice-peugeot-208|p. 111}}) : regonfler ne suffit pas, il faut ensuite réinitialiser. La notice Renault Clio 5 phase 2 cite aussi les cas où le système peut réagir en retard ou mal fonctionner : système non réinitialisé après un regonflage, réinitialisé avec des pressions différentes de celles recommandées, charge très changée, conduite sportive, route enneigée ou glissante, chaînes, un seul pneu neuf, pneus non homologués ({{cite:notice-renault-clio-5|p. 207}}).
 
 Si le voyant se rallume après une réinitialisation faite pneus froids et à la bonne pression, un pneu perd peut-être de l'air : la consigne de l'encadré s'applique de nouveau.
 
 ## Le voyant clignote, puis reste allumé
 
-Le système de surveillance est en défaut et ne vous préviendra plus d'un sous-gonflage. La notice {{notice:notice-peugeot-208}} demande de faire vérifier le système dans le réseau de la marque ou un atelier qualifié ; une roue de secours de type « galette », ou de taille différente, peut aussi suspendre la surveillance jusqu'à ce qu'elle soit remplacée ({{cite:notice-peugeot-208|p. 111}}). Selon la notice {{notice:notice-dacia-sandero-3}}, une roue sans capteur ou un capteur défaillant affiche « Capteurs pneus à contrôler » ({{cite:notice-dacia-sandero-3|p. 177}}). En attendant, vérifiez vous-même la pression des quatre pneus.
+Verdict retenu en haut de page : {{verdict:pression-pneus-systeme}}. Le système de surveillance est en défaut et ne vous préviendra plus d'un sous-gonflage. La notice Peugeot 208 demande de faire vérifier le système dans le réseau de la marque ou un atelier qualifié ; une roue de secours de type « galette », ou de taille différente, peut aussi suspendre la surveillance jusqu'à ce qu'elle soit remplacée ({{cite:notice-peugeot-208|p. 111}}). Selon la notice Dacia Sandero 3, une roue sans capteur ou un capteur défaillant affiche « Capteurs pneus à contrôler » ({{cite:notice-dacia-sandero-3|p. 177}}). En attendant, vérifiez vous-même la pression des quatre pneus.
 
 ## Combien de temps peut-on rouler avec ce voyant ?
 
-Les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : ralentir et s'arrêter dès que possible pour contrôler les pneus. Seule la notice Peugeot 208 prévoit de rouler prudemment, à vitesse réduite, quand le contrôle ne peut pas se faire tout de suite (p. 110). Verdict retenu en haut de page : {{verdict:pression-pneus}}.
+Les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : ralentir et s'arrêter dès que possible pour contrôler les pneus. Deux notices prévoient ensuite de rouler doucement : la notice Peugeot 208, prudemment et à vitesse réduite quand le contrôle ne peut pas se faire tout de suite (p. 110) ; la notice Seat Ibiza, jusqu'à l'atelier spécialisé le plus proche, à faible vitesse, si le pneu n'est pas crevé et ne doit pas être remplacé tout de suite (p. 312). Verdict retenu en haut de page : {{verdict:pression-pneus}}.
 
 ## Comment le système détecte un pneu dégonflé
 

@@ -6,7 +6,7 @@
 # 18 juin 1991 (Légifrance), relevé dans travaux/etape-8/textes/controle-technique-releve.md.
 id: pression-des-pneus
 title: "Pression des pneus : où la lire, comment gonfler ses pneus"
-h1: "Pression des pneus : la valeur du constructeur, pneus froids, une fois par mois"
+h1: "Pression des pneus : la valeur du constructeur, pneus froids, au moins une fois par mois"
 description: "La bonne pression est celle du constructeur : étiquette de la porte conducteur, pneus froids, au moins une fois par mois. Où la lire et comment gonfler, marque par marque."
 libelle_court: Pression des pneus
 question_decision: Puis-je rouler avec des pneus sous-gonflés, et à quelle pression les gonfler ?
@@ -17,7 +17,7 @@ voyants:
 sujet: pression
 texte_reference:
   nature: legifrance
-  reference: "Arrêté du 18 juin 1991 relatif au contrôle technique des véhicules de 3,5 tonnes au plus, annexe I, point 5.2.3 « Pneumatiques » (version en vigueur depuis le 01/01/2026)"
+  reference: "Arrêté du 18 juin 1991 relatif à la mise en place et à l'organisation du contrôle technique des véhicules dont le poids n'excède pas 3,5 tonnes, annexe I, point 5.2.3 « Pneumatiques » (version en vigueur depuis le 01/01/2026)"
   source: arrete-1991-06-18-controle-technique
 defaillances:
   - niveau: mineure
@@ -52,7 +52,7 @@ prochaine_revue: 2027-05-14
 
 ## Quelle pression mettre dans ses pneus ?
 
-Celle que le constructeur indique pour votre voiture, et aucune autre : elle dépend du modèle, de la dimension des pneus et de la charge. Elle est écrite sur une étiquette, le plus souvent sur la porte du conducteur, et dans la notice. Ce site ne donne volontairement aucune valeur générale en bars : une valeur moyenne peut être fausse pour votre voiture.
+Celle que le constructeur indique pour votre voiture, et aucune autre : elle dépend du modèle, de la dimension des pneus et de la charge. Dans les cinq notices lues pour cette page, elle est écrite sur une étiquette placée sur la porte du conducteur ou son encadrement ; la notice Toyota la donne aussi dans ses caractéristiques. Ce site ne donne volontairement aucune valeur générale en bars : une valeur moyenne peut être fausse pour votre voiture.
 
 Les notices lues pour cette page sont celles de ces modèles ; pour une autre voiture, c'est sa notice et son étiquette qui font foi :
 
@@ -86,7 +86,7 @@ L'étiquette peut donner des pressions différentes à l'avant et à l'arrière,
 
 ## Pression des pneus avec une remorque
 
-Aucune notice lue ne donne la pression des pneus d'une remorque : demandez-la à son constructeur ou à un professionnel. Pour la voiture qui tracte, la notice {{notice:notice-renault-clio-5}} demande, à pleine charge avec une remorque, de limiter la vitesse à 100 km/h et d'augmenter de 0,2 bar la pression des pneus, en raison du risque d'éclatement ({{cite:notice-renault-clio-5|p. 349}}).
+Aucune notice lue ne donne la pression des pneus d'une remorque : demandez-la à son constructeur ou à un professionnel. Pour la voiture qui tracte, la notice Renault Clio 5 phase 2 demande, à pleine charge avec une remorque, de limiter la vitesse à 100 km/h et d'augmenter de 0,2 bar la pression des pneus, en raison du risque d'éclatement ({{cite:notice-renault-clio-5|p. 349}}).
 
 ## Comment gonfler ses pneus
 
@@ -96,9 +96,11 @@ Aucune notice lue ne donne la pression des pneus d'une remorque : demandez-la à
 4. Ajustez chaque pneu à la valeur de l'étiquette.
 5. Réinitialisez le système de surveillance de la pression s'il y en a un : la manipulation de chaque notice est sur la page du [voyant de pression des pneus](/voyants/pression-pneus/).
 
+Où le faire : avec le compresseur du kit de dépannage si votre voiture en a un, ou au garage ; ce site ne recommande ni enseigne ni produit.
+
 ## Pneus sous-gonflés : ce que vous risquez
 
-Selon la notice {{notice:notice-peugeot-208}}, rouler avec des pneus sous-gonflés, surtout chargé, vite ou longtemps, dégrade la tenue de route, allonge les distances de freinage, use les pneus prématurément et augmente la consommation ({{cite:notice-peugeot-208|p. 110}}). La notice {{notice:notice-seat-ibiza}} prévient que des pneus trop peu gonflés, ou gonflés à des pressions différentes, peuvent s'endommager et faire perdre le contrôle de la voiture ({{cite:notice-seat-ibiza|p. 312}}). Selon Peugeot, une perte de pression ne se voit pas toujours sur le pneu : seul le contrôle de la pression le dit.
+Selon la notice Peugeot 208, rouler avec des pneus sous-gonflés, surtout chargé, vite ou longtemps, dégrade la tenue de route, allonge les distances de freinage, use les pneus prématurément et augmente la consommation ({{cite:notice-peugeot-208|p. 110}}). La notice Seat Ibiza prévient que des pneus trop peu gonflés, ou gonflés à des pressions différentes, peuvent s'endommager et faire perdre le contrôle de la voiture ({{cite:notice-seat-ibiza|p. 312}}). Selon Peugeot, une perte de pression ne se voit pas toujours sur le pneu : seul le contrôle de la pression le dit.
 
 ## Quand le voyant de pression des pneus s'allume
 
