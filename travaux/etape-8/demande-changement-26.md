@@ -1,6 +1,6 @@
 # Demande de changement n° 26 : moins de minutes de CI, sans retirer de contrôle
 
-**Statut : proposée le 14/11/2026 (nuit), à la suite de ta décision du 14/11 (22 h 45) de fixer un budget GitHub Actions ; version 2 après la revue indépendante.** Piste technique (03, règle 12, exception 1) : elle ne dépend d'aucun contenu non validé.
+**Statut : proposée le 14/11/2026 (nuit), à la suite de ta décision du 14/11 (22 h 45) de fixer un budget GitHub Actions ; version 2 après la revue indépendante ; acceptée par Houssem le 15/11/2026 (vers 0 h 05), avec le go de fusion de la pull request quand sa CI est verte.** Piste technique (03, règle 12, exception 1) : elle ne dépend d'aucun contenu non validé.
 
 - **Élément concerné** : `.github/workflows/ci.yml` (étape 7, porte fermée le 10/11), job « Production en ligne » et réglage `concurrency` ; commentaires de `scripts/verifier-production.ts` ; texte du job dans `CONTROLES.md` ; un test ajouté dans `tests/site.test.ts`.
 - **Changement proposé** :
