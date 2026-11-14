@@ -1042,7 +1042,7 @@ describe('coût probable : calcul, données et grille (demande de changement n°
     const ambigue = grille([{ voyant: 'adblue-reserve', source: 'notice-renault-clio-5', emplacement: 'p. 166, « Réservoir réactif », Entretien/Autonomie' }]);
     assert.ok(codes(controlerGrilleCouts(contexte.voyants, contexte.sources, ambigue), 'erreur').includes('COUT-CITATION-AMBIGUE'));
     const precise = grille([
-      { voyant: 'adblue-reserve', source: 'notice-renault-clio-5', emplacement: 'p. 166, « Réservoir réactif », Entretien/Autonomie', debut_extrait: '[témoin] s\'allume' },
+      { voyant: 'adblue-reserve', source: 'notice-renault-clio-5', emplacement: 'p. 166, « Réservoir réactif », Entretien/Autonomie', debut_extrait: '[témoin] s\'allume. « Remplir AdBlue avant 1200 km »' },
       { voyant: 'prechauffage', source: 'notice-seat-ibiza', emplacement: 'p. 289, « Gestion du moteur », Témoins' },
     ]);
     assert.deepEqual(controlerGrilleCouts(contexte.voyants, contexte.sources, precise), []);
