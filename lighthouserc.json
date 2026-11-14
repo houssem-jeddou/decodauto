@@ -15,7 +15,9 @@
         "http://localhost/pression-des-pneus/index.html",
         "http://localhost/voyants/index.html",
         "http://localhost/voyants/airbag/index.html",
-        "http://localhost/voyants/abs-esp/index.html"
+        "http://localhost/voyants/abs-esp/index.html",
+        "http://localhost/voyants/batterie/index.html",
+        "http://localhost/voyants/direction/index.html"
       ],
       "numberOfRuns": 3,
       "settings": {

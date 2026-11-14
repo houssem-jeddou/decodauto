@@ -56,6 +56,16 @@
       "tranche": "geste"
     },
     {
+      "id": "cosses-de-batterie",
+      "libelle": "Nettoyage et serrage des cosses de batterie",
+      "tranche": "geste"
+    },
+    {
+      "id": "reinitialisation-demandee-par-la-notice",
+      "libelle": "Réinitialisation demandée par la notice (bref parcours ou braquage du volant)",
+      "tranche": "geste"
+    },
+    {
       "id": "revision",
       "libelle": "Révision",
       "tranche": "entretien"
@@ -183,6 +193,11 @@
     {
       "id": "alternateur",
       "libelle": "Alternateur",
+      "tranche": "reparation"
+    },
+    {
+      "id": "courroie-d-alternateur",
+      "libelle": "Courroie d'alternateur",
       "tranche": "reparation"
     },
     {
