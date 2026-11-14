@@ -82,6 +82,9 @@ Aucun montant en euros.
 
 Les deux brouillons sont construits sur la branche d'essai `essai/brouillons` (jamais fusionnée), avec les pièces du §3. Seules erreurs attendues : l'absence d'empreinte de validation (R4-VALIDATION-ABSENTE, et le test de la porte 6 qui la vérifie aussi).
 
+- Après les deux revues : run 43614869107 (lots 5a et 5b ensemble, 14 pages construites) : recette sans erreur bloquante, seules erreurs les quatre R4-VALIDATION-ABSENTE attendues ; job « Contrôles » : 705 tests passés, seul celui de la porte 6 échoue (attendu).
+- Pull request n° 46 : CI verte au dernier commit des corrections (run 43614856582 : contrôles, recette, Lighthouse, production en ligne).
+
 ## 5. Porte 8 du lot : critères applicables (demande n° 17)
 
 | Critère | Preuve | Statut |
@@ -90,9 +93,9 @@ Les deux brouillons sont construits sur la branche d'essai `essai/brouillons` (j
 | Faits de sécurité et chiffres dans le paquet validé | §1 à §3 | À valider par Houssem |
 | Encadrés relus par Houssem | §1 et §2 | À valider |
 | Lighthouse mobile ≥ 95 et CLS < 0,1 | CI de la pull request après le passage | À vérifier à la CI |
-| Contrôles au vert | Branche d'essai (§4) ; CI de la pull request | Voir §4 |
+| Contrôles au vert | §4 ; CI de la pull request après le passage | À vérifier |
 | Recette de l'étape 9 | Pages relues sur le site construit, après le passage | Après le passage |
-| Revue indépendante du diff complet | §6 | À faire |
+| Revue indépendante du diff complet | §6 (deux revues) | Faite |
 
 ## 6. Revue indépendante
 
