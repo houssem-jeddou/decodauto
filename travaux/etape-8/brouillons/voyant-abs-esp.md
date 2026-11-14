@@ -18,7 +18,7 @@ voyants:
   - esp-defaut
   - esp-clignotant
 cout_probable:
-  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site) : du système en action ou désactivé, sans dépense, à la réparation du système de freinage au garage."
+  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site) : du système en action ou désactivé, sans dépense, au remplacement du bloc ABS."
   sources:
     - notice-dacia-sandero-3
     - notice-peugeot-208
@@ -45,7 +45,7 @@ causes:
     pieces:
       - fonctionnement-normal
   - cause: Contrôle de stabilité désactivé
-    explication: "Un système désactivé à la main allume un témoin à part, marqué OFF chez Peugeot, qui se réactive de lui-même au démarrage et à partir d'environ 50 km/h selon la notice Peugeot 208 ; la notice Seat Ibiza décrit l'antipatinage désactivé à la main, ou le contrôle de stabilité en mode Sport."
+    explication: "Chez Peugeot, un témoin à part, marqué OFF, signale le système désactivé, qui se réactive de lui-même au démarrage et à partir d'environ 50 km/h selon la notice Peugeot 208 ; la notice Seat Ibiza décrit l'antipatinage désactivé à la main, ou le contrôle de stabilité en mode Sport."
     pieces:
       - systeme-desactive
   - cause: Défaillance de l'ABS (capteur de roue, câblage ou autre composant)
@@ -80,21 +80,25 @@ Les notices lues pour cette page sont celles de ces modèles ; pour une autre g�
 
 ## Voyant ESP qui clignote ou allumé fixe
 
-Le voyant ESP montre une voiture qui glisse, avec deux traces en zigzag derrière elle : jaune selon le règlement ONU n° 121 ({{cite:reglement-onu-121|tableau, n° 43}}) et la notice Seat Ibiza ({{cite:notice-seat-ibiza|p. 93-94}}), orange dans la notice Peugeot 208. Le système appelé ESP sur cette page porte d'autres noms dans les notices : CDS chez Peugeot, ESC chez Renault, Dacia et Seat, VSC chez Toyota. Il corrige la trajectoire en agissant sur le freinage de certaines roues ou sur la puissance du moteur ({{cite:notice-renault-clio-5|p. 213}}). Les notices l'associent à l'antipatinage (ASR chez Peugeot et Seat, TRC chez Toyota).
+Le voyant ESP montre une voiture qui glisse, avec deux traces en zigzag derrière elle : jaune dans la notice Seat Ibiza ({{cite:notice-seat-ibiza|p. 93-94}}), orange dans la notice Peugeot 208. Le système appelé ESP sur cette page porte d'autres noms dans les notices : CDS chez Peugeot, ESC chez Renault, Dacia et Seat, VSC chez Toyota. Il corrige la trajectoire en agissant sur le freinage de certaines roues ou sur la puissance du moteur ({{cite:notice-renault-clio-5|p. 213}}). Les notices l'associent à l'antipatinage (ASR chez Peugeot et Seat, TRC chez Toyota).
 
 - **Il clignote en roulant** : le système est en action, il corrige une perte d'adhérence ou de trajectoire ({{cite:notice-peugeot-208|p. 17}}). Verdict retenu : {{verdict:esp-clignotant}}. Pour Peugeot, Renault, Dacia et Toyota, c'est son fonctionnement normal ; la notice Seat demande d'adapter immédiatement sa vitesse à l'état de la route ({{cite:notice-seat-ibiza|p. 255}}), et c'est la consigne retenue.
-- **Il reste allumé fixe** : le système est en défaut : {{verdict:esp-defaut}}. La voiture ne corrige plus les dérapages, surtout sur route mouillée ou glissante.
-- **Un témoin marqué OFF** : c'est le système désactivé, signalé par un témoin à part. Selon la notice Peugeot 208, il se réactive de lui-même au démarrage et à partir d'environ 50 km/h ({{cite:notice-peugeot-208|p. 17}}) ; la notice Seat Ibiza décrit à part l'antipatinage désactivé à la main, ou le contrôle de stabilité en mode Sport ({{cite:notice-seat-ibiza|p. 254}}). Les notices Renault, Dacia et Toyota ont aussi un témoin propre au système indisponible ou désactivé ({{cite:notice-renault-clio-5|p. 138}}, {{cite:notice-dacia-sandero-3|p. 112}}, {{cite:notice-toyota-yaris|p. 62-64}}).
+- **Il reste allumé fixe** : si vous ne l'avez pas désactivé vous-même, ou s'il s'allume avec le témoin Service ou un message, le système est en défaut ({{verdict:esp-defaut}}). La voiture ne corrige plus les dérapages : roulez prudemment, surtout sur route mouillée ou glissante.
+- **Un témoin marqué OFF** : chez Peugeot, ce témoin à part signale le système désactivé, qui se réactive de lui-même au démarrage et à partir d'environ 50 km/h ({{cite:notice-peugeot-208|p. 17}}) ; la notice Seat Ibiza décrit à part l'antipatinage désactivé à la main, ou le contrôle de stabilité en mode Sport ({{cite:notice-seat-ibiza|p. 254}}). Les notices Renault, Dacia et Toyota nomment aussi un témoin propre au système indisponible ou désactivé ({{cite:notice-renault-clio-5|p. 138}}, {{cite:notice-dacia-sandero-3|p. 112}}, {{cite:notice-toyota-yaris|p. 62-64}}), sans toujours dire quand il s'allume : si vous n'avez rien désactivé, c'est la consigne du voyant fixe qui s'applique.
 
 ## Voyants ABS et ESP allumés en même temps
 
 C'est un cas prévu par les notices. Selon la notice Seat Ibiza, le contrôle de stabilité fonctionne avec l'ABS : si l'ABS est défaillant, le voyant ESP s'allume aussi ({{cite:notice-seat-ibiza|p. 254}}). Dans les notices Renault Clio 5 phase 2 et Dacia Sandero 3, les voyants ABS et Service s'allument avec des messages sur l'ABS, le système de freinage (« Système freinage à contrôler ») et l'ESC : l'ABS, le contrôle de stabilité et l'aide au freinage d'urgence sont désactivés, et le freinage est toujours assuré ({{cite:notice-renault-clio-5|p. 212}}, {{cite:notice-dacia-sandero-3|p. 184}}). La consigne est alors celle du voyant ABS : {{verdict:abs}}. Si le voyant de freinage rouge s'y ajoute, c'est celle de l'arrêt.
 
-## Voyant ESP et message « Défaut frein de parking »
+## Voyant ESP et message « Défaut frein de parking » (Peugeot 208)
 
-La notice Peugeot 208 décrit ce cas sur les versions à frein de stationnement électrique : le témoin du contrôle de stabilité et le témoin Service allumés fixes, avec le message « Défaut frein de parking », signalent une anomalie du freinage de secours, qui ne dispose plus de ses performances optimales. Si le desserrage automatique ne fonctionne pas, la notice demande d'utiliser le desserrage manuel, ou de se rendre dans le réseau Peugeot ou dans un atelier qualifié ({{cite:notice-peugeot-208|p. 17 ; renvoi (3) p. 13}}). C'est le voyant ESP allumé fixe : {{verdict:esp-defaut}}.
+Dans la notice Peugeot 208, sur les versions à frein de stationnement électrique, ce message accompagne plusieurs témoins, avec des consignes différentes :
 
-Si c'est le témoin rouge du frein de stationnement électrique qui clignote, le serrage ou le desserrage est défaillant : la notice Peugeot 208 impose l'arrêt du véhicule, sur un terrain plat, avec un rapport engagé ou le mode P ({{cite:notice-peugeot-208|p. 14 ; renvoi (1) p. 13}}). Pour une autre voiture, cherchez « frein de stationnement » dans sa notice.
+- **témoins du contrôle de stabilité et Service, allumés fixes** : anomalie du freinage de secours, qui ne dispose plus de ses performances optimales ; si le desserrage automatique ne fonctionne pas, la notice demande d'utiliser le desserrage manuel, ou de se rendre dans le réseau Peugeot ou dans un atelier qualifié ({{cite:notice-peugeot-208|p. 17 ; renvoi (3) p. 13}}). La consigne retenue est celle du voyant ESP allumé fixe : {{verdict:esp-defaut}} ;
+- **témoin Service seul, ou témoins du frein de stationnement électrique** (desserrage automatique indisponible, voiture qui ne peut pas être immobilisée moteur tournant, frein défaillant) : la notice demande de faire appel au réseau Peugeot ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 14 et 16 ; renvoi (2) p. 13}}) ;
+- **témoin rouge du frein de stationnement électrique qui clignote** : le serrage ou le desserrage est défaillant ; la notice impose l'arrêt sur un terrain plat, avec un rapport engagé ou le mode P, puis de couper le contact et de faire appel au réseau Peugeot ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 14 ; renvois (1) et (2) p. 13}}).
+
+Pour une autre voiture, cherchez « frein de stationnement » dans sa notice.
 
 ## Comment éteindre le voyant ABS ?
 
@@ -108,4 +112,4 @@ Les notices disent que le système est défaillant, sans nommer la pièce. L'ann
 
 ## Voyants ABS et ESP au contrôle technique
 
-L'annexe I de l'arrêté du 18 juin 1991 classe en défaillance majeure le dispositif d'alerte de l'ABS qui indique un mauvais fonctionnement du système, comme un dispositif d'alerte qui fonctionne mal ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 1.6.1}}). Une défaillance majeure impose une contre-visite dans les deux mois ({{cite:arrete-1991-06-18-controle-technique|article 7}}). Le contrôle électronique de stabilité a son propre point : un indicateur de dysfonctionnement qui fait état d'une défaillance du système, ou un commutateur endommagé ou qui ne fonctionne pas correctement, y sont aussi des défaillances majeures ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 7.12.1}}). Faire réparer le système avant le rendez-vous évite une contre-visite pour ce point ; la consigne de l'encadré ne change pas : {{verdict:abs}}.
+L'annexe I de l'arrêté du 18 juin 1991 classe en défaillance majeure le dispositif d'alerte de l'ABS qui indique un mauvais fonctionnement du système, comme un dispositif d'alerte qui fonctionne mal ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 1.6.1}}). Une défaillance majeure impose une contre-visite dans les deux mois ({{cite:arrete-1991-06-18-controle-technique|article 7}}). Le contrôle électronique de stabilité a son propre point : un indicateur de dysfonctionnement qui fait état d'une défaillance du système, ou un commutateur endommagé ou qui ne fonctionne pas correctement, y sont aussi des défaillances majeures ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 7.12.1}}). Faire réparer avant le rendez-vous évite une contre-visite pour ce point. La consigne de l'encadré ne change pas. Voyant ABS : {{verdict:abs}}. Voyant ESP fixe : {{verdict:esp-defaut}}.

@@ -78,7 +78,7 @@ Connecteur sous un siège, contacteur tournant du volant : les notices lues ne n
 
 Ce témoin dit que l'airbag frontal du passager avant est désactivé : {{verdict:airbag-passager-desactive}}. C'est voulu quand un siège enfant dos à la route est installé sur le siège passager avant. Sinon, l'airbag ne se déclencherait pas en cas de choc : la notice Toyota Yaris demande alors de le remettre en position « ON » ({{cite:notice-toyota-yaris|p. 37}}), et la notice Seat de vérifier s'il doit rester désactivé ({{cite:notice-seat-ibiza|p. 26}}).
 
-- **Désactiver ou réactiver** : selon les notices Renault Clio 5 phase 2 (désactivation et réactivation) et Dacia Sandero 3 (désactivation), véhicule à l'arrêt et contact coupé, avec la commande prévue (le verrou) ; à la mise sous contact, vérifiez que le témoin est bien allumé : il reste allumé tant que l'airbag est désactivé ({{cite:notice-renault-clio-5|p. 106-107}}, {{cite:notice-dacia-sandero-3|p. 84}}).
+- **Désactiver ou réactiver** : selon les notices Renault Clio 5 phase 2 (désactivation et réactivation) et Dacia Sandero 3 (désactivation), véhicule à l'arrêt et contact coupé, avec la commande prévue (le verrou) ; après une désactivation, vérifiez à la mise sous contact que le témoin est bien allumé : il reste allumé tant que l'airbag est désactivé ({{cite:notice-renault-clio-5|p. 106-107}}, {{cite:notice-dacia-sandero-3|p. 84}}).
 - **Siège enfant dos à la route** : la notice Peugeot 208 l'autorise quand l'airbag passager est désactivé, sauf si le voyant airbag de défaut est allumé ; quand l'airbag passager est activé (témoin ON), elle l'interdit, à cause du risque de blessures graves ({{cite:notice-peugeot-208|p. 17-18}}).
 
 ## Voyant airbag allumé au contrôle technique
