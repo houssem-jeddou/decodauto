@@ -50,7 +50,7 @@ causes:
 
 ## Peut-on rouler avec le voyant FAP allumé ?
 
-Oui, mais pas comme d'habitude : {{verdict:fap}}. Les notices demandent de régénérer le filtre en roulant, dès que la circulation le permet, et en respectant les limitations de vitesse. Ne coupez pas le moteur au premier arrêt venu : c'est en roulant que le témoin doit s'éteindre.
+Oui, mais pas comme d'habitude : {{verdict:fap}}. Les notices demandent de régénérer le filtre en roulant, dès que la circulation le permet, et en respectant les limitations de vitesse. Selon la notice Dacia Sandero 3, un arrêt de la voiture, ou un régime moteur sous 2 000 tours par minute, avant l'extinction du témoin peut obliger à recommencer ({{cite:notice-dacia-sandero-3|p. 161}}).
 
 Les notices lues pour cette page sont celles de ces modèles ; pour une autre génération ou un autre modèle, c'est la notice de votre voiture qui fait foi :
 
@@ -76,12 +76,12 @@ Chaque notice donne sa façon de faire ; le tableau plus bas cite chacune à la 
 - **Renault Clio 5 phase 2 et Dacia Sandero 3** (versions Diesel) : continuer à rouler selon la circulation et les limitations de vitesse, si possible sans laisser le régime descendre sous 2 000 tours par minute ; le témoin doit s'éteindre au bout de 10 à 20 minutes environ ;
 - **Seat Ibiza** : moteur chaud, rouler entre 50 et 120 km/h, en respectant les limitations et les rapports conseillés, et ne terminer la régénération qu'après l'extinction du témoin.
 
-Une voie rapide ou une route dégagée s'y prête mieux que la ville. Si la circulation ne le permet pas, faites-le au premier trajet qui le permet, sans attendre plusieurs jours : l'urgence est celle de l'encadré.
+Ces vitesses et ces régimes se tiennent mieux sur une voie rapide ou une route dégagée qu'en ville. Si la circulation ne le permet pas tout de suite, faites-le au premier trajet qui le permet, sans attendre : l'urgence est celle de l'encadré.
 
 ## Le voyant ne s'éteint pas, ou d'autres voyants s'allument
 
 - Selon la notice {{notice:notice-seat-ibiza}}, si le témoin reste allumé après 30 minutes de conduite en régénération, il faut contacter un atelier spécialisé pour faire réparer le défaut ({{cite:notice-seat-ibiza|p. 290}}).
-- Selon les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, quand le filtre est saturé, d'autres témoins s'allument avec le message « Injection à contrôler » : consultez alors le réseau de la marque. Si le message est « Risque casse moteur », arrêtez la voiture, coupez le moteur et faites appel au réseau de la marque ({{cite:notice-renault-clio-5|p. 187}}, {{cite:notice-dacia-sandero-3|p. 161}}).
+- Selon les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, quand le filtre est saturé, d'autres témoins s'allument avec le message « Injection à contrôler » : elles demandent alors de consulter le réseau de la marque. Avec le témoin STOP et le message « Risque casse moteur », elles demandent d'arrêter la voiture, de couper le moteur et de faire appel au réseau de la marque ({{cite:notice-renault-clio-5|p. 187}}, {{cite:notice-dacia-sandero-3|p. 161}}).
 
 Si le [voyant moteur](/voyants/moteur/) s'allume avec celui du FAP, sa page dit quoi faire selon sa couleur et selon qu'il clignote ou non.
 
@@ -93,7 +93,7 @@ Dans ce cas, le témoin ne vient pas d'un filtre à régénérer : c'est l'appoi
 
 ## Un filtre à particules sur un moteur essence ?
 
-Oui, sur certaines voitures. La notice {{notice:notice-seat-ibiza}} décrit la régénération du filtre à particules « essence et diesel ». Les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} ont aussi un témoin du filtre à particules pour leurs versions essence : rouler dès que possible entre 50 et 110 km/h environ, dans le respect des limitations, jusqu'à son extinction ({{cite:notice-renault-clio-5|p. 188}}, {{cite:notice-dacia-sandero-3|p. 162}}).
+Oui, sur certaines voitures. La notice {{notice:notice-seat-ibiza}} décrit la régénération du filtre à particules « essence et diesel ». Les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} ont aussi un témoin du filtre à particules pour leurs versions essence : elles demandent de rouler dès que possible entre 50 et 110 km/h environ, dans le respect des limitations, jusqu'à son extinction ; selon la notice Dacia, il doit s'éteindre au bout de 5 à 20 minutes environ ({{cite:notice-renault-clio-5|p. 188}}, {{cite:notice-dacia-sandero-3|p. 162}}).
 
 La notice {{notice:notice-toyota-yaris}}, à moteur essence, signale le filtre plein par un message, « Filtre d'échappement plein », sans témoin propre ; la conduite reste possible tant que le témoin de dysfonctionnement ne s'allume pas. Si ce témoin s'allume, ou si le message « Entretien du moteur requis » s'affiche, la notice demande de faire vérifier la voiture immédiatement ({{cite:notice-toyota-yaris|p. 204}}).
 
@@ -105,4 +105,6 @@ Une défaillance majeure impose une contre-visite dans les deux mois ({{cite:arr
 
 ## FAP bouché : régénération, nettoyage ou remplacement
 
-Un filtre qui commence à se boucher se signale d'abord par son témoin, et la régénération en roulant suffit en général à l'éteindre : c'est la première tranche du coût probable. Les notices lues ne décrivent pas d'autre nettoyage à faire soi-même ; si le témoin ne s'éteint pas, ou si d'autres témoins s'allument, c'est au garage de trouver la cause, du capteur au filtre lui-même.
+Un filtre qui commence à se boucher se signale d'abord par son témoin, et la régénération en roulant doit l'éteindre : c'est la première tranche du coût probable. Les notices lues ne décrivent pas d'autre nettoyage à faire soi-même ; si le témoin ne s'éteint pas, ou si d'autres témoins s'allument, c'est au garage de trouver la cause.
+
+Pour éviter qu'il se bouche, la notice {{notice:notice-dacia-sandero-3}} conseille, pour faciliter la régénération, un long trajet de plus de 20 minutes environ sur des axes routiers tous les 200 km ({{cite:notice-dacia-sandero-3|p. 161}}).
