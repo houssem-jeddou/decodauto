@@ -8,6 +8,7 @@
 - **Adresse** : `/voyants/frein/` ; page mère : `/voyants/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/liquide-de-frein/` (vague C : pas de lien dans le texte avant sa publication) ; `/voyants/abs-esp/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page exemple rédigée** (sa validation est notée au journal) : `exemples/voyant/voyant-frein.md`. Elle sert de point de départ à la page de l'étape 8.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -89,17 +90,17 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de frein allumé ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant de frein allumé ? »
 - **Angle** : Trois voyants sous un même nom : les deux lignes de la base (freinage, frein de stationnement ; tableau des voyants du brief) et le témoin d'usure des plaquettes, en tête des résultats mais absent des notices lues (D4 ; relevé, constat 6).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
-  - Témoin d'usure des plaquettes (« voyant plaquette de frein », « peut-on rouler avec le voyant plaquette de frein », « reste allumé ») : ligne saisie citée (D4), dont la source reste à trouver.
+  - Témoin d'usure des plaquettes (« voyant plaquette de frein », « peut-on rouler avec le voyant plaquette de frein », « reste allumé ») : ligne saisie citée (D4), source trouvée le 14/11 : notice Seat Leon, p. 297-298 ; les six autres notices lues ne le décrivent pas.
   - « Puis-je rouler avec le voyant liquide de frein ? », « liquide de frein insuffisant », « système de freinage défaillant » : ligne de freinage de la base.
   - « Voyant frein orange » : lire ce que les notices décrivent en orange avant d'écrire ; ABS et freinage allumés ensemble : ligne de la page ABS et ESP (page liée).
   - « Comment enlever le voyant frein mini ? » : on ne l'éteint pas sans corriger la cause (relevé, constat 4).
   - Liquide de frein (appoint, purge) : page « liquide de frein » (page liée).
 - **Sources à trouver avant la rédaction** :
-  - Notice de constructeur qui décrit le témoin d'usure des plaquettes, à la page près : absent des notices lues à l'étape 5 (D4).
+  - Aucune : le témoin d'usure des plaquettes est décrit par la notice Seat Leon (p. 297-298), ajoutée au registre avec le lot 5d.
 - **Hors périmètre, à ne pas traiter** :
   - Marques hors notices lues (« voyant plaquette de frein Volkswagen », « voyant frein BMW ») : renvoi à la notice du véhicule (charte §2.5).
   - Prix de plaquettes et de prestations (docs/02).
