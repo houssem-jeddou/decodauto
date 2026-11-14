@@ -116,4 +116,4 @@ Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyan
 
 ## 7. Validation de Houssem
 
-À compléter.
+Le 14/11/2026 à 18 h 23, par la validation groupée (questions posées dans la session, paquets des lots 5a et 5b joints) : « Je valide + go » pour les lignes de validation proposées (§1 voyant airbag, §2 voyants ABS et ESP avec le rattachement des cas « Défaut frein de parking », §3 pièce « bloc ABS » en tranche grosse réparation), avec le go de fusion du commit de passage (pages déplacées vers `src/content`, rien d'autre) si sa CI est verte. Empreintes versées : voyant airbag `f3f89321…`, voyants ABS et ESP `67c73059…`.

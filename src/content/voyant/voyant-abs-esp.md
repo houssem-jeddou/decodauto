@@ -1,6 +1,6 @@
 ---
-# Brouillon de la page « voyants ABS et ESP » de la vague A (étape 8, lot 5a), rédigé le 14/11/2026, à valider par
-# Houssem. Hors de exemples/ et de src/content tant qu'il n'est pas validé. Les lignes de l'encadré viennent de la base.
+# Page « voyants ABS et ESP » de la vague A (étape 8, lot 5a), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 5a (règle de passage, travaux/etape-8/regle-de-passage.md).
 id: voyant-abs-esp
 title: "Voyant ABS ou ESP allumé : peut-on rouler, que faire ?"
 h1: "Voyants ABS et ESP : que faire quand ils s'allument ?"
@@ -39,6 +39,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (18 h 23),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-5a.md).
+validation: 67c73059442c2ca8619bdccbde91b6293e894a7e4dccb006a70ca5e4980cfe47
 causes:
   - cause: Contrôle de stabilité en action sur route glissante
     explication: "Selon les notices Peugeot 208, Renault Clio 5 phase 2, Dacia Sandero 3, Seat Ibiza et Toyota Yaris, le voyant ESP clignote quand le système corrige une perte d'adhérence ou de trajectoire : c'est son fonctionnement normal."
