@@ -154,6 +154,13 @@ describe('outil voyants : modèle généré depuis la base', () => {
     assert.equal(lignes.find((l) => l.voyant === 'huile-niveau')?.page, undefined);
   });
 
+  test('seules les lignes admises par la demande de changement n° 23 sont rattachées à la page outil', () => {
+    // En rattacher une autre à l'outil la dispense de sa page, de son tableau des notices et de son encadré : cela passe
+    // par une demande de changement, qui met cette liste à jour.
+    const ADMISES_SUR_L_OUTIL = ['stop'];
+    for (const v of base.filter((l) => l.page === page.id)) assert.ok(ADMISES_SUR_L_OUTIL.includes(v.id), `${v.id} rattachée à la page outil sans demande de changement`);
+  });
+
   test('une ligne rattachée à la page outil ne mène pas à l’outil lui-même (demande de changement n° 23)', () => {
     const rattachee = { ...base[0], id: 'essai-outil', page: page.id } as (typeof base)[number];
     const autre = modeleOutilVoyants({ voyants: [...base, rattachee], sources: site.sources, plan: site.plan, libelles });

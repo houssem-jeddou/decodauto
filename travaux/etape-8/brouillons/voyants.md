@@ -1,8 +1,8 @@
 ---
 # Page outil voyants (étape 8, livrable 8.1 ; demande de changement n° 11) : variante du type voyant, qui tient lieu
-# d'exemple de son modèle. Brouillon du lot 3b (14/11/2026) : encadré complété de la ligne du triangle d'alerte orange et
-# texte mis à jour avec les lignes STOP et triangle d'alerte (demande de changement n° 23), à valider par Houssem ; hors de
-# exemples/ et de src/content tant qu'il n'est pas validé. Les lignes de l'encadré et toute la liste viennent de la base.
+# d'exemple de son modèle. Brouillon du lot 3b (14/11/2026) : texte mis à jour avec la ligne STOP de la base (demande de
+# changement n° 23), à valider par Houssem ; l'encadré ne change pas. Les lignes de l'encadré et toute la liste viennent
+# de la base voyants validée.
 id: voyants
 title: "Voyant orange voiture : signification et liste des voyants"
 h1: "Voyants du tableau de bord : lequel est allumé, et pouvez-vous rouler ?"
@@ -11,12 +11,10 @@ libelle_court: Identifier un voyant
 question_decision: "Quel voyant s'est allumé, et pouvez-vous continuer à rouler ?"
 situations:
   - voyant: moteur-orange-fixe
-  - voyant: alerte-orange
   - voyant: abs
   - voyant: prechauffage
 voyants:
   - moteur-orange-fixe
-  - alerte-orange
   - abs
   - prechauffage
 cout_probable:
@@ -42,13 +40,16 @@ date_publication: 2026-11-04
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, renvoi, lignes, coût probable) et textes fixes de l'outil validés par Houssem le 04/11/2026
+# (13 h 48), avec les faits du texte (paquet travaux/etape-8/paquet-8.1-outil-voyants.md).
+validation: 4555601ad20e230a8fcdd82f70c3cb530810752127eb22f8514d2febb21cc5b2
 ---
 
 ## Comment lire un voyant
 
 Regardez le dessin, puis la couleur, puis la façon dont le voyant s'allume : fixe ou clignotant. Plusieurs notices l'appellent « témoin » : c'est la même chose.
 
-Un même dessin peut avoir plusieurs lignes dans la liste. Le voyant moteur en a trois : orange fixe, orange clignotant, rouge. Le voyant de pression des pneus en a deux : allumé fixe, ou qui clignote puis reste allumé. Le triangle avec un point d'exclamation en a deux : rouge, ou orange (« jaune » dans certaines notices). Lisez aussi le message affiché à côté du voyant : il peut changer la consigne, comme « Risque casse moteur » dans les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}.
+Un même dessin peut avoir plusieurs lignes dans la liste. Le voyant moteur en a trois : orange fixe, orange clignotant, rouge. Le voyant de pression des pneus en a deux : allumé fixe, ou qui clignote puis reste allumé. Lisez aussi le message affiché à côté du voyant : il peut changer la consigne, comme « Risque casse moteur » dans les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}.
 
 Pour ne voir que les voyants orange ou jaunes, ou que les rouges, utilisez le filtre de la liste.
 
@@ -70,8 +71,6 @@ Le règlement dit « jaune ». {{notice:notice-peugeot-208}} parle de témoins �
 
 Non. Une idée répandue veut qu'un voyant orange laisse rouler sans s'arrêter ; ce n'est pas ce que disent toutes les notices lues. Pour le voyant moteur orange allumé fixe, {{notice:notice-toyota-yaris}} demande d'arrêter immédiatement le véhicule dans un endroit sûr ({{cite:notice-toyota-yaris|p. 293}}). D'où le verdict retenu, « {{verdict:moteur-orange-fixe}} », et l'écart entre les marques affiché dans l'encadré. Pour le voyant de pression des pneus allumé fixe, orange lui aussi, le verdict retenu est le même : « {{verdict:pression-pneus}} ».
 
-Pour le triangle d'alerte orange ou jaune, le verdict retenu est « {{verdict:alerte-orange}} ». {{notice:notice-seat-ibiza}} demande de vérifier dès que possible la fonction en cause, et ajoute : « Le cas échéant, faites appel à un spécialiste en mesure de vous dépanner. » ({{cite:notice-seat-ibiza|p. 84}}). {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} laissent rouler avec ménagement jusqu'au garage ; le verdict retenu est le plus prudent.
-
 À l'inverse, un voyant rouge n'impose pas toujours l'arrêt. Le voyant de frein de stationnement, rouge, signale le frein à main serré : « {{verdict:frein-stationnement}} », une fois le frein complètement desserré ; le voyant doit alors s'éteindre. S'il reste allumé, ce n'est plus ce cas : voyez le [voyant de freinage rouge](#da-voyant-frein-rouge). S'il clignote, {{notice:notice-peugeot-208}} signale pour le frein électrique un serrage ou un desserrage défaillant, et demande l'arrêt du véhicule ({{cite:notice-peugeot-208|p. 14}}).
 
 Chaque groupe de la liste compte ses verdicts : c'est la ligne de votre voyant qui décide, pas sa couleur.
@@ -88,8 +87,8 @@ Le verdict retenu est « {{verdict:moteur-orange-fixe}} ». La [page Voyant mote
 - **Voiture qui dérape, avec des traces en zig zag** : le voyant ESP (contrôle de stabilité), [qui clignote](#da-voyant-esp-clignotant) ou [allumé fixe](#da-voyant-esp-defaut).
 - **Clé** : le [rappel d'entretien](#da-voyant-entretien-vidange). Attention : dans les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, la clé est le témoin Service, et ces notices demandent « un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement » ({{cite:notice-renault-clio-5|p. 136}}, {{cite:notice-dacia-sandero-3|p. 110}}).
 - **Huile** : en rouge, la [pression d'huile](#da-voyant-huile-pression-rouge) ; en orange ou par un message, le [niveau d'huile](#da-voyant-huile-niveau).
-- **STOP** : le [voyant STOP](#da-voyant-stop), rouge, qui s'allume avec un autre témoin ou un message : « {{verdict:stop}} ».
-- **Triangle avec un point d'exclamation** : le voyant d'alerte, [rouge](#da-voyant-alerte-rouge) ou [orange ou jaune](#da-voyant-alerte-orange). Lisez le message affiché avec lui : il dit quel système est en cause. Dans {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, le triangle rouge s'allume avec le témoin STOP, le triangle jaune avec le témoin Service (la clé).
+- **STOP** : le [voyant STOP](#da-voyant-stop), rouge, qui s'allume avec un autre témoin ou un message : « {{verdict:stop}} ». Les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} disent que ce témoin « vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation » ({{cite:notice-renault-clio-5|p. 136}}, {{cite:notice-dacia-sandero-3|p. 110}}).
+- **Triangle avec un point d'exclamation** : pas de ligne propre dans la liste, car seules les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, d'un même groupe, lui donnent une consigne propre. Elles l'appellent témoin d'alerte : s'il s'allume en rouge en roulant, accompagné du témoin STOP, il impose le même arrêt impératif que le [voyant STOP](#da-voyant-stop) ; s'il s'allume en jaune en roulant, accompagné du témoin Service (la clé), il « nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement » ({{cite:notice-renault-clio-5|p. 138}}, {{cite:notice-dacia-sandero-3|p. 112}}). Dans {{notice:notice-seat-ibiza}}, le voyant central d'alerte, rouge ou jaune, renvoie aux informations affichées à l'écran ({{cite:notice-seat-ibiza|p. 93}}) : lisez le message, il dit quel système est en cause. Pour une autre voiture, cherchez-le dans sa notice et, en cas de doute, demandez l'avis d'un professionnel.
 - **Préchauffage (spirale) qui clignote** : pas de ligne propre dans la liste, qui ne donne que le voyant allumé quelques secondes à la mise du contact. Dans {{notice:notice-seat-ibiza}}, il signale un dysfonctionnement de la gestion du moteur diesel : « Faites immédiatement contrôler le moteur par un atelier spécialisé. » ({{cite:notice-seat-ibiza|p. 289}}).
 - **Courroie de distribution** : aucune ligne de la liste. Le site ne donne pas de verdict pour ce voyant : cherchez-le dans la notice de votre voiture et, en cas de doute, demandez l'avis d'un professionnel.
 

@@ -35,7 +35,9 @@ Passages lus le 14/11/2026 sur les PDF des constructeurs (adresses au registre `
 
 **Peugeot 208 et Citroën C3** : pas de triangle dans la liste des témoins (le témoin d'alerte orange de ces notices est la clé « Service »).
 
-**Toyota Yaris** : voyant principal d'avertissement non relu ; pas nécessaire (trois marques de deux groupes sans lui).
+**Toyota Yaris** : voyant principal d'avertissement non relu.
+
+**Conclusion pour le triangle (après la revue indépendante du lot 3b)** : la consigne de Seat p. 84 est un texte général, valable pour tous les symboles d'alerte rouges ou jaunes de la liste p. 93 ; l'entrée propre du voyant central d'alerte (p. 93) ne donne aucune consigne. D'après la décision D2 de l'étape 5 (un texte général ne fixe pas le niveau d'un témoin ; sans consigne propre, la notice est « sans consigne »), Seat est sans consigne pour le triangle. La priorité 1 contredirait d'ailleurs la consigne propre de Seat pour l'alternateur, symbole rouge de la même liste (« Rendez-vous immédiatement dans l'atelier spécialisé le plus proche », citée « Oui, avec précautions » dans `batterie-rouge`). Restent Renault et Dacia, d'un seul groupe : pas de ligne dans la base pour le triangle (règle des trois marques de deux groupes) ; le texte de la page outil le cite sans verdict (repli prévu au livrable 8.3.3).
 
 ## Préchauffage qui clignote
 

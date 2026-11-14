@@ -1425,7 +1425,7 @@ export function controlerTableauNotices(
       constats.push(erreur('TABLEAU-NOTICES-ABSENT', "une page voyant affiche le tableau « Ce que dit la notice de votre marque » des voyants qui lui sont rattachés : aucune ligne reprise de la base n'a cette page pour page de rattachement (champ « page » de data/voyants.json)", fichier));
     }
     if (affiches.length > 0) {
-      constats.push(erreur('TABLEAU-NOTICES-INCOMPLET', "la page affiche un tableau des notices alors qu'aucun voyant de la base ne lui est rattaché : ce tableau est celui de la page de rattachement du voyant", fichier));
+      constats.push(erreur('TABLEAU-NOTICES-INCOMPLET', "la page affiche un tableau des notices alors qu'aucun n'est attendu (aucun voyant de la base ne lui est rattaché, ou c'est la page outil, qui cite les pages des notices sous chaque ligne) : ce tableau est celui de la page de rattachement du voyant", fichier));
     }
     return constats;
   }
