@@ -1,0 +1,115 @@
+[
+  {
+    "id": "stop",
+    "nom": "Voyant STOP rouge",
+    "couleur": "rouge",
+    "categorie": "Alerte générale",
+    "page": "voyants",
+    "pictogramme": "stop",
+    "situation": "Le témoin STOP s'allume en roulant, avec un autre témoin ou un message, et un signal sonore : la voiture a détecté un défaut grave, par exemple du moteur, du freinage, de la direction ou du circuit électrique.",
+    "verdict": "non, arrêt immédiat",
+    "urgence": "immédiate",
+    "action": "Arrêtez-vous dès que vous pouvez le faire sans danger, coupez le moteur et ne le redémarrez pas. Faites appel à un garage ou à l'assistance.",
+    "citations": [
+      {
+        "source": "notice-renault-clio-5",
+        "emplacement": "p. 137, « Témoins lumineux », Témoin d'arrêt impératif (STOP)",
+        "extrait": "Il s'allume conjointement à d'autres témoins et/ou messages, et est accompagné d'un signal sonore. Il vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-dacia-sandero-3",
+        "emplacement": "p. 110, « Témoins lumineux », témoin STOP",
+        "extrait": "[STOP] Le témoin vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-peugeot-208",
+        "emplacement": "p. 13, « Témoins de couleur rouge », STOP ; renvois (1) et (2) p. 13",
+        "extrait": "Fixe, associé à un autre témoin d'alerte, accompagné de l'affichage d'un message et d'un signal sonore. Un dysfonctionnement grave du moteur, du système de freinage, de la direction assistée, […] ou une anomalie électrique majeure est détectée. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. […] (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-citroen-c3",
+        "emplacement": "p. 10, « Liste des témoins », Témoins de couleur rouge, STOP ; renvois (1) et (2) p. 9",
+        "extrait": "Fixe, associé à un autre témoin d'alerte, accompagné de l'affichage d'un message et d'un signal sonore. Un dysfonctionnement grave du moteur, du système de freinage, de la direction assistée ou une anomalie électrique majeure a été détectée. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. […] (2) : Faire appel au réseau CITROËN ou à un atelier qualifié.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      }
+    ]
+  },
+  {
+    "id": "alerte-rouge",
+    "nom": "Voyant d'alerte rouge (triangle avec un point d'exclamation)",
+    "couleur": "rouge",
+    "categorie": "Alerte générale",
+    "page": "voyants",
+    "pictogramme": "alerte",
+    "situation": "Le triangle avec un point d'exclamation s'allume en rouge, avec un message à l'écran et parfois un signal sonore (chez Renault et Dacia, avec le témoin STOP) : un défaut grave est détecté.",
+    "verdict": "non, arrêt immédiat",
+    "urgence": "immédiate",
+    "action": "Arrêtez-vous dès que vous pouvez le faire sans danger, coupez le moteur et ne le redémarrez pas. Faites appel à un garage ou à l'assistance.",
+    "citations": [
+      {
+        "source": "notice-renault-clio-5",
+        "emplacement": "p. 138, « Témoins lumineux », Témoin d'alerte",
+        "extrait": "S'il s'allume en rouge en roulage accompagné du témoin [STOP], il vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-dacia-sandero-3",
+        "emplacement": "p. 112, « Témoins lumineux », Témoin d'alerte",
+        "extrait": "S'il s'allume en rouge en roulage accompagné du témoin [STOP], il vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-seat-ibiza",
+        "emplacement": "p. 93, « Témoins rouges », Voyant central d'alerte ; p. 84, « Messages d'avertissement de priorité 1 (rouges) »",
+        "extrait": "Voyant central d'alerte : informations supplémentaires sur l'écran du combiné d'instruments. […] (p. 84) Le symbole clignote ou s'allume (parfois accompagné de signaux sonores d'avertissement). Ne continuez pas votre route ! Danger ! Contrôlez la fonction défectueuse et remédiez au dysfonctionnement. Le cas échéant, faites appel à un spécialiste en mesure de vous dépanner.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      }
+    ]
+  },
+  {
+    "id": "alerte-orange",
+    "nom": "Voyant d'alerte orange ou jaune (triangle avec un point d'exclamation)",
+    "couleur": "orange",
+    "categorie": "Alerte générale",
+    "page": "voyants",
+    "pictogramme": "alerte",
+    "situation": "Le triangle avec un point d'exclamation s'allume en orange ou en jaune, avec un message à l'écran (chez Renault et Dacia, avec le témoin Service, une clé) : une anomalie est détectée.",
+    "verdict": "non, arrêt dès que possible",
+    "urgence": "immédiate",
+    "action": "Lisez le message affiché : il dit quel système est en cause. Rejoignez le premier endroit sûr (parking, aire, sortie suivante), arrêtez la voiture et faites-la contrôler avant de reprendre la route : faites appel à un garage ou à l'assistance.",
+    "citations": [
+      {
+        "source": "notice-renault-clio-5",
+        "emplacement": "p. 138, « Témoins lumineux », Témoin d'alerte",
+        "extrait": "S'il s'allume en jaune en roulage accompagné du témoin [Service], il nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement. Le non-respect de cette préconisation risque d'entraîner un endommagement du véhicule.",
+        "verdict": "oui avec précautions",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-dacia-sandero-3",
+        "emplacement": "p. 112, « Témoins lumineux », Témoin d'alerte",
+        "extrait": "S'il s'allume en jaune en roulage accompagné du témoin [Service], il nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
+        "verdict": "oui avec précautions",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-seat-ibiza",
+        "emplacement": "p. 93, « Témoins jaunes », Voyant central d'alerte ; p. 84, « Messages d'avertissement de priorité 2 (jaunes) »",
+        "extrait": "Voyant central d'alerte : informations supplémentaires sur l'écran du combiné d'instruments. […] (p. 84) Les dysfonctionnements ou l'absence de fluides peuvent endommager le véhicule et provoquer des pannes. Vérifiez la fonction défectueuse dès que possible. Le cas échéant, faites appel à un spécialiste en mesure de vous dépanner.",
+        "verdict": "non, arrêt dès que possible",
+        "urgence": "immédiate"
+      }
+    ],
+    "ecart_marques": "Seat demande de vérifier dès que possible la fonction en cause et, le cas échéant, de faire appel à un spécialiste en mesure de vous dépanner ; Renault et Dacia laissent rouler avec ménagement jusqu'au garage, au plus tôt."
+  }
+]
