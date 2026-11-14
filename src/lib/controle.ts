@@ -1683,7 +1683,7 @@ export function controlerEnsemble(pages: readonly PageControlee[], ctx: Contexte
 
   // Chaque voyant de la base est rattaché à une seule page, qui doit le déclarer. Exception, la page outil (demande de
   // changement n° 23) : elle affiche toutes les lignes de la base, et son encadré n'en reprend que ses exemples ; une
-  // ligne sans page propre (STOP, triangle d'alerte) lui est rattachée sans être déclarée.
+  // ligne sans page propre (le voyant STOP) lui est rattachée sans être déclarée.
   for (const voyant of ctx.voyants.values()) {
     const rattachee = parId.get(voyant.page);
     if (rattachee?.page === undefined) {
