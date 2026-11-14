@@ -48,8 +48,15 @@ Relevé de travail, jamais publié. Deux origines : les extraits de l'étape 5 (
 - p. 297 : Témoin de dérapage, dysfonctionnement du VSC, du TRC ou de l'aide au démarrage en côte : « Faites immédiatement vérifier le véhicule ».
 - p. 298, MISE EN GARDE, voyants ABS et du système de freinage restés allumés : « Arrêtez immédiatement le véhicule » ; « Le véhicule devient très instable pendant le freinage ».
 
+## Ajouts du 14/11 au soir, après la revue indépendante du lot 5a
+
+- Seat Ibiza p. 93-94, « Témoins : liste et renvois » (extrait de l'étape 5) : parmi les « Témoins jaunes » : dysfonctionnement de l'ESC ou désactivation provoquée par le système, ou ESC ou ASR en action ; ASR désactivé manuellement, ou ESC en mode Sport ; dysfonctionnement de l'ABS ; dysfonctionnement du système d'airbag et de rétracteurs des ceintures ; airbag frontal du passager désactivé.
+- Règlement ONU n° 121 (relevé `reglement-onu-121.md`, tableau, colonne 5) : n° 22 coussin gonflable « Jaune et/ou rouge » ; n° 26 système antiblocage « Jaune » ; n° 43 contrôle électronique de la stabilité « Jaune ».
+- Témoins du système désactivé ou indisponible : Peugeot 208 p. 17 (même dessin marqué OFF, « Le système est désactivé ») ; Renault Clio 5 phase 2 p. 138 (« Témoin de non-disponibilité de contrôle dynamique de conduite (ESC) et système antipatinage ») ; Dacia Sandero 3 p. 112 (« Témoin ESC OFF ») ; Toyota Yaris p. 62-64 (liste : « Témoin VSC OFF », renvoi p. 206).
+- Peugeot 208 p. 14, « Frein de stationnement électrique » : « Clignotant. Le serrage / desserrage est défaillant. Effectuer (1) : stationner sur un terrain plat (à l'horizontale). Avec une boîte de vitesses manuelle, engager un rapport. Avec une boîte de vitesses automatique ou un sélecteur de marche, sélectionner le mode P. » ; renvoi (1) p. 13 : « L'arrêt du véhicule est impératif ».
+
 ## Ce que les notices lues ne disent pas
 
 - Aucune ne nomme le connecteur sous un siège ni le contacteur tournant du volant : la page le dit.
-- Aucune des pages lues ne donne la couleur rouge au voyant airbag (Renault et Dacia impriment leurs témoins en noir) : la page cite seulement la liste orange de Peugeot ; la situation de la base (« orange ou rouge selon la voiture », validée le 24/10) reste affichée dans l'encadré.
+- Aucune notice lue ne donne la couleur rouge au voyant airbag (Renault et Dacia impriment leurs témoins en noir ; Peugeot : orange ; Seat : jaune) ; le règlement ONU n° 121 (relevé `reglement-onu-121.md`, tableau, n° 22 « Mauvais fonctionnement du coussin gonflable » : « Jaune et/ou rouge ») fonde la situation de la base (« orange ou rouge selon la voiture »), et la page le cite.
 - Aucune ne décrit de manipulation pour éteindre le voyant airbag ou le voyant ABS, sauf le cas Renault p. 106 (commande de l'airbag passager tournée en roulant).

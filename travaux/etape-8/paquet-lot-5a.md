@@ -1,10 +1,10 @@
 # Paquet de validation, lot 5a de la vague A : voyant airbag, voyants ABS et ESP (14/11/2026)
 
-> Préparé par Claude pour Houssem (03, règle 7 ; demande n° 17 : porte 8 du lot). Format téléphone : une partie par page. Volume indicatif du lot : 21 172 recherches par mois (plafond, docs/05 : voyant airbag 10 744, voyants ABS et ESP 10 428). Revue indépendante : §5. Le go vaut pour le commit de passage décrit au §6 (brouillons versés avec leur empreinte, déplacés vers `src/content`, rien d'autre) : toute autre modification après ta validation l'annule.
+> Préparé par Claude pour Houssem (03, règle 7 ; demande n° 17 : porte 8 du lot). Format téléphone : une partie par page. Volume indicatif du lot : 21 172 recherches par mois (plafond, docs/05 : voyant airbag 10 744, voyants ABS et ESP 10 428). Revue indépendante : §5. Le go vaut pour le commit de passage décrit au §6 (brouillons versés avec leur empreinte et déplacés vers `src/content` ; question retirée de `consignes.json`, briefs régénérés, adresses ajoutées à la liste Lighthouse, comme pour les lots précédents) : toute autre modification après ta validation l'annule.
 >
-> Hors de ce lot : voyants batterie et direction (lot suivant, sources relevées) ; voyant frein (décision D4 : source du témoin d'usure des plaquettes) ; AdBlue et préchauffage (lot 5b) ; codes défaut (lot 4).
+> Lot 5b (batterie, direction) : pull request n° 46, paquet à part. Hors de ces lots : voyant frein (décision D4), AdBlue et préchauffage (lot 5c), codes défaut (lot 4).
 
-Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyants validée le 24/10, reprises telles quelles. Aucune pièce ajoutée au coût probable, aucune demande de changement. Ce qui est à valider : la question, les lignes de l'encadré, les causes et leur coût, et les faits du texte. Passages relus : `travaux/etape-8/textes/airbag-abs-esp-releve.md` (notices) et `controle-technique-releve.md` (arrêté du 18 juin 1991).
+Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyants validée le 24/10, reprises telles quelles. Ce qui est à valider : la question, les lignes de l'encadré, les causes et leur coût, une pièce ajoutée au coût probable (§3), un rattachement (§2, voyant ESP et « Défaut frein de parking »), et les faits du texte. Passages relus : `travaux/etape-8/textes/airbag-abs-esp-releve.md` (notices, règlement ONU n° 121) et `controle-technique-releve.md` (arrêté du 18 juin 1991, corrigé après la revue : §5).
 
 ## 1. Voyant airbag (`/voyants/airbag/`)
 
@@ -13,24 +13,24 @@ Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyan
 **Question** : « Puis-je continuer à rouler avec le voyant airbag allumé ? »
 
 **Lignes de l'encadré** (base) :
-1. **Voyant airbag allumé (défaut des airbags ou des prétensionneurs)** → **Oui, avec précautions** · À faire tout de suite · « Vous pouvez rouler, mais faites contrôler le système sans attendre : en cas de choc, les airbags risquent de ne pas se déclencher, ou de se déclencher sans raison. En attendant, n'installez pas de siège enfant sur le siège passager avant. » · 5 marques (6 consignes) ; écart : Peugeot sans délai, Dacia « rapidement » pour le témoin seul.
+1. **Voyant airbag allumé (défaut des airbags ou des prétensionneurs)** → **Oui, avec précautions** · À faire tout de suite · « Vous pouvez rouler, mais faites contrôler le système sans attendre : en cas de choc, les airbags risquent de ne pas se déclencher, ou de se déclencher sans raison. En attendant, n'installez pas de siège enfant sur le siège passager avant. » · 5 marques (6 consignes) ; écart : Peugeot sans délai, Dacia « rapidement » pour le témoin seul. Situation affichée : « Le voyant airbag (orange ou rouge selon la voiture)… » : le rouge vient du règlement ONU n° 121 (« jaune et/ou rouge »), que la page cite.
 2. **Témoin « airbag passager désactivé » (OFF) allumé** → **Oui, vous pouvez rouler** · Aucune action nécessaire · « C'est normal si un siège enfant dos à la route est installé à l'avant. Sinon, réactivez l'airbag (position ON) voiture à l'arrêt et contact coupé, car il ne se déclencherait pas en cas de choc. » · 5 marques.
 
 **Coût probable (calculé)** : de « Aucun frais » à « Réparation au garage » ; base de calcul : « … de l'airbag passager désactivé volontairement, sans dépense, à la réparation du système d'airbag au garage. »
 
 **Causes** : airbag ou prétensionneur de ceinture défaillant → module d'airbag (réparation ; aucune notice ne nomme la pièce, la tranche est celle du renvoi au réseau) ; airbag passager désactivé avec sa commande → système désactivé (aucun frais).
 
-**Empreinte de l'encadré** : `f3f89321da4743757f1481de5a7b5a75aab5823527e4ce0ecdfe40de35ded7cb`.
+**Empreinte de l'encadré** : `f3f89321da4743757f1481de5a7b5a75aab5823527e4ce0ecdfe40de35ded7cb` (inchangée par la revue).
 
 **Faits du texte** (relevé joint) :
-- Délais : « immédiatement » Seat p. 26 et Toyota p. 293 ; « au plus tôt » Renault p. 137 ; « rapidement » Dacia p. 111 ; réseau ou atelier qualifié, Peugeot p. 17 (renvoi (3) p. 13). Aucune notice n'impose l'arrêt.
+- Délais : « immédiatement » Seat p. 26 et Toyota p. 293 ; « au plus tôt » Renault p. 137 ; « rapidement » Dacia p. 111 (« au plus tôt » avec le message « Airbag à contrôler », p. 101) ; réseau ou atelier qualifié, Peugeot p. 17 (renvoi (3) p. 13). Aucune notice n'impose l'arrêt.
 - Seat p. 27 : avec un défaut, airbags et rétracteurs peuvent se déclencher difficilement, pas du tout, ou de manière inattendue ; ne pas monter de siège enfant à l'avant, ou le retirer.
 - Ce que signale le voyant : airbags et prétensionneurs (Peugeot p. 17, Toyota p. 293) ; message « Airbag à contrôler » (Renault p. 124, Dacia p. 101).
 - Allumage normal quelques secondes à la mise du contact ; défaillance s'il ne s'allume pas, s'il s'allume moteur tournant, ou s'il clignote (Renault p. 137, Dacia p. 111, Seat p. 27).
-- Couleur : Peugeot le range parmi les témoins orange (p. 14 et 17) ; aucune autre notice lue ne donne sa couleur (Renault et Dacia impriment leurs témoins en noir) : la page dit « quelle que soit sa couleur ».
+- Couleur : orange chez Peugeot (p. 14 et 17), jaune chez Seat (p. 93-94) ; le règlement ONU n° 121 admet le jaune ou le rouge (tableau, n° 22).
 - Éteindre : seul cas décrit, Renault p. 106 (commande de l'airbag passager tournée en roulant : témoins airbag et Service ; couper puis remettre le contact) ; Renault p. 81 : toute intervention sur le système complet (airbags, prétensionneurs, boîtier, câblage) interdite sauf personnel qualifié du réseau. Connecteur sous siège et contacteur tournant : non nommés par les notices, la page le dit.
-- Témoin OFF : Toyota p. 37 (remettre sur ON sans siège enfant), Seat p. 26 (vérifier s'il doit rester désactivé) ; Renault p. 106-107 et Dacia p. 84 (à l'arrêt, contact coupé, avec le verrou ; témoin allumé en permanence) ; Peugeot p. 17-18 (siège dos à la route permis airbag désactivé, sauf voyant Airbags allumé ; interdit airbag activé).
-- Contrôle technique (Légifrance, relu le 14/11) : 7.1.6.a.2 indicateur de dysfonctionnement du système de retenue supplémentaire : majeure ; 7.1.5.b.2 défaillance signalée via l'interface électronique : majeure ; 7.1.5.d.1 mauvaise configuration de la désactivation de l'airbag passager : mineure ; article 7 : contre-visite dans les deux mois.
+- Témoin OFF : Toyota p. 37 (remettre sur ON sans siège enfant), Seat p. 26 (vérifier s'il doit rester désactivé) ; Renault p. 106-107 (désactivation et réactivation, à l'arrêt, contact coupé, avec le verrou) et Dacia p. 84 (désactivation) ; Peugeot p. 17-18 (siège dos à la route permis airbag désactivé, sauf voyant Airbags allumé ; interdit airbag activé).
+- Contrôle technique (Légifrance, relu le 14/11) : 7.1.6.a.2 indicateur de dysfonctionnement du système de retenue supplémentaire : majeure ; 7.1.5.b.2 défaillance signalée via l'interface électronique : majeure ; 7.1.5.d.1 mauvaise configuration de la désactivation de l'airbag passager : mineure ; article 7 : contre-visite dans les deux mois ; réparer avant évite une contre-visite « pour ce point ».
 - Non traité (brief) : modèles hors notices lues (206, 307, Clio 2 et 3, Twingo), ni titre ni partie par modèle.
 
 **Ligne de validation proposée** : « Je valide la page voyant airbag : question, encadré (deux lignes de la base, coût et causes, empreinte f3f89321…) et faits du texte. »
@@ -38,48 +38,56 @@ Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyan
 ## 2. Voyants ABS et ESP (`/voyants/abs-esp/`)
 
 **Titre** : « Voyant ABS ou ESP allumé : peut-on rouler, que faire ? » · **H1** : « Voyants ABS et ESP : que faire quand ils s'allument ? »
-**Description** : « Voyant ABS seul : vous pouvez rouler prudemment, le freinage classique reste assuré, mais faites vérifier sans attendre. Avec le voyant de freinage rouge : arrêtez-vous. »
+**Description** : « Voyant ABS seul : roulez prudemment et faites vérifier sans attendre ; avec le voyant de freinage rouge, arrêtez-vous. Voyant ESP fixe ou qui clignote : ce que disent les notices. »
 **Question** : « Puis-je continuer à rouler avec le voyant ABS ou ESP allumé ? »
 
 **Lignes de l'encadré** (base) :
 1. **Voyants ABS et freinage allumés ensemble** → **Non, arrêtez-vous immédiatement** · À faire tout de suite · « Arrêtez-vous dès que vous pouvez le faire sans danger, en freinant progressivement : le véhicule peut devenir instable au freinage. Ne repartez pas : faites appel à un garage ou à l'assistance. » · 5 marques.
-2. **Voyant ABS orange allumé** → **Oui, avec précautions** · À faire tout de suite · « Vous pouvez rouler prudemment, à allure modérée : les roues peuvent se bloquer en cas de freinage fort. Faites vérifier le système sans attendre. Si le voyant de freinage rouge s'allume aussi, arrêtez-vous (ligne « ABS et freinage »). » · 5 marques (6 consignes) ; écart : Peugeot sans délai, Renault et Dacia « rapidement » pour le témoin seul.
+2. **Voyant ABS orange allumé** → **Oui, avec précautions** · À faire tout de suite · « Vous pouvez rouler prudemment, à allure modérée : les roues peuvent se bloquer en cas de freinage fort. Faites vérifier le système sans attendre. Si le voyant de freinage rouge s'allume aussi, arrêtez-vous (ligne « ABS et freinage »). » · 4 marques (6 consignes) ; écart : Peugeot sans délai, Renault et Dacia « rapidement » pour le témoin seul.
 3. **Voyant ESP allumé fixe (système défaillant)** → **Oui, avec précautions** · À faire tout de suite · « Vous pouvez rouler prudemment, surtout sur route mouillée ou glissante, car la voiture ne corrige plus les dérapages. Faites vérifier le système sans attendre. » · 4 marques ; écart : Peugeot sans délai.
 4. **Voyant ESP clignotant (système en action)** → **Oui, avec précautions** · À faire tout de suite · « Levez le pied et adaptez tout de suite votre vitesse à l'état de la route : le système vous aide à garder la trajectoire, mais la route est glissante. » · 5 marques ; écart : seule Seat donne une consigne.
 
 **Coût probable (calculé)** : de « Aucun frais » à « Réparation au garage » ; base de calcul : « … du système en action ou désactivé, sans dépense, à la réparation du système de freinage au garage. » La page a une ligne d'arrêt : le dépannage sur autoroute s'affiche de lui-même (demande n° 10).
 
-**Causes** : contrôle de stabilité en action → fonctionnement normal (aucun frais) ; contrôle de stabilité désactivé → système désactivé (aucun frais) ; défaillance de l'ABS → capteur ABS, faisceau et connecteurs (réparation ; le contrôle technique vérifie ces composants, point 1.6.1) ; défaillance du répartiteur ou des dispositifs de freinage → calculateur (réparation). **Choix à valider** : aucune notice ne nomme la pièce de la quatrième cause ; « calculateur » est classé « Réparation au garage », la tranche du renvoi au réseau (Peugeot (2), Renault, Dacia). La plage de la page ne change pas avec ce choix.
+**Causes** : contrôle de stabilité en action → fonctionnement normal (aucun frais) ; contrôle de stabilité désactivé (témoin à part, marqué OFF) → système désactivé (aucun frais) ; défaillance de l'ABS → capteur ABS, faisceau et connecteurs, bloc ABS (réparation ; le contrôle technique range ces composants parmi les défaillances de l'ABS, point 1.6.1) ; défaillance du répartiteur ou des dispositifs de freinage → bloc ABS (réparation, **pièce nouvelle**, §3).
 
-**Empreinte de l'encadré** : `a678e833860c19fa9b7dab5be12fada969192da98c0f112d88ceeea46b0d5488`.
+**Empreinte de l'encadré** : `34d97ca7a7a33f76817b133beb39d06abc2bd28cd409687cb16228791d7a1c2d` (après la revue : pièces des causes).
+
+**Rattachement à valider** : la partie « Voyant ESP et message « Défaut frein de parking » » applique à ce cas Peugeot (témoins du contrôle de stabilité et Service allumés fixes) la ligne « Voyant ESP allumé fixe » : **Oui, avec précautions**, faire vérifier sans attendre ; la consigne Peugeot (desserrage manuel, ou réseau et atelier qualifié, renvoi (3)) est du même niveau. Le témoin rouge du frein de stationnement électrique qui clignote (Peugeot p. 14 : serrage ou desserrage défaillant, renvoi (1) « l'arrêt du véhicule est impératif ») est cité avec sa consigne d'arrêt, sans ligne de la base : sa ligne relève de la page du voyant frein.
 
 **Faits du texte** (relevé joint) :
-- ABS seul : freinage classique conservé (Peugeot p. 17, Renault p. 138, Dacia p. 112) ; Peugeot : rouler prudemment à allure modérée ; Toyota p. 293 : faire vérifier immédiatement.
+- ABS seul : freinage classique conservé (Peugeot p. 17, Renault p. 138, Dacia p. 112) ; Peugeot : rouler prudemment à allure modérée ; Toyota p. 293 : faire vérifier immédiatement ; aucune distance à ne pas dépasser dans les notices lues. Dessin : les lettres ABS dans un cercle ; jaune selon le règlement ONU n° 121 (n° 26), orange chez Peugeot.
 - ABS et freinage : Toyota p. 298 (très instable au freinage) ; Seat p. 251 (roues arrière bloquées, arrière qui dérape) ; Renault p. 213 et Dacia p. 184-185 (« Panne du système de freinage » avec plusieurs témoins : freinage partiellement assuré, dangereux de freiner brusquement, arrêt impératif et immédiat).
-- ESP : noms dans les notices (CDS Peugeot, ESC Renault, Dacia et Seat, VSC Toyota) ; correction par le freinage de certaines roues ou la puissance du moteur (Renault p. 213) ; antipatinage ASR (Peugeot, Seat) ou TRC (Toyota) ; clignote : régulation en cas de perte d'adhérence ou de trajectoire (Peugeot p. 17), adapter immédiatement sa vitesse (Seat p. 255) ; fixe : désactivé (Peugeot p. 17, réactivé au démarrage et vers 50 km/h ; Seat p. 254, ASR désactivé à la main ou ESC en mode Sport) ou défaut.
+- ESP : jaune selon le règlement ONU n° 121 (n° 43), jaune chez Seat (p. 93-94), orange chez Peugeot ; noms dans les notices (CDS Peugeot, ESC Renault, Dacia et Seat, VSC Toyota) ; correction par le freinage de certaines roues ou la puissance du moteur (Renault p. 213) ; antipatinage ASR (Peugeot, Seat) ou TRC (Toyota) ; clignote : régulation en cas de perte d'adhérence ou de trajectoire (Peugeot p. 17), adapter immédiatement sa vitesse (Seat p. 255) ; **fixe : défaut** ; système désactivé : témoin à part (Peugeot p. 17, même dessin marqué OFF, réactivé au démarrage et vers 50 km/h ; Seat p. 254 ; Renault p. 138 ; Dacia p. 112 ; Toyota p. 62-64).
 - ABS et ESP ensemble : Seat p. 254 (l'ESC fonctionne avec l'ABS) ; Renault p. 212 et Dacia p. 184 (ABS, ESC et aide au freinage d'urgence désactivés, freinage toujours assuré).
-- **ESP et frein de stationnement** (question des lecteurs, brief) : Peugeot p. 17, « Anomalie du frein de secours » (témoins CDS et Service, message « Défaut frein de parking ») : freinage de secours sans ses performances optimales ; desserrage manuel, ou réseau ou atelier qualifié (renvoi (3)). Consigne citée sans verdict : la combinaison n'est pas une ligne de la base, et la page dit qu'elle n'est pas celle de l'ABS et du voyant de freinage rouge.
+- ESP et « Défaut frein de parking » : Peugeot p. 17 (freinage de secours sans ses performances optimales ; desserrage manuel, ou renvoi (3)) ; témoin du frein de stationnement électrique qui clignote : Peugeot p. 14 (arrêt, renvoi (1)).
 - Éteindre : aucune manipulation décrite ; désactivation à la main de l'ESC ou de l'ASR seulement (Peugeot, Seat) ; extinction au bout de 2 secondes environ (Seat p. 254) ; ABS qui ne s'éteint pas après la mise sous contact : défaillance (Dacia p. 112).
-- Contrôle technique : 1.6.1 a.2 (dispositif d'alerte qui fonctionne mal), b.2 (dispositif d'alerte qui indique un mauvais fonctionnement), c.2, d.2, e.2 (capteur de roue, câblage, autres composants) : majeures ; article 7 ; le contrôle de stabilité n'est pas nommé dans le texte.
-- Non traité (brief) : prix d'un bloc ABS (01) ; Toyota Land Cruiser, 206.
+- Contrôle technique : 1.6.1 a.2 (dispositif d'alerte qui fonctionne mal), b.2 (dispositif d'alerte qui indique un mauvais fonctionnement), c.2, d.2, e.2 (capteur de roue, câblage, autres composants) : majeures ; **7.12.1 contrôle électronique de stabilité** (capteur, câblage, autres composants, commutateur, indicateur de dysfonctionnement) : majeures ; article 7.
+- Non traité (brief) : prix d'un bloc ABS (01 : le coût probable donne sa tranche) ; Toyota Land Cruiser, 206.
 
-**Ligne de validation proposée** : « Je valide la page voyants ABS et ESP : question, encadré (quatre lignes de la base, coût et causes avec le calculateur, empreinte a678e833…) et faits du texte. »
+**Ligne de validation proposée** : « Je valide la page voyants ABS et ESP : question, encadré (quatre lignes de la base, coût et causes avec le bloc ABS, empreinte 34d97ca7…), rattachement du cas « Défaut frein de parking » à la ligne ESP fixe, et faits du texte. »
 
-## 3. Construction de recette (branche d'essai)
+## 3. Donnée ajoutée : une pièce du coût probable
 
-Les deux brouillons sont construits sur la branche d'essai `essai/brouillons` (jamais fusionnée), comme de vraies pages : contrôles, liens et texte rendu. Seules erreurs, attendues : l'absence d'empreinte de validation (R4-VALIDATION-ABSENTE, et le test de la porte 6 qui la vérifie aussi). Alertes déjà présentes sur `main`, inchangées : « impérativement » dans les consignes Renault et Dacia de la ligne `airbag-passager-desactive` (l'adverbe porte sur la vérification du témoin, ligne validée le 24/10) ; « pas d'image » pour les articles.
+`data/couts.json` : **« Bloc ABS (groupe hydraulique et calculateur) »** (`bloc-abs`), tranche « Réparation au garage », pour les causes « défaillance de l'ABS » et « défaillance du répartiteur ou des dispositifs de freinage ». Raison : le brief demande que le coût probable réponde à « prix d'un bloc ABS » par sa tranche, sans prix ; aucune pièce de la liste ne couvrait le groupe hydraulique. Tranche : les notices renvoient au réseau sans annoncer de dégât grave si l'on continue (consigne de la tranche « réparation » de la grille du coût) ; autre choix possible, « Grosse réparation » (système lourd), qui porterait la plage de la page jusqu'à cette tranche. Aucun montant en euros.
 
-## 4. Porte 8 du lot : critères applicables (demande n° 17)
+**Ligne de validation proposée** : « Je valide la pièce « bloc ABS » en tranche réparation. »
 
-| Critère | Preuve | Statut |
+## 4. Construction de recette et contrôles
+
+- Branche d'essai `essai/brouillons` (jamais fusionnée) : les brouillons y sont construits comme de vraies pages. Run 43609641948 (avant la revue) : recette de 12 pages, seules erreurs les deux R4-VALIDATION-ABSENTE attendues ; part citée et expressions interdites passées. Dans le job « Contrôles », seul le test de la porte 6 échoue (exemple sans empreinte, attendu) ; la construction et les liens de ce job sont alors sautés : la preuve de construction vient du job « Recette ». Après les corrections de la revue : nouveau run, cité au §5.
+- Pull request n° 45 : CI verte (contrôles, recette, Lighthouse).
+- Alertes déjà présentes sur `main`, inchangées : « impérativement » dans les consignes Renault et Dacia de la ligne `airbag-passager-desactive` (l'adverbe porte sur la vérification du témoin, ligne validée le 24/10) ; « pas d'image » pour les articles.
+
+| Critère de la porte 8 (lot) | Preuve | Statut |
 |---|---|---|
-| Faits vérifiés sur sources, verdicts validés | Verdicts : base validée le 24/10 ; faits : §1 et §2, notices et arrêté relus (relevés joints) | À valider par Houssem |
-| Faits de sécurité et chiffres dans le paquet validé | §1 et §2 | À valider par Houssem |
+| Faits vérifiés sur sources, verdicts validés | Verdicts : base validée le 24/10 ; faits : §1 et §2, notices, règlement ONU et arrêté relus (relevés joints) | À valider par Houssem |
+| Faits de sécurité et chiffres dans le paquet validé | §1 à §3 | À valider par Houssem |
 | Encadrés relus par Houssem | §1 et §2 | À valider |
 | Lighthouse mobile ≥ 95 et CLS < 0,1 | CI de la pull request après le passage | À vérifier à la CI |
-| Contrôles au vert | Branche d'essai (§3) ; CI de la pull request | Voir §3 |
+| Contrôles au vert | §4 ; CI de la pull request après le passage | À vérifier |
 | Recette de l'étape 9 | Pages relues sur le site construit, après le passage | Après le passage |
-| Revue indépendante du diff complet | §5 | À faire |
+| Revue indépendante du diff complet | §5 | Faite |
 
 ## 5. Revue indépendante
 
