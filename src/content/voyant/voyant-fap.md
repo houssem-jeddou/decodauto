@@ -1,8 +1,7 @@
 ---
-# Brouillon de la page « voyant FAP » (étape 8, lot 3), rédigé le 14/11/2026 sur le modèle de page voyant. Il reste ici,
-# hors d'exemples/ et de src/content, jusqu'à la validation de Houssem (tests/porte6.test.ts exige l'empreinte de toute page
-# rédigée) : ensuite exemples/voyant/voyant-fap.md avec son empreinte, puis passage. La ligne de l'encadré vient de la base
-# voyants validée.
+# Page « voyant FAP » de la vague A (étape 8, lot 3), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 3 (règle de passage, travaux/etape-8/regle-de-passage.md).
+# Les lignes de l'encadré viennent de la base voyants validée.
 id: voyant-fap
 title: "Voyant FAP (filtre à particules) allumé : peut-on rouler ?"
 h1: "Voyant du filtre à particules (FAP) : que faire quand il s'allume ?"
@@ -37,6 +36,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (13 h 08),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-3.md).
+validation: 1cd0b8fe95daf60ff6bd6d767c40ad97ebc2b589dffdbdf44ebe4042224db799
 causes:
   - cause: Filtre en début de saturation, à régénérer en roulant
     explication: "Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, le témoin signale un début de saturation du filtre et demande au conducteur de le nettoyer en roulant ; selon la notice Peugeot 208, le filtre commence à saturer ; selon la notice Seat Ibiza, il est obstrué par de la suie et doit être nettoyé (régénération). Selon la notice Toyota Yaris, la suie s'accumule plus vite sur des trajets courts ou à basse vitesse. La régénération se fait en roulant, comme le dit l'encadré."

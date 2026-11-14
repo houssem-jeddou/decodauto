@@ -8,6 +8,7 @@
 - **Adresse** : `/pression-des-pneus/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/loi-montagne/` (vague A) ; `/usure-des-pneus/` (vague C : pas de lien dans le texte avant sa publication) ; `/voyants/pression-pneus/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page publiée** (sa validation est notée au journal) : `src/content/pneus/pression-des-pneus.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -36,6 +37,12 @@
 Et 15 autres : « gonfler les pneus », « gonfler un pneu », « gonfleur pneu de voiture », « pneu gonflage », « pneu remorque pression », « pression des pneu voiture », « pression des pneus à chaud », « pression des pneus pour une remorque », « pression des pneus remorque », « pression pneu à chaud », « pression pneu chaud », « pression pneu pour remorque », « pression pneu remorque », « pression pneu voiture », « vérifier la pression des pneus tous les combien ».
 
 ## Décision et sources disponibles
+
+Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à une autre page : pas de tableau des notices ici) :
+
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `pression-pneus` Voyant de pression des pneus allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Ralentissez, évitez les manœuvres brusques et arrêtez-vous dès que possible en lieu sûr pour regarder l'état des pneus. Pneu crevé ou à plat : ne roulez pas avec, changez la roue ou utilisez le kit de réparation. Sinon, regonflez à la pression indiquée par la voiture (de préférence pneus froids), puis réinitialisez le système. | 5 | oui |
 
 Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources.json`) : pressions de gonflage lues sur l'étiquette de la porte conducteur, vérifiées pneus froids, au moins une fois par mois et avant chaque grand voyage (notice Renault Clio 5, p. 207 et 348).
 
@@ -88,7 +95,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je rouler avec des pneus sous-gonflés, et à quelle pression les gonfler ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je rouler avec des pneus sous-gonflés, et à quelle pression les gonfler ? »
 - **Angle** : La bonne pression est celle du constructeur (étiquette, notice), lue pneus froids. L'aperçu IA donne une fourchette générale en bars ; la page n'en donne aucune et dit où lire la valeur, marque par marque.
 - **Élément unique** : Tableau du texte ({{tableau}}) « Où lire la pression et quand la vérifier, selon la notice de chaque marque » : emplacement de l'étiquette, pneus froids, fréquence de contrôle, réinitialisation du système de surveillance, chaque case citée à la page près.
 - **À traiter** :

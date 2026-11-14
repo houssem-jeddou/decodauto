@@ -1,6 +1,6 @@
 # Demande de changement n° 22 : ligne `pression-pneus` de la base voyants (citation Peugeot p. 110, écart corrigé)
 
-**Statut : proposée le 14/11/2026 avec le lot 3, à accepter par Houssem.** Origine : revue indépendante du lot 3 (constat important I2) ; règle 6 de `CLAUDE.md` (partir de sa recommandation).
+**Statut : acceptée par Houssem le 14/11/2026 (13 h 08), avec le lot 3.** Appliquée dans la pull request du lot 3 (#41) : citation et écart dans `data/voyants.json`, empreinte de la ligne `b986bf24…`. Origine : revue indépendante du lot 3 (constat important I2) ; règle 6 de `CLAUDE.md` (partir de sa recommandation).
 
 - **Élément concerné** : `data/voyants.json`, ligne `pression-pneus` (« Voyant de pression des pneus allumé fixe »), validée le 24/10/2026 (étape 5, base figée).
 - **Changement proposé** :

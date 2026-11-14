@@ -143,3 +143,7 @@ Un agent sans contexte de la rédaction a relu le diff complet de la pull reques
 2. Les trois brouillons passent dans `exemples/` avec leur empreinte, et leur question sort de `consignes.json` ; briefs régénérés (`node scripts/briefs.ts`).
 3. Passage des trois pages dans `src/content` (règle de passage faite à la main : mêmes vérifications, refaites par la CI) ; adresses ajoutées à la liste Lighthouse. Ce commit de passage est celui que vise ton go.
 4. CI verte sur ce commit ; fusion par commit de fusion, puis vérification de la mise en ligne.
+
+## 8. Validation de Houssem
+
+Le 14/11/2026 à 13 h 08, par la validation groupée (questions posées dans la session, paquet et demande n° 22 joints) : « Je valide + go » pour les trois pages (lignes de validation des §1 à §3, avec le go de fusion du commit de passage si sa CI est verte) ; « J'accepte les deux » pour la demande n° 22 et la pièce « appoint d'additif du FAP » en tranche entretien. Empreintes versées : FAP `1cd0b8fe…`, voyant de pression des pneus `83de9349…`, pression des pneus `ebfe2eab…` ; ligne `pression-pneus` de la base : `b986bf24…`.

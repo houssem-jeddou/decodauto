@@ -1,8 +1,7 @@
 ---
-# Brouillon de la page « voyant pression des pneus » (étape 8, lot 3), rédigé le 14/11/2026 sur le modèle de page
-# voyant. Il reste ici, hors d'exemples/ et de src/content, jusqu'à la validation de Houssem (tests/porte6.test.ts exige
-# l'empreinte de toute page rédigée) : ensuite exemples/voyant/voyant-pression-pneus.md avec son empreinte, puis passage.
-# Les lignes de l'encadré viennent de la base voyants validée.
+# Page « voyant de pression des pneus » de la vague A (étape 8, lot 3), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 3 (règle de passage, travaux/etape-8/regle-de-passage.md).
+# Les lignes de l'encadré viennent de la base voyants validée (ligne pression-pneus : demande de changement n° 22).
 id: voyant-pression-pneus
 title: "Voyant pression pneu allumé : peut-on rouler, que faire ?"
 h1: "Voyant de pression des pneus : que faire quand il s'allume ?"
@@ -33,6 +32,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (13 h 08),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-3.md).
+validation: 83de9349277b761037e4cac196dcc4776c18e2ae7b2b1dec900b0fa8c71b6b24
 causes:
   - cause: Pneu sous-gonflé
     explication: "La pression d'un ou plusieurs pneus a baissé. Les notices Peugeot 208 et Dacia Sandero 3 demandent de contrôler et d'ajuster à froid la pression des quatre pneus, puis de réinitialiser le système."

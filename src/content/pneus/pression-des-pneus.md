@@ -1,9 +1,7 @@
 ---
-# Brouillon de la page « pression des pneus » (étape 8, lot 3 ; modèle pneus et obligations, livrable 6.6c), rédigé le
-# 14/11/2026. Il reste ici, hors d'exemples/ et de src/content, jusqu'à la validation de Houssem (tests/porte6.test.ts
-# exige l'empreinte de toute page rédigée) : ensuite exemples/pneus/pression-des-pneus.md avec son empreinte, puis
-# passage. La ligne de l'encadré vient de la base voyants validée ; texte de référence : annexe I de l'arrêté du
-# 18 juin 1991 (Légifrance), relevé dans travaux/etape-8/textes/controle-technique-releve.md.
+# Page « pression des pneus » de la vague A (étape 8, lot 3), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 3 (règle de passage, travaux/etape-8/regle-de-passage.md).
+# La ligne de l'encadré vient de la base voyants validée (demande de changement n° 22) ; texte de référence : annexe I de l'arrêté du 18 juin 1991 (Légifrance), relevé dans travaux/etape-8/textes/controle-technique-releve.md.
 id: pression-des-pneus
 title: "Pression des pneus : où la lire, comment gonfler ses pneus"
 h1: "Pression des pneus : la valeur du constructeur, pneus froids, au moins une fois par mois"
@@ -48,6 +46,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-05-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (13 h 08),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-3.md).
+validation: ebfe2eabfe3e924e13752d6421aa9671f2ee65f63b483d4e6b8c56f002d5fadc
 ---
 
 ## Quelle pression mettre dans ses pneus ?
