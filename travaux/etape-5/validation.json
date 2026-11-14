@@ -1,5 +1,12 @@
 {
   "valide_par_houssem": "2026-10-24",
   "empreinte": "ee98b8d476b6aa680b4939c002becc02babe1fddb5b0111f359dde0772a017f9",
-  "lignes": 25
+  "lignes": 25,
+  "ajouts": [
+    {
+      "id": "stop",
+      "demande": 23,
+      "valide_par_houssem": "2026-11-14"
+    }
+  ]
 }
