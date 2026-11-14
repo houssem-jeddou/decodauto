@@ -91,7 +91,22 @@ Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyan
 
 ## 5. Revue indépendante
 
-À compléter.
+**Première revue** (agent sans contexte de la rédaction, diff complet de la pull request à la tête b4291ce, sources relues par le relecteur : Légifrance, PDF Renault, Seat et Peugeot ; Dacia et Toyota sur les extraits) : **« à corriger », un bloquant, six importants**. Vérifié sans constat : les six lignes de l'encadré, les écarts, les pages Renault, Seat et Peugeot, les points 1.6.1, 7.1.5, 7.1.6 et l'article 7 de l'arrêté.
+
+**Ce que la revue a changé** :
+- **bloquant** : la page ABS-ESP disait que le contrôle technique ne nomme pas le contrôle de stabilité ; l'annexe I a un point 7.12.1 « Contrôle électronique de stabilité » (capteur, câblage, autres composants, commutateur, indicateur de dysfonctionnement : défaillances majeures), relu par Claude sur Légifrance. Partie retitrée « Voyants ABS et ESP au contrôle technique » ; relevé du contrôle technique corrigé, et recherches d'absence refaites sur un seul mot (« stabilit », « alternateur », « charge de la batterie », « indicateur de dysfonctionnement ») ;
+- voyant ESP fixe : défaut, et non « désactivé ou en défaut » ; le système désactivé a un témoin à part (OFF), cité par marque ;
+- témoin « airbag OFF » : verdict rappelé sans la condition qui n'est pas dans la base ;
+- partie « Voyant ESP et message « Défaut frein de parking » » : cas exact, ligne ESP fixe appliquée (rattachement à valider, §2), témoin du frein de stationnement électrique qui clignote cité avec sa consigne d'arrêt (Peugeot p. 14), phrase rassurante retirée ;
+- couleurs sourcées : Peugeot (orange), Seat (jaune, p. 93-94) et règlement ONU n° 121 (n° 22 « jaune et/ou rouge » pour l'airbag, n° 26 et 43 « jaune » pour l'ABS et l'ESP), ce qui fonde aussi le « orange ou rouge » de l'encadré airbag ;
+- coût : pièce « bloc ABS » ajoutée (§3) au lieu de « calculateur » ;
+- paquet : ligne `abs` à 4 marques ; mineurs : consignes attribuées au modèle de la notice, Dacia « au plus tôt » avec le message, Renault p. 106-107, « évite une contre-visite pour ce point », « l'annexe range parmi les défaillances », « couramment » retiré, description avec l'ESP, distance non donnée par les notices, dessin du voyant ABS, run cité et sauts du job « Contrôles » expliqués.
+
+**Écarté, et pourquoi** : rien d'écarté sur le fond. Le commit de la demande n° 23 (mentions du triangle retirées) reste dans cette pull request : il est annoncé dans sa description, et ne change que des commentaires et de la documentation.
+
+**Seconde revue** (corrections de b4291ce à 4549dff) : en cours.
+
+**Reste à vérifier** : pictogrammes des témoins cités (lecture texte seulement) ; Lighthouse des deux pages après le passage.
 
 ## 6. Suite, après ta validation
 
