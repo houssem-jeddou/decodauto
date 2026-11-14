@@ -8,6 +8,7 @@
 - **Adresse** : `/voyants/pression-pneus/` ; page mère : `/voyants/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/pression-des-pneus/` (vague A) ; `/usure-des-pneus/` (vague C : pas de lien dans le texte avant sa publication).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page publiée** (sa validation est notée au journal) : `src/content/voyant/voyant-pression-pneus.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -85,7 +86,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de pression des pneus allumé ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant de pression des pneus allumé ? »
 - **Angle** : Voyant orange dont la ligne de la base impose pourtant l'arrêt, avec l'écart entre marques (tableau des voyants du brief). La réinitialisation après regonflage, consigne des notices, répond à « toujours allumé » et « comment l'enlever » (relevé, constat 4).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

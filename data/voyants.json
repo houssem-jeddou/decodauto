@@ -1004,6 +1004,13 @@
         "urgence": "immédiate"
       },
       {
+        "source": "notice-peugeot-208",
+        "emplacement": "p. 110, « Détection de sous-gonflage », Alerte de sous-gonflage",
+        "extrait": "Elle est signalée par l'allumage fixe de ce témoin, accompagné d'un signal sonore et, selon équipement, de l'affichage d'un message. Réduire immédiatement la vitesse, éviter les coups de volant et tout freinage brusque. S'arrêter dès que les conditions de circulation le permettent.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 311-312, « Systèmes de contrôle de la pression des pneus », Témoin de contrôle et AVERTISSEMENT",
         "extrait": "Témoin allumé. Pression de gonflage d'une roue bien inférieure à la valeur définie par le conducteur […] Si le témoin s'allume, vous devez immédiatement réduire la vitesse et éviter toute manœuvre soudaine de virage ou de freinage. Arrêtez-vous le plus rapidement possible et contrôlez la pression et l'état de tous les pneus.",
@@ -1039,8 +1046,8 @@
         "urgence": "immédiate"
       }
     ],
-    "ecart_marques": "Seat et Toyota demandent de s'arrêter dès que possible pour contrôler les pneus, Renault et Dacia en cas de message « Crevaison ». Pour un simple sous-gonflage, Peugeot demande de contrôler la pression le plus rapidement possible et Dacia de la vérifier et l'ajuster à froid ; Renault ne donne pas de consigne pour le témoin seul.",
-    "validation": "17b8a46e6c448e27d9a3fa07f4cdea5adbbc539692b63c9f23457042f5deb329"
+    "ecart_marques": "Peugeot (p. 110), Seat et Toyota demandent de s'arrêter dès que possible pour contrôler les pneus, Renault et Dacia en cas de message « Crevaison ». Pour un simple sous-gonflage, la liste des témoins de Peugeot (p. 18) demande de contrôler la pression le plus rapidement possible, et Dacia de la vérifier et de l'ajuster à froid ; Renault ne donne pas de consigne pour le témoin seul.",
+    "validation": "b986bf24d9ae5f89428d0101e0c7b74539cd21d6668b491f4a3c2aa2a1126660"
   },
   {
     "id": "pression-pneus-systeme",
