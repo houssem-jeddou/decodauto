@@ -616,6 +616,8 @@ describe('construction : les liens du texte des pages sont lus et contrôlés', 
     await mkdir(join(racineTest, 'docs'));
     const lignes05 = (plan as { mots_cles: string[]; vague: string }[]).flatMap((l) => l.mots_cles.map((m) => `${m},${l.vague},,`));
     await writeFile(join(racineTest, 'docs', '05_mots_cles_perimetre.csv'), ['mot_cle,vague,variante_proche_de,precision', ...lignes05].join('\r\n'));
+    await mkdir(join(racineTest, 'config'));
+    await writeFile(join(racineTest, 'config', 'vagues-ouvertes.json'), '["A", "B", "C"]\n');
     const ajouter = async (type: string, cas: string, texte: string) => {
       await mkdir(join(racineTest, 'src', 'content', type), { recursive: true });
       const page = await readFile(join(fixtures, 'cas', cas, 'page.md'), 'utf8');
@@ -630,6 +632,68 @@ describe('construction : les liens du texte des pages sont lus et contrôlés', 
     assert.equal(bilan.constats.filter((c) => c.regle === 'R7-LIEN-INCONNU').length, 0);
     // Paires du plan : socle ↔ panne (deux pages écrites) et panne ↔ fluide (fluide pas écrite) : 1 en attente.
     assert.ok(bilan.informations.some((i) => i.startsWith('1 lien(s) du plan')), JSON.stringify(bilan.informations));
+  });
+});
+
+// ---- Construction complète : vagues ouvertes (VAGUE-NON-OUVERTE, demande de changement n° 21) ----------------
+describe('construction : une page de src/content n’est publiée que si sa vague est ouverte', async () => {
+  const donnees = await lireJson<DonneesBrutes>(join(fixtures, 'contexte.json'));
+  const vagueDe = (id: string): string | undefined => (donnees.plan as { id: string; vague: string }[]).find((l) => l.id === id)?.vague;
+
+  /** Dépôt de test : données des fixtures, liste des vagues (ou aucune), et la page de panne (vague B) dans `dossier`. */
+  async function depot(vagues: string | undefined, dossier: 'src/content' | 'exemples', cas = 'valide-panne', type = 'panne'): Promise<string> {
+    const racineTest = await dossierTemporaire();
+    await mkdir(join(racineTest, 'data'));
+    await writeFile(join(racineTest, 'data', 'plan-du-site.json'), JSON.stringify(donnees.plan));
+    await writeFile(join(racineTest, 'data', 'voyants.json'), JSON.stringify(donnees.voyants));
+    await writeFile(join(racineTest, 'data', 'sources.json'), JSON.stringify(donnees.sources));
+    await writeFile(join(racineTest, 'data', 'couts.json'), JSON.stringify(donnees.couts));
+    await mkdir(join(racineTest, 'docs'));
+    const lignes05 = (donnees.plan as { mots_cles: string[]; vague: string }[]).flatMap((l) => l.mots_cles.map((m) => `${m},${l.vague},,`));
+    await writeFile(join(racineTest, 'docs', '05_mots_cles_perimetre.csv'), ['mot_cle,vague,variante_proche_de,precision', ...lignes05].join('\r\n'));
+    if (vagues !== undefined) {
+      await mkdir(join(racineTest, 'config'));
+      await writeFile(join(racineTest, 'config', 'vagues-ouvertes.json'), vagues);
+    }
+    await mkdir(join(racineTest, dossier, type), { recursive: true });
+    await writeFile(join(racineTest, dossier, type, `${cas}.md`), await readFile(join(fixtures, 'cas', cas, 'page.md'), 'utf8'));
+    return racineTest;
+  }
+  const vaguesNonOuvertes = (bilan: { constats: Constat[] }): Constat[] => bilan.constats.filter((c) => c.regle === 'VAGUE-NON-OUVERTE');
+
+  test('les fixtures couvrent les deux cas : la page de panne est de la vague B, celle du voyant de la vague A', () => {
+    assert.equal(vagueDe('fixture-panne'), 'B');
+    assert.equal(vagueDe('fixture-voyant'), 'A');
+  });
+
+  test('vague B fermée : la page de panne de src/content est refusée, une fois, sur son fichier', async () => {
+    const bilan = await controlerSite({ racine: await depot('["A"]\n', 'src/content'), dist: await dossierTemporaire(), aujourdhui: AUJOURDHUI, indexable: false });
+    const constats = vaguesNonOuvertes(bilan);
+    assert.equal(constats.length, 1, JSON.stringify(constats));
+    assert.equal(constats[0]?.fichier, 'src/content/panne/valide-panne.md');
+    assert.equal(constats[0]?.gravite, 'erreur');
+  });
+
+  test('vague B ouverte : aucun refus', async () => {
+    const bilan = await controlerSite({ racine: await depot('["A", "B"]\n', 'src/content'), dist: await dossierTemporaire(), aujourdhui: AUJOURDHUI, indexable: false });
+    assert.deepEqual(vaguesNonOuvertes(bilan), []);
+  });
+
+  test('page de la vague A : aucun refus', async () => {
+    const bilan = await controlerSite({ racine: await depot('["A"]\n', 'src/content', 'valide-voyant', 'voyant'), dist: await dossierTemporaire(), aujourdhui: AUJOURDHUI, indexable: false });
+    assert.deepEqual(vaguesNonOuvertes(bilan), []);
+  });
+
+  test('construction de recette : la même page de vague B dans exemples/ n’est pas refusée', async () => {
+    const bilan = await controlerSite({ racine: await depot('["A"]\n', 'exemples'), dist: await dossierTemporaire(), aujourdhui: AUJOURDHUI, indexable: false, exemples: true });
+    assert.deepEqual(vaguesNonOuvertes(bilan), []);
+  });
+
+  test('liste absente : une erreur sur config/vagues-ouvertes.json', async () => {
+    const bilan = await controlerSite({ racine: await depot(undefined, 'src/content', 'valide-voyant', 'voyant'), dist: await dossierTemporaire(), aujourdhui: AUJOURDHUI, indexable: false });
+    const constats = vaguesNonOuvertes(bilan);
+    assert.equal(constats.length, 1, JSON.stringify(constats));
+    assert.equal(constats[0]?.fichier, 'config/vagues-ouvertes.json');
   });
 });
 

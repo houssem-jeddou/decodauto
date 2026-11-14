@@ -9,7 +9,10 @@
         "http://localhost/loi-montagne/index.html",
         "http://localhost/voyants/moteur/index.html",
         "http://localhost/voyants/huile/index.html",
-        "http://localhost/codes-defaut/p0087/index.html"
+        "http://localhost/codes-defaut/p0087/index.html",
+        "http://localhost/voyants/fap/index.html",
+        "http://localhost/voyants/pression-pneus/index.html",
+        "http://localhost/pression-des-pneus/index.html"
       ],
       "numberOfRuns": 3,
       "settings": {

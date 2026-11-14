@@ -149,7 +149,6 @@
     ]
   },
   "voyant-fap": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant du filtre à particules allumé ?",
     "angle": "La consigne des notices passe par une régénération en roulant avant le garage (ligne de la base et son écart entre marques). Page de référence du FAP (docs/02 : pas de page organe).",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
@@ -222,7 +221,6 @@
     ]
   },
   "voyant-pression-pneus": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant de pression des pneus allumé ?",
     "angle": "Voyant orange dont la ligne de la base impose pourtant l'arrêt, avec l'écart entre marques (tableau des voyants du brief). La réinitialisation après regonflage, consigne des notices, répond à « toujours allumé » et « comment l'enlever » (relevé, constat 4).",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
@@ -341,7 +339,6 @@
     ]
   },
   "pression-des-pneus": {
-    "question_decision": "Puis-je rouler avec des pneus sous-gonflés, et à quelle pression les gonfler ?",
     "angle": "La bonne pression est celle du constructeur (étiquette, notice), lue pneus froids. L'aperçu IA donne une fourchette générale en bars ; la page n'en donne aucune et dit où lire la valeur, marque par marque.",
     "element_unique": "Tableau du texte ({{tableau}}) « Où lire la pression et quand la vérifier, selon la notice de chaque marque » : emplacement de l'étiquette, pneus froids, fréquence de contrôle, réinitialisation du système de surveillance, chaque case citée à la page près.",
     "a_traiter": [

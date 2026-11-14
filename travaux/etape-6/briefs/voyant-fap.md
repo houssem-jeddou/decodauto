@@ -8,6 +8,7 @@
 - **Adresse** : `/voyants/fap/` ; page mère : `/voyants/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0420/` (vague A) ; `/fumee-echappement/` (vague B : pas de lien dans le texte avant sa publication) ; `/nettoyer-fap/` (vague B : pas de lien dans le texte avant sa publication) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/moteur/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page publiée** (sa validation est notée au journal) : `src/content/voyant/voyant-fap.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -43,6 +44,13 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 |---|---|---|---|---|---|---|
 | `fap` Voyant du filtre à particules (FAP) orange | orange | Oui, avec précautions | À faire tout de suite | Dès que la circulation le permet, roulez une vingtaine de minutes à allure soutenue et régulière (par exemple à plus de 60 km/h sur voie rapide, régime moteur pas trop bas), sans couper le moteur, jusqu'à l'extinction du voyant. S'il ne s'éteint pas, ou s'il s'accompagne du voyant moteur ou Service, allez au garage. | 4 | oui |
 
+Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à une autre page : pas de tableau des notices ici) :
+
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `moteur-orange-fixe` Voyant moteur orange allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez que si la notice de votre voiture permet de rouler jusqu'au garage, et faites alors contrôler le moteur sans attendre en roulant prudemment ; sinon, faites appel à un garage ou à l'assistance. | 5 | oui |
+| `moteur-rouge` Voyant moteur rouge, ou STOP avec « Risque casse moteur » | rouge | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger, coupez le moteur et ne le redémarrez pas. Faites appel à un garage ou à l'assistance. | 3 | non |
+
 ## Ce que montre Google France (relevé du 28/10/2026 à 07:30 UTC, requête « voyant fap »)
 
 - **Aperçu IA** : présent ; domaines cités : vroomly.com, bestdrive.fr, facebook.com, location.carrefour.fr, ad.fr, mylittlegarage.fr, outilsobdfacile.fr, ultimauto.fr. Début du texte (tiers, jamais repris ni reformulé, charte §2.6) :
@@ -69,7 +77,7 @@ Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant du filtre à particules allumé ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant du filtre à particules allumé ? »
 - **Angle** : La consigne des notices passe par une régénération en roulant avant le garage (ligne de la base et son écart entre marques). Page de référence du FAP (docs/02 : pas de page organe).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

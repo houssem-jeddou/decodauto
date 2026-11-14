@@ -61,6 +61,11 @@
       "tranche": "entretien"
     },
     {
+      "id": "appoint-additif-fap",
+      "libelle": "Appoint d'additif du filtre à particules (au garage)",
+      "tranche": "entretien"
+    },
+    {
       "id": "vidange",
       "libelle": "Vidange",
       "tranche": "entretien"
