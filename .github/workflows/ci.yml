@@ -251,14 +251,17 @@ jobs:
   production:
     name: Production en ligne (redirections, noindex, robots.txt, plan du site)
     # Sur main (après un déploiement réussi, chaque semaine, à la demande) : un écart fait échouer le run
-    # (notification GitHub). Sur une pull request ou une autre branche, la vérification est informative
+    # (notification GitHub) ; juste après un déploiement, seulement s'il persiste au dernier de 4 passages
+    # (propagation de Cloudflare), les écarts passagers restant affichés en avertissement. Sur une pull request ou une autre branche, la vérification est informative
     # (avertissements, job vert) : la production n'a pas encore les changements de la branche et dépend aussi des
     # réglages Cloudflare, hors du dépôt.
     needs: deploiement
     if: ${{ !cancelled() && (needs.deploiement.result == 'success' || github.event_name != 'push') }}
     runs-on: ubuntu-latest
-    # Jusqu'à 4 passages à 30 secondes d'écart sur main (propagation de Cloudflare après un déploiement).
-    timeout-minutes: 8
+    # Après un déploiement : jusqu'à 4 passages, sans nouveau passage au-delà de 4 minutes ; un passage dure au plus
+    # 13 lectures de 20 s. Le délai du job couvre ce pire cas avec de la marge : un écart fait échouer le job, il ne
+    # l'annule jamais.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -266,4 +269,4 @@ jobs:
           node-version-file: .nvmrc
       # Aucune dépendance : le script n'utilise que Node. Aucun secret.
       - name: Vérifier la production
-        run: node scripts/verifier-production.ts ${{ (github.event_name == 'pull_request' || github.ref != 'refs/heads/main') && '--information' || '' }}
+        run: node scripts/verifier-production.ts ${{ (github.event_name == 'pull_request' || github.ref != 'refs/heads/main') && '--information' || '' }} ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && '--apres-deploiement' || '' }}
