@@ -46,9 +46,9 @@
 | Encadré relu, empreinte | Encadré inchangé, empreinte `4555601a…` recalculée identique | Vérifié |
 | Contrôles au vert | PR #43 : CI verte ; essai de l'état appliqué : seule l'empreinte de la ligne STOP attendue en erreur (voir le message de présentation pour les numéros de CI) | Vérifié |
 | Lighthouse mobile ≥ 95, CLS < 0,1 | Recette de l'essai (version à trois lignes, avec emplacement publicitaire factice) : 100 partout, CLS 0, LCP 1,06 s ; liste de production après le passage | Vérifié en recette |
-| Recette à la main : vrai téléphone | Aperçu privé de la page construite, à ouvrir sur ton téléphone (lien dans le message) | À faire (toi) |
+| Recette à la main : vrai téléphone | Aperçu privé de la page construite, ouvert par Houssem sur son iPhone le 14/11 : « OK sur iPhone (Safari) » | Vérifié |
 | Recette à la main : filtre dans Chromium | Aperçu ouvert dans Chrome le 14/11 : « Rouge » n'affiche que les voyants rouges, index compris | Vérifié |
-| Recette à la main : Safari, Firefox, lecteur d'écran | Safari : par ton téléphone s'il est un iPhone ; Firefox et lecteur d'écran non essayés (accessibilité Lighthouse 100 ; sans `:has()`, la liste s'affiche entière) | Ouvert |
+| Recette à la main : Safari, Firefox, lecteur d'écran | Safari : iPhone de Houssem, OK ; Firefox et lecteur d'écran non essayés (accessibilité Lighthouse 100 ; sans `:has()`, la liste s'affiche entière) | Safari vérifié ; Firefox et lecteur d'écran ouverts |
 
 ## 6. Revue indépendante (une revue, diff complet de la PR #43, état appliqué de l'essai, sources relues sur les PDF)
 
@@ -66,3 +66,7 @@ Verdict « à corriger » : un bloquant, trois importants, huit mineurs. Conform
 
 1. Après ta validation : ligne versée avec son empreinte, pictogramme dans `src/pictogrammes/`, page outil dans `exemples/voyant/voyants.md` (même empreinte), test du texte de l'outil mis à jour, briefs régénérés ; CI verte.
 2. Ta recette sur téléphone (§5), puis passage de l'outil dans `src/content` sur ton go, CI verte, fusion et vérification en ligne.
+
+## 8. Validation de Houssem
+
+Le 14/11/2026 à 15 h 27, par une validation groupée (paquet, demande n° 23 et lien de l'aperçu joints) : « J'accepte » la demande n° 23 ; « Je valide + go » pour le texte de la page outil (go de mise en ligne si la CI est verte et la recette sur téléphone OK) ; recette sur téléphone : « OK sur iPhone (Safari) » (aperçu privé de la page construite, filtre et index). Empreintes versées : ligne `stop` `e7d593d5…` ; page outil, encadré inchangé, `4555601a…`.

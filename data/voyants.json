@@ -102,6 +102,49 @@
     "validation": "69b4e9e427136672d8caab59ceef30fa304eb8d42548b32c5d4dbdc04221d8aa"
   },
   {
+    "id": "stop",
+    "nom": "Voyant STOP rouge",
+    "couleur": "rouge",
+    "categorie": "Alerte générale",
+    "page": "voyants",
+    "pictogramme": "stop",
+    "situation": "Le témoin STOP s'allume en roulant, avec un autre témoin ou un message, et un signal sonore : la voiture a détecté un défaut grave, par exemple du moteur, du freinage, de la direction ou du circuit électrique.",
+    "verdict": "non, arrêt immédiat",
+    "urgence": "immédiate",
+    "action": "Arrêtez-vous dès que vous pouvez le faire sans danger, coupez le moteur et ne le redémarrez pas. Faites appel à un garage ou à l'assistance.",
+    "citations": [
+      {
+        "source": "notice-renault-clio-5",
+        "emplacement": "p. 137, « Témoins lumineux », Témoin d'arrêt impératif (STOP)",
+        "extrait": "Il s'allume conjointement à d'autres témoins et/ou messages, et est accompagné d'un signal sonore. Il vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-dacia-sandero-3",
+        "emplacement": "p. 110, « Témoins lumineux », témoin STOP",
+        "extrait": "[STOP] Le témoin vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-peugeot-208",
+        "emplacement": "p. 13, « Témoins de couleur rouge », STOP ; renvois (1) et (2) p. 13",
+        "extrait": "Fixe, associé à un autre témoin d'alerte, accompagné de l'affichage d'un message et d'un signal sonore. Un dysfonctionnement grave du moteur, du système de freinage, de la direction assistée, […] ou une anomalie électrique majeure est détectée. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. […] (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      },
+      {
+        "source": "notice-citroen-c3",
+        "emplacement": "p. 10, « Liste des témoins », Témoins de couleur rouge, STOP ; renvois (1) et (2) p. 9",
+        "extrait": "Fixe, associé à un autre témoin d'alerte, accompagné de l'affichage d'un message et d'un signal sonore. Un dysfonctionnement grave du moteur, du système de freinage, de la direction assistée ou une anomalie électrique majeure a été détectée. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. […] (2) : Faire appel au réseau CITROËN ou à un atelier qualifié.",
+        "verdict": "non, arrêt immédiat",
+        "urgence": "immédiate"
+      }
+    ],
+    "validation": "e7d593d50217b54f4bbf4e77e2c6ba671cc2c28b372664971367682c18f67664"
+  },
+  {
     "id": "moteur-rouge",
     "nom": "Voyant moteur rouge, ou STOP avec « Risque casse moteur »",
     "couleur": "rouge",

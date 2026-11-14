@@ -1,7 +1,8 @@
 ---
-# Page outil voyants (étape 8, livrable 8.1 ; demande de changement n° 11) : variante du type voyant, qui tient lieu
-# d'exemple de son modèle. Jamais publiée avant son lot : hors de src/content, construite seulement par la construction de
-# recette (AVEC_EXEMPLES=1, dist-exemples). Les lignes de l'encadré et toute la liste viennent de la base voyants validée.
+# Page outil voyants (étape 8, livrable 8.1 ; demande de changement n° 11), variante du type voyant. Texte mis à jour avec
+# la ligne STOP de la base (demande de changement n° 23, lot 3b), encadré inchangé ; passée de exemples/ à src/content par
+# la pull request du lot 3b (règle de passage, travaux/etape-8/regle-de-passage.md). Les lignes de l'encadré et toute la
+# liste viennent de la base voyants validée.
 id: voyants
 title: "Voyant orange voiture : signification et liste des voyants"
 h1: "Voyants du tableau de bord : lequel est allumé, et pouvez-vous rouler ?"
@@ -25,6 +26,7 @@ cout_probable:
     - notice-seat-ibiza
     - notice-toyota-yaris
 sources:
+  - notice-citroen-c3
   - notice-dacia-sandero-3
   - notice-peugeot-208
   - notice-renault-clio-5
@@ -35,11 +37,12 @@ element_unique: outil
 outil: true
 auteur: houssem-jeddou
 date_publication: 2026-11-04
-date_modification: 2026-11-04
-date_revue: 2026-11-04
-prochaine_revue: 2027-11-04
+date_modification: 2026-11-14
+date_revue: 2026-11-14
+prochaine_revue: 2027-11-14
 # Encadré de décision (question, renvoi, lignes, coût probable) et textes fixes de l'outil validés par Houssem le 04/11/2026
 # (13 h 48), avec les faits du texte (paquet travaux/etape-8/paquet-8.1-outil-voyants.md).
+# Texte mis à jour validé par Houssem le 14/11/2026 (15 h 27), avec la demande n° 23 (paquet travaux/etape-8/paquet-lot-3b.md).
 validation: 4555601ad20e230a8fcdd82f70c3cb530810752127eb22f8514d2febb21cc5b2
 ---
 
@@ -85,14 +88,14 @@ Le verdict retenu est « {{verdict:moteur-orange-fixe}} ». La [page Voyant mote
 - **Voiture qui dérape, avec des traces en zig zag** : le voyant ESP (contrôle de stabilité), [qui clignote](#da-voyant-esp-clignotant) ou [allumé fixe](#da-voyant-esp-defaut).
 - **Clé** : le [rappel d'entretien](#da-voyant-entretien-vidange). Attention : dans les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, la clé est le témoin Service, et ces notices demandent « un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement » ({{cite:notice-renault-clio-5|p. 136}}, {{cite:notice-dacia-sandero-3|p. 110}}).
 - **Huile** : en rouge, la [pression d'huile](#da-voyant-huile-pression-rouge) ; en orange ou par un message, le [niveau d'huile](#da-voyant-huile-niveau).
-- **STOP** : pas encore de ligne propre dans la liste. Les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} disent que ce témoin « vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. » ({{cite:notice-renault-clio-5|p. 136}}, {{cite:notice-dacia-sandero-3|p. 110}}). {{notice:notice-peugeot-208}} : « L'arrêt du véhicule est impératif. Stationner dans les meilleures conditions de sécurité et couper le contact », puis faire appel au réseau ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 13}}).
-- **Triangle avec un point d'exclamation** : pas de ligne propre dans la liste. Dans {{notice:notice-renault-clio-5}}, c'est le témoin d'alerte : en rouge, accompagné du témoin STOP, il impose le même arrêt impératif ; en jaune, accompagné du témoin Service, il « nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement » ({{cite:notice-renault-clio-5|p. 138}}). Pour une autre voiture, cherchez-le dans sa notice et, en cas de doute, demandez l'avis d'un professionnel.
+- **STOP** : le [voyant STOP](#da-voyant-stop), rouge, qui s'allume avec un autre témoin ou un message : « {{verdict:stop}} ». Les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} disent que ce témoin « vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation » ({{cite:notice-renault-clio-5|p. 136}}, {{cite:notice-dacia-sandero-3|p. 110}}).
+- **Triangle avec un point d'exclamation** : pas de ligne propre dans la liste, car seules les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, d'un même groupe, lui donnent une consigne propre. Elles l'appellent témoin d'alerte : s'il s'allume en rouge en roulant, accompagné du témoin STOP, il impose le même arrêt impératif que le [voyant STOP](#da-voyant-stop) ; s'il s'allume en jaune en roulant, accompagné du témoin Service (la clé), il « nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement » ({{cite:notice-renault-clio-5|p. 138}}, {{cite:notice-dacia-sandero-3|p. 112}}). Dans {{notice:notice-seat-ibiza}}, le voyant central d'alerte, rouge ou jaune, renvoie aux informations affichées à l'écran ({{cite:notice-seat-ibiza|p. 93}}) : lisez le message, il dit quel système est en cause. Pour une autre voiture, cherchez-le dans sa notice et, en cas de doute, demandez l'avis d'un professionnel.
 - **Préchauffage (spirale) qui clignote** : pas de ligne propre dans la liste, qui ne donne que le voyant allumé quelques secondes à la mise du contact. Dans {{notice:notice-seat-ibiza}}, il signale un dysfonctionnement de la gestion du moteur diesel : « Faites immédiatement contrôler le moteur par un atelier spécialisé. » ({{cite:notice-seat-ibiza|p. 289}}).
 - **Courroie de distribution** : aucune ligne de la liste. Le site ne donne pas de verdict pour ce voyant : cherchez-le dans la notice de votre voiture et, en cas de doute, demandez l'avis d'un professionnel.
 
 ## « Voyant orange Dacia », « tableau de bord Clio » : et votre voiture ?
 
-Le verdict de chaque ligne ne dépend pas de votre marque : c'est le plus prudent des notices lues, celles de {{notice:notice-dacia-sandero-3}}, {{notice:notice-peugeot-208}}, {{notice:notice-renault-clio-5}}, {{notice:notice-seat-ibiza}} et {{notice:notice-toyota-yaris}}.
+Le verdict de chaque ligne ne dépend pas de votre marque : c'est le plus prudent des notices lues, celles de {{notice:notice-dacia-sandero-3}}, {{notice:notice-peugeot-208}}, {{notice:notice-renault-clio-5}}, {{notice:notice-seat-ibiza}} et {{notice:notice-toyota-yaris}}, et celle de {{notice:notice-citroen-c3}} pour le voyant STOP.
 
 Une consigne citée ne vaut que pour le modèle de sa notice : une autre Dacia, ou une autre génération de Clio, peut donner une consigne différente. La notice de votre propre voiture fait foi pour votre véhicule : si elle donne une consigne différente, suivez-la.
 

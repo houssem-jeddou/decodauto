@@ -125,7 +125,10 @@ describe('outil voyants : modèle généré depuis la base', () => {
     for (const absent of [/\btriangle\b/i, /courroie de distribution/i, /clignot.*pr[ée]chauffage|pr[ée]chauffage.*clignot/i]) {
       assert.equal(base.filter((v) => absent.test(`${v.nom} ${v.situation}`)).length, 0, String(absent));
     }
-    assert.equal(base.filter((v) => /^[^,]*\bSTOP\b/.test(v.nom) && !/moteur|direction/i.test(v.nom)).length, 0);
+    // Le voyant STOP a sa ligne, rouge, rattachée à la page outil (demande de changement n° 23) ; le texte y mène.
+    assert.equal(site.voyants.get('stop')?.couleur, 'rouge');
+    assert.equal(site.voyants.get('stop')?.page, page.id);
+    assert.match(corps, /\[voyant STOP\]\(#da-voyant-stop\)/);
   });
 
   test('l’index des dessins : une entrée par ligne, dans l’ordre de la liste, avec son dessin et un lien vers sa ligne, sans verdict', () => {
