@@ -75,8 +75,8 @@ Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyan
 
 ## 4. Construction de recette et contrôles
 
-- Branche d'essai `essai/brouillons` (jamais fusionnée) : les brouillons y sont construits comme de vraies pages. Run 43609641948 (avant la revue) : recette de 12 pages, seules erreurs les deux R4-VALIDATION-ABSENTE attendues ; part citée et expressions interdites passées. Dans le job « Contrôles », seul le test de la porte 6 échoue (exemple sans empreinte, attendu) ; la construction et les liens de ce job sont alors sautés : la preuve de construction vient du job « Recette ». Après les corrections de la revue : nouveau run, cité au §5.
-- Pull request n° 45 : CI verte (contrôles, recette, Lighthouse).
+- Branche d'essai `essai/brouillons` (jamais fusionnée) : les brouillons y sont construits comme de vraies pages. Run 43609641948 (avant la revue) : recette de 12 pages, seules erreurs les deux R4-VALIDATION-ABSENTE attendues ; part citée et expressions interdites passées. Dans le job « Contrôles », seul le test de la porte 6 échoue (exemple sans empreinte, attendu) ; la construction et les liens de ce job sont alors sautés : la preuve de construction vient du job « Recette ». Après les deux revues : run 43614869107 (lots 5a et 5b ensemble, 14 pages construites) : recette sans erreur bloquante, seules erreurs les quatre R4-VALIDATION-ABSENTE attendues ; job « Contrôles » : 705 tests passés, seul celui de la porte 6 échoue (attendu).
+- Pull request n° 45 : CI verte au dernier commit des corrections (run 43614799345 : contrôles, recette, Lighthouse, production en ligne).
 - Alertes déjà présentes sur `main`, inchangées : « impérativement » dans les consignes Renault et Dacia de la ligne `airbag-passager-desactive` (l'adverbe porte sur la vérification du témoin, ligne validée le 24/10) ; « pas d'image » pour les articles.
 
 | Critère de la porte 8 (lot) | Preuve | Statut |
