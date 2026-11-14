@@ -39,9 +39,9 @@ sources:
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-03
-date_modification: 2026-11-03
-date_revue: 2026-11-03
-prochaine_revue: 2027-11-03
+date_modification: 2026-11-14
+date_revue: 2026-11-14
+prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 03/11/2026 (17 h 32),
 # avec les faits du texte (paquet travaux/etape-6/paquet-6.6a-voyant-moteur.md).
 validation: ceaa32fa0a950647b8b04773dd6d19119eb701a6bdf11ee94044e2f789f46b1f
@@ -103,6 +103,12 @@ Pour un autre modèle de ces marques, une Clio 4 ou une Mégane par exemple, c'e
 
 Dans la notice Renault Clio 5 phase 2, ce message indique une défaillance du système de dépollution. Il fait partie des messages qui demandent de s'arrêter au plus tôt chez un représentant de la marque, en conduisant avec ménagement ({{cite:notice-renault-clio-5|p. 124}}). Pour le voyant moteur orange fixe, le verdict retenu en haut de page reste : {{verdict:moteur-orange-fixe}}.
 
+## « Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën
+
+Dans les notices Peugeot 208 et Citroën C3, le voyant d'autodiagnostic moteur orange allumé fixe signifie que « le système d'antipollution est défaillant » : il faut alors se rendre rapidement dans le réseau de la marque ou dans un atelier qualifié. Allumé avec le témoin de service (une clé), il signale une défaillance mineure du moteur. En rouge, une défaillance majeure du moteur, qui impose l'arrêt du véhicule (Peugeot 208 p. 13 et p. 15 ; Citroën C3, {{cite:notice-citroen-c3|p. 10-11}}). Verdict retenu en haut de page, pour toutes les voitures : {{verdict:moteur-orange-fixe}}.
+
+Pour un autre modèle de ces marques, une 308, une 3008, une C4 ou une DS3 par exemple, c'est la notice de votre voiture qui fait foi.
+
 ## Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?
 
 Les notices lues ne nomment aucune pièce pour ce voyant, ni vanne EGR ni sonde : elles demandent de consulter un réparateur ou le réseau de la marque. Les causes possibles, plus bas, suivent ce que disent les notices.
@@ -122,3 +128,13 @@ La notice Toyota Yaris décrit un cas où il s'éteint de lui-même : sur certai
 ## La voiture roule normalement, mais le voyant est allumé
 
 Les notices lues ne font pas d'exception quand la voiture semble rouler normalement, hormis le cas du réservoir vidé décrit plus haut : la consigne reste celle du voyant, fixe ou clignotant.
+
+## Perte de puissance, moteur qui tourne mal
+
+La notice Seat Ibiza relie ces symptômes au voyant : en cas de panne de combustion, de baisse de puissance ou de fonctionnement irrégulier du moteur, elle demande de faire réviser la voiture par un atelier spécialisé, et précise que le témoin de gaz d'échappement s'allume en général dans ce cas ; le catalyseur risquerait alors d'être endommagé par surchauffe ({{cite:notice-seat-ibiza|p. 289, « Catalyseur »}}). Verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}.
+
+## Contrôle technique avec le voyant moteur allumé
+
+Au contrôle technique, le contrôleur relève le système de diagnostic embarqué du moteur (OBD), celui que la notice Peugeot 208 appelle « système d'autodiagnostic moteur ». Un relevé qui indique un dysfonctionnement important est une défaillance majeure : point 8.2.12.d.2 pour un moteur essence, point 8.2.22.c.2 pour un moteur diesel ({{cite:arrete-1991-06-18-controle-technique|annexe I, points 8.2.12 et 8.2.22}}).
+
+Une défaillance majeure donne un résultat défavorable : la contre-visite doit être faite dans les deux mois qui suivent le contrôle, faute de quoi un nouveau contrôle complet est à refaire ({{cite:arrete-1991-06-18-controle-technique|article 7}}).
