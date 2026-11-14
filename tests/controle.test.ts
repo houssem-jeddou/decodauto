@@ -444,6 +444,26 @@ describe('base voyants (R3, R4, R8, pictogrammes) et rattachement (R1)', async (
     assert.deepEqual(codes(controlerEnsemble([], contexte), 'alerte'), ['R1-RATTACHEMENT']);
   });
 
+  test('une ligne rattachée à la page outil n’a pas à être déclarée par elle : l’outil affiche toute la base (demande de changement n° 23)', async () => {
+    const outil = { id: 'voyants', type: 'voyant', theme: 'alertes-et-codes', vague: 'A', adresse: '/voyants/', requete_principale: 'voyant orange voiture', mots_cles: ['voyant orange voiture'], liens: ['fixture-panne', 'fixture-voyant'] };
+    const plan = [...donnees.plan, outil];
+    const [premier, ...autres] = donnees.voyants as Record<string, unknown>[];
+    const rattacheeOutil = { ...premier, page: 'voyants' };
+    const { contexte, constats } = construireContexte({ ...donnees, plan, voyants: [rattacheeOutil, ...autres] }, AUJOURDHUI);
+    assert.deepEqual(constats, []);
+    const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-voyant', 'page.md'), 'utf8'));
+    const { page } = controlerPage({ type: 'voyant', brut, fichier: 'valide-voyant' }, contexte);
+    assert.ok(page);
+    const pageOutil: PageControlee = { type: 'voyant', fichier: 'outil', page: { ...page, id: 'voyants', voyants: [] } };
+    const pageVoyant: PageControlee = { type: 'voyant', fichier: 'valide-voyant', page };
+    // La page outil ne déclare pas la ligne qui lui est rattachée : ni erreur, ni alerte de rattachement pour elle.
+    const constatsOutil = controlerEnsemble([pageOutil, pageVoyant], contexte).filter((c) => c.message.includes(String(premier?.['id'])));
+    assert.deepEqual(constatsOutil, []);
+    // Une autre page de rattachement reste tenue de déclarer sa ligne.
+    const sansDeclaration: PageControlee = { type: 'voyant', fichier: 'valide-voyant', page: { ...page, voyants: [] } };
+    assert.deepEqual(codes(controlerEnsemble([pageOutil, sansDeclaration], contexte), 'erreur'), ['R1-RATTACHEMENT']);
+  });
+
   test('les liens viennent du plan du site : un lien déclaré des deux côtés dans le plan bloque', () => {
     const plan = donnees.plan.map((l) => {
       const ligne = l as Record<string, unknown>;

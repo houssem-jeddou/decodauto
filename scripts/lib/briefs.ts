@@ -6,7 +6,7 @@
 // (travaux/etape-6/briefs/consignes.json, seule partie rédigée : ni volume, ni lien, ni verdict recopié). Données
 // internes : jamais publiées. Module sans dépendance à l'exécution : testé sans installation (tests/briefs.test.ts).
 // ---------------------------------------------------------------------------------------------
-import { indexerPlan } from '../../src/lib/plan.ts';
+import { ID_OUTIL_VOYANTS, indexerPlan } from '../../src/lib/plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../../src/schemas/grille.ts';
 import type { Urgence, Verdict } from '../../src/schemas/listes.ts';
 
@@ -210,7 +210,12 @@ export function genererBrief(e: EntreeBrief): string {
   if (rattaches.length > 0 || reprisExemple.length > 0 || e.sourcesDeLaPage !== undefined) {
     l.push('## Décision et sources disponibles', '');
     if (rattaches.length > 0) {
-      l.push('Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :', '');
+      l.push(
+        page.id === ID_OUTIL_VOYANTS
+          ? "Voyants de la base rattachés à la page outil (lignes sans page propre, demande de changement n° 23) : l'outil les affiche dans sa liste et son index, sans tableau des notices ni reprise obligatoire dans l'encadré :"
+          : 'Voyants de la base rattachés à la page (lignes reprises telles quelles, jamais réécrites ; la page affiche leur tableau des notices) :',
+        '',
+      );
       tableauVoyants(rattaches);
     }
     if (reprisExemple.length > 0) {

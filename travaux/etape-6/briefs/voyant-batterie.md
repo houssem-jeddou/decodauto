@@ -6,8 +6,9 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/batterie/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/batterie-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/batterie-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/direction/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page publiée** (sa validation est notée au journal) : `src/content/voyant/voyant-batterie.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -78,7 +79,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de batterie allumé ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant de batterie allumé ? »
 - **Angle** : Une seule ligne de la base, le voyant de charge rouge, avec un écart entre marques à afficher. Les lecteurs cherchent surtout pourquoi il reste allumé avec une batterie neuve ou un alternateur en bon état.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

@@ -1,0 +1,126 @@
+# Paquet de validation, lot 5b de la vague A : voyant batterie, voyant de direction assistée (14/11/2026)
+
+> Préparé par Claude pour Houssem (03, règle 7 ; demande n° 17 : porte 8 du lot). Format téléphone : une partie par page. Volume indicatif du lot : 8 216 recherches par mois (plafond, docs/05 : voyant batterie 4 424, voyant volant orange 3 792). Revue indépendante : §6. Le go vaut pour le commit de passage décrit au §7 (brouillons versés avec leur empreinte et déplacés vers `src/content` ; question retirée de `consignes.json`, briefs régénérés, adresses ajoutées à la liste Lighthouse, comme pour les lots précédents) : toute autre modification après ta validation l'annule.
+>
+> Lot 5a (airbag, ABS et ESP) : pull request n° 45, paquet à part. Hors de ce lot : voyant frein (décision D4), AdBlue et préchauffage (lot 5c), codes défaut (lot 4).
+
+Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyants validée le 24/10, reprises telles quelles. Ce qui est à valider : la question, les lignes de l'encadré, les causes et leur coût, trois pièces ajoutées au coût probable (§3), une paire de liens ajoutée au plan (§3 bis), et les faits du texte. Passages relus : `travaux/etape-8/textes/batterie-direction-releve.md` (notices) et `controle-technique-releve.md` (arrêté du 18 juin 1991).
+
+## 1. Voyant batterie (`/voyants/batterie/`)
+
+**Titre** : « Voyant batterie allumé : peut-on rouler, que faire ? » · **H1** : « Voyant de batterie rouge : que faire quand il s'allume en roulant ? »
+**Description** : « Voyant de batterie allumé moteur tournant : arrêtez-vous dès que c'est sans danger, la batterie n'est plus rechargée. Ce que dit chaque notice, causes et coût probable. »
+**Question** : « Puis-je continuer à rouler avec le voyant de batterie allumé ? »
+
+**Ligne de l'encadré** (base) : **Voyant de charge de la batterie rouge** → **Non, arrêtez-vous immédiatement** · À faire tout de suite · « Arrêtez-vous dès que vous pouvez le faire sans danger et coupez le contact. Ne repartez pas si la notice de votre voiture l'interdit : faites appel à un garage ou à l'assistance. Si elle permet de rejoindre l'atelier le plus proche (Seat), éteignez les équipements électriques non indispensables. » · 5 marques ; écart : Seat laisse rouler jusqu'à l'atelier le plus proche, les quatre autres imposent l'arrêt.
+
+**Coût probable (calculé)** : de « Geste à faire vous-même » à « Réparation au garage » ; base de calcul : « … des cosses de batterie à nettoyer et resserrer vous-même, comme le demande la notice Peugeot 208, à la réparation du circuit de charge au garage. » Verdict d'arrêt : le dépannage sur autoroute s'affiche de lui-même.
+
+**Causes** : cosses sales ou desserrées → nettoyage et serrage des cosses (geste, **pièce nouvelle**, §3) ; courroie d'alternateur détendue ou cassée → courroie d'alternateur (réparation, **pièce nouvelle**, §3) ; alternateur ou circuit de charge défaillant → alternateur (réparation).
+
+**Empreinte de l'encadré** : `aa612e91ded68725def801296b909f48cda80f4de9afbc91d796d4d89dc55586`.
+
+**Faits du texte** (relevé joint) :
+- Arrêt : Peugeot p. 13 (arrêt impératif, contact coupé ; si le frein de stationnement électrique ne fonctionne plus : rapport engagé, position P ou cale selon la boîte), Toyota p. 292 (arrêter immédiatement), Renault p. 137 et Dacia p. 112 (sur route, avec STOP et signal sonore : surcharge ou décharge du circuit électrique, s'arrêter) ; Seat p. 302 : se rendre immédiatement à l'atelier spécialisé le plus proche, en éteignant les équipements électriques non indispensables, la batterie se déchargeant. Aucune distance dans les notices lues.
+- Avant le démarrage : témoins rouges ou orange allumés quelques secondes à la mise du contact, éteints dès le démarrage du moteur (Peugeot p. 12, Seat p. 302, Renault p. 137).
+- Ce que signale le voyant (partie titrée « voyant batterie ou voyant d'alternateur ») : circuit de charge (Peugeot), dysfonctionnement de l'alternateur (Seat, qui le nomme ainsi), système de charge (Toyota), surcharge ou décharge (Renault, Dacia) ; messages « Panne électrique DANGER » (Renault p. 125) et « Panne électrique » (Dacia p. 102) avec STOP : problème du circuit de charge (alternateur…), arrêt impératif et immédiat, moteur arrêté et non redémarré.
+- Batterie et direction : selon Toyota p. 297 (corrigé après la revue, relu à l'écran), une charge insuffisante ou une chute de tension peut allumer le voyant de direction assistée (lien vers sa page, §3 bis) ; Renault p. 143 et Dacia p. 115 (rubrique « Direction assistée », relues à l'écran) : « Ne roulez jamais avec une batterie faiblement chargée ».
+- Batterie neuve, alternateur en bon état : Peugeot p. 13 (cosses sales, courroie d'alternateur détendue ou sectionnée ; nettoyer et resserrer les cosses ; si le témoin ne s'éteint pas au démarrage, réseau ou atelier qualifié), consigne attribuée à cette notice ; sinon, diagnostic par un professionnel.
+- Clignotement et allumage par intermittence : aucune notice ne décrit de clignotement propre à ce voyant ; Toyota p. 292 applique ses consignes à tout voyant qui « s'allume ou clignote » (voyant de charge : arrêter immédiatement) et précise qu'un voyant qui s'éteint aussitôt ne signale pas forcément un dysfonctionnement, à faire vérifier si cela se reproduit ; pour une autre voiture, un voyant qui clignote ou se rallume moteur tournant relève de la ligne de l'encadré (arrêt), et un voyant qui s'est allumé puis éteint aussitôt, de l'avis d'un professionnel (corrigé après la seconde revue).
+- STOP et batterie : Renault p. 136-137 et Dacia p. 110-112 (STOP : arrêt impératif et immédiat, moteur arrêté et non redémarré) ; la notice lue est celle de la Clio 5 phase 2, pas de la Clio 3 (brief).
+- Non traité (brief) : achat de batterie, prix ; Berlingo, Clio 3 ; « batterie faible » et « voiture ne démarre pas » ont leurs pages (liées dans le plan, pas encore construites : aucun lien dans le texte).
+
+**Ligne de validation proposée** : « Je valide la page voyant batterie : question, encadré (ligne de la base, coût et causes, empreinte aa612e91…) et faits du texte. »
+
+## 2. Voyant de direction assistée (`/voyants/direction/`)
+
+**Titre** : « Voyant volant orange ou rouge : peut-on rouler, que faire ? » (la requête principale « voyant volant orange » doit figurer dans le title ou le H1) · **H1** : « Voyant de direction assistée (volant) : que faire quand il s'allume ? »
+**Description** : « Voyant volant orange : roulez prudemment et faites vérifier la direction sans attendre. Rouge, ou avec le témoin STOP : arrêtez-vous, la direction n'est plus assistée. »
+**Question** : « Puis-je continuer à rouler avec le voyant de direction assistée allumé ? »
+
+**Lignes de l'encadré** (base) :
+1. **Voyant de direction orange ou jaune** → **Oui, avec précautions** · À faire tout de suite · « Vous pouvez rouler prudemment, à allure modérée : le volant peut être plus dur. Faites vérifier la direction sans attendre. Si le voyant passe au rouge ou s'accompagne du témoin STOP, arrêtez-vous. » · 3 marques de 3 groupes ; écart : Peugeot et Seat sans délai précis, Toyota immédiat.
+2. **Voyant de direction rouge, ou STOP avec la direction** → **Non, arrêtez-vous immédiatement** · À faire tout de suite · « Tenez fermement le volant et arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez pas : faites appel à un garage ou à l'assistance. » · 5 marques (8 consignes) ; écart : Toyota demande une vérification immédiate sans imposer l'arrêt.
+
+**Coût probable (calculé)** : de « Geste à faire vous-même » à « Grosse réparation » ; base de calcul : « … de la réinitialisation que demandent les notices Seat Ibiza et Dacia Sandero 3 après une intervention sur la batterie, à la réparation de la direction assistée. » Verdict d'arrêt : le dépannage sur autoroute s'affiche de lui-même.
+
+**Causes** : batterie débranchée puis rebranchée, ou dépannée → réinitialisation demandée par la notice (geste, **pièce nouvelle**, §3 ; Seat p. 227 : bref parcours ; Dacia p. 113 et 115-116 : réinitialisation de l'angle du volant) ; charge de la batterie insuffisante → recharge ou batterie à remplacer (entretien ; Toyota p. 297) ; direction assistée défaillante → direction assistée (grosse réparation). **Choix à valider** : aucune notice ne nomme la pièce de la troisième cause ; la tranche retenue est la plus lourde plausible (règle du coût : « en cas de doute, la tranche la plus lourde plausible »).
+
+**Empreinte de l'encadré** : `db122d1908fb8d599aba7084d22c1a7af5b318b2531ec76b60d372404f31b8e6` (après les deux revues : base de calcul et pièce de la première cause).
+
+**Faits du texte** (relevé joint) :
+- Orange : Peugeot p. 17 (rouler prudemment à allure modérée, puis réseau ou atelier qualifié) ; Seat p. 227 (jaune : fonctionnement limité, atelier avec prudence) ; Toyota p. 294 (vérifier immédiatement) et p. 298 (jaune : assistance limitée).
+- Rouge ou STOP : Toyota p. 298 (rouge : assistance perdue, volant très difficile à manœuvrer ; le tenir fermement et le tourner avec plus de force) ; Seat p. 227 (rouge : direction endommagée, stopper dès que possible) ; Peugeot p. 13 (STOP : dysfonctionnement grave notamment de la direction assistée, arrêt impératif) ; Renault p. 125 et 138, Dacia p. 102 et 113 (direction avec STOP : défaillance ; « Panne de la direction » avec STOP : arrêt impératif et immédiat, moteur arrêté et non redémarré).
+- Pourquoi il s'allume : contrôle à la mise du contact (Seat, Renault, Dacia) ; défaillance (Peugeot, Seat, Toyota) ; batterie faible (Toyota p. 297 ; ne jamais rouler avec une batterie faiblement chargée, Renault p. 143 et Dacia p. 115 ; lien vers la page du voyant batterie) ; batterie rebranchée (Seat p. 227 : bref parcours à 15-20 km/h) ou dépannée (Dacia p. 113).
+- Éteindre : Seat p. 227 (témoin jaune qui ne s'allume plus après redémarrage et court trajet : révision inutile ; après rebranchement de la batterie, bref parcours) ; Dacia p. 115-116, relues à l'écran (suivant véhicule, après un dépannage de la batterie : réinitialisation de l'angle du volant, à l'arrêt sur sol horizontal, conducteur seul, moteur démarré, volant à fond à gauche environ une seconde en butée, puis à droite, puis roues droites ; ne pas laisser la direction braquée à fond en butée à l'arrêt) ; Renault p. 144 (ne jamais tourner le volant batterie débranchée) ; pour une autre voiture, la consigne de l'encadré ; hors de ces cas et de la colonne coincée, aucune manipulation dans les notices lues.
+- Clignotant : Seat p. 227, relu à l'écran (colonne de direction coincée : à l'arrêt, tourner le volant d'un côté et de l'autre ; colonne qui ne se verrouille ou ne se déverrouille pas : retirer la clé et remettre le contact ; s'arrêter si elle reste bloquée après la mise du contact, faire appel à un spécialiste), consigne citée sans verdict.
+- Triangle orange : autre voyant, expliqué sur la page des voyants (lien vers la page mère, brief).
+- Contrôle technique (Légifrance, relu le 14/11) : 2.6.1.a.2 (indicateur de dysfonctionnement) et c.2 (assistance qui ne fonctionne pas) : majeures ; article 7 ; la consigne de l'encadré rappelée pour l'orange et pour le rouge, en deux phrases (corrigé après les revues).
+- Non traité (brief) : Volkswagen, Audi, BMW, Polo, Golf 5, Clio 2, Touran : renvoi à la notice du véhicule.
+
+**Ligne de validation proposée** : « Je valide la page voyant de direction assistée : question, encadré (deux lignes de la base, coût et causes avec la direction assistée en grosse réparation, empreinte db122d19…) et faits du texte. »
+
+## 3. Données ajoutées : trois pièces du coût probable
+
+`data/couts.json` :
+- **« Nettoyage et serrage des cosses de batterie »** (`cosses-de-batterie`), tranche « Geste à faire vous-même » : la notice Peugeot 208 demande au conducteur de nettoyer et de resserrer les cosses (p. 13) ; c'est la consigne qui fonde la tranche « geste » (« la notice demande une action au conducteur »).
+- **« Courroie d'alternateur »** (`courroie-d-alternateur`), tranche « Réparation au garage » : cause citée par la notice Peugeot 208 (p. 13), sans consigne propre ; autre choix possible, « Entretien » (pièce d'usure) ; la plage de la page ne change pas (l'alternateur est déjà en réparation).
+- **« Réinitialisation demandée par la notice (bref parcours ou braquage du volant) »** (`reinitialisation-demandee-par-la-notice`), tranche « Geste à faire vous-même » : après une intervention sur la batterie, la notice Seat Ibiza demande un bref parcours à 15-20 km/h (p. 227), la notice Dacia Sandero 3 une réinitialisation de l'angle du volant (p. 115-116) ; ce sont des actions du conducteur, comme la régénération du filtre à particules en roulant, déjà classée « geste ». Ajoutée après les revues (au lieu de « fonctionnement normal »).
+
+Aucun montant en euros.
+
+**Ligne de validation proposée** : « Je valide les pièces « cosses de batterie » et « réinitialisation demandée par la notice » en geste, et « courroie d'alternateur » en réparation. »
+
+## 3 bis. Plan du site : une paire de liens ajoutée
+
+`data/plan-du-site.json` : lien entre `voyant-batterie` et `voyant-direction`, déclaré du côté de la page batterie (le lien retour est calculé) ; `docs/09` régénéré par `npm run plan:vue` (50 paires de pages liées). Justification : la notice Toyota Yaris (p. 297) relie les deux voyants (une batterie faible peut allumer le voyant de direction assistée), et deux causes de la page direction viennent de la batterie. Les deux pages se citent dans leur texte.
+
+**Ligne de validation proposée** : « Je valide le lien voyant batterie ↔ voyant de direction assistée. »
+
+## 4. Construction de recette (branche d'essai)
+
+Les deux brouillons sont construits sur la branche d'essai `essai/brouillons` (jamais fusionnée), avec les pièces du §3. Seules erreurs attendues : l'absence d'empreinte de validation (R4-VALIDATION-ABSENTE, et le test de la porte 6 qui la vérifie aussi).
+
+- Après les deux revues : run 43614869107 (lots 5a et 5b ensemble, 14 pages construites) : recette sans erreur bloquante, seules erreurs les quatre R4-VALIDATION-ABSENTE attendues ; job « Contrôles » : 705 tests passés, seul celui de la porte 6 échoue (attendu).
+- Pull request n° 46 : CI verte au dernier commit des corrections (run 43614856582 : contrôles, recette, Lighthouse, production en ligne).
+
+## 5. Porte 8 du lot : critères applicables (demande n° 17)
+
+| Critère | Preuve | Statut |
+|---|---|---|
+| Faits vérifiés sur sources, verdicts validés | Verdicts : base validée le 24/10 ; faits : §1 et §2, notices et arrêté relus (relevés joints) | À valider par Houssem |
+| Faits de sécurité et chiffres dans le paquet validé | §1 à §3 | À valider par Houssem |
+| Encadrés relus par Houssem | §1 et §2 | À valider |
+| Lighthouse mobile ≥ 95 et CLS < 0,1 | CI de la pull request après le passage | À vérifier à la CI |
+| Contrôles au vert | §4 ; CI de la pull request après le passage | À vérifier |
+| Recette de l'étape 9 | Pages relues sur le site construit, après le passage | Après le passage |
+| Revue indépendante du diff complet | §6 (deux revues) | Faite |
+
+## 6. Revue indépendante
+
+**Première revue** (agent sans contexte de la rédaction, diff complet de la pull request à la tête 58c551c, sources relues par WebFetch et Légifrance, empreintes et plages recalculées à part : identiques) : **« à corriger », un bloquant, six importants**. Vérifié sans constat : lignes de l'encadré reprises de la base, aucun verdict inventé, aucun prix, lien vers la page mère seulement, requête principale dans le title ou le H1, pages Peugeot 13 et 17, Seat 227 et 302, Renault 125 et 137-138, arrêté (2.6.1, article 7), tranches des deux premières pièces.
+
+**Ce que la revue a changé** :
+- **bloquant** : la partie contrôle technique de la page direction ne rappelait que la consigne de l'orange ; elle rappelle maintenant les deux lignes de l'encadré (orange, et rouge ou avec STOP) ;
+- consigne Seat du voyant qui clignote complétée (colonne coincée : tourner le volant à l'arrêt ; colonne qui ne se verrouille pas : retirer la clé et remettre le contact), relue sur le PDF ; « aucune autre manipulation » corrigé ; cas Seat de « Comment éteindre » cité avec sa page, et renvoi à l'encadré pour une autre voiture ;
+- page Toyota du passage sur la batterie faible : p. 297 (relu à l'écran dans la visionneuse Toyota), corrigé dans les deux pages, le relevé et le paquet ;
+- voyant de batterie qui clignote : Toyota p. 292, relu à l'écran (consignes valables pour un voyant qui « s'allume ou clignote » ; voyant qui s'éteint aussitôt : pas forcément un dysfonctionnement, à faire vérifier si cela se reproduit) ; allumage par intermittence traité ;
+- consigne Peugeot p. 13 sur l'immobilisation quand le frein de stationnement électrique ne fonctionne plus, ajoutée ;
+- « suffit » retiré ; base de calcul de la page direction réécrite ; cause « batterie rebranchée » classée « geste » avec une pièce nouvelle (§3) ;
+- mineurs : « voyant d'alternateur » et distance traités, « Panne électrique DANGER » (Renault), citation Dacia du STOP, « témoin du circuit de charge », consigne Peugeot attribuée à sa notice, phrase du triangle déplacée, paire de liens batterie ↔ direction proposée (§3 bis).
+
+**Écarté, et pourquoi** : idée d'une notice Volkswagen (Polo, Golf) pour « voyant volant orange volkswagen » : hors de ce lot, proposée en idée reportée (journal).
+
+**Seconde revue** (corrections de 58c551c à ca53a7b, dernière revue de ce livrable) : **« à corriger », un bloquant, deux importants**. Vérifié : Seat p. 227 (six phrases fidèles), Toyota p. 297 et 298, Peugeot p. 13, messages « Panne électrique » ; pièce de la première cause en « geste » ; paire de liens (50 paires, déclarée une fois, `docs/09` et briefs à jour) ; run 43612801403 sans autre erreur que les attendues. **Changé** : (bloquant) voyant de batterie qui clignote : pour une autre voiture, un voyant qui clignote ou se rallume moteur tournant relève de l'arrêt de l'encadré, l'avis d'un professionnel ne vaut que pour un voyant allumé puis éteint aussitôt ; « Comment éteindre » : réinitialisation de l'angle du volant de la notice Dacia (p. 115-116, relue à l'écran) et précaution Renault (p. 144) ; « Ne roulez jamais avec une batterie faiblement chargée » (Renault p. 143, Dacia p. 115), sur les deux pages ; pièce renommée (« réinitialisation demandée par la notice ») ; mineurs : Toyota p. 297 au paquet, consigne de l'encadré en deux phrases, « à défaut, la consigne de l'encadré » pour la colonne coincée. **Non relancé** : pas de troisième revue (deux au maximum) ; les ajouts viennent de pages relues à l'écran par Claude (Dacia p. 115-116, Renault p. 143-144).
+
+**Reste à vérifier** : pictogrammes (lecture texte seulement) ; Lighthouse des deux pages après le passage.
+
+## 7. Suite, après ta validation
+
+1. Les deux brouillons passent dans `exemples/` avec leur empreinte, et leur question sort de `consignes.json` ; briefs régénérés (`node scripts/briefs.ts`).
+2. Passage des deux pages dans `src/content` (règle de passage faite à la main : mêmes vérifications, refaites par la CI) ; adresses ajoutées à la liste Lighthouse. Ce commit de passage est celui que vise ton go.
+3. CI verte sur ce commit ; fusion par commit de fusion, puis vérification de la mise en ligne.
+
+## 8. Validation de Houssem
+
+Le 14/11/2026 à 18 h 23, par la validation groupée (questions posées dans la session, paquets des lots 5a et 5b joints) : « Je valide + go » pour les lignes de validation proposées (§1 voyant batterie, §2 voyant de direction assistée, §3 pièces « cosses de batterie » et « réinitialisation demandée par la notice » en tranche geste et « courroie d'alternateur » en tranche réparation, §3 bis lien voyant batterie ↔ voyant de direction assistée), avec le go de fusion du commit de passage (pages déplacées vers `src/content`, rien d'autre) après le lot 5a, si sa CI est verte. Empreintes versées : voyant batterie `aa612e91…`, voyant de direction assistée `db122d19…`.

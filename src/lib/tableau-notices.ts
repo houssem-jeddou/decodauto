@@ -10,13 +10,16 @@
 // courte (400 caractères au plus, contrôlé dans la base), entre guillemets, avec sa notice et sa page (charte §2.6 ;
 // code de la propriété intellectuelle, art. L122-5, 3° a : nom de l'auteur et source indiqués clairement).
 // Le tableau d'un voyant n'est affiché que sur sa page de rattachement (champ `page` de la base) : une autre page qui
-// reprend sa ligne (code défaut, panne) ne le recopie pas (une intention de recherche, une page).
+// reprend sa ligne (code défaut, panne) ne le recopie pas (une intention de recherche, une page). Seule exception, la page
+// outil (demande de changement n° 23) : une ligne qui lui est rattachée (le voyant STOP) est affichée par l'outil,
+// avec les pages citées sous la ligne ; la page outil n'a pas de tableau des notices.
 // Module sans dépendance à l'exécution : testé sans installation (tests/tableau-notices.test.ts).
 // ---------------------------------------------------------------------------------------------
 import { INSECABLE, attributHtml, texteHtml } from './html.ts';
 import { IDENTIFIANTS, ancreNotices, graviteDuVerdict, iconeGravite, nomCourtSource, type SourceDuRegistre } from './composants.ts';
 import { NOTICE_FAIT_FOI } from './charte.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
+import { ID_OUTIL_VOYANTS } from './plan.ts';
 import type { Urgence, Verdict } from '../schemas/listes.ts';
 
 /** Ce que le tableau lit d'une ligne de situation résolue (calcul.ts, LigneResolue). */
@@ -53,7 +56,8 @@ export interface TableauVoyant {
  * Modèle du tableau de la page `pageId` : une partie par ligne reprise de la base dont le voyant est rattaché à cette
  * page (dans l'ordre de l'encadré), une rangée par citation d'une notice de constructeur avec un niveau, triées par nom
  * de notice (ordre de la base pour les citations d'une même notice). Les lignes saisies ne sont pas reprises : elles
- * n'ont pas les notices de plusieurs marques (charte §2.1).
+ * n'ont pas les notices de plusieurs marques (charte §2.1). Page outil : aucun tableau, même pour une ligne qui lui est
+ * rattachée, car l'outil cite les pages des notices sous chaque ligne (demande de changement n° 23).
  */
 export function modeleTableauNotices(
   lignes: readonly LigneAvecCitations[],
@@ -61,6 +65,7 @@ export function modeleTableauNotices(
   registre: ReadonlyMap<string, Pick<SourceDuRegistre, 'titre' | 'categorie' | 'url'>>,
   pageId: string,
 ): TableauVoyant[] {
+  if (pageId === ID_OUTIL_VOYANTS) return [];
   return lignes.flatMap((ligne) => {
     if (ligne.voyant === undefined || voyants.get(ligne.voyant)?.page !== pageId) return [];
     const rangees = ligne.citations.flatMap((c): RangeeNotice[] => {
