@@ -57,6 +57,11 @@ const html = documentHtml({ titre: page.title, description: page.description, ad
 const contexteOutil = { ...contexte, pagesEcrites: libelles };
 const codes = (constats: readonly { regle: string }[]): string[] => [...new Set(constats.map((c) => c.regle))].sort();
 const controler = (h: string): string[] => codes(controlerOutilVoyants(h, 'x', modele));
+/** Libellé d'un choix du filtre tel que le rend l'outil, nombre de lignes compris : tiré du modèle, jamais écrit en dur. */
+const libelleDuFiltre = (couleur: string): string => {
+  const groupe = modele.groupes.find((g) => g.couleur === couleur);
+  return `>${groupe?.libelleFiltre ?? ''} (${groupe?.lignes.length ?? 0})<`;
+};
 
 describe('outil voyants : modèle généré depuis la base', () => {
   test('chaque ligne de la base figure une fois, dans le groupe de sa couleur', () => {
@@ -120,7 +125,10 @@ describe('outil voyants : modèle généré depuis la base', () => {
     for (const absent of [/\btriangle\b/i, /courroie de distribution/i, /clignot.*pr[ée]chauffage|pr[ée]chauffage.*clignot/i]) {
       assert.equal(base.filter((v) => absent.test(`${v.nom} ${v.situation}`)).length, 0, String(absent));
     }
-    assert.equal(base.filter((v) => /^[^,]*\bSTOP\b/.test(v.nom) && !/moteur|direction/i.test(v.nom)).length, 0);
+    // Le voyant STOP a sa ligne, rouge, rattachée à la page outil (demande de changement n° 23) ; le texte y mène.
+    assert.equal(site.voyants.get('stop')?.couleur, 'rouge');
+    assert.equal(site.voyants.get('stop')?.page, page.id);
+    assert.match(corps, /\[voyant STOP\]\(#da-voyant-stop\)/);
   });
 
   test('l’index des dessins : une entrée par ligne, dans l’ordre de la liste, avec son dessin et un lien vers sa ligne, sans verdict', () => {
@@ -147,6 +155,25 @@ describe('outil voyants : modèle généré depuis la base', () => {
     assert.equal(lignes.find((l) => l.voyant === 'temperature-rouge')?.page, undefined);
     assert.deepEqual(lignes.find((l) => l.voyant === 'moteur-rouge')?.page, { adresse: '/voyants/moteur/', libelle: 'Voyant moteur' });
     assert.equal(lignes.find((l) => l.voyant === 'huile-niveau')?.page, undefined);
+  });
+
+  test('seules les lignes admises par la demande de changement n° 23 sont rattachées à la page outil', () => {
+    // En rattacher une autre à l'outil la dispense de sa page, de son tableau des notices et de son encadré : cela passe
+    // par une demande de changement, qui met cette liste à jour.
+    const ADMISES_SUR_L_OUTIL = ['stop'];
+    for (const v of base.filter((l) => l.page === page.id)) assert.ok(ADMISES_SUR_L_OUTIL.includes(v.id), `${v.id} rattachée à la page outil sans demande de changement`);
+  });
+
+  test('une ligne rattachée à la page outil ne mène pas à l’outil lui-même (demande de changement n° 23)', () => {
+    const rattachee = { ...base[0], id: 'essai-outil', page: page.id } as (typeof base)[number];
+    const autre = modeleOutilVoyants({ voyants: [...base, rattachee], sources: site.sources, plan: site.plan, libelles });
+    const ligne = autre.groupes.flatMap((g) => g.lignes).find((l) => l.voyant === 'essai-outil');
+    assert.ok(ligne !== undefined);
+    assert.equal(ligne.page, undefined);
+    // Sans l'exception, la ligne mènerait à l'outil : la page outil est construite et a son adresse au plan.
+    assert.ok(libelles.has(page.id));
+    assert.equal(site.plan.get(page.id)?.adresse, '/voyants/');
+    assert.doesNotMatch(outilVoyants(autre, site.pictogrammes), /href="\/voyants\/"/);
   });
 
   test('chaque couleur de la liste fermée a son ordre et sa règle de filtre sans JavaScript (site.css)', () => {
@@ -288,7 +315,7 @@ describe('outil voyants : ce que les contrôles refusent (vérifié sur la vraie
       return t.replace(ecart, '').replace('</summary>', `</summary>${ecart}`);
     }), 'OUTIL-LIBELLES'],
     ['phrase du renvoi changée', (h) => h.replace(/(data-encadre-renvoi>)[^<]*/, '$1Ces lignes suffisent à décider. '), 'OUTIL-LIEN'],
-    ['libellés du filtre inversés', (h) => h.replace('>Orange ou jaune (16)<', '>@@<').replace('>Rouge (9)<', '>Orange ou jaune (16)<').replace('>@@<', '>Rouge (9)<'), 'OUTIL-FILTRE'],
+    ['libellés du filtre inversés', (h) => h.replace(libelleDuFiltre('orange'), '>@@<').replace(libelleDuFiltre('rouge'), libelleDuFiltre('orange')).replace('>@@<', libelleDuFiltre('rouge')), 'OUTIL-FILTRE'],
     ['identifiant du filtre changé', (h) => h.replace(`id="${idFiltre('rouge')}"`, 'id="autre"').replace(`for="${idFiltre('rouge')}"`, 'for="autre"'), 'OUTIL-FILTRE'],
     ['bouton désactivé', (h) => h.replace('value="rouge">', 'value="rouge" disabled>'), 'OUTIL-FILTRE'],
     ['liste masquée dans un groupe', (h) => h.replace('<ul class="outil-lignes"', '<ul hidden class="outil-lignes"'), 'OUTIL-SANS-JS'],

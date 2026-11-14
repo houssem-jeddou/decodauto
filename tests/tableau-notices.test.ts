@@ -17,6 +17,7 @@ import { texteHtml } from '../src/lib/html.ts';
 import { rangUrgence, rangVerdict } from '../src/schemas/listes.ts';
 import { schemasPage } from '../src/schemas/pages.ts';
 import { construireDemo } from '../scripts/lib/demo.ts';
+import { ID_OUTIL_VOYANTS } from '../src/lib/plan.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 // Données réelles : la date du contrôle est la plus récente des données (tests/date-des-donnees.ts, DATES-FUTUR).
@@ -65,6 +66,14 @@ describe('tableau des notices : modèle tiré de la base', () => {
     assert.deepEqual(modeleTableauNotices([moteur], VOYANTS, REGISTRE, 'voyant-huile'), []);
   });
 
+  test('page outil : aucun tableau, même pour une ligne qui lui est rattachée (demande de changement n° 23)', () => {
+    const voyants = new Map([...VOYANTS, ['stop', { nom: 'Voyant STOP rouge', page: ID_OUTIL_VOYANTS }]]);
+    const stop: LigneAvecCitations = { ...LIGNE_HUILE, voyant: 'stop' };
+    assert.deepEqual(modeleTableauNotices([stop, LIGNE_HUILE], voyants, REGISTRE, ID_OUTIL_VOYANTS), []);
+    // Ailleurs, la règle ne change pas : seule la ligne rattachée à la page a sa partie.
+    assert.deepEqual(modeleTableauNotices([stop, LIGNE_HUILE], voyants, REGISTRE, 'voyant-huile').map((t) => t.voyant), ['huile']);
+  });
+
   test('une rangée par consigne citée d’une notice (pas les autres sources), triée par notice ; chacune garde son niveau', () => {
     const [partie] = modeleTableauNotices([LIGNE_HUILE], VOYANTS, REGISTRE, 'voyant-huile');
     assert.ok(partie !== undefined);
@@ -97,7 +106,13 @@ describe('tableau des notices : modèle tiré de la base', () => {
     let parties = 0;
     for (const voyant of base) {
       const ligne = { ...voyant, voyant: voyant.id };
-      const [partie] = modeleTableauNotices([ligne], demo.contexte.voyants, demo.contexte.sources, voyant.page);
+      // Ligne rattachée à la page outil (demande de changement n° 23) : pas de tableau sur l'outil ; ses consignes se
+      // vérifient comme si elle était rattachée à une autre page.
+      const surOutil = voyant.page === ID_OUTIL_VOYANTS;
+      if (surOutil) assert.deepEqual(modeleTableauNotices([ligne], demo.contexte.voyants, demo.contexte.sources, voyant.page), [], voyant.id);
+      const pageVerifiee = surOutil ? 'page-de-verification' : voyant.page;
+      const voyants = surOutil ? new Map([...demo.contexte.voyants, [voyant.id, { ...voyant, page: pageVerifiee }]]) : demo.contexte.voyants;
+      const [partie] = modeleTableauNotices([ligne], voyants, demo.contexte.sources, pageVerifiee);
       assert.ok(partie !== undefined, voyant.id);
       parties += 1;
       // Au moins trois notices (règle 10 de 03) ; aucune consigne plus prudente que la ligne (R3) ; une rangée par

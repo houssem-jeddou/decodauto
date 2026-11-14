@@ -80,8 +80,20 @@ describe('brouillon de la base voyants (étape 5)', async () => {
     if ((await lireBrouillon()) !== undefined) return;
     const { constats } = construireContexte(donnees, AUJOURDHUI);
     assert.deepEqual(constats.filter((c) => c.gravite === 'erreur'), []);
-    const trace = JSON.parse(await readFile(join(racine, 'travaux/etape-5/validation.json'), 'utf8')) as { lignes: number; empreinte: string };
-    assert.equal(trace.lignes, z.array(voyantBaseSchema).parse(donnees.voyants).length);
+    const trace = JSON.parse(await readFile(join(racine, 'travaux/etape-5/validation.json'), 'utf8')) as {
+      lignes: number;
+      empreinte: string;
+      ajouts?: { id: string; demande: number; valide_par_houssem: string }[];
+    };
+    // Base validée à l'étape 5, plus les lignes ajoutées ensuite par une demande de changement acceptée (chacune notée
+    // dans la trace, avec sa propre empreinte vérifiée par R4).
+    const base = z.array(voyantBaseSchema).parse(donnees.voyants);
+    const ajouts = trace.ajouts ?? [];
+    assert.equal(trace.lignes + ajouts.length, base.length);
+    for (const a of ajouts) {
+      assert.ok(base.some((l) => l.id === a.id), `ligne ajoutée « ${a.id} » absente de la base`);
+      assert.ok(Number.isInteger(a.demande) && /^\d{4}-\d{2}-\d{2}$/.test(a.valide_par_houssem), `ajout « ${a.id} » : demande et date de validation`);
+    }
     assert.match(trace.empreinte, /^[0-9a-f]{64}$/);
   });
 
