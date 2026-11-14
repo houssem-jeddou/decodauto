@@ -44,7 +44,7 @@ Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyan
 
 **Coût probable (calculé)** : de « Geste à faire vous-même » à « Grosse réparation » ; base de calcul : « … de la réinitialisation que demandent les notices Seat Ibiza et Dacia Sandero 3 après une intervention sur la batterie, à la réparation de la direction assistée. » Verdict d'arrêt : le dépannage sur autoroute s'affiche de lui-même.
 
-**Causes** : batterie débranchée puis rebranchée, ou dépannée → réinitialisation demandée par la notice (geste, **pièce nouvelle**, §3 ; Seat p. 227 : bref parcours ; Dacia p. 113 et 115-116 : réinitialisation de l'angle du volant) ; charge de la batterie insuffisante → recharge ou batterie à remplacer (entretien ; Toyota p. 298) ; direction assistée défaillante → direction assistée (grosse réparation). **Choix à valider** : aucune notice ne nomme la pièce de la troisième cause ; la tranche retenue est la plus lourde plausible (règle du coût : « en cas de doute, la tranche la plus lourde plausible »).
+**Causes** : batterie débranchée puis rebranchée, ou dépannée → réinitialisation demandée par la notice (geste, **pièce nouvelle**, §3 ; Seat p. 227 : bref parcours ; Dacia p. 113 et 115-116 : réinitialisation de l'angle du volant) ; charge de la batterie insuffisante → recharge ou batterie à remplacer (entretien ; Toyota p. 297) ; direction assistée défaillante → direction assistée (grosse réparation). **Choix à valider** : aucune notice ne nomme la pièce de la troisième cause ; la tranche retenue est la plus lourde plausible (règle du coût : « en cas de doute, la tranche la plus lourde plausible »).
 
 **Empreinte de l'encadré** : `db122d1908fb8d599aba7084d22c1a7af5b318b2531ec76b60d372404f31b8e6` (après les deux revues : base de calcul et pièce de la première cause).
 
@@ -65,7 +65,6 @@ Les deux pages sont nouvelles. Leurs lignes d'encadré viennent de la base voyan
 `data/couts.json` :
 - **« Nettoyage et serrage des cosses de batterie »** (`cosses-de-batterie`), tranche « Geste à faire vous-même » : la notice Peugeot 208 demande au conducteur de nettoyer et de resserrer les cosses (p. 13) ; c'est la consigne qui fonde la tranche « geste » (« la notice demande une action au conducteur »).
 - **« Courroie d'alternateur »** (`courroie-d-alternateur`), tranche « Réparation au garage » : cause citée par la notice Peugeot 208 (p. 13), sans consigne propre ; autre choix possible, « Entretien » (pièce d'usure) ; la plage de la page ne change pas (l'alternateur est déjà en réparation).
-
 - **« Réinitialisation demandée par la notice (bref parcours ou braquage du volant) »** (`reinitialisation-demandee-par-la-notice`), tranche « Geste à faire vous-même » : après une intervention sur la batterie, la notice Seat Ibiza demande un bref parcours à 15-20 km/h (p. 227), la notice Dacia Sandero 3 une réinitialisation de l'angle du volant (p. 115-116) ; ce sont des actions du conducteur, comme la régénération du filtre à particules en roulant, déjà classée « geste ». Ajoutée après les revues (au lieu de « fonctionnement normal »).
 
 Aucun montant en euros.
