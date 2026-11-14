@@ -1,6 +1,6 @@
 ---
-# Brouillon de la page « code P0420 » de la vague A (étape 8, lot 4), rédigé le 14/11/2026, à valider par Houssem.
-# Hors de exemples/ et de src/content tant qu'il n'est pas validé. Modèle : page code P0087 (livrable 6.6b).
+# Page « code P0420 » de la vague A (étape 8, lot 4a), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 4a (règle de passage, travaux/etape-8/regle-de-passage.md).
 # La ligne de l'encadré vient de la base voyants validée (voyant moteur orange fixe, cité avec le code par les bulletins).
 id: code-p0420
 title: "Code P0420 : rendement du catalyseur trop bas, peut-on rouler ?"
@@ -70,6 +70,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (22 h 45),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-4a.md).
+validation: 05c43a35a48eef3a1ecb99304d705d940d8dd403dc2341c93b9fdb9515974cff
 causes:
   - cause: Fuite à l'admission ou à l'échappement
     explication: "Pour les voitures du groupe Volkswagen, Ross-Tech cite une fuite à l'admission ou à l'échappement, et demande de vérifier l'étanchéité des deux."

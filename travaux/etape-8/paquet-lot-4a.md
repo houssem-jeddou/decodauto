@@ -100,4 +100,4 @@ Brouillons versés avec leur empreinte et la date du jour, passés dans `src/con
 
 ## 6. Validation de Houssem
 
-À compléter.
+**14/11/2026, 22 h 45** (réponse groupée) : « Je valide les deux + go ». Valent les deux lignes de validation proposées aux §1 et §2 (pages code P0420, empreinte 05c43a35… ; code P0299, empreinte f39168dd… ; pièces « tuyau ou joint d'échappement » et « commande du turbo » ; 13 sources au registre), et le go pour la fusion et la mise en ligne dès que la CI repart (budget GitHub à fixer par Houssem, décision du 14/11).

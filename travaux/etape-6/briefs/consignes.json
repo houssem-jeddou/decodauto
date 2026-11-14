@@ -243,7 +243,6 @@
     ]
   },
   "code-p0420": {
-    "question_decision": "Puis-je continuer à rouler avec le code P0420 ?",
     "angle": "Code générique du catalyseur (rendement sous le seuil). Signification, causes et cas par marque tirés de sources techniques admises (charte §2.2), comme l'exemple P0087 ; le verdict vient de la ligne du voyant qui s'allume avec le code.",
     "element_unique": "Tableau des cas décrits par marque (modèle 6.6b).",
     "a_traiter": [
@@ -262,7 +261,6 @@
     ]
   },
   "code-p0299": {
-    "question_decision": "Puis-je continuer à rouler avec le code P0299 ?",
     "angle": "Pression de suralimentation (turbo) trop faible ; les lecteurs cherchent les symptômes et la marque. Le reste vient de sources admises (charte §2.2) ; le verdict, de la ligne du voyant qui s'allume avec le code.",
     "element_unique": "Tableau des cas décrits par marque (modèle 6.6b).",
     "a_traiter": [

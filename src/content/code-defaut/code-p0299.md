@@ -1,6 +1,6 @@
 ---
-# Brouillon de la page « code P0299 » de la vague A (étape 8, lot 4), rédigé le 14/11/2026, à valider par Houssem.
-# Hors de exemples/ et de src/content tant qu'il n'est pas validé. Modèle : page code P0087 (livrable 6.6b).
+# Page « code P0299 » de la vague A (étape 8, lot 4a), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 4a (règle de passage, travaux/etape-8/regle-de-passage.md).
 # La ligne de l'encadré vient de la base voyants validée (voyant moteur orange fixe, cité avec le code par les bulletins).
 id: code-p0299
 title: "Code P0299 : pression de turbo trop faible, peut-on rouler ?"
@@ -67,6 +67,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (22 h 45),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-4a.md).
+validation: f39168dd6c04ffe2fbc9b5879d37d81d672a963f7bc0b9d946e578833fe5216d
 causes:
   - cause: Fuite sur le circuit d'air de suralimentation
     explication: "Pour les Volkswagen 2.0 TDI qu'il nomme, vendues aux États-Unis, le bulletin de Volkswagen cite un tuyau de suralimentation en plastique fissuré, entre le turbo et l'échangeur d'air, et un raccord de durite qui fuit à l'échangeur."
