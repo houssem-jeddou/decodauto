@@ -77,7 +77,37 @@ Les sections suivantes reprennent les notes prises pendant la lecture à l'écra
 ## Vérifications de la revue indépendante (14/11 au soir)
 - Renault p. 166 : le relecteur confirme, par une extraction indépendante du PDF du registre, l'ordre « - », « s'allume », « s'allume », « clignote » pour les quatre messages (demande n° 24).
 - Peugeot p. 14, 15, 16, 21, 22, 170, 171 ; Renault p. 139, 163, 164, 166, 167 ; Seat p. 286, 287, 289 : relus par le relecteur sur les PDF, conformes aux brouillons. Dacia p. 135-136 : non vérifiables par le relecteur (erreur du serveur), relues à l'écran par Claude seulement.
-- Pictogrammes perdus à l'extraction : le témoin associé à l'AdBlue chez Seat (p. 286) reste à identifier sur le PDF (demande n° 25 à préparer) ; chez Renault et Dacia (p. 167 et 139), Claude l'a relevé à l'écran comme le témoin Service (clé).
+- Pictogrammes perdus à l'extraction : le témoin associé à l'AdBlue chez Seat (p. 286) restait à identifier sur le PDF (fait pour la demande n° 25, voir plus bas) ; chez Renault et Dacia (p. 167 et 139), Claude l'a relevé à l'écran comme le témoin Service (clé).
+
+## Demande n° 25 (14/11 au soir) : témoin associé chez Seat, notice Citroën C3
+
+- **Seat Ibiza p. 286 (PDF 288)**, lu à l'écran par Claude le 14/11 vers 21 h 15 (Chrome, PDF du registre, zoom sur le
+  tableau « Témoins d'alerte et de contrôle », partie AdBlue) : les deux lignes à deux symboles, « Il s'allume en
+  jaune. Un dysfonctionnement a été détecté dans le circuit d'AdBlue… » et « Il s'allume en rouge. Il est impossible de
+  redémarrer le moteur ! Dysfonctionnement du circuit d'Adblue… », montrent le symbole AdBlue suivi du symbole de la
+  **clé** (entretien), et non le voyant moteur. Le texte extrait du PDF n'a que des blancs à la place des symboles : la
+  lecture n'est pas vérifiable par une extraction ; à revoir par Houssem sur le PDF (page 288 du fichier) avec la
+  validation de la demande. La clé est aussi le symbole de l'indicateur d'entretien de la Seat Ibiza (base,
+  `entretien-vidange`).
+- **Citroën C3, guide d'utilisation édition 01-20** (`notice-citroen-c3`), lu le 14/11 vers 23 h par WebFetch (texte du
+  PDF du registre ; même lecture par le relecteur de la demande, indépendamment) ; à confirmer à l'écran :
+  - p. 12, témoin AdBlue, moteur 1.5 BlueHDi (Euro 6.2/6.3) : mêmes seuils et consignes que la Peugeot 208 p. 15
+    (allumé environ 30 secondes entre 2 400 et 800 km ; fixe entre 800 et 100 km, appoint rapide ou (3) ; clignotant
+    sous 100 km, appoint impératif ou (3) ; clignotant, démarrage interdit : appoint ou (2)) ;
+  - p. 12, moteur 1.6 BlueHDi (Euro 6.1) : fixe dès la mise du contact entre 2 400 et 600 km (« Faire rapidement un
+    appoint en AdBlue®, ou effectuer (3) ») ; **clignotant avec le témoin Service fixe sous 600 km** (« Faire
+    impérativement un appoint en AdBlue® » pour éviter la panne, ou (3)) ; clignotant avec Service fixe et démarrage
+    interdit (réservoir vide) : appoint (au moins 5 litres) ou (2) ;
+  - p. 13, système d'antipollution SCR : témoin AdBlue clignotant dès la mise du contact avec les témoins Service et
+    Autodiagnostic moteur fixes : jusqu'à 1 100 km possibles, « Effectuer (3) au plus tôt pour éviter le blocage du
+    démarrage » ; au-delà, démarrage interdit, (2) ;
+  - p. 13, témoin Service : distinct du témoin de clé d'entretien (« Service fixe et témoin de clé d'entretien
+    clignotant puis fixe » : révision dépassée, moteurs BlueHDi) ;
+  - p. 9 : (1) arrêt impératif ; (2) faire appel au réseau Citroën ou à un atelier qualifié ; (3) se rendre dans le
+    réseau Citroën ou dans un atelier qualifié.
+  - Conséquence pour la demande : le voyant Service n'est pas, à lui seul, le signe d'un défaut (C3 1.6 : réserve
+    basse) ; la ligne `adblue-defaut` se définit par le message de défaut, et la page le dit. La C3 n'est pas ajoutée
+    aux citations de la base (extraits mot pour mot à relever à l'écran) : elle est citée dans le texte de la page.
 
 ## Pour la page voyant frein (D4), hors de ce lot
 - Contrôle technique (pour la page frein, D4) : annexe I, 1.1.13.d.1 « Faisceau électrique du témoin d'usure déconnecté ou détérioré » : mineure ; 1.1.13.a.2 usure excessive : majeure.
