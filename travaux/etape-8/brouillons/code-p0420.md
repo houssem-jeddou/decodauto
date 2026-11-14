@@ -75,7 +75,7 @@ causes:
     explication: "Pour les voitures du groupe Volkswagen, Ross-Tech cite une fuite à l'admission ou à l'échappement, et demande de vérifier l'étanchéité des deux."
     pieces:
       - durites-et-colliers
-      - ligne-d-echappement
+      - tuyau-ou-joint-d-echappement
   - cause: Sonde lambda défaillante, ou défaut de sa commande
     explication: "Ross-Tech cite une sonde à oxygène (sonde lambda) défaillante ou un défaut de sa commande, et demande un test de vieillissement des sondes. Selon Hella, la sonde placée après le catalyseur sert à mesurer sa capacité à stocker l'oxygène."
     pieces:
@@ -93,9 +93,9 @@ causes:
 
 ## Peut-on rouler avec le code P0420 ?
 
-Le code P0420 se lit avec un appareil de diagnostic. Dans les bulletins de Toyota, Kia, Audi et Ford cités plus bas, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
+Le code P0420 se lit avec un appareil de diagnostic. Dans les bulletins de Toyota, Kia, Audi et Ford du tableau des cas par marque, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
 
-Si le voyant moteur clignote, la consigne n'est pas la même : voyez la page du [voyant moteur](/voyants/moteur/).
+Si le voyant moteur clignote, l'action à suivre n'est pas tout à fait la même : voyez la page du [voyant moteur](/voyants/moteur/).
 
 Si le code est lu sans que le voyant moteur soit allumé, aucune des notices lues ne donne de consigne : demandez l'avis d'un professionnel.
 
@@ -103,9 +103,9 @@ Si le code est lu sans que le voyant moteur soit allumé, aucune des notices lue
 
 Ce code défaut (DTC, de l'anglais Diagnostic Trouble Code) signale que le rendement du catalyseur de la ligne 1 est passé sous le seuil que surveille le calculateur du moteur. L'intitulé anglais des bulletins est « Catalyst System Efficiency Below Threshold (Bank 1) ».
 
-Le catalyseur stocke l'oxygène des gaz d'échappement pour les dépolluer. Selon Hella, depuis l'EOBD (le diagnostic embarqué européen), une seconde sonde lambda, placée après le catalyseur, mesure cette capacité de stockage : plus elle baisse, plus le signal de cette sonde varie. Quand les signaux des deux sondes, avant et après le catalyseur, sont à peu près les mêmes, le catalyseur ne stocke plus assez, par exemple à cause de son vieillissement ({{cite:hella-sonde-lambda|« Lambda sensor function »}}).
+Selon Hella, depuis l'EOBD (le diagnostic embarqué européen), le fonctionnement du catalyseur doit aussi être surveillé : une seconde sonde lambda, placée après lui, mesure sa capacité à stocker l'oxygène ; plus cette capacité baisse, plus le signal de cette sonde varie. Quand les signaux des deux sondes, avant et après le catalyseur, sont à peu près les mêmes, le catalyseur ne stocke plus assez, par exemple à cause de son vieillissement ({{cite:hella-sonde-lambda|« Lambda sensor function »}}).
 
-Le code P0430 désigne le même défaut sur la ligne 2 (« Bank 2 »), sur les moteurs qui ont deux rangées de cylindres, comme les moteurs en V des bulletins d'Audi, de Volkswagen et de Ford. Les documents cités décrivent tous des moteurs essence ; ils ne disent pas si le code existe sur un diesel.
+Le code P0430 désigne le même défaut sur la ligne 2 (« Bank 2 ») : les bulletins d'Audi, de Volkswagen et de Ford le citent avec le code P0420, et celui de Ford nomme un catalyseur gauche et un catalyseur droit. Les documents cités décrivent tous des moteurs essence ; ils ne disent pas si le code existe sur un diesel.
 
 ## Symptômes du code P0420
 
@@ -118,12 +118,12 @@ Les documents cités décrivent :
 
 1. Si le voyant moteur est allumé, suivez d'abord la consigne de l'encadré, en haut de page.
 2. Au garage, le diagnostic passe par les points de contrôle des causes ci-dessus : étanchéité de l'admission et de l'échappement, catalyseur, sondes lambda et leur commande, avec un test de vieillissement des sondes (Ross-Tech pour le groupe Volkswagen, {{cite:ross-tech-p0420|rubrique « Possible Solutions »}}).
-3. Le code seul ne désigne pas la pièce à changer. Plusieurs constructeurs ont corrigé le logiciel du calculateur, seul ou avec le catalyseur (bulletins d'Audi, de Kia et de Volkswagen, voitures vendues aux États-Unis), et Ross-Tech demande de chercher une mise à jour du calculateur dans la documentation du constructeur ({{cite:ross-tech-p0420|rubrique « Special Notes »}}). Demandez au réseau de votre marque si une mise à jour ou une campagne existe pour votre voiture.
-4. Après l'intervention, les bulletins de Toyota et d'Audi prévoient un essai sur route pour vérifier que le défaut ne revient pas.
+3. Le code seul ne désigne pas la pièce à changer. Plusieurs constructeurs ont corrigé le logiciel du calculateur, seul ou avec le catalyseur (bulletins d'Audi, de Kia et de Volkswagen, voitures vendues aux États-Unis), et Ross-Tech demande de chercher une mise à jour du calculateur dans la documentation du constructeur ({{cite:ross-tech-p0420|rubrique « Special Notes »}}). Demandez au réseau de votre marque si une mise à jour existe pour votre voiture.
+4. Après l'intervention, le bulletin de Toyota fait un essai sur route pour confirmer la réparation.
 
-## Ce qu'un catalyseur défectueux peut entraîner
+## Catalyseur défectueux : conséquences, et ce qui peut l'endommager
 
-Les notices lues parlent du catalyseur à propos du voyant moteur qui clignote : selon la notice Peugeot 208, ce clignotement signale un risque de destruction du catalyseur ({{cite:notice-peugeot-208|p. 15}}) ; selon la notice Seat Ibiza, un défaut de combustion peut l'endommager ({{cite:notice-seat-ibiza|p. 288}}). La consigne de ce cas est sur la page du [voyant moteur](/voyants/moteur/).
+Les documents lus décrivent comme conséquences le voyant moteur allumé, un bruit de ferraille qui vient du catalyseur (Toyota Tacoma 2010) et, au contrôle technique, une défaillance (partie suivante) ; ils n'en décrivent pas d'autre. Les notices lues parlent du catalyseur à propos du voyant moteur qui clignote : selon la notice Peugeot 208, ce clignotement signale un risque de destruction du catalyseur ({{cite:notice-peugeot-208|p. 15}}) ; selon la notice Seat Ibiza, un défaut de combustion peut l'endommager ({{cite:notice-seat-ibiza|p. 288}}). La consigne de ce cas est sur la page du [voyant moteur](/voyants/moteur/).
 
 ## Code P0420 au contrôle technique
 

@@ -211,7 +211,7 @@
       "tranche": "reparation"
     },
     {
-      "id": "ligne-d-echappement",
+      "id": "tuyau-ou-joint-d-echappement",
       "libelle": "Tuyau ou joint d'échappement",
       "tranche": "reparation"
     },
@@ -227,7 +227,7 @@
     },
     {
       "id": "commande-de-turbo",
-      "libelle": "Commande du turbo (actionneur, électrovanne, soupape)",
+      "libelle": "Commande du turbo (actionneur, électrovanne, tringlerie, vanne de recirculation)",
       "tranche": "reparation"
     },
     {

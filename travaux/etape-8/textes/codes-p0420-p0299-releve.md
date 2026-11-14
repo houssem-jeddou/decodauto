@@ -86,7 +86,15 @@ Hybrid, Ford F-150 PowerBoost) : hors périmètre (docs/02).
   Trailblazer à partir de 2021 (année de fin illisible dans le texte extrait), moteur 1.2 (LIH) ; « MIL illuminated »,
   « Cold Start Rattle Noise from the Engine Compartment », P0299 (« Engine Underboost ») possible ; « Potential
   turbocharger wastegate linkage wear. » ; contrôle de la dépression et de l'électrovanne de la soupape ; turbo
-  remplacé si la tringlerie est usée.
+  remplacé si la tringlerie est usée. Années du Trailblazer : fin illisible dans le texte extrait par Claude ;
+  « 2021–2023 » selon la lecture du relecteur (WebFetch) ; la page garde « à partir de 2021 ».
+- **Hella, section 3 « Symptoms »** (relue le 14/11) : « A failure of the electromechanical turbocharger actuator can
+  occur in the following way: » perte de performances, accélération faible ou insuffisante, voyant moteur allumé,
+  vitesse réduite, mode dégradé (« emergency mode »).
+- **P029900** : bulletin Audi 2039006/2, « DTC P029900 (Turbo/Super Charger Underboost) » (p. 1) ; bulletin Volkswagen
+  2036110 : « P0299 Turbo/Super Charger Underboost ». Même intitulé.
+- **Kia ENG160** : le PDF nomme Kia (« Kia Diagnostic System (KDS) », « any Kia model ») mais pas « Kia Motors America » ;
+  le registre dit « Kia (document publié par la NHTSA, États-Unis) ».
 
 ## Ce qui n'a pas été trouvé (pages : « aucun document lu »)
 

@@ -22,7 +22,7 @@ portee: generique
 carburant: essence et diesel
 precisions_par_marque:
   - marque: Audi
-    precision: "A3, A4 et A4 Cabriolet 2.0 TFSI de 2005 à 2007, vendues aux États-Unis : voyant moteur allumé, code P0299. Le bulletin d'Audi du 12/03/2015 l'explique par une vanne de recirculation du turbo (N249) défaillante : si sa membrane en caoutchouc est déchirée, la vanne est remplacée."
+    precision: "A3, A4 et A4 Cabriolet 2.0 TFSI de 2005 à 2007, vendues aux États-Unis : voyant moteur allumé, code P0299. Selon le bulletin d'Audi du 12/03/2015, il peut venir d'une vanne de recirculation du turbo (N249) défaillante : si sa membrane en caoutchouc est déchirée, la vanne est remplacée."
     sources:
       - bulletin-audi-2013060-p0299
   - marque: Audi
@@ -69,34 +69,33 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 causes:
   - cause: Fuite sur le circuit d'air de suralimentation
-    explication: "Pour les Volkswagen 2.0 TDI qu'il nomme, le bulletin de Volkswagen cite un tuyau de suralimentation en plastique fissuré, entre le turbo et l'échangeur d'air, et un raccord de durite qui fuit à l'échangeur."
+    explication: "Pour les Volkswagen 2.0 TDI qu'il nomme, vendues aux États-Unis, le bulletin de Volkswagen cite un tuyau de suralimentation en plastique fissuré, entre le turbo et l'échangeur d'air, et un raccord de durite qui fuit à l'échangeur."
     pieces:
       - durites-et-colliers
   - cause: Commande du turbo défaillante (dépression, membrane, électrovanne, actionneur)
-    explication: "Le même bulletin cite une durite de dépression pliée, vrillée ou qui fuit, et une membrane à dépression du turbo qui fuit ; celui de General Motors fait vérifier la dépression et l'électrovanne de la soupape de décharge. Selon Hella, la tige de l'actionneur ou les aubes d'un turbo à géométrie variable peuvent se gripper."
+    explication: "Le même bulletin cite une durite de dépression pliée, vrillée ou qui fuit, et une membrane à dépression du turbo qui fuit ; celui de General Motors (moteurs 1.2 LIH vendus en Amérique du Nord) fait vérifier la dépression et l'électrovanne de la soupape de décharge. Selon Hella, la tige de l'actionneur ou les aubes d'un turbo à géométrie variable peuvent se gripper."
     pieces:
       - durites-et-colliers
       - commande-de-turbo
-  - cause: Soupape de décharge ou vanne de recirculation défaillante
-    explication: "Audi cite une vanne de recirculation dont la membrane est déchirée, et une tringlerie de soupape de décharge détachée (2.0 TFSI) ; General Motors, une tringlerie usée, qui fait remplacer le turbo (1.2 LIH) (voitures vendues aux États-Unis ou en Amérique du Nord)."
+  - cause: Vanne de recirculation ou tringlerie de la soupape de décharge défaillante
+    explication: "Pour les 2.0 TFSI qu'il nomme, vendus aux États-Unis, Audi cite une vanne de recirculation dont la membrane est déchirée, et une tringlerie de soupape de décharge détachée : il fait remplacer la vanne, ou raccorder la tringlerie avec un clip neuf, sans changer le turbo."
     pieces:
       - commande-de-turbo
-      - turbo
-  - cause: Turbo endommagé (arbre de turbine cassé ou grippé)
-    explication: "Pour les Passat 2.0 TDI de 2012 à 2014 vendues aux États-Unis, Volkswagen fait remplacer le turbo et rincer tout le circuit d'huile du moteur, pour éviter que la panne ne revienne."
+  - cause: Turbo endommagé (arbre de turbine cassé ou grippé, tringlerie de la soupape de décharge usée)
+    explication: "Pour les Passat 2.0 TDI de 2012 à 2014 vendues aux États-Unis, Volkswagen fait remplacer le turbo et rincer tout le circuit d'huile du moteur, pour éviter que la panne ne revienne ; pour les moteurs 1.2 LIH vendus en Amérique du Nord, General Motors fait remplacer le turbo quand la tringlerie de sa soupape de décharge est usée."
     pieces:
       - turbo
   - cause: Logiciel du calculateur
-    explication: "Pour les Volkswagen 2.0 TDI qu'il nomme, le bulletin de Volkswagen demande de vérifier le niveau du logiciel du calculateur."
+    explication: "Pour les Volkswagen 2.0 TDI qu'il nomme, vendues aux États-Unis, le bulletin de Volkswagen demande de vérifier le niveau du logiciel du calculateur."
     pieces:
       - calculateur
 ---
 
 ## Peut-on rouler avec le code P0299 ?
 
-Le code P0299 se lit avec un appareil de diagnostic. Dans les bulletins d'Audi, de Volkswagen et de General Motors cités plus bas, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
+Le code P0299 se lit avec un appareil de diagnostic. Dans les bulletins d'Audi, de Volkswagen et de General Motors du tableau des cas par marque, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
 
-Si le voyant moteur clignote, la consigne n'est pas la même : voyez la page du [voyant moteur](/voyants/moteur/).
+Si le voyant moteur clignote, l'action à suivre n'est pas tout à fait la même : voyez la page du [voyant moteur](/voyants/moteur/).
 
 Si le code est lu sans que le voyant moteur soit allumé, aucune des notices lues ne donne de consigne : demandez l'avis d'un professionnel.
 
@@ -108,6 +107,10 @@ Selon Hella, la pression de suralimentation est réglée d'après une cartograph
 
 Les documents cités décrivent ce code sur des moteurs essence (2.0 TFSI, 1.2 LIH) comme sur des moteurs diesel (2.0 TDI).
 
+## P0299 ou P029900 ?
+
+Les bulletins du groupe Volkswagen écrivent ce code P0299 (Volkswagen, Passat 2.0 TDI) ou P029900 (Audi, 2.0 TFSI de 2013-2014), avec le même intitulé, « Turbo/Super Charger Underboost » ({{cite:bulletin-audi-2039006-p0299|p. 1}}) : c'est le même défaut, et la même marche à suivre.
+
 ## Symptômes du code P0299
 
 Les documents cités décrivent :
@@ -116,13 +119,15 @@ Les documents cités décrivent :
 - un manque de puissance (Volkswagen 2.0 TDI, Audi 2.0 TFSI de 2013-2014) ;
 - un bruit qui vient du turbo (Volkswagen Passat 2.0 TDI), ou un bruit de ferraille au démarrage à froid (Buick et Chevrolet 1.2 LIH).
 
+Selon Hella, une panne de l'actionneur électrique du turbo peut se traduire par une perte de puissance, une accélération faible, le voyant moteur allumé, une vitesse réduite et un mode dégradé ({{cite:hella-commande-turbo|section 3}}).
+
 ## Que faire avec le code P0299 ?
 
 1. Si le voyant moteur est allumé, suivez d'abord la consigne de l'encadré, en haut de page.
 2. Au garage, le diagnostic commence par la mémoire du calculateur, puis par un contrôle visuel du turbo et de sa commande, comme le recommande Hella ({{cite:hella-commande-turbo|section 5}}). Les bulletins cités font vérifier les durites de dépression, la commande du turbo et les tuyaux d'air de suralimentation, et ne font remplacer le turbo que dans les cas qu'ils décrivent.
-3. Le code seul ne désigne pas la pièce à changer. Plusieurs bulletins règlent le défaut sans remplacer le turbo : une vanne de recirculation (Audi), un clip de tringlerie (Audi), une membrane ou une durite de dépression (Volkswagen).
-4. Si le turbo est cassé, la cause peut venir de son graissage : pour les Passat 2.0 TDI qu'il nomme, Volkswagen fait rincer tout le circuit d'huile et remplacer la pompe à huile et les tuyaux d'huile du turbo avec lui, pour éviter que la panne ne revienne ({{cite:bulletin-vw-2036110-p0299|p. 3 à 5}}).
+3. Le code seul ne désigne pas la pièce à changer. Pour les voitures vendues aux États-Unis qu'ils nomment, plusieurs bulletins règlent le défaut sans remplacer le turbo : une vanne de recirculation (Audi), un clip de tringlerie (Audi), une membrane ou une durite de dépression (Volkswagen).
+4. Si le turbo est cassé, la réparation ne s'arrête pas forcément au turbo : pour les Passat 2.0 TDI qu'il nomme, Volkswagen fait rincer tout le circuit d'huile du moteur, et remplacer la pompe à huile et les tuyaux d'huile du turbo avec lui, pour éviter que la panne ne revienne ({{cite:bulletin-vw-2036110-p0299|p. 3 à 5}}).
 
-## P0299 sur une Peugeot, une Renault (1.5 dCi), une Mercedes, une Hyundai ou une Mazda
+## P0299 sur une Peugeot (1.6 HDi), une Citroën, une Renault (1.5 dCi), une Ford, une Opel ou une Mercedes
 
-Le code garde la même signification sur toutes les marques : c'est un code générique (voir la fiche du code). Mais les documents lus ne décrivent aucun cas sur les Peugeot, Renault, Mercedes, Hyundai ou Mazda, ni sur le moteur 1.5 dCi. Les cas décrits par marque ci-dessus viennent de bulletins de voitures vendues aux États-Unis ou en Amérique du Nord : ils montrent que le code peut venir d'une fuite, de la commande du turbo comme du turbo lui-même, mais ne valent que pour les modèles nommés. Sur votre voiture, seul le diagnostic dit d'où vient le défaut ; la marche à suivre reste la même.
+Le code garde la même signification sur toutes les marques : c'est un code générique (voir la fiche du code). Mais les documents lus ne décrivent aucun cas sur les Peugeot, Citroën, Renault, Ford, Opel, Mercedes, Hyundai ou Mazda, ni sur les moteurs 1.6 HDi et 1.5 dCi. Les cas décrits par marque ci-dessus viennent de bulletins de voitures vendues aux États-Unis ou en Amérique du Nord : ils montrent que le code peut venir d'une fuite, de la commande du turbo comme du turbo lui-même, mais ne valent que pour les modèles nommés. Sur votre voiture, seul le diagnostic dit d'où vient le défaut ; la marche à suivre reste la même.
