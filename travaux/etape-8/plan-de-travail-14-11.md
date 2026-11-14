@@ -37,6 +37,8 @@
 6. **Rien ne se préparait pour les étapes 10 et 11 avant la porte 8.** → Demande de changement n° 21 : modèles des étapes 10 et 11 sur la piste technique, et préparation de leurs sources, de leurs briefs et des brouillons de leurs exemples pendant les attentes de validation, sans rien en présenter ni publier avant la porte en cours.
 7. **Le journal approche sa limite** (`docs/04` : 44 114 caractères pour 45 000, `travaux/journal/verifier.py`) et se mettait à jour à chaque livrable. → Une mise à jour par session, archivage dès qu'il approche la limite.
 
+> **Mise à jour du 14/11 (13 h 15), après la relecture de la décision 8 du paquet 8.1 (validée le 04/11 : STOP et le triangle dans la base avant la mise en ligne de l'outil)** : lot 3 = voyant FAP, voyant de pression des pneus et page pression des pneus (texte de référence trouvé : annexe I du contrôle technique, point 5.2.3), soit 118 816 recherches par mois ; **lot 3b** = demande de changement de la base (STOP, triangle rouge, triangle orange, pictogrammes) puis outil voyants (142 516) ; voyant frein (20 540) au lot 5, faute de source du témoin d'usure des plaquettes (D4). Le tableau ci-dessous garde la proposition d'origine.
+
 ## 4. Lots de la vague A (par volume, sauf dépendance)
 
 | Lot | Pages | Volume (plafond) | Dépend de |
