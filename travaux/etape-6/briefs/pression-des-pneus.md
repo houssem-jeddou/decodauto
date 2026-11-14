@@ -37,7 +37,7 @@ Et 15 autres : « gonfler les pneus », « gonfler un pneu », « gonfleur pneu 
 
 ## Décision et sources disponibles
 
-Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources.json`) : pressions de gonflage lues sur l'étiquette de la porte conducteur, vérifiées pneus froids, au moins une fois par mois (notice Renault Clio 5, p. 206 et 348).
+Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources.json`) : pressions de gonflage lues sur l'étiquette de la porte conducteur, vérifiées pneus froids, au moins une fois par mois et avant chaque grand voyage (notice Renault Clio 5, p. 207 et 348).
 
 - `notice-renault-clio-5` : Renault Clio 5 phase 2 — Notice d'utilisation (réf. 1457-3).
 
