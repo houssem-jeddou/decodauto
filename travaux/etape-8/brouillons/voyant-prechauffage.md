@@ -42,7 +42,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 causes:
   - cause: Préchauffage du moteur diesel au démarrage
-    explication: "Selon les notices Peugeot 208, Renault Clio 5 phase 2, Dacia Sandero 3 et Seat Ibiza, le témoin s'allume à la mise du contact pendant que les bougies de préchauffage chauffent, puis s'éteint : c'est le fonctionnement normal."
+    explication: "Selon les notices Peugeot 208, Renault Clio 5 phase 2, Dacia Sandero 3 et Seat Ibiza, le témoin signale le préchauffage du moteur diesel, puis s'éteint quand le moteur peut démarrer : c'est le fonctionnement normal. Selon les notices Renault et Dacia, il indique que les bougies de préchauffage fonctionnent."
     pieces:
       - fonctionnement-normal
   - cause: Défaut de la gestion du moteur diesel (voyant qui clignote)
@@ -61,7 +61,7 @@ Tout dépend de ce qu'il fait.
 
 **Il clignote** : {{verdict:ligne-2}}. Cette ligne repose sur une seule notice, celle de la Seat Ibiza, la seule des notices lues qui décrit ce clignotement : elle signale un dysfonctionnement de la gestion du moteur diesel, et demande de faire contrôler immédiatement le moteur par un atelier spécialisé ({{cite:notice-seat-ibiza|p. 289}}).
 
-**Avec le voyant moteur allumé** : c'est la consigne du voyant moteur, plus prudente, qui compte : {{verdict:moteur-orange-fixe}}.
+**Avec le voyant moteur allumé** : c'est la consigne du [voyant moteur](/voyants/moteur/), plus prudente, qui compte : {{verdict:moteur-orange-fixe}}.
 
 Les notices lues pour cette page sont celles de ces modèles ; pour une autre génération ou un autre modèle, c'est la notice de votre voiture qui fait foi :
 
@@ -70,11 +70,11 @@ Les notices lues pour cette page sont celles de ces modèles ; pour une autre g�
 - {{notice:notice-renault-clio-5}}
 - {{notice:notice-seat-ibiza}}
 
-La Toyota Yaris lue pour les autres pages du site n'existe pas en version Diesel.
+La notice Toyota Yaris lue pour les autres pages du site ne décrit pas de moteur Diesel.
 
-## Démarrer quand le voyant s'éteint
+## Voyant bougie de préchauffage : démarrer quand il s'éteint
 
-Selon la notice Peugeot 208, à l'extinction du témoin, le démarrage est immédiat en maintenant l'appui sur la pédale d'embrayage (boîte manuelle) ou sur la pédale de frein (boîte automatique) ; si le moteur ne démarre pas, il faut renouveler la demande de démarrage en gardant le pied sur la pédale ({{cite:notice-peugeot-208|p. 14}}). Selon la notice Seat Ibiza, le moteur peut être démarré dès que le témoin s'éteint.
+Selon la notice Peugeot 208, à l'extinction du témoin, le démarrage est immédiat en maintenant l'appui sur la pédale d'embrayage (boîte manuelle) ou sur la pédale de frein (boîte automatique) ; si le moteur ne démarre pas, il faut renouveler la demande de démarrage en gardant le pied sur la pédale ({{cite:notice-peugeot-208|p. 14}}). Selon la notice Seat Ibiza, le moteur peut être démarré immédiatement quand le témoin s'éteint ({{cite:notice-seat-ibiza|p. 289}}).
 
 ## Voyant de préchauffage qui clignote et perte de puissance
 

@@ -6,7 +6,7 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/prechauffage/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/moteur/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)

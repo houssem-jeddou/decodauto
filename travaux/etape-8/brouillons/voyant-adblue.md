@@ -16,7 +16,7 @@ voyants:
   - adblue-defaut
   - adblue-demarrage-impossible
 cout_probable:
-  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site) : de l'appoint d'AdBlue, que vous pouvez faire vous-même, à la réparation du système AdBlue au garage."
+  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site) : de l'appoint d'AdBlue, que vous pouvez faire vous-même, à la grosse réparation du système AdBlue (réservoir, pompe ou injecteur)."
   sources:
     - notice-peugeot-208
     - notice-renault-clio-5
@@ -64,19 +64,19 @@ Les notices lues pour cette page sont celles de ces modèles ; pour une autre g�
 - {{notice:notice-renault-clio-5}}
 - {{notice:notice-seat-ibiza}}
 
-La Toyota Yaris lue pour les autres pages du site n'existe pas en version Diesel : elle n'a pas d'AdBlue.
+La notice Toyota Yaris lue pour les autres pages du site ne décrit pas de moteur Diesel : elle ne parle pas d'AdBlue.
 
 ## Les messages d'autonomie, marque par marque
 
 - **Peugeot 208** : entre 2 400 et 800 km d'autonomie, le témoin s'allume environ 30 secondes à chaque démarrage, avec un message : faites un appoint. Entre 800 et 100 km, il reste allumé avec un signal sonore : appoint rapide. Sous 100 km, il clignote : l'appoint est impératif pour éviter le blocage du démarrage ({{cite:notice-peugeot-208|p. 15 et 21}}).
-- **Renault Clio 5 phase 2 et Dacia Sandero 3** : sous 2 400 km, un message demande de prévoir l'appoint, sans témoin ; entre 1 200 et 800 km, le témoin s'allume ; ensuite, le message « XXX KM blocage remplir AdBlue » se répète tous les 100 km environ, puis tous les 50 km sous 200 km : faites le plein de réactif dès que possible. À « 0 KM », le démarrage est impossible : il faut faire soi-même le plein de réactif pour redémarrer ({{cite:notice-renault-clio-5|p. 166}}, {{cite:notice-dacia-sandero-3|p. 138}}).
+- **Renault Clio 5 phase 2 et Dacia Sandero 3** : sous 2 400 km, un message demande de prévoir l'appoint, sans témoin ; entre 1 200 et 800 km, le témoin s'allume ; ensuite, le message « XXX KM blocage remplir AdBlue » se répète tous les 100 km environ, puis tous les 50 km sous 200 km : faites le plein de réactif dès que possible. À « 0 KM », le témoin clignote (Renault) ou reste allumé (Dacia) et le démarrage est impossible : il faut faire soi-même le plein de réactif pour redémarrer ({{cite:notice-renault-clio-5|p. 166}}, {{cite:notice-dacia-sandero-3|p. 138}}).
 - **Seat Ibiza** : un message s'affiche sous 2 400 km ; le témoin jaune s'allume à 1 000 km, avec la distance avant que le moteur ne puisse plus redémarrer ; il passe au rouge à 0 km ({{cite:notice-seat-ibiza|p. 286}}).
 
 À 0 km, il faut verser au moins la quantité minimale indiquée par la notice : 5 litres pour la Peugeot 208 ({{cite:notice-peugeot-208|p. 22}}), environ 5 litres pour la Seat Ibiza ({{cite:notice-seat-ibiza|p. 287}}).
 
 ## « Défaut antipollution : démarrage interdit dans 1 100 km »
 
-Ce message est celui de la Peugeot 208. Quand un dysfonctionnement du système d'antipollution est détecté, les témoins AdBlue et moteur s'allument avec le message « Défaut antipollution ». Si le défaut était passager, l'alerte disparaît au trajet suivant. S'il persiste 50 km, il est confirmé : le témoin AdBlue clignote, le message annonce le nombre de kilomètres avant que le démarrage soit interdit, et vous pouvez rouler jusqu'à 1 100 km avant que le moteur ne redémarre plus. La notice demande de faire vérifier la voiture par le réseau Peugeot ou un atelier qualifié ({{cite:notice-peugeot-208|p. 22}}).
+Ce message est celui de la Peugeot 208. Quand un dysfonctionnement du système d'antipollution est détecté, le témoin AdBlue et le [voyant moteur](/voyants/moteur/) s'allument avec le message « Défaut antipollution ». Si le défaut était passager, l'alerte disparaît au trajet suivant. S'il persiste 50 km, il est confirmé : le témoin AdBlue clignote, le message annonce le nombre de kilomètres avant que le démarrage soit interdit, et vous pouvez rouler jusqu'à 1 100 km avant que le moteur ne redémarre plus. La notice demande de faire vérifier la voiture par le réseau Peugeot ou un atelier qualifié ({{cite:notice-peugeot-208|p. 22}}).
 
 Chez Renault et Dacia, les témoins AdBlue et Service s'allument avec les messages « Antipollution à contrôler », « Qualité AdBlue à contrôler » ou « Injection AdBlue à contrôler » : consultez un représentant de la marque le plus tôt possible. Le message « XXX KM blocage antipollution » indique qu'il reste moins de 800 km avant que le redémarrage soit impossible ; à « 0 KM », le moteur ne redémarre plus après la coupure du contact ({{cite:notice-renault-clio-5|p. 167}}, {{cite:notice-dacia-sandero-3|p. 139}}). La consigne de l'encadré : {{verdict:adblue-defaut}}.
 
@@ -90,9 +90,9 @@ Si le voyant reste allumé avec le voyant moteur ou Service, c'est un défaut : 
 
 ## Qu'est-ce que l'AdBlue, et combien en reste-t-il ?
 
-C'est une solution à base d'urée, qui sert au système d'antipollution des moteurs Diesel : selon la notice Peugeot 208, un catalyseur transforme avec elle jusqu'à 85 % des oxydes d'azote en azote et en eau ({{cite:notice-peugeot-208|p. 170}}). Selon la même notice, ces moteurs ne peuvent pas fonctionner sans AdBlue ({{cite:notice-peugeot-208|p. 21}}). Les notices demandent un liquide conforme à la norme ISO 22241 ({{cite:notice-renault-clio-5|p. 163}}).
+C'est une solution à base d'urée, qui sert au système d'antipollution des moteurs Diesel : selon la notice Peugeot 208, un catalyseur transforme avec elle jusqu'à 85 % des oxydes d'azote en azote et en eau ({{cite:notice-peugeot-208|p. 170}}). Selon la même notice, quand le réservoir est vide, un dispositif réglementaire empêche le moteur de redémarrer ({{cite:notice-peugeot-208|p. 170}}). Les notices demandent un liquide conforme à la norme ISO 22241 ({{cite:notice-renault-clio-5|p. 163}}).
 
-Le réservoir contient environ 15 litres sur la Peugeot 208, et 11 litres environ sur la Renault Clio 5 phase 2 et la Dacia Sandero 3 ({{cite:notice-renault-clio-5|p. 163}}, {{cite:notice-dacia-sandero-3|p. 135}}). Sur la Peugeot 208 à combiné matrice ou numérique, l'autonomie qui reste s'affiche à la demande, par la touche « Check » du menu Conduite / Véhicule de l'écran tactile ; sous 2 400 km, elle s'affiche d'elle-même à la mise du contact ({{cite:notice-peugeot-208|p. 21}}).
+Le réservoir contient environ 15 litres sur la Peugeot 208 ({{cite:notice-peugeot-208|p. 170}}) ; sa capacité utilisable est d'environ 11 litres sur la Renault Clio 5 phase 2 et la Dacia Sandero 3 ({{cite:notice-renault-clio-5|p. 163}}, {{cite:notice-dacia-sandero-3|p. 135}}). Sur la Peugeot 208 à combiné matrice ou numérique, l'autonomie qui reste s'affiche à la demande, par la touche « Check » du menu Conduite / Véhicule de l'écran tactile ; sous 2 400 km, elle s'affiche d'elle-même à la mise du contact ({{cite:notice-peugeot-208|p. 21}}).
 
 ## Faire l'appoint : les précautions des notices
 
@@ -100,4 +100,4 @@ Le réservoir contient environ 15 litres sur la Peugeot 208, et 11 litres enviro
 - Ne jamais verser l'AdBlue dans le réservoir de gazole, ne jamais le diluer ni le transvaser (Peugeot, p. 170-171).
 - Il gèle vers -11 °C selon la notice Peugeot, -10 °C selon les notices Renault et Dacia.
 - Selon la notice Peugeot 208, c'est un liquide ininflammable, incolore et inodore. En cas de contact avec les yeux, rincez-les immédiatement et abondamment pendant au moins 15 minutes, et consultez un médecin si la brûlure ou l'irritation persiste ; avec la peau, lavez à l'eau et au savon ; en cas d'ingestion, rincez la bouche et buvez beaucoup d'eau. Gardez les bidons hors de portée des enfants ({{cite:notice-peugeot-208|p. 171}}).
-- Selon les notices Renault et Dacia, il abîme les vêtements, les chaussures et la carrosserie : rincez rapidement et abondamment à l'eau froide les parties peintes touchées ({{cite:notice-renault-clio-5|p. 164}}).
+- Selon la notice Renault Clio 5 phase 2, le réactif est agressif pour les vêtements, les chaussures et la carrosserie ({{cite:notice-renault-clio-5|p. 164}}) ; la notice Dacia Sandero 3 le dit aussi pour les vêtements et la carrosserie ({{cite:notice-dacia-sandero-3|p. 136}}). Selon les deux notices, il ne doit pas entrer en contact avec les yeux ou la peau : en cas de contact, rincez abondamment à l'eau, et consultez un médecin si besoin ({{cite:notice-renault-clio-5|p. 163}}).
