@@ -32,14 +32,23 @@ place). Le dessin des témoins n'a donc pas été vu.
     de stationnement. » ;
   - jaune : « S'allume en jaune » ; « Plaquettes de frein avant usées. » ; « Adressez-vous immédiatement à un garage
     spécialisé. » (vérifié : « garage spécialisé », et non « atelier spécialisé »).
-- **p. 298, encadré AVERTISSEMENT** : « Si le témoin [pictogramme] s'allume, seul ou en combinaison avec un message à
+- **p. 297-298, encadré AVERTISSEMENT** (un seul encadré, quatre puces ; relu le 14/11 vers 23 h 45 après la revue) :
+  - puce 1 : « Lorsque vous mettez le contact, l'état du système des freins et des fonctions d'assistance de freinage »
+    « est automatiquement vérifié » ; puis « Si un voyant reste allumé de façon permanente, cela signifie » (p. 297)
+    « qu'il y a une défaillance. Faites immédiatement appel à une assistance technique qualifiée. » (p. 298). Consigne
+    générale du contrôle des voyants à la mise du contact ; selon la grille, « faire appel » mène au moins à « Non, ne
+    poursuivez pas votre trajet ». Non retenue pour le témoin d'usure, qui a sa consigne propre dans la puce 4 (décision
+    D2 de l'étape 5 : la consigne propre au témoin l'emporte sur l'encadré général) : choix soumis à Houssem (paquet) ;
+  - puces 2 et 3 : témoin de freinage et ABS (non relevées mot pour mot) ;
+  - puce 4, p. 298 : « Si le témoin [pictogramme] s'allume, seul ou en combinaison avec un message à
   l'écran du combiné d'instruments, » « rendez-vous immédiatement dans d'un atelier spécialisé pour qu'il contrôle les
   plaquettes de frein » « et qu'il remplace celles qui sont usées. » La coquille de la notice (« dans d'un ») est
   laissée hors de l'extrait de la ligne saisie, par « […] ».
 - **p. 300-302, frein de stationnement électronique** : pas de consigne pour un témoin jaune de défaut ; p. 301,
   AVERTISSEMENT : « Le véhicule peut se déplacer même lorsque le frein de stationnement électronique est activé. »
   (non cité sur la page).
-- **p. 304, « Servofrein électromécanique (eBKV) »**, texte courant : en cas de panne, « le symbole rouge […] de panne
+- **p. 304-305, « Servofrein électromécanique (eBKV) »** (titre p. 304, phrases p. 305 : dans le texte du PDF, le numéro
+  de page clôt chaque page, règle vérifiée par la revue sur quatre points), texte courant : en cas de panne, « le symbole rouge […] de panne
   du système de freinage apparaît sur le combiné d'instruments » ; « des vibrations peuvent être ressenties au niveau
   de la pédale de frein » ; « le conducteur doit appuyer plus fort sur la pédale de frein » ; « car la distance de
   freinage augmente à cause de l'absence de l'assistance du servofrein ». Aucune consigne propre (rouler, s'arrêter)

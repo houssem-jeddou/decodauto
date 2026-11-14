@@ -91,7 +91,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant de frein allumé ? »
-- **Angle** : Trois voyants sous un même nom : les deux lignes de la base (freinage, frein de stationnement ; tableau des voyants du brief) et le témoin d'usure des plaquettes, en tête des résultats mais absent des notices lues (D4 ; relevé, constat 6).
+- **Angle** : Trois voyants sous un même nom : les deux lignes de la base (freinage, frein de stationnement ; tableau des voyants du brief) et le témoin d'usure des plaquettes, en tête des résultats, décrit par la seule notice Seat Leon parmi les notices lues (D4, levée le 14/11 ; relevé, constat 6).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
   - Témoin d'usure des plaquettes (« voyant plaquette de frein », « peut-on rouler avec le voyant plaquette de frein », « reste allumé ») : ligne saisie citée (D4), source trouvée le 14/11 : notice Seat Leon, p. 297-298 ; les six autres notices lues ne le décrivent pas.

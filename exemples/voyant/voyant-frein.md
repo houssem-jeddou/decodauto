@@ -2,9 +2,9 @@
 # Page « voyant frein » de la vague A (étape 8, lot 5d), rédigée le 14/11/2026, en attente de la validation de Houssem
 # (paquet travaux/etape-8/paquet-lot-5d.md). Elle reste dans exemples/ jusqu'à la pull request de mise en ligne.
 id: voyant-frein
-title: "Voyant frein allumé : liquide, plaquettes, frein à main, peut-on rouler ?"
+title: "Voyant frein : liquide, plaquettes, frein à main, peut-on rouler ?"
 h1: "Voyant frein : liquide de frein bas, plaquettes usées ou frein à main serré ?"
-description: "Voyant de freinage rouge, frein à main desserré : arrêtez-vous. Témoin jaune des plaquettes : garage sans attendre. Frein à main serré : desserrez-le."
+description: "Voyant de freinage rouge (liquide de frein), frein à main desserré : arrêtez-vous. Témoin d'usure des plaquettes : garage sans attendre. Frein à main serré : desserrez-le."
 libelle_court: Voyant de frein
 question_decision: Puis-je continuer à rouler avec le voyant de frein allumé ?
 situations:
@@ -16,7 +16,7 @@ situations:
     citations:
       - source: notice-seat-leon
         emplacement: "p. 297-298, « Système de freinage », Témoins et AVERTISSEMENT"
-        extrait: "S'allume en jaune. Plaquettes de frein avant usées. Adressez-vous immédiatement à un garage spécialisé. […] Si le témoin […] s'allume, seul ou en combinaison avec un message à l'écran du combiné d'instruments, rendez-vous immédiatement […] pour qu'il contrôle les plaquettes de frein et qu'il remplace celles qui sont usées."
+        extrait: "S'allume en jaune. Plaquettes de frein avant usées. Adressez-vous immédiatement à un garage spécialisé. […] Si le témoin […] s'allume, seul ou en combinaison avec un message à l'écran du combiné d'instruments, rendez-vous immédiatement dans […] un atelier spécialisé pour qu'il contrôle les plaquettes de frein et qu'il remplace celles qui sont usées."
         verdict: oui avec précautions
         urgence: immédiate
   - voyant: frein-stationnement
@@ -68,9 +68,9 @@ causes:
 
 ## Peut-on rouler avec le voyant frein allumé ?
 
-Tout dépend du voyant qui s'allume : sous le nom de voyant frein, on trouve trois voyants différents.
+Tout dépend du voyant qui s'allume : sous le nom de voyant frein, on trouve trois voyants principaux.
 
-**Voyant de freinage rouge, frein de stationnement desserré** : {{verdict:frein-rouge}}. Il signale un niveau de liquide de frein trop bas ou un défaut du circuit de freinage. Toutes les notices lues demandent l'arrêt. La notice Seat Ibiza demande de ne pas continuer à rouler ({{cite:notice-seat-ibiza|p. 251}}), la notice Toyota Yaris de s'arrêter immédiatement dans un endroit sûr ({{cite:notice-toyota-yaris|p. 292}}). Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, s'il s'allume au freinage avec le témoin STOP et un signal sonore, arrêtez-vous et faites appel à un représentant de la marque ({{cite:notice-renault-clio-5|p. 137}}, {{cite:notice-dacia-sandero-3|p. 110-111}}).
+**Voyant de freinage rouge, frein de stationnement desserré** : {{verdict:frein-rouge}}. Il signale un niveau de liquide de frein trop bas ou un défaut du circuit de freinage. Toutes les notices citées sur cette page demandent l'arrêt. La notice Seat Ibiza demande de ne pas continuer à rouler ({{cite:notice-seat-ibiza|p. 251}}), la notice Toyota Yaris de s'arrêter immédiatement dans un endroit sûr ({{cite:notice-toyota-yaris|p. 292}}). Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, s'il s'allume au freinage avec le témoin STOP et un signal sonore, arrêtez-vous et faites appel à un représentant de la marque ({{cite:notice-renault-clio-5|p. 137}}, {{cite:notice-dacia-sandero-3|p. 110-111}}).
 
 **Témoin d'usure des plaquettes** : {{verdict:ligne-2}}. Cette ligne repose sur une seule notice, celle de la Seat Leon : le témoin jaune signale des plaquettes de frein avant usées, et elle demande de s'adresser immédiatement à un garage spécialisé ({{cite:notice-seat-leon|p. 297}}).
 
@@ -93,7 +93,7 @@ Pour une autre marque, BMW, Mini ou Volkswagen par exemple, cherchez « frein »
 
 Le voyant du liquide de frein est le voyant de freinage rouge : {{verdict:frein-rouge}}. Selon la notice Seat Leon, si le niveau du liquide baisse sensiblement en peu de temps, ou passe sous le repère du réservoir, le système de freinage n'est peut-être plus étanche : elle demande alors de faire appel à un spécialiste ({{cite:notice-seat-leon|p. 370}}). La notice Peugeot 208 prévoit, une fois la voiture arrêtée, un appoint avec un liquide conforme aux recommandations du constructeur ; si le problème persiste, elle demande de faire appel au réseau Peugeot ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 14 ; renvois p. 13}}).
 
-Les dessins des voyants rouges, dont celui du freinage, sont dans la [liste des voyants](/voyants/).
+Son dessin : un point d'exclamation dans un cercle. La [liste des voyants](/voyants/) montre les dessins de tous les voyants.
 
 ## Voyant plaquette de frein : peut-on rouler ?
 
@@ -101,7 +101,7 @@ Verdict retenu en haut de page : {{verdict:ligne-2}}. Dans la notice Seat Leon, 
 
 Combien de kilomètres peut-on faire ? Aucune des notices lues ne donne de distance à ne pas dépasser : la Seat Leon demande d'aller au garage immédiatement.
 
-Les autres notices lues (Peugeot 208, Renault Clio 5 phase 2, Dacia Sandero 3, Toyota Yaris, Seat Ibiza et Citroën C3) ne décrivent pas ce témoin. Si votre voiture en a un, sa notice dit sa couleur et sa consigne ; à défaut, c'est la consigne de l'encadré qui s'applique.
+Les autres notices lues pour le site (Peugeot 208, Renault Clio 5 phase 2, Dacia Sandero 3, Toyota Yaris, Seat Ibiza et Citroën C3) ne décrivent pas ce témoin. Si votre voiture en a un, sa notice dit sa couleur et sa consigne ; à défaut, c'est la consigne de l'encadré qui s'applique.
 
 **Le témoin reste allumé après le changement des plaquettes** : les notices lues n'en donnent pas la raison. Faites vérifier le témoin et son câblage par le garage qui a fait le remplacement : au contrôle technique, un faisceau électrique du témoin d'usure déconnecté ou détérioré est une défaillance ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 1.1.13}}).
 
@@ -111,7 +111,7 @@ Verdict retenu : {{verdict:frein-stationnement}}. Selon la notice Toyota Yaris, 
 
 Si un voyant de frein rouge reste allumé une fois le frein complètement desserré, ou s'allume en roulant, c'est la ligne du voyant de freinage qui s'applique : {{verdict:frein-rouge}}.
 
-Avec un frein de stationnement électrique, d'autres témoins existent. La notice Seat Leon range un défaut de ce frein parmi ses témoins jaunes ({{cite:notice-seat-leon|p. 97}}). La notice Peugeot 208 décrit plusieurs témoins et le message « Défaut frein de parking », avec des consignes différentes : la [page des voyants ABS et ESP](/voyants/abs-esp/) les détaille.
+Avec un frein de stationnement électrique, d'autres cas existent. Selon la notice Peugeot 208, le témoin rouge de ce frein qui clignote signale un serrage ou un desserrage défaillant : elle impose l'arrêt sur un terrain plat, avec un rapport engagé ou le mode P, puis de couper le contact et de faire appel au réseau Peugeot ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 14 ; renvois p. 13}}). Elle décrit aussi d'autres témoins et le message « Défaut frein de parking », avec des consignes différentes : la [page des voyants ABS et ESP](/voyants/abs-esp/) les détaille. La notice Seat Leon range un défaut de ce frein parmi ses témoins jaunes ({{cite:notice-seat-leon|p. 97}}), sans consigne propre : demandez l'avis d'un professionnel.
 
 ## Voyant frein orange ou jaune
 
@@ -123,15 +123,15 @@ Ce n'est pas le voyant de freinage rouge. Selon la voiture, ce peut être :
 
 Si le voyant de freinage rouge s'allume aussi, c'est l'arrêt : {{verdict:frein-rouge}}.
 
-## Pédale de frein dure, message de panne du freinage
+## Système de freinage défaillant, pédale de frein dure : que faire ?
 
-Selon la notice Seat Leon, en cas de panne du servofrein électromécanique, le symbole rouge de panne du système de freinage s'affiche, la pédale peut vibrer, et il faut appuyer plus fort sur la pédale de frein : la distance de freinage augmente ({{cite:notice-seat-leon|p. 304}}). Le voyant de freinage est allumé : {{verdict:frein-rouge}}.
+Selon la notice Seat Leon, en cas de panne du servofrein électromécanique, le symbole rouge de panne du système de freinage s'affiche, la pédale peut vibrer, et il faut appuyer plus fort sur la pédale de frein : la distance de freinage augmente ({{cite:notice-seat-leon|p. 304-305}}). C'est le voyant de freinage : {{verdict:frein-rouge}}.
 
-Les notices Renault Clio 5 phase 2 et Dacia Sandero 3 décrivent deux messages : « Système freinage à contrôler », avec les voyants ABS et Service, et « Panne du système de freinage », avec plusieurs voyants ({{cite:notice-renault-clio-5|p. 212-213}}, {{cite:notice-dacia-sandero-3|p. 184-185}}). La [page des voyants ABS et ESP](/voyants/abs-esp/) donne la consigne de chacun. Dès que le voyant de freinage rouge est allumé : {{verdict:frein-rouge}}.
+Les notices Renault Clio 5 phase 2 et Dacia Sandero 3 décrivent deux messages : « Système freinage à contrôler », avec les voyants ABS et Service, et « Panne du système de freinage », avec plusieurs voyants ({{cite:notice-renault-clio-5|p. 212-213}}, {{cite:notice-dacia-sandero-3|p. 184-185}}). La [page des voyants ABS et ESP](/voyants/abs-esp/) donne la consigne de chacun.
 
 ## Comment éteindre le voyant frein ?
 
-Les notices lues ne décrivent aucune manipulation pour éteindre un voyant de frein : il s'éteint quand la cause est corrigée. Le voyant du frein de stationnement s'éteint quand on desserre le frein ({{cite:notice-seat-ibiza|p. 251}}). Pour le voyant de freinage et le témoin d'usure des plaquettes, c'est le garage qui contrôle et répare. Pour une Mini, ou une autre marque dont la notice n'a pas été lue ici, c'est la notice de la voiture qui fait foi.
+Les notices lues ne décrivent aucune manipulation pour éteindre un voyant de frein : il s'éteint quand la cause est corrigée. Le voyant du frein de stationnement s'éteint quand on desserre le frein ({{cite:notice-seat-ibiza|p. 251}}). Pour le voyant de freinage, la notice Peugeot 208 prévoit un appoint de liquide de frein une fois la voiture arrêtée, puis l'appel au réseau ou à un atelier qualifié si le problème persiste ({{cite:notice-peugeot-208|p. 14}}). Pour le témoin d'usure des plaquettes, c'est le garage qui contrôle les plaquettes et remplace celles qui sont usées. Pour une Mini, ou une autre marque dont la notice n'a pas été lue ici, c'est la notice de la voiture qui fait foi.
 
 ## Voyants de frein au contrôle technique
 

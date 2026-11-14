@@ -172,7 +172,7 @@
     },
     {
       "id": "circuit-de-freinage",
-      "libelle": "Circuit de freinage (canalisations, flexibles, maître-cylindre)",
+      "libelle": "Circuit de freinage (canalisations, flexibles, étriers, maître-cylindre)",
       "tranche": "reparation"
     },
     {

@@ -220,7 +220,7 @@ Un verdict (pouvez-vous rouler, avec quelle urgence, quoi faire) n’est jamais 
 
 #### Plusieurs marques pour les voyants
 
-Pour les voyants, les notices de plusieurs grandes marques vendues en France sont lues et comparées. Notices citées aujourd’hui : Citroën C3, Dacia Sandero 3, Peugeot 208, Renault Clio 5 phase 2, Seat Ibiza et Toyota Yaris, soit six marques de quatre groupes. Chaque citation nomme le modèle et l’édition de la notice ; une consigne n’est jamais attribuée à un autre modèle que celui de la notice citée.
+Pour les voyants, les notices de plusieurs grandes marques vendues en France sont lues et comparées. Notices citées aujourd’hui : Citroën C3, Dacia Sandero 3, Peugeot 208, Renault Clio 5 phase 2, Seat Ibiza, Seat Leon et Toyota Yaris, soit six marques de quatre groupes. Chaque citation nomme le modèle et l’édition de la notice ; une consigne n’est jamais attribuée à un autre modèle que celui de la notice citée.
 
 Chaque voyant de la base du site s’appuie sur au moins trois marques de deux groupes différents. Quand les notices ne disent pas la même chose, la consigne la plus prudente est retenue, et la page vous montre l’écart, marque par marque. Quand une alerte n’est décrite que dans une ou deux notices, la page le dit et nomme la notice citée.
 
