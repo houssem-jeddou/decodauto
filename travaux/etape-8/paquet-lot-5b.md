@@ -123,4 +123,4 @@ Les deux brouillons sont construits sur la branche d'essai `essai/brouillons` (j
 
 ## 8. Validation de Houssem
 
-À compléter.
+Le 14/11/2026 à 18 h 23, par la validation groupée (questions posées dans la session, paquets des lots 5a et 5b joints) : « Je valide + go » pour les lignes de validation proposées (§1 voyant batterie, §2 voyant de direction assistée, §3 pièces « cosses de batterie » et « réinitialisation demandée par la notice » en tranche geste et « courroie d'alternateur » en tranche réparation, §3 bis lien voyant batterie ↔ voyant de direction assistée), avec le go de fusion du commit de passage (pages déplacées vers `src/content`, rien d'autre) après le lot 5a, si sa CI est verte. Empreintes versées : voyant batterie `aa612e91…`, voyant de direction assistée `db122d19…`.

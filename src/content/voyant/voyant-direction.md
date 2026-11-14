@@ -1,6 +1,6 @@
 ---
-# Brouillon de la page « voyant direction » de la vague A (étape 8, lot 5b), rédigé le 14/11/2026, à valider par Houssem.
-# Hors de exemples/ et de src/content tant qu'il n'est pas validé. Les lignes de l'encadré viennent de la base voyants.
+# Page « voyant direction » de la vague A (étape 8, lot 5b), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 5b (règle de passage, travaux/etape-8/regle-de-passage.md).
 id: voyant-direction
 title: "Voyant volant orange ou rouge : peut-on rouler, que faire ?"
 h1: "Voyant de direction assistée (volant) : que faire quand il s'allume ?"
@@ -32,6 +32,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (18 h 23),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-5b.md).
+validation: db122d1908fb8d599aba7084d22c1a7af5b318b2531ec76b60d372404f31b8e6
 causes:
   - cause: Batterie débranchée puis rebranchée, ou dépannée
     explication: "Selon la notice Seat Ibiza, le témoin jaune peut s'allumer quand la batterie 12 volts a été débranchée puis rebranchée : elle demande alors un bref parcours à 15-20 km/h. Selon la notice Dacia Sandero 3, il s'allume, suivant le véhicule, lors d'un dépannage de la batterie, et elle demande alors une réinitialisation de l'angle du volant, à faire soi-même."

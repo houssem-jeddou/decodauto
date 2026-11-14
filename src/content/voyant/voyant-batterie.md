@@ -1,6 +1,6 @@
 ---
-# Brouillon de la page « voyant batterie » de la vague A (étape 8, lot 5b), rédigé le 14/11/2026, à valider par Houssem.
-# Hors de exemples/ et de src/content tant qu'il n'est pas validé. La ligne de l'encadré vient de la base voyants.
+# Page « voyant batterie » de la vague A (étape 8, lot 5b), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 5b (règle de passage, travaux/etape-8/regle-de-passage.md).
 id: voyant-batterie
 title: "Voyant batterie allumé : peut-on rouler, que faire ?"
 h1: "Voyant de batterie rouge : que faire quand il s'allume en roulant ?"
@@ -29,6 +29,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (18 h 23),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-5b.md).
+validation: aa612e91ded68725def801296b909f48cda80f4de9afbc91d796d4d89dc55586
 causes:
   - cause: Cosses de batterie sales ou desserrées
     explication: "La notice Peugeot 208 cite les cosses sales parmi les causes d'un circuit de charge défaillant ; elle demande de nettoyer et de resserrer les cosses, puis, si le témoin ne s'éteint pas au démarrage du moteur, de faire appel au réseau ou à un atelier qualifié."

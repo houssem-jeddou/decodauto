@@ -8,6 +8,7 @@
 - **Adresse** : `/voyants/direction/` ; page mère : `/voyants/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/voyants/batterie/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page publiée** (sa validation est notée au journal) : `src/content/voyant/voyant-direction.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -79,7 +80,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je continuer à rouler avec le voyant de direction assistée allumé ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant de direction assistée allumé ? »
 - **Angle** : La couleur décide entre les deux lignes de la base (tableau des voyants du brief), avec un écart entre marques sur le rouge. Page courte : peu de mots-clés, des recherches surtout par modèle.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :
