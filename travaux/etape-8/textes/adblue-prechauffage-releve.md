@@ -10,7 +10,7 @@
 ## Toyota Yaris
 - La notice du registre ne décrit pas de moteur Diesel (ni AdBlue ni préchauffage) : rien à relever.
 
-## Passages des notes de travail
+Les sections suivantes reprennent les notes prises pendant la lecture à l'écran (14/11, de 17 h 30 à 18 h 45 environ).
 
 ## Renault Clio 5 phase 2, p. 166 (Entretien/Autonomie) — témoins vérifiés à l'écran
 - « Prévoir AdBlue avant 2400 km » : aucun témoin (« - ») ; à la mise sous contact, moins de 2 400 km d'autonomie ; prévoir le remplissage (soi-même ou un représentant).
@@ -58,7 +58,7 @@
 ## Peugeot 208, p. 170-171 « AdBlue (BlueHDi) », lu à l'écran le 14/11 (≈ 18 h 05)
 - p. 170 : norme Euro 6, SCR et FAP ; « À l'aide d'un liquide appelé AdBlue qui contient de l'urée, un catalyseur transforme jusqu'à 85 % des oxydes d'azote (NOx) en azote et en eau, inoffensifs pour la santé et l'environnement. » ; réservoir spécifique d'environ 15 litres ; autonomie avant alerte d'environ 6 500 km, fortement variable selon le mode de conduite ; alerte à la réserve : environ 2 400 km avant le réservoir vide ; réservoir vide : un dispositif réglementaire empêche le redémarrage ; SCR défaillant : le véhicule devient polluant ; dysfonctionnement confirmé : se rendre dès que possible dans le réseau ou un atelier qualifié ; « Après 1 100 km parcourus, un dispositif s'active automatiquement pour empêcher le démarrage du moteur » ; dans les deux cas, un indicateur d'autonomie indique la distance avant l'immobilisation ; gel à -11 °C environ, réchauffage du réservoir ; approvisionnement : appoint dès la première alerte, norme ISO 22241, ne jamais transvaser ni diluer, réseau Peugeot, ateliers, stations-service avec pompes AdBlue pour véhicules particuliers ; stockage : gèle sous -11 °C, se dégrade à partir de +25 °C.
 - p. 171 : précautions : solution à base d'urée, ininflammable, incolore, inodore ; peau : laver à l'eau courante et au savon ; yeux : rincer immédiatement et abondamment au moins 15 minutes, médecin si brûlure ou irritation persistante ; ingestion : rincer la bouche, boire beaucoup d'eau ; vapeurs d'ammoniac possibles par forte température, ne pas inhaler ; hors de portée des enfants ; ne jamais verser l'AdBlue dans le réservoir de gazole ; procédure : surface plane et horizontale ; **après une panne d'AdBlue, patienter environ 5 minutes avant de remettre le contact (sans ouvrir la porte conducteur, ni déverrouiller, ni introduire la clé), mettre le contact, puis démarrer après 10 secondes** ; appoint de 10 à 13 litres avec des bidons ; **tout appoint doit être d'au moins 5 litres pour être pris en compte par le système**.
-- p. 21-22 (WebFetch) : indicateur d'autonomie AdBlue, à lire à l'écran (réponse à « combien il en reste »).
+- p. 21-22 : indicateur d'autonomie AdBlue, lu à l'écran ensuite (section suivante).
 
 ## Peugeot 208, p. 21-22 « Indicateurs d'autonomie d'AdBlue (BlueHDi) », lu à l'écran le 14/11 (≈ 18 h 10)
 - p. 21 : sous la réserve (2 400 à 0 km), un témoin s'allume à la mise du contact avec une estimation de la distance avant le blocage du démarrage ; l'antidémarrage réglementaire s'active automatiquement quand le réservoir est vide ; redémarrage impossible tant qu'un niveau minimal n'est pas restauré ; **affichage manuel de l'autonomie** (combiné matrice ou numérique) : au-dessus de 2 400 km elle ne s'affiche pas d'elle-même, touche « Check » du menu Conduite / Véhicule de l'écran tactile ; tableau : 2 400 à 800 km, procéder à un appoint ; 800 à 100 km, rapidement ; 100 à 0 km, l'appoint est impératif, risque de blocage du démarrage.
@@ -68,9 +68,16 @@
 - Témoin de préchauffage (spirale) allumé : « Système de préchauffage du moteur diesel. Lorsque le témoin s'éteint, le moteur peut être démarré immédiatement. » ; clignote : « Dysfonctionnement de la gestion du moteur diesel. Faites immédiatement contrôler le moteur par un atelier spécialisé. »
 - Nota : « Tant que les voyants [moteur], [gaz d'échappement], EPC ou [spirale de préchauffage] restent allumés, il est possible que le moteur présente un dysfonctionnement, que la consommation de carburant augmente et que le moteur perde de la puissance. » (le dernier dessin est la spirale, comme en tête de l'entrée « Témoin allumé »).
 - Colonne centrale : panne de combustion, baisse de puissance ou fonctionnement irrégulier du moteur : contacter un atelier spécialisé pour faire réviser le véhicule.
-- Contrôle technique (pour la page frein, D4) : annexe I, 1.1.13.d.1 « Faisceau électrique du témoin d'usure déconnecté ou détérioré » : mineure ; 1.1.13.a.2 usure excessive : majeure.
 
 
 ## Faits retirés des brouillons faute de relevé (14/11, avant la revue)
-- Peugeot 208 p. 21 : « ces moteurs ne peuvent pas fonctionner sans AdBlue » : phrase absente des notes de lecture ; remplacée par le fait relevé p. 170 (réservoir vide : un dispositif réglementaire empêche le redémarrage).
+- Peugeot 208 p. 21 : « ces moteurs ne peuvent pas fonctionner sans AdBlue » : phrase absente des notes de lecture ; remplacée d'abord par le fait relevé p. 170 (réservoir vide : un dispositif réglementaire empêche le redémarrage), puis **rétablie après la revue** : le relecteur l'a trouvée dans le PDF, et Claude l'a vérifiée par WebFetch le 14/11 au soir (p. 21 : « Ils ne peuvent fonctionner sans liquide AdBlue® »).
 - Renault Clio 5 phase 2 p. 164 : consigne de rinçage des parties peintes : absente des notes ; seul « agressif pour les vêtements, les chaussures et la carrosserie » est gardé.
+
+## Vérifications de la revue indépendante (14/11 au soir)
+- Renault p. 166 : le relecteur confirme, par une extraction indépendante du PDF du registre, l'ordre « - », « s'allume », « s'allume », « clignote » pour les quatre messages (demande n° 24).
+- Peugeot p. 14, 15, 16, 21, 22, 170, 171 ; Renault p. 139, 163, 164, 166, 167 ; Seat p. 286, 287, 289 : relus par le relecteur sur les PDF, conformes aux brouillons. Dacia p. 135-136 : non vérifiables par le relecteur (erreur du serveur), relues à l'écran par Claude seulement.
+- Pictogrammes perdus à l'extraction : le témoin associé à l'AdBlue chez Seat (p. 286) reste à identifier sur le PDF (demande n° 25 à préparer) ; chez Renault et Dacia (p. 167 et 139), Claude l'a relevé à l'écran comme le témoin Service (clé).
+
+## Pour la page voyant frein (D4), hors de ce lot
+- Contrôle technique (pour la page frein, D4) : annexe I, 1.1.13.d.1 « Faisceau électrique du témoin d'usure déconnecté ou détérioré » : mineure ; 1.1.13.a.2 usure excessive : majeure.
