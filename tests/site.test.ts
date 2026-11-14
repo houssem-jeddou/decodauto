@@ -303,6 +303,16 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
     assert.match(script, /passages: apresDeploiement \? 4 : 1/);
   });
 
+  test('demande n° 27 : chaque job tourne sur l\'exécuteur choisi par la variable CI_RUNNER, à défaut sur ubuntu-latest', async () => {
+    const ci = await readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
+    const jobs = ci.slice(ci.indexOf('\njobs:\n'));
+    const executeurs = [...jobs.matchAll(/\n    runs-on: (.*)\n/g)].map((m) => m[1]);
+    const nomsDeJobs = [...jobs.matchAll(/\n  ([a-z][a-z-]*):\n/g)].map((m) => m[1]);
+    assert.ok(nomsDeJobs.length >= 7, `jobs trouvés : ${nomsDeJobs.join(', ')}`);
+    assert.equal(executeurs.length, nomsDeJobs.length, 'chaque job déclare son exécuteur');
+    for (const e of executeurs) assert.equal(e, "${{ vars.CI_RUNNER || 'ubuntu-latest' }}");
+  });
+
   test('demande n° 26 : le job production ne tourne que sur main, et seuls une pull request ou un essai hors de main annulent le passage remplacé', async () => {
     const ci = await readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
     const job = ci.slice(ci.indexOf('\n  production:'));

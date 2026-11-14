@@ -15,6 +15,12 @@ on:
 permissions:
   contents: read
 
+# Exécuteur de tous les jobs (demande de changement n° 27) : la variable du dépôt CI_RUNNER, réglée par Houssem à
+# « self-hosted » (exécuteur installé dans Ubuntu, sous WSL, sur son PC : minutes gratuites, travaux/etape-8/executeur-wsl.md).
+# Sans cette variable, les serveurs de GitHub (ubuntu-latest), qui consomment les minutes du dépôt privé : retour
+# arrière sans toucher au code, en supprimant la variable. Les jobs attendent l'exécuteur tant que le PC est éteint
+# (24 heures au plus, puis échec : il suffit de relancer).
+
 # Un nouveau passage annule celui qu'il remplace sur une pull request, et sur un lancement à la demande hors de main
 # (branches d'essai, demande de changement n° 26 : minutes du dépôt privé). Sur main, un passage en cours va au bout
 # (un passage encore en attente peut être remplacé par un plus récent, règle de GitHub pour un groupe de concurrence).
@@ -30,7 +36,7 @@ env:
 jobs:
   controles:
     name: Contrôles (schémas, règles, build, liens)
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -89,7 +95,7 @@ jobs:
     #    qu'après sa validation, jamais pour faire passer le contrôle, et l'attendu est retiré dans le même commit ;
     # Aucun attendu aujourd'hui : la page « à propos » (livrable 7.3) est dans src/content depuis le premier lot, les liens « Méthode » mènent à elle.
     if: ${{ github.event_name != 'schedule' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     env:
       AVEC_EXEMPLES: '1'
@@ -130,7 +136,7 @@ jobs:
     name: Lighthouse mobile (3 passages)
     needs: controles
     if: ${{ github.event_name != 'schedule' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -170,7 +176,7 @@ jobs:
     # la fusion, et un déploiement refusé par les contrôles n'a pas besoin d'être vérifié.
     needs: controles
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 5
     permissions:
       contents: read
@@ -206,7 +212,7 @@ jobs:
     name: Secrets Cloudflare présents ?
     needs: [controles, lighthouse]
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 2
     outputs:
       disponibles: ${{ steps.verification.outputs.disponibles }}
@@ -229,7 +235,7 @@ jobs:
     # ET si les deux secrets existent.
     needs: [controles, lighthouse, secrets-cloudflare, origine-main]
     if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.secrets-cloudflare.outputs.disponibles == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 10
     concurrency:
       group: deploiement-production
@@ -261,7 +267,7 @@ jobs:
     # toujours vert), la production n'ayant pas encore les changements de la branche, et coûtait une minute par passage.
     needs: deploiement
     if: ${{ !cancelled() && (needs.deploiement.result == 'success' || ((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main')) }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     # Après un déploiement : jusqu'à 4 passages, sans nouveau passage au-delà de 4 minutes. Un passage fait 14 lectures
     # d'au plus 20 s quand le site répond (http://www en deux redirections), jusqu'à 33 dans une boucle de redirections
     # lentes (11 min au plus). Le délai du job couvre ce pire cas : un écart fait échouer le job, il ne l'annule jamais.
