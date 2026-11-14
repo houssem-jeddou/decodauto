@@ -5,7 +5,8 @@
 //
 //  - une ligne par ligne de la base (un voyant dans un état donné) : pictogramme, nom, situation, verdict et urgence écrits
 //    (libellés de la grille, jamais la seule couleur), action, écart entre marques ; lien vers la page du voyant seulement
-//    quand elle est construite ; notices et pages citées dans un bloc dépliable sous la ligne ;
+//    quand elle est construite, et jamais vers l'outil lui-même (ligne qui lui est rattachée, demande de changement
+//    n° 23) ; notices et pages citées dans un bloc dépliable sous la ligne ;
 //  - groupes par couleur, avec le compte des verdicts du groupe : la couleur ne suffit pas à décider (brief `voyants`) ;
 //  - filtre par couleur sans JavaScript : boutons radio et règles CSS (`:has(:checked)`, src/styles/site.css). Tout le
 //    contenu est dans le HTML, « Tous » est coché au départ ; un navigateur sans `:has()` affiche simplement toute la liste ;
@@ -30,6 +31,7 @@ import {
   type SourceDuRegistre,
 } from './composants.ts';
 import { enLettres, enumerer } from './charte.ts';
+import { ID_OUTIL_VOYANTS } from './plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { COULEURS_VOYANT, LIBELLES_COULEURS, rangUrgence, rangVerdict, type Urgence, type Verdict } from '../schemas/listes.ts';
 import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, INTRODUCTION_OUTIL, LEGENDE_FILTRE, LIBELLE_FILTRE_TOUS, LIBELLE_LIEN_PAGE, TITRE_INDEX_OUTIL, TITRE_OUTIL } from './outil-textes.ts';
@@ -159,7 +161,8 @@ export function modeleOutilVoyants(entree: {
         const court = source !== undefined ? nomCourtSource(source) : c.source;
         return { source: c.source, nom: edition !== undefined && source?.categorie === 'notice-constructeur' ? `${court}, ${edition}` : court, emplacement: c.emplacement };
       }),
-      page: adresse !== undefined && libelle !== undefined ? { adresse, libelle } : undefined,
+      // Une ligne rattachée à la page outil (demande de changement n° 23) ne mène pas à la page où elle est affichée.
+      page: v.page !== ID_OUTIL_VOYANTS && adresse !== undefined && libelle !== undefined ? { adresse, libelle } : undefined,
     };
   };
   const groupes = ORDRE_GROUPES.flatMap((couleur): GroupeOutil[] => {

@@ -21,7 +21,7 @@ import {
   type PieceCout,
   type TexteDeCout,
 } from './cout.ts';
-import { controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
+import { ID_OUTIL_VOYANTS, controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
 import { normaliserRecherche } from './texte.ts';
 import {
   coutsSchema,
@@ -1681,13 +1681,15 @@ export function controlerEnsemble(pages: readonly PageControlee[], ctx: Contexte
     }
   }
 
-  // Chaque voyant de la base est rattaché à une seule page, qui doit le déclarer.
+  // Chaque voyant de la base est rattaché à une seule page, qui doit le déclarer. Exception, la page outil (demande de
+  // changement n° 23) : elle affiche toutes les lignes de la base, et son encadré n'en reprend que ses exemples ; une
+  // ligne sans page propre (STOP, triangle d'alerte) lui est rattachée sans être déclarée.
   for (const voyant of ctx.voyants.values()) {
     const rattachee = parId.get(voyant.page);
     if (rattachee?.page === undefined) {
       // Page absente du plan : déjà une erreur (controlerVoyantsDansLePlan). Sinon, pas encore écrite : alerte.
       if (ctx.plan.has(voyant.page)) constats.push(alerte('R1-RATTACHEMENT', `voyant « ${voyant.id} » : la page rattachée « ${voyant.page} » n'est pas encore écrite`, 'data/voyants.json'));
-    } else if (!(rattachee.page.voyants ?? []).includes(voyant.id)) {
+    } else if (voyant.page !== ID_OUTIL_VOYANTS && !(rattachee.page.voyants ?? []).includes(voyant.id)) {
       constats.push(erreur('R1-RATTACHEMENT', `voyant « ${voyant.id} » : la page rattachée « ${voyant.page} » ne le déclare pas dans « voyants »`, rattachee.fichier));
     }
   }

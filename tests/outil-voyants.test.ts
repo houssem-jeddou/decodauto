@@ -149,6 +149,18 @@ describe('outil voyants : modèle généré depuis la base', () => {
     assert.equal(lignes.find((l) => l.voyant === 'huile-niveau')?.page, undefined);
   });
 
+  test('une ligne rattachée à la page outil ne mène pas à l’outil lui-même (demande de changement n° 23)', () => {
+    const rattachee = { ...base[0], id: 'essai-outil', page: page.id } as (typeof base)[number];
+    const autre = modeleOutilVoyants({ voyants: [...base, rattachee], sources: site.sources, plan: site.plan, libelles });
+    const ligne = autre.groupes.flatMap((g) => g.lignes).find((l) => l.voyant === 'essai-outil');
+    assert.ok(ligne !== undefined);
+    assert.equal(ligne.page, undefined);
+    // Sans l'exception, la ligne mènerait à l'outil : la page outil est construite et a son adresse au plan.
+    assert.ok(libelles.has(page.id));
+    assert.equal(site.plan.get(page.id)?.adresse, '/voyants/');
+    assert.doesNotMatch(outilVoyants(autre, site.pictogrammes), /href="\/voyants\/"/);
+  });
+
   test('chaque couleur de la liste fermée a son ordre et sa règle de filtre sans JavaScript (site.css)', () => {
     assert.deepEqual([...ORDRE_GROUPES].sort(), [...COULEURS_VOYANT].sort());
     for (const couleur of COULEURS_VOYANT) {
