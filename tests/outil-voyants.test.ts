@@ -57,6 +57,11 @@ const html = documentHtml({ titre: page.title, description: page.description, ad
 const contexteOutil = { ...contexte, pagesEcrites: libelles };
 const codes = (constats: readonly { regle: string }[]): string[] => [...new Set(constats.map((c) => c.regle))].sort();
 const controler = (h: string): string[] => codes(controlerOutilVoyants(h, 'x', modele));
+/** Libellé d'un choix du filtre tel que le rend l'outil, nombre de lignes compris : tiré du modèle, jamais écrit en dur. */
+const libelleDuFiltre = (couleur: string): string => {
+  const groupe = modele.groupes.find((g) => g.couleur === couleur);
+  return `>${groupe?.libelleFiltre ?? ''} (${groupe?.lignes.length ?? 0})<`;
+};
 
 describe('outil voyants : modèle généré depuis la base', () => {
   test('chaque ligne de la base figure une fois, dans le groupe de sa couleur', () => {
@@ -300,7 +305,7 @@ describe('outil voyants : ce que les contrôles refusent (vérifié sur la vraie
       return t.replace(ecart, '').replace('</summary>', `</summary>${ecart}`);
     }), 'OUTIL-LIBELLES'],
     ['phrase du renvoi changée', (h) => h.replace(/(data-encadre-renvoi>)[^<]*/, '$1Ces lignes suffisent à décider. '), 'OUTIL-LIEN'],
-    ['libellés du filtre inversés', (h) => h.replace('>Orange ou jaune (16)<', '>@@<').replace('>Rouge (9)<', '>Orange ou jaune (16)<').replace('>@@<', '>Rouge (9)<'), 'OUTIL-FILTRE'],
+    ['libellés du filtre inversés', (h) => h.replace(libelleDuFiltre('orange'), '>@@<').replace(libelleDuFiltre('rouge'), libelleDuFiltre('orange')).replace('>@@<', libelleDuFiltre('rouge')), 'OUTIL-FILTRE'],
     ['identifiant du filtre changé', (h) => h.replace(`id="${idFiltre('rouge')}"`, 'id="autre"').replace(`for="${idFiltre('rouge')}"`, 'for="autre"'), 'OUTIL-FILTRE'],
     ['bouton désactivé', (h) => h.replace('value="rouge">', 'value="rouge" disabled>'), 'OUTIL-FILTRE'],
     ['liste masquée dans un groupe', (h) => h.replace('<ul class="outil-lignes"', '<ul hidden class="outil-lignes"'), 'OUTIL-SANS-JS'],
