@@ -22,6 +22,18 @@ Relevé de travail, jamais publié. Les pages ne citent que les extraits utiles,
   - 8.2.22.c.1 anomalie du dispositif antipollution sans dysfonctionnement important : mineure ;
   - 8.2.22.c.2 « Le relevé du système OBD indique un dysfonctionnement important » : majeure ;
   - 8.2.22.d.1 connexion impossible sans dysfonctionnement du témoin OBD : mineure.
+- 8.2.11. Équipements de réduction des émissions à l'échappement pour moteur à allumage commandé (essence), relu le 14/11 :
+  8.2.11.a.2 « L'équipement monté par le constructeur est manifestement absent, modifié ou défectueux » : majeure ;
+  8.2.11.b.2 « Fuites susceptibles d'affecter les mesures des émissions » : majeure.
+- 8.2.21. Équipements de réduction des émissions à l'échappement pour moteur à allumage par compression (diesel), relu
+  le 14/11 : 8.2.21.a.2 « L'équipement monté par le constructeur est manifestement absent, modifié ou défectueux » :
+  majeure ; 8.2.21.b.2 fuites : majeure. Le mot « particules » n'apparaît nulle part dans l'arrêté (recherche dans le
+  texte affiché, 14/11) : le filtre à particules n'est pas nommé.
+- 1.1.13. Garnitures ou plaquettes de freins, relu le 14/11 : a.1 « Usure importante » : mineure ; a.2 « Usure excessive
+  (marque minimale atteinte) » : majeure ; a.3 « Usure excessive (marque minimale non visible) » : critique ;
+  b.2 plaquettes encrassées par de l'huile, de la graisse : majeure ; b.3 avec performances de freinage réduites :
+  critique ; c.3 absentes ou mal montées : critique ; d.1 « Faisceau électrique du témoin d'usure déconnecté ou
+  détérioré » : mineure.
 - 1.1.10.f.1 « Témoin du liquide des freins allumé ou défectueux » : mineure ; 1.1.10.g.1 dispositif avertisseur de niveau insuffisant défectueux : mineure.
 - 1.1.13.d.1 « Faisceau électrique du témoin d'usure déconnecté ou détérioré » : mineure.
 - 1.1.6.e.2 « Mauvais fonctionnement, signal avertisseur indiquant un dysfonctionnement » : majeure (point 1.1.6 : à relire avec son intitulé avant usage).
