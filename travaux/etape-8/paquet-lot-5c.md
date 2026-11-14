@@ -129,4 +129,4 @@ Les deux brouillons sont construits sur la branche d'essai `essai/brouillons` (j
 
 ## 8. Validation de Houssem
 
-À compléter.
+Le 14/11/2026 à 19 h 53, par la validation groupée (questions posées dans la session, paquet et demande n° 24 joints) : « Je valide + go » pour la page voyant AdBlue (§1, avec le recouvrement des lignes 2 et 3 dit en clair, corrigé ensuite par la demande n° 25) et pour la page voyant de préchauffage (§2, ligne saisie « voyant qui clignote » : Oui, avec précautions ; À faire tout de suite ; Seat p. 289 ; lien du plan préchauffage ↔ voyant moteur, §3 bis), avec le go de fusion du commit de passage si sa CI est verte ; « J'accepte » la demande n° 24 (§3). Empreintes versées : voyant AdBlue `f476c128…`, voyant de préchauffage `88b9ea07…` ; ligne `adblue-reserve` de la base : `003b8d89…`.

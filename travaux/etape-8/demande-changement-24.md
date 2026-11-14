@@ -1,6 +1,6 @@
 # Demande de changement n° 24 : ligne `adblue-reserve` de la base voyants (extrait Renault p. 166 corrigé)
 
-**Statut : proposée le 14/11/2026, avec le lot 5c (page voyant AdBlue).** Origine : relecture à l'écran de la notice Renault Clio 5 phase 2, p. 166 et 167, pour la page AdBlue (consigne du brief : « témoins des messages AdBlue de Renault, Dacia et Peugeot, à vérifier sur les PDF »).
+**Statut : proposée le 14/11/2026 avec le lot 5c (page voyant AdBlue) ; acceptée par Houssem le 14/11/2026 (19 h 53) et appliquée dans la pull request du lot (empreinte de la ligne `003b8d89…`).** Origine : relecture à l'écran de la notice Renault Clio 5 phase 2, p. 166 et 167, pour la page AdBlue (consigne du brief : « témoins des messages AdBlue de Renault, Dacia et Peugeot, à vérifier sur les PDF »).
 
 - **Élément concerné** : `data/voyants.json`, ligne `adblue-reserve` (« Voyant AdBlue orange (réserve basse, démarrage bientôt bloqué) »), validée le 24/10/2026 (étape 5, base figée), cinquième citation (Renault Clio 5 phase 2, « p. 166, « Réservoir réactif », Entretien/Autonomie »).
 - **Changement proposé** : dans l'extrait de cette citation, « [témoin] clignote. « XXX KM blocage remplir AdBlue » » devient « [témoin] s'allume. « XXX KM blocage remplir AdBlue » ». **Rien d'autre** : emplacement, niveau tiré de la notice (« dès que possible » : Oui, avec précautions ; À faire tout de suite), verdict, urgence, action, écart et autres citations inchangés.

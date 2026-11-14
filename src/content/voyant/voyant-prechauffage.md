@@ -1,6 +1,6 @@
 ---
-# Brouillon de la page « voyant préchauffage » de la vague A (étape 8, lot 5c), rédigé le 14/11/2026, à valider par Houssem.
-# Hors de exemples/ et de src/content tant qu'il n'est pas validé. Lignes de la base, et une ligne saisie citée (Seat Ibiza).
+# Page « voyant préchauffage » de la vague A (étape 8, lot 5c), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 5c (règle de passage, travaux/etape-8/regle-de-passage.md).
 id: voyant-prechauffage
 title: "Voyant préchauffage allumé ou qui clignote : peut-on rouler ?"
 h1: "Voyant de préchauffage (diesel) : normal au démarrage, défaut s'il clignote"
@@ -42,6 +42,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (19 h 53),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-5c.md).
+validation: 88b9ea070d76a8ecabef83a49ada1eace425555fa8bc6a6f099c0e441e708fe1
 causes:
   - cause: Préchauffage du moteur diesel au démarrage
     explication: "Selon les notices Peugeot 208, Renault Clio 5 phase 2, Dacia Sandero 3 et Seat Ibiza, le témoin signale le préchauffage du moteur diesel, puis s'éteint quand le moteur peut démarrer : c'est le fonctionnement normal. Selon les notices Renault et Dacia, il indique que les bougies de préchauffage fonctionnent."

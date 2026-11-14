@@ -1,6 +1,6 @@
 ---
-# Brouillon de la page « voyant AdBlue » de la vague A (étape 8, lot 5c), rédigé le 14/11/2026, à valider par Houssem.
-# Hors de exemples/ et de src/content tant qu'il n'est pas validé. Les lignes de l'encadré viennent de la base voyants.
+# Page « voyant AdBlue » de la vague A (étape 8, lot 5c), rédigée le 14/11/2026 et validée par Houssem le 14/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 5c (règle de passage, travaux/etape-8/regle-de-passage.md).
 id: voyant-adblue
 title: "Voyant AdBlue allumé : peut-on rouler, que faire ?"
 h1: "Voyant AdBlue : réserve basse, défaut antipollution ou démarrage impossible"
@@ -35,6 +35,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (19 h 53),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-5c.md).
+validation: f476c1286ed25d06ad8caafae4b59caefba2f3e88c423219952e74025fa9dc2f
 causes:
   - cause: Appoint pas encore pris en compte par le système
     explication: "Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, si l'on ne laisse pas tourner le moteur 10 secondes à l'arrêt après le remplissage, le système ne prend en compte l'appoint qu'après plusieurs dizaines de minutes de roulage."
