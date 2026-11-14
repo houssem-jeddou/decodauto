@@ -89,7 +89,7 @@ Les sections suivantes reprennent les notes prises pendant la lecture à l'écra
   lecture n'est pas vérifiable par une extraction ; à revoir par Houssem sur le PDF (page 288 du fichier) avec la
   validation de la demande. La clé est aussi le symbole de l'indicateur d'entretien de la Seat Ibiza (base,
   `entretien-vidange`).
-- **Citroën C3, guide d'utilisation édition 01-20** (`notice-citroen-c3`), lu le 14/11 vers 23 h par WebFetch (texte du
+- **Citroën C3, guide d'utilisation édition 01-20** (`notice-citroen-c3`), lu le 14/11 vers 22 h 05 par WebFetch (texte du
   PDF du registre ; même lecture par le relecteur de la demande, indépendamment) ; à confirmer à l'écran :
   - p. 12, témoin AdBlue, moteur 1.5 BlueHDi (Euro 6.2/6.3) : mêmes seuils et consignes que la Peugeot 208 p. 15
     (allumé environ 30 secondes entre 2 400 et 800 km ; fixe entre 800 et 100 km, appoint rapide ou (3) ; clignotant
