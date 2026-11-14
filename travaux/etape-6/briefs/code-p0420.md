@@ -8,6 +8,7 @@
 - **Adresse** : `/codes-defaut/p0420/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/moteur-puretech/` (vague B : pas de lien dans le texte avant sa publication) ; `/nettoyer-fap/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/fap/` (vague A) ; `/voyants/moteur/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page exemple rédigée** (sa validation est notée au journal) : `exemples/code-defaut/code-p0420.md`. Elle sert de point de départ à la page de l'étape 8.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -36,6 +37,12 @@
 Et 2 autres : « p0420nissan », « peugeot 208 p0420 ».
 
 ## Décision et sources disponibles
+
+Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à une autre page : pas de tableau des notices ici) :
+
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `moteur-orange-fixe` Voyant moteur orange allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez que si la notice de votre voiture permet de rouler jusqu'au garage, et faites alors contrôler le moteur sans attendre en roulant prudemment ; sinon, faites appel à un garage ou à l'assistance. | 5 | oui |
 
 Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources.json`) : verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire).
 
@@ -80,7 +87,7 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je continuer à rouler avec le code P0420 ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le code P0420 ? »
 - **Angle** : Code générique du catalyseur (rendement sous le seuil). Signification, causes et cas par marque tirés de sources techniques admises (charte §2.2), comme l'exemple P0087 ; le verdict vient de la ligne du voyant qui s'allume avec le code.
 - **Élément unique** : Tableau des cas décrits par marque (modèle 6.6b).
 - **À traiter** :

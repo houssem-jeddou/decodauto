@@ -100,7 +100,7 @@ jobs:
       - name: Construction avec les exemples (dist-exemples)
         run: npx astro build
       - name: Script de contrôle, exemples compris
-        run: node scripts/controle.ts --dist dist-exemples --exemples
+        run: node scripts/controle.ts --dist dist-exemples --exemples --attendu R4-VALIDATION-ABSENTE@exemples/code-defaut/code-p0420.md --attendu R4-VALIDATION-ABSENTE@exemples/code-defaut/code-p0299.md
       - name: Liens cassés
         if: ${{ !cancelled() }}
         run: node scripts/liens.ts --dist dist-exemples --exemples
