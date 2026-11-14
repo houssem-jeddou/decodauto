@@ -8,14 +8,16 @@ on:
   # GitHub ne lance les déclenchements planifiés que depuis la branche par défaut (main).
   schedule:
     - cron: '17 6 * * 1'
-  # Lancement à la demande (onglet Actions) : contrôles et vérification de la production, jamais de déploiement.
+  # Lancement à la demande (onglet Actions) : contrôles, et vérification de la production sur main seulement (demande
+  # de changement n° 26) ; jamais de déploiement.
   workflow_dispatch:
 
 permissions:
   contents: read
 
 # Un nouveau passage annule celui qu'il remplace sur une pull request, et sur un lancement à la demande hors de main
-# (branches d'essai, demande de changement n° 26 : minutes du dépôt privé). Jamais sur main : un déploiement va au bout.
+# (branches d'essai, demande de changement n° 26 : minutes du dépôt privé). Sur main, un passage en cours va au bout
+# (un passage encore en attente peut être remplacé par un plus récent, règle de GitHub pour un groupe de concurrence).
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main') }}
@@ -258,7 +260,7 @@ jobs:
     # request ni sur une autre branche (demande de changement n° 26) : il n'y était qu'informatif (avertissements, job
     # toujours vert), la production n'ayant pas encore les changements de la branche, et coûtait une minute par passage.
     needs: deploiement
-    if: ${{ !cancelled() && (needs.deploiement.result == 'success' || (github.event_name != 'push' && github.event_name != 'pull_request' && github.ref == 'refs/heads/main')) }}
+    if: ${{ !cancelled() && (needs.deploiement.result == 'success' || ((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main')) }}
     runs-on: ubuntu-latest
     # Après un déploiement : jusqu'à 4 passages, sans nouveau passage au-delà de 4 minutes. Un passage fait 14 lectures
     # d'au plus 20 s quand le site répond (http://www en deux redirections), jusqu'à 33 dans une boucle de redirections
@@ -271,4 +273,6 @@ jobs:
           node-version-file: .nvmrc
       # Aucune dépendance : le script n'utilise que Node. Aucun secret.
       - name: Vérifier la production
+        # --information ne s'applique plus en CI depuis la demande n° 26 (le job ne tourne que sur main) : gardé comme
+        # garde-fou, si le job venait à tourner ailleurs.
         run: node scripts/verifier-production.ts ${{ (github.event_name == 'pull_request' || github.ref != 'refs/heads/main') && '--information' || '' }} ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && '--apres-deploiement' || '' }}

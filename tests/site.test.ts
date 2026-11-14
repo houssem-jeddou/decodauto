@@ -268,7 +268,7 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
     assert.deepEqual(o.attentes, [30_000]);
   });
 
-  test('un seul passage (pull request, contrôle du lundi, lancement à la demande) : écart rendu tel quel, sans attente', async () => {
+  test('un seul passage (contrôle du lundi, lancement à la demande sur main, lancement local) : écart rendu tel quel, sans attente', async () => {
     const o = options();
     const resultat = await verifierAvecTentatives(async () => { o.avancer(); return [ecart]; }, { ...o.opts, passages: 1 });
     assert.deepEqual(resultat, { constats: [ecart], passages: 1, passagers: [] });
@@ -301,5 +301,40 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
     const script = await readFile(join(racine, 'scripts', 'verifier-production.ts'), 'utf8');
     assert.match(script, /budgetMs: 240_000/);
     assert.match(script, /passages: apresDeploiement \? 4 : 1/);
+  });
+
+  test('demande n° 26 : le job production ne tourne que sur main, et seuls une pull request ou un essai hors de main annulent le passage remplacé', async () => {
+    const ci = await readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
+    const job = ci.slice(ci.indexOf('\n  production:'));
+    const condition = /\n    if: (\$\{\{.*\}\})\n/.exec(job)?.[1];
+    const annulation = /\nconcurrency:\n  group: .*\n  cancel-in-progress: (\$\{\{.*\}\})\n/.exec(ci)?.[1];
+    assert.ok(condition !== undefined && annulation !== undefined, 'condition du job production ou annulation introuvable');
+    // Évalue l'expression de GitHub pour un événement : seules les variables utilisées ici sont remplacées, toute autre
+    // variable laissée dans l'expression fait échouer l'évaluation (le test doit alors être complété).
+    const evaluer = (expression: string, c: { evenement: string; ref: string; deploiement: string }): boolean => {
+      const js = expression
+        .replace(/^\$\{\{\s*|\s*\}\}$/g, '')
+        .replace(/!cancelled\(\)/g, 'true')
+        .replace(/github\.event_name/g, JSON.stringify(c.evenement))
+        .replace(/github\.ref/g, JSON.stringify(c.ref))
+        .replace(/needs\.deploiement\.result/g, JSON.stringify(c.deploiement))
+        .replace(/==/g, '===');
+      assert.doesNotMatch(js, /[a-z_]+\.[a-z_]+/i, `variable non prévue par le test : ${js}`);
+      return Function(`return (${js});`)() === true;
+    };
+    const main = 'refs/heads/main';
+    const cas = [
+      { nom: 'push sur main, déploiement réussi', evenement: 'push', ref: main, deploiement: 'success', production: true, annule: false },
+      { nom: 'push sur main, déploiement ignoré', evenement: 'push', ref: main, deploiement: 'skipped', production: false, annule: false },
+      { nom: 'push sur main, déploiement en échec', evenement: 'push', ref: main, deploiement: 'failure', production: false, annule: false },
+      { nom: 'pull request', evenement: 'pull_request', ref: 'refs/pull/12/merge', deploiement: 'skipped', production: false, annule: true },
+      { nom: 'contrôle du lundi', evenement: 'schedule', ref: main, deploiement: 'skipped', production: true, annule: false },
+      { nom: 'lancement à la demande sur main', evenement: 'workflow_dispatch', ref: main, deploiement: 'skipped', production: true, annule: false },
+      { nom: 'lancement à la demande sur une branche d\'essai', evenement: 'workflow_dispatch', ref: 'refs/heads/essai/brouillons', deploiement: 'skipped', production: false, annule: true },
+    ];
+    for (const c of cas) {
+      assert.equal(evaluer(condition, c), c.production, `job production, ${c.nom}`);
+      assert.equal(evaluer(annulation, c), c.annule, `annulation du passage remplacé, ${c.nom}`);
+    }
   });
 });
