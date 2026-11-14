@@ -95,7 +95,6 @@
     ]
   },
   "voyant-batterie": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant de batterie allumé ?",
     "angle": "Une seule ligne de la base, le voyant de charge rouge, avec un écart entre marques à afficher. Les lecteurs cherchent surtout pourquoi il reste allumé avec une batterie neuve ou un alternateur en bon état.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
@@ -185,7 +184,6 @@
     ]
   },
   "voyant-airbag": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant airbag allumé ?",
     "angle": "Deux témoins de la base, aux actions très différentes (tableau des voyants du brief : défaut des airbags ou des prétensionneurs ; airbag passager désactivé, avec sa condition). La recherche veut surtout éteindre le voyant : la page dit honnêtement pourquoi on ne le fait pas soi-même.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
@@ -203,7 +201,6 @@
     ]
   },
   "voyant-abs-esp": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant ABS ou ESP allumé ?",
     "angle": "Quatre lignes de la base (tableau des voyants du brief), de l'ESP qui clignote parce qu'il agit aux voyants ABS et freinage allumés ensemble. « Peut-on rouler sans ABS » est exactement l'encadré.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
@@ -235,7 +232,6 @@
     ]
   },
   "voyant-direction": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant de direction assistée allumé ?",
     "angle": "La couleur décide entre les deux lignes de la base (tableau des voyants du brief), avec un écart entre marques sur le rouge. Page courte : peu de mots-clés, des recherches surtout par modèle.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [

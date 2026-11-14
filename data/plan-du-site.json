@@ -485,7 +485,8 @@
     "parent": "voyants",
     "liens": [
       "batterie-voiture",
-      "voiture-ne-demarre-pas"
+      "voiture-ne-demarre-pas",
+      "voyant-direction"
     ]
   },
   {
