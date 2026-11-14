@@ -36,6 +36,8 @@ sources:
   - notice-renault-clio-5
   - notice-seat-ibiza
   - notice-toyota-yaris
+  - notice-citroen-c3
+  - arrete-1991-06-18-controle-technique
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-03
