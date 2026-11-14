@@ -119,3 +119,7 @@ Un agent sans contexte de la rédaction a relu le diff complet de la pull reques
 1. La page huile passe de son brouillon à `exemples/voyant/` avec son empreinte, et sa question sort de `consignes.json` ; puis les trois pages passent dans `src/content` (règle de passage, faite à la main : `npm ci` est impossible dans la session ; mêmes vérifications, refaites par la CI : empreinte (R4), « à propos » en ligne, liste Lighthouse ; briefs régénérés par `node scripts/briefs.ts`).
 2. CI verte sur ce commit (contrôles, recette, Lighthouse) ; recette sur l'artefact.
 3. Fusion par commit de fusion sur ton go, pour le commit indiqué dans la pull request.
+
+## 7. Validation de Houssem
+
+Le 14/11/2026 à 12 h 13, par la validation groupée (questions posées dans la session) : « Je valide + go » pour les quatre lignes de validation proposées (§1, §1 bis, §2, §3), avec le go de fusion du commit de passage (pages déplacées vers `src/content`, rien d'autre) si sa CI est verte. Empreinte de la page huile versée : `36e1977d…`.

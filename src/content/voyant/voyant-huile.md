@@ -1,8 +1,7 @@
 ---
-# Brouillon de la page « voyant huile » (étape 8, lot 2), rédigé le 14/11/2026 sur le modèle de page voyant. Il reste ici,
-# hors d'exemples/ et de src/content, jusqu'à la validation de Houssem (tests/porte6.test.ts exige l'empreinte de toute page
-# rédigée) : ensuite exemples/voyant/voyant-huile.md avec son empreinte, puis passage. Les lignes de l'encadré viennent de la
-# base voyants validée.
+# Page « voyant huile » de la vague A (modèle de page voyant ; lot 2, étape 8), rédigée le 14/11/2026 et validée par
+# Houssem le 14/11/2026. Passée de exemples/ à src/content par la pull request du lot 2 (règle de passage,
+# travaux/etape-8/regle-de-passage.md). Les lignes de l'encadré viennent de la base voyants validée.
 id: voyant-huile
 title: "Voyant huile moteur allumé : rouge ou orange, peut-on rouler ?"
 h1: "Voyant d'huile moteur rouge, orange ou clé : que faire ?"
@@ -40,6 +39,9 @@ date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (12 h 13),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-2.md).
+validation: 36e1977d997fa533133a6fa77a47ef11b1d7c05e7222036622b729d90055b240
 causes:
   - cause: Niveau d'huile trop bas
     explication: "Les notices Seat Ibiza, Peugeot 208 et Toyota Yaris signalent un niveau d'huile bas par un voyant orange (jaune chez Seat) ou par un message ; celles de Renault Clio 5 phase 2 et Dacia Sandero 3, par une alerte de l'afficheur au démarrage quand le niveau minimum est atteint. Le remède est l'appoint, avec l'huile que préconise la notice."

@@ -1,7 +1,7 @@
 ---
-# Exemple rédigé du modèle de page code défaut (étape 6, livrable 6.6b). Jamais publié avant son lot : il est hors de
-# src/content et n'est construit que par la construction de recette (AVEC_EXEMPLES=1, dist-exemples). Il deviendra la
-# page « code P0087 » de la vague A (étape 8). La ligne de l'encadré vient de la base voyants validée (voyant moteur).
+# Page « code P0087 » de la vague A (modèle de page code défaut ; exemple du livrable 6.6b, publié sans changement,
+# validé par Houssem le 14/11/2026). Passée de exemples/ à src/content par la pull request du lot 2 (règle de passage,
+# travaux/etape-8/regle-de-passage.md). La ligne de l'encadré vient de la base voyants validée (voyant moteur).
 id: code-p0087
 title: "Code P0087 : pression de carburant trop basse, peut-on rouler ?"
 h1: "Code défaut P0087 : pression de la rampe de carburant trop basse"

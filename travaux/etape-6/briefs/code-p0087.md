@@ -8,7 +8,7 @@
 - **Adresse** : `/codes-defaut/p0087/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/moteur/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
-- **Page exemple rédigée** (sa validation est notée au journal) : `exemples/code-defaut/code-p0087.md`. Elle sert de point de départ à la page de l'étape 8.
+- **Page publiée** (sa validation est notée au journal) : `src/content/code-defaut/code-p0087.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Requête et mots-clés (plan du site, docs/05)
 

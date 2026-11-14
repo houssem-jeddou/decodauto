@@ -79,7 +79,6 @@
     ]
   },
   "voyant-huile": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant d'huile allumé ?",
     "angle": "Trois lignes de la base, trois décisions différentes (tableau des voyants du brief) : la couleur et le pictogramme décident, entre pression d'huile, niveau d'huile et rappel d'entretien.",
     "element_unique": "Tableau « Ce que dit la notice de votre marque », une partie par voyant rattaché.",
     "a_traiter": [

@@ -1,7 +1,7 @@
 ---
-# Exemple rédigé du modèle de page voyant (étape 6, livrable 6.6a). Jamais publié avant son lot : il est hors de
-# src/content et n'est construit que par la construction de recette (AVEC_EXEMPLES=1, dist-exemples). Il deviendra la
-# page « voyant moteur » de la vague A (étape 8). Les lignes de l'encadré viennent de la base voyants validée.
+# Page « voyant moteur » de la vague A (modèle de page voyant ; exemple du livrable 6.6a, complété au lot 2 le
+# 14/11/2026 et validé par Houssem le 14/11/2026). Passée de exemples/ à src/content par la pull request du lot 2
+# (règle de passage, travaux/etape-8/regle-de-passage.md). Les lignes de l'encadré viennent de la base voyants validée.
 id: voyant-moteur
 title: "Voyant moteur orange allumé : peut-on rouler ? Que faire ?"
 h1: "Voyant moteur orange, fixe ou clignotant : que faire ?"
