@@ -1,6 +1,6 @@
 # Demande de changement n° 25 : lignes AdBlue de la base voyants (`adblue-reserve`, `adblue-defaut`, `adblue-demarrage-impossible`)
 
-**Statut : proposée le 14/11/2026 ; version 2 après la revue indépendante (14/11, 22 h 10), version 3 après la seconde revue (14/11, 22 h 45).** Origine : revue indépendante du lot 5c (constat I1) et décision de Houssem du 14/11 (19 h 53) : la page AdBlue est publiée avec un recouvrement entre deux lignes de son encadré, à corriger par cette demande.
+**Statut : acceptée par Houssem le 14/11/2026 (22 h 45), version 3** (proposée le 14/11 ; version 2 après la revue indépendante, 22 h 10 ; version 3 après la seconde revue, vers 22 h 40). Appliquée avec les trois empreintes dans la pull request de la demande (n° 49). Origine : revue indépendante du lot 5c (constat I1) et décision de Houssem du 14/11 (19 h 53) : la page AdBlue est publiée avec un recouvrement entre deux lignes de son encadré, à corriger par cette demande.
 
 ## 1. Élément concerné
 

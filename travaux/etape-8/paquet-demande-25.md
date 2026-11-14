@@ -70,7 +70,10 @@ Nom de la ligne 2 (outil, tableau des notices) : « Voyant AdBlue avec un messag
 
 ## 6. Validation de Houssem
 
-À compléter.
+**14/11/2026, 22 h 45** (réponse groupée) : « J'accepte, je valide + go », après les deux vérifications (clé vue sur le PDF Seat, notice C3 vue). Valent :
+- « J'accepte la demande n° 25 (version 3) » ;
+- « Je valide la mise à jour de la page voyant AdBlue : encadré (empreinte 10b8ac97…) et texte, dont la nuance Citroën C3 » ;
+- go pour la fusion et la mise en ligne, dès que la CI repart (budget GitHub fixé par Houssem le 14/11).
 
 **Lignes de validation proposées** :
 - « J'accepte la demande n° 25 (version 3) : « sans le voyant moteur » et « avant 0 km » dans les lignes adblue-reserve et adblue-defaut, adblue-defaut définie par le message de défaut (citation Peugeot p. 16 retirée ; Seat, Renault et Dacia gardés, verdict inchangé ; clé chez Seat vue par moi sur le PDF), situation de adblue-demarrage-impossible complétée pour Dacia. »
