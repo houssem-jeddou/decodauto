@@ -244,10 +244,19 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
     const resultat = await verifierAvecTentatives(async () => { o.avancer(); return [ecart]; }, { ...o.opts, journal: (m) => journal.push(m) });
     assert.equal(resultat.passages, 4);
     assert.deepEqual(resultat.constats, [ecart]);
-    assert.deepEqual(resultat.passagers, [ecart, ecart, ecart]);
+    assert.deepEqual(resultat.passagers, [], 'un écart persistant n\'est pas passager');
     assert.deepEqual(o.attentes, [30_000, 30_000, 30_000]);
     assert.equal(journal.length, 3);
     assert.match(journal[0] ?? '', /PROD-NOINDEX-PRESENT/);
+  });
+
+  test('écarts mêlés : le passager est rendu une fois, le persistant reste au dernier passage', async () => {
+    const o = options();
+    const reponses = [[ecart, cookie], [ecart, cookie], [cookie]];
+    let appels = 0;
+    const resultat = await verifierAvecTentatives(async () => { o.avancer(); return reponses[appels++] ?? [cookie]; }, o.opts);
+    assert.deepEqual(resultat.constats, [cookie]);
+    assert.deepEqual(resultat.passagers, [ecart]);
   });
 
   test('budget de temps : aucun nouveau passage au-delà, l\'écart du passage en cours est retenu (le job échoue, il n\'est pas annulé)', async () => {
@@ -286,8 +295,9 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
     assert.match(job, /--apres-deploiement/);
     assert.match(job, /github\.event_name == 'push' && github\.ref == 'refs\/heads\/main'\) && '--apres-deploiement'/);
     const delai = Number(/timeout-minutes: (\d+)/.exec(job)?.[1]);
-    // Budget de 4 min, plus un passage au pire (13 lectures de 20 s), plus la préparation du job : au moins 10 min.
-    assert.ok(delai >= 10, `timeout-minutes du job production : ${delai}`);
+    // Budget de 4 min, plus un dernier passage au pire (33 lectures de 20 s dans une boucle de redirections), plus la
+    // préparation du job : au moins 17 min.
+    assert.ok(delai >= 17, `timeout-minutes du job production : ${delai}`);
     const script = await readFile(join(racine, 'scripts', 'verifier-production.ts'), 'utf8');
     assert.match(script, /budgetMs: 240_000/);
     assert.match(script, /passages: apresDeploiement \? 4 : 1/);

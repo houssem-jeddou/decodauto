@@ -258,10 +258,10 @@ jobs:
     needs: deploiement
     if: ${{ !cancelled() && (needs.deploiement.result == 'success' || github.event_name != 'push') }}
     runs-on: ubuntu-latest
-    # Après un déploiement : jusqu'à 4 passages, sans nouveau passage au-delà de 4 minutes ; un passage dure au plus
-    # 13 lectures de 20 s. Le délai du job couvre ce pire cas avec de la marge : un écart fait échouer le job, il ne
-    # l'annule jamais.
-    timeout-minutes: 15
+    # Après un déploiement : jusqu'à 4 passages, sans nouveau passage au-delà de 4 minutes. Un passage fait 14 lectures
+    # d'au plus 20 s quand le site répond (http://www en deux redirections), jusqu'à 33 dans une boucle de redirections
+    # lentes (11 min au plus). Le délai du job couvre ce pire cas : un écart fait échouer le job, il ne l'annule jamais.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0

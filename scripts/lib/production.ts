@@ -202,17 +202,25 @@ export async function verifierAvecTentatives(verifier: () => Promise<Constat[]>,
   if (!Number.isInteger(total) || total < 1) throw new Error(`passages doit être un entier d'au moins 1 (reçu : ${String(total)})`);
   if (!Number.isFinite(delaiMs) || delaiMs < 0 || !Number.isFinite(budgetMs) || budgetMs < 0) throw new Error('delaiMs et budgetMs doivent être des durées positives');
   const debut = options.maintenant();
-  const passagers: Constat[] = [];
+  const precedents: Constat[] = [];
   let constats: Constat[] = [];
+  // Écarts passagers : vus à un passage précédent et absents du dernier, sans doublon (un écart persistant n'en est pas un).
+  const cle = (c: Constat): string => `${c.regle}\u0000${c.message}`;
+  const resultat = (passage: number): ResultatTentatives => {
+    const derniers = new Set(constats.map(cle));
+    const vus = new Set<string>();
+    const passagers = precedents.filter((c) => !derniers.has(cle(c)) && !vus.has(cle(c)) && vus.add(cle(c)) !== undefined);
+    return { constats, passages: passage, passagers };
+  };
   for (let passage = 1; passage <= total; passage += 1) {
     constats = await verifier();
-    if (constats.length === 0) return { constats, passages: passage, passagers };
+    if (constats.length === 0) return resultat(passage);
     const ecoule = options.maintenant() - debut;
-    if (passage === total || ecoule + delaiMs > budgetMs) return { constats, passages: passage, passagers };
-    passagers.push(...constats);
+    if (passage === total || ecoule + delaiMs > budgetMs) return resultat(passage);
+    precedents.push(...constats);
     const regles = [...new Set(constats.map((c) => c.regle))].join(', ');
     options.journal?.(`Passage ${passage} sur ${total} au plus : ${constats.length} écart(s) (${regles}) ; nouvelle vérification dans ${Math.round(delaiMs / 1000)} s (propagation de Cloudflare).`);
     await options.attendre(delaiMs);
   }
-  return { constats, passages: total, passagers };
+  return resultat(total);
 }
