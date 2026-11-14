@@ -27,7 +27,7 @@ const LIGHTHOUSE = `{\n  "ci": {\n    "collect": {\n      "staticDistDir": "./di
 async function depot(fichiers: Record<string, string>): Promise<string> {
   const racine = await mkdtemp(join(tmpdir(), 'passage-'));
   temporaires.push(racine);
-  const tous: Record<string, string> = { 'data/plan-du-site.json': JSON.stringify(PLAN), 'lighthouserc.json': LIGHTHOUSE, ...fichiers };
+  const tous: Record<string, string> = { 'data/plan-du-site.json': JSON.stringify(PLAN), 'lighthouserc.json': LIGHTHOUSE, 'config/vagues-ouvertes.json': '["A"]\n', ...fichiers };
   for (const [chemin, texte] of Object.entries(tous)) {
     await mkdir(dirname(join(racine, chemin)), { recursive: true });
     await writeFile(join(racine, chemin), texte);
