@@ -65,7 +65,7 @@ Il signale un défaut des systèmes de retenue : les airbags, ou les prétension
 
 Le voyant s'allume quelques secondes à la mise du contact, puis s'éteint : c'est le contrôle normal. Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, il signale une défaillance s'il ne s'allume pas à la mise sous contact, s'il s'allume moteur allumé, ou, pour Dacia, s'il clignote ({{cite:notice-renault-clio-5|p. 137}}, {{cite:notice-dacia-sandero-3|p. 111}}). La notice Seat dit la même chose du témoin qui reste allumé ou clignote ({{cite:notice-seat-ibiza|p. 27}}).
 
-La notice Peugeot 208 le range parmi les témoins de couleur orange ({{cite:notice-peugeot-208|p. 14 et 17}}) ; sur d'autres voitures, il peut être rouge. Quelle que soit sa couleur, la consigne est la même : {{verdict:airbag-defaut}}.
+La notice Peugeot 208 le range parmi les témoins de couleur orange ({{cite:notice-peugeot-208|p. 14 et 17}}). Quelle que soit sa couleur sur votre voiture, la consigne est la même : {{verdict:airbag-defaut}}.
 
 ## Comment éteindre le voyant airbag ?
 
