@@ -36,8 +36,12 @@ Relevé de travail, jamais publié. Les pages ne citent que les extraits utiles,
   détérioré » : mineure.
 - 1.1.10.f.1 « Témoin du liquide des freins allumé ou défectueux » : mineure ; 1.1.10.g.1 dispositif avertisseur de niveau insuffisant défectueux : mineure.
 - 1.1.13.d.1 « Faisceau électrique du témoin d'usure déconnecté ou détérioré » : mineure.
-- 1.1.6.e.2 « Mauvais fonctionnement, signal avertisseur indiquant un dysfonctionnement » : majeure (point 1.1.6 : à relire avec son intitulé avant usage).
-- 2.6.1.d.2 « Le système signale une défaillance via l'interface électronique du véhicule » : majeure (point 2.6.1 : à relire avec son intitulé avant usage).
+- 1.1.6. « COMMANDE DU FREIN DE STATIONNEMENT » (intitulé relu le 14/11) : 1.1.6.e.2 « Mauvais fonctionnement, signal avertisseur indiquant un dysfonctionnement » : majeure.
+- 1.6.1. « SYSTÈME ANTIBLOCAGE (ABS) », relu le 14/11 : a.2 « Mauvais fonctionnement du dispositif d'alerte » : majeure ; b.2 « Le dispositif d'alerte indique un mauvais fonctionnement du système » : majeure ; c.2 « Capteur de vitesse de roue manquant ou endommagé » : majeure ; d.2 « Câblage endommagé » : majeure ; e.2 « Autres composants manquants ou endommagés » : majeure ; f.2 « Le système signale une défaillance via l'interface électronique du véhicule » : majeure.
+- 2.6.1. « DIRECTION ASSISTÉE ÉLECTRONIQUE », relu le 14/11 : a.2 « L'indicateur de dysfonctionnement fait état d'une défaillance du système » : majeure ; b.2 « Incohérence entre l'angle du volant et l'angle des roues » : majeure (b.3, direction affectée : critique) ; c.2 « L'assistance ne fonctionne pas » : majeure ; d.2 « Le système signale une défaillance via l'interface électronique du véhicule » : majeure.
+- 7.1.6. « SYSTÈME DE RETENUE SUPPLÉMENTAIRE », relu le 14/11 : a.2 « L'indicateur de dysfonctionnement fait état d'une défaillance du système » : majeure.
+- 4.13.1. « BATTERIE DE SERVICE » (14/11) : fixation et étanchéité seulement (a.1, a.2, b.1, b.2) ; rien sur le témoin de charge.
+- Contrôle de stabilité (ESP, ESC) : aucune occurrence de « ESC », « patinage », « stabilité électronique », « contrôle de stabilité » ni « trajectoire » dans le texte affiché (recherche du 14/11) : le système n'est pas nommé.
 - 5.2.3.h.1 « Le système de contrôle de la pression des pneumatiques fonctionne mal ou le pneumatique est manifestement sous-gonflé » : mineure ; 5.2.3.h.2 « Le système de contrôle de la pression des pneumatiques est manifestement inopérant » : majeure ; 5.2.3.i.1 « La pression des pneumatiques est anormale ou incontrôlable » : mineure.
 - 7.1.5.a.2 coussins gonflables manifestement manquants ou ne convenant pas : majeure ; 7.1.5.b.2 « Le système signale une défaillance via l'interface électronique du véhicule » : majeure ; 7.1.5.c.2 « Coussin gonflable manifestement inopérant » : majeure ; 7.1.5.d.1 « Mauvaise configuration du système de désactivation du coussin gonflable passager » : mineure.
 
