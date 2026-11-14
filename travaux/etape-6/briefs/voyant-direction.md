@@ -6,6 +6,7 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/direction/` ; page mère : `/voyants/`.
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/voyants/batterie/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)

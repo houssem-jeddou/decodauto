@@ -6,7 +6,7 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/batterie/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/batterie-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/batterie-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-ne-demarre-pas/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/direction/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 
 ## Requête et mots-clés (plan du site, docs/05)
