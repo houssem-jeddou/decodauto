@@ -8,7 +8,7 @@ id: a-propos
 title: "À propos de decodauto.com"
 description: "Qui édite decodauto.com, ce que le site est et n'est pas, et comment les verdicts « rouler ou non » sont établis et vérifiés."
 libelle_court: À propos
-date_modification: 2026-11-14
+date_modification: 2026-11-15
 date_revue: 2026-11-10
 prochaine_revue: 2027-11-10
 auteurs:

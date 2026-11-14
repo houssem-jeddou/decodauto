@@ -1,6 +1,6 @@
 ---
-# Page « voyant frein » de la vague A (étape 8, lot 5d), rédigée le 14/11/2026, en attente de la validation de Houssem
-# (paquet travaux/etape-8/paquet-lot-5d.md). Elle reste dans exemples/ jusqu'à la pull request de mise en ligne.
+# Page « voyant frein » de la vague A (étape 8, lot 5d), rédigée le 14/11/2026 et validée par Houssem le 15/11/2026.
+# Passée de exemples/ à src/content par la pull request du lot 5d (règle de passage, travaux/etape-8/regle-de-passage.md).
 id: voyant-frein
 title: "Voyant frein : liquide, plaquettes, frein à main, peut-on rouler ?"
 h1: "Voyant frein : liquide de frein bas, plaquettes usées ou frein à main serré ?"
@@ -42,10 +42,13 @@ sources:
   - arrete-1991-06-18-controle-technique
 element_unique: tableau
 auteur: houssem-jeddou
-date_publication: 2026-11-14
-date_modification: 2026-11-14
-date_revue: 2026-11-14
-prochaine_revue: 2027-11-14
+date_publication: 2026-11-15
+date_modification: 2026-11-15
+date_revue: 2026-11-15
+prochaine_revue: 2027-11-15
+# Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 15/11/2026 (vers 0 h 05),
+# avec les faits du texte (paquet travaux/etape-8/paquet-lot-5d.md ; consigne propre au témoin d'usure retenue).
+validation: f05923882cbcee69743aa848f7a3190886ee2df85e9a6e9da7a06a23f75e7d43
 causes:
   - cause: Frein de stationnement serré ou mal desserré
     explication: "Selon la notice Peugeot 208, le témoin du frein de stationnement manuel signale un frein serré ou mal desserré ; selon les notices Seat Ibiza et Toyota Yaris, il s'éteint quand on desserre le frein."
