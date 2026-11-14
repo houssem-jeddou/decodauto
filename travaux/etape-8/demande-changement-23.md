@@ -41,7 +41,7 @@ La décision 8 de 8.1 ne laisse pas mettre l'outil en ligne sans STOP dans la ba
 ## Impact sur ce qui est validé
 
 - Base voyants : 25 → 26 lignes ; les 25 lignes existantes et leurs empreintes ne changent pas. La nouvelle ligne reçoit son empreinte après ton accord (`e7d593d5…`, calculée par `empreinteVoyant` du dépôt).
-- Page outil (pas encore en ligne) : l'encadré ne change pas (empreinte du 04/11 `4555601a…` inchangée) ; le texte change (STOP mène à sa ligne, triangle mieux décrit, notice Citroën C3 ajoutée) ; la liste et l'index affichent la ligne d'eux-mêmes (26 entrées, 12 rouges).
+- Page outil (pas encore en ligne) : l'encadré ne change pas (empreinte du 04/11 `4555601a…` inchangée) ; le texte change (STOP mène à sa ligne, triangle mieux décrit, notice Citroën C3 ajoutée) ; la liste et l'index affichent la ligne d'eux-mêmes (26 entrées, dont 10 rouges).
 - Aucune page en ligne ne change.
 
 ## Contrôles à relancer
