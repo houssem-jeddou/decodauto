@@ -1,6 +1,6 @@
 # Demande de changement n° 21 : préparer l'étape suivante pendant les attentes de validation
 
-**Statut : proposée le 14/11/2026, à accepter par Houssem.** Origine : demande de Houssem du 14/11 (10 h 59) d'accélérer sans rien perdre en qualité ; revue du reste à faire dans `plan-de-travail-14-11.md`.
+**Statut : acceptée par Houssem le 14/11/2026 (12 h 13), proposée le même jour.** Application : 03 v15 et `CLAUDE.md` (pull request `docs/`), contrôle VAGUE-NON-OUVERTE (PR #42) ; instructions du projet Claude : texte ci-dessous, à coller par Houssem. Origine : demande de Houssem du 14/11 (10 h 59) d'accélérer sans rien perdre en qualité ; revue du reste à faire dans `plan-de-travail-14-11.md`.
 
 - **Élément concerné** : `docs/03`, règle 12 (« une piste technique en parallèle » et ses trois exceptions), lignes des étapes 10 et 11 (« préparés sur la branche du lot ») et point 2 du « Déroulé de chaque session de travail » (« Ne travailler que sur elles ») ; demande n° 5 (« La règle 12 (piste technique) n'est pas modifiée ») ; instructions du projet Claude, règle anti-régression 2 ; `CLAUDE.md` (Méthode, point 4). Lue strictement, la règle 12 n'autorise comme livrable technique d'une autre étape que les pictogrammes de l'étape 5 et la partie technique de l'outil voyants de l'étape 8 (énumération après les deux-points), et aucune préparation du contenu de l'étape qui suit.
 - **Changement proposé** :

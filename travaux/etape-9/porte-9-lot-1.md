@@ -1,5 +1,7 @@
 # Porte de l'étape 9, premier lot : critères et preuves (14/11/2026)
 
+**Validée par Houssem le 14/11/2026 (12 h 13)** (« Je valide la porte 9 »). Tag `etape-9-premier-lot` à poser par lui (lien plus bas).
+
 > Paquet de porte préparé par Claude le 14/11/2026, à valider par Houssem. Critères : `docs/03`, ligne de l'étape 9 (v14) ; la recette et la porte 8 du lot sont dans `paquet-lot-1.md` (deux revues indépendantes, 11/11). 03 : « L'étape est terminée à la mise en ligne du premier lot » ; les lots suivants repassent la porte 8 et la recette avant chaque fusion.
 
 ## Critères « Avant »
