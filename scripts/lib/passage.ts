@@ -5,6 +5,7 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { DOSSIER_CONTENU, DOSSIER_EXEMPLES, localiserPage } from './pages-redigees.ts';
+import { FICHIER_VAGUES_OUVERTES, lireVaguesOuvertes, messageVagueNonOuverte } from './vagues.ts';
 
 /** Page dont l'accès à « Méthode » (/a-propos/#methode) conditionne la construction de production (R7-LIEN, liens de l'encadré). */
 export const ID_A_PROPOS = 'a-propos';
@@ -54,14 +55,26 @@ export async function verifierPassage(racine: string, id: string, empreinteDe: (
   const page = plan.find((p) => p.id === id);
   if (page === undefined) return { erreurs: [`${id} : identifiant absent de data/plan-du-site.json`] };
 
+  // Vagues ouvertes (demande de changement n° 21) : une page d'une vague non ouverte ne passe pas dans src/content.
+  const listeVagues = await lire(racine, FICHIER_VAGUES_OUVERTES);
+  if (listeVagues === undefined) erreurs.push(`${FICHIER_VAGUES_OUVERTES} introuvable : la liste des vagues ouvertes est obligatoire`);
+  else {
+    try {
+      const ouvertes = lireVaguesOuvertes(listeVagues);
+      if (!ouvertes.includes(page.vague)) erreurs.push(`${id} : ${messageVagueNonOuverte(id, page.vague, ouvertes)}`);
+    } catch (e) {
+      erreurs.push((e as Error).message);
+    }
+  }
+
   let source: string | undefined;
   try {
     source = await localiserPage(racine, page.type, id);
   } catch (e) {
-    return { erreurs: [(e as Error).message] };
+    return { erreurs: [...erreurs, (e as Error).message] };
   }
-  if (source === undefined) return { erreurs: [`${id} : aucun fichier ${DOSSIER_EXEMPLES}/${page.type}/${id}.md`] };
-  if (source.startsWith(`${DOSSIER_CONTENU}/`)) return { erreurs: [`${id} : déjà dans ${DOSSIER_CONTENU}/ (${source})`] };
+  if (source === undefined) return { erreurs: [...erreurs, `${id} : aucun fichier ${DOSSIER_EXEMPLES}/${page.type}/${id}.md`] };
+  if (source.startsWith(`${DOSSIER_CONTENU}/`)) return { erreurs: [...erreurs, `${id} : déjà dans ${DOSSIER_CONTENU}/ (${source})`] };
 
   const texte = (await lire(racine, source)) ?? '';
   const idFichier = /^id: *(\S+)\s*$/m.exec(texte)?.[1];
