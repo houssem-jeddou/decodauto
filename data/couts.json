@@ -61,6 +61,11 @@
       "tranche": "geste"
     },
     {
+      "id": "bref-parcours",
+      "libelle": "Bref parcours demandé par la notice",
+      "tranche": "geste"
+    },
+    {
       "id": "revision",
       "libelle": "Révision",
       "tranche": "entretien"

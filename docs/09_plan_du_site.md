@@ -11,7 +11,7 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 - **Mots-clés rattachés :** 1167 sur 1167, soit 1009 comptés et 158 variantes, chacun sur une seule page.
 - **Volume indicatif rattaché :** 1 140 760 recherches par mois.
 - **Vagues :** A = 22 pages, B = 11, C = 9, comme dans 02 et 03.
-- **Liens :** 49 paires de pages liées, chacune déclarée une seule fois dans le plan. Le lien retour est calculé.
+- **Liens :** 50 paires de pages liées, chacune déclarée une seule fois dans le plan. Le lien retour est calculé.
 - **Parent :** la page mère, reprise dans l'adresse et dans le fil d'Ariane. Elle affiche aussi la liste de ses pages enfants, par un lien calculé.
 - **Accueil :** il liste toutes les pages publiées, par thème, et cette liste est générée depuis le plan. Aucune page n'est donc orpheline.
 
@@ -22,7 +22,7 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 | voyants | `/voyants/` | voyant | A | voyant orange voiture | 205 (190) | 142 516 | – | surchauffe-moteur |
 | voyant-moteur | `/voyants/moteur/` | voyant | A | voyant moteur orange | 159 (154) | 119 764 | voyants | code-p0087, code-p0299, code-p0380, code-p0420, code-p1351, contre-visite-controle-technique, perte-de-puissance, voiture-qui-broute, voyant-adblue, voyant-fap |
 | voyant-huile | `/voyants/huile/` | voyant | A | voyant huile moteur | 29 (28) | 51 508 | voyants | huile-moteur, moteur-puretech, niveau-huile |
-| voyant-batterie | `/voyants/batterie/` | voyant | A | voyant batterie | 5 (5) | 4 424 | voyants | batterie-voiture, voiture-ne-demarre-pas |
+| voyant-batterie | `/voyants/batterie/` | voyant | A | voyant batterie | 5 (5) | 4 424 | voyants | batterie-voiture, voiture-ne-demarre-pas, voyant-direction |
 | voyant-frein | `/voyants/frein/` | voyant | A | voyant frein | 21 (20) | 20 540 | voyants | liquide-de-frein, voyant-abs-esp |
 | voyant-adblue | `/voyants/adblue/` | voyant | A | voyant adblue | 16 (16) | 7 900 | voyants | voyant-moteur |
 | voyant-fap | `/voyants/fap/` | voyant | A | voyant fap | 24 (24) | 18 960 | voyants | code-p0420, fumee-echappement, nettoyer-fap, perte-de-puissance, voyant-moteur |
@@ -30,7 +30,7 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 | voyant-airbag | `/voyants/airbag/` | voyant | A | voyant airbag | 16 (16) | 10 744 | voyants | contre-visite-controle-technique |
 | voyant-abs-esp | `/voyants/abs-esp/` | voyant | A | voyant abs | 17 (15) | 10 428 | voyants | contre-visite-controle-technique, voyant-frein |
 | voyant-pression-pneus | `/voyants/pression-pneus/` | voyant | A | voyant pression pneu | 18 (17) | 11 060 | voyants | pression-des-pneus, usure-des-pneus |
-| voyant-direction | `/voyants/direction/` | voyant | A | voyant volant orange | 3 (3) | 3 792 | voyants | – |
+| voyant-direction | `/voyants/direction/` | voyant | A | voyant volant orange | 3 (3) | 3 792 | voyants | voyant-batterie |
 | code-p0420 | `/codes-defaut/p0420/` | code-defaut | A | p0420 | 17 (16) | 10 744 | – | moteur-puretech, nettoyer-fap, voyant-fap, voyant-moteur |
 | code-p0087 | `/codes-defaut/p0087/` | code-defaut | A | p0087 | 21 (19) | 17 380 | – | perte-de-puissance, voyant-moteur |
 | code-p0299 | `/codes-defaut/p0299/` | code-defaut | A | p0299 | 22 (21) | 15 168 | – | perte-de-puissance, voyant-moteur |

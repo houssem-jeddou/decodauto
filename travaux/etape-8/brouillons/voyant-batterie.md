@@ -46,9 +46,9 @@ causes:
 
 ## Peut-on rouler avec le voyant de batterie allumé ?
 
-Verdict retenu en haut de page : {{verdict:batterie-rouge}}. Quand ce voyant s'allume moteur tournant, la batterie n'est plus rechargée : selon la notice Seat Ibiza, elle se décharge ({{cite:notice-seat-ibiza|p. 302}}).
+Verdict retenu en haut de page : {{verdict:batterie-rouge}}. Quand ce voyant s'allume moteur tournant, la batterie n'est plus rechargée normalement : selon la notice Seat Ibiza, elle se décharge ({{cite:notice-seat-ibiza|p. 302}}). Aucune des notices lues ne donne de distance à ne pas dépasser.
 
-Quatre des cinq notices lues imposent l'arrêt. La notice Peugeot 208 demande l'arrêt impératif du véhicule, stationné dans les meilleures conditions de sécurité, contact coupé ({{cite:notice-peugeot-208|p. 13}}). La notice Toyota Yaris demande d'arrêter immédiatement le véhicule dans un endroit sûr ({{cite:notice-toyota-yaris|p. 292}}). Pour Renault et Dacia, le voyant allumé sur route avec le témoin STOP et un signal sonore indique une surcharge ou une décharge du circuit électrique : arrêtez-vous ({{cite:notice-renault-clio-5|p. 137}}, {{cite:notice-dacia-sandero-3|p. 112}}).
+Quatre des cinq notices lues imposent l'arrêt. La notice Peugeot 208 demande l'arrêt impératif du véhicule, stationné dans les meilleures conditions de sécurité, contact coupé ; si le frein de stationnement électrique ne fonctionne plus, elle demande d'immobiliser la voiture autrement : un rapport engagé en boîte manuelle, la position P en boîte automatique EAT6, une cale contre une roue en boîte EAT8 ou avec le sélecteur de marche ({{cite:notice-peugeot-208|p. 13}}). La notice Toyota Yaris demande d'arrêter immédiatement le véhicule dans un endroit sûr ({{cite:notice-toyota-yaris|p. 292}}). Pour Renault et Dacia, le voyant allumé sur route avec le témoin STOP et un signal sonore indique une surcharge ou une décharge du circuit électrique : arrêtez-vous ({{cite:notice-renault-clio-5|p. 137}}, {{cite:notice-dacia-sandero-3|p. 112}}).
 
 La notice Seat Ibiza est la seule à laisser rouler : elle demande de se rendre immédiatement dans l'atelier spécialisé le plus proche, en éteignant tous les équipements électriques qui ne sont pas indispensables. L'encadré retient la consigne la plus prudente, l'arrêt ; si la notice de votre voiture permet de rejoindre l'atelier, éteignez ces équipements.
 
@@ -66,27 +66,29 @@ Oui. Selon la notice Peugeot 208, certains témoins rouges ou orange s'allument 
 
 C'est donc le voyant qui reste allumé une fois le moteur démarré, ou qui s'allume en roulant, qui signale une panne : {{verdict:batterie-rouge}}.
 
-## Que signale le voyant de batterie ?
+## Voyant batterie ou voyant d'alternateur : que signale-t-il ?
 
-Les notices lues le décrivent comme un témoin de charge : il signale que la batterie n'est plus rechargée. Elles parlent d'un circuit de charge défaillant (Peugeot 208), d'un dysfonctionnement de l'alternateur (Seat Ibiza), du système de charge (Toyota Yaris), d'une surcharge ou d'une décharge du circuit électrique (Renault et Dacia).
+Les notices lues le décrivent comme un témoin du circuit de charge : circuit de charge défaillant (Peugeot 208), dysfonctionnement de l'alternateur (Seat Ibiza, qui le nomme ainsi), dysfonctionnement du système de charge (Toyota Yaris), surcharge ou décharge du circuit électrique (Renault et Dacia).
 
-Les notices Renault et Dacia ont aussi un message d'alerte, « Panne électrique », qui indique un problème dans le circuit de charge de la batterie (alternateur…). Il s'affiche avec le témoin STOP, qui impose un arrêt impératif et immédiat : arrêtez le moteur et ne le redémarrez pas ({{cite:notice-renault-clio-5|p. 125}}, {{cite:notice-dacia-sandero-3|p. 102}}).
+Les notices Renault et Dacia ont aussi un message d'alerte, « Panne électrique DANGER » chez Renault, « Panne électrique » chez Dacia, qui indique un problème dans le circuit de charge de la batterie (alternateur…). Il s'affiche avec le témoin STOP, qui impose un arrêt impératif et immédiat : arrêtez le moteur et ne le redémarrez pas ({{cite:notice-renault-clio-5|p. 125}}, {{cite:notice-dacia-sandero-3|p. 102}}).
 
-Selon la notice Toyota Yaris, une charge insuffisante de la batterie, ou une chute provisoire de sa tension, peut aussi allumer le voyant de direction assistée ({{cite:notice-toyota-yaris|p. 298}}).
+Selon la notice Toyota Yaris, une charge insuffisante de la batterie, ou une chute provisoire de sa tension, peut aussi allumer le voyant de [direction assistée](/voyants/direction/) ({{cite:notice-toyota-yaris|p. 297}}).
 
 ## Voyant batterie allumé avec une batterie neuve ou un alternateur en bon état
 
-La notice Peugeot 208 donne deux exemples de causes : des cosses sales, une courroie d'alternateur détendue ou sectionnée. Elle demande de nettoyer et de resserrer les cosses ; si le témoin ne s'éteint pas au démarrage du moteur, de faire appel au réseau Peugeot ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 13}}). Après un changement de batterie, cette consigne revient à vérifier les cosses, contact coupé.
+La notice Peugeot 208 donne deux exemples de causes : des cosses sales, une courroie d'alternateur détendue ou sectionnée. Elle demande de nettoyer et de resserrer les cosses ; si le témoin ne s'éteint pas au démarrage du moteur, de faire appel au réseau Peugeot ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 13}}). Après un changement de batterie, la consigne de cette notice revient à vérifier les cosses, contact coupé.
 
 Si les cosses sont propres et serrées, les autres causes citées sont la courroie d'alternateur (Peugeot 208) et l'alternateur lui-même (Seat Ibiza). Même avec un alternateur jugé en bon état, seul un diagnostic du circuit de charge par un professionnel dit d'où vient le défaut.
 
-## Voyant batterie qui clignote
+## Voyant batterie qui clignote ou s'allume par intermittence
 
-Aucune des notices lues ne décrit un voyant de charge qui clignote. Faute de consigne, la page ne donne pas de verdict pour ce cas : demandez l'avis d'un professionnel. S'il reste allumé moteur tournant, c'est la consigne de l'encadré qui s'applique.
+Aucune des notices lues ne décrit de clignotement propre à ce voyant. La notice Toyota Yaris applique ses consignes à tout voyant qui « s'allume ou clignote » : pour le voyant du système de charge, arrêter immédiatement le véhicule dans un endroit sûr. Elle précise qu'un voyant qui s'allume ou clignote, puis s'éteint aussitôt, ne signale pas forcément un dysfonctionnement ; si cela se reproduit, elle demande de faire vérifier la voiture ({{cite:notice-toyota-yaris|p. 292}}).
+
+Pour une autre voiture, demandez l'avis d'un professionnel. Dès que le voyant reste allumé moteur tournant, c'est la consigne de l'encadré qui s'applique : {{verdict:batterie-rouge}}.
 
 ## Voyants STOP et batterie allumés ensemble
 
-Pour Renault et Dacia, c'est le cas décrit plus haut : le voyant de batterie allumé sur route avec le témoin STOP et un signal sonore signale une surcharge ou une décharge du circuit électrique, et le témoin STOP impose un arrêt impératif et immédiat ; il faut arrêter le moteur, ne pas le redémarrer et faire appel à un représentant de la marque ({{cite:notice-renault-clio-5|p. 136-137}}). La notice lue est celle de la Clio 5 phase 2 : pour une Clio 3 ou une autre génération, c'est sa propre notice qui fait foi.
+Pour Renault et Dacia, c'est le cas décrit plus haut : le voyant de batterie allumé sur route avec le témoin STOP et un signal sonore signale une surcharge ou une décharge du circuit électrique, et le témoin STOP impose un arrêt impératif et immédiat ; il faut arrêter le moteur, ne pas le redémarrer et faire appel à un représentant de la marque ({{cite:notice-renault-clio-5|p. 136-137}}, {{cite:notice-dacia-sandero-3|p. 110-112}}). La notice lue est celle de la Clio 5 phase 2 : pour une Clio 3 ou une autre génération, c'est sa propre notice qui fait foi.
 
 ## La voiture ne démarre pas, alors que la batterie est bonne
 
