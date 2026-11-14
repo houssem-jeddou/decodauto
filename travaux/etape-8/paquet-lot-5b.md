@@ -96,7 +96,22 @@ Les deux brouillons sont construits sur la branche d'essai `essai/brouillons` (j
 
 ## 6. Revue indépendante
 
-À compléter.
+**Première revue** (agent sans contexte de la rédaction, diff complet de la pull request à la tête 58c551c, sources relues par WebFetch et Légifrance, empreintes et plages recalculées à part : identiques) : **« à corriger », un bloquant, six importants**. Vérifié sans constat : lignes de l'encadré reprises de la base, aucun verdict inventé, aucun prix, lien vers la page mère seulement, requête principale dans le title ou le H1, pages Peugeot 13 et 17, Seat 227 et 302, Renault 125 et 137-138, arrêté (2.6.1, article 7), tranches des deux premières pièces.
+
+**Ce que la revue a changé** :
+- **bloquant** : la partie contrôle technique de la page direction ne rappelait que la consigne de l'orange ; elle rappelle maintenant les deux lignes de l'encadré (orange, et rouge ou avec STOP) ;
+- consigne Seat du voyant qui clignote complétée (colonne coincée : tourner le volant à l'arrêt ; colonne qui ne se verrouille pas : retirer la clé et remettre le contact), relue sur le PDF ; « aucune autre manipulation » corrigé ; cas Seat de « Comment éteindre » cité avec sa page, et renvoi à l'encadré pour une autre voiture ;
+- page Toyota du passage sur la batterie faible : p. 297 (relu à l'écran dans la visionneuse Toyota), corrigé dans les deux pages, le relevé et le paquet ;
+- voyant de batterie qui clignote : Toyota p. 292, relu à l'écran (consignes valables pour un voyant qui « s'allume ou clignote » ; voyant qui s'éteint aussitôt : pas forcément un dysfonctionnement, à faire vérifier si cela se reproduit) ; allumage par intermittence traité ;
+- consigne Peugeot p. 13 sur l'immobilisation quand le frein de stationnement électrique ne fonctionne plus, ajoutée ;
+- « suffit » retiré ; base de calcul de la page direction réécrite ; cause « batterie rebranchée » classée « geste » avec une pièce nouvelle (§3) ;
+- mineurs : « voyant d'alternateur » et distance traités, « Panne électrique DANGER » (Renault), citation Dacia du STOP, « témoin du circuit de charge », consigne Peugeot attribuée à sa notice, phrase du triangle déplacée, paire de liens batterie ↔ direction proposée (§3 bis).
+
+**Écarté, et pourquoi** : idée d'une notice Volkswagen (Polo, Golf) pour « voyant volant orange volkswagen » : hors de ce lot, proposée en idée reportée (journal).
+
+**Seconde revue** (corrections de 58c551c à ca53a7b) : en cours.
+
+**Reste à vérifier** : pictogrammes (lecture texte seulement) ; Lighthouse des deux pages après le passage.
 
 ## 7. Suite, après ta validation
 
