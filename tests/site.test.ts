@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { ENTETES_LECTURE, verifierProduction, suivre, type Lire, type Reponse } from '../scripts/lib/production.ts';
+import { ENTETES_LECTURE, verifierAvecTentatives, verifierProduction, suivre, type Lire, type Reponse } from '../scripts/lib/production.ts';
 import {
   LIGNE_SITEMAP,
   URL_SITE,
@@ -13,6 +13,7 @@ import {
   planDuSiteBienForme,
   robotsAnnoncePlanDuSite,
 } from '../src/lib/site.ts';
+import type { Constat } from '../src/lib/controle.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -205,5 +206,45 @@ describe('vérification de la production (redirections, noindex, robots.txt, pla
   test('suivre une chaîne de redirections s\'arrête à la première réponse qui n\'en est pas une', async () => {
     const etapes = await suivre('http://www.decodauto.com/', reseauConforme({ 'http://www.decodauto.com/': redirection('https://www.decodauto.com/') }));
     assert.deepEqual(etapes.map((e) => `${e.url} ${e.statut}`), ['http://www.decodauto.com/ 301', 'https://www.decodauto.com/ 301', 'https://decodauto.com/ 200']);
+  });
+});
+
+describe('vérification de la production : nouvelles tentatives (propagation de Cloudflare, point ouvert du 12/11)', () => {
+  const ecart: Constat = { regle: 'PROD-NOINDEX-PRESENT', message: 'noindex encore servi', gravite: 'erreur' };
+  const attentes: number[] = [];
+  const attendre = async (ms: number): Promise<void> => { attentes.push(ms); };
+
+  test('écart passager : retenu seulement s\'il persiste ; ici conforme au deuxième passage', async () => {
+    attentes.length = 0;
+    const reponses = [[ecart], []];
+    let appels = 0;
+    const resultat = await verifierAvecTentatives(async () => reponses[appels++] ?? [], { passages: 4, delaiMs: 30_000, attendre });
+    assert.deepEqual(resultat, { constats: [], passages: 2 });
+    assert.deepEqual(attentes, [30_000]);
+  });
+
+  test('écart persistant : retenu au dernier passage, après toutes les tentatives', async () => {
+    attentes.length = 0;
+    const journal: string[] = [];
+    const resultat = await verifierAvecTentatives(async () => [ecart], { passages: 4, delaiMs: 30_000, attendre, journal: (m) => journal.push(m) });
+    assert.equal(resultat.passages, 4);
+    assert.deepEqual(resultat.constats, [ecart]);
+    assert.deepEqual(attentes, [30_000, 30_000, 30_000]);
+    assert.equal(journal.length, 3);
+    assert.match(journal[0] ?? '', /PROD-NOINDEX-PRESENT/);
+  });
+
+  test('vérification informative : un seul passage, sans attente', async () => {
+    attentes.length = 0;
+    const resultat = await verifierAvecTentatives(async () => [ecart], { passages: 1, delaiMs: 30_000, attendre });
+    assert.equal(resultat.passages, 1);
+    assert.deepEqual(attentes, []);
+  });
+
+  test('conforme dès le premier passage : aucune attente', async () => {
+    attentes.length = 0;
+    const resultat = await verifierAvecTentatives(async () => [], { passages: 4, delaiMs: 30_000, attendre });
+    assert.deepEqual(resultat, { constats: [], passages: 1 });
+    assert.deepEqual(attentes, []);
   });
 });

@@ -115,7 +115,7 @@ Non vérifiable par machine (liste de recette) : un recouvrement de sens entre d
 Tests : `tests/canonical.test.ts` (site construit de test), `tests/site.test.ts` (fonctions de `src/lib/site.ts`, robots.txt du dépôt, adresse du site égale à `site` dans `astro.config.mjs`).
 
 ## Production en ligne (`npm run production`, job « production » de la CI)
-Sur `main` (après chaque déploiement réussi, chaque lundi, à la demande depuis l'onglet Actions) : un écart fait échouer le run. Sur une pull request ou une autre branche, il est informatif (`--information` : avertissements, job vert) : la production n'a pas encore les changements de la branche et dépend aussi des réglages Cloudflare, hors du dépôt. Une erreur réseau (nom introuvable, délai dépassé) devient un constat décrit, sans interrompre les autres vérifications. Aucun secret. Code : `scripts/lib/production.ts` ; tests : `tests/site.test.ts` (faux réseau).
+Sur `main` (après chaque déploiement réussi, chaque lundi, à la demande depuis l'onglet Actions) : un écart fait échouer le run s'il persiste au dernier de 4 passages, à 30 secondes d'écart (juste après un déploiement, Cloudflare peut servir l'ancienne version pendant environ une minute : point ouvert du 12/11/2026 ; `verifierAvecTentatives`). Sur une pull request ou une autre branche, il est informatif (`--information` : avertissements, job vert) : la production n'a pas encore les changements de la branche et dépend aussi des réglages Cloudflare, hors du dépôt. Une erreur réseau (nom introuvable, délai dépassé) devient un constat décrit, sans interrompre les autres vérifications. Aucun secret. Code : `scripts/lib/production.ts` ; tests : `tests/site.test.ts` (faux réseau).
 
 | Code | Contrôle |
 |---|---|

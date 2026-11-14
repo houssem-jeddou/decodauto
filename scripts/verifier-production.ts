@@ -3,11 +3,13 @@
 // dépôt, plan du site servi en XML.
 // Lancé par la CI (job « production ») ; aucun secret, aucune écriture. Usage : npm run production [-- --information]
 //   --information : les écarts sont affichés comme des avertissements et le script réussit (pull request, branche
-//                   autre que main : la production n'a pas encore les changements de la branche).
+//                   autre que main : la production n'a pas encore les changements de la branche) ; un seul passage.
+//   Sans --information : jusqu'à 4 passages à 30 secondes d'écart ; un écart n'est retenu que s'il persiste au dernier
+//                   (propagation de Cloudflare juste après un déploiement, point ouvert du 12/11/2026).
 import { appendFile, readFile } from 'node:fs/promises';
 import { argv, env, exit, stdout } from 'node:process';
 import { modeIndexation } from '../src/lib/indexation.ts';
-import { ENTETES_LECTURE, verifierProduction, type Lire } from './lib/production.ts';
+import { ENTETES_LECTURE, verifierAvecTentatives, verifierProduction, type Lire } from './lib/production.ts';
 
 const lire: Lire = async (url) => {
   const r = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(20_000), headers: ENTETES_LECTURE });
@@ -23,9 +25,21 @@ const lire: Lire = async (url) => {
 
 const mode = modeIndexation();
 stdout.write(`Mode d'indexation du dépôt : ${mode.description}\n`);
-const constats = await verifierProduction({ lire, robotsDepot: await readFile('public/robots.txt', 'utf8'), indexable: mode.indexable });
-
+const robotsDepot = await readFile('public/robots.txt', 'utf8');
 const information = argv.includes('--information');
+// Hors vérification informative (main : après un déploiement, chaque semaine, à la demande), un écart n'est retenu que s'il
+// persiste après la propagation de Cloudflare : 4 passages, 30 secondes d'écart (moins de 2 minutes d'attente en tout).
+const { constats, passages } = await verifierAvecTentatives(
+  () => verifierProduction({ lire, robotsDepot, indexable: mode.indexable }),
+  {
+    passages: information ? 1 : 4,
+    delaiMs: 30_000,
+    attendre: (ms) => new Promise((fin) => setTimeout(fin, ms)),
+    journal: (message) => stdout.write(`${message}\n`),
+  },
+);
+if (passages > 1) stdout.write(`Production vérifiée en ${passages} passage(s).\n`);
+
 const enGitHub = env['GITHUB_ACTIONS'] === 'true';
 const niveau = information ? 'warning' : 'error';
 for (const c of constats) stdout.write(enGitHub ? `::${niveau} title=${c.regle}::${c.message}\n` : `${information ? 'ÉCART' : 'ERREUR'} [${c.regle}] ${c.message}\n`);

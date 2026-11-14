@@ -163,3 +163,38 @@ export async function verifierProduction(options: OptionsProduction): Promise<Co
   }
   return constats;
 }
+
+/** Options des nouvelles tentatives de la vérification de la production. */
+export interface OptionsTentatives {
+  /** Nombre total de passages (au moins 1). */
+  passages: number;
+  /** Attente entre deux passages, en millisecondes. */
+  delaiMs: number;
+  /** Attente injectée (setTimeout en CI, immédiate dans les tests). */
+  attendre: (ms: number) => Promise<void>;
+  /** Journal des passages en échec (sortie de la CI). */
+  journal?: (message: string) => void;
+}
+
+/**
+ * Nouvelles tentatives (point ouvert du 12/11/2026) : juste après un déploiement, Cloudflare peut servir l'ancienne version
+ * pendant environ une minute (le 12/11, le premier passage voyait encore l'en-tête noindex). Un écart n'est retenu que s'il
+ * persiste au dernier passage ; chaque passage refait toutes les vérifications, rien n'est affaibli.
+ */
+export async function verifierAvecTentatives(
+  verifier: () => Promise<Constat[]>,
+  options: OptionsTentatives,
+): Promise<{ constats: Constat[]; passages: number }> {
+  const total = Math.max(1, Math.floor(options.passages));
+  let constats: Constat[] = [];
+  for (let passage = 1; passage <= total; passage += 1) {
+    constats = await verifier();
+    if (constats.length === 0) return { constats, passages: passage };
+    if (passage < total) {
+      const regles = [...new Set(constats.map((c) => c.regle))].join(', ');
+      options.journal?.(`Passage ${passage} sur ${total} : ${constats.length} écart(s) (${regles}) ; nouvelle vérification dans ${Math.round(options.delaiMs / 1000)} s (propagation de Cloudflare).`);
+      await options.attendre(options.delaiMs);
+    }
+  }
+  return { constats, passages: total };
+}
