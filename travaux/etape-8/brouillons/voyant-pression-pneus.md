@@ -4,7 +4,7 @@
 # l'empreinte de toute page rédigée) : ensuite exemples/voyant/voyant-pression-pneus.md avec son empreinte, puis passage.
 # Les lignes de l'encadré viennent de la base voyants validée.
 id: voyant-pression-pneus
-title: "Voyant pression des pneus allumé : peut-on rouler, que faire ?"
+title: "Voyant pression pneu allumé : peut-on rouler, que faire ?"
 h1: "Voyant de pression des pneus : que faire quand il s'allume ?"
 description: "Voyant de pression des pneus allumé : ralentissez et arrêtez-vous immédiatement, dès que c'est sans danger, pour contrôler les pneus. Puis regonflez et réinitialisez, notice par notice."
 libelle_court: Voyant pression des pneus

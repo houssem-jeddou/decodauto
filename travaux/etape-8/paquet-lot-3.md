@@ -35,7 +35,7 @@ Les trois pages sont nouvelles. Leurs lignes d'encadré viennent de la base voya
 
 ## 2. Voyant de pression des pneus (`/voyants/pression-pneus/`)
 
-**Titre** : « Voyant pression des pneus allumé : peut-on rouler, que faire ? » · **H1** : « Voyant de pression des pneus : que faire quand il s'allume ? »
+**Titre** : « Voyant pression pneu allumé : peut-on rouler, que faire ? » (la requête principale « voyant pression pneu » doit figurer dans le title ou le H1) · **H1** : « Voyant de pression des pneus : que faire quand il s'allume ? »
 **Description** : « Voyant de pression des pneus allumé : ralentissez et arrêtez-vous immédiatement, dès que c'est sans danger, pour contrôler les pneus. Puis regonflez et réinitialisez, notice par notice. »
 **Question** : « Puis-je continuer à rouler avec le voyant de pression des pneus allumé ? »
 

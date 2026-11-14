@@ -47,7 +47,7 @@ auteur: houssem-jeddou
 date_publication: 2026-11-14
 date_modification: 2026-11-14
 date_revue: 2026-11-14
-prochaine_revue: 2027-11-14
+prochaine_revue: 2027-05-14
 ---
 
 ## Quelle pression mettre dans ses pneus ?
