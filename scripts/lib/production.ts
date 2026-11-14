@@ -163,3 +163,64 @@ export async function verifierProduction(options: OptionsProduction): Promise<Co
   }
   return constats;
 }
+
+/** Options des nouvelles tentatives de la vérification de la production. */
+export interface OptionsTentatives {
+  /** Nombre maximal de passages : un entier d'au moins 1. */
+  passages: number;
+  /** Attente entre deux passages, en millisecondes. */
+  delaiMs: number;
+  /**
+   * Budget de temps, en millisecondes, au-delà duquel aucun nouveau passage ne commence (le passage en cours va à son
+   * terme) : le job de la CI doit pouvoir échouer normalement avant son propre délai, jamais être annulé.
+   */
+  budgetMs: number;
+  /** Attente injectée (setTimeout en CI, immédiate dans les tests). */
+  attendre: (ms: number) => Promise<void>;
+  /** Horloge injectée, en millisecondes (Date.now en CI). */
+  maintenant: () => number;
+  /** Journal des passages en échec (sortie de la CI). */
+  journal?: (message: string) => void;
+}
+
+/** Résultat des passages : constats du dernier passage, et écarts passagers des passages précédents (jamais tus). */
+export interface ResultatTentatives {
+  constats: Constat[];
+  passages: number;
+  passagers: Constat[];
+}
+
+/**
+ * Nouvelles tentatives (point ouvert du 12/11/2026) : juste après un déploiement, Cloudflare peut servir l'ancienne version
+ * pendant environ une minute (le 12/11, le premier passage voyait encore l'en-tête noindex). Un écart fait échouer la
+ * vérification s'il persiste au dernier passage ; chaque passage refait toutes les vérifications, rien n'est affaibli.
+ * Les écarts des passages précédents sont rendus à part (`passagers`) pour être affichés, même quand le dernier passage
+ * est conforme.
+ */
+export async function verifierAvecTentatives(verifier: () => Promise<Constat[]>, options: OptionsTentatives): Promise<ResultatTentatives> {
+  const { passages: total, delaiMs, budgetMs } = options;
+  if (!Number.isInteger(total) || total < 1) throw new Error(`passages doit être un entier d'au moins 1 (reçu : ${String(total)})`);
+  if (!Number.isFinite(delaiMs) || delaiMs < 0 || !Number.isFinite(budgetMs) || budgetMs < 0) throw new Error('delaiMs et budgetMs doivent être des durées positives');
+  const debut = options.maintenant();
+  const precedents: Constat[] = [];
+  let constats: Constat[] = [];
+  // Écarts passagers : vus à un passage précédent et absents du dernier, sans doublon (un écart persistant n'en est pas un).
+  const cle = (c: Constat): string => `${c.regle}\u0000${c.message}`;
+  const resultat = (passage: number): ResultatTentatives => {
+    const derniers = new Set(constats.map(cle));
+    const vus = new Set<string>();
+    const passagers = precedents.filter((c) => !derniers.has(cle(c)) && !vus.has(cle(c)) && vus.add(cle(c)) !== undefined);
+    return { constats, passages: passage, passagers };
+  };
+  for (let passage = 1; passage <= total; passage += 1) {
+    constats = await verifier();
+    if (constats.length === 0) return resultat(passage);
+    const ecoule = options.maintenant() - debut;
+    if (passage === total || ecoule + delaiMs > budgetMs) return resultat(passage);
+    precedents.push(...constats);
+    const regles = [...new Set(constats.map((c) => c.regle))].join(', ');
+    options.journal?.(`Passage ${passage} sur ${total} au plus : ${constats.length} écart(s) (${regles}) ; nouvelle vérification dans ${Math.round(delaiMs / 1000)} s (propagation de Cloudflare).`);
+    await options.attendre(delaiMs);
+  }
+  return resultat(total);
+}

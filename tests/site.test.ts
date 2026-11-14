@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { ENTETES_LECTURE, verifierProduction, suivre, type Lire, type Reponse } from '../scripts/lib/production.ts';
+import { ENTETES_LECTURE, verifierAvecTentatives, verifierProduction, suivre, type Lire, type Reponse } from '../scripts/lib/production.ts';
 import {
   LIGNE_SITEMAP,
   URL_SITE,
@@ -13,6 +13,7 @@ import {
   planDuSiteBienForme,
   robotsAnnoncePlanDuSite,
 } from '../src/lib/site.ts';
+import type { Constat } from '../src/lib/controle.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -205,5 +206,100 @@ describe('vérification de la production (redirections, noindex, robots.txt, pla
   test('suivre une chaîne de redirections s\'arrête à la première réponse qui n\'en est pas une', async () => {
     const etapes = await suivre('http://www.decodauto.com/', reseauConforme({ 'http://www.decodauto.com/': redirection('https://www.decodauto.com/') }));
     assert.deepEqual(etapes.map((e) => `${e.url} ${e.statut}`), ['http://www.decodauto.com/ 301', 'https://www.decodauto.com/ 301', 'https://decodauto.com/ 200']);
+  });
+});
+
+describe('vérification de la production : nouvelles tentatives (propagation de Cloudflare, point ouvert du 12/11)', () => {
+  const ecart: Constat = { regle: 'PROD-NOINDEX-PRESENT', message: 'noindex encore servi', gravite: 'erreur' };
+  const cookie: Constat = { regle: 'PROD-COOKIE', message: 'cookie déposé', gravite: 'erreur' };
+  // Horloge simulée : chaque attente avance l'horloge de sa durée ; chaque passage dure `dureePassage`.
+  function options(dureePassage = 5_000) {
+    let horloge = 0;
+    const attentes: number[] = [];
+    return {
+      attentes,
+      avancer: () => { horloge += dureePassage; },
+      opts: {
+        passages: 4,
+        delaiMs: 30_000,
+        budgetMs: 240_000,
+        attendre: async (ms: number) => { attentes.push(ms); horloge += ms; },
+        maintenant: () => horloge,
+      },
+    };
+  }
+
+  test('écart passager : le job ne retient que le dernier passage, conforme ici, et l\'écart reste rendu à part', async () => {
+    const o = options();
+    const reponses = [[ecart], []];
+    let appels = 0;
+    const resultat = await verifierAvecTentatives(async () => { o.avancer(); return reponses[appels++] ?? []; }, o.opts);
+    assert.deepEqual(resultat, { constats: [], passages: 2, passagers: [ecart] });
+    assert.deepEqual(o.attentes, [30_000]);
+  });
+
+  test('écart persistant : retenu au dernier passage, après toutes les tentatives', async () => {
+    const o = options();
+    const journal: string[] = [];
+    const resultat = await verifierAvecTentatives(async () => { o.avancer(); return [ecart]; }, { ...o.opts, journal: (m) => journal.push(m) });
+    assert.equal(resultat.passages, 4);
+    assert.deepEqual(resultat.constats, [ecart]);
+    assert.deepEqual(resultat.passagers, [], 'un écart persistant n\'est pas passager');
+    assert.deepEqual(o.attentes, [30_000, 30_000, 30_000]);
+    assert.equal(journal.length, 3);
+    assert.match(journal[0] ?? '', /PROD-NOINDEX-PRESENT/);
+  });
+
+  test('écarts mêlés : le passager est rendu une fois, le persistant reste au dernier passage', async () => {
+    const o = options();
+    const reponses = [[ecart, cookie], [ecart, cookie], [cookie]];
+    let appels = 0;
+    const resultat = await verifierAvecTentatives(async () => { o.avancer(); return reponses[appels++] ?? [cookie]; }, o.opts);
+    assert.deepEqual(resultat.constats, [cookie]);
+    assert.deepEqual(resultat.passagers, [ecart]);
+  });
+
+  test('budget de temps : aucun nouveau passage au-delà, l\'écart du passage en cours est retenu (le job échoue, il n\'est pas annulé)', async () => {
+    const o = options(160_000); // pire cas d'un passage : 8 lectures de 20 s
+    const resultat = await verifierAvecTentatives(async () => { o.avancer(); return [cookie]; }, o.opts);
+    // 1er passage : 160 s ; 160 + 30 ≤ 240 : nouvelle tentative ; 2e passage : 350 s écoulées > 240 : arrêt.
+    assert.equal(resultat.passages, 2);
+    assert.deepEqual(resultat.constats, [cookie]);
+    assert.deepEqual(o.attentes, [30_000]);
+  });
+
+  test('un seul passage (pull request, contrôle du lundi, lancement à la demande) : écart rendu tel quel, sans attente', async () => {
+    const o = options();
+    const resultat = await verifierAvecTentatives(async () => { o.avancer(); return [ecart]; }, { ...o.opts, passages: 1 });
+    assert.deepEqual(resultat, { constats: [ecart], passages: 1, passagers: [] });
+    assert.deepEqual(o.attentes, []);
+  });
+
+  test('conforme dès le premier passage : aucune attente', async () => {
+    const o = options();
+    const resultat = await verifierAvecTentatives(async () => { o.avancer(); return []; }, o.opts);
+    assert.deepEqual(resultat, { constats: [], passages: 1, passagers: [] });
+    assert.deepEqual(o.attentes, []);
+  });
+
+  test('nombre de passages invalide : refusé, jamais « conforme » sans vérification', async () => {
+    const o = options();
+    for (const passages of [0, Number.NaN, 2.5, -1]) {
+      await assert.rejects(verifierAvecTentatives(async () => [], { ...o.opts, passages }), /passages doit être un entier/);
+    }
+  });
+
+  test('le workflow ne demande plusieurs passages qu\'après un déploiement, avec un délai de job qui couvre le pire cas', async () => {
+    const ci = await readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
+    const job = ci.slice(ci.indexOf('\n  production:'));
+    assert.match(job, /--apres-deploiement/);
+    assert.match(job, /github\.event_name == 'push' && github\.ref == 'refs\/heads\/main'\) && '--apres-deploiement'/);
+    const delai = Number(/timeout-minutes: (\d+)/.exec(job)?.[1]);
+    // Budget de 4 min, plus un dernier passage au pire (33 lectures de 20 s dans une boucle de redirections), plus la
+    // préparation du job : au moins 17 min.
+    assert.ok(delai >= 17, `timeout-minutes du job production : ${delai}`);
+    const script = await readFile(join(racine, 'scripts', 'verifier-production.ts'), 'utf8');
+    assert.match(script, /budgetMs: 240_000/);
+    assert.match(script, /passages: apresDeploiement \? 4 : 1/);
   });
 });
