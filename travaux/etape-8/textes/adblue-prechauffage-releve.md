@@ -1,4 +1,16 @@
-# Notes de travail, lot 5c (AdBlue), lu à l'écran le 14/11 vers 17 h 30
+# Relevé des notices, lot 5c : pages voyant AdBlue et voyant de préchauffage (14/11/2026)
+
+> Passages relus à l'écran le 14/11/2026 (de 17 h 30 à 18 h 45 environ) dans les notices du registre, sauf mention « extrait de l'étape 5 » (texte relevé le 24/10 dans `travaux/etape-5/notices/`). Les guillemets signalent un texte recopié ; le reste est un résumé fidèle. Données internes, jamais publiées.
+
+## Seat Ibiza, p. 286-287 (extrait de l'étape 5, `seat-ibiza.txt`, PDF 288-289)
+- p. 286 : « Lorsque l'autonomie devient restante inférieure à 2 400 km, une indication s'affiche sur l'écran du combiné d'instruments pour indiquer qu'il est nécessaire de remplir le réservoir d'AdBlue®. Si ce message est ignoré, le témoin lumineux jaune s'allume après une autonomie restante de 1 000 km. L'écran du combiné d'instruments indique qu'il ne sera plus possible de redémarrer le moteur dans XXX km. Si le témoin lumineux jaune est ignoré, lorsqu'une autonomie restante de 0 km est affichée, il n'est plus possible de redémarrer le moteur. Le voyant d'avertissement rouge s'allume. »
+- p. 286, témoins : rouge seul : « Il est impossible de redémarrer le moteur ! Le niveau d'AdBlue est trop faible. Arrêtez le véhicule dans un endroit adéquat, sûr et plat, puis faites l'appoint avec la quantité minimale nécessaire d'additif AdBlue » ; rouge avec un autre témoin : « Dysfonctionnement du circuit d'Adblue. Adressez-vous à un atelier spécialisé. Faites réviser le système. » ; jaune seul : « La réserve d'AdBlue est faible. Faites l'appoint […] dans les prochains kilomètres […] indiqués » ; jaune avec un autre témoin : « Un dysfonctionnement a été détecté dans le circuit d'AdBlue ou le liquide AdBlue rajouté n'est pas conforme. Adressez-vous à un atelier spécialisé. »
+- p. 287 : « ajoutez au minimum la quantité minimale nécessaire (environ 5 litres) ».
+
+## Toyota Yaris
+- La notice du registre ne décrit pas de moteur Diesel (ni AdBlue ni préchauffage) : rien à relever.
+
+## Passages des notes de travail
 
 ## Renault Clio 5 phase 2, p. 166 (Entretien/Autonomie) — témoins vérifiés à l'écran
 - « Prévoir AdBlue avant 2400 km » : aucun témoin (« - ») ; à la mise sous contact, moins de 2 400 km d'autonomie ; prévoir le remplissage (soi-même ou un représentant).
@@ -29,7 +41,7 @@
 - Ligne `adblue-reserve`, citation Renault p. 166 (deuxième) : l'extrait commence par « [témoin] clignote. « XXX KM blocage remplir AdBlue » » ; à l'écran (14/11), le témoin « s'allume » pour « XXX KM » et « clignote » pour « 0 KM ». Extrait à corriger (« [témoin] s'allume. ») ; niveau inchangé (« dès que possible » : oui avec précautions, immédiate). L'outil en ligne n'affiche pas l'extrait (vérifié : « XXX KM » absent de /voyants/). Le tableau des notices de la page AdBlue l'afficherait.
 - Ligne `adblue-demarrage-impossible` : Renault « 0 KM » : témoin qui clignote (à l'écran) ; Dacia : « s'allume ». La situation dit « rouge ou clignote » : cohérent.
 
-## Reste à lire pour la page AdBlue (brief)
+## Lectures prévues pour la page AdBlue (brief) — faites le 14/11, voir les sections suivantes
 - « Voyant AdBlue reste allumé après remplissage », « qu'est-ce que l'AdBlue », « combien il en reste », « AdBlue danger » : sections de remplissage et de mise en garde des notices : Peugeot 208 (chapitre AdBlue des informations pratiques, page à trouver), Renault p. 163-165, Dacia p. 135-137, Seat p. 287 (quantité minimale environ 5 litres, déjà relevée). Toyota Yaris lue : pas de version Diesel.
 - Seat p. 286 (extrait de l'étape 5) : indication sous 2 400 km ; témoin jaune à 1 000 km, « plus possible de redémarrer le moteur dans XXX km » ; rouge à 0 km.
 
@@ -57,3 +69,8 @@
 - Nota : « Tant que les voyants [moteur], [gaz d'échappement], EPC ou [spirale de préchauffage] restent allumés, il est possible que le moteur présente un dysfonctionnement, que la consommation de carburant augmente et que le moteur perde de la puissance. » (le dernier dessin est la spirale, comme en tête de l'entrée « Témoin allumé »).
 - Colonne centrale : panne de combustion, baisse de puissance ou fonctionnement irrégulier du moteur : contacter un atelier spécialisé pour faire réviser le véhicule.
 - Contrôle technique (pour la page frein, D4) : annexe I, 1.1.13.d.1 « Faisceau électrique du témoin d'usure déconnecté ou détérioré » : mineure ; 1.1.13.a.2 usure excessive : majeure.
+
+
+## Faits retirés des brouillons faute de relevé (14/11, avant la revue)
+- Peugeot 208 p. 21 : « ces moteurs ne peuvent pas fonctionner sans AdBlue » : phrase absente des notes de lecture ; remplacée par le fait relevé p. 170 (réservoir vide : un dispositif réglementaire empêche le redémarrage).
+- Renault Clio 5 phase 2 p. 164 : consigne de rinçage des parties peintes : absente des notes ; seul « agressif pour les vêtements, les chaussures et la carrosserie » est gardé.

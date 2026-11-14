@@ -4,19 +4,21 @@
 id: voyant-adblue
 title: "Voyant AdBlue allumé : peut-on rouler, que faire ?"
 h1: "Voyant AdBlue : réserve basse, défaut antipollution ou démarrage impossible"
-description: "Voyant AdBlue allumé : faites l'appoint avant la fin de l'autonomie affichée. Défaut antipollution, « démarrage interdit dans 1 100 km » : garage au plus tôt. Messages de chaque notice."
+description: "Voyant AdBlue allumé : faites l'appoint avant la fin de l'autonomie affichée. Avec le voyant Service, garage au plus tôt ; avec le voyant moteur, arrêtez-vous d'abord. Messages de chaque notice."
 libelle_court: Voyant AdBlue
 question_decision: Puis-je continuer à rouler avec le voyant AdBlue allumé ?
 situations:
   - voyant: adblue-reserve
   - voyant: adblue-defaut
+  - voyant: moteur-orange-fixe
   - voyant: adblue-demarrage-impossible
 voyants:
   - adblue-reserve
   - adblue-defaut
+  - moteur-orange-fixe
   - adblue-demarrage-impossible
 cout_probable:
-  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site) : de l'appoint d'AdBlue, que vous pouvez faire vous-même, à la grosse réparation du système AdBlue (réservoir, pompe ou injecteur)."
+  base_de_calcul: "Chaque cause est classée d'après la pièce la plus lourde qu'elle peut toucher (liste des pièces du site) : de l'appoint déjà fait mais pas encore pris en compte, sans dépense, à la grosse réparation du système AdBlue (réservoir, pompe ou injecteur), en passant par l'appoint d'AdBlue, que vous pouvez faire vous-même."
   sources:
     - notice-peugeot-208
     - notice-renault-clio-5
@@ -53,7 +55,9 @@ Tout dépend du message qui l'accompagne.
 
 **Réserve basse, avec un message d'autonomie** : {{verdict:adblue-reserve}}. Le voyant prévient que le réservoir d'AdBlue se vide : une fois l'autonomie affichée à zéro, le moteur ne redémarre plus. Faites l'appoint avant : les seuils de chaque marque sont détaillés plus bas.
 
-**Défaut antipollution, avec le voyant moteur ou Service** : {{verdict:adblue-defaut}}. Le système d'antipollution est en défaut, et un compte à rebours peut s'afficher avant que le démarrage soit bloqué : allez au garage au plus tôt.
+**Défaut antipollution, avec le voyant Service** : {{verdict:adblue-defaut}}. Le système d'antipollution est en défaut, et un compte à rebours peut s'afficher avant que le démarrage soit bloqué : allez au garage au plus tôt.
+
+**Avec le voyant moteur** : la consigne du [voyant moteur](/voyants/moteur/), plus prudente, compte aussi : {{verdict:moteur-orange-fixe}}. Elle laisse repartir jusqu'au garage si la notice de votre voiture le permet, comme celle de la Peugeot 208 (voir plus bas).
 
 **Démarrage impossible (autonomie à 0 km)** : {{verdict:adblue-demarrage-impossible}}. La notice Seat Ibiza demande d'arrêter la voiture dans un endroit adéquat, sûr et plat, puis de faire l'appoint avec la quantité minimale d'AdBlue ; si c'est le circuit d'AdBlue qui est défaillant, de s'adresser à un atelier spécialisé ({{cite:notice-seat-ibiza|p. 286}}). Selon les notices Peugeot 208, Renault Clio 5 phase 2 et Dacia Sandero 3, le moteur ne redémarre pas sans appoint ou sans intervention du réseau.
 
@@ -76,7 +80,7 @@ La notice Toyota Yaris lue pour les autres pages du site ne décrit pas de moteu
 
 ## « Défaut antipollution : démarrage interdit dans 1 100 km »
 
-Ce message est celui de la Peugeot 208. Quand un dysfonctionnement du système d'antipollution est détecté, le témoin AdBlue et le [voyant moteur](/voyants/moteur/) s'allument avec le message « Défaut antipollution ». Si le défaut était passager, l'alerte disparaît au trajet suivant. S'il persiste 50 km, il est confirmé : le témoin AdBlue clignote, le message annonce le nombre de kilomètres avant que le démarrage soit interdit, et vous pouvez rouler jusqu'à 1 100 km avant que le moteur ne redémarre plus. La notice demande de faire vérifier la voiture par le réseau Peugeot ou un atelier qualifié ({{cite:notice-peugeot-208|p. 22}}).
+Ce message est celui de la Peugeot 208. Quand un dysfonctionnement du système d'antipollution est détecté, le témoin AdBlue et le voyant moteur s'allument avec le message « Défaut antipollution ». Si le défaut était passager, l'alerte disparaît au trajet suivant. S'il persiste 50 km, il est confirmé : le témoin AdBlue clignote, le message annonce le nombre de kilomètres avant que le démarrage soit interdit, et vous pouvez rouler jusqu'à 1 100 km avant que le moteur ne redémarre plus. La notice demande de faire vérifier la voiture par le réseau Peugeot ou un atelier qualifié ({{cite:notice-peugeot-208|p. 22}}). Le voyant moteur étant allumé, la consigne retenue est la sienne, la plus prudente : {{verdict:moteur-orange-fixe}} ; cette notice permet ensuite de rouler jusqu'au réseau.
 
 Chez Renault et Dacia, les témoins AdBlue et Service s'allument avec les messages « Antipollution à contrôler », « Qualité AdBlue à contrôler » ou « Injection AdBlue à contrôler » : consultez un représentant de la marque le plus tôt possible. Le message « XXX KM blocage antipollution » indique qu'il reste moins de 800 km avant que le redémarrage soit impossible ; à « 0 KM », le moteur ne redémarre plus après la coupure du contact ({{cite:notice-renault-clio-5|p. 167}}, {{cite:notice-dacia-sandero-3|p. 139}}). La consigne de l'encadré : {{verdict:adblue-defaut}}.
 
@@ -86,7 +90,7 @@ Le remplissage n'est pas toujours pris en compte tout de suite. Selon les notice
 
 Selon la notice Peugeot 208, un appoint doit être d'au moins 5 litres pour être pris en compte ; après une panne d'AdBlue, il faut attendre environ 5 minutes avant de remettre le contact, sans ouvrir la porte du conducteur ni déverrouiller la voiture, puis attendre 10 secondes contact mis avant de démarrer ({{cite:notice-peugeot-208|p. 171}}).
 
-Si le voyant reste allumé avec le voyant moteur ou Service, c'est un défaut : {{verdict:adblue-defaut}}. Selon la notice Seat Ibiza, un liquide AdBlue rajouté non conforme peut déclencher l'alerte ({{cite:notice-seat-ibiza|p. 286}}).
+Si le voyant reste allumé avec le voyant Service, c'est un défaut : {{verdict:adblue-defaut}} ; avec le voyant moteur, c'est la consigne du voyant moteur qui compte. Selon la notice Seat Ibiza, un liquide AdBlue rajouté non conforme peut déclencher l'alerte ({{cite:notice-seat-ibiza|p. 286}}).
 
 ## Qu'est-ce que l'AdBlue, et combien en reste-t-il ?
 
