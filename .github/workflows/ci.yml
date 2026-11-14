@@ -14,9 +14,11 @@ on:
 permissions:
   contents: read
 
+# Un nouveau passage annule celui qu'il remplace sur une pull request, et sur un lancement à la demande hors de main
+# (branches d'essai, demande de changement n° 26 : minutes du dépôt privé). Jamais sur main : un déploiement va au bout.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main') }}
 
 env:
   ASTRO_TELEMETRY_DISABLED: '1'
@@ -252,11 +254,11 @@ jobs:
     name: Production en ligne (redirections, noindex, robots.txt, plan du site)
     # Sur main (après un déploiement réussi, chaque semaine, à la demande) : un écart fait échouer le run
     # (notification GitHub) ; juste après un déploiement, seulement s'il persiste au dernier de 4 passages
-    # (propagation de Cloudflare), les écarts passagers restant affichés en avertissement. Sur une pull request ou une autre branche, la vérification est informative
-    # (avertissements, job vert) : la production n'a pas encore les changements de la branche et dépend aussi des
-    # réglages Cloudflare, hors du dépôt.
+    # (propagation de Cloudflare), les écarts passagers restant affichés en avertissement. Plus de passage sur une pull
+    # request ni sur une autre branche (demande de changement n° 26) : il n'y était qu'informatif (avertissements, job
+    # toujours vert), la production n'ayant pas encore les changements de la branche, et coûtait une minute par passage.
     needs: deploiement
-    if: ${{ !cancelled() && (needs.deploiement.result == 'success' || github.event_name != 'push') }}
+    if: ${{ !cancelled() && (needs.deploiement.result == 'success' || (github.event_name != 'push' && github.event_name != 'pull_request' && github.ref == 'refs/heads/main')) }}
     runs-on: ubuntu-latest
     # Après un déploiement : jusqu'à 4 passages, sans nouveau passage au-delà de 4 minutes. Un passage fait 14 lectures
     # d'au plus 20 s quand le site répond (http://www en deux redirections), jusqu'à 33 dans une boucle de redirections
