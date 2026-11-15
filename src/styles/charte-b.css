@@ -186,6 +186,8 @@ main>.accueil-main{max-width:72rem}
 .theme{padding:.9rem 1rem}
 .theme h2{margin:0 0 .45rem;font-size:1.15rem}
 .theme ul{margin:0;padding-left:1.1rem;font-size:.9375rem}
+/* Cibles tactiles d'au moins 24 px entre deux liens de la liste (WCAG 2.5.8 ; Lighthouse target-size, F1.2). */
+.theme li+li{margin-top:.4rem}
 .theme p{margin:0;font-size:.9375rem}
 
 @media (min-width:40rem){

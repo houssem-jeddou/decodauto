@@ -29,7 +29,8 @@ const brouillon = demoFormat2Active(process.env) ? await lireBrouillonFormat2(cw
 const pagesDuSocle = (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).map((page) => (brouillon !== undefined ? pageAvecBrouillon(page, brouillon) : page));
 const aProposEcrite = pagesDuSocle.find((page) => page.id === PAGE_METHODE);
 // Format de lecture de l'accueil (demande de changement n° 30, lot F1) : champ `format` de sa fiche du socle, 1 par défaut.
-const format = pagesDuSocle.find((page) => page.id === 'accueil')?.format ?? 1;
+// Démonstration du format 2 : l'accueil n'a pas encore de fiche dans src/content/socle (elle viendra au lot F3) ; le brouillon le passe au format 2.
+const format = brouillon?.accueil?.format ?? pagesDuSocle.find((page) => page.id === 'accueil')?.format ?? 1;
 const aPropos = aProposEcrite !== undefined ? { adresse: site.plan.get(PAGE_METHODE)?.adresse ?? '', libelle: aProposEcrite.libelle_court ?? aProposEcrite.title } : undefined;
 const donneesAccueil = { pages: pagesListees(site.plan, libelles), aPropos: aPropos !== undefined && aPropos.adresse !== '' ? aPropos : undefined };
 // Format 2 (src/lib/accueil.ts, accueilFormat2Html) : grille des voyants dont la page est construite, illustration du combiné
