@@ -1,9 +1,10 @@
 # Porte de sortie de l'étape 8 (vague A) : dossier de vérification
 
 **État : dossier du 15/11/2026 (soir), complété après la fusion des PR #49, #50 et #53** (CI de GitHub, dépôt public
-depuis le 15/11, 17 h 29 : écart à régulariser, demande n° 29), relu par une revue indépendante (encadré en fin de
-dossier), **à valider par Houssem** avec les demandes de changement n° 28 et n° 29. Rien ici n'est « validé » au sens de
-la porte tant que Houssem ne l'a pas écrit.
+depuis le 15/11, 17 h 29, gardé public par décision de Houssem du 15/11 à 19 h 54 : demande n° 29), relu par deux revues
+indépendantes (encadré en fin de dossier), **à valider par Houssem** avec la demande de changement n° 28. La demande
+n° 29 a sa propre ligne de validation et ne conditionne pas la porte. Rien ici n'est « validé » au sens de la porte tant
+que Houssem ne l'a pas écrit.
 
 Porte (docs/03, ligne 8, v12, demande n° 17) : vérifiée par lot de mise en ligne ; l'étape se ferme quand tous les lots
 ont passé la porte de lot et que la porte complète est vérifiée sur l'ensemble. **Demande n° 28 (proposée,
@@ -67,31 +68,59 @@ par son nom complet.
   ligne sans lui) ; son sort se décide ici : **recommandation : le reporter** (idée reportée « liste des départements
   avec leur arrêté, ou outil “ma commune est-elle concernée ?” »), à reprendre avant le 01/11/2027, quand les sites des
   préfectures répondent (journal, points ouverts).
-- **Dépôt public** (écart à `docs/03`, règle 3) : régularisé par la demande n° 29 (conditions : aucun secret ni donnée
-  non publiée, pas de `CI_RUNNER` tant qu'il est public ; protection de `main`, désormais gratuite, recommandée ;
-  revu avant AdSense).
+- **Dépôt public** (écart à `docs/03`, règle 3) : gardé public par décision de Houssem (15/11, 19 h 54), après
+  l'inventaire des données personnelles exposées (retirées de l'arbre par la PR #57, l'historique les garde) ;
+  régularisé par la demande n° 29, version 2 (conditions, protection de `main`, mesures), à accepter à part.
 - **Après la porte** : tag de l'étape 8 posé par Houssem (`etape-8-vague-a`, sur le commit de fusion de cette pull
   request) ; `docs/03` (ligne 8, règles 2 et 12 et « Déroulé de chaque session », point 2 : demande n° 28 ; règle 3 :
   demande n° 29), `CLAUDE.md`, journal ; textes à coller par Houssem dans les instructions du projet : demande n° 21
   (`demande-changement-21.md`), puis n° 28 (`demande-changement-28.md`, fin du document), puis n° 29 ; enfin la pull
   request qui ajoute « B » à `config/vagues-ouvertes.json`, validée par Houssem (demande n° 21) : début de l'étape 10.
 
-## 4. Ligne de validation proposée
-« Je valide la porte de l'étape 8 sur les 20 pages en ligne, en acceptant que l'outil voyants n'ait pas été essayé dans
-Firefox ni avec un lecteur d'écran ; j'accepte la demande n° 28 (l'étape 8 se ferme sans le lot 4b, P0380 et P1351,
-qui reste ouvert : cinquième exception à la règle 12) et la demande n° 29 (dépôt public ; protection de `main` : oui /
-non) ; 8.3.1b (tableau des départements de la loi montagne) passe en idée reportée, à reprendre avant le 01/11/2027. »
+## 4. Lignes de validation proposées
+1. Porte et demande n° 28 : « Je valide la porte de l'étape 8 sur les 20 pages en ligne, en acceptant que l'outil
+   voyants n'ait pas été essayé dans Firefox ni avec un lecteur d'écran ; j'accepte la demande n° 28 (l'étape 8 se
+   ferme sans le lot 4b, P0380 et P1351, qui reste ouvert : cinquième exception à la règle 12) ; 8.3.1b (tableau des
+   départements de la loi montagne) passe en idée reportée, à reprendre avant le 01/11/2027. »
+2. Demande n° 29, à part (fin de `demande-changement-29.md`) : « J'accepte la demande n° 29 : dépôt public avec les
+   conditions du §2 ; protection de `main` (§3) : oui / non ; mesures du §4 : oui / non. »
 
 ## Revue indépendante
-Une revue (agent sans contexte de la rédaction, 15/11 au soir) : « à corriger », rien de bloquant ; chiffres, numéros
-de passage, commits, 20 pages sur 22, 17 empreintes, Lighthouse, outil voyants et volumes recoupés et exacts.
+Deux revues (agents sans contexte de la rédaction, 15/11 au soir), le maximum par livrable.
+
+**Première revue** : « à corriger », rien de bloquant ; chiffres, numéros de passage, commits, 20 pages sur 22,
+17 empreintes, Lighthouse, outil voyants et volumes recoupés et exacts.
 - **Changé** : la ligne de validation tranche 8.3.1b et fait accepter explicitement Firefox et le lecteur d'écran
-  (critère marqué « partiellement vérifié ») ; dépôt public signalé comme écart et régularisé par la demande n° 29
-  (sans `CI_RUNNER` tant qu'il est public) ; incident du lot 5d raconté tel qu'il s'est passé (contrôle local, pas la
-  CI) ; heure de l'inspection d'URL corrigée ; 21 alertes dites ; accueil couvert par la liste de production ; tag,
-  « Déroulé » et textes à coller ajoutés à l'après-porte ; note périmée de `CONTROLES.md` (page outil) corrigée ;
-  archives 04j à 04m désormais sur `main` (PR #52 fusionnée).
+  (critère marqué « partiellement vérifié ») ; dépôt public signalé comme écart et régularisé par la demande n° 29 ;
+  incident du lot 5d raconté tel qu'il s'est passé (contrôle local, pas la CI) ; heure de l'inspection d'URL corrigée ;
+  21 alertes dites ; accueil couvert par la liste de production ; tag, « Déroulé » et textes à coller ajoutés à
+  l'après-porte ; note périmée de `CONTROLES.md` (page outil) corrigée ; archives 04j à 04m désormais sur `main` (PR #52
+  fusionnée).
 - **Vérifié après la revue** : les adresses sans paramètre servent bien la version du 15/11 (Chrome de Houssem, 15/11
   vers 19 h 15 : pages AdBlue et outil « Mis à jour le 15/11 », nouvel encadré AdBlue, liens vers la page voyant
   frein) ; l'ancienne version vue par le relecteur venait du cache de son outil.
-- **Non vérifié** : faits des pages contre leurs sources (revues par lot) ; recette dans Firefox et au lecteur d'écran.
+
+**Seconde revue** (commit feedc6d et demande n° 29) : « à corriger », **un point bloquant** : la demande n° 29 affirmait
+une vérification fausse, des données personnelles jamais publiées étaient lisibles par tous ; 6 points importants,
+5 mineurs.
+- **Changé** : inventaire complet (arbres, historique, messages de commit, pull requests), options présentées à
+  Houssem, qui a décidé de garder le dépôt public (15/11, 19 h 54) ; données retirées de l'arbre (PR #57), mentions
+  écrites par Claude retirées du journal et de la description de la PR #52 ; demande n° 29 réécrite (version 2) :
+  protection de `main` aux réglages exacts (contournement interdit, noms exacts des contrôles, branche à jour avant
+  fusion) et ses limites ; condition « aucun exécuteur auto-hébergé enregistré » au lieu de `CI_RUNNER` ; risques
+  décrits (notices, textes de Google, mots-clés et plan, brouillons, doutes juridiques), plus un risque ajouté par
+  Claude pour le référencement (pages de GitHub non exclues par son `robots.txt`) ; contrôles proposés (analyse des
+  secrets, COMMITS-COURRIEL, EXECUTEUR-HEBERGE) ; éléments concernés complétés ; deux lignes de validation séparées ;
+  « donnée personnelle non publiée » ; pages mises en ligne par #49, #50 et #53 précisées.
+- **Écarté** : réécrire l'historique (contraire à `CLAUDE.md`, change tous les commits, ne retire pas les copies) ;
+  deux dépôts, l'un public, l'autre privé (source de vérité coupée en deux) ; l'essai dans Firefox et au lecteur
+  d'écran reste au choix de Houssem (deux minutes) : la ligne de validation l'accepte comme écart (accessibilité
+  Lighthouse 100, liste entière lisible sans `:has()`).
+- **Vérifié par la seconde revue** : 21 alertes ; arbre testé égal à l'arbre fusionné pour #49, #50 et #53 ; chronologie
+  de l'incident du lot 5d ; accueil dans la liste Lighthouse de production ; CI verte sur b58cb2b ; affirmations sur
+  GitHub de la demande n° 29 (protection gratuite pour un dépôt public, exécuteur auto-hébergé déconseillé, copies
+  gardées après un retour en privé).
+
+**Non vérifié** : faits des pages contre leurs sources (revus par lot) ; recette dans Firefox et au lecteur d'écran ;
+commit b58cb2b (soumission à Bing) relu par aucune revue ; exécuteurs et variables du dépôt (l'API les refuse à la
+session ; l'exécuteur de la demande n° 27 n'a jamais été installé).
