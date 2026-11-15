@@ -2,7 +2,7 @@
 
 **Version 1, 15/11/2026.** Houssem a choisi la piste B le 15/11 à 22 h 57 et validé le format du pilote F1, avec les précisions 2a et 2i (demande de changement n° 30, §8). Ce document est la vue lisible de la charte.
 
-**Ce qui fait foi** : à partir de la mise en œuvre du lot F1, les styles du dépôt (variables et composants de `src/styles/`) ; d'ici là, les règles de la piste B du pilote (`travaux/etape-13/pilote-f1/css/site.css`, sélecteurs `[data-piste="b"]` et base commune). Une variante de composant passe par la charte : ce document et les styles. Jamais de style isolé dans une page.
+**Ce qui fait foi** : à partir de la mise en œuvre du lot F1, les styles du dépôt (variables et composants de `src/styles/`) ; d'ici là, les règles de la piste B du pilote (`travaux/etape-13/pilote-f1/css/site.css` sur la branche `etape-13/pilote-f1`, sélecteurs `[data-piste="b"]` et base commune). Une variante de composant passe par la charte : ce document et les styles. Jamais de style isolé dans une page.
 
 **Ce qu'elle sert** : un site utile et facile à retrouver. Le lecteur reconnaît son voyant tel qu'il le voit sur son tableau de bord, allumé sur fond sombre. La décision se lit d'un coup d'œil. Rien ne ralentit la page.
 
