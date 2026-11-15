@@ -6,6 +6,7 @@ import { LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, so
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
+import { MOTS_VERDICT_ARBRE, REPONSES_MIN_ARBRE, modeleFichePanne, modeleFicheTutoriel, type EntreeDuJournal, type LigneDeFiche } from './fiche-panne.ts';
 import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_INDEX_OUTIL, TITRE_OUTIL, ancreLigneOutil, idFiltre, libelleDetail, modeleOutilVoyants, outilVoyants, type ModeleOutil } from './outil-voyants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
@@ -854,6 +855,13 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         code: { fiche: modeleFicheCode(page, ctx.voyants, ctx.sources), parMarque: modeleParMarque(page), elementUnique: page.element_unique === 'tableau' },
       }),
       ...('texte_reference' in page && { texte: { fiche: modeleFicheTexte(page, ctx.sources) } }),
+      // Étape 10 : fiche du symptôme sur une page panne, fiche du tutoriel sur toute page qui en déclare un (sa consigne
+      // « quand ne pas le faire soi-même » ne manque jamais), historique sur une page dossier ; absents ailleurs.
+      fiches: {
+        ...('contexte' in page && { fichePanne: modeleFichePanne(page) }),
+        ...(page.tutoriel !== undefined && { ficheTutoriel: modeleFicheTutoriel(page.tutoriel) }),
+        ...('journal_modifications' in page && { historique: page.journal_modifications }),
+      },
     };
     // Page outil voyants (livrable 8.1) : l'outil généré depuis la base, et les sources de toutes ses lignes dans « Sources ».
     if ('outil' in page && page.outil === true) {
@@ -905,6 +913,7 @@ export function limiteProchaineRevue(type: TypePage, dateRevue: Date, sujet?: st
  *  - DATES-FUTUR : date de publication, de modification, de revue ou d'une entrée du journal dans le futur ;
  *  - DATES-ORDRE : modification avant la publication ; entrée du journal d'un dossier hors de la période qui va de la
  *    publication à la dernière modification ;
+ *  - DATES-HISTORIQUE : la dernière entrée du journal d'un dossier n'est pas datée de la dernière modification (étape 10) ;
  *  - DATES-REVUE-DELAI : prochaine revue au-delà du délai du type (charte §8).
  * prochaine_revue après date_revue (R7-DATES) et le délai du dossier (R7-FORMAT) sont contrôlés par les schémas ; une
  * revue faite avant la publication reste permise (relecture avant mise en ligne).
@@ -929,6 +938,12 @@ export function controlerDates(page: PageEditoriale, type: TypePage, aujourdhui:
         constats.push(erreur('DATES-ORDRE', `journal_modifications[${i}] (${jourIso(entree.date)}) hors de la période de la page, de date_publication (${jourIso(page.date_publication)}) à date_modification (${jourIso(page.date_modification)})`, fichier));
       }
     });
+    // Historique du dossier (étape 10) : sa dernière entrée est la dernière modification de la page, pour que « Mis à jour
+    // le » et l'historique concordent (règle 14 : date_modification ne bouge que pour une vraie modification).
+    const derniere = Math.max(...page.journal_modifications.map((e) => e.date.getTime()));
+    if (derniere !== page.date_modification.getTime()) {
+      constats.push(erreur('DATES-HISTORIQUE', `la dernière entrée de journal_modifications (${jourIso(new Date(derniere))}) n'est pas datée de date_modification (${jourIso(page.date_modification)}) : « Mis à jour le » et l'historique du dossier doivent concorder`, fichier));
+    }
   }
   const limite = limiteProchaineRevue(type, page.date_revue, 'sujet' in page ? page.sujet : undefined);
   if (limite !== undefined && page.prochaine_revue.getTime() > limite.getTime()) {
@@ -974,6 +989,11 @@ export interface AttendusPage {
   texte?: { fiche: FicheTexte } | undefined;
   /** Page outil voyants (livrable 8.1, outil-voyants.ts) : l'outil attendu, généré depuis la base. */
   outil?: ModeleOutil | undefined;
+  /**
+   * Fiches et historique (étape 10, fiche-panne.ts) : fiche du symptôme (page panne), fiche du tutoriel (toute page qui
+   * déclare un tutoriel) et historique du dossier (page dossier) attendus ; absents : ces blocs ne doivent pas être affichés.
+   */
+  fiches?: { fichePanne?: readonly LigneDeFiche[]; ficheTutoriel?: readonly LigneDeFiche[]; historique?: readonly EntreeDuJournal[] } | undefined;
 }
 
 /** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
@@ -1084,6 +1104,35 @@ export function controlerHtml(
     constats.push(erreur('R7-ELEMENT-UNIQUE-ABSENT', `l'élément unique « ${page.element_unique} » est absent ou vide dans la page construite (attribut data-element-unique="${page.element_unique}"${page.element_unique === 'tableau' ? ', avec au moins une ligne de données' : ''})`, fichier));
   }
 
+  // Arbre de décision (étape 10) : une liste numérotée de questions, chacune suivie d'au moins deux réponses (sous-liste),
+  // comme le construit le modèle depuis le marqueur « {{arbre}} » du texte rédigé.
+  if (page.element_unique === 'arbre-de-decision' && !manque) {
+    const questions = element.children('ol').first().children('li');
+    const incompletes = questions.toArray().filter((q) => $(q).children('ul, ol').first().children('li').length < REPONSES_MIN_ARBRE);
+    if (questions.length === 0 || incompletes.length > 0) {
+      constats.push(erreur('R7-ARBRE-QUESTIONS', `l'arbre de décision est une liste numérotée de questions, chacune suivie d'au moins ${REPONSES_MIN_ARBRE} réponses (sous-liste) ; ${questions.length === 0 ? 'aucune question' : `${incompletes.length} question(s) avec moins de ${REPONSES_MIN_ARBRE} réponses`}`, fichier));
+    }
+    // Toute phrase de l'arbre (texte propre de chaque élément de liste, à toute profondeur : questions, réponses, texte
+    // hors des listes de réponses) : un libellé de verdict de la grille n'y est cité que s'il est celui d'une ligne de
+    // l'encadré (le texte ne contredit jamais l'encadré) ; une phrase qui dit de rouler ou de s'arrêter
+    // (EXPRESSIONS_VERDICT_ARBRE) cite ce libellé (« {{verdict:…}} » du texte rédigé, charte §2.1 et §2.3), jamais un
+    // verdict écrit à la main. Liste d'expressions forcément incomplète : le reste se relit au paquet de validation.
+    const libelles = Object.values(GRILLE_VERDICTS).map((v) => v.libelle);
+    const deLEncadre = new Set(lignes.map((l) => GRILLE_VERDICTS[l.verdict].libelle));
+    for (const li of element.find('li').toArray()) {
+      const propre = $(li).clone();
+      propre.children('ul, ol').remove();
+      const brut = propre.text().replace(/\s+/g, ' ').trim();
+      const texte = normaliserTexte(brut);
+      const cites = libelles.filter((l) => texte.includes(normaliserTexte(l)));
+      if (cites.some((l) => !deLEncadre.has(l))) {
+        constats.push(erreur('R7-ARBRE-VERDICT', `phrase de l'arbre qui cite un verdict absent de l'encadré de décision (le texte ne contredit jamais l'encadré) : « ${brut.slice(0, 60)} »`, fichier));
+      } else if (cites.length === 0 && MOTS_VERDICT_ARBRE.test(texte)) {
+        constats.push(erreur('R7-ARBRE-VERDICT', `phrase de l'arbre qui dit de rouler ou de s'arrêter sans redire le verdict d'une ligne de l'encadré (« {{verdict:…}} ») : « ${brut.slice(0, 60)} »`, fichier));
+      }
+    }
+  }
+
   // Tutoriel : les étapes s'écrivent dans le texte, en liste numérotée portant le marqueur data-tutoriel-etapes
   // (n'importe quelle autre liste numérotée de la page ne compte pas).
   if (page.tutoriel !== undefined && $('ol[data-tutoriel-etapes] > li').length === 0) {
@@ -1096,6 +1145,7 @@ export function controlerHtml(
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
   if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
   if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil));
+  if (attendus?.fiches !== undefined) constats.push(...controlerFichesPanneDossier(html, fichier, attendus.fiches));
   return constats;
 }
 
@@ -1341,6 +1391,57 @@ export function controlerFicheTexte(html: string, fichier: string, attendu: { fi
     return [erreur('FICHE-TEXTE-INCOMPLETE', `la fiche « Le texte en bref » n'affiche pas, dans l'ordre : ${attendu.fiche.lignes.map((l) => l.intitule).join(', ')} (texte tiré du contenu et du registre)`, fichier)];
   }
   return [];
+}
+
+/**
+ * Fiches et historique (étape 10, fiche-panne.ts), comme les construisent les modèles :
+ *  - FICHE-PANNE-* : une page panne affiche une seule fiche du symptôme (data-fiche-panne), avec dans l'ordre chaque
+ *    ligne du modèle (symptôme s'il est saisi, quand, moteurs concernés) au texte exact ; les autres pages n'en ont pas ;
+ *  - FICHE-TUTORIEL-* : toute page au format tutoriel affiche une seule fiche du tutoriel (data-fiche-tutoriel : outils,
+ *    durée, difficulté, quand ne pas le faire soi-même) ; une page qui n'est pas un tutoriel n'en a pas ;
+ *  - HISTORIQUE-* : une page dossier affiche un seul historique (data-historique-dossier), une entrée par ligne du
+ *    journal des modifications, de la plus récente à la plus ancienne, avec sa date (time datetime) et son résumé ; les
+ *    autres pages n'en ont pas.
+ * Texte comparé normalisé (normaliserTexte).
+ */
+export function controlerFichesPanneDossier(
+  html: string,
+  fichier: string,
+  attendu: { fichePanne?: readonly LigneDeFiche[]; ficheTutoriel?: readonly LigneDeFiche[]; historique?: readonly EntreeDuJournal[] },
+): Constat[] {
+  const constats: Constat[] = [];
+  const $ = cheerio.load(html);
+  const lignesVoulues = (lignes: readonly LigneDeFiche[]): string => lignes.map((l) => `${normaliserTexte(l.intitule)} : ${normaliserTexte(l.valeur)}`).join('\n');
+  const fiches: Array<{ attribut: string; code: string; nom: string; voulue: readonly LigneDeFiche[] | undefined; sans: string }> = [
+    { attribut: 'data-fiche-panne', code: 'FICHE-PANNE', nom: 'la fiche du symptôme', voulue: attendu.fichePanne, sans: 'une page qui n\'est pas une page panne' },
+    { attribut: 'data-fiche-tutoriel', code: 'FICHE-TUTORIEL', nom: 'la fiche du tutoriel', voulue: attendu.ficheTutoriel, sans: 'une page qui n\'est pas un tutoriel' },
+  ];
+  for (const { attribut, code, nom, voulue, sans } of fiches) {
+    const trouvees = $(`[${attribut}]`);
+    if (voulue === undefined) {
+      if (trouvees.length > 0) constats.push(erreur(`${code}-INCOMPLETE`, `${nom} (${attribut}) est affichée sur ${sans} : le contenu n'en déclare pas`, fichier));
+    } else if (trouvees.length !== 1) {
+      constats.push(erreur(`${code}-ABSENTE`, `la page affiche ${nom} (${attribut}) une fois ; trouvé : ${trouvees.length}`, fichier));
+    } else if (trouvees.find('[data-fiche-ligne]').toArray().map((el) => `${normaliserTexte($(el).find('dt').text())} : ${normaliserTexte($(el).find('dd').text())}`).join('\n') !== lignesVoulues(voulue)) {
+      constats.push(erreur(`${code}-INCOMPLETE`, `${nom} n'affiche pas, dans l'ordre : ${voulue.map((l) => l.intitule).join(', ')} (texte tiré du contenu)`, fichier));
+    }
+  }
+  const historiques = $('[data-historique-dossier]');
+  if (attendu.historique === undefined) {
+    if (historiques.length > 0) constats.push(erreur('HISTORIQUE-INCOMPLET', 'historique du dossier (data-historique-dossier) affiché sur une page qui n\'est pas un dossier', fichier));
+  } else if (historiques.length !== 1) {
+    constats.push(erreur('HISTORIQUE-ABSENT', `une page dossier affiche l'historique du dossier (data-historique-dossier) une fois ; trouvé : ${historiques.length}`, fichier));
+  } else {
+    const iso = (d: Date): string => d.toISOString().slice(0, 10);
+    const lues = historiques.find('[data-historique-entree]').toArray().map((el) => `${$(el).find('time').attr('datetime') ?? ''} ${normaliserTexte($(el).text())}`);
+    const voulues = [...attendu.historique]
+      .sort((a, b) => b.date.getTime() - a.date.getTime())
+      .map((e) => `${iso(e.date)} ${normaliserTexte(`${iso(e.date).split('-').reverse().join('/')} : ${e.resume}`)}`);
+    if (lues.join('\n') !== voulues.join('\n')) {
+      constats.push(erreur('HISTORIQUE-INCOMPLET', `l'historique du dossier n'affiche pas, de la plus récente à la plus ancienne, les ${voulues.length} entrée(s) du journal des modifications (date et résumé)`, fichier));
+    }
+  }
+  return constats;
 }
 
 /**

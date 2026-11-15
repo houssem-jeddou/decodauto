@@ -21,7 +21,7 @@ Branche `etape-7/mentions-legales` (PR empilée sur #28). **Ce que Houssem valid
 | Hébergeur | Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, États-Unis ; +1 650 319 8930 |
 | Droit de réponse | Toute personne nommée ou désignée sur le site peut demander l'insertion d'une réponse, en écrivant au directeur de la publication, dans un délai de trois mois à compter de la mise à disposition du message qui la justifie. |
 
-Non publié, volontairement : l'identifiant unique de ta carte (2004234A). La loi ne demande un numéro d'inscription que pour les personnes assujetties au registre du commerce et des sociétés ou au registre national des entreprises (français) ; voir le point 6 du §4.
+Non publié, volontairement : l'identifiant unique de ta carte (valeur retirée du dépôt le 15/11/2026). La loi ne demande un numéro d'inscription que pour les personnes assujetties au registre du commerce et des sociétés ou au registre national des entreprises (français) ; voir le point 6 du §4.
 
 ## 3. Ce que disent les textes (sources lues le 10/11/2026)
 
@@ -33,7 +33,7 @@ Non publié, volontairement : l'identifiant unique de ta carte (2004234A). La lo
 
 1. **Adresse** : le texte de la loi dit « domicile » ; service-public.fr dit « adresse de domiciliation de l'entreprise », pour un entrepreneur individuel français. Aucun texte lu ne tranche pour un auto-entrepreneur tunisien. Tu as choisi la domiciliation d'Ariana ; ton domicile n'est pas publié. Risque : un lecteur ou une autorité peut juger que ce n'est pas le « domicile ». À faire vérifier par ton comptable, si tu veux lever le doute.
 2. **Édition à titre professionnel** : choisie, puisque des recettes publicitaires sont prévues (étape 12). L'anonymat du II ne vaut que « à titre non professionnel » ; aucun texte lu ne définit cette notion.
-3. **Activité déclarée** : ta carte dit « services administratifs et logistiques » ; tu as indiqué le 09/11 avoir vérifié que le statut couvre le site, recettes publicitaires comprises. Claude ne l'a pas contrôlé. La page dit seulement « entrepreneur individuel, régime auto-entrepreneur ».
+3. **Activité déclarée** (libellé de ta carte retiré du dépôt le 15/11/2026) : tu as indiqué le 09/11 avoir vérifié que le statut couvre le site, recettes publicitaires comprises. Claude ne l'a pas contrôlé. La page dit seulement « entrepreneur individuel, régime auto-entrepreneur ».
 4. **Courriel** : la réception de `erreur@decodauto.com` reste à confirmer par un courriel de test avant la mise en ligne (journal).
 5. **Publicité** : la page n'affirme rien sur la publicité au-delà de la politique de confidentialité validée en 7.2 (« mise à jour d'abord »).
 
