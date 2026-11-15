@@ -29,6 +29,12 @@ légales), 17 pages éditoriales (12 voyants dont l'outil, 3 codes, pression des
 éditoriales portent chacune leur empreinte `validation:` (fichiers de `src/content`, relevé du 15/11 sur b960529).
 Manquent les deux pages du lot 4b.
 
+Étape 9 après les déploiements (inspection d'URL de Search Console, 15/11 vers 19 h 20, dans le Chrome de Houssem) :
+5 pages déjà « sur Google » (outil voyants, airbag, ABS et ESP, batterie, direction) ; indexation demandée pour les 11
+autres pages éditoriales des lots 2 à 5d (voyant frein, voyant moteur, voyant huile, voyant FAP, voyant de pression des
+pneus, pression des pneus, P0087, AdBlue, préchauffage, P0420, P0299), toutes acceptées (« Indexation demandée »). Lot 1 :
+fait le 12/11 (`travaux/etape-9/porte-9-lot-1.md`).
+
 Fusion des lots 4a et 5d (15/11) : chaque pull request avait la CI verte sur sa tête exacte (contrôles, recette,
 Lighthouse) ; pour #53, l'arbre fusionné était identique à l'arbre testé (`git merge-tree`, 3647698b). Incident évité :
 une première mise à jour de la branche du lot 5d, faite avec une copie périmée de la branche du lot 4a, ne contenait pas
