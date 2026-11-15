@@ -68,3 +68,92 @@ export function accueilHtml(donnees: DonneesAccueil): string {
   if (donnees.aPropos !== undefined) morceaux.push(`<p class="accueil-a-propos" data-accueil-a-propos><a href="${attributHtml(donnees.aPropos.adresse)}">${texteHtml(`${donnees.aPropos.libelle} : qui édite le site et comment`)}</a></p>`);
   return morceaux.join('');
 }
+
+// ---- Accueil au format 2 (demande de changement n° 30, lot F1, tâche F1.2 ; charte graphique §4, « Accueil ») -------------
+// Tête nuit (mention en tête, H1, premier paragraphe ; sur ordinateur, l'illustration du combiné à droite), puis la section
+// « Quel voyant s'est allumé ? » : grille des pictogrammes de la base, un lien par voyant dont la page est construite
+// (libellé court de la page : porte du pilote, §3), et le lien vers l'outil ; puis l'accès par thème et « Un guide
+// indépendant » (second paragraphe, lien vers « à propos »), en cartes. Structure et classes du pilote validé
+// (generer.py, page_accueil), pour src/styles/charte-b.css. Mêmes repères contrôlés qu'au format 1 (ACCUEIL-*).
+// En production, l'accueil reste au format 1 jusqu'au lot F3.
+
+/** Illustration du combiné de l'accueil au format 2 (fichier de src/illustrations et texte alternatif), affichée sur ordinateur. */
+export const ILLUSTRATION_ACCUEIL = { fichier: 'accueil-tableau-de-bord', alt: 'Tableau de bord avec plusieurs voyants allumés' } as const;
+
+/** Libellés fixes de l'accueil au format 2, repris du pilote validé ; à relire avec le paquet du lot F3. */
+export const ACCUEIL_FORMAT2 = {
+  titreVoyants: 'Quel voyant s’est allumé ?',
+  chapoVoyants: 'Touchez le dessin qui ressemble à votre voyant : la page dit si vous pouvez rouler.',
+  lienOutil: 'Voir tous les voyants, par couleur',
+  titreGuide: 'Un guide indépendant',
+} as const;
+
+/** Un voyant de la grille : la page de rattachement construite, son libellé court et le dessin de sa première ligne. */
+export interface VoyantDeLaGrille {
+  adresse: string;
+  libelle: string;
+  pictogramme: string;
+  couleur: string;
+}
+
+/**
+ * Grille des voyants : une entrée par page de rattachement des lignes de la base (dans l'ordre de la base), seulement si
+ * cette page est construite, hors page outil (elle a son propre lien) ; dessin et couleur de sa première ligne.
+ */
+export function grilleDesVoyants(
+  voyants: Iterable<{ page: string; pictogramme: string; couleur: string }>,
+  plan: ReadonlyMap<string, { adresse: string }>,
+  libelles: ReadonlyMap<string, string>,
+  pictogrammes: ReadonlyMap<string, string>,
+): VoyantDeLaGrille[] {
+  const vues = new Set<string>();
+  const grille: VoyantDeLaGrille[] = [];
+  for (const v of voyants) {
+    if (vues.has(v.page) || v.page === ID_OUTIL_VOYANTS) continue;
+    vues.add(v.page);
+    const adresse = plan.get(v.page)?.adresse;
+    const libelle = libelles.get(v.page);
+    const dessin = pictogrammes.get(v.pictogramme);
+    if (adresse !== undefined && libelle !== undefined && dessin !== undefined) grille.push({ adresse, libelle, pictogramme: dessin, couleur: v.couleur });
+  }
+  return grille;
+}
+
+export interface DonneesAccueilFormat2 extends DonneesAccueil {
+  grille: readonly VoyantDeLaGrille[];
+  /** Illustration du combiné (figure déjà construite, format2.ts), affichée sur ordinateur seulement. */
+  illustration?: string | undefined;
+  /** Mention en tête (composants.ts), en tête de la tête de page. */
+  mention: string;
+  /** Tuile ronde d'un voyant (format2.ts). */
+  tuile: (pictogramme: string, couleur: string) => string;
+}
+
+export function accueilFormat2Html(donnees: DonneesAccueilFormat2): string {
+  const [premier, ...suite] = PARAGRAPHES_ACCUEIL;
+  const tete = `<div class="tete hero">${donnees.mention}<div class="hero-int"><div class="hero-texte"><h1>${texteHtml(TITRE_ACCUEIL)}</h1><p class="chapo">${texteHtml(premier ?? '')}</p></div>${donnees.illustration ?? ''}</div></div>`;
+  const outil = donnees.pages.find((p) => p.id === ID_OUTIL_VOYANTS);
+  const cartes = donnees.grille.map((v) => `<li><a href="${attributHtml(v.adresse)}">${donnees.tuile(v.pictogramme, v.couleur)}<span>${texteHtml(v.libelle)}</span></a></li>`).join('');
+  const voyants =
+    donnees.grille.length > 0 || outil !== undefined
+      ? [
+          '<section class="voyants" id="voyants" data-accueil-voyants aria-labelledby="da-accueil-voyants">',
+          `<h2 id="da-accueil-voyants">${texteHtml(ACCUEIL_FORMAT2.titreVoyants)}</h2>`,
+          `<p class="voyants-chapo">${texteHtml(ACCUEIL_FORMAT2.chapoVoyants)}</p>`,
+          cartes !== '' ? `<ul class="grille-voyants">${cartes}</ul>` : '',
+          outil !== undefined ? `<p class="tous" data-accueil-outil><a href="${attributHtml(outil.adresse)}">${texteHtml(ACCUEIL_FORMAT2.lienOutil)}</a></p>` : '',
+          '</section>',
+        ].join('')
+      : '';
+  const themes = THEMES.flatMap((theme) => {
+    const pages = donnees.pages.filter((p) => p.theme === theme);
+    if (pages.length === 0) return [];
+    const id = `da-accueil-${theme}`;
+    return [`<section class="theme" data-accueil-theme="${theme}" aria-labelledby="${id}"><h2 id="${id}">${texteHtml(LIBELLES_THEMES[theme])}</h2><ul>${pages.map((p) => `<li><a href="${attributHtml(p.adresse)}">${texteHtml(p.libelle)}</a></li>`).join('')}</ul></section>`];
+  });
+  const aPropos = donnees.aPropos !== undefined ? ` <span data-accueil-a-propos><a href="${attributHtml(donnees.aPropos.adresse)}">${texteHtml(`${donnees.aPropos.libelle} : qui édite le site et comment`)}</a></span>` : '';
+  const guide = `<section class="theme theme-guide" data-accueil-guide aria-labelledby="da-accueil-guide"><h2 id="da-accueil-guide">${texteHtml(ACCUEIL_FORMAT2.titreGuide)}</h2>${suite.map((p) => `<p>${texteHtml(p)}${aPropos}</p>`).join('')}</section>`;
+  // Les cartes des thèmes portent la liste contrôlée (ACCUEIL-LISTE) ; la carte « Un guide indépendant » la suit dans la grille.
+  const liste = themes.length > 0 ? `<div class="themes" data-accueil-pages>${themes.join('')}${guide}</div>` : `<div class="themes">${guide}</div>`;
+  return `${tete}<div class="accueil-main">${voyants}${liste}</div>`;
+}

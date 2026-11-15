@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
 import { ANCRE_METHODE, DELAI_REVUE_MOIS, DELAI_REVUE_SOCLE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature } from './charte.ts';
-import { LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, sourcesDeLaLigne } from './composants.ts';
+import { IDENTIFIANTS, LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
@@ -24,6 +24,8 @@ import {
 } from './cout.ts';
 import { ID_OUTIL_VOYANTS, controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
 import { normaliserRecherche } from './texte.ts';
+import { controlerFormat2 } from './controle-format2.ts';
+import { FORMAT2 } from './format2.ts';
 import {
   coutsSchema,
   montantSchema,
@@ -1141,7 +1143,9 @@ export function controlerHtml(
 
   constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout, attendus?.lignes));
   if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
-  if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, attendus.notices));
+  if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, { ...attendus.notices, format: page.format ?? 1 }));
+  // Format 2 (demande de changement n° 30) : règles de format vérifiables par une machine (controle-format2.ts).
+  if (page.format === 2) constats.push(...controlerFormat2(html, fichier, lignes, (attendus?.lignes ?? []).map((l) => l.phrase)));
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
   if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
   if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil));
@@ -1515,7 +1519,7 @@ export function controlerTableauNotices(
   html: string,
   fichier: string,
   lignes: readonly LigneResolue[],
-  attendu: { tableaux: readonly TableauVoyant[]; elementUnique: boolean },
+  attendu: { tableaux: readonly TableauVoyant[]; elementUnique: boolean; format?: 1 | 2 | undefined },
 ): Constat[] {
   const constats: Constat[] = [];
   const $ = cheerio.load(html);
@@ -1589,10 +1593,24 @@ export function controlerTableauNotices(
 
   // Lien de l'encadré vers la partie du voyant : la ligne de situation reprise de la base renvoie au détail par notice.
   // Sans encadré, ou avec un autre nombre de lignes, R9-ENCADRE-ABSENT ou R9-ENCADRE-CONTENU le signale déjà.
+  // Format 2 (demande de changement n° 30, règle 2b) : la ligne d'écart renvoie à la partie du voyant (« Votre marque ») ; le
+  // bloc « Notices » sous l'encadré renvoie au tableau (« Ce que dit chaque notice »). Une ligne sans écart n'a pas de lien.
   const lignesEncadre = $('[data-encadre-decision]').first().find('[data-encadre-ligne]');
   if (lignesEncadre.length !== lignes.length) return constats;
+  if (attendu.format === 2) {
+    const versTableau = $('[data-provenance] a').filter((_, a) => $(a).attr('href') === `#${IDENTIFIANT_NOTICES}` && n($(a).text()) === n(FORMAT2.lienNotices));
+    if (versTableau.length !== 1) constats.push(erreur('TABLEAU-NOTICES-LIEN', `bloc « Notices » sous l'encadré : lien « ${FORMAT2.lienNotices} » vers #${IDENTIFIANT_NOTICES} absent`, fichier));
+    if ($(`#${IDENTIFIANT_NOTICES}`).length !== 1) constats.push(erreur('TABLEAU-NOTICES-LIEN', `le titre du tableau des notices porte l'ancre « ${IDENTIFIANT_NOTICES} »`, fichier));
+  }
   lignes.forEach((ligne, i) => {
     if (ligne.voyant === undefined || !voyantsAttendus.includes(ligne.voyant)) return;
+    if (attendu.format === 2) {
+      if (ligne.ecart_marques === undefined) return;
+      const ancre2 = ancreNotices(ligne.voyant);
+      const lien2 = lignesEncadre.eq(i).find('[data-ecart-court] a').filter((_, a) => $(a).attr('href') === `#${ancre2}` && n($(a).text()) === n(FORMAT2.lienVotreMarque));
+      if (lien2.length === 0) constats.push(erreur('TABLEAU-NOTICES-LIEN', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : lien « ${FORMAT2.lienVotreMarque} » vers #${ancre2} absent de la ligne d'écart`, fichier));
+      return;
+    }
     const ancre = ancreNotices(ligne.voyant);
     const lien = lignesEncadre
       .eq(i)
@@ -1604,6 +1622,9 @@ export function controlerTableauNotices(
   });
   return constats;
 }
+
+/** Ancre du titre du tableau des notices (lien « Ce que dit chaque notice » du format 2). */
+const IDENTIFIANT_NOTICES = IDENTIFIANTS.notices;
 
 /** Balise ouvrante portant un attribut donné (sans valeur, ou avec une valeur). */
 const baliseAvecAttribut = (attribut: string): RegExp => new RegExp(`<[a-z][a-z0-9-]*\\b[^>]*\\s${attribut}(?=[\\s=/>])[^>]*>`, 'gi');
@@ -1690,14 +1711,18 @@ export function controlerEncadre(
       // Nombre de notices sur lequel repose la ligne (charte §2.1) : porté par data-notices et écrit dans la phrase des
       // sources, avec le nom des notices.
       const attendu = sourcesLignes?.[i];
+      const format2 = page.format === 2;
       if (attendu !== undefined && element.attr('data-notices') !== String(attendu.notices)) {
         constats.push(erreur('R9-ENCADRE-SOURCES', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : data-notices doit valoir ${attendu.notices} (notices de constructeurs citées par la ligne)`, fichier));
       }
-      if (attendu !== undefined && attendu.phrase !== '' && !normaliserTexte(element.text()).includes(normaliserTexte(attendu.phrase))) {
+      // Format 2 (règle 2b) : la phrase des sources passe sous l'encadré, dans le bloc « Notices » (FORMAT2-PROVENANCE).
+      if (!format2 && attendu !== undefined && attendu.phrase !== '' && !normaliserTexte(element.text()).includes(normaliserTexte(attendu.phrase))) {
         constats.push(erreur('R9-ENCADRE-SOURCES', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : n'affiche pas « ${attendu.phrase} »`, fichier));
       }
       const texteLigne = normaliserTexte(element.text());
-      const attendus = [ligne.situation, GRILLE_VERDICTS[ligne.verdict].libelle, GRILLE_URGENCES[ligne.urgence].libelle, ligne.action, ...(ligne.ecart_marques !== undefined ? [ligne.ecart_marques] : [])];
+      // Écart entre marques : en entier au format 1 ; au format 2, la ligne d'écart courte (FORMAT2-ECART en vérifie le texte).
+      const ecart = ligne.ecart_marques === undefined ? [] : format2 ? (ligne.ecart_court !== undefined ? [ligne.ecart_court] : []) : [ligne.ecart_marques];
+      const attendus = [ligne.situation, GRILLE_VERDICTS[ligne.verdict].libelle, GRILLE_URGENCES[ligne.urgence].libelle, ligne.action, ...ecart];
       const absents = attendus.filter((t) => !texteLigne.includes(normaliserTexte(t)));
       if (absents.length > 0) {
         constats.push(erreur('R9-ENCADRE-CONTENU', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : n'affiche pas ${absents.map((t) => `« ${t} »`).join(', ')}`, fichier));

@@ -432,7 +432,7 @@ export function compterMots(texte: string): number {
  * lien de signalement, section « Sources », renvois de page du tableau des notices (« p. 15, « … » ») et de l'outil voyants :
  * ce sont des références, pas du texte cité ni du texte du site.
  */
-export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-emplacement-pub]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references'] as const;
+export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-emplacement-pub]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references', '[data-sommaire]'] as const;
 
 export interface PartCitee {
   /** Mots du texte affiché dans le contenu principal (main), hors HORS_PART_CITEE. */
@@ -928,7 +928,8 @@ export function constatsAccueil(html: string, fichier: string, attendu: AccueilA
   } else if (liste.length !== 1) {
     constats.push(erreur('ACCUEIL-LISTE', 'l\'accueil affiche une liste des pages construites (data-accueil-pages)', fichier));
   } else {
-    const liens = liste.find('a[href]').toArray().map((a) => $(a).attr('href') ?? '');
+    // Le lien vers « à propos » peut être dans la grille des thèmes (carte « Un guide indépendant » du format 2) : hors liste.
+    const liens = liste.find('a[href]').not('[data-accueil-a-propos] a').toArray().map((a) => $(a).attr('href') ?? '');
     const manquantes = attendu.pages.filter((p) => !liens.includes(p.adresse)).map((p) => p.adresse);
     const inconnues = liens.filter((l) => !attendu.pages.some((p) => p.adresse === l));
     const doublons = liens.filter((l, i) => liens.indexOf(l) !== i);

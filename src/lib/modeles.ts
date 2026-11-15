@@ -60,6 +60,7 @@ import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
 import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-voyants.ts';
+import { pageVoyantFormat2 } from './format2.ts';
 import { REPONSES_MIN_ARBRE, fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, modeleFichePanne, modeleFicheTutoriel } from './fiche-panne.ts';
 
 export { REPONSES_MIN_ARBRE };
@@ -138,6 +139,8 @@ export function texteRedige(
   const echec = (message: string): never => {
     throw new Error(`page « ${page.id} », texte rédigé : ${message}`);
   };
+  // Repère du verdict sous un H2 (demande de changement n° 30, règle 2d) : format 2 seulement (format2.ts, reperesDuTexte).
+  if (/\{\{repere:/.test(html)) echec('« {{repere:…}} » : le repère de section n\'existe qu\'au format 2 (champ format: 2)');
   const avecArbre = arbreDuTexte(html, page, options.arbreDuTexte === true, echec);
   const avecEtapes = etapesDuTexte(avecArbre, page.tutoriel !== undefined, options.etapesDuTexte === true, echec);
   const avecTableau = tableauDuTexte(avecEtapes, page, options.tableauDuTexte === true, echec);
@@ -320,6 +323,9 @@ export const pageVoyant: Modele = (page, site, corpsHtml) => {
   return [hautDePage(page, site), texte.html, causesDeLaPage(page, site), tableauNoticesDeLaPage(page, site, { elementUnique: true }), basDePage(page, site, texte.citations)].join('');
 };
 
+/** Page voyant (hors outil) au format 2 (demande de changement n° 30) : voir src/lib/format2.ts. */
+export const pageVoyantF2: Modele = (page, site, corpsHtml) => pageVoyantFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site));
+
 /** Page code défaut : voir l'ordre en tête de ce fichier. */
 export const pageCodeDefaut: Modele = (page, site, corpsHtml) => {
   if (!('code' in page)) throw new Error(`page « ${page.id} » : le modèle code défaut s'applique à une page code défaut`);
@@ -438,6 +444,12 @@ export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pa
 
 /** Modèle d'une page, ou la raison pour laquelle il n'existe pas encore (la construction échoue alors). */
 export function modeleDeLaPage(type: TypePage, page: PageEditoriale): { modele: Modele } | { absent: string } {
+  // Format 2 (demande de changement n° 30, lot F1) : page voyant hors outil seulement (F1.2) ; les autres modèles passent au
+  // format 2 après leur conception visuelle (F1.3) : d'ici là, une telle page fait échouer la construction.
+  if (page.format === 2) {
+    if (type === 'voyant' && !('outil' in page && page.outil === true)) return { modele: pageVoyantF2 };
+    return { absent: `le format 2 des pages « ${type}${'outil' in page && page.outil === true ? ' (outil voyants)' : ''} » n'est pas encore livré (lot F1, F1.3 : à dessiner d'abord)` };
+  }
   if (type === 'voyant' && 'outil' in page && page.outil === true) return { modele: pageOutilVoyants };
   const modele = MODELES[type];
   return modele !== undefined ? { modele } : { absent: `le modèle des pages « ${type} » n'est pas encore livré (étape 6, 10 ou 11)` };

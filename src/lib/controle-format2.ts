@@ -1,0 +1,126 @@
+// ---------------------------------------------------------------------------------------------
+// Contrôles du format 2 sur la page construite (demande de changement n° 30, règles 2a à 2m vérifiables par une machine ;
+// lot F1, tâche F1.2 ; src/lib/format2.ts). Appelés par controlerHtml (controle.ts) pour toute page au format 2 :
+//  - FORMAT2-ECART : une ligne de l'encadré dont les marques divergent affiche sa ligne d'écart courte (texte exact, 25 mots
+//    au plus, lien « Votre marque » compris, règle 2b), et une ligne sans écart n'en affiche pas ;
+//  - FORMAT2-PROVENANCE : le bloc « Notices / Base du coût » suit la ligne de transparence et donne la phrase des sources de
+//    chaque ligne (règle 2b) ;
+//  - FORMAT2-ILLUSTRATION : une seule illustration, juste après ce bloc (règle 2i et précision du 15/11), dessin nommé
+//    (role="img", texte alternatif) et légende terminée par « Illustration decodauto. » ;
+//  - FORMAT2-REPERE : chaque repère du verdict suit immédiatement un H2 du texte rédigé et porte le verdict d'une ligne de
+//    l'encadré (règle 2d) ;
+//  - FORMAT2-REPLIE : chaque extrait cité du tableau des notices est dans une partie dépliable, au libellé unique sur la
+//    page (règle 2f) ; « Sources » est repliée (details fermé) et son résumé donne leur nombre (règle 2g) ;
+//  - FORMAT2-SOMMAIRE : dès SOMMAIRE_MIN_H2 titres H2 dans le texte rédigé, un sommaire « Sur cette page » qui mène à
+//    chacun d'eux, sans lien vers une ancre absente (règle 2h).
+// Les mesures de hauteur (2a, 2i : premier écran, trois écrans) se font à la porte, avec un navigateur (conception, §5).
+// Module sans dépendance à l'exécution autre que cheerio : testé sans installation (tests/format2.test.ts).
+// ---------------------------------------------------------------------------------------------
+import * as cheerio from 'cheerio';
+import { normaliserTexte } from './empreinte.ts';
+import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, motsDe } from './format2.ts';
+import type { LigneResolue } from './calcul.ts';
+
+export interface ConstatFormat2 {
+  regle: string;
+  gravite: 'erreur';
+  message: string;
+  fichier?: string | undefined;
+}
+const erreur = (regle: string, message: string, fichier?: string): ConstatFormat2 => ({ regle, gravite: 'erreur', message, fichier });
+
+/** Phrases des sources de chaque ligne (composants.ts, phraseSources), dans l'ordre de l'encadré. */
+export function controlerFormat2(html: string, fichier: string, lignes: readonly LigneResolue[], phrases: readonly string[]): ConstatFormat2[] {
+  const constats: ConstatFormat2[] = [];
+  const $ = cheerio.load(html);
+  const n = normaliserTexte;
+  const texte = (el: ReturnType<typeof $>): string => el.text().replace(/\s+/g, ' ').trim();
+
+  // Ligne d'écart courte (2b).
+  const affichees = $('[data-encadre-decision]').first().find('[data-encadre-ligne]').toArray();
+  if (affichees.length === lignes.length) {
+    lignes.forEach((ligne, i) => {
+      const ecart = $(affichees[i]).find('[data-ecart-court]');
+      if (ligne.ecart_marques === undefined) {
+        if (ecart.length > 0) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : ligne d'écart affichée alors que les marques ne divergent pas`, fichier));
+        return;
+      }
+      if (ecart.length !== 1 || ligne.ecart_court === undefined) {
+        constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré (« ${ligne.situation.slice(0, 60)} ») : les marques divergent, la ligne d'écart courte (ecart_court) est attendue`, fichier));
+        return;
+      }
+      const vue = ecart.clone();
+      vue.find('.vh').remove();
+      const mots = motsDe(texte(vue));
+      if (!n(texte(vue)).includes(n(ligne.ecart_court))) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : la ligne d'écart affiche « ${ligne.ecart_court} »`, fichier));
+      if (mots > ECART_COURT_MAX_MOTS) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : ligne d'écart de ${mots} mots, lien compris ; ${ECART_COURT_MAX_MOTS} au plus (règle 2b)`, fichier));
+    });
+  }
+
+  // Bloc « Notices / Base du coût » (2b), juste après la ligne de transparence.
+  const provenance = $('[data-provenance]');
+  if (provenance.length !== 1) constats.push(erreur('FORMAT2-PROVENANCE', `un bloc « ${FORMAT2.notices} / ${FORMAT2.baseDuCout} » (data-provenance) sous l'encadré ; trouvé : ${provenance.length}`, fichier));
+  else {
+    if (!provenance.prev().is('[data-ligne-transparence]')) constats.push(erreur('FORMAT2-PROVENANCE', 'le bloc « Notices / Base du coût » suit immédiatement la ligne de transparence (charte graphique §4)', fichier));
+    const contenu = n(texte(provenance));
+    phrases.forEach((phrase, i) => {
+      if (phrase === '') return;
+      // La phrase peut commencer en minuscule après « Ligne n : » : la casse ne compte pas (normaliserTexte).
+      if (!contenu.includes(n(phrase))) constats.push(erreur('FORMAT2-PROVENANCE', `ligne ${i + 1} : le bloc « Notices » n'affiche pas « ${phrase} »`, fichier));
+    });
+  }
+
+  // Illustration (2i), juste après le bloc « Notices / Base du coût ».
+  const figures = $('figure[data-illustration]');
+  if (figures.length !== 1) constats.push(erreur('FORMAT2-ILLUSTRATION', `une illustration (figure data-illustration) attendue au format 2 ; trouvé : ${figures.length}`, fichier));
+  else {
+    const figure = figures.first();
+    const avant = provenance.length === 1 ? '[data-provenance]' : '[data-ligne-transparence]';
+    if (!figure.prev().is(avant)) constats.push(erreur('FORMAT2-ILLUSTRATION', "l'illustration suit immédiatement le bloc « Notices / Base du coût » (règle 2i, précision du 15/11)", fichier));
+    const dessin = figure.children('svg').first();
+    if (dessin.length !== 1 || dessin.attr('role') !== 'img' || (dessin.attr('aria-label') ?? '').trim() === '') constats.push(erreur('FORMAT2-ILLUSTRATION', "le dessin de l'illustration est un SVG nommé (role=\"img\", aria-label : texte alternatif)", fichier));
+    const legende = texte(figure.find('figcaption'));
+    if (!legende.endsWith(FORMAT2.credit)) constats.push(erreur('FORMAT2-ILLUSTRATION', `la légende de l'illustration se termine par « ${FORMAT2.credit} »`, fichier));
+  }
+
+  // Repères (2d) : sous un H2 du texte rédigé, verdict d'une ligne de l'encadré.
+  const verdicts = new Set(lignes.map((l) => l.verdict as string));
+  $('[data-repere]').each((_, el) => {
+    const repere = $(el);
+    const ok = repere.prev().is('h2') && repere.closest('[data-corps]').length === 1 && verdicts.has(repere.attr('data-verdict') ?? '');
+    if (!ok) constats.push(erreur('FORMAT2-REPERE', `repère « ${texte(repere)} » : il suit immédiatement un H2 du texte rédigé et porte le verdict d'une ligne de l'encadré (règle 2d)`, fichier));
+  });
+
+  // Parties repliées (2f, 2g).
+  const libelles: string[] = [];
+  $('[data-tableau-notices] .notices-citation').each((_, el) => {
+    const details = $(el).closest('details');
+    const libelle = texte(details.children('summary').first());
+    if (details.length === 0 || libelle === '' || details.is('[open]')) constats.push(erreur('FORMAT2-REPLIE', "extrait cité du tableau des notices : dans une partie dépliable fermée, avec un libellé (règle 2f)", fichier));
+    else libelles.push(libelle);
+  });
+  const doublons = [...new Set(libelles.filter((l, i) => libelles.indexOf(l) !== i))];
+  if (doublons.length > 0) constats.push(erreur('FORMAT2-REPLIE', `libellés d'extrait répétés sur la page : ${doublons.join(' ; ')} (règle 2f : libellé unique)`, fichier));
+  const sources = $('[data-sources]').first();
+  if (sources.length === 1) {
+    const nombre = sources.find('[data-source-id]').length;
+    const resume = texte(sources.children('summary').first());
+    if (!sources.is('details') || sources.is('[open]') || resume !== `${FORMAT2.sources} (${nombre})`) {
+      constats.push(erreur('FORMAT2-REPLIE', `« Sources » est repliée (details fermé), avec le résumé « ${FORMAT2.sources} (${nombre}) » (règle 2g)`, fichier));
+    }
+  }
+
+  // Sommaire (2h).
+  const titres = $('[data-corps] h2').toArray().map((h) => $(h));
+  const sommaires = $('[data-sommaire]');
+  if (titres.length >= SOMMAIRE_MIN_H2 && sommaires.length === 0) constats.push(erreur('FORMAT2-SOMMAIRE', `${titres.length} titres H2 dans le texte rédigé : un sommaire « ${FORMAT2.sommaire} » est attendu dès ${SOMMAIRE_MIN_H2} (règle 2h)`, fichier));
+  sommaires.each((_, el) => {
+    const cibles = $(el).find('a[href^="#"]').toArray().map((a) => ($(a).attr('href') ?? '').slice(1));
+    const absentes = cibles.filter((c) => $(`[id="${c.replace(/"/g, '\\"')}"]`).length !== 1);
+    const oublies = titres.filter((h) => !cibles.includes(h.attr('id') ?? '')).map((h) => texte(h));
+    if (absentes.length > 0 || oublies.length > 0) {
+      constats.push(erreur('FORMAT2-SOMMAIRE', `le sommaire mène à chaque H2 du texte rédigé, sans ancre absente ; ancres absentes : ${absentes.join(', ') || 'aucune'} ; titres oubliés : ${oublies.join(' ; ') || 'aucun'}`, fichier));
+    }
+  });
+  return constats;
+}

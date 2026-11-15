@@ -1,0 +1,114 @@
+{
+  "avertissement": "Brouillon, jamais validé. Données du format 2 pour la construction de démonstration du lot F1 (tâche F1.2, npm run demo:format2), jamais publiées : lignes d'écart courtes et « ce que demande la notice » du pilote F1 (branche etape-13/pilote-f1, generer.py), sauf les lignes « adblue-defaut » et « adblue-demarrage-impossible », rédigées pour cette démonstration (le pilote ne reprenait qu'un groupe AdBlue) ; illustrations du pilote redessinées en fichiers SVG (dossier illustrations/) ; repères placés comme dans le pilote. Ces textes se valident avec le paquet du lot F2 ; data/voyants.json et src/content ne changent pas.",
+  "voyants": {
+    "moteur-orange-fixe": {
+      "ecart_court": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt).",
+      "demandes": {
+        "notice-dacia-sandero-3|p. 113, « Témoin de contrôle du système antipollution »": "Consulter au plus tôt un représentant de la marque",
+        "notice-peugeot-208|p. 15, « Système d'autodiagnostic moteur » ; renvoi (3) p. 13": "Se rendre rapidement dans le réseau ou un atelier qualifié",
+        "notice-renault-clio-5|p. 139, « Témoin de contrôle du système antipollution » (repris p. 199)": "Consulter au plus tôt un représentant de la marque",
+        "notice-seat-ibiza|p. 288, « Gestion du moteur et système d'épuration des gaz d'échappement », Témoins": "Rouler prudemment jusqu’à l’atelier le plus proche",
+        "notice-toyota-yaris|p. 293, 7.2.4 « Si un voyant s'allume », Voyant de dysfonctionnement": "Arrêter immédiatement le véhicule dans un endroit sûr"
+      }
+    },
+    "moteur-orange-clignotant": {
+      "ecart_court": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt).",
+      "demandes": {
+        "notice-dacia-sandero-3|p. 113, « Témoin de contrôle du système antipollution »": "Réduire le régime moteur, puis consulter au plus tôt",
+        "notice-peugeot-208|p. 15, « Système d'autodiagnostic moteur » ; renvoi (2) p. 13": "Faire impérativement appel au réseau (catalyseur menacé)",
+        "notice-renault-clio-5|p. 139, « Témoin de contrôle du système antipollution » (repris p. 199)": "Réduire le régime moteur, puis consulter au plus tôt",
+        "notice-seat-ibiza|p. 288, « Gestion du moteur et système d'épuration des gaz d'échappement », Témoins": "Rouler prudemment jusqu’à l’atelier le plus proche (catalyseur menacé)",
+        "notice-toyota-yaris|p. 292-293, 7.2.4 « Si un voyant s'allume », Voyant de dysfonctionnement": "Arrêter immédiatement le véhicule dans un endroit sûr"
+      }
+    },
+    "moteur-rouge": {
+      "demandes": {
+        "notice-dacia-sandero-3|p. 102, « Messages d'alerte » (et p. 161)": "Arrêt impératif et immédiat, compatible avec la circulation, moteur coupé, sans le redémarrer",
+        "notice-peugeot-208|p. 13, « Témoins de couleur rouge », Système d'autodiagnostic moteur ; renvois (1) et (2) p. 13": "Arrêt impératif, contact coupé, puis appel au réseau",
+        "notice-renault-clio-5|p. 125, « Messages d'alerte » (et p. 187 et 189)": "Arrêt impératif et immédiat, compatible avec la circulation, moteur coupé, sans le redémarrer"
+      }
+    },
+    "adblue-reserve": {
+      "ecart_court": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée).",
+      "demandes": {
+        "notice-peugeot-208|p. 15, « AdBlue (BlueHDi) »": "Faire un appoint (autonomie de 2 400 à 800 km)",
+        "notice-peugeot-208|p. 15, « AdBlue (BlueHDi) » ; renvoi (3) p. 13": "Appoint rapide sous 800 km, impératif sous 100 km",
+        "notice-seat-ibiza|p. 286, « AdBlue », Témoins d'alerte et de contrôle": "Faire l’appoint dans les kilomètres indiqués",
+        "notice-renault-clio-5|p. 166, « Réservoir réactif », Entretien/Autonomie": "Faire le plein de réactif dès que possible",
+        "notice-dacia-sandero-3|p. 138, « Réservoir réactif », Entretien/Autonomie": "Faire le plein de réactif dès que possible"
+      }
+    },
+    "adblue-defaut": {
+      "ecart_court": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué).",
+      "demandes": {
+        "notice-seat-ibiza|p. 286, « AdBlue », Témoins d'alerte et de contrôle": "S’adresser à un atelier et faire réviser le système",
+        "notice-renault-clio-5|p. 167, « Réservoir réactif », Anomalies de fonctionnement du système": "Consulter un représentant de la marque le plus tôt possible",
+        "notice-dacia-sandero-3|p. 139, « Réservoir réactif », Anomalies de fonctionnement du système": "Consulter un représentant de la marque le plus tôt possible"
+      }
+    },
+    "adblue-demarrage-impossible": {
+      "ecart_court": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé).",
+      "demandes": {
+        "notice-seat-ibiza|p. 286, « AdBlue », Témoins d'alerte et de contrôle": "S’adresser à un atelier et faire réviser le système",
+        "notice-peugeot-208|p. 15-16, « AdBlue (BlueHDi) » et « Système d'antipollution SCR » ; renvoi (2) p. 13": "Faire un appoint, ou appeler le réseau, pour redémarrer",
+        "notice-renault-clio-5|p. 166-167, « Réservoir réactif »": "Faire soi-même le plein de réactif pour redémarrer",
+        "notice-dacia-sandero-3|p. 138-139, « Réservoir réactif »": "Faire soi-même le plein de réactif pour redémarrer"
+      }
+    }
+  },
+  "pages": {
+    "voyant-moteur": {
+      "illustration": {
+        "fichier": "voyant-moteur-tableau-de-bord",
+        "alt": "Le voyant moteur orange allumé au tableau de bord",
+        "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques."
+      },
+      "reperes": [
+        {
+          "titre": "Peut-on rouler avec le voyant moteur orange allumé ?",
+          "repere": "moteur-orange-fixe"
+        },
+        {
+          "titre": "Voyant moteur qui clignote",
+          "repere": "moteur-orange-clignotant"
+        },
+        {
+          "titre": "Voyant moteur rouge ou message « Risque casse moteur »",
+          "repere": "moteur-rouge"
+        },
+        {
+          "titre": "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+          "repere": "moteur-orange-fixe"
+        },
+        {
+          "titre": "Combien de kilomètres peut-on faire ?",
+          "repere": "moteur-orange-fixe"
+        },
+        {
+          "titre": "Perte de puissance, moteur qui tourne mal",
+          "repere": "moteur-orange-fixe"
+        }
+      ]
+    },
+    "voyant-adblue": {
+      "illustration": {
+        "fichier": "voyant-adblue-autonomie",
+        "alt": "Le voyant AdBlue allumé avec un message d’autonomie",
+        "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3)."
+      },
+      "reperes": [
+        {
+          "titre": "Peut-on rouler avec le voyant AdBlue allumé ?",
+          "repere": "adblue-reserve"
+        },
+        {
+          "titre": "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+          "repere": "adblue-defaut"
+        }
+      ]
+    }
+  },
+  "accueil": {
+    "format": 2
+  }
+}

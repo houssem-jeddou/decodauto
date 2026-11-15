@@ -27,7 +27,7 @@ export interface LigneAvecCitations {
   voyant?: string | undefined;
   verdict: Verdict;
   urgence: Urgence;
-  citations: readonly { source: string; emplacement: string; extrait: string; verdict?: Verdict | undefined; urgence?: Urgence | undefined }[];
+  citations: readonly { source: string; emplacement: string; extrait: string; verdict?: Verdict | undefined; urgence?: Urgence | undefined; demande?: string | undefined }[];
 }
 
 /** Une consigne citée d'une notice de constructeur, avec son propre niveau. */
@@ -39,6 +39,8 @@ export interface RangeeNotice {
   url?: string | undefined;
   emplacement: string;
   extrait: string;
+  /** Ce que demande la notice, en quelques mots du site (format 2, tableau compact ; champ `demande` de la citation). */
+  demande?: string | undefined;
   /** Niveau que la grille tire de cette consigne (champ de la citation dans la base). */
   verdict: Verdict;
   urgence: Urgence;
@@ -79,6 +81,7 @@ export function modeleTableauNotices(
           url: source.url,
           emplacement: c.emplacement,
           extrait: c.extrait,
+          demande: c.demande,
           verdict: c.verdict,
           urgence: c.urgence,
           retenue: c.verdict === ligne.verdict && c.urgence === ligne.urgence,
@@ -114,7 +117,7 @@ export const FIN_TABLEAU_NOTICES = `Votre marque n’est pas dans ce tableau, ou
  * Extrait cité mot pour mot, entre guillemets français ; les guillemets de la notice à l'intérieur deviennent des
  * guillemets anglais (« … “OIL” … »), pour que la fin de la citation reste lisible.
  */
-function citation(extrait: string): string {
+export function citation(extrait: string): string {
   const interieur = texteHtml(extrait).replace(new RegExp(`«${INSECABLE}?`, 'g'), '“').replace(new RegExp(`${INSECABLE}?»`, 'g'), '”');
   return `«${INSECABLE}${interieur}${INSECABLE}»`;
 }

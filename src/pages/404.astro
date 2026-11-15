@@ -4,6 +4,9 @@ import Base from '../layouts/Base.astro';
 import type { PageSaisie } from '../schemas/pages.ts';
 // La page 404 suit le format de l'accueil (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md, §1).
 const format = (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).find((page) => page.id === 'accueil')?.format ?? 1;
+// Format 2 de la page 404 : à dessiner d'abord (lot F1, F1.3). La démonstration du format 2 (DEMO_FORMAT2=1) ne change que la
+// page d'accueil en mémoire : la 404 y reste au format 1.
+if (format === 2) throw new Error("page 404 : le format 2 n'est pas encore livré (lot F1, F1.3 : à dessiner d'abord)");
 ---
 
 <Base

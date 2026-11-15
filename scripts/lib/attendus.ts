@@ -20,10 +20,17 @@ export const DOSSIER_RECETTE = 'dist-exemples';
  */
 export function refusRecette(args: readonly string[], dist: string, env: Readonly<Record<string, string | undefined>>): string | undefined {
   const exemples = args.includes('--exemples');
+  const demo = args.includes('--demo-format2');
+  if (exemples && demo) return '--exemples et --demo-format2 : une seule construction de test à la fois';
   if (exemples && (basename(dist) !== DOSSIER_RECETTE || env['AVEC_EXEMPLES'] !== '1')) return `--exemples n'est accepté que sur le dossier ${DOSSIER_RECETTE}, construit avec AVEC_EXEMPLES=1`;
+  // Construction de démonstration du format 2 (lot F1, scripts/lib/demo-format2.ts) : son dossier, construit avec DEMO_FORMAT2=1.
+  if (demo && (basename(dist) !== DOSSIER_DEMO_FORMAT2 || env['DEMO_FORMAT2'] !== '1')) return `--demo-format2 n'est accepté que sur le dossier ${DOSSIER_DEMO_FORMAT2}, construit avec DEMO_FORMAT2=1`;
   if (!exemples && args.includes('--attendu')) return "--attendu n'est accepté que pour la construction de recette (--exemples)";
   return undefined;
 }
+
+/** Dossier de la construction de démonstration du format 2 (astro.config.mjs, DEMO_FORMAT2=1 ; scripts/lib/demo-format2.ts). */
+export const DOSSIER_DEMO_FORMAT2 = 'dist-demo-format2';
 
 export interface Attendu {
   regle: string;

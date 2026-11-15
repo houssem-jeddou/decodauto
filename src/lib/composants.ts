@@ -130,11 +130,12 @@ export function cheminDAriane(id: string, plan: ReadonlyMap<string, LigneDuPlan>
   return [{ libelle: 'Accueil', adresse: '/' }, ...meres, { libelle: libelles.get(id) ?? id }];
 }
 
-export function filDAriane(miettes: readonly Miette[]): string {
+/** Fil d'Ariane ; `classe` : classe du bloc (« fil » au format 2, charte graphique §4). */
+export function filDAriane(miettes: readonly Miette[], classe = 'fil-ariane'): string {
   const elements = miettes
     .map((m) => (m.adresse !== undefined ? `<li><a href="${attributHtml(m.adresse)}">${texteHtml(m.libelle)}</a></li>` : `<li><span aria-current="page">${texteHtml(m.libelle)}</span></li>`))
     .join('');
-  return `<nav class="fil-ariane" aria-label="${attributHtml('Fil d’Ariane')}" data-fil-ariane><ol>${elements}</ol></nav>`;
+  return `<nav class="${attributHtml(classe)}" aria-label="${attributHtml('Fil d’Ariane')}" data-fil-ariane><ol>${elements}</ol></nav>`;
 }
 
 // ---- Encadré de décision ---------------------------------------------------------------------------
@@ -429,7 +430,13 @@ export function pagesLiees(entree: {
  * consultation. `note` : phrase affichée sous le titre (page outil voyants : les pages citées sont sous chaque ligne).
  */
 export function sectionSources(citees: ReadonlyMap<string, readonly string[]>, registre: ReadonlyMap<string, SourceDuRegistre>, note?: string): string {
-  const elements = [...citees].flatMap(([id, emplacements]) => {
+  const elements = elementsDesSources(citees, registre);
+  return `<section class="sources" data-sources aria-labelledby="${IDENTIFIANTS.sources}"><h2 id="${IDENTIFIANTS.sources}">Sources</h2>${note !== undefined ? `<p>${texteHtml(note)}</p>` : ''}<ol>${elements.join('')}</ol></section>`;
+}
+
+/** Une entrée de liste par source citée connue du registre : titre (lien), éditeur, emplacements cités, date de consultation. */
+export function elementsDesSources(citees: ReadonlyMap<string, readonly string[]>, registre: ReadonlyMap<string, SourceDuRegistre>): string[] {
+  return [...citees].flatMap(([id, emplacements]) => {
     const source = registre.get(id);
     if (source === undefined) return [];
     const ou = emplacements.length > 0 ? ` ${texteHtml(`Cité : ${emplacements.join(' ; ')}.`)}` : '';
@@ -437,7 +444,6 @@ export function sectionSources(citees: ReadonlyMap<string, readonly string[]>, r
       `<li data-source-id="${attributHtml(id)}"><a href="${attributHtml(source.url)}" rel="noopener">${texteHtml(source.titre)}</a>, ${texteHtml(source.editeur)}.${ou} ${texteHtml(`Consulté le ${dateAffichee(source.date_consultation)}.`)}</li>`,
     ];
   });
-  return `<section class="sources" data-sources aria-labelledby="${IDENTIFIANTS.sources}"><h2 id="${IDENTIFIANTS.sources}">Sources</h2>${note !== undefined ? `<p>${texteHtml(note)}</p>` : ''}<ol>${elements.join('')}</ol></section>`;
 }
 
 // ---- Section « Méthode » de la page « à propos » ------------------------------------------------------

@@ -19,6 +19,7 @@
     "grille:vue": "node scripts/vue-grille.ts",
     "charte:vue": "node scripts/vue-charte.ts",
     "demo": "node scripts/demo-composants.ts",
+    "demo:format2": "DEMO_FORMAT2=1 astro build && DEMO_FORMAT2=1 node scripts/controle.ts --dist dist-demo-format2 --demo-format2 && node scripts/liens.ts --dist dist-demo-format2",
     "empreinte": "node scripts/empreinte.ts",
     "verifier:modes": "node scripts/verifier-modes.ts",
     "production": "node scripts/verifier-production.ts",
