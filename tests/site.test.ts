@@ -303,16 +303,6 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
     assert.match(script, /passages: apresDeploiement \? 4 : 1/);
   });
 
-  test('demande n° 27 : chaque job tourne sur l\'exécuteur choisi par la variable CI_RUNNER, à défaut sur ubuntu-latest', async () => {
-    const ci = await readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
-    const jobs = ci.slice(ci.indexOf('\njobs:\n'));
-    const executeurs = [...jobs.matchAll(/\n    runs-on: (.*)\n/g)].map((m) => m[1]);
-    const nomsDeJobs = [...jobs.matchAll(/\n  ([a-z][a-z-]*):\n/g)].map((m) => m[1]);
-    assert.ok(nomsDeJobs.length >= 7, `jobs trouvés : ${nomsDeJobs.join(', ')}`);
-    assert.equal(executeurs.length, nomsDeJobs.length, 'chaque job déclare son exécuteur');
-    for (const e of executeurs) assert.equal(e, "${{ vars.CI_RUNNER || 'ubuntu-latest' }}");
-  });
-
   test('demande n° 26 : le job production ne tourne que sur main, et seuls une pull request ou un essai hors de main annulent le passage remplacé', async () => {
     const ci = await readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
     const job = ci.slice(ci.indexOf('\n  production:'));
@@ -346,5 +336,45 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
       assert.equal(evaluer(condition, c), c.production, `job production, ${c.nom}`);
       assert.equal(evaluer(annulation, c), c.annule, `annulation du passage remplacé, ${c.nom}`);
     }
+  });
+});
+
+describe('CI : exécuteur, cache et stockage (demande n° 27)', () => {
+  const lireCi = () => readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
+
+  test('chaque job tourne sur l\'exécuteur choisi par la variable CI_RUNNER, à défaut sur ubuntu-latest', async () => {
+    const ci = await lireCi();
+    const jobs = ci.slice(ci.indexOf('\njobs:\n'));
+    const executeurs = [...jobs.matchAll(/\n    runs-on: (.*)\n/g)].map((m) => m[1]);
+    const nomsDeJobs = [...jobs.matchAll(/\n  ([a-z][a-z-]*):\n/g)].map((m) => m[1]);
+    assert.ok(nomsDeJobs.length >= 7, `jobs trouvés : ${nomsDeJobs.join(', ')}`);
+    assert.equal(executeurs.length, nomsDeJobs.length, 'chaque job déclare son exécuteur');
+    for (const e of executeurs) assert.equal(e, "${{ vars.CI_RUNNER || 'ubuntu-latest' }}");
+  });
+
+  test('le cache npm de GitHub ne sert que sur ses serveurs, jamais sur l\'exécuteur du PC', async () => {
+    const ci = await lireCi();
+    const caches = [...ci.matchAll(/\n {10}cache: (.*)\n/g)].map((m) => m[1]);
+    assert.equal(caches.length, 4, 'quatre étapes setup-node déclarent un cache');
+    const expression = "${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}";
+    for (const c of caches) assert.equal(c, expression);
+    // Évaluation de l'expression : une variable absente vaut une chaîne vide chez GitHub ; '' (aucun cache) est faux,
+    // d'où l'ordre « != … && 'npm' || '' » (l'ordre inverse donnerait toujours 'npm').
+    const evaluer = (executeur: string): string => {
+      const js = expression.replace(/^\$\{\{\s*|\s*\}\}$/g, '').replace(/vars\.CI_RUNNER/g, JSON.stringify(executeur));
+      return Function(`return (${js});`)();
+    };
+    assert.equal(evaluer(''), 'npm', 'variable absente : serveurs de GitHub, cache npm');
+    assert.equal(evaluer('ubuntu-latest'), 'npm');
+    assert.equal(evaluer('self-hosted'), '', 'exécuteur du PC : aucun cache de GitHub');
+  });
+
+  test('les rapports complets de Lighthouse ne sont conservés qu\'en cas d\'échec, et le job a un délai de 30 minutes', async () => {
+    const ci = await lireCi();
+    const job = ci.slice(ci.indexOf('\n  lighthouse:'), ci.indexOf('\n  origine-main:'));
+    assert.match(job, /\n    timeout-minutes: 30\n/);
+    const envoi = job.slice(job.indexOf('Conserver les rapports'));
+    assert.match(envoi, /^Conserver les rapports \(en cas d'échec\)\n {8}if: \$\{\{ failure\(\) \}\}\n/);
+    assert.match(envoi, /name: rapports-lighthouse/);
   });
 });
