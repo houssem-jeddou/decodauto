@@ -50,11 +50,13 @@ export const ligneSituationSchema = z
     action: texte.optional(),
     citations: z.array(citationSchema).min(1).optional(),
     ecart_marques: texte.optional(),
+    // Ligne d'écart courte du format 2 (demande de changement n° 30, règle 2b), quand `ecart_marques` est saisi.
+    ecart_court: texte.optional(),
   })
   .superRefine((ligne, ctx) => {
     const champs = ['situation', 'verdict', 'urgence', 'action', 'citations'] as const;
     if (ligne.voyant !== undefined) {
-      for (const champ of [...champs, 'voyant_lie', 'ecart_marques'] as const) {
+      for (const champ of [...champs, 'voyant_lie', 'ecart_marques', 'ecart_court'] as const) {
         if (ligne[champ] !== undefined) {
           probleme(
             ctx,
@@ -131,6 +133,12 @@ const libelleCourt = texte.max(LIBELLE_COURT_MAX, `le libellé court fait au plu
 export const formatSchema = z.union([z.literal(1), z.literal(2)]);
 export type FormatPage = z.infer<typeof formatSchema>;
 
+/**
+ * Visuel qui montre où regarder ou quoi faire (demande de changement n° 30, règle 2i) : illustration dessinée pour le site,
+ * `src/illustrations/<fichier>.svg`, avec son texte alternatif et sa légende (« Illustration decodauto. » ajouté par le modèle).
+ */
+export const illustrationSchema = z.strictObject({ fichier: identifiant, alt: texte, legende: texte });
+
 /** Champs communs à toutes les pages éditoriales hors socle (docs/08 §1). */
 const champsCommuns = {
   id: identifiant,
@@ -160,6 +168,9 @@ const champsCommuns = {
   tutoriel: tutorielSchema.optional(),
   // Format de lecture, 1 par défaut (formatSchema).
   format: formatSchema.optional(),
+  // Format 2 : réponse directe d'une page informative, en tête de l'encadré (règle 2c), et visuel (règle 2i).
+  reponse_directe: texte.optional(),
+  illustration: illustrationSchema.optional(),
 };
 
 type Commun = {
@@ -172,6 +183,8 @@ type Commun = {
   element_unique: (typeof ELEMENTS_UNIQUES)[number];
   tutoriel?: unknown;
   format?: FormatPage | undefined;
+  reponse_directe?: string | undefined;
+  illustration?: { fichier: string; alt: string; legende: string } | undefined;
 };
 
 /** Règles communes aux six types, exprimées dans le schéma. */
