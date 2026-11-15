@@ -20,6 +20,8 @@
         "http://localhost/voyants/direction/index.html",
         "http://localhost/voyants/adblue/index.html",
         "http://localhost/voyants/prechauffage/index.html",
+        "http://localhost/codes-defaut/p0420/index.html",
+        "http://localhost/codes-defaut/p0299/index.html",
         "http://localhost/voyants/frein/index.html"
       ],
       "numberOfRuns": 3,

@@ -8,6 +8,7 @@
 - **Adresse** : `/codes-defaut/p0299/`.
 - **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/moteur/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
+- **Page publiée** (sa validation est notée au journal) : `src/content/code-defaut/code-p0299.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Requête et mots-clés (plan du site, docs/05)
 
@@ -36,6 +37,12 @@
 Et 7 autres : « p0299 pression de suralimentation faible », « p0299 renault », « p0299 renault 1.5 dci », « p029900 », « p029900 audi », « p029900 volkswagen », « vw p029900 ».
 
 ## Décision et sources disponibles
+
+Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à une autre page : pas de tableau des notices ici) :
+
+| Voyant | Couleur | Verdict | Urgence | Action (base) | Notices citées | Écart entre marques |
+|---|---|---|---|---|---|---|
+| `moteur-orange-fixe` Voyant moteur orange allumé fixe | orange | Non, arrêtez-vous immédiatement | À faire tout de suite | Arrêtez-vous dès que vous pouvez le faire sans danger. Ne repartez que si la notice de votre voiture permet de rouler jusqu'au garage, et faites alors contrôler le moteur sans attendre en roulant prudemment ; sinon, faites appel à un garage ou à l'assistance. | 5 | oui |
 
 Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources.json`) : verdict tiré des lignes « voyant moteur » de la base (libellé du code : source secondaire).
 
@@ -90,7 +97,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision proposée** : « Puis-je continuer à rouler avec le code P0299 ? »
+- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le code P0299 ? »
 - **Angle** : Pression de suralimentation (turbo) trop faible ; les lecteurs cherchent les symptômes et la marque. Le reste vient de sources admises (charte §2.2) ; le verdict, de la ligne du voyant qui s'allume avec le code.
 - **Élément unique** : Tableau des cas décrits par marque (modèle 6.6b).
 - **À traiter** :

@@ -260,5 +260,109 @@
     "categorie": "legifrance",
     "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000171443",
     "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "ross-tech-p0420",
+    "titre": "Ross-Tech Wiki — 16804/P0420/001056 : rendement du catalyseur inférieur au seuil, ligne 1 (Catalyst System; Bank 1: Efficiency Below Threshold)",
+    "editeur": "Ross-Tech LLC (logiciel de diagnostic VCDS des voitures du groupe Volkswagen)",
+    "categorie": "secondaire",
+    "url": "https://wiki.ross-tech.com/wiki/index.php/16804/P0420/001056",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "hella-sonde-lambda",
+    "titre": "Hella Tech World — Lambda sensor function (fonction de la sonde lambda, surveillance du catalyseur)",
+    "editeur": "Hella (HELLA GmbH & Co. KGaA, Lippstadt)",
+    "categorie": "secondaire",
+    "url": "https://www.hella.com/techworld/uk/Test-lambda-sensor-4379/",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-toyota-t-sb-0161-13-p0420",
+    "titre": "Bulletin Toyota T-SB-0161-13 — Tacoma 2010, moteur 2TR-FE : bruit de ferraille du catalyseur du tuyau d'échappement avant et/ou voyant moteur, code P0420 (31/10/2013)",
+    "editeur": "Toyota Motor Sales, USA (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2013/MC-10132102-9999.pdf",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-kia-eng160-p0420",
+    "titre": "Bulletin Kia ENG160 (rév. 1 du 15/11/2016) — Optima, Sorento et Sportage 2.4 GDI : mise à jour du calculateur, voyant moteur avec les codes P0420/P0171 (octobre 2016)",
+    "editeur": "Kia (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2016/MC-10109774-9999.pdf",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-audi-2038434-p0420",
+    "titre": "Bulletin Audi of America 01 14 95 2038434/1 — Q7 2007-2011, moteur 3.6 FSI : voyant moteur, code P0420 ou P0430, mise à jour du logiciel du calculateur (26/09/2014)",
+    "editeur": "Audi of America (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10124819-9999.pdf",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-vw-2058261-p0420",
+    "titre": "Bulletin Volkswagen Group of America 2058261/2 (01-20-01) — Atlas 2018-2019, moteur 3.6 (CDVC) : remplacement du catalyseur et mise à jour du calculateur, code P0420 ou P0430 (16/03/2020)",
+    "editeur": "Volkswagen Group of America (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10172979-0001.pdf",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-ford-19-2366-p0420",
+    "titre": "Bulletin Ford 19-2366 — Police Interceptor Sedan 2016-2019, moteur 3.7L Ti-VCT : voyant moteur, codes P0420 et/ou P0430 (09/12/2019)",
+    "editeur": "Ford Motor Company (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2019/MC-10169812-0001.pdf",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "hella-commande-turbo",
+    "titre": "Hella Tech World — Electronic boost pressure control, turbocharger actuator testing (régulation électronique de la pression de suralimentation, contrôle de l'actionneur du turbo)",
+    "editeur": "Hella (HELLA GmbH & Co. KGaA, Lippstadt)",
+    "categorie": "secondaire",
+    "url": "https://www.hella.com/techworld/uk/technical/car-electronics-and-electrics/electronic-boost-pressure-control-turbocharger-actuator-testing/",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-audi-2013060-p0299",
+    "titre": "Bulletin Audi of America 01 15 16 2013060/7 — A3, A4 et A4 Cabriolet 2005-2007, moteur 2.0 TFSI : voyant moteur, code P0299, vanne de recirculation du turbo N249 (12/03/2015)",
+    "editeur": "Audi of America (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10119942-9999.pdf",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-audi-2039006-p0299",
+    "titre": "Bulletin Audi of America 21 14 21 2039006/2 — A4, A5, A5 Cabriolet, A6, Q5 et TT 2013-2014, moteur 2.0 TFSI : voyant moteur, code P029900, tringlerie de la soupape de décharge détachée (26/11/2014)",
+    "editeur": "Audi of America (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2014/MC-10124870-9999.pdf",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-vw-2026771-p0299",
+    "titre": "Bulletin Volkswagen Group of America 2026771 (21 15 01) — Jetta, Golf et Jetta SportWagen 2009-2014, moteur 2.0 TDI (CBEA, CJAA) : manque de puissance, voyant moteur, codes P2563, P2564, P0299 ou P20D8 (15/01/2015)",
+    "editeur": "Volkswagen Group of America (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2015/MC-10121244-9999.pdf",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-vw-2036110-p0299",
+    "titre": "Bulletin Volkswagen Group of America 2036110/12 (21-18-01) — Passat 2012-2014, moteur 2.0 TDI (CKRA) : manque de performances, arbre de turbine du turbo cassé ou grippé, code P0299 (24/09/2020)",
+    "editeur": "Volkswagen Group of America (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2020/MC-10180601-0001.pdf",
+    "date_consultation": "2026-11-14"
+  },
+  {
+    "id": "bulletin-gm-23-na-058-p0299",
+    "titre": "Bulletin General Motors 23-NA-058 — Buick Encore GX et Chevrolet Trailblazer, moteur 1.2 (LIH) : bruit de ferraille au démarrage à froid, voyant moteur, code P0299 (août 2023)",
+    "editeur": "General Motors LLC (document publié par la NHTSA, États-Unis)",
+    "categorie": "secondaire",
+    "url": "https://static.nhtsa.gov/odi/tsbs/2023/MC-10242244-0001.pdf",
+    "date_consultation": "2026-11-14"
   }
 ]
