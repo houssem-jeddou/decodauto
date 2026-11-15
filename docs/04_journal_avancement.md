@@ -59,7 +59,7 @@ Dernière mise à jour : 15/11/2026 (18 h 45, heure de Tunis)
   - lignes, liens, libellés écrits, lien « Signaler une erreur », contenu sans JavaScript : contrôlés automatiquement ;
   - encadré de la page outil : validé, empreinte versée ;
   - filtre par couleur : présence contrôlée ; essayé dans Chromium seulement. Safari, Firefox, lecteur d'écran et vrai téléphone restent à la recette ;
-  - Lighthouse de la page outil : passe dans la recette, sans les emplacements publicitaires factices de l'étape 7. À repasser avec eux.
+  - Lighthouse de la page outil : repassé avec les emplacements factices de l'étape 7 (recette) : 100 dans les quatre catégories, CLS 0 (passage 43740400962, 15/11).
 
 ## Étape 7, Socle technique (piste technique) : livrables
 - [x] **7.3 « À propos »** (PR #27, validé le 10/11), **7.4a accueil** (PR #28, validé le 10/11) : fiche auteur, section « Méthode », accueil généré depuis le plan ; paquets `paquet-7.3-a-propos.md`, `paquet-7.4a-accueil.md`.
