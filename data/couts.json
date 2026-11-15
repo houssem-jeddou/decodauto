@@ -171,8 +171,18 @@
       "tranche": "reparation"
     },
     {
+      "id": "circuit-de-freinage",
+      "libelle": "Circuit de freinage (canalisations, flexibles, étriers, maître-cylindre)",
+      "tranche": "reparation"
+    },
+    {
       "id": "bloc-abs",
       "libelle": "Bloc ABS (groupe hydraulique et calculateur)",
+      "tranche": "organe"
+    },
+    {
+      "id": "servofrein",
+      "libelle": "Servofrein (assistance de freinage)",
       "tranche": "organe"
     },
     {

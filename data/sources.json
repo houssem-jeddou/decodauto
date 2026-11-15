@@ -20,6 +20,16 @@
     "modele": "Ibiza (5e génération), notice édition 11/20"
   },
   {
+    "id": "notice-seat-leon",
+    "titre": "Seat Leon — Notice d'utilisation (édition 06/21)",
+    "editeur": "Seat (groupe Volkswagen)",
+    "categorie": "notice-constructeur",
+    "url": "https://www.seat.fr/datamanual-manual/leon/my22_w25/fr-fr/LEON_06_21_FR.pdf",
+    "date_consultation": "2026-11-14",
+    "marque": "seat",
+    "modele": "Leon (4e génération, 5 portes et Sportstourer), notice édition 06/21"
+  },
+  {
     "id": "notice-renault-clio-5",
     "titre": "Renault Clio 5 phase 2 — Notice d'utilisation (réf. 1457-3)",
     "editeur": "Renault (Renault Group)",
