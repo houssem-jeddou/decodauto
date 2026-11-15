@@ -129,3 +129,12 @@ Durées retenues : F1 deux jours (16–17/11) ; F2 deux jours et F3 un à deux j
 - **Textes à coller dans les instructions du projet**, après ceux de la demande n° 28 :
   1. règle anti-régression 2, après la cinquième exception : « Sixième exception (demande de changement n° 30) : l'étape 13 (format de lecture et identité visuelle) est avancée : lot F1 (pilote) après la porte 8, puis la vague B rédigée au nouveau format ; les lots F2 et F3 (reprise des pages en ligne de la vague A) avancent en parallèle de la vague B, l'étape 10 passant d'abord. Chaque lot passe la porte du format (règles 2a à 2m de la demande, Lighthouse, revue indépendante, validation de Houssem), la recette de l'étape 9 et les vérifications après déploiement. » ;
   2. « Règles éditoriales et de sécurité », à la fin de la première puce : « Sur une page informative (pression des pneus ; en vague C, huiles et liquides), l'encadré commence par la réponse directe à la question du lecteur, puis la décision (demande de changement n° 30). »
+
+## 8. Validation du pilote F1 (15/11/2026, 22 h 57)
+Houssem : « B, format OK avec 2a et 2i ».
+- **Piste B « Tableau de bord »** choisie. Charte graphique : `docs/11_charte_graphique.md` (vue lisible ; font foi les styles du dépôt à la mise en œuvre du lot F1).
+- **Format validé** sur les quatre pages du pilote (porte du format du pilote : `travaux/etape-13/pilote-f1/porte-f1.md`, branche `etape-13/pilote-f1`), avec deux précisions :
+  - **2a** : sur une page informative, la réponse directe est complète dans le premier écran, et la première situation y commence avec son verdict et son urgence ; son action peut continuer au-delà ;
+  - **2i** : quand le bas de l'encadré dépasse à lui seul trois écrans, le visuel suit immédiatement le bloc « Notices / Base du coût ».
+- **Même message** : chaque page et chaque composant ajoutés sont conçus visuellement avant d'être mis en place (`docs/03`, règle 15 ; charte graphique, §6).
+- **Suite** : mise en œuvre du lot F1 dans les modèles du site (piste B, format, contrôles), avec sa porte : critères de la ligne 13 de `docs/03` vérifiés sur le site construit, revue indépendante, validation de Houssem. Les textes nouveaux se valident avec les paquets des lots F2 et F3.
