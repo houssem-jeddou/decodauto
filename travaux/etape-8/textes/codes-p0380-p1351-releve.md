@@ -23,17 +23,18 @@ Volumes des briefs (plafonds, docs/05) : P0380 13 904 recherches par mois (dont 
 1. **Volkswagen of America, ElsaWeb Newsletter, édition 40 (17/06/2013)**, publiée par la NHTSA
    (`https://static.nhtsa.gov/odi/tsbs/2013/MC-10069478-0335.pdf`) : rubrique 28-01-09, Golf, Jetta, New Beetle
    1999-2003 à moteur ALH TDI (marché des États-Unis) ; des bougies de deux fournisseurs (Bosch et Beru) mélangées
-   peuvent faire enregistrer le code P0380 (« Glow Plug Monitoring »). **À lire en entier** (texte exact, page).
+   peuvent faire enregistrer le code P0380 (« Glow Plug Monitoring »). Lue en entier le 15/11 (ci-dessous).
 2. **Hella, Info Technique « Relais de préchauffage » (15/12/2002, en français)**
    (`https://www.hella.com/tibi/ti/fr/electrics/ti_fr_electrics_relais_de_prechauffage.pdf`) : effets d'un relais
    défectueux (témoin de préchauffage éteint ou allumé plus longtemps, démarrage difficile ou impossible, fumée au
    démarrage, code de défaut mémorisé), causes, étapes de contrôle. Générique : ne cite pas P0380.
 3. **Hella, Info Technique « Bougies de préchauffage » (en français)**
    (`https://www.hella.com/tibi/ti/fr/electrics/ti_fr_electrics_bougie_de_prechauffage.pdf`) : effets d'une bougie
-   défectueuse, contrôles. Générique. **À lire en entier.**
+   défectueuse, contrôles. Générique. Lue en entier le 15/11 (ci-dessous).
 4. **BorgWarner (BERU), « Troubleshooting – Glow Plugs »**
-   (`https://borgwarner.com/aftermarket/diesel-cold-start-ignition/troubleshooting-glow-plugs`) : causes d'avarie des
-   bougies (pointe détruite, etc.). Générique. **À lire.**
+   (`https://borgwarner.com/aftermarket/diesel-cold-start-ignition/troubleshooting-glow-plugs`) : avaries des bougies
+   (pointe détruite, gonflée, sonde fissurée, encrassement, etc.), avec causes et remèdes ; lue le 15/11 : ni code, ni
+   témoin.
 
 Repérés mais non retenus (copies de manuels d'atelier chez des tiers) : saabwisonline.com (Saab : « Glow Control Unit
 Feedback Error »), workshop-manuals.com (Vauxhall Astra J 1.3 CDTI : « P0380 00 Glow Plug Feedback Circuit
@@ -69,16 +70,16 @@ l'encadré d'une page code est celle du voyant qui s'allume avec le code, attrib
 cite (journal, seconde revue de 6.6b ; charte §2.2 : le verdict vient de la base voyants par cette ligne). La page
 P0380 ne peut donc pas encore être rédigée. Proposition : demande de changement n° 28 (porte 8 sans le lot 4b).
 
-## Ce qui manque pour P0380
-- Le libellé générique du code par une source admise : page du wiki de Ross-Tech « 16764/P0380/… » (non trouvée par
-  la recherche ; c'est la source du libellé générique de P0420 au lot 4a), ou tableaux OBD de General Motors
-  (gsi.ext.gm.com).
-- Les cas des marques les plus recherchées : Renault, Dacia, Nissan (moteur 1.5 dCi), puis Ford, Opel, Peugeot.
-  Aucune source admise trouvée le 15/11. Sans elles, la page ne traite que les marques sourcées et le dit.
-- La ligne de l'encadré (voyant qui s'allume avec le code) : d'après un document qui le cite (journal, seconde revue
-  de 6.6b) ; la newsletter Volkswagen ne parle pas du voyant.
+## Ce qui manque pour P0380 (état du 15/11, après les lectures ci-dessus)
+- Le libellé et les causes sont sourcés pour le groupe Volkswagen (page Ross-Tech lue en entier, voir plus haut).
+- **Un document admis qui dise quel voyant s'allume avec P0380** : aucun trouvé (relevé et revue de la demande n° 28 :
+  bulletins GM 15114, PIP6090, N212338290, 20-NA-066, Volkswagen 2037386, Audi 2067792, FCA 09-009-15, GM TechLink ;
+  aucun ne cite P0380 avec un témoin). Sans lui, la ligne de l'encadré ne peut pas être attribuée.
+- Les cas des marques les plus recherchées : Renault, Dacia, Nissan (8 532 recherches sur 13 904, au plus), puis Ford,
+  Opel, Peugeot : aucune source admise.
 
 ## Suite
-Lire en entier les sources 1, 3 et 4 ; chercher la page Ross-Tech et une source par marque (Renault, Dacia, Nissan) ;
-si le libellé générique et au moins les cas sourcés suffisent à une page utile, rédiger la page P0380 seule (lot 4b
-réduit) et laisser P1351 reportée.
+La piste « page P0380 seule » est abandonnée le 15/11 : faute de document qui cite le voyant avec le code, la page ne
+peut pas avoir sa ligne d'encadré. Demande de changement n° 28 : l'étape 8 se ferme sans le lot 4b, qui rouvre quand un
+document admis cite un voyant avec P0380 (et, pour P1351, quand un document admis donne son sens chez Peugeot ou
+Citroën et le voyant qui s'allume).
