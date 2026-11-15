@@ -39,6 +39,36 @@ Repérés mais non retenus (copies de manuels d'atelier chez des tiers) : saabwi
 Feedback Error »), workshop-manuals.com (Vauxhall Astra J 1.3 CDTI : « P0380 00 Glow Plug Feedback Circuit
 Malfunction »), lrman.ru (Land Rover Freelander 2), noobka.github.io (Mazda MZ-CD 1.6), manualslib.com (Isuzu, Hummer).
 
+## P0380 : lectures complètes du 15/11 (nuit)
+- **Ross-Tech, page « 16764/P0380/000869 - Glow Plug/Heater (Q6) Circuit: Malfunction »**
+  (`http://wiki.ross-tech.com/wiki/index.php/16764/P0380/000869`, lue en entier dans le navigateur de Claude : la page
+  renvoie de https vers http, que WebFetch ne suit pas) : symptômes « No Pre-Glow Period », « Poor Cold Starting » ;
+  causes « Glow Plug Wiring faulty », « Glow Plug faulty » ; solutions « Check Glow Plug Wiring », « Check Glow Plug » ;
+  note : renvoi à un forum (TDIClub), non repris. Voitures du groupe Volkswagen. **Aucun témoin cité.**
+- **Volkswagen of America, ElsaWeb Newsletter, édition 40 (17/06/2013)** : texte vérifié : « The vehicle must have all
+  the same supplier or DTC P0380 (Glow Plug Monitoring) may set. » (rubrique 28-01-09, Golf, Jetta, New Beetle
+  1999-2003, moteur ALH TDI ; document sans pagination). **Aucun témoin cité.**
+- **Hella, Info Technique « Relais de préchauffage » (15/12/2002)**, p. 1-2 : effets (« Le voyant de contrôle du
+  préchauffage reste éteint ou allumé plus longtemps que d'habitude », démarrage difficile ou impossible, fumée au
+  démarrage, « Mémorisation d'un code de défaut ») ; causes (contacts usés, court-circuit interne, absence de tension
+  ou de masse, faux contact au connecteur, circuit ouvert) ; p. 2-2 : sept contrôles. Ne cite aucun code.
+- **Hella, Info Technique « Bougies de préchauffage » (15/12/2002)**, p. 1 : effets (démarrage difficile à basse
+  température, fumée après le démarrage, moteur qui ne tourne pas rond), causes (rupture du filament, surchauffe de la
+  tige, absence de tension) ; p. 2 : contrôles, et « vérifier le circuit de préchauffage et, si nécessaire, changer le
+  relais de préchauffage ». Ne cite aucun code.
+- **General Motors, bulletin 15114 (juillet 2015)**, publié par la NHTSA
+  (`https://static.nhtsa.gov/odi/tsbs/2015/SB-10089893-2280.pdf`) : témoin MIL allumé à cause des bougies (Duramax 6.6
+  LML, LGH, États-Unis), **sans aucun code cité** : ne rattache pas le témoin au code P0380.
+- Le bulletin General Motors 07057 (2008, Duramax LB7, « illumination of the MIL » et renvoi au code P0380) et le
+  bulletin PIT3121 (2004, P0380 avec P0621) n'ont été trouvés qu'en copie sur des forums (duramaxforum.com,
+  justanswer.com) : non retenus.
+
+**Conclusion du 15/11** : le sens du code et ses causes sont sourcés pour le groupe Volkswagen (Ross-Tech) et un cas
+Volkswagen des États-Unis ; mais **aucun document admis ne dit quel voyant s'allume avec P0380**. Or la ligne de
+l'encadré d'une page code est celle du voyant qui s'allume avec le code, attribuée seulement d'après un document qui le
+cite (journal, seconde revue de 6.6b ; charte §2.2 : le verdict vient de la base voyants par cette ligne). La page
+P0380 ne peut donc pas encore être rédigée. Proposition : demande de changement n° 28 (porte 8 sans le lot 4b).
+
 ## Ce qui manque pour P0380
 - Le libellé générique du code par une source admise : page du wiki de Ross-Tech « 16764/P0380/… » (non trouvée par
   la recherche ; c'est la source du libellé générique de P0420 au lot 4a), ou tableaux OBD de General Motors
