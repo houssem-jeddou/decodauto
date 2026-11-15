@@ -84,3 +84,12 @@ Batterie (p. 339-341, 362-364) :
 - **Clé ou carte non détectée** : démarrage de secours (Peugeot p. 95, Seat p. 215, Renault p. 175-176 et 384).
 - **Volant bloqué** : manœuvrer le volant en tournant la clé ou en appuyant sur le bouton (Peugeot p. 92, Renault p. 384).
 - **À ne jamais faire** : démarrer en branchant un chargeur (Peugeot p. 187, Citroën p. 137), booster de 24 V (Citroën p. 137), pousser une boîte automatique (Peugeot p. 188, Seat p. 58), remorquer une voiture dont la batterie est déchargée (Seat p. 57), aérosol de démarrage (Seat p. 212), moteur dans un endroit fermé (Seat p. 213).
+
+## Sources techniques secondaires candidates (si la charte les admet pour les causes des pages panne)
+
+Repérées le 15/11/2026 par une recherche web, non lues en entier ; elles ne fixeraient jamais un verdict, et ne valent que pour les modèles et moteurs qu'elles nomment (charte §2.2 et §2.5) :
+- Hella, « Info Véhicule » Peugeot 206 HDi 1.4 (DV4TD) : « Le moteur ne démarre pas, le témoin moteur s'allume » (`hella.com/tibi/bi/fr/electronics/bi_fr_electronics_peugeot_206_systeme_de_prechauffage_du_carburant.pdf`, 17/08/2006).
+- Hella, « Info Véhicule » Peugeot 407 HDi 2,0 (DW10BTED4) : « Le véhicule ne démarre pas, la batterie est déchargée » (`hella.com/tibi/bi/fr/electronics/bi_fr_electronics_peugeot_407_batterie_dechargee.pdf`, 30/05/2006).
+- Hella, « Info Technique » relais de préchauffage : effets d'un relais défectueux (le moteur démarre mal ou pas du tout, fort dégagement de fumée au démarrage, code de défaut mémorisé) et ordre des vérifications (`hella.com/tibi/ti/fr/electrics/ti_fr_electrics_relais_de_prechauffage.pdf`, 15/12/2002).
+- Hella, conseil de réparation « Opel Meriva A - Le démarreur ne tourne pas » (Hella Tech World, adresse à relever).
+- Aucune ne cite le voyant qui s'allume avec le code P0380 : rien de nouveau pour le lot 4b (demande n° 28).
