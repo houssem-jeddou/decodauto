@@ -61,7 +61,7 @@ Les nombres sont calculés depuis la base. Les affirmations de l'introduction et
 
 | Fait, tel qu'écrit | Source | Vérifié |
 |---|---|---|
-| STOP : « vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. » | Notices Renault Clio 5 phase 2, p. 136 ; Dacia Sandero 3, p. 110 | `travaux/etape-5/notices/` ; page Renault vue le 04/11 |
+| STOP : « vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. » | Notices Renault Clio 5 phase 2, p. 136 ; Dacia Sandero 3, p. 110 | `claude/notices-etape-5/` (projet Claude) ; page Renault vue le 04/11 |
 | STOP : « L'arrêt du véhicule est impératif. Stationner dans les meilleures conditions de sécurité et couper le contact », puis faire appel au réseau ou à un atelier qualifié | Notice Peugeot 208, p. 13 : STOP « Effectuer (1), puis (2) », renvois (1) et (2) | Relevé de l'étape 5 |
 | Triangle avec un point d'exclamation : témoin d'alerte ; en rouge avec STOP, le même arrêt impératif ; en jaune avec Service, « un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement » | Notice Renault Clio 5 phase 2, p. 138 | **Symbole vu sur la page du PDF le 04/11** ; texte dans le relevé. Attribué à cette notice seule |
 | Clé : témoin Service, « un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement » | Notices Renault Clio 5 phase 2, p. 136 ; Dacia Sandero 3, p. 110 | Symbole vérifié sur le rendu le 24/10 (noté dans le relevé) |

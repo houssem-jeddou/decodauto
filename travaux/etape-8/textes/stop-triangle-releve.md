@@ -1,6 +1,6 @@
 # Relevé des notices : témoin STOP et triangle d'alerte (lot 3b, demande de changement n° 23)
 
-Passages lus le 14/11/2026 sur les PDF des constructeurs (adresses au registre `data/sources.json`), page imprimée = page du fichier − 2. Les symboles des témoins sont des images : `[STOP]`, `[Service]` et `[triangle]` notent le dessin vu sur la page. Les textes de Renault, Dacia et Peugeot sont aussi dans les relevés de l'étape 5 (`travaux/etape-5/notices/`), extraits par pdf.js ; ceux de Citroën et de Seat ci-dessous ont été lus à l'écran.
+Passages lus le 14/11/2026 sur les PDF des constructeurs (adresses au registre `data/sources.json`), page imprimée = page du fichier − 2. Les symboles des témoins sont des images : `[STOP]`, `[Service]` et `[triangle]` notent le dessin vu sur la page. Les textes de Renault, Dacia et Peugeot sont aussi dans les relevés de l'étape 5 (`claude/notices-etape-5/` (projet Claude)), extraits par pdf.js ; ceux de Citroën et de Seat ci-dessous ont été lus à l'écran.
 
 ## Témoin STOP
 

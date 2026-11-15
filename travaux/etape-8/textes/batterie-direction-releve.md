@@ -1,6 +1,6 @@
 # Relevé : notices relues pour le lot 5b (voyant batterie, voyant de direction assistée), 14/11/2026
 
-Relevé de travail, jamais publié. Extraits de l'étape 5 (`travaux/etape-5/notices/*.txt`, texte des PDF des constructeurs extrait par pdf.js, 23-24/10, sans retouche), et page relue à l'écran le 14/11 quand c'est indiqué. Le texte du contrôle technique est dans `controle-technique-releve.md` (points 2.6.1 et 4.13.1, article 7). Les pages ne citent que les extraits utiles, par la source du registre.
+Relevé de travail, jamais publié. Extraits de l'étape 5 (`claude/notices-etape-5/*.txt` (projet Claude), texte des PDF des constructeurs extrait par pdf.js, 23-24/10, sans retouche), et page relue à l'écran le 14/11 quand c'est indiqué. Le texte du contrôle technique est dans `controle-technique-releve.md` (points 2.6.1 et 4.13.1, article 7). Les pages ne citent que les extraits utiles, par la source du registre.
 
 ## Peugeot 208 (guide d'utilisation édition 01-20)
 
