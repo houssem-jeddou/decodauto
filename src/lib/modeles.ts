@@ -32,6 +32,21 @@
 //   de transparence · outil (élément unique, généré depuis la base) · texte rédigé (contenu de guide, questions des
 //   lecteurs) · pages enfants et pages liées · sources
 // L'outil vient avant le texte : le lecteur qui cherche son voyant ne doit pas d'abord lire un guide.
+//
+// Ordre d'une page panne (charte §4, point 7 : symptômes, causes, marche à suivre ; étape 10, partie technique du
+// modèle, demande de changement n° 21) :
+//   fil d'Ariane · H1 · encadré de décision · signature · ligne de transparence · fiche « Le symptôme en bref »
+//   (symptôme, quand, carburant) · fiche « Le tutoriel en bref » si la page est un tutoriel · texte rédigé (arbre de
+//   décision, élément unique marqué « {{arbre}} », ou étapes du tutoriel marquées « {{etapes}} » ; questions des
+//   lecteurs) · causes et coût · tableau des notices si un voyant de la base est rattaché à la page · pages liées · sources
+// L'arbre vient avant les causes : le lecteur arrêté au bord de la route cherche quoi faire, selon ce qu'il voit.
+//
+// Ordre d'une page dossier (étape 10) :
+//   fil d'Ariane · H1 · encadré de décision · signature · ligne de transparence · fiche « Le tutoriel en bref » si la
+//   page est un tutoriel · texte rédigé (avec l'élément unique, un tableau marqué « {{tableau}} ») · historique du
+//   dossier (journal des modifications, du plus récent au plus ancien) · tableau des notices si un voyant de la base est
+//   rattaché à la page · pages liées · sources
+// L'historique suit le texte : il dit ce qui a changé depuis la dernière visite, sans retarder la réponse.
 // ---------------------------------------------------------------------------------------------
 import { basDePage, causesDeLaPage, hautDePage, tableauNoticesDeLaPage, type DonneesSite } from './gabarit.ts';
 import { attributHtml, echapper, texteHtml, typographierHtml } from './html.ts';
@@ -44,6 +59,9 @@ import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
 import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-voyants.ts';
+import { REPONSES_MIN_ARBRE, fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, modeleFichePanne, modeleFicheTutoriel } from './fiche-panne.ts';
+
+export { REPONSES_MIN_ARBRE };
 import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
 import type { TypePage } from '../schemas/listes.ts';
 
@@ -64,14 +82,31 @@ export type Modele = (page: PageEditoriale, site: DonneesSite, corpsHtml: string
  *  - « {{montant:<id>}} » : texte d'un montant de data/couts.json déclaré dans le coût probable de la page (charte §2.3 :
  *    jamais un montant écrit à la main ; livrable 6.6c) ;
  *  - « {{tableau}} », seul dans son paragraphe, juste avant un tableau Markdown : ce tableau est l'élément unique de la
- *    page (data-element-unique="tableau"). Permis seulement si le modèle n'en construit pas (pages pneus et obligations)
- *    et si la page déclare un tableau comme élément unique ; un seul par page (livrable 6.6c).
+ *    page (data-element-unique="tableau"). Permis seulement si le modèle n'en construit pas (pages pneus et obligations,
+ *    panne et dossier) et si la page déclare un tableau comme élément unique ; un seul par page (livrable 6.6c) ;
+ *  - « {{arbre}} », seul dans son paragraphe, juste avant une liste numérotée de questions, chacune suivie de la liste
+ *    à puces de ses réponses (au moins deux) : l'arbre de décision, élément unique d'une page panne (étape 10) ;
+ *  - « {{etapes}} », seul dans son paragraphe, juste avant une liste numérotée : les étapes d'un tutoriel
+ *    (data-tutoriel-etapes, contrôle R7-TUTORIEL-ETAPES), sur toute page qui déclare un tutoriel (étape 10).
  * Une référence inconnue, hors des sources ou des lignes de la page, ou illisible, fait échouer la construction.
  */
 export const REFERENCE = /\{\{(notice|verdict|cite|montant):([a-z0-9-]+)(?:\|([^{}|]+))?\}\}/g;
 
 /** Marqueur du tableau du texte qui sert d'élément unique, tel que le rend le Markdown (paragraphe seul). */
 export const MARQUEUR_TABLEAU = /<p>\s*\{\{tableau\}\}\s*<\/p>\s*/g;
+
+/**
+ * Marqueur de l'arbre de décision d'une page panne (étape 10), seul dans son paragraphe, juste avant une liste
+ * numérotée : chaque élément est une question, suivie de la liste de ses réponses (au moins deux), chacune disant quoi
+ * faire ou à quelle question passer. La liste devient l'élément unique (data-element-unique="arbre-de-decision").
+ */
+export const MARQUEUR_ARBRE = /<p>\s*\{\{arbre\}\}\s*<\/p>\s*/g;
+
+/**
+ * Marqueur des étapes d'un tutoriel, seul dans son paragraphe, juste avant une liste numérotée : elle reçoit
+ * data-tutoriel-etapes (contrôle R7-TUTORIEL-ETAPES : une autre liste numérotée de la page ne compte pas).
+ */
+export const MARQUEUR_ETAPES = /<p>\s*\{\{etapes\}\}\s*<\/p>\s*/g;
 
 /** « Peugeot 208 (2e génération), guide d'utilisation édition 01-20 » ; sans `modele` au registre : « Peugeot 208 ». */
 export function nomCompletNotice(source: Pick<SourceDuRegistre, 'titre' | 'categorie' | 'modele'>): string {
@@ -92,9 +127,9 @@ export interface CitationDuTexte {
  */
 export function texteRedige(
   corpsHtml: string,
-  page: Pick<PageEditoriale, 'id' | 'sources' | 'situations' | 'cout_probable' | 'element_unique'>,
+  page: Pick<PageEditoriale, 'id' | 'sources' | 'situations' | 'cout_probable' | 'element_unique' | 'tutoriel'>,
   site: Pick<DonneesSite, 'sources' | 'voyants' | 'couts'>,
-  options: { tableauDuTexte: boolean } = { tableauDuTexte: false },
+  options: { tableauDuTexte?: boolean; arbreDuTexte?: boolean } = {},
 ): { html: string; citations: CitationDuTexte[] } {
   const html = corpsHtml.trim();
   if (html === '') return { html: '', citations: [] };
@@ -102,7 +137,9 @@ export function texteRedige(
   const echec = (message: string): never => {
     throw new Error(`page « ${page.id} », texte rédigé : ${message}`);
   };
-  const avecTableau = tableauDuTexte(html, page, options.tableauDuTexte, echec);
+  const avecArbre = arbreDuTexte(html, page, options.arbreDuTexte === true, echec);
+  const avecEtapes = etapesDuTexte(avecArbre, page.tutoriel !== undefined, echec);
+  const avecTableau = tableauDuTexte(avecEtapes, page, options.tableauDuTexte === true, echec);
   const avecReferences = avecTableau.replace(REFERENCE, (tout, genre: string, id: string, complement: string | undefined) => {
     if (genre === 'verdict') {
       if (complement !== undefined) echec(`${tout} : pas de complément après le voyant`);
@@ -142,6 +179,14 @@ export function texteRedige(
   return { html: `<div class="corps" data-corps>${typographierHtml(avecReferences)}</div>`, citations };
 }
 
+/** Nom d'une région (attribut aria-label, échappé) : le dernier titre H2 ou H3 du HTML qui la précède, sinon `defaut`. */
+function nomDeRegion(avant: string, defaut: string): string {
+  const titres = [...avant.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/g)];
+  const entites: Readonly<Record<string, string>> = { '&amp;': '&', '&#39;': "'", '&#x27;': "'", '&quot;': '"', '&lt;': '<', '&gt;': '>' };
+  const titre = (titres.at(-1)?.[1] ?? '').replace(/<[^>]+>/g, '').replace(/&(amp|#39|#x27|quot|lt|gt);/g, (e) => entites[e] ?? e).trim();
+  return attributHtml(titre !== '' ? titre : defaut);
+}
+
 /**
  * Marqueur « {{tableau}} » (voir REFERENCE) : le tableau qui le suit devient l'élément unique de la page, dans un bloc
  * qui défile en largeur s'il est trop large (atteignable au clavier : région nommée, tabindex="0"). Refusé si le modèle construit lui-même l'élément unique, si la page ne déclare pas
@@ -159,20 +204,106 @@ function tableauDuTexte(
   if (page.element_unique !== 'tableau') echec('« {{tableau}} » : la page ne déclare pas un tableau comme élément unique (element_unique)');
   if (marqueurs.length > 1) echec('« {{tableau}} » : un seul tableau par page est l\'élément unique');
   // Nom de la région : le titre (H2 ou H3) qui précède le tableau, sinon « Tableau ».
-  const avant = html.slice(0, html.search(MARQUEUR_TABLEAU));
-  const titres = [...avant.matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/g)];
-  const entites: Readonly<Record<string, string>> = { '&amp;': '&', '&#39;': "'", '&#x27;': "'", '&quot;': '"', '&lt;': '<', '&gt;': '>' };
-  const titre = (titres.at(-1)?.[1] ?? '').replace(/<[^>]+>/g, '').replace(/&(amp|#39|#x27|quot|lt|gt);/g, (e) => entites[e] ?? e).trim();
-  const nom = attributHtml(titre !== '' ? titre : 'Tableau');
+  const nom = nomDeRegion(html.slice(0, html.search(MARQUEUR_TABLEAU)), 'Tableau');
   const resultat = html.replace(/<p>\s*\{\{tableau\}\}\s*<\/p>\s*(<table[\s\S]*?<\/table>)/, `<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="${nom}" tabindex="0">$1</div>`);
   if (resultat === html) echec('« {{tableau}} » doit précéder immédiatement un tableau');
+  return resultat;
+}
+
+/**
+ * Fin de la liste (ol ou ul) qui commence à `debut` dans `html` : index juste après sa balise fermante, en tenant compte
+ * des listes de même balise imbriquées. -1 si elle n'est pas fermée.
+ */
+function finDeListe(html: string, debut: number, balise: 'ol' | 'ul'): number {
+  const motif = new RegExp(`<(/?)${balise}\\b[^>]*>`, 'g');
+  motif.lastIndex = debut;
+  let profondeur = 0;
+  for (let m = motif.exec(html); m !== null; m = motif.exec(html)) {
+    profondeur += m[1] === '/' ? -1 : 1;
+    if (profondeur === 0) return m.index + m[0].length;
+  }
+  return -1;
+}
+
+/** Éléments directs (li) d'une liste, rendue par le Markdown : le contenu de chacun, listes imbriquées comprises. */
+function elementsDeListe(liste: string): string[] {
+  const interieur = liste.replace(/^<(ol|ul)\b[^>]*>/, '').replace(/<\/(ol|ul)>\s*$/, '');
+  const elements: string[] = [];
+  const motif = /<(\/?)li\b[^>]*>/g;
+  let profondeur = 0;
+  let debut = -1;
+  for (let m = motif.exec(interieur); m !== null; m = motif.exec(interieur)) {
+    if (m[1] !== '/') {
+      if (profondeur === 0) debut = m.index + m[0].length;
+      profondeur++;
+    } else {
+      profondeur--;
+      if (profondeur === 0) elements.push(interieur.slice(debut, m.index));
+    }
+  }
+  return elements;
+}
+
+/**
+ * Marqueur « {{arbre}} » (étape 10) : la liste numérotée qui le suit devient l'arbre de décision, élément unique de la
+ * page (data-element-unique="arbre-de-decision"), dans une région nommée par le titre qui la précède. Refusé si le
+ * modèle ne le permet pas (pages panne seulement), si la page ne déclare pas un arbre comme élément unique, s'il y en a
+ * plus d'un, s'il n'est pas suivi d'une liste numérotée, ou si une question a moins de REPONSES_MIN_ARBRE réponses
+ * (liste à puces sous la question). Une page panne qui déclare l'arbre sans le marqueur échoue aussi : sans lui, l'arbre
+ * n'est pas repéré.
+ */
+function arbreDuTexte(
+  html: string,
+  page: Pick<PageEditoriale, 'element_unique'>,
+  permis: boolean,
+  echec: (message: string) => never,
+): string {
+  const marqueurs = html.match(MARQUEUR_ARBRE) ?? [];
+  if (marqueurs.length === 0) {
+    if (permis && page.element_unique === 'arbre-de-decision') echec('la page déclare un arbre de décision : le marquer par « {{arbre}} », seul dans son paragraphe, juste avant sa liste numérotée');
+    return html;
+  }
+  if (!permis) echec('« {{arbre}} » : l\'arbre de décision n\'est permis que sur une page panne');
+  if (page.element_unique !== 'arbre-de-decision') echec('« {{arbre}} » : la page ne déclare pas un arbre de décision comme élément unique (element_unique)');
+  if (marqueurs.length > 1) echec('« {{arbre}} » : un seul arbre de décision par page');
+  const position = html.search(MARQUEUR_ARBRE);
+  const marqueur = /<p>\s*\{\{arbre\}\}\s*<\/p>\s*/.exec(html.slice(position));
+  const debutListe = position + (marqueur?.[0].length ?? 0);
+  if (!html.startsWith('<ol', debutListe)) echec('« {{arbre}} » doit précéder immédiatement une liste numérotée (une question par élément)');
+  const fin = finDeListe(html, debutListe, 'ol');
+  if (fin < 0) echec('« {{arbre}} » : liste numérotée non fermée');
+  const liste = html.slice(debutListe, fin);
+  const questions = elementsDeListe(liste);
+  if (questions.length === 0) echec('« {{arbre}} » : l\'arbre n\'a aucune question');
+  questions.forEach((question, i) => {
+    const sousListe = /<(ul|ol)\b[^>]*>[\s\S]*<\/\1>/.exec(question);
+    const reponses = sousListe !== null ? elementsDeListe(sousListe[0]).length : 0;
+    if (reponses < REPONSES_MIN_ARBRE) echec(`« {{arbre}} » : la question ${i + 1} a ${reponses} réponse(s) ; il en faut au moins ${REPONSES_MIN_ARBRE}, en liste à puces sous la question`);
+  });
+  // Nom de la région : le titre (H2 ou H3) qui précède l'arbre, sinon « Arbre de décision ».
+  const nom = nomDeRegion(html.slice(0, position), 'Arbre de décision');
+  return `${html.slice(0, position)}<div class="arbre" data-element-unique="arbre-de-decision" role="region" aria-label="${nom}">${liste}</div>${html.slice(fin)}`;
+}
+
+/**
+ * Marqueur « {{etapes}} » : la liste numérotée qui le suit reçoit data-tutoriel-etapes (étapes du tutoriel, contrôle
+ * R7-TUTORIEL-ETAPES). Refusé sur une page sans tutoriel, s'il y en a plus d'un, ou s'il ne précède pas une liste
+ * numérotée.
+ */
+function etapesDuTexte(html: string, tutoriel: boolean, echec: (message: string) => never): string {
+  const marqueurs = html.match(MARQUEUR_ETAPES) ?? [];
+  if (marqueurs.length === 0) return html;
+  if (!tutoriel) echec('« {{etapes}} » : la page n\'est pas un tutoriel (champ tutoriel absent)');
+  if (marqueurs.length > 1) echec('« {{etapes}} » : une seule liste d\'étapes par page');
+  const resultat = html.replace(/<p>\s*\{\{etapes\}\}\s*<\/p>\s*<ol\b([^>]*)>/, '<ol class="etapes" data-tutoriel-etapes$1>');
+  if (resultat === html) echec('« {{etapes}} » doit précéder immédiatement une liste numérotée');
   return resultat;
 }
 
 /** Texte rédigé seul (voir texteRedige). */
 export function corpsRedige(
   corpsHtml: string,
-  page: Pick<PageEditoriale, 'id' | 'sources' | 'situations' | 'cout_probable' | 'element_unique'>,
+  page: Pick<PageEditoriale, 'id' | 'sources' | 'situations' | 'cout_probable' | 'element_unique' | 'tutoriel'>,
   site: Pick<DonneesSite, 'sources' | 'voyants' | 'couts'>,
 ): string {
   return texteRedige(corpsHtml, page, site).html;
@@ -225,6 +356,35 @@ export const pageOutilVoyants: Modele = (page, site, corpsHtml) => {
   ].join('');
 };
 
+/** Page panne : voir l'ordre en tête de ce fichier. L'arbre de décision est dans le texte rédigé (« {{arbre}} »). */
+export const pagePanne: Modele = (page, site, corpsHtml) => {
+  if (!('contexte' in page)) throw new Error(`page « ${page.id} » : le modèle panne s'applique à une page panne`);
+  const texte = texteRedige(corpsHtml, page, site, { tableauDuTexte: true, arbreDuTexte: true });
+  return [
+    hautDePage(page, site),
+    fichePanneHtml(modeleFichePanne(page)),
+    page.tutoriel !== undefined ? ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel)) : '',
+    texte.html,
+    causesDeLaPage(page, site),
+    tableauNoticesDeLaPage(page, site, { elementUnique: false }),
+    basDePage(page, site, texte.citations),
+  ].join('');
+};
+
+/** Page dossier : voir l'ordre en tête de ce fichier. L'historique vient du journal des modifications de la page. */
+export const pageDossier: Modele = (page, site, corpsHtml) => {
+  if (!('journal_modifications' in page)) throw new Error(`page « ${page.id} » : le modèle dossier s'applique à une page dossier`);
+  const texte = texteRedige(corpsHtml, page, site, { tableauDuTexte: true });
+  return [
+    hautDePage(page, site),
+    page.tutoriel !== undefined ? ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel)) : '',
+    texte.html,
+    historiqueDossierHtml(page.journal_modifications),
+    tableauNoticesDeLaPage(page, site, { elementUnique: false }),
+    basDePage(page, site, texte.citations),
+  ].join('');
+};
+
 /** Fiche d'un auteur (identité et parcours), affichée sur la page « à propos » depuis le champ `auteurs`. */
 export function fichesAuteur(auteur: { id: string; nom: string; presentation: string }): string {
   return `<section class="auteur" id="auteur-${attributHtml(auteur.id)}" data-auteur data-auteur-id="${attributHtml(auteur.id)}"><h2>${texteHtml(auteur.nom)}</h2><p>${texteHtml(auteur.presentation)}</p></section>`;
@@ -268,8 +428,8 @@ export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date
   ].join('');
 }
 
-/** Modèles livrés, par type. La variante outil du type voyant : pageOutilVoyants. Les types des vagues B et C n'en ont pas encore. */
-export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut, pneus: pagePneus };
+/** Modèles livrés, par type. La variante outil du type voyant : pageOutilVoyants. Le type fluide (vague C) n'en a pas encore. */
+export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut, pneus: pagePneus, panne: pagePanne, dossier: pageDossier };
 
 /** Modèle d'une page, ou la raison pour laquelle il n'existe pas encore (la construction échoue alors). */
 export function modeleDeLaPage(type: TypePage, page: PageEditoriale): { modele: Modele } | { absent: string } {

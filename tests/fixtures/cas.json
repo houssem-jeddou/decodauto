@@ -1006,5 +1006,68 @@
     ],
     "alertes": [],
     "explication": "Un script dans l'outil : l'outil et son filtre fonctionnent sans JavaScript."
+  },
+  {
+    "nom": "panne-sans-fiche",
+    "type": "panne",
+    "erreurs": [
+      "FICHE-PANNE-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Page panne construite sans la fiche « Le symptôme en bref » (symptôme, quand, carburant)."
+  },
+  {
+    "nom": "panne-fiche-incomplete",
+    "type": "panne",
+    "erreurs": [
+      "FICHE-PANNE-INCOMPLETE"
+    ],
+    "alertes": [],
+    "explication": "La fiche du symptôme construite n'affiche pas le symptôme du contenu."
+  },
+  {
+    "nom": "panne-tutoriel-sans-fiche",
+    "type": "panne",
+    "erreurs": [
+      "FICHE-TUTORIEL-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Tutoriel de panne construit sans la fiche « Le tutoriel en bref » (outils, durée, difficulté, quand ne pas le faire soi-même)."
+  },
+  {
+    "nom": "panne-fiche-tutoriel-en-trop",
+    "type": "panne",
+    "erreurs": [
+      "FICHE-TUTORIEL-INCOMPLETE"
+    ],
+    "alertes": [],
+    "explication": "Fiche du tutoriel affichée sur une page qui n'est pas un tutoriel."
+  },
+  {
+    "nom": "r7-arbre-une-reponse",
+    "type": "panne",
+    "erreurs": [
+      "R7-ARBRE-QUESTIONS"
+    ],
+    "alertes": [],
+    "explication": "Une question de l'arbre de décision n'a qu'une réponse : ce n'est pas un choix."
+  },
+  {
+    "nom": "dossier-sans-historique",
+    "type": "dossier",
+    "erreurs": [
+      "HISTORIQUE-ABSENT"
+    ],
+    "alertes": [],
+    "explication": "Page dossier construite sans l'historique du dossier (journal des modifications)."
+  },
+  {
+    "nom": "dossier-historique-incomplet",
+    "type": "dossier",
+    "erreurs": [
+      "HISTORIQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Une entrée du journal des modifications manque à l'historique construit."
   }
 ]
