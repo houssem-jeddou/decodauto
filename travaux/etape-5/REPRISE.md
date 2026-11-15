@@ -14,7 +14,7 @@ Ce dossier `travaux/` n'est pas une source de vérité. Il garde le travail de l
 
 - DC n° 3 fusionnée (PR #6, main = 7623e76). La grille est validée.
 - Prochain livrable : le registre des sources, puis la base voyants en brouillon (sans empreinte), le paquet de validation, la revue indépendante et la présentation à Houssem.
-- Notices relevées mot pour mot (texte pdf.js, page imprimée = page PDF − 2) dans `notices/` :
+- Notices relevées mot pour mot (texte pdf.js, page imprimée = page PDF − 2) dans `notices/` (dossier retiré du dépôt public par la demande de changement n° 29, gardé dans les documents du projet Claude : `claude/notices-etape-5/`) :
   - **Peugeot 208**, guide 01-20 (public.servicebox.peugeot.com), témoins p. 12-20 : complet.
   - **Seat Ibiza**, notice 11/20 : https://www.seat.fr/datamanual-manual/ibiza/my21_w48/fr-fr/IBIZA_11_20_FR.pdf (pages 26, 89, 90, 227, 251, 254, 286, 288-290, 294, 302, 311-312) : complet.
   - **Renault Clio 5 ph2**, notice 1457-3 FRA : https://www.user-manual.renault.com/sites/renault/files/Clio_5_ph2_-_1457-3_FRA.pdf (p. 124-125, 136-142, 163-167, 186-191, 199, 206-213) : complet. Reste éventuellement à lire p. 106 (airbag passager OFF), p. 330 (niveau d'huile) et l'indicateur d'entretien (PDF 118, 124).
