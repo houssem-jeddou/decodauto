@@ -2,8 +2,9 @@
 // X-Robots-Tag cohérent avec le mode d'indexation du dépôt, ni script ni cookie sur la page servie, robots.txt identique au
 // dépôt, plan du site servi en XML.
 // Lancé par la CI (job « production ») ; aucun secret, aucune écriture. Usage : npm run production [-- --information]
-//   --information : les écarts sont affichés comme des avertissements et le script réussit (pull request, branche
-//                   autre que main : la production n'a pas encore les changements de la branche) ; un seul passage.
+//   --information : les écarts sont affichés comme des avertissements et le script réussit ; un seul passage. Pour un
+//                   lancement local ou sur une branche autre que main (la production n'a pas encore ses changements) ;
+//                   la CI ne lance plus ce job hors de main (demande de changement n° 26).
 //   --apres-deploiement (push sur main, après le déploiement) : jusqu'à 4 passages à 30 secondes d'écart, sans nouveau
 //                   passage au-delà de 4 minutes ; un écart fait échouer s'il persiste au dernier, et les écarts des
 //                   passages précédents restent affichés en avertissement (propagation de Cloudflare, point ouvert du
@@ -31,7 +32,7 @@ const robotsDepot = await readFile('public/robots.txt', 'utf8');
 const information = argv.includes('--information');
 // Juste après un déploiement (job « production » d'un push sur main), Cloudflare peut servir l'ancienne version pendant
 // environ une minute : jusqu'à 4 passages à 30 secondes d'écart, sans nouveau passage au-delà de 4 minutes. Ailleurs
-// (pull request, contrôle du lundi, lancement à la demande) : un seul passage.
+// (contrôle du lundi, lancement à la demande sur main, lancement local) : un seul passage.
 const apresDeploiement = argv.includes('--apres-deploiement') && !information;
 const { constats, passages, passagers } = await verifierAvecTentatives(
   () => verifierProduction({ lire, robotsDepot, indexable: mode.indexable }),
