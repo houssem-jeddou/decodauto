@@ -123,6 +123,14 @@ const causesSchema = z.array(z.strictObject({ cause: texte, explication: texte, 
 
 const libelleCourt = texte.max(LIBELLE_COURT_MAX, `le libellé court fait au plus ${LIBELLE_COURT_MAX} caractères`);
 
+/**
+ * Format de lecture (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md, §1) : 1, le format actuel
+ * (par défaut), ou 2, le nouveau (charte graphique, piste B). Une page passe au format 2 dans la pull request de son lot,
+ * avec la nouvelle empreinte de son encadré validée par Houssem ; modèle, en-tête, pied de page et feuille de style suivent.
+ */
+export const formatSchema = z.union([z.literal(1), z.literal(2)]);
+export type FormatPage = z.infer<typeof formatSchema>;
+
 /** Champs communs à toutes les pages éditoriales hors socle (docs/08 §1). */
 const champsCommuns = {
   id: identifiant,
@@ -150,6 +158,8 @@ const champsCommuns = {
   validation: hashHex.optional(),
   // Format « tutoriel », possible dans tous les types (docs/08 §2).
   tutoriel: tutorielSchema.optional(),
+  // Format de lecture, 1 par défaut (formatSchema).
+  format: formatSchema.optional(),
 };
 
 type Commun = {
@@ -161,6 +171,7 @@ type Commun = {
   voyants?: string[] | undefined;
   element_unique: (typeof ELEMENTS_UNIQUES)[number];
   tutoriel?: unknown;
+  format?: FormatPage | undefined;
 };
 
 /** Règles communes aux six types, exprimées dans le schéma. */
@@ -343,6 +354,8 @@ export const soclePageSchema = z.strictObject({
   date_modification: dateIso,
   date_revue: dateIso,
   prochaine_revue: dateIso,
+  // Format de lecture (formatSchema) : celui de l'accueil vaut aussi pour la page 404.
+  format: formatSchema.optional(),
   auteurs: z
     .array(
       z.strictObject({

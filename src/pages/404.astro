@@ -1,11 +1,16 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import type { PageSaisie } from '../schemas/pages.ts';
+// La page 404 suit le format de l'accueil (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md, §1).
+const format = (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).find((page) => page.id === 'accueil')?.format ?? 1;
 ---
 
 <Base
   titre="Page introuvable : decodauto.com"
   description="Cette page n'existe pas (ou plus). Revenez à l'accueil de decodauto.com."
   sansCanonical
+  format={format}
 >
   <h1>Cette page est introuvable</h1>
   <p>L’adresse demandée n’existe pas, ou le site n’est pas encore en ligne.</p>

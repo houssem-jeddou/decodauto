@@ -21,11 +21,14 @@ const collections = [
 ];
 const libelles = new Map(collections.flat().map((entree) => [(entree.data as PageEditoriale).id, (entree.data as PageEditoriale).libelle_court]));
 const { site } = await donneesDuSite(cwd(), libelles, new Date());
-const aProposEcrite = (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).find((page) => page.id === PAGE_METHODE);
+const pagesDuSocle = (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>);
+const aProposEcrite = pagesDuSocle.find((page) => page.id === PAGE_METHODE);
+// Format de lecture de l'accueil (demande de changement n° 30, lot F1) : champ `format` de sa fiche du socle, 1 par défaut.
+const format = pagesDuSocle.find((page) => page.id === 'accueil')?.format ?? 1;
 const aPropos = aProposEcrite !== undefined ? { adresse: site.plan.get(PAGE_METHODE)?.adresse ?? '', libelle: aProposEcrite.libelle_court ?? aProposEcrite.title } : undefined;
 const html = accueilHtml({ pages: pagesListees(site.plan, libelles), aPropos: aPropos !== undefined && aPropos.adresse !== '' ? aPropos : undefined });
 ---
 
-<Base titre={TITLE_ACCUEIL} description={DESCRIPTION_ACCUEIL} donneesStructurees={scriptsAccueil()}>
+<Base titre={TITLE_ACCUEIL} description={DESCRIPTION_ACCUEIL} donneesStructurees={scriptsAccueil()} format={format}>
   <Fragment set:html={html} />
 </Base>

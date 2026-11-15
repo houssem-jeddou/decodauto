@@ -52,6 +52,7 @@ export async function getStaticPaths() {
         props: {
           titre: page.title,
           description: page.description,
+          format: page.format ?? 1,
           html: pageSocle(page, entree.rendered?.html ?? '', page.id === PAGE_METHODE ? sectionMethodeHtml(sectionMethode([...contexte.sources.values()])) : undefined),
           donneesStructurees: page.id === PAGE_METHODE ? scriptsAPropos(auteurs, ligne.adresse) : [],
         },
@@ -71,6 +72,7 @@ export async function getStaticPaths() {
       props: {
         titre: page.title,
         description: page.description,
+        format: page.format ?? 1,
         html: choix.modele(page, site, corps),
         donneesStructurees: scriptsPageEditoriale(
           { titre: page.h1, description: page.description, adresse: ligne.adresse, modification: page.date_modification, auteur, adresseAPropos },
@@ -83,9 +85,9 @@ export async function getStaticPaths() {
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { titre, description, html, donneesStructurees } = Astro.props as Props;
+const { titre, description, html, donneesStructurees, format } = Astro.props as Props;
 ---
 
-<Base titre={titre} description={description} donneesStructurees={donneesStructurees}>
+<Base titre={titre} description={description} donneesStructurees={donneesStructurees} format={format}>
   <Fragment set:html={html} />
 </Base>
