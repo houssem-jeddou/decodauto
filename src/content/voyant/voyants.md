@@ -37,7 +37,7 @@ element_unique: outil
 outil: true
 auteur: houssem-jeddou
 date_publication: 2026-11-04
-date_modification: 2026-11-14
+date_modification: 2026-11-15
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, renvoi, lignes, coût probable) et textes fixes de l'outil validés par Houssem le 04/11/2026

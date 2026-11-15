@@ -476,7 +476,7 @@
     "categorie": "Antipollution diesel",
     "page": "voyant-adblue",
     "pictogramme": "adblue",
-    "situation": "Le voyant AdBlue orange s'allume ou clignote avec un message d'autonomie, par exemple « démarrage impossible dans … km ».",
+    "situation": "Le voyant AdBlue orange s'allume ou clignote avec un message d'autonomie, par exemple « démarrage impossible dans … km », sans message de défaut ni voyant moteur, tant que l'autonomie affichée n'est pas à 0 km.",
     "verdict": "oui avec précautions",
     "urgence": "immédiate",
     "action": "Faites l'appoint d'AdBlue sans attendre, à la pompe ou avec un bidon (au moins la quantité minimale indiquée par la notice), avant la fin de l'autonomie affichée : à zéro, le moteur ne redémarre plus.",
@@ -532,7 +532,7 @@
       }
     ],
     "ecart_marques": "Seat laisse faire l'appoint dans les kilomètres indiqués (le voyant s'allume à 1 000 km d'autonomie) ; Renault et Dacia laissent prévoir l'appoint entre 1 200 et 800 km, puis le demandent dès que possible ; Peugeot demande un appoint rapide sous 800 km d'autonomie, impératif sous 100 km.",
-    "validation": "003b8d8936d6fd50d8ce314806a34097319f8b1cba7d7ed7a27f80909ec38930"
+    "validation": "46d4a991bf0cd04fa31b2cceb6c5124caec95129eaa00bf8a69ccc479c7b3117"
   },
   {
     "id": "adblue-demarrage-impossible",
@@ -541,7 +541,7 @@
     "categorie": "Antipollution diesel",
     "page": "voyant-adblue",
     "pictogramme": "adblue",
-    "situation": "Le message annonce que le moteur ne peut plus redémarrer (« 0 km », « démarrage impossible ») : réservoir d'AdBlue vide ou système AdBlue bloqué. Selon la voiture, le voyant AdBlue est rouge ou clignote.",
+    "situation": "Le message annonce que le moteur ne peut plus redémarrer (« 0 km », « démarrage impossible ») : réservoir d'AdBlue vide ou système AdBlue bloqué. Selon la voiture, le voyant AdBlue est rouge, clignote ou reste allumé.",
     "verdict": "non, arrêt immédiat",
     "urgence": "immédiate",
     "action": "Ne repartez pas avant d'avoir fait l'appoint d'AdBlue (au moins la quantité minimale indiquée par la notice), voiture garée dans un endroit sûr et plat. Si c'est un défaut du système AdBlue et non un réservoir vide, faites appel à un garage ou à l'assistance.",
@@ -556,7 +556,7 @@
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 286, « AdBlue », Témoins d'alerte et de contrôle",
-        "extrait": "[deux témoins] Il s'allume en rouge. Il est impossible de redémarrer le moteur ! Dysfonctionnement du circuit d'Adblue. Adressez-vous à un atelier spécialisé. Faites réviser le système.",
+        "extrait": "[AdBlue] et [clé] Il s'allume en rouge. Il est impossible de redémarrer le moteur ! Dysfonctionnement du circuit d'Adblue. Adressez-vous à un atelier spécialisé. Faites réviser le système.",
         "verdict": "non, arrêt dès que possible",
         "urgence": "immédiate"
       },
@@ -583,31 +583,24 @@
       }
     ],
     "ecart_marques": "Seat demande d'arrêter le véhicule dans un endroit sûr et plat pour faire l'appoint, et de s'adresser à un atelier en cas de défaut du système ; Peugeot, Renault et Dacia indiquent que le moteur ne redémarrera pas sans appoint d'AdBlue ou intervention du réseau, sans imposer l'arrêt.",
-    "validation": "f674c1766322300d20e70cd06e3cd45bb0224b169e4d106b22d8b03927334310"
+    "validation": "8e50a30749677e69ec4afa81b590df2da18547b89d8a535e22ff704350cf42b5"
   },
   {
     "id": "adblue-defaut",
-    "nom": "Voyant AdBlue avec voyant moteur ou Service (système AdBlue défaillant)",
+    "nom": "Voyant AdBlue avec un message de défaut antipollution, sans le voyant moteur",
     "couleur": "orange",
     "categorie": "Antipollution diesel",
     "page": "voyant-adblue",
     "pictogramme": "adblue",
-    "situation": "Le voyant AdBlue s'allume avec le voyant moteur ou Service et un message de défaut antipollution, parfois « démarrage impossible dans … km ».",
+    "situation": "Le voyant AdBlue s'allume avec un message de défaut du système antipollution (par exemple « … à contrôler »), avec le voyant Service ou une clé selon la marque, sans le voyant moteur ; parfois avec les kilomètres qui restent avant le blocage du démarrage, tant que l'autonomie affichée n'est pas à 0 km.",
     "verdict": "oui avec précautions",
     "urgence": "immédiate",
     "action": "Allez au garage au plus tôt, avant la fin des kilomètres affichés : une fois à zéro, le moteur ne redémarre plus. Si de l'AdBlue vient d'être ajouté, signalez-le : un liquide non conforme peut déclencher l'alerte.",
     "citations": [
       {
-        "source": "notice-peugeot-208",
-        "emplacement": "p. 16, « Système d'antipollution SCR (BlueHDi) » ; renvoi (3) p. 13",
-        "extrait": "Témoin d'AdBlue clignotant dès la mise du contact, associé au témoin d'Autodiagnostic moteur fixe, accompagnés d'un signal sonore et d'un message indiquant l'autonomie de roulage. Selon le message affiché, il est possible de parcourir jusqu'à 1 100 km avant le déclenchement du dispositif d'antidémarrage du moteur. Effectuer (3) au plus tôt pour éviter le blocage du démarrage.",
-        "verdict": "oui avec précautions",
-        "urgence": "immédiate"
-      },
-      {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 286, « AdBlue », Témoins d'alerte et de contrôle",
-        "extrait": "[deux témoins] Il s'allume en jaune. Un dysfonctionnement a été détecté dans le circuit d'AdBlue ou le liquide AdBlue rajouté n'est pas conforme. Adressez-vous à un atelier spécialisé. Faites réviser le système.",
+        "extrait": "[AdBlue] et [clé] Il s'allume en jaune. Un dysfonctionnement a été détecté dans le circuit d'AdBlue ou le liquide AdBlue rajouté n'est pas conforme. Adressez-vous à un atelier spécialisé. Faites réviser le système.",
         "verdict": "oui avec précautions",
         "urgence": "sous quelques jours"
       },
@@ -626,8 +619,8 @@
         "urgence": "immédiate"
       }
     ],
-    "ecart_marques": "Seat demande de s'adresser à un atelier sans indiquer de délai ; Peugeot, Renault et Dacia demandent d'y aller au plus tôt.",
-    "validation": "bf7b52dbb9ac07d2301e690c4b07e1e32f4eabe97a4a2c99ec23d65057186689"
+    "ecart_marques": "Seat demande de s'adresser à un atelier sans indiquer de délai ; Renault et Dacia demandent de consulter un représentant de la marque le plus tôt possible.",
+    "validation": "121e896759d839abe378fce4e44ea5916ef9ef41fa56ba75d858e47a072b8643"
   },
   {
     "id": "fap",
