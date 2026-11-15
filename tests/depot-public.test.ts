@@ -13,6 +13,7 @@ import {
   REGLE_COURRIEL,
   courrielNoreply,
   jobsSansEtapeExecuteur,
+  nomsDesJobs,
   lireJournalGit,
   verifierCourriels,
 } from '../scripts/lib/depot-public.ts';
@@ -77,7 +78,10 @@ describe('COMMITS-COURRIEL : adresses « noreply »', () => {
       commit('b.txt', 'noreply@anthropic.com', 'noreply@anthropic.com');
       await writeFile(join(dossier, 'c.txt'), 'c');
       const bonne = commit('c.txt', '12345678+compte@users.noreply.github.com', 'noreply@github.com');
-      const lancer = (plage: string) => spawnSync(process.execPath, [join(racine, 'scripts/verifier-commits-courriel.ts'), plage], { cwd: dossier, encoding: 'utf8', env: { ...process.env, GITHUB_ACTIONS: '' } });
+      // Ni format GitHub ni résumé de la CI : le refus attendu de ce test ne doit pas s'écrire dans le résumé public du job.
+      const environnement: NodeJS.ProcessEnv = { ...process.env, GITHUB_ACTIONS: '' };
+      delete environnement['GITHUB_STEP_SUMMARY'];
+      const lancer = (plage: string) => spawnSync(process.execPath, [join(racine, 'scripts/verifier-commits-courriel.ts'), plage], { cwd: dossier, encoding: 'utf8', env: environnement });
       const ok = lancer(`${base}..${bonne}`);
       assert.equal(ok.status, 0, ok.stdout + ok.stderr);
       assert.match(ok.stdout, /2 commit\(s\) de la pull request, tous sous une adresse « noreply »/);
@@ -102,7 +106,7 @@ describe('EXECUTEUR-HEBERGE : première étape de chaque job de la CI', () => {
   test('chaque job de .github/workflows/ci.yml commence par l\'étape, avec sa condition exacte', async () => {
     const workflow = await readFile(join(racine, '.github/workflows/ci.yml'), 'utf8');
     assert.deepEqual(jobsSansEtapeExecuteur(workflow), []);
-    assert.ok((workflow.match(/^ {2}[A-Za-z0-9_-]+:\s*$/gm) ?? []).length >= 7, 'les sept jobs sont lus');
+    assert.deepEqual(nomsDesJobs(workflow), ['controles', 'exemples', 'lighthouse', 'origine-main', 'secrets-cloudflare', 'deploiement', 'production']);
     assert.match(workflow, /node scripts\/verifier-commits-courriel\.ts "\$BASE_SHA\.\.\$HEAD_SHA"/);
   });
 
@@ -132,8 +136,18 @@ describe('EXECUTEUR-HEBERGE : première étape de chaque job de la CI', () => {
       '  aucune-etape:',
       '    runs-on: ubuntu-latest',
       '    uses: ./.github/workflows/autre.yml',
+      '# commentaire en colonne 0 : la section des jobs continue',
+      '  apres-commentaire:',
+      '    runs-on: ubuntu-latest',
+      '    steps:',
+      '      - uses: actions/checkout@v4',
+      '  sans-sortie:',
+      '    runs-on: ubuntu-latest',
+      '    steps:',
+      etape.replace('          exit 1', '          echo fin'),
     ].join('\n');
-    assert.deepEqual(jobsSansEtapeExecuteur(workflow), ['sans', 'condition', 'nom', 'aucune-etape']);
+    assert.deepEqual(jobsSansEtapeExecuteur(workflow), ['sans', 'condition', 'nom', 'aucune-etape', 'apres-commentaire', 'sans-sortie']);
+    assert.deepEqual(nomsDesJobs(workflow), ['bon', 'sans', 'condition', 'nom', 'aucune-etape', 'apres-commentaire', 'sans-sortie']);
     assert.throws(() => jobsSansEtapeExecuteur('name: x\non: push\n'), /jobs/);
   });
 });

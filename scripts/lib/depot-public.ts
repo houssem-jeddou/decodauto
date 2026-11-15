@@ -69,6 +69,8 @@ export function jobsSansEtapeExecuteur(workflow: string): string[] {
   if (debutJobs === -1) throw new Error('section « jobs: » introuvable dans le workflow');
   const jobs: { nom: string; lignes: string[] }[] = [];
   for (const ligne of lignes.slice(debutJobs + 1)) {
+    // Ligne vide ou commentaire, même en colonne 0 : la section des jobs continue.
+    if (ligne.trim() === '' || /^\s*#/.test(ligne)) continue;
     if (/^\S/.test(ligne)) break;
     const job = /^ {2}([A-Za-z0-9_-]+):\s*$/.exec(ligne);
     if (job !== null) jobs.push({ nom: job[1] ?? '', lignes: [] });
@@ -94,7 +96,27 @@ export function jobsSansEtapeExecuteur(workflow: string): string[] {
         etape
           .map((l) => new RegExp(`^ {8}${cle}: (.*)$`).exec(l)?.[1]?.trim())
           .find((v) => v !== undefined);
-      return champ('name') !== NOM_ETAPE_EXECUTEUR || champ('if') !== CONDITION_ETAPE_EXECUTEUR || !(champ('run') ?? '').startsWith('|');
+      // La garde doit faire échouer le job : bloc « run » avec une ligne « exit 1 ».
+      const sortie = etape.some((l) => /^ {10}exit 1\s*$/.test(l));
+      return champ('name') !== NOM_ETAPE_EXECUTEUR || champ('if') !== CONDITION_ETAPE_EXECUTEUR || !(champ('run') ?? '').startsWith('|') || !sortie;
     })
     .map(({ nom }) => nom);
 }
+
+/** Noms des jobs du workflow, dans l'ordre (même lecture que `jobsSansEtapeExecuteur`). */
+export function nomsDesJobs(workflow: string): string[] {
+  const lignes = workflow.split('\n');
+  const debutJobs = lignes.findIndex((l) => /^jobs:\s*$/.test(l));
+  if (debutJobs === -1) throw new Error('section « jobs: » introuvable dans le workflow');
+  const noms: string[] = [];
+  for (const ligne of lignes.slice(debutJobs + 1)) {
+    if (ligne.trim() === '' || /^\s*#/.test(ligne)) continue;
+    if (/^\S/.test(ligne)) break;
+    const job = /^ {2}([A-Za-z0-9_-]+):\s*$/.exec(ligne);
+    if (job !== null) noms.push(job[1] ?? '');
+  }
+  return noms;
+}
+
+/** Exécuteur de chaque job (demande de changement n° 29) : la variable CI_RUNNER n'est lue que si le dépôt est privé. */
+export const EXECUTEUR_DES_JOBS = "${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}";

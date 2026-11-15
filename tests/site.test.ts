@@ -14,6 +14,7 @@ import {
   robotsAnnoncePlanDuSite,
 } from '../src/lib/site.ts';
 import type { Constat } from '../src/lib/controle.ts';
+import { EXECUTEUR_DES_JOBS } from '../scripts/lib/depot-public.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -342,14 +343,24 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
 describe('CI : exécuteur, cache et stockage (demande n° 27)', () => {
   const lireCi = () => readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
 
-  test('chaque job tourne sur l\'exécuteur choisi par la variable CI_RUNNER, à défaut sur ubuntu-latest', async () => {
+  test('chaque job tourne sur les serveurs de GitHub si le dépôt est public ; s\'il est privé, sur l\'exécuteur de CI_RUNNER (demande n° 29)', async () => {
     const ci = await lireCi();
     const jobs = ci.slice(ci.indexOf('\njobs:\n'));
     const executeurs = [...jobs.matchAll(/\n    runs-on: (.*)\n/g)].map((m) => m[1]);
     const nomsDeJobs = [...jobs.matchAll(/\n  ([a-z][a-z-]*):\n/g)].map((m) => m[1]);
     assert.ok(nomsDeJobs.length >= 7, `jobs trouvés : ${nomsDeJobs.join(', ')}`);
     assert.equal(executeurs.length, nomsDeJobs.length, 'chaque job déclare son exécuteur');
-    for (const e of executeurs) assert.equal(e, "${{ vars.CI_RUNNER || 'ubuntu-latest' }}");
+    for (const e of executeurs) assert.equal(e, EXECUTEUR_DES_JOBS);
+    // Évaluation de l'expression (« && » avant « || » chez GitHub ; une variable absente vaut une chaîne vide).
+    const evaluer = (prive: boolean | null, variable: string): string => {
+      const js = EXECUTEUR_DES_JOBS.replace(/^\$\{\{\s*|\s*\}\}$/g, '').replace('github.event.repository.private', JSON.stringify(prive)).replace('vars.CI_RUNNER', JSON.stringify(variable));
+      return Function(`return (${js});`)();
+    };
+    assert.equal(evaluer(false, 'self-hosted'), 'ubuntu-latest', 'dépôt public : jamais l\'exécuteur auto-hébergé');
+    assert.equal(evaluer(null, 'self-hosted'), 'ubuntu-latest', 'visibilité non lue : comptée comme publique');
+    assert.equal(evaluer(false, ''), 'ubuntu-latest');
+    assert.equal(evaluer(true, ''), 'ubuntu-latest', 'dépôt privé sans variable : serveurs de GitHub');
+    assert.equal(evaluer(true, 'self-hosted'), 'self-hosted', 'dépôt privé avec la variable : exécuteur de la demande n° 27');
   });
 
   test('le cache npm de GitHub ne sert que sur ses serveurs, jamais sur l\'exécuteur du PC', async () => {
