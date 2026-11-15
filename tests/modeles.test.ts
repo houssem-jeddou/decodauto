@@ -11,7 +11,8 @@ import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { dateDesDonnees } from './date-des-donnees.ts';
-import { MODELES, corpsRedige, modeleDeLaPage, nomCompletNotice, pageCodeDefaut, pageOutilVoyants, pagePneus, pageVoyant, texteRedige } from '../src/lib/modeles.ts';
+import { MODELES, REPONSES_MIN_ARBRE, corpsRedige, modeleDeLaPage, nomCompletNotice, pageCodeDefaut, pageDossier, pageOutilVoyants, pagePanne, pagePneus, pageVoyant, texteRedige } from '../src/lib/modeles.ts';
+import { TITRE_FICHE_PANNE, TITRE_FICHE_SITUATION, TITRE_FICHE_TUTORIEL, TITRE_HISTORIQUE } from '../src/lib/fiche-panne.ts';
 import { TITRE_FICHE_TEXTE, modeleFicheTexte } from '../src/lib/fiche-texte.ts';
 import { CONSIGNE_SANS_VOYANT, LIBELLE_CARBURANT, LIBELLE_PORTEE, modeleFicheCode, modeleParMarque } from '../src/lib/fiche-code.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
@@ -80,9 +81,9 @@ const exempleCode = () => exemple(EXEMPLE_CODE, 'code-defaut');
 const exemplePneus = () => exemple(EXEMPLE_PNEUS, 'pneus');
 
 describe('modèles de pages (livrable 6.6)', () => {
-  test('modèle de chaque type : pages voyant, code défaut, pneus et obligations et outil voyants livrés ; autres types pas encore (la construction échoue alors)', async () => {
+  test('modèle de chaque type : pages voyant, code défaut, pneus et obligations, outil voyants, panne et dossier livrés ; fluide pas encore (la construction échoue alors)', async () => {
     const { page } = await exemple();
-    const livres = ['voyant', 'code-defaut', 'pneus'];
+    const livres = ['voyant', 'code-defaut', 'pneus', 'panne', 'dossier'];
     for (const type of livres) assert.ok('modele' in modeleDeLaPage(type as never, page), type);
     assert.deepEqual(modeleDeLaPage('voyant', { ...page, outil: true } as PageEditoriale), { modele: pageOutilVoyants });
     for (const type of TYPES_PAGE.filter((t) => !livres.includes(t))) assert.ok('absent' in modeleDeLaPage(type, page), type);
@@ -91,6 +92,8 @@ describe('modèles de pages (livrable 6.6)', () => {
     const { site } = await exemple();
     assert.throws(() => pageCodeDefaut(page, site, ''), /page code défaut/);
     assert.throws(() => pagePneus(page, site, ''), /page pneus et obligations/);
+    assert.throws(() => pagePanne(page, site, ''), /page panne/);
+    assert.throws(() => pageDossier(page, site, ''), /page dossier/);
   });
 
   test('page pneus et obligations : encadré, signature, transparence, fiche « Le texte en bref », texte rédigé (avec le tableau élément unique), sources, dans cet ordre', async () => {
@@ -252,6 +255,83 @@ describe('modèles de pages (livrable 6.6)', () => {
     assert.match(html, /data-element-unique="tableau"/);
     // Sans texte rédigé, pas de bloc vide.
     assert.ok(!pageVoyant(page, site, '').includes('data-corps'));
+  });
+});
+
+// Pages panne et dossier (étape 10, partie technique des modèles) : construites sur la page voyant de l'exemple, complétée
+// des champs de leur type (le modèle ne revalide pas le frontmatter : le schéma le fait à la construction).
+async function exemplePanne(champs: Record<string, unknown> = {}) {
+  const { page, site } = await exemple();
+  const panne = { ...page, symptome: 'Le moteur ne démarre pas.', contexte: ['au démarrage', 'par grand froid'], carburant: 'essence et diesel', element_unique: 'arbre-de-decision', ...champs } as unknown as PageEditoriale;
+  return { page: panne, site };
+}
+const question = (texte: string, reponses: readonly string[]): string => `<li>${texte}\n<ul>\n${reponses.map((r) => `<li>${r}</li>`).join('\n')}\n</ul>\n</li>`;
+const ARBRE = `<h2>Le bon geste</h2><p>{{arbre}}</p>\n<ol>\n${question('Les voyants s’allument-ils ?', ['Non : batterie.', 'Oui : question 2.'])}\n${question('Le démarreur tourne-t-il ?', ['Non : garage.', 'Oui : n’insistez pas.'])}\n</ol>\n<p>Suite.</p>`;
+const TUTORIEL = { outils: ['câbles de démarrage'], duree: '15 minutes', difficulte: 'facile', quand_ne_pas_le_faire_soi_meme: 'Si la batterie est gelée.' };
+
+describe('modèles panne et dossier (étape 10, partie technique)', () => {
+  test('page panne (charte §4 : symptômes, causes, marche à suivre) : encadré, signature, transparence, fiche du symptôme, causes, texte rédigé avec l’arbre de décision (élément unique), sources, dans cet ordre', async () => {
+    const { page, site } = await exemplePanne();
+    const html = pagePanne(page, site, ARBRE);
+    const ordre = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-fiche-panne', 'data-causes', 'data-corps', 'data-element-unique="arbre-de-decision"', 'data-sources'].map((m) => html.indexOf(m));
+    assert.ok(ordre.every((i) => i >= 0), JSON.stringify(ordre));
+    assert.deepEqual([...ordre].sort((a, b) => a - b), ordre);
+    assert.equal(html.match(/data-element-unique=/g)?.length, 1);
+    assert.match(html, /<div class="arbre" data-element-unique="arbre-de-decision" role="region" aria-label="Le bon geste"><ol>/);
+    assert.ok(html.includes(TITRE_FICHE_PANNE) && !html.includes(TITRE_FICHE_TUTORIEL));
+    assert.ok(!html.includes('{{'));
+  });
+
+  test('arbre de décision mal écrit ou mal placé : la construction échoue', async () => {
+    const { page, site } = await exemplePanne();
+    const voyant = await exemple();
+    const uneReponse = `<p>{{arbre}}</p><ol>${question('Q ?', ['Seule réponse.'])}${question('Q2 ?', ['A', 'B'])}</ol>`;
+    const refus: Array<[() => unknown, RegExp]> = [
+      [() => pagePanne(page, site, '<p>Texte sans arbre.</p>'), /marquer par « \{\{arbre\}\} »/],
+      [() => corpsRedige(ARBRE, voyant.page, voyant.site), /permis que sur une page panne/],
+      [() => pagePanne({ ...page, element_unique: 'photo' } as PageEditoriale, site, ARBRE), /ne déclare pas un arbre/],
+      [() => pagePanne(page, site, `${ARBRE}${ARBRE}`), /un seul arbre/],
+      [() => pagePanne(page, site, '<p>{{arbre}}</p><p>Texte.</p>'), /précéder immédiatement une liste numérotée/],
+      [() => pagePanne(page, site, uneReponse), new RegExp(`question 1 a 1 réponse\\(s\\) ; il en faut au moins ${REPONSES_MIN_ARBRE}`)],
+      [() => pagePanne(page, site, `<p>{{arbre}}</p><ol><li>Q ?</li></ol>`), /question 1 a 0 réponse/],
+      // Deux listes de réponses sous une question : seule la première compte, comme pour le contrôle R7-ARBRE-QUESTIONS.
+      [() => pagePanne(page, site, `<p>{{arbre}}</p><ol><li>Q ?<ul><li>A</li></ul><p>ou</p><ul><li>B</li></ul></li><li>Q2 ?<ul><li>A</li><li>B</li></ul></li></ol>`), /question 1 a 1 réponse/],
+    ];
+    for (const [appel, motif] of refus) assert.throws(appel, motif);
+  });
+
+  test('page au format tutoriel : fiche « La situation en bref » sans symptôme, fiche du tutoriel, étapes marquées « {{etapes}} » (data-tutoriel-etapes), tableau élément unique ; ailleurs, le marqueur est refusé', async () => {
+    // Élément unique d'un tutoriel : un tableau ou un arbre ; la photo n'a pas encore de modèle (décision « photos
+    // réelles » ouverte au journal).
+    const { page, site } = await exemplePanne({ tutoriel: TUTORIEL, element_unique: 'tableau', symptome: undefined });
+    const corps = '<h2>Tension de la batterie</h2><p>{{tableau}}</p><table><thead><tr><th>Tension</th></tr></thead><tbody><tr><td>12,6 V</td></tr></tbody></table><h2>Les étapes</h2><p>{{etapes}}</p>\n<ol>\n<li>Garer la voiture.</li>\n<li>Brancher les câbles.</li>\n</ol>';
+    const html = pagePanne(page, site, corps);
+    assert.match(html, /<ol class="etapes" data-tutoriel-etapes>\n<li>Garer la voiture\.<\/li>/);
+    assert.ok(html.includes(TITRE_FICHE_TUTORIEL) && html.indexOf('data-fiche-panne') < html.indexOf('data-fiche-tutoriel'));
+    assert.ok(html.includes(TITRE_FICHE_SITUATION) && !html.includes(TITRE_FICHE_PANNE) && !html.includes('<dt>Symptôme</dt>'));
+    assert.equal(html.match(/data-element-unique=/g)?.length, 1);
+    assert.match(html, /data-element-unique="tableau" role="region" aria-label="Tension de la batterie"/);
+    const sansTutoriel = await exemplePanne();
+    assert.throws(() => pagePanne(sansTutoriel.page, sansTutoriel.site, `${ARBRE}<p>{{etapes}}</p><ol><li>A</li></ol>`), /n'est pas un tutoriel/);
+    assert.throws(() => pagePanne(page, site, '<p>{{etapes}}</p><p>Texte.</p>'), /précéder immédiatement une liste numérotée/);
+    // Sur un type dont le modèle n'affiche pas la fiche du tutoriel (voyant), « {{etapes}} » est refusé : la consigne
+    // « quand ne pas le faire soi-même » ne disparaît jamais en silence.
+    const voyant = await exemple();
+    assert.throws(() => corpsRedige('<p>{{etapes}}</p><ol><li>A</li></ol>', { ...voyant.page, tutoriel: TUTORIEL } as unknown as PageEditoriale, voyant.site), /n'affiche pas encore la fiche « Le tutoriel en bref »/);
+  });
+
+  test('page dossier : encadré, signature, transparence, texte rédigé avec le tableau (élément unique), historique du plus récent au plus ancien, sources, dans cet ordre', async () => {
+    const { page: base, site } = await exemple();
+    const page = { ...base, element_unique: 'tableau', journal_modifications: [{ date: new Date('2026-11-01T00:00:00Z'), resume: 'Création.' }, { date: new Date('2026-11-15T00:00:00Z'), resume: 'Rappel ajouté.' }] } as unknown as PageEditoriale;
+    const html = pageDossier(page, site, '<h2>Les rappels</h2><p>{{tableau}}</p><table><thead><tr><th>Date</th></tr></thead><tbody><tr><td>2020</td></tr></tbody></table>');
+    const ordre = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-corps', 'data-element-unique="tableau"', 'data-historique-dossier', 'data-sources'].map((m) => html.indexOf(m));
+    assert.ok(ordre.every((i) => i >= 0), JSON.stringify(ordre));
+    assert.deepEqual([...ordre].sort((a, b) => a - b), ordre);
+    assert.equal(html.match(/data-element-unique=/g)?.length, 1);
+    assert.ok(html.includes(TITRE_HISTORIQUE));
+    assert.ok(html.indexOf('datetime="2026-11-15"') < html.indexOf('datetime="2026-11-01"'), 'le plus récent d’abord');
+    assert.equal(html.match(/data-historique-entree/g)?.length, 2);
+    assert.ok(!html.includes('data-causes'), 'un dossier n’a pas de causes');
   });
 });
 

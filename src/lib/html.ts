@@ -14,7 +14,7 @@ const ENTITES: Readonly<Record<string, string>> = { '&': '&amp;', '<': '&lt;', '
 export const echapper = (texte: string): string => texte.replace(/[&<>"']/g, (c) => ENTITES[c] ?? c);
 
 /** Unités qui suivent un nombre (espace insécable entre les deux, charte §3.3). */
-const UNITES = ['bar', 'km/h', 'km', '°C', '€', '%', 'litres', 'litre', 'l', 'mm', 'cm', 'kg', 't', 'h', 'min', 'ans', 'an', 'mois', 'jours', 'jour', 'semaines', 'semaine'];
+const UNITES = ['bar', 'km/h', 'km', '°C', '€', '%', 'litres', 'litre', 'l', 'mm', 'cm', 'kg', 't', 'h', 'min', 'ans', 'an', 'mois', 'jours', 'jour', 'semaines', 'semaine', 'V', 'Ah', 'A', 'kW', 'W'];
 // L'unité n'est suivie ni d'une lettre ni d'un chiffre ni d'une apostrophe (« 208 l’a » : « l » n'est pas le litre).
 const NOMBRE_UNITE = new RegExp(`(\\d) (?=(?:${UNITES.map((u) => u.replace(/[/.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})(?![\\p{L}\\d’']))`, 'gu');
 
@@ -64,6 +64,16 @@ export const ELEMENTS_SANS_TYPOGRAPHIE = ['code', 'pre', 'kbd', 'samp', 'script'
 const SANS_TYPOGRAPHIE = new RegExp(`^(?:${ELEMENTS_SANS_TYPOGRAPHIE.join('|')})$`, 'i');
 
 /**
+ * Entité HTML restée dans un texte (« &amp; », « &lt; », « &#8239; ») : protégée pendant la typographie, sinon la règle
+ * « espace insécable avant ; » la couperait (« &amp ; », affiché « & ; »). Chacune est remplacée par un caractère du
+ * plan d'usage privé supplémentaire A (ni lettre, ni chiffre, ni espace ; 65 534 places), puis rétablie ; un caractère
+ * de ce plan déjà présent dans le texte est protégé de la même façon, pour être rétabli à l'identique.
+ */
+const ENTITE = /&(?:#\d+|#x[0-9a-f]+|[a-z][a-z0-9]*);|[\u{F0000}-\u{FFFFD}]/giu;
+const PROTEGE = /[\u{F0000}-\u{FFFFD}]/gu;
+const PROTECTION = 0xf0000;
+
+/**
  * Découpe d'un fragment HTML en jetons : commentaires, éléments à contenu brut (script, style, textarea) en entier,
  * balises (dont les attributs entre guillemets peuvent contenir « > »), et textes entre deux balises.
  */
@@ -93,7 +103,10 @@ export function typographierHtml(html: string): string {
           .replace(/&ldquo;/gi, '“')
           .replace(/&rdquo;/gi, '”')
           .replace(/&nbsp;|&#160;|&#xa0;/gi, INSECABLE);
-        morceaux.push(typographier(lu, guillemets).replace(/"/g, '&quot;'));
+        const entites: string[] = [];
+        const protege = lu.replace(ENTITE, (entite) => String.fromCodePoint(PROTECTION + entites.push(entite) - 1));
+        const typographie = typographier(protege, guillemets).replace(/"/g, '&quot;');
+        morceaux.push(typographie.replace(PROTEGE, (c) => entites[(c.codePointAt(0) ?? 0) - PROTECTION] ?? c));
       }
     }
     const jeton = decoupe[i + 1];
