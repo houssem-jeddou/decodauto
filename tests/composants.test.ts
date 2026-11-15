@@ -80,6 +80,8 @@ describe('typographie et échappement (charte §3.3)', () => {
     assert.equal(typographierHtml("<script>if (a < b) {x='y'}</script><p>L'huile : ok</p>"), `<script>if (a < b) {x='y'}</script><p>L’huile${INSECABLE}: ok</p>`);
     assert.equal(typographierHtml('<p>Le message "<strong>STOP</strong>" apparaît</p>'), `<p>Le message «${INSECABLE}<strong>STOP</strong>${INSECABLE}» apparaît</p>`);
     assert.equal(typographierHtml('<p>Jantes de 15" ou 16"</p>'), '<p>Jantes de 15″ ou 16″</p>');
+    // Entités suivies d'une espace (« tension &lt; 12 V ») : jamais coupées par l'insécable avant « ; » (étape 10, revue).
+    assert.equal(typographierHtml('<li>Tension &lt; 12 V ou &gt; 15 V : M&amp;S, R&amp; D ?</li>'), `<li>Tension &lt; 12 V ou &gt; 15 V${INSECABLE}: M&amp;S, R&amp; D${INSECABLE}?</li>`);
     assert.equal(typographierHtml('<p>Que faire\n: ok. Attention: chaud</p><samp>x : y</samp><!-- a " b -->'), `<p>Que faire${INSECABLE}: ok. Attention${INSECABLE}: chaud</p><samp>x : y</samp><!-- a " b -->`);
   });
   test('typographie d\'un fragment HTML (corps rendu depuis le Markdown) : texte retouché, code et balises intacts', () => {

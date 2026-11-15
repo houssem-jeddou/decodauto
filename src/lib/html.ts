@@ -64,6 +64,14 @@ export const ELEMENTS_SANS_TYPOGRAPHIE = ['code', 'pre', 'kbd', 'samp', 'script'
 const SANS_TYPOGRAPHIE = new RegExp(`^(?:${ELEMENTS_SANS_TYPOGRAPHIE.join('|')})$`, 'i');
 
 /**
+ * Entité HTML restée dans un texte (« &amp; », « &lt; », « &#8239; ») : protégée pendant la typographie, sinon la règle
+ * « espace insécable avant ; » la couperait (« &amp ; », affiché « & ; »). Chacune est remplacée par un caractère d'usage
+ * privé (ni lettre, ni chiffre, ni espace), puis rétablie.
+ */
+const ENTITE = /&(?:#\d+|#x[0-9a-f]+|[a-z][a-z0-9]*);/gi;
+const PROTECTION = 0xe100;
+
+/**
  * Découpe d'un fragment HTML en jetons : commentaires, éléments à contenu brut (script, style, textarea) en entier,
  * balises (dont les attributs entre guillemets peuvent contenir « > »), et textes entre deux balises.
  */
@@ -93,7 +101,10 @@ export function typographierHtml(html: string): string {
           .replace(/&ldquo;/gi, '“')
           .replace(/&rdquo;/gi, '”')
           .replace(/&nbsp;|&#160;|&#xa0;/gi, INSECABLE);
-        morceaux.push(typographier(lu, guillemets).replace(/"/g, '&quot;'));
+        const entites: string[] = [];
+        const protege = lu.replace(ENTITE, (entite) => String.fromCharCode(PROTECTION + entites.push(entite) - 1));
+        const typographie = typographier(protege, guillemets).replace(/"/g, '&quot;');
+        morceaux.push(typographie.replace(/[\ue100-\uefff]/g, (c) => entites[c.charCodeAt(0) - PROTECTION] ?? c));
       }
     }
     const jeton = decoupe[i + 1];
