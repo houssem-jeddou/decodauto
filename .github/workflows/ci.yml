@@ -171,11 +171,18 @@ jobs:
     # et ceux du format 2 ; seules erreurs attendues, fixées par le script : les empreintes des lignes et des pages du
     # brouillon (R4-EMPREINTE). Ce job ne conditionne pas le déploiement et rien de dist-demo-format2 n'est jamais déployé.
     if: ${{ github.event_name != 'schedule' }}
-    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     env:
       DEMO_FORMAT2: '1'
     steps:
+      # Dépôt public (demande de changement n° 29) : aucun exécuteur auto-hébergé. Première étape de chaque job, contrôlée
+      # par tests/depot-public.test.ts (EXECUTEUR-HEBERGE) ; une visibilité non lue compte comme publique.
+      - name: Exécuteur hébergé par GitHub (dépôt public, demande de changement n° 29)
+        if: ${{ runner.environment != 'github-hosted' && github.event.repository.private != true }}
+        run: |
+          echo "::error title=EXECUTEUR-HEBERGE::Ce job tourne sur un exécuteur auto-hébergé alors que le dépôt est public (demande de changement n° 29) : supprimer la variable CI_RUNNER du dépôt."
+          exit 1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:

@@ -106,7 +106,7 @@ describe('EXECUTEUR-HEBERGE : première étape de chaque job de la CI', () => {
   test('chaque job de .github/workflows/ci.yml commence par l\'étape, avec sa condition exacte', async () => {
     const workflow = await readFile(join(racine, '.github/workflows/ci.yml'), 'utf8');
     assert.deepEqual(jobsSansEtapeExecuteur(workflow), []);
-    assert.deepEqual(nomsDesJobs(workflow), ['controles', 'exemples', 'lighthouse', 'origine-main', 'secrets-cloudflare', 'deploiement', 'production']);
+    assert.deepEqual(nomsDesJobs(workflow), ['controles', 'exemples', 'demo-format-deux', 'lighthouse', 'origine-main', 'secrets-cloudflare', 'deploiement', 'production']);
     assert.match(workflow, /node scripts\/verifier-commits-courriel\.ts "\$BASE_SHA\.\.\$HEAD_SHA"/);
   });
 
