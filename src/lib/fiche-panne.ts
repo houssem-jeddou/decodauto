@@ -11,6 +11,7 @@
 // ---------------------------------------------------------------------------------------------
 import { INSECABLE, texteHtml } from './html.ts';
 import { LIBELLE_CARBURANT } from './fiche-code.ts';
+import { MOTS_REPERES } from '../schemas/grille.ts';
 import type { CARBURANTS, DIFFICULTES } from '../schemas/listes.ts';
 
 type Carburant = (typeof CARBURANTS)[number];
@@ -20,11 +21,47 @@ type Difficulte = (typeof DIFFICULTES)[number];
 export const REPONSES_MIN_ARBRE = 2;
 
 /**
- * Mots qui, dans une réponse de l'arbre de décision, disent de rouler ou de s'arrêter (texte normalisé par
- * normaliserTexte : sans accents ni ponctuation). Une telle réponse redit le verdict d'une ligne de l'encadré, au libellé
- * de la grille (contrôle R7-ARBRE-VERDICT, charte §2.1 et §2.3).
+ * Expressions qui, dans l'arbre de décision, disent de rouler ou de s'arrêter (texte normalisé par normaliserTexte : sans
+ * accents ni ponctuation) : celles des notices que la grille classe à l'arrêt ou à l'appel (MOTS_REPERES, une seule
+ * source), et celles de la conduite. Une phrase de l'arbre qui en contient une redit le verdict d'une ligne de l'encadré,
+ * au libellé de la grille (contrôle R7-ARBRE-VERDICT, charte §2.1 et §2.3). Des expressions, pas des verbes seuls :
+ * « poursuivez avec la question 4 », « le moteur refuse de repartir » ou « arrêtez la climatisation » ne sont pas des
+ * verdicts.
+ * Liste forcément incomplète : chaque réponse de l'arbre se relit aussi contre l'encadré au paquet de validation.
  */
-export const MOTS_VERDICT_ARBRE = /\b(roulez|rouler|roulons|arretez|arreter|poursuivez|poursuivre|repartez|repartir|reprenez la route|reprendre la route)\b/;
+export const EXPRESSIONS_VERDICT_ARBRE: readonly string[] = [
+  ...MOTS_REPERES.arret,
+  ...MOTS_REPERES.appel,
+  'vous pouvez rouler',
+  'pouvez rouler',
+  'pas rouler',
+  'roulez',
+  'ne roulez plus',
+  'evitez de rouler',
+  'rouler jusqu',
+  'continuez a rouler',
+  'continuer a rouler',
+  'continuez jusqu',
+  'ne poursuivez pas',
+  'poursuivez votre trajet',
+  'poursuivre votre trajet',
+  'poursuivez votre route',
+  'reprenez la route',
+  'reprendre la route',
+  'reprenez votre trajet',
+  'reprendre votre trajet',
+  'repartez',
+  'ne redemarrez pas',
+  'stoppez',
+  'garez vous',
+  'garez la voiture',
+  'garez le vehicule',
+  'immobilisez',
+  'conduisez',
+  'arret immediat',
+  'arretez la voiture',
+];
+export const MOTS_VERDICT_ARBRE = new RegExp(`\\b(?:${EXPRESSIONS_VERDICT_ARBRE.map((e) => e.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})\\b`);
 
 /** Identifiants des titres (préfixe da-, comme les autres composants : ID-DOUBLON). */
 export const IDENTIFIANT_FICHE_PANNE = 'da-symptome';

@@ -1156,5 +1156,32 @@
     ],
     "alertes": [],
     "explication": "Une réponse de l'arbre cite un verdict qu'aucune ligne de l'encadré ne donne : le texte contredirait l'encadré."
+  },
+  {
+    "nom": "r7-arbre-precautions-hors-encadre",
+    "type": "panne",
+    "erreurs": [
+      "R7-ARBRE-VERDICT"
+    ],
+    "alertes": [],
+    "explication": "Une réponse de l'arbre cite « Oui, avec précautions », qu'aucune ligne de l'encadré ne donne (libellé vérifié même sans expression de conduite)."
+  },
+  {
+    "nom": "r7-arbre-verdict-dans-question",
+    "type": "panne",
+    "erreurs": [
+      "R7-ARBRE-VERDICT"
+    ],
+    "alertes": [],
+    "explication": "Le texte d'une question, hors de la liste des réponses, dit de s'arrêter sans redire le verdict de l'encadré : toute phrase de l'arbre est contrôlée."
+  },
+  {
+    "nom": "panne-tutoriel-fiche-incomplete",
+    "type": "panne",
+    "erreurs": [
+      "FICHE-TUTORIEL-INCOMPLETE"
+    ],
+    "alertes": [],
+    "explication": "La fiche du tutoriel construite n'affiche pas « Quand ne pas le faire soi-même »."
   }
 ]

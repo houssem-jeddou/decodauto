@@ -360,6 +360,9 @@ interface OptionsHtml {
   arbreAvecVerdict?: boolean;
   arbreVerdictEcrit?: boolean;
   arbreVerdictHorsEncadre?: boolean;
+  arbreVerdictPrecautions?: boolean;
+  arbreVerdictDansQuestion?: boolean;
+  ficheTutorielFausse?: boolean;
   sansHistorique?: boolean;
   historiqueIncomplet?: boolean;
   historiqueDesordre?: boolean;
@@ -458,7 +461,9 @@ function blocsEtape10(page: Objet, type: string, options: OptionsHtml): string {
   return [
     type === 'panne' && !options.sansFichePanne ? fichePanneHtml(options.fichePanneFausse ? fiche.slice(1) : fiche) : '',
     options.fichePanneEnTrop ? fichePanneHtml([{ intitule: 'Quand', valeur: 'Situation de test' }]) : '',
-    tutoriel !== undefined && !options.sansFicheTutoriel ? ficheTutorielHtml(modeleFicheTutoriel(tutoriel as unknown as Tutoriel)) : '',
+    tutoriel !== undefined && !options.sansFicheTutoriel
+      ? ficheTutorielHtml(options.ficheTutorielFausse ? modeleFicheTutoriel(tutoriel as unknown as Tutoriel).slice(0, -1) : modeleFicheTutoriel(tutoriel as unknown as Tutoriel))
+      : '',
     historique,
   ].join('');
 }
@@ -473,8 +478,11 @@ function arbreDeTest(options: OptionsHtml): string {
       ? 'Non : arrêtez-vous et faites contrôler le démarreur.'
       : options.arbreVerdictHorsEncadre
         ? `Non : ${GRILLE_VERDICTS['non, arrêt immédiat'].libelle}.`
-        : 'Non : faites contrôler le démarreur.';
-  return `${ouvrir}<ol><li>Le démarreur tourne-t-il ?<ul><li>Oui : batterie probablement bonne.</li>${options.arbreUneReponse ? '' : `<li>${non}</li>`}</ul></li></ol></div>`;
+        : options.arbreVerdictPrecautions
+          ? `Non : ${GRILLE_VERDICTS['oui avec précautions'].libelle} ; allez au garage.`
+          : 'Non : faites contrôler le démarreur.';
+  const question = options.arbreVerdictDansQuestion ? 'Le démarreur tourne-t-il ? Sinon, coupez le moteur.' : 'Le démarreur tourne-t-il ?';
+  return `${ouvrir}<ol><li>${question}<ul><li>Oui : batterie probablement bonne.</li>${options.arbreUneReponse ? '' : `<li>${non}</li>`}</ul></li></ol></div>`;
 }
 
 function encadre(page: Objet, options: OptionsHtml): string {
@@ -834,6 +842,9 @@ invalide('r7-arbre-sans-liste', 'panne', panne(), ['R7-ARBRE-QUESTIONS'], "Arbre
 valide('valide-panne-arbre-verdict', 'panne', panne(), "Une réponse de l'arbre qui dit de s'arrêter redit le verdict d'une ligne de l'encadré, au libellé de la grille.", { arbreAvecVerdict: true });
 invalide('r7-arbre-verdict-ecrit', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre dit de s'arrêter sans redire le verdict de l'encadré (verdict écrit à la main).", { arbreVerdictEcrit: true });
 invalide('r7-arbre-verdict-hors-encadre', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre cite un verdict qu'aucune ligne de l'encadré ne donne : le texte contredirait l'encadré.", { arbreVerdictHorsEncadre: true });
+invalide('r7-arbre-precautions-hors-encadre', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre cite « Oui, avec précautions », qu'aucune ligne de l'encadré ne donne (libellé vérifié même sans expression de conduite).", { arbreVerdictPrecautions: true });
+invalide('r7-arbre-verdict-dans-question', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Le texte d'une question, hors de la liste des réponses, dit de s'arrêter sans redire le verdict de l'encadré : toute phrase de l'arbre est contrôlée.", { arbreVerdictDansQuestion: true });
+invalide('panne-tutoriel-fiche-incomplete', 'panne', panneTutoriel(), ['FICHE-TUTORIEL-INCOMPLETE'], "La fiche du tutoriel construite n'affiche pas « Quand ne pas le faire soi-même ».", { ficheTutorielFausse: true });
 
 // ---- Écriture ----------------------------------------------------------------------------------------
 await rm(join(racine, 'cas'), { recursive: true, force: true });

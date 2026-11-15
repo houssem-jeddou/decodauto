@@ -913,6 +913,7 @@ export function limiteProchaineRevue(type: TypePage, dateRevue: Date, sujet?: st
  *  - DATES-FUTUR : date de publication, de modification, de revue ou d'une entrée du journal dans le futur ;
  *  - DATES-ORDRE : modification avant la publication ; entrée du journal d'un dossier hors de la période qui va de la
  *    publication à la dernière modification ;
+ *  - DATES-HISTORIQUE : la dernière entrée du journal d'un dossier n'est pas datée de la dernière modification (étape 10) ;
  *  - DATES-REVUE-DELAI : prochaine revue au-delà du délai du type (charte §8).
  * prochaine_revue après date_revue (R7-DATES) et le délai du dossier (R7-FORMAT) sont contrôlés par les schémas ; une
  * revue faite avant la publication reste permise (relecture avant mise en ligne).
@@ -1111,21 +1112,23 @@ export function controlerHtml(
     if (questions.length === 0 || incompletes.length > 0) {
       constats.push(erreur('R7-ARBRE-QUESTIONS', `l'arbre de décision est une liste numérotée de questions, chacune suivie d'au moins ${REPONSES_MIN_ARBRE} réponses (sous-liste) ; ${questions.length === 0 ? 'aucune question' : `${incompletes.length} question(s) avec moins de ${REPONSES_MIN_ARBRE} réponses`}`, fichier));
     }
-    // Une réponse qui dit de rouler ou de s'arrêter redit le verdict d'une ligne de l'encadré, au libellé exact de la
-    // grille (« {{verdict:…}} » du texte rédigé, charte §2.1 et §2.3) : jamais un verdict écrit à la main, ni un verdict
-    // qui n'est pas dans l'encadré.
+    // Toute phrase de l'arbre (texte propre de chaque élément de liste, à toute profondeur : questions, réponses, texte
+    // hors des listes de réponses) : un libellé de verdict de la grille n'y est cité que s'il est celui d'une ligne de
+    // l'encadré (le texte ne contredit jamais l'encadré) ; une phrase qui dit de rouler ou de s'arrêter
+    // (EXPRESSIONS_VERDICT_ARBRE) cite ce libellé (« {{verdict:…}} » du texte rédigé, charte §2.1 et §2.3), jamais un
+    // verdict écrit à la main. Liste d'expressions forcément incomplète : le reste se relit au paquet de validation.
     const libelles = Object.values(GRILLE_VERDICTS).map((v) => v.libelle);
     const deLEncadre = new Set(lignes.map((l) => GRILLE_VERDICTS[l.verdict].libelle));
-    const reponses = questions.toArray().flatMap((q) => $(q).children('ul, ol').first().children('li').toArray());
-    for (const reponse of reponses) {
-      const texte = normaliserTexte($(reponse).text());
-      if (!MOTS_VERDICT_ARBRE.test(texte)) continue;
+    for (const li of element.find('li').toArray()) {
+      const propre = $(li).clone();
+      propre.children('ul, ol').remove();
+      const brut = propre.text().replace(/\s+/g, ' ').trim();
+      const texte = normaliserTexte(brut);
       const cites = libelles.filter((l) => texte.includes(normaliserTexte(l)));
-      const extrait = $(reponse).text().replace(/\s+/g, ' ').trim().slice(0, 60);
-      if (cites.length === 0) {
-        constats.push(erreur('R7-ARBRE-VERDICT', `réponse de l'arbre qui dit de rouler ou de s'arrêter sans redire le verdict d'une ligne de l'encadré (« {{verdict:…}} ») : « ${extrait} »`, fichier));
-      } else if (cites.some((l) => !deLEncadre.has(l))) {
-        constats.push(erreur('R7-ARBRE-VERDICT', `réponse de l'arbre qui cite un verdict absent de l'encadré de décision (le texte ne contredit jamais l'encadré) : « ${extrait} »`, fichier));
+      if (cites.some((l) => !deLEncadre.has(l))) {
+        constats.push(erreur('R7-ARBRE-VERDICT', `phrase de l'arbre qui cite un verdict absent de l'encadré de décision (le texte ne contredit jamais l'encadré) : « ${brut.slice(0, 60)} »`, fichier));
+      } else if (cites.length === 0 && MOTS_VERDICT_ARBRE.test(texte)) {
+        constats.push(erreur('R7-ARBRE-VERDICT', `phrase de l'arbre qui dit de rouler ou de s'arrêter sans redire le verdict d'une ligne de l'encadré (« {{verdict:…}} ») : « ${brut.slice(0, 60)} »`, fichier));
       }
     }
   }

@@ -7,6 +7,7 @@ import {
   IDENTIFIANT_FICHE_PANNE,
   IDENTIFIANT_FICHE_TUTORIEL,
   IDENTIFIANT_HISTORIQUE,
+  EXPRESSIONS_VERDICT_ARBRE,
   MOTS_VERDICT_ARBRE,
   REPONSES_MIN_ARBRE,
   TITRE_FICHE_PANNE,
@@ -21,6 +22,7 @@ import {
 } from '../src/lib/fiche-panne.ts';
 import { INSECABLE } from '../src/lib/html.ts';
 import { normaliserTexte } from '../src/lib/empreinte.ts';
+import { MOTS_REPERES } from '../src/schemas/grille.ts';
 
 const jour = (iso: string): Date => new Date(`${iso}T00:00:00Z`);
 
@@ -61,11 +63,39 @@ describe('fiche du symptôme et fiche du tutoriel (étape 10)', () => {
     assert.equal(tutoriel.match(/data-fiche-ligne/g)?.length, 4);
   });
 
-  test("arbre de décision : au moins deux réponses par question ; mots qui disent de rouler ou de s'arrêter (R7-ARBRE-VERDICT)", () => {
+  test("arbre de décision : au moins deux réponses par question ; expressions qui disent de rouler ou de s'arrêter (R7-ARBRE-VERDICT), tirées de la grille et de la conduite", () => {
     assert.equal(REPONSES_MIN_ARBRE, 2);
     const dit = (texte: string): boolean => MOTS_VERDICT_ARBRE.test(normaliserTexte(texte));
-    for (const texte of ['Non : arrêtez-vous et appelez l’assistance.', 'Vous pouvez rouler jusqu’au garage.', 'Ne poursuivez pas votre trajet.', 'Ne repartez pas.', 'Reprenez la route doucement.']) assert.ok(dit(texte), texte);
-    for (const texte of ['Oui : la batterie est en cause, passez à la question 3.', 'Le moteur s’arrête au ralenti ?', 'Non : faites contrôler le démarreur.']) assert.ok(!dit(texte), texte);
+    // Une seule source pour les expressions d'arrêt et d'appel des notices : la grille.
+    for (const expression of [...MOTS_REPERES.arret, ...MOTS_REPERES.appel]) assert.ok(EXPRESSIONS_VERDICT_ARBRE.includes(expression), expression);
+    const verdicts = [
+      'Non : arrêtez-vous et appelez l’assistance.',
+      'Vous pouvez rouler jusqu’au garage.',
+      'Vous ne pouvez pas rouler.',
+      'Ne poursuivez pas votre trajet.',
+      'Ne repartez pas.',
+      'Reprenez la route doucement.',
+      'Coupez le moteur.',
+      'Faites appel à un garage.',
+      'Faites remorquer la voiture.',
+      'Stoppez le véhicule.',
+      'Garez la voiture.',
+      'Ne redémarrez pas.',
+      'Continuez jusqu’au garage.',
+      'Conduisez prudemment.',
+    ];
+    for (const texte of verdicts) assert.ok(dit(texte), texte);
+    const autres = [
+      'Oui : la batterie est en cause, passez à la question 3.',
+      'Non : poursuivez avec la question 4.',
+      'Le moteur refuse de repartir.',
+      'Avant de rouler : passez à la question 2.',
+      'Arrêtez la climatisation et mettez le chauffage à fond.',
+      'Arrêtez d’actionner le démarreur.',
+      'Le moteur peut s’arrêter au ralenti ?',
+      'Non : faites contrôler le démarreur.',
+    ];
+    for (const texte of autres) assert.ok(!dit(texte), texte);
   });
 });
 
