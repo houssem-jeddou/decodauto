@@ -34,7 +34,9 @@ Manquent les deux pages du lot 4b.
 5 pages déjà « sur Google » (outil voyants, airbag, ABS et ESP, batterie, direction) ; indexation demandée pour les 11
 autres pages éditoriales des lots 2 à 5d (voyant frein, voyant moteur, voyant huile, voyant FAP, voyant de pression des
 pneus, pression des pneus, P0087, AdBlue, préchauffage, P0420, P0299), toutes acceptées (« Indexation demandée »). Lot 1 :
-fait le 12/11 (`travaux/etape-9/porte-9-lot-1.md`).
+fait le 12/11 (`travaux/etape-9/porte-9-lot-1.md`). Bing Webmaster Tools (15/11, 19 h 19) : les 16 adresses des lots 2 à
+5d soumises (« 16 URLs submitted successfully », quota de 100 par jour) ; la rubrique IndexNow ne montre aucune
+notification reçue depuis le 13/11 (Crawler Hints de Cloudflare) : soumettre les adresses de chaque lot à la main.
 
 Fusion des lots 4a et 5d (15/11) : chaque pull request avait la CI verte sur sa tête exacte (contrôles, recette,
 Lighthouse) ; pour #49, #50 et #53, l'arbre fusionné était identique à l'arbre testé (`git merge-tree`). Incident évité :
