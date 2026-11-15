@@ -1,6 +1,6 @@
 # Relevé des notices, lot 5c : pages voyant AdBlue et voyant de préchauffage (14/11/2026)
 
-> Passages relus à l'écran le 14/11/2026 (de 17 h 30 à 18 h 45 environ) dans les notices du registre, sauf mention « extrait de l'étape 5 » (texte relevé le 24/10 dans `travaux/etape-5/notices/`). Les guillemets signalent un texte recopié ; le reste est un résumé fidèle. Données internes, jamais publiées.
+> Passages relus à l'écran le 14/11/2026 (de 17 h 30 à 18 h 45 environ) dans les notices du registre, sauf mention « extrait de l'étape 5 » (texte relevé le 24/10 dans `claude/notices-etape-5/` (projet Claude)). Les guillemets signalent un texte recopié ; le reste est un résumé fidèle. Données internes, jamais publiées.
 
 ## Seat Ibiza, p. 286-287 (extrait de l'étape 5, `seat-ibiza.txt`, PDF 288-289)
 - p. 286 : « Lorsque l'autonomie devient restante inférieure à 2 400 km, une indication s'affiche sur l'écran du combiné d'instruments pour indiquer qu'il est nécessaire de remplir le réservoir d'AdBlue®. Si ce message est ignoré, le témoin lumineux jaune s'allume après une autonomie restante de 1 000 km. L'écran du combiné d'instruments indique qu'il ne sera plus possible de redémarrer le moteur dans XXX km. Si le témoin lumineux jaune est ignoré, lorsqu'une autonomie restante de 0 km est affichée, il n'est plus possible de redémarrer le moteur. Le voyant d'avertissement rouge s'allume. »

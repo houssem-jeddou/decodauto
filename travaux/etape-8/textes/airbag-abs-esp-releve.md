@@ -1,6 +1,6 @@
 # Relevé : notices relues pour le lot 5a (voyant airbag, voyants ABS et ESP), 14/11/2026
 
-Relevé de travail, jamais publié. Deux origines : les extraits de l'étape 5 (`travaux/etape-5/notices/*.txt`, texte des PDF des constructeurs extrait par pdf.js, 23-24/10, sans retouche), et des pages relues à l'écran le 14/11 dans le navigateur (Chrome de Houssem, page imprimée vérifiée au pied de page), signalées « lu à l'écran ». Le texte du contrôle technique est dans `controle-technique-releve.md`. Les pages ne citent que les extraits utiles, par la source du registre.
+Relevé de travail, jamais publié. Deux origines : les extraits de l'étape 5 (`claude/notices-etape-5/*.txt` (projet Claude), texte des PDF des constructeurs extrait par pdf.js, 23-24/10, sans retouche), et des pages relues à l'écran le 14/11 dans le navigateur (Chrome de Houssem, page imprimée vérifiée au pied de page), signalées « lu à l'écran ». Le texte du contrôle technique est dans `controle-technique-releve.md`. Les pages ne citent que les extraits utiles, par la source du registre.
 
 ## Peugeot 208 (guide d'utilisation édition 01-20), lu à l'écran le 14/11
 

@@ -22,6 +22,10 @@ permissions:
 # après 24 heures d'attente, GitHub annule le job : il suffit de relancer le passage. Sur l'exécuteur, pas de cache npm
 # de GitHub (setup-node) : le dossier ~/.npm reste sur le PC d'un job à l'autre, alors que le cache de GitHub
 # téléchargerait environ 150 Mo à chaque job (et les enverrait au premier).
+# Suspendu tant que le dépôt est public (demande de changement n° 29, acceptée le 15/11/2026) : aucun exécuteur
+# auto-hébergé. Sur un dépôt public, chaque job tourne sur les serveurs de GitHub, quelle que soit la variable CI_RUNNER
+# (runs-on ne la lit que si le dépôt est privé) ; en plus, la première étape de chaque job échoue hors d'un serveur de
+# GitHub (EXECUTEUR-HEBERGE). L'exécuteur n'a jamais été installé (WSL 2 ne démarre pas sur le PC de Houssem).
 
 # Un nouveau passage annule celui qu'il remplace sur une pull request, et sur un lancement à la demande hors de main
 # (branches d'essai, demande de changement n° 26 : minutes du dépôt privé). Sur main, un passage en cours va au bout
@@ -38,14 +42,32 @@ env:
 jobs:
   controles:
     name: Contrôles (schémas, règles, build, liens)
-    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     steps:
+      # Dépôt public (demande de changement n° 29) : aucun exécuteur auto-hébergé. Première étape de chaque job, contrôlée
+      # par tests/depot-public.test.ts (EXECUTEUR-HEBERGE) ; une visibilité non lue compte comme publique.
+      - name: Exécuteur hébergé par GitHub (dépôt public, demande de changement n° 29)
+        if: ${{ runner.environment != 'github-hosted' && github.event.repository.private != true }}
+        run: |
+          echo "::error title=EXECUTEUR-HEBERGE::Ce job tourne sur un exécuteur auto-hébergé alors que le dépôt est public (demande de changement n° 29) : supprimer la variable CI_RUNNER du dépôt."
+          exit 1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
           cache: ${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}
+      # Dépôt public (demande de changement n° 29) : chaque commit de la pull request a une adresse d'auteur et de commiteur
+      # « noreply » (COMMITS-COURRIEL, scripts/verifier-commits-courriel.ts). Historique complet chargé pour lire les commits
+      # entre la base et la tête de la pull request ; le message d'erreur ne redit pas l'adresse (journal public).
+      - name: Adresses « noreply » des commits de la pull request (dépôt public, demande de changement n° 29)
+        if: ${{ github.event_name == 'pull_request' }}
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ -f "$(git rev-parse --git-dir)/shallow" ]; then git fetch --no-tags --unshallow origin "$BASE_SHA" "$HEAD_SHA"; else git fetch --no-tags origin "$BASE_SHA" "$HEAD_SHA"; fi
+          node scripts/verifier-commits-courriel.ts "$BASE_SHA..$HEAD_SHA"
       - name: Installer les dépendances
         run: npm ci
       # Demande de changement n° 18 (scripts/verifier-indexation-durable.ts) : à chaque construction, drapeau à true
@@ -97,11 +119,18 @@ jobs:
     #    qu'après sa validation, jamais pour faire passer le contrôle, et l'attendu est retiré dans le même commit ;
     # Aucun attendu aujourd'hui : la page « à propos » (livrable 7.3) est dans src/content depuis le premier lot, les liens « Méthode » mènent à elle.
     if: ${{ github.event_name != 'schedule' }}
-    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     env:
       AVEC_EXEMPLES: '1'
     steps:
+      # Dépôt public (demande de changement n° 29) : aucun exécuteur auto-hébergé. Première étape de chaque job, contrôlée
+      # par tests/depot-public.test.ts (EXECUTEUR-HEBERGE) ; une visibilité non lue compte comme publique.
+      - name: Exécuteur hébergé par GitHub (dépôt public, demande de changement n° 29)
+        if: ${{ runner.environment != 'github-hosted' && github.event.repository.private != true }}
+        run: |
+          echo "::error title=EXECUTEUR-HEBERGE::Ce job tourne sur un exécuteur auto-hébergé alors que le dépôt est public (demande de changement n° 29) : supprimer la variable CI_RUNNER du dépôt."
+          exit 1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -138,12 +167,19 @@ jobs:
     name: Lighthouse mobile (3 passages)
     needs: controles
     if: ${{ github.event_name != 'schedule' }}
-    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     # Demande n° 27 : 10,4 à 10,9 minutes chez GitHub le 14/11 pour 17 adresses ; la liste grandit à chaque lot et la
     # vitesse de l'exécuteur du PC n'est pas celle des serveurs de GitHub. Un délai, pas un seuil : les scores exigés
     # ne changent pas.
     timeout-minutes: 30
     steps:
+      # Dépôt public (demande de changement n° 29) : aucun exécuteur auto-hébergé. Première étape de chaque job, contrôlée
+      # par tests/depot-public.test.ts (EXECUTEUR-HEBERGE) ; une visibilité non lue compte comme publique.
+      - name: Exécuteur hébergé par GitHub (dépôt public, demande de changement n° 29)
+        if: ${{ runner.environment != 'github-hosted' && github.event.repository.private != true }}
+        run: |
+          echo "::error title=EXECUTEUR-HEBERGE::Ce job tourne sur un exécuteur auto-hébergé alors que le dépôt est public (demande de changement n° 29) : supprimer la variable CI_RUNNER du dépôt."
+          exit 1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -184,13 +220,20 @@ jobs:
     # la fusion, et un déploiement refusé par les contrôles n'a pas besoin d'être vérifié.
     needs: controles
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 5
     permissions:
       contents: read
       pull-requests: read
       actions: read
     steps:
+      # Dépôt public (demande de changement n° 29) : aucun exécuteur auto-hébergé. Première étape de chaque job, contrôlée
+      # par tests/depot-public.test.ts (EXECUTEUR-HEBERGE) ; une visibilité non lue compte comme publique.
+      - name: Exécuteur hébergé par GitHub (dépôt public, demande de changement n° 29)
+        if: ${{ runner.environment != 'github-hosted' && github.event.repository.private != true }}
+        run: |
+          echo "::error title=EXECUTEUR-HEBERGE::Ce job tourne sur un exécuteur auto-hébergé alors que le dépôt est public (demande de changement n° 29) : supprimer la variable CI_RUNNER du dépôt."
+          exit 1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
@@ -220,7 +263,7 @@ jobs:
     name: Secrets Cloudflare présents ?
     needs: [controles, lighthouse]
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 2
     outputs:
       disponibles: ${{ steps.verification.outputs.disponibles }}
@@ -228,6 +271,13 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
+      # Dépôt public (demande de changement n° 29) : aucun exécuteur auto-hébergé. Première étape de chaque job, contrôlée
+      # par tests/depot-public.test.ts (EXECUTEUR-HEBERGE) ; une visibilité non lue compte comme publique.
+      - name: Exécuteur hébergé par GitHub (dépôt public, demande de changement n° 29)
+        if: ${{ runner.environment != 'github-hosted' && github.event.repository.private != true }}
+        run: |
+          echo "::error title=EXECUTEUR-HEBERGE::Ce job tourne sur un exécuteur auto-hébergé alors que le dépôt est public (demande de changement n° 29) : supprimer la variable CI_RUNNER du dépôt."
+          exit 1
       - id: verification
         run: |
           if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
@@ -243,12 +293,19 @@ jobs:
     # ET si les deux secrets existent.
     needs: [controles, lighthouse, secrets-cloudflare, origine-main]
     if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.secrets-cloudflare.outputs.disponibles == 'true' }}
-    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 10
     concurrency:
       group: deploiement-production
       cancel-in-progress: false
     steps:
+      # Dépôt public (demande de changement n° 29) : aucun exécuteur auto-hébergé. Première étape de chaque job, contrôlée
+      # par tests/depot-public.test.ts (EXECUTEUR-HEBERGE) ; une visibilité non lue compte comme publique.
+      - name: Exécuteur hébergé par GitHub (dépôt public, demande de changement n° 29)
+        if: ${{ runner.environment != 'github-hosted' && github.event.repository.private != true }}
+        run: |
+          echo "::error title=EXECUTEUR-HEBERGE::Ce job tourne sur un exécuteur auto-hébergé alors que le dépôt est public (demande de changement n° 29) : supprimer la variable CI_RUNNER du dépôt."
+          exit 1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -275,12 +332,19 @@ jobs:
     # toujours vert), la production n'ayant pas encore les changements de la branche, et coûtait une minute par passage.
     needs: deploiement
     if: ${{ !cancelled() && (needs.deploiement.result == 'success' || ((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main')) }}
-    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     # Après un déploiement : jusqu'à 4 passages, sans nouveau passage au-delà de 4 minutes. Un passage fait 14 lectures
     # d'au plus 20 s quand le site répond (http://www en deux redirections), jusqu'à 33 dans une boucle de redirections
     # lentes (11 min au plus). Le délai du job couvre ce pire cas : un écart fait échouer le job, il ne l'annule jamais.
     timeout-minutes: 20
     steps:
+      # Dépôt public (demande de changement n° 29) : aucun exécuteur auto-hébergé. Première étape de chaque job, contrôlée
+      # par tests/depot-public.test.ts (EXECUTEUR-HEBERGE) ; une visibilité non lue compte comme publique.
+      - name: Exécuteur hébergé par GitHub (dépôt public, demande de changement n° 29)
+        if: ${{ runner.environment != 'github-hosted' && github.event.repository.private != true }}
+        run: |
+          echo "::error title=EXECUTEUR-HEBERGE::Ce job tourne sur un exécuteur auto-hébergé alors que le dépôt est public (demande de changement n° 29) : supprimer la variable CI_RUNNER du dépôt."
+          exit 1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:

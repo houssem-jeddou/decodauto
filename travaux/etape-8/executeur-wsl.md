@@ -1,5 +1,11 @@
 # Exécuteur GitHub Actions sur le PC de Houssem (Ubuntu 26.04 sous WSL)
 
+> **Suspendu tant que le dépôt est public** (demande de changement n° 29, acceptée le 15/11/2026) : aucun exécuteur
+> auto-hébergé. Sur un dépôt public, chaque job tourne sur les serveurs de GitHub quelle que soit la variable `CI_RUNNER`
+> (`runs-on` ne la lit que si le dépôt est privé), et la première étape de chaque job échoue sinon (EXECUTEUR-HEBERGE).
+> L'exécuteur n'a jamais été installé (WSL 2 ne démarre pas sur le PC de Houssem). Ce guide ne sert que si le dépôt
+> repasse en privé, par une demande de changement.
+
 Demande de changement n° 27. L'exécuteur (« self-hosted runner ») fait tourner la CI du dépôt sur le PC de Houssem, dans
 Ubuntu 26.04 sous WSL : le même système que les serveurs de GitHub (`ubuntu-latest` tourne sur l'image `ubuntu-26.04`,
 d'après les journaux de la CI du 09/11 et du 14/11), donc les contrôles, écrits et validés sous Linux, tournent sans

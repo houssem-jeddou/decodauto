@@ -103,6 +103,6 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
   - Bougies de préchauffage (« voyant bougie », « bougie de préchauffage voyant ») : codes P0380 et P1351 (pages liées).
   - « Voiture ne démarre pas » et « perte de puissance » : pages liées, une phrase ici.
 - **Sources à trouver avant la rédaction** :
-  - Consigne du témoin de préchauffage qui clignote dans les notices Peugeot 208, Renault Clio 5 et Dacia Sandero 3 (versions diesel), à la page près ; Seat Ibiza p. 289 est déjà relevée (travaux/etape-5/notices/seat-ibiza.txt).
+  - Consigne du témoin de préchauffage qui clignote dans les notices Peugeot 208, Renault Clio 5 et Dacia Sandero 3 (versions diesel), à la page près ; Seat Ibiza p. 289 est déjà relevée (claude/notices-etape-5/seat-ibiza.txt, documents du projet Claude).
 - **Hors périmètre, à ne pas traiter** :
   - Modèles cités (« voyant prechauffage clio 2 », « trafic 2 ») : pas de page par modèle.
