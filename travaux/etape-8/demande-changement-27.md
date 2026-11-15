@@ -1,7 +1,8 @@
 # Demande de changement n° 27 : la CI tourne sur le PC de Houssem (exécuteur auto-hébergé, Ubuntu 26.04 sous WSL)
 
-**Statut : proposée le 15/11/2026 (version 2, après la revue indépendante), à la suite du choix de Houssem (0 h 30 : « On
-part avec l'option, la quatrième option » ; peu après, pour la machine : « Ce PC, j'ai le droit »).** Piste technique
+**Statut : acceptée par Houssem le 15/11/2026 (vers 1 h 15 : « J'accepte + go »), avec le go de fusion de sa pull
+request quand la CI est verte. Proposée le 15/11 (version 2, après la revue indépendante), à la suite du choix de Houssem
+(0 h 30 : « On part avec l'option, la quatrième option » ; peu après, pour la machine : « Ce PC, j'ai le droit »).** Piste technique
 (03, règle 12, exception 1), suite de la demande n° 26 (même fichier) : sa pull request contient aussi les commits de la
 n° 26, acceptée le 15/11 ; la PR #51 n'est donc pas fusionnée à part (ses commits entrent par celle-ci ; GitHub la marque
 fusionnée, sinon elle est fermée).
