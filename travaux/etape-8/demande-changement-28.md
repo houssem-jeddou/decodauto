@@ -1,14 +1,17 @@
 # Demande de changement n° 28 : fermer l'étape 8 sans le lot 4b (codes P0380 et P1351), reporté faute de source admise
 
-**Statut : proposée le 15/11/2026 (nuit), version 2 après la revue indépendante, à faire accepter par Houssem.**
+**Statut : proposée le 15/11/2026 (nuit), version 3 après deux revues indépendantes, à faire accepter par Houssem.**
 Étape 8 (vague A).
 
 - **Éléments concernés** :
   - `docs/03` : tableau des étapes, ligne 8 (livrable « 5 codes OBD » ; porte « l'étape se ferme quand tous les lots ont
     passé ce contrôle ») ; règle 2 (« puis une dernière fois pour l'ensemble de la vague A avant l'étape 10 ») ;
-    règle 12 (liste fermée « avec quatre exceptions ») ;
-  - `CLAUDE.md` (méthode, point 4 : « avec quatre exceptions ») ;
-  - instructions du projet Claude (règle anti-régression 2 : liste des exceptions), texte à coller par Houssem ;
+    règle 12 (liste fermée « avec quatre exceptions ») ; « Déroulé de chaque session », point 2 (« sauf correction
+    urgente (règle 13) et préparation anticipée (règle 12) ») ;
+  - `CLAUDE.md` : méthode, point 4 (« avec quatre exceptions ») et « Porte de sortie par étape » (« l'étape se ferme
+    quand tous les lots sont passés ») ;
+  - instructions du projet Claude : règle anti-régression 2, puce « Pour l'étape 8 » et liste des exceptions, texte à
+    coller par Houssem ;
   - journal.
   Le plan du site ne change pas : les pages `code-p0380` et `code-p1351` restent en vague A, avec leurs briefs et leurs
   consignes.
@@ -27,7 +30,8 @@
      qui s'allume avec lui ;
   5. **point de revue** : à la porte de l'étape 11 (fin de la vague C), si l'une des deux pages n'est toujours pas
      rédigeable, Houssem décide de garder l'exception ou de retirer la page du périmètre (demande de changement, `docs/02`
-     étant figé).
+     étant figé). Le lot 4b ne retarde ni l'étape 13 ni la demande AdSense (`docs/03`, lignes 12 et 13 : « quand le site
+     est complet ») : si l'exception est gardée, le site compte comme complet sans ces deux pages.
 - **Raison (données)** (relevé : `travaux/etape-8/textes/codes-p0380-p1351-releve.md`, 14 et 15/11) :
   - P1351 (19 276 recherches par mois au plus, docs/05) : le sens du code chez Peugeot et Citroën n'a été trouvé que sur
     des forums, un blog commercial et un agrégateur, tous exclus par la charte §2.2 ;
@@ -39,7 +43,8 @@
     « dtc p0380 renault » à 3 160 chacune) ;
   - **la règle de la ligne de l'encadré** : la ligne d'une page code est celle du voyant qui s'allume avec le code,
     attribuée seulement d'après un document qui le cite (consigne des briefs validée par Houssem le 03/11, revue de 6.8 ;
-    charte §2.2 : le verdict vient de la base voyants par cette ligne ; contrôle R2-CODE-SANS-VOYANT) ; elle a été
+    charte §2.2 : le verdict vient de la base voyants par cette ligne ; le contrôle R2-CODE-SANS-VOYANT exige seulement
+    qu'un voyant soit déclaré, l'attribution d'après un document relevant de la consigne) ; elle a été
     appliquée ainsi aux trois pages codes validées (P0087, P0420, P0299 : voyant moteur cité avec le code par les
     bulletins ou les fiches qu'elles citent). Trois pistes plus anciennes ne suffisent pas : `travaux/etape-5/pages-sources.json` (porte 5) prévoyait
     « verdict tiré des lignes voyant moteur » sans document ; la notice Seat Ibiza (p. 289), que le brief renvoyait au
@@ -64,18 +69,25 @@
     seulement vers les pages construites, `src/lib/composants.ts`) ;
   - risque : deux pages de la vague A, au plus 33 180 recherches par mois, restent sans page tant qu'aucune source
     admise n'est trouvée ; c'est déjà le cas aujourd'hui, et la règle « pas de page sans source » ne change pas.
-- **Ce que fait Houssem** : accepter ou non ; s'il accepte, coller dans les instructions du projet le texte ci-dessous.
+- **Ce que fait Houssem** : accepter ou non ; s'il accepte, coller dans les instructions du projet les textes
+  ci-dessous.
   Après son accord, Claude met à jour `docs/03` (version suivante : ligne 8, règles 2 et 12), `CLAUDE.md` et le journal,
   dans le projet puis dans la copie `docs/` (pull request).
 - **Contrôles à relancer** : aucun contrôle automatique ne change. La porte complète de l'étape 8 est vérifiée sur les
   20 pages, critère par critère avec preuve (dossier `travaux/etape-8/porte-8.md`), après la fusion des lots en attente
   (PR #49, #50 et #53).
 
-**Texte à coller dans les instructions du projet** (règle anti-régression 2, après la quatrième exception de la
-demande n° 21) : « Cinquième exception (demande de changement n° 28) : le lot 4b de la vague A (codes P0380 et P1351)
-reste ouvert après la fermeture de l'étape 8. Quand des sources admises sont trouvées, ses pages passent la porte de lot
-de l'étape 8, la recette de l'étape 9 et les vérifications après déploiement, pendant les étapes suivantes. Cette
-recherche passe après l'étape en cours et la préparation anticipée. Point de revue à la porte de l'étape 11. »
+**Textes à coller dans les instructions du projet** (règle anti-régression 2) :
+1. si ce n'est pas encore fait, la quatrième exception de la demande n° 21 (texte dans
+   `travaux/etape-8/demande-changement-21.md`, « Texte proposé pour les instructions du projet Claude »), après la
+   troisième exception ;
+2. à la fin de la puce « Pour l'étape 8 » : « Sauf le lot 4b (codes P0380 et P1351, demande de changement n° 28) :
+   l'étape se ferme quand la porte complète est vérifiée sur les 20 autres pages. » ;
+3. après la quatrième exception : « Cinquième exception (demande de changement n° 28) : le lot 4b de la vague A (codes
+   P0380 et P1351) reste ouvert après la fermeture de l'étape 8. Le travail sur ce lot (sources, rédaction) passe après
+   l'étape en cours et la préparation anticipée ; il reprend quand un document admis cite le voyant qui s'allume avec le
+   code (pour P1351 : et son sens chez Peugeot ou Citroën). Ses pages passent alors la porte de lot de l'étape 8, la
+   recette de l'étape 9 et les vérifications après déploiement. Point de revue à la porte de l'étape 11. »
 
 **Ligne de validation proposée** : « J'accepte la demande n° 28 : l'étape 8 se ferme sans le lot 4b (P0380, P1351),
 qui reste ouvert (cinquième exception à la règle 12) et passera la porte de lot dès que des sources admises sont
