@@ -6,7 +6,7 @@ import { LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, so
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
-import { REPONSES_MIN_ARBRE, modeleFichePanne, modeleFicheTutoriel, type EntreeDuJournal, type LigneDeFiche } from './fiche-panne.ts';
+import { MOTS_VERDICT_ARBRE, REPONSES_MIN_ARBRE, modeleFichePanne, modeleFicheTutoriel, type EntreeDuJournal, type LigneDeFiche } from './fiche-panne.ts';
 import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_INDEX_OUTIL, TITRE_OUTIL, ancreLigneOutil, idFiltre, libelleDetail, modeleOutilVoyants, outilVoyants, type ModeleOutil } from './outil-voyants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
@@ -855,13 +855,13 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         code: { fiche: modeleFicheCode(page, ctx.voyants, ctx.sources), parMarque: modeleParMarque(page), elementUnique: page.element_unique === 'tableau' },
       }),
       ...('texte_reference' in page && { texte: { fiche: modeleFicheTexte(page, ctx.sources) } }),
-      ...((typeEditorial === 'panne' || typeEditorial === 'dossier') && {
-        panneDossier: {
-          ...('contexte' in page && { fichePanne: modeleFichePanne(page) }),
-          ...(page.tutoriel !== undefined && { ficheTutoriel: modeleFicheTutoriel(page.tutoriel) }),
-          ...('journal_modifications' in page && { historique: page.journal_modifications }),
-        },
-      }),
+      // Étape 10 : fiche du symptôme sur une page panne, fiche du tutoriel sur toute page qui en déclare un (sa consigne
+      // « quand ne pas le faire soi-même » ne manque jamais), historique sur une page dossier ; absents ailleurs.
+      fiches: {
+        ...('contexte' in page && { fichePanne: modeleFichePanne(page) }),
+        ...(page.tutoriel !== undefined && { ficheTutoriel: modeleFicheTutoriel(page.tutoriel) }),
+        ...('journal_modifications' in page && { historique: page.journal_modifications }),
+      },
     };
     // Page outil voyants (livrable 8.1) : l'outil généré depuis la base, et les sources de toutes ses lignes dans « Sources ».
     if ('outil' in page && page.outil === true) {
@@ -937,6 +937,12 @@ export function controlerDates(page: PageEditoriale, type: TypePage, aujourdhui:
         constats.push(erreur('DATES-ORDRE', `journal_modifications[${i}] (${jourIso(entree.date)}) hors de la période de la page, de date_publication (${jourIso(page.date_publication)}) à date_modification (${jourIso(page.date_modification)})`, fichier));
       }
     });
+    // Historique du dossier (étape 10) : sa dernière entrée est la dernière modification de la page, pour que « Mis à jour
+    // le » et l'historique concordent (règle 14 : date_modification ne bouge que pour une vraie modification).
+    const derniere = Math.max(...page.journal_modifications.map((e) => e.date.getTime()));
+    if (derniere !== page.date_modification.getTime()) {
+      constats.push(erreur('DATES-HISTORIQUE', `la dernière entrée de journal_modifications (${jourIso(new Date(derniere))}) n'est pas datée de date_modification (${jourIso(page.date_modification)}) : « Mis à jour le » et l'historique du dossier doivent concorder`, fichier));
+    }
   }
   const limite = limiteProchaineRevue(type, page.date_revue, 'sujet' in page ? page.sujet : undefined);
   if (limite !== undefined && page.prochaine_revue.getTime() > limite.getTime()) {
@@ -983,10 +989,10 @@ export interface AttendusPage {
   /** Page outil voyants (livrable 8.1, outil-voyants.ts) : l'outil attendu, généré depuis la base. */
   outil?: ModeleOutil | undefined;
   /**
-   * Pages panne et dossier (étape 10, fiche-panne.ts) : fiche du symptôme (page panne), fiche du tutoriel (page au
-   * format tutoriel) et historique du dossier (page dossier) attendus ; absents : ces blocs ne doivent pas être affichés.
+   * Fiches et historique (étape 10, fiche-panne.ts) : fiche du symptôme (page panne), fiche du tutoriel (toute page qui
+   * déclare un tutoriel) et historique du dossier (page dossier) attendus ; absents : ces blocs ne doivent pas être affichés.
    */
-  panneDossier?: { fichePanne?: readonly LigneDeFiche[]; ficheTutoriel?: readonly LigneDeFiche[]; historique?: readonly EntreeDuJournal[] } | undefined;
+  fiches?: { fichePanne?: readonly LigneDeFiche[]; ficheTutoriel?: readonly LigneDeFiche[]; historique?: readonly EntreeDuJournal[] } | undefined;
 }
 
 /** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
@@ -1105,6 +1111,23 @@ export function controlerHtml(
     if (questions.length === 0 || incompletes.length > 0) {
       constats.push(erreur('R7-ARBRE-QUESTIONS', `l'arbre de décision est une liste numérotée de questions, chacune suivie d'au moins ${REPONSES_MIN_ARBRE} réponses (sous-liste) ; ${questions.length === 0 ? 'aucune question' : `${incompletes.length} question(s) avec moins de ${REPONSES_MIN_ARBRE} réponses`}`, fichier));
     }
+    // Une réponse qui dit de rouler ou de s'arrêter redit le verdict d'une ligne de l'encadré, au libellé exact de la
+    // grille (« {{verdict:…}} » du texte rédigé, charte §2.1 et §2.3) : jamais un verdict écrit à la main, ni un verdict
+    // qui n'est pas dans l'encadré.
+    const libelles = Object.values(GRILLE_VERDICTS).map((v) => v.libelle);
+    const deLEncadre = new Set(lignes.map((l) => GRILLE_VERDICTS[l.verdict].libelle));
+    const reponses = questions.toArray().flatMap((q) => $(q).children('ul, ol').first().children('li').toArray());
+    for (const reponse of reponses) {
+      const texte = normaliserTexte($(reponse).text());
+      if (!MOTS_VERDICT_ARBRE.test(texte)) continue;
+      const cites = libelles.filter((l) => texte.includes(normaliserTexte(l)));
+      const extrait = $(reponse).text().replace(/\s+/g, ' ').trim().slice(0, 60);
+      if (cites.length === 0) {
+        constats.push(erreur('R7-ARBRE-VERDICT', `réponse de l'arbre qui dit de rouler ou de s'arrêter sans redire le verdict d'une ligne de l'encadré (« {{verdict:…}} ») : « ${extrait} »`, fichier));
+      } else if (cites.some((l) => !deLEncadre.has(l))) {
+        constats.push(erreur('R7-ARBRE-VERDICT', `réponse de l'arbre qui cite un verdict absent de l'encadré de décision (le texte ne contredit jamais l'encadré) : « ${extrait} »`, fichier));
+      }
+    }
   }
 
   // Tutoriel : les étapes s'écrivent dans le texte, en liste numérotée portant le marqueur data-tutoriel-etapes
@@ -1119,7 +1142,7 @@ export function controlerHtml(
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
   if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
   if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil));
-  if (attendus?.panneDossier !== undefined) constats.push(...controlerFichesPanneDossier(html, fichier, attendus.panneDossier));
+  if (attendus?.fiches !== undefined) constats.push(...controlerFichesPanneDossier(html, fichier, attendus.fiches));
   return constats;
 }
 
@@ -1368,13 +1391,14 @@ export function controlerFicheTexte(html: string, fichier: string, attendu: { fi
 }
 
 /**
- * Pages panne et dossier (étape 10, fiche-panne.ts), comme les construit le modèle :
+ * Fiches et historique (étape 10, fiche-panne.ts), comme les construisent les modèles :
  *  - FICHE-PANNE-* : une page panne affiche une seule fiche du symptôme (data-fiche-panne), avec dans l'ordre chaque
- *    ligne du modèle (symptôme, quand, carburant) au texte exact ; une page dossier n'en a pas ;
- *  - FICHE-TUTORIEL-* : une page au format tutoriel affiche une seule fiche du tutoriel (data-fiche-tutoriel : outils,
+ *    ligne du modèle (symptôme s'il est saisi, quand, moteurs concernés) au texte exact ; les autres pages n'en ont pas ;
+ *  - FICHE-TUTORIEL-* : toute page au format tutoriel affiche une seule fiche du tutoriel (data-fiche-tutoriel : outils,
  *    durée, difficulté, quand ne pas le faire soi-même) ; une page qui n'est pas un tutoriel n'en a pas ;
  *  - HISTORIQUE-* : une page dossier affiche un seul historique (data-historique-dossier), une entrée par ligne du
- *    journal des modifications, de la plus récente à la plus ancienne, avec sa date (time datetime) et son résumé.
+ *    journal des modifications, de la plus récente à la plus ancienne, avec sa date (time datetime) et son résumé ; les
+ *    autres pages n'en ont pas.
  * Texte comparé normalisé (normaliserTexte).
  */
 export function controlerFichesPanneDossier(
@@ -1386,7 +1410,7 @@ export function controlerFichesPanneDossier(
   const $ = cheerio.load(html);
   const lignesVoulues = (lignes: readonly LigneDeFiche[]): string => lignes.map((l) => `${normaliserTexte(l.intitule)} : ${normaliserTexte(l.valeur)}`).join('\n');
   const fiches: Array<{ attribut: string; code: string; nom: string; voulue: readonly LigneDeFiche[] | undefined; sans: string }> = [
-    { attribut: 'data-fiche-panne', code: 'FICHE-PANNE', nom: 'la fiche du symptôme', voulue: attendu.fichePanne, sans: 'une page dossier' },
+    { attribut: 'data-fiche-panne', code: 'FICHE-PANNE', nom: 'la fiche du symptôme', voulue: attendu.fichePanne, sans: 'une page qui n\'est pas une page panne' },
     { attribut: 'data-fiche-tutoriel', code: 'FICHE-TUTORIEL', nom: 'la fiche du tutoriel', voulue: attendu.ficheTutoriel, sans: 'une page qui n\'est pas un tutoriel' },
   ];
   for (const { attribut, code, nom, voulue, sans } of fiches) {

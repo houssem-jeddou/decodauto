@@ -12,7 +12,7 @@ import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { dateDesDonnees } from './date-des-donnees.ts';
 import { MODELES, REPONSES_MIN_ARBRE, corpsRedige, modeleDeLaPage, nomCompletNotice, pageCodeDefaut, pageDossier, pageOutilVoyants, pagePanne, pagePneus, pageVoyant, texteRedige } from '../src/lib/modeles.ts';
-import { TITRE_FICHE_PANNE, TITRE_FICHE_TUTORIEL, TITRE_HISTORIQUE } from '../src/lib/fiche-panne.ts';
+import { TITRE_FICHE_PANNE, TITRE_FICHE_SITUATION, TITRE_FICHE_TUTORIEL, TITRE_HISTORIQUE } from '../src/lib/fiche-panne.ts';
 import { TITRE_FICHE_TEXTE, modeleFicheTexte } from '../src/lib/fiche-texte.ts';
 import { CONSIGNE_SANS_VOYANT, LIBELLE_CARBURANT, LIBELLE_PORTEE, modeleFicheCode, modeleParMarque } from '../src/lib/fiche-code.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
@@ -270,10 +270,10 @@ const ARBRE = `<h2>Le bon geste</h2><p>{{arbre}}</p>\n<ol>\n${question('Les voya
 const TUTORIEL = { outils: ['câbles de démarrage'], duree: '15 minutes', difficulte: 'facile', quand_ne_pas_le_faire_soi_meme: 'Si la batterie est gelée.' };
 
 describe('modèles panne et dossier (étape 10, partie technique)', () => {
-  test('page panne : encadré, signature, transparence, fiche du symptôme, texte rédigé avec l’arbre de décision (élément unique), causes, sources, dans cet ordre', async () => {
+  test('page panne (charte §4 : symptômes, causes, marche à suivre) : encadré, signature, transparence, fiche du symptôme, causes, texte rédigé avec l’arbre de décision (élément unique), sources, dans cet ordre', async () => {
     const { page, site } = await exemplePanne();
     const html = pagePanne(page, site, ARBRE);
-    const ordre = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-fiche-panne', 'data-corps', 'data-element-unique="arbre-de-decision"', 'data-causes', 'data-sources'].map((m) => html.indexOf(m));
+    const ordre = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-fiche-panne', 'data-causes', 'data-corps', 'data-element-unique="arbre-de-decision"', 'data-sources'].map((m) => html.indexOf(m));
     assert.ok(ordre.every((i) => i >= 0), JSON.stringify(ordre));
     assert.deepEqual([...ordre].sort((a, b) => a - b), ordre);
     assert.equal(html.match(/data-element-unique=/g)?.length, 1);
@@ -294,19 +294,30 @@ describe('modèles panne et dossier (étape 10, partie technique)', () => {
       [() => pagePanne(page, site, '<p>{{arbre}}</p><p>Texte.</p>'), /précéder immédiatement une liste numérotée/],
       [() => pagePanne(page, site, uneReponse), new RegExp(`question 1 a 1 réponse\\(s\\) ; il en faut au moins ${REPONSES_MIN_ARBRE}`)],
       [() => pagePanne(page, site, `<p>{{arbre}}</p><ol><li>Q ?</li></ol>`), /question 1 a 0 réponse/],
+      // Deux listes de réponses sous une question : seule la première compte, comme pour le contrôle R7-ARBRE-QUESTIONS.
+      [() => pagePanne(page, site, `<p>{{arbre}}</p><ol><li>Q ?<ul><li>A</li></ul><p>ou</p><ul><li>B</li></ul></li><li>Q2 ?<ul><li>A</li><li>B</li></ul></li></ol>`), /question 1 a 1 réponse/],
     ];
     for (const [appel, motif] of refus) assert.throws(appel, motif);
   });
 
-  test('page au format tutoriel : fiche du tutoriel, étapes marquées « {{etapes}} » (data-tutoriel-etapes) ; ailleurs, le marqueur est refusé', async () => {
-    const { page, site } = await exemplePanne({ tutoriel: TUTORIEL, element_unique: 'photo', symptome: undefined });
-    const html = pagePanne(page, site, '<h2>Les étapes</h2><p>{{etapes}}</p>\n<ol>\n<li>Garer la voiture.</li>\n<li>Brancher les câbles.</li>\n</ol>');
+  test('page au format tutoriel : fiche « La situation en bref » sans symptôme, fiche du tutoriel, étapes marquées « {{etapes}} » (data-tutoriel-etapes), tableau élément unique ; ailleurs, le marqueur est refusé', async () => {
+    // Élément unique d'un tutoriel : un tableau ou un arbre ; la photo n'a pas encore de modèle (décision « photos
+    // réelles » ouverte au journal).
+    const { page, site } = await exemplePanne({ tutoriel: TUTORIEL, element_unique: 'tableau', symptome: undefined });
+    const corps = '<h2>Tension de la batterie</h2><p>{{tableau}}</p><table><thead><tr><th>Tension</th></tr></thead><tbody><tr><td>12,6 V</td></tr></tbody></table><h2>Les étapes</h2><p>{{etapes}}</p>\n<ol>\n<li>Garer la voiture.</li>\n<li>Brancher les câbles.</li>\n</ol>';
+    const html = pagePanne(page, site, corps);
     assert.match(html, /<ol class="etapes" data-tutoriel-etapes>\n<li>Garer la voiture\.<\/li>/);
     assert.ok(html.includes(TITRE_FICHE_TUTORIEL) && html.indexOf('data-fiche-panne') < html.indexOf('data-fiche-tutoriel'));
-    assert.ok(!html.includes('<dt>Symptôme</dt>'));
+    assert.ok(html.includes(TITRE_FICHE_SITUATION) && !html.includes(TITRE_FICHE_PANNE) && !html.includes('<dt>Symptôme</dt>'));
+    assert.equal(html.match(/data-element-unique=/g)?.length, 1);
+    assert.match(html, /data-element-unique="tableau" role="region" aria-label="Tension de la batterie"/);
     const sansTutoriel = await exemplePanne();
     assert.throws(() => pagePanne(sansTutoriel.page, sansTutoriel.site, `${ARBRE}<p>{{etapes}}</p><ol><li>A</li></ol>`), /n'est pas un tutoriel/);
     assert.throws(() => pagePanne(page, site, '<p>{{etapes}}</p><p>Texte.</p>'), /précéder immédiatement une liste numérotée/);
+    // Sur un type dont le modèle n'affiche pas la fiche du tutoriel (voyant), « {{etapes}} » est refusé : la consigne
+    // « quand ne pas le faire soi-même » ne disparaît jamais en silence.
+    const voyant = await exemple();
+    assert.throws(() => corpsRedige('<p>{{etapes}}</p><ol><li>A</li></ol>', { ...voyant.page, tutoriel: TUTORIEL } as unknown as PageEditoriale, voyant.site), /n'affiche pas encore la fiche « Le tutoriel en bref »/);
   });
 
   test('page dossier : encadré, signature, transparence, texte rédigé avec le tableau (élément unique), historique du plus récent au plus ancien, sources, dans cet ordre', async () => {

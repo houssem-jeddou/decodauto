@@ -7,8 +7,10 @@ import {
   IDENTIFIANT_FICHE_PANNE,
   IDENTIFIANT_FICHE_TUTORIEL,
   IDENTIFIANT_HISTORIQUE,
+  MOTS_VERDICT_ARBRE,
   REPONSES_MIN_ARBRE,
   TITRE_FICHE_PANNE,
+  TITRE_FICHE_SITUATION,
   TITRE_FICHE_TUTORIEL,
   TITRE_HISTORIQUE,
   fichePanneHtml,
@@ -18,6 +20,7 @@ import {
   modeleFicheTutoriel,
 } from '../src/lib/fiche-panne.ts';
 import { INSECABLE } from '../src/lib/html.ts';
+import { normaliserTexte } from '../src/lib/empreinte.ts';
 
 const jour = (iso: string): Date => new Date(`${iso}T00:00:00Z`);
 
@@ -26,20 +29,23 @@ describe('fiche du symptôme et fiche du tutoriel (étape 10)', () => {
     assert.deepEqual(modeleFichePanne({ symptome: 'Le moteur ne démarre pas.', contexte: ['au démarrage', 'par grand froid'], carburant: 'diesel' }), [
       { intitule: 'Symptôme', valeur: 'Le moteur ne démarre pas.' },
       { intitule: 'Quand', valeur: 'Au démarrage, par grand froid' },
-      { intitule: 'Carburant', valeur: 'Diesel' },
+      { intitule: 'Moteurs concernés', valeur: 'Diesel' },
     ]);
   });
 
-  test('un tutoriel est dispensé du symptôme (docs/08 §2) : la fiche commence alors par « Quand »', () => {
-    assert.deepEqual(modeleFichePanne({ contexte: ['batterie déchargée'], carburant: 'essence et diesel' }), [
+  test('un tutoriel est dispensé du symptôme (docs/08 §2) : la fiche commence alors par « Quand » et s’intitule « La situation en bref »', () => {
+    const lignes = modeleFichePanne({ contexte: ['batterie déchargée'], carburant: 'essence et diesel' });
+    assert.deepEqual(lignes, [
       { intitule: 'Quand', valeur: 'Batterie déchargée' },
-      { intitule: 'Carburant', valeur: 'Essence et diesel' },
+      { intitule: 'Moteurs concernés', valeur: 'Essence et diesel' },
     ]);
+    assert.ok(fichePanneHtml(lignes).includes(`>${TITRE_FICHE_SITUATION}</h2>`));
+    assert.ok(fichePanneHtml(modeleFichePanne({ symptome: 'Démarrage impossible.', contexte: ['à froid'], carburant: 'diesel' })).includes(`>${TITRE_FICHE_PANNE}</h2>`));
   });
 
   test('fiche du tutoriel : outils, durée, difficulté (libellé), quand ne pas le faire soi-même', () => {
     assert.deepEqual(modeleFicheTutoriel({ outils: ['câbles', 'gants'], duree: '15 minutes', difficulte: 'moyenne', quand_ne_pas_le_faire_soi_meme: 'Batterie gelée.' }), [
-      { intitule: 'Outils', valeur: 'câbles, gants' },
+      { intitule: 'Outils', valeur: 'Câbles, gants' },
       { intitule: 'Durée', valeur: '15 minutes' },
       { intitule: 'Difficulté', valeur: 'Moyenne' },
       { intitule: 'Quand ne pas le faire soi-même', valeur: 'Batterie gelée.' },
@@ -55,8 +61,11 @@ describe('fiche du symptôme et fiche du tutoriel (étape 10)', () => {
     assert.equal(tutoriel.match(/data-fiche-ligne/g)?.length, 4);
   });
 
-  test("l'arbre de décision exige au moins deux réponses par question", () => {
+  test("arbre de décision : au moins deux réponses par question ; mots qui disent de rouler ou de s'arrêter (R7-ARBRE-VERDICT)", () => {
     assert.equal(REPONSES_MIN_ARBRE, 2);
+    const dit = (texte: string): boolean => MOTS_VERDICT_ARBRE.test(normaliserTexte(texte));
+    for (const texte of ['Non : arrêtez-vous et appelez l’assistance.', 'Vous pouvez rouler jusqu’au garage.', 'Ne poursuivez pas votre trajet.', 'Ne repartez pas.', 'Reprenez la route doucement.']) assert.ok(dit(texte), texte);
+    for (const texte of ['Oui : la batterie est en cause, passez à la question 3.', 'Le moteur s’arrête au ralenti ?', 'Non : faites contrôler le démarreur.']) assert.ok(!dit(texte), texte);
   });
 });
 

@@ -831,10 +831,11 @@
     "nom": "dates-journal-hors-periode",
     "type": "dossier",
     "erreurs": [
-      "DATES-ORDRE"
+      "DATES-ORDRE",
+      "DATES-HISTORIQUE"
     ],
     "alertes": [],
-    "explication": "Entrée du journal d'un dossier hors de la période de la page."
+    "explication": "Entrée du journal d'un dossier hors de la période de la page (et qui n'est donc pas la dernière modification)."
   },
   {
     "nom": "socle-sans-description",
@@ -1014,7 +1015,7 @@
       "FICHE-PANNE-ABSENTE"
     ],
     "alertes": [],
-    "explication": "Page panne construite sans la fiche « Le symptôme en bref » (symptôme, quand, carburant)."
+    "explication": "Page panne construite sans la fiche « Le symptôme en bref » (symptôme, quand, moteurs concernés)."
   },
   {
     "nom": "panne-fiche-incomplete",
@@ -1062,12 +1063,98 @@
     "explication": "Page dossier construite sans l'historique du dossier (journal des modifications)."
   },
   {
+    "nom": "valide-dossier-historique",
+    "type": "dossier",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Dossier valide à deux entrées : l'historique les affiche de la plus récente à la plus ancienne ; la plus récente est la date de modification."
+  },
+  {
     "nom": "dossier-historique-incomplet",
     "type": "dossier",
     "erreurs": [
       "HISTORIQUE-INCOMPLET"
     ],
     "alertes": [],
-    "explication": "Une entrée du journal des modifications manque à l'historique construit."
+    "explication": "L'entrée la plus récente du journal des modifications manque à l'historique construit."
+  },
+  {
+    "nom": "dossier-historique-desordre",
+    "type": "dossier",
+    "erreurs": [
+      "HISTORIQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "L'historique construit affiche la plus ancienne entrée d'abord."
+  },
+  {
+    "nom": "dossier-fiche-panne-en-trop",
+    "type": "dossier",
+    "erreurs": [
+      "FICHE-PANNE-INCOMPLETE"
+    ],
+    "alertes": [],
+    "explication": "Fiche du symptôme affichée sur une page qui n'est pas une page panne."
+  },
+  {
+    "nom": "panne-historique-en-trop",
+    "type": "panne",
+    "erreurs": [
+      "HISTORIQUE-INCOMPLET"
+    ],
+    "alertes": [],
+    "explication": "Historique du dossier affiché sur une page panne."
+  },
+  {
+    "nom": "fluide-tutoriel-sans-fiche",
+    "type": "fluide",
+    "erreurs": [
+      "FICHE-TUTORIEL-ABSENTE"
+    ],
+    "alertes": [],
+    "explication": "Tutoriel d'une page fluide construit sans la fiche « Le tutoriel en bref » : exigée sur toute page qui déclare un tutoriel."
+  },
+  {
+    "nom": "dates-historique-derniere",
+    "type": "dossier",
+    "erreurs": [
+      "DATES-HISTORIQUE"
+    ],
+    "alertes": [],
+    "explication": "La dernière entrée du journal n'est pas datée de la dernière modification : « Mis à jour le » et l'historique ne concordent pas."
+  },
+  {
+    "nom": "r7-arbre-sans-liste",
+    "type": "panne",
+    "erreurs": [
+      "R7-ARBRE-QUESTIONS"
+    ],
+    "alertes": [],
+    "explication": "Arbre de décision sans liste numérotée de questions."
+  },
+  {
+    "nom": "valide-panne-arbre-verdict",
+    "type": "panne",
+    "erreurs": [],
+    "alertes": [],
+    "explication": "Une réponse de l'arbre qui dit de s'arrêter redit le verdict d'une ligne de l'encadré, au libellé de la grille."
+  },
+  {
+    "nom": "r7-arbre-verdict-ecrit",
+    "type": "panne",
+    "erreurs": [
+      "R7-ARBRE-VERDICT"
+    ],
+    "alertes": [],
+    "explication": "Une réponse de l'arbre dit de s'arrêter sans redire le verdict de l'encadré (verdict écrit à la main)."
+  },
+  {
+    "nom": "r7-arbre-verdict-hors-encadre",
+    "type": "panne",
+    "erreurs": [
+      "R7-ARBRE-VERDICT"
+    ],
+    "alertes": [],
+    "explication": "Une réponse de l'arbre cite un verdict qu'aucune ligne de l'encadré ne donne : le texte contredirait l'encadré."
   }
 ]

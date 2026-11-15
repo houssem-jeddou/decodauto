@@ -36,10 +36,11 @@
 // Ordre d'une page panne (charte §4, point 7 : symptômes, causes, marche à suivre ; étape 10, partie technique du
 // modèle, demande de changement n° 21) :
 //   fil d'Ariane · H1 · encadré de décision · signature · ligne de transparence · fiche « Le symptôme en bref »
-//   (symptôme, quand, carburant) · fiche « Le tutoriel en bref » si la page est un tutoriel · texte rédigé (arbre de
-//   décision, élément unique marqué « {{arbre}} », ou étapes du tutoriel marquées « {{etapes}} » ; questions des
-//   lecteurs) · causes et coût · tableau des notices si un voyant de la base est rattaché à la page · pages liées · sources
-// L'arbre vient avant les causes : le lecteur arrêté au bord de la route cherche quoi faire, selon ce qu'il voit.
+//   (symptôme, quand, moteurs concernés ; « La situation en bref » sur un tutoriel sans symptôme) · fiche « Le tutoriel
+//   en bref » si la page est un tutoriel · causes et coût · texte rédigé (marche à suivre : arbre de décision, élément
+//   unique marqué « {{arbre}} », ou étapes du tutoriel marquées « {{etapes}} » ; questions des lecteurs) · tableau des
+//   notices si un voyant de la base est rattaché à la page · pages liées · sources
+// L'encadré donne déjà la décision ; l'arbre de décision, dans la marche à suivre, la détaille selon ce que voit le lecteur.
 //
 // Ordre d'une page dossier (étape 10) :
 //   fil d'Ariane · H1 · encadré de décision · signature · ligne de transparence · fiche « Le tutoriel en bref » si la
@@ -129,7 +130,7 @@ export function texteRedige(
   corpsHtml: string,
   page: Pick<PageEditoriale, 'id' | 'sources' | 'situations' | 'cout_probable' | 'element_unique' | 'tutoriel'>,
   site: Pick<DonneesSite, 'sources' | 'voyants' | 'couts'>,
-  options: { tableauDuTexte?: boolean; arbreDuTexte?: boolean } = {},
+  options: { tableauDuTexte?: boolean; arbreDuTexte?: boolean; etapesDuTexte?: boolean } = {},
 ): { html: string; citations: CitationDuTexte[] } {
   const html = corpsHtml.trim();
   if (html === '') return { html: '', citations: [] };
@@ -138,7 +139,7 @@ export function texteRedige(
     throw new Error(`page « ${page.id} », texte rédigé : ${message}`);
   };
   const avecArbre = arbreDuTexte(html, page, options.arbreDuTexte === true, echec);
-  const avecEtapes = etapesDuTexte(avecArbre, page.tutoriel !== undefined, echec);
+  const avecEtapes = etapesDuTexte(avecArbre, page.tutoriel !== undefined, options.etapesDuTexte === true, echec);
   const avecTableau = tableauDuTexte(avecEtapes, page, options.tableauDuTexte === true, echec);
   const avecReferences = avecTableau.replace(REFERENCE, (tout, genre: string, id: string, complement: string | undefined) => {
     if (genre === 'verdict') {
@@ -249,7 +250,8 @@ function elementsDeListe(liste: string): string[] {
  * page (data-element-unique="arbre-de-decision"), dans une région nommée par le titre qui la précède. Refusé si le
  * modèle ne le permet pas (pages panne seulement), si la page ne déclare pas un arbre comme élément unique, s'il y en a
  * plus d'un, s'il n'est pas suivi d'une liste numérotée, ou si une question a moins de REPONSES_MIN_ARBRE réponses
- * (liste à puces sous la question). Une page panne qui déclare l'arbre sans le marqueur échoue aussi : sans lui, l'arbre
+ * (première liste à puces sous la question). Une réponse qui dit de rouler ou de s'arrêter cite le verdict d'une ligne de
+ * l'encadré par « {{verdict:…}} » (contrôle R7-ARBRE-VERDICT de la page construite, charte §2.1 et §2.3). Une page panne qui déclare l'arbre sans le marqueur échoue aussi : sans lui, l'arbre
  * n'est pas repéré.
  */
 function arbreDuTexte(
@@ -276,8 +278,10 @@ function arbreDuTexte(
   const questions = elementsDeListe(liste);
   if (questions.length === 0) echec('« {{arbre}} » : l\'arbre n\'a aucune question');
   questions.forEach((question, i) => {
-    const sousListe = /<(ul|ol)\b[^>]*>[\s\S]*<\/\1>/.exec(question);
-    const reponses = sousListe !== null ? elementsDeListe(sousListe[0]).length : 0;
+    // Réponses : la première sous-liste de la question (une seule liste de réponses, comme le lit R7-ARBRE-QUESTIONS).
+    const debut = /<(ul|ol)\b[^>]*>/.exec(question);
+    const finSousListe = debut !== null ? finDeListe(question, debut.index, debut[1] as 'ul' | 'ol') : -1;
+    const reponses = debut !== null && finSousListe > 0 ? elementsDeListe(question.slice(debut.index, finSousListe)).length : 0;
     if (reponses < REPONSES_MIN_ARBRE) echec(`« {{arbre}} » : la question ${i + 1} a ${reponses} réponse(s) ; il en faut au moins ${REPONSES_MIN_ARBRE}, en liste à puces sous la question`);
   });
   // Nom de la région : le titre (H2 ou H3) qui précède l'arbre, sinon « Arbre de décision ».
@@ -287,12 +291,13 @@ function arbreDuTexte(
 
 /**
  * Marqueur « {{etapes}} » : la liste numérotée qui le suit reçoit data-tutoriel-etapes (étapes du tutoriel, contrôle
- * R7-TUTORIEL-ETAPES). Refusé sur une page sans tutoriel, s'il y en a plus d'un, ou s'il ne précède pas une liste
- * numérotée.
+ * R7-TUTORIEL-ETAPES). Refusé sur un type dont le modèle n'affiche pas encore la fiche « Le tutoriel en bref » (permis :
+ * panne et dossier), sur une page sans tutoriel, s'il y en a plus d'un, ou s'il ne précède pas une liste numérotée.
  */
-function etapesDuTexte(html: string, tutoriel: boolean, echec: (message: string) => never): string {
+function etapesDuTexte(html: string, tutoriel: boolean, permis: boolean, echec: (message: string) => never): string {
   const marqueurs = html.match(MARQUEUR_ETAPES) ?? [];
   if (marqueurs.length === 0) return html;
+  if (!permis) echec('« {{etapes}} » : le modèle de ce type de page n\'affiche pas encore la fiche « Le tutoriel en bref » (permis sur les pages panne et dossier)');
   if (!tutoriel) echec('« {{etapes}} » : la page n\'est pas un tutoriel (champ tutoriel absent)');
   if (marqueurs.length > 1) echec('« {{etapes}} » : une seule liste d\'étapes par page');
   const resultat = html.replace(/<p>\s*\{\{etapes\}\}\s*<\/p>\s*<ol\b([^>]*)>/, '<ol class="etapes" data-tutoriel-etapes$1>');
@@ -359,13 +364,13 @@ export const pageOutilVoyants: Modele = (page, site, corpsHtml) => {
 /** Page panne : voir l'ordre en tête de ce fichier. L'arbre de décision est dans le texte rédigé (« {{arbre}} »). */
 export const pagePanne: Modele = (page, site, corpsHtml) => {
   if (!('contexte' in page)) throw new Error(`page « ${page.id} » : le modèle panne s'applique à une page panne`);
-  const texte = texteRedige(corpsHtml, page, site, { tableauDuTexte: true, arbreDuTexte: true });
+  const texte = texteRedige(corpsHtml, page, site, { tableauDuTexte: true, arbreDuTexte: true, etapesDuTexte: true });
   return [
     hautDePage(page, site),
     fichePanneHtml(modeleFichePanne(page)),
     page.tutoriel !== undefined ? ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel)) : '',
-    texte.html,
     causesDeLaPage(page, site),
+    texte.html,
     tableauNoticesDeLaPage(page, site, { elementUnique: false }),
     basDePage(page, site, texte.citations),
   ].join('');
@@ -374,7 +379,7 @@ export const pagePanne: Modele = (page, site, corpsHtml) => {
 /** Page dossier : voir l'ordre en tête de ce fichier. L'historique vient du journal des modifications de la page. */
 export const pageDossier: Modele = (page, site, corpsHtml) => {
   if (!('journal_modifications' in page)) throw new Error(`page « ${page.id} » : le modèle dossier s'applique à une page dossier`);
-  const texte = texteRedige(corpsHtml, page, site, { tableauDuTexte: true });
+  const texte = texteRedige(corpsHtml, page, site, { tableauDuTexte: true, etapesDuTexte: true });
   return [
     hautDePage(page, site),
     page.tutoriel !== undefined ? ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel)) : '',

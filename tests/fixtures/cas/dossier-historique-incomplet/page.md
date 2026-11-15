@@ -36,8 +36,10 @@ situations:
         urgence: sous quelques semaines
 element_unique: tableau
 journal_modifications:
-  - date: 2026-10-20
+  - date: 2026-10-01
     resume: Création du dossier de test.
+  - date: 2026-10-20
+    resume: Rappel de test ajouté.
 validation: c002274fbff507a627ff4617447335bc648a3c540ed659d638704c4f7311857e
 ---
 
