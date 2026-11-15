@@ -171,8 +171,18 @@
       "tranche": "reparation"
     },
     {
+      "id": "circuit-de-freinage",
+      "libelle": "Circuit de freinage (canalisations, flexibles, étriers, maître-cylindre)",
+      "tranche": "reparation"
+    },
+    {
       "id": "bloc-abs",
       "libelle": "Bloc ABS (groupe hydraulique et calculateur)",
+      "tranche": "organe"
+    },
+    {
+      "id": "servofrein",
+      "libelle": "Servofrein (assistance de freinage)",
       "tranche": "organe"
     },
     {
@@ -211,6 +221,11 @@
       "tranche": "reparation"
     },
     {
+      "id": "tuyau-ou-joint-d-echappement",
+      "libelle": "Tuyau ou joint d'échappement",
+      "tranche": "reparation"
+    },
+    {
       "id": "vanne-egr",
       "libelle": "Vanne EGR",
       "tranche": "reparation"
@@ -218,6 +233,11 @@
     {
       "id": "boitier-de-prechauffage",
       "libelle": "Boîtier de préchauffage",
+      "tranche": "reparation"
+    },
+    {
+      "id": "commande-de-turbo",
+      "libelle": "Commande du turbo (actionneur, électrovanne, tringlerie, vanne de recirculation)",
       "tranche": "reparation"
     },
     {
