@@ -1,0 +1,111 @@
+{
+ "voyant-moteur.html|a": {
+  "lcp": 748,
+  "cls": 0,
+  "polices": [
+   "Titre A"
+  ],
+  "octets": {
+   "Document": 45804,
+   "Stylesheet": 32335,
+   "Font": 19085,
+   "Other": 521
+  }
+ },
+ "voyant-moteur.html|b": {
+  "lcp": 676,
+  "cls": 0,
+  "polices": [
+   "Titre B"
+  ],
+  "octets": {
+   "Document": 45804,
+   "Stylesheet": 32335,
+   "Font": 14141
+  }
+ },
+ "voyant-moteur.html|c": {
+  "lcp": 676,
+  "cls": 0,
+  "polices": [
+   "Titre C"
+  ],
+  "octets": {
+   "Document": 45804,
+   "Stylesheet": 32335,
+   "Font": 12785
+  }
+ },
+ "pression-des-pneus.html|a": {
+  "lcp": 652,
+  "cls": 0,
+  "polices": [
+   "Titre A"
+  ],
+  "octets": {
+   "Document": 30685,
+   "Stylesheet": 32335,
+   "Font": 19085
+  }
+ },
+ "pression-des-pneus.html|b": {
+  "lcp": 616,
+  "cls": 0,
+  "polices": [
+   "Titre B"
+  ],
+  "octets": {
+   "Document": 30685,
+   "Stylesheet": 32335,
+   "Font": 14141
+  }
+ },
+ "pression-des-pneus.html|c": {
+  "lcp": 624,
+  "cls": 0,
+  "polices": [
+   "Titre C"
+  ],
+  "octets": {
+   "Document": 30685,
+   "Stylesheet": 32335,
+   "Font": 12785
+  }
+ },
+ "accueil.html|a": {
+  "lcp": 592,
+  "cls": 0,
+  "polices": [
+   "Titre A"
+  ],
+  "octets": {
+   "Document": 19750,
+   "Stylesheet": 32335,
+   "Font": 19085
+  }
+ },
+ "accueil.html|b": {
+  "lcp": 612,
+  "cls": 0,
+  "polices": [
+   "Titre B"
+  ],
+  "octets": {
+   "Document": 19750,
+   "Stylesheet": 32335,
+   "Font": 14141
+  }
+ },
+ "accueil.html|c": {
+  "lcp": 568,
+  "cls": 0,
+  "polices": [
+   "Titre C"
+  ],
+  "octets": {
+   "Document": 19750,
+   "Stylesheet": 32335,
+   "Font": 12785
+  }
+ }
+}

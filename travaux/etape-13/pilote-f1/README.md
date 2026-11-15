@@ -1,10 +1,22 @@
-# Pilote F1 (demande de changement n° 30) : point de reprise du 15/11/2026, 21 h 20
+# Pilote F1 (demande de changement n° 30), version 2 du 15/11/2026 (23 h)
 
-Maquette statique, jamais déployée : nouveau format de lecture et trois pistes d'identité visuelle (A « Atelier », B « Tableau de bord », C « Route »), sur l'accueil et les pages voyant moteur, voyant AdBlue et pression des pneus. Textes repris de la production du 15/11 ; textes nouveaux à valider (lignes « Selon la marque » de 25 mots au plus, réponse directe de la pression des pneus, corps raccourci du voyant moteur, libellés de la grille de l'accueil).
+Maquette statique, jamais déployée : nouveau format de lecture et trois pistes d'identité visuelle sur quatre pages.
+- **Pistes** : A « Atelier », B « Tableau de bord », C « Route ».
+- **Pages** : accueil, voyant moteur, voyant AdBlue, pression des pneus.
+- **Textes** : repris de la production du 15/11 (`src/content`, `data/voyants.json`). Les textes nouveaux sont à valider aux lots F2 et F3 (liste dans `porte-f1.md`, §3).
 
+**Où regarder**
 - Canevas Design (artboards par piste) : https://claude.ai/artifact/9ybQRa2L4gEofat1pC5AEM
 - Maquette interactive (pages entières, choix de la piste) : https://claude.ai/artifact/Hei9kTWqABaVAV4svYjEuU
-- Régénérer : `python3 generer.py` (écrit `maquette/`, pictogrammes lus dans `src/pictogrammes`), polices sous-ensemblées depuis les polices libres du système (Inter, Poppins, Lora, licence OFL), `canvas.py` (artboards), `captures.py` et `mesures.py` (serveur local sur le port 8765).
-- Mesures de la maquette (375 × 812) : voyant moteur 12,8 écrans (20,1 en ligne), fin de l'action de la 1re situation à 565 px ; AdBlue 647 px ; pression des pneus : réponse directe entière à 646 px.
+- Porte du format (mesures, deux précisions proposées, revues) : `porte-f1.md`.
 
-Reste à faire : revue indépendante du pilote (pas encore lancée) ; choix de la piste par Houssem ; validation du format ; puis mise en œuvre dans les modèles (lots F2 et F3, en parallèle de la vague B).
+**Régénérer**
+- `python3 polices.py`. Polices de titre sous licence OFL, sans nom réservé, prises dans un dossier de polices libres de l'environnement de travail ; les fichiers obtenus sont dans `polices/`, avec leur licence.
+- `python3 generer.py`. Il écrit `maquette/` et lit les pictogrammes de `src/pictogrammes` et la base voyants.
+- `python3 canvas.py`, `python3 porte/verifier_porte.py`, `python3 porte/perf.py` et `python3 porte/captures.py`. Ces scripts demandent un serveur local sur le port 8765, à lancer dans `maquette/`.
+
+**Mesures** : à 375 × 667 visibles, avec la police chargée puis la police de secours (`porte/resultats-v2.json`).
+
+**Reste à faire**
+- Choix de la piste et validation du format par Houssem, dont les deux précisions de 2a et 2i.
+- Mise en œuvre dans les modèles (lot F1), puis lots F2 et F3, en parallèle de la vague B.

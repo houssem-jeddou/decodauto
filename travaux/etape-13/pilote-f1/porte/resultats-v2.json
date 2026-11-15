@@ -1,0 +1,3674 @@
+{
+ "voyant-moteur.html|a|375|police": {
+  "hauteur_page": 11179,
+  "ecrans": 16.8,
+  "mention_bas": 106,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 199,
+   "bottom": 1518,
+   "h": 1318
+  },
+  "encadre_ecrans": 1.98,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 532,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 383,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1832,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2002,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.5,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre A"
+  ]
+ },
+ "voyant-moteur.html|b|375|police": {
+  "hauteur_page": 10975,
+  "ecrans": 16.5,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 186,
+   "bottom": 1515,
+   "h": 1330
+  },
+  "encadre_ecrans": 1.99,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 522,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 373,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1829,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2002,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre B"
+  ]
+ },
+ "voyant-moteur.html|c|375|police": {
+  "hauteur_page": 11152,
+  "ecrans": 16.7,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 194,
+   "bottom": 1608,
+   "h": 1413
+  },
+  "encadre_ecrans": 2.12,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 538,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 389,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1921,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2002,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre C"
+  ]
+ },
+ "voyant-adblue.html|a|375|police": {
+  "hauteur_page": 6877,
+  "ecrans": 10.3,
+  "mention_bas": 106,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 225,
+   "bottom": 2287,
+   "h": 2063
+  },
+  "encadre_ecrans": 3.09,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 629,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 522,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 2639,
+   "apres_encadre": true,
+   "dans_3_ecrans": false,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1203,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.93,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre A"
+  ]
+ },
+ "voyant-adblue.html|b|375|police": {
+  "hauteur_page": 6789,
+  "ecrans": 10.2,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 211,
+   "bottom": 2222,
+   "h": 2011
+  },
+  "encadre_ecrans": 3.01,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 601,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 493,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 2574,
+   "apres_encadre": true,
+   "dans_3_ecrans": false,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1203,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre B"
+  ]
+ },
+ "voyant-adblue.html|c|375|police": {
+  "hauteur_page": 7027,
+  "ecrans": 10.5,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 221,
+   "bottom": 2361,
+   "h": 2140
+  },
+  "encadre_ecrans": 3.21,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 618,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 510,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 2713,
+   "apres_encadre": true,
+   "dans_3_ecrans": false,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1203,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre C"
+  ]
+ },
+ "pression-des-pneus.html|a|375|police": {
+  "hauteur_page": 9511,
+  "ecrans": 14.3,
+  "mention_bas": 106,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 225,
+   "bottom": 1086,
+   "h": 862
+  },
+  "encadre_ecrans": 1.29,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 793,
+  "premiere_situation_complete_667": false,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 417,
+  "premier_verdict_bas": 603,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1363,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1660,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.93,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre A"
+  ]
+ },
+ "pression-des-pneus.html|b|375|police": {
+  "hauteur_page": 9364,
+  "ecrans": 14,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 211,
+   "bottom": 1053,
+   "h": 842
+  },
+  "encadre_ecrans": 1.26,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 766,
+  "premiere_situation_complete_667": false,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 405,
+  "premier_verdict_bas": 576,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1329,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1660,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre B"
+  ]
+ },
+ "pression-des-pneus.html|c|375|police": {
+  "hauteur_page": 9505,
+  "ecrans": 14.3,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 221,
+   "bottom": 1088,
+   "h": 867
+  },
+  "encadre_ecrans": 1.3,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 782,
+  "premiere_situation_complete_667": false,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 419,
+  "premier_verdict_bas": 592,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1364,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1660,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre C"
+  ]
+ },
+ "accueil.html|a|375|police": {
+  "hauteur_page": 1716,
+  "ecrans": 2.6,
+  "mention_bas": 106,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 0,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 43,
+   "minimum": 6.12,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre A"
+  ]
+ },
+ "accueil.html|b|375|police": {
+  "hauteur_page": 1696,
+  "ecrans": 2.5,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 0,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 43,
+   "minimum": 6.67,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre B"
+  ]
+ },
+ "accueil.html|c|375|police": {
+  "hauteur_page": 1783,
+  "ecrans": 2.7,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 0,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 43,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre C"
+  ]
+ },
+ "voyant-moteur.html|a|375|secours": {
+  "hauteur_page": 11204,
+  "ecrans": 16.8,
+  "mention_bas": 106,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 199,
+   "bottom": 1518,
+   "h": 1318
+  },
+  "encadre_ecrans": 1.98,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 532,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 383,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1832,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2002,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.5,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-moteur.html|b|375|secours": {
+  "hauteur_page": 11025,
+  "ecrans": 16.5,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 186,
+   "bottom": 1515,
+   "h": 1330
+  },
+  "encadre_ecrans": 1.99,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 522,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 373,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1829,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2002,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-moteur.html|c|375|secours": {
+  "hauteur_page": 11316,
+  "ecrans": 17,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 221,
+   "bottom": 1634,
+   "h": 1413
+  },
+  "encadre_ecrans": 2.12,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 565,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 416,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1948,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2002,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-adblue.html|a|375|secours": {
+  "hauteur_page": 6877,
+  "ecrans": 10.3,
+  "mention_bas": 106,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 225,
+   "bottom": 2287,
+   "h": 2063
+  },
+  "encadre_ecrans": 3.09,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 629,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 522,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 2639,
+   "apres_encadre": true,
+   "dans_3_ecrans": false,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1203,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.93,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-adblue.html|b|375|secours": {
+  "hauteur_page": 6789,
+  "ecrans": 10.2,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 211,
+   "bottom": 2222,
+   "h": 2011
+  },
+  "encadre_ecrans": 3.01,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 601,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 493,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 2574,
+   "apres_encadre": true,
+   "dans_3_ecrans": false,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1203,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-adblue.html|c|375|secours": {
+  "hauteur_page": 7027,
+  "ecrans": 10.5,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 221,
+   "bottom": 2361,
+   "h": 2140
+  },
+  "encadre_ecrans": 3.21,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 618,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 510,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 2713,
+   "apres_encadre": true,
+   "dans_3_ecrans": false,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1203,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "pression-des-pneus.html|a|375|secours": {
+  "hauteur_page": 9511,
+  "ecrans": 14.3,
+  "mention_bas": 106,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 225,
+   "bottom": 1086,
+   "h": 862
+  },
+  "encadre_ecrans": 1.29,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 793,
+  "premiere_situation_complete_667": false,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 417,
+  "premier_verdict_bas": 603,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1363,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1660,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.93,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "pression-des-pneus.html|b|375|secours": {
+  "hauteur_page": 9364,
+  "ecrans": 14,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 211,
+   "bottom": 1053,
+   "h": 842
+  },
+  "encadre_ecrans": 1.26,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 766,
+  "premiere_situation_complete_667": false,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 405,
+  "premier_verdict_bas": 576,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1329,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1660,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "pression-des-pneus.html|c|375|secours": {
+  "hauteur_page": 9532,
+  "ecrans": 14.3,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 248,
+   "bottom": 1115,
+   "h": 867
+  },
+  "encadre_ecrans": 1.3,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 809,
+  "premiere_situation_complete_667": false,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 446,
+  "premier_verdict_bas": 619,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1391,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1660,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "accueil.html|a|375|secours": {
+  "hauteur_page": 1716,
+  "ecrans": 2.6,
+  "mention_bas": 106,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 0,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 43,
+   "minimum": 6.12,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "accueil.html|b|375|secours": {
+  "hauteur_page": 1729,
+  "ecrans": 2.6,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 0,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 43,
+   "minimum": 6.67,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "accueil.html|c|375|secours": {
+  "hauteur_page": 1783,
+  "ecrans": 2.7,
+  "mention_bas": 99,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 0,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 43,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-moteur.html|a|1366|police": {
+  "hauteur_page": 7843,
+  "ecrans": 11.8,
+  "mention_bas": 85,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 163,
+   "bottom": 904,
+   "h": 741
+  },
+  "encadre_ecrans": 1.11,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 355,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 289,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1101,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2015,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.5,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre A"
+  ]
+ },
+ "voyant-moteur.html|b|1366|police": {
+  "hauteur_page": 7607,
+  "ecrans": 11.4,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 150,
+   "bottom": 880,
+   "h": 730
+  },
+  "encadre_ecrans": 1.09,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 338,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 272,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1077,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2015,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre B"
+  ]
+ },
+ "voyant-moteur.html|c|1366|police": {
+  "hauteur_page": 7718,
+  "ecrans": 11.6,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 160,
+   "bottom": 933,
+   "h": 773
+  },
+  "encadre_ecrans": 1.16,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 356,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 290,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1130,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2015,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre C"
+  ]
+ },
+ "voyant-adblue.html|a|1366|police": {
+  "hauteur_page": 4818,
+  "ecrans": 7.2,
+  "mention_bas": 85,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 200,
+   "bottom": 1270,
+   "h": 1070
+  },
+  "encadre_ecrans": 1.6,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 407,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 341,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1467,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1210,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.93,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre A"
+  ]
+ },
+ "voyant-adblue.html|b|1366|police": {
+  "hauteur_page": 4723,
+  "ecrans": 7.1,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 187,
+   "bottom": 1234,
+   "h": 1047
+  },
+  "encadre_ecrans": 1.57,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 390,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 324,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1431,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1210,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre B"
+  ]
+ },
+ "voyant-adblue.html|c|1366|police": {
+  "hauteur_page": 4880,
+  "ecrans": 7.3,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 202,
+   "bottom": 1318,
+   "h": 1116
+  },
+  "encadre_ecrans": 1.67,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 413,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 347,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1515,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1210,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre C"
+  ]
+ },
+ "pression-des-pneus.html|a|1366|police": {
+  "hauteur_page": 6073,
+  "ecrans": 9.1,
+  "mention_bas": 85,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 200,
+   "bottom": 677,
+   "h": 476
+  },
+  "encadre_ecrans": 0.71,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 507,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 327,
+  "premier_verdict_bas": 420,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 855,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1667,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.93,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre A"
+  ]
+ },
+ "pression-des-pneus.html|b|1366|police": {
+  "hauteur_page": 5932,
+  "ecrans": 8.9,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 187,
+   "bottom": 655,
+   "h": 468
+  },
+  "encadre_ecrans": 0.7,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 492,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 315,
+  "premier_verdict_bas": 405,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 833,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1667,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre B"
+  ]
+ },
+ "pression-des-pneus.html|c|1366|police": {
+  "hauteur_page": 6065,
+  "ecrans": 9.1,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 202,
+   "bottom": 713,
+   "h": 511
+  },
+  "encadre_ecrans": 0.77,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 513,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 334,
+  "premier_verdict_bas": 426,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 891,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1667,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre C"
+  ]
+ },
+ "accueil.html|a|1366|police": {
+  "hauteur_page": 1133,
+  "ecrans": 1.7,
+  "mention_bas": 85,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 104,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 44,
+   "minimum": 6.12,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre A"
+  ]
+ },
+ "accueil.html|b|1366|police": {
+  "hauteur_page": 1116,
+  "ecrans": 1.7,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 97,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 44,
+   "minimum": 6.67,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre B"
+  ]
+ },
+ "accueil.html|c|1366|police": {
+  "hauteur_page": 1144,
+  "ecrans": 1.7,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 97,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 44,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": [
+   "Titre C"
+  ]
+ },
+ "voyant-moteur.html|a|1366|secours": {
+  "hauteur_page": 7843,
+  "ecrans": 11.8,
+  "mention_bas": 85,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 163,
+   "bottom": 904,
+   "h": 741
+  },
+  "encadre_ecrans": 1.11,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 355,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 289,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1101,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2015,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.5,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-moteur.html|b|1366|secours": {
+  "hauteur_page": 7607,
+  "ecrans": 11.4,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 150,
+   "bottom": 880,
+   "h": 730
+  },
+  "encadre_ecrans": 1.09,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 338,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 272,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1077,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2015,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-moteur.html|c|1366|secours": {
+  "hauteur_page": 7814,
+  "ecrans": 11.7,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "13px",
+  "encadre": {
+   "top": 202,
+   "bottom": 975,
+   "h": 773
+  },
+  "encadre_ecrans": 1.16,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 398,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat), puis Peugeot et Seat (catalyseur menacé). Moins stricts : Renault et Dacia (régime réduit, consulter au plus tôt). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 331,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1172,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. Illustration decodauto."
+  },
+  "reperes": 6,
+  "reperes_avec_forme": 6,
+  "formules_interdites": [],
+  "paragraphes": 28,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1034,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant moteur allumé ?",
+   "Peut-on rouler avec le voyant moteur orange allumé ?",
+   "Le voyant s’allume au démarrage, puis s’éteint",
+   "Voyant moteur qui clignote",
+   "Voyant moteur rouge ou message « Risque casse moteur »",
+   "Message « Antipollution à contrôler »",
+   "« Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën",
+   "Défaut moteur, vanne EGR, sonde : quelle pièce est en cause ?",
+   "Combien de kilomètres peut-on faire ?",
+   "Comment éteindre le voyant moteur ?",
+   "La voiture roule normalement, mais le voyant est allumé",
+   "Perte de puissance, moteur qui tourne mal",
+   "Contrôle technique avec le voyant moteur allumé",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 13,
+   "extraits": 13,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Dacia Sandero 3, p. 113, voyant fixe",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, voyant fixe"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (11)"
+  },
+  "sommaire": true,
+  "mots_page": 2015,
+  "contraste": {
+   "elements": 265,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-adblue.html|a|1366|secours": {
+  "hauteur_page": 4818,
+  "ecrans": 7.2,
+  "mention_bas": 85,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 200,
+   "bottom": 1270,
+   "h": 1070
+  },
+  "encadre_ecrans": 1.6,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 407,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 341,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1467,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1210,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.93,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-adblue.html|b|1366|secours": {
+  "hauteur_page": 4749,
+  "ecrans": 7.1,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 187,
+   "bottom": 1234,
+   "h": 1047
+  },
+  "encadre_ecrans": 1.57,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 390,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 324,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1431,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1210,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "voyant-adblue.html|c|1366|secours": {
+  "hauteur_page": 4907,
+  "ecrans": 7.4,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 202,
+   "bottom": 1318,
+   "h": 1116
+  },
+  "encadre_ecrans": 1.67,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 413,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km, impératif sous 100 km chez Peugeot). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+   },
+   {
+    "mots": 22,
+    "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+   },
+   {
+    "mots": 24,
+    "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt). Votre marque"
+   },
+   {
+    "mots": 25,
+    "texte": "Plus strict : Seat (arrêt en lieu sûr et plat). Moins stricts : Peugeot, Renault, Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": null,
+  "premier_verdict_bas": 347,
+  "reponse_avant_lignes": null,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 1515,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). Illustration decodauto."
+  },
+  "reperes": 0,
+  "reperes_avec_forme": 0,
+  "formules_interdites": [],
+  "paragraphes": 10,
+  "phrases_max": 2,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 236,
+  "h2": [
+   "Puis-je continuer à rouler avec le voyant AdBlue allumé ?",
+   "Peut-on rouler avec le voyant AdBlue allumé ?",
+   "Les messages d’autonomie, marque par marque",
+   "Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?",
+   "Voyant AdBlue allumé après le remplissage",
+   "Qu’est-ce que l’AdBlue, et combien en reste-t-il ?",
+   "Faire l’appoint : les précautions des notices",
+   "Causes possibles",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 15, de 2 400 à 800 km",
+    "Extrait Peugeot 208, p. 15 ; renvoi p. 13, sous 800 km"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1210,
+  "contraste": {
+   "elements": 175,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "pression-des-pneus.html|a|1366|secours": {
+  "hauteur_page": 6073,
+  "ecrans": 9.1,
+  "mention_bas": 85,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 200,
+   "bottom": 677,
+   "h": 476
+  },
+  "encadre_ecrans": 0.71,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 507,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 327,
+  "premier_verdict_bas": 420,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 855,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1667,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.93,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "pression-des-pneus.html|b|1366|secours": {
+  "hauteur_page": 5957,
+  "ecrans": 8.9,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 187,
+   "bottom": 655,
+   "h": 468
+  },
+  "encadre_ecrans": 0.7,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 492,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 315,
+  "premier_verdict_bas": 405,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 833,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1667,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.89,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "pression-des-pneus.html|c|1366|secours": {
+  "hauteur_page": 6092,
+  "ecrans": 9.1,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "encadre": {
+   "top": 202,
+   "bottom": 713,
+   "h": 511
+  },
+  "encadre_ecrans": 0.77,
+  "encadre_apres_h1": true,
+  "premiere_situation_bas": 513,
+  "premiere_situation_complete_667": true,
+  "cachés_dans_encadre": 0,
+  "ecarts": [
+   {
+    "mots": 25,
+    "texte": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia). Votre marque"
+   }
+  ],
+  "ordre_charte": true,
+  "provenance_hors_encadre": true,
+  "cout_dans_encadre": true,
+  "reponse_bas": 334,
+  "premier_verdict_bas": 426,
+  "reponse_avant_lignes": true,
+  "pub": {
+   "apres_encadre": true,
+   "hauteur": 280
+  },
+  "illustration": {
+   "haut": 891,
+   "apres_encadre": true,
+   "dans_3_ecrans": true,
+   "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture. Illustration decodauto."
+  },
+  "reperes": 1,
+  "reperes_avec_forme": 1,
+  "formules_interdites": [],
+  "paragraphes": 11,
+  "phrases_max": 3,
+  "paragraphes_trop_longs": [],
+  "mots_corps": 1008,
+  "h2": [
+   "Quelle pression mettre dans vos pneus, et que faire si le voyant de pression s’allume ?",
+   "Le texte en bref",
+   "Quelle pression mettre dans ses pneus ?",
+   "Où lire la pression et quand la vérifier, selon la notice de chaque marque",
+   "Pneus froids : et si on vérifie la pression à chaud ?",
+   "Pression avant et arrière, à vide ou en charge",
+   "Pression des pneus avec une remorque",
+   "Comment gonfler ses pneus",
+   "Pneus sous-gonflés : ce que vous risquez",
+   "Quand le voyant de pression des pneus s’allume",
+   "Pression des pneus au contrôle technique",
+   "Ce que dit la notice de votre marque",
+   "À lire aussi"
+  ],
+  "notices": {
+   "rangs": 7,
+   "extraits": 7,
+   "libelles_uniques": true,
+   "exemple": [
+    "Extrait Peugeot 208, p. 18, voyant de pression",
+    "Extrait Peugeot 208, p. 110, voyant de pression"
+   ]
+  },
+  "sources": {
+   "repliee": true,
+   "resume": "Sources (10)"
+  },
+  "sommaire": true,
+  "mots_page": 1667,
+  "contraste": {
+   "elements": 182,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "accueil.html|a|1366|secours": {
+  "hauteur_page": 1133,
+  "ecrans": 1.7,
+  "mention_bas": 85,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 104,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 44,
+   "minimum": 6.12,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "accueil.html|b|1366|secours": {
+  "hauteur_page": 1116,
+  "ecrans": 1.7,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 97,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 44,
+   "minimum": 6.67,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ },
+ "accueil.html|c|1366|secours": {
+  "hauteur_page": 1144,
+  "ecrans": 1.7,
+  "mention_bas": 78,
+  "mention_avant_h1": true,
+  "mention_taille": "16px",
+  "texte_taille": "16px",
+  "illustration": {
+   "haut": 97,
+   "legende": "Illustration decodauto."
+  },
+  "grille_liens": 18,
+  "themes": 3,
+  "h2": [
+   "Quel voyant s’est allumé ?",
+   "Alertes et codes",
+   "Pneus et obligations",
+   "Un guide indépendant"
+  ],
+  "sources": null,
+  "sommaire": false,
+  "mots_page": 108,
+  "contraste": {
+   "elements": 44,
+   "minimum": 5.51,
+   "echecs": [],
+   "nb_echecs": 0,
+   "avec_fond_image": 0
+  },
+  "polices_chargees": []
+ }
+}
