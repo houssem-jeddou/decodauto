@@ -4,6 +4,7 @@ dist-indexable/
 .astro/
 .wrangler/
 .lighthouseci/
+.lighthouseci-demo-format2/
 .env
 .env.*
 *.log

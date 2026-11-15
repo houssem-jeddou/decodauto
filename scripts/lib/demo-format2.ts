@@ -87,6 +87,7 @@ const texteDuTitre = (html: string): string =>
     .replace(/'/g, '’')
     .replace(/&quot;/g, '"')
     .replace(/&amp;/g, '&')
+    .replace(/&nbsp;|&#160;|&#xa0;/gi, ' ')
     .replace(/[\s  ]+/g, ' ')
     .trim();
 
@@ -126,4 +127,11 @@ export function attendusDemoFormat2(brouillon: BrouillonFormat2, fichierDePage: 
     return fichier === undefined ? [] : [{ regle: 'R4-EMPREINTE', fichier, brut: `R4-EMPREINTE@${fichier}` }];
   });
   return [...lignes, ...pages];
+}
+
+/** Une page de la construction de démonstration (attribut data-demo-format2 sur html) dans un site contrôlé comme réel : DEMO-PUBLIEE. */
+export function constatsDemoPubliee(html: string, fichier: string): { regle: string; gravite: 'erreur'; message: string; fichier: string }[] {
+  return new RegExp(`<html\\b[^>]*\\s${ATTRIBUT_DEMO}(?=[\\s=>])`, 'i').test(html)
+    ? [{ regle: 'DEMO-PUBLIEE', gravite: 'erreur', message: "page de la construction de démonstration du format 2 (data-demo-format2) : elle n'est jamais publiée", fichier }]
+    : [];
 }

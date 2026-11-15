@@ -134,6 +134,48 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+  demo-format-deux:
+    name: Démonstration du format 2 (jamais déployée)
+    # Lot F1, tâche F1.2 (demande de changement n° 30) : le site construit avec le voyant moteur, le voyant AdBlue et
+    # l'accueil au format 2, d'après le brouillon travaux/etape-13/f1/demo/brouillon-format2.json (« Brouillon, jamais
+    # validé »), appliqué en mémoire (scripts/lib/demo-format2.ts), dans dist-demo-format2. Tous les contrôles d'aujourd'hui
+    # et ceux du format 2 ; seules erreurs attendues, fixées par le script : les empreintes des lignes et des pages du
+    # brouillon (R4-EMPREINTE). Ce job ne conditionne pas le déploiement et rien de dist-demo-format2 n'est jamais déployé.
+    if: ${{ github.event_name != 'schedule' }}
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 15
+    env:
+      DEMO_FORMAT2: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: ${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}
+      - name: Installer les dépendances
+        run: npm ci
+      - name: Construction de démonstration (dist-demo-format2)
+        run: npx astro build
+      - name: Script de contrôle, format 2
+        run: node scripts/controle.ts --dist dist-demo-format2 --demo-format2
+      - name: Liens cassés
+        if: ${{ !cancelled() }}
+        run: node scripts/liens.ts --dist dist-demo-format2
+      - name: Lighthouse mobile des pages au format 2 (avec les emplacements publicitaires factices)
+        if: ${{ !cancelled() }}
+        run: npx lhci autorun --config=lighthouserc-demo-format2.json
+      - name: Scores par page (médiane de chaque mesure, lecture dans ce journal)
+        if: ${{ !cancelled() }}
+        run: node scripts/scores-lighthouse.ts .lighthouseci-demo-format2
+      - name: Conserver la construction de démonstration
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: demo-format2
+          path: dist-demo-format2
+          if-no-files-found: error
+          retention-days: 14
+
   lighthouse:
     name: Lighthouse mobile (3 passages)
     needs: controles

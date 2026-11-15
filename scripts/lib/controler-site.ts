@@ -10,7 +10,7 @@ import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, char
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
 import { FICHIER_VAGUES_OUVERTES, chargerVaguesOuvertes, controlerVaguesOuvertes } from './vagues.ts';
 import { controlerFavicon } from './favicon.ts';
-import { ATTRIBUT_DEMO, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
+import { constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
 import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
 import { chargerIllustrations } from './demo-format2.ts';
 import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
@@ -157,11 +157,7 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   }
   // Garde-fou : une page de la construction de démonstration du format 2 n'est jamais dans un site contrôlé comme réel.
   if (brouillonFormat2 === undefined) {
-    for (const chemin of await listerFichiers(dist, '.html')) {
-      if (new RegExp(`<html\\b[^>]*\\s${ATTRIBUT_DEMO}(?=[\\s=>])`).test(await readFile(chemin, 'utf8'))) {
-        constats.push({ regle: 'DEMO-PUBLIEE', gravite: 'erreur', message: 'page de la construction de démonstration du format 2 (data-demo-format2) : elle n\'est jamais publiée', fichier: relative(dist, chemin).split('\\').join('/') });
-      }
-    }
+    for (const chemin of await listerFichiers(dist, '.html')) constats.push(...constatsDemoPubliee(await readFile(chemin, 'utf8'), relative(dist, chemin).split('\\').join('/')));
   }
   // Accueil (livrable 7.4a) : liste générée depuis le plan, exactement les pages éditoriales construites.
   const adresseOutil = construitesEditoriales.find((p) => p.id === ID_OUTIL_VOYANTS) !== undefined ? contexte.plan.get(ID_OUTIL_VOYANTS)?.adresse : undefined;
