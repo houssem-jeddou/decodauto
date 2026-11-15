@@ -41,6 +41,7 @@ Et 13 autres : « fumée blanche voiture diesel », « fumée blanche voiture es
 - **Angle** : Fumée blanche d'un diesel pendant la régénération du filtre à particules, ou d'une essence par temps froid ou humide : « pas obligatoirement une anomalie » (Renault p. 386) ; fumée sous le capot : arrêt. Fumée noire ou bleue : aucune notice lue.
 - **Élément unique** : Arbre de décision (couleur, au démarrage ou en roulant, avec un voyant, avec une odeur ou une perte de puissance).
 - **À traiter** :
+  - Requête principale à revoir, comme le note le journal (« Pour l'étape 8 et les suivantes ») : « fumée blanche échappement » ne dit rien de la fumée noire, très cherchée (« diesel fume noir », « fumée noire diesel ») ; la changer modifie le plan du site : demande de changement, avec le lot.
   - « Fumée blanche au démarrage », « fumée blanche voiture diesel », « fumée blanche voiture essence » : tableau Renault p. 386 et ligne `fap` de la base.
   - « Diesel fume noir », « traitement fumée noire diesel » : aucune notice lue ; ne recommander aucun additif sans source.
   - « Ma voiture fume blanche et perte de puissance » : page liée « perte de puissance ».
