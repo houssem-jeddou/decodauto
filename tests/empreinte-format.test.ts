@@ -26,10 +26,10 @@ describe('empreintes du format 2', () => {
     couleur: 'orange',
     pictogramme: 'essai',
     situation: 'Le voyant s\'allume en roulant',
-    verdict: 'non-arretez-vous',
-    urgence: 'immediatement',
+    verdict: 'non, arrêt immédiat',
+    urgence: 'immédiate',
     action: 'Arrêtez-vous.',
-    citations: [{ source: 'notice-a', emplacement: 'p. 1', extrait: 'Arrêtez-vous.', verdict: 'non-arretez-vous', urgence: 'immediatement' }],
+    citations: [{ source: 'notice-a', emplacement: 'p. 1', extrait: 'Arrêtez-vous.', verdict: 'non, arrêt immédiat', urgence: 'immédiate' }],
     ecart_marques: 'Une marque est plus stricte.',
   };
 
@@ -45,7 +45,7 @@ describe('empreintes du format 2', () => {
     const base = new Map<string, LigneAffichee>([['essai', { ...ligne }]]);
     const encadre: EncadreValide = {
       question_decision: 'Peut-on rouler ?',
-      situations: [{ voyant: 'essai' }, { situation: 'Autre cas', verdict: 'oui', urgence: 'a-la-prochaine-revision', action: 'Rien.', citations: ligne.citations, ecart_marques: 'Écart.' }],
+      situations: [{ voyant: 'essai' }, { situation: 'Autre cas', verdict: 'oui', urgence: 'aucune', action: 'Rien.', citations: ligne.citations, ecart_marques: 'Écart.' }],
       cout_probable: { base_de_calcul: 'Pièces.', sources: ['notice-a'] },
     };
     const plage = { selonLeVoyant: false, de: 'aucun', a: 'aucun' };
