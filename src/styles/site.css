@@ -2,6 +2,8 @@
    La gravité ne repose jamais sur la seule couleur (WCAG 1.4.1) : le libellé du verdict est écrit et l'icône a une
    forme propre à chaque verdict ; la couleur s'y ajoute. Contrastes du texte : au moins 4,5:1 sur leur fond. */
 :root {
+  /* Format de lecture de cette feuille (demande de changement n° 30, lot F1) : contrôle FEUILLE-FORMAT. */
+  --charte:1;
   color-scheme: light;
   --texte: #1a1d21;
   --texte-doux: #4a5058;

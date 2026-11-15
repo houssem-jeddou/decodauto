@@ -548,6 +548,24 @@ export function adressesDuCss(css: string): string[] {
 }
 
 /**
+ * Feuille de style de la page (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md, §2) : une seule,
+ * en ligne, celle du format de la page (`data-format` de html, 1 ou 2), repérée par son marqueur `--charte:<format>` ;
+ * aucune feuille reliée. Une page sans sa feuille, ou avec les deux, s'afficherait mal sans qu'aucun autre contrôle le voie.
+ */
+export function constatsFeuilleDeStyle(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const format = $('html').attr('data-format');
+  if (format !== '1' && format !== '2') return [erreur('FEUILLE-FORMAT', `attribut data-format de html absent ou inconnu (« ${format ?? ''} ») : 1 ou 2 attendu`, fichier)];
+  const constats: Constat[] = [];
+  if ($('link[rel~="stylesheet"]').length > 0) constats.push(erreur('FEUILLE-FORMAT', 'feuille de style reliée : la feuille du format est posée en ligne, seule', fichier));
+  const styles = $('style').toArray().map((e) => $(e).text());
+  const marqueurs = styles.flatMap((css) => [...css.matchAll(/--charte:\s*(\d+)/g)].map((m) => m[1]));
+  if (styles.length !== 1 || marqueurs.length !== 1) constats.push(erreur('FEUILLE-FORMAT', `${styles.length} bloc(s) de style et ${marqueurs.length} marqueur(s) de feuille : une seule feuille, celle du format ${format}, attendue`, fichier));
+  else if (marqueurs[0] !== format) constats.push(erreur('FEUILLE-FORMAT', `feuille du format ${marqueurs[0] ?? '?'} sur une page au format ${format}`, fichier));
+  return constats;
+}
+
+/**
  * Aucun traceur ni ressource d'un autre site (livrable 7.2) : la politique de confidentialité dit que le site ne dépose aucun
  * cookie et ne contient aucun script de mesure d'audience. Une page construite n'a donc ni script (seules les données
  * structurées, `application/ld+json`, sont permises), ni cadre, objet ou intégration, ni image, média, feuille de style ou
@@ -974,6 +992,7 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
       ...constatsTexteRedige(html, fichier),
       ...constatsPartCitee(html, fichier),
       ...constatsRessourcesTierces(html, fichier),
+      ...constatsFeuilleDeStyle(html, fichier),
       ...constatsLienConfidentialite(html, fichier, adresseAttendue),
       ...constatsMentionsLegales(html, fichier, adresseAttendue !== undefined && fichier === `${adressePolitique.replace(/^\//, '')}index.html`),
       ...constatsEmplacementsPub(html, fichier, recette),

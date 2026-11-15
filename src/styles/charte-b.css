@@ -2,7 +2,7 @@
    Feuille des pages au format 2 (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md, §2), tirée de la piste B
    du pilote validé (branche etape-13/pilote-f1) : base commune, puis règles de la piste B, au même ordre et à la même
    spécificité (« :root » remplace l'attribut de piste). Texte courant en police du système ; une seule police de titre,
-   Outfit (licence OFL, public/polices/), chargée sans décalage (font-display: optional). Marqueur : --charte. */
+   Outfit (licence OFL, public/polices/), chargée sans décalage (font-display: optional). Marqueur du format : propriété personnalisée « charte », valeur 2 (contrôle FEUILLE-FORMAT). */
 @font-face{font-family:"Outfit";src:url(/polices/outfit.woff) format("woff");font-weight:700;font-display:optional}
 
 :root{
@@ -17,7 +17,7 @@
 
 
 :root{
-  --charte:b;
+  --charte:2;
   --police-titre:"Outfit",var(--police-texte);
   --fond-page:#eef1f5;--surface:#fff;--texte:#121820;--texte-doux:#4b5563;--bord:#d5dbe3;--encre:#121820;
   --accent:#0b5cad;--accent-fond:#e6f0fb;
