@@ -8,15 +8,27 @@ on:
   # GitHub ne lance les déclenchements planifiés que depuis la branche par défaut (main).
   schedule:
     - cron: '17 6 * * 1'
-  # Lancement à la demande (onglet Actions) : contrôles et vérification de la production, jamais de déploiement.
+  # Lancement à la demande (onglet Actions) : contrôles, et vérification de la production sur main seulement (demande
+  # de changement n° 26) ; jamais de déploiement.
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# Exécuteur de tous les jobs (demande de changement n° 27) : la variable du dépôt CI_RUNNER, réglée par Houssem à
+# « self-hosted » (exécuteur installé dans Ubuntu, sous WSL, sur son PC : minutes gratuites, travaux/etape-8/executeur-wsl.md).
+# Sans cette variable, les serveurs de GitHub (ubuntu-latest), qui consomment les minutes du dépôt privé : retour
+# arrière sans toucher au code, en supprimant la variable. Les jobs attendent l'exécuteur tant que le PC est éteint ;
+# après 24 heures d'attente, GitHub annule le job : il suffit de relancer le passage. Sur l'exécuteur, pas de cache npm
+# de GitHub (setup-node) : le dossier ~/.npm reste sur le PC d'un job à l'autre, alors que le cache de GitHub
+# téléchargerait environ 150 Mo à chaque job (et les enverrait au premier).
+
+# Un nouveau passage annule celui qu'il remplace sur une pull request, et sur un lancement à la demande hors de main
+# (branches d'essai, demande de changement n° 26 : minutes du dépôt privé). Sur main, un passage en cours va au bout
+# (un passage encore en attente peut être remplacé par un plus récent, règle de GitHub pour un groupe de concurrence).
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main') }}
 
 env:
   ASTRO_TELEMETRY_DISABLED: '1'
@@ -26,14 +38,14 @@ env:
 jobs:
   controles:
     name: Contrôles (schémas, règles, build, liens)
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          cache: ${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}
       - name: Installer les dépendances
         run: npm ci
       # Demande de changement n° 18 (scripts/verifier-indexation-durable.ts) : à chaque construction, drapeau à true
@@ -85,7 +97,7 @@ jobs:
     #    qu'après sa validation, jamais pour faire passer le contrôle, et l'attendu est retiré dans le même commit ;
     # Aucun attendu aujourd'hui : la page « à propos » (livrable 7.3) est dans src/content depuis le premier lot, les liens « Méthode » mènent à elle.
     if: ${{ github.event_name != 'schedule' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
     env:
       AVEC_EXEMPLES: '1'
@@ -94,7 +106,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          cache: ${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}
       - name: Installer les dépendances
         run: npm ci
       - name: Construction avec les exemples (dist-exemples)
@@ -126,14 +138,17 @@ jobs:
     name: Lighthouse mobile (3 passages)
     needs: controles
     if: ${{ github.event_name != 'schedule' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
+    # Demande n° 27 : 10,4 à 10,9 minutes chez GitHub le 14/11 pour 17 adresses ; la liste grandit à chaque lot et la
+    # vitesse de l'exécuteur du PC n'est pas celle des serveurs de GitHub. Un délai, pas un seuil : les scores exigés
+    # ne changent pas.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          cache: ${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}
       - run: npm ci
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
@@ -144,8 +159,11 @@ jobs:
       - name: Scores par page (médiane de chaque mesure, lecture dans ce journal)
         if: ${{ !cancelled() }}
         run: node scripts/scores-lighthouse.ts .lighthouseci
-      - name: Conserver les rapports
-        if: ${{ !cancelled() }}
+      # Rapports complets seulement si une mesure échoue (demande n° 27) : 58 rapports de 77 Mo en moyenne occupaient
+      # 4,5 Go le 15/11, pour 500 Mo de stockage compris dans l'offre gratuite. Les scores de chaque page restent dans
+      # le journal du job (étape précédente).
+      - name: Conserver les rapports (en cas d'échec)
+        if: ${{ failure() }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: rapports-lighthouse
@@ -166,7 +184,7 @@ jobs:
     # la fusion, et un déploiement refusé par les contrôles n'a pas besoin d'être vérifié.
     needs: controles
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 5
     permissions:
       contents: read
@@ -202,7 +220,7 @@ jobs:
     name: Secrets Cloudflare présents ?
     needs: [controles, lighthouse]
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 2
     outputs:
       disponibles: ${{ steps.verification.outputs.disponibles }}
@@ -225,7 +243,7 @@ jobs:
     # ET si les deux secrets existent.
     needs: [controles, lighthouse, secrets-cloudflare, origine-main]
     if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.secrets-cloudflare.outputs.disponibles == 'true' }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 10
     concurrency:
       group: deploiement-production
@@ -235,7 +253,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .nvmrc
-          cache: npm
+          cache: ${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}
       - run: npm ci
       # On déploie exactement le dossier qui a passé tous les contrôles, sans le reconstruire.
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
@@ -252,12 +270,12 @@ jobs:
     name: Production en ligne (redirections, noindex, robots.txt, plan du site)
     # Sur main (après un déploiement réussi, chaque semaine, à la demande) : un écart fait échouer le run
     # (notification GitHub) ; juste après un déploiement, seulement s'il persiste au dernier de 4 passages
-    # (propagation de Cloudflare), les écarts passagers restant affichés en avertissement. Sur une pull request ou une autre branche, la vérification est informative
-    # (avertissements, job vert) : la production n'a pas encore les changements de la branche et dépend aussi des
-    # réglages Cloudflare, hors du dépôt.
+    # (propagation de Cloudflare), les écarts passagers restant affichés en avertissement. Plus de passage sur une pull
+    # request ni sur une autre branche (demande de changement n° 26) : il n'y était qu'informatif (avertissements, job
+    # toujours vert), la production n'ayant pas encore les changements de la branche, et coûtait une minute par passage.
     needs: deploiement
-    if: ${{ !cancelled() && (needs.deploiement.result == 'success' || github.event_name != 'push') }}
-    runs-on: ubuntu-latest
+    if: ${{ !cancelled() && (needs.deploiement.result == 'success' || ((github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main')) }}
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-latest' }}
     # Après un déploiement : jusqu'à 4 passages, sans nouveau passage au-delà de 4 minutes. Un passage fait 14 lectures
     # d'au plus 20 s quand le site répond (http://www en deux redirections), jusqu'à 33 dans une boucle de redirections
     # lentes (11 min au plus). Le délai du job couvre ce pire cas : un écart fait échouer le job, il ne l'annule jamais.
@@ -269,4 +287,6 @@ jobs:
           node-version-file: .nvmrc
       # Aucune dépendance : le script n'utilise que Node. Aucun secret.
       - name: Vérifier la production
+        # --information ne s'applique plus en CI depuis la demande n° 26 (le job ne tourne que sur main) : gardé comme
+        # garde-fou, si le job venait à tourner ailleurs.
         run: node scripts/verifier-production.ts ${{ (github.event_name == 'pull_request' || github.ref != 'refs/heads/main') && '--information' || '' }} ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && '--apres-deploiement' || '' }}
