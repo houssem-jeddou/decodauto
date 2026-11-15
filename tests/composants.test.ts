@@ -80,6 +80,12 @@ describe('typographie et échappement (charte §3.3)', () => {
     assert.equal(typographierHtml("<script>if (a < b) {x='y'}</script><p>L'huile : ok</p>"), `<script>if (a < b) {x='y'}</script><p>L’huile${INSECABLE}: ok</p>`);
     assert.equal(typographierHtml('<p>Le message "<strong>STOP</strong>" apparaît</p>'), `<p>Le message «${INSECABLE}<strong>STOP</strong>${INSECABLE}» apparaît</p>`);
     assert.equal(typographierHtml('<p>Jantes de 15" ou 16"</p>'), '<p>Jantes de 15″ ou 16″</p>');
+    // Entités suivies d'une espace (« tension &lt; 12 V ») : jamais coupées par l'insécable avant « ; » (étape 10, revue).
+    assert.equal(typographierHtml('<li>Tension &lt; 12 V ou &gt; 15 V : M&amp;S, R&amp; D ?</li>'), `<li>Tension &lt; 12${INSECABLE}V ou &gt; 15${INSECABLE}V${INSECABLE}: M&amp;S, R&amp; D${INSECABLE}?</li>`);
+    // Unités électriques (charte §3.3) ; un caractère d'usage privé déjà dans le texte est rétabli tel quel.
+    assert.equal(typographier('Batterie 12 V, 60 Ah, 540 A, 2 kW'), `Batterie 12${INSECABLE}V, 60${INSECABLE}Ah, 540${INSECABLE}A, 2${INSECABLE}kW`);
+    const prive = String.fromCodePoint(0xf0005);
+    assert.equal(typographierHtml(`<p>Icône ${prive} et &amp; ensuite</p>`), `<p>Icône ${prive} et &amp; ensuite</p>`);
     assert.equal(typographierHtml('<p>Que faire\n: ok. Attention: chaud</p><samp>x : y</samp><!-- a " b -->'), `<p>Que faire${INSECABLE}: ok. Attention${INSECABLE}: chaud</p><samp>x : y</samp><!-- a " b -->`);
   });
   test('typographie d\'un fragment HTML (corps rendu depuis le Markdown) : texte retouché, code et balises intacts', () => {
