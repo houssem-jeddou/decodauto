@@ -1,0 +1,182 @@
+{
+  "panne-format2-chargee": {
+    "telephone": {
+      "police": true,
+      "basMention": 99,
+      "basPremiereSituation": 498,
+      "basEncadre": 948,
+      "hautIllustration": 1291,
+      "illustrationSuitProvenance": true,
+      "hautArbre": 2910,
+      "hauteurArbre": 1221,
+      "hautHistorique": null,
+      "hauteurPage": 5091,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "police": true,
+      "basMention": 78,
+      "basPremiereSituation": 318,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "illustrationSuitProvenance": true,
+      "hautArbre": 2173,
+      "hauteurArbre": 701,
+      "hautHistorique": null,
+      "hauteurPage": 3772,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "panne-format2-secours": {
+    "telephone": {
+      "police": false,
+      "basMention": 99,
+      "basPremiereSituation": 498,
+      "basEncadre": 948,
+      "hautIllustration": 1291,
+      "illustrationSuitProvenance": true,
+      "hautArbre": 2910,
+      "hauteurArbre": 1221,
+      "hautHistorique": null,
+      "hauteurPage": 5091,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "police": false,
+      "basMention": 78,
+      "basPremiereSituation": 318,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "illustrationSuitProvenance": true,
+      "hautArbre": 2173,
+      "hauteurArbre": 701,
+      "hautHistorique": null,
+      "hauteurPage": 3772,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "panne-format2-arbre-court-chargee": {
+    "telephone": {
+      "police": true,
+      "basMention": 99,
+      "basPremiereSituation": 498,
+      "basEncadre": 948,
+      "hautIllustration": 1291,
+      "illustrationSuitProvenance": true,
+      "hautArbre": 2910,
+      "hauteurArbre": 337,
+      "hautHistorique": null,
+      "hauteurPage": 4206,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "police": true,
+      "basMention": 78,
+      "basPremiereSituation": 318,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "illustrationSuitProvenance": true,
+      "hautArbre": 2173,
+      "hauteurArbre": 237,
+      "hautHistorique": null,
+      "hauteurPage": 3309,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "panne-format2-arbre-court-secours": {
+    "telephone": {
+      "police": false,
+      "basMention": 99,
+      "basPremiereSituation": 498,
+      "basEncadre": 948,
+      "hautIllustration": 1291,
+      "illustrationSuitProvenance": true,
+      "hautArbre": 2910,
+      "hauteurArbre": 337,
+      "hautHistorique": null,
+      "hauteurPage": 4206,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "police": false,
+      "basMention": 78,
+      "basPremiereSituation": 318,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "illustrationSuitProvenance": true,
+      "hautArbre": 2173,
+      "hauteurArbre": 237,
+      "hautHistorique": null,
+      "hauteurPage": 3309,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "dossier-format2-chargee": {
+    "telephone": {
+      "police": true,
+      "basMention": 99,
+      "basPremiereSituation": 481,
+      "basEncadre": 927,
+      "hautIllustration": 1269,
+      "illustrationSuitProvenance": true,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "hautHistorique": 3388,
+      "hauteurPage": 4373,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "police": true,
+      "basMention": 78,
+      "basPremiereSituation": 338,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "illustrationSuitProvenance": true,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "hautHistorique": 2404,
+      "hauteurPage": 3296,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "dossier-format2-secours": {
+    "telephone": {
+      "police": false,
+      "basMention": 99,
+      "basPremiereSituation": 481,
+      "basEncadre": 927,
+      "hautIllustration": 1269,
+      "illustrationSuitProvenance": true,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "hautHistorique": 3413,
+      "hauteurPage": 4398,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "police": false,
+      "basMention": 78,
+      "basPremiereSituation": 338,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "illustrationSuitProvenance": true,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "hautHistorique": 2404,
+      "hauteurPage": 3296,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  }
+}

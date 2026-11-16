@@ -17,4 +17,6 @@ await writeFile(join(sortie, 'methode.html'), demo.htmlMethode);
 const format2 = await construireDemoFormat2(racine, new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate())));
 for (const p of format2.pages) await writeFile(join(sortie, `${p.nom}.html`), p.html);
 await cp(join(racine, 'public/polices'), join(sortie, 'polices'), { recursive: true });
+// Icônes du site (le navigateur demande /favicon.ico de lui-même) : sans elles, une erreur 404 dans la console de l'aperçu.
+for (const icone of ['favicon.ico', 'favicon.png', 'apple-touch-icon.png']) await cp(join(racine, 'public', icone), join(sortie, icone));
 stdout.write(`Aperçu écrit dans ${sortie} : voyant-huile.html, methode.html, ${format2.pages.map((p) => `${p.nom}.html`).join(', ')}\n`);
