@@ -186,7 +186,9 @@ main>.accueil-main{max-width:72rem}
 .voyants-chapo{margin:.2rem 0 .6rem;font-size:.9375rem}
 .grille-voyants{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem}
 .grille-voyants li{display:grid}
-.grille-voyants a{display:grid;justify-items:center;align-content:start;gap:.3rem;text-decoration:none;font-size:.6875rem;font-weight:600;text-align:center;line-height:1.2;padding:.5rem .1rem;overflow-wrap:anywhere}
+/* Libellés de la grille en 12 px (pilote) : les 18 tiennent à 375 px sans coupure, police chargée ou de secours ; sur un écran plus
+   étroit, un mot long se coupe avec un tiret (jamais sans), seulement s'il a 10 lettres au moins (seconde revue de F1.2). */
+.grille-voyants a{display:grid;justify-items:center;align-content:start;gap:.3rem;text-decoration:none;font-size:.75rem;font-weight:600;text-align:center;line-height:1.2;padding:.5rem 0;-webkit-hyphens:auto;hyphens:auto;hyphenate-limit-chars:10 4 4}
 .grille-voyants .tuile{width:2.9rem;height:2.9rem}
 .grille-voyants .tuile svg{width:2rem;height:2rem}
 .tous{margin:.7rem 0 0;font-size:.9375rem}
@@ -206,11 +208,12 @@ main>.accueil-main{max-width:72rem}
   main>.page{display:grid;grid-template-columns:minmax(0,44rem) 17rem;gap:2rem;max-width:66rem}
   main>.page .colonne{min-width:0}
   main>.page aside{position:relative}
-  /* Colonne collante, état long (F1.2-corrections, §3) : hauteur de l'écran moins son décalage, défilement propre, ombre en
-     bas tant que la suite est cachée (ombres de défilement en CSS seul : fonds « local » et « scroll »). */
-  main>.page aside .colle{position:sticky;top:1rem;max-height:calc(100vh - 2rem);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;
-    background:linear-gradient(var(--fond-page) 30%,rgba(238,241,245,0)) center top/100% 2rem no-repeat local,linear-gradient(rgba(238,241,245,0),var(--fond-page) 70%) center bottom/100% 2rem no-repeat local,radial-gradient(farthest-side at 50% 0,rgba(18,24,32,.22),transparent) center top/100% .7rem no-repeat scroll,radial-gradient(farthest-side at 50% 100%,rgba(18,24,32,.22),transparent) center bottom/100% .7rem no-repeat scroll}
-  main>.page aside .sommaire{margin-top:0;padding-bottom:.5rem}
+  /* Colonne collante, état long (F1.2-corrections, §3 ; seconde revue) : hauteur de l'écran moins son décalage, défilement propre ;
+     un fondu collé en bas de la colonne, au-dessus des pastilles, signale la suite ; la marge basse du sommaire le laisse sur du
+     vide quand la colonne est au bout (ou quand tout tient). */
+  main>.page aside .colle{position:sticky;top:1rem;max-height:calc(100vh - 2rem);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+  main>.page aside .colle::after{content:"";display:block;position:sticky;bottom:0;height:2.5rem;margin-top:-2.5rem;pointer-events:none;background:linear-gradient(rgba(238,241,245,0),var(--fond-page) 85%)}
+  main>.page aside .sommaire{margin-top:0;padding-bottom:2.5rem}
   main>.page aside .sommaire ul{flex-direction:column;flex-wrap:nowrap;overflow:visible}
   /* Mention en tête alignée sur le fil, le H1 et l'encadré (F1.2-corrections, §5). */
   .tete:not(.hero)>.mention-ia{max-width:66rem}

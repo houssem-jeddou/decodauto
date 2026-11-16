@@ -25,6 +25,7 @@ import {
   tuileDeLaPage,
   insecableApresPage,
   minusculeInitiale,
+  illustrationAccueil,
 } from '../src/lib/format2.ts';
 import { controlerFormat2 } from '../src/lib/controle-format2.ts';
 import { marqueEtModele, modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
@@ -366,6 +367,9 @@ describe('format 2 : corrections après la revue (brief F1.2-corrections)', () =
   test('§5 espace insécable après « p. » (texte seulement), minuscule initiale, tuile d\'une page code', async () => {
     assert.equal(insecableApresPage('<p>notice (p. 13) et p. 15</p><a title="p. 1">'), '<p>notice (p. 13) et p. 15</p><a title="p. 1">');
     assert.equal(insecableApresPage('<p>cap. 3</p>'), '<p>cap. 3</p>');
+    // Seconde revue : jamais dans un dessin, du code ou un script.
+    const brut = '<svg viewBox="0 0 1 1"><text>p. 1</text></svg><code>p. 2</code><pre>x p. 3</pre><script>a="p. 4"</script><p>p. 5</p>';
+    assert.equal(insecableApresPage(brut), brut.replace('<p>p. 5</p>', '<p>p.\u00a05</p>'));
     assert.equal(minusculeInitiale('Voyant moteur orange'), 'voyant moteur orange');
     assert.equal(minusculeInitiale('AdBlue : démarrage impossible'), 'AdBlue : démarrage impossible');
     assert.equal(minusculeInitiale('STOP'), 'STOP');
@@ -423,6 +427,23 @@ describe('format 2 : corrections après la revue (brief F1.2-corrections)', () =
     assert.ok(!avec('Texte du site.').includes('FORMAT2-METHODE'));
     assert.ok(avec('Verdict retenu en haut de page : oui.').includes('FORMAT2-METHODE'));
     assert.ok(avec('Le guide, édition 01-20, le dit.').includes('FORMAT2-METHODE'));
+    // Seconde revue : une page écrite à la main (« p. » suivi d'un chiffre), hors citation.
+    assert.ok(avec('La notice le dit (p. 139).').includes('FORMAT2-METHODE'));
+    assert.ok(avec('La notice le dit (p.\u00a0139 et p. 113).').includes('FORMAT2-METHODE'));
+    assert.ok(!avec('Le texte cite « voir p. 12 ».').includes('FORMAT2-METHODE'), 'citation entre guillemets');
+    assert.ok(!avec('Le cap. 3 ne compte pas.').includes('FORMAT2-METHODE'));
     assert.ok(!avec('La notice dit « édition 01-20 ».').includes('FORMAT2-METHODE'), 'citation entre guillemets');
+  });
+});
+
+describe('format 2 : seconde revue de F1.2', () => {
+  test('illustration de l\'accueil exigée au format 2 ; libellé « Frein à main » ; pas de repère sur la page AdBlue du brouillon', async () => {
+    const { site } = await siteDemo();
+    const accueil = { fichier: 'accueil-tableau-de-bord', alt: 'Tableau de bord' };
+    assert.match(illustrationAccueil(site.illustrations, accueil), /^<figure class="illustration illustration-accueil" data-illustration><svg[^>]* role="img" aria-label="Tableau de bord"/);
+    assert.throws(() => illustrationAccueil(new Map(), accueil), /accueil au format 2 : illustration « accueil-tableau-de-bord » introuvable/);
+    assert.throws(() => illustrationAccueil(undefined, accueil), /introuvable/);
+    assert.equal(LIBELLES_PICTOGRAMMES['frein-stationnement'], 'Frein à main');
+    assert.deepEqual(brouillon.pages['voyant-adblue']?.reperes ?? [], []);
   });
 });

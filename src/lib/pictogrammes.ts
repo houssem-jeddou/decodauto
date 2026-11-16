@@ -13,7 +13,7 @@ export const LIBELLES_PICTOGRAMMES: Readonly<Record<string, string>> = {
   'cle-entretien': 'Clé d’entretien',
   batterie: 'Batterie',
   frein: 'Frein',
-  'frein-stationnement': 'Frein de stationnement',
+  'frein-stationnement': 'Frein à main',
   adblue: 'AdBlue',
   fap: 'FAP',
   prechauffage: 'Préchauffage',

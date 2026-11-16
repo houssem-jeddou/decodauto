@@ -483,7 +483,22 @@ export function tuileDeLaPage(site: Pick<DonneesSite, 'voyants' | 'pictogrammes'
  * Espace insécable après « p. » devant un numéro de page (charte graphique §3), dans le texte affiché d'une page au format 2
  * (jamais dans une balise ni un attribut). Le format 1 n'est pas touché (production identique).
  */
-export const insecableApresPage = (html: string): string => html.replace(/(>[^<]*)/g, (texte) => texte.replace(/(^|[^\p{L}])p\. (?=\d)/gu, `$1p.\u00a0`));
+export const insecableApresPage = (html: string): string =>
+  html
+    // Dessins, code, scripts et styles ne sont jamais retouchés (comme typographierHtml).
+    .split(/(<(svg|code|pre|script|style|textarea)\b[\s\S]*?<\/\2\s*>)/i)
+    .map((morceau, i) => (i % 3 === 0 ? morceau.replace(/(>[^<]*)/g, (texte) => texte.replace(/(^|[^\p{L}])p\. (?=\d)/gu, `$1p.\u00a0`)) : i % 3 === 1 ? morceau : ''))
+    .join('');
+
+/**
+ * Illustration du combiné de l'accueil au format 2 (affichée sur ordinateur) : exigée, comme sur les pages voyants (règle 2i ;
+ * brief F1.2-corrections, §6).
+ */
+export function illustrationAccueil(illustrations: ReadonlyMap<string, string> | undefined, illustration: { fichier: string; alt: string }): string {
+  const dessin = illustrations?.get(illustration.fichier);
+  if (dessin === undefined) throw new Error(`accueil au format 2 : illustration « ${illustration.fichier} » introuvable (${DOSSIER_ILLUSTRATIONS}/${illustration.fichier}.svg)`);
+  return figureIllustration(illustrationEnLigne(dessin, illustration.alt, illustration.fichier), '', 'illustration illustration-accueil');
+}
 
 /** Illustration de la page, tirée de `site.illustrations` ; obligatoire au format 2 (règle 2i). */
 export function illustrationDeLaPage(page: Pick<PageEditoriale, 'id' | 'illustration'>, site: Pick<DonneesSite, 'illustrations'>): string {

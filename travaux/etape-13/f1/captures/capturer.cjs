@@ -19,6 +19,16 @@ const POLICES = { chargee: false, secours: true };
 async function ouvrir(navigateur, url, largeur, hauteur, echelle, bloquer, source) {
   const page = await navigateur.newPage({ viewport: { width: largeur, height: hauteur }, deviceScaleFactor: echelle });
   if (bloquer) await page.route(/\/(polices|fonts)\//, (r) => r.abort());
+  // Police chargée : font-display: optional peut garder la police de secours si la police arrive après le premier rendu,
+  // même en cache ; pour la capture « police chargée », la feuille est servie en font-display: block (état d'un lecteur qui a
+  // la police en cache), sans rien changer d'autre (seconde revue de F1.2 : une capture « chargée » était en police de secours).
+  else {
+    await page.route(/(\.html?|\/|\.css)(\?.*)?$/, async (route) => {
+      const reponse = await route.fetch();
+      const corps = (await reponse.text()).replace(/font-display:\s*optional/g, 'font-display:block');
+      await route.fulfill({ response: reponse, body: corps });
+    });
+  }
   await page.goto(url, { waitUntil: 'networkidle' });
   if (!bloquer) await page.reload({ waitUntil: 'networkidle' });
   // Maquette du pilote : sa barre de commandes est masquée, comme pour ses propres mesures (porte/verifier_porte.py).
@@ -36,6 +46,7 @@ async function mesurer(page) {
     const provenance = document.querySelector('.provenance');
     return {
       policeTitre: [...document.fonts].some((f) => f.status === 'loaded' && f.weight === '700'),
+      lignesH1: (() => { const r = document.createRange(); r.selectNodeContents(document.querySelector('h1')); return new Set([...r.getClientRects()].map((x) => Math.round(x.top))).size; })(),
       h1: getComputedStyle(document.querySelector('h1')).fontFamily.split(',')[0],
       basMention: bas('.mention-ia'),
       // Règle 2a, comme la porte du pilote (porte/verifier_porte.py) : bas de la situation, du verdict, de l'urgence et de
@@ -47,6 +58,7 @@ async function mesurer(page) {
       hautIllustration: haut('figure.illustration'),
       illustrationSuitProvenance: figure !== null && provenance !== null ? figure.previousElementSibling === provenance : null,
       hautGrilleVoyants: haut('.grille-voyants'),
+      colle: (() => { const c = document.querySelector('.colle'); if (!c || getComputedStyle(c).display === 'none' || c.offsetParent === null) return null; return { hauteur: c.clientHeight, contenu: c.scrollHeight, hauteurEcran: innerHeight, defilement: getComputedStyle(c).overflowY }; })(),
       hautSectionVoyants: haut('.voyants'),
       hauteurPage: Math.round(document.documentElement.scrollHeight),
       largeurPage: Math.round(document.documentElement.scrollWidth),
@@ -83,9 +95,23 @@ async function mesurer(page) {
       const page = await ouvrir(navigateur, PAGES[1].demo, largeur, hauteur, echelle, bloquer, 'demo');
       for (const etat of ['long', 'court']) {
         if (etat === 'court') await page.evaluate((c) => document.querySelectorAll('.sommaire').forEach((s) => s.querySelectorAll('a span').forEach((a, i) => { a.textContent = c[i] ?? a.textContent; })), COURTS);
-        await page.evaluate((l) => { const s = document.querySelector(l > 900 ? '.sommaire-cote' : '.sommaire-colonne'); scrollTo(0, s.getBoundingClientRect().top + scrollY - (l > 900 ? 300 : 120)); }, largeur);
-        await page.waitForTimeout(150);
-        await page.screenshot({ path: join(sortie, `demo-sommaire-${etat}-${nom}-${police}.png`) });
+        if (largeur > 900) {
+          // Ordinateur : page défilée au-delà de l'encadré, colonne collée en haut (hauteur maximale, défilement propre, ombre du
+          // bas) ; puis la colonne défilée d'elle-même (ombres du haut et du bas).
+          await page.evaluate(() => { const c = document.querySelector('.colle'); c.scrollTop = 0; scrollTo(0, Math.max(0, document.querySelector('.decision').getBoundingClientRect().bottom + scrollY - 400)); });
+          await page.waitForTimeout(150);
+          await page.screenshot({ path: join(sortie, `demo-sommaire-${etat}-${nom}-${police}.png`) });
+          if (etat === 'long') {
+            await page.evaluate(() => { document.querySelector('.colle').scrollTop = 120; });
+            await page.waitForTimeout(150);
+            await page.screenshot({ path: join(sortie, `demo-sommaire-${etat}-${nom}-defilee-${police}.png`) });
+          }
+        } else {
+          // Téléphone : le sommaire de la colonne sous le haut de l'écran (défilement jamais négatif).
+          await page.evaluate(() => { const s = document.querySelector('.sommaire-colonne'); scrollTo(0, Math.max(0, s.getBoundingClientRect().top + scrollY - 120)); });
+          await page.waitForTimeout(150);
+          await page.screenshot({ path: join(sortie, `demo-sommaire-${etat}-${nom}-${police}.png`) });
+        }
       }
       await page.close();
     }

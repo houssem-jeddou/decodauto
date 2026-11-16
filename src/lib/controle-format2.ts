@@ -11,7 +11,8 @@
 //    l'encadré (règle 2d) ;
 //  - FORMAT2-REPLIE : chaque extrait cité du tableau des notices est dans une partie dépliable, au libellé unique sur la
 //    page (règle 2f) ; « Sources » est repliée (details fermé) et son résumé donne leur nombre (règle 2g) ;
-//  - FORMAT2-METHODE : ni « Verdict retenu » ni le mot « édition » dans le texte rédigé, hors citation (règle 2d) ;
+//  - FORMAT2-METHODE : ni « Verdict retenu », ni le mot « édition », ni une page écrite à la main (« p. 13 ») dans le texte
+//    rédigé, hors citation (règle 2d) ;
 //  - FORMAT2-SOMMAIRE : dès SOMMAIRE_MIN_H2 titres H2 dans le texte rédigé, un sommaire « Sur cette page » qui mène à
 //    chacun d'eux, sans lien vers une ancre absente (règle 2h).
 // Les mesures de hauteur (2a, 2i : premier écran, trois écrans) se font à la porte, avec un navigateur (conception, §5).
@@ -113,12 +114,17 @@ export function controlerFormat2(html: string, fichier: string, lignes: readonly
     }
   }
 
-  // Méthode hors du texte (2d) : ni « Verdict retenu » ni le mot « édition » dans le texte rédigé, hors citation (texte
-  // entre guillemets « … », blockquote, q).
+  // Méthode hors du texte (2d) : ni « Verdict retenu », ni le mot « édition », ni une page écrite à la main dans le texte rédigé,
+  // hors citation (texte entre guillemets « … », blockquote, q). Les « {{cite:…}} » n'y sont plus : leurs pages vont dans « Sources ».
   const corps = $('[data-corps]').clone();
   corps.find('blockquote, q, .notices-citation').remove();
   const sansCitations = texte(corps).replace(/«[^»]*»/g, ' ');
-  const methode = [/verdict retenu/i.test(sansCitations) ? '« Verdict retenu »' : '', /(^|[^\p{L}])[ée]ditions?(?![\p{L}])/iu.test(sansCitations) ? '« édition »' : ''].filter((m) => m !== '');
+  const methode = [
+    /verdict retenu/i.test(sansCitations) ? '« Verdict retenu »' : '',
+    /(^|[^\p{L}])[ée]ditions?(?![\p{L}])/iu.test(sansCitations) ? '« édition »' : '',
+    // Page écrite à la main (« p. 139 ») : au format 2, une page citée s'écrit « {{cite:…}} » (rendue dans « Sources »).
+    /(^|[^\p{L}])p\.[\s\u00a0\u202f]*\d/u.test(sansCitations) ? 'une page écrite à la main (« p. » suivi d\'un chiffre)' : '',
+  ].filter((m) => m !== '');
   if (methode.length > 0) constats.push(erreur('FORMAT2-METHODE', `le texte rédigé contient ${methode.join(' et ')} hors citation : au format 2, la méthode sort du texte, qui nomme la marque et le modèle ; les éditions et références vont dans « Sources » (règle 2d)`, fichier));
 
   // Sommaire (2h).

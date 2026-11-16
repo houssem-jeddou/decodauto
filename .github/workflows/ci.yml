@@ -168,8 +168,10 @@ jobs:
     # Lot F1, tâche F1.2 (demande de changement n° 30) : le site construit avec le voyant moteur, le voyant AdBlue et
     # l'accueil au format 2, d'après le brouillon travaux/etape-13/f1/demo/brouillon-format2.json (« Brouillon, jamais
     # validé »), appliqué en mémoire (scripts/lib/demo-format2.ts), dans dist-demo-format2. Tous les contrôles d'aujourd'hui
-    # et ceux du format 2 ; seules erreurs attendues, fixées par le script : les empreintes des lignes et des pages du
-    # brouillon (R4-EMPREINTE). Ce job ne conditionne pas le déploiement et rien de dist-demo-format2 n'est jamais déployé.
+    # et ceux du format 2 ; seules erreurs attendues, fixées par le script (scripts/lib/demo-format2.ts, attendusDemoFormat2) :
+    # les empreintes des lignes et des pages du brouillon (R4-EMPREINTE, jamais recalculées) et FORMAT2-METHODE sur une page
+    # dont le texte en ligne n'est pas encore repris (« Verdict retenu », pages écrites à la main ; champ texte_a_reprendre,
+    # lot F2). Ce job ne conditionne pas le déploiement et rien de dist-demo-format2 n'est jamais déployé.
     if: ${{ github.event_name != 'schedule' }}
     runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
