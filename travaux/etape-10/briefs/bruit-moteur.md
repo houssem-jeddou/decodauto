@@ -48,12 +48,12 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Mon moteur fait un bruit anormal : puis-je continuer à rouler ? »
-- **Angle** : Bruit avec un voyant (pression ou niveau d'huile : lignes de la base) ou sans voyant ; les notices lues ne décrivent presque pas de bruits : la page le dit et renvoie au garage.
+- **Angle** : Bruit avec un voyant d'huile : lignes de la base. Sans voyant : la conduite à tenir vient de Toyota (p. 242 et 291 : cliquetis ou bruits anormaux, contacter dès que possible un réparateur ; p. 36 et 242 : bruit d'échappement qui change, risque de monoxyde de carbone, vitres ouvertes, vérification immédiate) ; ce qui est normal : bruit plus fort un court moment au démarrage à froid (Seat p. 213), légers cliquetis très brefs à l'accélération (Toyota p. 335), bruit de la régénération du filtre (Seat p. 290) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).
 - **Élément unique** : Arbre de décision (avec ou sans voyant, au ralenti ou à l'accélération, claquement, cliquetis, sifflement).
 - **À traiter** :
   - « Claquement moteur », « cliquetis moteur », « bruit poussoir hydraulique », « injecteur qui claque », « turbo siffle », « bruit support moteur hs », « ventilateur qui fait du bruit », « bruit échappement » : branches de l'arbre, sans cause inventée.
   - Pages liées « niveau d'huile » (vague C : pas de lien avant sa publication) et « moteur PureTech » (signes cités par Stellantis).
 - **Sources à trouver avant la rédaction** :
-  - Causes des bruits : dépend du point à décider sur les sources techniques secondaires des pages panne.
+  - Causes d'un claquement, d'un cliquetis anormal ou d'un sifflement : aucune notice ; dépend de la demande de changement n° 31.
 - **Hors périmètre, à ne pas traiter** :
   - Diagnostic à l'oreille ou par enregistrement : non traité.

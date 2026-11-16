@@ -39,11 +39,12 @@
 - **À traiter** :
   - « Voltage batterie voiture », « batterie 12 volts » : la tension nominale est celle des notices (chargeur 12 V : Peugeot p. 188, Renault p. 363) ; aucune valeur de tension « bonne » ou « faible » sans source.
   - « Batterie 24 volts », « batterie 6 volts » : les notices lues parlent de 12 V ; Citroën interdit un booster de 24 V ou plus (p. 137).
-  - « Batterie avec voyant vert » : indicateur de certaines batteries, source à trouver.
+  - « Batterie avec voyant vert » : l'indicateur coloré (« œil magique ») est décrit par la notice Seat (p. 302-303 : électrolyte trop bas ou correct ; couleurs à relire sur le rendu de la page) ; pour les autres batteries, la notice ou l'étiquette de la batterie fait foi.
   - « Batterie 60ah, 70ah, 95 ah » : la notice ou l'étiquette de la batterie d'origine fait foi ; Renault : batterie équivalente (p. 341).
   - « Problème de batterie voiture symptôme », « batterie décharge lente » : tableau Renault p. 384, Seat p. 301 et 303.
+  - Causes d'une décharge : petits parcours, roulage urbain, froid, consommateurs utilisés moteur arrêté (Dacia p. 301) ; décharge naturelle d'une voiture immobilisée (Toyota p. 321) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).
 - **Sources à trouver avant la rédaction** :
-  - Valeurs de tension d'une batterie chargée ou déchargée et indicateur à voyant vert : documentation technique d'un fabricant de batteries, sinon ne rien en dire.
+  - Valeurs de tension d'une batterie chargée ou déchargée : aucune notice ; dépend de la demande de changement n° 31 (documents techniques d'un fabricant de batteries), sinon ne rien en dire.
 - **Hors périmètre, à ne pas traiter** :
   - Prix, marques et comparatifs de batteries (docs/01 : pas de requête d'achat générique comme objectif).
   - Batterie d'un véhicule hybride ou électrique (docs/02).

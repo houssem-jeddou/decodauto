@@ -36,13 +36,12 @@
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Puis-je changer moi-même la batterie de ma voiture ? »
-- **Angle** : Tutoriel limité à ce que disent les notices : Renault réserve toute intervention sur la batterie à un professionnel (p. 341) ; Peugeot et Citroën décrivent le débranchement (borne +, attente de 4 minutes) ; Seat donne l'ordre des câbles (p. 301-302) et recommande d'acheter la batterie dans un service technique (p. 303).
-- **Élément unique** : Tutoriel (étapes numérotées), avec « quand ne pas le faire soi-même » selon la notice.
+- **Angle** : La réponse dépend de la notice : Renault et Dacia réservent toute intervention sur la batterie à un professionnel (p. 341 ; p. 302) ; Seat demande de s'adresser à un atelier pour tout problème de batterie et de choisir la batterie de rechange avec un service technique (p. 301 et 303) ; Toyota demande de contacter un réparateur avant de débrancher les bornes (p. 321) ; Peugeot et Citroën réservent au réseau ou à un atelier le remplacement de la batterie des versions Stop & Start (p. 168 ; p. 114) et décrivent le débranchement (borne +, attente de 4 minutes).
+- **Élément unique** : Tableau « Ce que dit la notice de votre marque » (qui change la batterie, batterie Stop & Start, caractéristiques de la batterie de rechange, ordre de débranchement, réinitialisations), puis les étapes numérotées des seuls cas que les notices décrivent (proposition du 16/11, à valider avec le lot : un tutoriel « faites-le vous-même » contredirait quatre notices, et Peugeot et Citroën pour leurs versions Stop & Start).
 - **À traiter** :
+  - Décision en tête : faites changer la batterie par un professionnel, ou consultez-le d'abord, sauf si la notice de votre voiture décrit l'opération ; marque par marque (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).
   - « Comment changer une batterie de voiture sans perdre les données » : réinitialisations demandées par les notices après rebranchement (Peugeot p. 190, Citroën p. 139, Dacia et Seat pour la direction).
   - « Borne batterie voiture », « débrancher une batterie de voiture » : ordre des bornes selon la notice de la voiture.
   - Page mère « batterie » ; page liée « voiture ne démarre pas ».
-- **Sources à trouver avant la rédaction** :
-  - Rubrique batterie des notices Dacia et Toyota.
 - **Hors périmètre, à ne pas traiter** :
   - Hybrides : Renault interdit de débrancher la batterie de 12 volts d'une E-Tech (p. 340) ; hors périmètre (docs/02).

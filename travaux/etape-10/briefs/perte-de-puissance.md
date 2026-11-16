@@ -45,14 +45,14 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Ma voiture perd de la puissance : puis-je continuer à rouler ? »
-- **Angle** : Perte de puissance avec un voyant (moteur, préchauffage qui clignote, EPC) ou sans voyant : quand un voyant est allumé, sa ligne décide ; sans voyant, les notices lues ne disent rien.
+- **Angle** : Perte de puissance avec un voyant (moteur, préchauffage qui clignote, EPC) : la ligne du voyant décide ; sans voyant, les notices disent quoi faire (Toyota p. 291 : perte de puissance importante, contacter dès que possible un réparateur ; Seat p. 289 : baisse de puissance, atelier spécialisé ; Dacia p. 162 et Renault p. 188 : réparations au plus vite) et donnent des causes (Seat p. 283 : essence d'indice d'octane plus bas ; Toyota p. 322 : signe de surchauffe ; Dacia p. 162 : allumage défectueux, panne d'essence) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).
 - **Élément unique** : Arbre de décision (quel voyant, depuis quand, essence ou diesel, avec fumée ou à-coups).
 - **À traiter** :
-  - « Voyant epc perte de puissance » : le témoin EPC (groupe Volkswagen) n'a pas de ligne de la base (un seul groupe, étape 5) : ligne saisie avec la notice Seat à la page près, ou renvoi à la notice.
+  - « Voyant epc perte de puissance » : témoin EPC décrit par la notice Seat Ibiza p. 288 (« Dysfonctionnement de la gestion du moteur essence. Faites immédiatement contrôler le moteur par un atelier spécialisé. ») : ligne saisie (une seule notice : la page le dit), même formule que la ligne « préchauffage qui clignote » validée.
   - « Perte de puissance 1.6 hdi 110 sans voyant » : sans voyant, aucune notice lue ; ne rien transposer d'un autre moteur (charte §2.5).
   - Diesel et essence : formulations du lecteur du brief ; pages liées « voiture qui broute » et « fumée échappement ».
 - **Sources à trouver avant la rédaction** :
-  - Notice Seat : témoin EPC, page à relire.
-  - Mode dégradé décrit par les notices (Peugeot, Renault, Dacia), page à relire.
+  - Causes propres au diesel, hors codes P0087 et P0299 (pages liées) : dépend de la demande de changement n° 31.
+  - « Mode dégradé » : aucune notice lue ne le décrit sous ce nom (relevé du 16/11) : ne pas en parler comme d'un mode décrit par le constructeur.
 - **Hors périmètre, à ne pas traiter** :
   - Reprogrammation moteur, « défapage », suppression de la vanne EGR : non traités.

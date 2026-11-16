@@ -32,13 +32,13 @@
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Ma voiture broute : puis-je continuer à rouler ? »
-- **Angle** : Avec le voyant moteur qui clignote, la base décide : ligne `moteur-orange-clignotant` (« ratés de combustion », arrêt immédiat, écart Seat, Renault et Dacia). Sans voyant, aucune notice lue ne décrit le broutement.
+- **Angle** : Avec le voyant moteur qui clignote, la base décide (ligne `moteur-orange-clignotant`). Sans voyant, les notices disent quoi faire et pourquoi pour l'essence : ratés d'allumage et à-coups dus à un système d'allumage défectueux, une panne d'essence ou une bougie débranchée, réparations au plus vite (Dacia p. 162, Renault p. 188) ; réservoir vidé, ratés (Seat p. 289) ; à-coups ou fonctionnement irrégulier : contacter dès que possible un réparateur (Toyota p. 291) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).
 - **Élément unique** : Arbre de décision (voyant moteur clignotant, fixe ou éteint ; au démarrage, à bas régime, en roulant, à l'accélération ; essence ou diesel).
 - **À traiter** :
   - « Voiture qui broute en roulant », « à bas régime », « au démarrage », « à l'accélération diesel » : branches de l'arbre.
   - « Voiture qui broute et perte de puissance » : page liée « perte de puissance ».
   - Lignes `moteur-orange-clignotant` et `moteur-orange-fixe` de la base, reprises telles quelles.
 - **Sources à trouver avant la rédaction** :
-  - Causes du broutement : aucune notice lue ; dépend du point à décider sur les sources techniques secondaires des pages panne.
+  - Causes propres au diesel et détail des vérifications : dépend de la demande de changement n° 31.
 - **Hors périmètre, à ne pas traiter** :
   - Valises et lecteurs OBD (docs/02).

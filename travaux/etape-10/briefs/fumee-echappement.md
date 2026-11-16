@@ -38,7 +38,7 @@ Et 13 autres : « fumée blanche voiture diesel », « fumée blanche voiture es
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Ma voiture fume à l'échappement : puis-je continuer à rouler ? »
-- **Angle** : Fumée blanche d'un diesel pendant la régénération du filtre à particules, ou d'une essence par temps froid ou humide : « pas obligatoirement une anomalie » (Renault p. 386) ; fumée sous le capot : arrêt. Fumée noire ou bleue : aucune notice lue.
+- **Angle** : Fumée blanche d'un diesel pendant la régénération du filtre (Renault p. 186 et 386, Dacia p. 160 et 348 : sans conséquence), d'une essence par temps froid ou humide (Renault p. 386) ; vapeur d'eau après un long ralenti et odeur de « brûlé » des premières régénérations (Peugeot p. 168, Citroën p. 115) ; fumée du chauffage d'appoint d'un diesel sous la voiture par temps froid (Seat p. 213) ; fumée sous le capot : arrêt (Renault p. 386, Seat p. 290 : ne pas ouvrir le capot tant que de la vapeur s'échappe). Fumée noire ou bleue : aucune notice (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).
 - **Élément unique** : Arbre de décision (couleur, au démarrage ou en roulant, avec un voyant, avec une odeur ou une perte de puissance).
 - **À traiter** :
   - Requête principale à revoir, comme le note le journal (« Pour l'étape 8 et les suivantes ») : « fumée blanche échappement » ne dit rien de la fumée noire, très cherchée (« diesel fume noir », « fumée noire diesel ») ; la changer modifie le plan du site : demande de changement, avec le lot.
@@ -46,6 +46,6 @@ Et 13 autres : « fumée blanche voiture diesel », « fumée blanche voiture es
   - « Diesel fume noir », « traitement fumée noire diesel » : aucune notice lue ; ne recommander aucun additif sans source.
   - « Ma voiture fume blanche et perte de puissance » : page liée « perte de puissance ».
 - **Sources à trouver avant la rédaction** :
-  - Fumée noire et bleue : dépend du point à décider sur les sources techniques secondaires des pages panne.
+  - Fumée noire et bleue : dépend de la demande de changement n° 31.
 - **Hors périmètre, à ne pas traiter** :
   - Additifs et produits de nettoyage vendus : non recommandés sans source admise.

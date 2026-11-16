@@ -22,7 +22,7 @@
   },
   "voiture-qui-broute": {
     "question_decision": "Ma voiture broute : puis-je continuer à rouler ?",
-    "angle": "Avec le voyant moteur qui clignote, la base décide : ligne `moteur-orange-clignotant` (« ratés de combustion », arrêt immédiat, écart Seat, Renault et Dacia). Sans voyant, aucune notice lue ne décrit le broutement.",
+    "angle": "Avec le voyant moteur qui clignote, la base décide (ligne `moteur-orange-clignotant`). Sans voyant, les notices disent quoi faire et pourquoi pour l'essence : ratés d'allumage et à-coups dus à un système d'allumage défectueux, une panne d'essence ou une bougie débranchée, réparations au plus vite (Dacia p. 162, Renault p. 188) ; réservoir vidé, ratés (Seat p. 289) ; à-coups ou fonctionnement irrégulier : contacter dès que possible un réparateur (Toyota p. 291) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).",
     "element_unique": "Arbre de décision (voyant moteur clignotant, fixe ou éteint ; au démarrage, à bas régime, en roulant, à l'accélération ; essence ou diesel).",
     "a_traiter": [
       "« Voiture qui broute en roulant », « à bas régime », « au démarrage », « à l'accélération diesel » : branches de l'arbre.",
@@ -30,7 +30,7 @@
       "Lignes `moteur-orange-clignotant` et `moteur-orange-fixe` de la base, reprises telles quelles."
     ],
     "sources_a_trouver": [
-      "Causes du broutement : aucune notice lue ; dépend du point à décider sur les sources techniques secondaires des pages panne."
+      "Causes propres au diesel et détail des vérifications : dépend de la demande de changement n° 31."
     ],
     "hors_perimetre": [
       "Valises et lecteurs OBD (docs/02)."
@@ -38,16 +38,16 @@
   },
   "perte-de-puissance": {
     "question_decision": "Ma voiture perd de la puissance : puis-je continuer à rouler ?",
-    "angle": "Perte de puissance avec un voyant (moteur, préchauffage qui clignote, EPC) ou sans voyant : quand un voyant est allumé, sa ligne décide ; sans voyant, les notices lues ne disent rien.",
+    "angle": "Perte de puissance avec un voyant (moteur, préchauffage qui clignote, EPC) : la ligne du voyant décide ; sans voyant, les notices disent quoi faire (Toyota p. 291 : perte de puissance importante, contacter dès que possible un réparateur ; Seat p. 289 : baisse de puissance, atelier spécialisé ; Dacia p. 162 et Renault p. 188 : réparations au plus vite) et donnent des causes (Seat p. 283 : essence d'indice d'octane plus bas ; Toyota p. 322 : signe de surchauffe ; Dacia p. 162 : allumage défectueux, panne d'essence) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).",
     "element_unique": "Arbre de décision (quel voyant, depuis quand, essence ou diesel, avec fumée ou à-coups).",
     "a_traiter": [
-      "« Voyant epc perte de puissance » : le témoin EPC (groupe Volkswagen) n'a pas de ligne de la base (un seul groupe, étape 5) : ligne saisie avec la notice Seat à la page près, ou renvoi à la notice.",
+      "« Voyant epc perte de puissance » : témoin EPC décrit par la notice Seat Ibiza p. 288 (« Dysfonctionnement de la gestion du moteur essence. Faites immédiatement contrôler le moteur par un atelier spécialisé. ») : ligne saisie (une seule notice : la page le dit), même formule que la ligne « préchauffage qui clignote » validée.",
       "« Perte de puissance 1.6 hdi 110 sans voyant » : sans voyant, aucune notice lue ; ne rien transposer d'un autre moteur (charte §2.5).",
       "Diesel et essence : formulations du lecteur du brief ; pages liées « voiture qui broute » et « fumée échappement »."
     ],
     "sources_a_trouver": [
-      "Notice Seat : témoin EPC, page à relire.",
-      "Mode dégradé décrit par les notices (Peugeot, Renault, Dacia), page à relire."
+      "Causes propres au diesel, hors codes P0087 et P0299 (pages liées) : dépend de la demande de changement n° 31.",
+      "« Mode dégradé » : aucune notice lue ne le décrit sous ce nom (relevé du 16/11) : ne pas en parler comme d'un mode décrit par le constructeur."
     ],
     "hors_perimetre": [
       "Reprogrammation moteur, « défapage », suppression de la vanne EGR : non traités."
@@ -55,7 +55,7 @@
   },
   "surchauffe-moteur": {
     "question_decision": "Mon moteur surchauffe : puis-je continuer à rouler ?",
-    "angle": "Ligne `temperature-rouge` de la base, rattachée à cette page (arrêt immédiat, cinq notices ; son tableau des notices y est affiché), puis ce que disent les notices après l'arrêt : laisser refroidir, ne jamais ouvrir le vase chaud, appoint seulement s'il reste du liquide (Seat p. 298), causes du tableau Renault p. 387.",
+    "angle": "Ligne `temperature-rouge` de la base, rattachée à cette page (arrêt immédiat, cinq notices ; son tableau des notices y est affiché), puis ce que disent les notices après l'arrêt : laisser refroidir, ne jamais ouvrir le vase chaud, appoint seulement s'il reste du liquide (Seat p. 298), causes du tableau Renault p. 387. Peugeot et Citroën : contrôle et appoint moteur froid, attendre au moins une heure, dévisser le bouchon de deux tours en cas d'urgence (p. 167 ; p. 113) ; Toyota : mesures correctives et contrôle du ventilateur (p. 322-323) ; Seat : ne pas ouvrir le capot tant que de la vapeur s'échappe (p. 290) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).",
     "element_unique": "Arbre de décision (voyant rouge ou aiguille en zone rouge, vapeur ou fumée sous le capot, bouillonnement dans le bocal, fuite).",
     "a_traiter": [
       "« Voyant liquide de refroidissement », « voyant température moteur », « logo liquide de refroidissement » : pictogramme et ligne de la base.",
@@ -63,23 +63,21 @@
       "Fumée sous le capot : arrêt (Renault p. 386).",
       "Page liée « liquide de refroidissement » (vague C) : pas de lien dans le texte avant sa publication."
     ],
-    "sources_a_trouver": [
-      "Peugeot et Citroën : rubrique du liquide de refroidissement (niveau, appoint), page à relire."
-    ],
+    "sources_a_trouver": [],
     "hors_perimetre": [
       "Prix d'un joint de culasse : le coût probable vient de la liste des pièces, jamais d'un devis d'enseigne."
     ]
   },
   "bruit-moteur": {
     "question_decision": "Mon moteur fait un bruit anormal : puis-je continuer à rouler ?",
-    "angle": "Bruit avec un voyant (pression ou niveau d'huile : lignes de la base) ou sans voyant ; les notices lues ne décrivent presque pas de bruits : la page le dit et renvoie au garage.",
+    "angle": "Bruit avec un voyant d'huile : lignes de la base. Sans voyant : la conduite à tenir vient de Toyota (p. 242 et 291 : cliquetis ou bruits anormaux, contacter dès que possible un réparateur ; p. 36 et 242 : bruit d'échappement qui change, risque de monoxyde de carbone, vitres ouvertes, vérification immédiate) ; ce qui est normal : bruit plus fort un court moment au démarrage à froid (Seat p. 213), légers cliquetis très brefs à l'accélération (Toyota p. 335), bruit de la régénération du filtre (Seat p. 290) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).",
     "element_unique": "Arbre de décision (avec ou sans voyant, au ralenti ou à l'accélération, claquement, cliquetis, sifflement).",
     "a_traiter": [
       "« Claquement moteur », « cliquetis moteur », « bruit poussoir hydraulique », « injecteur qui claque », « turbo siffle », « bruit support moteur hs », « ventilateur qui fait du bruit », « bruit échappement » : branches de l'arbre, sans cause inventée.",
       "Pages liées « niveau d'huile » (vague C : pas de lien avant sa publication) et « moteur PureTech » (signes cités par Stellantis)."
     ],
     "sources_a_trouver": [
-      "Causes des bruits : dépend du point à décider sur les sources techniques secondaires des pages panne."
+      "Causes d'un claquement, d'un cliquetis anormal ou d'un sifflement : aucune notice ; dépend de la demande de changement n° 31."
     ],
     "hors_perimetre": [
       "Diagnostic à l'oreille ou par enregistrement : non traité."
@@ -87,7 +85,7 @@
   },
   "fumee-echappement": {
     "question_decision": "Ma voiture fume à l'échappement : puis-je continuer à rouler ?",
-    "angle": "Fumée blanche d'un diesel pendant la régénération du filtre à particules, ou d'une essence par temps froid ou humide : « pas obligatoirement une anomalie » (Renault p. 386) ; fumée sous le capot : arrêt. Fumée noire ou bleue : aucune notice lue.",
+    "angle": "Fumée blanche d'un diesel pendant la régénération du filtre (Renault p. 186 et 386, Dacia p. 160 et 348 : sans conséquence), d'une essence par temps froid ou humide (Renault p. 386) ; vapeur d'eau après un long ralenti et odeur de « brûlé » des premières régénérations (Peugeot p. 168, Citroën p. 115) ; fumée du chauffage d'appoint d'un diesel sous la voiture par temps froid (Seat p. 213) ; fumée sous le capot : arrêt (Renault p. 386, Seat p. 290 : ne pas ouvrir le capot tant que de la vapeur s'échappe). Fumée noire ou bleue : aucune notice (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).",
     "element_unique": "Arbre de décision (couleur, au démarrage ou en roulant, avec un voyant, avec une odeur ou une perte de puissance).",
     "a_traiter": [
       "Requête principale à revoir, comme le note le journal (« Pour l'étape 8 et les suivantes ») : « fumée blanche échappement » ne dit rien de la fumée noire, très cherchée (« diesel fume noir », « fumée noire diesel ») ; la changer modifie le plan du site : demande de changement, avec le lot.",
@@ -96,7 +94,7 @@
       "« Ma voiture fume blanche et perte de puissance » : page liée « perte de puissance »."
     ],
     "sources_a_trouver": [
-      "Fumée noire et bleue : dépend du point à décider sur les sources techniques secondaires des pages panne."
+      "Fumée noire et bleue : dépend de la demande de changement n° 31."
     ],
     "hors_perimetre": [
       "Additifs et produits de nettoyage vendus : non recommandés sans source admise."
@@ -109,12 +107,13 @@
     "a_traiter": [
       "« Voltage batterie voiture », « batterie 12 volts » : la tension nominale est celle des notices (chargeur 12 V : Peugeot p. 188, Renault p. 363) ; aucune valeur de tension « bonne » ou « faible » sans source.",
       "« Batterie 24 volts », « batterie 6 volts » : les notices lues parlent de 12 V ; Citroën interdit un booster de 24 V ou plus (p. 137).",
-      "« Batterie avec voyant vert » : indicateur de certaines batteries, source à trouver.",
+      "« Batterie avec voyant vert » : l'indicateur coloré (« œil magique ») est décrit par la notice Seat (p. 302-303 : électrolyte trop bas ou correct ; couleurs à relire sur le rendu de la page) ; pour les autres batteries, la notice ou l'étiquette de la batterie fait foi.",
       "« Batterie 60ah, 70ah, 95 ah » : la notice ou l'étiquette de la batterie d'origine fait foi ; Renault : batterie équivalente (p. 341).",
-      "« Problème de batterie voiture symptôme », « batterie décharge lente » : tableau Renault p. 384, Seat p. 301 et 303."
+      "« Problème de batterie voiture symptôme », « batterie décharge lente » : tableau Renault p. 384, Seat p. 301 et 303.",
+      "Causes d'une décharge : petits parcours, roulage urbain, froid, consommateurs utilisés moteur arrêté (Dacia p. 301) ; décharge naturelle d'une voiture immobilisée (Toyota p. 321) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md)."
     ],
     "sources_a_trouver": [
-      "Valeurs de tension d'une batterie chargée ou déchargée et indicateur à voyant vert : documentation technique d'un fabricant de batteries, sinon ne rien en dire."
+      "Valeurs de tension d'une batterie chargée ou déchargée : aucune notice ; dépend de la demande de changement n° 31 (documents techniques d'un fabricant de batteries), sinon ne rien en dire."
     ],
     "hors_perimetre": [
       "Prix, marques et comparatifs de batteries (docs/01 : pas de requête d'achat générique comme objectif).",
@@ -123,48 +122,44 @@
   },
   "batterie-changer": {
     "question_decision": "Puis-je changer moi-même la batterie de ma voiture ?",
-    "angle": "Tutoriel limité à ce que disent les notices : Renault réserve toute intervention sur la batterie à un professionnel (p. 341) ; Peugeot et Citroën décrivent le débranchement (borne +, attente de 4 minutes) ; Seat donne l'ordre des câbles (p. 301-302) et recommande d'acheter la batterie dans un service technique (p. 303).",
-    "element_unique": "Tutoriel (étapes numérotées), avec « quand ne pas le faire soi-même » selon la notice.",
+    "angle": "La réponse dépend de la notice : Renault et Dacia réservent toute intervention sur la batterie à un professionnel (p. 341 ; p. 302) ; Seat demande de s'adresser à un atelier pour tout problème de batterie et de choisir la batterie de rechange avec un service technique (p. 301 et 303) ; Toyota demande de contacter un réparateur avant de débrancher les bornes (p. 321) ; Peugeot et Citroën réservent au réseau ou à un atelier le remplacement de la batterie des versions Stop & Start (p. 168 ; p. 114) et décrivent le débranchement (borne +, attente de 4 minutes).",
+    "element_unique": "Tableau « Ce que dit la notice de votre marque » (qui change la batterie, batterie Stop & Start, caractéristiques de la batterie de rechange, ordre de débranchement, réinitialisations), puis les étapes numérotées des seuls cas que les notices décrivent (proposition du 16/11, à valider avec le lot : un tutoriel « faites-le vous-même » contredirait quatre notices, et Peugeot et Citroën pour leurs versions Stop & Start).",
     "a_traiter": [
+      "Décision en tête : faites changer la batterie par un professionnel, ou consultez-le d'abord, sauf si la notice de votre voiture décrit l'opération ; marque par marque (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).",
       "« Comment changer une batterie de voiture sans perdre les données » : réinitialisations demandées par les notices après rebranchement (Peugeot p. 190, Citroën p. 139, Dacia et Seat pour la direction).",
       "« Borne batterie voiture », « débrancher une batterie de voiture » : ordre des bornes selon la notice de la voiture.",
       "Page mère « batterie » ; page liée « voiture ne démarre pas »."
     ],
-    "sources_a_trouver": [
-      "Rubrique batterie des notices Dacia et Toyota."
-    ],
+    "sources_a_trouver": [],
     "hors_perimetre": [
       "Hybrides : Renault interdit de débrancher la batterie de 12 volts d'une E-Tech (p. 340) ; hors périmètre (docs/02)."
     ]
   },
   "batterie-recharger": {
     "question_decision": "Comment recharger la batterie de ma voiture, et puis-je rouler ensuite ?",
-    "angle": "Recharge avec un chargeur de 12 V selon la notice (Peugeot p. 188-189, sans débrancher la batterie ; Renault p. 362-363 ; Seat p. 303 : par un atelier spécialisé), démarrage avec une autre voiture, jamais une batterie gelée.",
+    "angle": "Recharge avec un chargeur de 12 V selon la notice (Peugeot p. 188-189, sans débrancher la batterie ; Renault p. 362-363 ; Dacia p. 326 ; Seat p. 303 : par un atelier spécialisé, la batterie demandant une tension de charge limitée), démarrage avec une autre voiture, jamais une batterie gelée.",
     "element_unique": "Tutoriel (étapes numérotées).",
     "a_traiter": [
       "« Recharger une batterie de voiture avec une autre voiture », « câble recharge », « pince recharge » : démarrage avec une autre batterie selon la notice.",
       "« Peut-on charger une batterie de voiture sans la débrancher » : Peugeot, oui (p. 188) ; les autres selon leur notice.",
       "« Recharge batterie voiture en roulant » : Peugeot et Citroën, rouler avant une charge suffisante peut altérer certaines fonctions.",
-      "Page mère « batterie » ; page liée « voiture ne démarre pas »."
+      "Page mère « batterie » ; page liée « voiture ne démarre pas ».",
+      "Toyota : démarrage avec un deuxième véhicule (p. 319-320), puis « faites vérifier le véhicule dès que possible » ; « Il est impossible de mettre le moteur en marche en poussant le véhicule » (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md)."
     ],
-    "sources_a_trouver": [
-      "Rubrique batterie des notices Dacia et Toyota."
-    ],
+    "sources_a_trouver": [],
     "hors_perimetre": [
       "« Recharger batterie 12v toyota hybride » : véhicule hybride, hors périmètre (docs/02)."
     ]
   },
   "nettoyer-fap": {
     "question_decision": "Puis-je nettoyer moi-même le filtre à particules, et comment ?",
-    "angle": "Ce que décrivent les notices : la régénération en roulant (ligne `fap` de la base) et, chez Peugeot et Citroën, l'additif. Les nettoyages proposés en ligne (hydrogène, karcher, sans démontage) n'ont aucune source admise : la page le dit, sans les décrire ni les recommander.",
+    "angle": "Ce que décrivent les notices : la régénération en roulant (ligne `fap` de la base) et, chez Peugeot et Citroën, l'additif. Les nettoyages proposés en ligne (hydrogène, karcher, sans démontage) n'ont aucune source admise : la page le dit, sans les décrire ni les recommander. Relevé : régénération en roulant au moins 60 km/h (Peugeot p. 168, Citroën p. 114) ; régime au-dessus de 2 000 tr/min si possible, 10 à 20 minutes (Renault p. 186) ; 50 à 110 km/h, 5 à 20 minutes, essence (Dacia p. 162, Renault p. 188) ; 50 à 120 km/h, atelier si le témoin reste allumé après 30 minutes (Seat p. 289-290) ; additif : appoint par le réseau ou un atelier (Peugeot p. 15, Citroën p. 113-114) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).",
     "element_unique": "Tutoriel (régénération en roulant selon la notice).",
     "a_traiter": [
       "« Nettoyage fap sans démontage », « hydrogène », « karcher », « professionnel », « décrasser fap », « peut-on nettoyer un fap » : réponse honnête, selon les notices.",
       "Page liée « voyant FAP » (vague A, en ligne)."
     ],
-    "sources_a_trouver": [
-      "Notices Peugeot et Citroën : rubrique de l'additif du filtre à particules, page à relire."
-    ],
+    "sources_a_trouver": [],
     "hors_perimetre": [
       "Prix d'un nettoyage en atelier et enseignes.",
       "Suppression du filtre (« défapage ») : non traitée."

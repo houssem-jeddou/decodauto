@@ -38,14 +38,13 @@ Et 2 autres : « recharger une batterie à plat », « recharger une batterie de
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Comment recharger la batterie de ma voiture, et puis-je rouler ensuite ? »
-- **Angle** : Recharge avec un chargeur de 12 V selon la notice (Peugeot p. 188-189, sans débrancher la batterie ; Renault p. 362-363 ; Seat p. 303 : par un atelier spécialisé), démarrage avec une autre voiture, jamais une batterie gelée.
+- **Angle** : Recharge avec un chargeur de 12 V selon la notice (Peugeot p. 188-189, sans débrancher la batterie ; Renault p. 362-363 ; Dacia p. 326 ; Seat p. 303 : par un atelier spécialisé, la batterie demandant une tension de charge limitée), démarrage avec une autre voiture, jamais une batterie gelée.
 - **Élément unique** : Tutoriel (étapes numérotées).
 - **À traiter** :
   - « Recharger une batterie de voiture avec une autre voiture », « câble recharge », « pince recharge » : démarrage avec une autre batterie selon la notice.
   - « Peut-on charger une batterie de voiture sans la débrancher » : Peugeot, oui (p. 188) ; les autres selon leur notice.
   - « Recharge batterie voiture en roulant » : Peugeot et Citroën, rouler avant une charge suffisante peut altérer certaines fonctions.
   - Page mère « batterie » ; page liée « voiture ne démarre pas ».
-- **Sources à trouver avant la rédaction** :
-  - Rubrique batterie des notices Dacia et Toyota.
+  - Toyota : démarrage avec un deuxième véhicule (p. 319-320), puis « faites vérifier le véhicule dès que possible » ; « Il est impossible de mettre le moteur en marche en poussant le véhicule » (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).
 - **Hors périmètre, à ne pas traiter** :
   - « Recharger batterie 12v toyota hybride » : véhicule hybride, hors périmètre (docs/02).

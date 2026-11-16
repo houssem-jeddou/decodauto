@@ -308,11 +308,12 @@ solliciter que faiblement. Rajoutez dès que possible du supercarburant. »
   batteries utilisées sont dotées d'une technologie particulière qui nécessite une limitation de la tension de
   charge. » ; remplacement : se renseigner auprès d'un Service Technique avant l'achat, batterie Start-Stop remplacée
   seulement par une batterie de mêmes spécifications.
-- **Conséquence pour `batterie-changer` (16 116 recherches par mois au plus)** : les six notices renvoient le changement
-  de batterie à un professionnel, ou au moins demandent de le consulter d'abord (Renault p. 341 et Dacia p. 302 : toute
-  intervention ; Seat p. 301 et 303 ; Peugeot p. 168 et Citroën p. 114 : versions Stop & Start ; Toyota p. 321 : avant de
-  débrancher les bornes). Un tutoriel « changer sa batterie soi-même » contredirait les notices : la décision de la page
-  est « faites-la changer par un professionnel, selon votre notice », et l'élément unique gagne à devenir le **tableau
+- **Conséquence pour `batterie-changer` (16 116 recherches par mois au plus)** : quatre notices renvoient toute
+  intervention sur la batterie à un professionnel, ou demandent de le consulter d'abord (Renault p. 341 et Dacia p. 302 :
+  toute intervention ; Seat p. 301 et 303 ; Toyota p. 321 : avant de débrancher les bornes) ; Peugeot et Citroën le font
+  pour les versions Stop & Start (p. 168 ; p. 114) et décrivent ailleurs le débranchement. Un tutoriel « changer sa
+  batterie soi-même » contredirait ces notices : la décision de la page est « faites-la changer par un professionnel, sauf
+  si la notice de votre voiture décrit l'opération », et l'élément unique gagne à devenir le **tableau
   « ce que dit la notice de votre marque »** (qui la change, batterie Start-Stop, caractéristiques à respecter, ordre de
   débranchement) plutôt qu'un tutoriel ; consigne du brief à revoir avant la rédaction (proposée par Claude, validée avec
   le lot).

@@ -54,14 +54,12 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Mon moteur surchauffe : puis-je continuer à rouler ? »
-- **Angle** : Ligne `temperature-rouge` de la base, rattachée à cette page (arrêt immédiat, cinq notices ; son tableau des notices y est affiché), puis ce que disent les notices après l'arrêt : laisser refroidir, ne jamais ouvrir le vase chaud, appoint seulement s'il reste du liquide (Seat p. 298), causes du tableau Renault p. 387.
+- **Angle** : Ligne `temperature-rouge` de la base, rattachée à cette page (arrêt immédiat, cinq notices ; son tableau des notices y est affiché), puis ce que disent les notices après l'arrêt : laisser refroidir, ne jamais ouvrir le vase chaud, appoint seulement s'il reste du liquide (Seat p. 298), causes du tableau Renault p. 387. Peugeot et Citroën : contrôle et appoint moteur froid, attendre au moins une heure, dévisser le bouchon de deux tours en cas d'urgence (p. 167 ; p. 113) ; Toyota : mesures correctives et contrôle du ventilateur (p. 322-323) ; Seat : ne pas ouvrir le capot tant que de la vapeur s'échappe (p. 290) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).
 - **Élément unique** : Arbre de décision (voyant rouge ou aiguille en zone rouge, vapeur ou fumée sous le capot, bouillonnement dans le bocal, fuite).
 - **À traiter** :
   - « Voyant liquide de refroidissement », « voyant température moteur », « logo liquide de refroidissement » : pictogramme et ligne de la base.
   - « Voiture qui chauffe en roulant », « cause surchauffe moteur » : tableau Renault p. 387 (motoventilateur, fuite, joint de culasse).
   - Fumée sous le capot : arrêt (Renault p. 386).
   - Page liée « liquide de refroidissement » (vague C) : pas de lien dans le texte avant sa publication.
-- **Sources à trouver avant la rédaction** :
-  - Peugeot et Citroën : rubrique du liquide de refroidissement (niveau, appoint), page à relire.
 - **Hors périmètre, à ne pas traiter** :
   - Prix d'un joint de culasse : le coût probable vient de la liste des pièces, jamais d'un devis d'enseigne.
