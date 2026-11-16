@@ -31,7 +31,7 @@ import { normaliserTexte } from './empreinte.ts';
 import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, motsDe, phraseNotices, type RenvoiNotices } from './format2.ts';
 import type { LigneResolue } from './calcul.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
-import { graviteDuVerdict } from './composants.ts';
+import { ancreNoticesLigne, graviteDuVerdict } from './composants.ts';
 import type { Verdict } from '../schemas/listes.ts';
 
 export interface ConstatFormat2 {
@@ -96,7 +96,19 @@ export function controlerFormat2(
         return;
       }
       const ancre = renvoi.lien.startsWith('#') ? renvoi.lien.slice(1) : undefined;
-      if (ancre !== undefined && $(`[id="${ancre}"]`).length !== 1) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : le lien « ${FORMAT2.lienVotreMarque} » mène à #${ancre}, absent de la page`, fichier));
+      if (ancre !== undefined && $(`[id="${ancre}"]`).length !== 1) {
+        constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : le lien « ${FORMAT2.lienVotreMarque} » mène à #${ancre}, absent de la page`, fichier));
+        return;
+      }
+      // Ligne saisie (décision du 16/11/2026) : l'ancre est dans le bloc « Notices », sur la phrase des notices de cette ligne.
+      if (ancre === ancreNoticesLigne(i + 1)) {
+        const cible = $(`[id="${ancre}"]`);
+        const porteuse = cible.is('.provenance-ligne') ? cible : cible.closest('.provenance-ligne');
+        const phrase = phrases[i] ?? '';
+        if (cible.closest('[data-provenance]').length !== 1 || porteuse.length !== 1 || (phrase !== '' && !n(texte(porteuse)).includes(n(phrase.slice(1))))) {
+          constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : l'ancre #${ancre} du lien « ${FORMAT2.lienVotreMarque} » n'est pas sur la phrase des notices de cette ligne, dans le bloc « Notices »`, fichier));
+        }
+      }
     });
   }
 

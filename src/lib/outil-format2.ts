@@ -53,6 +53,7 @@ import {
   ligneEncadreFormat2,
   nombreDeH2,
   pagesLieesFormat2,
+  lignesSaisiesAvecEcart,
   provenanceHtml,
   reperesDuTexte,
   sommaireHtml,
@@ -316,7 +317,7 @@ export function pageOutilFormat2(
   const cout = coutDeLaPage(page, lignes, site.couts);
   // L'outil n'a pas de tableau des notices (demande de changement n° 8) : la ligne d'écart ne renvoie à aucun tableau ;
   // l'encadré renvoie à la liste, où chaque carte mène à la page du voyant.
-  const lignesF2: LigneFormat2[] = lignes.map((l) => {
+  const lignesF2: LigneFormat2[] = lignes.map((l, i) => {
     const voyant = l.voyant !== undefined ? site.voyants.get(l.voyant) : undefined;
     return {
       situation: l.situation,
@@ -325,7 +326,7 @@ export function pageOutilFormat2(
       action: l.action,
       ecartCourt: l.ecart_marques !== undefined ? l.ecart_court : undefined,
       // Règle 2b étendue à l'outil : la ligne d'écart de l'encadré renvoie au tableau de la page du voyant (renvoiNotices).
-      lienNotices: l.ecart_marques === undefined ? undefined : lienDuRenvoi(renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: site.voyants, plan: site.plan, voisins: indexerPlan(site.plan).voisins.get(page.id) ?? new Set(), auTableau: new Set(), construite: (id) => site.libelles.has(id) })),
+      lienNotices: l.ecart_marques === undefined ? undefined : lienDuRenvoi(renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: site.voyants, plan: site.plan, voisins: indexerPlan(site.plan).voisins.get(page.id) ?? new Set(), auTableau: new Set(), construite: (id) => site.libelles.has(id), ligne: i + 1 })),
       notices: sourcesDeLaLigne(l.sources, site.sources).notices.length,
       pictogramme: voyant !== undefined ? site.pictogrammes.get(voyant.pictogramme) : undefined,
       couleur: voyant?.couleur,
@@ -362,7 +363,7 @@ export function pageOutilFormat2(
     encadre,
     signaturePage({ modification: page.date_modification, revue: page.date_revue }),
     ligneTransparence(adresseMethode(site.plan)),
-    provenanceHtml({ phrases, baseDeCalcul: page.cout_probable.base_de_calcul }),
+    provenanceHtml({ phrases, baseDeCalcul: page.cout_probable.base_de_calcul, ancres: lignesSaisiesAvecEcart(lignes) }),
     illustrationDeLaPage(page, site),
     avecSommaire ? sommaireHtml(entrees, 'sommaire-colonne') : '',
     outil,

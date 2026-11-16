@@ -180,6 +180,13 @@ export function nomCourtSource(source: Pick<SourceDuRegistre, 'titre' | 'categor
 /** Ancre de la partie d'un voyant dans le tableau des notices (livrable 6.4) : l'encadré de décision y renvoie. */
 export const ancreNotices = (voyant: string): string => `${IDENTIFIANTS.notices}-${voyant}`;
 
+/**
+ * Ancre de la phrase « Notices » d'une ligne saisie de l'encadré (format 2, sans voyant de la base, donc sans tableau des
+ * notices) : le lien « Votre marque » de sa ligne d'écart y renvoie (règle 2b, décision du 16/11/2026). `ligne` : rang de la
+ * ligne dans l'encadré, à partir de 1.
+ */
+export const ancreNoticesLigne = (ligne: number): string => `${IDENTIFIANTS.notices}-ligne-${ligne}`;
+
 /** Libellé du lien de l'encadré vers la partie du voyant dans le tableau des notices (livrable 6.4). */
 export const LIBELLE_LIEN_NOTICES = 'Ce que dit chaque notice';
 

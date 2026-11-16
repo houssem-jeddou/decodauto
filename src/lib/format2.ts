@@ -33,6 +33,7 @@ import {
   TITRE_SOURCES,
   adresseMethode,
   ancreNotices,
+  ancreNoticesLigne,
   cheminDAriane,
   elementsDesSources,
   filDAriane,
@@ -194,7 +195,10 @@ export type RenvoiNotices = { lien: string } | { aucun: string } | { absent: str
  * Renvoi « Votre marque » d'une ligne dont les marques divergent (règle 2b, revue de F1.3b) : la partie du voyant au tableau
  * des notices (#da-notices-<voyant>), sur la page si le voyant y est rattaché ; sinon sur la page à laquelle il est rattaché
  * (champ « page » de la base), seulement si le plan lie les deux pages et que cette page est construite. Sinon, aucun lien :
- * FORMAT2-ECART échoue avec la raison (paire du plan à proposer, page pas encore construite, ligne saisie sans voyant).
+ * FORMAT2-ECART échoue avec la raison (paire du plan à proposer, page pas encore construite).
+ * Ligne saisie, sans voyant de la base (décision du 16/11/2026) : elle n'a pas de tableau des notices ; son lien mène aux
+ * notices de cette ligne, dans le bloc « Notices » sous l'encadré (#da-notices-ligne-<n>, ancreNoticesLigne), jamais au
+ * tableau des notices.
  * Exceptions (`aucun` : aucun lien attendu) : une ligne rattachée à la page outil (le voyant STOP, demande n° 23) n'a aucun
  * tableau ; sur la page outil, comme sur ses cartes, le lien n'existe que si la page du voyant est construite.
  * Un seul tableau par voyant, sur sa page : jamais répété ailleurs.
@@ -209,9 +213,13 @@ export function renvoiNotices(entree: {
   /** Voyants qui ont leur partie au tableau des notices de la page. */
   auTableau: ReadonlySet<string>;
   construite: (id: string) => boolean;
+  /** Rang de la ligne dans l'encadré, à partir de 1 (ligne saisie : ancre de sa phrase « Notices »). */
+  ligne?: number | undefined;
 }): RenvoiNotices {
   const { pageId, voyant } = entree;
-  if (voyant === undefined) return { absent: "ligne saisie, sans voyant de la base : aucun tableau des notices où renvoyer" };
+  if (voyant === undefined) {
+    return entree.ligne !== undefined ? { lien: `#${ancreNoticesLigne(entree.ligne)}` } : { absent: "ligne saisie, sans voyant de la base : rang de la ligne inconnu, aucune phrase « Notices » où renvoyer" };
+  }
   const page = entree.voyants.get(voyant)?.page;
   if (page === undefined) return { absent: `voyant « ${voyant} » absent de la base` };
   // Ligne rattachée à la page outil (le voyant STOP, demande n° 23) : la page outil n'a pas de tableau des notices.
@@ -304,6 +312,13 @@ export function encadreFormat2(entree: { question: string; reponseDirecte?: stri
  * (« Lignes 1 et 2 : … »).
  */
 export function phraseNotices(phrases: readonly string[]): string {
+  return groupesNotices(phrases)
+    .map((g) => g.texte)
+    .join(' ');
+}
+
+/** Groupes de la phrase « Notices » : lignes qui partagent une phrase, et le texte affiché du groupe (phraseNotices). */
+function groupesNotices(phrases: readonly string[]): { lignes: number[]; texte: string }[] {
   const groupes: { lignes: number[]; phrase: string }[] = [];
   phrases.forEach((phrase, i) => {
     if (phrase === '') return;
@@ -311,23 +326,42 @@ export function phraseNotices(phrases: readonly string[]): string {
     if (groupe !== undefined) groupe.lignes.push(i + 1);
     else groupes.push({ lignes: [i + 1], phrase });
   });
-  if (groupes.length === 0) return '';
   const toutes = groupes.length === 1 && (groupes[0]?.lignes.length ?? 0) === phrases.length;
-  if (toutes) return groupes[0]?.phrase ?? '';
-  return groupes
+  return groupes.map((g) => {
+    if (toutes) return { lignes: g.lignes, texte: g.phrase };
+    const numeros = g.lignes.length === 1 ? `Ligne ${g.lignes[0]}` : `Lignes ${g.lignes.slice(0, -1).join(', ')} et ${g.lignes.at(-1)}`;
+    return { lignes: g.lignes, texte: `${numeros} : ${g.phrase.charAt(0).toLowerCase()}${g.phrase.slice(1)}` };
+  });
+}
+
+/**
+ * Phrase « Notices » en HTML : celle de phraseNotices ; la phrase de chaque ligne de `ancres` (lignes saisies dont la ligne
+ * d'écart renvoie ici, ancreNoticesLigne) est dans un élément qui porte son ancre ; quand plusieurs lignes partagent une
+ * phrase, une ancre vide de plus par ligne, au même endroit.
+ */
+export function phraseNoticesHtml(phrases: readonly string[], ancres: ReadonlySet<number> = new Set()): string {
+  return groupesNotices(phrases)
     .map((g) => {
-      const numeros = g.lignes.length === 1 ? `Ligne ${g.lignes[0]}` : `Lignes ${g.lignes.slice(0, -1).join(', ')} et ${g.lignes.at(-1)}`;
-      return `${numeros} : ${g.phrase.charAt(0).toLowerCase()}${g.phrase.slice(1)}`;
+      const ids = g.lignes.filter((n) => ancres.has(n)).map(ancreNoticesLigne);
+      if (ids.length === 0) return texteHtml(g.texte);
+      return `<span class="provenance-ligne" id="${attributHtml(ids[0] ?? '')}">${ids.slice(1).map((id) => `<span id="${attributHtml(id)}"></span>`).join('')}${texteHtml(g.texte)}</span>`;
     })
     .join(' ');
 }
 
-/** Bloc « Notices / Base du coût », sous la ligne de transparence, en petit (règle 2b). */
-export function provenanceHtml(entree: { phrases: readonly string[]; baseDeCalcul?: string | undefined; lienNotices?: string | undefined }): string {
-  const notices = phraseNotices(entree.phrases);
+/** Lignes saisies (sans voyant de la base) dont les marques divergent : leur ligne d'écart renvoie à leur phrase « Notices ». */
+export const lignesSaisiesAvecEcart = (lignes: readonly { voyant?: string | undefined; ecart_marques?: string | undefined }[]): Set<number> =>
+  new Set(lignes.flatMap((l, i) => (l.voyant === undefined && l.ecart_marques !== undefined ? [i + 1] : [])));
+
+/**
+ * Bloc « Notices / Base du coût », sous la ligne de transparence, en petit (règle 2b). `ancres` : lignes saisies de
+ * l'encadré dont la ligne d'écart renvoie à leur phrase « Notices » (phraseNoticesHtml).
+ */
+export function provenanceHtml(entree: { phrases: readonly string[]; baseDeCalcul?: string | undefined; lienNotices?: string | undefined; ancres?: ReadonlySet<number> | undefined }): string {
+  const notices = phraseNoticesHtml(entree.phrases, entree.ancres);
   const lien = entree.lienNotices !== undefined ? ` <a href="#${attributHtml(entree.lienNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienNotices)}</a>` : '';
   const morceaux = [
-    notices !== '' || lien !== '' ? `<p><span class="provenance-libelle">${texteHtml(FORMAT2.notices)}</span> ${texteHtml(notices)}${lien}</p>` : '',
+    notices !== '' || lien !== '' ? `<p><span class="provenance-libelle">${texteHtml(FORMAT2.notices)}</span> ${notices}${lien}</p>` : '',
     entree.baseDeCalcul !== undefined ? `<p><span class="provenance-libelle">${texteHtml(FORMAT2.baseDuCout)}</span> ${texteHtml(entree.baseDeCalcul)}</p>` : '',
   ].join('');
   return morceaux === '' ? '' : `<div class="provenance" data-provenance>${morceaux}</div>`;
@@ -643,7 +677,7 @@ export function pageFormat2(
   // Encadré : une ligne d'écart courte pour chaque ligne dont les marques divergent (règle 2b).
   const sansEcartCourt = lignes.flatMap((l, i) => (l.ecart_marques !== undefined && (l.ecart_court === undefined || l.ecart_court.trim() === '') ? [`ligne ${i + 1} (${l.voyant ?? l.situation})`] : []));
   if (sansEcartCourt.length > 0) throw new Error(`page « ${page.id} » au format 2 : ligne d'écart courte (ecart_court) absente alors que les marques divergent : ${sansEcartCourt.join(', ')}`);
-  const lignesF2: LigneFormat2[] = lignes.map((l) => {
+  const lignesF2: LigneFormat2[] = lignes.map((l, i) => {
     const voyant = l.voyant !== undefined ? site.voyants.get(l.voyant) : undefined;
     return {
       situation: l.situation,
@@ -651,7 +685,7 @@ export function pageFormat2(
       urgence: l.urgence,
       action: l.action,
       ecartCourt: l.ecart_marques !== undefined ? l.ecart_court : undefined,
-      lienNotices: l.ecart_marques === undefined ? undefined : lienDuRenvoi(renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: site.voyants, plan: site.plan, voisins: index.voisins.get(page.id) ?? new Set(), auTableau, construite: (id) => site.libelles.has(id) })),
+      lienNotices: l.ecart_marques === undefined ? undefined : lienDuRenvoi(renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: site.voyants, plan: site.plan, voisins: index.voisins.get(page.id) ?? new Set(), auTableau, construite: (id) => site.libelles.has(id), ligne: i + 1 })),
       notices: sourcesDeLaLigne(l.sources, site.sources).notices.length,
       pictogramme: voyant !== undefined ? site.pictogrammes.get(voyant.pictogramme) : undefined,
       couleur: voyant?.couleur,
@@ -684,7 +718,7 @@ export function pageFormat2(
     encadreFormat2({ question: page.question_decision, reponseDirecte: page.reponse_directe, lignes: lignesF2, coutHtml }),
     signaturePage({ modification: page.date_modification, revue: page.date_revue }),
     ligneTransparence(adresseMethode(site.plan)),
-    provenanceHtml({ phrases, baseDeCalcul: coutHtml !== '' ? page.cout_probable.base_de_calcul : undefined, lienNotices: tableau !== '' ? IDENTIFIANTS.notices : undefined }),
+    provenanceHtml({ phrases, baseDeCalcul: coutHtml !== '' ? page.cout_probable.base_de_calcul : undefined, lienNotices: tableau !== '' ? IDENTIFIANTS.notices : undefined, ancres: lignesSaisiesAvecEcart(lignes) }),
     illustrationDeLaPage(page, site),
     avecSommaire ? sommaireHtml(entrees, 'sommaire-colonne') : '',
     ...corps,
