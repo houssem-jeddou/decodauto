@@ -1,6 +1,7 @@
 Brouillon, jamais validé. Recette locale du lot B2 (vague B : « batterie de voiture » au modèle panne avec arbre de
 décision, « recharger » et « changer » au format tutoriel), faite le 16/11/2026 sur la branche `etape-10/lot-b2` à
-`09e0a98` (main intégré jusqu'à 797127c ; seul le journal a changé depuis sur main). Rien n'en va dans une pull request
+`09e0a98`, puis à `80b5c8d` (lignes d'écart courtes de la batterie gelée ajoutées par le pilotage pendant la recette ;
+main intégré jusqu'à 797127c, seul le journal a changé depuis sur main). Rien n'en va dans une pull request
 vers `main`.
 
 ## Résultat en bref
@@ -10,13 +11,13 @@ vers `main`.
   par la rédaction.
   - `batterie-changer`, ligne 1 : `notice-renault-clio-5` et `notice-dacia-sandero-3`, 432 caractères chacun ;
   - `batterie-recharger`, ligne 1 : `notice-peugeot-208`, 408 caractères.
-- **Ligne d'écart courte absente sur deux lignes saisies**, et cette ligne ne peut pas renvoyer au tableau des notices :
-  - `batterie-voiture`, ligne 4 (« La batterie a gelé… ») ;
-  - `batterie-recharger`, ligne 3.
-
-  Chacune a un `ecart_marques` mais pas d'`ecart_court` : la construction s'arrête au format 2. Une ligne d'écart courte
-  y fait ensuite échouer FORMAT2-ECART, car une ligne saisie n'a pas de tableau des notices où mener « Votre marque ».
-  **C'est une question de règle (2b) pour les lignes saisies, à trancher** ; je n'ai rien écrit sur la branche.
+- **Ligne d'écart courte d'une ligne saisie : FORMAT2-ECART en erreur.** Cas de `batterie-voiture`, ligne 4 (« La batterie
+  a gelé… »), et de `batterie-recharger`, ligne 3.
+  - À 09e0a98, ces lignes avaient un `ecart_marques` sans `ecart_court` : la construction s'arrêtait.
+  - À 80b5c8d, la ligne d'écart courte est là, mais FORMAT2-ECART échoue : une ligne saisie n'a pas de tableau des notices
+    où mener « Votre marque », et la règle 2b exige ce renvoi.
+  - **C'est une question de règle pour les lignes saisies qui ont un écart, à trancher.** Possibilités : ligne d'écart sans
+    renvoi pour une ligne saisie, ou écart dit dans le texte. Je n'ai rien changé.
 - **Exemples de la porte 10 sur la branche** (`voiture-ne-demarre-pas`, `moteur-puretech`) : leurs entrées du registre
   (cinq sources) et de `data/couts.json` (deux pièces, une prise en charge) ne sont pas sur la branche.
   Erreurs : R3-SOURCE-INCONNUE, COUT-PIECE-INCONNUE, COUT-PRISE-EN-CHARGE-INCONNUE, en plus de R4-VALIDATION-ABSENTE.
@@ -34,9 +35,7 @@ Les deux tutoriels sont bloqués par le schéma. Construction dans une copie de 
 - sans les deux exemples de la porte 10 ;
 - avec la base voyants du lot F2 (`etape-13/f2-donnees`, commit 7e1937b), pour la ligne d'écart courte de
   `batterie-rouge` (ligne 5) ;
-- avec, pour la ligne 4, une ligne d'écart courte **proposée pour la mesure seulement** : « Plus strict : Seat (ne pas
-  démarrer avec des câbles, remplacer la batterie). Moins stricts : Peugeot et Citroën (pas de recharge, faire
-  contrôler). » Elle est tirée de l'`ecart_marques` de la page ; le texte à retenir reste à rédiger et à valider.
+- page à 80b5c8d, avec la ligne d'écart courte de la ligne 4 écrite par le pilotage.
 
 Contrôle (`controle.txt`, point 4) : 26 × R4-EMPREINTE (lignes du lot F2, pas encore validées), R4-VALIDATION-ABSENTE
 (`batterie-voiture`), et FORMAT2-ECART sur la ligne 4 (voir plus haut). Aucune autre erreur.
@@ -44,13 +43,13 @@ Contrôle (`controle.txt`, point 4) : 26 × R4-EMPREINTE (lignes du lot F2, pas 
 | Mesure (px, à 375 × 667 : police chargée / de secours) | `batterie-voiture` |
 |---|---|
 | Bas de la première situation (2a : 667 au plus) | 522 / 547 |
-| Bas de l'encadré (5 lignes) | 1 924 / 1 950 |
-| Haut du bloc « Notices / Base du coût » | 2 071 / 2 096 |
-| Haut de l'illustration (2i) | 2 408 / 2 433 : au-delà de trois écrans (2 001), signalé, encadré de 5 lignes |
-| Haut du sommaire | 2 702 / 2 727 |
-| Haut de l'arbre de décision | 3 492 / 3 518 (seuil de six écrans : 4 002) |
-| Haut des causes | 4 820 / 4 846 |
-| Hauteur de la page | 10 758 / 10 809 |
+| Bas de l'encadré (5 lignes) | 1 905 / 1 930 |
+| Haut du bloc « Notices / Base du coût » | 2 051 / 2 076 |
+| Haut de l'illustration (2i) | 2 388 / 2 414 : au-delà de trois écrans (2 001), signalé, encadré de 5 lignes |
+| Haut du sommaire | 2 682 / 2 707 |
+| Haut de l'arbre de décision | 3 472 / 3 498 (seuil de six écrans : 4 002) |
+| Haut des causes | 4 800 / 4 826 |
+| Hauteur de la page | 10 738 / 10 789 |
 | À 1366 × 800 : première situation, illustration, arbre | 335 ; 1 361 ; 2 261 |
 | Largeur à 320 px | 320, aucun débordement (320, 375, 1366 px, deux polices) |
 

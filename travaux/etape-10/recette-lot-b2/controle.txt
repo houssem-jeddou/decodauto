@@ -1,6 +1,6 @@
 Brouillon, jamais validé. Recette du lot B2, 16/11/2026.
 
-1. Branche etape-10/lot-b2 à 09e0a98, telle quelle : AVEC_EXEMPLES=1 npx astro build → échec (schéma ; Astro s'arrête au premier fichier) :
+1. Branche etape-10/lot-b2 à 09e0a98 (extraits inchangés à 80b5c8d), telle quelle : AVEC_EXEMPLES=1 npx astro build → échec (schéma ; Astro s'arrête au premier fichier) :
 
 [InvalidContentEntryDataError] panne → batterie-changer data does not match collection schema.
 
@@ -24,7 +24,7 @@ batterie-voiture | paragraphes > 3 phrases : 0  | {{arbre}} partie 2, {{etapes}}
 batterie-recharger | paragraphes > 3 phrases : 0  | {{arbre}} partie 0, {{etapes}} partie 2, {{tableau}} partie 3 ; 1re partie : 1 bloc(s)
 batterie-changer | paragraphes > 3 phrases : 0  | {{arbre}} partie 0, {{etapes}} partie 2, {{tableau}} partie 3 ; 1re partie : 1 bloc(s)
 
-4. Copie de travail séparée (jamais commitée) : sans batterie-recharger ni batterie-changer (bloquées par le schéma), sans les deux exemples de la porte 10 (leurs sources et coûts provisoires ne sont pas sur la branche), base voyants du lot F2 (etape-13/f2-donnees, 7e1937b), ligne d'écart courte proposée pour la ligne 4 de batterie-voiture (voir README). AVEC_EXEMPLES=1 node scripts/controle.ts --dist dist-exemples --exemples :
+4. Copie de travail séparée (jamais commitée), branche à 80b5c8d : sans batterie-recharger ni batterie-changer (bloquées par le schéma), sans les deux exemples de la porte 10 (leurs sources et coûts provisoires ne sont pas sur la branche), base voyants du lot F2 (etape-13/f2-donnees, 7e1937b). AVEC_EXEMPLES=1 node scripts/controle.ts --dist dist-exemples --exemples :
 
 ERREUR [R4-EMPREINTE] data/voyants.json : voyant « moteur-orange-fixe » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
 ERREUR [R4-EMPREINTE] data/voyants.json : voyant « moteur-orange-clignotant » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
