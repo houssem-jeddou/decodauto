@@ -1,70 +1,59 @@
-Brouillon, jamais validé. Recette locale du lot B4 (vague B, modèle panne avec arbre de décision : « perte de puissance »,
-« voiture qui broute », « bruit moteur », « fumée à l'échappement »), refaite le 16/11/2026 au soir sur la branche
-`etape-10/lot-b4` à `75f88fd` (extrait Dacia p. 162 ramené à 398 caractères), avec le lot F2 validé (PR
-houssem-jeddou/decodauto#71 à 8593505, empreintes écrites) et la PR houssem-jeddou/decodauto#73 à 4a499c2. Les quatre
-pages sont mesurées et capturées. Rien n'en va dans une pull request vers `main`. Verdicts et extraits ne sont pas touchés.
+Brouillon, jamais validé. Recette locale du lot B4 (vague B) : « perte de puissance », « voiture qui broute », « bruit moteur » et « fumée à l'échappement » (panne, arbre de décision). Refaite le 16/11/2026 (nuit), après les
+corrections de la revue indépendante, sur la branche `etape-10/lot-b4` à `c4eee7a`. Remplace la recette précédente, périmée
+(textes et verdicts ont changé depuis). Rien n'en va dans une pull request vers `main`. **Aucun texte de page n'est corrigé par
+la recette** : les points ci-dessous sont signalés.
 
 ## Résultat en bref
 
-- **Les quatre brouillons passent le schéma** (`controle.txt`, point 2). Aucun paragraphe de plus de trois phrases ; l'arbre
-  est dans la deuxième partie du texte, après une première partie d'un seul paragraphe. **Rien n'a été corrigé.**
-- **Une erreur nouvelle, à trancher, non corrigée : COUT-PIECE-INCONNUE** sur `perte-de-puissance` et `voiture-qui-broute`.
-  Leur cause « panne d'essence » porte la pièce `carburant-et-reamorcage`, absente de `data/couts.json` sur toutes les
-  branches. Elle est aussi utilisée par l'exemple `voiture-ne-demarre-pas` de la porte 10. L'ajouter, c'est choisir sa
-  tranche du coût probable : à faire dans la pull request du lot, validé avec lui. Elle était masquée jusqu'ici par l'erreur
-  de schéma.
-  - Effet sur la page : sans cette pièce, le coût probable n'est pas calculé et l'encadré s'affiche **sans son bloc de coût**.
-    Les mesures de ces deux pages au-delà des lignes de l'encadré sont donc trop courtes de la hauteur de ce bloc : 193 px
-    à 375 px sur `bruit-moteur` et `fumee-echappement` (dépannage sur autoroute compris). La première situation (2a) n'est
-    pas touchée : le bloc vient après les lignes.
-- **Lignes saisies à écart** (PR n° 73) : `perte-de-puissance` ligne 4 et `voiture-qui-broute` ligne 3 mènent à leur
-  phrase « Notices » (`#da-notices-ligne-4`, `#da-notices-ligne-3`), avec l'écart entre marques en entier dessous ; aucun
-  FORMAT2-ECART.
-- **Plan du site** : la branche porte le changement de la requête principale de la fumée (« fumée blanche échappement »
-  devient « fumée blanche voiture »), demande de changement en attente. Aucun contrôle ne le signale. Il est à valider
-  avant la fusion.
-- **Contrôle de la copie de travail** : 11 erreurs, les 9 validations absentes des brouillons B2, B3 et B4
-  (R4-VALIDATION-ABSENTE) et les 2 COUT-PIECE-INCONNUE. Plus aucune R4-EMPREINTE du lot F2 (empreintes écrites).
-- FORMAT2-MESURES : 23 pages, 138 mesures, **0 erreur**.
-- Lighthouse mobile : 100 / 100 / 100 sur les quatre pages, CLS 0.
+- **Schéma : OK** pour chaque brouillon ; aucun paragraphe de plus de trois phrases ; arbre ou étapes dans la deuxième partie du
+  texte (`controle.txt`, point 2).
+- **Contrôle de la copie de travail : seules les validations absentes** (9 × R4-VALIDATION-ABSENTE, les brouillons B2 à B4),
+  aucune autre erreur (`controle.txt`, point 3).
+- **FORMAT2-MESURES : 0 erreur** (25 pages, 150 mesures) ; signalements du lot ci-dessous, à dire dans le paquet.
+- **Lighthouse mobile** : 100 / 100 / 100 sur chaque page, CLS 0 (`lighthouse.txt` ; SEO 66 : construction en noindex, attendu).
 
-## Mesures (`mesures.json`, `mesures-format2.txt` ; à 375 × 667, police chargée / de secours)
+## Points attendus, à trancher ou à dire dans le paquet
+
+- **Arbre de « perte de puissance » au-delà de six écrans** (4 002 px) : 4 458 / 4 483 px à 375 px, encadré de 7 lignes. FORMAT2-MESURES le signale pour **décision de Houssem sur captures** (demande n° 32) : `captures/perte-de-puissance-375-chargee-page.png`.
+- **Illustration au-delà de trois écrans** sur « perte de puissance » (3 371 / 3 396 px), « voiture qui broute » (2 451), « bruit moteur » (2 370) ; signalées (demande n° 32). « Fumée à l'échappement » : 1 694, dans les trois écrans.
+- **Plan du site** : la branche porte le changement de la requête principale de la fumée (« fumée blanche échappement » devient « fumée blanche voiture »), demande de changement en attente ; aucun contrôle ne le signale. À valider avant la fusion.
+- Pièce `ligne-d-echappement` retirée au profit de `tuyau-ou-joint-d-echappement` : aucune pièce inconnue au contrôle (COUT-*). La pièce `carburant-et-reamorcage` vient de la PR n° 76 (lot B1).
+
+## Mesures (`mesures.json`, `mesures-format2.txt` ; police chargée / de secours quand elles diffèrent)
 
 | | Perte de puissance | Voiture qui broute | Bruit moteur | Fumée à l'échappement |
 |---|---|---|---|---|
-| Bas de la première situation (2a : 667 au plus) | 558 / 583 | 558 | 479 | 464 |
-| Bas de l'encadré | 1 773 / 1 798 (5 lignes, **sans le coût**) | 1 337 (3 lignes, **sans le coût**) | 1 715 (6 lignes) | 1 326 (4 lignes) |
-| Haut du bloc « Notices / Base du coût » | 1 920 / 1 944 | 1 483 | 1 862 | 1 472 |
-| Haut de l'illustration (2i) | **2 162 / 2 187, au-delà de trois écrans** (2 001), signalé : encadré de 5 lignes, puis bloc « Notices » avec l'écart de la ligne 4 ; avec le coût, environ 2 350 | 1 706 ; avec le coût, environ 1 900 | **2 105, au-delà de trois écrans**, signalé : encadré de 6 lignes | 1 696 |
-| Haut du sommaire | 2 456 / 2 480 | 2 000 | 2 418 | 2 010 |
-| Arbre de décision (seuil de six écrans : 4 002) | 3 199 / 3 224 ; avec le coût, environ 3 390 | 2 719 | 3 112 | 2 752 |
-| Causes | 3 963 / 3 987 | 3 301 | 3 955 | 3 505 |
-| Hauteur de la page | 7 950 / 8 000 | 6 144 | 7 102 | 7 280 / 7 305 |
-| À 1366 × 800 : première situation, illustration, arbre | 338 ; 1 278 ; 2 203 | 338 ; 1 000 ; 1 900 | 338 ; 1 310 ; 2 210 | 332 ; 1 063 ; 1 963 |
+| Bas de la première situation, à 375 px | 558 / 583 | 558 | 479 | 464 |
+| Bas de l'encadré, à 375 px | 2 715 / 2 739 (7 lignes) | 1 849 (4 lignes) | 1 843 (6 lignes) | 1 324 (4 lignes) |
+| Haut de l'illustration, à 375 px | 3 371 / 3 396 | 2 451 | 2 370 | 1 694 |
+| Arbre ou étapes, à 375 px | arbre à 4 458 / 4 483 | arbre à 3 489 | arbre à 3 416 | arbre à 2 789 |
+| Hauteur de la page, à 375 px | 10 871 / 10 921 | 7 570 | 8 019 | 7 640 |
+| Bas de la première situation, à 320 px | 660 | 614 / 638 | 602 | 550 |
+| Bas de l'encadré, à 320 px | 3 239 (7 lignes) | 2 193 / 2 217 (4 lignes) | 2 123 (6 lignes) | 1 506 (4 lignes) |
+| Haut de l'illustration, à 320 px | 3 991 | 2 872 / 2 896 | 2 727 | 1 934 |
+| Arbre ou étapes, à 320 px | arbre à 5 120 / 5 145 | arbre à 3 994 / 4 018 | arbre à 3 834 / 3 860 | arbre à 3 071 |
+| Hauteur de la page, à 320 px | 12 612 / 12 637 | 8 649 / 8 724 | 9 132 / 9 157 | 8 742 |
+| À 1366 × 800 : première situation ; illustration ; arbre ou étapes | 338 ; 1 859 ; 2 784 | 338 ; 1 416 ; 2 341 | 338 ; 1 438 ; 2 357 | 332 ; 1 042 ; 1 962 |
 | Largeur à 320 px | 320, aucun débordement | 320, aucun débordement | 320, aucun débordement | 320, aucun débordement |
 
-Les valeurs « avec le coût » ajoutent les 193 px du bloc mesuré sur les deux autres pages : une estimation, pas une mesure.
-La page de la fumée est plus haute de 71 px qu'à la recette précédente (7 209) : le lien vers « perte de puissance »
-s'affiche maintenant (texte et pages liées), puisque cette page est construite.
+Seuils à 375 × 667 : première situation 667 px (2a) ; trois écrans 2 001 px (illustration, 2i) ; six écrans 4 002 px (arbre ou
+étapes, demande n° 32). À 320 px, l'écran est de 640 px de haut ; les règles se mesurent à 375 px.
 
-Lighthouse mobile, 3 passages, médianes (`lighthouse.txt`) : les quatre pages sont à 100 en performance, accessibilité et
-bonnes pratiques, CLS 0,000, LCP de 754 à 1 052 ms. SEO 66 : construction en noindex, attendu.
+Lighthouse mobile, 3 passages, médianes : Perte de puissance LCP 1052 ms ; Voiture qui broute LCP 902 ms ; Bruit moteur LCP 1052 ms ; Fumée à l'échappement LCP 905 ms.
 
-Captures : 62 fichiers (`captures/`).
+Captures : 72 fichiers.
 
 ## Comment la recette est construite
 
-- **La branche seule ne se construit pas** (`controle.txt`, point 1). La ligne d'écart courte de `batterie-rouge` est dans
-  la base du lot F2 (PR houssem-jeddou/decodauto#71), validée mais pas encore fusionnée. Les exemples de la porte 10 présents sur la
-  branche n'ont pas non plus leurs sources ni leurs coûts.
-- **Copie de travail séparée, jamais commitée**, construite avec `AVEC_EXEMPLES=1` :
-  - la branche ;
-  - plus le lot F2 (`etape-13/f2-donnees` à 8593505, base validée et empreintes écrites) ;
-  - plus la PR houssem-jeddou/decodauto#73 à 4a499c2 (`etape-13/ecart-lignes-saisies` : ligne d'écart des lignes saisies,
-    avec l'écart entre marques en entier sous la phrase « Notices » ciblée) ;
-  - sans les deux exemples de la porte 10.
+- **La branche seule ne se construit pas** (`controle.txt`, point 1) : l'exemple « moteur PureTech » de la porte 10, présent dans
+  `exemples/`, cite des sources qui viennent de la PR houssem-jeddou/decodauto#76 (lot B1), pas encore fusionnée.
+- **Copie de travail séparée, jamais poussée**, construite avec `AVEC_EXEMPLES=1` : `etape-10/lot-b4` (qui porte les lots B2, B3
+  et B4 et `main`), plus la PR houssem-jeddou/decodauto#73 (011f891 : lignes d'écart des lignes saisies) et la PR
+  houssem-jeddou/decodauto#76 (c548a28 : sources, coûts et pages de la porte 10). `data/sources.json` : union des deux côtés,
+  entrées communes identiques. Les copies des deux exemples de la porte 10 dans `exemples/`, identiques aux pages publiées par la
+  PR n° 76, sont retirées.
 - Chromium préinstallé, police du système Inter ; police chargée (seconde visite, feuille en `font-display: block`) et
   police de secours (`/polices/` refusé) ; pixels CSS depuis le haut de la page.
-- Captures (`captures/`, `capturer.cjs`) : `<page>-<375|1366>-<chargee|secours>-<ecran|page|encadre|illustration|arbre|etapes|tableau>.png`,
+- Captures (`captures/`, `capturer.cjs`) : `<page>-<320|375|1366>-<chargee|secours>-<ecran|page|encadre|notices|illustration|arbre|etapes|tableau>.png`,
   PNG sans perte, échelle 2 (page entière : échelle 1). Une capture en police de secours identique octet pour octet à
   celle en police chargée n'est pas gardée.
