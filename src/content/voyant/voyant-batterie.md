@@ -49,7 +49,7 @@ format: 2
 illustration:
   fichier: voyant-batterie-tableau-de-bord
   alt: "Le voyant de charge de la batterie allumé en rouge au tableau de bord"
-  legende: "Le voyant de charge a la forme d’une batterie, avec ses bornes + et −. Allumé en rouge moteur tournant, il signale que la batterie n’est plus rechargée."
+  legende: "Le voyant de charge a la forme d’une batterie, avec ses bornes + et −. Allumé en rouge moteur tournant, il signale que la batterie n’est plus rechargée normalement."
 ---
 
 ## Peut-on rouler avec le voyant de batterie allumé ?

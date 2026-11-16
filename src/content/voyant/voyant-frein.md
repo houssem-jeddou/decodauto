@@ -121,9 +121,7 @@ Les autres notices lues pour le site (Peugeot 208, Renault Clio 5 phase 2, Dacia
 
 ## Voyant frein à main allumé
 
-{{repere:frein-stationnement}}
-
-Selon la notice Toyota Yaris, un signal sonore retentit si la voiture roule avec le frein de stationnement serré ({{cite:notice-toyota-yaris|p. 118}}).
+**Frein à main serré** : {{verdict:frein-stationnement}}. Selon la notice Toyota Yaris, un signal sonore retentit si la voiture roule avec le frein de stationnement serré ({{cite:notice-toyota-yaris|p. 118}}).
 
 Si un voyant de frein rouge reste allumé une fois le frein complètement desserré, ou s'allume en roulant, c'est la ligne du voyant de freinage qui s'applique : {{verdict:frein-rouge}}.
 

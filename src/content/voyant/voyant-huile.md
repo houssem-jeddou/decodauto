@@ -103,7 +103,9 @@ Dans les notices Renault Clio 5 phase 2 et Dacia Sandero 3, le témoin de pressi
 
 ## Voyant d'huile rouge qui clignote
 
-La notice Seat Ibiza décrit ce cas ({{cite:notice-seat-ibiza|p. 294}}). Si le témoin clignote avec trois signaux sonores, elle demande d'arrêter le moteur, de contrôler le niveau d'huile et de faire l'appoint s'il le faut. S'il clignote alors que le niveau est correct, elle demande de ne pas poursuivre la route, de ne pas laisser non plus le moteur tourner au ralenti, et de demander l'aide d'un professionnel. 
+{{repere:huile-pression-rouge}}
+
+La notice Seat Ibiza décrit ce cas ({{cite:notice-seat-ibiza|p. 294}}). Si le témoin clignote avec trois signaux sonores, elle demande d'arrêter le moteur, de contrôler le niveau d'huile et de faire l'appoint s'il le faut. S'il clignote alors que le niveau est correct, elle demande de ne pas poursuivre la route, de ne pas laisser non plus le moteur tourner au ralenti, et de demander l'aide d'un professionnel.
 
 ## Voyant d'huile orange : le niveau d'huile est bas
 
@@ -126,7 +128,7 @@ Quand c'est le voyant rouge de pression d'huile qui s'allume, les notices Seat I
 
 ## Combien de kilomètres peut-on faire avec le voyant d'huile allumé ?
 
-Pour le voyant rouge et pour l'alerte de niveau bas, les notices lues ne donnent aucune distance, mais une consigne : s'arrêter et couper le moteur pour le voyant rouge ({{verdict:huile-pression-rouge}}) ; vérifier le niveau sans attendre et faire l'appoint pour l'alerte de niveau bas ({{verdict:huile-niveau}}). Seul le rappel d'entretien parle de kilomètres : chez Peugeot, la clé fixe annonce la révision à moins de 1 000 km ({{cite:notice-peugeot-208|p. 19-20}}). Consigne retenue : {{verdict:entretien-vidange}}.
+Pour le voyant rouge et pour l'alerte de niveau bas, les notices lues ne donnent aucune distance, mais une consigne : s'arrêter et couper le moteur pour le voyant rouge ({{verdict:huile-pression-rouge}}) ; vérifier le niveau sans attendre et faire l'appoint pour l'alerte de niveau bas ({{verdict:huile-niveau}}). Seul le rappel d'entretien parle de kilomètres : chez Peugeot, la clé fixe annonce la révision à moins de 1 000 km ({{cite:notice-peugeot-208|p. 19-20}}). Pour le rappel d'entretien, la consigne de l'encadré est : {{verdict:entretien-vidange}}.
 
 ## Voyant clé : vidange ou révision
 

@@ -41,7 +41,7 @@
       "airbag"
     ],
     "alt": "Le voyant de charge de la batterie allumé en rouge au tableau de bord",
-    "legende": "Le voyant de charge a la forme d’une batterie, avec ses bornes + et −. Allumé en rouge moteur tournant, il signale que la batterie n’est plus rechargée."
+    "legende": "Le voyant de charge a la forme d’une batterie, avec ses bornes + et −. Allumé en rouge moteur tournant, il signale que la batterie n’est plus rechargée normalement."
   },
   "voyant-frein": {
     "fichier": "voyant-frein-tableau-de-bord",
@@ -99,7 +99,7 @@
       "adblue"
     ],
     "alt": "Le voyant de préchauffage, en forme de spirale, allumé en orange au tableau de bord",
-    "legende": "Le voyant de préchauffage a la forme d’une spirale. Sur un diesel, il s’allume quelques secondes à la mise du contact : attendez qu’il s’éteigne pour démarrer."
+    "legende": "Le voyant de préchauffage a la forme d’une spirale. Sur un diesel, il s’allume à la mise du contact : attendez qu’il s’éteigne pour démarrer."
   },
   "voyant-airbag": {
     "fichier": "voyant-airbag-tableau-de-bord",
@@ -165,7 +165,7 @@
       "abs"
     ],
     "alt": "Le voyant de pression des pneus allumé en orange au tableau de bord",
-    "legende": "Le voyant de pression des pneus dessine un fer à cheval avec un point d’exclamation. Fixe : un pneu sous-gonflé, voire crevé. Clignotant environ une minute puis fixe : le système de surveillance est en défaut."
+    "legende": "Le voyant de pression des pneus dessine un fer à cheval avec un point d’exclamation. Fixe : un pneu sous-gonflé, voire crevé. Clignotant puis fixe : le système de surveillance est en défaut."
   },
   "voyant-direction": {
     "fichier": "voyant-direction-tableau-de-bord",

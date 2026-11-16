@@ -78,9 +78,9 @@ illustration:
 
 {{repere:moteur-orange-fixe}}
 
-C'est la consigne la plus prudente des notices lues, celle de la Toyota Yaris : arrêter immédiatement le véhicule dans un endroit sûr.
+Cette consigne est la plus prudente des notices lues, celle de la Toyota Yaris : arrêter immédiatement le véhicule dans un endroit sûr.
 
-Une idée répandue veut qu'on puisse continuer à rouler avec le voyant moteur orange fixe , jaune dans la notice Seat Ibiza ({{cite:notice-seat-ibiza|p. 93-94}}). Les autres notices lues le permettent en effet, pour aller au garage au plus tôt ou rapidement selon la marque. L'encadré dit quand repartir, et quand faire appel à un garage ou à l'assistance.
+Une idée répandue veut qu'on puisse continuer à rouler avec le voyant moteur orange fixe, que la notice Seat Ibiza dit jaune ({{cite:notice-seat-ibiza|p. 93-94}}). Les autres notices lues le permettent en effet, pour aller au garage au plus tôt ou rapidement selon la marque. L'encadré dit quand repartir, et quand faire appel à un garage ou à l'assistance.
 
 Les notices lues pour cette page sont celles de ces modèles ; pour une autre génération ou un autre modèle, c'est la notice de votre voiture qui fait foi :
 
@@ -115,15 +115,13 @@ Pour un autre modèle de ces marques, une Clio 4 ou une Mégane par exemple, c'e
 
 ## Message « Antipollution à contrôler »
 
-Dans la notice Renault Clio 5 phase 2, ce message indique une défaillance du système de dépollution. Il fait partie des messages qui demandent de s'arrêter au plus tôt chez un représentant de la marque, en conduisant avec ménagement ({{cite:notice-renault-clio-5|p. 124}}). Pour le voyant moteur orange fixe, le verdict retenu en haut de page reste : {{verdict:moteur-orange-fixe}}.
+Dans la notice Renault Clio 5 phase 2, ce message indique une défaillance du système de dépollution. Il fait partie des messages qui demandent de s'arrêter au plus tôt chez un représentant de la marque, en conduisant avec ménagement ({{cite:notice-renault-clio-5|p. 124}}). Pour le voyant moteur orange fixe, la consigne de l'encadré reste : {{verdict:moteur-orange-fixe}}.
 
 ## « Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën
 
-{{repere:moteur-orange-fixe}}
-
 Dans les notices Peugeot 208 et Citroën C3, le voyant d'autodiagnostic moteur orange allumé fixe signifie que « le système d'antipollution est défaillant » : elles demandent alors de se rendre rapidement dans le réseau de la marque ou dans un atelier qualifié. Allumé avec le témoin en forme de clé, il signale une défaillance mineure du moteur.
 
-En rouge, il signale une défaillance majeure du moteur, pour laquelle ces notices demandent l'arrêt du véhicule ({{cite:notice-peugeot-208|p. 13 et p. 15}} ; {{cite:notice-citroen-c3|p. 9-11}}). La consigne la plus prudente, celle de l'encadré, vaut aussi pour ces deux marques.
+En rouge, ce voyant signale une défaillance majeure du moteur, pour laquelle ces notices demandent l'arrêt du véhicule ({{cite:notice-peugeot-208|p. 13 et p. 15}} ; {{cite:notice-citroen-c3|p. 9-11}}). Pour le voyant orange fixe, la consigne de l'encadré vaut aussi pour ces deux marques : {{verdict:moteur-orange-fixe}}.
 
 Pour un autre modèle de ces marques, une 308, une 3008, une C4 ou une DS3 par exemple, c'est la notice de votre voiture qui fait foi.
 
@@ -133,9 +131,7 @@ Les notices lues ne nomment aucune pièce pour ce voyant, ni vanne EGR ni sonde 
 
 ## Combien de kilomètres peut-on faire ?
 
-{{repere:moteur-orange-fixe}}
-
-Pour le voyant moteur seul, les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : s'arrêter immédiatement (Toyota Yaris), consulter au plus tôt ou rapidement, ou rouler prudemment jusqu'à l'atelier spécialisé le plus proche (Seat Ibiza), selon la marque et selon que le voyant est fixe ou clignote. 
+Pour le voyant moteur seul, les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : s'arrêter immédiatement (Toyota Yaris), consulter au plus tôt ou rapidement, ou rouler prudemment jusqu'à l'atelier spécialisé le plus proche (Seat Ibiza), selon la marque et selon que le voyant est fixe ou clignote. Fixe ou clignotant, le voyant a le même verdict dans l'encadré : {{verdict:moteur-orange-fixe}}.
 
 Sur un moteur diesel, si le voyant AdBlue s'allume avec le voyant moteur, lisez aussi sa consigne dans la notice de votre voiture.
 
@@ -151,9 +147,7 @@ Les notices lues ne font pas d'exception quand la voiture semble rouler normalem
 
 ## Perte de puissance, moteur qui tourne mal
 
-{{repere:moteur-orange-fixe}}
-
-La notice Seat Ibiza relie ces symptômes au voyant : en cas de panne de combustion, de baisse de puissance ou de fonctionnement irrégulier du moteur, elle demande de faire réviser la voiture par un atelier spécialisé, et précise que le témoin de gaz d'échappement s'allume en général dans ce cas ; le catalyseur risquerait alors d'être endommagé par surchauffe ({{cite:notice-seat-ibiza|p. 289, « Catalyseur »}}). 
+La notice Seat Ibiza relie ces symptômes au voyant : en cas de panne de combustion, de baisse de puissance ou de fonctionnement irrégulier du moteur, elle demande de faire réviser la voiture par un atelier spécialisé, et précise que le témoin de gaz d'échappement s'allume en général dans ce cas ; le catalyseur risquerait alors d'être endommagé par surchauffe ({{cite:notice-seat-ibiza|p. 289, « Catalyseur »}}). Avec le voyant allumé, fixe ou clignotant, l'encadré dit : {{verdict:moteur-orange-fixe}}.
 
 ## Contrôle technique avec le voyant moteur allumé
 

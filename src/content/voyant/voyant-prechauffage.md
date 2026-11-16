@@ -60,7 +60,7 @@ format: 2
 illustration:
   fichier: voyant-prechauffage-tableau-de-bord
   alt: "Le voyant de préchauffage, en forme de spirale, allumé en orange au tableau de bord"
-  legende: "Le voyant de préchauffage a la forme d’une spirale. Sur un diesel, il s’allume quelques secondes à la mise du contact : attendez qu’il s’éteigne pour démarrer."
+  legende: "Le voyant de préchauffage a la forme d’une spirale. Sur un diesel, il s’allume à la mise du contact : attendez qu’il s’éteigne pour démarrer."
 ---
 
 ## Peut-on rouler avec le voyant de préchauffage allumé ?
@@ -69,7 +69,7 @@ Tout dépend de ce qu'il fait.
 
 **Allumé à la mise du contact, puis éteint** : {{verdict:prechauffage}}. C'est le préchauffage du moteur diesel : attendez qu'il s'éteigne avant de démarrer.
 
-Selon la notice Peugeot 208, il s'allume si les conditions climatiques et la température du moteur le nécessitent, jusqu'à environ 30 secondes en conditions hivernales sévères ({{cite:notice-peugeot-208|p. 14}}). Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, il doit s'allumer contact mis : il indique que les bougies de préchauffage fonctionnent, et s'éteint quand le préchauffage est obtenu ({{cite:notice-renault-clio-5|p. 139}}, {{cite:notice-dacia-sandero-3|p. 113}}).
+Selon la notice Peugeot 208, ce voyant s'allume si les conditions climatiques et la température du moteur le nécessitent, jusqu'à environ 30 secondes en conditions hivernales sévères ({{cite:notice-peugeot-208|p. 14}}). Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, il doit s'allumer contact mis : il indique que les bougies de préchauffage fonctionnent, et s'éteint quand le préchauffage est obtenu ({{cite:notice-renault-clio-5|p. 139}}, {{cite:notice-dacia-sandero-3|p. 113}}).
 
 **Il clignote** : {{verdict:ligne-2}}. Cette ligne repose sur une seule notice, celle de la Seat Ibiza, la seule des notices lues qui décrit ce clignotement : elle signale un dysfonctionnement de la gestion du moteur diesel, et demande de faire contrôler immédiatement le moteur par un atelier spécialisé ({{cite:notice-seat-ibiza|p. 289}}).
 

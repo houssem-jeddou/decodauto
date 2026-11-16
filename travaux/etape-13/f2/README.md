@@ -26,8 +26,9 @@ base. Vérifiés : forme du fichier (un SVG avec viewBox, rien d'interdit par `i
 (au moins 12 px à 375 px), rendu à 375 et 760 px de large avec `charte-b.css`. Brouillon, jamais validé.
 
 ## Pages voyants passées au format 2 (sur cette branche, sans pull request)
-Les 11 pages voyants (hors page outil, qui attend la tâche F1.3a) : `format: 2`, champ `illustration`, repère sous chaque
-H2 lié à une seule ligne de l'encadré (25 ; une exception explicite à une autre ligne dans le texte est admise, une section qui mêle plusieurs cas n'a pas de repère), formule « Verdict retenu… » retirée (le repère la remplace), références écrites à
+Les 12 pages voyants, page outil comprise (son modèle est la tâche F1.3a, pull request n° 64) : `format: 2`, champ
+`illustration`, repère sous chaque H2 lié à une seule ligne de l'encadré (23 ; une exception explicite à une autre ligne
+dans le texte est admise, une section qui mêle plusieurs cas n'a pas de repère et redit le verdict dans une phrase), formule « Verdict retenu… » retirée (le repère la remplace), références écrites à
 la main remplacées par `{{cite:…}}` (règle 2d : au format 2, elles vont dans « Sources »), paragraphes de plus de trois
 phrases coupés à une limite de phrase (28), pronoms de tête de paragraphe remplacés par le nom de la notice (7). Aucun H2
 retiré ni renommé, aucun verdict changé. La base porte `ecart_court` (16 lignes) et `demande` (126 citations) : les
@@ -43,3 +44,15 @@ Reste pour la pull request du lot F2 : `date_modification` des pages, revue ind�
   qui rendent les vraies pages avec le modèle du format 1 (modèles 6.6, panne et dossier, pages rédigées), porte de
   l'étape 6 (encadrés validés) : ces derniers repassent une fois les empreintes versées après validation.
 - La règle 2d (références hors du texte) attend les corrections de F1.2 (point 7 du brief).
+
+## Version 2 du paquet (16/11/2026, après-midi) : corrections de la revue indépendante
+- Formule « Verdict(s) retenu(s) » et « consigne retenue » retirées partout, page outil comprise (règle 2d) ; quatre
+  repères retirés de sections qui mêlent plusieurs cas (voyant moteur : Peugeot et Citroën, kilomètres, perte de puissance ;
+  frein à main), le verdict redit dans une phrase ; repères ajoutés sous « Voyant d'huile rouge qui clignote » et
+  « Combien de temps peut-on rouler avec ce voyant ? » (pneus) ; verdict du voyant ESP qui clignote rétabli dans le texte ;
+  coupes de paragraphes reprises (pronoms en tête, coquille du voyant moteur, puce AdBlue de cinq phrases).
+- Base : 4 lignes d'écart courtes et 23 « ce que demande la notice » reprises (consigne Peugeot « faire appel au réseau »,
+  gestes perdus, conditions qui distinguent deux consignes d'une même notice, seuil de 800 km, consignes adoucies ou durcies).
+- Légendes de trois illustrations corrigées (pneus, batterie, préchauffage) ; page outil : illustration du combiné.
+- Outils : `appliquer-f2.py` (verse le brouillon dans la base), `verifier-pages-f2.py` (règles 2d, 2e, repères, H2),
+  `generer-paquet-f2.py` (paquet), `planche-f2.py` (planche des illustrations).

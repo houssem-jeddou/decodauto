@@ -100,7 +100,7 @@ Pour faciliter la régénération, la notice Dacia conseille un long trajet sur 
 - Selon la notice Seat Ibiza, si le témoin reste allumé après 30 minutes de conduite en régénération, il faut contacter un atelier spécialisé pour faire réparer le défaut ({{cite:notice-seat-ibiza|p. 290}}).
 - Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, quand le filtre est saturé, d'autres témoins s'allument avec le message « Injection à contrôler » : elles demandent alors de consulter le réseau de la marque. Avec le témoin STOP et le message « Risque casse moteur », elles demandent d'arrêter la voiture, de couper le moteur et de faire appel au réseau de la marque ({{cite:notice-renault-clio-5|p. 187}}, {{cite:notice-dacia-sandero-3|p. 161}}).
 
-Verdicts retenus en haut de page : {{verdict:fap}} pour le témoin du FAP seul ; {{verdict:moteur-orange-fixe}} si le voyant moteur orange s'y ajoute ; {{verdict:moteur-rouge}} pour le voyant moteur rouge ou « Risque casse moteur ».
+Consignes de l'encadré : {{verdict:fap}} pour le témoin du FAP seul ; {{verdict:moteur-orange-fixe}} si le voyant moteur orange s'y ajoute ; {{verdict:moteur-rouge}} pour le voyant moteur rouge ou « Risque casse moteur ».
 
 ## Voyant FAP et additif : comment l'éteindre ?
 

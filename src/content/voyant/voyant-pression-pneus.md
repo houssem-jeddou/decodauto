@@ -52,16 +52,16 @@ format: 2
 illustration:
   fichier: voyant-pression-pneus-tableau-de-bord
   alt: "Le voyant de pression des pneus allumé en orange au tableau de bord"
-  legende: "Le voyant de pression des pneus dessine un fer à cheval avec un point d’exclamation. Fixe : un pneu sous-gonflé, voire crevé. Clignotant environ une minute puis fixe : le système de surveillance est en défaut."
+  legende: "Le voyant de pression des pneus dessine un fer à cheval avec un point d’exclamation. Fixe : un pneu sous-gonflé, voire crevé. Clignotant puis fixe : le système de surveillance est en défaut."
 ---
 
 ## Peut-on rouler avec le voyant de pression des pneus allumé ?
 
 {{repere:pression-pneus}}
 
-Ce voyant est orange, mais la consigne retenue est celle de l'arrêt. Plusieurs notices demandent de s'arrêter dès que possible pour contrôler les pneus : selon la notice Seat Ibiza, des pneus trop peu gonflés peuvent faire perdre le contrôle de la voiture.
+Ce voyant est orange, mais la consigne de l'encadré est celle de l'arrêt. Plusieurs notices demandent de s'arrêter dès que possible pour contrôler les pneus : selon la notice Seat Ibiza, des pneus trop peu gonflés peuvent faire perdre le contrôle de la voiture.
 
-L'encadré signale l'écart entre marques. S'il clignote d'abord, puis reste allumé, c'est le système de surveillance qui est en défaut : {{verdict:pression-pneus-systeme}}.
+L'encadré signale l'écart entre marques. Si le voyant clignote d'abord, puis reste allumé, c'est le système de surveillance qui est en défaut : {{verdict:pression-pneus-systeme}}.
 
 Les notices lues pour cette page sont celles de ces modèles ; pour une autre génération ou un autre modèle, c'est la notice de votre voiture qui fait foi :
 
@@ -108,7 +108,9 @@ Selon la notice Dacia Sandero 3, une roue sans capteur ou un capteur défaillant
 
 ## Combien de temps peut-on rouler avec ce voyant ?
 
-Les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : ralentir et s'arrêter dès que possible pour contrôler les pneus. Deux notices prévoient ensuite de rouler doucement : la notice Peugeot 208, prudemment et à vitesse réduite quand le contrôle ne peut pas se faire tout de suite ({{cite:notice-peugeot-208|p. 110}}) ; la notice Seat Ibiza, jusqu'à l'atelier spécialisé le plus proche, à faible vitesse, si le pneu n'est pas crevé et ne doit pas être remplacé tout de suite ({{cite:notice-seat-ibiza|p. 312}}). 
+{{repere:pression-pneus}}
+
+Les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : ralentir et s'arrêter dès que possible pour contrôler les pneus. Deux notices prévoient ensuite de rouler doucement : la notice Peugeot 208, prudemment et à vitesse réduite quand le contrôle ne peut pas se faire tout de suite ({{cite:notice-peugeot-208|p. 110}}) ; la notice Seat Ibiza, jusqu'à l'atelier spécialisé le plus proche, à faible vitesse, si le pneu n'est pas crevé et ne doit pas être remplacé tout de suite ({{cite:notice-seat-ibiza|p. 312}}).
 
 ## Comment le système détecte un pneu dégonflé
 
