@@ -102,7 +102,7 @@ describe('format 2 : briques (lot F1, F1.2)', () => {
   test('mots d\'une ligne d\'écart (comptage du pilote) et lien « Votre marque » compris', () => {
     assert.equal(motsDe('Plus strict : Toyota (arrêt immédiat).'), 5);
     assert.equal(motsDe(FORMAT2.lienVotreMarque), 2);
-    for (const id of ['moteur-orange-fixe', 'moteur-orange-clignotant', 'adblue-reserve', 'adblue-defaut', 'adblue-demarrage-impossible']) {
+    for (const id of ['moteur-orange-fixe', 'moteur-orange-clignotant', 'adblue-reserve', 'adblue-defaut', 'adblue-demarrage-impossible', 'batterie-rouge']) {
       const ecart = brouillon.voyants[id]?.ecart_court ?? '';
       assert.ok(motsDe(ecart) + 2 <= ECART_COURT_MAX_MOTS, `${id} : ${motsDe(ecart) + 2} mots`);
     }
@@ -158,12 +158,13 @@ describe('format 2 : briques (lot F1, F1.2)', () => {
 });
 
 describe('format 2 : modèle des pages voyants', () => {
-  test('modeleDeLaPage : page voyant au format 2 → modèle du format 2 ; outil, autres types au format 2 → pas encore livré (F1.3)', async () => {
+  test('modeleDeLaPage : page voyant au format 2 → modèle du format 2 ; outil, code défaut et pneus au format 2 → pas encore livré (F1.3)', async () => {
     const { page } = await pageDemo();
     assert.deepEqual(modeleDeLaPage('voyant', page), { modele: pageVoyantF2 });
     assert.deepEqual(modeleDeLaPage('voyant', { ...page, format: 1 } as PageEditoriale), { modele: pageVoyant });
     assert.ok('absent' in modeleDeLaPage('voyant', { ...page, outil: true } as PageEditoriale));
-    for (const type of ['code-defaut', 'pneus', 'panne', 'dossier'] as const) assert.match((modeleDeLaPage(type, page) as { absent: string }).absent, /format 2 .* F1\.3/);
+    // Panne et dossier : livrés en F1.3c (tests/format2-panne.test.ts) ; code défaut et pneus : F1.3b.
+    for (const type of ['code-defaut', 'pneus'] as const) assert.match((modeleDeLaPage(type, page) as { absent: string }).absent, /format 2 .* F1\.3/);
   });
 
   test('ordre de la charte graphique §4 : mention, fil, H1, encadré, signature, transparence, notices et coût, illustration, sommaire, texte, causes, tableau, sources ; H1 dans main', async () => {
@@ -302,8 +303,12 @@ describe('format 2 : construction de démonstration', () => {
     assert.ok(texte.trimStart().startsWith(`{\n  "avertissement": "${MENTION_BROUILLON}`), 'la mention ouvre le fichier');
     const base = JSON.parse(await readFile(join(racine, 'data/voyants.json'), 'utf8')) as unknown[];
     const completee = voyantsAvecBrouillon(base, brouillon) as { id: string; ecart_court?: string; citations: { demande?: string }[] }[];
-    // Toutes les citations des lignes du brouillon ont « ce que demande la notice ».
-    for (const id of Object.keys(brouillon.voyants)) assert.ok(completee.find((v) => v.id === id)?.citations.every((c) => c.demande !== undefined), id);
+    // Toutes les citations des lignes du brouillon qui donnent « ce que demande la notice » l'ont ; une ligne qui n'a qu'une
+    // ligne d'écart courte (page de démonstration sans tableau des notices) n'en donne aucune.
+    for (const [id, ajout] of Object.entries(brouillon.voyants)) {
+      if (ajout.demandes === undefined) assert.ok(ajout.ecart_court !== undefined, id);
+      else assert.ok(completee.find((v) => v.id === id)?.citations.every((c) => c.demande !== undefined), id);
+    }
     assert.throws(() => voyantsAvecBrouillon(base, { ...brouillon, voyants: { inconnu: {} } }), /absent/);
     assert.throws(() => voyantsAvecBrouillon(base, { ...brouillon, voyants: { 'moteur-rouge': { demandes: { 'x|y': 'z' } } } }), /citation\(s\) inconnue\(s\)/);
     const un = { ...brouillon, pages: { 'voyant-moteur': { illustration: { fichier: 'f', alt: 'a', legende: 'l' }, reperes: [{ titre: 'Combien de kilomètres peut-on faire ?', repere: 'moteur-orange-fixe' }] } } };

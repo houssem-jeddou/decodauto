@@ -10,7 +10,7 @@ import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, char
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
 import { FICHIER_VAGUES_OUVERTES, chargerVaguesOuvertes, controlerVaguesOuvertes } from './vagues.ts';
 import { controlerFavicon } from './favicon.ts';
-import { constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
+import { DOSSIER_PAGES_DEMO_FORMAT2, constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
 import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
 import { chargerIllustrations } from './demo-format2.ts';
 import { constatsLibellesPictogrammes } from '../../src/lib/pictogrammes.ts';
@@ -40,7 +40,8 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   // à la construction (scripts/lib/demo-format2.ts).
   const lues = await chargerDonnees(racine);
   const donnees = brouillonFormat2 !== undefined ? { ...lues, voyants: voyantsAvecBrouillon(lues.voyants, brouillonFormat2) } : lues;
-  const pagesLues = (await chargerPages(racine, exemples ? [DOSSIER_CONTENU, DOSSIER_EXEMPLES] : [DOSSIER_CONTENU])).map((p) =>
+  const dossiers = [DOSSIER_CONTENU, ...(exemples ? [DOSSIER_EXEMPLES] : []), ...(brouillonFormat2 !== undefined ? [DOSSIER_PAGES_DEMO_FORMAT2] : [])];
+  const pagesLues = (await chargerPages(racine, dossiers)).map((p) =>
     brouillonFormat2 !== undefined && p.brut !== undefined ? { ...p, brut: pageAvecBrouillon(p.brut, brouillonFormat2) } : p,
   );
   if (brouillonFormat2 !== undefined) informations.push('construction de démonstration du format 2 (dist-demo-format2) : brouillon jamais validé, jamais déployée');

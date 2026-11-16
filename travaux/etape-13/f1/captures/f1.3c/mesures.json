@@ -1,0 +1,354 @@
+{
+  "planche-320-chargee": {
+    "basPremiereSituation": null,
+    "basEncadre": null,
+    "hautIllustration": null,
+    "hautArbre": 69,
+    "hauteurArbre": 891,
+    "pastillesSurUneLigne": false,
+    "hautHistorique": null,
+    "hauteurPage": 1065,
+    "largeurPage": 320,
+    "debordements": 0
+  },
+  "planche-360-chargee": {
+    "basPremiereSituation": null,
+    "basEncadre": null,
+    "hautIllustration": null,
+    "hautArbre": 69,
+    "hauteurArbre": 759,
+    "pastillesSurUneLigne": true,
+    "hautHistorique": null,
+    "hauteurPage": 933,
+    "largeurPage": 360,
+    "debordements": 0
+  },
+  "planche-375-chargee": {
+    "basPremiereSituation": null,
+    "basEncadre": null,
+    "hautIllustration": null,
+    "hautArbre": 69,
+    "hauteurArbre": 759,
+    "pastillesSurUneLigne": true,
+    "hautHistorique": null,
+    "hauteurPage": 933,
+    "largeurPage": 375,
+    "debordements": 0
+  },
+  "planche-1366-chargee": {
+    "basPremiereSituation": null,
+    "basEncadre": null,
+    "hautIllustration": null,
+    "hautArbre": 69,
+    "hauteurArbre": 562,
+    "pastillesSurUneLigne": true,
+    "hautHistorique": null,
+    "hauteurPage": 800,
+    "largeurPage": 1366,
+    "debordements": 0
+  },
+  "panne-arbre-long-chargee": {
+    "telephone": {
+      "basPremiereSituation": 498,
+      "basEncadre": 948,
+      "hautIllustration": 1291,
+      "hautArbre": 2887,
+      "hauteurArbre": 1122,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 5131,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "telephone360": {
+      "basPremiereSituation": 498,
+      "basEncadre": 968,
+      "hautIllustration": 1330,
+      "hautArbre": 2945,
+      "hauteurArbre": 1196,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 5264,
+      "largeurPage": 360,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "basPremiereSituation": 318,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "hautArbre": 2175,
+      "hauteurArbre": 801,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 3956,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "panne-arbre-court-chargee": {
+    "telephone": {
+      "basPremiereSituation": 472,
+      "basEncadre": 856,
+      "hautIllustration": 1198,
+      "hautArbre": 2086,
+      "hauteurArbre": 410,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 3453,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "telephone360": {
+      "basPremiereSituation": 472,
+      "basEncadre": 895,
+      "hautIllustration": 1237,
+      "hautArbre": 2168,
+      "hauteurArbre": 435,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 3559,
+      "largeurPage": 360,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "basPremiereSituation": 318,
+      "basEncadre": 556,
+      "hautIllustration": 773,
+      "hautArbre": 1663,
+      "hauteurArbre": 312,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 2861,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "panne-tutoriel-chargee": {
+    "telephone": {
+      "basPremiereSituation": 580,
+      "basEncadre": 826,
+      "hautIllustration": 1149,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "pastillesSurUneLigne": null,
+      "hautHistorique": null,
+      "hauteurPage": 3644,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "basPremiereSituation": 359,
+      "basEncadre": 522,
+      "hautIllustration": 720,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "pastillesSurUneLigne": null,
+      "hautHistorique": null,
+      "hauteurPage": 2957,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "dossier-chargee": {
+    "telephone": {
+      "basPremiereSituation": 481,
+      "basEncadre": 927,
+      "hautIllustration": 1269,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "pastillesSurUneLigne": null,
+      "hautHistorique": 2628,
+      "hauteurPage": 3634,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "basPremiereSituation": 338,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "pastillesSurUneLigne": null,
+      "hautHistorique": 1750,
+      "hauteurPage": 2642,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "planche-320-secours": {
+    "basPremiereSituation": null,
+    "basEncadre": null,
+    "hautIllustration": null,
+    "hautArbre": 69,
+    "hauteurArbre": 891,
+    "pastillesSurUneLigne": false,
+    "hautHistorique": null,
+    "hauteurPage": 1065,
+    "largeurPage": 320,
+    "debordements": 0
+  },
+  "planche-360-secours": {
+    "basPremiereSituation": null,
+    "basEncadre": null,
+    "hautIllustration": null,
+    "hautArbre": 69,
+    "hauteurArbre": 759,
+    "pastillesSurUneLigne": true,
+    "hautHistorique": null,
+    "hauteurPage": 933,
+    "largeurPage": 360,
+    "debordements": 0
+  },
+  "planche-375-secours": {
+    "basPremiereSituation": null,
+    "basEncadre": null,
+    "hautIllustration": null,
+    "hautArbre": 69,
+    "hauteurArbre": 759,
+    "pastillesSurUneLigne": true,
+    "hautHistorique": null,
+    "hauteurPage": 933,
+    "largeurPage": 375,
+    "debordements": 0
+  },
+  "planche-1366-secours": {
+    "basPremiereSituation": null,
+    "basEncadre": null,
+    "hautIllustration": null,
+    "hautArbre": 69,
+    "hauteurArbre": 562,
+    "pastillesSurUneLigne": true,
+    "hautHistorique": null,
+    "hauteurPage": 800,
+    "largeurPage": 1366,
+    "debordements": 0
+  },
+  "panne-arbre-long-secours": {
+    "telephone": {
+      "basPremiereSituation": 498,
+      "basEncadre": 948,
+      "hautIllustration": 1291,
+      "hautArbre": 2887,
+      "hauteurArbre": 1122,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 5131,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "telephone360": {
+      "basPremiereSituation": 498,
+      "basEncadre": 968,
+      "hautIllustration": 1330,
+      "hautArbre": 2945,
+      "hauteurArbre": 1196,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 5264,
+      "largeurPage": 360,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "basPremiereSituation": 318,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "hautArbre": 2175,
+      "hauteurArbre": 801,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 3956,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "panne-arbre-court-secours": {
+    "telephone": {
+      "basPremiereSituation": 472,
+      "basEncadre": 856,
+      "hautIllustration": 1198,
+      "hautArbre": 2086,
+      "hauteurArbre": 410,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 3453,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "telephone360": {
+      "basPremiereSituation": 498,
+      "basEncadre": 920,
+      "hautIllustration": 1263,
+      "hautArbre": 2193,
+      "hauteurArbre": 435,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 3585,
+      "largeurPage": 360,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "basPremiereSituation": 318,
+      "basEncadre": 556,
+      "hautIllustration": 773,
+      "hautArbre": 1663,
+      "hauteurArbre": 312,
+      "pastillesSurUneLigne": true,
+      "hautHistorique": null,
+      "hauteurPage": 2861,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "panne-tutoriel-secours": {
+    "telephone": {
+      "basPremiereSituation": 580,
+      "basEncadre": 826,
+      "hautIllustration": 1149,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "pastillesSurUneLigne": null,
+      "hautHistorique": null,
+      "hauteurPage": 3644,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "basPremiereSituation": 359,
+      "basEncadre": 522,
+      "hautIllustration": 720,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "pastillesSurUneLigne": null,
+      "hautHistorique": null,
+      "hauteurPage": 2957,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  },
+  "dossier-secours": {
+    "telephone": {
+      "basPremiereSituation": 481,
+      "basEncadre": 927,
+      "hautIllustration": 1269,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "pastillesSurUneLigne": null,
+      "hautHistorique": 2653,
+      "hauteurPage": 3660,
+      "largeurPage": 375,
+      "debordements": 0
+    },
+    "ordinateur": {
+      "basPremiereSituation": 338,
+      "basEncadre": 598,
+      "hautIllustration": 814,
+      "hautArbre": null,
+      "hauteurArbre": null,
+      "pastillesSurUneLigne": null,
+      "hautHistorique": 1750,
+      "hauteurPage": 2642,
+      "largeurPage": 1366,
+      "debordements": 0
+    }
+  }
+}

@@ -11,13 +11,14 @@
 //                         COUT-FOURCHETTE-A-REVOIR pour être prévenu).
 // Variables : SITE_INDEXABLE, CONTROLE_DATE (AAAA-MM-JJ, pour les tests).
 import { appendFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 import { argv, cwd, env, exit, stdout } from 'node:process';
 import { codeSortie, codesEchec, sontBloquants } from '../src/lib/controle.ts';
 import { modeIndexation } from '../src/lib/indexation.ts';
 import { controlerSite } from './lib/controler-site.ts';
 import { appliquerAttendus, lireAttendus, refusRecette } from './lib/attendus.ts';
-import { attendusDemoFormat2, lireBrouillonFormat2 } from './lib/demo-format2.ts';
+import { DOSSIER_PAGES_DEMO_FORMAT2, attendusDemoFormat2, attendusPagesDemo, lireBrouillonFormat2 } from './lib/demo-format2.ts';
+import { listerFichiers } from './lib/charger.ts';
 
 const racine = cwd();
 const indice = argv.indexOf('--dist');
@@ -44,7 +45,9 @@ if (refus !== undefined) {
 }
 const demoFormat2 = argv.includes('--demo-format2');
 const brouillon = demoFormat2 ? await lireBrouillonFormat2(racine) : undefined;
-const attendus = [...lireAttendus(argv), ...(brouillon !== undefined ? attendusDemoFormat2(brouillon, (id) => `src/content/voyant/${id}.md`) : [])];
+// Pages de démonstration des modèles panne et dossier (tests/demo/format2, revue de F1.3c) : sans empreinte de validation.
+const pagesDemo = brouillon !== undefined ? (await listerFichiers(resolve(racine, DOSSIER_PAGES_DEMO_FORMAT2), '.md')).map((f) => relative(racine, f).split('\\').join('/')) : [];
+const attendus = [...lireAttendus(argv), ...(brouillon !== undefined ? [...attendusDemoFormat2(brouillon, (id) => `src/content/voyant/${id}.md`), ...attendusPagesDemo(pagesDemo)] : [])];
 const bilanSite = await controlerSite({ racine, dist, aujourdhui: aujourdhui(), indexable: mode.indexable, exemples, brouillonFormat2: brouillon });
 const { informations, pagesEditoriales } = bilanSite;
 const { constats, absorbes } = appliquerAttendus(bilanSite.constats, attendus);

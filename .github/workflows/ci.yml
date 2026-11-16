@@ -171,7 +171,10 @@ jobs:
     # et ceux du format 2 ; seules erreurs attendues, fixées par le script (scripts/lib/demo-format2.ts, attendusDemoFormat2) :
     # les empreintes des lignes et des pages du brouillon (R4-EMPREINTE, jamais recalculées) et FORMAT2-METHODE sur une page
     # dont le texte en ligne n'est pas encore repris (« Verdict retenu », pages écrites à la main ; champ texte_a_reprendre,
-    # lot F2). Ce job ne conditionne pas le déploiement et rien de dist-demo-format2 n'est jamais déployé.
+    # lot F2). Revue de F1.3c : les pages de démonstration des modèles panne et dossier (tests/demo/format2, Markdown rendu
+    # par Astro comme une vraie page) s'y ajoutent, sans empreinte (R4-VALIDATION-ABSENTE attendue, attendusPagesDemo), et
+    # entrent dans lighthouserc-demo-format2.json. Ce job ne conditionne pas le déploiement et rien de dist-demo-format2 n'est
+    # jamais déployé.
     if: ${{ github.event_name != 'schedule' }}
     runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
