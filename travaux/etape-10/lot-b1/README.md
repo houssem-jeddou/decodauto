@@ -15,7 +15,9 @@ a2b36ce (lot F2 fusionné).
   `jauge-huile.svg`, générateur `travaux/etape-10/generer-illustrations.py`.
 - **Registre** (`data/sources.json`) : `rappelconso-48835`, `rappelconso-48836`, `rappelconso-48204` (RappelConso) ;
   `peugeot-puretech-solutions` et `stellantis-puretech-indemnisation-2025` (secondaires, nature
-  `communication-constructeur`, demande n° 31). Consultées le 2026-11-16. Entrées de la recette de la porte 10, sans la
+  `communication-constructeur`, demande n° 31). Consultées le 2026-11-16. Le communiqué de Stellantis est celui de la
+  version belge ; **la recherche d'une version France (paquet de la porte 10 validé, point 7) est reportée à la revue
+  suivante de la page**, comme le paquet le prévoit. Entrées de la recette de la porte 10, sans la
   mention « (provisoire, jamais validé) » de leur titre.
 - **Coûts** (`data/couts.json`) : pièces `pile-de-cle` et `carburant-et-reamorcage` (tranche `geste`) ; prise en charge
   `couverture-speciale-puretech` (source `peugeot-puretech-solutions`, vérifiée le 2026-11-16, à revérifier tous les
@@ -25,9 +27,13 @@ a2b36ce (lot F2 fusionné).
   - `moteur-puretech` : `e663cb5d…dd31` ;
   - `couverture-speciale-puretech` : `91e0ad2e…52ab8`.
 
-  Vérifiées avant d'être écrites : les deux empreintes de page sont **identiques** quand on les calcule avec la base des
-  voyants de la recette de la porte 10 (l'état vu par Houssem à 19 h 26) et avec la base du lot F2 fusionnée. La règle de
-  passage le confirme (« empreinte de l'encadré : identique à la validation de Houssem »).
+  Ce qui prouve qu'elles portent sur ce que Houssem a validé (revue du lot, M2) :
+  1. les deux pages sont identiques à celles de `preparation/etape-10` à b9b0835, la version validée, hors commentaire
+     d'en-tête et ligne `validation` (comparaison de tout le reste du fichier) ;
+  2. l'empreinte couvre aussi les lignes de la base affichées dans l'encadré : calculée avec la base des voyants de la
+     recette de la porte 10 (l'état vu par Houssem à 19 h 26) et avec celle du lot F2 fusionnée, elle est **la même**.
+
+  La règle de passage, qui recalcule la même empreinte, n'est pas une preuve indépendante.
 - **Passage** (`npm run passage -- <id> --appliquer`) : pages déplacées dans `src/content`, adresses ajoutées à
   `lighthouserc.json`.
 - **Démonstration du format 2** : sa page de démonstration du dossier portait l'identifiant `moteur-puretech` (le seul
@@ -74,5 +80,31 @@ motif en entier au lieu de « Même motif » (`captures/moteur-puretech-375-char
 | Juridique et transparence : mention en tête, signature, ligne de transparence, « Signaler une erreur », sources listées (10 et 15), aucune publicité | oui | oui |
 | Liens : `npm run liens` 0 problème ; liens internes uniquement vers des pages liées au plan | oui | oui |
 | Format 2 : ni « Verdict retenu » ni « consigne retenue » ; marque et modèle nommés ; repères sous les H2 d'une seule ligne (contrôle FORMAT2) ; illustration qui montre où regarder (cosses de la batterie ; jauge d'huile) | oui | oui |
+| Format 2 : navigation au clavier, contour de focus visible (Tab sur toute la page, 58 et 57 éléments atteints) | oui : aucun élément sans contour ; 3 px bleu clair sur fond sombre, 3 px bleu foncé sur fond clair | oui, idem |
+| Format 2 : ni édition ni page écrite à la main dans le texte | oui (0 « édition », 0 « p. n » dans le texte ; pages citées dans « Sources ») | oui |
+| Format 2 : comparaisons en tableau quand le texte compare | **à juger par Houssem** : le paragraphe « Pousser la voiture… » compare quatre marques en prose (Toyota, Peugeot, Renault, Dacia) ; texte validé, non modifié | oui : rappels et couverture dans le tableau des rappels |
 | Format 2 : rendu sur un vrai téléphone (première situation, ligne d'écart, sommaire, tableaux en cartes) | **à faire par Houssem** | **à faire par Houssem** |
 | Format 2 : liste des H2 avant et après | sans objet (pages nouvelles) | sans objet |
+
+## Revue indépendante de la pull request (16/11/2026, ~23 h 20) : corrections
+
+- **I1, pastille « À lire aussi » des pages panne et dossier.** La pastille d'une page liée prenait la tuile du premier voyant
+  de la base de son encadré : sur les pages en ligne, « voiture qui ne démarre pas » avait la spirale du préchauffage
+  (voyants batterie et préchauffage) et « moteur PureTech » la burette rouge (voyant huile). Décision (règle 6) : une page
+  panne ou dossier a une pastille sans tuile, état qui existe déjà. `voyantsDesPages` (`src/lib/format2.ts`) ne donne plus
+  le voyant de l'encadré que pour une page code défaut ou pneus et obligations ; la route l'utilise
+  (`src/pages/[...adresse].astro`) ; commentaire de `tuileDeLaPage` corrigé. Test dans les deux sens
+  (`tests/format2.test.ts`) : pages voyant, code défaut et pneus avec tuile ; pages panne et dossier sans, alors qu'un voyant
+  donné à la même page lui en mettrait une.
+- **Captures** (`captures/revue-a-lire-aussi/`, script `capturer-liees.cjs`) des cinq pages en ligne que la pull request
+  modifie : section « À lire aussi » de P0420 et des voyants batterie, huile et préchauffage, et liste des pages de
+  l'accueil avec sa quatrième carte (« Pannes et symptômes »). 375 et 1366 px, deux polices, en trois états : `enligne`
+  (`main`), `avant-correction` (la pull request avant I1), `apres`. Le voyant huile n'a pas de section « À lire aussi » en
+  ligne (aucune page liée construite) : pas de capture `enligne`. Une capture en police de secours identique octet pour
+  octet n'est pas gardée (50 fichiers).
+- **M1** : report de la recherche d'une version France du communiqué Stellantis, dit ci-dessus (registre).
+- **M2** : preuve des empreintes reformulée (identité avec b9b0835 et même empreinte avec les deux bases).
+- **M3** : liste de recette complétée (contour de focus, ni édition ni page écrite à la main, comparaisons en tableau,
+  vrai téléphone).
+- **M4** : en-tête de la page de démonstration déplacée (`tests/demo/format2-remplacees/dossier/moteur-puretech.md`) mis à
+  jour.
