@@ -60,12 +60,13 @@ import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
 import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-voyants.ts';
-import { pageVoyantFormat2 } from './format2.ts';
+import { causesFormat2, pageFormat2, pageVoyantFormat2, pastilleVerdict, sommaireHtml, teteSeule, titresDesSections } from './format2.ts';
+import { pageOutilFormat2 } from './outil-format2.ts';
 import { REPONSES_MIN_ARBRE, fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, modeleFichePanne, modeleFicheTutoriel } from './fiche-panne.ts';
 
 export { REPONSES_MIN_ARBRE };
 import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
-import type { TypePage } from '../schemas/listes.ts';
+import type { TypePage, Verdict } from '../schemas/listes.ts';
 
 /** Un modèle : la page (frontmatter validé), les données du site et le corps rendu depuis le Markdown (HTML). */
 export type Modele = (page: PageEditoriale, site: DonneesSite, corpsHtml: string) => string;
@@ -186,22 +187,28 @@ export function texteRedige(
   const avecArbre = arbreDuTexte(html, page, options.arbreDuTexte === true, echec);
   const avecEtapes = etapesDuTexte(avecArbre, page.tutoriel !== undefined, options.etapesDuTexte === true, echec);
   const avecTableau = tableauDuTexte(avecEtapes, page, options.tableauDuTexte === true, echec);
-  const avecReferences = avecTableau.replace(REFERENCE, (tout, genre: string, id: string, complement: string | undefined) => {
+  // Format 2 : un verdict cité dans l'arbre de décision s'affiche en pastille (forme et libellé ; charte graphique §4).
+  const debutArbre = options.format2 === true ? avecTableau.search(/<div class="arbre" data-element-unique="arbre-de-decision"/) : -1;
+  const debutListe = debutArbre >= 0 ? avecTableau.indexOf('<ol', debutArbre) : -1;
+  const finArbre = debutListe >= 0 ? finDeListe(avecTableau, debutListe, 'ol') : -1;
+  const dansLArbre = (position: number): boolean => debutArbre >= 0 && position > debutArbre && position < finArbre;
+  const avecReferences = avecTableau.replace(REFERENCE, (tout, genre: string, id: string, complement: string | undefined, position: number) => {
     if (genre === 'verdict') {
       if (complement !== undefined) echec(`${tout} : pas de complément après le voyant`);
+      const rendu = (verdict: Verdict): string => (dansLArbre(position) ? pastilleVerdict(verdict) : echapper(GRILLE_VERDICTS[verdict].libelle));
       const numero = /^ligne-(\d+)$/.exec(id);
       if (numero !== null) {
         const ligne = page.situations[Number(numero[1]) - 1] ?? echec(`${tout} : l'encadré de la page n'a pas de ligne ${numero[1]}`);
         if ('voyant' in ligne && ligne.voyant !== undefined) {
           const voyant = site.voyants.get(ligne.voyant) ?? echec(`${tout} : voyant absent de la base`);
-          return echapper(GRILLE_VERDICTS[voyant.verdict].libelle);
+          return rendu(voyant.verdict);
         }
-        return echapper(GRILLE_VERDICTS[ligne.verdict ?? echec(`${tout} : ligne sans verdict`)].libelle);
+        return rendu(ligne.verdict ?? echec(`${tout} : ligne sans verdict`));
       }
       const pageOutil = 'outil' in page && page.outil === true;
       if (!pageOutil && !page.situations.some((ligne) => 'voyant' in ligne && ligne.voyant === id)) echec(`${tout} : le voyant « ${id} » n'est pas une ligne de l'encadré de la page`);
       const voyant = site.voyants.get(id) ?? echec(`${tout} : voyant absent de la base`);
-      return echapper(GRILLE_VERDICTS[voyant.verdict].libelle);
+      return rendu(voyant.verdict);
     }
     if (genre === 'montant') {
       if (complement !== undefined) echec(`${tout} : pas de complément après le montant`);
@@ -223,7 +230,14 @@ export function texteRedige(
     return echapper(emplacement);
   });
   if (avecReferences.includes('{{')) echec('référence illisible (« {{ » restant après le rendu)');
-  return { html: `<div class="corps" data-corps>${typographierHtml(avecReferences)}</div>`, citations };
+  // Format 2 : listes sans puces (questions de l'arbre, étapes) annoncées comme listes à VoiceOver (Safari), comme l'encadré.
+  const avecRoles =
+    options.format2 === true
+      ? avecReferences
+          .replace(/(<div class="arbre" data-element-unique="arbre-de-decision"[^>]*>)<ol(?![^>]*\brole=)/g, '$1<ol role="list"')
+          .replace(/<ol class="etapes" data-tutoriel-etapes(?![^>]*\brole=)/g, '<ol class="etapes" data-tutoriel-etapes role="list"')
+      : avecReferences;
+  return { html: `<div class="corps" data-corps>${typographierHtml(avecRoles)}</div>`, citations };
 }
 
 /** Nom d'une région (attribut aria-label, échappé) : le dernier titre H2 ou H3 du HTML qui la précède, sinon `defaut`. */
@@ -369,6 +383,37 @@ export const pageVoyant: Modele = (page, site, corpsHtml) => {
 /** Page voyant (hors outil) au format 2 (demande de changement n° 30) : voir src/lib/format2.ts. */
 export const pageVoyantF2: Modele = (page, site, corpsHtml) => pageVoyantFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { format2: true }));
 
+/**
+ * Page panne au format 2 (lot F1, F1.3c ; ordre revu par la demande de changement n° 32, F1.4) : fiche du symptôme (ou de
+ * la situation), fiche du tutoriel, texte rédigé jusqu'à la partie qui porte l'arbre de décision (ou les étapes), causes,
+ * suite du texte (src/lib/format2.ts, pageFormat2 et insererApresPartieArbre) ; arbre de décision en carte, ses verdicts
+ * cités en pastilles ; tableau des notices affiché sans être l'élément unique. FORMAT2-ARBRE-PLACE vérifie que l'arbre est
+ * dans la première ou la deuxième partie du texte.
+ */
+export const pagePanneF2: Modele = (page, site, corpsHtml) => {
+  if (!('contexte' in page)) throw new Error(`page « ${page.id} » : le modèle panne s'applique à une page panne`);
+  return pageFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { tableauDuTexte: true, arbreDuTexte: true, etapesDuTexte: true, format2: true }), {
+    avantTexte: [
+      fichePanneHtml(modeleFichePanne(page), { format2: true }),
+      page.tutoriel !== undefined ? ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel), { format2: true }) : '',
+    ],
+    apresTexte: [],
+    tableauElementUnique: false,
+    // Demande de changement n° 32 : les causes suivent la partie du texte qui porte l'arbre (ou les étapes).
+    apresPartieArbre: causesFormat2(page.causes, site.couts),
+  });
+};
+
+/** Page dossier au format 2 (lot F1, F1.3c) : fiche du tutoriel, texte rédigé, historique en carte, tableau des notices. */
+export const pageDossierF2: Modele = (page, site, corpsHtml) => {
+  if (!('journal_modifications' in page)) throw new Error(`page « ${page.id} » : le modèle dossier s'applique à une page dossier`);
+  return pageFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { tableauDuTexte: true, etapesDuTexte: true, format2: true }), {
+    avantTexte: [page.tutoriel !== undefined ? ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel), { format2: true }) : ''],
+    apresTexte: [historiqueDossierHtml(page.journal_modifications, { format2: true })],
+    tableauElementUnique: false,
+  });
+};
+
 /** Page code défaut : voir l'ordre en tête de ce fichier. */
 export const pageCodeDefaut: Modele = (page, site, corpsHtml) => {
   if (!('code' in page)) throw new Error(`page « ${page.id} » : le modèle code défaut s'applique à une page code défaut`);
@@ -382,6 +427,40 @@ export const pageCodeDefaut: Modele = (page, site, corpsHtml) => {
     tableauNoticesDeLaPage(page, site, { elementUnique: false }),
     basDePage(page, site, texte.citations),
   ].join('');
+};
+
+/**
+ * Page code défaut au format 2 (demande de changement n° 30, F1.3b) : ordre de la charte graphique §4 (format2.ts,
+ * pageFormat2), puis, comme au format 1 : fiche du code (carte), cas décrits par marque (tableau de la charte), causes
+ * (cartes), texte rédigé, tableau des notices si un voyant de la base est rattaché à la page.
+ */
+export const pageCodeDefautF2: Modele = (page, site, corpsHtml) => {
+  if (!('code' in page)) throw new Error(`page « ${page.id} » : le modèle code défaut s'applique à une page code défaut`);
+  return pageFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { format2: true }), {
+    avantTexte: [
+      ficheCodeHtml(modeleFicheCode(page, site.voyants, site.sources), { format2: true, code: page.code }),
+      parMarqueHtml(modeleParMarque(page), site.sources, { elementUnique: page.element_unique === 'tableau', format2: true }),
+      causesFormat2(page.causes, site.couts),
+    ],
+    apresTexte: [],
+    tableauElementUnique: false,
+  });
+};
+
+/**
+ * Page pneus et obligations au format 2 (F1.3b) : réponse directe en tête de l'encadré (page informative, règle 2c), fiche
+ * « Le texte en bref » (carte) avant le texte rédigé, tableau du texte dans le bloc de la charte, tableau des notices si un
+ * voyant de la base est rattaché à la page.
+ */
+export const pagePneusF2: Modele = (page, site, corpsHtml) => {
+  if (!('texte_reference' in page)) throw new Error(`page « ${page.id} » : le modèle pneus et obligations s'applique à une page pneus et obligations`);
+  // Page informative (pression des pneus ; conception du lot F1, §3) : sans réponse directe, la construction échoue.
+  if (page.sujet === 'pression' && (page.reponse_directe ?? '').trim() === '') throw new Error(`page « ${page.id} » au format 2 : page informative sans réponse directe (reponse_directe, règle 2c)`);
+  return pageFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { tableauDuTexte: true, format2: true }), {
+    avantTexte: [ficheTexteHtml(modeleFicheTexte(page, site.sources), { format2: true })],
+    apresTexte: [],
+    tableauElementUnique: false,
+  });
 };
 
 /** Page pneus et obligations : voir l'ordre en tête de ce fichier. */
@@ -409,6 +488,9 @@ export const pageOutilVoyants: Modele = (page, site, corpsHtml) => {
     basDePage(page, site, [...texte.citations, ...modele.sources.map((source) => ({ source }))], NOTE_SOURCES_OUTIL),
   ].join('');
 };
+
+/** Page outil voyants au format 2 (demande de changement n° 30, F1.3a) : voir src/lib/outil-format2.ts. */
+export const pageOutilVoyantsF2: Modele = (page, site, corpsHtml) => pageOutilFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { format2: true }));
 
 /** Page panne : voir l'ordre en tête de ce fichier. L'arbre de décision est dans le texte rédigé (« {{arbre}} »). */
 export const pagePanne: Modele = (page, site, corpsHtml) => {
@@ -440,8 +522,9 @@ export const pageDossier: Modele = (page, site, corpsHtml) => {
 };
 
 /** Fiche d'un auteur (identité et parcours), affichée sur la page « à propos » depuis le champ `auteurs`. */
-export function fichesAuteur(auteur: { id: string; nom: string; presentation: string }): string {
-  return `<section class="auteur" id="auteur-${attributHtml(auteur.id)}" data-auteur data-auteur-id="${attributHtml(auteur.id)}"><h2>${texteHtml(auteur.nom)}</h2><p>${texteHtml(auteur.presentation)}</p></section>`;
+export function fichesAuteur(auteur: { id: string; nom: string; presentation: string }, options: { format2?: boolean } = {}): string {
+  // Format 2 (F1.3b) : carte du corps de la charte (encart).
+  return `<section class="${options.format2 === true ? 'auteur encart' : 'auteur'}" id="auteur-${attributHtml(auteur.id)}" data-auteur data-auteur-id="${attributHtml(auteur.id)}"><h2>${texteHtml(auteur.nom)}</h2><p>${texteHtml(auteur.presentation)}</p></section>`;
 }
 
 /** Dans le texte d'une page du socle : l'adresse de contact, tirée de site.ts, jamais recopiée (livrable 7.2). */
@@ -453,7 +536,14 @@ export const MARQUEUR_CONTACT = '{{contact}}';
  * confidentialité, le titre de la section reçoit son ancre stable, quel que soit le rendu du Markdown. Une référence
  * inconnue, ou une section de confidentialité absente, fait échouer la construction.
  */
-export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date_modification' | 'auteurs'>, corpsHtml: string, methodeHtml?: string): string {
+/**
+ * Titres à partir desquels une page du socle au format 2 a un sommaire (règle 2h, F1.4) : deux. Les pages du socle sont
+ * longues (mentions légales : 6,7 écrans de téléphone avec deux titres) ; FORMAT2-MESURES vérifie la règle sur la hauteur.
+ */
+export const SOMMAIRE_MIN_TITRES_SOCLE = 2;
+
+export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date_modification' | 'auteurs' | 'format'>, corpsHtml: string, methodeHtml?: string): string {
+  const format2 = page.format === 2;
   const contact = `<!--email_off--><a href="mailto:${ADRESSE_SIGNALEMENT}">${texteHtml(ADRESSE_SIGNALEMENT)}</a><!--/email_off-->`;
   let corps = corpsHtml.replaceAll(MARQUEUR_CONTACT, contact);
   const inconnue = /\{\{[^}]*\}\}/.exec(corps);
@@ -465,33 +555,66 @@ export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date
   }
   // Page « à propos » (livrable 7.3) : fiche de chaque auteur (champ `auteurs`, jamais recopiée dans le texte) puis section
   // « Méthode » (charte §7.2). Sans elle, les liens « Méthode » de toutes les pages seraient cassés : la construction échoue.
-  const fiches = (page.auteurs ?? []).map((a) => fichesAuteur(a));
+  const fiches = (page.auteurs ?? []).map((a) => fichesAuteur(a, { format2 }));
   if (page.id === PAGE_METHODE) {
     if (fiches.length === 0) throw new Error(`page « ${page.id} » : aucune fiche auteur (champ auteurs) : l'auteur est identifié sur cette page`);
     if (methodeHtml === undefined) throw new Error(`page « ${page.id} » : la section « Méthode » est absente`);
   } else if (fiches.length > 0) throw new Error(`page « ${page.id} » : les fiches auteur ne se saisissent que sur la page « ${PAGE_METHODE} »`);
-  return [
-    `<h1>${texteHtml(page.title)}</h1>`,
+  const contenu = [
     // Page des mentions légales (livrable 7.4b) : le bloc d'identification de l'éditeur et de l'hébergeur, généré depuis
     // src/lib/editeur.ts, passe avant la politique de confidentialité ; il échoue si une mention manque.
-    ...(page.id === PAGE_CONFIDENTIALITE ? [mentionsLegalesHtml(contact)] : []),
+    ...(page.id === PAGE_CONFIDENTIALITE ? [mentionsLegalesHtml(contact, undefined, { format2 })] : []),
     `<div class="corps" data-corps>${typographierHtml(corps)}</div>`,
     ...fiches,
-    ...(page.id === PAGE_METHODE ? [methodeHtml ?? ''] : []),
+    // Format 2 : section « Méthode » en carte du corps, tableau des définitions dans le bloc de la charte.
+    ...(page.id === PAGE_METHODE ? [format2 ? methodeFormat2(methodeHtml ?? '') : (methodeHtml ?? '')] : []),
     `<p class="socle-date" data-socle-date>${texteHtml(`Mis à jour le ${dateAffichee(page.date_modification)}`)}</p>`,
-  ].join('');
+  ];
+  // Format 2 (demande de changement n° 30, F1.3b) : tête de page nuit (mention en tête, H1), sans encadré ; texte sur fond
+  // clair ; ni illustration, ni emplacement publicitaire. Sommaire « Sur cette page » dès SOMMAIRE_MIN_TITRES_SOCLE titres
+  // (règle 2h : « à propos », plus de douze écrans ; mentions légales, plus de six, F1.4) : dans la colonne sur téléphone, à
+  // droite sur ordinateur.
+  if (format2) {
+    const entrees = titresDesSections(contenu.join(''));
+    const avecSommaire = entrees.length >= SOMMAIRE_MIN_TITRES_SOCLE;
+    return [
+      teteSeule(page.title),
+      `<div class="page"><div class="colonne socle">${avecSommaire ? sommaireHtml(entrees, 'sommaire-colonne') : ''}${contenu.join('')}</div>`,
+      avecSommaire ? `<aside><div class="colle">${sommaireHtml(entrees, 'sommaire-cote')}</div></aside>` : '',
+      '</div>',
+    ].join('');
+  }
+  return [`<h1>${texteHtml(page.title)}</h1>`, ...contenu].join('');
 }
+
+
+/** Section « Méthode » au format 2 : carte du corps, tableau des définitions dans le bloc de la charte. */
+const methodeFormat2 = (html: string): string =>
+  html.replace('<section class="methode"', '<section class="methode encart"').replace(/(<table class="definitions">[\s\S]*?<\/table>)/g, '<div class="tableau">$1</div>');
 
 /** Modèles livrés, par type. La variante outil du type voyant : pageOutilVoyants. Le type fluide (vague C) n'en a pas encore. */
 export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut, pneus: pagePneus, panne: pagePanne, dossier: pageDossier };
 
+/**
+ * Vague B (demande de changement n° 30, revue de F1.3c) : une page panne ou dossier est rédigée au format 2. La route des
+ * pages (src/pages/[...adresse].astro) refuse à la construction une telle page au format 1, qu'elle vienne de src/content,
+ * de exemples/ ou de la démonstration ; les pages de test (tests/fixtures) gardent le modèle du format 1.
+ */
+export function refusFormatVagueB(type: TypePage, page: Pick<PageEditoriale, 'id' | 'format'>): string | undefined {
+  return (type === 'panne' || type === 'dossier') && page.format !== 2 ? `page « ${page.id} » : une page « ${type} » est rédigée au format 2 (vague B, demande de changement n° 30) : ajouter « format: 2 »` : undefined;
+}
+
 /** Modèle d'une page, ou la raison pour laquelle il n'existe pas encore (la construction échoue alors). */
 export function modeleDeLaPage(type: TypePage, page: PageEditoriale): { modele: Modele } | { absent: string } {
-  // Format 2 (demande de changement n° 30, lot F1) : page voyant hors outil seulement (F1.2) ; les autres modèles passent au
-  // format 2 après leur conception visuelle (F1.3) : d'ici là, une telle page fait échouer la construction.
+  // Format 2 (demande de changement n° 30, lot F1) : pages voyants (F1.2), page outil (F1.3a), codes défaut et pneus (F1.3b),
+  // panne et dossier (F1.3c) ; un autre type au format 2 fait échouer la construction tant que son modèle n'est pas dessiné.
   if (page.format === 2) {
-    if (type === 'voyant' && !('outil' in page && page.outil === true)) return { modele: pageVoyantF2 };
-    return { absent: `le format 2 des pages « ${type}${'outil' in page && page.outil === true ? ' (outil voyants)' : ''} » n'est pas encore livré (lot F1, F1.3 : à dessiner d'abord)` };
+    if (type === 'voyant') return { modele: 'outil' in page && page.outil === true ? pageOutilVoyantsF2 : pageVoyantF2 };
+    if (type === 'panne') return { modele: pagePanneF2 };
+    if (type === 'dossier') return { modele: pageDossierF2 };
+    if (type === 'code-defaut') return { modele: pageCodeDefautF2 };
+    if (type === 'pneus') return { modele: pagePneusF2 };
+    return { absent: `le format 2 des pages « ${type} » n'est pas encore livré (lot F1, F1.3 : à dessiner d'abord)` };
   }
   if (type === 'voyant' && 'outil' in page && page.outil === true) return { modele: pageOutilVoyants };
   const modele = MODELES[type];

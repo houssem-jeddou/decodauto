@@ -8,7 +8,7 @@ import type { FormatPage } from '../schemas/pages.ts';
 import { PAGE_CONFIDENTIALITE } from '../lib/charte.ts';
 import { estIndexable } from '../lib/indexation.ts';
 import { bandeau, pied } from '../lib/gabarit.ts';
-import { bandeauFormat2, piedFormat2 } from '../lib/format2.ts';
+import { adresseBoutonVoyant, bandeauFormat2, piedFormat2 } from '../lib/format2.ts';
 import { ID_OUTIL_VOYANTS } from '../lib/plan.ts';
 import { demoFormat2Active } from '../../scripts/lib/demo-format2.ts';
 // Pictogramme du bouton « Trouver mon voyant » du format 2 (pilote : le voyant moteur), tiré de la base des dessins.
@@ -37,7 +37,9 @@ const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.
 // la tête de page, dans le contenu de la page (main).
 const outilConstruit = format === 2 && (await getCollection('voyant')).some((page) => (page.data as { outil?: boolean }).outil === true);
 const adresseOutil = outilConstruit ? (await getEntry('plan-du-site', ID_OUTIL_VOYANTS))?.data.adresse : undefined;
-const haut = format === 2 ? bandeauFormat2({ adresseOutil, pictogrammeBouton }) : bandeau();
+// Sur la page outil elle-même, pas de bouton « Trouver mon voyant » (revue de F1.3a) ; ni sur la page 404 (sans canonical),
+// qui porte le sien sous sa phrase : un seul bouton par page (revue de F1.3b).
+const haut = format === 2 ? bandeauFormat2({ adresseOutil: sansCanonical ? undefined : adresseBoutonVoyant(adresseOutil, Astro.url.pathname), pictogrammeBouton }) : bandeau();
 // Lien vers la politique de confidentialité : dès que sa page est construite, sur toutes les pages, à son adresse du plan.
 const pageConfidentialite = (await getCollection('socle')).some((page) => (page.data as { id: string }).id === PAGE_CONFIDENTIALITE);
 const adresseConfidentialite = pageConfidentialite ? (await getEntry('plan-du-site', PAGE_CONFIDENTIALITE))?.data.adresse : undefined;

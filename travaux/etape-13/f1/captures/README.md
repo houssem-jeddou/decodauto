@@ -1,5 +1,13 @@
 # Captures et mesures de la démonstration du format 2 (lot F1, tâche F1.2)
 
+**Refaites le 16/11/2026 à F1.4** (porte du lot F1), sur la démonstration de la branche `etape-13/f1-porte`, PNG sans perte
+(couleurs exactes ; une capture en police de secours identique octet pour octet à celle en police chargée n'est pas gardée).
+Changements visibles depuis la prise précédente : ligne de transparence en 13 px et couleur douce (elle n'était pas stylée :
+pages plus courtes d'environ 44 px), contour de focus bleu clair sur fond sombre, bandeau sans débordement à 320 px, rangée
+« dépannage » de F1.3b sans triangle. Les mesures de ce dossier (`mesures.json`) sont celles de cette prise ; les mesures de
+la porte, toutes pages et trois largeurs, sont dans `travaux/etape-13/f1/porte/mesures-format2.json` (FORMAT2-MESURES), qui
+font foi quand un tableau plus bas date d'une prise antérieure.
+
 Prises le 16/11/2026 après la seconde revue indépendante de F1.2, par `capturer.cjs` (Chromium et Playwright préinstallés de
 l'environnement de Claude), sur :
 - la **démonstration** : `npm run demo:format2` (construction `dist-demo-format2`, jamais déployée), servie en local ;
@@ -8,7 +16,7 @@ l'environnement de Claude), sur :
 
 Fichiers : `<demo|pilote>-<accueil|moteur|adblue>-<375-ecran|375-page|1366-ecran>-<chargee|secours>.png`.
 - `375-ecran` : 375 × 667, premier écran (échelle 2) ; `375-page` : page entière à 375 px (échelle 1) ; `1366-ecran` :
-  1366 × 800 (échelle 1). PNG réduits à 128 couleurs.
+  1366 × 800 (échelle 1). PNG sans perte.
 - Police chargée : la feuille est servie en `font-display: block` pour la capture (état d'un lecteur qui a la police en
   cache ; en `optional`, une police arrivée après le premier rendu peut laisser la police de secours, ce qui avait faussé une
   capture « chargée ») ; police de secours : requêtes de `/polices/` (pilote : `/fonts/`) bloquées. Même fichier de police
@@ -20,6 +28,10 @@ Fichiers : `<demo|pilote>-<accueil|moteur|adblue>-<375-ecran|375-page|1366-ecran
   `auto` ; fondu collé en bas tant que la suite est cachée.
 - `mesures.json` : mesures brutes, en pixels CSS depuis le haut de la page.
 
+**Refaites le 16/11/2026** (revue de F1.3a) : PNG tels que les écrit le navigateur, recompressés sans perte (couleurs exactes ; les
+précédentes étaient réduites à 128 couleurs, ce qui faisait paraître la diode orange rouge et les voyants rouges roses) ; la
+démonstration montre les lignes d'écart courtes et « ce que demande la notice » du brouillon F2, version 2.
+
 ## Pages voyants (375 × 667, sauf la dernière colonne)
 
 Règle 2a : bas de la situation, du verdict, de l'urgence et de l'action de la première ligne (définition de la porte du
@@ -29,12 +41,12 @@ illustration juste après le bloc « Notices / Base du coût » (précision du 1
 
 | Page | Source | Police | Bas de la mention | Bas de la 1re situation (2a) | Bas de l'encadré | Bas de « Notices / Base du coût » | Haut de l'illustration (2i) | Illustration juste après le bloc | Hauteur de la page | Hauteur à 1366 px |
 |---|---|---|---|---|---|---|---|---|---|---|
-| moteur | démonstration | chargée | 99 | 522 | 1515 | 1939 | 1952 | oui | 12470 | 8141 |
-| moteur | démonstration | secours | 99 | 522 | 1515 | 1939 | 1952 | oui | 12521 | 8141 |
+| moteur | démonstration | chargée | 99 | 522 | 1555 | 1979 | 1992 | oui | 12531 | 8122 |
+| moteur | démonstration | secours | 99 | 522 | 1555 | 1979 | 1992 | oui | 12582 | 8122 |
 | moteur | pilote | chargée | 99 | 522 | 1515 | 1817 | 1829 | oui | 10992 | 7607 |
 | moteur | pilote | secours | 99 | 522 | 1515 | 1817 | 1829 | oui | 11042 | 7607 |
-| adblue | démonstration | chargée | 99 | 601 | 2222 | 2740 | 2753 | oui | 13833 | 8419 |
-| adblue | démonstration | secours | 99 | 601 | 2222 | 2740 | 2753 | oui | 13833 | 8444 |
+| adblue | démonstration | chargée | 99 | 601 | 2242 | 2760 | 2773 | oui | 13896 | 8408 |
+| adblue | démonstration | secours | 99 | 601 | 2242 | 2760 | 2773 | oui | 13896 | 8434 |
 | adblue | pilote | chargée | 99 | 601 | 2222 | 2561 | 2574 | oui | 6799 | 4723 |
 | adblue | pilote | secours | 99 | 601 | 2222 | 2561 | 2574 | oui | 6799 | 4749 |
 

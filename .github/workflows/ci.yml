@@ -145,6 +145,19 @@ jobs:
       - name: Liens cassés
         if: ${{ !cancelled() }}
         run: node scripts/liens.ts --dist dist-exemples --exemples
+      - name: Police du système des mesures (Inter, proche des polices des téléphones, comme le poste du pilote ; FORMAT2-MESURES)
+        if: ${{ !cancelled() }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends fonts-inter
+          mkdir -p ~/.config/fontconfig
+          printf '%s\n' '<?xml version="1.0"?>' '<!DOCTYPE fontconfig SYSTEM "fonts.dtd">' '<fontconfig>' \
+            '<alias binding="strong"><family>system-ui</family><prefer><family>Inter</family></prefer></alias>' \
+            '<alias binding="strong"><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>' \
+            '</fontconfig>' > ~/.config/fontconfig/fonts.conf
+          fc-cache -f && fc-match system-ui && fc-match sans-serif
+      - name: Mesures du format 2 dans un navigateur (pages au format 2 de la recette ; FORMAT2-MESURES)
+        if: ${{ !cancelled() }}
+        run: CHROME_PATH="$(command -v google-chrome || command -v chromium)" node scripts/mesurer-format2.ts --dist dist-exemples
       - name: Texte rédigé des exemples, tel que rendu (lecture dans ce journal)
         if: ${{ !cancelled() }}
         run: node scripts/texte-exemples.ts dist-exemples
@@ -171,7 +184,10 @@ jobs:
     # et ceux du format 2 ; seules erreurs attendues, fixées par le script (scripts/lib/demo-format2.ts, attendusDemoFormat2) :
     # les empreintes des lignes et des pages du brouillon (R4-EMPREINTE, jamais recalculées) et FORMAT2-METHODE sur une page
     # dont le texte en ligne n'est pas encore repris (« Verdict retenu », pages écrites à la main ; champ texte_a_reprendre,
-    # lot F2). Ce job ne conditionne pas le déploiement et rien de dist-demo-format2 n'est jamais déployé.
+    # lot F2). Revue de F1.3c : les pages de démonstration des modèles panne et dossier (tests/demo/format2, Markdown rendu
+    # par Astro comme une vraie page) s'y ajoutent, sans empreinte (R4-VALIDATION-ABSENTE attendue, attendusPagesDemo), et
+    # entrent dans lighthouserc-demo-format2.json. Ce job ne conditionne pas le déploiement et rien de dist-demo-format2 n'est
+    # jamais déployé.
     if: ${{ github.event_name != 'schedule' }}
     runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 15
@@ -199,6 +215,19 @@ jobs:
       - name: Liens cassés
         if: ${{ !cancelled() }}
         run: node scripts/liens.ts --dist dist-demo-format2
+      - name: Police du système des mesures (Inter, proche des polices des téléphones, comme le poste du pilote ; FORMAT2-MESURES)
+        if: ${{ !cancelled() }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends fonts-inter
+          mkdir -p ~/.config/fontconfig
+          printf '%s\n' '<?xml version="1.0"?>' '<!DOCTYPE fontconfig SYSTEM "fonts.dtd">' '<fontconfig>' \
+            '<alias binding="strong"><family>system-ui</family><prefer><family>Inter</family></prefer></alias>' \
+            '<alias binding="strong"><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>' \
+            '</fontconfig>' > ~/.config/fontconfig/fonts.conf
+          fc-cache -f && fc-match system-ui && fc-match sans-serif
+      - name: Mesures du format 2 dans un navigateur (règles 2a et 2i, débordement à 320, 375 et 1366 px ; FORMAT2-MESURES)
+        if: ${{ !cancelled() }}
+        run: CHROME_PATH="$(command -v google-chrome || command -v chromium)" node scripts/mesurer-format2.ts --dist dist-demo-format2
       - name: Lighthouse mobile des pages au format 2 (avec les emplacements publicitaires factices)
         if: ${{ !cancelled() }}
         run: npx lhci autorun --config=lighthouserc-demo-format2.json

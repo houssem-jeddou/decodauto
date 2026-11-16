@@ -72,11 +72,12 @@ export function modeleFicheTexte(page: PageTexte, registre: Registre): FicheText
 }
 
 /** Fiche « Le texte en bref » (section repérée data-texte-reference, une ligne data-fiche-ligne par intitulé). */
-export function ficheTexteHtml(fiche: FicheTexte): string {
+export function ficheTexteHtml(fiche: FicheTexte, options: { format2?: boolean } = {}): string {
   return [
     `<section class="fiche-texte" data-texte-reference aria-labelledby="${IDENTIFIANT_FICHE_TEXTE}">`,
     `<h2 id="${IDENTIFIANT_FICHE_TEXTE}">${texteHtml(fiche.titre)}</h2>`,
-    '<dl>',
+    // Format 2 (demande de changement n° 30, F1.3b) : fiche en carte du corps.
+    options.format2 === true ? '<dl class="fiche">' : '<dl>',
     ...fiche.lignes.map((l) => `<div data-fiche-ligne><dt>${texteHtml(l.intitule)}</dt><dd>${texteHtml(l.valeur)}</dd></div>`),
     '</dl>',
     '</section>',

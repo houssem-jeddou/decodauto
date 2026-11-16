@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
 import {
   CATEGORIES_SOURCE,
+  NATURES_SOURCE_SECONDAIRE,
   COULEURS_VOYANT,
   THEMES_AVEC_SOCLE,
   TYPES_AVEC_SOCLE,
@@ -73,8 +74,18 @@ export const sourceSchema = z
     date_consultation: dateIso,
     marque: identifiant.optional(),
     modele: texte.optional(),
+    // Source secondaire : sa nature, obligatoire (demande de changement n° 31 ; NATURES_SOURCE_SECONDAIRE). Texte libre
+    // vérifié ci-dessous, pour que toute valeur hors liste porte le code SOURCE-SECONDAIRE-NATURE.
+    nature: texte.optional(),
   })
   .superRefine((source, ctx) => {
+    if (source.categorie === 'secondaire' && source.nature === undefined) {
+      ctx.addIssue({ code: 'custom', path: ['nature'], message: `une source secondaire indique sa nature (${NATURES_SOURCE_SECONDAIRE.join(', ')}) : un forum, un article de presse ou un blog n'entre pas au registre`, params: { regle: 'SOURCE-SECONDAIRE-NATURE' } });
+    } else if (source.categorie === 'secondaire' && !(NATURES_SOURCE_SECONDAIRE as readonly string[]).includes(source.nature ?? '')) {
+      ctx.addIssue({ code: 'custom', path: ['nature'], message: `nature « ${source.nature} » non admise : ${NATURES_SOURCE_SECONDAIRE.join(', ')} (un forum, un article de presse ou un blog n'entre pas au registre)`, params: { regle: 'SOURCE-SECONDAIRE-NATURE' } });
+    } else if (source.categorie !== 'secondaire' && source.nature !== undefined) {
+      ctx.addIssue({ code: 'custom', path: ['nature'], message: 'la nature ne se donne que pour une source secondaire', params: { regle: 'SOURCE-SECONDAIRE-NATURE' } });
+    }
     if (source.categorie === 'notice-constructeur' && source.marque === undefined) {
       ctx.addIssue({ code: 'custom', path: ['marque'], message: 'une notice constructeur indique sa marque', params: { regle: 'R7-CHAMP-MANQUANT' } });
     }

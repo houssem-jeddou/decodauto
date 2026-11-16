@@ -5,7 +5,18 @@
       "url": [
         "http://localhost/index.html",
         "http://localhost/voyants/moteur/index.html",
-        "http://localhost/voyants/adblue/index.html"
+        "http://localhost/voyants/adblue/index.html",
+        "http://localhost/perte-de-puissance-voiture/index.html",
+        "http://localhost/voiture-qui-broute/index.html",
+        "http://localhost/batterie-voiture/changer/index.html",
+        "http://localhost/moteur-puretech/index.html",
+        "http://localhost/voyants/index.html",
+        "http://localhost/codes-defaut/p0420/index.html",
+        "http://localhost/pression-des-pneus/index.html",
+        "http://localhost/loi-montagne/index.html",
+        "http://localhost/a-propos/index.html",
+        "http://localhost/mentions-legales/index.html",
+        "http://localhost/404.html"
       ],
       "numberOfRuns": 3,
       "settings": {

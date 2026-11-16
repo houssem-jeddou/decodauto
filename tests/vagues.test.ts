@@ -9,7 +9,7 @@ import { after, describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { VAGUES } from '../src/schemas/listes.ts';
 import { verifierPassage } from '../scripts/lib/passage.ts';
-import { FICHIER_VAGUES_OUVERTES, VAGUES_CONNUES, chargerVaguesOuvertes, controlerVaguesOuvertes, lireVaguesOuvertes } from '../scripts/lib/vagues.ts';
+import { FICHIER_LOTS_FORMAT2, FICHIER_VAGUES_OUVERTES, VAGUES_CONNUES, chargerLotsFormat2, chargerVaguesOuvertes, controlerFormatDesVagues, controlerVaguesOuvertes, lireLotsFormat2, lireVaguesOuvertes } from '../scripts/lib/vagues.ts';
 
 const racineDepot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const temporaires: string[] = [];
@@ -127,5 +127,51 @@ describe('règle de passage : une page d’une vague non ouverte ne passe pas', 
     const racine = await depot('A\n');
     const { erreurs } = await verifierPassage(racine, 'moteur-surchauffe', () => 'a'.repeat(64));
     assert.ok(erreurs.some((e) => e.includes(FICHIER_VAGUES_OUVERTES)), erreurs.join('\n'));
+  });
+});
+
+describe('contrôle FORMAT2-VAGUE (demande de changement n° 30, F1.4)', () => {
+  const vagues: Record<string, string> = { a1: 'A', a2: 'A', b1: 'B', c1: 'C' };
+  const vagueDe = (id: string): string | undefined => vagues[id];
+  const regles = (c: readonly { regle: string }[]): string[] => c.map((x) => x.regle);
+
+  test('le fichier du dépôt est lisible et vide tant qu\'aucun lot F2 ou F3 n\'est publié', async () => {
+    assert.deepEqual(await chargerLotsFormat2(racineDepot), []);
+    assert.deepEqual(JSON.parse(await readFile(join(racineDepot, FICHIER_LOTS_FORMAT2), 'utf8')), { pages: [] });
+  });
+
+  test('lecture : { "pages": [...] } sans doublon ; autre forme refusée', () => {
+    assert.deepEqual(lireLotsFormat2('{"pages":["a1"]}'), ['a1']);
+    for (const t of ['x', '[]', '{}', '{"pages":"a1"}', '{"pages":["a1","a1"]}', '{"pages":[""]}', '{"pages":[],"autre":1}']) assert.throws(() => lireLotsFormat2(t), t);
+  });
+
+  test('vagues B et C : au format 1 (format absent ou 1), où que soit la page, erreur ; au format 2, rien', () => {
+    for (const fichier of ['src/content/panne/b1.md', 'exemples/panne/b1.md', 'tests/demo/format2/panne/b1.md']) {
+      for (const format of [undefined, 1]) assert.deepEqual(regles(controlerFormatDesVagues([{ id: 'b1', fichier, format }], vagueDe, [], { demo: false })), ['FORMAT2-VAGUE'], `${fichier} ${format}`);
+      assert.deepEqual(controlerFormatDesVagues([{ id: 'b1', fichier, format: 2 }], vagueDe, [], { demo: false }), []);
+    }
+    assert.match(controlerFormatDesVagues([{ id: 'c1', fichier: 'src/content/fluide/c1.md' }], vagueDe, [], { demo: false })[0]?.message ?? '', /vague C : elle est rédigée au format 2/);
+  });
+
+  test('vague A au format 2 dans src/content : seulement si son lot l\'inscrit ; la démonstration n\'est pas concernée', () => {
+    const page = { id: 'a1', fichier: 'src/content/voyant/a1.md', format: 2 };
+    const refus = controlerFormatDesVagues([page], vagueDe, [], { demo: false });
+    assert.deepEqual(regles(refus), ['FORMAT2-VAGUE']);
+    assert.match(refus[0]?.message ?? '', /seulement avec son lot \(F2 ou F3\)/);
+    assert.deepEqual(controlerFormatDesVagues([page], vagueDe, ['a1'], { demo: false }), []);
+    assert.deepEqual(controlerFormatDesVagues([page], vagueDe, [], { demo: true }), []);
+    // Vague A au format 1 : la règle d'aujourd'hui.
+    assert.deepEqual(controlerFormatDesVagues([{ id: 'a2', fichier: 'src/content/voyant/a2.md' }], vagueDe, [], { demo: false }), []);
+  });
+
+  test('page inscrite restée au format 1, page inscrite hors du plan ou d\'une autre vague : erreur', () => {
+    assert.deepEqual(regles(controlerFormatDesVagues([{ id: 'a1', fichier: 'src/content/voyant/a1.md', format: 1 }], vagueDe, ['a1'], { demo: false })), ['FORMAT2-VAGUE']);
+    assert.deepEqual(regles(controlerFormatDesVagues([], vagueDe, ['inconnue'], { demo: false })), ['FORMAT2-VAGUE']);
+    assert.match(controlerFormatDesVagues([], vagueDe, ['b1'], { demo: false })[0]?.message ?? '', /vague B ; seules les pages de la vague A/);
+  });
+
+  test('le source du contrôle du site appelle ce contrôle', async () => {
+    const source = await readFile(join(racineDepot, 'scripts/lib/controler-site.ts'), 'utf8');
+    assert.match(source, /controlerFormatDesVagues\(/);
   });
 });

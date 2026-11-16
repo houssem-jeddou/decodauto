@@ -22,6 +22,12 @@ export { DOSSIER_DEMO_FORMAT2 } from './attendus.ts';
 /** Brouillon des données du format 2 et dessins des illustrations du pilote, redessinés en fichiers SVG. */
 export const FICHIER_BROUILLON_FORMAT2 = 'travaux/etape-13/f1/demo/brouillon-format2.json';
 export const DOSSIER_ILLUSTRATIONS_DEMO = 'travaux/etape-13/f1/demo/illustrations';
+/**
+ * Pages de démonstration des modèles panne et dossier (revue de F1.3c) : fichiers Markdown de tests/demo/format2/<type>/,
+ * lus seulement par cette construction (src/content.config.ts) et par son contrôle ; jamais publiés. Sans empreinte de
+ * validation : R4-VALIDATION-ABSENTE y est une erreur attendue (attendusPagesDemo).
+ */
+export const DOSSIER_PAGES_DEMO_FORMAT2 = 'tests/demo/format2';
 /** Mention obligatoire en tête du brouillon. */
 export const MENTION_BROUILLON = 'Brouillon, jamais validé';
 /** Attribut posé sur html dans la construction de démonstration (contrôle DEMO-PUBLIEE). */
@@ -38,6 +44,8 @@ export interface BrouillonFormat2 {
     string,
     {
       illustration: { fichier: string; alt: string; legende: string };
+      /** Réponse directe d'une page informative (règle 2c ; F1.3b : pression des pneus, texte du pilote). */
+      reponse_directe?: string;
       reperes?: { titre: string; repere: string }[];
       /** Phrases du texte rendu réécrites comme au lot F2 (règle 2d : une référence hors parenthèse fait échouer). */
       remplacements?: { avant: string; apres: string }[];
@@ -45,8 +53,10 @@ export interface BrouillonFormat2 {
       texte_a_reprendre?: boolean;
     }
   >;
-  /** Accueil au format 2. */
+  /** Accueil au format 2 (la page 404 suit son format). */
   accueil?: { format: 2 };
+  /** Pages du socle passées au format 2 (F1.3b : « à propos », mentions légales). */
+  socle?: string[];
 }
 
 export async function lireBrouillonFormat2(racine: string): Promise<BrouillonFormat2> {
@@ -104,13 +114,14 @@ export function voyantsAvecBrouillon(voyants: readonly unknown[], brouillon: Bro
   return resultat;
 }
 
-/** Frontmatter d'une page complété du brouillon : format 2 et illustration (pages voyants), format 2 (accueil). */
+/** Frontmatter d'une page complété du brouillon : format 2 et illustration (pages éditoriales), format 2 (accueil, socle). */
 export function pageAvecBrouillon<T>(page: T, brouillon: BrouillonFormat2): T {
   const id = (page as { id?: unknown }).id;
   if (typeof id !== 'string') return page;
   const ajout = brouillon.pages[id];
-  if (ajout !== undefined) return { ...page, format: 2, illustration: ajout.illustration };
+  if (ajout !== undefined) return { ...page, format: 2, illustration: ajout.illustration, ...(ajout.reponse_directe !== undefined && { reponse_directe: ajout.reponse_directe }) };
   if (id === 'accueil' && brouillon.accueil?.format === 2) return { ...page, format: 2 };
+  if (brouillon.socle?.includes(id) === true) return { ...page, format: 2 };
   return page;
 }
 
@@ -170,7 +181,42 @@ export function attendusDemoFormat2(brouillon: BrouillonFormat2, fichierDePage: 
     const fichier = fichierDePage(id);
     return p.texte_a_reprendre === true && fichier !== undefined ? [{ regle: 'FORMAT2-METHODE', fichier, brut: `FORMAT2-METHODE@${fichier}` }] : [];
   });
-  return [...lignes, ...pages, ...methode];
+  const paragraphes = PARAGRAPHES_A_REPRENDRE_DEMO.flatMap((id): Attendu[] => {
+    const fichier = fichierDePage(id);
+    return fichier === undefined ? [] : [{ regle: 'FORMAT2-PARAGRAPHES', fichier, brut: `FORMAT2-PARAGRAPHES@${fichier}` }];
+  });
+  return [...lignes, ...pages, ...methode, ...paragraphes];
+}
+
+/**
+ * Pages de la démonstration dont le texte en ligne (format 1, non repris) a des paragraphes de plus de trois phrases
+ * (FORMAT2-PARAGRAPHES, règle 2e ; F1.4) : textes repris aux lots F2 (voyants, outil) et F3 (code, loi montagne, socle).
+ * Une page reprise qui n'en a plus rend l'attendu inutile, ce que la construction signale (attendu non rencontré).
+ */
+export const PARAGRAPHES_A_REPRENDRE_DEMO: readonly string[] = ['voyant-moteur', 'voyant-adblue', 'voyants', 'code-p0420', 'loi-montagne', 'a-propos'];
+
+/**
+ * Paires de liens absentes du plan dont une page de démonstration a besoin pour le renvoi « Votre marque » de sa ligne
+ * d'écart (revue de F1.3b, B1 : FORMAT2-ECART) : fichier de la page → paire, proposée avec le lot de la vague B
+ * qui publie la page (revue de la porte F1). Une paire
+ * ajoutée au plan rend l'attendu inutile, ce que la construction signale (attendu non rencontré).
+ */
+export const PAIRES_MANQUANTES_DEMO: Readonly<Record<string, string>> = {
+  [`${DOSSIER_PAGES_DEMO_FORMAT2}/panne/batterie-changer.md`]: 'batterie-changer ↔ voyant-batterie',
+};
+
+/**
+ * Erreurs attendues des pages de démonstration (tests/demo/format2) : aucune n'a d'empreinte de validation ; une page dont
+ * le renvoi « Votre marque » attend une paire du plan (PAIRES_MANQUANTES_DEMO) échoue à FORMAT2-ECART, paire nommée.
+ */
+export function attendusPagesDemo(fichiers: readonly string[]): Attendu[] {
+  return fichiers.flatMap((fichier): Attendu[] => {
+    const paire = PAIRES_MANQUANTES_DEMO[fichier];
+    return [
+      { regle: 'R4-VALIDATION-ABSENTE', fichier, brut: `R4-VALIDATION-ABSENTE@${fichier}` },
+      ...(paire !== undefined ? [{ regle: 'FORMAT2-ECART', fichier, extrait: `paire de liens ${paire}`, brut: `FORMAT2-ECART@${fichier}@paire de liens ${paire}` }] : []),
+    ];
+  });
 }
 
 /** Une page de la construction de démonstration (attribut data-demo-format2 sur html) dans un site contrôlé comme réel : DEMO-PUBLIEE. */

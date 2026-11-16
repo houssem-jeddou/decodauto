@@ -14,7 +14,7 @@
       "hautGrilleVoyants": 445,
       "colle": null,
       "hautSectionVoyants": 346,
-      "hauteurPage": 2025,
+      "hauteurPage": 2236,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -31,7 +31,7 @@
       "hautGrilleVoyants": 486,
       "colle": null,
       "hautSectionVoyants": 410,
-      "hauteurPage": 1399,
+      "hauteurPage": 1415,
       "largeurPage": 1366
     }
   },
@@ -50,7 +50,7 @@
       "hautGrilleVoyants": 478,
       "colle": null,
       "hautSectionVoyants": 379,
-      "hauteurPage": 2057,
+      "hauteurPage": 2268,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -67,7 +67,7 @@
       "hautGrilleVoyants": 486,
       "colle": null,
       "hautSectionVoyants": 410,
-      "hauteurPage": 1399,
+      "hauteurPage": 1415,
       "largeurPage": 1366
     }
   },
@@ -150,15 +150,15 @@
       "h1": "Outfit",
       "basMention": 99,
       "basPremiereSituation": 522,
-      "basPremiereLigne": 618,
-      "basEncadre": 1515,
-      "basProvenance": 1939,
-      "hautIllustration": 1952,
+      "basPremiereLigne": 638,
+      "basEncadre": 1593,
+      "basProvenance": 1970,
+      "hautIllustration": 1982,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": null,
       "hautSectionVoyants": null,
-      "hauteurPage": 12470,
+      "hauteurPage": 12604,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -168,9 +168,9 @@
       "basMention": 78,
       "basPremiereSituation": 338,
       "basPremiereLigne": 394,
-      "basEncadre": 880,
-      "basProvenance": 1121,
-      "hautIllustration": 1134,
+      "basEncadre": 899,
+      "basProvenance": 1102,
+      "hautIllustration": 1115,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": {
@@ -180,7 +180,7 @@
         "defilement": "auto"
       },
       "hautSectionVoyants": null,
-      "hauteurPage": 8141,
+      "hauteurPage": 8115,
       "largeurPage": 1366
     }
   },
@@ -191,15 +191,15 @@
       "h1": "Outfit",
       "basMention": 99,
       "basPremiereSituation": 522,
-      "basPremiereLigne": 618,
-      "basEncadre": 1515,
-      "basProvenance": 1939,
-      "hautIllustration": 1952,
+      "basPremiereLigne": 638,
+      "basEncadre": 1593,
+      "basProvenance": 1970,
+      "hautIllustration": 1982,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": null,
       "hautSectionVoyants": null,
-      "hauteurPage": 12521,
+      "hauteurPage": 12654,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -209,9 +209,9 @@
       "basMention": 78,
       "basPremiereSituation": 338,
       "basPremiereLigne": 394,
-      "basEncadre": 880,
-      "basProvenance": 1121,
-      "hautIllustration": 1134,
+      "basEncadre": 899,
+      "basProvenance": 1102,
+      "hautIllustration": 1115,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": {
@@ -221,7 +221,7 @@
         "defilement": "auto"
       },
       "hautSectionVoyants": null,
-      "hauteurPage": 8141,
+      "hauteurPage": 8115,
       "largeurPage": 1366
     }
   },
@@ -315,14 +315,14 @@
       "basMention": 99,
       "basPremiereSituation": 601,
       "basPremiereLigne": 696,
-      "basEncadre": 2222,
-      "basProvenance": 2740,
-      "hautIllustration": 2753,
+      "basEncadre": 2280,
+      "basProvenance": 2750,
+      "hautIllustration": 2763,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": null,
       "hautSectionVoyants": null,
-      "hauteurPage": 13833,
+      "hauteurPage": 13887,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -332,9 +332,9 @@
       "basMention": 78,
       "basPremiereSituation": 390,
       "basPremiereLigne": 446,
-      "basEncadre": 1234,
-      "basProvenance": 1513,
-      "hautIllustration": 1526,
+      "basEncadre": 1254,
+      "basProvenance": 1494,
+      "hautIllustration": 1507,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": {
@@ -344,7 +344,7 @@
         "defilement": "auto"
       },
       "hautSectionVoyants": null,
-      "hauteurPage": 8419,
+      "hauteurPage": 8390,
       "largeurPage": 1366
     }
   },
@@ -356,14 +356,14 @@
       "basMention": 99,
       "basPremiereSituation": 601,
       "basPremiereLigne": 696,
-      "basEncadre": 2222,
-      "basProvenance": 2740,
-      "hautIllustration": 2753,
+      "basEncadre": 2280,
+      "basProvenance": 2750,
+      "hautIllustration": 2763,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": null,
       "hautSectionVoyants": null,
-      "hauteurPage": 13833,
+      "hauteurPage": 13887,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -373,9 +373,9 @@
       "basMention": 78,
       "basPremiereSituation": 390,
       "basPremiereLigne": 446,
-      "basEncadre": 1234,
-      "basProvenance": 1513,
-      "hautIllustration": 1526,
+      "basEncadre": 1254,
+      "basProvenance": 1494,
+      "hautIllustration": 1507,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": {
@@ -385,7 +385,7 @@
         "defilement": "auto"
       },
       "hautSectionVoyants": null,
-      "hauteurPage": 8444,
+      "hauteurPage": 8415,
       "largeurPage": 1366
     }
   },

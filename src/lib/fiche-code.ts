@@ -76,11 +76,14 @@ export function modeleFicheCode(page: PageCode, voyants: ReadonlyMap<string, { n
   };
 }
 
-export function ficheCodeHtml(fiche: FicheCode): string {
+export function ficheCodeHtml(fiche: FicheCode, options: { format2?: boolean; code?: string } = {}): string {
+  // Format 2 (demande de changement n° 30, F1.3b) : fiche en carte du corps (dl.fiche), code en chasse fixe dans le titre.
+  const titre = texteHtml(fiche.titre);
+  const code = options.code !== undefined ? texteHtml(options.code) : undefined;
   return [
     `<section class="fiche-code" data-fiche-code aria-labelledby="${IDENTIFIANTS_CODE.fiche}">`,
-    `<h2 id="${IDENTIFIANTS_CODE.fiche}">${texteHtml(fiche.titre)}</h2>`,
-    '<dl>',
+    `<h2 id="${IDENTIFIANTS_CODE.fiche}">${options.format2 === true && code !== undefined ? titre.replace(code, `<code class="code">${code}</code>`) : titre}</h2>`,
+    options.format2 === true ? '<dl class="fiche">' : '<dl>',
     ...fiche.lignes.map((l) => `<div data-fiche-ligne><dt>${texteHtml(l.intitule)}</dt><dd>${texteHtml(l.valeur)}</dd></div>`),
     '</dl>',
     '</section>',
@@ -108,7 +111,7 @@ export function modeleParMarque(page: PageCode): RangeeParMarque[] {
  * Tableau « Cas décrits par marque ». Élément unique de la page quand `elementUnique` (element_unique: tableau). Vide
  * si la page n'a pas de précision par marque.
  */
-export function parMarqueHtml(rangees: readonly RangeeParMarque[], registre: Registre, options: { elementUnique: boolean }): string {
+export function parMarqueHtml(rangees: readonly RangeeParMarque[], registre: Registre, options: { elementUnique: boolean; format2?: boolean }): string {
   if (rangees.length === 0) return '';
   const lignes = rangees.map((r) =>
     [
@@ -123,8 +126,12 @@ export function parMarqueHtml(rangees: readonly RangeeParMarque[], registre: Reg
     `<section class="par-marque"${options.elementUnique ? ' data-element-unique="tableau"' : ''} data-cas-par-marque aria-labelledby="${IDENTIFIANTS_CODE.parMarque}">`,
     `<h2 id="${IDENTIFIANTS_CODE.parMarque}">${texteHtml('Cas décrits par marque')}</h2>`,
     `<p>${texteHtml(INTRODUCTION_PAR_MARQUE)}</p>`,
+    // Format 2 : le tableau dans le bloc de la charte (en-tête sombre, angles, filets) ; en cartes sur téléphone, bien qu'il
+    // n'ait que trois colonnes : la colonne du texte, longue, y serait trop étroite (variante proposée pour docs/11 §4).
+    options.format2 === true ? '<div class="tableau tableau-cartes tableau-par-marque">' : '',
     `<table role="table" aria-labelledby="${IDENTIFIANTS_CODE.parMarque}"><thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Marque</th><th scope="col" role="columnheader">${texteHtml('Ce que dit le document')}</th><th scope="col" role="columnheader">Source</th></tr></thead>`,
     `<tbody role="rowgroup">${lignes.join('')}</tbody></table>`,
+    options.format2 === true ? '</div>' : '',
     '</section>',
   ].join('');
 }
