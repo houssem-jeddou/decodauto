@@ -2,7 +2,7 @@
 
 Ce fichier est l'état de référence du projet. Il est remplacé en entier à la fin de chaque session ayant produit une validation ou une décision.
 
-Dernière mise à jour : 16/11/2026 (19 h 05, heure de Tunis)
+Dernière mise à jour : 16/11/2026 (19 h 35, heure de Tunis)
 
 ## État des étapes
 | # | Étape | Statut | Livrable de référence |
