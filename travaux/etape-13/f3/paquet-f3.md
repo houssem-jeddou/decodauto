@@ -4,7 +4,7 @@
 
 ## Code P0087 (`/codes-defaut/p0087/`)
 
-- Champs de l'en-tête changés : `format`, `illustration`
+- Champs de l'en-tête changés : `date_modification`, `format`, `illustration`
 - Lignes de l'encadré : identiques à main
   1. Base `moteur-orange-fixe` : Non, arrêtez-vous immédiatement · À faire tout de suite · ligne d'écart (lot F2) : « Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). »
 - Illustration dessinée pour le site (`code-p0087-circuit-carburant`) : alt « Schéma du circuit de carburant : réservoir et pompe, filtre, pompe haute pression, rampe avec son capteur de pression, injecteurs » ; légende « Le carburant va du réservoir à la rampe, où un capteur mesure la pression que le calculateur surveille. En orange, les pièces que citent les causes de cette page. »
@@ -32,7 +32,7 @@
 
 ## Code P0299 (`/codes-defaut/p0299/`)
 
-- Champs de l'en-tête changés : `format`, `illustration`
+- Champs de l'en-tête changés : `date_modification`, `format`, `illustration`
 - Lignes de l'encadré : identiques à main
   1. Base `moteur-orange-fixe` : Non, arrêtez-vous immédiatement · À faire tout de suite · ligne d'écart (lot F2) : « Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). »
 - Illustration dessinée pour le site (`code-p0299-circuit-turbo`) : alt « Schéma de la suralimentation : filtre à air, turbo et sa commande, vanne, échangeur, moteur et calculateur » ; légende « Le turbo, entraîné par les gaz d'échappement, envoie l'air comprimé au moteur par l'échangeur ; sa commande règle la pression. En orange, ce que citent les causes de cette page. »
@@ -56,7 +56,7 @@
 
 ## Code P0420 (`/codes-defaut/p0420/`)
 
-- Champs de l'en-tête changés : `format`, `illustration`
+- Champs de l'en-tête changés : `date_modification`, `format`, `illustration`
 - Lignes de l'encadré : identiques à main
   1. Base `moteur-orange-fixe` : Non, arrêtez-vous immédiatement · À faire tout de suite · ligne d'écart (lot F2) : « Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). »
 - Illustration dessinée pour le site (`code-p0420-ligne-echappement`) : alt « Schéma de la ligne d'échappement : moteur, sonde avant, catalyseur, sonde après, les deux sondes reliées au calculateur » ; légende « La sonde placée après le catalyseur mesure sa capacité à stocker l'oxygène ; le calculateur compare les deux sondes. En orange, ce que citent les causes de cette page. »
@@ -84,11 +84,11 @@
 
 ## Pression des pneus (`/pression-des-pneus/`)
 
-- Champs de l'en-tête changés : `format`, `illustration`, `question_decision`, `reponse_directe`
+- Champs de l'en-tête changés : `date_modification`, `format`, `illustration`, `question_decision`, `reponse_directe`
   - `question_decision` : « Puis-je rouler avec des pneus sous-gonflés, et à quelle pression les gonfler ? » → « À quelle pression gonfler mes pneus, et puis-je rouler s'ils sont sous-gonflés ? »
   - `reponse_directe` : « (absent) » → « Celle du constructeur, à froid : sur l'étiquette de la porte du conducteur ou de son encadrement, propre à chaque voiture. »
 - Lignes de l'encadré : identiques à main
-  1. Base `pression-pneus` : Non, arrêtez-vous immédiatement · À faire tout de suite · ligne d'écart (lot F2) : « Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts : Peugeot (liste des témoins), Dacia sinon (vérifier la pression). »
+  1. Base `pression-pneus` : Non, arrêtez-vous immédiatement · À faire tout de suite · ligne d'écart (lot F2) : « Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir). »
 - Illustration dessinée pour le site (`pression-etiquette-porte`) : alt « Où lire la pression : l'étiquette sur le chant de la porte du conducteur (1) ou sur son encadrement (2), valeurs propres à chaque voiture » ; légende « Selon la notice, l'étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place au niveau de la porte. Les valeurs sont propres à chaque voiture. »
 - Repères : sous « Quand le voyant de pression des pneus s'allume » → `pression-pneus`
 - Titres H2 : identiques
@@ -98,7 +98,7 @@
 
 **Avant** : | Notice | Où lire la pression | Quand la vérifier | Après avoir gonflé | |---|---|---|---| | Peugeot 208 | Étiquette collée au niveau de la porte côté conducteur, avec les pressions à vide et en charge et celle de la roue de secours (p. 198) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette (p. 110) | Réinitialiser la détection de sous-gonflage (p. 111) | | Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours (p. 348) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud (p. 207 et 348) | Réinitialiser l'avertisseur de perte de pression (p. 207-208) | | Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur (p. 179) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids (p. 179) | Réinitialiser l'avertisseur de perte de pression (p. 179-180) | | Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche (p. 307) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids (p. 306) | Mémoriser la nouvelle pression dans le système (p. 312) | | Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice (p. 266, renvoi p. 333) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines (p. 266) | Initialiser le système dans les cas que la notice énumère (p. 261-262) |
 
-**Après** : | Notice | Où lire la pression | Quand la vérifier | Après avoir gonflé | |---|---|---|---| | Peugeot 208 | Étiquette collée au niveau de la porte côté conducteur, avec les pressions à vide et en charge et celle de la roue de secours ({{cite:notice-peugeot-208|p. 198}}) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette ({{cite:notice-peugeot-208|p. 110}}) | Réinitialiser la détection de sous-gonflage ({{cite:notice-peugeot-208|p. 111}}) | | Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours ({{cite:notice-renault-clio-5|p. 348}}) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5|p. 207 et 348}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-renault-clio-5|p. 207-208}}) | | Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur ({{cite:notice-dacia-sandero-3|p. 179}}) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids ({{cite:notice-dacia-sandero-3|p. 179}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-dacia-sandero-3|p. 179-180}}) | | Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche ({{cite:notice-seat-ibiza|p. 307}}) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids ({{cite:notice-seat-ibiza|p. 306}}) | Mémoriser la nouvelle pression dans le système ({{cite:notice-seat-ibiza|p. 312}}) | | Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice ({{cite:notice-toyota-yaris|p. 266, renvoi p. 333}}) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines ({{cite:notice-toyota-yaris|p. 266}}) | Initialiser le système dans les cas que la notice énumère ({{cite:notice-toyota-yaris|p. 261-262}}) |
+**Après** : | Notice | Où lire la pression | Quand la vérifier | Après avoir gonflé | |---|---|---|---| | Peugeot 208 | Étiquette collée au niveau de la porte côté conducteur, avec les pressions à vide et en charge et celle de la roue de secours ({{cite:notice-peugeot-208\|p. 198}}) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette ({{cite:notice-peugeot-208\|p. 110}}) | Réinitialiser la détection de sous-gonflage ({{cite:notice-peugeot-208\|p. 111}}) | | Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours ({{cite:notice-renault-clio-5\|p. 348}}) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5\|p. 207 et 348}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-renault-clio-5\|p. 207-208}}) | | Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur ({{cite:notice-dacia-sandero-3\|p. 179}}) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids ({{cite:notice-dacia-sandero-3\|p. 179}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-dacia-sandero-3\|p. 179-180}}) | | Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche ({{cite:notice-seat-ibiza\|p. 307}}) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids ({{cite:notice-seat-ibiza\|p. 306}}) | Mémoriser la nouvelle pression dans le système ({{cite:notice-seat-ibiza\|p. 312}}) | | Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice ({{cite:notice-toyota-yaris\|p. 266, renvoi p. 333}}) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines ({{cite:notice-toyota-yaris\|p. 266}}) | Initialiser le système dans les cas que la notice énumère ({{cite:notice-toyota-yaris\|p. 261-262}}) |
 
 **Avant** : Si vous ne pouvez contrôler qu'à chaud, deux notices donnent une correction : ajouter 0,3 bar aux valeurs de l'étiquette pour Peugeot (p. 110), les majorer de 0,2 à 0,3 bar pour Renault, qui précise qu'il ne faut jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5|p. 348}}). Pour une autre voiture, suivez sa notice.
 
@@ -112,7 +112,7 @@
 
 ## Loi montagne (`/loi-montagne/`)
 
-- Champs de l'en-tête changés : `format`, `illustration`
+- Champs de l'en-tête changés : `date_modification`, `format`, `illustration`
 - Lignes de l'encadré : identiques à main
   1. Saisie : « Sans pneus hiver (symbole alpin et M+S) ni chaînes ou chaussettes à neige à bord » → Non, ne poursuivez pas votre trajet · À faire tout de suite
   2. Saisie : « Avec quatre pneus hiver (symbole alpin et M+S) » → Oui, avec précautions · Aucune action nécessaire
@@ -151,7 +151,7 @@
 
 ## À propos (`/a-propos/`)
 
-- Champs de l'en-tête changés : `format`
+- Champs de l'en-tête changés : `date_modification`, `format`
 - Titres H2 : identiques
 - Paragraphes changés : 2 nouveaux ou réécrits, 1 anciens retirés ou réécrits
 
@@ -167,7 +167,7 @@
 
 ## Mentions légales et confidentialité (`/mentions-legales/`)
 
-- Champs de l'en-tête changés : `format`
+- Champs de l'en-tête changés : `date_modification`, `format`
 - Titres H2 : identiques
 - Paragraphes changés : 0 nouveaux ou réécrits, 0 anciens retirés ou réécrits
 

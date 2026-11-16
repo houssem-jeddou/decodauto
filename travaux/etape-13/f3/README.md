@@ -48,3 +48,19 @@ Planche : `illustrations-f3-planche.png`. Rendu vérifié à 640 unités avec `r
 Construction et contrôles (non lancés ici : pas de dépendances installées dans cette session), `date_modification`,
 captures et mesures, Lighthouse, revue indépendante, paquet de validation, empreintes après la validation de Houssem
 (brief : `taches/F3-pr.md`).
+
+## Pull request du lot F3 (houssem-jeddou/decodauto#77, 16/11/2026, soir)
+- `main` (a2b36ce, lot F2 fusionné) intégré par une fusion, sans conflit.
+- Lot inscrit dans `config/lots-format2.json` (les 7 pages, dans l'ordre du plan) ; `date_modification` des 7 pages au
+  16/11/2026 (règle 14 b).
+- Pression des pneus : dans les cellules du tableau, la barre des références `{{cite:<source>|<page>}}` s'écrit `\|` (sinon
+  elle sépare les cellules : la construction échouait sur une référence illisible) ; rendu vérifié (4 cellules par ligne,
+  pages citées dans « Sources ») ; `verifier-pages-f3.py` reconnaît cette forme. Aucun mot changé.
+- Démonstration du format 2 : brouillon vidé (pages et socle), dessin de la pression des pneus retiré du dossier de la
+  démonstration (identique à celui du site), plus de paragraphes à reprendre.
+- Tests à jour (réponse directe lue dans la page, brouillon vide, lots F2 et F3, socle au format 1 sur la version au format 1
+  des pages). Seuls échecs attendus avant la validation : les empreintes des 5 pages éditoriales (R4-EMPREINTE, et le test de
+  la porte de l'étape 6 qui les vérifie).
+- Preuves : `preuves/` (mesures, FORMAT2-MESURES, mots des lignes d'écart, Lighthouse, production comparée à `main`) et
+  `captures/` (117 PNG).
+- Reste : revue indépendante, paquet F3 validé par Houssem, empreintes (`npm run empreinte`), CI verte.
