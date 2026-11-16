@@ -150,15 +150,15 @@
       "h1": "Outfit",
       "basMention": 99,
       "basPremiereSituation": 522,
-      "basPremiereLigne": 618,
-      "basEncadre": 1515,
-      "basProvenance": 1939,
-      "hautIllustration": 1952,
+      "basPremiereLigne": 638,
+      "basEncadre": 1555,
+      "basProvenance": 1979,
+      "hautIllustration": 1992,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": null,
       "hautSectionVoyants": null,
-      "hauteurPage": 12470,
+      "hauteurPage": 12531,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -180,7 +180,7 @@
         "defilement": "auto"
       },
       "hautSectionVoyants": null,
-      "hauteurPage": 8141,
+      "hauteurPage": 8122,
       "largeurPage": 1366
     }
   },
@@ -191,15 +191,15 @@
       "h1": "Outfit",
       "basMention": 99,
       "basPremiereSituation": 522,
-      "basPremiereLigne": 618,
-      "basEncadre": 1515,
-      "basProvenance": 1939,
-      "hautIllustration": 1952,
+      "basPremiereLigne": 638,
+      "basEncadre": 1555,
+      "basProvenance": 1979,
+      "hautIllustration": 1992,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": null,
       "hautSectionVoyants": null,
-      "hauteurPage": 12521,
+      "hauteurPage": 12582,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -221,7 +221,7 @@
         "defilement": "auto"
       },
       "hautSectionVoyants": null,
-      "hauteurPage": 8141,
+      "hauteurPage": 8122,
       "largeurPage": 1366
     }
   },
@@ -315,14 +315,14 @@
       "basMention": 99,
       "basPremiereSituation": 601,
       "basPremiereLigne": 696,
-      "basEncadre": 2222,
-      "basProvenance": 2740,
-      "hautIllustration": 2753,
+      "basEncadre": 2242,
+      "basProvenance": 2760,
+      "hautIllustration": 2773,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": null,
       "hautSectionVoyants": null,
-      "hauteurPage": 13833,
+      "hauteurPage": 13896,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -344,7 +344,7 @@
         "defilement": "auto"
       },
       "hautSectionVoyants": null,
-      "hauteurPage": 8419,
+      "hauteurPage": 8408,
       "largeurPage": 1366
     }
   },
@@ -356,14 +356,14 @@
       "basMention": 99,
       "basPremiereSituation": 601,
       "basPremiereLigne": 696,
-      "basEncadre": 2222,
-      "basProvenance": 2740,
-      "hautIllustration": 2753,
+      "basEncadre": 2242,
+      "basProvenance": 2760,
+      "hautIllustration": 2773,
       "illustrationSuitProvenance": true,
       "hautGrilleVoyants": null,
       "colle": null,
       "hautSectionVoyants": null,
-      "hauteurPage": 13833,
+      "hauteurPage": 13896,
       "largeurPage": 375
     },
     "ordinateur": {
@@ -385,7 +385,7 @@
         "defilement": "auto"
       },
       "hautSectionVoyants": null,
-      "hauteurPage": 8444,
+      "hauteurPage": 8434,
       "largeurPage": 1366
     }
   },

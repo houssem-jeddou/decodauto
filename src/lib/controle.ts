@@ -25,7 +25,8 @@ import {
 import { ID_OUTIL_VOYANTS, controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
 import { normaliserRecherche } from './texte.ts';
 import { controlerFormat2 } from './controle-format2.ts';
-import { FORMAT2 } from './format2.ts';
+import { ECART_COURT_MAX_MOTS, FORMAT2, motsDe } from './format2.ts';
+import { ecartDeLaCarte, entreesIndexFormat2, modeleOutilFormat2, outilVoyantsFormat2, texteEntreeIndex } from './outil-format2.ts';
 import {
   coutsSchema,
   montantSchema,
@@ -1156,7 +1157,7 @@ export function controlerHtml(
   if (page.format === 2) constats.push(...controlerFormat2(html, fichier, lignes, (attendus?.lignes ?? []).map((l) => l.phrase)));
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
   if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
-  if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil));
+  if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil, page.format ?? 1));
   if (attendus?.fiches !== undefined) constats.push(...controlerFichesPanneDossier(html, fichier, attendus.fiches));
   return constats;
 }
@@ -1181,9 +1182,17 @@ export function controlerHtml(
  *  - OUTIL-SANS-JS : contenu présent dans le HTML sans JavaScript : ni script, ni noscript, ni style, ni template dans
  *    l'outil ; rien de masqué (hidden, display:none, visibility:hidden, aria-hidden sur du texte, inert), ni l'outil, ni un
  *    bloc qui le contient, ni un bloc qu'il contient. Seules les références sont dans un bloc dépliable, ouvert sans script.
+ * Format 2 (demande de changement n° 30, F1.3a, src/lib/outil-format2.ts) : mêmes règles, sur le rendu du format 2 :
+ * l'écart d'une ligne est sa ligne d'écart courte quand la base en a une (sinon l'écart entier) ; l'index a une entrée
+ * par paire (pictogramme, couleur) de la base, une fois, dans l'ordre de sa première ligne dans la liste : la tuile de la
+ * paire, son libellé (LIBELLES_PICTOGRAMMES) et sa couleur écrite, sans autre texte, un seul lien vers cette première
+ * ligne ; le texte de l'outil est celui que génère le modèle du format 2.
  * Texte comparé normalisé (normaliserTexte) : la typographie ne compte pas, les mots et les chiffres comptent.
  */
-export function controlerOutilVoyants(html: string, fichier: string, attendu: ModeleOutil): Constat[] {
+export function controlerOutilVoyants(html: string, fichier: string, attenduBase: ModeleOutil, format: 1 | 2 = 1): Constat[] {
+  const format2 = format === 2;
+  // Format 2 (revue de F1.3a) : les cartes sont rangées par paire (pictogramme, couleur), la plus grave d'abord.
+  const attendu = format2 ? modeleOutilFormat2(attenduBase) : attenduBase;
   const constats: Constat[] = [];
   const $ = cheerio.load(html);
   const n = normaliserTexte;
@@ -1259,13 +1268,27 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     // Texte hors du bloc dépliable : ce que le lecteur voit sans ouvrir quoi que ce soit.
     const visibles = ligne.children().toArray().map((el) => $(el)).filter((el) => !el.is('details'));
     const texteVisible = n(visibles.map((el) => el.text()).join(' '));
-    const absents = [l.nom, l.situation, GRILLE_VERDICTS[l.verdict].libelle, GRILLE_URGENCES[l.urgence].libelle, l.action, ...(l.ecart !== undefined ? [l.ecart] : [])].filter((t) => !texteVisible.includes(n(t)));
+    const ecart = format2 ? ecartDeLaCarte(l) : l.ecart;
+    const absents = [l.nom, l.situation, GRILLE_VERDICTS[l.verdict].libelle, GRILLE_URGENCES[l.urgence].libelle, l.action, ...(ecart !== undefined ? [ecart] : [])].filter((t) => !texteVisible.includes(n(t)));
     if (absents.length > 0) problemes.push(`n'affiche pas ${absents.map((t) => `« ${t} »`).join(', ')}`);
     const autres = libellesNiveaux.filter((e) => e.cle !== (e.genre === 'verdict' ? l.verdict : l.urgence) && texteVisible.includes(n(e.libelle))).map((e) => e.libelle);
     if (autres.length > 0) problemes.push(`affiche aussi le libellé d'un autre niveau (${autres.map((t) => `« ${t} »`).join(', ')})`);
-    if (l.ecart === undefined && texteVisible.includes(n('Selon les marques'))) problemes.push("un écart est affiché alors que la base n'en signale pas");
-    const picto = ligne.find('.voyant').first();
-    if (ligne.find('.icone-gravite').first().attr('data-icone-gravite') !== String(graviteDuVerdict(l.verdict))) problemes.push(`icône de gravité (attendue : ${graviteDuVerdict(l.verdict)})`);
+    // Écart affiché alors que la base n'en signale pas : au format 1, « Selon les marques : » ; au format 2, la ligne d'écart.
+    if (l.ecart === undefined && (format2 ? ligne.find('.ecart, [data-ecart-court]').length > 0 : texteVisible.includes(n('Selon les marques')))) problemes.push("un écart est affiché alors que la base n'en signale pas");
+    // Format 2 (règle 2b, revue de F1.3a) : la ligne d'écart courte, obligatoire quand les marques divergent, au texte exact,
+    // 25 mots au plus lien « Votre marque » compris ; jamais l'écart entier.
+    if (format2 && l.ecart !== undefined) {
+      const courte = ligne.find('[data-ecart-court]');
+      const vue = courte.clone();
+      vue.find('.vh').remove();
+      const lue = vue.text().replace(/\s+/g, ' ').trim();
+      if (l.ecartCourt === undefined) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : les marques divergent, la ligne d'écart courte (ecart_court) est attendue (plus de repli sur l'écart entier)`, fichier));
+      else if (courte.length !== 1 || n(lue) !== n(l.ecartCourt)) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : la ligne d'écart affiche « ${l.ecartCourt} »${lue !== '' && n(lue) === n(l.ecart) ? " (et non l'écart entier)" : ''}`, fichier));
+      else if (motsDe(lue) + motsDe(FORMAT2.lienVotreMarque) > ECART_COURT_MAX_MOTS) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : ligne d'écart de plus de ${ECART_COURT_MAX_MOTS} mots, lien « ${FORMAT2.lienVotreMarque} » compris (règle 2b)`, fichier));
+    }
+    // Format 1 : pictogramme dans un rond (.voyant), icône .icone-gravite ; format 2 : tuile du voyant allumé, forme de la gravité.
+    const picto = ligne.find(format2 ? '.tuile[data-pictogramme]' : '.voyant').first();
+    if (ligne.find(format2 ? 'svg.forme[data-icone-gravite]' : '.icone-gravite').first().attr('data-icone-gravite') !== String(graviteDuVerdict(l.verdict))) problemes.push(`icône de gravité (attendue : ${graviteDuVerdict(l.verdict)})`);
     if (picto.find('svg').length === 0) problemes.push('pictogramme absent');
     else if (picto.attr('data-pictogramme') !== l.pictogramme || picto.attr('data-couleur') !== l.couleur) problemes.push(`pictogramme (attendu : « ${l.pictogramme} », couleur ${l.couleur})`);
     // Bloc dépliable : le nombre de notices, les notices nommées, chaque page citée.
@@ -1319,11 +1342,38 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     if (n(index.find('h3').first().text()) !== n(TITRE_INDEX_OUTIL)) constats.push(erreur('OUTIL-INDEX', `le titre de l'index est « ${TITRE_INDEX_OUTIL} »`, fichier));
     const entrees = index.find('[data-outil-index-entree]').toArray().map((el) => $(el));
     const lues = entrees.map((e) => e.attr('data-outil-index-entree') ?? '');
-    if (lues.join('|') !== voulus.join('|')) {
+    if (format2) {
+      // Format 2 : une tuile par paire (pictogramme, couleur), dans l'ordre de sa première ligne dans la liste.
+      const paires = entreesIndexFormat2(attendu);
+      const cles = paires.map((p) => p.cle);
+      if (lues.join('|') !== cles.join('|')) {
+        constats.push(erreur('OUTIL-INDEX', `l'index a une entrée par paire (pictogramme, couleur) de la base, une fois, dans l'ordre de la liste ; manquantes : ${cles.filter((c) => !lues.includes(c)).join(', ') || 'aucune'} ; inconnues : ${lues.filter((c) => !cles.includes(c)).join(', ') || 'aucune'}${lues.length === cles.length && cles.every((c) => lues.includes(c)) && new Set(lues).size === lues.length ? ' ; ordre différent' : ''}`, fichier));
+      }
+      // Une grille par couleur, sous le titre du groupe de cette couleur (critère WCAG 1.4.1).
+      for (const g of attendu.groupes) {
+        const bloc = index.find(`[data-outil-index-couleur="${g.couleur}"]`);
+        if (bloc.length !== 1 || n(bloc.children('h4').first().text()) !== n(g.titre)) constats.push(erreur('OUTIL-INDEX', `l'index a une grille par couleur, sous le titre « ${g.titre} »`, fichier));
+      }
+      const parCle = new Map(paires.map((p) => [p.cle, p]));
+      for (const entree of entrees) {
+        const cle = entree.attr('data-outil-index-entree') ?? '';
+        const p = parCle.get(cle);
+        if (p === undefined) continue;
+        const problemes: string[] = [];
+        if (entree.attr('data-couleur') !== p.couleur) problemes.push(`data-couleur (attendu : ${p.couleur}, le filtre le lit)`);
+        const liens = entree.find('a');
+        if (liens.length !== 1 || liens.first().attr('href') !== `#${ancreLigneOutil(p.premiere)}`) problemes.push(`un seul lien, vers la première ligne de la paire (#${ancreLigneOutil(p.premiere)})`);
+        if (n(entree.text()) !== n(texteEntreeIndex(p))) problemes.push(`le libellé du dessin et son nombre de cas s'il y en a plusieurs, sans autre texte (« ${texteEntreeIndex(p)} »)`);
+        if (entree.closest('[data-outil-index-couleur]').attr('data-outil-index-couleur') !== p.couleur) problemes.push(`dans la grille de sa couleur (${p.couleur})`);
+        const tuile = entree.find('.tuile[data-pictogramme]').first();
+        if (tuile.find('svg').length === 0 || tuile.attr('data-pictogramme') !== p.pictogramme || tuile.attr('data-couleur') !== p.couleur) problemes.push(`tuile (attendue : « ${p.pictogramme} », couleur ${p.couleur})`);
+        if (problemes.length > 0) constats.push(erreur('OUTIL-INDEX', `index, entrée « ${cle} » : ${problemes.join(' ; ')}`, fichier));
+      }
+    } else if (lues.join('|') !== voulus.join('|')) {
       constats.push(erreur('OUTIL-INDEX', `l'index a une entrée par ligne de la base, une fois, dans l'ordre de la liste ; manquantes : ${voulus.filter((id) => !lues.includes(id)).join(', ') || 'aucune'} ; inconnues : ${lues.filter((id) => !voulus.includes(id)).join(', ') || 'aucune'}`, fichier));
     }
     const parVoyant = new Map(attendues.map((l) => [l.voyant, l]));
-    for (const entree of entrees) {
+    for (const entree of format2 ? [] : entrees) {
       const id = entree.attr('data-outil-index-entree') ?? '';
       const l = parVoyant.get(id);
       if (l === undefined) continue;
@@ -1380,7 +1430,7 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
   if (constats.length === 0) {
     // Sans les blancs : un dessin peut laisser un saut de ligne entre deux textes, qui ne compte pas.
     const sansBlancs = (texte: string): string => n(texte).replace(/\s+/g, '');
-    const genere = sansBlancs(cheerio.load(outilVoyants(attendu, new Map()))('[data-outil-voyants]').first().text());
+    const genere = sansBlancs(cheerio.load((format2 ? outilVoyantsFormat2 : outilVoyants)(attendu, new Map()))('[data-outil-voyants]').first().text());
     if (sansBlancs(outil.text()) !== genere) constats.push(erreur('OUTIL-LIBELLES', "le texte de l'outil n'est pas celui que génère le modèle depuis la base : une phrase a été ajoutée, retirée ou changée", fichier));
   }
   return constats;

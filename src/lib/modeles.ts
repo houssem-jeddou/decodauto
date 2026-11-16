@@ -61,6 +61,7 @@ import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from '
 import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
 import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-voyants.ts';
 import { causesFormat2, pageFormat2, pageVoyantFormat2, pastilleVerdict } from './format2.ts';
+import { pageOutilFormat2 } from './outil-format2.ts';
 import { REPONSES_MIN_ARBRE, fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, modeleFichePanne, modeleFicheTutoriel } from './fiche-panne.ts';
 
 export { REPONSES_MIN_ARBRE };
@@ -451,6 +452,9 @@ export const pageOutilVoyants: Modele = (page, site, corpsHtml) => {
   ].join('');
 };
 
+/** Page outil voyants au format 2 (demande de changement n° 30, F1.3a) : voir src/lib/outil-format2.ts. */
+export const pageOutilVoyantsF2: Modele = (page, site, corpsHtml) => pageOutilFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { format2: true }));
+
 /** Page panne : voir l'ordre en tête de ce fichier. L'arbre de décision est dans le texte rédigé (« {{arbre}} »). */
 export const pagePanne: Modele = (page, site, corpsHtml) => {
   if (!('contexte' in page)) throw new Error(`page « ${page.id} » : le modèle panne s'applique à une page panne`);
@@ -537,13 +541,13 @@ export function refusFormatVagueB(type: TypePage, page: Pick<PageEditoriale, 'id
 
 /** Modèle d'une page, ou la raison pour laquelle il n'existe pas encore (la construction échoue alors). */
 export function modeleDeLaPage(type: TypePage, page: PageEditoriale): { modele: Modele } | { absent: string } {
-  // Format 2 (demande de changement n° 30, lot F1) : page voyant hors outil seulement (F1.2) ; les autres modèles passent au
+  // Format 2 (demande de changement n° 30, lot F1) : pages voyants (F1.2) et page outil (F1.3a) ; les autres modèles passent au
   // format 2 après leur conception visuelle (F1.3) : d'ici là, une telle page fait échouer la construction.
   if (page.format === 2) {
-    if (type === 'voyant' && !('outil' in page && page.outil === true)) return { modele: pageVoyantF2 };
+    if (type === 'voyant') return { modele: 'outil' in page && page.outil === true ? pageOutilVoyantsF2 : pageVoyantF2 };
     if (type === 'panne') return { modele: pagePanneF2 };
     if (type === 'dossier') return { modele: pageDossierF2 };
-    return { absent: `le format 2 des pages « ${type}${'outil' in page && page.outil === true ? ' (outil voyants)' : ''} » n'est pas encore livré (lot F1, F1.3 : à dessiner d'abord)` };
+    return { absent: `le format 2 des pages « ${type} » n'est pas encore livré (lot F1, F1.3 : à dessiner d'abord)` };
   }
   if (type === 'voyant' && 'outil' in page && page.outil === true) return { modele: pageOutilVoyants };
   const modele = MODELES[type];

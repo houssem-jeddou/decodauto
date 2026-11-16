@@ -20,6 +20,10 @@ Fichiers : `<demo|pilote>-<accueil|moteur|adblue>-<375-ecran|375-page|1366-ecran
   `auto` ; fondu collé en bas tant que la suite est cachée.
 - `mesures.json` : mesures brutes, en pixels CSS depuis le haut de la page.
 
+**Refaites le 16/11/2026** (revue de F1.3a) : PNG tels que les écrit le navigateur, recompressés sans perte (couleurs exactes ; les
+précédentes étaient réduites à 128 couleurs, ce qui faisait paraître la diode orange rouge et les voyants rouges roses) ; la
+démonstration montre les lignes d'écart courtes et « ce que demande la notice » du brouillon F2, version 2.
+
 ## Pages voyants (375 × 667, sauf la dernière colonne)
 
 Règle 2a : bas de la situation, du verdict, de l'urgence et de l'action de la première ligne (définition de la porte du
@@ -29,12 +33,12 @@ illustration juste après le bloc « Notices / Base du coût » (précision du 1
 
 | Page | Source | Police | Bas de la mention | Bas de la 1re situation (2a) | Bas de l'encadré | Bas de « Notices / Base du coût » | Haut de l'illustration (2i) | Illustration juste après le bloc | Hauteur de la page | Hauteur à 1366 px |
 |---|---|---|---|---|---|---|---|---|---|---|
-| moteur | démonstration | chargée | 99 | 522 | 1515 | 1939 | 1952 | oui | 12470 | 8141 |
-| moteur | démonstration | secours | 99 | 522 | 1515 | 1939 | 1952 | oui | 12521 | 8141 |
+| moteur | démonstration | chargée | 99 | 522 | 1555 | 1979 | 1992 | oui | 12531 | 8122 |
+| moteur | démonstration | secours | 99 | 522 | 1555 | 1979 | 1992 | oui | 12582 | 8122 |
 | moteur | pilote | chargée | 99 | 522 | 1515 | 1817 | 1829 | oui | 10992 | 7607 |
 | moteur | pilote | secours | 99 | 522 | 1515 | 1817 | 1829 | oui | 11042 | 7607 |
-| adblue | démonstration | chargée | 99 | 601 | 2222 | 2740 | 2753 | oui | 13833 | 8419 |
-| adblue | démonstration | secours | 99 | 601 | 2222 | 2740 | 2753 | oui | 13833 | 8444 |
+| adblue | démonstration | chargée | 99 | 601 | 2242 | 2760 | 2773 | oui | 13896 | 8408 |
+| adblue | démonstration | secours | 99 | 601 | 2242 | 2760 | 2773 | oui | 13896 | 8434 |
 | adblue | pilote | chargée | 99 | 601 | 2222 | 2561 | 2574 | oui | 6799 | 4723 |
 | adblue | pilote | secours | 99 | 601 | 2222 | 2561 | 2574 | oui | 6799 | 4749 |
 
