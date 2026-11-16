@@ -11,6 +11,7 @@ import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
+import { readFileSync } from 'node:fs';
 import { dateDesDonnees } from './date-des-donnees.ts';
 import { bandeauFormat2, lignesSaisiesAvecEcart, phraseNotices, phraseNoticesHtml, piedFormat2, renvoiNotices } from '../src/lib/format2.ts';
 import { ancreNoticesLigne, IDENTIFIANTS } from '../src/lib/composants.ts';
@@ -132,5 +133,13 @@ describe("ligne d'écart d'une ligne saisie (règle 2b, décision du 16/11/2026)
     assert.deepEqual(ecart(html), []);
     $('[data-encadre-decision] [data-encadre-ligne]').eq(rang - 1).append('<p class="ecart" data-ecart-court>Plus strict : X.</p>');
     assert.ok(ecart($.html()).some((m) => m.includes('ne divergent pas')));
+  });
+});
+
+describe('ligne saisie : style de la phrase ciblée (charte B)', () => {
+  test('marge de défilement et couleur pleine quand la phrase est la cible du lien', () => {
+    const css = readFileSync(join(racine, 'src/styles/charte-b.css'), 'utf8');
+    assert.match(css, /\.provenance-ligne\{scroll-margin-top:4rem\}/);
+    assert.match(css, /\.provenance-ligne:target\{color:var\(--texte\)\}/);
   });
 });

@@ -85,6 +85,10 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .provenance{font-size:.8125rem;color:var(--texte-doux);margin:.4rem 0 0;line-height:1.45}
 .provenance p{margin:.25rem 0}
 .provenance-libelle{font-weight:700;color:var(--texte);margin-right:.25rem}
+/* Phrase des notices d'une ligne saisie, cible du lien « Votre marque » de sa ligne d'écart (décision du 16/11/2026) : un peu
+   de marge au-dessus quand on y arrive, et le texte en couleur pleine tant qu'elle est la cible. */
+.provenance-ligne{scroll-margin-top:4rem}
+.provenance-ligne:target{color:var(--texte)}
 .illustration{margin:.8rem 0 0;padding:.6rem;overflow:hidden}
 .illustration svg{display:block;width:100%;height:auto}
 .illustration figcaption{font-size:.875rem;margin:.45rem .2rem 0;line-height:1.4}
