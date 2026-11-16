@@ -21,7 +21,7 @@
 // src/lib/outil-format2.ts (F1.3a) ; pages panne et dossier : modeles.ts (F1.3c).
 // Module sans dépendance à l'exécution : tests, démonstration et construction l'utilisent tel quel.
 // ---------------------------------------------------------------------------------------------
-import { attributHtml, decoderEntites, texteHtml } from './html.ts';
+import { INSECABLE, attributHtml, decoderEntites, texteHtml } from './html.ts';
 import {
   IDENTIFIANTS,
   LIBELLE_COUT_PROBABLE,
@@ -253,14 +253,20 @@ export function ligneEncadreFormat2(ligne: LigneFormat2): string {
   ].join('');
 }
 
-/** Plage du coût probable, tranches en pastilles (« de [X] à [Y] ») ; « Selon le voyant » pour l'outil. */
+/**
+ * Plage du coût probable, tranches en pastilles (« de [X] à [Y] ») ; « Selon le voyant » pour l'outil. La préposition est
+ * groupée avec sa pastille : jamais seule en fin de ligne (lot F2, recette de la porte 10).
+ */
 function plageHtml(cout: CoutResolu): string | undefined {
   const pastille = (libelle: string): string => `<span class="tranche">${texteHtml(libelle)}</span>`;
   if (cout.selonLeVoyant) return pastille(LIBELLE_SELON_LE_VOYANT);
   if (cout.de === undefined || cout.a === undefined) return undefined;
   const de = GRILLE_COUTS[cout.de].libelle;
   const a = GRILLE_COUTS[cout.a].libelle;
-  return cout.de === cout.a ? pastille(de) : `de ${pastille(de)} à ${pastille(a)}`;
+  // Chrome coupe la ligne avant une pastille (inline-block) même après une espace insécable : la préposition et sa pastille
+  // sont groupées dans un élément qui ne passe pas à la ligne (.borne, charte-b.css).
+  const borne = (preposition: string, libelle: string): string => `<span class="borne">${preposition}${INSECABLE}${pastille(libelle)}</span>`;
+  return cout.de === cout.a ? pastille(de) : `${borne('de', de)} ${borne('à', a)}`;
 }
 
 /** Coût probable dans l'encadré : plage, risque si l'on continue, montants et leurs dates, prises en charge. */

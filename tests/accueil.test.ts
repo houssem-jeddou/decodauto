@@ -98,3 +98,16 @@ describe('texte de l’accueil', () => {
     assert.equal(accueil?.parent, undefined);
   });
 });
+
+describe('fiche de l\'accueil (src/content/socle/accueil.md, lot F2)', () => {
+  test('elle porte le format 2 ; son title et sa description, exigés par le schéma du socle, restent ceux qu\'affiche l\'accueil (TITLE_ACCUEIL, DESCRIPTION_ACCUEIL)', async () => {
+    const texte = await readFile(join(racine, 'src/content/socle/accueil.md'), 'utf8');
+    const champ = (nom: string): string | undefined => new RegExp(`^${nom}: "?(.*?)"?$`, 'm').exec(texte)?.[1];
+    assert.equal(champ('id'), 'accueil');
+    assert.equal(champ('format'), '2');
+    assert.equal(champ('title'), TITLE_ACCUEIL);
+    assert.equal(champ('description'), DESCRIPTION_ACCUEIL);
+    // Aucun texte de l'accueil dans la fiche : il vient de src/lib/accueil.ts (PARAGRAPHES_ACCUEIL).
+    assert.equal(texte.split('\n---').slice(1).join('').trim(), '');
+  });
+});
