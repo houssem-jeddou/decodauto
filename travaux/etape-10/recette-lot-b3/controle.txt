@@ -1,6 +1,6 @@
-Brouillon, jamais validé. Recette du lot B3, 16/11/2026.
+Brouillon, jamais validé. Recette du lot B3, 16/11/2026 (refaite avec la PR n° 73 à 4a499c2 : écart entre marques sous la phrase « Notices » des lignes saisies).
 
-1. Branche etape-10/lot-b3 à 47f7970, telle quelle : AVEC_EXEMPLES=1 npx astro build → échec. Astro s'arrête à la première erreur :
+1. Branche etape-10/lot-b3 à 4b9aea1, telle quelle : AVEC_EXEMPLES=1 npx astro build → échec. Astro s'arrête à la première erreur :
 
 page « batterie-voiture » au format 2 : ligne d'écart courte (ecart_court) absente alors que les marques divergent : ligne 5 (batterie-rouge)
 
