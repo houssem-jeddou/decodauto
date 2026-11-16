@@ -1,6 +1,6 @@
-Brouillon, jamais validé. Recette du lot B4, 16/11/2026.
+Brouillon, jamais validé. Recette du lot B4, 16/11/2026 (refaite avec la PR n° 73 à 4a499c2 : écart entre marques sous la phrase « Notices » des lignes saisies).
 
-1. Branche etape-10/lot-b4 à 3c3b8e9, telle quelle : AVEC_EXEMPLES=1 npx astro build → échec. Astro s'arrête à la première erreur :
+1. Branche etape-10/lot-b4 à b5e7404, telle quelle : AVEC_EXEMPLES=1 npx astro build → échec. Astro s'arrête à la première erreur :
 
 [InvalidContentEntryDataError] panne → perte-de-puissance data does not match collection schema.
 

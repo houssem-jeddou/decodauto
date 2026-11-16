@@ -1,4 +1,4 @@
-Brouillon, jamais validé. node scripts/mesurer-format2.ts --dist dist-exemples (copie de travail séparée, voir controle.txt, point 3), Chromium, police du système Inter, 16/11/2026. Toutes les pages au format 2 de la construction sont mesurées (lot F2 et lots B2 à b4 compris).
+Brouillon, jamais validé. node scripts/mesurer-format2.ts --dist dist-exemples (copie de travail séparée, voir controle.txt, point 3), Chromium, police du système Inter, 16/11/2026. Toutes les pages au format 2 de la construction sont mesurées.
 
 FORMAT2-MESURES : 21 page(s) au format 2 dans dist-exemples
 Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situation | Bas de l’encadré | Illustration | Après « Notices » | Arbre ou étapes | Hauteur | Sommaire | Largeur de page | Débordements
@@ -8,27 +8,27 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /404.html | 320 | chargée | – | – | – | – | – | non | – | 640 | non | 320 | 0
 /404.html | 375 | chargée | – | – | – | – | – | non | – | 667 | non | 375 | 0
 /404.html | 1366 | chargée | – | – | – | – | – | non | – | 800 | non | 1366 | 0
-/batterie-voiture/ | 320 | chargée | – | 413 | 603 | 2217 | 2758 | oui | 3860 | 12347 | oui | 320 | 0
-/batterie-voiture/ | 375 | chargée | – | 371 | 520 | 1903 | 2386 | oui | 3470 | 10865 | oui | 375 | 0
-/batterie-voiture/ | 1366 | chargée | – | 268 | 335 | 1107 | 1361 | oui | 2261 | 7175 | oui | 1366 | 0
+/batterie-voiture/ | 320 | chargée | – | 413 | 603 | 2217 | 2877 | oui | 3978 | 12465 | oui | 320 | 0
+/batterie-voiture/ | 375 | chargée | – | 371 | 520 | 1903 | 2505 | oui | 3589 | 10984 | oui | 375 | 0
+/batterie-voiture/ | 1366 | chargée | – | 268 | 335 | 1107 | 1423 | oui | 2323 | 7238 | oui | 1366 | 0
 /batterie-voiture/changer/ | 320 | chargée | – | 418 | 546 | 1550 | 1959 | oui | 3940 | 9210 | oui | 320 | 0
 /batterie-voiture/changer/ | 375 | chargée | – | 377 | 464 | 1269 | 1640 | oui | 3457 | 8126 | oui | 375 | 0
 /batterie-voiture/changer/ | 1366 | chargée | – | 250 | 295 | 791 | 988 | oui | 2431 | 5403 | oui | 1366 | 0
-/batterie-voiture/recharger/ | 320 | chargée | – | 459 | 608 | 1510 | 1938 | oui | 3883 | 9310 | oui | 320 | 0
-/batterie-voiture/recharger/ | 375 | chargée | – | 377 | 505 | 1270 | 1622 | oui | 3409 | 8139 | oui | 375 | 0
-/batterie-voiture/recharger/ | 1366 | chargée | – | 287 | 353 | 796 | 993 | oui | 2411 | 5449 | oui | 1366 | 0
+/batterie-voiture/recharger/ | 320 | chargée | – | 459 | 608 | 1510 | 2054 | oui | 3999 | 9427 | oui | 320 | 0
+/batterie-voiture/recharger/ | 375 | chargée | – | 377 | 505 | 1270 | 1719 | oui | 3507 | 8236 | oui | 375 | 0
+/batterie-voiture/recharger/ | 1366 | chargée | – | 287 | 353 | 796 | 1053 | oui | 2471 | 5509 | oui | 1366 | 0
 /bruit-moteur/ | 320 | chargée | – | 453 | 602 | 1959 | 2406 | oui | 3455 | 8077 | oui | 320 | 0
 /bruit-moteur/ | 375 | chargée | – | 371 | 479 | 1715 | 2105 | oui | 3112 | 7102 | oui | 375 | 0
 /bruit-moteur/ | 1366 | chargée | – | 272 | 338 | 1094 | 1310 | oui | 2210 | 5125 | oui | 1366 | 0
 /fumee-echappement/ | 320 | chargée | – | 459 | 567 | 1545 | 1973 | oui | 3071 | 8324 | oui | 320 | 0
 /fumee-echappement/ | 375 | chargée | – | 377 | 464 | 1326 | 1696 | oui | 2752 | 7209 | oui | 375 | 0
 /fumee-echappement/ | 1366 | chargée | – | 287 | 332 | 847 | 1063 | oui | 1963 | 5073 | oui | 1366 | 0
-/moteur-qui-surchauffe/ | 320 | chargée | – | 488 | 761 | 2278 | 2838 | oui | 3918 | 11449 | oui | 320 | 0
-/moteur-qui-surchauffe/ | 375 | chargée | – | 409 | 641 | 1987 | 2471 | oui | 3508 | 10127 | oui | 375 | 0
-/moteur-qui-surchauffe/ | 1366 | chargée | – | 272 | 380 | 1181 | 1453 | oui | 2333 | 6847 | oui | 1366 | 0
-/nettoyer-fap/ | 320 | chargée | – | 434 | 645 | 1184 | 1612 | oui | 3331 | 7749 | oui | 320 | 0
-/nettoyer-fap/ | 375 | chargée | – | 390 | 580 | 1038 | 1408 | oui | 3014 | 6832 | oui | 375 | 0
-/nettoyer-fap/ | 1366 | chargée | – | 272 | 359 | 646 | 843 | oui | 2216 | 4800 | oui | 1366 | 0
+/moteur-qui-surchauffe/ | 320 | chargée | – | 488 | 761 | 2278 | 2957 | oui | 4036 | 11568 | oui | 320 | 0
+/moteur-qui-surchauffe/ | 375 | chargée | – | 409 | 641 | 1987 | 2589 | oui | 3627 | 10246 | oui | 375 | 0
+/moteur-qui-surchauffe/ | 1366 | chargée | – | 272 | 380 | 1181 | 1496 | oui | 2376 | 6890 | oui | 1366 | 0
+/nettoyer-fap/ | 320 | chargée | – | 434 | 645 | 1184 | 1691 | oui | 3410 | 7828 | oui | 320 | 0
+/nettoyer-fap/ | 375 | chargée | – | 390 | 580 | 1038 | 1468 | oui | 3074 | 6891 | oui | 375 | 0
+/nettoyer-fap/ | 1366 | chargée | – | 272 | 359 | 646 | 884 | oui | 2257 | 4841 | oui | 1366 | 0
 /voyants/ | 320 | chargée | – | 543 | 733 | 1709 | 2156 | oui | – | 25970 | oui | 320 | 0
 /voyants/ | 375 | chargée | – | 486 | 635 | 1452 | 1823 | oui | – | 22178 | oui | 375 | 0
 /voyants/ | 1366 | chargée | – | 379 | 445 | 913 | 1128 | oui | – | 13136 | oui | 1366 | 0
@@ -71,27 +71,27 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /404.html | 320 | secours | – | – | – | – | – | non | – | 640 | non | 320 | 0
 /404.html | 375 | secours | – | – | – | – | – | non | – | 667 | non | 375 | 0
 /404.html | 1366 | secours | – | – | – | – | – | non | – | 800 | non | 1366 | 0
-/batterie-voiture/ | 320 | secours | – | 413 | 603 | 2217 | 2758 | oui | 3860 | 12397 | oui | 320 | 0
-/batterie-voiture/ | 375 | secours | – | 396 | 545 | 1927 | 2411 | oui | 3495 | 10915 | oui | 375 | 0
-/batterie-voiture/ | 1366 | secours | – | 268 | 335 | 1107 | 1361 | oui | 2261 | 7175 | oui | 1366 | 0
+/batterie-voiture/ | 320 | secours | – | 413 | 603 | 2217 | 2877 | oui | 3978 | 12516 | oui | 320 | 0
+/batterie-voiture/ | 375 | secours | – | 396 | 545 | 1927 | 2530 | oui | 3614 | 11034 | oui | 375 | 0
+/batterie-voiture/ | 1366 | secours | – | 268 | 335 | 1107 | 1423 | oui | 2323 | 7238 | oui | 1366 | 0
 /batterie-voiture/changer/ | 320 | secours | – | 418 | 546 | 1550 | 1959 | oui | 3940 | 9210 | oui | 320 | 0
 /batterie-voiture/changer/ | 375 | secours | – | 377 | 464 | 1269 | 1640 | oui | 3457 | 8126 | oui | 375 | 0
 /batterie-voiture/changer/ | 1366 | secours | – | 250 | 295 | 791 | 988 | oui | 2431 | 5403 | oui | 1366 | 0
-/batterie-voiture/recharger/ | 320 | secours | – | 459 | 608 | 1510 | 1938 | oui | 3883 | 9336 | oui | 320 | 0
-/batterie-voiture/recharger/ | 375 | secours | – | 377 | 505 | 1270 | 1622 | oui | 3409 | 8164 | oui | 375 | 0
-/batterie-voiture/recharger/ | 1366 | secours | – | 287 | 353 | 796 | 993 | oui | 2411 | 5449 | oui | 1366 | 0
+/batterie-voiture/recharger/ | 320 | secours | – | 459 | 608 | 1510 | 2054 | oui | 3999 | 9452 | oui | 320 | 0
+/batterie-voiture/recharger/ | 375 | secours | – | 377 | 505 | 1270 | 1719 | oui | 3507 | 8262 | oui | 375 | 0
+/batterie-voiture/recharger/ | 1366 | secours | – | 287 | 353 | 796 | 1053 | oui | 2471 | 5509 | oui | 1366 | 0
 /bruit-moteur/ | 320 | secours | – | 453 | 602 | 1959 | 2406 | oui | 3481 | 8102 | oui | 320 | 0
 /bruit-moteur/ | 375 | secours | – | 371 | 479 | 1715 | 2105 | oui | 3112 | 7102 | oui | 375 | 0
 /bruit-moteur/ | 1366 | secours | – | 272 | 338 | 1094 | 1310 | oui | 2210 | 5125 | oui | 1366 | 0
 /fumee-echappement/ | 320 | secours | – | 459 | 567 | 1545 | 1973 | oui | 3071 | 8324 | oui | 320 | 0
 /fumee-echappement/ | 375 | secours | – | 377 | 464 | 1326 | 1696 | oui | 2752 | 7235 | oui | 375 | 0
 /fumee-echappement/ | 1366 | secours | – | 287 | 332 | 847 | 1063 | oui | 1963 | 5073 | oui | 1366 | 0
-/moteur-qui-surchauffe/ | 320 | secours | – | 488 | 761 | 2278 | 2838 | oui | 3918 | 11449 | oui | 320 | 0
-/moteur-qui-surchauffe/ | 375 | secours | – | 409 | 641 | 1987 | 2471 | oui | 3508 | 10152 | oui | 375 | 0
-/moteur-qui-surchauffe/ | 1366 | secours | – | 272 | 380 | 1181 | 1453 | oui | 2333 | 6847 | oui | 1366 | 0
-/nettoyer-fap/ | 320 | secours | – | 434 | 645 | 1184 | 1612 | oui | 3357 | 7851 | oui | 320 | 0
-/nettoyer-fap/ | 375 | secours | – | 390 | 580 | 1038 | 1408 | oui | 3014 | 6832 | oui | 375 | 0
-/nettoyer-fap/ | 1366 | secours | – | 272 | 359 | 646 | 843 | oui | 2216 | 4800 | oui | 1366 | 0
+/moteur-qui-surchauffe/ | 320 | secours | – | 488 | 761 | 2278 | 2957 | oui | 4036 | 11568 | oui | 320 | 0
+/moteur-qui-surchauffe/ | 375 | secours | – | 409 | 641 | 1987 | 2589 | oui | 3627 | 10271 | oui | 375 | 0
+/moteur-qui-surchauffe/ | 1366 | secours | – | 272 | 380 | 1181 | 1496 | oui | 2376 | 6890 | oui | 1366 | 0
+/nettoyer-fap/ | 320 | secours | – | 434 | 645 | 1184 | 1691 | oui | 3435 | 7929 | oui | 320 | 0
+/nettoyer-fap/ | 375 | secours | – | 390 | 580 | 1038 | 1468 | oui | 3074 | 6891 | oui | 375 | 0
+/nettoyer-fap/ | 1366 | secours | – | 272 | 359 | 646 | 884 | oui | 2257 | 4841 | oui | 1366 | 0
 /voyants/ | 320 | secours | – | 543 | 733 | 1709 | 2156 | oui | – | 26021 | oui | 320 | 0
 /voyants/ | 375 | secours | – | 486 | 635 | 1452 | 1823 | oui | – | 22228 | oui | 375 | 0
 /voyants/ | 1366 | secours | – | 379 | 445 | 913 | 1128 | oui | – | 13161 | oui | 1366 | 0
@@ -128,14 +128,14 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /voyants/pression-pneus/ | 320 | secours | – | 534 | 765 | 1515 | 1943 | oui | – | 12268 | oui | 320 | 0
 /voyants/pression-pneus/ | 375 | secours | – | 455 | 645 | 1275 | 1646 | oui | – | 10832 | oui | 375 | 0
 /voyants/pression-pneus/ | 1366 | secours | – | 272 | 359 | 700 | 915 | oui | – | 6876 | oui | 1366 | 0
-SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police chargée) : illustration à 2386 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1903 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police chargée) : illustration à 2505 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1903 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /bruit-moteur/ (police chargée) : illustration à 2105 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1715 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /moteur-qui-surchauffe/ (police chargée) : illustration à 2471 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1987 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /moteur-qui-surchauffe/ (police chargée) : illustration à 2589 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1987 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voyants/abs-esp/ (police chargée) : illustration à 2320 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1893 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police chargée) : illustration à 2761 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2277 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police de secours) : illustration à 2411 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1927 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police de secours) : illustration à 2530 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1927 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /bruit-moteur/ (police de secours) : illustration à 2105 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1715 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /moteur-qui-surchauffe/ (police de secours) : illustration à 2471 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1987 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /moteur-qui-surchauffe/ (police de secours) : illustration à 2589 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1987 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voyants/abs-esp/ (police de secours) : illustration à 2320 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1893 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police de secours) : illustration à 2761 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2277 px (règle 2i, demande n° 32 : à dire dans le paquet)
 Mesures : 21 page(s), 126 mesure(s), 0 erreur(s), 10 signalement(s) à reprendre dans le paquet.
