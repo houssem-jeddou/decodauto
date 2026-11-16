@@ -56,3 +56,16 @@ Reste pour la pull request du lot F2 : `date_modification` des pages, revue ind�
 - Légendes de trois illustrations corrigées (pneus, batterie, préchauffage) ; page outil : illustration du combiné.
 - Outils : `appliquer-f2.py` (verse le brouillon dans la base), `verifier-pages-f2.py` (règles 2d, 2e, repères, H2),
   `generer-paquet-f2.py` (paquet), `planche-f2.py` (planche des illustrations).
+
+## Pull request du lot F2 (houssem-jeddou/decodauto#71, 16/11/2026, soir)
+- `main` intégré par une fusion (cd2433f, porte F1 validée) ; accueil et page 404 au format 2 en production (fiche
+  `src/content/socle/accueil.md`) ; lot inscrit dans `config/lots-format2.json` ; `date_modification` des 12 pages au 16/11.
+- Démonstration du format 2 : ne simule plus le lot F2 (lignes de la base, pages, accueil retirés du brouillon de F1).
+- Trois corrections de modèle, avec captures avant et après (`captures/corrections/`) : lien « Votre marque » sur une seule
+  ligne, préposition du coût probable jamais seule en fin de ligne, H1 à 1,4 rem sur téléphone (règle 2a, voyant de pression
+  des pneus en police de secours).
+- Preuves du paquet : `captures/` (13 pages) et `preuves/` (mesures, FORMAT2-MESURES, Lighthouse, production comparée à `main`).
+- Paquet version 3 : accueil et page 404 (A1 à A7), une phrase de la page ABS et ESP reprise (« La consigne retenue est » →
+  « La consigne est alors », FORMAT2-METHODE).
+- Reste : revue indépendante, validation de Houssem (paquet version 3, changements de l'outil et du H1 sur captures), puis
+  empreintes (`npm run empreinte`), CI verte, relevé Search Console avant la fusion.

@@ -1,8 +1,8 @@
 // Page outil « Quel voyant est allumé ? » au format 2 (demande de changement n° 30, lot F1, tâche F1.3a) : modèle
 // (src/lib/outil-format2.ts), contrôles OUTIL-* sur le rendu du format 2 (index par paire pictogramme et couleur, cartes,
-// filtre), contrôles du format 2, cas en échec de chaque branche nouvelle. Données : base voyants validée et brouillon du
-// format 2 (lignes d'écart courtes, illustration ; « Brouillon, jamais validé »), appliqué en mémoire comme la construction
-// de démonstration (npm run demo:format2). Le corps est un fragment HTML écrit pour le test.
+// filtre), contrôles du format 2, cas en échec de chaque branche nouvelle. Données : base voyants et page outil, avec leurs
+// données du format 2 depuis le lot F2 (lignes d'écart courtes, illustration), lues comme la construction de démonstration
+// (npm run demo:format2). Le corps est un fragment HTML écrit pour le test.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
