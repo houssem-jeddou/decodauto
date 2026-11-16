@@ -89,7 +89,9 @@ Chaque groupe de la liste compte ses verdicts : c'est la ligne de votre voyant q
 
 ## Est-ce dangereux de rouler avec le voyant moteur orange allumé ?
 
-La consigne est « {{verdict:moteur-orange-fixe}} ». La [page Voyant moteur](/voyants/moteur/) donne ses causes possibles et ce que dit chaque notice, y compris quand le voyant clignote.
+{{repere:moteur-orange-fixe}}
+
+La [page Voyant moteur](/voyants/moteur/) donne ses causes possibles et ce que dit chaque notice, y compris quand le voyant clignote.
 
 ## « Point d'exclamation », « zig zag », « clé », « huile » : quel voyant est-ce ?
 
