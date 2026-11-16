@@ -29,6 +29,15 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
   - *tableaux du texte* : bloc de la charte ; au-delà de trois colonnes, une carte par rangée sur téléphone (intitulé de la
     colonne devant chaque valeur), tableau ordinaire sur ordinateur ;
   - *étapes d'un tutoriel* : cartes numérotées, sans retrait de liste.
+  Revue de F1.3c (décisions du 16/11/2026) :
+  - *pastille du verdict cité dans l'arbre* : elle termine la réponse, seule sur sa ligne, après la consigne ; retraits
+    réduits sur téléphone pour que le libellé le plus long de la grille tienne sur une ligne à 360 et 375 px (état sur deux
+    lignes dessiné, forme en haut à gauche, sous 360 px) ; la pastille est réservée à l'arbre et aux repères : un
+    `{{verdict:…}}` dans la prose reste du texte (décision du 16/11, gardé tel quel) ;
+  - *séparateur des rangées* : un même filet de 1 px (couleur des filets, `#d5dbe3`) entre les rangées des fiches et de
+    l'historique, comme entre les questions de l'arbre ;
+  - *tableau en cartes* : une carte par rangée sur téléphone (fond blanc, bord, angles de 12 px, filet entre les cellules) ;
+  - *listes sans puces* (questions de l'arbre, étapes, historique) : `role="list"`, comme l'encadré.
   Points à trancher à la porte : l'arbre arrive loin sur téléphone (2 910 px) parce que les fiches et les causes le précèdent
   (ordre de la charte) ; sur téléphone, une pastille longue passe à la ligne sous « Oui : ».
 

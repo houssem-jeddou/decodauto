@@ -138,14 +138,16 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .arbre ul{margin:.35rem 0 0;padding-left:1.1rem;font-weight:400;list-style:disc}
 .arbre ul li{margin:.3rem 0}
 /* Pastille du verdict cité : elle termine la réponse, seule sur sa ligne, après la consigne (revue de F1.3c). */
-.verdict-cite{display:flex;width:fit-content;max-width:100%;align-items:center;gap:.3rem;font-size:.8125rem;font-weight:700;line-height:1.25;padding:.12rem .55rem;margin:.35rem 0 .05rem}
-.verdict-cite .forme{width:.95rem;height:.95rem;flex:none}
+.verdict-cite{display:flex;width:fit-content;max-width:100%;align-items:flex-start;gap:.3rem;font-size:.8125rem;font-weight:700;line-height:1.25;padding:.12rem .55rem;margin:.35rem 0 .05rem}
+.verdict-cite .forme{width:.95rem;height:.95rem;flex:none;margin-top:.05rem}
+/* Écran plus étroit que 360 px : le libellé passe à la ligne sous lui-même, la forme reste en haut à gauche. */
 /* Téléphone : retraits réduits, pour que le libellé le plus long de la grille tienne sur une ligne à 360 px. */
 @media (max-width:40rem){
   .arbre{padding:.3rem .7rem .45rem}
   .arbre>ol>li{padding-left:2rem}
   .arbre>ol>li::before{width:1.45rem;height:1.45rem}
-  .arbre ul{padding-left:.95rem}
+  .arbre ul{padding-left:.85rem}
+  .verdict-cite{padding:.12rem .45rem}
 }
 /* Historique du dossier (F1.3c) : carte du corps, date en gras en tête de chaque entrée. */
 .historique{list-style:none;margin:.5rem 0;padding:.2rem .9rem}

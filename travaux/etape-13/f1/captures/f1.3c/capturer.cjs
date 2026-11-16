@@ -1,79 +1,99 @@
-// Captures et mesures des pages panne et dossier au format 2 (lot F1, tâche F1.3c), sur les pages de démonstration de
-// tests/demo rendues par `npm run demo` (dist-demo/, jamais publié). Usage : servir dist-demo sur le port 8791, puis
-// `node travaux/etape-13/f1/captures/f1.3c/capturer.cjs <dossier de sortie>`. Navigateur : le Chromium et le Playwright
-// préinstallés de l'environnement de Claude (require('playwright')), hors dépendances du dépôt. Police chargée : feuille servie
-// en font-display: block (police en cache) ; police de secours : /polices/ bloqué (même méthode que ../capturer.cjs).
+// Captures et mesures des pages panne, dossier et tutoriel au format 2 (lot F1, tâche F1.3c et sa revue), sur la
+// construction de démonstration du format 2 (npm run demo:format2 : pages Markdown de tests/demo/format2 rendues par Astro).
+// Usage : construire, écrire la planche (node travaux/etape-13/f1/captures/f1.3c/planche.ts dist-demo-format2/planche-arbre.html),
+// servir dist-demo-format2 sur le port 8790, puis `node travaux/etape-13/f1/captures/f1.3c/capturer.cjs <dossier de sortie>`.
+// Navigateur : le Chromium et le Playwright préinstallés de l'environnement (require('playwright')).
+// Police chargée : feuille servie en font-display: block (police en cache) ; police de secours : /polices/ bloqué.
+// PNG tels que les écrit le navigateur (couleurs exactes, sans réduction de palette). Mesures en pixels CSS.
 const { chromium } = require('playwright');
 const { join } = require('node:path');
 const { writeFileSync } = require('node:fs');
 
 const sortie = process.argv[2] ?? '.';
-const PAGES = ['panne-format2', 'panne-format2-arbre-court', 'dossier-format2'];
-const BASE = 'http://localhost:8791/';
+const BASE = 'http://localhost:8790';
+const PAGES = [
+  { nom: 'panne-arbre-long', chemin: '/perte-de-puissance-voiture/', composants: [['arbre', '[data-element-unique="arbre-de-decision"]'], ['fiche-panne', '[data-fiche-panne]']] },
+  { nom: 'panne-arbre-court', chemin: '/voiture-qui-broute/', composants: [['arbre', '[data-element-unique="arbre-de-decision"]']] },
+  { nom: 'panne-tutoriel', chemin: '/batterie-voiture/changer/', composants: [['fiche-tutoriel', '[data-fiche-tutoriel]'], ['etapes', 'ol[data-tutoriel-etapes]'], ['tableau', '[data-element-unique="tableau"]']] },
+  { nom: 'dossier', chemin: '/moteur-puretech/', composants: [['tableau', '[data-element-unique="tableau"]'], ['historique', '[data-historique-dossier]']] },
+];
+const POLICES = { chargee: false, secours: true };
 
 async function ouvrir(navigateur, url, largeur, hauteur, echelle, bloquer) {
   const page = await navigateur.newPage({ viewport: { width: largeur, height: hauteur }, deviceScaleFactor: echelle });
   if (bloquer) await page.route(/\/polices\//, (r) => r.abort());
   else {
-    await page.route(/\.html(\?.*)?$/, async (route) => {
+    await page.route(/(\.html?|\/|\.css)(\?.*)?$/, async (route) => {
       const reponse = await route.fetch();
-      await route.fulfill({ response: reponse, body: (await reponse.text()).replace(/font-display:\s*optional/g, 'font-display:block') });
+      const corps = (await reponse.text()).replace(/font-display:\s*optional/g, 'font-display:block');
+      await route.fulfill({ response: reponse, body: corps });
     });
   }
   await page.goto(url, { waitUntil: 'networkidle' });
+  if (!bloquer) await page.reload({ waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForTimeout(150);
+  await page.waitForTimeout(200);
   return page;
 }
 
-const mesurer = (page) =>
-  page.evaluate(() => {
-    const haut = (s) => { const e = document.querySelector(s); return e ? Math.round(e.getBoundingClientRect().top + scrollY) : null; };
-    const bas = (s) => { const e = document.querySelector(s); return e ? Math.round(e.getBoundingClientRect().bottom + scrollY) : null; };
-    const l = document.querySelector('.ligne');
+async function mesurer(page) {
+  return page.evaluate(() => {
+    const el = (s) => document.querySelector(s);
+    const haut = (s) => { const e = el(s); return e ? Math.round(e.getBoundingClientRect().top + scrollY) : null; };
+    const bas = (s) => { const e = el(s); return e ? Math.round(e.getBoundingClientRect().bottom + scrollY) : null; };
+    const premiere = el('[data-encadre-ligne]');
+    const pastilles = [...document.querySelectorAll('[data-verdict-cite]')];
     return {
-      police: [...document.fonts].some((f) => f.status === 'loaded'),
-      basMention: bas('.mention-ia'),
-      basPremiereSituation: l ? Math.max(...['.situation', '.verdict', '.urgence', '.action'].map((s) => l.querySelector(s)).filter(Boolean).map((e) => Math.round(e.getBoundingClientRect().bottom + scrollY))) : null,
-      basEncadre: bas('.decision'),
-      hautIllustration: haut('figure.illustration'),
-      illustrationSuitProvenance: document.querySelector('figure.illustration')?.previousElementSibling === document.querySelector('.provenance'),
-      hautArbre: haut('.arbre'),
-      hauteurArbre: (() => { const a = document.querySelector('.arbre'); return a ? Math.round(a.getBoundingClientRect().height) : null; })(),
+      basPremiereSituation: premiere ? Math.max(...['.situation', '.verdict', '.urgence', '.action'].map((s) => premiere.querySelector(s)).filter(Boolean).map((e) => Math.round(e.getBoundingClientRect().bottom + scrollY))) : null,
+      basEncadre: bas('[data-encadre-decision]'),
+      hautIllustration: haut('figure[data-illustration]'),
+      hautArbre: haut('[data-element-unique="arbre-de-decision"]'),
+      hauteurArbre: (() => { const e = el('[data-element-unique="arbre-de-decision"]'); return e ? Math.round(e.getBoundingClientRect().height) : null; })(),
+      // Pastilles sur une ligne : hauteur d'une ligne de pastille (22 px) ; plus, elle passe à la ligne.
+      pastillesSurUneLigne: pastilles.length === 0 ? null : pastilles.every((p) => p.getBoundingClientRect().height < 30),
       hautHistorique: haut('[data-historique-dossier]'),
-      hauteurPage: document.documentElement.scrollHeight,
-      largeurPage: document.documentElement.scrollWidth,
-      debordements: [...document.querySelectorAll('.arbre li, .etapes li, .historique li, .fiche div, .cause, .tableau td')].filter((e) => e.scrollWidth > e.clientWidth + 1).length,
+      hauteurPage: Math.round(document.documentElement.scrollHeight),
+      largeurPage: Math.round(document.documentElement.scrollWidth),
+      debordements: [...document.querySelectorAll('main *')].filter((e) => { const r = e.getBoundingClientRect(); return r.width > 0 && r.right > innerWidth + 0.5 && !e.closest('.vh, .sommaire'); }).length,
     };
   });
+}
 
 (async () => {
   const navigateur = await chromium.launch();
   const mesures = {};
-  for (const nom of PAGES) {
-    for (const [police, bloquer] of [['chargee', false], ['secours', true]]) {
-      let page = await ouvrir(navigateur, `${BASE}${nom}.html`, 375, 667, 2, bloquer);
-      mesures[`${nom}-${police}`] = { telephone: await mesurer(page) };
-      await page.screenshot({ path: join(sortie, `${nom}-375-ecran-${police}.png`) });
+  for (const [police, bloquer] of Object.entries(POLICES)) {
+    // Planche des états de l'arbre : quatre gravités, libellé le plus long ; 320 px montre l'état sur deux lignes.
+    for (const largeur of [320, 360, 375, 1366]) {
+      const page = await ouvrir(navigateur, `${BASE}/planche-arbre.html`, largeur, 800, largeur === 1366 ? 1 : 2, bloquer);
+      mesures[`planche-${largeur}-${police}`] = await mesurer(page);
+      await page.locator('.arbre').screenshot({ path: join(sortie, `planche-arbre-${largeur}-${police}.png`) });
       await page.close();
-      page = await ouvrir(navigateur, `${BASE}${nom}.html`, 375, 667, 1, bloquer);
-      await page.screenshot({ path: join(sortie, `${nom}-375-page-${police}.png`), fullPage: true });
-      // Composant nouveau ou repris, vu seul au téléphone : arbre, ou fiche du tutoriel, étapes, tableau et historique.
-      for (const [sel, suffixe] of nom.startsWith('panne') ? [['.arbre', 'arbre']] : [['[data-fiche-tutoriel]', 'tutoriel'], ['ol.etapes', 'etapes'], ['[data-element-unique="tableau"]', 'tableau'], ['[data-historique-dossier]', 'historique']]) {
-        const el = await page.$(sel);
-        if (el) await el.screenshot({ path: join(sortie, `${nom}-375-${suffixe}-${police}.png`) });
+    }
+    for (const p of PAGES) {
+      const nom = (suffixe) => join(sortie, `${p.nom}-${suffixe}-${police}.png`);
+      let page = await ouvrir(navigateur, BASE + p.chemin, 375, 667, 2, bloquer);
+      mesures[`${p.nom}-${police}`] = { telephone: await mesurer(page) };
+      await page.screenshot({ path: nom('375-ecran') });
+      for (const [suffixe, selecteur] of p.composants) await page.locator(selecteur).first().screenshot({ path: nom(`375-${suffixe}`) });
+      await page.close();
+      if (p.composants.some(([s]) => s === 'arbre')) {
+        page = await ouvrir(navigateur, BASE + p.chemin, 360, 640, 2, bloquer);
+        mesures[`${p.nom}-${police}`].telephone360 = await mesurer(page);
+        await page.locator('[data-element-unique="arbre-de-decision"]').screenshot({ path: nom('360-arbre') });
+        await page.close();
       }
+      page = await ouvrir(navigateur, BASE + p.chemin, 375, 667, 1, bloquer);
+      await page.screenshot({ path: nom('375-page'), fullPage: true });
       await page.close();
-      page = await ouvrir(navigateur, `${BASE}${nom}.html`, 1366, 800, 1, bloquer);
-      mesures[`${nom}-${police}`].ordinateur = await mesurer(page);
-      await page.screenshot({ path: join(sortie, `${nom}-1366-ecran-${police}.png`) });
-      await page.evaluate((s) => { const e = document.querySelector(s); if (e) scrollTo(0, Math.max(0, e.getBoundingClientRect().top + scrollY - 80)); }, nom.startsWith('panne') ? '.arbre' : '[data-fiche-tutoriel]');
-      await page.waitForTimeout(150);
-      await page.screenshot({ path: join(sortie, `${nom}-1366-corps-${police}.png`) });
+      page = await ouvrir(navigateur, BASE + p.chemin, 1366, 800, 1, bloquer);
+      mesures[`${p.nom}-${police}`].ordinateur = await mesurer(page);
+      await page.screenshot({ path: nom('1366-ecran') });
+      await page.locator('[data-corps]').screenshot({ path: nom('1366-corps') });
       await page.close();
     }
   }
+  writeFileSync(join(sortie, 'mesures.json'), `${JSON.stringify(mesures, null, 2)}\n`);
   await navigateur.close();
-  writeFileSync(join(sortie, 'mesures.json'), JSON.stringify(mesures, null, 2) + '\n');
-  process.stdout.write(JSON.stringify(mesures, null, 1) + '\n');
+  for (const [cle, m] of Object.entries(mesures)) console.log(cle, JSON.stringify(m.telephone ?? m), m.telephone360 ? `360 : ${JSON.stringify(m.telephone360)}` : '');
 })();
