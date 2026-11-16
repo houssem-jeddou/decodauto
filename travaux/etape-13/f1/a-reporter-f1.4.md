@@ -40,6 +40,35 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
   - *listes sans puces* (questions de l'arbre, étapes, historique) : `role="list"`, comme l'encadré.
   Points à trancher à la porte : l'arbre arrive loin sur téléphone (2 910 px) parce que les fiches et les causes le précèdent
   (ordre de la charte) ; sur téléphone, une pastille longue passe à la ligne sous « Oui : ».
+- **§4, page outil (F1.3a, 16/11/2026, captures `travaux/etape-13/f1/captures/f1.3a/`)** : variantes proposées, toutes
+  tirées de composants existants :
+  - *renvoi de l'encadré* (« Trouvez votre voyant dans la liste ») : bouton ambre du bandeau, sous la question et avant les
+    exemples, visible dans le premier écran ; *coût « Selon le voyant »* : pastille ambre des tranches ;
+  - *filtre par couleur* : pastilles blanches bordées du sommaire, pastille cochée sombre (panneau), diode de la couleur ;
+  - *index des dessins* : la grille de l'accueil (tuiles rondes allumées dans des cellules sombres, sur fond nuit), une tuile
+    par paire (pictogramme, couleur), libellé de `LIBELLES_PICTOGRAMMES` ; 4 tuiles par rangée à 375 px, 6 sur ordinateur ;
+  - *groupe de couleur* : panneau sombre de l'encadré, titre avec une **diode** (point lumineux de la couleur des voyants,
+    élément nouveau, décoratif) ; *carte d'une ligne* : la cellule d'une ligne de l'encadré (tuile, nom en gras et situation
+    en texte doux, pastilles verdict et urgence, action, ligne d'écart), lien de la page du voyant, sources repliées ;
+  - *ordre dans l'outil* : titre, filtre, grille, introduction, groupes (l'introduction suit la grille : le renvoi de
+    l'encadré mène au titre, et la grille apparaît sans faire défiler l'introduction).
+  Revue de F1.3a (décisions du 16/11/2026) :
+  - *index* : **deux grilles, une par couleur**, sous le titre du groupe (« Voyants orange ou jaunes », « Voyants rouges »,
+    textes déjà validés), pour que deux tuiles d'un même dessin ne se distinguent pas par la seule couleur (WCAG 1.4.1) ; le
+    filtre masque la grille des autres couleurs ; **nombre de cas** sur la tuile d'une paire qui en a plusieurs (« 2 cas ») ;
+  - *ordre des cartes* : **par paire** (pictogramme, couleur), la paire la plus grave d'abord, puis par gravité dans la
+    paire. **Change l'ordre de la liste et la décision 9 du paquet 8.1** (une entrée d'index par ligne) : à valider par
+    Houssem sur captures, à la porte du format ;
+  - *cartes* : ligne d'écart courte obligatoire (FORMAT2-ECART, plus de repli sur l'écart entier) ;
+  - *renvoi de l'encadré* : bouton ambre **sans icône** (docs/10 §4, point 4 : une icône seulement si elle double un texte) ;
+  - *introduction* : en deux paragraphes, sans changer un mot (règle 2e) ; *titre de groupe* : diode alignée sur la première
+    ligne, « 16 cas » insécable ; diode blanche retirée tant qu'aucune ligne blanche n'existe ;
+  - *bandeau* : pas de bouton « Trouver mon voyant » sur la page outil elle-même (demande n° 30, §6).
+  À reporter aussi, après validation : **CLAUDE.md, « Outil voyants »** (index par paire et par couleur, au lieu d'« une
+  entrée `data-outil-index-entree` par ligne » ; ordre des cartes par paire au format 2 ; repères du verdict dans le texte de
+  la page outil) et **docs/10 §4** (bouton sans icône ; introduction de l'outil en deux paragraphes).
+  Décision du 16/11 : l'illustration (règle 2i) est gardée sur l'outil (sans elle, la grille commence encore au-delà de trois
+  écrans).
 
 ## Liste de recette (`docs/03`, étape 9) : à ajouter pour les lots au format 2
 - Repères de section : un repère seulement sous un H2 qui pose la question d'une seule ligne de l'encadré (exception explicite
