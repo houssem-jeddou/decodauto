@@ -24,14 +24,12 @@
    notice**, Seat Ibiza p. 289, dont le passage ne se limite pas à l'essence (la ligne affiche une notice). Renault et
    Dacia ne visent que les « versions essence » ; la notice Toyota Yaris lue ne couvre aucune version diesel (relevé de
    l'étape 5 : « Pas de version Diesel »), elle n'est donc pas citée (charte §2.5).
-   - Point ouvert : le « […] » du relevé, entre « se produisent. » et « Par ailleurs », n'a pas été relu (le texte de
-     l'étape 5 n'a pas ce passage ; le PDF n'est pas accessible ici). Si la phrase sur le catalyseur ne vaut que pour un
-     autre cas, la citation Seat redescend à Oui, avec précautions · À faire dans les jours qui viennent (« contactez
-     un atelier spécialisé », sans délai écrit), et la ligne diesel avec elle ; la ligne essence resterait à « Non »
-     (Renault, Dacia). Appui : la page voyant moteur, validée le 14/11 (lot 2, Seat p. 289 lue sur le PDF), relie déjà
-     cette phrase à ces symptômes (« le catalyseur risquerait alors d'être endommagé »).
-   - **Recommandation : valider**, après relecture à l'écran du passage coupé si elle est possible avant la
-     présentation.
+   - Relu mot pour mot à l'écran par le pilotage le 16/11 vers 23 h 25 (PDF 291 → p. 289) : le « […] » coupe une
+     seule phrase, « Dans ce cas, le carburant qui n'a pas été brûlé peut parvenir dans le système d'échappement et
+     être libéré dans l'atmosphère. » ; la phrase sur le catalyseur suit directement, dans le même cas (les symptômes
+     décrits). La citation Seat reste à « Non, ne poursuivez pas votre trajet ». Le texte ne distingue pas essence et
+     diesel : la ligne diesel repose sur lui seul.
+   - **Recommandation : valider.**
 3. **Voyant EPC** (« perte de puissance », ligne 4) : niveau inchangé, **Oui, avec précautions** · À faire tout de suite
    (Seat Ibiza p. 288). Action : « Faites contrôler le moteur sans attendre par un atelier. Si la voiture perd de la
    puissance, suivez la ligne « Moteur essence », plus prudente. » L'arbre n'a plus de sortie propre au voyant EPC : sa
@@ -47,8 +45,8 @@
    précautions** · À faire tout de suite (Seat Ibiza p. 283). Situation précisée : « faute de supercarburant » (le relevé
    rattache la consigne au cas où l'on n'a pas de super). L'arbre n'y mène que pour une perte de puissance **légère** ;
    sinon, ligne 5.
-   - Point ouvert (revue M8) : le contexte des deux phrases de la p. 283 n'a pas été relu ; selon le relevé, la
-     consigne vise l'essence ordinaire 91, qu'on ne trouve pas en France.
+   - Contexte relu à l'écran le 16/11 vers 23 h 25 (PDF 285 → p. 283) : pour un moteur qui demande du super 95, « En son
+     absence, il est possible d'utiliser si nécessaire de l'essence ordinaire 91 (87 AKI). » ; la consigne suit.
    - Pour : Seat décrit cette perte légère comme l'effet attendu de ce carburant, avec sa propre consigne. Contre :
      Renault et Dacia rangent toute perte de puissance d'une essence parmi les anomalies qui menacent le catalyseur
      (principe 6 : en cas de doute, le plus prudent).
@@ -154,7 +152,7 @@
     (point 10) ;
   - I11, branches de l'arbre par moment ou par bruit : aucune source ne le permet (point 14) ;
   - M3 : le compte rendu de la recette (`recette-lot-b4/README.md`) n'est pas corrigé : la recette est à refaire ;
-  - M8 et le « […] » de Seat p. 289 : non relus à l'écran (points 2 et 5).
+  - M8 et le « […] » de Seat p. 289 : relus à l'écran par le pilotage après la correction (points 2 et 5).
 - **Non relu** : toutes les corrections ci-dessus sont faites après la revue et ne sont pas relues. **La recette est à
   refaire** (contrôles, mesures, captures, Lighthouse), sur la branche avec le lot B1.
 
