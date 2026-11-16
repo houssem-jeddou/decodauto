@@ -23,6 +23,9 @@ Il remplace les passages « à relire » de `autres-pannes-releve.md` et complè
 | Peugeot 208 | PDF 167-170 → p. 165-168 | Niveaux ; liquide de refroidissement ; batterie 12 V (remplacement Stop & Start) ; filtre à particules diesel | **Nouveau** |
 | Peugeot 208 | PDF 17 → p. 15 | Additif du filtre à particules (témoin fixe) ; ne jamais rouler jusqu'à la panne sèche | Lu |
 | Citroën C3 | PDF 114-117 → p. 112-115 | Mêmes rubriques que Peugeot (refroidissement, batterie) ; additif gasoil : appoint par le réseau ; filtre à particules | **Nouveau** |
+| Toyota Yaris | p. 36, 242, 291, 335 | Bruits anormaux, cliquetis, à-coups, perte de puissance, bruit d'échappement : conduite à tenir | **Nouveau** (conduite à tenir de première main) |
+| Toyota Yaris | p. 319-323 | Batterie déchargée, débranchement, remplacement ; surchauffe (signes et mesures correctives) | **Nouveau** |
+| Six notices entières | toutes les pages | Relevé de chaque « bruit », « cliquetis », « claquement », « sifflement », « fumée » | Aucune cause d'un bruit du moteur, aucune fumée noire ou bleue |
 
 ## Renault Clio 5 phase 2 (`notice-renault-clio-5`), « Anomalies de fonctionnement », « Sur route »
 
@@ -142,6 +145,20 @@ avant la rédaction, même famille de notice).
 - p. 289, filtre à particules (essence et diesel) : 50 à 120 km/h moteur chaud, jusqu'à l'extinction du témoin (déjà dans
   la base, ligne `fap`).
 
+**Démarrage, p. 213 (PDF 215)**, Nota : « Lors du démarrage du moteur à froid, les bruits peuvent brièvement augmenter.
+Ce phénomène est normal et il n'y a donc pas lieu de s'inquiéter. » ; « À des températures inférieures à +5 °C (+41 °F),
+un peu de fumée peut s'échapper du dessous des véhicules diesel lorsque le chauffage d'appoint supplémentaire à
+carburant est activé. » ; ATTENTION : « Évitez les régimes élevés, les accélérations à plein gaz et les fortes
+sollicitations sur moteur froid – risque de panne du moteur ! »
+
+**Filtre à particules et compartiment moteur, p. 290 (PDF 292)** : « Si le témoin reste allumé après 30 minutes de
+conduite en mode régénération, contactez un atelier spécialisé pour faire réparer le défaut » ; « Pendant la
+régénération, du bruit, des odeurs et un régime de ralenti élevé peuvent se produire. » ; « Afin de ne pas réduire la
+durée de vie du filtre à particules, utilisez toujours la bonne huile moteur et le bon carburant. Évitez également de
+faire toujours des trajets courts. » ; AVERTISSEMENT : « N'ouvrez jamais le capot-moteur si vous remarquez que du
+compartiment-moteur s'échappe de la vapeur ou du liquide de refroidissement. Attendez jusqu'à ce qu'il n'y ait plus
+d'échappement de vapeur ou de liquide de refroidissement. »
+
 **Carburant, p. 283 (PDF 285)** : avec de l'essence à indice d'octane plus bas que conseillé, « avec une légère perte de
 puissance » ; à défaut de super, ordinaire 91 : « Vous ne devez alors faire tourner le moteur qu'à régime moyen et ne le
 solliciter que faiblement. Rajoutez dès que possible du supercarburant. »
@@ -190,10 +207,64 @@ solliciter que faiblement. Rajoutez dès que possible du supercarburant. »
   CITROËN ou par un atelier qualifié. »
 - **Carburant** (Peugeot p. 15) : « Ne jamais rouler jusqu'à la panne sèche, cela pourrait endommager les systèmes
   d'antipollution et d'injection. »
-- **Bruits** : la notice Peugeot ne décrit aucun bruit du moteur thermique (relevé de tous les « bruit », « cliquetis »,
-  « claquement », « sifflement » et « fumée » des 276 pages : clignotants, airbags, moteur électrique, téléphone).
+- **Bruits et fumées** : ni Peugeot ni Citroën ne décrivent un bruit du moteur thermique ou une fumée à l'échappement
+  hors de la vapeur d'eau ci-dessus (relevé de toutes les occurrences de « bruit », « cliquetis », « claquement »,
+  « claque », « sifflement », « siffle », « fumée » et « fume » des 276 pages Peugeot et des 212 pages Citroën :
+  clignotants, airbags, moteur électrique, téléphone, bouchon de carburant).
+- **Dacia** (même relevé, 384 pages) : comme Renault (p. 160 : fumées blanches exceptionnelles du nettoyage automatique
+  du filtre à particules, sans conséquence ; tableau p. 348-349) ; bruits de l'airbag, du rétroviseur, de l'aide au
+  stationnement ; aucun bruit du moteur, aucune fumée noire ou bleue.
+- **Renault** (même relevé, 424 pages) : fumées blanches (p. 186, 386), fumée sous le capot (p. 386), étiquette
+  d'opacité ; les bruits décrits sont ceux du système hybride E-Tech (hors périmètre), de l'airbag et du rétroviseur ;
+  aucun bruit du moteur thermique, aucune fumée noire ou bleue.
+- **Seat** (même relevé, notice entière) : seulement le bruit qui augmente brièvement au démarrage à froid (p. 213), le bruit
+  de la régénération du filtre (p. 290), la fumée du chauffage d'appoint diesel sous le véhicule (p. 213) ; ni
+  claquement, ni cliquetis du moteur (« indice de cliquetis » p. 283 : qualité de l'essence), ni fumée noire ou bleue.
 - « Mode dégradé » : aucune des notices lues ne décrit de mode dégradé du moteur thermique sous ce nom (Peugeot :
   « mode tortue » du seul moteur électrique, hors périmètre).
+
+## Toyota Yaris (`notice-toyota-yaris`, page PDF = page imprimée), notice entière relevée
+
+- **p. 242, « Votre véhicule nécessite-t-il des réparations ? »** : « Soyez attentif aux variations de performances et aux
+  signaux sonores, ainsi qu'aux indications informant qu'une réparation s'avère nécessaire. Voici quelques indices
+  importants : • Ratés d'allumage, fonctionnement irrégulier du moteur ou cliquetis • Perte de puissance importante
+  • Bruits anormaux du moteur • Fuite de liquide sous le véhicule (il est toutefois normal que de l'eau s'écoule de la
+  climatisation après l'avoir utilisé.) • Modification du bruit d'échappement (cela peut indiquer une fuite dangereuse de
+  monoxyde de carbone. Conduisez avec les vitres ouvertes et faites vérifier le système d'échappement immédiatement.) […]
+  • Température du liquide de refroidissement du moteur continuellement supérieure à la normale » ; même page : « nous
+  vous recommandons de confier les opérations d'entretien et les réparations à un concessionnaire ou un réparateur
+  Toyota agréé, ou à tout autre réparateur qualifié ».
+- **p. 291, 7.2.2 « Si vous pensez qu'il y a un problème »** : « Si vous remarquez l'un des symptômes suivants, votre
+  véhicule a probablement besoin d'un réglage ou d'une réparation. Contactez dès que possible un concessionnaire ou un
+  réparateur Toyota agréé, ou tout autre réparateur qualifié. » ; symptômes audibles : « Changement au niveau du bruit de
+  l'échappement », « Cliquetis ou autres bruits anormaux du moteur » ; symptômes de fonctionnement : « Ratés
+  d'allumage, à-coups ou fonctionnement irrégulier du moteur », « Perte de puissance importante » ; symptômes visibles :
+  fuites sous le véhicule, aiguille de température continuellement au-dessus de la normale.
+- **p. 36, gaz d'échappement** : odeur de gaz d'échappement dans le véhicule : « ouvrez les vitres et faites vérifier le
+  véhicule dès que possible » ; « si l'échappement produit un bruit anormal, veuillez faire vérifier et réparer votre
+  véhicule ».
+- **p. 335, carburant** : « Si vous entendez des cliquetis dans votre moteur • Contactez un concessionnaire ou un
+  réparateur Toyota agréé, ou tout autre réparateur qualifié. • Vous pouvez occasionnellement entendre de légers
+  cliquetis pendant un temps très court lorsque vous accélérez ou conduisez dans une montée. Cela est normal et il n'y a
+  aucune raison de s'inquiéter. » ; essence sans plomb EN228, indice d'octane 95 ou plus ; carburant inapproprié :
+  « le moteur risque d'être endommagé ».
+- **p. 319-321, batterie** : causes d'un démarreur lent ou immobile (batterie déchargée, bornes desserrées, corrodées ou
+  débranchées) ; démarrage avec un deuxième véhicule (câbles, régime légèrement augmenté environ 5 minutes, débranchement
+  dans l'ordre inverse), puis « faites vérifier le véhicule dès que possible » ; « Il est impossible de mettre le moteur
+  en marche en poussant le véhicule. » ; « Avant de débrancher les bornes de la batterie, contactez un concessionnaire ou
+  un réparateur Toyota agréé, ou tout autre réparateur qualifié. » (mémoire des calculateurs effacée) ; décharge
+  naturelle d'un véhicule longtemps inutilisé ; remplacement : batterie 12 V de même boîtier, capacité et courant de
+  démarrage à froid équivalents ou supérieurs (valeurs données par version), batterie d'origine ou équivalente avec le
+  système d'arrêt et de démarrage ; MISE EN GARDE : « Commencez toujours par débrancher la borne négative (-). » ;
+  p. 322 : lunettes de sécurité, acide, plomb, ne pas se pencher sur la batterie.
+- **p. 322-323, 7.2.11 « Si votre véhicule surchauffe »** (déjà citée par la base, ligne `temperature-rouge`) : signes
+  (jauge dans la zone rouge « ou vous ressentez une perte de puissance du moteur », message, vapeur sous le capot) ;
+  mesures correctives : arrêt en lieu sûr, climatisation puis moteur coupés ; capot soulevé avec précaution après
+  dissipation de la vapeur ; fuites ; niveau entre « F » et « L » ; appoint (de l'eau en cas d'urgence, selon Toyota) ;
+  contrôle du ventilateur ; « Si le ventilateur ne fonctionne pas : Arrêtez immédiatement le moteur et contactez […] ».
+- Relevé des « bruit », « cliquetis », « claquement », « sifflement », « fumée » des 440 pages : rien d'autre sur le moteur
+  (aides à la conduite, chargeur sans fil, freins, kit de réparation des pneus) ; aucune cause d'un claquement ou d'un
+  cliquetis, aucune fumée noire ou bleue.
 
 ## Ce que cela change pour les briefs
 
@@ -217,6 +288,14 @@ solliciter que faiblement. Rajoutez dès que possible du supercarburant. »
   sur la batterie (démontage, débranchement) ; Peugeot et Citroën, le remplacement de la batterie des versions Stop &
   Start dans le réseau ou un atelier qualifié ; Seat, la recharge par un atelier spécialisé (relevé du 15/11, p. 303, à
   relire). Le tutoriel doit l'écrire en tête, marque par marque (consigne « quand ne pas le faire soi-même »).
-- **`bruit-moteur`** : aucune notice ne décrit les bruits du moteur thermique ; seules les lignes du voyant d'huile
-  (base) et la pression d'huile du tableau Renault et Dacia (p. 386, p. 349) s'appliquent.
-- Reste à lire : Toyota (batterie, surchauffe) ; Seat p. 303 mot pour mot.
+- **`bruit-moteur`** : la conduite à tenir a une source de première main (Toyota p. 242 et 291 : bruits anormaux,
+  cliquetis, contacter dès que possible un réparateur ; Toyota p. 36 et 242 : bruit d'échappement qui change, risque de
+  monoxyde de carbone, faire vérifier immédiatement, vitres ouvertes), ce qui est normal aussi (Seat p. 213 : bruit plus
+  fort un court moment à froid ; Toyota p. 335 : légers cliquetis très brefs à l'accélération ; Seat p. 290 : bruit de la
+  régénération) ; avec un voyant d'huile allumé, les lignes de la base décident ; les **causes** d'un claquement, d'un
+  cliquetis ou d'un sifflement ne sont dans aucune notice.
+- **`perte-de-puissance`, `voiture-qui-broute`** : conduite à tenir aussi chez Toyota (p. 291 : à-coups, ratés, perte de
+  puissance importante : contacter dès que possible un réparateur) ; perte de puissance comme signe de surchauffe
+  (Toyota p. 322).
+- **`batterie-changer`** : Toyota demande de contacter un réparateur avant de débrancher les bornes (p. 321).
+- Reste à lire : Seat p. 303 mot pour mot (recharge par un atelier spécialisé).
