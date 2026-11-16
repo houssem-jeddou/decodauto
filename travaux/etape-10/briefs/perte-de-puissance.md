@@ -52,7 +52,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
   - « Perte de puissance 1.6 hdi 110 sans voyant » : sans voyant, aucune notice lue ; ne rien transposer d'un autre moteur (charte §2.5).
   - Diesel et essence : formulations du lecteur du brief ; pages liées « voiture qui broute » et « fumée échappement ».
 - **Sources à trouver avant la rédaction** :
-  - Causes propres au diesel, hors codes P0087 et P0299 (pages liées) : dépend de la demande de changement n° 31.
+  - Causes propres au diesel, hors codes P0087 et P0299 (pages liées) : documents techniques admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)), avec moteurs, marché et date du document ; liste dite incomplète.
   - « Mode dégradé » : aucune notice lue ne le décrit sous ce nom (relevé du 16/11) : ne pas en parler comme d'un mode décrit par le constructeur.
 - **Hors périmètre, à ne pas traiter** :
   - Reprogrammation moteur, « défapage », suppression de la vanne EGR : non traités.

@@ -46,7 +46,7 @@ Et 40 autres : « batterie a plat comment faire », « batterie a plat que faire
   - « Voiture ne démarre pas tableau de bord éteint », « mais les voyants s'allument », « mais radio fonctionne » : branches de l'arbre ; aucune notice lue ne parle de la radio : le dire, sans explication inventée.
   - « Pourquoi ma voiture ne démarre pas malgré une batterie neuve » : circuit de charge (Peugeot p. 13), ligne `batterie-rouge` de la base.
   - Clé ou carte non détectée : démarrage de secours (Peugeot p. 95, Seat p. 215, Renault p. 175-176).
-  - « Bruit démarreur hs » : aucune notice lue ne nomme le démarreur comme cause ; dépend du point à décider sur les sources techniques secondaires.
+  - « Bruit démarreur hs » : aucune notice lue ne nomme le démarreur comme cause ; un document technique d'équipementier, lu en entier, inscrit au registre (nature `document-technique`) et qui relie lui-même la cause au symptôme, peut la donner (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)) ; jamais d'urgence, de geste ni de risque tirés de lui.
 - **Sources à trouver avant la rédaction** :
   - Notices Dacia (tableau des anomalies) et Toyota (« Si le moteur ne démarre pas »), à lire dans le navigateur.
   - Extraits du relevé du 15/11/2026 relus mot pour mot à l'écran (travaux/etape-10/textes/demarrage-batterie-releve.md).

@@ -46,6 +46,6 @@ Et 13 autres : « fumée blanche voiture diesel », « fumée blanche voiture es
   - « Diesel fume noir », « traitement fumée noire diesel » : aucune notice lue ; ne recommander aucun additif sans source.
   - « Ma voiture fume blanche et perte de puissance » : page liée « perte de puissance ».
 - **Sources à trouver avant la rédaction** :
-  - Fumée noire et bleue : dépend de la demande de changement n° 31.
+  - Fumée noire et bleue : lire d'abord l'instruction technique du contrôle technique sur l'opacité des fumées (première main) ; causes par documents techniques admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)) ; une situation qu'aucune source de première main ne décrit n'a pas de ligne dans l'encadré : la page le dit et conseille un professionnel.
 - **Hors périmètre, à ne pas traiter** :
   - Additifs et produits de nettoyage vendus : non recommandés sans source admise.

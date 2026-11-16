@@ -44,7 +44,7 @@
   - « Problème de batterie voiture symptôme », « batterie décharge lente » : tableau Renault p. 384, Seat p. 301 et 303.
   - Causes d'une décharge : petits parcours, roulage urbain, froid, consommateurs utilisés moteur arrêté (Dacia p. 301) ; décharge naturelle d'une voiture immobilisée (Toyota p. 321) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md).
 - **Sources à trouver avant la rédaction** :
-  - Valeurs de tension d'une batterie chargée ou déchargée : aucune notice ; dépend de la demande de changement n° 31 (documents techniques d'un fabricant de batteries), sinon ne rien en dire.
+  - Valeurs de tension d'une batterie chargée ou déchargée : aucune notice ; documents techniques d'un fabricant de batteries admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)), avec leurs conditions de mesure, sinon ne rien en dire.
 - **Hors périmètre, à ne pas traiter** :
   - Prix, marques et comparatifs de batteries (docs/01 : pas de requête d'achat générique comme objectif).
   - Batterie d'un véhicule hybride ou électrique (docs/02).

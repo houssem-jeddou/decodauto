@@ -39,6 +39,6 @@
   - « Voiture qui broute et perte de puissance » : page liée « perte de puissance ».
   - Lignes `moteur-orange-clignotant` et `moteur-orange-fixe` de la base, reprises telles quelles.
 - **Sources à trouver avant la rédaction** :
-  - Causes propres au diesel et détail des vérifications : dépend de la demande de changement n° 31.
+  - Causes propres au diesel et détail des vérifications : documents techniques admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)), avec moteurs, marché et date du document ; liste dite incomplète ; verdicts et gestes seulement de première main.
 - **Hors périmètre, à ne pas traiter** :
   - Valises et lecteurs OBD (docs/02).

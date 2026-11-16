@@ -54,6 +54,6 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
   - « Claquement moteur », « cliquetis moteur », « bruit poussoir hydraulique », « injecteur qui claque », « turbo siffle », « bruit support moteur hs », « ventilateur qui fait du bruit », « bruit échappement » : branches de l'arbre, sans cause inventée.
   - Pages liées « niveau d'huile » (vague C : pas de lien avant sa publication) et « moteur PureTech » (signes cités par Stellantis).
 - **Sources à trouver avant la rédaction** :
-  - Causes d'un claquement, d'un cliquetis anormal ou d'un sifflement : aucune notice ; dépend de la demande de changement n° 31.
+  - Causes d'un claquement, d'un cliquetis anormal ou d'un sifflement : aucune notice ; documents techniques admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)), sinon la page dit quoi faire (Toyota p. 291) et ce qui est normal ; vérifier d'abord Seat p. 283 (indice de cliquetis), cause de première main citée d'abord.
 - **Hors périmètre, à ne pas traiter** :
   - Diagnostic à l'oreille ou par enregistrement : non traité.

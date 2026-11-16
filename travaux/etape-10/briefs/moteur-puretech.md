@@ -46,7 +46,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
 - **Question de décision proposée** : « Moteur PureTech : puis-je continuer à rouler si une alerte s'allume ou si un rappel me concerne ? »
-- **Angle** : Dossier daté, revu tous les trois mois : rappels officiels (RappelConso), couverture spéciale du constructeur (plafond passé de 175 000 à 180 000 km), alertes de la base (pression et niveau d'huile, entretien). Brouillon : exemples/dossier/moteur-puretech.md.
+- **Angle** : Dossier daté, revu tous les trois mois : rappels officiels (RappelConso), couverture spéciale du constructeur (plafond passé de 175 000 à 180 000 km), alertes de la base (pression et niveau d'huile, entretien). Couverture spéciale et plateforme d'indemnisation : communication officielle du constructeur seulement (nature `communication-constructeur`, demande de changement n° 31), datée et revérifiée à chaque revue ; jamais un verdict ni un geste tirés d'elle. Brouillon : exemples/dossier/moteur-puretech.md.
 - **Élément unique** : Tableau des rappels officiels (fiches RappelConso : date, modèles, fabrication, motif, conduite à tenir).
 - **À traiter** :
   - Mots-clés par modèle (208, 2008, 308, 3008, C3, Opel) : servis par le tableau des rappels (modèles cités par les fiches), jamais par une page par modèle (docs/01).

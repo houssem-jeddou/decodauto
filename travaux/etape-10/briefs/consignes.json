@@ -9,7 +9,7 @@
       "« Voiture ne démarre pas tableau de bord éteint », « mais les voyants s'allument », « mais radio fonctionne » : branches de l'arbre ; aucune notice lue ne parle de la radio : le dire, sans explication inventée.",
       "« Pourquoi ma voiture ne démarre pas malgré une batterie neuve » : circuit de charge (Peugeot p. 13), ligne `batterie-rouge` de la base.",
       "Clé ou carte non détectée : démarrage de secours (Peugeot p. 95, Seat p. 215, Renault p. 175-176).",
-      "« Bruit démarreur hs » : aucune notice lue ne nomme le démarreur comme cause ; dépend du point à décider sur les sources techniques secondaires."
+      "« Bruit démarreur hs » : aucune notice lue ne nomme le démarreur comme cause ; un document technique d'équipementier, lu en entier, inscrit au registre (nature `document-technique`) et qui relie lui-même la cause au symptôme, peut la donner (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)) ; jamais d'urgence, de geste ni de risque tirés de lui."
     ],
     "sources_a_trouver": [
       "Notices Dacia (tableau des anomalies) et Toyota (« Si le moteur ne démarre pas »), à lire dans le navigateur.",
@@ -30,7 +30,7 @@
       "Lignes `moteur-orange-clignotant` et `moteur-orange-fixe` de la base, reprises telles quelles."
     ],
     "sources_a_trouver": [
-      "Causes propres au diesel et détail des vérifications : dépend de la demande de changement n° 31."
+      "Causes propres au diesel et détail des vérifications : documents techniques admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)), avec moteurs, marché et date du document ; liste dite incomplète ; verdicts et gestes seulement de première main."
     ],
     "hors_perimetre": [
       "Valises et lecteurs OBD (docs/02)."
@@ -46,7 +46,7 @@
       "Diesel et essence : formulations du lecteur du brief ; pages liées « voiture qui broute » et « fumée échappement »."
     ],
     "sources_a_trouver": [
-      "Causes propres au diesel, hors codes P0087 et P0299 (pages liées) : dépend de la demande de changement n° 31.",
+      "Causes propres au diesel, hors codes P0087 et P0299 (pages liées) : documents techniques admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)), avec moteurs, marché et date du document ; liste dite incomplète.",
       "« Mode dégradé » : aucune notice lue ne le décrit sous ce nom (relevé du 16/11) : ne pas en parler comme d'un mode décrit par le constructeur."
     ],
     "hors_perimetre": [
@@ -77,7 +77,7 @@
       "Pages liées « niveau d'huile » (vague C : pas de lien avant sa publication) et « moteur PureTech » (signes cités par Stellantis)."
     ],
     "sources_a_trouver": [
-      "Causes d'un claquement, d'un cliquetis anormal ou d'un sifflement : aucune notice ; dépend de la demande de changement n° 31."
+      "Causes d'un claquement, d'un cliquetis anormal ou d'un sifflement : aucune notice ; documents techniques admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)), sinon la page dit quoi faire (Toyota p. 291) et ce qui est normal ; vérifier d'abord Seat p. 283 (indice de cliquetis), cause de première main citée d'abord."
     ],
     "hors_perimetre": [
       "Diagnostic à l'oreille ou par enregistrement : non traité."
@@ -94,7 +94,7 @@
       "« Ma voiture fume blanche et perte de puissance » : page liée « perte de puissance »."
     ],
     "sources_a_trouver": [
-      "Fumée noire et bleue : dépend de la demande de changement n° 31."
+      "Fumée noire et bleue : lire d'abord l'instruction technique du contrôle technique sur l'opacité des fumées (première main) ; causes par documents techniques admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)) ; une situation qu'aucune source de première main ne décrit n'a pas de ligne dans l'encadré : la page le dit et conseille un professionnel."
     ],
     "hors_perimetre": [
       "Additifs et produits de nettoyage vendus : non recommandés sans source admise."
@@ -113,7 +113,7 @@
       "Causes d'une décharge : petits parcours, roulage urbain, froid, consommateurs utilisés moteur arrêté (Dacia p. 301) ; décharge naturelle d'une voiture immobilisée (Toyota p. 321) (relevé à l'écran du 16/11 : travaux/etape-10/textes/autres-pannes-verification.md)."
     ],
     "sources_a_trouver": [
-      "Valeurs de tension d'une batterie chargée ou déchargée : aucune notice ; dépend de la demande de changement n° 31 (documents techniques d'un fabricant de batteries), sinon ne rien en dire."
+      "Valeurs de tension d'une batterie chargée ou déchargée : aucune notice ; documents techniques d'un fabricant de batteries admis (demande de changement n° 31 (acceptée le 16/11 : charte §2.2)), avec leurs conditions de mesure, sinon ne rien en dire."
     ],
     "hors_perimetre": [
       "Prix, marques et comparatifs de batteries (docs/01 : pas de requête d'achat générique comme objectif).",
@@ -167,7 +167,7 @@
   },
   "moteur-puretech": {
     "question_decision": "Moteur PureTech : puis-je continuer à rouler si une alerte s'allume ou si un rappel me concerne ?",
-    "angle": "Dossier daté, revu tous les trois mois : rappels officiels (RappelConso), couverture spéciale du constructeur (plafond passé de 175 000 à 180 000 km), alertes de la base (pression et niveau d'huile, entretien). Brouillon : exemples/dossier/moteur-puretech.md.",
+    "angle": "Dossier daté, revu tous les trois mois : rappels officiels (RappelConso), couverture spéciale du constructeur (plafond passé de 175 000 à 180 000 km), alertes de la base (pression et niveau d'huile, entretien). Couverture spéciale et plateforme d'indemnisation : communication officielle du constructeur seulement (nature `communication-constructeur`, demande de changement n° 31), datée et revérifiée à chaque revue ; jamais un verdict ni un geste tirés d'elle. Brouillon : exemples/dossier/moteur-puretech.md.",
     "element_unique": "Tableau des rappels officiels (fiches RappelConso : date, modèles, fabrication, motif, conduite à tenir).",
     "a_traiter": [
       "Mots-clés par modèle (208, 2008, 308, 3008, C3, Opel) : servis par le tableau des rappels (modèles cités par les fiches), jamais par une page par modèle (docs/01).",
