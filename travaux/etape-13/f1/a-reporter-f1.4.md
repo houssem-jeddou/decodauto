@@ -3,6 +3,10 @@
 Notes de la mise en œuvre de F1.2 et de ses deux revues indépendantes (16/11/2026). `docs/` ne se modifie qu'après la
 validation de Houssem, par la pull request de la copie : ces points y entrent à F1.4, avec la porte du format.
 
+**F1.4 (16/11/2026)** : ces points sont repris, mot pour mot à reporter, dans `travaux/etape-13/f1/porte-f1.md`, §6
+(« Textes proposés ») ; ce qui était « à faire à F1.4 » est fait (débordement à 320 px, ligne de transparence, contour de
+focus sur fond sombre, captures refaites) ; ce qui reste pour F2, F3 et la vague B est au §5 du dossier.
+
 ## Charte graphique (`docs/11`)
 - **§4, repère de section (règle retenue à la seconde revue de F1.2)** : un repère seulement sous un H2 qui pose la question
   d'une seule ligne de l'encadré ; une exception explicite à une autre ligne dans le texte est admise (exemple : FAP avec le
