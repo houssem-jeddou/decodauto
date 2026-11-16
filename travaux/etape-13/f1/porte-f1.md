@@ -45,7 +45,7 @@ Preuves de référence (commandes lancées sur la branche ; la CI de la PR les r
 | 7 | Gravité jamais par la seule couleur | Forme de la gravité (`svg.forme[data-icone-gravite]`) et libellé de la grille sur chaque verdict : encadré (R9-*), repères (FORMAT2-REPERE), arbre (FORMAT2-ARBRE), cartes de l'outil (OUTIL-LIBELLES), index de l'outil en deux grilles par couleur (OUTIL-INDEX, WCAG 1.4.1) | **Vérifié** |
 | 8 | Encadré de décision premier bloc après le H1 | R9-ENCADRE-POSITION sur toutes les pages éditoriales de la démonstration | **Vérifié** |
 | 9 | Liste de recette de l'étape 9 repassée avant chaque fusion (dont le filtre de l'outil et le rendu sur un vrai téléphone) | Aucune page publiée à F1 | **Sans objet à F1** ; à faire à F2 et F3 (§5) |
-| 10 | Contrôles au vert | CI de la PR (jobs « Contrôles », « Démonstration du format 2 », « Recette des exemples », « Lighthouse mobile ») | **À vérifier** sur le dernier commit de la PR |
+| 10 | Contrôles au vert | CI de la PR (jobs « Contrôles », « Démonstration du format 2 », « Recette des exemples », « Lighthouse mobile »), tous les quatre exigés par la protection de `main` (§4, point 10) | **Vérifié** : les quatre verts sur le dernier commit de la PR (exécution citée dans sa description) |
 | 11 | Revue indépendante | Une seule, lancée par le chat sur la PR complète (décision du 16/11) | **À faire** |
 | 12 | Validation de Houssem | – | **À faire** |
 
@@ -157,8 +157,10 @@ Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/
    compact (dessin du bouton effacé, aujourd'hui sous 360 px) peut s'étendre jusqu'à 400 px : il tient alors sur une ligne
    (mesuré à 360 px avec DejaVu Sans) ; à décider sur captures.
 10. **Job « Démonstration du format 2 »** : c'est le seul qui fait tourner FORMAT2-MESURES (et la recette des exemples, sans
-    page au format 2 aujourd'hui) ; il n'est pas exigé par la protection de `main`. Houssem est sollicité pour l'ajouter aux
-    vérifications exigées (réglage du dépôt, hors du code).
+    page au format 2 aujourd'hui). Houssem l'a ajouté aux vérifications exigées par la protection de `main` le 16/11 vers
+    18 h 14 (heure de Tunis) : la protection exige aujourd'hui « Contrôles », « Lighthouse mobile », « Recette des
+    exemples » et « Démonstration du format 2 ». **Vérifié** par l'API GitHub :
+    `gh api repos/houssem-jeddou/decodauto/branches/main/protection/required_status_checks`.
 11. **Écart au pilote : bloc « Notices / Base du coût »** détaillé par ligne de l'encadré (« Ligne 1 : d'après… ; Ligne 2 :
     … », règle 2b, phrases tirées des sources de chaque ligne), plus long que le bloc du pilote. Entre le bas de
     l'encadré et le haut de l'illustration (signature, ligne de transparence, bloc « Notices ») : AdBlue 483 px contre 352 au
