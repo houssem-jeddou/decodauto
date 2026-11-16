@@ -1,8 +1,12 @@
 # Lot B1 de la vague B : « voiture ne démarre pas » et « moteur PureTech »
 
-**À valider par Houssem avec la pull request : l'ouverture de la vague B** (`config/vagues-ouvertes.json` : `["A", "B"]`,
-règle des vagues ouvertes). La pull request reste en brouillon jusqu'à cette validation. Les deux pages elles-mêmes sont
-déjà validées (16/11/2026, 19 h 26, « Je valide les exemples de la porte 10 », journal, PR n° 72).
+**Ouverture de la vague B** (`config/vagues-ouvertes.json` : `["A", "B"]`, règle des vagues ouvertes) : décidée par
+Claude le 17/11/2026 vers 0 h 20 (heure de Tunis), sur la délégation de Houssem du 17/11 à 0 h 13 (il part dormir et
+donne le feu vert pour valider seul, en partant de la recommandation de Claude ; restent à Houssem les verdicts de
+sécurité nouveaux, qu'il n'a pas vus). Ce lot n'apporte aucun verdict nouveau : les deux pages sont celles que Houssem a
+validées (16/11/2026, 19 h 26, « Je valide les exemples de la porte 10 », journal, PR n° 72), identiques à `b9b0835`.
+Revue indépendante faite (« à corriger », rien de bloquant), corrections intégrées. Reste à faire par Houssem après la
+mise en ligne : le rendu sur un vrai téléphone (liste de recette).
 
 Brief : `travaux/etape-10/taches/B1-pr.md` (branche `preparation/etape-10`). Branche `etape-10/lot-b1`, depuis `main` à
 a2b36ce (lot F2 fusionné).
