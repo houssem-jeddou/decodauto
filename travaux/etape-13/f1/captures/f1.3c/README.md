@@ -1,5 +1,15 @@
 # Captures et mesures des pages panne, dossier et tutoriel au format 2 (lot F1, tâche F1.3c et sa revue)
 
+**Refaites le 16/11/2026 à F1.4** (porte du lot F1), sur la démonstration de la branche `etape-13/f1-porte`, PNG sans perte
+(couleurs exactes ; une capture en police de secours identique octet pour octet à celle en police chargée n'est pas gardée).
+Changements visibles depuis la prise précédente : ligne de transparence en 13 px et couleur douce (elle n'était pas stylée :
+pages plus courtes d'environ 44 px), contour de focus bleu clair sur fond sombre, bandeau sans débordement à 320 px, rangée
+« dépannage » de F1.3b sans triangle ; **ordre de la page panne de la demande n° 32** (texte jusqu'à la partie de
+l'arbre ou des étapes, causes, suite du texte) ; la vue `1366-corps` montre désormais toute la colonne (le texte est en deux
+blocs, de part et d'autre des causes). Captures avant et après le changement d'ordre : `../demande-32/`. Les mesures de ce dossier (`mesures.json`) sont celles de cette prise ; les mesures de
+la porte, toutes pages et trois largeurs, sont dans `travaux/etape-13/f1/porte/mesures-format2.json` (FORMAT2-MESURES), qui
+font foi quand un tableau plus bas date d'une prise antérieure.
+
 Prises le 16/11/2026 par `capturer.cjs` sur la construction de démonstration du format 2 (`npm run demo:format2`) : les
 pages de démonstration de `tests/demo/format2` (Markdown rendu par Astro, comme une vraie page ; jamais publiées), et la
 planche des états de l'arbre (`planche.ts` : une question par gravité, de 0 à 3, chaque réponse terminée par la pastille du

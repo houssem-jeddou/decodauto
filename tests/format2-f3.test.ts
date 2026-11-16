@@ -172,7 +172,9 @@ describe('format 2 : socle et page 404 (F1.3b)', () => {
     assert.equal($('main > .page > .colonne.socle > [data-corps]').length, 1);
     assert.ok($('[data-auteur]').hasClass('encart') && $('[data-methode]').hasClass('encart'));
     assert.equal($('[data-methode] .tableau > table.definitions').length, $('[data-methode] table.definitions').length);
-    assert.equal($('[data-encadre-decision], [data-illustration], [data-emplacement-pub], [data-sommaire]').length, 0);
+    assert.equal($('[data-encadre-decision], [data-illustration], [data-emplacement-pub]').length, 0);
+    // Deux titres (fiche de l'auteur, « Méthode ») : sommaire du socle (règle 2h, F1.4).
+    assert.equal($('[data-sommaire]').length, 2);
     assert.deepEqual(regles([...constatsPageAPropos(html, 'a-propos.html'), ...constatsMentionEtSignalement(html, 'a-propos.html', '/a-propos/'), ...constatsTypographie(html, 'a-propos.html')]), []);
     assert.ok(regles(constatsPageAPropos(modifie(html, ($$) => $$('[data-methode]').remove()), 'x')).includes('METHODE-SECTION'));
     assert.ok(regles(constatsPageAPropos(modifie(html, ($$) => $$('[data-auteur]').remove()), 'x')).includes('AUTEUR-FICHE'));
@@ -189,9 +191,12 @@ describe('format 2 : socle et page 404 (F1.3b)', () => {
     assert.deepEqual(cibles.slice(0, 3), ['#a', '#b', '#c']);
     assert.ok(cibles.includes('#methode') && cibles.some((c) => c.startsWith('#auteur-')));
     for (const c of cibles) assert.equal($(c).length, 1, c);
-    // Mentions légales : deux titres, pas de sommaire.
+    // Mentions légales : deux titres (mentions, confidentialité) et plus de six écrans : sommaire aussi (règle 2h, F1.4) ;
+    // une page du socle d'un seul titre n'en a pas.
     const mentions = { ...(await lire('src/content/socle/mentions-legales.md')), format: 2 as const };
-    assert.equal(cheerio.load(pageSocle(mentions, '<h2>Confidentialité</h2><p>Texte.</p>'))('[data-sommaire]').length, 0);
+    const $m = cheerio.load(pageSocle(mentions, '<h2>Confidentialité</h2><p>Texte.</p>'));
+    assert.deepEqual($m('.sommaire-cote a').toArray().map((a) => $m(a).attr('href')), ['#da-mentions-legales', '#confidentialite']);
+    assert.equal(cheerio.load(pageSocle({ ...mentions, id: 'autre' } as typeof mentions, '<h2 id="x">X</h2><p>Texte.</p>'))('[data-sommaire]').length, 0);
   });
 
   test('mentions légales : bloc des mentions en fiche (carte), avant la politique ; contrôles verts, cas en échec', async () => {

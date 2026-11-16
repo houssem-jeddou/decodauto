@@ -1,0 +1,158 @@
+{
+  "perte-de-puissance-chargee": {
+    "basEncadre": 986,
+    "illustration": 1281,
+    "sommaire": 1536,
+    "fiche": 1645,
+    "arbre": 2874,
+    "etapes": null,
+    "causes": 1975,
+    "sommaireOrdre": [
+      "Le symptôme en bref",
+      "Causes possibles",
+      "Le voyant moteur est rouge : que faire ?",
+      "Selon ce que vous voyez",
+      "En côte ou en charge",
+      "Le turbo"
+    ],
+    "hauteur": 5118
+  },
+  "perte-de-puissance-secours": {
+    "basEncadre": 986,
+    "illustration": 1281,
+    "sommaire": 1536,
+    "fiche": 1645,
+    "arbre": 2874,
+    "etapes": null,
+    "causes": 1975,
+    "sommaireOrdre": [
+      "Le symptôme en bref",
+      "Causes possibles",
+      "Le voyant moteur est rouge : que faire ?",
+      "Selon ce que vous voyez",
+      "En côte ou en charge",
+      "Le turbo"
+    ],
+    "hauteur": 5118
+  },
+  "voiture-qui-broute-chargee": {
+    "basEncadre": 894,
+    "illustration": 1189,
+    "sommaire": 1443,
+    "fiche": 1534,
+    "arbre": 2076,
+    "etapes": null,
+    "causes": 1818,
+    "sommaireOrdre": [
+      "Le symptôme en bref",
+      "Causes possibles",
+      "Selon ce que vous voyez",
+      "Au démarrage",
+      "À bas régime"
+    ],
+    "hauteur": 3442
+  },
+  "voiture-qui-broute-secours": {
+    "basEncadre": 894,
+    "illustration": 1189,
+    "sommaire": 1443,
+    "fiche": 1534,
+    "arbre": 2076,
+    "etapes": null,
+    "causes": 1818,
+    "sommaireOrdre": [
+      "Le symptôme en bref",
+      "Causes possibles",
+      "Selon ce que vous voyez",
+      "Au démarrage",
+      "À bas régime"
+    ],
+    "hauteur": 3442
+  },
+  "changer-la-batterie-chargee": {
+    "basEncadre": 863,
+    "illustration": 1140,
+    "sommaire": 1375,
+    "fiche": 1465,
+    "arbre": null,
+    "etapes": 2411,
+    "causes": 2033,
+    "sommaireOrdre": [
+      "La situation en bref",
+      "Le tutoriel en bref",
+      "Causes possibles",
+      "Avant de commencer",
+      "Les étapes",
+      "Ce qu’il faut vérifier ensuite"
+    ],
+    "hauteur": 3762
+  },
+  "changer-la-batterie-secours": {
+    "basEncadre": 863,
+    "illustration": 1140,
+    "sommaire": 1375,
+    "fiche": 1465,
+    "arbre": null,
+    "etapes": 2411,
+    "causes": 2033,
+    "sommaireOrdre": [
+      "La situation en bref",
+      "Le tutoriel en bref",
+      "Causes possibles",
+      "Avant de commencer",
+      "Les étapes",
+      "Ce qu’il faut vérifier ensuite"
+    ],
+    "hauteur": 3762
+  },
+  "voiture-ne-demarre-pas-chargee": {
+    "basEncadre": 1983,
+    "illustration": 2406,
+    "sommaire": 2719,
+    "fiche": 2828,
+    "arbre": 5666,
+    "etapes": null,
+    "causes": 3158,
+    "sommaireOrdre": [
+      "Le symptôme en bref",
+      "Causes possibles",
+      "Que faire quand la voiture ne démarre pas ?",
+      "Le bon geste selon ce qui se passe",
+      "Voiture qui ne démarre pas, voyants faibles ou éteints : la batterie",
+      "Après le démarrage : peut-on rouler tout de suite ?",
+      "Diesel : attendre que le voyant de préchauffage s’éteigne",
+      "Le démarreur tourne mais le moteur ne démarre pas",
+      "Diesel en panne sèche : le réamorçage",
+      "Clé ou carte non reconnue : le démarrage de secours",
+      "Volant bloqué, clé qui ne tourne pas",
+      "Pousser la voiture pour la faire démarrer ?",
+      "Ma voiture ne démarre pas malgré une batterie neuve"
+    ],
+    "hauteur": 13061
+  },
+  "voiture-ne-demarre-pas-secours": {
+    "basEncadre": 1983,
+    "illustration": 2406,
+    "sommaire": 2719,
+    "fiche": 2828,
+    "arbre": 5692,
+    "etapes": null,
+    "causes": 3158,
+    "sommaireOrdre": [
+      "Le symptôme en bref",
+      "Causes possibles",
+      "Que faire quand la voiture ne démarre pas ?",
+      "Le bon geste selon ce qui se passe",
+      "Voiture qui ne démarre pas, voyants faibles ou éteints : la batterie",
+      "Après le démarrage : peut-on rouler tout de suite ?",
+      "Diesel : attendre que le voyant de préchauffage s’éteigne",
+      "Le démarreur tourne mais le moteur ne démarre pas",
+      "Diesel en panne sèche : le réamorçage",
+      "Clé ou carte non reconnue : le démarrage de secours",
+      "Volant bloqué, clé qui ne tourne pas",
+      "Pousser la voiture pour la faire démarrer ?",
+      "Ma voiture ne démarre pas malgré une batterie neuve"
+    ],
+    "hauteur": 13112
+  }
+}

@@ -3,6 +3,10 @@
 Notes de la mise en œuvre de F1.2 et de ses deux revues indépendantes (16/11/2026). `docs/` ne se modifie qu'après la
 validation de Houssem, par la pull request de la copie : ces points y entrent à F1.4, avec la porte du format.
 
+**F1.4 (16/11/2026)** : ces points sont repris, mot pour mot à reporter, dans `travaux/etape-13/f1/porte-f1.md`, §6
+(« Textes proposés ») ; ce qui était « à faire à F1.4 » est fait (débordement à 320 px, ligne de transparence, contour de
+focus sur fond sombre, captures refaites) ; ce qui reste pour F2, F3 et la vague B est au §5 du dossier.
+
 ## Charte graphique (`docs/11`)
 - **§4, repère de section (règle retenue à la seconde revue de F1.2)** : un repère seulement sous un H2 qui pose la question
   d'une seule ligne de l'encadré ; une exception explicite à une autre ligne dans le texte est admise (exemple : FAP avec le
@@ -24,7 +28,8 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
     réponses en liste à puces ; un verdict cité est une pastille en ligne (forme de la gravité, libellé de la grille, liseré
     de sa couleur) ; aucun libellé de verdict écrit à la main (FORMAT2-ARBRE) ;
   - *fiches « Le symptôme en bref » et « Le tutoriel en bref »* : carte, intitulé en gras au-dessus de sa valeur, rangées séparées ;
-  - *causes* : cartes de la page voyant, avant le texte sur la page panne (ordre §4) ;
+  - *causes* : cartes de la page voyant ; sur la page panne, après la partie du texte qui porte l'arbre ou les étapes
+    (demande de changement n° 32, acceptée le 16/11 à 16 h 52, mise en œuvre à F1.4 ; avant : avant le texte) ;
   - *historique du dossier* : carte, une entrée par rangée séparée d'un filet, date en gras, du plus récent au plus ancien ;
   - *tableaux du texte* : bloc de la charte ; au-delà de trois colonnes, une carte par rangée sur téléphone (intitulé de la
     colonne devant chaque valeur), tableau ordinaire sur ordinateur ;
@@ -93,7 +98,7 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
     si le plan lie les deux pages (FORMAT2-ECART). **Écart au pilote, à noter à la porte F1** : le pilote répétait le tableau
     des notices du voyant de pression sur la page « pression des pneus » ; il n'y est plus, la ligne d'écart renvoie à la
     page du voyant (un seul tableau par voyant, sur sa page). Paire manquante dans le plan : `batterie-changer` ↔
-    `voyant-batterie` (page « changer la batterie », vague B), proposée par Houssem avec le lot F3 ;
+    `voyant-batterie` (page « changer la batterie », vague B), proposée avec le lot de la vague B qui publie cette page ;
   - *dépannage sur autoroute* : triangle retiré (forme réservée aux verdicts, §1.4 ; docs/10 §4, point 4), cellule et gras
     gardés ;
   - *cas décrits par marque* (téléphone) : une seule carte, un cas par rangée, un seul filet entre deux cas, la marque en
@@ -128,8 +133,10 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
   `{{cite:…}}` (règle 2d).
 - **Dépannage sur autoroute** : besoin d'un encart avec la consigne sourcée (Service-public F11056, sans numéro de
   téléphone) : texte nouveau et champ de données. Houssem rédige la demande de changement pour F3.
+
+## Vague B : à reprendre avec le lot de la page
 - **Paire de liens du plan** : `batterie-changer` ↔ `voyant-batterie`, pour le renvoi « Votre marque » de la page « changer
-  la batterie » (vague B).
+  la batterie » ; proposée avec le lot de la vague B qui publie cette page (revue de la porte F1, M4), pas avec F3.
 
 ## Liste de recette (`docs/03`, étape 9) : à ajouter pour les lots au format 2
 - Repères de section : un repère seulement sous un H2 qui pose la question d'une seule ligne de l'encadré (exception explicite

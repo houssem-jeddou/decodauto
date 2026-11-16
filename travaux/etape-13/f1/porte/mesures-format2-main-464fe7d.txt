@@ -1,0 +1,137 @@
+FORMAT2-MESURES : 14 page(s) au format 2 dans ../../../tmp/claude-0/-home-user-decodauto/b94f8bcf-9ace-50b7-9f87-2c66fa4c0e76/scratchpad/wt-main/dist-demo-format2
+Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situation | Bas de l’encadré | Illustration | Après « Notices » | Arbre ou étapes | Hauteur | Largeur de page | Débordements
+/ | 320 | chargée | – | – | – | – | 0 | non | – | 2361 | 335 | 1
+/ | 375 | chargée | – | – | – | – | 0 | non | – | 2207 | 375 | 0
+/ | 1366 | chargée | – | – | – | – | 97 | non | – | 1399 | 1366 | 0
+/404.html | 320 | chargée | – | – | – | – | – | non | – | 640 | 320 | 0
+/404.html | 375 | chargée | – | – | – | – | – | non | – | 667 | 375 | 0
+/404.html | 1366 | chargée | – | – | – | – | – | non | – | 800 | 1366 | 0
+/a-propos/ | 320 | chargée | – | – | – | – | – | non | – | 10426 | 335 | 1
+/a-propos/ | 375 | chargée | – | – | – | – | – | non | – | 8286 | 375 | 0
+/a-propos/ | 1366 | chargée | – | – | – | – | – | non | – | 4816 | 1366 | 0
+/batterie-voiture/changer/ | 320 | chargée | – | 446 | 657 | 979 | 1365 | oui | 2630 | 3946 | 335 | 1
+/batterie-voiture/changer/ | 375 | chargée | – | 411 | 580 | 863 | 1187 | oui | 2458 | 3681 | 375 | 0
+/batterie-voiture/changer/ | 1366 | chargée | – | 272 | 359 | 542 | 739 | oui | 1989 | 2976 | 1366 | 0
+/codes-defaut/p0420/ | 320 | chargée | – | 434 | 624 | 1010 | 1452 | oui | – | 10430 | 335 | 1
+/codes-defaut/p0420/ | 375 | chargée | – | 399 | 547 | 872 | 1252 | oui | – | 9175 | 375 | 0
+/codes-defaut/p0420/ | 1366 | chargée | – | 309 | 375 | 558 | 793 | oui | – | 5987 | 1366 | 0
+/loi-montagne/ | 320 | chargée | – | 480 | 649 | 1529 | 1896 | oui | – | 9803 | 335 | 1
+/loi-montagne/ | 375 | chargée | – | 442 | 591 | 1350 | 1674 | oui | – | 8539 | 375 | 0
+/loi-montagne/ | 1366 | chargée | – | 308 | 374 | 848 | 1065 | oui | – | 5486 | 1366 | 0
+/mentions-legales/ | 320 | chargée | – | – | – | – | – | non | – | 5112 | 335 | 1
+/mentions-legales/ | 375 | chargée | – | – | – | – | – | non | – | 4470 | 375 | 0
+/mentions-legales/ | 1366 | chargée | – | – | – | – | – | non | – | 3002 | 1366 | 0
+/moteur-puretech/ | 320 | chargée | – | 430 | 579 | 1178 | 1583 | oui | – | 4018 | 335 | 1
+/moteur-puretech/ | 375 | chargée | – | 373 | 481 | 964 | 1307 | oui | – | 3625 | 375 | 0
+/moteur-puretech/ | 1366 | chargée | – | 272 | 338 | 617 | 833 | oui | – | 2661 | 1366 | 0
+/perte-de-puissance-voiture/ | 320 | chargée | – | 465 | 572 | 1156 | 1561 | oui | 3206 | 5829 | 335 | 1
+/perte-de-puissance-voiture/ | 375 | chargée | – | 411 | 498 | 986 | 1329 | oui | 2922 | 5166 | 375 | 0
+/perte-de-puissance-voiture/ | 1366 | chargée | – | 272 | 318 | 617 | 833 | oui | 2194 | 3976 | 1366 | 0
+/pression-des-pneus/ | 320 | chargée | 452 | 677 | 909 | 1294 | 1699 | oui | – | 9130 | 335 | 1
+/pression-des-pneus/ | 375 | chargée | 405 | 576 | 766 | 1091 | 1433 | oui | – | 8208 | 375 | 0
+/pression-des-pneus/ | 1366 | chargée | 293 | 384 | 470 | 653 | 869 | oui | – | 5187 | 1366 | 0
+/voiture-qui-broute/ | 320 | chargée | – | 465 | 572 | 1053 | 1458 | oui | 2369 | 3920 | 335 | 1
+/voiture-qui-broute/ | 375 | chargée | – | 385 | 472 | 894 | 1236 | oui | 2123 | 3490 | 375 | 0
+/voiture-qui-broute/ | 1366 | chargée | – | 272 | 318 | 576 | 792 | oui | 1682 | 2880 | 1366 | 0
+/voyants/ | 320 | chargée | – | 546 | 736 | 1711 | 2211 | oui | – | 25859 | 320 | 0
+/voyants/ | 375 | chargée | – | 489 | 638 | 1455 | 1873 | oui | – | 22100 | 375 | 0
+/voyants/ | 1366 | chargée | – | 379 | 445 | 913 | 1167 | oui | – | 12908 | 1366 | 0
+/voyants/adblue/ | 320 | chargée | – | 536 | 685 | 2671 | 3284 | oui | – | 16017 | 335 | 1
+/voyants/adblue/ | 375 | chargée | – | 493 | 601 | 2280 | 2811 | oui | – | 13916 | 375 | 0
+/voyants/adblue/ | 1366 | chargée | – | 324 | 390 | 1254 | 1545 | oui | – | 8428 | 1366 | 0
+/voyants/moteur/ | 320 | chargée | – | 458 | 648 | 1930 | 2429 | oui | – | 14532 | 335 | 1
+/voyants/moteur/ | 375 | chargée | – | 373 | 522 | 1593 | 2030 | oui | – | 12634 | 375 | 0
+/voyants/moteur/ | 1366 | chargée | – | 272 | 338 | 899 | 1153 | oui | – | 8153 | 1366 | 0
+/ | 320 | secours | – | – | – | – | 0 | non | – | 2361 | 342 | 1
+/ | 375 | secours | – | – | – | – | 0 | non | – | 2239 | 375 | 0
+/ | 1366 | secours | – | – | – | – | 97 | non | – | 1399 | 1366 | 0
+/404.html | 320 | secours | – | – | – | – | – | non | – | 640 | 320 | 0
+/404.html | 375 | secours | – | – | – | – | – | non | – | 667 | 375 | 0
+/404.html | 1366 | secours | – | – | – | – | – | non | – | 800 | 1366 | 0
+/a-propos/ | 320 | secours | – | – | – | – | – | non | – | 10426 | 342 | 1
+/a-propos/ | 375 | secours | – | – | – | – | – | non | – | 8286 | 375 | 0
+/a-propos/ | 1366 | secours | – | – | – | – | – | non | – | 4816 | 1366 | 0
+/batterie-voiture/changer/ | 320 | secours | – | 446 | 657 | 979 | 1365 | oui | 2630 | 3946 | 342 | 1
+/batterie-voiture/changer/ | 375 | secours | – | 411 | 580 | 863 | 1187 | oui | 2458 | 3681 | 375 | 0
+/batterie-voiture/changer/ | 1366 | secours | – | 272 | 359 | 542 | 739 | oui | 1989 | 2976 | 1366 | 0
+/codes-defaut/p0420/ | 320 | secours | – | 434 | 624 | 1010 | 1452 | oui | – | 10455 | 342 | 1
+/codes-defaut/p0420/ | 375 | secours | – | 399 | 547 | 872 | 1252 | oui | – | 9226 | 375 | 0
+/codes-defaut/p0420/ | 1366 | secours | – | 309 | 375 | 558 | 793 | oui | – | 6038 | 1366 | 0
+/loi-montagne/ | 320 | secours | – | 505 | 675 | 1554 | 1922 | oui | – | 9854 | 342 | 1
+/loi-montagne/ | 375 | secours | – | 442 | 591 | 1350 | 1674 | oui | – | 8640 | 375 | 0
+/loi-montagne/ | 1366 | secours | – | 308 | 374 | 848 | 1065 | oui | – | 5486 | 1366 | 0
+/mentions-legales/ | 320 | secours | – | – | – | – | – | non | – | 5112 | 342 | 1
+/mentions-legales/ | 375 | secours | – | – | – | – | – | non | – | 4470 | 375 | 0
+/mentions-legales/ | 1366 | secours | – | – | – | – | – | non | – | 3002 | 1366 | 0
+/moteur-puretech/ | 320 | secours | – | 430 | 579 | 1178 | 1583 | oui | – | 4018 | 342 | 1
+/moteur-puretech/ | 375 | secours | – | 373 | 481 | 964 | 1307 | oui | – | 3650 | 375 | 0
+/moteur-puretech/ | 1366 | secours | – | 272 | 338 | 617 | 833 | oui | – | 2661 | 1366 | 0
+/perte-de-puissance-voiture/ | 320 | secours | – | 465 | 572 | 1156 | 1561 | oui | 3206 | 5829 | 342 | 1
+/perte-de-puissance-voiture/ | 375 | secours | – | 411 | 498 | 986 | 1329 | oui | 2922 | 5166 | 375 | 0
+/perte-de-puissance-voiture/ | 1366 | secours | – | 272 | 318 | 617 | 833 | oui | 2194 | 3976 | 1366 | 0
+/pression-des-pneus/ | 320 | secours | 452 | 677 | 909 | 1294 | 1699 | oui | – | 9181 | 342 | 1
+/pression-des-pneus/ | 375 | secours | 405 | 576 | 766 | 1091 | 1433 | oui | – | 8208 | 375 | 0
+/pression-des-pneus/ | 1366 | secours | 293 | 384 | 470 | 653 | 869 | oui | – | 5212 | 1366 | 0
+/voiture-qui-broute/ | 320 | secours | – | 465 | 572 | 1053 | 1458 | oui | 2369 | 3920 | 342 | 1
+/voiture-qui-broute/ | 375 | secours | – | 385 | 472 | 894 | 1236 | oui | 2123 | 3490 | 375 | 0
+/voiture-qui-broute/ | 1366 | secours | – | 272 | 318 | 576 | 792 | oui | 1682 | 2880 | 1366 | 0
+/voyants/ | 320 | secours | – | 546 | 736 | 1711 | 2211 | oui | – | 25910 | 320 | 0
+/voyants/ | 375 | secours | – | 489 | 638 | 1455 | 1873 | oui | – | 22150 | 375 | 0
+/voyants/ | 1366 | secours | – | 379 | 445 | 913 | 1167 | oui | – | 12933 | 1366 | 0
+/voyants/adblue/ | 320 | secours | – | 562 | 710 | 2697 | 3309 | oui | – | 16042 | 342 | 1
+/voyants/adblue/ | 375 | secours | – | 493 | 601 | 2280 | 2811 | oui | – | 13916 | 375 | 0
+/voyants/adblue/ | 1366 | secours | – | 324 | 390 | 1254 | 1545 | oui | – | 8453 | 1366 | 0
+/voyants/moteur/ | 320 | secours | – | 458 | 648 | 1930 | 2429 | oui | – | 14583 | 342 | 1
+/voyants/moteur/ | 375 | secours | – | 373 | 522 | 1593 | 2030 | oui | – | 12685 | 375 | 0
+/voyants/moteur/ | 1366 | secours | – | 272 | 338 | 899 | 1153 | oui | – | 8153 | 1366 | 0
+ERREUR [FORMAT2-MESURES] / (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] / (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /a-propos/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /a-propos/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /batterie-voiture/changer/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /batterie-voiture/changer/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /codes-defaut/p0420/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /codes-defaut/p0420/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /loi-montagne/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /loi-montagne/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /mentions-legales/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /mentions-legales/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /moteur-puretech/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /moteur-puretech/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /perte-de-puissance-voiture/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /perte-de-puissance-voiture/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /pression-des-pneus/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /pression-des-pneus/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /voiture-qui-broute/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /voiture-qui-broute/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /voyants/adblue/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /voyants/adblue/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /voyants/moteur/ (320 px, police chargée) : la page défile horizontalement (335 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /voyants/moteur/ (320 px, police chargée) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (335)
+ERREUR [FORMAT2-MESURES] /voyants/moteur/ (375 px, police chargée) : illustration à 2030 px : 2001 au plus, soit trois écrans (règle 2i)
+ERREUR [FORMAT2-MESURES] / (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] / (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /a-propos/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /a-propos/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /batterie-voiture/changer/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /batterie-voiture/changer/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /codes-defaut/p0420/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /codes-defaut/p0420/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /loi-montagne/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /loi-montagne/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /mentions-legales/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /mentions-legales/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /moteur-puretech/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /moteur-puretech/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /perte-de-puissance-voiture/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /perte-de-puissance-voiture/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /pression-des-pneus/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /pression-des-pneus/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /voiture-qui-broute/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /voiture-qui-broute/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /voyants/adblue/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /voyants/adblue/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /voyants/moteur/ (320 px, police de secours) : la page défile horizontalement (342 px de large pour 320) : critère WCAG 1.4.10
+ERREUR [FORMAT2-MESURES] /voyants/moteur/ (320 px, police de secours) : 1 élément(s) dépassent le bord droit hors d'un bloc qui défile : a.bouton-voyant (342)
+ERREUR [FORMAT2-MESURES] /voyants/moteur/ (375 px, police de secours) : illustration à 2030 px : 2001 au plus, soit trois écrans (règle 2i)
+Mesures : 14 page(s), 84 mesure(s), 50 erreur(s).

@@ -1,5 +1,13 @@
 # Captures et mesures de la démonstration du format 2 (lot F1, tâche F1.2)
 
+**Refaites le 16/11/2026 à F1.4** (porte du lot F1), sur la démonstration de la branche `etape-13/f1-porte`, PNG sans perte
+(couleurs exactes ; une capture en police de secours identique octet pour octet à celle en police chargée n'est pas gardée).
+Changements visibles depuis la prise précédente : ligne de transparence en 13 px et couleur douce (elle n'était pas stylée :
+pages plus courtes d'environ 44 px), contour de focus bleu clair sur fond sombre, bandeau sans débordement à 320 px, rangée
+« dépannage » de F1.3b sans triangle. Les mesures de ce dossier (`mesures.json`) sont celles de cette prise ; les mesures de
+la porte, toutes pages et trois largeurs, sont dans `travaux/etape-13/f1/porte/mesures-format2.json` (FORMAT2-MESURES), qui
+font foi quand un tableau plus bas date d'une prise antérieure.
+
 Prises le 16/11/2026 après la seconde revue indépendante de F1.2, par `capturer.cjs` (Chromium et Playwright préinstallés de
 l'environnement de Claude), sur :
 - la **démonstration** : `npm run demo:format2` (construction `dist-demo-format2`, jamais déployée), servie en local ;
@@ -8,7 +16,7 @@ l'environnement de Claude), sur :
 
 Fichiers : `<demo|pilote>-<accueil|moteur|adblue>-<375-ecran|375-page|1366-ecran>-<chargee|secours>.png`.
 - `375-ecran` : 375 × 667, premier écran (échelle 2) ; `375-page` : page entière à 375 px (échelle 1) ; `1366-ecran` :
-  1366 × 800 (échelle 1). PNG réduits à 128 couleurs.
+  1366 × 800 (échelle 1). PNG sans perte.
 - Police chargée : la feuille est servie en `font-display: block` pour la capture (état d'un lecteur qui a la police en
   cache ; en `optional`, une police arrivée après le premier rendu peut laisser la police de secours, ce qui avait faussé une
   capture « chargée ») ; police de secours : requêtes de `/polices/` (pilote : `/fonts/`) bloquées. Même fichier de police

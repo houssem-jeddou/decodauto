@@ -10,6 +10,7 @@ import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
+import { constatsArbrePlace } from '../src/lib/controle-format2.ts';
 import { dateDesDonnees } from './date-des-donnees.ts';
 import { controlerPage } from '../src/lib/controle.ts';
 import { constatsExpressionsInterdites, constatsIdentifiants, constatsPartCitee, constatsTexteRedige, constatsTypographie } from '../scripts/lib/dist.ts';
@@ -125,11 +126,16 @@ describe('format 2 : pages panne et dossier (F1.3c et sa revue)', () => {
     assert.equal(cheerio.load(tutoriel.html)('[data-ecart-court] a').length, 0);
   });
 
-  test('page panne : ordre de la charte §4 ; arbre en carte, liste annoncée (role="list") ; chaque pastille termine sa réponse, avec la gravité de son verdict', () => {
-    const marques = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-provenance', 'data-illustration', 'data-sommaire', 'data-fiche-panne', 'data-causes', 'data-corps', 'data-element-unique="arbre-de-decision"', 'data-emplacement-pub', 'data-sources'];
+  test('page panne : ordre de la demande n° 32 (texte jusqu\'à la partie de l\'arbre, causes, suite du texte) ; arbre en carte, liste annoncée (role="list") ; chaque pastille termine sa réponse, avec la gravité de son verdict', () => {
+    const marques = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-provenance', 'data-illustration', 'data-sommaire', 'data-fiche-panne', 'data-corps', 'data-element-unique="arbre-de-decision"', 'data-causes', 'id="en-cote"', 'data-emplacement-pub', 'data-sources'];
     const positions = marques.map((m) => panne.html.indexOf(m));
     assert.ok(positions.every((p) => p >= 0), JSON.stringify(positions));
     assert.deepEqual([...positions].sort((a, b) => a - b), positions);
+    // Les causes sont entre deux blocs du texte rédigé ; le sommaire suit le même ordre.
+    const $o = cheerio.load(panne.html);
+    assert.equal($o('[data-corps]').length, 2);
+    assert.ok($o('[data-causes]').prev().is('[data-corps]') && $o('[data-causes]').next().is('[data-corps]'));
+    assert.deepEqual($o('.sommaire-cote a').toArray().map((a) => $o(a).attr('href')), ['#da-symptome', '#que-faire', '#selon-ce-que-vous-voyez', '#da-causes', '#en-cote', '#turbo']);
     const $ = cheerio.load(panne.html);
     assert.equal($('.arbre > ol[role="list"] > li').length, 4);
     const pastilles = $('.arbre [data-verdict-cite]').toArray().map((el) => $(el));
@@ -161,6 +167,38 @@ describe('format 2 : pages panne et dossier (F1.3c et sa revue)', () => {
     assert.deepEqual(tableau.find('tbody td[role="cell"]').toArray().map((td) => ($(td).attr('data-libelle') ?? '').replace(/[\u00a0\u202f]/g, ' ')), ['Date', 'Moteurs', 'Ce qui est en cause', 'Pièces & main-d’œuvre', 'Âge < 5 ans']);
     assert.ok(!dossier.html.includes('&amp;amp;') && !dossier.html.includes('&amp;lt;'));
     assert.equal($('[data-historique-dossier] ul.historique[role="list"] > li').length, 3);
+  });
+
+  test('tutoriel (demande n° 32) : les causes suivent la partie des étapes ; sommaire dans le même ordre', () => {
+    const $t = cheerio.load(tutoriel.html);
+    const ordre = ['data-fiche-tutoriel', 'id="avant"', 'data-tutoriel-etapes', 'data-causes', 'id="ensuite"'].map((m) => tutoriel.html.indexOf(m));
+    assert.ok(ordre.every((p) => p >= 0), JSON.stringify(ordre));
+    assert.deepEqual([...ordre].sort((a, b) => a - b), ordre);
+    const cibles = $t('.sommaire-cote a').toArray().map((a) => $t(a).attr('href'));
+    assert.ok(cibles.indexOf('#da-causes') === cibles.indexOf('#etapes') + 1, cibles.join(' '));
+  });
+
+  test('FORMAT2-ARBRE-PLACE (demande n° 32) : arbre ou étapes dans la première ou la deuxième partie ; dans la deuxième, première partie d\'un seul paragraphe', () => {
+    const page = (corps: string): string => `<html><body><div class="corps" data-corps>${corps}</div></body></html>`;
+    const arbre = '<div class="arbre" data-element-unique="arbre-de-decision"><ol><li>Q</li></ol></div>';
+    const etapes = '<ol data-tutoriel-etapes><li>É</li></ol>';
+    const regles = (h: string): string[] => constatsArbrePlace(h, 'x').map((c) => c.regle);
+    // Passent : arbre dans la première partie (avant le premier H2, ou sous le premier H2) ; dans la deuxième après un seul
+    // paragraphe (repère et titre mis à part) ; tutoriel sans arbre, étapes dans la deuxième partie ; page sans arbre.
+    assert.deepEqual(regles(page(`<p>Intro.</p>${arbre}<h2>A</h2><p>x</p>`)), []);
+    assert.deepEqual(regles(page(`<h2>A</h2><p>Un.</p>${arbre}<h2>B</h2><p>x</p>`)), []);
+    assert.deepEqual(regles(page(`<h2>A</h2><p data-repere>R</p><p>Un seul.</p><h2>B</h2>${arbre}<h2>C</h2><p>x</p>`)), []);
+    assert.deepEqual(regles(page(`<p>Un seul.</p><h2>Étapes</h2>${etapes}`)), []);
+    assert.deepEqual(regles(page('<h2>A</h2><p>Rien.</p>')), []);
+    // Échouent : arbre dans la troisième partie ; première partie de deux paragraphes ; étapes dans la troisième partie.
+    assert.deepEqual(regles(page(`<h2>A</h2><p>a</p><h2>B</h2><p>b</p><h2>C</h2>${arbre}`)), ['FORMAT2-ARBRE-PLACE']);
+    assert.match(constatsArbrePlace(page(`<h2>A</h2><p>Un.</p><p>Deux.</p><h2>B</h2>${arbre}`), 'x')[0]?.message ?? '', /deuxième partie .* un seul paragraphe \(trouvé : 2 bloc/);
+    assert.deepEqual(regles(page(`<p>Intro.</p><h2>A</h2><p>a</p><h2>B</h2>${etapes}`)), ['FORMAT2-ARBRE-PLACE']);
+    // Les pages de démonstration construites passent (contrôle appelé par controlerPage sur une page panne au format 2).
+    for (const p of [panne, tutoriel]) assert.ok(!p.controle(p.html).includes('FORMAT2-ARBRE-PLACE'), p.page.id);
+    // Arbre déplacé en fin de texte (troisième partie) : refusé par le contrôle de la page.
+    const deplace = modifie(panne.html, ($) => { const a = $('[data-element-unique="arbre-de-decision"]'); $('[data-corps]').last().append(a); });
+    assert.ok(panne.controle(deplace).includes('FORMAT2-ARBRE-PLACE'));
   });
 
   test('cas en échec des branches nouvelles', () => {

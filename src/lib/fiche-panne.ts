@@ -5,8 +5,9 @@
 //  - fiche « Le tutoriel en bref » d'une page au format tutoriel (outils, durée, difficulté, quand ne pas le faire
 //    soi-même ; docs/08 §2) ; les étapes, elles, sont dans le texte rédigé, en liste numérotée marquée « {{etapes}} » ;
 //  - historique d'un dossier (journal des modifications, du plus récent au plus ancien).
-// Tout vient du frontmatter validé : rien n'est saisi dans le HTML. Charte §4, point 7 : pages pannes, symptômes,
-// causes, marche à suivre (l'arbre de décision du texte rédigé donne la marche à suivre selon ce que voit le lecteur).
+// Tout vient du frontmatter validé : rien n'est saisi dans le HTML. Charte §4, point 7, revu par la demande de changement
+// n° 32 : page panne au format 2 = fiches, puis le texte rédigé jusqu'à la partie qui porte l'arbre de décision (ou les
+// étapes), puis les causes, puis la suite du texte (l'arbre donne la marche à suivre selon ce que voit le lecteur).
 // Module sans dépendance à l'exécution : testé sans installation (tests/fiche-panne.test.ts).
 // ---------------------------------------------------------------------------------------------
 import { INSECABLE, texteHtml } from './html.ts';

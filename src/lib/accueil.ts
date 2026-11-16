@@ -77,12 +77,13 @@ export function accueilHtml(donnees: DonneesAccueil): string {
 // LIBELLES_PICTOGRAMMES), et le lien vers l'outil ; puis l'accès par thème et « Un guide
 // indépendant » (second paragraphe, lien vers « à propos »), en cartes. Structure et classes du pilote validé
 // (generer.py, page_accueil), pour src/styles/charte-b.css. Mêmes repères contrôlés qu'au format 1 (ACCUEIL-*).
-// En production, l'accueil reste au format 1 jusqu'au lot F3.
+// En production, l'accueil reste au format 1 jusqu'au lot F2 (docs/03 v20, décision de Houssem du 16/11 : l'accueil passe
+// du lot F3 au lot F2) ; la page 404, qui suit le format de l'accueil, passe avec lui.
 
 /** Illustration du combiné de l'accueil au format 2 (fichier de src/illustrations et texte alternatif), affichée sur ordinateur. */
 export const ILLUSTRATION_ACCUEIL = { fichier: 'accueil-tableau-de-bord', alt: 'Tableau de bord avec plusieurs voyants allumés' } as const;
 
-/** Libellés fixes de l'accueil au format 2, repris du pilote validé ; à relire avec le paquet du lot F3. */
+/** Libellés fixes de l'accueil au format 2, repris du pilote validé ; à relire avec le paquet du lot F2 (docs/03 v20). */
 export const ACCUEIL_FORMAT2 = {
   titreVoyants: 'Quel voyant s’est allumé ?',
   chapoVoyants: 'Touchez le dessin qui ressemble à votre voyant : la page dit si vous pouvez rouler.',

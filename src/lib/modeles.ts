@@ -60,7 +60,7 @@ import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
 import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-voyants.ts';
-import { SOMMAIRE_MIN_H2, causesFormat2, pageFormat2, pageVoyantFormat2, pastilleVerdict, sommaireHtml, teteSeule, titresDesSections } from './format2.ts';
+import { causesFormat2, pageFormat2, pageVoyantFormat2, pastilleVerdict, sommaireHtml, teteSeule, titresDesSections } from './format2.ts';
 import { pageOutilFormat2 } from './outil-format2.ts';
 import { REPONSES_MIN_ARBRE, fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, modeleFichePanne, modeleFicheTutoriel } from './fiche-panne.ts';
 
@@ -384,9 +384,11 @@ export const pageVoyant: Modele = (page, site, corpsHtml) => {
 export const pageVoyantF2: Modele = (page, site, corpsHtml) => pageVoyantFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { format2: true }));
 
 /**
- * Page panne au format 2 (lot F1, F1.3c) : même ordre qu'au format 1 (fiche du symptôme, fiche du tutoriel, causes avant le
- * texte), dans la mise en page du format 2 (src/lib/format2.ts, pageFormat2) ; arbre de décision en carte, ses verdicts
- * cités en pastilles ; tableau des notices affiché sans être l'élément unique.
+ * Page panne au format 2 (lot F1, F1.3c ; ordre revu par la demande de changement n° 32, F1.4) : fiche du symptôme (ou de
+ * la situation), fiche du tutoriel, texte rédigé jusqu'à la partie qui porte l'arbre de décision (ou les étapes), causes,
+ * suite du texte (src/lib/format2.ts, pageFormat2 et insererApresPartieArbre) ; arbre de décision en carte, ses verdicts
+ * cités en pastilles ; tableau des notices affiché sans être l'élément unique. FORMAT2-ARBRE-PLACE vérifie que l'arbre est
+ * dans la première ou la deuxième partie du texte.
  */
 export const pagePanneF2: Modele = (page, site, corpsHtml) => {
   if (!('contexte' in page)) throw new Error(`page « ${page.id} » : le modèle panne s'applique à une page panne`);
@@ -394,10 +396,11 @@ export const pagePanneF2: Modele = (page, site, corpsHtml) => {
     avantTexte: [
       fichePanneHtml(modeleFichePanne(page), { format2: true }),
       page.tutoriel !== undefined ? ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel), { format2: true }) : '',
-      causesFormat2(page.causes, site.couts),
     ],
     apresTexte: [],
     tableauElementUnique: false,
+    // Demande de changement n° 32 : les causes suivent la partie du texte qui porte l'arbre (ou les étapes).
+    apresPartieArbre: causesFormat2(page.causes, site.couts),
   });
 };
 
@@ -533,6 +536,12 @@ export const MARQUEUR_CONTACT = '{{contact}}';
  * confidentialité, le titre de la section reçoit son ancre stable, quel que soit le rendu du Markdown. Une référence
  * inconnue, ou une section de confidentialité absente, fait échouer la construction.
  */
+/**
+ * Titres à partir desquels une page du socle au format 2 a un sommaire (règle 2h, F1.4) : deux. Les pages du socle sont
+ * longues (mentions légales : 6,7 écrans de téléphone avec deux titres) ; FORMAT2-MESURES vérifie la règle sur la hauteur.
+ */
+export const SOMMAIRE_MIN_TITRES_SOCLE = 2;
+
 export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date_modification' | 'auteurs' | 'format'>, corpsHtml: string, methodeHtml?: string): string {
   const format2 = page.format === 2;
   const contact = `<!--email_off--><a href="mailto:${ADRESSE_SIGNALEMENT}">${texteHtml(ADRESSE_SIGNALEMENT)}</a><!--/email_off-->`;
@@ -562,11 +571,12 @@ export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date
     `<p class="socle-date" data-socle-date>${texteHtml(`Mis à jour le ${dateAffichee(page.date_modification)}`)}</p>`,
   ];
   // Format 2 (demande de changement n° 30, F1.3b) : tête de page nuit (mention en tête, H1), sans encadré ; texte sur fond
-  // clair ; ni illustration, ni emplacement publicitaire. Sommaire « Sur cette page » dès SOMMAIRE_MIN_H2 titres (règle 2h,
-  // revue de F1.3b : « à propos », plus de douze écrans) : dans la colonne sur téléphone, à droite sur ordinateur.
+  // clair ; ni illustration, ni emplacement publicitaire. Sommaire « Sur cette page » dès SOMMAIRE_MIN_TITRES_SOCLE titres
+  // (règle 2h : « à propos », plus de douze écrans ; mentions légales, plus de six, F1.4) : dans la colonne sur téléphone, à
+  // droite sur ordinateur.
   if (format2) {
     const entrees = titresDesSections(contenu.join(''));
-    const avecSommaire = entrees.length >= SOMMAIRE_MIN_H2;
+    const avecSommaire = entrees.length >= SOMMAIRE_MIN_TITRES_SOCLE;
     return [
       teteSeule(page.title),
       `<div class="page"><div class="colonne socle">${avecSommaire ? sommaireHtml(entrees, 'sommaire-colonne') : ''}${contenu.join('')}</div>`,
