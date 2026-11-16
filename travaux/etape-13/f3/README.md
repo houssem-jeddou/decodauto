@@ -19,7 +19,16 @@ L'accueil et la 404 sont passés au lot F2 (décision de Houssem du 16/11, 17 h 
 - Règle 2e : paragraphes de plus de trois phrases coupés à une limite de phrase (codes : 2 chacun ; loi montagne : 3, dont
   celui de l'amende, qui commence par un montant ; « à propos » : 1). Aucun mot changé hors des phrases citées ci-dessus,
   aucun H2 retiré ni renommé.
+- Pression des pneus : question de l'encadré remise dans l'ordre de la réponse directe (point du lot F3 de
+  `a-reporter-f1.4.md`) : « À quelle pression gonfler mes pneus, et puis-je rouler s'ils sont sous-gonflés ? » (avant :
+  « Puis-je rouler avec des pneus sous-gonflés, et à quelle pression les gonfler ? ») ; la réponse directe répond à la
+  première moitié, la ligne de l'encadré à la seconde. L'encadré change : validation de Houssem et empreinte avec le lot.
 - `verifier-pages-f3.py` (adapté de celui du lot F2) : 0 erreur sur les 7 pages.
+
+## Points ouverts
+- Encart « dépannage sur autoroute » (consigne sourcée, Service-public F11056) : noté pour F3 dans `a-reporter-f1.4.md`,
+  avec une demande de changement (texte nouveau et champ de données) ; pas dans ce brouillon.
+- `config/lots-format2.json` : la pull request du lot y inscrit le lot F3 et ses 7 pages (contrôle FORMAT2-VAGUE, F1.4).
 
 ## Illustrations (règle 2i)
 `generer-illustrations-f3.py` écrit quatre dessins dans `src/illustrations/` ; la pression des pneus reprend le dessin du

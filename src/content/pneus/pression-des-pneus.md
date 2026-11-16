@@ -7,7 +7,7 @@ title: "Pression des pneus : où la lire, comment gonfler ses pneus"
 h1: "Pression des pneus : la valeur du constructeur, pneus froids, au moins une fois par mois"
 description: "La bonne pression est celle du constructeur : étiquette de la porte conducteur, pneus froids, au moins une fois par mois. Où la lire et comment gonfler, marque par marque."
 libelle_court: Pression des pneus
-question_decision: Puis-je rouler avec des pneus sous-gonflés, et à quelle pression les gonfler ?
+question_decision: À quelle pression gonfler mes pneus, et puis-je rouler s'ils sont sous-gonflés ?
 situations:
   - voyant: pression-pneus
 voyants:

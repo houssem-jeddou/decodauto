@@ -13,6 +13,7 @@ jamais sur `main`, jamais de push forcé ni de réécriture d'historique : `main
 
 ## 2. Ce que la pull request contient
 - Les 7 pages du `README.md` du lot, construites avec les modèles de F1.3b (code défaut, pneus et obligations, socle).
+- Le lot F3 et ses 7 pages inscrits dans `config/lots-format2.json` (FORMAT2-VAGUE, F1.4).
 - La démonstration du format 2 (`scripts/lib/demo-format2.ts`, `brouillon-format2.json`) n'emprunte plus de dessin ni de
   texte pour ces pages : retirer de la démonstration ce que les vraies pages portent désormais, comme au lot F2.
 - `date_modification` des 5 pages éditoriales et des 2 pages du socle : date du jour de la mise au point finale (règle 14 b :
