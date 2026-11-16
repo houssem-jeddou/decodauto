@@ -1,13 +1,14 @@
 # Demande de changement n° 31 : sources secondaires, une règle par usage pour toutes les pages éditoriales (charte §2.2, §2.6, méthode)
 
-**Statut : version 2 du 16/11/2026, après la revue indépendante de la version 1 ; seconde revue, puis acceptation de
-Houssem.** Étape 10 (vague B), avant la rédaction des pages ; aucune page n'est rédigée ni publiée par cette demande.
+**Statut : version 2 du 16/11/2026, après la revue indépendante de la version 1 (une seule revue : consigne de Houssem
+du 16/11/2026), à faire accepter par Houssem.** Étape 10 (vague B), avant la rédaction des pages ; aucune page n'est rédigée ni publiée par cette demande.
 
 **Ce qui change depuis la version 1** (revue du 16/11) : la règle n'est plus limitée aux causes des pages panne ; elle
 vaut, par usage, pour toutes les pages éditoriales (la pratique en ligne et le dossier PureTech en avaient déjà besoin) ;
 elle dit ce qu'une source secondaire ne fait jamais (geste conseillé compris), ce que fait une page quand aucune source
 de première main ne décrit une situation, et quand un document décrit un risque plus grave que l'encadré ; la méthode
-publiée et le registre suivent ; deux contrôles se renforcent.
+publiée et le registre suivent ; deux contrôles se renforcent. Correction du 16/11 (relecture partielle de la version 2) : la signification
+d'un code défaut et ses cas par marque, admis depuis le livrable 6.6b, restent dans la liste des usages admis.
 
 ## Éléments concernés
 - `docs/10_charte_editoriale.md` : §2.2, puce « Pages codes défaut : sources techniques secondaires » ; §2.6, phrase
@@ -78,8 +79,8 @@ règle, par usage, valable pour toutes les pages éditoriales** :
   « **Sources secondaires : une règle par usage** (pages codes défaut validées avec le livrable 6.6b ; étendue à toutes
   les pages éditoriales par la demande de changement n° 31). Une source secondaire, inscrite au registre avec sa nature
   et citée sur la page, n'est admise que pour :
-  - les causes d'un code, d'un symptôme ou d'un voyant, leur explication, les vérifications qu'un atelier fait et les
-    valeurs de référence avec leurs conditions de mesure : documents techniques (bulletins et fiches techniques de
+  - la signification d'un code défaut et ses cas par marque ; les causes d'un code, d'un symptôme ou d'un voyant,
+    leur explication, les vérifications qu'un atelier fait et les valeurs de référence avec leurs conditions de mesure : documents techniques (bulletins et fiches techniques de
     constructeur, documents techniques d'équipementier, fabricant de batteries compris, documentation d'un éditeur
     d'outil de diagnostic) ;
   - un programme d'un constructeur (extension de garantie, prise en charge) : sa communication officielle, datée et
