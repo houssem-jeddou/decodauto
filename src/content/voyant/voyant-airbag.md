@@ -30,7 +30,7 @@ sources:
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-14
-date_modification: 2026-11-14
+date_modification: 2026-11-16
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (18 h 23),

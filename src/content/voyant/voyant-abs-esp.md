@@ -36,7 +36,7 @@ sources:
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-14
-date_modification: 2026-11-14
+date_modification: 2026-11-16
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (18 h 23),
@@ -112,7 +112,7 @@ La consigne est alors celle du voyant ABS : {{verdict:abs}}. Si le voyant de fre
 
 Dans la notice Peugeot 208, sur les versions à frein de stationnement électrique, ce message accompagne plusieurs témoins, avec des consignes différentes :
 
-- **témoins du contrôle de stabilité et Service, allumés fixes** : anomalie du freinage de secours, qui ne dispose plus de ses performances optimales ; si le desserrage automatique ne fonctionne pas, la notice demande d'utiliser le desserrage manuel, ou de se rendre dans le réseau Peugeot ou dans un atelier qualifié ({{cite:notice-peugeot-208|p. 17 ; renvoi (3) p. 13}}). La consigne retenue est celle du voyant ESP allumé fixe : {{verdict:esp-defaut}} ;
+- **témoins du contrôle de stabilité et Service, allumés fixes** : anomalie du freinage de secours, qui ne dispose plus de ses performances optimales ; si le desserrage automatique ne fonctionne pas, la notice demande d'utiliser le desserrage manuel, ou de se rendre dans le réseau Peugeot ou dans un atelier qualifié ({{cite:notice-peugeot-208|p. 17 ; renvoi (3) p. 13}}). La consigne est alors celle du voyant ESP allumé fixe : {{verdict:esp-defaut}} ;
 - **témoin Service seul, ou témoins du frein de stationnement électrique** (desserrage automatique indisponible, voiture qui ne peut pas être immobilisée moteur tournant, frein défaillant) : la notice demande de faire appel au réseau Peugeot ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 14 et 16 ; renvoi (2) p. 13}}) ;
 - **témoin rouge du frein de stationnement électrique qui clignote** : le serrage ou le desserrage est défaillant ; la notice impose l'arrêt sur un terrain plat, avec un rapport engagé ou le mode P, puis de couper le contact et de faire appel au réseau Peugeot ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 14 ; renvois (1) et (2) p. 13}}).
 

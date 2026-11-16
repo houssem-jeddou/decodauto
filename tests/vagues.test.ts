@@ -135,9 +135,12 @@ describe('contrôle FORMAT2-VAGUE (demande de changement n° 30, F1.4)', () => {
   const vagueDe = (id: string): string | undefined => vagues[id];
   const regles = (c: readonly { regle: string }[]): string[] => c.map((x) => x.regle);
 
-  test('le fichier du dépôt est lisible et vide tant qu\'aucun lot F2 ou F3 n\'est publié', async () => {
-    assert.deepEqual(await chargerLotsFormat2(racineDepot), []);
-    assert.deepEqual(JSON.parse(await readFile(join(racineDepot, FICHIER_LOTS_FORMAT2), 'utf8')), { pages: [] });
+  test('le fichier du dépôt est lisible et porte le lot F2 : l\'accueil et les pages voyants de la vague A, dans l\'ordre du plan (la page 404, hors du plan, suit l\'accueil)', async () => {
+    const plan = JSON.parse(await readFile(join(racineDepot, 'data/plan-du-site.json'), 'utf8')) as { id: string; type: string; vague: string }[];
+    const lotF2 = ['accueil', ...plan.filter((l) => l.type === 'voyant' && l.vague === 'A').map((l) => l.id)];
+    assert.equal(lotF2.length, 13);
+    assert.deepEqual(await chargerLotsFormat2(racineDepot), lotF2);
+    assert.deepEqual(JSON.parse(await readFile(join(racineDepot, FICHIER_LOTS_FORMAT2), 'utf8')), { pages: lotF2 });
   });
 
   test('lecture : { "pages": [...] } sans doublon ; autre forme refusée', () => {
