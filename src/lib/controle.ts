@@ -26,7 +26,7 @@ import { ID_OUTIL_VOYANTS, controlerLiensDuTexte, controlerStructurePlan, contro
 import { normaliserRecherche } from './texte.ts';
 import { controlerFormat2 } from './controle-format2.ts';
 import { ECART_COURT_MAX_MOTS, FORMAT2, motsDe, renvoiNotices, type RenvoiNotices } from './format2.ts';
-import { ecartDeLaCarte, entreesIndexFormat2, modeleOutilFormat2, outilVoyantsFormat2, texteEntreeIndex } from './outil-format2.ts';
+import { ecartDeLaCarte, lienNoticesDeLaCarte, entreesIndexFormat2, modeleOutilFormat2, outilVoyantsFormat2, texteEntreeIndex } from './outil-format2.ts';
 import {
   coutsSchema,
   montantSchema,
@@ -849,16 +849,13 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         return { notices: nommees.notices.length, phrase: phraseSources({ ...nommees, ecart: l.ecart_marques }) };
       }),
       lienMethode: methode !== undefined ? `${methode.adresse}#${ANCRE_METHODE}` : undefined,
-      renvoisNotices:
-        'outil' in page && page.outil === true
-          ? undefined
-          : (() => {
-              const auTableau = new Set(modeleTableauNotices(lignes, ctx.voyants, ctx.sources, page.id).map((t) => t.voyant));
-              const voisins = indexerPlan(ctx.plan).voisins.get(page.id) ?? new Set<string>();
-              return lignes.map((l) =>
-                l.ecart_marques === undefined ? undefined : renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: ctx.voyants, plan: ctx.plan, voisins, auTableau, construite: (id) => ctx.pagesEcrites?.has(id) === true }),
-              );
-            })(),
+      renvoisNotices: (() => {
+        const auTableau = new Set(modeleTableauNotices(lignes, ctx.voyants, ctx.sources, page.id).map((t) => t.voyant));
+        const voisins = indexerPlan(ctx.plan).voisins.get(page.id) ?? new Set<string>();
+        return lignes.map((l) =>
+          l.ecart_marques === undefined ? undefined : renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: ctx.voyants, plan: ctx.plan, voisins, auTableau, construite: (id) => ctx.pagesEcrites?.has(id) === true }),
+        );
+      })(),
       notices: {
         tableaux: modeleTableauNotices(lignes, ctx.voyants, ctx.sources, page.id),
         // Demande de changement n° 8 : sur une page voyant (hors outil), l'élément unique est le tableau des notices.
@@ -988,7 +985,7 @@ export interface AttendusPage {
   lignes: readonly SourcesDeLigne[];
   /**
    * Format 2 (règle 2b, revue de F1.3b) : renvoi attendu de la ligne d'écart de chaque ligne au tableau des notices
-   * (renvoiNotices ; undefined pour une ligne sans écart). Page outil : non vérifié (ses cartes mènent à la page du voyant).
+   * (renvoiNotices ; undefined pour une ligne sans écart), page outil comprise (ses cartes : controlerOutilVoyants).
    */
   renvoisNotices?: readonly (RenvoiNotices | undefined)[] | undefined;
   /** Adresse attendue du lien « Méthode » (page « à propos » du plan, ancre de la méthode), si elle est dans le plan. */
@@ -1295,11 +1292,20 @@ export function controlerOutilVoyants(html: string, fichier: string, attenduBase
     if (format2 && l.ecart !== undefined) {
       const courte = ligne.find('[data-ecart-court]');
       const vue = courte.clone();
-      vue.find('.vh').remove();
+      vue.find('.vh, a[data-lien-notices]').remove();
       const lue = vue.text().replace(/\s+/g, ' ').trim();
       if (l.ecartCourt === undefined) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : les marques divergent, la ligne d'écart courte (ecart_court) est attendue (plus de repli sur l'écart entier)`, fichier));
       else if (courte.length !== 1 || n(lue) !== n(l.ecartCourt)) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : la ligne d'écart affiche « ${l.ecartCourt} »${lue !== '' && n(lue) === n(l.ecart) ? " (et non l'écart entier)" : ''}`, fichier));
       else if (motsDe(lue) + motsDe(FORMAT2.lienVotreMarque) > ECART_COURT_MAX_MOTS) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : ligne d'écart de plus de ${ECART_COURT_MAX_MOTS} mots, lien « ${FORMAT2.lienVotreMarque} » compris (règle 2b)`, fichier));
+      // Règle 2b étendue à l'outil (16/11/2026) : « Votre marque » mène au tableau de la page du voyant, si elle est
+      // construite ; une ligne rattachée à la page outil (STOP, demande n° 23) n'a pas de tableau, donc pas de lien.
+      const attendu = lienNoticesDeLaCarte(l);
+      const liensCarte = courte.find('a[data-lien-notices]');
+      if (attendu === undefined) {
+        if (liensCarte.length > 0) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : lien « ${FORMAT2.lienVotreMarque} » affiché alors que ${l.page === undefined ? "la page du voyant n'est pas construite, ou que la ligne est rattachée à la page outil (sans tableau des notices, demande n° 23)" : 'aucun tableau ne peut le recevoir'}`, fichier));
+      } else if (liensCarte.length !== 1 || liensCarte.attr('href') !== attendu || n(liensCarte.text()) !== n(FORMAT2.lienVotreMarque)) {
+        constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : la ligne d'écart renvoie au tableau des notices de la page du voyant par un lien « ${FORMAT2.lienVotreMarque} » vers ${attendu}`, fichier));
+      }
     }
     // Format 1 : pictogramme dans un rond (.voyant), icône .icone-gravite ; format 2 : tuile du voyant allumé, forme de la gravité.
     const picto = ligne.find(format2 ? '.tuile[data-pictogramme]' : '.voyant').first();
@@ -1327,7 +1333,9 @@ export function controlerOutilVoyants(html: string, fichier: string, attenduBase
       if (lien === undefined) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : la page ${l.page.adresse} est construite, le lien vers elle manque`, fichier));
       else if (!n(lien.text()).includes(n(l.page.libelle))) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : le lien vers ${l.page.adresse} nomme la page (« ${l.page.libelle} »)`, fichier));
     }
-    const permis = l.page !== undefined ? [l.page.adresse] : [];
+    // Format 2 (règle 2b étendue à l'outil) : le lien « Votre marque » de la ligne d'écart mène à la même page, à son tableau.
+    const lienNotices = format2 ? lienNoticesDeLaCarte(l) : undefined;
+    const permis = [...(l.page !== undefined ? [l.page.adresse] : []), ...(lienNotices !== undefined ? [lienNotices] : [])];
     const enTrop = liens.filter((h) => !permis.includes(h));
     if (enTrop.length > 0) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : lien(s) inattendu(s) ${enTrop.join(', ')} : une ligne ne mène qu'à la page construite du voyant`, fichier));
     if (ligne.parents('details').length > 0) constats.push(erreur('OUTIL-SANS-JS', `ligne « ${l.voyant} » dans un bloc dépliable : verdict et action se lisent sans rien ouvrir`, fichier));

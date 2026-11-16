@@ -64,7 +64,11 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
   - *introduction* : en deux paragraphes, sans changer un mot (règle 2e) ; *titre de groupe* : diode alignée sur la première
     ligne, « 16 cas » insécable ; diode blanche retirée tant qu'aucune ligne blanche n'existe ;
   - *bandeau* : pas de bouton « Trouver mon voyant » sur la page outil elle-même (demande n° 30, §6).
-  À reporter aussi, après validation : **CLAUDE.md, « Outil voyants »** (index par paire et par couleur, au lieu d'« une
+  Règle 2b étendue à l'outil (décision du 16/11/2026, dans houssem-jeddou/decodauto#65) : sur une carte dont la ligne a un
+  écart, et dans l'encadré, « Votre marque » mène au tableau de la page du voyant (`#da-notices-<voyant>`) quand elle est
+  construite ; une ligne rattachée à la page outil (STOP, demande n° 23) n'a pas de tableau, donc pas de lien (FORMAT2-ECART).
+  À reporter aussi, après validation : **CLAUDE.md, « Outil voyants »** (lien « Votre marque » des cartes, en plus du lien
+  vers la page du voyant) (index par paire et par couleur, au lieu d'« une
   entrée `data-outil-index-entree` par ligne » ; ordre des cartes par paire au format 2 ; repères du verdict dans le texte de
   la page outil) et **docs/10 §4** (bouton sans icône ; introduction de l'outil en deux paragraphes).
   Décision du 16/11 : l'illustration (règle 2i) est gardée sur l'outil (sans elle, la grille commence encore au-delà de trois

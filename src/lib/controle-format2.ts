@@ -83,6 +83,11 @@ export function controlerFormat2(
         constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : la ligne d'écart ne peut pas renvoyer au tableau des notices (« ${FORMAT2.lienVotreMarque} ») : ${renvoi.absent}`, fichier));
         return;
       }
+      // Ligne rattachée à la page outil (le voyant STOP, demande n° 23) : pas de tableau, donc aucun lien.
+      if ('aucun' in renvoi) {
+        if (liens.length > 0) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : lien « ${FORMAT2.lienVotreMarque} » affiché alors qu'aucun tableau ne peut le recevoir : ${renvoi.aucun}`, fichier));
+        return;
+      }
       if (liens.length !== 1 || liens.attr('href') !== renvoi.lien || n(texte(liens.first())) !== n(FORMAT2.lienVotreMarque)) {
         constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : la ligne d'écart renvoie au tableau des notices par un lien « ${FORMAT2.lienVotreMarque} » vers ${renvoi.lien}`, fichier));
         return;

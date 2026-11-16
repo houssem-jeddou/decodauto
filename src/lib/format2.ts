@@ -54,7 +54,7 @@ import { dateAffichee, datesAffichees, fourchetteAffichee, libelleRisque, tranch
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import { citation, modeleTableauNotices, CLASSE_CITATION_NOTICE, FIN_TABLEAU_NOTICES, TITRE_TABLEAU_NOTICES, COLONNE_NOTICE, COLONNE_NIVEAU, LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, type RangeeNotice, type TableauVoyant } from './tableau-notices.ts';
 import { emplacementPub } from './emplacements-pub.ts';
-import { indexerPlan } from './plan.ts';
+import { ID_OUTIL_VOYANTS, indexerPlan } from './plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { GRILLE_COUTS, LIBELLE_SELON_LE_VOYANT, LIBELLES_FOURCHETTES } from '../schemas/cout.ts';
 import type { Verdict } from '../schemas/listes.ts';
@@ -182,16 +182,21 @@ export interface LigneFormat2 {
 }
 
 /** Adresse du renvoi, s'il existe. */
-const lienDuRenvoi = (r: RenvoiNotices): string | undefined => ('lien' in r ? r.lien : undefined);
+export const lienDuRenvoi = (r: RenvoiNotices): string | undefined => ('lien' in r ? r.lien : undefined);
 
-/** Renvoi de la ligne d'écart au tableau des notices : son adresse, ou la raison de son absence (FORMAT2-ECART). */
-export type RenvoiNotices = { lien: string } | { absent: string };
+/**
+ * Renvoi de la ligne d'écart au tableau des notices : son adresse ; ou `aucun`, aucun lien attendu (ligne rattachée à la page
+ * outil, qui n'a pas de tableau : le voyant STOP, demande n° 23) ; ou `absent`, la raison d'un renvoi manquant (FORMAT2-ECART).
+ */
+export type RenvoiNotices = { lien: string } | { aucun: string } | { absent: string };
 
 /**
  * Renvoi « Votre marque » d'une ligne dont les marques divergent (règle 2b, revue de F1.3b) : la partie du voyant au tableau
  * des notices (#da-notices-<voyant>), sur la page si le voyant y est rattaché ; sinon sur la page à laquelle il est rattaché
  * (champ « page » de la base), seulement si le plan lie les deux pages et que cette page est construite. Sinon, aucun lien :
  * FORMAT2-ECART échoue avec la raison (paire du plan à proposer, page pas encore construite, ligne saisie sans voyant).
+ * Exceptions (`aucun` : aucun lien attendu) : une ligne rattachée à la page outil (le voyant STOP, demande n° 23) n'a aucun
+ * tableau ; sur la page outil, comme sur ses cartes, le lien n'existe que si la page du voyant est construite.
  * Un seul tableau par voyant, sur sa page : jamais répété ailleurs.
  */
 export function renvoiNotices(entree: {
@@ -209,10 +214,17 @@ export function renvoiNotices(entree: {
   if (voyant === undefined) return { absent: "ligne saisie, sans voyant de la base : aucun tableau des notices où renvoyer" };
   const page = entree.voyants.get(voyant)?.page;
   if (page === undefined) return { absent: `voyant « ${voyant} » absent de la base` };
+  // Ligne rattachée à la page outil (le voyant STOP, demande n° 23) : la page outil n'a pas de tableau des notices.
+  if (page === ID_OUTIL_VOYANTS) return { aucun: `voyant « ${voyant} » rattaché à la page outil, qui n'a pas de tableau des notices (demande n° 23)` };
   if (page === pageId) return entree.auTableau.has(voyant) ? { lien: `#${ancreNotices(voyant)}` } : { absent: `voyant « ${voyant} » rattaché à la page, sans partie au tableau des notices` };
   if (!entree.voisins.has(page)) return { absent: `voyant « ${voyant} » rattaché à la page « ${page} », que le plan ne lie pas à « ${pageId} » : paire de liens ${pageId} ↔ ${page} à proposer` };
   const adresse = entree.plan.get(page)?.adresse;
-  if (adresse === undefined || !entree.construite(page)) return { absent: `voyant « ${voyant} » rattaché à la page « ${page} », pas encore construite` };
+  if (adresse === undefined || !entree.construite(page)) {
+    // Page outil (règle 2b étendue à l'outil, 16/11/2026) : comme ses cartes, le lien n'existe que si la page du voyant est
+    // construite ; ailleurs, une page pas encore construite fait échouer FORMAT2-ECART.
+    if (pageId === ID_OUTIL_VOYANTS) return { aucun: `page « ${page} » du voyant « ${voyant} » pas encore construite (page outil : lien seulement vers une page construite)` };
+    return { absent: `voyant « ${voyant} » rattaché à la page « ${page} », pas encore construite` };
+  }
   return { lien: `${adresse}#${ancreNotices(voyant)}` };
 }
 
