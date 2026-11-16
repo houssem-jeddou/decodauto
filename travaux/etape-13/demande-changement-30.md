@@ -138,3 +138,8 @@ Houssem : « B, format OK avec 2a et 2i ».
   - **2i** : quand le bas de l'encadré dépasse à lui seul trois écrans, le visuel suit immédiatement le bloc « Notices / Base du coût ».
 - **Même message** : chaque page et chaque composant ajoutés sont conçus visuellement avant d'être mis en place (`docs/03`, règle 15 ; charte graphique, §6).
 - **Suite** : mise en œuvre du lot F1 dans les modèles du site (piste B, format, contrôles), avec sa porte : critères de la ligne 13 de `docs/03` vérifiés sur le site construit, revue indépendante, validation de Houssem. Les textes nouveaux se valident avec les paquets des lots F2 et F3.
+
+**Note du 16/11/2026 (demande de changement n° 32, acceptée par Houssem à 16 h 52)** : la précision 2i est assouplie. Le
+visuel suit immédiatement le bloc « Notices / Base du coût », sous la ligne de transparence. Le haut du visuel est mesuré
+à 375 × 667, police chargée et police de secours, et donné dans chaque paquet ; au-delà de trois écrans, le paquet le
+signale et dit pourquoi.
