@@ -226,11 +226,6 @@
       "tranche": "reparation"
     },
     {
-      "id": "ligne-d-echappement",
-      "libelle": "Ligne d'échappement (tuyaux, silencieux, joints)",
-      "tranche": "reparation"
-    },
-    {
       "id": "tuyau-ou-joint-d-echappement",
       "libelle": "Tuyau ou joint d'échappement",
       "tranche": "reparation"
