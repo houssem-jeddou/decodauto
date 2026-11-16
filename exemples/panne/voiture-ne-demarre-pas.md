@@ -158,8 +158,9 @@ Ne multipliez pas les essais : les notices lues demandent de couper le contact e
 5. Le réservoir est-il vide ?
    - Oui : remettez du carburant ; sur un diesel, au moins 5 litres de gazole, puis la procédure de votre notice (le plus souvent, réamorcer le circuit). {{verdict:ligne-4}}
    - Non : après quelques essais, n'insistez pas. {{verdict:ligne-3}}
-6. Le moteur a démarré, mais le voyant batterie reste allumé, ou s'allume en roulant ?
-   - La batterie ne se recharge plus : {{verdict:batterie-rouge}}
+6. Une fois le moteur démarré, le voyant batterie reste-t-il allumé, ou s'allume-t-il en roulant ?
+   - Oui : la batterie ne se recharge plus. {{verdict:batterie-rouge}}
+   - Non : si la voiture a démarré avec une autre batterie, faites contrôler la vôtre dans les jours qui suivent. {{verdict:ligne-1}}
 
 ## Voiture qui ne démarre pas, voyants faibles ou éteints : la batterie
 
