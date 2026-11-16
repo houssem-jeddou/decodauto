@@ -1,0 +1,60 @@
+Brouillon, jamais validé. Sortie de : AVEC_EXEMPLES=1 node scripts/controle.ts --dist dist-exemples --exemples (arbre local de la recette, 16/11/2026)
+
+Mode d'indexation : NON INDEXABLE : noindex partout (variable SITE_INDEXABLE ≠ "true")
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « moteur-orange-fixe » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « moteur-orange-clignotant » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « stop » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « moteur-rouge » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « huile-pression-rouge » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « huile-niveau » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « entretien-vidange » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « batterie-rouge » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « frein-rouge » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « frein-stationnement » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « adblue-reserve » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « adblue-demarrage-impossible » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « adblue-defaut » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « fap » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « prechauffage » : citation de « notice-seat-ibiza » : « immediatement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « prechauffage » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « airbag-defaut » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « airbag-passager-desactive » : citation de « notice-renault-clio-5 » : « imperativement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
+ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « airbag-passager-desactive » : citation de « notice-dacia-sandero-3 » : « imperativement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « airbag-passager-desactive » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « abs » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « abs-et-frein » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « esp-clignotant » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « esp-defaut » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « pression-pneus » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « pression-pneus-systeme » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « direction-orange » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « direction-rouge » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ERREUR [R4-EMPREINTE] data/voyants.json : voyant « temperature-rouge » : l'empreinte de validation ne correspond plus à la ligne (identifiant, nom, couleur, pictogramme et son dessin, situation, verdict, urgence, action, écart, citations). Revalidation par Houssem nécessaire
+ALERTE [R4-MONTANT-VALIDATION-ABSENTE] data/couts.json : prise en charge « couverture-speciale-puretech » : texte pas encore validé par Houssem (empreinte absente) ; une page qui l'afficherait est bloquée
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-abs-esp.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-adblue.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-airbag.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-batterie.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-direction.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-fap.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-frein.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-huile.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-moteur.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-prechauffage.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-pression-pneus.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyants.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/code-defaut/code-p0087.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/code-defaut/code-p0299.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/code-defaut/code-p0420.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/pneus/loi-montagne.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/pneus/pression-des-pneus.md : pas d'image : Google la recommande pour les articles
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/voiture-ne-demarre-pas.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ALERTE [R7-IMAGE-RECOMMANDEE] exemples/panne/voiture-ne-demarre-pas.md : pas d'image : Google la recommande pour les articles
+ERREUR [R4-MONTANT-NON-VALIDE] exemples/dossier/moteur-puretech.md : prise en charge « couverture-speciale-puretech » : son texte n'est pas validé par Houssem (empreinte absente ou différente) ; la page ne peut pas l'afficher
+ERREUR [R4-VALIDATION-ABSENTE] exemples/dossier/moteur-puretech.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ALERTE [R7-IMAGE-RECOMMANDEE] exemples/dossier/moteur-puretech.md : pas d'image : Google la recommande pour les articles
+ALERTE [R1-RATTACHEMENT] data/voyants.json : voyant « temperature-rouge » : la page rattachée « surchauffe-moteur » n'est pas encore écrite
+INFO construction de recette des exemples (exemples/) : jamais déployée
+INFO 11 mot(s)-clé(s) servi(s) dans une autre vague que celle de docs/05 : voyant-fap (B → A) : 1 ; surchauffe-moteur (A → B) : 9 ; batterie-voiture (A → B) : 1
+INFO 42 lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites
+Contrôle : 21 page(s) éditoriale(s), 29 erreur(s) bloquante(s), 24 alerte(s). Mode d'indexation : non indexable.
