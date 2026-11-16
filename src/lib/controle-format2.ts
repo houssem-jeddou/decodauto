@@ -13,11 +13,14 @@
 //    l'encadré (règle 2d) ;
 //  - FORMAT2-REPLIE : chaque extrait cité du tableau des notices est dans une partie dépliable, au libellé unique sur la
 //    page (règle 2f) ; « Sources » est repliée (details fermé) et son résumé donne leur nombre (règle 2g) ;
-//  - FORMAT2-METHODE : ni « Verdict retenu », ni le mot « édition », ni une page écrite à la main (« p. 13 ») dans le texte
+//  - FORMAT2-METHODE : ni « Verdict(s) retenu(s) », ni « consigne(s) retenue(s) », ni le mot « édition », ni une page écrite à la main (« p. 13 ») dans le texte
 //    rédigé, hors citation (règle 2d) ;
 //  - FORMAT2-ARBRE : dans chaque arbre de décision, chaque verdict cité est une pastille (forme, gravité et libellé d'une
 //    ligne de l'encadré) qui termine une réponse,
 //    jamais un libellé écrit hors pastille (F1.3c) ;
+//  - FORMAT2-ARBRE-PLACE : sur une page panne, l'arbre de décision (ou les étapes d'un tutoriel) est dans la première ou
+//    la deuxième partie du texte rédigé ; dans la deuxième, la première est un seul paragraphe (demande n° 32 ; F1.4) ;
+//  - FORMAT2-PARAGRAPHES : un paragraphe du texte rédigé a trois phrases au plus (règle 2e ; F1.4), pages du socle comprises ;
 //  - FORMAT2-SOMMAIRE : dès SOMMAIRE_MIN_H2 titres H2 dans le texte rédigé, un sommaire « Sur cette page » qui mène à
 //    chacun d'eux, sans lien vers une ancre absente (règle 2h).
 // Les mesures de hauteur (2a, 2i : premier écran, trois écrans) se font à la porte, avec un navigateur (conception, §5).
@@ -172,12 +175,16 @@ export function controlerFormat2(
   corps.find('blockquote, q, .notices-citation').remove();
   const sansCitations = texte(corps).replace(/«[^»]*»/g, ' ');
   const methode = [
-    /verdict retenu/i.test(sansCitations) ? '« Verdict retenu »' : '',
+    // « Verdict retenu », « Verdicts retenus » (forme de la page FAP), « consigne(s) retenue(s) » (F1.4) : la méthode sort du texte.
+    /verdicts?[\s\u00a0\u202f]+retenus?/i.test(sansCitations) ? '« Verdict retenu »' : '',
+    /consignes?[\s\u00a0\u202f]+retenues?/i.test(sansCitations) ? '« consigne retenue »' : '',
     /(^|[^\p{L}])[ée]ditions?(?![\p{L}])/iu.test(sansCitations) ? '« édition »' : '',
     // Page écrite à la main (« p. 139 ») : au format 2, une page citée s'écrit « {{cite:…}} » (rendue dans « Sources »).
     /(^|[^\p{L}])p\.[\s\u00a0\u202f]*\d/u.test(sansCitations) ? 'une page écrite à la main (« p. » suivi d\'un chiffre)' : '',
   ].filter((m) => m !== '');
   if (methode.length > 0) constats.push(erreur('FORMAT2-METHODE', `le texte rédigé contient ${methode.join(' et ')} hors citation : au format 2, la méthode sort du texte, qui nomme la marque et le modèle ; les éditions et références vont dans « Sources » (règle 2d)`, fichier));
+
+  constats.push(...constatsParagraphes(html, fichier));
 
   // Arbre de décision (F1.3c et sa revue) : chaque verdict cité l'est en pastille (forme et libellé, jamais la couleur
   // seule), au libellé de la grille de son verdict, qui est celui d'une ligne de l'encadré ; sa gravité (data-gravite et
@@ -228,4 +235,74 @@ export function controlerFormat2(
     }
   });
   return constats;
+}
+
+// ---- Paragraphes de trois phrases au plus (règle 2e ; F1.4) ---------------------------------------------------------
+
+/** Phrases d'un paragraphe au plus (règle 2e). */
+export const PHRASES_MAX_PARAGRAPHE = 3;
+
+/**
+ * Nombre de phrases d'un texte : une fin de phrase (point, point d'exclamation ou d'interrogation, points de suspension,
+ * suivis au besoin, espaces comprises, d'un guillemet ou d'une parenthèse fermants) suivie d'une majuscule. « p. 12 » ou « 0,3 bar. 2 » ne
+ * coupent pas (chiffre) ; une abréviation suivie d'une majuscule (« M. Dupont ») compterait une phrase de trop : aucune
+ * dans les textes du site.
+ */
+export function nombreDePhrases(texte: string): number {
+  const t = texte.replace(/\s+/g, ' ').trim();
+  if (t === '') return 0;
+  return (t.match(/[.!?…](?:[\s\u00a0\u202f]*["»)\]])*[\s\u00a0\u202f]+(?=[«"(\[]?[\s\u00a0\u202f]*[A-ZÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸŒÆ])/g) ?? []).length + 1;
+}
+
+/**
+ * FORMAT2-PARAGRAPHES : chaque paragraphe du texte rédigé (`[data-corps]`, hors citation, liste, tableau, figure et repère)
+ * a au plus PHRASES_MAX_PARAGRAPHE phrases (règle 2e : « paragraphes de trois phrases au plus »).
+ */
+export function constatsParagraphes(html: string, fichier: string): ConstatFormat2[] {
+  const $ = cheerio.load(html);
+  const longs: string[] = [];
+  $('[data-corps] p').each((_, el) => {
+    const p = $(el);
+    if (p.closest('blockquote, li, table, figure, .repere, [data-repere]').length > 0) return;
+    const texte = p.text().replace(/\s+/g, ' ').trim();
+    const n = nombreDePhrases(texte);
+    if (n > PHRASES_MAX_PARAGRAPHE) longs.push(`${n} phrases : « ${texte.slice(0, 60)}… »`);
+  });
+  return longs.length === 0 ? [] : [erreur('FORMAT2-PARAGRAPHES', `${longs.length} paragraphe(s) de plus de ${PHRASES_MAX_PARAGRAPHE} phrases dans le texte rédigé (règle 2e) : ${longs.slice(0, 3).join(' ; ')}`, fichier)];
+}
+
+// ---- Place de l'arbre de décision sur la page panne (demande de changement n° 32 ; F1.4) ---------------------------
+
+/**
+ * FORMAT2-ARBRE-PLACE : le texte rédigé (blocs `data-corps`, dans l'ordre) se découpe en parties, chacune commençant à un H2 ;
+ * le texte placé avant le premier H2, s'il y en a, compte comme une partie. L'arbre de décision (ou, sans arbre, les
+ * étapes d'un tutoriel) est dans la première ou la deuxième partie ; s'il est dans la deuxième, la première est faite d'un
+ * seul paragraphe (son titre et un repère du verdict mis à part). Une page sans arbre ni étapes n'est pas concernée.
+ */
+export function constatsArbrePlace(html: string, fichier: string): ConstatFormat2[] {
+  const $ = cheerio.load(html);
+  const enfants = $('[data-corps]').toArray().flatMap((bloc) => $(bloc).children().toArray());
+  const parties: (typeof enfants)[] = [];
+  let courante: typeof enfants = [];
+  for (const el of enfants) {
+    if (el.tagName === 'h2') {
+      if (courante.length > 0) parties.push(courante);
+      courante = [el];
+    } else courante.push(el);
+  }
+  if (courante.length > 0) parties.push(courante);
+  const contient = (partie: typeof enfants, selecteur: string): boolean => partie.some((el) => $(el).is(selecteur) || $(el).find(selecteur).length > 0);
+  const arbre = '[data-element-unique="arbre-de-decision"]';
+  const cible = parties.some((p) => contient(p, arbre)) ? arbre : 'ol[data-tutoriel-etapes]';
+  const nom = cible === arbre ? "l'arbre de décision" : "les étapes du tutoriel";
+  const rang = parties.findIndex((p) => contient(p, cible));
+  if (rang < 0) return [];
+  if (rang >= 2) return [erreur('FORMAT2-ARBRE-PLACE', `${nom} est dans la partie ${rang + 1} du texte : il va dans la première ou la deuxième (demande de changement n° 32)`, fichier)];
+  if (rang === 1) {
+    const premiere = (parties[0] ?? []).filter((el) => el.tagName !== 'h2' && !$(el).is('[data-repere]') && $(el).text().trim() !== '');
+    if (premiere.length !== 1 || premiere[0]?.tagName !== 'p') {
+      return [erreur('FORMAT2-ARBRE-PLACE', `${nom} est dans la deuxième partie du texte : la première partie est alors un seul paragraphe (trouvé : ${premiere.length} bloc(s)) (demande de changement n° 32)`, fichier)];
+    }
+  }
+  return [];
 }

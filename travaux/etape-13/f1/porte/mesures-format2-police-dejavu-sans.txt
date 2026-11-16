@@ -1,0 +1,97 @@
+FORMAT2-MESURES : 14 page(s) au format 2 dans dist-demo-format2
+Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situation | Bas de l’encadré | Illustration | Après « Notices » | Arbre ou étapes | Hauteur | Sommaire | Largeur de page | Débordements
+/ | 320 | chargée | – | – | – | – | 0 | non | – | 2414 | non | 320 | 0
+/ | 375 | chargée | – | – | – | – | 0 | non | – | 2250 | non | 375 | 0
+/ | 1366 | chargée | – | – | – | – | 97 | non | – | 1431 | non | 1366 | 0
+/404.html | 320 | chargée | – | – | – | – | – | non | – | 640 | non | 320 | 0
+/404.html | 375 | chargée | – | – | – | – | – | non | – | 667 | non | 375 | 0
+/404.html | 1366 | chargée | – | – | – | – | – | non | – | 800 | non | 1366 | 0
+/a-propos/ | 320 | chargée | – | – | – | – | – | non | – | 10349 | oui | 320 | 0
+/a-propos/ | 375 | chargée | – | – | – | – | – | non | – | 8991 | oui | 375 | 0
+/a-propos/ | 1366 | chargée | – | – | – | – | – | non | – | 5082 | oui | 1366 | 0
+/batterie-voiture/changer/ | 320 | chargée | – | 503 | 714 | 1056 | 1410 | oui | 2473 | 4103 | oui | 320 | 0
+/batterie-voiture/changer/ | 375 | chargée | – | 446 | 636 | 939 | 1215 | oui | 2303 | 3747 | oui | 375 | 0
+/batterie-voiture/changer/ | 1366 | chargée | – | 272 | 359 | 561 | 721 | oui | 1816 | 2977 | oui | 1366 | 0
+/codes-defaut/p0420/ | 320 | chargée | – | 472 | 683 | 1088 | 1499 | oui | – | 10959 | oui | 320 | 0
+/codes-defaut/p0420/ | 375 | chargée | – | 434 | 582 | 929 | 1262 | oui | – | 9516 | oui | 375 | 0
+/codes-defaut/p0420/ | 1366 | chargée | – | 309 | 396 | 598 | 795 | oui | – | 6154 | oui | 1366 | 0
+/loi-montagne/ | 320 | chargée | – | 518 | 709 | 1588 | 1923 | oui | – | 10110 | oui | 320 | 0
+/loi-montagne/ | 375 | chargée | – | 480 | 629 | 1428 | 1704 | oui | – | 8908 | oui | 375 | 0
+/loi-montagne/ | 1366 | chargée | – | 327 | 393 | 867 | 1045 | oui | – | 5589 | oui | 1366 | 0
+/mentions-legales/ | 320 | chargée | – | – | – | – | – | non | – | 5499 | oui | 320 | 0
+/mentions-legales/ | 375 | chargée | – | – | – | – | – | non | – | 4870 | oui | 375 | 0
+/mentions-legales/ | 1366 | chargée | – | – | – | – | – | non | – | 3126 | oui | 1366 | 0
+/moteur-puretech/ | 320 | chargée | – | 468 | 617 | 1255 | 1628 | oui | – | 4083 | oui | 320 | 0
+/moteur-puretech/ | 375 | chargée | – | 411 | 518 | 1040 | 1354 | oui | – | 3672 | oui | 375 | 0
+/moteur-puretech/ | 1366 | chargée | – | 294 | 360 | 658 | 836 | oui | – | 2686 | oui | 1366 | 0
+/perte-de-puissance-voiture/ | 320 | chargée | – | 544 | 651 | 1255 | 1628 | oui | 2695 | 6207 | oui | 320 | 0
+/perte-de-puissance-voiture/ | 375 | chargée | – | 427 | 514 | 1018 | 1351 | oui | 2384 | 5392 | oui | 375 | 0
+/perte-de-puissance-voiture/ | 1366 | chargée | – | 272 | 318 | 637 | 815 | oui | 1756 | 3969 | oui | 1366 | 0
+/pression-des-pneus/ | 320 | chargée | 512 | 756 | 1008 | 1414 | 1787 | oui | – | 9539 | oui | 320 | 0
+/pression-des-pneus/ | 375 | chargée | 426 | 633 | 823 | 1169 | 1464 | oui | – | 8503 | oui | 375 | 0
+/pression-des-pneus/ | 1366 | chargée | 315 | 420 | 507 | 729 | 907 | oui | – | 5388 | oui | 1366 | 0
+/voiture-qui-broute/ | 320 | chargée | – | 522 | 629 | 1148 | 1522 | oui | 2205 | 4073 | oui | 320 | 0
+/voiture-qui-broute/ | 375 | chargée | – | 401 | 488 | 928 | 1242 | oui | 1932 | 3611 | oui | 375 | 0
+/voiture-qui-broute/ | 1366 | chargée | – | 272 | 318 | 595 | 773 | oui | 1490 | 2861 | oui | 1366 | 0
+/voyants/ | 320 | chargée | – | 561 | 772 | 1806 | 2292 | oui | – | 27344 | oui | 320 | 0
+/voyants/ | 375 | chargée | – | 524 | 673 | 1548 | 1938 | oui | – | 23446 | oui | 375 | 0
+/voyants/ | 1366 | chargée | – | 379 | 466 | 933 | 1149 | oui | – | 13243 | oui | 1366 | 0
+/voyants/adblue/ | 320 | chargée | – | 653 | 802 | 3042 | 3660 | oui | – | 17192 | oui | 320 | 0
+/voyants/adblue/ | 375 | chargée | – | 512 | 640 | 2429 | 2931 | oui | – | 14640 | oui | 375 | 0
+/voyants/adblue/ | 1366 | chargée | – | 343 | 409 | 1351 | 1623 | oui | – | 8895 | oui | 1366 | 0
+/voyants/moteur/ | 320 | chargée | – | 518 | 729 | 2089 | 2556 | oui | – | 15475 | oui | 320 | 0
+/voyants/moteur/ | 375 | chargée | – | 408 | 557 | 1700 | 2090 | oui | – | 13085 | oui | 375 | 0
+/voyants/moteur/ | 1366 | chargée | – | 272 | 359 | 940 | 1174 | oui | – | 8413 | oui | 1366 | 0
+/ | 320 | secours | – | – | – | – | 0 | non | – | 2472 | non | 320 | 0
+/ | 375 | secours | – | – | – | – | 0 | non | – | 2321 | non | 375 | 0
+/ | 1366 | secours | – | – | – | – | 97 | non | – | 1431 | non | 1366 | 0
+/404.html | 320 | secours | – | – | – | – | – | non | – | 640 | non | 320 | 0
+/404.html | 375 | secours | – | – | – | – | – | non | – | 667 | non | 375 | 0
+/404.html | 1366 | secours | – | – | – | – | – | non | – | 800 | non | 1366 | 0
+/a-propos/ | 320 | secours | – | – | – | – | – | non | – | 10349 | oui | 320 | 0
+/a-propos/ | 375 | secours | – | – | – | – | – | non | – | 9056 | oui | 375 | 0
+/a-propos/ | 1366 | secours | – | – | – | – | – | non | – | 5082 | oui | 1366 | 0
+/batterie-voiture/changer/ | 320 | secours | – | 529 | 740 | 1081 | 1436 | oui | 2498 | 4154 | oui | 320 | 0
+/batterie-voiture/changer/ | 375 | secours | – | 484 | 675 | 977 | 1254 | oui | 2342 | 3785 | oui | 375 | 0
+/batterie-voiture/changer/ | 1366 | secours | – | 272 | 359 | 561 | 721 | oui | 1816 | 2977 | oui | 1366 | 0
+/codes-defaut/p0420/ | 320 | secours | – | 497 | 708 | 1114 | 1525 | oui | – | 11061 | oui | 320 | 0
+/codes-defaut/p0420/ | 375 | secours | – | 472 | 621 | 967 | 1300 | oui | – | 9605 | oui | 375 | 0
+/codes-defaut/p0420/ | 1366 | secours | – | 309 | 396 | 598 | 795 | oui | – | 6204 | oui | 1366 | 0
+/loi-montagne/ | 320 | secours | – | 544 | 734 | 1613 | 1949 | oui | – | 10211 | oui | 320 | 0
+/loi-montagne/ | 375 | secours | – | 544 | 693 | 1492 | 1768 | oui | – | 9099 | oui | 375 | 0
+/loi-montagne/ | 1366 | secours | – | 327 | 393 | 867 | 1045 | oui | – | 5690 | oui | 1366 | 0
+/mentions-legales/ | 320 | secours | – | – | – | – | – | non | – | 5499 | oui | 320 | 0
+/mentions-legales/ | 375 | secours | – | – | – | – | – | non | – | 4909 | oui | 375 | 0
+/mentions-legales/ | 1366 | secours | – | – | – | – | – | non | – | 3126 | oui | 1366 | 0
+/moteur-puretech/ | 320 | secours | – | 494 | 643 | 1280 | 1654 | oui | – | 4109 | oui | 320 | 0
+/moteur-puretech/ | 375 | secours | – | 450 | 557 | 1078 | 1392 | oui | – | 3736 | oui | 375 | 0
+/moteur-puretech/ | 1366 | secours | – | 294 | 360 | 658 | 836 | oui | – | 2686 | oui | 1366 | 0
+/perte-de-puissance-voiture/ | 320 | secours | – | 569 | 677 | 1280 | 1654 | oui | 2745 | 6258 | oui | 320 | 0
+/perte-de-puissance-voiture/ | 375 | secours | – | 466 | 552 | 1057 | 1389 | oui | 2422 | 5430 | oui | 375 | 0
+/perte-de-puissance-voiture/ | 1366 | secours | – | 272 | 318 | 637 | 815 | oui | 1756 | 3969 | oui | 1366 | 0
+/pression-des-pneus/ | 320 | secours | 538 | 782 | 1034 | 1439 | 1812 | oui | – | 9692 | oui | 320 | 0
+/pression-des-pneus/ | 375 | secours | 490 | 697 | 887 | 1233 | 1528 | oui | – | 8567 | oui | 375 | 0
+/pression-des-pneus/ | 1366 | secours | 315 | 420 | 507 | 729 | 907 | oui | – | 5413 | oui | 1366 | 0
+/voiture-qui-broute/ | 320 | secours | – | 522 | 629 | 1148 | 1522 | oui | 2230 | 4098 | oui | 320 | 0
+/voiture-qui-broute/ | 375 | secours | – | 466 | 552 | 993 | 1307 | oui | 1996 | 3676 | oui | 375 | 0
+/voiture-qui-broute/ | 1366 | secours | – | 272 | 318 | 595 | 773 | oui | 1490 | 2861 | oui | 1366 | 0
+/voyants/ | 320 | secours | – | 586 | 797 | 1831 | 2317 | oui | – | 27495 | oui | 320 | 0
+/voyants/ | 375 | secours | – | 524 | 673 | 1548 | 1938 | oui | – | 23546 | oui | 375 | 0
+/voyants/ | 1366 | secours | – | 379 | 466 | 933 | 1149 | oui | – | 13319 | oui | 1366 | 0
+/voyants/adblue/ | 320 | secours | – | 704 | 853 | 3093 | 3711 | oui | – | 17319 | oui | 320 | 0
+/voyants/adblue/ | 375 | secours | – | 576 | 704 | 2493 | 2995 | oui | – | 14704 | oui | 375 | 0
+/voyants/adblue/ | 1366 | secours | – | 343 | 409 | 1351 | 1623 | oui | – | 8920 | oui | 1366 | 0
+/voyants/moteur/ | 320 | secours | – | 543 | 754 | 2114 | 2582 | oui | – | 15628 | oui | 320 | 0
+/voyants/moteur/ | 375 | secours | – | 472 | 621 | 1765 | 2154 | oui | – | 13275 | oui | 375 | 0
+/voyants/moteur/ | 1366 | secours | – | 272 | 359 | 940 | 1174 | oui | – | 8438 | oui | 1366 | 0
+SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police chargée) : illustration à 2931 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2429 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /voyants/moteur/ (police chargée) : illustration à 2090 px, au-delà de trois écrans (2001 px) ; raison : encadré de 3 ligne(s), bas à 1700 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police de secours) : illustration à 2995 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2493 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /voyants/moteur/ (police de secours) : illustration à 2154 px, au-delà de trois écrans (2001 px) ; raison : encadré de 3 ligne(s), bas à 1765 px (règle 2i, demande n° 32 : à dire dans le paquet)
+ERREUR [FORMAT2-MESURES] /voyants/ (375 px, police chargée) : première situation complète à 673 px : 667 au plus (règle 2a)
+ERREUR [FORMAT2-MESURES] /batterie-voiture/changer/ (375 px, police de secours) : première situation complète à 675 px : 667 au plus (règle 2a)
+ERREUR [FORMAT2-MESURES] /loi-montagne/ (375 px, police de secours) : première situation complète à 693 px : 667 au plus (règle 2a)
+ERREUR [FORMAT2-MESURES] /pression-des-pneus/ (375 px, police de secours) : verdict et urgence de la première situation à 697 px : 667 au plus (précision 2a)
+ERREUR [FORMAT2-MESURES] /voyants/ (375 px, police de secours) : première situation complète à 673 px : 667 au plus (règle 2a)
+ERREUR [FORMAT2-MESURES] /voyants/adblue/ (375 px, police de secours) : première situation complète à 704 px : 667 au plus (règle 2a)
+Mesures : 14 page(s), 84 mesure(s), 6 erreur(s), 4 signalement(s) à reprendre dans le paquet.

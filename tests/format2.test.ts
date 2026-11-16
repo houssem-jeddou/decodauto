@@ -28,7 +28,7 @@ import {
   illustrationAccueil,
   renvoiNotices,
 } from '../src/lib/format2.ts';
-import { controlerFormat2 } from '../src/lib/controle-format2.ts';
+import { PHRASES_MAX_PARAGRAPHE, constatsParagraphes, controlerFormat2, nombreDePhrases } from '../src/lib/controle-format2.ts';
 import { marqueEtModele, modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
 import { ACCUEIL_FORMAT2, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
 import { mentionEnTete } from '../src/lib/composants.ts';
@@ -50,6 +50,7 @@ import {
   corpsAvecReperes,
   lireBrouillonFormat2,
   pageAvecBrouillon,
+  PARAGRAPHES_A_REPRENDRE_DEMO,
   voyantsAvecBrouillon,
 } from '../scripts/lib/demo-format2.ts';
 import { constatsAccueil, constatsHauteurReservee, constatsLienConfidentialite, constatsMentionEtSignalement, constatsPartCitee } from '../scripts/lib/dist.ts';
@@ -101,13 +102,14 @@ async function construire(corps = CORPS, fichier = MOTEUR) {
 }
 
 describe('format 2 : briques (lot F1, F1.2)', () => {
-  test('mots d\'une ligne d\'écart (comptage du pilote) et lien « Votre marque » compris', () => {
+  test('mots d\'une ligne d\'écart (comptage du pilote) et lien « Votre marque » compris : chaque ligne d\'écart courte de la base (lot F2) en a 25 au plus', async () => {
     assert.equal(motsDe('Plus strict : Toyota (arrêt immédiat).'), 5);
     assert.equal(motsDe(FORMAT2.lienVotreMarque), 2);
-    for (const id of Object.keys(brouillon.voyants).filter((id) => brouillon.voyants[id]?.ecart_court !== undefined)) {
-      const ecart = brouillon.voyants[id]?.ecart_court ?? '';
-      assert.ok(motsDe(ecart) + 2 <= ECART_COURT_MAX_MOTS, `${id} : ${motsDe(ecart) + 2} mots`);
-    }
+    const base = JSON.parse(await readFile(join(racine, 'data/voyants.json'), 'utf8')) as { id: string; ecart_marques?: string; ecart_court?: string }[];
+    // Lot F2 : une ligne d'écart courte pour chaque ligne qui a un écart entre marques (16), aucune ailleurs.
+    assert.deepEqual(base.filter((v) => v.ecart_court !== undefined).map((v) => v.id), base.filter((v) => v.ecart_marques !== undefined).map((v) => v.id));
+    assert.equal(base.filter((v) => v.ecart_court !== undefined).length, 16);
+    for (const v of base.filter((v) => v.ecart_court !== undefined)) assert.ok(motsDe(v.ecart_court ?? '') + 2 <= ECART_COURT_MAX_MOTS, `${v.id} : ${motsDe(v.ecart_court ?? '') + 2} mots`);
   });
 
   test('phrase « Notices » : une phrase commune, ou chaque phrase précédée de ses lignes', () => {
@@ -189,17 +191,17 @@ describe('format 2 : modèle des pages voyants', () => {
     assert.ok($('[data-repere]').toArray().every((r) => $(r).prev().is('h2')));
   });
 
-  test('page construite au format 2 : les contrôles d\'aujourd\'hui et ceux du format 2 passent ; seule l\'empreinte (brouillon jamais validé) échoue', async () => {
+  test('page construite au format 2 : les contrôles d\'aujourd\'hui et ceux du format 2 passent, empreinte de la validation de Houssem comprise (paquet F2, version 4)', async () => {
     const { brut, contexte, html } = await construire();
     const resultat = controlerPage({ type: 'voyant', brut, fichier: MOTEUR }, contexte, html);
-    assert.deepEqual(regles(resultat.constats), ['R4-EMPREINTE']);
+    assert.deepEqual(regles(resultat.constats), []);
     assert.deepEqual(regles(constatsPartCitee(html, 'x.html')), []);
   });
 
   test('page AdBlue au format 2 (quatre lignes, dont la ligne du voyant moteur rattachée à une autre page) : mêmes contrôles verts', async () => {
     const corps = '<h2 id="a">Peut-on rouler ?</h2><p>{{repere:adblue-reserve}}</p><p>Texte.</p>';
     const { brut, contexte, html } = await construire(corps, ADBLUE);
-    assert.deepEqual(regles(controlerPage({ type: 'voyant', brut, fichier: ADBLUE }, contexte, html).constats), ['R4-EMPREINTE']);
+    assert.deepEqual(regles(controlerPage({ type: 'voyant', brut, fichier: ADBLUE }, contexte, html).constats), []);
     const $ = cheerio.load(html);
     // Moins de trois H2 dans le texte : pas de sommaire. La ligne du voyant moteur n'a pas de partie au tableau de la page :
     // son lien « Votre marque » mène à la partie du voyant sur la page du voyant moteur, que le plan lie à la page AdBlue
@@ -224,7 +226,7 @@ describe('format 2 : modèle des pages voyants', () => {
   test('FORMAT2-ECART vérifie le renvoi au tableau des notices : lien absent, mal dirigé, ancre absente, page non liée par le plan ou non construite', async () => {
     const moteur = await construire();
     const controle = (h: string, contexte = moteur.contexte, brut = moteur.brut, fichier = MOTEUR): string[] => regles(controlerPage({ type: 'voyant', brut, fichier }, contexte, h).constats);
-    assert.deepEqual(controle(moteur.html), ['R4-EMPREINTE']);
+    assert.deepEqual(controle(moteur.html), []);
     const avec = (f: ($: cheerio.CheerioAPI) => void): string => {
       const $ = cheerio.load(moteur.html);
       f($);
@@ -237,13 +239,41 @@ describe('format 2 : modèle des pages voyants', () => {
     // Page AdBlue : la ligne du voyant moteur renvoie à la page du voyant moteur ; non construite, ou non liée par le plan.
     const adblue = await construire('<h2 id="a">Peut-on rouler ?</h2><p>Texte.</p>', ADBLUE);
     const ctx = adblue.contexte;
-    assert.deepEqual(controle(adblue.html, ctx, adblue.brut, ADBLUE), ['R4-EMPREINTE']);
+    assert.deepEqual(controle(adblue.html, ctx, adblue.brut, ADBLUE), []);
     const sansMoteur = new Map([...(ctx.pagesEcrites ?? [])].filter(([id]) => id !== 'voyant-moteur'));
     assert.ok(controle(adblue.html, { ...ctx, pagesEcrites: sansMoteur }, adblue.brut, ADBLUE).includes('FORMAT2-ECART'));
     const planSansLien = new Map([...ctx.plan].map(([id, l]) => [id, id === 'voyant-adblue' || id === 'voyant-moteur' ? { ...l, liens: (l.liens ?? []).filter((c) => c !== 'voyant-moteur' && c !== 'voyant-adblue') } : l]));
     const nonLie = controlerPage({ type: 'voyant', brut: adblue.brut, fichier: ADBLUE }, { ...ctx, plan: planSansLien }, adblue.html).constats.filter((c) => c.regle === 'FORMAT2-ECART');
     assert.equal(nonLie.length, 1);
     assert.match(nonLie[0]?.message ?? '', /paire de liens voyant-adblue ↔ voyant-moteur à proposer/);
+  });
+
+  test('lien « Votre marque » de la ligne du voyant moteur sur les pages AdBlue, FAP et préchauffage (F1.4) : vers la page du voyant moteur ; FORMAT2-ECART vert, et en échec sans ce lien', async () => {
+    const { site, contexte } = await siteDemo();
+    const ctx = { ...contexte, pagesEcrites: site.libelles };
+    for (const fichier of [ADBLUE, 'src/content/voyant/voyant-fap.md', 'src/content/voyant/voyant-prechauffage.md']) {
+      const lu = pageAvecBrouillon(lireFrontmatter(await readFile(join(racine, fichier), 'utf8')) as Record<string, unknown>, brouillon);
+      // Au format 2, avec une illustration de la démonstration (le test porte sur le lien, pas sur le dessin de la page).
+      const brut = { ...lu, format: 2, illustration: { fichier: 'voyant-moteur-tableau-de-bord', alt: 'Dessin de test', legende: 'Dessin de test. Illustration decodauto.' } };
+      const page = schemasPage.voyant.parse(brut) as PageEditoriale;
+      const html = documentFormat2(pageVoyantF2(page, site, '<h2 id="a">A</h2><p>Texte.</p>'), page, contexte.plan.get(page.id)?.adresse ?? '/');
+      const $ = cheerio.load(html);
+      const i = page.situations.findIndex((l) => 'voyant' in l && l.voyant === 'moteur-orange-fixe');
+      assert.ok(i >= 0, `${page.id} : ligne du voyant moteur`);
+      assert.equal($('[data-encadre-decision] [data-encadre-ligne]').eq(i).find('[data-lien-notices]').attr('href'), '/voyants/moteur/#da-notices-moteur-orange-fixe', page.id);
+      const ecart = (h: string): string[] => controlerPage({ type: 'voyant', brut, fichier }, ctx, h).constats.filter((c) => c.regle === 'FORMAT2-ECART').map((c) => c.message);
+      assert.deepEqual(ecart(html), [], page.id);
+      $('[data-encadre-decision] [data-encadre-ligne]').eq(i).find('[data-lien-notices]').remove();
+      assert.ok(ecart($.html()).some((m) => m.includes(`ligne ${i + 1}`)), page.id);
+    }
+  });
+
+  test('plage du coût probable : chaque préposition groupée avec sa pastille (.borne, jamais seule en fin de ligne ; lot F2)', async () => {
+    const { html } = await construire();
+    const $ = cheerio.load(html);
+    const bornes = $('[data-encadre-cout] .borne').toArray().map((el) => $(el));
+    assert.deepEqual(bornes.map((b) => b.text().split('\u00a0')[0]), ['de', 'à']);
+    assert.ok(bornes.every((b) => b.children('.tranche').length === 1));
   });
 
   test('erreurs de construction : écart court, illustration, « ce que demande la notice » absents ; repère mal placé ou inconnu ; repère au format 1', async () => {
@@ -353,16 +383,21 @@ describe('format 2 : construction de démonstration', () => {
     const un = { ...brouillon, pages: { 'voyant-moteur': { illustration: { fichier: 'f', alt: 'a', legende: 'l' }, reperes: [{ titre: 'Combien de kilomètres peut-on faire ?', repere: 'moteur-orange-fixe' }] } } };
     assert.equal(corpsAvecReperes('voyant-moteur', '<h2 id="x">Combien de kilomètres peut-on faire&nbsp;?</h2><p>a</p>', un), '<h2 id="x">Combien de kilomètres peut-on faire&nbsp;?</h2><p>{{repere:moteur-orange-fixe}}</p><p>a</p>');
     assert.throws(() => corpsAvecReperes('voyant-moteur', '<h2>Autre</h2>', un), /introuvable/);
-    // data/voyants.json et src/content ne changent pas : le brouillon ne s'applique qu'en mémoire.
-    assert.ok(!base.some((v) => 'ecart_court' in (v as object)));
-    assert.ok(!(await readFile(join(racine, MOTEUR), 'utf8')).includes('format:'));
+    // Lot F2 : les données du format 2 et les pages du lot sont dans data/voyants.json et src/content ; la démonstration ne
+    // les simule plus (aucune ligne de la base, aucune page du lot, pas l'accueil dans le brouillon).
+    assert.deepEqual(brouillon.voyants, {});
+    assert.ok(base.every((v) => (v as { citations: { demande?: string }[] }).citations.every((c) => c.demande !== undefined)));
+    assert.equal(brouillon.accueil, undefined);
+    assert.deepEqual(Object.keys(brouillon.pages).sort(), ['code-p0420', 'loi-montagne', 'pression-des-pneus']);
+    assert.ok((await readFile(join(racine, MOTEUR), 'utf8')).includes('\nformat: 2\n'));
   });
 
-  test('erreurs attendues : l\'empreinte de chaque ligne et de chaque page du brouillon (R4-EMPREINTE), rien d\'autre', () => {
+  test('erreurs attendues : l\'empreinte de chaque ligne et de chaque page du brouillon (R4-EMPREINTE), la méthode et les paragraphes des textes non repris, rien d\'autre', () => {
     const attendus = attendusDemoFormat2(brouillon, (id) => `src/content/voyant/${id}.md`);
     const aReprendre = Object.values(brouillon.pages).filter((p) => p.texte_a_reprendre === true).length;
-    assert.equal(attendus.length, Object.keys(brouillon.voyants).length + Object.keys(brouillon.pages).length + aReprendre);
-    assert.deepEqual([...new Set(attendus.map((a) => a.regle))].sort(), aReprendre > 0 ? ['FORMAT2-METHODE', 'R4-EMPREINTE'] : ['R4-EMPREINTE']);
+    // F1.4 : paragraphes de plus de trois phrases des textes en ligne non repris (FORMAT2-PARAGRAPHES, pages nommées).
+    assert.equal(attendus.length, Object.keys(brouillon.voyants).length + Object.keys(brouillon.pages).length + aReprendre + PARAGRAPHES_A_REPRENDRE_DEMO.length);
+    assert.deepEqual([...new Set(attendus.map((a) => a.regle))].sort(), ['FORMAT2-METHODE', 'FORMAT2-PARAGRAPHES', 'R4-EMPREINTE']);
   });
 
   test('option --demo-format2 : seulement sur dist-demo-format2 construit avec DEMO_FORMAT2=1 ; garde-fou DEMO-PUBLIEE', () => {
@@ -462,7 +497,7 @@ describe('format 2 : corrections après la revue (brief F1.2-corrections)', () =
     assert.match(f1.html, /Peugeot 208 \(2e génération\), guide d’utilisation édition 01-20 \(p\. 13\s; p\. 9-11\)/u);
   });
 
-  test('§7 FORMAT2-METHODE : « Verdict retenu » ou « édition » dans le texte rédigé, hors citation', async () => {
+  test('§7 FORMAT2-METHODE : « Verdict(s) retenu(s) », « consigne(s) retenue(s) » ou « édition » dans le texte rédigé, hors citation', async () => {
     const { html, site, page } = await construire();
     const { resoudreLignes } = await import('../src/lib/calcul.ts');
     const lignes = resoudreLignes(page.situations, site.voyants).lignes;
@@ -470,6 +505,11 @@ describe('format 2 : corrections après la revue (brief F1.2-corrections)', () =
     const avec = (texte: string): string[] => regles(controlerFormat2(html.replace('<p>Texte du site.</p>', `<p>${texte}</p>`), 'p.html', lignes, phrases));
     assert.ok(!avec('Texte du site.').includes('FORMAT2-METHODE'));
     assert.ok(avec('Verdict retenu en haut de page : oui.').includes('FORMAT2-METHODE'));
+    // F1.4 : formes au pluriel et « consigne retenue », chacune refusée (la page FAP écrivait « Verdicts retenus »).
+    for (const forme of ['Verdicts retenus en haut de page : oui.', 'Le verdict\u00a0retenu est prudent.', 'La consigne retenue est la plus prudente.', 'Les consignes retenues sont celles de Toyota.', 'Consignes retenue ici.']) {
+      assert.ok(avec(forme).includes('FORMAT2-METHODE'), forme);
+    }
+    assert.ok(!avec('La consigne de la notice est retenue par prudence.').includes('FORMAT2-METHODE'), 'mots séparés : pas la formule');
     assert.ok(avec('Le guide, édition 01-20, le dit.').includes('FORMAT2-METHODE'));
     // Seconde revue : une page écrite à la main (« p. » suivi d'un chiffre), hors citation.
     assert.ok(avec('La notice le dit (p. 139).').includes('FORMAT2-METHODE'));
@@ -477,6 +517,29 @@ describe('format 2 : corrections après la revue (brief F1.2-corrections)', () =
     assert.ok(!avec('Le texte cite « voir p. 12 ».').includes('FORMAT2-METHODE'), 'citation entre guillemets');
     assert.ok(!avec('Le cap. 3 ne compte pas.').includes('FORMAT2-METHODE'));
     assert.ok(!avec('La notice dit « édition 01-20 ».').includes('FORMAT2-METHODE'), 'citation entre guillemets');
+  });
+});
+
+describe('format 2 : FORMAT2-PARAGRAPHES (règle 2e, F1.4)', () => {
+  test('phrases comptées : fin de phrase suivie d\'une majuscule ; « p. 12 », « 0,3 bar. » devant un chiffre ou une minuscule ne coupent pas', () => {
+    assert.equal(nombreDePhrases(''), 0);
+    assert.equal(nombreDePhrases('Une phrase.'), 1);
+    assert.equal(nombreDePhrases('Une. Deux ! Trois ? Quatre…'), 4);
+    assert.equal(nombreDePhrases('Voir la notice (p. 12) pour la valeur. Puis gonfler.'), 2);
+    assert.equal(nombreDePhrases('Toyota (arrêt immédiat). Moins stricts : Seat.'), 2);
+    assert.equal(nombreDePhrases('Il dit « arrêtez-vous. » Ensuite, repartez.'), 2);
+  });
+
+  test('un paragraphe de quatre phrases du texte rédigé échoue ; trois passent ; citations, listes, tableaux et repères exclus ; socle compris', () => {
+    const page = (corps: string): string => `<html><body><div data-corps>${corps}</div></body></html>`;
+    const quatre = '<p>Un. Deux. Trois. Quatre.</p>';
+    assert.deepEqual(constatsParagraphes(page('<p>Un. Deux. Trois.</p>'), 'x').map((c) => c.regle), []);
+    const echec = constatsParagraphes(page(quatre), 'x');
+    assert.deepEqual(echec.map((c) => c.regle), ['FORMAT2-PARAGRAPHES']);
+    assert.match(echec[0]?.message ?? '', /1 paragraphe\(s\) de plus de 3 phrases .*4 phrases : « Un\. Deux\./);
+    for (const enveloppe of ['blockquote', 'li', 'figure']) assert.deepEqual(constatsParagraphes(page(`<${enveloppe}>${quatre}</${enveloppe}>`), 'x'), [], enveloppe);
+    assert.deepEqual(constatsParagraphes(`<html><body><p>Un. Deux. Trois. Quatre.</p></body></html>`, 'x'), [], 'hors du texte rédigé');
+    assert.equal(PHRASES_MAX_PARAGRAPHE, 3);
   });
 });
 

@@ -89,7 +89,8 @@ async function mesurer(page) {
       page = await ouvrir(navigateur, BASE + p.chemin, 1366, 800, 1, bloquer);
       mesures[`${p.nom}-${police}`].ordinateur = await mesurer(page);
       await page.screenshot({ path: nom('1366-ecran') });
-      await page.locator('[data-corps]').screenshot({ path: nom('1366-corps') });
+      // Colonne entière : depuis la demande n° 32, le texte d'une page panne est en deux blocs data-corps, de part et d'autre des causes.
+      await page.locator('.page .colonne').first().screenshot({ path: nom('1366-corps') });
       await page.close();
     }
   }

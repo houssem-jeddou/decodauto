@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "accueil",
+    "voyants",
+    "voyant-moteur",
+    "voyant-huile",
+    "voyant-batterie",
+    "voyant-frein",
+    "voyant-adblue",
+    "voyant-fap",
+    "voyant-prechauffage",
+    "voyant-airbag",
+    "voyant-abs-esp",
+    "voyant-pression-pneus",
+    "voyant-direction"
+  ]
+}

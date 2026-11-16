@@ -63,9 +63,7 @@ illustration:
 
 {{repere:moteur-rouge}}
 
-Texte de démonstration qui cite la notice {{notice:notice-peugeot-208}} ({{cite:notice-peugeot-208|p. 13}}) : la page réelle est rédigée avec la vague B.
-
-Deuxième paragraphe de démonstration, avec la notice {{notice:notice-toyota-yaris}} et la notice {{notice:notice-renault-clio-5}}.
+Texte de démonstration qui cite la notice {{notice:notice-peugeot-208}} ({{cite:notice-peugeot-208|p. 13}}) : la page réelle est rédigée avec la vague B. Il nomme aussi la notice {{notice:notice-toyota-yaris}} et la notice {{notice:notice-renault-clio-5}}, en un seul paragraphe : l'arbre suit, dans la deuxième partie (demande de changement n° 32).
 
 ## Selon ce que vous voyez
 

@@ -11,6 +11,7 @@ Précisions validées avec la porte de l'étape 6 (04/11/2026, 12 h 03) : partie
 Précisions validées avec le livrable 8.1 (04/11/2026, 13 h 48) : pages citées de la page outil (§2.6) ; renvoi de son encadré (§4, point 4, demande de changement n° 12) ; son corps et ses sources (§4, points 7 et 8) ; contrôles ajoutés (§9).
 Précisions validées avec le livrable 7.2 (09/11/2026, 21 h 41) : liens d'une page du socle vers d'autres sites (§2.7) ; lien « Mentions légales et confidentialité » en pied de page (§4) ; revue des pages du socle (§8) ; contrôles ajoutés (§9).
 Précisions acceptées le 16/11/2026 (16 h 52) : sources secondaires, une règle par usage pour toutes les pages éditoriales (§2.2, §2.6 ; demande de changement n° 31 ; nouvelle partie « Les codes défaut et les pannes » de la section « Méthode », §7.2, avec la republication d'« à propos ») ; ordre de la page panne (§4, point 7 ; demande n° 32 : mis à jour à la porte F1).
+Précisions validées avec la porte F1 (16/11/2026, 18 h 55) : structure d'une page au format 2, repères et méthode (§4) ; ordre de la page panne (§4, point 7, demande de changement n° 32) ; longueur au format 2 (§3.5). Textes repris mot pour mot du dossier de la porte (`travaux/etape-13/f1/porte-f1.md`, §6.2).
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -110,6 +111,9 @@ Précisions acceptées le 16/11/2026 (16 h 52) : sources secondaires, une règle
 - La réponse tient dans l'encadré de décision. Le texte qui suit sert à vérifier, comprendre et agir : il s'arrête quand il n'aide plus.
 - Pas de FAQ artificielle (Google n'en accorde plus les résultats enrichis à ce type de site, 03) ; les questions des lecteurs relevées sur Google sont traitées dans le corps de la page.
 
+Au format 2 : paragraphes de trois phrases au plus (FORMAT2-PARAGRAPHES), étapes en liste numérotée, comparaisons en
+tableau.
+
 ### 3.6 Accessibilité
 - Le texte d'un lien dit où il mène (jamais « cliquez ici »).
 - Les titres se suivent sans saut de niveau (H1, puis H2, puis H3).
@@ -127,7 +131,10 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
 7. **Corps**, selon le type de page (08 §2) :
    - pages voyants (demande de changement n° 9, 6.6a) : texte rédigé (questions des lecteurs relevées sur Google ; chaque partie qui répond à une question redit le verdict retenu), causes, puis tableau « Ce que dit la notice de votre marque » (6.4). La marche à suivre est l'action de chaque ligne de l'encadré de décision : le corps ne la recopie pas ;
    - pages codes défaut (modèle validé avec le livrable 6.6b) : fiche du code (signification, portée, moteurs concernés, voyant qui s'allume, puis la consigne d'un code lu sans ce voyant allumé, « Demandez l'avis d'un professionnel », et la source de la signification) ; cas décrits par marque, élément unique quand c'est un tableau ; causes ; texte rédigé, avec la marche à suivre ;
-   - pages pannes : symptômes, causes, marche à suivre ;
+   - pages pannes (demande de changement n° 32) : fiche « Le symptôme en bref » (ou « La situation en bref »), fiche « Le
+     tutoriel en bref » sur un tutoriel, puis le texte rédigé jusqu'à la partie qui porte l'arbre de décision ou les étapes,
+     puis les causes, puis la suite du texte. L'arbre, ou les étapes, est dans la première ou la deuxième partie du texte ;
+     s'il est dans la deuxième, la première est un seul paragraphe ;
    - pages fluides : rôle, niveau, appoint, marche à suivre ;
    - pages pneus et obligations (modèle validé avec le livrable 6.6c) : fiche « Le texte en bref », en haut de page (texte de référence et où le lire ; selon le sujet, période et zones, ou défaillances et contre-visite), puis texte rédigé : ce qui est exigé (avec l'élément unique quand c'est un tableau du texte, marqué `{{tableau}}`), questions des lecteurs, marche à suivre ;
    - page outil voyants (modèle validé avec le livrable 8.1) : outil (filtre par couleur, index des dessins, liste par couleur), puis texte rédigé (questions des lecteurs), pages enfants et liées. La liste vient avant le texte : le lecteur cherche d'abord son voyant ;
@@ -136,6 +143,16 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
 9. **Lien « Signaler une erreur »**, puis, dès que la page des mentions légales est construite, le lien « Mentions légales et confidentialité » vers sa section `#confidentialite` (validé avec le livrable 7.2) : en pied de toutes les pages, socle compris.
 
 Les emplacements publicitaires, quand il y en aura, ne sont jamais avant l'encadré (R9-PUB-AVANT-ENCADRE).
+
+**Au format 2** (demande de changement n° 30, charte graphique §4) : mention en tête, fil d'Ariane, H1, encadré de
+décision, signature, ligne de transparence, bloc « Notices / Base du coût », illustration, sommaire, corps du modèle,
+tableau des notices, emplacement publicitaire, pages liées, « Sources » repliée. Sur la page outil, le renvoi vers la liste est un bouton, sans icône
+(point 4 ci-dessus : une icône seulement si elle double un texte), et l'introduction de l'outil tient en deux paragraphes,
+sans changer un mot.
+
+Repère du verdict : seulement sous un H2 qui pose la question d'une seule ligne de l'encadré ; une section qui mêle
+plusieurs cas n'en a pas. Le texte nomme la marque et le modèle ; ni « Verdict retenu », ni « consigne retenue », ni
+édition, ni page écrite à la main : les références vont dans « Sources » par `{{cite:…}}` (règle 2d, FORMAT2-METHODE).
 
 ## 5. Transparence
 ### 5.1 Mention en tête et ligne de transparence

@@ -24,7 +24,7 @@ import {
 } from './cout.ts';
 import { ID_OUTIL_VOYANTS, controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
 import { normaliserRecherche } from './texte.ts';
-import { controlerFormat2 } from './controle-format2.ts';
+import { constatsArbrePlace, constatsParagraphes, controlerFormat2 } from './controle-format2.ts';
 import { ECART_COURT_MAX_MOTS, FORMAT2, motsDe, renvoiNotices, type RenvoiNotices } from './format2.ts';
 import { ecartDeLaCarte, lienNoticesDeLaCarte, entreesIndexFormat2, modeleOutilFormat2, outilVoyantsFormat2, texteEntreeIndex } from './outil-format2.ts';
 import {
@@ -705,6 +705,8 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
       constats.push(erreur('R7-PLAN-TYPE', `le plan du site range « ${socle.id} » dans le type « ${ligne.type} », la page est de type « socle »`, fichier));
     }
     if (html !== undefined) constats.push(...controlerHtmlSocle(socle, html, fichier));
+    // Format 2 (règle 2e, F1.4) : paragraphes de trois phrases au plus, pages du socle comprises.
+    if (html !== undefined && (lecture.data as { format?: number }).format === 2) constats.push(...constatsParagraphes(html, fichier));
     return { constats, id: socle.id };
   }
 
@@ -1172,6 +1174,8 @@ export function controlerHtml(
   if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, { ...attendus.notices, format: page.format ?? 1 }));
   // Format 2 (demande de changement n° 30) : règles de format vérifiables par une machine (controle-format2.ts).
   if (page.format === 2) constats.push(...controlerFormat2(html, fichier, lignes, (attendus?.lignes ?? []).map((l) => l.phrase), page.reponse_directe, attendus?.renvoisNotices));
+  // Page panne au format 2 (demande de changement n° 32) : l'arbre, ou les étapes, dans la première ou la deuxième partie.
+  if (page.format === 2 && 'contexte' in page) constats.push(...constatsArbrePlace(html, fichier));
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
   if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
   if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil, page.format ?? 1));
