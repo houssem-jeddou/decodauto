@@ -18,6 +18,11 @@ Il remplace les passages « à relire » de `autres-pannes-releve.md` et complè
 | Seat Ibiza | PDF 299-300 → p. 297-298 | Liquide de refroidissement : spécification, contrôle du niveau, appoint, avertissements | Exact ; fin de l'ATTENTION complétée |
 | Seat Ibiza | PDF 290-291 → p. 288-289 | Témoins de la gestion du moteur, dont l'EPC ; perte de puissance et fonctionnement irrégulier ; ratés | **Nouveau** (témoin EPC trouvé, causes) |
 | Seat Ibiza | PDF 285 → p. 283 | Essence à indice d'octane plus bas : légère perte de puissance | **Nouveau** (cause) |
+| Renault Clio 5 phase 2 | PDF 188 → p. 186 | Diesel : régime, fumées blanches du nettoyage automatique du filtre à particules, précautions hivernales | **Nouveau** (fumée) |
+| Renault Clio 5 phase 2 | PDF 190 → p. 188 | Versions essence : même passage que Dacia p. 162, mot pour mot (à une précision près) | Lu |
+| Peugeot 208 | PDF 167-170 → p. 165-168 | Niveaux ; liquide de refroidissement ; batterie 12 V (remplacement Stop & Start) ; filtre à particules diesel | **Nouveau** |
+| Peugeot 208 | PDF 17 → p. 15 | Additif du filtre à particules (témoin fixe) ; ne jamais rouler jusqu'à la panne sèche | Lu |
+| Citroën C3 | PDF 114-117 → p. 112-115 | Mêmes rubriques que Peugeot (refroidissement, batterie) ; additif gasoil : appoint par le réseau ; filtre à particules | **Nouveau** |
 
 ## Renault Clio 5 phase 2 (`notice-renault-clio-5`), « Anomalies de fonctionnement », « Sur route »
 
@@ -141,6 +146,55 @@ avant la rédaction, même famille de notice).
 puissance » ; à défaut de super, ordinaire 91 : « Vous ne devez alors faire tourner le moteur qu'à régime moyen et ne le
 solliciter que faiblement. Rajoutez dès que possible du supercarburant. »
 
+## Renault Clio 5 phase 2, particularités (p. 186 et 188)
+
+- p. 186 (PDF 188), diesel : « En roulage, pour ne pas endommager le moteur, ne laissez jamais monter le régime moteur au
+  dessus de 4500 tours/minutes quelques que soit la vitesse engagée. » ; « En roulage, suivant la qualité du carburant
+  utilisé, des fumées blanches peuvent exceptionnellement apparaître. Cela est dû au nettoyage automatique du filtre à
+  particules et est sans conséquence sur le comportement du véhicule. » ; panne de carburant : réamorcer le circuit
+  (🡺 159) avant de redémarrer ; « Précautions hivernales […] veillez à ce que votre batterie soit toujours bien
+  chargée ; veillez à ne jamais laisser le niveau de gazole trop baisser dans le réservoir afin d'éviter la condensation
+  de vapeur d'eau s'accumulant dans le fond du réservoir. » ; filtre à particules : déjà dans la base (ligne `fap`).
+- p. 188 (PDF 190), essence : même passage que Dacia p. 162 (« utilisation d'additifs pour lubrifiant ou carburant non
+  agréés », sans « par le constructeur »), même consigne (« faites effectuer par un Représentant de la marque les
+  réparations nécessaires au plus vite »), même « Problème de démarrage ».
+- p. 161 (PDF 163), panne de carburant diesel : réamorçage, « si le moteur ne démarre toujours pas après plusieurs
+  tentatives, faites appel à un Représentant de la marque » (déjà relu pour l'exemple « voiture ne démarre pas »).
+
+## Peugeot 208 (`notice-peugeot-208`) et Citroën C3 (`notice-citroen-c3`), même rédaction
+
+- **Niveaux** (Peugeot p. 165, Citroën p. 112) : « En cas de baisse importante d'un niveau, faire vérifier le circuit
+  correspondant par le réseau PEUGEOT [CITROËN] ou par un atelier qualifié. » ; le moto-ventilateur peut se mettre en
+  marche à tout instant, même contact coupé ; circuit de gazole sous très haute pression : toute intervention
+  exclusivement par le réseau ou un atelier qualifié.
+- **Liquide de refroidissement** (Peugeot p. 167, Citroën p. 113) : « Un appoint de ce liquide entre deux révisions est
+  normal. Le contrôle et l'appoint doivent être faits moteur froid. Un niveau insuffisant présente des risques de
+  dommages importants pour le moteur » ; niveau proche du repère « MAXI » sans le dépasser ; « Si le niveau est proche ou
+  en-dessous du repère "MINI", il est impératif de faire un appoint. » ; « Le circuit de refroidissement étant sous
+  pression, attendre au moins une heure après l'arrêt du moteur pour intervenir. En cas d'intervention urgente, pour
+  éviter tout risque de brûlure, se munir d'un chiffon et dévisser le bouchon de deux tours pour laisser retomber la
+  pression. »
+- **Batterie 12 V** (Peugeot p. 168, Citroën p. 114) : « La batterie est sans entretien. » ; vérifier le serrage des
+  cosses vissées et la propreté des branchements ; « Les versions équipées du Stop & Start comportent une batterie au
+  plomb 12 V de technologie et de caractéristiques spécifiques. Son remplacement doit être effectué exclusivement dans le
+  réseau PEUGEOT [CITROËN] ou dans un atelier qualifié. »
+- **Filtre à particules, diesel** (Peugeot p. 168, Citroën p. 114-115) : début de colmatage signalé par l'allumage
+  temporaire du témoin ; « Dès que les conditions de circulation le permettent, régénérer le filtre en roulant à une
+  vitesse d'au moins 60 km/h jusqu'à l'extinction du témoin. » ; Citroën : « Si le témoin reste affiché, il s'agit d'un
+  manque d'additif gasoil. » ; « Après un fonctionnement prolongé du véhicule à très basse vitesse ou au ralenti, il est
+  possible de constater exceptionnellement des émissions de vapeur d'eau à l'échappement, lors d'accélérations. Ces
+  émissions sont sans conséquence » ; véhicule neuf : premières régénérations avec des odeurs de « brûlé »
+  « parfaitement normales ».
+- **Additif du filtre à particules** : Peugeot p. 15, témoin fixe, « Faire rapidement réaliser l'appoint » (base, lot 3) ;
+  Citroën p. 113-114 : « La mise à niveau de cet additif doit impérativement et rapidement être effectuée par le réseau
+  CITROËN ou par un atelier qualifié. »
+- **Carburant** (Peugeot p. 15) : « Ne jamais rouler jusqu'à la panne sèche, cela pourrait endommager les systèmes
+  d'antipollution et d'injection. »
+- **Bruits** : la notice Peugeot ne décrit aucun bruit du moteur thermique (relevé de tous les « bruit », « cliquetis »,
+  « claquement », « sifflement » et « fumée » des 276 pages : clignotants, airbags, moteur électrique, téléphone).
+- « Mode dégradé » : aucune des notices lues ne décrit de mode dégradé du moteur thermique sous ce nom (Peugeot :
+  « mode tortue » du seul moteur électrique, hors périmètre).
+
 ## Ce que cela change pour les briefs
 
 - **`voiture-qui-broute`** : des causes de première main existent (Dacia p. 162 et Renault p. 188 : système d'allumage
@@ -152,10 +206,17 @@ solliciter que faiblement. Rajoutez dès que possible du supercarburant. »
   charte §2.2 pour les codes).
 - **`surchauffe-moteur`** : tableau Renault et Dacia (motoventilateur, fuite, joint de culasse), Seat p. 298 (appoint
   seulement s'il reste du liquide, jamais moteur chaud, arrêt s'il n'en reste plus).
-- **`fumee-echappement`** : fumée blanche (Renault et Dacia, mot pour mot) ; fumée sous le capot : arrêt ; fumée noire
-  ou bleue : toujours aucune notice.
+- **`fumee-echappement`** : fumée blanche (Renault et Dacia, tableau ; Renault p. 186 : fumées blanches exceptionnelles
+  du nettoyage du filtre, sans conséquence) ; vapeur d'eau après un long ralenti et odeur de « brûlé » des premières
+  régénérations (Peugeot p. 168, Citroën p. 115) ; fumée sous le capot : arrêt ; fumée noire ou bleue : toujours aucune
+  notice.
+- **`nettoyer-fap`** : régénération en roulant, marque par marque (Peugeot et Citroën : au moins 60 km/h ; Renault :
+  régime au-dessus de 2 000 tr/min si possible, 10 à 20 minutes ; Dacia et Renault essence : 50 à 110 km/h, 5 à 20
+  minutes ; Seat : 50 à 120 km/h) ; additif (Peugeot, Citroën) : appoint par le réseau ou un atelier qualifié.
 - **`batterie-changer`, `batterie-recharger`** : Renault et Dacia demandent qu'un professionnel fasse toute intervention
-  sur la batterie (démontage, débranchement) ; le tutoriel doit l'écrire en tête, marque par marque (consigne « quand ne
-  pas le faire soi-même »).
-- Reste à lire : Toyota (batterie, surchauffe), Peugeot et Citroën (liquide de refroidissement, additif du filtre à
-  particules, mode dégradé), Renault p. 188 mot pour mot.
+  sur la batterie (démontage, débranchement) ; Peugeot et Citroën, le remplacement de la batterie des versions Stop &
+  Start dans le réseau ou un atelier qualifié ; Seat, la recharge par un atelier spécialisé (relevé du 15/11, p. 303, à
+  relire). Le tutoriel doit l'écrire en tête, marque par marque (consigne « quand ne pas le faire soi-même »).
+- **`bruit-moteur`** : aucune notice ne décrit les bruits du moteur thermique ; seules les lignes du voyant d'huile
+  (base) et la pression d'huile du tableau Renault et Dacia (p. 386, p. 349) s'appliquent.
+- Reste à lire : Toyota (batterie, surchauffe) ; Seat p. 303 mot pour mot.
