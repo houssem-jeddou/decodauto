@@ -76,8 +76,26 @@ def bruits() -> str:
     return "".join(p)
 
 
+def fumees() -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300">', FOND]
+    for i, (couleur, bord, titre, sous) in enumerate((("#e6ebf0", "#e6ebf0", "Blanche", "parfois normale"),
+                                                    ("#2b3138", "#8b97a6", "Noire", "à faire vérifier"),
+                                                    ("#5b8def", "#5b8def", "Bleue", "à faire vérifier"))):
+        x = 124 + i * 196
+        bx = x - 40
+        # Sortie d'échappement, puis trois volutes de fumée.
+        p.append(f'<rect x="{bx - 60}" y="176" width="60" height="22" rx="6" fill="#5d6876" stroke="#11151a" stroke-width="2"/>')
+        p.append(f'<ellipse cx="{bx}" cy="187" rx="6" ry="11" fill="#11151a"/>')
+        for dx, dy, r in ((18, 180, 14), (40, 162, 19), (68, 140, 24)):
+            p.append(f'<circle cx="{bx + dx}" cy="{dy}" r="{r}" fill="{couleur}" fill-opacity=".85" stroke="{bord}" stroke-width="2"/>')
+        coul_sous = AMBRE if i else VERT
+        p.append(texte(x, 240, titre, taille=26, poids=700))
+        p.append(texte(x, 270, sous, taille=24, couleur=coul_sous))
+    p.append("</svg>")
+    return "".join(p)
+
 if __name__ == "__main__":
-    for nom, f in (("puissance-voyants", puissance), ("broute-voyant-moteur", broute), ("bruit-normal-ou-pas", bruits)):
+    for nom, f in (("puissance-voyants", puissance), ("broute-voyant-moteur", broute), ("bruit-normal-ou-pas", bruits), ("fumee-couleurs", fumees)):
         s = f()
         (SORTIE / f"{nom}.svg").write_text(s + "\n", encoding="utf-8")
         print(nom, len(s))
