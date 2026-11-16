@@ -181,8 +181,19 @@ export function attendusDemoFormat2(brouillon: BrouillonFormat2, fichierDePage: 
     const fichier = fichierDePage(id);
     return p.texte_a_reprendre === true && fichier !== undefined ? [{ regle: 'FORMAT2-METHODE', fichier, brut: `FORMAT2-METHODE@${fichier}` }] : [];
   });
-  return [...lignes, ...pages, ...methode];
+  const paragraphes = PARAGRAPHES_A_REPRENDRE_DEMO.flatMap((id): Attendu[] => {
+    const fichier = fichierDePage(id);
+    return fichier === undefined ? [] : [{ regle: 'FORMAT2-PARAGRAPHES', fichier, brut: `FORMAT2-PARAGRAPHES@${fichier}` }];
+  });
+  return [...lignes, ...pages, ...methode, ...paragraphes];
 }
+
+/**
+ * Pages de la démonstration dont le texte en ligne (format 1, non repris) a des paragraphes de plus de trois phrases
+ * (FORMAT2-PARAGRAPHES, règle 2e ; F1.4) : textes repris aux lots F2 (voyants, outil) et F3 (code, loi montagne, socle).
+ * Une page reprise qui n'en a plus rend l'attendu inutile, ce que la construction signale (attendu non rencontré).
+ */
+export const PARAGRAPHES_A_REPRENDRE_DEMO: readonly string[] = ['voyant-moteur', 'voyant-adblue', 'voyants', 'code-p0420', 'loi-montagne', 'a-propos'];
 
 /**
  * Paires de liens absentes du plan dont une page de démonstration a besoin pour le renvoi « Votre marque » de sa ligne

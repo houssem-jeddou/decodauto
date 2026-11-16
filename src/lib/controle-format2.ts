@@ -18,6 +18,7 @@
 //  - FORMAT2-ARBRE : dans chaque arbre de décision, chaque verdict cité est une pastille (forme, gravité et libellé d'une
 //    ligne de l'encadré) qui termine une réponse,
 //    jamais un libellé écrit hors pastille (F1.3c) ;
+//  - FORMAT2-PARAGRAPHES : un paragraphe du texte rédigé a trois phrases au plus (règle 2e ; F1.4), pages du socle comprises ;
 //  - FORMAT2-SOMMAIRE : dès SOMMAIRE_MIN_H2 titres H2 dans le texte rédigé, un sommaire « Sur cette page » qui mène à
 //    chacun d'eux, sans lien vers une ancre absente (règle 2h).
 // Les mesures de hauteur (2a, 2i : premier écran, trois écrans) se font à la porte, avec un navigateur (conception, §5).
@@ -181,6 +182,8 @@ export function controlerFormat2(
   ].filter((m) => m !== '');
   if (methode.length > 0) constats.push(erreur('FORMAT2-METHODE', `le texte rédigé contient ${methode.join(' et ')} hors citation : au format 2, la méthode sort du texte, qui nomme la marque et le modèle ; les éditions et références vont dans « Sources » (règle 2d)`, fichier));
 
+  constats.push(...constatsParagraphes(html, fichier));
+
   // Arbre de décision (F1.3c et sa revue) : chaque verdict cité l'est en pastille (forme et libellé, jamais la couleur
   // seule), au libellé de la grille de son verdict, qui est celui d'une ligne de l'encadré ; sa gravité (data-gravite et
   // forme) est celle de ce verdict ; elle termine une réponse (dernier élément de son élément de liste, après la consigne) ;
@@ -230,4 +233,38 @@ export function controlerFormat2(
     }
   });
   return constats;
+}
+
+// ---- Paragraphes de trois phrases au plus (règle 2e ; F1.4) ---------------------------------------------------------
+
+/** Phrases d'un paragraphe au plus (règle 2e). */
+export const PHRASES_MAX_PARAGRAPHE = 3;
+
+/**
+ * Nombre de phrases d'un texte : une fin de phrase (point, point d'exclamation ou d'interrogation, points de suspension,
+ * suivis au besoin, espaces comprises, d'un guillemet ou d'une parenthèse fermants) suivie d'une majuscule. « p. 12 » ou « 0,3 bar. 2 » ne
+ * coupent pas (chiffre) ; une abréviation suivie d'une majuscule (« M. Dupont ») compterait une phrase de trop : aucune
+ * dans les textes du site.
+ */
+export function nombreDePhrases(texte: string): number {
+  const t = texte.replace(/\s+/g, ' ').trim();
+  if (t === '') return 0;
+  return (t.match(/[.!?…](?:[\s\u00a0\u202f]*["»)\]])*[\s\u00a0\u202f]+(?=[«"(\[]?[\s\u00a0\u202f]*[A-ZÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸŒÆ])/g) ?? []).length + 1;
+}
+
+/**
+ * FORMAT2-PARAGRAPHES : chaque paragraphe du texte rédigé (`[data-corps]`, hors citation, liste, tableau, figure et repère)
+ * a au plus PHRASES_MAX_PARAGRAPHE phrases (règle 2e : « paragraphes de trois phrases au plus »).
+ */
+export function constatsParagraphes(html: string, fichier: string): ConstatFormat2[] {
+  const $ = cheerio.load(html);
+  const longs: string[] = [];
+  $('[data-corps] p').each((_, el) => {
+    const p = $(el);
+    if (p.closest('blockquote, li, table, figure, .repere, [data-repere]').length > 0) return;
+    const texte = p.text().replace(/\s+/g, ' ').trim();
+    const n = nombreDePhrases(texte);
+    if (n > PHRASES_MAX_PARAGRAPHE) longs.push(`${n} phrases : « ${texte.slice(0, 60)}… »`);
+  });
+  return longs.length === 0 ? [] : [erreur('FORMAT2-PARAGRAPHES', `${longs.length} paragraphe(s) de plus de ${PHRASES_MAX_PARAGRAPHE} phrases dans le texte rédigé (règle 2e) : ${longs.slice(0, 3).join(' ; ')}`, fichier)];
 }

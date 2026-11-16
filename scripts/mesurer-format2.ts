@@ -92,6 +92,8 @@ function mesurerDansLaPage(): Omit<MesurePage, 'adresse' | 'largeur' | 'police'>
     illustrationApresProvenance: figure !== null && figure.previousElementSibling?.matches('[data-provenance]') === true,
     hautArbre: haut(arbre),
     hauteurPage: document.documentElement.scrollHeight,
+    sommaireAttendu: el('[data-ligne-transparence]') !== null || el('.colonne.socle') !== null,
+    sommaire: el('[data-sommaire]') !== null,
   };
 }
 

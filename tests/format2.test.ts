@@ -28,7 +28,7 @@ import {
   illustrationAccueil,
   renvoiNotices,
 } from '../src/lib/format2.ts';
-import { controlerFormat2 } from '../src/lib/controle-format2.ts';
+import { PHRASES_MAX_PARAGRAPHE, constatsParagraphes, controlerFormat2, nombreDePhrases } from '../src/lib/controle-format2.ts';
 import { marqueEtModele, modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
 import { ACCUEIL_FORMAT2, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
 import { mentionEnTete } from '../src/lib/composants.ts';
@@ -50,6 +50,7 @@ import {
   corpsAvecReperes,
   lireBrouillonFormat2,
   pageAvecBrouillon,
+  PARAGRAPHES_A_REPRENDRE_DEMO,
   voyantsAvecBrouillon,
 } from '../scripts/lib/demo-format2.ts';
 import { constatsAccueil, constatsHauteurReservee, constatsLienConfidentialite, constatsMentionEtSignalement, constatsPartCitee } from '../scripts/lib/dist.ts';
@@ -378,11 +379,12 @@ describe('format 2 : construction de démonstration', () => {
     assert.ok(!(await readFile(join(racine, MOTEUR), 'utf8')).includes('format:'));
   });
 
-  test('erreurs attendues : l\'empreinte de chaque ligne et de chaque page du brouillon (R4-EMPREINTE), rien d\'autre', () => {
+  test('erreurs attendues : l\'empreinte de chaque ligne et de chaque page du brouillon (R4-EMPREINTE), la méthode et les paragraphes des textes non repris, rien d\'autre', () => {
     const attendus = attendusDemoFormat2(brouillon, (id) => `src/content/voyant/${id}.md`);
     const aReprendre = Object.values(brouillon.pages).filter((p) => p.texte_a_reprendre === true).length;
-    assert.equal(attendus.length, Object.keys(brouillon.voyants).length + Object.keys(brouillon.pages).length + aReprendre);
-    assert.deepEqual([...new Set(attendus.map((a) => a.regle))].sort(), aReprendre > 0 ? ['FORMAT2-METHODE', 'R4-EMPREINTE'] : ['R4-EMPREINTE']);
+    // F1.4 : paragraphes de plus de trois phrases des textes en ligne non repris (FORMAT2-PARAGRAPHES, pages nommées).
+    assert.equal(attendus.length, Object.keys(brouillon.voyants).length + Object.keys(brouillon.pages).length + aReprendre + PARAGRAPHES_A_REPRENDRE_DEMO.length);
+    assert.deepEqual([...new Set(attendus.map((a) => a.regle))].sort(), ['FORMAT2-METHODE', 'FORMAT2-PARAGRAPHES', 'R4-EMPREINTE']);
   });
 
   test('option --demo-format2 : seulement sur dist-demo-format2 construit avec DEMO_FORMAT2=1 ; garde-fou DEMO-PUBLIEE', () => {
@@ -502,6 +504,29 @@ describe('format 2 : corrections après la revue (brief F1.2-corrections)', () =
     assert.ok(!avec('Le texte cite « voir p. 12 ».').includes('FORMAT2-METHODE'), 'citation entre guillemets');
     assert.ok(!avec('Le cap. 3 ne compte pas.').includes('FORMAT2-METHODE'));
     assert.ok(!avec('La notice dit « édition 01-20 ».').includes('FORMAT2-METHODE'), 'citation entre guillemets');
+  });
+});
+
+describe('format 2 : FORMAT2-PARAGRAPHES (règle 2e, F1.4)', () => {
+  test('phrases comptées : fin de phrase suivie d\'une majuscule ; « p. 12 », « 0,3 bar. » devant un chiffre ou une minuscule ne coupent pas', () => {
+    assert.equal(nombreDePhrases(''), 0);
+    assert.equal(nombreDePhrases('Une phrase.'), 1);
+    assert.equal(nombreDePhrases('Une. Deux ! Trois ? Quatre…'), 4);
+    assert.equal(nombreDePhrases('Voir la notice (p. 12) pour la valeur. Puis gonfler.'), 2);
+    assert.equal(nombreDePhrases('Toyota (arrêt immédiat). Moins stricts : Seat.'), 2);
+    assert.equal(nombreDePhrases('Il dit « arrêtez-vous. » Ensuite, repartez.'), 2);
+  });
+
+  test('un paragraphe de quatre phrases du texte rédigé échoue ; trois passent ; citations, listes, tableaux et repères exclus ; socle compris', () => {
+    const page = (corps: string): string => `<html><body><div data-corps>${corps}</div></body></html>`;
+    const quatre = '<p>Un. Deux. Trois. Quatre.</p>';
+    assert.deepEqual(constatsParagraphes(page('<p>Un. Deux. Trois.</p>'), 'x').map((c) => c.regle), []);
+    const echec = constatsParagraphes(page(quatre), 'x');
+    assert.deepEqual(echec.map((c) => c.regle), ['FORMAT2-PARAGRAPHES']);
+    assert.match(echec[0]?.message ?? '', /1 paragraphe\(s\) de plus de 3 phrases .*4 phrases : « Un\. Deux\./);
+    for (const enveloppe of ['blockquote', 'li', 'figure']) assert.deepEqual(constatsParagraphes(page(`<${enveloppe}>${quatre}</${enveloppe}>`), 'x'), [], enveloppe);
+    assert.deepEqual(constatsParagraphes(`<html><body><p>Un. Deux. Trois. Quatre.</p></body></html>`, 'x'), [], 'hors du texte rédigé');
+    assert.equal(PHRASES_MAX_PARAGRAPHE, 3);
   });
 });
 

@@ -60,7 +60,7 @@ import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
 import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-voyants.ts';
-import { SOMMAIRE_MIN_H2, causesFormat2, pageFormat2, pageVoyantFormat2, pastilleVerdict, sommaireHtml, teteSeule, titresDesSections } from './format2.ts';
+import { causesFormat2, pageFormat2, pageVoyantFormat2, pastilleVerdict, sommaireHtml, teteSeule, titresDesSections } from './format2.ts';
 import { pageOutilFormat2 } from './outil-format2.ts';
 import { REPONSES_MIN_ARBRE, fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, modeleFichePanne, modeleFicheTutoriel } from './fiche-panne.ts';
 
@@ -533,6 +533,12 @@ export const MARQUEUR_CONTACT = '{{contact}}';
  * confidentialité, le titre de la section reçoit son ancre stable, quel que soit le rendu du Markdown. Une référence
  * inconnue, ou une section de confidentialité absente, fait échouer la construction.
  */
+/**
+ * Titres à partir desquels une page du socle au format 2 a un sommaire (règle 2h, F1.4) : deux. Les pages du socle sont
+ * longues (mentions légales : 6,7 écrans de téléphone avec deux titres) ; FORMAT2-MESURES vérifie la règle sur la hauteur.
+ */
+export const SOMMAIRE_MIN_TITRES_SOCLE = 2;
+
 export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date_modification' | 'auteurs' | 'format'>, corpsHtml: string, methodeHtml?: string): string {
   const format2 = page.format === 2;
   const contact = `<!--email_off--><a href="mailto:${ADRESSE_SIGNALEMENT}">${texteHtml(ADRESSE_SIGNALEMENT)}</a><!--/email_off-->`;
@@ -562,11 +568,12 @@ export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date
     `<p class="socle-date" data-socle-date>${texteHtml(`Mis à jour le ${dateAffichee(page.date_modification)}`)}</p>`,
   ];
   // Format 2 (demande de changement n° 30, F1.3b) : tête de page nuit (mention en tête, H1), sans encadré ; texte sur fond
-  // clair ; ni illustration, ni emplacement publicitaire. Sommaire « Sur cette page » dès SOMMAIRE_MIN_H2 titres (règle 2h,
-  // revue de F1.3b : « à propos », plus de douze écrans) : dans la colonne sur téléphone, à droite sur ordinateur.
+  // clair ; ni illustration, ni emplacement publicitaire. Sommaire « Sur cette page » dès SOMMAIRE_MIN_TITRES_SOCLE titres
+  // (règle 2h : « à propos », plus de douze écrans ; mentions légales, plus de six, F1.4) : dans la colonne sur téléphone, à
+  // droite sur ordinateur.
   if (format2) {
     const entrees = titresDesSections(contenu.join(''));
-    const avecSommaire = entrees.length >= SOMMAIRE_MIN_H2;
+    const avecSommaire = entrees.length >= SOMMAIRE_MIN_TITRES_SOCLE;
     return [
       teteSeule(page.title),
       `<div class="page"><div class="colonne socle">${avecSommaire ? sommaireHtml(entrees, 'sommaire-colonne') : ''}${contenu.join('')}</div>`,

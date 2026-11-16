@@ -24,7 +24,7 @@ import {
 } from './cout.ts';
 import { ID_OUTIL_VOYANTS, controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
 import { normaliserRecherche } from './texte.ts';
-import { controlerFormat2 } from './controle-format2.ts';
+import { constatsParagraphes, controlerFormat2 } from './controle-format2.ts';
 import { ECART_COURT_MAX_MOTS, FORMAT2, motsDe, renvoiNotices, type RenvoiNotices } from './format2.ts';
 import { ecartDeLaCarte, lienNoticesDeLaCarte, entreesIndexFormat2, modeleOutilFormat2, outilVoyantsFormat2, texteEntreeIndex } from './outil-format2.ts';
 import {
@@ -700,6 +700,8 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
       constats.push(erreur('R7-PLAN-TYPE', `le plan du site range « ${socle.id} » dans le type « ${ligne.type} », la page est de type « socle »`, fichier));
     }
     if (html !== undefined) constats.push(...controlerHtmlSocle(socle, html, fichier));
+    // Format 2 (règle 2e, F1.4) : paragraphes de trois phrases au plus, pages du socle comprises.
+    if (html !== undefined && (lecture.data as { format?: number }).format === 2) constats.push(...constatsParagraphes(html, fichier));
     return { constats, id: socle.id };
   }
 

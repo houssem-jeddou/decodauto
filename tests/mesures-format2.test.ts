@@ -7,12 +7,12 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { ECRAN_TELEPHONE, TROIS_ECRANS, evaluerMesure, type MesurePage } from '../scripts/lib/mesures-format2.ts';
+import { ECRAN_TELEPHONE, SIX_ECRANS, TROIS_ECRANS, evaluerMesure, type MesurePage } from '../scripts/lib/mesures-format2.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const base: MesurePage = {
   adresse: '/voyants/moteur/', largeur: 375, police: 'chargee', policeChargee: true, largeurPage: 375, debordements: [], encadre: true,
-  basReponse: null, basVerdictUrgence: 373, basPremiereSituation: 522, basEncadre: 1593, hautIllustration: 1982, illustrationApresProvenance: true, hautArbre: null, hauteurPage: 12685,
+  basReponse: null, basVerdictUrgence: 373, basPremiereSituation: 522, basEncadre: 1593, hautIllustration: 1982, illustrationApresProvenance: true, hautArbre: null, hauteurPage: 12685, sommaireAttendu: true, sommaire: true,
 };
 const messages = (m: Partial<MesurePage>): string[] => evaluerMesure({ ...base, ...m }).map((c) => c.message);
 
@@ -46,6 +46,14 @@ describe('FORMAT2-MESURES : évaluation', () => {
     assert.match(messages({ hautIllustration: null })[0] ?? '', /aucune illustration/);
     assert.deepEqual(messages({ basEncadre: 2400, hautIllustration: 2800, illustrationApresProvenance: true }), []);
     assert.match(messages({ basEncadre: 2400, hautIllustration: 2800, illustrationApresProvenance: false })[0] ?? '', /suit immédiatement le bloc « Notices \/ Base du coût »/);
+  });
+
+  test('2h : page éditoriale ou du socle de plus de six écrans sans sommaire ; accueil et 404 non concernés ; page courte sans sommaire admise', () => {
+    assert.equal(SIX_ECRANS, 4002);
+    assert.match(messages({ sommaire: false })[0] ?? '', /plus de six écrans \(4002 px\), sans sommaire « Sur cette page » \(règle 2h\)/);
+    assert.deepEqual(messages({ sommaire: false, hauteurPage: 4000 }), []);
+    assert.deepEqual(messages({ sommaire: false, sommaireAttendu: false, encadre: false }), []);
+    assert.equal(messages({ sommaire: false, encadre: false, basPremiereSituation: null, hautIllustration: null }).length, 1, 'page du socle');
   });
 
   test('débordement : page plus large que l\'écran, ou élément hors d\'un bloc qui défile, à toute largeur', () => {
