@@ -28,7 +28,7 @@ situations:
         urgence: immédiate
       - source: notice-dacia-sandero-3
         emplacement: "p. 162, « Particularités des versions essence »"
-        extrait: "Ou des anomalies de fonctionnement telles que : – système d'allumage défectueux ou panne d'essence ou bougie débranchée se traduisant par des ratés d'allumage et des à-coups au cours de la conduite ; – perte de puissance, provoquent un échauffement excessif du pot catalytique […]. Si vous constatez les anomalies de fonctionnement ci-dessus, faites effectuer par un Représentant de la marque les réparations nécessaires au plus vite."
+        extrait: "Ou des anomalies de fonctionnement telles que : – système d'allumage défectueux […] se traduisant par des ratés d'allumage et des à-coups au cours de la conduite ; – perte de puissance, provoquent un échauffement excessif du pot catalytique […]. Si vous constatez les anomalies de fonctionnement ci-dessus, faites effectuer par un Représentant de la marque les réparations nécessaires au plus vite."
         verdict: oui avec précautions
         urgence: immédiate
       - source: notice-renault-clio-5
