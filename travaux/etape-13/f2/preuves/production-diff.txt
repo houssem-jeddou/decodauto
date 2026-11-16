@@ -1,0 +1,32 @@
+Construction de production (SITE_INDEXABLE=true npx astro build) de la branche et de main à cd2433f (git worktree), puis diff -rq, 16/11/2026.
+
+$ diff -rq dist <main>/dist | sort
+Files dist/404.html and <main>/dist/404.html differ
+Files dist/index.html and <main>/dist/index.html differ
+Files dist/sitemap.xml and <main>/dist/sitemap.xml differ
+Files dist/voyants/abs-esp/index.html and <main>/dist/voyants/abs-esp/index.html differ
+Files dist/voyants/adblue/index.html and <main>/dist/voyants/adblue/index.html differ
+Files dist/voyants/airbag/index.html and <main>/dist/voyants/airbag/index.html differ
+Files dist/voyants/batterie/index.html and <main>/dist/voyants/batterie/index.html differ
+Files dist/voyants/direction/index.html and <main>/dist/voyants/direction/index.html differ
+Files dist/voyants/fap/index.html and <main>/dist/voyants/fap/index.html differ
+Files dist/voyants/frein/index.html and <main>/dist/voyants/frein/index.html differ
+Files dist/voyants/huile/index.html and <main>/dist/voyants/huile/index.html differ
+Files dist/voyants/index.html and <main>/dist/voyants/index.html differ
+Files dist/voyants/moteur/index.html and <main>/dist/voyants/moteur/index.html differ
+Files dist/voyants/prechauffage/index.html and <main>/dist/voyants/prechauffage/index.html differ
+Files dist/voyants/pression-pneus/index.html and <main>/dist/voyants/pression-pneus/index.html differ
+
+Fichiers : 28 dans chaque construction. Pages hors du lot, identiques octet pour octet :
+  /a-propos/ : identique
+  /mentions-legales/ : identique
+  /codes-defaut/p0087/ : identique
+  /codes-defaut/p0299/ : identique
+  /codes-defaut/p0420/ : identique
+  /loi-montagne/ : identique
+  /pression-des-pneus/ : identique
+
+sitemap.xml : seules les dates lastmod des 12 pages voyants changent (2026-11-16) :
+      9 < lastmod>2026-11-14
+      3 < lastmod>2026-11-15
+     12 > lastmod>2026-11-16

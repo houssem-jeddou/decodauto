@@ -147,7 +147,7 @@ def main() -> None:
     nb_demandes = sum(1 for l in base for c in l['citations'] if c.get('demande'))
     w('# Paquet de validation, lot F2 (étape 13, format 2) : lignes de la base et pages voyants')
     w('')
-    w('> **Brouillon, jamais validé.** Version 2 du 16/11/2026, après la revue indépendante du paquet. Préparé par Claude '
+    w('> **Brouillon, jamais validé.** Version 3 du 16/11/2026 (pull request du lot F2 : accueil et page 404 ajoutés, une phrase de la page ABS et ESP reprise) ; version 2 après la revue indépendante du paquet. Préparé par Claude '
       'pour Houssem (03, règle 7 ; demande n° 30 : porte du format, lot par lot). Format téléphone. Données : branche '
       '`etape-13/f2-donnees` (`data/voyants.json`, `src/content/voyant/`, `src/illustrations/`), tirées de '
       '`travaux/etape-13/f2/brouillon-f2.json` ; paquet généré par `travaux/etape-13/f2/generer-paquet-f2.py`.')
@@ -166,19 +166,22 @@ def main() -> None:
       'du site, signalé comme tel : texte alternatif et légende), ses **repères de verdict** (un repère sous chaque titre '
       'qui pose la question d\'une seule ligne de l\'encadré ; aucun sous un titre qui mêle plusieurs cas) et les '
       '**phrases réécrites**, montrées avant et après (règle 2d : formule « Verdict retenu » retirée, références de '
-      'pages passées dans « Sources » ; règle 2e : paragraphes de trois phrases au plus).')
+      'pages passées dans « Sources » ; règle 2e : paragraphes de trois phrases au plus) ;')
+    w('4. **A1 à A7** : l\'**accueil** et la **page 404** au format 2 (avancés du lot F3 au lot F2, décision du 16/11 à 17 h 00) : '
+      'les textes affichés nouveaux, tirés du code (section 3) ; les textes de l\'accueil que tu as déjà validés (livrable 7.4a) '
+      'sont rappelés, inchangés.')
     w('')
-    w('**Comment répondre** : « Je valide le paquet F2, version 2 » ; ou « Je valide sauf : » suivi des numéros à reprendre '
-      '(par exemple « E3 : … ; D12 : … ; P4 : … »). Une retouche de forme ne relance pas de revue ; une retouche qui touche '
+    w('**Comment répondre** : « Je valide le paquet F2, version 3 » ; ou « Je valide sauf : » suivi des numéros à reprendre '
+      '(par exemple « E3 : … ; D12 : … ; P4 : … ; A2 : … »). Une retouche de forme ne relance pas de revue ; une retouche qui touche '
       'un fait ou un verdict, si.')
     w('')
     w('Ces textes entrent dans l\'empreinte de chaque ligne et de chaque page : elles ne seront versées qu\'après ta '
       'validation du contenu exact (`CLAUDE.md` : l\'empreinte ne se recalcule pas pour faire passer un contrôle).')
     w('')
-    w('**Rendu** : les captures des 12 pages à 375 × 667 et 1366 × 800 (police chargée et police de secours), la hauteur '
-      'de l\'encadré avant et après (règle 2b) et les mesures des règles 2a et 2i sont jointes au message qui te présente '
-      'ce paquet (construction de la pull request du lot F2). Planche des 12 illustrations : '
-      '[illustrations-f2-planche.png](illustrations-f2-planche.png).')
+    w('**Rendu** (pull request du lot F2) : captures des 13 pages (accueil compris) à 375 × 667 et 1366 × 800, police chargée '
+      'et police de secours, à côté de la page en ligne au format 1 ([captures/](captures/README.md)) ; mesures des règles 2a, 2b, '
+      '2h et 2i, hauteur de l\'encadré avant et après, largeur à 320 px et Lighthouse ([preuves/](preuves/README.md)). Planche '
+      'des 12 illustrations : [illustrations-f2-planche.png](illustrations-f2-planche.png).')
     w('')
     w('**Décisions prises dans ce paquet** (à contredire si tu n\'es pas d\'accord) : les numéros des points du contrôle '
       'technique écrits dans le texte (« point 8.2.12 », « points 8.2.11 et 8.2.12 ») restent, parce que le procès-verbal '
@@ -263,6 +266,27 @@ def main() -> None:
                 w(f'    Après : « {n} »')
         else:
             w('- Phrases réécrites : aucune.')
+    # Section 3 : accueil et page 404 (textes tirés du code par textes-accueil-404.ts, jamais recopiés).
+    tx = json.loads(subprocess.run(['node', 'travaux/etape-13/f2/textes-accueil-404.ts'], cwd=RACINE, capture_output=True, text=True, check=True).stdout)
+    acc, p404 = tx['accueil'], tx['page404']
+    w('')
+    w('## 3. Accueil et page 404 (format 2)')
+    w('')
+    w(f'Rappel, inchangés (validés au livrable 7.4a) : title « {acc["title"]} » ; H1 « {acc["h1"]} » ; premier paragraphe '
+      f'(tête de page) « {acc["paragraphes"][0]} » ; second paragraphe (carte « {acc["nouveaux"]["titreGuide"]} ») '
+      f'« {acc["paragraphes"][1]} ».')
+    w('')
+    w(f'- **A1** · titre de la grille : « {acc["nouveaux"]["titreVoyants"]} »')
+    w(f'- **A2** · phrase sous ce titre : « {acc["nouveaux"]["chapoVoyants"]} »')
+    w(f'- **A3** · lien vers l\'outil, sous la grille : « {acc["nouveaux"]["lienOutil"]} »')
+    w(f'- **A4** · titre de la carte du second paragraphe : « {acc["nouveaux"]["titreGuide"]} »')
+    w(f'- **A5** · illustration de l\'accueil (`src/illustrations/{acc["illustration"]["fichier"]}.svg`, affichée sur ordinateur, '
+      f'sans autre légende que « Illustration decodauto. ») : texte alternatif « {acc["illustration"]["alt"]} »')
+    w(f'- **A6** · libellé de chacun des {len(tx["pictogrammes"])} dessins de la grille (un dessin, sans verdict ; le lien mène à la '
+      'page du voyant, ou à sa ligne dans l\'outil) : ' + ' ; '.join(f'« {v} »' for v in tx['pictogrammes'].values()))
+    w(f'- **A7** · page 404 au format 2 : bouton « {p404["bouton"]} » (vers l\'outil, le seul de la page) et lien « {p404["lienAccueil"]} » '
+      f'(au format 1 : « {p404["lienAccueil"][0].lower() + p404["lienAccueil"][1:]} », dans une liste) ; inchangés : H1 « {p404["h1"]} », '
+      f'phrase « {p404["phrase"]} », title « {p404["title"]} ».')
     SORTIE.write_text('\n'.join(out) + '\n', encoding='utf-8')
     print(SORTIE, len('\n'.join(out)))
 

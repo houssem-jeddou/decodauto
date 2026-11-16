@@ -1,0 +1,15 @@
+Brouillon, jamais validé. Lighthouse mobile, 3 passages, médianes : npx lhci autorun (configuration de lighthouserc.json, adresses réduites aux 13 pages du lot) sur la construction de production de la branche (SITE_INDEXABLE=true), puis node scripts/scores-lighthouse.ts, 16/11/2026.
+
+/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 903 ms, TBT 0 ms
+/voyants/abs-esp/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/adblue/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 903 ms, TBT 0 ms
+/voyants/airbag/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 905 ms, TBT 0 ms
+/voyants/batterie/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1051 ms, TBT 0 ms
+/voyants/direction/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/fap/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 909 ms, TBT 0 ms
+/voyants/frein/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/huile/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1051 ms, TBT 0 ms
+/voyants/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 905 ms, TBT 0 ms
+/voyants/moteur/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/prechauffage/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/voyants/pression-pneus/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms

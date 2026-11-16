@@ -50,5 +50,8 @@ describe('charte B : coupures de ligne (lot F2, recette de la porte 10)', () => 
   test('lien « Votre marque » : jamais coupé sur deux lignes ; plage du coût probable : la préposition reste avec sa pastille', () => {
     assert.match(css, /a\[data-lien-notices\]\{white-space:nowrap\}/);
     assert.match(css, /\.borne\{white-space:nowrap\}/);
+    // H1 à 1,4 rem sur téléphone et tablette (règle 2a, voyant de pression des pneus en police de secours), 2,1 rem sur ordinateur.
+    assert.match(css, /\nh1\{font-family:var\(--police-titre\);font-weight:700;font-size:1\.4rem;/);
+    assert.match(css, /h1\{font-size:2\.1rem\}/);
   });
 });
