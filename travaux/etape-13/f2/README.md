@@ -1,4 +1,7 @@
-# Lot F2 : données du format 2 (brouillon, jamais validé)
+# Lot F2 : données du format 2 (validé par Houssem le 16/11/2026 à 21 h 30, heure de Tunis)
+
+**Validation de Houssem : 16/11/2026, 21 h 30 (heure de Tunis), « Je valide le paquet F2, version 4 ».** Les sections
+ci-dessous décrivent le travail tel qu'il était avant cette validation ; la dernière dit ce qui a été fait après.
 
 `brouillon-f2.json` : pour les 26 lignes de la base voyants (`data/voyants.json`), la ligne d'écart courte
 (`ecart_court`, 16 lignes qui ont un `ecart_marques`) et « ce que demande la notice » de chacune des 126 citations
@@ -79,3 +82,15 @@ Reste pour la pull request du lot F2 : `date_modification` des pages, revue ind�
   m4 : « Sous 800 km » retiré des deux demandes AdBlue (le seuil n'est pas dans l'extrait) ; m5, m6 : items M2 à M5 ;
   m11 : captures de la page 404. Les autres mineurs sont dans la section 5 du paquet (points ouverts).
 - Libellé d'urgence du tableau des notices jamais coupé (item M4). Paquet en version 4 ; preuves et captures refaites.
+
+## Validation de Houssem et empreintes (16/11/2026, après 21 h 30)
+- Validation : 16/11/2026, 21 h 30 (heure de Tunis), phrase exacte : « Je valide le paquet F2, version 4 ».
+- Contenu vérifié identique à la version 4 avant les empreintes : tête `92a08ea` (aucun commit depuis) ; paquet régénéré
+  sans différence ; `appliquer-f2.py --verifier` : 0 différence avec `brouillon-f2.json` ; `verifier-pages-f2.py` : 0 erreur.
+- Empreintes écrites par la commande officielle (`node scripts/empreinte.ts --voyant <id>` pour les 26 lignes de
+  `data/voyants.json`, `node scripts/empreinte.ts <page>` pour les 12 pages de `src/content/voyant/`), sans autre
+  changement de données : 38 lignes modifiées, chacune un champ `validation`. L'accueil n'a pas d'empreinte (aucun encadré
+  de décision) : le contrôle n'en attend pas.
+- Tests mis à jour en conséquence : les pages au format 2 passent sans R4-EMPREINTE ; leur version au format 1
+  (`tests/format1.ts`, modèles du format 1) porte R4-EMPREINTE, puisque l'empreinte couvre le format 2.
+- En tête du paquet : la validation (générée par `generer-paquet-f2.py`, contenu de la version 4 inchangé).

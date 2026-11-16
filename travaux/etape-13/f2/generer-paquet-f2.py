@@ -166,7 +166,7 @@ def main() -> None:
     nb_demandes = sum(1 for l in base for c in l['citations'] if c.get('demande'))
     w('# Paquet de validation, lot F2 (étape 13, format 2) : lignes de la base et pages voyants')
     w('')
-    w('> **Brouillon, jamais validé.** Version 4 du 16/11/2026 (après la revue indépendante de la pull request n° 71 : trois « ce que demande la notice » reprennent « avec ménagement », trois autres et deux lignes d\'écart reprises, hauteur des illustrations, corrections de modèle et date de mise à jour) ; version 3 : accueil et page 404 ; version 2 : après la revue indépendante du paquet. Préparé par Claude '
+    w('> **Validé par Houssem le 16/11/2026 à 21 h 30 (heure de Tunis) : « Je valide le paquet F2, version 4 ».** Empreintes des 26 lignes de la base et des 12 pages écrites ensuite par `npm run empreinte`, sur le contenu de la version 4 (`92a08ea`), sans autre changement.\n>\n> Version 4 du 16/11/2026 (après la revue indépendante de la pull request n° 71 : trois « ce que demande la notice » reprennent « avec ménagement », trois autres et deux lignes d\'écart reprises, hauteur des illustrations, corrections de modèle et date de mise à jour) ; version 3 : accueil et page 404 ; version 2 : après la revue indépendante du paquet. Préparé par Claude '
       'pour Houssem (03, règle 7 ; demande n° 30 : porte du format, lot par lot). Format téléphone. Données : branche '
       '`etape-13/f2-donnees` (`data/voyants.json`, `src/content/voyant/`, `src/illustrations/`), tirées de '
       '`travaux/etape-13/f2/brouillon-f2.json` ; paquet généré par `travaux/etape-13/f2/generer-paquet-f2.py`.')
