@@ -25,7 +25,11 @@ Preuves de référence (commandes lancées sur la branche ; la CI de la PR les r
   plan `batterie-changer` ↔ `voyant-batterie`) ; liens : 582 internes vérifiés, 0 problème ;
 - `npm run mesures:format2` (FORMAT2-MESURES, Chromium) : 14 pages, 84 mesures, **0 erreur**, 2 signalements (illustration
   AdBlue au-delà de trois écrans, encadré de quatre lignes : règle 2i assouplie par la demande n° 32)
-  (`porte/mesures-format2.log`, `porte/mesures-format2.json`). Même mesure sur la démonstration construite depuis `main`
+  (`porte/mesures-format2.log`, `porte/mesures-format2.json`). **Environnement de mesure** : police du système Inter,
+  proche des polices des téléphones (Roboto, SF) et celle du poste qui a mesuré le pilote ; la CI l'installe
+  (`fonts-inter`) avant les mesures. Avec DejaVu Sans (police par défaut d'un poste Linux, celle de la CI sans ce
+  réglage), la première situation de l'outil voyants finit à 673 px (6 px au-delà de 2a) et le bouton du bandeau passe sous
+  le nom du site (il débordait de 3 à 9 px avant que le bandeau ne passe à la ligne). Même mesure sur la démonstration construite depuis `main`
   (464fe7d, avant F1.4) : **50 erreurs** (`porte/mesures-format2-main-464fe7d.log`), corrigées ici (§3).
 
 ## 1. Critères de la ligne 13 de `docs/03` (colonne « Porte de sortie »)

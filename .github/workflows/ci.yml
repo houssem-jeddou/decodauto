@@ -145,6 +145,16 @@ jobs:
       - name: Liens cassés
         if: ${{ !cancelled() }}
         run: node scripts/liens.ts --dist dist-exemples --exemples
+      - name: Police du système des mesures (Inter, proche des polices des téléphones, comme le poste du pilote ; FORMAT2-MESURES)
+        if: ${{ !cancelled() }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends fonts-inter
+          mkdir -p ~/.config/fontconfig
+          printf '%s\n' '<?xml version="1.0"?>' '<!DOCTYPE fontconfig SYSTEM "fonts.dtd">' '<fontconfig>' \
+            '<alias binding="strong"><family>system-ui</family><prefer><family>Inter</family></prefer></alias>' \
+            '<alias binding="strong"><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>' \
+            '</fontconfig>' > ~/.config/fontconfig/fonts.conf
+          fc-cache -f && fc-match system-ui && fc-match sans-serif
       - name: Mesures du format 2 dans un navigateur (pages au format 2 de la recette ; FORMAT2-MESURES)
         if: ${{ !cancelled() }}
         run: CHROME_PATH="$(command -v google-chrome || command -v chromium)" node scripts/mesurer-format2.ts --dist dist-exemples
@@ -205,6 +215,16 @@ jobs:
       - name: Liens cassés
         if: ${{ !cancelled() }}
         run: node scripts/liens.ts --dist dist-demo-format2
+      - name: Police du système des mesures (Inter, proche des polices des téléphones, comme le poste du pilote ; FORMAT2-MESURES)
+        if: ${{ !cancelled() }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends fonts-inter
+          mkdir -p ~/.config/fontconfig
+          printf '%s\n' '<?xml version="1.0"?>' '<!DOCTYPE fontconfig SYSTEM "fonts.dtd">' '<fontconfig>' \
+            '<alias binding="strong"><family>system-ui</family><prefer><family>Inter</family></prefer></alias>' \
+            '<alias binding="strong"><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>' \
+            '</fontconfig>' > ~/.config/fontconfig/fonts.conf
+          fc-cache -f && fc-match system-ui && fc-match sans-serif
       - name: Mesures du format 2 dans un navigateur (règles 2a et 2i, débordement à 320, 375 et 1366 px ; FORMAT2-MESURES)
         if: ${{ !cancelled() }}
         run: CHROME_PATH="$(command -v google-chrome || command -v chromium)" node scripts/mesurer-format2.ts --dist dist-demo-format2
