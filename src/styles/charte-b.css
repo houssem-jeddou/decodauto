@@ -42,6 +42,8 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid var
 .bouton-voyant{margin-left:auto;display:inline-flex;align-items:center;gap:.35rem;font-weight:600;font-size:.8125rem;white-space:nowrap;text-decoration:none;padding:.4rem .7rem}
 .mention-ia{max-width:72rem;margin:0 auto;padding:.3rem 1rem .05rem;font-size:1rem;line-height:1.35}
 .tete-int{max-width:44rem;margin:0 auto;padding:.15rem 1rem .5rem}
+/* Tête sans fil d'Ariane (socle, 404) : même écart entre la mention et le H1 que les pages éditoriales (revue de F1.3b). */
+.tete-seule .tete-int{padding-top:1.75rem}
 .fil{font-size:.8125rem;margin:.1rem 0 .3rem}
 .fil ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.25rem}
 .fil li+li::before{content:"›";margin:0 .3rem;opacity:.7}
@@ -200,6 +202,8 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
   .tableau-cartes th,.tableau-cartes td{padding:.25rem 0}
   .tableau-cartes td+td,.tableau-cartes th+td{border-top:1px solid var(--bord)}
   .tableau-cartes td::before{content:attr(data-libelle);display:block;font-size:.75rem;font-weight:700;color:var(--texte-doux)}
+  /* Titre de la carte : la première cellule de la rangée (th scope="row", revue de F1.3b). */
+  .tableau-cartes tbody th{padding-top:0;font-family:var(--police-titre);font-size:1rem;line-height:1.3}
 }
 .liees ul{list-style:none;padding:0;margin:.5rem 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:.5rem}
 .liees a{display:flex;align-items:center;gap:.5rem;padding:.5rem .6rem;text-decoration:none;color:var(--texte);font-weight:600;font-size:.9375rem;min-height:3.2rem}
@@ -289,6 +293,27 @@ main>.accueil-main{max-width:72rem}
 .outil-voyants:has(#da-filtre-vert:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="vert"]),
 .outil-voyants:has(#da-filtre-bleu:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="bleu"]),
 .outil-voyants:has(#da-filtre-blanc:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="blanc"]){display:none}
+/* Pages du lot F3 au format 2 (F1.3b) : code en chasse fixe dans la fiche du code, définitions des fiches sans rangées
+   (mentions légales), rangée « dépannage sur autoroute » du coût, tête de page sans encadré (socle, 404). */
+.fiche-code h2 .code{font-family:var(--mono);font-size:.92em;padding:.05rem .4rem;border-radius:6px}
+.fiche>dt{margin-top:.55rem}.fiche>dt:first-of-type{margin-top:.45rem}.fiche>dd:last-of-type{margin-bottom:.5rem}
+.cas-intitule{display:none}
+/* Cas décrits par marque sur téléphone (revue de F1.3b) : une seule carte, un cas par rangée, un seul filet entre deux cas,
+   la marque en tête de son cas, la source sous le texte sans filet. */
+@media (max-width:40rem){
+  .tableau-cartes .cas-intitule{display:inline;font-weight:700}
+  .tableau-par-marque tbody th{font-size:1.05rem}
+  .tableau-par-marque .cas-sources{margin-top:.3rem;font-size:.8125rem;color:var(--texte-doux)}
+}
+.montant.depannage{margin:.45rem 0 .2rem;padding:.45rem .55rem;font-size:.875rem;line-height:1.4;border-radius:10px}
+.colonne.socle{padding-top:.2rem}
+.colonne.socle>:is(:first-child,.sommaire-colonne+*)>h2:first-of-type{margin-top:1.1rem}
+.colonne.socle .encart h2,.colonne.socle .encart>h2{margin-top:.2rem}
+/* Page 404 : pied de page en bas de l'écran, même quand la page est courte (revue de F1.3b). */
+body:has(.tete-404){min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+body:has(.tete-404)>main{flex:1 0 auto}
+.actions-404{display:flex;flex-wrap:wrap;gap:.7rem 1.1rem;align-items:center;margin:1rem 0 .4rem}
+.actions-404 .bouton-voyant{margin-left:0;font-size:.9375rem;padding:.55rem .95rem}
 
 @media (min-width:40rem){
   .grille-voyants{grid-template-columns:repeat(auto-fill,minmax(6.5rem,1fr))}
@@ -378,6 +403,12 @@ main>.accueil-main{max-width:72rem}
 :root .illustration-accueil{background:transparent;padding:0}
 @media (min-width:60rem){:root .voyants{--rayon-voyants:20px;margin-top:1rem}}
 @media (max-width:40rem){:root .tableau-cartes table{border-radius:0;overflow:visible}:root .tableau-cartes th,:root .tableau-cartes td{border-bottom:0}}
+@media (max-width:40rem){
+  :root .tableau-par-marque table{background:var(--surface);border:1px solid var(--bord);border-radius:12px}
+  :root .tableau-par-marque tr{margin:0;padding:.7rem .85rem;border:0;border-radius:0;background:transparent}
+  :root .tableau-par-marque tr+tr{border-top:1px solid var(--bord)}
+  :root .tableau-par-marque th+td,:root .tableau-par-marque td+td{border-top:0}
+}
 :root .decision .bouton-voyant{color:#1a1300}
 :root .diode{background:var(--dv);box-shadow:0 0 6px var(--dv)}
 :root .diode[data-couleur="orange"]{--dv:var(--v-orange)}:root .diode[data-couleur="rouge"]{--dv:var(--v-rouge)}:root .diode[data-couleur="vert"]{--dv:var(--v-vert)}:root .diode[data-couleur="bleu"]{--dv:var(--v-bleu)}
@@ -389,3 +420,8 @@ main>.accueil-main{max-width:72rem}
 :root .outil-resume,:root .outil-situation,:root .outil-detail{color:var(--nuit-doux)}
 :root .outil-groupe a{color:var(--nuit-lien)}
 :root .outil-ligne:target{box-shadow:0 0 0 2px var(--ambre)}
+:root .tete-seule .tete-int{padding-bottom:1.4rem}
+:root .fiche-code h2 .code{background:var(--panneau);color:var(--ambre)}
+:root .depannage{background:var(--cellule);border:1px solid var(--filet-nuit);color:var(--nuit-texte)}
+:root .depannage strong{color:#fff}
+:root .lien-accueil{color:var(--nuit-lien);font-weight:600}

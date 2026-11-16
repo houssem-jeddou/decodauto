@@ -10,7 +10,7 @@
 //                         (le workflow hebdomadaire l'utilise avec R5-REVUE-DEPASSEE, COUT-A-REVERIFIER et
 //                         COUT-FOURCHETTE-A-REVOIR pour être prévenu).
 // Variables : SITE_INDEXABLE, CONTROLE_DATE (AAAA-MM-JJ, pour les tests).
-import { appendFile } from 'node:fs/promises';
+import { appendFile, readdir } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { argv, cwd, env, exit, stdout } from 'node:process';
 import { codeSortie, codesEchec, sontBloquants } from '../src/lib/controle.ts';
@@ -47,7 +47,10 @@ const demoFormat2 = argv.includes('--demo-format2');
 const brouillon = demoFormat2 ? await lireBrouillonFormat2(racine) : undefined;
 // Pages de démonstration des modèles panne et dossier (tests/demo/format2, revue de F1.3c) : sans empreinte de validation.
 const pagesDemo = brouillon !== undefined ? (await listerFichiers(resolve(racine, DOSSIER_PAGES_DEMO_FORMAT2), '.md')).map((f) => relative(racine, f).split('\\').join('/')) : [];
-const attendus = [...lireAttendus(argv), ...(brouillon !== undefined ? [...attendusDemoFormat2(brouillon, (id) => `src/content/voyant/${id}.md`), ...attendusPagesDemo(pagesDemo)] : [])];
+// Fichier de chaque page du brouillon, quel que soit son type (pages voyants, codes défaut, pneus et obligations : F1.3b).
+const fichiersDeContenu = brouillon !== undefined ? (await readdir(resolve(racine, 'src/content'), { recursive: true })).filter((f) => f.endsWith('.md')).map((f) => `src/content/${f.split('\\').join('/')}`) : [];
+const fichierDePage = (id: string): string | undefined => fichiersDeContenu.find((f) => f.endsWith(`/${id}.md`));
+const attendus = [...lireAttendus(argv), ...(brouillon !== undefined ? [...attendusDemoFormat2(brouillon, fichierDePage), ...attendusPagesDemo(pagesDemo)] : [])];
 const bilanSite = await controlerSite({ racine, dist, aujourdhui: aujourdhui(), indexable: mode.indexable, exemples, brouillonFormat2: brouillon });
 const { informations, pagesEditoriales } = bilanSite;
 const { constats, absorbes } = appliquerAttendus(bilanSite.constats, attendus);

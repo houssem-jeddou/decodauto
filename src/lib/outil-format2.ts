@@ -25,6 +25,7 @@ import { attributHtml, texteHtml } from './html.ts';
 import {
   IDENTIFIANTS,
   adresseMethode,
+  ancreNotices,
   cheminDAriane,
   filDAriane,
   graviteDuVerdict,
@@ -41,6 +42,8 @@ import { LIBELLES_PICTOGRAMMES } from './pictogrammes.ts';
 import {
   BALANCE,
   FORMAT2,
+  lienDuRenvoi,
+  renvoiNotices,
   HORLOGE,
   SOMMAIRE_MIN_H2,
   coutFormat2,
@@ -100,6 +103,15 @@ const tuileOutil = (dessin: string | undefined, pictogramme: string, couleur: st
  * entier). Une ligne dont les marques divergent sans ligne courte fait échouer la construction (outilVoyantsFormat2).
  */
 export const ecartDeLaCarte = (l: Pick<LigneOutil, 'ecart' | 'ecartCourt'>): string | undefined => (l.ecart === undefined ? undefined : l.ecartCourt);
+
+/**
+ * Lien « Votre marque » d'une carte dont les marques divergent (règle 2b étendue à l'outil, décision du 16/11/2026) : la
+ * partie du voyant au tableau des notices de sa page (`#da-notices-<voyant>`), seulement si cette page est construite
+ * (`page` de la ligne, jamais l'outil lui-même). Une ligne rattachée à la page outil (le voyant STOP, demande n° 23) n'a pas
+ * de tableau : pas de lien.
+ */
+export const lienNoticesDeLaCarte = (l: Pick<LigneOutil, 'voyant' | 'ecart' | 'page'>): string | undefined =>
+  l.ecart === undefined || l.page === undefined ? undefined : `${l.page.adresse}#${ancreNotices(l.voyant)}`;
 
 // ---- Ordre des cartes : par paire (pictogramme, couleur) ------------------------------------------------------------
 
@@ -217,12 +229,14 @@ function filtreFormat2(modele: ModeleOutil): string {
 function carteFormat2(l: LigneOutil, pictogrammes: ReadonlyMap<string, string>): string {
   const sources = phraseSources(l);
   const ecart = ecartDeLaCarte(l);
+  const lienNotices = lienNoticesDeLaCarte(l);
+  const lien = lienNotices !== undefined ? ` <a href="${attributHtml(lienNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienVotreMarque)}</a>` : '';
   return [
     `<li class="ligne outil-ligne" id="${attributHtml(ancreLigneOutil(l.voyant))}" data-outil-ligne data-voyant="${attributHtml(l.voyant)}" data-couleur="${attributHtml(l.couleur)}" data-verdict="${attributHtml(l.verdict)}" data-urgence="${attributHtml(l.urgence)}" data-gravite="${graviteDuVerdict(l.verdict)}" data-notices="${l.notices.length}">`,
     `<div class="ligne-tete">${tuileOutil(pictogrammes.get(l.pictogramme), l.pictogramme, l.couleur)}<div><h4 class="outil-nom">${texteHtml(l.nom)}</h4><p class="outil-situation">${texteHtml(l.situation)}</p></div></div>`,
     `<p class="badges"><span class="verdict">${formeGravite(l.verdict)}${texteHtml(GRILLE_VERDICTS[l.verdict].libelle)}</span><span class="urgence">${HORLOGE}${texteHtml(GRILLE_URGENCES[l.urgence].libelle)}</span></p>`,
     `<p class="action">${texteHtml(l.action)}</p>`,
-    ecart !== undefined ? `<p class="ecart" data-ecart-court>${BALANCE}<span class="vh">${texteHtml(FORMAT2.selonLaMarque)}</span>${texteHtml(ecart)}</p>` : '',
+    ecart !== undefined ? `<p class="ecart" data-ecart-court>${BALANCE}<span class="vh">${texteHtml(FORMAT2.selonLaMarque)}</span>${texteHtml(ecart)}${lien}</p>` : '',
     l.page !== undefined ? `<p class="outil-page"><a href="${attributHtml(l.page.adresse)}">${texteHtml(`${LIBELLE_LIEN_PAGE} : ${l.page.libelle}`)}</a></p>` : '',
     `<details class="outil-detail"><summary>${texteHtml(libelleDetail(l))}</summary>`,
     sources !== '' ? `<p>${texteHtml(sources)}</p>` : '',
@@ -310,6 +324,8 @@ export function pageOutilFormat2(
       urgence: l.urgence,
       action: l.action,
       ecartCourt: l.ecart_marques !== undefined ? l.ecart_court : undefined,
+      // Règle 2b étendue à l'outil : la ligne d'écart de l'encadré renvoie au tableau de la page du voyant (renvoiNotices).
+      lienNotices: l.ecart_marques === undefined ? undefined : lienDuRenvoi(renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: site.voyants, plan: site.plan, voisins: indexerPlan(site.plan).voisins.get(page.id) ?? new Set(), auTableau: new Set(), construite: (id) => site.libelles.has(id) })),
       notices: sourcesDeLaLigne(l.sources, site.sources).notices.length,
       pictogramme: voyant !== undefined ? site.pictogrammes.get(voyant.pictogramme) : undefined,
       couleur: voyant?.couleur,

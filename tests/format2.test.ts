@@ -26,6 +26,7 @@ import {
   insecableApresPage,
   minusculeInitiale,
   illustrationAccueil,
+  renvoiNotices,
 } from '../src/lib/format2.ts';
 import { controlerFormat2 } from '../src/lib/controle-format2.ts';
 import { marqueEtModele, modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
@@ -95,7 +96,8 @@ async function construire(corps = CORPS, fichier = MOTEUR) {
   const { site, contexte } = await siteDemo();
   const { brut, page } = await pageDemo(fichier);
   const html = documentFormat2(pageVoyantF2(page, site, corps), page, contexte.plan.get(page.id)?.adresse ?? '/');
-  return { site, contexte, brut, page, html };
+  // Pages écrites : celles de la démonstration (renvoi « Votre marque » vers la page d'un voyant rattaché ailleurs).
+  return { site, contexte: { ...contexte, pagesEcrites: site.libelles }, brut, page, html };
 }
 
 describe('format 2 : briques (lot F1, F1.2)', () => {
@@ -162,7 +164,7 @@ describe('format 2 : modèle des pages voyants', () => {
     const { page } = await pageDemo();
     assert.deepEqual(modeleDeLaPage('voyant', page), { modele: pageVoyantF2 });
     assert.deepEqual(modeleDeLaPage('voyant', { ...page, format: 1 } as PageEditoriale), { modele: pageVoyant });
-    for (const type of ['code-defaut', 'pneus'] as const) assert.match((modeleDeLaPage(type, page) as { absent: string }).absent, /format 2 .* F1\.3/);
+    // Outil : tests/outil-format2.test.ts ; panne et dossier : tests/format2-panne.test.ts ; codes défaut et pneus : tests/format2-f3.test.ts.
   });
 
   test('ordre de la charte graphique §4 : mention, fil, H1, encadré, signature, transparence, notices et coût, illustration, sommaire, texte, causes, tableau, sources ; H1 dans main', async () => {
@@ -199,10 +201,49 @@ describe('format 2 : modèle des pages voyants', () => {
     const { brut, contexte, html } = await construire(corps, ADBLUE);
     assert.deepEqual(regles(controlerPage({ type: 'voyant', brut, fichier: ADBLUE }, contexte, html).constats), ['R4-EMPREINTE']);
     const $ = cheerio.load(html);
-    // Moins de trois H2 dans le texte : pas de sommaire. La ligne du voyant moteur n'a pas de partie au tableau : son lien
-    // « Votre marque » mène au tableau entier.
+    // Moins de trois H2 dans le texte : pas de sommaire. La ligne du voyant moteur n'a pas de partie au tableau de la page :
+    // son lien « Votre marque » mène à la partie du voyant sur la page du voyant moteur, que le plan lie à la page AdBlue
+    // (revue de F1.3b, B1 : un seul tableau par voyant, sur sa page).
     assert.equal($('[data-sommaire]').length, 0);
-    assert.equal($('[data-encadre-ligne]').eq(2).find('[data-ecart-court] a').attr('href'), '#da-notices');
+    assert.equal($('[data-encadre-ligne]').eq(2).find('[data-ecart-court] a').attr('href'), '/voyants/moteur/#da-notices-moteur-orange-fixe');
+    assert.equal($('[data-tableau-notices] [data-voyant="moteur-orange-fixe"]').length, 0);
+  });
+
+  test('renvoi « Votre marque » (revue de F1.3b, B1) : sur la page, ou sur la page du voyant liée par le plan et construite ; sinon absent, avec la raison', () => {
+    const voyants = new Map([['a', { page: 'p' }], ['b', { page: 'q' }]]);
+    const plan = new Map([['p', { adresse: '/p/' }], ['q', { adresse: '/q/' }]]);
+    const base = { pageId: 'p', voyants, plan, voisins: new Set(['q']), auTableau: new Set(['a']), construite: () => true };
+    assert.deepEqual(renvoiNotices({ ...base, voyant: 'a' }), { lien: '#da-notices-a' });
+    assert.match((renvoiNotices({ ...base, voyant: 'a', auTableau: new Set() }) as { absent: string }).absent, /sans partie au tableau/);
+    assert.deepEqual(renvoiNotices({ ...base, voyant: 'b' }), { lien: '/q/#da-notices-b' });
+    assert.match((renvoiNotices({ ...base, voyant: 'b', voisins: new Set() }) as { absent: string }).absent, /paire de liens p ↔ q à proposer/);
+    assert.match((renvoiNotices({ ...base, voyant: 'b', construite: () => false }) as { absent: string }).absent, /pas encore construite/);
+    assert.match((renvoiNotices({ ...base, voyant: undefined }) as { absent: string }).absent, /ligne saisie/);
+  });
+
+  test('FORMAT2-ECART vérifie le renvoi au tableau des notices : lien absent, mal dirigé, ancre absente, page non liée par le plan ou non construite', async () => {
+    const moteur = await construire();
+    const controle = (h: string, contexte = moteur.contexte, brut = moteur.brut, fichier = MOTEUR): string[] => regles(controlerPage({ type: 'voyant', brut, fichier }, contexte, h).constats);
+    assert.deepEqual(controle(moteur.html), ['R4-EMPREINTE']);
+    const avec = (f: ($: cheerio.CheerioAPI) => void): string => {
+      const $ = cheerio.load(moteur.html);
+      f($);
+      return $.html();
+    };
+    // Ligne 1 (moteur orange fixe, rattaché à la page) : lien retiré, mal dirigé, ancre retirée du tableau.
+    assert.ok(controle(avec(($) => $('[data-encadre-ligne]').eq(0).find('[data-lien-notices]').remove())).includes('FORMAT2-ECART'));
+    assert.ok(controle(avec(($) => $('[data-encadre-ligne]').eq(0).find('[data-lien-notices]').attr('href', '#da-notices'))).includes('FORMAT2-ECART'));
+    assert.ok(controle(avec(($) => $('#da-notices-moteur-orange-fixe').removeAttr('id'))).includes('FORMAT2-ECART'));
+    // Page AdBlue : la ligne du voyant moteur renvoie à la page du voyant moteur ; non construite, ou non liée par le plan.
+    const adblue = await construire('<h2 id="a">Peut-on rouler ?</h2><p>Texte.</p>', ADBLUE);
+    const ctx = adblue.contexte;
+    assert.deepEqual(controle(adblue.html, ctx, adblue.brut, ADBLUE), ['R4-EMPREINTE']);
+    const sansMoteur = new Map([...(ctx.pagesEcrites ?? [])].filter(([id]) => id !== 'voyant-moteur'));
+    assert.ok(controle(adblue.html, { ...ctx, pagesEcrites: sansMoteur }, adblue.brut, ADBLUE).includes('FORMAT2-ECART'));
+    const planSansLien = new Map([...ctx.plan].map(([id, l]) => [id, id === 'voyant-adblue' || id === 'voyant-moteur' ? { ...l, liens: (l.liens ?? []).filter((c) => c !== 'voyant-moteur' && c !== 'voyant-adblue') } : l]));
+    const nonLie = controlerPage({ type: 'voyant', brut: adblue.brut, fichier: ADBLUE }, { ...ctx, plan: planSansLien }, adblue.html).constats.filter((c) => c.regle === 'FORMAT2-ECART');
+    assert.equal(nonLie.length, 1);
+    assert.match(nonLie[0]?.message ?? '', /paire de liens voyant-adblue ↔ voyant-moteur à proposer/);
   });
 
   test('erreurs de construction : écart court, illustration, « ce que demande la notice » absents ; repère mal placé ou inconnu ; repère au format 1', async () => {
@@ -302,7 +343,7 @@ describe('format 2 : construction de démonstration', () => {
     const base = JSON.parse(await readFile(join(racine, 'data/voyants.json'), 'utf8')) as unknown[];
     const completee = voyantsAvecBrouillon(base, brouillon) as { id: string; ecart_court?: string; citations: { demande?: string }[] }[];
     // Toutes les citations des lignes du brouillon qui donnent « ce que demande la notice » l'ont ; une ligne qui n'a qu'une
-    // ligne d'écart courte (page de démonstration sans tableau des notices) n'en donne aucune.
+    // ligne d'écart courte (page de démonstration sans tableau des notices, dont « pression-pneus », F1.3b) n'en donne aucune.
     for (const [id, ajout] of Object.entries(brouillon.voyants)) {
       if (ajout.demandes === undefined) assert.ok(ajout.ecart_court !== undefined, id);
       else assert.ok(completee.find((v) => v.id === id)?.citations.every((c) => c.demande !== undefined), id);

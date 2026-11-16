@@ -10,9 +10,9 @@ import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import * as cheerio from 'cheerio';
 import { dateDesDonnees } from './date-des-donnees.ts';
-import { adresseBoutonVoyant, bandeauFormat2, piedFormat2 } from '../src/lib/format2.ts';
+import { adresseBoutonVoyant, bandeauFormat2, piedFormat2, renvoiNotices } from '../src/lib/format2.ts';
 import { modeleDeLaPage, pageOutilVoyants, pageOutilVoyantsF2 } from '../src/lib/modeles.ts';
-import { clePaire, entreesIndexFormat2, modeleOutilFormat2, outilVoyantsFormat2, paragraphes, texteEntreeIndex } from '../src/lib/outil-format2.ts';
+import { clePaire, entreesIndexFormat2, lienNoticesDeLaCarte, modeleOutilFormat2, outilVoyantsFormat2, paragraphes, texteEntreeIndex } from '../src/lib/outil-format2.ts';
 import { INTRODUCTION_OUTIL, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, ancreLigneOutil, modeleOutilVoyants, outilVoyants, type ModeleOutil } from '../src/lib/outil-voyants.ts';
 import { LIBELLES_PICTOGRAMMES } from '../src/lib/pictogrammes.ts';
 import { controlerOutilVoyants, controlerPage } from '../src/lib/controle.ts';
@@ -150,7 +150,7 @@ describe('format 2 : page outil (F1.3a)', () => {
     const carte = (id: string) => $(`#${ancreLigneOutil(id)}`);
     for (const l of modele.groupes.flatMap((g) => g.lignes)) {
       if (l.ecart === undefined) assert.equal(carte(l.voyant).find('.ecart').length, 0, l.voyant);
-      else assert.equal(plat(carte(l.voyant).find('[data-ecart-court]').clone().children('.vh').remove().end().text()), plat(brouillon.voyants[l.voyant]?.ecart_court), l.voyant);
+      else assert.equal(plat(carte(l.voyant).find('[data-ecart-court]').clone().children('.vh, a[data-lien-notices]').remove().end().text()), plat(brouillon.voyants[l.voyant]?.ecart_court), l.voyant);
     }
     assert.ok(!carte('pression-pneus').text().includes('Renault ne donne pas de consigne pour le témoin seul'));
     // Forme de la gravité et tuile du voyant allumé ; pas de lien vers l'outil lui-même (STOP) ; sources repliées.
@@ -160,6 +160,55 @@ describe('format 2 : page outil (F1.3a)', () => {
     // Sans ligne d'écart courte, la construction échoue (plus de repli sur l'écart entier).
     const sans: ModeleOutil = { ...modele, groupes: modele.groupes.map((g) => ({ ...g, lignes: g.lignes.map((l) => (l.voyant === 'abs' ? { ...l, ecartCourt: undefined } : l)) })) };
     assert.throws(() => outilVoyantsFormat2(sans, new Map()), /ligne d'écart courte \(ecart_court\) absente .*abs/);
+  });
+
+  test('règle 2b étendue à l\'outil (16/11/2026) : « Votre marque » d\'une carte et de l\'encadré mène au tableau de la page du voyant si elle est construite ; ligne rattachée à la page outil (STOP, demande n° 23) : pas de lien', () => {
+    const $ = cheerio.load(html);
+    const carte = (id: string) => $(`#${ancreLigneOutil(id)}`);
+    // Page construite (voyant moteur) : lien vers la partie du voyant ; page non construite (ABS, dans ce test) : aucun lien.
+    assert.equal(carte('moteur-orange-fixe').find('[data-ecart-court] a[data-lien-notices]').attr('href'), '/voyants/moteur/#da-notices-moteur-orange-fixe');
+    assert.equal(plat(carte('moteur-orange-fixe').find('[data-lien-notices]').text()), 'Votre marque');
+    assert.equal(carte('abs').find('[data-lien-notices]').length, 0);
+    for (const l of modele.groupes.flatMap((g) => g.lignes)) assert.equal(carte(l.voyant).find('[data-lien-notices]').attr('href'), lienNoticesDeLaCarte(l), l.voyant);
+    // Encadré de l'outil : ligne 1 (voyant moteur) vers sa page ; ligne de l'ABS sans lien (page non construite ici).
+    const lignes = $('[data-encadre-decision] [data-encadre-ligne]');
+    assert.equal(lignes.eq(0).find('[data-lien-notices]').attr('href'), '/voyants/moteur/#da-notices-moteur-orange-fixe');
+    // STOP (ligne rattachée à la page outil) : jamais de lien, même si les marques divergeaient.
+    const stop = modele.groupes.flatMap((g) => g.lignes).find((l) => l.voyant === 'stop');
+    assert.ok(stop !== undefined && stop.page === undefined);
+    assert.equal(lienNoticesDeLaCarte({ ...stop, ecart: 'Écart fictif.' }), undefined);
+    const voyants = new Map([['stop', { page: 'voyants' }], ['m', { page: 'voyant-moteur' }]]);
+    const plan = new Map([['voyants', { adresse: '/voyants/' }], ['voyant-moteur', { adresse: '/voyants/moteur/' }]]);
+    const base = { pageId: 'voyants', voyants, plan, voisins: new Set(['voyant-moteur']), auTableau: new Set<string>(), construite: () => true };
+    assert.match((renvoiNotices({ ...base, voyant: 'stop' }) as { aucun: string }).aucun, /page outil, qui n'a pas de tableau des notices \(demande n° 23\)/);
+    assert.deepEqual(renvoiNotices({ ...base, voyant: 'm' }), { lien: '/voyants/moteur/#da-notices-m' });
+    assert.ok('aucun' in renvoiNotices({ ...base, voyant: 'm', construite: () => false }));
+    // Ailleurs que sur l'outil, une page non construite reste une erreur (B1).
+    assert.ok('absent' in renvoiNotices({ ...base, pageId: 'voyant-adblue', voisins: new Set(['voyant-moteur']), voyant: 'm', construite: () => false }));
+  });
+
+  test('FORMAT2-ECART sur l\'outil : lien retiré ou mal dirigé sur une carte, lien vers une page non construite, lien sur une ligne rattachée à la page outil (STOP) ; lien retiré dans l\'encadré', async () => {
+    const cas: string[] = [
+      modifie(($) => $('#da-voyant-moteur-orange-fixe [data-lien-notices]').remove()),
+      modifie(($) => $('#da-voyant-moteur-orange-fixe [data-lien-notices]').attr('href', '/voyants/moteur/')),
+      modifie(($) => $('#da-voyant-abs [data-ecart-court]').append(' <a href="/voyants/abs-esp/#da-notices-abs" data-lien-notices>Votre marque</a>')),
+      modifie(($) => $('[data-encadre-decision] [data-encadre-ligne]').first().find('[data-lien-notices]').remove()),
+    ];
+    for (const h of cas) assert.ok(controle(h).includes('FORMAT2-ECART'), controle(h).join(', '));
+    // STOP avec un écart (base modifiée pour le test) : la carte n'a pas de lien, contrôle vert ; un lien ajouté est refusé.
+    const stopBase = site.voyants.get('stop');
+    assert.ok(stopBase !== undefined);
+    const voyantsStop = new Map(site.voyants);
+    voyantsStop.set('stop', { ...stopBase, ecart_marques: 'Écart fictif du test.', ecart_court: 'Écart fictif du test.' });
+    const htmlStop = html.replace(contenu, pageOutilVoyantsF2(page, { ...site, voyants: voyantsStop }, CORPS));
+    const ctxStop = { ...contexte, voyants: voyantsStop, pagesEcrites: site.libelles };
+    const controleStop = (h: string): string[] => regles(controlerPage({ type: 'voyant', brut, fichier: OUTIL }, ctxStop, h).constats).filter((r) => r.startsWith('FORMAT2-ECART'));
+    const $ = cheerio.load(htmlStop);
+    assert.equal($('#da-voyant-stop [data-ecart-court]').length, 1);
+    assert.equal($('#da-voyant-stop [data-lien-notices]').length, 0);
+    assert.deepEqual(controleStop(htmlStop), []);
+    $('#da-voyant-stop [data-ecart-court]').append(' <a href="/voyants/#da-notices-stop" data-lien-notices>Votre marque</a>');
+    assert.deepEqual(controleStop($.html()), ['FORMAT2-ECART']);
   });
 
   test('renvoi de l\'encadré sans icône ; introduction en deux paragraphes, mot pour mot ; pas de bouton « Trouver mon voyant » dans le bandeau de la page outil', () => {

@@ -187,8 +187,23 @@ type Commun = {
   illustration?: { fichier: string; alt: string; legende: string } | undefined;
 };
 
-/** Règles communes aux six types, exprimées dans le schéma. */
-function reglesCommunes(page: Commun, ctx: z.RefinementCtx): void {
+/** Réponse directe d'une page informative (règle 2c, revue de F1.3b) : 40 mots au plus. */
+export const REPONSE_DIRECTE_MAX_MOTS = 40;
+
+/**
+ * Règles communes aux six types, exprimées dans le schéma. `informative` : la page peut porter une réponse directe
+ * (pages pneus et obligations seulement, revue de F1.3b).
+ */
+function reglesCommunes(page: Commun, ctx: z.RefinementCtx, informative = false): void {
+  if (page.reponse_directe !== undefined) {
+    if (!informative) {
+      probleme(ctx, 'R7-FORMAT', ['reponse_directe'], 'la réponse directe (reponse_directe) est réservée aux pages pneus et obligations (page informative, règle 2c)');
+    } else {
+      // Mots comptés comme la ligne d'écart (src/lib/format2.ts, motsDe) : suites qui contiennent une lettre ou un chiffre.
+      const mots = page.reponse_directe.split(/\s+/).filter((m) => /[\p{L}\p{N}]/u.test(m)).length;
+      if (mots > REPONSE_DIRECTE_MAX_MOTS) probleme(ctx, 'R7-FORMAT', ['reponse_directe'], `réponse directe de ${mots} mots : ${REPONSE_DIRECTE_MAX_MOTS} au plus (règle 2c)`);
+    }
+  }
   if (/^sans objet\.?$/i.test(page.question_decision.trim())) {
     probleme(ctx, 'R7-SANS-OBJET', ['question_decision'], '« Sans objet » est interdit hors socle');
   }
@@ -323,7 +338,7 @@ export const pneusPageSchema = z
     contre_visite: z.strictObject({ delai: texte, demarche: texte }).optional(),
   })
   .superRefine((page, ctx) => {
-    reglesCommunes(page, ctx);
+    reglesCommunes(page, ctx, true);
     if (page.sujet === 'loi-montagne') {
       if (page.periode === undefined) probleme(ctx, 'R7-CHAMP-MANQUANT', ['periode'], 'la loi montagne indique la période');
       if (page.zones === undefined) probleme(ctx, 'R7-CHAMP-MANQUANT', ['zones'], 'la loi montagne indique les zones');

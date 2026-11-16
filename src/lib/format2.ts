@@ -17,8 +17,8 @@
 //   [colonne de côté, ordinateur] sommaire collant
 // Le H1 reste dans `main` (Base.astro) : la tête de page est le premier bloc de `main`, la colonne le second.
 //
-// Page outil voyants au format 2 : src/lib/outil-format2.ts (F1.3a). Ce qui n'est pas encore au format 2 (F1.3, à dessiner
-// d'abord) : pages codes, pneus et obligations, socle, 404, panne et dossier ; modeleDeLaPage refuse une telle page au format 2 (la construction échoue).
+// Pages codes, pneus et obligations (pageFormat2, modeles.ts), socle et 404 au format 2 : F1.3b ; page outil voyants :
+// src/lib/outil-format2.ts (F1.3a) ; pages panne et dossier : modeles.ts (F1.3c).
 // Module sans dépendance à l'exécution : tests, démonstration et construction l'utilisent tel quel.
 // ---------------------------------------------------------------------------------------------
 import { attributHtml, decoderEntites, texteHtml } from './html.ts';
@@ -54,7 +54,7 @@ import { dateAffichee, datesAffichees, fourchetteAffichee, libelleRisque, tranch
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import { citation, modeleTableauNotices, CLASSE_CITATION_NOTICE, FIN_TABLEAU_NOTICES, TITRE_TABLEAU_NOTICES, COLONNE_NOTICE, COLONNE_NIVEAU, LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, type RangeeNotice, type TableauVoyant } from './tableau-notices.ts';
 import { emplacementPub } from './emplacements-pub.ts';
-import { indexerPlan } from './plan.ts';
+import { ID_OUTIL_VOYANTS, indexerPlan } from './plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { GRILLE_COUTS, LIBELLE_SELON_LE_VOYANT, LIBELLES_FOURCHETTES } from '../schemas/cout.ts';
 import type { Verdict } from '../schemas/listes.ts';
@@ -159,6 +159,12 @@ export function piedFormat2(adressePage?: string, adresseConfidentialite?: strin
 /** Tête de page (fond nuit) : mention en tête, fil d'Ariane, H1. */
 export const teteDePage = (filHtml: string, h1: string): string => `<div class="tete">${mentionEnTete()}<div class="tete-int">${filHtml}<h1>${texteHtml(h1)}</h1></div></div>`;
 
+/**
+ * Tête de page du format 2 sans encadré qui la chevauche (socle, 404 ; F1.3b) : mention en tête et H1, sans fil d'Ariane ;
+ * `suite` : ce qui suit le H1 dans la tête (404 : une phrase, le bouton et le lien vers l'accueil).
+ */
+export const teteSeule = (h1: string, suite = '', classe?: string): string => `<div class="tete tete-seule${classe !== undefined ? ` ${classe}` : ''}">${mentionEnTete()}<div class="tete-int"><h1>${texteHtml(h1)}</h1>${suite}</div></div>`;
+
 // ---- Encadré de décision ---------------------------------------------------------------------------
 
 export interface LigneFormat2 {
@@ -168,18 +174,65 @@ export interface LigneFormat2 {
   action: string;
   /** Ligne d'écart courte, quand les marques divergent. */
   ecartCourt?: string | undefined;
-  /** Ancre de la partie du voyant au tableau des notices (lien « Votre marque »). */
-  ancreNotices?: string | undefined;
+  /** Adresse de la partie du voyant au tableau des notices, sur la page ou sur sa page (lien « Votre marque » : renvoiNotices). */
+  lienNotices?: string | undefined;
   notices: number;
   pictogramme?: string | undefined;
   couleur?: string | undefined;
+}
+
+/** Adresse du renvoi, s'il existe. */
+export const lienDuRenvoi = (r: RenvoiNotices): string | undefined => ('lien' in r ? r.lien : undefined);
+
+/**
+ * Renvoi de la ligne d'écart au tableau des notices : son adresse ; ou `aucun`, aucun lien attendu (ligne rattachée à la page
+ * outil, qui n'a pas de tableau : le voyant STOP, demande n° 23) ; ou `absent`, la raison d'un renvoi manquant (FORMAT2-ECART).
+ */
+export type RenvoiNotices = { lien: string } | { aucun: string } | { absent: string };
+
+/**
+ * Renvoi « Votre marque » d'une ligne dont les marques divergent (règle 2b, revue de F1.3b) : la partie du voyant au tableau
+ * des notices (#da-notices-<voyant>), sur la page si le voyant y est rattaché ; sinon sur la page à laquelle il est rattaché
+ * (champ « page » de la base), seulement si le plan lie les deux pages et que cette page est construite. Sinon, aucun lien :
+ * FORMAT2-ECART échoue avec la raison (paire du plan à proposer, page pas encore construite, ligne saisie sans voyant).
+ * Exceptions (`aucun` : aucun lien attendu) : une ligne rattachée à la page outil (le voyant STOP, demande n° 23) n'a aucun
+ * tableau ; sur la page outil, comme sur ses cartes, le lien n'existe que si la page du voyant est construite.
+ * Un seul tableau par voyant, sur sa page : jamais répété ailleurs.
+ */
+export function renvoiNotices(entree: {
+  pageId: string;
+  voyant: string | undefined;
+  voyants: ReadonlyMap<string, { page: string }>;
+  plan: ReadonlyMap<string, { adresse: string }>;
+  /** Pages que le plan lie à la page (paires déclarées, mère et enfants : indexerPlan). */
+  voisins: ReadonlySet<string>;
+  /** Voyants qui ont leur partie au tableau des notices de la page. */
+  auTableau: ReadonlySet<string>;
+  construite: (id: string) => boolean;
+}): RenvoiNotices {
+  const { pageId, voyant } = entree;
+  if (voyant === undefined) return { absent: "ligne saisie, sans voyant de la base : aucun tableau des notices où renvoyer" };
+  const page = entree.voyants.get(voyant)?.page;
+  if (page === undefined) return { absent: `voyant « ${voyant} » absent de la base` };
+  // Ligne rattachée à la page outil (le voyant STOP, demande n° 23) : la page outil n'a pas de tableau des notices.
+  if (page === ID_OUTIL_VOYANTS) return { aucun: `voyant « ${voyant} » rattaché à la page outil, qui n'a pas de tableau des notices (demande n° 23)` };
+  if (page === pageId) return entree.auTableau.has(voyant) ? { lien: `#${ancreNotices(voyant)}` } : { absent: `voyant « ${voyant} » rattaché à la page, sans partie au tableau des notices` };
+  if (!entree.voisins.has(page)) return { absent: `voyant « ${voyant} » rattaché à la page « ${page} », que le plan ne lie pas à « ${pageId} » : paire de liens ${pageId} ↔ ${page} à proposer` };
+  const adresse = entree.plan.get(page)?.adresse;
+  if (adresse === undefined || !entree.construite(page)) {
+    // Page outil (règle 2b étendue à l'outil, 16/11/2026) : comme ses cartes, le lien n'existe que si la page du voyant est
+    // construite ; ailleurs, une page pas encore construite fait échouer FORMAT2-ECART.
+    if (pageId === ID_OUTIL_VOYANTS) return { aucun: `page « ${page} » du voyant « ${voyant} » pas encore construite (page outil : lien seulement vers une page construite)` };
+    return { absent: `voyant « ${voyant} » rattaché à la page « ${page} », pas encore construite` };
+  }
+  return { lien: `${adresse}#${ancreNotices(voyant)}` };
 }
 
 /** Une ligne de l'encadré : tuile du voyant et situation, verdict et urgence en pastilles, action, ligne d'écart. */
 export function ligneEncadreFormat2(ligne: LigneFormat2): string {
   const gravite = graviteDuVerdict(ligne.verdict);
   const picto = ligne.pictogramme !== undefined ? tuile(ligne.pictogramme, ligne.couleur ?? 'neutre') : '';
-  const lien = ligne.ancreNotices !== undefined ? ` <a href="#${attributHtml(ligne.ancreNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienVotreMarque)}</a>` : '';
+  const lien = ligne.lienNotices !== undefined ? ` <a href="${attributHtml(ligne.lienNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienVotreMarque)}</a>` : '';
   const ecart =
     ligne.ecartCourt !== undefined ? `<p class="ecart" data-ecart-court>${BALANCE}<span class="vh">${texteHtml(FORMAT2.selonLaMarque)}</span>${texteHtml(ligne.ecartCourt)}${lien}</p>` : '';
   return [
@@ -212,7 +265,17 @@ export function coutFormat2(cout: CoutResolu, couts: DonneesCouts): string {
     cout.risque !== undefined ? `<p>${texteHtml(libelleRisque(cout.risque))}</p>` : '',
     ...cout.montants.flatMap((id) => {
       const montant = couts.montants.get(id);
-      return montant === undefined ? [] : [`<p class="montant">${texteHtml(montant.texte)} (${texteHtml(datesAffichees(montant).join(', '))})</p>`];
+      if (montant === undefined) return [];
+      const dates = `(${texteHtml(datesAffichees(montant).join(', '))})`;
+      // Dépannage sur autoroute (montant automatique d'une page à verdict d'arrêt, F1.3b) : rangée de l'encart, lisible d'un
+      // coup d'œil : cellule sombre et objet du montant en gras, texte validé inchangé ; sans triangle, forme réservée aux
+      // verdicts (charte graphique §1.4 ; docs/10 §4, point 4 : revue de F1.3b).
+      if (montant.automatique === 'verdict-arret') {
+        const [objet, ...suite] = montant.texte.split(' : ');
+        const texte = suite.length > 0 ? `<strong>${texteHtml(objet ?? '')}</strong>${texteHtml(` : ${suite.join(' : ')}`)}` : texteHtml(montant.texte);
+        return [`<p class="montant depannage" data-depannage>${texte} ${dates}</p>`];
+      }
+      return [`<p class="montant">${texteHtml(montant.texte)} ${dates}</p>`];
     }),
     ...cout.prisesEnCharge.flatMap((id) => {
       const prise = couts.prises_en_charge.get(id);
@@ -312,6 +375,17 @@ export interface EntreeSommaire {
 /** Titres H2 d'un fragment HTML, avec leur identifiant (les titres sans identifiant sont ignorés). */
 export function titresH2(html: string): EntreeSommaire[] {
   return [...html.matchAll(/<h2\b[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => ({ ancre: m[1] ?? '', titreHtml: (m[2] ?? '').replace(/<[^>]+>/g, '').trim() }));
+}
+
+/**
+ * Titres de niveau 2 d'une page du socle (revue de F1.3b) : ceux du texte, qui portent leur ancre, et ceux des sections
+ * générées (fiche de l'auteur, « Méthode ») dont l'ancre est portée par la section ; dans l'ordre de la page.
+ */
+export function titresDesSections(html: string): EntreeSommaire[] {
+  return [...html.matchAll(/<section\b[^>]*\sid="([^"]+)"[^>]*>\s*<h2\b[^>]*>([\s\S]*?)<\/h2>|<h2\b[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => ({
+    ancre: m[1] ?? m[3] ?? '',
+    titreHtml: (m[2] ?? m[4] ?? '').replace(/<[^>]+>/g, '').trim(),
+  }));
 }
 
 /** Nombre de H2 d'un fragment HTML. */
@@ -545,6 +619,7 @@ export function pageFormat2(
   const cout = coutDeLaPage(page, lignes, site.couts);
   const tableaux = modeleTableauNotices(lignes, site.voyants, site.sources, page.id);
   const auTableau = new Set(tableaux.map((t) => t.voyant));
+  const index = indexerPlan(site.plan);
 
   // Encadré : une ligne d'écart courte pour chaque ligne dont les marques divergent (règle 2b).
   const sansEcartCourt = lignes.flatMap((l, i) => (l.ecart_marques !== undefined && (l.ecart_court === undefined || l.ecart_court.trim() === '') ? [`ligne ${i + 1} (${l.voyant ?? l.situation})`] : []));
@@ -557,7 +632,7 @@ export function pageFormat2(
       urgence: l.urgence,
       action: l.action,
       ecartCourt: l.ecart_marques !== undefined ? l.ecart_court : undefined,
-      ancreNotices: l.voyant !== undefined && auTableau.has(l.voyant) ? ancreNotices(l.voyant) : auTableau.size > 0 && l.ecart_marques !== undefined ? IDENTIFIANTS.notices : undefined,
+      lienNotices: l.ecart_marques === undefined ? undefined : lienDuRenvoi(renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: site.voyants, plan: site.plan, voisins: index.voisins.get(page.id) ?? new Set(), auTableau, construite: (id) => site.libelles.has(id) })),
       notices: sourcesDeLaLigne(l.sources, site.sources).notices.length,
       pictogramme: voyant !== undefined ? site.pictogrammes.get(voyant.pictogramme) : undefined,
       couleur: voyant?.couleur,
@@ -582,7 +657,6 @@ export function pageFormat2(
     if (!emplacements.includes(c.emplacement)) emplacements.push(c.emplacement);
     citees.set(c.source, emplacements);
   }
-  const index = indexerPlan(site.plan);
   const construites = (ids: Iterable<string>): string[] => [...ids].filter((id) => site.libelles.has(id));
 
   const colonne = [
@@ -633,10 +707,22 @@ export function tableauxDuTexteFormat2(html: string): string {
   const enrichir = (table: string): { table: string; cartes: boolean } => {
     const entetes = [...(/<thead\b[\s\S]*?<\/thead>/.exec(table)?.[0] ?? '').matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/g)].map((m) => decoderEntites((m[1] ?? '').replace(/<[^>]+>/g, '')).trim());
     if (entetes.length <= 3) return { table, cartes: false };
-    const corps = table.replace(/<tr\b[^>]*>[\s\S]*?<\/tr>/g, (rangee) => {
-      let i = 0;
-      return rangee.replace(/<td\b([^>]*)>/g, (_t, attributs: string) => `<td${attributs} data-libelle="${attributHtml(entetes[i++] ?? '')}">`);
-    });
+    // Cartes (revue de F1.3b) : la première cellule de chaque rangée en devient le titre (th scope="row"), et les rôles du
+    // tableau sont écrits, comme pour les cas par marque : un lecteur d'écran garde le tableau quand l'affichage passe en blocs.
+    const corps = table
+      .replace(/<table\b/, '<table role="table"')
+      .replace(/<(thead|tbody)\b/g, '<$1 role="rowgroup"')
+      .replace(/<tr\b/g, '<tr role="row"')
+      .replace(/<th\b(?![^>]*\bscope=)/g, '<th scope="col" role="columnheader"')
+      .replace(/<tr role="row"([^>]*)>([\s\S]*?)<\/tr>/g, (rangee, attributs: string, cellules: string) => {
+        if (!/<td\b/.test(cellules)) return rangee;
+        let i = 0;
+        const avecTitre = cellules.replace(/<td\b([^>]*)>([\s\S]*?)<\/td>/g, (_c, a: string, contenu: string) => {
+          const rang = i++;
+          return rang === 0 ? `<th scope="row" role="rowheader"${a}>${contenu}</th>` : `<td role="cell"${a} data-libelle="${attributHtml(entetes[rang] ?? '')}">${contenu}</td>`;
+        });
+        return `<tr role="row"${attributs}>${avecTitre}</tr>`;
+      });
     return { table: corps, cartes: true };
   };
   // Tableau élément unique, déjà dans son bloc.

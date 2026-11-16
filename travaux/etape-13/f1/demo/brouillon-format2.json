@@ -1,5 +1,5 @@
 {
-  "avertissement": "Brouillon, jamais validé. Données du format 2 pour la construction de démonstration du lot F1 (tâche F1.2, npm run demo:format2), jamais publiées : lignes d'écart courtes et « ce que demande la notice » du pilote F1 (branche etape-13/pilote-f1, generer.py), sauf les lignes « adblue-defaut » et « adblue-demarrage-impossible », rédigées pour cette démonstration (le pilote ne reprenait qu'un groupe AdBlue) ; illustrations du pilote redessinées en fichiers SVG (dossier illustrations/) ; repères placés comme dans le pilote, un repère seulement sous un titre qui pose la question d'une seule ligne de l'encadré (seconde revue de F1.2) : aucun sur la page AdBlue, dont les sections mêlent plusieurs cas. Page outil (tâche F1.3a et sa revue) : passée au format 2 avec l'illustration du combiné de l'accueil, légende rédigée pour cette démonstration ; repère du voyant moteur (ligne 1) sous « Est-ce dangereux de rouler… », comme le brouillon F2 ; texte de l'outil non repris (« verdict retenu » laissé jusqu'au lot F2). Pages panne et dossier de démonstration (revue de F1.3c) : fichiers Markdown de tests/demo/format2, lus seulement par cette construction. Lignes d'écart courtes et « ce que demande la notice » des 26 lignes (dont « batterie-rouge », pour la page « changer la batterie ») : celles du brouillon F2, version 2 (branche etape-13/f2-donnees, travaux/etape-13/f2/brouillon-f2.json, commit 6748c75), reprises telles quelles pour que la démonstration montre les textes qui seront validés. Ces textes se valident avec le paquet du lot F2 ; data/voyants.json et src/content ne changent pas. Texte des pages : celui en ligne ; une phrase du voyant moteur réécrite comme au lot F2 (règle 2d : référence hors parenthèse), la formule « Verdict retenu » laissée jusqu'au lot F2 (erreur FORMAT2-METHODE attendue).",
+  "avertissement": "Brouillon, jamais validé. Données du format 2 pour la construction de démonstration du lot F1 (tâche F1.2, npm run demo:format2), jamais publiées : lignes d'écart courtes et « ce que demande la notice » du pilote F1 (branche etape-13/pilote-f1, generer.py), sauf les lignes « adblue-defaut » et « adblue-demarrage-impossible », rédigées pour cette démonstration (le pilote ne reprenait qu'un groupe AdBlue) ; illustrations du pilote redessinées en fichiers SVG (dossier illustrations/) ; repères placés comme dans le pilote, un repère seulement sous un titre qui pose la question d'une seule ligne de l'encadré (seconde revue de F1.2) : aucun sur la page AdBlue, dont les sections mêlent plusieurs cas. Page outil (tâche F1.3a et sa revue) : passée au format 2 avec l'illustration du combiné de l'accueil, légende rédigée pour cette démonstration ; repère du voyant moteur (ligne 1) sous « Est-ce dangereux de rouler… », comme le brouillon F2 ; texte de l'outil non repris (« verdict retenu » laissé jusqu'au lot F2). Pages panne et dossier de démonstration (revue de F1.3c) : fichiers Markdown de tests/demo/format2, lus seulement par cette construction. Lignes d'écart courtes et « ce que demande la notice » des 26 lignes (dont « batterie-rouge », pour la page « changer la batterie ») : celles du brouillon F2, version 2 (branche etape-13/f2-donnees, travaux/etape-13/f2/brouillon-f2.json, commit 6748c75), reprises telles quelles pour que la démonstration montre les textes qui seront validés. Pages du lot F3 (tâche F1.3b) : code P0420, pression des pneus, loi montagne, « à propos » et mentions légales passées au format 2 (la page 404 suit l'accueil) ; réponse directe de la pression des pneus reprise du pilote ; illustration de la pression des pneus redessinée du pilote ; celles du code P0420 et de la loi montagne empruntées à des pages voisines, signalées comme telles ; textes non repris (lot F3). Ces textes se valident avec le paquet du lot F2 ; data/voyants.json et src/content ne changent pas. Texte des pages : celui en ligne ; une phrase du voyant moteur réécrite comme au lot F2 (règle 2d : référence hors parenthèse), la formule « Verdict retenu » laissée jusqu'au lot F2 (erreur FORMAT2-METHODE attendue).",
   "voyants": {
     "moteur-orange-fixe": {
       "ecart_court": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement).",
@@ -246,6 +246,9 @@
         "notice-toyota-yaris|p. 292, 7.2.4 « Si un voyant s'allume », Voyant de température élevée du liquide de refroidissement": "Arrêter immédiatement le véhicule dans un endroit sûr",
         "notice-toyota-yaris|p. 322-323, 7.2.11 « Si votre véhicule surchauffe », Mesures correctives": "S’arrêter, couper la climatisation puis le moteur"
       }
+    },
+    "pression-pneus": {
+      "ecart_court": "Plus stricts : Peugeot, Seat, Toyota (arrêt dès que possible) ; Renault et Dacia si « Crevaison ». Moins stricts, sous-gonflage seul : contrôler la pression (Peugeot, Dacia)."
     }
   },
   "pages": {
@@ -310,9 +313,44 @@
           "repere": "moteur-orange-fixe"
         }
       ]
+    },
+    "code-p0420": {
+      "illustration": {
+        "fichier": "voyant-moteur-tableau-de-bord",
+        "alt": "Le voyant moteur orange allumé au tableau de bord (dessin d'une page voisine)",
+        "legende": "Dessin de démonstration, repris de la page du voyant moteur, qui s'allume avec ce code : la page réelle aura le sien (lot F3)."
+      },
+      "texte_a_reprendre": true,
+      "remplacements": [
+        {
+          "avant": "des sondes (Ross-Tech pour le groupe Volkswagen, {{cite:ross-tech-p0420|rubrique « Possible Solutions »}})",
+          "apres": "des sondes, selon Ross-Tech pour le groupe Volkswagen ({{cite:ross-tech-p0420|rubrique « Possible Solutions »}})"
+        }
+      ]
+    },
+    "pression-des-pneus": {
+      "illustration": {
+        "fichier": "pression-etiquette-porte",
+        "alt": "Où lire la pression : l’étiquette sur le chant de la porte du conducteur (1) ou sur son encadrement (2), valeurs propres à chaque voiture",
+        "legende": "Selon la notice, l’étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte ». Les valeurs sont propres à chaque voiture."
+      },
+      "reponse_directe": "Celle du constructeur, à froid : sur l’étiquette de la porte du conducteur ou de son encadrement, propre à chaque voiture.",
+      "texte_a_reprendre": true
+    },
+    "loi-montagne": {
+      "illustration": {
+        "fichier": "accueil-tableau-de-bord",
+        "alt": "Le combiné d'instruments (dessin d'une page voisine)",
+        "legende": "Dessin de démonstration, repris de l'accueil, pour montrer l'emplacement de l'illustration : la page réelle aura le sien (lot F3)."
+      },
+      "texte_a_reprendre": true
     }
   },
   "accueil": {
     "format": 2
-  }
+  },
+  "socle": [
+    "a-propos",
+    "mentions-legales"
+  ]
 }
