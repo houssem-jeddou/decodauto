@@ -23,7 +23,7 @@ situations:
     ecart_court: "Plus strict : Citroën (appoint impératif et rapide). Moins strict : Peugeot (appoint rapide)."
     citations:
       - source: notice-citroen-c3
-        emplacement: "p. 114, « Additif gasoil », appoint"
+        emplacement: "p. 114, additif du filtre à particules, « Appoint »"
         extrait: "La mise à niveau de cet additif doit impérativement et rapidement être effectuée par le réseau CITROËN ou par un atelier qualifié."
         verdict: oui avec précautions
         urgence: immédiate
