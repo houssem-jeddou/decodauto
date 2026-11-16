@@ -193,7 +193,7 @@ export function attendusDemoFormat2(brouillon: BrouillonFormat2, fichierDePage: 
  * (FORMAT2-PARAGRAPHES, règle 2e ; F1.4) : textes repris aux lots F2 (voyants, outil) et F3 (code, loi montagne, socle).
  * Une page reprise qui n'en a plus rend l'attendu inutile, ce que la construction signale (attendu non rencontré).
  */
-export const PARAGRAPHES_A_REPRENDRE_DEMO: readonly string[] = ['voyant-moteur', 'voyant-adblue', 'voyants', 'code-p0420', 'loi-montagne', 'a-propos'];
+export const PARAGRAPHES_A_REPRENDRE_DEMO: readonly string[] = ['code-p0420', 'loi-montagne', 'a-propos'];
 
 /**
  * Paires de liens absentes du plan dont une page de démonstration a besoin pour le renvoi « Votre marque » de sa ligne

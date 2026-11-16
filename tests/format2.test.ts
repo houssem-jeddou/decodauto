@@ -102,13 +102,14 @@ async function construire(corps = CORPS, fichier = MOTEUR) {
 }
 
 describe('format 2 : briques (lot F1, F1.2)', () => {
-  test('mots d\'une ligne d\'écart (comptage du pilote) et lien « Votre marque » compris', () => {
+  test('mots d\'une ligne d\'écart (comptage du pilote) et lien « Votre marque » compris : chaque ligne d\'écart courte de la base (lot F2) en a 25 au plus', async () => {
     assert.equal(motsDe('Plus strict : Toyota (arrêt immédiat).'), 5);
     assert.equal(motsDe(FORMAT2.lienVotreMarque), 2);
-    for (const id of Object.keys(brouillon.voyants).filter((id) => brouillon.voyants[id]?.ecart_court !== undefined)) {
-      const ecart = brouillon.voyants[id]?.ecart_court ?? '';
-      assert.ok(motsDe(ecart) + 2 <= ECART_COURT_MAX_MOTS, `${id} : ${motsDe(ecart) + 2} mots`);
-    }
+    const base = JSON.parse(await readFile(join(racine, 'data/voyants.json'), 'utf8')) as { id: string; ecart_marques?: string; ecart_court?: string }[];
+    // Lot F2 : une ligne d'écart courte pour chaque ligne qui a un écart entre marques (16), aucune ailleurs.
+    assert.deepEqual(base.filter((v) => v.ecart_court !== undefined).map((v) => v.id), base.filter((v) => v.ecart_marques !== undefined).map((v) => v.id));
+    assert.equal(base.filter((v) => v.ecart_court !== undefined).length, 16);
+    for (const v of base.filter((v) => v.ecart_court !== undefined)) assert.ok(motsDe(v.ecart_court ?? '') + 2 <= ECART_COURT_MAX_MOTS, `${v.id} : ${motsDe(v.ecart_court ?? '') + 2} mots`);
   });
 
   test('phrase « Notices » : une phrase commune, ou chaque phrase précédée de ses lignes', () => {
@@ -252,8 +253,8 @@ describe('format 2 : modèle des pages voyants', () => {
     const ctx = { ...contexte, pagesEcrites: site.libelles };
     for (const fichier of [ADBLUE, 'src/content/voyant/voyant-fap.md', 'src/content/voyant/voyant-prechauffage.md']) {
       const lu = pageAvecBrouillon(lireFrontmatter(await readFile(join(racine, fichier), 'utf8')) as Record<string, unknown>, brouillon);
-      // Pages FAP et préchauffage hors du brouillon : passées au format 2 en mémoire, avec une illustration de démonstration.
-      const brut = { ...lu, format: 2, illustration: lu['illustration'] ?? { fichier: 'voyant-moteur-tableau-de-bord', alt: 'Dessin de test', legende: 'Dessin de test. Illustration decodauto.' } };
+      // Au format 2, avec une illustration de la démonstration (le test porte sur le lien, pas sur le dessin de la page).
+      const brut = { ...lu, format: 2, illustration: { fichier: 'voyant-moteur-tableau-de-bord', alt: 'Dessin de test', legende: 'Dessin de test. Illustration decodauto.' } };
       const page = schemasPage.voyant.parse(brut) as PageEditoriale;
       const html = documentFormat2(pageVoyantF2(page, site, '<h2 id="a">A</h2><p>Texte.</p>'), page, contexte.plan.get(page.id)?.adresse ?? '/');
       const $ = cheerio.load(html);
@@ -374,9 +375,13 @@ describe('format 2 : construction de démonstration', () => {
     const un = { ...brouillon, pages: { 'voyant-moteur': { illustration: { fichier: 'f', alt: 'a', legende: 'l' }, reperes: [{ titre: 'Combien de kilomètres peut-on faire ?', repere: 'moteur-orange-fixe' }] } } };
     assert.equal(corpsAvecReperes('voyant-moteur', '<h2 id="x">Combien de kilomètres peut-on faire&nbsp;?</h2><p>a</p>', un), '<h2 id="x">Combien de kilomètres peut-on faire&nbsp;?</h2><p>{{repere:moteur-orange-fixe}}</p><p>a</p>');
     assert.throws(() => corpsAvecReperes('voyant-moteur', '<h2>Autre</h2>', un), /introuvable/);
-    // data/voyants.json et src/content ne changent pas : le brouillon ne s'applique qu'en mémoire.
-    assert.ok(!base.some((v) => 'ecart_court' in (v as object)));
-    assert.ok(!(await readFile(join(racine, MOTEUR), 'utf8')).includes('format:'));
+    // Lot F2 : les données du format 2 et les pages du lot sont dans data/voyants.json et src/content ; la démonstration ne
+    // les simule plus (aucune ligne de la base, aucune page du lot, pas l'accueil dans le brouillon).
+    assert.deepEqual(brouillon.voyants, {});
+    assert.ok(base.every((v) => (v as { citations: { demande?: string }[] }).citations.every((c) => c.demande !== undefined)));
+    assert.equal(brouillon.accueil, undefined);
+    assert.deepEqual(Object.keys(brouillon.pages).sort(), ['code-p0420', 'loi-montagne', 'pression-des-pneus']);
+    assert.ok((await readFile(join(racine, MOTEUR), 'utf8')).includes('\nformat: 2\n'));
   });
 
   test('erreurs attendues : l\'empreinte de chaque ligne et de chaque page du brouillon (R4-EMPREINTE), la méthode et les paragraphes des textes non repris, rien d\'autre', () => {

@@ -144,13 +144,13 @@ describe('format 2 : page outil (F1.3a)', () => {
     assert.equal(voyants.indexOf('pression-pneus-systeme') - voyants.indexOf('pression-pneus'), 1);
   });
 
-  test('cartes : une par ligne de la base, cellule de l\'encadré ; ligne d\'écart courte obligatoire (brouillon F2), jamais l\'écart entier ; aucune ligne d\'écart si la base n\'en a pas', () => {
+  test('cartes : une par ligne de la base, cellule de l\'encadré ; ligne d\'écart courte obligatoire (base, lot F2), jamais l\'écart entier ; aucune ligne d\'écart si la base n\'en a pas', () => {
     const $ = cheerio.load(html);
     assert.equal($('[data-outil-ligne]').length, 26);
     const carte = (id: string) => $(`#${ancreLigneOutil(id)}`);
     for (const l of modele.groupes.flatMap((g) => g.lignes)) {
       if (l.ecart === undefined) assert.equal(carte(l.voyant).find('.ecart').length, 0, l.voyant);
-      else assert.equal(plat(carte(l.voyant).find('[data-ecart-court]').clone().children('.vh, a[data-lien-notices]').remove().end().text()), plat(brouillon.voyants[l.voyant]?.ecart_court), l.voyant);
+      else assert.equal(plat(carte(l.voyant).find('[data-ecart-court]').clone().children('.vh, a[data-lien-notices]').remove().end().text()), plat(site.voyants.get(l.voyant)?.ecart_court), l.voyant);
     }
     assert.ok(!carte('pression-pneus').text().includes('Renault ne donne pas de consigne pour le témoin seul'));
     // Forme de la gravité et tuile du voyant allumé ; pas de lien vers l'outil lui-même (STOP) ; sources repliées.

@@ -24,10 +24,13 @@ import { TEXTES_OUTIL } from '../src/lib/outil-textes.ts';
 import { execFileSync } from 'node:child_process';
 import { execPath } from 'node:process';
 import { pageRedigee } from '../scripts/lib/pages-redigees.ts';
+import { versionFormat1 } from './format1.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const EXEMPLE = await pageRedigee(racine, 'voyant', 'voyants');
-const contenu = await readFile(join(racine, EXEMPLE), 'utf8');
+// Modèle de l'outil au format 1 (livrable 8.1) : la page, passée au format 2 au lot F2, est lue dans sa version au format 1
+// (tests/format1.ts) ; son modèle du format 2 est testé par tests/outil-format2.test.ts.
+const contenu = versionFormat1(await readFile(join(racine, EXEMPLE), 'utf8'));
 const brut = lireFrontmatter(contenu) as Record<string, unknown>;
 const page = schemasPage.voyant.parse(brut) as PageEditoriale;
 
@@ -45,7 +48,7 @@ function corpsHtml(markdown: string): string {
     .join('\n');
 }
 
-const aujourdhui = await dateDesDonnees(racine);
+const aujourdhui = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', 'tests/demo/voyant-huile.md', EXEMPLE]);
 // Pages construites de la recette : l'outil et l'exemple « voyant moteur ».
 const libelles = new Map<string, string>([[page.id, page.libelle_court], ['voyant-moteur', 'Voyant moteur']]);
 const { site, contexte } = await donneesDuSite(racine, libelles, aujourdhui, [AUTEUR_SUPPOSE]);
