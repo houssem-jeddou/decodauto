@@ -19,7 +19,7 @@ situations:
     citations:
       - source: notice-peugeot-208
         emplacement: "p. 188, « Recharger la batterie avec un chargeur de batterie »"
-        extrait: "Dans certains cas, il peut être nécessaire de charger la batterie : – Utilisation du véhicule essentiellement pour des trajets courts. – En prévision d'une immobilisation prolongée de plusieurs semaines. Consulter le réseau PEUGEOT ou un atelier qualifié. Pour recharger soi-même la batterie du véhicule, utiliser uniquement un chargeur compatible avec les batteries au plomb, d'une tension nominale de 12 V."
+        extrait: "Dans certains cas, il peut être nécessaire de charger la batterie […]. Consulter le réseau PEUGEOT ou un atelier qualifié. Pour recharger soi-même la batterie du véhicule, utiliser uniquement un chargeur compatible avec les batteries au plomb, d'une tension nominale de 12 V."
         verdict: oui avec précautions
         urgence: sous quelques jours
       - source: notice-renault-clio-5

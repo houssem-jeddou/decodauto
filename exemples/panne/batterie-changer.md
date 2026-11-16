@@ -21,12 +21,12 @@ situations:
     citations:
       - source: notice-renault-clio-5
         emplacement: "p. 341, « Batterie »"
-        extrait: "toutes interventions sur la batterie (démontage, débranchement...) doivent impérativement être effectuées par un professionnel spécialisé. Risque de brûlures par chocs électriques. Respectez impérativement les périodicités de remplacement mentionnées dans le document d'entretien sans les dépasser. La batterie étant spécifique, veillez à la faire remplacer par une batterie équivalente. Faites appel à un Représentant de la marque."
+        extrait: "toutes interventions sur la batterie (démontage, débranchement...) doivent impérativement être effectuées par un professionnel spécialisé. […] La batterie étant spécifique, veillez à la faire remplacer par une batterie équivalente. Faites appel à un Représentant de la marque."
         verdict: oui avec précautions
         urgence: sous quelques jours
       - source: notice-dacia-sandero-3
         emplacement: "p. 302, « Batterie »"
-        extrait: "toutes interventions sur la batterie (démontage, débranchement...) doivent impérativement être effectuées par un professionnel spécialisé. Risque de brûlures par chocs électriques. Respectez impérativement les périodicités de remplacement mentionnées dans le document d'entretien sans les dépasser. La batterie étant spécifique, veillez à la faire remplacer par une batterie équivalente. Faites appel à un Représentant de la marque."
+        extrait: "toutes interventions sur la batterie (démontage, débranchement...) doivent impérativement être effectuées par un professionnel spécialisé. […] La batterie étant spécifique, veillez à la faire remplacer par une batterie équivalente. Faites appel à un Représentant de la marque."
         verdict: oui avec précautions
         urgence: sous quelques jours
       - source: notice-peugeot-208
