@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """Illustrations du lot B4 de la vague B (règle 2i), dessinées pour le site, au gabarit de generer-illustrations-b2.py.
 Le dessin du voyant moteur reprend le pictogramme du site (src/pictogrammes/moteur.svg), redessiné par nos soins.
-- perte-de-puissance : le voyant moteur (fixe ou clignotant) et le témoin EPC à regarder (base voyants ; notice Seat
+- perte-de-puissance : le voyant moteur (fixe ou clignotant) et le voyant EPC à regarder (base voyants ; notice Seat
   Ibiza p. 288) ;
 - voiture-qui-broute : le voyant moteur, clignotant (ratés de combustion) ou fixe (base voyants) ;
-- bruit-moteur : les bruits normaux et ceux à faire vérifier (notices Seat Ibiza p. 213 et 290, Toyota Yaris p. 242,
-  291 et 335).
+- bruit-moteur : les bruits normaux et ceux à faire vérifier (notices Seat Ibiza p. 213 et 290, Toyota Yaris p. 291 et
+  335) ; le bruit d'échappement qui change n'y est plus (revue du 16/11 : sa ligne est plus grave, « Non, ne poursuivez
+  pas votre trajet ») ;
+- fumee-echappement : les trois couleurs de fumée, sans étiquette de statut (revue du 16/11 : « à faire vérifier »
+  imitait un verdict pour un cas sans ligne dans l'encadré) ; blanche « parfois normale » (Renault p. 386, Dacia
+  p. 348-349), noire et bleue « aucune notice ».
 Sortie : src/illustrations/<nom>.svg."""
 import importlib.util
 from pathlib import Path
@@ -39,7 +43,7 @@ def puissance() -> str:
     p.append(pastille(450, 140))
     p.append(texte(450, 152, "EPC", taille=34, poids=800, couleur=AMBRE))
     p.append(b2.anneau(450, 140, 64))
-    p.append(texte(450, 252, "Témoin EPC (essence)", couleur=AMBRE))
+    p.append(texte(450, 252, "Voyant EPC (essence)", couleur=AMBRE))
     p.append(texte(320, 54, "Regardez d'abord le tableau de bord", couleur=DOUX))
     p.append("</svg>")
     return "".join(p)
@@ -65,12 +69,12 @@ def bruits() -> str:
     p.append(f'<circle cx="62" cy="62" r="16" fill="none" stroke="{VERT}" stroke-width="4"/>')
     p.append(f'<path d="M54 62 L60 68 L71 56" fill="none" stroke="{VERT}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>')
     p.append(texte(90, 71, "Normal", taille=26, poids=700, couleur=VERT, ancre="start"))
-    for i, ligne in enumerate(("Démarrage à froid", "Cliquetis très bref", "Régénération du FAP")):
+    for i, ligne in enumerate(("Démarrage à froid", "Cliquetis très bref", "Nettoyage du filtre")):
         p.append(texte(48, 128 + i * 50, ligne, ancre="start"))
     p.append(f'<path d="M334 76 L350 48 L366 76 Z" fill="none" stroke="{AMBRE}" stroke-width="4" stroke-linejoin="round"/>')
     p.append(f'<line x1="350" y1="58" x2="350" y2="66" stroke="{AMBRE}" stroke-width="4" stroke-linecap="round"/>')
     p.append(texte(378, 71, "À faire vérifier", taille=26, poids=700, couleur=AMBRE, ancre="start"))
-    for i, ligne in enumerate(("Cliquetis qui dure", "Bruit anormal", "Échappement qui change")):
+    for i, ligne in enumerate(("Cliquetis qui dure", "Claquement, sifflement", "Autre bruit anormal")):
         p.append(texte(328, 128 + i * 50, ligne, ancre="start"))
     p.append("</svg>")
     return "".join(p)
@@ -79,8 +83,8 @@ def bruits() -> str:
 def fumees() -> str:
     p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300">', FOND]
     for i, (couleur, bord, titre, sous) in enumerate((("#e6ebf0", "#e6ebf0", "Blanche", "parfois normale"),
-                                                    ("#2b3138", "#8b97a6", "Noire", "à faire vérifier"),
-                                                    ("#5b8def", "#5b8def", "Bleue", "à faire vérifier"))):
+                                                    ("#2b3138", "#8b97a6", "Noire", "aucune notice"),
+                                                    ("#5b8def", "#5b8def", "Bleue", "aucune notice"))):
         x = 124 + i * 196
         bx = x - 40
         # Sortie d'échappement, puis trois volutes de fumée.
@@ -88,7 +92,7 @@ def fumees() -> str:
         p.append(f'<ellipse cx="{bx}" cy="187" rx="6" ry="11" fill="#11151a"/>')
         for dx, dy, r in ((18, 180, 14), (40, 162, 19), (68, 140, 24)):
             p.append(f'<circle cx="{bx + dx}" cy="{dy}" r="{r}" fill="{couleur}" fill-opacity=".85" stroke="{bord}" stroke-width="2"/>')
-        coul_sous = AMBRE if i else VERT
+        coul_sous = DOUX if i else VERT
         p.append(texte(x, 240, titre, taille=26, poids=700))
         p.append(texte(x, 270, sous, taille=24, couleur=coul_sous))
     p.append("</svg>")
