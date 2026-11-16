@@ -16,13 +16,13 @@ const [base, sortie] = process.argv.slice(2);
       await page.goto(`${base}/batterie-voiture/`, { waitUntil: 'networkidle' });
       if (!secours) await page.reload({ waitUntil: 'networkidle' });
       await page.evaluate(() => document.fonts.ready);
-      const ligne = page.locator('[data-encadre-decision] [data-encadre-ligne]').nth(3);
-      await ligne.screenshot({ path: join(sortie, `ligne-saisie-${w}-${police}-encadre.png`) });
+      const ligne = page.locator('[data-encadre-decision] [data-encadre-ligne]').nth(Number(process.env.RANG ?? 4) - 1);
+      await ligne.screenshot({ path: join(sortie, `${process.env.PREFIXE ?? 'ligne-saisie'}-${w}-${police}-encadre.png`) });
       await ligne.locator('a[data-lien-notices]').click();
       await page.waitForTimeout(300);
       const cible = await page.evaluate(() => { const e = document.querySelector(':target'); return e ? e.id : null; });
       console.log(w, police, 'cible', cible, 'url', page.url().split('#')[1]);
-      await page.screenshot({ path: join(sortie, `ligne-saisie-${w}-${police}-apres-clic.png`) });
+      await page.screenshot({ path: join(sortie, `${process.env.PREFIXE ?? 'ligne-saisie'}-${w}-${police}-apres-clic.png`) });
       await page.close();
     }
   }
