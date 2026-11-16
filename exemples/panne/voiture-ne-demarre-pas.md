@@ -8,8 +8,9 @@
 #   (src/schemas/grille.ts), à confirmer au paquet.
 # - Notices Dacia et Toyota lues le 16/11/2026 : citations et pages ajoutées.
 # - Pièces à créer dans data/couts.json avec le lot : `pile-de-cle` (geste) et `carburant-et-reamorcage` (geste).
-# - Format de l'arbre de décision (`{{arbre}}` suivi d'une liste numérotée) : provisoire, fixé par la partie technique
-#   du modèle panne (piste technique, après la demande n° 27).
+# - Format 2 (16/11/2026, demande n° 30) : repères sous les titres d'une seule ligne, illustration dessinée pour le site
+#   (`batterie-cosses`), références de pages passées dans « Sources » (règle 2d), marque et modèle dans le texte.
+#   Se construit quand la base porte les lignes d'écart courtes du lot F2 (`batterie-rouge`, `prechauffage`).
 id: voiture-ne-demarre-pas
 title: "Voiture ne démarre pas : que faire, cas par cas"
 h1: "Ma voiture ne démarre pas : que vérifier, et quand faire appel à un garage ?"
@@ -78,6 +79,11 @@ voyants:
   - prechauffage
   - batterie-rouge
 element_unique: arbre-de-decision
+format: 2
+illustration:
+  fichier: batterie-cosses
+  alt: "Une batterie de 12 volts et ses deux cosses, négative et positive, entourées : c'est là qu'il faut regarder"
+  legende: "Cosses mal serrées, débranchées ou oxydées : la notice Renault Clio 5 demande de les resserrer, de les rebrancher ou de les nettoyer. Sur certaines voitures, la batterie n'est pas directement accessible : suivez votre notice."
 symptome: "Le moteur ne démarre pas quand vous tournez la clé ou appuyez sur le bouton de démarrage."
 carburant: essence et diesel
 contexte:
@@ -164,28 +170,38 @@ Ne multipliez pas les essais : les notices lues demandent de couper le contact e
 
 ## Voiture qui ne démarre pas, voyants faibles ou éteints : la batterie
 
+{{repere:ligne-1}}
+
 Dans le tableau des anomalies des notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}, des voyants qui faiblissent ou ne s'allument pas, avec un démarreur qui ne tourne pas, viennent de trois causes : des cosses de batterie mal serrées, débranchées ou oxydées, une batterie déchargée ou hors d'usage, ou un circuit défectueux ({{cite:notice-renault-clio-5|p. 384}} ; {{cite:notice-dacia-sandero-3|p. 347}}). La notice {{notice:notice-toyota-yaris}} ajoute un signe plus discret : un démarreur qui tourne lentement, avec des éclairages intérieurs et des phares atténués. La batterie est alors peut-être déchargée, ou ses bornes desserrées ou corrodées ({{cite:notice-toyota-yaris|p. 319}}).
 
 Pour démarrer avec une autre batterie, suivez la notice de votre voiture : l'ordre de branchement et le point où se branche le câble noir changent d'une voiture à l'autre. Sur la Peugeot 208, la borne négative n'est pas accessible et un point de masse déporté la remplace ({{cite:notice-peugeot-208|p. 187-188}}) ; sur la Clio 5, les câbles se branchent sur un bornier du compartiment moteur ({{cite:notice-renault-clio-5|p. 363-364}}).
 
 Ce que les notices lues interdisent :
 
-- démarrer avec des câbles si l'une des batteries est gelée : « risque d'explosion » ({{cite:notice-seat-ibiza|p. 57}}) ;
-- démarrer le moteur en branchant un chargeur de batterie ({{cite:notice-peugeot-208|p. 187}}) ;
-- utiliser un booster de batterie de 24 V ou plus ({{cite:notice-citroen-c3|p. 137}}) ;
-- laisser tourner le moteur dans un endroit fermé : « risque d'intoxication » ({{cite:notice-seat-ibiza|p. 213}}) ;
-- utiliser un aérosol de démarrage à froid, qui peut exploser ou emballer le moteur ({{cite:notice-seat-ibiza|p. 213}}) ;
-- pousser la voiture quand la colonne de direction est verrouillée ({{cite:notice-renault-clio-5|p. 384}} ; {{cite:notice-dacia-sandero-3|p. 347}}).
+- démarrer avec des câbles si l'une des batteries est gelée : « risque d'explosion », selon la notice {{notice:notice-seat-ibiza}} ({{cite:notice-seat-ibiza|p. 57}}) ;
+- démarrer le moteur en branchant un chargeur de batterie (notice {{notice:notice-peugeot-208}}) ({{cite:notice-peugeot-208|p. 187}}) ;
+- utiliser un booster de batterie de 24 V ou plus (notice {{notice:notice-citroen-c3}}) ({{cite:notice-citroen-c3|p. 137}}) ;
+- laisser tourner le moteur dans un endroit fermé : « risque d'intoxication », selon la notice {{notice:notice-seat-ibiza}} ({{cite:notice-seat-ibiza|p. 213}}) ;
+- utiliser un aérosol de démarrage à froid, qui peut exploser ou emballer le moteur (notice {{notice:notice-seat-ibiza}}) ({{cite:notice-seat-ibiza|p. 213}}) ;
+- pousser la voiture quand la colonne de direction est verrouillée (notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}}) ({{cite:notice-renault-clio-5|p. 384}} ; {{cite:notice-dacia-sandero-3|p. 347}}).
 
 ## Le démarreur tourne mais le moteur ne démarre pas
+
+{{repere:ligne-3}}
 
 La notice {{notice:notice-peugeot-208}} demande de couper le contact si le moteur ne démarre pas tout de suite, puis d'attendre quelques instants avant de recommencer. Après quelques tentatives, elle demande de ne pas insister, car le démarreur et le moteur risquent d'être endommagés, et de faire appel au réseau ou à un atelier qualifié ({{cite:notice-peugeot-208|p. 93}}). Seat demande d'interrompre le lancement et de réessayer au bout d'une minute environ ({{cite:notice-seat-ibiza|p. 212}}).
 
 Quand le démarreur tourne normalement mais que le moteur ne part pas, la notice {{notice:notice-toyota-yaris}} cite trois causes : trop peu de carburant, un moteur noyé (redémarrez en suivant la procédure de démarrage de la notice), ou un dysfonctionnement de l'antidémarrage ({{cite:notice-toyota-yaris|p. 318}}).
 
+## Diesel : le voyant de préchauffage reste allumé
+
+{{repere:prechauffage}}
+
 Sur un diesel, attendez que le voyant de préchauffage s'éteigne avant d'actionner le démarreur : c'est la consigne de toutes les notices lues pour ce voyant. Par temps froid, il reste allumé plus longtemps ({{cite:notice-peugeot-208|p. 93}}).
 
 ## Diesel en panne sèche : le réamorçage
+
+{{repere:ligne-4}}
 
 Sur la plupart des diesels tombés en panne sèche, il ne suffit pas de refaire le plein : le circuit de carburant doit être réamorcé. Les notices Peugeot et Citroën demandent d'abord de mettre au moins 5 litres de gazole ; la suite de la procédure dépend du moteur, et la notice de votre voiture la décrit ({{cite:notice-peugeot-208|p. 175}} ; {{cite:notice-citroen-c3|p. 120}}). La notice Dacia demande aussi de réamorcer le circuit avant de redémarrer ({{cite:notice-dacia-sandero-3|p. 160}}).
 

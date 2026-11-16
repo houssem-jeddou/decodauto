@@ -13,6 +13,9 @@
 # - Ligne saisie « rappel non fait » : niveau proposé par la règle du plus prudent (« contacter le concessionnaire »
 #   n'est pas dans la grille), à trancher par Houssem au paquet.
 # - Tableau des rappels (`{{tableau}}`) : format provisoire, fixé par la partie technique du modèle dossier.
+# - Format 2 (16/11/2026, demande n° 30) : repère sous la section des rappels (ligne 4), illustration dessinée pour le
+#   site (`jauge-huile`), section « Contrôler le niveau d'huile » (Peugeot 208 p. 166, Citroën C3 p. 112-113, relues
+#   à l'écran le 16/11/2026 : travaux/etape-10/textes/autres-pannes-verification.md).
 id: moteur-puretech
 title: "Moteurs PureTech : courroie, huile, rappels et prise en charge"
 h1: "Moteur 1.2 PureTech : votre voiture est-elle concernée, et que faire ?"
@@ -38,6 +41,11 @@ voyants:
   - huile-niveau
   - entretien-vidange
 element_unique: tableau
+format: 2
+illustration:
+  fichier: jauge-huile
+  alt: "La jauge d'huile du moteur : le niveau doit se situer entre les repères mini et maxi"
+  legende: "Contrôle du niveau d'huile, selon les notices Peugeot 208 et Citroën C3 : sur un sol plat, moteur à l'arrêt depuis 30 minutes, le niveau se situe entre les repères mini et maxi de la jauge."
 journal_modifications:
   - date: 2026-11-16
     resume: "Brouillon de préparation : rappels RappelConso de 2020 et 2023, couverture spéciale, plateforme d'indemnisation et certificat Check+ du constructeur (sources relues le 16/11/2026)."
@@ -60,6 +68,7 @@ sources:
   - peugeot-puretech-solutions
   - stellantis-puretech-indemnisation-2025
   - notice-peugeot-208
+  - notice-citroen-c3
   - notice-seat-ibiza
   - notice-renault-clio-5
   - notice-dacia-sandero-3
@@ -78,6 +87,8 @@ Les PureTech 1.0 et 1.2 sont des moteurs essence du groupe Stellantis, montés s
 Ce dossier est daté et revu au moins tous les trois mois : les règles de prise en charge ont déjà changé plusieurs fois.
 
 ## Les rappels officiels sur la pompe à vide
+
+{{repere:ligne-4}}
 
 {{tableau}}
 
@@ -99,6 +110,12 @@ Les consignes sont celles de tous les moteurs, et l'encadré en haut de page les
 
 Sur un PureTech, l'entretien fait à temps compte deux fois : il protège le moteur, et c'est une condition de la couverture spéciale du constructeur.
 
+## Contrôler le niveau d'huile d'un PureTech
+
+Les notices {{notice:notice-peugeot-208}} et {{notice:notice-citroen-c3}} demandent de vérifier le niveau sur un sol plat, moteur à l'arrêt depuis 30 minutes, avec l'indicateur du combiné à la mise du contact ou avec la jauge manuelle. Le niveau correct se situe entre les repères maxi et mini de la jauge. Elles préconisent un contrôle, avec appoint si nécessaire, tous les 5 000 km, et rappellent que des appoints entre deux vidanges sont normaux ({{cite:notice-peugeot-208|p. 166}} ; {{cite:notice-citroen-c3|p. 112-113}}).
+
+Sous le repère mini, ces notices demandent de ne pas démarrer le moteur avant d'avoir complété le niveau ; au-dessus du repère maxi, de faire appel au réseau ou à un atelier qualifié. L'huile doit correspondre à la motorisation et au plan d'entretien, et aucun additif ne doit être ajouté à l'huile moteur ({{cite:notice-peugeot-208|p. 166}}).
+
 ## La couverture spéciale du constructeur (relevé du 16/11/2026)
 
 Selon la page de Peugeot consultée le 16/11/2026, certains moteurs PureTech concernés par une consommation d'huile excessive ou une dégradation prématurée de la courroie de distribution bénéficient d'une couverture qui prend en charge 100 % des coûts (pièces et main-d'œuvre) jusqu'à 10 ans ou 180 000 km, au premier des deux termes échus, à partir du début de la garantie constructeur initiale. Elle s'applique selon la date de production de la voiture, et si le plan d'entretien a été respecté ({{cite:peugeot-puretech-solutions|rubrique « Couverture spéciale »}}). Le plafond a déjà changé : ce dossier le revérifie à chaque revue.
@@ -113,4 +130,4 @@ L'intervalle de remplacement est celui du carnet d'entretien de votre voiture, s
 
 ## Ce que ce brouillon ne dit pas encore
 
-Section de travail, à retirer avant le paquet : rappels de 2025 et 2026 cités par la presse (1.2 PureTech 82, moteurs hybrides à chaîne) à chercher sur RappelConso ; notices Peugeot et Citroën à lire sur l'huile préconisée et le contrôle du niveau ; signes d'usure de la courroie : aucune source de première main retrouvée (la page « Stellantis &You » du relevé du 15/11 est introuvable), section retirée.
+Section de travail, à retirer avant le paquet : rappels de 2025 et 2026 cités par la presse (1.2 PureTech 82, moteurs hybrides à chaîne) à chercher sur RappelConso ; signes d'usure de la courroie : aucune source de première main retrouvée (la page « Stellantis &You » du relevé du 15/11 est introuvable), section retirée.
