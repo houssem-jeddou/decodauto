@@ -115,6 +115,8 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .mini .forme{width:.95rem;height:.95rem}
 .fiche{margin:.75rem 0;padding:.2rem .9rem}
 .fiche div{padding:.5rem 0}
+/* Rangées des fiches et de l'historique : un même filet (revue de F1.3c). */
+.fiche div+div{border-top:1px solid var(--bord)}
 .fiche dt{font-weight:700;font-size:.875rem}.fiche dd{margin:0;font-size:.9375rem;color:var(--texte-doux)}
 .reponse{margin:0 0 .6rem;padding:.6rem .7rem;font-size:.9375rem;line-height:1.45}
 .reponse-texte{margin:0;font-weight:600}
@@ -135,8 +137,16 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .arbre>ol>li p{margin:0}
 .arbre ul{margin:.35rem 0 0;padding-left:1.1rem;font-weight:400;list-style:disc}
 .arbre ul li{margin:.3rem 0}
-.verdict-cite{display:inline-flex;align-items:center;gap:.25rem;font-size:.8125rem;font-weight:700;line-height:1.25;padding:.08rem .5rem;margin:.1rem .1rem 0;vertical-align:.08em}
+/* Pastille du verdict cité : elle termine la réponse, seule sur sa ligne, après la consigne (revue de F1.3c). */
+.verdict-cite{display:flex;width:fit-content;max-width:100%;align-items:center;gap:.3rem;font-size:.8125rem;font-weight:700;line-height:1.25;padding:.12rem .55rem;margin:.35rem 0 .05rem}
 .verdict-cite .forme{width:.95rem;height:.95rem;flex:none}
+/* Téléphone : retraits réduits, pour que le libellé le plus long de la grille tienne sur une ligne à 360 px. */
+@media (max-width:40rem){
+  .arbre{padding:.3rem .7rem .45rem}
+  .arbre>ol>li{padding-left:2rem}
+  .arbre>ol>li::before{width:1.45rem;height:1.45rem}
+  .arbre ul{padding-left:.95rem}
+}
 /* Historique du dossier (F1.3c) : carte du corps, date en gras en tête de chaque entrée. */
 .historique{list-style:none;margin:.5rem 0;padding:.2rem .9rem}
 .historique li{padding:.55rem 0;font-size:.9375rem}
@@ -182,7 +192,11 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 @media (max-width:40rem){
   .tableau-cartes thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   .tableau-cartes table,.tableau-cartes tbody,.tableau-cartes tr,.tableau-cartes th,.tableau-cartes td{display:block}
-  .tableau-cartes tr{margin:0 0 .6rem;padding:.4rem .2rem}
+  /* Une carte par rangée : fond, bord et espace propres (revue de F1.3c). */
+  .tableau-cartes table{background:transparent}
+  .tableau-cartes tr{margin:0 0 .6rem;padding:.55rem .8rem;background:var(--surface);border:1px solid var(--bord);border-radius:12px}
+  .tableau-cartes th,.tableau-cartes td{padding:.25rem 0}
+  .tableau-cartes td+td,.tableau-cartes th+td{border-top:1px solid var(--bord)}
   .tableau-cartes td::before{content:attr(data-libelle);display:block;font-size:.75rem;font-weight:700;color:var(--texte-doux)}
 }
 .liees ul{list-style:none;padding:0;margin:.5rem 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:.5rem}
@@ -305,4 +319,4 @@ main>.accueil-main{max-width:72rem}
 :root .grille-voyants a{color:var(--nuit-texte);background:var(--panneau);border:1px solid var(--filet-nuit);border-radius:14px}
 :root .illustration-accueil{background:transparent;padding:0}
 @media (min-width:60rem){:root .voyants{--rayon-voyants:20px;margin-top:1rem}}
-
+@media (max-width:40rem){:root .tableau-cartes table{border-radius:0;overflow:visible}:root .tableau-cartes th,:root .tableau-cartes td{border-bottom:0}}

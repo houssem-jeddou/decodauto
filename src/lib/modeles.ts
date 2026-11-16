@@ -229,7 +229,14 @@ export function texteRedige(
     return echapper(emplacement);
   });
   if (avecReferences.includes('{{')) echec('référence illisible (« {{ » restant après le rendu)');
-  return { html: `<div class="corps" data-corps>${typographierHtml(avecReferences)}</div>`, citations };
+  // Format 2 : listes sans puces (questions de l'arbre, étapes) annoncées comme listes à VoiceOver (Safari), comme l'encadré.
+  const avecRoles =
+    options.format2 === true
+      ? avecReferences
+          .replace(/(<div class="arbre" data-element-unique="arbre-de-decision"[^>]*>)<ol(?![^>]*\brole=)/g, '$1<ol role="list"')
+          .replace(/<ol class="etapes" data-tutoriel-etapes(?![^>]*\brole=)/g, '<ol class="etapes" data-tutoriel-etapes role="list"')
+      : avecReferences;
+  return { html: `<div class="corps" data-corps>${typographierHtml(avecRoles)}</div>`, citations };
 }
 
 /** Nom d'une région (attribut aria-label, échappé) : le dernier titre H2 ou H3 du HTML qui la précède, sinon `defaut`. */
@@ -518,6 +525,15 @@ export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date
 
 /** Modèles livrés, par type. La variante outil du type voyant : pageOutilVoyants. Le type fluide (vague C) n'en a pas encore. */
 export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut, pneus: pagePneus, panne: pagePanne, dossier: pageDossier };
+
+/**
+ * Vague B (demande de changement n° 30, revue de F1.3c) : une page panne ou dossier est rédigée au format 2. La route des
+ * pages (src/pages/[...adresse].astro) refuse à la construction une telle page au format 1, qu'elle vienne de src/content,
+ * de exemples/ ou de la démonstration ; les pages de test (tests/fixtures) gardent le modèle du format 1.
+ */
+export function refusFormatVagueB(type: TypePage, page: Pick<PageEditoriale, 'id' | 'format'>): string | undefined {
+  return (type === 'panne' || type === 'dossier') && page.format !== 2 ? `page « ${page.id} » : une page « ${type} » est rédigée au format 2 (vague B, demande de changement n° 30) : ajouter « format: 2 »` : undefined;
+}
 
 /** Modèle d'une page, ou la raison pour laquelle il n'existe pas encore (la construction échoue alors). */
 export function modeleDeLaPage(type: TypePage, page: PageEditoriale): { modele: Modele } | { absent: string } {

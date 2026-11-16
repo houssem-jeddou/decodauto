@@ -6,7 +6,7 @@ import { IDENTIFIANTS, LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phr
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
-import { MOTS_VERDICT_ARBRE, REPONSES_MIN_ARBRE, modeleFichePanne, modeleFicheTutoriel, type EntreeDuJournal, type LigneDeFiche } from './fiche-panne.ts';
+import { MOTS_ACTION_ARBRE, MOTS_VERDICT_ARBRE, REPONSES_MIN_ARBRE, modeleFichePanne, modeleFicheTutoriel, type EntreeDuJournal, type LigneDeFiche } from './fiche-panne.ts';
 import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_INDEX_OUTIL, TITRE_OUTIL, ancreLigneOutil, idFiltre, libelleDetail, modeleOutilVoyants, outilVoyants, type ModeleOutil } from './outil-voyants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
@@ -1107,8 +1107,12 @@ export function controlerHtml(
   }
 
   // Arbre de décision (étape 10) : une liste numérotée de questions, chacune suivie d'au moins deux réponses (sous-liste),
-  // comme le construit le modèle depuis le marqueur « {{arbre}} » du texte rédigé.
-  if (page.element_unique === 'arbre-de-decision' && !manque) {
+  // comme le construit le modèle depuis le marqueur « {{arbre}} » du texte rédigé. Un arbre au plus par page
+  // (R7-ARBRE-UNIQUE) ; chaque arbre de la page construite est lu (F1.3c, revue).
+  const arbres = $('[data-element-unique="arbre-de-decision"]').toArray().map((el) => $(el));
+  if (arbres.length > 1) constats.push(erreur('R7-ARBRE-UNIQUE', `un seul arbre de décision par page ; trouvé : ${arbres.length}`, fichier));
+  for (const arbre of page.element_unique === 'arbre-de-decision' && !manque ? arbres : []) {
+    const element = arbre;
     const questions = element.children('ol').first().children('li');
     const incompletes = questions.toArray().filter((q) => $(q).children('ul, ol').first().children('li').length < REPONSES_MIN_ARBRE);
     if (questions.length === 0 || incompletes.length > 0) {
@@ -1131,6 +1135,10 @@ export function controlerHtml(
         constats.push(erreur('R7-ARBRE-VERDICT', `phrase de l'arbre qui cite un verdict absent de l'encadré de décision (le texte ne contredit jamais l'encadré) : « ${brut.slice(0, 60)} »`, fichier));
       } else if (cites.length === 0 && MOTS_VERDICT_ARBRE.test(texte)) {
         constats.push(erreur('R7-ARBRE-VERDICT', `phrase de l'arbre qui dit de rouler ou de s'arrêter sans redire le verdict d'une ligne de l'encadré (« {{verdict:…}} ») : « ${brut.slice(0, 60)} »`, fichier));
+      } else if (cites.length === 0 && $(li).parent().is('ul') && MOTS_ACTION_ARBRE.test(texte)) {
+        // Réponse de l'arbre qui demande une vérification, une visite au garage, chez un réparateur ou un représentant de la
+        // marque, ou qui donne une urgence (mots repères de la grille) : elle redit le verdict d'une ligne de l'encadré.
+        constats.push(erreur('R7-ARBRE-VERDICT', `réponse de l'arbre qui demande une vérification, un passage au garage ou donne une urgence sans redire le verdict d'une ligne de l'encadré (« {{verdict:…}} ») : « ${brut.slice(0, 60)} »`, fichier));
       }
     }
   }

@@ -1167,6 +1167,15 @@
     "explication": "Une réponse de l'arbre cite « Oui, avec précautions », qu'aucune ligne de l'encadré ne donne (libellé vérifié même sans expression de conduite)."
   },
   {
+    "nom": "r7-arbre-action-sans-verdict",
+    "type": "panne",
+    "erreurs": [
+      "R7-ARBRE-VERDICT"
+    ],
+    "alertes": [],
+    "explication": "Une réponse de l'arbre demande un contrôle (« faites contrôler ») sans redire le verdict d'une ligne de l'encadré (revue de F1.3c)."
+  },
+  {
     "nom": "r7-arbre-verdict-dans-question",
     "type": "panne",
     "erreurs": [

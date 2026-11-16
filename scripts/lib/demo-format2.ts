@@ -22,6 +22,12 @@ export { DOSSIER_DEMO_FORMAT2 } from './attendus.ts';
 /** Brouillon des données du format 2 et dessins des illustrations du pilote, redessinés en fichiers SVG. */
 export const FICHIER_BROUILLON_FORMAT2 = 'travaux/etape-13/f1/demo/brouillon-format2.json';
 export const DOSSIER_ILLUSTRATIONS_DEMO = 'travaux/etape-13/f1/demo/illustrations';
+/**
+ * Pages de démonstration des modèles panne et dossier (revue de F1.3c) : fichiers Markdown de tests/demo/format2/<type>/,
+ * lus seulement par cette construction (src/content.config.ts) et par son contrôle ; jamais publiés. Sans empreinte de
+ * validation : R4-VALIDATION-ABSENTE y est une erreur attendue (attendusPagesDemo).
+ */
+export const DOSSIER_PAGES_DEMO_FORMAT2 = 'tests/demo/format2';
 /** Mention obligatoire en tête du brouillon. */
 export const MENTION_BROUILLON = 'Brouillon, jamais validé';
 /** Attribut posé sur html dans la construction de démonstration (contrôle DEMO-PUBLIEE). */
@@ -171,6 +177,11 @@ export function attendusDemoFormat2(brouillon: BrouillonFormat2, fichierDePage: 
     return p.texte_a_reprendre === true && fichier !== undefined ? [{ regle: 'FORMAT2-METHODE', fichier, brut: `FORMAT2-METHODE@${fichier}` }] : [];
   });
   return [...lignes, ...pages, ...methode];
+}
+
+/** Erreurs attendues des pages de démonstration (tests/demo/format2) : aucune n'a d'empreinte de validation. */
+export function attendusPagesDemo(fichiers: readonly string[]): Attendu[] {
+  return fichiers.map((fichier): Attendu => ({ regle: 'R4-VALIDATION-ABSENTE', fichier, brut: `R4-VALIDATION-ABSENTE@${fichier}` }));
 }
 
 /** Une page de la construction de démonstration (attribut data-demo-format2 sur html) dans un site contrôlé comme réel : DEMO-PUBLIEE. */

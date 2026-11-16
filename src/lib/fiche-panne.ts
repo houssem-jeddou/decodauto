@@ -61,6 +61,33 @@ export const EXPRESSIONS_VERDICT_ARBRE: readonly string[] = [
   'arret immediat',
   'arretez la voiture',
 ];
+/**
+ * Expressions d'une réponse de l'arbre qui demande une vérification, une visite au garage, chez un réparateur ou un
+ * représentant de la marque, ou qui donne une urgence (mots repères de la grille, dont « dès que possible » et
+ * « immédiatement ») : une telle réponse redit le verdict d'une ligne de l'encadré (R7-ARBRE-VERDICT, revue de F1.3c).
+ * Texte normalisé (normaliserTexte). Liste forcément incomplète, comme EXPRESSIONS_VERDICT_ARBRE.
+ */
+export const EXPRESSIONS_ACTION_ARBRE: readonly string[] = [
+  ...MOTS_REPERES.immediat,
+  'faites verifier',
+  'faire verifier',
+  'faites le verifier',
+  'faites la verifier',
+  'faites controler',
+  'faire controler',
+  'faites le controler',
+  'faites la controler',
+  'verifiez',
+  'controlez',
+  'garage',
+  'reparateur',
+  'atelier',
+  'representant de la marque',
+  'concessionnaire',
+  'reseau de la marque',
+];
+export const MOTS_ACTION_ARBRE = new RegExp(`\\b(?:${EXPRESSIONS_ACTION_ARBRE.map((e) => e.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})\\b`);
+
 export const MOTS_VERDICT_ARBRE = new RegExp(`\\b(?:${EXPRESSIONS_VERDICT_ARBRE.map((e) => e.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})\\b`);
 
 /** Identifiants des titres (préfixe da-, comme les autres composants : ID-DOUBLON). */
@@ -182,7 +209,7 @@ export function historiqueDossierHtml(journal: readonly EntreeDuJournal[], optio
     `<section class="historique-dossier" data-historique-dossier aria-labelledby="${IDENTIFIANT_HISTORIQUE}">`,
     `<h2 id="${IDENTIFIANT_HISTORIQUE}">${texteHtml(TITRE_HISTORIQUE)}</h2>`,
     // Format 2 : carte du corps, date en gras en tête de chaque entrée (charte-b.css, .historique).
-    options.format2 === true ? '<ul class="historique">' : '<ul>',
+    options.format2 === true ? '<ul class="historique" role="list">' : '<ul>',
     // Espace insécable avant le deux-points (typographie française, contrôle TYPO-ESPACE du site construit).
     ...entrees.map((e) => `<li data-historique-entree><time datetime="${dateIso(e.date)}">${texteHtml(dateLisible(e.date))}</time>${INSECABLE}: ${texteHtml(e.resume)}</li>`),
     '</ul>',

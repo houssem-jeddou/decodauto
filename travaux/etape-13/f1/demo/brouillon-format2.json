@@ -1,5 +1,5 @@
 {
-  "avertissement": "Brouillon, jamais validé. Données du format 2 pour la construction de démonstration du lot F1 (tâche F1.2, npm run demo:format2), jamais publiées : lignes d'écart courtes et « ce que demande la notice » du pilote F1 (branche etape-13/pilote-f1, generer.py), sauf les lignes « adblue-defaut » et « adblue-demarrage-impossible », rédigées pour cette démonstration (le pilote ne reprenait qu'un groupe AdBlue) ; illustrations du pilote redessinées en fichiers SVG (dossier illustrations/) ; repères placés comme dans le pilote, un repère seulement sous un titre qui pose la question d'une seule ligne de l'encadré (seconde revue de F1.2) : aucun sur la page AdBlue, dont les sections mêlent plusieurs cas. Ces textes se valident avec le paquet du lot F2 ; data/voyants.json et src/content ne changent pas. Texte des pages : celui en ligne ; une phrase du voyant moteur réécrite comme au lot F2 (règle 2d : référence hors parenthèse), la formule « Verdict retenu » laissée jusqu'au lot F2 (erreur FORMAT2-METHODE attendue).",
+  "avertissement": "Brouillon, jamais validé. Données du format 2 pour la construction de démonstration du lot F1 (tâche F1.2, npm run demo:format2), jamais publiées : lignes d'écart courtes et « ce que demande la notice » du pilote F1 (branche etape-13/pilote-f1, generer.py), sauf les lignes « adblue-defaut » et « adblue-demarrage-impossible », rédigées pour cette démonstration (le pilote ne reprenait qu'un groupe AdBlue) ; illustrations du pilote redessinées en fichiers SVG (dossier illustrations/) ; repères placés comme dans le pilote, un repère seulement sous un titre qui pose la question d'une seule ligne de l'encadré (seconde revue de F1.2) : aucun sur la page AdBlue, dont les sections mêlent plusieurs cas. Pages panne et dossier de démonstration (revue de F1.3c) : fichiers Markdown de tests/demo/format2, lus seulement par cette construction ; ligne d'écart courte de « batterie-rouge » rédigée pour la démonstration (page « changer la batterie »). Ces textes se valident avec le paquet du lot F2 ; data/voyants.json et src/content ne changent pas. Texte des pages : celui en ligne ; une phrase du voyant moteur réécrite comme au lot F2 (règle 2d : référence hors parenthèse), la formule « Verdict retenu » laissée jusqu'au lot F2 (erreur FORMAT2-METHODE attendue).",
   "voyants": {
     "moteur-orange-fixe": {
       "ecart_court": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt).",
@@ -57,6 +57,9 @@
         "notice-renault-clio-5|p. 166-167, « Réservoir réactif »": "Faire soi-même le plein de réactif pour redémarrer",
         "notice-dacia-sandero-3|p. 138-139, « Réservoir réactif »": "Faire soi-même le plein de réactif pour redémarrer"
       }
+    },
+    "batterie-rouge": {
+      "ecart_court": "Plus stricts : Peugeot, Renault, Dacia, Toyota (arrêt). Moins strict : Seat (atelier le plus proche, immédiatement)."
     }
   },
   "pages": {

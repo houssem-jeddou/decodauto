@@ -362,6 +362,8 @@ interface OptionsHtml {
   arbreVerdictHorsEncadre?: boolean;
   arbreVerdictPrecautions?: boolean;
   arbreVerdictDansQuestion?: boolean;
+  /** Réponse de l'arbre qui demande un contrôle sans redire le verdict (R7-ARBRE-VERDICT étendu, revue de F1.3c). */
+  arbreActionSansVerdict?: boolean;
   ficheTutorielFausse?: boolean;
   sansHistorique?: boolean;
   historiqueIncomplet?: boolean;
@@ -480,7 +482,9 @@ function arbreDeTest(options: OptionsHtml): string {
         ? `Non : ${GRILLE_VERDICTS['non, arrêt immédiat'].libelle}.`
         : options.arbreVerdictPrecautions
           ? `Non : ${GRILLE_VERDICTS['oui avec précautions'].libelle} ; allez au garage.`
-          : 'Non : faites contrôler le démarreur.';
+          : options.arbreActionSansVerdict
+            ? 'Non : faites contrôler le démarreur.'
+            : 'Non : lisez la suite de la page sur le démarreur.';
   const question = options.arbreVerdictDansQuestion ? 'Le démarreur tourne-t-il ? Sinon, coupez le moteur.' : 'Le démarreur tourne-t-il ?';
   return `${ouvrir}<ol><li>${question}<ul><li>Oui : batterie probablement bonne.</li>${options.arbreUneReponse ? '' : `<li>${non}</li>`}</ul></li></ol></div>`;
 }
@@ -843,6 +847,7 @@ valide('valide-panne-arbre-verdict', 'panne', panne(), "Une réponse de l'arbre 
 invalide('r7-arbre-verdict-ecrit', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre dit de s'arrêter sans redire le verdict de l'encadré (verdict écrit à la main).", { arbreVerdictEcrit: true });
 invalide('r7-arbre-verdict-hors-encadre', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre cite un verdict qu'aucune ligne de l'encadré ne donne : le texte contredirait l'encadré.", { arbreVerdictHorsEncadre: true });
 invalide('r7-arbre-precautions-hors-encadre', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre cite « Oui, avec précautions », qu'aucune ligne de l'encadré ne donne (libellé vérifié même sans expression de conduite).", { arbreVerdictPrecautions: true });
+invalide('r7-arbre-action-sans-verdict', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre demande un contrôle (« faites contrôler ») sans redire le verdict d'une ligne de l'encadré (revue de F1.3c).", { arbreActionSansVerdict: true });
 invalide('r7-arbre-verdict-dans-question', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Le texte d'une question, hors de la liste des réponses, dit de s'arrêter sans redire le verdict de l'encadré : toute phrase de l'arbre est contrôlée.", { arbreVerdictDansQuestion: true });
 invalide('panne-tutoriel-fiche-incomplete', 'panne', panneTutoriel(), ['FICHE-TUTORIEL-INCOMPLETE'], "La fiche du tutoriel construite n'affiche pas « Quand ne pas le faire soi-même ».", { ficheTutorielFausse: true });
 

@@ -21,7 +21,7 @@
 // 404, panne et dossier ; modeleDeLaPage refuse une telle page au format 2 (la construction échoue).
 // Module sans dépendance à l'exécution : tests, démonstration et construction l'utilisent tel quel.
 // ---------------------------------------------------------------------------------------------
-import { attributHtml, texteHtml } from './html.ts';
+import { attributHtml, decoderEntites, texteHtml } from './html.ts';
 import {
   IDENTIFIANTS,
   LIBELLE_COUT_PROBABLE,
@@ -621,7 +621,7 @@ export function pageVoyantFormat2(
  */
 export function tableauxDuTexteFormat2(html: string): string {
   const enrichir = (table: string): { table: string; cartes: boolean } => {
-    const entetes = [...(/<thead\b[\s\S]*?<\/thead>/.exec(table)?.[0] ?? '').matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/g)].map((m) => (m[1] ?? '').replace(/<[^>]+>/g, '').trim());
+    const entetes = [...(/<thead\b[\s\S]*?<\/thead>/.exec(table)?.[0] ?? '').matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/g)].map((m) => decoderEntites((m[1] ?? '').replace(/<[^>]+>/g, '')).trim());
     if (entetes.length <= 3) return { table, cartes: false };
     const corps = table.replace(/<tr\b[^>]*>[\s\S]*?<\/tr>/g, (rangee) => {
       let i = 0;

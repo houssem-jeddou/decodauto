@@ -59,6 +59,19 @@ export const texteHtml = (texte: string): string => echapper(typographier(texte)
 /** Valeur d'attribut : échappée, sans typographie (identifiants, adresses, niveaux de la grille). */
 export const attributHtml = (valeur: string): string => echapper(valeur);
 
+/**
+ * Texte d'un fragment HTML (déjà échappé) ramené au texte brut : entités nommées courantes et numériques décodées, pour
+ * le repasser par attributHtml sans double échappement (« Pièces &amp;amp; main-d’œuvre », revue de F1.3c).
+ */
+export function decoderEntites(html: string): string {
+  const nommees: Readonly<Record<string, string>> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: '\u00a0' };
+  return html.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (tout, nom: string) => {
+    if (nom.startsWith('#x') || nom.startsWith('#X')) return String.fromCodePoint(Number.parseInt(nom.slice(2), 16));
+    if (nom.startsWith('#')) return String.fromCodePoint(Number(nom.slice(1)));
+    return nommees[nom.toLowerCase()] ?? tout;
+  });
+}
+
 /** Éléments dont le texte n'est jamais retouché : code, préformaté, scripts, styles, saisie, dessins. Repris par TYPO-*. */
 export const ELEMENTS_SANS_TYPOGRAPHIE = ['code', 'pre', 'kbd', 'samp', 'script', 'style', 'textarea', 'template', 'svg', 'math'] as const;
 const SANS_TYPOGRAPHIE = new RegExp(`^(?:${ELEMENTS_SANS_TYPOGRAPHIE.join('|')})$`, 'i');
