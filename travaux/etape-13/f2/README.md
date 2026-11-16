@@ -15,3 +15,12 @@ aucune action ne change**.
   d'AdBlue, démarrage impossible). Ce n'est pas une revue indépendante : la revue du lot F2 la fera, sources à l'appui.
 - Entrera dans la base (champ `ecart_court` de la ligne, champ `demande` de chaque citation) dans la pull request du lot
   F2, après validation ; les empreintes des lignes ne s'écrivent qu'après la validation du contenu exact.
+
+## Illustrations des pages voyants (règle 2i)
+`illustrations/` : 9 dessins pour les pages voyant huile, batterie, frein, FAP, préchauffage, airbag, ABS et ESP, pression
+des pneus et direction (moteur et AdBlue : dessins de la démonstration de F1.2). Même style que le pilote validé : le
+combiné (compteur, compte-tours), avec le ou les voyants de la page allumés dans l'écran central et une rangée de voyants
+éteints. Chaque page en a un, avec son texte alternatif et sa légende dans `illustrations-f2.json` (champ `illustration` de
+la page au lot F2 ; « Illustration decodauto. » est ajouté par le modèle). Légendes tirées des noms et des situations de la
+base. Vérifiés : forme du fichier (un SVG avec viewBox, rien d'interdit par `illustrationEnLigne`), textes de 24 unités
+(au moins 12 px à 375 px), rendu à 375 et 760 px de large avec `charte-b.css`. Brouillon, jamais validé.
