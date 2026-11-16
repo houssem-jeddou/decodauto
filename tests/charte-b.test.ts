@@ -45,3 +45,10 @@ describe('charte B : contrastes (F1.4)', () => {
     assert.match(css, /\.grille-voyants a\{[^}]*padding:\.5rem \.3rem;/);
   });
 });
+
+describe('charte B : coupures de ligne (lot F2, recette de la porte 10)', () => {
+  test('lien « Votre marque » : jamais coupé sur deux lignes ; plage du coût probable : la préposition reste avec sa pastille', () => {
+    assert.match(css, /a\[data-lien-notices\]\{white-space:nowrap\}/);
+    assert.match(css, /\.borne\{white-space:nowrap\}/);
+  });
+});

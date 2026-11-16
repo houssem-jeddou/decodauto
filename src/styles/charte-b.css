@@ -75,10 +75,14 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .action{margin:.25rem 0 0}
 .ecart{margin:.45rem 0 0;font-size:.875rem;line-height:1.42}
 .ecart .balance{width:1.05rem;height:1.05rem;vertical-align:-.2rem;margin-right:.3rem}
+/* Lien « Votre marque » d'une ligne d'écart (encadré, cartes de l'outil) : toujours sur une seule ligne (lot F2). */
+a[data-lien-notices]{white-space:nowrap}
 .cout{margin:.7rem 0 0;padding-top:.55rem;font-size:.875rem}
 .cout p{margin:.2rem 0}
 .cout-libelle{font-weight:700;margin-right:.25rem}
 .tranche{display:inline-block;font-weight:700;padding:.05rem .45rem;font-size:.8125rem}
+/* Préposition de la plage du coût probable et sa pastille : jamais séparées en fin de ligne (lot F2). */
+.borne{white-space:nowrap}
 .montant{font-size:.8125rem}
 .signature,.ligne-transparence{font-size:.8125rem;margin:.45rem 0;color:var(--texte-doux)}
 .signature{margin-top:.7rem}

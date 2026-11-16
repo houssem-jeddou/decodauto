@@ -268,6 +268,14 @@ describe('format 2 : modèle des pages voyants', () => {
     }
   });
 
+  test('plage du coût probable : chaque préposition groupée avec sa pastille (.borne, jamais seule en fin de ligne ; lot F2)', async () => {
+    const { html } = await construire();
+    const $ = cheerio.load(html);
+    const bornes = $('[data-encadre-cout] .borne').toArray().map((el) => $(el));
+    assert.deepEqual(bornes.map((b) => b.text().split('\u00a0')[0]), ['de', 'à']);
+    assert.ok(bornes.every((b) => b.children('.tranche').length === 1));
+  });
+
   test('erreurs de construction : écart court, illustration, « ce que demande la notice » absents ; repère mal placé ou inconnu ; repère au format 1', async () => {
     const { site } = await siteDemo();
     const { page } = await pageDemo();
