@@ -193,10 +193,11 @@ Sur la Seat Ibiza ({{cite:notice-seat-ibiza|p. 56-57}}) :
 
 1. Coupez le contact sur les deux voitures.
 2. Branchez le câble rouge entre la borne positive (+) de la voiture en panne et la borne positive (+) de la voiture qui fournit le courant.
-3. Branchez le câble noir sur la borne négative, ou, sur une voiture équipée du Start-Stop, sur une borne de mise à la terre appropriée, mais pas directement sur la borne négative de la batterie déchargée.
-4. Lancez le moteur de la voiture qui fournit le courant et laissez-le tourner au ralenti.
-5. Démarrez la voiture en panne : si le moteur ne démarre pas au bout de 10 secondes, recommencez environ une minute plus tard.
-6. Moteurs en marche, débranchez les câbles exactement dans l'ordre inverse.
+3. Branchez une extrémité du câble noir sur la borne négative (-) de la voiture qui fournit le courant ; si cette voiture a le Start-Stop, sur une borne de mise à la terre appropriée ou une pièce métallique massive vissée au bloc-moteur.
+4. Branchez l'autre extrémité du câble noir, sur la voiture en panne, à une pièce en métal massif vissée au carter-moteur, pas directement sur la borne négative de la batterie déchargée.
+5. Lancez le moteur de la voiture qui fournit le courant et laissez-le tourner au ralenti.
+6. Démarrez la voiture en panne : si le moteur ne démarre pas au bout de 10 secondes, recommencez environ une minute plus tard.
+7. Moteurs en marche, débranchez les câbles exactement dans l'ordre inverse.
 
 La notice Seat Ibiza interdit ce démarrage avec des câbles si l'une des batteries est gelée, à cause du risque d'explosion ({{cite:notice-seat-ibiza|p. 57}}). Une fois le moteur démarré, les notices Peugeot 208 et Citroën C3 demandent de le laisser tourner, voiture à l'arrêt, au moins 30 minutes, pour que la batterie atteigne un niveau de charge suffisant ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). La notice Toyota Yaris demande ensuite de faire vérifier la voiture dès que possible ({{cite:notice-toyota-yaris|p. 320}}).
 

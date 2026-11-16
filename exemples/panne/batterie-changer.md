@@ -8,8 +8,7 @@
 #   professionnel quand la notice le demande (proposition du 16/11, à valider avec le lot).
 # - Illustration dessinée pour le site : batterie-ordre-bornes (travaux/etape-10/generer-illustrations-b2.py).
 # - Corrigé après la revue indépendante du 16/11/2026 (rapport « à corriger ») : extrait Seat de la ligne 2 ramené à ce
-#   que dit le relevé (« batteries endommagées : remplacer immédiatement », à relire mot pour mot), niveau tiré de la
-#   grille ; Seat p. 301 citée à la ligne 1 ; étapes rattachées aux notices Seat Ibiza et Toyota Yaris ; borne (+) seule
+#   texte relu mot pour mot à l'écran le 16/11/2026 vers 23 h 15 (PDF 304 → p. 302), niveau tiré de la grille ; Seat p. 301 citée à la ligne 1 ; étapes rattachées aux notices Seat Ibiza et Toyota Yaris ; borne (+) seule
 #   ramenée à la longue immobilisation ; faits absents des relevés retirés ; corrections non relues par la revue.
 id: batterie-changer
 title: "Comment changer une batterie de voiture : ce que disent les notices"
@@ -49,14 +48,14 @@ situations:
         verdict: oui avec précautions
         urgence: sous quelques jours
   - situation: "La batterie est endommagée"
-    verdict: oui avec précautions
+    verdict: non, arrêt dès que possible
     urgence: immédiate
-    action: "Faites-la remplacer sans attendre par un garage ou un atelier spécialisé."
+    action: "Ne l'utilisez pas, ni pour démarrer ni pour rouler : faites appel à un garage ou à l'assistance pour la remplacer."
     citations:
       - source: notice-seat-ibiza
         emplacement: "p. 302, « Batterie de 12 volts »"
-        extrait: "Remplacez immédiatement les batteries endommagées."
-        verdict: oui avec précautions
+        extrait: "N'utilisez pas de batteries endommagées. Risque d'explosion ! Remplacez immédiatement les batteries endommagées."
+        verdict: non, arrêt dès que possible
         urgence: immédiate
   - situation: "Vous venez de rebrancher la batterie, ou d'en poser une neuve"
     verdict: oui
@@ -193,4 +192,4 @@ Selon les notices Peugeot 208 et Citroën C3, le Stop & Start peut ne pas foncti
 
 {{repere:ligne-2}}
 
-La notice Seat Ibiza demande de remplacer immédiatement une batterie endommagée ({{cite:notice-seat-ibiza|p. 302}}). Pour les problèmes liés à la batterie, elle demande de se rendre chez un partenaire SEAT ou un atelier spécialisé, à cause du risque de brûlures et d'explosion ({{cite:notice-seat-ibiza|p. 301}}).
+La notice Seat Ibiza interdit d'utiliser une batterie endommagée, à cause du risque d'explosion, et demande de la remplacer immédiatement ({{cite:notice-seat-ibiza|p. 302}}). Pour les problèmes liés à la batterie, elle demande de se rendre chez un partenaire SEAT ou un atelier spécialisé, à cause du risque de brûlures et d'explosion ({{cite:notice-seat-ibiza|p. 301}}).

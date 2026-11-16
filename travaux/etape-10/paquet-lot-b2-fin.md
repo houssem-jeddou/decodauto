@@ -43,28 +43,17 @@
    avec un écart (plus strictes : Renault et Dacia ; moins strictes : Peugeot et Seat). Elle dirait alors de ne pas
    rouler avec une batterie à remplacer, ce qu'aucune notice n'écrit. **Recommandation : garder Oui, avec
    précautions · dans les jours qui viennent.**
-6. **Batterie endommagée** (« changer », ligne 2) : **niveau changé après la revue**, de « Non, ne poursuivez pas votre
-   trajet » à **Oui, avec précautions** · À faire tout de suite. Ce qui a été relu :
-   - le texte relevé de la notice Seat (`travaux/etape-5/notices/seat-ibiza.txt`, branche `preparation/etape-10`) ne
-     contient de la p. 302 que le témoin d'alerte de l'alternateur, pas la rubrique « Batterie de 12 volts » ;
-   - aucun relevé ne contient « N'utilisez pas » ni « Risque d'explosion » pour une batterie endommagée ; le relevé
-     `batterie-b2-verification.md` (PDF 304 → p. 302) ne donne qu'un résumé : « batteries endommagées : remplacer
-     immédiatement ».
-   La ligne repose donc sur ce que dit le relevé, avec l'extrait « Remplacez immédiatement les batteries endommagées. »,
-   **attesté en résumé seulement : à relire mot pour mot à l'écran (PDF 304) avant la validation**. Si le texte exact
-   diffère, l'extrait est remplacé par ce texte et le niveau réexaminé. La grille, dans les deux sens :
-   - vers « Oui, avec précautions · tout de suite » (retenu) : la consigne demande une action (remplacer) pour une
-     anomalie, sans imposer l'arrêt ni empêcher de rejoindre le garage ; « immédiatement » est un repère d'urgence
-     (immédiate), pas de verdict ; l'urgence immédiate couvre « le passage au garage en y allant directement ». La
-     consigne Seat p. 301 (mot pour mot) demande d'ailleurs de « vous rendre chez » un atelier pour les problèmes de
-     batterie ;
-   - vers le plus prudent (principe 3) : « remplacer immédiatement » peut vouloir dire qu'on n'utilise plus la batterie
-     avant son remplacement, donc qu'on ne repart pas avec : la grille range ce cas à « Non, ne poursuivez pas votre
-     trajet » (empêche de rouler jusqu'au garage). « Non, arrêtez-vous immédiatement » demanderait une consigne qui impose
-     l'arrêt d'un véhicule en marche ; or une batterie endommagée se découvre capot ouvert, voiture arrêtée.
-   Si la notice dit bien « N'utilisez pas de batteries endommagées. Risque d'explosion ! », sans viser un véhicule en
-   marche, la proposition d'avant la revue revient : **Non, ne poursuivez pas votre trajet · tout de suite**.
-   **Recommandation : Oui, avec précautions · À faire tout de suite, après la relecture de la p. 302.**
+6. **Batterie endommagée** (« changer », ligne 2) : **Non, ne poursuivez pas votre trajet** · À faire tout de suite.
+   Extrait relu mot pour mot à l'écran le 16/11/2026 vers 23 h 15 (PDF 304 → p. 302, rubrique « Batterie de 12 volts ») :
+   « N'utilisez pas de batteries endommagées. Risque d'explosion ! Remplacez immédiatement les batteries endommagées. »
+   La correction faite juste après la revue (« Oui, avec précautions », faute de texte exact) est donc annulée. La grille,
+   dans les deux sens :
+   - « Non, ne poursuivez pas votre trajet » (retenu) : la notice interdit d'utiliser la batterie, donc de démarrer et
+     de rouler avec elle jusqu'au garage ; la grille range à ce niveau ce qui empêche de rouler jusqu'au garage et ce
+     qui demande de faire appel à un professionnel ;
+   - « Non, arrêtez-vous immédiatement » (principe 3) demanderait une consigne qui impose l'arrêt d'un véhicule en
+     marche ; une batterie endommagée se découvre capot ouvert, voiture arrêtée.
+   **Recommandation : valider.**
 7. **Après le rebranchement** (« changer », lignes 3 et 4) : **Oui, vous pouvez rouler** · aucune action (Peugeot
    p. 190, Citroën p. 139 : attendre 1 minute contact mis ; Stop & Start parfois indisponible au trajet suivant,
    jusqu'à environ 8 heures). Après la revue, l'action de la ligne 3 ne dit plus que ce que dit son extrait (attendre
@@ -99,20 +88,21 @@
       batterie (point de collecte, législation, « jamais avec les ordures ménagères »), retirée plutôt que reformulée ;
       « la tension seule ne dit pas tout » (VARTA) ; « Stop & Start » rattaché aux batteries AGM ou EFB ;
     - ajoutés, d'après les relevés : ordre des câbles de démarrage, Peugeot p. 188 et Seat p. 56-57
-      (`demarrage-batterie-releve.md`, l. 23 et 40-41, relevé du 15/11 par l'outil de lecture web, **non relu à
-      l'écran**) ; câbles de section suffisante, norme DIN 72553, 25 mm² (essence) et 35 mm² (diesel), véhicules sans
+      (`demarrage-batterie-releve.md`, l. 23 et 40-41, relevé du 15/11 par l'outil de lecture web, relu à l'écran
+      par le pilotage le 16/11 vers 23 h 15 : Peugeot PDF 190, Seat PDF 58-59) ; câbles de section suffisante, norme DIN 72553, 25 mm² (essence) et 35 mm² (diesel), véhicules sans
       contact (Seat p. 55, même relevé, l. 39, fin à relire ; Peugeot p. 187) ; Seat p. 213, moteur dans un endroit
       fermé (relu, `demarrage-batterie-verification.md`, l. 17) ; Seat p. 301, gaz détonant pendant la recharge (relevé
       du 15/11, l. 50) ; Dacia p. 301, ni ouvrir ni ajouter de liquide (relu mot pour mot) ; Seat p. 227, direction
       (texte relevé de l'étape 5) ; Toyota p. 321, toujours commencer par la borne négative (entre guillemets dans
       `autres-pannes-verification.md`, l. 258) ;
-    - le relevé de Seat p. 56 ne dit pas sur quelle voiture se branche le câble noir : la page ne le dit pas non plus et
-      reprend l'interdiction de la p. 57 (pas directement sur la borne négative de la batterie déchargée) ; à relire à
-      l'écran ;
-    - attestés en résumé seulement par les relevés, à relire mot pour mot avant la validation : extraits Seat p. 302
-      (ligne 2 de « changer ») et p. 303 (ligne 1 de « changer »), deux premières phrases de l'« œil magique », Toyota
-      p. 319 et 320, première phrase de Peugeot p. 188, fins de Peugeot p. 190 et Citroën p. 139 ; pour Citroën, « pas
-      nécessaire de débrancher » et la liste des réinitialisations (relevé : « mêmes consignes que Peugeot »).
+    - relus mot pour mot à l'écran par le pilotage après la correction (16/11, vers 23 h 15, pdf.js sur les PDF du
+      registre) : Seat p. 55 (câbles DIN 72553, 25 et 35 mm²), p. 56-57 (ordre des câbles, avec ou sans Start-Stop, le
+      câble noir branché sur la voiture en panne à une pièce métallique du moteur ; étapes 3 et 4 de la Seat précisées
+      d'après ce texte), p. 301 (ouvrir la batterie et modifier son niveau de liquide interdits), p. 302 (batterie
+      endommagée, batterie gelée) et p. 303 (œil magique, remplacement : extrait de la ligne 1) ; Peugeot p. 168, 188,
+      189 et 190 (tous les extraits du lot) ; Citroën p. 137, 138 et 139 (tous les extraits du lot ; « il n'est pas
+      nécessaire de débrancher la batterie » pour la recharger, p. 137). Les extraits Toyota p. 319 et 320 sont ceux des
+      lignes reprises de l'exemple validé à la porte 10.
 12. **Haut de l'illustration (demande n° 32)**, mesuré par la recette d'avant la revue (375 × 667) : « batterie de
     voiture » **2 505 px** (2 530 en police de secours), **au-delà de trois écrans (2 001)**. Raison : l'encadré a cinq
     lignes, puis le bloc « Notices » affiche l'écart entre marques de la ligne 4 sous sa phrase. « Recharger » : 1 719 ;
@@ -126,7 +116,7 @@
 - **Ce qu'elle a changé** :
   - bloquant B1 : la question du gel ouvre l'arbre de « batterie de voiture », avant toute consigne de démarrage avec
     des câbles, avec la formule de la notice Seat ;
-  - I1 : extrait Seat de la batterie endommagée ramené au relevé, niveau tiré de la grille (point 6) ;
+  - I1 : extrait Seat de la batterie endommagée relu mot pour mot à l'écran par le pilotage après la correction (« N'utilisez pas… Risque d'explosion ! » est bien dans la notice) : niveau de la proposition d'origine gardé, « Non, ne poursuivez pas votre trajet » (point 6) ;
   - I2 : arguments sur « faites appel » et « impérativement », et lecture de la ligne « gelée » (point 5) ;
   - I3 : étapes de « changer » présentées comme ce que décrivent les notices Seat Ibiza et Toyota Yaris, qui demandent
     d'abord un atelier ou un réparateur ; Seat dans la fiche et l'introduction ; étape 7 (Peugeot, Citroën) retirée de
@@ -164,6 +154,5 @@
 ## Ligne de validation proposée
 « Je valide le lot B2 : batterie de voiture (cinq lignes : voyants faibles, message de batterie faible, indicateur
 coloré, batterie gelée, voyant batterie de la base), recharger la batterie (trois lignes : chargeur, après un démarrage
-avec une autre batterie, batterie gelée) et changer la batterie (quatre lignes : remplacement, batterie endommagée à
-« Oui, avec précautions · À faire tout de suite » une fois la notice Seat Ibiza p. 302 relue mot pour mot, après le
-rebranchement, Stop & Start), leurs coûts, causes, sources, arbre, étapes et tableaux. »
+avec une autre batterie, batterie gelée) et changer la batterie (quatre lignes : remplacement, batterie endommagée,
+après le rebranchement, Stop & Start), leurs coûts, causes, sources, arbre, étapes et tableaux. »
