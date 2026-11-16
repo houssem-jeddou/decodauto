@@ -100,7 +100,7 @@ sources:
   - reponse-ministerielle-senat-2026-02-12
 auteur: houssem-jeddou
 date_publication: 2026-11-03
-date_modification: 2026-11-10
+date_modification: 2026-11-16
 date_revue: 2026-11-10
 prochaine_revue: 2027-05-10
 # Encadré de décision (question, quatre lignes et leurs citations, coût probable et pièces) validé par Houssem le

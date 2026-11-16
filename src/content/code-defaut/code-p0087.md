@@ -59,7 +59,7 @@ sources:
   - bosch-rampe-common-rail
 auteur: houssem-jeddou
 date_publication: 2026-11-03
-date_modification: 2026-11-03
+date_modification: 2026-11-16
 date_revue: 2026-11-03
 prochaine_revue: 2027-11-03
 # Encadré de décision (question, ligne, coût probable et pièces des causes) validé par Houssem le 03/11/2026 (20 h 06),

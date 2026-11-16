@@ -8,7 +8,7 @@ id: mentions-legales
 title: "Mentions légales et confidentialité"
 description: "Qui édite decodauto.com et ce que le site fait de vos données : aucun compte, aucune publicité, aucun cookie du site, et vos droits."
 libelle_court: Mentions légales et confidentialité
-date_modification: 2026-11-10
+date_modification: 2026-11-16
 date_revue: 2026-11-10
 prochaine_revue: 2027-11-10
 format: 2

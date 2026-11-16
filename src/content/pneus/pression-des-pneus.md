@@ -43,7 +43,7 @@ sources:
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-14
-date_modification: 2026-11-14
+date_modification: 2026-11-16
 date_revue: 2026-11-14
 prochaine_revue: 2027-05-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (13 h 08),
@@ -75,11 +75,11 @@ Les notices lues pour cette page sont celles de ces modèles ; pour une autre vo
 
 | Notice | Où lire la pression | Quand la vérifier | Après avoir gonflé |
 |---|---|---|---|
-| Peugeot 208 | Étiquette collée au niveau de la porte côté conducteur, avec les pressions à vide et en charge et celle de la roue de secours ({{cite:notice-peugeot-208|p. 198}}) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette ({{cite:notice-peugeot-208|p. 110}}) | Réinitialiser la détection de sous-gonflage ({{cite:notice-peugeot-208|p. 111}}) |
-| Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours ({{cite:notice-renault-clio-5|p. 348}}) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5|p. 207 et 348}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-renault-clio-5|p. 207-208}}) |
-| Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur ({{cite:notice-dacia-sandero-3|p. 179}}) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids ({{cite:notice-dacia-sandero-3|p. 179}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-dacia-sandero-3|p. 179-180}}) |
-| Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche ({{cite:notice-seat-ibiza|p. 307}}) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids ({{cite:notice-seat-ibiza|p. 306}}) | Mémoriser la nouvelle pression dans le système ({{cite:notice-seat-ibiza|p. 312}}) |
-| Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice ({{cite:notice-toyota-yaris|p. 266, renvoi p. 333}}) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines ({{cite:notice-toyota-yaris|p. 266}}) | Initialiser le système dans les cas que la notice énumère ({{cite:notice-toyota-yaris|p. 261-262}}) |
+| Peugeot 208 | Étiquette collée au niveau de la porte côté conducteur, avec les pressions à vide et en charge et celle de la roue de secours ({{cite:notice-peugeot-208\|p. 198}}) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette ({{cite:notice-peugeot-208\|p. 110}}) | Réinitialiser la détection de sous-gonflage ({{cite:notice-peugeot-208\|p. 111}}) |
+| Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours ({{cite:notice-renault-clio-5\|p. 348}}) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5\|p. 207 et 348}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-renault-clio-5\|p. 207-208}}) |
+| Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur ({{cite:notice-dacia-sandero-3\|p. 179}}) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids ({{cite:notice-dacia-sandero-3\|p. 179}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-dacia-sandero-3\|p. 179-180}}) |
+| Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche ({{cite:notice-seat-ibiza\|p. 307}}) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids ({{cite:notice-seat-ibiza\|p. 306}}) | Mémoriser la nouvelle pression dans le système ({{cite:notice-seat-ibiza\|p. 312}}) |
+| Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice ({{cite:notice-toyota-yaris\|p. 266, renvoi p. 333}}) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines ({{cite:notice-toyota-yaris\|p. 266}}) | Initialiser le système dans les cas que la notice énumère ({{cite:notice-toyota-yaris\|p. 261-262}}) |
 
 ## Pneus froids : et si on vérifie la pression à chaud ?
 

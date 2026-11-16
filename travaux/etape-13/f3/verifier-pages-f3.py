@@ -4,7 +4,8 @@
 import re, subprocess, sys, yaml
 from pathlib import Path
 RAC = Path(sys.argv[1]); pages = sys.argv[2:]  # chemins relatifs à src/content : code-defaut/code-p0420, pneus/loi-montagne, socle/a-propos
-CITE = r'\{\{cite:([a-z0-9-]+)\|[^{}|]+\}\}'
+# Dans une cellule de tableau Markdown, la barre s'écrit « \| » (sinon elle sépare les cellules).
+CITE = r'\{\{cite:([a-z0-9-]+)\\?\|[^{}|]+\}\}'
 GROUPE = re.compile(r'\s?\((?:\s*' + CITE.replace('([a-z0-9-]+)', '[a-z0-9-]+') + r'\s*(?:[,;]|\bet\b)?\s*)+\)')
 def phrases(p):
     t = re.sub(r'\{\{[^}]*\}\}', 'X', p)
