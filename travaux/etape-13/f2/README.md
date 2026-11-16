@@ -69,3 +69,13 @@ Reste pour la pull request du lot F2 : `date_modification` des pages, revue ind�
   « La consigne est alors », FORMAT2-METHODE).
 - Reste : revue indépendante, validation de Houssem (paquet version 3, changements de l'outil et du H1 sur captures), puis
   empreintes (`npm run empreinte`), CI verte, relevé Search Console avant la fusion.
+
+## Revue indépendante de la pull request (16/11/2026, soir ; `revue-independante.md`)
+- I1 : item M1 du paquet (H1 à 1,4 rem, captures avant et après) ; `docs/11` après la validation.
+- I2 : haut de l'illustration de chaque page dans le paquet, avec la raison au-delà de trois écrans (AdBlue, ABS et ESP).
+- I3 : « Témoin Service : au plus tôt chez un représentant, avec ménagement » (airbag Dacia p. 101, ABS Renault p. 212 et
+  Dacia p. 184).
+- m1, m2 : E2 et E14 reprises ; m3 : demande Toyota de la pression des pneus avec « immédiatement » (dans l'extrait) ;
+  m4 : « Sous 800 km » retiré des deux demandes AdBlue (le seuil n'est pas dans l'extrait) ; m5, m6 : items M2 à M5 ;
+  m11 : captures de la page 404. Les autres mineurs sont dans la section 5 du paquet (points ouverts).
+- Libellé d'urgence du tableau des notices jamais coupé (item M4). Paquet en version 4 ; preuves et captures refaites.

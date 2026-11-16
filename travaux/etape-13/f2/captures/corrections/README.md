@@ -1,4 +1,4 @@
-# Lot F2 : trois corrections de modèle (captures avant et après, 375 × 667)
+# Lot F2 : quatre corrections de modèle (captures avant et après, 375 × 667) et page 404
 
 Les deux premières, signalées par la recette locale de la porte 10 (16/11/2026), sont corrigées dans la pull request du
 lot F2 à la demande du pilotage ; la troisième, trouvée par FORMAT2-MESURES sur les pages du lot :
@@ -29,3 +29,11 @@ d'écart du voyant moteur et du voyant AdBlue, coût probable du voyant moteur e
    2,1 rem sur ordinateur, inchangé). Effet : ce H1 tient sur deux lignes, la première situation finit à 645 px ; aucun
    autre H1 du lot ne gagne de ligne (mesuré sur les 12 pages, police de secours). **À valider sur captures** (écart au
    pilote : 0,8 px de moins). Fichiers : `pression-pneus-h1-375-secours-<avant|apres>.png` (premier écran, échelle 1).
+
+4. **Libellé d'urgence du tableau des notices coupé au milieu** (« À faire tout de / suite » ; revue indépendante de la pull
+   request n° 71). Correction : `.t-notices .mini-urgence{white-space:nowrap}`. Relevé sur les 11 pages voyants qui ont un
+   tableau (116 libellés) : avant, 64 coupés à 375 px et 116 à 320 px ; après, aucun, et aucun ne dépasse de sa carte.
+   Fichiers : `urgence-notices-moteur-375-<chargee|secours>-<avant|apres>.png` (« avant » rendu en annulant la règle ;
+   `urgence-404.cjs`).
+
+Page 404 au format 2 (elle passe au format 2 avec l'accueil) : `404-f2-<375|1366>-<chargee|secours>-ecran.png`.

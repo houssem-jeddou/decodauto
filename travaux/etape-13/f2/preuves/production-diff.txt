@@ -1,4 +1,4 @@
-Construction de production (SITE_INDEXABLE=true npx astro build) de la branche et de main à cd2433f (git worktree), puis diff -rq, 16/11/2026.
+Construction de production (SITE_INDEXABLE=true npx astro build) de la branche et de main à cd2433f (git worktree), puis diff -rq, 16/11/2026 (refaite après la revue indépendante de la pull request).
 
 $ diff -rq dist <main>/dist | sort
 Files dist/404.html and <main>/dist/404.html differ

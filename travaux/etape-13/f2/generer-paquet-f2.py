@@ -141,13 +141,32 @@ def main() -> None:
     RESOUDRE['notice'] = nom_notice
 
     pages = sorted((RACINE / 'src/content/voyant').glob('voyant-*.md')) + [RACINE / 'src/content/voyant/voyants.md']
+    # Haut de l'illustration (règle 2i, demande n° 32 : donné dans chaque paquet, avec la raison au-delà de trois écrans),
+    # lu dans les preuves de la pull request (FORMAT2-MESURES, construction de production, 375 × 667).
+    adresses = {l['id']: l['adresse'] for l in json.loads((RACINE / 'data/plan-du-site.json').read_text(encoding='utf-8'))}
+    mesures = json.loads((RACINE / 'travaux/etape-13/f2/preuves/mesures.json').read_text(encoding='utf-8'))['format2_mesures']['mesures']
+
+    def haut_illustration(ident: str) -> str:
+        m = {x['police']: x for x in mesures if x['adresse'] == adresses[ident] and x['largeur'] == 375}
+        c, s = m['chargee'], m['secours']
+        fr = lambda n: f'{n:,}'.replace(',', '\u202f')
+        txt = (f'- **Haut de l\'illustration** (375 × 667, police chargée / de secours) : {fr(c["hautIllustration"])} / '
+               f'{fr(s["hautIllustration"])} px')
+        if max(c['hautIllustration'], s['hautIllustration']) <= 2001:
+            return txt + ', dans les trois premiers écrans (2 001 px).'
+        entre = c['hautIllustration'] - c['basEncadre']
+        seul = ' l\'encadré seul reste sous les trois écrans, ' if c['basEncadre'] <= 2001 else ' '
+        return (txt + f' : **au-delà de trois écrans** (2 001 px), signalé par FORMAT2-MESURES (demande n° 32 : le visuel suit '
+                f'toujours le bloc « Notices / Base du coût »). Raison : un encadré de {c["lignesEncadre"]} lignes, qui finit à '
+                f'{fr(c["basEncadre"])} px ;' + seul +
+                f'puis la signature, la ligne de transparence et le bloc « Notices / Base du coût » ({entre} px).')
     out = []
     w = out.append
     lignes_ecart = [l for l in base if l.get('ecart_court')]
     nb_demandes = sum(1 for l in base for c in l['citations'] if c.get('demande'))
     w('# Paquet de validation, lot F2 (étape 13, format 2) : lignes de la base et pages voyants')
     w('')
-    w('> **Brouillon, jamais validé.** Version 3 du 16/11/2026 (pull request du lot F2 : accueil et page 404 ajoutés, une phrase de la page ABS et ESP reprise) ; version 2 après la revue indépendante du paquet. Préparé par Claude '
+    w('> **Brouillon, jamais validé.** Version 4 du 16/11/2026 (après la revue indépendante de la pull request n° 71 : trois « ce que demande la notice » reprennent « avec ménagement », trois autres et deux lignes d\'écart reprises, hauteur des illustrations, corrections de modèle et date de mise à jour) ; version 3 : accueil et page 404 ; version 2 : après la revue indépendante du paquet. Préparé par Claude '
       'pour Houssem (03, règle 7 ; demande n° 30 : porte du format, lot par lot). Format téléphone. Données : branche '
       '`etape-13/f2-donnees` (`data/voyants.json`, `src/content/voyant/`, `src/illustrations/`), tirées de '
       '`travaux/etape-13/f2/brouillon-f2.json` ; paquet généré par `travaux/etape-13/f2/generer-paquet-f2.py`.')
@@ -169,10 +188,13 @@ def main() -> None:
       'pages passées dans « Sources » ; règle 2e : paragraphes de trois phrases au plus) ;')
     w('4. **A1 à A7** : l\'**accueil** et la **page 404** au format 2 (avancés du lot F3 au lot F2, décision du 16/11 à 17 h 00) : '
       'les textes affichés nouveaux, tirés du code (section 3) ; les textes de l\'accueil que tu as déjà validés (livrable 7.4a) '
-      'sont rappelés, inchangés.')
+      'sont rappelés, inchangés ;')
+    w('5. **M1 à M5** : les **corrections de modèle** de la pull request (H1 à 1,4 rem sur téléphone, trois retours à la ligne) '
+      'et la **date « Mis à jour le »** des 12 pages (section 4), avec leurs captures avant et après. Les points ouverts, à '
+      'trancher ou à laisser, sont en section 5.')
     w('')
-    w('**Comment répondre** : « Je valide le paquet F2, version 3 » ; ou « Je valide sauf : » suivi des numéros à reprendre '
-      '(par exemple « E3 : … ; D12 : … ; P4 : … ; A2 : … »). Une retouche de forme ne relance pas de revue ; une retouche qui touche '
+    w('**Comment répondre** : « Je valide le paquet F2, version 4 » ; ou « Je valide sauf : » suivi des numéros à reprendre '
+      '(par exemple « E3 : … ; D12 : … ; P4 : … ; A2 : … ; M1 : … »). Une retouche de forme ne relance pas de revue ; une retouche qui touche '
       'un fait ou un verdict, si.')
     w('')
     w('Ces textes entrent dans l\'empreinte de chaque ligne et de chaque page : elles ne seront versées qu\'après ta '
@@ -239,6 +261,7 @@ def main() -> None:
         if ill:
             w(f'- **Illustration** (`src/illustrations/{ill.get("fichier")}.svg`, voir la planche) : texte alternatif '
               f'« {ill.get("alt")} » ; légende « {ill.get("legende")} » (le modèle ajoute « Illustration decodauto. »)')
+            w(haut_illustration(p.stem))
         rep = reperes(corps)
         if rep:
             w('- **Repères** :')
@@ -286,7 +309,53 @@ def main() -> None:
       'page du voyant, ou à sa ligne dans l\'outil) : ' + ' ; '.join(f'« {v} »' for v in tx['pictogrammes'].values()))
     w(f'- **A7** · page 404 au format 2 : bouton « {p404["bouton"]} » (vers l\'outil, le seul de la page) et lien « {p404["lienAccueil"]} » '
       f'(au format 1 : « {p404["lienAccueil"][0].lower() + p404["lienAccueil"][1:]} », dans une liste) ; inchangés : H1 « {p404["h1"]} », '
-      f'phrase « {p404["phrase"]} », title « {p404["title"]} ».')
+      f'phrase « {p404["phrase"]} », title « {p404["title"]} ». Captures : [375 px](captures/corrections/404-f2-375-chargee-ecran.png), '
+      '[1366 px](captures/corrections/404-f2-1366-chargee-ecran.png) (police de secours : mêmes noms, « secours »).')
+    # Section 4 : corrections de modèle et date de mise à jour (revue indépendante de la PR n° 71, I1, m5, m6).
+    C = 'captures/corrections/'
+    def m375(ident: str, police: str = 'chargee') -> dict:
+        return next(x for x in mesures if x['adresse'] == adresses[ident] and x['largeur'] == 375 and x['police'] == police)
+    pp = m375('voyant-pression-pneus', 'secours')
+    w('')
+    w('## 4. Corrections de modèle et date de mise à jour (M1 à M5)')
+    w('')
+    w('Ces corrections touchent la feuille de style ou le modèle de toutes les pages au format 2. Elles n\'entrent pas dans les '
+      'empreintes, mais changent la charte : `docs/11` sera mis à jour après ta validation (pas dans la pull request).')
+    w('')
+    w(f'- **M1 · H1 à 1,4 rem au lieu de 1,45 sur téléphone et tablette** (ordinateur inchangé, 2,1 rem). Sans elle, en police de '
+      f'secours, le H1 de la page pression des pneus passait sur trois lignes et sa première situation finissait à 673 px, au-delà '
+      f'du premier écran (règle 2a : 667 au plus). Après : {pp["basPremiereSituation"]} px ; aucun autre H1 du lot ne change de '
+      f'nombre de lignes. Écart au pilote : 0,8 px de moins. Captures : [avant]({C}pression-pneus-h1-375-secours-avant.png), '
+      f'[après]({C}pression-pneus-h1-375-secours-apres.png). `docs/11` §3 (« H1 de 1,45 rem sur téléphone ») à mettre à jour après ta validation.')
+    w(f'- **M2 · Lien « Votre marque » sur une seule ligne** (`a[data-lien-notices]{{white-space:nowrap}}`) : il passe en entier à la '
+      f'ligne suivante au lieu de se couper. Captures : ligne d\'écart du voyant moteur [avant]({C}moteur-ecart-375-chargee-avant.png) / '
+      f'[après]({C}moteur-ecart-375-chargee-apres.png) ; carte de l\'outil [avant]({C}outil-carte-375-chargee-avant.png) / [après]({C}outil-carte-375-chargee-apres.png).')
+    w(f'- **M3 · Préposition du coût probable jamais seule en fin de ligne** : « de » et « à » restent avec leur pastille (nouvelle '
+      f'classe `.borne`, `white-space:nowrap`). Captures : [avant]({C}moteur-cout-375-chargee-avant.png) / [après]({C}moteur-cout-375-chargee-apres.png).')
+    w(f'- **M4 · Libellé d\'urgence du tableau des notices jamais coupé** (`.t-notices .mini-urgence`, `white-space:nowrap`) : à 375 px, '
+      f'64 libellés sur 116 se coupaient au milieu (« À faire tout de / suite »), tous à 320 px ; après, aucun, et aucun ne dépasse '
+      f'de sa carte. Captures : [avant]({C}urgence-notices-moteur-375-chargee-avant.png) / [après]({C}urgence-notices-moteur-375-chargee-apres.png).')
+    w('- **M5 · Date « Mis à jour le » des 12 pages au 16/11/2026** (et `lastmod` du plan du site) : les textes affichés changent '
+      '(lignes d\'écart courtes, « ce que demande la notice », repères, phrases réécrites), ce qui est une vraie modification '
+      '(règle 14 b). `date_revue` ne change pas : ce n\'est pas une relecture complète. Si une correction suit ta validation un '
+      'autre jour, la date suivra. L\'accueil n\'affiche pas de date.')
+    # Section 5 : points ouverts (mineurs de la revue laissés à trancher).
+    fap = m375('voyant-fap')
+    pc = m375('voyant-pression-pneus')
+    w('')
+    w('## 5. Points ouverts (à trancher ou à laisser)')
+    w('')
+    w('- **E2, voyant moteur qui clignote** : la ligne d\'écart distingue maintenant Peugeot et Seat (« ne pas poursuivre ») de '
+      'Renault et Dacia, les moins stricts. Reste une tension déjà validée : la consigne Seat (« Lever le pied, aller prudemment '
+      'à l\'atelier proche ») s\'affiche à côté du niveau « Non, ne poursuivez pas votre trajet » de la même citation.')
+    w(f'- **Page pression des pneus** : la première situation finit à {pc["basPremiereSituation"]} px, sous le maximum de 667 px mais '
+      'au-delà de la marge visée de 640 px (`docs/11` §5 a). Une police du système plus large qu\'Inter peut la faire dépasser.')
+    w(f'- **Page FAP** : l\'illustration est à {fap["hautIllustration"]} px, à {2001 - fap["hautIllustration"]} px du seuil de trois écrans ; '
+      'avec une autre police, elle serait signalée.')
+    w('- **Fiche de l\'accueil** (`src/content/socle/accueil.md`) : le schéma du socle exige un title et une description, que la '
+      'fiche reprend de `src/lib/accueil.ts` (un test vérifie qu\'ils restent égaux). Ses dates ne sont ni affichées ni contrôlées.')
+    w('- **Page voyant moteur (P9), deux phrases réécrites au style lourd** : « …le voyant moteur orange fixe, que la notice Seat '
+      'Ibiza dit jaune (…) » ; « Cette consigne est la plus prudente… », sans antécédent juste après la pastille du repère.')
     SORTIE.write_text('\n'.join(out) + '\n', encoding='utf-8')
     print(SORTIE, len('\n'.join(out)))
 

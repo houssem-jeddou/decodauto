@@ -199,7 +199,8 @@ a[data-lien-notices]{white-space:nowrap}
 .t-notices summary{cursor:pointer;color:var(--accent);font-weight:600}
 .t-notices blockquote{margin:.35rem 0 .1rem;padding:.4rem .6rem;color:var(--texte)}
 .t-notices .niveau{min-width:9.5rem}
-.t-notices .mini-urgence{display:block;margin-top:.25rem;font-size:.75rem;color:var(--texte-doux)}
+/* Libellé d'urgence du tableau des notices : jamais coupé au milieu (lot F2, revue de la PR n° 71). */
+.t-notices .mini-urgence{display:block;margin-top:.25rem;font-size:.75rem;color:var(--texte-doux);white-space:nowrap}
 .t-notices .page{white-space:nowrap;font-family:var(--mono);font-size:.8125rem}
 @media (max-width:40rem){
   .t-notices thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}

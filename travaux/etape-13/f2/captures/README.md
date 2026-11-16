@@ -20,7 +20,7 @@ Un dossier par page : `accueil`, `outil` (`/voyants/`), puis les 11 pages voyant
 | `f2-…-carte.png` | première carte de la liste (outil) |
 | `f1-<375\|1366>-chargee-ecran.png` | premier écran de la page en ligne (format 1) |
 
-Une capture en police de secours identique octet pour octet à celle en police chargée n'est pas gardée (226 fichiers
+Une capture en police de secours identique octet pour octet à celle en police chargée n'est pas gardée (225 fichiers
 restent) : avec Inter comme police du système, la plupart des blocs rendent pareil.
 
-Les captures avant et après des trois corrections de modèle de la pull request sont dans `corrections/`.
+Les captures avant et après des quatre corrections de modèle de la pull request, et celles de la page 404 au format 2, sont dans `corrections/`.

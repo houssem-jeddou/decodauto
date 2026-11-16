@@ -1,5 +1,5 @@
 {
-  "_": "Brouillon, jamais validé. Mesures du lot F2 (16/11/2026), construction de production de la branche (SITE_INDEXABLE=true), Chromium, police du système Inter ; pixels CSS depuis le haut de la page. Paires : [police chargée, police de secours].",
+  "_": "Brouillon, jamais validé. Mesures du lot F2 (16/11/2026, après la revue indépendante de la PR n° 71), construction de production de la branche (SITE_INDEXABLE=true), Chromium, police du système Inter ; pixels CSS depuis le haut de la page. Paires : [police chargée, police de secours].",
   "resume": [
     {
       "page": "/",
@@ -12,6 +12,7 @@
         0,
         0
       ],
+      "2i_bas_encadre_375": null,
       "2i_lignes_encadre": 0,
       "2h_ecrans_375": 3.1,
       "2h_sommaire": false,
@@ -39,8 +40,9 @@
         1823,
         1823
       ],
+      "2i_bas_encadre_375": 1452,
       "2i_lignes_encadre": 3,
-      "2h_ecrans_375": 32.5,
+      "2h_ecrans_375": 32.4,
       "2h_sommaire": true,
       "largeur_320": [
         320,
@@ -60,12 +62,13 @@
       ],
       "2b_mots_lignes_ecart": [
         24,
-        25
+        22
       ],
       "2i_illustration_375": [
-        1981,
-        1981
+        1961,
+        1961
       ],
+      "2i_bas_encadre_375": 1571,
       "2i_lignes_encadre": 3,
       "2h_ecrans_375": 17.8,
       "2h_sommaire": true,
@@ -76,7 +79,7 @@
       "debordements": 0,
       "hauteur_encadre_375_format1_format2": [
         2597,
-        1407
+        1387
       ]
     },
     {
@@ -93,6 +96,7 @@
         1979,
         1979
       ],
+      "2i_bas_encadre_375": 1552,
       "2i_lignes_encadre": 3,
       "2h_ecrans_375": 17.3,
       "2h_sommaire": true,
@@ -119,6 +123,7 @@
         1260,
         1260
       ],
+      "2i_bas_encadre_375": 908,
       "2i_lignes_encadre": 1,
       "2h_ecrans_375": 12.0,
       "2h_sommaire": true,
@@ -143,6 +148,7 @@
         1648,
         1648
       ],
+      "2i_bas_encadre_375": 1315,
       "2i_lignes_encadre": 3,
       "2h_ecrans_375": 16.5,
       "2h_sommaire": true,
@@ -172,8 +178,9 @@
         2761,
         2761
       ],
+      "2i_bas_encadre_375": 2277,
       "2i_lignes_encadre": 4,
-      "2h_ecrans_375": 20.3,
+      "2h_ecrans_375": 20.4,
       "2h_sommaire": true,
       "largeur_320": [
         320,
@@ -199,6 +206,7 @@
         1999,
         1999
       ],
+      "2i_bas_encadre_375": 1572,
       "2i_lignes_encadre": 3,
       "2h_ecrans_375": 15.1,
       "2h_sommaire": true,
@@ -225,6 +233,7 @@
         1776,
         1776
       ],
+      "2i_bas_encadre_375": 1367,
       "2i_lignes_encadre": 3,
       "2h_ecrans_375": 9.7,
       "2h_sommaire": true,
@@ -251,6 +260,7 @@
         1416,
         1416
       ],
+      "2i_bas_encadre_375": 1027,
       "2i_lignes_encadre": 2,
       "2h_ecrans_375": 13.0,
       "2h_sommaire": true,
@@ -279,6 +289,7 @@
         2320,
         2320
       ],
+      "2i_bas_encadre_375": 1893,
       "2i_lignes_encadre": 4,
       "2h_ecrans_375": 19.7,
       "2h_sommaire": true,
@@ -299,12 +310,13 @@
         645
       ],
       "2b_mots_lignes_ecart": [
-        25
+        24
       ],
       "2i_illustration_375": [
         1646,
         1646
       ],
+      "2i_bas_encadre_375": 1275,
       "2i_lignes_encadre": 2,
       "2h_ecrans_375": 15.7,
       "2h_sommaire": true,
@@ -332,6 +344,7 @@
         1670,
         1670
       ],
+      "2i_bas_encadre_375": 1262,
       "2i_lignes_encadre": 2,
       "2h_ecrans_375": 14.5,
       "2h_sommaire": true,
@@ -484,7 +497,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 25463,
+        "hauteurPage": 25443,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -504,7 +517,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 21660,
+        "hauteurPage": 21640,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -584,7 +597,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 4,
-        "hauteurPage": 8229,
+        "hauteurPage": 8171,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -624,7 +637,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 4,
-        "hauteurPage": 13549,
+        "hauteurPage": 13593,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -644,7 +657,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 4,
-        "hauteurPage": 8098,
+        "hauteurPage": 8129,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -704,7 +717,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 5495,
+        "hauteurPage": 5426,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -824,7 +837,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 6027,
+        "hauteurPage": 6017,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -884,7 +897,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 6152,
+        "hauteurPage": 6106,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1004,7 +1017,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 7275,
+        "hauteurPage": 7164,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1019,12 +1032,12 @@
         "basReponse": null,
         "basVerdictUrgence": 430,
         "basPremiereSituation": 621,
-        "basEncadre": 1903,
-        "hautIllustration": 2350,
+        "basEncadre": 1883,
+        "hautIllustration": 2330,
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 13647,
+        "hauteurPage": 13627,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1039,12 +1052,12 @@
         "basReponse": null,
         "basVerdictUrgence": 371,
         "basPremiereSituation": 520,
-        "basEncadre": 1591,
-        "hautIllustration": 1981,
+        "basEncadre": 1571,
+        "hautIllustration": 1961,
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 11890,
+        "hauteurPage": 11870,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1144,7 +1157,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 11857,
+        "hauteurPage": 11878,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1164,7 +1177,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 10446,
+        "hauteurPage": 10468,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1184,7 +1197,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 6454,
+        "hauteurPage": 6512,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1324,7 +1337,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 25514,
+        "hauteurPage": 25494,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1344,7 +1357,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 21709,
+        "hauteurPage": 21689,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1424,7 +1437,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 4,
-        "hauteurPage": 8229,
+        "hauteurPage": 8171,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1464,7 +1477,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 4,
-        "hauteurPage": 13549,
+        "hauteurPage": 13593,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1484,7 +1497,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 4,
-        "hauteurPage": 8123,
+        "hauteurPage": 8154,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1544,7 +1557,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 5495,
+        "hauteurPage": 5426,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1664,7 +1677,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 6064,
+        "hauteurPage": 6054,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1724,7 +1737,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 6189,
+        "hauteurPage": 6143,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1844,7 +1857,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 7275,
+        "hauteurPage": 7164,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1859,12 +1872,12 @@
         "basReponse": null,
         "basVerdictUrgence": 455,
         "basPremiereSituation": 645,
-        "basEncadre": 1927,
-        "hautIllustration": 2375,
+        "basEncadre": 1907,
+        "hautIllustration": 2355,
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 13722,
+        "hauteurPage": 13703,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1879,12 +1892,12 @@
         "basReponse": null,
         "basVerdictUrgence": 371,
         "basPremiereSituation": 520,
-        "basEncadre": 1591,
-        "hautIllustration": 1981,
+        "basEncadre": 1571,
+        "hautIllustration": 1961,
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 3,
-        "hauteurPage": 11941,
+        "hauteurPage": 11921,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -1984,7 +1997,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 11882,
+        "hauteurPage": 11904,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -2004,7 +2017,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 10446,
+        "hauteurPage": 10468,
         "sommaireAttendu": true,
         "sommaire": true
       },
@@ -2024,7 +2037,7 @@
         "illustrationApresProvenance": true,
         "hautArbre": null,
         "lignesEncadre": 2,
-        "hauteurPage": 6454,
+        "hauteurPage": 6512,
         "sommaireAttendu": true,
         "sommaire": true
       }
@@ -2069,17 +2082,17 @@
         "adresse": "/voyants/",
         "voyant": "moteur-orange-clignotant",
         "ou": "carte de l’outil",
-        "mots": 25,
+        "mots": 22,
         "lien": true,
-        "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Peugeot (appel au réseau), Seat (pied levé, atelier proche), Renault et Dacia (régime réduit, consulter vite). Votre marque"
+        "texte": "Plus stricts : Toyota (arrêt immédiat), Peugeot et Seat (ne pas poursuivre). Moins stricts : Renault et Dacia (régime réduit, consulter vite). Votre marque"
       },
       {
         "adresse": "/voyants/",
         "voyant": "pression-pneus",
         "ou": "carte de l’outil",
-        "mots": 25,
+        "mots": 24,
         "lien": true,
-        "texte": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts : Peugeot (liste des témoins), Dacia sinon (vérifier la pression). Votre marque"
+        "texte": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir). Votre marque"
       },
       {
         "adresse": "/voyants/",
@@ -2317,9 +2330,9 @@
         "adresse": "/voyants/moteur/",
         "voyant": "ligne 2 de l’encadré",
         "ou": "encadré",
-        "mots": 25,
+        "mots": 22,
         "lien": true,
-        "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Peugeot (appel au réseau), Seat (pied levé, atelier proche), Renault et Dacia (régime réduit, consulter vite). Votre marque"
+        "texte": "Plus stricts : Toyota (arrêt immédiat), Peugeot et Seat (ne pas poursuivre). Moins stricts : Renault et Dacia (régime réduit, consulter vite). Votre marque"
       },
       {
         "adresse": "/voyants/prechauffage/",
@@ -2333,9 +2346,9 @@
         "adresse": "/voyants/pression-pneus/",
         "voyant": "ligne 1 de l’encadré",
         "ou": "encadré",
-        "mots": 25,
+        "mots": 24,
         "lien": true,
-        "texte": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts : Peugeot (liste des témoins), Dacia sinon (vérifier la pression). Votre marque"
+        "texte": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir). Votre marque"
       }
     ]
   },
@@ -2410,7 +2423,7 @@
       "hauteurEncadre": 1244,
       "hautIllustration": 1823,
       "hautSommaire": 2097,
-      "hauteurPage": 21660
+      "hauteurPage": 21640
     },
     "outil format1 375-chargee": {
       "hautEncadre": 268,
@@ -2426,7 +2439,7 @@
       "hauteurEncadre": 1244,
       "hautIllustration": 1823,
       "hautSommaire": 2097,
-      "hauteurPage": 21709
+      "hauteurPage": 21689
     },
     "outil format1 375-secours": {
       "hautEncadre": 268,
@@ -2470,11 +2483,11 @@
     },
     "moteur format2 375-chargee": {
       "hautEncadre": 184,
-      "basEncadre": 1591,
-      "hauteurEncadre": 1407,
-      "hautIllustration": 1981,
-      "hautSommaire": 2235,
-      "hauteurPage": 11890
+      "basEncadre": 1571,
+      "hauteurEncadre": 1387,
+      "hautIllustration": 1961,
+      "hautSommaire": 2215,
+      "hauteurPage": 11870
     },
     "moteur format1 375-chargee": {
       "hautEncadre": 268,
@@ -2486,11 +2499,11 @@
     },
     "moteur format2 375-secours": {
       "hautEncadre": 184,
-      "basEncadre": 1591,
-      "hauteurEncadre": 1407,
-      "hautIllustration": 1981,
-      "hautSommaire": 2235,
-      "hauteurPage": 11941
+      "basEncadre": 1571,
+      "hauteurEncadre": 1387,
+      "hautIllustration": 1961,
+      "hautSommaire": 2215,
+      "hauteurPage": 11921
     },
     "moteur format1 375-secours": {
       "hautEncadre": 268,
@@ -2570,7 +2583,7 @@
       "hauteurEncadre": 770,
       "hautIllustration": 1174,
       "hautSommaire": 201,
-      "hauteurPage": 7275
+      "hauteurPage": 7164
     },
     "huile format1 1366-chargee": {
       "hautEncadre": 184,
@@ -2586,7 +2599,7 @@
       "hauteurEncadre": 770,
       "hautIllustration": 1174,
       "hautSommaire": 201,
-      "hauteurPage": 7275
+      "hauteurPage": 7164
     },
     "huile format1 1366-secours": {
       "hautEncadre": 184,
@@ -2730,7 +2743,7 @@
       "hauteurEncadre": 2069,
       "hautIllustration": 2761,
       "hautSommaire": 3035,
-      "hauteurPage": 13549
+      "hauteurPage": 13593
     },
     "adblue format1 375-chargee": {
       "hautEncadre": 303,
@@ -2746,7 +2759,7 @@
       "hauteurEncadre": 2069,
       "hautIllustration": 2761,
       "hautSommaire": 3035,
-      "hauteurPage": 13549
+      "hauteurPage": 13593
     },
     "adblue format1 375-secours": {
       "hautEncadre": 303,
@@ -2762,7 +2775,7 @@
       "hauteurEncadre": 1067,
       "hautIllustration": 1507,
       "hautSommaire": 238,
-      "hauteurPage": 8098
+      "hauteurPage": 8129
     },
     "adblue format1 1366-chargee": {
       "hautEncadre": 184,
@@ -2778,7 +2791,7 @@
       "hauteurEncadre": 1067,
       "hautIllustration": 1507,
       "hautSommaire": 238,
-      "hauteurPage": 8123
+      "hauteurPage": 8154
     },
     "adblue format1 1366-secours": {
       "hautEncadre": 184,
@@ -2826,7 +2839,7 @@
       "hauteurEncadre": 745,
       "hautIllustration": 1130,
       "hautSommaire": 201,
-      "hauteurPage": 6152
+      "hauteurPage": 6106
     },
     "fap format1 1366-chargee": {
       "hautEncadre": 184,
@@ -2842,7 +2855,7 @@
       "hauteurEncadre": 745,
       "hautIllustration": 1167,
       "hautSommaire": 238,
-      "hauteurPage": 6189
+      "hauteurPage": 6143
     },
     "fap format1 1366-secours": {
       "hautEncadre": 184,
@@ -2954,7 +2967,7 @@
       "hauteurEncadre": 487,
       "hautIllustration": 872,
       "hautSommaire": 201,
-      "hauteurPage": 5495
+      "hauteurPage": 5426
     },
     "airbag format1 1366-chargee": {
       "hautEncadre": 184,
@@ -2970,7 +2983,7 @@
       "hauteurEncadre": 487,
       "hautIllustration": 872,
       "hautSommaire": 201,
-      "hauteurPage": 5495
+      "hauteurPage": 5426
     },
     "airbag format1 1366-secours": {
       "hautEncadre": 184,
@@ -3018,7 +3031,7 @@
       "hauteurEncadre": 929,
       "hautIllustration": 1314,
       "hautSommaire": 201,
-      "hauteurPage": 8229
+      "hauteurPage": 8171
     },
     "abs-esp format1 1366-chargee": {
       "hautEncadre": 184,
@@ -3034,7 +3047,7 @@
       "hauteurEncadre": 929,
       "hautIllustration": 1314,
       "hautSommaire": 201,
-      "hauteurPage": 8229
+      "hauteurPage": 8171
     },
     "abs-esp format1 1366-secours": {
       "hautEncadre": 184,
@@ -3050,7 +3063,7 @@
       "hauteurEncadre": 1067,
       "hautIllustration": 1646,
       "hautSommaire": 1939,
-      "hauteurPage": 10446
+      "hauteurPage": 10468
     },
     "pression-pneus format1 375-chargee": {
       "hautEncadre": 295,
@@ -3066,7 +3079,7 @@
       "hauteurEncadre": 1067,
       "hautIllustration": 1646,
       "hautSommaire": 1939,
-      "hauteurPage": 10446
+      "hauteurPage": 10468
     },
     "pression-pneus format1 375-secours": {
       "hautEncadre": 295,
@@ -3082,7 +3095,7 @@
       "hauteurEncadre": 550,
       "hautIllustration": 915,
       "hautSommaire": 201,
-      "hauteurPage": 6454
+      "hauteurPage": 6512
     },
     "pression-pneus format1 1366-chargee": {
       "hautEncadre": 184,
@@ -3098,7 +3111,7 @@
       "hauteurEncadre": 550,
       "hautIllustration": 915,
       "hautSommaire": 201,
-      "hauteurPage": 6454
+      "hauteurPage": 6512
     },
     "pression-pneus format1 1366-secours": {
       "hautEncadre": 184,
@@ -3146,7 +3159,7 @@
       "hauteurEncadre": 576,
       "hautIllustration": 942,
       "hautSommaire": 201,
-      "hauteurPage": 6027
+      "hauteurPage": 6017
     },
     "direction format1 1366-chargee": {
       "hautEncadre": 184,
@@ -3162,7 +3175,7 @@
       "hauteurEncadre": 576,
       "hautIllustration": 979,
       "hautSommaire": 238,
-      "hauteurPage": 6064
+      "hauteurPage": 6054
     },
     "direction format1 1366-secours": {
       "hautEncadre": 184,

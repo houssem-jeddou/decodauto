@@ -1,15 +1,16 @@
 # Paquet de validation, lot F2 (étape 13, format 2) : lignes de la base et pages voyants
 
-> **Brouillon, jamais validé.** Version 3 du 16/11/2026 (pull request du lot F2 : accueil et page 404 ajoutés, une phrase de la page ABS et ESP reprise) ; version 2 après la revue indépendante du paquet. Préparé par Claude pour Houssem (03, règle 7 ; demande n° 30 : porte du format, lot par lot). Format téléphone. Données : branche `etape-13/f2-donnees` (`data/voyants.json`, `src/content/voyant/`, `src/illustrations/`), tirées de `travaux/etape-13/f2/brouillon-f2.json` ; paquet généré par `travaux/etape-13/f2/generer-paquet-f2.py`.
+> **Brouillon, jamais validé.** Version 4 du 16/11/2026 (après la revue indépendante de la pull request n° 71 : trois « ce que demande la notice » reprennent « avec ménagement », trois autres et deux lignes d'écart reprises, hauteur des illustrations, corrections de modèle et date de mise à jour) ; version 3 : accueil et page 404 ; version 2 : après la revue indépendante du paquet. Préparé par Claude pour Houssem (03, règle 7 ; demande n° 30 : porte du format, lot par lot). Format téléphone. Données : branche `etape-13/f2-donnees` (`data/voyants.json`, `src/content/voyant/`, `src/illustrations/`), tirées de `travaux/etape-13/f2/brouillon-f2.json` ; paquet généré par `travaux/etape-13/f2/generer-paquet-f2.py`.
 
 **Rien ne change sur le fond** : situations, verdicts, urgences, actions, extraits des notices, causes et coûts restent ceux que tu as validés (lots 2 à 5d de la vague A, demandes n° 23 à 26). **Ce qui est nouveau, à valider** :
 
 1. **E1 à E16** : la **ligne d'écart courte** de 16 lignes de la base (règle 2b : 25 mots au plus avec le lien « Votre marque », marques les plus et les moins strictes, renvoi au tableau des notices). L'écart complet que tu as validé reste dans la base, mais **le format 2 ne l'affiche plus** : la page montre la ligne courte, et le tableau des notices la consigne de chaque marque, avec son extrait ;
 2. **D1 à D26** : **« ce que demande la notice »**, une phrase de 10 mots au plus pour chacune des 126 consignes citées (règle 2f : tableau des notices compact, l'extrait mot pour mot restant dépliable), regroupées par ligne de la base ;
 3. **P1 à P12** : pour chacune des 12 pages voyants (page outil comprise), son **illustration** (dessin du site, signalé comme tel : texte alternatif et légende), ses **repères de verdict** (un repère sous chaque titre qui pose la question d'une seule ligne de l'encadré ; aucun sous un titre qui mêle plusieurs cas) et les **phrases réécrites**, montrées avant et après (règle 2d : formule « Verdict retenu » retirée, références de pages passées dans « Sources » ; règle 2e : paragraphes de trois phrases au plus) ;
-4. **A1 à A7** : l'**accueil** et la **page 404** au format 2 (avancés du lot F3 au lot F2, décision du 16/11 à 17 h 00) : les textes affichés nouveaux, tirés du code (section 3) ; les textes de l'accueil que tu as déjà validés (livrable 7.4a) sont rappelés, inchangés.
+4. **A1 à A7** : l'**accueil** et la **page 404** au format 2 (avancés du lot F3 au lot F2, décision du 16/11 à 17 h 00) : les textes affichés nouveaux, tirés du code (section 3) ; les textes de l'accueil que tu as déjà validés (livrable 7.4a) sont rappelés, inchangés ;
+5. **M1 à M5** : les **corrections de modèle** de la pull request (H1 à 1,4 rem sur téléphone, trois retours à la ligne) et la **date « Mis à jour le »** des 12 pages (section 4), avec leurs captures avant et après. Les points ouverts, à trancher ou à laisser, sont en section 5.
 
-**Comment répondre** : « Je valide le paquet F2, version 3 » ; ou « Je valide sauf : » suivi des numéros à reprendre (par exemple « E3 : … ; D12 : … ; P4 : … ; A2 : … »). Une retouche de forme ne relance pas de revue ; une retouche qui touche un fait ou un verdict, si.
+**Comment répondre** : « Je valide le paquet F2, version 4 » ; ou « Je valide sauf : » suivi des numéros à reprendre (par exemple « E3 : … ; D12 : … ; P4 : … ; A2 : … ; M1 : … »). Une retouche de forme ne relance pas de revue ; une retouche qui touche un fait ou un verdict, si.
 
 Ces textes entrent dans l'empreinte de chaque ligne et de chaque page : elles ne seront versées qu'après ta validation du contenu exact (`CLAUDE.md` : l'empreinte ne se recalcule pas pour faire passer un contrôle).
 
@@ -40,7 +41,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
 ### D2 · `moteur-orange-clignotant` : Voyant moteur orange clignotant
 - Page : `voyant-moteur` · **Non, arrêtez-vous immédiatement** · À faire tout de suite (inchangés)
 - Écart validé : « Toyota demande d'arrêter immédiatement le véhicule ; Peugeot demande de faire appel au réseau (risque de destruction du catalyseur) ; Seat signale un risque pour le catalyseur et demande de rouler prudemment jusqu'à l'atelier le plus proche ; Renault et Dacia demandent de réduire le régime moteur et de consulter au plus tôt. »
-- **E2 · Écart court (nouveau)** : « Plus strict : Toyota (arrêt immédiat). Moins stricts : Peugeot (appel au réseau), Seat (pied levé, atelier proche), Renault et Dacia (régime réduit, consulter vite). » (23 mots ; 25 avec « Votre marque »)
+- **E2 · Écart court (nouveau)** : « Plus stricts : Toyota (arrêt immédiat), Peugeot et Seat (ne pas poursuivre). Moins stricts : Renault et Dacia (régime réduit, consulter vite). » (20 mots ; 22 avec « Votre marque »)
 - Consignes citées :
   - **Peugeot 208**, p. 15, « Système d'autodiagnostic moteur » ; renvoi (2) p. 13 (Non, ne poursuivez pas votre trajet ; À faire tout de suite) : « Clignotant. Le système du contrôle moteur est défaillant. Risque de destruction du catalyseur. Effectuer impérativement (2). […] (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié. »
     → **« Faire impérativement appel au réseau (catalyseur menacé) »** (7 mots)
@@ -180,11 +181,11 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   - **Renault Clio 5 phase 2**, p. 166, « Réservoir réactif », Entretien/Autonomie (Oui, avec précautions ; À faire dans les jours qui viennent) : « [témoin] s'allume. « Remplir AdBlue avant 1200 km » Lorsque le message s'affiche à la mise sous contact du moteur, il vous reste entre 1200 km et 800 km d'autonomie. Prévoyez d'effectuer ou de faire effectuer par un Représentant de la marque, le remplissage de réactif dans le réservoir. »
     → **« Prévoir le remplissage de réactif (1 200 à 800 km) »** (10 mots)
   - **Renault Clio 5 phase 2**, p. 166, « Réservoir réactif », Entretien/Autonomie (Oui, avec précautions ; À faire tout de suite) : « [témoin] s'allume. « XXX KM blocage remplir AdBlue » […] Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible. »
-    → **« Sous 800 km : faire le plein dès que possible »** (9 mots)
+    → **« Message de blocage : faire le plein dès que possible »** (9 mots)
   - **Dacia Sandero 3**, p. 138, « Réservoir réactif », Entretien/Autonomie (Oui, avec précautions ; À faire dans les jours qui viennent) : « [témoin] s'allume. « REMPLIR ADBLUE AVANT 1200km » Lorsque le message s'affiche à la mise sous contact du moteur, il vous reste entre 1200 km et 800 km d'autonomie. Prévoyez d'effectuer ou de faire effectuer par un Représentant de la marque, le remplissage ou un appoint de réactif dans le réservoir. »
     → **« Prévoir un remplissage ou appoint (1 200 à 800 km) »** (10 mots)
   - **Dacia Sandero 3**, p. 138, « Réservoir réactif », Entretien/Autonomie (Oui, avec précautions ; À faire tout de suite) : « [témoin] s'allume. « xxxKM BLOCAGE REMPLIR ADBLUE » […] Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible. »
-    → **« Sous 800 km : faire le plein dès que possible »** (9 mots)
+    → **« Message de blocage : faire le plein dès que possible »** (9 mots)
 
 ### D12 · `adblue-demarrage-impossible` : AdBlue : démarrage impossible (réservoir vide ou système bloqué)
 - Page : `voyant-adblue` · **Non, arrêtez-vous immédiatement** · À faire tout de suite (inchangés)
@@ -257,7 +258,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   - **Toyota Yaris**, p. 293, 7.2.4 « Si un voyant s'allume », Voyant SRS (Oui, avec précautions ; À faire tout de suite) : « Indique un dysfonctionnement dans : Le système d'airbag SRS ; ou Le système de prétensionneur de ceinture de sécurité. Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié. »
     → **« Faire immédiatement vérifier le véhicule »** (5 mots)
   - **Dacia Sandero 3**, p. 101, « Messages d'anomalies de fonctionnement » (Oui, avec précautions ; À faire tout de suite) : « Ils apparaissent avec le témoin [Service] et nécessitent un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement. […] « Airbag à contrôler » Indique une défaillance des systèmes de retenue complémentaire aux ceintures. En cas d'accident, ils risquent de ne pas se déclencher »
-    → **« Témoin Service allumé : aller au plus tôt chez un représentant »** (10 mots)
+    → **« Témoin Service : au plus tôt chez un représentant, avec ménagement »** (10 mots)
 
 ### D17 · `airbag-passager-desactive` : Témoin « airbag passager désactivé » (OFF) allumé
 - Page : `voyant-airbag` · **Oui, vous pouvez rouler** · Aucune action nécessaire (inchangés)
@@ -284,11 +285,11 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   - **Renault Clio 5 phase 2**, p. 138, « Témoin antiblocage des roues » (Oui, avec précautions ; À faire dans les jours qui viennent) : « S'il s'allume en roulant, il signale une défaillance du système d'antiblocage des roues. Le système de freinage est alors assuré comme sur un véhicule non équipé du système ABS. Consultez rapidement un Représentant de la marque. »
     → **« Témoin seul : consulter rapidement un représentant de la marque »** (9 mots)
   - **Renault Clio 5 phase 2**, p. 212, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement ; témoin Service p. 136 (Oui, avec précautions ; À faire tout de suite) : « [Service] et [ABS] allumés au tableau de bord accompagnés des messages « ABS à contrôler », « Système freinage à contrôler » et « ESC à contrôler » : cela indique que l'ABS, l'ESC et l'aide au freinage d'urgence sont désactivés. Le freinage est toujours assuré ; […] (p. 136) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement. »
-    → **« Témoin Service allumé : aller au plus tôt chez un représentant »** (10 mots)
+    → **« Témoin Service : au plus tôt chez un représentant, avec ménagement »** (10 mots)
   - **Dacia Sandero 3**, p. 112, « Témoin antiblocage des roues » (Oui, avec précautions ; À faire dans les jours qui viennent) : « S'il ne s'éteint pas après la mise sous contact ou s'il s'allume en roulant, il signale une défaillance du système d'antiblocage des roues. Le système de freinage est alors assuré comme sur un véhicule non équipé du système ABS. Consultez rapidement un Représentant de la marque. »
     → **« Témoin seul : consulter rapidement un représentant de la marque »** (9 mots)
   - **Dacia Sandero 3**, p. 184, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement ; témoin Service p. 110 (Oui, avec précautions ; À faire tout de suite) : « [Service] et [ABS] allumés au tableau de bord accompagnés des messages « ABS », « Système freinage à contrôler » et « ESC » : cela indique que l'ABS, l'ESC et l'aide au freinage d'urgence sont désactivés. Le freinage est toujours assuré ; […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement. »
-    → **« Témoin Service allumé : aller au plus tôt chez un représentant »** (10 mots)
+    → **« Témoin Service : au plus tôt chez un représentant, avec ménagement »** (10 mots)
   - **Toyota Yaris**, p. 293, 7.2.4 « Si un voyant s'allume », Voyant ABS (Oui, avec précautions ; À faire tout de suite) : « Indique un dysfonctionnement dans : L'ABS ; ou Le système d'assistance au freinage. Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié. »
     → **« Faire immédiatement vérifier le véhicule »** (5 mots)
 
@@ -340,7 +341,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
 ### D22 · `pression-pneus` : Voyant de pression des pneus allumé fixe
 - Page : `voyant-pression-pneus` · **Non, arrêtez-vous immédiatement** · À faire tout de suite (inchangés)
 - Écart validé : « Peugeot (p. 110), Seat et Toyota demandent de s'arrêter dès que possible pour contrôler les pneus, Renault et Dacia en cas de message « Crevaison ». Pour un simple sous-gonflage, la liste des témoins de Peugeot (p. 18) demande de contrôler la pression le plus rapidement possible, et Dacia de la vérifier et de l'ajuster à froid ; Renault ne donne pas de consigne pour le témoin seul. »
-- **E14 · Écart court (nouveau)** : « Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts : Peugeot (liste des témoins), Dacia sinon (vérifier la pression). » (23 mots ; 25 avec « Votre marque »)
+- **E14 · Écart court (nouveau)** : « Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir). » (22 mots ; 24 avec « Votre marque »)
 - Consignes citées :
   - **Peugeot 208**, p. 18, « Sous-gonflage » (Oui, avec précautions ; À faire tout de suite) : « Fixe. La pression est insuffisante dans une ou plusieurs roues. Contrôler la pression des pneumatiques le plus rapidement possible. Réinitialiser le système de détection après ajustement de la pression. »
     → **« Contrôler la pression au plus vite, puis réinitialiser le système »** (10 mots)
@@ -351,7 +352,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   - **Dacia Sandero 3**, p. 177, « Système de surveillance de pression des pneumatiques », Anomalies de gonflage possibles (Oui, avec précautions ; À faire dans les jours qui viennent) : « s'allume fixe. « Pression pneus à réajuster » Une roue et la valeur de pression associée s'affichent en jaune. Cela indique qu'un sous gonflage du pneumatique a été détecté. Vérifiez et ajustez la pression à froid des quatre pneumatiques puis, réinitialisez le système. »
     → **« Vérifier et ajuster la pression à froid, puis réinitialiser »** (9 mots)
   - **Toyota Yaris**, p. 295 et 298, Voyant de faible pression des pneus et MISE EN GARDE (Non, arrêtez-vous immédiatement ; À faire tout de suite) : « Lorsque le témoin s'allume (un signal sonore retentit) : Faible pression des pneus due à des causes naturelles. Réglez la pression de gonflage des pneus […] Faible pression des pneus en raison d'un pneu crevé. Arrêtez immédiatement le véhicule dans un endroit sûr. […] Arrêtez votre véhicule dans un endroit sûr dès que possible. Réglez immédiatement la pression de gonflage des pneus. »
-    → **« S’arrêter en lieu sûr, puis régler la pression »** (8 mots)
+    → **« S’arrêter immédiatement en lieu sûr, puis régler la pression »** (9 mots)
   - **Renault Clio 5 phase 2**, p. 125, « Messages d'alerte » (Non, arrêtez-vous immédiatement ; À faire tout de suite) : « Ils apparaissent avec le témoin [STOP] et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. […] « Crevaison » Indique qu'au moins une des roues est crevée ou fortement sous-gonflée. »
     → **« Avec le message de crevaison, s’arrêter impérativement et immédiatement »** (9 mots)
   - **Dacia Sandero 3**, p. 102, « Messages d'alerte » (Non, arrêtez-vous immédiatement ; À faire tout de suite) : « Ils apparaissent avec le témoin [STOP] et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. […] « Crevaison » Indique qu'au moins une des roues est crevée ou fortement sous-gonflée. »
@@ -428,6 +429,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   3. `esp-defaut` (base) : Oui, avec précautions · À faire tout de suite
   4. `esp-clignotant` (base) : Oui, avec précautions · À faire tout de suite
 - **Illustration** (`src/illustrations/voyant-abs-esp-tableau-de-bord.svg`, voir la planche) : texte alternatif « Les voyants ABS et ESP allumés en orange, avec le voyant de freinage rouge » ; légende « ABS : les lettres dans un cercle. ESP : une voiture qui dérape. Le voyant ABS allumé avec le voyant rouge de freinage signale une alerte plus grave : voyez l’encadré. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 2 320 / 2 320 px : **au-delà de trois écrans** (2 001 px), signalé par FORMAT2-MESURES (demande n° 32 : le visuel suit toujours le bloc « Notices / Base du coût »). Raison : un encadré de 4 lignes, qui finit à 1 893 px ; l'encadré seul reste sous les trois écrans, puis la signature, la ligne de transparence et le bloc « Notices / Base du coût » (427 px).
 - **Repères** :
   - sous « Voyants ABS et ESP allumés en même temps » → `abs` : **Oui, avec précautions**
 - Titres H2 (7) : identiques à la page en ligne, dans le même ordre (règle 2j).
@@ -445,6 +447,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   3. `moteur-orange-fixe` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
   4. `adblue-demarrage-impossible` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
 - **Illustration** (`src/illustrations/voyant-adblue-autonomie.svg`, voir la planche) : texte alternatif « Le voyant AdBlue allumé avec un message d’autonomie » ; légende « Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3). » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 2 761 / 2 761 px : **au-delà de trois écrans** (2 001 px), signalé par FORMAT2-MESURES (demande n° 32 : le visuel suit toujours le bloc « Notices / Base du coût »). Raison : un encadré de 4 lignes, qui finit à 2 277 px ; puis la signature, la ligne de transparence et le bloc « Notices / Base du coût » (484 px).
 - Repères : aucun (aucun titre ne pose la question d'une seule ligne de l'encadré).
 - Titres H2 (6) : identiques à la page en ligne, dans le même ordre (règle 2j).
 - Retouches sans changement de mots : 0 paragraphe(s) coupé(s) à une limite de phrase ; 0 paragraphe(s) touché(s) seulement par les références de pages (passées dans « Sources ») ou par la formule « Verdict retenu » retirée.
@@ -461,6 +464,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   1. `airbag-defaut` (base) : Oui, avec précautions · À faire tout de suite
   2. `airbag-passager-desactive` (base) : Oui, vous pouvez rouler · Aucune action nécessaire
 - **Illustration** (`src/illustrations/voyant-airbag-tableau-de-bord.svg`, voir la planche) : texte alternatif « Le voyant airbag et le témoin « airbag passager OFF » allumés au tableau de bord » ; légende « Le voyant airbag, un passager assis devant son coussin, signale un défaut des airbags ou des prétensionneurs. Le témoin barré « OFF » confirme que l’airbag du passager avant est désactivé. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 416 / 1 416 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Peut-on rouler avec le voyant airbag allumé ? » → `airbag-defaut` : **Oui, avec précautions**
   - sous « Témoin « airbag passager OFF » : quand est-ce normal ? » → `airbag-passager-desactive` : **Oui, vous pouvez rouler**
@@ -474,6 +478,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
 - Lignes de l'encadré (inchangées) :
   1. `batterie-rouge` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
 - **Illustration** (`src/illustrations/voyant-batterie-tableau-de-bord.svg`, voir la planche) : texte alternatif « Le voyant de charge de la batterie allumé en rouge au tableau de bord » ; légende « Le voyant de charge a la forme d’une batterie, avec ses bornes + et −. Allumé en rouge moteur tournant, il signale que la batterie n’est plus rechargée normalement. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 260 / 1 260 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Peut-on rouler avec le voyant de batterie allumé ? » → `batterie-rouge` : **Non, arrêtez-vous immédiatement**
   - sous « Voyants STOP et batterie allumés ensemble » → `batterie-rouge` : **Non, arrêtez-vous immédiatement**
@@ -486,6 +491,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   1. `direction-orange` (base) : Oui, avec précautions · À faire tout de suite
   2. `direction-rouge` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
 - **Illustration** (`src/illustrations/voyant-direction-tableau-de-bord.svg`, voir la planche) : texte alternatif « Le voyant de direction assistée allumé en orange et en rouge » ; légende « Le voyant de direction dessine un volant suivi d’un point d’exclamation. Selon la voiture et la gravité, il s’allume en orange (ou jaune) ou en rouge. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 670 / 1 670 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Peut-on rouler avec le voyant volant orange ? » → `direction-orange` : **Oui, avec précautions**
   - sous « Voyant volant rouge, ou avec le témoin STOP » → `direction-rouge` : **Non, arrêtez-vous immédiatement**
@@ -505,6 +511,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   2. `moteur-orange-fixe` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
   3. `moteur-rouge` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
 - **Illustration** (`src/illustrations/voyant-fap-tableau-de-bord.svg`, voir la planche) : texte alternatif « Le voyant du filtre à particules allumé en orange au tableau de bord » ; légende « Le voyant du filtre à particules dessine le filtre sur sa ligne d’échappement. Allumé, il signale un filtre qui commence à se saturer et doit se nettoyer en roulant. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 999 / 1 999 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Peut-on rouler avec le voyant FAP allumé ? » → `fap` : **Oui, avec précautions**
 - Titres H2 (8) : identiques à la page en ligne, dans le même ordre (règle 2j).
@@ -523,6 +530,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   2. ligne saisie : « Le témoin d'usure des plaquettes de frein s'allume, sur les voitures qui en ont un : les plaquettes sont usées. » : Oui, avec précautions · À faire tout de suite
   3. `frein-stationnement` (base) : Oui, vous pouvez rouler · Aucune action nécessaire
 - **Illustration** (`src/illustrations/voyant-frein-tableau-de-bord.svg`, voir la planche) : texte alternatif « Deux voyants rouges au tableau de bord : le point d’exclamation dans un cercle et la lettre P dans un cercle » ; légende « Deux voyants rouges à distinguer : le point d’exclamation dans un cercle concerne le liquide ou le circuit de freinage, frein de stationnement desserré ; la lettre P, le frein de stationnement serré. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 648 / 1 648 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Voyant liquide de frein : peut-on rouler ? » → `frein-rouge` : **Non, arrêtez-vous immédiatement**
   - sous « Voyant plaquette de frein : peut-on rouler ? » → ligne 2 de l'encadré : **Oui, avec précautions**
@@ -542,6 +550,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   2. `huile-niveau` (base) : Oui, avec précautions · À faire tout de suite
   3. `entretien-vidange` (base) : Oui, avec précautions · À faire dans les jours qui viennent
 - **Illustration** (`src/illustrations/voyant-huile-tableau-de-bord.svg`, voir la planche) : texte alternatif « Trois voyants allumés au tableau de bord : pression d’huile en rouge, niveau d’huile et clé d’entretien en orange » ; légende « Trois dessins à ne pas confondre : la burette rouge signale une pression d’huile trop basse ; la burette au-dessus de vagues, un niveau d’huile bas ; la clé, une révision ou une vidange à faire. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 979 / 1 979 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Voyant d'huile rouge : la pression d'huile » → `huile-pression-rouge` : **Non, arrêtez-vous immédiatement**
   - sous « Voyant d'huile rouge qui clignote » → `huile-pression-rouge` : **Non, arrêtez-vous immédiatement**
@@ -563,6 +572,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   2. `moteur-orange-clignotant` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
   3. `moteur-rouge` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
 - **Illustration** (`src/illustrations/voyant-moteur-tableau-de-bord.svg`, voir la planche) : texte alternatif « Le voyant moteur orange allumé au tableau de bord » ; légende « Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 961 / 1 961 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Peut-on rouler avec le voyant moteur orange allumé ? » → `moteur-orange-fixe` : **Non, arrêtez-vous immédiatement**
   - sous « Voyant moteur qui clignote » → `moteur-orange-clignotant` : **Non, arrêtez-vous immédiatement**
@@ -587,6 +597,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   2. ligne saisie : « Le voyant de préchauffage (spirale) clignote : la gestion du moteur diesel est en défaut ; le moteur peut perdre de la puissance et consommer davantage. » : Oui, avec précautions · À faire tout de suite
   3. `moteur-orange-fixe` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
 - **Illustration** (`src/illustrations/voyant-prechauffage-tableau-de-bord.svg`, voir la planche) : texte alternatif « Le voyant de préchauffage, en forme de spirale, allumé en orange au tableau de bord » ; légende « Le voyant de préchauffage a la forme d’une spirale. Sur un diesel, il s’allume à la mise du contact : attendez qu’il s’éteigne pour démarrer. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 776 / 1 776 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Voyant bougie de préchauffage : démarrer quand il s'éteint » → `prechauffage` : **Oui, vous pouvez rouler**
   - sous « Voyant de préchauffage qui clignote et perte de puissance » → ligne 2 de l'encadré : **Oui, avec précautions**
@@ -601,6 +612,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   1. `pression-pneus` (base) : Non, arrêtez-vous immédiatement · À faire tout de suite
   2. `pression-pneus-systeme` (base) : Oui, avec précautions · À faire tout de suite
 - **Illustration** (`src/illustrations/voyant-pression-pneus-tableau-de-bord.svg`, voir la planche) : texte alternatif « Le voyant de pression des pneus allumé en orange au tableau de bord » ; légende « Le voyant de pression des pneus dessine un fer à cheval avec un point d’exclamation. Fixe : un pneu sous-gonflé, voire crevé. Clignotant puis fixe : le système de surveillance est en défaut. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 646 / 1 646 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Peut-on rouler avec le voyant de pression des pneus allumé ? » → `pression-pneus` : **Non, arrêtez-vous immédiatement**
   - sous « Que faire quand le voyant s'allume en roulant » → `pression-pneus` : **Non, arrêtez-vous immédiatement**
@@ -620,6 +632,7 @@ Pour chaque ligne : verdict et urgence (inchangés), écart validé puis **écar
   2. `abs` (base) : Oui, avec précautions · À faire tout de suite
   3. `prechauffage` (base) : Oui, vous pouvez rouler · Aucune action nécessaire
 - **Illustration** (`src/illustrations/accueil-tableau-de-bord.svg`, voir la planche) : texte alternatif « Le combiné d'instruments, avec cinq voyants allumés : quatre sur l'écran entre les compteurs, le voyant ABS juste en dessous » ; légende « Les voyants s'allument au combiné, entre les compteurs ou sur l'écran : repérez le dessin, sa couleur, et s'il reste fixe ou clignote. » (le modèle ajoute « Illustration decodauto. »)
+- **Haut de l'illustration** (375 × 667, police chargée / de secours) : 1 823 / 1 823 px, dans les trois premiers écrans (2 001 px).
 - **Repères** :
   - sous « Est-ce dangereux de rouler avec le voyant moteur orange allumé ? » → `moteur-orange-fixe` : **Non, arrêtez-vous immédiatement**
 - Titres H2 (7) : identiques à la page en ligne, dans le même ordre (règle 2j).
@@ -640,4 +653,22 @@ Rappel, inchangés (validés au livrable 7.4a) : title « decodauto : voyant all
 - **A4** · titre de la carte du second paragraphe : « Un guide indépendant »
 - **A5** · illustration de l'accueil (`src/illustrations/accueil-tableau-de-bord.svg`, affichée sur ordinateur, sans autre légende que « Illustration decodauto. ») : texte alternatif « Tableau de bord avec plusieurs voyants allumés »
 - **A6** · libellé de chacun des 18 dessins de la grille (un dessin, sans verdict ; le lien mène à la page du voyant, ou à sa ligne dans l'outil) : « Moteur » ; « STOP » ; « Pression d’huile » ; « Niveau d’huile » ; « Clé d’entretien » ; « Batterie » ; « Frein » ; « Frein à main » ; « AdBlue » ; « FAP » ; « Préchauffage » ; « Airbag » ; « Airbag passager désactivé » ; « ABS » ; « ESP » ; « Pression des pneus » ; « Direction » ; « Température »
-- **A7** · page 404 au format 2 : bouton « Trouver mon voyant » (vers l'outil, le seul de la page) et lien « Revenir à l’accueil de decodauto.com » (au format 1 : « revenir à l’accueil de decodauto.com », dans une liste) ; inchangés : H1 « Cette page est introuvable », phrase « L’adresse demandée n’existe pas, ou le site n’est pas encore en ligne. », title « Page introuvable : decodauto.com ».
+- **A7** · page 404 au format 2 : bouton « Trouver mon voyant » (vers l'outil, le seul de la page) et lien « Revenir à l’accueil de decodauto.com » (au format 1 : « revenir à l’accueil de decodauto.com », dans une liste) ; inchangés : H1 « Cette page est introuvable », phrase « L’adresse demandée n’existe pas, ou le site n’est pas encore en ligne. », title « Page introuvable : decodauto.com ». Captures : [375 px](captures/corrections/404-f2-375-chargee-ecran.png), [1366 px](captures/corrections/404-f2-1366-chargee-ecran.png) (police de secours : mêmes noms, « secours »).
+
+## 4. Corrections de modèle et date de mise à jour (M1 à M5)
+
+Ces corrections touchent la feuille de style ou le modèle de toutes les pages au format 2. Elles n'entrent pas dans les empreintes, mais changent la charte : `docs/11` sera mis à jour après ta validation (pas dans la pull request).
+
+- **M1 · H1 à 1,4 rem au lieu de 1,45 sur téléphone et tablette** (ordinateur inchangé, 2,1 rem). Sans elle, en police de secours, le H1 de la page pression des pneus passait sur trois lignes et sa première situation finissait à 673 px, au-delà du premier écran (règle 2a : 667 au plus). Après : 645 px ; aucun autre H1 du lot ne change de nombre de lignes. Écart au pilote : 0,8 px de moins. Captures : [avant](captures/corrections/pression-pneus-h1-375-secours-avant.png), [après](captures/corrections/pression-pneus-h1-375-secours-apres.png). `docs/11` §3 (« H1 de 1,45 rem sur téléphone ») à mettre à jour après ta validation.
+- **M2 · Lien « Votre marque » sur une seule ligne** (`a[data-lien-notices]{white-space:nowrap}`) : il passe en entier à la ligne suivante au lieu de se couper. Captures : ligne d'écart du voyant moteur [avant](captures/corrections/moteur-ecart-375-chargee-avant.png) / [après](captures/corrections/moteur-ecart-375-chargee-apres.png) ; carte de l'outil [avant](captures/corrections/outil-carte-375-chargee-avant.png) / [après](captures/corrections/outil-carte-375-chargee-apres.png).
+- **M3 · Préposition du coût probable jamais seule en fin de ligne** : « de » et « à » restent avec leur pastille (nouvelle classe `.borne`, `white-space:nowrap`). Captures : [avant](captures/corrections/moteur-cout-375-chargee-avant.png) / [après](captures/corrections/moteur-cout-375-chargee-apres.png).
+- **M4 · Libellé d'urgence du tableau des notices jamais coupé** (`.t-notices .mini-urgence`, `white-space:nowrap`) : à 375 px, 64 libellés sur 116 se coupaient au milieu (« À faire tout de / suite »), tous à 320 px ; après, aucun, et aucun ne dépasse de sa carte. Captures : [avant](captures/corrections/urgence-notices-moteur-375-chargee-avant.png) / [après](captures/corrections/urgence-notices-moteur-375-chargee-apres.png).
+- **M5 · Date « Mis à jour le » des 12 pages au 16/11/2026** (et `lastmod` du plan du site) : les textes affichés changent (lignes d'écart courtes, « ce que demande la notice », repères, phrases réécrites), ce qui est une vraie modification (règle 14 b). `date_revue` ne change pas : ce n'est pas une relecture complète. Si une correction suit ta validation un autre jour, la date suivra. L'accueil n'affiche pas de date.
+
+## 5. Points ouverts (à trancher ou à laisser)
+
+- **E2, voyant moteur qui clignote** : la ligne d'écart distingue maintenant Peugeot et Seat (« ne pas poursuivre ») de Renault et Dacia, les moins stricts. Reste une tension déjà validée : la consigne Seat (« Lever le pied, aller prudemment à l'atelier proche ») s'affiche à côté du niveau « Non, ne poursuivez pas votre trajet » de la même citation.
+- **Page pression des pneus** : la première situation finit à 645 px, sous le maximum de 667 px mais au-delà de la marge visée de 640 px (`docs/11` §5 a). Une police du système plus large qu'Inter peut la faire dépasser.
+- **Page FAP** : l'illustration est à 1999 px, à 2 px du seuil de trois écrans ; avec une autre police, elle serait signalée.
+- **Fiche de l'accueil** (`src/content/socle/accueil.md`) : le schéma du socle exige un title et une description, que la fiche reprend de `src/lib/accueil.ts` (un test vérifie qu'ils restent égaux). Ses dates ne sont ni affichées ni contrôlées.
+- **Page voyant moteur (P9), deux phrases réécrites au style lourd** : « …le voyant moteur orange fixe, que la notice Seat Ibiza dit jaune (…) » ; « Cette consigne est la plus prudente… », sans antécédent juste après la pastille du repère.

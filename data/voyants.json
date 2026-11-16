@@ -110,7 +110,7 @@
       }
     ],
     "ecart_marques": "Toyota demande d'arrêter immédiatement le véhicule ; Peugeot demande de faire appel au réseau (risque de destruction du catalyseur) ; Seat signale un risque pour le catalyseur et demande de rouler prudemment jusqu'à l'atelier le plus proche ; Renault et Dacia demandent de réduire le régime moteur et de consulter au plus tôt.",
-    "ecart_court": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Peugeot (appel au réseau), Seat (pied levé, atelier proche), Renault et Dacia (régime réduit, consulter vite).",
+    "ecart_court": "Plus stricts : Toyota (arrêt immédiat), Peugeot et Seat (ne pas poursuivre). Moins stricts : Renault et Dacia (régime réduit, consulter vite).",
     "validation": "69b4e9e427136672d8caab59ceef30fa304eb8d42548b32c5d4dbdc04221d8aa"
   },
   {
@@ -569,7 +569,7 @@
         "extrait": "[témoin] s'allume. « XXX KM blocage remplir AdBlue » […] Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible.",
         "verdict": "oui avec précautions",
         "urgence": "immédiate",
-        "demande": "Sous 800 km : faire le plein dès que possible"
+        "demande": "Message de blocage : faire le plein dès que possible"
       },
       {
         "source": "notice-dacia-sandero-3",
@@ -585,7 +585,7 @@
         "extrait": "[témoin] s'allume. « xxxKM BLOCAGE REMPLIR ADBLUE » […] Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible.",
         "verdict": "oui avec précautions",
         "urgence": "immédiate",
-        "demande": "Sous 800 km : faire le plein dès que possible"
+        "demande": "Message de blocage : faire le plein dès que possible"
       }
     ],
     "ecart_marques": "Seat laisse faire l'appoint dans les kilomètres indiqués (le voyant s'allume à 1 000 km d'autonomie) ; Renault et Dacia laissent prévoir l'appoint entre 1 200 et 800 km, puis le demandent dès que possible ; Peugeot demande un appoint rapide sous 800 km d'autonomie, impératif sous 100 km.",
@@ -844,7 +844,7 @@
         "extrait": "Ils apparaissent avec le témoin [Service] et nécessitent un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement. […] « Airbag à contrôler » Indique une défaillance des systèmes de retenue complémentaire aux ceintures. En cas d'accident, ils risquent de ne pas se déclencher",
         "verdict": "oui avec précautions",
         "urgence": "immédiate",
-        "demande": "Témoin Service allumé : aller au plus tôt chez un représentant"
+        "demande": "Témoin Service : au plus tôt chez un représentant, avec ménagement"
       }
     ],
     "ecart_marques": "Peugeot ne donne pas de délai et Dacia demande de consulter rapidement pour le témoin seul ; Seat, Renault, Toyota et Dacia (message « Airbag à contrôler ») demandent un contrôle immédiat ou au plus tôt.",
@@ -940,7 +940,7 @@
         "extrait": "[Service] et [ABS] allumés au tableau de bord accompagnés des messages « ABS à contrôler », « Système freinage à contrôler » et « ESC à contrôler » : cela indique que l'ABS, l'ESC et l'aide au freinage d'urgence sont désactivés. Le freinage est toujours assuré ; […] (p. 136) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
         "urgence": "immédiate",
-        "demande": "Témoin Service allumé : aller au plus tôt chez un représentant"
+        "demande": "Témoin Service : au plus tôt chez un représentant, avec ménagement"
       },
       {
         "source": "notice-dacia-sandero-3",
@@ -956,7 +956,7 @@
         "extrait": "[Service] et [ABS] allumés au tableau de bord accompagnés des messages « ABS », « Système freinage à contrôler » et « ESC » : cela indique que l'ABS, l'ESC et l'aide au freinage d'urgence sont désactivés. Le freinage est toujours assuré ; […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
         "urgence": "immédiate",
-        "demande": "Témoin Service allumé : aller au plus tôt chez un représentant"
+        "demande": "Témoin Service : au plus tôt chez un représentant, avec ménagement"
       },
       {
         "source": "notice-toyota-yaris",
@@ -1182,7 +1182,7 @@
         "extrait": "Lorsque le témoin s'allume (un signal sonore retentit) : Faible pression des pneus due à des causes naturelles. Réglez la pression de gonflage des pneus […] Faible pression des pneus en raison d'un pneu crevé. Arrêtez immédiatement le véhicule dans un endroit sûr. […] Arrêtez votre véhicule dans un endroit sûr dès que possible. Réglez immédiatement la pression de gonflage des pneus.",
         "verdict": "non, arrêt immédiat",
         "urgence": "immédiate",
-        "demande": "S’arrêter en lieu sûr, puis régler la pression"
+        "demande": "S’arrêter immédiatement en lieu sûr, puis régler la pression"
       },
       {
         "source": "notice-renault-clio-5",
@@ -1202,7 +1202,7 @@
       }
     ],
     "ecart_marques": "Peugeot (p. 110), Seat et Toyota demandent de s'arrêter dès que possible pour contrôler les pneus, Renault et Dacia en cas de message « Crevaison ». Pour un simple sous-gonflage, la liste des témoins de Peugeot (p. 18) demande de contrôler la pression le plus rapidement possible, et Dacia de la vérifier et de l'ajuster à froid ; Renault ne donne pas de consigne pour le témoin seul.",
-    "ecart_court": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts : Peugeot (liste des témoins), Dacia sinon (vérifier la pression).",
+    "ecart_court": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir).",
     "validation": "b986bf24d9ae5f89428d0101e0c7b74539cd21d6668b491f4a3c2aa2a1126660"
   },
   {
