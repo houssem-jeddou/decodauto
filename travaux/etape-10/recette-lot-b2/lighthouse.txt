@@ -1,0 +1,3 @@
+Brouillon, jamais validé. Lighthouse mobile, 3 passages, médianes (npx lhci autorun, configuration de lighthouserc-exemples.json réduite à la page), 16/11/2026.
+
+/batterie-voiture/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 904 ms, TBT 0 ms
