@@ -10,7 +10,7 @@ import { empreintePage, empreinteVoyant, type EncadreValide, type LigneAffichee,
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 describe('empreintes du format 2', () => {
-  test('chaque ligne de data/voyants.json garde son empreinte validée (aucune donnée du format 2 encore saisie)', async () => {
+  test('chaque ligne de data/voyants.json a son empreinte validée, données du format 2 comprises (lot F2 : en échec jusqu\'aux empreintes versées après la validation de Houssem)', async () => {
     const base = JSON.parse(await readFile(join(racine, 'data/voyants.json'), 'utf8')) as { voyants?: (VoyantValide & { validation: string })[] } | (VoyantValide & { validation: string })[];
     const lignes = Array.isArray(base) ? base : (base.voyants ?? []);
     assert.ok(lignes.length >= 25, `lignes lues : ${lignes.length}`);

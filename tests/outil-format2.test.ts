@@ -1,8 +1,8 @@
 // Page outil « Quel voyant est allumé ? » au format 2 (demande de changement n° 30, lot F1, tâche F1.3a) : modèle
 // (src/lib/outil-format2.ts), contrôles OUTIL-* sur le rendu du format 2 (index par paire pictogramme et couleur, cartes,
-// filtre), contrôles du format 2, cas en échec de chaque branche nouvelle. Données : base voyants validée et brouillon du
-// format 2 (lignes d'écart courtes, illustration ; « Brouillon, jamais validé »), appliqué en mémoire comme la construction
-// de démonstration (npm run demo:format2). Le corps est un fragment HTML écrit pour le test.
+// filtre), contrôles du format 2, cas en échec de chaque branche nouvelle. Données : base voyants et page outil, avec leurs
+// données du format 2 depuis le lot F2 (lignes d'écart courtes, illustration), lues comme la construction de démonstration
+// (npm run demo:format2). Le corps est un fragment HTML écrit pour le test.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -73,8 +73,8 @@ describe('format 2 : page outil (F1.3a)', () => {
     assert.deepEqual(modeleDeLaPage('voyant', { ...page, format: 1 } as PageEditoriale), { modele: pageOutilVoyants });
   });
 
-  test('page construite : contrôles d\'aujourd\'hui (OUTIL-*, R9) et du format 2 verts ; seule l\'empreinte (brouillon jamais validé) échoue', () => {
-    assert.deepEqual(controle(html), ['R4-EMPREINTE']);
+  test('page construite : contrôles d\'aujourd\'hui (OUTIL-*, R9) et du format 2 verts, empreinte de la validation de Houssem comprise (paquet F2, version 4)', () => {
+    assert.deepEqual(controle(html), []);
     assert.deepEqual(regles(constatsPartCitee(html, 'x.html')), []);
   });
 
@@ -144,13 +144,13 @@ describe('format 2 : page outil (F1.3a)', () => {
     assert.equal(voyants.indexOf('pression-pneus-systeme') - voyants.indexOf('pression-pneus'), 1);
   });
 
-  test('cartes : une par ligne de la base, cellule de l\'encadré ; ligne d\'écart courte obligatoire (brouillon F2), jamais l\'écart entier ; aucune ligne d\'écart si la base n\'en a pas', () => {
+  test('cartes : une par ligne de la base, cellule de l\'encadré ; ligne d\'écart courte obligatoire (base, lot F2), jamais l\'écart entier ; aucune ligne d\'écart si la base n\'en a pas', () => {
     const $ = cheerio.load(html);
     assert.equal($('[data-outil-ligne]').length, 26);
     const carte = (id: string) => $(`#${ancreLigneOutil(id)}`);
     for (const l of modele.groupes.flatMap((g) => g.lignes)) {
       if (l.ecart === undefined) assert.equal(carte(l.voyant).find('.ecart').length, 0, l.voyant);
-      else assert.equal(plat(carte(l.voyant).find('[data-ecart-court]').clone().children('.vh, a[data-lien-notices]').remove().end().text()), plat(brouillon.voyants[l.voyant]?.ecart_court), l.voyant);
+      else assert.equal(plat(carte(l.voyant).find('[data-ecart-court]').clone().children('.vh, a[data-lien-notices]').remove().end().text()), plat(site.voyants.get(l.voyant)?.ecart_court), l.voyant);
     }
     assert.ok(!carte('pression-pneus').text().includes('Renault ne donne pas de consigne pour le témoin seul'));
     // Forme de la gravité et tuile du voyant allumé ; pas de lien vers l'outil lui-même (STOP) ; sources repliées.

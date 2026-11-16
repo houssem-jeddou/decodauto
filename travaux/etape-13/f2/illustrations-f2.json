@@ -1,0 +1,192 @@
+{
+  "voyant-huile": {
+    "fichier": "voyant-huile-tableau-de-bord",
+    "pictos": [
+      [
+        "huile",
+        "rouge"
+      ],
+      [
+        "huile-niveau",
+        "orange"
+      ],
+      [
+        "cle-entretien",
+        "orange"
+      ]
+    ],
+    "bas": [
+      "moteur",
+      "batterie",
+      "frein",
+      "abs",
+      "airbag"
+    ],
+    "alt": "Trois voyants allumés au tableau de bord : pression d’huile en rouge, niveau d’huile et clé d’entretien en orange",
+    "legende": "Trois dessins à ne pas confondre : la burette rouge signale une pression d’huile trop basse ; la burette au-dessus de vagues, un niveau d’huile bas ; la clé, une révision ou une vidange à faire."
+  },
+  "voyant-batterie": {
+    "fichier": "voyant-batterie-tableau-de-bord",
+    "pictos": [
+      [
+        "batterie",
+        "rouge"
+      ]
+    ],
+    "bas": [
+      "moteur",
+      "huile",
+      "frein",
+      "abs",
+      "airbag"
+    ],
+    "alt": "Le voyant de charge de la batterie allumé en rouge au tableau de bord",
+    "legende": "Le voyant de charge a la forme d’une batterie, avec ses bornes + et −. Allumé en rouge moteur tournant, il signale que la batterie n’est plus rechargée normalement."
+  },
+  "voyant-frein": {
+    "fichier": "voyant-frein-tableau-de-bord",
+    "pictos": [
+      [
+        "frein",
+        "rouge"
+      ],
+      [
+        "frein-stationnement",
+        "rouge"
+      ]
+    ],
+    "bas": [
+      "moteur",
+      "huile",
+      "batterie",
+      "abs",
+      "airbag"
+    ],
+    "alt": "Deux voyants rouges au tableau de bord : le point d’exclamation dans un cercle et la lettre P dans un cercle",
+    "legende": "Deux voyants rouges à distinguer : le point d’exclamation dans un cercle concerne le liquide ou le circuit de freinage, frein de stationnement desserré ; la lettre P, le frein de stationnement serré."
+  },
+  "voyant-fap": {
+    "fichier": "voyant-fap-tableau-de-bord",
+    "pictos": [
+      [
+        "fap",
+        "orange"
+      ]
+    ],
+    "bas": [
+      "moteur",
+      "huile",
+      "batterie",
+      "prechauffage",
+      "adblue"
+    ],
+    "alt": "Le voyant du filtre à particules allumé en orange au tableau de bord",
+    "legende": "Le voyant du filtre à particules dessine le filtre sur sa ligne d’échappement. Allumé, il signale un filtre qui commence à se saturer et doit se nettoyer en roulant."
+  },
+  "voyant-prechauffage": {
+    "fichier": "voyant-prechauffage-tableau-de-bord",
+    "pictos": [
+      [
+        "prechauffage",
+        "orange"
+      ]
+    ],
+    "bas": [
+      "moteur",
+      "huile",
+      "batterie",
+      "fap",
+      "adblue"
+    ],
+    "alt": "Le voyant de préchauffage, en forme de spirale, allumé en orange au tableau de bord",
+    "legende": "Le voyant de préchauffage a la forme d’une spirale. Sur un diesel, il s’allume à la mise du contact : attendez qu’il s’éteigne pour démarrer."
+  },
+  "voyant-airbag": {
+    "fichier": "voyant-airbag-tableau-de-bord",
+    "pictos": [
+      [
+        "airbag",
+        "orange"
+      ],
+      [
+        "airbag-passager-off",
+        "orange"
+      ]
+    ],
+    "bas": [
+      "moteur",
+      "huile",
+      "batterie",
+      "frein",
+      "abs"
+    ],
+    "alt": "Le voyant airbag et le témoin « airbag passager OFF » allumés au tableau de bord",
+    "legende": "Le voyant airbag, un passager assis devant son coussin, signale un défaut des airbags ou des prétensionneurs. Le témoin barré « OFF » confirme que l’airbag du passager avant est désactivé."
+  },
+  "voyant-abs-esp": {
+    "fichier": "voyant-abs-esp-tableau-de-bord",
+    "pictos": [
+      [
+        "abs",
+        "orange"
+      ],
+      [
+        "esp",
+        "orange"
+      ],
+      [
+        "frein",
+        "rouge"
+      ]
+    ],
+    "bas": [
+      "moteur",
+      "huile",
+      "batterie",
+      "airbag",
+      "direction"
+    ],
+    "alt": "Les voyants ABS et ESP allumés en orange, avec le voyant de freinage rouge",
+    "legende": "ABS : les lettres dans un cercle. ESP : une voiture qui dérape. Le voyant ABS allumé avec le voyant rouge de freinage signale une alerte plus grave : voyez l’encadré."
+  },
+  "voyant-pression-pneus": {
+    "fichier": "voyant-pression-pneus-tableau-de-bord",
+    "pictos": [
+      [
+        "pression-pneus",
+        "orange"
+      ]
+    ],
+    "bas": [
+      "moteur",
+      "huile",
+      "batterie",
+      "frein",
+      "abs"
+    ],
+    "alt": "Le voyant de pression des pneus allumé en orange au tableau de bord",
+    "legende": "Le voyant de pression des pneus dessine un fer à cheval avec un point d’exclamation. Fixe : un pneu sous-gonflé, voire crevé. Clignotant puis fixe : le système de surveillance est en défaut."
+  },
+  "voyant-direction": {
+    "fichier": "voyant-direction-tableau-de-bord",
+    "pictos": [
+      [
+        "direction",
+        "orange"
+      ],
+      [
+        "direction",
+        "rouge"
+      ]
+    ],
+    "bas": [
+      "moteur",
+      "huile",
+      "batterie",
+      "frein",
+      "abs"
+    ],
+    "alt": "Le voyant de direction assistée allumé en orange et en rouge",
+    "legende": "Le voyant de direction dessine un volant suivi d’un point d’exclamation. Selon la voiture et la gravité, il s’allume en orange (ou jaune) ou en rouge."
+  }
+}

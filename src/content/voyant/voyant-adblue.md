@@ -33,12 +33,12 @@ sources:
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-14
-date_modification: 2026-11-15
+date_modification: 2026-11-16
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) revalidé par Houssem le 14/11/2026 (22 h 45),
 # avec les faits du texte (paquet travaux/etape-8/paquet-demande-25.md).
-validation: 10b8ac97683583ccb813158963203d8753906f025ca1a591f85c264f107a8852
+validation: 4964e5abae750cd91f553edf30e8e041948bb7ccb06348a5c8874a24421d54c4
 causes:
   - cause: Appoint pas encore pris en compte par le système
     explication: "Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, si l'on ne laisse pas tourner le moteur 10 secondes à l'arrêt après le remplissage, le système ne prend en compte l'appoint qu'après plusieurs dizaines de minutes de roulage."
@@ -52,6 +52,11 @@ causes:
     explication: "Les notices Peugeot 208, Renault Clio 5 phase 2 et Dacia Sandero 3 signalent une défaillance du système d'antipollution ; selon la notice Seat Ibiza, l'alerte peut aussi venir d'un liquide AdBlue rajouté non conforme. Aucune notice ne nomme la pièce en cause : le diagnostic au garage le dit."
     pieces:
       - systeme-adblue
+format: 2
+illustration:
+  fichier: voyant-adblue-autonomie
+  alt: "Le voyant AdBlue allumé avec un message d’autonomie"
+  legende: "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3)."
 ---
 
 ## Peut-on rouler avec le voyant AdBlue allumé ?
@@ -60,7 +65,9 @@ Tout dépend du message qui l'accompagne.
 
 **Réserve basse, avec un message d'autonomie, sans le voyant moteur** : {{verdict:adblue-reserve}}. Le voyant prévient que le réservoir d'AdBlue se vide : une fois l'autonomie affichée à zéro, le moteur ne redémarre plus. Faites l'appoint avant : les seuils de chaque marque sont détaillés plus bas.
 
-**Avec un message de défaut antipollution, sans le voyant moteur** : {{verdict:adblue-defaut}}. Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3 (voyants AdBlue et Service, messages « … à contrôler ») et Seat Ibiza (voyant AdBlue jaune avec la clé), le système d'antipollution est en défaut ; chez Renault et Dacia, un compte à rebours peut s'afficher avant que le démarrage soit bloqué : allez au garage au plus tôt. Le voyant Service ne suffit pas à le dire : sur la Citroën C3 à moteur 1.6 BlueHDi, le voyant AdBlue qui clignote avec le voyant Service annonce une réserve basse ({{cite:notice-citroen-c3|p. 12}}). Lisez le message affiché.
+**Avec un message de défaut antipollution, sans le voyant moteur** : {{verdict:adblue-defaut}}. Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3 (voyants AdBlue et Service, messages « … à contrôler ») et Seat Ibiza (voyant AdBlue jaune avec la clé), le système d'antipollution est en défaut ; chez Renault et Dacia, un compte à rebours peut s'afficher avant que le démarrage soit bloqué : allez au garage au plus tôt.
+
+Le voyant Service ne suffit pas à distinguer ce défaut : sur la Citroën C3 à moteur 1.6 BlueHDi, le voyant AdBlue qui clignote avec le voyant Service annonce une réserve basse ({{cite:notice-citroen-c3|p. 12}}). Lisez le message affiché.
 
 **Avec le voyant moteur** : c'est la consigne du [voyant moteur](/voyants/moteur/), plus prudente, qui s'applique : {{verdict:moteur-orange-fixe}}. Elle laisse repartir jusqu'au garage si la notice de votre voiture le permet, comme celle de la Peugeot 208 (voir plus bas).
 
@@ -87,7 +94,9 @@ La notice Toyota Yaris lue pour les autres pages du site ne décrit pas de moteu
 
 ## Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?
 
-Ces messages sont ceux de la Peugeot 208, où le témoin AdBlue s'allume avec le voyant moteur ({{cite:notice-peugeot-208|p. 16}}) : la consigne retenue est donc celle du voyant moteur, la plus prudente : {{verdict:moteur-orange-fixe}}. Selon la notice, le message « Défaut antipollution » signale un dysfonctionnement du système d'antipollution ; si le défaut était passager, l'alerte disparaît au trajet suivant. S'il persiste pendant 50 km, il est confirmé : le témoin AdBlue clignote, et le message « Démarrage interdit dans X km » annonce la distance qui reste avant que le dispositif d'antidémarrage se déclenche, au plus tard après 1 100 km. La notice demande de faire vérifier la voiture par le réseau Peugeot ou un atelier qualifié ({{cite:notice-peugeot-208|p. 22}}) : elle permet donc de rouler jusqu'au réseau, à rejoindre sans attendre. La notice Citroën C3 décrit le même cas, avec en plus le voyant Service ({{cite:notice-citroen-c3|p. 13}}).
+Ces messages sont ceux de la Peugeot 208, où le témoin AdBlue s'allume avec le voyant moteur ({{cite:notice-peugeot-208|p. 16}}) : la consigne de l'encadré est donc celle du voyant moteur, la plus prudente : {{verdict:moteur-orange-fixe}}. Selon la notice, le message « Défaut antipollution » signale un dysfonctionnement du système d'antipollution ; si le défaut était passager, l'alerte disparaît au trajet suivant. S'il persiste pendant 50 km, il est confirmé : le témoin AdBlue clignote, et le message « Démarrage interdit dans X km » annonce la distance qui reste avant que le dispositif d'antidémarrage se déclenche, au plus tard après 1 100 km.
+
+La notice Peugeot 208 demande de faire vérifier la voiture par le réseau Peugeot ou un atelier qualifié ({{cite:notice-peugeot-208|p. 22}}) : elle permet donc de rouler jusqu'au réseau, à rejoindre sans attendre. La notice Citroën C3 décrit le même cas, avec en plus le voyant Service ({{cite:notice-citroen-c3|p. 13}}).
 
 Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, les témoins AdBlue et Service s'allument avec les messages « Antipollution à contrôler », « Qualité AdBlue à contrôler » ou « Injection AdBlue à contrôler » : consultez un représentant de la marque le plus tôt possible. Le message « XXX KM blocage antipollution » indique qu'il reste moins de 800 km avant que le redémarrage soit impossible ; à « 0 KM », le moteur ne redémarre plus après la coupure du contact ({{cite:notice-renault-clio-5|p. 167}}, {{cite:notice-dacia-sandero-3|p. 139}}). Sans le voyant moteur, et tant que l'autonomie affichée n'est pas à 0 km, la consigne de l'encadré est : {{verdict:adblue-defaut}} ; à « 0 KM », c'est celle du démarrage impossible : {{verdict:adblue-demarrage-impossible}}.
 
@@ -112,5 +121,6 @@ Le réservoir contient environ 15 litres sur la Peugeot 208 ({{cite:notice-peuge
 - Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, faites l'appoint moteur arrêté et contact coupé ({{cite:notice-renault-clio-5|p. 163}}, {{cite:notice-dacia-sandero-3|p. 135}}) ; selon la notice Peugeot 208, voiture sur un sol plat et horizontal ({{cite:notice-peugeot-208|p. 171}}).
 - Selon la notice Peugeot 208, ne versez jamais l'AdBlue dans le réservoir de gazole, et ne le diluez ni ne le transvasez jamais ({{cite:notice-peugeot-208|p. 170-171}}).
 - Il gèle vers -11 °C selon la notice Peugeot 208 ({{cite:notice-peugeot-208|p. 170}}), vers -10 °C selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3 ({{cite:notice-renault-clio-5|p. 164}}, {{cite:notice-dacia-sandero-3|p. 135-136}}).
-- Selon la notice Peugeot 208, c'est un liquide ininflammable, incolore et inodore. En cas de contact avec les yeux, rincez-les immédiatement et abondamment pendant au moins 15 minutes, et consultez un médecin si la brûlure ou l'irritation persiste ; avec la peau, lavez à l'eau et au savon ; en cas d'ingestion, rincez la bouche et buvez beaucoup d'eau. Gardez les bidons hors de portée des enfants. Par forte température, des vapeurs d'ammoniac peuvent se dégager : ne les inhalez pas ({{cite:notice-peugeot-208|p. 171}}). Selon la notice Renault Clio 5 phase 2, il peut s'en dégager à l'ouverture du bouchon quand le réservoir est chaud ({{cite:notice-renault-clio-5|p. 163}}).
+- Selon la notice Peugeot 208, c'est un liquide ininflammable, incolore et inodore. En cas de contact avec les yeux, rincez-les immédiatement et abondamment pendant au moins 15 minutes, et consultez un médecin si la brûlure ou l'irritation persiste ; avec la peau, lavez à l'eau et au savon ; en cas d'ingestion, rincez la bouche et buvez beaucoup d'eau. Gardez les bidons hors de portée des enfants ({{cite:notice-peugeot-208|p. 171}}).
+- Par forte température, selon la notice Peugeot 208, des vapeurs d'ammoniac peuvent se dégager : ne les inhalez pas ({{cite:notice-peugeot-208|p. 171}}). Selon la notice Renault Clio 5 phase 2, il peut s'en dégager à l'ouverture du bouchon quand le réservoir est chaud ({{cite:notice-renault-clio-5|p. 163}}).
 - Selon la notice Renault Clio 5 phase 2, le réactif est agressif pour les vêtements, les chaussures et la carrosserie ({{cite:notice-renault-clio-5|p. 164}}) ; la notice Dacia Sandero 3 le dit aussi pour les vêtements et la carrosserie ({{cite:notice-dacia-sandero-3|p. 136}}). Selon les deux notices, il ne doit pas entrer en contact avec les yeux ou la peau : en cas de contact, rincez abondamment à l'eau, et consultez un médecin si besoin ({{cite:notice-renault-clio-5|p. 163}}, {{cite:notice-dacia-sandero-3|p. 135}}).

@@ -29,6 +29,7 @@ import { INSECABLE } from '../src/lib/html.ts';
 import { schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
 import { TYPES_PAGE } from '../src/schemas/listes.ts';
 import { pageRedigee } from '../scripts/lib/pages-redigees.ts';
+import { versionFormat1 } from './format1.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const fixtures = join(racine, 'tests', 'fixtures');
@@ -66,7 +67,9 @@ function corpsMinimal(markdown: string): string {
 }
 
 async function exemple(fichier = EXEMPLE, type: 'voyant' | 'code-defaut' | 'pneus' = 'voyant') {
-  const contenu = await readFile(join(racine, fichier), 'utf8');
+  // Ces tests portent sur les modèles du format 1 (livrable 6.6) : une page passée au format 2 par son lot (F2) y est rendue
+  // dans sa version au format 1 (tests/format1.ts) ; la page publiée, au format 2, est contrôlée par la construction.
+  const contenu = versionFormat1(await readFile(join(racine, fichier), 'utf8'));
   const brut = lireFrontmatter(contenu) as Record<string, unknown>;
   const page = schemasPage[type].parse(brut) as PageEditoriale;
   const { site, contexte, constats } = await donneesDuSite(racine, new Map([[page.id, page.libelle_court]]), AUJOURDHUI, [AUTEUR_DES_EXEMPLES]);
@@ -347,7 +350,11 @@ describe("page rédigée « voyant moteur » (exemples/ jusqu'au passage, livrab
     const { brut, contexte, constats, html } = await exemple();
     assert.deepEqual(erreurs(constats), []);
     const resultat = controlerPage({ type: 'voyant', brut, fichier: EXEMPLE }, contexte, html);
-    assert.deepEqual(erreurs(resultat.constats), brut['validation'] === undefined ? ['R4-VALIDATION-ABSENTE'] : []);
+    // Page passée au format 2 et validée sous ce format (paquet F2) : l'empreinte couvre le format et la ligne d'écart
+    // courte (src/lib/empreinte.ts), sa version au format 1 n'est donc pas validée (R4-EMPREINTE, seule erreur). La page
+    // publiée, au format 2, est contrôlée sans erreur par la construction et par tests/format2.test.ts.
+    const auFormat2 = (await readFile(join(racine, EXEMPLE), 'utf8')).includes('\nformat: 2\n');
+    assert.deepEqual(erreurs(resultat.constats), brut['validation'] === undefined ? ['R4-VALIDATION-ABSENTE'] : auFormat2 ? ['R4-EMPREINTE'] : []);
   });
 
   test('[CI] composants de la page construite : typographie, identifiants, expressions interdites, part de texte cité', async () => {
