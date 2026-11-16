@@ -157,7 +157,7 @@
    `nettoyer-fap` à `voyant-moteur` : sans la paire, FORMAT2-ECART échoue. Proposition : ajouter la paire
    `nettoyer-fap` ↔ `voyant-moteur` à `data/plan-du-site.json` dans la pull request du lot. Justification : la page
    déclare deux lignes du voyant moteur, dont le tableau des notices est sur la page du voyant moteur (même paire que
-   `voyant-fap` ↔ `voyant-moteur`). Non ajoutée par cette correction, qui ne touchait que les fichiers du lot.
+   `voyant-fap` ↔ `voyant-moteur`). Ajoutée sur la branche du lot (`data/plan-du-site.json`, liens de `voyant-moteur`).
    **Recommandation : valider les deux lignes et la paire.**
 8. **Tutoriel « nettoyer le FAP »** : difficulté « facile » ; durée « jusqu'à l'extinction du voyant », 10 à 20 minutes
    environ selon Renault et Dacia Diesel (p. 186 ; p. 160), atelier après 30 minutes selon Seat (p. 290) ; cinq étapes
