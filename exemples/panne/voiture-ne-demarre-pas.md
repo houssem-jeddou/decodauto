@@ -20,8 +20,10 @@ question_decision: "Ma voiture ne démarre pas : que faire, et puis-je repartir 
 situations:
   - situation: "Les voyants du tableau de bord faiblissent ou ne s'allument pas, et le démarreur ne tourne pas"
     verdict: oui avec précautions
-    urgence: sous quelques jours
-    action: "Resserrez ou nettoyez les cosses de la batterie, puis démarrez avec une autre batterie (câbles ou booster) en suivant la notice de votre voiture. Ne le faites jamais si une batterie est gelée. Faites ensuite contrôler la batterie, et remplacez-la si nécessaire."
+    urgence: immédiate
+    action: "Resserrez ou nettoyez les cosses de la batterie, puis démarrez avec une autre batterie (câbles ou booster) en suivant la notice de votre voiture, jamais si une batterie est gelée. Une fois le moteur démarré, faites vérifier la voiture et la batterie dès que possible, et remplacez la batterie si nécessaire."
+    ecart_marques: "Toyota demande de faire vérifier la voiture dès que possible après un démarrage avec une autre batterie ; Renault, Dacia et Seat demandent de remplacer ou de faire contrôler la batterie, sans écrire de délai."
+    ecart_court: "Plus strict : Toyota (vérification dès que possible). Moins stricts : Renault, Dacia et Seat (batterie à contrôler ou remplacer, sans délai)."
     citations:
       - source: notice-renault-clio-5
         emplacement: "p. 384, « Anomalies de fonctionnement », « Vous actionnez le démarreur »"
@@ -38,6 +40,11 @@ situations:
         extrait: "Si des problèmes de démarrage subsistent en raison de la charge insuffisante de la batterie, ils peuvent indiquer que la batterie du véhicule est défectueuse. Dans ce cas, nous vous conseillons de faire contrôler, recharger ou remplacer la batterie du véhicule par un Service Technique."
         verdict: oui avec précautions
         urgence: sous quelques jours
+      - source: notice-toyota-yaris
+        emplacement: "p. 320, 7.2.10 « Si la batterie du véhicule est déchargée »"
+        extrait: "Une fois que le moteur démarre, faites vérifier le véhicule dès que possible par un concessionnaire ou réparateur Toyota agréé, ou par tout autre réparateur qualifié."
+        verdict: oui avec précautions
+        urgence: immédiate
       - source: notice-toyota-yaris
         emplacement: "p. 319, 7.2.8 « Si le moteur ne démarre pas »"
         extrait: "Le moteur du système de démarrage ne tourne pas, les éclairages intérieurs et les phares ne s'allument pas, ou l'avertisseur sonore ne retentit pas. […] Contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié si vous ne pouvez pas résoudre le problème ou si vous ne connaissez pas les procédures de réparation."
@@ -166,7 +173,7 @@ Ne multipliez pas les essais : les notices lues demandent de couper le contact e
    - Non : après quelques essais, n'insistez pas. {{verdict:ligne-3}}
 6. Une fois le moteur démarré, le voyant batterie reste-t-il allumé, ou s'allume-t-il en roulant ?
    - Oui : la batterie ne se recharge plus. {{verdict:batterie-rouge}}
-   - Non : si la voiture a démarré avec une autre batterie, faites contrôler la vôtre dans les jours qui suivent. {{verdict:ligne-1}}
+   - Non : si la voiture a démarré avec une autre batterie, faites-la vérifier dès que possible. {{verdict:ligne-1}}
 
 ## Voiture qui ne démarre pas, voyants faibles ou éteints : la batterie
 
@@ -227,7 +234,9 @@ La notice Seat ne le recommande pas, l'interdit sur une boîte automatique, et l
 
 ## Après le démarrage : peut-on rouler tout de suite ?
 
-Après un démarrage avec une autre batterie, les notices Peugeot et Citroën demandent de laisser tourner le moteur, à l'arrêt, au moins 30 minutes, pour que la batterie retrouve une charge suffisante. Rouler tout de suite peut altérer certaines fonctions de la voiture ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). Si le voyant batterie reste allumé moteur tournant, la batterie ne se recharge plus : suivez la consigne de l'encadré.
+Après un démarrage avec une autre batterie, les notices Peugeot et Citroën demandent de laisser tourner le moteur, à l'arrêt, au moins 30 minutes, pour que la batterie retrouve une charge suffisante. Rouler tout de suite peut altérer certaines fonctions de la voiture ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). La notice {{notice:notice-toyota-yaris}} demande ensuite de faire vérifier la voiture dès que possible ({{cite:notice-toyota-yaris|p. 320}}).
+
+Si le voyant batterie reste allumé moteur tournant, la batterie ne se recharge plus : suivez la consigne de l'encadré.
 
 ## Ma voiture ne démarre pas malgré une batterie neuve
 
