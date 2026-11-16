@@ -73,6 +73,8 @@ export interface VoyantPourOutil {
   urgence: Urgence;
   action: string;
   ecart_marques?: string | undefined;
+  /** Ligne d'écart courte (format 2, règle 2b), quand elle existe. */
+  ecart_court?: string | undefined;
   citations: readonly { source: string; emplacement: string }[];
 }
 
@@ -93,6 +95,8 @@ export interface LigneOutil {
   urgence: Urgence;
   action: string;
   ecart?: string | undefined;
+  /** Ligne d'écart courte de la base (format 2), quand elle existe ; sinon la carte du format 2 affiche l'écart entier. */
+  ecartCourt?: string | undefined;
   notices: readonly string[];
   autres: readonly string[];
   references: readonly ReferenceOutil[];
@@ -154,6 +158,7 @@ export function modeleOutilVoyants(entree: {
       urgence: v.urgence,
       action: v.action,
       ecart: v.ecart_marques,
+      ecartCourt: v.ecart_marques !== undefined ? v.ecart_court : undefined,
       ...sourcesDeLaLigne(ids, entree.sources),
       references: v.citations.map((c) => {
         const source = entree.sources.get(c.source);

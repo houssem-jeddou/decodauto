@@ -102,7 +102,7 @@ describe('format 2 : briques (lot F1, F1.2)', () => {
   test('mots d\'une ligne d\'écart (comptage du pilote) et lien « Votre marque » compris', () => {
     assert.equal(motsDe('Plus strict : Toyota (arrêt immédiat).'), 5);
     assert.equal(motsDe(FORMAT2.lienVotreMarque), 2);
-    for (const id of ['moteur-orange-fixe', 'moteur-orange-clignotant', 'adblue-reserve', 'adblue-defaut', 'adblue-demarrage-impossible', 'batterie-rouge']) {
+    for (const id of Object.keys(brouillon.voyants).filter((id) => brouillon.voyants[id]?.ecart_court !== undefined)) {
       const ecart = brouillon.voyants[id]?.ecart_court ?? '';
       assert.ok(motsDe(ecart) + 2 <= ECART_COURT_MAX_MOTS, `${id} : ${motsDe(ecart) + 2} mots`);
     }
@@ -158,12 +158,10 @@ describe('format 2 : briques (lot F1, F1.2)', () => {
 });
 
 describe('format 2 : modèle des pages voyants', () => {
-  test('modeleDeLaPage : page voyant au format 2 → modèle du format 2 ; outil, code défaut et pneus au format 2 → pas encore livré (F1.3)', async () => {
+  test('modeleDeLaPage : page voyant au format 2 → modèle du format 2 ; code défaut et pneus au format 2 → pas encore livré (F1.3 ; outil : tests/outil-format2.test.ts ; panne et dossier : tests/format2-panne.test.ts)', async () => {
     const { page } = await pageDemo();
     assert.deepEqual(modeleDeLaPage('voyant', page), { modele: pageVoyantF2 });
     assert.deepEqual(modeleDeLaPage('voyant', { ...page, format: 1 } as PageEditoriale), { modele: pageVoyant });
-    assert.ok('absent' in modeleDeLaPage('voyant', { ...page, outil: true } as PageEditoriale));
-    // Panne et dossier : livrés en F1.3c (tests/format2-panne.test.ts) ; code défaut et pneus : F1.3b.
     for (const type of ['code-defaut', 'pneus'] as const) assert.match((modeleDeLaPage(type, page) as { absent: string }).absent, /format 2 .* F1\.3/);
   });
 

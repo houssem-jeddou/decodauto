@@ -17,8 +17,8 @@
 //   [colonne de côté, ordinateur] sommaire collant
 // Le H1 reste dans `main` (Base.astro) : la tête de page est le premier bloc de `main`, la colonne le second.
 //
-// Ce qui n'est pas encore au format 2 (F1.3, à dessiner d'abord) : outil voyants, pages codes, pneus et obligations, socle,
-// 404, panne et dossier ; modeleDeLaPage refuse une telle page au format 2 (la construction échoue).
+// Page outil voyants au format 2 : src/lib/outil-format2.ts (F1.3a). Ce qui n'est pas encore au format 2 (F1.3, à dessiner
+// d'abord) : pages codes, pneus et obligations, socle, 404, panne et dossier ; modeleDeLaPage refuse une telle page au format 2 (la construction échoue).
 // Module sans dépendance à l'exécution : tests, démonstration et construction l'utilisent tel quel.
 // ---------------------------------------------------------------------------------------------
 import { attributHtml, decoderEntites, texteHtml } from './html.ts';
@@ -56,7 +56,7 @@ import { citation, modeleTableauNotices, CLASSE_CITATION_NOTICE, FIN_TABLEAU_NOT
 import { emplacementPub } from './emplacements-pub.ts';
 import { indexerPlan } from './plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
-import { GRILLE_COUTS, LIBELLES_FOURCHETTES } from '../schemas/cout.ts';
+import { GRILLE_COUTS, LIBELLE_SELON_LE_VOYANT, LIBELLES_FOURCHETTES } from '../schemas/cout.ts';
 import type { Verdict } from '../schemas/listes.ts';
 import type { DonneesSite } from './gabarit.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
@@ -114,9 +114,10 @@ const FORMES: Readonly<Record<number, string>> = {
 export const formeGravite = (verdict: Verdict): string =>
   `<svg class="forme" data-icone-gravite="${graviteDuVerdict(verdict)}" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">${FORMES[graviteDuVerdict(verdict)] ?? ''}</svg>`;
 
-const HORLOGE =
+/** Horloge de l'urgence et balance de la ligne d'écart (décoratives) : encadré et cartes de l'outil voyants (outil-format2.ts). */
+export const HORLOGE =
   '<svg class="horloge" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
-const BALANCE =
+export const BALANCE =
   '<svg class="balance" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M12 3v18M5 21h14M4 7h16M7 7l-3 7h6zM17 7l-3 7h6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>';
 
 /** Tuile ronde d'un voyant « allumé » dans sa couleur de la base (charte graphique §1, point 2). Décorative. */
@@ -136,6 +137,14 @@ export function bandeauFormat2(entree: { adresseOutil?: string | undefined; pict
   const bouton = entree.adresseOutil !== undefined ? `<a class="bouton-voyant" href="${attributHtml(entree.adresseOutil)}" data-bouton-voyant>${icone}${texteHtml(FORMAT2.boutonVoyant)}</a>` : '';
   return `<div class="bandeau-int"><a class="nom-du-site" href="/">${logoEnLigne(32)}<span class="nom-texte">${nom}</span></a>${bouton}</div>`;
 }
+
+/**
+ * Adresse vers laquelle mène le bouton « Trouver mon voyant » du bandeau sur une page : celle de la page outil, sauf sur la
+ * page outil elle-même (le bouton y mènerait à la page affichée ; la demande n° 30, §6, l'a écarté du premier écran de
+ * l'outil ; revue de F1.3a).
+ */
+export const adresseBoutonVoyant = (adresseOutil: string | undefined, adressePage: string | undefined): string | undefined =>
+  adresseOutil !== undefined && adressePage !== adresseOutil ? adresseOutil : undefined;
 
 /** Pied du format 2 : « Signaler une erreur » (adresse de la page dans le message) et lien des mentions légales. */
 export function piedFormat2(adressePage?: string, adresseConfidentialite?: string): string {
@@ -185,8 +194,9 @@ export function ligneEncadreFormat2(ligne: LigneFormat2): string {
 
 /** Plage du coût probable, tranches en pastilles (« de [X] à [Y] ») ; « Selon le voyant » pour l'outil. */
 function plageHtml(cout: CoutResolu): string | undefined {
-  if (cout.de === undefined || cout.a === undefined) return undefined;
   const pastille = (libelle: string): string => `<span class="tranche">${texteHtml(libelle)}</span>`;
+  if (cout.selonLeVoyant) return pastille(LIBELLE_SELON_LE_VOYANT);
+  if (cout.de === undefined || cout.a === undefined) return undefined;
   const de = GRILLE_COUTS[cout.de].libelle;
   const a = GRILLE_COUTS[cout.a].libelle;
   return cout.de === cout.a ? pastille(de) : `de ${pastille(de)} à ${pastille(a)}`;
