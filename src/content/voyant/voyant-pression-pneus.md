@@ -48,11 +48,20 @@ causes:
     explication: "Quand le voyant clignote puis reste allumé, la surveillance n'est plus assurée : selon la notice Dacia Sandero 3, une roue sans capteur (roue de secours) ou un capteur défaillant ; selon la notice Peugeot 208, un dysfonctionnement à faire vérifier dans le réseau de la marque ou un atelier qualifié."
     pieces:
       - capteur-de-pression-des-pneus
+format: 2
+illustration:
+  fichier: voyant-pression-pneus-tableau-de-bord
+  alt: "Le voyant de pression des pneus allumé en orange au tableau de bord"
+  legende: "Le voyant de pression des pneus dessine un fer à cheval avec un point d’exclamation. Fixe : un pneu sous-gonflé, voire crevé. Clignotant environ une minute puis fixe : le système de surveillance est en défaut."
 ---
 
 ## Peut-on rouler avec le voyant de pression des pneus allumé ?
 
-Ce voyant est orange, mais la consigne retenue est celle de l'arrêt : {{verdict:pression-pneus}}. Plusieurs notices demandent de s'arrêter dès que possible pour contrôler les pneus : selon la notice Seat Ibiza, des pneus trop peu gonflés peuvent faire perdre le contrôle de la voiture. L'encadré signale l'écart entre marques. S'il clignote d'abord, puis reste allumé, c'est le système de surveillance qui est en défaut : {{verdict:pression-pneus-systeme}}.
+{{repere:pression-pneus}}
+
+Ce voyant est orange, mais la consigne retenue est celle de l'arrêt. Plusieurs notices demandent de s'arrêter dès que possible pour contrôler les pneus : selon la notice Seat Ibiza, des pneus trop peu gonflés peuvent faire perdre le contrôle de la voiture.
+
+L'encadré signale l'écart entre marques. S'il clignote d'abord, puis reste allumé, c'est le système de surveillance qui est en défaut : {{verdict:pression-pneus-systeme}}.
 
 Les notices lues pour cette page sont celles de ces modèles ; pour une autre génération ou un autre modèle, c'est la notice de votre voiture qui fait foi :
 
@@ -66,13 +75,13 @@ La notice de la Clio 5 phase 2 ne vaut pas pour une Clio 4, ni celle de la Seat 
 
 ## Que faire quand le voyant s'allume en roulant
 
+{{repere:pression-pneus}}
+
 La notice Peugeot 208 donne la marche à suivre la plus détaillée ({{cite:notice-peugeot-208|p. 110, « Alerte de sous-gonflage »}}) : réduire immédiatement la vitesse, éviter les coups de volant et les freinages brusques, s'arrêter dès que la circulation le permet, puis contrôler à froid la pression des quatre pneus, par exemple avec le compresseur du kit de dépannage. Elle prévient qu'une perte de pression ne déforme pas toujours le pneu de façon visible : un coup d'œil ne suffit pas. Si le contrôle n'est pas possible tout de suite, elle demande de rouler prudemment, à vitesse réduite ; en cas de crevaison, d'utiliser le kit ou la roue de secours.
 
 La notice Seat Ibiza demande aussi de réduire immédiatement la vitesse, d'éviter les virages et freinages brusques, de s'arrêter le plus rapidement possible et de contrôler la pression et l'état de tous les pneus. Elle prévient que des pneus trop peu gonflés peuvent s'endommager et faire perdre le contrôle de la voiture ({{cite:notice-seat-ibiza|p. 312}}).
 
 Dans les notices Renault Clio 5 phase 2 et Dacia Sandero 3, le message « Crevaison », affiché avec le témoin STOP, impose un arrêt impératif et immédiat ; la notice Dacia demande, pour le message « Pression pneus à réajuster », de vérifier et d'ajuster la pression à froid des quatre pneus, puis de réinitialiser le système ({{cite:notice-dacia-sandero-3|p. 177}}).
-
-Verdict retenu en haut de page : {{verdict:pression-pneus}}.
 
 ## Regonfler, puis réinitialiser : la manipulation de chaque notice
 
@@ -91,15 +100,21 @@ Si le voyant se rallume après une réinitialisation faite pneus froids et à la
 
 ## Le voyant clignote, puis reste allumé
 
-Verdict retenu en haut de page : {{verdict:pression-pneus-systeme}}. Le système de surveillance est en défaut et ne vous préviendra plus d'un sous-gonflage. La notice Peugeot 208 demande de faire vérifier le système dans le réseau de la marque ou un atelier qualifié ; une roue de secours de type « galette », ou de taille différente, peut aussi suspendre la surveillance jusqu'à ce qu'elle soit remplacée ({{cite:notice-peugeot-208|p. 111}}). Selon la notice Dacia Sandero 3, une roue sans capteur ou un capteur défaillant affiche « Capteurs pneus à contrôler » ({{cite:notice-dacia-sandero-3|p. 177}}). En attendant, vérifiez vous-même la pression des quatre pneus.
+{{repere:pression-pneus-systeme}}
+
+Le système de surveillance est en défaut et ne vous préviendra plus d'un sous-gonflage. La notice Peugeot 208 demande de faire vérifier le système dans le réseau de la marque ou un atelier qualifié ; une roue de secours de type « galette », ou de taille différente, peut aussi suspendre la surveillance jusqu'à ce qu'elle soit remplacée ({{cite:notice-peugeot-208|p. 111}}).
+
+Selon la notice Dacia Sandero 3, une roue sans capteur ou un capteur défaillant affiche « Capteurs pneus à contrôler » ({{cite:notice-dacia-sandero-3|p. 177}}). En attendant, vérifiez vous-même la pression des quatre pneus.
 
 ## Combien de temps peut-on rouler avec ce voyant ?
 
-Les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : ralentir et s'arrêter dès que possible pour contrôler les pneus. Deux notices prévoient ensuite de rouler doucement : la notice Peugeot 208, prudemment et à vitesse réduite quand le contrôle ne peut pas se faire tout de suite (p. 110) ; la notice Seat Ibiza, jusqu'à l'atelier spécialisé le plus proche, à faible vitesse, si le pneu n'est pas crevé et ne doit pas être remplacé tout de suite (p. 312). Verdict retenu en haut de page : {{verdict:pression-pneus}}.
+Les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : ralentir et s'arrêter dès que possible pour contrôler les pneus. Deux notices prévoient ensuite de rouler doucement : la notice Peugeot 208, prudemment et à vitesse réduite quand le contrôle ne peut pas se faire tout de suite ({{cite:notice-peugeot-208|p. 110}}) ; la notice Seat Ibiza, jusqu'à l'atelier spécialisé le plus proche, à faible vitesse, si le pneu n'est pas crevé et ne doit pas être remplacé tout de suite ({{cite:notice-seat-ibiza|p. 312}}). 
 
 ## Comment le système détecte un pneu dégonflé
 
-Les notices décrivent deux systèmes. Chez Peugeot, Seat et Dacia (avertisseur sans capteurs), le système compare la vitesse des roues, mesurée par leurs capteurs, à des valeurs de référence ({{cite:notice-peugeot-208|p. 110-111}} ; {{cite:notice-seat-ibiza|p. 311}} ; {{cite:notice-dacia-sandero-3|p. 178}}). Il ne mesure donc pas la pression elle-même : d'où la réinitialisation après chaque regonflage, et une alerte qui peut tarder, par exemple sous 40 km/h selon la notice Peugeot. D'autres voitures ont un capteur de pression dans chaque roue : la notice Dacia décrit aussi ce système ({{cite:notice-dacia-sandero-3|p. 177}}), et la notice Toyota parle des émetteurs de pression montés avec les valves ({{cite:notice-toyota-yaris|p. 261}}).
+Les notices décrivent deux systèmes. Chez Peugeot, Seat et Dacia (avertisseur sans capteurs), le système compare la vitesse des roues, mesurée par leurs capteurs, à des valeurs de référence ({{cite:notice-peugeot-208|p. 110-111}} ; {{cite:notice-seat-ibiza|p. 311}} ; {{cite:notice-dacia-sandero-3|p. 178}}).
+
+Ce système ne mesure donc pas la pression elle-même : d'où la réinitialisation après chaque regonflage, et une alerte qui peut tarder, par exemple sous 40 km/h selon la notice Peugeot. D'autres voitures ont un capteur de pression dans chaque roue : la notice Dacia décrit aussi ce système ({{cite:notice-dacia-sandero-3|p. 177}}), et la notice Toyota parle des émetteurs de pression montés avec les valves ({{cite:notice-toyota-yaris|p. 261}}).
 
 ## Voyant de pression des pneus et contrôle technique
 

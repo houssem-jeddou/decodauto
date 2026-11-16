@@ -1,0 +1,251 @@
+{
+  "avertissement": "Brouillon, jamais validé. Lignes d'écart courtes et « ce que demande la notice » des 26 lignes de la base voyants (lot F2, demande de changement n° 30), à valider avant publication.",
+  "voyants": {
+    "moteur-orange-fixe": {
+      "ecart_court": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (atelier le plus proche), Peugeot (garage rapidement), Renault et Dacia (consulter au plus tôt).",
+      "demandes": {
+        "notice-peugeot-208|p. 15, « Système d'autodiagnostic moteur » ; renvoi (3) p. 13": "Se rendre rapidement dans le réseau ou un atelier qualifié",
+        "notice-seat-ibiza|p. 288, « Gestion du moteur et système d'épuration des gaz d'échappement », Témoins": "Rouler prudemment jusqu’à l’atelier le plus proche",
+        "notice-renault-clio-5|p. 139, « Témoin de contrôle du système antipollution » (repris p. 199)": "Consulter au plus tôt un représentant de la marque",
+        "notice-dacia-sandero-3|p. 113, « Témoin de contrôle du système antipollution »": "Consulter au plus tôt un représentant de la marque",
+        "notice-toyota-yaris|p. 293, 7.2.4 « Si un voyant s'allume », Voyant de dysfonctionnement": "Arrêter immédiatement le véhicule dans un endroit sûr"
+      }
+    },
+    "moteur-orange-clignotant": {
+      "ecart_court": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Peugeot et Seat (garage, catalyseur menacé), Renault et Dacia (régime réduit, consulter au plus tôt).",
+      "demandes": {
+        "notice-peugeot-208|p. 15, « Système d'autodiagnostic moteur » ; renvoi (2) p. 13": "Faire impérativement appel au réseau (catalyseur menacé)",
+        "notice-seat-ibiza|p. 288, « Gestion du moteur et système d'épuration des gaz d'échappement », Témoins": "Rouler prudemment vers l’atelier le plus proche (catalyseur menacé)",
+        "notice-renault-clio-5|p. 139, « Témoin de contrôle du système antipollution » (repris p. 199)": "Réduire le régime moteur, puis consulter au plus tôt",
+        "notice-dacia-sandero-3|p. 113, « Témoin de contrôle du système antipollution »": "Réduire le régime moteur, puis consulter au plus tôt",
+        "notice-toyota-yaris|p. 292-293, 7.2.4 « Si un voyant s'allume », Voyant de dysfonctionnement": "Arrêter immédiatement le véhicule dans un endroit sûr"
+      }
+    },
+    "stop": {
+      "demandes": {
+        "notice-renault-clio-5|p. 137, « Témoins lumineux », Témoin d'arrêt impératif (STOP)": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer",
+        "notice-dacia-sandero-3|p. 110, « Témoins lumineux », témoin STOP": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer",
+        "notice-peugeot-208|p. 13, « Témoins de couleur rouge », STOP ; renvois (1) et (2) p. 13": "S’arrêter impérativement, puis appeler le réseau",
+        "notice-citroen-c3|p. 10, « Liste des témoins », Témoins de couleur rouge, STOP ; renvois (1) et (2) p. 9": "S’arrêter impérativement, puis appeler le réseau"
+      }
+    },
+    "moteur-rouge": {
+      "demandes": {
+        "notice-peugeot-208|p. 13, « Témoins de couleur rouge », Système d'autodiagnostic moteur ; renvois (1) et (2) p. 13": "S’arrêter impérativement, couper le contact, appeler le réseau",
+        "notice-renault-clio-5|p. 125, « Messages d'alerte » (et p. 187 et 189)": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer",
+        "notice-dacia-sandero-3|p. 102, « Messages d'alerte » (et p. 161)": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer"
+      }
+    },
+    "huile-pression-rouge": {
+      "demandes": {
+        "notice-peugeot-208|p. 13, « Témoins de couleur rouge », Pression d'huile moteur ; renvois (1) et (2) p. 13": "S’arrêter impérativement, couper le contact, appeler le réseau",
+        "notice-seat-ibiza|p. 294, « Huile moteur », Témoin d'alerte": "S’arrêter immédiatement, couper le moteur, vérifier l’huile",
+        "notice-renault-clio-5|p. 137-138, « Témoin de pression d'huile »": "S’arrêter impérativement, couper le contact, vérifier l’huile",
+        "notice-dacia-sandero-3|p. 111, « Témoin de pression d'huile »": "S’arrêter impérativement, couper le contact, vérifier l’huile",
+        "notice-toyota-yaris|p. 292, 7.2.4 « Si un voyant s'allume », Voyant de faible pression d'huile moteur": "Arrêter immédiatement le véhicule dans un endroit sûr"
+      }
+    },
+    "huile-niveau": {
+      "ecart_court": "Plus stricts : Seat (contrôle immédiat) et Peugeot (appoint impératif). Moins strict : Toyota (vérifier et faire l’appoint, sans délai indiqué).",
+      "demandes": {
+        "notice-seat-ibiza|p. 294, « Huile moteur », Témoin d'alerte": "Contrôler immédiatement le niveau, faire l’appoint dès que possible",
+        "notice-peugeot-208|p. 20, « Indicateur de niveau d'huile moteur », Manque d'huile": "Vérifier à la jauge, puis compléter impérativement le niveau",
+        "notice-toyota-yaris|p. 299, 7.2.5 « Si un message d'avertissement est affiché »": "Vérifier le niveau et faire l’appoint si nécessaire"
+      }
+    },
+    "entretien-vidange": {
+      "ecart_court": "Plus stricts : Renault et Dacia (révision au plus vite, conduite avec ménagement). Moins stricts : Peugeot, Seat et Toyota (simple rappel d’entretien).",
+      "demandes": {
+        "notice-peugeot-208|p. 19-20, « Indicateur d'entretien », Clé d'entretien": "Faire la révision très prochainement, dès que possible si dépassée",
+        "notice-seat-ibiza|p. 90, « Périodicité d'entretien », Date d'entretien": "Faire l’entretien, la vidange ou l’inspection demandés",
+        "notice-renault-clio-5|p. 122, « Ordinateur de bord », Autonomie de révision ; témoin Service p. 136": "Faire la révision au plus vite, en conduisant avec ménagement",
+        "notice-dacia-sandero-3|p. 98, « Ordinateur de bord », Autonomie de révision ; témoin Service p. 110": "Faire la révision au plus vite, en conduisant avec ménagement",
+        "notice-toyota-yaris|p. 300, 7.2.5 « Si un message d'avertissement est affiché »": "Faire vidanger l’huile et changer le filtre à huile"
+      }
+    },
+    "batterie-rouge": {
+      "ecart_court": "Plus stricts : Peugeot, Renault, Dacia et Toyota (arrêt imposé). Moins strict : Seat (atelier le plus proche, immédiatement).",
+      "demandes": {
+        "notice-peugeot-208|p. 13, « Témoins de couleur rouge », Charge batterie 12 V ; renvoi (1) p. 13": "S’arrêter impérativement et couper le contact",
+        "notice-seat-ibiza|p. 302, « Batterie », Témoin d'alerte": "Se rendre immédiatement à l’atelier le plus proche",
+        "notice-renault-clio-5|p. 137, « Témoin de charge de batterie »": "S’arrêter et appeler un représentant de la marque",
+        "notice-dacia-sandero-3|p. 112, « Témoin de charge de batterie »": "S’arrêter et appeler un représentant de la marque",
+        "notice-toyota-yaris|p. 292, 7.2.4 « Si un voyant s'allume », Voyant du système de charge": "Arrêter immédiatement le véhicule dans un endroit sûr"
+      }
+    },
+    "frein-rouge": {
+      "demandes": {
+        "notice-peugeot-208|p. 14, « Freinage » ; renvois (1) et (2) p. 13": "S’arrêter impérativement, puis compléter le liquide de frein",
+        "notice-seat-ibiza|p. 251, « Système de freinage », Témoins": "Ne pas continuer de rouler",
+        "notice-renault-clio-5|p. 137, « Témoin d'incident sur circuit de freinage »": "S’arrêter et appeler un représentant de la marque",
+        "notice-dacia-sandero-3|p. 110-111, « Témoin d'incident sur circuit de freinage »": "S’arrêter et appeler un représentant de la marque",
+        "notice-toyota-yaris|p. 292, 7.2.4 « Si un voyant s'allume », Voyant du système de freinage": "Arrêter immédiatement le véhicule dans un endroit sûr"
+      }
+    },
+    "frein-stationnement": {
+      "demandes": {
+        "notice-peugeot-208|p. 14, « Frein de stationnement manuel » et « Frein de stationnement électrique »": "Signale un frein de stationnement serré ou mal desserré",
+        "notice-seat-ibiza|p. 251, « Système de freinage », Témoins": "Signale le frein à main serré, jusqu’à son desserrage",
+        "notice-renault-clio-5|p. 190, « Frein de parking assisté »": "Confirme le serrage du frein de parking assisté",
+        "notice-dacia-sandero-3|p. 155, « Frein de parking assisté »": "Confirme le serrage du frein de parking assisté",
+        "notice-toyota-yaris|p. 118, 4.2.5 « Frein de stationnement »": "Relâcher le frein de stationnement (alerte en roulant)"
+      }
+    },
+    "adblue-reserve": {
+      "ecart_court": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km). Moins strict : Seat (dans l’autonomie affichée).",
+      "demandes": {
+        "notice-peugeot-208|p. 15, « AdBlue (BlueHDi) »": "Faire un appoint (autonomie de 2 400 à 800 km)",
+        "notice-peugeot-208|p. 15, « AdBlue (BlueHDi) » ; renvoi (3) p. 13": "Faire rapidement l’appoint, impérativement sous 100 km",
+        "notice-seat-ibiza|p. 286, « AdBlue », Témoins d'alerte et de contrôle": "Faire l’appoint dans les kilomètres indiqués",
+        "notice-renault-clio-5|p. 166, « Réservoir réactif », Entretien/Autonomie#1": "Prévoir le remplissage de réactif (1 200 à 800 km)",
+        "notice-renault-clio-5|p. 166, « Réservoir réactif », Entretien/Autonomie#2": "Faire le plein de réactif dès que possible",
+        "notice-dacia-sandero-3|p. 138, « Réservoir réactif », Entretien/Autonomie#1": "Prévoir un remplissage ou appoint (1 200 à 800 km)",
+        "notice-dacia-sandero-3|p. 138, « Réservoir réactif », Entretien/Autonomie#2": "Faire le plein de réactif dès que possible"
+      }
+    },
+    "adblue-demarrage-impossible": {
+      "ecart_court": "Plus strict : Seat (arrêt en lieu sûr). Moins stricts : Peugeot, Renault et Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé).",
+      "demandes": {
+        "notice-seat-ibiza|p. 286, « AdBlue », Témoins d'alerte et de contrôle#1": "S’arrêter en lieu sûr et plat pour l’appoint",
+        "notice-seat-ibiza|p. 286, « AdBlue », Témoins d'alerte et de contrôle#2": "S’adresser à un atelier et faire réviser le système",
+        "notice-peugeot-208|p. 15-16, « AdBlue (BlueHDi) » et « Système d'antipollution SCR » ; renvoi (2) p. 13": "Faire un appoint, ou appeler le réseau, pour redémarrer",
+        "notice-renault-clio-5|p. 166-167, « Réservoir réactif »": "Faire soi-même le plein de réactif pour redémarrer",
+        "notice-dacia-sandero-3|p. 138-139, « Réservoir réactif »": "Faire soi-même le plein de réactif pour redémarrer"
+      }
+    },
+    "adblue-defaut": {
+      "ecart_court": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué).",
+      "demandes": {
+        "notice-seat-ibiza|p. 286, « AdBlue », Témoins d'alerte et de contrôle": "S’adresser à un atelier et faire réviser le système",
+        "notice-renault-clio-5|p. 167, « Réservoir réactif », Anomalies de fonctionnement du système": "Consulter un représentant de la marque le plus tôt possible",
+        "notice-dacia-sandero-3|p. 139, « Réservoir réactif », Anomalies de fonctionnement du système": "Consulter un représentant de la marque le plus tôt possible"
+      }
+    },
+    "fap": {
+      "ecart_court": "Plus stricts : Peugeot, Renault et Dacia (rouler pour régénérer dès que la circulation le permet). Moins strict : Seat (régénération sans délai indiqué).",
+      "demandes": {
+        "notice-peugeot-208|p. 14-15, « Filtre à particules (Diesel) »": "Régénérer le filtre en roulant à 60 km/h minimum",
+        "notice-seat-ibiza|p. 288-290, « Filtre à particules »": "Rouler entre 50 et 120 km/h pour régénérer",
+        "notice-renault-clio-5|p. 186, « Particularités des versions Diesel », Filtre à particules": "Continuer à rouler jusqu’à l’extinction du témoin",
+        "notice-dacia-sandero-3|p. 160, « Particularités des versions Diesel », Filtre à particules": "Continuer à rouler jusqu’à l’extinction du témoin"
+      }
+    },
+    "prechauffage": {
+      "demandes": {
+        "notice-peugeot-208|p. 14, « Préchauffage moteur (Diesel) »": "Attendre l’extinction du témoin avant de démarrer",
+        "notice-seat-ibiza|p. 289, « Gestion du moteur », Témoins": "Démarrer une fois le témoin éteint",
+        "notice-renault-clio-5|p. 139, « Témoin de préchauffage (version Diesel) »": "Démarrer une fois le témoin éteint",
+        "notice-dacia-sandero-3|p. 113, « Témoin de préchauffage (version Diesel) »": "Démarrer une fois le témoin éteint"
+      }
+    },
+    "airbag-defaut": {
+      "ecart_court": "Plus stricts : Dacia avec message, Seat, Toyota et Renault (contrôle sans attendre). Moins stricts : Peugeot (sans délai indiqué), Dacia témoin seul (rapidement).",
+      "demandes": {
+        "notice-peugeot-208|p. 17, « Airbags » ; renvoi (3) p. 13": "Se rendre dans le réseau ou un atelier qualifié",
+        "notice-seat-ibiza|p. 26-27, « Témoins de contrôle du système d'airbags »": "Faire contrôler immédiatement ; pas de siège enfant à l’avant",
+        "notice-renault-clio-5|p. 137, « Témoin d'airbag »": "Consulter au plus tôt un représentant de la marque",
+        "notice-dacia-sandero-3|p. 111, « Témoin d'Airbag »": "Consulter rapidement un représentant de la marque",
+        "notice-toyota-yaris|p. 293, 7.2.4 « Si un voyant s'allume », Voyant SRS": "Faire immédiatement vérifier le véhicule",
+        "notice-dacia-sandero-3|p. 101, « Messages d'anomalies de fonctionnement »": "Aller au plus tôt chez un représentant, avec ménagement"
+      }
+    },
+    "airbag-passager-desactive": {
+      "demandes": {
+        "notice-peugeot-208|p. 17-18, « Airbag passager avant (OFF) »": "Signale l’airbag passager neutralisé, commande sur OFF",
+        "notice-seat-ibiza|p. 26, « Témoins de contrôle du système d'airbags »": "Vérifier si l’airbag doit rester désactivé",
+        "notice-renault-clio-5|p. 106, « Désactivation airbag passager avant »": "Vérifier impérativement que le témoin est allumé (siège enfant possible)",
+        "notice-dacia-sandero-3|p. 84, « Désactivation de l'airbag passager avant »": "Vérifier impérativement que le témoin est allumé (siège enfant possible)",
+        "notice-toyota-yaris|p. 37, « Témoin “PASSENGER AIR BAG” »": "Sans siège enfant, vérifier que l’airbag est sur ON"
+      }
+    },
+    "abs": {
+      "ecart_court": "Plus stricts : Renault et Dacia avec témoin Service, Toyota (sans attendre). Moins stricts : Peugeot (sans délai indiqué), Renault et Dacia témoin seul (rapidement).",
+      "demandes": {
+        "notice-peugeot-208|p. 17, « Antiblocage des roues (ABS) » ; renvoi (3) p. 13": "Rouler prudemment à allure modérée, puis aller au garage",
+        "notice-renault-clio-5|p. 138, « Témoin antiblocage des roues »": "Consulter rapidement un représentant de la marque",
+        "notice-renault-clio-5|p. 212, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement ; témoin Service p. 136": "Aller au plus tôt chez un représentant, avec ménagement",
+        "notice-dacia-sandero-3|p. 112, « Témoin antiblocage des roues »": "Consulter rapidement un représentant de la marque",
+        "notice-dacia-sandero-3|p. 184, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement ; témoin Service p. 110": "Aller au plus tôt chez un représentant, avec ménagement",
+        "notice-toyota-yaris|p. 293, 7.2.4 « Si un voyant s'allume », Voyant ABS": "Faire immédiatement vérifier le véhicule"
+      }
+    },
+    "abs-et-frein": {
+      "demandes": {
+        "notice-peugeot-208|p. 14, « Freinage » (deux témoins) ; renvois (1) et (2) p. 13": "S’arrêter impérativement, couper le contact, appeler le réseau",
+        "notice-seat-ibiza|p. 251, « Système de freinage », AVERTISSEMENT": "S’arrêter et demander l’aide d’un technicien",
+        "notice-renault-clio-5|p. 213, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement": "S’arrêter impérativement et immédiatement, sans freiner brusquement",
+        "notice-dacia-sandero-3|p. 184-185, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement": "S’arrêter impérativement et immédiatement, sans freiner brusquement",
+        "notice-toyota-yaris|p. 298, MISE EN GARDE « Si le voyant ABS et le voyant du système de freinage restent allumés »": "Arrêter immédiatement le véhicule dans un endroit sûr"
+      }
+    },
+    "esp-clignotant": {
+      "ecart_court": "Plus strict : Seat (adapter immédiatement sa vitesse). Moins stricts : Peugeot, Renault, Dacia et Toyota (système en action, sans consigne).",
+      "demandes": {
+        "notice-seat-ibiza|p. 254-255, « Systèmes de stabilisation et assistance au freinage », Témoins et AVERTISSEMENT": "Adapter immédiatement sa vitesse à l’état de la route",
+        "notice-peugeot-208|p. 17, « Contrôle dynamique de stabilité (CDS) / Antipatinage des roues (ASR) »": "Signale la régulation en cas de perte d’adhérence",
+        "notice-renault-clio-5|p. 213, « Contrôle dynamique de conduite ESC », Principe de fonctionnement": "Signale que le système corrige la trajectoire",
+        "notice-dacia-sandero-3|p. 185, « Contrôle dynamique de conduite ESC », Principe de fonctionnement": "Signale que le système corrige la trajectoire",
+        "notice-toyota-yaris|p. 205, « Lorsque les systèmes TRC/VSC/de contrôle du roulis de remorque fonctionnent »": "Signale que les systèmes antidérapage sont en action"
+      }
+    },
+    "esp-defaut": {
+      "ecart_court": "Plus stricts : Renault et Dacia (représentant au plus tôt, avec ménagement), Toyota (vérification immédiate). Moins strict : Peugeot (garage, sans délai indiqué).",
+      "demandes": {
+        "notice-peugeot-208|p. 17, « Contrôle dynamique de stabilité (CDS) / Antipatinage des roues (ASR) » ; renvoi (3) p. 13": "Se rendre dans le réseau ou un atelier qualifié",
+        "notice-renault-clio-5|p. 213, « Contrôle dynamique de conduite ESC », Anomalies de fonctionnement ; témoin Service p. 136": "Aller au plus tôt chez un représentant, avec ménagement",
+        "notice-dacia-sandero-3|p. 185, « Contrôle dynamique de conduite ESC », Anomalies de fonctionnement ; témoin Service p. 110": "Aller au plus tôt chez un représentant, avec ménagement",
+        "notice-toyota-yaris|p. 297, 7.2.4 « Si un voyant s'allume », Témoin de dérapage": "Faire immédiatement vérifier le véhicule"
+      }
+    },
+    "pression-pneus": {
+      "ecart_court": "Plus stricts : Seat, Toyota, Peugeot p. 110, Renault et Dacia si « Crevaison » (arrêt). Moins stricts : Peugeot p. 18 et Dacia (vérifier la pression).",
+      "demandes": {
+        "notice-peugeot-208|p. 18, « Sous-gonflage »": "Contrôler la pression au plus vite, puis réinitialiser le système",
+        "notice-peugeot-208|p. 110, « Détection de sous-gonflage », Alerte de sous-gonflage": "Ralentir, puis s’arrêter dès que la circulation le permet",
+        "notice-seat-ibiza|p. 311-312, « Systèmes de contrôle de la pression des pneus », Témoin de contrôle et AVERTISSEMENT": "Ralentir, s’arrêter au plus vite et contrôler les pneus",
+        "notice-dacia-sandero-3|p. 177, « Système de surveillance de pression des pneumatiques », Anomalies de gonflage possibles": "Vérifier et ajuster la pression à froid, puis réinitialiser",
+        "notice-toyota-yaris|p. 295 et 298, Voyant de faible pression des pneus et MISE EN GARDE": "S’arrêter en lieu sûr, puis régler la pression",
+        "notice-renault-clio-5|p. 125, « Messages d'alerte »": "Avec le message de crevaison, s’arrêter impérativement et immédiatement",
+        "notice-dacia-sandero-3|p. 102, « Messages d'alerte »": "Avec le message de crevaison, s’arrêter impérativement et immédiatement"
+      }
+    },
+    "pression-pneus-systeme": {
+      "demandes": {
+        "notice-peugeot-208|p. 18, « Sous-gonflage » ; renvoi (3) p. 13": "Vérifier dès que possible la pression des pneus",
+        "notice-dacia-sandero-3|p. 177, Anomalies de gonflage possibles ; témoin Service p. 110": "Aller au plus tôt chez un représentant, avec ménagement",
+        "notice-toyota-yaris|p. 295 et 297, Voyant de faible pression des pneus": "Faire immédiatement vérifier le véhicule"
+      }
+    },
+    "direction-orange": {
+      "ecart_court": "Plus strict : Toyota (vérification immédiate). Moins stricts : Peugeot et Seat (rouler prudemment jusqu’au garage, sans délai indiqué).",
+      "demandes": {
+        "notice-peugeot-208|p. 17, « Direction assistée » ; renvoi (3) p. 13": "Rouler prudemment à allure modérée, puis aller au garage",
+        "notice-seat-ibiza|p. 227, « Direction », Témoin de contrôle": "Se rendre avec prudence dans un atelier spécialisé",
+        "notice-toyota-yaris|p. 294 et 298, Voyant du système de direction assistée électrique (jaune)": "Faire immédiatement vérifier le véhicule"
+      }
+    },
+    "direction-rouge": {
+      "ecart_court": "Plus stricts : Seat, Peugeot, Renault et Dacia (arrêt imposé). Moins strict : Toyota (vérification immédiate, sans arrêt imposé).",
+      "demandes": {
+        "notice-seat-ibiza|p. 227, « Direction », Témoin de contrôle": "S’arrêter dès que possible et en toute sécurité",
+        "notice-peugeot-208|p. 13, « STOP » ; renvois (1) et (2) p. 13": "S’arrêter impérativement (dysfonctionnement grave)",
+        "notice-renault-clio-5|p. 125, « Messages d'alerte »": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer",
+        "notice-dacia-sandero-3|p. 102, « Messages d'alerte »": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer",
+        "notice-toyota-yaris|p. 294 et 298, Voyant du système de direction assistée électrique (rouge)": "Faire immédiatement vérifier le véhicule",
+        "notice-renault-clio-5|p. 138, « Témoin de direction à assistance variable » ; témoin STOP p. 136-137": "S’arrêter impérativement et immédiatement, appeler un représentant",
+        "notice-dacia-sandero-3|p. 113, « Témoin de direction à assistance variable » ; témoin STOP p. 110-111": "S’arrêter impérativement et immédiatement, appeler un représentant",
+        "notice-toyota-yaris|p. 298, MISE EN GARDE « Lorsque le voyant du système de direction assistée électrique s'allume »": "Tenir fermement le volant, le bouger avec plus de force"
+      }
+    },
+    "temperature-rouge": {
+      "demandes": {
+        "notice-peugeot-208|p. 13, « Température maxi du liquide de refroidissement » ; renvois (1) et (2) p. 13": "S’arrêter impérativement ; moteur refroidi, compléter le niveau",
+        "notice-seat-ibiza|p. 89, « Indicateur de température du liquide de refroidissement du moteur », Témoin d'alerte et de contrôle": "S’arrêter immédiatement, couper le moteur, le laisser refroidir",
+        "notice-renault-clio-5|p. 139, « Témoin d'alerte de température du liquide de refroidissement »": "S’arrêter, laisser tourner au ralenti une ou deux minutes",
+        "notice-dacia-sandero-3|p. 111, « Témoin d'alerte de température du liquide de refroidissement »": "S’arrêter, laisser tourner au ralenti une ou deux minutes",
+        "notice-toyota-yaris|p. 292, 7.2.4 « Si un voyant s'allume », Voyant de température élevée du liquide de refroidissement": "Arrêter immédiatement le véhicule dans un endroit sûr",
+        "notice-toyota-yaris|p. 322-323, 7.2.11 « Si votre véhicule surchauffe », Mesures correctives": "S’arrêter, couper la climatisation puis le moteur"
+      }
+    }
+  }
+}

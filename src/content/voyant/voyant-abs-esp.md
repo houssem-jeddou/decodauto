@@ -61,17 +61,26 @@ causes:
     explication: "Quand les voyants ABS et freinage s'allument ensemble, la notice Peugeot 208 indique une défaillance du répartiteur électronique de freinage, et les notices Renault Clio 5 phase 2 et Dacia Sandero 3 une défaillance des dispositifs de freinage, sans nommer la pièce."
     pieces:
       - bloc-abs
+format: 2
+illustration:
+  fichier: voyant-abs-esp-tableau-de-bord
+  alt: "Les voyants ABS et ESP allumés en orange, avec le voyant de freinage rouge"
+  legende: "ABS : les lettres dans un cercle. ESP : une voiture qui dérape. Le voyant ABS allumé avec le voyant rouge de freinage signale une alerte plus grave : voyez l’encadré."
 ---
 
 ## Peut-on rouler avec le voyant ABS allumé ?
 
 Tout dépend du voyant de freinage rouge.
 
-**Voyant ABS seul** : {{verdict:abs}}. Les notices Peugeot 208, Renault Clio 5 phase 2 et Dacia Sandero 3 disent que le freinage reste assuré comme sur une voiture sans ABS ({{cite:notice-peugeot-208|p. 17}}, {{cite:notice-renault-clio-5|p. 138}}, {{cite:notice-dacia-sandero-3|p. 112}}) : vous pouvez donc rouler, mais sans antiblocage, les roues peuvent se bloquer lors d'un freinage fort. Peugeot demande de rouler prudemment à allure modérée jusqu'au garage, Toyota de faire vérifier la voiture immédiatement ({{cite:notice-toyota-yaris|p. 293}}). L'encadré retient la consigne la plus prudente : faire vérifier sans attendre, en roulant prudemment. Aucune des notices lues ne donne de distance à ne pas dépasser.
+**Voyant ABS seul** : {{verdict:abs}}. Les notices Peugeot 208, Renault Clio 5 phase 2 et Dacia Sandero 3 disent que le freinage reste assuré comme sur une voiture sans ABS ({{cite:notice-peugeot-208|p. 17}}, {{cite:notice-renault-clio-5|p. 138}}, {{cite:notice-dacia-sandero-3|p. 112}}) : vous pouvez donc rouler, mais sans antiblocage, les roues peuvent se bloquer lors d'un freinage fort. Peugeot demande de rouler prudemment à allure modérée jusqu'au garage, Toyota de faire vérifier la voiture immédiatement ({{cite:notice-toyota-yaris|p. 293}}).
+
+L'encadré retient la consigne la plus prudente : faire vérifier sans attendre, en roulant prudemment. Aucune des notices lues ne donne de distance à ne pas dépasser.
 
 Le voyant ABS montre les lettres ABS dans un cercle. Le règlement ONU n° 121, qui fixe la couleur de certains voyants, le veut jaune ({{cite:reglement-onu-121|tableau, n° 26}}) ; la notice Peugeot 208 le range parmi les témoins orange ({{cite:notice-peugeot-208|p. 14 et 17}}).
 
-**Voyants ABS et freinage rouge allumés ensemble** : {{verdict:abs-et-frein}}. La notice Toyota Yaris prévient que la voiture devient très instable au freinage ({{cite:notice-toyota-yaris|p. 298}}). Selon la notice Seat Ibiza, les roues arrière peuvent se bloquer et l'arrière de la voiture déraper ({{cite:notice-seat-ibiza|p. 251}}). Les notices Renault et Dacia, quand plusieurs témoins s'allument avec le message « Panne du système de freinage », disent que le freinage n'est plus que partiellement assuré, qu'il est dangereux de freiner brusquement et que l'arrêt est impératif et immédiat ({{cite:notice-renault-clio-5|p. 213}}, {{cite:notice-dacia-sandero-3|p. 184-185}}). Arrêtez-vous en freinant progressivement, puis faites appel à un garage ou à l'assistance.
+**Voyants ABS et freinage rouge allumés ensemble** : {{verdict:abs-et-frein}}. La notice Toyota Yaris prévient que la voiture devient très instable au freinage ({{cite:notice-toyota-yaris|p. 298}}). Selon la notice Seat Ibiza, les roues arrière peuvent se bloquer et l'arrière de la voiture déraper ({{cite:notice-seat-ibiza|p. 251}}).
+
+Les notices Renault et Dacia, quand plusieurs témoins s'allument avec le message « Panne du système de freinage », disent que le freinage n'est plus que partiellement assuré, qu'il est dangereux de freiner brusquement et que l'arrêt est impératif et immédiat ({{cite:notice-renault-clio-5|p. 213}}, {{cite:notice-dacia-sandero-3|p. 184-185}}). Arrêtez-vous en freinant progressivement, puis faites appel à un garage ou à l'assistance.
 
 Les notices lues pour cette page sont celles de ces modèles ; pour une autre génération ou un autre modèle, c'est la notice de votre voiture qui fait foi :
 
@@ -83,15 +92,21 @@ Les notices lues pour cette page sont celles de ces modèles ; pour une autre g�
 
 ## Voyant ESP qui clignote ou allumé fixe
 
-Le voyant ESP montre une voiture qui glisse, avec deux traces en zigzag derrière elle : jaune dans la notice Seat Ibiza ({{cite:notice-seat-ibiza|p. 93-94}}), orange dans la notice Peugeot 208. Le système appelé ESP sur cette page porte d'autres noms dans les notices : CDS chez Peugeot, ESC chez Renault, Dacia et Seat, VSC chez Toyota. Il corrige la trajectoire en agissant sur le freinage de certaines roues ou sur la puissance du moteur ({{cite:notice-renault-clio-5|p. 213}}). Les notices l'associent à l'antipatinage (ASR chez Peugeot et Seat, TRC chez Toyota).
+Le voyant ESP montre une voiture qui glisse, avec deux traces en zigzag derrière elle : jaune dans la notice Seat Ibiza ({{cite:notice-seat-ibiza|p. 93-94}}), orange dans la notice Peugeot 208. Le système appelé ESP sur cette page porte d'autres noms dans les notices : CDS chez Peugeot, ESC chez Renault, Dacia et Seat, VSC chez Toyota.
 
-- **Il clignote en roulant** : le système est en action, il corrige une perte d'adhérence ou de trajectoire ({{cite:notice-peugeot-208|p. 17}}). Verdict retenu : {{verdict:esp-clignotant}}. Pour Peugeot, Renault, Dacia et Toyota, c'est son fonctionnement normal ; la notice Seat demande d'adapter immédiatement sa vitesse à l'état de la route ({{cite:notice-seat-ibiza|p. 255}}), et c'est la consigne retenue.
+Ce système corrige la trajectoire en agissant sur le freinage de certaines roues ou sur la puissance du moteur ({{cite:notice-renault-clio-5|p. 213}}). Les notices l'associent à l'antipatinage (ASR chez Peugeot et Seat, TRC chez Toyota).
+
+- **Il clignote en roulant** : le système est en action, il corrige une perte d'adhérence ou de trajectoire ({{cite:notice-peugeot-208|p. 17}}). Pour Peugeot, Renault, Dacia et Toyota, c'est son fonctionnement normal ; la notice Seat demande d'adapter immédiatement sa vitesse à l'état de la route ({{cite:notice-seat-ibiza|p. 255}}), et c'est la consigne retenue.
 - **Il reste allumé fixe** : si vous ne l'avez pas désactivé vous-même, ou s'il s'allume avec le témoin Service ou un message, le système est en défaut ({{verdict:esp-defaut}}). La voiture ne corrige plus les dérapages : roulez prudemment, surtout sur route mouillée ou glissante.
 - **Un témoin marqué OFF** : chez Peugeot, ce témoin à part signale le système désactivé, qui se réactive de lui-même au démarrage et à partir d'environ 50 km/h ({{cite:notice-peugeot-208|p. 17}}) ; la notice Seat Ibiza décrit à part l'antipatinage désactivé à la main, ou le contrôle de stabilité en mode Sport ({{cite:notice-seat-ibiza|p. 254}}). Les notices Renault, Dacia et Toyota nomment aussi un témoin propre au système indisponible ou désactivé ({{cite:notice-renault-clio-5|p. 138}}, {{cite:notice-dacia-sandero-3|p. 112}}, {{cite:notice-toyota-yaris|p. 62-64}}), sans toujours dire quand il s'allume : si vous n'avez rien désactivé, c'est la consigne du voyant fixe qui s'applique.
 
 ## Voyants ABS et ESP allumés en même temps
 
-C'est un cas prévu par les notices. Selon la notice Seat Ibiza, le contrôle de stabilité fonctionne avec l'ABS : si l'ABS est défaillant, le voyant ESP s'allume aussi ({{cite:notice-seat-ibiza|p. 254}}). Dans les notices Renault Clio 5 phase 2 et Dacia Sandero 3, les voyants ABS et Service s'allument avec des messages sur l'ABS, le système de freinage (« Système freinage à contrôler ») et l'ESC : l'ABS, le contrôle de stabilité et l'aide au freinage d'urgence sont désactivés, et le freinage est toujours assuré ({{cite:notice-renault-clio-5|p. 212}}, {{cite:notice-dacia-sandero-3|p. 184}}). La consigne est alors celle du voyant ABS : {{verdict:abs}}. Si le voyant de freinage rouge s'y ajoute, c'est celle de l'arrêt.
+{{repere:abs}}
+
+C'est un cas prévu par les notices. Selon la notice Seat Ibiza, le contrôle de stabilité fonctionne avec l'ABS : si l'ABS est défaillant, le voyant ESP s'allume aussi ({{cite:notice-seat-ibiza|p. 254}}). Dans les notices Renault Clio 5 phase 2 et Dacia Sandero 3, les voyants ABS et Service s'allument avec des messages sur l'ABS, le système de freinage (« Système freinage à contrôler ») et l'ESC : l'ABS, le contrôle de stabilité et l'aide au freinage d'urgence sont désactivés, et le freinage est toujours assuré ({{cite:notice-renault-clio-5|p. 212}}, {{cite:notice-dacia-sandero-3|p. 184}}).
+
+La consigne est alors celle du voyant ABS : {{verdict:abs}}. Si le voyant de freinage rouge s'y ajoute, c'est celle de l'arrêt.
 
 ## Voyant ESP et message « Défaut frein de parking » (Peugeot 208)
 
@@ -115,4 +130,8 @@ Les notices disent que le système est défaillant, sans nommer la pièce. L'ann
 
 ## Voyants ABS et ESP au contrôle technique
 
-L'annexe I de l'arrêté du 18 juin 1991 classe en défaillance majeure le dispositif d'alerte de l'ABS qui indique un mauvais fonctionnement du système, comme un dispositif d'alerte qui fonctionne mal ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 1.6.1}}). Une défaillance majeure impose une contre-visite dans les deux mois ({{cite:arrete-1991-06-18-controle-technique|article 7}}). Le contrôle électronique de stabilité a son propre point : un indicateur de dysfonctionnement qui fait état d'une défaillance du système, ou un commutateur endommagé ou qui ne fonctionne pas correctement, y sont aussi des défaillances majeures ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 7.12.1}}). Faire réparer avant le rendez-vous évite une contre-visite pour ce point. La consigne de l'encadré ne change pas. Voyant ABS : {{verdict:abs}}. Voyant ESP fixe : {{verdict:esp-defaut}}.
+L'annexe I de l'arrêté du 18 juin 1991 classe en défaillance majeure le dispositif d'alerte de l'ABS qui indique un mauvais fonctionnement du système, comme un dispositif d'alerte qui fonctionne mal ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 1.6.1}}). Une défaillance majeure impose une contre-visite dans les deux mois ({{cite:arrete-1991-06-18-controle-technique|article 7}}). Le contrôle électronique de stabilité a son propre point : un indicateur de dysfonctionnement qui fait état d'une défaillance du système, ou un commutateur endommagé ou qui ne fonctionne pas correctement, y sont aussi des défaillances majeures ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 7.12.1}}).
+
+Faire réparer avant le rendez-vous évite une contre-visite pour ce point. La consigne de l'encadré ne change pas.
+
+Voyant ABS : {{verdict:abs}}. Voyant ESP fixe : {{verdict:esp-defaut}}.
