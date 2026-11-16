@@ -5,8 +5,8 @@ du combiné, traits clairs, ambre pour « regardez ici »), au gabarit de genere
   (notice Seat Ibiza p. 302-303) ;
 - batterie-recharger : le chargeur branché, pince rouge sur la borne (+), pince noire sur le point de masse (notices
   Peugeot 208 p. 188-189, Citroën C3 p. 137-138) ;
-- batterie-changer : l'ordre des câbles, débrancher d'abord le négatif, rebrancher d'abord le positif (notices Seat
-  Ibiza p. 301-302, Toyota Yaris p. 321).
+- batterie-changer : l'ordre des câbles de la notice Seat Ibiza (p. 301-302), débrancher d'abord le négatif,
+  rebrancher d'abord le positif ; la notice Toyota Yaris (p. 321) fait aussi débrancher d'abord le négatif.
 Contraintes de `illustrationEnLigne` : un seul <svg> racine avec viewBox ; ni script, ni foreignObject, ni image, ni
 use, ni lien, ni attribut on*, ni href, ni url(), ni @import ; textes de 24 unités au moins (12 px à 375 px).
 Sortie : src/illustrations/<nom>.svg."""
@@ -62,7 +62,8 @@ def etiquette() -> str:
     # Étiquette sur la face avant : tension et capacité.
     p.append('<rect x="196" y="166" width="208" height="70" rx="8" fill="#e6ebf0"/>')
     p.append(texte(300, 197, "12 V", taille=28, poids=800, couleur="#0d1116"))
-    p.append(texte(300, 226, "60 Ah", taille=24, poids=700, couleur="#252d37"))
+    # Capacité sans valeur : aucune source du lot ne donne de valeur type (revue du 16/11, I7).
+    p.append(texte(300, 226, "XX Ah", taille=24, poids=700, couleur="#252d37"))
     p.append(f'<rect x="188" y="158" width="224" height="86" rx="12" fill="none" stroke="{AMBRE}" stroke-width="3" stroke-dasharray="8 7"/>')
     # Légendes.
     p.append(texte(300, 66, "Indicateur coloré", couleur=AMBRE))

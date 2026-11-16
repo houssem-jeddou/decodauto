@@ -14,6 +14,11 @@ p10 = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(p10)
 # Registre de la branche du lot (source VARTA ajoutée avec le lot).
 p10.sources = {s['id']: s for s in json.loads((PREP / 'data/sources.json').read_text(encoding='utf-8'))}
+# Base voyants de la branche (main fusionné : lot F2 validé le 16/11/2026, 21 h 30, et en ligne, PR n° 71).
+p10.base = {l['id']: l for l in json.loads((PREP / 'data/voyants.json').read_text(encoding='utf-8'))}
+# Le gabarit de la porte 10 présente l'écart court de la base comme « à valider avec son paquet » : le lot F2 est validé.
+F2_AVANT = 'écart court (lot F2, à valider avec son paquet)'
+F2_APRES = 'écart court (base du lot F2, validé le 16/11/2026 et en ligne)'
 SORTIE = ICI / 'paquet-lot-b2.md'
 
 
@@ -41,7 +46,9 @@ def main() -> None:
     w('> **Brouillon, jamais validé.** Étape 10, rédaction ouverte par la validation de la porte 10 (16/11/2026, 19 h 26). '
       'Trois pages au format 2 (demande n° 30), sur le modèle des exemples validés. Extraits relus à l\'écran le 16/11/2026 '
       '(`travaux/etape-10/textes/batterie-b2-verification.md`, `demarrage-batterie-verification.md`, '
-      '`autres-pannes-verification.md`). Recette, revue indépendante et points à trancher en fin de paquet.')
+      '`autres-pannes-verification.md`). Version 2 du 16/11/2026, corrigée après la revue indépendante (encadré « Revue '
+      'indépendante » en fin de paquet) ; les corrections ne sont pas relues et la recette est à refaire. Points à '
+      'trancher en fin de paquet.')
     w('')
     for ident, adresse in (('batterie-voiture', '/batterie-voiture/'), ('batterie-recharger', '/batterie-voiture/recharger/'),
                            ('batterie-changer', '/batterie-voiture/changer/')):
@@ -50,7 +57,8 @@ def main() -> None:
         tutoriel(chemin, w)
     fin = ICI / 'paquet-lot-b2-fin.md'
     queue = fin.read_text(encoding='utf-8') if fin.exists() else ''
-    SORTIE.write_text('\n'.join(out) + '\n' + queue, encoding='utf-8')
+    texte = '\n'.join(out).replace(F2_AVANT, F2_APRES)
+    SORTIE.write_text(texte + '\n' + queue, encoding='utf-8')
     print(SORTIE, len('\n'.join(out)))
 
 

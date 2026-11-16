@@ -1,83 +1,68 @@
-// Brouillon, jamais validé. Recette locale du lot B2 (vague B) :
-// captures et mesures des pages du lot (panne « batterie de voiture ») sur la construction
-// de recette (AVEC_EXEMPLES=1, dist-exemples), servie en local sur le port 8794. Jamais sur le site publié.
-// Usage : node capturer.cjs <dossier de sortie>
-// Navigateur : le Chromium et le Playwright préinstallés de l'environnement, police du système Inter. Police chargée :
-// feuille servie en font-display: block, seconde visite (police en cache) ; police de secours : /polices/ refusé.
-// PNG sans perte. Échelle 2 pour l'écran, l'encadré, l'arbre ou le tableau et l'illustration ; échelle 1 pour la page
-// entière (au-delà de 16 384 px de haut à l'échelle 2). Mesures en pixels CSS depuis le haut de la page.
+// Brouillon, jamais validé. Recette locale d'un lot de la vague B : captures et mesures des pages du lot sur la construction
+// de recette (AVEC_EXEMPLES=1, dist-exemples) servie en local. Jamais sur le site publié.
+// Usage : node capturer.cjs <base> <dossier de sortie> '<JSON : [[nom, adresse, [[sélecteur, suffixe], …]], …]>'
+// Chromium préinstallé, police du système Inter. Police chargée : feuille servie en font-display: block, seconde visite ;
+// police de secours : /polices/ refusé. PNG sans perte ; échelle 2 (écran, encadré, éléments), échelle 1 (page entière).
 const { chromium } = require('playwright');
 const { join } = require('node:path');
 const { writeFileSync } = require('node:fs');
-
-const sortie = process.argv[2] ?? '.';
-const BASE = 'http://localhost:8794';
-const PAGES = [
-  ['batterie-voiture', '/batterie-voiture/', '[data-element-unique="arbre-de-decision"]', 'arbre'],
-];
-const FORMATS = [[375, 667], [1366, 800]];
-
-async function ouvrir(navigateur, url, largeur, hauteur, echelle, secours) {
-  const page = await navigateur.newPage({ viewport: { width: largeur, height: hauteur }, deviceScaleFactor: echelle });
+const [base, sortie, json] = process.argv.slice(2);
+const PAGES = JSON.parse(json);
+async function ouvrir(nav, url, w, h, echelle, secours) {
+  const page = await nav.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: echelle });
   if (secours) await page.route(/\/polices\//, (r) => r.abort());
-  else await page.route(/(\.html?|\/|\.css)(\?.*)?$/, async (route) => {
-    const reponse = await route.fetch();
-    await route.fulfill({ response: reponse, body: (await reponse.text()).replace(/font-display:\s*optional/g, 'font-display:block') });
-  });
+  else await page.route(/(\.html?|\/|\.css)(\?.*)?$/, async (route) => { const rep = await route.fetch(); await route.fulfill({ response: rep, body: (await rep.text()).replace(/font-display:\s*optional/g, 'font-display:block') }); });
   await page.goto(url, { waitUntil: 'networkidle' });
   if (!secours) await page.reload({ waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForTimeout(150);
+  await page.waitForTimeout(100);
   return page;
 }
-
-const mesurer = (page, selecteurElement) => page.evaluate((selElement) => {
-  const visible = (e) => e !== null && e.getBoundingClientRect().height > 0;
-  const premierVisible = (s) => [...document.querySelectorAll(s)].find(visible) ?? null;
+const mesurer = (page) => page.evaluate(() => {
+  const vis = (e) => e !== null && e.getBoundingClientRect().height > 0;
+  const premier = (s) => [...document.querySelectorAll(s)].find(vis) ?? null;
   const haut = (e) => (e ? Math.round(e.getBoundingClientRect().top + scrollY) : null);
   const bas = (e) => (e ? Math.round(e.getBoundingClientRect().bottom + scrollY) : null);
-  const ligne = document.querySelector('[data-encadre-decision] [data-encadre-ligne]');
-  const basLigne = ligne ? Math.max(...['.situation', '.verdict', '.urgence', '.action'].map((s) => ligne.querySelector(s)).filter(Boolean).map(bas)) : null;
+  const l = document.querySelector('[data-encadre-decision] [data-encadre-ligne]');
   return {
-    policeChargee: [...document.fonts].some((f) => f.status === 'loaded'),
-    basPremiereSituation: basLigne,
+    basPremiereSituation: l ? Math.max(...['.situation', '.verdict', '.urgence', '.action'].map((s) => l.querySelector(s)).filter(Boolean).map(bas)) : null,
     basEncadre: bas(document.querySelector('[data-encadre-decision]')),
+    lignesEncadre: document.querySelectorAll('[data-encadre-decision] [data-encadre-ligne]').length,
     hautNoticesBaseDuCout: haut(document.querySelector('[data-provenance]')),
     hautIllustration: haut(document.querySelector('figure[data-illustration]')),
-    hautSommaire: haut(premierVisible('[data-sommaire]')),
-    hautArbreOuTableau: haut(document.querySelector(selElement)),
+    hautSommaire: haut(premier('[data-sommaire]')),
+    hautArbre: haut(document.querySelector('[data-element-unique="arbre-de-decision"]')),
+    hautEtapes: haut(document.querySelector('ol[data-tutoriel-etapes]')),
+    hautTableau: haut(document.querySelector('[data-element-unique="tableau"]')),
     hautCauses: haut(document.querySelector('[data-causes]')),
-    lignesEncadre: document.querySelectorAll('[data-encadre-decision] [data-encadre-ligne]').length,
     hauteurPage: document.documentElement.scrollHeight,
     largeurPage: document.documentElement.scrollWidth,
   };
-}, selecteurElement);
-
+});
 (async () => {
-  const navigateur = await chromium.launch();
+  const nav = await chromium.launch();
   const mesures = {};
-  for (const [nom, chemin, selElement, nomElement] of PAGES) {
+  for (const [nom, adresse, elements] of PAGES) {
     for (const [police, secours] of [['chargee', false], ['secours', true]]) {
-      // Largeur à 320 px : aucun débordement.
-      let page = await ouvrir(navigateur, BASE + chemin, 320, 640, 1, secours);
-      mesures[`${nom}-320-${police}`] = await mesurer(page, selElement);
+      let page = await ouvrir(nav, base + adresse, 320, 640, 1, secours);
+      mesures[`${nom}-320-${police}`] = await mesurer(page);
       await page.close();
-      for (const [largeur, hauteur] of FORMATS) {
-        const cle = `${nom}-${largeur}-${police}`;
-        page = await ouvrir(navigateur, BASE + chemin, largeur, hauteur, 1, secours);
-        mesures[cle] = await mesurer(page, selElement);
+      for (const [w, h] of [[375, 667], [1366, 800]]) {
+        const cle = `${nom}-${w}-${police}`;
+        page = await ouvrir(nav, base + adresse, w, h, 1, secours);
+        mesures[cle] = await mesurer(page);
         await page.screenshot({ path: join(sortie, `${cle}-page.png`), fullPage: true });
         await page.close();
-        page = await ouvrir(navigateur, BASE + chemin, largeur, hauteur, 2, secours);
+        page = await ouvrir(nav, base + adresse, w, h, 2, secours);
         await page.screenshot({ path: join(sortie, `${cle}-ecran.png`) });
-        await page.locator('[data-encadre-decision]').screenshot({ path: join(sortie, `${cle}-encadre.png`) });
-        await page.locator(selElement).screenshot({ path: join(sortie, `${cle}-${nomElement}.png`) });
-        await page.locator('figure[data-illustration]').screenshot({ path: join(sortie, `${cle}-illustration.png`) });
+        for (const [sel, suffixe] of [['[data-encadre-decision]', 'encadre'], ['figure[data-illustration]', 'illustration'], ...elements]) {
+          const loc = page.locator(sel).first();
+          if (await loc.count()) await loc.screenshot({ path: join(sortie, `${cle}-${suffixe}.png`) });
+        }
         await page.close();
       }
     }
   }
   writeFileSync(join(sortie, 'mesures-captures.json'), `${JSON.stringify(mesures, null, 2)}\n`);
-  await navigateur.close();
-  for (const [k, m] of Object.entries(mesures)) console.log(k, JSON.stringify(m));
+  await nav.close();
 })();
