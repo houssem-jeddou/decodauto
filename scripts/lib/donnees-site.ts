@@ -22,7 +22,7 @@ export interface DonneesDuSite {
 export async function donneesDuSite(racine: string, libelles: ReadonlyMap<string, string>, aujourdhui: Date, auteurs: readonly string[] = []): Promise<DonneesDuSite> {
   const lues = await chargerDonnees(racine);
   // Construction de démonstration du format 2 (DEMO_FORMAT2=1, dist-demo-format2, jamais déployée) : la base voyants est
-  // complétée en mémoire du brouillon du format 2, et les illustrations sont celles du brouillon (scripts/lib/demo-format2.ts).
+  // complétée en mémoire du brouillon du format 2, et les illustrations du brouillon s'ajoutent à celles du site (scripts/lib/demo-format2.ts).
   const demo = demoFormat2Active(process.env);
   const donnees = demo ? { ...lues, voyants: voyantsAvecBrouillon(lues.voyants, await lireBrouillonFormat2(racine)) } : lues;
   const { contexte, constats } = construireContexte({ ...donnees, auteurs }, aujourdhui);
@@ -33,8 +33,11 @@ export async function donneesDuSite(racine: string, libelles: ReadonlyMap<string
     couts: contexte.couts,
     pictogrammes: new Map((donnees.pictogrammes ?? []).map((p) => [p.id, p.contenu])),
     libelles: new Map(libelles),
-    // Illustrations dessinées pour le site (format 2, règle 2i).
-    illustrations: await chargerIllustrations(racine, demo ? DOSSIER_ILLUSTRATIONS_DEMO : DOSSIER_ILLUSTRATIONS),
+    // Illustrations dessinées pour le site (format 2, règle 2i) ; démonstration : celles du site, plus celles qui n'existent
+    // que pour elle (pages du lot F3 pas encore dessinées pour le site).
+    illustrations: demo
+      ? new Map([...(await chargerIllustrations(racine, DOSSIER_ILLUSTRATIONS)), ...(await chargerIllustrations(racine, DOSSIER_ILLUSTRATIONS_DEMO))])
+      : await chargerIllustrations(racine, DOSSIER_ILLUSTRATIONS),
     // Emplacements publicitaires factices : construction de recette et démonstration du format 2 seulement (livrable 7.5b ;
     // règle 2m), jamais en production.
     pubFactice: emplacementsFactices(process.env) || demo,

@@ -33,12 +33,12 @@ sources:
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-14
-date_modification: 2026-11-14
+date_modification: 2026-11-16
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (13 h 08),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-3.md).
-validation: 1cd0b8fe95daf60ff6bd6d767c40ad97ebc2b589dffdbdf44ebe4042224db799
+validation: 6f5902da0cb47fbdc72209998c28ea212c6563fa717a0435a38de68555366d1b
 causes:
   - cause: Filtre en début de saturation, à régénérer en roulant
     explication: "Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, le témoin signale un début de saturation du filtre et demande au conducteur de le nettoyer en roulant ; selon la notice Peugeot 208, le filtre commence à saturer ; selon la notice Seat Ibiza, il est obstrué par de la suie et doit être nettoyé (régénération). Selon la notice Toyota Yaris, la suie s'accumule plus vite sur des trajets courts ou à basse vitesse. La régénération se fait en roulant, comme le dit l'encadré."
@@ -52,11 +52,18 @@ causes:
     explication: "Selon la notice Seat Ibiza, un témoin encore allumé après 30 minutes de conduite en régénération demande de faire réparer le défaut dans un atelier spécialisé ; selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, la saturation du filtre allume d'autres témoins avec le message « Injection à contrôler », et il faut consulter le réseau de la marque. Aucune ne nomme la pièce en cause : la tranche retenue est celle du filtre à remplacer, la plus lourde."
     pieces:
       - filtre-a-particules
+format: 2
+illustration:
+  fichier: voyant-fap-tableau-de-bord
+  alt: "Le voyant du filtre à particules allumé en orange au tableau de bord"
+  legende: "Le voyant du filtre à particules dessine le filtre sur sa ligne d’échappement. Allumé, il signale un filtre qui commence à se saturer et doit se nettoyer en roulant."
 ---
 
 ## Peut-on rouler avec le voyant FAP allumé ?
 
-Verdict retenu en haut de page : {{verdict:fap}}. Les notices Peugeot 208, Renault Clio 5 phase 2 et Dacia Sandero 3 demandent de régénérer le filtre en roulant dès que la circulation le permet ; Renault, Dacia et Seat rappellent de respecter les limitations de vitesse. Selon la notice Dacia, un arrêt de la voiture, ou un régime moteur sous 2 000 tours par minute, avant l'extinction du témoin peut obliger à recommencer ({{cite:notice-dacia-sandero-3|p. 161}}).
+{{repere:fap}}
+
+Les notices Peugeot 208, Renault Clio 5 phase 2 et Dacia Sandero 3 demandent de régénérer le filtre en roulant dès que la circulation le permet ; Renault, Dacia et Seat rappellent de respecter les limitations de vitesse. Selon la notice Dacia, un arrêt de la voiture, ou un régime moteur sous 2 000 tours par minute, avant l'extinction du témoin peut obliger à recommencer ({{cite:notice-dacia-sandero-3|p. 161}}).
 
 Si le voyant moteur s'allume avec celui du FAP, c'est sa consigne, plus prudente, qui compte : {{verdict:moteur-orange-fixe}} pour le voyant moteur orange fixe ; {{verdict:moteur-rouge}} pour le voyant moteur rouge, ou le témoin STOP avec le message « Risque casse moteur ». L'encadré donne ces deux lignes, et la page du [voyant moteur](/voyants/moteur/) les détaille.
 
@@ -72,7 +79,9 @@ Les quatre premières décrivent un témoin du filtre à particules ; la Toyota 
 
 ## À quoi sert le filtre à particules, et pourquoi son voyant s'allume
 
-Le filtre à particules, ou FAP, retient la suie des gaz d'échappement. Pour ne pas se boucher, il doit régulièrement brûler cette suie : c'est la régénération. La notice Seat Ibiza explique qu'il faut pour cela un moteur à sa température de fonctionnement et une vitesse soutenue, qui augmente la température et brûle la suie ({{cite:notice-seat-ibiza|p. 289, « Régénération du filtre à particules essence et diesel »}}). Selon la notice Toyota Yaris, la suie s'accumule plus vite si l'on roule souvent sur des trajets courts ou à basse vitesse, ou si le moteur démarre souvent par grand froid ({{cite:notice-toyota-yaris|p. 204}}).
+Le filtre à particules, ou FAP, retient la suie des gaz d'échappement. Pour ne pas se boucher, il doit régulièrement brûler cette suie : c'est la régénération.
+
+La notice Seat Ibiza explique qu'il faut pour cela un moteur à sa température de fonctionnement et une vitesse soutenue, qui augmente la température et brûle la suie ({{cite:notice-seat-ibiza|p. 289, « Régénération du filtre à particules essence et diesel »}}). Selon la notice Toyota Yaris, la suie s'accumule plus vite si l'on roule souvent sur des trajets courts ou à basse vitesse, ou si le moteur démarre souvent par grand froid ({{cite:notice-toyota-yaris|p. 204}}).
 
 Le témoin s'allume quand le filtre commence à saturer : selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, il indique un début de saturation et la nécessité d'une intervention du conducteur pour nettoyer le filtre.
 
@@ -91,11 +100,11 @@ Pour faciliter la régénération, la notice Dacia conseille un long trajet sur 
 - Selon la notice Seat Ibiza, si le témoin reste allumé après 30 minutes de conduite en régénération, il faut contacter un atelier spécialisé pour faire réparer le défaut ({{cite:notice-seat-ibiza|p. 290}}).
 - Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, quand le filtre est saturé, d'autres témoins s'allument avec le message « Injection à contrôler » : elles demandent alors de consulter le réseau de la marque. Avec le témoin STOP et le message « Risque casse moteur », elles demandent d'arrêter la voiture, de couper le moteur et de faire appel au réseau de la marque ({{cite:notice-renault-clio-5|p. 187}}, {{cite:notice-dacia-sandero-3|p. 161}}).
 
-Verdicts retenus en haut de page : {{verdict:fap}} pour le témoin du FAP seul ; {{verdict:moteur-orange-fixe}} si le voyant moteur orange s'y ajoute ; {{verdict:moteur-rouge}} pour le voyant moteur rouge ou « Risque casse moteur ».
+Consignes de l'encadré : {{verdict:fap}} pour le témoin du FAP seul ; {{verdict:moteur-orange-fixe}} si le voyant moteur orange s'y ajoute ; {{verdict:moteur-rouge}} pour le voyant moteur rouge ou « Risque casse moteur ».
 
 ## Voyant FAP et additif : comment l'éteindre ?
 
-Certains moteurs Diesel ont un réservoir d'additif pour le filtre à particules. La notice Peugeot 208 décrit le même témoin, accompagné d'un signal sonore et d'un message sur le niveau insuffisant de l'additif : le réservoir d'additif est au minimum, et elle demande de faire réaliser l'appoint rapidement, dans le réseau Peugeot ou dans un atelier qualifié ({{cite:notice-peugeot-208|p. 15}}, renvoi (3) de la p. 13).
+Certains moteurs Diesel ont un réservoir d'additif pour le filtre à particules. La notice Peugeot 208 décrit le même témoin, accompagné d'un signal sonore et d'un message sur le niveau insuffisant de l'additif : le réservoir d'additif est au minimum, et elle demande de faire réaliser l'appoint rapidement, dans le réseau Peugeot ou dans un atelier qualifié ({{cite:notice-peugeot-208|p. 15 ; renvoi (3) de la p. 13}}).
 
 Dans ce cas, le geste à faire est l'appoint d'additif, pas la régénération ; la consigne de l'encadré reste celle du voyant : {{verdict:fap}}. Ne cherchez pas à effacer le témoin sans traiter sa cause. Pour une Peugeot 308 ou une autre voiture que la 208 lue ici, c'est la notice de votre véhicule qui dit s'il a un additif et où se fait l'appoint.
 
@@ -107,7 +116,9 @@ La notice Toyota Yaris, à moteur essence, décrit un filtre qui se régénère 
 
 ## Voyant FAP allumé au contrôle technique
 
-Le texte du contrôle technique, l'annexe I de l'arrêté du 18 juin 1991, ne nomme ni le filtre à particules ni son témoin. Pour un moteur Diesel, il contrôle l'équipement de réduction des émissions monté par le constructeur : manifestement absent, modifié ou défectueux, c'est une défaillance majeure ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 8.2.21}}). Il contrôle aussi le relevé du système OBD : une anomalie du dispositif antipollution sans dysfonctionnement important est une défaillance mineure, un dysfonctionnement important une défaillance majeure ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 8.2.22}}). Les mêmes règles valent pour un moteur essence (points 8.2.11 et 8.2.12).
+Le texte du contrôle technique, l'annexe I de l'arrêté du 18 juin 1991, ne nomme ni le filtre à particules ni son témoin. Pour un moteur Diesel, il contrôle l'équipement de réduction des émissions monté par le constructeur : manifestement absent, modifié ou défectueux, c'est une défaillance majeure ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 8.2.21}}).
+
+Le contrôle porte aussi sur le relevé du système OBD : une anomalie du dispositif antipollution sans dysfonctionnement important est une défaillance mineure, un dysfonctionnement important une défaillance majeure ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 8.2.22}}). Les mêmes règles valent pour un moteur essence (points 8.2.11 et 8.2.12).
 
 Une défaillance majeure impose une contre-visite dans les deux mois ({{cite:arrete-1991-06-18-controle-technique|article 7}}). Le texte ne dit pas si le seul témoin du FAP allumé suffit à constater une défaillance : le plus sûr est de régénérer le filtre, ou de le faire réparer, avant le rendez-vous. La consigne de l'encadré ne change pas : {{verdict:fap}}.
 

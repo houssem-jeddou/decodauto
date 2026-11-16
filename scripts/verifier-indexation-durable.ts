@@ -59,6 +59,9 @@ async function lireEtat(lecteur: Lecteur, ou: string): Promise<EtatDuSite> {
     const texte = (await lecteur.fichier(chemin)) ?? '';
     const id = valeurDeTete(texte, 'id');
     if (id === undefined) throw new Error(`${ou} : ${chemin} sans identifiant (id) lisible`);
+    // Fiche de l'accueil (src/content/socle/accueil.md, lot F2) : elle ne porte que le format de lecture ; l'accueil n'est
+    // pas rendu depuis elle, et son title et son H1 sont lus dans src/lib/accueil.ts (ci-dessous).
+    if (id === 'accueil') continue;
     pages.set(id, texte);
   }
   const accueilSource = await lecteur.fichier('src/lib/accueil.ts');

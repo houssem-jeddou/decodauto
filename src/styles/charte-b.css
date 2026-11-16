@@ -51,7 +51,9 @@ a:focus-visible,summary:focus-visible,button:focus-visible,[tabindex]:focus-visi
 .fil{font-size:.8125rem;margin:.1rem 0 .3rem}
 .fil ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.25rem}
 .fil li+li::before{content:"›";margin:0 .3rem;opacity:.7}
-h1{font-family:var(--police-titre);font-weight:700;font-size:1.45rem;line-height:1.1;margin:.05rem 0 0}
+/* H1 à 1,4 rem sur téléphone (1,45 au pilote) : en police de secours, celui du voyant de pression des pneus tient sur deux
+   lignes et la première situation dans le premier écran (règle 2a, lot F2) ; sur ordinateur, 2,1 rem (ci-dessous). */
+h1{font-family:var(--police-titre);font-weight:700;font-size:1.4rem;line-height:1.1;margin:.05rem 0 0}
 h2{font-family:var(--police-titre);font-weight:700;font-size:1.32rem;line-height:1.2;margin:2rem 0 .55rem}
 h3{font-size:1.0625rem;margin:1.2rem 0 .4rem}
 p{margin:.45rem 0 .7rem}
@@ -75,10 +77,14 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .action{margin:.25rem 0 0}
 .ecart{margin:.45rem 0 0;font-size:.875rem;line-height:1.42}
 .ecart .balance{width:1.05rem;height:1.05rem;vertical-align:-.2rem;margin-right:.3rem}
+/* Lien « Votre marque » d'une ligne d'écart (encadré, cartes de l'outil) : toujours sur une seule ligne (lot F2). */
+a[data-lien-notices]{white-space:nowrap}
 .cout{margin:.7rem 0 0;padding-top:.55rem;font-size:.875rem}
 .cout p{margin:.2rem 0}
 .cout-libelle{font-weight:700;margin-right:.25rem}
 .tranche{display:inline-block;font-weight:700;padding:.05rem .45rem;font-size:.8125rem}
+/* Préposition de la plage du coût probable et sa pastille : jamais séparées en fin de ligne (lot F2). */
+.borne{white-space:nowrap}
 .montant{font-size:.8125rem}
 .signature,.ligne-transparence{font-size:.8125rem;margin:.45rem 0;color:var(--texte-doux)}
 .signature{margin-top:.7rem}
@@ -193,7 +199,8 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .t-notices summary{cursor:pointer;color:var(--accent);font-weight:600}
 .t-notices blockquote{margin:.35rem 0 .1rem;padding:.4rem .6rem;color:var(--texte)}
 .t-notices .niveau{min-width:9.5rem}
-.t-notices .mini-urgence{display:block;margin-top:.25rem;font-size:.75rem;color:var(--texte-doux)}
+/* Libellé d'urgence du tableau des notices : jamais coupé au milieu (lot F2, revue de la PR n° 71). */
+.t-notices .mini-urgence{display:block;margin-top:.25rem;font-size:.75rem;color:var(--texte-doux);white-space:nowrap}
 .t-notices .page{white-space:nowrap;font-family:var(--mono);font-size:.8125rem}
 @media (max-width:40rem){
   .t-notices thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
