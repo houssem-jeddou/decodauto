@@ -619,7 +619,9 @@ function controlerCout(
     if (resolu.de !== undefined && rangTranche(risque.tranche) < rangTranche(resolu.de)) {
       constats.push(erreur('COUT-RISQUE', `le risque si l'on continue (« ${GRILLE_COUTS[risque.tranche].libelle} ») est plus léger que le début de la plage (« ${GRILLE_COUTS[resolu.de].libelle} »)`, fichier));
     }
+    // Demande de changement n° 31 : chaque citation du risque est de première main (avant : au moins une).
     let premiereMain = false;
+    const secondaires: string[] = [];
     for (const citation of risque.citations) {
       if (estReference(citation)) {
         const trouvee = trouverCitation(citation, ctx.voyants);
@@ -633,8 +635,11 @@ function controlerCout(
       }
       const source = ctx.sources.get(citation.source);
       if (source !== undefined && SOURCES_PREMIERE_MAIN.includes(source.categorie)) premiereMain = true;
+      else if (source !== undefined) secondaires.push(citation.source);
     }
-    if (!premiereMain && !constats.some((c) => c.regle.startsWith('COUT-CITATION') || c.regle === 'R3-SOURCE-INCONNUE')) {
+    if (secondaires.length > 0) {
+      constats.push(erreur('COUT-RISQUE-SOURCE', `le risque si l'on continue ne cite que des sources de première main : ${[...new Set(secondaires)].join(', ')} n'en ${secondaires.length > 1 ? 'sont' : 'est'} pas (demande de changement n° 31 : aucun risque tiré d'une source secondaire)`, fichier));
+    } else if (!premiereMain && !constats.some((c) => c.regle.startsWith('COUT-CITATION') || c.regle === 'R3-SOURCE-INCONNUE')) {
       constats.push(erreur('COUT-RISQUE-SOURCE', 'le risque si l\'on continue est cité d\'au moins une source de première main (notice constructeur)', fichier));
     }
   }

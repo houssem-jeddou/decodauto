@@ -22,6 +22,8 @@ type Objet = Record<string, unknown>;
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..', 'tests', 'fixtures');
 
 // ---- Contexte commun : plan du site, base voyants, registre des sources, pictogrammes, fiches auteur ------
+// Une source secondaire porte sa nature (demande de changement n° 31) : les sources secondaires de test (« fixture-forum »,
+// « fixture-comparateur ») sont des documents techniques de test, seule nature compatible avec leur rôle dans les cas.
 const source = (id: string, categorie: string, marque?: string, editeur = 'Éditeur de test'): Objet => ({
   id,
   titre: `Source de test ${id}`,
@@ -30,6 +32,7 @@ const source = (id: string, categorie: string, marque?: string, editeur = 'Édit
   url: 'https://exemple.test/source',
   date_consultation: '2026-10-01',
   ...(marque !== undefined && { marque, modele: 'Modèle de test' }),
+  ...(categorie === 'secondaire' && { nature: 'document-technique' }),
 });
 
 /** Citation d'une source ; le niveau (verdict, urgence) se donne pour une notice constructeur. */
@@ -758,6 +761,7 @@ invalide('cout-prise-en-charge-inconnue', 'dossier', avecCout(dossier(), { prise
 invalide('cout-prise-en-charge-hors-plage', 'fluide', avecCout(fluide(), { prise_en_charge: ['fixture-garantie'] }), ['COUT-PRISE-EN-CHARGE'], 'Une prise en charge sur une page dont la plage ne va pas jusqu\'à la réparation au garage.');
 invalide('cout-risque-plus-leger', 'panne', avecCout(panne(), { si_vous_continuez: { tranche: 'aucun', citations: [{ voyant: 'fixture-voyant-batterie', source: 'fixture-notice', emplacement: 'p. 1, rubrique de test' }] } }), ['COUT-RISQUE'], 'Le risque si l\'on continue est plus léger que le début de la plage.');
 invalide('cout-risque-sans-premiere-main', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [citation('fixture-forum')] } }), ['COUT-RISQUE-SOURCE'], 'Le risque si l\'on continue n\'est cité que d\'une source secondaire.');
+invalide('cout-risque-source-secondaire', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 1, rubrique de test' }, citation('fixture-forum')] } }), ['COUT-RISQUE-SOURCE'], "Le risque si l'on continue cite une notice et une source secondaire : chaque citation du risque est de première main (demande de changement n° 31).");
 invalide('cout-citation-introuvable', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 99' }] } }), ['COUT-CITATION-INTROUVABLE'], 'La citation référencée n\'existe pas dans la base voyants.');
 invalide('r9-encadre-sans-cout', 'panne', panne(), ['R9-ENCADRE-CONTENU'], "L'encadré n'affiche pas le coût probable (plage, montant automatique).", { encadreSansCout: true });
 invalide('r9-encadre-sources', 'voyant', voyantPage(), ['R9-ENCADRE-SOURCES'], "Une ligne de l'encadré annonce un autre nombre de notices que celles qu'elle cite (charte §2.1).", { noticesFausses: true });

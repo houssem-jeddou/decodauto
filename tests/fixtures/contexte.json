@@ -231,7 +231,8 @@
       "editeur": "Éditeur de test",
       "categorie": "secondaire",
       "url": "https://exemple.test/source",
-      "date_consultation": "2026-10-01"
+      "date_consultation": "2026-10-01",
+      "nature": "document-technique"
     },
     {
       "id": "fixture-comparateur",
@@ -239,7 +240,8 @@
       "editeur": "Comparateur de test",
       "categorie": "secondaire",
       "url": "https://exemple.test/source",
-      "date_consultation": "2026-10-01"
+      "date_consultation": "2026-10-01",
+      "nature": "document-technique"
     }
   ],
   "auteurs": [

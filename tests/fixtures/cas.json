@@ -661,6 +661,15 @@
     "explication": "Le risque si l'on continue n'est cité que d'une source secondaire."
   },
   {
+    "nom": "cout-risque-source-secondaire",
+    "type": "voyant",
+    "erreurs": [
+      "COUT-RISQUE-SOURCE"
+    ],
+    "alertes": [],
+    "explication": "Le risque si l'on continue cite une notice et une source secondaire : chaque citation du risque est de première main (demande de changement n° 31)."
+  },
+  {
     "nom": "cout-citation-introuvable",
     "type": "voyant",
     "erreurs": [
