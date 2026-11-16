@@ -4,7 +4,10 @@
 # - Extraits et pages citées relus mot pour mot le 16/11/2026 (pdf.js dans Chrome) :
 #   travaux/etape-10/textes/batterie-b2-verification.md et les relevés de l'exemple « voiture ne démarre pas ».
 #   Ligne 2 reprise mot pour mot de l'exemple validé ; ligne 3 identique à la ligne 4 de « batterie-voiture ».
-# - Illustration dessinée pour le site : batterie-chargeur (travaux/etape-10/generer-illustrations.py).
+# - Illustration dessinée pour le site : batterie-chargeur (travaux/etape-10/generer-illustrations-b2.py).
+# - Corrigé après la revue indépendante du 16/11/2026 (rapport « à corriger ») : ordre des câbles Peugeot 208 et Seat
+#   Ibiza d'après les relevés, débranchement réservé à un professionnel chez Renault et Dacia, faits absents des relevés
+#   retirés ; corrections non relues par la revue.
 id: batterie-recharger
 title: "Recharger une batterie de voiture : chargeur, câbles, étapes"
 h1: "Recharger la batterie de sa voiture : comment faire, et quand rouler ?"
@@ -92,7 +95,7 @@ tutoriel:
     - lunettes et gants de protection
   duree: "Quelques minutes pour brancher et débrancher ; durée de charge selon le chargeur"
   difficulte: facile
-  quand_ne_pas_le_faire_soi_meme: "Batterie gelée ou endommagée, notice qui réserve la recharge à un atelier (Seat Ibiza), ou batterie aux spécificités de recharge (Renault Clio 5, Dacia Sandero 3 : demandez conseil au représentant de la marque)."
+  quand_ne_pas_le_faire_soi_meme: "Batterie gelée ou endommagée, notice qui réserve la recharge à un atelier (Seat Ibiza), ou batterie aux spécificités de recharge (Renault Clio 5, Dacia Sandero 3 : demandez conseil au représentant de la marque ; ces deux notices réservent aussi tout débranchement de la batterie à un professionnel spécialisé)."
 carburant: essence et diesel
 contexte:
   - après de petits parcours
@@ -104,6 +107,7 @@ cout_probable:
     - notice-renault-clio-5
     - notice-dacia-sandero-3
     - notice-peugeot-208
+    - notice-citroen-c3
     - notice-seat-ibiza
 sources:
   - notice-peugeot-208
@@ -119,7 +123,7 @@ date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
 causes:
   - cause: Batterie déchargée
-    explication: "Selon les notices Renault Clio 5 et Dacia Sandero 3, l'état de charge baisse surtout sur de petits parcours, en ville, quand la température baisse, et après une longue utilisation de la radio ou d'autres équipements moteur arrêté. Une recharge suffit alors."
+    explication: "Selon les notices Renault Clio 5 et Dacia Sandero 3, l'état de charge baisse surtout sur de petits parcours, en ville, quand la température baisse, et après une longue utilisation de la radio ou d'autres équipements moteur arrêté. Les notices Peugeot 208 et Citroën C3 conseillent de la recharger quand la voiture sert surtout pour des trajets courts, ou avant une immobilisation prolongée."
     pieces:
       - recharge-batterie
   - cause: Batterie en fin de vie
@@ -144,11 +148,11 @@ Ces étapes sont celles des notices {{notice:notice-peugeot-208}} et {{notice:no
 
 {{etapes}}
 
-1. Travaillez dans un endroit aéré, loin des flammes et des étincelles, et protégez-vous les yeux et le visage.
-2. Coupez le contact et éteignez tous les équipements électriques : radio, feux, essuie-glaces.
-3. Vérifiez que le chargeur est prévu pour une batterie au plomb de 12 volts et que ses câbles sont en bon état, puis éteignez-le.
+1. Travaillez dans un endroit aéré, loin des flammes, et protégez-vous les yeux et le visage.
+2. Coupez le contact et éteignez les équipements électriques.
+3. Vérifiez que le chargeur est prévu pour une batterie au plomb de 12 volts, puis éteignez-le.
 4. Branchez la pince rouge (+) sur la borne (+) de la batterie, puis la pince noire (-) sur le point de masse indiqué par la notice.
-5. Mettez le chargeur en marche et suivez les instructions de son fabricant.
+5. Mettez le chargeur en marche.
 6. À la fin de la charge, éteignez le chargeur avant de débrancher les pinces.
 
 Ne branchez jamais les pinces à l'envers, et ne démarrez jamais le moteur en branchant un chargeur ({{cite:notice-peugeot-208|p. 187-188}}). Sur la Peugeot 208, la borne négative de la batterie n'est pas accessible : un point de masse déporté la remplace ({{cite:notice-peugeot-208|p. 187}}).
@@ -160,28 +164,48 @@ Ne branchez jamais les pinces à l'envers, et ne démarrez jamais le moteur en b
 | Notice | Recharger soi-même | Chargeur demandé | Débrancher la batterie ? |
 |---|---|---|---|
 | Peugeot 208, Citroën C3 | Oui, ou consulter le réseau ou un atelier qualifié | Pour batterie au plomb, 12 volts | Pas nécessaire |
-| Renault Clio 5, Dacia Sandero 3 | Oui ; certaines batteries ont des spécificités de recharge : demandez conseil au représentant de la marque | Compatible avec une batterie de 12 volts | Jamais moteur tournant ; attendre après la coupure du moteur avant de la débrancher |
+| Renault Clio 5, Dacia Sandero 3 | Oui ; certaines batteries ont des spécificités de recharge : demandez conseil au représentant de la marque | Compatible avec une batterie de 12 volts | Non : tout débranchement par un professionnel spécialisé ; jamais moteur tournant |
 | Seat Ibiza | Non : par un atelier spécialisé | Tension de charge limitée, selon la notice | Seulement dans des cas exceptionnels |
 
-Le tableau résume les notices lues ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}} ; {{cite:notice-renault-clio-5|p. 363}} ; {{cite:notice-dacia-sandero-3|p. 326}} ; {{cite:notice-seat-ibiza|p. 301 et 303}}). Avant de débrancher une batterie, la notice {{notice:notice-renault-clio-5}} demande d'attendre au moins cinq minutes après la coupure du moteur, et la notice {{notice:notice-dacia-sandero-3}} au moins une minute.
+Le tableau résume les notices lues ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}} ; {{cite:notice-renault-clio-5|p. 341 et 363}} ; {{cite:notice-dacia-sandero-3|p. 302 et 326}} ; {{cite:notice-seat-ibiza|p. 301 et 303}}). Les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} réservent tout débranchement de la batterie, comme son démontage, à un professionnel spécialisé ({{cite:notice-renault-clio-5|p. 341}} ; {{cite:notice-dacia-sandero-3|p. 302}}).
 
 ## Peut-on recharger la batterie sans la débrancher ?
 
-Oui sur la Peugeot 208 et la Citroën C3 : leurs notices précisent qu'il n'est pas nécessaire de débrancher la batterie ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). Les notices Renault Clio 5 et Dacia Sandero 3 interdisent de la débrancher quand le moteur tourne ({{cite:notice-renault-clio-5|p. 363}} ; {{cite:notice-dacia-sandero-3|p. 326}}). La notice Seat Ibiza ne la fait débrancher que dans des cas exceptionnels, car certaines fonctions de la voiture sont alors perdues ({{cite:notice-seat-ibiza|p. 301}}).
+Oui sur la Peugeot 208 et la Citroën C3 : leurs notices précisent qu'il n'est pas nécessaire de débrancher la batterie ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). Les notices Renault Clio 5 et Dacia Sandero 3 réservent le débranchement à un professionnel spécialisé et l'interdisent quand le moteur tourne ; leur rubrique sur le chargeur demande d'attendre après la coupure du moteur, au moins cinq minutes sur la Renault Clio 5 et au moins une minute sur la Dacia Sandero 3 ({{cite:notice-renault-clio-5|p. 341 et 363}} ; {{cite:notice-dacia-sandero-3|p. 302 et 326}}). La notice Seat Ibiza ne la fait débrancher que dans des cas exceptionnels ({{cite:notice-seat-ibiza|p. 301}}).
 
 ## Recharger avec une autre voiture : les câbles de démarrage
 
 {{repere:ligne-2}}
 
-Avec des câbles de démarrage, la batterie d'une autre voiture ne sert pas à recharger la vôtre : elle aide le moteur à démarrer, puis c'est le moteur qui recharge la batterie. La batterie de secours doit avoir une tension de 12 volts et une capacité au moins égale à celle de la batterie déchargée ({{cite:notice-peugeot-208|p. 187}} ; {{cite:notice-dacia-sandero-3|p. 326-327}}). La notice Renault Clio 5 demande des câbles de section importante ({{cite:notice-renault-clio-5|p. 363}}).
+Avec des câbles de démarrage, la batterie d'une autre voiture ne sert pas à recharger la vôtre : elle aide le moteur à démarrer, puis c'est le moteur qui recharge la batterie. La batterie de secours doit avoir une tension de 12 volts et une capacité au moins égale à celle de la batterie déchargée ({{cite:notice-peugeot-208|p. 187}} ; {{cite:notice-dacia-sandero-3|p. 326-327}}). La notice {{notice:notice-seat-ibiza}} demande des câbles de section suffisante, conformes à la norme DIN 72553 : au moins 25 mm² pour un moteur essence et 35 mm² pour un diesel ({{cite:notice-seat-ibiza|p. 55}}).
 
-Une fois le moteur démarré, les notices Peugeot 208 et Citroën C3 demandent de le laisser tourner, voiture à l'arrêt, au moins 30 minutes : rouler tout de suite peut altérer certaines fonctions de la voiture ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). La notice Citroën C3 précise que le Stop & Start reste indisponible tant que la charge n'est pas suffisante. La notice {{notice:notice-toyota-yaris}} demande ensuite de faire vérifier la voiture dès que possible ({{cite:notice-toyota-yaris|p. 320}}).
+Les deux voitures ne doivent pas se toucher, selon les notices Peugeot 208 et Seat Ibiza ({{cite:notice-peugeot-208|p. 187}} ; {{cite:notice-seat-ibiza|p. 55}}). Selon la notice {{notice:notice-toyota-yaris}}, il est impossible de démarrer le moteur en poussant la voiture ({{cite:notice-toyota-yaris|p. 320}}). Les notices Peugeot 208 et Seat Ibiza donnent l'ordre de branchement des câbles, chacune pour sa voiture : sur une autre voiture, suivez sa notice, car le point où se branche le câble noir change d'une voiture à l'autre.
 
-L'ordre de branchement des câbles est décrit sur la page [voiture qui ne démarre pas](/voiture-ne-demarre-pas/), avec ce que les notices interdisent.
+Sur la Peugeot 208 ({{cite:notice-peugeot-208|p. 188}}) :
+
+1. Branchez le câble rouge sur la borne (+) de la batterie en panne, puis sur la borne (+) de la batterie de secours ou du booster.
+2. Branchez le câble vert ou noir sur la borne (-) de la batterie de secours, puis son autre extrémité sur le point de masse de la Peugeot 208.
+3. Démarrez le moteur de la voiture qui dépanne et laissez-le tourner quelques minutes.
+4. Actionnez le démarreur de la voiture en panne et laissez tourner le moteur ; s'il ne démarre pas tout de suite, coupez le contact et attendez quelques instants.
+5. Attendez le retour au ralenti, puis débranchez les câbles dans l'ordre inverse.
+
+Sur la Seat Ibiza ({{cite:notice-seat-ibiza|p. 56-57}}) :
+
+1. Coupez le contact sur les deux voitures.
+2. Branchez le câble rouge entre la borne positive (+) de la voiture en panne et la borne positive (+) de la voiture qui fournit le courant.
+3. Branchez une extrémité du câble noir sur la borne négative (-) de la voiture qui fournit le courant ; si cette voiture a le Start-Stop, sur une borne de mise à la terre appropriée ou une pièce métallique massive vissée au bloc-moteur.
+4. Branchez l'autre extrémité du câble noir, sur la voiture en panne, à une pièce en métal massif vissée au carter-moteur, pas directement sur la borne négative de la batterie déchargée.
+5. Lancez le moteur de la voiture qui fournit le courant et laissez-le tourner au ralenti.
+6. Démarrez la voiture en panne : si le moteur ne démarre pas au bout de 10 secondes, recommencez environ une minute plus tard.
+7. Moteurs en marche, débranchez les câbles exactement dans l'ordre inverse.
+
+La notice Seat Ibiza interdit ce démarrage avec des câbles si l'une des batteries est gelée, à cause du risque d'explosion ({{cite:notice-seat-ibiza|p. 57}}). Une fois le moteur démarré, les notices Peugeot 208 et Citroën C3 demandent de le laisser tourner, voiture à l'arrêt, au moins 30 minutes, pour que la batterie atteigne un niveau de charge suffisant ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). La notice Toyota Yaris demande ensuite de faire vérifier la voiture dès que possible ({{cite:notice-toyota-yaris|p. 320}}).
 
 ## Recharger la batterie en roulant
 
-Moteur tournant, la batterie se recharge. Certaines voitures préviennent quand sa charge baisse : les notices Renault Clio 5 et Dacia Sandero 3 décrivent le message « Batterie faible Démarrer moteur », qui disparaît quand le moteur tourne ([batterie de voiture faible](/batterie-voiture/)). Selon la notice Toyota Yaris, il est impossible de démarrer la voiture en la poussant ({{cite:notice-toyota-yaris|p. 320}}).
+Moteur tournant, la batterie se recharge. Certaines voitures préviennent quand sa charge baisse : les notices Renault Clio 5 et Dacia Sandero 3 décrivent le message « Batterie faible Démarrer moteur », qui disparaît une fois le moteur démarré ([batterie de voiture faible](/batterie-voiture/)).
+
+Juste après un démarrage avec une autre batterie, les notices Peugeot 208 et Citroën C3 préviennent que rouler tout de suite, sans niveau de charge suffisant, peut altérer certaines fonctions de la voiture ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). La notice Citroën C3 précise que certaines fonctions, dont le Stop & Start, restent indisponibles tant que la charge n'est pas suffisante ({{cite:notice-citroen-c3|p. 137}}).
 
 Si la batterie se vide souvent, la recharge ne règle pas tout : la notice Seat Ibiza voit dans des problèmes de démarrage qui subsistent le signe d'une batterie défectueuse, à faire contrôler, recharger ou remplacer ({{cite:notice-seat-ibiza|p. 303}}).
 

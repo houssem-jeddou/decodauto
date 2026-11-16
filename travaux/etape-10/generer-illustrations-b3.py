@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Illustrations du lot B3 de la vague B (règle 2i), dessinées pour le site, au gabarit de generer-illustrations-b2.py :
-- surchauffe-moteur : le bocal du liquide de refroidissement, niveau entre les repères mini et maxi, bouchon à ne
-  jamais ouvrir moteur chaud (notices Peugeot 208 p. 167, Citroën C3 p. 113, Seat Ibiza p. 298) ;
+- surchauffe-moteur : le bocal du liquide de refroidissement, niveau entre les repères mini et maxi lu moteur froid ;
+  moteur chaud, attendre avant d'ouvrir le bouchon (notices Peugeot 208 p. 167 et Citroën C3 p. 113 : attendre au moins
+  une heure, ouverture d'urgence avec un chiffon ; Seat Ibiza p. 298 : jamais moteur chaud ; le « jamais » n'est attribué
+  qu'à Seat, dans la légende de la page, revue du lot B3, I4) ;
 - nettoyer-fap : la régénération en roulant, à allure soutenue et régulière (notices Peugeot 208 p. 14-15, Seat Ibiza
-  p. 288-290, Renault Clio 5 p. 186, Dacia Sandero 3 p. 160).
+  p. 288-290, Renault Clio 5 p. 186, Dacia Sandero 3 p. 160). Compteur sans chiffres : la vitesse ou le régime change
+  selon la notice (tableau de la page), aucune plage n'est dessinée (revue du lot B3, I5).
 Sortie : src/illustrations/<nom>.svg."""
 import importlib.util
 import math
@@ -33,8 +36,8 @@ def bocal() -> str:
     p.append('<rect x="262" y="66" width="76" height="34" rx="8" fill="#3a4350" stroke="#11151a" stroke-width="2"/>')
     p.append('<rect x="270" y="58" width="60" height="12" rx="4" fill="#5d6876"/>')
     p.append('<circle cx="300" cy="80" r="44" fill="none" stroke="#ffb648" stroke-width="3" stroke-dasharray="8 7"/>')
-    p.append(texte(40, 62, "Ne jamais ouvrir", couleur=AMBRE, ancre="start"))
-    p.append(texte(40, 92, "moteur chaud", couleur=AMBRE, ancre="start"))
+    p.append(texte(40, 62, "Moteur chaud :", couleur=AMBRE, ancre="start"))
+    p.append(texte(40, 92, "attendre", couleur=AMBRE, ancre="start"))
     p.append(texte(40, 232, "Niveau lu", couleur=DOUX, ancre="start"))
     p.append(texte(40, 262, "moteur froid", couleur=DOUX, ancre="start"))
     p.append("</svg>")
@@ -47,18 +50,18 @@ def regeneration() -> str:
     def point(v, rr):
         a = math.radians(180 - v / 140 * 180)
         return cx + rr * math.cos(a), cy - rr * math.sin(a)
-    # Cadran de vitesse de 0 à 140 km/h, plage de régénération (60 à 120) en ambre.
+    # Cadran de vitesse sans chiffres ni plage : la vitesse ou le régime à tenir est celui de la notice (aucune notice ne
+    # donne la même plage ; Renault et Dacia Diesel donnent un régime). Graduations neutres, aiguille stable.
     x0, y0 = point(0, r); x1, y1 = point(140, r)
     p.append(f'<path d="M{x0:.1f} {y0:.1f} A{r} {r} 0 0 1 {x1:.1f} {y1:.1f}" fill="none" stroke="#3a4350" stroke-width="14" stroke-linecap="round"/>')
-    a0, b0 = point(60, r); a1, b1 = point(120, r)
-    p.append(f'<path d="M{a0:.1f} {b0:.1f} A{r} {r} 0 0 1 {a1:.1f} {b1:.1f}" fill="none" stroke="{AMBRE}" stroke-width="14" stroke-linecap="round"/>')
-    for v in (0, 60, 120):
-        tx, ty = point(v, r - 36)
-        p.append(texte(round(tx), round(ty + 8), str(v), taille=24, poids=600, couleur=DOUX))
+    for v in range(0, 141, 20):
+        ax, ay = point(v, r - 16); bx, by = point(v, r - 30)
+        p.append(f'<line x1="{ax:.1f}" y1="{ay:.1f}" x2="{bx:.1f}" y2="{by:.1f}" stroke="{DOUX}" stroke-width="3" stroke-linecap="round"/>')
     nx, ny = point(90, r - 22)
-    p.append(f'<line x1="{cx}" y1="{cy}" x2="{nx:.1f}" y2="{ny:.1f}" stroke="{TEXTE}" stroke-width="6" stroke-linecap="round"/>')
+    p.append(f'<line x1="{cx}" y1="{cy}" x2="{nx:.1f}" y2="{ny:.1f}" stroke="{AMBRE}" stroke-width="6" stroke-linecap="round"/>')
     p.append(f'<circle cx="{cx}" cy="{cy}" r="12" fill="#0d1116" stroke="{TEXTE}" stroke-width="4"/>')
-    p.append(texte(cx, 250, "km/h", taille=24, poids=600, couleur=DOUX))
+    p.append(texte(cx, 244, "vitesse ou régime :", taille=24, poids=600, couleur=DOUX))
+    p.append(texte(cx, 271, "selon votre notice", taille=24, poids=600, couleur=DOUX))
     # Consigne, à droite.
     p.append(texte(372, 104, "Allure soutenue", taille=26, poids=700, ancre="start"))
     p.append(texte(372, 138, "et régulière", taille=26, poids=700, ancre="start"))
