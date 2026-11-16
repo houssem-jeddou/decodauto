@@ -13,6 +13,7 @@ s'intègre par une fusion).
 
 ## 2. Ce que la pull request contient
 - **Accueil** (décision de Houssem du 16/11, 17 h 00 : avancé du lot F3) : il passe au format 2 en production (modèle de F1.2, grille des pictogrammes), avec ses textes déjà validés (`PARAGRAPHES_ACCUEIL`) ; tout texte affiché nouveau (libellés de la grille, titres) est listé pour le paquet F2, tiré du code, jamais recopié à la main.
+- Le lot F2 et ses pages (accueil et 404 compris) inscrits dans `config/lots-format2.json` (FORMAT2-VAGUE, F1.4).
 - `date_modification` des 12 pages : date du jour de la mise au point finale (règle 14 b : les textes sont repris, demande
   n° 30) ; `date_revue` inchangée sauf relecture complète.
 - Tests mis à jour (liste du `README.md` du lot, « Essai en CI ») : empreintes du format 2, démonstration qui se retire
