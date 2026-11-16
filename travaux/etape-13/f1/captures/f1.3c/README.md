@@ -4,7 +4,9 @@
 (couleurs exactes ; une capture en police de secours identique octet pour octet à celle en police chargée n'est pas gardée).
 Changements visibles depuis la prise précédente : ligne de transparence en 13 px et couleur douce (elle n'était pas stylée :
 pages plus courtes d'environ 44 px), contour de focus bleu clair sur fond sombre, bandeau sans débordement à 320 px, rangée
-« dépannage » de F1.3b sans triangle. Les mesures de ce dossier (`mesures.json`) sont celles de cette prise ; les mesures de
+« dépannage » de F1.3b sans triangle ; **ordre de la page panne de la demande n° 32** (texte jusqu'à la partie de
+l'arbre ou des étapes, causes, suite du texte) ; la vue `1366-corps` montre désormais toute la colonne (le texte est en deux
+blocs, de part et d'autre des causes). Captures avant et après le changement d'ordre : `../demande-32/`. Les mesures de ce dossier (`mesures.json`) sont celles de cette prise ; les mesures de
 la porte, toutes pages et trois largeurs, sont dans `travaux/etape-13/f1/porte/mesures-format2.json` (FORMAT2-MESURES), qui
 font foi quand un tableau plus bas date d'une prise antérieure.
 

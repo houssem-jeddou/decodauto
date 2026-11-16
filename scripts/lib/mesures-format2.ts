@@ -5,13 +5,14 @@
 //  - 2a, à 375 × 667 : bas de la première situation de l'encadré (situation, verdict, urgence, action) ≤ 667 px ; page
 //    informative (réponse directe) : réponse directe complète et verdict et urgence de la première situation ≤ 667 px, son
 //    action pouvant continuer au-delà (précision 2a) ;
-//  - 2i, à 375 × 667 : haut de l'illustration ≤ 3 écrans (2 001 px) ; ou, quand le bas de l'encadré dépasse à lui seul trois
-//    écrans, l'illustration suit immédiatement le bloc « Notices / Base du coût » (précision 2i) ;
+//  - 2i, à 375 × 667 (assouplie par la demande de changement n° 32) : l'illustration suit immédiatement le bloc « Notices /
+//    Base du coût » (erreur sinon) ; son haut est mesuré et donné ; au-delà de trois écrans (2 001 px), il est signalé, avec
+//    le nombre de lignes de l'encadré (signalement, à reprendre dans le paquet du lot : pas une erreur) ;
 //  - 2h, à 375 × 667 : une page éditoriale ou du socle de plus de six écrans (4 002 px) a un sommaire « Sur cette page » ;
 //  - débordement : à 320, 375 et 1366 px de large, la page ne défile pas horizontalement, et aucun élément ne dépasse le
 //    bord droit hors d'un bloc qui défile de lui-même (tableau, sommaire) (critère WCAG 1.4.10) ;
-//  - haut de l'arbre de décision ou des étapes (page panne) : donné, sans seuil (seuil de six écrans seulement si la demande
-//    n° 32 est acceptée).
+//  - haut de l'arbre de décision ou des étapes (page panne) : donné ; au-delà de six écrans (4 002 px), signalé : la page
+//    passe par une décision de Houssem sur captures (demande de changement n° 32, seuil écrit).
 // ---------------------------------------------------------------------------------------------
 
 /** Hauteur visible d'un écran de téléphone (375 × 667, barres du navigateur déduites : demande n° 30, §1). */
@@ -49,6 +50,8 @@ export interface MesurePage {
   illustrationApresProvenance: boolean;
   /** Haut de l'arbre de décision ou des étapes d'un tutoriel (page panne ou dossier), sinon null. */
   hautArbre: number | null;
+  /** Nombre de lignes (situations) de l'encadré : raison donnée quand l'illustration dépasse trois écrans. */
+  lignesEncadre: number;
   hauteurPage: number;
   /** Page éditoriale (ligne de transparence) ou du socle : la règle 2h s'y applique. */
   sommaireAttendu: boolean;
@@ -87,14 +90,29 @@ export function evaluerMesure(m: MesurePage): ConstatMesure[] {
   } else if (m.basPremiereSituation === null || m.basPremiereSituation > ECRAN_TELEPHONE) {
     constats.push(erreur(m, `première situation complète à ${m.basPremiereSituation ?? '?'} px : ${ECRAN_TELEPHONE} au plus (règle 2a)`));
   }
-  // Règle 2i et précision 2i.
+  // Règle 2i, assouplie par la demande n° 32 : l'illustration suit toujours le bloc « Notices / Base du coût » ; son haut
+  // est signalé au-delà de trois écrans (signalerMesure), sans erreur.
   if (m.hautIllustration === null) constats.push(erreur(m, 'aucune illustration (règle 2i)'));
-  else if (m.basEncadre !== null && m.basEncadre > TROIS_ECRANS) {
-    if (!m.illustrationApresProvenance) constats.push(erreur(m, `encadré plus long que trois écrans (${m.basEncadre} px) : l'illustration suit immédiatement le bloc « Notices / Base du coût » (précision 2i)`));
-  } else if (m.hautIllustration > TROIS_ECRANS) {
-    constats.push(erreur(m, `illustration à ${m.hautIllustration} px : ${TROIS_ECRANS} au plus, soit trois écrans (règle 2i)`));
-  }
+  else if (!m.illustrationApresProvenance) constats.push(erreur(m, "l'illustration suit immédiatement le bloc « Notices / Base du coût », sous la ligne de transparence (règle 2i, demande de changement n° 32)"));
   return constats;
+}
+
+/**
+ * Signalements d'une mesure (à 375 px), à reprendre dans le paquet du lot, sans faire échouer la construction (demande de
+ * changement n° 32) : illustration au-delà de trois écrans, avec la raison (lignes de l'encadré) ; arbre de décision ou
+ * étapes au-delà de six écrans (décision de Houssem sur captures).
+ */
+export function signalerMesure(m: MesurePage): string[] {
+  if (m.largeur !== 375) return [];
+  const ou = `${m.adresse} (police ${m.police === 'chargee' ? 'chargée' : 'de secours'})`;
+  const signalements: string[] = [];
+  if (m.hautIllustration !== null && m.hautIllustration > TROIS_ECRANS) {
+    signalements.push(`${ou} : illustration à ${m.hautIllustration} px, au-delà de trois écrans (${TROIS_ECRANS} px) ; raison : encadré de ${m.lignesEncadre} ligne(s), bas à ${m.basEncadre ?? '?'} px (règle 2i, demande n° 32 : à dire dans le paquet)`);
+  }
+  if (m.hautArbre !== null && m.hautArbre > SIX_ECRANS) {
+    signalements.push(`${ou} : arbre de décision ou étapes à ${m.hautArbre} px, au-delà de six écrans (${SIX_ECRANS} px) : décision de Houssem sur captures (demande n° 32)`);
+  }
+  return signalements;
 }
 
 /** Ligne de tableau lisible d'une mesure (journal de la CI et dossier de la porte). */

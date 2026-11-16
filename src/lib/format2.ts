@@ -600,6 +600,25 @@ export interface BlocsDuModele {
   avantTexte: readonly string[];
   apresTexte: readonly string[];
   tableauElementUnique: boolean;
+  /**
+   * Bloc placé dans le texte rédigé, juste après la partie qui porte l'arbre de décision (ou les étapes d'un tutoriel) :
+   * les causes de la page panne (demande de changement n° 32). Sans arbre ni étapes, après le texte.
+   */
+  apresPartieArbre?: string | undefined;
+}
+
+/**
+ * Coupe le texte rédigé (`<div class="corps" data-corps>…</div>`) au titre H2 qui suit la partie de l'arbre de décision
+ * (ou des étapes d'un tutoriel) et y place `bloc` (demande de changement n° 32) : le texte jusqu'à cette partie, le bloc,
+ * puis la suite du texte dans un second `data-corps`. Sans arbre ni étapes, ou sans H2 après eux, le bloc suit le texte.
+ */
+export function insererApresPartieArbre(texteHtml: string, bloc: string): string {
+  if (bloc === '') return texteHtml;
+  const ouverture = '<div class="corps" data-corps>';
+  const repere = /data-element-unique="arbre-de-decision"|<ol\b[^>]*\sdata-tutoriel-etapes\b/.exec(texteHtml);
+  const suite = repere === null ? -1 : texteHtml.indexOf('<h2', repere.index);
+  if (!texteHtml.startsWith(ouverture) || suite < 0) return `${texteHtml}${bloc}`;
+  return `${texteHtml.slice(0, suite)}</div>${bloc}${ouverture}${texteHtml.slice(suite)}`;
 }
 
 /**
@@ -644,9 +663,11 @@ export function pageFormat2(
   // Texte rédigé : repères, puis références du modèle commun ; tableaux du texte dans le style de la charte.
   const texte = texteRedige(reperesDuTexte(corpsHtml, page, lignes));
   const texteHtmlFinal = tableauxDuTexteFormat2(texte.html);
+  const texteDuCorps = insererApresPartieArbre(texteHtmlFinal, blocs.apresPartieArbre ?? '');
   const tableau = tableauNoticesCompact(tableaux, { elementUnique: blocs.tableauElementUnique, pageId: page.id });
-  // Sommaire : les titres H2 du corps, dans l'ordre de la page (fiches, causes, texte, historique), puis le tableau.
-  const corps = [...blocs.avantTexte, texteHtmlFinal, ...blocs.apresTexte];
+  // Sommaire : les titres H2 du corps, dans l'ordre de la page (fiches, texte, causes après la partie de l'arbre sur la page
+  // panne, suite du texte, historique), puis le tableau.
+  const corps = [...blocs.avantTexte, texteDuCorps, ...blocs.apresTexte];
   const entrees = [...titresH2(corps.join('')), ...(tableau !== '' ? [{ ancre: IDENTIFIANTS.notices, titreHtml: texteHtml(FORMAT2.titreNotices) }] : [])];
   const avecSommaire = nombreDeH2(texteHtmlFinal) >= SOMMAIRE_MIN_H2;
 

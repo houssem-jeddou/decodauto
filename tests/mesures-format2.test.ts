@@ -7,12 +7,12 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { ECRAN_TELEPHONE, SIX_ECRANS, TROIS_ECRANS, evaluerMesure, type MesurePage } from '../scripts/lib/mesures-format2.ts';
+import { ECRAN_TELEPHONE, SIX_ECRANS, TROIS_ECRANS, evaluerMesure, signalerMesure, type MesurePage } from '../scripts/lib/mesures-format2.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const base: MesurePage = {
   adresse: '/voyants/moteur/', largeur: 375, police: 'chargee', policeChargee: true, largeurPage: 375, debordements: [], encadre: true,
-  basReponse: null, basVerdictUrgence: 373, basPremiereSituation: 522, basEncadre: 1593, hautIllustration: 1982, illustrationApresProvenance: true, hautArbre: null, hauteurPage: 12685, sommaireAttendu: true, sommaire: true,
+  basReponse: null, basVerdictUrgence: 373, basPremiereSituation: 522, basEncadre: 1593, hautIllustration: 1982, illustrationApresProvenance: true, hautArbre: null, lignesEncadre: 3, hauteurPage: 12685, sommaireAttendu: true, sommaire: true,
 };
 const messages = (m: Partial<MesurePage>): string[] => evaluerMesure({ ...base, ...m }).map((c) => c.message);
 
@@ -41,11 +41,21 @@ describe('FORMAT2-MESURES : évaluation', () => {
     assert.match(messages({ basReponse: 405, basVerdictUrgence: 690 })[0] ?? '', /verdict et urgence de la première situation à 690 px/);
   });
 
-  test('2i : illustration au-delà de trois écrans, ou absente ; encadré plus long que trois écrans : l\'illustration suit le bloc « Notices »', () => {
-    assert.match(messages({ hautIllustration: 2030 })[0] ?? '', /illustration à 2030 px : 2001 au plus/);
+  test('2i assouplie (demande n° 32) : illustration absente, ou pas juste après « Notices / Base du coût » : erreur ; au-delà de trois écrans : signalée avec la raison, sans erreur', () => {
     assert.match(messages({ hautIllustration: null })[0] ?? '', /aucune illustration/);
-    assert.deepEqual(messages({ basEncadre: 2400, hautIllustration: 2800, illustrationApresProvenance: true }), []);
-    assert.match(messages({ basEncadre: 2400, hautIllustration: 2800, illustrationApresProvenance: false })[0] ?? '', /suit immédiatement le bloc « Notices \/ Base du coût »/);
+    assert.match(messages({ illustrationApresProvenance: false })[0] ?? '', /suit immédiatement le bloc « Notices \/ Base du coût »/);
+    assert.deepEqual(messages({ hautIllustration: 2406, basEncadre: 1983, lignesEncadre: 6 }), []);
+    const s = signalerMesure({ ...base, hautIllustration: 2406, basEncadre: 1983, lignesEncadre: 6 });
+    assert.equal(s.length, 1);
+    assert.match(s[0] ?? '', /illustration à 2406 px, au-delà de trois écrans \(2001 px\) ; raison : encadré de 6 ligne\(s\), bas à 1983 px/);
+    assert.deepEqual(signalerMesure(base), []);
+    assert.deepEqual(signalerMesure({ ...base, largeur: 1366, hautIllustration: 2406 }), [], 'seulement à 375 px');
+  });
+
+  test('seuil de l\'arbre (demande n° 32) : au-delà de six écrans, signalé (décision de Houssem sur captures), sans erreur', () => {
+    assert.deepEqual(signalerMesure({ ...base, hautArbre: 3560 }), []);
+    assert.match(signalerMesure({ ...base, hautArbre: 4003 })[0] ?? '', /arbre de décision ou étapes à 4003 px, au-delà de six écrans \(4002 px\) : décision de Houssem sur captures/);
+    assert.deepEqual(messages({ hautArbre: 5666 }), []);
   });
 
   test('2h : page éditoriale ou du socle de plus de six écrans sans sommaire ; accueil et 404 non concernés ; page courte sans sommaire admise', () => {

@@ -13,7 +13,7 @@ import { extname, join, normalize, relative, resolve } from 'node:path';
 import { argv, env, exit } from 'node:process';
 import puppeteer, { type Browser } from 'puppeteer-core';
 import { listerFichiers } from './lib/charger.ts';
-import { ENTETE_MESURES, HAUTEURS, LARGEURS, evaluerMesure, ligneMesure, type MesurePage } from './lib/mesures-format2.ts';
+import { ENTETE_MESURES, HAUTEURS, LARGEURS, evaluerMesure, ligneMesure, signalerMesure, type MesurePage } from './lib/mesures-format2.ts';
 
 const option = (nom: string): string | undefined => {
   const i = argv.indexOf(nom);
@@ -91,6 +91,7 @@ function mesurerDansLaPage(): Omit<MesurePage, 'adresse' | 'largeur' | 'police'>
     hautIllustration: haut(figure),
     illustrationApresProvenance: figure !== null && figure.previousElementSibling?.matches('[data-provenance]') === true,
     hautArbre: haut(arbre),
+    lignesEncadre: document.querySelectorAll('[data-encadre-decision] [data-encadre-ligne]').length,
     hauteurPage: document.documentElement.scrollHeight,
     sommaireAttendu: el('[data-ligne-transparence]') !== null || el('.colonne.socle') !== null,
     sommaire: el('[data-sommaire]') !== null,
@@ -142,7 +143,9 @@ try {
 const constats = mesures.flatMap(evaluerMesure);
 console.log(ENTETE_MESURES);
 for (const m of mesures) console.log(ligneMesure(m));
+const signalements = mesures.flatMap(signalerMesure);
+for (const t of signalements) console.log(`SIGNALÉ [FORMAT2-MESURES] ${t}`);
 for (const c of constats) console.log(`ERREUR [${c.regle}] ${c.message}`);
-console.log(`Mesures : ${adresses.length} page(s), ${mesures.length} mesure(s), ${constats.length} erreur(s).`);
-if (sortieJson !== undefined) await writeFile(sortieJson, `${JSON.stringify({ mesures, constats }, null, 2)}\n`);
+console.log(`Mesures : ${adresses.length} page(s), ${mesures.length} mesure(s), ${constats.length} erreur(s), ${signalements.length} signalement(s) à reprendre dans le paquet.`);
+if (sortieJson !== undefined) await writeFile(sortieJson, `${JSON.stringify({ mesures, constats, signalements }, null, 2)}\n`);
 exit(constats.length > 0 ? 1 : 0);

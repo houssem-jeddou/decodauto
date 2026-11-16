@@ -28,7 +28,8 @@ focus sur fond sombre, captures refaites) ; ce qui reste pour F2, F3 et la vague
     réponses en liste à puces ; un verdict cité est une pastille en ligne (forme de la gravité, libellé de la grille, liseré
     de sa couleur) ; aucun libellé de verdict écrit à la main (FORMAT2-ARBRE) ;
   - *fiches « Le symptôme en bref » et « Le tutoriel en bref »* : carte, intitulé en gras au-dessus de sa valeur, rangées séparées ;
-  - *causes* : cartes de la page voyant, avant le texte sur la page panne (ordre §4) ;
+  - *causes* : cartes de la page voyant ; sur la page panne, après la partie du texte qui porte l'arbre ou les étapes
+    (demande de changement n° 32, acceptée le 16/11 à 16 h 52, mise en œuvre à F1.4 ; avant : avant le texte) ;
   - *historique du dossier* : carte, une entrée par rangée séparée d'un filet, date en gras, du plus récent au plus ancien ;
   - *tableaux du texte* : bloc de la charte ; au-delà de trois colonnes, une carte par rangée sur téléphone (intitulé de la
     colonne devant chaque valeur), tableau ordinaire sur ordinateur ;

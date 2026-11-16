@@ -384,9 +384,11 @@ export const pageVoyant: Modele = (page, site, corpsHtml) => {
 export const pageVoyantF2: Modele = (page, site, corpsHtml) => pageVoyantFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { format2: true }));
 
 /**
- * Page panne au format 2 (lot F1, F1.3c) : même ordre qu'au format 1 (fiche du symptôme, fiche du tutoriel, causes avant le
- * texte), dans la mise en page du format 2 (src/lib/format2.ts, pageFormat2) ; arbre de décision en carte, ses verdicts
- * cités en pastilles ; tableau des notices affiché sans être l'élément unique.
+ * Page panne au format 2 (lot F1, F1.3c ; ordre revu par la demande de changement n° 32, F1.4) : fiche du symptôme (ou de
+ * la situation), fiche du tutoriel, texte rédigé jusqu'à la partie qui porte l'arbre de décision (ou les étapes), causes,
+ * suite du texte (src/lib/format2.ts, pageFormat2 et insererApresPartieArbre) ; arbre de décision en carte, ses verdicts
+ * cités en pastilles ; tableau des notices affiché sans être l'élément unique. FORMAT2-ARBRE-PLACE vérifie que l'arbre est
+ * dans la première ou la deuxième partie du texte.
  */
 export const pagePanneF2: Modele = (page, site, corpsHtml) => {
   if (!('contexte' in page)) throw new Error(`page « ${page.id} » : le modèle panne s'applique à une page panne`);
@@ -394,10 +396,11 @@ export const pagePanneF2: Modele = (page, site, corpsHtml) => {
     avantTexte: [
       fichePanneHtml(modeleFichePanne(page), { format2: true }),
       page.tutoriel !== undefined ? ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel), { format2: true }) : '',
-      causesFormat2(page.causes, site.couts),
     ],
     apresTexte: [],
     tableauElementUnique: false,
+    // Demande de changement n° 32 : les causes suivent la partie du texte qui porte l'arbre (ou les étapes).
+    apresPartieArbre: causesFormat2(page.causes, site.couts),
   });
 };
 

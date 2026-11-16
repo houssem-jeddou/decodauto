@@ -18,12 +18,13 @@ Pages de la démonstration (14 au format 2) :
 Un modèle par type : voyant, outil, code défaut, pneus et obligations, panne, dossier, tutoriel, accueil, socle, 404.
 
 Preuves de référence (commandes lancées sur la branche ; la CI de la PR les rejoue) :
-- `npm test` : 837 tests, 837 réussis, 0 échec ;
+- `npm test` : 840 tests, 840 réussis, 0 échec ;
 - `npm run schemas` : 0 erreur ;
 - `npm run demo:format2` : 23 pages éditoriales, 0 erreur bloquante ; 49 erreurs attendues, toutes nommées (empreintes
   du brouillon, textes non repris : FORMAT2-METHODE, FORMAT2-PARAGRAPHES ; pages de démonstration sans empreinte ; paire du
-  plan `batterie-changer` ↔ `voyant-batterie`) ; liens : 578 internes vérifiés, 0 problème ;
-- `npm run mesures:format2` (FORMAT2-MESURES, Chromium) : 14 pages, 84 mesures, **0 erreur**
+  plan `batterie-changer` ↔ `voyant-batterie`) ; liens : 582 internes vérifiés, 0 problème ;
+- `npm run mesures:format2` (FORMAT2-MESURES, Chromium) : 14 pages, 84 mesures, **0 erreur**, 2 signalements (illustration
+  AdBlue au-delà de trois écrans, encadré de quatre lignes : règle 2i assouplie par la demande n° 32)
   (`porte/mesures-format2.log`, `porte/mesures-format2.json`). Même mesure sur la démonstration construite depuis `main`
   (464fe7d, avant F1.4) : **50 erreurs** (`porte/mesures-format2-main-464fe7d.log`), corrigées ici (§3).
 
@@ -56,7 +57,7 @@ Preuves de référence (commandes lancées sur la branche ; la CI de la PR les r
 | **2f** Tableau des notices compact ; extraits dépliables au libellé unique | TABLEAU-NOTICES-*, FORMAT2-REPLIE | `tests/format2.test.ts` | – |
 | **2g** « Sources » repliée avec leur nombre | FORMAT2-REPLIE | `tests/format2.test.ts` | – |
 | **2h** Sommaire au-delà de six écrans | FORMAT2-SOMMAIRE (dès trois H2 : sommaire qui mène à chacun) ; **FORMAT2-MESURES** (F1.4) : page éditoriale ou du socle de plus de 4 002 px sans sommaire refusée ; socle : sommaire dès deux titres | `tests/mesures-format2.test.ts`, `tests/format2-f3.test.ts` | – |
-| **2i** Visuel après l'encadré dans les trois premiers écrans (2 001 px) ; précision : encadré plus long que trois écrans, visuel juste après « Notices / Base du coût » | FORMAT2-ILLUSTRATION (une seule, juste après le bloc « Notices », dessin nommé, légende signée), construction refusée sans illustration ; **FORMAT2-MESURES** (haut ≤ 2 001 px, ou précision) | `tests/mesures-format2.test.ts` (2 030 px, absente, encadré long sans le visuel juste après) | Le dessin montre-t-il où regarder (jugement) |
+| **2i** Visuel après l'encadré, dans les trois premiers écrans ; **assouplie par la demande n° 32** : le visuel suit toujours le bloc « Notices / Base du coût » ; son haut est mesuré et donné, et signalé au-delà de trois écrans (2 001 px) avec la raison | FORMAT2-ILLUSTRATION (une seule, juste après le bloc « Notices », dessin nommé, légende signée), construction refusée sans illustration ; **FORMAT2-MESURES** (haut ≤ 2 001 px, ou précision) | `tests/mesures-format2.test.ts` (2 030 px, absente, encadré long sans le visuel juste après) | Le dessin montre-t-il où regarder (jugement) |
 | **2j** Aucune question retirée ; part citée d'un tiers au plus ; mots et hauteur en indicateurs | CITATIONS-PART ; hauteur donnée par FORMAT2-MESURES | `tests/format2.test.ts` (part citée) | Liste des H2 avant et après dans le paquet de chaque lot (F2, F3) : les textes ne changent qu'alors |
 | **2k** Accueil : grille des pictogrammes, accès par thème ; outil : index en grille | ACCUEIL-LISTE, ACCUEIL-LIEN, PICTO-LIBELLE, OUTIL-INDEX | `tests/format2.test.ts`, `tests/outil-format2.test.ts` | – |
 | **2l** Mention en tête inchangée ; ligne de transparence au même texte, visible, contraste AA | MENTION-IA-*, composants communs ; **`tests/charte-b.test.ts`** (F1.4) : la classe stylée est celle du composant, 13 px, couleur douce, contraste 6,67:1 ; Lighthouse accessibilité 100 | `tests/charte-b.test.ts` | – |
@@ -68,6 +69,9 @@ Autres contrôles ajoutés à F1.4 :
 - **Débordement horizontal** à 320, 375 et 1366 px (WCAG 1.4.10) : dans FORMAT2-MESURES, sur toutes les pages de la
   démonstration et de la recette des exemples.
 - **Contour de focus** sur fond sombre (WCAG 1.4.11) : `tests/charte-b.test.ts` (3:1 au moins contre chaque fond).
+- **FORMAT2-ARBRE-PLACE** (demande n° 32, §1 bis du brief) : sur la page panne, l'arbre (ou les étapes) dans la première ou
+  la deuxième partie du texte ; dans la deuxième, première partie d'un seul paragraphe ; cas en échec testés
+  (`tests/format2-panne.test.ts`). Seuil de six écrans pour le haut de l'arbre : signalé par FORMAT2-MESURES.
 
 ## 3. Mesures page par page (FORMAT2-MESURES, 375 × 667, police chargée / de secours quand elles diffèrent)
 
@@ -75,20 +79,20 @@ Pixels CSS depuis le haut de la page. Seuils : 667 (2a), 2 001 (2i), 4 002 (2h).
 
 | Page | Réponse directe | Verdict et urgence | 1re situation | Bas de l'encadré | Illustration | Juste après « Notices » | Arbre ou étapes | Hauteur | Sommaire | Débordement (320, 375, 1366) |
 |---|---|---|---|---|---|---|---|---|---|---|
-| `/voyants/moteur/` | – | 373 | **522** | 1 593 | **1 982** | oui | – | 12 587 / 12 637 | oui | 0 |
-| `/voyants/adblue/` | – | 493 | **601** | 2 280 | 2 763 (précision 2i) | **oui** | – | 13 869 | oui | 0 |
-| `/voyants/` (outil) | – | 489 | **638** | 1 455 | **1 825** | oui | – | 22 067 / 22 117 | oui | 0 |
-| `/codes-defaut/p0420/` | – | 399 | **547** | 872 | **1 205** | oui | – | 9 127 / 9 178 | oui | 0 |
-| `/pression-des-pneus/` (informative) | **405** | **576** | 766 (précision 2a) | 1 091 | **1 386** | oui | – | 8 161 | oui | 0 |
-| `/loi-montagne/` | – | 442 | **591** | 1 350 | **1 627** | oui | – | 8 492 / 8 593 | oui | 0 |
-| `/perte-de-puissance-voiture/` | – | 411 | **498** | 986 | **1 281** | oui | 2 874 | 5 118 | oui | 0 |
-| `/voiture-qui-broute/` | – | 385 | **472** | 894 | **1 189** | oui | 2 076 | 3 442 | oui | 0 |
-| `/batterie-voiture/changer/` (tutoriel) | – | 411 | **580** | 863 | **1 140** | oui | 2 411 (étapes) | 3 634 | oui | 0 |
-| `/moteur-puretech/` (dossier) | – | 373 | **481** | 964 | **1 259** | oui | – | 3 578 / 3 603 | oui | 0 |
-| `/` (accueil) | – | – | – | – | – | – | – | 2 236 / 2 268 | – | 0 |
-| `/a-propos/` | – | – | – | – | – | – | – | 8 286 | oui | 0 |
-| `/mentions-legales/` | – | – | – | – | – | – | – | 4 547 | oui | 0 |
-| `/404.html` | – | – | – | – | – | – | – | 667 (pied en bas) | – | 0 |
+| `/voyants/moteur/` | – | 373 | **522** | 1 593 | **1 982** | oui | – | 12 587 / 12 637 | oui | 0 |
+| `/voyants/adblue/` | – | 493 | **601** | 2 280 | 2 763 (signalée : encadré de 4 lignes) | oui | – | 13 869 | oui | 0 |
+| `/voyants/` (outil) | – | 489 | **638** | 1 455 | **1 825** | oui | – | 22 067 / 22 117 | oui | 0 |
+| `/codes-defaut/p0420/` | – | 399 | **547** | 872 | **1 205** | oui | – | 9 127 / 9 178 | oui | 0 |
+| `/pression-des-pneus/` (informative) | **405** | 576 | 766 | 1 091 | **1 386** | oui | – | 8 161 | oui | 0 |
+| `/loi-montagne/` | – | 442 | **591** | 1 350 | **1 627** | oui | – | 8 492 / 8 593 | oui | 0 |
+| `/perte-de-puissance-voiture/` | – | 411 | **498** | 986 | **1 281** | oui | 2 314 | 5 132 | oui | 0 |
+| `/voiture-qui-broute/` | – | 385 | **472** | 894 | **1 189** | oui | 1 855 | 3 442 | oui | 0 |
+| `/batterie-voiture/changer/` (tutoriel) | – | 411 | **580** | 863 | **1 140** | oui | 2 190 | 3 634 | oui | 0 |
+| `/moteur-puretech/` (dossier) | – | 373 | **481** | 964 | **1 259** | oui | – | 3 578 / 3 603 | oui | 0 |
+| `/` (accueil) | – | – | – | – | – | – | – | 2 236 / 2 268 | – | 0 |
+| `/a-propos/` | – | – | – | – | – | – | – | 8 286 | oui | 0 |
+| `/mentions-legales/` | – | – | – | – | – | – | – | 4 547 | oui | 0 |
+| `/404.html` | – | – | – | – | – | – | – | 667 | – | 0 |
 
 Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/mesures-format2-main-464fe7d.log`) :
 - **débordement à 320 px** sur les 12 pages qui ont le bouton du bandeau (335 px en police chargée, 342 px en police de
@@ -101,10 +105,11 @@ Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/
 
 ## 4. Points à trancher à la porte (avec ma recommandation)
 
-1. **Place de l'arbre de décision sur téléphone** (demande de changement n° 32, version 2, soumise à Houssem le 16/11). Le
-   haut de l'arbre est à 2 874 px (perte de puissance) et 2 076 px (broute), parce que les fiches et les causes le
-   précèdent (ordre de la charte). **Recommandation** : accepter la demande n° 32 (§1 bis du brief, non mis en œuvre ici).
-   Si elle est refusée, l'ordre actuel est gardé et ces mesures sont données à chaque porte.
+1. **Place de l'arbre de décision sur téléphone : tranché.** Houssem a accepté la demande n° 32 (version 2) le 16/11 à
+   16 h 52 ; elle est mise en œuvre ici (§7). Haut de l'arbre (ou des étapes), avant → après : perte de puissance
+   2 874 → 2 314 px ; voiture qui broute 2 076 → 1 855 ; changer la batterie (étapes) 2 411 → 2 190 ; exemple « voiture ne
+   démarre pas » (version 2, construit en local) 5 666 → 3 560 px (5 692 → 3 585 en police de secours), sous le seuil de
+   six écrans. À valider sur les captures avant et après (`captures/demande-32/`).
 2. **Page outil** :
    - index par paire (pictogramme, couleur), une grille par couleur, au lieu d'une entrée par ligne : change la décision 9
      du paquet 8.1 (04/11) ;
@@ -141,8 +146,10 @@ Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/
 - **Recette de l'étape 9** avant chaque fusion : filtre de l'outil, **rendu sur un vrai téléphone**, contour de focus au
   clavier, lecteur d'écran sur les tableaux en cartes.
 - **Search Console** : chiffres relevés page par page avant F2 (ligne 13).
-- **Vague B** : pages rédigées au format 2 d'emblée (FORMAT2-VAGUE), modèles panne et dossier de F1.3c ; demande n° 32 si
-  acceptée.
+- **Vague B** : pages rédigées au format 2 d'emblée (FORMAT2-VAGUE), modèles panne et dossier de F1.3c, ordre de la page
+  panne de la demande n° 32 (FORMAT2-ARBRE-PLACE) ; haut de l'arbre et du visuel donnés dans chaque paquet (signalements de
+  FORMAT2-MESURES). Exemple « voiture ne démarre pas » : illustration à 2 406 px (encadré de six lignes, bas à 1 983 px),
+  signalée, à dire dans le paquet de la porte 10 ; pièces `pile-de-cle` et `carburant-et-reamorcage` à ajouter avec le lot.
 - **F3** (noté dans `a-reporter-f1.4.md`) : encart « dépannage sur autoroute » (demande de changement rédigée par Houssem) ;
   « (p. 198) » du tableau de la pression en `{{cite}}` ; question de la page pression revue avec sa réponse directe.
 
@@ -193,6 +200,11 @@ et compléter la puce « Typographie française » :
 | Page du socle et 404 | Tête de page nuit sans encadré, même écart entre la mention et le H1 que les pages éditoriales ; fiche de l'auteur et « Méthode » en cartes ; 404 : phrase, un seul bouton « Trouver mon voyant » (aucun dans le bandeau), lien vers l'accueil, pied de page en bas de l'écran. |
 | Bandeau sous 360 px | Le dessin du bouton « Trouver mon voyant » s'efface, son texte reste ; nom du site et marges resserrés (aucun défilement horizontal à 320 px). |
 
+**§5, règle i** — remplacer la précision du 15/11 par (texte de la demande n° 32) :
+> **2i** (assouplie par la demande de changement n° 32) : le visuel suit immédiatement le bloc « Notices / Base du coût »,
+> sous la ligne de transparence. Le haut du visuel est mesuré à 375 × 667, police chargée et police de secours, et donné
+> dans chaque paquet ; au-delà de trois écrans, le paquet le signale et dit pourquoi.
+
 **§5** — ajouter :
 > Ces règles sont vérifiées par les contrôles du dépôt (FORMAT2-*, R9-*, TABLEAU-NOTICES-*, CITATIONS-PART ; catalogue :
 > `CONTROLES.md`) ; les hauteurs (2a, 2h, 2i) et le débordement à 320, 375 et 1366 px sont mesurés dans un navigateur
@@ -203,10 +215,15 @@ et compléter la puce « Typographie française » :
 **§4 Structure d'une page éditoriale** — ajouter après la liste :
 > **Au format 2** (demande de changement n° 30, charte graphique §4) : mention en tête, fil d'Ariane, H1, encadré de
 > décision, signature, ligne de transparence, bloc « Notices / Base du coût », illustration, sommaire, corps du modèle,
-> tableau des notices, emplacement publicitaire, pages liées, « Sources » repliée. Page panne : fiches, causes, puis texte
-> (ordre revu si la demande n° 32 est acceptée). Sur la page outil, le renvoi vers la liste est un bouton, sans icône
+> tableau des notices, emplacement publicitaire, pages liées, « Sources » repliée. Sur la page outil, le renvoi vers la liste est un bouton, sans icône
 > (point 4 ci-dessus : une icône seulement si elle double un texte), et l'introduction de l'outil tient en deux paragraphes,
 > sans changer un mot.
+
+**§4, point 7, pages pannes** — remplacer par (texte de la demande n° 32) :
+> pages pannes (demande de changement n° 32) : fiche « Le symptôme en bref » (ou « La situation en bref »), fiche « Le
+> tutoriel en bref » sur un tutoriel, puis le texte rédigé jusqu'à la partie qui porte l'arbre de décision ou les étapes,
+> puis les causes, puis la suite du texte. L'arbre, ou les étapes, est dans la première ou la deuxième partie du texte ;
+> s'il est dans la deuxième, la première est un seul paragraphe.
 
 **§3.5 Longueur** — ajouter :
 > Au format 2 : paragraphes de trois phrases au plus (FORMAT2-PARAGRAPHES), étapes en liste numérotée, comparaisons en
@@ -242,3 +259,40 @@ Champs ajoutés au lot F1 (déjà dans `src/schemas/`) :
 >   « comparaisons en tableau » quand le texte compare ;
 > - le dessin de l'illustration montre où regarder ou quoi faire ;
 > - liste des H2 avant et après (aucune question retirée).
+
+### 6.5 Note datée après le §8 de la demande n° 30 (`travaux/etape-13/demande-changement-30.md`)
+
+> **Note du 16/11/2026 (demande de changement n° 32, acceptée par Houssem à 16 h 52)** : la précision 2i est assouplie. Le
+> visuel suit immédiatement le bloc « Notices / Base du coût », sous la ligne de transparence. Le haut du visuel est mesuré
+> à 375 × 667, police chargée et police de secours, et donné dans chaque paquet ; au-delà de trois écrans, le paquet le
+> signale et dit pourquoi.
+
+## 7. Demande de changement n° 32 (§1 bis du brief), mise en œuvre
+
+Acceptée par Houssem le 16/11/2026 à 16 h 52 (texte : branche `etape-13/demande-32`, commit 0faa62d).
+
+- **Ordre de la page panne** (`pagePanneF2`, `src/lib/modeles.ts` ; `insererApresPartieArbre`, `src/lib/format2.ts`) :
+  fiches, texte rédigé jusqu'à la partie qui porte l'arbre (ou les étapes), causes, suite du texte (second bloc
+  `data-corps`), tableau des notices, emplacement, pages liées, sources ; sommaire dans le même ordre.
+- **FORMAT2-ARBRE-PLACE** (`constatsArbrePlace`, `src/lib/controle-format2.ts`) et ses cas en échec : arbre dans la
+  troisième partie ; première partie de deux paragraphes ; étapes d'un tutoriel dans la troisième partie ; passent : tutoriel
+  sans arbre, page sans arbre. La démonstration « perte de puissance » avait une première partie de deux paragraphes : ils
+  sont fusionnés en un.
+- **Précision 2i assouplie** dans FORMAT2-MESURES : visuel toujours juste après « Notices / Base du coût » (erreur sinon),
+  haut signalé au-delà de trois écrans avec le nombre de lignes de l'encadré ; haut de l'arbre signalé au-delà de six
+  écrans (décision de Houssem sur captures).
+- `CLAUDE.md` (« Modèles de pages »), commentaire de `src/lib/fiche-panne.ts`, `a-reporter-f1.4.md` et `CONTROLES.md` mis
+  à jour.
+- **Captures avant et après** (`captures/demande-32/`, 375 × 667 page entière et 1366 × 800, premier écran et écran de
+  l'arbre, police chargée et police de secours) : démonstrations « perte de puissance », « voiture qui broute », « changer la
+  batterie », et l'exemple « voiture ne démarre pas » (branche `preparation/etape-10`, version 2, construit en local sans
+  être commité : deux pièces manquent à `data/couts.json`, à ajouter avec le lot). Mesures : `mesures-avant.json`,
+  `mesures-apres.json`, `mesures-format2-avec-exemple.log` (FORMAT2-MESURES avec l'exemple : 15 pages, 0 erreur,
+  4 signalements).
+
+| Page | Arbre ou étapes, avant → après | Causes, avant → après | Illustration | Ordre du sommaire après |
+|---|---|---|---|---|
+| Perte de puissance | 2 874 → **2 314** | 1 975 → 3 468 | 1 281 | symptôme, « que faire ? », « selon ce que vous voyez » (arbre), causes, suite |
+| Voiture qui broute | 2 076 → **1 855** | 1 818 → 2 297 | 1 189 | symptôme, « selon ce que vous voyez » (arbre), causes, suite |
+| Changer la batterie (tutoriel) | 2 411 → **2 190** (étapes) | 2 033 → 2 603 | 1 140 | situation, tutoriel, « avant de commencer », « les étapes », causes, suite |
+| Voiture ne démarre pas (exemple, version 2) | 5 666 → **3 560** (5 692 → 3 585 en police de secours) | 3 158 → 5 350 | 2 406, signalée (encadré de 6 lignes, bas à 1 983) | symptôme, « que faire ? », « le bon geste » (arbre), causes, suite |

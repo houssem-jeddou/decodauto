@@ -18,6 +18,8 @@
 //  - FORMAT2-ARBRE : dans chaque arbre de décision, chaque verdict cité est une pastille (forme, gravité et libellé d'une
 //    ligne de l'encadré) qui termine une réponse,
 //    jamais un libellé écrit hors pastille (F1.3c) ;
+//  - FORMAT2-ARBRE-PLACE : sur une page panne, l'arbre de décision (ou les étapes d'un tutoriel) est dans la première ou
+//    la deuxième partie du texte rédigé ; dans la deuxième, la première est un seul paragraphe (demande n° 32 ; F1.4) ;
 //  - FORMAT2-PARAGRAPHES : un paragraphe du texte rédigé a trois phrases au plus (règle 2e ; F1.4), pages du socle comprises ;
 //  - FORMAT2-SOMMAIRE : dès SOMMAIRE_MIN_H2 titres H2 dans le texte rédigé, un sommaire « Sur cette page » qui mène à
 //    chacun d'eux, sans lien vers une ancre absente (règle 2h).
@@ -267,4 +269,40 @@ export function constatsParagraphes(html: string, fichier: string): ConstatForma
     if (n > PHRASES_MAX_PARAGRAPHE) longs.push(`${n} phrases : « ${texte.slice(0, 60)}… »`);
   });
   return longs.length === 0 ? [] : [erreur('FORMAT2-PARAGRAPHES', `${longs.length} paragraphe(s) de plus de ${PHRASES_MAX_PARAGRAPHE} phrases dans le texte rédigé (règle 2e) : ${longs.slice(0, 3).join(' ; ')}`, fichier)];
+}
+
+// ---- Place de l'arbre de décision sur la page panne (demande de changement n° 32 ; F1.4) ---------------------------
+
+/**
+ * FORMAT2-ARBRE-PLACE : le texte rédigé (blocs `data-corps`, dans l'ordre) se découpe en parties, chacune commençant à un H2 ;
+ * le texte placé avant le premier H2, s'il y en a, compte comme une partie. L'arbre de décision (ou, sans arbre, les
+ * étapes d'un tutoriel) est dans la première ou la deuxième partie ; s'il est dans la deuxième, la première est faite d'un
+ * seul paragraphe (son titre et un repère du verdict mis à part). Une page sans arbre ni étapes n'est pas concernée.
+ */
+export function constatsArbrePlace(html: string, fichier: string): ConstatFormat2[] {
+  const $ = cheerio.load(html);
+  const enfants = $('[data-corps]').toArray().flatMap((bloc) => $(bloc).children().toArray());
+  const parties: (typeof enfants)[] = [];
+  let courante: typeof enfants = [];
+  for (const el of enfants) {
+    if (el.tagName === 'h2') {
+      if (courante.length > 0) parties.push(courante);
+      courante = [el];
+    } else courante.push(el);
+  }
+  if (courante.length > 0) parties.push(courante);
+  const contient = (partie: typeof enfants, selecteur: string): boolean => partie.some((el) => $(el).is(selecteur) || $(el).find(selecteur).length > 0);
+  const arbre = '[data-element-unique="arbre-de-decision"]';
+  const cible = parties.some((p) => contient(p, arbre)) ? arbre : 'ol[data-tutoriel-etapes]';
+  const nom = cible === arbre ? "l'arbre de décision" : "les étapes du tutoriel";
+  const rang = parties.findIndex((p) => contient(p, cible));
+  if (rang < 0) return [];
+  if (rang >= 2) return [erreur('FORMAT2-ARBRE-PLACE', `${nom} est dans la partie ${rang + 1} du texte : il va dans la première ou la deuxième (demande de changement n° 32)`, fichier)];
+  if (rang === 1) {
+    const premiere = (parties[0] ?? []).filter((el) => el.tagName !== 'h2' && !$(el).is('[data-repere]') && $(el).text().trim() !== '');
+    if (premiere.length !== 1 || premiere[0]?.tagName !== 'p') {
+      return [erreur('FORMAT2-ARBRE-PLACE', `${nom} est dans la deuxième partie du texte : la première partie est alors un seul paragraphe (trouvé : ${premiere.length} bloc(s)) (demande de changement n° 32)`, fichier)];
+    }
+  }
+  return [];
 }

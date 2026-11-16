@@ -15,6 +15,7 @@
       "hautIllustration": 0,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 2375,
       "sommaireAttendu": false,
       "sommaire": false
@@ -34,6 +35,7 @@
       "hautIllustration": 0,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 2236,
       "sommaireAttendu": false,
       "sommaire": false
@@ -53,6 +55,7 @@
       "hautIllustration": 97,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 1415,
       "sommaireAttendu": false,
       "sommaire": false
@@ -72,6 +75,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 640,
       "sommaireAttendu": false,
       "sommaire": false
@@ -91,6 +95,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 667,
       "sommaireAttendu": false,
       "sommaire": false
@@ -110,6 +115,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 800,
       "sommaireAttendu": false,
       "sommaire": false
@@ -129,6 +135,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 9836,
       "sommaireAttendu": true,
       "sommaire": true
@@ -148,6 +155,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 8286,
       "sommaireAttendu": true,
       "sommaire": true
@@ -167,6 +175,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 4816,
       "sommaireAttendu": true,
       "sommaire": true
@@ -185,7 +194,8 @@
       "basEncadre": 979,
       "hautIllustration": 1313,
       "illustrationApresProvenance": true,
-      "hautArbre": 2578,
+      "hautArbre": 2357,
+      "lignesEncadre": 1,
       "hauteurPage": 3867,
       "sommaireAttendu": true,
       "sommaire": true
@@ -204,7 +214,8 @@
       "basEncadre": 863,
       "hautIllustration": 1140,
       "illustrationApresProvenance": true,
-      "hautArbre": 2411,
+      "hautArbre": 2190,
+      "lignesEncadre": 1,
       "hauteurPage": 3634,
       "sommaireAttendu": true,
       "sommaire": true
@@ -223,7 +234,8 @@
       "basEncadre": 542,
       "hautIllustration": 701,
       "illustrationApresProvenance": true,
-      "hautArbre": 1951,
+      "hautArbre": 1776,
+      "lignesEncadre": 1,
       "hauteurPage": 2938,
       "sommaireAttendu": true,
       "sommaire": true
@@ -243,6 +255,7 @@
       "hautIllustration": 1400,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 10334,
       "sommaireAttendu": true,
       "sommaire": true
@@ -262,6 +275,7 @@
       "hautIllustration": 1205,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 9127,
       "sommaireAttendu": true,
       "sommaire": true
@@ -281,6 +295,7 @@
       "hautIllustration": 755,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 5949,
       "sommaireAttendu": true,
       "sommaire": true
@@ -300,6 +315,7 @@
       "hautIllustration": 1844,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 9652,
       "sommaireAttendu": true,
       "sommaire": true
@@ -319,6 +335,7 @@
       "hautIllustration": 1627,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 8492,
       "sommaireAttendu": true,
       "sommaire": true
@@ -338,6 +355,7 @@
       "hautIllustration": 1027,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 5448,
       "sommaireAttendu": true,
       "sommaire": true
@@ -357,6 +375,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 5188,
       "sommaireAttendu": true,
       "sommaire": true
@@ -376,6 +395,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 4547,
       "sommaireAttendu": true,
       "sommaire": true
@@ -395,6 +415,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 3002,
       "sommaireAttendu": true,
       "sommaire": true
@@ -414,6 +435,7 @@
       "hautIllustration": 1531,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 2,
       "hauteurPage": 3966,
       "sommaireAttendu": true,
       "sommaire": true
@@ -433,6 +455,7 @@
       "hautIllustration": 1259,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 2,
       "hauteurPage": 3578,
       "sommaireAttendu": true,
       "sommaire": true
@@ -452,6 +475,7 @@
       "hautIllustration": 795,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 2,
       "hauteurPage": 2623,
       "sommaireAttendu": true,
       "sommaire": true
@@ -470,8 +494,9 @@
       "basEncadre": 1156,
       "hautIllustration": 1509,
       "illustrationApresProvenance": true,
-      "hautArbre": 3154,
-      "hauteurPage": 5777,
+      "hautArbre": 2542,
+      "lignesEncadre": 2,
+      "hauteurPage": 5791,
       "sommaireAttendu": true,
       "sommaire": true
     },
@@ -489,8 +514,9 @@
       "basEncadre": 986,
       "hautIllustration": 1281,
       "illustrationApresProvenance": true,
-      "hautArbre": 2874,
-      "hauteurPage": 5118,
+      "hautArbre": 2314,
+      "lignesEncadre": 2,
+      "hauteurPage": 5132,
       "sommaireAttendu": true,
       "sommaire": true
     },
@@ -508,8 +534,9 @@
       "basEncadre": 617,
       "hautIllustration": 795,
       "illustrationApresProvenance": true,
-      "hautArbre": 2156,
-      "hauteurPage": 3937,
+      "hautArbre": 1689,
+      "lignesEncadre": 2,
+      "hauteurPage": 3901,
       "sommaireAttendu": true,
       "sommaire": true
     },
@@ -528,6 +555,7 @@
       "hautIllustration": 1647,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 9056,
       "sommaireAttendu": true,
       "sommaire": true
@@ -547,6 +575,7 @@
       "hautIllustration": 1386,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 8161,
       "sommaireAttendu": true,
       "sommaire": true
@@ -566,6 +595,7 @@
       "hautIllustration": 831,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 5149,
       "sommaireAttendu": true,
       "sommaire": true
@@ -584,7 +614,8 @@
       "basEncadre": 1053,
       "hautIllustration": 1406,
       "illustrationApresProvenance": true,
-      "hautArbre": 2317,
+      "hautArbre": 2070,
+      "lignesEncadre": 2,
       "hauteurPage": 3868,
       "sommaireAttendu": true,
       "sommaire": true
@@ -603,7 +634,8 @@
       "basEncadre": 894,
       "hautIllustration": 1189,
       "illustrationApresProvenance": true,
-      "hautArbre": 2076,
+      "hautArbre": 1855,
+      "lignesEncadre": 2,
       "hauteurPage": 3442,
       "sommaireAttendu": true,
       "sommaire": true
@@ -622,7 +654,8 @@
       "basEncadre": 576,
       "hautIllustration": 754,
       "illustrationApresProvenance": true,
-      "hautArbre": 1644,
+      "hautArbre": 1470,
+      "lignesEncadre": 2,
       "hauteurPage": 2842,
       "sommaireAttendu": true,
       "sommaire": true
@@ -642,6 +675,7 @@
       "hautIllustration": 2158,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 25821,
       "sommaireAttendu": true,
       "sommaire": true
@@ -661,6 +695,7 @@
       "hautIllustration": 1825,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 22067,
       "sommaireAttendu": true,
       "sommaire": true
@@ -680,6 +715,7 @@
       "hautIllustration": 1128,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 12898,
       "sommaireAttendu": true,
       "sommaire": true
@@ -699,6 +735,7 @@
       "hautIllustration": 3232,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 15965,
       "sommaireAttendu": true,
       "sommaire": true
@@ -718,6 +755,7 @@
       "hautIllustration": 2763,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 13869,
       "sommaireAttendu": true,
       "sommaire": true
@@ -737,6 +775,7 @@
       "hautIllustration": 1507,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 8390,
       "sommaireAttendu": true,
       "sommaire": true
@@ -756,6 +795,7 @@
       "hautIllustration": 2377,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 14480,
       "sommaireAttendu": true,
       "sommaire": true
@@ -775,6 +815,7 @@
       "hautIllustration": 1982,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 12587,
       "sommaireAttendu": true,
       "sommaire": true
@@ -794,6 +835,7 @@
       "hautIllustration": 1115,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 8115,
       "sommaireAttendu": true,
       "sommaire": true
@@ -813,6 +855,7 @@
       "hautIllustration": 0,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 2375,
       "sommaireAttendu": false,
       "sommaire": false
@@ -832,6 +875,7 @@
       "hautIllustration": 0,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 2268,
       "sommaireAttendu": false,
       "sommaire": false
@@ -851,6 +895,7 @@
       "hautIllustration": 97,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 1415,
       "sommaireAttendu": false,
       "sommaire": false
@@ -870,6 +915,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 640,
       "sommaireAttendu": false,
       "sommaire": false
@@ -889,6 +935,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 667,
       "sommaireAttendu": false,
       "sommaire": false
@@ -908,6 +955,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 800,
       "sommaireAttendu": false,
       "sommaire": false
@@ -927,6 +975,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 9836,
       "sommaireAttendu": true,
       "sommaire": true
@@ -946,6 +995,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 8286,
       "sommaireAttendu": true,
       "sommaire": true
@@ -965,6 +1015,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 4816,
       "sommaireAttendu": true,
       "sommaire": true
@@ -983,7 +1034,8 @@
       "basEncadre": 979,
       "hautIllustration": 1313,
       "illustrationApresProvenance": true,
-      "hautArbre": 2578,
+      "hautArbre": 2357,
+      "lignesEncadre": 1,
       "hauteurPage": 3867,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1002,7 +1054,8 @@
       "basEncadre": 863,
       "hautIllustration": 1140,
       "illustrationApresProvenance": true,
-      "hautArbre": 2411,
+      "hautArbre": 2190,
+      "lignesEncadre": 1,
       "hauteurPage": 3634,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1021,7 +1074,8 @@
       "basEncadre": 542,
       "hautIllustration": 701,
       "illustrationApresProvenance": true,
-      "hautArbre": 1951,
+      "hautArbre": 1776,
+      "lignesEncadre": 1,
       "hauteurPage": 2938,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1041,6 +1095,7 @@
       "hautIllustration": 1400,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 10360,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1060,6 +1115,7 @@
       "hautIllustration": 1205,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 9178,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1079,6 +1135,7 @@
       "hautIllustration": 755,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 6000,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1098,6 +1155,7 @@
       "hautIllustration": 1869,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 9702,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1117,6 +1175,7 @@
       "hautIllustration": 1627,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 8593,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1136,6 +1195,7 @@
       "hautIllustration": 1027,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 5448,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1155,6 +1215,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 5188,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1174,6 +1235,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 4547,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1193,6 +1255,7 @@
       "hautIllustration": null,
       "illustrationApresProvenance": false,
       "hautArbre": null,
+      "lignesEncadre": 0,
       "hauteurPage": 3002,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1212,6 +1275,7 @@
       "hautIllustration": 1531,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 2,
       "hauteurPage": 3966,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1231,6 +1295,7 @@
       "hautIllustration": 1259,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 2,
       "hauteurPage": 3603,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1250,6 +1315,7 @@
       "hautIllustration": 795,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 2,
       "hauteurPage": 2623,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1268,8 +1334,9 @@
       "basEncadre": 1156,
       "hautIllustration": 1509,
       "illustrationApresProvenance": true,
-      "hautArbre": 3154,
-      "hauteurPage": 5777,
+      "hautArbre": 2542,
+      "lignesEncadre": 2,
+      "hauteurPage": 5791,
       "sommaireAttendu": true,
       "sommaire": true
     },
@@ -1287,8 +1354,9 @@
       "basEncadre": 986,
       "hautIllustration": 1281,
       "illustrationApresProvenance": true,
-      "hautArbre": 2874,
-      "hauteurPage": 5118,
+      "hautArbre": 2314,
+      "lignesEncadre": 2,
+      "hauteurPage": 5132,
       "sommaireAttendu": true,
       "sommaire": true
     },
@@ -1306,8 +1374,9 @@
       "basEncadre": 617,
       "hautIllustration": 795,
       "illustrationApresProvenance": true,
-      "hautArbre": 2156,
-      "hauteurPage": 3937,
+      "hautArbre": 1689,
+      "lignesEncadre": 2,
+      "hauteurPage": 3901,
       "sommaireAttendu": true,
       "sommaire": true
     },
@@ -1326,6 +1395,7 @@
       "hautIllustration": 1647,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 9107,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1345,6 +1415,7 @@
       "hautIllustration": 1386,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 8161,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1364,6 +1435,7 @@
       "hautIllustration": 831,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 1,
       "hauteurPage": 5174,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1382,7 +1454,8 @@
       "basEncadre": 1053,
       "hautIllustration": 1406,
       "illustrationApresProvenance": true,
-      "hautArbre": 2317,
+      "hautArbre": 2070,
+      "lignesEncadre": 2,
       "hauteurPage": 3868,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1401,7 +1474,8 @@
       "basEncadre": 894,
       "hautIllustration": 1189,
       "illustrationApresProvenance": true,
-      "hautArbre": 2076,
+      "hautArbre": 1855,
+      "lignesEncadre": 2,
       "hauteurPage": 3442,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1420,7 +1494,8 @@
       "basEncadre": 576,
       "hautIllustration": 754,
       "illustrationApresProvenance": true,
-      "hautArbre": 1644,
+      "hautArbre": 1470,
+      "lignesEncadre": 2,
       "hauteurPage": 2842,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1440,6 +1515,7 @@
       "hautIllustration": 2158,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 25872,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1459,6 +1535,7 @@
       "hautIllustration": 1825,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 22117,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1478,6 +1555,7 @@
       "hautIllustration": 1128,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 12923,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1497,6 +1575,7 @@
       "hautIllustration": 3257,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 15990,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1516,6 +1595,7 @@
       "hautIllustration": 2763,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 13869,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1535,6 +1615,7 @@
       "hautIllustration": 1507,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 4,
       "hauteurPage": 8415,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1554,6 +1635,7 @@
       "hautIllustration": 2377,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 14531,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1573,6 +1655,7 @@
       "hautIllustration": 1982,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 12637,
       "sommaireAttendu": true,
       "sommaire": true
@@ -1592,10 +1675,15 @@
       "hautIllustration": 1115,
       "illustrationApresProvenance": true,
       "hautArbre": null,
+      "lignesEncadre": 3,
       "hauteurPage": 8115,
       "sommaireAttendu": true,
       "sommaire": true
     }
   ],
-  "constats": []
+  "constats": [],
+  "signalements": [
+    "/voyants/adblue/ (police chargée) : illustration à 2763 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2280 px (règle 2i, demande n° 32 : à dire dans le paquet)",
+    "/voyants/adblue/ (police de secours) : illustration à 2763 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2280 px (règle 2i, demande n° 32 : à dire dans le paquet)"
+  ]
 }
