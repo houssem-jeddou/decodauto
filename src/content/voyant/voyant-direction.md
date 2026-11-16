@@ -34,7 +34,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (18 h 23),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-5b.md).
-validation: db122d1908fb8d599aba7084d22c1a7af5b318b2531ec76b60d372404f31b8e6
+validation: 76de9636e7f3b4eba51bdc578d0145877e495dc97be503af6100bf87fb4f632c
 causes:
   - cause: Batterie débranchée puis rebranchée, ou dépannée
     explication: "Selon la notice Seat Ibiza, le témoin jaune peut s'allumer quand la batterie 12 volts a été débranchée puis rebranchée : elle demande alors un bref parcours à 15-20 km/h. Selon la notice Dacia Sandero 3, il s'allume, suivant le véhicule, lors d'un dépannage de la batterie, et elle demande alors une réinitialisation de l'angle du volant, à faire soi-même."

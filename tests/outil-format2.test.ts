@@ -73,8 +73,8 @@ describe('format 2 : page outil (F1.3a)', () => {
     assert.deepEqual(modeleDeLaPage('voyant', { ...page, format: 1 } as PageEditoriale), { modele: pageOutilVoyants });
   });
 
-  test('page construite : contrôles d\'aujourd\'hui (OUTIL-*, R9) et du format 2 verts ; seule l\'empreinte (brouillon jamais validé) échoue', () => {
-    assert.deepEqual(controle(html), ['R4-EMPREINTE']);
+  test('page construite : contrôles d\'aujourd\'hui (OUTIL-*, R9) et du format 2 verts, empreinte de la validation de Houssem comprise (paquet F2, version 4)', () => {
+    assert.deepEqual(controle(html), []);
     assert.deepEqual(regles(constatsPartCitee(html, 'x.html')), []);
   });
 

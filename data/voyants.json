@@ -54,7 +54,7 @@
     ],
     "ecart_marques": "Toyota demande d'arrêter immédiatement le véhicule. Renault et Dacia demandent de consulter au plus tôt un représentant de la marque, Seat de rouler prudemment jusqu'à l'atelier le plus proche, Peugeot de s'y rendre rapidement.",
     "ecart_court": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement).",
-    "validation": "e482ba56ea864d1ce1163444bb9e9107176da6ba5ea5b7d42aed1ba2777f1bc4"
+    "validation": "78a71a2011e956f630b91f9a2c676ce03b30d88a02460db186f6fe37061244e6"
   },
   {
     "id": "moteur-orange-clignotant",
@@ -111,7 +111,7 @@
     ],
     "ecart_marques": "Toyota demande d'arrêter immédiatement le véhicule ; Peugeot demande de faire appel au réseau (risque de destruction du catalyseur) ; Seat signale un risque pour le catalyseur et demande de rouler prudemment jusqu'à l'atelier le plus proche ; Renault et Dacia demandent de réduire le régime moteur et de consulter au plus tôt.",
     "ecart_court": "Plus stricts : Toyota (arrêt immédiat), Peugeot et Seat (ne pas poursuivre). Moins stricts : Renault et Dacia (régime réduit, consulter vite).",
-    "validation": "69b4e9e427136672d8caab59ceef30fa304eb8d42548b32c5d4dbdc04221d8aa"
+    "validation": "2d78f4e1e4023f91f7d8892d4ea30beafa52f9eb378090f0f2b9b14b1ed15d0f"
   },
   {
     "id": "stop",
@@ -158,7 +158,7 @@
         "demande": "S’arrêter impérativement, puis appeler le réseau"
       }
     ],
-    "validation": "e7d593d50217b54f4bbf4e77e2c6ba671cc2c28b372664971367682c18f67664"
+    "validation": "f41e917ae01b4699eb45623d9c26a83b2e294900c510b1e7721b5080551b4d83"
   },
   {
     "id": "moteur-rouge",
@@ -197,7 +197,7 @@
         "demande": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer"
       }
     ],
-    "validation": "a9227d9db6803608e5e2a47c7057b1985afc9ed6608a570ab0bd72db49b78888"
+    "validation": "67ed5f74a90e1c6a80f7faeaa5565a74380857edc7c4c75020676ed8792217b1"
   },
   {
     "id": "huile-pression-rouge",
@@ -252,7 +252,7 @@
         "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       }
     ],
-    "validation": "b3a25fb72da75a22179bd1e0be9b780f834950aeee63ebe4f4f77b33580dd30b"
+    "validation": "7227ff04875992186e1dd46b59b72d5ffc62cf1136b6c2dfc4dc691e6e584e9f"
   },
   {
     "id": "huile-niveau",
@@ -293,7 +293,7 @@
     ],
     "ecart_marques": "Toyota demande de vérifier le niveau et de faire l'appoint sans indiquer de délai ; Seat et Peugeot demandent de le faire immédiatement ou impérativement.",
     "ecart_court": "Plus stricts : Seat (contrôle immédiat) et Peugeot (appoint impératif). Moins strict : Toyota (vérifier et faire l’appoint, sans délai indiqué).",
-    "validation": "0968573d7c700d33f95bcc1822abf97b163aaac338c7731664f0ddfa5bde046d"
+    "validation": "8dc8df2065ccadee18f709038acb45d829da56386cec01dc176478af2b25be6a"
   },
   {
     "id": "entretien-vidange",
@@ -350,7 +350,7 @@
     ],
     "ecart_marques": "Chez Renault et Dacia, le message s'accompagne du témoin Service, dont la notice demande d'aller au plus tôt chez un représentant de la marque en conduisant avec ménagement ; Peugeot, Seat et Toyota rappellent un entretien à faire, sans précaution de conduite.",
     "ecart_court": "Plus stricts : Renault et Dacia (révision au plus vite, conduite avec ménagement). Moins stricts : Peugeot, Seat et Toyota (rappel d’entretien, sans précaution).",
-    "validation": "9bbfa9e1218fc314ee749231e7ff6ba68ce53f77485f58d0dd4cd6f5aa8d8881"
+    "validation": "75935d5d7657eebce6993063f4b3647fed69f99454bd13a339cb89b1078abf2e"
   },
   {
     "id": "batterie-rouge",
@@ -407,7 +407,7 @@
     ],
     "ecart_marques": "Seat laisse rouler jusqu'à l'atelier spécialisé le plus proche, immédiatement ; Peugeot, Renault, Dacia et Toyota imposent l'arrêt.",
     "ecart_court": "Plus stricts : Peugeot, Renault, Dacia et Toyota (arrêt imposé). Moins strict : Seat (atelier le plus proche, immédiatement).",
-    "validation": "03e04216bf80fe6c2972146c09c3ac060eaa1c742edcc1fe5d315a2d70518f56"
+    "validation": "cc30bfdc5ac10977116fecfd4e20e2efaa1e26ee152efa0b08408cc688749f12"
   },
   {
     "id": "frein-rouge",
@@ -462,7 +462,7 @@
         "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       }
     ],
-    "validation": "7cae2ec5e5c30b15854d0811dc080e5c8994fd2653a6e2af9959e15455247523"
+    "validation": "95b4c62f5f8394f2f6b358666dbac4b77cd617b1aff342368ad6601206abc741"
   },
   {
     "id": "frein-stationnement",
@@ -517,7 +517,7 @@
         "demande": "Signale le frein serré ; alerte si l’on roule ainsi"
       }
     ],
-    "validation": "e2e9592ac44a5f1d92434c4a6e3047ecb13a61e25fe88e807e46c6f4f0476755"
+    "validation": "eb8db48567a36d22f6f119cf00fb5ee7d6312ef9a9115c1daf483e0f602ec4dc"
   },
   {
     "id": "adblue-reserve",
@@ -590,7 +590,7 @@
     ],
     "ecart_marques": "Seat laisse faire l'appoint dans les kilomètres indiqués (le voyant s'allume à 1 000 km d'autonomie) ; Renault et Dacia laissent prévoir l'appoint entre 1 200 et 800 km, puis le demandent dès que possible ; Peugeot demande un appoint rapide sous 800 km d'autonomie, impératif sous 100 km.",
     "ecart_court": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km). Moins strict : Seat (dans l’autonomie affichée).",
-    "validation": "46d4a991bf0cd04fa31b2cceb6c5124caec95129eaa00bf8a69ccc479c7b3117"
+    "validation": "0673fd6972eb9e9d58ba4bca90ac6a28258c612c8915cf508c22e975c3a84b59"
   },
   {
     "id": "adblue-demarrage-impossible",
@@ -647,7 +647,7 @@
     ],
     "ecart_marques": "Seat demande d'arrêter le véhicule dans un endroit sûr et plat pour faire l'appoint, et de s'adresser à un atelier en cas de défaut du système ; Peugeot, Renault et Dacia indiquent que le moteur ne redémarrera pas sans appoint d'AdBlue ou intervention du réseau, sans imposer l'arrêt.",
     "ecart_court": "Plus strict : Seat (arrêt en lieu sûr). Moins stricts : Peugeot, Renault et Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé).",
-    "validation": "8e50a30749677e69ec4afa81b590df2da18547b89d8a535e22ff704350cf42b5"
+    "validation": "eb0b7ed5273e81a2c0736c01ded3afeeeccd3a95e424e4e47ac21aea205e2529"
   },
   {
     "id": "adblue-defaut",
@@ -688,7 +688,7 @@
     ],
     "ecart_marques": "Seat demande de s'adresser à un atelier sans indiquer de délai ; Renault et Dacia demandent de consulter un représentant de la marque le plus tôt possible.",
     "ecart_court": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué).",
-    "validation": "121e896759d839abe378fce4e44ea5916ef9ef41fa56ba75d858e47a072b8643"
+    "validation": "6eda63580c14c136ec969164c910a67b2bd4bf1ac67d4c93116b0858f9696167"
   },
   {
     "id": "fap",
@@ -737,7 +737,7 @@
     ],
     "ecart_marques": "Seat ne donne pas de délai pour la régénération ; Peugeot, Renault et Dacia demandent de la faire dès que la circulation le permet.",
     "ecart_court": "Plus stricts : Peugeot, Renault et Dacia (rouler pour régénérer dès que la circulation le permet). Moins strict : Seat (régénération sans délai indiqué).",
-    "validation": "ad2a287fa7c85b8bec1dabf8d3ddf60101ab135da96abdfaab549dcc4d90c737"
+    "validation": "702fe4d6d2d58bb4939e5a671720a076c76773a288b50e5ab19c0f60a425b5c9"
   },
   {
     "id": "prechauffage",
@@ -784,7 +784,7 @@
         "demande": "Démarrer une fois le témoin éteint"
       }
     ],
-    "validation": "51e731ffe2dfd5ee7cb394346f1456e052975d410024bbd439ab93f2deba8124"
+    "validation": "4db9484c5359068b929f7d579cf97c8381433fcdf66acb585646dd759a103693"
   },
   {
     "id": "airbag-defaut",
@@ -849,7 +849,7 @@
     ],
     "ecart_marques": "Peugeot ne donne pas de délai et Dacia demande de consulter rapidement pour le témoin seul ; Seat, Renault, Toyota et Dacia (message « Airbag à contrôler ») demandent un contrôle immédiat ou au plus tôt.",
     "ecart_court": "Plus stricts : Dacia avec message, Seat, Toyota et Renault (contrôle sans attendre). Moins stricts : Peugeot (sans délai indiqué), Dacia témoin seul (rapidement).",
-    "validation": "8964bb55fb7b14b834fb601a126369873efeaf0deed3778ec6b37d7fbc9579ee"
+    "validation": "9cfcac77b5439f8b720f5d4f3e41cd441f3913680aa9dec4c11c8dc96e4eeab2"
   },
   {
     "id": "airbag-passager-desactive",
@@ -904,7 +904,7 @@
         "demande": "Sans siège enfant, vérifier que l’airbag est sur ON"
       }
     ],
-    "validation": "2f5a585bf7d6f18c2b50b083f6100f110a1aee5547a5dbecedecb42866dc6586"
+    "validation": "3fdf22a06f4e5bf9474b76c390cb96b0ce72df8ad469cb7d59d3a6899f1be7ca"
   },
   {
     "id": "abs",
@@ -969,7 +969,7 @@
     ],
     "ecart_marques": "Peugeot demande d'aller au garage en roulant prudemment, sans délai précis, et Renault et Dacia de consulter rapidement pour le témoin seul ; Renault et Dacia (avec le témoin Service) et Toyota demandent un contrôle au plus tôt ou immédiat.",
     "ecart_court": "Plus stricts : Renault et Dacia avec témoin Service, Toyota (sans attendre). Moins stricts : Peugeot (sans délai indiqué), Renault et Dacia témoin seul (rapidement).",
-    "validation": "859b03e0c4a3f183eb67019b7774f9a107f9c6a793a23c89dd612e454cd05745"
+    "validation": "ae46101b594afc5ff8b38f8544e7a7325541c75042594e594b9aeb5cf4eabc1e"
   },
   {
     "id": "abs-et-frein",
@@ -1024,7 +1024,7 @@
         "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       }
     ],
-    "validation": "7ea9099f9cabed553031a6b869ee2ed75f19392b5f6811b8faf41c85e882016f"
+    "validation": "9d6a4d89de0c624ef5ab7f3797e849d468148f24aadf17492b49725f31bf9eef"
   },
   {
     "id": "esp-clignotant",
@@ -1081,7 +1081,7 @@
     ],
     "ecart_marques": "Seat demande d'adapter immédiatement sa vitesse ; Peugeot, Renault, Dacia et Toyota décrivent le clignotement comme le fonctionnement normal du système, sans consigne.",
     "ecart_court": "Plus strict : Seat (adapter immédiatement sa vitesse). Moins stricts : Peugeot, Renault, Dacia et Toyota (système en action, sans consigne).",
-    "validation": "cd86001eb38dc89d0972c87a6c2b7a34f30206e92d85aa0be117cda352ed9f4c"
+    "validation": "6c8e72f934381092a2f2b0ce5799c9ea4052f1dee5f6b1a8d92509ab24def193"
   },
   {
     "id": "esp-defaut",
@@ -1130,7 +1130,7 @@
     ],
     "ecart_marques": "Peugeot demande d'aller au garage sans indiquer de délai ; Renault, Dacia et Toyota demandent d'y aller au plus tôt ou de faire vérifier immédiatement.",
     "ecart_court": "Plus stricts : Renault et Dacia (représentant au plus tôt, avec ménagement), Toyota (vérification immédiate). Moins strict : Peugeot (garage, sans délai indiqué).",
-    "validation": "851699bcd84723fd9d709d3672e7a1303fd9c92cfc682d312837eeff5dd411e3"
+    "validation": "cfd2fa16e0b5130b1faf2bcd4f1dee5591716260cea18a25093b21fb29e78ed2"
   },
   {
     "id": "pression-pneus",
@@ -1203,7 +1203,7 @@
     ],
     "ecart_marques": "Peugeot (p. 110), Seat et Toyota demandent de s'arrêter dès que possible pour contrôler les pneus, Renault et Dacia en cas de message « Crevaison ». Pour un simple sous-gonflage, la liste des témoins de Peugeot (p. 18) demande de contrôler la pression le plus rapidement possible, et Dacia de la vérifier et de l'ajuster à froid ; Renault ne donne pas de consigne pour le témoin seul.",
     "ecart_court": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir).",
-    "validation": "b986bf24d9ae5f89428d0101e0c7b74539cd21d6668b491f4a3c2aa2a1126660"
+    "validation": "2389fe8e2e092f111fc5eea0db4d9fdd88de0bc0a2f41a3c84694c3dcfc6e60a"
   },
   {
     "id": "pression-pneus-systeme",
@@ -1242,7 +1242,7 @@
         "demande": "Faire immédiatement vérifier le véhicule"
       }
     ],
-    "validation": "56b7215439112525deb0d0e6ef960633943aae98ae4d49ff5610eedb95bce17a"
+    "validation": "614e2bc935616dd78f4850b097142d357aaf094bf0ca3fe8f8142e0c71afdb70"
   },
   {
     "id": "direction-orange",
@@ -1283,7 +1283,7 @@
     ],
     "ecart_marques": "Peugeot et Seat laissent rouler prudemment jusqu'au garage, sans délai précis ; Toyota demande une vérification immédiate.",
     "ecart_court": "Plus strict : Toyota (vérification immédiate). Moins stricts : Peugeot et Seat (rouler prudemment jusqu’au garage, sans délai indiqué).",
-    "validation": "292dc266cddf062af00d9142c0f5ba79f05ae3792758ba4d0840a9f6bf49ebba"
+    "validation": "d37ed193468f3b27cdffb2221fe9ea8c582c14e19035780418799312651e647f"
   },
   {
     "id": "direction-rouge",
@@ -1364,7 +1364,7 @@
     ],
     "ecart_marques": "Toyota demande une vérification immédiate sans imposer l'arrêt ; Seat, Peugeot, Renault et Dacia imposent l'arrêt.",
     "ecart_court": "Plus stricts : Seat, Peugeot, Renault et Dacia (arrêt imposé). Moins strict : Toyota (vérification immédiate, sans arrêt imposé).",
-    "validation": "b9b7c561c41660f3acd8de7bb3eae219ac75f0a2b1ded1602f7d9ea259d76541"
+    "validation": "d81d8647459c51dadf0b51fd70c79723a1e860755dd5016e77ae80228e753540"
   },
   {
     "id": "temperature-rouge",
@@ -1427,6 +1427,6 @@
         "demande": "S’arrêter, couper la climatisation puis le moteur"
       }
     ],
-    "validation": "b8492c7561409b0a696c3669ba08c61e66efbfe8573ba0168c4b75adebc568a4"
+    "validation": "fa17e03fca455664efba570b08bfcaf11287f2ae31b00b22bb259cd54d90c12d"
   }
 ]

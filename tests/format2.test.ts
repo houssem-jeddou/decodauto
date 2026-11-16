@@ -191,17 +191,17 @@ describe('format 2 : modèle des pages voyants', () => {
     assert.ok($('[data-repere]').toArray().every((r) => $(r).prev().is('h2')));
   });
 
-  test('page construite au format 2 : les contrôles d\'aujourd\'hui et ceux du format 2 passent ; seule l\'empreinte (brouillon jamais validé) échoue', async () => {
+  test('page construite au format 2 : les contrôles d\'aujourd\'hui et ceux du format 2 passent, empreinte de la validation de Houssem comprise (paquet F2, version 4)', async () => {
     const { brut, contexte, html } = await construire();
     const resultat = controlerPage({ type: 'voyant', brut, fichier: MOTEUR }, contexte, html);
-    assert.deepEqual(regles(resultat.constats), ['R4-EMPREINTE']);
+    assert.deepEqual(regles(resultat.constats), []);
     assert.deepEqual(regles(constatsPartCitee(html, 'x.html')), []);
   });
 
   test('page AdBlue au format 2 (quatre lignes, dont la ligne du voyant moteur rattachée à une autre page) : mêmes contrôles verts', async () => {
     const corps = '<h2 id="a">Peut-on rouler ?</h2><p>{{repere:adblue-reserve}}</p><p>Texte.</p>';
     const { brut, contexte, html } = await construire(corps, ADBLUE);
-    assert.deepEqual(regles(controlerPage({ type: 'voyant', brut, fichier: ADBLUE }, contexte, html).constats), ['R4-EMPREINTE']);
+    assert.deepEqual(regles(controlerPage({ type: 'voyant', brut, fichier: ADBLUE }, contexte, html).constats), []);
     const $ = cheerio.load(html);
     // Moins de trois H2 dans le texte : pas de sommaire. La ligne du voyant moteur n'a pas de partie au tableau de la page :
     // son lien « Votre marque » mène à la partie du voyant sur la page du voyant moteur, que le plan lie à la page AdBlue
@@ -226,7 +226,7 @@ describe('format 2 : modèle des pages voyants', () => {
   test('FORMAT2-ECART vérifie le renvoi au tableau des notices : lien absent, mal dirigé, ancre absente, page non liée par le plan ou non construite', async () => {
     const moteur = await construire();
     const controle = (h: string, contexte = moteur.contexte, brut = moteur.brut, fichier = MOTEUR): string[] => regles(controlerPage({ type: 'voyant', brut, fichier }, contexte, h).constats);
-    assert.deepEqual(controle(moteur.html), ['R4-EMPREINTE']);
+    assert.deepEqual(controle(moteur.html), []);
     const avec = (f: ($: cheerio.CheerioAPI) => void): string => {
       const $ = cheerio.load(moteur.html);
       f($);
@@ -239,7 +239,7 @@ describe('format 2 : modèle des pages voyants', () => {
     // Page AdBlue : la ligne du voyant moteur renvoie à la page du voyant moteur ; non construite, ou non liée par le plan.
     const adblue = await construire('<h2 id="a">Peut-on rouler ?</h2><p>Texte.</p>', ADBLUE);
     const ctx = adblue.contexte;
-    assert.deepEqual(controle(adblue.html, ctx, adblue.brut, ADBLUE), ['R4-EMPREINTE']);
+    assert.deepEqual(controle(adblue.html, ctx, adblue.brut, ADBLUE), []);
     const sansMoteur = new Map([...(ctx.pagesEcrites ?? [])].filter(([id]) => id !== 'voyant-moteur'));
     assert.ok(controle(adblue.html, { ...ctx, pagesEcrites: sansMoteur }, adblue.brut, ADBLUE).includes('FORMAT2-ECART'));
     const planSansLien = new Map([...ctx.plan].map(([id, l]) => [id, id === 'voyant-adblue' || id === 'voyant-moteur' ? { ...l, liens: (l.liens ?? []).filter((c) => c !== 'voyant-moteur' && c !== 'voyant-adblue') } : l]));

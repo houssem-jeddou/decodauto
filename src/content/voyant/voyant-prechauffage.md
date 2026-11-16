@@ -44,7 +44,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (19 h 53),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-5c.md).
-validation: 88b9ea070d76a8ecabef83a49ada1eace425555fa8bc6a6f099c0e441e708fe1
+validation: 883bba2212f5cf8abeea25560c167de6fde49ea706b5cd4722480953dc71c41b
 causes:
   - cause: Préchauffage du moteur diesel au démarrage
     explication: "Selon les notices Peugeot 208, Renault Clio 5 phase 2, Dacia Sandero 3 et Seat Ibiza, le témoin signale le préchauffage du moteur diesel, puis s'éteint quand le moteur peut démarrer : c'est le fonctionnement normal. Selon les notices Renault et Dacia, il indique que les bougies de préchauffage fonctionnent."

@@ -48,7 +48,7 @@ date_revue: 2026-11-15
 prochaine_revue: 2027-11-15
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 15/11/2026 (vers 0 h 05),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-5d.md ; consigne propre au témoin d'usure retenue).
-validation: f05923882cbcee69743aa848f7a3190886ee2df85e9a6e9da7a06a23f75e7d43
+validation: 740100a502da89de695ae7bd6cf1aa65339d38f956758caa3f23989f96b2c1e3
 causes:
   - cause: Frein de stationnement serré ou mal desserré
     explication: "Selon la notice Peugeot 208, le témoin du frein de stationnement manuel signale un frein serré ou mal desserré ; selon les notices Seat Ibiza et Toyota Yaris, il s'éteint quand on desserre le frein."

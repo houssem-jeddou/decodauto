@@ -34,7 +34,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (13 h 08),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-3.md).
-validation: 83de9349277b761037e4cac196dcc4776c18e2ae7b2b1dec900b0fa8c71b6b24
+validation: e039e6de8ba2c1613145afbb1b8878aa01e590821752fe3d6ba264f8adc0c1a8
 causes:
   - cause: Pneu sous-gonflé
     explication: "La pression d'un ou plusieurs pneus a baissé. Les notices Peugeot 208 et Dacia Sandero 3 demandent de contrôler et d'ajuster à froid la pression des quatre pneus, puis de réinitialiser le système."

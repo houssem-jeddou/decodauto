@@ -41,7 +41,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (12 h 13),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-2.md).
-validation: 36e1977d997fa533133a6fa77a47ef11b1d7c05e7222036622b729d90055b240
+validation: a0f454bfb7c306fe3f12acf77d88a86f3b9cce0a278743a8093cf7079f36684f
 causes:
   - cause: Niveau d'huile trop bas
     explication: "Les notices Seat Ibiza, Peugeot 208 et Toyota Yaris signalent un niveau d'huile bas par un voyant orange (jaune chez Seat) ou par un message ; celles de Renault Clio 5 phase 2 et Dacia Sandero 3, par une alerte de l'afficheur au démarrage quand le niveau minimum est atteint. Le remède est l'appoint, avec l'huile que préconise la notice."

@@ -38,7 +38,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (13 h 08),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-3.md).
-validation: 1cd0b8fe95daf60ff6bd6d767c40ad97ebc2b589dffdbdf44ebe4042224db799
+validation: 6f5902da0cb47fbdc72209998c28ea212c6563fa717a0435a38de68555366d1b
 causes:
   - cause: Filtre en début de saturation, à régénérer en roulant
     explication: "Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, le témoin signale un début de saturation du filtre et demande au conducteur de le nettoyer en roulant ; selon la notice Peugeot 208, le filtre commence à saturer ; selon la notice Seat Ibiza, il est obstrué par de la suie et doit être nettoyé (régénération). Selon la notice Toyota Yaris, la suie s'accumule plus vite sur des trajets courts ou à basse vitesse. La régénération se fait en roulant, comme le dit l'encadré."

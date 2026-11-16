@@ -31,7 +31,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (18 h 23),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-5b.md).
-validation: aa612e91ded68725def801296b909f48cda80f4de9afbc91d796d4d89dc55586
+validation: 5aaa19ffa8eb6296036db3bc2465c026971af9b1265da091c87a698411570cf9
 causes:
   - cause: Cosses de batterie sales ou desserrées
     explication: "La notice Peugeot 208 cite les cosses sales parmi les causes d'un circuit de charge défaillant ; elle demande de nettoyer et de resserrer les cosses, puis, si le témoin ne s'éteint pas au démarrage du moteur, de faire appel au réseau ou à un atelier qualifié."

@@ -38,7 +38,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) revalidé par Houssem le 14/11/2026 (22 h 45),
 # avec les faits du texte (paquet travaux/etape-8/paquet-demande-25.md).
-validation: 10b8ac97683583ccb813158963203d8753906f025ca1a591f85c264f107a8852
+validation: 4964e5abae750cd91f553edf30e8e041948bb7ccb06348a5c8874a24421d54c4
 causes:
   - cause: Appoint pas encore pris en compte par le système
     explication: "Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, si l'on ne laisse pas tourner le moteur 10 secondes à l'arrêt après le remplissage, le système ne prend en compte l'appoint qu'après plusieurs dizaines de minutes de roulage."

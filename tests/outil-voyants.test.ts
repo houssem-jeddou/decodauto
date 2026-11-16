@@ -198,11 +198,13 @@ describe('outil voyants : modèle généré depuis la base', () => {
 });
 
 describe('outil voyants : page construite', () => {
-  test('la vraie page passe tous les contrôles, empreinte de la validation de Houssem comprise', () => {
+  test('la vraie page passe tous les contrôles ; sa version au format 1 n’est pas validée (empreinte du format 2)', () => {
     assert.deepEqual(controler(html), []);
     const { constats } = controlerPage({ type: 'voyant', brut, fichier: EXEMPLE }, contexteOutil, html);
     const erreurs = constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle);
-    assert.deepEqual(erreurs, [], JSON.stringify(constats, null, 1));
+    // La page est validée au format 2 (paquet F2) : l'empreinte couvre le format et les lignes d'écart courtes
+    // (src/lib/empreinte.ts) ; la page publiée est contrôlée sans erreur par tests/outil-format2.test.ts et la construction.
+    assert.deepEqual(erreurs, ['R4-EMPREINTE'], JSON.stringify(constats, null, 1));
     assert.deepEqual(
       [...constatsMentionEtSignalement(html, 'x', '/voyants/'), ...constatsTypographie(html, 'x'), ...constatsIdentifiants(html, 'x'), ...constatsExpressionsInterdites(html, 'x'), ...constatsTexteRedige(html, 'x'), ...constatsPartCitee(html, 'x')],
       [],

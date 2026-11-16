@@ -35,7 +35,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (18 h 23),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-5a.md).
-validation: f3f89321da4743757f1481de5a7b5a75aab5823527e4ce0ecdfe40de35ded7cb
+validation: 4401820456b7baa47fdfe03cf04eb09f0aaf4a35a1bccaac878489035b95f8f1
 causes:
   - cause: Airbag ou prétensionneur de ceinture défaillant
     explication: "Selon les notices Peugeot 208 et Toyota Yaris, le voyant signale qu'un des airbags ou des prétensionneurs de ceinture de sécurité est défaillant ; la notice Seat Ibiza parle d'un dysfonctionnement du système d'airbag et de rétracteurs de ceintures. Le diagnostic au garage dit quelle pièce est en cause."

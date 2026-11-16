@@ -43,7 +43,7 @@ prochaine_revue: 2027-11-14
 # Encadré de décision (question, renvoi, lignes, coût probable) et textes fixes de l'outil validés par Houssem le 04/11/2026
 # (13 h 48), avec les faits du texte (paquet travaux/etape-8/paquet-8.1-outil-voyants.md).
 # Texte mis à jour validé par Houssem le 14/11/2026 (15 h 27), avec la demande n° 23 (paquet travaux/etape-8/paquet-lot-3b.md).
-validation: 4555601ad20e230a8fcdd82f70c3cb530810752127eb22f8514d2febb21cc5b2
+validation: 8bb25348d79fef026a3c3e3d7d6b4ae4b27d4dd4cd3f853dfbd6bea163872b90
 format: 2
 illustration:
   fichier: accueil-tableau-de-bord
