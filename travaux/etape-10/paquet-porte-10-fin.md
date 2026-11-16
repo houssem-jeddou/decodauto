@@ -20,7 +20,8 @@
    garder.**
 4. **Voiture qui ne démarre pas, ligne 5** (diesel en panne sèche) : **Oui, avec précautions** · À faire tout de suite.
    Notice Renault Clio 5 p. 161 ajoutée (attendre quelques minutes, contact mis, pour le réamorçage) ; l'action renvoie
-   à la ligne 4 si le moteur ne démarre toujours pas. **Recommandation : valider.**
+   à la ligne 4 si le moteur ne démarre toujours pas (le renvoi inverse, de la ligne 4 vers la ligne 5, est retiré le
+   16/11 après la recette : les deux lignes se renvoyaient l'une à l'autre). **Recommandation : valider.**
 5. **Moteur PureTech, lignes 3 et 4, nouvelles** (à la jauge, niveau sous le repère mini, ou au-dessus du repère
    maxi) : **Non, arrêtez-vous immédiatement** · À faire tout de suite. Peugeot 208 p. 166 et Citroën C3 p. 112-113 :
    « Ne pas démarrer le moteur si le niveau est » sous le repère B (complément « impérativement ») ou au-dessus du
@@ -41,16 +42,31 @@
    niveau proposé**, pour le risque de freinage écrit par la fiche.
 7. **Sources nouvelles du dossier PureTech** : trois fiches RappelConso (première main) ; la page « Moteurs PureTech,
    nos solutions » de peugeot.fr et le communiqué de Stellantis du 7 mai 2025 (communication du constructeur : elles
-   ne fixent aucun verdict, seulement la couverture spéciale et ses conditions). Ces deux dernières ne sont admises que
-   si la demande de changement n° 31 est acceptée ; sinon, la section sur la couverture spéciale est retirée. Le
+   ne fixent aucun verdict, seulement la couverture spéciale et ses conditions). Elles sont admises par la demande de changement
+   n° 31 (acceptée le 16/11, 16 h 52 ; nature `communication-constructeur` au registre, PR n° 69). Le
    communiqué est celui de la version belge du site de presse de Stellantis : une version France sera cherchée à
    l'ajout au registre.
 8. **Pièces et prise en charge nouvelles** (`data/couts.json`, avec le lot) : `pile-de-cle` et
    `carburant-et-reamorcage` (gestes à faire soi-même) ; `couverture-speciale-puretech` (prise en charge du
    constructeur, datée, revérifiée tous les 90 jours : 100 %, 10 ans ou 180 000 km, au premier terme échu, sous
    conditions).
-9. **Ordre de la page panne** : l'exemple ouvre son texte sur un paragraphe court, puis l'arbre, comme le propose la
-   demande de changement n° 32 (à valider à part). Si elle est refusée, les causes restent avant le texte.
+9. **Ordre de la page panne** : l'exemple ouvre son texte sur un paragraphe court, puis l'arbre, puis les causes, comme le
+   demande la demande de changement n° 32 (acceptée le 16/11, mise en œuvre par la PR n° 68).
+10. **Illustrations au-delà de trois écrans** (règle 2i assouplie par la demande n° 32) : 2 700 px (panne) et 2 807 px
+   (dossier), parce que leurs encadrés ont six lignes (bas à 2 179 et 2 324 px). Elles suivent bien le bloc « Notices /
+   Base du coût ». **Recommandation : accepter** ; raccourcir un encadré retirerait une situation sourcée.
+
+## Recette locale (16/11/2026, `travaux/etape-10/recette-porte-10/`, sur les modèles de la porte F1)
+- Construction de recette : 23 pages ; contrôles : 29 erreurs, toutes des validations absentes (26 lignes de la base
+  du lot F2 sans empreinte, les deux encadrés, la prise en charge provisoire), aucune autre.
+- Mesures à 375 × 667 (police chargée / de secours) : première situation finie à 547 px (panne) et 528 px (dossier),
+  sous 667 (règle 2a) ; arbre de décision à 3 855 / 3 880 px, sous six écrans (4 002) ; aucun débordement à 320 px.
+- Lighthouse mobile (3 passages) : 100 en performance, accessibilité et bonnes pratiques sur les deux pages, CLS 0.
+- Captures : 31 (375 × 667 et 1366 × 800, deux polices) dans `captures/`.
+- Corrigé après la recette (16/11, non relu par la revue) : renvoi circulaire entre les lignes 4 et 5 de la page panne
+  (point 4) ; la deuxième fiche du tableau des rappels disait seulement « Même motif » : son motif est écrit en entier
+  (identique à la première fiche, relu à l'écran : `porte10-verification.md`). « Votre marque » coupé sur deux lignes et
+  « à » seul en fin de ligne dans le coût probable : corrigés dans les modèles par la PR du lot F2.
 
 ## Revue indépendante (une seule revue, consigne du 16/11/2026)
 - **Ce qu'elle a changé.** Voiture qui ne démarre pas : urgence de la ligne 1 ramenée à ses sources (la consigne
@@ -70,15 +86,13 @@
   trancher par toi (point 6). Ajouter un risque chiffré « si vous continuez » à la page panne : facultatif, non fait.
 - **Ce qui reste à vérifier.** Les extraits ajoutés après la revue (lignes 2, 4 et 5 de la page panne, lignes 3 et 4
   du dossier) ont été relus mot pour mot à l'écran (`travaux/etape-10/textes/porte10-verification.md`), mais ils n'ont
-  pas été relus par la revue (une seule revue). La construction de recette, les captures à 375 × 667 et 1366 × 800,
-  les mesures 2a et 2i et Lighthouse attendent la fusion de la PR n° 63.
+  pas été relus par la revue (une seule revue) ; de même les deux corrections faites après la recette. La recette elle-même
+  (construction, captures, mesures, Lighthouse) a été faite après la revue : ses résultats sont plus haut.
 
 ## Ce qui reste avant la publication des deux pages
 - Lignes d'écart courtes de la base (lot F2) validées et versées : les deux exemples en dépendent (`batterie-rouge`,
   `huile-niveau`, `entretien-vidange`).
-- Modèles de F1.3c fusionnés (PR n° 63), puis construction de recette des deux exemples au format 2, captures à
-  375 × 667 et 1366 × 800, mesures 2a et 2i, Lighthouse.
-- Sources ajoutées au registre et pièces ajoutées à `data/couts.json` avec le lot ; demandes n° 31 et n° 32 tranchées.
+- Sources ajoutées au registre et pièces ajoutées à `data/couts.json` avec le lot (entrées provisoires de la recette).
 - Ta validation, puis les empreintes.
 
 ## Ligne de validation proposée

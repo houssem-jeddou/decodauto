@@ -1,6 +1,6 @@
 # Paquet de validation, porte 10 : exemples panne et dossier au format 2 (brouillon, jamais validé)
 
-> **Brouillon, jamais validé.** Préparation anticipée de l'étape 10 (docs/03, règle 12) : présenté à Houssem après la porte du lot F1. Critère de la ligne 10 de `docs/03` : « Exemples panne et dossier validés par Houssem (verdicts et encadrés de décision) avant la rédaction du lot ». Les deux exemples sont au format 2 (demande n° 30) et se construisent quand la base porte les lignes d'écart courtes du lot F2 et que les modèles de F1.3c sont fusionnés. Version 2 du 16/11/2026, après la revue indépendante (encadré « Revue indépendante » en fin de paquet). Sources relues à l'écran le 16/11/2026 : `travaux/etape-10/textes/demarrage-batterie-verification.md`, `puretech-verification.md`, `porte10-verification.md`, `autres-pannes-verification.md`.
+> **Brouillon, jamais validé.** Préparation anticipée de l'étape 10 (docs/03, règle 12) : présenté à Houssem après la porte du lot F1. Critère de la ligne 10 de `docs/03` : « Exemples panne et dossier validés par Houssem (verdicts et encadrés de décision) avant la rédaction du lot ». Les deux exemples sont au format 2 (demande n° 30), construits en recette locale le 16/11 sur les modèles de la porte F1 avec la base du lot F2 (lignes d'écart courtes, validées avec le paquet F2). Version 2 du 16/11/2026, après la revue indépendante (encadré « Revue indépendante » en fin de paquet), et deux corrections après la recette. Sources relues à l'écran le 16/11/2026 : `travaux/etape-10/textes/demarrage-batterie-verification.md`, `puretech-verification.md`, `porte10-verification.md`, `autres-pannes-verification.md`.
 
 ## Voiture qui ne démarre pas (`/voiture-ne-demarre-pas/`)
 
@@ -19,7 +19,7 @@
    - Citroën C3, p. 137, démarrage à partir d'une autre batterie (Oui, avec précautions ; À faire tout de suite) : « Laisser tourner le moteur, à l'arrêt, au minimum 30 minutes afin de permettre à la batterie d'atteindre un niveau de charge suffisant. Rouler immédiatement sans avoir atteint un niveau de charge suffisant peut altérer certaines fonctionnalités du véhicule. »
    - Toyota Yaris, p. 320, 7.2.10 « Si la batterie du véhicule est déchargée » (Oui, avec précautions ; À faire tout de suite) : « Une fois que le moteur démarre, faites vérifier le véhicule dès que possible par un concessionnaire ou réparateur Toyota agréé, ou par tout autre réparateur qualifié. »
 3. **Voyant de préchauffage (diesel) allumé au démarrage** (base, reprise telle quelle) → **Oui, vous pouvez rouler** · Aucune action nécessaire · « C'est normal : attendez que le voyant s'éteigne avant de démarrer. » · sans écart
-4. **Ligne saisie, verdict de sécurité à valider** : « Le démarreur tourne, mais le moteur ne démarre pas après quelques essais » → **Non, ne poursuivez pas votre trajet** · À faire tout de suite · « N'insistez pas : coupez le contact entre deux essais et attendez quelques instants. Après quelques essais, faites appel à un garage ou à l'assistance. Si le réservoir d'un diesel est vide, voyez la ligne suivante. »
+4. **Ligne saisie, verdict de sécurité à valider** : « Le démarreur tourne, mais le moteur ne démarre pas après quelques essais » → **Non, ne poursuivez pas votre trajet** · À faire tout de suite · « N'insistez pas : coupez le contact entre deux essais et attendez quelques instants. Après quelques essais, faites appel à un garage ou à l'assistance. »
    - Peugeot 208, p. 93, « Démarrage / Arrêt du moteur avec la clé » (Non, ne poursuivez pas votre trajet ; À faire tout de suite) : « Si après quelques tentatives le moteur ne démarre pas, ne pas insister - Risque d'endommagement du démarreur et du moteur ! Faire appel au réseau PEUGEOT ou à un atelier qualifié. »
    - Renault Clio 5 phase 2, p. 188, « Particularités des versions essence », « Problème de démarrage » (Non, ne poursuivez pas votre trajet ; À faire tout de suite) : « Pour éviter d'endommager le pot catalytique, le démarreur ou bien, de provoquer une usure prématurée de la batterie, n'insistez pas dans la tentative de démarrage […] sans avoir identifié et traité la cause de la défaillance. Dans le cas contraire, ne tentez plus de démarrer le moteur et faites appel à un Représentant de la marque. »
    - Dacia Sandero 3, p. 162, « Particularités des versions essence », « Problème de démarrage » (Non, ne poursuivez pas votre trajet ; À faire tout de suite) : « Pour éviter d'endommager le pot catalytique, le démarreur ou bien, de provoquer une usure prématurée de la batterie, n'insistez pas dans la tentative de démarrage […] sans avoir identifié et traité la cause de la défaillance. Dans le cas contraire, ne tentez plus de démarrer le moteur et faites appel à un Représentant de la marque. »
@@ -108,7 +108,7 @@
 | Fiche RappelConso | Publiée le | Modèles | Période indiquée par la fiche | Motif | Conduite à tenir |
 |---|---|---|---|---|---|
 | A12/01504/20 (Citroën et DS) | 20/11/2020 | Berlingo, C3, C3 Picasso, C4, C4 Cactus, C4 Picasso, DS3, DS4 à moteur turbo essence de 1,2 litre | Fabrication de mars 2013 à avril 2017 | La pompe à vide peut être endommagée par l'abrasion de la courroie : assistance de freinage réduite ou perdue, risque d'accident | Contacter le concessionnaire |
-| A12/01505/20 (Peugeot) | 20/11/2020 | 208, 308, 2008, 3008, 5008, Partner à moteur turbo essence de 1,2 litre | Fabrication de mars 2013 à avril 2017 | Même motif | Contacter le concessionnaire |
+| A12/01505/20 (Peugeot) | 20/11/2020 | 208, 308, 2008, 3008, 5008, Partner à moteur turbo essence de 1,2 litre | Fabrication de mars 2013 à avril 2017 | La pompe à vide peut être endommagée par l'abrasion de la courroie : assistance de freinage réduite ou perdue, risque d'accident | Contacter le concessionnaire |
 | A11/00077/23 (Peugeot, Opel) | 16/06/2023, mise à jour le 18/06/2026 | 2008, 208, 3008, 308, 5008, Partner, Grandland X, Crossland X (moteur non précisé par la fiche) | Peugeot : du 03/04/2017 au 11/12/2020 ; Opel : du 12/04/2017 au 28/08/2018 (la fiche ne dit pas à quoi correspondent ces dates) | La lubrification de la pompe à vide peut être insuffisante : rupture possible, assistance de freinage réduite, risque d'accident | Contacter le concessionnaire |
 
 ## Points à trancher (avec ma recommandation)
@@ -133,7 +133,8 @@
    garder.**
 4. **Voiture qui ne démarre pas, ligne 5** (diesel en panne sèche) : **Oui, avec précautions** · À faire tout de suite.
    Notice Renault Clio 5 p. 161 ajoutée (attendre quelques minutes, contact mis, pour le réamorçage) ; l'action renvoie
-   à la ligne 4 si le moteur ne démarre toujours pas. **Recommandation : valider.**
+   à la ligne 4 si le moteur ne démarre toujours pas (le renvoi inverse, de la ligne 4 vers la ligne 5, est retiré le
+   16/11 après la recette : les deux lignes se renvoyaient l'une à l'autre). **Recommandation : valider.**
 5. **Moteur PureTech, lignes 3 et 4, nouvelles** (à la jauge, niveau sous le repère mini, ou au-dessus du repère
    maxi) : **Non, arrêtez-vous immédiatement** · À faire tout de suite. Peugeot 208 p. 166 et Citroën C3 p. 112-113 :
    « Ne pas démarrer le moteur si le niveau est » sous le repère B (complément « impérativement ») ou au-dessus du
@@ -154,16 +155,31 @@
    niveau proposé**, pour le risque de freinage écrit par la fiche.
 7. **Sources nouvelles du dossier PureTech** : trois fiches RappelConso (première main) ; la page « Moteurs PureTech,
    nos solutions » de peugeot.fr et le communiqué de Stellantis du 7 mai 2025 (communication du constructeur : elles
-   ne fixent aucun verdict, seulement la couverture spéciale et ses conditions). Ces deux dernières ne sont admises que
-   si la demande de changement n° 31 est acceptée ; sinon, la section sur la couverture spéciale est retirée. Le
+   ne fixent aucun verdict, seulement la couverture spéciale et ses conditions). Elles sont admises par la demande de changement
+   n° 31 (acceptée le 16/11, 16 h 52 ; nature `communication-constructeur` au registre, PR n° 69). Le
    communiqué est celui de la version belge du site de presse de Stellantis : une version France sera cherchée à
    l'ajout au registre.
 8. **Pièces et prise en charge nouvelles** (`data/couts.json`, avec le lot) : `pile-de-cle` et
    `carburant-et-reamorcage` (gestes à faire soi-même) ; `couverture-speciale-puretech` (prise en charge du
    constructeur, datée, revérifiée tous les 90 jours : 100 %, 10 ans ou 180 000 km, au premier terme échu, sous
    conditions).
-9. **Ordre de la page panne** : l'exemple ouvre son texte sur un paragraphe court, puis l'arbre, comme le propose la
-   demande de changement n° 32 (à valider à part). Si elle est refusée, les causes restent avant le texte.
+9. **Ordre de la page panne** : l'exemple ouvre son texte sur un paragraphe court, puis l'arbre, puis les causes, comme le
+   demande la demande de changement n° 32 (acceptée le 16/11, mise en œuvre par la PR n° 68).
+10. **Illustrations au-delà de trois écrans** (règle 2i assouplie par la demande n° 32) : 2 700 px (panne) et 2 807 px
+   (dossier), parce que leurs encadrés ont six lignes (bas à 2 179 et 2 324 px). Elles suivent bien le bloc « Notices /
+   Base du coût ». **Recommandation : accepter** ; raccourcir un encadré retirerait une situation sourcée.
+
+## Recette locale (16/11/2026, `travaux/etape-10/recette-porte-10/`, sur les modèles de la porte F1)
+- Construction de recette : 23 pages ; contrôles : 29 erreurs, toutes des validations absentes (26 lignes de la base
+  du lot F2 sans empreinte, les deux encadrés, la prise en charge provisoire), aucune autre.
+- Mesures à 375 × 667 (police chargée / de secours) : première situation finie à 547 px (panne) et 528 px (dossier),
+  sous 667 (règle 2a) ; arbre de décision à 3 855 / 3 880 px, sous six écrans (4 002) ; aucun débordement à 320 px.
+- Lighthouse mobile (3 passages) : 100 en performance, accessibilité et bonnes pratiques sur les deux pages, CLS 0.
+- Captures : 31 (375 × 667 et 1366 × 800, deux polices) dans `captures/`.
+- Corrigé après la recette (16/11, non relu par la revue) : renvoi circulaire entre les lignes 4 et 5 de la page panne
+  (point 4) ; la deuxième fiche du tableau des rappels disait seulement « Même motif » : son motif est écrit en entier
+  (identique à la première fiche, relu à l'écran : `porte10-verification.md`). « Votre marque » coupé sur deux lignes et
+  « à » seul en fin de ligne dans le coût probable : corrigés dans les modèles par la PR du lot F2.
 
 ## Revue indépendante (une seule revue, consigne du 16/11/2026)
 - **Ce qu'elle a changé.** Voiture qui ne démarre pas : urgence de la ligne 1 ramenée à ses sources (la consigne
@@ -183,15 +199,13 @@
   trancher par toi (point 6). Ajouter un risque chiffré « si vous continuez » à la page panne : facultatif, non fait.
 - **Ce qui reste à vérifier.** Les extraits ajoutés après la revue (lignes 2, 4 et 5 de la page panne, lignes 3 et 4
   du dossier) ont été relus mot pour mot à l'écran (`travaux/etape-10/textes/porte10-verification.md`), mais ils n'ont
-  pas été relus par la revue (une seule revue). La construction de recette, les captures à 375 × 667 et 1366 × 800,
-  les mesures 2a et 2i et Lighthouse attendent la fusion de la PR n° 63.
+  pas été relus par la revue (une seule revue) ; de même les deux corrections faites après la recette. La recette elle-même
+  (construction, captures, mesures, Lighthouse) a été faite après la revue : ses résultats sont plus haut.
 
 ## Ce qui reste avant la publication des deux pages
 - Lignes d'écart courtes de la base (lot F2) validées et versées : les deux exemples en dépendent (`batterie-rouge`,
   `huile-niveau`, `entretien-vidange`).
-- Modèles de F1.3c fusionnés (PR n° 63), puis construction de recette des deux exemples au format 2, captures à
-  375 × 667 et 1366 × 800, mesures 2a et 2i, Lighthouse.
-- Sources ajoutées au registre et pièces ajoutées à `data/couts.json` avec le lot ; demandes n° 31 et n° 32 tranchées.
+- Sources ajoutées au registre et pièces ajoutées à `data/couts.json` avec le lot (entrées provisoires de la recette).
 - Ta validation, puis les empreintes.
 
 ## Ligne de validation proposée

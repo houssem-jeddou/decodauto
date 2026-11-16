@@ -70,7 +70,7 @@ situations:
   - situation: "Le démarreur tourne, mais le moteur ne démarre pas après quelques essais"
     verdict: non, arrêt dès que possible
     urgence: immédiate
-    action: "N'insistez pas : coupez le contact entre deux essais et attendez quelques instants. Après quelques essais, faites appel à un garage ou à l'assistance. Si le réservoir d'un diesel est vide, voyez la ligne suivante."
+    action: "N'insistez pas : coupez le contact entre deux essais et attendez quelques instants. Après quelques essais, faites appel à un garage ou à l'assistance."
     citations:
       - source: notice-peugeot-208
         emplacement: "p. 93, « Démarrage / Arrêt du moteur avec la clé »"
