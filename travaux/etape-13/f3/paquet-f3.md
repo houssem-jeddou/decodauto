@@ -4,15 +4,25 @@
 
 ## Code P0087 (`/codes-defaut/p0087/`)
 
-- Champs de l'en-tête changés : `date_modification`, `format`, `illustration`
+- Champs de l'en-tête changés : `date_modification`, `description`, `format`, `illustration`
 - Lignes de l'encadré : identiques à main
   1. Base `moteur-orange-fixe` : Non, arrêtez-vous immédiatement · À faire tout de suite · ligne d'écart (lot F2) : « Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). »
+- Date « Mis à jour le » : 2026-11-03 → 2026-11-16 (textes repris : repère, paragraphes coupés, références passées dans « Sources », titre de la section du verdict)
+- Haut de l'illustration à 375 × 667 (police chargée / de secours) : 1199 / 1224 px, juste après « Notices / Base du coût » ; dans les trois premiers écrans (2 001 px) (demande n° 32)
+- Hauteur de l'encadré à 375 px : 1208 px en ligne (format 1) → 683 px (format 2)
+- Premier écran (2a) : première situation jusqu'à 520 / 545 px (667 au plus)
+- Écrans à 375 px : 11.3, sommaire « Sur cette page » : oui ; largeur à 320 px : 320, débordements : 0
+- Captures : [`captures/p0087/`](captures/p0087/) (format 2, et la page en ligne au format 1 pour comparaison)
 - Illustration dessinée pour le site (`code-p0087-circuit-carburant`) : alt « Schéma du circuit de carburant : réservoir et pompe, filtre, pompe haute pression, rampe avec son capteur de pression, injecteurs » ; légende « Le carburant va du réservoir à la rampe, où un capteur mesure la pression que le calculateur surveille. En orange, les pièces que citent les causes de cette page. »
-- Repères : sous « Peut-on rouler avec le code P0087 ? » → `moteur-orange-fixe`
-- Titres H2 : identiques
-- Paragraphes changés : 4 nouveaux ou réécrits, 3 anciens retirés ou réécrits
+- Repères : sous « Peut-on rouler avec le code P0087 et le voyant moteur orange allumé fixe ? » → `moteur-orange-fixe`
+- Titres H2 : changés : « Peut-on rouler avec le code P0087 ? » → « Peut-on rouler avec le code P0087 et le voyant moteur orange allumé fixe ? »
+- Paragraphes changés : 5 nouveaux ou réécrits, 4 anciens retirés ou réécrits
 
 <details><summary>Avant (–) et après (+)</summary>
+
+**Avant** : ## Peut-on rouler avec le code P0087 ?
+
+**Après** : ## Peut-on rouler avec le code P0087 et le voyant moteur orange allumé fixe ?
 
 **Avant** : Le code P0087 se lit avec un appareil de diagnostic. Dans les bulletins de Kia et d'Audi et les fiches Hella, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
 
@@ -35,12 +45,22 @@
 - Champs de l'en-tête changés : `date_modification`, `format`, `illustration`
 - Lignes de l'encadré : identiques à main
   1. Base `moteur-orange-fixe` : Non, arrêtez-vous immédiatement · À faire tout de suite · ligne d'écart (lot F2) : « Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). »
-- Illustration dessinée pour le site (`code-p0299-circuit-turbo`) : alt « Schéma de la suralimentation : filtre à air, turbo et sa commande, vanne, échangeur, moteur et calculateur » ; légende « Le turbo, entraîné par les gaz d'échappement, envoie l'air comprimé au moteur par l'échangeur ; sa commande règle la pression. En orange, ce que citent les causes de cette page. »
-- Repères : sous « Peut-on rouler avec le code P0299 ? » → `moteur-orange-fixe`
-- Titres H2 : identiques
-- Paragraphes changés : 3 nouveaux ou réécrits, 2 anciens retirés ou réécrits
+- Date « Mis à jour le » : 2026-11-15 → 2026-11-16 (textes repris : repère, paragraphes coupés, références passées dans « Sources », titre de la section du verdict)
+- Haut de l'illustration à 375 × 667 (police chargée / de secours) : 1202 / 1202 px, juste après « Notices / Base du coût » ; dans les trois premiers écrans (2 001 px) (demande n° 32)
+- Hauteur de l'encadré à 375 px : 1183 px en ligne (format 1) → 661 px (format 2)
+- Premier écran (2a) : première situation jusqu'à 545 / 545 px (667 au plus)
+- Écrans à 375 px : 13.2, sommaire « Sur cette page » : oui ; largeur à 320 px : 320, débordements : 0
+- Captures : [`captures/p0299/`](captures/p0299/) (format 2, et la page en ligne au format 1 pour comparaison)
+- Illustration dessinée pour le site (`code-p0299-circuit-turbo`) : alt « Schéma de la suralimentation : filtre à air, turbo et sa commande, échangeur, moteur et calculateur » ; légende « Le turbo envoie l'air comprimé au moteur par l'échangeur ; sa commande règle la pression. En orange, ce que citent les causes de cette page. »
+- Repères : sous « Peut-on rouler avec le code P0299 et le voyant moteur orange allumé fixe ? » → `moteur-orange-fixe`
+- Titres H2 : changés : « Peut-on rouler avec le code P0299 ? » → « Peut-on rouler avec le code P0299 et le voyant moteur orange allumé fixe ? »
+- Paragraphes changés : 4 nouveaux ou réécrits, 3 anciens retirés ou réécrits
 
 <details><summary>Avant (–) et après (+)</summary>
+
+**Avant** : ## Peut-on rouler avec le code P0299 ?
+
+**Après** : ## Peut-on rouler avec le code P0299 et le voyant moteur orange allumé fixe ?
 
 **Avant** : Le code P0299 se lit avec un appareil de diagnostic. Dans les bulletins d'Audi, de Volkswagen et de General Motors du tableau des cas par marque, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
 
@@ -59,14 +79,24 @@
 - Champs de l'en-tête changés : `date_modification`, `format`, `illustration`
 - Lignes de l'encadré : identiques à main
   1. Base `moteur-orange-fixe` : Non, arrêtez-vous immédiatement · À faire tout de suite · ligne d'écart (lot F2) : « Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). »
+- Date « Mis à jour le » : 2026-11-15 → 2026-11-16 (textes repris : repère, paragraphes coupés, références passées dans « Sources », titre de la section du verdict)
+- Haut de l'illustration à 375 × 667 (police chargée / de secours) : 1202 / 1202 px, juste après « Notices / Base du coût » ; dans les trois premiers écrans (2 001 px) (demande n° 32)
+- Hauteur de l'encadré à 375 px : 1183 px en ligne (format 1) → 661 px (format 2)
+- Premier écran (2a) : première situation jusqu'à 545 / 545 px (667 au plus)
+- Écrans à 375 px : 13.1, sommaire « Sur cette page » : oui ; largeur à 320 px : 320, débordements : 0
+- Captures : [`captures/p0420/`](captures/p0420/) (format 2, et la page en ligne au format 1 pour comparaison)
 - Illustration dessinée pour le site (`code-p0420-ligne-echappement`) : alt « Schéma de la ligne d'échappement : moteur, sonde avant, catalyseur, sonde après, les deux sondes reliées au calculateur » ; légende « La sonde placée après le catalyseur mesure sa capacité à stocker l'oxygène ; le calculateur compare les deux sondes. En orange, ce que citent les causes de cette page. »
-- Repères : sous « Peut-on rouler avec le code P0420 ? » → `moteur-orange-fixe`
-- Titres H2 : identiques
-- Paragraphes changés : 4 nouveaux ou réécrits, 3 anciens retirés ou réécrits
+- Repères : sous « Peut-on rouler avec le code P0420 et le voyant moteur orange allumé fixe ? » → `moteur-orange-fixe`
+- Titres H2 : changés : « Peut-on rouler avec le code P0420 ? » → « Peut-on rouler avec le code P0420 et le voyant moteur orange allumé fixe ? »
+- Paragraphes changés : 5 nouveaux ou réécrits, 4 anciens retirés ou réécrits
 
 <details><summary>Avant (–) et après (+)</summary>
 
+**Avant** : ## Peut-on rouler avec le code P0420 ?
+
 **Avant** : Le code P0420 se lit avec un appareil de diagnostic. Dans les bulletins de Toyota, Kia, Audi et Ford du tableau des cas par marque, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
+
+**Après** : ## Peut-on rouler avec le code P0420 et le voyant moteur orange allumé fixe ?
 
 **Après** : Le code P0420 se lit avec un appareil de diagnostic. Dans les bulletins de Toyota, Kia, Audi et Ford du tableau des cas par marque, il s'accompagne du voyant moteur allumé. Avec ce voyant, la consigne de l'encadré est celle de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit aussi quand repartir.
 
@@ -89,16 +119,22 @@
   - `reponse_directe` : « (absent) » → « Celle du constructeur, à froid : sur l'étiquette de la porte du conducteur ou de son encadrement, propre à chaque voiture. »
 - Lignes de l'encadré : identiques à main
   1. Base `pression-pneus` : Non, arrêtez-vous immédiatement · À faire tout de suite · ligne d'écart (lot F2) : « Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir). »
-- Illustration dessinée pour le site (`pression-etiquette-porte`) : alt « Où lire la pression : l'étiquette sur le chant de la porte du conducteur (1) ou sur son encadrement (2), valeurs propres à chaque voiture » ; légende « Selon la notice, l'étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place au niveau de la porte. Les valeurs sont propres à chaque voiture. »
+- Date « Mis à jour le » : 2026-11-14 → 2026-11-16 (question de l'encadré et réponse directe nouvelles, références du tableau et du texte passées dans « Sources », citation Peugeot entre guillemets)
+- Haut de l'illustration à 375 × 667 (police chargée / de secours) : 1383 / 1383 px, juste après « Notices / Base du coût » ; dans les trois premiers écrans (2 001 px) (demande n° 32)
+- Hauteur de l'encadré à 375 px : 1444 px en ligne (format 1) → 880 px (format 2)
+- Premier écran (2a, page informative) : réponse directe jusqu'à 402 px, verdict et urgence de la première situation jusqu'à 573 px (667 au plus)
+- Écrans à 375 px : 11.5, sommaire « Sur cette page » : oui ; largeur à 320 px : 320, débordements : 0
+- Captures : [`captures/pression-des-pneus/`](captures/pression-des-pneus/) (format 2, et la page en ligne au format 1 pour comparaison)
+- Illustration dessinée pour le site (`pression-etiquette-porte`) : alt « Où lire la pression : l'étiquette sur le chant de la porte du conducteur (1) ou sur le cadre de la porte (2), valeurs à vide et en charge propres à chaque voiture » ; légende « Selon la notice, l'étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur le cadre de la porte (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte côté conducteur ». Les valeurs sont propres à chaque voiture. »
 - Repères : sous « Quand le voyant de pression des pneus s'allume » → `pression-pneus`
-- Titres H2 : identiques
+- Titres H2 : identiques à main
 - Paragraphes changés : 3 nouveaux ou réécrits, 3 anciens retirés ou réécrits
 
 <details><summary>Avant (–) et après (+)</summary>
 
 **Avant** : | Notice | Où lire la pression | Quand la vérifier | Après avoir gonflé | |---|---|---|---| | Peugeot 208 | Étiquette collée au niveau de la porte côté conducteur, avec les pressions à vide et en charge et celle de la roue de secours (p. 198) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette (p. 110) | Réinitialiser la détection de sous-gonflage (p. 111) | | Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours (p. 348) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud (p. 207 et 348) | Réinitialiser l'avertisseur de perte de pression (p. 207-208) | | Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur (p. 179) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids (p. 179) | Réinitialiser l'avertisseur de perte de pression (p. 179-180) | | Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche (p. 307) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids (p. 306) | Mémoriser la nouvelle pression dans le système (p. 312) | | Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice (p. 266, renvoi p. 333) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines (p. 266) | Initialiser le système dans les cas que la notice énumère (p. 261-262) |
 
-**Après** : | Notice | Où lire la pression | Quand la vérifier | Après avoir gonflé | |---|---|---|---| | Peugeot 208 | Étiquette collée au niveau de la porte côté conducteur, avec les pressions à vide et en charge et celle de la roue de secours ({{cite:notice-peugeot-208\|p. 198}}) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette ({{cite:notice-peugeot-208\|p. 110}}) | Réinitialiser la détection de sous-gonflage ({{cite:notice-peugeot-208\|p. 111}}) | | Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours ({{cite:notice-renault-clio-5\|p. 348}}) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5\|p. 207 et 348}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-renault-clio-5\|p. 207-208}}) | | Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur ({{cite:notice-dacia-sandero-3\|p. 179}}) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids ({{cite:notice-dacia-sandero-3\|p. 179}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-dacia-sandero-3\|p. 179-180}}) | | Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche ({{cite:notice-seat-ibiza\|p. 307}}) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids ({{cite:notice-seat-ibiza\|p. 306}}) | Mémoriser la nouvelle pression dans le système ({{cite:notice-seat-ibiza\|p. 312}}) | | Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice ({{cite:notice-toyota-yaris\|p. 266, renvoi p. 333}}) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines ({{cite:notice-toyota-yaris\|p. 266}}) | Initialiser le système dans les cas que la notice énumère ({{cite:notice-toyota-yaris\|p. 261-262}}) |
+**Après** : | Notice | Où lire la pression | Quand la vérifier | Après avoir gonflé | |---|---|---|---| | Peugeot 208 | Étiquette « collée au niveau de la porte côté conducteur », avec les pressions à vide et en charge et celle de la roue de secours ({{cite:notice-peugeot-208\|p. 198}}) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette ({{cite:notice-peugeot-208\|p. 110}}) | Réinitialiser la détection de sous-gonflage ({{cite:notice-peugeot-208\|p. 111}}) | | Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours ({{cite:notice-renault-clio-5\|p. 348}}) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5\|p. 207 et 348}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-renault-clio-5\|p. 207-208}}) | | Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur ({{cite:notice-dacia-sandero-3\|p. 179}}) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids ({{cite:notice-dacia-sandero-3\|p. 179}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-dacia-sandero-3\|p. 179-180}}) | | Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche ({{cite:notice-seat-ibiza\|p. 307}}) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids ({{cite:notice-seat-ibiza\|p. 306}}) | Mémoriser la nouvelle pression dans le système ({{cite:notice-seat-ibiza\|p. 312}}) | | Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice ({{cite:notice-toyota-yaris\|p. 266, renvoi p. 333}}) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines ({{cite:notice-toyota-yaris\|p. 266}}) | Initialiser le système dans les cas que la notice énumère ({{cite:notice-toyota-yaris\|p. 261-262}}) |
 
 **Avant** : Si vous ne pouvez contrôler qu'à chaud, deux notices donnent une correction : ajouter 0,3 bar aux valeurs de l'étiquette pour Peugeot (p. 110), les majorer de 0,2 à 0,3 bar pour Renault, qui précise qu'il ne faut jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5|p. 348}}). Pour une autre voiture, suivez sa notice.
 
@@ -118,9 +154,15 @@
   2. Saisie : « Avec quatre pneus hiver (symbole alpin et M+S) » → Oui, avec précautions · Aucune action nécessaire
   3. Saisie : « Avec des chaînes ou chaussettes à neige à bord, sans pneus hiver, sur route sans neige ni verglas » → Oui, avec précautions · Aucune action nécessaire
   4. Saisie : « Sur route enneigée, devant le panneau qui rend les chaînes obligatoires (B26), avec des chaînes ou chaussettes à neige à bord » → Oui, avec précautions · À faire tout de suite
+- Date « Mis à jour le » : 2026-11-10 → 2026-11-16 (textes repris : repères, paragraphes coupés)
+- Haut de l'illustration à 375 × 667 (police chargée / de secours) : 1624 / 1624 px, juste après « Notices / Base du coût » ; dans les trois premiers écrans (2 001 px) (demande n° 32)
+- Hauteur de l'encadré à 375 px : 1905 px en ligne (format 1) → 1139 px (format 2)
+- Premier écran (2a) : première situation jusqu'à 588 / 588 px (667 au plus)
+- Écrans à 375 px : 12.3, sommaire « Sur cette page » : oui ; largeur à 320 px : 320, débordements : 0
+- Captures : [`captures/loi-montagne/`](captures/loi-montagne/) (format 2, et la page en ligne au format 1 pour comparaison)
 - Illustration dessinée pour le site (`loi-montagne-flanc-du-pneu`) : alt « Flanc d'un pneu hiver : le symbole alpin, une montagne à trois pics avec un flocon, à côté du marquage M+S » ; légende « Un pneu hiver porte les deux marquages sur son flanc. Sans eux, gardez des chaînes ou chaussettes à neige à bord. »
 - Repères : sous « Peut-on rouler sans pneus hiver ni chaînes en zone de montagne ? » → `ligne-1` ; sous « Deux chaussettes à neige suffisent-elles ? » → `ligne-3`
-- Titres H2 : identiques
+- Titres H2 : identiques à main
 - Paragraphes changés : 7 nouveaux ou réécrits, 4 anciens retirés ou réécrits
 
 <details><summary>Avant (–) et après (+)</summary>
@@ -151,8 +193,11 @@
 
 ## À propos (`/a-propos/`)
 
-- Champs de l'en-tête changés : `date_modification`, `format`
-- Titres H2 : identiques
+- Champs de l'en-tête changés : `format`
+- Date « Mis à jour le » : 2026-11-15, inchangée : seul le format change, aucun mot (règle 14 b, demande n° 30 §7)
+- Écrans à 375 px : 12.4, sommaire « Sur cette page » : oui ; largeur à 320 px : 320, débordements : 0
+- Captures : [`captures/a-propos/`](captures/a-propos/) (format 2, et la page en ligne au format 1 pour comparaison)
+- Titres H2 : identiques à main
 - Paragraphes changés : 2 nouveaux ou réécrits, 1 anciens retirés ou réécrits
 
 <details><summary>Avant (–) et après (+)</summary>
@@ -167,8 +212,11 @@
 
 ## Mentions légales et confidentialité (`/mentions-legales/`)
 
-- Champs de l'en-tête changés : `date_modification`, `format`
-- Titres H2 : identiques
+- Champs de l'en-tête changés : `format`
+- Date « Mis à jour le » : 2026-11-10, inchangée : seul le format change, aucun mot (règle 14 b, demande n° 30 §7)
+- Écrans à 375 px : 6.8, sommaire « Sur cette page » : oui ; largeur à 320 px : 320, débordements : 0
+- Captures : [`captures/mentions-legales/`](captures/mentions-legales/) (format 2, et la page en ligne au format 1 pour comparaison)
+- Titres H2 : identiques à main
 - Paragraphes changés : 0 nouveaux ou réécrits, 0 anciens retirés ou réécrits
 
 ## Points à trancher (avec ma recommandation)
@@ -178,18 +226,95 @@
 2. **Pression des pneus** : la question passe à « À quelle pression gonfler mes pneus, et puis-je rouler s'ils sont
    sous-gonflés ? » et l'encadré s'ouvre sur la réponse directe « Celle du constructeur, à froid : sur l'étiquette de la
    porte du conducteur ou de son encadrement, propre à chaque voiture. » (page informative, demande n° 30). Title, H1 et
-   adresse ne changent pas. **Recommandation : valider.**
-3. **Textes réécrits** (détail page par page plus haut, avant et après) : repères de verdict sous les titres liés à une
-   ligne, paragraphes coupés à trois phrases, références de pages passées dans « Sources » (règle 2d), formule
-   « verdict retenu » retirée (FORMAT2-METHODE). **Recommandation : valider.**
-4. **Illustrations dessinées pour le site** (cinq) : circuit carburant (P0087), circuit turbo (P0299), ligne
-   d'échappement (P0420), flanc du pneu hiver (loi montagne), étiquette de la porte (pression). Hauteur mesurée à la
-   recette de la pull request. **Recommandation : valider.**
+   adresse ne changent pas.
+   - **Sources de la réponse directe**, déjà citées sur la page : notices Peugeot 208 p. 110 (pneus froids) et p. 198
+     (étiquette), Renault Clio 5 phase 2 p. 348, Dacia Sandero 3 p. 179, Seat Ibiza p. 306-307, Toyota Yaris p. 266.
+   - **Recommandation : valider.**
+3. **Textes réécrits** (détail page par page plus haut, avant et après) :
+   - repères de verdict sous les titres liés à une ligne ;
+   - paragraphes coupés à trois phrases ;
+   - références de pages passées dans « Sources » (règle 2d) ;
+   - formule « verdict retenu » retirée (FORMAT2-METHODE).
 
-## Recette, revue indépendante, Search Console
-À compléter avec la pull request du lot (après la fusion du lot F2) : construction de production, mesures du format 2,
-captures à 375 et 1366, Lighthouse, revue indépendante (une seule), relevé Search Console avant la fusion.
+   Depuis la revue de la pull request :
+   - le titre de la section du verdict des trois codes porte sa condition : « Peut-on rouler avec le code P0087 et le
+     voyant moteur orange allumé fixe ? », de même pour P0299 et P0420. Le repère ne dit que le verdict. Title et H1
+     inchangés ;
+   - la méta-description de P0087 ne dit plus « la consigne retenue » (« Avec le voyant moteur allumé, arrêtez-vous
+     immédiatement. ») ;
+   - la citation de la notice Peugeot sur l'étiquette est entre guillemets, mot pour mot (« collée au niveau de la porte
+     côté conducteur », p. 198).
+
+   **Recommandation : valider.**
+4. **Illustrations dessinées pour le site** (cinq) : circuit carburant (P0087), circuit turbo (P0299), ligne
+   d'échappement (P0420), flanc du pneu hiver (loi montagne), étiquette de la porte (pression). Leur hauteur est donnée
+   page par page plus haut (demande n° 32). Depuis la revue :
+   - **P0299** : la « vanne » est retirée du dessin et du texte alternatif. La légende ne dit plus « entraîné par les gaz
+     d'échappement », que rien ne source sur la page ;
+   - **pression des pneus** : la colonne « normal » devient « à vide » (mot de la notice Peugeot). La deuxième colonne
+     garde « chargé » : « en charge » collait les deux titres de colonne, lus comme un seul à 375 px ;
+   - texte alternatif et légende : « cadre de la porte » pour Seat et Toyota, comme leurs notices ; « à vide et en
+     charge » dans le texte alternatif.
+
+   **Recommandation : valider.**
+5. **Références dans les cases du tableau de la pression des pneus** (revue de la pull request, I2) :
+   - au format 2, les références `{{cite:…}}` des cases partent dans « Sources » ; la case ne montre plus la page de la
+     notice. Captures : `captures/pression-des-pneus/f2-375-chargee-element-unique.png` (tableau, sans pages) et
+     `f2-1366-chargee-sources-repliee.png` (« Sources », pages comprises) ;
+   - **décision du pilotage (règle 6) : on l'accepte pour F3.** L'idée d'afficher la page dans la case est notée comme
+     idée reportée par le pilotage ;
+   - **Recommandation : valider.**
+6. **Schémas des codes** (revue, m1) : les dessins de P0087, P0299 et P0420 montrent le circuit et, en orange, les pièces
+   que nomment les causes de la page, donc ce que le garage vérifie. Ils ne montrent pas où regarder sur la voiture : un
+   code se lit à l'appareil de diagnostic. **Recommandation : les garder.**
+7. **Dates « Mis à jour le »** (règle 14 b, demande n° 30 §7 ; détail page par page plus haut) :
+   - 16/11/2026 pour les cinq pages éditoriales, dont le texte est repris ;
+   - mentions légales (10/11) et « à propos » (15/11) inchangées : seul leur format change, aucun mot (revue, B1).
+
+   **Recommandation : valider.**
+
+## Point ouvert, hors du lot
+- Encart « dépannage sur autoroute » avec sa consigne sourcée (Service-public, F11056) : noté pour F3 dans
+  `a-reporter-f1.4.md`. Il demande un texte nouveau et un champ de données, donc une demande de changement. Il n'est pas
+  dans ce lot.
+
+## Preuves (pull request houssem-jeddou/decodauto#77)
+Détail et commandes : `travaux/etape-13/f3/preuves/README.md`.
+- **Construction de production** de la branche comparée à celle de `main` (`production-diff.txt`). Seules les 7 pages du
+  lot et `sitemap.xml` changent ; dans `sitemap.xml`, seul le `lastmod` des 5 pages éditoriales passe au 2026-11-16.
+  Toutes les autres pages sont identiques octet pour octet.
+- **Mesures du format 2** (`mesures-format2.txt`, `mesures.json`) : 21 pages, 126 mesures, 0 erreur ; aucun signalement
+  sur les pages du lot.
+- **Lignes d'écart** (`mots-ecart.json`) : 24 mots au plus avec « Votre marque » ; aucune au-delà de 25.
+- **Lighthouse mobile**, 3 passages, médianes (`lighthouse.txt`) : 100 / 100 / 100 / 100 sur les 7 pages, CLS 0.
+- **Captures** (`captures/`), à 375 × 667 et 1366 × 800, police chargée et police de secours :
+  - premier écran, encadré, illustration, élément unique, sommaire et « Sources » repliée ;
+  - fiche auteur et « Méthode » (« à propos ») ; bloc des mentions légales ;
+  - la page en ligne au format 1 à côté.
+
+  Aucune de ces pages n'a de tableau des notices : le voyant de leur encadré a sa page, et « Votre marque » y mène.
+- **Revue indépendante** : faite le 16/11 au soir (« à corriger », aucun verdict ne change). Ses constats et leur suite
+  sont dans l'encadré ci-dessous.
+- **Search Console** : relevé par le pilotage avant la fusion.
+
+> **Revue indépendante de la pull request (16/11/2026, ~23 h 45) : ce qui a changé, ce qui est écarté.**
+> - Changé :
+>   - **B1**, dates du socle (point 7) ; brief `taches/F3-pr.md` §2 corrigé ;
+>   - **I1**, ce paquet complété : hauteur de l'illustration et de l'encadré, captures, date, page par page ;
+>     Lighthouse et production ; sources de la réponse directe ; point ouvert ; plus de « À compléter » ;
+>   - **I2**, point 5 ;
+>   - **I3**, dessin de P0299 (point 4) ;
+>   - **m1**, point 6 ;
+>   - **m2**, titres des codes (point 3) ;
+>   - **m3**, pression : « à vide », « cadre de la porte », citation Peugeot entre guillemets (points 3 et 4) ;
+>   - **m4**, le brief ne dit plus la question « validée dans l'exemple » ;
+>   - **m5**, `preuves/README.md` (commandes et commits), captures de la fiche auteur, de « Méthode » et de « Sources » ;
+>   - **m6**, méta-description de P0087.
+> - Écarté : « en charge » dans la colonne du dessin de la pression, illisible à 375 px (point 4) ; la colonne garde
+>   « chargé ».
+> - **Ces corrections n'ont pas été relues par la revue indépendante** (une seule revue par livrable).
 
 ## Ligne de validation proposée
 « Je valide le lot F3 : les encadrés des sept pages au format 2 (verdicts inchangés), la question et la réponse directe
-de la pression des pneus, les textes réécrits, les repères et les cinq illustrations. »
+de la pression des pneus, les textes réécrits, les repères, les cinq illustrations, les références du tableau de la
+pression dans « Sources » et les dates de mise à jour. »

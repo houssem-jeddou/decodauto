@@ -24,6 +24,26 @@ PAGES = [
     ('pneus/loi-montagne.md', '/loi-montagne/'), ('socle/a-propos.md', '/a-propos/'),
     ('socle/mentions-legales.md', '/mentions-legales/'),
 ]
+# Dossier des captures de chaque page (captures/<dossier>/) et raison de sa date de mise à jour (règle 14 b).
+CAPTURES = {'code-defaut/code-p0087.md': 'p0087', 'code-defaut/code-p0299.md': 'p0299', 'code-defaut/code-p0420.md': 'p0420',
+            'pneus/pression-des-pneus.md': 'pression-des-pneus', 'pneus/loi-montagne.md': 'loi-montagne',
+            'socle/a-propos.md': 'a-propos', 'socle/mentions-legales.md': 'mentions-legales'}
+RAISON_DATE = {
+    'code-defaut/code-p0087.md': 'textes repris : repère, paragraphes coupés, références passées dans « Sources », titre de la section du verdict',
+    'code-defaut/code-p0299.md': 'textes repris : repère, paragraphes coupés, références passées dans « Sources », titre de la section du verdict',
+    'code-defaut/code-p0420.md': 'textes repris : repère, paragraphes coupés, références passées dans « Sources », titre de la section du verdict',
+    'pneus/pression-des-pneus.md': 'question de l\'encadré et réponse directe nouvelles, références du tableau et du texte passées dans « Sources », citation Peugeot entre guillemets',
+    'pneus/loi-montagne.md': 'textes repris : repères, paragraphes coupés',
+    'socle/a-propos.md': None, 'socle/mentions-legales.md': None,
+}
+TROIS_ECRANS = 2001
+
+
+def mesures_du_lot() -> dict:
+    f = RACINE / 'travaux/etape-13/f3/preuves/mesures.json'
+    return json.loads(f.read_text(encoding='utf-8'))['resume'] if f.exists() else {}
+
+
 VERDICTS = {'oui': 'Oui, vous pouvez rouler', 'oui avec précautions': 'Oui, avec précautions',
             'non, arrêt dès que possible': 'Non, ne poursuivez pas votre trajet',
             'non, arrêt immédiat': 'Non, arrêtez-vous immédiatement'}
@@ -81,6 +101,32 @@ def main() -> None:
                 else:
                     w(f'  {i}. Saisie : « {s["situation"]} » → {VERDICTS[s["verdict"]]} · {URGENCES[s["urgence"]]}'
                       + (f' · écart court : « {s["ecart_court"]} »' if s.get('ecart_court') else ''))
+        da, dn = fa.get('date_modification'), fn.get('date_modification')
+        raison = RAISON_DATE.get(chemin)
+        if dn != da:
+            w(f'- Date « Mis à jour le » : {da} → {dn} ({raison})')
+        else:
+            w(f'- Date « Mis à jour le » : {dn}, inchangée : seul le format change, aucun mot (règle 14 b, demande n° 30 §7)')
+        m = mesures_du_lot().get(CAPTURES[chemin], {})
+        if m:
+            ill_h = m.get('illustration_2i') or [None, None]
+            if ill_h[0] is not None:
+                apres = all(m.get('illustration_apres_provenance') or [False])
+                trop = ill_h[0] > TROIS_ECRANS
+                w(f'- Haut de l\'illustration à 375 × 667 (police chargée / de secours) : {ill_h[0]} / {ill_h[1]} px'
+                  f'{", juste après « Notices / Base du coût »" if apres else ", **pas juste après « Notices »**"}'
+                  f'{" ; **au-delà de trois écrans (2 001 px)**" if trop else " ; dans les trois premiers écrans (2 001 px)"} (demande n° 32)')
+            enc = m.get('encadre_format1_vers_format2') or [None, None]
+            if enc[0] is not None:
+                w(f'- Hauteur de l\'encadré à 375 px : {enc[0]} px en ligne (format 1) → {enc[1]} px (format 2)')
+            if m.get('premiere_situation_2a', [None])[0] is not None:
+                rd = m.get('reponse_directe_et_verdict_urgence_2a')
+                if rd:
+                    w(f'- Premier écran (2a, page informative) : réponse directe jusqu\'à {rd[0][0]} px, verdict et urgence de la première situation jusqu\'à {rd[0][1]} px (667 au plus)')
+                else:
+                    w(f'- Premier écran (2a) : première situation jusqu\'à {m["premiere_situation_2a"][0]} / {m["premiere_situation_2a"][1]} px (667 au plus)')
+            w(f'- Écrans à 375 px : {m["ecrans_et_sommaire_2h"][0]}, sommaire « Sur cette page » : {"oui" if m["ecrans_et_sommaire_2h"][1] else "non"} ; largeur à 320 px : {m["largeur_320"][0]}, débordements : {m["debordements"]}')
+        w(f'- Captures : [`captures/{CAPTURES[chemin]}/`](captures/{CAPTURES[chemin]}/) (format 2, et la page en ligne au format 1 pour comparaison)')
         ill = fn.get('illustration')
         if ill:
             w(f'- Illustration dessinée pour le site (`{ill["fichier"]}`) : alt « {ill["alt"]} » ; légende « {ill["legende"]} »')
@@ -89,7 +135,7 @@ def main() -> None:
             w('- Repères : ' + ' ; '.join(f'sous « {h} » → `{r}`' for h, r in reps))
         h2n = re.findall(r'^## (.+)$', cn, re.M)
         h2a = re.findall(r'^## (.+)$', ca, re.M)
-        w('- Titres H2 : ' + ('identiques' if h2n == h2a else 'changés : ' + ' ; '.join(
+        w('- Titres H2 : ' + ('identiques à main' if h2n == h2a else 'changés : ' + ' ; '.join(
             f'« {a} » → « {b} »' for a, b in zip(h2a, h2n) if a != b) + (' (nombre différent)' if len(h2a) != len(h2n) else '')))
         pa, pn = paragraphes(ca), paragraphes(cn)
         diff = [d for d in difflib.ndiff(pa, pn) if d[:2] in ('- ', '+ ')]

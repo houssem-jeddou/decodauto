@@ -66,6 +66,8 @@ const mesurer = (page) => page.evaluate(() => {
         await prendre('[data-sommaire]:visible', 'sommaire');
         await prendre('[data-element-unique]', 'element-unique');
         if (nom === 'mentions-legales') await prendre('[data-mentions-legales]', 'mentions');
+        if (nom === 'a-propos') { await prendre('section.auteur', 'fiche-auteur'); await prendre('#methode', 'methode'); }
+        await prendre('[data-sources]', 'sources-repliee');
         if (await page.locator('[data-tableau-notices] .notices-voyant').count()) {
           await prendre('[data-tableau-notices] .notices-voyant', 'notices-replie');
           await page.evaluate(() => document.querySelectorAll('[data-tableau-notices] .notices-voyant:first-of-type details').forEach((d) => { d.open = true; }));

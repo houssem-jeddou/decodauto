@@ -51,8 +51,8 @@ captures et mesures, Lighthouse, revue indépendante, paquet de validation, empr
 
 ## Pull request du lot F3 (houssem-jeddou/decodauto#77, 16/11/2026, soir)
 - `main` (a2b36ce, lot F2 fusionné) intégré par une fusion, sans conflit.
-- Lot inscrit dans `config/lots-format2.json` (les 7 pages, dans l'ordre du plan) ; `date_modification` des 7 pages au
-  16/11/2026 (règle 14 b).
+- Lot inscrit dans `config/lots-format2.json` (les 7 pages, dans l'ordre du plan) ; `date_modification` des 5 pages
+  éditoriales au 16/11/2026 (règle 14 b) ; celle des 2 pages du socle inchangée (revue, B1).
 - Pression des pneus : dans les cellules du tableau, la barre des références `{{cite:<source>|<page>}}` s'écrit `\|` (sinon
   elle sépare les cellules : la construction échouait sur une référence illisible) ; rendu vérifié (4 cellules par ligne,
   pages citées dans « Sources ») ; `verifier-pages-f3.py` reconnaît cette forme. Aucun mot changé.
@@ -64,3 +64,15 @@ captures et mesures, Lighthouse, revue indépendante, paquet de validation, empr
 - Preuves : `preuves/` (mesures, FORMAT2-MESURES, mots des lignes d'écart, Lighthouse, production comparée à `main`) et
   `captures/` (117 PNG).
 - Reste : revue indépendante, paquet F3 validé par Houssem, empreintes (`npm run empreinte`), CI verte.
+
+## Revue indépendante de la pull request (16/11/2026, ~23 h 45) : corrections
+Détail, point par point, dans l'encadré « Revue indépendante » du paquet (`paquet-f3.md`, fin).
+- B1 : dates du socle remises (mentions légales 10/11, « à propos » 15/11 : format seul) ; brief `taches/F3-pr.md` §2.
+- I1 : paquet complété depuis `preuves/` (générateur `generer-paquet-f3.py` et `paquet-f3-fin.md`).
+- I2 : références des cases du tableau de la pression dans « Sources » acceptées pour F3 (point à trancher du paquet).
+- I3 : dessin de P0299 sans « vanne » ; légende sans « entraîné par les gaz d'échappement » (`generer-illustrations-f3.py`).
+- m1 à m6 : schémas des codes gardés (paquet) ; titre de la section du verdict des codes avec sa condition (le lot déclare
+  ces trois renommages dans `verifier-pages-f3.py`) ; pression : « à vide », « cadre de la porte », citation Peugeot entre
+  guillemets ; brief : la question n'est plus dite « validée » (`scripts/lib/briefs.ts`) ; `preuves/README.md` et captures
+  de la fiche auteur, de « Méthode » et de « Sources » ; méta-description de P0087.
+- Preuves et captures refaites (145 PNG). Corrections non relues par la revue indépendante.
