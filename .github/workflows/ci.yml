@@ -145,6 +145,9 @@ jobs:
       - name: Liens cassés
         if: ${{ !cancelled() }}
         run: node scripts/liens.ts --dist dist-exemples --exemples
+      - name: Mesures du format 2 dans un navigateur (pages au format 2 de la recette ; FORMAT2-MESURES)
+        if: ${{ !cancelled() }}
+        run: CHROME_PATH="$(command -v google-chrome || command -v chromium)" node scripts/mesurer-format2.ts --dist dist-exemples
       - name: Texte rédigé des exemples, tel que rendu (lecture dans ce journal)
         if: ${{ !cancelled() }}
         run: node scripts/texte-exemples.ts dist-exemples
@@ -202,6 +205,9 @@ jobs:
       - name: Liens cassés
         if: ${{ !cancelled() }}
         run: node scripts/liens.ts --dist dist-demo-format2
+      - name: Mesures du format 2 dans un navigateur (règles 2a et 2i, débordement à 320, 375 et 1366 px ; FORMAT2-MESURES)
+        if: ${{ !cancelled() }}
+        run: CHROME_PATH="$(command -v google-chrome || command -v chromium)" node scripts/mesurer-format2.ts --dist dist-demo-format2
       - name: Lighthouse mobile des pages au format 2 (avec les emplacements publicitaires factices)
         if: ${{ !cancelled() }}
         run: npx lhci autorun --config=lighthouserc-demo-format2.json

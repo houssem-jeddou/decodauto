@@ -246,6 +246,26 @@ describe('format 2 : modèle des pages voyants', () => {
     assert.match(nonLie[0]?.message ?? '', /paire de liens voyant-adblue ↔ voyant-moteur à proposer/);
   });
 
+  test('lien « Votre marque » de la ligne du voyant moteur sur les pages AdBlue, FAP et préchauffage (F1.4) : vers la page du voyant moteur ; FORMAT2-ECART vert, et en échec sans ce lien', async () => {
+    const { site, contexte } = await siteDemo();
+    const ctx = { ...contexte, pagesEcrites: site.libelles };
+    for (const fichier of [ADBLUE, 'src/content/voyant/voyant-fap.md', 'src/content/voyant/voyant-prechauffage.md']) {
+      const lu = pageAvecBrouillon(lireFrontmatter(await readFile(join(racine, fichier), 'utf8')) as Record<string, unknown>, brouillon);
+      // Pages FAP et préchauffage hors du brouillon : passées au format 2 en mémoire, avec une illustration de démonstration.
+      const brut = { ...lu, format: 2, illustration: lu['illustration'] ?? { fichier: 'voyant-moteur-tableau-de-bord', alt: 'Dessin de test', legende: 'Dessin de test. Illustration decodauto.' } };
+      const page = schemasPage.voyant.parse(brut) as PageEditoriale;
+      const html = documentFormat2(pageVoyantF2(page, site, '<h2 id="a">A</h2><p>Texte.</p>'), page, contexte.plan.get(page.id)?.adresse ?? '/');
+      const $ = cheerio.load(html);
+      const i = page.situations.findIndex((l) => 'voyant' in l && l.voyant === 'moteur-orange-fixe');
+      assert.ok(i >= 0, `${page.id} : ligne du voyant moteur`);
+      assert.equal($('[data-encadre-decision] [data-encadre-ligne]').eq(i).find('[data-lien-notices]').attr('href'), '/voyants/moteur/#da-notices-moteur-orange-fixe', page.id);
+      const ecart = (h: string): string[] => controlerPage({ type: 'voyant', brut, fichier }, ctx, h).constats.filter((c) => c.regle === 'FORMAT2-ECART').map((c) => c.message);
+      assert.deepEqual(ecart(html), [], page.id);
+      $('[data-encadre-decision] [data-encadre-ligne]').eq(i).find('[data-lien-notices]').remove();
+      assert.ok(ecart($.html()).some((m) => m.includes(`ligne ${i + 1}`)), page.id);
+    }
+  });
+
   test('erreurs de construction : écart court, illustration, « ce que demande la notice » absents ; repère mal placé ou inconnu ; repère au format 1', async () => {
     const { site } = await siteDemo();
     const { page } = await pageDemo();
