@@ -17,6 +17,7 @@ auteurs:
     profils:
       - https://www.linkedin.com/in/houssem-jeddou
     presentation: "Diplômé en génie logiciel (ISSAT de Sousse), consultant technique sur Microsoft Dynamics 365 et Power Platform depuis 2020, aujourd'hui responsable technique d'une équipe de consultants. Il construit et vérifie des logiciels de gestion d'entreprise : il n'est pas mécanicien. Sur ce site, il fixe la méthode, vérifie chaque verdict sur sa source et en porte la responsabilité éditoriale. Il travaille depuis la Tunisie."
+format: 2
 ---
 
 ## Ce que le site fait
@@ -31,6 +32,8 @@ Le site n'est pas un atelier : il ne remplace ni la notice de votre voiture, ni 
 
 ## Qui écrit, qui vérifie
 
-Les textes sont rédigés par une intelligence artificielle, sous la responsabilité de l'éditeur du site, présenté plus bas. Chaque page commence par une mention qui le dit. L'éditeur vérifie lui-même chaque verdict et la décision affichée en haut de chaque page avant sa publication. La section « Méthode » ci-dessous détaille ce qui est vérifié et comment.
+Les textes sont rédigés par une intelligence artificielle, sous la responsabilité de l'éditeur du site, présenté plus bas. Chaque page commence par une mention qui le dit.
+
+L'éditeur vérifie lui-même chaque verdict et la décision affichée en haut de chaque page avant sa publication. La section « Méthode » ci-dessous détaille ce qui est vérifié et comment.
 
 Pour signaler une erreur sur une page, le lien « Signaler une erreur » en bas de chaque page ouvre un courriel pré-rempli avec l'adresse de la page.

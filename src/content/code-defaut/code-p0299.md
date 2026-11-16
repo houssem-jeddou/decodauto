@@ -92,11 +92,18 @@ causes:
     explication: "Pour les Volkswagen 2.0 TDI qu'il nomme, vendues aux États-Unis, le bulletin de Volkswagen demande de vérifier le niveau du logiciel du calculateur."
     pieces:
       - calculateur
+format: 2
+illustration:
+  fichier: code-p0299-circuit-turbo
+  alt: "Schéma de la suralimentation : filtre à air, turbo et sa commande, vanne, échangeur, moteur et calculateur"
+  legende: "Le turbo, entraîné par les gaz d'échappement, envoie l'air comprimé au moteur par l'échangeur ; sa commande règle la pression. En orange, ce que citent les causes de cette page."
 ---
 
 ## Peut-on rouler avec le code P0299 ?
 
-Le code P0299 se lit avec un appareil de diagnostic. Dans les bulletins d'Audi, de Volkswagen et de General Motors du tableau des cas par marque, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
+{{repere:moteur-orange-fixe}}
+
+Le code P0299 se lit avec un appareil de diagnostic. Dans les bulletins d'Audi, de Volkswagen et de General Motors du tableau des cas par marque, il s'accompagne du voyant moteur allumé. Avec ce voyant, la consigne de l'encadré est celle de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit aussi quand repartir.
 
 Si le voyant moteur clignote, l'action à suivre n'est pas tout à fait la même : voyez la page du [voyant moteur](/voyants/moteur/).
 
@@ -133,4 +140,6 @@ Selon Hella, une panne de l'actionneur électrique du turbo peut se traduire par
 
 ## P0299 sur une Peugeot (1.6 HDi), une Citroën, une Renault (1.5 dCi), une Ford, une Opel ou une Mercedes
 
-Le code garde la même signification sur toutes les marques : c'est un code générique (voir la fiche du code). Mais les documents lus ne décrivent aucun cas sur les Peugeot, Citroën, Renault, Ford, Opel, Mercedes, Hyundai ou Mazda, ni sur les moteurs 1.6 HDi et 1.5 dCi. Les cas décrits par marque ci-dessus viennent de bulletins de voitures vendues aux États-Unis ou en Amérique du Nord : ils montrent que le code peut venir d'une fuite, de la commande du turbo comme du turbo lui-même, mais ne valent que pour les modèles nommés. Sur votre voiture, seul le diagnostic dit d'où vient le défaut ; la marche à suivre reste la même.
+Le code garde la même signification sur toutes les marques : c'est un code générique (voir la fiche du code).
+
+Mais les documents lus ne décrivent aucun cas sur les Peugeot, Citroën, Renault, Ford, Opel, Mercedes, Hyundai ou Mazda, ni sur les moteurs 1.6 HDi et 1.5 dCi. Les cas décrits par marque ci-dessus viennent de bulletins de voitures vendues aux États-Unis ou en Amérique du Nord : ils montrent que le code peut venir d'une fuite, de la commande du turbo comme du turbo lui-même, mais ne valent que pour les modèles nommés. Sur votre voiture, seul le diagnostic dit d'où vient le défaut ; la marche à suivre reste la même.

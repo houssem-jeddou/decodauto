@@ -1,0 +1,28 @@
+{
+  "code-defaut/code-p0087": {
+    "fichier": "code-p0087-circuit-carburant",
+    "alt": "Schéma du circuit de carburant : réservoir et pompe, filtre, pompe haute pression, rampe avec son capteur de pression, injecteurs",
+    "legende": "Le carburant va du réservoir à la rampe, où un capteur mesure la pression que le calculateur surveille. En orange, les pièces que citent les causes de cette page."
+  },
+  "code-defaut/code-p0299": {
+    "fichier": "code-p0299-circuit-turbo",
+    "alt": "Schéma de la suralimentation : filtre à air, turbo et sa commande, vanne, échangeur, moteur et calculateur",
+    "legende": "Le turbo, entraîné par les gaz d'échappement, envoie l'air comprimé au moteur par l'échangeur ; sa commande règle la pression. En orange, ce que citent les causes de cette page."
+  },
+  "code-defaut/code-p0420": {
+    "fichier": "code-p0420-ligne-echappement",
+    "alt": "Schéma de la ligne d'échappement : moteur, sonde avant, catalyseur, sonde après, les deux sondes reliées au calculateur",
+    "legende": "La sonde placée après le catalyseur mesure sa capacité à stocker l'oxygène ; le calculateur compare les deux sondes. En orange, ce que citent les causes de cette page."
+  },
+  "pneus/loi-montagne": {
+    "fichier": "loi-montagne-flanc-du-pneu",
+    "alt": "Flanc d'un pneu hiver : le symbole alpin, une montagne à trois pics avec un flocon, à côté du marquage M+S",
+    "legende": "Un pneu hiver porte les deux marquages sur son flanc. Sans eux, gardez des chaînes ou chaussettes à neige à bord."
+  },
+  "pneus/pression-des-pneus": {
+    "fichier": "pression-etiquette-porte",
+    "alt": "Où lire la pression : l'étiquette sur le chant de la porte du conducteur (1) ou sur son encadrement (2), valeurs propres à chaque voiture",
+    "legende": "Selon la notice, l'étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place au niveau de la porte. Les valeurs sont propres à chaque voiture.",
+    "reponse_directe": "Celle du constructeur, à froid : sur l'étiquette de la porte du conducteur ou de son encadrement, propre à chaque voiture."
+  }
+}

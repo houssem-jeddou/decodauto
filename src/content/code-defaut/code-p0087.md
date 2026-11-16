@@ -91,11 +91,18 @@ causes:
     explication: "Ross-Tech cite une perte de pression par un injecteur qui fuit."
     pieces:
       - injecteurs
+format: 2
+illustration:
+  fichier: code-p0087-circuit-carburant
+  alt: "Schéma du circuit de carburant : réservoir et pompe, filtre, pompe haute pression, rampe avec son capteur de pression, injecteurs"
+  legende: "Le carburant va du réservoir à la rampe, où un capteur mesure la pression que le calculateur surveille. En orange, les pièces que citent les causes de cette page."
 ---
 
 ## Peut-on rouler avec le code P0087 ?
 
-Le code P0087 se lit avec un appareil de diagnostic. Dans les bulletins de Kia et d'Audi et les fiches Hella, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
+{{repere:moteur-orange-fixe}}
+
+Le code P0087 se lit avec un appareil de diagnostic. Dans les bulletins de Kia et d'Audi et les fiches Hella, il s'accompagne du voyant moteur allumé. Avec ce voyant, la consigne de l'encadré est celle de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit aussi quand repartir.
 
 Si le code est lu sans que le voyant moteur soit allumé, aucune des notices lues ne donne de consigne : demandez l'avis d'un professionnel.
 
@@ -118,7 +125,7 @@ Les documents cités décrivent :
 ## Que faire avec le code P0087 ?
 
 1. Si le voyant moteur est allumé, suivez d'abord la consigne de l'encadré, en haut de page.
-2. Au garage, le diagnostic commence par les valeurs mesurées de la pression de carburant, puis passe par les points de contrôle des causes ci-dessus (Ross-Tech pour le groupe Volkswagen, {{cite:ross-tech-p0087|rubrique « Possible Solutions »}}).
+2. Au garage, le diagnostic commence par les valeurs mesurées de la pression de carburant, puis passe par les points de contrôle des causes ci-dessus, selon Ross-Tech pour le groupe Volkswagen ({{cite:ross-tech-p0087|rubrique « Possible Solutions »}}).
 3. Le code seul ne désigne pas la pièce à changer : la fiche technique de Kia rappelle qu'elle ne remplace pas un vrai diagnostic, et le bulletin d'Audi demande, pour son cas, de ne remplacer aucune pièce et de ne pas mettre à jour le logiciel ({{cite:bulletin-audi-2033211-p0087|rubrique « Service »}}).
 
 ## Régulateur de pression : comment savoir s'il est en cause ?
@@ -127,4 +134,6 @@ Selon Bosch, sur les systèmes diesel à rampe commune, la rampe porte toujours,
 
 ## P0087 sur un autre moteur ou une autre marque (1.4 HDi, 1.6 HDi, Mercedes)
 
-Le code garde la même signification sur toutes les marques : c'est un code générique (voir la fiche du code). Mais les documents lus ne décrivent aucun cas sur ces moteurs ni sur les Mercedes. Les causes ci-dessus sont celles que ces documents décrivent pour d'autres voitures : seul le diagnostic dit d'où vient le défaut sur la vôtre. La marche à suivre reste la même : la consigne de l'encadré si le voyant moteur est allumé, puis le diagnostic.
+Le code garde la même signification sur toutes les marques : c'est un code générique (voir la fiche du code).
+
+Mais les documents lus ne décrivent aucun cas sur ces moteurs ni sur les Mercedes. Les causes ci-dessus sont celles que ces documents décrivent pour d'autres voitures : seul le diagnostic dit d'où vient le défaut sur la vôtre. La marche à suivre reste la même : la consigne de l'encadré si le voyant moteur est allumé, puis le diagnostic.

@@ -107,6 +107,11 @@ prochaine_revue: 2027-05-10
 # 03/11/2026 (21 h 44), avec les sources, la fiche, le tableau, les faits du texte et les sept décisions du paquet
 # (travaux/etape-6/paquet-6.6c-loi-montagne.md), demande de changement n° 10 comprise.
 validation: 75abb315d6c38686d9171d0b75a2289ecf5d643e261d1c7b5bf05ea8a6733a46
+format: 2
+illustration:
+  fichier: loi-montagne-flanc-du-pneu
+  alt: "Flanc d'un pneu hiver : le symbole alpin, une montagne à trois pics avec un flocon, à côté du marquage M+S"
+  legende: "Un pneu hiver porte les deux marquages sur son flanc. Sans eux, gardez des chaînes ou chaussettes à neige à bord."
 ---
 
 ## Loi montagne : où et quand faut-il s'équiper ?
@@ -139,13 +144,19 @@ Ce tableau reprend l'article D314-8 ({{cite:code-de-la-route-d314-8|article D314
 
 ## Peut-on rouler sans pneus hiver ni chaînes en zone de montagne ?
 
-Dans une commune soumise à l'obligation, du 1er novembre au 31 mars, sans pneus hiver ni chaînes à bord, le verdict retenu en haut de page est : {{verdict:ligne-1}}. L'encadré dit comment vous équiper.
+{{repere:ligne-1}}
 
-Hors de ces communes, ou du 1er avril au 31 octobre, l'article D314-8 n'impose aucun équipement. Mais sur une route enneigée, le panneau qui rend les chaînes obligatoires (B26) les impose, y compris hors de la période d'hiver. Pour une voiture ou un utilitaire léger, le port de pneus hiver est admis pour respecter ce panneau, sauf si un panonceau « Chaînes à neige obligatoires » limite le passage aux véhicules équipés de chaînes ({{cite:arrete-1967-11-24-signalisation|article 4}} ; {{cite:arrete-2021-06-23-signalisation|article 7}}). La Sécurité routière dit la même chose.
+Cette consigne vaut dans une commune soumise à l'obligation, du 1er novembre au 31 mars, sans pneus hiver ni chaînes à bord. L'encadré dit comment vous équiper.
+
+Hors de ces communes, ou du 1er avril au 31 octobre, l'article D314-8 n'impose aucun équipement. Mais sur une route enneigée, le panneau qui rend les chaînes obligatoires (B26) les impose, y compris hors de la période d'hiver.
+
+Pour une voiture ou un utilitaire léger, le port de pneus hiver est admis pour respecter ce panneau, sauf si un panonceau « Chaînes à neige obligatoires » limite le passage aux véhicules équipés de chaînes ({{cite:arrete-1967-11-24-signalisation|article 4}} ; {{cite:arrete-2021-06-23-signalisation|article 7}}). La Sécurité routière dit la même chose.
 
 Sur neige ou verglas sans ce panneau, aucun des textes lus n'impose de monter les chaînes. La Sécurité routière ne prévoit de les laisser dans le coffre qu'en l'absence de neige ou de verglas.
 
 ## Deux chaussettes à neige suffisent-elles ?
+
+{{repere:ligne-3}}
 
 Pour l'obligation, oui : le texte demande de quoi équiper au moins deux roues motrices, et la Sécurité routière accepte les chaussettes à neige, qu'elle appelle aussi chaînes textiles, au même titre que les chaînes métalliques. Elle les dit plus simples à poser, mais moins efficaces que les chaînes en cas de fort enneigement.
 
@@ -159,9 +170,13 @@ Un pneu 4 saisons, ou toutes saisons, n'a pas de définition réglementaire : il
 
 ## Quelle amende pour la loi montagne : peut-on être verbalisé ?
 
-{{montant:aucune-amende-loi-montagne}}. La date de la dernière vérification est indiquée en haut de page. L'obligation d'équipement s'applique quand même. Selon le ministère de l'Intérieur, instituer une sanction demande un décret ({{cite:reponse-ministerielle-senat-2026-02-12|réponse publiée le 12/02/2026}}) ; aucun décret de ce type n'était publié à la date de la dernière revue indiquée en haut de page.
+{{montant:aucune-amende-loi-montagne}}. La date de la dernière vérification est indiquée en haut de page.
 
-Le panneau B26, qui impose les chaînes sur route enneigée, relève d'une autre règle : c'est une signalisation routière. Sauf disposition différente, le code de la route punit le conducteur qui ne respecte pas la signalisation de l'amende des contraventions de 2e classe ({{cite:code-de-la-route-r411-26|article R411-26}}), soit 150 euros au plus ({{cite:code-penal-131-13|article 131-13, 2°}}). Le ministère de l'Intérieur l'a confirmé dans une réponse publiée au Journal officiel le 21 mars 2023 : l'amende est plafonnée à 150 euros ({{cite:reponse-ministerielle-an-2023-03-21|question n° 3489}}). Ce plafond n'est pas le montant de l'amende forfaitaire.
+L'obligation d'équipement s'applique quand même. Selon le ministère de l'Intérieur, instituer une sanction demande un décret ({{cite:reponse-ministerielle-senat-2026-02-12|réponse publiée le 12/02/2026}}) ; aucun décret de ce type n'était publié à la date de la dernière revue indiquée en haut de page.
+
+Le panneau B26, qui impose les chaînes sur route enneigée, relève d'une autre règle : c'est une signalisation routière. Sauf disposition différente, le code de la route punit le conducteur qui ne respecte pas la signalisation de l'amende des contraventions de 2e classe ({{cite:code-de-la-route-r411-26|article R411-26}}), soit 150 euros au plus ({{cite:code-penal-131-13|article 131-13, 2°}}).
+
+Le ministère de l'Intérieur l'a confirmé dans une réponse publiée au Journal officiel le 21 mars 2023 : l'amende est plafonnée à 150 euros ({{cite:reponse-ministerielle-an-2023-03-21|question n° 3489}}). Ce plafond n'est pas le montant de l'amende forfaitaire.
 
 ## Loi Montagne II, loi Montagne III : de quel texte parle-t-on ?
 
