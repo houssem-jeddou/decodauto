@@ -103,8 +103,9 @@ def main() -> None:
       'porte du lot F1. Critère de la ligne 10 de `docs/03` : « Exemples panne et dossier validés par Houssem (verdicts et '
       'encadrés de décision) avant la rédaction du lot ». Les deux exemples sont au format 2 (demande n° 30) et se '
       'construisent quand la base porte les lignes d\'écart courtes du lot F2 et que les modèles de F1.3c sont fusionnés. '
-      'Sources relues à l\'écran le 16/11/2026 : `travaux/etape-10/textes/demarrage-batterie-verification.md`, '
-      '`puretech-verification.md`, `autres-pannes-verification.md`.')
+      'Version 2 du 16/11/2026, après la revue indépendante (encadré « Revue indépendante » en fin de paquet). Sources '
+      'relues à l\'écran le 16/11/2026 : `travaux/etape-10/textes/demarrage-batterie-verification.md`, '
+      '`puretech-verification.md`, `porte10-verification.md`, `autres-pannes-verification.md`.')
     w('')
     page(PREP / 'exemples/panne/voiture-ne-demarre-pas.md', '/voiture-ne-demarre-pas/', w)
     page(PREP / 'exemples/dossier/moteur-puretech.md', '/moteur-puretech/', w)
