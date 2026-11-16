@@ -62,7 +62,7 @@
 - Mesures à 375 × 667 (police chargée / de secours) : première situation finie à 547 px (panne) et 528 px (dossier),
   sous 667 (règle 2a) ; arbre de décision à 3 855 / 3 880 px, sous six écrans (4 002) ; aucun débordement à 320 px.
 - Lighthouse mobile (3 passages) : 100 en performance, accessibilité et bonnes pratiques sur les deux pages, CLS 0.
-- Captures : 31 (375 × 667 et 1366 × 800, deux polices) dans `captures/`.
+- Captures : 30 (375 × 667 et 1366 × 800, deux polices) dans `captures/`.
 - Corrigé après la recette (16/11, non relu par la revue) : renvoi circulaire entre les lignes 4 et 5 de la page panne
   (point 4) ; la deuxième fiche du tableau des rappels disait seulement « Même motif » : son motif est écrit en entier
   (identique à la première fiche, relu à l'écran : `porte10-verification.md`). « Votre marque » coupé sur deux lignes et

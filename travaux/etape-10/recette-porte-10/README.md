@@ -69,7 +69,7 @@ Mobile, 3 passages, médianes : les deux pages à 100 en performance, accessibil
 `<page>-<375|1366>-<chargee|secours>-<ecran|page|encadre|arbre|tableau-rappels|illustration>.png`, PNG sans perte ;
 échelle 2, sauf la page entière (échelle 1 : plus de 16 384 px de haut à l'échelle 2). Une capture en police de secours
 identique octet pour octet à celle en police chargée n'est pas gardée (encadré, illustration, arbre à 1366, tableau des
-rappels à 1366) : 31 captures.
+rappels à 1366) : 30 captures.
 
 Le dossier `demande-32/` garde les captures de l'exemple panne avant et après la demande n° 32, prises sur une autre
 construction (la démonstration du format 2, avec un autre état de la base) : l'encadré y était plus court (bas à 1 983 px).
