@@ -27,7 +27,7 @@ base. Vérifiés : forme du fichier (un SVG avec viewBox, rien d'interdit par `i
 
 ## Pages voyants passées au format 2 (sur cette branche, sans pull request)
 Les 11 pages voyants (hors page outil, qui attend la tâche F1.3a) : `format: 2`, champ `illustration`, repère sous chaque
-H2 lié à une seule ligne de l'encadré (26), formule « Verdict retenu… » retirée (le repère la remplace), références écrites à
+H2 lié à une seule ligne de l'encadré (25 ; une exception explicite à une autre ligne dans le texte est admise, une section qui mêle plusieurs cas n'a pas de repère), formule « Verdict retenu… » retirée (le repère la remplace), références écrites à
 la main remplacées par `{{cite:…}}` (règle 2d : au format 2, elles vont dans « Sources »), paragraphes de plus de trois
 phrases coupés à une limite de phrase (28), pronoms de tête de paragraphe remplacés par le nom de la notice (7). Aucun H2
 retiré ni renommé, aucun verdict changé. La base porte `ecart_court` (16 lignes) et `demande` (126 citations) : les

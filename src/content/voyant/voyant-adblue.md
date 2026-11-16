@@ -94,8 +94,6 @@ La notice Toyota Yaris lue pour les autres pages du site ne décrit pas de moteu
 
 ## Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?
 
-{{repere:moteur-orange-fixe}}
-
 Ces messages sont ceux de la Peugeot 208, où le témoin AdBlue s'allume avec le voyant moteur ({{cite:notice-peugeot-208|p. 16}}) : la consigne retenue est donc celle du voyant moteur, la plus prudente : {{verdict:moteur-orange-fixe}}. Selon la notice, le message « Défaut antipollution » signale un dysfonctionnement du système d'antipollution ; si le défaut était passager, l'alerte disparaît au trajet suivant. S'il persiste pendant 50 km, il est confirmé : le témoin AdBlue clignote, et le message « Démarrage interdit dans X km » annonce la distance qui reste avant que le dispositif d'antidémarrage se déclenche, au plus tard après 1 100 km.
 
 La notice demande de faire vérifier la voiture par le réseau Peugeot ou un atelier qualifié ({{cite:notice-peugeot-208|p. 22}}) : elle permet donc de rouler jusqu'au réseau, à rejoindre sans attendre. La notice Citroën C3 décrit le même cas, avec en plus le voyant Service ({{cite:notice-citroen-c3|p. 13}}).
