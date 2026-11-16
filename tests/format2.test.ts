@@ -22,11 +22,16 @@ import {
   piedFormat2,
   reperesDuTexte,
   tuile,
+  tuileDeLaPage,
+  insecableApresPage,
+  minusculeInitiale,
 } from '../src/lib/format2.ts';
 import { controlerFormat2 } from '../src/lib/controle-format2.ts';
-import { modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
+import { marqueEtModele, modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
 import { ACCUEIL_FORMAT2, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
 import { mentionEnTete } from '../src/lib/composants.ts';
+import { LIBELLES_PICTOGRAMMES, constatsLibellesPictogrammes } from '../src/lib/pictogrammes.ts';
+import { chargerPictogrammes } from '../scripts/lib/charger.ts';
 import { typographier } from '../src/lib/html.ts';
 import { controlerPage, type Constat } from '../src/lib/controle.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
@@ -37,6 +42,8 @@ import {
   FICHIER_BROUILLON_FORMAT2,
   MENTION_BROUILLON,
   attendusDemoFormat2,
+  cleCitation,
+  clesDesCitations,
   constatsDemoPubliee,
   corpsAvecReperes,
   lireBrouillonFormat2,
@@ -251,24 +258,39 @@ describe('format 2 : modèle des pages voyants', () => {
 });
 
 describe('format 2 : accueil', () => {
-  test('grille des voyants dont la page est construite (hors outil), accès par thème, « Un guide indépendant » ; contrôles ACCUEIL-* verts', async () => {
+  test('grille : un dessin par pictogramme de la base (18), libellé de LIBELLES_PICTOGRAMMES, lien vers la page construite ou vers la carte de l\'outil ; contrôles ACCUEIL-* verts', async () => {
     const { site } = await siteDemo();
     const libelles = new Map([['voyant-moteur', 'Voyant moteur'], ['voyant-adblue', 'Voyant AdBlue'], ['voyants', 'Identifier un voyant']]);
     const grille = grilleDesVoyants(site.voyants.values(), site.plan, libelles, site.pictogrammes);
-    assert.deepEqual(grille.map((v) => v.libelle), ['Voyant moteur', 'Voyant AdBlue']);
+    const dessins = new Set([...site.voyants.values()].map((v) => v.pictogramme));
+    assert.equal(grille.length, dessins.size);
+    assert.equal(grille.length, 18);
+    assert.deepEqual(grille.map((v) => v.libelle), [...dessins].map((d) => LIBELLES_PICTOGRAMMES[d]));
+    assert.equal(grille.find((v) => v.libelle === 'Moteur')?.adresse, '/voyants/moteur/');
+    assert.equal(grille.find((v) => v.libelle === 'AdBlue')?.adresse, '/voyants/adblue/');
+    assert.equal(grille.find((v) => v.libelle === 'STOP')?.adresse, '/voyants/#da-voyant-stop');
+    assert.equal(grille.find((v) => v.libelle === 'Température')?.adresse, '/voyants/#da-voyant-temperature-rouge');
+    // Sans outil construit, un dessin dont la page n'est pas construite n'a pas de tuile (jamais un lien vers une page absente).
+    assert.deepEqual(grilleDesVoyants(site.voyants.values(), site.plan, new Map([['voyant-moteur', 'Voyant moteur']]), site.pictogrammes).map((v) => v.libelle), ['Moteur']);
     const pages = pagesListees(site.plan, libelles);
     const aPropos = { adresse: '/a-propos/', libelle: 'À propos' };
     const html = accueilFormat2Html({ pages, aPropos, grille, mention: mentionEnTete(), tuile });
     const $ = cheerio.load(html);
     assert.equal($('.tete.hero h1').length, 1);
-    assert.equal($('.grille-voyants a').length, 2);
+    assert.equal($('.grille-voyants a').length, 18);
     assert.equal($('#voyants h2').text(), typographier(ACCUEIL_FORMAT2.titreVoyants));
     assert.equal($('[data-accueil-guide] h2').text(), typographier(ACCUEIL_FORMAT2.titreGuide));
     const adresses = pages.map((p) => ({ adresse: p.adresse, theme: p.theme }));
     assert.deepEqual(regles(constatsAccueil(html, 'index.html', { pages: adresses, outil: '/voyants/', aPropos: '/a-propos/' })), []);
-    // Sans outil construit : ni lien « Voir tous les voyants », ni bouton du bandeau (Base.astro).
     const sansOutil = accueilFormat2Html({ pages: pages.filter((p) => p.id !== 'voyants'), aPropos, grille, mention: mentionEnTete(), tuile });
     assert.ok(!sansOutil.includes('data-accueil-outil'));
+  });
+
+  test('PICTO-LIBELLE : chaque fichier de src/pictogrammes a son libellé, aucun libellé sans fichier', async () => {
+    const fichiers = (await chargerPictogrammes(racine)).map((p) => p.id);
+    assert.deepEqual(constatsLibellesPictogrammes(fichiers), []);
+    assert.deepEqual(regles(constatsLibellesPictogrammes([...fichiers, 'nouveau'])), ['PICTO-LIBELLE']);
+    assert.deepEqual(regles(constatsLibellesPictogrammes(fichiers.filter((f) => f !== 'stop'))), ['PICTO-LIBELLE']);
   });
 });
 
@@ -293,8 +315,9 @@ describe('format 2 : construction de démonstration', () => {
 
   test('erreurs attendues : l\'empreinte de chaque ligne et de chaque page du brouillon (R4-EMPREINTE), rien d\'autre', () => {
     const attendus = attendusDemoFormat2(brouillon, (id) => `src/content/voyant/${id}.md`);
-    assert.equal(attendus.length, Object.keys(brouillon.voyants).length + Object.keys(brouillon.pages).length);
-    assert.ok(attendus.every((a) => a.regle === 'R4-EMPREINTE'));
+    const aReprendre = Object.values(brouillon.pages).filter((p) => p.texte_a_reprendre === true).length;
+    assert.equal(attendus.length, Object.keys(brouillon.voyants).length + Object.keys(brouillon.pages).length + aReprendre);
+    assert.deepEqual([...new Set(attendus.map((a) => a.regle))].sort(), aReprendre > 0 ? ['FORMAT2-METHODE', 'R4-EMPREINTE'] : ['R4-EMPREINTE']);
   });
 
   test('option --demo-format2 : seulement sur dist-demo-format2 construit avec DEMO_FORMAT2=1 ; garde-fou DEMO-PUBLIEE', () => {
@@ -316,3 +339,90 @@ describe('format 2 : construction de démonstration', () => {
 
 /** Rappel : les constats ont le type Constat du contrôle. */
 export type { Constat };
+
+describe('format 2 : corrections après la revue (brief F1.2-corrections)', () => {
+  test('§1 clés du brouillon : « source|emplacement », suffixée « #rang » quand la paire se répète ; clé sans rang ou inconnue refusée', async () => {
+    const cites = [
+      { source: 'a', emplacement: 'p. 1' },
+      { source: 'a', emplacement: 'p. 1' },
+      { source: 'b', emplacement: 'p. 2' },
+    ];
+    assert.deepEqual(clesDesCitations(cites), ['a|p. 1#1', 'a|p. 1#2', 'b|p. 2']);
+    const base = JSON.parse(await readFile(join(racine, 'data/voyants.json'), 'utf8')) as { id: string; citations: { source: string; emplacement: string }[] }[];
+    const ligne = base.find((v) => v.id === 'adblue-demarrage-impossible');
+    assert.ok(ligne !== undefined);
+    const seat = ligne.citations.filter((c) => c.source === 'notice-seat-ibiza');
+    assert.equal(seat.length, 2);
+    assert.equal(cleCitation(seat[0] ?? { source: '', emplacement: '' }), cleCitation(seat[1] ?? { source: '', emplacement: '' }), 'paire répétée dans la ligne');
+    const sansRang = { ...brouillon, voyants: { 'adblue-demarrage-impossible': { demandes: { [cleCitation(seat[0] ?? { source: '', emplacement: '' })]: 'x' } } } };
+    assert.throws(() => voyantsAvecBrouillon(base, sansRang), /ambiguë/);
+    assert.throws(() => voyantsAvecBrouillon(base, { ...brouillon, voyants: { 'adblue-reserve': { demandes: { 'notice-x|p. 9': 'x' } } } }), /inconnue/);
+    // Le brouillon : chaque consigne Seat a sa propre demande, fidèle à son extrait.
+    const completee = voyantsAvecBrouillon(base, brouillon) as typeof base & { citations: { demande?: string }[] }[];
+    const demandes = completee.find((v) => v.id === 'adblue-demarrage-impossible')?.citations.filter((c) => c.source === 'notice-seat-ibiza').map((c) => (c as { demande?: string }).demande);
+    assert.equal(new Set(demandes).size, 2, JSON.stringify(demandes));
+  });
+
+  test('§5 espace insécable après « p. » (texte seulement), minuscule initiale, tuile d\'une page code', async () => {
+    assert.equal(insecableApresPage('<p>notice (p. 13) et p. 15</p><a title="p. 1">'), '<p>notice (p. 13) et p. 15</p><a title="p. 1">');
+    assert.equal(insecableApresPage('<p>cap. 3</p>'), '<p>cap. 3</p>');
+    assert.equal(minusculeInitiale('Voyant moteur orange'), 'voyant moteur orange');
+    assert.equal(minusculeInitiale('AdBlue : démarrage impossible'), 'AdBlue : démarrage impossible');
+    assert.equal(minusculeInitiale('STOP'), 'STOP');
+    const { site } = await siteDemo();
+    const tuileDe = tuileDeLaPage({ ...site, voyantDesPages: new Map([['code-p0420', 'moteur-orange-fixe']]) });
+    assert.match(tuileDe('code-p0420'), /class="tuile" data-couleur="orange"/);
+    assert.match(tuileDe('voyant-adblue'), /class="tuile"/);
+    assert.equal(tuileDe('loi-montagne'), '');
+  });
+
+  test('§6 contrôles du format 2 en échec : TABLEAU-NOTICES-LIEN, R9-ENCADRE-CONTENU, R9-ENCADRE-SOURCES, FORMAT2-PROVENANCE (attribution « Ligne n »)', async () => {
+    const { brut, contexte, html } = await construire();
+    const controle = (h: string): string[] => regles(controlerPage({ type: 'voyant', brut, fichier: MOTEUR }, contexte, h).constats);
+    const modifie = (f: ($: cheerio.CheerioAPI) => void): string => {
+      const $ = cheerio.load(html);
+      f($);
+      return $.html();
+    };
+    const cas: [string, string][] = [
+      ['TABLEAU-NOTICES-LIEN', modifie(($) => $('[data-ecart-court] a').first().remove())],
+      ['TABLEAU-NOTICES-LIEN', modifie(($) => $('[data-provenance] a').remove())],
+      ['R9-ENCADRE-CONTENU', modifie(($) => $('[data-ecart-court]').first().text('Plus strict : une autre marque.'))],
+      ['R9-ENCADRE-SOURCES', modifie(($) => $('[data-encadre-ligne]').first().attr('data-notices', '2'))],
+      ['FORMAT2-PROVENANCE', modifie(($) => { const p = $('[data-provenance] p').first(); p.html((p.html() ?? '').replace('Lignes 1 et 2', 'Lignes 1 et 3')); })],
+    ];
+    for (const [regle, page] of cas) assert.ok(controle(page).includes(regle), `${regle} : ${controle(page).join(', ')}`);
+  });
+
+  test('§7 règle 2d : marque et modèle seulement, références entre parenthèses retirées (pages dans « Sources »), référence ailleurs refusée ; format 1 inchangé', async () => {
+    const { site } = await siteDemo();
+    const { page } = await pageDemo();
+    const noms = ['notice-peugeot-208', 'notice-seat-ibiza', 'notice-renault-clio-5', 'notice-dacia-sandero-3', 'notice-toyota-yaris', 'notice-citroen-c3', 'notice-seat-leon'].map((id) => {
+      const source = site.sources.get(id);
+      assert.ok(source !== undefined, id);
+      return marqueEtModele(source);
+    });
+    assert.deepEqual(noms, ['Peugeot 208', 'Seat Ibiza', 'Renault Clio 5 phase 2', 'Dacia Sandero 3', 'Toyota Yaris', 'Citroën C3', 'Seat Leon']);
+    const corps = '<p>Selon {{notice:notice-peugeot-208}} ({{cite:notice-peugeot-208|p. 13}} ; {{cite:notice-citroen-c3|p. 9-11}}), arrêtez-vous.</p>';
+    const f2 = texteRedige(corps, page, site, { format2: true });
+    assert.match(f2.html, /Selon Peugeot 208, arrêtez-vous\./);
+    assert.deepEqual(f2.citations, [{ source: 'notice-peugeot-208', emplacement: 'p. 13' }, { source: 'notice-citroen-c3', emplacement: 'p. 9-11' }]);
+    assert.throws(() => texteRedige('<p>Voir {{cite:notice-peugeot-208|p. 13}}.</p>', page, site, { format2: true }), /parenthèse faite seulement de références/);
+    assert.throws(() => texteRedige('<p>(jaune, {{cite:notice-seat-ibiza|p. 93-94}})</p>', page, site, { format2: true }), /règle 2d/);
+    assert.throws(() => texteRedige('<p>A ({{cite:notice-seat-leon|p. 1}}).</p>', page, site, { format2: true }), /pas dans les sources de la page/);
+    const f1 = texteRedige(corps, page, site);
+    assert.match(f1.html, /Peugeot 208 \(2e génération\), guide d’utilisation édition 01-20 \(p\. 13\s; p\. 9-11\)/u);
+  });
+
+  test('§7 FORMAT2-METHODE : « Verdict retenu » ou « édition » dans le texte rédigé, hors citation', async () => {
+    const { html, site, page } = await construire();
+    const { resoudreLignes } = await import('../src/lib/calcul.ts');
+    const lignes = resoudreLignes(page.situations, site.voyants).lignes;
+    const phrases = lignes.map(() => '');
+    const avec = (texte: string): string[] => regles(controlerFormat2(html.replace('<p>Texte du site.</p>', `<p>${texte}</p>`), 'p.html', lignes, phrases));
+    assert.ok(!avec('Texte du site.').includes('FORMAT2-METHODE'));
+    assert.ok(avec('Verdict retenu en haut de page : oui.').includes('FORMAT2-METHODE'));
+    assert.ok(avec('Le guide, édition 01-20, le dit.').includes('FORMAT2-METHODE'));
+    assert.ok(!avec('La notice dit « édition 01-20 ».').includes('FORMAT2-METHODE'), 'citation entre guillemets');
+  });
+});

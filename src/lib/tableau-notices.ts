@@ -107,6 +107,12 @@ export const LIBELLE_CONSIGNE_RETENUE = 'Consigne retenue';
 export const NOTE_SANS_CONSIGNE_RETENUE =
   'Aucune de ces consignes ne donne à elle seule le niveau affiché en haut de page : il retient le verdict le plus prudent et l’urgence la plus forte de toutes les sources citées pour ce voyant (voir « Sources »).';
 
+/** Titre du tableau, repris par le format 2. */
+export const TITRE_TABLEAU_NOTICES = 'Ce que dit la notice de votre marque';
+/** En-têtes des colonnes « Notice » et « Niveau », repris par le format 2. */
+export const COLONNE_NOTICE = 'Notice';
+export const COLONNE_NIVEAU = 'Niveau';
+
 /** Introduction du tableau. */
 export const INTRODUCTION_TABLEAU_NOTICES = `Chaque consigne est citée mot pour mot, avec sa page. Le verdict en haut de page reprend la plus prudente : elle est marquée « ${LIBELLE_CONSIGNE_RETENUE} ».`;
 
@@ -149,7 +155,7 @@ export function tableauNotices(tableaux: readonly TableauVoyant[], options: { el
       `<h3 id="${attributHtml(ancre)}">${texteHtml(t.titre)}</h3>`,
       // Rôles explicites : sur téléphone, le tableau s'affiche en cartes (site.css) et certains navigateurs perdent
       // alors la sémantique de tableau ; les rôles la conservent pour les lecteurs d'écran.
-      `<table role="table" aria-labelledby="${attributHtml(ancre)}"><thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Notice</th><th scope="col" role="columnheader">${texteHtml('Ce qu’elle demande')}</th><th scope="col" role="columnheader">Niveau</th></tr></thead>`,
+      `<table role="table" aria-labelledby="${attributHtml(ancre)}"><thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">${COLONNE_NOTICE}</th><th scope="col" role="columnheader">${texteHtml('Ce qu’elle demande')}</th><th scope="col" role="columnheader">${COLONNE_NIVEAU}</th></tr></thead>`,
       `<tbody role="rowgroup">${t.rangees.map(rangeeHtml).join('')}</tbody></table>`,
       // Le niveau retenu peut venir d'une source plus prudente que toutes les notices (texte officiel, Sécurité
       // routière), ou combiner deux consignes : le tableau le dit, plutôt que de laisser croire qu'une notice le donne.
@@ -159,7 +165,7 @@ export function tableauNotices(tableaux: readonly TableauVoyant[], options: { el
   });
   return [
     `<section class="notices"${options.elementUnique ? ' data-element-unique="tableau"' : ''} data-tableau-notices aria-labelledby="${IDENTIFIANTS.notices}">`,
-    `<h2 id="${IDENTIFIANTS.notices}">${texteHtml('Ce que dit la notice de votre marque')}</h2>`,
+    `<h2 id="${IDENTIFIANTS.notices}">${texteHtml(TITRE_TABLEAU_NOTICES)}</h2>`,
     `<p>${texteHtml(INTRODUCTION_TABLEAU_NOTICES)}</p>`,
     ...parties,
     `<p class="notices-autres">${texteHtml(FIN_TABLEAU_NOTICES)}</p>`,

@@ -24,6 +24,13 @@
 import { attributHtml, texteHtml } from './html.ts';
 import {
   IDENTIFIANTS,
+  LIBELLE_COUT_PROBABLE,
+  LIBELLE_LIEN_NOTICES,
+  LIBELLE_ORDRE_DE_GRANDEUR,
+  TITRE_CAUSES,
+  TITRE_PAGES_ENFANTS,
+  TITRE_PAGES_LIEES,
+  TITRE_SOURCES,
   adresseMethode,
   ancreNotices,
   cheminDAriane,
@@ -45,7 +52,7 @@ import { logoEnLigne } from './marque.ts';
 import { ANCRE_CONFIDENTIALITE, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR } from './charte.ts';
 import { dateAffichee, datesAffichees, fourchetteAffichee, libelleRisque, trancheDesPieces, type CoutResolu, type DonneesCouts } from './cout.ts';
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
-import { citation, modeleTableauNotices, CLASSE_CITATION_NOTICE, FIN_TABLEAU_NOTICES, LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, type RangeeNotice, type TableauVoyant } from './tableau-notices.ts';
+import { citation, modeleTableauNotices, CLASSE_CITATION_NOTICE, FIN_TABLEAU_NOTICES, TITRE_TABLEAU_NOTICES, COLONNE_NOTICE, COLONNE_NIVEAU, LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, type RangeeNotice, type TableauVoyant } from './tableau-notices.ts';
 import { emplacementPub } from './emplacements-pub.ts';
 import { indexerPlan } from './plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
@@ -55,7 +62,10 @@ import type { DonneesSite } from './gabarit.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
 import type { CitationDuTexte } from './modeles.ts';
 
-/** Libellés fixes du format 2, repris du pilote validé (charte graphique §4) ; nouveaux textes à relire avec les paquets de F2 et F3. */
+/**
+ * Libellés fixes du format 2 : ceux du format 1 importés de leur source (composants.ts, tableau-notices.ts), jamais recopiés ;
+ * les nouveaux, repris du pilote validé (charte graphique §4), à relire avec les paquets de F2 et F3.
+ */
 export const FORMAT2 = {
   boutonVoyant: 'Trouver mon voyant',
   lienVotreMarque: 'Votre marque',
@@ -63,17 +73,17 @@ export const FORMAT2 = {
   selonLaMarque: 'Selon la marque : ',
   sommaire: 'Sur cette page',
   credit: 'Illustration decodauto.',
-  coutProbable: 'Coût probable',
+  coutProbable: LIBELLE_COUT_PROBABLE.replace(/\s*:$/, ''),
   notices: 'Notices',
   baseDuCout: 'Base du coût',
-  lienNotices: 'Ce que dit chaque notice',
-  titreNotices: 'Ce que dit la notice de votre marque',
+  lienNotices: LIBELLE_LIEN_NOTICES,
+  titreNotices: TITRE_TABLEAU_NOTICES,
   introNotices: 'Le niveau de chaque consigne, notice par notice ; l’extrait mot pour mot se déplie sous chaque ligne.',
-  colonnesNotices: ['Notice', 'Ce que demande la notice', 'Niveau', 'Page'],
+  colonnesNotices: [COLONNE_NOTICE, 'Ce que demande la notice', COLONNE_NIVEAU, 'Page'],
   extrait: 'Extrait',
-  sources: 'Sources',
-  enfants: 'Dans cette rubrique',
-  liees: 'À lire aussi',
+  sources: TITRE_SOURCES,
+  enfants: TITRE_PAGES_ENFANTS,
+  liees: TITRE_PAGES_LIEES,
 } as const;
 
 /** Ligne d'écart courte : 25 mots au plus, lien « Votre marque » compris (règle 2b). */
@@ -300,7 +310,7 @@ export const nombreDeH2 = (html: string): number => (html.match(/<h2\b/g) ?? [])
 /** Sommaire « Sur cette page » : `classe` sommaire-colonne (téléphone, dans la colonne) ou sommaire-cote (ordinateur). */
 export function sommaireHtml(entrees: readonly EntreeSommaire[], classe: 'sommaire-colonne' | 'sommaire-cote'): string {
   return `<nav class="sommaire ${classe}" aria-label="${attributHtml(FORMAT2.sommaire)}" data-sommaire><p>${texteHtml(FORMAT2.sommaire)}</p><ul>${entrees
-    .map((e) => `<li><a href="#${attributHtml(e.ancre)}">${e.titreHtml}</a></li>`)
+    .map((e) => `<li><a href="#${attributHtml(e.ancre)}"><span>${e.titreHtml}</span></a></li>`)
     .join('')}</ul></nav>`;
 }
 
@@ -332,6 +342,12 @@ export function reperesDuTexte(html: string, page: Pick<PageEditoriale, 'id'>, l
 
 // ---- Tableau des notices compact ------------------------------------------------------------------------
 
+/**
+ * Première lettre en minuscule, seulement si le premier mot n'a pas d'autre majuscule (« Voyant moteur » → « voyant moteur » ;
+ * « AdBlue : … », « STOP », « ESP » gardent la leur).
+ */
+export const minusculeInitiale = (texte: string): string => (/^\p{Lu}[^\s\p{Lu}]*(?=\s|$)/u.test(texte) ? texte.charAt(0).toLowerCase() + texte.slice(1) : texte);
+
 /** Page courte d'un emplacement (« p. 15 », « p. 292-293 ») : colonne « Page » du tableau compact ; l'emplacement entier suit l'extrait. */
 export function pageCourte(emplacement: string): string {
   return /^p\.\s*\d+(?:\s*[-–]\s*\d+)?/.exec(emplacement)?.[0].replace(/\s*[-–]\s*/, '-') ?? emplacement;
@@ -354,7 +370,7 @@ export function libellesExtraits(rangees: readonly (Pick<RangeeNotice, 'nom' | '
   rangees.forEach((r, i) => voyantsParBase.set(bases[i] ?? '', (voyantsParBase.get(bases[i] ?? '') ?? new Set()).add(r.voyant)));
   const avecVoyant = rangees.map((r, i) => {
     const b = bases[i] ?? '';
-    return (parBase.get(b) ?? 1) > 1 && (voyantsParBase.get(b)?.size ?? 1) > 1 ? `${b}, ${/^\p{Lu}\p{Ll}/u.test(r.voyant) ? r.voyant.charAt(0).toLowerCase() + r.voyant.slice(1) : r.voyant}` : b;
+    return (parBase.get(b) ?? 1) > 1 && (voyantsParBase.get(b)?.size ?? 1) > 1 ? `${b}, ${minusculeInitiale(r.voyant)}` : b;
   });
   const total = compter(avecVoyant);
   const vus = new Map<string, number>();
@@ -449,14 +465,25 @@ export function sourcesRepliees(citees: ReadonlyMap<string, readonly string[]>, 
 
 // ---- Page voyant au format 2 ------------------------------------------------------------------------------
 
-/** Tuile du voyant d'une page : celle de la première ligne de la base rattachée à cette page, s'il y en a une. */
-export function tuileDeLaPage(site: Pick<DonneesSite, 'voyants' | 'pictogrammes'>): (id: string) => string {
+/**
+ * Tuile du voyant d'une page : celle de la première ligne de la base rattachée à cette page ; sinon (page code défaut), celle
+ * du voyant qui s'allume avec le code, première ligne de son encadré reprise de la base (`site.voyantDesPages`) ; sinon rien
+ * (pastille sans tuile, même hauteur : charte-b.css).
+ */
+export function tuileDeLaPage(site: Pick<DonneesSite, 'voyants' | 'pictogrammes' | 'voyantDesPages'>): (id: string) => string {
   return (id) => {
-    const voyant = [...site.voyants.values()].find((v) => v.page === id);
+    const rattache = [...site.voyants.values()].find((v) => v.page === id);
+    const voyant = rattache ?? site.voyants.get(site.voyantDesPages?.get(id) ?? '');
     const dessin = voyant !== undefined ? site.pictogrammes.get(voyant.pictogramme) : undefined;
     return voyant !== undefined && dessin !== undefined ? tuile(dessin, voyant.couleur) : '';
   };
 }
+
+/**
+ * Espace insécable après « p. » devant un numéro de page (charte graphique §3), dans le texte affiché d'une page au format 2
+ * (jamais dans une balise ni un attribut). Le format 1 n'est pas touché (production identique).
+ */
+export const insecableApresPage = (html: string): string => html.replace(/(>[^<]*)/g, (texte) => texte.replace(/(^|[^\p{L}])p\. (?=\d)/gu, `$1p.\u00a0`));
 
 /** Illustration de la page, tirée de `site.illustrations` ; obligatoire au format 2 (règle 2i). */
 export function illustrationDeLaPage(page: Pick<PageEditoriale, 'id' | 'illustration'>, site: Pick<DonneesSite, 'illustrations'>): string {
@@ -540,12 +567,12 @@ export function pageVoyantFormat2(
     }),
     sourcesRepliees(citees, site.sources),
   ].join('');
-  return [
+  return insecableApresPage([
     teteDePage(filDAriane(cheminDAriane(page.id, site.plan, site.libelles), 'fil'), page.h1),
     `<div class="page"><div class="colonne">${colonne}</div>`,
     avecSommaire ? `<aside><div class="colle">${sommaireHtml(entrees, 'sommaire-cote')}</div></aside>` : '',
     '</div>',
-  ].join('');
+  ].join(''));
 }
 
 // ---- Causes ------------------------------------------------------------------------------------------------
@@ -562,10 +589,10 @@ export function causesFormat2(causes: readonly { cause: string; explication: str
     const coutTexte =
       tranche === undefined
         ? ''
-        : `<p class="cause-cout">${texteHtml('Coût probable :')} <span class="tranche">${texteHtml(GRILLE_COUTS[tranche].libelle)}</span>${
-            fourchette !== undefined ? texteHtml(` ; ordre de grandeur, pièce et main-d'œuvre : ${LIBELLES_FOURCHETTES[fourchette.valeur]} (relevé le ${dateAffichee(fourchette.releve_le)})`) : ''
+        : `<p class="cause-cout">${texteHtml(LIBELLE_COUT_PROBABLE)} <span class="tranche">${texteHtml(GRILLE_COUTS[tranche].libelle)}</span>${
+            fourchette !== undefined ? texteHtml(` ; ${LIBELLE_ORDRE_DE_GRANDEUR} : ${LIBELLES_FOURCHETTES[fourchette.valeur]} (relevé le ${dateAffichee(fourchette.releve_le)})`) : ''
           }</p>`;
     return `<li class="cause"><h3>${texteHtml(c.cause)}</h3><p>${texteHtml(c.explication)}</p>${coutTexte}</li>`;
   });
-  return `<section data-causes aria-labelledby="${IDENTIFIANTS.causes}"><h2 id="${IDENTIFIANTS.causes}">Causes possibles</h2><ol class="causes">${elements.join('')}</ol></section>`;
+  return `<section data-causes aria-labelledby="${IDENTIFIANTS.causes}"><h2 id="${IDENTIFIANTS.causes}">${texteHtml(TITRE_CAUSES)}</h2><ol class="causes">${elements.join('')}</ol></section>`;
 }

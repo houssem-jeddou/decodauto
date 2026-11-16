@@ -34,7 +34,17 @@ export interface BrouillonFormat2 {
   /** Par ligne de la base : ligne d'écart courte, et « ce que demande la notice » de chaque citation (clé « source|emplacement »). */
   voyants: Record<string, { ecart_court?: string; demandes?: Record<string, string> }>;
   /** Par page voyant : illustration et repères (texte exact du H2 sous lequel le repère se place, ligne qu'il désigne). */
-  pages: Record<string, { illustration: { fichier: string; alt: string; legende: string }; reperes?: { titre: string; repere: string }[] }>;
+  pages: Record<
+    string,
+    {
+      illustration: { fichier: string; alt: string; legende: string };
+      reperes?: { titre: string; repere: string }[];
+      /** Phrases du texte rendu réécrites comme au lot F2 (règle 2d : une référence hors parenthèse fait échouer). */
+      remplacements?: { avant: string; apres: string }[];
+      /** Le texte en ligne n'est pas encore repris (lot F2) : « Verdict retenu » attendu (FORMAT2-METHODE). */
+      texte_a_reprendre?: boolean;
+    }
+  >;
   /** Accueil au format 2. */
   accueil?: { format: 2 };
 }
@@ -45,23 +55,48 @@ export async function lireBrouillonFormat2(racine: string): Promise<BrouillonFor
   return brouillon;
 }
 
-/** Clé d'une citation dans le brouillon. */
+/** Paire « source|emplacement » d'une citation. */
 export const cleCitation = (c: { source: string; emplacement: string }): string => `${c.source}|${c.emplacement}`;
 
-/** Lignes de la base (data/voyants.json, telles que lues) complétées du brouillon. Une clé inconnue fait échouer. */
+/**
+ * Clé de chaque citation d'une ligne dans le brouillon (brief F1.2-corrections, §1) : « <source>|<emplacement> » quand la
+ * paire est unique dans la ligne ; sinon « <source>|<emplacement>#<rang> » (1, 2… dans l'ordre de la base), et la clé
+ * sans suffixe n'existe pas.
+ */
+export function clesDesCitations(citations: readonly { source: string; emplacement: string }[]): string[] {
+  const paires = citations.map(cleCitation);
+  const vus = new Map<string, number>();
+  return paires.map((p) => {
+    if (paires.filter((q) => q === p).length === 1) return p;
+    const rang = (vus.get(p) ?? 0) + 1;
+    vus.set(p, rang);
+    return `${p}#${rang}`;
+  });
+}
+
+/**
+ * Lignes de la base (data/voyants.json, telles que lues) complétées du brouillon. Une clé inconnue, ou sans son rang alors que
+ * la paire se répète dans la ligne, fait échouer.
+ */
 export function voyantsAvecBrouillon(voyants: readonly unknown[], brouillon: BrouillonFormat2): readonly unknown[] {
   const connus = new Set<string>();
   const resultat = (voyants as readonly { id: string; citations: { source: string; emplacement: string }[] }[]).map((v) => {
     const ajout = brouillon.voyants[v.id];
     if (ajout === undefined) return v;
     connus.add(v.id);
-    const demandes = new Set(Object.keys(ajout.demandes ?? {}));
-    const citations = v.citations.map((c) => {
-      const demande = ajout.demandes?.[cleCitation(c)];
-      demandes.delete(cleCitation(c));
+    const cles = clesDesCitations(v.citations);
+    const attendues = new Set(cles);
+    const inconnues = Object.keys(ajout.demandes ?? {}).filter((k) => !attendues.has(k));
+    if (inconnues.length > 0) {
+      const ambigues = inconnues.filter((k) => cles.some((c) => c.startsWith(`${k}#`)));
+      throw new Error(
+        `${FICHIER_BROUILLON_FORMAT2} : voyant « ${v.id} » : ${ambigues.length > 0 ? `clé(s) ambiguë(s), la paire se répète dans la ligne (ajouter #<rang>) : ${ambigues.join(' ; ')} ; ` : ''}citation(s) inconnue(s) : ${inconnues.join(' ; ')}`,
+      );
+    }
+    const citations = v.citations.map((c, i) => {
+      const demande = ajout.demandes?.[cles[i] ?? ''];
       return demande === undefined ? c : { ...c, demande };
     });
-    if (demandes.size > 0) throw new Error(`${FICHIER_BROUILLON_FORMAT2} : voyant « ${v.id} » : citation(s) inconnue(s) : ${[...demandes].join(' ; ')}`);
     return { ...v, ...(ajout.ecart_court !== undefined && { ecart_court: ajout.ecart_court }), citations };
   });
   const inconnus = Object.keys(brouillon.voyants).filter((id) => !connus.has(id));
@@ -97,6 +132,10 @@ const texteDuTitre = (html: string): string =>
  */
 export function corpsAvecReperes(id: string, html: string, brouillon: BrouillonFormat2): string {
   let resultat = html;
+  for (const r of brouillon.pages[id]?.remplacements ?? []) {
+    if (!resultat.includes(r.avant)) throw new Error(`${FICHIER_BROUILLON_FORMAT2} : page « ${id} » : phrase à remplacer introuvable : « ${r.avant} »`);
+    resultat = resultat.replace(r.avant, r.apres);
+  }
   for (const r of brouillon.pages[id]?.reperes ?? []) {
     let trouve = false;
     resultat = resultat.replace(/(<h2\b[^>]*>)([\s\S]*?)(<\/h2>)/g, (tout, debut: string, titre: string, fin: string) => {
@@ -118,7 +157,8 @@ export async function chargerIllustrations(racine: string, dossier: string): Pro
 
 /**
  * Erreurs attendues de la construction de démonstration : l'empreinte de chaque ligne de la base complétée du brouillon et
- * de chaque page passée au format 2 ne correspond plus (R4-EMPREINTE) ; rien de ce brouillon n'est validé.
+ * de chaque page passée au format 2 ne correspond plus (R4-EMPREINTE) ; rien de ce brouillon n'est validé. Une page dont le
+ * texte en ligne n'est pas encore repris (lot F2) garde la formule « Verdict retenu » (FORMAT2-METHODE).
  */
 export function attendusDemoFormat2(brouillon: BrouillonFormat2, fichierDePage: (id: string) => string | undefined): Attendu[] {
   const lignes = Object.keys(brouillon.voyants).map((id): Attendu => ({ regle: 'R4-EMPREINTE', fichier: 'data/voyants.json', extrait: `voyant « ${id} »`, brut: `R4-EMPREINTE@data/voyants.json@voyant « ${id} »` }));
@@ -126,7 +166,11 @@ export function attendusDemoFormat2(brouillon: BrouillonFormat2, fichierDePage: 
     const fichier = fichierDePage(id);
     return fichier === undefined ? [] : [{ regle: 'R4-EMPREINTE', fichier, brut: `R4-EMPREINTE@${fichier}` }];
   });
-  return [...lignes, ...pages];
+  const methode = Object.entries(brouillon.pages).flatMap(([id, p]): Attendu[] => {
+    const fichier = fichierDePage(id);
+    return p.texte_a_reprendre === true && fichier !== undefined ? [{ regle: 'FORMAT2-METHODE', fichier, brut: `FORMAT2-METHODE@${fichier}` }] : [];
+  });
+  return [...lignes, ...pages, ...methode];
 }
 
 /** Une page de la construction de démonstration (attribut data-demo-format2 sur html) dans un site contrôlé comme réel : DEMO-PUBLIEE. */

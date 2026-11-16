@@ -117,6 +117,37 @@ export function nomCompletNotice(source: Pick<SourceDuRegistre, 'titre' | 'categ
   return source.modele !== undefined ? `${marque} ${source.modele}` : court;
 }
 
+/**
+ * Marque et modèle d'une notice, sans génération ni édition (format 2, règle 2d) : « Peugeot 208 », « Seat Leon » ; premier
+ * segment du champ `modele` du registre, parenthèses retirées, avant la première virgule.
+ */
+export function marqueEtModele(source: Pick<SourceDuRegistre, 'titre' | 'categorie' | 'modele'>): string {
+  const court = nomCourtSource(source);
+  if (source.modele === undefined) return court;
+  const marque = court.split(' ')[0] ?? court;
+  const modele = (source.modele.replace(/\s*\([^)]*\)/g, '').split(',')[0] ?? '').trim();
+  return modele === '' ? court : `${marque} ${modele}`;
+}
+
+/** Référence à une page citée dans le texte rédigé. */
+const REFERENCE_CITE = /\{\{cite:[a-z0-9-]+(?:\|[^{}|]+)?\}\}/;
+
+/**
+ * Parenthèses faites seulement de références « {{cite:<source>|<page>}} » (séparées par « , », « ; » ou « et »), retirées
+ * avec l'espace qui les précède ; chaque page citée est ajoutée à `citations` (section « Sources »). Format 2, règle 2d.
+ */
+export function sansReferencesEntreParentheses(html: string, citations: CitationDuTexte[]): string {
+  const ref = '\\{\\{cite:([a-z0-9-]+)\\|([^{}|]+)\\}\\}';
+  const seules = new RegExp(`\\s*\\(\\s*${ref}(?:\\s*(?:[,;]|\\bet\\b)\\s*${ref})*\\s*\\)`, 'g');
+  return html.replace(seules, (tout) => {
+    for (const m of tout.matchAll(new RegExp(ref, 'g'))) {
+      const emplacement = (m[2] ?? '').trim();
+      if (emplacement !== '') citations.push({ source: m[1] ?? '', emplacement });
+    }
+    return '';
+  });
+}
+
 /** Une page ou section citée dans le texte rédigé seulement (« {{cite:…}} »), ajoutée à la section « Sources ». */
 export interface CitationDuTexte {
   source: string;
@@ -131,14 +162,25 @@ export function texteRedige(
   corpsHtml: string,
   page: Pick<PageEditoriale, 'id' | 'sources' | 'situations' | 'cout_probable' | 'element_unique' | 'tutoriel'>,
   site: Pick<DonneesSite, 'sources' | 'voyants' | 'couts'>,
-  options: { tableauDuTexte?: boolean; arbreDuTexte?: boolean; etapesDuTexte?: boolean } = {},
+  options: { tableauDuTexte?: boolean; arbreDuTexte?: boolean; etapesDuTexte?: boolean; format2?: boolean } = {},
 ): { html: string; citations: CitationDuTexte[] } {
-  const html = corpsHtml.trim();
-  if (html === '') return { html: '', citations: [] };
+  const brut = corpsHtml.trim();
+  if (brut === '') return { html: '', citations: [] };
   const citations: CitationDuTexte[] = [];
   const echec = (message: string): never => {
     throw new Error(`page « ${page.id} », texte rédigé : ${message}`);
   };
+  // Format 2 (demande de changement n° 30, règle 2d) : la méthode sort du texte. Une parenthèse faite seulement de
+  // références « {{cite:…}} » (séparées par une virgule, un point-virgule ou « et ») disparaît avec l'espace qui la précède ;
+  // ses pages vont dans « Sources » ; une référence ailleurs fait échouer (la phrase est à réécrire).
+  const html = options.format2 === true ? sansReferencesEntreParentheses(brut, citations) : brut;
+  if (options.format2 === true && REFERENCE_CITE.test(html)) {
+    echec(`${REFERENCE_CITE.exec(html)?.[0] ?? '{{cite:…}}'} : au format 2, une page citée ne s'écrit que dans une parenthèse faite seulement de références (règle 2d : la phrase est à réécrire)`);
+  }
+  for (const c of citations) {
+    if (!site.sources.has(c.source)) echec(`{{cite:${c.source}|…}} : aucune source de ce nom au registre`);
+    if (!page.sources.includes(c.source)) echec(`{{cite:${c.source}|…}} : « ${c.source} » n'est pas dans les sources de la page (« Sources » ne la listerait pas)`);
+  }
   // Repère du verdict sous un H2 (demande de changement n° 30, règle 2d) : format 2 seulement (format2.ts, reperesDuTexte).
   if (/\{\{repere:/.test(html)) echec('« {{repere:…}} » : le repère de section n\'existe qu\'au format 2 (champ format: 2)');
   const avecArbre = arbreDuTexte(html, page, options.arbreDuTexte === true, echec);
@@ -172,7 +214,8 @@ export function texteRedige(
     if (genre === 'notice') {
       if (complement !== undefined) echec(`${tout} : pas de complément après la notice`);
       if (source.categorie !== 'notice-constructeur') echec(`${tout} : « ${id} » n'est pas une notice de constructeur`);
-      return echapper(nomCompletNotice(source));
+      // Format 2 (règle 2d) : la marque et le modèle seulement ; le nom complet reste au tableau des notices et dans « Sources ».
+      return echapper(options.format2 === true ? marqueEtModele(source) : nomCompletNotice(source));
     }
     const emplacement = complement?.trim() ?? '';
     if (emplacement === '') echec(`${tout} : page ou section manquante ({{cite:<source>|<page>}})`);
@@ -324,7 +367,7 @@ export const pageVoyant: Modele = (page, site, corpsHtml) => {
 };
 
 /** Page voyant (hors outil) au format 2 (demande de changement n° 30) : voir src/lib/format2.ts. */
-export const pageVoyantF2: Modele = (page, site, corpsHtml) => pageVoyantFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site));
+export const pageVoyantF2: Modele = (page, site, corpsHtml) => pageVoyantFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { format2: true }));
 
 /** Page code défaut : voir l'ordre en tête de ce fichier. */
 export const pageCodeDefaut: Modele = (page, site, corpsHtml) => {

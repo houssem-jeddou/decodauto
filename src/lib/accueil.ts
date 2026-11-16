@@ -6,6 +6,8 @@
 // Module sans dépendance à l'exécution : tests et construction l'utilisent tel quel.
 import { texteHtml, attributHtml } from './html.ts';
 import { ID_OUTIL_VOYANTS } from './plan.ts';
+import { LIBELLES_PICTOGRAMMES } from './pictogrammes.ts';
+import { ancreLigneOutil } from './outil-voyants.ts';
 import { LIBELLES_THEMES, THEMES, type Theme } from '../schemas/listes.ts';
 
 /** Le positionnement du site (docs/01) : le H1 de l'accueil. */
@@ -71,8 +73,8 @@ export function accueilHtml(donnees: DonneesAccueil): string {
 
 // ---- Accueil au format 2 (demande de changement n° 30, lot F1, tâche F1.2 ; charte graphique §4, « Accueil ») -------------
 // Tête nuit (mention en tête, H1, premier paragraphe ; sur ordinateur, l'illustration du combiné à droite), puis la section
-// « Quel voyant s'est allumé ? » : grille des pictogrammes de la base, un lien par voyant dont la page est construite
-// (libellé court de la page : porte du pilote, §3), et le lien vers l'outil ; puis l'accès par thème et « Un guide
+// « Quel voyant s'est allumé ? » : grille des pictogrammes de la base, un dessin par pictogramme (libellé :
+// LIBELLES_PICTOGRAMMES), et le lien vers l'outil ; puis l'accès par thème et « Un guide
 // indépendant » (second paragraphe, lien vers « à propos »), en cartes. Structure et classes du pilote validé
 // (generer.py, page_accueil), pour src/styles/charte-b.css. Mêmes repères contrôlés qu'au format 1 (ACCUEIL-*).
 // En production, l'accueil reste au format 1 jusqu'au lot F3.
@@ -88,7 +90,7 @@ export const ACCUEIL_FORMAT2 = {
   titreGuide: 'Un guide indépendant',
 } as const;
 
-/** Un voyant de la grille : la page de rattachement construite, son libellé court et le dessin de sa première ligne. */
+/** Un dessin de la grille : son libellé (LIBELLES_PICTOGRAMMES), le lien du voyant, le dessin et sa couleur. */
 export interface VoyantDeLaGrille {
   adresse: string;
   libelle: string;
@@ -97,22 +99,27 @@ export interface VoyantDeLaGrille {
 }
 
 /**
- * Grille des voyants : une entrée par page de rattachement des lignes de la base (dans l'ordre de la base), seulement si
- * cette page est construite, hors page outil (elle a son propre lien) ; dessin et couleur de sa première ligne.
+ * Grille des voyants (brief F1.2-corrections, §2 ; charte graphique §4 ; porte du pilote, règle 2k) : une tuile par
+ * pictogramme distinct de la base, dans l'ordre de la base, de la couleur de la première ligne qui l'utilise, au libellé de
+ * LIBELLES_PICTOGRAMMES. Lien : la page de cette ligne si elle est construite ; sinon la carte de la ligne dans l'outil
+ * voyants (« /voyants/#da-voyant-<ligne> », comme le voyant STOP), s'il est construit ; sinon pas de tuile (jamais un lien
+ * vers une page absente).
  */
 export function grilleDesVoyants(
-  voyants: Iterable<{ page: string; pictogramme: string; couleur: string }>,
+  voyants: Iterable<{ id: string; page: string; pictogramme: string; couleur: string }>,
   plan: ReadonlyMap<string, { adresse: string }>,
   libelles: ReadonlyMap<string, string>,
   pictogrammes: ReadonlyMap<string, string>,
 ): VoyantDeLaGrille[] {
-  const vues = new Set<string>();
+  const outil = libelles.has(ID_OUTIL_VOYANTS) ? plan.get(ID_OUTIL_VOYANTS)?.adresse : undefined;
+  const vus = new Set<string>();
   const grille: VoyantDeLaGrille[] = [];
   for (const v of voyants) {
-    if (vues.has(v.page) || v.page === ID_OUTIL_VOYANTS) continue;
-    vues.add(v.page);
-    const adresse = plan.get(v.page)?.adresse;
-    const libelle = libelles.get(v.page);
+    if (vus.has(v.pictogramme)) continue;
+    vus.add(v.pictogramme);
+    const page = v.page !== ID_OUTIL_VOYANTS && libelles.has(v.page) ? plan.get(v.page)?.adresse : undefined;
+    const adresse = page ?? (outil !== undefined ? `${outil}#${ancreLigneOutil(v.id)}` : undefined);
+    const libelle = LIBELLES_PICTOGRAMMES[v.pictogramme];
     const dessin = pictogrammes.get(v.pictogramme);
     if (adresse !== undefined && libelle !== undefined && dessin !== undefined) grille.push({ adresse, libelle, pictogramme: dessin, couleur: v.couleur });
   }

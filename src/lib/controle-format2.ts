@@ -11,6 +11,7 @@
 //    l'encadré (règle 2d) ;
 //  - FORMAT2-REPLIE : chaque extrait cité du tableau des notices est dans une partie dépliable, au libellé unique sur la
 //    page (règle 2f) ; « Sources » est repliée (details fermé) et son résumé donne leur nombre (règle 2g) ;
+//  - FORMAT2-METHODE : ni « Verdict retenu » ni le mot « édition » dans le texte rédigé, hors citation (règle 2d) ;
 //  - FORMAT2-SOMMAIRE : dès SOMMAIRE_MIN_H2 titres H2 dans le texte rédigé, un sommaire « Sur cette page » qui mène à
 //    chacun d'eux, sans lien vers une ancre absente (règle 2h).
 // Les mesures de hauteur (2a, 2i : premier écran, trois écrans) se font à la porte, avec un navigateur (conception, §5).
@@ -18,7 +19,7 @@
 // ---------------------------------------------------------------------------------------------
 import * as cheerio from 'cheerio';
 import { normaliserTexte } from './empreinte.ts';
-import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, motsDe } from './format2.ts';
+import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, motsDe, phraseNotices } from './format2.ts';
 import type { LigneResolue } from './calcul.ts';
 
 export interface ConstatFormat2 {
@@ -62,12 +63,14 @@ export function controlerFormat2(html: string, fichier: string, lignes: readonly
   if (provenance.length !== 1) constats.push(erreur('FORMAT2-PROVENANCE', `un bloc « ${FORMAT2.notices} / ${FORMAT2.baseDuCout} » (data-provenance) sous l'encadré ; trouvé : ${provenance.length}`, fichier));
   else {
     if (!provenance.prev().is('[data-ligne-transparence]')) constats.push(erreur('FORMAT2-PROVENANCE', 'le bloc « Notices / Base du coût » suit immédiatement la ligne de transparence (charte graphique §4)', fichier));
-    const contenu = n(texte(provenance));
-    phrases.forEach((phrase, i) => {
-      if (phrase === '') return;
-      // La phrase peut commencer en minuscule après « Ligne n : » : la casse ne compte pas (normaliserTexte).
-      if (!contenu.includes(n(phrase))) constats.push(erreur('FORMAT2-PROVENANCE', `ligne ${i + 1} : le bloc « Notices » n'affiche pas « ${phrase} »`, fichier));
-    });
+    // La phrase « Notices » attribue chaque phrase des sources à ses lignes (« Lignes 1 et 2 : … ») : elle est comparée
+    // en entier à celle que le modèle compose (format2.ts, phraseNotices), ce que R9-ENCADRE-SOURCES garantissait ligne par ligne.
+    const attendue = phraseNotices(phrases);
+    const notices = provenance.find('p').filter((_, p) => $(p).find('.provenance-libelle').first().text().trim() === FORMAT2.notices).first().clone();
+    notices.find('.provenance-libelle, a').remove();
+    if (attendue !== '' && n(texte(notices)) !== n(attendue)) {
+      constats.push(erreur('FORMAT2-PROVENANCE', `le bloc « Notices » affiche « ${texte(notices)} » au lieu de « ${attendue} » (phrase des sources de chaque ligne, avec ses numéros de ligne)`, fichier));
+    }
   }
 
   // Illustration (2i), juste après le bloc « Notices / Base du coût ».
@@ -109,6 +112,14 @@ export function controlerFormat2(html: string, fichier: string, lignes: readonly
       constats.push(erreur('FORMAT2-REPLIE', `« Sources » est repliée (details fermé), avec le résumé « ${FORMAT2.sources} (${nombre}) » (règle 2g)`, fichier));
     }
   }
+
+  // Méthode hors du texte (2d) : ni « Verdict retenu » ni le mot « édition » dans le texte rédigé, hors citation (texte
+  // entre guillemets « … », blockquote, q).
+  const corps = $('[data-corps]').clone();
+  corps.find('blockquote, q, .notices-citation').remove();
+  const sansCitations = texte(corps).replace(/«[^»]*»/g, ' ');
+  const methode = [/verdict retenu/i.test(sansCitations) ? '« Verdict retenu »' : '', /(^|[^\p{L}])[ée]ditions?(?![\p{L}])/iu.test(sansCitations) ? '« édition »' : ''].filter((m) => m !== '');
+  if (methode.length > 0) constats.push(erreur('FORMAT2-METHODE', `le texte rédigé contient ${methode.join(' et ')} hors citation : au format 2, la méthode sort du texte, qui nomme la marque et le modèle ; les éditions et références vont dans « Sources » (règle 2d)`, fichier));
 
   // Sommaire (2h).
   const titres = $('[data-corps] h2').toArray().map((h) => $(h));

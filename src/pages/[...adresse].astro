@@ -40,7 +40,16 @@ export async function getStaticPaths() {
   );
   // Libellé court de chaque page construite : fil d'Ariane et pages liées ne mènent qu'à des pages construites.
   const libelles = new Map(entrees.map(({ page }) => [page.id, page.libelle_court]));
-  const { site, contexte } = await donneesDuSite(cwd(), libelles, new Date());
+  const lu = await donneesDuSite(cwd(), libelles, new Date());
+  const contexte = lu.contexte;
+  // Voyant de la base de chaque page (première ligne de son encadré reprise de la base) : tuile des pages liées au format 2.
+  const voyantDesPages = new Map(
+    entrees.flatMap(({ page }) => {
+      const premiere = page.situations.find((l) => 'voyant' in l && l.voyant !== undefined);
+      return premiere !== undefined && 'voyant' in premiere && premiere.voyant !== undefined ? [[page.id, premiere.voyant] as [string, string]] : [];
+    }),
+  );
+  const site = { ...lu.site, voyantDesPages };
   // Fiches auteur (page « à propos ») : l'auteur d'une page éditoriale est celui de sa fiche (données structurées, livrable 7.5a).
   const entreesSocle = await getCollection('socle');
   const adresseAPropos = site.plan.get(PAGE_METHODE)?.adresse;

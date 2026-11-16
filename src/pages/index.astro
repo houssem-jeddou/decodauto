@@ -36,6 +36,8 @@ const donneesAccueil = { pages: pagesListees(site.plan, libelles), aPropos: aPro
 // Format 2 (src/lib/accueil.ts, accueilFormat2Html) : grille des voyants dont la page est construite, illustration du combiné
 // si son dessin existe (affichée sur ordinateur).
 const dessin = site.illustrations?.get(ILLUSTRATION_ACCUEIL.fichier);
+// Illustration exigée au format 2, comme sur les pages voyants (règle 2i ; brief F1.2-corrections, §6).
+if (format === 2 && dessin === undefined) throw new Error(`accueil au format 2 : illustration « ${ILLUSTRATION_ACCUEIL.fichier} » introuvable (src/illustrations/${ILLUSTRATION_ACCUEIL.fichier}.svg)`);
 const html =
   format === 2
     ? accueilFormat2Html({

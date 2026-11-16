@@ -48,6 +48,8 @@ export interface DonneesSite {
   pictogrammes: ReadonlyMap<string, string>;
   /** Libellé court de chaque page construite (identifiant → libellé) : fil d'Ariane et pages liées. */
   libelles: ReadonlyMap<string, string>;
+  /** Voyant de la base de chaque page construite qui en reprend une ligne (première ligne de son encadré) : tuile des pages liées au format 2. */
+  voyantDesPages?: ReadonlyMap<string, string>;
   /** Dessin de chaque illustration du site (format 2, règle 2i : nom de fichier → SVG de src/illustrations). */
   illustrations?: ReadonlyMap<string, string>;
   /** Emplacements publicitaires factices (construction de recette seulement, livrable 7.5b) : absents en production. */

@@ -183,6 +183,14 @@ export const ancreNotices = (voyant: string): string => `${IDENTIFIANTS.notices}
 /** Libellé du lien de l'encadré vers la partie du voyant dans le tableau des notices (livrable 6.4). */
 export const LIBELLE_LIEN_NOTICES = 'Ce que dit chaque notice';
 
+/** Libellés fixes des composants, repris tels quels par le format 2 (src/lib/format2.ts). */
+export const LIBELLE_COUT_PROBABLE = 'Coût probable :';
+export const TITRE_CAUSES = 'Causes possibles';
+export const LIBELLE_ORDRE_DE_GRANDEUR = "ordre de grandeur, pièce et main-d'œuvre";
+export const TITRE_PAGES_ENFANTS = 'Dans cette rubrique';
+export const TITRE_PAGES_LIEES = 'À lire aussi';
+export const TITRE_SOURCES = 'Sources';
+
 export interface LigneEncadre {
   situation: string;
   verdict: Verdict;
@@ -337,7 +345,7 @@ function ligneEncadreHtml(ligne: LigneEncadre): string {
 function coutEncadreHtml(cout: CoutEncadre): string {
   return [
     '<div class="encadre-cout" data-encadre-cout>',
-    `<p class="encadre-plage">${etiquette('Coût probable :')}<strong>${texteHtml(cout.plage)}</strong></p>`,
+    `<p class="encadre-plage">${etiquette(LIBELLE_COUT_PROBABLE)}<strong>${texteHtml(cout.plage)}</strong></p>`,
     cout.risque !== undefined ? `<p class="encadre-risque">${texteHtml(cout.risque)}</p>` : '',
     ...cout.montants.map((m) => `<p class="encadre-montant">${texteHtml(m.texte)} <span class="encadre-date">(${texteHtml(m.dates.join(', '))})</span></p>`),
     ...cout.prisesEnCharge.map((p) => `<p class="encadre-prise-en-charge">${texteHtml(p)}</p>`),
@@ -386,14 +394,14 @@ export function causesAvecCout(causes: readonly { cause: string; explication: st
     const coutTexte =
       tranche === undefined
         ? ''
-        : `<p class="cause-cout">${etiquette('Coût probable :')}<strong>${texteHtml(GRILLE_COUTS[tranche].libelle)}</strong>${
+        : `<p class="cause-cout">${etiquette(LIBELLE_COUT_PROBABLE)}<strong>${texteHtml(GRILLE_COUTS[tranche].libelle)}</strong>${
             fourchette !== undefined
-              ? texteHtml(` ; ordre de grandeur, pièce et main-d'œuvre : ${LIBELLES_FOURCHETTES[fourchette.valeur]} (relevé le ${dateAffichee(fourchette.releve_le)})`)
+              ? texteHtml(` ; ${LIBELLE_ORDRE_DE_GRANDEUR} : ${LIBELLES_FOURCHETTES[fourchette.valeur]} (relevé le ${dateAffichee(fourchette.releve_le)})`)
               : ''
           }</p>`;
     return `<li class="cause"><h3>${texteHtml(c.cause)}</h3><p>${texteHtml(c.explication)}</p>${coutTexte}</li>`;
   });
-  return `<section class="causes" data-causes aria-labelledby="${IDENTIFIANTS.causes}"><h2 id="${IDENTIFIANTS.causes}">Causes possibles</h2><ol>${elements.join('')}</ol></section>`;
+  return `<section class="causes" data-causes aria-labelledby="${IDENTIFIANTS.causes}"><h2 id="${IDENTIFIANTS.causes}">${TITRE_CAUSES}</h2><ol>${elements.join('')}</ol></section>`;
 }
 
 // ---- Pages liées (plan du site) ---------------------------------------------------------------------
@@ -418,8 +426,8 @@ export function pagesLiees(entree: {
   const enfants = entree.enfants.map(lien).filter((l) => l !== '');
   const autres = [...entree.voisins].filter((id) => id !== parent && !entree.enfants.includes(id)).map(lien).filter((l) => l !== '');
   const blocs: string[] = [];
-  if (enfants.length > 0) blocs.push(`<section class="pages-enfants" data-pages-enfants aria-labelledby="${IDENTIFIANTS.enfants}"><h2 id="${IDENTIFIANTS.enfants}">Dans cette rubrique</h2><ul>${enfants.join('')}</ul></section>`);
-  if (autres.length > 0) blocs.push(`<nav class="pages-liees" data-pages-liees aria-labelledby="${IDENTIFIANTS.liees}"><h2 id="${IDENTIFIANTS.liees}">${texteHtml('À lire aussi')}</h2><ul>${autres.join('')}</ul></nav>`);
+  if (enfants.length > 0) blocs.push(`<section class="pages-enfants" data-pages-enfants aria-labelledby="${IDENTIFIANTS.enfants}"><h2 id="${IDENTIFIANTS.enfants}">${TITRE_PAGES_ENFANTS}</h2><ul>${enfants.join('')}</ul></section>`);
+  if (autres.length > 0) blocs.push(`<nav class="pages-liees" data-pages-liees aria-labelledby="${IDENTIFIANTS.liees}"><h2 id="${IDENTIFIANTS.liees}">${texteHtml(TITRE_PAGES_LIEES)}</h2><ul>${autres.join('')}</ul></nav>`);
   return blocs.join('');
 }
 
@@ -431,7 +439,7 @@ export function pagesLiees(entree: {
  */
 export function sectionSources(citees: ReadonlyMap<string, readonly string[]>, registre: ReadonlyMap<string, SourceDuRegistre>, note?: string): string {
   const elements = elementsDesSources(citees, registre);
-  return `<section class="sources" data-sources aria-labelledby="${IDENTIFIANTS.sources}"><h2 id="${IDENTIFIANTS.sources}">Sources</h2>${note !== undefined ? `<p>${texteHtml(note)}</p>` : ''}<ol>${elements.join('')}</ol></section>`;
+  return `<section class="sources" data-sources aria-labelledby="${IDENTIFIANTS.sources}"><h2 id="${IDENTIFIANTS.sources}">${TITRE_SOURCES}</h2>${note !== undefined ? `<p>${texteHtml(note)}</p>` : ''}<ol>${elements.join('')}</ol></section>`;
 }
 
 /** Une entrée de liste par source citée connue du registre : titre (lien), éditeur, emplacements cités, date de consultation. */

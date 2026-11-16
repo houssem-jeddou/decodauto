@@ -6,13 +6,14 @@ import { join, relative } from 'node:path';
 import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
 import { ID_OUTIL_VOYANTS, adressesDansLeTexte, indexerPlan, liensEnAttente, liensExternesDuTexte } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
-import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
+import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, chargerPictogrammes, listerFichiers } from './charger.ts';
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
 import { FICHIER_VAGUES_OUVERTES, chargerVaguesOuvertes, controlerVaguesOuvertes } from './vagues.ts';
 import { controlerFavicon } from './favicon.ts';
 import { constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
 import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
 import { chargerIllustrations } from './demo-format2.ts';
+import { constatsLibellesPictogrammes } from '../../src/lib/pictogrammes.ts';
 import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
@@ -155,6 +156,8 @@ export async function controlerSite(options: { racine: string; dist: string; auj
       constats.push({ regle: 'ILLUSTRATION-SVG', gravite: 'erreur', message: e instanceof Error ? e.message : String(e), fichier: `${DOSSIER_ILLUSTRATIONS}/${fichier}.svg` });
     }
   }
+  // Libellé de chaque pictogramme (grille de l'accueil au format 2) : un par fichier de src/pictogrammes (PICTO-LIBELLE).
+  constats.push(...constatsLibellesPictogrammes((await chargerPictogrammes(racine)).map((p) => p.id)));
   // Garde-fou : une page de la construction de démonstration du format 2 n'est jamais dans un site contrôlé comme réel.
   if (brouillonFormat2 === undefined) {
     for (const chemin of await listerFichiers(dist, '.html')) constats.push(...constatsDemoPubliee(await readFile(chemin, 'utf8'), relative(dist, chemin).split('\\').join('/')));
