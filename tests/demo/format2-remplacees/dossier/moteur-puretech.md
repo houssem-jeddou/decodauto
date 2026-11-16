@@ -1,8 +1,10 @@
 ---
 # Page de démonstration du modèle dossier au format 2, sans tutoriel (lot F1, revue de F1.3c) : tableau de six colonnes (en
-# cartes sur téléphone, intitulés avec « & » et « < »), historique ; jamais publiée, lue seulement par la construction de
-# démonstration du format 2 (DEMO_FORMAT2=1). Lignes de l'encadré tirées de la base voyants validée ; textes de
-# démonstration ; sans empreinte (R4-VALIDATION-ABSENTE attendue). Illustration d'une page voisine, signalée.
+# cartes sur téléphone, intitulés avec « & » et « < »), historique ; jamais publiée. Depuis le lot B1, la vraie page
+# « moteur PureTech » est publiée (src/content/dossier/) : cette page ne passe plus par la construction de démonstration
+# (la vraie page l'y remplace) et n'est lue que par les tests du modèle (tests/format2-panne.test.ts ;
+# tests/demo/format2-remplacees/README.md). Lignes de l'encadré tirées de la base voyants validée ; textes de
+# démonstration ; sans empreinte. Illustration d'une page voisine, signalée.
 id: moteur-puretech
 title: "Moteurs PureTech : que vérifier ? (démonstration)"
 h1: "Moteur PureTech : que vérifier, et quand ?"

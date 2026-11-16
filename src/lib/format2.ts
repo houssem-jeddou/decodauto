@@ -58,7 +58,7 @@ import { emplacementPub } from './emplacements-pub.ts';
 import { ID_OUTIL_VOYANTS, indexerPlan } from './plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { GRILLE_COUTS, LIBELLE_SELON_LE_VOYANT, LIBELLES_FOURCHETTES } from '../schemas/cout.ts';
-import type { Verdict } from '../schemas/listes.ts';
+import type { TypePage, Verdict } from '../schemas/listes.ts';
 import type { DonneesSite } from './gabarit.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
 import type { CitationDuTexte } from './modeles.ts';
@@ -599,10 +599,29 @@ export function sourcesRepliees(citees: ReadonlyMap<string, readonly string[]>, 
 
 // ---- Page voyant au format 2 ------------------------------------------------------------------------------
 
+/** Types de page dont la pastille « À lire aussi » prend la tuile du voyant de leur encadré : code défaut, pneus et obligations. */
+export const TYPES_TUILE_PAR_ENCADRE: readonly TypePage[] = ['code-defaut', 'pneus'];
+
 /**
- * Tuile du voyant d'une page : celle de la première ligne de la base rattachée à cette page ; sinon (page code défaut), celle
- * du voyant qui s'allume avec le code, première ligne de son encadré reprise de la base (`site.voyantDesPages`) ; sinon rien
- * (pastille sans tuile, même hauteur : charte-b.css).
+ * Voyant de chaque page dont la pastille prend la tuile du voyant de son encadré (`site.voyantDesPages`) : la première ligne de
+ * l'encadré reprise de la base, sur une page code défaut (le voyant qui s'allume avec le code) ou pneus et obligations. Une
+ * page panne ou dossier n'en a pas (revue du lot B1, I1) : son encadré réunit des voyants de causes différentes, dont aucun
+ * ne la représente ; sa pastille reste sans tuile.
+ */
+export function voyantsDesPages(pages: readonly { type: TypePage; page: Pick<PageEditoriale, 'id' | 'situations'> }[]): Map<string, string> {
+  return new Map(
+    pages.flatMap(({ type, page }): [string, string][] => {
+      if (!TYPES_TUILE_PAR_ENCADRE.includes(type)) return [];
+      const premiere = page.situations.find((l) => 'voyant' in l && l.voyant !== undefined);
+      return premiere !== undefined && 'voyant' in premiere && premiere.voyant !== undefined ? [[page.id, premiere.voyant]] : [];
+    }),
+  );
+}
+
+/**
+ * Tuile du voyant d'une page : celle de la première ligne de la base rattachée à cette page (page voyant) ; sinon, pour une
+ * page code défaut ou pneus et obligations, celle du voyant de son encadré (`site.voyantDesPages`, voyantsDesPages) ; sinon
+ * rien : pastille sans tuile, même hauteur (charte-b.css), notamment pour une page panne ou dossier.
  */
 export function tuileDeLaPage(site: Pick<DonneesSite, 'voyants' | 'pictogrammes' | 'voyantDesPages'>): (id: string) => string {
   return (id) => {
