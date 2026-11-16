@@ -68,6 +68,7 @@ situations:
     urgence: immédiate
     action: "Ne la rechargez pas et ne démarrez pas avec des câbles : risque d'explosion. Faites appel à un garage ou à l'assistance, qui la contrôlera ou la remplacera."
     ecart_marques: "La notice Seat Ibiza interdit de démarrer avec des câbles et demande de remplacer toute batterie qui a gelé ; les notices Peugeot 208 et Citroën C3 interdisent la recharge et demandent de la faire contrôler."
+    ecart_court: "Plus strict : Seat (remplacer la batterie, jamais de câbles). Moins stricts : Peugeot et Citroën (la faire contrôler)."
     citations:
       - source: notice-seat-ibiza
         emplacement: "p. 57, « Aide au démarrage »"
