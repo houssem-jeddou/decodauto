@@ -182,8 +182,8 @@ export const ancreNotices = (voyant: string): string => `${IDENTIFIANTS.notices}
 
 /**
  * Ancre de la phrase « Notices » d'une ligne saisie de l'encadré (format 2, sans voyant de la base, donc sans tableau des
- * notices) : le lien « Votre marque » de sa ligne d'écart y renvoie (règle 2b, décision du 16/11/2026). `ligne` : rang de la
- * ligne dans l'encadré, à partir de 1.
+ * notices), sous laquelle s'affiche l'écart entre marques de la ligne : le lien « Votre marque » de sa ligne d'écart y
+ * renvoie (règle 2b, décision du 16/11/2026 ; revue de la PR n° 73). `ligne` : rang de la ligne dans l'encadré, à partir de 1.
  */
 export const ancreNoticesLigne = (ligne: number): string => `${IDENTIFIANTS.notices}-ligne-${ligne}`;
 

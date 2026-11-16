@@ -3,7 +3,10 @@
 // lot F1, tâche F1.2 ; src/lib/format2.ts). Appelés par controlerHtml (controle.ts) pour toute page au format 2 :
 //  - FORMAT2-ECART : une ligne de l'encadré dont les marques divergent affiche sa ligne d'écart courte (texte exact, 25 mots
 //    au plus, lien « Votre marque » compris, règle 2b), qui renvoie au tableau des notices (renvoiNotices : sur la page, ou
-//    sur la page du voyant que le plan lie à celle-ci ; sinon échec, avec la raison), et une ligne sans écart n'en affiche pas ;
+//    sur la page du voyant que le plan lie à celle-ci ; sinon échec, avec la raison), et une ligne sans écart n'en affiche pas.
+//    Ligne saisie, sans voyant de la base (décision du 16/11/2026) : le lien mène à la phrase des notices de cette ligne, dans
+//    le bloc « Notices » (#da-notices-ligne-<n>), qui porte le texte exact de son groupe (numéros de ligne compris) et, dessous,
+//    l'écart entre marques de la ligne en entier ; aucune ancre ni aucun écart de ce bloc pour une autre ligne ;
 //  - FORMAT2-REPONSE : la réponse directe d'une page informative est en tête de l'encadré, au texte exact (règle 2c) ;
 //  - FORMAT2-PROVENANCE : le bloc « Notices / Base du coût » suit la ligne de transparence et donne la phrase des sources de
 //    chaque ligne (règle 2b) ;
@@ -28,7 +31,7 @@
 // ---------------------------------------------------------------------------------------------
 import * as cheerio from 'cheerio';
 import { normaliserTexte } from './empreinte.ts';
-import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, motsDe, phraseNotices, type RenvoiNotices } from './format2.ts';
+import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, groupesNotices, motsDe, phraseNotices, type RenvoiNotices } from './format2.ts';
 import type { LigneResolue } from './calcul.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ancreNoticesLigne, graviteDuVerdict } from './composants.ts';
@@ -44,8 +47,9 @@ const erreur = (regle: string, message: string, fichier?: string): ConstatFormat
 
 /** Phrases des sources de chaque ligne (composants.ts, phraseSources), dans l'ordre de l'encadré. */
 /**
- * `renvois` : pour chaque ligne de l'encadré, le renvoi attendu de sa ligne d'écart au tableau des notices (renvoiNotices,
- * calculé depuis la base et le plan ; undefined pour une ligne sans écart). Absent : le renvoi n'est pas vérifié (tests).
+ * `renvois` : pour chaque ligne de l'encadré, le renvoi attendu de sa ligne d'écart (renvoiNotices, calculé depuis la base et
+ * le plan) : au tableau des notices pour une ligne de la base, à sa phrase « Notices » pour une ligne saisie ; undefined pour
+ * une ligne sans écart. Absent : le renvoi n'est pas vérifié (tests).
  */
 export function controlerFormat2(
   html: string,
@@ -92,7 +96,8 @@ export function controlerFormat2(
         return;
       }
       if (liens.length !== 1 || liens.attr('href') !== renvoi.lien || n(texte(liens.first())) !== n(FORMAT2.lienVotreMarque)) {
-        constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : la ligne d'écart renvoie au tableau des notices par un lien « ${FORMAT2.lienVotreMarque} » vers ${renvoi.lien}`, fichier));
+        const vers = ligne.voyant === undefined ? 'à la phrase de ses notices, dans le bloc « Notices »,' : 'au tableau des notices';
+        constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : la ligne d'écart renvoie ${vers} par un lien « ${FORMAT2.lienVotreMarque} » vers ${renvoi.lien}`, fichier));
         return;
       }
       const ancre = renvoi.lien.startsWith('#') ? renvoi.lien.slice(1) : undefined;
@@ -100,17 +105,43 @@ export function controlerFormat2(
         constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : le lien « ${FORMAT2.lienVotreMarque} » mène à #${ancre}, absent de la page`, fichier));
         return;
       }
-      // Ligne saisie (décision du 16/11/2026) : l'ancre est dans le bloc « Notices », sur la phrase des notices de cette ligne.
+      // Ligne saisie (décision du 16/11/2026) : l'ancre est dans le bloc « Notices », sur la phrase des notices du groupe de
+      // cette ligne (texte exact, numéros de ligne compris), et l'écart entre marques de la ligne s'affiche en entier dessous,
+      // dans le même élément.
       if (ancre === ancreNoticesLigne(i + 1)) {
         const cible = $(`[id="${ancre}"]`);
         const porteuse = cible.is('.provenance-ligne') ? cible : cible.closest('.provenance-ligne');
-        const phrase = phrases[i] ?? '';
-        if (cible.closest('[data-provenance]').length !== 1 || porteuse.length !== 1 || (phrase !== '' && !n(texte(porteuse)).includes(n(phrase.slice(1))))) {
-          constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : l'ancre #${ancre} du lien « ${FORMAT2.lienVotreMarque} » n'est pas sur la phrase des notices de cette ligne, dans le bloc « Notices »`, fichier));
+        const groupe = groupesNotices(phrases).find((g) => g.lignes.includes(i + 1));
+        const phraseAffichee = porteuse.clone();
+        phraseAffichee.find('.provenance-ecart').remove();
+        if (cible.closest('[data-provenance]').length !== 1 || porteuse.length !== 1) {
+          constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : l'ancre #${ancre} du lien « ${FORMAT2.lienVotreMarque} » n'est pas dans le bloc « Notices », sur une phrase des notices`, fichier));
+          return;
+        }
+        if (groupe === undefined || n(texte(phraseAffichee)) !== n(groupe.texte)) {
+          constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : l'ancre #${ancre} est sur « ${texte(phraseAffichee)} » au lieu de la phrase des notices de cette ligne (« ${groupe?.texte ?? ''} »)`, fichier));
+        }
+        const ecartAffiche = porteuse.find(`.provenance-ecart[data-ecart-ligne="${i + 1}"]`);
+        if (ecartAffiche.length !== 1 || !n(texte(ecartAffiche)).includes(n(ligne.ecart_marques))) {
+          constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : sous sa phrase « Notices », l'écart entre marques de la ligne est attendu en entier (« ${ligne.ecart_marques} »)`, fichier));
         }
       }
     });
   }
+  // Ancres et écarts du bloc « Notices » en trop (revue de la PR n° 73) : seulement pour une ligne saisie dont les marques
+  // divergent ; jamais pour une ligne de la base, une ligne sans écart ou un rang absent de l'encadré.
+  const saisieAvecEcart = (rang: number): boolean => {
+    const l = lignes[rang - 1];
+    return l !== undefined && l.voyant === undefined && l.ecart_marques !== undefined;
+  };
+  $('[id^="da-notices-ligne-"]').each((_, el) => {
+    const rang = Number(/^da-notices-ligne-(\d+)$/.exec($(el).attr('id') ?? '')?.[1] ?? 'NaN');
+    if (!saisieAvecEcart(rang)) constats.push(erreur('FORMAT2-ECART', `ancre #${$(el).attr('id')} en trop : seule une ligne saisie de l'encadré dont les marques divergent a une phrase « Notices » ciblée`, fichier));
+  });
+  $('[data-provenance] .provenance-ecart').each((_, el) => {
+    const rang = Number($(el).attr('data-ecart-ligne') ?? 'NaN');
+    if (!saisieAvecEcart(rang)) constats.push(erreur('FORMAT2-ECART', `écart entre marques du bloc « Notices » en trop (ligne ${$(el).attr('data-ecart-ligne') ?? '?'}) : seulement pour une ligne saisie dont les marques divergent`, fichier));
+  });
 
   // Réponse directe d'une page informative (2c, F1.3b) : en tête de l'encadré, juste après la question et avant la première
   // situation, au texte exact du contenu ; aucune sur une page qui n'en déclare pas.
@@ -135,7 +166,7 @@ export function controlerFormat2(
     // en entier à celle que le modèle compose (format2.ts, phraseNotices), ce que R9-ENCADRE-SOURCES garantissait ligne par ligne.
     const attendue = phraseNotices(phrases);
     const notices = provenance.find('p').filter((_, p) => $(p).find('.provenance-libelle').first().text().trim() === FORMAT2.notices).first().clone();
-    notices.find('.provenance-libelle, a').remove();
+    notices.find('.provenance-libelle, a, .provenance-ecart').remove();
     if (attendue !== '' && n(texte(notices)) !== n(attendue)) {
       constats.push(erreur('FORMAT2-PROVENANCE', `le bloc « Notices » affiche « ${texte(notices)} » au lieu de « ${attendue} » (phrase des sources de chaque ligne, avec ses numéros de ligne)`, fichier));
     }

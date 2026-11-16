@@ -80,20 +80,28 @@ describe("ligne d'écart d'une ligne saisie (règle 2b, décision du 16/11/2026)
     assert.deepEqual(renvoiNotices({ ...commun, voyant: 'v', voyants: new Map([['v', { page: 'p' }]]), auTableau: new Set(['v']), ligne: 1 }), { lien: '#da-notices-v' });
   });
 
-  test('phrase « Notices » en HTML : même texte que phraseNotices ; ancre sur la phrase de chaque ligne saisie, une ancre vide de plus quand deux lignes la partagent', () => {
+  test('phrase « Notices » en HTML : même texte que phraseNotices hors écarts ; ancre de la première ligne saisie du groupe sur la phrase, écart de chaque ligne en entier dessous, ancre de la deuxième sur son écart', () => {
     const phrases = ['D’après deux notices.', 'D’après une notice.', 'D’après une notice.'];
-    const html = phraseNoticesHtml(phrases, new Set([2, 3]));
+    const html = phraseNoticesHtml(phrases, new Map([[2, 'Écart A.'], [3, 'Écart B.']]));
     const $ = cheerio.load(`<p>${html}</p>`);
-    assert.equal(plat($('p').text()), plat(phraseNotices(phrases)));
-    assert.equal($('.provenance-ligne').attr('id'), 'da-notices-ligne-2');
-    assert.equal(plat($('.provenance-ligne').text()), 'Lignes 2 et 3 : d’après une notice.');
-    assert.equal($('.provenance-ligne > span[id="da-notices-ligne-3"]').length, 1);
+    const sansEcarts = $('p').clone();
+    sansEcarts.find('.provenance-ecart').remove();
+    assert.equal(plat(sansEcarts.text()), plat(phraseNotices(phrases)));
+    const groupe = $('.provenance-ligne');
+    assert.equal(groupe.attr('id'), 'da-notices-ligne-2');
+    const ecarts = groupe.children('.provenance-ecart').toArray().map((el) => $(el));
+    assert.deepEqual(ecarts.map((e) => [e.attr('data-ecart-ligne'), e.attr('id'), plat(e.text())]), [
+      ['2', undefined, 'Ligne 2, selon les marques : Écart A.'],
+      ['3', 'da-notices-ligne-3', 'Ligne 3, selon les marques : Écart B.'],
+    ]);
+    // Une seule ligne saisie à écart dans le groupe : libellé sans rang.
+    assert.equal(plat(cheerio.load(phraseNoticesHtml(phrases, new Map([[1, 'Écart C.']]))).root().find('.provenance-ecart').text()), 'Selon les marques : Écart C.');
     // Sans ligne saisie à écart : aucune ancre, aucun élément ajouté.
     assert.ok(!phraseNoticesHtml(phrases).includes('<'));
-    assert.deepEqual([...lignesSaisiesAvecEcart([{ voyant: 'v', ecart_marques: 'x' }, { ecart_marques: 'x' }, {}])], [2]);
+    assert.deepEqual([...lignesSaisiesAvecEcart([{ voyant: 'v', ecart_marques: 'x' }, { ecart_marques: 'y' }, {}])], [[2, 'y']]);
   });
 
-  test('page : ligne d’écart affichée, lien vers sa phrase « Notices » dans le bloc sous l’encadré ; FORMAT2-ECART vert', async () => {
+  test('page : ligne d’écart affichée, lien vers sa phrase « Notices » dans le bloc sous l’encadré, avec l’écart entre marques en entier dessous ; FORMAT2-ECART vert', async () => {
     const { html, ecart, rang } = await construire([LIGNE_SAISIE]);
     const $ = cheerio.load(html);
     const ligne = $('[data-encadre-decision] [data-encadre-ligne]').eq(rang - 1);
@@ -102,11 +110,24 @@ describe("ligne d'écart d'une ligne saisie (règle 2b, décision du 16/11/2026)
     const cible = $(`#da-notices-ligne-${rang}`);
     assert.equal(cible.closest('[data-provenance]').length, 1);
     assert.match(plat(cible.text()), new RegExp(`^Ligne ${rang} : d’après deux notices de constructeurs`));
+    assert.equal(plat(cible.find('.provenance-ecart').text()), `Selon les marques : ${LIGNE_SAISIE.ecart_marques}`.replace(/[  ]/g, ' '));
     assert.equal($('[data-tableau-notices] [id^="da-notices-ligne"]').length, 0);
     assert.deepEqual(ecart(html), []);
   });
 
-  test('cas en échec : lien retiré, lien vers le tableau des notices, ancre absente, ancre hors du bloc « Notices » ou sur la phrase d’une autre ligne', async () => {
+  test('deux lignes saisies à écart qui partagent la phrase : la seconde mène à son écart, dans l’élément ciblé ; FORMAT2-ECART vert', async () => {
+    const seconde = { ...LIGNE_SAISIE, situation: 'Essai : deuxième ligne saisie, mêmes notices', ecart_marques: `${LIGNE_SAISIE.ecart_marques} (essai)` };
+    const { html, ecart, rang } = await construire([LIGNE_SAISIE, seconde]);
+    const $ = cheerio.load(html);
+    const lien = $('[data-encadre-decision] [data-encadre-ligne]').eq(rang - 1).find('a[data-lien-notices]');
+    assert.equal(lien.attr('href'), `#da-notices-ligne-${rang}`);
+    const cible = $(`#da-notices-ligne-${rang}`);
+    assert.ok(cible.is('.provenance-ecart') && cible.parent().is(`.provenance-ligne#da-notices-ligne-${rang - 1}`));
+    assert.match(plat(cible.text()), new RegExp(`^Ligne ${rang}, selon les marques : .*\\(essai\\)$`));
+    assert.deepEqual(ecart(html), []);
+  });
+
+  test('cas en échec : lien retiré ou vers le tableau ; ancre absente, hors du bloc, sur la phrase d’une autre ligne ou d’un autre rang ; écart absent ou tronqué ; ancre ou écart en trop', async () => {
     const { html, ecart, rang } = await construire([LIGNE_SAISIE]);
     const modifie = (f: ($: cheerio.CheerioAPI) => void): string => {
       const $ = cheerio.load(html);
@@ -114,22 +135,29 @@ describe("ligne d'écart d'une ligne saisie (règle 2b, décision du 16/11/2026)
       return $.html();
     };
     const lien = ($: cheerio.CheerioAPI) => $('[data-encadre-decision] [data-encadre-ligne]').eq(rang - 1).find('a[data-lien-notices]');
-    for (const [nom, h] of [
-      ['lien retiré', modifie(($) => lien($).remove())],
-      ['lien vers le tableau', modifie(($) => lien($).attr('href', '#da-notices'))],
-      ['ancre absente', modifie(($) => $(`#da-notices-ligne-${rang}`).removeAttr('id'))],
-      ['ancre hors du bloc', modifie(($) => { $(`#da-notices-ligne-${rang}`).removeAttr('id'); $('[data-encadre-decision]').append(`<p class="provenance-ligne" id="da-notices-ligne-${rang}">Ligne ${rang} : d’après deux notices.</p>`); })],
-      ['phrase d’une autre ligne', modifie(($) => { const cible = $(`#da-notices-ligne-${rang}`); cible.text('Ligne 1 : d’après une autre notice.'); })],
-    ] as const) {
-      assert.ok(ecart(h).some((m) => m.includes(`ligne ${rang} de l'encadré`)), `${nom} : ${ecart(h).join(' | ')}`);
-    }
+    const cible = ($: cheerio.CheerioAPI) => $(`#da-notices-ligne-${rang}`);
+    const echoue = (nom: string, h: string, attendu: string) => assert.ok(ecart(h).some((m) => m.includes(attendu)), `${nom} : ${ecart(h).join(' | ')}`);
+    echoue('lien retiré', modifie(($) => lien($).remove()), `ligne ${rang} de l'encadré`);
+    echoue('lien vers le tableau', modifie(($) => lien($).attr('href', '#da-notices')), 'à la phrase de ses notices');
+    echoue('ancre absente', modifie(($) => cible($).removeAttr('id')), 'absent de la page');
+    // Seule condition violée : la phrase exacte, avec son écart, est déplacée hors du bloc « Notices ».
+    echoue('ancre hors du bloc', modifie(($) => { const el = cible($); el.remove(); $('[data-encadre-decision]').append(el); }), "n'est pas dans le bloc « Notices »");
+    // Phrase de la ligne suivie d'une autre phrase (une sous-chaîne passait), puis rang changé.
+    echoue('autre phrase', modifie(($) => { cible($).prepend('Autre source : une notice. '); }), 'au lieu de la phrase des notices');
+    echoue('autre rang', modifie(($) => { const el = cible($); el.html(el.html()!.replace(`Ligne ${rang}`, `Ligne ${rang - 1}`)); }), 'au lieu de la phrase des notices');
+    echoue('écart absent', modifie(($) => cible($).find('.provenance-ecart').remove()), "l'écart entre marques de la ligne est attendu en entier");
+    echoue('écart tronqué', modifie(($) => cible($).find('.provenance-ecart').text('Selon les marques : la notice Seat Ibiza interdit.')), "l'écart entre marques de la ligne est attendu en entier");
+    // Ancre en trop sur une ligne de la base (ligne 1), écart en trop pour une ligne sans écart saisi.
+    echoue('ancre en trop', modifie(($) => $('[data-provenance] p').first().append('<span id="da-notices-ligne-1"></span>')), 'ancre #da-notices-ligne-1 en trop');
+    echoue('écart en trop', modifie(($) => $('[data-provenance] p').first().append('<span class="provenance-ecart" data-ecart-ligne="1">Selon les marques : x</span>')), 'en trop (ligne 1)');
   });
 
-  test('ligne saisie sans écart : ni ligne d’écart, ni lien, ni ancre ; une ligne d’écart ajoutée échoue', async () => {
+  test('ligne saisie sans écart : ni ligne d’écart, ni lien, ni ancre, ni écart sous la phrase ; une ligne d’écart ajoutée échoue', async () => {
     const { html, ecart, rang } = await construire([LIGNE_SANS_ECART]);
     const $ = cheerio.load(html);
     assert.equal($('[data-encadre-decision] [data-encadre-ligne]').eq(rang - 1).find('[data-ecart-court]').length, 0);
     assert.equal($(`#da-notices-ligne-${rang}`).length, 0);
+    assert.equal($('[data-provenance] .provenance-ecart').length, 0);
     assert.deepEqual(ecart(html), []);
     $('[data-encadre-decision] [data-encadre-ligne]').eq(rang - 1).append('<p class="ecart" data-ecart-court>Plus strict : X.</p>');
     assert.ok(ecart($.html()).some((m) => m.includes('ne divergent pas')));
@@ -137,9 +165,11 @@ describe("ligne d'écart d'une ligne saisie (règle 2b, décision du 16/11/2026)
 });
 
 describe('ligne saisie : style de la phrase ciblée (charte B)', () => {
-  test('marge de défilement et couleur pleine quand la phrase est la cible du lien', () => {
+  test('marge de défilement et couleur pleine quand la phrase, ou l’écart d’une deuxième ligne, est la cible du lien ; écart sous la phrase', () => {
     const css = readFileSync(join(racine, 'src/styles/charte-b.css'), 'utf8');
-    assert.match(css, /\.provenance-ligne\{scroll-margin-top:4rem\}/);
-    assert.match(css, /\.provenance-ligne:target\{color:var\(--texte\)\}/);
+    // La phrase ciblée, et l'écart d'une deuxième ligne qui partage la phrase (ancre sur l'écart) : même marge, même couleur.
+    assert.match(css, /\.provenance-ligne,\.provenance-ligne \[id\]\{scroll-margin-top:4rem\}/);
+    assert.match(css, /\.provenance-ligne:target,\.provenance-ligne:has\(:target\)\{color:var\(--texte\)\}/);
+    assert.match(css, /\.provenance-ecart\{display:block;/);
   });
 });

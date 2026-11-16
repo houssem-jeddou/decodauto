@@ -196,9 +196,9 @@ export type RenvoiNotices = { lien: string } | { aucun: string } | { absent: str
  * des notices (#da-notices-<voyant>), sur la page si le voyant y est rattaché ; sinon sur la page à laquelle il est rattaché
  * (champ « page » de la base), seulement si le plan lie les deux pages et que cette page est construite. Sinon, aucun lien :
  * FORMAT2-ECART échoue avec la raison (paire du plan à proposer, page pas encore construite).
- * Ligne saisie, sans voyant de la base (décision du 16/11/2026) : elle n'a pas de tableau des notices ; son lien mène aux
- * notices de cette ligne, dans le bloc « Notices » sous l'encadré (#da-notices-ligne-<n>, ancreNoticesLigne), jamais au
- * tableau des notices.
+ * Ligne saisie, sans voyant de la base (décision du 16/11/2026) : elle n'a pas de tableau des notices ; son lien mène à la
+ * phrase des notices de cette ligne, dans le bloc « Notices » sous l'encadré, avec dessous l'écart entre marques de la ligne
+ * en entier (#da-notices-ligne-<n>, ancreNoticesLigne, phraseNoticesHtml), jamais au tableau des notices.
  * Exceptions (`aucun` : aucun lien attendu) : une ligne rattachée à la page outil (le voyant STOP, demande n° 23) n'a aucun
  * tableau ; sur la page outil, comme sur ses cartes, le lien n'existe que si la page du voyant est construite.
  * Un seul tableau par voyant, sur sa page : jamais répété ailleurs.
@@ -318,7 +318,7 @@ export function phraseNotices(phrases: readonly string[]): string {
 }
 
 /** Groupes de la phrase « Notices » : lignes qui partagent une phrase, et le texte affiché du groupe (phraseNotices). */
-function groupesNotices(phrases: readonly string[]): { lignes: number[]; texte: string }[] {
+export function groupesNotices(phrases: readonly string[]): { lignes: number[]; texte: string }[] {
   const groupes: { lignes: number[]; phrase: string }[] = [];
   phrases.forEach((phrase, i) => {
     if (phrase === '') return;
@@ -334,30 +334,40 @@ function groupesNotices(phrases: readonly string[]): { lignes: number[]; texte: 
   });
 }
 
+/** Libellé de l'écart entre marques d'une ligne saisie, sous sa phrase « Notices » (celui du format 1 dans l'encadré). */
+export const LIBELLE_ECART_LIGNE_SAISIE = 'Selon les marques :';
+
 /**
- * Phrase « Notices » en HTML : celle de phraseNotices ; la phrase de chaque ligne de `ancres` (lignes saisies dont la ligne
- * d'écart renvoie ici, ancreNoticesLigne) est dans un élément qui porte son ancre ; quand plusieurs lignes partagent une
- * phrase, une ancre vide de plus par ligne, au même endroit.
+ * Phrase « Notices » en HTML : celle de phraseNotices ; pour une ligne saisie dont les marques divergent (`ecarts` : rang de
+ * la ligne → son ecart_marques), la phrase de son groupe est dans un élément qui porte l'ancre de la première de ces lignes
+ * (ancreNoticesLigne), et l'écart entre marques de chacune s'affiche en entier sous la phrase, dans ce même élément
+ * (décision du 16/11/2026 : la cible du lien « Votre marque » dit ce que demande chaque marque). Quand plusieurs de ces
+ * lignes partagent la phrase, l'écart de chacune est précédé de son rang, et celui de la deuxième ou suivante porte son ancre.
  */
-export function phraseNoticesHtml(phrases: readonly string[], ancres: ReadonlySet<number> = new Set()): string {
+export function phraseNoticesHtml(phrases: readonly string[], ecarts: ReadonlyMap<number, string> = new Map()): string {
   return groupesNotices(phrases)
     .map((g) => {
-      const ids = g.lignes.filter((n) => ancres.has(n)).map(ancreNoticesLigne);
-      if (ids.length === 0) return texteHtml(g.texte);
-      return `<span class="provenance-ligne" id="${attributHtml(ids[0] ?? '')}">${ids.slice(1).map((id) => `<span id="${attributHtml(id)}"></span>`).join('')}${texteHtml(g.texte)}</span>`;
+      const lignes = g.lignes.filter((n) => ecarts.has(n));
+      if (lignes.length === 0) return texteHtml(g.texte);
+      const blocs = lignes.map((n, k) => {
+        const libelle = lignes.length > 1 ? `Ligne ${n}, ${LIBELLE_ECART_LIGNE_SAISIE.charAt(0).toLowerCase()}${LIBELLE_ECART_LIGNE_SAISIE.slice(1)}` : LIBELLE_ECART_LIGNE_SAISIE;
+        const id = k > 0 ? ` id="${attributHtml(ancreNoticesLigne(n))}"` : '';
+        return `<span class="provenance-ecart" data-ecart-ligne="${n}"${id}><span class="provenance-ecart-libelle">${texteHtml(libelle)}</span> ${texteHtml(ecarts.get(n) ?? '')}</span>`;
+      });
+      return `<span class="provenance-ligne" id="${attributHtml(ancreNoticesLigne(lignes[0] ?? 0))}">${texteHtml(g.texte)}${blocs.join('')}</span>`;
     })
     .join(' ');
 }
 
-/** Lignes saisies (sans voyant de la base) dont les marques divergent : leur ligne d'écart renvoie à leur phrase « Notices ». */
-export const lignesSaisiesAvecEcart = (lignes: readonly { voyant?: string | undefined; ecart_marques?: string | undefined }[]): Set<number> =>
-  new Set(lignes.flatMap((l, i) => (l.voyant === undefined && l.ecart_marques !== undefined ? [i + 1] : [])));
+/** Lignes saisies (sans voyant de la base) dont les marques divergent, et leur écart : leur lien « Votre marque » mène sous leur phrase « Notices ». */
+export const lignesSaisiesAvecEcart = (lignes: readonly { voyant?: string | undefined; ecart_marques?: string | undefined }[]): Map<number, string> =>
+  new Map(lignes.flatMap((l, i) => (l.voyant === undefined && l.ecart_marques !== undefined ? [[i + 1, l.ecart_marques] as const] : [])));
 
 /**
  * Bloc « Notices / Base du coût », sous la ligne de transparence, en petit (règle 2b). `ancres` : lignes saisies de
- * l'encadré dont la ligne d'écart renvoie à leur phrase « Notices » (phraseNoticesHtml).
+ * l'encadré dont les marques divergent, avec leur écart (lignesSaisiesAvecEcart, phraseNoticesHtml).
  */
-export function provenanceHtml(entree: { phrases: readonly string[]; baseDeCalcul?: string | undefined; lienNotices?: string | undefined; ancres?: ReadonlySet<number> | undefined }): string {
+export function provenanceHtml(entree: { phrases: readonly string[]; baseDeCalcul?: string | undefined; lienNotices?: string | undefined; ancres?: ReadonlyMap<number, string> | undefined }): string {
   const notices = phraseNoticesHtml(entree.phrases, entree.ancres);
   const lien = entree.lienNotices !== undefined ? ` <a href="#${attributHtml(entree.lienNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienNotices)}</a>` : '';
   const morceaux = [
