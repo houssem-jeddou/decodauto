@@ -26,3 +26,21 @@ nouveau juste avant la fusion du lot F2** : les données de Google ont deux à t
   commencée) et « Explorée, actuellement non indexée » (2, systèmes Google). La page en « noindex » est
   `http://decodauto.com/`, explorée le 6/11/2026, avant que le site devienne indexable (12/11) : rien à corriger sur le
   site en ligne. Les deux pages explorées et non indexées sont à relire au suivi du 19/11 (J+7 du journal).
+
+## Relevé juste avant la fusion du lot F2 (16/11/2026, vers 21 h 40, heure de Tunis)
+Rapport « Performances » mis à jour par Google environ 5 h 30 plus tôt ; vue sur trois mois (aucune donnée avant le 12/11).
+Aucun changement depuis le relevé de 12 h 10 : 0 clic, 5 impressions, CTR 0 %, position moyenne 54,4.
+
+| Page | Clics | Impressions | Position |
+|---|---|---|---|
+| `/loi-montagne/` | 0 | 5 | 54,8 |
+| `/` (accueil) | 0 | 1 | 1,0 |
+| `/a-propos/` | 0 | 1 | 2,0 |
+| `/mentions-legales/` | 0 | 1 | 4,0 |
+| Les 16 pages des lots 2 à 5d | – | pas encore de données |
+
+Requêtes détaillées : « chaine obligatoire » (2 impressions, position 89), « zone montagne pneu » (1 impression,
+position 83). Indexation : inchangée (4 pages dans l'index ; 1 « noindex », `http://decodauto.com/` ; 2 « explorées,
+actuellement non indexées »). Les 12 pages reprises par F2 (en ligne au format 2 le 16/11 à 22 h 04) n'ont donc aucune
+donnée avant le changement : la comparaison avant et après portera sur les impressions et les positions à partir du
+suivi du 19/11 et du 26/11.
