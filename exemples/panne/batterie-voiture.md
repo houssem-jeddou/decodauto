@@ -5,7 +5,9 @@
 #   travaux/etape-10/textes/batterie-b2-verification.md, demarrage-batterie-verification.md et
 #   autres-pannes-verification.md. Ligne 1 reprise mot pour mot de l'exemple validé « voiture ne démarre pas ».
 # - Source nouvelle au registre avec le lot : varta-interpretation-tests (document technique, demande n° 31).
-# - Illustration dessinée pour le site : batterie-etiquette (générée par travaux/etape-10/generer-illustrations.py).
+# - Illustration dessinée pour le site : batterie-etiquette (générée par travaux/etape-10/generer-illustrations-b2.py).
+# - Corrigé après la revue indépendante du 16/11/2026 (rapport « à corriger ») : question du gel en tête de l'arbre,
+#   faits absents des relevés retirés, tension en tête de page ; corrections non relues par la revue.
 id: batterie-voiture
 title: "Voltage batterie voiture : batterie faible, que faire ?"
 h1: "Batterie de voiture faible : comment le savoir, et que faire ?"
@@ -41,7 +43,7 @@ situations:
   - situation: "Le message « Mode sauvegarde batterie », puis « Batterie faible Démarrer moteur », s'affiche au tableau de bord"
     verdict: oui avec précautions
     urgence: immédiate
-    action: "Démarrez le moteur et laissez-le tourner, ou roulez, jusqu'à ce que le message disparaisse."
+    action: "Démarrez le moteur, hors d'un endroit fermé, et laissez-le tourner, ou roulez, jusqu'à ce que le message disparaisse."
     citations:
       - source: notice-renault-clio-5
         emplacement: "p. 339, « Batterie »"
@@ -59,7 +61,7 @@ situations:
     action: "Faites réviser la batterie par un garage, qui la remplacera si nécessaire. N'ouvrez pas la batterie et n'ajoutez pas de liquide."
     citations:
       - source: notice-seat-ibiza
-        emplacement: "p. 303, « Vérification du niveau d'électrolyte de la batterie »"
+        emplacement: "p. 302-303, « Vérification du niveau d'électrolyte de la batterie »"
         extrait: "L'indicateur du regard circulaire (« œil magique ») change de couleur en fonction de l'état de charge et du niveau d'électrolyte de la batterie. On distingue deux couleurs : Jaune clair ou incolore : Le niveau d'électrolyte de la batterie est trop bas. Adressez-vous à un atelier spécialisé, faites réviser la batterie et si nécessaire, faites-la remplacer."
         verdict: oui avec précautions
         urgence: sous quelques jours
@@ -113,6 +115,7 @@ cout_probable:
     - notice-dacia-sandero-3
     - notice-seat-ibiza
     - notice-peugeot-208
+    - notice-citroen-c3
 sources:
   - notice-renault-clio-5
   - notice-dacia-sandero-3
@@ -128,7 +131,7 @@ date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
 causes:
   - cause: Batterie déchargée
-    explication: "Selon les notices Renault Clio 5 et Dacia Sandero 3, l'état de charge baisse surtout sur de petits parcours, en ville, quand la température baisse, et après une longue utilisation de la radio ou d'autres équipements moteur arrêté. Les notices Peugeot 208 et Citroën C3 conseillent de la recharger quand la voiture sert surtout pour des trajets courts, ou avant une immobilisation de plusieurs semaines."
+    explication: "Selon les notices Renault Clio 5 et Dacia Sandero 3, l'état de charge baisse surtout sur de petits parcours, en ville, quand la température baisse, et après une longue utilisation de la radio ou d'autres équipements moteur arrêté. Les notices Peugeot 208 et Citroën C3 conseillent de la recharger quand la voiture sert surtout pour des trajets courts, ou avant une immobilisation prolongée."
     pieces:
       - recharge-batterie
   - cause: Batterie en fin de vie
@@ -156,20 +159,20 @@ causes:
 
 ## Batterie faible : par où commencer ?
 
-Une batterie faible se voit surtout au démarrage : voyants qui faiblissent, démarreur qui ne tourne pas ou tourne lentement. Certaines voitures préviennent aussi par un message au tableau de bord. Suivez les questions ci-dessous, dans l'ordre.
+Une batterie de voiture a une tension nominale de 12 volts, et le fabricant de batteries VARTA indique qu'une batterie de démarrage entièrement chargée a une tension de 12,8 volts ({{cite:notice-dacia-sandero-3|p. 326-327}} ; {{cite:varta-interpretation-tests|« Interprétation des tests de batteries »}}). Une batterie faible se voit surtout au démarrage : voyants qui faiblissent, démarreur qui ne tourne pas. Suivez les questions ci-dessous, dans l'ordre.
 
 ## Le bon geste selon ce que vous voyez
 
 {{arbre}}
 
-1. Quand vous mettez le contact, les voyants faiblissent-ils ou restent-ils éteints, avec un démarreur qui ne tourne pas ?
-   - Oui : resserrez ou nettoyez les cosses, puis démarrez avec une autre batterie en suivant votre notice ; sinon, faites contrôler la batterie. {{verdict:ligne-1}}
+1. Fait-il un temps proche de 0 °C ou en dessous, et la batterie a-t-elle pu geler ?
+   - Oui, ou vous n'en êtes pas sûr : ne la rechargez pas et ne démarrez pas avec des câbles. {{verdict:ligne-4}}
    - Non : passez à la question 2.
-2. Fait-il très froid, et la batterie a-t-elle pu geler ?
-   - Oui, elle a gelé, ou vous n'en êtes pas sûr : ne la rechargez pas et ne démarrez pas avec des câbles. {{verdict:ligne-4}}
+2. Quand vous mettez le contact, les voyants faiblissent-ils ou restent-ils éteints, avec un démarreur qui ne tourne pas ?
+   - Oui : resserrez ou nettoyez les cosses, puis démarrez avec une autre batterie en suivant votre notice ; sinon, faites contrôler la batterie. {{verdict:ligne-1}}
    - Non : passez à la question 3.
 3. Un message « Mode sauvegarde batterie » ou « Batterie faible Démarrer moteur » s'affiche-t-il ?
-   - Oui : démarrez le moteur et laissez-le tourner, ou roulez, jusqu'à ce qu'il disparaisse. {{verdict:ligne-2}}
+   - Oui : démarrez le moteur, hors d'un endroit fermé, et laissez-le tourner, ou roulez, jusqu'à ce qu'il disparaisse. {{verdict:ligne-2}}
    - Non : passez à la question 4.
 4. Moteur tournant, le voyant batterie rouge reste-t-il allumé, ou s'allume-t-il en roulant ?
    - Oui : la batterie n'est plus rechargée. {{verdict:batterie-rouge}}
@@ -186,13 +189,13 @@ Les notices lues ne parlent que de batteries de 12 volts. Les notices {{notice:n
 
 ## Quelle tension mesurer ?
 
-Les notices lues ne donnent aucune valeur de tension. Le fabricant de batteries VARTA indique qu'une batterie de démarrage entièrement chargée a une tension de 12,8 volts, et qu'elle doit être rechargée si sa tension en circuit ouvert descend sous 12,4 volts ({{cite:varta-interpretation-tests|« Interprétation des tests de batteries »}}). Pour une batterie de Stop & Start (AGM ou EFB), il précise que le test est plus approfondi : la tension seule ne dit pas tout de son état.
+Les notices lues ne donnent aucune valeur de tension mesurée. Le fabricant de batteries VARTA donne deux valeurs de référence : 12,8 volts pour une batterie de démarrage entièrement chargée et, en circuit ouvert, 12,4 volts comme seuil de recharge ({{cite:varta-interpretation-tests|« Interprétation des tests de batteries »}}). Pour une batterie AGM ou EFB, deux technologies de batterie, il prévoit un test plus approfondi.
 
 ## Capacité en Ah : celle de la batterie d'origine
 
-60, 70 ou 95 Ah : la capacité dépend de la voiture. La notice {{notice:notice-seat-ibiza}} demande une batterie dont les propriétés, les spécifications et les dimensions correspondent à celle d'origine, et précise que ces spécifications sont écrites sur son boîtier ({{cite:notice-seat-ibiza|p. 303}}). Les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} demandent une batterie équivalente, et la notice {{notice:notice-toyota-yaris}} une capacité et un courant de démarrage à froid équivalents ou supérieurs ({{cite:notice-renault-clio-5|p. 341}} ; {{cite:notice-dacia-sandero-3|p. 302}} ; {{cite:notice-toyota-yaris|p. 321}}).
+La capacité d'une batterie, en ampères-heures (Ah), dépend de la version de la voiture : la notice {{notice:notice-toyota-yaris}} la donne version par version, et demande une batterie de capacité et de courant de démarrage à froid équivalents ou supérieurs ({{cite:notice-toyota-yaris|p. 321}}). Les notices {{notice:notice-renault-clio-5}} et {{notice:notice-dacia-sandero-3}} demandent une batterie équivalente, et la notice {{notice:notice-seat-ibiza}} de se renseigner auprès d'un service technique avant d'acheter la batterie de rechange ({{cite:notice-renault-clio-5|p. 341}} ; {{cite:notice-dacia-sandero-3|p. 302}} ; {{cite:notice-seat-ibiza|p. 303}}). Pour la choisir, fiez-vous à la notice de votre voiture ou à l'étiquette de la batterie d'origine.
 
-Sur une voiture équipée du Stop & Start, la batterie est spécifique : la notice Seat Ibiza demande une batterie aux mêmes spécifications, et les notices Peugeot 208 et Citroën C3 un remplacement dans le réseau ou dans un atelier qualifié ({{cite:notice-seat-ibiza|p. 303}} ; {{cite:notice-peugeot-208|p. 168}} ; {{cite:notice-citroen-c3|p. 114}}). Pour le remplacement, voyez [changer la batterie de sa voiture](/batterie-voiture/changer/).
+Sur une voiture équipée du Stop & Start, la batterie est spécifique : la notice Seat Ibiza demande une batterie aux mêmes spécifications, écrites sur le boîtier de la batterie, et les notices Peugeot 208 et Citroën C3 un remplacement dans le réseau ou dans un atelier qualifié ({{cite:notice-seat-ibiza|p. 303}} ; {{cite:notice-peugeot-208|p. 168}} ; {{cite:notice-citroen-c3|p. 114}}). Pour le remplacement, voyez [changer la batterie de sa voiture](/batterie-voiture/changer/).
 
 ## Message « Batterie faible Démarrer moteur »
 
@@ -200,15 +203,15 @@ Sur une voiture équipée du Stop & Start, la batterie est spécifique : la noti
 
 Sur les voitures qui en sont équipées, un système surveille l'état de charge de la batterie. Quand il baisse, les notices Renault Clio 5 et Dacia Sandero 3 décrivent le message « Mode sauvegarde batterie », puis « Batterie faible Démarrer moteur » : démarrez le moteur, et le message disparaît ({{cite:notice-renault-clio-5|p. 339}} ; {{cite:notice-dacia-sandero-3|p. 301}}). La notice Dacia ajoute que vous pouvez aussi rouler, ou attendre qu'il disparaisse.
 
-Selon la notice Renault Clio 5, ce message peut apparaître après 5 à 30 minutes d'utilisation de la voiture moteur arrêté. Il prévient que des équipements de confort, comme l'éclairage intérieur, la radio, la navigation ou la ventilation, peuvent être coupés automatiquement ({{cite:notice-renault-clio-5|p. 339}}).
+Selon la notice Renault Clio 5, ce message peut apparaître après 5 à 30 minutes d'utilisation de la voiture moteur arrêté ({{cite:notice-renault-clio-5|p. 339}}). Ne laissez pas tourner le moteur dans un endroit fermé : la notice Seat Ibiza l'interdit, à cause du risque d'intoxication ({{cite:notice-seat-ibiza|p. 213}}).
 
 ## L'indicateur coloré de la batterie (« œil magique »)
 
 {{repere:ligne-3}}
 
-Certaines batteries ont sur le dessus un regard rond dont la couleur change selon l'état de charge et le niveau d'électrolyte. Sur la Seat Ibiza, jaune clair ou incolore signale un niveau trop bas : la notice demande de faire réviser la batterie par un atelier spécialisé, et de la remplacer si nécessaire ; noir signale un niveau correct ({{cite:notice-seat-ibiza|p. 302-303}}). Elle ne décrit que ces deux couleurs : pour un indicateur vert, ou une autre batterie, fiez-vous à la notice de votre voiture.
+Certaines batteries ont un regard rond, l'« œil magique », dont la couleur change selon l'état de charge et le niveau d'électrolyte. Sur la Seat Ibiza, jaune clair ou incolore signale un niveau trop bas : la notice demande de faire réviser la batterie par un atelier spécialisé, et de la remplacer si nécessaire ; noir signale un niveau correct ({{cite:notice-seat-ibiza|p. 302-303}}). Elle ne décrit que ces deux couleurs : pour un indicateur vert, ou une autre batterie, fiez-vous à la notice de votre voiture ou à l'étiquette de la batterie.
 
-La notice Seat Ibiza interdit d'ouvrir la batterie et d'essayer d'en modifier le niveau de liquide : il en sortirait un gaz qui risque d'exploser ({{cite:notice-seat-ibiza|p. 301}}).
+La notice Seat Ibiza interdit d'ouvrir la batterie, et prévient qu'un mélange de gaz détonant très explosif se forme pendant sa recharge ({{cite:notice-seat-ibiza|p. 301}}). La notice Dacia Sandero 3 interdit aussi de l'ouvrir ou d'y ajouter du liquide ({{cite:notice-dacia-sandero-3|p. 301}}).
 
 ## Batterie gelée : ne pas la recharger
 
@@ -222,10 +225,10 @@ Les notices Peugeot 208 et Citroën C3 interdisent aussi la recharge d'une batte
 
 {{repere:batterie-rouge}}
 
-Moteur tournant, le [voyant batterie](/voyants/batterie/) rouge signale que la batterie n'est plus rechargée : elle se vide en roulant. La notice Peugeot 208 cite des cosses sales et une courroie d'alternateur détendue ou sectionnée ({{cite:notice-peugeot-208|p. 13}}). En attendant, la notice Seat Ibiza demande d'éteindre les équipements électriques qui ne sont pas indispensables ({{cite:notice-seat-ibiza|p. 302}}).
+Moteur tournant, le [voyant batterie](/voyants/batterie/) rouge signale que la batterie n'est plus rechargée : elle se vide en roulant. La notice Peugeot 208 cite des cosses sales et une courroie d'alternateur détendue ou sectionnée ({{cite:notice-peugeot-208|p. 13}}). La notice Seat Ibiza, qui demande de se rendre immédiatement à l'atelier spécialisé le plus proche, conseille alors d'éteindre les équipements électriques qui ne sont pas indispensables ({{cite:notice-seat-ibiza|p. 302}}).
 
 ## Batterie qui se décharge vite
 
 Selon les notices Renault Clio 5 et Dacia Sandero 3, l'état de charge baisse surtout sur de petits parcours, en ville, quand la température baisse, et après une longue utilisation de la radio ou d'autres équipements moteur arrêté ({{cite:notice-renault-clio-5|p. 339}} ; {{cite:notice-dacia-sandero-3|p. 301}}). Une voiture longtemps immobilisée se décharge aussi d'elle-même, selon la notice Toyota Yaris ({{cite:notice-toyota-yaris|p. 321}}).
 
-Les notices Peugeot 208 et Citroën C3 conseillent de recharger la batterie quand la voiture sert surtout pour des trajets courts, ou avant une immobilisation de plusieurs semaines ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). Pour le faire vous-même, voyez [recharger la batterie de sa voiture](/batterie-voiture/recharger/). Vérifiez aussi les cosses : les notices Seat Ibiza et Citroën C3 demandent d'en contrôler la propreté et le serrage ({{cite:notice-seat-ibiza|p. 301}} ; {{cite:notice-citroen-c3|p. 114}}).
+Les notices Peugeot 208 et Citroën C3 conseillent de recharger la batterie quand la voiture sert surtout pour des trajets courts, ou avant une immobilisation prolongée ({{cite:notice-peugeot-208|p. 188}} ; {{cite:notice-citroen-c3|p. 137}}). Pour le faire vous-même, voyez [recharger la batterie de sa voiture](/batterie-voiture/recharger/). Vérifiez aussi les cosses : les notices Seat Ibiza et Citroën C3 demandent d'en contrôler la propreté et le serrage ({{cite:notice-seat-ibiza|p. 301}} ; {{cite:notice-citroen-c3|p. 114}}).
