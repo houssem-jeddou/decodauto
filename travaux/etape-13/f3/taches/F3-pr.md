@@ -16,8 +16,10 @@ jamais sur `main`, jamais de push forcé ni de réécriture d'historique : `main
 - Le lot F3 et ses 7 pages inscrits dans `config/lots-format2.json` (FORMAT2-VAGUE, F1.4).
 - La démonstration du format 2 (`scripts/lib/demo-format2.ts`, `brouillon-format2.json`) n'emprunte plus de dessin ni de
   texte pour ces pages : retirer de la démonstration ce que les vraies pages portent désormais, comme au lot F2.
-- `date_modification` des 5 pages éditoriales et des 2 pages du socle : date du jour de la mise au point finale (règle 14 b :
-  textes repris) ; `date_revue` inchangée sauf relecture complète.
+- `date_modification` des 5 pages éditoriales : date du jour de la mise au point finale (règle 14 b : textes repris) ; celle des
+  2 pages du socle **ne change pas** (mentions légales : 10/11 ; « à propos » : 15/11) : seul leur format change, aucun mot
+  (règle 14 b, demande n° 30 §7 ; corrigé après la revue indépendante de la pull request, B1). `date_revue` inchangée sauf
+  relecture complète.
 - Tests mis à jour comme au lot F2 (empreintes du format 2, démonstration, tests qui rendaient ces pages au format 1).
 - Contrôles : seules erreurs attendues avant la validation, les empreintes des 5 pages éditoriales (R4-EMPREINTE), jamais
   recalculées avant la validation de Houssem ; toute autre erreur se corrige (FORMAT2-*, CITATIONS-PART, TITRE-*, DATE-*).

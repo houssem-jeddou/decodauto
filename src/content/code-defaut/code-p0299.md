@@ -95,11 +95,11 @@ causes:
 format: 2
 illustration:
   fichier: code-p0299-circuit-turbo
-  alt: "Schéma de la suralimentation : filtre à air, turbo et sa commande, vanne, échangeur, moteur et calculateur"
-  legende: "Le turbo, entraîné par les gaz d'échappement, envoie l'air comprimé au moteur par l'échangeur ; sa commande règle la pression. En orange, ce que citent les causes de cette page."
+  alt: "Schéma de la suralimentation : filtre à air, turbo et sa commande, échangeur, moteur et calculateur"
+  legende: "Le turbo envoie l'air comprimé au moteur par l'échangeur ; sa commande règle la pression. En orange, ce que citent les causes de cette page."
 ---
 
-## Peut-on rouler avec le code P0299 ?
+## Peut-on rouler avec le code P0299 et le voyant moteur orange allumé fixe ?
 
 {{repere:moteur-orange-fixe}}
 

@@ -87,7 +87,6 @@ def p0299():
          boite(384, 30, 160, 74, ["commande", "du turbo"]),
          # Air de suralimentation (cause 1 : fuite) : du compresseur à l'échangeur, puis au moteur.
          tuyau([(200, 107), (200, 248), (236, 248)], cause=True, tirets=True), fleche(200, 214, "b"),
-         boite(160, 156, 80, 40, ["vanne"], rx=10),
          boite(236, 222, 128, 52, ["échangeur"], cause=False),
          tuyau([(364, 248), (420, 248)]), fleche(394, 248),
          # Gaz d'échappement : du moteur à la turbine.

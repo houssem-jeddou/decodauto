@@ -53,8 +53,8 @@ format: 2
 reponse_directe: "Celle du constructeur, à froid : sur l'étiquette de la porte du conducteur ou de son encadrement, propre à chaque voiture."
 illustration:
   fichier: pression-etiquette-porte
-  alt: "Où lire la pression : l'étiquette sur le chant de la porte du conducteur (1) ou sur son encadrement (2), valeurs propres à chaque voiture"
-  legende: "Selon la notice, l'étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur son encadrement (2 : Seat, Toyota) ; Peugeot la place au niveau de la porte. Les valeurs sont propres à chaque voiture."
+  alt: "Où lire la pression : l'étiquette sur le chant de la porte du conducteur (1) ou sur le cadre de la porte (2), valeurs à vide et en charge propres à chaque voiture"
+  legende: "Selon la notice, l'étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur le cadre de la porte (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte côté conducteur ». Les valeurs sont propres à chaque voiture."
 ---
 
 ## Quelle pression mettre dans ses pneus ?
@@ -75,7 +75,7 @@ Les notices lues pour cette page sont celles de ces modèles ; pour une autre vo
 
 | Notice | Où lire la pression | Quand la vérifier | Après avoir gonflé |
 |---|---|---|---|
-| Peugeot 208 | Étiquette collée au niveau de la porte côté conducteur, avec les pressions à vide et en charge et celle de la roue de secours ({{cite:notice-peugeot-208\|p. 198}}) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette ({{cite:notice-peugeot-208\|p. 110}}) | Réinitialiser la détection de sous-gonflage ({{cite:notice-peugeot-208\|p. 111}}) |
+| Peugeot 208 | Étiquette « collée au niveau de la porte côté conducteur », avec les pressions à vide et en charge et celle de la roue de secours ({{cite:notice-peugeot-208\|p. 198}}) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette ({{cite:notice-peugeot-208\|p. 110}}) | Réinitialiser la détection de sous-gonflage ({{cite:notice-peugeot-208\|p. 111}}) |
 | Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours ({{cite:notice-renault-clio-5\|p. 348}}) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5\|p. 207 et 348}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-renault-clio-5\|p. 207-208}}) |
 | Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur ({{cite:notice-dacia-sandero-3\|p. 179}}) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids ({{cite:notice-dacia-sandero-3\|p. 179}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-dacia-sandero-3\|p. 179-180}}) |
 | Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche ({{cite:notice-seat-ibiza\|p. 307}}) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids ({{cite:notice-seat-ibiza\|p. 306}}) | Mémoriser la nouvelle pression dans le système ({{cite:notice-seat-ibiza\|p. 312}}) |

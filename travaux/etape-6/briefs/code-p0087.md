@@ -95,7 +95,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le code P0087 ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le code P0087 ? »
 - **Angle** : Exemple validé en 6.6b : fiche, cas par marque et causes tirés de sources admises ; ligne de l'encadré reprise de la base (tableau des voyants du brief).
 - **Élément unique** : Tableau des cas décrits par marque, déjà dans l'exemple.
 - **À traiter** :

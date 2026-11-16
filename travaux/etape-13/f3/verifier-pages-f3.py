@@ -12,6 +12,7 @@ def phrases(p):
     t = re.sub(r'\b(p|n°|M|ex|etc|env|cf|réf)\.\s', r'\1 ', t)
     t = re.sub(r'(\d)\.(\d)', r'\1\2', t)
     return [s for s in re.split(r'(?<=[.!?…])\s+(?=[A-ZÀ-ÖØ-Ý«(])', t.strip()) if s.strip()]
+H2_RENOMMES = {f'## Peut-on rouler avec le code {c} ?': f'## Peut-on rouler avec le code {c} et le voyant moteur orange allumé fixe ?' for c in ('P0087', 'P0299', 'P0420')}
 erreurs = 0
 for page in pages:
     f = RAC / f'src/content/{page}.md'; s = f.read_text()
@@ -19,6 +20,8 @@ for page in pages:
     avant = subprocess.run(['git', '-C', str(RAC), 'show', f'origin/main:src/content/{page}.md'], capture_output=True, text=True).stdout
     h2_avant = [l for l in avant.splitlines() if l.startswith('## ')]; h2 = [l for l in corps.splitlines() if l.startswith('## ')]
     pb = []
+    # H2 renommés exprès (revue indépendante de la PR du lot F3, m2) : le repère du verdict ne dit pas sa condition, le H2 la porte.
+    h2_avant = [H2_RENOMMES.get(l, l) for l in h2_avant]
     if h2 != h2_avant: pb.append(f'H2 changés : {set(h2_avant) ^ set(h2)}')
     socle = page.startswith('socle/')
     if fm.get('format') != 2 or (not socle and not fm.get('illustration')): pb.append('format ou illustration absents')

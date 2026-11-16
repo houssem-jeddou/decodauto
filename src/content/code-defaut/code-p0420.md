@@ -99,7 +99,7 @@ illustration:
   legende: "La sonde placée après le catalyseur mesure sa capacité à stocker l'oxygène ; le calculateur compare les deux sondes. En orange, ce que citent les causes de cette page."
 ---
 
-## Peut-on rouler avec le code P0420 ?
+## Peut-on rouler avec le code P0420 et le voyant moteur orange allumé fixe ?
 
 {{repere:moteur-orange-fixe}}
 

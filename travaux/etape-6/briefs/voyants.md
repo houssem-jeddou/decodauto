@@ -95,7 +95,7 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Quel voyant s'est allumé, et pouvez-vous continuer à rouler ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Quel voyant s'est allumé, et pouvez-vous continuer à rouler ? »
 - **Angle** : Identifier le voyant par son pictogramme et sa couleur, puis donner pour chacun le verdict de la base. Ce que l'aperçu IA ne dit pas : la couleur ne suffit pas, des voyants orange de la base imposent l'arrêt, et l'écart entre marques est affiché (relevé, constat 2).
 - **Élément unique** : Outil : liste des voyants générée depuis la base (pictogramme redessiné, couleur, verdict, urgence, page du voyant), filtre par couleur, lisible sans JavaScript (docs/08 §2). Modèle livré en 8.1 (src/lib/outil-voyants.ts).
 - **À traiter** :

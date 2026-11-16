@@ -5,7 +5,7 @@
 id: code-p0087
 title: "Code P0087 : pression de carburant trop basse, peut-on rouler ?"
 h1: "Code défaut P0087 : pression de la rampe de carburant trop basse"
-description: "Code P0087 : pression de carburant trop basse dans la rampe. Avec le voyant moteur allumé, la consigne retenue est de vous arrêter immédiatement. Causes et cas par marque."
+description: "Code P0087 : pression de carburant trop basse dans la rampe. Avec le voyant moteur allumé, arrêtez-vous immédiatement. Causes et cas par marque."
 libelle_court: Code P0087
 question_decision: Puis-je continuer à rouler avec le code P0087 ?
 situations:
@@ -98,7 +98,7 @@ illustration:
   legende: "Le carburant va du réservoir à la rampe, où un capteur mesure la pression que le calculateur surveille. En orange, les pièces que citent les causes de cette page."
 ---
 
-## Peut-on rouler avec le code P0087 ?
+## Peut-on rouler avec le code P0087 et le voyant moteur orange allumé fixe ?
 
 {{repere:moteur-orange-fixe}}
 
