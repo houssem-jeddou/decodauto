@@ -13,7 +13,7 @@
 //    l'encadré (règle 2d) ;
 //  - FORMAT2-REPLIE : chaque extrait cité du tableau des notices est dans une partie dépliable, au libellé unique sur la
 //    page (règle 2f) ; « Sources » est repliée (details fermé) et son résumé donne leur nombre (règle 2g) ;
-//  - FORMAT2-METHODE : ni « Verdict retenu », ni le mot « édition », ni une page écrite à la main (« p. 13 ») dans le texte
+//  - FORMAT2-METHODE : ni « Verdict(s) retenu(s) », ni « consigne(s) retenue(s) », ni le mot « édition », ni une page écrite à la main (« p. 13 ») dans le texte
 //    rédigé, hors citation (règle 2d) ;
 //  - FORMAT2-ARBRE : dans chaque arbre de décision, chaque verdict cité est une pastille (forme, gravité et libellé d'une
 //    ligne de l'encadré) qui termine une réponse,
@@ -172,7 +172,9 @@ export function controlerFormat2(
   corps.find('blockquote, q, .notices-citation').remove();
   const sansCitations = texte(corps).replace(/«[^»]*»/g, ' ');
   const methode = [
-    /verdict retenu/i.test(sansCitations) ? '« Verdict retenu »' : '',
+    // « Verdict retenu », « Verdicts retenus » (forme de la page FAP), « consigne(s) retenue(s) » (F1.4) : la méthode sort du texte.
+    /verdicts?[\s\u00a0\u202f]+retenus?/i.test(sansCitations) ? '« Verdict retenu »' : '',
+    /consignes?[\s\u00a0\u202f]+retenues?/i.test(sansCitations) ? '« consigne retenue »' : '',
     /(^|[^\p{L}])[ée]ditions?(?![\p{L}])/iu.test(sansCitations) ? '« édition »' : '',
     // Page écrite à la main (« p. 139 ») : au format 2, une page citée s'écrit « {{cite:…}} » (rendue dans « Sources »).
     /(^|[^\p{L}])p\.[\s\u00a0\u202f]*\d/u.test(sansCitations) ? 'une page écrite à la main (« p. » suivi d\'un chiffre)' : '',

@@ -8,7 +8,7 @@ import { ID_OUTIL_VOYANTS, adressesDansLeTexte, indexerPlan, liensEnAttente, lie
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
 import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, chargerPictogrammes, listerFichiers } from './charger.ts';
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
-import { FICHIER_VAGUES_OUVERTES, chargerVaguesOuvertes, controlerVaguesOuvertes } from './vagues.ts';
+import { FICHIER_LOTS_FORMAT2, FICHIER_VAGUES_OUVERTES, chargerLotsFormat2, chargerVaguesOuvertes, controlerFormatDesVagues, controlerVaguesOuvertes } from './vagues.ts';
 import { controlerFavicon } from './favicon.ts';
 import { DOSSIER_PAGES_DEMO_FORMAT2, constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
 import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
@@ -110,6 +110,18 @@ export async function controlerSite(options: { racine: string; dist: string; auj
     constats.push(...controlerVaguesOuvertes(pagesPubliees, (id) => contexte.plan.get(id)?.vague, ouvertes, DOSSIER_CONTENU));
   } catch (e) {
     constats.push({ regle: 'VAGUE-NON-OUVERTE', gravite: 'erreur', message: e instanceof Error ? e.message : String(e), fichier: FICHIER_VAGUES_OUVERTES });
+  }
+  // Format des vagues (demande de changement n° 30, F1.4) : vagues B et C au format 2 ; vague A au format 2 seulement avec
+  // son lot (config/lots-format2.json), sauf dans la construction de démonstration.
+  try {
+    const lots = await chargerLotsFormat2(racine);
+    const pagesFormat = pagesLues.map((l) => {
+      const brut = l.brut as { id?: unknown; format?: unknown } | null | undefined;
+      return { id: typeof brut?.id === 'string' ? brut.id : undefined, fichier: l.fichier, format: brut?.format };
+    });
+    constats.push(...controlerFormatDesVagues(pagesFormat, (id) => contexte.plan.get(id)?.vague, lots, { demo: brouillonFormat2 !== undefined, dossierContenu: DOSSIER_CONTENU }));
+  } catch (e) {
+    constats.push({ regle: 'FORMAT2-VAGUE', gravite: 'erreur', message: e instanceof Error ? e.message : String(e), fichier: FICHIER_LOTS_FORMAT2 });
   }
   // Une page éditoriale construite a son fichier de contenu : un exemple (exemples/), une page de test ou une page
   // supprimée ne se retrouvent jamais dans le site construit (livrable 6.6 : aucune vraie page sur main avant l'étape 9).

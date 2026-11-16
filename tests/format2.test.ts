@@ -462,7 +462,7 @@ describe('format 2 : corrections après la revue (brief F1.2-corrections)', () =
     assert.match(f1.html, /Peugeot 208 \(2e génération\), guide d’utilisation édition 01-20 \(p\. 13\s; p\. 9-11\)/u);
   });
 
-  test('§7 FORMAT2-METHODE : « Verdict retenu » ou « édition » dans le texte rédigé, hors citation', async () => {
+  test('§7 FORMAT2-METHODE : « Verdict(s) retenu(s) », « consigne(s) retenue(s) » ou « édition » dans le texte rédigé, hors citation', async () => {
     const { html, site, page } = await construire();
     const { resoudreLignes } = await import('../src/lib/calcul.ts');
     const lignes = resoudreLignes(page.situations, site.voyants).lignes;
@@ -470,6 +470,11 @@ describe('format 2 : corrections après la revue (brief F1.2-corrections)', () =
     const avec = (texte: string): string[] => regles(controlerFormat2(html.replace('<p>Texte du site.</p>', `<p>${texte}</p>`), 'p.html', lignes, phrases));
     assert.ok(!avec('Texte du site.').includes('FORMAT2-METHODE'));
     assert.ok(avec('Verdict retenu en haut de page : oui.').includes('FORMAT2-METHODE'));
+    // F1.4 : formes au pluriel et « consigne retenue », chacune refusée (la page FAP écrivait « Verdicts retenus »).
+    for (const forme of ['Verdicts retenus en haut de page : oui.', 'Le verdict\u00a0retenu est prudent.', 'La consigne retenue est la plus prudente.', 'Les consignes retenues sont celles de Toyota.', 'Consignes retenue ici.']) {
+      assert.ok(avec(forme).includes('FORMAT2-METHODE'), forme);
+    }
+    assert.ok(!avec('La consigne de la notice est retenue par prudence.').includes('FORMAT2-METHODE'), 'mots séparés : pas la formule');
     assert.ok(avec('Le guide, édition 01-20, le dit.').includes('FORMAT2-METHODE'));
     // Seconde revue : une page écrite à la main (« p. » suivi d'un chiffre), hors citation.
     assert.ok(avec('La notice le dit (p. 139).').includes('FORMAT2-METHODE'));
