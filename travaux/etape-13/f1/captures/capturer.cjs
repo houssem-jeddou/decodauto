@@ -75,6 +75,21 @@ async function mesurer(page) {
       }
     }
   }
+  // Sommaire, état court (brief F1.2-corrections, §3) : libellés courts du pilote posés dans la page du voyant moteur pour la
+  // capture seulement (les données n'ont pas de titre court) ; état long : la page telle quelle (captures ci-dessus).
+  const COURTS = ['Peut-on rouler ?', 'Au démarrage', 'Il clignote', 'Rouge ou « Risque casse moteur »', '« Antipollution à contrôler »', 'Peugeot et Citroën', 'Quelle pièce ?', 'Combien de km ?', 'L’éteindre', 'Roule normalement', 'Perte de puissance', 'Contrôle technique', 'Causes', 'Votre marque'];
+  for (const [police, bloquer] of Object.entries(POLICES)) {
+    for (const [largeur, hauteur, echelle, nom] of [[375, 667, 2, '375'], [1366, 800, 1, '1366']]) {
+      const page = await ouvrir(navigateur, PAGES[1].demo, largeur, hauteur, echelle, bloquer, 'demo');
+      for (const etat of ['long', 'court']) {
+        if (etat === 'court') await page.evaluate((c) => document.querySelectorAll('.sommaire').forEach((s) => s.querySelectorAll('a span').forEach((a, i) => { a.textContent = c[i] ?? a.textContent; })), COURTS);
+        await page.evaluate((l) => { const s = document.querySelector(l > 900 ? '.sommaire-cote' : '.sommaire-colonne'); scrollTo(0, s.getBoundingClientRect().top + scrollY - (l > 900 ? 300 : 120)); }, largeur);
+        await page.waitForTimeout(150);
+        await page.screenshot({ path: join(sortie, `demo-sommaire-${etat}-${nom}-${police}.png`) });
+      }
+      await page.close();
+    }
+  }
   await navigateur.close();
   writeFileSync(join(sortie, 'mesures.json'), JSON.stringify(mesures, null, 2) + '\n');
   process.stdout.write(JSON.stringify(mesures, null, 1) + '\n');
