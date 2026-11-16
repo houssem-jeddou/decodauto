@@ -41,12 +41,12 @@ sources:
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-03
-date_modification: 2026-11-14
+date_modification: 2026-11-16
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 03/11/2026 (17 h 32),
 # avec les faits du texte (paquet travaux/etape-6/paquet-6.6a-voyant-moteur.md).
-validation: ceaa32fa0a950647b8b04773dd6d19119eb701a6bdf11ee94044e2f789f46b1f
+validation: 54e8768ab36caaa2c13783854552511c88bf259ca633b23f8ccf5d2587582e08
 causes:
   - cause: Défaut du système antipollution
     explication: "Pour le voyant orange fixe, les notices Peugeot 208, Seat Ibiza, Renault Clio 5 phase 2 et Dacia Sandero 3 désignent le système qui contrôle les gaz d'échappement ; la notice Peugeot 208 cite aussi une défaillance mineure du moteur. Elles ne nomment pas de pièce : elles demandent de consulter un réparateur ou le réseau de la marque."
@@ -67,13 +67,20 @@ causes:
     pieces:
       - injecteurs
       - moteur
+format: 2
+illustration:
+  fichier: voyant-moteur-tableau-de-bord
+  alt: "Le voyant moteur orange allumé au tableau de bord"
+  legende: "Le voyant moteur ressemble à un bloc moteur vu de côté. Orange : fixe ou clignotant ; rouge sur certaines marques."
 ---
 
 ## Peut-on rouler avec le voyant moteur orange allumé ?
 
-Verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne la plus prudente des notices lues, celle de la Toyota Yaris : arrêter immédiatement le véhicule dans un endroit sûr.
+{{repere:moteur-orange-fixe}}
 
-Une idée répandue veut qu'on puisse continuer à rouler avec le voyant moteur orange fixe (jaune dans la notice Seat Ibiza, {{cite:notice-seat-ibiza|p. 93-94}}). Les autres notices lues le permettent en effet, pour aller au garage au plus tôt ou rapidement selon la marque. L'encadré dit quand repartir, et quand faire appel à un garage ou à l'assistance.
+Cette consigne est la plus prudente des notices lues, celle de la Toyota Yaris : arrêter immédiatement le véhicule dans un endroit sûr.
+
+Une idée répandue veut qu'on puisse continuer à rouler avec le voyant moteur orange fixe, que la notice Seat Ibiza dit jaune ({{cite:notice-seat-ibiza|p. 93-94}}). Les autres notices lues le permettent en effet, pour aller au garage au plus tôt ou rapidement selon la marque. L'encadré dit quand repartir, et quand faire appel à un garage ou à l'assistance.
 
 Les notices lues pour cette page sont celles de ces modèles ; pour une autre génération ou un autre modèle, c'est la notice de votre voiture qui fait foi :
 
@@ -88,27 +95,33 @@ Le nom du voyant change d'une notice à l'autre : « voyant de dysfonctionnement
 
 ## Le voyant s'allume au démarrage, puis s'éteint
 
-Dans les notices Renault Clio 5 phase 2 (p. 139) et Dacia Sandero 3 (p. 113), ce voyant s'allume au démarrage du moteur, puis s'éteint ; suivant le véhicule, il s'allume aussi à la coupure du contact. La notice Peugeot 208 précise qu'il doit s'éteindre au démarrage du moteur (p. 15). La consigne de l'encadré vaut quand il reste allumé, ou quand il s'allume en roulant.
+Dans les notices Renault Clio 5 phase 2 et Dacia Sandero 3, ce voyant s'allume au démarrage du moteur, puis s'éteint ; suivant le véhicule, il s'allume aussi à la coupure du contact ({{cite:notice-renault-clio-5|p. 139}} ; {{cite:notice-dacia-sandero-3|p. 113}}). La notice Peugeot 208 précise qu'il doit s'éteindre au démarrage du moteur ({{cite:notice-peugeot-208|p. 15}}). La consigne de l'encadré vaut quand il reste allumé, ou quand il s'allume en roulant.
 
 ## Voyant moteur qui clignote
 
-Verdict retenu en haut de page : {{verdict:moteur-orange-clignotant}}. Dans les notices Peugeot 208 (p. 15) et Seat Ibiza (p. 288), le clignotement annonce une conséquence plus grave que le voyant fixe : le catalyseur risque d'être endommagé, voire détruit.
+{{repere:moteur-orange-clignotant}}
 
-Les notices Renault Clio 5 phase 2 et Dacia Sandero 3 demandent de réduire le régime moteur jusqu'à ce que le clignotement cesse, puis de consulter au plus tôt un représentant de la marque (p. 139 et p. 113) : le clignotement qui cesse ne dispense pas de cette visite.
+Dans les notices Peugeot 208 et Seat Ibiza, le clignotement annonce une conséquence plus grave que le voyant fixe : le catalyseur risque d'être endommagé, voire détruit ({{cite:notice-peugeot-208|p. 15}} ; {{cite:notice-seat-ibiza|p. 288}}).
+
+Les notices Renault Clio 5 phase 2 et Dacia Sandero 3 demandent de réduire le régime moteur jusqu'à ce que le clignotement cesse, puis de consulter au plus tôt un représentant de la marque ({{cite:notice-renault-clio-5|p. 139}} ; {{cite:notice-dacia-sandero-3|p. 113}}) : le clignotement qui cesse ne dispense pas de cette visite.
 
 ## Voyant moteur rouge ou message « Risque casse moteur »
 
-Verdict retenu en haut de page : {{verdict:moteur-rouge}}. Dans la notice Peugeot 208, le voyant d'autodiagnostic moteur rouge signale une défaillance majeure du moteur, et l'arrêt du véhicule est impératif (p. 13). Dans les notices Renault Clio 5 phase 2 et Dacia Sandero 3, le message « Risque casse moteur » impose un arrêt immédiat, moteur coupé et sans le redémarrer (p. 125 et p. 102).
+{{repere:moteur-rouge}}
+
+Dans la notice Peugeot 208, le voyant d'autodiagnostic moteur rouge signale une défaillance majeure du moteur, et l'arrêt du véhicule est impératif ({{cite:notice-peugeot-208|p. 13}}). Dans les notices Renault Clio 5 phase 2 et Dacia Sandero 3, le message « Risque casse moteur » impose un arrêt immédiat, moteur coupé et sans le redémarrer ({{cite:notice-renault-clio-5|p. 125}} ; {{cite:notice-dacia-sandero-3|p. 102}}).
 
 Pour un autre modèle de ces marques, une Clio 4 ou une Mégane par exemple, c'est la notice de votre voiture qui fait foi.
 
 ## Message « Antipollution à contrôler »
 
-Dans la notice Renault Clio 5 phase 2, ce message indique une défaillance du système de dépollution. Il fait partie des messages qui demandent de s'arrêter au plus tôt chez un représentant de la marque, en conduisant avec ménagement ({{cite:notice-renault-clio-5|p. 124}}). Pour le voyant moteur orange fixe, le verdict retenu en haut de page reste : {{verdict:moteur-orange-fixe}}.
+Dans la notice Renault Clio 5 phase 2, ce message indique une défaillance du système de dépollution. Il fait partie des messages qui demandent de s'arrêter au plus tôt chez un représentant de la marque, en conduisant avec ménagement ({{cite:notice-renault-clio-5|p. 124}}). Pour le voyant moteur orange fixe, la consigne de l'encadré reste : {{verdict:moteur-orange-fixe}}.
 
 ## « Défaut moteur », « système antipollution défaillant » : Peugeot et Citroën
 
-Dans les notices Peugeot 208 et Citroën C3, le voyant d'autodiagnostic moteur orange allumé fixe signifie que « le système d'antipollution est défaillant » : elles demandent alors de se rendre rapidement dans le réseau de la marque ou dans un atelier qualifié. Allumé avec le témoin en forme de clé, il signale une défaillance mineure du moteur. En rouge, une défaillance majeure du moteur, pour laquelle elles demandent l'arrêt du véhicule ({{cite:notice-peugeot-208|p. 13 et p. 15}} ; {{cite:notice-citroen-c3|p. 9-11}}). Verdict retenu en haut de page, pour toutes les voitures : {{verdict:moteur-orange-fixe}}.
+Dans les notices Peugeot 208 et Citroën C3, le voyant d'autodiagnostic moteur orange allumé fixe signifie que « le système d'antipollution est défaillant » : elles demandent alors de se rendre rapidement dans le réseau de la marque ou dans un atelier qualifié. Allumé avec le témoin en forme de clé, il signale une défaillance mineure du moteur.
+
+En rouge, ce voyant signale une défaillance majeure du moteur, pour laquelle ces notices demandent l'arrêt du véhicule ({{cite:notice-peugeot-208|p. 13 et p. 15}} ; {{cite:notice-citroen-c3|p. 9-11}}). Pour le voyant orange fixe, la consigne de l'encadré vaut aussi pour ces deux marques : {{verdict:moteur-orange-fixe}}.
 
 Pour un autre modèle de ces marques, une 308, une 3008, une C4 ou une DS3 par exemple, c'est la notice de votre voiture qui fait foi.
 
@@ -118,7 +131,7 @@ Les notices lues ne nomment aucune pièce pour ce voyant, ni vanne EGR ni sonde 
 
 ## Combien de kilomètres peut-on faire ?
 
-Pour le voyant moteur seul, les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : s'arrêter immédiatement (Toyota Yaris), consulter au plus tôt ou rapidement, ou rouler prudemment jusqu'à l'atelier spécialisé le plus proche (Seat Ibiza), selon la marque et selon que le voyant est fixe ou clignote. Verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}.
+Pour le voyant moteur seul, les notices lues ne donnent aucune distance. Elles donnent une consigne à la place : s'arrêter immédiatement (Toyota Yaris), consulter au plus tôt ou rapidement, ou rouler prudemment jusqu'à l'atelier spécialisé le plus proche (Seat Ibiza), selon la marque et selon que le voyant est fixe ou clignote. Fixe ou clignotant, le voyant a le même verdict dans l'encadré : {{verdict:moteur-orange-fixe}}.
 
 Sur un moteur diesel, si le voyant AdBlue s'allume avec le voyant moteur, lisez aussi sa consigne dans la notice de votre voiture.
 
@@ -134,7 +147,7 @@ Les notices lues ne font pas d'exception quand la voiture semble rouler normalem
 
 ## Perte de puissance, moteur qui tourne mal
 
-La notice Seat Ibiza relie ces symptômes au voyant : en cas de panne de combustion, de baisse de puissance ou de fonctionnement irrégulier du moteur, elle demande de faire réviser la voiture par un atelier spécialisé, et précise que le témoin de gaz d'échappement s'allume en général dans ce cas ; le catalyseur risquerait alors d'être endommagé par surchauffe ({{cite:notice-seat-ibiza|p. 289, « Catalyseur »}}). Verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}.
+La notice Seat Ibiza relie ces symptômes au voyant : en cas de panne de combustion, de baisse de puissance ou de fonctionnement irrégulier du moteur, elle demande de faire réviser la voiture par un atelier spécialisé, et précise que le témoin de gaz d'échappement s'allume en général dans ce cas ; le catalyseur risquerait alors d'être endommagé par surchauffe ({{cite:notice-seat-ibiza|p. 289, « Catalyseur »}}). Avec le voyant allumé, fixe ou clignotant, l'encadré dit : {{verdict:moteur-orange-fixe}}.
 
 ## Contrôle technique avec le voyant moteur allumé
 

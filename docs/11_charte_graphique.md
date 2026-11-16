@@ -46,7 +46,8 @@ Le logo « Cadran » et le favicon ne changent pas (demande n° 19, règle 14 e)
 - **Texte** : police du système (`system-ui`), 16 px, interligne 1,55. Encadré : 15 px, interligne 1,38. Signature,
   ligne de transparence, bloc « Notices / Base du coût », mentions et notes : 13 px, couleur douce (`#4b5563`, 6,7 pour 1
   sur le fond de page).
-- **Tailles des titres** : H1 de 1,45 rem sur téléphone et 2,1 rem sur ordinateur ; H1 de l'accueil de 1,85 et 2,5 rem ; H2 de 1,32 rem.
+- **Tailles des titres** : H1 de 1,4 rem sur téléphone et tablette (1,45 au pilote, réduit au lot F2 pour que la première situation tienne dans le premier écran en police de secours, règle 2a) et 2,1 rem sur ordinateur ; H1 de l'accueil de 1,85 et 2,5 rem ; H2 de 1,32 rem.
+- **Ce qui ne se coupe jamais en fin de ligne** (lot F2, validé le 16/11/2026) : le lien « Votre marque » passe en entier à la ligne suivante ; « de » et « à » restent avec la pastille du coût probable (classe `.borne`) ; le libellé d'urgence du tableau des notices tient sur une ligne, sans dépasser de sa carte.
 - **Typographie française** : espaces insécables avant « : ; ! ? » et à l'intérieur des guillemets, entre un nombre et son unité, et après « p. » devant un numéro (format 2) ; séparateur des milliers.
 
 ## 4. Composants
