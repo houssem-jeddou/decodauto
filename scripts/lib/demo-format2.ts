@@ -197,7 +197,8 @@ export const PARAGRAPHES_A_REPRENDRE_DEMO: readonly string[] = ['voyant-moteur',
 
 /**
  * Paires de liens absentes du plan dont une page de démonstration a besoin pour le renvoi « Votre marque » de sa ligne
- * d'écart (revue de F1.3b, B1 : FORMAT2-ECART) : fichier de la page → paire, proposée par Houssem avec le lot F3. Une paire
+ * d'écart (revue de F1.3b, B1 : FORMAT2-ECART) : fichier de la page → paire, proposée avec le lot de la vague B
+ * qui publie la page (revue de la porte F1). Une paire
  * ajoutée au plan rend l'attendu inutile, ce que la construction signale (attendu non rencontré).
  */
 export const PAIRES_MANQUANTES_DEMO: Readonly<Record<string, string>> = {

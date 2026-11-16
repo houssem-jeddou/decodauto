@@ -83,7 +83,8 @@ export function controlerVaguesOuvertes(
 // ---------------------------------------------------------------------------------------------
 // Format des vagues (demande de changement n° 30, lot F1, tâche F1.4 : FORMAT2-VAGUE). Une page des vagues B et C est
 // rédigée au format 2 (src/content, exemples/ et démonstration). Une page de la vague A (en ligne au format 1) passe au
-// format 2 seulement avec son lot (F2 : voyants et outil ; F3 : codes, pneus et obligations, socle) : la pull request du lot
+// format 2 seulement avec son lot (F2 : voyants, outil et accueil, la page 404 suivant l'accueil ; F3 : codes, pneus et
+// obligations, « à propos » et mentions légales ; docs/03 v20) : la pull request du lot
 // inscrit ses pages dans config/lots-format2.json, et la page n'y est admise au format 2 que dans src/content. La
 // construction de démonstration (brouillon jamais validé, jamais déployée) n'est pas concernée par cette seconde règle.
 

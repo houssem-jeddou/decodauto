@@ -3,7 +3,8 @@
 // (demande de changement n° 30, lot F1, tâche F1.3b) : tête de page nuit avec le H1, une phrase, le bouton « Trouver mon
 // voyant » de la charte (vers la page outil, si elle est construite ; le seul de la page : le bandeau n'en a pas sur la 404)
 // et le lien vers l'accueil ; rien d'autre, aucun lien hors du plan du site ; pied de page en bas de l'écran (classe
-// tete-404). La page 404 suit le format de l'accueil.
+// tete-404). La page 404 suit le format de l'accueil : en production, elle passe au format 2 avec lui, au lot F2 (docs/03
+// v20 : l'accueil avancé de F3 à F2, décision de Houssem du 16/11).
 // ---------------------------------------------------------------------------------------------
 import { attributHtml, texteHtml } from './html.ts';
 import { pictogrammeDecoratif } from './composants.ts';

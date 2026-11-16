@@ -5,15 +5,16 @@ format 2 (`npm run demo:format2`), avant (`-avant-`) et après (`-apres-`) la mi
 F1.4. PNG sans perte ; une capture en police de secours identique octet pour octet à celle en police chargée n'est pas
 gardée.
 
-Pages : démonstrations « perte de puissance », « voiture qui broute », « changer la batterie » (tutoriel) ; exemple
-« voiture ne démarre pas » (branche `preparation/etape-10`, version 2, jamais validé), ajouté à la démonstration en local
-et **jamais commité** (deux pièces de `data/couts.json` lui manquent : `pile-de-cle`, `carburant-et-reamorcage`, à ajouter
-avec son lot).
+Pages : démonstrations « perte de puissance », « voiture qui broute », « changer la batterie » (tutoriel). L'exemple
+« voiture ne démarre pas » (branche `preparation/etape-10`, version 2, verdicts jamais validés) a été mesuré de la même façon,
+ajouté en local à la démonstration sans être commité ; ses captures sont sur la branche `preparation/etape-10`, dans
+`travaux/etape-10/recette-porte-10/demande-32/` (brouillon de l'étape 10 : il n'entre pas dans une PR vers `main`, revue de
+la porte F1). Il reste cité ici par ses chiffres.
 
 Fichiers : `<page>-<avant|apres>-<vue>-<chargee|secours>.png`, vues `375-page` (page entière à 375 px), `1366-ecran`
 (premier écran à 1366 × 800), `1366-arbre` (écran qui commence à l'arbre ou aux étapes). Mesures en pixels CSS à 375 × 667 :
 `mesures-avant.json`, `mesures-apres.json` (haut de l'encadré, de l'illustration, du sommaire, de la fiche, de l'arbre ou
-des étapes, des causes ; ordre du sommaire) ; `mesures-format2-avec-exemple.log` : FORMAT2-MESURES sur la démonstration
+des étapes, des causes ; ordre du sommaire) ; `mesures-format2-avec-exemple.txt` : FORMAT2-MESURES sur la démonstration
 avec l'exemple (15 pages, 0 erreur, 4 signalements : illustrations de l'exemple et d'AdBlue au-delà de trois écrans).
 
 | Page | Arbre ou étapes, avant → après | Causes, avant → après |

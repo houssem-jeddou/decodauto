@@ -98,7 +98,7 @@ focus sur fond sombre, captures refaites) ; ce qui reste pour F2, F3 et la vague
     si le plan lie les deux pages (FORMAT2-ECART). **Écart au pilote, à noter à la porte F1** : le pilote répétait le tableau
     des notices du voyant de pression sur la page « pression des pneus » ; il n'y est plus, la ligne d'écart renvoie à la
     page du voyant (un seul tableau par voyant, sur sa page). Paire manquante dans le plan : `batterie-changer` ↔
-    `voyant-batterie` (page « changer la batterie », vague B), proposée par Houssem avec le lot F3 ;
+    `voyant-batterie` (page « changer la batterie », vague B), proposée avec le lot de la vague B qui publie cette page ;
   - *dépannage sur autoroute* : triangle retiré (forme réservée aux verdicts, §1.4 ; docs/10 §4, point 4), cellule et gras
     gardés ;
   - *cas décrits par marque* (téléphone) : une seule carte, un cas par rangée, un seul filet entre deux cas, la marque en
@@ -133,8 +133,10 @@ focus sur fond sombre, captures refaites) ; ce qui reste pour F2, F3 et la vague
   `{{cite:…}}` (règle 2d).
 - **Dépannage sur autoroute** : besoin d'un encart avec la consigne sourcée (Service-public F11056, sans numéro de
   téléphone) : texte nouveau et champ de données. Houssem rédige la demande de changement pour F3.
+
+## Vague B : à reprendre avec le lot de la page
 - **Paire de liens du plan** : `batterie-changer` ↔ `voyant-batterie`, pour le renvoi « Votre marque » de la page « changer
-  la batterie » (vague B).
+  la batterie » ; proposée avec le lot de la vague B qui publie cette page (revue de la porte F1, M4), pas avec F3.
 
 ## Liste de recette (`docs/03`, étape 9) : à ajouter pour les lots au format 2
 - Repères de section : un repère seulement sous un H2 qui pose la question d'une seule ligne de l'encadré (exception explicite

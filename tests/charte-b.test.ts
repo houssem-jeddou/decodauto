@@ -24,7 +24,7 @@ const couleur = (nom: string): string => {
 
 describe('charte B : contrastes (F1.4)', () => {
   test('contour de focus : variable --focus, bleu de la charte sur fond clair, bleu clair sur les surfaces sombres ; 3:1 au moins contre chaque fond', () => {
-    assert.match(css, /a:focus-visible,summary:focus-visible,button:focus-visible\{outline:3px solid var\(--focus,var\(--accent\)\)/);
+    assert.match(css, /a:focus-visible,summary:focus-visible,button:focus-visible,\[tabindex\]:focus-visible\{outline:3px solid var\(--focus,var\(--accent\)\)/);
     assert.match(css, /\.outil-choix input:focus-visible\+label\{outline:3px solid var\(--focus,var\(--accent\)\)/);
     const sombres = /:root \.bandeau,:root \.tete,:root \.hero,:root \.decision,:root \.pied,:root \.voyants,:root \.outil-groupe,:root \.illustration\{--focus:var\(--nuit-lien\)\}/;
     assert.match(css, sombres);

@@ -25,12 +25,12 @@ Preuves de référence (commandes lancées sur la branche ; la CI de la PR les r
   plan `batterie-changer` ↔ `voyant-batterie`) ; liens : 582 internes vérifiés, 0 problème ;
 - `npm run mesures:format2` (FORMAT2-MESURES, Chromium) : 14 pages, 84 mesures, **0 erreur**, 2 signalements (illustration
   AdBlue au-delà de trois écrans, encadré de quatre lignes : règle 2i assouplie par la demande n° 32)
-  (`porte/mesures-format2.log`, `porte/mesures-format2.json`). **Environnement de mesure** : police du système Inter,
+  (`porte/mesures-format2.txt`, `porte/mesures-format2.json`). **Environnement de mesure** : police du système Inter,
   proche des polices des téléphones (Roboto, SF) et celle du poste qui a mesuré le pilote ; la CI l'installe
   (`fonts-inter`) avant les mesures. Avec DejaVu Sans (police par défaut d'un poste Linux, celle de la CI sans ce
   réglage), la première situation de l'outil voyants finit à 673 px (6 px au-delà de 2a) et le bouton du bandeau passe sous
   le nom du site (il débordait de 3 à 9 px avant que le bandeau ne passe à la ligne). Même mesure sur la démonstration construite depuis `main`
-  (464fe7d, avant F1.4) : **50 erreurs** (`porte/mesures-format2-main-464fe7d.log`), corrigées ici (§3).
+  (464fe7d, avant F1.4) : **50 erreurs** (`porte/mesures-format2-main-464fe7d.txt`), corrigées ici (§3).
 
 ## 1. Critères de la ligne 13 de `docs/03` (colonne « Porte de sortie »)
 
@@ -98,7 +98,7 @@ Pixels CSS depuis le haut de la page. Seuils : 667 (2a), 2 001 (2i), 4 002 (2h).
 | `/mentions-legales/` | – | – | – | – | – | – | – | 4 547 | oui | 0 |
 | `/404.html` | – | – | – | – | – | – | – | 667 | – | 0 |
 
-Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/mesures-format2-main-464fe7d.log`) :
+Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/mesures-format2-main-464fe7d.txt`) :
 - **débordement à 320 px** sur les 12 pages qui ont le bouton du bandeau (335 px en police chargée, 342 px en police de
   secours) : sous 360 px, le dessin du bouton s'efface (son texte reste), le nom du site et les marges se resserrent ; le
   tableau de la loi montagne, qui défilait de 9 px dans son bloc, coupe désormais un mot trop long ;
@@ -113,7 +113,8 @@ Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/
    16 h 52 ; elle est mise en œuvre ici (§7). Haut de l'arbre (ou des étapes), avant → après : perte de puissance
    2 874 → 2 314 px ; voiture qui broute 2 076 → 1 855 ; changer la batterie (étapes) 2 411 → 2 190 ; exemple « voiture ne
    démarre pas » (version 2, construit en local) 5 666 → 3 560 px (5 692 → 3 585 en police de secours), sous le seuil de
-   six écrans. À valider sur les captures avant et après (`captures/demande-32/`).
+   six écrans. À valider sur les captures avant et après des démonstrations (`captures/demande-32/`) ; celles de l'exemple,
+   brouillon de l'étape 10, sont sur la branche `preparation/etape-10` (`travaux/etape-10/recette-porte-10/demande-32/`).
 2. **Page outil** :
    - index par paire (pictogramme, couleur), une grille par couleur, au lieu d'une entrée par ligne : change la décision 9
      du paquet 8.1 (04/11) ;
@@ -128,16 +129,42 @@ Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/
    lignes prévu.
 4. **Pression des pneus, écart au pilote** : le pilote répétait le tableau des notices du voyant de pression sur la page ;
    la ligne d'écart renvoie désormais au tableau de la page du voyant (un seul tableau par voyant, sur sa page ; revue de
-   F1.3b). **Recommandation** : valider.
+   F1.3b). **Recommandation** : valider. Capture : `captures/f1.3b/pression-des-pneus-format2-375-ecart-chargee.png`.
 5. **Lien « Votre marque » de la page outil** (décision du 16/11 dans la PR #65) : vers le tableau de la page du voyant quand
    elle est construite ; jamais sur la ligne STOP. Dans l'encadré de l'outil, une page de voyant non construite ne donne pas
-   d'erreur (pas de lien), comme sur les cartes. **Recommandation** : valider.
+   d'erreur (pas de lien), comme sur les cartes. **Recommandation** : valider. Captures :
+   `captures/f1.3a/outil-format2-375-carte-ecart-court-chargee.png`,
+   `captures/f1.3b/outil-format2-375-carte-votre-marque-chargee.png`.
 6. **Sommaire du socle dès deux titres** (F1.4) : la règle 2h demande un sommaire au-delà de six écrans ; les mentions légales
    en font 6,8 avec deux titres. **Recommandation** : valider (deux pastilles, « Mentions légales » et « Confidentialité »).
+   Capture : `captures/f1.3b/mentions-legales-format2-375-ecran-chargee.png`.
 7. **Paire du plan** `batterie-changer` ↔ `voyant-batterie`, pour le lien « Votre marque » de « changer la batterie »
-   (vague B) : à proposer avec ce lot.
+   (vague B) : à proposer avec le lot de la vague B qui publie cette page (et non avec F3).
 8. **Illustrations du code P0420 et de la loi montagne** : empruntées à des pages voisines pour la démonstration, signalées
    comme telles ; les vraies arrivent avec le lot F3.
+9. **Sensibilité à la police du système** (revue de la porte F1). Les règles 2a et 2i se mesurent avec la police du système
+   Inter, proche des polices des téléphones (Roboto, SF) et celle du poste qui a mesuré le pilote ; la CI l'installe
+   (`fonts-inter`) depuis 7e6d5d6, après l'échec du premier passage (e6e35b4, DejaVu Sans). Mesures de la démonstration
+   avec une autre police du système (`FONTCONFIG_FILE`, mêmes 84 mesures) :
+   - **DejaVu Sans** (police par défaut d'un poste Linux, large) : **6 erreurs 2a** : l'outil voyants à 673 px dans les deux
+     polices ; en police de secours, le nom du site passe dans la police du système, le bandeau tient sur deux lignes (+38 px,
+     état dessiné : `captures/bandeau-police-large/`), et la première situation finit à 704 px (AdBlue), 697 px (pression
+     des pneus, verdict et urgence), 693 px (loi montagne), 675 px (changer la batterie) ;
+   - **Liberation Sans** : **0 erreur**.
+   Journaux : `porte/mesures-format2-police-dejavu-sans.txt`, `porte/mesures-format2-police-liberation-sans.txt`.
+   **Recommandation** : garder Inter comme référence des mesures (téléphones) et dire l'écart ici ; un téléphone affiche la
+   police de son système (Roboto, SF), pas DejaVu Sans. Si Houssem veut tenir 2a aussi avec une police large, le bandeau
+   compact (dessin du bouton effacé, aujourd'hui sous 360 px) peut s'étendre jusqu'à 400 px : il tient alors sur une ligne
+   (mesuré à 360 px avec DejaVu Sans) ; à décider sur captures.
+10. **Job « Démonstration du format 2 »** : c'est le seul qui fait tourner FORMAT2-MESURES (et la recette des exemples, sans
+    page au format 2 aujourd'hui) ; il n'est pas exigé par la protection de `main`. Houssem est sollicité pour l'ajouter aux
+    vérifications exigées (réglage du dépôt, hors du code).
+11. **Écart au pilote : bloc « Notices / Base du coût »** détaillé par ligne de l'encadré (« Ligne 1 : d'après… ; Ligne 2 :
+    … », règle 2b, phrases tirées des sources de chaque ligne), plus long que le bloc du pilote. Entre le bas de
+    l'encadré et le haut de l'illustration (signature, ligne de transparence, bloc « Notices ») : AdBlue 483 px contre 352 au
+    pilote, voyant moteur 389 contre 314 (mesures de la revue de la porte). C'est ce qui ne laisse que 19 px de marge à
+    l'illustration du voyant moteur (1 982 px). **Recommandation** : garder (le bloc dit, ligne par ligne, sur quoi repose
+    chaque verdict) ; FORMAT2-MESURES signale l'illustration au-delà de trois écrans (demande n° 32).
 
 ## 5. Ce qui reste pour F2, F3 et la vague B
 
@@ -145,7 +172,9 @@ Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/
   F2 v2) ; réponse directe et question de la pression des pneus ; légendes des illustrations ; textes rédigés sans
   « Verdict retenu », « consigne retenue », éditions ni pages écrites à la main (FORMAT2-METHODE) et en paragraphes de trois
   phrases au plus (FORMAT2-PARAGRAPHES) ; liste des H2 avant et après (2j).
-- **Pages en ligne de la vague A** (F2 : voyants et outil ; F3 : codes, pneus et obligations, socle) : passage au format 2
+- **Pages en ligne de la vague A** (F2 : voyants, outil et **accueil**, avancé de F3 à F2 par `docs/03` v20, décision de
+  Houssem du 16/11 ; **la page 404, qui suit le format de l'accueil, passe en F2 avec lui** ; F3 : codes, pneus et
+  obligations, « à propos » et mentions légales) : passage au format 2
   avec leur lot, inscrites dans `config/lots-format2.json` par la PR du lot (FORMAT2-VAGUE) ; FORMAT2-MESURES sur chaque page.
 - **Recette de l'étape 9** avant chaque fusion : filtre de l'outil, **rendu sur un vrai téléphone**, contour de focus au
   clavier, lecteur d'écran sur les tableaux en cartes.
@@ -154,6 +183,9 @@ Ce que F1.4 a corrigé (mesure de la démonstration de `main`, 464fe7d : `porte/
   panne de la demande n° 32 (FORMAT2-ARBRE-PLACE) ; haut de l'arbre et du visuel donnés dans chaque paquet (signalements de
   FORMAT2-MESURES). Exemple « voiture ne démarre pas » : illustration à 2 406 px (encadré de six lignes, bas à 1 983 px),
   signalée, à dire dans le paquet de la porte 10 ; pièces `pile-de-cle` et `carburant-et-reamorcage` à ajouter avec le lot.
+- **Vague C** : le modèle fluide au format 2 (pas encore dessiné : `modeleDeLaPage` refuse une page fluide au format 2) et
+  la réponse directe des pages huiles et liquides (le schéma la réserve aujourd'hui aux pages pneus et obligations ; l'ouvrir
+  aux pages fluide est une demande de structure).
 - **F3** (noté dans `a-reporter-f1.4.md`) : encart « dépannage sur autoroute » (demande de changement rédigée par Houssem) ;
   « (p. 198) » du tableau de la pression en `{{cite}}` ; question de la page pression revue avec sa réponse directe.
 
@@ -203,6 +235,7 @@ et compléter la puce « Typographie française » :
 | Ligne d'écart | Lien « Votre marque » vers la partie du voyant au tableau des notices : sur la page, ou sur la page du voyant que le plan lie à la page ; page outil : vers la page du voyant quand elle est construite, jamais sur la ligne STOP. |
 | Page du socle et 404 | Tête de page nuit sans encadré, même écart entre la mention et le H1 que les pages éditoriales ; fiche de l'auteur et « Méthode » en cartes ; 404 : phrase, un seul bouton « Trouver mon voyant » (aucun dans le bandeau), lien vers l'accueil, pied de page en bas de l'écran. |
 | Bandeau sous 360 px | Le dessin du bouton « Trouver mon voyant » s'efface, son texte reste ; nom du site et marges resserrés (aucun défilement horizontal à 320 px). |
+| Bandeau sur deux lignes (police large) | Quand le nom du site et le bouton ne tiennent pas sur une ligne (police du système large, comme DejaVu Sans, avec la police de secours), le bouton « Trouver mon voyant » passe sous le nom, aligné à droite ; le bandeau prend environ 38 px de plus ; jamais de débordement horizontal. Captures : `travaux/etape-13/f1/captures/bandeau-police-large/`. |
 
 **§5, règle i** — remplacer la précision du 15/11 par (texte de la demande n° 32) :
 > **2i** (assouplie par la demande de changement n° 32) : le visuel suit immédiatement le bloc « Notices / Base du coût »,
@@ -264,7 +297,18 @@ Champs ajoutés au lot F1 (déjà dans `src/schemas/`) :
 > - le dessin de l'illustration montre où regarder ou quoi faire ;
 > - liste des H2 avant et après (aucune question retirée).
 
-### 6.5 Note datée après le §8 de la demande n° 30 (`travaux/etape-13/demande-changement-30.md`)
+### 6.5 `CLAUDE.md`, « Outil voyants » (corrigé dans cette PR, à confirmer avec la validation de la porte)
+
+> index des dessins entre le filtre et la liste (`data-outil-index`, sans verdict, filtré comme la liste : au format 1, une
+> entrée `data-outil-index-entree` par ligne ; au format 2, `src/lib/outil-format2.ts`, une grille par couleur sous le titre
+> de son groupe et une entrée par paire pictogramme et couleur avec son nombre de cas, cartes rangées par paire, la plus
+> grave d'abord, et sur la carte d'une ligne qui a un écart le lien « Votre marque » vers le tableau des notices de la page
+> du voyant quand elle est construite, jamais sur la ligne STOP ; changements de la décision 9 du paquet 8.1, à valider à la
+> porte F1) ; contrôles OUTIL-*, FORMAT2-ECART.
+
+Aussi corrigé dans `CLAUDE.md` par cette PR : « Modèles de pages », ordre de la page panne (demande n° 32, FORMAT2-ARBRE-PLACE).
+
+### 6.6 Note datée après le §8 de la demande n° 30 (`travaux/etape-13/demande-changement-30.md`)
 
 > **Note du 16/11/2026 (demande de changement n° 32, acceptée par Houssem à 16 h 52)** : la précision 2i est assouplie. Le
 > visuel suit immédiatement le bloc « Notices / Base du coût », sous la ligne de transparence. Le haut du visuel est mesuré
@@ -291,7 +335,7 @@ Acceptée par Houssem le 16/11/2026 à 16 h 52 (texte : branche `etape-13/demand
   l'arbre, police chargée et police de secours) : démonstrations « perte de puissance », « voiture qui broute », « changer la
   batterie », et l'exemple « voiture ne démarre pas » (branche `preparation/etape-10`, version 2, construit en local sans
   être commité : deux pièces manquent à `data/couts.json`, à ajouter avec le lot). Mesures : `mesures-avant.json`,
-  `mesures-apres.json`, `mesures-format2-avec-exemple.log` (FORMAT2-MESURES avec l'exemple : 15 pages, 0 erreur,
+  `mesures-apres.json`, `mesures-format2-avec-exemple.txt` (FORMAT2-MESURES avec l'exemple : 15 pages, 0 erreur,
   4 signalements).
 
 | Page | Arbre ou étapes, avant → après | Causes, avant → après | Illustration | Ordre du sommaire après |
