@@ -27,7 +27,7 @@ ne sont pas touchés.
 ## Mesures (`mesures.json`, `mesures-format2.txt`)
 
 Chromium préinstallé, police du système Inter ; pixels CSS ; police chargée et police de secours. Les valeurs sont les
-mêmes dans les deux polices, sauf la hauteur des pages et la position des étapes du FAP en police de secours.
+mêmes dans les deux polices à 375 px, sauf la hauteur des pages.
 
 | À 375 × 667 | Moteur qui surchauffe | Nettoyer le FAP |
 |---|---|---|
