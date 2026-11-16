@@ -3,6 +3,7 @@
 // lot F1, tâche F1.2 ; src/lib/format2.ts). Appelés par controlerHtml (controle.ts) pour toute page au format 2 :
 //  - FORMAT2-ECART : une ligne de l'encadré dont les marques divergent affiche sa ligne d'écart courte (texte exact, 25 mots
 //    au plus, lien « Votre marque » compris, règle 2b), et une ligne sans écart n'en affiche pas ;
+//  - FORMAT2-REPONSE : la réponse directe d'une page informative est en tête de l'encadré, au texte exact (règle 2c) ;
 //  - FORMAT2-PROVENANCE : le bloc « Notices / Base du coût » suit la ligne de transparence et donne la phrase des sources de
 //    chaque ligne (règle 2b) ;
 //  - FORMAT2-ILLUSTRATION : une seule illustration, juste après ce bloc (règle 2i et précision du 15/11), dessin nommé
@@ -38,7 +39,7 @@ export interface ConstatFormat2 {
 const erreur = (regle: string, message: string, fichier?: string): ConstatFormat2 => ({ regle, gravite: 'erreur', message, fichier });
 
 /** Phrases des sources de chaque ligne (composants.ts, phraseSources), dans l'ordre de l'encadré. */
-export function controlerFormat2(html: string, fichier: string, lignes: readonly LigneResolue[], phrases: readonly string[]): ConstatFormat2[] {
+export function controlerFormat2(html: string, fichier: string, lignes: readonly LigneResolue[], phrases: readonly string[], reponseDirecte?: string): ConstatFormat2[] {
   const constats: ConstatFormat2[] = [];
   const $ = cheerio.load(html);
   const n = normaliserTexte;
@@ -63,6 +64,20 @@ export function controlerFormat2(html: string, fichier: string, lignes: readonly
       if (!n(texte(vue)).includes(n(ligne.ecart_court))) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : la ligne d'écart affiche « ${ligne.ecart_court} »`, fichier));
       if (mots > ECART_COURT_MAX_MOTS) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : ligne d'écart de ${mots} mots, lien compris ; ${ECART_COURT_MAX_MOTS} au plus (règle 2b)`, fichier));
     });
+  }
+
+  // Réponse directe d'une page informative (2c, F1.3b) : en tête de l'encadré, juste après la question et avant la première
+  // situation, au texte exact du contenu ; aucune sur une page qui n'en déclare pas.
+  const reponses = $('[data-reponse-directe]');
+  if (reponseDirecte === undefined) {
+    if (reponses.length > 0) constats.push(erreur('FORMAT2-REPONSE', 'réponse directe affichée alors que la page n\'en déclare pas (reponse_directe)', fichier));
+  } else if (reponses.length !== 1) {
+    constats.push(erreur('FORMAT2-REPONSE', `une réponse directe (data-reponse-directe) en tête de l'encadré ; trouvé : ${reponses.length}`, fichier));
+  } else {
+    const reponse = reponses.first();
+    const place = reponse.parent().is('[data-encadre-decision]') && reponse.prev().is('h2') && reponse.next().find('[data-encadre-ligne]').length > 0;
+    if (!place) constats.push(erreur('FORMAT2-REPONSE', 'la réponse directe est en tête de l\'encadré : juste après la question, avant la première situation (règle 2c)', fichier));
+    if (n(texte(reponse)) !== n(reponseDirecte)) constats.push(erreur('FORMAT2-REPONSE', `la réponse directe affiche « ${reponseDirecte} »`, fichier));
   }
 
   // Bloc « Notices / Base du coût » (2b), juste après la ligne de transparence.

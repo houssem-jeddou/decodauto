@@ -162,7 +162,7 @@ describe('format 2 : modèle des pages voyants', () => {
     const { page } = await pageDemo();
     assert.deepEqual(modeleDeLaPage('voyant', page), { modele: pageVoyantF2 });
     assert.deepEqual(modeleDeLaPage('voyant', { ...page, format: 1 } as PageEditoriale), { modele: pageVoyant });
-    for (const type of ['code-defaut', 'pneus'] as const) assert.match((modeleDeLaPage(type, page) as { absent: string }).absent, /format 2 .* F1\.3/);
+    // Outil : tests/outil-format2.test.ts ; panne et dossier : tests/format2-panne.test.ts ; codes défaut et pneus : tests/format2-f3.test.ts.
   });
 
   test('ordre de la charte graphique §4 : mention, fil, H1, encadré, signature, transparence, notices et coût, illustration, sommaire, texte, causes, tableau, sources ; H1 dans main', async () => {
@@ -302,7 +302,7 @@ describe('format 2 : construction de démonstration', () => {
     const base = JSON.parse(await readFile(join(racine, 'data/voyants.json'), 'utf8')) as unknown[];
     const completee = voyantsAvecBrouillon(base, brouillon) as { id: string; ecart_court?: string; citations: { demande?: string }[] }[];
     // Toutes les citations des lignes du brouillon qui donnent « ce que demande la notice » l'ont ; une ligne qui n'a qu'une
-    // ligne d'écart courte (page de démonstration sans tableau des notices) n'en donne aucune.
+    // ligne d'écart courte (page de démonstration sans tableau des notices, dont « pression-pneus », F1.3b) n'en donne aucune.
     for (const [id, ajout] of Object.entries(brouillon.voyants)) {
       if (ajout.demandes === undefined) assert.ok(ajout.ecart_court !== undefined, id);
       else assert.ok(completee.find((v) => v.id === id)?.citations.every((c) => c.demande !== undefined), id);

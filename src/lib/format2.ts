@@ -17,8 +17,8 @@
 //   [colonne de côté, ordinateur] sommaire collant
 // Le H1 reste dans `main` (Base.astro) : la tête de page est le premier bloc de `main`, la colonne le second.
 //
-// Page outil voyants au format 2 : src/lib/outil-format2.ts (F1.3a). Ce qui n'est pas encore au format 2 (F1.3, à dessiner
-// d'abord) : pages codes, pneus et obligations, socle, 404, panne et dossier ; modeleDeLaPage refuse une telle page au format 2 (la construction échoue).
+// Pages codes, pneus et obligations (pageFormat2, modeles.ts), socle et 404 au format 2 : F1.3b ; page outil voyants :
+// src/lib/outil-format2.ts (F1.3a) ; pages panne et dossier : modeles.ts (F1.3c).
 // Module sans dépendance à l'exécution : tests, démonstration et construction l'utilisent tel quel.
 // ---------------------------------------------------------------------------------------------
 import { attributHtml, decoderEntites, texteHtml } from './html.ts';
@@ -159,6 +159,12 @@ export function piedFormat2(adressePage?: string, adresseConfidentialite?: strin
 /** Tête de page (fond nuit) : mention en tête, fil d'Ariane, H1. */
 export const teteDePage = (filHtml: string, h1: string): string => `<div class="tete">${mentionEnTete()}<div class="tete-int">${filHtml}<h1>${texteHtml(h1)}</h1></div></div>`;
 
+/**
+ * Tête de page du format 2 sans encadré qui la chevauche (socle, 404 ; F1.3b) : mention en tête et H1, sans fil d'Ariane ;
+ * `suite` : ce qui suit le H1 dans la tête (404 : une phrase, le bouton et le lien vers l'accueil).
+ */
+export const teteSeule = (h1: string, suite = ''): string => `<div class="tete tete-seule">${mentionEnTete()}<div class="tete-int"><h1>${texteHtml(h1)}</h1>${suite}</div></div>`;
+
 // ---- Encadré de décision ---------------------------------------------------------------------------
 
 export interface LigneFormat2 {
@@ -212,7 +218,16 @@ export function coutFormat2(cout: CoutResolu, couts: DonneesCouts): string {
     cout.risque !== undefined ? `<p>${texteHtml(libelleRisque(cout.risque))}</p>` : '',
     ...cout.montants.flatMap((id) => {
       const montant = couts.montants.get(id);
-      return montant === undefined ? [] : [`<p class="montant">${texteHtml(montant.texte)} (${texteHtml(datesAffichees(montant).join(', '))})</p>`];
+      if (montant === undefined) return [];
+      const dates = `(${texteHtml(datesAffichees(montant).join(', '))})`;
+      // Dépannage sur autoroute (montant automatique d'une page à verdict d'arrêt, F1.3b) : rangée de l'encart, lisible d'un
+      // coup d'œil : triangle d'alerte (jamais la couleur seule) et objet du montant en gras, texte validé inchangé.
+      if (montant.automatique === 'verdict-arret') {
+        const [objet, ...suite] = montant.texte.split(' : ');
+        const texte = suite.length > 0 ? `<strong>${texteHtml(objet ?? '')}</strong>${texteHtml(` : ${suite.join(' : ')}`)}` : texteHtml(montant.texte);
+        return [`<p class="montant depannage" data-depannage>${ALERTE}<span>${texte} ${dates}</span></p>`];
+      }
+      return [`<p class="montant">${texteHtml(montant.texte)} ${dates}</p>`];
     }),
     ...cout.prisesEnCharge.flatMap((id) => {
       const prise = couts.prises_en_charge.get(id);

@@ -56,10 +56,10 @@ export async function getStaticPaths() {
   const auteurs: AuteurDeclare[] = entreesSocle.flatMap((e) => ((e.data as PageSaisie<'socle'>).id === PAGE_METHODE ? ((e.data as PageSaisie<'socle'>).auteurs ?? []) : []));
   // Pages du socle (livrable 7.2), sauf l'accueil, qui a sa propre route (src/pages/index.astro).
   const socle = entreesSocle.flatMap((entree) => {
-    const page = entree.data as PageSaisie<'socle'>;
+    const lue = entree.data as PageSaisie<'socle'>;
+    // Démonstration du format 2 : pages du socle passées au format 2 par le brouillon, en mémoire.
+    const page = brouillon !== undefined ? pageAvecBrouillon(lue, brouillon) : lue;
     if (page.id === 'accueil') return [];
-    // Format 2 des pages du socle : à dessiner d'abord (lot F1, F1.3).
-    if (page.format === 2) throw new Error(`page « ${page.id} » : le format 2 des pages du socle n'est pas encore livré (lot F1, F1.3 : à dessiner d'abord)`);
     const ligne = site.plan.get(page.id);
     if (ligne === undefined) throw new Error(`page « ${page.id} » absente du plan du site (data/plan-du-site.json)`);
     if ((entree.body ?? '').trim() !== '' && entree.rendered?.html === undefined) throw new Error(`page « ${page.id} » : le texte rédigé (corps Markdown) n'a pas été rendu`);

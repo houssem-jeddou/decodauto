@@ -69,6 +69,22 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
   la page outil) et **docs/10 §4** (bouton sans icône ; introduction de l'outil en deux paragraphes).
   Décision du 16/11 : l'illustration (règle 2i) est gardée sur l'outil (sans elle, la grille commence encore au-delà de trois
   écrans).
+- **§4, pages du lot F3 (F1.3b, 16/11/2026, captures `travaux/etape-13/f1/captures/f1.3b/`)** : variantes proposées, toutes
+  tirées de composants existants :
+  - *fiche du code* et *fiche « Le texte en bref »* : carte du corps (`dl.fiche`) ; le code en chasse fixe, pastille sombre au
+    texte ambre, dans le titre de la fiche ;
+  - *cas décrits par marque* : tableau de la charte, **en cartes sur téléphone bien qu'il n'ait que trois colonnes** (la
+    colonne du texte, longue, y serait illisible : capture `code-p0420-format2-375-par-marque`), « Source : » devant les sources ;
+  - *dépannage sur autoroute* : rangée du coût de l'encadré (cellule sombre, triangle d'alerte ambre, objet du montant en
+    gras), texte validé inchangé ; il reste dans l'encadré (règle 2b : montants et dates dans l'encadré) ;
+  - *page informative* : réponse directe en cellule en tête de l'encadré (déjà dessinée par le pilote) ;
+  - *socle et 404* : tête de page nuit **sans encadré** (`tete-seule` : marge basse réduite), texte sur fond clair ; fiche de
+    l'auteur et « Méthode » en cartes (définitions dans le bloc tableau) ; mentions légales en fiche ; 404 : phrase, bouton
+    ambre « Trouver mon voyant » et lien vers l'accueil dans la tête de page.
+  Point à trancher : le brief demandait un *encart du corps* « dépannage sur autoroute » avec un numéro et une consigne. Aucune
+  donnée validée ne porte ce numéro ni cette consigne (`data/couts.json` ne porte que le forfait réglementé) : les écrire
+  demanderait un texte nouveau, sourcé (fiche Service-public F11056, déjà au registre) et validé, et un champ de données (demande
+  de changement sur la structure). Proposé pour le lot F3, non fait ici.
 
 ## Liste de recette (`docs/03`, étape 9) : à ajouter pour les lots au format 2
 - Repères de section : un repère seulement sous un H2 qui pose la question d'une seule ligne de l'encadré (exception explicite

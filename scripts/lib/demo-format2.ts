@@ -44,6 +44,8 @@ export interface BrouillonFormat2 {
     string,
     {
       illustration: { fichier: string; alt: string; legende: string };
+      /** Réponse directe d'une page informative (règle 2c ; F1.3b : pression des pneus, texte du pilote). */
+      reponse_directe?: string;
       reperes?: { titre: string; repere: string }[];
       /** Phrases du texte rendu réécrites comme au lot F2 (règle 2d : une référence hors parenthèse fait échouer). */
       remplacements?: { avant: string; apres: string }[];
@@ -51,8 +53,10 @@ export interface BrouillonFormat2 {
       texte_a_reprendre?: boolean;
     }
   >;
-  /** Accueil au format 2. */
+  /** Accueil au format 2 (la page 404 suit son format). */
   accueil?: { format: 2 };
+  /** Pages du socle passées au format 2 (F1.3b : « à propos », mentions légales). */
+  socle?: string[];
 }
 
 export async function lireBrouillonFormat2(racine: string): Promise<BrouillonFormat2> {
@@ -110,13 +114,14 @@ export function voyantsAvecBrouillon(voyants: readonly unknown[], brouillon: Bro
   return resultat;
 }
 
-/** Frontmatter d'une page complété du brouillon : format 2 et illustration (pages voyants), format 2 (accueil). */
+/** Frontmatter d'une page complété du brouillon : format 2 et illustration (pages éditoriales), format 2 (accueil, socle). */
 export function pageAvecBrouillon<T>(page: T, brouillon: BrouillonFormat2): T {
   const id = (page as { id?: unknown }).id;
   if (typeof id !== 'string') return page;
   const ajout = brouillon.pages[id];
-  if (ajout !== undefined) return { ...page, format: 2, illustration: ajout.illustration };
+  if (ajout !== undefined) return { ...page, format: 2, illustration: ajout.illustration, ...(ajout.reponse_directe !== undefined && { reponse_directe: ajout.reponse_directe }) };
   if (id === 'accueil' && brouillon.accueil?.format === 2) return { ...page, format: 2 };
+  if (brouillon.socle?.includes(id) === true) return { ...page, format: 2 };
   return page;
 }
 

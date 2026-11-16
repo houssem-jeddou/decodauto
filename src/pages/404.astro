@@ -1,25 +1,36 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+import { cwd } from 'node:process';
 import Base from '../layouts/Base.astro';
 import type { PageSaisie } from '../schemas/pages.ts';
-// La page 404 suit le format de l'accueil (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md, §1).
-const format = (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).find((page) => page.id === 'accueil')?.format ?? 1;
-// Format 2 de la page 404 : à dessiner d'abord (lot F1, F1.3). La démonstration du format 2 (DEMO_FORMAT2=1) ne change que la
-// page d'accueil en mémoire : la 404 y reste au format 1.
-if (format === 2) throw new Error("page 404 : le format 2 n'est pas encore livré (lot F1, F1.3 : à dessiner d'abord)");
+import { DESCRIPTION_404, LIEN_ACCUEIL_404, PHRASE_404, TITLE_404, TITRE_404, page404Format2 } from '../lib/page-404.ts';
+import { ID_OUTIL_VOYANTS } from '../lib/plan.ts';
+import { demoFormat2Active, lireBrouillonFormat2 } from '../../scripts/lib/demo-format2.ts';
+import pictogrammeBouton from '../pictogrammes/moteur.svg?raw';
+// La page 404 suit le format de l'accueil (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md, §1) ;
+// dans la démonstration du format 2 (DEMO_FORMAT2=1, jamais déployée), celui que le brouillon donne à l'accueil.
+const brouillon = demoFormat2Active(process.env) ? await lireBrouillonFormat2(cwd()) : undefined;
+const format = brouillon?.accueil?.format ?? (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).find((page) => page.id === 'accueil')?.format ?? 1;
+// Format 2 (src/lib/page-404.ts, F1.3b) : bouton « Trouver mon voyant » vers la page outil, seulement si elle est construite.
+const outilConstruit = format === 2 && (await getCollection('voyant')).some((page) => (page.data as { outil?: boolean }).outil === true);
+const adresseOutil = outilConstruit ? (await getEntry('plan-du-site', ID_OUTIL_VOYANTS))?.data.adresse : undefined;
+const contenu2 = format === 2 ? page404Format2({ adresseOutil, pictogrammeBouton }) : '';
 ---
 
-<Base
-  titre="Page introuvable : decodauto.com"
-  description="Cette page n'existe pas (ou plus). Revenez à l'accueil de decodauto.com."
-  sansCanonical
-  format={format}
->
-  <h1>Cette page est introuvable</h1>
-  <p>L’adresse demandée n’existe pas, ou le site n’est pas encore en ligne.</p>
-  <p>Vous pouvez&nbsp;:</p>
-  <ul>
-    <li>vérifier l’adresse saisie (elle se termine par une barre oblique&nbsp;: <code>/</code>)&nbsp;;</li>
-    <li><a href="/">revenir à l’accueil de decodauto.com</a>.</li>
-  </ul>
+<Base titre={TITLE_404} description={DESCRIPTION_404} sansCanonical format={format}>
+  {
+    format === 2 ? (
+      <Fragment set:html={contenu2} />
+    ) : (
+      <>
+        <h1>{TITRE_404}</h1>
+        <p>{PHRASE_404}</p>
+        <p>Vous pouvez&nbsp;:</p>
+        <ul>
+          <li>vérifier l’adresse saisie (elle se termine par une barre oblique&nbsp;: <code>/</code>)&nbsp;;</li>
+          <li><a href="/">{LIEN_ACCUEIL_404}</a>.</li>
+        </ul>
+      </>
+    )
+  }
 </Base>

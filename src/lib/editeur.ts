@@ -76,7 +76,7 @@ export function verifierEditeur(e: Editeur = EDITEUR): void {
  * Bloc « Mentions légales » de la page qui porte la politique de confidentialité : éditeur, directeur de la publication,
  * hébergeur, contact, droit de réponse. `contactHtml` est le lien du courriel de contact (site.ts).
  */
-export function mentionsLegalesHtml(contactHtml: string, e: Editeur = EDITEUR): string {
+export function mentionsLegalesHtml(contactHtml: string, e: Editeur = EDITEUR, options: { format2?: boolean } = {}): string {
   verifierEditeur(e);
   const ligne = (id: string, terme: string, valeur: string): string => `<dt>${texteHtml(terme)}</dt><dd data-mention="${attributHtml(id)}">${texteHtml(valeur)}</dd>`;
   // Un numéro de téléphone s'écrit tel quel : la typographie des grands nombres y poserait des espaces insécables au hasard.
@@ -84,7 +84,8 @@ export function mentionsLegalesHtml(contactHtml: string, e: Editeur = EDITEUR): 
   return [
     `<section class="mentions-legales" id="${ID_MENTIONS_LEGALES}" data-mentions-legales aria-labelledby="${ID_MENTIONS_LEGALES}-titre">`,
     `<h2 id="${ID_MENTIONS_LEGALES}-titre">Mentions légales</h2>`,
-    '<dl>',
+    // Format 2 (demande de changement n° 30, F1.3b) : bloc en fiche, carte du corps.
+    options.format2 === true ? '<dl class="fiche">' : '<dl>',
     ligne('editeur-nom', 'Éditeur', e.nom),
     `<dt>Statut</dt><dd data-mention="editeur-statut">${texteHtml(e.statut.charAt(0).toUpperCase() + e.statut.slice(1))}</dd>`,
     ligne('editeur-adresse', 'Adresse', e.adresse),
