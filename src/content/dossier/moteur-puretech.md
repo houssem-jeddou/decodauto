@@ -1,6 +1,6 @@
 ---
-# Page « moteur PureTech » (modèle dossier) de la vague B. Exemple de la porte 10, rédigé le 15 et le 16/11/2026, sources relues à l'écran
-# (travaux/etape-10/textes/), validé par Houssem le 16/11/2026 à 19 h 26 (« Je valide les exemples de la porte 10 »,
+# Page « moteur PureTech » (modèle dossier) de la vague B, rédigée pour la porte 10 le 15 et le 16/11/2026, sources relues à l'écran
+# (travaux/etape-10/textes/), validée par Houssem le 16/11/2026 à 19 h 26 (« Je valide les exemples de la porte 10 »,
 # journal, PR n° 72) dans la version de preparation/etape-10 à b9b0835. Empreinte posée par la pull request du lot B1,
 # sur la base du lot F2 fusionnée. Passée de exemples/ à src/content par cette pull request (règle de passage).
 id: moteur-puretech
