@@ -221,6 +221,11 @@
       "tranche": "reparation"
     },
     {
+      "id": "motoventilateur",
+      "libelle": "Motoventilateur (ventilateur du radiateur)",
+      "tranche": "reparation"
+    },
+    {
       "id": "tuyau-ou-joint-d-echappement",
       "libelle": "Tuyau ou joint d'échappement",
       "tranche": "reparation"
@@ -288,6 +293,11 @@
     {
       "id": "distribution-cassee-ou-usee",
       "libelle": "Distribution cassée ou usée avant l'échéance",
+      "tranche": "organe"
+    },
+    {
+      "id": "joint-de-culasse",
+      "libelle": "Joint de culasse",
       "tranche": "organe"
     },
     {
