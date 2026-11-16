@@ -298,4 +298,24 @@ solliciter que faiblement. Rajoutez dès que possible du supercarburant. »
   puissance importante : contacter dès que possible un réparateur) ; perte de puissance comme signe de surchauffe
   (Toyota p. 322).
 - **`batterie-changer`** : Toyota demande de contacter un réparateur avant de débrancher les bornes (p. 321).
-- Reste à lire : Seat p. 303 mot pour mot (recharge par un atelier spécialisé).
+- **Seat, batterie (p. 301-303, PDF 303-305, relues le 16/11)** : « Tous travaux sur la batterie requièrent des
+  connaissances spécialisées. Nous vous prions de vous rendre chez un partenaire SEAT ou un atelier spécialisé pour les
+  problèmes liés à la batterie : risque de brûlures et d'explosion de la batterie ! » ; « La batterie ne doit être
+  débranchée que dans des cas exceptionnels. » ; débrancher d'abord les câbles négatifs, rebrancher d'abord le positif
+  (p. 301-302) ; « œil magique » (p. 302-303) : deux couleurs, électrolyte trop bas (atelier spécialisé) ou correct
+  (correspondance des couleurs « jaune clair ou incolore » et « noir » à relire sur le rendu de la page : le texte extrait
+  les sépare) ; « La recharge de la batterie du véhicule doit être effectuée par un atelier spécialisé ; en effet, les
+  batteries utilisées sont dotées d'une technologie particulière qui nécessite une limitation de la tension de
+  charge. » ; remplacement : se renseigner auprès d'un Service Technique avant l'achat, batterie Start-Stop remplacée
+  seulement par une batterie de mêmes spécifications.
+- **Conséquence pour `batterie-changer` (16 116 recherches par mois au plus)** : les six notices renvoient le changement
+  de batterie à un professionnel, ou au moins demandent de le consulter d'abord (Renault p. 341 et Dacia p. 302 : toute
+  intervention ; Seat p. 301 et 303 ; Peugeot p. 168 et Citroën p. 114 : versions Stop & Start ; Toyota p. 321 : avant de
+  débrancher les bornes). Un tutoriel « changer sa batterie soi-même » contredirait les notices : la décision de la page
+  est « faites-la changer par un professionnel, selon votre notice », et l'élément unique gagne à devenir le **tableau
+  « ce que dit la notice de votre marque »** (qui la change, batterie Start-Stop, caractéristiques à respecter, ordre de
+  débranchement) plutôt qu'un tutoriel ; consigne du brief à revoir avant la rédaction (proposée par Claude, validée avec
+  le lot).
+- **`batterie-recharger`** : la recharge au chargeur est décrite par Peugeot (p. 187-188), Citroën (p. 137), Renault
+  (p. 362-363) et Dacia (p. 326), avec leurs précautions ; Seat la confie à un atelier spécialisé (p. 303) : la page le
+  montre marque par marque.
