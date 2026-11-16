@@ -33,3 +33,13 @@ phrases coupés à une limite de phrase (28), pronoms de tête de paragraphe rem
 retiré ni renommé, aucun verdict changé. La base porte `ecart_court` (16 lignes) et `demande` (126 citations) : les
 empreintes des lignes et des pages ne correspondent plus (R4-EMPREINTE) jusqu'à la validation du contenu exact.
 Reste pour la pull request du lot F2 : `date_modification` des pages, revue indépendante, validation, empreintes, CI.
+
+## Essai en CI sur les modèles de F1.2 (PR #62, fermée sans fusion, 16/11 vers 4 h 15)
+- Construction de recette avec les 11 pages au format 2 : réussie (aucune erreur de rendu).
+- Script de contrôle : 37 erreurs, toutes des empreintes (26 lignes, 11 pages) ; aucune autre (FORMAT2-*, part citée,
+  titres) ; alertes inchangées.
+- Tests à mettre à jour dans la PR du lot F2 : « empreintes du format 2 » (suppose la base sans donnée du format 2),
+  « format 2 : construction de démonstration » (la démonstration se retire quand les données sont dans la base), tests
+  qui rendent les vraies pages avec le modèle du format 1 (modèles 6.6, panne et dossier, pages rédigées), porte de
+  l'étape 6 (encadrés validés) : ces derniers repassent une fois les empreintes versées après validation.
+- La règle 2d (références hors du texte) attend les corrections de F1.2 (point 7 du brief).
