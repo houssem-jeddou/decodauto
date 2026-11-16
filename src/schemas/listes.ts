@@ -111,6 +111,18 @@ export const SOURCES_PREMIERE_MAIN: readonly CategorieSource[] = [
 ];
 
 /**
+ * Nature d'une source secondaire (demande de changement n° 31, acceptée par Houssem le 16/11/2026) : obligatoire pour une
+ * source de catégorie « secondaire » (contrôle SOURCE-SECONDAIRE-NATURE). Seules ces natures sont admises au registre :
+ *  - « document-technique » : document technique d'un constructeur ou d'un équipementier (bulletin publié par la NHTSA,
+ *    fiche Hella, Bosch, base de diagnostic Ross-Tech) ;
+ *  - « communication-constructeur » : communication publiée par un constructeur (programme de prise en charge…) ;
+ *  - « administration » : publication d'une administration (réponse ministérielle, Service-public.fr).
+ * Un forum, un article de presse ou un blog n'a pas de nature admise : il n'entre pas au registre.
+ */
+export const NATURES_SOURCE_SECONDAIRE = ['document-technique', 'communication-constructeur', 'administration'] as const;
+export type NatureSourceSecondaire = (typeof NATURES_SOURCE_SECONDAIRE)[number];
+
+/**
  * Marques de référence des verdicts de la base voyants (docs/03, règle 10), fixées au début de l'étape 5 par la
  * demande de changement n° 3 : les six premières marques des immatriculations de voitures particulières neuves en
  * France en 2025 (PFA / AAA Data), plus Seat, ajoutée par Houssem (sa notice d'utilisation est publiée en ligne
