@@ -70,7 +70,7 @@
 
 ### Lignes de l'encadré
 1. **Ligne saisie, verdict de sécurité à valider** : « La batterie est déchargée et vous voulez la recharger avec un chargeur » → **Oui, avec précautions** · À faire dans les jours qui viennent · « Utilisez un chargeur prévu pour une batterie au plomb de 12 volts, dans un endroit aéré, en suivant votre notice, ou faites-la recharger par un garage. La notice Seat Ibiza réserve la recharge à un atelier spécialisé. »
-   - Peugeot 208, p. 188, « Recharger la batterie avec un chargeur de batterie » (Oui, avec précautions ; À faire dans les jours qui viennent) : « Dans certains cas, il peut être nécessaire de charger la batterie : – Utilisation du véhicule essentiellement pour des trajets courts. – En prévision d'une immobilisation prolongée de plusieurs semaines. Consulter le réseau PEUGEOT ou un atelier qualifié. Pour recharger soi-même la batterie du véhicule, utiliser uniquement un chargeur compatible avec les batteries au plomb, d'une tension nominale de 12 V. »
+   - Peugeot 208, p. 188, « Recharger la batterie avec un chargeur de batterie » (Oui, avec précautions ; À faire dans les jours qui viennent) : « Dans certains cas, il peut être nécessaire de charger la batterie […]. Consulter le réseau PEUGEOT ou un atelier qualifié. Pour recharger soi-même la batterie du véhicule, utiliser uniquement un chargeur compatible avec les batteries au plomb, d'une tension nominale de 12 V. »
    - Renault Clio 5 phase 2, p. 363, « Branchement d'un chargeur » (Oui, avec précautions ; À faire dans les jours qui viennent) : « Le chargeur doit être compatible avec une batterie de tension nominale de 12 volts. […] Certaines batteries peuvent présenter des spécificités en terme de recharge, prenez conseil auprès de votre Représentant de la marque. »
    - Seat Ibiza, p. 303, « Recharge de la batterie du véhicule » (Oui, avec précautions ; À faire dans les jours qui viennent) : « La recharge de la batterie du véhicule doit être effectuée par un atelier spécialisé ; en effet, les batteries utilisées sont dotées d'une technologie particulière qui nécessite une limitation de la tension de charge. »
 2. **Ligne saisie, verdict de sécurité à valider** : « Le moteur a démarré grâce à une autre batterie (câbles ou booster) » → **Oui, avec précautions** · À faire tout de suite · « Avant de rouler, laissez tourner le moteur, voiture à l'arrêt, au moins 30 minutes pour recharger la batterie. Faites ensuite vérifier la voiture et la batterie dès que possible par un garage, qui remplacera la batterie si nécessaire. »
@@ -124,8 +124,8 @@
 
 ### Lignes de l'encadré
 1. **Ligne saisie, verdict de sécurité à valider** : « La batterie est hors d'usage et doit être remplacée » → **Oui, avec précautions** · À faire dans les jours qui viennent · « Faites-la remplacer par un garage, par une batterie équivalente à celle d'origine. Ne la changez vous-même que si la notice de votre voiture décrit l'opération. »
-   - Renault Clio 5 phase 2, p. 341, « Batterie » (Oui, avec précautions ; À faire dans les jours qui viennent) : « toutes interventions sur la batterie (démontage, débranchement...) doivent impérativement être effectuées par un professionnel spécialisé. Risque de brûlures par chocs électriques. Respectez impérativement les périodicités de remplacement mentionnées dans le document d'entretien sans les dépasser. La batterie étant spécifique, veillez à la faire remplacer par une batterie équivalente. Faites appel à un Représentant de la marque. »
-   - Dacia Sandero 3, p. 302, « Batterie » (Oui, avec précautions ; À faire dans les jours qui viennent) : « toutes interventions sur la batterie (démontage, débranchement...) doivent impérativement être effectuées par un professionnel spécialisé. Risque de brûlures par chocs électriques. Respectez impérativement les périodicités de remplacement mentionnées dans le document d'entretien sans les dépasser. La batterie étant spécifique, veillez à la faire remplacer par une batterie équivalente. Faites appel à un Représentant de la marque. »
+   - Renault Clio 5 phase 2, p. 341, « Batterie » (Oui, avec précautions ; À faire dans les jours qui viennent) : « toutes interventions sur la batterie (démontage, débranchement...) doivent impérativement être effectuées par un professionnel spécialisé. […] La batterie étant spécifique, veillez à la faire remplacer par une batterie équivalente. Faites appel à un Représentant de la marque. »
+   - Dacia Sandero 3, p. 302, « Batterie » (Oui, avec précautions ; À faire dans les jours qui viennent) : « toutes interventions sur la batterie (démontage, débranchement...) doivent impérativement être effectuées par un professionnel spécialisé. […] La batterie étant spécifique, veillez à la faire remplacer par une batterie équivalente. Faites appel à un Représentant de la marque. »
    - Peugeot 208, p. 168, « Batterie 12 V » (Oui, avec précautions ; À faire dans les jours qui viennent) : « Les versions équipées du Stop & Start comportent une batterie au plomb 12 V de technologie et de caractéristiques spécifiques. Son remplacement doit être effectué exclusivement dans le réseau PEUGEOT ou dans un atelier qualifié. »
    - Seat Ibiza, p. 303, « Remplacement de la batterie » (Oui, avec précautions ; À faire dans les jours qui viennent) : « S'il est nécessaire de remplacer la batterie du véhicule, adressez-vous à un Service Technique avant de l'acheter afin de vous informer sur la compatibilité électromagnétique, les dimensions et les exigences en matière d'entretien, de rendement et de sécurité de la nouvelle batterie. »
 2. **Ligne saisie, verdict de sécurité à valider** : « La batterie est endommagée » → **Non, ne poursuivez pas votre trajet** · À faire tout de suite · « Ne l'utilisez plus : risque d'explosion. Faites-la remplacer sans attendre par un garage, ou faites appel à l'assistance. »
@@ -171,3 +171,50 @@
 6. Rebranchez d'abord le câble positif (+), puis le câble négatif (-), sans jamais les intervertir : risque d'incendie des câbles.
 7. Mettez le contact et attendez 1 minute avant de démarrer, puis réinitialisez ce que demande votre notice.
 
+## Points à trancher (avec ma recommandation)
+1. **Batterie gelée** (« batterie de voiture », ligne 4 ; « recharger », ligne 3) : **Non, ne poursuivez pas votre
+   trajet** · À faire tout de suite. La notice Seat Ibiza interdit de démarrer avec des câbles si une batterie est
+   gelée (p. 57), interdit de la recharger et demande de remplacer toute batterie qui a gelé (p. 302) : on ne peut pas
+   rejoindre le garage par ses propres moyens, ce que la grille range à ce niveau (« empêche de rouler jusqu'au
+   garage »). Les notices Peugeot 208 et Citroën C3 interdisent aussi la recharge mais demandent seulement de la faire
+   contrôler (Oui, avec précautions) : écart signalé. **Recommandation : garder.**
+2. **Message « Batterie faible Démarrer moteur »** (« batterie de voiture », ligne 2) : **Oui, avec précautions** · À
+   faire tout de suite (Renault p. 339, Dacia p. 301 : démarrer le moteur ; Dacia : rouler ou attendre que le message
+   disparaisse). **Recommandation : valider.**
+3. **Indicateur coloré** (« batterie de voiture », ligne 3) : **Oui, avec précautions** · dans les jours qui viennent
+   (Seat p. 303 : faire réviser la batterie, la remplacer si nécessaire ; couleurs lues sur le rendu de la page : jaune
+   clair ou incolore, niveau trop bas ; noir, correct). Une seule notice décrit cet indicateur : la page le dit.
+   **Recommandation : valider.**
+4. **Recharger avec un chargeur** (« recharger », ligne 1) : **Oui, avec précautions** · dans les jours qui viennent.
+   Peugeot p. 188 et Renault p. 363 décrivent la recharge par soi-même (chargeur 12 V) ; Seat p. 303 la réserve à un
+   atelier spécialisé : même niveau, l'action le dit. **Recommandation : valider.**
+5. **Remplacement** (« changer », ligne 1) : **Oui, avec précautions** · dans les jours qui viennent. Les extraits
+   Renault p. 341 et Dacia p. 302 contiennent « Faites appel à un Représentant de la marque » : la grille range « faire
+   appel au réseau » au niveau « Non, ne poursuivez pas votre trajet » quand il s'agit d'une panne qui empêche de
+   rouler ; ici, la consigne porte sur qui remplace la batterie, pas sur la conduite (principe 1 : classer selon le
+   sens, pas le seul verbe). Le contrôle signalera R3-NIVEAU-A-VERIFIER (alerte, non bloquante). **Recommandation :
+   garder Oui, avec précautions.**
+6. **Batterie endommagée** (« changer », ligne 2) : **Non, ne poursuivez pas votre trajet** · À faire tout de suite
+   (Seat p. 302 : ne pas l'utiliser, risque d'explosion, la remplacer immédiatement). **Recommandation : valider.**
+7. **Après le rebranchement** (« changer », lignes 3 et 4) : **Oui, vous pouvez rouler** · aucune action (Peugeot
+   p. 190, Citroën p. 139 : attendre 1 minute contact mis ; Stop & Start parfois indisponible au trajet suivant,
+   jusqu'à environ 8 heures). **Recommandation : valider.**
+8. **Consignes des briefs de la vague B** (proposées le 15/11, `travaux/etape-10/briefs/`) : validées avec ce lot
+   pour ses trois pages. Écart au brief de « changer » : les étapes ne décrivent que ce que décrivent les notices Seat
+   Ibiza et Toyota Yaris (ordre des câbles), et la décision en tête renvoie au professionnel quand la notice le
+   demande. **Recommandation : valider.**
+9. **Source nouvelle** : `varta-interpretation-tests` (VARTA, document technique, demande n° 31) pour les valeurs de
+   tension (12,8 V chargée ; recharger sous 12,4 V en circuit ouvert), citées dans le texte seulement, jamais pour un
+   verdict. **Recommandation : valider.**
+10. **Tutoriel « changer »** : difficulté « difficile », parce que quatre notices sur six réservent l'opération à un
+    professionnel ou demandent de le consulter. **Recommandation : valider.**
+
+## Recette locale, revue indépendante
+À compléter : recette complète des trois pages (après la correction des extraits de plus de 400 caractères et la
+pull request sur les lignes d'écart des lignes saisies), puis revue indépendante (une seule).
+
+## Ligne de validation proposée
+« Je valide le lot B2 : batterie de voiture (cinq lignes : voyants faibles, message de batterie faible, indicateur
+coloré, batterie gelée, voyant batterie de la base), recharger la batterie (trois lignes : chargeur, après un démarrage
+avec une autre batterie, batterie gelée) et changer la batterie (quatre lignes : remplacement, batterie endommagée,
+après le rebranchement, Stop & Start), leurs coûts, causes, sources, arbre, étapes et tableaux. »
