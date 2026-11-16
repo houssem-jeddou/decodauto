@@ -14,6 +14,8 @@ export interface LigneResolue {
   /** Sources citées, sans doublon (calculées depuis les citations). */
   sources: readonly string[];
   ecart_marques?: string | undefined;
+  /** Ligne d'écart courte du format 2 (demande de changement n° 30, règle 2b), si elle est saisie. */
+  ecart_court?: string | undefined;
   origine: 'base' | 'page';
   voyant?: string;
   voyant_lie?: string | undefined;
@@ -42,6 +44,7 @@ export function resoudreLignes(
         citations: voyant.citations,
         sources: sourcesCitees(voyant.citations),
         ecart_marques: voyant.ecart_marques,
+        ecart_court: voyant.ecart_court,
         origine: 'base',
         voyant: voyant.id,
       });
@@ -60,6 +63,7 @@ export function resoudreLignes(
         citations: ligne.citations,
         sources: sourcesCitees(ligne.citations),
         ecart_marques: ligne.ecart_marques,
+        ecart_court: ligne.ecart_court,
         origine: 'page',
         voyant_lie: ligne.voyant_lie,
       });

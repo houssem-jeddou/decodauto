@@ -1,7 +1,10 @@
 // Script de contrôle lancé à chaque construction (npm run build).
 // Applique les règles de docs/08 §3, la cohérence de non-indexation et les garde-fous du dépôt.
-// Usage : node scripts/controle.ts [--dist dist] [--exemples [--attendu CODE@fichier[@extrait]]…] [--echouer-sur CODE[,CODE…]]
+// Usage : node scripts/controle.ts [--dist dist] [--exemples [--attendu CODE@fichier[@extrait]]… | --demo-format2] [--echouer-sur CODE[,CODE…]]
 //   --exemples : construction de recette des exemples rédigés (exemples/, dist-exemples ; jamais déployée).
+//   --demo-format2 : construction de démonstration du format 2 (DEMO_FORMAT2=1, dist-demo-format2 ; jamais déployée) : le
+//                    brouillon du format 2 s'applique aux données lues, et ses empreintes fausses sont attendues
+//                    (scripts/lib/demo-format2.ts).
 //   --attendu : erreur attendue de la construction de recette (scripts/lib/attendus.ts) ; refusé sans --exemples.
 //   --echouer-sur CODES : en plus des erreurs, fait échouer le script si une alerte porte l'un de ces codes
 //                         (le workflow hebdomadaire l'utilise avec R5-REVUE-DEPASSEE, COUT-A-REVERIFIER et
@@ -14,6 +17,7 @@ import { codeSortie, codesEchec, sontBloquants } from '../src/lib/controle.ts';
 import { modeIndexation } from '../src/lib/indexation.ts';
 import { controlerSite } from './lib/controler-site.ts';
 import { appliquerAttendus, lireAttendus, refusRecette } from './lib/attendus.ts';
+import { attendusDemoFormat2, lireBrouillonFormat2 } from './lib/demo-format2.ts';
 
 const racine = cwd();
 const indice = argv.indexOf('--dist');
@@ -38,8 +42,10 @@ if (refus !== undefined) {
   stdout.write(`ERREUR ${refus}\n`);
   exit(2);
 }
-const attendus = lireAttendus(argv);
-const bilanSite = await controlerSite({ racine, dist, aujourdhui: aujourdhui(), indexable: mode.indexable, exemples });
+const demoFormat2 = argv.includes('--demo-format2');
+const brouillon = demoFormat2 ? await lireBrouillonFormat2(racine) : undefined;
+const attendus = [...lireAttendus(argv), ...(brouillon !== undefined ? attendusDemoFormat2(brouillon, (id) => `src/content/voyant/${id}.md`) : [])];
+const bilanSite = await controlerSite({ racine, dist, aujourdhui: aujourdhui(), indexable: mode.indexable, exemples, brouillonFormat2: brouillon });
 const { informations, pagesEditoriales } = bilanSite;
 const { constats, absorbes } = appliquerAttendus(bilanSite.constats, attendus);
 

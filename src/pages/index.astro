@@ -6,7 +6,10 @@ import { getCollection } from 'astro:content';
 import { cwd } from 'node:process';
 import Base from '../layouts/Base.astro';
 import { PAGE_METHODE } from '../lib/charte.ts';
-import { DESCRIPTION_ACCUEIL, TITLE_ACCUEIL, accueilHtml, pagesListees } from '../lib/accueil.ts';
+import { DESCRIPTION_ACCUEIL, ILLUSTRATION_ACCUEIL, TITLE_ACCUEIL, accueilFormat2Html, accueilHtml, grilleDesVoyants, pagesListees } from '../lib/accueil.ts';
+import { mentionEnTete } from '../lib/composants.ts';
+import { illustrationAccueil, tuile } from '../lib/format2.ts';
+import { demoFormat2Active, lireBrouillonFormat2, pageAvecBrouillon } from '../../scripts/lib/demo-format2.ts';
 import { scriptsAccueil } from '../lib/donnees-structurees.ts';
 import { donneesDuSite } from '../../scripts/lib/donnees-site.ts';
 import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
@@ -21,11 +24,30 @@ const collections = [
 ];
 const libelles = new Map(collections.flat().map((entree) => [(entree.data as PageEditoriale).id, (entree.data as PageEditoriale).libelle_court]));
 const { site } = await donneesDuSite(cwd(), libelles, new Date());
-const aProposEcrite = (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).find((page) => page.id === PAGE_METHODE);
+// Construction de démonstration du format 2 (DEMO_FORMAT2=1, jamais déployée) : l'accueil passe au format 2 en mémoire.
+const brouillon = demoFormat2Active(process.env) ? await lireBrouillonFormat2(cwd()) : undefined;
+const pagesDuSocle = (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).map((page) => (brouillon !== undefined ? pageAvecBrouillon(page, brouillon) : page));
+const aProposEcrite = pagesDuSocle.find((page) => page.id === PAGE_METHODE);
+// Format de lecture de l'accueil (demande de changement n° 30, lot F1) : champ `format` de sa fiche du socle, 1 par défaut.
+// Démonstration du format 2 : l'accueil n'a pas encore de fiche dans src/content/socle (elle viendra au lot F3) ; le brouillon le passe au format 2.
+const format = brouillon?.accueil?.format ?? pagesDuSocle.find((page) => page.id === 'accueil')?.format ?? 1;
 const aPropos = aProposEcrite !== undefined ? { adresse: site.plan.get(PAGE_METHODE)?.adresse ?? '', libelle: aProposEcrite.libelle_court ?? aProposEcrite.title } : undefined;
-const html = accueilHtml({ pages: pagesListees(site.plan, libelles), aPropos: aPropos !== undefined && aPropos.adresse !== '' ? aPropos : undefined });
+const donneesAccueil = { pages: pagesListees(site.plan, libelles), aPropos: aPropos !== undefined && aPropos.adresse !== '' ? aPropos : undefined };
+// Format 2 (src/lib/accueil.ts, accueilFormat2Html) : grille des voyants dont la page est construite, illustration du combiné
+// si son dessin existe (affichée sur ordinateur).
+const html =
+  format === 2
+    ? accueilFormat2Html({
+        ...donneesAccueil,
+        grille: grilleDesVoyants(site.voyants.values(), site.plan, libelles, site.pictogrammes),
+        // Illustration exigée au format 2 (illustrationAccueil échoue sans elle).
+        illustration: illustrationAccueil(site.illustrations, ILLUSTRATION_ACCUEIL),
+        mention: mentionEnTete(),
+        tuile,
+      })
+    : accueilHtml(donneesAccueil);
 ---
 
-<Base titre={TITLE_ACCUEIL} description={DESCRIPTION_ACCUEIL} donneesStructurees={scriptsAccueil()}>
+<Base titre={TITLE_ACCUEIL} description={DESCRIPTION_ACCUEIL} donneesStructurees={scriptsAccueil()} format={format}>
   <Fragment set:html={html} />
 </Base>

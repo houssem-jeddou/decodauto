@@ -366,7 +366,7 @@ describe('CI : exécuteur, cache et stockage (demande n° 27)', () => {
   test('le cache npm de GitHub ne sert que sur ses serveurs, jamais sur l\'exécuteur du PC', async () => {
     const ci = await lireCi();
     const caches = [...ci.matchAll(/\n {10}cache: (.*)\n/g)].map((m) => m[1]);
-    assert.equal(caches.length, 4, 'quatre étapes setup-node déclarent un cache');
+    assert.equal(caches.length, 5, 'cinq étapes setup-node déclarent un cache (dont la démonstration du format 2, lot F1)');
     const expression = "${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}";
     for (const c of caches) assert.equal(c, expression);
     // Évaluation de l'expression : une variable absente vaut une chaîne vide chez GitHub ; '' (aucun cache) est faux,

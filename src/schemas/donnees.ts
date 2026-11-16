@@ -93,6 +93,8 @@ export type Source = z.infer<typeof sourceSchema>;
  *    Les notices d'au moins MARQUES_MIN marques de référence, de GROUPES_MIN groupes, sont citées ; le verdict le
  *    plus prudent l'emporte (docs/03 règle 10) ;
  *  - `ecart_marques` : obligatoire quand les citations ne donnent pas toutes le même niveau ; dit l'écart au lecteur ;
+ *  - `ecart_court` : la ligne d'écart du format 2 (25 mots au plus avec son lien, marques plus et moins strictes nommées ;
+ *    demande de changement n° 30, règle 2b), validée avec la ligne ;
  *  - `validation` : empreinte de la ligne validée par Houssem (voir src/lib/empreinte.ts).
  */
 export const voyantBaseSchema = z.strictObject({
@@ -108,6 +110,7 @@ export const voyantBaseSchema = z.strictObject({
   action: texte,
   citations: z.array(citationSchema).min(1),
   ecart_marques: texte.optional(),
+  ecart_court: texte.optional(),
   validation: hashHex,
 });
 export type VoyantBase = z.infer<typeof voyantBaseSchema>;
