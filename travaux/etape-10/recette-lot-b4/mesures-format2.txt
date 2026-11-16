@@ -1,0 +1,141 @@
+Brouillon, jamais validé. node scripts/mesurer-format2.ts --dist dist-exemples (copie de travail séparée, voir controle.txt, point 3), Chromium, police du système Inter, 16/11/2026. Toutes les pages au format 2 de la construction sont mesurées (lot F2 et lots B2 à b4 compris).
+
+FORMAT2-MESURES : 21 page(s) au format 2 dans dist-exemples
+Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situation | Bas de l’encadré | Illustration | Après « Notices » | Arbre ou étapes | Hauteur | Sommaire | Largeur de page | Débordements
+/ | 320 | chargée | – | – | – | – | 0 | non | – | 2464 | non | 320 | 0
+/ | 375 | chargée | – | – | – | – | 0 | non | – | 2324 | non | 375 | 0
+/ | 1366 | chargée | – | – | – | – | 97 | non | – | 1415 | non | 1366 | 0
+/404.html | 320 | chargée | – | – | – | – | – | non | – | 640 | non | 320 | 0
+/404.html | 375 | chargée | – | – | – | – | – | non | – | 667 | non | 375 | 0
+/404.html | 1366 | chargée | – | – | – | – | – | non | – | 800 | non | 1366 | 0
+/batterie-voiture/ | 320 | chargée | – | 413 | 603 | 2217 | 2758 | oui | 3860 | 12347 | oui | 320 | 0
+/batterie-voiture/ | 375 | chargée | – | 371 | 520 | 1903 | 2386 | oui | 3470 | 10865 | oui | 375 | 0
+/batterie-voiture/ | 1366 | chargée | – | 268 | 335 | 1107 | 1361 | oui | 2261 | 7175 | oui | 1366 | 0
+/batterie-voiture/changer/ | 320 | chargée | – | 418 | 546 | 1550 | 1959 | oui | 3940 | 9210 | oui | 320 | 0
+/batterie-voiture/changer/ | 375 | chargée | – | 377 | 464 | 1269 | 1640 | oui | 3457 | 8126 | oui | 375 | 0
+/batterie-voiture/changer/ | 1366 | chargée | – | 250 | 295 | 791 | 988 | oui | 2431 | 5403 | oui | 1366 | 0
+/batterie-voiture/recharger/ | 320 | chargée | – | 459 | 608 | 1510 | 1938 | oui | 3883 | 9310 | oui | 320 | 0
+/batterie-voiture/recharger/ | 375 | chargée | – | 377 | 505 | 1270 | 1622 | oui | 3409 | 8139 | oui | 375 | 0
+/batterie-voiture/recharger/ | 1366 | chargée | – | 287 | 353 | 796 | 993 | oui | 2411 | 5449 | oui | 1366 | 0
+/bruit-moteur/ | 320 | chargée | – | 453 | 602 | 1959 | 2406 | oui | 3455 | 8077 | oui | 320 | 0
+/bruit-moteur/ | 375 | chargée | – | 371 | 479 | 1715 | 2105 | oui | 3112 | 7102 | oui | 375 | 0
+/bruit-moteur/ | 1366 | chargée | – | 272 | 338 | 1094 | 1310 | oui | 2210 | 5125 | oui | 1366 | 0
+/fumee-echappement/ | 320 | chargée | – | 459 | 567 | 1545 | 1973 | oui | 3071 | 8324 | oui | 320 | 0
+/fumee-echappement/ | 375 | chargée | – | 377 | 464 | 1326 | 1696 | oui | 2752 | 7209 | oui | 375 | 0
+/fumee-echappement/ | 1366 | chargée | – | 287 | 332 | 847 | 1063 | oui | 1963 | 5073 | oui | 1366 | 0
+/moteur-qui-surchauffe/ | 320 | chargée | – | 488 | 761 | 2278 | 2838 | oui | 3918 | 11449 | oui | 320 | 0
+/moteur-qui-surchauffe/ | 375 | chargée | – | 409 | 641 | 1987 | 2471 | oui | 3508 | 10127 | oui | 375 | 0
+/moteur-qui-surchauffe/ | 1366 | chargée | – | 272 | 380 | 1181 | 1453 | oui | 2333 | 6847 | oui | 1366 | 0
+/nettoyer-fap/ | 320 | chargée | – | 434 | 645 | 1184 | 1612 | oui | 3331 | 7749 | oui | 320 | 0
+/nettoyer-fap/ | 375 | chargée | – | 390 | 580 | 1038 | 1408 | oui | 3014 | 6832 | oui | 375 | 0
+/nettoyer-fap/ | 1366 | chargée | – | 272 | 359 | 646 | 843 | oui | 2216 | 4800 | oui | 1366 | 0
+/voyants/ | 320 | chargée | – | 543 | 733 | 1709 | 2156 | oui | – | 25970 | oui | 320 | 0
+/voyants/ | 375 | chargée | – | 486 | 635 | 1452 | 1823 | oui | – | 22178 | oui | 375 | 0
+/voyants/ | 1366 | chargée | – | 379 | 445 | 913 | 1128 | oui | – | 13136 | oui | 1366 | 0
+/voyants/abs-esp/ | 320 | chargée | – | 468 | 617 | 2231 | 2735 | oui | – | 15521 | oui | 320 | 0
+/voyants/abs-esp/ | 375 | chargée | – | 409 | 537 | 1893 | 2320 | oui | – | 13522 | oui | 375 | 0
+/voyants/abs-esp/ | 1366 | chargée | – | 272 | 338 | 1079 | 1314 | oui | – | 8535 | oui | 1366 | 0
+/voyants/adblue/ | 320 | chargée | – | 534 | 682 | 2669 | 3229 | oui | – | 16059 | oui | 320 | 0
+/voyants/adblue/ | 375 | chargée | – | 491 | 598 | 2277 | 2761 | oui | – | 13957 | oui | 375 | 0
+/voyants/adblue/ | 1366 | chargée | – | 324 | 390 | 1254 | 1507 | oui | – | 8493 | oui | 1366 | 0
+/voyants/airbag/ | 320 | chargée | – | 485 | 654 | 1205 | 1652 | oui | – | 10333 | oui | 320 | 0
+/voyants/airbag/ | 375 | chargée | – | 447 | 575 | 1027 | 1416 | oui | – | 9056 | oui | 375 | 0
+/voyants/airbag/ | 1366 | chargée | – | 287 | 353 | 637 | 872 | oui | – | 5790 | oui | 1366 | 0
+/voyants/batterie/ | 320 | chargée | – | 493 | 704 | 1070 | 1460 | oui | – | 9605 | oui | 320 | 0
+/voyants/batterie/ | 375 | chargée | – | 434 | 603 | 908 | 1260 | oui | – | 8393 | oui | 375 | 0
+/voyants/batterie/ | 1366 | chargée | – | 272 | 359 | 542 | 739 | oui | – | 5399 | oui | 1366 | 0
+/voyants/direction/ | 320 | chargée | – | 518 | 666 | 1498 | 1964 | oui | – | 11317 | oui | 320 | 0
+/voyants/direction/ | 375 | chargée | – | 458 | 586 | 1262 | 1670 | oui | – | 10007 | oui | 375 | 0
+/voyants/direction/ | 1366 | chargée | – | 272 | 338 | 726 | 942 | oui | – | 6381 | oui | 1366 | 0
+/voyants/fap/ | 320 | chargée | – | 456 | 666 | 1865 | 2350 | oui | – | 12331 | oui | 320 | 0
+/voyants/fap/ | 375 | chargée | – | 415 | 605 | 1572 | 1999 | oui | – | 10491 | oui | 375 | 0
+/voyants/fap/ | 1366 | chargée | – | 272 | 359 | 895 | 1130 | oui | – | 6481 | oui | 1366 | 0
+/voyants/frein/ | 320 | chargée | – | 531 | 721 | 1512 | 1903 | oui | – | 12963 | oui | 320 | 0
+/voyants/frein/ | 375 | chargée | – | 453 | 602 | 1315 | 1648 | oui | – | 11370 | oui | 375 | 0
+/voyants/frein/ | 1366 | chargée | – | 324 | 390 | 829 | 1026 | oui | – | 7428 | oui | 1366 | 0
+/voyants/huile/ | 320 | chargée | – | 455 | 604 | 1854 | 2358 | oui | – | 13440 | oui | 320 | 0
+/voyants/huile/ | 375 | chargée | – | 371 | 479 | 1552 | 1979 | oui | – | 11924 | oui | 375 | 0
+/voyants/huile/ | 1366 | chargée | – | 272 | 338 | 920 | 1174 | oui | – | 7528 | oui | 1366 | 0
+/voyants/moteur/ | 320 | chargée | – | 430 | 621 | 1883 | 2330 | oui | – | 13991 | oui | 320 | 0
+/voyants/moteur/ | 375 | chargée | – | 371 | 520 | 1571 | 1961 | oui | – | 12234 | oui | 375 | 0
+/voyants/moteur/ | 1366 | chargée | – | 272 | 338 | 899 | 1115 | oui | – | 7954 | oui | 1366 | 0
+/voyants/prechauffage/ | 320 | chargée | – | 504 | 570 | 1606 | 2072 | oui | – | 7700 | oui | 320 | 0
+/voyants/prechauffage/ | 375 | chargée | – | 461 | 506 | 1367 | 1776 | oui | – | 6801 | oui | 375 | 0
+/voyants/prechauffage/ | 1366 | chargée | – | 309 | 334 | 819 | 1054 | oui | – | 4669 | oui | 1366 | 0
+/voyants/pression-pneus/ | 320 | chargée | – | 534 | 765 | 1515 | 1943 | oui | – | 12242 | oui | 320 | 0
+/voyants/pression-pneus/ | 375 | chargée | – | 455 | 645 | 1275 | 1646 | oui | – | 10832 | oui | 375 | 0
+/voyants/pression-pneus/ | 1366 | chargée | – | 272 | 359 | 700 | 915 | oui | – | 6876 | oui | 1366 | 0
+/ | 320 | secours | – | – | – | – | 0 | non | – | 2464 | non | 320 | 0
+/ | 375 | secours | – | – | – | – | 0 | non | – | 2357 | non | 375 | 0
+/ | 1366 | secours | – | – | – | – | 97 | non | – | 1415 | non | 1366 | 0
+/404.html | 320 | secours | – | – | – | – | – | non | – | 640 | non | 320 | 0
+/404.html | 375 | secours | – | – | – | – | – | non | – | 667 | non | 375 | 0
+/404.html | 1366 | secours | – | – | – | – | – | non | – | 800 | non | 1366 | 0
+/batterie-voiture/ | 320 | secours | – | 413 | 603 | 2217 | 2758 | oui | 3860 | 12397 | oui | 320 | 0
+/batterie-voiture/ | 375 | secours | – | 396 | 545 | 1927 | 2411 | oui | 3495 | 10915 | oui | 375 | 0
+/batterie-voiture/ | 1366 | secours | – | 268 | 335 | 1107 | 1361 | oui | 2261 | 7175 | oui | 1366 | 0
+/batterie-voiture/changer/ | 320 | secours | – | 418 | 546 | 1550 | 1959 | oui | 3940 | 9210 | oui | 320 | 0
+/batterie-voiture/changer/ | 375 | secours | – | 377 | 464 | 1269 | 1640 | oui | 3457 | 8126 | oui | 375 | 0
+/batterie-voiture/changer/ | 1366 | secours | – | 250 | 295 | 791 | 988 | oui | 2431 | 5403 | oui | 1366 | 0
+/batterie-voiture/recharger/ | 320 | secours | – | 459 | 608 | 1510 | 1938 | oui | 3883 | 9336 | oui | 320 | 0
+/batterie-voiture/recharger/ | 375 | secours | – | 377 | 505 | 1270 | 1622 | oui | 3409 | 8164 | oui | 375 | 0
+/batterie-voiture/recharger/ | 1366 | secours | – | 287 | 353 | 796 | 993 | oui | 2411 | 5449 | oui | 1366 | 0
+/bruit-moteur/ | 320 | secours | – | 453 | 602 | 1959 | 2406 | oui | 3481 | 8102 | oui | 320 | 0
+/bruit-moteur/ | 375 | secours | – | 371 | 479 | 1715 | 2105 | oui | 3112 | 7102 | oui | 375 | 0
+/bruit-moteur/ | 1366 | secours | – | 272 | 338 | 1094 | 1310 | oui | 2210 | 5125 | oui | 1366 | 0
+/fumee-echappement/ | 320 | secours | – | 459 | 567 | 1545 | 1973 | oui | 3071 | 8324 | oui | 320 | 0
+/fumee-echappement/ | 375 | secours | – | 377 | 464 | 1326 | 1696 | oui | 2752 | 7235 | oui | 375 | 0
+/fumee-echappement/ | 1366 | secours | – | 287 | 332 | 847 | 1063 | oui | 1963 | 5073 | oui | 1366 | 0
+/moteur-qui-surchauffe/ | 320 | secours | – | 488 | 761 | 2278 | 2838 | oui | 3918 | 11449 | oui | 320 | 0
+/moteur-qui-surchauffe/ | 375 | secours | – | 409 | 641 | 1987 | 2471 | oui | 3508 | 10152 | oui | 375 | 0
+/moteur-qui-surchauffe/ | 1366 | secours | – | 272 | 380 | 1181 | 1453 | oui | 2333 | 6847 | oui | 1366 | 0
+/nettoyer-fap/ | 320 | secours | – | 434 | 645 | 1184 | 1612 | oui | 3357 | 7851 | oui | 320 | 0
+/nettoyer-fap/ | 375 | secours | – | 390 | 580 | 1038 | 1408 | oui | 3014 | 6832 | oui | 375 | 0
+/nettoyer-fap/ | 1366 | secours | – | 272 | 359 | 646 | 843 | oui | 2216 | 4800 | oui | 1366 | 0
+/voyants/ | 320 | secours | – | 543 | 733 | 1709 | 2156 | oui | – | 26021 | oui | 320 | 0
+/voyants/ | 375 | secours | – | 486 | 635 | 1452 | 1823 | oui | – | 22228 | oui | 375 | 0
+/voyants/ | 1366 | secours | – | 379 | 445 | 913 | 1128 | oui | – | 13161 | oui | 1366 | 0
+/voyants/abs-esp/ | 320 | secours | – | 493 | 642 | 2256 | 2760 | oui | – | 15546 | oui | 320 | 0
+/voyants/abs-esp/ | 375 | secours | – | 409 | 537 | 1893 | 2320 | oui | – | 13547 | oui | 375 | 0
+/voyants/abs-esp/ | 1366 | secours | – | 272 | 338 | 1079 | 1314 | oui | – | 8535 | oui | 1366 | 0
+/voyants/adblue/ | 320 | secours | – | 558 | 707 | 2693 | 3254 | oui | – | 16083 | oui | 320 | 0
+/voyants/adblue/ | 375 | secours | – | 491 | 598 | 2277 | 2761 | oui | – | 13957 | oui | 375 | 0
+/voyants/adblue/ | 1366 | secours | – | 324 | 390 | 1254 | 1507 | oui | – | 8518 | oui | 1366 | 0
+/voyants/airbag/ | 320 | secours | – | 509 | 679 | 1230 | 1677 | oui | – | 10383 | oui | 320 | 0
+/voyants/airbag/ | 375 | secours | – | 447 | 575 | 1027 | 1416 | oui | – | 9056 | oui | 375 | 0
+/voyants/airbag/ | 1366 | secours | – | 287 | 353 | 637 | 872 | oui | – | 5790 | oui | 1366 | 0
+/voyants/batterie/ | 320 | secours | – | 493 | 704 | 1070 | 1460 | oui | – | 9630 | oui | 320 | 0
+/voyants/batterie/ | 375 | secours | – | 434 | 603 | 908 | 1260 | oui | – | 8393 | oui | 375 | 0
+/voyants/batterie/ | 1366 | secours | – | 309 | 396 | 579 | 776 | oui | – | 5435 | oui | 1366 | 0
+/voyants/direction/ | 320 | secours | – | 518 | 666 | 1498 | 1964 | oui | – | 11368 | oui | 320 | 0
+/voyants/direction/ | 375 | secours | – | 458 | 586 | 1262 | 1670 | oui | – | 10032 | oui | 375 | 0
+/voyants/direction/ | 1366 | secours | – | 309 | 375 | 763 | 979 | oui | – | 6418 | oui | 1366 | 0
+/voyants/fap/ | 320 | secours | – | 456 | 666 | 1865 | 2350 | oui | – | 12382 | oui | 320 | 0
+/voyants/fap/ | 375 | secours | – | 415 | 605 | 1572 | 1999 | oui | – | 10491 | oui | 375 | 0
+/voyants/fap/ | 1366 | secours | – | 309 | 396 | 932 | 1167 | oui | – | 6518 | oui | 1366 | 0
+/voyants/frein/ | 320 | secours | – | 555 | 745 | 1537 | 1927 | oui | – | 13013 | oui | 320 | 0
+/voyants/frein/ | 375 | secours | – | 453 | 602 | 1315 | 1648 | oui | – | 11396 | oui | 375 | 0
+/voyants/frein/ | 1366 | secours | – | 324 | 390 | 829 | 1026 | oui | – | 7428 | oui | 1366 | 0
+/voyants/huile/ | 320 | secours | – | 455 | 604 | 1854 | 2358 | oui | – | 13440 | oui | 320 | 0
+/voyants/huile/ | 375 | secours | – | 371 | 479 | 1552 | 1979 | oui | – | 11949 | oui | 375 | 0
+/voyants/huile/ | 1366 | secours | – | 272 | 338 | 920 | 1174 | oui | – | 7528 | oui | 1366 | 0
+/voyants/moteur/ | 320 | secours | – | 455 | 645 | 1907 | 2355 | oui | – | 14067 | oui | 320 | 0
+/voyants/moteur/ | 375 | secours | – | 371 | 520 | 1571 | 1961 | oui | – | 12285 | oui | 375 | 0
+/voyants/moteur/ | 1366 | secours | – | 272 | 338 | 899 | 1115 | oui | – | 7954 | oui | 1366 | 0
+/voyants/prechauffage/ | 320 | secours | – | 504 | 570 | 1606 | 2072 | oui | – | 7751 | oui | 320 | 0
+/voyants/prechauffage/ | 375 | secours | – | 461 | 506 | 1367 | 1776 | oui | – | 6801 | oui | 375 | 0
+/voyants/prechauffage/ | 1366 | secours | – | 309 | 334 | 819 | 1054 | oui | – | 4669 | oui | 1366 | 0
+/voyants/pression-pneus/ | 320 | secours | – | 534 | 765 | 1515 | 1943 | oui | – | 12268 | oui | 320 | 0
+/voyants/pression-pneus/ | 375 | secours | – | 455 | 645 | 1275 | 1646 | oui | – | 10832 | oui | 375 | 0
+/voyants/pression-pneus/ | 1366 | secours | – | 272 | 359 | 700 | 915 | oui | – | 6876 | oui | 1366 | 0
+SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police chargée) : illustration à 2386 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1903 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /bruit-moteur/ (police chargée) : illustration à 2105 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1715 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /moteur-qui-surchauffe/ (police chargée) : illustration à 2471 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1987 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /voyants/abs-esp/ (police chargée) : illustration à 2320 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1893 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police chargée) : illustration à 2761 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2277 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police de secours) : illustration à 2411 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1927 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /bruit-moteur/ (police de secours) : illustration à 2105 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1715 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /moteur-qui-surchauffe/ (police de secours) : illustration à 2471 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1987 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /voyants/abs-esp/ (police de secours) : illustration à 2320 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1893 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police de secours) : illustration à 2761 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2277 px (règle 2i, demande n° 32 : à dire dans le paquet)
+Mesures : 21 page(s), 126 mesure(s), 0 erreur(s), 10 signalement(s) à reprendre dans le paquet.

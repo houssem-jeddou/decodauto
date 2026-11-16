@@ -1,0 +1,4 @@
+Brouillon, jamais validé. Lighthouse mobile, 3 passages, médianes (npx lhci autorun, lighthouserc-exemples.json réduit aux pages du lot), 16/11/2026.
+
+/bruit-moteur/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 756 ms, TBT 0 ms
+/fumee-echappement/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
