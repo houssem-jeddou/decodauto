@@ -121,9 +121,27 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .reperes-rapides{display:flex;flex-wrap:wrap;gap:.35rem;margin:.5rem 0 0;padding:0;list-style:none}
 .reperes-rapides li{display:inline-flex;align-items:center;gap:.3rem;font-size:.8125rem;font-weight:600;line-height:1.2;padding:.22rem .5rem}
 .reperes-rapides svg{width:1.1rem;height:1.1rem;flex:none}
-.etapes{counter-reset:e;list-style:none;padding:0}
+.etapes,.corps ol.etapes{counter-reset:e;list-style:none;padding:0}
 .etapes li{counter-increment:e;position:relative;padding:.5rem .75rem .5rem 2.75rem;margin:.4rem 0}
 .etapes li::before{content:counter(e);position:absolute;left:.7rem;top:.5rem;width:1.55rem;height:1.55rem;display:grid;place-items:center;font-weight:700;font-size:.8125rem}
+/* Arbre de décision (F1.3c) : carte claire ; questions numérotées dans des pastilles sombres à chiffre ambre, comme les
+   étapes ; réponses en liste sous la question ; verdict cité en pastille (variante du repère, plus petite : forme et
+   libellé, jamais la couleur seule). */
+.arbre{margin:.75rem 0;padding:.35rem .9rem .5rem}
+.arbre>ol{counter-reset:q;list-style:none;margin:0;padding:0}
+.arbre>ol>li{counter-increment:q;position:relative;padding:.6rem 0 .6rem 2.4rem;font-weight:600}
+.arbre>ol>li+li{border-top:1px solid var(--bord)}
+.arbre>ol>li::before{content:counter(q);position:absolute;left:0;top:.55rem;width:1.6rem;height:1.6rem;display:grid;place-items:center;font-weight:700;font-size:.8125rem}
+.arbre>ol>li p{margin:0}
+.arbre ul{margin:.35rem 0 0;padding-left:1.1rem;font-weight:400;list-style:disc}
+.arbre ul li{margin:.3rem 0}
+.verdict-cite{display:inline-flex;align-items:center;gap:.25rem;font-size:.8125rem;font-weight:700;line-height:1.25;padding:.08rem .5rem;margin:.1rem .1rem 0;vertical-align:.08em}
+.verdict-cite .forme{width:.95rem;height:.95rem;flex:none}
+/* Historique du dossier (F1.3c) : carte du corps, date en gras en tête de chaque entrée. */
+.historique{list-style:none;margin:.5rem 0;padding:.2rem .9rem}
+.historique li{padding:.55rem 0;font-size:.9375rem}
+.historique li+li{border-top:1px solid var(--bord)}
+.historique time{font-weight:700}
 .pub,.emplacement-pub{height:280px;margin:1.5rem 0;border:1px dashed #a3acb8;display:grid;place-items:center;color:#5b6573;font-size:.8125rem;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(0,0,0,.025) 8px,rgba(0,0,0,.025) 16px)}
 /* Emplacement publicitaire du site (src/lib/emplacements-pub.ts) : hauteur réservée du grand rectangle et de son étiquette (PUB-HAUTEUR-RESERVEE). */
 .emplacement-pub{height:auto;min-height:340px;align-content:center;gap:.25rem}
@@ -260,7 +278,9 @@ main>.accueil-main{max-width:72rem}
 :root .sommaire a{border:1px solid #9aa6b5;border-radius:999px;color:var(--texte);background:#fff}
 :root .repere{background:var(--panneau);color:var(--lr);border-radius:999px;border:1px solid var(--lr);--glyphe:var(--panneau)}
 :root .repere[data-gravite="3"]{--lr:var(--led3)}:root .repere[data-gravite="2"]{--lr:var(--led2)}:root .repere[data-gravite="1"]{--lr:var(--led1)}:root .repere[data-gravite="0"]{--lr:var(--led0)}
-:root .encart,:root .cause,:root .fiche,:root .etapes li,:root .theme,:root details.sources{background:#fff;border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 16px rgba(0,0,0,.06)}
+:root .verdict-cite{background:var(--panneau);color:var(--lr);border-radius:999px;border:1px solid var(--lr);--glyphe:var(--panneau)}
+:root .verdict-cite[data-gravite="3"]{--lr:var(--led3)}:root .verdict-cite[data-gravite="2"]{--lr:var(--led2)}:root .verdict-cite[data-gravite="1"]{--lr:var(--led1)}:root .verdict-cite[data-gravite="0"]{--lr:var(--led0)}
+:root .encart,:root .cause,:root .fiche,:root .etapes li,:root .theme,:root details.sources,:root .arbre,:root .historique{background:#fff;border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 16px rgba(0,0,0,.06)}
 :root .noms li{background:var(--fond-page);border-radius:10px;padding:.35rem .6rem}
 :root .tableau table{border-radius:12px;overflow:hidden}
 :root .tableau th,:root .tableau td{border-bottom:1px solid var(--bord)}
@@ -270,7 +290,7 @@ main>.accueil-main{max-width:72rem}
 :root .reponse{background:var(--cellule);border:1px solid var(--filet-nuit);border-radius:14px}
 :root .reperes-rapides li{border:1px solid var(--filet-nuit);border-radius:999px;color:var(--nuit-texte)}
 :root .reperes-rapides svg{color:var(--ambre)}
-:root .etapes li::before{background:var(--panneau);color:var(--ambre);border-radius:50%}
+:root .etapes li::before,:root .arbre>ol>li::before{background:var(--panneau);color:var(--ambre);border-radius:50%}
 :root .t-notices{border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 16px rgba(0,0,0,.06)}
 :root .t-notices thead th{background:var(--panneau);color:var(--nuit-texte)}
 :root .t-notices tbody tr{border-bottom:1px solid var(--bord)}

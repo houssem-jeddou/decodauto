@@ -3,7 +3,8 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { cwd, stdout } from 'node:process';
-import { construireDemo } from './lib/demo.ts';
+import { construireDemo, construireDemoFormat2 } from './lib/demo.ts';
+import { cp } from 'node:fs/promises';
 
 const racine = cwd();
 const sortie = join(racine, 'dist-demo');
@@ -12,4 +13,8 @@ const demo = await construireDemo(racine, new Date(Date.UTC(maintenant.getUTCFul
 await mkdir(sortie, { recursive: true });
 await writeFile(join(sortie, 'voyant-huile.html'), demo.html);
 await writeFile(join(sortie, 'methode.html'), demo.htmlMethode);
-stdout.write(`Aperçu écrit dans ${sortie} : voyant-huile.html, methode.html\n`);
+// Pages panne et dossier au format 2 (lot F1, F1.3c), avec la police de titre servie à côté (/polices/).
+const format2 = await construireDemoFormat2(racine, new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCMonth(), maintenant.getUTCDate())));
+for (const p of format2.pages) await writeFile(join(sortie, `${p.nom}.html`), p.html);
+await cp(join(racine, 'public/polices'), join(sortie, 'polices'), { recursive: true });
+stdout.write(`Aperçu écrit dans ${sortie} : voyant-huile.html, methode.html, ${format2.pages.map((p) => `${p.nom}.html`).join(', ')}\n`);

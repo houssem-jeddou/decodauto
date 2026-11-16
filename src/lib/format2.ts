@@ -509,16 +509,27 @@ export function illustrationDeLaPage(page: Pick<PageEditoriale, 'id' | 'illustra
 }
 
 /**
- * Page voyant (hors outil) au format 2 : voir l'ordre en tête de ce fichier. `texteRedige` : le texte rédigé du modèle
- * commun (références remplacées, typographié), passé par modeles.ts.
+ * Blocs propres à un modèle au format 2 : avant le texte rédigé (fiches, causes de la page panne), après lui (causes de la
+ * page voyant, historique du dossier), et le rôle du tableau des notices (élément unique de la page voyant seulement).
  */
-export function pageVoyantFormat2(
+export interface BlocsDuModele {
+  avantTexte: readonly string[];
+  apresTexte: readonly string[];
+  tableauElementUnique: boolean;
+}
+
+/**
+ * Page éditoriale au format 2 : tête de page, encadré, signature, transparence, bloc « Notices / Base du coût »,
+ * illustration, sommaire, puis les blocs du modèle autour du texte rédigé, tableau des notices, publicité, pages liées,
+ * sources (charte graphique §4). `texteRedige` : le texte rédigé du modèle commun (références remplacées, typographié).
+ */
+export function pageFormat2(
   page: PageEditoriale,
   site: DonneesSite,
   corpsHtml: string,
   texteRedige: (corps: string) => { html: string; citations: CitationDuTexte[] },
+  blocs: BlocsDuModele,
 ): string {
-  const causesHtml = causesFormat2('causes' in page ? page.causes : undefined, site.couts);
   const { lignes, voyantsInconnus } = resoudreLignes(page.situations, site.voyants);
   if (voyantsInconnus.length > 0) throw new Error(`page « ${page.id} » : voyant(s) absent(s) de la base : ${voyantsInconnus.join(', ')}`);
   const cout = coutDeLaPage(page, lignes, site.couts);
@@ -545,11 +556,14 @@ export function pageVoyantFormat2(
   const coutHtml = coutFormat2(cout, site.couts);
   const phrases = lignes.map((l) => phraseSources({ ...sourcesDeLaLigne(l.sources, site.sources), ecart: l.ecart_marques }));
 
-  // Texte rédigé : repères, puis références du modèle commun.
+  // Texte rédigé : repères, puis références du modèle commun ; tableaux du texte dans le style de la charte.
   const texte = texteRedige(reperesDuTexte(corpsHtml, page, lignes));
-  const tableau = tableauNoticesCompact(tableaux, { elementUnique: true, pageId: page.id });
-  const entrees = [...titresH2(texte.html), ...(causesHtml !== '' ? titresH2(causesHtml) : []), ...(tableau !== '' ? [{ ancre: IDENTIFIANTS.notices, titreHtml: texteHtml(FORMAT2.titreNotices) }] : [])];
-  const avecSommaire = nombreDeH2(texte.html) >= SOMMAIRE_MIN_H2;
+  const texteHtmlFinal = tableauxDuTexteFormat2(texte.html);
+  const tableau = tableauNoticesCompact(tableaux, { elementUnique: blocs.tableauElementUnique, pageId: page.id });
+  // Sommaire : les titres H2 du corps, dans l'ordre de la page (fiches, causes, texte, historique), puis le tableau.
+  const corps = [...blocs.avantTexte, texteHtmlFinal, ...blocs.apresTexte];
+  const entrees = [...titresH2(corps.join('')), ...(tableau !== '' ? [{ ancre: IDENTIFIANTS.notices, titreHtml: texteHtml(FORMAT2.titreNotices) }] : [])];
+  const avecSommaire = nombreDeH2(texteHtmlFinal) >= SOMMAIRE_MIN_H2;
 
   // Sources : celles de l'encadré, du coût et du texte rédigé.
   const citees = sourcesDeLaPageCitees(page, lignes, site.couts, cout);
@@ -568,8 +582,7 @@ export function pageVoyantFormat2(
     provenanceHtml({ phrases, baseDeCalcul: coutHtml !== '' ? page.cout_probable.base_de_calcul : undefined, lienNotices: tableau !== '' ? IDENTIFIANTS.notices : undefined }),
     illustrationDeLaPage(page, site),
     avecSommaire ? sommaireHtml(entrees, 'sommaire-colonne') : '',
-    texte.html,
-    causesHtml,
+    ...corps,
     tableau,
     emplacementPub('fin-de-contenu', site.pubFactice === true),
     pagesLieesFormat2({
@@ -589,6 +602,49 @@ export function pageVoyantFormat2(
     '</div>',
   ].join(''));
 }
+
+/** Page voyant (hors outil) au format 2 : texte rédigé, causes, tableau des notices (élément unique). */
+export function pageVoyantFormat2(
+  page: PageEditoriale,
+  site: DonneesSite,
+  corpsHtml: string,
+  texteRedige: (corps: string) => { html: string; citations: CitationDuTexte[] },
+): string {
+  const causesHtml = causesFormat2('causes' in page ? page.causes : undefined, site.couts);
+  return pageFormat2(page, site, corpsHtml, texteRedige, { avantTexte: [], apresTexte: [causesHtml], tableauElementUnique: true });
+}
+
+/**
+ * Tableaux du texte rédigé au format 2 (charte graphique §4, « Tableaux ») : dans un bloc `tableau` (en-tête sombre, angles,
+ * défilement en largeur) ; au-delà de trois colonnes, en cartes sur téléphone (`tableau-cartes`, chaque cellule portant le
+ * libellé de sa colonne). Le tableau élément unique (« {{tableau}} ») garde son bloc et ses repères.
+ */
+export function tableauxDuTexteFormat2(html: string): string {
+  const enrichir = (table: string): { table: string; cartes: boolean } => {
+    const entetes = [...(/<thead\b[\s\S]*?<\/thead>/.exec(table)?.[0] ?? '').matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/g)].map((m) => (m[1] ?? '').replace(/<[^>]+>/g, '').trim());
+    if (entetes.length <= 3) return { table, cartes: false };
+    const corps = table.replace(/<tr\b[^>]*>[\s\S]*?<\/tr>/g, (rangee) => {
+      let i = 0;
+      return rangee.replace(/<td\b([^>]*)>/g, (_t, attributs: string) => `<td${attributs} data-libelle="${attributHtml(entetes[i++] ?? '')}">`);
+    });
+    return { table: corps, cartes: true };
+  };
+  // Tableau élément unique, déjà dans son bloc.
+  const avecBloc = html.replace(/<div class="tableau-corps"([^>]*)>(<table\b[\s\S]*?<\/table>)<\/div>/g, (_tout, attributs: string, table: string) => {
+    const e = enrichir(table);
+    return `<div class="tableau tableau-corps${e.cartes ? ' tableau-cartes' : ''}"${attributs}>${e.table}</div>`;
+  });
+  // Autres tableaux du texte : posés dans un bloc de la charte.
+  return avecBloc.replace(/(<div class="tableau[^"]*"[^>]*>)?(<table\b[\s\S]*?<\/table>)/g, (tout, bloc: string | undefined, table: string) => {
+    if (bloc !== undefined) return tout;
+    const e = enrichir(table);
+    return `<div class="tableau${e.cartes ? ' tableau-cartes' : ''}">${e.table}</div>`;
+  });
+}
+
+/** Pastille d'un verdict cité dans l'arbre de décision (variante du repère, plus petite ; forme et libellé, jamais la couleur seule). */
+export const pastilleVerdict = (verdict: Verdict): string =>
+  `<span class="verdict-cite" data-verdict-cite data-verdict="${attributHtml(verdict)}" data-gravite="${graviteDuVerdict(verdict)}">${formeGravite(verdict)}${texteHtml(GRILLE_VERDICTS[verdict].libelle)}</span>`;
 
 // ---- Causes ------------------------------------------------------------------------------------------------
 

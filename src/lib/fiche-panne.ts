@@ -130,11 +130,19 @@ export function modeleFicheTutoriel(tutoriel: Tutoriel): LigneDeFiche[] {
   ];
 }
 
-function fiche(classe: string, attribut: string, identifiant: string, titre: string, lignes: readonly LigneDeFiche[]): string {
+/**
+ * Format de lecture des fiches (demande de changement n° 30) : au format 2, la liste des lignes est une carte du corps de
+ * la charte graphique (`<dl class="fiche">`, comme le pilote) ; au format 1, rien ne change.
+ */
+export interface OptionsFiche {
+  format2?: boolean;
+}
+
+function fiche(classe: string, attribut: string, identifiant: string, titre: string, lignes: readonly LigneDeFiche[], options: OptionsFiche = {}): string {
   return [
     `<section class="${classe}" ${attribut} aria-labelledby="${identifiant}">`,
     `<h2 id="${identifiant}">${texteHtml(titre)}</h2>`,
-    '<dl>',
+    options.format2 === true ? '<dl class="fiche">' : '<dl>',
     ...lignes.map((l) => `<div data-fiche-ligne><dt>${texteHtml(l.intitule)}</dt><dd>${texteHtml(l.valeur)}</dd></div>`),
     '</dl>',
     '</section>',
@@ -145,14 +153,14 @@ function fiche(classe: string, attribut: string, identifiant: string, titre: str
  * Fiche « Le symptôme en bref » (section repérée data-fiche-panne, une ligne data-fiche-ligne par intitulé) ; « La
  * situation en bref » quand la page n'a pas de symptôme.
  */
-export function fichePanneHtml(lignes: readonly LigneDeFiche[]): string {
+export function fichePanneHtml(lignes: readonly LigneDeFiche[], options: OptionsFiche = {}): string {
   const titre = lignes.some((l) => l.intitule === INTITULE_SYMPTOME) ? TITRE_FICHE_PANNE : TITRE_FICHE_SITUATION;
-  return fiche('fiche-panne', 'data-fiche-panne', IDENTIFIANT_FICHE_PANNE, titre, lignes);
+  return fiche('fiche-panne', 'data-fiche-panne', IDENTIFIANT_FICHE_PANNE, titre, lignes, options);
 }
 
 /** Fiche « Le tutoriel en bref » (section repérée data-fiche-tutoriel). */
-export function ficheTutorielHtml(lignes: readonly LigneDeFiche[]): string {
-  return fiche('fiche-tutoriel', 'data-fiche-tutoriel', IDENTIFIANT_FICHE_TUTORIEL, TITRE_FICHE_TUTORIEL, lignes);
+export function ficheTutorielHtml(lignes: readonly LigneDeFiche[], options: OptionsFiche = {}): string {
+  return fiche('fiche-tutoriel', 'data-fiche-tutoriel', IDENTIFIANT_FICHE_TUTORIEL, TITRE_FICHE_TUTORIEL, lignes, options);
 }
 
 /** Une entrée du journal des modifications d'un dossier. */
@@ -168,12 +176,13 @@ const dateLisible = (date: Date): string => dateIso(date).split('-').reverse().j
  * Historique d'un dossier (section repérée data-historique-dossier) : une entrée data-historique-entree par ligne du
  * journal des modifications, de la plus récente à la plus ancienne, avec sa date lisible et machine (<time>).
  */
-export function historiqueDossierHtml(journal: readonly EntreeDuJournal[]): string {
+export function historiqueDossierHtml(journal: readonly EntreeDuJournal[], options: OptionsFiche = {}): string {
   const entrees = [...journal].sort((a, b) => b.date.getTime() - a.date.getTime());
   return [
     `<section class="historique-dossier" data-historique-dossier aria-labelledby="${IDENTIFIANT_HISTORIQUE}">`,
     `<h2 id="${IDENTIFIANT_HISTORIQUE}">${texteHtml(TITRE_HISTORIQUE)}</h2>`,
-    '<ul>',
+    // Format 2 : carte du corps, date en gras en tête de chaque entrée (charte-b.css, .historique).
+    options.format2 === true ? '<ul class="historique">' : '<ul>',
     // Espace insécable avant le deux-points (typographie française, contrôle TYPO-ESPACE du site construit).
     ...entrees.map((e) => `<li data-historique-entree><time datetime="${dateIso(e.date)}">${texteHtml(dateLisible(e.date))}</time>${INSECABLE}: ${texteHtml(e.resume)}</li>`),
     '</ul>',

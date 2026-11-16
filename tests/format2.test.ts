@@ -158,12 +158,13 @@ describe('format 2 : briques (lot F1, F1.2)', () => {
 });
 
 describe('format 2 : modèle des pages voyants', () => {
-  test('modeleDeLaPage : page voyant au format 2 → modèle du format 2 ; outil, autres types au format 2 → pas encore livré (F1.3)', async () => {
+  test('modeleDeLaPage : page voyant au format 2 → modèle du format 2 ; outil, code défaut et pneus au format 2 → pas encore livré (F1.3)', async () => {
     const { page } = await pageDemo();
     assert.deepEqual(modeleDeLaPage('voyant', page), { modele: pageVoyantF2 });
     assert.deepEqual(modeleDeLaPage('voyant', { ...page, format: 1 } as PageEditoriale), { modele: pageVoyant });
     assert.ok('absent' in modeleDeLaPage('voyant', { ...page, outil: true } as PageEditoriale));
-    for (const type of ['code-defaut', 'pneus', 'panne', 'dossier'] as const) assert.match((modeleDeLaPage(type, page) as { absent: string }).absent, /format 2 .* F1\.3/);
+    // Panne et dossier : livrés en F1.3c (tests/format2-panne.test.ts) ; code défaut et pneus : F1.3b.
+    for (const type of ['code-defaut', 'pneus'] as const) assert.match((modeleDeLaPage(type, page) as { absent: string }).absent, /format 2 .* F1\.3/);
   });
 
   test('ordre de la charte graphique §4 : mention, fil, H1, encadré, signature, transparence, notices et coût, illustration, sommaire, texte, causes, tableau, sources ; H1 dans main', async () => {

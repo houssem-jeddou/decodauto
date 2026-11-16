@@ -13,6 +13,8 @@
 //    page (règle 2f) ; « Sources » est repliée (details fermé) et son résumé donne leur nombre (règle 2g) ;
 //  - FORMAT2-METHODE : ni « Verdict retenu », ni le mot « édition », ni une page écrite à la main (« p. 13 ») dans le texte
 //    rédigé, hors citation (règle 2d) ;
+//  - FORMAT2-ARBRE : dans l'arbre de décision, chaque verdict cité est une pastille (forme et libellé d'une ligne de l'encadré),
+//    jamais un libellé écrit hors pastille (F1.3c) ;
 //  - FORMAT2-SOMMAIRE : dès SOMMAIRE_MIN_H2 titres H2 dans le texte rédigé, un sommaire « Sur cette page » qui mène à
 //    chacun d'eux, sans lien vers une ancre absente (règle 2h).
 // Les mesures de hauteur (2a, 2i : premier écran, trois écrans) se font à la porte, avec un navigateur (conception, §5).
@@ -22,6 +24,7 @@ import * as cheerio from 'cheerio';
 import { normaliserTexte } from './empreinte.ts';
 import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, motsDe, phraseNotices } from './format2.ts';
 import type { LigneResolue } from './calcul.ts';
+import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 
 export interface ConstatFormat2 {
   regle: string;
@@ -126,6 +129,25 @@ export function controlerFormat2(html: string, fichier: string, lignes: readonly
     /(^|[^\p{L}])p\.[\s\u00a0\u202f]*\d/u.test(sansCitations) ? 'une page écrite à la main (« p. » suivi d\'un chiffre)' : '',
   ].filter((m) => m !== '');
   if (methode.length > 0) constats.push(erreur('FORMAT2-METHODE', `le texte rédigé contient ${methode.join(' et ')} hors citation : au format 2, la méthode sort du texte, qui nomme la marque et le modèle ; les éditions et références vont dans « Sources » (règle 2d)`, fichier));
+
+  // Arbre de décision (F1.3c) : chaque verdict cité l'est en pastille (forme et libellé, jamais la couleur seule), au libellé
+  // de la grille de son verdict, qui est celui d'une ligne de l'encadré ; aucun libellé de verdict écrit hors pastille.
+  const arbre = $('[data-element-unique="arbre-de-decision"]');
+  if (arbre.length === 1) {
+    const libelles = Object.entries(GRILLE_VERDICTS).map(([v, g]) => [v, g.libelle] as const);
+    arbre.find('[data-verdict-cite]').each((_, el) => {
+      const pastille = $(el);
+      const verdict = pastille.attr('data-verdict') ?? '';
+      const libelle = libelles.find(([v]) => v === verdict)?.[1];
+      if (libelle === undefined || n(texte(pastille)) !== n(libelle) || pastille.find('svg.forme').length !== 1 || !verdicts.has(verdict)) {
+        constats.push(erreur('FORMAT2-ARBRE', `pastille de verdict de l'arbre « ${texte(pastille)} » : forme et libellé du verdict « ${verdict} », celui d'une ligne de l'encadré`, fichier));
+      }
+    });
+    const horsPastille = arbre.clone();
+    horsPastille.find('[data-verdict-cite]').remove();
+    const ecrits = libelles.filter(([, l]) => n(texte(horsPastille)).includes(n(l))).map(([, l]) => l);
+    if (ecrits.length > 0) constats.push(erreur('FORMAT2-ARBRE', `libellé de verdict écrit dans l'arbre hors pastille : ${ecrits.join(' ; ')} (au format 2, « {{verdict:…}} » s'affiche en pastille)`, fichier));
+  }
 
   // Sommaire (2h).
   const titres = $('[data-corps] h2').toArray().map((h) => $(h));
