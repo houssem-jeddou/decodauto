@@ -1,9 +1,18 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import '../styles/site.css';
+// Feuille de style de la page seule, selon son format (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md,
+// §2) : texte traité et minifié par Vite (?inline), posé en ligne ; jamais les deux feuilles sur une même page.
+import cssFormat1 from '../styles/site.css?inline';
+import cssFormat2 from '../styles/charte-b.css?inline';
+import type { FormatPage } from '../schemas/pages.ts';
 import { PAGE_CONFIDENTIALITE } from '../lib/charte.ts';
 import { estIndexable } from '../lib/indexation.ts';
 import { bandeau, pied } from '../lib/gabarit.ts';
+import { adresseBoutonVoyant, bandeauFormat2, piedFormat2 } from '../lib/format2.ts';
+import { ID_OUTIL_VOYANTS } from '../lib/plan.ts';
+import { demoFormat2Active } from '../../scripts/lib/demo-format2.ts';
+// Pictogramme du bouton « Trouver mon voyant » du format 2 (pilote : le voyant moteur), tiré de la base des dessins.
+import pictogrammeBouton from '../pictogrammes/moteur.svg?raw';
 import { liensFavicon } from '../lib/marque.ts';
 
 interface Props {
@@ -13,28 +22,38 @@ interface Props {
   sansCanonical?: boolean;
   /** Scripts JSON-LD de la page (src/lib/donnees-structurees.ts, livrable 7.5a) : déjà échappés, générés depuis la page. */
   donneesStructurees?: readonly string[];
+  /** Format de lecture de la page (1 par défaut) : feuille de style, en-tête et pied de page suivent. */
+  format?: FormatPage;
 }
 
-const { titre, description, sansCanonical = false, donneesStructurees = [] } = Astro.props;
+const { titre, description, sansCanonical = false, donneesStructurees = [], format = 1 } = Astro.props;
+const feuille = `<style>${format === 2 ? cssFormat2 : cssFormat1}</style>`;
 const indexable = estIndexable();
 // Canonical : l'adresse de la page elle-même, absolue (contrôles CANONICAL-*). Jamais saisie à la main.
 const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.site).href;
 // Composants communs à toutes les pages (livrable 6.3, src/lib/gabarit.ts) : nom du site et mention en tête avant le
-// H1, lien de signalement en pied de page (contrôles MENTION-IA-* et SIGNALER-ERREUR-ABSENT).
-const haut = bandeau();
+// H1, lien de signalement en pied de page (contrôles MENTION-IA-* et SIGNALER-ERREUR-ABSENT). Format 2 (src/lib/format2.ts) :
+// bandeau de la piste B, bouton « Trouver mon voyant » vers la page outil si elle est construite ; la mention en tête ouvre
+// la tête de page, dans le contenu de la page (main).
+const outilConstruit = format === 2 && (await getCollection('voyant')).some((page) => (page.data as { outil?: boolean }).outil === true);
+const adresseOutil = outilConstruit ? (await getEntry('plan-du-site', ID_OUTIL_VOYANTS))?.data.adresse : undefined;
+// Sur la page outil elle-même, pas de bouton « Trouver mon voyant » (revue de F1.3a) ; ni sur la page 404 (sans canonical),
+// qui porte le sien sous sa phrase : un seul bouton par page (revue de F1.3b).
+const haut = format === 2 ? bandeauFormat2({ adresseOutil: sansCanonical ? undefined : adresseBoutonVoyant(adresseOutil, Astro.url.pathname), pictogrammeBouton }) : bandeau();
 // Lien vers la politique de confidentialité : dès que sa page est construite, sur toutes les pages, à son adresse du plan.
 const pageConfidentialite = (await getCollection('socle')).some((page) => (page.data as { id: string }).id === PAGE_CONFIDENTIALITE);
 const adresseConfidentialite = pageConfidentialite ? (await getEntry('plan-du-site', PAGE_CONFIDENTIALITE))?.data.adresse : undefined;
 // Sur la page 404, l'adresse demandée n'est pas connue du site statique : le lecteur la complète dans son courriel.
-const bas = pied(sansCanonical ? undefined : Astro.url.pathname, adresseConfidentialite);
+const bas = (format === 2 ? piedFormat2 : pied)(sansCanonical ? undefined : Astro.url.pathname, adresseConfidentialite);
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-format={String(format)} data-demo-format2={demoFormat2Active(process.env) ? '' : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titre}</title>
+    <Fragment set:html={feuille} />
     <meta name="description" content={description} />
     {!indexable && <meta name="robots" content="noindex" />}
     {canonical && <link rel="canonical" href={canonical} />}

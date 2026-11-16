@@ -7,11 +7,12 @@ import type { InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
 import { cwd } from 'node:process';
 import Base from '../layouts/Base.astro';
-import { modeleDeLaPage, pageSocle } from '../lib/modeles.ts';
+import { modeleDeLaPage, pageSocle, refusFormatVagueB } from '../lib/modeles.ts';
 import { cheminDAriane, sectionMethodeHtml } from '../lib/composants.ts';
 import { scriptsAPropos, scriptsPageEditoriale, type AuteurDeclare } from '../lib/donnees-structurees.ts';
 import { PAGE_METHODE, sectionMethode } from '../lib/charte.ts';
 import { donneesDuSite } from '../../scripts/lib/donnees-site.ts';
+import { corpsAvecReperes, demoFormat2Active, lireBrouillonFormat2, pageAvecBrouillon } from '../../scripts/lib/demo-format2.ts';
 import type { TypePage } from '../schemas/listes.ts';
 import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
 
@@ -24,24 +25,40 @@ export async function getStaticPaths() {
     ['pneus', await getCollection('pneus')],
     ['dossier', await getCollection('dossier')],
   ];
+  // Construction de démonstration du format 2 (DEMO_FORMAT2=1, jamais déployée ; scripts/lib/demo-format2.ts) : pages et
+  // repères du brouillon, appliqués en mémoire.
+  const brouillon = demoFormat2Active(process.env) ? await lireBrouillonFormat2(cwd()) : undefined;
   const entrees = parType.flatMap(([type, liste]) =>
     liste.map((entree) => {
-      const page = entree.data as PageEditoriale;
+      const lue = entree.data as PageEditoriale;
       // Un corps Markdown sans rendu ne doit pas donner une page sans texte : la construction échoue (revue de 6.6a).
-      if ((entree.body ?? '').trim() !== '' && entree.rendered?.html === undefined) throw new Error(`page « ${page.id} » : le texte rédigé (corps Markdown) n'a pas été rendu`);
-      return { type, page, corps: entree.rendered?.html ?? '' };
+      if ((entree.body ?? '').trim() !== '' && entree.rendered?.html === undefined) throw new Error(`page « ${lue.id} » : le texte rédigé (corps Markdown) n'a pas été rendu`);
+      const page = brouillon !== undefined ? pageAvecBrouillon(lue, brouillon) : lue;
+      const corps = entree.rendered?.html ?? '';
+      return { type, page, corps: brouillon !== undefined ? corpsAvecReperes(page.id, corps, brouillon) : corps };
     }),
   );
   // Libellé court de chaque page construite : fil d'Ariane et pages liées ne mènent qu'à des pages construites.
   const libelles = new Map(entrees.map(({ page }) => [page.id, page.libelle_court]));
-  const { site, contexte } = await donneesDuSite(cwd(), libelles, new Date());
+  const lu = await donneesDuSite(cwd(), libelles, new Date());
+  const contexte = lu.contexte;
+  // Voyant de la base de chaque page (première ligne de son encadré reprise de la base) : tuile des pages liées au format 2.
+  const voyantDesPages = new Map(
+    entrees.flatMap(({ page }) => {
+      const premiere = page.situations.find((l) => 'voyant' in l && l.voyant !== undefined);
+      return premiere !== undefined && 'voyant' in premiere && premiere.voyant !== undefined ? [[page.id, premiere.voyant] as [string, string]] : [];
+    }),
+  );
+  const site = { ...lu.site, voyantDesPages };
   // Fiches auteur (page « à propos ») : l'auteur d'une page éditoriale est celui de sa fiche (données structurées, livrable 7.5a).
   const entreesSocle = await getCollection('socle');
   const adresseAPropos = site.plan.get(PAGE_METHODE)?.adresse;
   const auteurs: AuteurDeclare[] = entreesSocle.flatMap((e) => ((e.data as PageSaisie<'socle'>).id === PAGE_METHODE ? ((e.data as PageSaisie<'socle'>).auteurs ?? []) : []));
   // Pages du socle (livrable 7.2), sauf l'accueil, qui a sa propre route (src/pages/index.astro).
   const socle = entreesSocle.flatMap((entree) => {
-    const page = entree.data as PageSaisie<'socle'>;
+    const lue = entree.data as PageSaisie<'socle'>;
+    // Démonstration du format 2 : pages du socle passées au format 2 par le brouillon, en mémoire.
+    const page = brouillon !== undefined ? pageAvecBrouillon(lue, brouillon) : lue;
     if (page.id === 'accueil') return [];
     const ligne = site.plan.get(page.id);
     if (ligne === undefined) throw new Error(`page « ${page.id} » absente du plan du site (data/plan-du-site.json)`);
@@ -52,6 +69,7 @@ export async function getStaticPaths() {
         props: {
           titre: page.title,
           description: page.description,
+          format: page.format ?? 1,
           html: pageSocle(page, entree.rendered?.html ?? '', page.id === PAGE_METHODE ? sectionMethodeHtml(sectionMethode([...contexte.sources.values()])) : undefined),
           donneesStructurees: page.id === PAGE_METHODE ? scriptsAPropos(auteurs, ligne.adresse) : [],
         },
@@ -61,6 +79,8 @@ export async function getStaticPaths() {
   const editoriales = entrees.map(({ type, page, corps }) => {
     const ligne = site.plan.get(page.id);
     if (ligne === undefined) throw new Error(`page « ${page.id} » absente du plan du site (data/plan-du-site.json)`);
+    const refus = refusFormatVagueB(type, page);
+    if (refus !== undefined) throw new Error(refus);
     const choix = modeleDeLaPage(type, page);
     if ('absent' in choix) throw new Error(`page « ${page.id} » : ${choix.absent}`);
     // Données structurées (livrable 7.5a) : l'auteur est celui de la fiche de « à propos » (champ `auteur`).
@@ -71,6 +91,7 @@ export async function getStaticPaths() {
       props: {
         titre: page.title,
         description: page.description,
+        format: page.format ?? 1,
         html: choix.modele(page, site, corps),
         donneesStructurees: scriptsPageEditoriale(
           { titre: page.h1, description: page.description, adresse: ligne.adresse, modification: page.date_modification, auteur, adresseAPropos },
@@ -83,9 +104,9 @@ export async function getStaticPaths() {
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { titre, description, html, donneesStructurees } = Astro.props as Props;
+const { titre, description, html, donneesStructurees, format } = Astro.props as Props;
 ---
 
-<Base titre={titre} description={description} donneesStructurees={donneesStructurees}>
+<Base titre={titre} description={description} donneesStructurees={donneesStructurees} format={format}>
   <Fragment set:html={html} />
 </Base>

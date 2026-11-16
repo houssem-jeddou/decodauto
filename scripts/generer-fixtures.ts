@@ -12,6 +12,7 @@ import { LIBELLE_LIEN_NOTICES, ancreNotices, phraseSources, sourcesDeLaLigne } f
 import { modeleTableauNotices, tableauNotices } from '../src/lib/tableau-notices.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml, type PageCode } from '../src/lib/fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte, type PageTexte } from '../src/lib/fiche-texte.ts';
+import { fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, modeleFichePanne, modeleFicheTutoriel, type PagePanne, type Tutoriel } from '../src/lib/fiche-panne.ts';
 import { ANCRE_OUTIL, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, modeleOutilVoyants, outilVoyants, type VoyantPourOutil } from '../src/lib/outil-voyants.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../src/schemas/grille.ts';
 import type { TrancheCout } from '../src/schemas/cout.ts';
@@ -21,6 +22,8 @@ type Objet = Record<string, unknown>;
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..', 'tests', 'fixtures');
 
 // ---- Contexte commun : plan du site, base voyants, registre des sources, pictogrammes, fiches auteur ------
+// Une source secondaire porte sa nature (demande de changement n° 31) : les sources secondaires de test (« fixture-forum »,
+// « fixture-comparateur ») sont des documents techniques de test, seule nature compatible avec leur rôle dans les cas.
 const source = (id: string, categorie: string, marque?: string, editeur = 'Éditeur de test'): Objet => ({
   id,
   titre: `Source de test ${id}`,
@@ -29,6 +32,7 @@ const source = (id: string, categorie: string, marque?: string, editeur = 'Édit
   url: 'https://exemple.test/source',
   date_consultation: '2026-10-01',
   ...(marque !== undefined && { marque, modele: 'Modèle de test' }),
+  ...(categorie === 'secondaire' && { nature: 'document-technique' }),
 });
 
 /** Citation d'une source ; le niveau (verdict, urgence) se donne pour une notice constructeur. */
@@ -348,6 +352,26 @@ interface OptionsHtml {
   outilIndexIncomplet?: boolean;
   /** Page du socle construite sans sa meta description (livrable 7.2). */
   socleSansDescription?: boolean;
+  /** Fiches, historique et arbre de décision (étape 10, partie technique des modèles). */
+  sansFichePanne?: boolean;
+  fichePanneFausse?: boolean;
+  fichePanneEnTrop?: boolean;
+  sansFicheTutoriel?: boolean;
+  ficheTutorielEnTrop?: boolean;
+  arbreUneReponse?: boolean;
+  arbreSansListe?: boolean;
+  arbreAvecVerdict?: boolean;
+  arbreVerdictEcrit?: boolean;
+  arbreVerdictHorsEncadre?: boolean;
+  arbreVerdictPrecautions?: boolean;
+  arbreVerdictDansQuestion?: boolean;
+  /** Réponse de l'arbre qui demande un contrôle sans redire le verdict (R7-ARBRE-VERDICT étendu, revue de F1.3c). */
+  arbreActionSansVerdict?: boolean;
+  ficheTutorielFausse?: boolean;
+  sansHistorique?: boolean;
+  historiqueIncomplet?: boolean;
+  historiqueDesordre?: boolean;
+  historiqueEnTrop?: boolean;
 }
 
 /** Lignes de situation telles qu'affichées : les lignes { voyant } sont reprises de la base de test. */
@@ -418,6 +442,54 @@ function blocsTexte(page: Objet, options: OptionsHtml): string {
   if (options.sansFicheTexte) return '';
   const modele = modeleFicheTexte(page as unknown as PageTexte, REGISTRE_TEST);
   return ficheTexteHtml(options.ficheTexteFausse ? { ...modele, lignes: modele.lignes.slice(1) } : modele);
+}
+
+/**
+ * Étape 10 : fiche du symptôme (page panne), fiche du tutoriel (toute page qui en déclare un) et historique (page
+ * dossier), produits par les vrais composants ; rien sur les autres pages.
+ */
+function blocsEtape10(page: Objet, type: string, options: OptionsHtml): string {
+  const fiche = type === 'panne' && Array.isArray(page['contexte']) ? modeleFichePanne(page as unknown as PagePanne) : [];
+  const tutoriel = page['tutoriel'] ?? (options.ficheTutorielEnTrop ? tutorielDef : undefined);
+  const journal = ((page['journal_modifications'] as Objet[] | undefined) ?? []).map((e) => ({ date: new Date(`${String(e['date'])}T00:00:00Z`), resume: String(e['resume']) }));
+  const plusRecentDAbord = [...journal].sort((a, b) => b.date.getTime() - a.date.getTime());
+  let historique = '';
+  if (type === 'dossier' && !options.sansHistorique) {
+    // Incomplet : l'entrée la plus récente manque ; désordre : la plus ancienne d'abord.
+    historique = historiqueDossierHtml(options.historiqueIncomplet ? plusRecentDAbord.slice(1) : journal);
+    if (options.historiqueDesordre) {
+      const entrees = historique.match(/<li data-historique-entree>[\s\S]*?<\/li>/g) ?? [];
+      historique = historique.replace(entrees.join(''), [...entrees].reverse().join(''));
+    }
+  }
+  if (options.historiqueEnTrop) historique = historiqueDossierHtml([{ date: new Date('2026-10-20T00:00:00Z'), resume: 'Entrée de test.' }]);
+  return [
+    type === 'panne' && !options.sansFichePanne ? fichePanneHtml(options.fichePanneFausse ? fiche.slice(1) : fiche) : '',
+    options.fichePanneEnTrop ? fichePanneHtml([{ intitule: 'Quand', valeur: 'Situation de test' }]) : '',
+    tutoriel !== undefined && !options.sansFicheTutoriel
+      ? ficheTutorielHtml(options.ficheTutorielFausse ? modeleFicheTutoriel(tutoriel as unknown as Tutoriel).slice(0, -1) : modeleFicheTutoriel(tutoriel as unknown as Tutoriel))
+      : '',
+    historique,
+  ].join('');
+}
+
+/** Arbre de décision de test : une question, deux réponses (variantes pour les contrôles R7-ARBRE-*). */
+function arbreDeTest(options: OptionsHtml): string {
+  const ouvrir = '<div class="arbre" data-element-unique="arbre-de-decision" role="region" aria-label="Que faire">';
+  if (options.arbreSansListe) return `${ouvrir}<p>Le démarreur tourne-t-il ?</p></div>`;
+  const non = options.arbreAvecVerdict
+    ? `Non : ${GRILLE_VERDICTS['non, arrêt dès que possible'].libelle} ; faites contrôler le démarreur.`
+    : options.arbreVerdictEcrit
+      ? 'Non : arrêtez-vous et faites contrôler le démarreur.'
+      : options.arbreVerdictHorsEncadre
+        ? `Non : ${GRILLE_VERDICTS['non, arrêt immédiat'].libelle}.`
+        : options.arbreVerdictPrecautions
+          ? `Non : ${GRILLE_VERDICTS['oui avec précautions'].libelle} ; allez au garage.`
+          : options.arbreActionSansVerdict
+            ? 'Non : faites contrôler le démarreur.'
+            : 'Non : lisez la suite de la page sur le démarreur.';
+  const question = options.arbreVerdictDansQuestion ? 'Le démarreur tourne-t-il ? Sinon, coupez le moteur.' : 'Le démarreur tourne-t-il ?';
+  return `${ouvrir}<ol><li>${question}<ul><li>Oui : batterie probablement bonne.</li>${options.arbreUneReponse ? '' : `<li>${non}</li>`}</ul></li></ol></div>`;
 }
 
 function encadre(page: Objet, options: OptionsHtml): string {
@@ -519,7 +591,8 @@ function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): st
   if (type === 'socle') return `${entete}${options.socleSansDescription ? '' : `<meta name="description" content="${String(page['description'])}">`}</head><body><main><h1>${String(page['title'])}</h1></main></body></html>\n`;
   const ligneDonnees = options.tableauSansDonnees ? '' : '<tr><td>ACEA A3/B4</td></tr>';
   const blocs: Record<string, string> = {
-    'arbre-de-decision': '<div data-element-unique="arbre-de-decision"><ul><li>Le démarreur tourne-t-il ? Oui : batterie probablement bonne.</li></ul></div>',
+    // Arbre de décision (étape 10) : liste numérotée de questions, chacune suivie d'au moins deux réponses.
+    'arbre-de-decision': arbreDeTest(options),
     tableau: `<div data-element-unique="tableau"><table><tr><th>Norme</th></tr>${ligneDonnees}</table></div>`,
     photo: '<img data-element-unique="photo" src="/images/fixture.jpg" alt="Photo de test" />',
     outil: page['outil'] === true ? blocOutil(options) : '<div data-element-unique="outil"><p>Outil de test</p></div>',
@@ -542,7 +615,8 @@ function htmlConstruit(page: Objet, type: string, options: OptionsHtml = {}): st
   // Sans élément unique : seul l'élément unique manque (sur une page voyant, c'est le tableau des notices).
   // Page code défaut : fiche du code, puis cas par marque ; ce tableau est l'élément unique quand la page en a.
   // Page pneus et obligations : fiche « Le texte en bref » avant le corps (livrable 6.6c).
-  const code = type === 'code-defaut' ? blocsCode(page, options) : type === 'pneus' ? blocsTexte(page, options) : '';
+  // Étape 10 : fiche du symptôme, fiche du tutoriel, historique du dossier (rien sur une page qui n'en a pas).
+  const code = `${type === 'code-defaut' ? blocsCode(page, options) : type === 'pneus' ? blocsTexte(page, options) : ''}${blocsEtape10(page, type, options)}`;
   const parMarque = type === 'code-defaut' && Array.isArray(page['precisions_par_marque']) && page['element_unique'] === 'tableau';
   const element = pageVoyant && notices !== '' ? (options.sansElement ? '' : notices) : `${code}${options.sansElement || parMarque ? '' : (blocs[String(page['element_unique'])] ?? '')}${notices}`;
   return `${entete}<meta name="description" content="${String(page['description'])}"></head><body>${pub}${avant}<main><header><h1>${String(page['h1'])}</h1></header>${entreH1EtEncadre}${blocEncadre}${apres}${element}${etapes}${autreListe}${communs.sources}</main></body></html>\n`;
@@ -687,6 +761,7 @@ invalide('cout-prise-en-charge-inconnue', 'dossier', avecCout(dossier(), { prise
 invalide('cout-prise-en-charge-hors-plage', 'fluide', avecCout(fluide(), { prise_en_charge: ['fixture-garantie'] }), ['COUT-PRISE-EN-CHARGE'], 'Une prise en charge sur une page dont la plage ne va pas jusqu\'à la réparation au garage.');
 invalide('cout-risque-plus-leger', 'panne', avecCout(panne(), { si_vous_continuez: { tranche: 'aucun', citations: [{ voyant: 'fixture-voyant-batterie', source: 'fixture-notice', emplacement: 'p. 1, rubrique de test' }] } }), ['COUT-RISQUE'], 'Le risque si l\'on continue est plus léger que le début de la plage.');
 invalide('cout-risque-sans-premiere-main', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [citation('fixture-forum')] } }), ['COUT-RISQUE-SOURCE'], 'Le risque si l\'on continue n\'est cité que d\'une source secondaire.');
+invalide('cout-risque-source-secondaire', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 1, rubrique de test' }, citation('fixture-forum')] } }), ['COUT-RISQUE-SOURCE'], "Le risque si l'on continue cite une notice et une source secondaire : chaque citation du risque est de première main (demande de changement n° 31).");
 invalide('cout-citation-introuvable', 'voyant', avecCout(voyantPage(), { si_vous_continuez: { tranche: 'organe', citations: [{ voyant: 'fixture-voyant-huile', source: 'fixture-notice', emplacement: 'p. 99' }] } }), ['COUT-CITATION-INTROUVABLE'], 'La citation référencée n\'existe pas dans la base voyants.');
 invalide('r9-encadre-sans-cout', 'panne', panne(), ['R9-ENCADRE-CONTENU'], "L'encadré n'affiche pas le coût probable (plage, montant automatique).", { encadreSansCout: true });
 invalide('r9-encadre-sources', 'voyant', voyantPage(), ['R9-ENCADRE-SOURCES'], "Une ligne de l'encadré annonce un autre nombre de notices que celles qu'elle cite (charte §2.1).", { noticesFausses: true });
@@ -721,7 +796,7 @@ valide(
   'Loi montagne avec un verdict « non » (obligation d\'équipement) : le dépannage sur autoroute ne s\'affiche pas de lui-même (demande de changement n° 10).',
 );
 invalide('dates-revue-loi-montagne', 'pneus', loiMontagne({ date_revue: '2026-06-01', prochaine_revue: '2026-11-15' }), ['DATES-REVUE-DELAI'], 'Loi montagne revue en juin : la suivante tombe avant le 1er novembre, début de la saison (charte §8).');
-invalide('dates-journal-hors-periode', 'dossier', { ...dossier(), journal_modifications: [{ date: '2026-09-15', resume: 'Entrée antérieure à la publication.' }] }, ['DATES-ORDRE'], "Entrée du journal d'un dossier hors de la période de la page.");
+invalide('dates-journal-hors-periode', 'dossier', { ...dossier(), journal_modifications: [{ date: '2026-09-15', resume: 'Entrée antérieure à la publication.' }] }, ['DATES-ORDRE', 'DATES-HISTORIQUE'], "Entrée du journal d'un dossier hors de la période de la page (et qui n'est donc pas la dernière modification).");
 invalide('socle-sans-description', 'socle', (() => { const { description: _, ...reste } = socle(); return reste; })(), ['R7-CHAMP-MANQUANT'], "Page du socle sans description : la meta description manquerait (demande de changement n° 13).");
 invalide('socle-html-sans-description', 'socle', socle(), ['R7-HTML-DESCRIPTION'], 'Page du socle construite sans la meta description de son contenu.', { socleSansDescription: true });
 invalide('dates-socle-revue-delai', 'socle', { ...socle(), prochaine_revue: '2027-12-01' }, ['DATES-REVUE-DELAI'], 'Page du socle dont la prochaine revue dépasse 12 mois (demande de changement n° 13).');
@@ -748,6 +823,37 @@ invalide('outil-filtre-sans-tous', 'voyant', outilPage(), ['OUTIL-FILTRE'], "« 
 invalide('outil-index-entree-manquante', 'voyant', outilPage(), ['OUTIL-INDEX'], "Une ligne de la base n'a pas son entrée dans l'index des dessins : le lecteur n'y trouverait pas ce dessin.", { outilIndexIncomplet: true });
 invalide('outil-ligne-masquee', 'voyant', outilPage(), ['OUTIL-SANS-JS'], "Une ligne masquée dans le HTML (hidden) : elle n'apparaîtrait qu'avec un script.", { outilLigneMasquee: true });
 invalide('outil-script', 'voyant', outilPage(), ['OUTIL-SANS-JS'], "Un script dans l'outil : l'outil et son filtre fonctionnent sans JavaScript.", { outilScript: true });
+
+// ---- Pages panne et dossier (étape 10, partie technique des modèles) ------------------------------
+invalide('panne-sans-fiche', 'panne', panne(), ['FICHE-PANNE-ABSENTE'], 'Page panne construite sans la fiche « Le symptôme en bref » (symptôme, quand, moteurs concernés).', { sansFichePanne: true });
+invalide('panne-fiche-incomplete', 'panne', panne(), ['FICHE-PANNE-INCOMPLETE'], "La fiche du symptôme construite n'affiche pas le symptôme du contenu.", { fichePanneFausse: true });
+invalide('panne-tutoriel-sans-fiche', 'panne', panneTutoriel(), ['FICHE-TUTORIEL-ABSENTE'], 'Tutoriel de panne construit sans la fiche « Le tutoriel en bref » (outils, durée, difficulté, quand ne pas le faire soi-même).', { sansFicheTutoriel: true });
+invalide('panne-fiche-tutoriel-en-trop', 'panne', panne(), ['FICHE-TUTORIEL-INCOMPLETE'], "Fiche du tutoriel affichée sur une page qui n'est pas un tutoriel.", { ficheTutorielEnTrop: true });
+invalide('r7-arbre-une-reponse', 'panne', panne(), ['R7-ARBRE-QUESTIONS'], "Une question de l'arbre de décision n'a qu'une réponse : ce n'est pas un choix.", { arbreUneReponse: true });
+invalide('dossier-sans-historique', 'dossier', dossier(), ['HISTORIQUE-ABSENT'], "Page dossier construite sans l'historique du dossier (journal des modifications).", { sansHistorique: true });
+// Dossier à deux entrées de journal : la plus récente est la dernière modification (DATES-HISTORIQUE).
+const dossierDeux = (): Objet => ({
+  ...dossier(),
+  journal_modifications: [
+    { date: '2026-10-01', resume: 'Création du dossier de test.' },
+    { date: '2026-10-20', resume: 'Rappel de test ajouté.' },
+  ],
+});
+valide('valide-dossier-historique', 'dossier', dossierDeux(), "Dossier valide à deux entrées : l'historique les affiche de la plus récente à la plus ancienne ; la plus récente est la date de modification.");
+invalide('dossier-historique-incomplet', 'dossier', dossierDeux(), ['HISTORIQUE-INCOMPLET'], "L'entrée la plus récente du journal des modifications manque à l'historique construit.", { historiqueIncomplet: true });
+invalide('dossier-historique-desordre', 'dossier', dossierDeux(), ['HISTORIQUE-INCOMPLET'], "L'historique construit affiche la plus ancienne entrée d'abord.", { historiqueDesordre: true });
+invalide('dossier-fiche-panne-en-trop', 'dossier', dossier(), ['FICHE-PANNE-INCOMPLETE'], "Fiche du symptôme affichée sur une page qui n'est pas une page panne.", { fichePanneEnTrop: true });
+invalide('panne-historique-en-trop', 'panne', panne(), ['HISTORIQUE-INCOMPLET'], "Historique du dossier affiché sur une page panne.", { historiqueEnTrop: true });
+invalide('fluide-tutoriel-sans-fiche', 'fluide', fluideTutoriel(), ['FICHE-TUTORIEL-ABSENTE'], "Tutoriel d'une page fluide construit sans la fiche « Le tutoriel en bref » : exigée sur toute page qui déclare un tutoriel.", { sansFicheTutoriel: true });
+invalide('dates-historique-derniere', 'dossier', { ...dossier(), journal_modifications: [{ date: '2026-10-01', resume: 'Création du dossier de test.' }] }, ['DATES-HISTORIQUE'], "La dernière entrée du journal n'est pas datée de la dernière modification : « Mis à jour le » et l'historique ne concordent pas.");
+invalide('r7-arbre-sans-liste', 'panne', panne(), ['R7-ARBRE-QUESTIONS'], "Arbre de décision sans liste numérotée de questions.", { arbreSansListe: true });
+valide('valide-panne-arbre-verdict', 'panne', panne(), "Une réponse de l'arbre qui dit de s'arrêter redit le verdict d'une ligne de l'encadré, au libellé de la grille.", { arbreAvecVerdict: true });
+invalide('r7-arbre-verdict-ecrit', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre dit de s'arrêter sans redire le verdict de l'encadré (verdict écrit à la main).", { arbreVerdictEcrit: true });
+invalide('r7-arbre-verdict-hors-encadre', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre cite un verdict qu'aucune ligne de l'encadré ne donne : le texte contredirait l'encadré.", { arbreVerdictHorsEncadre: true });
+invalide('r7-arbre-precautions-hors-encadre', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre cite « Oui, avec précautions », qu'aucune ligne de l'encadré ne donne (libellé vérifié même sans expression de conduite).", { arbreVerdictPrecautions: true });
+invalide('r7-arbre-action-sans-verdict', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Une réponse de l'arbre demande un contrôle (« faites contrôler ») sans redire le verdict d'une ligne de l'encadré (revue de F1.3c).", { arbreActionSansVerdict: true });
+invalide('r7-arbre-verdict-dans-question', 'panne', panne(), ['R7-ARBRE-VERDICT'], "Le texte d'une question, hors de la liste des réponses, dit de s'arrêter sans redire le verdict de l'encadré : toute phrase de l'arbre est contrôlée.", { arbreVerdictDansQuestion: true });
+invalide('panne-tutoriel-fiche-incomplete', 'panne', panneTutoriel(), ['FICHE-TUTORIEL-INCOMPLETE'], "La fiche du tutoriel construite n'affiche pas « Quand ne pas le faire soi-même ».", { ficheTutorielFausse: true });
 
 // ---- Écriture ----------------------------------------------------------------------------------------
 await rm(join(racine, 'cas'), { recursive: true, force: true });

@@ -67,7 +67,7 @@ Dans le texte rédigé, trois choses sont **générées, jamais tapées à la ma
 - les noms des notices avec leur génération et leur édition, tirés du registre (`{{notice:…}}`) ;
 - les pages citées dans le texte seulement, ajoutées à « Sources » (`{{cite:…}}`).
 
-Chaque fait cite sa notice et sa page. Les extraits sont dans `travaux/etape-5/notices/`.
+Chaque fait cite sa notice et sa page. Les extraits sont dans les documents du projet Claude (`claude/notices-etape-5/`).
 
 | Partie | Fait affirmé | Source |
 |---|---|---|

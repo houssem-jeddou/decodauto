@@ -18,7 +18,7 @@ import { dateAffichee } from '../src/lib/cout.ts';
 import { ADRESSE_SIGNALEMENT } from '../src/lib/site.ts';
 import { soclePageSchema } from '../src/schemas/pages.ts';
 import { lireFrontmatter, separerFrontmatter } from '../scripts/lib/charger.ts';
-import { adressesDuCss, constatsExpressionsInterdites, constatsIdentifiants, constatsLienConfidentialite, constatsPageAPropos, constatsRessourcesTierces, constatsTypographie, controlerComposantsCommuns } from '../scripts/lib/dist.ts';
+import { adressesDuCss, constatsExpressionsInterdites, constatsFeuilleDeStyle, constatsIdentifiants, constatsLienConfidentialite, constatsPageAPropos, constatsRessourcesTierces, constatsTypographie, controlerComposantsCommuns } from '../scripts/lib/dist.ts';
 import { pageRedigee } from '../scripts/lib/pages-redigees.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -279,5 +279,26 @@ describe('page « à propos » : fiche auteur et section « Méthode »', () => 
     assert.match(corpsAPropos, /L'éditeur vérifie lui-même chaque verdict/);
     assert.match(corpsAPropos, /Il n'est relu par aucun mécanicien et ne répare pas de voitures/);
     assert.match(aPropos.auteurs?.[0]?.presentation ?? '', /n'est pas mécanicien/);
+  });
+});
+
+describe('FEUILLE-FORMAT : la feuille du format de la page, seule et en ligne (demande de changement n° 30, lot F1)', () => {
+  const page = (format: string | null, tete: string): string =>
+    `<!doctype html><html lang="fr"${format === null ? '' : ` data-format="${format}"`}><head><title>T</title>${tete}</head><body></body></html>`;
+  const codesFeuille = (html: string): string[] => constatsFeuilleDeStyle(html, 'x').map((c) => c.regle);
+
+  test('accepté : une feuille en ligne au marqueur du format de la page', () => {
+    assert.deepEqual(codesFeuille(page('1', '<style>:root{--charte:1;color:red}</style>')), []);
+    assert.deepEqual(codesFeuille(page('2', '<style>:root{--charte: 2}</style>')), []);
+  });
+
+  test('refusé : format absent, feuille reliée, deux feuilles, aucune, feuille d\'un autre format', () => {
+    for (const [nom, html] of [
+      ['format absent', page(null, '<style>:root{--charte:1}</style>')],
+      ['feuille reliée', page('1', '<style>:root{--charte:1}</style><link rel="stylesheet" href="/_astro/x.css">')],
+      ['deux feuilles', page('1', '<style>:root{--charte:1}</style><style>:root{--charte:2}</style>')],
+      ['aucune feuille', page('2', '')],
+      ['feuille d\'un autre format', page('2', '<style>:root{--charte:1}</style>')],
+    ] as const) assert.ok(codesFeuille(html).includes('FEUILLE-FORMAT'), nom);
   });
 });

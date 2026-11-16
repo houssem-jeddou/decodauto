@@ -110,18 +110,17 @@
     ]
   },
   "voyant-frein": {
-    "question_decision": "Puis-je continuer à rouler avec le voyant de frein allumé ?",
-    "angle": "Trois voyants sous un même nom : les deux lignes de la base (freinage, frein de stationnement ; tableau des voyants du brief) et le témoin d'usure des plaquettes, en tête des résultats mais absent des notices lues (D4 ; relevé, constat 6).",
+    "angle": "Trois voyants sous un même nom : les deux lignes de la base (freinage, frein de stationnement ; tableau des voyants du brief) et le témoin d'usure des plaquettes, en tête des résultats, décrit par la seule notice Seat Leon parmi les notices lues (D4, levée le 14/11 ; relevé, constat 6).",
     "element_unique": "Tableau « Ce que dit la notice de votre marque ».",
     "a_traiter": [
-      "Témoin d'usure des plaquettes (« voyant plaquette de frein », « peut-on rouler avec le voyant plaquette de frein », « reste allumé ») : ligne saisie citée (D4), dont la source reste à trouver.",
+      "Témoin d'usure des plaquettes (« voyant plaquette de frein », « peut-on rouler avec le voyant plaquette de frein », « reste allumé ») : ligne saisie citée (D4), source trouvée le 14/11 : notice Seat Leon, p. 297-298 ; les six autres notices lues ne le décrivent pas.",
       "« Puis-je rouler avec le voyant liquide de frein ? », « liquide de frein insuffisant », « système de freinage défaillant » : ligne de freinage de la base.",
       "« Voyant frein orange » : lire ce que les notices décrivent en orange avant d'écrire ; ABS et freinage allumés ensemble : ligne de la page ABS et ESP (page liée).",
       "« Comment enlever le voyant frein mini ? » : on ne l'éteint pas sans corriger la cause (relevé, constat 4).",
       "Liquide de frein (appoint, purge) : page « liquide de frein » (page liée)."
     ],
     "sources_a_trouver": [
-      "Notice de constructeur qui décrit le témoin d'usure des plaquettes, à la page près : absent des notices lues à l'étape 5 (D4)."
+      "Aucune : le témoin d'usure des plaquettes est décrit par la notice Seat Leon (p. 297-298), ajoutée au registre avec le lot 5d."
     ],
     "hors_perimetre": [
       "Marques hors notices lues (« voyant plaquette de frein Volkswagen », « voyant frein BMW ») : renvoi à la notice du véhicule (charte §2.5).",
@@ -175,7 +174,7 @@
       "« Voiture ne démarre pas » et « perte de puissance » : pages liées, une phrase ici."
     ],
     "sources_a_trouver": [
-      "Consigne du témoin de préchauffage qui clignote dans les notices Peugeot 208, Renault Clio 5 et Dacia Sandero 3 (versions diesel), à la page près ; Seat Ibiza p. 289 est déjà relevée (travaux/etape-5/notices/seat-ibiza.txt)."
+      "Consigne du témoin de préchauffage qui clignote dans les notices Peugeot 208, Renault Clio 5 et Dacia Sandero 3 (versions diesel), à la page près ; Seat Ibiza p. 289 est déjà relevée (claude/notices-etape-5/seat-ibiza.txt, documents du projet Claude)."
     ],
     "hors_perimetre": [
       "Modèles cités (« voyant prechauffage clio 2 », « trafic 2 ») : pas de page par modèle."
@@ -243,7 +242,6 @@
     ]
   },
   "code-p0420": {
-    "question_decision": "Puis-je continuer à rouler avec le code P0420 ?",
     "angle": "Code générique du catalyseur (rendement sous le seuil). Signification, causes et cas par marque tirés de sources techniques admises (charte §2.2), comme l'exemple P0087 ; le verdict vient de la ligne du voyant qui s'allume avec le code.",
     "element_unique": "Tableau des cas décrits par marque (modèle 6.6b).",
     "a_traiter": [
@@ -262,7 +260,6 @@
     ]
   },
   "code-p0299": {
-    "question_decision": "Puis-je continuer à rouler avec le code P0299 ?",
     "angle": "Pression de suralimentation (turbo) trop faible ; les lecteurs cherchent les symptômes et la marque. Le reste vient de sources admises (charte §2.2) ; le verdict, de la ligne du voyant qui s'allume avec le code.",
     "element_unique": "Tableau des cas décrits par marque (modèle 6.6b).",
     "a_traiter": [

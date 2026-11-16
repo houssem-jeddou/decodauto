@@ -2,6 +2,8 @@
    La gravité ne repose jamais sur la seule couleur (WCAG 1.4.1) : le libellé du verdict est écrit et l'icône a une
    forme propre à chaque verdict ; la couleur s'y ajoute. Contrastes du texte : au moins 4,5:1 sur leur fond. */
 :root {
+  /* Format de lecture de cette feuille (demande de changement n° 30, lot F1) : contrôle FEUILLE-FORMAT. */
+  --charte:1;
   color-scheme: light;
   --texte: #1a1d21;
   --texte-doux: #4a5058;
@@ -386,13 +388,17 @@ h3 {
    une carte par marque sur téléphone (seuls les en-têtes de colonnes sont alors masqués à l'écran, lus par les lecteurs
    d'écran ; jamais un cas ni sa source). */
 .fiche-code dl,
-.fiche-texte dl {
+.fiche-texte dl,
+.fiche-panne dl,
+.fiche-tutoriel dl {
   margin: 0 0 1rem;
   border: 1px solid var(--bord);
   border-radius: 0.375rem;
 }
 .fiche-code dl > div,
-.fiche-texte dl > div {
+.fiche-texte dl > div,
+.fiche-panne dl > div,
+.fiche-tutoriel dl > div {
   display: grid;
   grid-template-columns: 11rem 1fr;
   gap: 0.75rem;
@@ -400,15 +406,21 @@ h3 {
   border-bottom: 1px solid var(--bord);
 }
 .fiche-code dl > div:last-child,
-.fiche-texte dl > div:last-child {
+.fiche-texte dl > div:last-child,
+.fiche-panne dl > div:last-child,
+.fiche-tutoriel dl > div:last-child {
   border-bottom: none;
 }
 .fiche-code dt,
-.fiche-texte dt {
+.fiche-texte dt,
+.fiche-panne dt,
+.fiche-tutoriel dt {
   font-weight: 600;
 }
 .fiche-code dd,
-.fiche-texte dd {
+.fiche-texte dd,
+.fiche-panne dd,
+.fiche-tutoriel dd {
   margin: 0;
 }
 .par-marque table {
@@ -441,7 +453,9 @@ h3 {
 }
 @media (max-width: 40rem) {
   .fiche-code dl > div,
-  .fiche-texte dl > div {
+  .fiche-texte dl > div,
+  .fiche-panne dl > div,
+  .fiche-tutoriel dl > div {
     grid-template-columns: 1fr;
     gap: 0.125rem;
   }
@@ -474,6 +488,44 @@ h3 {
   .cas-intitule {
     display: inline;
   }
+}
+
+/* Pages panne et dossier (étape 10) : les fiches « Le symptôme en bref » et « Le tutoriel en bref » reprennent la mise
+   en forme de la fiche du code. L'arbre de décision : une question par carte numérotée, ses réponses en dessous ; les
+   étapes d'un tutoriel : numéros bien visibles, une étape par ligne aérée. L'historique d'un dossier : date en gras. */
+.arbre > ol {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+.arbre > ol > li {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--bord);
+  border-radius: 0.375rem;
+  background: var(--fond-doux);
+}
+.arbre > ol > li > ul,
+.arbre > ol > li > ol {
+  margin: 0.375rem 0 0;
+  padding-left: 1.25rem;
+}
+.arbre > ol > li > ul > li,
+.arbre > ol > li > ol > li {
+  margin-top: 0.25rem;
+}
+.etapes > li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
+}
+.etapes > li::marker {
+  font-weight: 700;
+}
+.historique-dossier ul {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+.historique-dossier time {
+  font-weight: 600;
 }
 
 /* Page pneus et obligations (livrable 6.6c) : la fiche « Le texte en bref » reprend la mise en forme de la fiche du code ;

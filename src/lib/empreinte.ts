@@ -58,6 +58,7 @@ export interface CitationValidee {
   extrait: string;
   verdict?: Verdict | undefined;
   urgence?: Urgence | undefined;
+  demande?: string | undefined;
 }
 
 /** Ligne de la base voyants, telle que validée. */
@@ -72,6 +73,7 @@ export interface VoyantValide {
   action: string;
   citations: readonly CitationValidee[];
   ecart_marques?: string | undefined;
+  ecart_court?: string | undefined;
 }
 
 /** Ligne de situation d'une page : référence à un voyant de la base, ou ligne saisie. */
@@ -84,6 +86,7 @@ export interface LigneDePage {
   action?: string | undefined;
   citations?: readonly CitationValidee[] | undefined;
   ecart_marques?: string | undefined;
+  ecart_court?: string | undefined;
 }
 
 /** Ce que l'encadré de décision affiche d'une ligne de la base voyants. */
@@ -93,6 +96,7 @@ export interface LigneAffichee {
   urgence: Urgence;
   action: string;
   ecart_marques?: string | undefined;
+  ecart_court?: string | undefined;
 }
 
 /** Citation du risque si l'on continue : référence à la base voyants, ou citation saisie. */
@@ -118,6 +122,9 @@ export interface EncadreValide {
   causes?: readonly { cause: string; pieces: readonly string[] }[] | undefined;
   /** Page outil voyants : ses textes fixes (renvoi de l'encadré compris) entrent dans l'empreinte (livrable 8.1). */
   outil?: boolean | undefined;
+  /** Format de lecture (demande de changement n° 30, lot F1) et réponse directe d'une page informative au format 2. */
+  format?: 1 | 2 | undefined;
+  reponse_directe?: string | undefined;
 }
 
 /** Montant fixé par un texte, ou prise en charge, tel que validé : identifiant, texte, date d'entrée en vigueur,
@@ -149,6 +156,8 @@ function citationsCanoniques(citations: readonly CitationValidee[]): string[] {
         extrait: normaliserTexte(c.extrait),
         verdict: c.verdict ?? null,
         urgence: c.urgence ?? null,
+        // Format 2 : ce que demande la notice ; absent, la forme canonique reste celle d'avant (JSON sans la clé).
+        demande: c.demande === undefined ? undefined : normaliserTexte(c.demande),
       }),
     )
     .sort();
@@ -190,6 +199,8 @@ export function empreinteVoyant(voyant: VoyantValide, dessin: string | undefined
     urgence: voyant.urgence,
     action: normaliserTexte(voyant.action),
     ecart_marques: facultatif(voyant.ecart_marques),
+    // Format 2 : ligne d'écart courte ; absente, l'empreinte reste celle d'avant (JSON sans la clé).
+    ecart_court: voyant.ecart_court === undefined ? undefined : normaliserTexte(voyant.ecart_court),
     citations: citationsCanoniques(voyant.citations),
   });
 }
@@ -238,6 +249,16 @@ export function empreintePage(encadre: EncadreValide, base: ReadonlyMap<string, 
     causes: (encadre.causes ?? []).map((c) => ({ cause: normaliserTexte(c.cause), pieces: Array.isArray(c.pieces) ? [...c.pieces].sort() : null })),
     // Page outil seulement : les autres empreintes ne changent pas (demande de changement n° 12, livrable 8.1).
     ...(encadre.outil === true ? { textes_outil: TEXTES_OUTIL.map(normaliserTexte) } : {}),
+    // Format 2 seulement (demande de changement n° 30, lot F1) : le format, la réponse directe et la ligne d'écart courte
+    // affichée de chaque situation entrent dans l'empreinte ; une page au format 1 garde la sienne. Passer une page au
+    // format 2 demande donc toujours une nouvelle validation de son encadré.
+    ...(encadre.format === 2
+      ? {
+          format: 2,
+          reponse_directe: facultatif(encadre.reponse_directe),
+          ecarts_courts: encadre.situations.map((l) => facultatif(l.voyant !== undefined ? base.get(l.voyant)?.ecart_court : l.ecart_court)),
+        }
+      : {}),
   });
 }
 

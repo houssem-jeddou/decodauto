@@ -10,6 +10,8 @@ Précisions validées avec le livrable 6.6c (03/11/2026, 21 h 44) : montant cit�
 Précisions validées avec la porte de l'étape 6 (04/11/2026, 12 h 03) : partie « Les codes défaut » de la section « Méthode » (§7.2, nouvelle empreinte des textes affichés) ; « pages écrites pour vendre un appareil ou un service » (§2.2) ; « nos rédactions » dans la liste du §2.7.
 Précisions validées avec le livrable 8.1 (04/11/2026, 13 h 48) : pages citées de la page outil (§2.6) ; renvoi de son encadré (§4, point 4, demande de changement n° 12) ; son corps et ses sources (§4, points 7 et 8) ; contrôles ajoutés (§9).
 Précisions validées avec le livrable 7.2 (09/11/2026, 21 h 41) : liens d'une page du socle vers d'autres sites (§2.7) ; lien « Mentions légales et confidentialité » en pied de page (§4) ; revue des pages du socle (§8) ; contrôles ajoutés (§9).
+Précisions acceptées le 16/11/2026 (16 h 52) : sources secondaires, une règle par usage pour toutes les pages éditoriales (§2.2, §2.6 ; demande de changement n° 31 ; nouvelle partie « Les codes défaut et les pannes » de la section « Méthode », §7.2, avec la republication d'« à propos ») ; ordre de la page panne (§4, point 7 ; demande n° 32 : mis à jour à la porte F1).
+Précisions validées avec la porte F1 (16/11/2026, 18 h 55) : structure d'une page au format 2, repères et méthode (§4) ; ordre de la page panne (§4, point 7, demande de changement n° 32) ; longueur au format 2 (§3.5). Textes repris mot pour mot du dossier de la porte (`travaux/etape-13/f1/porte-f1.md`, §6.2).
 
 ## 0. Ce qui fait foi
 - **Règles de rédaction** (sections 1 à 6 et 8 à 10) : ce document (projet Claude, copie dans `docs/`).
@@ -41,10 +43,14 @@ Précisions validées avec le livrable 7.2 (09/11/2026, 21 h 41) : liens d'une p
 - Pas de « dans la plupart des cas », « souvent », « en général » pour habiller un chiffre non sourcé.
 - **« Combien de kilomètres puis-je faire ? »** Si aucune notice lue ne donne de distance, la page le dit en ces termes, et donne ce que la notice demande à la place (délai, précaution). Jamais une distance estimée.
 - Les causes sont présentées dans un ordre logique, jamais « par fréquence » sans donnée sourcée (R6).
-- **Pages codes défaut : sources techniques secondaires** (validé avec le livrable 6.6b). Les notices d'utilisation ne parlent pas des codes défaut. La signification d'un code, ses causes et ses cas par marque peuvent donc venir de sources secondaires, inscrites au registre et citées sur la page :
-  - sont admis les bulletins et fiches techniques de constructeur, les documents techniques d'équipementier et la documentation d'un éditeur d'outil de diagnostic ;
-  - sont exclus les blogs commerciaux, les pages écrites pour vendre un appareil ou un service, et les forums (précisé avec la porte de l'étape 6 : un éditeur d'outil de diagnostic vend son logiciel, sa documentation technique reste admise) ;
-  - une source admise ne vaut que pour les modèles, moteurs et marchés qu'elle nomme, et ne fixe jamais de verdict : le verdict vient de la base voyants, par la ligne du voyant qui s'allume avec le code.
+- **Sources secondaires : une règle par usage** (pages codes défaut validées avec le livrable 6.6b ; étendue à toutes les pages éditoriales par la demande de changement n° 31). Une source secondaire, inscrite au registre avec sa nature et citée sur la page, n'est admise que pour :
+  - la signification d'un code défaut et ses cas par marque ; les causes d'un code, d'un symptôme ou d'un voyant, leur explication, les vérifications qu'un atelier fait et les valeurs de référence avec leurs conditions de mesure : documents techniques (bulletins et fiches techniques de constructeur, documents techniques d'équipementier, fabricant de batteries compris, documentation d'un éditeur d'outil de diagnostic) ;
+  - un programme d'un constructeur (extension de garantie, prise en charge) : sa communication officielle, datée et revérifiée ;
+  - l'application d'un texte par l'administration : réponses publiées des ministres, fiches de Service-public.fr, qui ne contredisent jamais le texte.
+
+  Sont exclus les blogs commerciaux, les pages écrites pour vendre un produit, un appareil ou un service (catalogue, guide de produits), les sites de conseils, les forums et la presse. Un éditeur d'outil de diagnostic vend son logiciel : sa documentation technique reste admise (précisé avec la porte de l'étape 6).
+
+  Une source secondaire ne fixe jamais un verdict, une urgence, une action conseillée au lecteur ni le risque de l'encadré : ils viennent de la base voyants (sur une page code défaut, par la ligne du voyant qui s'allume avec le code) ou d'une source de première main, comme tout geste conseillé. La notice ou le texte de première main est cité d'abord ; en cas de désaccord, la page le dit et la notice fait foi pour son véhicule. Une cause n'est citée que si le document la relie lui-même au symptôme, au code ou au voyant ; la page garde le contexte du document (§2.5) et son degré de certitude, signale une traduction, et dit qu'une liste de causes n'est pas complète. Une situation qu'aucune source de première main ne décrit n'a pas de ligne dans l'encadré : la page le dit et conseille l'avis d'un professionnel. Un risque plus grave décrit par un document secondaire est cité tel quel, sans changer le verdict, et passe au paquet de validation.
 - Une relecture par une IA n'est pas une vérification.
 
 ### 2.3 Coût probable
@@ -69,7 +75,7 @@ Précisions validées avec le livrable 7.2 (09/11/2026, 21 h 41) : liens d'une p
 
 ### 2.6 Textes d'autrui, citations et images
 - **Citations.** Une citation de notice ou de texte reste courte (400 caractères au plus, contrôlé), entre guillemets, avec son auteur et sa source ; elle sert l'explication de la page. Le volume cité reste limité : le tableau des notices (6.4) et l'outil ne reprennent que l'extrait utile de chaque consigne, jamais une notice entière. Cadre légal visé : l'exception de courte citation (code de la propriété intellectuelle, art. L122-5, 3° a, relu sur Légifrance le 02/11/2026, version en vigueur depuis le 01/01/2023) : le nom de l'auteur et la source sont indiqués clairement ; les citations sont courtes ; elles sont justifiées par le caractère pédagogique ou d'information de la page qui les cite. La loi ne fixe aucun seuil. Seuil du site (validé avec le livrable 6.6a) : sur une page éditoriale, le texte cité (extraits de notices, citations sourcées, texte entre guillemets) ne dépasse pas un tiers du texte affiché (`PART_CITEE_MAX`, contrôle CITATIONS-PART) ; et la page a toujours un texte rédigé qui répond aux questions des lecteurs (TEXTE-REDIGE-ABSENT). Mesure sur la page exemple « voyant moteur » : 22 % (32 % sans texte rédigé). Sur la page outil, les pages citées pour chaque voyant sont données sous sa ligne, dans un bloc dépliable, et la section « Sources » y renvoie.
-- **Résultats de Google, aperçu IA, autres sites.** Ils servent seulement à connaître les questions des lecteurs (relevé Google). Leurs textes ne sont jamais repris ni reformulés. Quand une idée répandue contredit la notice, la page le dit et cite la notice. Les sources techniques secondaires admises par le §2.2 (pages codes défaut) ne sont pas des « autres sites » : elles sont inscrites au registre et citées.
+- **Résultats de Google, aperçu IA, autres sites.** Ils servent seulement à connaître les questions des lecteurs (relevé Google). Leurs textes ne sont jamais repris ni reformulés. Quand une idée répandue contredit la notice, la page le dit et cite la notice. Les sources secondaires admises par le §2.2 ne sont pas des « autres sites » : elles sont inscrites au registre, avec leur nature, et citées.
 - **Photos.** Une photo présentée comme réelle est une vraie photo, avec son auteur ou sa source. Jamais une image générée par une IA présentée comme une photo réelle.
 
 ### 2.7 Ce qu'on n'écrit jamais
@@ -105,6 +111,9 @@ Précisions validées avec le livrable 7.2 (09/11/2026, 21 h 41) : liens d'une p
 - La réponse tient dans l'encadré de décision. Le texte qui suit sert à vérifier, comprendre et agir : il s'arrête quand il n'aide plus.
 - Pas de FAQ artificielle (Google n'en accorde plus les résultats enrichis à ce type de site, 03) ; les questions des lecteurs relevées sur Google sont traitées dans le corps de la page.
 
+Au format 2 : paragraphes de trois phrases au plus (FORMAT2-PARAGRAPHES), étapes en liste numérotée, comparaisons en
+tableau.
+
 ### 3.6 Accessibilité
 - Le texte d'un lien dit où il mène (jamais « cliquez ici »).
 - Les titres se suivent sans saut de niveau (H1, puis H2, puis H3).
@@ -122,7 +131,10 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
 7. **Corps**, selon le type de page (08 §2) :
    - pages voyants (demande de changement n° 9, 6.6a) : texte rédigé (questions des lecteurs relevées sur Google ; chaque partie qui répond à une question redit le verdict retenu), causes, puis tableau « Ce que dit la notice de votre marque » (6.4). La marche à suivre est l'action de chaque ligne de l'encadré de décision : le corps ne la recopie pas ;
    - pages codes défaut (modèle validé avec le livrable 6.6b) : fiche du code (signification, portée, moteurs concernés, voyant qui s'allume, puis la consigne d'un code lu sans ce voyant allumé, « Demandez l'avis d'un professionnel », et la source de la signification) ; cas décrits par marque, élément unique quand c'est un tableau ; causes ; texte rédigé, avec la marche à suivre ;
-   - pages pannes : symptômes, causes, marche à suivre ;
+   - pages pannes (demande de changement n° 32) : fiche « Le symptôme en bref » (ou « La situation en bref »), fiche « Le
+     tutoriel en bref » sur un tutoriel, puis le texte rédigé jusqu'à la partie qui porte l'arbre de décision ou les étapes,
+     puis les causes, puis la suite du texte. L'arbre, ou les étapes, est dans la première ou la deuxième partie du texte ;
+     s'il est dans la deuxième, la première est un seul paragraphe ;
    - pages fluides : rôle, niveau, appoint, marche à suivre ;
    - pages pneus et obligations (modèle validé avec le livrable 6.6c) : fiche « Le texte en bref », en haut de page (texte de référence et où le lire ; selon le sujet, période et zones, ou défaillances et contre-visite), puis texte rédigé : ce qui est exigé (avec l'élément unique quand c'est un tableau du texte, marqué `{{tableau}}`), questions des lecteurs, marche à suivre ;
    - page outil voyants (modèle validé avec le livrable 8.1) : outil (filtre par couleur, index des dessins, liste par couleur), puis texte rédigé (questions des lecteurs), pages enfants et liées. La liste vient avant le texte : le lecteur cherche d'abord son voyant ;
@@ -131,6 +143,16 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
 9. **Lien « Signaler une erreur »**, puis, dès que la page des mentions légales est construite, le lien « Mentions légales et confidentialité » vers sa section `#confidentialite` (validé avec le livrable 7.2) : en pied de toutes les pages, socle compris.
 
 Les emplacements publicitaires, quand il y en aura, ne sont jamais avant l'encadré (R9-PUB-AVANT-ENCADRE).
+
+**Au format 2** (demande de changement n° 30, charte graphique §4) : mention en tête, fil d'Ariane, H1, encadré de
+décision, signature, ligne de transparence, bloc « Notices / Base du coût », illustration, sommaire, corps du modèle,
+tableau des notices, emplacement publicitaire, pages liées, « Sources » repliée. Sur la page outil, le renvoi vers la liste est un bouton, sans icône
+(point 4 ci-dessus : une icône seulement si elle double un texte), et l'introduction de l'outil tient en deux paragraphes,
+sans changer un mot.
+
+Repère du verdict : seulement sous un H2 qui pose la question d'une seule ligne de l'encadré ; une section qui mêle
+plusieurs cas n'en a pas. Le texte nomme la marque et le modèle ; ni « Verdict retenu », ni « consigne retenue », ni
+édition, ni page écrite à la main : les références vont dans « Sources » par `{{cite:…}}` (règle 2d, FORMAT2-METHODE).
 
 ## 5. Transparence
 ### 5.1 Mention en tête et ligne de transparence
@@ -220,7 +242,7 @@ Un verdict (pouvez-vous rouler, avec quelle urgence, quoi faire) n’est jamais 
 
 #### Plusieurs marques pour les voyants
 
-Pour les voyants, les notices de plusieurs grandes marques vendues en France sont lues et comparées. Notices citées aujourd’hui : Citroën C3, Dacia Sandero 3, Peugeot 208, Renault Clio 5 phase 2, Seat Ibiza et Toyota Yaris, soit six marques de quatre groupes. Chaque citation nomme le modèle et l’édition de la notice ; une consigne n’est jamais attribuée à un autre modèle que celui de la notice citée.
+Pour les voyants, les notices de plusieurs grandes marques vendues en France sont lues et comparées. Notices citées aujourd’hui : Citroën C3, Dacia Sandero 3, Peugeot 208, Renault Clio 5 phase 2, Seat Ibiza, Seat Leon et Toyota Yaris, soit six marques de quatre groupes. Chaque citation nomme le modèle et l’édition de la notice ; une consigne n’est jamais attribuée à un autre modèle que celui de la notice citée.
 
 Chaque voyant de la base du site s’appuie sur au moins trois marques de deux groupes différents. Quand les notices ne disent pas la même chose, la consigne la plus prudente est retenue, et la page vous montre l’écart, marque par marque. Quand une alerte n’est décrite que dans une ou deux notices, la page le dit et nomme la notice citée.
 

@@ -6,6 +6,8 @@ import { construireContexte, type Constat, type Contexte } from '../../src/lib/c
 import type { DonneesSite } from '../../src/lib/gabarit.ts';
 import { emplacementsFactices } from '../../src/lib/emplacements-pub.ts';
 import { chargerDonnees } from './charger.ts';
+import { DOSSIER_ILLUSTRATIONS } from '../../src/lib/format2.ts';
+import { DOSSIER_ILLUSTRATIONS_DEMO, chargerIllustrations, demoFormat2Active, lireBrouillonFormat2, voyantsAvecBrouillon } from './demo-format2.ts';
 
 export interface DonneesDuSite {
   site: DonneesSite;
@@ -18,7 +20,11 @@ export interface DonneesDuSite {
  * des pages construites). `auteurs` : fiches auteur connues (celles du socle, lues par le contrôle).
  */
 export async function donneesDuSite(racine: string, libelles: ReadonlyMap<string, string>, aujourdhui: Date, auteurs: readonly string[] = []): Promise<DonneesDuSite> {
-  const donnees = await chargerDonnees(racine);
+  const lues = await chargerDonnees(racine);
+  // Construction de démonstration du format 2 (DEMO_FORMAT2=1, dist-demo-format2, jamais déployée) : la base voyants est
+  // complétée en mémoire du brouillon du format 2, et les illustrations sont celles du brouillon (scripts/lib/demo-format2.ts).
+  const demo = demoFormat2Active(process.env);
+  const donnees = demo ? { ...lues, voyants: voyantsAvecBrouillon(lues.voyants, await lireBrouillonFormat2(racine)) } : lues;
   const { contexte, constats } = construireContexte({ ...donnees, auteurs }, aujourdhui);
   const site: DonneesSite = {
     plan: contexte.plan,
@@ -27,8 +33,11 @@ export async function donneesDuSite(racine: string, libelles: ReadonlyMap<string
     couts: contexte.couts,
     pictogrammes: new Map((donnees.pictogrammes ?? []).map((p) => [p.id, p.contenu])),
     libelles: new Map(libelles),
-    // Emplacements publicitaires factices : construction de recette seulement (livrable 7.5b), jamais en production.
-    pubFactice: emplacementsFactices(process.env),
+    // Illustrations dessinées pour le site (format 2, règle 2i).
+    illustrations: await chargerIllustrations(racine, demo ? DOSSIER_ILLUSTRATIONS_DEMO : DOSSIER_ILLUSTRATIONS),
+    // Emplacements publicitaires factices : construction de recette et démonstration du format 2 seulement (livrable 7.5b ;
+    // règle 2m), jamais en production.
+    pubFactice: emplacementsFactices(process.env) || demo,
   };
   return { site, contexte, constats };
 }

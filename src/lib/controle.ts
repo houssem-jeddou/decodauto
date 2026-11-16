@@ -2,10 +2,11 @@ import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
 import { ANCRE_METHODE, DELAI_REVUE_MOIS, DELAI_REVUE_SOCLE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature } from './charte.ts';
-import { LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, sourcesDeLaLigne } from './composants.ts';
+import { IDENTIFIANTS, LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
 import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
+import { MOTS_ACTION_ARBRE, MOTS_VERDICT_ARBRE, REPONSES_MIN_ARBRE, modeleFichePanne, modeleFicheTutoriel, type EntreeDuJournal, type LigneDeFiche } from './fiche-panne.ts';
 import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_INDEX_OUTIL, TITRE_OUTIL, ancreLigneOutil, idFiltre, libelleDetail, modeleOutilVoyants, outilVoyants, type ModeleOutil } from './outil-voyants.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
@@ -23,6 +24,9 @@ import {
 } from './cout.ts';
 import { ID_OUTIL_VOYANTS, controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
 import { normaliserRecherche } from './texte.ts';
+import { constatsArbrePlace, constatsParagraphes, controlerFormat2 } from './controle-format2.ts';
+import { ECART_COURT_MAX_MOTS, FORMAT2, motsDe, renvoiNotices, type RenvoiNotices } from './format2.ts';
+import { ecartDeLaCarte, lienNoticesDeLaCarte, entreesIndexFormat2, modeleOutilFormat2, outilVoyantsFormat2, texteEntreeIndex } from './outil-format2.ts';
 import {
   coutsSchema,
   montantSchema,
@@ -615,7 +619,9 @@ function controlerCout(
     if (resolu.de !== undefined && rangTranche(risque.tranche) < rangTranche(resolu.de)) {
       constats.push(erreur('COUT-RISQUE', `le risque si l'on continue (« ${GRILLE_COUTS[risque.tranche].libelle} ») est plus léger que le début de la plage (« ${GRILLE_COUTS[resolu.de].libelle} »)`, fichier));
     }
+    // Demande de changement n° 31 : chaque citation du risque est de première main (avant : au moins une).
     let premiereMain = false;
+    const secondaires: string[] = [];
     for (const citation of risque.citations) {
       if (estReference(citation)) {
         const trouvee = trouverCitation(citation, ctx.voyants);
@@ -629,8 +635,11 @@ function controlerCout(
       }
       const source = ctx.sources.get(citation.source);
       if (source !== undefined && SOURCES_PREMIERE_MAIN.includes(source.categorie)) premiereMain = true;
+      else if (source !== undefined) secondaires.push(citation.source);
     }
-    if (!premiereMain && !constats.some((c) => c.regle.startsWith('COUT-CITATION') || c.regle === 'R3-SOURCE-INCONNUE')) {
+    if (secondaires.length > 0) {
+      constats.push(erreur('COUT-RISQUE-SOURCE', `le risque si l'on continue ne cite que des sources de première main : ${[...new Set(secondaires)].join(', ')} n'en ${secondaires.length > 1 ? 'sont' : 'est'} pas (demande de changement n° 31 : aucun risque tiré d'une source secondaire)`, fichier));
+    } else if (!premiereMain && !constats.some((c) => c.regle.startsWith('COUT-CITATION') || c.regle === 'R3-SOURCE-INCONNUE')) {
       constats.push(erreur('COUT-RISQUE-SOURCE', 'le risque si l\'on continue est cité d\'au moins une source de première main (notice constructeur)', fichier));
     }
   }
@@ -696,6 +705,8 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
       constats.push(erreur('R7-PLAN-TYPE', `le plan du site range « ${socle.id} » dans le type « ${ligne.type} », la page est de type « socle »`, fichier));
     }
     if (html !== undefined) constats.push(...controlerHtmlSocle(socle, html, fichier));
+    // Format 2 (règle 2e, F1.4) : paragraphes de trois phrases au plus, pages du socle comprises.
+    if (html !== undefined && (lecture.data as { format?: number }).format === 2) constats.push(...constatsParagraphes(html, fichier));
     return { constats, id: socle.id };
   }
 
@@ -845,6 +856,13 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         return { notices: nommees.notices.length, phrase: phraseSources({ ...nommees, ecart: l.ecart_marques }) };
       }),
       lienMethode: methode !== undefined ? `${methode.adresse}#${ANCRE_METHODE}` : undefined,
+      renvoisNotices: (() => {
+        const auTableau = new Set(modeleTableauNotices(lignes, ctx.voyants, ctx.sources, page.id).map((t) => t.voyant));
+        const voisins = indexerPlan(ctx.plan).voisins.get(page.id) ?? new Set<string>();
+        return lignes.map((l) =>
+          l.ecart_marques === undefined ? undefined : renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: ctx.voyants, plan: ctx.plan, voisins, auTableau, construite: (id) => ctx.pagesEcrites?.has(id) === true }),
+        );
+      })(),
       notices: {
         tableaux: modeleTableauNotices(lignes, ctx.voyants, ctx.sources, page.id),
         // Demande de changement n° 8 : sur une page voyant (hors outil), l'élément unique est le tableau des notices.
@@ -854,6 +872,13 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         code: { fiche: modeleFicheCode(page, ctx.voyants, ctx.sources), parMarque: modeleParMarque(page), elementUnique: page.element_unique === 'tableau' },
       }),
       ...('texte_reference' in page && { texte: { fiche: modeleFicheTexte(page, ctx.sources) } }),
+      // Étape 10 : fiche du symptôme sur une page panne, fiche du tutoriel sur toute page qui en déclare un (sa consigne
+      // « quand ne pas le faire soi-même » ne manque jamais), historique sur une page dossier ; absents ailleurs.
+      fiches: {
+        ...('contexte' in page && { fichePanne: modeleFichePanne(page) }),
+        ...(page.tutoriel !== undefined && { ficheTutoriel: modeleFicheTutoriel(page.tutoriel) }),
+        ...('journal_modifications' in page && { historique: page.journal_modifications }),
+      },
     };
     // Page outil voyants (livrable 8.1) : l'outil généré depuis la base, et les sources de toutes ses lignes dans « Sources ».
     if ('outil' in page && page.outil === true) {
@@ -905,6 +930,7 @@ export function limiteProchaineRevue(type: TypePage, dateRevue: Date, sujet?: st
  *  - DATES-FUTUR : date de publication, de modification, de revue ou d'une entrée du journal dans le futur ;
  *  - DATES-ORDRE : modification avant la publication ; entrée du journal d'un dossier hors de la période qui va de la
  *    publication à la dernière modification ;
+ *  - DATES-HISTORIQUE : la dernière entrée du journal d'un dossier n'est pas datée de la dernière modification (étape 10) ;
  *  - DATES-REVUE-DELAI : prochaine revue au-delà du délai du type (charte §8).
  * prochaine_revue après date_revue (R7-DATES) et le délai du dossier (R7-FORMAT) sont contrôlés par les schémas ; une
  * revue faite avant la publication reste permise (relecture avant mise en ligne).
@@ -929,6 +955,12 @@ export function controlerDates(page: PageEditoriale, type: TypePage, aujourdhui:
         constats.push(erreur('DATES-ORDRE', `journal_modifications[${i}] (${jourIso(entree.date)}) hors de la période de la page, de date_publication (${jourIso(page.date_publication)}) à date_modification (${jourIso(page.date_modification)})`, fichier));
       }
     });
+    // Historique du dossier (étape 10) : sa dernière entrée est la dernière modification de la page, pour que « Mis à jour
+    // le » et l'historique concordent (règle 14 : date_modification ne bouge que pour une vraie modification).
+    const derniere = Math.max(...page.journal_modifications.map((e) => e.date.getTime()));
+    if (derniere !== page.date_modification.getTime()) {
+      constats.push(erreur('DATES-HISTORIQUE', `la dernière entrée de journal_modifications (${jourIso(new Date(derniere))}) n'est pas datée de date_modification (${jourIso(page.date_modification)}) : « Mis à jour le » et l'historique du dossier doivent concorder`, fichier));
+    }
   }
   const limite = limiteProchaineRevue(type, page.date_revue, 'sujet' in page ? page.sujet : undefined);
   if (limite !== undefined && page.prochaine_revue.getTime() > limite.getTime()) {
@@ -958,6 +990,11 @@ export interface AttendusPage {
    * des sources affichée (composants.ts, phraseSources).
    */
   lignes: readonly SourcesDeLigne[];
+  /**
+   * Format 2 (règle 2b, revue de F1.3b) : renvoi attendu de la ligne d'écart de chaque ligne au tableau des notices
+   * (renvoiNotices ; undefined pour une ligne sans écart), page outil comprise (ses cartes : controlerOutilVoyants).
+   */
+  renvoisNotices?: readonly (RenvoiNotices | undefined)[] | undefined;
   /** Adresse attendue du lien « Méthode » (page « à propos » du plan, ancre de la méthode), si elle est dans le plan. */
   lienMethode?: string | undefined;
   /**
@@ -974,6 +1011,11 @@ export interface AttendusPage {
   texte?: { fiche: FicheTexte } | undefined;
   /** Page outil voyants (livrable 8.1, outil-voyants.ts) : l'outil attendu, généré depuis la base. */
   outil?: ModeleOutil | undefined;
+  /**
+   * Fiches et historique (étape 10, fiche-panne.ts) : fiche du symptôme (page panne), fiche du tutoriel (toute page qui
+   * déclare un tutoriel) et historique du dossier (page dossier) attendus ; absents : ces blocs ne doivent pas être affichés.
+   */
+  fiches?: { fichePanne?: readonly LigneDeFiche[]; ficheTutoriel?: readonly LigneDeFiche[]; historique?: readonly EntreeDuJournal[] } | undefined;
 }
 
 /** Position d'une balise portant un attribut dans le HTML brut (commentaires et scripts retirés), ou -1. */
@@ -1084,6 +1126,43 @@ export function controlerHtml(
     constats.push(erreur('R7-ELEMENT-UNIQUE-ABSENT', `l'élément unique « ${page.element_unique} » est absent ou vide dans la page construite (attribut data-element-unique="${page.element_unique}"${page.element_unique === 'tableau' ? ', avec au moins une ligne de données' : ''})`, fichier));
   }
 
+  // Arbre de décision (étape 10) : une liste numérotée de questions, chacune suivie d'au moins deux réponses (sous-liste),
+  // comme le construit le modèle depuis le marqueur « {{arbre}} » du texte rédigé. Un arbre au plus par page
+  // (R7-ARBRE-UNIQUE) ; chaque arbre de la page construite est lu (F1.3c, revue).
+  const arbres = $('[data-element-unique="arbre-de-decision"]').toArray().map((el) => $(el));
+  if (arbres.length > 1) constats.push(erreur('R7-ARBRE-UNIQUE', `un seul arbre de décision par page ; trouvé : ${arbres.length}`, fichier));
+  for (const arbre of page.element_unique === 'arbre-de-decision' && !manque ? arbres : []) {
+    const element = arbre;
+    const questions = element.children('ol').first().children('li');
+    const incompletes = questions.toArray().filter((q) => $(q).children('ul, ol').first().children('li').length < REPONSES_MIN_ARBRE);
+    if (questions.length === 0 || incompletes.length > 0) {
+      constats.push(erreur('R7-ARBRE-QUESTIONS', `l'arbre de décision est une liste numérotée de questions, chacune suivie d'au moins ${REPONSES_MIN_ARBRE} réponses (sous-liste) ; ${questions.length === 0 ? 'aucune question' : `${incompletes.length} question(s) avec moins de ${REPONSES_MIN_ARBRE} réponses`}`, fichier));
+    }
+    // Toute phrase de l'arbre (texte propre de chaque élément de liste, à toute profondeur : questions, réponses, texte
+    // hors des listes de réponses) : un libellé de verdict de la grille n'y est cité que s'il est celui d'une ligne de
+    // l'encadré (le texte ne contredit jamais l'encadré) ; une phrase qui dit de rouler ou de s'arrêter
+    // (EXPRESSIONS_VERDICT_ARBRE) cite ce libellé (« {{verdict:…}} » du texte rédigé, charte §2.1 et §2.3), jamais un
+    // verdict écrit à la main. Liste d'expressions forcément incomplète : le reste se relit au paquet de validation.
+    const libelles = Object.values(GRILLE_VERDICTS).map((v) => v.libelle);
+    const deLEncadre = new Set(lignes.map((l) => GRILLE_VERDICTS[l.verdict].libelle));
+    for (const li of element.find('li').toArray()) {
+      const propre = $(li).clone();
+      propre.children('ul, ol').remove();
+      const brut = propre.text().replace(/\s+/g, ' ').trim();
+      const texte = normaliserTexte(brut);
+      const cites = libelles.filter((l) => texte.includes(normaliserTexte(l)));
+      if (cites.some((l) => !deLEncadre.has(l))) {
+        constats.push(erreur('R7-ARBRE-VERDICT', `phrase de l'arbre qui cite un verdict absent de l'encadré de décision (le texte ne contredit jamais l'encadré) : « ${brut.slice(0, 60)} »`, fichier));
+      } else if (cites.length === 0 && MOTS_VERDICT_ARBRE.test(texte)) {
+        constats.push(erreur('R7-ARBRE-VERDICT', `phrase de l'arbre qui dit de rouler ou de s'arrêter sans redire le verdict d'une ligne de l'encadré (« {{verdict:…}} ») : « ${brut.slice(0, 60)} »`, fichier));
+      } else if (cites.length === 0 && $(li).parent().is('ul') && MOTS_ACTION_ARBRE.test(texte)) {
+        // Réponse de l'arbre qui demande une vérification, une visite au garage, chez un réparateur ou un représentant de la
+        // marque, ou qui donne une urgence (mots repères de la grille) : elle redit le verdict d'une ligne de l'encadré.
+        constats.push(erreur('R7-ARBRE-VERDICT', `réponse de l'arbre qui demande une vérification, un passage au garage ou donne une urgence sans redire le verdict d'une ligne de l'encadré (« {{verdict:…}} ») : « ${brut.slice(0, 60)} »`, fichier));
+      }
+    }
+  }
+
   // Tutoriel : les étapes s'écrivent dans le texte, en liste numérotée portant le marqueur data-tutoriel-etapes
   // (n'importe quelle autre liste numérotée de la page ne compte pas).
   if (page.tutoriel !== undefined && $('ol[data-tutoriel-etapes] > li').length === 0) {
@@ -1092,10 +1171,15 @@ export function controlerHtml(
 
   constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout, attendus?.lignes));
   if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
-  if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, attendus.notices));
+  if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, { ...attendus.notices, format: page.format ?? 1 }));
+  // Format 2 (demande de changement n° 30) : règles de format vérifiables par une machine (controle-format2.ts).
+  if (page.format === 2) constats.push(...controlerFormat2(html, fichier, lignes, (attendus?.lignes ?? []).map((l) => l.phrase), page.reponse_directe, attendus?.renvoisNotices));
+  // Page panne au format 2 (demande de changement n° 32) : l'arbre, ou les étapes, dans la première ou la deuxième partie.
+  if (page.format === 2 && 'contexte' in page) constats.push(...constatsArbrePlace(html, fichier));
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
   if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
-  if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil));
+  if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil, page.format ?? 1));
+  if (attendus?.fiches !== undefined) constats.push(...controlerFichesPanneDossier(html, fichier, attendus.fiches));
   return constats;
 }
 
@@ -1119,9 +1203,17 @@ export function controlerHtml(
  *  - OUTIL-SANS-JS : contenu présent dans le HTML sans JavaScript : ni script, ni noscript, ni style, ni template dans
  *    l'outil ; rien de masqué (hidden, display:none, visibility:hidden, aria-hidden sur du texte, inert), ni l'outil, ni un
  *    bloc qui le contient, ni un bloc qu'il contient. Seules les références sont dans un bloc dépliable, ouvert sans script.
+ * Format 2 (demande de changement n° 30, F1.3a, src/lib/outil-format2.ts) : mêmes règles, sur le rendu du format 2 :
+ * l'écart d'une ligne est sa ligne d'écart courte quand la base en a une (sinon l'écart entier) ; l'index a une entrée
+ * par paire (pictogramme, couleur) de la base, une fois, dans l'ordre de sa première ligne dans la liste : la tuile de la
+ * paire, son libellé (LIBELLES_PICTOGRAMMES) et sa couleur écrite, sans autre texte, un seul lien vers cette première
+ * ligne ; le texte de l'outil est celui que génère le modèle du format 2.
  * Texte comparé normalisé (normaliserTexte) : la typographie ne compte pas, les mots et les chiffres comptent.
  */
-export function controlerOutilVoyants(html: string, fichier: string, attendu: ModeleOutil): Constat[] {
+export function controlerOutilVoyants(html: string, fichier: string, attenduBase: ModeleOutil, format: 1 | 2 = 1): Constat[] {
+  const format2 = format === 2;
+  // Format 2 (revue de F1.3a) : les cartes sont rangées par paire (pictogramme, couleur), la plus grave d'abord.
+  const attendu = format2 ? modeleOutilFormat2(attenduBase) : attenduBase;
   const constats: Constat[] = [];
   const $ = cheerio.load(html);
   const n = normaliserTexte;
@@ -1197,13 +1289,36 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     // Texte hors du bloc dépliable : ce que le lecteur voit sans ouvrir quoi que ce soit.
     const visibles = ligne.children().toArray().map((el) => $(el)).filter((el) => !el.is('details'));
     const texteVisible = n(visibles.map((el) => el.text()).join(' '));
-    const absents = [l.nom, l.situation, GRILLE_VERDICTS[l.verdict].libelle, GRILLE_URGENCES[l.urgence].libelle, l.action, ...(l.ecart !== undefined ? [l.ecart] : [])].filter((t) => !texteVisible.includes(n(t)));
+    const ecart = format2 ? ecartDeLaCarte(l) : l.ecart;
+    const absents = [l.nom, l.situation, GRILLE_VERDICTS[l.verdict].libelle, GRILLE_URGENCES[l.urgence].libelle, l.action, ...(ecart !== undefined ? [ecart] : [])].filter((t) => !texteVisible.includes(n(t)));
     if (absents.length > 0) problemes.push(`n'affiche pas ${absents.map((t) => `« ${t} »`).join(', ')}`);
     const autres = libellesNiveaux.filter((e) => e.cle !== (e.genre === 'verdict' ? l.verdict : l.urgence) && texteVisible.includes(n(e.libelle))).map((e) => e.libelle);
     if (autres.length > 0) problemes.push(`affiche aussi le libellé d'un autre niveau (${autres.map((t) => `« ${t} »`).join(', ')})`);
-    if (l.ecart === undefined && texteVisible.includes(n('Selon les marques'))) problemes.push("un écart est affiché alors que la base n'en signale pas");
-    const picto = ligne.find('.voyant').first();
-    if (ligne.find('.icone-gravite').first().attr('data-icone-gravite') !== String(graviteDuVerdict(l.verdict))) problemes.push(`icône de gravité (attendue : ${graviteDuVerdict(l.verdict)})`);
+    // Écart affiché alors que la base n'en signale pas : au format 1, « Selon les marques : » ; au format 2, la ligne d'écart.
+    if (l.ecart === undefined && (format2 ? ligne.find('.ecart, [data-ecart-court]').length > 0 : texteVisible.includes(n('Selon les marques')))) problemes.push("un écart est affiché alors que la base n'en signale pas");
+    // Format 2 (règle 2b, revue de F1.3a) : la ligne d'écart courte, obligatoire quand les marques divergent, au texte exact,
+    // 25 mots au plus lien « Votre marque » compris ; jamais l'écart entier.
+    if (format2 && l.ecart !== undefined) {
+      const courte = ligne.find('[data-ecart-court]');
+      const vue = courte.clone();
+      vue.find('.vh, a[data-lien-notices]').remove();
+      const lue = vue.text().replace(/\s+/g, ' ').trim();
+      if (l.ecartCourt === undefined) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : les marques divergent, la ligne d'écart courte (ecart_court) est attendue (plus de repli sur l'écart entier)`, fichier));
+      else if (courte.length !== 1 || n(lue) !== n(l.ecartCourt)) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : la ligne d'écart affiche « ${l.ecartCourt} »${lue !== '' && n(lue) === n(l.ecart) ? " (et non l'écart entier)" : ''}`, fichier));
+      else if (motsDe(lue) + motsDe(FORMAT2.lienVotreMarque) > ECART_COURT_MAX_MOTS) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : ligne d'écart de plus de ${ECART_COURT_MAX_MOTS} mots, lien « ${FORMAT2.lienVotreMarque} » compris (règle 2b)`, fichier));
+      // Règle 2b étendue à l'outil (16/11/2026) : « Votre marque » mène au tableau de la page du voyant, si elle est
+      // construite ; une ligne rattachée à la page outil (STOP, demande n° 23) n'a pas de tableau, donc pas de lien.
+      const attendu = lienNoticesDeLaCarte(l);
+      const liensCarte = courte.find('a[data-lien-notices]');
+      if (attendu === undefined) {
+        if (liensCarte.length > 0) constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : lien « ${FORMAT2.lienVotreMarque} » affiché alors que ${l.page === undefined ? "la page du voyant n'est pas construite, ou que la ligne est rattachée à la page outil (sans tableau des notices, demande n° 23)" : 'aucun tableau ne peut le recevoir'}`, fichier));
+      } else if (liensCarte.length !== 1 || liensCarte.attr('href') !== attendu || n(liensCarte.text()) !== n(FORMAT2.lienVotreMarque)) {
+        constats.push(erreur('FORMAT2-ECART', `carte « ${l.voyant} » : la ligne d'écart renvoie au tableau des notices de la page du voyant par un lien « ${FORMAT2.lienVotreMarque} » vers ${attendu}`, fichier));
+      }
+    }
+    // Format 1 : pictogramme dans un rond (.voyant), icône .icone-gravite ; format 2 : tuile du voyant allumé, forme de la gravité.
+    const picto = ligne.find(format2 ? '.tuile[data-pictogramme]' : '.voyant').first();
+    if (ligne.find(format2 ? 'svg.forme[data-icone-gravite]' : '.icone-gravite').first().attr('data-icone-gravite') !== String(graviteDuVerdict(l.verdict))) problemes.push(`icône de gravité (attendue : ${graviteDuVerdict(l.verdict)})`);
     if (picto.find('svg').length === 0) problemes.push('pictogramme absent');
     else if (picto.attr('data-pictogramme') !== l.pictogramme || picto.attr('data-couleur') !== l.couleur) problemes.push(`pictogramme (attendu : « ${l.pictogramme} », couleur ${l.couleur})`);
     // Bloc dépliable : le nombre de notices, les notices nommées, chaque page citée.
@@ -1227,7 +1342,9 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
       if (lien === undefined) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : la page ${l.page.adresse} est construite, le lien vers elle manque`, fichier));
       else if (!n(lien.text()).includes(n(l.page.libelle))) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : le lien vers ${l.page.adresse} nomme la page (« ${l.page.libelle} »)`, fichier));
     }
-    const permis = l.page !== undefined ? [l.page.adresse] : [];
+    // Format 2 (règle 2b étendue à l'outil) : le lien « Votre marque » de la ligne d'écart mène à la même page, à son tableau.
+    const lienNotices = format2 ? lienNoticesDeLaCarte(l) : undefined;
+    const permis = [...(l.page !== undefined ? [l.page.adresse] : []), ...(lienNotices !== undefined ? [lienNotices] : [])];
     const enTrop = liens.filter((h) => !permis.includes(h));
     if (enTrop.length > 0) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : lien(s) inattendu(s) ${enTrop.join(', ')} : une ligne ne mène qu'à la page construite du voyant`, fichier));
     if (ligne.parents('details').length > 0) constats.push(erreur('OUTIL-SANS-JS', `ligne « ${l.voyant} » dans un bloc dépliable : verdict et action se lisent sans rien ouvrir`, fichier));
@@ -1257,11 +1374,38 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
     if (n(index.find('h3').first().text()) !== n(TITRE_INDEX_OUTIL)) constats.push(erreur('OUTIL-INDEX', `le titre de l'index est « ${TITRE_INDEX_OUTIL} »`, fichier));
     const entrees = index.find('[data-outil-index-entree]').toArray().map((el) => $(el));
     const lues = entrees.map((e) => e.attr('data-outil-index-entree') ?? '');
-    if (lues.join('|') !== voulus.join('|')) {
+    if (format2) {
+      // Format 2 : une tuile par paire (pictogramme, couleur), dans l'ordre de sa première ligne dans la liste.
+      const paires = entreesIndexFormat2(attendu);
+      const cles = paires.map((p) => p.cle);
+      if (lues.join('|') !== cles.join('|')) {
+        constats.push(erreur('OUTIL-INDEX', `l'index a une entrée par paire (pictogramme, couleur) de la base, une fois, dans l'ordre de la liste ; manquantes : ${cles.filter((c) => !lues.includes(c)).join(', ') || 'aucune'} ; inconnues : ${lues.filter((c) => !cles.includes(c)).join(', ') || 'aucune'}${lues.length === cles.length && cles.every((c) => lues.includes(c)) && new Set(lues).size === lues.length ? ' ; ordre différent' : ''}`, fichier));
+      }
+      // Une grille par couleur, sous le titre du groupe de cette couleur (critère WCAG 1.4.1).
+      for (const g of attendu.groupes) {
+        const bloc = index.find(`[data-outil-index-couleur="${g.couleur}"]`);
+        if (bloc.length !== 1 || n(bloc.children('h4').first().text()) !== n(g.titre)) constats.push(erreur('OUTIL-INDEX', `l'index a une grille par couleur, sous le titre « ${g.titre} »`, fichier));
+      }
+      const parCle = new Map(paires.map((p) => [p.cle, p]));
+      for (const entree of entrees) {
+        const cle = entree.attr('data-outil-index-entree') ?? '';
+        const p = parCle.get(cle);
+        if (p === undefined) continue;
+        const problemes: string[] = [];
+        if (entree.attr('data-couleur') !== p.couleur) problemes.push(`data-couleur (attendu : ${p.couleur}, le filtre le lit)`);
+        const liens = entree.find('a');
+        if (liens.length !== 1 || liens.first().attr('href') !== `#${ancreLigneOutil(p.premiere)}`) problemes.push(`un seul lien, vers la première ligne de la paire (#${ancreLigneOutil(p.premiere)})`);
+        if (n(entree.text()) !== n(texteEntreeIndex(p))) problemes.push(`le libellé du dessin et son nombre de cas s'il y en a plusieurs, sans autre texte (« ${texteEntreeIndex(p)} »)`);
+        if (entree.closest('[data-outil-index-couleur]').attr('data-outil-index-couleur') !== p.couleur) problemes.push(`dans la grille de sa couleur (${p.couleur})`);
+        const tuile = entree.find('.tuile[data-pictogramme]').first();
+        if (tuile.find('svg').length === 0 || tuile.attr('data-pictogramme') !== p.pictogramme || tuile.attr('data-couleur') !== p.couleur) problemes.push(`tuile (attendue : « ${p.pictogramme} », couleur ${p.couleur})`);
+        if (problemes.length > 0) constats.push(erreur('OUTIL-INDEX', `index, entrée « ${cle} » : ${problemes.join(' ; ')}`, fichier));
+      }
+    } else if (lues.join('|') !== voulus.join('|')) {
       constats.push(erreur('OUTIL-INDEX', `l'index a une entrée par ligne de la base, une fois, dans l'ordre de la liste ; manquantes : ${voulus.filter((id) => !lues.includes(id)).join(', ') || 'aucune'} ; inconnues : ${lues.filter((id) => !voulus.includes(id)).join(', ') || 'aucune'}`, fichier));
     }
     const parVoyant = new Map(attendues.map((l) => [l.voyant, l]));
-    for (const entree of entrees) {
+    for (const entree of format2 ? [] : entrees) {
       const id = entree.attr('data-outil-index-entree') ?? '';
       const l = parVoyant.get(id);
       if (l === undefined) continue;
@@ -1318,7 +1462,7 @@ export function controlerOutilVoyants(html: string, fichier: string, attendu: Mo
   if (constats.length === 0) {
     // Sans les blancs : un dessin peut laisser un saut de ligne entre deux textes, qui ne compte pas.
     const sansBlancs = (texte: string): string => n(texte).replace(/\s+/g, '');
-    const genere = sansBlancs(cheerio.load(outilVoyants(attendu, new Map()))('[data-outil-voyants]').first().text());
+    const genere = sansBlancs(cheerio.load((format2 ? outilVoyantsFormat2 : outilVoyants)(attendu, new Map()))('[data-outil-voyants]').first().text());
     if (sansBlancs(outil.text()) !== genere) constats.push(erreur('OUTIL-LIBELLES', "le texte de l'outil n'est pas celui que génère le modèle depuis la base : une phrase a été ajoutée, retirée ou changée", fichier));
   }
   return constats;
@@ -1341,6 +1485,57 @@ export function controlerFicheTexte(html: string, fichier: string, attendu: { fi
     return [erreur('FICHE-TEXTE-INCOMPLETE', `la fiche « Le texte en bref » n'affiche pas, dans l'ordre : ${attendu.fiche.lignes.map((l) => l.intitule).join(', ')} (texte tiré du contenu et du registre)`, fichier)];
   }
   return [];
+}
+
+/**
+ * Fiches et historique (étape 10, fiche-panne.ts), comme les construisent les modèles :
+ *  - FICHE-PANNE-* : une page panne affiche une seule fiche du symptôme (data-fiche-panne), avec dans l'ordre chaque
+ *    ligne du modèle (symptôme s'il est saisi, quand, moteurs concernés) au texte exact ; les autres pages n'en ont pas ;
+ *  - FICHE-TUTORIEL-* : toute page au format tutoriel affiche une seule fiche du tutoriel (data-fiche-tutoriel : outils,
+ *    durée, difficulté, quand ne pas le faire soi-même) ; une page qui n'est pas un tutoriel n'en a pas ;
+ *  - HISTORIQUE-* : une page dossier affiche un seul historique (data-historique-dossier), une entrée par ligne du
+ *    journal des modifications, de la plus récente à la plus ancienne, avec sa date (time datetime) et son résumé ; les
+ *    autres pages n'en ont pas.
+ * Texte comparé normalisé (normaliserTexte).
+ */
+export function controlerFichesPanneDossier(
+  html: string,
+  fichier: string,
+  attendu: { fichePanne?: readonly LigneDeFiche[]; ficheTutoriel?: readonly LigneDeFiche[]; historique?: readonly EntreeDuJournal[] },
+): Constat[] {
+  const constats: Constat[] = [];
+  const $ = cheerio.load(html);
+  const lignesVoulues = (lignes: readonly LigneDeFiche[]): string => lignes.map((l) => `${normaliserTexte(l.intitule)} : ${normaliserTexte(l.valeur)}`).join('\n');
+  const fiches: Array<{ attribut: string; code: string; nom: string; voulue: readonly LigneDeFiche[] | undefined; sans: string }> = [
+    { attribut: 'data-fiche-panne', code: 'FICHE-PANNE', nom: 'la fiche du symptôme', voulue: attendu.fichePanne, sans: 'une page qui n\'est pas une page panne' },
+    { attribut: 'data-fiche-tutoriel', code: 'FICHE-TUTORIEL', nom: 'la fiche du tutoriel', voulue: attendu.ficheTutoriel, sans: 'une page qui n\'est pas un tutoriel' },
+  ];
+  for (const { attribut, code, nom, voulue, sans } of fiches) {
+    const trouvees = $(`[${attribut}]`);
+    if (voulue === undefined) {
+      if (trouvees.length > 0) constats.push(erreur(`${code}-INCOMPLETE`, `${nom} (${attribut}) est affichée sur ${sans} : le contenu n'en déclare pas`, fichier));
+    } else if (trouvees.length !== 1) {
+      constats.push(erreur(`${code}-ABSENTE`, `la page affiche ${nom} (${attribut}) une fois ; trouvé : ${trouvees.length}`, fichier));
+    } else if (trouvees.find('[data-fiche-ligne]').toArray().map((el) => `${normaliserTexte($(el).find('dt').text())} : ${normaliserTexte($(el).find('dd').text())}`).join('\n') !== lignesVoulues(voulue)) {
+      constats.push(erreur(`${code}-INCOMPLETE`, `${nom} n'affiche pas, dans l'ordre : ${voulue.map((l) => l.intitule).join(', ')} (texte tiré du contenu)`, fichier));
+    }
+  }
+  const historiques = $('[data-historique-dossier]');
+  if (attendu.historique === undefined) {
+    if (historiques.length > 0) constats.push(erreur('HISTORIQUE-INCOMPLET', 'historique du dossier (data-historique-dossier) affiché sur une page qui n\'est pas un dossier', fichier));
+  } else if (historiques.length !== 1) {
+    constats.push(erreur('HISTORIQUE-ABSENT', `une page dossier affiche l'historique du dossier (data-historique-dossier) une fois ; trouvé : ${historiques.length}`, fichier));
+  } else {
+    const iso = (d: Date): string => d.toISOString().slice(0, 10);
+    const lues = historiques.find('[data-historique-entree]').toArray().map((el) => `${$(el).find('time').attr('datetime') ?? ''} ${normaliserTexte($(el).text())}`);
+    const voulues = [...attendu.historique]
+      .sort((a, b) => b.date.getTime() - a.date.getTime())
+      .map((e) => `${iso(e.date)} ${normaliserTexte(`${iso(e.date).split('-').reverse().join('/')} : ${e.resume}`)}`);
+    if (lues.join('\n') !== voulues.join('\n')) {
+      constats.push(erreur('HISTORIQUE-INCOMPLET', `l'historique du dossier n'affiche pas, de la plus récente à la plus ancienne, les ${voulues.length} entrée(s) du journal des modifications (date et résumé)`, fichier));
+    }
+  }
+  return constats;
 }
 
 /**
@@ -1414,7 +1609,7 @@ export function controlerTableauNotices(
   html: string,
   fichier: string,
   lignes: readonly LigneResolue[],
-  attendu: { tableaux: readonly TableauVoyant[]; elementUnique: boolean },
+  attendu: { tableaux: readonly TableauVoyant[]; elementUnique: boolean; format?: 1 | 2 | undefined },
 ): Constat[] {
   const constats: Constat[] = [];
   const $ = cheerio.load(html);
@@ -1488,10 +1683,24 @@ export function controlerTableauNotices(
 
   // Lien de l'encadré vers la partie du voyant : la ligne de situation reprise de la base renvoie au détail par notice.
   // Sans encadré, ou avec un autre nombre de lignes, R9-ENCADRE-ABSENT ou R9-ENCADRE-CONTENU le signale déjà.
+  // Format 2 (demande de changement n° 30, règle 2b) : la ligne d'écart renvoie à la partie du voyant (« Votre marque ») ; le
+  // bloc « Notices » sous l'encadré renvoie au tableau (« Ce que dit chaque notice »). Une ligne sans écart n'a pas de lien.
   const lignesEncadre = $('[data-encadre-decision]').first().find('[data-encadre-ligne]');
   if (lignesEncadre.length !== lignes.length) return constats;
+  if (attendu.format === 2) {
+    const versTableau = $('[data-provenance] a').filter((_, a) => $(a).attr('href') === `#${IDENTIFIANT_NOTICES}` && n($(a).text()) === n(FORMAT2.lienNotices));
+    if (versTableau.length !== 1) constats.push(erreur('TABLEAU-NOTICES-LIEN', `bloc « Notices » sous l'encadré : lien « ${FORMAT2.lienNotices} » vers #${IDENTIFIANT_NOTICES} absent`, fichier));
+    if ($(`#${IDENTIFIANT_NOTICES}`).length !== 1) constats.push(erreur('TABLEAU-NOTICES-LIEN', `le titre du tableau des notices porte l'ancre « ${IDENTIFIANT_NOTICES} »`, fichier));
+  }
   lignes.forEach((ligne, i) => {
     if (ligne.voyant === undefined || !voyantsAttendus.includes(ligne.voyant)) return;
+    if (attendu.format === 2) {
+      if (ligne.ecart_marques === undefined) return;
+      const ancre2 = ancreNotices(ligne.voyant);
+      const lien2 = lignesEncadre.eq(i).find('[data-ecart-court] a').filter((_, a) => $(a).attr('href') === `#${ancre2}` && n($(a).text()) === n(FORMAT2.lienVotreMarque));
+      if (lien2.length === 0) constats.push(erreur('TABLEAU-NOTICES-LIEN', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : lien « ${FORMAT2.lienVotreMarque} » vers #${ancre2} absent de la ligne d'écart`, fichier));
+      return;
+    }
     const ancre = ancreNotices(ligne.voyant);
     const lien = lignesEncadre
       .eq(i)
@@ -1503,6 +1712,9 @@ export function controlerTableauNotices(
   });
   return constats;
 }
+
+/** Ancre du titre du tableau des notices (lien « Ce que dit chaque notice » du format 2). */
+const IDENTIFIANT_NOTICES = IDENTIFIANTS.notices;
 
 /** Balise ouvrante portant un attribut donné (sans valeur, ou avec une valeur). */
 const baliseAvecAttribut = (attribut: string): RegExp => new RegExp(`<[a-z][a-z0-9-]*\\b[^>]*\\s${attribut}(?=[\\s=/>])[^>]*>`, 'gi');
@@ -1589,14 +1801,18 @@ export function controlerEncadre(
       // Nombre de notices sur lequel repose la ligne (charte §2.1) : porté par data-notices et écrit dans la phrase des
       // sources, avec le nom des notices.
       const attendu = sourcesLignes?.[i];
+      const format2 = page.format === 2;
       if (attendu !== undefined && element.attr('data-notices') !== String(attendu.notices)) {
         constats.push(erreur('R9-ENCADRE-SOURCES', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : data-notices doit valoir ${attendu.notices} (notices de constructeurs citées par la ligne)`, fichier));
       }
-      if (attendu !== undefined && attendu.phrase !== '' && !normaliserTexte(element.text()).includes(normaliserTexte(attendu.phrase))) {
+      // Format 2 (règle 2b) : la phrase des sources passe sous l'encadré, dans le bloc « Notices » (FORMAT2-PROVENANCE).
+      if (!format2 && attendu !== undefined && attendu.phrase !== '' && !normaliserTexte(element.text()).includes(normaliserTexte(attendu.phrase))) {
         constats.push(erreur('R9-ENCADRE-SOURCES', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : n'affiche pas « ${attendu.phrase} »`, fichier));
       }
       const texteLigne = normaliserTexte(element.text());
-      const attendus = [ligne.situation, GRILLE_VERDICTS[ligne.verdict].libelle, GRILLE_URGENCES[ligne.urgence].libelle, ligne.action, ...(ligne.ecart_marques !== undefined ? [ligne.ecart_marques] : [])];
+      // Écart entre marques : en entier au format 1 ; au format 2, la ligne d'écart courte (FORMAT2-ECART en vérifie le texte).
+      const ecart = ligne.ecart_marques === undefined ? [] : format2 ? (ligne.ecart_court !== undefined ? [ligne.ecart_court] : []) : [ligne.ecart_marques];
+      const attendus = [ligne.situation, GRILLE_VERDICTS[ligne.verdict].libelle, GRILLE_URGENCES[ligne.urgence].libelle, ligne.action, ...ecart];
       const absents = attendus.filter((t) => !texteLigne.includes(normaliserTexte(t)));
       if (absents.length > 0) {
         constats.push(erreur('R9-ENCADRE-CONTENU', `ligne ${i + 1} de l'encadré (« ${ligne.situation} ») : n'affiche pas ${absents.map((t) => `« ${t} »`).join(', ')}`, fichier));

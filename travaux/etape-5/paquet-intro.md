@@ -12,7 +12,7 @@ Brouillon du 24/10/2026, corrigé après la revue indépendante. Ce paquet est g
 ## Méthode suivie
 - **Notices** : 5 marques de référence sur 7, de 4 groupes sur 4.
   - Citroën et Volkswagen n'ont pas été consultés : la règle des 3 marques de 2 groupes est tenue sans eux.
-  - Chaque notice est la notice d'utilisation publiée par le constructeur, lue dans le PDF officiel ; le texte relevé est conservé dans `travaux/etape-5/notices/`.
+  - Chaque notice est la notice d'utilisation publiée par le constructeur, lue dans le PDF officiel ; le texte relevé est conservé dans les documents du projet Claude (`claude/notices-etape-5/`).
   - Les symboles des témoins sont des images, absentes du texte extrait. Quand un extrait dit « accompagné du témoin », le témoin a été identifié sur le rendu de la page et noté entre crochets (par exemple « [STOP] », « [Service] »).
 - **Règle appliquée**, celle de la demande de changement n° 3, sans exception :
   - chaque notice consultée qui donne une consigne pour l'état décrit est citée ;

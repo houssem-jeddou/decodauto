@@ -20,6 +20,9 @@ export const citationSchema = z
     extrait: texte.max(EXTRAIT_MAX, `un extrait cité fait au plus ${EXTRAIT_MAX} caractères (courte citation)`),
     verdict: z.enum(VERDICTS).optional(),
     urgence: z.enum(URGENCES).optional(),
+    // Ce que demande la notice, en quelques mots du site : colonne du tableau des notices compact au format 2 (demande de
+    // changement n° 30, lot F1) ; validée avec la ligne (empreinte de la ligne de la base).
+    demande: texte.optional(),
   })
   .superRefine((citation, ctx) => {
     if ((citation.verdict === undefined) !== (citation.urgence === undefined)) {

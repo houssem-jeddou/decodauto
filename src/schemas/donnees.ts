@@ -1,6 +1,7 @@
 import { z } from 'astro/zod';
 import {
   CATEGORIES_SOURCE,
+  NATURES_SOURCE_SECONDAIRE,
   COULEURS_VOYANT,
   THEMES_AVEC_SOCLE,
   TYPES_AVEC_SOCLE,
@@ -73,8 +74,18 @@ export const sourceSchema = z
     date_consultation: dateIso,
     marque: identifiant.optional(),
     modele: texte.optional(),
+    // Source secondaire : sa nature, obligatoire (demande de changement n° 31 ; NATURES_SOURCE_SECONDAIRE). Texte libre
+    // vérifié ci-dessous, pour que toute valeur hors liste porte le code SOURCE-SECONDAIRE-NATURE.
+    nature: texte.optional(),
   })
   .superRefine((source, ctx) => {
+    if (source.categorie === 'secondaire' && source.nature === undefined) {
+      ctx.addIssue({ code: 'custom', path: ['nature'], message: `une source secondaire indique sa nature (${NATURES_SOURCE_SECONDAIRE.join(', ')}) : un forum, un article de presse ou un blog n'entre pas au registre`, params: { regle: 'SOURCE-SECONDAIRE-NATURE' } });
+    } else if (source.categorie === 'secondaire' && !(NATURES_SOURCE_SECONDAIRE as readonly string[]).includes(source.nature ?? '')) {
+      ctx.addIssue({ code: 'custom', path: ['nature'], message: `nature « ${source.nature} » non admise : ${NATURES_SOURCE_SECONDAIRE.join(', ')} (un forum, un article de presse ou un blog n'entre pas au registre)`, params: { regle: 'SOURCE-SECONDAIRE-NATURE' } });
+    } else if (source.categorie !== 'secondaire' && source.nature !== undefined) {
+      ctx.addIssue({ code: 'custom', path: ['nature'], message: 'la nature ne se donne que pour une source secondaire', params: { regle: 'SOURCE-SECONDAIRE-NATURE' } });
+    }
     if (source.categorie === 'notice-constructeur' && source.marque === undefined) {
       ctx.addIssue({ code: 'custom', path: ['marque'], message: 'une notice constructeur indique sa marque', params: { regle: 'R7-CHAMP-MANQUANT' } });
     }
@@ -93,6 +104,8 @@ export type Source = z.infer<typeof sourceSchema>;
  *    Les notices d'au moins MARQUES_MIN marques de référence, de GROUPES_MIN groupes, sont citées ; le verdict le
  *    plus prudent l'emporte (docs/03 règle 10) ;
  *  - `ecart_marques` : obligatoire quand les citations ne donnent pas toutes le même niveau ; dit l'écart au lecteur ;
+ *  - `ecart_court` : la ligne d'écart du format 2 (25 mots au plus avec son lien, marques plus et moins strictes nommées ;
+ *    demande de changement n° 30, règle 2b), validée avec la ligne ;
  *  - `validation` : empreinte de la ligne validée par Houssem (voir src/lib/empreinte.ts).
  */
 export const voyantBaseSchema = z.strictObject({
@@ -108,6 +121,7 @@ export const voyantBaseSchema = z.strictObject({
   action: texte,
   citations: z.array(citationSchema).min(1),
   ecart_marques: texte.optional(),
+  ecart_court: texte.optional(),
   validation: hashHex,
 });
 export type VoyantBase = z.infer<typeof voyantBaseSchema>;

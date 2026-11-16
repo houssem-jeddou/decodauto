@@ -14,6 +14,7 @@ import {
   robotsAnnoncePlanDuSite,
 } from '../src/lib/site.ts';
 import type { Constat } from '../src/lib/controle.ts';
+import { EXECUTEUR_DES_JOBS } from '../scripts/lib/depot-public.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -268,7 +269,7 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
     assert.deepEqual(o.attentes, [30_000]);
   });
 
-  test('un seul passage (pull request, contrôle du lundi, lancement à la demande) : écart rendu tel quel, sans attente', async () => {
+  test('un seul passage (contrôle du lundi, lancement à la demande sur main, lancement local) : écart rendu tel quel, sans attente', async () => {
     const o = options();
     const resultat = await verifierAvecTentatives(async () => { o.avancer(); return [ecart]; }, { ...o.opts, passages: 1 });
     assert.deepEqual(resultat, { constats: [ecart], passages: 1, passagers: [] });
@@ -301,5 +302,90 @@ describe('vérification de la production : nouvelles tentatives (propagation de 
     const script = await readFile(join(racine, 'scripts', 'verifier-production.ts'), 'utf8');
     assert.match(script, /budgetMs: 240_000/);
     assert.match(script, /passages: apresDeploiement \? 4 : 1/);
+  });
+
+  test('demande n° 26 : le job production ne tourne que sur main, et seuls une pull request ou un essai hors de main annulent le passage remplacé', async () => {
+    const ci = await readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
+    const job = ci.slice(ci.indexOf('\n  production:'));
+    const condition = /\n    if: (\$\{\{.*\}\})\n/.exec(job)?.[1];
+    const annulation = /\nconcurrency:\n  group: .*\n  cancel-in-progress: (\$\{\{.*\}\})\n/.exec(ci)?.[1];
+    assert.ok(condition !== undefined && annulation !== undefined, 'condition du job production ou annulation introuvable');
+    // Évalue l'expression de GitHub pour un événement : seules les variables utilisées ici sont remplacées, toute autre
+    // variable laissée dans l'expression fait échouer l'évaluation (le test doit alors être complété).
+    const evaluer = (expression: string, c: { evenement: string; ref: string; deploiement: string }): boolean => {
+      const js = expression
+        .replace(/^\$\{\{\s*|\s*\}\}$/g, '')
+        .replace(/!cancelled\(\)/g, 'true')
+        .replace(/github\.event_name/g, JSON.stringify(c.evenement))
+        .replace(/github\.ref/g, JSON.stringify(c.ref))
+        .replace(/needs\.deploiement\.result/g, JSON.stringify(c.deploiement))
+        .replace(/==/g, '===');
+      assert.doesNotMatch(js, /[a-z_]+\.[a-z_]+/i, `variable non prévue par le test : ${js}`);
+      return Function(`return (${js});`)() === true;
+    };
+    const main = 'refs/heads/main';
+    const cas = [
+      { nom: 'push sur main, déploiement réussi', evenement: 'push', ref: main, deploiement: 'success', production: true, annule: false },
+      { nom: 'push sur main, déploiement ignoré', evenement: 'push', ref: main, deploiement: 'skipped', production: false, annule: false },
+      { nom: 'push sur main, déploiement en échec', evenement: 'push', ref: main, deploiement: 'failure', production: false, annule: false },
+      { nom: 'pull request', evenement: 'pull_request', ref: 'refs/pull/12/merge', deploiement: 'skipped', production: false, annule: true },
+      { nom: 'contrôle du lundi', evenement: 'schedule', ref: main, deploiement: 'skipped', production: true, annule: false },
+      { nom: 'lancement à la demande sur main', evenement: 'workflow_dispatch', ref: main, deploiement: 'skipped', production: true, annule: false },
+      { nom: 'lancement à la demande sur une branche d\'essai', evenement: 'workflow_dispatch', ref: 'refs/heads/essai/brouillons', deploiement: 'skipped', production: false, annule: true },
+    ];
+    for (const c of cas) {
+      assert.equal(evaluer(condition, c), c.production, `job production, ${c.nom}`);
+      assert.equal(evaluer(annulation, c), c.annule, `annulation du passage remplacé, ${c.nom}`);
+    }
+  });
+});
+
+describe('CI : exécuteur, cache et stockage (demande n° 27)', () => {
+  const lireCi = () => readFile(join(racine, '.github', 'workflows', 'ci.yml'), 'utf8');
+
+  test('chaque job tourne sur les serveurs de GitHub si le dépôt est public ; s\'il est privé, sur l\'exécuteur de CI_RUNNER (demande n° 29)', async () => {
+    const ci = await lireCi();
+    const jobs = ci.slice(ci.indexOf('\njobs:\n'));
+    const executeurs = [...jobs.matchAll(/\n    runs-on: (.*)\n/g)].map((m) => m[1]);
+    const nomsDeJobs = [...jobs.matchAll(/\n  ([a-z][a-z-]*):\n/g)].map((m) => m[1]);
+    assert.ok(nomsDeJobs.length >= 7, `jobs trouvés : ${nomsDeJobs.join(', ')}`);
+    assert.equal(executeurs.length, nomsDeJobs.length, 'chaque job déclare son exécuteur');
+    for (const e of executeurs) assert.equal(e, EXECUTEUR_DES_JOBS);
+    // Évaluation de l'expression (« && » avant « || » chez GitHub ; une variable absente vaut une chaîne vide).
+    const evaluer = (prive: boolean | null, variable: string): string => {
+      const js = EXECUTEUR_DES_JOBS.replace(/^\$\{\{\s*|\s*\}\}$/g, '').replace('github.event.repository.private', JSON.stringify(prive)).replace('vars.CI_RUNNER', JSON.stringify(variable));
+      return Function(`return (${js});`)();
+    };
+    assert.equal(evaluer(false, 'self-hosted'), 'ubuntu-latest', 'dépôt public : jamais l\'exécuteur auto-hébergé');
+    assert.equal(evaluer(null, 'self-hosted'), 'ubuntu-latest', 'visibilité non lue : comptée comme publique');
+    assert.equal(evaluer(false, ''), 'ubuntu-latest');
+    assert.equal(evaluer(true, ''), 'ubuntu-latest', 'dépôt privé sans variable : serveurs de GitHub');
+    assert.equal(evaluer(true, 'self-hosted'), 'self-hosted', 'dépôt privé avec la variable : exécuteur de la demande n° 27');
+  });
+
+  test('le cache npm de GitHub ne sert que sur ses serveurs, jamais sur l\'exécuteur du PC', async () => {
+    const ci = await lireCi();
+    const caches = [...ci.matchAll(/\n {10}cache: (.*)\n/g)].map((m) => m[1]);
+    assert.equal(caches.length, 5, 'cinq étapes setup-node déclarent un cache (dont la démonstration du format 2, lot F1)');
+    const expression = "${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}";
+    for (const c of caches) assert.equal(c, expression);
+    // Évaluation de l'expression : une variable absente vaut une chaîne vide chez GitHub ; '' (aucun cache) est faux,
+    // d'où l'ordre « != … && 'npm' || '' » (l'ordre inverse donnerait toujours 'npm').
+    const evaluer = (executeur: string): string => {
+      const js = expression.replace(/^\$\{\{\s*|\s*\}\}$/g, '').replace(/vars\.CI_RUNNER/g, JSON.stringify(executeur));
+      return Function(`return (${js});`)();
+    };
+    assert.equal(evaluer(''), 'npm', 'variable absente : serveurs de GitHub, cache npm');
+    assert.equal(evaluer('ubuntu-latest'), 'npm');
+    assert.equal(evaluer('self-hosted'), '', 'exécuteur du PC : aucun cache de GitHub');
+  });
+
+  test('les rapports complets de Lighthouse ne sont conservés qu\'en cas d\'échec, et le job a un délai de 30 minutes', async () => {
+    const ci = await lireCi();
+    const job = ci.slice(ci.indexOf('\n  lighthouse:'), ci.indexOf('\n  origine-main:'));
+    assert.match(job, /\n    timeout-minutes: 30\n/);
+    const envoi = job.slice(job.indexOf('Conserver les rapports'));
+    assert.match(envoi, /^Conserver les rapports \(en cas d'échec\)\n {8}if: \$\{\{ failure\(\) \}\}\n/);
+    assert.match(envoi, /name: rapports-lighthouse/);
   });
 });

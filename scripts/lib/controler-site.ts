@@ -6,10 +6,14 @@ import { join, relative } from 'node:path';
 import { construireContexte, controlerEnsemble, controlerGrilleCouts, controlerPage, type Constat, type PageControlee } from '../../src/lib/controle.ts';
 import { ID_OUTIL_VOYANTS, adressesDansLeTexte, indexerPlan, liensEnAttente, liensExternesDuTexte } from '../../src/lib/plan.ts';
 import { FICHIER_05, controlerPortePlan, lireCsv } from '../../src/lib/porte-plan.ts';
-import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, listerFichiers } from './charger.ts';
+import { AUTEUR_SUPPOSE, DOSSIER_CONTENU, DOSSIER_EXEMPLES, auteursDuSocle, chargerDonnees, chargerPages, chargerPictogrammes, listerFichiers } from './charger.ts';
 import { adresseDepuisFichier } from '../../src/lib/site.ts';
-import { FICHIER_VAGUES_OUVERTES, chargerVaguesOuvertes, controlerVaguesOuvertes } from './vagues.ts';
+import { FICHIER_LOTS_FORMAT2, FICHIER_VAGUES_OUVERTES, chargerLotsFormat2, chargerVaguesOuvertes, controlerFormatDesVagues, controlerVaguesOuvertes } from './vagues.ts';
 import { controlerFavicon } from './favicon.ts';
+import { DOSSIER_PAGES_DEMO_FORMAT2, constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
+import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
+import { chargerIllustrations } from './demo-format2.ts';
+import { constatsLibellesPictogrammes } from '../../src/lib/pictogrammes.ts';
 import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
@@ -25,15 +29,22 @@ export interface BilanControle {
  */
 export const AUTEUR_DES_EXEMPLES = AUTEUR_SUPPOSE;
 
-export async function controlerSite(options: { racine: string; dist: string; aujourdhui: Date; indexable: boolean; exemples?: boolean }): Promise<BilanControle> {
-  const { racine, dist, aujourdhui, indexable, exemples = false } = options;
+export async function controlerSite(options: { racine: string; dist: string; aujourdhui: Date; indexable: boolean; exemples?: boolean; brouillonFormat2?: BrouillonFormat2 | undefined }): Promise<BilanControle> {
+  const { racine, dist, aujourdhui, indexable, exemples = false, brouillonFormat2 } = options;
   const constats: Constat[] = [];
   const informations: string[] = [];
 
   // 1. Fichiers de données et base voyants. Construction de recette (--exemples) : les exemples rédigés s'ajoutent aux
   //    pages (dont la page « à propos » et sa fiche auteur, livrable 7.3).
-  const donnees = await chargerDonnees(racine);
-  const pagesLues = await chargerPages(racine, exemples ? [DOSSIER_CONTENU, DOSSIER_EXEMPLES] : [DOSSIER_CONTENU]);
+  // Construction de démonstration du format 2 (--demo-format2) : le brouillon s'applique aux données et aux pages lues, comme
+  // à la construction (scripts/lib/demo-format2.ts).
+  const lues = await chargerDonnees(racine);
+  const donnees = brouillonFormat2 !== undefined ? { ...lues, voyants: voyantsAvecBrouillon(lues.voyants, brouillonFormat2) } : lues;
+  const dossiers = [DOSSIER_CONTENU, ...(exemples ? [DOSSIER_EXEMPLES] : []), ...(brouillonFormat2 !== undefined ? [DOSSIER_PAGES_DEMO_FORMAT2] : [])];
+  const pagesLues = (await chargerPages(racine, dossiers)).map((p) =>
+    brouillonFormat2 !== undefined && p.brut !== undefined ? { ...p, brut: pageAvecBrouillon(p.brut, brouillonFormat2) } : p,
+  );
+  if (brouillonFormat2 !== undefined) informations.push('construction de démonstration du format 2 (dist-demo-format2) : brouillon jamais validé, jamais déployée');
   const auteurs = auteursDuSocle(pagesLues);
   if (exemples) informations.push(`construction de recette des exemples (${DOSSIER_EXEMPLES}/) : jamais déployée`);
   const { contexte: contexteDonnees, constats: constatsDonnees } = construireContexte({ ...donnees, auteurs }, aujourdhui);
@@ -100,6 +111,18 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   } catch (e) {
     constats.push({ regle: 'VAGUE-NON-OUVERTE', gravite: 'erreur', message: e instanceof Error ? e.message : String(e), fichier: FICHIER_VAGUES_OUVERTES });
   }
+  // Format des vagues (demande de changement n° 30, F1.4) : vagues B et C au format 2 ; vague A au format 2 seulement avec
+  // son lot (config/lots-format2.json), sauf dans la construction de démonstration.
+  try {
+    const lots = await chargerLotsFormat2(racine);
+    const pagesFormat = pagesLues.map((l) => {
+      const brut = l.brut as { id?: unknown; format?: unknown } | null | undefined;
+      return { id: typeof brut?.id === 'string' ? brut.id : undefined, fichier: l.fichier, format: brut?.format };
+    });
+    constats.push(...controlerFormatDesVagues(pagesFormat, (id) => contexte.plan.get(id)?.vague, lots, { demo: brouillonFormat2 !== undefined, dossierContenu: DOSSIER_CONTENU }));
+  } catch (e) {
+    constats.push({ regle: 'FORMAT2-VAGUE', gravite: 'erreur', message: e instanceof Error ? e.message : String(e), fichier: FICHIER_LOTS_FORMAT2 });
+  }
   // Une page éditoriale construite a son fichier de contenu : un exemple (exemples/), une page de test ou une page
   // supprimée ne se retrouvent jamais dans le site construit (livrable 6.6 : aucune vraie page sur main avant l'étape 9).
   const adressesDuPlan = new Set([...contexte.plan.values()].map((l) => l.adresse));
@@ -137,7 +160,21 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   constats.push(...(await controlerPagesDuPlan(dist, [...contexte.plan.values()].map((ligne) => ligne.adresse))));
   constats.push(...(await controlerCanonicalEtPlanDuSite(dist)));
   constats.push(...(await controler404(dist)));
-  constats.push(...(await controlerComposantsCommuns(dist, contexte.plan.get(PAGE_CONFIDENTIALITE)?.adresse, contexte.plan.get(PAGE_METHODE)?.adresse, exemples)));
+  constats.push(...(await controlerComposantsCommuns(dist, contexte.plan.get(PAGE_CONFIDENTIALITE)?.adresse, contexte.plan.get(PAGE_METHODE)?.adresse, exemples || brouillonFormat2 !== undefined)));
+  // Illustrations du site (format 2, règle 2i) : chaque dessin de src/illustrations se pose en ligne sans script ni ressource.
+  for (const [fichier, svg] of await chargerIllustrations(racine, DOSSIER_ILLUSTRATIONS)) {
+    try {
+      illustrationEnLigne(svg, fichier, fichier);
+    } catch (e) {
+      constats.push({ regle: 'ILLUSTRATION-SVG', gravite: 'erreur', message: e instanceof Error ? e.message : String(e), fichier: `${DOSSIER_ILLUSTRATIONS}/${fichier}.svg` });
+    }
+  }
+  // Libellé de chaque pictogramme (grille de l'accueil au format 2) : un par fichier de src/pictogrammes (PICTO-LIBELLE).
+  constats.push(...constatsLibellesPictogrammes((await chargerPictogrammes(racine)).map((p) => p.id)));
+  // Garde-fou : une page de la construction de démonstration du format 2 n'est jamais dans un site contrôlé comme réel.
+  if (brouillonFormat2 === undefined) {
+    for (const chemin of await listerFichiers(dist, '.html')) constats.push(...constatsDemoPubliee(await readFile(chemin, 'utf8'), relative(dist, chemin).split('\\').join('/')));
+  }
   // Accueil (livrable 7.4a) : liste générée depuis le plan, exactement les pages éditoriales construites.
   const adresseOutil = construitesEditoriales.find((p) => p.id === ID_OUTIL_VOYANTS) !== undefined ? contexte.plan.get(ID_OUTIL_VOYANTS)?.adresse : undefined;
   const adresseAPropos = contexte.plan.get(PAGE_METHODE)?.adresse;

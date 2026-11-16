@@ -432,7 +432,7 @@ export function compterMots(texte: string): number {
  * lien de signalement, section « Sources », renvois de page du tableau des notices (« p. 15, « … » ») et de l'outil voyants :
  * ce sont des références, pas du texte cité ni du texte du site.
  */
-export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-emplacement-pub]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references'] as const;
+export const HORS_PART_CITEE = ['[data-sources]', '[data-fil-ariane]', '[data-pages-liees]', '[data-pages-enfants]', '[data-emplacement-pub]', '[data-mention-ia]', '[data-signaler-erreur]', '.notices-page', '.outil-references', '[data-sommaire]'] as const;
 
 export interface PartCitee {
   /** Mots du texte affiché dans le contenu principal (main), hors HORS_PART_CITEE. */
@@ -545,6 +545,24 @@ export function adressesDuCss(css: string): string[] {
   const adresses = [...sansCommentaires.matchAll(/url\(\s*(?:"([^"]*)"|'([^']*)'|([^)\s]*))\s*\)/gi)].map((m) => m[1] ?? m[2] ?? m[3] ?? '');
   const imports = [...sansCommentaires.matchAll(/@import\s+(?:"([^"]*)"|'([^']*)')/gi)].map((m) => m[1] ?? m[2] ?? '');
   return [...adresses, ...imports].filter((u) => adresseTierce(u));
+}
+
+/**
+ * Feuille de style de la page (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md, §2) : une seule,
+ * en ligne, celle du format de la page (`data-format` de html, 1 ou 2), repérée par son marqueur `--charte:<format>` ;
+ * aucune feuille reliée. Une page sans sa feuille, ou avec les deux, s'afficherait mal sans qu'aucun autre contrôle le voie.
+ */
+export function constatsFeuilleDeStyle(html: string, fichier: string): Constat[] {
+  const $ = cheerio.load(html);
+  const format = $('html').attr('data-format');
+  if (format !== '1' && format !== '2') return [erreur('FEUILLE-FORMAT', `attribut data-format de html absent ou inconnu (« ${format ?? ''} ») : 1 ou 2 attendu`, fichier)];
+  const constats: Constat[] = [];
+  if ($('link[rel~="stylesheet"]').length > 0) constats.push(erreur('FEUILLE-FORMAT', 'feuille de style reliée : la feuille du format est posée en ligne, seule', fichier));
+  const styles = $('style').toArray().map((e) => $(e).text());
+  const marqueurs = styles.flatMap((css) => [...css.matchAll(/--charte:\s*(\d+)/g)].map((m) => m[1]));
+  if (styles.length !== 1 || marqueurs.length !== 1) constats.push(erreur('FEUILLE-FORMAT', `${styles.length} bloc(s) de style et ${marqueurs.length} marqueur(s) de feuille : une seule feuille, celle du format ${format}, attendue`, fichier));
+  else if (marqueurs[0] !== format) constats.push(erreur('FEUILLE-FORMAT', `feuille du format ${marqueurs[0] ?? '?'} sur une page au format ${format}`, fichier));
+  return constats;
 }
 
 /**
@@ -910,7 +928,8 @@ export function constatsAccueil(html: string, fichier: string, attendu: AccueilA
   } else if (liste.length !== 1) {
     constats.push(erreur('ACCUEIL-LISTE', 'l\'accueil affiche une liste des pages construites (data-accueil-pages)', fichier));
   } else {
-    const liens = liste.find('a[href]').toArray().map((a) => $(a).attr('href') ?? '');
+    // Le lien vers « à propos » peut être dans la grille des thèmes (carte « Un guide indépendant » du format 2) : hors liste.
+    const liens = liste.find('a[href]').not('[data-accueil-a-propos] a').toArray().map((a) => $(a).attr('href') ?? '');
     const manquantes = attendu.pages.filter((p) => !liens.includes(p.adresse)).map((p) => p.adresse);
     const inconnues = liens.filter((l) => !attendu.pages.some((p) => p.adresse === l));
     const doublons = liens.filter((l, i) => liens.indexOf(l) !== i);
@@ -974,6 +993,7 @@ export async function controlerComposantsCommuns(dist: string, adressePolitique 
       ...constatsTexteRedige(html, fichier),
       ...constatsPartCitee(html, fichier),
       ...constatsRessourcesTierces(html, fichier),
+      ...constatsFeuilleDeStyle(html, fichier),
       ...constatsLienConfidentialite(html, fichier, adresseAttendue),
       ...constatsMentionsLegales(html, fichier, adresseAttendue !== undefined && fichier === `${adressePolitique.replace(/^\//, '')}index.html`),
       ...constatsEmplacementsPub(html, fichier, recette),

@@ -1,0 +1,97 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./dist-demo-format2",
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/voyants/moteur/index.html",
+        "http://localhost/voyants/adblue/index.html",
+        "http://localhost/perte-de-puissance-voiture/index.html",
+        "http://localhost/voiture-qui-broute/index.html",
+        "http://localhost/batterie-voiture/changer/index.html",
+        "http://localhost/moteur-puretech/index.html",
+        "http://localhost/voyants/index.html",
+        "http://localhost/codes-defaut/p0420/index.html",
+        "http://localhost/pression-des-pneus/index.html",
+        "http://localhost/loi-montagne/index.html",
+        "http://localhost/a-propos/index.html",
+        "http://localhost/mentions-legales/index.html",
+        "http://localhost/404.html"
+      ],
+      "numberOfRuns": 3,
+      "settings": {
+        "formFactor": "mobile",
+        "chromeFlags": "--no-sandbox --disable-dev-shm-usage"
+      }
+    },
+    "assert": {
+      "aggregationMethod": "median-run",
+      "assertions": {
+        "categories:performance": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ],
+        "categories:accessibility": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ],
+        "categories:best-practices": [
+          "error",
+          {
+            "minScore": 0.95
+          }
+        ],
+        "document-title": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "meta-description": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "html-has-lang": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "viewport": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "link-text": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "crawlable-anchors": [
+          "error",
+          {
+            "minScore": 1
+          }
+        ],
+        "cumulative-layout-shift": [
+          "error",
+          {
+            "maxNumericValue": 0.1
+          }
+        ]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": ".lighthouseci-demo-format2"
+    }
+  }
+}
