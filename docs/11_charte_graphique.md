@@ -2,7 +2,11 @@
 
 **Version 1, 15/11/2026.** Houssem a choisi la piste B le 15/11 à 22 h 57 et validé le format du pilote F1, avec les précisions 2a et 2i (demande de changement n° 30, §8). Ce document est la vue lisible de la charte.
 
-**Ce qui fait foi** : à partir de la mise en œuvre du lot F1, les styles du dépôt (variables et composants de `src/styles/`) ; d'ici là, les règles de la piste B du pilote (`travaux/etape-13/pilote-f1/css/site.css` sur la branche `etape-13/pilote-f1`, sélecteurs `[data-piste="b"]` et base commune). Une variante de composant passe par la charte : ce document et les styles. Jamais de style isolé dans une page.
+**Version 2, 16/11/2026.** Porte F1 validée par Houssem le 16/11 à 18 h 55 (PR n° 68) : mise en œuvre dans les styles du dépôt, composants ajoutés au §4, focus et typographie (§2, §3), précision 2i assouplie par la demande de changement n° 32 (§5). Textes repris mot pour mot du dossier de la porte (`travaux/etape-13/f1/porte-f1.md`, §6.1).
+
+**Ce qui fait foi** : les styles du dépôt (`src/styles/charte-b.css`, variables et composants), mis en œuvre au lot F1
+(porte du 16/11/2026). Une variante de composant passe par la charte : ce document et les styles. Jamais de style isolé
+dans une page.
 
 **Ce qu'elle sert** : un site utile et facile à retrouver. Le lecteur reconnaît son voyant tel qu'il le voit sur son tableau de bord, allumé sur fond sombre. La décision se lit d'un coup d'œil. Rien ne ralentit la page.
 
@@ -31,13 +35,19 @@ Tous les contrastes de texte respectent le niveau AA du WCAG : 4,5 pour 1, ou 3 
 | Gravité sur fond clair, de 0 à 3 (texte) | `#1e7a3c`, `#8a5a00`, `#b34700`, `#b3261e` |
 | Couleur des voyants allumés : orange, rouge, vert, bleu | `#ff9f1a`, `#ff4d4d`, `#3ddc84`, `#4da3ff` |
 
+Contour de focus : 3 px, décalé de 2 px ; bleu des liens (`#0b5cad`) sur fond clair, bleu clair des liens de nuit
+(`#8cc4ff`) sur les surfaces sombres (bandeau, tête de page, encadré, pied de page, grille des voyants, groupes de l'outil,
+illustration) : au moins 3 pour 1 contre chaque fond (8,6 à 10,1 sur fond sombre ; 5,9 sur le fond de page).
+
 Le logo « Cadran » et le favicon ne changent pas (demande n° 19, règle 14 e).
 
 ## 3. Typographie
 - **Titres** (nom du site, H1, H2, résumé de « Sources ») : Outfit, en gras. Licence OFL sans nom réservé, licence servie à côté du fichier. Sous-ensemble latin du français, environ 14 Ko en WOFF. Chargement sans décalage (`font-display: optional`) : au premier passage sur réseau lent, la police du système s'affiche, et les règles du premier écran sont vérifiées dans les deux cas.
-- **Texte** : police du système (`system-ui`), 16 px, interligne 1,55. Encadré : 15 px, interligne 1,38. Mentions et notes : 13 px.
+- **Texte** : police du système (`system-ui`), 16 px, interligne 1,55. Encadré : 15 px, interligne 1,38. Signature,
+  ligne de transparence, bloc « Notices / Base du coût », mentions et notes : 13 px, couleur douce (`#4b5563`, 6,7 pour 1
+  sur le fond de page).
 - **Tailles des titres** : H1 de 1,45 rem sur téléphone et 2,1 rem sur ordinateur ; H1 de l'accueil de 1,85 et 2,5 rem ; H2 de 1,32 rem.
-- **Typographie française** : espaces insécables avant « : ; ! ? » et à l'intérieur des guillemets, entre un nombre et son unité, et après « p. » ; séparateur des milliers.
+- **Typographie française** : espaces insécables avant « : ; ! ? » et à l'intérieur des guillemets, entre un nombre et son unité, et après « p. » devant un numéro (format 2) ; séparateur des milliers.
 
 ## 4. Composants
 
@@ -66,13 +76,29 @@ Ordre de la page éditoriale (charte éditoriale §4 et §5.1, puis demande n° 
 | Notices et base du coût | Sous la ligne de transparence, en 13 px, libellés en gras. |
 | Illustration | Carte sombre de 20 px d'angles. Dessin SVG fait pour le site, textes d'au moins 12 px à 375 px de large. Légende claire terminée par « Illustration decodauto. ». Jamais une image générée présentée comme une photo ; une photo réelle seulement si Houssem la fournit ou l'accepte sous licence libre, créditée. |
 | Sommaire « Sur cette page » | Pastilles blanches bordées, en ligne qui défile sur téléphone ; colonne de côté collante sur ordinateur (un seul sommaire visible). |
-| Repère de section | Pastille sombre en tête d'une section liée à l'encadré : forme et libellé du verdict dans la couleur de la gravité. |
+| Repère de section | Pastille sombre en tête d'une section liée à l'encadré : forme et libellé du verdict dans la couleur de la gravité. Un repère seulement sous un H2 qui pose la question d'une seule ligne de l'encadré ; une exception explicite à une autre ligne dans le texte est admise (exemple : FAP avec le voyant moteur) ; une section qui mêle plusieurs cas n'en a pas. |
 | Cartes du corps (encart, causes, fiche, étapes, sources) | Blanches, angles de 16 px, ombre légère ; étapes numérotées dans des pastilles sombres à chiffre ambre. |
 | Tableaux | En-tête sombre, texte clair, lignes séparées par un filet, angles de 12 px. Comparaisons en cartes sur téléphone quand le tableau a plus de trois colonnes. |
-| Tableau des notices | Colonnes : notice, ce que demande la notice, niveau, page. Badge de niveau sombre à texte lumineux, mention « Consigne retenue ». Extrait mot pour mot dépliable, au libellé unique. Une carte par notice sur téléphone. |
+| Tableau des notices | Colonnes : notice, ce que demande la notice, niveau, page. Badge de niveau sombre à texte lumineux, mention « Consigne retenue ». Extrait mot pour mot dépliable, au libellé unique. Une carte par notice sur téléphone. « Consigne retenue » dans la cellule « Niveau » ; colonne « Page » courte (« p. 15 »), emplacement entier sous l'extrait. |
 | Pages liées | Pastilles blanches avec la tuile ronde du voyant. |
 | Pied de page | Fond nuit, liens bleu clair : « Signaler une erreur », mentions légales. |
 | Accueil | Tête nuit (H1, premier paragraphe) ; sur ordinateur, l'illustration du combiné à droite. Juste après, la section « Quel voyant s'est allumé ? » sur fond nuit : grille des pictogrammes de la base, un lien par voyant, tuiles rondes allumées dans des cellules sombres ; elle commence dans le premier écran du téléphone. Puis l'accès par thème et « Un guide indépendant », en cartes. |
+| Sommaire, état long | Ordinateur : colonne collante à la hauteur de l'écran, défilement propre, ombres de défilement. Téléphone : pastilles de 13,5 rem au plus (une pastille et demie visible à 375 px), deux lignes puis points de suspension, hauteur égale, accroche, fondu à droite. Pages du socle : dès deux titres. |
+| Accueil, grille des voyants | Un dessin par pictogramme de la base (18), libellé de `LIBELLES_PICTOGRAMMES` en 12 px (13 px sur ordinateur), marge intérieure de la tuile, coupure d'un mot de 10 lettres au moins avec un tiret ; cartes de thème aux liens espacés (cibles de 24 px). |
+| Emplacement publicitaire | 340 px réservés. |
+| Page outil | Renvoi de l'encadré en bouton ambre, sans icône ; coût « Selon le voyant » en pastille ambre ; filtre par couleur en pastilles (cochée : panneau sombre, diode de la couleur) ; index des dessins en une grille par couleur, une tuile par paire (pictogramme, couleur) avec son nombre de cas ; un panneau sombre par groupe de couleur, titre avec une diode ; une carte par ligne de la base (la cellule de l'encadré), rangées par paire, la plus grave d'abord ; pas de bouton « Trouver mon voyant » dans le bandeau de la page outil. |
+| Arbre de décision | Carte claire ; question numérotée par une pastille sombre au chiffre ambre ; réponses en liste ; un verdict cité est une pastille (forme, libellé de la grille, liseré de sa couleur) qui termine sa réponse, seule sur sa ligne ; sur deux lignes sous 360 px. |
+| Fiches (« Le symptôme en bref », « Le tutoriel en bref », fiche du code, « Le texte en bref », mentions légales) | Carte, intitulé en gras au-dessus de sa valeur, rangées séparées d'un filet de 1 px ; code en chasse fixe, pastille sombre au texte ambre. |
+| Causes | Cartes ; sur la page panne, avant le texte. |
+| Historique du dossier | Carte, une entrée par rangée séparée d'un filet, date en gras, du plus récent au plus ancien. |
+| Tableaux du texte | Bloc de la charte. Sur téléphone, en cartes quand une colonne porte un texte long, ou au-delà de trois colonnes : la première cellule de la rangée est le titre de la carte, l'intitulé de la colonne précède chaque autre valeur, rôles du tableau écrits. Cas décrits par marque : une seule carte, un cas par rangée, un filet entre deux cas, la marque en tête. Sous 360 px, une cellule coupe un mot trop long. |
+| Étapes d'un tutoriel | Cartes numérotées, sans retrait de liste. |
+| Listes sans puces (questions de l'arbre, étapes, historique) | `role="list"`, comme l'encadré. |
+| Rangée « dépannage sur autoroute » | Rangée du coût de l'encadré : cellule sombre, objet du montant en gras, texte validé inchangé ; sans triangle (forme réservée aux verdicts). |
+| Ligne d'écart | Lien « Votre marque » vers la partie du voyant au tableau des notices : sur la page, ou sur la page du voyant que le plan lie à la page ; page outil : vers la page du voyant quand elle est construite, jamais sur la ligne STOP. |
+| Page du socle et 404 | Tête de page nuit sans encadré, même écart entre la mention et le H1 que les pages éditoriales ; fiche de l'auteur et « Méthode » en cartes ; 404 : phrase, un seul bouton « Trouver mon voyant » (aucun dans le bandeau), lien vers l'accueil, pied de page en bas de l'écran. |
+| Bandeau sous 360 px | Le dessin du bouton « Trouver mon voyant » s'efface, son texte reste ; nom du site et marges resserrés (aucun défilement horizontal à 320 px). |
+| Bandeau sur deux lignes (police large) | Quand le nom du site et le bouton ne tiennent pas sur une ligne (police du système large, comme DejaVu Sans, avec la police de secours), le bouton « Trouver mon voyant » passe sous le nom, aligné à droite ; le bandeau prend environ 38 px de plus ; jamais de débordement horizontal. Captures : `travaux/etape-13/f1/captures/bandeau-police-large/`. |
 
 ## 5. Règles de format (demande n° 30, §4, point 2, et §8)
 - **a.** Sur téléphone (375 × 667 visibles), la première situation est complète dans le premier écran : situation, verdict, urgence, action. Marge visée : 640 px.
@@ -85,11 +111,17 @@ Ordre de la page éditoriale (charte éditoriale §4 et §5.1, puis demande n° 
 - **g.** « Sources » repliée, avec leur nombre.
 - **h.** Sommaire au-delà de six écrans.
 - **i.** Un visuel qui montre où regarder ou quoi faire, après l'encadré, dans les trois premiers écrans.
-  - **Précision du 15/11** : quand le bas de l'encadré dépasse à lui seul trois écrans, le visuel suit immédiatement le bloc « Notices / Base du coût ».
+  - **2i** (assouplie par la demande de changement n° 32) : le visuel suit immédiatement le bloc « Notices / Base du coût »,
+    sous la ligne de transparence. Le haut du visuel est mesuré à 375 × 667, police chargée et police de secours, et donné
+    dans chaque paquet ; au-delà de trois écrans, le paquet le signale et dit pourquoi.
 - **j.** Aucune question des lecteurs retirée ; part citée d'un tiers au plus.
 - **k.** Accueil : grille des pictogrammes et accès par thème. Outil : index des dessins en grille sur téléphone.
 - **l.** Mention en tête et ligne de transparence inchangées, contraste AA.
 - **m.** Emplacements publicitaires jamais entre le H1 et l'encadré.
+
+Ces règles sont vérifiées par les contrôles du dépôt (FORMAT2-*, R9-*, TABLEAU-NOTICES-*, CITATIONS-PART ; catalogue :
+`CONTROLES.md`) ; les hauteurs (2a, 2h, 2i) et le débordement à 320, 375 et 1366 px sont mesurés dans un navigateur
+(FORMAT2-MESURES), police chargée et police de secours.
 
 ## 6. Conception visuelle avant intégration (décision de Houssem du 15/11/2026, 22 h 57)
 Chaque page et chaque composant ajoutés sont d'abord pensés pour être visuellement parfaits dans cette charte, avant d'être mis en place :

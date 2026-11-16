@@ -1,4 +1,4 @@
-# Structure des contenus — decodauto.com (v11)
+# Structure des contenus — decodauto.com (v12)
 
 Validée par Houssem le 22/10/2026, après trois revues indépendantes. Étape 3, livrable « Structure des contenus ».
 v2 (23/10/2026, accord de Houssem) : ajout du champ facultatif `voyant_lie` dans une ligne de situation saisie (voir le champ situations et la règle 2).
@@ -11,6 +11,7 @@ v8 (demande de changement n° 10, étape 6, acceptée par Houssem le 03/11/2026)
 v9 (demande de changement n° 12, étape 8, acceptée par Houssem le 04/11/2026) : renvoi vers la liste dans l'encadré de la seule page outil (section 3, règle 9).
 v10 (demande de changement n° 13, étape 7, acceptée par Houssem le 09/11/2026) : description et dates de revue des pages du socle (section 2, ligne « Socle »).
 v11 (14/11/2026, demande de changement n° 23, acceptée par Houssem) : une ligne de la base sans page propre, admise par une demande de changement (le voyant STOP), se rattache à la page outil, qui l'affiche dans sa liste sans la reprendre dans son encadré ni lui donner de tableau des notices (règles 1 et 12).
+v12 (16/11/2026, porte F1 validée par Houssem à 18 h 55 ; demande de changement n° 30, lot F1) : champs du format 2, déjà dans `src/schemas/` (section 1, « Champs du format 2 »).
 
 **Archivé le 23/10/2026 (décision de Houssem, porte de l'étape 3)** : la transposition en schémas est validée. Ce sont désormais **les schémas du dépôt (`src/schemas/`, contrôles dans `src/lib/controle.ts`) qui font foi** ; ce fichier reste la référence lisible. Toute modification de structure passe par une demande de changement (03) et met à jour les schémas, puis ce fichier.
 
@@ -39,6 +40,18 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
 | adresse, theme | ✅ | **calculés** depuis le plan du site | Jamais saisis. |
 | niveau_securite | ✅ | **calculé** | Reprend la situation la plus grave de la page. |
 | validation | ✅ | saisi après la validation de Houssem | v4. Empreinte de l'**encadré de décision** : question de décision, lignes de situation (une ligne reprise de la base par l'identifiant du voyant et ce que l'encadré en affiche : situation, verdict, urgence, action, écart, de sorte que les changer oblige à relire l'encadré ; une ligne saisie en entier) et coût probable (v5 : plage calculée, par les identifiants de ses tranches ; pièces de chaque cause ou de la page ; risque, montants et prises en charge par leur identifiant ; base de calcul et sources ; reclasser une pièce fait donc revalider). Exigée sur toute page éditoriale. Les lignes de la base voyants portent leur propre empreinte (section 5), comme le texte de chaque montant de `data/couts.json` (section 7). |
+
+**Champs du format 2** (lot F1, déjà dans `src/schemas/` ; texte du dossier de la porte F1, §6.3) :
+- `format` (toute page, socle compris) : 1 ou 2 ; absent = 1. Vagues B et C : 2. Vague A : 2 seulement avec son lot
+  (`config/lots-format2.json`, FORMAT2-VAGUE).
+- `illustration` (page éditoriale au format 2, obligatoire) : `fichier` (SVG de `src/illustrations`), `alt`, `legende`
+  terminée par « Illustration decodauto. ».
+- `reponse_directe` (pages pneus et obligations seulement) : réponse directe à la question du lecteur, 40 mots au plus,
+  en tête de l'encadré (règle 2c) ; exigée sur une page informative au format 2.
+- Base voyants, `ecart_court` (ligne dont les marques divergent, format 2) : ligne d'écart de 25 mots au plus avec
+  « Votre marque », qui nomme les marques plus et moins strictes.
+- Base voyants, citation d'une notice, `demande` : ce que demande la notice, en une phrase, pour la colonne du tableau des
+  notices.
 
 **Listes fermées**
 - verdict, du moins grave au plus grave : `oui` / `oui avec précautions` / `non, arrêt dès que possible` / `non, arrêt immédiat`.
