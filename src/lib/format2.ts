@@ -163,7 +163,7 @@ export const teteDePage = (filHtml: string, h1: string): string => `<div class="
  * Tête de page du format 2 sans encadré qui la chevauche (socle, 404 ; F1.3b) : mention en tête et H1, sans fil d'Ariane ;
  * `suite` : ce qui suit le H1 dans la tête (404 : une phrase, le bouton et le lien vers l'accueil).
  */
-export const teteSeule = (h1: string, suite = ''): string => `<div class="tete tete-seule">${mentionEnTete()}<div class="tete-int"><h1>${texteHtml(h1)}</h1>${suite}</div></div>`;
+export const teteSeule = (h1: string, suite = '', classe?: string): string => `<div class="tete tete-seule${classe !== undefined ? ` ${classe}` : ''}">${mentionEnTete()}<div class="tete-int"><h1>${texteHtml(h1)}</h1>${suite}</div></div>`;
 
 // ---- Encadré de décision ---------------------------------------------------------------------------
 
@@ -363,6 +363,17 @@ export interface EntreeSommaire {
 /** Titres H2 d'un fragment HTML, avec leur identifiant (les titres sans identifiant sont ignorés). */
 export function titresH2(html: string): EntreeSommaire[] {
   return [...html.matchAll(/<h2\b[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => ({ ancre: m[1] ?? '', titreHtml: (m[2] ?? '').replace(/<[^>]+>/g, '').trim() }));
+}
+
+/**
+ * Titres de niveau 2 d'une page du socle (revue de F1.3b) : ceux du texte, qui portent leur ancre, et ceux des sections
+ * générées (fiche de l'auteur, « Méthode ») dont l'ancre est portée par la section ; dans l'ordre de la page.
+ */
+export function titresDesSections(html: string): EntreeSommaire[] {
+  return [...html.matchAll(/<section\b[^>]*\sid="([^"]+)"[^>]*>\s*<h2\b[^>]*>([\s\S]*?)<\/h2>|<h2\b[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)].map((m) => ({
+    ancre: m[1] ?? m[3] ?? '',
+    titreHtml: (m[2] ?? m[4] ?? '').replace(/<[^>]+>/g, '').trim(),
+  }));
 }
 
 /** Nombre de H2 d'un fragment HTML. */
@@ -684,10 +695,22 @@ export function tableauxDuTexteFormat2(html: string): string {
   const enrichir = (table: string): { table: string; cartes: boolean } => {
     const entetes = [...(/<thead\b[\s\S]*?<\/thead>/.exec(table)?.[0] ?? '').matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/g)].map((m) => decoderEntites((m[1] ?? '').replace(/<[^>]+>/g, '')).trim());
     if (entetes.length <= 3) return { table, cartes: false };
-    const corps = table.replace(/<tr\b[^>]*>[\s\S]*?<\/tr>/g, (rangee) => {
-      let i = 0;
-      return rangee.replace(/<td\b([^>]*)>/g, (_t, attributs: string) => `<td${attributs} data-libelle="${attributHtml(entetes[i++] ?? '')}">`);
-    });
+    // Cartes (revue de F1.3b) : la première cellule de chaque rangée en devient le titre (th scope="row"), et les rôles du
+    // tableau sont écrits, comme pour les cas par marque : un lecteur d'écran garde le tableau quand l'affichage passe en blocs.
+    const corps = table
+      .replace(/<table\b/, '<table role="table"')
+      .replace(/<(thead|tbody)\b/g, '<$1 role="rowgroup"')
+      .replace(/<tr\b/g, '<tr role="row"')
+      .replace(/<th\b(?![^>]*\bscope=)/g, '<th scope="col" role="columnheader"')
+      .replace(/<tr role="row"([^>]*)>([\s\S]*?)<\/tr>/g, (rangee, attributs: string, cellules: string) => {
+        if (!/<td\b/.test(cellules)) return rangee;
+        let i = 0;
+        const avecTitre = cellules.replace(/<td\b([^>]*)>([\s\S]*?)<\/td>/g, (_c, a: string, contenu: string) => {
+          const rang = i++;
+          return rang === 0 ? `<th scope="row" role="rowheader"${a}>${contenu}</th>` : `<td role="cell"${a} data-libelle="${attributHtml(entetes[rang] ?? '')}">${contenu}</td>`;
+        });
+        return `<tr role="row"${attributs}>${avecTitre}</tr>`;
+      });
     return { table: corps, cartes: true };
   };
   // Tableau élément unique, déjà dans son bloc.

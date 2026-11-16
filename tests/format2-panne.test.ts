@@ -156,7 +156,9 @@ describe('format 2 : pages panne et dossier (F1.3c et sa revue)', () => {
     assert.equal($('[data-fiche-tutoriel]').length, 0);
     const tableau = $('[data-element-unique="tableau"]');
     assert.ok(tableau.hasClass('tableau-cartes'));
-    assert.deepEqual(tableau.find('tbody td').toArray().map((td) => ($(td).attr('data-libelle') ?? '').replace(/[\u00a0\u202f]/g, ' ')), ['Rappel', 'Date', 'Moteurs', 'Ce qui est en cause', 'Pièces & main-d’œuvre', 'Âge < 5 ans']);
+    // Revue de F1.3b : la première cellule est le titre de la carte (th scope="row"), les autres portent leur intitulé.
+    assert.equal(tableau.find('tbody tr[role="row"] > th[scope="row"][role="rowheader"]').first().text(), 'A');
+    assert.deepEqual(tableau.find('tbody td[role="cell"]').toArray().map((td) => ($(td).attr('data-libelle') ?? '').replace(/[\u00a0\u202f]/g, ' ')), ['Date', 'Moteurs', 'Ce qui est en cause', 'Pièces & main-d’œuvre', 'Âge < 5 ans']);
     assert.ok(!dossier.html.includes('&amp;amp;') && !dossier.html.includes('&amp;lt;'));
     assert.equal($('[data-historique-dossier] ul.historique[role="list"] > li').length, 3);
   });
@@ -222,10 +224,13 @@ describe('format 2 : pages panne et dossier (F1.3c et sa revue)', () => {
   test('tableaux du texte au format 2 : bloc de la charte, cartes au-delà de trois colonnes, intitulés avec & et < échappés une seule fois', () => {
     const trois = '<table><thead><tr><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>3</td></tr></tbody></table>';
     assert.equal(tableauxDuTexteFormat2(trois), `<div class="tableau">${trois}</div>`);
-    const quatre = '<table><thead><tr><th>Pièces &amp; main-d’œuvre</th><th>Âge &lt; 5 ans</th><th>C</th><th>D</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>3</td><td>4</td></tr></tbody></table>';
+    const quatre = '<table><thead><tr><th>Notice</th><th>Pièces &amp; main-d’œuvre</th><th>Âge &lt; 5 ans</th><th>D</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>3</td><td>4</td></tr></tbody></table>';
     const rendu = tableauxDuTexteFormat2(quatre);
-    assert.match(rendu, /<td data-libelle="Pièces &amp; main-d’œuvre">1<\/td><td data-libelle="Âge &lt; 5 ans">2<\/td>/);
+    assert.match(rendu, /<th scope="row" role="rowheader">1<\/th><td role="cell" data-libelle="Pièces &amp; main-d’œuvre">2<\/td><td role="cell" data-libelle="Âge &lt; 5 ans">3<\/td>/);
     assert.equal(cheerio.load(rendu)('td').first().attr('data-libelle'), 'Pièces & main-d’œuvre');
+    // Rôles du tableau, comme les cas par marque (revue de F1.3b) : le tableau reste annoncé quand il passe en cartes.
+    assert.match(rendu, /^<div class="tableau tableau-cartes"><table role="table"><thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Notice<\/th>/);
+    assert.match(rendu, /<tbody role="rowgroup"><tr role="row">/);
     const unique = `<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="X" tabindex="0">${trois}</div>`;
     assert.equal(tableauxDuTexteFormat2(unique), `<div class="tableau tableau-corps" data-element-unique="tableau" role="region" aria-label="X" tabindex="0">${trois}</div>`);
     assert.equal(decoderEntites('a &amp; b &lt; c &#39;d&#x27; &nbsp;&unknown;'), 'a & b < c \'d\'  &unknown;');

@@ -20,7 +20,7 @@ import { AUTEUR_DES_EXEMPLES } from '../scripts/lib/controler-site.ts';
 import { lireFrontmatter } from '../scripts/lib/charger.ts';
 import { lireBrouillonFormat2, pageAvecBrouillon } from '../scripts/lib/demo-format2.ts';
 import { constatsMentionEtSignalement, constatsMentionsLegales, constatsPageAPropos, constatsPartCitee, constatsTypographie } from '../scripts/lib/dist.ts';
-import { schemasPage, type PageEditoriale, type PageSaisie } from '../src/schemas/pages.ts';
+import { REPONSE_DIRECTE_MAX_MOTS, schemasPage, type PageEditoriale, type PageSaisie } from '../src/schemas/pages.ts';
 import type { TypePage } from '../src/schemas/listes.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -113,7 +113,28 @@ describe('format 2 : pages code défaut et pneus et obligations (F1.3b)', () => 
     assert.equal(reponse.text().replace(/\s+/g, ' ').trim().replace(/[  ]/g, ' '), (brouillon.pages['pression-des-pneus']?.reponse_directe ?? '').replace(/[  ]/g, ' '));
     assert.equal($('[data-texte-reference] dl.fiche').length, 1);
     assert.ok($('[data-element-unique="tableau"]').hasClass('tableau-cartes'));
+    // Revue de F1.3b : la notice est le titre de chaque carte (th scope="row"), rôles du tableau comme les cas par marque.
+    const tableau = $('[data-element-unique="tableau"] table[role="table"]');
+    assert.equal(tableau.find('tbody > tr[role="row"]').length, tableau.find('tbody > tr > th[scope="row"][role="rowheader"]').length);
+    assert.ok(tableau.find('tbody th[scope="row"]').first().text().length > 0);
+    assert.equal(tableau.find('thead th[scope="col"][role="columnheader"]').length, 4);
     assert.equal(cheerio.load(montagne.html)('[data-reponse-directe]').length, 0);
+  });
+
+  test('réponse directe (schéma, revue de F1.3b) : réservée aux pages pneus et obligations, 40 mots au plus ; celle du pilote en compte moins', () => {
+    const lu = (type: 'pneus' | 'code-defaut', brut: Record<string, unknown>): string[] => {
+      const r = schemasPage[type].safeParse(brut);
+      return r.success ? [] : r.error.issues.map((i) => i.message);
+    };
+    const reponse = brouillon.pages['pression-des-pneus']?.reponse_directe ?? '';
+    const mots = reponse.split(/\s+/).filter((m) => /[\p{L}\p{N}]/u.test(m)).length;
+    assert.equal(mots, 20);
+    assert.equal(REPONSE_DIRECTE_MAX_MOTS, 40);
+    assert.deepEqual(lu('pneus', pression.brut as Record<string, unknown>), []);
+    const quaranteEtUn = Array.from({ length: 41 }, (_, i) => `mot${i}`).join(' ');
+    assert.deepEqual(lu('pneus', { ...(pression.brut as Record<string, unknown>), reponse_directe: quaranteEtUn.split(' ').slice(0, 40).join(' ') }), []);
+    assert.ok(lu('pneus', { ...(pression.brut as Record<string, unknown>), reponse_directe: quaranteEtUn }).some((m) => /41 mots : 40 au plus/.test(m)));
+    assert.ok(lu('code-defaut', { ...(code.brut as Record<string, unknown>), reponse_directe: 'Oui.' }).some((m) => /réservée aux pages pneus et obligations/.test(m)));
   });
 
   test('page informative sans réponse directe : la construction échoue', () => {
@@ -157,6 +178,22 @@ describe('format 2 : socle et page 404 (F1.3b)', () => {
     assert.ok(regles(constatsPageAPropos(modifie(html, ($$) => $$('[data-auteur]').remove()), 'x')).includes('AUTEUR-FICHE'));
   });
 
+  test('« à propos » : sommaire « Sur cette page » dès trois titres (règle 2h, revue de F1.3b), vers les titres du texte, la fiche de l\'auteur et « Méthode » ; dans la colonne et à droite', async () => {
+    const page = { ...(await lire('src/content/socle/a-propos.md')), format: 2 as const };
+    const corps = '<h2 id="a">A</h2><p>Texte.</p><h2 id="b">B</h2><p>Texte.</p><h2 id="c">C</h2><p>Texte.</p>';
+    const html = document(pageSocle(page, corps, methode), { title: page.title, description: page.description }, '/a-propos/');
+    const $ = cheerio.load(html);
+    assert.equal($('main > .page > .colonne.socle > nav.sommaire-colonne:first-child[data-sommaire]').length, 1);
+    assert.equal($('main > .page > aside .sommaire-cote[data-sommaire]').length, 1);
+    const cibles = $('.sommaire-cote a').toArray().map((a) => $(a).attr('href') ?? '');
+    assert.deepEqual(cibles.slice(0, 3), ['#a', '#b', '#c']);
+    assert.ok(cibles.includes('#methode') && cibles.some((c) => c.startsWith('#auteur-')));
+    for (const c of cibles) assert.equal($(c).length, 1, c);
+    // Mentions légales : deux titres, pas de sommaire.
+    const mentions = { ...(await lire('src/content/socle/mentions-legales.md')), format: 2 as const };
+    assert.equal(cheerio.load(pageSocle(mentions, '<h2>Confidentialité</h2><p>Texte.</p>'))('[data-sommaire]').length, 0);
+  });
+
   test('mentions légales : bloc des mentions en fiche (carte), avant la politique ; contrôles verts, cas en échec', async () => {
     const page = { ...(await lire('src/content/socle/mentions-legales.md')), format: 2 as const };
     const html = document(pageSocle(page, '<h2>Confidentialité</h2><p>Texte du test.</p>'), { title: page.title, description: page.description }, '/mentions-legales/');
@@ -175,5 +212,8 @@ describe('format 2 : socle et page 404 (F1.3b)', () => {
     assert.deepEqual($('a').toArray().map((a) => $(a).attr('href')), ['/voyants/', '/']);
     assert.equal($('[data-mention-ia]').length, 1);
     assert.ok(!page404Format2({}).includes('bouton-voyant'));
+    // Pied de page en bas de l'écran (revue de F1.3b) : la tête porte la classe que la feuille étire.
+    assert.equal($('.tete.tete-404').length, 1);
+    assert.match(await readFile(join(racine, 'src/styles/charte-b.css'), 'utf8'), /body:has\(\.tete-404\)\{min-height:100vh;[^}]*display:flex;flex-direction:column\}/);
   });
 });

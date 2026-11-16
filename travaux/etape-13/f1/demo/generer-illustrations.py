@@ -65,14 +65,16 @@ def tableau_de_bord(centre=None, message=None, centre_grille=None, bas=()):
     return "".join(p)
 
 
-# Étiquette de pression du pilote (generer.py, illustration_pression), F1.3b : couleurs du thème écrites en clair, textes portés
-# à 21 unités au moins (12 px à 375 px de large).
+# Étiquette de pression du pilote (generer.py, illustration_pression), F1.3b et sa revue : couleurs du thème écrites en clair ;
+# textes de TAILLE_TEXTE unités au moins (24 pour 640 de large, soit 12 px au moins à 375 px) ; voiture réduite pour élargir
+# l'étiquette agrandie, où « normal » et « chargé » sont deux colonnes bien séparées.
 def etiquette_pression():
     """Porte du conducteur ouverte (articulée à l'avant) : étiquette sur le chant de la porte (1) ou sur l'encadrement (2),
     étiquette agrandie aux valeurs volontairement masquées."""
     fond_txt = POLICE
+    t = TAILLE_TEXTE
     voiture = (
-        '<g transform="translate(-6 46) scale(.86)">'
+        '<g transform="translate(-4 60) scale(.78)">'
         '<line x1="20" y1="236" x2="410" y2="236" stroke="#3a4553" stroke-width="4" stroke-linecap="round"/>'
         '<path d="M42 206 C42 186 52 176 76 172 L118 166 L160 118 C168 110 178 106 190 106 L292 106 C306 106 316 112 324 122 '
         'L356 164 L378 170 C394 174 402 186 402 202 L402 214 C402 220 398 224 392 224 L52 224 C46 224 42 220 42 214 Z" '
@@ -89,25 +91,29 @@ def etiquette_pression():
         '<circle cx="110" cy="224" r="28" fill="#1d232b"/><circle cx="110" cy="224" r="12" fill="#9aa5b3"/>'
         '<circle cx="334" cy="224" r="28" fill="#1d232b"/><circle cx="334" cy="224" r="12" fill="#9aa5b3"/>'
         '</g>')
-    reperes = ''.join(f'<circle cx="{cx}" cy="{cy}" r="15" fill="#ffd27a" stroke="#8a5a00" stroke-width="2"/>'
-                      f'<text x="{cx}" y="{cy + 7}" text-anchor="middle" font-size="21" font-weight="700" fill="#2b2f36" {fond_txt}>{n}</text>'
-                      for n, cx, cy in (("1", 158, 168), ("2", 236, 136)))
+    # Repères 1 et 2, dans le repère de la page (voiture à l'échelle .78) : à gauche de l'étiquette 1, à droite de la 2.
+    reperes = ''.join(f'<circle cx="{cx}" cy="{cy}" r="16" fill="#ffd27a" stroke="#8a5a00" stroke-width="2"/>'
+                      f'<text x="{cx}" y="{cy + 8}" text-anchor="middle" font-size="{t}" font-weight="700" fill="#2b2f36" {fond_txt}>{n}</text>'
+                      for n, cx, cy in (("1", 128, 184), ("2", 214, 200)))
+    # Étiquette agrandie : x de 328 à 632 ; colonne des intitulés à gauche, deux colonnes de valeurs de 76 de large,
+    # centrées en 478 et 578 (« normal » et « chargé » séparés d'une vingtaine d'unités).
+    colonnes = (440, 540)
     loupe = (
-        '<line x1="208" y1="200" x2="372" y2="96" stroke="#8a5a00" stroke-width="2" stroke-dasharray="6 6"/>'
-        '<line x1="210" y1="208" x2="372" y2="330" stroke="#8a5a00" stroke-width="2" stroke-dasharray="6 6"/>'
-        '<rect x="372" y="36" width="260" height="318" rx="16" fill="#fffdf6" stroke="#8a5a00" stroke-width="3"/>'
-        f'<text x="502" y="78" text-anchor="middle" font-size="24" font-weight="700" fill="#2b2f36" {fond_txt}>Pression à froid</text>'
-        f'<text x="502" y="104" text-anchor="middle" font-size="21" fill="#57514a" {fond_txt}>(bar)</text>'
-        '<line x1="390" y1="118" x2="614" y2="118" stroke="#d9cfb8" stroke-width="2"/>'
-        f'<text x="514" y="150" font-size="21" fill="#57514a" text-anchor="middle" {fond_txt}>normal</text>'
-        f'<text x="588" y="150" font-size="21" fill="#57514a" text-anchor="middle" {fond_txt}>chargé</text>'
-        f'<text x="388" y="198" font-size="22" font-weight="700" fill="#2b2f36" {fond_txt}>Avant</text>'
-        f'<text x="388" y="258" font-size="22" font-weight="700" fill="#2b2f36" {fond_txt}>Arrière</text>'
-        + "".join(f'<rect x="{x}" y="{y}" width="60" height="36" rx="6" fill="#efe7d6"/>'
-                  f'<text x="{x + 30}" y="{y + 25}" text-anchor="middle" font-size="21" fill="#57514a" {fond_txt}>x,x</text>'
-                  for x in (484, 558) for y in (172, 232)) +
-        f'<text x="502" y="306" text-anchor="middle" font-size="21" fill="#57514a" {fond_txt}>valeurs propres</text>'
-        f'<text x="502" y="330" text-anchor="middle" font-size="21" fill="#57514a" {fond_txt}>à chaque voiture</text>')
+        '<line x1="156" y1="196" x2="328" y2="96" stroke="#8a5a00" stroke-width="2" stroke-dasharray="6 6"/>'
+        '<line x1="156" y1="204" x2="328" y2="330" stroke="#8a5a00" stroke-width="2" stroke-dasharray="6 6"/>'
+        '<rect x="328" y="36" width="304" height="316" rx="16" fill="#fffdf6" stroke="#8a5a00" stroke-width="3"/>'
+        f'<text x="480" y="76" text-anchor="middle" font-size="26" font-weight="700" fill="#2b2f36" {fond_txt}>Pression à froid</text>'
+        f'<text x="480" y="104" text-anchor="middle" font-size="{t}" fill="#57514a" {fond_txt}>(bar)</text>'
+        '<line x1="344" y1="118" x2="616" y2="118" stroke="#d9cfb8" stroke-width="2"/>'
+        + "".join(f'<text x="{x + 38}" y="{152}" font-size="{t}" fill="#57514a" text-anchor="middle" {fond_txt}>{titre}</text>'
+                  for x, titre in zip(colonnes, ("normal", "chargé"))) +
+        f'<text x="344" y="200" font-size="{t}" font-weight="700" fill="#2b2f36" {fond_txt}>Avant</text>'
+        f'<text x="344" y="260" font-size="{t}" font-weight="700" fill="#2b2f36" {fond_txt}>Arrière</text>'
+        + "".join(f'<rect x="{x}" y="{y}" width="76" height="40" rx="6" fill="#efe7d6"/>'
+                  f'<text x="{x + 38}" y="{y + 28}" text-anchor="middle" font-size="{t}" fill="#57514a" {fond_txt}>x,x</text>'
+                  for x in colonnes for y in (172, 232)) +
+        f'<text x="480" y="308" text-anchor="middle" font-size="{t}" fill="#57514a" {fond_txt}>valeurs propres</text>'
+        f'<text x="480" y="336" text-anchor="middle" font-size="{t}" fill="#57514a" {fond_txt}>à chaque voiture</text>')
     return ('<svg viewBox="0 0 640 372" xmlns="http://www.w3.org/2000/svg">'
             + voiture + reperes + loupe + '</svg>\n')
 

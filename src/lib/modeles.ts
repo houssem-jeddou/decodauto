@@ -60,7 +60,7 @@ import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { ficheCodeHtml, modeleFicheCode, modeleParMarque, parMarqueHtml } from './fiche-code.ts';
 import { ficheTexteHtml, modeleFicheTexte } from './fiche-texte.ts';
 import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-voyants.ts';
-import { causesFormat2, pageFormat2, pageVoyantFormat2, pastilleVerdict, teteSeule } from './format2.ts';
+import { SOMMAIRE_MIN_H2, causesFormat2, pageFormat2, pageVoyantFormat2, pastilleVerdict, sommaireHtml, teteSeule, titresDesSections } from './format2.ts';
 import { pageOutilFormat2 } from './outil-format2.ts';
 import { REPONSES_MIN_ARBRE, fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, modeleFichePanne, modeleFicheTutoriel } from './fiche-panne.ts';
 
@@ -562,8 +562,18 @@ export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date
     `<p class="socle-date" data-socle-date>${texteHtml(`Mis à jour le ${dateAffichee(page.date_modification)}`)}</p>`,
   ];
   // Format 2 (demande de changement n° 30, F1.3b) : tête de page nuit (mention en tête, H1), sans encadré ; texte sur fond
-  // clair ; ni illustration, ni emplacement publicitaire.
-  if (format2) return `${teteSeule(page.title)}<div class="page"><div class="colonne socle">${contenu.join('')}</div></div>`;
+  // clair ; ni illustration, ni emplacement publicitaire. Sommaire « Sur cette page » dès SOMMAIRE_MIN_H2 titres (règle 2h,
+  // revue de F1.3b : « à propos », plus de douze écrans) : dans la colonne sur téléphone, à droite sur ordinateur.
+  if (format2) {
+    const entrees = titresDesSections(contenu.join(''));
+    const avecSommaire = entrees.length >= SOMMAIRE_MIN_H2;
+    return [
+      teteSeule(page.title),
+      `<div class="page"><div class="colonne socle">${avecSommaire ? sommaireHtml(entrees, 'sommaire-colonne') : ''}${contenu.join('')}</div>`,
+      avecSommaire ? `<aside><div class="colle">${sommaireHtml(entrees, 'sommaire-cote')}</div></aside>` : '',
+      '</div>',
+    ].join('');
+  }
   return [`<h1>${texteHtml(page.title)}</h1>`, ...contenu].join('');
 }
 

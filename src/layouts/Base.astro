@@ -37,8 +37,9 @@ const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.
 // la tête de page, dans le contenu de la page (main).
 const outilConstruit = format === 2 && (await getCollection('voyant')).some((page) => (page.data as { outil?: boolean }).outil === true);
 const adresseOutil = outilConstruit ? (await getEntry('plan-du-site', ID_OUTIL_VOYANTS))?.data.adresse : undefined;
-// Sur la page outil elle-même, pas de bouton « Trouver mon voyant » (revue de F1.3a).
-const haut = format === 2 ? bandeauFormat2({ adresseOutil: adresseBoutonVoyant(adresseOutil, Astro.url.pathname), pictogrammeBouton }) : bandeau();
+// Sur la page outil elle-même, pas de bouton « Trouver mon voyant » (revue de F1.3a) ; ni sur la page 404 (sans canonical),
+// qui porte le sien sous sa phrase : un seul bouton par page (revue de F1.3b).
+const haut = format === 2 ? bandeauFormat2({ adresseOutil: sansCanonical ? undefined : adresseBoutonVoyant(adresseOutil, Astro.url.pathname), pictogrammeBouton }) : bandeau();
 // Lien vers la politique de confidentialité : dès que sa page est construite, sur toutes les pages, à son adresse du plan.
 const pageConfidentialite = (await getCollection('socle')).some((page) => (page.data as { id: string }).id === PAGE_CONFIDENTIALITE);
 const adresseConfidentialite = pageConfidentialite ? (await getEntry('plan-du-site', PAGE_CONFIDENTIALITE))?.data.adresse : undefined;

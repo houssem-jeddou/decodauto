@@ -75,8 +75,8 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
     texte ambre, dans le titre de la fiche ;
   - *cas décrits par marque* : tableau de la charte, **en cartes sur téléphone bien qu'il n'ait que trois colonnes** (la
     colonne du texte, longue, y serait illisible : capture `code-p0420-format2-375-par-marque`), « Source : » devant les sources ;
-  - *dépannage sur autoroute* : rangée du coût de l'encadré (cellule sombre, triangle d'alerte ambre, objet du montant en
-    gras), texte validé inchangé ; il reste dans l'encadré (règle 2b : montants et dates dans l'encadré) ;
+  - *dépannage sur autoroute* : rangée du coût de l'encadré (cellule sombre, objet du montant en gras), texte validé
+    inchangé ; il reste dans l'encadré (règle 2b : montants et dates dans l'encadré) ;
   - *page informative* : réponse directe en cellule en tête de l'encadré (déjà dessinée par le pilote) ;
   - *socle et 404* : tête de page nuit **sans encadré** (`tete-seule` : marge basse réduite), texte sur fond clair ; fiche de
     l'auteur et « Méthode » en cartes (définitions dans le bloc tableau) ; mentions légales en fiche ; 404 : phrase, bouton
@@ -85,6 +85,49 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
   donnée validée ne porte ce numéro ni cette consigne (`data/couts.json` ne porte que le forfait réglementé) : les écrire
   demanderait un texte nouveau, sourcé (fiche Service-public F11056, déjà au registre) et validé, et un champ de données (demande
   de changement sur la structure). Proposé pour le lot F3, non fait ici.
+  Revue de F1.3b (décisions du 16/11/2026) :
+  - *ligne d'écart* (règle 2b) : le lien « Votre marque » renvoie à la partie du voyant au tableau des notices
+    (`#da-notices-<voyant>`), sur la page si le voyant y est rattaché, sinon sur la page à laquelle il est rattaché, seulement
+    si le plan lie les deux pages (FORMAT2-ECART). **Écart au pilote, à noter à la porte F1** : le pilote répétait le tableau
+    des notices du voyant de pression sur la page « pression des pneus » ; il n'y est plus, la ligne d'écart renvoie à la
+    page du voyant (un seul tableau par voyant, sur sa page). Paire manquante dans le plan : `batterie-changer` ↔
+    `voyant-batterie` (page « changer la batterie », vague B), proposée par Houssem avec le lot F3 ;
+  - *dépannage sur autoroute* : triangle retiré (forme réservée aux verdicts, §1.4 ; docs/10 §4, point 4), cellule et gras
+    gardés ;
+  - *cas décrits par marque* (téléphone) : une seule carte, un cas par rangée, un seul filet entre deux cas, la marque en
+    tête de son cas, la source sous le texte sans filet ;
+  - *tableau en cartes* (pression des pneus, dossier) : la première cellule de la rangée devient le titre de la carte
+    (`th scope="row"`), rôles du tableau écrits comme pour les cas par marque ;
+  - *socle et 404* : même écart entre la mention et le H1 que les pages éditoriales (29 px à 375 et 1366 px) ; 404 : un seul
+    bouton « Trouver mon voyant » (sous la phrase ; aucun dans le bandeau), pied de page en bas de l'écran ; « à propos » :
+    sommaire « Sur cette page » (règle 2h, dans la colonne de droite sur ordinateur) ;
+  - *réponse directe* : réservée par le schéma aux pages pneus et obligations, 40 mots au plus (`REPONSE_DIRECTE_MAX_MOTS` ;
+    celle du pilote en compte 20) ;
+  - *illustration de la pression* : textes de 24 unités au moins pour 640 de large (12 px au moins à 375 px), « normal » et
+    « chargé » en deux colonnes séparées.
+  Gardé : cas par marque en cartes sur téléphone bien qu'il n'ait que trois colonnes ; action de la pression jusqu'à 766 px
+  (précision 2a).
+- **§4, règle des cartes (revue de F1.3b)** : écrire la règle d'après le contenu, et non d'après le nombre de colonnes : un
+  tableau passe en cartes sur téléphone quand une colonne porte un texte long (cas par marque : trois colonnes, dont une de
+  texte long), ou au-delà de trois colonnes.
+- **§2, couleurs : contour de focus** : sur fond nuit, contraste de 3:1 au moins (critère WCAG 1.4.11) ; à vérifier pour tous
+  les éléments focalisables du bandeau, de la tête de page et de l'encadré.
+- **§3, typographie : ligne de transparence** : classe `ligne-transparence` (13 px, couleur douce) à écrire dans la charte.
+
+## À faire à F1.4 (revue de F1.3b)
+- **Débordement à 320 px** (critère WCAG 1.4.10) : le bouton « Trouver mon voyant » du bandeau déborde (335 px de large) ; le
+  tableau de la loi montagne défile de 9 px. Corriger, et ajouter le contrôle « aucun débordement horizontal à 320 px » sur
+  toutes les pages de la démonstration.
+- **Captures de F1.2 refaites** : la rangée « dépannage » rend l'encadré plus haut de 18 px ; refaire les captures concernées.
+
+## Lot F3 (pages en ligne de la vague A au nouveau format) : à reprendre
+- **Pression des pneus** : question de la page revue avec sa réponse directe (la question et la réponse se répondent).
+- **Tableau de la pression** : « (p. 198) » et les autres pages écrites à la main dans le tableau remplacées par
+  `{{cite:…}}` (règle 2d).
+- **Dépannage sur autoroute** : consigne sourcée (Service-public F11056, sans numéro de téléphone), par une demande de
+  changement (texte nouveau et champ de données).
+- **Paire de liens du plan** : `batterie-changer` ↔ `voyant-batterie`, pour le renvoi « Votre marque » de la page « changer
+  la batterie » (vague B).
 
 ## Liste de recette (`docs/03`, étape 9) : à ajouter pour les lots au format 2
 - Repères de section : un repère seulement sous un H2 qui pose la question d'une seule ligne de l'encadré (exception explicite
