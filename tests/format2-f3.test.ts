@@ -95,11 +95,11 @@ describe('format 2 : pages code défaut et pneus et obligations (F1.3b)', () => 
     assert.ok($('[data-causes] ol.causes > li.cause').length > 0);
   });
 
-  test('dépannage sur autoroute : rangée du coût, triangle d\'alerte et objet en gras (texte validé inchangé) ; absent de la loi montagne', () => {
+  test('dépannage sur autoroute : rangée du coût, objet en gras, sans triangle (forme réservée aux verdicts) (texte validé inchangé) ; absent de la loi montagne', () => {
     const $ = cheerio.load(code.html);
     const depannage = $('[data-encadre-cout] [data-depannage]');
     assert.equal(depannage.length, 1);
-    assert.equal(depannage.find('svg.alerte[aria-hidden="true"]').length, 1);
+    assert.equal(depannage.find('svg').length, 0);
     assert.equal(depannage.find('strong').text(), 'Dépannage sur autoroute ou route express');
     assert.equal($('[data-encadre-cout] [data-depannage]').closest('[data-encadre-decision]').length, 1);
     assert.equal(cheerio.load(montagne.html)('[data-depannage]').length, 0);

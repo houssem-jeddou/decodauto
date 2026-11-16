@@ -114,11 +114,15 @@ describe('format 2 : pages panne et dossier (F1.3c et sa revue)', () => {
     assert.deepEqual(modeleDeLaPage('dossier', { ...dossier.page, format: 1 } as PageEditoriale), { modele: pageDossier });
   });
 
-  test('pages de démonstration : contrôles d\'aujourd\'hui et du format 2 verts (arbre, tutoriel, dossier sans tutoriel) ; seule l\'empreinte absente est attendue', () => {
-    for (const p of [panne, tutoriel, dossier]) {
-      assert.deepEqual(p.controle(p.html), [], p.page.id);
-      assert.ok(erreurs(p.constats(p.html)).includes('R4-VALIDATION-ABSENTE'), p.page.id);
-    }
+  test('pages de démonstration : contrôles d\'aujourd\'hui et du format 2 verts (arbre, tutoriel, dossier sans tutoriel) ; seule l\'empreinte absente est attendue, et le renvoi manquant du tutoriel', () => {
+    for (const p of [panne, dossier]) assert.deepEqual(p.controle(p.html), [], p.page.id);
+    for (const p of [panne, tutoriel, dossier]) assert.ok(erreurs(p.constats(p.html)).includes('R4-VALIDATION-ABSENTE'), p.page.id);
+    // Revue de F1.3b (B1) : la ligne « batterie-rouge » renvoie au tableau des notices de la page du voyant de batterie,
+    // que le plan ne lie pas à « changer la batterie » : FORMAT2-ECART, paire nommée (à proposer avec le lot F3).
+    assert.deepEqual(tutoriel.controle(tutoriel.html), ['FORMAT2-ECART']);
+    const constat = tutoriel.constats(tutoriel.html).find((c) => c.regle === 'FORMAT2-ECART');
+    assert.match(constat?.message ?? '', /paire de liens batterie-changer ↔ voyant-batterie à proposer/);
+    assert.equal(cheerio.load(tutoriel.html)('[data-ecart-court] a').length, 0);
   });
 
   test('page panne : ordre de la charte §4 ; arbre en carte, liste annoncée (role="list") ; chaque pastille termine sa réponse, avec la gravité de son verdict', () => {

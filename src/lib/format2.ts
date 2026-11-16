@@ -174,18 +174,53 @@ export interface LigneFormat2 {
   action: string;
   /** Ligne d'écart courte, quand les marques divergent. */
   ecartCourt?: string | undefined;
-  /** Ancre de la partie du voyant au tableau des notices (lien « Votre marque »). */
-  ancreNotices?: string | undefined;
+  /** Adresse de la partie du voyant au tableau des notices, sur la page ou sur sa page (lien « Votre marque » : renvoiNotices). */
+  lienNotices?: string | undefined;
   notices: number;
   pictogramme?: string | undefined;
   couleur?: string | undefined;
+}
+
+/** Adresse du renvoi, s'il existe. */
+const lienDuRenvoi = (r: RenvoiNotices): string | undefined => ('lien' in r ? r.lien : undefined);
+
+/** Renvoi de la ligne d'écart au tableau des notices : son adresse, ou la raison de son absence (FORMAT2-ECART). */
+export type RenvoiNotices = { lien: string } | { absent: string };
+
+/**
+ * Renvoi « Votre marque » d'une ligne dont les marques divergent (règle 2b, revue de F1.3b) : la partie du voyant au tableau
+ * des notices (#da-notices-<voyant>), sur la page si le voyant y est rattaché ; sinon sur la page à laquelle il est rattaché
+ * (champ « page » de la base), seulement si le plan lie les deux pages et que cette page est construite. Sinon, aucun lien :
+ * FORMAT2-ECART échoue avec la raison (paire du plan à proposer, page pas encore construite, ligne saisie sans voyant).
+ * Un seul tableau par voyant, sur sa page : jamais répété ailleurs.
+ */
+export function renvoiNotices(entree: {
+  pageId: string;
+  voyant: string | undefined;
+  voyants: ReadonlyMap<string, { page: string }>;
+  plan: ReadonlyMap<string, { adresse: string }>;
+  /** Pages que le plan lie à la page (paires déclarées, mère et enfants : indexerPlan). */
+  voisins: ReadonlySet<string>;
+  /** Voyants qui ont leur partie au tableau des notices de la page. */
+  auTableau: ReadonlySet<string>;
+  construite: (id: string) => boolean;
+}): RenvoiNotices {
+  const { pageId, voyant } = entree;
+  if (voyant === undefined) return { absent: "ligne saisie, sans voyant de la base : aucun tableau des notices où renvoyer" };
+  const page = entree.voyants.get(voyant)?.page;
+  if (page === undefined) return { absent: `voyant « ${voyant} » absent de la base` };
+  if (page === pageId) return entree.auTableau.has(voyant) ? { lien: `#${ancreNotices(voyant)}` } : { absent: `voyant « ${voyant} » rattaché à la page, sans partie au tableau des notices` };
+  if (!entree.voisins.has(page)) return { absent: `voyant « ${voyant} » rattaché à la page « ${page} », que le plan ne lie pas à « ${pageId} » : paire de liens ${pageId} ↔ ${page} à proposer` };
+  const adresse = entree.plan.get(page)?.adresse;
+  if (adresse === undefined || !entree.construite(page)) return { absent: `voyant « ${voyant} » rattaché à la page « ${page} », pas encore construite` };
+  return { lien: `${adresse}#${ancreNotices(voyant)}` };
 }
 
 /** Une ligne de l'encadré : tuile du voyant et situation, verdict et urgence en pastilles, action, ligne d'écart. */
 export function ligneEncadreFormat2(ligne: LigneFormat2): string {
   const gravite = graviteDuVerdict(ligne.verdict);
   const picto = ligne.pictogramme !== undefined ? tuile(ligne.pictogramme, ligne.couleur ?? 'neutre') : '';
-  const lien = ligne.ancreNotices !== undefined ? ` <a href="#${attributHtml(ligne.ancreNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienVotreMarque)}</a>` : '';
+  const lien = ligne.lienNotices !== undefined ? ` <a href="${attributHtml(ligne.lienNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienVotreMarque)}</a>` : '';
   const ecart =
     ligne.ecartCourt !== undefined ? `<p class="ecart" data-ecart-court>${BALANCE}<span class="vh">${texteHtml(FORMAT2.selonLaMarque)}</span>${texteHtml(ligne.ecartCourt)}${lien}</p>` : '';
   return [
@@ -221,11 +256,12 @@ export function coutFormat2(cout: CoutResolu, couts: DonneesCouts): string {
       if (montant === undefined) return [];
       const dates = `(${texteHtml(datesAffichees(montant).join(', '))})`;
       // Dépannage sur autoroute (montant automatique d'une page à verdict d'arrêt, F1.3b) : rangée de l'encart, lisible d'un
-      // coup d'œil : triangle d'alerte (jamais la couleur seule) et objet du montant en gras, texte validé inchangé.
+      // coup d'œil : cellule sombre et objet du montant en gras, texte validé inchangé ; sans triangle, forme réservée aux
+      // verdicts (charte graphique §1.4 ; docs/10 §4, point 4 : revue de F1.3b).
       if (montant.automatique === 'verdict-arret') {
         const [objet, ...suite] = montant.texte.split(' : ');
         const texte = suite.length > 0 ? `<strong>${texteHtml(objet ?? '')}</strong>${texteHtml(` : ${suite.join(' : ')}`)}` : texteHtml(montant.texte);
-        return [`<p class="montant depannage" data-depannage>${ALERTE}<span>${texte} ${dates}</span></p>`];
+        return [`<p class="montant depannage" data-depannage>${texte} ${dates}</p>`];
       }
       return [`<p class="montant">${texteHtml(montant.texte)} ${dates}</p>`];
     }),
@@ -560,6 +596,7 @@ export function pageFormat2(
   const cout = coutDeLaPage(page, lignes, site.couts);
   const tableaux = modeleTableauNotices(lignes, site.voyants, site.sources, page.id);
   const auTableau = new Set(tableaux.map((t) => t.voyant));
+  const index = indexerPlan(site.plan);
 
   // Encadré : une ligne d'écart courte pour chaque ligne dont les marques divergent (règle 2b).
   const sansEcartCourt = lignes.flatMap((l, i) => (l.ecart_marques !== undefined && (l.ecart_court === undefined || l.ecart_court.trim() === '') ? [`ligne ${i + 1} (${l.voyant ?? l.situation})`] : []));
@@ -572,7 +609,7 @@ export function pageFormat2(
       urgence: l.urgence,
       action: l.action,
       ecartCourt: l.ecart_marques !== undefined ? l.ecart_court : undefined,
-      ancreNotices: l.voyant !== undefined && auTableau.has(l.voyant) ? ancreNotices(l.voyant) : auTableau.size > 0 && l.ecart_marques !== undefined ? IDENTIFIANTS.notices : undefined,
+      lienNotices: l.ecart_marques === undefined ? undefined : lienDuRenvoi(renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: site.voyants, plan: site.plan, voisins: index.voisins.get(page.id) ?? new Set(), auTableau, construite: (id) => site.libelles.has(id) })),
       notices: sourcesDeLaLigne(l.sources, site.sources).notices.length,
       pictogramme: voyant !== undefined ? site.pictogrammes.get(voyant.pictogramme) : undefined,
       couleur: voyant?.couleur,
@@ -597,7 +634,6 @@ export function pageFormat2(
     if (!emplacements.includes(c.emplacement)) emplacements.push(c.emplacement);
     citees.set(c.source, emplacements);
   }
-  const index = indexerPlan(site.plan);
   const construites = (ids: Iterable<string>): string[] => [...ids].filter((id) => site.libelles.has(id));
 
   const colonne = [

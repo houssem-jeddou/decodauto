@@ -2,7 +2,8 @@
 // Contrôles du format 2 sur la page construite (demande de changement n° 30, règles 2a à 2m vérifiables par une machine ;
 // lot F1, tâche F1.2 ; src/lib/format2.ts). Appelés par controlerHtml (controle.ts) pour toute page au format 2 :
 //  - FORMAT2-ECART : une ligne de l'encadré dont les marques divergent affiche sa ligne d'écart courte (texte exact, 25 mots
-//    au plus, lien « Votre marque » compris, règle 2b), et une ligne sans écart n'en affiche pas ;
+//    au plus, lien « Votre marque » compris, règle 2b), qui renvoie au tableau des notices (renvoiNotices : sur la page, ou
+//    sur la page du voyant que le plan lie à celle-ci ; sinon échec, avec la raison), et une ligne sans écart n'en affiche pas ;
 //  - FORMAT2-REPONSE : la réponse directe d'une page informative est en tête de l'encadré, au texte exact (règle 2c) ;
 //  - FORMAT2-PROVENANCE : le bloc « Notices / Base du coût » suit la ligne de transparence et donne la phrase des sources de
 //    chaque ligne (règle 2b) ;
@@ -24,7 +25,7 @@
 // ---------------------------------------------------------------------------------------------
 import * as cheerio from 'cheerio';
 import { normaliserTexte } from './empreinte.ts';
-import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, motsDe, phraseNotices } from './format2.ts';
+import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, motsDe, phraseNotices, type RenvoiNotices } from './format2.ts';
 import type { LigneResolue } from './calcul.ts';
 import { GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { graviteDuVerdict } from './composants.ts';
@@ -39,7 +40,18 @@ export interface ConstatFormat2 {
 const erreur = (regle: string, message: string, fichier?: string): ConstatFormat2 => ({ regle, gravite: 'erreur', message, fichier });
 
 /** Phrases des sources de chaque ligne (composants.ts, phraseSources), dans l'ordre de l'encadré. */
-export function controlerFormat2(html: string, fichier: string, lignes: readonly LigneResolue[], phrases: readonly string[], reponseDirecte?: string): ConstatFormat2[] {
+/**
+ * `renvois` : pour chaque ligne de l'encadré, le renvoi attendu de sa ligne d'écart au tableau des notices (renvoiNotices,
+ * calculé depuis la base et le plan ; undefined pour une ligne sans écart). Absent : le renvoi n'est pas vérifié (tests).
+ */
+export function controlerFormat2(
+  html: string,
+  fichier: string,
+  lignes: readonly LigneResolue[],
+  phrases: readonly string[],
+  reponseDirecte?: string,
+  renvois?: readonly (RenvoiNotices | undefined)[],
+): ConstatFormat2[] {
   const constats: ConstatFormat2[] = [];
   const $ = cheerio.load(html);
   const n = normaliserTexte;
@@ -63,6 +75,20 @@ export function controlerFormat2(html: string, fichier: string, lignes: readonly
       const mots = motsDe(texte(vue));
       if (!n(texte(vue)).includes(n(ligne.ecart_court))) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : la ligne d'écart affiche « ${ligne.ecart_court} »`, fichier));
       if (mots > ECART_COURT_MAX_MOTS) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : ligne d'écart de ${mots} mots, lien compris ; ${ECART_COURT_MAX_MOTS} au plus (règle 2b)`, fichier));
+      // Renvoi au tableau des notices (revue de F1.3b) : le lien « Votre marque », vers la partie du voyant.
+      const renvoi = renvois?.[i];
+      if (renvoi === undefined) return;
+      const liens = ecart.find('a[data-lien-notices]');
+      if ('absent' in renvoi) {
+        constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : la ligne d'écart ne peut pas renvoyer au tableau des notices (« ${FORMAT2.lienVotreMarque} ») : ${renvoi.absent}`, fichier));
+        return;
+      }
+      if (liens.length !== 1 || liens.attr('href') !== renvoi.lien || n(texte(liens.first())) !== n(FORMAT2.lienVotreMarque)) {
+        constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : la ligne d'écart renvoie au tableau des notices par un lien « ${FORMAT2.lienVotreMarque} » vers ${renvoi.lien}`, fichier));
+        return;
+      }
+      const ancre = renvoi.lien.startsWith('#') ? renvoi.lien.slice(1) : undefined;
+      if (ancre !== undefined && $(`[id="${ancre}"]`).length !== 1) constats.push(erreur('FORMAT2-ECART', `ligne ${i + 1} de l'encadré : le lien « ${FORMAT2.lienVotreMarque} » mène à #${ancre}, absent de la page`, fichier));
     });
   }
 

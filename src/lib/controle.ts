@@ -25,7 +25,7 @@ import {
 import { ID_OUTIL_VOYANTS, controlerLiensDuTexte, controlerStructurePlan, controlerVoyantsDansLePlan, indexerPlan } from './plan.ts';
 import { normaliserRecherche } from './texte.ts';
 import { controlerFormat2 } from './controle-format2.ts';
-import { ECART_COURT_MAX_MOTS, FORMAT2, motsDe } from './format2.ts';
+import { ECART_COURT_MAX_MOTS, FORMAT2, motsDe, renvoiNotices, type RenvoiNotices } from './format2.ts';
 import { ecartDeLaCarte, entreesIndexFormat2, modeleOutilFormat2, outilVoyantsFormat2, texteEntreeIndex } from './outil-format2.ts';
 import {
   coutsSchema,
@@ -849,6 +849,16 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         return { notices: nommees.notices.length, phrase: phraseSources({ ...nommees, ecart: l.ecart_marques }) };
       }),
       lienMethode: methode !== undefined ? `${methode.adresse}#${ANCRE_METHODE}` : undefined,
+      renvoisNotices:
+        'outil' in page && page.outil === true
+          ? undefined
+          : (() => {
+              const auTableau = new Set(modeleTableauNotices(lignes, ctx.voyants, ctx.sources, page.id).map((t) => t.voyant));
+              const voisins = indexerPlan(ctx.plan).voisins.get(page.id) ?? new Set<string>();
+              return lignes.map((l) =>
+                l.ecart_marques === undefined ? undefined : renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: ctx.voyants, plan: ctx.plan, voisins, auTableau, construite: (id) => ctx.pagesEcrites?.has(id) === true }),
+              );
+            })(),
       notices: {
         tableaux: modeleTableauNotices(lignes, ctx.voyants, ctx.sources, page.id),
         // Demande de changement n° 8 : sur une page voyant (hors outil), l'élément unique est le tableau des notices.
@@ -976,6 +986,11 @@ export interface AttendusPage {
    * des sources affichée (composants.ts, phraseSources).
    */
   lignes: readonly SourcesDeLigne[];
+  /**
+   * Format 2 (règle 2b, revue de F1.3b) : renvoi attendu de la ligne d'écart de chaque ligne au tableau des notices
+   * (renvoiNotices ; undefined pour une ligne sans écart). Page outil : non vérifié (ses cartes mènent à la page du voyant).
+   */
+  renvoisNotices?: readonly (RenvoiNotices | undefined)[] | undefined;
   /** Adresse attendue du lien « Méthode » (page « à propos » du plan, ancre de la méthode), si elle est dans le plan. */
   lienMethode?: string | undefined;
   /**
@@ -1154,7 +1169,7 @@ export function controlerHtml(
   if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
   if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, { ...attendus.notices, format: page.format ?? 1 }));
   // Format 2 (demande de changement n° 30) : règles de format vérifiables par une machine (controle-format2.ts).
-  if (page.format === 2) constats.push(...controlerFormat2(html, fichier, lignes, (attendus?.lignes ?? []).map((l) => l.phrase), page.reponse_directe));
+  if (page.format === 2) constats.push(...controlerFormat2(html, fichier, lignes, (attendus?.lignes ?? []).map((l) => l.phrase), page.reponse_directe, attendus?.renvoisNotices));
   if (attendus?.code !== undefined) constats.push(...controlerFicheCode(html, fichier, attendus.code));
   if (attendus?.texte !== undefined) constats.push(...controlerFicheTexte(html, fichier, attendus.texte));
   if (attendus?.outil !== undefined) constats.push(...controlerOutilVoyants(html, fichier, attendus.outil, page.format ?? 1));

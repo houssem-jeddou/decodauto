@@ -184,9 +184,27 @@ export function attendusDemoFormat2(brouillon: BrouillonFormat2, fichierDePage: 
   return [...lignes, ...pages, ...methode];
 }
 
-/** Erreurs attendues des pages de démonstration (tests/demo/format2) : aucune n'a d'empreinte de validation. */
+/**
+ * Paires de liens absentes du plan dont une page de démonstration a besoin pour le renvoi « Votre marque » de sa ligne
+ * d'écart (revue de F1.3b, B1 : FORMAT2-ECART) : fichier de la page → paire, proposée par Houssem avec le lot F3. Une paire
+ * ajoutée au plan rend l'attendu inutile, ce que la construction signale (attendu non rencontré).
+ */
+export const PAIRES_MANQUANTES_DEMO: Readonly<Record<string, string>> = {
+  [`${DOSSIER_PAGES_DEMO_FORMAT2}/panne/batterie-changer.md`]: 'batterie-changer ↔ voyant-batterie',
+};
+
+/**
+ * Erreurs attendues des pages de démonstration (tests/demo/format2) : aucune n'a d'empreinte de validation ; une page dont
+ * le renvoi « Votre marque » attend une paire du plan (PAIRES_MANQUANTES_DEMO) échoue à FORMAT2-ECART, paire nommée.
+ */
 export function attendusPagesDemo(fichiers: readonly string[]): Attendu[] {
-  return fichiers.map((fichier): Attendu => ({ regle: 'R4-VALIDATION-ABSENTE', fichier, brut: `R4-VALIDATION-ABSENTE@${fichier}` }));
+  return fichiers.flatMap((fichier): Attendu[] => {
+    const paire = PAIRES_MANQUANTES_DEMO[fichier];
+    return [
+      { regle: 'R4-VALIDATION-ABSENTE', fichier, brut: `R4-VALIDATION-ABSENTE@${fichier}` },
+      ...(paire !== undefined ? [{ regle: 'FORMAT2-ECART', fichier, extrait: `paire de liens ${paire}`, brut: `FORMAT2-ECART@${fichier}@paire de liens ${paire}` }] : []),
+    ];
+  });
 }
 
 /** Une page de la construction de démonstration (attribut data-demo-format2 sur html) dans un site contrôlé comme réel : DEMO-PUBLIEE. */
