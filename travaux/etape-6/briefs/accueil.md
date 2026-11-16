@@ -6,6 +6,7 @@
 
 - **Type** : socle ; **thème** : socle ; **vague** : A.
 - **Adresse** : `/`.
+- **Page publiée** (sa validation est notée au journal) : `src/content/socle/accueil.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 

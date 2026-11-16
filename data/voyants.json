@@ -16,39 +16,45 @@
         "emplacement": "p. 15, « Système d'autodiagnostic moteur » ; renvoi (3) p. 13",
         "extrait": "Fixe. Le système d'antipollution est défaillant. Le témoin doit s'éteindre au démarrage du moteur. Effectuer (3) rapidement. Fixes. Une défaillance mineure du moteur est détectée. Effectuer (3). […] (3) : Se rendre dans le réseau PEUGEOT ou dans un atelier qualifié.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Se rendre rapidement dans le réseau ou un atelier qualifié"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 288, « Gestion du moteur et système d'épuration des gaz d'échappement », Témoins",
         "extrait": "Témoin allumé. Dysfonctionnement du système de contrôle des gaz d'échappement. Levez le pied de l'accélérateur et roulez prudemment jusqu'à l'atelier spécialisé le plus proche pour y faire contrôler le moteur.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Lever le pied, rouler prudemment jusqu’à l’atelier le plus proche"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 139, « Témoin de contrôle du système antipollution » (repris p. 199)",
         "extrait": "S'il s'allume de façon continue, consultez au plus tôt un Représentant de la marque",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Consulter au plus tôt un représentant de la marque"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 113, « Témoin de contrôle du système antipollution »",
         "extrait": "S'il s'allume de façon continue, consultez au plus tôt un Représentant de la marque",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Consulter au plus tôt un représentant de la marque"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 293, 7.2.4 « Si un voyant s'allume », Voyant de dysfonctionnement",
         "extrait": "Indique un dysfonctionnement dans : Le système électronique de commande du moteur ; Le système électronique de commande de papillon ; ou Le système électronique de commande de Multidrive (si le véhicule en est équipé). Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       }
     ],
     "ecart_marques": "Toyota demande d'arrêter immédiatement le véhicule. Renault et Dacia demandent de consulter au plus tôt un représentant de la marque, Seat de rouler prudemment jusqu'à l'atelier le plus proche, Peugeot de s'y rendre rapidement.",
-    "validation": "e482ba56ea864d1ce1163444bb9e9107176da6ba5ea5b7d42aed1ba2777f1bc4"
+    "ecart_court": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement).",
+    "validation": "78a71a2011e956f630b91f9a2c676ce03b30d88a02460db186f6fe37061244e6"
   },
   {
     "id": "moteur-orange-clignotant",
@@ -67,39 +73,45 @@
         "emplacement": "p. 15, « Système d'autodiagnostic moteur » ; renvoi (2) p. 13",
         "extrait": "Clignotant. Le système du contrôle moteur est défaillant. Risque de destruction du catalyseur. Effectuer impérativement (2). […] (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié.",
         "verdict": "non, arrêt dès que possible",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire impérativement appel au réseau (catalyseur menacé)"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 288, « Gestion du moteur et système d'épuration des gaz d'échappement », Témoins",
         "extrait": "Clignote. Dysfonctionnement de combustion susceptible d'endommager le catalyseur. Levez le pied de l'accélérateur et roulez prudemment jusqu'à l'atelier spécialisé le plus proche pour y faire contrôler le moteur.",
         "verdict": "non, arrêt dès que possible",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Lever le pied, aller prudemment à l’atelier proche (catalyseur menacé)"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 139, « Témoin de contrôle du système antipollution » (repris p. 199)",
         "extrait": "s'il clignote, réduisez le régime moteur jusqu'à disparition du clignotement. Consultez au plus tôt un Représentant de la marque",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Réduire le régime moteur, puis consulter au plus tôt"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 113, « Témoin de contrôle du système antipollution »",
         "extrait": "s'il clignote, réduisez le régime moteur jusqu'à disparition du clignotement. Consultez au plus tôt un Représentant de la marque",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Réduire le régime moteur, puis consulter au plus tôt"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 292-293, 7.2.4 « Si un voyant s'allume », Voyant de dysfonctionnement",
         "extrait": "Si un voyant quelconque s'allume ou clignote, gardez votre calme et effectuez les opérations suivantes. […] Voyant de dysfonctionnement […] Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       }
     ],
     "ecart_marques": "Toyota demande d'arrêter immédiatement le véhicule ; Peugeot demande de faire appel au réseau (risque de destruction du catalyseur) ; Seat signale un risque pour le catalyseur et demande de rouler prudemment jusqu'à l'atelier le plus proche ; Renault et Dacia demandent de réduire le régime moteur et de consulter au plus tôt.",
-    "validation": "69b4e9e427136672d8caab59ceef30fa304eb8d42548b32c5d4dbdc04221d8aa"
+    "ecart_court": "Plus stricts : Toyota (arrêt immédiat), Peugeot et Seat (ne pas poursuivre). Moins stricts : Renault et Dacia (régime réduit, consulter vite).",
+    "validation": "2d78f4e1e4023f91f7d8892d4ea30beafa52f9eb378090f0f2b9b14b1ed15d0f"
   },
   {
     "id": "stop",
@@ -118,31 +130,35 @@
         "emplacement": "p. 137, « Témoins lumineux », Témoin d'arrêt impératif (STOP)",
         "extrait": "Il s'allume conjointement à d'autres témoins et/ou messages, et est accompagné d'un signal sonore. Il vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 110, « Témoins lumineux », témoin STOP",
         "extrait": "[STOP] Le témoin vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez le moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer"
       },
       {
         "source": "notice-peugeot-208",
         "emplacement": "p. 13, « Témoins de couleur rouge », STOP ; renvois (1) et (2) p. 13",
         "extrait": "Fixe, associé à un autre témoin d'alerte, accompagné de l'affichage d'un message et d'un signal sonore. Un dysfonctionnement grave du moteur, du système de freinage, de la direction assistée, […] ou une anomalie électrique majeure est détectée. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. […] (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement, puis appeler le réseau"
       },
       {
         "source": "notice-citroen-c3",
         "emplacement": "p. 10, « Liste des témoins », Témoins de couleur rouge, STOP ; renvois (1) et (2) p. 9",
         "extrait": "Fixe, associé à un autre témoin d'alerte, accompagné de l'affichage d'un message et d'un signal sonore. Un dysfonctionnement grave du moteur, du système de freinage, de la direction assistée ou une anomalie électrique majeure a été détectée. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. […] (2) : Faire appel au réseau CITROËN ou à un atelier qualifié.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement, puis appeler le réseau"
       }
     ],
-    "validation": "e7d593d50217b54f4bbf4e77e2c6ba671cc2c28b372664971367682c18f67664"
+    "validation": "f41e917ae01b4699eb45623d9c26a83b2e294900c510b1e7721b5080551b4d83"
   },
   {
     "id": "moteur-rouge",
@@ -161,24 +177,27 @@
         "emplacement": "p. 13, « Témoins de couleur rouge », Système d'autodiagnostic moteur ; renvois (1) et (2) p. 13",
         "extrait": "Système d'autodiagnostic moteur (Essence ou Diesel) Fixes. Une défaillance majeure du moteur est détectée. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. Stationner dans les meilleures conditions de sécurité et couper le contact. (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement, couper le contact, appeler le réseau"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 125, « Messages d'alerte » (et p. 187 et 189)",
         "extrait": "Ils apparaissent avec le témoin et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez votre moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. […] « Risque casse moteur » Indique une défaillance de l'injection, une surchauffe du moteur du véhicule ou un problème grave au niveau du moteur.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 102, « Messages d'alerte » (et p. 161)",
         "extrait": "Ils apparaissent avec le témoin et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez votre moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. […] « Risque casse moteur » Indique une défaillance de l'injection, une surchauffe du moteur du véhicule ou un problème grave au niveau du moteur.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer"
       }
     ],
-    "validation": "a9227d9db6803608e5e2a47c7057b1985afc9ed6608a570ab0bd72db49b78888"
+    "validation": "67ed5f74a90e1c6a80f7faeaa5565a74380857edc7c4c75020676ed8792217b1"
   },
   {
     "id": "huile-pression-rouge",
@@ -197,38 +216,43 @@
         "emplacement": "p. 13, « Témoins de couleur rouge », Pression d'huile moteur ; renvois (1) et (2) p. 13",
         "extrait": "Pression d'huile moteur (Essence ou Diesel) Fixe. Le circuit de lubrification du moteur est défaillant. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. Stationner dans les meilleures conditions de sécurité et couper le contact. (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement, couper le contact, appeler le réseau"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 294, « Huile moteur », Témoin d'alerte",
         "extrait": "S'allume en rouge. Arrêtez-vous immédiatement ! La pression d'huile moteur est trop faible. Éteignez le moteur. Vérifiez le niveau d'huile moteur.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter immédiatement, couper le moteur, vérifier l’huile"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 137-138, « Témoin de pression d'huile »",
         "extrait": "S'il s'allume sur route, accompagné du témoin [STOP] et d'un signal sonore, arrêtez-vous impérativement et coupez le contact. Vérifiez le niveau d'huile. Si le niveau est normal, cela provient d'une autre cause. Faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement, couper le contact, vérifier l’huile"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 111, « Témoin de pression d'huile »",
         "extrait": "S'il s'allume sur route accompagné du témoin [STOP] et d'un signal sonore, arrêtez-vous impérativement et coupez le contact. Vérifiez le niveau d'huile. Si le niveau est normal, cela provient d'une autre cause : consultez rapidement un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement, couper le contact, vérifier l’huile"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 292, 7.2.4 « Si un voyant s'allume », Voyant de faible pression d'huile moteur",
         "extrait": "Indique que la pression d'huile moteur est trop basse. Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       }
     ],
-    "validation": "b3a25fb72da75a22179bd1e0be9b780f834950aeee63ebe4f4f77b33580dd30b"
+    "validation": "7227ff04875992186e1dd46b59b72d5ffc62cf1136b6c2dfc4dc691e6e584e9f"
   },
   {
     "id": "huile-niveau",
@@ -247,25 +271,29 @@
         "emplacement": "p. 294, « Huile moteur », Témoin d'alerte",
         "extrait": "S'allume en jaune. Contrôlez immédiatement le niveau d'huile du moteur. Faites l'appoint d'huile dès que possible",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Contrôler immédiatement le niveau, faire l’appoint dès que possible"
       },
       {
         "source": "notice-peugeot-208",
         "emplacement": "p. 20, « Indicateur de niveau d'huile moteur », Manque d'huile",
         "extrait": "Indiqué, selon combiné, par l'affichage \" OIL \" ou par le message \" Niveau d'huile incorrect \" accompagné de l'allumage du témoin de service et d'un signal sonore. Si le manque d'huile est confirmé par la vérification à la jauge manuelle, compléter impérativement le niveau pour éviter la détérioration du moteur.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Vérifier à la jauge ; si manque confirmé, compléter impérativement"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 299, 7.2.5 « Si un message d'avertissement est affiché »",
         "extrait": "Si “Niveau d'huile moteur faible. Ajoutez ou remplacez.” s'affiche. Le niveau d'huile moteur est faible. Vérifiez le niveau d'huile moteur et faites l'appoint, si nécessaire.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Vérifier le niveau et faire l’appoint si nécessaire"
       }
     ],
     "ecart_marques": "Toyota demande de vérifier le niveau et de faire l'appoint sans indiquer de délai ; Seat et Peugeot demandent de le faire immédiatement ou impérativement.",
-    "validation": "0968573d7c700d33f95bcc1822abf97b163aaac338c7731664f0ddfa5bde046d"
+    "ecart_court": "Plus stricts : Seat (contrôle immédiat) et Peugeot (appoint impératif). Moins strict : Toyota (vérifier et faire l’appoint, sans délai indiqué).",
+    "validation": "8dc8df2065ccadee18f709038acb45d829da56386cec01dc176478af2b25be6a"
   },
   {
     "id": "entretien-vidange",
@@ -284,39 +312,45 @@
         "emplacement": "p. 19-20, « Indicateur d'entretien », Clé d'entretien",
         "extrait": "Fixe, dès la mise du contact. L'échéance de révision est inférieure à 1 000 km. Effectuer la révision très prochainement. Clé d'entretien clignotante. Clignotant puis fixe, dès la mise du contact. […] L'échéance de révision est dépassée. Effectuer la révision dès que possible.",
         "verdict": "oui",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Faire la révision très prochainement, dès que possible si dépassée"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 90, « Périodicité d'entretien », Date d'entretien",
         "extrait": "Lorsqu'un entretien ou une inspection arrive à échéance, il est possible qu'un signal sonore retentisse après avoir mis le contact et que le symbole clé plate s'affiche à l'écran du combiné d'instruments, accompagné des messages suivants : Entretien maintenant ! Faites inspecter le véhicule. Service de vidange d'huile nécessaire ! Vidange d'huile et entretien nécessaires !",
         "verdict": "oui",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Faire l’entretien, la vidange ou l’inspection demandés"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 122, « Ordinateur de bord », Autonomie de révision ; témoin Service p. 136",
         "extrait": "autonomie égale à 0 km ou date de révision atteinte : le message « Faire révision » s'affiche accompagné du témoin [Service]. Le véhicule nécessite alors une révision le plus rapidement possible. […] (p. 136) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Faire la révision au plus vite, en conduisant avec ménagement"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 98, « Ordinateur de bord », Autonomie de révision ; témoin Service p. 110",
         "extrait": "autonomie égale à 0 km ou date de révision atteinte : le message « Faire révision » s'affiche accompagné du témoin [Service]. Le véhicule nécessite alors une révision le plus rapidement possible. […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Faire la révision au plus vite, en conduisant avec ménagement"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 300, 7.2.5 « Si un message d'avertissement est affiché »",
         "extrait": "Si “Entretien d'huile requis. Visitez votre concessionnaire.” s'affiche. Indique qu'une vidange de l'huile moteur est requise. Faites vérifier et vidanger l'huile moteur et changer le filtre à huile par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.",
         "verdict": "oui",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Faire vidanger l’huile et changer le filtre à huile"
       }
     ],
     "ecart_marques": "Chez Renault et Dacia, le message s'accompagne du témoin Service, dont la notice demande d'aller au plus tôt chez un représentant de la marque en conduisant avec ménagement ; Peugeot, Seat et Toyota rappellent un entretien à faire, sans précaution de conduite.",
-    "validation": "9bbfa9e1218fc314ee749231e7ff6ba68ce53f77485f58d0dd4cd6f5aa8d8881"
+    "ecart_court": "Plus stricts : Renault et Dacia (révision au plus vite, conduite avec ménagement). Moins stricts : Peugeot, Seat et Toyota (rappel d’entretien, sans précaution).",
+    "validation": "75935d5d7657eebce6993063f4b3647fed69f99454bd13a339cb89b1078abf2e"
   },
   {
     "id": "batterie-rouge",
@@ -335,39 +369,45 @@
         "emplacement": "p. 13, « Témoins de couleur rouge », Charge batterie 12 V ; renvoi (1) p. 13",
         "extrait": "Charge batterie 12 V. Fixe. Le circuit de charge de la batterie est défaillant (ex. : cosses sales, courroie d'alternateur détendue ou sectionnée). Effectuer (1). […] (1) : L'arrêt du véhicule est impératif. Stationner dans les meilleures conditions de sécurité et couper le contact.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement et couper le contact"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 302, « Batterie », Témoin d'alerte",
         "extrait": "Si le témoin s'allume en cours de route, la batterie du véhicule n'est plus rechargée par l'alternateur. Rendez-vous immédiatement dans l'atelier spécialisé le plus proche. Mais comme la batterie se décharge, il est alors préférable d'éteindre tous les dispositifs électriques non absolument indispensables.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Aller immédiatement à l’atelier le plus proche, équipements superflus éteints"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 137, « Témoin de charge de batterie »",
         "extrait": "S'il s'allume sur route accompagné du témoin [STOP] et d'un signal sonore, cela indique une surcharge ou une décharge du circuit électrique. Arrêtez-vous et faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter et appeler un représentant de la marque"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 112, « Témoin de charge de batterie »",
         "extrait": "S'il s'allume sur route accompagné du témoin [STOP] et d'un signal sonore, cela indique une surcharge ou une décharge du circuit électrique. Arrêtez-vous et faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter et appeler un représentant de la marque"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 292, 7.2.4 « Si un voyant s'allume », Voyant du système de charge",
         "extrait": "Indique un dysfonctionnement du système de charge du véhicule. Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       }
     ],
     "ecart_marques": "Seat laisse rouler jusqu'à l'atelier spécialisé le plus proche, immédiatement ; Peugeot, Renault, Dacia et Toyota imposent l'arrêt.",
-    "validation": "03e04216bf80fe6c2972146c09c3ac060eaa1c742edcc1fe5d315a2d70518f56"
+    "ecart_court": "Plus stricts : Peugeot, Renault, Dacia et Toyota (arrêt imposé). Moins strict : Seat (atelier le plus proche, immédiatement).",
+    "validation": "cc30bfdc5ac10977116fecfd4e20e2efaa1e26ee152efa0b08408cc688749f12"
   },
   {
     "id": "frein-rouge",
@@ -386,38 +426,43 @@
         "emplacement": "p. 14, « Freinage » ; renvois (1) et (2) p. 13",
         "extrait": "Freinage. Fixe. La baisse du niveau de liquide de frein dans le circuit de freinage est importante. Effectuer (1), puis faire l'appoint avec un liquide conforme aux recommandations du Constructeur. Si le problème persiste, effectuer (2). […] (1) : L'arrêt du véhicule est impératif.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement, puis compléter le liquide de frein"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 251, « Système de freinage », Témoins",
         "extrait": "S'allume en rouge. Niveau de liquide de frein trop bas […] ou dysfonctionnement du circuit de freinage. Ne continuez pas de rouler !",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Ne pas continuer de rouler"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 137, « Témoin d'incident sur circuit de freinage »",
         "extrait": "S'il s'allume au freinage, accompagné du témoin [STOP] et d'un signal sonore, c'est l'indice d'une baisse de niveau dans les circuits ou d'un incident sur le système de freinage. Arrêtez-vous et faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter et appeler un représentant de la marque"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 110-111, « Témoin d'incident sur circuit de freinage »",
         "extrait": "S'il s'allume au freinage, accompagné du témoin [STOP] et d'un signal sonore, c'est l'indice d'une baisse de niveau dans les circuits ou d'un incident sur le système de freinage. Arrêtez-vous et faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter et appeler un représentant de la marque"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 292, 7.2.4 « Si un voyant s'allume », Voyant du système de freinage",
         "extrait": "Indique ce qui suit : Le niveau du liquide de frein est bas ; ou Le système de freinage présente un dysfonctionnement. Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. Il pourrait être dangereux de continuer à conduire.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       }
     ],
-    "validation": "7cae2ec5e5c30b15854d0811dc080e5c8994fd2653a6e2af9959e15455247523"
+    "validation": "95b4c62f5f8394f2f6b358666dbac4b77cd617b1aff342368ad6601206abc741"
   },
   {
     "id": "frein-stationnement",
@@ -436,38 +481,43 @@
         "emplacement": "p. 14, « Frein de stationnement manuel » et « Frein de stationnement électrique »",
         "extrait": "Frein de stationnement manuel. Fixe. Le frein de stationnement est serré ou mal desserré. Frein de stationnement électrique. Fixe. Le frein de stationnement électrique est serré.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Signale un frein de stationnement serré ou mal desserré"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 251, « Système de freinage », Témoins",
         "extrait": "S'allume en rouge. Frein à main serré. Le témoin s'éteint lorsque le frein à main est desserré.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Signale le frein à main serré, jusqu’à son desserrage"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 190, « Frein de parking assisté »",
         "extrait": "Le serrage du frein de parking assisté est confirmé par le message « Frein de parking serré » et le témoin au tableau de bord",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Confirme le serrage du frein de parking assisté"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 155, « Frein de parking assisté »",
         "extrait": "Le serrage du frein de parking assisté est confirmé par le message « Frein de parking serré » et le témoin au tableau de bord",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Confirme le serrage du frein de parking assisté"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 118, 4.2.5 « Frein de stationnement »",
         "extrait": "Engage le frein de stationnement […] Le témoin de frein de stationnement s'allume. Relâche le frein de stationnement […] Le témoin de frein de stationnement s'éteint. […] Un signal sonore retentit si le véhicule roule avec le frein de stationnement engagé. Le message “Relâchez le frein de stationnement” s'affiche",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Signale le frein serré ; alerte si l’on roule ainsi"
       }
     ],
-    "validation": "e2e9592ac44a5f1d92434c4a6e3047ecb13a61e25fe88e807e46c6f4f0476755"
+    "validation": "eb8db48567a36d22f6f119cf00fb5ee7d6312ef9a9115c1daf483e0f602ec4dc"
   },
   {
     "id": "adblue-reserve",
@@ -486,53 +536,61 @@
         "emplacement": "p. 15, « AdBlue (BlueHDi) »",
         "extrait": "Allumé pendant 30 secondes environ à chaque démarrage du véhicule, accompagné d'un message indiquant l'autonomie de roulage. L'autonomie de roulage est comprise entre 2 400 et 800 km. Faire un appoint en AdBlue.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Faire un appoint (autonomie de 2 400 à 800 km)"
       },
       {
         "source": "notice-peugeot-208",
         "emplacement": "p. 15, « AdBlue (BlueHDi) » ; renvoi (3) p. 13",
         "extrait": "Fixe dès la mise du contact, accompagné d'un signal sonore et d'un message indiquant l'autonomie de roulage. L'autonomie de roulage est comprise entre 800 et 100 km. Faire rapidement un appoint en AdBlue, ou effectuer (3). Clignotant […] L'autonomie de roulage est inférieure à 100 km. Faire impérativement un appoint en AdBlue pour éviter le blocage du démarrage, ou effectuer (3).",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire rapidement l’appoint, impérativement sous 100 km"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 286, « AdBlue », Témoins d'alerte et de contrôle",
         "extrait": "S'allume en jaune. La réserve d'AdBlue est faible. Faites l'appoint d'additif AdBlue dans les prochains kilomètres (ou milles) indiqués. SEAT recommande pour cela de vous rendre dans un atelier spécialisé.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Faire l’appoint dans les kilomètres indiqués"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 166, « Réservoir réactif », Entretien/Autonomie",
         "extrait": "[témoin] s'allume. « Remplir AdBlue avant 1200 km » Lorsque le message s'affiche à la mise sous contact du moteur, il vous reste entre 1200 km et 800 km d'autonomie. Prévoyez d'effectuer ou de faire effectuer par un Représentant de la marque, le remplissage de réactif dans le réservoir.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Prévoir le remplissage de réactif (1 200 à 800 km)"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 166, « Réservoir réactif », Entretien/Autonomie",
         "extrait": "[témoin] s'allume. « XXX KM blocage remplir AdBlue » […] Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Message de blocage : faire le plein dès que possible"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 138, « Réservoir réactif », Entretien/Autonomie",
         "extrait": "[témoin] s'allume. « REMPLIR ADBLUE AVANT 1200km » Lorsque le message s'affiche à la mise sous contact du moteur, il vous reste entre 1200 km et 800 km d'autonomie. Prévoyez d'effectuer ou de faire effectuer par un Représentant de la marque, le remplissage ou un appoint de réactif dans le réservoir.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Prévoir un remplissage ou appoint (1 200 à 800 km)"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 138, « Réservoir réactif », Entretien/Autonomie",
         "extrait": "[témoin] s'allume. « xxxKM BLOCAGE REMPLIR ADBLUE » […] Dans tous les cas, effectuez ou faites effectuer par un Représentant de la marque, le plein de réactif dans le réservoir dès que possible.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Message de blocage : faire le plein dès que possible"
       }
     ],
     "ecart_marques": "Seat laisse faire l'appoint dans les kilomètres indiqués (le voyant s'allume à 1 000 km d'autonomie) ; Renault et Dacia laissent prévoir l'appoint entre 1 200 et 800 km, puis le demandent dès que possible ; Peugeot demande un appoint rapide sous 800 km d'autonomie, impératif sous 100 km.",
-    "validation": "46d4a991bf0cd04fa31b2cceb6c5124caec95129eaa00bf8a69ccc479c7b3117"
+    "ecart_court": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km). Moins strict : Seat (dans l’autonomie affichée).",
+    "validation": "0673fd6972eb9e9d58ba4bca90ac6a28258c612c8915cf508c22e975c3a84b59"
   },
   {
     "id": "adblue-demarrage-impossible",
@@ -551,39 +609,45 @@
         "emplacement": "p. 286, « AdBlue », Témoins d'alerte et de contrôle",
         "extrait": "S'allume en rouge. Il est impossible de redémarrer le moteur ! Le niveau d'AdBlue est trop faible. Arrêtez le véhicule dans un endroit adéquat, sûr et plat, puis faites l'appoint avec la quantité minimale nécessaire d'additif AdBlue",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter en lieu sûr et plat pour l’appoint"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 286, « AdBlue », Témoins d'alerte et de contrôle",
         "extrait": "[AdBlue] et [clé] Il s'allume en rouge. Il est impossible de redémarrer le moteur ! Dysfonctionnement du circuit d'Adblue. Adressez-vous à un atelier spécialisé. Faites réviser le système.",
         "verdict": "non, arrêt dès que possible",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Redémarrage impossible : s’adresser à un atelier et faire réviser"
       },
       {
         "source": "notice-peugeot-208",
         "emplacement": "p. 15-16, « AdBlue (BlueHDi) » et « Système d'antipollution SCR » ; renvoi (2) p. 13",
         "extrait": "Le réservoir d'AdBlue est vide : le dispositif d'antidémarrage réglementaire empêche le redémarrage du moteur. Pour redémarrer le moteur, faire un appoint en AdBlue, ou effectuer (2). […] Le dispositif d'antidémarrage empêche le redémarrage du moteur (…). Pour redémarrer le moteur, effectuer (2). […] (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié.",
         "verdict": "non, arrêt dès que possible",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire un appoint, ou appeler le réseau, pour redémarrer"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 166-167, « Réservoir réactif »",
         "extrait": "« 0 KM blocage remplir AdBlue » Le démarrage du moteur est impossible. Pour redémarrer, vous devez faire vous-même le plein de réactif dans le réservoir. […] « 0 KM blocage antipollution » Indique qu'après coupure du contact, le redémarrage du véhicule est impossible. Faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt dès que possible",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Selon le message : faire le plein ou appeler un représentant"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 138-139, « Réservoir réactif »",
         "extrait": "« 0KM BLOCAGE REMPLIR ADBLUE » Le démarrage du moteur est impossible. Pour redémarrer, vous devez faire vous-même le plein de réactif dans le réservoir. […] « 0KM BLOCAGE ANTIPOLLUTION » Indique qu'après coupure du contact, le redémarrage du véhicule est impossible. Faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt dès que possible",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Selon le message : faire le plein ou appeler un représentant"
       }
     ],
     "ecart_marques": "Seat demande d'arrêter le véhicule dans un endroit sûr et plat pour faire l'appoint, et de s'adresser à un atelier en cas de défaut du système ; Peugeot, Renault et Dacia indiquent que le moteur ne redémarrera pas sans appoint d'AdBlue ou intervention du réseau, sans imposer l'arrêt.",
-    "validation": "8e50a30749677e69ec4afa81b590df2da18547b89d8a535e22ff704350cf42b5"
+    "ecart_court": "Plus strict : Seat (arrêt en lieu sûr). Moins stricts : Peugeot, Renault et Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé).",
+    "validation": "eb0b7ed5273e81a2c0736c01ded3afeeeccd3a95e424e4e47ac21aea205e2529"
   },
   {
     "id": "adblue-defaut",
@@ -602,25 +666,29 @@
         "emplacement": "p. 286, « AdBlue », Témoins d'alerte et de contrôle",
         "extrait": "[AdBlue] et [clé] Il s'allume en jaune. Un dysfonctionnement a été détecté dans le circuit d'AdBlue ou le liquide AdBlue rajouté n'est pas conforme. Adressez-vous à un atelier spécialisé. Faites réviser le système.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "S’adresser à un atelier et faire réviser le système"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 167, « Réservoir réactif », Anomalies de fonctionnement du système",
         "extrait": "« Antipollution à contrôler » « Qualité AdBlue à contrôler » « Injection AdBlue à contrôler » Indique une défaillance du système. Consultez un Représentant de la marque le plus tôt possible. […] « XXX KM blocage antipollution » Indique une défaillance du système et qu'il vous reste moins de 800 km à parcourir avant que le redémarrage du véhicule soit impossible.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Consulter un représentant de la marque le plus tôt possible"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 139, « Réservoir réactif », Anomalies de fonctionnement du système",
         "extrait": "« ANTIPOLLUTION A CONTROLER » « QUALITE ADBLUE A CONTROLER » « INJECTION ADBLUE A CONTROLER » Indique une défaillance du système. Consultez un Représentant de la marque le plus tôt possible. […] « xxxKM BLOCAGE ANTIPOLLUTION » Indique une défaillance du système et qu'il vous reste moins de 800 km à parcourir avant que le redémarrage du véhicule soit impossible.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Consulter un représentant de la marque le plus tôt possible"
       }
     ],
     "ecart_marques": "Seat demande de s'adresser à un atelier sans indiquer de délai ; Renault et Dacia demandent de consulter un représentant de la marque le plus tôt possible.",
-    "validation": "121e896759d839abe378fce4e44ea5916ef9ef41fa56ba75d858e47a072b8643"
+    "ecart_court": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué).",
+    "validation": "6eda63580c14c136ec969164c910a67b2bd4bf1ac67d4c93116b0858f9696167"
   },
   {
     "id": "fap",
@@ -639,32 +707,37 @@
         "emplacement": "p. 14-15, « Filtre à particules (Diesel) »",
         "extrait": "Fixe, accompagné d'un signal sonore et d'un message de risque de colmatage du filtre à particules. Le filtre à particules commence à saturer. Dès que les conditions de circulation le permettent, régénérer le filtre en roulant à une vitesse d'au moins 60 km/h jusqu'à l'extinction du témoin.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Dès que possible, régénérer en roulant à 60 km/h minimum"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 288-290, « Filtre à particules »",
         "extrait": "Conduisez à une vitesse comprise entre 50 et 120 km/h (31 et 75 mi/h). Cela augmente la température et brûle la suie dans le filtre. […] Terminer la régénération après l'extinction du témoin lumineux. Si le témoin reste allumé après 30 minutes de conduite en mode régénération, contactez un atelier spécialisé pour faire réparer le défaut",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Rouler entre 50 et 120 km/h pour régénérer"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 186, « Particularités des versions Diesel », Filtre à particules",
         "extrait": "Pour cela, à l'apparition du témoin, continuez à rouler suivant les conditions de circulation et le respect des limitations de vitesse jusqu'à l'extinction du témoin. Si possible, ne laissez pas le régime moteur descendre en dessous de 2000 tours/min.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Continuer à rouler jusqu’à l’extinction du témoin"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 160, « Particularités des versions Diesel », Filtre à particules",
         "extrait": "Pour cela, à l'apparition du témoin, continuez à rouler suivant les conditions de circulation et le respect des limitations de vitesse jusqu'à l'extinction du témoin. Si possible, ne laissez pas le régime moteur descendre en dessous de 2000 tours/mn.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Continuer à rouler jusqu’à l’extinction du témoin"
       }
     ],
     "ecart_marques": "Seat ne donne pas de délai pour la régénération ; Peugeot, Renault et Dacia demandent de la faire dès que la circulation le permet.",
-    "validation": "ad2a287fa7c85b8bec1dabf8d3ddf60101ab135da96abdfaab549dcc4d90c737"
+    "ecart_court": "Plus stricts : Peugeot, Renault et Dacia (rouler pour régénérer dès que la circulation le permet). Moins strict : Seat (régénération sans délai indiqué).",
+    "validation": "702fe4d6d2d58bb4939e5a671720a076c76773a288b50e5ab19c0f60a425b5c9"
   },
   {
     "id": "prechauffage",
@@ -683,31 +756,35 @@
         "emplacement": "p. 14, « Préchauffage moteur (Diesel) »",
         "extrait": "Allumé temporairement (jusqu'à environ 30 secondes en conditions hivernales sévères). À la mise du contact, si les conditions climatiques et la température du moteur le nécessitent. Attendre l'extinction du témoin avant de démarrer.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Attendre l’extinction du témoin avant de démarrer"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 289, « Gestion du moteur », Témoins",
         "extrait": "Témoin allumé. Système de préchauffage du moteur diesel. Lorsque le témoin s'éteint, le moteur peut être démarré immédiatement.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Démarrer une fois le témoin éteint"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 139, « Témoin de préchauffage (version Diesel) »",
         "extrait": "Contact mis, il doit s'allumer. Il indique que les bougies de préchauffage sont en fonctionnement. Il s'éteint quand le préchauffage est obtenu. Le moteur peut démarrer.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Démarrer une fois le témoin éteint"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 113, « Témoin de préchauffage (version Diesel) »",
         "extrait": "Contact mis, il doit s'allumer. Il indique que les bougies de préchauffage sont en fonctionnement. Il s'éteint quand le préchauffage est obtenu. Le moteur peut démarrer.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Démarrer une fois le témoin éteint"
       }
     ],
-    "validation": "51e731ffe2dfd5ee7cb394346f1456e052975d410024bbd439ab93f2deba8124"
+    "validation": "4db9484c5359068b929f7d579cf97c8381433fcdf66acb585646dd759a103693"
   },
   {
     "id": "airbag-defaut",
@@ -726,46 +803,53 @@
         "emplacement": "p. 17, « Airbags » ; renvoi (3) p. 13",
         "extrait": "Airbags. Fixe. L'un des airbags ou prétensionneurs pyrotechniques des ceintures de sécurité est défaillant. Effectuer (3). […] (3) : Se rendre dans le réseau PEUGEOT ou dans un atelier qualifié.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Se rendre dans le réseau ou un atelier qualifié"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 26-27, « Témoins de contrôle du système d'airbags »",
         "extrait": "Dysfonctionnement du système d'airbag et de rétracteurs de ceintures. Faites contrôler immédiatement le système par un atelier spécialisé. […] Ne montez pas un siège pour enfants sur le siège du passager avant ou retirez le siège pour enfants monté !",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire contrôler immédiatement ; pas de siège enfant à l’avant"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 137, « Témoin d'airbag »",
         "extrait": "S'il ne s'allume pas à la mise sous contact ou s'il s'allume moteur allumé, il signale une défaillance du système. Consultez au plus tôt un Représentant de la marque.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Consulter au plus tôt un représentant de la marque"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 111, « Témoin d'Airbag »",
         "extrait": "S'il ne s'allume pas à la mise sous contact, ou s'il s'allume moteur allumé ou s'il clignote, il signale une défaillance du système. Consultez rapidement un Représentant de la marque.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Témoin seul : consulter rapidement un représentant de la marque"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 293, 7.2.4 « Si un voyant s'allume », Voyant SRS",
         "extrait": "Indique un dysfonctionnement dans : Le système d'airbag SRS ; ou Le système de prétensionneur de ceinture de sécurité. Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire immédiatement vérifier le véhicule"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 101, « Messages d'anomalies de fonctionnement »",
         "extrait": "Ils apparaissent avec le témoin [Service] et nécessitent un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement. […] « Airbag à contrôler » Indique une défaillance des systèmes de retenue complémentaire aux ceintures. En cas d'accident, ils risquent de ne pas se déclencher",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Témoin Service : au plus tôt chez un représentant, avec ménagement"
       }
     ],
     "ecart_marques": "Peugeot ne donne pas de délai et Dacia demande de consulter rapidement pour le témoin seul ; Seat, Renault, Toyota et Dacia (message « Airbag à contrôler ») demandent un contrôle immédiat ou au plus tôt.",
-    "validation": "8964bb55fb7b14b834fb601a126369873efeaf0deed3778ec6b37d7fbc9579ee"
+    "ecart_court": "Plus stricts : Dacia avec message, Seat, Toyota et Renault (contrôle sans attendre). Moins stricts : Peugeot (sans délai indiqué), Dacia témoin seul (rapidement).",
+    "validation": "9cfcac77b5439f8b720f5d4f3e41cd441f3913680aa9dec4c11c8dc96e4eeab2"
   },
   {
     "id": "airbag-passager-desactive",
@@ -784,38 +868,43 @@
         "emplacement": "p. 17-18, « Airbag passager avant (OFF) »",
         "extrait": "Fixe. L'airbag frontal passager est neutralisé. La commande est actionnée sur la position \" OFF \". Il est possible d'installer un siège enfant \"dos à la route\", sauf en cas d'anomalie de fonctionnement des airbags (témoin d'alerte Airbags allumé).",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Signale l’airbag passager neutralisé, commande sur OFF"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 26, « Témoins de contrôle du système d'airbags »",
         "extrait": "Airbag frontal du passager désactivé. Vérifiez si l'airbag doit rester désactivé.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Vérifier si l’airbag doit rester désactivé"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 106, « Désactivation airbag passager avant »",
         "extrait": "À la mise sous contact, vérifiez impérativement que le témoin est bien allumé sur l'afficheur. Ce voyant reste allumé en permanence pour vous confirmer que vous pouvez installer un siège enfant.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Vérifier impérativement que le témoin est allumé (siège enfant possible)"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 84, « Désactivation de l'airbag passager avant »",
         "extrait": "À la mise sous contact, vérifiez impérativement que le témoin est bien allumé sur l'afficheur. Ce témoin reste allumé en permanence pour vous confirmer que vous pouvez installer un siège enfant.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Vérifier impérativement que le témoin est allumé (siège enfant possible)"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 37, « Témoin “PASSENGER AIR BAG” »",
         "extrait": "Le témoin “OFF” s'allume (uniquement si le contacteur du moteur est en position ON). […] Lorsqu'un système de retenue pour enfant n'est pas installé sur le siège du passager avant. Assurez-vous que le système d'activation/désactivation manuelle de l'airbag est en position “ON”.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Sans siège enfant, vérifier que l’airbag est sur ON"
       }
     ],
-    "validation": "2f5a585bf7d6f18c2b50b083f6100f110a1aee5547a5dbecedecb42866dc6586"
+    "validation": "3fdf22a06f4e5bf9474b76c390cb96b0ce72df8ad469cb7d59d3a6899f1be7ca"
   },
   {
     "id": "abs",
@@ -834,46 +923,53 @@
         "emplacement": "p. 17, « Antiblocage des roues (ABS) » ; renvoi (3) p. 13",
         "extrait": "Fixe. Le système d'antiblocage des roues est défaillant. Le véhicule conserve un freinage classique. Rouler prudemment à allure modérée, puis effectuer (3). […] (3) : Se rendre dans le réseau PEUGEOT ou dans un atelier qualifié.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Rouler prudemment à allure modérée, puis aller au garage"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 138, « Témoin antiblocage des roues »",
         "extrait": "S'il s'allume en roulant, il signale une défaillance du système d'antiblocage des roues. Le système de freinage est alors assuré comme sur un véhicule non équipé du système ABS. Consultez rapidement un Représentant de la marque.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Témoin seul : consulter rapidement un représentant de la marque"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 212, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement ; témoin Service p. 136",
         "extrait": "[Service] et [ABS] allumés au tableau de bord accompagnés des messages « ABS à contrôler », « Système freinage à contrôler » et « ESC à contrôler » : cela indique que l'ABS, l'ESC et l'aide au freinage d'urgence sont désactivés. Le freinage est toujours assuré ; […] (p. 136) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Témoin Service : au plus tôt chez un représentant, avec ménagement"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 112, « Témoin antiblocage des roues »",
         "extrait": "S'il ne s'éteint pas après la mise sous contact ou s'il s'allume en roulant, il signale une défaillance du système d'antiblocage des roues. Le système de freinage est alors assuré comme sur un véhicule non équipé du système ABS. Consultez rapidement un Représentant de la marque.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Témoin seul : consulter rapidement un représentant de la marque"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 184, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement ; témoin Service p. 110",
         "extrait": "[Service] et [ABS] allumés au tableau de bord accompagnés des messages « ABS », « Système freinage à contrôler » et « ESC » : cela indique que l'ABS, l'ESC et l'aide au freinage d'urgence sont désactivés. Le freinage est toujours assuré ; […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Témoin Service : au plus tôt chez un représentant, avec ménagement"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 293, 7.2.4 « Si un voyant s'allume », Voyant ABS",
         "extrait": "Indique un dysfonctionnement dans : L'ABS ; ou Le système d'assistance au freinage. Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire immédiatement vérifier le véhicule"
       }
     ],
     "ecart_marques": "Peugeot demande d'aller au garage en roulant prudemment, sans délai précis, et Renault et Dacia de consulter rapidement pour le témoin seul ; Renault et Dacia (avec le témoin Service) et Toyota demandent un contrôle au plus tôt ou immédiat.",
-    "validation": "859b03e0c4a3f183eb67019b7774f9a107f9c6a793a23c89dd612e454cd05745"
+    "ecart_court": "Plus stricts : Renault et Dacia avec témoin Service, Toyota (sans attendre). Moins stricts : Peugeot (sans délai indiqué), Renault et Dacia témoin seul (rapidement).",
+    "validation": "ae46101b594afc5ff8b38f8544e7a7325541c75042594e594b9aeb5cf4eabc1e"
   },
   {
     "id": "abs-et-frein",
@@ -892,38 +988,43 @@
         "emplacement": "p. 14, « Freinage » (deux témoins) ; renvois (1) et (2) p. 13",
         "extrait": "Fixes. Le répartiteur électronique de freinage (REF) est défaillant. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif. Stationner dans les meilleures conditions de sécurité et couper le contact. (2) : Faire appel au réseau PEUGEOT ou à un atelier qualifié.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement, couper le contact, appeler le réseau"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 251, « Système de freinage », AVERTISSEMENT",
         "extrait": "Si le témoin du système de freinage s'allume en même temps que le témoin d'ABS, il se peut que le fonctionnement de l'ABS soit défaillant. Lorsque cette fonction est en panne, les roues arrière peuvent se bloquer. Dans certaines circonstances, l'arrière du véhicule peut déraper, au risque de perdre le contrôle. Arrêtez-vous et demandez de l'aide à un technicien.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter et demander l’aide d’un technicien"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 213, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement",
         "extrait": "[quatre témoins] allumés au tableau de bord accompagnés du message « Panne du système de freinage » : cela indique une défaillance des dispositifs de freinage. […] Votre freinage est partiellement assuré. Toutefois, il est dangereux de freiner brusquement et ceci vous impose un arrêt impératif et immédiat compatible avec les conditions de circulation. Faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement et immédiatement, sans freiner brusquement"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 184-185, « Dispositifs de correction et d'assistance à la conduite », Anomalies de fonctionnement",
         "extrait": "[quatre témoins] allumés au tableau de bord accompagnés du message « Panne du système de freinage » : cela indique une défaillance des dispositifs de freinage. […] Votre freinage est partiellement assuré. Toutefois, il est dangereux de freiner brusquement et ceci vous impose un arrêt impératif et immédiat compatible avec les conditions de circulation. Faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement et immédiatement, sans freiner brusquement"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 298, MISE EN GARDE « Si le voyant ABS et le voyant du système de freinage restent allumés »",
         "extrait": "Arrêtez immédiatement le véhicule dans un endroit sûr et contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. Le véhicule devient très instable pendant le freinage, et l'ABS risque de connaître une défaillance, ce qui peut provoquer un accident et causer des blessures graves voire mortelles.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       }
     ],
-    "validation": "7ea9099f9cabed553031a6b869ee2ed75f19392b5f6811b8faf41c85e882016f"
+    "validation": "9d6a4d89de0c624ef5ab7f3797e849d468148f24aadf17492b49725f31bf9eef"
   },
   {
     "id": "esp-clignotant",
@@ -942,39 +1043,45 @@
         "emplacement": "p. 254-255, « Systèmes de stabilisation et assistance au freinage », Témoins et AVERTISSEMENT",
         "extrait": "Clignote. ESC ou ASR en cours de fonctionnement. […] Lorsque les systèmes entrent dans la plage de régulation, adaptez immédiatement votre vitesse à l'état de la route et aux conditions",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Adapter immédiatement sa vitesse à l’état de la route"
       },
       {
         "source": "notice-peugeot-208",
         "emplacement": "p. 17, « Contrôle dynamique de stabilité (CDS) / Antipatinage des roues (ASR) »",
         "extrait": "Clignotant. La régulation du système CDS/ASR s'active en cas de perte d'adhérence ou de trajectoire.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Signale la régulation en cas de perte d’adhérence"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 213, « Contrôle dynamique de conduite ESC », Principe de fonctionnement",
         "extrait": "Le système compare la volonté du conducteur à la trajectoire réelle du véhicule et corrige cette dernière, si nécessaire, en agissant sur le freinage de certaines roues et/ou sur la puissance du moteur, en cas de déclenchement du système, le témoin clignote au tableau de bord.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Signale que le système corrige la trajectoire"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 185, « Contrôle dynamique de conduite ESC », Principe de fonctionnement",
         "extrait": "Le système compare la volonté du conducteur à la trajectoire réelle du véhicule et corrige cette dernière, si nécessaire, en agissant sur le freinage de certaines roues et/ou sur la puissance du moteur, en cas de déclenchement du système, le témoin clignote au tableau de bord.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Signale que le système corrige la trajectoire"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 205, « Lorsque les systèmes TRC/VSC/de contrôle du roulis de remorque fonctionnent »",
         "extrait": "Le témoin de dérapage clignote lorsque les systèmes TRC/VSC/de contrôle du roulis de la remorque fonctionnent.",
         "verdict": "oui",
-        "urgence": "aucune"
+        "urgence": "aucune",
+        "demande": "Signale que les systèmes antidérapage sont en action"
       }
     ],
     "ecart_marques": "Seat demande d'adapter immédiatement sa vitesse ; Peugeot, Renault, Dacia et Toyota décrivent le clignotement comme le fonctionnement normal du système, sans consigne.",
-    "validation": "cd86001eb38dc89d0972c87a6c2b7a34f30206e92d85aa0be117cda352ed9f4c"
+    "ecart_court": "Plus strict : Seat (adapter immédiatement sa vitesse). Moins stricts : Peugeot, Renault, Dacia et Toyota (système en action, sans consigne).",
+    "validation": "6c8e72f934381092a2f2b0ce5799c9ea4052f1dee5f6b1a8d92509ab24def193"
   },
   {
     "id": "esp-defaut",
@@ -993,32 +1100,37 @@
         "emplacement": "p. 17, « Contrôle dynamique de stabilité (CDS) / Antipatinage des roues (ASR) » ; renvoi (3) p. 13",
         "extrait": "Fixe. Le système CDS/ASR est défaillant. Effectuer (3). […] (3) : Se rendre dans le réseau PEUGEOT ou dans un atelier qualifié.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Se rendre dans le réseau ou un atelier qualifié"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 213, « Contrôle dynamique de conduite ESC », Anomalies de fonctionnement ; témoin Service p. 136",
         "extrait": "Lorsque le système détecte une anomalie de fonctionnement, le message « ESC à contrôler » et les témoins [Service] et [ESC] s'affichent au tableau de bord. Dans ce cas, l'ESC et le système antipatinage sont désactivés. Consultez un Représentant de la marque. […] (p. 136) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Aller au plus tôt chez un représentant, avec ménagement"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 185, « Contrôle dynamique de conduite ESC », Anomalies de fonctionnement ; témoin Service p. 110",
         "extrait": "Lorsque le système détecte une anomalie de fonctionnement, le message « ESC à contrôler » et les témoins [Service] et [ESC] s'affichent au tableau de bord. Dans ce cas, l'ESC et le système antipatinage sont désactivés. Consultez un Représentant de la marque. […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Aller au plus tôt chez un représentant, avec ménagement"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 297, 7.2.4 « Si un voyant s'allume », Témoin de dérapage",
         "extrait": "Indique un dysfonctionnement dans : Le système VSC ; Le système TRC ; ou Le système de commande d'assistance au démarrage en côte. Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire immédiatement vérifier le véhicule"
       }
     ],
     "ecart_marques": "Peugeot demande d'aller au garage sans indiquer de délai ; Renault, Dacia et Toyota demandent d'y aller au plus tôt ou de faire vérifier immédiatement.",
-    "validation": "851699bcd84723fd9d709d3672e7a1303fd9c92cfc682d312837eeff5dd411e3"
+    "ecart_court": "Plus stricts : Renault et Dacia (représentant au plus tôt, avec ménagement), Toyota (vérification immédiate). Moins strict : Peugeot (garage, sans délai indiqué).",
+    "validation": "cfd2fa16e0b5130b1faf2bcd4f1dee5591716260cea18a25093b21fb29e78ed2"
   },
   {
     "id": "pression-pneus",
@@ -1037,53 +1149,61 @@
         "emplacement": "p. 18, « Sous-gonflage »",
         "extrait": "Fixe. La pression est insuffisante dans une ou plusieurs roues. Contrôler la pression des pneumatiques le plus rapidement possible. Réinitialiser le système de détection après ajustement de la pression.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Contrôler la pression au plus vite, puis réinitialiser le système"
       },
       {
         "source": "notice-peugeot-208",
         "emplacement": "p. 110, « Détection de sous-gonflage », Alerte de sous-gonflage",
         "extrait": "Elle est signalée par l'allumage fixe de ce témoin, accompagné d'un signal sonore et, selon équipement, de l'affichage d'un message. Réduire immédiatement la vitesse, éviter les coups de volant et tout freinage brusque. S'arrêter dès que les conditions de circulation le permettent.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Ralentir aussitôt, sans à-coup, puis s’arrêter dès que possible"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 311-312, « Systèmes de contrôle de la pression des pneus », Témoin de contrôle et AVERTISSEMENT",
         "extrait": "Témoin allumé. Pression de gonflage d'une roue bien inférieure à la valeur définie par le conducteur […] Si le témoin s'allume, vous devez immédiatement réduire la vitesse et éviter toute manœuvre soudaine de virage ou de freinage. Arrêtez-vous le plus rapidement possible et contrôlez la pression et l'état de tous les pneus.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Ralentir aussitôt, sans à-coup, s’arrêter vite et contrôler les pneus"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 177, « Système de surveillance de pression des pneumatiques », Anomalies de gonflage possibles",
         "extrait": "s'allume fixe. « Pression pneus à réajuster » Une roue et la valeur de pression associée s'affichent en jaune. Cela indique qu'un sous gonflage du pneumatique a été détecté. Vérifiez et ajustez la pression à froid des quatre pneumatiques puis, réinitialisez le système.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Vérifier et ajuster la pression à froid, puis réinitialiser"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 295 et 298, Voyant de faible pression des pneus et MISE EN GARDE",
         "extrait": "Lorsque le témoin s'allume (un signal sonore retentit) : Faible pression des pneus due à des causes naturelles. Réglez la pression de gonflage des pneus […] Faible pression des pneus en raison d'un pneu crevé. Arrêtez immédiatement le véhicule dans un endroit sûr. […] Arrêtez votre véhicule dans un endroit sûr dès que possible. Réglez immédiatement la pression de gonflage des pneus.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter immédiatement en lieu sûr, puis régler la pression"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 125, « Messages d'alerte »",
         "extrait": "Ils apparaissent avec le témoin [STOP] et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. […] « Crevaison » Indique qu'au moins une des roues est crevée ou fortement sous-gonflée.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Avec le message de crevaison, s’arrêter impérativement et immédiatement"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 102, « Messages d'alerte »",
         "extrait": "Ils apparaissent avec le témoin [STOP] et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. […] « Crevaison » Indique qu'au moins une des roues est crevée ou fortement sous-gonflée.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Avec le message de crevaison, s’arrêter impérativement et immédiatement"
       }
     ],
     "ecart_marques": "Peugeot (p. 110), Seat et Toyota demandent de s'arrêter dès que possible pour contrôler les pneus, Renault et Dacia en cas de message « Crevaison ». Pour un simple sous-gonflage, la liste des témoins de Peugeot (p. 18) demande de contrôler la pression le plus rapidement possible, et Dacia de la vérifier et de l'ajuster à froid ; Renault ne donne pas de consigne pour le témoin seul.",
-    "validation": "b986bf24d9ae5f89428d0101e0c7b74539cd21d6668b491f4a3c2aa2a1126660"
+    "ecart_court": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir).",
+    "validation": "2389fe8e2e092f111fc5eea0db4d9fdd88de0bc0a2f41a3c84694c3dcfc6e60a"
   },
   {
     "id": "pression-pneus-systeme",
@@ -1102,24 +1222,27 @@
         "emplacement": "p. 18, « Sous-gonflage » ; renvoi (3) p. 13",
         "extrait": "Témoin de sous-gonflage clignotant puis fixe et témoin de Service fixe. Le système de surveillance de la pression des pneumatiques est défaillant. La détection de sous-gonflage n'est plus assurée. Dès que possible, vérifier la pression des pneumatiques et effectuer (3).",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Vérifier la pression dès que possible, puis aller au garage"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 177, Anomalies de gonflage possibles ; témoin Service p. 110",
         "extrait": "clignote puis s'allume fixe accompagné du témoin [Service] « Capteurs pneus à contrôler » Une roue ne s'affiche plus. Cela indique qu'au moins une roue n'est pas équipée de capteur […] ou que le capteur est défaillant. Consultez un Représentant de la marque. […] (p. 110) Le témoin [Service] nécessite un arrêt au plus tôt chez un Représentant de la marque en conduisant avec ménagement.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Aller au plus tôt chez un représentant, avec ménagement"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 295 et 297, Voyant de faible pression des pneus",
         "extrait": "Si le témoin reste allumé après avoir clignoté pendant environ 1 minute (un signal sonore ne retentit pas) : Dysfonctionnement dans le système de détection de pression des pneus. Faites vérifier le système […] Il se peut que le système de détection de pression des pneus présente un dysfonctionnement. Faites immédiatement vérifier le véhicule",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire immédiatement vérifier le véhicule"
       }
     ],
-    "validation": "56b7215439112525deb0d0e6ef960633943aae98ae4d49ff5610eedb95bce17a"
+    "validation": "614e2bc935616dd78f4850b097142d357aaf094bf0ca3fe8f8142e0c71afdb70"
   },
   {
     "id": "direction-orange",
@@ -1138,25 +1261,29 @@
         "emplacement": "p. 17, « Direction assistée » ; renvoi (3) p. 13",
         "extrait": "Direction assistée. Fixe. La direction assistée est défaillante. Rouler prudemment à allure modérée, puis effectuer (3). […] (3) : Se rendre dans le réseau PEUGEOT ou dans un atelier qualifié.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Rouler prudemment à allure modérée, puis aller au garage"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 227, « Direction », Témoin de contrôle",
         "extrait": "S'allume en jaune. Fonctionnement limité de la direction. Rendez-vous avec prudence dans un atelier spécialisé pour effectuer une révision de la direction.",
         "verdict": "oui avec précautions",
-        "urgence": "sous quelques jours"
+        "urgence": "sous quelques jours",
+        "demande": "Se rendre avec prudence dans un atelier spécialisé"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 294 et 298, Voyant du système de direction assistée électrique (jaune)",
         "extrait": "Indique un dysfonctionnement du système EPS (direction assistée électrique). Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié. […] Lorsque le voyant s'allume en jaune, l'assistance à la direction assistée est limitée.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire immédiatement vérifier le véhicule"
       }
     ],
     "ecart_marques": "Peugeot et Seat laissent rouler prudemment jusqu'au garage, sans délai précis ; Toyota demande une vérification immédiate.",
-    "validation": "292dc266cddf062af00d9142c0f5ba79f05ae3792758ba4d0840a9f6bf49ebba"
+    "ecart_court": "Plus strict : Toyota (vérification immédiate). Moins stricts : Peugeot et Seat (rouler prudemment jusqu’au garage, sans délai indiqué).",
+    "validation": "d37ed193468f3b27cdffb2221fe9ea8c582c14e19035780418799312651e647f"
   },
   {
     "id": "direction-rouge",
@@ -1175,60 +1302,69 @@
         "emplacement": "p. 227, « Direction », Témoin de contrôle",
         "extrait": "S'allume en rouge. Direction endommagée. Stoppez le véhicule dès que possible et en toute sécurité. Rendez-vous sans plus attendre dans un atelier spécialisé pour réparer la panne.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter dès que possible et en toute sécurité"
       },
       {
         "source": "notice-peugeot-208",
         "emplacement": "p. 13, « STOP » ; renvois (1) et (2) p. 13",
         "extrait": "STOP. Fixe, associé à un autre témoin d'alerte, accompagné de l'affichage d'un message et d'un signal sonore. Un dysfonctionnement grave du moteur, du système de freinage, de la direction assistée, de la boîte de vitesses automatique ou une anomalie électrique majeure est détectée. Effectuer (1), puis (2). […] (1) : L'arrêt du véhicule est impératif.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement (dysfonctionnement grave)"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 125, « Messages d'alerte »",
         "extrait": "Ils apparaissent avec le témoin et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez votre moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. […] « Panne de la direction » Indique un problème dans la direction.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 102, « Messages d'alerte »",
         "extrait": "Ils apparaissent avec le témoin et vous imposent pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation. Arrêtez votre moteur et ne le redémarrez pas. Faites appel à un Représentant de la marque. […] « Panne de la direction » Indique un problème sur la direction.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter immédiatement, couper le moteur, ne pas redémarrer"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 294 et 298, Voyant du système de direction assistée électrique (rouge)",
         "extrait": "Indique un dysfonctionnement du système EPS (direction assistée électrique). Faites immédiatement vérifier le véhicule par un concessionnaire ou un réparateur Toyota agréé, ou par tout autre réparateur qualifié. […] Lorsque le voyant s'allume en rouge, l'assistance à la direction assistée est perdue et il devient alors très difficile de manœuvrer le volant.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Faire immédiatement vérifier le véhicule"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 138, « Témoin de direction à assistance variable » ; témoin STOP p. 136-137",
         "extrait": "S'il s'allume en roulant accompagné du témoin [STOP], cela indique une défaillance du système. Faites appel à un Représentant de la marque. […] (p. 137) Il vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement et immédiatement, appeler un représentant"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 113, « Témoin de direction à assistance variable » ; témoin STOP p. 110-111",
         "extrait": "S'il s'allume en roulant accompagné du témoin [STOP], cela indique une défaillance du système. Faites appel à un Représentant de la marque. […] (p. 111) Il vous impose, pour votre sécurité, un arrêt impératif et immédiat compatible avec les conditions de circulation.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement et immédiatement, appeler un représentant"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 298, MISE EN GARDE « Lorsque le voyant du système de direction assistée électrique s'allume »",
         "extrait": "Lorsque le volant est plus difficile à manœuvrer que d'habitude, tenez-le fermement et bougez-le avec plus de force que d'habitude.",
         "verdict": "oui avec précautions",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Tenir fermement le volant, le bouger avec plus de force"
       }
     ],
     "ecart_marques": "Toyota demande une vérification immédiate sans imposer l'arrêt ; Seat, Peugeot, Renault et Dacia imposent l'arrêt.",
-    "validation": "b9b7c561c41660f3acd8de7bb3eae219ac75f0a2b1ded1602f7d9ea259d76541"
+    "ecart_court": "Plus stricts : Seat, Peugeot, Renault et Dacia (arrêt imposé). Moins strict : Toyota (vérification immédiate, sans arrêt imposé).",
+    "validation": "d81d8647459c51dadf0b51fd70c79723a1e860755dd5016e77ae80228e753540"
   },
   {
     "id": "temperature-rouge",
@@ -1247,44 +1383,50 @@
         "emplacement": "p. 13, « Température maxi du liquide de refroidissement » ; renvois (1) et (2) p. 13",
         "extrait": "La température du circuit de refroidissement est trop élevée. Effectuer (1), puis attendre le refroidissement du moteur pour compléter le niveau, si nécessaire. Si le problème persiste, effectuer (2). […] (1) : L'arrêt du véhicule est impératif. Stationner dans les meilleures conditions de sécurité et couper le contact.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter impérativement ; moteur refroidi, compléter le niveau si nécessaire"
       },
       {
         "source": "notice-seat-ibiza",
         "emplacement": "p. 89, « Indicateur de température du liquide de refroidissement du moteur », Témoin d'alerte et de contrôle",
         "extrait": "S'allume en rouge. Arrêtez-vous immédiatement ! Niveau de liquide de refroidissement trop faible, température du liquide de refroidissement trop élevée. Il clignote en rouge. Système de refroidissement du moteur défectueux. Arrêtez le véhicule, coupez le moteur et laissez-le refroidir.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter immédiatement, couper le moteur, le laisser refroidir"
       },
       {
         "source": "notice-renault-clio-5",
         "emplacement": "p. 139, « Témoin d'alerte de température du liquide de refroidissement »",
         "extrait": "S'il devient rouge, arrêtez-vous et laissez tourner le moteur au ralenti une ou deux minutes. La température doit s'abaisser et le témoin repasser au bleu. Sinon arrêtez le moteur. Laissez-le refroidir avant de vérifier le liquide de refroidissement. Faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter, ralenti une ou deux minutes, sinon couper le moteur"
       },
       {
         "source": "notice-dacia-sandero-3",
         "emplacement": "p. 111, « Témoin d'alerte de température du liquide de refroidissement »",
         "extrait": "S'il devient rouge, arrêtez-vous et laissez tourner le moteur au ralenti une ou deux minutes. La température doit s'abaisser et le témoin s'éteindre ou repasser au bleu. Sinon arrêtez le moteur. Laissez-le refroidir avant de vérifier le liquide de refroidissement. Faites appel à un Représentant de la marque.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter, ralenti une ou deux minutes, sinon couper le moteur"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 292, 7.2.4 « Si un voyant s'allume », Voyant de température élevée du liquide de refroidissement",
         "extrait": "Indique que la température du liquide de refroidissement du moteur est trop élevée. Arrêtez immédiatement le véhicule dans un endroit sûr.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "Arrêter immédiatement le véhicule dans un endroit sûr"
       },
       {
         "source": "notice-toyota-yaris",
         "emplacement": "p. 322-323, 7.2.11 « Si votre véhicule surchauffe », Mesures correctives",
         "extrait": "1.Arrêtez le véhicule dans un endroit sûr et désactivez le système de climatisation, puis arrêtez le moteur. […] 3.Après avoir laissé suffisamment refroidir le moteur, vérifiez que les durites et le faisceau de radiateur (radiateur) ne présentent pas de fuites.",
         "verdict": "non, arrêt immédiat",
-        "urgence": "immédiate"
+        "urgence": "immédiate",
+        "demande": "S’arrêter, couper la climatisation puis le moteur"
       }
     ],
-    "validation": "b8492c7561409b0a696c3669ba08c61e66efbfe8573ba0168c4b75adebc568a4"
+    "validation": "fa17e03fca455664efba570b08bfcaf11287f2ae31b00b22bb259cd54d90c12d"
   }
 ]
