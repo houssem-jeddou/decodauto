@@ -1,6 +1,6 @@
 // Captures et mesures des pages du lot F3 au format 2 (lot F1, tâche F1.3b) : code défaut, pneus et obligations (page
 // informative avec réponse directe, loi montagne), socle (« à propos », mentions légales) et 404, à côté des mêmes pages en
-// ligne (format 1). Usage : servir dist-demo-format2 (npm run demo:format2) sur le port 8790 et dist (npm run build) sur le
+// ligne (format 1), refaites après la revue de F1.3b. Usage : servir dist-demo-format2 (npm run demo:format2) sur le port 8790 et dist (npm run build) sur le
 // port 8792, puis `node travaux/etape-13/f1/captures/f1.3b/capturer.cjs <dossier de sortie>`.
 // Navigateur : le Chromium et le Playwright préinstallés de l'environnement (require('playwright')), hors dépendances du dépôt.
 // Police chargée : feuille servie en font-display: block (police en cache) ; police de secours : /polices/ bloqué.
@@ -12,9 +12,9 @@ const { writeFileSync } = require('node:fs');
 const sortie = process.argv[2] ?? '.';
 const PAGES = [
   { nom: 'code-p0420', chemin: '/codes-defaut/p0420/', composants: [['fiche-code', '[data-fiche-code]'], ['par-marque', '[data-cas-par-marque]'], ['causes', '[data-causes]'], ['cout', '[data-encadre-cout]']] },
-  { nom: 'pression-des-pneus', chemin: '/pression-des-pneus/', composants: [['encadre', '[data-encadre-decision]'], ['fiche-texte', '[data-texte-reference]'], ['tableau', '[data-element-unique="tableau"]']] },
+  { nom: 'pression-des-pneus', chemin: '/pression-des-pneus/', composants: [['encadre', '[data-encadre-decision]'], ['ecart', '[data-encadre-ligne] [data-ecart-court]'], ['illustration', 'figure[data-illustration]'], ['fiche-texte', '[data-texte-reference]'], ['tableau', '[data-element-unique="tableau"]']] },
   { nom: 'loi-montagne', chemin: '/loi-montagne/', composants: [['encadre', '[data-encadre-decision]'], ['fiche-texte', '[data-texte-reference]']] },
-  { nom: 'a-propos', chemin: '/a-propos/', composants: [['auteur', '[data-auteur]'], ['methode', '[data-methode]']] },
+  { nom: 'a-propos', chemin: '/a-propos/', composants: [['sommaire', '.sommaire-colonne'], ['auteur', '[data-auteur]'], ['methode', '[data-methode]']] },
   { nom: 'mentions-legales', chemin: '/mentions-legales/', composants: [['mentions', '[data-mentions-legales]']] },
   { nom: '404', chemin: '/404.html', composants: [] },
 ];
@@ -48,6 +48,10 @@ async function mesurer(page) {
       policeTitre: [...document.fonts].some((f) => f.status === 'loaded' && f.weight === '700'),
       basMention: bas('[data-mention-ia]'),
       basH1: bas('h1'),
+      // Revue de F1.3b : écart entre la mention et le H1 (même valeur sur toutes les pages), boutons « Trouver mon voyant ».
+      ecartMentionH1: Math.round(el('h1').getBoundingClientRect().top - el('[data-mention-ia]').getBoundingClientRect().bottom),
+      boutonsVoyant: document.querySelectorAll('.bouton-voyant').length,
+      basPied: bas('footer'),
       // Règle 2c : bas de la réponse directe ; règle 2a : bas de la situation, du verdict, de l'urgence et de l'action de la
       // première ligne (format 2 : .situation, .verdict, .urgence, .action ; format 1 : encadre-*).
       basReponse: bas('[data-reponse-directe]'),

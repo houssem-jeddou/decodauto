@@ -81,10 +81,8 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
   - *socle et 404* : tête de page nuit **sans encadré** (`tete-seule` : marge basse réduite), texte sur fond clair ; fiche de
     l'auteur et « Méthode » en cartes (définitions dans le bloc tableau) ; mentions légales en fiche ; 404 : phrase, bouton
     ambre « Trouver mon voyant » et lien vers l'accueil dans la tête de page.
-  Point à trancher : le brief demandait un *encart du corps* « dépannage sur autoroute » avec un numéro et une consigne. Aucune
-  donnée validée ne porte ce numéro ni cette consigne (`data/couts.json` ne porte que le forfait réglementé) : les écrire
-  demanderait un texte nouveau, sourcé (fiche Service-public F11056, déjà au registre) et validé, et un champ de données (demande
-  de changement sur la structure). Proposé pour le lot F3, non fait ici.
+  Encart du corps « dépannage sur autoroute » (consigne) : aucune donnée validée ne le porte (`data/couts.json` ne porte que le
+  forfait réglementé) ; besoin noté pour F3 (section « Lot F3 » ci-dessous), demande de changement rédigée par Houssem.
   Revue de F1.3b (décisions du 16/11/2026) :
   - *ligne d'écart* (règle 2b) : le lien « Votre marque » renvoie à la partie du voyant au tableau des notices
     (`#da-notices-<voyant>`), sur la page si le voyant y est rattaché, sinon sur la page à laquelle il est rattaché, seulement
@@ -124,8 +122,8 @@ validation de Houssem, par la pull request de la copie : ces points y entrent à
 - **Pression des pneus** : question de la page revue avec sa réponse directe (la question et la réponse se répondent).
 - **Tableau de la pression** : « (p. 198) » et les autres pages écrites à la main dans le tableau remplacées par
   `{{cite:…}}` (règle 2d).
-- **Dépannage sur autoroute** : consigne sourcée (Service-public F11056, sans numéro de téléphone), par une demande de
-  changement (texte nouveau et champ de données).
+- **Dépannage sur autoroute** : besoin d'un encart avec la consigne sourcée (Service-public F11056, sans numéro de
+  téléphone) : texte nouveau et champ de données. Houssem rédige la demande de changement pour F3.
 - **Paire de liens du plan** : `batterie-changer` ↔ `voyant-batterie`, pour le renvoi « Votre marque » de la page « changer
   la batterie » (vague B).
 
