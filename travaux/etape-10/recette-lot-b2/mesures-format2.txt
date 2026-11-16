@@ -1,0 +1,12 @@
+Brouillon, jamais validé. node scripts/mesurer-format2.ts --dist dist-exemples (copie de travail séparée, voir controle.txt, point 4), Chromium, police du système Inter, 16/11/2026.
+
+Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situation | Bas de l’encadré | Illustration | Après « Notices » | Arbre ou étapes | Hauteur | Sommaire | Largeur de page | Débordements
+/batterie-voiture/ | 320 | chargée | – | 415 | 606 | 2220 | 2761 | oui | 3862 | 12173 | oui | 320 | 0
+/batterie-voiture/ | 375 | chargée | – | 373 | 522 | 1905 | 2388 | oui | 3472 | 10738 | oui | 375 | 0
+/batterie-voiture/ | 1366 | chargée | – | 268 | 335 | 1107 | 1361 | oui | 2261 | 7058 | oui | 1366 | 0
+/batterie-voiture/ | 320 | secours | – | 415 | 606 | 2220 | 2761 | oui | 3862 | 12223 | oui | 320 | 0
+/batterie-voiture/ | 375 | secours | – | 399 | 547 | 1930 | 2414 | oui | 3498 | 10789 | oui | 375 | 0
+/batterie-voiture/ | 1366 | secours | – | 268 | 335 | 1107 | 1361 | oui | 2261 | 7058 | oui | 1366 | 0
+SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police chargée) : illustration à 2388 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1905 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police de secours) : illustration à 2414 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1930 px (règle 2i, demande n° 32 : à dire dans le paquet)
+Mesures : 1 page(s), 6 mesure(s), 0 erreur(s), 2 signalement(s) à reprendre dans le paquet.
