@@ -8,7 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import generer_pilote as g
 
-SORTIE = Path(__file__).parent / "sortie"
+SORTIE = Path(__file__).resolve().parents[3] / "src/illustrations"
 
 def ecran(pictos):
     n = len(pictos)

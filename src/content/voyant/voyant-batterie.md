@@ -45,13 +45,22 @@ causes:
     explication: "Selon la notice Seat Ibiza, le témoin signale un dysfonctionnement de l'alternateur : la batterie n'est plus rechargée. Les notices Renault Clio 5 phase 2 et Dacia Sandero 3 associent le message « Panne électrique » à un problème du circuit de charge (alternateur…)."
     pieces:
       - alternateur
+format: 2
+illustration:
+  fichier: voyant-batterie-tableau-de-bord
+  alt: "Le voyant de charge de la batterie allumé en rouge au tableau de bord"
+  legende: "Le voyant de charge a la forme d’une batterie, avec ses bornes + et −. Allumé en rouge moteur tournant, il signale que la batterie n’est plus rechargée."
 ---
 
 ## Peut-on rouler avec le voyant de batterie allumé ?
 
-Verdict retenu en haut de page : {{verdict:batterie-rouge}}. Quand ce voyant s'allume moteur tournant, la batterie n'est plus rechargée normalement : selon la notice Seat Ibiza, elle se décharge ({{cite:notice-seat-ibiza|p. 302}}). Aucune des notices lues ne donne de distance à ne pas dépasser.
+{{repere:batterie-rouge}}
 
-Quatre des cinq notices lues imposent l'arrêt. La notice Peugeot 208 demande l'arrêt impératif du véhicule, stationné dans les meilleures conditions de sécurité, contact coupé ; si le frein de stationnement électrique ne fonctionne plus, elle demande d'immobiliser la voiture autrement : un rapport engagé en boîte manuelle, la position P en boîte automatique EAT6, une cale contre une roue en boîte EAT8 ou avec le sélecteur de marche ({{cite:notice-peugeot-208|p. 13}}). La notice Toyota Yaris demande d'arrêter immédiatement le véhicule dans un endroit sûr ({{cite:notice-toyota-yaris|p. 292}}). Pour Renault et Dacia, le voyant allumé sur route avec le témoin STOP et un signal sonore indique une surcharge ou une décharge du circuit électrique : arrêtez-vous ({{cite:notice-renault-clio-5|p. 137}}, {{cite:notice-dacia-sandero-3|p. 112}}).
+Quand ce voyant s'allume moteur tournant, la batterie n'est plus rechargée normalement : selon la notice Seat Ibiza, elle se décharge ({{cite:notice-seat-ibiza|p. 302}}). Aucune des notices lues ne donne de distance à ne pas dépasser.
+
+Quatre des cinq notices lues imposent l'arrêt. La notice Peugeot 208 demande l'arrêt impératif du véhicule, stationné dans les meilleures conditions de sécurité, contact coupé ; si le frein de stationnement électrique ne fonctionne plus, elle demande d'immobiliser la voiture autrement : un rapport engagé en boîte manuelle, la position P en boîte automatique EAT6, une cale contre une roue en boîte EAT8 ou avec le sélecteur de marche ({{cite:notice-peugeot-208|p. 13}}).
+
+La notice Toyota Yaris demande d'arrêter immédiatement le véhicule dans un endroit sûr ({{cite:notice-toyota-yaris|p. 292}}). Pour Renault et Dacia, le voyant allumé sur route avec le témoin STOP et un signal sonore indique une surcharge ou une décharge du circuit électrique : arrêtez-vous ({{cite:notice-renault-clio-5|p. 137}}, {{cite:notice-dacia-sandero-3|p. 112}}).
 
 La notice Seat Ibiza est la seule à laisser rouler : elle demande de se rendre immédiatement dans l'atelier spécialisé le plus proche, en éteignant tous les équipements électriques qui ne sont pas indispensables. L'encadré retient la consigne la plus prudente, l'arrêt ; si la notice de votre voiture permet de rejoindre l'atelier, éteignez ces équipements.
 
@@ -65,7 +74,9 @@ Les notices lues pour cette page sont celles de ces modèles ; pour une autre g�
 
 ## Voyant batterie rouge avant le démarrage : est-ce normal ?
 
-Oui. Selon la notice Peugeot 208, certains témoins rouges ou orange s'allument quelques secondes à la mise du contact et doivent s'éteindre dès le démarrage du moteur ({{cite:notice-peugeot-208|p. 12}}). La notice Seat Ibiza dit la même chose du témoin de batterie : il s'allume après la mise du contact et doit s'éteindre après le démarrage du moteur. Selon la notice Renault Clio 5 phase 2, il s'éteint quelques secondes après la mise sous contact ou le démarrage ({{cite:notice-renault-clio-5|p. 137}}).
+Oui. Selon la notice Peugeot 208, certains témoins rouges ou orange s'allument quelques secondes à la mise du contact et doivent s'éteindre dès le démarrage du moteur ({{cite:notice-peugeot-208|p. 12}}).
+
+La notice Seat Ibiza dit la même chose du témoin de batterie : il s'allume après la mise du contact et doit s'éteindre après le démarrage du moteur. Selon la notice Renault Clio 5 phase 2, il s'éteint quelques secondes après la mise sous contact ou le démarrage ({{cite:notice-renault-clio-5|p. 137}}).
 
 C'est donc le voyant qui reste allumé une fois le moteur démarré, ou qui s'allume en roulant, qui signale une panne : {{verdict:batterie-rouge}}.
 
@@ -90,6 +101,8 @@ Aucune des notices lues ne décrit de clignotement propre à ce voyant. La notic
 Pour une autre voiture, un voyant de charge qui clignote ou se rallume moteur tournant relève de la consigne de l'encadré : {{verdict:batterie-rouge}}. S'il s'est allumé puis éteint aussitôt, demandez l'avis d'un professionnel.
 
 ## Voyants STOP et batterie allumés ensemble
+
+{{repere:batterie-rouge}}
 
 Pour Renault et Dacia, c'est le cas décrit plus haut : le voyant de batterie allumé sur route avec le témoin STOP et un signal sonore signale une surcharge ou une décharge du circuit électrique, et le témoin STOP impose un arrêt impératif et immédiat ; il faut arrêter le moteur, ne pas le redémarrer et faire appel à un représentant de la marque ({{cite:notice-renault-clio-5|p. 136-137}}, {{cite:notice-dacia-sandero-3|p. 110-112}}). La notice lue est celle de la Clio 5 phase 2 : pour une Clio 3 ou une autre génération, c'est sa propre notice qui fait foi.
 

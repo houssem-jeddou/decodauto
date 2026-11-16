@@ -52,6 +52,11 @@ causes:
     explication: "Les notices Peugeot 208, Renault Clio 5 phase 2 et Dacia Sandero 3 signalent une défaillance du système d'antipollution ; selon la notice Seat Ibiza, l'alerte peut aussi venir d'un liquide AdBlue rajouté non conforme. Aucune notice ne nomme la pièce en cause : le diagnostic au garage le dit."
     pieces:
       - systeme-adblue
+format: 2
+illustration:
+  fichier: voyant-adblue-autonomie
+  alt: "Le voyant AdBlue allumé avec un message d’autonomie"
+  legende: "Exemple d’écran : sous 800 km d’autonomie, le message « XXX KM blocage remplir AdBlue » se répète (notices Renault Clio 5 phase 2 et Dacia Sandero 3)."
 ---
 
 ## Peut-on rouler avec le voyant AdBlue allumé ?
@@ -60,7 +65,9 @@ Tout dépend du message qui l'accompagne.
 
 **Réserve basse, avec un message d'autonomie, sans le voyant moteur** : {{verdict:adblue-reserve}}. Le voyant prévient que le réservoir d'AdBlue se vide : une fois l'autonomie affichée à zéro, le moteur ne redémarre plus. Faites l'appoint avant : les seuils de chaque marque sont détaillés plus bas.
 
-**Avec un message de défaut antipollution, sans le voyant moteur** : {{verdict:adblue-defaut}}. Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3 (voyants AdBlue et Service, messages « … à contrôler ») et Seat Ibiza (voyant AdBlue jaune avec la clé), le système d'antipollution est en défaut ; chez Renault et Dacia, un compte à rebours peut s'afficher avant que le démarrage soit bloqué : allez au garage au plus tôt. Le voyant Service ne suffit pas à le dire : sur la Citroën C3 à moteur 1.6 BlueHDi, le voyant AdBlue qui clignote avec le voyant Service annonce une réserve basse ({{cite:notice-citroen-c3|p. 12}}). Lisez le message affiché.
+**Avec un message de défaut antipollution, sans le voyant moteur** : {{verdict:adblue-defaut}}. Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3 (voyants AdBlue et Service, messages « … à contrôler ») et Seat Ibiza (voyant AdBlue jaune avec la clé), le système d'antipollution est en défaut ; chez Renault et Dacia, un compte à rebours peut s'afficher avant que le démarrage soit bloqué : allez au garage au plus tôt.
+
+Le voyant Service ne suffit pas à le dire : sur la Citroën C3 à moteur 1.6 BlueHDi, le voyant AdBlue qui clignote avec le voyant Service annonce une réserve basse ({{cite:notice-citroen-c3|p. 12}}). Lisez le message affiché.
 
 **Avec le voyant moteur** : c'est la consigne du [voyant moteur](/voyants/moteur/), plus prudente, qui s'applique : {{verdict:moteur-orange-fixe}}. Elle laisse repartir jusqu'au garage si la notice de votre voiture le permet, comme celle de la Peugeot 208 (voir plus bas).
 
@@ -87,7 +94,11 @@ La notice Toyota Yaris lue pour les autres pages du site ne décrit pas de moteu
 
 ## Défaut antipollution, démarrage impossible dans 1 100 km : que faire ?
 
-Ces messages sont ceux de la Peugeot 208, où le témoin AdBlue s'allume avec le voyant moteur ({{cite:notice-peugeot-208|p. 16}}) : la consigne retenue est donc celle du voyant moteur, la plus prudente : {{verdict:moteur-orange-fixe}}. Selon la notice, le message « Défaut antipollution » signale un dysfonctionnement du système d'antipollution ; si le défaut était passager, l'alerte disparaît au trajet suivant. S'il persiste pendant 50 km, il est confirmé : le témoin AdBlue clignote, et le message « Démarrage interdit dans X km » annonce la distance qui reste avant que le dispositif d'antidémarrage se déclenche, au plus tard après 1 100 km. La notice demande de faire vérifier la voiture par le réseau Peugeot ou un atelier qualifié ({{cite:notice-peugeot-208|p. 22}}) : elle permet donc de rouler jusqu'au réseau, à rejoindre sans attendre. La notice Citroën C3 décrit le même cas, avec en plus le voyant Service ({{cite:notice-citroen-c3|p. 13}}).
+{{repere:moteur-orange-fixe}}
+
+Ces messages sont ceux de la Peugeot 208, où le témoin AdBlue s'allume avec le voyant moteur ({{cite:notice-peugeot-208|p. 16}}) : la consigne retenue est donc celle du voyant moteur, la plus prudente : {{verdict:moteur-orange-fixe}}. Selon la notice, le message « Défaut antipollution » signale un dysfonctionnement du système d'antipollution ; si le défaut était passager, l'alerte disparaît au trajet suivant. S'il persiste pendant 50 km, il est confirmé : le témoin AdBlue clignote, et le message « Démarrage interdit dans X km » annonce la distance qui reste avant que le dispositif d'antidémarrage se déclenche, au plus tard après 1 100 km.
+
+La notice demande de faire vérifier la voiture par le réseau Peugeot ou un atelier qualifié ({{cite:notice-peugeot-208|p. 22}}) : elle permet donc de rouler jusqu'au réseau, à rejoindre sans attendre. La notice Citroën C3 décrit le même cas, avec en plus le voyant Service ({{cite:notice-citroen-c3|p. 13}}).
 
 Selon les notices Renault Clio 5 phase 2 et Dacia Sandero 3, les témoins AdBlue et Service s'allument avec les messages « Antipollution à contrôler », « Qualité AdBlue à contrôler » ou « Injection AdBlue à contrôler » : consultez un représentant de la marque le plus tôt possible. Le message « XXX KM blocage antipollution » indique qu'il reste moins de 800 km avant que le redémarrage soit impossible ; à « 0 KM », le moteur ne redémarre plus après la coupure du contact ({{cite:notice-renault-clio-5|p. 167}}, {{cite:notice-dacia-sandero-3|p. 139}}). Sans le voyant moteur, et tant que l'autonomie affichée n'est pas à 0 km, la consigne de l'encadré est : {{verdict:adblue-defaut}} ; à « 0 KM », c'est celle du démarrage impossible : {{verdict:adblue-demarrage-impossible}}.
 
