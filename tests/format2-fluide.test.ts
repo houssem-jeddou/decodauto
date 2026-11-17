@@ -1,5 +1,5 @@
 // Page fluide au format 2 (étape 11, partie technique du modèle ; demande de changement n° 30) : modèle (ordre de la charte
-// graphique §4 et de la charte éditoriale §4 : rôle, niveau, appoint, marche à suivre), fiche « Le fluide en bref » en carte
+// graphique §4 et de la charte éditoriale §4 : rôle, niveau, appoint, marche à suivre), fiche « L'essentiel » en carte
 // (composant « Fiches » de la charte), fiche du tutoriel, étapes et tableau du texte (élément unique), format 2 exigé (vague
 // C), contrôles d'aujourd'hui et du format 2, cas en échec dans les deux sens.
 // Page : le frontmatter de la page de démonstration tests/demo/format2/fluide/niveau-huile.md (rendue par Astro dans la
@@ -13,13 +13,14 @@ import * as cheerio from 'cheerio';
 import { dateDesDonnees } from './date-des-donnees.ts';
 import { controlerFichesPanneDossier, controlerPage } from '../src/lib/controle.ts';
 import { constatsExpressionsInterdites, constatsIdentifiants, constatsPartCitee, constatsTexteRedige, constatsTypographie } from '../scripts/lib/dist.ts';
-import { MODELES, modeleDeLaPage, pageFluideF2, refusFormatVagueB } from '../src/lib/modeles.ts';
+import { MODELES, modeleDeLaPage, pageFluideF2, refusFormat1 } from '../src/lib/modeles.ts';
 import { bandeauFormat2, piedFormat2 } from '../src/lib/format2.ts';
 import { INTITULES_FICHE_FLUIDE, TITRE_FICHE_FLUIDE, ficheFluideHtml, modeleFicheFluide } from '../src/lib/fiche-fluide.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
 import { AUTEUR_DES_EXEMPLES } from '../scripts/lib/controler-site.ts';
 import { lireFrontmatter } from '../scripts/lib/charger.ts';
 import { DOSSIER_PAGES_DEMO_FORMAT2 } from '../scripts/lib/demo-format2.ts';
+import { localiserPage } from '../scripts/lib/pages-redigees.ts';
 import { REPONSE_DIRECTE_MAX_MOTS, schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -86,11 +87,11 @@ describe('format 2 : page fluide (étape 11, partie technique du modèle)', () =
     const auFormat1 = { ...page, format: undefined } as PageEditoriale;
     assert.ok('absent' in modeleDeLaPage('fluide', auFormat1));
     assert.equal(MODELES.fluide, undefined);
-    assert.match(refusFormatVagueB('fluide', auFormat1) ?? '', /« fluide » est rédigée au format 2 \(vague C/);
-    assert.equal(refusFormatVagueB('fluide', page), undefined);
+    assert.match(refusFormat1('fluide', auFormat1) ?? '', /« fluide » est rédigée au format 2 \(vague C/);
+    assert.equal(refusFormat1('fluide', page), undefined);
     // Les autres types ne changent pas : panne et dossier refusés au format 1 (vague B), voyant admis.
-    assert.match(refusFormatVagueB('panne', { id: 'p', format: undefined }) ?? '', /vague B/);
-    assert.equal(refusFormatVagueB('voyant', { id: 'v', format: undefined }), undefined);
+    assert.match(refusFormat1('panne', { id: 'p', format: undefined }) ?? '', /vague B/);
+    assert.equal(refusFormat1('voyant', { id: 'v', format: undefined }), undefined);
   });
 
   test('page construite : contrôles d\'aujourd\'hui et du format 2 verts ; seule l\'empreinte absente est attendue', () => {
@@ -98,8 +99,8 @@ describe('format 2 : page fluide (étape 11, partie technique du modèle)', () =
     assert.ok(erreurs(constats(html)).includes('R4-VALIDATION-ABSENTE'));
   });
 
-  test('ordre de la charte (§4) : encadré, signature, transparence, Notices, illustration, sommaire, fiche du fluide, fiche du tutoriel, texte (étapes, tableau), pages liées, sources', () => {
-    const marques = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-provenance', 'data-illustration', 'data-sommaire', 'data-fiche-fluide', 'data-fiche-tutoriel', 'data-corps', 'data-tutoriel-etapes', 'data-element-unique="tableau"', 'data-sources'];
+  test('ordre de la charte (§4) : encadré, signature, transparence, Notices, illustration, sommaire, fiche du tutoriel, texte jusqu\'à la partie des étapes, fiche « L\'essentiel » (revue de la PR n° 79, I2), suite du texte (tableau), pages liées, sources ; sans étapes, la fiche précède le texte', () => {
+    const marques = ['data-encadre-decision', 'data-signature', 'data-ligne-transparence', 'data-provenance', 'data-illustration', 'data-sommaire', 'data-fiche-tutoriel', 'data-corps', 'data-tutoriel-etapes', 'data-fiche-fluide', 'data-element-unique="tableau"', 'data-sources'];
     const positions = marques.map((m) => html.indexOf(m));
     assert.ok(positions.every((p) => p >= 0), marques.filter((_, i) => positions[i] === -1).join(', '));
     assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'ordre de la page');
@@ -109,9 +110,18 @@ describe('format 2 : page fluide (étape 11, partie technique du modèle)', () =
     assert.equal($('[data-causes]').length, 0);
     assert.equal($('[data-tableau-notices]').length, 0);
     assert.ok($('[data-lien-notices]').toArray().every((a) => ($(a).attr('href') ?? '').startsWith('/voyants/huile/#da-notices-')));
+    // La fiche suit la partie du texte qui porte les étapes : juste avant le titre de la partie suivante.
+    assert.ok($('[data-fiche-fluide]').prev().is('[data-corps]') && $('[data-fiche-fluide]').prev().find('ol[data-tutoriel-etapes]').length === 1);
+    assert.equal($('[data-fiche-fluide]').next().is('[data-corps]') && $('[data-fiche-fluide]').next().children().first().is('h2#sous-le-mini'), true);
+    // Page fluide sans étapes (pas de tutoriel) : la fiche précède le texte, et il n'y a pas de fiche du tutoriel.
+    const sansTutoriel = { ...page, tutoriel: undefined } as PageEditoriale;
+    const corpsSansEtapes = CORPS.replace('<p>{{etapes}}</p>', '');
+    const autre = document(pageFluideF2(sansTutoriel, site, corpsSansEtapes), page);
+    assert.ok(autre.indexOf('data-fiche-fluide') < autre.indexOf('data-corps'));
+    assert.equal(cheerio.load(autre)('[data-fiche-tutoriel]').length, 0);
   });
 
-  test('fiche « Le fluide en bref » : composant « Fiches » de la charte (carte), trois lignes dans l\'ordre, tirées du contenu', () => {
+  test('fiche « L\'essentiel » : composant « Fiches » de la charte (carte), trois lignes dans l\'ordre, tirées du contenu', () => {
     const lignes = modeleFicheFluide(page as unknown as Parameters<typeof modeleFicheFluide>[0]);
     assert.deepEqual(lignes.map((l) => l.intitule), [INTITULES_FICHE_FLUIDE.normes, INTITULES_FICHE_FLUIDE.verifier, INTITULES_FICHE_FLUIDE.changer]);
     const p = page as unknown as { normes: string[]; comment_verifier: string; quand_changer: { texte: string } };
@@ -176,7 +186,10 @@ describe('format 2 : page fluide (étape 11, partie technique du modèle)', () =
     // Les autres types la refusent toujours (une vraie page de chaque type, à laquelle on l'ajoute).
     const vraies = { voyant: 'voyant/voyant-moteur', 'code-defaut': 'code-defaut/code-p0420', panne: 'panne/voiture-ne-demarre-pas', dossier: 'dossier/moteur-puretech' } as const;
     for (const [type, chemin] of Object.entries(vraies) as [keyof typeof vraies, string][]) {
-      const vraie = lireFrontmatter(await readFile(join(racine, 'src/content', `${chemin}.md`), 'utf8')) as Record<string, unknown>;
+      const [dossier, id] = chemin.split('/') as [string, string];
+      const fichier = await localiserPage(racine, dossier, id);
+      assert.ok(fichier !== undefined, chemin);
+      const vraie = lireFrontmatter(await readFile(join(racine, fichier), 'utf8')) as Record<string, unknown>;
       assert.ok(schemasPage[type].safeParse(vraie).success, type);
       const r = schemasPage[type].safeParse({ ...vraie, reponse_directe: 'Oui.' });
       const messages = r.success ? [] : r.error.issues.map((i) => i.message);

@@ -1,12 +1,20 @@
 ---
-# Page de démonstration du modèle fluide au format 2 (étape 11, partie technique du modèle) : jamais publiée, lue seulement
-# par la construction de démonstration du format 2 (DEMO_FORMAT2=1) et par les tests du modèle. Copie de l'exemple
-# « niveau d'huile » de la préparation de l'étape 11 (branche preparation/etape-11, exemples/fluide/niveau-huile.md, 4e6851f),
-# brouillon jamais validé. Seuls changent ce commentaire ; le lien vers la page mère « huile moteur », écrit en texte (cette
-# page n'est pas construite, le lien serait cassé : npm run liens) ; et la réponse directe, celle que l'exemple propose en
-# commentaire (règle 2c de la demande n° 30 : page informative, reponse_directe ouverte au type fluide). Sans empreinte (R4-VALIDATION-ABSENTE attendue, attendusPagesDemo).
-# Format tutoriel : fiche « Le fluide en bref », fiche du tutoriel, étapes {{etapes}}, tableau {{tableau}} (élément unique),
-# deux lignes de la base (huile-niveau, huile-pression-rouge) avec leur tableau des notices, illustration jauge-huile.
+# Brouillon, jamais validé. Page de démonstration du modèle fluide au format 2 (étape 11, partie technique du modèle) :
+# jamais publiée, lue seulement par la construction de démonstration du format 2 (DEMO_FORMAT2=1) et par les tests du
+# modèle. Sans empreinte (R4-VALIDATION-ABSENTE attendue, attendusPagesDemo).
+# Provenance : copie de l'exemple « niveau d'huile » de la préparation de l'étape 11 (branche preparation/etape-11,
+# exemples/fluide/niveau-huile.md, 4e6851f), brouillon jamais validé.
+# - Lignes 1 et 2 de l'encadré (niveau sous le mini, niveau au-dessus du maxi) : reprises mot pour mot des lignes 3 et 4
+#   saisies du dossier « moteur PureTech » (src/content/dossier/moteur-puretech.md), dont les extraits ont été relus le
+#   16/11/2026 et que Houssem a validées avec les exemples de la porte 10 le 16/11/2026 à 19 h 26. Ici, elles ne sont pas
+#   validées pour cette page.
+# - Lignes 3 et 4 : lignes huile-niveau et huile-pression-rouge de la base voyants, reprises de la base.
+# - Tout le reste (réponse directe, texte, fiches, tableau) : brouillon de l'exemple, jamais validé.
+# Changements par rapport à l'exemple : ce commentaire ; le lien vers la page mère « huile moteur », écrit en texte (page
+# pas construite, le lien serait cassé : npm run liens) ; la réponse directe, celle que l'exemple propose en commentaire
+# (règle 2c de la demande n° 30 ; l'ouverture de reponse_directe au type fluide attend l'accord de Houssem).
+# Format tutoriel : fiche du tutoriel avant le texte, étapes {{etapes}}, puis fiche « L'essentiel » après la partie qui
+# porte les étapes, tableau {{tableau}} (élément unique), illustration jauge-huile.
 id: niveau-huile
 title: "Niveau d'huile moteur : le vérifier à la jauge et faire l'appoint"
 h1: "Niveau d'huile moteur : comment le vérifier, et que faire s'il est trop bas ou trop haut ?"

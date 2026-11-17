@@ -1,9 +1,10 @@
 // ---------------------------------------------------------------------------------------------
-// Bloc propre aux pages fluides (étape 11, partie technique du modèle, demande de changement n° 21) : la fiche « Le fluide
-// en bref ». Elle affiche les trois champs du type fluide (docs/08 §2 : normes et spécifications ; comment vérifier ;
-// quand changer, sourcé), tirés du frontmatter, jamais saisis dans le HTML. Composant existant de la charte graphique
-// (§4, « Fiches » : carte, intitulé en gras au-dessus de sa valeur, rangées séparées d'un filet), comme « Le symptôme en
-// bref » et « Le texte en bref ». Les sources de « quand changer » vont dans « Sources » (calcul.ts,
+// Bloc propre aux pages fluides (étape 11, partie technique du modèle, demande de changement n° 21) : la fiche
+// « L'essentiel » (titre retenu à la revue de la PR n° 79, M5). Elle affiche les trois champs du type fluide, et rien
+// d'autre (docs/08 §2 : normes et spécifications ; comment vérifier ; quand changer, sourcé), tirés du frontmatter, jamais
+// saisis dans le HTML : ni le rôle du fluide, ni le niveau, ni l'appoint, qui sont dans le texte rédigé. Composant existant
+// de la charte graphique (§4, « Fiches » : carte, intitulé en gras au-dessus de sa valeur, rangées séparées d'un filet),
+// comme « Le symptôme en bref » et « Le texte en bref ». Les sources de « quand changer » vont dans « Sources » (calcul.ts,
 // sourcesDeLaPageCitees). Format 2 seul : le type fluide n'a pas de modèle au format 1 (vague C).
 // ---------------------------------------------------------------------------------------------
 import { fiche, type LigneDeFiche } from './fiche-panne.ts';
@@ -12,7 +13,7 @@ import { fiche, type LigneDeFiche } from './fiche-panne.ts';
 export const IDENTIFIANT_FICHE_FLUIDE = 'da-fiche-fluide';
 
 /** Titre de la fiche. */
-export const TITRE_FICHE_FLUIDE = 'Le fluide en bref';
+export const TITRE_FICHE_FLUIDE = 'L’essentiel';
 
 /** Intitulés de la fiche, dans l'ordre. */
 export const INTITULES_FICHE_FLUIDE = { normes: 'Normes et spécifications', verifier: 'Comment vérifier', changer: 'Quand changer' } as const;
@@ -33,7 +34,7 @@ export function modeleFicheFluide(page: PageFluide): LigneDeFiche[] {
   ];
 }
 
-/** Fiche « Le fluide en bref » (section repérée data-fiche-fluide, une ligne data-fiche-ligne par intitulé), en carte. */
+/** Fiche « L'essentiel » (section repérée data-fiche-fluide, une ligne data-fiche-ligne par intitulé), en carte. */
 export function ficheFluideHtml(lignes: readonly LigneDeFiche[]): string {
   return fiche('fiche-fluide', 'data-fiche-fluide', IDENTIFIANT_FICHE_FLUIDE, TITRE_FICHE_FLUIDE, lignes, { format2: true });
 }

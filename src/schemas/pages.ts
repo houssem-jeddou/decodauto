@@ -319,7 +319,8 @@ export const fluidePageSchema = z
   })
   .superRefine((page, ctx) => {
     // Page informative (demande de changement n° 30, règle 2c : « huiles et liquides ») : réponse directe admise ; le
-    // modèle l'exige (pageFluideF2).
+    // modèle l'exige (pageFluideF2). Demande de structure (dossier de la porte F1, docs/08) : attend l'accord de Houssem
+    // (PR n° 79), docs/08 à mettre à jour ensuite.
     reglesCommunes(page, ctx, true);
     exigerElement(page, ctx, 'tableau', 'le tableau', false);
   });

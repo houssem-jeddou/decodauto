@@ -877,8 +877,8 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
       // « quand ne pas le faire soi-même » ne manque jamais), historique sur une page dossier ; absents ailleurs.
       fiches: {
         ...('contexte' in page && { fichePanne: modeleFichePanne(page) }),
-        // Étape 11 : fiche « Le fluide en bref » sur une page fluide au format 2, absente ailleurs. Une page fluide n'est publiée
-        // qu'au format 2 (refusFormatVagueB, modeles.ts) ; le format 1 ne reste qu'aux pages de test (tests/fixtures).
+        // Étape 11 : fiche « L'essentiel » sur une page fluide au format 2, absente ailleurs. Une page fluide n'est publiée
+        // qu'au format 2 (refusFormat1, modeles.ts) ; le format 1 ne reste qu'aux pages de test (tests/fixtures).
         ...('normes' in page && page.format === 2 && { ficheFluide: modeleFicheFluide(page) }),
         ...(page.tutoriel !== undefined && { ficheTutoriel: modeleFicheTutoriel(page.tutoriel) }),
         ...('journal_modifications' in page && { historique: page.journal_modifications }),
@@ -1495,7 +1495,7 @@ export function controlerFicheTexte(html: string, fichier: string, attendu: { fi
  * Fiches et historique (étape 10, fiche-panne.ts), comme les construisent les modèles :
  *  - FICHE-PANNE-* : une page panne affiche une seule fiche du symptôme (data-fiche-panne), avec dans l'ordre chaque
  *    ligne du modèle (symptôme s'il est saisi, quand, moteurs concernés) au texte exact ; les autres pages n'en ont pas ;
- *  - FICHE-FLUIDE-* (étape 11) : une page fluide au format 2 affiche une seule fiche « Le fluide en bref » (data-fiche-fluide :
+ *  - FICHE-FLUIDE-* (étape 11) : une page fluide au format 2 affiche une seule fiche « L'essentiel » (data-fiche-fluide :
  *    normes et spécifications, comment vérifier, quand changer) au texte exact ; les autres pages n'en ont pas ;
  *  - FICHE-TUTORIEL-* : toute page au format tutoriel affiche une seule fiche du tutoriel (data-fiche-tutoriel : outils,
  *    durée, difficulté, quand ne pas le faire soi-même) ; une page qui n'est pas un tutoriel n'en a pas ;
@@ -1514,7 +1514,7 @@ export function controlerFichesPanneDossier(
   const lignesVoulues = (lignes: readonly LigneDeFiche[]): string => lignes.map((l) => `${normaliserTexte(l.intitule)} : ${normaliserTexte(l.valeur)}`).join('\n');
   const fiches: Array<{ attribut: string; code: string; nom: string; voulue: readonly LigneDeFiche[] | undefined; sans: string }> = [
     { attribut: 'data-fiche-panne', code: 'FICHE-PANNE', nom: 'la fiche du symptôme', voulue: attendu.fichePanne, sans: 'une page qui n\'est pas une page panne' },
-    { attribut: 'data-fiche-fluide', code: 'FICHE-FLUIDE', nom: 'la fiche « Le fluide en bref »', voulue: attendu.ficheFluide, sans: 'une page qui n\'est pas une page fluide' },
+    { attribut: 'data-fiche-fluide', code: 'FICHE-FLUIDE', nom: 'la fiche « L’essentiel »', voulue: attendu.ficheFluide, sans: 'une page qui n\'est pas une page fluide' },
     { attribut: 'data-fiche-tutoriel', code: 'FICHE-TUTORIEL', nom: 'la fiche du tutoriel', voulue: attendu.ficheTutoriel, sans: 'une page qui n\'est pas un tutoriel' },
   ];
   for (const { attribut, code, nom, voulue, sans } of fiches) {

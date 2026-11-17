@@ -161,7 +161,7 @@ export function modeleFicheTutoriel(tutoriel: Tutoriel): LigneDeFiche[] {
 /**
  * Format de lecture des fiches (demande de changement n° 30) : au format 2, la liste des lignes est une carte du corps de
  * la charte graphique (`<dl class="fiche">`, comme le pilote) ; au format 1, rien ne change. `fiche` sert aussi à la fiche
- * « Le fluide en bref » (fiche-fluide.ts).
+ * « L'essentiel » (fiche-fluide.ts).
  */
 export interface OptionsFiche {
   format2?: boolean;
