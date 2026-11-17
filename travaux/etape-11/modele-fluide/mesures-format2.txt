@@ -17,9 +17,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /codes-defaut/p0420/ | 320 | chargée | – | 431 | 621 | 1007 | 1398 | oui | – | 10332 | oui | 320 | 0
 /codes-defaut/p0420/ | 375 | chargée | – | 396 | 545 | 870 | 1202 | oui | – | 9114 | oui | 375 | 0
 /codes-defaut/p0420/ | 1366 | chargée | – | 309 | 375 | 558 | 755 | oui | – | 5938 | oui | 1366 | 0
-/huile-moteur/verifier-niveau/ | 320 | chargée | 470 | 601 | 729 | 2019 | 2579 | oui | 4406 | 10344 | oui | 320 | 0
-/huile-moteur/verifier-niveau/ | 375 | chargée | 424 | 538 | 646 | 1743 | 2226 | oui | 3943 | 9460 | oui | 375 | 0
-/huile-moteur/verifier-niveau/ | 1366 | chargée | 315 | 383 | 428 | 1062 | 1316 | oui | 2669 | 6015 | oui | 1366 | 0
+/huile-moteur/verifier-niveau/ | 320 | chargée | 470 | 601 | 729 | 2019 | 2579 | oui | 3704 | 10344 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | chargée | 424 | 538 | 646 | 1743 | 2226 | oui | 3311 | 9460 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 1366 | chargée | 315 | 383 | 428 | 1062 | 1316 | oui | 2269 | 6015 | oui | 1366 | 0
 /loi-montagne/ | 320 | chargée | – | 477 | 647 | 1526 | 1841 | oui | – | 9649 | oui | 320 | 0
 /loi-montagne/ | 375 | chargée | – | 440 | 588 | 1348 | 1624 | oui | – | 8489 | oui | 375 | 0
 /loi-montagne/ | 1366 | chargée | – | 308 | 374 | 848 | 1027 | oui | – | 5448 | oui | 1366 | 0
@@ -92,9 +92,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /codes-defaut/p0420/ | 320 | secours | – | 431 | 621 | 1007 | 1398 | oui | – | 10357 | oui | 320 | 0
 /codes-defaut/p0420/ | 375 | secours | – | 396 | 545 | 870 | 1202 | oui | – | 9164 | oui | 375 | 0
 /codes-defaut/p0420/ | 1366 | secours | – | 309 | 375 | 558 | 755 | oui | – | 5989 | oui | 1366 | 0
-/huile-moteur/verifier-niveau/ | 320 | secours | 470 | 601 | 729 | 2019 | 2579 | oui | 4406 | 10395 | oui | 320 | 0
-/huile-moteur/verifier-niveau/ | 375 | secours | 448 | 563 | 671 | 1767 | 2251 | oui | 3968 | 9485 | oui | 375 | 0
-/huile-moteur/verifier-niveau/ | 1366 | secours | 315 | 383 | 428 | 1062 | 1316 | oui | 2669 | 6015 | oui | 1366 | 0
+/huile-moteur/verifier-niveau/ | 320 | secours | 470 | 601 | 729 | 2019 | 2579 | oui | 3704 | 10395 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | secours | 448 | 563 | 671 | 1767 | 2251 | oui | 3335 | 9485 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 1366 | secours | 315 | 383 | 428 | 1062 | 1316 | oui | 2269 | 6015 | oui | 1366 | 0
 /loi-montagne/ | 320 | secours | – | 502 | 671 | 1551 | 1866 | oui | – | 9699 | oui | 320 | 0
 /loi-montagne/ | 375 | secours | – | 440 | 588 | 1348 | 1624 | oui | – | 8590 | oui | 375 | 0
 /loi-montagne/ | 1366 | secours | – | 308 | 374 | 848 | 1027 | oui | – | 5448 | oui | 1366 | 0

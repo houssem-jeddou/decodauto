@@ -1,5 +1,6 @@
 // Étape 11, modèle fluide : captures et mesures d'une page servie en local (construction de démonstration du format 2).
 // Jamais sur le site publié.
+// Largeurs : 320 × 640 (revue de la PR n° 79), 375 × 667 et 1366 × 800.
 // Usage : node capturer.cjs <base> <dossier de sortie> '<JSON : [[nom, adresse, [[sélecteur, suffixe], …]], …]>'
 // Chromium préinstallé, police du système Inter. Police chargée : feuille servie en font-display: block, seconde visite ;
 // police de secours : /polices/ refusé. PNG sans perte ; échelle 2 (écran, encadré, éléments), échelle 1 (page entière).
@@ -44,10 +45,8 @@ const mesurer = (page) => page.evaluate(() => {
   const mesures = {};
   for (const [nom, adresse, elements] of PAGES) {
     for (const [police, secours] of [['chargee', false], ['secours', true]]) {
-      let page = await ouvrir(nav, base + adresse, 320, 640, 1, secours);
-      mesures[`${nom}-320-${police}`] = await mesurer(page);
-      await page.close();
-      for (const [w, h] of [[375, 667], [1366, 800]]) {
+      let page;
+      for (const [w, h] of [[320, 640], [375, 667], [1366, 800]]) {
         const cle = `${nom}-${w}-${police}`;
         page = await ouvrir(nav, base + adresse, w, h, 1, secours);
         mesures[cle] = await mesurer(page);
