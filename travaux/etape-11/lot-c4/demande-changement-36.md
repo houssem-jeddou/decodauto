@@ -1,6 +1,9 @@
 # Demande de changement n° 36 : verdict d'une obligation légale (contrôle technique, pneus)
 
-> **Brouillon, jamais validé. Proposée, à accepter par Houssem.** Rédigée le 17/11/2026 avec le lot C4 de la vague C
+> **Acceptée par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis)** avec les lots C2, C3 et C4 : « … et j'accepte la demande de changement n° 36. » (lignes de validation des deux pages du lot C4). Appliquée par la pull
+> request des lots C2, C3 et C4.
+>
+> Historique : proposée. Rédigée le 17/11/2026 avec le lot C4 de la vague C
 > (étape 11), réécrite après la revue indépendante du lot C4 (constats B1 et I2) sur décision du pilotage (règle 6). Les
 > deux pages du lot appliquent déjà, en brouillon, les niveaux proposés ici ; rien n'est validé avant l'acceptation.
 > Reprend l'idée reportée « définition du verdict « Non, ne poursuivez pas votre trajet » pour une obligation légale »

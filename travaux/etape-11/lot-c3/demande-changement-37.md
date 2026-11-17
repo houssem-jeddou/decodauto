@@ -1,6 +1,9 @@
 # Demande de changement n° 37 : requête principale des pages « liquide de refroidissement » et « liquide de frein »
 
-> **Proposée, à accepter par Houssem.** Proposée le 17/11/2026 avec le lot C3 de la vague C (étape 11), sur le modèle de
+> **Acceptée par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis)** avec les lots C2, C3 et C4 : « Donc je valide les lots C2, C3 et C4. », en réponse au message du pilotage qui portait la ligne de validation du paquet C3 avec la demande n° 37. Appliquée par la pull
+> request des lots C2, C3 et C4.
+>
+> Historique : proposée. Proposée le 17/11/2026 avec le lot C3 de la vague C (étape 11), sur le modèle de
 > la demande n° 34 (page « fumée à l'échappement »). Le changement est écrit sur la branche `etape-11/lot-c3` et
 > n'entre dans `main` qu'avec la pull request du lot, après acceptation. Numéro 37 : le n° 35 est le report du cas 3 de
 > `docs/09` (page « huile moteur », lot C2) ; le n° 36, le verdict d'une obligation légale (pneus usés, lot C4), numéros

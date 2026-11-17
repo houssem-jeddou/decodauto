@@ -1,6 +1,9 @@
 # Demande de changement n° 35 : report du cas 3 de `docs/09` (tableau des viscosités et 85W140, page « huile moteur »)
 
-> **Proposée, à accepter par Houssem.** Rédigée le 17/11/2026 avec le lot C2 de la vague C (étape 11), après la revue
+> **Acceptée par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis)** avec les lots C2, C3 et C4 : « Donc je valide les lots C2, C3 et C4. », en réponse au message du pilotage qui portait la ligne de validation du paquet C2 avec la demande n° 35. Appliquée par la pull
+> request des lots C2, C3 et C4.
+>
+> Historique : proposée. Rédigée le 17/11/2026 avec le lot C2 de la vague C (étape 11), après la revue
 > indépendante de la page « huile moteur » (constat I1) et sur décision du pilotage (règle 6). Rien n'est changé dans
 > `docs/` par ce lot : `docs/09` ne sera modifié qu'après l'acceptation, par la pull request de la copie `docs/`.
 
