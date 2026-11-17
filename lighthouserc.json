@@ -34,7 +34,12 @@
         "http://localhost/voiture-qui-broute/index.html",
         "http://localhost/bruit-moteur/index.html",
         "http://localhost/fumee-echappement/index.html",
-        "http://localhost/huile-moteur/verifier-niveau/index.html"
+        "http://localhost/huile-moteur/verifier-niveau/index.html",
+        "http://localhost/huile-moteur/index.html",
+        "http://localhost/liquide-de-refroidissement/index.html",
+        "http://localhost/liquide-de-frein/index.html",
+        "http://localhost/usure-des-pneus/index.html",
+        "http://localhost/contre-visite-controle-technique/index.html"
       ],
       "numberOfRuns": 3,
       "settings": {

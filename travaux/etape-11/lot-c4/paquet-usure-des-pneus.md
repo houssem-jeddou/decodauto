@@ -9,7 +9,7 @@
 > corrections sur décision du pilotage (règle 6), §0. **Ce qui a changé après la revue n'a pas été relu par un relecteur
 > indépendant.** Le niveau de la ligne 1 s'appuie sur la **demande de changement n° 36** (règle 1), proposée.
 
-Page : `exemples/pneus/usure-des-pneus.md`, adresse `/usure-des-pneus/` (plan du site, vague C ; pages liées :
+Page : `src/content/pneus/usure-des-pneus.md` depuis la pull request des lots C2, C3 et C4 (`exemples/pneus/usure-des-pneus.md` à la validation), adresse `/usure-des-pneus/` (plan du site, vague C ; pages liées :
 contre-visite, loi montagne, voyant de pression des pneus, pression des pneus), modèle pneus et obligations au format 2,
 sujet « usure ».
 

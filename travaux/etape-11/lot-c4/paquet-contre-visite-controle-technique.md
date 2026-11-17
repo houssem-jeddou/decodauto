@@ -10,7 +10,7 @@
 > été relu par un relecteur indépendant.** Les niveaux des trois lignes dépendent de la **demande de changement n° 36**
 > (`demande-changement-36.md`, réécrite), proposée.
 
-Page : `exemples/pneus/contre-visite-controle-technique.md`, adresse `/contre-visite-controle-technique/` (plan du site,
+Page : `src/content/pneus/contre-visite-controle-technique.md` depuis la pull request des lots C2, C3 et C4 (`exemples/pneus/contre-visite-controle-technique.md` à la validation), adresse `/contre-visite-controle-technique/` (plan du site,
 vague C ; pages liées : voyant moteur, voyant airbag, voyant ABS et ESP, usure des pneus), modèle pneus et obligations
 au format 2, sujet « contrôle technique ».
 

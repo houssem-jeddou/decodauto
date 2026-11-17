@@ -10,7 +10,7 @@
 > « à corriger », dont le bloquant B1 sur cette page ; corrections faites sur décision du pilotage (règle 6), §0. **Ce
 > qui a changé après la revue n'a pas été relu par un relecteur indépendant.**
 
-Page : `exemples/fluide/liquide-de-frein.md`, adresse `/liquide-de-frein/` (plan du site, vague C ; page liée : voyant
+Page : `src/content/fluide/liquide-de-frein.md` depuis la pull request des lots C2, C3 et C4 (`exemples/fluide/liquide-de-frein.md` à la validation), adresse `/liquide-de-frein/` (plan du site, vague C ; page liée : voyant
 frein), modèle fluide au format 2.
 
 - **Requête principale** : « liquide de frein » (31 600 recherches par mois), au lieu de « liquide de frein voiture »

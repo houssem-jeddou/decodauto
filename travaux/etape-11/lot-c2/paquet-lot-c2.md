@@ -13,7 +13,7 @@
 > corrections (§0) sont faites sur décision du pilotage (règle 6). **Ce qui a changé après la revue n'a pas été relu par
 > un relecteur indépendant.**
 
-Page : `exemples/fluide/huile-moteur.md`, adresse `/huile-moteur/` (plan du site, vague C, page mère des pages 5W30,
+Page : `src/content/fluide/huile-moteur.md` depuis la pull request des lots C2, C3 et C4 (`exemples/fluide/huile-moteur.md` à la validation), adresse `/huile-moteur/` (plan du site, vague C, page mère des pages 5W30,
 5W40, 10W40 et niveau d'huile ; pages liées : voyant huile, moteur PureTech), modèle fluide au format 2.
 
 - **Title** : « Huile moteur, vidange : quelle huile mettre et quand vidanger ? » (requête principale « huile moteur

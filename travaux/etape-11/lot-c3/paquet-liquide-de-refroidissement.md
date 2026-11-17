@@ -11,7 +11,7 @@
 > « à corriger » ; corrections faites sur décision du pilotage (règle 6), §0. **Ce qui a changé après la revue n'a pas
 > été relu par un relecteur indépendant.**
 
-Page : `exemples/fluide/liquide-de-refroidissement.md`, adresse `/liquide-de-refroidissement/` (plan du site, vague C ;
+Page : `src/content/fluide/liquide-de-refroidissement.md` depuis la pull request des lots C2, C3 et C4 (`exemples/fluide/liquide-de-refroidissement.md` à la validation), adresse `/liquide-de-refroidissement/` (plan du site, vague C ;
 page liée : moteur qui surchauffe), modèle fluide au format 2.
 
 - **Requête principale** : « liquide de refroidissement » (31 600 recherches par mois), au lieu de « liquide de
