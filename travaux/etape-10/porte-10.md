@@ -1,5 +1,17 @@
 # Porte de sortie de l'étape 10 (vague B) : dossier de vérification
 
+> **Validé par Houssem le 17/11/2026 à 10 h 11**, mot pour mot sur la ligne de validation du §4 : « Je valide la porte de
+> l'étape 10 sur les 11 pages de la vague B en ligne. Je confirme que mon « Je valide tout ! » du 17/11 à 7 h 39 couvrait
+> la ligne de validation de chaque paquet (F3, B2, B3, B4) et la demande n° 33. Je ratifie l'ouverture de la vague B et
+> la mise en ligne du lot B1 (PR #76), faites sur ma délégation de la nuit, dont le passage avait été écrit sur sa branche
+> avant cette délégation. J'accepte : que les revues indépendantes des lots B2 à B4 aient été faites sur leurs branches
+> avant les pull requests, leurs corrections n'étant pas relues ; que la liste de recette de l'étape 9 n'ait été repassée
+> point par point que pour le lot B1, les lots B2 à B4 l'étant par leur recette, la CI et la relecture en ligne ; les
+> exceptions de six écrans (nettoyer le FAP, perte de puissance) ; le passage « Pousser la voiture… » de « voiture qui ne
+> démarre pas » tel qu'il est. Restent à faire : le rendu sur un vrai téléphone (par moi), l'indexation des 5 pages
+> restantes et la soumission à Bing (§3). » **L'étape 10 est fermée.** Le dossier ci-dessous est celui qu'il a validé
+> (82b41d1), inchangé.
+
 **État : dossier du 17/11/2026 (matin), après la fusion des quatre lots de la vague B (PR #76, #80, #81, #82),
 relevé sur `main` à b1c7d57 (fusion de la PR #82), dont le passage de la CI (44043161687, déploiement et production
 compris) sert de preuve. La PR #79 (partie technique du modèle fluide, sans page publiée) a été fusionnée ensuite
