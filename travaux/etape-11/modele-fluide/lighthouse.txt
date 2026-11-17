@@ -1,0 +1,3 @@
+Lighthouse mobile, 3 passages, médianes (npx lhci autorun, lighthouserc-demo-format2.json réduit à la page de démonstration du fluide), construction de démonstration du format 2, 17/11/2026.
+
+/huile-moteur/verifier-niveau/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 905 ms, TBT 0 ms
