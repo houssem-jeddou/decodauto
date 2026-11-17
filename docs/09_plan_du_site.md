@@ -62,8 +62,8 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 | huile-5w40 | `/huile-moteur/5w40/` | fluide | C | huile 5w40 | 14 (9) | 22 752 | huile-moteur | huile-5w30 |
 | huile-10w40 | `/huile-moteur/10w40/` | fluide | C | huile 10w40 | 9 (5) | 12 956 | huile-moteur | – |
 | niveau-huile | `/huile-moteur/verifier-niveau/` | fluide | C | niveau d huile moteur | 14 (14) | 7 268 | huile-moteur | bruit-moteur, moteur-puretech, voyant-huile |
-| liquide-de-refroidissement | `/liquide-de-refroidissement/` | fluide | C | liquide de refroidissement voiture | 22 (12) | 35 076 | – | surchauffe-moteur |
-| liquide-de-frein | `/liquide-de-frein/` | fluide | C | liquide de frein voiture | 10 (4) | 9 796 | – | voyant-frein |
+| liquide-de-refroidissement | `/liquide-de-refroidissement/` | fluide | C | liquide de refroidissement | 22 (12) | 35 076 | – | surchauffe-moteur |
+| liquide-de-frein | `/liquide-de-frein/` | fluide | C | liquide de frein | 10 (4) | 9 796 | – | voyant-frein |
 
 ## 4. Pneus et obligations
 
@@ -100,7 +100,7 @@ Les deux revues indépendantes recommandent de garder les cas 1 à 10, validés 
 |---|---|---|---|
 | 1 | Voyant température et voyant liquide de refroidissement : 9 mots-clés de la vague A (8 216 / mois ; le neuvième, « voyant liquide de refroidissement », est une variante non comptée, ajoutée par la demande de changement n° 16), dont « voyant temperature moteur » | surchauffe-moteur (vague B) | C'est la règle de 02 et de 05. Ces mots-clés seront servis vers le 07/11. En attendant, l'outil voyants présente ce voyant dès la vague A. |
 | 2 | « temoin pneu », « temoins pneu » (6 320) | usure-des-pneus | Bloc d'origine dans 05. L'intention est ambiguë : elle peut aussi viser le voyant de pression, d'où un lien vers voyant-pression-pneus. |
-| 3 | 15W40, 20W50, SAE 30, 0W40, 10W50, 10W60, 85W140 | huile-moteur (tableau des viscosités) | 02 ne prévoit que 3 pages de viscosité. La page devra préciser que la 85W140 est une huile de transmission, pas une huile moteur. |
+| 3 | 15W40, 20W50, SAE 30, 0W40, 10W50, 10W60, 85W140 | huile-moteur (tableau des viscosités) | 02 ne prévoit que 3 pages de viscosité. La page devra préciser que la 85W140 est une huile de transmission, pas une huile moteur. **Reporté** (demande de changement n° 35, acceptée par Houssem le 17/11/2026) : tableau des viscosités et 85W140 attendent une source de première main admise (notice Toyota Yaris) ; d'ici là, la page dit, grade par grade, ce que disent les notices lues, et rien de la 85W140 ; revu au plus tard à la prochaine revue de la page (17/11/2027). |
 | 4 | « vanne egr 1.6 hdi » (3 160) et les voyants EGR | voyant-moteur | Conforme à 05 (« Couvert par la page du voyant »). |
 | 5 | « batterie à plat » et ses variantes (12) | voiture-ne-demarre-pas | Règle de 02. Exception : « recharger une batterie à plat » va sur batterie-recharger. |
 | 6 | « controle technique voyant moteur », « voyant moteur controle technique » | voyant-moteur | La recherche part du voyant. La page contre-visite reçoit un lien. |

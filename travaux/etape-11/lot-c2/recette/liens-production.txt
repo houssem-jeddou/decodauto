@@ -1,0 +1,7 @@
+Brouillon, jamais validé (après la revue indépendante du 17/11, non relu par un relecteur indépendant). npm run liens (construction de production), lot C2.
+
+> decodauto@0.0.0 liens
+> node scripts/liens.ts
+
+Liens : 33 page(s), 1138 lien(s) interne(s) vérifié(s), 436 externe(s) non vérifié(s), 0 problème(s).
+FIN 0

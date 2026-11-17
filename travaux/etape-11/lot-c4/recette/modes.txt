@@ -1,0 +1,6 @@
+Brouillon, jamais validé. npm run verifier:modes, les quatre combinaisons du mode d'indexation, lot C4 après la revue (17/11).
+OK     variable absente + drapeau false → noindex
+OK     variable absente + drapeau true → noindex
+OK     variable "true" + drapeau false → noindex
+OK     variable "true" + drapeau true → indexable
+FIN 0

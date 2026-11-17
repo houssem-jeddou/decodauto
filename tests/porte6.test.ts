@@ -22,6 +22,27 @@ const plan = JSON.parse(await readFile(join(racine, 'data/plan-du-site.json'), '
 const editorialesA = plan.filter((p) => p.vague === 'A' && p.type !== 'socle') as { id: string; type: TypePage; vague: string }[];
 const typesVagueA = [...new Set(editorialesA.map((p) => p.type))].sort();
 const empreinte = (...args: string[]): string => execFileSync(execPath, ['scripts/empreinte.ts', ...args], { cwd: racine, encoding: 'utf8' }).trim().split('\n').at(-1) ?? '';
+const parId = new Map(plan.map((p) => [p.id, p]));
+
+/**
+ * Contrôle d'une page rédigée d'un type de la vague A. Seules les pages de la vague A relèvent de la porte de l'étape 6 :
+ * les pages du même type des vagues suivantes (les pneus de la vague C, étape 11, lot C4) sont contrôlées par
+ * R4-VALIDATION-ABSENTE à la construction et par la règle de passage (travaux/etape-8/regle-de-passage.md), pas ici.
+ * Changement à valider par Houssem avec le lot C4 (décision du pilotage du 17/11/2026, règle 6 ; paquet du lot C4). Renvoie « ignoree »
+ * pour une page d'une autre vague, « controlee » sinon ; lève une erreur si la page de la vague A ne passe pas.
+ */
+function controlerPageRedigee(chemin: string, texte: string, type: TypePage): 'ignoree' | 'controlee' {
+  const id = /^id: *(\S+)\s*$/m.exec(texte)?.[1];
+  const page = id === undefined ? undefined : parId.get(id);
+  assert.ok(page !== undefined, `${chemin} : identifiant absent du plan`);
+  assert.equal(page.type, type, `${chemin} : la page ${id} est de type ${page.type} dans le plan`);
+  if (page.vague !== 'A') return 'ignoree';
+  assert.equal(chemin, `${chemin.startsWith('exemples/') ? 'exemples' : 'src/content'}/${type}/${id}.md`, `${chemin} : le nom du fichier doit être l'identifiant de la page`);
+  const validation = /^validation: *([0-9a-f]{64})\s*$/m.exec(texte)?.[1];
+  assert.ok(validation !== undefined, `${chemin} : encadré sans empreinte de validation`);
+  assert.equal(empreinte(chemin), validation, `${chemin} : l'encadré a changé depuis la validation de Houssem`);
+  return 'controlee';
+}
 
 describe("porte de sortie de l'étape 6", () => {
   test('chaque page éditoriale de la vague A a un modèle pour son type, outil voyants compris (demande de changement n° 11)', () => {
@@ -35,26 +56,26 @@ describe("porte de sortie de l'étape 6", () => {
   });
 
   test("chaque type de la vague A a un exemple rédigé, du bon type, dont l'encadré n'a pas changé depuis l'empreinte versée après la validation de Houssem", async () => {
-    const parId = new Map(plan.map((p) => [p.id, p]));
     for (const type of typesVagueA) {
       // Une page rédigée est dans exemples/ ou, après le passage (livrable 8.3.0), dans src/content : même contrôle des deux côtés.
       const fichiers = await pagesDuType(racine, type);
       let controles = 0;
       for (const chemin of fichiers) {
-        const texte = await readFile(join(racine, chemin), 'utf8');
-        controles += 1;
-        const id = /^id: *(\S+)\s*$/m.exec(texte)?.[1];
-        const page = id === undefined ? undefined : parId.get(id);
-        assert.ok(page !== undefined, `${chemin} : identifiant absent du plan`);
-        assert.equal(page.type, type, `${chemin} : la page ${id} est de type ${page.type} dans le plan`);
-        assert.equal(page.vague, 'A', `${chemin} : la page ${id} n'est pas de la vague A`);
-        assert.equal(chemin, `${chemin.startsWith('exemples/') ? 'exemples' : 'src/content'}/${type}/${id}.md`, `${chemin} : le nom du fichier doit être l'identifiant de la page`);
-        const validation = /^validation: *([0-9a-f]{64})\s*$/m.exec(texte)?.[1];
-        assert.ok(validation !== undefined, `${chemin} : encadré sans empreinte de validation`);
-        assert.equal(empreinte(chemin), validation, `${chemin} : l'encadré a changé depuis la validation de Houssem`);
+        if (controlerPageRedigee(chemin, await readFile(join(racine, chemin), 'utf8'), type) === 'controlee') controles += 1;
       }
-      assert.ok(controles > 0, `${type} : aucun exemple rédigé`);
+      assert.ok(controles > 0, `${type} : aucun exemple rédigé de la vague A`);
     }
+  });
+
+  test("une page de la vague A sans empreinte échoue toujours ; une page d'une autre vague du même type est laissée à R4-VALIDATION-ABSENTE", async () => {
+    const chemin = 'src/content/pneus/pression-des-pneus.md';
+    const texte = await readFile(join(racine, chemin), 'utf8');
+    assert.match(texte, /^validation: *[0-9a-f]{64}\s*$/m, 'la page de référence doit porter une empreinte');
+    const sansEmpreinte = texte.replace(/^validation: *[0-9a-f]{64}\s*$/m, '');
+    assert.throws(() => controlerPageRedigee(chemin, sansEmpreinte, 'pneus'), /encadré sans empreinte de validation/);
+    const autreVague = sansEmpreinte.replace(/^id: *pression-des-pneus\s*$/m, 'id: usure-des-pneus');
+    assert.equal(parId.get('usure-des-pneus')?.vague, 'C');
+    assert.equal(controlerPageRedigee('exemples/pneus/usure-des-pneus.md', autreVague, 'pneus'), 'ignoree');
   });
 
   test('les textes affichés de la charte (ligne de transparence, section « Méthode ») portent l’empreinte validée', async () => {

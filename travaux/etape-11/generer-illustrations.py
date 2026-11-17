@@ -7,6 +7,30 @@ traits clairs, ambre pour « regardez ici »). Brouillon, jamais validé.
   ne situe pas ces pièces sur un moteur donné : leur emplacement figure sur le schéma du compartiment moteur de la
   notice. Lecture de la jauge et repères : notices Renault Clio 5 phase 2 p. 331, Dacia Sandero 3 p. 294, Peugeot 208
   p. 166, Citroën C3 p. 112-113, Seat Ibiza p. 295 (relues à l'écran le 17/11/2026).
+- huile-moteur-choisir (page « huile moteur ») : à gauche, le plan ou document d'entretien de la voiture, qui donne
+  l'huile du moteur ; à droite, l'étiquette d'un bidon sans marque, où l'on retrouve la norme demandée (en ambre), la
+  classe ACEA et le grade. Le dessin n'explique pas le grade (aucune source admise lue) et ne montre aucune marque
+  d'huile. Notices : Peugeot 208 p. 166, Citroën C3 p. 113, Renault Clio 5 phase 2 p. 333, Dacia Sandero 3 p. 296,
+  Seat Ibiza p. 293 (relues à l'écran le 17/11/2026, vers 11 h 50).
+- liquide-refroidissement-vase (page « liquide de refroidissement ») : à gauche, le vase d'expansion (grand bocal, deux
+  départs de durite, bouchon à visser), avec ses repères MAX et MIN et le niveau lu entre les deux ; à droite, les deux consignes : niveau lu moteur froid
+  (vert), bouchon jamais ouvert moteur chaud (ambre). Le liquide est dessiné sans couleur de marque (seule la notice
+  Seat nomme une couleur). Notices : Peugeot 208 p. 167, Citroën C3 p. 113, Renault Clio 5 phase 2 p. 334-335, Dacia
+  Sandero 3 p. 298, Seat Ibiza p. 298 (relues à l'écran le 17/11/2026, vers 12 h 30).
+- liquide-frein-reservoir (page « liquide de frein ») : à gauche, le petit réservoir posé sur le maître-cylindre, son
+  bouchon rond, ses repères MAX et MIN et le niveau lu à travers la paroi ; à droite, le niveau normal (vert) et l'alerte (ambre) :
+  sous le MINI, ou en baisse rapide, renvoi à l'encadré. Notices : Peugeot 208 p. 166, Citroën C3 p. 113, Renault
+  Clio 5 phase 2 p. 336-337, Dacia Sandero 3 p. 299, Seat Ibiza p. 299 (relues à l'écran le 17/11/2026, vers 12 h 30).
+- usure-pneu-temoin (page « usure des pneus ») : coupe de la bande de roulement, à gauche neuve (témoin d'usure en
+  retrait au fond de la rainure), à droite usée (bande au niveau du témoin : 1,6 mm, en ambre) ; en bas, le repère du
+  flanc, « TWI » ou un triangle. Notices : Peugeot 208 p. 169, Citroën C3 p. 115, Renault Clio 5 phase 2 p. 346, Dacia
+  Sandero 3 p. 307, Seat Ibiza p. 308 (relues à l'écran le 17/11/2026, vers 12 h 55) ; arrêté du 18 juillet 2019,
+  article 5.
+- contre-visite-delais (page « contre-visite ») : frise du jour du contrôle à deux mois ; défaillances majeures (S),
+  deux mois pour réparer et repasser (orange, couleur de « Non, ne poursuivez pas votre trajet ») ; défaillance critique
+  (R), valable le seul jour du contrôle (rouge, couleur de « Non, arrêtez-vous immédiatement ») ; contre-visite
+  dans les deux mois ; au-delà, contrôle complet. Arrêté du 18 juin 1991, articles 7 et 8 (relus à l'écran le
+  17/11/2026, vers 13 h 15).
 
 Contraintes de `illustrationEnLigne` : un seul <svg> racine avec viewBox ; ni script, ni foreignObject, ni image, ni
 use, ni lien, ni attribut on*, ni href, ni url(), ni @import ; textes de 24 unités au moins (12 px à 375 px).
@@ -64,8 +88,131 @@ def niveau_huile_jauge() -> str:
     return "".join(p)
 
 
+def huile_moteur_choisir() -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
+    # --- À gauche : le plan d'entretien (livret ouvert).
+    p.append(texte(40, 62, "Votre voiture", taille=24, poids=600, couleur=DOUX, ancre="start"))
+    p.append('<path d="M60 96 L168 110 L168 266 L60 252 Z" fill="#1b222b" stroke="#3a4553" stroke-width="3" stroke-linejoin="round"/>')
+    p.append('<path d="M276 96 L168 110 L168 266 L276 252 Z" fill="#232c37" stroke="#3a4553" stroke-width="3" stroke-linejoin="round"/>')
+    for y in (138, 162, 186):
+        p.append(f'<line x1="78" y1="{y}" x2="150" y2="{y + 10}" stroke="#3a4553" stroke-width="6" stroke-linecap="round"/>')
+    p.append(f'<rect x="186" y="150" width="72" height="30" rx="8" fill="none" stroke="{AMBRE}" stroke-width="5"/>')
+    p.append(texte(168, 302, "plan d'entretien", taille=24, poids=700, couleur=TEXTE))
+    # Flèche vers le bidon.
+    p.append(f'<path d="M300 182 L346 182" stroke="{AMBRE}" stroke-width="6" stroke-linecap="round"/>')
+    p.append(f'<path d="M336 170 L350 182 L336 194" fill="none" stroke="{AMBRE}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>')
+    # --- À droite : l'étiquette du bidon, sans marque.
+    p.append(texte(372, 62, "Sur le bidon", taille=24, poids=600, couleur=DOUX, ancre="start"))
+    p.append('<path d="M372 104 L540 104 L540 92 Q540 84 548 84 L572 84 Q580 84 580 92 L580 104 L600 104 L600 280 Q600 290 590 290 L382 290 Q372 290 372 280 Z" fill="#1b222b" stroke="#3a4553" stroke-width="3" stroke-linejoin="round"/>')
+    p.append(f'<rect x="392" y="126" width="188" height="42" rx="10" fill="#232c37" stroke="{AMBRE}" stroke-width="5"/>')
+    p.append(texte(486, 156, "norme", taille=24, poids=700, couleur=AMBRE))
+    p.append('<rect x="392" y="180" width="188" height="38" rx="10" fill="#232c37"/>')
+    p.append(texte(486, 208, "ACEA", taille=24, poids=700, couleur="#c9d1db"))
+    p.append('<rect x="392" y="230" width="188" height="38" rx="10" fill="#232c37"/>')
+    p.append(texte(486, 258, "grade", taille=24, poids=700, couleur="#c9d1db"))
+    p.append("</svg>")
+    return "".join(p)
+
+
+
+def reperes(p, x, haut, bas):
+    """Repères MAX et MIN gravés sur la paroi, à droite du réservoir."""
+    for yy, nom in ((haut, "MAX"), (bas, "MIN")):
+        p.append(f'<line x1="{x - 34}" y1="{yy}" x2="{x + 10}" y2="{yy}" stroke="{TEXTE}" stroke-width="4" stroke-linecap="round"/>')
+        p.append(texte(x + 18, yy + 9, nom, taille=24, poids=700, ancre="start"))
+
+
+def liquide_refroidissement_vase() -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
+    p.append(texte(40, 62, "Vase d'expansion", taille=24, poids=600, couleur=DOUX, ancre="start"))
+    # Vase : grand bocal translucide, deux départs de durite en bas, bouchon à visser en haut.
+    p.append('<rect x="60" y="110" width="190" height="170" rx="30" fill="#1b222b" stroke="#9aa5b1" stroke-width="4"/>')
+    p.append('<rect x="66" y="176" width="178" height="98" rx="24" fill="#5b6b7d" opacity=".75"/>')
+    p.append(f'<line x1="66" y1="176" x2="244" y2="176" stroke="{VERT}" stroke-width="5" stroke-linecap="round"/>')
+    p.append('<path d="M96 280 L96 312 M214 280 L214 312" stroke="#3a4553" stroke-width="16" stroke-linecap="round"/>')
+    p.append(f'<rect x="120" y="82" width="70" height="32" rx="10" fill="#232c37" stroke="{AMBRE}" stroke-width="5"/>')
+    for x in (134, 148, 162, 176):
+        p.append(f'<line x1="{x}" y1="88" x2="{x}" y2="108" stroke="{AMBRE}" stroke-width="3"/>')
+    reperes(p, 250, 140, 244)
+    p.append(texte(372, 104, "Bouchon : jamais", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    p.append(texte(372, 134, "moteur chaud", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    p.append(f'<path d="M196 96 L356 96" fill="none" stroke="{AMBRE}" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>')
+    p.append(texte(372, 210, "Moteur froid :", taille=24, poids=700, couleur=VERT, ancre="start"))
+    p.append(texte(372, 242, "niveau entre", taille=24, poids=600, ancre="start"))
+    p.append(texte(372, 272, "MIN et MAX", taille=24, poids=600, ancre="start"))
+    p.append("</svg>")
+    return "".join(p)
+
+
+def liquide_frein_reservoir() -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
+    p.append(texte(40, 62, "Réservoir de liquide de frein", taille=24, poids=600, couleur=DOUX, ancre="start"))
+    # Maître-cylindre (bloc métallique) et ses deux canalisations, réservoir posé dessus, bouchon rond strié.
+    p.append('<rect x="50" y="250" width="250" height="48" rx="10" fill="#3a4553"/>')
+    p.append('<path d="M70 298 L70 322 M280 298 L280 322" stroke="#3a4553" stroke-width="10" stroke-linecap="round"/>')
+    p.append('<rect x="90" y="130" width="170" height="120" rx="16" fill="#1b222b" stroke="#9aa5b1" stroke-width="4"/>')
+    p.append('<rect x="96" y="160" width="158" height="84" rx="12" fill="#8a7a4a" opacity=".75"/>')
+    p.append(f'<line x1="96" y1="160" x2="254" y2="160" stroke="{VERT}" stroke-width="5" stroke-linecap="round"/>')
+    p.append(f'<ellipse cx="175" cy="118" rx="52" ry="18" fill="#232c37" stroke="{AMBRE}" stroke-width="5"/>')
+    for x in (145, 160, 175, 190, 205):
+        p.append(f'<line x1="{x}" y1="108" x2="{x}" y2="128" stroke="{AMBRE}" stroke-width="3"/>')
+    reperes(p, 260, 148, 224)
+    p.append(texte(372, 112, "Bouchon fermé :", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    p.append(texte(372, 142, "le niveau se lit", taille=24, poids=600, ancre="start"))
+    p.append(texte(372, 172, "à travers la paroi", taille=24, poids=600, ancre="start"))
+    p.append(texte(372, 230, "Sous MIN, ou", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    p.append(texte(372, 260, "baisse rapide :", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    p.append(texte(372, 290, "voir l'encadré", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    p.append("</svg>")
+    return "".join(p)
+
+def usure_pneu_temoin() -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
+    for x0, titre, haut, coul in ((40, "Neuf", 96, VERT), (340, "Usé", 150, AMBRE)):
+        p.append(texte(x0, 62, titre, taille=24, poids=600, couleur=DOUX, ancre="start"))
+        # Bande de roulement (deux pains de gomme) et rainure entre les deux, témoin au fond.
+        fond = 214
+        p.append(f'<rect x="{x0 + 10}" y="{haut}" width="100" height="{fond - haut}" rx="6" fill="#3a4553"/>')
+        p.append(f'<rect x="{x0 + 170}" y="{haut}" width="100" height="{fond - haut}" rx="6" fill="#3a4553"/>')
+        p.append(f'<rect x="{x0 + 10}" y="{fond}" width="260" height="26" fill="#252d37"/>')
+        p.append(f'<rect x="{x0 + 116}" y="150" width="48" height="{fond - 150}" rx="4" fill="#9aa5b1"/>')
+        p.append(f'<line x1="{x0 + 4}" y1="{haut}" x2="{x0 + 276}" y2="{haut}" stroke="{coul}" stroke-width="4" stroke-dasharray="10 8"/>')
+    p.append(texte(180, 280, "témoin en retrait", taille=24, poids=700, couleur=VERT))
+    p.append(texte(480, 280, "1,6 mm : changez", taille=24, poids=700, couleur=AMBRE))
+    p.append(texte(320, 318, "Repère sur le flanc : TWI ou ▲", taille=24, poids=600, couleur=TEXTE))
+    p.append("</svg>")
+    return "".join(p)
+
+
+def contre_visite_delais() -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
+    x0, x1 = 120, 580
+    p.append(texte(x0, 62, "Jour du contrôle", taille=24, poids=600, couleur=DOUX))
+    p.append(texte(x1 + 18, 62, "+ 2 mois", taille=24, poids=600, couleur=DOUX, ancre="end"))
+    for x in (x0, x1):
+        p.append(f'<line x1="{x}" y1="76" x2="{x}" y2="238" stroke="#3a4553" stroke-width="4"/>')
+    # Couleurs des niveaux de la charte (--led2 : « Non, ne poursuivez pas votre trajet » ; --led3 : « Non,
+    # arrêtez-vous immédiatement ») : S et R sont des résultats défavorables, aucun des deux n'est vert.
+    orange, rouge = "#ffab70", "#ff8a80"
+    p.append(texte(40, 118, "S", taille=32, poids=800, couleur=orange, ancre="start"))
+    p.append(f'<rect x="{x0}" y="96" width="{x1 - x0}" height="30" rx="15" fill="{orange}" opacity=".85"/>')
+    p.append(texte(40, 188, "R", taille=32, poids=800, couleur=rouge, ancre="start"))
+    p.append(f'<rect x="{x0 - 15}" y="166" width="30" height="30" rx="15" fill="{rouge}"/>')
+    p.append(f'<line x1="{x0 + 30}" y1="181" x2="{x1}" y2="181" stroke="{rouge}" stroke-width="4" stroke-dasharray="10 8"/>')
+    p.append(texte(350, 156, "2 mois pour réparer", taille=24, poids=700, couleur=orange))
+    p.append(texte(360, 226, "valable le jour même", taille=24, poids=700, couleur=rouge))
+    p.append(texte(320, 284, "Contre-visite : dans les 2 mois", taille=24, poids=700, couleur=TEXTE))
+    p.append(texte(320, 316, "après : contrôle complet", taille=24, poids=600, couleur=DOUX))
+    p.append("</svg>")
+    return "".join(p)
+
+
 if __name__ == "__main__":
-    for nom, f in (("niveau-huile-jauge", niveau_huile_jauge),):
+    for nom, f in (("niveau-huile-jauge", niveau_huile_jauge), ("huile-moteur-choisir", huile_moteur_choisir),
+                    ("liquide-refroidissement-vase", liquide_refroidissement_vase),
+                    ("liquide-frein-reservoir", liquide_frein_reservoir),
+                    ("usure-pneu-temoin", usure_pneu_temoin),
+                    ("contre-visite-delais", contre_visite_delais)):
         s = f()
         (SORTIE / f"{nom}.svg").write_text(s + "\n", encoding="utf-8")
         print(nom, len(s))

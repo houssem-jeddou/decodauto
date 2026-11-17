@@ -126,6 +126,11 @@
       "tranche": "entretien"
     },
     {
+      "id": "remplacement-liquide-de-refroidissement",
+      "libelle": "Remplacement du liquide de refroidissement",
+      "tranche": "entretien"
+    },
+    {
       "id": "pneus",
       "libelle": "Pneus à remplacer",
       "tranche": "entretien"
