@@ -1,104 +1,107 @@
-# Demande de changement n° 36 : verdict d'une obligation légale (pneus usés, contrôle technique défavorable)
+# Demande de changement n° 36 : verdict d'une obligation légale (contrôle technique, pneus)
 
-> **Proposée, à accepter par Houssem.** Rédigée le 17/11/2026 avec le lot C4 de la vague C (étape 11), sur décision du
-> pilotage (règle 6), à partir du relevé des sources, §10 point 1, et de ce que les notices ajoutent (relevé, §13). Les
+> **Brouillon, jamais validé. Proposée, à accepter par Houssem.** Rédigée le 17/11/2026 avec le lot C4 de la vague C
+> (étape 11), réécrite après la revue indépendante du lot C4 (constats B1 et I2) sur décision du pilotage (règle 6). Les
 > deux pages du lot appliquent déjà, en brouillon, les niveaux proposés ici ; rien n'est validé avant l'acceptation.
 > Reprend l'idée reportée « définition du verdict « Non, ne poursuivez pas votre trajet » pour une obligation légale »
-> (paquet 6.6c, décision 1).
+> (paquet 6.6c, décision 1). **Cette version n'a pas été relue par un relecteur indépendant.**
 
 ## Élément
-La grille des verdicts (`src/schemas/grille.ts`, `PRINCIPES_GRILLE` et `GRILLE_VERDICTS` ; vue lisible `docs/08`, partie
-générée par `npm run grille:vue` ; section « Méthode » de la page « à propos », qui reprend les principes). La grille
-classe aujourd'hui des **consignes de notice** ; elle ne dit pas comment classer une **obligation légale** (arrêté,
-code de la route, contrôle technique), que docs/01 admet pourtant comme citation qui fixe un niveau (« Légifrance,
-textes du contrôle technique »). Un seul précédent : la loi montagne (code de la route D314-8, validée le 10/11/2026),
-classée « Non, ne poursuivez pas votre trajet » par analogie, sans règle écrite.
+La grille des verdicts (`src/schemas/grille.ts`, `PRINCIPES_GRILLE`) et sa vue lisible (`docs/08`, partie générée par
+`npm run grille:vue`). La grille classe aujourd'hui des **consignes de notice** ; elle ne dit pas comment classer une
+**obligation légale** du contrôle technique ou des pneus, que docs/01 admet pourtant comme citation qui fixe un niveau
+(« Légifrance, textes du contrôle technique »).
 
 ## Changement proposé
-Trois règles pour une citation d'un texte légal ou réglementaire, ajoutées à la grille :
+Trois règles pour une citation de l'arrêté du 18 juin 1991 (contrôle technique), du code de la route ou de l'arrêté du
+18 juillet 2019 (pneus) :
 
-1. **Un texte interdit de circuler dans l'état constaté** (le véhicule ne remplit plus une exigence « pendant toute son
-   utilisation sur route », ou n'a plus de contrôle technique valable) : **« Non, ne poursuivez pas votre trajet »** ·
-   **« À faire tout de suite »**. L'action n'est pas « faites-la contrôler » (définition actuelle du niveau) mais la mise
-   en conformité : « faites remplacer » (pneus), « faites réparer, puis passez la contre-visite » (contrôle technique).
-   Les sanctions du code de la route (contravention, immobilisation possible) se citent comme faits, sans changer le
-   niveau.
-2. **Un texte laisse un délai pour se mettre en conformité** (résultat défavorable pour défaillances majeures : contrôle
-   valable deux mois, contre-visite dans ce délai) : **« Oui, avec précautions »** · **« À prévoir dans les semaines qui
-   viennent »**.
-3. **Un classement du contrôle technique** (défaillance mineure, majeure, critique de l'annexe I) **est un fait, pas un
-   verdict** : il se cite dans la fiche « Le texte en bref » et dans le texte. Il ne fixe le niveau d'une ligne que par
-   ce qu'il entraîne selon l'article 7 (validité de deux mois ou limitée au jour du contrôle), donc par les règles 1 et 2.
+1. **La gravité fixée par l'arrêté du 18 juin 1991 (article 7) donne le niveau** :
+   - défaillance **mineure** (« aucune incidence notable sur la sécurité du véhicule ou sur l'environnement ») →
+     **« Oui, vous pouvez rouler »** ;
+   - défaillance **majeure** (« susceptibles de compromettre la sécurité du véhicule, d'avoir une incidence négative sur
+     l'environnement, ou de mettre en danger les autres usagers de la route ») → **« Non, ne poursuivez pas votre
+     trajet »** · **« À faire tout de suite »** ;
+   - défaillance **critique** (« un danger direct et immédiat pour la sécurité routière ou ayant une incidence grave sur
+     l'environnement ») → **« Non, arrêtez-vous immédiatement »** · **« À faire tout de suite »**.
+2. **Un délai légal** (validité du contrôle de deux mois, délai de la contre-visite) **n'est jamais une autorisation de
+   rouler** : il ne rend jamais une ligne moins prudente que la gravité du défaut (règle 1) ni que sa consigne propre
+   (ligne de la base pour un voyant, consigne d'une notice).
+3. **Plus de contrôle valable** (délai de deux mois dépassé sans contre-visite) : code de la route, article R323-1
+   (« Tout propriétaire d'un véhicule mentionné au présent chapitre n'est autorisé à le mettre ou le maintenir en
+   circulation qu'après un contrôle technique ayant vérifié qu'il est en bon état de marche et en état satisfaisant
+   d'entretien. ») → **« Non, ne poursuivez pas votre trajet »** · **« À faire tout de suite »**.
 
 Le niveau d'une ligne reste celui de la citation la plus prudente (R3-PLUS-PRUDENT), notices et textes ensemble ; l'écart
-entre une notice et le texte légal est signalé comme un écart entre marques.
+entre une notice et le texte est signalé comme un écart entre marques. Les sanctions (contravention, immobilisation,
+fourrière) se citent comme faits, sans changer le niveau.
+
+## Champ
+- **Contrôle technique et pneus** seulement.
+- **La loi montagne n'est pas concernée** : son obligation (code de la route, D314-8) est un équipement exigé dans une
+  zone et une période, non une gravité de défaillance ni une validité de contrôle ; ses lignes, validées le 10/11/2026
+  (« Non, ne poursuivez pas votre trajet » sans équipement dans la zone), restent telles quelles et ne sont pas
+  reclassées par ces règles.
+
+## Ce qui ne change pas
+- **La définition affichée des verdicts** (`GRILLE_VERDICTS`) et **la section « Méthode » de la page « à propos »**
+  (`src/lib/charte.ts`) ne changent pas : la section « Méthode » ne reprend pas `PRINCIPES_GRILLE` (elle cite la grille
+  des verdicts et des urgences). Les actions sont propres aux pages : « faites réparer, puis passez la contre-visite »,
+  « faites remplacer les pneus ». La version précédente de cette demande disait à tort que la page « à propos » changeait.
+- Aucun verdict de la base voyants, aucune page publiée ne change de niveau.
+
+## Mise en œuvre (tranchée)
+Les trois règles s'ajoutent aux principes de la grille (`PRINCIPES_GRILLE`, une entrée « Obligation légale (contrôle
+technique, pneus) ») et donc à la vue de `docs/08` régénérée par `npm run grille:vue`, dans la pull request du lot, après
+l'acceptation. Elles ne sont pas écrites dans ce lot tant que la demande n'est pas acceptée.
+
+## Alternative (non retenue)
+Défaillance **majeure** → « Oui, avec précautions », avec renvoi à la consigne propre du défaut (ligne de la base, notice).
+Non retenue : l'article 7 définit la défaillance majeure comme susceptible de compromettre la sécurité ou de mettre en
+danger les autres usagers ; la laisser à « Oui » ferait du délai de deux mois une autorisation de rouler (contraire à la
+règle 2).
 
 ## Application aux deux pages du lot (brouillon)
 
-**Usure des pneus.** Arrêté du 18 juillet 2019, article 5 (relu à l'écran le 17/11 vers 1 h 50) : les pneus des voitures
-particulières doivent avoir « dans les rainures principales de leur bande de roulement, une profondeur d'au moins
-1,6 mm », « pendant toute leur utilisation sur route » → règle 1. Annexe I, 5.2.3 (relue le 17/11 vers 13 h 15) : e.2
-« L'indicateur d'usure de la profondeur des sculptures est atteint » : majeure ; e.3 « La profondeur des sculptures n'est
-pas conforme aux exigences » : critique → faits (règle 3). Code de la route, R314-1 (relu en entier le 17/11 vers
-13 h 50) : sculptures apparentes sur toute la surface de roulement, aucune toile visible, aucune déchirure profonde sur
-les flancs ; y contrevenir est puni de l'amende prévue pour les contraventions de la quatrième classe, immobilisation
-possible → fait. L'article 5 de l'arrêté de 2019, relu en entier, limite aussi à 5 mm l'écart de profondeur entre deux
-pneus d'un même essieu (fait, dit comme le texte le dit).
-
-Ce que les notices ajoutent (relevé, §13, relu à l'écran le 17/11 vers 12 h 55), classé par la grille actuelle :
-
-| Notice | Consigne | Niveau par la grille |
+**Contre-visite** (articles 7 et 8 relus à l'écran le 17/11 vers 13 h 15 ; R323-1 vers 13 h 50) :
+| Ligne | Niveau | Règle |
 |---|---|---|
-| Peugeot 208 p. 169 | « la profondeur des rainures est inférieure à 1,6 mm ; remplacer impérativement les pneumatiques » | Oui, avec précautions · tout de suite (« impérativement ») |
-| Citroën C3 p. 115 | « il est impératif de remplacer les pneumatiques » | idem |
-| Renault Clio 5 p. 346, Dacia Sandero 3 p. 307 | « il est alors nécessaire de remplacer vos pneumatiques car la profondeur des sculptures n'est, au plus, que de 1,6 mm et ceci entraîne une mauvaise adhérence sur les routes mouillées » | Oui, avec précautions · dans les jours qui viennent (action sans délai écrit) |
-| Seat Ibiza p. 308 | « Les pneus doivent être changés au plus tard lorsque les indicateurs d'usure sont usés. […] il existe des risques d'accident ! » | « au plus tard », absent de la grille, et un risque d'accident annoncé si l'on roule : niveau le plus prudent qu'il peut signifier (principe 3) → Non, ne poursuivez pas votre trajet · tout de suite |
+| Résultat défavorable pour défaillances majeures (S) | Non, ne poursuivez pas votre trajet · tout de suite | règle 1 (majeure) ; règle 2 : les deux mois servent à réparer et repasser, pas à rouler avec le défaut |
+| Résultat défavorable pour défaillances critiques (R) | Non, arrêtez-vous immédiatement · tout de suite | règle 1 (critique) |
+| Deux mois passés sans contre-visite | Non, ne poursuivez pas votre trajet · tout de suite | règle 3 (R323-1) |
 
-Ligne « Les témoins d'usure affleurent : les rainures n'ont plus que 1,6 mm ou moins » : **Non, ne poursuivez pas votre
-trajet · À faire tout de suite** (arrêté de 2019 par la règle 1, et Seat), écart signalé : Peugeot et Citroën (remplacer
-impérativement), Renault et Dacia (remplacer, sans délai écrit). Sans la règle 1, la ligne resterait à ce niveau par la
-seule lecture de Seat (principe 3) ; si Houssem classe autrement la consigne Seat et refuse la règle 1, elle descendrait
-à « Oui, avec précautions · À faire tout de suite » (Peugeot, Citroën).
-
-**Contre-visite.** Arrêté du 18 juin 1991, article 7 (relu à l'écran le 17/11 vers 13 h 15) :
-- défaillances majeures (S) : « la validité du contrôle est de deux mois à compter de la date du contrôle technique
-  périodique » → règle 2 : **Oui, avec précautions · À prévoir dans les semaines qui viennent** (réparer, puis
-  contre-visite dans les deux mois) ;
-- défaillances critiques (R) : « la validité du contrôle est limitée au jour du contrôle » → règle 1, après le jour du
-  contrôle : **Non, ne poursuivez pas votre trajet · À faire tout de suite** ;
-- délai de deux mois dépassé : « faute de quoi un nouveau contrôle technique périodique est à réaliser » → règle 1 :
-  **Non, ne poursuivez pas votre trajet · À faire tout de suite**.
-- Code de la route, R323-1 (relu en entier le 17/11 vers 13 h 50) : « Tout propriétaire d'un véhicule mentionné au
-  présent chapitre n'est autorisé à le mettre ou le maintenir en circulation qu'après un contrôle technique ayant vérifié
-  qu'il est en bon état de marche et en état satisfaisant d'entretien. » → règle 1, cité aux lignes 2 et 3 avec
-  l'article 7 ; la sanction (quatrième classe, immobilisation, fourrière possible) → fait.
+**Usure des pneus** (annexe I, 5.2.3, relue vers 13 h 15 ; article 5 de l'arrêté de 2019, relu vers 13 h 50) :
+- e.2 « L'indicateur d'usure de la profondeur des sculptures est atteint » : **majeure** → règle 1 : « Non, ne poursuivez
+  pas votre trajet » ; e.3 « La profondeur des sculptures n'est pas conforme aux exigences » : critique ; e.1 « Usure
+  anormale » : mineure.
+- L'article 5 exige au moins 1,6 mm et fait signaler 1,6 mm par l'indicateur « avec une tolérance de + 0,6/- 0 mm » : à
+  l'indicateur, l'exigence légale peut encore être remplie. Ce n'est donc pas l'article 5 qui fixe le niveau de la ligne
+  « témoins d'usure atteints », mais le classement du contrôle technique (règle 1, majeure) et les notices.
+- Notices (relues vers 12 h 55) : Peugeot 208 p. 169 et Citroën C3 p. 115 (« remplacer impérativement », « il est
+  impératif de remplacer ») → Oui, avec précautions · tout de suite ; Renault Clio 5 p. 346 et Dacia Sandero 3 p. 307
+  (« il est alors nécessaire de remplacer ») → Oui, avec précautions · dans les jours qui viennent ; Seat Ibiza p. 308
+  (« Les pneus doivent être changés au plus tard lorsque les indicateurs d'usure sont usés. S'il n'est pas fermé, il
+  existe des risques d'accident ! », sic) → « au plus tard », absent de la grille, et un risque d'accident annoncé :
+  Non, ne poursuivez pas votre trajet (principe 3).
+- R314-1 (sculptures apparentes, aucune toile, aucune déchirure profonde ; contravention de la quatrième classe,
+  immobilisation possible) : fait.
 
 ## Raison
-- Les deux pages sont des pages d'obligation : sans règle écrite, leur niveau dépendrait d'une analogie avec la loi
-  montagne, que rien ne fixe ; une règle écrite rend le niveau vérifiable et identique d'une page à l'autre.
-- Volume en jeu (plan du site, `docs/09`) : usure des pneus, 16 116 recherches par mois comptées ; contre-visite,
-  14 852 ; ce sont les deux pages de la vague C qui portent une obligation légale.
-- L'action actuelle du niveau « Non, ne poursuivez pas votre trajet » (« faites-la contrôler ») ne dit pas quoi faire
-  quand le défaut est déjà constaté par un texte.
+- Les deux pages portent une obligation : sans règle écrite, leur niveau dépendrait d'une analogie que rien ne fixe ; la
+  règle 1 suit la définition que donne le texte lui-même de chaque gravité.
+- Volume en jeu (plan du site) : usure des pneus, 16 116 recherches par mois comptées ; contre-visite, 14 852.
+- Un délai de contre-visite lu comme une autorisation de rouler serait l'erreur la plus grave possible sur ces pages
+  (règle 2).
 
-## Ce que le texte ne dit pas (et que la page ne dira pas)
-- Aucun texte relu ne dit si l'on peut rouler jusqu'au garage le jour d'un résultat défavorable pour défaillances
-  critiques, ni comment rejoindre un garage ensuite (relevé, §8) : la page ne l'affirme pas.
-- Aucune limite d'âge légale des pneus : l'âge de 6 ans n'est cité que comme consigne de la notice Seat Ibiza.
-- Le montant de l'amende forfaitaire de quatrième classe n'est relevé dans aucun texte : pas de montant affiché.
-- R314-1, R323-1 et l'article 5 de l'arrêté de 2019 sont relus en entier (relevé, §15, 17/11 vers 13 h 50).
+## Ce que les textes ne disent pas (et que les pages ne disent pas)
+- Comment rejoindre un garage après un résultat défavorable : aucun texte relu ne le dit.
+- Aucune limite d'âge légale des pneus (« 6 ans » : consigne Seat seulement).
+- Aucun montant d'amende relevé.
 
 ## Impact sur ce qui est validé
-- `src/schemas/grille.ts` : trois règles ajoutées aux principes (ou un niveau de consignes « texte légal » par verdict),
-  après l'acceptation, dans la pull request du lot ; `docs/08` (partie générée) et la section « Méthode » de la page
-  « à propos » (publiée) se régénèrent : **la page « à propos » change**, sa date de mise à jour aussi ; elle passe
-  avec le lot, validée par Houssem.
-- Aucun verdict de la base voyants, aucune page publiée ne change de niveau. La loi montagne garde son niveau (elle
-  correspond à la règle 1).
-- **Recommandation** (règle 6) : accepter ; la règle 1 et la règle 2 sont celles que la loi montagne applique déjà, la
-  règle 3 évite de prendre un classement de contrôle technique pour un verdict.
+`src/schemas/grille.ts` (`PRINCIPES_GRILLE`) et `docs/08` (partie générée) après l'acceptation ; ni la page « à propos »,
+ni la définition des verdicts, ni la base voyants, ni la loi montagne.
 
 ## Contrôles à relancer
-`npm run schemas`, `npm test` (tests de la grille), `npm run grille:vue` et `npm run charte:vue` (parties générées de
-`docs/08` et `docs/10`), `npm run build` (R3-PLUS-PRUDENT, R3-NIVEAU-SANS-SOURCE, METHODE-SECTION), la construction de
-recette, `npm run liens`.
+`npm run schemas`, `npm test`, `npm run grille:vue`, `npm run build` (R3-PLUS-PRUDENT, R3-NIVEAU-SANS-SOURCE), la
+construction de recette, `npm run liens`.
