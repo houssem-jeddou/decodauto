@@ -141,6 +141,7 @@ Principes :
 4. Le verdict et l'urgence d'une ligne sont au moins aussi prudents que la citation la plus prudente. Si les citations ne donnent pas toutes le même niveau, l'écart est signalé dans la ligne et affiché au lecteur.
 5. Le couple verdict / urgence doit être admis par le tableau des urgences admises : ne pas pouvoir rouler implique d'agir tout de suite ; pouvoir rouler sans précaution exclut une action immédiate.
 6. En cas de doute sur le classement d'une consigne, on retient le niveau le plus prudent et on recommande l'avis d'un professionnel.
+7. Obligation légale (contrôle technique, pneus) : la gravité fixée par l'arrêté du 18 juin 1991 (article 7) donne le niveau : défaillance mineure, « Oui, vous pouvez rouler » ; majeure, « Non, ne poursuivez pas votre trajet » ; critique, « Non, arrêtez-vous immédiatement ». Un délai légal (validité du contrôle, délai de la contre-visite) n'est jamais une autorisation de rouler et ne rend jamais une ligne moins prudente que la gravité du défaut ou sa consigne propre (voyant, notice). Sans contrôle valable (délai dépassé), l'article R323-1 du code de la route donne « Non, ne poursuivez pas votre trajet ».
 
 | Verdict | Libellé affiché | Ce que cela demande au lecteur | Consignes de notice qui y mènent | Urgences admises |
 |---|---|---|---|---|
