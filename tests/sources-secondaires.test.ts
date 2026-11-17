@@ -32,15 +32,16 @@ describe('sources secondaires : nature obligatoire (SOURCE-SECONDAIRE-NATURE, de
     assert.deepEqual([...NATURES_SOURCE_SECONDAIRE], ['document-technique', 'communication-constructeur', 'administration']);
   });
 
-  test('registre : les 26 sources secondaires ont une nature admise (21 documents techniques dont VARTA au lot B2 et MAHLE au lot B4, 3 administration, 2 communications du constructeur, lot B1) ; aucune autre source n\'en a', () => {
+  test('registre : les 27 sources secondaires ont une nature admise (22 documents techniques dont VARTA au lot B2, MAHLE au lot B4 et ACEA au lot C5, 3 administration, 2 communications du constructeur, lot B1) ; aucune autre source n\'en a', () => {
     const secondaires = registre.filter((s) => s.categorie === 'secondaire');
-    assert.equal(secondaires.length, 26);
+    assert.equal(secondaires.length, 27);
     assert.ok(secondaires.every((s) => (NATURES_SOURCE_SECONDAIRE as readonly string[]).includes(s.nature ?? '')), secondaires.filter((s) => s.nature === undefined).map((s) => s.id).join(', '));
     const parNature = (n: string): string[] => secondaires.filter((s) => s.nature === n).map((s) => s.id);
-    assert.equal(parNature('document-technique').length, 21);
+    assert.equal(parNature('document-technique').length, 22);
     assert.deepEqual(parNature('communication-constructeur').sort(), ['peugeot-puretech-solutions', 'stellantis-puretech-indemnisation-2025']);
     assert.deepEqual(parNature('administration').sort(), ['reponse-ministerielle-an-2023-03-21', 'reponse-ministerielle-senat-2026-02-12', 'service-public-depannage-autoroute']);
-    // Documents techniques : Hella 4, Bosch 1, Ross-Tech 2, bulletins publiés par la NHTSA 12, VARTA 1 (lot B2), MAHLE 1 (lot B4).
+    // Documents techniques : Hella 4, Bosch 1, Ross-Tech 2, bulletins publiés par la NHTSA 12, VARTA 1 (lot B2), MAHLE 1 (lot B4),
+    // ACEA 1 (lot C5 : séquences d'huiles 2023, classes C2, C3 et C4).
     const techniques = secondaires.filter((s) => s.nature === 'document-technique');
     assert.equal(techniques.filter((s) => /^Hella/.test(s.editeur)).length, 4);
     assert.equal(techniques.filter((s) => /Bosch/.test(s.editeur)).length, 1);
@@ -48,6 +49,7 @@ describe('sources secondaires : nature obligatoire (SOURCE-SECONDAIRE-NATURE, de
     assert.equal(techniques.filter((s) => /NHTSA/.test(s.editeur)).length, 12);
     assert.deepEqual(techniques.filter((s) => /VARTA/.test(s.editeur)).map((s) => s.id), ['varta-interpretation-tests']);
     assert.deepEqual(techniques.filter((s) => /MAHLE/.test(s.editeur)).map((s) => s.id), ['mahle-turbo-dommages-2024']);
+    assert.deepEqual(techniques.filter((s) => /ACEA/.test(s.editeur)).map((s) => s.id), ['acea-oil-sequences-2023']);
     assert.ok(registre.filter((s) => s.categorie !== 'secondaire').every((s) => s.nature === undefined));
   });
 

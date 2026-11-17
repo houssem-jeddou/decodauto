@@ -4,20 +4,26 @@
 #   §7) : Seat Ibiza p. 90, 293, 294, 296, 316 ; Peugeot 208 p. 165, 166, 168 ; Citroën C3 p. 112, 113, 114 ; Renault
 #   Clio 5 phase 2 p. 122, 330, 333 ; Dacia Sandero 3 p. 99, 294, 296, 297. Recherche de « SAE », « viscosit »,
 #   « ACEA », « vidange » dans chaque PDF entier : aucun grade ni viscosité chez Peugeot, Citroën, Renault, Dacia ;
-#   « ACEA C3 » chez Seat seulement. Toyota Yaris : seulement le message de vidange de la base (p. 300) ; le reste non lu.
-# - Décisions du pilotage (règle 6, 17/11) : rien sur la signification d'un grade ni sur la 85W140 ; « j'ai mis une
-#   autre huile » sur la seule notice Seat p. 294, niveaux par la grille.
+#   « ACEA C3 » chez Seat seulement. Toyota Yaris : message de vidange de la base (p. 300) ; grades et sens d'un grade,
+#   p. 330, lus dans le PDF officiel le 17/11 vers 21 h 35 (relevé §18, révision du lot C5).
+# - Décisions du pilotage (règle 6, 17/11) : rien sur la signification d'un grade tant que Toyota n'était pas lue (levé
+#   par la révision du lot C5, sur la seule notice Toyota) ; rien sur la 85W140 ; « j'ai mis une autre huile » sur la
+#   seule notice Seat p. 294, niveaux par la grille.
 # - Illustration : `huile-moteur-choisir`, dessinée pour cette page (travaux/etape-11/generer-illustrations.py).
 # - Revue indépendante du 17/11 (« à corriger ») : décisions du pilotage B1, I1 à I4, M1 à M6 (paquet du lot C2, §0) ;
 #   ligne « baisse anormale » retirée (elle ira sur la page « niveau d'huile », une intention, une page) ; ligne « doute
 #   sur l'huile versée » ajoutée ; tableau des viscosités et 85W140 reportés (demande de changement n° 35).
+# - Révision du 17/11 (lot C5, décision du pilotage, paquet du lot C5, §7) : réponse directe, section des grades et ligne
+#   Toyota du tableau, depuis la notice Toyota p. 330. Validée par Houssem le 17/11/2026 à 22 h 44, mot pour mot :
+#   « Je valide tout ! Goo » (ligne de validation du §7) ; empreinte reposée après la validation. Title, H1, description et les quatre
+#   lignes de l'encadré inchangés.
 id: huile-moteur
 title: "Huile moteur, vidange : quelle huile mettre et quand vidanger ?"
 h1: "Huile moteur : quelle huile mettre dans ma voiture, et quand faire la vidange ?"
 description: "L'huile à mettre est celle du plan d'entretien de votre voiture, pas un grade choisi seul ; la vidange, à son échéance. Erreur d'huile : ce que dit Seat."
 libelle_court: Huile moteur
 question_decision: "Quelle huile mettre dans mon moteur, et à quel moment faire la vidange ?"
-reponse_directe: "Celle que demande le plan ou le document d'entretien de votre voiture pour son moteur : les notices lues ne recommandent aucun grade. La vidange se fait à l'échéance de ce plan, que rappelle le combiné."
+reponse_directe: "Celle que demande le plan ou le document d'entretien de votre voiture : parmi les notices lues, seule la Toyota Yaris non hybride recommande un grade, la 0W-16. La vidange se fait à l'échéance de ce plan, que rappelle le combiné."
 situations:
   - voyant: entretien-vidange
   - situation: "Vous avez versé une huile moteur différente de celle que demande la notice ou le plan d'entretien"
@@ -107,8 +113,9 @@ date_modification: 2026-11-17
 date_revue: 2026-11-17
 prochaine_revue: 2027-11-17
 # Encadré de décision (question, réponse directe, lignes, coût probable) validé par Houssem le 17/11/2026 à 15 h 05
-# (heure de Tunis), avec les faits du texte (lot C2, travaux/etape-11/lot-c2/paquet-lot-c2.md).
-validation: 6e7c085162972fded1bbb9ca2fc2de821ad9b42b12de28c665b77e8ddda2acb4
+# (heure de Tunis), avec les faits du texte (lot C2, travaux/etape-11/lot-c2/paquet-lot-c2.md) ; réponse directe révisée
+# et validée le 17/11/2026 à 22 h 44 (lot C5, travaux/etape-11/lot-c5/paquet-lot-c5.md, §7).
+validation: 5ecdd5b3282f98504677c995524b7a10f4bc50935eaa4475b3c327132bc2cbaa
 ---
 
 ## Quelle huile moteur mettre dans ma voiture ?
@@ -132,7 +139,11 @@ C'est une solution d'urgence, jusqu'à la prochaine vidange : la notice demande 
 
 ## 5W30, 15W40, SAE 30 : que disent les notices des grades ?
 
-Parmi les notices lues, aucune n'explique ces codes de viscosité, et elles ne recommandent aucun grade : les notices Peugeot 208, Citroën C3, Renault Clio 5 et Dacia Sandero 3 n'en citent aucun. La notice Seat Ibiza cite seulement la classe ACEA C3 et des normes VW et API. Sur le bidon, cherchez la norme que demande votre plan d'entretien.
+Parmi les notices lues, seule la notice Toyota Yaris (génération 2020, non hybride) explique ces codes de viscosité et cite des grades. Le nombre avant le W dit l'aptitude de l'huile au démarrage à froid ; le nombre après le W, sa viscosité à température élevée. Pour son moteur essence, elle recommande « de préférence » la 0W-16, n'admet la 0W-20 que faute de 0W-16, jusqu'à la vidange suivante, et cite aussi la 5W-30 ({{cite:notice-toyota-yaris|p. 330}}).
+
+Les notices Peugeot 208, Citroën C3, Renault Clio 5 et Dacia Sandero 3 ne citent aucun grade ; la notice Seat Ibiza cite seulement la classe ACEA C3 et des normes VW et API. Aucune notice lue ne cite la 15W40, la 20W50, la SAE 30, la 0W40, la 10W50, la 10W60 ni la 85W140 : faute de source, cette page n'en dit pas plus.
+
+Sur le bidon, cherchez la norme que demande votre plan d'entretien.
 
 ## Quand faire la vidange ?
 
@@ -193,8 +204,8 @@ Non : les notices Peugeot 208 et Citroën C3 demandent de ne jamais utiliser d'a
 | Renault Clio 5 phase 2 | Qualité d'huile : document d'entretien du véhicule | Périodicité : document d'entretien ; suivant le véhicule, l'autonomie de vidange s'adapte au style de conduite |
 | Dacia Sandero 3 | Qualité d'huile : document d'entretien du véhicule | Comme Renault Clio 5 |
 | Seat Ibiza | Conforme aux normes VW ; jamais d'additif ; appoint d'urgence de 0,5 litre au plus, une fois, avec les normes listées plus haut | Au plus 2 ans, selon les conditions d'utilisation et le style de conduite ; vidange par un service technique recommandée |
-| Toyota Yaris | Non lu | Message « Entretien d'huile requis » : faire vidanger l'huile moteur et changer le filtre |
+| Toyota Yaris | Moteur essence : 0W-16 de préférence ; 0W-20 faute de 0W-16, jusqu'à la vidange suivante ; 5W-30 | Message « Entretien d'huile requis » : faire vidanger l'huile moteur et changer le filtre |
 
-Le tableau résume les notices lues ({{cite:notice-peugeot-208|p. 19-20, 166 et 168}} ; {{cite:notice-citroen-c3|p. 112-114}} ; {{cite:notice-renault-clio-5|p. 122 et 333}} ; {{cite:notice-dacia-sandero-3|p. 99 et 296}} ; {{cite:notice-seat-ibiza|p. 90, 293-294 et 296}} ; {{cite:notice-toyota-yaris|p. 300}}). Pour une autre voiture, sa notice et son plan d'entretien font foi.
+Le tableau résume les notices lues ({{cite:notice-peugeot-208|p. 19-20, 166 et 168}} ; {{cite:notice-citroen-c3|p. 112-114}} ; {{cite:notice-renault-clio-5|p. 122 et 333}} ; {{cite:notice-dacia-sandero-3|p. 99 et 296}} ; {{cite:notice-seat-ibiza|p. 90, 293-294 et 296}} ; {{cite:notice-toyota-yaris|p. 300 et 330}}). Pour une autre voiture, sa notice et son plan d'entretien font foi.
 
 La page [voyant huile](/voyants/huile/) explique les voyants d'huile, et le dossier [moteur PureTech](/moteur-puretech/) traite de l'huile de ces moteurs.

@@ -1,0 +1,6 @@
+Brouillon, jamais validé (après la revue indépendante du lot C5, changements non relus par un relecteur indépendant). npm run verifier:modes, les quatre combinaisons du mode d'indexation, lot C5.
+OK     variable absente + drapeau false → noindex
+OK     variable absente + drapeau true → noindex
+OK     variable "true" + drapeau false → noindex
+OK     variable "true" + drapeau true → indexable
+FIN 0

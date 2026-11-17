@@ -470,5 +470,14 @@
     "nature": "communication-constructeur",
     "url": "https://www.media.stellantis.com/be-fr/citroen/press/stellantis-etend-sa-politique-d-indemnisation-des-reclamations-des-consommateurs-europeens-sur-les-generations-precedentes-de-moteurs-puretech-1-0-et-1-2",
     "date_consultation": "2026-11-16"
+  },
+  {
+    "id": "acea-oil-sequences-2023",
+    "titre": "ACEA, « 2023 ACEA Oil Sequences for Light-Duty Engines », révision 0 (septembre 2023), en anglais",
+    "editeur": "ACEA (association des constructeurs européens d'automobiles)",
+    "categorie": "secondaire",
+    "nature": "document-technique",
+    "url": "https://www.acea.auto/files/2023_ACEA_oil_sequences_light-duty_engines.pdf",
+    "date_consultation": "2026-11-17"
   }
 ]

@@ -1,0 +1,69 @@
+Brouillon, jamais validé (après la revue indépendante du lot C5, changements non relus par un relecteur indépendant). Contrôles du lot C5.
+
+== schemas
+FIN 0
+
+== test
+# tests 865
+# pass 865
+# fail 0
+FIN 0
+
+== build
+INFO 11 mot(s)-clé(s) servi(s) dans une autre vague que celle de docs/05 : voyant-fap (B → A) : 1 ; surchauffe-moteur (A → B) : 9 ; batterie-voiture (A → B) : 1
+INFO 8 lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites
+Contrôle : 37 page(s) éditoriale(s), 0 erreur(s) bloquante(s), 39 alerte(s). Mode d'indexation : non indexable.
+FIN 0
+
+== liens
+Liens : 38 page(s), 1335 lien(s) interne(s) vérifié(s), 484 externe(s) non vérifié(s), 0 problème(s).
+FIN 0
+
+== recette
+ERREUR [R4-VALIDATION-ABSENTE] exemples/fluide/huile-10w40.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/fluide/huile-5w30.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/fluide/huile-5w40.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+INFO construction de recette des exemples (exemples/) : jamais déployée
+INFO 11 mot(s)-clé(s) servi(s) dans une autre vague que celle de docs/05 : voyant-fap (B → A) : 1 ; surchauffe-moteur (A → B) : 9 ; batterie-voiture (A → B) : 1
+INFO 4 lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites
+Contrôle : 40 page(s) éditoriale(s), 3 erreur(s) bloquante(s), 42 alerte(s). Mode d'indexation : non indexable.
+FIN 1
+
+== demo
+INFO construction de démonstration du format 2 (dist-demo-format2) : brouillon jamais validé, jamais déployée
+INFO 11 mot(s)-clé(s) servi(s) dans une autre vague que celle de docs/05 : voyant-fap (B → A) : 1 ; surchauffe-moteur (A → B) : 9 ; batterie-voiture (A → B) : 1
+INFO 8 lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites
+Contrôle : 37 page(s) éditoriale(s), 0 erreur(s) bloquante(s), 39 alerte(s). Mode d'indexation : non indexable.
+Liens : 38 page(s), 1335 lien(s) interne(s) vérifié(s), 484 externe(s) non vérifié(s), 0 problème(s).
+FIN 0
+
+== index
+Indexation durable : 0 erreur(s) ; drapeau true, variable SITE_INDEXABLE "true" ; comparaison avec origin/main : 31 page(s) publiée(s) dans la base, 36 dans la pull request.
+FIN 0
+
+== modes
+OK     variable absente + drapeau false → noindex
+OK     variable absente + drapeau true → noindex
+OK     variable "true" + drapeau false → noindex
+OK     variable "true" + drapeau true → indexable
+FIN 0
+
+== Après la révision de la page « huile moteur » (§7 du paquet) : contrôles refaits
+
+== schemas
+- 0 hints
+
+== test
+# tests 865
+# pass 865
+# fail 0
+
+== build (npm run build) : seule erreur, attendue, R4-EMPREINTE sur huile-moteur
+ERREUR [R4-EMPREINTE] src/content/fluide/huile-moteur.md : l'empreinte de validation ne correspond plus à l'encadré de décision (question, lignes de situation, y compris une ligne de la base revalidée depuis, coût probable, y compris une pièce reclassée depuis). Relecture et revalidation par Houssem nécessaires
+Contrôle : 37 page(s) éditoriale(s), 1 erreur(s) bloquante(s), 39 alerte(s). Mode d'indexation : non indexable.
+
+== liens
+Liens : 38 page(s), 1335 lien(s) interne(s) vérifié(s), 484 externe(s) non vérifié(s), 0 problème(s).
+
+== indexation durable (SITE_INDEXABLE=true, --base origin/main)
+Indexation durable : 0 erreur(s) ; drapeau true, variable SITE_INDEXABLE "true" ; comparaison avec origin/main : 31 page(s) publiée(s) dans la base, 36 dans la pull request.
