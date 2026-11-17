@@ -1,4 +1,4 @@
-Brouillon, jamais validé (après la relecture de Légifrance du 17/11 vers 15 h 10 et la correction de tests/porte6.test.ts). Contrôles du lot C4, 17/11/2026.
+Brouillon, jamais validé (après la revue indépendante du lot C4, changements non relus par un relecteur indépendant). Contrôles du lot C4.
 
 == schemas
 - 0 hints

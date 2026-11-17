@@ -8,7 +8,8 @@
   contre-visite-controle-technique n'est pas de la vague A ». Le test parcourait **toutes** les pages rédigées des types
   de la vague A (`code-defaut`, `pneus`, `voyant`) ; les deux pages du lot C4 sont les premières pages `pneus` de la
   vague C.
-- **Changement** (validé par Houssem avec le lot, comme tout changement d'un contrôle) : la vérification d'une page passe
+- **Changement** (à valider par Houssem avec le lot, comme tout changement d'un contrôle ; jugé sans affaiblissement par
+  la revue indépendante du lot C4) : la vérification d'une page passe
   dans `controlerPageRedigee`, qui ne contrôle que les pages de la vague A (« ignoree » pour une autre vague) ;
   l'assertion « au moins un exemple » est comptée sur les pages de la vague A ; le commentaire dit pourquoi : les pages
   des vagues suivantes restent contrôlées par R4-VALIDATION-ABSENTE à la construction et par la règle de passage.
