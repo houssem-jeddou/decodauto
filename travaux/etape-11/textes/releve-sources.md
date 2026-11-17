@@ -491,3 +491,43 @@ faites vérifier leur état par un Représentant de la marque. »
   ● Cette observation est particulièrement vraie lorsque vous circulez dans de mauvaises conditions météorologiques,
   notamment en présence de pluie et de verglas. Il est important que la profondeur des sculptures des pneus soit la plus
   grande possible, et qu'elle soit à peu près égale sur les pneus de l'essieu avant et arrière. »
+
+## 14. Relecture à l'écran du 17/11/2026 vers 13 h 20 (Légifrance, lot C4) : les cinq passages indispensables
+
+**Relu à l'écran** (Légifrance dans Chrome, 17/11/2026 vers 13 h 20), à la demande du lot C4
+(`travaux/etape-11/lot-c4/a-relire-wf.md`, passages 1 à 5). Ces textes remplacent, pour ces passages, les extraits [WF]
+des §7 et §8. Les passages « utiles » (règlement ONU n° 30, arrêté de 2019 article 9, fiche F2878, intitulés des
+fonctions de l'annexe I) ne sont pas relus : les pages s'en passent (décision du pilotage).
+
+**Arrêté du 18 juin 1991, annexe I** (https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053003556/2026-04-28),
+« 5.2.3. PNEUMATIQUES » :
+- « 5.2.3. d. 2. Pneumatique gravement endommagé, entaillé ou montage inadapté » : Majeure ;
+- « 5.2.3. d. 3. Corde visible ou endommagée » : Critique ;
+- « 5.2.3. e. 1. Usure anormale ou présence d'un corps étranger » : Mineure ;
+- « 5.2.3. e. 2. L'indicateur d'usure de la profondeur des sculptures est atteint » : Majeure ;
+- « 5.2.3. e. 3. La profondeur des sculptures n'est pas conforme aux exigences » : Critique.
+
+Les lettres d et e n'ont pas d'intitulé dans cette version : seules les défaillances sont écrites (ne pas en inventer).
+
+**Arrêté du 18 juin 1991, article 7** (https://www.legifrance.gouv.fr/codes/id/LEGISCTA000034159602), en vigueur depuis
+le 20 mai 2018 : « Le contrôle technique périodique et la contre-visite entraînent : - un résultat favorable (A) en
+l'absence de défaillance majeure et critique ; - un résultat défavorable pour défaillances majeures (S), en l'absence de
+défaillance critique et lorsqu'il est constaté au moins une défaillance majeure. Dans ce cas, la validité du contrôle est
+de deux mois à compter de la date du contrôle technique périodique ; - un résultat défavorable pour défaillances
+critiques (R) lorsqu'il est constaté au moins une défaillance critique. Dans ce cas, la validité du contrôle est limitée
+au jour du contrôle. Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être
+réalisée que dans le délai de deux mois après le contrôle technique périodique tel que défini à l'article 5, faute de
+quoi un nouveau contrôle technique périodique est à réaliser. »
+
+**Arrêté du 18 juin 1991, article 8** (même adresse), en vigueur depuis le 27 mars 2022 : « Les points à contrôler lors
+des contre-visites et contre-visites complémentaires sont définis à l'annexe I du présent arrêté. A l'issue du contrôle,
+si les points susvisés présentent des défaillances majeures ou critiques, une nouvelle contre-visite ou contre-visite
+complémentaire est à réaliser dans la limite du délai de deux mois à compter du contrôle technique périodique défini à
+l'article 5 du présent arrêté ou du contrôle technique complémentaire défini à l'article 5-1 du présent arrêté. Dans le
+cas où ce délai est dépassé, ou lorsque l'original du procès-verbal de contrôle relatif au contrôle technique périodique
+ou complémentaire ne peut être présenté au contrôleur et que les données informatiques du contrôle technique
+défavorable ne peuvent pas être consultées, le véhicule est soumis à un nouveau contrôle technique périodique tel que
+défini à l'article 5 du présent arrêté […]. Si, à cette occasion, une nouvelle contre-visite ou contre-visite
+complémentaire est prescrite, celle-ci est réalisée dans un nouveau délai de deux mois. Lorsque la contre-visite n'est
+pas réalisée dans le même centre que celui où le contrôle périodique ou complémentaire qui a fait l'objet d'un résultat
+défavorable a été réalisé, une copie du contrôle périodique ou complémentaire est archivée avec le procès-verbal […]. »
