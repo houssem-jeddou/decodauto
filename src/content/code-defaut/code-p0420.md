@@ -67,12 +67,12 @@ sources:
   - arrete-1991-06-18-controle-technique
 auteur: houssem-jeddou
 date_publication: 2026-11-15
-date_modification: 2026-11-15
+date_modification: 2026-11-16
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (22 h 45),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-4a.md).
-validation: 05c43a35a48eef3a1ecb99304d705d940d8dd403dc2341c93b9fdb9515974cff
+validation: 1623661128065ee4d3aa7de741e96d75c3b81c833b12bac7a1d1668af71a3bc0
 causes:
   - cause: Fuite à l'admission ou à l'échappement
     explication: "Pour les voitures du groupe Volkswagen, Ross-Tech cite une fuite à l'admission ou à l'échappement, et demande de vérifier l'étanchéité des deux."
@@ -92,11 +92,18 @@ causes:
     explication: "Selon Hella, le catalyseur perd avec l'âge sa capacité à stocker l'oxygène. Les bulletins de Toyota, Volkswagen et Ford font remplacer le catalyseur sur les modèles qu'ils nomment, celui de Kia le collecteur d'échappement quand le pré-catalyseur fonctionne mal (voitures vendues aux États-Unis)."
     pieces:
       - catalyseur
+format: 2
+illustration:
+  fichier: code-p0420-ligne-echappement
+  alt: "Schéma de la ligne d'échappement : moteur, sonde avant, catalyseur, sonde après, les deux sondes reliées au calculateur"
+  legende: "La sonde placée après le catalyseur mesure sa capacité à stocker l'oxygène ; le calculateur compare les deux sondes. En orange, ce que citent les causes de cette page."
 ---
 
-## Peut-on rouler avec le code P0420 ?
+## Peut-on rouler avec le code P0420 et le voyant moteur orange allumé fixe ?
 
-Le code P0420 se lit avec un appareil de diagnostic. Dans les bulletins de Toyota, Kia, Audi et Ford du tableau des cas par marque, il s'accompagne du voyant moteur allumé. Avec ce voyant, verdict retenu en haut de page : {{verdict:moteur-orange-fixe}}. C'est la consigne de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit quand repartir.
+{{repere:moteur-orange-fixe}}
+
+Le code P0420 se lit avec un appareil de diagnostic. Dans les bulletins de Toyota, Kia, Audi et Ford du tableau des cas par marque, il s'accompagne du voyant moteur allumé. Avec ce voyant, la consigne de l'encadré est celle de la notice {{notice:notice-toyota-yaris}}, la plus prudente des notices lues sur ce voyant ; l'encadré dit aussi quand repartir.
 
 Si le voyant moteur clignote, l'action à suivre n'est pas tout à fait la même : voyez la page du [voyant moteur](/voyants/moteur/).
 
@@ -120,7 +127,7 @@ Les documents cités décrivent :
 ## Comment résoudre le code P0420 ?
 
 1. Si le voyant moteur est allumé, suivez d'abord la consigne de l'encadré, en haut de page.
-2. Au garage, le diagnostic passe par les points de contrôle des causes ci-dessus : étanchéité de l'admission et de l'échappement, catalyseur, sondes lambda et leur commande, avec un test de vieillissement des sondes (Ross-Tech pour le groupe Volkswagen, {{cite:ross-tech-p0420|rubrique « Possible Solutions »}}).
+2. Au garage, le diagnostic passe par les points de contrôle des causes ci-dessus : étanchéité de l'admission et de l'échappement, catalyseur, sondes lambda et leur commande, avec un test de vieillissement des sondes, selon Ross-Tech pour le groupe Volkswagen ({{cite:ross-tech-p0420|rubrique « Possible Solutions »}}).
 3. Le code seul ne désigne pas la pièce à changer. Plusieurs constructeurs ont corrigé le logiciel du calculateur, seul ou avec le catalyseur (bulletins d'Audi, de Kia et de Volkswagen, voitures vendues aux États-Unis), et Ross-Tech demande de chercher une mise à jour du calculateur dans la documentation du constructeur ({{cite:ross-tech-p0420|rubrique « Special Notes »}}). Demandez au réseau de votre marque si une mise à jour existe pour votre voiture.
 4. Après l'intervention, le bulletin de Toyota fait un essai sur route pour confirmer la réparation.
 
@@ -140,4 +147,6 @@ Le texte ne dit pas dans quel cas se range un code P0420. À part, un équipemen
 
 ## P0420 sur une Peugeot, une Citroën, une Renault ou un 1.2 PureTech
 
-Le code garde la même signification sur toutes les marques : c'est un code générique (voir la fiche du code). Mais les documents lus ne décrivent aucun cas sur les Peugeot, Citroën, Renault ou Nissan, ni sur le moteur 1.2 PureTech. Pour Toyota, Volkswagen et Ford, les seuls cas lus concernent des modèles vendus aux États-Unis (tableau ci-dessus) : ils montrent que le code peut venir du catalyseur comme du logiciel du calculateur, mais ne valent que pour les modèles nommés. Sur votre voiture, seul le diagnostic dit d'où vient le défaut ; la marche à suivre reste la même.
+Le code garde la même signification sur toutes les marques : c'est un code générique (voir la fiche du code).
+
+Mais les documents lus ne décrivent aucun cas sur les Peugeot, Citroën, Renault ou Nissan, ni sur le moteur 1.2 PureTech. Pour Toyota, Volkswagen et Ford, les seuls cas lus concernent des modèles vendus aux États-Unis (tableau ci-dessus) : ils montrent que le code peut venir du catalyseur comme du logiciel du calculateur, mais ne valent que pour les modèles nommés. Sur votre voiture, seul le diagnostic dit d'où vient le défaut ; la marche à suivre reste la même.

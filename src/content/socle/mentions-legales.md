@@ -11,6 +11,7 @@ libelle_court: Mentions légales et confidentialité
 date_modification: 2026-11-10
 date_revue: 2026-11-10
 prochaine_revue: 2027-11-10
+format: 2
 ---
 
 ## Confidentialité

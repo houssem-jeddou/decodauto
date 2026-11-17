@@ -95,7 +95,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je rouler avec des pneus sous-gonflés, et à quelle pression les gonfler ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « À quelle pression gonfler mes pneus, et puis-je rouler s'ils sont sous-gonflés ? »
 - **Angle** : La bonne pression est celle du constructeur (étiquette, notice), lue pneus froids. L'aperçu IA donne une fourchette générale en bars ; la page n'en donne aucune et dit où lire la valeur, marque par marque.
 - **Élément unique** : Tableau du texte ({{tableau}}) « Où lire la pression et quand la vérifier, selon la notice de chaque marque » : emplacement de l'étiquette, pneus froids, fréquence de contrôle, réinitialisation du système de surveillance, chaque case citée à la page près.
 - **À traiter** :

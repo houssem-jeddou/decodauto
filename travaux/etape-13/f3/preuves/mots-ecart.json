@@ -1,0 +1,334 @@
+{
+  "max": 25,
+  "depassements": 0,
+  "lignes": [
+    {
+      "adresse": "/codes-defaut/p0087/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). Votre marque"
+    },
+    {
+      "adresse": "/codes-defaut/p0299/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). Votre marque"
+    },
+    {
+      "adresse": "/codes-defaut/p0420/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). Votre marque"
+    },
+    {
+      "adresse": "/pression-des-pneus/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "ligne 2 de l’encadré",
+      "ou": "encadré",
+      "mots": 25,
+      "lien": true,
+      "texte": "Plus stricts : Renault et Dacia avec témoin Service, Toyota (sans attendre). Moins stricts : Peugeot (sans délai indiqué), Renault et Dacia témoin seul (rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "moteur-orange-fixe",
+      "ou": "carte de l’outil",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "moteur-orange-clignotant",
+      "ou": "carte de l’outil",
+      "mots": 22,
+      "lien": true,
+      "texte": "Plus stricts : Toyota (arrêt immédiat), Peugeot et Seat (ne pas poursuivre). Moins stricts : Renault et Dacia (régime réduit, consulter vite). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "pression-pneus",
+      "ou": "carte de l’outil",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "huile-niveau",
+      "ou": "carte de l’outil",
+      "mots": 21,
+      "lien": true,
+      "texte": "Plus stricts : Seat (contrôle immédiat) et Peugeot (appoint impératif). Moins strict : Toyota (vérifier et faire l’appoint, sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "adblue-reserve",
+      "ou": "carte de l’outil",
+      "mots": 19,
+      "lien": true,
+      "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "adblue-defaut",
+      "ou": "carte de l’outil",
+      "mots": 22,
+      "lien": true,
+      "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "fap",
+      "ou": "carte de l’outil",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus stricts : Peugeot, Renault et Dacia (rouler pour régénérer dès que la circulation le permet). Moins strict : Seat (régénération sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "airbag-defaut",
+      "ou": "carte de l’outil",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus stricts : Dacia avec message, Seat, Toyota et Renault (contrôle sans attendre). Moins stricts : Peugeot (sans délai indiqué), Dacia témoin seul (rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "abs",
+      "ou": "carte de l’outil",
+      "mots": 25,
+      "lien": true,
+      "texte": "Plus stricts : Renault et Dacia avec témoin Service, Toyota (sans attendre). Moins stricts : Peugeot (sans délai indiqué), Renault et Dacia témoin seul (rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "esp-clignotant",
+      "ou": "carte de l’outil",
+      "mots": 21,
+      "lien": true,
+      "texte": "Plus strict : Seat (adapter immédiatement sa vitesse). Moins stricts : Peugeot, Renault, Dacia et Toyota (système en action, sans consigne). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "esp-defaut",
+      "ou": "carte de l’outil",
+      "mots": 23,
+      "lien": true,
+      "texte": "Plus stricts : Renault et Dacia (représentant au plus tôt, avec ménagement), Toyota (vérification immédiate). Moins strict : Peugeot (garage, sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "direction-orange",
+      "ou": "carte de l’outil",
+      "mots": 19,
+      "lien": true,
+      "texte": "Plus strict : Toyota (vérification immédiate). Moins stricts : Peugeot et Seat (rouler prudemment jusqu’au garage, sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "entretien-vidange",
+      "ou": "carte de l’outil",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus stricts : Renault et Dacia (révision au plus vite, conduite avec ménagement). Moins stricts : Peugeot, Seat et Toyota (rappel d’entretien, sans précaution). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "batterie-rouge",
+      "ou": "carte de l’outil",
+      "mots": 19,
+      "lien": true,
+      "texte": "Plus stricts : Peugeot, Renault, Dacia et Toyota (arrêt imposé). Moins strict : Seat (atelier le plus proche, immédiatement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "adblue-demarrage-impossible",
+      "ou": "carte de l’outil",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Seat (arrêt en lieu sûr). Moins stricts : Peugeot, Renault et Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+    },
+    {
+      "adresse": "/voyants/",
+      "voyant": "direction-rouge",
+      "ou": "carte de l’outil",
+      "mots": 19,
+      "lien": true,
+      "texte": "Plus stricts : Seat, Peugeot, Renault et Dacia (arrêt imposé). Moins strict : Toyota (vérification immédiate, sans arrêt imposé). Votre marque"
+    },
+    {
+      "adresse": "/voyants/abs-esp/",
+      "voyant": "ligne 2 de l’encadré",
+      "ou": "encadré",
+      "mots": 25,
+      "lien": true,
+      "texte": "Plus stricts : Renault et Dacia avec témoin Service, Toyota (sans attendre). Moins stricts : Peugeot (sans délai indiqué), Renault et Dacia témoin seul (rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/abs-esp/",
+      "voyant": "ligne 3 de l’encadré",
+      "ou": "encadré",
+      "mots": 23,
+      "lien": true,
+      "texte": "Plus stricts : Renault et Dacia (représentant au plus tôt, avec ménagement), Toyota (vérification immédiate). Moins strict : Peugeot (garage, sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/abs-esp/",
+      "voyant": "ligne 4 de l’encadré",
+      "ou": "encadré",
+      "mots": 21,
+      "lien": true,
+      "texte": "Plus strict : Seat (adapter immédiatement sa vitesse). Moins stricts : Peugeot, Renault, Dacia et Toyota (système en action, sans consigne). Votre marque"
+    },
+    {
+      "adresse": "/voyants/adblue/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 19,
+      "lien": true,
+      "texte": "Plus stricts : Peugeot, Renault et Dacia (appoint rapide sous 800 km). Moins strict : Seat (dans l’autonomie affichée). Votre marque"
+    },
+    {
+      "adresse": "/voyants/adblue/",
+      "voyant": "ligne 2 de l’encadré",
+      "ou": "encadré",
+      "mots": 22,
+      "lien": true,
+      "texte": "Plus stricts : Renault et Dacia (représentant de la marque le plus tôt possible). Moins strict : Seat (atelier, sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/adblue/",
+      "voyant": "ligne 3 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/adblue/",
+      "voyant": "ligne 4 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Seat (arrêt en lieu sûr). Moins stricts : Peugeot, Renault et Dacia (redémarrage impossible sans appoint ou réseau, arrêt non imposé). Votre marque"
+    },
+    {
+      "adresse": "/voyants/airbag/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus stricts : Dacia avec message, Seat, Toyota et Renault (contrôle sans attendre). Moins stricts : Peugeot (sans délai indiqué), Dacia témoin seul (rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/batterie/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 19,
+      "lien": true,
+      "texte": "Plus stricts : Peugeot, Renault, Dacia et Toyota (arrêt imposé). Moins strict : Seat (atelier le plus proche, immédiatement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/direction/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 19,
+      "lien": true,
+      "texte": "Plus strict : Toyota (vérification immédiate). Moins stricts : Peugeot et Seat (rouler prudemment jusqu’au garage, sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/direction/",
+      "voyant": "ligne 2 de l’encadré",
+      "ou": "encadré",
+      "mots": 19,
+      "lien": true,
+      "texte": "Plus stricts : Seat, Peugeot, Renault et Dacia (arrêt imposé). Moins strict : Toyota (vérification immédiate, sans arrêt imposé). Votre marque"
+    },
+    {
+      "adresse": "/voyants/fap/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus stricts : Peugeot, Renault et Dacia (rouler pour régénérer dès que la circulation le permet). Moins strict : Seat (régénération sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/fap/",
+      "voyant": "ligne 2 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/huile/",
+      "voyant": "ligne 2 de l’encadré",
+      "ou": "encadré",
+      "mots": 21,
+      "lien": true,
+      "texte": "Plus stricts : Seat (contrôle immédiat) et Peugeot (appoint impératif). Moins strict : Toyota (vérifier et faire l’appoint, sans délai indiqué). Votre marque"
+    },
+    {
+      "adresse": "/voyants/huile/",
+      "voyant": "ligne 3 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus stricts : Renault et Dacia (révision au plus vite, conduite avec ménagement). Moins stricts : Peugeot, Seat et Toyota (rappel d’entretien, sans précaution). Votre marque"
+    },
+    {
+      "adresse": "/voyants/moteur/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/moteur/",
+      "voyant": "ligne 2 de l’encadré",
+      "ou": "encadré",
+      "mots": 22,
+      "lien": true,
+      "texte": "Plus stricts : Toyota (arrêt immédiat), Peugeot et Seat (ne pas poursuivre). Moins stricts : Renault et Dacia (régime réduit, consulter vite). Votre marque"
+    },
+    {
+      "adresse": "/voyants/prechauffage/",
+      "voyant": "ligne 3 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus strict : Toyota (arrêt immédiat). Moins stricts : Seat (pied levé, atelier proche), Renault et Dacia (consulter au plus tôt), Peugeot (garage rapidement). Votre marque"
+    },
+    {
+      "adresse": "/voyants/pression-pneus/",
+      "voyant": "ligne 1 de l’encadré",
+      "ou": "encadré",
+      "mots": 24,
+      "lien": true,
+      "texte": "Plus stricts : Seat, Toyota et Peugeot ; Renault et Dacia avec « Crevaison » (arrêt). Moins stricts, simple sous-gonflage : Peugeot et Dacia (pression à revoir). Votre marque"
+    }
+  ]
+}
