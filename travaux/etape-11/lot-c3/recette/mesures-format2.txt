@@ -1,4 +1,4 @@
-Brouillon, jamais validé. FORMAT2-MESURES, construction de recette (AVEC_EXEMPLES=1), lot C3, 17/11/2026.
+Brouillon, jamais validé (après la revue indépendante du 17/11, changements non relus par un relecteur indépendant). FORMAT2-MESURES, construction de recette (AVEC_EXEMPLES=1), lot C3.
 
 FORMAT2-MESURES : 36 page(s) au format 2 dans dist-exemples
 Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situation | Bas de l’encadré | Illustration | Après « Notices » | Arbre ou étapes | Hauteur | Sommaire | Largeur de page | Débordements
@@ -35,18 +35,18 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /fumee-echappement/ | 320 | chargée | – | 442 | 550 | 1506 | 1934 | oui | 3071 | 8742 | oui | 320 | 0
 /fumee-echappement/ | 375 | chargée | – | 377 | 464 | 1324 | 1694 | oui | 2789 | 7640 | oui | 375 | 0
 /fumee-echappement/ | 1366 | chargée | – | 287 | 332 | 826 | 1042 | oui | 1962 | 5232 | oui | 1366 | 0
-/huile-moteur/ | 320 | chargée | 489 | 696 | 845 | 2154 | 2638 | oui | – | 11672 | oui | 320 | 0
-/huile-moteur/ | 375 | chargée | 424 | 595 | 723 | 1799 | 2207 | oui | – | 10349 | oui | 375 | 0
-/huile-moteur/ | 1366 | chargée | 315 | 405 | 471 | 1077 | 1312 | oui | – | 6385 | oui | 1366 | 0
+/huile-moteur/ | 320 | chargée | 489 | 696 | 845 | 2096 | 2524 | oui | – | 10990 | oui | 320 | 0
+/huile-moteur/ | 375 | chargée | 424 | 595 | 723 | 1761 | 2131 | oui | – | 10008 | oui | 375 | 0
+/huile-moteur/ | 1366 | chargée | 315 | 405 | 471 | 1079 | 1295 | oui | – | 6368 | oui | 1366 | 0
 /huile-moteur/verifier-niveau/ | 320 | chargée | 514 | 644 | 772 | 2149 | 2903 | oui | 4259 | 13456 | oui | 320 | 0
 /huile-moteur/verifier-niveau/ | 375 | chargée | 467 | 582 | 689 | 1873 | 2513 | oui | 3760 | 11930 | oui | 375 | 0
 /huile-moteur/verifier-niveau/ | 1366 | chargée | 337 | 404 | 470 | 1152 | 1505 | oui | 2549 | 7416 | oui | 1366 | 0
-/liquide-de-frein/ | 320 | chargée | 467 | 636 | 743 | 1597 | 2201 | oui | – | 8903 | oui | 320 | 0
-/liquide-de-frein/ | 375 | chargée | 445 | 579 | 666 | 1385 | 1912 | oui | – | 7960 | oui | 375 | 0
-/liquide-de-frein/ | 1366 | chargée | 315 | 401 | 447 | 833 | 1130 | oui | – | 4937 | oui | 1366 | 0
-/liquide-de-refroidissement/ | 320 | chargée | 514 | 666 | 794 | 2659 | 3551 | oui | – | 11925 | oui | 320 | 0
-/liquide-de-refroidissement/ | 375 | chargée | 445 | 579 | 687 | 2262 | 3002 | oui | – | 10520 | oui | 375 | 0
-/liquide-de-refroidissement/ | 1366 | chargée | 315 | 401 | 447 | 1307 | 1741 | oui | – | 6514 | oui | 1366 | 0
+/liquide-de-frein/ | 320 | chargée | 445 | 614 | 742 | 1882 | 2523 | oui | – | 9293 | oui | 320 | 0
+/liquide-de-frein/ | 375 | chargée | 424 | 557 | 665 | 1614 | 2141 | oui | – | 8331 | oui | 375 | 0
+/liquide-de-frein/ | 1366 | chargée | 315 | 401 | 447 | 974 | 1290 | oui | – | 5164 | oui | 1366 | 0
+/liquide-de-refroidissement/ | 320 | chargée | 514 | 666 | 794 | 2592 | 3365 | oui | – | 11979 | oui | 320 | 0
+/liquide-de-refroidissement/ | 375 | chargée | 445 | 579 | 687 | 2175 | 2815 | oui | – | 10700 | oui | 375 | 0
+/liquide-de-refroidissement/ | 1366 | chargée | 315 | 401 | 447 | 1260 | 1613 | oui | – | 6461 | oui | 1366 | 0
 /loi-montagne/ | 320 | chargée | – | 477 | 647 | 1526 | 1841 | oui | – | 9711 | oui | 320 | 0
 /loi-montagne/ | 375 | chargée | – | 440 | 588 | 1348 | 1624 | oui | – | 8552 | oui | 375 | 0
 /loi-montagne/ | 1366 | chargée | – | 308 | 374 | 848 | 1027 | oui | – | 5591 | oui | 1366 | 0
@@ -143,18 +143,18 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /fumee-echappement/ | 320 | secours | – | 442 | 550 | 1506 | 1934 | oui | 3071 | 8742 | oui | 320 | 0
 /fumee-echappement/ | 375 | secours | – | 377 | 464 | 1324 | 1694 | oui | 2789 | 7640 | oui | 375 | 0
 /fumee-echappement/ | 1366 | secours | – | 287 | 332 | 826 | 1042 | oui | 1962 | 5232 | oui | 1366 | 0
-/huile-moteur/ | 320 | secours | 489 | 696 | 845 | 2154 | 2638 | oui | – | 11723 | oui | 320 | 0
-/huile-moteur/ | 375 | secours | 424 | 595 | 723 | 1799 | 2207 | oui | – | 10349 | oui | 375 | 0
-/huile-moteur/ | 1366 | secours | 315 | 405 | 471 | 1077 | 1312 | oui | – | 6385 | oui | 1366 | 0
+/huile-moteur/ | 320 | secours | 489 | 696 | 845 | 2096 | 2524 | oui | – | 11066 | oui | 320 | 0
+/huile-moteur/ | 375 | secours | 424 | 595 | 723 | 1761 | 2131 | oui | – | 10008 | oui | 375 | 0
+/huile-moteur/ | 1366 | secours | 315 | 405 | 471 | 1079 | 1295 | oui | – | 6368 | oui | 1366 | 0
 /huile-moteur/verifier-niveau/ | 320 | secours | 514 | 644 | 772 | 2149 | 2903 | oui | 4259 | 13507 | oui | 320 | 0
 /huile-moteur/verifier-niveau/ | 375 | secours | 492 | 607 | 714 | 1897 | 2537 | oui | 3785 | 11955 | oui | 375 | 0
 /huile-moteur/verifier-niveau/ | 1366 | secours | 337 | 404 | 470 | 1152 | 1505 | oui | 2549 | 7416 | oui | 1366 | 0
-/liquide-de-frein/ | 320 | secours | 467 | 636 | 743 | 1597 | 2201 | oui | – | 8903 | oui | 320 | 0
-/liquide-de-frein/ | 375 | secours | 445 | 579 | 666 | 1385 | 1912 | oui | – | 7985 | oui | 375 | 0
-/liquide-de-frein/ | 1366 | secours | 315 | 401 | 447 | 833 | 1130 | oui | – | 4962 | oui | 1366 | 0
-/liquide-de-refroidissement/ | 320 | secours | 538 | 691 | 819 | 2684 | 3575 | oui | – | 12000 | oui | 320 | 0
-/liquide-de-refroidissement/ | 375 | secours | 470 | 604 | 711 | 2287 | 3027 | oui | – | 10595 | oui | 375 | 0
-/liquide-de-refroidissement/ | 1366 | secours | 315 | 401 | 447 | 1307 | 1741 | oui | – | 6540 | oui | 1366 | 0
+/liquide-de-frein/ | 320 | secours | 445 | 614 | 742 | 1882 | 2523 | oui | – | 9293 | oui | 320 | 0
+/liquide-de-frein/ | 375 | secours | 424 | 557 | 665 | 1614 | 2141 | oui | – | 8357 | oui | 375 | 0
+/liquide-de-frein/ | 1366 | secours | 315 | 401 | 447 | 974 | 1290 | oui | – | 5190 | oui | 1366 | 0
+/liquide-de-refroidissement/ | 320 | secours | 538 | 691 | 819 | 2617 | 3390 | oui | – | 12055 | oui | 320 | 0
+/liquide-de-refroidissement/ | 375 | secours | 470 | 604 | 711 | 2199 | 2839 | oui | – | 10750 | oui | 375 | 0
+/liquide-de-refroidissement/ | 1366 | secours | 315 | 401 | 447 | 1260 | 1613 | oui | – | 6512 | oui | 1366 | 0
 /loi-montagne/ | 320 | secours | – | 502 | 671 | 1551 | 1866 | oui | – | 9761 | oui | 320 | 0
 /loi-montagne/ | 375 | secours | – | 440 | 588 | 1348 | 1624 | oui | – | 8653 | oui | 375 | 0
 /loi-montagne/ | 1366 | secours | – | 308 | 374 | 848 | 1027 | oui | – | 5591 | oui | 1366 | 0
@@ -220,9 +220,10 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /voyants/pression-pneus/ | 1366 | secours | – | 272 | 359 | 700 | 915 | oui | – | 6876 | oui | 1366 | 0
 SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police chargée) : illustration à 2505 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1903 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /bruit-moteur/ (police chargée) : illustration à 2370 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1843 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /huile-moteur/ (police chargée) : illustration à 2207 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1799 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/ (police chargée) : illustration à 2131 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1761 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police chargée) : illustration à 2513 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1873 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /liquide-de-refroidissement/ (police chargée) : illustration à 3002 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 2262 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /liquide-de-frein/ (police chargée) : illustration à 2141 px, au-delà de trois écrans (2001 px) ; raison : encadré de 3 ligne(s), bas à 1614 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /liquide-de-refroidissement/ (police chargée) : illustration à 2815 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 2175 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /moteur-puretech/ (police chargée) : illustration à 2805 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2321 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /moteur-qui-surchauffe/ (police chargée) : illustration à 2448 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1884 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /nettoyer-fap/ (police chargée) : illustration à 2364 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1840 px (règle 2i, demande n° 32 : à dire dans le paquet)
@@ -235,9 +236,10 @@ SIGNALÉ [FORMAT2-MESURES] /voyants/abs-esp/ (police chargée) : illustration à
 SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police chargée) : illustration à 2761 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2277 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police de secours) : illustration à 2530 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1927 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /bruit-moteur/ (police de secours) : illustration à 2370 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1843 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /huile-moteur/ (police de secours) : illustration à 2207 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1799 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/ (police de secours) : illustration à 2131 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1761 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police de secours) : illustration à 2537 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1897 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /liquide-de-refroidissement/ (police de secours) : illustration à 3027 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 2287 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /liquide-de-frein/ (police de secours) : illustration à 2141 px, au-delà de trois écrans (2001 px) ; raison : encadré de 3 ligne(s), bas à 1614 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /liquide-de-refroidissement/ (police de secours) : illustration à 2839 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 2199 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /moteur-puretech/ (police de secours) : illustration à 2805 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2321 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /moteur-qui-surchauffe/ (police de secours) : illustration à 2448 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1884 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /nettoyer-fap/ (police de secours) : illustration à 2364 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1840 px (règle 2i, demande n° 32 : à dire dans le paquet)
@@ -248,4 +250,4 @@ SIGNALÉ [FORMAT2-MESURES] /voiture-ne-demarre-pas/ (police de secours) : illust
 SIGNALÉ [FORMAT2-MESURES] /voiture-qui-broute/ (police de secours) : illustration à 2451 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1849 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voyants/abs-esp/ (police de secours) : illustration à 2320 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1893 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police de secours) : illustration à 2761 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2277 px (règle 2i, demande n° 32 : à dire dans le paquet)
-Mesures : 36 page(s), 216 mesure(s), 0 erreur(s), 30 signalement(s) à reprendre dans le paquet.
+Mesures : 36 page(s), 216 mesure(s), 0 erreur(s), 32 signalement(s) à reprendre dans le paquet.

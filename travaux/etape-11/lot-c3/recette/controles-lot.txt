@@ -1,4 +1,4 @@
-Brouillon, jamais validé. npm run liens (construction de production) et contrôles du lot C3, 17/11/2026 : schemas, test, build, liens, démonstration, indexation durable, modes.
+Brouillon, jamais validé (après la revue indépendante du 17/11, changements non relus par un relecteur indépendant). Contrôles du lot C3.
 
 == schemas
 - 0 hints
@@ -26,7 +26,7 @@ Liens : 33 page(s), 1138 lien(s) interne(s) vérifié(s), 436 externe(s) non vé
 FIN 0
 
 == index
-Indexation durable : 0 erreur(s) ; drapeau true, variable SITE_INDEXABLE "true" ; comparaison avec origin/main : 30 page(s) publiée(s) dans la base, 31 dans la pull request.
+Indexation durable : 0 erreur(s) ; drapeau true, variable SITE_INDEXABLE "true" ; comparaison avec origin/main : 31 page(s) publiée(s) dans la base, 31 dans la pull request.
 FIN 0
 
 == modes
