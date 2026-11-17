@@ -28,7 +28,7 @@ const parId = new Map(plan.map((p) => [p.id, p]));
  * Contrôle d'une page rédigée d'un type de la vague A. Seules les pages de la vague A relèvent de la porte de l'étape 6 :
  * les pages du même type des vagues suivantes (les pneus de la vague C, étape 11, lot C4) sont contrôlées par
  * R4-VALIDATION-ABSENTE à la construction et par la règle de passage (travaux/etape-8/regle-de-passage.md), pas ici.
- * Changement validé avec le lot C4 (décision du pilotage du 17/11/2026, règle 6 ; paquet du lot C4). Renvoie « ignoree »
+ * Changement à valider par Houssem avec le lot C4 (décision du pilotage du 17/11/2026, règle 6 ; paquet du lot C4). Renvoie « ignoree »
  * pour une page d'une autre vague, « controlee » sinon ; lève une erreur si la page de la vague A ne passe pas.
  */
 function controlerPageRedigee(chemin: string, texte: string, type: TypePage): 'ignoree' | 'controlee' {

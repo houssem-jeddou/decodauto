@@ -6,33 +6,35 @@
 #   308 ; Toyota Yaris non lue. Légifrance relu à l'écran le 17/11 : arrêté du 18 juillet 2019, article 5, et code de la
 #   route R314-1 (vers 1 h 50) ; annexe I de l'arrêté du 18 juin 1991, 5.2.3 d et e, et article 7 (vers 13 h 15, §14) ;
 #   R314-1 en entier et article 5 de l'arrêté de 2019 en entier (vers 13 h 50, §15).
-# - Décisions du pilotage (règle 6, 17/11) : pneus usés, les cinq notices classées par la grille, niveau de l'obligation
-#   légale par la demande de changement n° 36 (proposée) ; pneu endommagé et vibrations : Seat seule, au niveau de sa
+# - Décisions du pilotage (règle 6, 17/11) : pneus usés, les cinq notices classées par la grille, niveau de la ligne 1 par
+#   les notices et la règle 1 de la demande de changement n° 36 (indicateur atteint : défaillance majeure), réécrite après
+#   la revue indépendante du lot C4 (l'indicateur signale 1,6 mm avec une tolérance de + 0,6/- 0 mm : l'article 5 ne fixe
+#   pas le niveau) ; pneu endommagé et vibrations : Seat seule, au niveau de sa
 #   citation ; « 6 ans » : seulement comme consigne Seat, jamais comme règle générale.
 # - Illustration : `usure-pneu-temoin`, dessinée pour cette page (travaux/etape-11/generer-illustrations.py).
 id: usure-des-pneus
 title: "Pneu usé : témoin d'usure, 1,6 mm et quand changer ses pneus"
 h1: "Pneus usés : peut-on encore rouler, et comment lire le témoin d'usure ?"
-description: "Un pneu est usé quand ses témoins d'usure affleurent : il reste 1,6 mm, le minimum légal. Ne repartez pas sans le changer. Ce que disent la loi et cinq notices."
+description: "Un pneu est usé quand ses témoins d'usure affleurent la bande de roulement : ne repartez pas sans le changer. Ce que disent les notices, le contrôle technique et la loi."
 libelle_court: Usure des pneus
 question_decision: "Puis-je rouler avec des pneus usés, et comment savoir s'ils le sont ?"
-reponse_directe: "Regardez les témoins d'usure au fond des rainures : s'ils affleurent la bande de roulement, il reste 1,6 mm ou moins, le minimum légal. Ne poursuivez pas votre trajet avec ces pneus : faites-les remplacer."
+reponse_directe: "Regardez les témoins d'usure au fond des rainures : s'ils affleurent la bande de roulement, le pneu est à sa limite d'usure. Ne poursuivez pas votre trajet avec ces pneus : faites-les remplacer."
 situations:
-  - situation: "Les témoins d'usure affleurent la bande de roulement : les rainures n'ont plus que 1,6 mm ou moins"
+  - situation: "Les pneus sont usés jusqu'aux témoins d'usure : les témoins affleurent la bande de roulement"
     verdict: non, arrêt dès que possible
     urgence: immédiate
     action: "Ne poursuivez pas votre trajet avec ces pneus : faites-les remplacer avant de reprendre la route, au moins les deux d'un même essieu."
-    ecart_marques: "L'arrêté du 18 juillet 2019 exige au moins 1,6 mm pendant toute l'utilisation sur route, et la notice Seat Ibiza annonce un risque d'accident ; les notices Peugeot 208 et Citroën C3 demandent de remplacer impérativement les pneus, les notices Renault Clio 5 et Dacia Sandero 3 de les remplacer, sans délai écrit."
-    ecart_court: "Plus stricts : la loi (1,6 mm au moins) et Seat. Moins stricts : Peugeot, Citroën (remplacer impérativement), Renault et Dacia (remplacer)."
+    ecart_marques: "Le contrôle technique classe l'indicateur d'usure atteint en défaillance majeure, et la notice Seat Ibiza annonce un risque d'accident ; les notices Peugeot 208 et Citroën C3 demandent de remplacer impérativement les pneus, les notices Renault Clio 5 et Dacia Sandero 3 de les remplacer, sans délai écrit."
+    ecart_court: "Plus stricts : contrôle technique (défaillance majeure) et Seat. Moins stricts : Peugeot, Citroën (remplacer impérativement), Renault et Dacia (remplacer)."
     citations:
-      - source: arrete-2019-07-18-pneumatiques
-        emplacement: "article 5"
-        extrait: "Les pneumatiques des véhicules des catégories M 1, N 1, O 1 et O 2 doivent présenter, pendant toute leur utilisation sur route, dans les rainures principales de leur bande de roulement, une profondeur d'au moins 1,6 mm."
+      - source: arrete-1991-06-18-controle-technique
+        emplacement: "annexe I, point 5.2.3.e.2 (défaillance majeure)"
+        extrait: "L'indicateur d'usure de la profondeur des sculptures est atteint"
         verdict: non, arrêt dès que possible
         urgence: immédiate
       - source: notice-seat-ibiza
         emplacement: "p. 308, « Indicateurs d'usure », AVERTISSEMENT"
-        extrait: "Les pneus doivent être changés au plus tard lorsque les indicateurs d'usure sont usés. […] il existe des risques d'accident !"
+        extrait: "Les pneus doivent être changés au plus tard lorsque les indicateurs d'usure sont usés. S'il n'est pas fermé, il existe des risques d'accident !"
         verdict: non, arrêt dès que possible
         urgence: immédiate
       - source: notice-peugeot-208
@@ -106,7 +108,7 @@ defaillances:
     signification: "La profondeur des sculptures n'est pas conforme aux exigences (point 5.2.3.e.3) ; corde visible ou endommagée (point 5.2.3.d.3)"
 contre_visite:
   delai: "Deux mois après le contrôle technique"
-  demarche: "Une défaillance majeure laisse le contrôle valable deux mois ; une défaillance critique, le seul jour du contrôle. Dans les deux cas, la contre-visite se fait dans les deux mois, faute de quoi un nouveau contrôle complet est à refaire (article 7)."
+  demarche: "La contre-visite se fait dans les deux mois qui suivent le contrôle, faute de quoi un nouveau contrôle complet est à refaire (article 7). Ce délai sert à remplacer les pneus et repasser : il n'autorise pas à rouler avec des pneus usés."
 illustration:
   fichier: usure-pneu-temoin
   alt: "Coupe de la bande de roulement : neuve, le témoin d'usure est en retrait au fond de la rainure ; usée, la bande arrive au niveau du témoin, il reste 1,6 mm. Sur le flanc, « TWI » ou un triangle repère l'emplacement des témoins"
@@ -139,17 +141,19 @@ prochaine_revue: 2027-05-17
 
 {{repere:ligne-1}}
 
-Quand les témoins d'usure affleurent la bande de roulement : il ne reste alors que 1,6 mm, ou moins, dans les rainures. L'arrêté du 18 juillet 2019 exige au moins 1,6 mm dans les rainures principales des pneus d'une voiture particulière, pendant toute leur utilisation sur route ({{cite:arrete-2019-07-18-pneumatiques|article 5}}). {{verdict:ligne-1}}, selon l'encadré.
+Quand les témoins d'usure affleurent la bande de roulement : le pneu est à sa limite d'usure. {{verdict:ligne-1}}, selon l'encadré. Au contrôle technique, un indicateur d'usure atteint est une défaillance majeure ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 5.2.3}}).
 
-Les cinq notices lues demandent alors de remplacer les pneus. Peugeot 208 et Citroën C3 le jugent impératif ; Renault Clio 5 et Dacia Sandero 3 le jugent nécessaire, car l'adhérence devient mauvaise sur route mouillée. Selon la notice Seat Ibiza, les pneus doivent être changés au plus tard à ce moment, sinon il existe des risques d'accident.
+Les cinq notices lues demandent alors de remplacer les pneus. Selon Peugeot 208 et Citroën C3, la profondeur des rainures est alors inférieure à 1,6 mm, et le remplacement est impératif ; selon Renault Clio 5 et Dacia Sandero 3, elle n'est plus que de 1,6 mm au plus, et l'adhérence devient mauvaise sur route mouillée. Selon la notice Seat Ibiza, les pneus doivent être changés au plus tard à ce moment, sinon il existe des risques d'accident.
 
-La notice Seat Ibiza rappelle que ce danger est plus grand par mauvais temps, sous la pluie ou le verglas. Elle conseille une profondeur de sculpture la plus grande possible, et à peu près égale à l'avant et à l'arrière ({{cite:notice-seat-ibiza|p. 308}}).
+L'arrêté du 18 juillet 2019 exige au moins 1,6 mm dans les rainures principales des pneus d'une voiture particulière, pendant toute leur utilisation sur route. Les indicateurs signalent 1,6 mm avec une tolérance de + 0,6/- 0 mm : à l'indicateur, l'exigence légale peut encore être remplie ({{cite:arrete-2019-07-18-pneumatiques|article 5}}).
+
+La notice Seat Ibiza rappelle que le danger est plus grand par mauvais temps, sous la pluie ou le verglas. Elle conseille une profondeur de sculpture la plus grande possible, et à peu près égale à l'avant et à l'arrière ({{cite:notice-seat-ibiza|p. 308}}).
 
 ## Où sont les témoins d'usure ?
 
 Au fond des rainures de la bande de roulement. Les notices Renault Clio 5 et Dacia Sandero 3 les décrivent comme des bossages incorporés dans l'épaisseur de la bande ; la notice Seat Ibiza, comme des indicateurs de 1,6 mm de hauteur, placés à intervalles réguliers en travers du sens de roulement ({{cite:notice-renault-clio-5|p. 346}} ; {{cite:notice-dacia-sandero-3|p. 307}} ; {{cite:notice-seat-ibiza|p. 308}}).
 
-L'arrêté du 18 juillet 2019 impose ces indicateurs sur les pneus des voitures particulières : ils signalent que les rainures n'ont plus que 1,6 mm, avec une tolérance de + 0,6/- 0 mm ({{cite:arrete-2019-07-18-pneumatiques|article 5}}).
+L'arrêté du 18 juillet 2019 impose ces indicateurs sur les pneus des voitures particulières ({{cite:arrete-2019-07-18-pneumatiques|article 5}}).
 
 Pour les trouver, cherchez sur le flanc du pneu les lettres « TWI » ou un petit triangle, selon la notice Seat Ibiza. Tant que le témoin reste en retrait de la bande de roulement, il reste plus de 1,6 mm, selon les notices Peugeot 208 et Citroën C3 ({{cite:notice-peugeot-208|p. 169}} ; {{cite:notice-citroen-c3|p. 115}}).
 
@@ -159,7 +163,7 @@ Le « témoin » allumé au tableau de bord est autre chose : c'est le voyant de
 
 Au contrôle technique, un indicateur d'usure atteint est une défaillance majeure, et une profondeur qui n'est pas conforme aux exigences, une défaillance critique. Une usure anormale est une défaillance mineure ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 5.2.3}}).
 
-Une défaillance majeure laisse le contrôle valable deux mois ; une défaillance critique, le seul jour du contrôle. Dans les deux cas, la contre-visite se fait dans les deux mois ({{cite:arrete-1991-06-18-controle-technique|article 7}}). La page [contre-visite du contrôle technique](/contre-visite-controle-technique/) détaille les délais.
+La contre-visite se fait dans les deux mois qui suivent le contrôle ({{cite:arrete-1991-06-18-controle-technique|article 7}}) : ce délai sert à remplacer les pneus et à repasser, il n'autorise pas à rouler avec des pneus usés. La page [contre-visite du contrôle technique](/contre-visite-controle-technique/) détaille les délais.
 
 Sur la route, le code de la route exige des sculptures apparentes sur toute la surface de roulement, aucune toile visible et aucune déchirure profonde sur les flancs. Y contrevenir est puni de l'amende prévue pour les contraventions de la quatrième classe, et l'immobilisation du véhicule peut être prescrite ({{cite:code-de-la-route-r314-1|article R314-1}}).
 
@@ -167,7 +171,7 @@ Sur la route, le code de la route exige des sculptures apparentes sur toute la s
 
 {{repere:ligne-2}}
 
-Non : {{verdict:ligne-2}}, selon l'encadré. La notice Seat Ibiza demande de ne jamais rouler avec des pneus endommagés, et de faire remplacer immédiatement une roue ou un pneu défectueux. Elle demande de vérifier de temps en temps que les pneus n'ont ni trou, ni entaille, ni déchirure, ni boursouflure ({{cite:notice-seat-ibiza|p. 304-305}}).
+{{verdict:ligne-2}}, selon l'encadré. La notice Seat Ibiza demande de ne jamais rouler avec des pneus endommagés, et de faire remplacer immédiatement une roue ou un pneu défectueux. Elle demande de vérifier de temps en temps que les pneus n'ont ni trou, ni entaille, ni déchirure, ni boursouflure ({{cite:notice-seat-ibiza|p. 304-305}}).
 
 Au contrôle technique, un pneu gravement endommagé ou entaillé est une défaillance majeure ; une corde visible ou endommagée, une défaillance critique ({{cite:arrete-1991-06-18-controle-technique|annexe I, point 5.2.3}}).
 
@@ -207,8 +211,8 @@ En hiver, dans les communes soumises à la loi montagne, d'autres règles s'ajou
 
 | Source | Repère d'usure | Ce qu'elle demande |
 |---|---|---|
-| Arrêté du 18 juillet 2019 | 1,6 mm au moins dans les rainures principales | Pendant toute l'utilisation sur route |
-| Contrôle technique (annexe I) | Indicateur d'usure atteint : défaillance majeure ; profondeur non conforme : critique | Contre-visite dans les deux mois |
+| Arrêté du 18 juillet 2019 | 1,6 mm au moins dans les rainures principales ; indicateurs à 1,6 mm (tolérance + 0,6/- 0 mm) | Pendant toute l'utilisation sur route |
+| Contrôle technique (annexe I) | Indicateur d'usure atteint : défaillance majeure ; profondeur non conforme : critique | Remplacer les pneus, puis contre-visite dans les deux mois |
 | Peugeot 208 | Témoins d'usure qui n'apparaissent plus en retrait : moins de 1,6 mm | Remplacer impérativement les pneus |
 | Citroën C3 | Comme Peugeot 208 | Remplacement impératif |
 | Renault Clio 5 phase 2 | Bossages-témoins visibles : 1,6 mm au plus | Remplacement nécessaire (mauvaise adhérence sur route mouillée) |

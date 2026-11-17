@@ -27,7 +27,8 @@ traits clairs, ambre pour « regardez ici »). Brouillon, jamais validé.
   Sandero 3 p. 307, Seat Ibiza p. 308 (relues à l'écran le 17/11/2026, vers 12 h 55) ; arrêté du 18 juillet 2019,
   article 5.
 - contre-visite-delais (page « contre-visite ») : frise du jour du contrôle à deux mois ; défaillances majeures (S),
-  contrôle valable deux mois (vert) ; défaillance critique (R), valable le seul jour du contrôle (ambre) ; contre-visite
+  deux mois pour réparer et repasser (orange, couleur de « Non, ne poursuivez pas votre trajet ») ; défaillance critique
+  (R), valable le seul jour du contrôle (rouge, couleur de « Non, arrêtez-vous immédiatement ») ; contre-visite
   dans les deux mois ; au-delà, contrôle complet. Arrêté du 18 juin 1991, articles 7 et 8 (relus à l'écran le
   17/11/2026, vers 13 h 15).
 
@@ -190,13 +191,16 @@ def contre_visite_delais() -> str:
     p.append(texte(x1 + 18, 62, "+ 2 mois", taille=24, poids=600, couleur=DOUX, ancre="end"))
     for x in (x0, x1):
         p.append(f'<line x1="{x}" y1="76" x2="{x}" y2="238" stroke="#3a4553" stroke-width="4"/>')
-    p.append(texte(40, 118, "S", taille=32, poids=800, couleur=VERT, ancre="start"))
-    p.append(f'<rect x="{x0}" y="96" width="{x1 - x0}" height="30" rx="15" fill="{VERT}" opacity=".85"/>')
-    p.append(texte(40, 188, "R", taille=32, poids=800, couleur=AMBRE, ancre="start"))
-    p.append(f'<rect x="{x0 - 15}" y="166" width="30" height="30" rx="15" fill="{AMBRE}"/>')
-    p.append(f'<line x1="{x0 + 30}" y1="181" x2="{x1}" y2="181" stroke="{AMBRE}" stroke-width="4" stroke-dasharray="10 8"/>')
-    p.append(texte(350, 156, "valable 2 mois", taille=24, poids=700, couleur=VERT))
-    p.append(texte(360, 226, "valable le jour même", taille=24, poids=700, couleur=AMBRE))
+    # Couleurs des niveaux de la charte (--led2 : « Non, ne poursuivez pas votre trajet » ; --led3 : « Non,
+    # arrêtez-vous immédiatement ») : S et R sont des résultats défavorables, aucun des deux n'est vert.
+    orange, rouge = "#ffab70", "#ff8a80"
+    p.append(texte(40, 118, "S", taille=32, poids=800, couleur=orange, ancre="start"))
+    p.append(f'<rect x="{x0}" y="96" width="{x1 - x0}" height="30" rx="15" fill="{orange}" opacity=".85"/>')
+    p.append(texte(40, 188, "R", taille=32, poids=800, couleur=rouge, ancre="start"))
+    p.append(f'<rect x="{x0 - 15}" y="166" width="30" height="30" rx="15" fill="{rouge}"/>')
+    p.append(f'<line x1="{x0 + 30}" y1="181" x2="{x1}" y2="181" stroke="{rouge}" stroke-width="4" stroke-dasharray="10 8"/>')
+    p.append(texte(350, 156, "2 mois pour réparer", taille=24, poids=700, couleur=orange))
+    p.append(texte(360, 226, "valable le jour même", taille=24, poids=700, couleur=rouge))
     p.append(texte(320, 284, "Contre-visite : dans les 2 mois", taille=24, poids=700, couleur=TEXTE))
     p.append(texte(320, 316, "après : contrôle complet", taille=24, poids=600, couleur=DOUX))
     p.append("</svg>")
