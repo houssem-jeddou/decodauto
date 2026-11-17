@@ -1,0 +1,232 @@
+# Relevé des sources de la vague C (préparation anticipée de l'étape 11), 17/11/2026
+
+**Brouillon, jamais validé.** Relevé de travail, jamais publié. Préparation anticipée de l'étape 11 (docs/03, règle 12,
+quatrième exception, demande de changement n° 21) : rien n'en est présenté à la validation, fusionné ni publié avant la
+fermeture de la porte de l'étape 10. Aucun niveau ci-dessous n'est validé : les niveaux sont ceux que la grille
+(`src/schemas/grille.ts`) tire de chaque consigne, proposés pour le paquet de validation de Houssem.
+
+Pages couvertes : les 9 pages de la vague C de `data/plan-du-site.json` (`huile-moteur`, `huile-5w30`, `huile-5w40`,
+`huile-10w40`, `niveau-huile`, `liquide-de-refroidissement`, `liquide-de-frein`, `usure-des-pneus`,
+`contre-visite-controle-technique`).
+
+## 1. Méthode de lecture et limites
+
+Chaque extrait porte une lettre qui dit comment il a été lu :
+
+- **[E5]** texte relevé de l'étape 5 (`travaux/etape-5/notices/<notice>.txt`, branche `preparation/etape-10` ; texte
+  extrait du PDF officiel par pdf.js, sans retouche ; retiré du dépôt public par la demande n° 29) : mot pour mot.
+  Ces relevés ne couvrent que les témoins et quelques rubriques voisines.
+- **[E10]** relevé vérifié à l'écran de l'étape 10 (`travaux/etape-10/textes/porte10-verification.md` et
+  `autres-pannes-verification.md`, branche `etape-10/lot-b4`) : lu mot pour mot dans le PDF officiel par pdf.js dans
+  Chrome, les 15 et 16/11/2026.
+- **[E8]** relevé de l'étape 8 (`travaux/etape-8/textes/`, sur `main`) : Légifrance lu dans le Chrome de Houssem le
+  14/11/2026 (`controle-technique-releve.md`) ; notice Seat Leon lue par extraction du texte du PDF, sans voir les pages
+  (`frein-releve.md`, « à relire à l'écran si un doute apparaît »).
+- **[WF]** lecture automatique d'une page web par l'outil de lecture de cette session (WebFetch), le 17/11/2026. Cet
+  outil ne rend que des citations de moins de 125 caractères et résume le reste : **chaque extrait [WF] est à relire à
+  l'écran** avant d'entrer dans une page ou un paquet.
+
+Pages des notices : numéros des pages imprimées, comme les relevés des étapes 5 et 10 (décalage des PDF : Peugeot,
+Citroën, Renault, Dacia et Seat, page PDF − 2 ; Toyota, page PDF = page imprimée). Adresses des PDF : `data/sources.json`.
+
+**Limites de cette session.** Les PDF des notices (servicebox Peugeot, service.citroen.com, seat.fr,
+user-manual.renault.com) et l'accès direct à Légifrance sont refusés par le proxy de la session (« 403 » à la
+connexion, 17/11/2026) : aucune nouvelle page de notice n'a pu être lue. Tout ce qui manque aux notices ci-dessous est
+donc « non lu », pas « absent de la notice ». Légifrance a été lu par [WF], puis relu à l'écran le 17/11 vers 1 h 50 pour l'arrêté du 18 juillet 2019 (article 5) et les articles R314-1 et R323-1 du code de la route (mot pour mot conformes ; R323-1 : contravention de la quatrième classe, immobilisation possible).
+
+## 2. Sources nouvelles à inscrire au registre (avec le lot qui les cite)
+
+| Identifiant proposé | Catégorie (nature) | Titre et adresse | Consulté | Lu par |
+|---|---|---|---|---|
+| `arrete-2019-07-18-pneumatiques` | `legifrance` | Arrêté du 18 juillet 2019 relatif aux pneumatiques, article 5 (en vigueur depuis le 31/08/2019) : https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000038995312 ; texte : https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000038987822 | 17/11/2026 | [écran, 17/11 vers 1 h 50, Légifrance dans Chrome] |
+| `code-de-la-route-r314-1` | `legifrance` | Code de la route, article R314-1 (en vigueur depuis le 27/08/2020) : https://www.legifrance.gouv.fr/codes/id/LEGISCTA000006159580 (chapitre « Pneumatiques ») | 17/11/2026 | [écran, 17/11 vers 1 h 50, Légifrance dans Chrome] |
+| `code-de-la-route-r323-1` | `legifrance` | Code de la route, article R323-1 (en vigueur depuis le 01/01/2026, décret n° 2025-1180 du 8 décembre 2025, art. 4) : https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053003281 | 17/11/2026 | [écran, 17/11 vers 1 h 50, Légifrance dans Chrome] |
+| `reglement-onu-30` | `reglement-onu` | Règlement n° 30 de la CEE-ONU, pneumatiques pour automobiles et leurs remorques, révision 3 (29/03/2007), E/ECE/324/Rev.1/Add.29/Rev.3 : https://digitallibrary.un.org/record/597096/files/E_ECE_324_Rev.1_Add.29_Rev.3_E_ECE_TRANS_505_Rev.1_Add.29_Rev.3-FR.pdf (version consolidée en vigueur à trouver ; EUR-Lex : https://eur-lex.europa.eu/eli/reg/2008/30(2)/oj, sans le texte) | 17/11/2026 | [WF] |
+| `service-public-controle-technique` | `secondaire` (`administration`) | Service-public.fr, fiche F2878 « Contrôle technique d'une voiture (catégorie M1) », vérifiée le 01/01/2026 : https://www.service-public.gouv.fr/particuliers/vosdroits/F2878 (lue dans sa version anglaise `?lang=en`) | 17/11/2026 | [WF] |
+| `acea-oil-sequences-2023` | `secondaire` (`document-technique`, **à faire admettre**) | ACEA (association des constructeurs européens), « ACEA Oil Sequences 2023 – Light-duty engines », révision 0 du 12/09/2023 : https://www.acea.auto/publication/acea-oil-sequences-2023/ et https://www.acea.auto/files/2023_ACEA_oil_sequences_light-duty_engines.pdf | 17/11/2026 | [WF] |
+
+Déjà au registre et utilisées ici : les sept notices (`notice-peugeot-208`, `notice-citroen-c3`, `notice-seat-ibiza`,
+`notice-seat-leon`, `notice-renault-clio-5`, `notice-dacia-sandero-3`, `notice-toyota-yaris`) et
+`arrete-1991-06-18-controle-technique` (pour l'annexe I en vigueur depuis le 01/01/2026, adresse lue par [WF] :
+https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053003556/2026-04-28 ; articles 5 à 11 :
+https://www.legifrance.gouv.fr/codes/id/LEGISCTA000034159602), `code-penal-131-13`.
+
+Écarté : l'article R543-6 du code de l'environnement (lu le 17/11, [WF], en vigueur depuis le 01/07/2022) ne porte que
+sur l'enregistrement des collecteurs d'huiles usagées, pas sur ce qu'un particulier doit en faire.
+
+## 3. Huile moteur et niveau d'huile (`huile-moteur`, `niveau-huile`)
+
+### 3.1 Consignes de notice (niveau selon la grille)
+
+| Notice | Emplacement | Extrait (mot pour mot) | Niveau tiré de la consigne | Lu par |
+|---|---|---|---|---|
+| Peugeot 208 | p. 166, « Huile moteur », vérification avec la jauge manuelle | « Ne pas démarrer le moteur si le niveau est : […] – Inférieur au repère B : effectuer impérativement un complément d'huile moteur. » | Non, arrêtez-vous immédiatement ; à faire tout de suite (« ne pas démarrer », absent de la grille : niveau le plus prudent, principes 3 et 6 ; **validé pour le dossier PureTech le 16/11**) | [E10] |
+| Peugeot 208 | p. 166, idem | « Ne pas démarrer le moteur si le niveau est : – Supérieur au repère A : faire appel au réseau PEUGEOT ou à un atelier qualifié. » | Non, arrêtez-vous immédiatement ; à faire tout de suite (même décision, validée le 16/11) | [E10] |
+| Citroën C3 | p. 112-113, « Huile moteur » | « Ne pas démarrer le moteur, si le niveau est : […] – Inférieur au repère B : effectuer impérativement un complément d'huile moteur. » ; « – Supérieur au repère A : faire appel au réseau CITROËN ou à un atelier qualifié. » | Mêmes niveaux que Peugeot (validés le 16/11) | [E10] |
+| Peugeot 208 | p. 166 | « La vérification du niveau s'effectue sur un sol plat, moteur à l'arrêt depuis 30 minutes, soit avec l'indicateur de niveau d'huile au combiné, à la mise du contact (pour les véhicules équipés d'une jauge électrique), soit avec la jauge manuelle. » | Fait (procédure), sans niveau | [E10] |
+| Peugeot 208 | p. 166 | « Il est normal de faire des appoints d'huile entre deux révisions (ou vidanges). Il est préconisé d'effectuer un contrôle, avec appoint si nécessaire, tous les 5 000 km. » | Fait, sans niveau | [E10] |
+| Peugeot 208 | p. 166 | « Pour préserver la fiabilité des moteurs et les dispositifs d'antipollution, ne jamais utiliser d'additif dans l'huile moteur. » ; « le niveau correct doit se situer entre les repères A (maxi) et B (mini). » | Fait, sans niveau | [E10] |
+| Peugeot 208 | p. 166 | « Avant d'effectuer un complément d'huile ou une vidange du moteur, vérifier que l'huile corresponde à la motorisation et soit conforme aux recommandations indiquées dans le plan d'entretien » ; « Dans les 30 minutes qui suivent un appoint d'huile, l'indication du niveau d'huile au combiné à la mise du contact n'est pas valable. » ; complément : verser par petites quantités, attendre quelques minutes avant de vérifier à la jauge (**résumé du relevé, pas mot pour mot**) | Fait, sans niveau | [E10] |
+| Citroën C3 | p. 112-113 | Même texte que Peugeot p. 166 (« A = MAXI », « B = MINI », contrôle « tous les 5 000 km », « ne jamais utiliser d'additif dans l'huile moteur ») | Fait | [E10] |
+| Peugeot 208 | p. 165, « Niveaux » | « Vérifier régulièrement tous ces niveaux dans le respect du plan d'entretien du constructeur. Faire l'appoint si nécessaire, sauf indication contraire. En cas de baisse importante d'un niveau, faire vérifier le circuit correspondant par le réseau PEUGEOT ou par un atelier qualifié. » | Oui, avec précautions ; à faire dans les jours qui viennent (« faire vérifier », sans délai) : pour une baisse importante d'un niveau, tous circuits | [E10] |
+| Peugeot 208 | p. 20, « Indicateur de niveau d'huile moteur » | « Toute vérification de ce niveau n'est valable que si le véhicule est sur un sol horizontal, moteur à l'arrêt depuis plus de 30 minutes. » | Fait, sans niveau | [E5] |
+| Peugeot 208 | p. 20, Manque d'huile | « Si le manque d'huile est confirmé par la vérification à la jauge manuelle, compléter impérativement le niveau pour éviter la détérioration du moteur. » | Déjà dans la base (`huile-niveau`) : oui, avec précautions ; tout de suite | [E5] |
+| Seat Ibiza | p. 294, « Huile moteur », témoin | « S'allume en jaune. Contrôlez immédiatement le niveau d'huile du moteur. Faites l'appoint d'huile dès que possible » | Déjà dans la base (`huile-niveau`) | [E5] |
+| Seat Ibiza | p. 294, témoin | « Il clignote en jaune. Dysfonctionnement du capteur de niveau d'huile. Adressez-vous à un atelier spécialisé pour le faire réviser. Par mesure de sécurité, il est recommandé de contrôler le niveau d'huile moteur à l'occasion de chaque passage à la pompe. » | Oui, avec précautions ; à faire dans les jours qui viennent (« adressez-vous à un atelier », sans délai) ; une seule notice | [E5] |
+| Seat Ibiza | p. 294, témoin rouge | « Si le voyant clignote accompagné de trois signaux sonores d'avertissement , arrêtez le moteur et contrôlez le niveau d'huile. » ; « Si le témoin clignote bien que le niveau d'huile soit correct, ne poursuivez pas votre route. Ne faites pas non plus tourner le moteur au ralenti. » | Non, arrêtez-vous immédiatement ; tout de suite (« arrêtez le moteur ») ; cas de la ligne de base `huile-pression-rouge`, déjà la plus stricte | [E5] |
+| Renault Clio 5 phase 2 | p. 386, « Anomalies de fonctionnement », « Sur route » | « Le témoin de pression d'huile s'allume : en virage ou au freinage » → « Le niveau est trop bas. » → « Ajoutez de l'huile moteur 🡺 332. » | Oui, avec précautions ; à faire dans les jours qui viennent (« ajoutez », sans délai) ; l'autre cas du même tableau (« tarde à s'éteindre ou reste allumé à l'accélération » → « Arrêtez-vous ») relève de la ligne de base `huile-pression-rouge` | [E10] |
+| Dacia Sandero 3 | p. 348-349, même tableau | Mêmes lignes que Renault, mot pour mot (relevé du 16/11) | Idem | [E10] |
+| Renault Clio 5 phase 2 | p. 131, « Alerte niveau d'huile moteur minimum » | « Au démarrage moteur, l'afficheur au tableau de bord vous alerte lorsque le niveau d'huile minimum est atteint 🡺 330 . » | Fait (comment l'alerte s'affiche), sans consigne propre | [E5] |
+| Dacia Sandero 3 | p. 105, idem | « Au démarrage moteur, l'afficheur au tableau de bord vous alerte lorsque le niveau d'huile minimum est atteint 🡺 294 . » | Fait, sans consigne propre | [E5] |
+| Toyota Yaris | p. 299, 7.2.5 | « Le niveau d'huile moteur est faible. Vérifiez le niveau d'huile moteur et faites l'appoint, si nécessaire. ( → P. 247) » | Déjà dans la base (`huile-niveau`) | [E5] |
+| Toyota Yaris | p. 300, 7.2.5 | « Si “Entretien d'huile bientôt requis” s'affiche […] Indique qu'une vidange de l'huile moteur doit être programmée. Vérifiez le niveau d'huile moteur et effectuez la vidange si nécessaire. » | Oui, vous pouvez rouler ; à prévoir dans les semaines qui viennent (entretien à programmer, sans anomalie) | [E5] |
+
+Lignes de la base qui servent ces pages : `huile-niveau` (alerte de niveau, Seat p. 294, Peugeot p. 20, Toyota p. 299),
+`huile-pression-rouge` (cinq notices), `entretien-vidange` (cinq notices : Peugeot p. 19-20, Seat p. 90, Renault
+p. 122 et 136, Dacia p. 98 et 110, Toyota p. 300).
+
+### 3.2 Ce qui n'est pas trouvé (huile moteur, niveau)
+
+- **Procédure complète de la jauge** (sortir, essuyer, replonger, lire) : non relevée mot pour mot, même chez Peugeot et
+  Citroën. Rubriques à lire : Renault Clio 5 p. 330-332, Dacia Sandero 3 p. 294, Seat Ibiza p. 295, Toyota Yaris p. 247
+  (pages données par les renvois des textes [E5] ci-dessus).
+- **Consigne des autres marques sous le mini ou au-dessus du maxi** : non lue ; les deux lignes de la jauge reposent sur
+  deux notices d'un seul groupe (Stellantis). La page le dit (charte §2.1).
+- **Huile préconisée par moteur** (norme du constructeur, viscosité) et **intervalle de vidange** : non lus dans les six
+  notices (rubriques « caractéristiques » et plan d'entretien) ; le plan d'entretien de Peugeot et Citroën n'est pas au
+  registre.
+- **Causes d'une consommation d'huile excessive** : aucune dans les notices lues (le dossier PureTech cite seulement le
+  constructeur sur ses moteurs). La page le dit et conseille un professionnel.
+- **« Vidange par aspiration »**, **vidange Opel Corsa** : aucune source admise lue.
+
+## 4. Viscosités (`huile-5w30`, `huile-5w40`, `huile-10w40`, et le tableau des grades de `huile-moteur`)
+
+| Source | Emplacement | Extrait | Usage | Lu par |
+|---|---|---|---|---|
+| Peugeot 208 | p. 166 | « vérifier que l'huile corresponde à la motorisation et soit conforme aux recommandations indiquées dans le plan d'entretien » | Fait de première main pour la réponse directe : la notice décide, pas le grade | [E10] |
+| Citroën C3 | p. 112-113 | Même consigne que Peugeot | Idem | [E10] |
+| ACEA 2023 (à admettre) | rubrique « Consumer Language » (pages non numérotées) | C2 : « Stable, stay-in-grade engine oil with mid-SAPS Level, for aftertreatment system compatibility. » ; C4 : « with low-SAPS Level, for aftertreatment system compatibility. » ; C3 : pour des huiles de viscosité HTHS d'au moins 3,5 mPa·s ; « consult the manufacturer's owner manual/handbook in case of doubt » ; grade de viscosité « according to SAE J300 » | Signification des classes C2, C3, C4 (source secondaire, jamais un verdict) ; en anglais : traduction à signaler (charte §2.2) | [WF] |
+
+Non trouvé :
+
+- **Signification d'un grade SAE** (le « 5W » à froid, le « 30 » à chaud) : la norme SAE J300 est payante, non achetée ; le
+  document ACEA y renvoie sans la redonner. Aucune source admise ne l'explique aujourd'hui : **question à trancher**
+  (source secondaire admise, ou page qui ne l'explique pas). Les sites des marques d'huile vendent leur produit : exclus
+  (charte §2.2).
+- **Huile 85W140** (huile de transmission, norme SAE J306 : docs/09, cas 3) : aucune source lue.
+- **Normes Renault RN17, Volkswagen 504 00 et 507 00 (« Long Life »)** : aucun document du constructeur lu.
+- **Quelle notice de référence cite une 5W30, une 5W40 ou une 10W40** : non lu (rubriques « caractéristiques »).
+- Relevé Google (docs/07, depuis la Tunisie) pour « huile 5w30 pour quel moteur » : questions associées « Quelles voitures
+  utilisent de l'huile 5W30 ? », « Quelle est la différence entre 5W30 et 5W40 ? », « Quand utiliser de l'huile 5W30 ? »,
+  « Puis-je mettre de la 5W40 au lieu de la 5W30 ? » ; aucune page de première main en tête (TotalEnergies Gabon,
+  distributeurs).
+
+## 5. Liquide de refroidissement (`liquide-de-refroidissement`)
+
+| Notice ou texte | Emplacement | Extrait (mot pour mot) | Niveau tiré de la consigne | Lu par |
+|---|---|---|---|---|
+| Seat Ibiza | p. 298, « Liquide de refroidissement », appoint | « Faites l'appoint de liquide de refroidissement uniquement s'il en reste encore dans le vase d'expansion, sinon vous pourriez endommager le moteur. S'il n'y a plus de liquide de refroidissement dans le vase d'expansion, arrêtez-vous. Faites appel à un spécialiste en mesure de vous dépanner » | Non, arrêtez-vous immédiatement ; tout de suite (« arrêtez-vous ») : vase d'expansion vide | [E10] |
+| Seat Ibiza | p. 298, ATTENTION | « Si vous manquez de liquide de refroidissement dans le vase d'expansion, garez la voiture dans un endroit sûr et arrêtez-vous. Demandez de l'aide à un technicien. » | Non, arrêtez-vous immédiatement ; tout de suite | [E10] |
+| Seat Ibiza | p. 298, AVERTISSEMENT | « Le système de refroidissement est sous pression ! N'ouvrez jamais le bouchon du vase d'expansion du liquide de refroidissement tant que le moteur est chaud. Risque de brûlures ! » | Fait de sécurité (geste interdit), sans niveau | [E10] |
+| Seat Ibiza | p. 298, appoint | « Laissez refroidir le moteur. » ; « Si vous perdez du liquide de refroidissement, rendez-vous dans un atelier spécialisé pour inspecter le système de refroidissement. » | Perte de liquide : oui, avec précautions ; dans les jours qui viennent (« rendez-vous dans un atelier », sans délai) | [E10] |
+| Seat Ibiza | p. 297 | Mélange d'eau traitée et d'au moins 40 % d'additif G12evo, protection antigel jusqu'à -25 °C ; liquide marron au lieu de lilas : mélange inadapté, à remplacer immédiatement (**résumé du relevé, à relire mot pour mot**) ; AVERTISSEMENT : « S'il n'y a pas suffisamment de liquide antigel dans le système de refroidissement, le moteur risque de ne pas fonctionner correctement – risque de blessures graves ! » | Faits (liquide, couleur) ; « marron : à remplacer immédiatement » à classer quand l'extrait sera relu (probablement oui, avec précautions ; tout de suite) | [E10] |
+| Seat Ibiza | p. 298, contrôle du niveau | Véhicule à l'horizontale, contact coupé, niveau entre les repères moteur froid (**résumé, à relire**) | Fait | [E10] |
+| Peugeot 208 | p. 167, « Liquide de refroidissement » | « Un appoint de ce liquide entre deux révisions est normal. Le contrôle et l'appoint doivent être faits moteur froid. Un niveau insuffisant présente des risques de dommages importants pour le moteur » | Fait | [E10] |
+| Peugeot 208 | p. 167 | « Si le niveau est proche ou en-dessous du repère "MINI", il est impératif de faire un appoint. » | Oui, avec précautions ; tout de suite (« faire un appoint », « impératif ») : niveau bas, liquide encore présent | [E10] |
+| Peugeot 208 | p. 167 | « Le circuit de refroidissement étant sous pression, attendre au moins une heure après l'arrêt du moteur pour intervenir. En cas d'intervention urgente, pour éviter tout risque de brûlure, se munir d'un chiffon et dévisser le bouchon de deux tours pour laisser retomber la pression. » | Fait de sécurité | [E10] |
+| Citroën C3 | p. 113 | Même texte que Peugeot p. 167 (relevé du 16/11 : « même rédaction ») | Mêmes niveaux | [E10] |
+| Renault Clio 5 phase 2 | p. 387, « Le moteur chauffe » | « Fuites de liquide de refroidissement. » → « Vérifiez le bocal de liquide de refroidissement : il doit contenir du liquide. S'il n'en contient pas, consultez un Représentant de la marque le plus tôt possible. » | Oui, avec précautions ; tout de suite (« le plus tôt possible ») ; **contexte** : le moteur chauffe et le témoin de température s'allume, cas de la ligne de base `temperature-rouge` (arrêt) | [E10] |
+| Renault Clio 5 phase 2 | p. 387 | « Bouillonnement dans le bocal de liquide de refroidissement. » → « Panne mécanique : joint de culasse détérioré. » → « Arrêtez le moteur. Faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement ; tout de suite (« arrêtez le moteur ») | [E10] |
+| Renault Clio 5 phase 2 | p. 387, radiateur | « Radiateur : Dans le cas d'un important manque de liquide de refroidissement n'oubliez pas qu'il ne faut jamais faire le plein avec du liquide de refroidissement froid lorsque le moteur est très chaud. » | Fait de sécurité | [E10] |
+| Dacia Sandero 3 | p. 348-350, même tableau | Mêmes lignes que Renault, mot pour mot | Mêmes niveaux | [E10] |
+| Renault Clio 5 phase 2 | p. 386 | « Fumée sous capot moteur. » → « Court-circuit ou fuite du circuit de refroidissement. » → « Arrêtez-vous, coupez le contact, éloignez-vous du véhicule et faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement ; tout de suite (cas de la page surchauffe ou fumée) | [E10] |
+| Toyota Yaris | p. 322-323, 7.2.11 | « 3.Après avoir laissé suffisamment refroidir le moteur, vérifiez que les durites et le faisceau de radiateur (radiateur) ne présentent pas de fuites. » (extrait de la base, ligne `temperature-rouge`) ; niveau entre « F » et « L », appoint (de l'eau en cas d'urgence, selon Toyota) (**résumé, à relire**) | Ligne de base `temperature-rouge` | [E5] et [E10] |
+| Contrôle technique | annexe I, 8.4.1 « PERTES DE LIQUIDES » | a.2 « Fuite excessive de liquide autre que de l'eau susceptible de porter atteinte à l'environnement » : majeure ; a.3 « écoulement permanent constituant un risque très grave » : critique (le point ne nomme pas le liquide de refroidissement) | Fait du contrôle technique, sans verdict de conduite | [WF] |
+
+Ligne de la base : `temperature-rouge` (voyant de température, cinq notices et Toyota p. 322-323).
+
+Non trouvé : le liquide préconisé par Peugeot 208, Citroën C3, Renault Clio 5, Dacia Sandero 3 et Toyota Yaris (norme,
+couleur) ; toute consigne propre à BMW (marque non lue) ; un texte sur le « G12 » hors du G12evo de Seat.
+
+## 6. Liquide de frein (`liquide-de-frein`)
+
+| Notice ou texte | Emplacement | Extrait | Niveau | Lu par |
+|---|---|---|---|---|
+| Seat Leon (4e génération) | p. 370, « Liquide de freins » | « Si le niveau de liquide de frein diminue sensiblement en peu de temps ou descend en dessous du repère [pictogramme du repère] » ; « il se peut que le système de freinage ne soit plus étanche. » ; « Faites appel à un spécialiste en mesure de vous dépanner. » | Non, ne poursuivez pas votre trajet ; tout de suite (« faites appel », grille) ; une seule notice | [E8] (extraction du texte du PDF : **à relire à l'écran** avant tout encadré) |
+| Seat Leon | p. 370 | « Nous vous recommandons de faire effectuer la vidange du liquide de frein par un Service Technique. » | Fait (remplacement au garage), sans niveau | [E8] |
+| Peugeot 208 | p. 14, « Freinage » (base `frein-rouge`) | « faire l'appoint avec un liquide conforme aux recommandations du Constructeur. » | Ligne de base `frein-rouge` (arrêt) | [E5] |
+| Peugeot 208 | p. 165, « Niveaux » | « En cas de baisse importante d'un niveau, faire vérifier le circuit correspondant par le réseau PEUGEOT ou par un atelier qualifié. » | Oui, avec précautions ; dans les jours qui viennent (consigne générale, moins prudente que Seat Leon) | [E10] |
+| Contrôle technique | annexe I, 1.1.10 | d.2 « Niveau du liquide de frein sous la marque MIN » : majeure ; d.3 « Pas de liquide de frein visible » : critique ; f.1 « Témoin du liquide des freins allumé ou défectueux » : mineure ; g.1 dispositif avertisseur de niveau insuffisant défectueux : mineure | Faits du contrôle technique | [WF] (d.2, d.3) ; [E8] (f.1, g.1) |
+| Contrôle technique | annexe I, 1.8 « LIQUIDE DE FREIN » | 1.8.1.a.2 « Liquide de frein contaminé ou sédimenté » : majeure ; 1.8.1.a.3 « Liquide de frein contaminé ou sédimenté : risque imminent de défaillance » : critique | Faits | [WF] |
+
+Ligne de la base : `frein-rouge` (cinq notices : Peugeot p. 14, Seat Ibiza p. 251, Renault p. 137, Dacia p. 110-111,
+Toyota p. 292).
+
+Non trouvé : norme du liquide (« DOT 4 ») dans les notices de référence ; intervalle de remplacement ; rubrique « Liquide
+de frein » de Peugeot 208 et Citroën C3 (pages 165-168 lues le 16/11 pour d'autres rubriques, sans relevé de celle-ci),
+de Seat Ibiza, Renault, Dacia et Toyota.
+
+## 7. Usure des pneus (`usure-des-pneus`)
+
+| Texte | Emplacement | Extrait | Usage | Lu par |
+|---|---|---|---|---|
+| Arrêté du 18 juillet 2019 relatif aux pneumatiques | article 5 (en vigueur depuis le 31/08/2019) | « dans les rainures principales de leur bande de roulement, une profondeur d'au moins 1,6 mm. » (phrase qui vise les catégories M1, N1, O1 et O2, « pendant toute leur utilisation sur route ») | Texte de référence de la page (`texte_reference`) ; ligne saisie à trancher (voir §10) | [écran, 17/11 vers 1 h 50, Légifrance dans Chrome] |
+| Idem | article 5 | « Les pneumatiques destinés aux voitures particulières et à leurs remorques doivent être équipés d'indicateurs d'usure » ; « avec une tolérance de + 0,6/- 0 mm » | Fait (témoin d'usure) | [écran, 17/11 vers 1 h 50, Légifrance dans Chrome] |
+| Idem | article 9 | « L'arrêté du 24 octobre 1994 modifié relatif aux pneumatiques est abrogé. » | Fait (texte en vigueur) | [WF] |
+| Code de la route | article R314-1 | « est puni de l'amende prévue pour les contraventions de la quatrième classe » ; « L'immobilisation du véhicule peut être prescrite » | Sanction ; montant forfaitaire à sourcer avant tout affichage | [écran, 17/11 vers 1 h 50, Légifrance dans Chrome] |
+| Contrôle technique | annexe I, 5.2.3 « PNEUMATIQUES » | e.1 « Usure anormale ou présence d'un corps étranger » : mineure ; e.2 « L'indicateur d'usure de la profondeur des sculptures est atteint » : majeure ; e.3 « La profondeur des sculptures n'est pas conforme aux exigences » : critique ; d.3 « Corde visible ou endommagée » : critique ; d.2 pneu gravement endommagé ou entaillé : majeure (**résumé**) | Défaillances (fiche « Le texte en bref ») | [WF] |
+| Règlement ONU n° 30 (rév. 3) | § 3.1.9 | « un groupe de quatre chiffres, les deux premiers indiquant la semaine et les deux derniers l'année de fabrication » | Fait (« date fabrication pneu ») | [WF] |
+| Idem | § 2.27 et § 6.3.3 | indicateurs d'usure : « les bossages existant à l'intérieur des rainures de la bande de roulement » ; « que les rainures de la bande de roulement n'ont plus qu'une profondeur de 1,6 mm » | Fait (témoin d'usure) | [WF] |
+| Peugeot 208 | p. 110, « Détection de sous-gonflage » | Le sous-gonflage « Provoque l'usure prématurée des pneumatiques. » | Fait (usure anormale), lien vers la pression | [E8] (lu à l'écran) |
+
+Non trouvé : consigne d'une notice de référence sur les témoins d'usure et le remplacement (rubrique « Pneumatiques »
+non relevée) ; une limite d'âge des pneus dans un texte officiel (aucune trouvée : la page le dit, sans « 5 ans » ni
+« 10 ans ») ; le montant de l'amende forfaitaire de quatrième classe dans un texte de Légifrance (code de procédure
+pénale) et son décompte par pneu (point ouvert du journal) ; version consolidée en vigueur du règlement ONU n° 30.
+
+## 8. Contrôle technique et contre-visite (`contre-visite-controle-technique`)
+
+| Texte | Emplacement | Extrait | Usage | Lu par |
+|---|---|---|---|---|
+| Arrêté du 18 juin 1991 | article 7 (en vigueur depuis le 20/05/2018) | « les défaillances mineures n'ayant aucune incidence notable sur la sécurité du véhicule ou sur l'environnement » ; « les défaillances majeures susceptibles de compromettre la sécurité du véhicule » ; « les défaillances critiques constituant un danger direct et immédiat pour la sécurité routière » | Fiche « Le texte en bref » (`defaillances`) | [E8] et [WF] |
+| Idem | article 7 | « la validité du contrôle est de deux mois à compter de la date du contrôle technique périodique » (majeure) ; « la validité du contrôle est limitée au jour du contrôle » (critique) | Lignes à trancher (§10) | [WF] (et [E8], 14/11) |
+| Idem | article 7 | « Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être réalisée que dans le délai de deux mois après le contrôle technique périodique [...], faute de quoi un nouveau contrôle technique périodique est à réaliser. » | `contre_visite.delai` et délai dépassé | [E8] (Légifrance, Chrome de Houssem, 14/11) |
+| Idem | article 8 (en vigueur depuis le 27/03/2022) | points de la contre-visite « sont définis à l'annexe I du présent arrêté » ; « une nouvelle contre-visite ou contre-visite complémentaire est à réaliser dans la limite du délai de deux mois » | « Peut-on faire plusieurs contre-visites » | [WF] et [E8] |
+| Idem | article 5 (en vigueur depuis le 07/08/2023) | pour la contre-visite, « les opérations de contrôle sont réalisées par un seul contrôleur » | Fait secondaire | [écran, 17/11 vers 1 h 50, Légifrance dans Chrome] |
+| Code de la route | article R323-1 (en vigueur depuis le 01/01/2026) | « est puni de l'amende prévue pour les contraventions de la quatrième classe » ; « L'immobilisation peut être prescrite dans les conditions prévues aux articles L. 325-1 à L. 325-3. » | Sanction de la circulation sans contrôle valable (point ouvert du journal : version du 01/01/2026 à lire, faite ici par [WF]) | [WF] |
+| Service-public.fr F2878 | rubriques contre-visite et sanctions (vérifiée le 01/01/2026) | contre-visite dans un centre au choix ; résultat S : valable 2 mois ; R : valable le jour du contrôle ; amende forfaitaire de 135 €, jusqu'à 750 € ; immobilisation possible, fiche de circulation de 7 jours (**résumé de la version anglaise**) | Application du texte (source secondaire `administration`) ; montants à rattacher à un texte de Légifrance avant affichage | [WF] |
+| Annexe I | points liés aux voyants (relevé de l'étape 8) | 8.2.12.d.2 et 8.2.22.c.2 (OBD, majeure), 7.1.5 et 7.1.6 (airbag), 1.6.1 (ABS), 7.12.1 (ESP), 2.6.1 (direction), 5.2.3.h (pression) | Liens vers les pages voyants (plan) | [E8] |
+
+Non trouvé : la liste des fonctions de l'annexe I (intitulés des sections 0 à 9) mot pour mot ; le régime des véhicules
+de collection ; la fiche F2878 en français ; un texte qui dise si l'on peut rouler pour aller réparer après une
+défaillance critique (la fiche F2878 ne le dit pas : la page ne l'affirmera pas).
+
+## 9. Pages sans source de première main suffisante aujourd'hui
+
+| Page | Ce qui manque avant la rédaction |
+|---|---|
+| `huile-5w30`, `huile-5w40`, `huile-10w40` | Huile préconisée par moteur dans les notices ; source admise pour la signification d'un grade SAE ; admission du document ACEA au registre |
+| `huile-moteur` | Mêmes manques ; intervalle de vidange ; 85W140 |
+| `liquide-de-frein` | Norme (DOT) et intervalle dans au moins une notice ; relecture à l'écran de Seat Leon p. 370 |
+| `liquide-de-refroidissement` | Liquide préconisé chez Peugeot, Renault, Dacia, Toyota ; relecture mot pour mot de Seat p. 297 |
+| `usure-des-pneus`, `contre-visite-controle-technique` | Relecture à l'écran des extraits [WF] ; décision sur le niveau d'une obligation légale (§10) |
+| `niveau-huile` | Procédure de la jauge mot pour mot ; autres marques (exemple rédigé sans elles) |
+
+## 10. Questions de niveau que la grille ne tranche pas (pour Houssem)
+
+1. **Obligation légale sans consigne de notice** (pneus usés, contrôle technique défavorable) : l'idée reportée « définition
+   du verdict « Non, ne poursuivez pas votre trajet » pour une obligation légale » (paquet 6.6c, décision 1) revient ici.
+   Précédent : la loi montagne cite le code de la route au niveau « Non, ne poursuivez pas votre trajet » (« ne continuez
+   pas dans la zone sans équipement »). Proposition, par analogie, **non validée** :
+   - rainures à 1,6 mm ou moins (témoin d'usure atteint) : Non, ne poursuivez pas votre trajet ; tout de suite ;
+   - corde visible ou pneu entaillé : idem, et le contrôle technique la classe critique (« danger direct et immédiat ») ;
+   - contrôle défavorable avec défaillance majeure : Oui, avec précautions ; à prévoir dans les semaines qui viennent
+     (contrôle valable deux mois, contre-visite dans ce délai) ;
+   - contrôle défavorable avec défaillance critique, après le jour du contrôle, ou délai de deux mois dépassé : Non, ne
+     poursuivez pas votre trajet ; tout de suite (plus de contrôle valable : R323-1).
+   L'action « faites-la contrôler » de la définition ne convient pas : demande de changement de la grille à proposer avec
+   le lot, ou action propre à la page (« faites réparer, puis passez la contre-visite »).
+2. **« Ne pas démarrer le moteur »** (jauge sous le mini ou au-dessus du maxi) : absent de la grille, classé au niveau le
+   plus prudent ; décision déjà prise par Houssem pour le dossier PureTech (16/11) ; reprise telle quelle dans l'exemple.
+3. **Une seule notice** (Seat Leon pour le liquide de frein ; Seat Ibiza pour le vase vide ; Peugeot et Citroën, un seul
+   groupe, pour la jauge) : admis pour une ligne saisie (charte §2.1), la page le dit ; à relire à l'écran d'abord.

@@ -1,0 +1,102 @@
+{
+  "niveau-huile": {
+    "clavier": {
+      "elements": 26,
+      "sansContour": [],
+      "contours": [
+        "3px solid rgb(140, 196, 255)",
+        "3px solid rgb(11, 92, 173)"
+      ]
+    },
+    "seo": {
+      "title": "Niveau d'huile moteur : le vérifier à la jauge et faire l'appoint",
+      "longueurTitle": 65,
+      "description": "Vérifier le niveau d'huile à la jauge, faire l'appoint et réagir à un niveau trop bas ou trop haut, selon les notices Peugeot, Citroën, Renault, Dacia et Seat.",
+      "h1": 1,
+      "canonical": "https://decodauto.com/huile-moteur/verifier-niveau/",
+      "lang": "fr",
+      "robots": null,
+      "jsonld": [
+        "Article",
+        "BreadcrumbList"
+      ],
+      "reperes": [
+        "Niveau d’huile sous le repère mini : puis-je démarrer ? → Non, arrêtez-vous immédiatement",
+        "Trop d’huile, au-dessus du repère maxi : que faire ? → Non, arrêtez-vous immédiatement",
+        "Voyant de niveau d’huile orange : puis-je rouler ? → Oui, avec précautions",
+        "Voyant d’huile rouge : puis-je rouler ? → Non, arrêtez-vous immédiatement"
+      ],
+      "h2": [
+        "Niveau d’huile trop bas ou trop haut, voyant d’huile allumé : puis-je démarrer et rouler ?",
+        "Le tutoriel en bref",
+        "Vérifier le niveau d’huile moteur, étape par étape",
+        "L’essentiel",
+        "Vérifier le niveau d’huile moteur à chaud ou à froid ?",
+        "Quel est le bon niveau d’huile moteur ?",
+        "Niveau d’huile sous le repère mini : puis-je démarrer ?",
+        "Trop d’huile, au-dessus du repère maxi : que faire ?",
+        "Faire le niveau d’huile : quelle huile, à quelle fréquence ?",
+        "Ce que dit chaque notice sur le niveau d’huile",
+        "Voyant de niveau d’huile orange : puis-je rouler ?",
+        "Voyant d’huile rouge : puis-je rouler ?",
+        "Pourquoi ma voiture consomme de l’huile ?",
+        "À lire aussi"
+      ],
+      "illustration": "Où regarder : la jauge, à lire entre les repères MAXI et MINI, et le bouchon de remplissage, où l’on verse l’huile. Leur emplacement figure sur le schéma du compartiment moteur de votre notice. Illustration decodauto.",
+      "signaler": 1,
+      "mention": 1,
+      "pub": 0,
+      "longueurDescription": 159
+    },
+    "texte": {
+      "verdictRetenu": false,
+      "edition": false,
+      "pageAlaMain": false
+    }
+  },
+  "accueil": {
+    "clavier": {
+      "elements": 53,
+      "sansContour": [],
+      "contours": [
+        "3px solid rgb(140, 196, 255)",
+        "3px solid rgb(11, 92, 173)"
+      ]
+    },
+    "seo": {
+      "title": "decodauto : voyant allumé, code défaut, que faire ?",
+      "longueurTitle": 51,
+      "description": "Voyant allumé, code défaut, bruit suspect ou obligation : peut-on rouler, avec quelle urgence, que faire. Un guide indépendant, sans pièces à vendre.",
+      "h1": 1,
+      "canonical": "https://decodauto.com/",
+      "lang": "fr",
+      "robots": null,
+      "jsonld": [
+        "WebSite"
+      ],
+      "reperes": [],
+      "h2": [
+        "Quel voyant s’est allumé ?",
+        "Alertes et codes",
+        "Pannes et symptômes",
+        "Niveaux et fluides",
+        "Pneus et obligations",
+        "Un guide indépendant"
+      ],
+      "illustration": "Illustration decodauto.",
+      "signaler": 1,
+      "mention": 1,
+      "pub": 0,
+      "longueurDescription": 149
+    },
+    "texte": {
+      "verdictRetenu": false,
+      "edition": false,
+      "pageAlaMain": false
+    }
+  },
+  "sitemap": {
+    "niveauHuile": true,
+    "lastmod": "2026-11-17"
+  }
+}

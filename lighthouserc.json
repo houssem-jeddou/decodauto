@@ -33,7 +33,8 @@
         "http://localhost/perte-de-puissance-voiture/index.html",
         "http://localhost/voiture-qui-broute/index.html",
         "http://localhost/bruit-moteur/index.html",
-        "http://localhost/fumee-echappement/index.html"
+        "http://localhost/fumee-echappement/index.html",
+        "http://localhost/huile-moteur/verifier-niveau/index.html"
       ],
       "numberOfRuns": 3,
       "settings": {

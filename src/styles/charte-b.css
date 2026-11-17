@@ -264,6 +264,9 @@ main>.accueil-main{max-width:72rem}
 /* Cibles tactiles d'au moins 24 px entre deux liens de la liste (WCAG 2.5.8 ; Lighthouse target-size, F1.2). */
 .theme li+li{margin-top:.4rem}
 .theme p{margin:0;font-size:.9375rem}
+/* Carte « Un guide indépendant » sur toute la largeur de la grille (revue de la PR n° 84, I1) : les thèmes restent sur une
+   rangée à 1366 px quel que soit leur nombre (quatre depuis la vague C), sans carte seule sur une rangée. */
+.theme-guide{grid-column:1/-1}
 
 /* Page outil « Quel voyant est allumé ? » (F1.3a) : renvoi de l'encadré en bouton ambre, filtre en pastilles sans script,
    index des dessins dans la grille de l'accueil, un panneau sombre par groupe de couleur (diode), une cellule de l'encadré

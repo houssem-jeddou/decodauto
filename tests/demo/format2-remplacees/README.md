@@ -11,3 +11,4 @@ les tests des modèles la lisent ; dans la construction de démonstration, la vr
 | `panne/batterie-changer.md` (démonstration du format tutoriel : fiche du tutoriel, étapes, ligne d'écart sans paire de liens) | `src/content/panne/batterie-changer.md` | B2 | `tests/format2-panne.test.ts` |
 | `panne/perte-de-puissance.md` (démonstration du modèle panne : arbre de décision, causes après l'arbre) | `src/content/panne/perte-de-puissance.md` | B4 | `tests/format2-panne.test.ts` |
 | `panne/voiture-qui-broute.md` (démonstration du modèle panne) | `src/content/panne/voiture-qui-broute.md` | B4 | aucun |
+| `fluide/niveau-huile.md` (démonstration du modèle fluide : fiche « L'essentiel » après les étapes, réponse directe) | `src/content/fluide/niveau-huile.md` | C1 | `tests/format2-fluide.test.ts` |

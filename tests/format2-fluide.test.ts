@@ -2,8 +2,9 @@
 // graphique §4 et de la charte éditoriale §4 : rôle, niveau, appoint, marche à suivre), fiche « L'essentiel » en carte
 // (composant « Fiches » de la charte), fiche du tutoriel, étapes et tableau du texte (élément unique), format 2 exigé (vague
 // C), contrôles d'aujourd'hui et du format 2, cas en échec dans les deux sens.
-// Page : le frontmatter de la page de démonstration tests/demo/format2/fluide/niveau-huile.md (rendue par Astro dans la
-// construction DEMO_FORMAT2=1) ; le corps, un fragment HTML écrit pour le test, comme le rend Astro.
+// Page : le frontmatter de la page de démonstration tests/demo/format2-remplacees/fluide/niveau-huile.md (lue seulement par
+// ces tests depuis le lot C1, où la vraie page la remplace dans la construction de démonstration) ; le corps, un fragment
+// HTML écrit pour le test, comme le rend Astro.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -19,12 +20,13 @@ import { INTITULES_FICHE_FLUIDE, TITRE_FICHE_FLUIDE, ficheFluideHtml, modeleFich
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
 import { AUTEUR_DES_EXEMPLES } from '../scripts/lib/controler-site.ts';
 import { lireFrontmatter } from '../scripts/lib/charger.ts';
-import { DOSSIER_PAGES_DEMO_FORMAT2 } from '../scripts/lib/demo-format2.ts';
 import { localiserPage } from '../scripts/lib/pages-redigees.ts';
 import { REPONSE_DIRECTE_MAX_MOTS, schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
-const FICHIER = `${DOSSIER_PAGES_DEMO_FORMAT2}/fluide/niveau-huile.md`;
+// Page de démonstration remplacée dans la construction de démonstration par la vraie page (lot C1) : gardée pour ces
+// tests du modèle, hors du dossier construit (tests/demo/format2-remplacees/README.md).
+const FICHIER = 'tests/demo/format2-remplacees/fluide/niveau-huile.md';
 const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', FICHIER]);
 const erreurs = (constats: readonly { regle: string; gravite: string }[]): string[] => constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle).sort();
 
