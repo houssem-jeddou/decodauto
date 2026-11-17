@@ -12,13 +12,13 @@ traits clairs, ambre pour « regardez ici »). Brouillon, jamais validé.
   classe ACEA et le grade. Le dessin n'explique pas le grade (aucune source admise lue) et ne montre aucune marque
   d'huile. Notices : Peugeot 208 p. 166, Citroën C3 p. 113, Renault Clio 5 phase 2 p. 333, Dacia Sandero 3 p. 296,
   Seat Ibiza p. 293 (relues à l'écran le 17/11/2026, vers 12 h 15).
-- liquide-refroidissement-vase (page « liquide de refroidissement ») : à gauche, le vase d'expansion, bouchon fermé,
-  avec ses repères MAXI et MINI et le niveau lu entre les deux ; à droite, les deux consignes : niveau lu moteur froid
+- liquide-refroidissement-vase (page « liquide de refroidissement ») : à gauche, le vase d'expansion (grand bocal, deux
+  départs de durite, bouchon à visser), avec ses repères MAX et MIN et le niveau lu entre les deux ; à droite, les deux consignes : niveau lu moteur froid
   (vert), bouchon jamais ouvert moteur chaud (ambre). Le liquide est dessiné sans couleur de marque (seule la notice
   Seat nomme une couleur). Notices : Peugeot 208 p. 167, Citroën C3 p. 113, Renault Clio 5 phase 2 p. 334-335, Dacia
   Sandero 3 p. 298, Seat Ibiza p. 298 (relues à l'écran le 17/11/2026, vers 13 h 30).
-- liquide-frein-reservoir (page « liquide de frein ») : à gauche, le réservoir de liquide de frein, bouchon fermé, avec
-  ses repères MAXI et MINI et le niveau lu entre les deux ; à droite, le niveau normal (vert) et l'alerte (ambre) :
+- liquide-frein-reservoir (page « liquide de frein ») : à gauche, le petit réservoir posé sur le maître-cylindre, son
+  bouchon rond, ses repères MAX et MIN et le niveau lu à travers la paroi ; à droite, le niveau normal (vert) et l'alerte (ambre) :
   sous le MINI, ou en baisse rapide, renvoi à l'encadré. Notices : Peugeot 208 p. 166, Citroën C3 p. 113, Renault
   Clio 5 phase 2 p. 336-337, Dacia Sandero 3 p. 299, Seat Ibiza p. 299 (relues à l'écran le 17/11/2026, vers 13 h 30).
 - usure-pneu-temoin (page « usure des pneus ») : coupe de la bande de roulement, à gauche neuve (témoin d'usure en
@@ -113,30 +113,32 @@ def huile_moteur_choisir() -> str:
     return "".join(p)
 
 
-def bocal(p, x, y, l, h, niveau):
-    """Bocal translucide (vase d'expansion ou réservoir), bouchon fermé, repères MAXI et MINI, niveau lu entre les deux."""
-    cx = x + l // 2
-    p.append(f'<rect x="{cx - 34}" y="{y - 26}" width="68" height="30" rx="8" fill="#232c37" stroke="{AMBRE}" stroke-width="5"/>')
-    p.append(f'<rect x="{x}" y="{y}" width="{l}" height="{h}" rx="26" fill="#1b222b" stroke="#9aa5b1" stroke-width="4"/>')
-    p.append(f'<rect x="{x + 6}" y="{niveau}" width="{l - 12}" height="{y + h - niveau - 6}" rx="20" fill="#5b6b7d" opacity=".75"/>')
-    p.append(f'<line x1="{x + 6}" y1="{niveau}" x2="{x + l - 6}" y2="{niveau}" stroke="{VERT}" stroke-width="5" stroke-linecap="round"/>')
-    maxi, mini = y + 34, y + h - 40
-    for yy, nom in ((maxi, "MAXI"), (mini, "MINI")):
-        p.append(f'<line x1="{x + l - 40}" y1="{yy}" x2="{x + l + 12}" y2="{yy}" stroke="{TEXTE}" stroke-width="4" stroke-linecap="round"/>')
-        p.append(texte(x + l + 20, yy + 9, nom, taille=24, poids=700, ancre="start"))
+
+def reperes(p, x, haut, bas):
+    """Repères MAX et MIN gravés sur la paroi, à droite du réservoir."""
+    for yy, nom in ((haut, "MAX"), (bas, "MIN")):
+        p.append(f'<line x1="{x - 34}" y1="{yy}" x2="{x + 10}" y2="{yy}" stroke="{TEXTE}" stroke-width="4" stroke-linecap="round"/>')
+        p.append(texte(x + 18, yy + 9, nom, taille=24, poids=700, ancre="start"))
 
 
 def liquide_refroidissement_vase() -> str:
     p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
     p.append(texte(40, 62, "Vase d'expansion", taille=24, poids=600, couleur=DOUX, ancre="start"))
-    bocal(p, 60, 112, 160, 186, 170)
-    # Consignes à droite.
+    # Vase : grand bocal translucide, deux départs de durite en bas, bouchon à visser en haut.
+    p.append('<rect x="60" y="110" width="190" height="170" rx="30" fill="#1b222b" stroke="#9aa5b1" stroke-width="4"/>')
+    p.append('<rect x="66" y="176" width="178" height="98" rx="24" fill="#5b6b7d" opacity=".75"/>')
+    p.append(f'<line x1="66" y1="176" x2="244" y2="176" stroke="{VERT}" stroke-width="5" stroke-linecap="round"/>')
+    p.append('<path d="M96 280 L96 312 M214 280 L214 312" stroke="#3a4553" stroke-width="16" stroke-linecap="round"/>')
+    p.append(f'<rect x="120" y="82" width="70" height="32" rx="10" fill="#232c37" stroke="{AMBRE}" stroke-width="5"/>')
+    for x in (134, 148, 162, 176):
+        p.append(f'<line x1="{x}" y1="88" x2="{x}" y2="108" stroke="{AMBRE}" stroke-width="3"/>')
+    reperes(p, 250, 140, 244)
     p.append(texte(372, 104, "Bouchon : jamais", taille=24, poids=700, couleur=AMBRE, ancre="start"))
     p.append(texte(372, 134, "moteur chaud", taille=24, poids=700, couleur=AMBRE, ancre="start"))
-    p.append(f'<path d="M180 98 L356 98" fill="none" stroke="{AMBRE}" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>')
+    p.append(f'<path d="M196 96 L356 96" fill="none" stroke="{AMBRE}" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>')
     p.append(texte(372, 210, "Moteur froid :", taille=24, poids=700, couleur=VERT, ancre="start"))
     p.append(texte(372, 242, "niveau entre", taille=24, poids=600, ancre="start"))
-    p.append(texte(372, 272, "MINI et MAXI", taille=24, poids=600, ancre="start"))
+    p.append(texte(372, 272, "MIN et MAX", taille=24, poids=600, ancre="start"))
     p.append("</svg>")
     return "".join(p)
 
@@ -144,16 +146,24 @@ def liquide_refroidissement_vase() -> str:
 def liquide_frein_reservoir() -> str:
     p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
     p.append(texte(40, 62, "Réservoir de liquide de frein", taille=24, poids=600, couleur=DOUX, ancre="start"))
-    bocal(p, 60, 112, 160, 186, 170)
-    p.append(texte(372, 128, "Normal :", taille=24, poids=700, couleur=VERT, ancre="start"))
-    p.append(texte(372, 160, "entre MINI", taille=24, poids=600, ancre="start"))
-    p.append(texte(372, 190, "et MAXI", taille=24, poids=600, ancre="start"))
-    p.append(texte(372, 238, "Sous MINI, ou", taille=24, poids=700, couleur=AMBRE, ancre="start"))
-    p.append(texte(372, 268, "baisse rapide :", taille=24, poids=700, couleur=AMBRE, ancre="start"))
-    p.append(texte(372, 298, "voir l'encadré", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    # Maître-cylindre (bloc métallique) et ses deux canalisations, réservoir posé dessus, bouchon rond strié.
+    p.append('<rect x="50" y="250" width="250" height="48" rx="10" fill="#3a4553"/>')
+    p.append('<path d="M70 298 L70 322 M280 298 L280 322" stroke="#3a4553" stroke-width="10" stroke-linecap="round"/>')
+    p.append('<rect x="90" y="130" width="170" height="120" rx="16" fill="#1b222b" stroke="#9aa5b1" stroke-width="4"/>')
+    p.append('<rect x="96" y="160" width="158" height="84" rx="12" fill="#8a7a4a" opacity=".75"/>')
+    p.append(f'<line x1="96" y1="160" x2="254" y2="160" stroke="{VERT}" stroke-width="5" stroke-linecap="round"/>')
+    p.append(f'<ellipse cx="175" cy="118" rx="52" ry="18" fill="#232c37" stroke="{AMBRE}" stroke-width="5"/>')
+    for x in (145, 160, 175, 190, 205):
+        p.append(f'<line x1="{x}" y1="108" x2="{x}" y2="128" stroke="{AMBRE}" stroke-width="3"/>')
+    reperes(p, 260, 148, 224)
+    p.append(texte(372, 112, "Bouchon fermé :", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    p.append(texte(372, 142, "le niveau se lit", taille=24, poids=600, ancre="start"))
+    p.append(texte(372, 172, "à travers la paroi", taille=24, poids=600, ancre="start"))
+    p.append(texte(372, 230, "Sous MIN, ou", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    p.append(texte(372, 260, "baisse rapide :", taille=24, poids=700, couleur=AMBRE, ancre="start"))
+    p.append(texte(372, 290, "voir l'encadré", taille=24, poids=700, couleur=AMBRE, ancre="start"))
     p.append("</svg>")
     return "".join(p)
-
 
 def usure_pneu_temoin() -> str:
     p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]

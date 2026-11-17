@@ -1,4 +1,4 @@
-Brouillon, jamais validé. Contrôle de la construction de recette, lot C3, 17/11/2026 : seules erreurs attendues R4-VALIDATION-ABSENTE (huile-moteur du lot C2, liquide de refroidissement, liquide de frein : pages sans empreinte avant la validation de Houssem).
+Brouillon, jamais validé (après la revue indépendante du 17/11, changements non relus par un relecteur indépendant). Contrôle de la construction de recette, lot C3 : seules erreurs attendues R4-VALIDATION-ABSENTE.
 
 Mode d'indexation : NON INDEXABLE : noindex partout (variable SITE_INDEXABLE ≠ "true")
 ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « prechauffage » : citation de « notice-seat-ibiza » : « immediatement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
