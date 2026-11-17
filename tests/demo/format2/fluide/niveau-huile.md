@@ -12,7 +12,7 @@
 # - Tout le reste (réponse directe, texte, fiches, tableau) : brouillon de l'exemple, jamais validé.
 # Changements par rapport à l'exemple : ce commentaire ; le lien vers la page mère « huile moteur », écrit en texte (page
 # pas construite, le lien serait cassé : npm run liens) ; la réponse directe, celle que l'exemple propose en commentaire
-# (règle 2c de la demande n° 30 ; l'ouverture de reponse_directe au type fluide attend l'accord de Houssem).
+# (règle 2c de la demande n° 30 ; reponse_directe ouverte au type fluide par la demande n° 33, acceptée le 17/11/2026).
 # Format tutoriel : fiche du tutoriel avant le texte, étapes {{etapes}}, puis fiche « L'essentiel » après la partie qui
 # porte les étapes, tableau {{tableau}} (élément unique), illustration jauge-huile.
 id: niveau-huile

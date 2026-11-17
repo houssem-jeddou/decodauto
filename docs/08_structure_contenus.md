@@ -46,8 +46,9 @@ Image de référence : un type de page = une table ; un champ = une colonne ; un
   (`config/lots-format2.json`, FORMAT2-VAGUE).
 - `illustration` (page éditoriale au format 2, obligatoire) : `fichier` (SVG de `src/illustrations`), `alt`, `legende`
   terminée par « Illustration decodauto. ».
-- `reponse_directe` (pages pneus et obligations seulement) : réponse directe à la question du lecteur, 40 mots au plus,
-  en tête de l'encadré (règle 2c) ; exigée sur une page informative au format 2.
+- `reponse_directe` (pages pneus et obligations et pages fluides ; pages fluides depuis la demande de changement n° 33,
+  acceptée par Houssem le 17/11/2026) : réponse directe à la question du lecteur, 40 mots au plus, en tête de l'encadré
+  (règle 2c) ; exigée sur une page informative au format 2.
 - Base voyants, `ecart_court` (ligne dont les marques divergent, format 2) : ligne d'écart de 25 mots au plus avec
   « Votre marque », qui nomme les marques plus et moins strictes.
 - Base voyants, citation d'une notice, `demande` : ce que demande la notice, en une phrase, pour la colonne du tableau des

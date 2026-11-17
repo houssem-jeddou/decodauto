@@ -41,20 +41,19 @@ Choix faits (règle 6) :
   les pages de test (`tests/fixtures`) restent au format 1, et la fiche n'y est pas attendue.
 - Pas de causes : le schéma n'en a pas, et aucun champ nouveau n'est ajouté.
 
-### Réponse directe des pages fluides : en attente de l'accord de Houssem
+### Réponse directe des pages fluides : demande de changement n° 33, acceptée
 
 Le schéma la réservait aux pages pneus et obligations. Cette pull request l'ouvre au type fluide : `fluidePageSchema`
 l'admet, 40 mots au plus ; les autres types la refusent toujours ; `pageFluideF2` l'exige, comme le modèle l'exige pour la
 page de la pression des pneus. Même rendu et mêmes contrôles : FORMAT2-REPONSE, et FORMAT2-MESURES 2a, qui mesure la
 réponse directe puis le verdict et l'urgence de la première situation.
 
-**C'est une demande de structure** (revue de la PR, B1) : le dossier de la porte F1 (`travaux/etape-13/f1/porte-f1.md`,
-l. 188-190) dit qu'ouvrir la réponse directe aux pages fluides « est une demande de structure », et `docs/08` (l. 49)
-la réserve aux pages pneus et obligations. Décision du pilotage : le changement reste dans cette pull request, qui reste en
-brouillon ; il **attend l'accord de Houssem** sur une demande de changement courte que le pilotage lui présente. Après
-cet accord, `docs/08` l. 49 est à mettre à jour (« pages pneus et obligations et pages fluides »). Sans accord, il faut
-retirer l'ouverture du schéma et l'exigence du modèle, et la page fluide perd sa réponse directe (précision 2a : le
-premier écran se mesure alors sur la première situation).
+C'est une demande de structure (revue de la PR, B1 : dossier de la porte F1, `travaux/etape-13/f1/porte-f1.md`,
+l. 188-190 ; `docs/08`, l. 49). **Demande de changement n° 33, acceptée par Houssem le 17/11/2026 à 7 h 39** (« J'accepte
+la demande n° 33 (réponse directe des pages fluides). », dans le message du matin auquel Houssem a répondu « Je valide
+tout ! Fais le necessaire »). Texte de la demande : `travaux/etape-11/demande-changement-reponse-fluide.md` (branche
+`preparation/etape-11`). `docs/08` l. 49 est mis à jour dans cette pull request (« pages pneus et obligations et pages
+fluides »), ainsi que les commentaires du schéma, de `CONTROLES.md` et de la page de démonstration.
 
 Contrôle nouveau : **FICHE-FLUIDE-ABSENTE / FICHE-FLUIDE-INCOMPLETE** (`src/lib/controle.ts`, `CONTROLES.md`). Une page
 fluide au format 2 affiche une seule fiche, au texte exact ; les autres pages n'en ont pas. Les marqueurs `{{etapes}}` et
@@ -134,7 +133,7 @@ un autre composant (une seule carte), hors de cette règle.
 
 ## Ce qui manque au schéma `fluidePageSchema` pour ce modèle (non changé, sauf la réponse directe)
 
-1. ~~`reponse_directe`~~ : ouverte au type fluide dans cette pull request, en attente de l'accord de Houssem (ci-dessus).
+1. ~~`reponse_directe`~~ : ouverte au type fluide dans cette pull request (demande n° 33, acceptée le 17/11/2026).
 2. **Sources de `comment_verifier` et de `normes`** : seul `quand_changer` a ses `sources`. Les deux autres champs
    écrivent leurs notices dans le texte (« (notices Peugeot 208 et Citroën C3) »). Ces sources n'entrent donc ni dans
    « Sources » ni dans un contrôle, et le texte de la fiche porte des références que la règle 2d sort du texte ailleurs.
