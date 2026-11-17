@@ -314,6 +314,16 @@
       "id": "boite-de-vitesses",
       "libelle": "Boîte de vitesses",
       "tranche": "organe"
+    },
+    {
+      "id": "pile-de-cle",
+      "libelle": "Pile de la clé",
+      "tranche": "geste"
+    },
+    {
+      "id": "carburant-et-reamorcage",
+      "libelle": "Carburant et réamorçage",
+      "tranche": "geste"
     }
   ],
   "montants": [
@@ -344,5 +354,16 @@
       "validation": "7ff3f6ac58e0efca69614c485c58a6586c5851d0c88768d1cf59b3a366e1c316"
     }
   ],
-  "prises_en_charge": []
+  "prises_en_charge": [
+    {
+      "id": "couverture-speciale-puretech",
+      "texte": "Couverture spéciale du constructeur pour certains moteurs PureTech : 100 % des pièces et de la main-d'œuvre, jusqu'à 10 ans ou 180 000 km au premier des deux termes échus, sous conditions",
+      "sources": [
+        "peugeot-puretech-solutions"
+      ],
+      "verifie_le": "2026-11-16",
+      "reverifier_apres_jours": 90,
+      "validation": "91e0ad2e48cb847ac26effcd87fe3894f29eab0e4e32b51ab5f4bbbf17852ab8"
+    }
+  ]
 }

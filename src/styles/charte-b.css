@@ -91,6 +91,13 @@ a[data-lien-notices]{white-space:nowrap}
 .provenance{font-size:.8125rem;color:var(--texte-doux);margin:.4rem 0 0;line-height:1.45}
 .provenance p{margin:.25rem 0}
 .provenance-libelle{font-weight:700;color:var(--texte);margin-right:.25rem}
+/* Phrase des notices d'une ligne saisie, cible du lien « Votre marque » de sa ligne d'écart (décision du 16/11/2026), avec
+   dessous l'écart entre marques de la ligne, en entier : un peu de marge au-dessus quand on y arrive, et le texte en couleur
+   pleine tant que la phrase, ou l'écart d'une deuxième ligne qui partage la phrase, est la cible (revue de la PR n° 73). */
+.provenance-ligne,.provenance-ligne [id]{scroll-margin-top:4rem}
+.provenance-ligne:target,.provenance-ligne:has(:target){color:var(--texte)}
+.provenance-ecart{display:block;margin:.2rem 0 .15rem}
+.provenance-ecart-libelle{font-weight:700}
 .illustration{margin:.8rem 0 0;padding:.6rem;overflow:hidden}
 .illustration svg{display:block;width:100%;height:auto}
 .illustration figcaption{font-size:.875rem;margin:.45rem .2rem 0;line-height:1.4}

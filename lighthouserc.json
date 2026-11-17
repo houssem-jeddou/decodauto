@@ -22,7 +22,12 @@
         "http://localhost/voyants/prechauffage/index.html",
         "http://localhost/codes-defaut/p0420/index.html",
         "http://localhost/codes-defaut/p0299/index.html",
-        "http://localhost/voyants/frein/index.html"
+        "http://localhost/voyants/frein/index.html",
+        "http://localhost/voiture-ne-demarre-pas/index.html",
+        "http://localhost/moteur-puretech/index.html",
+        "http://localhost/batterie-voiture/index.html",
+        "http://localhost/batterie-voiture/recharger/index.html",
+        "http://localhost/batterie-voiture/changer/index.html"
       ],
       "numberOfRuns": 3,
       "settings": {

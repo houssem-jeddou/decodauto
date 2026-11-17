@@ -1,0 +1,8 @@
+Files wt-main/dist/codes-defaut/p0420/index.html and wt-b1/dist/codes-defaut/p0420/index.html differ
+Files wt-main/dist/index.html and wt-b1/dist/index.html differ
+Only in wt-b1/dist: moteur-puretech
+Files wt-main/dist/sitemap.xml and wt-b1/dist/sitemap.xml differ
+Only in wt-b1/dist: voiture-ne-demarre-pas
+Files wt-main/dist/voyants/batterie/index.html and wt-b1/dist/voyants/batterie/index.html differ
+Files wt-main/dist/voyants/huile/index.html and wt-b1/dist/voyants/huile/index.html differ
+Files wt-main/dist/voyants/prechauffage/index.html and wt-b1/dist/voyants/prechauffage/index.html differ
