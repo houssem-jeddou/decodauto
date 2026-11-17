@@ -1,7 +1,7 @@
 // Pages du lot F3 au format 2 (demande de changement n° 30, lot F1, tâche F1.3b) : code défaut, pneus et obligations
 // (page informative avec réponse directe, loi montagne), dépannage sur autoroute, socle (« à propos », mentions légales) et
-// page 404. Données : base voyants validée et brouillon du format 2 (« Brouillon, jamais validé »), appliqué en mémoire
-// comme la construction de démonstration (npm run demo:format2). Les corps sont des fragments HTML écrits pour le test.
+// page 404. Données : base voyants validée et pages du lot, au format 2 dans leur frontmatter depuis la pull request du
+// lot F3 (le brouillon de la démonstration n'en simule plus aucune). Les corps sont des fragments HTML écrits pour le test.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -76,9 +76,9 @@ describe('format 2 : pages code défaut et pneus et obligations (F1.3b)', () => 
     assert.deepEqual(modeleDeLaPage('pneus', { ...pression.page, format: 1 } as PageEditoriale), { modele: pagePneus });
   });
 
-  test('pages construites : contrôles d\'aujourd\'hui (CODE-*, FICHE-TEXTE-*, R9) et du format 2 verts ; seule l\'empreinte (brouillon jamais validé) échoue', () => {
+  test('pages construites : contrôles d\'aujourd\'hui (CODE-*, FICHE-TEXTE-*, R9), du format 2 et empreinte (lot F3 validé par Houssem le 17/11/2026) verts', () => {
     for (const p of [code, pression, montagne]) {
-      assert.deepEqual(p.controle(p.html), ['R4-EMPREINTE'], p.page.id);
+      assert.deepEqual(p.controle(p.html), [], p.page.id);
       assert.deepEqual(regles(constatsPartCitee(p.html, 'x.html')), [], p.page.id);
     }
   });
@@ -110,7 +110,8 @@ describe('format 2 : pages code défaut et pneus et obligations (F1.3b)', () => 
     const reponse = $('[data-encadre-decision] > [data-reponse-directe]');
     assert.equal(reponse.length, 1);
     assert.ok(reponse.prev().is('h2') && reponse.next().find('[data-encadre-ligne]').length > 0);
-    assert.equal(reponse.text().replace(/\s+/g, ' ').trim().replace(/[  ]/g, ' '), (brouillon.pages['pression-des-pneus']?.reponse_directe ?? '').replace(/[  ]/g, ' '));
+    const plat = (t: string): string => t.replace(/\s+/g, ' ').trim().replace(/[  ]/g, ' ').replace(/’/g, "'");
+    assert.equal(plat(reponse.text()), plat(String((pression.brut as Record<string, unknown>)['reponse_directe'] ?? '')));
     assert.equal($('[data-texte-reference] dl.fiche').length, 1);
     assert.ok($('[data-element-unique="tableau"]').hasClass('tableau-cartes'));
     // Revue de F1.3b : la notice est le titre de chaque carte (th scope="row"), rôles du tableau comme les cas par marque.
@@ -126,7 +127,7 @@ describe('format 2 : pages code défaut et pneus et obligations (F1.3b)', () => 
       const r = schemasPage[type].safeParse(brut);
       return r.success ? [] : r.error.issues.map((i) => i.message);
     };
-    const reponse = brouillon.pages['pression-des-pneus']?.reponse_directe ?? '';
+    const reponse = String((pression.brut as Record<string, unknown>)['reponse_directe'] ?? '');
     const mots = reponse.split(/\s+/).filter((m) => /[\p{L}\p{N}]/u.test(m)).length;
     assert.equal(mots, 20);
     assert.equal(REPONSE_DIRECTE_MAX_MOTS, 40);

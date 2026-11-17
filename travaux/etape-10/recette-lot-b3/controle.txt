@@ -1,0 +1,32 @@
+Brouillon, jamais validé. Recette du lot B3, 16/11/2026 (nuit), après les corrections de la revue indépendante.
+
+1. Branche etape-10/lot-b3 à 78d78ef, telle quelle : AVEC_EXEMPLES=1 npx astro build → échec, à la première erreur :
+
+page « moteur-puretech », texte rédigé : {{cite:stellantis-puretech-indemnisation-2025|…}} : aucune source de ce nom au registre
+
+   (sources du dossier PureTech, exemple de la porte 10 : elles viennent de la PR n° 76, lot B1, pas encore fusionnée).
+
+2. Schéma et texte des brouillons du lot (schemasPage.panne ; paragraphes de plus de trois phrases, place de l'arbre, des étapes et du tableau), sur la branche :
+
+surchauffe-moteur schéma : OK
+nettoyer-fap schéma : OK
+surchauffe-moteur | paragraphes > 3 phrases : 0  | {{arbre}} partie 2, {{etapes}} partie 0, {{tableau}} partie 0 ; 1re partie : 1 bloc(s)
+nettoyer-fap | paragraphes > 3 phrases : 0  | {{arbre}} partie 0, {{etapes}} partie 2, {{tableau}} partie 3 ; 1re partie : 1 bloc(s)
+
+3. Copie de travail séparée (jamais poussée) : etape-10/lot-b4 à c4eee7a (lots B2, B3 et B4, main intégré), plus etape-13/ecart-lignes-saisies (PR n° 73, 011f891) et etape-10/lot-b1 (PR n° 76, c548a28 : sources, coûts et pages de la porte 10) ; data/sources.json : union des deux côtés ; copies des deux exemples de la porte 10 retirées d'exemples/ (publiées par la PR n° 76). AVEC_EXEMPLES=1 node scripts/controle.ts --dist dist-exemples --exemples :
+
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/batterie-changer.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/batterie-recharger.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/batterie-voiture.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/bruit-moteur.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/fumee-echappement.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/nettoyer-fap.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/perte-de-puissance.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/surchauffe-moteur.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ERREUR [R4-VALIDATION-ABSENTE] exemples/panne/voiture-qui-broute.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+Contrôle : 31 page(s) éditoriale(s), 9 erreur(s) bloquante(s), 33 alerte(s). Mode d'indexation : non indexable.
+
+Alertes sur les pages du lot :
+
+ALERTE [R7-IMAGE-RECOMMANDEE] exemples/panne/nettoyer-fap.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] exemples/panne/surchauffe-moteur.md : pas d'image : Google la recommande pour les articles

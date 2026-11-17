@@ -388,6 +388,24 @@
     "date_consultation": "2026-11-14"
   },
   {
+    "id": "varta-interpretation-tests",
+    "titre": "VARTA (Clarios) : « Interprétation des tests de batteries » (base de connaissances, version belge en français)",
+    "editeur": "Clarios (marque VARTA)",
+    "categorie": "secondaire",
+    "nature": "document-technique",
+    "url": "https://www.varta-automotive.com/fr-be/knowledge/articles/details-de-l-article/interpr%C3%A9tation-des-tests-de-batteries",
+    "date_consultation": "2026-11-16"
+  },
+  {
+    "id": "mahle-turbo-dommages-2024",
+    "titre": "MAHLE : « Turbocompresseurs : dommages, causes, solutions et prévention » (réf. mahled-309/03.2024/FR)",
+    "editeur": "MAHLE Aftermarket GmbH",
+    "categorie": "secondaire",
+    "nature": "document-technique",
+    "url": "https://www.mahle-aftermarket.com/media/homepage/facelift/media-center/engine-components_turbocharger/damage/fr_07_schadensbroschuere_turbolader_2024_web_doppelseiten.pdf",
+    "date_consultation": "2026-11-16"
+  },
+  {
     "id": "rappelconso-48835",
     "titre": "RappelConso — fiche A12/01504/20 (Citroën et DS) du 20/11/2020 : pompe à vide",
     "editeur": "RappelConso (DGCCRF)",

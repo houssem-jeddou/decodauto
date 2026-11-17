@@ -420,7 +420,8 @@
       "voiture-qui-broute",
       "voyant-fap",
       "voyant-adblue",
-      "contre-visite-controle-technique"
+      "contre-visite-controle-technique",
+      "nettoyer-fap"
     ]
   },
   {
@@ -1087,7 +1088,7 @@
     "theme": "pannes-et-symptomes",
     "vague": "B",
     "adresse": "/fumee-echappement/",
-    "requete_principale": "fumée blanche échappement",
+    "requete_principale": "fumée blanche voiture",
     "mots_cles": [
       "traitement fumée noire diesel",
       "diesel fume noir",

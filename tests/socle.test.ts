@@ -13,6 +13,7 @@ import { ANCRE_CONFIDENTIALITE, ANCRE_METHODE, LIBELLE_LIEN_CONFIDENTIALITE, PAG
 import { lienConfidentialite, sectionMethodeHtml } from '../src/lib/composants.ts';
 import { controlerHtmlSocle } from '../src/lib/controle.ts';
 import { pied } from '../src/lib/gabarit.ts';
+import { versionFormat1 } from './format1.ts';
 import { MARQUEUR_CONTACT, pageSocle } from '../src/lib/modeles.ts';
 import { dateAffichee } from '../src/lib/cout.ts';
 import { ADRESSE_SIGNALEMENT } from '../src/lib/site.ts';
@@ -23,7 +24,9 @@ import { pageRedigee } from '../scripts/lib/pages-redigees.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const EXEMPLE = await pageRedigee(racine, 'socle', 'mentions-legales');
-const contenu = await readFile(join(racine, EXEMPLE), 'utf8');
+// Modèle du socle au format 1 (livrable 7.2) : la page, passée au format 2 au lot F3, est lue dans sa version au format 1
+// (tests/format1.ts) ; son modèle du format 2 est testé par tests/format2-f3.test.ts.
+const contenu = versionFormat1(await readFile(join(racine, EXEMPLE), 'utf8'));
 const brut = lireFrontmatter(contenu) as Record<string, unknown>;
 const page = soclePageSchema.parse(brut);
 const corpsMarkdown = separerFrontmatter(contenu).corps;
@@ -226,7 +229,7 @@ describe('lien de pied de page vers la politique (CONFIDENTIALITE-*)', () => {
 // ---- Page « à propos » (livrable 7.3) -------------------------------------------------------------------------------
 
 const cheminAPropos = await pageRedigee(racine, 'socle', PAGE_METHODE);
-const contenuAPropos = await readFile(join(racine, cheminAPropos), 'utf8');
+const contenuAPropos = versionFormat1(await readFile(join(racine, cheminAPropos), 'utf8'));
 const brutAPropos = lireFrontmatter(contenuAPropos) as Record<string, unknown>;
 const aPropos = soclePageSchema.parse(brutAPropos);
 const corpsAPropos = separerFrontmatter(contenuAPropos).corps;

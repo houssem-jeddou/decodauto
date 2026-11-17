@@ -1,0 +1,21 @@
+Brouillon, jamais validé. Sortie de : CHROME_PATH=… node scripts/mesurer-format2.ts --dist dist-exemples (arbre local de la recette, 16/11/2026)
+
+FORMAT2-MESURES : 2 page(s) au format 2 dans dist-exemples
+Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situation | Bas de l’encadré | Illustration | Après « Notices » | Arbre ou étapes | Hauteur | Sommaire | Largeur de page | Débordements
+/moteur-puretech/ | 320 | chargée | – | 477 | 626 | 2729 | 3289 | oui | – | 9241 | oui | 320 | 0
+/moteur-puretech/ | 375 | chargée | – | 420 | 528 | 2324 | 2807 | oui | – | 8210 | oui | 375 | 0
+/moteur-puretech/ | 1366 | chargée | – | 331 | 397 | 1377 | 1649 | oui | – | 5367 | oui | 1366 | 0
+/voiture-ne-demarre-pas/ | 320 | chargée | – | 437 | 627 | 2572 | 3188 | oui | 4431 | 15736 | oui | 320 | 0
+/voiture-ne-demarre-pas/ | 375 | chargée | – | 399 | 547 | 2179 | 2700 | oui | 3855 | 13341 | oui | 375 | 0
+/voiture-ne-demarre-pas/ | 1366 | chargée | – | 305 | 371 | 1304 | 1595 | oui | 2546 | 8657 | oui | 1366 | 0
+/moteur-puretech/ | 320 | secours | – | 477 | 626 | 2729 | 3289 | oui | – | 9266 | oui | 320 | 0
+/moteur-puretech/ | 375 | secours | – | 420 | 528 | 2324 | 2807 | oui | – | 8235 | oui | 375 | 0
+/moteur-puretech/ | 1366 | secours | – | 331 | 397 | 1377 | 1649 | oui | – | 5367 | oui | 1366 | 0
+/voiture-ne-demarre-pas/ | 320 | secours | – | 463 | 653 | 2597 | 3214 | oui | 4456 | 15762 | oui | 320 | 0
+/voiture-ne-demarre-pas/ | 375 | secours | – | 399 | 547 | 2179 | 2700 | oui | 3880 | 13392 | oui | 375 | 0
+/voiture-ne-demarre-pas/ | 1366 | secours | – | 305 | 371 | 1304 | 1595 | oui | 2546 | 8657 | oui | 1366 | 0
+SIGNALÉ [FORMAT2-MESURES] /moteur-puretech/ (police chargée) : illustration à 2807 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2324 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /voiture-ne-demarre-pas/ (police chargée) : illustration à 2700 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2179 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /moteur-puretech/ (police de secours) : illustration à 2807 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2324 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /voiture-ne-demarre-pas/ (police de secours) : illustration à 2700 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2179 px (règle 2i, demande n° 32 : à dire dans le paquet)
+Mesures : 2 page(s), 12 mesure(s), 0 erreur(s), 4 signalement(s) à reprendre dans le paquet.

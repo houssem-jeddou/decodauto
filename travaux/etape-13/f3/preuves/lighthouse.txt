@@ -1,0 +1,9 @@
+Lighthouse mobile, 3 passages, médianes (npx lhci autorun, lighthouserc.json réduit aux 7 pages du lot), construction de production (SITE_INDEXABLE=true), 16/11/2026.
+
+/a-propos/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 754 ms, TBT 0 ms
+/codes-defaut/p0087/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 904 ms, TBT 0 ms
+/codes-defaut/p0299/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1055 ms, TBT 0 ms
+/codes-defaut/p0420/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1054 ms, TBT 0 ms
+/loi-montagne/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 904 ms, TBT 0 ms
+/mentions-legales/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 906 ms, TBT 0 ms
+/pression-des-pneus/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 906 ms, TBT 0 ms
