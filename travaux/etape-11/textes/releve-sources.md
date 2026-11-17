@@ -565,3 +565,18 @@ en quatre points répartis uniformément sur la circonférence du pneumatique ne
 pour plus d'un point sur quatre. La différence entre la profondeur des rainures principales de deux pneumatiques montés
 sur un même essieu ne doit pas dépasser 5 mm. » Décision du pilotage : la dernière phrase répond à « changer un seul
 pneu » ; à dire seulement comme le texte le dit.
+
+## 16. Relecture à l'écran du 17/11/2026 vers 14 h 40 (Légifrance, lot C4) : fonctions contrôlées de l'annexe I
+
+**Relu à l'écran** (Légifrance dans Chrome, 17/11/2026 vers 14 h 40), à la demande de la revue indépendante du lot C4
+(constat I3). Arrêté du 18 juin 1991, annexe I en vigueur depuis le 1er janvier 2026
+(https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053003556/2026-04-28), « C. Fonctions contrôlées » : « Au
+cours du contrôle technique périodique et pour toutes les catégories de véhicules légers, le contrôleur vérifie les
+points de contrôle définis dans la présente annexe pour les fonctions suivantes : 0. Identification du véhicule
+1. Equipements de freinage 2. Direction 3. Visibilité 4. Feux, dispositifs réfléchissants et équipements électriques
+5. Essieux, roues, pneus, suspension 6. Châssis et accessoires du châssis 7. Autre matériel 8. Nuisances. » Les
+fonctions 10 à 13 s'y ajoutent pour le dépannage, le transport sanitaire, les auto-écoles, les taxis et les VTC.
+
+Heures des relevés corrigées le 17/11 (heure de Tunis rapportée par erreur ; décision du pilotage) : lot C2 vers
+11 h 50 (§11), lot C3 vers 12 h 30 (§12), notices pneus vers 12 h 55 (§13), cinq passages de Légifrance vers 13 h 15
+(§14), R314-1, R323-1 et article 5 vers 13 h 50 (§15).
