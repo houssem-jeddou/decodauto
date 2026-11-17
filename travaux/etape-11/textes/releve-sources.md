@@ -328,3 +328,109 @@ sur la 85W140.
 - p. 297 (PDF 299) : baisse anormale et vidange à chaud, comme Renault.
 - p. 99 (PDF 101) : même texte d'autonomie de vidange que Renault ; « Vidange dans 30 000 km/24 mois » y est un exemple
   d'affichage, pas une périodicité : à ne pas citer comme telle.
+
+## 12. Relevé à l'écran du 17/11/2026 vers 13 h 30 (lot C3 : liquide de refroidissement, liquide de frein)
+
+**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 13 h 30) : page imprimée, page du PDF entre
+parenthèses. Toyota : non lu (même blocage, PDF sur s3.amazonaws.com). Décisions du pilotage du même jour (règle 6) :
+encadrés sur ces citations, le plus prudent l'emporte, écart signalé ; lignes de base `temperature-rouge` et
+`frein-rouge` reprises ; liquide marron (Seat seule) classé par la grille ; DOT 4 dit seulement comme Peugeot, Citroën et
+Seat le disent ; aucune périodicité chiffrée ; aucune couleur ni norme générale hors Seat ; une illustration par page.
+
+**Seat Ibiza**
+- p. 297 (PDF 299), « Spécification du liquide de refroidissement » : « Le système de refroidissement du moteur contient un
+  mélange d'eau spécialement traitée à l'usine et d'au moins 40 % d'additif G12evo (TL-VW 774 L) de couleur lilas. Ce
+  mélange offre une protection antigel jusqu'à -25 °C (-13 °F) et protège les pièces en alliage léger du système de
+  refroidissement du moteur contre la corrosion. En outre, il empêche l'entartrage et élève nettement le point
+  d'ébullition du liquide de refroidissement. Pour protéger ce système de refroidissement, le pourcentage d'additif doit
+  toujours être d'au moins 40 %, même lorsque le climat est chaud et que la protection antigel n'est pas nécessaire. Si,
+  pour des raisons climatiques, une protection supplémentaire est nécessaire, il est possible d'augmenter la proportion
+  d'additifs, mais seulement jusqu'à 60 % ; au-delà, la protection antigel diminuerait et cela entraverait le
+  refroidissement. Pour reconstituer le liquide de refroidissement, il faut utiliser un mélange d'eau distillée et d'au
+  moins 40 % d'additif G12evo pour une protection optimale contre la corrosion. Le mélange G12evo avec les liquides de
+  refroidissement du moteur G13 (TL-VW 774 J), G12 plus-plus (TL-VW 774 G), G12 plus (TL-VW 774 F), G12 (rouge) ou G11
+  (bleu verdâtre) dégrade la protection anticorrosion et doit être évité. » AVERTISSEMENT : « S'il n'y a pas suffisamment
+  de liquide antigel dans le système de refroidissement, le moteur risque de ne pas fonctionner correctement – risque de
+  blessures graves ! […] Lorsque la température extérieure est extrêmement basse, le liquide de refroidissement peut geler
+  et le véhicule rester immobilisé. » ATTENTION : « Il ne faut jamais mélanger les additifs d'origine avec des liquides de
+  refroidissement non homologués par SEAT. ● Si le liquide du vase d'expansion n'est pas de couleur lilas mais marron, par
+  exemple, cela signifie que l'additif G12evo a été mélangé avec un liquide de refroidissement inadapté. Dans ce cas, le
+  liquide de refroidissement devra immédiatement être remplacé. »
+- p. 298 (PDF 300) : « Faites l'appoint de liquide de refroidissement lorsque son niveau descend en dessous de la marque
+  [min] (minimum). » ; contrôle : « Stationnez le véhicule en position horizontale. – Coupez le contact d'allumage. –
+  Consultez le niveau de liquide de refroidissement dans le vase d'expansion. Lorsque le moteur est froid, le niveau de
+  liquide de refroidissement doit rester entre les repères. Lorsque le moteur est chaud, il peut se situer légèrement
+  au-dessus de la marque supérieure. » ; appoint : « Laissez refroidir le moteur. – Couvrez le bouchon du vase d'expansion
+  du liquide de refroidissement avec un chiffon et dévissez-le soigneusement vers la gauche. – Faites l'appoint de liquide
+  de refroidissement uniquement s'il en reste encore dans le vase d'expansion, sinon vous pourriez endommager le moteur.
+  S'il n'y a plus de liquide de refroidissement dans le vase d'expansion, arrêtez-vous. Faites appel à un spécialiste en
+  mesure de vous dépanner. – S'il reste encore un peu de liquide de refroidissement dans le vase d'expansion, faites
+  l'appoint jusqu'à la marque supérieure. – Faites l'appoint de liquide de refroidissement jusqu'à obtenir un niveau
+  stable. – Vissez le bouchon correctement. Si vous perdez du liquide de refroidissement, rendez-vous dans un atelier
+  spécialisé pour inspecter le système de refroidissement. » ; AVERTISSEMENT : « Le système de refroidissement est sous
+  pression ! N'ouvrez jamais le bouchon du vase d'expansion du liquide de refroidissement tant que le moteur est chaud.
+  Risque de brûlures ! ● Conservez l'antigel dans son bidon d'origine hors de portée des enfants. » ; ATTENTION : « Si
+  vous manquez de liquide de refroidissement dans le vase d'expansion, garez la voiture dans un endroit sûr et
+  arrêtez-vous. Demandez de l'aide à un technicien. »
+- p. 299 (PDF 301), « Liquide de freins » : « Le niveau de liquide de frein doit être situé entre les repères [MIN] et
+  [MAX]. Si le niveau de liquide de frein diminue sensiblement en peu de temps ou descend en dessous du repère [MIN], il
+  se peut que le système de freinage ne soit plus étanche. Faites appel à un spécialiste en mesure de vous dépanner. Un
+  témoin sur l'écran du combiné d'instruments indique également le niveau de liquide de frein. » ; « Nous vous
+  recommandons de faire effectuer la vidange du liquide de frein par un Service Technique. » ; AVERTISSEMENT : « Si le
+  niveau du liquide de frein est faible, ou si le liquide de frein n'est pas approprié ou ancien, le système de freinage
+  pourrait s'avérer défectueux ou la puissance de freinage pourrait être réduite. ● Vérifiez périodiquement le système de
+  freinage et le niveau du liquide de frein ! ● Si les freins sont trop sollicités et que le liquide de frein est ancien,
+  des bulles de vapeur risquent de se produire. Les bulles de vapeur réduisent la puissance des freins, en augmentant
+  sensiblement la distance de freinage, et peuvent même endommager complètement le système de freinage. ● Assurez-vous de
+  toujours utiliser le liquide de frein adapté. Utilisez uniquement du liquide de frein conforme à la norme VW 501 14. ●
+  […] Si ce liquide de frein n'est pas disponible, utilisez uniquement un liquide de frein de haute qualité conforme aux
+  exigences de la norme DIN ISO 4925 CLASS 4 ou de la norme américaine FMVSS 116 DOT 4. ● Le liquide de frein utilisé doit
+  être neuf. ● Conservez toujours le liquide de frein dans son bidon d'origine fermé et hors de portée des enfants :
+  risque d'intoxication ! » ; ATTENTION : « Le liquide de frein ne doit pas entrer en contact avec la peinture du véhicule
+  car il est abrasif. » (Seat Ibiza remplace Seat Leon p. 370 : même consigne, notice de référence.)
+
+**Peugeot 208**
+- p. 166 (PDF 168), « Liquide de freins » : « Le niveau de ce liquide doit se situer proche du repère " MAXI ". Sinon,
+  vérifier l'état d'usure des plaquettes de freins. Pour connaître la périodicité de la vidange du circuit de freinage, se
+  reporter au plan d'entretien du constructeur. Nettoyer le bouchon avant de le retirer pour faire l'appoint. N'employer
+  que du liquide de freins DOT4 provenant d'un bidon scellé. »
+- p. 167 (PDF 169), « Liquide de refroidissement » : « Un appoint de ce liquide entre deux révisions est normal. Le
+  contrôle et l'appoint doivent être faits moteur froid. Un niveau insuffisant présente des risques de dommages
+  importants pour le moteur, il doit se situer proche du repère " MAXI " sans jamais le dépasser. Si le niveau est proche
+  ou en-dessous du repère " MINI ", il est impératif de faire un appoint. Lorsque le moteur est chaud, la température du
+  liquide de refroidissement est régulée par le moto-ventilateur. Le circuit de refroidissement étant sous pression,
+  attendre au moins une heure après l'arrêt du moteur pour intervenir. En cas d'intervention urgente, pour éviter tout
+  risque de brûlure, se munir d'un chiffon et dévisser le bouchon de deux tours pour laisser retomber la pression.
+  Lorsque la pression est retombée, retirer le bouchon et compléter le niveau. »
+
+**Citroën C3** — p. 113 (PDF 115) : liquide de freins, même texte que Peugeot mot pour mot (DOT4 compris) ; liquide de
+refroidissement, même texte que Peugeot (« Le niveau de ce liquide doit se situer proche du repère " MAXI " sans jamais
+le dépasser », « la température de ce liquide est régulée »).
+
+**Renault Clio 5 phase 2**
+- p. 334-335 (PDF 336-337), « Niveau liquide de refroidissement » : « Contact coupé et sur sol horizontal, le niveau à froid
+  doit se situer entre les repères « MINI » et « MAXI » indiqués sur le bocal de liquide de refroidissement. Complétez ce
+  niveau à froid avant qu'il n'atteigne le repère « MINI ». Périodicité du contrôle de niveau : Vérifiez votre niveau de
+  liquide de refroidissement régulièrement (le moteur thermique est susceptible de subir de graves détériorations par
+  manque de liquide de refroidissement). Si un apport est nécessaire, n'utilisez que les produits agréés par nos Services
+  Techniques qui vous assurent : – une protection antigel ; – une protection anticorrosion du circuit de
+  refroidissement. » ; « Périodicité de remplacement : Reportez-vous au document d'entretien de votre véhicule. En cas de
+  baisse anormale ou répétée du niveau, consultez un Représentant de la marque. » ; « Aucune intervention ne doit être
+  effectuée sur le circuit de refroidissement lorsque le moteur thermique est chaud. Risque de brûlures. »
+- p. 336-337 (PDF 338-339), « Liquide de freins » : « Il est à contrôler souvent, et en tout cas chaque fois que vous sentez
+  une différence même légère de l'efficacité de freinage. Le contrôle du niveau se fait contact coupé et sur sol
+  horizontal. » ; « Le niveau baisse normalement en même temps que l'usure des garnitures, mais il ne doit jamais
+  descendre en dessous de la cote d'alerte « MINI ». » ; « Remplissage : Toute intervention sur le circuit hydraulique doit
+  entraîner le remplacement du liquide par un spécialiste. Utilisez obligatoirement un liquide agréé par nos Services
+  Techniques (et prélevé d'un bidon scellé). Périodicité de remplacement : Reportez-vous au document d'entretien de votre
+  véhicule. » ; « En cas de baisse anormale ou répétée du niveau, consultez un Représentant de la marque. »
+- p. 387 (PDF 389) : tableau « Le moteur chauffe » (fuites, bocal vide : « consultez un Représentant de la marque le plus
+  tôt possible » ; bouillonnement : « Arrêtez le moteur » ; radiateur : jamais de liquide froid dans un moteur très
+  chaud) : identique au relevé du 16/11 (`travaux/etape-10/textes/autres-pannes-verification.md`).
+
+**Dacia Sandero 3**
+- p. 298 (PDF 300) : même texte que Renault pour le liquide de refroidissement (« moteur thermique »).
+- p. 299 (PDF 301), liquide de freins : niveau et remplissage comme Renault (« Utilisez obligatoirement un liquide agréé par
+  les Services Techniques et prélevé d'un bidon scellé »), sans la phrase « Il est à contrôler souvent… », non vue chez
+  Dacia.
+- p. 349-350 (PDF 351-352) : même tableau « Le moteur chauffe » que Renault.
