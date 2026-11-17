@@ -2,7 +2,7 @@
 > pilotage du matin, qui portait mot pour mot la ligne de validation de ce paquet (« Ligne de validation proposée »,
 > ci-dessous : « Je valide le lot B3 : moteur qui surchauffe … »), paire de liens `nettoyer-fap` ↔ `voyant-moteur`
 > comprise. Empreintes des deux pages (moteur qui surchauffe, nettoyer le FAP) posées ensuite par `npm run empreinte`,
-> sur le contenu du paquet (25d1199), sans autre changement ; passage dans `src/content` par `npm run passage` (règle
+> sur le contenu du paquet (pages de 25d1199, paquet de af4ad11), sans autre changement ; passage dans `src/content` par `npm run passage` (règle
 > de passage).
 
 ## Points à trancher (avec ma recommandation)
