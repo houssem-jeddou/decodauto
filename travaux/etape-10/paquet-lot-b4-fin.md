@@ -124,10 +124,16 @@
     au poussoir, à l'injecteur, au sifflement du turbo ou au support moteur ; une cause propre au diesel qui broute ; une
     réponse pour le « 1.6 HDi 110 sans voyant ». Le ventilateur qui se met en marche contact coupé (Peugeot p. 165, Seat
     p. 297-298) est ajouté au texte de « bruit moteur », sans ligne.
-15. **Mesures du format 2** : à refaire. L'encadré de « perte de puissance » passe de 5 à 7 lignes (et sa page gagne la
-    partie « température » au tableau des notices), celui de « voiture qui broute » de 3 à 4 ; illustrations au-delà de
-    trois écrans attendues sur « perte de puissance » et « bruit moteur » (règle 2i assouplie par la demande n° 32 :
-    signalé, pas bloquant). La première situation de chaque encadré est inchangée.
+15. **Mesures du format 2** (recette refaite après la revue, `recette-lot-b4/`, 375 × 667, police chargée) :
+    - première situation : 558, 558, 479 et 464 px (règle 2a : 667 au plus) ;
+    - illustration : « perte de puissance » 3 371 px, « voiture qui broute » 2 451, « bruit moteur » 2 370, au-delà de trois
+      écrans (2 001), parce que les encadrés ont 4 à 7 lignes et que le bloc « Notices » vient avant (règle 2i assouplie par
+      la demande n° 32 : signalé, pas bloquant) ; « fumée » 1 694 ;
+    - **arbre de « perte de puissance » à 4 458 px, au-delà de six écrans (4 002)** : demande n° 32, décision de Houssem sur
+      captures (`recette-lot-b4/captures/perte-de-puissance-375-chargee-page.png`). Cause : l'encadré de sept lignes finit à
+      2 715 px. Les autres arbres sont sous le seuil (3 489, 3 416, 2 789). Lighthouse 100 sur les quatre pages, aucun
+      débordement à 320 px. **Recommandation : accepter.** La décision est en tête de page, le sommaire mène à l'arbre, et
+      raccourcir l'encadré retirerait un cas sourcé (moteur diesel, voyant EPC, essence 91) qu'un lecteur cherche.
 
 ## Revue indépendante
 - **Une revue**, faite le 16/11/2026 sur la branche à `5163482` : verdict **« à corriger »**, 1 constat bloquant,
@@ -163,4 +169,4 @@ de la base, voyant EPC, moteur essence et moteur diesel sans voyant moteur, indi
 lignes : pression d'huile de la base, bruit d'échappement ou odeur, bruit anormal, démarrage à froid, cliquetis brefs,
 régénération) et fumée à l'échappement (quatre lignes : fumée blanche, vapeur d'eau d'un diesel, chauffage d'appoint,
 fumée sous le capot), leurs coûts et risques, causes, sources et arbres, et la demande de changement de la requête
-principale de la page fumée. »
+principale de la page fumée, et l'arbre de « perte de puissance » au-delà de six écrans (4 458 px). »
