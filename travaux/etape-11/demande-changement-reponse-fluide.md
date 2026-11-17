@@ -1,7 +1,9 @@
-# Demande de changement (n° 33 proposé) : réponse directe pour les pages « niveaux et fluides »
+# Demande de changement n° 33 : réponse directe pour les pages « niveaux et fluides »
 
-> **Brouillon, jamais validé.** Proposée le 17/11/2026 avec la partie technique du modèle fluide (PR #79, brouillon).
-> Rien n'est fusionné sans l'accord de Houssem.
+> **Acceptée par Houssem le 17/11/2026 à 7 h 39.** Le message du matin du pilotage portait la phrase « J'accepte la
+> demande n° 33 (réponse directe des pages fluides). », et Houssem y a répondu : « Je valide tout ! Fais le necessaire ».
+> Proposée le 17/11/2026 avec la partie technique du modèle fluide (PR n° 79), qui l'applique : schéma, modèle, tests,
+> `docs/08` l. 49.
 
 - **Élément** : structure des contenus (`src/schemas/pages.ts`, `fluidePageSchema` ; vue lisible `docs/08`, l. 49) :
   le champ `reponse_directe` est aujourd'hui réservé aux pages « pneus et obligations ».
