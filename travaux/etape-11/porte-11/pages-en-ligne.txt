@@ -1,0 +1,17 @@
+Relevé des 6 pages en ligne de la vague C, le 17/11/2026 vers 21 h 40 (heure de Tunis), dans le navigateur intégré de
+Claude, sur https://decodauto.com (pages lues par fetch sur le site lui-même, cache désactivé, analysées par DOMParser).
+Colonnes : lot | adresse | statut HTTP | en-tête X-Robots-Tag | balise robots | canonical | lignes de l'encadré |
+lignes avec leurs deux libellés écrits (verdict et urgence) et data-verdict, data-urgence | verdict/urgence de chaque
+ligne, dans l'ordre | liens « Signaler une erreur » | élément unique | fiches | emplacements pub | mention IA |
+ligne de transparence | réponse directe | date du premier <time> (non relevée : « - »).
+
+C1 | /huile-moteur/verifier-niveau/ | 200 | - | - | https://decodauto.com/huile-moteur/verifier-niveau/ | 4 | 4 | non, arrêt immédiat/immédiate ; non, arrêt immédiat/immédiate ; oui avec précautions/immédiate ; non, arrêt immédiat/immédiate | 1 | tableau | data-fiche-fluide,data-fiche-tutoriel | 0 | 1 | 1 | 1 | -
+C2 | /huile-moteur/ | 200 | - | - | https://decodauto.com/huile-moteur/ | 4 | 4 | oui avec précautions/sous quelques jours ; oui avec précautions/immédiate ; non, arrêt immédiat/immédiate ; non, arrêt immédiat/immédiate | 1 | tableau | data-fiche-fluide | 0 | 1 | 1 | 1 | -
+C3 | /liquide-de-refroidissement/ | 200 | - | - | https://decodauto.com/liquide-de-refroidissement/ | 5 | 5 | oui avec précautions/immédiate ; non, arrêt immédiat/immédiate ; oui avec précautions/sous quelques jours ; oui avec précautions/immédiate ; non, arrêt immédiat/immédiate | 1 | tableau | data-fiche-fluide | 0 | 1 | 1 | 1 | -
+C3 | /liquide-de-frein/ | 200 | - | - | https://decodauto.com/liquide-de-frein/ | 3 | 3 | non, arrêt immédiat/immédiate ; oui avec précautions/sous quelques jours ; non, arrêt immédiat/immédiate | 1 | tableau | data-fiche-fluide | 0 | 1 | 1 | 1 | -
+C4 | /usure-des-pneus/ | 200 | - | - | https://decodauto.com/usure-des-pneus/ | 4 | 4 | non, arrêt dès que possible/immédiate ; non, arrêt immédiat/immédiate ; non, arrêt immédiat/immédiate ; oui avec précautions/sous quelques jours | 1 | tableau | data-texte-reference | 0 | 1 | 1 | 1 | -
+C4 | /contre-visite-controle-technique/ | 200 | - | - | https://decodauto.com/contre-visite-controle-technique/ | 3 | 3 | non, arrêt dès que possible/immédiate ; non, arrêt immédiat/immédiate ; non, arrêt dès que possible/immédiate | 1 | tableau | data-texte-reference | 0 | 1 | 1 | 1 | -
+sitemap.xml : 37 adresses
+
+6 pages, 23 lignes d'encadré, 23 avec leurs deux libellés écrits ; aucun noindex (ni en-tête, ni balise) ; aucun
+emplacement publicitaire en production (PUB-PRODUCTION).

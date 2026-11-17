@@ -1,0 +1,63 @@
+Lighthouse mobile, job « Lighthouse mobile (3 passages) » de main à 1b695ae (passage 44119274522, job 134167162520, 17/11/2026, 15 h 54 à 16 h 14 UTC), médianes de 3 passages, liste lighthouserc.json.
+Extrait du journal du job (gh api repos/houssem-jeddou/decodauto/actions/jobs/134167162520/logs), adresse locale retirée.
+
+/a-propos/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 903 ms, TBT 0 ms
+/batterie-voiture/changer/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/batterie-voiture/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/batterie-voiture/recharger/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/bruit-moteur/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/codes-defaut/p0087/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/codes-defaut/p0299/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/codes-defaut/p0420/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1051 ms, TBT 0 ms
+/contre-visite-controle-technique/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1051 ms, TBT 0 ms
+/fumee-echappement/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/huile-moteur/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/huile-moteur/verifier-niveau/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 903 ms, TBT 0 ms
+/liquide-de-frein/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/liquide-de-refroidissement/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/loi-montagne/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/mentions-legales/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 902 ms, TBT 0 ms
+/moteur-puretech/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/moteur-qui-surchauffe/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 903 ms, TBT 0 ms
+/nettoyer-fap/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/perte-de-puissance-voiture/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/pression-des-pneus/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/usure-des-pneus/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voiture-ne-demarre-pas/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voiture-qui-broute/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 901 ms, TBT 0 ms
+/voyants/abs-esp/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/voyants/adblue/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/voyants/airbag/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/batterie/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/voyants/direction/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1051 ms, TBT 0 ms
+/voyants/fap/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/frein/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1051 ms, TBT 0 ms
+/voyants/huile/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/moteur/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/prechauffage/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/voyants/pression-pneus/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+
+Démonstration du format 2 (job 134165834456, même passage, emplacements factices) :
+/404.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 755 ms, TBT 0 ms
+/a-propos/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 905 ms, TBT 0 ms
+/batterie-voiture/changer/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/codes-defaut/p0420/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/huile-moteur/verifier-niveau/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 903 ms, TBT 0 ms
+/loi-montagne/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1054 ms, TBT 0 ms
+/mentions-legales/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 754 ms, TBT 0 ms
+/moteur-puretech/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/perte-de-puissance-voiture/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/pression-des-pneus/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1055 ms, TBT 0 ms
+/voiture-qui-broute/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 902 ms, TBT 0 ms
+/voyants/adblue/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1052 ms, TBT 0 ms
+/voyants/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1054 ms, TBT 0 ms
+/voyants/moteur/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+
+Contrôles (job 134165834539) :
+Mode d'indexation : INDEXABLE (variable SITE_INDEXABLE = "true" ET drapeau config/indexation.json = true)
+Contrôle : 37 page(s) éditoriale(s), 0 erreur(s) bloquante(s), 39 alerte(s). Mode d'indexation : INDEXABLE.
+Production en ligne (job 134181825870) :
+Production : tout est conforme.
