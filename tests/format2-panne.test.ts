@@ -29,9 +29,9 @@ import type { TypePage } from '../src/schemas/listes.ts';
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FICHIERS = {
   panne: `${DOSSIER_PAGES_DEMO_FORMAT2}/panne/perte-de-puissance.md`,
-  tutoriel: `${DOSSIER_PAGES_DEMO_FORMAT2}/panne/batterie-changer.md`,
-  // Page de démonstration remplacée dans la construction de démonstration par la vraie page (lot B1) : gardée pour ces
-  // tests du modèle, hors du dossier construit (tests/demo/format2-remplacees/README.md).
+  // Pages de démonstration remplacées dans la construction de démonstration par la vraie page (lots B1 et B2) : gardées
+  // pour ces tests du modèle, hors du dossier construit (tests/demo/format2-remplacees/README.md).
+  tutoriel: 'tests/demo/format2-remplacees/panne/batterie-changer.md',
   dossier: 'tests/demo/format2-remplacees/dossier/moteur-puretech.md',
 } as const;
 const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', ...Object.values(FICHIERS)]);

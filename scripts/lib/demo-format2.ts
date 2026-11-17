@@ -201,9 +201,9 @@ export const PARAGRAPHES_A_REPRENDRE_DEMO: readonly string[] = [];
  * qui publie la page (revue de la porte F1). Une paire
  * ajoutée au plan rend l'attendu inutile, ce que la construction signale (attendu non rencontré).
  */
-export const PAIRES_MANQUANTES_DEMO: Readonly<Record<string, string>> = {
-  [`${DOSSIER_PAGES_DEMO_FORMAT2}/panne/batterie-changer.md`]: 'batterie-changer ↔ voyant-batterie',
-};
+// Aucune aujourd'hui : la démonstration « changer la batterie » (paire batterie-changer ↔ voyant-batterie) est remplacée
+// par la vraie page depuis le lot B2 (tests/demo/format2-remplacees/README.md).
+export const PAIRES_MANQUANTES_DEMO: Readonly<Record<string, string>> = {};
 
 /**
  * Erreurs attendues des pages de démonstration (tests/demo/format2) : aucune n'a d'empreinte de validation ; une page dont
