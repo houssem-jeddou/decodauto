@@ -86,7 +86,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant de pression des pneus allumé ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le voyant de pression des pneus allumé ? »
 - **Angle** : Voyant orange dont la ligne de la base impose pourtant l'arrêt, avec l'écart entre marques (tableau des voyants du brief). La réinitialisation après regonflage, consigne des notices, répond à « toujours allumé » et « comment l'enlever » (relevé, constat 4).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

@@ -93,7 +93,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant ABS ou ESP allumé ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le voyant ABS ou ESP allumé ? »
 - **Angle** : Quatre lignes de la base (tableau des voyants du brief), de l'ESP qui clignote parce qu'il agit aux voyants ABS et freinage allumés ensemble. « Peut-on rouler sans ABS » est exactement l'encadré.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

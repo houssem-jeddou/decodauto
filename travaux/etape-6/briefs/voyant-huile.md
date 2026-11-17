@@ -91,7 +91,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant d'huile allumé ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le voyant d'huile allumé ? »
 - **Angle** : Trois lignes de la base, trois décisions différentes (tableau des voyants du brief) : la couleur et le pictogramme décident, entre pression d'huile, niveau d'huile et rappel d'entretien.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque », une partie par voyant rattaché.
 - **À traiter** :
