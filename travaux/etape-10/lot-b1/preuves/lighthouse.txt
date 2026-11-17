@@ -1,0 +1,4 @@
+Lighthouse mobile, 3 passages, médianes (npx lhci autorun, lighthouserc.json réduit aux deux pages du lot), construction de production (SITE_INDEXABLE=true), 16/11/2026.
+
+/moteur-puretech/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 1053 ms, TBT 0 ms
+/voiture-ne-demarre-pas/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 100 ; CLS 0.000, LCP 906 ms, TBT 0 ms

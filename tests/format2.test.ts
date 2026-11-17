@@ -23,6 +23,7 @@ import {
   reperesDuTexte,
   tuile,
   tuileDeLaPage,
+  voyantsDesPages,
   insecableApresPage,
   minusculeInitiale,
   illustrationAccueil,
@@ -461,6 +462,25 @@ describe('format 2 : corrections après la revue (brief F1.2-corrections)', () =
     assert.match(tuileDe('code-p0420'), /class="tuile" data-couleur="orange"/);
     assert.match(tuileDe('voyant-adblue'), /class="tuile"/);
     assert.equal(tuileDe('loi-montagne'), '');
+  });
+
+  test('pastille « À lire aussi » (revue du lot B1, I1) : une page voyant, code défaut ou pneus prend la tuile de son voyant ; une page panne ou dossier n\'en a pas', async () => {
+    const { site } = await siteDemo();
+    const avecMoteur = (id: string) => ({ id, situations: [{ voyant: 'prechauffage' }, { voyant: 'moteur-orange-fixe' }] }) as unknown as Pick<PageEditoriale, 'id' | 'situations'>;
+    const voyants = voyantsDesPages([
+      { type: 'code-defaut', page: avecMoteur('code-p0420') },
+      { type: 'pneus', page: avecMoteur('pression-des-pneus') },
+      { type: 'panne', page: avecMoteur('voiture-ne-demarre-pas') },
+      { type: 'dossier', page: avecMoteur('moteur-puretech') },
+      { type: 'voyant', page: avecMoteur('voyant-moteur') },
+    ]);
+    // Page code défaut et pneus : première ligne de l'encadré reprise de la base ; page voyant : sa ligne rattachée suffit.
+    assert.deepEqual([...voyants.entries()].sort(), [['code-p0420', 'prechauffage'], ['pression-des-pneus', 'prechauffage']]);
+    const tuileDe = tuileDeLaPage({ ...site, voyantDesPages: voyants });
+    for (const id of ['voyant-batterie', 'voyant-huile', 'code-p0420', 'pression-des-pneus']) assert.match(tuileDe(id), /class="tuile"/, id);
+    for (const id of ['voiture-ne-demarre-pas', 'moteur-puretech']) assert.equal(tuileDe(id), '', id);
+    // Sens inverse : la même page panne, si elle recevait un voyant, aurait une tuile ; c'est voyantsDesPages qui l'en prive.
+    assert.match(tuileDeLaPage({ ...site, voyantDesPages: new Map([['voiture-ne-demarre-pas', 'prechauffage']]) })('voiture-ne-demarre-pas'), /class="tuile"/);
   });
 
   test('§6 contrôles du format 2 en échec : TABLEAU-NOTICES-LIEN, R9-ENCADRE-CONTENU, R9-ENCADRE-SOURCES, FORMAT2-PROVENANCE (attribution « Ligne n »)', async () => {

@@ -31,12 +31,13 @@ describe('sources secondaires : nature obligatoire (SOURCE-SECONDAIRE-NATURE, de
     assert.deepEqual([...NATURES_SOURCE_SECONDAIRE], ['document-technique', 'communication-constructeur', 'administration']);
   });
 
-  test('registre : les 22 sources secondaires ont une nature admise (19 documents techniques, 3 administration) ; aucune autre source n\'en a', () => {
+  test('registre : les 24 sources secondaires ont une nature admise (19 documents techniques, 3 administration, 2 communications du constructeur, lot B1) ; aucune autre source n\'en a', () => {
     const secondaires = registre.filter((s) => s.categorie === 'secondaire');
-    assert.equal(secondaires.length, 22);
+    assert.equal(secondaires.length, 24);
     assert.ok(secondaires.every((s) => (NATURES_SOURCE_SECONDAIRE as readonly string[]).includes(s.nature ?? '')), secondaires.filter((s) => s.nature === undefined).map((s) => s.id).join(', '));
     const parNature = (n: string): string[] => secondaires.filter((s) => s.nature === n).map((s) => s.id);
     assert.equal(parNature('document-technique').length, 19);
+    assert.deepEqual(parNature('communication-constructeur').sort(), ['peugeot-puretech-solutions', 'stellantis-puretech-indemnisation-2025']);
     assert.deepEqual(parNature('administration').sort(), ['reponse-ministerielle-an-2023-03-21', 'reponse-ministerielle-senat-2026-02-12', 'service-public-depannage-autoroute']);
     // Documents techniques : Hella 4, Bosch 1, Ross-Tech 2, bulletins publiés par la NHTSA 12.
     const techniques = secondaires.filter((s) => s.nature === 'document-technique');
