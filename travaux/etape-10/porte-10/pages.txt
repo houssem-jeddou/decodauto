@@ -1,0 +1,19 @@
+Relevé des 11 pages de la vague B sur la construction de production de main à b1c7d57 (17/11/2026).
+Commandes : SITE_INDEXABLE=true npx astro build ; node travaux/etape-10/porte-10/releve-pages.cjs dist .
+Emplacement pub : 0 attendu en production (PUB-PRODUCTION) ; les emplacements factices ne sont que dans les constructions de recette et de démonstration.
+
+Lot | Page | Adresse | Lignes de l'encadré | Libellés écrits (verdict et urgence) | Signaler une erreur | Élément unique | Fiche | Emplacement pub
+B1 | voiture-ne-demarre-pas | /voiture-ne-demarre-pas/ | 6 | 6 sur 6 | 1 | arbre-de-decision | data-fiche-panne | 0
+B1 | moteur-puretech | /moteur-puretech/ | 6 | 6 sur 6 | 1 | tableau | data-historique-dossier | 0
+B2 | batterie-voiture | /batterie-voiture/ | 5 | 5 sur 5 | 1 | arbre-de-decision | data-fiche-panne | 0
+B2 | batterie-recharger | /batterie-voiture/recharger/ | 3 | 3 sur 3 | 1 | tableau | data-fiche-panne, data-fiche-tutoriel | 0
+B2 | batterie-changer | /batterie-voiture/changer/ | 4 | 4 sur 4 | 1 | tableau | data-fiche-panne, data-fiche-tutoriel | 0
+B3 | surchauffe-moteur | /moteur-qui-surchauffe/ | 6 | 6 sur 6 | 1 | arbre-de-decision | data-fiche-panne | 0
+B3 | nettoyer-fap | /nettoyer-fap/ | 4 | 4 sur 4 | 1 | tableau | data-fiche-panne, data-fiche-tutoriel | 0
+B4 | perte-de-puissance | /perte-de-puissance-voiture/ | 7 | 7 sur 7 | 1 | arbre-de-decision | data-fiche-panne | 0
+B4 | voiture-qui-broute | /voiture-qui-broute/ | 4 | 4 sur 4 | 1 | arbre-de-decision | data-fiche-panne | 0
+B4 | bruit-moteur | /bruit-moteur/ | 6 | 6 sur 6 | 1 | arbre-de-decision | data-fiche-panne | 0
+B4 | fumee-echappement | /fumee-echappement/ | 4 | 4 sur 4 | 1 | arbre-de-decision | data-fiche-panne | 0
+
+11 pages, 0 écart(s).
+Code de sortie : 0
