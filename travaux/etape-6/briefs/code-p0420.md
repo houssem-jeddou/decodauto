@@ -87,7 +87,7 @@ Sources de première main prévues à l'étape 5 (`travaux/etape-5/pages-sources
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le code P0420 ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le code P0420 ? »
 - **Angle** : Code générique du catalyseur (rendement sous le seuil). Signification, causes et cas par marque tirés de sources techniques admises (charte §2.2), comme l'exemple P0087 ; le verdict vient de la ligne du voyant qui s'allume avec le code.
 - **Élément unique** : Tableau des cas décrits par marque (modèle 6.6b).
 - **À traiter** :

@@ -93,7 +93,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant de préchauffage allumé ou qui clignote ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le voyant de préchauffage allumé ou qui clignote ? »
 - **Angle** : La recherche porte sur le clignotement en roulant, avec perte de puissance, alors que la base ne décrit que l'allumage au démarrage (relevé, constat 6). La notice Seat Ibiza p. 289 relevée décrit le clignotement comme un défaut de la gestion du moteur diesel.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

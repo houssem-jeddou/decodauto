@@ -93,7 +93,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant airbag allumé ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le voyant airbag allumé ? »
 - **Angle** : Deux témoins de la base, aux actions très différentes (tableau des voyants du brief : défaut des airbags ou des prétensionneurs ; airbag passager désactivé, avec sa condition). La recherche veut surtout éteindre le voyant : la page dit honnêtement pourquoi on ne le fait pas soi-même.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

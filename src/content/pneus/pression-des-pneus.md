@@ -7,7 +7,7 @@ title: "Pression des pneus : où la lire, comment gonfler ses pneus"
 h1: "Pression des pneus : la valeur du constructeur, pneus froids, au moins une fois par mois"
 description: "La bonne pression est celle du constructeur : étiquette de la porte conducteur, pneus froids, au moins une fois par mois. Où la lire et comment gonfler, marque par marque."
 libelle_court: Pression des pneus
-question_decision: Puis-je rouler avec des pneus sous-gonflés, et à quelle pression les gonfler ?
+question_decision: À quelle pression gonfler mes pneus, et puis-je rouler s'ils sont sous-gonflés ?
 situations:
   - voyant: pression-pneus
 voyants:
@@ -43,12 +43,18 @@ sources:
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-14
-date_modification: 2026-11-14
+date_modification: 2026-11-16
 date_revue: 2026-11-14
 prochaine_revue: 2027-05-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (13 h 08),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-3.md).
-validation: ebfe2eabfe3e924e13752d6421aa9671f2ee65f63b483d4e6b8c56f002d5fadc
+validation: 9b87c34327545248a9ff6000b9481fc67df3099282e4fd40c2b88f98da927fc0
+format: 2
+reponse_directe: "Celle du constructeur, à froid : sur l'étiquette de la porte du conducteur ou de son encadrement, propre à chaque voiture."
+illustration:
+  fichier: pression-etiquette-porte
+  alt: "Où lire la pression : l'étiquette sur le chant de la porte du conducteur (1) ou sur le cadre de la porte (2), valeurs à vide et en charge propres à chaque voiture"
+  legende: "Selon la notice, l'étiquette est sur le chant de la porte du conducteur (1 : Renault, Dacia) ou sur le cadre de la porte (2 : Seat, Toyota) ; Peugeot la place « au niveau de la porte côté conducteur ». Les valeurs sont propres à chaque voiture."
 ---
 
 ## Quelle pression mettre dans ses pneus ?
@@ -69,17 +75,17 @@ Les notices lues pour cette page sont celles de ces modèles ; pour une autre vo
 
 | Notice | Où lire la pression | Quand la vérifier | Après avoir gonflé |
 |---|---|---|---|
-| Peugeot 208 | Étiquette collée au niveau de la porte côté conducteur, avec les pressions à vide et en charge et celle de la roue de secours (p. 198) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette (p. 110) | Réinitialiser la détection de sous-gonflage (p. 111) |
-| Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours (p. 348) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud (p. 207 et 348) | Réinitialiser l'avertisseur de perte de pression (p. 207-208) |
-| Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur (p. 179) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids (p. 179) | Réinitialiser l'avertisseur de perte de pression (p. 179-180) |
-| Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche (p. 307) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids (p. 306) | Mémoriser la nouvelle pression dans le système (p. 312) |
-| Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice (p. 266, renvoi p. 333) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines (p. 266) | Initialiser le système dans les cas que la notice énumère (p. 261-262) |
+| Peugeot 208 | Étiquette « collée au niveau de la porte côté conducteur », avec les pressions à vide et en charge et celle de la roue de secours ({{cite:notice-peugeot-208\|p. 198}}) | Une fois par mois, à froid : voiture arrêtée depuis une heure, ou après moins de 10 km à vitesse modérée ; sinon, ajouter 0,3 bar aux valeurs de l'étiquette ({{cite:notice-peugeot-208\|p. 110}}) | Réinitialiser la détection de sous-gonflage ({{cite:notice-peugeot-208\|p. 111}}) |
+| Renault Clio 5 phase 2 | Étiquette sur le chant de la porte conducteur : pressions avant, arrière et de la roue de secours ({{cite:notice-renault-clio-5\|p. 348}}) | Au moins une fois par mois et avant chaque grand voyage, pneus froids ; si les pneus sont chauds, majorer les valeurs de 0,2 à 0,3 bar et ne jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5\|p. 207 et 348}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-renault-clio-5\|p. 207-208}}) |
+| Dacia Sandero 3 | Étiquette collée sur le chant de la porte conducteur ({{cite:notice-dacia-sandero-3\|p. 179}}) | Au moins une fois par mois et avant chaque grand voyage, roue de secours comprise, pneus froids ({{cite:notice-dacia-sandero-3\|p. 179}}) | Réinitialiser l'avertisseur de perte de pression ({{cite:notice-dacia-sandero-3\|p. 179-180}}) |
+| Seat Ibiza | Étiquette sur la face arrière du cadre de la porte avant gauche ({{cite:notice-seat-ibiza\|p. 307}}) | Au moins une fois par mois et avant tout long trajet, toujours pneus froids ({{cite:notice-seat-ibiza\|p. 306}}) | Mémoriser la nouvelle pression dans le système ({{cite:notice-seat-ibiza\|p. 312}}) |
+| Toyota Yaris | Étiquette sur le cadre de la porte du conducteur ; valeurs à froid aussi dans la notice ({{cite:notice-toyota-yaris\|p. 266, renvoi p. 333}}) | Au moins une fois par mois ; Toyota recommande toutes les deux semaines ({{cite:notice-toyota-yaris\|p. 266}}) | Initialiser le système dans les cas que la notice énumère ({{cite:notice-toyota-yaris\|p. 261-262}}) |
 
 ## Pneus froids : et si on vérifie la pression à chaud ?
 
 Toutes les notices lues donnent des pressions pour des pneus froids. Pour Peugeot, un pneu est froid quand la voiture est arrêtée depuis une heure, ou après un trajet de moins de 10 km à vitesse modérée ({{cite:notice-peugeot-208|p. 110}}).
 
-Si vous ne pouvez contrôler qu'à chaud, deux notices donnent une correction : ajouter 0,3 bar aux valeurs de l'étiquette pour Peugeot (p. 110), les majorer de 0,2 à 0,3 bar pour Renault, qui précise qu'il ne faut jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5|p. 348}}). Pour une autre voiture, suivez sa notice.
+Si vous ne pouvez contrôler qu'à chaud, deux notices donnent une correction : ajouter 0,3 bar aux valeurs de l'étiquette pour Peugeot ({{cite:notice-peugeot-208|p. 110}}), les majorer de 0,2 à 0,3 bar pour Renault, qui précise qu'il ne faut jamais dégonfler un pneu chaud ({{cite:notice-renault-clio-5|p. 348}}). Pour une autre voiture, suivez sa notice.
 
 ## Pression avant et arrière, à vide ou en charge
 
@@ -105,7 +111,9 @@ Selon la notice Peugeot 208, rouler avec des pneus sous-gonflés, surtout charg�
 
 ## Quand le voyant de pression des pneus s'allume
 
-L'encadré en haut de page donne la consigne : {{verdict:pression-pneus}}. Ce qu'il faut faire ensuite, et comment éteindre le voyant après le regonflage, est sur la page du [voyant de pression des pneus](/voyants/pression-pneus/).
+{{repere:pression-pneus}}
+
+Ce qu'il faut faire ensuite, et comment éteindre le voyant après le regonflage, est sur la page du [voyant de pression des pneus](/voyants/pression-pneus/).
 
 ## Pression des pneus au contrôle technique
 
