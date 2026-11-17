@@ -1,9 +1,11 @@
 ---
-# BROUILLON, jamais validé. Étape 10, lot B2 (rédaction ouverte par la validation de la porte 10 le 16/11/2026,
-# 19 h 26). Page de la vague B au format tutoriel, sans empreinte tant que Houssem n'a pas validé son encadré.
+# Page de la vague B, étape 10, lot B2 (rédaction ouverte par la validation de la porte 10 le 16/11/2026, 19 h 26).
+# Validée par Houssem le 17/11/2026 à 7 h 39 (« Je valide tout ! Fais le necessaire », sur la ligne de validation de
+# travaux/etape-10/paquet-lot-b2-fin.md) ; empreinte posée et passage de exemples/ à src/content par la pull request
+# du lot B2 (règle de passage).
 # - Extraits et pages citées relus mot pour mot le 16/11/2026 (pdf.js dans Chrome) :
-#   travaux/etape-10/textes/batterie-b2-verification.md et les relevés de l'exemple « voiture ne démarre pas ».
-#   Ligne 2 reprise mot pour mot de l'exemple validé ; ligne 3 identique à la ligne 4 de « batterie-voiture ».
+#   travaux/etape-10/textes/batterie-b2-verification.md et les relevés de la page « voiture ne démarre pas ».
+#   Ligne 2 reprise mot pour mot de la page validée « voiture ne démarre pas » ; ligne 3 identique à la ligne 4 de « batterie-voiture ».
 # - Illustration dessinée pour le site : batterie-chargeur (travaux/etape-10/generer-illustrations-b2.py).
 # - Corrigé après la revue indépendante du 16/11/2026 (rapport « à corriger ») : ordre des câbles Peugeot 208 et Seat
 #   Ibiza d'après les relevés, débranchement réservé à un professionnel chez Renault et Dacia, faits absents des relevés
@@ -121,6 +123,7 @@ date_publication: 2026-11-16
 date_modification: 2026-11-16
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
+validation: 83a229f4280524714f9216e1b371ed59474032b9d30d86257d4515921baf6de3
 causes:
   - cause: Batterie déchargée
     explication: "Selon les notices Renault Clio 5 et Dacia Sandero 3, l'état de charge baisse surtout sur de petits parcours, en ville, quand la température baisse, et après une longue utilisation de la radio ou d'autres équipements moteur arrêté. Les notices Peugeot 208 et Citroën C3 conseillent de la recharger quand la voiture sert surtout pour des trajets courts, ou avant une immobilisation prolongée."

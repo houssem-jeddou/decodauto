@@ -1,6 +1,8 @@
 ---
-# BROUILLON, jamais validé. Étape 10, lot B2 (rédaction ouverte par la validation de la porte 10 le 16/11/2026,
-# 19 h 26). Page de la vague B au format tutoriel, sans empreinte tant que Houssem n'a pas validé son encadré.
+# Page de la vague B, étape 10, lot B2 (rédaction ouverte par la validation de la porte 10 le 16/11/2026, 19 h 26).
+# Validée par Houssem le 17/11/2026 à 7 h 39 (« Je valide tout ! Fais le necessaire », sur la ligne de validation de
+# travaux/etape-10/paquet-lot-b2-fin.md) ; empreinte posée et passage de exemples/ à src/content par la pull request
+# du lot B2 (règle de passage).
 # - Extraits et pages citées relus mot pour mot le 16/11/2026 (pdf.js dans Chrome) :
 #   travaux/etape-10/textes/batterie-b2-verification.md et autres-pannes-verification.md (Dacia p. 302, Peugeot
 #   p. 168, Citroën p. 114, Toyota p. 321 : résumé relu à l'écran, cité par renvoi de page seulement).
@@ -125,6 +127,7 @@ date_publication: 2026-11-16
 date_modification: 2026-11-16
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
+validation: 28814eb8aea24870ff104a5d7001407d5b835b252c32f35e9a6463a877cfdaac
 causes:
   - cause: Batterie déchargée, mais encore bonne
     explication: "Avant de la changer, une recharge peut suffire : les notices Peugeot 208 et Citroën C3 la conseillent quand la voiture sert surtout pour des trajets courts, ou avant une immobilisation prolongée."

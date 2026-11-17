@@ -8,3 +8,4 @@ les tests des modèles la lisent ; dans la construction de démonstration, la vr
 | Page | Remplacée par | Lot | Tests qui la lisent |
 |---|---|---|---|
 | `dossier/moteur-puretech.md` (démonstration du modèle dossier : tableau de six colonnes, historique de trois entrées) | `src/content/dossier/moteur-puretech.md` | B1 | `tests/format2-panne.test.ts` |
+| `panne/batterie-changer.md` (démonstration du format tutoriel : fiche du tutoriel, étapes, ligne d'écart sans paire de liens) | `src/content/panne/batterie-changer.md` | B2 | `tests/format2-panne.test.ts` |
