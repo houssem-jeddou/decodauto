@@ -1,3 +1,3 @@
-Brouillon, jamais validé (après la revue indépendante du lot C5, changements non relus par un relecteur indépendant). Liens de la construction de recette (AVEC_EXEMPLES=1, --exemples), lot C5.
+Brouillon, jamais validé (après la revue indépendante du lot C5 et la révision de la page « huile moteur », changements non relus par un relecteur indépendant). Liens de la construction de recette (AVEC_EXEMPLES=1, --exemples), lot C5, après la révision de « huile moteur ».
 
 Liens : 41 page(s), 1436 lien(s) interne(s) vérifié(s), 505 externe(s) non vérifié(s), 0 problème(s).

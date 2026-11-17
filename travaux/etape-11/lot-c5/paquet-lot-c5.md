@@ -35,7 +35,8 @@
 >   - Une section « Huile … et température » : le graphique Toyota p. 330 et l'ACEA p. 6-7, traduction signalée.
 >
 > **Ce qui a changé après la revue n'a pas été relu par un relecteur indépendant** (une seule revue par livrable,
-> décision du 16/11/2026).
+> décision du 16/11/2026). **La révision de la page « huile moteur » (§7), faite après la revue sur décision du
+> pilotage, n'a pas non plus été relue par un relecteur indépendant.**
 
 Sources de toutes les pages, toutes relues :
 - Notice Toyota Yaris p. 247, 248, 330 et 331 (relevé §18, lue dans le PDF officiel le 17/11 vers 21 h 35).
@@ -212,6 +213,9 @@ accessibilité 100, bonnes pratiques 100, CLS 0, LCP de 903 à 906 ms. SEO 66 : 
 
 ## 5. Points à trancher (avec ma recommandation)
 
+> **Décisions du pilotage (règle 6, 17/11)** : points 1, 3, 4, 5 et 6 comme recommandé. Point 2 : la page mère est
+> révisée dans ce lot, pour une seule validation de Houssem (§7).
+
 1. **Pas de ligne de la base `huile-niveau`.**
    - Son écart renvoie au tableau des notices de la page « voyant huile », que le plan ne lie pas aux pages de grade.
      L'inclure fait échouer FORMAT2-ECART.
@@ -226,6 +230,7 @@ accessibilité 100, bonnes pratiques 100, CLS 0, LCP de 903 à 906 ms. SEO 66 : 
    - **Recommandation : réviser « huile moteur » dans un petit lot qui suit C5** (Toyota lue, sans autre changement),
      avec une nouvelle validation de Houssem, avant ou avec la mise en ligne des pages de grade, pour qu'un lecteur ne
      lise pas deux réponses contraires entre la mère et ses enfants.
+   - **Décision du pilotage** : révision faite dans ce lot (§7).
 3. **Urgence « Aucune action nécessaire » avec « Oui, avec précautions » (constat I2).**
    - La consigne porte sur l'huile à verser au prochain appoint ou à la prochaine vidange, pas sur la conduite : il n'y a
      rien à faire tout de suite.
@@ -259,3 +264,93 @@ fiche « L'essentiel », le tableau, l'illustration, les traductions du document
 description. »
 
 Le registre (`acea-oil-sequences-2023`, source secondaire, document technique) se valide avec le lot.
+
+## 7. Révision de la page « huile moteur »
+
+Décision du pilotage (règle 6, 17/11) : les pages de grade ne sont pas publiées avec une page mère qui les contredit, et
+Houssem ne valide qu'une fois. La page `src/content/fluide/huile-moteur.md` (lot C2, validée le 17/11 à 15 h 05) est donc
+révisée dans ce lot, au plus juste.
+
+**Raison** : depuis la lecture de la notice Toyota Yaris (relevé §18, p. 330), il est faux de dire que les notices lues
+« ne recommandent aucun grade » et de marquer Toyota « Non lu ». La Toyota Yaris non hybride recommande « de
+préférence » la 0W-16, n'admet la 0W-20 que faute de 0W-16, jusqu'à la vidange suivante, et cite la 5W-30.
+
+**Inchangés** : title, H1, description, question de décision, les quatre lignes de l'encadré (voyant clé de la base et
+les trois lignes saisies), coût probable, fiche « L'essentiel », illustration, toutes les autres sections. `date_modification`
+reste au 17/11/2026 (c'est déjà sa valeur). L'empreinte n'est pas recalculée : elle sera reposée après la validation de
+Houssem.
+
+### Réponse directe (40 mots au plus : 39)
+
+- **Avant** : « Celle que demande le plan ou le document d'entretien de votre voiture pour son moteur : les notices lues
+  ne recommandent aucun grade. La vidange se fait à l'échéance de ce plan, que rappelle le combiné. »
+- **Après** : « Celle que demande le plan ou le document d'entretien de votre voiture : parmi les notices lues, seule la
+  Toyota Yaris non hybride recommande un grade, la 0W-16. La vidange se fait à l'échéance de ce plan, que rappelle le
+  combiné. »
+- « pour son moteur » est retiré pour tenir dans 40 mots ; le sens (l'huile du plan ou du document d'entretien) est
+  gardé.
+
+### Section « 5W30, 15W40, SAE 30 : que disent les notices des grades ? » (titre inchangé)
+
+- **Avant** : « Parmi les notices lues, aucune n'explique ces codes de viscosité, et elles ne recommandent aucun grade :
+  les notices Peugeot 208, Citroën C3, Renault Clio 5 et Dacia Sandero 3 n'en citent aucun. La notice Seat Ibiza cite
+  seulement la classe ACEA C3 et des normes VW et API. Sur le bidon, cherchez la norme que demande votre plan
+  d'entretien. »
+- **Après** (trois paragraphes) :
+  - « Parmi les notices lues, seule la notice Toyota Yaris (génération 2020, non hybride) explique ces codes de viscosité
+    et cite des grades. Le nombre avant le W dit l'aptitude de l'huile au démarrage à froid ; le nombre après le W, sa
+    viscosité à température élevée. Pour son moteur essence, elle recommande « de préférence » la 0W-16, n'admet la 0W-20
+    que faute de 0W-16, jusqu'à la vidange suivante, et cite aussi la 5W-30 (notice Toyota Yaris, p. 330). »
+  - « Les notices Peugeot 208, Citroën C3, Renault Clio 5 et Dacia Sandero 3 ne citent aucun grade ; la notice Seat
+    Ibiza cite seulement la classe ACEA C3 et des normes VW et API. Aucune notice lue ne cite la 15W40, la 20W50, la
+    SAE 30, la 0W40, la 10W50, la 10W60 ni la 85W140 : faute de source, cette page n'en dit pas plus. »
+  - « Sur le bidon, cherchez la norme que demande votre plan d'entretien. »
+- Le report de la demande n° 35 (tableau des viscosités, 85W140) est maintenu, dit sans jargon (« faute de source »).
+- **Pas de lien dans le texte vers les trois pages de grade.** Le modèle les affiche déjà dans le bloc des pages enfants
+  dès qu'elles sont construites (vérifié dans la construction de recette). Un lien écrit dans le texte casse
+  `npm run liens` sur la construction de production tant que les pages de grade ne sont pas passées (essai fait : trois
+  liens cassés).
+
+### Rangée Toyota du tableau « Ce que dit chaque notice sur l'huile moteur »
+
+- **Avant** : « Toyota Yaris | Non lu | Message « Entretien d'huile requis » : faire vidanger l'huile moteur et changer le
+  filtre »
+- **Après** : « Toyota Yaris | Moteur essence : 0W-16 de préférence ; 0W-20 faute de 0W-16, jusqu'à la vidange suivante ;
+  5W-30 | Message « Entretien d'huile requis » : faire vidanger l'huile moteur et changer le filtre »
+- Références sous le tableau : notice Toyota Yaris « p. 300 » devient « p. 300 et 330 ».
+
+### En-tête de la page (commentaires)
+
+- Sources : Toyota p. 330 lue le 17/11 vers 21 h 35 (relevé §18).
+- Décision « rien sur la signification d'un grade » : levée par cette révision, sur la seule notice Toyota.
+- Nouvelle entrée : révision du lot C5, brouillon jamais validé, empreinte à reposer après la validation.
+
+### Recette (refaite pour cette révision)
+
+- `npm run schemas` : 0 indice.
+- `npm test` : 865 tests sur 865.
+- `npm run build` : une seule erreur, **attendue**, R4-EMPREINTE sur `src/content/fluide/huile-moteur.md`. La réponse
+  directe est dans l'empreinte, qui n'est pas recalculée ; l'erreur disparaît quand l'empreinte est reposée après la
+  validation de Houssem.
+- `npm run liens` : 0 problème.
+- Indexation durable : 0 erreur.
+- Construction de recette (`controle.txt`) : seules erreurs, attendues, R4-EMPREINTE (huile moteur) et
+  R4-VALIDATION-ABSENTE (trois pages de grade). `liens-recette.txt` : 1 436 liens, 0 problème.
+- Mesures, à 375 × 667 (`mesures-format2.txt`) :
+
+  | | Réponse directe finie à | Verdict et urgence (1re situation) | Bas de l'encadré | Illustration (haut) | Hauteur de page |
+  |---|---|---|---|---|---|
+  | Avant (lot C2) | 424 | 595 | 1 761 | 2 131 | 10 067 |
+  | Après | 445 | 617 | 1 782 | 2 153 | 10 409 |
+
+  - La réponse directe a une ligne de plus (+ 21 px).
+  - Premier écran (667 px) : la réponse directe, le verdict et l'urgence de la première situation y tiennent toujours.
+  - L'illustration était déjà signalée au-delà de trois écrans (2 001 px) au lot C2. Elle l'est encore, à 2 153 px,
+    pour la même raison : un encadré de 4 lignes (règle 2i, demande n° 32). Aucun débordement.
+- Captures à 375 px, police chargée et police de secours (`captures/huile-moteur-375-*`), les captures de secours
+  identiques étant retirées.
+
+### Ligne de validation proposée (mot pour mot)
+
+« Je valide la révision de la page « huile moteur » : la nouvelle réponse directe, la section sur les grades et la ligne
+Toyota du tableau ; les quatre lignes de l'encadré sont inchangées. »

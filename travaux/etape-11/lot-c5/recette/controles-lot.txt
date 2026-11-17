@@ -47,3 +47,23 @@ OK     variable absente + drapeau true → noindex
 OK     variable "true" + drapeau false → noindex
 OK     variable "true" + drapeau true → indexable
 FIN 0
+
+== Après la révision de la page « huile moteur » (§7 du paquet) : contrôles refaits
+
+== schemas
+- 0 hints
+
+== test
+# tests 865
+# pass 865
+# fail 0
+
+== build (npm run build) : seule erreur, attendue, R4-EMPREINTE sur huile-moteur
+ERREUR [R4-EMPREINTE] src/content/fluide/huile-moteur.md : l'empreinte de validation ne correspond plus à l'encadré de décision (question, lignes de situation, y compris une ligne de la base revalidée depuis, coût probable, y compris une pièce reclassée depuis). Relecture et revalidation par Houssem nécessaires
+Contrôle : 37 page(s) éditoriale(s), 1 erreur(s) bloquante(s), 39 alerte(s). Mode d'indexation : non indexable.
+
+== liens
+Liens : 38 page(s), 1335 lien(s) interne(s) vérifié(s), 484 externe(s) non vérifié(s), 0 problème(s).
+
+== indexation durable (SITE_INDEXABLE=true, --base origin/main)
+Indexation durable : 0 erreur(s) ; drapeau true, variable SITE_INDEXABLE "true" ; comparaison avec origin/main : 31 page(s) publiée(s) dans la base, 36 dans la pull request.

@@ -1,4 +1,4 @@
-Brouillon, jamais validé (après la revue indépendante du lot C5, changements non relus par un relecteur indépendant). Contrôle de la construction de recette, lot C5 : seules erreurs attendues R4-VALIDATION-ABSENTE (trois pages sans empreinte).
+Brouillon, jamais validé (après la revue indépendante du lot C5 et la révision de la page « huile moteur », changements non relus par un relecteur indépendant). Contrôle de la construction de recette, lot C5. Erreurs attendues : R4-VALIDATION-ABSENTE (trois pages de grade sans empreinte) et R4-EMPREINTE sur src/content/fluide/huile-moteur.md (réponse directe révisée, §7 du paquet ; empreinte non recalculée, reposée après la validation de Houssem).
 
 Mode d'indexation : NON INDEXABLE : noindex partout (variable SITE_INDEXABLE ≠ "true")
 ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « prechauffage » : citation de « notice-seat-ibiza » : « immediatement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
@@ -31,6 +31,7 @@ ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/perte-de-puissance.md : pas d'im
 ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/surchauffe-moteur.md : pas d'image : Google la recommande pour les articles
 ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/voiture-ne-demarre-pas.md : pas d'image : Google la recommande pour les articles
 ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/voiture-qui-broute.md : pas d'image : Google la recommande pour les articles
+ERREUR [R4-EMPREINTE] src/content/fluide/huile-moteur.md : l'empreinte de validation ne correspond plus à l'encadré de décision (question, lignes de situation, y compris une ligne de la base revalidée depuis, coût probable, y compris une pièce reclassée depuis). Relecture et revalidation par Houssem nécessaires
 ALERTE [R7-IMAGE-RECOMMANDEE] src/content/fluide/huile-moteur.md : pas d'image : Google la recommande pour les articles
 ALERTE [R7-IMAGE-RECOMMANDEE] src/content/fluide/liquide-de-frein.md : pas d'image : Google la recommande pour les articles
 ALERTE [R7-IMAGE-RECOMMANDEE] src/content/fluide/liquide-de-refroidissement.md : pas d'image : Google la recommande pour les articles
@@ -49,4 +50,4 @@ ALERTE [R7-IMAGE-RECOMMANDEE] exemples/fluide/huile-5w40.md : pas d'image : Goog
 INFO construction de recette des exemples (exemples/) : jamais déployée
 INFO 11 mot(s)-clé(s) servi(s) dans une autre vague que celle de docs/05 : voyant-fap (B → A) : 1 ; surchauffe-moteur (A → B) : 9 ; batterie-voiture (A → B) : 1
 INFO 4 lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites
-Contrôle : 40 page(s) éditoriale(s), 3 erreur(s) bloquante(s), 42 alerte(s). Mode d'indexation : non indexable.
+Contrôle : 40 page(s) éditoriale(s), 4 erreur(s) bloquante(s), 42 alerte(s). Mode d'indexation : non indexable.

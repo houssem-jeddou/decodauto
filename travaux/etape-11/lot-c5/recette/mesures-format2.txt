@@ -1,4 +1,4 @@
-Brouillon, jamais validé (après la revue indépendante du lot C5, changements non relus par un relecteur indépendant). FORMAT2-MESURES sur la construction de recette (dist-exemples), lot C5 : 320 × 640, 375 × 667, 1366 × 800, police chargée et police de secours. Les trois pages du lot n'ont aucun signalement.
+Brouillon, jamais validé (après la revue indépendante du lot C5 et la révision de la page « huile moteur », changements non relus par un relecteur indépendant). FORMAT2-MESURES sur la construction de recette (dist-exemples), lot C5, après la révision de « huile moteur » : 320 × 640, 375 × 667, 1366 × 800, police chargée et police de secours. Aucun signalement pour les trois pages de grade ; « huile moteur » : illustration à 2 153 px à 375 px (encadré de 4 lignes), signalée (§7 du paquet).
 
 FORMAT2-MESURES : 41 page(s) au format 2 dans dist-exemples
 Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situation | Bas de l’encadré | Illustration | Après « Notices » | Arbre ou étapes | Hauteur | Sommaire | Largeur de page | Débordements
@@ -38,9 +38,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /fumee-echappement/ | 320 | chargée | – | 442 | 550 | 1506 | 1934 | oui | 3071 | 8742 | oui | 320 | 0
 /fumee-echappement/ | 375 | chargée | – | 377 | 464 | 1324 | 1694 | oui | 2789 | 7640 | oui | 375 | 0
 /fumee-echappement/ | 1366 | chargée | – | 287 | 332 | 826 | 1042 | oui | 1962 | 5232 | oui | 1366 | 0
-/huile-moteur/ | 320 | chargée | 467 | 674 | 823 | 2074 | 2503 | oui | – | 11146 | oui | 320 | 0
-/huile-moteur/ | 375 | chargée | 424 | 595 | 723 | 1761 | 2131 | oui | – | 10067 | oui | 375 | 0
-/huile-moteur/ | 1366 | chargée | 315 | 405 | 471 | 1079 | 1295 | oui | – | 6368 | oui | 1366 | 0
+/huile-moteur/ | 320 | chargée | 489 | 696 | 845 | 2096 | 2524 | oui | – | 11583 | oui | 320 | 0
+/huile-moteur/ | 375 | chargée | 445 | 617 | 745 | 1782 | 2153 | oui | – | 10409 | oui | 375 | 0
+/huile-moteur/ | 1366 | chargée | 315 | 405 | 471 | 1079 | 1295 | oui | – | 6539 | oui | 1366 | 0
 /huile-moteur/10w40/ | 320 | chargée | 445 | 579 | 728 | 846 | 1161 | oui | – | 7553 | oui | 320 | 0
 /huile-moteur/10w40/ | 375 | chargée | 424 | 538 | 646 | 743 | 1019 | oui | – | 6764 | oui | 375 | 0
 /huile-moteur/10w40/ | 1366 | chargée | 315 | 383 | 449 | 522 | 681 | oui | – | 4462 | oui | 1366 | 0
@@ -161,9 +161,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /fumee-echappement/ | 320 | secours | – | 442 | 550 | 1506 | 1934 | oui | 3071 | 8742 | oui | 320 | 0
 /fumee-echappement/ | 375 | secours | – | 377 | 464 | 1324 | 1694 | oui | 2789 | 7640 | oui | 375 | 0
 /fumee-echappement/ | 1366 | secours | – | 287 | 332 | 826 | 1042 | oui | 1962 | 5232 | oui | 1366 | 0
-/huile-moteur/ | 320 | secours | 467 | 674 | 823 | 2074 | 2503 | oui | – | 11222 | oui | 320 | 0
-/huile-moteur/ | 375 | secours | 424 | 595 | 723 | 1761 | 2131 | oui | – | 10067 | oui | 375 | 0
-/huile-moteur/ | 1366 | secours | 315 | 405 | 471 | 1079 | 1295 | oui | – | 6368 | oui | 1366 | 0
+/huile-moteur/ | 320 | secours | 489 | 696 | 845 | 2096 | 2524 | oui | – | 11659 | oui | 320 | 0
+/huile-moteur/ | 375 | secours | 445 | 617 | 745 | 1782 | 2153 | oui | – | 10409 | oui | 375 | 0
+/huile-moteur/ | 1366 | secours | 315 | 405 | 471 | 1079 | 1295 | oui | – | 6539 | oui | 1366 | 0
 /huile-moteur/10w40/ | 320 | secours | 445 | 579 | 728 | 846 | 1161 | oui | – | 7578 | oui | 320 | 0
 /huile-moteur/10w40/ | 375 | secours | 424 | 538 | 646 | 743 | 1019 | oui | – | 6815 | oui | 375 | 0
 /huile-moteur/10w40/ | 1366 | secours | 315 | 383 | 449 | 522 | 681 | oui | – | 4462 | oui | 1366 | 0
@@ -250,7 +250,7 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /voyants/pression-pneus/ | 1366 | secours | – | 272 | 359 | 700 | 915 | oui | – | 6876 | oui | 1366 | 0
 SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police chargée) : illustration à 2505 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1903 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /bruit-moteur/ (police chargée) : illustration à 2370 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1843 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /huile-moteur/ (police chargée) : illustration à 2131 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1761 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/ (police chargée) : illustration à 2153 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1782 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police chargée) : illustration à 2513 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1873 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /liquide-de-frein/ (police chargée) : illustration à 2141 px, au-delà de trois écrans (2001 px) ; raison : encadré de 3 ligne(s), bas à 1614 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /liquide-de-refroidissement/ (police chargée) : illustration à 2815 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 2175 px (règle 2i, demande n° 32 : à dire dans le paquet)
@@ -267,7 +267,7 @@ SIGNALÉ [FORMAT2-MESURES] /voyants/abs-esp/ (police chargée) : illustration à
 SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police chargée) : illustration à 2761 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2277 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /batterie-voiture/ (police de secours) : illustration à 2530 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 1927 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /bruit-moteur/ (police de secours) : illustration à 2370 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 1843 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /huile-moteur/ (police de secours) : illustration à 2131 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1761 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/ (police de secours) : illustration à 2153 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1782 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police de secours) : illustration à 2537 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1897 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /liquide-de-frein/ (police de secours) : illustration à 2141 px, au-delà de trois écrans (2001 px) ; raison : encadré de 3 ligne(s), bas à 1614 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /liquide-de-refroidissement/ (police de secours) : illustration à 2839 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 2199 px (règle 2i, demande n° 32 : à dire dans le paquet)
