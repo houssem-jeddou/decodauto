@@ -531,3 +531,37 @@ défini à l'article 5 du présent arrêté […]. Si, à cette occasion, une no
 complémentaire est prescrite, celle-ci est réalisée dans un nouveau délai de deux mois. Lorsque la contre-visite n'est
 pas réalisée dans le même centre que celui où le contrôle périodique ou complémentaire qui a fait l'objet d'un résultat
 défavorable a été réalisé, une copie du contrôle périodique ou complémentaire est archivée avec le procès-verbal […]. »
+
+## 15. Relecture à l'écran du 17/11/2026 vers 15 h 10 (Légifrance, lot C4) : R314-1, R323-1, arrêté de 2019 article 5
+
+**Relu à l'écran** (Légifrance dans Chrome, 17/11/2026 vers 15 h 10), à la demande du lot C4
+(`travaux/etape-11/lot-c4/points-ouverts.md`, §2). Ces textes complètent les phrases de sanction relevées au §7 et au §8.
+
+**Code de la route, article R314-1** (en vigueur depuis le 27 août 2020, décret n° 2020-1088) : « Les pneumatiques, à
+l'exception de ceux des matériels de travaux publics, doivent présenter sur toute leur surface de roulement des
+sculptures apparentes. Aucune toile ne doit apparaître ni en surface ni à fond de sculpture des pneumatiques. En outre,
+ceux-ci ne doivent comporter sur leurs flancs aucune déchirure profonde. » ; « Le fait de contrevenir aux dispositions du
+présent article relatives à la nature, la forme, l'état et les conditions d'utilisation des pneumatiques est puni de
+l'amende prévue pour les contraventions de la quatrième classe. L'immobilisation du véhicule peut être prescrite dans les
+conditions prévues aux articles L. 325-1, L. 325-2 et L. 325-3. »
+
+**Code de la route, article R323-1** (en vigueur depuis le 1er janvier 2026, décret n° 2025-1180) : « Tout propriétaire
+d'un véhicule mentionné au présent chapitre n'est autorisé à le mettre ou le maintenir en circulation qu'après un
+contrôle technique ayant vérifié qu'il est en bon état de marche et en état satisfaisant d'entretien. » ; « Le fait pour
+tout propriétaire de mettre ou maintenir en circulation un véhicule sans avoir satisfait aux obligations de contrôle
+technique fixées par le présent chapitre est puni de l'amende prévue pour les contraventions de la quatrième classe.
+L'immobilisation peut être prescrite dans les conditions prévues aux articles L. 325-1 à L. 325-3. A défaut de
+présentation aux contrôles techniques obligatoires ou dans le cas où les réparations ou aménagements prescrits par
+l'expert chargé des contrôles techniques ne sont pas exécutés, la mise en fourrière peut également être prescrite. »
+
+**Arrêté du 18 juillet 2019 relatif aux pneumatiques, article 5** (en vigueur depuis le 31 août 2019), en entier : « Les
+pneumatiques des véhicules des catégories M 1, N 1, O 1 et O 2 doivent présenter, pendant toute leur utilisation sur
+route, dans les rainures principales de leur bande de roulement, une profondeur d'au moins 1,6 mm. Les pneumatiques
+destinés aux voitures particulières et à leurs remorques doivent être équipés d'indicateurs d'usure répondant aux
+prescriptions du point 6.3.3.3 du règlement n° 30 et du point 6.6.11.3 du règlement n° 108 susvisés et permettant de
+signaler que les rainures de la bande de roulement n'ont plus qu'une profondeur de 1,6 mm, avec une tolérance de
++ 0,6/- 0 mm. Sur les véhicules autres que ceux visés au point 1er alinéa ci-dessus, la profondeur de rainures mesurée
+en quatre points répartis uniformément sur la circonférence du pneumatique ne doit pas être inférieure à un millimètre
+pour plus d'un point sur quatre. La différence entre la profondeur des rainures principales de deux pneumatiques montés
+sur un même essieu ne doit pas dépasser 5 mm. » Décision du pilotage : la dernière phrase répond à « changer un seul
+pneu » ; à dire seulement comme le texte le dit.
