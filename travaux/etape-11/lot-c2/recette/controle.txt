@@ -1,4 +1,4 @@
-Brouillon, jamais validé. Contrôle de la construction de recette, lot C2, 17/11/2026 : seule erreur attendue R4-VALIDATION-ABSENTE.
+Brouillon, jamais validé (après la revue indépendante du 17/11, non relu par un relecteur indépendant). Contrôle de la construction de recette, lot C2, 17/11/2026 : seule erreur attendue R4-VALIDATION-ABSENTE.
 
 Mode d'indexation : NON INDEXABLE : noindex partout (variable SITE_INDEXABLE ≠ "true")
 ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « prechauffage » : citation de « notice-seat-ibiza » : « immediatement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
@@ -41,3 +41,4 @@ INFO construction de recette des exemples (exemples/) : jamais déployée
 INFO 11 mot(s)-clé(s) servi(s) dans une autre vague que celle de docs/05 : voyant-fap (B → A) : 1 ; surchauffe-moteur (A → B) : 9 ; batterie-voiture (A → B) : 1
 INFO 17 lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites
 Contrôle : 33 page(s) éditoriale(s), 1 erreur(s) bloquante(s), 35 alerte(s). Mode d'indexation : non indexable.
+FIN 1
