@@ -76,9 +76,9 @@ describe('format 2 : pages code défaut et pneus et obligations (F1.3b)', () => 
     assert.deepEqual(modeleDeLaPage('pneus', { ...pression.page, format: 1 } as PageEditoriale), { modele: pagePneus });
   });
 
-  test('pages construites : contrôles d\'aujourd\'hui (CODE-*, FICHE-TEXTE-*, R9) et du format 2 verts ; seule l\'empreinte (brouillon jamais validé) échoue', () => {
+  test('pages construites : contrôles d\'aujourd\'hui (CODE-*, FICHE-TEXTE-*, R9), du format 2 et empreinte (lot F3 validé par Houssem le 17/11/2026) verts', () => {
     for (const p of [code, pression, montagne]) {
-      assert.deepEqual(p.controle(p.html), ['R4-EMPREINTE'], p.page.id);
+      assert.deepEqual(p.controle(p.html), [], p.page.id);
       assert.deepEqual(regles(constatsPartCitee(p.html, 'x.html')), [], p.page.id);
     }
   });

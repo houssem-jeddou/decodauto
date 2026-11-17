@@ -72,7 +72,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (22 h 45),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-4a.md).
-validation: 05c43a35a48eef3a1ecb99304d705d940d8dd403dc2341c93b9fdb9515974cff
+validation: 1623661128065ee4d3aa7de741e96d75c3b81c833b12bac7a1d1668af71a3bc0
 causes:
   - cause: Fuite à l'admission ou à l'échappement
     explication: "Pour les voitures du groupe Volkswagen, Ross-Tech cite une fuite à l'admission ou à l'échappement, et demande de vérifier l'étanchéité des deux."

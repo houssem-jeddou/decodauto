@@ -106,7 +106,7 @@ prochaine_revue: 2027-05-10
 # Encadré de décision (question, quatre lignes et leurs citations, coût probable et pièces) validé par Houssem le
 # 03/11/2026 (21 h 44), avec les sources, la fiche, le tableau, les faits du texte et les sept décisions du paquet
 # (travaux/etape-6/paquet-6.6c-loi-montagne.md), demande de changement n° 10 comprise.
-validation: 75abb315d6c38686d9171d0b75a2289ecf5d643e261d1c7b5bf05ea8a6733a46
+validation: 0c0f6573e5eb247a260ca97df2d67687bd552873503a5c6abed865d2cb518159
 format: 2
 illustration:
   fichier: loi-montagne-flanc-du-pneu

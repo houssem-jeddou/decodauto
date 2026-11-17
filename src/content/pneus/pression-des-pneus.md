@@ -48,7 +48,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-05-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (13 h 08),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-3.md).
-validation: ebfe2eabfe3e924e13752d6421aa9671f2ee65f63b483d4e6b8c56f002d5fadc
+validation: 9b87c34327545248a9ff6000b9481fc67df3099282e4fd40c2b88f98da927fc0
 format: 2
 reponse_directe: "Celle du constructeur, à froid : sur l'étiquette de la porte du conducteur ou de son encadrement, propre à chaque voiture."
 illustration:

@@ -69,7 +69,7 @@ date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 14/11/2026 (22 h 45),
 # avec les faits du texte (paquet travaux/etape-8/paquet-lot-4a.md).
-validation: f39168dd6c04ffe2fbc9b5879d37d81d672a963f7bc0b9d946e578833fe5216d
+validation: 0dd0b74c52973261bc98c31df8c34188e5a7a5520248101ba8565ce6c05022c3
 causes:
   - cause: Fuite sur le circuit d'air de suralimentation
     explication: "Pour les Volkswagen 2.0 TDI qu'il nomme, vendues aux États-Unis, le bulletin de Volkswagen cite un tuyau de suralimentation en plastique fissuré, entre le turbo et l'échangeur d'air, et un raccord de durite qui fuit à l'échangeur."

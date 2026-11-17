@@ -1,3 +1,9 @@
+> **Validé par Houssem le 17/11/2026 à 7 h 39 : « Je valide tout ! Fais le necessaire ».** Réponse au message du
+> pilotage du matin, qui portait mot pour mot la ligne de validation de ce paquet (« Ligne de validation proposée »,
+> ci-dessous : « Je valide le lot F3 : … »). Empreintes des cinq pages éditoriales du lot (codes P0087, P0299, P0420,
+> loi montagne, pression des pneus) posées ensuite par `npm run empreinte`, sur le contenu du paquet (717e955), sans
+> autre changement.
+
 ## Points à trancher (avec ma recommandation)
 1. **Encadrés** : aucun verdict ne change (lignes saisies identiques à `main`, contrôlé par le générateur). Au format 2,
    l'encadré affiche en plus les lignes d'écart courtes de la base (lot F2) : ses empreintes changent et sont posées

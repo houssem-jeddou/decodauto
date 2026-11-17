@@ -65,7 +65,7 @@ prochaine_revue: 2027-11-03
 # Encadré de décision (question, ligne, coût probable et pièces des causes) validé par Houssem le 03/11/2026 (20 h 06),
 # avec les sources, la fiche, les cas par marque, les faits du texte et les cinq décisions du paquet
 # (travaux/etape-6/paquet-6.6b-code-p0087.md).
-validation: 14dd328dd7446231d1efa10827c3cfdc349c3e160e9a3e21e77491038f9707cb
+validation: 695527fe95d5516024822ba292d2571c57d8856fe9b91bb7fec677bfbcbefdf0
 causes:
   - cause: Pompe à carburant qui ne débite pas assez
     explication: "Pour les voitures du groupe Volkswagen, Ross-Tech demande de contrôler la quantité de carburant fournie par la pompe à carburant."
