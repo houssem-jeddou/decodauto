@@ -1,0 +1,16 @@
+Empreintes de validation des 11 pages de la vague B, recalculées sur main à b1c7d57 (17/11/2026) et comparées au champ validation de chaque fichier.
+Commande, pour chaque page : npm run empreinte -- src/content/<type>/<id>.md
+
+src/content/panne/voiture-ne-demarre-pas.md : calculée 23847e5321ab708e7826a64af70ed68deead02f6671676b646f13e5e426e2318 ; fichier 23847e5321ab708e7826a64af70ed68deead02f6671676b646f13e5e426e2318 ; identique
+src/content/dossier/moteur-puretech.md : calculée e663cb5dc67cd375fdb2cc38574590fbedfefd03f5d10f6e0bd7d7b662a7dd31 ; fichier e663cb5dc67cd375fdb2cc38574590fbedfefd03f5d10f6e0bd7d7b662a7dd31 ; identique
+src/content/panne/batterie-voiture.md : calculée 7f5936e91a5b9ceabe928bc73dd845dcdc0863927e225b257598432b77daa5ea ; fichier 7f5936e91a5b9ceabe928bc73dd845dcdc0863927e225b257598432b77daa5ea ; identique
+src/content/panne/batterie-recharger.md : calculée 83a229f4280524714f9216e1b371ed59474032b9d30d86257d4515921baf6de3 ; fichier 83a229f4280524714f9216e1b371ed59474032b9d30d86257d4515921baf6de3 ; identique
+src/content/panne/batterie-changer.md : calculée 28814eb8aea24870ff104a5d7001407d5b835b252c32f35e9a6463a877cfdaac ; fichier 28814eb8aea24870ff104a5d7001407d5b835b252c32f35e9a6463a877cfdaac ; identique
+src/content/panne/surchauffe-moteur.md : calculée 949bba7c0c0ef41f809bff797235cb9743892660f0c76685f5acb394595c758c ; fichier 949bba7c0c0ef41f809bff797235cb9743892660f0c76685f5acb394595c758c ; identique
+src/content/panne/nettoyer-fap.md : calculée d967a22031e5912aba31c2c733980a407ad4b818df04bd6adf7de8e6d7e4a619 ; fichier d967a22031e5912aba31c2c733980a407ad4b818df04bd6adf7de8e6d7e4a619 ; identique
+src/content/panne/perte-de-puissance.md : calculée 5d8140aa5075b6205d70384bb90814512017e937bdb17782c2e62e70a3baaf01 ; fichier 5d8140aa5075b6205d70384bb90814512017e937bdb17782c2e62e70a3baaf01 ; identique
+src/content/panne/voiture-qui-broute.md : calculée 560ee701c801b855638499e7e225b8023458044c1de78f6a719b2302673904d4 ; fichier 560ee701c801b855638499e7e225b8023458044c1de78f6a719b2302673904d4 ; identique
+src/content/panne/bruit-moteur.md : calculée 9e0425ec7131c3306be33c028895a7d78610358ffad0cd79cb8b6690e6f2166c ; fichier 9e0425ec7131c3306be33c028895a7d78610358ffad0cd79cb8b6690e6f2166c ; identique
+src/content/panne/fumee-echappement.md : calculée d9e1dc2f264f42ae72eeafa5cc37de6c95d5dd7f16e3d3218fa02d55189293f7 ; fichier d9e1dc2f264f42ae72eeafa5cc37de6c95d5dd7f16e3d3218fa02d55189293f7 ; identique
+
+11 empreinte(s) sur 11 identiques.
