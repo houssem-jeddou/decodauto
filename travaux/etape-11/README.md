@@ -73,9 +73,10 @@ seule à la fois, docs/03, règle 12), contrôlé à la porte de l'étape 11 :
 
 ## 4. Questions : décisions de Claude (règle 6, nuit du 17/11, sur la délégation de Houssem) et ce qui reste à Houssem
 
-1. **Réponse directe des pages fluides** : décidé, aucune demande de changement. La demande n° 30 (acceptée) classe déjà
-   « huiles et liquides » parmi les pages informatives (règle 2c, précision 2a) ; le schéma qui réserve `reponse_directe`
-   aux pages pneus est un oubli de mise en œuvre, réparé par la partie technique du modèle fluide (PR #79).
+1. **Réponse directe des pages fluides** : **à Houssem**, par une courte demande de changement de structure. La règle 2c
+   de la demande n° 30 vise bien « huiles et liquides », mais le dossier de la porte F1 (validé le 16/11,
+   `travaux/etape-13/f1/porte-f1.md`, l. 188-190) et `docs/08` (l. 49) disent que l'ouvrir aux pages fluides est une demande
+   de structure (revue de la PR #79, B1). Le changement est prêt dans la PR #79 (brouillon), en attente de cet accord.
 2. **Niveau d'une obligation légale** (pneus usés, contrôle technique défavorable : relevé, §10) : **à Houssem**, par la
    demande de changement de la grille notée en idée reportée (paquet 6.6c, décision 1), proposée avec le lot qui en a
    besoin (usure des pneus, contre-visite), avec la logique de la loi montagne.
