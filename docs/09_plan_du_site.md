@@ -11,7 +11,7 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 - **Mots-clés rattachés :** 1167 sur 1167, soit 1009 comptés et 158 variantes, chacun sur une seule page.
 - **Volume indicatif rattaché :** 1 140 760 recherches par mois.
 - **Vagues :** A = 22 pages, B = 11, C = 9, comme dans 02 et 03.
-- **Liens :** 52 paires de pages liées, chacune déclarée une seule fois dans le plan. Le lien retour est calculé.
+- **Liens :** 53 paires de pages liées, chacune déclarée une seule fois dans le plan. Le lien retour est calculé.
 - **Parent :** la page mère, reprise dans l'adresse et dans le fil d'Ariane. Elle affiche aussi la liste de ses pages enfants, par un lien calculé.
 - **Accueil :** il liste toutes les pages publiées, par thème, et cette liste est générée depuis le plan. Aucune page n'est donc orpheline.
 
@@ -51,7 +51,7 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 | batterie-changer | `/batterie-voiture/changer/` | panne | B | comment changer une batterie de voiture | 15 (15) | 16 116 | batterie-voiture | voiture-ne-demarre-pas |
 | batterie-recharger | `/batterie-voiture/recharger/` | panne | B | recharger une batterie de voiture | 17 (15) | 13 272 | batterie-voiture | voiture-ne-demarre-pas |
 | nettoyer-fap | `/nettoyer-fap/` | panne | B | nettoyer fap | 22 (22) | 43 924 | – | code-p0420, voyant-fap, voyant-moteur |
-| moteur-puretech | `/moteur-puretech/` | dossier | B | moteurs puretech | 79 (65) | 103 016 | – | bruit-moteur, code-p0420, huile-moteur, voyant-huile |
+| moteur-puretech | `/moteur-puretech/` | dossier | B | moteurs puretech | 79 (65) | 103 016 | – | bruit-moteur, code-p0420, huile-moteur, niveau-huile, voyant-huile |
 
 ## 3. Niveaux et fluides
 
@@ -61,7 +61,7 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 | huile-5w30 | `/huile-moteur/5w30/` | fluide | C | huile 5w30 | 20 (15) | 27 492 | huile-moteur | huile-5w40 |
 | huile-5w40 | `/huile-moteur/5w40/` | fluide | C | huile 5w40 | 14 (9) | 22 752 | huile-moteur | huile-5w30 |
 | huile-10w40 | `/huile-moteur/10w40/` | fluide | C | huile 10w40 | 9 (5) | 12 956 | huile-moteur | – |
-| niveau-huile | `/huile-moteur/verifier-niveau/` | fluide | C | niveau d huile moteur | 14 (14) | 7 268 | huile-moteur | bruit-moteur, voyant-huile |
+| niveau-huile | `/huile-moteur/verifier-niveau/` | fluide | C | niveau d huile moteur | 14 (14) | 7 268 | huile-moteur | bruit-moteur, moteur-puretech, voyant-huile |
 | liquide-de-refroidissement | `/liquide-de-refroidissement/` | fluide | C | liquide de refroidissement voiture | 22 (12) | 35 076 | – | surchauffe-moteur |
 | liquide-de-frein | `/liquide-de-frein/` | fluide | C | liquide de frein voiture | 10 (4) | 9 796 | – | voyant-frein |
 

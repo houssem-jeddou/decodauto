@@ -1,0 +1,3 @@
+Brouillon, jamais validé. Lighthouse mobile, 3 passages, médianes (npx lhci autorun sur dist-exemples, AVEC_EXEMPLES=1, emplacements publicitaires factices), page « niveau d'huile », 17/11/2026, après les retouches.
+
+/huile-moteur/verifier-niveau/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 1053 ms, TBT 0 ms

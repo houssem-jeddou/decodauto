@@ -1,0 +1,44 @@
+Brouillon, jamais validé. Contrôle de la construction de recette (AVEC_EXEMPLES=1 npx astro build ; AVEC_EXEMPLES=1 node scripts/controle.ts --dist dist-exemples --exemples), 17/11/2026, après les retouches. Seule erreur attendue : R4-VALIDATION-ABSENTE (exemple jamais validé).
+
+Mode d'indexation : NON INDEXABLE : noindex partout (variable SITE_INDEXABLE ≠ "true")
+ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « prechauffage » : citation de « notice-seat-ibiza » : « immediatement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
+ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « airbag-passager-desactive » : citation de « notice-renault-clio-5 » : « imperativement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
+ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « airbag-passager-desactive » : citation de « notice-dacia-sandero-3 » : « imperativement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-abs-esp.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-adblue.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-airbag.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-batterie.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-direction.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-fap.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-frein.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-huile.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-moteur.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-prechauffage.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyant-pression-pneus.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/voyant/voyants.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/code-defaut/code-p0087.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/code-defaut/code-p0299.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/code-defaut/code-p0420.md : pas d'image : Google la recommande pour les articles
+ALERTE [R3-NIVEAU-A-VERIFIER] src/content/panne/batterie-changer.md : situation « La batterie est hors d'usage et doit être remplacée » : citation de « notice-renault-clio-5 » : « faites appel » mène au moins à « non, arrêt dès que possible » ; « imperativement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui avec précautions », « sous quelques jours ». À vérifier sur le paquet de validation
+ALERTE [R3-NIVEAU-A-VERIFIER] src/content/panne/batterie-changer.md : situation « La batterie est hors d'usage et doit être remplacée » : citation de « notice-dacia-sandero-3 » : « faites appel » mène au moins à « non, arrêt dès que possible » ; « imperativement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui avec précautions », « sous quelques jours ». À vérifier sur le paquet de validation
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/batterie-changer.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/batterie-recharger.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/batterie-voiture.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/bruit-moteur.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/fumee-echappement.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/nettoyer-fap.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/perte-de-puissance.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/surchauffe-moteur.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/voiture-ne-demarre-pas.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/panne/voiture-qui-broute.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/pneus/loi-montagne.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/pneus/pression-des-pneus.md : pas d'image : Google la recommande pour les articles
+ALERTE [R7-IMAGE-RECOMMANDEE] src/content/dossier/moteur-puretech.md : pas d'image : Google la recommande pour les articles
+ERREUR [R4-VALIDATION-ABSENTE] exemples/fluide/niveau-huile.md : la page n'a pas d'empreinte de validation de son encadré de décision (question, lignes de situation, coût probable)
+ALERTE [R7-IMAGE-RECOMMANDEE] exemples/fluide/niveau-huile.md : pas d'image : Google la recommande pour les articles
+INFO construction de recette des exemples (exemples/) : jamais déployée
+INFO 11 mot(s)-clé(s) servi(s) dans une autre vague que celle de docs/05 : voyant-fap (B → A) : 1 ; surchauffe-moteur (A → B) : 9 ; batterie-voiture (A → B) : 1
+INFO 20 lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites
+Contrôle : 32 page(s) éditoriale(s), 1 erreur(s) bloquante(s), 34 alerte(s). Mode d'indexation : non indexable.
+
+Liens : 33 page(s), 1136 lien(s) interne(s) vérifié(s), 436 externe(s) non vérifié(s), 0 problème(s).
