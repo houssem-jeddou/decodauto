@@ -14,9 +14,9 @@
 #   ligne « baisse anormale » retirée (elle ira sur la page « niveau d'huile », une intention, une page) ; ligne « doute
 #   sur l'huile versée » ajoutée ; tableau des viscosités et 85W140 reportés (demande de changement n° 35).
 # - Révision du 17/11 (lot C5, décision du pilotage, paquet du lot C5, §7) : réponse directe, section des grades et ligne
-#   Toyota du tableau, depuis la notice Toyota p. 330. Brouillon, jamais validé : l'empreinte ci-dessous est celle du
-#   17/11 à 15 h 05 et ne couvre plus la réponse directe ; elle sera reposée après la validation de Houssem. Title, H1,
-#   description et les quatre lignes de l'encadré inchangés.
+#   Toyota du tableau, depuis la notice Toyota p. 330. Validée par Houssem le 17/11/2026 à 22 h 44, mot pour mot :
+#   « Je valide tout ! Goo » (ligne de validation du §7) ; empreinte reposée après la validation. Title, H1, description et les quatre
+#   lignes de l'encadré inchangés.
 id: huile-moteur
 title: "Huile moteur, vidange : quelle huile mettre et quand vidanger ?"
 h1: "Huile moteur : quelle huile mettre dans ma voiture, et quand faire la vidange ?"
@@ -113,8 +113,9 @@ date_modification: 2026-11-17
 date_revue: 2026-11-17
 prochaine_revue: 2027-11-17
 # Encadré de décision (question, réponse directe, lignes, coût probable) validé par Houssem le 17/11/2026 à 15 h 05
-# (heure de Tunis), avec les faits du texte (lot C2, travaux/etape-11/lot-c2/paquet-lot-c2.md).
-validation: 6e7c085162972fded1bbb9ca2fc2de821ad9b42b12de28c665b77e8ddda2acb4
+# (heure de Tunis), avec les faits du texte (lot C2, travaux/etape-11/lot-c2/paquet-lot-c2.md) ; réponse directe révisée
+# et validée le 17/11/2026 à 22 h 44 (lot C5, travaux/etape-11/lot-c5/paquet-lot-c5.md, §7).
+validation: 5ecdd5b3282f98504677c995524b7a10f4bc50935eaa4475b3c327132bc2cbaa
 ---
 
 ## Quelle huile moteur mettre dans ma voiture ?

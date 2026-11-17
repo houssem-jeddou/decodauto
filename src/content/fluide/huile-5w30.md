@@ -1,6 +1,7 @@
 ---
-# Brouillon, jamais validé. Étape 11 (vague C), lot C5 : page « huile 5W30 » (modèle fluide, format 2), enfant de la page
-# « huile moteur ». Pas d'empreinte tant que Houssem n'a pas validé son encadré (paquet du lot C5).
+# Validé par Houssem le 17/11/2026 à 22 h 44, mot pour mot : « Je valide tout ! Goo » (ligne de validation de la page, paquet du lot C5,
+# §6). Étape 11 (vague C), lot C5 : page « huile 5W30 » (modèle fluide, format 2), enfant de la page « huile moteur ».
+# Empreinte posée après la validation.
 # - Sources : notice Toyota Yaris (génération 2020, non hybride) p. 247, 248, 330 et 331 (relevé des sources, §18, lue dans
 #   le PDF officiel le 17/11/2026 vers 21 h 35) ; notices Peugeot 208 p. 166, Citroën C3 p. 113, Renault Clio 5 p. 333,
 #   Dacia Sandero 3 p. 296, Seat Ibiza p. 293 et 316 (§11, relues à l'écran le 17/11 vers 11 h 50) ; document ACEA 2023
@@ -84,6 +85,9 @@ date_publication: 2026-11-17
 date_modification: 2026-11-17
 date_revue: 2026-11-17
 prochaine_revue: 2027-11-17
+# Encadré de décision (question, réponse directe, lignes, coût probable) validé par Houssem le 17/11/2026 à 22 h 44
+# (lot C5, travaux/etape-11/lot-c5/paquet-lot-c5.md, §6).
+validation: 80446a0e659d59fcd13204ac9c4c88312126335378bb8c677804c6cf8aef9110
 ---
 
 ## Que veut dire 5W30 ?

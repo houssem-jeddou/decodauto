@@ -1,7 +1,14 @@
 # Paquet de validation du lot C5 : pages « huile 5W30 », « huile 5W40 » et « huile 10W40 »
 
-> **Brouillon, jamais validé.** Étape 11 (vague C), lot C5, branche `etape-11/lot-c5` (partie de `main` à 1b695ae),
-> sans pull request ni passage. Aucun verdict ci-dessous n'est validé.
+> **Validé par Houssem le 17/11/2026 à 22 h 44**, mot pour mot : « Je valide tout ! Goo ». C'est sa réponse au message
+> du pilotage qui portait mot pour mot les quatre lignes de validation de ce paquet : les trois lignes du §6 (pages
+> « huile 5W30 », « huile 5W40 » et « huile 10W40 ») et la ligne du §7 (révision de la page « huile moteur »), avec le
+> point 3 du §5 (urgence « Aucune action nécessaire » avec « Oui, avec précautions »). La phrase vaut les quatre lignes
+> telles qu'envoyées ; « Goo » vaut demande de passage et de mise en ligne. Empreintes posées, passage des trois pages
+> de grade et pull request vers `main` après la validation.
+
+> **État avant la validation de 22 h 44 (brouillon).** Étape 11 (vague C), lot C5, branche `etape-11/lot-c5` (partie
+> de `main` à 1b695ae), sans pull request ni passage. Aucun verdict ci-dessous n'était validé.
 
 > **Revue indépendante** (17/11/2026, agent sans contexte de la rédaction, sur 9b516b1, les trois pages, le registre et
 > les illustrations) : **« à corriger »**.
