@@ -1,4 +1,4 @@
-# Structure des contenus — decodauto.com (v12)
+# Structure des contenus — decodauto.com (v13)
 
 Validée par Houssem le 22/10/2026, après trois revues indépendantes. Étape 3, livrable « Structure des contenus ».
 v2 (23/10/2026, accord de Houssem) : ajout du champ facultatif `voyant_lie` dans une ligne de situation saisie (voir le champ situations et la règle 2).
@@ -12,6 +12,7 @@ v9 (demande de changement n° 12, étape 8, acceptée par Houssem le 04/11/2026)
 v10 (demande de changement n° 13, étape 7, acceptée par Houssem le 09/11/2026) : description et dates de revue des pages du socle (section 2, ligne « Socle »).
 v11 (14/11/2026, demande de changement n° 23, acceptée par Houssem) : une ligne de la base sans page propre, admise par une demande de changement (le voyant STOP), se rattache à la page outil, qui l'affiche dans sa liste sans la reprendre dans son encadré ni lui donner de tableau des notices (règles 1 et 12).
 v12 (16/11/2026, porte F1 validée par Houssem à 18 h 55 ; demande de changement n° 30, lot F1) : champs du format 2, déjà dans `src/schemas/` (section 1, « Champs du format 2 »).
+v13 (17/11/2026, demande de changement n° 33, acceptée par Houssem à 7 h 39, appliquée par la PR #79) : `reponse_directe` ouverte aux pages « niveaux et fluides » (section 1, « Champs du format 2 »).
 
 **Archivé le 23/10/2026 (décision de Houssem, porte de l'étape 3)** : la transposition en schémas est validée. Ce sont désormais **les schémas du dépôt (`src/schemas/`, contrôles dans `src/lib/controle.ts`) qui font foi** ; ce fichier reste la référence lisible. Toute modification de structure passe par une demande de changement (03) et met à jour les schémas, puis ce fichier.
 
