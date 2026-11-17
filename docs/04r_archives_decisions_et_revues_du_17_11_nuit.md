@@ -1,4 +1,4 @@
-# Archives du journal : décisions et revues de la nuit du 17/11/2026 (vague B ouverte, lot B1, lots B2 à B4 et F3), ligne de l'étape 13 et séances de validation n° 1 à 14
+# Archives du journal : décisions et revues de la nuit du 17/11/2026 (vague B ouverte, lot B1, lots B2 à B4 et F3), ligne de l'étape 13, séances de validation n° 1 à 14 et points clos
 
 Déplacées du journal (`04_journal_avancement.md`) le 17/11/2026, sans réécriture (sauf la ligne de l'étape 13, gardée ici dans son dernier état avant d'être résumée au journal). Elles font partie du journal.
 
@@ -32,3 +32,8 @@ Déplacées du journal (`04_journal_avancement.md`) le 17/11/2026, sans réécri
 12. ~~go du premier lot~~ : donné le 12/11 (8 h 39) ; ~~porte 9 du premier lot~~ : validée le 14/11 (12 h 13) ; tag `etape-9-premier-lot` à poser par Houssem.
 13. ~~demande n° 27 (exécuteur de la CI sur le PC de Houssem, PR #54)~~ : acceptée le 15/11 (vers 1 h 15), PR #54 fusionnée le 15/11 ; exécuteur jamais installé (WSL 2 ne démarre pas sur le PC de Houssem) : remplacé par le dépôt public (15/11, 17 h 29) ; ~~fusions en attente~~ : #49, #50 et #53 en ligne le 15/11.
 14. ~~porte 8 complète et demande n° 28~~ : validées le 15/11 (20 h 55) ; ~~demande n° 30~~ : acceptée le 15/11 (20 h 55), option 1 ; ~~demande n° 29 (dépôt public)~~ : acceptée le 15/11 (22 h 57), protection de `main` : oui, mesures : oui ; ~~PR #56~~ : fusionnée le 15/11 ; ~~PR #59~~ : fusionnée le 15/11 (23 h 20, e68b501) ; ~~PR #55~~ : fusionnée le 15/11.
+
+## Pour l'étape 8 et les suivantes : points clos (déplacés le 17/11)
+- ~~**Base voyants, avant la mise en ligne de l'outil**~~ (décision 8 de 8.1, paquet §5) : fait, demande n° 23 acceptée le 14/11 (ligne STOP rattachée à la page outil, qui l'affiche sans la reprendre dans son encadré ni lui donner de tableau des notices ; le triangle n'a de consigne propre que chez Renault et Dacia, d'un même groupe : la consigne générale de Seat p. 84 ne compte pas (décision D2), il reste cité sans verdict, repli du livrable 8.3.3 ; notices relues le 14/11 : Renault p. 136-138, Dacia p. 110-112, Peugeot p. 13, Citroën C3 p. 9-10, Seat p. 84 et 93) et pictogrammes ; le préchauffage qui clignote n'est décrit que par Seat (p. 289) : ligne saisie liée sur sa page (lot 5), l'outil le cite déjà dans son texte. Autres cas lus dans les notices sans ligne propre : voyant central (Seat), Service (Peugeot), frein de stationnement électrique qui clignote (Peugeot), direction jaune qui clignote (Seat), absence de retour au tableau de bord (Dacia), carburant, ceintures, portes, eau dans le gazole (Peugeot).
+- Page « voyant préchauffage » : ligne « qui clignote » saisie et citée (Seat p. 289, seule notice qui décrit ce clignotement), validée avec le lot 5c le 14/11 (19 h 53).
+- Page « pression des pneus » (lot 3) : texte de référence trouvé, annexe I de l'arrêté du 18 juin 1991, point 5.2.3 (Légifrance) ; `pages-sources.json` corrigé (p. 207 et 348) dans la PR #41.
