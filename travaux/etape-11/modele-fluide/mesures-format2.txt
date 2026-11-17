@@ -17,9 +17,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /codes-defaut/p0420/ | 320 | chargée | – | 431 | 621 | 1007 | 1398 | oui | – | 10332 | oui | 320 | 0
 /codes-defaut/p0420/ | 375 | chargée | – | 396 | 545 | 870 | 1202 | oui | – | 9114 | oui | 375 | 0
 /codes-defaut/p0420/ | 1366 | chargée | – | 309 | 375 | 558 | 755 | oui | – | 5938 | oui | 1366 | 0
-/huile-moteur/verifier-niveau/ | 320 | chargée | – | 440 | 568 | 1857 | 2418 | oui | 4245 | 10183 | oui | 320 | 0
-/huile-moteur/verifier-niveau/ | 375 | chargée | – | 399 | 506 | 1603 | 2087 | oui | 3804 | 9321 | oui | 375 | 0
-/huile-moteur/verifier-niveau/ | 1366 | chargée | – | 308 | 354 | 988 | 1241 | oui | 2595 | 5941 | oui | 1366 | 0
+/huile-moteur/verifier-niveau/ | 320 | chargée | 470 | 601 | 729 | 2019 | 2579 | oui | 4406 | 10344 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | chargée | 424 | 538 | 646 | 1743 | 2226 | oui | 3943 | 9460 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 1366 | chargée | 315 | 383 | 428 | 1062 | 1316 | oui | 2669 | 6015 | oui | 1366 | 0
 /loi-montagne/ | 320 | chargée | – | 477 | 647 | 1526 | 1841 | oui | – | 9649 | oui | 320 | 0
 /loi-montagne/ | 375 | chargée | – | 440 | 588 | 1348 | 1624 | oui | – | 8489 | oui | 375 | 0
 /loi-montagne/ | 1366 | chargée | – | 308 | 374 | 848 | 1027 | oui | – | 5448 | oui | 1366 | 0
@@ -92,9 +92,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /codes-defaut/p0420/ | 320 | secours | – | 431 | 621 | 1007 | 1398 | oui | – | 10357 | oui | 320 | 0
 /codes-defaut/p0420/ | 375 | secours | – | 396 | 545 | 870 | 1202 | oui | – | 9164 | oui | 375 | 0
 /codes-defaut/p0420/ | 1366 | secours | – | 309 | 375 | 558 | 755 | oui | – | 5989 | oui | 1366 | 0
-/huile-moteur/verifier-niveau/ | 320 | secours | – | 440 | 568 | 1857 | 2418 | oui | 4245 | 10233 | oui | 320 | 0
-/huile-moteur/verifier-niveau/ | 375 | secours | – | 424 | 531 | 1628 | 2111 | oui | 3828 | 9345 | oui | 375 | 0
-/huile-moteur/verifier-niveau/ | 1366 | secours | – | 308 | 354 | 988 | 1241 | oui | 2595 | 5941 | oui | 1366 | 0
+/huile-moteur/verifier-niveau/ | 320 | secours | 470 | 601 | 729 | 2019 | 2579 | oui | 4406 | 10395 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | secours | 448 | 563 | 671 | 1767 | 2251 | oui | 3968 | 9485 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 1366 | secours | 315 | 383 | 428 | 1062 | 1316 | oui | 2669 | 6015 | oui | 1366 | 0
 /loi-montagne/ | 320 | secours | – | 502 | 671 | 1551 | 1866 | oui | – | 9699 | oui | 320 | 0
 /loi-montagne/ | 375 | secours | – | 440 | 588 | 1348 | 1624 | oui | – | 8590 | oui | 375 | 0
 /loi-montagne/ | 1366 | secours | – | 308 | 374 | 848 | 1027 | oui | – | 5448 | oui | 1366 | 0
@@ -152,12 +152,12 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /voyants/pression-pneus/ | 320 | secours | – | 534 | 765 | 1515 | 1943 | oui | – | 12268 | oui | 320 | 0
 /voyants/pression-pneus/ | 375 | secours | – | 455 | 645 | 1275 | 1646 | oui | – | 10832 | oui | 375 | 0
 /voyants/pression-pneus/ | 1366 | secours | – | 272 | 359 | 700 | 915 | oui | – | 6876 | oui | 1366 | 0
-SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police chargée) : illustration à 2087 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1603 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police chargée) : illustration à 2226 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1743 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /moteur-puretech/ (police chargée) : illustration à 2805 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2321 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voiture-ne-demarre-pas/ (police chargée) : illustration à 2656 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2135 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voyants/abs-esp/ (police chargée) : illustration à 2320 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1893 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voyants/adblue/ (police chargée) : illustration à 2761 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 2277 px (règle 2i, demande n° 32 : à dire dans le paquet)
-SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police de secours) : illustration à 2111 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1628 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police de secours) : illustration à 2251 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1767 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /moteur-puretech/ (police de secours) : illustration à 2805 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2321 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voiture-ne-demarre-pas/ (police de secours) : illustration à 2656 px, au-delà de trois écrans (2001 px) ; raison : encadré de 6 ligne(s), bas à 2135 px (règle 2i, demande n° 32 : à dire dans le paquet)
 SIGNALÉ [FORMAT2-MESURES] /voyants/abs-esp/ (police de secours) : illustration à 2320 px, au-delà de trois écrans (2001 px) ; raison : encadré de 4 ligne(s), bas à 1893 px (règle 2i, demande n° 32 : à dire dans le paquet)
