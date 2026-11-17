@@ -617,3 +617,69 @@ achetée). Il ne permet donc pas, à lui seul, le tableau des viscosités ni la 
   consulter la notice du constructeur en cas de doute ;
 - « le constructeur peut indiquer une viscosité selon la température extérieure » (p. 6 et 7) ;
 - toujours dit comme une traduction d'une source secondaire, jamais comme un verdict (aucun niveau n'en est tiré).
+
+## 18. Lecture du 17/11/2026 vers 21 h 35 : notice Toyota Yaris (pages de grade)
+
+**Lu dans le PDF officiel** (réf. PZ49X-9A592-FR, 440 pages, 62 261 340 octets), téléchargé par Houssem le 17/11/2026
+depuis le portail propriétaires de toyota.fr (même référence que `notice-toyota-yaris` du registre) et transmis à Claude
+par un dossier de son ordinateur ; texte extrait par `pdftotext -layout`, page 330 regardée en image pour le graphique.
+Toyota : page PDF = page imprimée. Mot pour mot.
+
+- p. 330, 8.1 « Caractéristiques », « Système de lubrification », « Choix de l'huile moteur » : « Moteur à essence —
+  Votre véhicule Toyota contient de l'huile “Toyota Genuine Motor Oil” (huile moteur d'origine Toyota). Toyota
+  recommande d'utiliser l'huile approuvée “Toyota Genuine Motor Oil” (huile moteur d'origine Toyota). Une huile moteur
+  d'une qualité équivalente peut également être utilisée. Grade d'huile : 0W-16 : Huile moteur multigrade API SN
+  “Resource-Conserving”, SN PLUS “Resource-Conserving” ou SP “Resource-Conserving” ou ILSAC GF-6B 0W-20 et 5W-30 :
+  Huile moteur multigrade API grade SM “Energy-Conserving”, SN “Resource-Conserving”, SN PLUS “Resource-Conserving” or
+  SP “Resource-Conserving” ou ILSAC GF-6A »
+- p. 330, même rubrique : « Votre véhicule Toyota contient de l'huile SAE 0W-16 à sa sortie d'usine, le meilleur choix
+  pour une bonne économie de carburant et pour un bon démarrage par temps froid. Si de l'huile SAE 0W-16 n'est pas
+  disponible, vous pouvez utiliser de l'huile SAE 0W-20. Toutefois, elle doit être remplacée par de la SAE 0W-16 lors
+  de la prochaine vidange d'huile. »
+- p. 330, même rubrique : « Viscosité de l'huile (0W-16 est expliqué ici en guise d'exemple) : • La partie 0W de 0W-16
+  indique la caractéristique de l'huile qui permet un démarrage à froid. Les huiles qui ont une valeur plus petite avant
+  le W facilitent le démarrage du moteur par temps froid. • La partie 16 de 0W-16 indique la caractéristique de la
+  viscosité de l'huile lorsque celle-ci est à température élevée. Une huile dont la viscosité est plus élevée (ayant
+  une valeur plus grande) convient mieux si le véhicule circule à des vitesses élevées ou dans des conditions de charge
+  extrêmes. »
+- p. 330, graphique « Viscosité recommandée (SAE) » (lu en image) : trois flèches, 0W-16 (repère A, « De préférence »),
+  0W-20 et 5W-30, chacune sur toute la plage graduée (−18 °C, 4 °C, 27 °C ; 0, 40, 80 °F) et prolongée aux deux
+  extrémités ; repère B : « Plage de températures prévues avant la prochaine vidange d'huile ».
+- p. 331, « Comment interpréter les étiquettes sur les récipients d'huile » : « Sur certains récipients d'huile moteur
+  figurent soit l'un, soit les deux symboles d'identification API pour vous permettre de sélectionner l'huile à
+  utiliser. » ; « A Symbole service API Partie supérieure : “API SERVICE SP” signifie que la qualité d'huile a été
+  désignée par l'API (American Petroleum Institute). Partie centrale : “SAE 0W-16” indique le grade de viscosité SAE.
+  Partie inférieure : “Resource-Conserving” signifie que l'huile contribue à économiser le carburant et à protéger
+  l'environnement. B Symbole de certification de l'ILSAC Le symbole de certification de l'ILSAC (International
+  Lubricant Specification Advisory Committee) se trouve sur l'avant du récipient. »
+- p. 247, 6.3, « Consommation d'huile moteur » : « Une certaine quantité d'huile moteur sera consommée pendant la
+  conduite. Dans les situations suivantes, la consommation d'huile peut augmenter, et vous pourriez devoir faire
+  l'appoint d'huile moteur entre deux moments prévus pour l'entretien de l'huile. […] • Si une huile de faible qualité ou
+  de viscosité inadéquate est utilisée »
+- p. 248, « Appoint d'huile moteur » : « Si le niveau d'huile est en dessous ou très proche du repère de bas niveau,
+  ajoutez de l'huile moteur du même type que celle qui se trouve déjà dans le moteur. » ; « Vérification du type
+  d'huile et préparation des éléments nécessaires […] • Sélection de l'huile moteur →P. 330 »
+- p. 248, « Le niveau d'huile moteur augmente » : « Si le niveau d'huile moteur dépasse le repère de limite supérieure de
+  remplissage, contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. »
+- p. 247, « Vérification de l'huile moteur » : « Lorsque le moteur a atteint sa température de fonctionnement et qu'il a
+  été arrêté, vérifiez le niveau d'huile sur la jauge. 1.Garez le véhicule sur un sol plat. Après avoir fait monter en
+  température le moteur et l'avoir arrêté, attendez environ 5 minutes pour que l'huile se stabilise dans le carter du
+  moteur. »
+
+**Ce que cela permet** (pages de grade, lot C5) :
+- **sens d'un grade**, dit par une notice de référence (première main) : le nombre avant le W, démarrage à froid (plus
+  petit, démarrage plus facile par temps froid) ; le nombre après, viscosité à température élevée (plus grand, mieux pour
+  les vitesses élevées ou les charges extrêmes) ; « SAE 0W-16 » sur le bidon = grade de viscosité SAE ;
+- **5W-30** : grade permis par la Yaris essence (graphique et liste), à côté du 0W-16 recommandé et du 0W-20 ; avec ses
+  normes (API SM « Energy-Conserving », SN, SN PLUS, SP « Resource-Conserving », ILSAC GF-6A) ;
+- **5W-40 et 10W-40** : cités par aucune des sept notices de référence lues (Toyota n'admet que 0W-16, 0W-20 et 5W-30 ;
+  les cinq autres notices lues n'en citent aucun ; relevé §11) : la page le dira, sans liste de voitures compatibles ;
+- **appoint** : « même type que celle qui se trouve déjà dans le moteur » (p. 248) : réponse à « mettre de la 5W40 au
+  lieu de la 5W30 ? », avec la notice de sa voiture ;
+- **tableau des viscosités de la page « huile moteur »** (demande n° 35) : la notice Toyota ne couvre que trois grades
+  (0W-16, 0W-20, 5W-30) ; les grades du cas 3 de `docs/09` (15W40, 20W50, SAE 30, 0W40, 10W50, 10W60, 85W140) restent sans
+  source : **le report de la demande n° 35 est maintenu**.
+
+**Pour la page « niveau d'huile », prochaine révision** (pas pour ce lot) : Toyota mesure moteur chaud, après environ
+5 minutes (p. 247) ; au-dessus du repère maxi, « contactez un concessionnaire » (p. 248), consigne moins stricte que
+Peugeot et Citroën (ne pas démarrer), déjà retenues au niveau le plus prudent.
