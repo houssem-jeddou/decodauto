@@ -14,7 +14,7 @@ import { constatsArbrePlace } from '../src/lib/controle-format2.ts';
 import { dateDesDonnees } from './date-des-donnees.ts';
 import { controlerPage } from '../src/lib/controle.ts';
 import { constatsExpressionsInterdites, constatsIdentifiants, constatsPartCitee, constatsTexteRedige, constatsTypographie } from '../scripts/lib/dist.ts';
-import { modeleDeLaPage, pageDossier, pageDossierF2, pagePanne, pagePanneF2, refusFormatVagueB } from '../src/lib/modeles.ts';
+import { modeleDeLaPage, pageDossier, pageDossierF2, pagePanne, pagePanneF2, refusFormat1 } from '../src/lib/modeles.ts';
 import { bandeauFormat2, pastilleVerdict, piedFormat2, tableauxDuTexteFormat2 } from '../src/lib/format2.ts';
 import { fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, MOTS_ACTION_ARBRE } from '../src/lib/fiche-panne.ts';
 import { decoderEntites } from '../src/lib/html.ts';
@@ -108,10 +108,10 @@ describe('format 2 : pages panne et dossier (F1.3c et sa revue)', () => {
     assert.deepEqual(modeleDeLaPage('panne', panne.page), { modele: pagePanneF2 });
     assert.deepEqual(modeleDeLaPage('dossier', dossier.page), { modele: pageDossierF2 });
     for (const [type, p] of [['panne', panne.page], ['dossier', dossier.page]] as const) {
-      assert.equal(refusFormatVagueB(type, p), undefined);
-      for (const format of [1, undefined] as const) assert.match(refusFormatVagueB(type, { ...p, format }) ?? '', /format 2 \(vague B/);
+      assert.equal(refusFormat1(type, p), undefined);
+      for (const format of [1, undefined] as const) assert.match(refusFormat1(type, { ...p, format }) ?? '', /format 2 \(vague B/);
     }
-    assert.equal(refusFormatVagueB('voyant', { id: 'x', format: undefined }), undefined);
+    assert.equal(refusFormat1('voyant', { id: 'x', format: undefined }), undefined);
     // Les modèles du format 1 restent pour les pages de test (tests/fixtures).
     assert.deepEqual(modeleDeLaPage('panne', { ...panne.page, format: 1 } as PageEditoriale), { modele: pagePanne });
     assert.deepEqual(modeleDeLaPage('dossier', { ...dossier.page, format: 1 } as PageEditoriale), { modele: pageDossier });

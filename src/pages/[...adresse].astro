@@ -7,7 +7,7 @@ import type { InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
 import { cwd } from 'node:process';
 import Base from '../layouts/Base.astro';
-import { modeleDeLaPage, pageSocle, refusFormatVagueB } from '../lib/modeles.ts';
+import { modeleDeLaPage, pageSocle, refusFormat1 } from '../lib/modeles.ts';
 import { voyantsDesPages } from '../lib/format2.ts';
 import { cheminDAriane, sectionMethodeHtml } from '../lib/composants.ts';
 import { scriptsAPropos, scriptsPageEditoriale, type AuteurDeclare } from '../lib/donnees-structurees.ts';
@@ -76,7 +76,7 @@ export async function getStaticPaths() {
   const editoriales = entrees.map(({ type, page, corps }) => {
     const ligne = site.plan.get(page.id);
     if (ligne === undefined) throw new Error(`page « ${page.id} » absente du plan du site (data/plan-du-site.json)`);
-    const refus = refusFormatVagueB(type, page);
+    const refus = refusFormat1(type, page);
     if (refus !== undefined) throw new Error(refus);
     const choix = modeleDeLaPage(type, page);
     if ('absent' in choix) throw new Error(`page « ${page.id} » : ${choix.absent}`);

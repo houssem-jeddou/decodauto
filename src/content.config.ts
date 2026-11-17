@@ -10,7 +10,7 @@ import { TYPES_AVEC_SOCLE } from './schemas/listes.ts';
 // écrit dans dist-exemples (astro.config.mjs) et n'est jamais déployée. Sans la variable, exemples/ n'est jamais lu.
 const AVEC_EXEMPLES = process.env['AVEC_EXEMPLES'] === '1';
 // Construction de démonstration du format 2 (DEMO_FORMAT2=1, dist-demo-format2, jamais déployée ; revue de F1.3c) : les
-// pages de démonstration de tests/demo/format2/<type>/ (panne, dossier) s'y ajoutent, rendues par Astro comme une vraie page.
+// pages de démonstration de tests/demo/format2/<type>/ (panne, dossier, fluide) s'y ajoutent, rendues par Astro comme une vraie page.
 const DEMO_FORMAT2 = process.env['DEMO_FORMAT2'] === '1';
 
 function collectionDePages<T extends (typeof TYPES_AVEC_SOCLE)[number]>(type: T) {

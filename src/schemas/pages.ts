@@ -191,13 +191,14 @@ type Commun = {
 export const REPONSE_DIRECTE_MAX_MOTS = 40;
 
 /**
- * Règles communes aux six types, exprimées dans le schéma. `informative` : la page peut porter une réponse directe
- * (pages pneus et obligations seulement, revue de F1.3b).
+ * Règles communes aux six types, exprimées dans le schéma. `informative` : la page peut porter une réponse directe (règle
+ * 2c de la demande de changement n° 30 : pages pneus et obligations, revue de F1.3b ; pages fluides, « huiles et
+ * liquides » de la vague C, étape 11, demande de changement n° 33 acceptée le 17/11/2026).
  */
 function reglesCommunes(page: Commun, ctx: z.RefinementCtx, informative = false): void {
   if (page.reponse_directe !== undefined) {
     if (!informative) {
-      probleme(ctx, 'R7-FORMAT', ['reponse_directe'], 'la réponse directe (reponse_directe) est réservée aux pages pneus et obligations (page informative, règle 2c)');
+      probleme(ctx, 'R7-FORMAT', ['reponse_directe'], 'la réponse directe (reponse_directe) est réservée aux pages pneus et obligations et aux pages fluides (pages informatives, règle 2c, demandes de changement n° 30 et n° 33)');
     } else {
       // Mots comptés comme la ligne d'écart (src/lib/format2.ts, motsDe) : suites qui contiennent une lettre ou un chiffre.
       const mots = page.reponse_directe.split(/\s+/).filter((m) => /[\p{L}\p{N}]/u.test(m)).length;
@@ -317,7 +318,9 @@ export const fluidePageSchema = z
     quand_changer: z.strictObject({ texte, sources: z.array(identifiant).min(1) }),
   })
   .superRefine((page, ctx) => {
-    reglesCommunes(page, ctx);
+    // Page informative (demande de changement n° 30, règle 2c : « huiles et liquides ») : réponse directe admise
+    // (demande de changement n° 33, acceptée par Houssem le 17/11/2026, docs/08) ; le modèle l'exige (pageFluideF2).
+    reglesCommunes(page, ctx, true);
     exigerElement(page, ctx, 'tableau', 'le tableau', false);
   });
 
