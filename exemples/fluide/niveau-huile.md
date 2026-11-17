@@ -68,7 +68,7 @@ situations:
         urgence: immédiate
       - source: notice-dacia-sandero-3
         emplacement: "p. 295, huile moteur, remplissage"
-        extrait: "Si le niveau MAXI est dépassé, ne démarrez pas votre véhicule et faites appel à un Représentant de la marque."
+        extrait: "Il ne faut en aucun cas dépasser le niveau maximum de remplissage B : risque d'endommagement du moteur et du système de dépollution. Si le niveau MAXI est dépassé, ne démarrez pas votre véhicule et faites appel à un Représentant de la marque."
         verdict: non, arrêt immédiat
         urgence: immédiate
       - source: notice-seat-ibiza
@@ -86,7 +86,7 @@ format: 2
 illustration:
   fichier: niveau-huile-jauge
   alt: "Sous le capot, le bouchon de remplissage et la poignée de la jauge ; à droite, la jauge sortie, le niveau d'huile lu entre les repères MAXI et MINI"
-  legende: "Où regarder : la jauge, à lire entre les repères MAXI et MINI, et le bouchon de remplissage, où l'on verse l'huile. Leur emplacement figure sur le schéma du compartiment moteur de votre notice. Illustration decodauto."
+  legende: "Où regarder : la jauge, à lire entre les repères MAXI et MINI, et le bouchon de remplissage, où l'on verse l'huile. Leur emplacement figure sur le schéma du compartiment moteur de votre notice."
 tutoriel:
   outils:
     - "la jauge manuelle ou l'indicateur de niveau du combiné (jauge électrique)"
@@ -181,7 +181,7 @@ Entre les repères mini et maxi de la jauge, pour les cinq notices lues. Ni trop
 
 {{verdict:ligne-2}}, selon l'encadré : ne démarrez pas le moteur et faites appel au réseau de la marque ou à un atelier qualifié. Les cinq notices le demandent ; la notice Seat Ibiza dit d'informer votre service technique.
 
-Ces notices disent ce que l'on risque : le moteur et le système de dépollution (Renault Clio 5), le moteur (Dacia Sandero 3), le moteur et le catalyseur (Seat Ibiza).
+Ces notices disent ce que l'on risque : le moteur et le système de dépollution (Renault Clio 5, Dacia Sandero 3), le moteur et le catalyseur (Seat Ibiza).
 
 ## Faire le niveau d'huile : quelle huile, à quelle fréquence ?
 

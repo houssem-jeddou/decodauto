@@ -1,4 +1,4 @@
-Brouillon, jamais validé. FORMAT2-MESURES sur la construction de recette (AVEC_EXEMPLES=1, dist-exemples), branche preparation/etape-11, 17/11/2026, après la revue indépendante de l'exemple.
+Brouillon, jamais validé. FORMAT2-MESURES sur la construction de recette (AVEC_EXEMPLES=1, dist-exemples), branche preparation/etape-11, 17/11/2026, après la revue indépendante et les retouches (légende, risque Dacia).
 Commande : CHROME_PATH=… node scripts/mesurer-format2.ts --dist dist-exemples --json …
 
 FORMAT2-MESURES : 33 page(s) au format 2 dans dist-exemples
@@ -36,8 +36,8 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /fumee-echappement/ | 320 | chargée | – | 442 | 550 | 1506 | 1934 | oui | 3071 | 8742 | oui | 320 | 0
 /fumee-echappement/ | 375 | chargée | – | 377 | 464 | 1324 | 1694 | oui | 2789 | 7640 | oui | 375 | 0
 /fumee-echappement/ | 1366 | chargée | – | 287 | 332 | 826 | 1042 | oui | 1962 | 5232 | oui | 1366 | 0
-/huile-moteur/verifier-niveau/ | 320 | chargée | 514 | 644 | 772 | 2149 | 2903 | oui | 4278 | 13417 | oui | 320 | 0
-/huile-moteur/verifier-niveau/ | 375 | chargée | 467 | 582 | 689 | 1873 | 2513 | oui | 3779 | 11891 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 320 | chargée | 514 | 644 | 772 | 2149 | 2903 | oui | 4259 | 13397 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | chargée | 467 | 582 | 689 | 1873 | 2513 | oui | 3760 | 11871 | oui | 375 | 0
 /huile-moteur/verifier-niveau/ | 1366 | chargée | 337 | 404 | 470 | 1152 | 1505 | oui | 2549 | 7416 | oui | 1366 | 0
 /loi-montagne/ | 320 | chargée | – | 477 | 647 | 1526 | 1841 | oui | – | 9711 | oui | 320 | 0
 /loi-montagne/ | 375 | chargée | – | 440 | 588 | 1348 | 1624 | oui | – | 8552 | oui | 375 | 0
@@ -135,8 +135,8 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /fumee-echappement/ | 320 | secours | – | 442 | 550 | 1506 | 1934 | oui | 3071 | 8742 | oui | 320 | 0
 /fumee-echappement/ | 375 | secours | – | 377 | 464 | 1324 | 1694 | oui | 2789 | 7640 | oui | 375 | 0
 /fumee-echappement/ | 1366 | secours | – | 287 | 332 | 826 | 1042 | oui | 1962 | 5232 | oui | 1366 | 0
-/huile-moteur/verifier-niveau/ | 320 | secours | 514 | 644 | 772 | 2149 | 2903 | oui | 4278 | 13467 | oui | 320 | 0
-/huile-moteur/verifier-niveau/ | 375 | secours | 492 | 607 | 714 | 1897 | 2537 | oui | 3804 | 11915 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 320 | secours | 514 | 644 | 772 | 2149 | 2903 | oui | 4259 | 13448 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | secours | 492 | 607 | 714 | 1897 | 2537 | oui | 3785 | 11896 | oui | 375 | 0
 /huile-moteur/verifier-niveau/ | 1366 | secours | 337 | 404 | 470 | 1152 | 1505 | oui | 2549 | 7416 | oui | 1366 | 0
 /loi-montagne/ | 320 | secours | – | 502 | 671 | 1551 | 1866 | oui | – | 9761 | oui | 320 | 0
 /loi-montagne/ | 375 | secours | – | 440 | 588 | 1348 | 1624 | oui | – | 8653 | oui | 375 | 0

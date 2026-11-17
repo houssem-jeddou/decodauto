@@ -1,4 +1,4 @@
-Brouillon, jamais validé. Contrôle de la construction de recette (AVEC_EXEMPLES=1 npx astro build ; AVEC_EXEMPLES=1 node scripts/controle.ts --dist dist-exemples --exemples), 17/11/2026, après la revue indépendante. Seule erreur attendue : R4-VALIDATION-ABSENTE (exemple jamais validé).
+Brouillon, jamais validé. Contrôle de la construction de recette (AVEC_EXEMPLES=1 npx astro build ; AVEC_EXEMPLES=1 node scripts/controle.ts --dist dist-exemples --exemples), 17/11/2026, après les retouches. Seule erreur attendue : R4-VALIDATION-ABSENTE (exemple jamais validé).
 
 Mode d'indexation : NON INDEXABLE : noindex partout (variable SITE_INDEXABLE ≠ "true")
 ALERTE [R3-NIVEAU-A-VERIFIER] data/voyants.json : voyant « prechauffage » : citation de « notice-seat-ibiza » : « immediatement » mène à une urgence immédiate selon la grille. Niveau saisi : « oui », « aucune ». À vérifier sur le paquet de validation

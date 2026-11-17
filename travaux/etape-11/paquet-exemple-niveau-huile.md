@@ -54,12 +54,11 @@ tout de suite**. Ligne saisie.
   | Peugeot 208 | p. 166 | « Ne pas démarrer le moteur si le niveau est : – Supérieur au repère A : faire appel au réseau PEUGEOT ou à un atelier qualifié. » |
   | Citroën C3 | p. 112-113 | « Ne pas démarrer le moteur, si le niveau est : – Supérieur au repère A : faire appel au réseau CITROËN ou à un atelier qualifié. » |
   | Renault Clio 5 phase 2 | p. 331, huile moteur, remplissage | « Il ne faut en aucun cas dépasser le niveau maximum de remplissage B : risque d'endommagement du moteur et du système de dépollution. Si le niveau maxi est dépassé, ne démarrez pas votre véhicule et faites appel à un Représentant de la marque. » |
-  | Dacia Sandero 3 | p. 295, huile moteur, remplissage | « Si le niveau MAXI est dépassé, ne démarrez pas votre véhicule et faites appel à un Représentant de la marque. » |
+  | Dacia Sandero 3 | p. 295, huile moteur, remplissage | « Il ne faut en aucun cas dépasser le niveau maximum de remplissage B : risque d'endommagement du moteur et du système de dépollution. Si le niveau MAXI est dépassé, ne démarrez pas votre véhicule et faites appel à un Représentant de la marque. » |
   | Seat Ibiza | p. 295, huile moteur, contrôle du niveau à la jauge | « Ne démarrez pas le moteur si le niveau d'huile se trouve au-dessus de la zone A. Risque d'endommagement du moteur et du catalyseur. Informez votre Service Technique. » |
 
-- Risque cité dans le texte : moteur et système de dépollution (Renault), moteur (Dacia, phrase de lecture de la p. 294 :
-  « risque d'endommagement du moteur »), moteur et catalyseur (Seat). Pour Dacia, la phrase sur le système de
-  dépollution ne fait pas partie de ce qui m'a été transmis de la p. 295 : je ne l'attribue pas à Dacia.
+- Risque cité dans le texte : moteur et système de dépollution (Renault p. 331, Dacia p. 295, même phrase), moteur et
+  catalyseur (Seat p. 295).
 
 **Lignes 1 et 2 : différentes du dossier PureTech.** Le dossier PureTech a les mêmes situations, verdicts, urgences et
 actions de départ, validés avec la porte 10 (16/11, 19 h 26). Ici, la ligne 1 a une citation de plus (Seat), donc un
@@ -108,7 +107,7 @@ Les PDF des notices sont refusés par le proxy de ma session. **Relu à l'écran
 | Renault Clio 5 phase 2 | p. 331 (PDF 333) | lecture sur sol horizontal, après un arrêt prolongé du moteur, jauge impérative ; sortir, essuyer avec un chiffon propre et non pelucheux, enfoncer jusqu'en butée, ressortir, lire entre MINI et MAXI ; entonnoir ou zone protégée, risque d'incendie ; extrait de la ligne 2 | étapes 2, 5 à 7, 9, 12 ; ligne 2 |
 | Renault Clio 5 phase 2 | p. 332 (PDF 334) | « Le véhicule doit être sur sol horizontal, moteur arrêté et froid (par exemple : avant le premier démarrage de la journée). » ; capacité de 0,9 à 2 litres entre MINI et MAXI selon le moteur ; « attendez 20 minutes environ pour permettre l'écoulement de l'huile » | étape 11, paragraphe sous les étapes, tableau |
 | Dacia Sandero 3 | p. 294 (PDF 296) | même texte de lecture que Renault, mot pour mot | étapes 2, 5 à 7 |
-| Dacia Sandero 3 | p. 295 (PDF 297) | même phrase de l'entonnoir et du risque d'incendie ; extrait de la ligne 2 ; appoint moteur thermique froid, contact coupé ; capacité de 1,5 à 2 litres ; « attendez 20 minutes environ » | étapes 9, 11 ; ligne 2 |
+| Dacia Sandero 3 | p. 295 (PDF 297) | même phrase de l'entonnoir et du risque d'incendie ; « Il ne faut en aucun cas dépasser le niveau maximum de remplissage B : risque d'endommagement du moteur et du système de dépollution. », juste avant « Si le niveau MAXI est dépassé, ne démarrez pas votre véhicule et faites appel à un Représentant de la marque. » ; appoint moteur thermique froid, contact coupé ; capacité de 1,5 à 2 litres ; « attendez 20 minutes environ » | étapes 9, 11 ; ligne 2 (extrait et risque cité) |
 | Seat Ibiza | p. 295 (PDF 297) | stationner à l'horizontale, moteur au ralenti jusqu'à la température de fonctionnement, contact coupé, environ 2 minutes ; retirer, essuyer avec un chiffon propre, enfoncer jusqu'en butée, retirer, vérifier ; zones A, B, C ; consommation jusqu'à 0,5 l/1 000 km, plus élevée durant les 5 000 premiers km, contrôle de préférence après chaque plein et avant les longs trajets ; extrait de la ligne 2 ; appoint par petites quantités, 0,5 l au plus, environ 2 minutes avant de revérifier | étapes 2, 5 à 7, 10, 11 ; lignes 1 et 2 ; sections « fréquence » et « consommation » |
 | Seat Ibiza | p. 294 | « Par mesure de sécurité, il est recommandé de contrôler le niveau d'huile moteur à l'occasion de chaque passage à la pompe. » suit la ligne « Il clignote en jaune : dysfonctionnement du capteur » | remise dans son contexte (capteur défaillant), section du voyant orange |
 | Toyota Yaris | p. 247 | **non lue** (portail inaccessible) | la page le dit (tableau : « Non lu ») |
@@ -148,8 +147,9 @@ la marque. »).
 - **B9** : illustration nouvelle, `niveau-huile-jauge`, dessinée pour le site et signalée comme telle : sous le capot,
   le bouchon de remplissage et la poignée de la jauge ; à droite, la jauge sortie, lue entre MAXI et MINI. Légende :
   « Où regarder : la jauge, à lire entre les repères MAXI et MINI, et le bouchon de remplissage, où l'on verse
-  l'huile. Leur emplacement figure sur le schéma du compartiment moteur de votre notice. Illustration decodauto. »
-  Générateur : `travaux/etape-11/generer-illustrations.py`.
+  l'huile. Leur emplacement figure sur le schéma du compartiment moteur de votre notice. », suivie de la mention
+  « Illustration decodauto. » que le modèle ajoute lui-même (elle n'est plus écrite dans la légende : la première
+  version l'affichait deux fois). Générateur : `travaux/etape-11/generer-illustrations.py`.
 - **B10** : fiche « L'essentiel », normes « Selon le plan d'entretien de votre voiture ; jamais d'additif dans
   l'huile moteur (notices Peugeot 208 et Citroën C3). » ; redites réduites ; sections des lignes 1 et 2 ouvertes par
   `{{verdict:ligne-1}}` et `{{verdict:ligne-2}}` ; ligne Citroën du tableau : « alerte de niveau bas non relevée » ;
@@ -174,17 +174,17 @@ Preuves : `travaux/etape-11/recette-niveau-huile/` (`controle.txt`, `mesures-for
   | Bas de la 1re situation (action comprise) | 689 / 714 | 772 | 470 | — |
   | Bas de l'encadré (4 lignes) | 1 873 / 1 897 | 2 149 | 1 152 | — |
   | Haut de l'illustration | **2 513 / 2 537, signalée** | 2 903 | 1 505 | trois écrans, 2 001 (règle 2i, demande n° 32) |
-  | Haut des étapes | 3 779 / 3 804 | 4 278 | 2 549 | six écrans, 4 002 (à 375 px) |
-  | Hauteur de la page | 11 891 / 11 915 | 13 417 / 13 467 | 7 416 | — |
+  | Haut des étapes | 3 760 / 3 785 | 4 259 | 2 549 | six écrans, 4 002 (à 375 px) |
+  | Hauteur de la page | 11 871 / 11 896 | 13 397 / 13 448 | 7 416 | — |
 
   Aucun débordement à 320, 375 ni 1366 px. **Illustration au-delà de trois écrans** : encadré de 4 lignes, dont une
   ligne d'écart, puis le bloc « Notices », qu'elle suit immédiatement (demande n° 32). Captures :
   `captures/niveau-huile-375-chargee-page.png`.
 - **Lighthouse mobile**, 3 passages, médianes, emplacements publicitaires factices : performance 100, accessibilité
-  100, bonnes pratiques 100, CLS 0, LCP 905 ms (SEO 66 : construction en noindex, attendu).
-- **Captures** (53 PNG) : 320 × 640, 375 × 667 et 1366 × 800, police chargée et police de secours : premier écran, page
+  100, bonnes pratiques 100, CLS 0, LCP 1 053 ms (SEO 66 : construction en noindex, attendu).
+- **Captures** (54 PNG, refaites après les retouches de la légende et du risque Dacia) : 320 × 640, 375 × 667 et 1366 × 800, police chargée et police de secours : premier écran, page
   entière, encadré, bloc « Notices », illustration, sommaire, fiche du tutoriel, étapes, fiche « L'essentiel »,
-  tableau (en cartes sur téléphone), emplacement factice. 13 captures en police de secours identiques, octet pour
+  tableau (en cartes sur téléphone), emplacement factice. 12 captures en police de secours identiques, octet pour
   octet, à celles en police chargée ne sont pas gardées. Pas de tableau des notices sur la page : ses deux voyants sont
   rattachés à la page « voyant huile ».
 
