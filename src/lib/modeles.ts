@@ -420,11 +420,13 @@ export const pageDossierF2: Modele = (page, site, corpsHtml) => {
  * (format2.ts, pageFormat2), puis, comme la charte éditoriale le demande (§4 : rôle, niveau, appoint, marche à suivre) :
  * fiche « Le fluide en bref » (normes, comment vérifier, quand changer) et fiche « Le tutoriel en bref » (format tutoriel)
  * avant le texte rédigé ; dans le texte, les étapes ({{etapes}}) et le tableau ({{tableau}}, élément unique du type) ;
- * tableau des notices si un voyant de la base est rattaché à la page, affiché sans être l'élément unique. Ni réponse directe
- * ni causes : le schéma fluide n'en a pas (fluidePageSchema).
+ * tableau des notices si un voyant de la base est rattaché à la page, affiché sans être l'élément unique. Page informative
+ * (demande de changement n° 30, règle 2c : « huiles et liquides ») : l'encadré commence par la réponse directe, exigée, comme
+ * sur la page de la pression des pneus (sans elle, la construction échoue). Pas de causes : le schéma fluide n'en a pas.
  */
 export const pageFluideF2: Modele = (page, site, corpsHtml) => {
   if (!('normes' in page)) throw new Error(`page « ${page.id} » : le modèle fluide s'applique à une page fluide`);
+  if ((page.reponse_directe ?? '').trim() === '') throw new Error(`page « ${page.id} » au format 2 : page informative sans réponse directe (reponse_directe, règle 2c, demande de changement n° 30)`);
   return pageFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { tableauDuTexte: true, etapesDuTexte: true, format2: true }), {
     avantTexte: [
       ficheFluideHtml(modeleFicheFluide(page)),

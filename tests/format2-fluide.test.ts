@@ -20,7 +20,7 @@ import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
 import { AUTEUR_DES_EXEMPLES } from '../scripts/lib/controler-site.ts';
 import { lireFrontmatter } from '../scripts/lib/charger.ts';
 import { DOSSIER_PAGES_DEMO_FORMAT2 } from '../scripts/lib/demo-format2.ts';
-import { schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
+import { REPONSE_DIRECTE_MAX_MOTS, schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FICHIER = `${DOSSIER_PAGES_DEMO_FORMAT2}/fluide/niveau-huile.md`;
@@ -104,9 +104,8 @@ describe('format 2 : page fluide (étape 11, partie technique du modèle)', () =
     assert.ok(positions.every((p) => p >= 0), marques.filter((_, i) => positions[i] === -1).join(', '));
     assert.deepEqual([...positions].sort((a, b) => a - b), positions, 'ordre de la page');
     const $ = cheerio.load(html);
-    // Ni réponse directe, ni causes : le schéma fluide n'en a pas. Ses voyants sont rattachés à la page du voyant huile : pas
-    // de tableau des notices ici, « Votre marque » mène à la page du voyant.
-    assert.equal($('[data-reponse-directe]').length, 0);
+    // Pas de causes : le schéma fluide n'en a pas. Ses voyants sont rattachés à la page du voyant huile : pas de tableau des
+    // notices ici, « Votre marque » mène à la page du voyant.
     assert.equal($('[data-causes]').length, 0);
     assert.equal($('[data-tableau-notices]').length, 0);
     assert.ok($('[data-lien-notices]').toArray().every((a) => ($(a).attr('href') ?? '').startsWith('/voyants/huile/#da-notices-')));
@@ -141,6 +140,48 @@ describe('format 2 : page fluide (étape 11, partie technique du modèle)', () =
     const fiche = ficheFluideHtml(modeleFicheFluide(page as unknown as Parameters<typeof modeleFicheFluide>[0]));
     assert.deepEqual(controlerFichesPanneDossier(fiche, 'x', {}).map((c) => c.regle), ['FICHE-FLUIDE-INCOMPLETE']);
     assert.deepEqual(controlerFichesPanneDossier(fiche, 'x', { ficheFluide: modeleFicheFluide(page as unknown as Parameters<typeof modeleFicheFluide>[0]) }), []);
+  });
+
+  test('réponse directe (demande n° 30, règle 2c : « huiles et liquides », pages informatives) : en tête de l\'encadré, avant la première situation, au texte du contenu ; exigée par le modèle', () => {
+    const $ = cheerio.load(html);
+    const reponse = $('[data-encadre-decision] > [data-reponse-directe]');
+    assert.equal(reponse.length, 1);
+    assert.ok(reponse.prev().is('h2') && reponse.next().find('[data-encadre-ligne]').length > 0);
+    const plat = (t: string): string => t.replace(/\s+/g, ' ').trim().replace(/[\u00a0\u202f]/g, ' ').replace(/’/g, "'");
+    assert.equal(plat(reponse.text()), plat(String(brut['reponse_directe'] ?? '')));
+    // Sens inverse : retirée, changée ou déplacée dans la page construite, FORMAT2-REPONSE.
+    const cas = [
+      modifie(html, (d) => d('[data-reponse-directe]').remove()),
+      modifie(html, (d) => d('[data-reponse-directe]').text('Autre réponse.')),
+      modifie(html, (d) => d('[data-encadre-decision] > h2').before(d('[data-reponse-directe]'))),
+    ];
+    for (const h of cas) assert.ok(controle(h).includes('FORMAT2-REPONSE'), controle(h).join(', '));
+    // Le modèle l'exige : une page fluide sans réponse directe ne se construit pas.
+    assert.throws(() => pageFluideF2({ ...page, reponse_directe: undefined } as PageEditoriale, site, CORPS), /page informative sans réponse directe/);
+  });
+
+  test('schéma : réponse directe admise sur une page fluide (40 mots au plus), toujours refusée sur une page voyant, code défaut, panne ou dossier', async () => {
+    const lu = (donnees: Record<string, unknown>): string[] => {
+      const r = schemasPage.fluide.safeParse(donnees);
+      return r.success ? [] : r.error.issues.map((i) => i.message);
+    };
+    assert.deepEqual(lu(brut), []);
+    const mots = (n: number): string => Array.from({ length: n }, (_, i) => `mot${i}`).join(' ');
+    assert.equal(REPONSE_DIRECTE_MAX_MOTS, 40);
+    assert.deepEqual(lu({ ...brut, reponse_directe: mots(40) }), []);
+    assert.ok(lu({ ...brut, reponse_directe: mots(41) }).some((m) => /41 mots : 40 au plus/.test(m)));
+    // Sans réponse directe, le schéma l'admet (c'est le modèle qui l'exige).
+    const sans = Object.fromEntries(Object.entries(brut).filter(([cle]) => cle !== 'reponse_directe'));
+    assert.deepEqual(lu(sans), []);
+    // Les autres types la refusent toujours (une vraie page de chaque type, à laquelle on l'ajoute).
+    const vraies = { voyant: 'voyant/voyant-moteur', 'code-defaut': 'code-defaut/code-p0420', panne: 'panne/voiture-ne-demarre-pas', dossier: 'dossier/moteur-puretech' } as const;
+    for (const [type, chemin] of Object.entries(vraies) as [keyof typeof vraies, string][]) {
+      const vraie = lireFrontmatter(await readFile(join(racine, 'src/content', `${chemin}.md`), 'utf8')) as Record<string, unknown>;
+      assert.ok(schemasPage[type].safeParse(vraie).success, type);
+      const r = schemasPage[type].safeParse({ ...vraie, reponse_directe: 'Oui.' });
+      const messages = r.success ? [] : r.error.issues.map((i) => i.message);
+      assert.ok(messages.some((m) => /réservée aux pages pneus et obligations et aux pages fluides/.test(m)), type);
+    }
   });
 
   test('marqueurs du texte : {{etapes}} et {{tableau}} admis sur une page fluide ; le tableau est l\'élément unique, dans le bloc de la charte', () => {

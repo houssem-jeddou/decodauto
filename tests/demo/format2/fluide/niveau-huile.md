@@ -2,8 +2,9 @@
 # Page de démonstration du modèle fluide au format 2 (étape 11, partie technique du modèle) : jamais publiée, lue seulement
 # par la construction de démonstration du format 2 (DEMO_FORMAT2=1) et par les tests du modèle. Copie de l'exemple
 # « niveau d'huile » de la préparation de l'étape 11 (branche preparation/etape-11, exemples/fluide/niveau-huile.md, 4e6851f),
-# brouillon jamais validé. Seuls changent ce commentaire et le lien vers la page mère « huile moteur », écrit en texte : cette
-# page n'est pas construite, le lien serait cassé (npm run liens). Sans empreinte (R4-VALIDATION-ABSENTE attendue, attendusPagesDemo).
+# brouillon jamais validé. Seuls changent ce commentaire ; le lien vers la page mère « huile moteur », écrit en texte (cette
+# page n'est pas construite, le lien serait cassé : npm run liens) ; et la réponse directe, celle que l'exemple propose en
+# commentaire (règle 2c de la demande n° 30 : page informative, reponse_directe ouverte au type fluide). Sans empreinte (R4-VALIDATION-ABSENTE attendue, attendusPagesDemo).
 # Format tutoriel : fiche « Le fluide en bref », fiche du tutoriel, étapes {{etapes}}, tableau {{tableau}} (élément unique),
 # deux lignes de la base (huile-niveau, huile-pression-rouge) avec leur tableau des notices, illustration jauge-huile.
 id: niveau-huile
@@ -12,6 +13,7 @@ h1: "Niveau d'huile moteur : comment le vérifier, et que faire s'il est trop ba
 description: "Vérifiez le niveau d'huile sur un sol plat, moteur arrêté depuis 30 minutes : il doit se situer entre les repères mini et maxi de la jauge. En dessous ou au-dessus, ne démarrez pas."
 libelle_court: Niveau d'huile
 question_decision: "Niveau d'huile trop bas ou trop haut, voyant d'huile allumé : puis-je démarrer et rouler ?"
+reponse_directe: "Sur un sol plat, moteur arrêté depuis 30 minutes, le niveau doit se situer entre les repères mini et maxi de la jauge, selon les notices Peugeot 208 et Citroën C3."
 situations:
   - situation: "À la jauge, le niveau d'huile est sous le repère mini"
     verdict: non, arrêt immédiat
