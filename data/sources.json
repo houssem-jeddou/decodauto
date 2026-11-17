@@ -404,5 +404,47 @@
     "nature": "document-technique",
     "url": "https://www.mahle-aftermarket.com/media/homepage/facelift/media-center/engine-components_turbocharger/damage/fr_07_schadensbroschuere_turbolader_2024_web_doppelseiten.pdf",
     "date_consultation": "2026-11-16"
+  },
+  {
+    "id": "rappelconso-48835",
+    "titre": "RappelConso — fiche A12/01504/20 (Citroën et DS) du 20/11/2020 : pompe à vide",
+    "editeur": "RappelConso (DGCCRF)",
+    "categorie": "rappelconso",
+    "url": "https://rappel.conso.gouv.fr/fiche-rappel/48835/Rapex",
+    "date_consultation": "2026-11-16"
+  },
+  {
+    "id": "rappelconso-48836",
+    "titre": "RappelConso — fiche A12/01505/20 (Peugeot) du 20/11/2020 : pompe à vide",
+    "editeur": "RappelConso (DGCCRF)",
+    "categorie": "rappelconso",
+    "url": "https://rappel.conso.gouv.fr/fiche-rappel/48836/Rapex",
+    "date_consultation": "2026-11-16"
+  },
+  {
+    "id": "rappelconso-48204",
+    "titre": "RappelConso — fiche A11/00077/23 (Opel et Peugeot) du 16/06/2023, mise à jour le 18/06/2026 : pompe à vide",
+    "editeur": "RappelConso (DGCCRF)",
+    "categorie": "rappelconso",
+    "url": "https://rappel.conso.gouv.fr/fiche-rappel/48204/Rapex",
+    "date_consultation": "2026-11-16"
+  },
+  {
+    "id": "peugeot-puretech-solutions",
+    "titre": "Peugeot — Moteurs PureTech, nos solutions",
+    "editeur": "Peugeot (Stellantis)",
+    "categorie": "secondaire",
+    "nature": "communication-constructeur",
+    "url": "https://www.peugeot.fr/entretien-et-services/moteurs-puretech-solutions.html",
+    "date_consultation": "2026-11-16"
+  },
+  {
+    "id": "stellantis-puretech-indemnisation-2025",
+    "titre": "Stellantis — communiqué du 7 mai 2025 : politique d'indemnisation étendue aux générations précédentes des moteurs PureTech 1.0 et 1.2",
+    "editeur": "Stellantis",
+    "categorie": "secondaire",
+    "nature": "communication-constructeur",
+    "url": "https://www.media.stellantis.com/be-fr/citroen/press/stellantis-etend-sa-politique-d-indemnisation-des-reclamations-des-consommateurs-europeens-sur-les-generations-precedentes-de-moteurs-puretech-1-0-et-1-2",
+    "date_consultation": "2026-11-16"
   }
 ]

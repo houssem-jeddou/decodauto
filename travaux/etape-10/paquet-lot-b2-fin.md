@@ -1,3 +1,9 @@
+> **Validé par Houssem le 17/11/2026 à 7 h 39 : « Je valide tout ! Fais le necessaire ».** Réponse au message du
+> pilotage du matin, qui portait mot pour mot la ligne de validation de ce paquet (« Ligne de validation proposée »,
+> ci-dessous : « Je valide le lot B2 : batterie de voiture … »). Empreintes des trois pages (batterie de voiture,
+> recharger la batterie, changer la batterie) posées ensuite par `npm run empreinte`, sur le contenu du paquet
+> (ae58f7b), sans autre changement ; passage dans `src/content` par `npm run passage` (règle de passage).
+
 ## Points à trancher (avec ma recommandation)
 1. **Batterie gelée** (« batterie de voiture », ligne 4 ; « recharger », ligne 3) : **Non, ne poursuivez pas votre
    trajet** · À faire tout de suite. La notice Seat Ibiza interdit de démarrer avec des câbles si une batterie est

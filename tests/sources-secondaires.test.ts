@@ -2,8 +2,9 @@
 //  - SOURCE-SECONDAIRE-NATURE : une source de catégorie « secondaire » porte une nature admise (document-technique,
 //    communication-constructeur, administration) ; un forum, un article de presse ou un blog n'entre pas au registre ;
 //    une autre catégorie ne porte pas de nature ;
-//  - les 22 sources secondaires du registre ont leur nature : 19 documents techniques (Hella 4, Bosch 1, Ross-Tech 2,
-//    bulletins publiés par la NHTSA 12) et 3 publications de l'administration (deux réponses ministérielles, Service-public.fr).
+//  - les 25 sources secondaires du registre ont leur nature : 20 documents techniques (Hella 4, Bosch 1, Ross-Tech 2,
+//    bulletins publiés par la NHTSA 12, VARTA 1 au lot B2), 3 publications de l'administration (deux réponses
+//    ministérielles, Service-public.fr) et 2 communications du constructeur (lot B1).
 // COUT-RISQUE-SOURCE renforcé (chaque citation du risque de première main) : pages de test `cout-risque-source-secondaire`
 // et `cout-risque-sans-premiere-main` (tests/fixtures, tests/controle.test.ts).
 import assert from 'node:assert/strict';
@@ -31,19 +32,21 @@ describe('sources secondaires : nature obligatoire (SOURCE-SECONDAIRE-NATURE, de
     assert.deepEqual([...NATURES_SOURCE_SECONDAIRE], ['document-technique', 'communication-constructeur', 'administration']);
   });
 
-  test('registre : les 22 sources secondaires ont une nature admise (19 documents techniques, 3 administration) ; aucune autre source n\'en a', () => {
+  test('registre : les 25 sources secondaires ont une nature admise (20 documents techniques dont VARTA au lot B2, 3 administration, 2 communications du constructeur, lot B1) ; aucune autre source n\'en a', () => {
     const secondaires = registre.filter((s) => s.categorie === 'secondaire');
-    assert.equal(secondaires.length, 22);
+    assert.equal(secondaires.length, 25);
     assert.ok(secondaires.every((s) => (NATURES_SOURCE_SECONDAIRE as readonly string[]).includes(s.nature ?? '')), secondaires.filter((s) => s.nature === undefined).map((s) => s.id).join(', '));
     const parNature = (n: string): string[] => secondaires.filter((s) => s.nature === n).map((s) => s.id);
-    assert.equal(parNature('document-technique').length, 19);
+    assert.equal(parNature('document-technique').length, 20);
+    assert.deepEqual(parNature('communication-constructeur').sort(), ['peugeot-puretech-solutions', 'stellantis-puretech-indemnisation-2025']);
     assert.deepEqual(parNature('administration').sort(), ['reponse-ministerielle-an-2023-03-21', 'reponse-ministerielle-senat-2026-02-12', 'service-public-depannage-autoroute']);
-    // Documents techniques : Hella 4, Bosch 1, Ross-Tech 2, bulletins publiés par la NHTSA 12.
+    // Documents techniques : Hella 4, Bosch 1, Ross-Tech 2, bulletins publiés par la NHTSA 12, VARTA 1 (lot B2).
     const techniques = secondaires.filter((s) => s.nature === 'document-technique');
     assert.equal(techniques.filter((s) => /^Hella/.test(s.editeur)).length, 4);
     assert.equal(techniques.filter((s) => /Bosch/.test(s.editeur)).length, 1);
     assert.equal(techniques.filter((s) => /Ross-Tech/.test(s.editeur)).length, 2);
     assert.equal(techniques.filter((s) => /NHTSA/.test(s.editeur)).length, 12);
+    assert.deepEqual(techniques.filter((s) => /VARTA/.test(s.editeur)).map((s) => s.id), ['varta-interpretation-tests']);
     assert.ok(registre.filter((s) => s.categorie !== 'secondaire').every((s) => s.nature === undefined));
   });
 

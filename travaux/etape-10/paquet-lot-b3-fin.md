@@ -1,3 +1,10 @@
+> **Validé par Houssem le 17/11/2026 à 7 h 39 : « Je valide tout ! Fais le necessaire ».** Réponse au message du
+> pilotage du matin, qui portait mot pour mot la ligne de validation de ce paquet (« Ligne de validation proposée »,
+> ci-dessous : « Je valide le lot B3 : moteur qui surchauffe … »), paire de liens `nettoyer-fap` ↔ `voyant-moteur`
+> comprise. Empreintes des deux pages (moteur qui surchauffe, nettoyer le FAP) posées ensuite par `npm run empreinte`,
+> sur le contenu du paquet (pages de 25d1199, paquet de af4ad11), sans autre changement ; passage dans `src/content` par `npm run passage` (règle
+> de passage).
+
 ## Points à trancher (avec ma recommandation)
 1. **Fumée ou vapeur sous le capot** (« moteur qui surchauffe », ligne 2) : **Non, arrêtez-vous immédiatement** · À
    faire tout de suite (Renault Clio 5 p. 386, Dacia Sandero 3 p. 348-349 : s'arrêter, couper le contact, s'éloigner du
@@ -65,11 +72,15 @@
     nettoyage en atelier ; la page dit seulement que c'est au garage de trouver la cause si la régénération ne suffit
     pas. Une réponse demanderait une source admise (document technique d'un constructeur ou d'un équipementier,
     demande n° 31). **Recommandation : valider les consignes, garder le point ouvert dans les idées reportées.**
-11. **Mesures du format 2** : celles de la recette du 16/11 ne valent plus (encadré de la surchauffe sans l'écart de la
-    ligne 4 ; encadré du FAP à quatre lignes, avec la rangée du dépannage sur autoroute ; illustrations redessinées).
-    À 320 px, la recette relevait la fin de la première situation à 761 px (surchauffe) et 645 px (FAP), et l'arbre
-    au-delà de six écrans : la règle 2a se mesure à 375 px, c'est seulement noté. **Recommandation : remesurer à la
-    recette refaite.**
+11. **Mesures du format 2** (recette refaite après la revue, `recette-lot-b3/`, 375 × 667, police chargée) :
+    - première situation : surchauffe 641 px (sous 667, 1 px au-delà de la marge visée de 640), FAP 580 px ;
+    - illustration : surchauffe 2 448 px, FAP 2 364 px, au-delà de trois écrans (2 001) : encadrés de six et quatre lignes,
+      dont la rangée du dépannage sur autoroute du FAP, maintenant à « arrêt immédiat » (règle 2i assouplie par la demande
+      n° 32 : signalé, pas bloquant) ;
+    - arbre de la surchauffe à 3 624 px, sous six écrans (4 002) ; **étapes du FAP à 4 102 px, 100 px au-delà de six
+      écrans** : demande n° 32, décision de Houssem sur captures (`recette-lot-b3/captures/nettoyer-fap-375-chargee-page.png`).
+      Lighthouse 100, aucun débordement à 320 px. **Recommandation : accepter.** L'écart vient des deux lignes du voyant
+      moteur ajoutées par la revue, qui protègent le lecteur ; le sommaire mène aux étapes.
 
 ## Revue indépendante
 Une revue, le 16/11/2026 (relecteur sans part à la rédaction, rapport `revue-lot-b3`) : verdict « à corriger », un
@@ -117,4 +128,5 @@ constat bloquant, sept importants, dix mineurs. Extraits jugés fidèles aux rel
 le capot, bouillonnement dans le bocal, bocal vide sur la notice Seat seule, niveau proche du mini, température au-dessus
 de la normale avec l'écart entre les pages 291 et 242 de la notice Toyota) et nettoyer le FAP (quatre lignes : voyant
 FAP, voyant moteur orange fixe et voyant moteur rouge de la base, additif au minimum), la paire de liens
-nettoyer-fap ↔ voyant-moteur, leurs coûts, causes, sources, arbre, étapes et tableau. »
+nettoyer-fap ↔ voyant-moteur, leurs coûts, causes, sources, arbre, étapes et tableau, et les étapes du FAP au-delà de six
+écrans (4 102 px). »
