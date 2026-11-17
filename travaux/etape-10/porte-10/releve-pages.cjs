@@ -1,6 +1,6 @@
 // Porte 10 : relevé, sur une construction du site, des 11 pages de la vague B : gravité écrite dans l'encadré (libellés du
 // verdict et de l'urgence de chaque ligne), lien « Signaler une erreur », élément unique, fiche, emplacement publicitaire.
-// Usage : node porte10-pages.cjs <dist> <racine du dépôt (pour cheerio)>
+// Usage : node releve-pages.cjs <dist> <racine du dépôt (pour cheerio)>
 const fs = require('fs');
 const path = require('path');
 const cheerio = require(path.resolve(process.argv[3], 'node_modules/cheerio'));
