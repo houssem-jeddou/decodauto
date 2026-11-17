@@ -1,0 +1,35 @@
+Brouillon, jamais validé. npm run liens (construction de production) et contrôles du lot C3, 17/11/2026 : schemas, test, build, liens, démonstration, indexation durable, modes.
+
+== schemas
+- 0 hints
+
+FIN 0
+
+== test
+# tests 864
+# pass 864
+# fail 0
+
+== build
+INFO 20 lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites
+Contrôle : 32 page(s) éditoriale(s), 0 erreur(s) bloquante(s), 34 alerte(s). Mode d'indexation : non indexable.
+FIN 0
+
+== liens
+
+Liens : 33 page(s), 1138 lien(s) interne(s) vérifié(s), 436 externe(s) non vérifié(s), 0 problème(s).
+FIN 0
+
+== demo
+Contrôle : 32 page(s) éditoriale(s), 0 erreur(s) bloquante(s), 34 alerte(s). Mode d'indexation : non indexable.
+Liens : 33 page(s), 1138 lien(s) interne(s) vérifié(s), 436 externe(s) non vérifié(s), 0 problème(s).
+FIN 0
+
+== index
+Indexation durable : 0 erreur(s) ; drapeau true, variable SITE_INDEXABLE "true" ; comparaison avec origin/main : 30 page(s) publiée(s) dans la base, 31 dans la pull request.
+FIN 0
+
+== modes
+OK     variable "true" + drapeau false → noindex
+OK     variable "true" + drapeau true → indexable
+FIN 0
