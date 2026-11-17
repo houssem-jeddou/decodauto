@@ -230,3 +230,101 @@ défaillance critique (la fiche F2878 ne le dit pas : la page ne l'affirmera pas
    plus prudent ; décision déjà prise par Houssem pour le dossier PureTech (16/11) ; reprise telle quelle dans l'exemple.
 3. **Une seule notice** (Seat Leon pour le liquide de frein ; Seat Ibiza pour le vase vide ; Peugeot et Citroën, un seul
    groupe, pour la jauge) : admis pour une ligne saisie (charte §2.1), la page le dit ; à relire à l'écran d'abord.
+
+## 11. Relevé à l'écran du 17/11/2026 vers 12 h 15 (lot C2 : huiles)
+
+**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 12 h 15) : page imprimée, page du PDF entre
+parenthèses. Recherche dans chaque PDF entier de « SAE », « viscosit », « ACEA », « vidange » : aucune viscosité ni grade
+SAE chez Peugeot, Citroën, Renault, Dacia ; chez Seat, seulement « ACEA C3 » (p. 294). **Aucune des cinq notices
+n'explique un grade.** Peugeot PDF 147 : page publicitaire d'une marque d'huile (« 0W-20 ») : ni consigne ni source
+admissible, à ne pas citer. Toyota : PDF hébergé sur s3.amazonaws.com, refusé par le navigateur ; accès demandé à
+Houssem. Décisions du pilotage du même jour (règle 6) : rien sur la signification d'un grade tant que Toyota n'est pas
+lue ; ACEA C2, C3, C4 seulement comme source secondaire (document technique, demande n° 31), traduction signalée ; rien
+sur la 85W140.
+
+**Seat Ibiza**
+- p. 293 (PDF 295), « Huile moteur, Généralités » : « Le moteur est lubrifié en usine avec une huile multigrade de
+  qualité, qui peut généralement être utilisée toute l'année. Étant donné qu'utiliser une huile de bonne qualité est
+  indispensable au bon fonctionnement du moteur et à sa longévité, l'huile utilisée lors des vidanges ou dans le cas
+  d'appoint devra toujours être conforme aux normes VW. Nous vous recommandons de confier le changement d'huile à un
+  service technique ou un atelier spécialisé. » ; « Si le niveau d'huile moteur est trop faible : Votre atelier
+  spécialisé pourra vous indiquer l'huile-moteur adaptée à votre véhicule. Si l'huile-moteur recommandée est
+  indisponible, il est autorisé en cas d'urgence de faire l'appoint une fois en rajoutant un maximum 0,5 l de l'huile
+  suivante jusqu'à la prochaine vidange : Moteurs essence : norme VW 504 00, VW 502 00, VW 508 00, ACEA C3 ou API SN.
+  Moteurs diesel : norme VW 507 00, VW 505 01, ACEA C3 ou API CK-4. Faites appel à un atelier spécialisé pour remplacer
+  l'huile. »
+- p. 294 (PDF 296) : « Aucun additif ne doit être mélangé à l'huile moteur. Les dommages produits par ces additifs ne
+  sont pas couverts par la garantie. » ATTENTION : « Si vous avez rempli une huile moteur différente de celles
+  spécifiées dans les normes indiquées plus haut ou par votre service technique de SEAT, tenez compte de ce qui suit :
+  ● Le risque de dégâts sur le moteur et sur le filtre à particules* ne peut pas être totalement exclu. ● Vous pouvez
+  continuer à circuler avec le véhicule si vous avez versé maximum 0,5 l d'huile moteur. Faites changer l'huile dès que
+  possible par un atelier spécialisé. Dans le cas contraire, il existe un danger de dégâts sur le moteur. ● Si vous
+  avez versé plus de 0,5 l d'huile moteur, circulez avec le moteur à faible charge et au maximum dans la fourchette de
+  régime moyen. Ne circulez pas à plus de 80 km/h et ne parcourez pas plus de 300 km (environ). Faites changer l'huile
+  dès que possible par un atelier spécialisé. Dans le cas contraire, il existe un danger de dégâts sur le moteur. ● Le
+  risque d'éventuels dégâts sur le véhicule (moteur, système d'échappement) vous incombe. En cas de doute, évitez de
+  démarrer le moteur et faites appel à l'assistance du service technique. ● Si vous n'avez pas versé de l'huile moteur
+  mais un autre liquide, ne démarrez pas le moteur. Demandez l'assistance du service technique. Risque d'endommagement
+  du moteur ! » Nota : « Avant d'entreprendre un long trajet, nous vous conseillons d'acquérir de l'huile moteur de type
+  VW et d'en garder un bidon dans votre véhicule. »
+- p. 296 (PDF 298), « Changement d'huile moteur » : « Nous vous recommandons de faire effectuer la vidange d'huile par un
+  Service Technique. » AVERTISSEMENT : « N'effectuez la vidange d'huile moteur vous-même que si vous possédez les
+  connaissances requises pour ce type de travail ! […] ● Laissez d'abord refroidir le moteur. De l'huile chaude peut
+  occasionner des brûlures ! ● Portez des lunettes de protection – risque de brûlures corrosives par projections
+  d'huile. […] ● L'huile est toxique ! Conservez l'huile usagée hors de portée des enfants avant de l'éliminer. » ;
+  « L'huile usagée ne doit en aucun cas parvenir dans les égouts ou s'infiltrer dans le sol. »
+- p. 90 (PDF 92), « Périodicité d'entretien » : « SEAT distingue les services avec vidange d'huile moteur (par ex.,
+  Service de vidange d'huile) et les services sans vidange d'huile moteur (Service Entretien par exemple). […] Pour
+  calculer cette vidange (maximum 2 ans), les conditions d'utilisation du véhicule et le style de conduite sont pris
+  en compte. »
+- p. 316 (PDF 318), « Service Entretien » : entretien intermédiaire fixe tous les 5 000, 7 500, 10 000 ou 15 000 km ou au
+  bout de 1 an selon le numéro PR, ou flexible selon l'indicateur (résumé du relevé) ; « L'entretien flexible se
+  caractérise notamment par l'utilisation d'huile longue durée (LongLife) au lieu de l'huile moteur conventionnelle. » ;
+  en conditions difficiles (trajets courts fréquents, ralenti prolongé, zones poussiéreuses, remorque, circulation
+  dense en ville, hiver, carburant à forte teneur en soufre), « certains travaux devront être réalisés avant la
+  prochaine date de révision prévue ».
+
+**Peugeot 208**
+- p. 166 (PDF 168) : « Il est normal de faire des appoints d'huile entre deux révisions (ou vidanges). Il est préconisé
+  d'effectuer un contrôle, avec appoint si nécessaire, tous les 5 000 km. Pour préserver la fiabilité des moteurs et les
+  dispositifs d'antipollution, ne jamais utiliser d'additif dans l'huile moteur. » ; « Caractéristiques de l'huile :
+  Avant d'effectuer un complément d'huile ou une vidange du moteur, vérifier que l'huile corresponde à la motorisation
+  et soit conforme aux recommandations indiquées dans le plan d'entretien fourni avec le véhicule (ou disponible auprès
+  du réseau PEUGEOT ou d'un atelier qualifié). L'utilisation d'une huile non recommandée peut entraîner la perte de la
+  garantie contractuelle en cas de défaillance du moteur. » ; « Vider l'huile usagée dans les containers réservés à cet
+  usage dans le réseau PEUGEOT ou dans un atelier qualifié. »
+- p. 165 (PDF 167) : « Éviter tout contact prolongé de l'huile et des liquides usagés avec la peau. »
+- p. 168 (PDF 170) : « Filtre à huile : Changer le filtre à huile à chaque vidange d'huile moteur. »
+- « Caractéristiques techniques » (p. 194, 196-197) : rien sur l'huile.
+
+**Citroën C3**
+- p. 112 (PDF 114) : mêmes phrases que Peugeot sur les appoints entre deux révisions, le contrôle tous les 5 000 km et les
+  additifs.
+- p. 113 (PDF 115) : « Caractéristiques de l'huile : Avant d'effectuer un complément d'huile ou une vidange du moteur,
+  vérifier que l'huile correspond à la motorisation et est conforme aux recommandations du constructeur. » (sans la
+  phrase sur la garantie).
+- p. 114 (PDF 116) : « Filtre à huile : Changer le filtre à huile à chaque vidange d'huile moteur. »
+
+**Renault Clio 5 phase 2**
+- p. 330 (PDF 332), « Niveau huile moteur, Généralités » : « Un moteur consomme de l'huile pour le graissage et le
+  refroidissement des pièces en mouvement et il est normal de faire des appoints d'huile entre deux vidanges. Toutefois,
+  si après la période de rodage, les apports étaient supérieurs à 0,5 litre pour 1 000 km, consultez un Représentant de
+  la marque. Périodicité : vérifiez périodiquement votre niveau d'huile et, en tout cas, avant chaque grand voyage sous
+  peine de risquer de détériorer votre moteur. »
+- p. 333 (PDF 335) : « Vidange moteur. Périodicité : reportez-vous au document d'entretien de votre véhicule. Capacité de
+  vidange : Reportez-vous au document d'entretien de votre véhicule ou consultez un Représentant de la marque. […]
+  Qualité d'huile moteur : Reportez-vous au document d'entretien de votre véhicule. » ; « En cas de baisse anormale ou
+  répétée du niveau, consultez un Représentant de la marque. » ; « Vidange moteur : si vous réalisez la vidange moteur
+  chaud, attention aux risques de brûlures dues à l'écoulement de l'huile. »
+- p. 122 (PDF 124) : « si une révision est faite sans vidange moteur, alors il faut réinitialiser uniquement l'autonomie
+  de révision. Dans le cas d'une vidange moteur, il faut réinitialiser à la fois l'autonomie de révision et de vidange.
+  Suivant véhicule, l'autonomie de vidange s'adapte au style de conduite (roulage fréquent à des vitesses faibles,
+  porte-à-porte, roulage prolongé au ralenti, traction d'une remorque...). La distance restant à parcourir jusqu'à la
+  prochaine vidange peut donc dans certains cas diminuer plus vite que la distance réellement parcourue. »
+
+**Dacia Sandero 3**
+- p. 294 (PDF 296) : même texte que Renault p. 330, mot pour mot sauf « Un moteur thermique consomme de l'huile ».
+- p. 296 (PDF 298) : mêmes « Vidange moteur », « Capacité de vidange », « Qualité d'huile moteur » que Renault.
+- p. 297 (PDF 299) : baisse anormale et vidange à chaud, comme Renault.
+- p. 99 (PDF 101) : même texte d'autonomie de vidange que Renault ; « Vidange dans 30 000 km/24 mois » y est un exemple
+  d'affichage, pas une périodicité : à ne pas citer comme telle.

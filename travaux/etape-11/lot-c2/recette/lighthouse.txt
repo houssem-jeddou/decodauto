@@ -1,0 +1,3 @@
+Brouillon, jamais validé. Lighthouse mobile, 3 passages, médianes, emplacements factices, page « huile moteur », 17/11/2026.
+
+/huile-moteur/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 908 ms, TBT 0 ms

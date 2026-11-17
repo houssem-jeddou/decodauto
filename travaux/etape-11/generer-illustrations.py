@@ -7,6 +7,11 @@ traits clairs, ambre pour « regardez ici »). Brouillon, jamais validé.
   ne situe pas ces pièces sur un moteur donné : leur emplacement figure sur le schéma du compartiment moteur de la
   notice. Lecture de la jauge et repères : notices Renault Clio 5 phase 2 p. 331, Dacia Sandero 3 p. 294, Peugeot 208
   p. 166, Citroën C3 p. 112-113, Seat Ibiza p. 295 (relues à l'écran le 17/11/2026).
+- huile-moteur-choisir (page « huile moteur ») : à gauche, le plan ou document d'entretien de la voiture, qui donne
+  l'huile du moteur ; à droite, l'étiquette d'un bidon sans marque, où l'on retrouve la norme demandée (en ambre), la
+  classe ACEA et le grade. Le dessin n'explique pas le grade (aucune source admise lue) et ne montre aucune marque
+  d'huile. Notices : Peugeot 208 p. 166, Citroën C3 p. 113, Renault Clio 5 phase 2 p. 333, Dacia Sandero 3 p. 296,
+  Seat Ibiza p. 293 (relues à l'écran le 17/11/2026, vers 12 h 15).
 
 Contraintes de `illustrationEnLigne` : un seul <svg> racine avec viewBox ; ni script, ni foreignObject, ni image, ni
 use, ni lien, ni attribut on*, ni href, ni url(), ni @import ; textes de 24 unités au moins (12 px à 375 px).
@@ -64,8 +69,34 @@ def niveau_huile_jauge() -> str:
     return "".join(p)
 
 
+def huile_moteur_choisir() -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
+    # --- À gauche : le plan d'entretien (livret ouvert).
+    p.append(texte(40, 62, "Votre voiture", taille=24, poids=600, couleur=DOUX, ancre="start"))
+    p.append('<path d="M60 96 L168 110 L168 266 L60 252 Z" fill="#1b222b" stroke="#3a4553" stroke-width="3" stroke-linejoin="round"/>')
+    p.append('<path d="M276 96 L168 110 L168 266 L276 252 Z" fill="#232c37" stroke="#3a4553" stroke-width="3" stroke-linejoin="round"/>')
+    for y in (138, 162, 186):
+        p.append(f'<line x1="78" y1="{y}" x2="150" y2="{y + 10}" stroke="#3a4553" stroke-width="6" stroke-linecap="round"/>')
+    p.append(f'<rect x="186" y="150" width="72" height="30" rx="8" fill="none" stroke="{AMBRE}" stroke-width="5"/>')
+    p.append(texte(168, 302, "plan d'entretien", taille=24, poids=700, couleur=TEXTE))
+    # Flèche vers le bidon.
+    p.append(f'<path d="M300 182 L346 182" stroke="{AMBRE}" stroke-width="6" stroke-linecap="round"/>')
+    p.append(f'<path d="M336 170 L350 182 L336 194" fill="none" stroke="{AMBRE}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>')
+    # --- À droite : l'étiquette du bidon, sans marque.
+    p.append(texte(372, 62, "Sur le bidon", taille=24, poids=600, couleur=DOUX, ancre="start"))
+    p.append('<path d="M372 104 L540 104 L540 92 Q540 84 548 84 L572 84 Q580 84 580 92 L580 104 L600 104 L600 280 Q600 290 590 290 L382 290 Q372 290 372 280 Z" fill="#1b222b" stroke="#3a4553" stroke-width="3" stroke-linejoin="round"/>')
+    p.append(f'<rect x="392" y="126" width="188" height="42" rx="10" fill="#232c37" stroke="{AMBRE}" stroke-width="5"/>')
+    p.append(texte(486, 156, "norme", taille=24, poids=700, couleur=AMBRE))
+    p.append('<rect x="392" y="180" width="188" height="38" rx="10" fill="#232c37"/>')
+    p.append(texte(486, 208, "ACEA", taille=24, poids=700, couleur="#c9d1db"))
+    p.append('<rect x="392" y="230" width="188" height="38" rx="10" fill="#232c37"/>')
+    p.append(texte(486, 258, "grade", taille=24, poids=700, couleur="#c9d1db"))
+    p.append("</svg>")
+    return "".join(p)
+
+
 if __name__ == "__main__":
-    for nom, f in (("niveau-huile-jauge", niveau_huile_jauge),):
+    for nom, f in (("niveau-huile-jauge", niveau_huile_jauge), ("huile-moteur-choisir", huile_moteur_choisir)):
         s = f()
         (SORTIE / f"{nom}.svg").write_text(s + "\n", encoding="utf-8")
         print(nom, len(s))
