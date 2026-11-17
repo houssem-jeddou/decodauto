@@ -21,6 +21,15 @@ traits clairs, ambre pour « regardez ici »). Brouillon, jamais validé.
   ses repères MAXI et MINI et le niveau lu entre les deux ; à droite, le niveau normal (vert) et l'alerte (ambre) :
   sous le MINI, ou en baisse rapide, renvoi à l'encadré. Notices : Peugeot 208 p. 166, Citroën C3 p. 113, Renault
   Clio 5 phase 2 p. 336-337, Dacia Sandero 3 p. 299, Seat Ibiza p. 299 (relues à l'écran le 17/11/2026, vers 13 h 30).
+- usure-pneu-temoin (page « usure des pneus ») : coupe de la bande de roulement, à gauche neuve (témoin d'usure en
+  retrait au fond de la rainure), à droite usée (bande au niveau du témoin : 1,6 mm, en ambre) ; en bas, le repère du
+  flanc, « TWI » ou un triangle. Notices : Peugeot 208 p. 169, Citroën C3 p. 115, Renault Clio 5 phase 2 p. 346, Dacia
+  Sandero 3 p. 307, Seat Ibiza p. 308 (relues à l'écran le 17/11/2026, vers 14 h 20) ; arrêté du 18 juillet 2019,
+  article 5.
+- contre-visite-delais (page « contre-visite ») : frise du jour du contrôle à deux mois ; défaillances majeures (S),
+  contrôle valable deux mois (vert) ; défaillance critique (R), valable le seul jour du contrôle (ambre) ; contre-visite
+  dans les deux mois ; au-delà, contrôle complet. Arrêté du 18 juin 1991, articles 7 et 8 (relus à l'écran le
+  17/11/2026, vers 13 h 20).
 
 Contraintes de `illustrationEnLigne` : un seul <svg> racine avec viewBox ; ni script, ni foreignObject, ni image, ni
 use, ni lien, ni attribut on*, ni href, ni url(), ni @import ; textes de 24 unités au moins (12 px à 375 px).
@@ -146,10 +155,50 @@ def liquide_frein_reservoir() -> str:
     return "".join(p)
 
 
+def usure_pneu_temoin() -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
+    for x0, titre, haut, coul in ((40, "Neuf", 96, VERT), (340, "Usé", 150, AMBRE)):
+        p.append(texte(x0, 62, titre, taille=24, poids=600, couleur=DOUX, ancre="start"))
+        # Bande de roulement (deux pains de gomme) et rainure entre les deux, témoin au fond.
+        fond = 214
+        p.append(f'<rect x="{x0 + 10}" y="{haut}" width="100" height="{fond - haut}" rx="6" fill="#3a4553"/>')
+        p.append(f'<rect x="{x0 + 170}" y="{haut}" width="100" height="{fond - haut}" rx="6" fill="#3a4553"/>')
+        p.append(f'<rect x="{x0 + 10}" y="{fond}" width="260" height="26" fill="#252d37"/>')
+        p.append(f'<rect x="{x0 + 116}" y="150" width="48" height="{fond - 150}" rx="4" fill="#9aa5b1"/>')
+        p.append(f'<line x1="{x0 + 4}" y1="{haut}" x2="{x0 + 276}" y2="{haut}" stroke="{coul}" stroke-width="4" stroke-dasharray="10 8"/>')
+    p.append(texte(180, 280, "témoin en retrait", taille=24, poids=700, couleur=VERT))
+    p.append(texte(480, 280, "1,6 mm : changez", taille=24, poids=700, couleur=AMBRE))
+    p.append(texte(320, 318, "Repère sur le flanc : TWI ou ▲", taille=24, poids=600, couleur=TEXTE))
+    p.append("</svg>")
+    return "".join(p)
+
+
+def contre_visite_delais() -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
+    x0, x1 = 120, 580
+    p.append(texte(x0, 62, "Jour du contrôle", taille=24, poids=600, couleur=DOUX))
+    p.append(texte(x1 + 18, 62, "+ 2 mois", taille=24, poids=600, couleur=DOUX, ancre="end"))
+    for x in (x0, x1):
+        p.append(f'<line x1="{x}" y1="76" x2="{x}" y2="238" stroke="#3a4553" stroke-width="4"/>')
+    p.append(texte(40, 118, "S", taille=32, poids=800, couleur=VERT, ancre="start"))
+    p.append(f'<rect x="{x0}" y="96" width="{x1 - x0}" height="30" rx="15" fill="{VERT}" opacity=".85"/>')
+    p.append(texte(40, 188, "R", taille=32, poids=800, couleur=AMBRE, ancre="start"))
+    p.append(f'<rect x="{x0 - 15}" y="166" width="30" height="30" rx="15" fill="{AMBRE}"/>')
+    p.append(f'<line x1="{x0 + 30}" y1="181" x2="{x1}" y2="181" stroke="{AMBRE}" stroke-width="4" stroke-dasharray="10 8"/>')
+    p.append(texte(350, 156, "valable 2 mois", taille=24, poids=700, couleur=VERT))
+    p.append(texte(360, 226, "valable le jour même", taille=24, poids=700, couleur=AMBRE))
+    p.append(texte(320, 284, "Contre-visite : dans les 2 mois", taille=24, poids=700, couleur=TEXTE))
+    p.append(texte(320, 316, "après : contrôle complet", taille=24, poids=600, couleur=DOUX))
+    p.append("</svg>")
+    return "".join(p)
+
+
 if __name__ == "__main__":
     for nom, f in (("niveau-huile-jauge", niveau_huile_jauge), ("huile-moteur-choisir", huile_moteur_choisir),
                     ("liquide-refroidissement-vase", liquide_refroidissement_vase),
-                    ("liquide-frein-reservoir", liquide_frein_reservoir)):
+                    ("liquide-frein-reservoir", liquide_frein_reservoir),
+                    ("usure-pneu-temoin", usure_pneu_temoin),
+                    ("contre-visite-delais", contre_visite_delais)):
         s = f()
         (SORTIE / f"{nom}.svg").write_text(s + "\n", encoding="utf-8")
         print(nom, len(s))
