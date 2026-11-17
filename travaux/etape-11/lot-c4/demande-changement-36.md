@@ -37,15 +37,15 @@ entre une notice et le texte légal est signalé comme un écart entre marques.
 
 **Usure des pneus.** Arrêté du 18 juillet 2019, article 5 (relu à l'écran le 17/11 vers 1 h 50) : les pneus des voitures
 particulières doivent avoir « dans les rainures principales de leur bande de roulement, une profondeur d'au moins
-1,6 mm », « pendant toute leur utilisation sur route » → règle 1. Annexe I, 5.2.3 (relue le 17/11 vers 13 h 20) : e.2
+1,6 mm », « pendant toute leur utilisation sur route » → règle 1. Annexe I, 5.2.3 (relue le 17/11 vers 13 h 15) : e.2
 « L'indicateur d'usure de la profondeur des sculptures est atteint » : majeure ; e.3 « La profondeur des sculptures n'est
 pas conforme aux exigences » : critique → faits (règle 3). Code de la route, R314-1 (relu en entier le 17/11 vers
-15 h 10) : sculptures apparentes sur toute la surface de roulement, aucune toile visible, aucune déchirure profonde sur
+13 h 50) : sculptures apparentes sur toute la surface de roulement, aucune toile visible, aucune déchirure profonde sur
 les flancs ; y contrevenir est puni de l'amende prévue pour les contraventions de la quatrième classe, immobilisation
 possible → fait. L'article 5 de l'arrêté de 2019, relu en entier, limite aussi à 5 mm l'écart de profondeur entre deux
 pneus d'un même essieu (fait, dit comme le texte le dit).
 
-Ce que les notices ajoutent (relevé, §13, relu à l'écran le 17/11 vers 14 h 20), classé par la grille actuelle :
+Ce que les notices ajoutent (relevé, §13, relu à l'écran le 17/11 vers 12 h 55), classé par la grille actuelle :
 
 | Notice | Consigne | Niveau par la grille |
 |---|---|---|
@@ -60,7 +60,7 @@ impérativement), Renault et Dacia (remplacer, sans délai écrit). Sans la règ
 seule lecture de Seat (principe 3) ; si Houssem classe autrement la consigne Seat et refuse la règle 1, elle descendrait
 à « Oui, avec précautions · À faire tout de suite » (Peugeot, Citroën).
 
-**Contre-visite.** Arrêté du 18 juin 1991, article 7 (relu à l'écran le 17/11 vers 13 h 20) :
+**Contre-visite.** Arrêté du 18 juin 1991, article 7 (relu à l'écran le 17/11 vers 13 h 15) :
 - défaillances majeures (S) : « la validité du contrôle est de deux mois à compter de la date du contrôle technique
   périodique » → règle 2 : **Oui, avec précautions · À prévoir dans les semaines qui viennent** (réparer, puis
   contre-visite dans les deux mois) ;
@@ -68,7 +68,7 @@ seule lecture de Seat (principe 3) ; si Houssem classe autrement la consigne Sea
   contrôle : **Non, ne poursuivez pas votre trajet · À faire tout de suite** ;
 - délai de deux mois dépassé : « faute de quoi un nouveau contrôle technique périodique est à réaliser » → règle 1 :
   **Non, ne poursuivez pas votre trajet · À faire tout de suite**.
-- Code de la route, R323-1 (relu en entier le 17/11 vers 15 h 10) : « Tout propriétaire d'un véhicule mentionné au
+- Code de la route, R323-1 (relu en entier le 17/11 vers 13 h 50) : « Tout propriétaire d'un véhicule mentionné au
   présent chapitre n'est autorisé à le mettre ou le maintenir en circulation qu'après un contrôle technique ayant vérifié
   qu'il est en bon état de marche et en état satisfaisant d'entretien. » → règle 1, cité aux lignes 2 et 3 avec
   l'article 7 ; la sanction (quatrième classe, immobilisation, fourrière possible) → fait.
@@ -86,7 +86,7 @@ seule lecture de Seat (principe 3) ; si Houssem classe autrement la consigne Sea
   critiques, ni comment rejoindre un garage ensuite (relevé, §8) : la page ne l'affirme pas.
 - Aucune limite d'âge légale des pneus : l'âge de 6 ans n'est cité que comme consigne de la notice Seat Ibiza.
 - Le montant de l'amende forfaitaire de quatrième classe n'est relevé dans aucun texte : pas de montant affiché.
-- R314-1, R323-1 et l'article 5 de l'arrêté de 2019 sont relus en entier (relevé, §15, 17/11 vers 15 h 10).
+- R314-1, R323-1 et l'article 5 de l'arrêté de 2019 sont relus en entier (relevé, §15, 17/11 vers 13 h 50).
 
 ## Impact sur ce qui est validé
 - `src/schemas/grille.ts` : trois règles ajoutées aux principes (ou un niveau de consignes « texte légal » par verdict),

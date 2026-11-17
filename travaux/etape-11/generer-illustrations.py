@@ -11,25 +11,25 @@ traits clairs, ambre pour « regardez ici »). Brouillon, jamais validé.
   l'huile du moteur ; à droite, l'étiquette d'un bidon sans marque, où l'on retrouve la norme demandée (en ambre), la
   classe ACEA et le grade. Le dessin n'explique pas le grade (aucune source admise lue) et ne montre aucune marque
   d'huile. Notices : Peugeot 208 p. 166, Citroën C3 p. 113, Renault Clio 5 phase 2 p. 333, Dacia Sandero 3 p. 296,
-  Seat Ibiza p. 293 (relues à l'écran le 17/11/2026, vers 12 h 15).
+  Seat Ibiza p. 293 (relues à l'écran le 17/11/2026, vers 11 h 50).
 - liquide-refroidissement-vase (page « liquide de refroidissement ») : à gauche, le vase d'expansion (grand bocal, deux
   départs de durite, bouchon à visser), avec ses repères MAX et MIN et le niveau lu entre les deux ; à droite, les deux consignes : niveau lu moteur froid
   (vert), bouchon jamais ouvert moteur chaud (ambre). Le liquide est dessiné sans couleur de marque (seule la notice
   Seat nomme une couleur). Notices : Peugeot 208 p. 167, Citroën C3 p. 113, Renault Clio 5 phase 2 p. 334-335, Dacia
-  Sandero 3 p. 298, Seat Ibiza p. 298 (relues à l'écran le 17/11/2026, vers 13 h 30).
+  Sandero 3 p. 298, Seat Ibiza p. 298 (relues à l'écran le 17/11/2026, vers 12 h 30).
 - liquide-frein-reservoir (page « liquide de frein ») : à gauche, le petit réservoir posé sur le maître-cylindre, son
   bouchon rond, ses repères MAX et MIN et le niveau lu à travers la paroi ; à droite, le niveau normal (vert) et l'alerte (ambre) :
   sous le MINI, ou en baisse rapide, renvoi à l'encadré. Notices : Peugeot 208 p. 166, Citroën C3 p. 113, Renault
-  Clio 5 phase 2 p. 336-337, Dacia Sandero 3 p. 299, Seat Ibiza p. 299 (relues à l'écran le 17/11/2026, vers 13 h 30).
+  Clio 5 phase 2 p. 336-337, Dacia Sandero 3 p. 299, Seat Ibiza p. 299 (relues à l'écran le 17/11/2026, vers 12 h 30).
 - usure-pneu-temoin (page « usure des pneus ») : coupe de la bande de roulement, à gauche neuve (témoin d'usure en
   retrait au fond de la rainure), à droite usée (bande au niveau du témoin : 1,6 mm, en ambre) ; en bas, le repère du
   flanc, « TWI » ou un triangle. Notices : Peugeot 208 p. 169, Citroën C3 p. 115, Renault Clio 5 phase 2 p. 346, Dacia
-  Sandero 3 p. 307, Seat Ibiza p. 308 (relues à l'écran le 17/11/2026, vers 14 h 20) ; arrêté du 18 juillet 2019,
+  Sandero 3 p. 307, Seat Ibiza p. 308 (relues à l'écran le 17/11/2026, vers 12 h 55) ; arrêté du 18 juillet 2019,
   article 5.
 - contre-visite-delais (page « contre-visite ») : frise du jour du contrôle à deux mois ; défaillances majeures (S),
   contrôle valable deux mois (vert) ; défaillance critique (R), valable le seul jour du contrôle (ambre) ; contre-visite
   dans les deux mois ; au-delà, contrôle complet. Arrêté du 18 juin 1991, articles 7 et 8 (relus à l'écran le
-  17/11/2026, vers 13 h 20).
+  17/11/2026, vers 13 h 15).
 
 Contraintes de `illustrationEnLigne` : un seul <svg> racine avec viewBox ; ni script, ni foreignObject, ni image, ni
 use, ni lien, ni attribut on*, ni href, ni url(), ni @import ; textes de 24 unités au moins (12 px à 375 px).

@@ -2,10 +2,10 @@
 # Brouillon, jamais validé. Étape 11 (vague C), lot C4 : page « contre-visite du contrôle technique » (modèle pneus et
 # obligations, sujet contrôle technique, format 2). Pas d'empreinte tant que Houssem n'a pas validé son encadré.
 # - Sources : arrêté du 18 juin 1991, articles 7 et 8 et annexe I, 5.2.3 (Légifrance relu à l'écran le 17/11/2026 vers
-#   13 h 20 ; travaux/etape-11/textes/releve-sources.md, §14) ; définitions des défaillances (article 7) et points de
+#   13 h 15 ; travaux/etape-11/textes/releve-sources.md, §14) ; définitions des défaillances (article 7) et points de
 #   l'annexe I liés aux voyants : relevé de l'étape 8 (Légifrance lu par Houssem le 14/11, travaux/etape-8/textes/
 #   controle-technique-releve.md) ; code de la route R323-1 (relu à l'écran le 17/11 vers 1 h 50, puis en entier vers
-#   15 h 10, §15) : cité aux lignes 2 et 3 (règle 1 de la demande n° 36).
+#   13 h 50, §15) : cité aux lignes 2 et 3 (règle 1 de la demande n° 36).
 # - Niveaux des lignes : obligation légale, par la demande de changement n° 36 (proposée) : défaillances majeures, contrôle
 #   valable deux mois (règle 2) ; défaillances critiques après le jour du contrôle, et délai dépassé (règle 1).
 # - Aucun texte relu ne dit comment rejoindre un garage après le jour d'un résultat critique : la page ne l'affirme pas.

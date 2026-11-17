@@ -19,7 +19,7 @@ sujet « usure ».
   reste 1,6 mm ou moins, le minimum légal. Ne poursuivez pas votre trajet avec ces pneus : faites-les remplacer. »
   Sources : arrêté du 18 juillet 2019, article 5 ; notices (témoins) ; ligne 1.
 - **Texte de référence** (fiche « Le texte en bref ») : arrêté du 18 juillet 2019 relatif aux pneumatiques, article 5.
-  Défaillances (annexe I, 5.2.3, relue le 17/11 vers 13 h 20) : mineure e.1 ; majeure e.2 et d.2 ; critique e.3 et d.3.
+  Défaillances (annexe I, 5.2.3, relue le 17/11 vers 13 h 15) : mineure e.1 ; majeure e.2 et d.2 ; critique e.3 et d.3.
   Contre-visite : article 7.
 
 ## 1. Les lignes de l'encadré
@@ -34,7 +34,7 @@ groupes, **écart signalé**.
 
   | Source | Emplacement | Extrait | Niveau |
   |---|---|---|---|
-  | Arrêté du 18 juillet 2019 | article 5 | « Les pneumatiques des véhicules des catégories M 1, N 1, O 1 et O 2 doivent présenter, pendant toute leur utilisation sur route, dans les rainures principales de leur bande de roulement, une profondeur d'au moins 1,6 mm. » (première phrase entière, relue le 17/11 vers 15 h 10) | Non, ne poursuivez pas votre trajet · tout de suite (**demande n° 36, règle 1** : exigence « pendant toute leur utilisation sur route ») |
+  | Arrêté du 18 juillet 2019 | article 5 | « Les pneumatiques des véhicules des catégories M 1, N 1, O 1 et O 2 doivent présenter, pendant toute leur utilisation sur route, dans les rainures principales de leur bande de roulement, une profondeur d'au moins 1,6 mm. » (première phrase entière, relue le 17/11 vers 13 h 50) | Non, ne poursuivez pas votre trajet · tout de suite (**demande n° 36, règle 1** : exigence « pendant toute leur utilisation sur route ») |
   | Seat Ibiza | p. 308, AVERTISSEMENT | « Les pneus doivent être changés au plus tard lorsque les indicateurs d'usure sont usés. […] il existe des risques d'accident ! » | Non, ne poursuivez pas votre trajet · tout de suite (« au plus tard », absent de la grille, et risque d'accident annoncé : principe 3) |
   | Peugeot 208 | p. 169 | « Lorsque les témoins d'usure n'apparaissent plus en retrait de la bande de roulement, la profondeur des rainures est inférieure à 1,6 mm ; remplacer impérativement les pneumatiques. » | Oui, avec précautions · tout de suite (« impérativement ») |
   | Citroën C3 | p. 115 | même texte, « il est impératif de remplacer les pneumatiques » | idem |
@@ -77,11 +77,11 @@ Contrôle de la grille : aucune alerte R3-NIVEAU-A-VERIFIER pour la page.
 - Pas de « si vous continuez » ; aucun montant ; le dépannage sur autoroute s'affiche de lui-même (lignes à l'arrêt).
 
 ## 3. Extraits et faits : relus à l'écran
-- Notices relues à l'écran le 17/11 vers 14 h 20 (relevé, §13) : Peugeot 208 p. 169, Citroën C3 p. 115, Renault Clio 5
+- Notices relues à l'écran le 17/11 vers 12 h 55 (relevé, §13) : Peugeot 208 p. 169, Citroën C3 p. 115, Renault Clio 5
   p. 346, Dacia Sandero 3 p. 307, Seat Ibiza p. 304, 305, 306 et 308. Toyota non lue (la page le dit).
 - Légifrance : arrêté du 18 juillet 2019, article 5, et R314-1 relus le 17/11 vers 1 h 50 ; annexe I, 5.2.3 d et e, et
-  article 7, relus le 17/11 vers 13 h 20 (relevé, §14).
-- **Relus en entier le 17/11 vers 15 h 10** (relevé, §15), et la page changée en conséquence (changements après la
+  article 7, relus le 17/11 vers 13 h 15 (relevé, §14).
+- **Relus en entier le 17/11 vers 13 h 50** (relevé, §15), et la page changée en conséquence (changements après la
   recette du 42fea1b, non relus par un relecteur indépendant) :
   - R314-1 : la page dit maintenant ce que l'article exige (« sculptures apparentes » sur toute la surface de roulement,
     aucune toile visible, aucune déchirure profonde sur les flancs) et sa sanction (« l'amende prévue pour les
@@ -113,7 +113,7 @@ Preuves : `recette/` (communes au lot).
   verdict et urgence de la première situation à 557 / 557 (667 au plus) ; première situation entière à 644 ; encadré
   (4 lignes) fini à 1 636 ; **illustration à 2 200 px, au-delà de trois écrans (2 001 px), signalée** : raison, l'encadré
   de 4 lignes fini à 1 636 px, suivi du bloc « Notices / Base du coût » (règle 2i, demande n° 32) ; page de 9 195 px avant la relecture. À
-  320 px : verdict et urgence à 636 ; aucun débordement. Recette refaite après la relecture de 15 h 10 : page de 9 504 px
+  320 px : verdict et urgence à 636 ; aucun débordement. Recette refaite après la relecture de 13 h 50 : page de 9 504 px
   (texte de l'article 5 ajouté), mesures de l'encadré inchangées.
 - **Contrôle** (`controle.txt`) : seules erreurs, attendues, R4-VALIDATION-ABSENTE (pages sans empreinte) ; aucune
   alerte R3-NIVEAU-A-VERIFIER pour les pages du lot. Contrôles du lot (`controles-lot.txt`) : schémas, construction,

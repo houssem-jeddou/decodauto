@@ -1,11 +1,11 @@
 ---
 # Brouillon, jamais validé. Étape 11 (vague C), lot C4 : page « usure des pneus » (modèle pneus et obligations, format 2).
 # Pas d'empreinte tant que Houssem n'a pas validé son encadré (paquet du lot C4).
-# - Sources : notices relues à l'écran le 17/11/2026 vers 14 h 20 (travaux/etape-11/textes/releve-sources.md, §13) :
+# - Sources : notices relues à l'écran le 17/11/2026 vers 12 h 55 (travaux/etape-11/textes/releve-sources.md, §13) :
 #   Peugeot 208 p. 169, Citroën C3 p. 115, Renault Clio 5 phase 2 p. 346, Dacia Sandero 3 p. 307, Seat Ibiza p. 304-306 et
 #   308 ; Toyota Yaris non lue. Légifrance relu à l'écran le 17/11 : arrêté du 18 juillet 2019, article 5, et code de la
-#   route R314-1 (vers 1 h 50) ; annexe I de l'arrêté du 18 juin 1991, 5.2.3 d et e, et article 7 (vers 13 h 20, §14) ;
-#   R314-1 en entier et article 5 de l'arrêté de 2019 en entier (vers 15 h 10, §15).
+#   route R314-1 (vers 1 h 50) ; annexe I de l'arrêté du 18 juin 1991, 5.2.3 d et e, et article 7 (vers 13 h 15, §14) ;
+#   R314-1 en entier et article 5 de l'arrêté de 2019 en entier (vers 13 h 50, §15).
 # - Décisions du pilotage (règle 6, 17/11) : pneus usés, les cinq notices classées par la grille, niveau de l'obligation
 #   légale par la demande de changement n° 36 (proposée) ; pneu endommagé et vibrations : Seat seule, au niveau de sa
 #   citation ; « 6 ans » : seulement comme consigne Seat, jamais comme règle générale.

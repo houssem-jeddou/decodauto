@@ -231,9 +231,9 @@ défaillance critique (la fiche F2878 ne le dit pas : la page ne l'affirmera pas
 3. **Une seule notice** (Seat Leon pour le liquide de frein ; Seat Ibiza pour le vase vide ; Peugeot et Citroën, un seul
    groupe, pour la jauge) : admis pour une ligne saisie (charte §2.1), la page le dit ; à relire à l'écran d'abord.
 
-## 11. Relevé à l'écran du 17/11/2026 vers 12 h 15 (lot C2 : huiles)
+## 11. Relevé à l'écran du 17/11/2026 vers 11 h 50 (lot C2 : huiles)
 
-**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 12 h 15) : page imprimée, page du PDF entre
+**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 11 h 50) : page imprimée, page du PDF entre
 parenthèses. Recherche dans chaque PDF entier de « SAE », « viscosit », « ACEA », « vidange » : aucune viscosité ni grade
 SAE chez Peugeot, Citroën, Renault, Dacia ; chez Seat, seulement « ACEA C3 » (p. 294). **Aucune des cinq notices
 n'explique un grade.** Peugeot PDF 147 : page publicitaire d'une marque d'huile (« 0W-20 ») : ni consigne ni source
@@ -329,9 +329,9 @@ sur la 85W140.
 - p. 99 (PDF 101) : même texte d'autonomie de vidange que Renault ; « Vidange dans 30 000 km/24 mois » y est un exemple
   d'affichage, pas une périodicité : à ne pas citer comme telle.
 
-## 12. Relevé à l'écran du 17/11/2026 vers 13 h 30 (lot C3 : liquide de refroidissement, liquide de frein)
+## 12. Relevé à l'écran du 17/11/2026 vers 12 h 30 (lot C3 : liquide de refroidissement, liquide de frein)
 
-**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 13 h 30) : page imprimée, page du PDF entre
+**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 12 h 30) : page imprimée, page du PDF entre
 parenthèses. Toyota : non lu (même blocage, PDF sur s3.amazonaws.com). Décisions du pilotage du même jour (règle 6) :
 encadrés sur ces citations, le plus prudent l'emporte, écart signalé ; lignes de base `temperature-rouge` et
 `frein-rouge` reprises ; liquide marron (Seat seule) classé par la grille ; DOT 4 dit seulement comme Peugeot, Citroën et
@@ -435,9 +435,9 @@ le dépasser », « la température de ce liquide est régulée »).
   Dacia.
 - p. 349-350 (PDF 351-352) : même tableau « Le moteur chauffe » que Renault.
 
-## 13. Relevé à l'écran du 17/11/2026 vers 14 h 20 (lot C4 : usure des pneus, contre-visite)
+## 13. Relevé à l'écran du 17/11/2026 vers 12 h 55 (lot C4 : usure des pneus, contre-visite)
 
-**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 14 h 20) : page imprimée, page du PDF entre
+**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 12 h 55) : page imprimée, page du PDF entre
 parenthèses. Toyota : non lu (même blocage). Décisions du pilotage du même jour (règle 6) : pneus usés : les cinq notices
 donnent maintenant une consigne, classée par la grille ; demande de changement n° 36 (verdict d'une obligation légale :
 1,6 mm de l'arrêté du 18/07/2019, défaillances du contrôle technique), à partir du §10, point 1, avec ce que les notices
@@ -492,9 +492,9 @@ faites vérifier leur état par un Représentant de la marque. »
   notamment en présence de pluie et de verglas. Il est important que la profondeur des sculptures des pneus soit la plus
   grande possible, et qu'elle soit à peu près égale sur les pneus de l'essieu avant et arrière. »
 
-## 14. Relecture à l'écran du 17/11/2026 vers 13 h 20 (Légifrance, lot C4) : les cinq passages indispensables
+## 14. Relecture à l'écran du 17/11/2026 vers 13 h 15 (Légifrance, lot C4) : les cinq passages indispensables
 
-**Relu à l'écran** (Légifrance dans Chrome, 17/11/2026 vers 13 h 20), à la demande du lot C4
+**Relu à l'écran** (Légifrance dans Chrome, 17/11/2026 vers 13 h 15), à la demande du lot C4
 (`travaux/etape-11/lot-c4/a-relire-wf.md`, passages 1 à 5). Ces textes remplacent, pour ces passages, les extraits [WF]
 des §7 et §8. Les passages « utiles » (règlement ONU n° 30, arrêté de 2019 article 9, fiche F2878, intitulés des
 fonctions de l'annexe I) ne sont pas relus : les pages s'en passent (décision du pilotage).
@@ -532,9 +532,9 @@ complémentaire est prescrite, celle-ci est réalisée dans un nouveau délai de
 pas réalisée dans le même centre que celui où le contrôle périodique ou complémentaire qui a fait l'objet d'un résultat
 défavorable a été réalisé, une copie du contrôle périodique ou complémentaire est archivée avec le procès-verbal […]. »
 
-## 15. Relecture à l'écran du 17/11/2026 vers 15 h 10 (Légifrance, lot C4) : R314-1, R323-1, arrêté de 2019 article 5
+## 15. Relecture à l'écran du 17/11/2026 vers 13 h 50 (Légifrance, lot C4) : R314-1, R323-1, arrêté de 2019 article 5
 
-**Relu à l'écran** (Légifrance dans Chrome, 17/11/2026 vers 15 h 10), à la demande du lot C4
+**Relu à l'écran** (Légifrance dans Chrome, 17/11/2026 vers 13 h 50), à la demande du lot C4
 (`travaux/etape-11/lot-c4/points-ouverts.md`, §2). Ces textes complètent les phrases de sanction relevées au §7 et au §8.
 
 **Code de la route, article R314-1** (en vigueur depuis le 27 août 2020, décret n° 2020-1088) : « Les pneumatiques, à

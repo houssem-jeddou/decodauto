@@ -1,0 +1,26 @@
+{
+  "huile-moteur-320-chargee": {
+    "basReponseDirecte": 467,
+    "basVerdictUrgence": 674,
+    "basPremiereSituation": 823,
+    "largeurPage": 320
+  },
+  "huile-moteur-375-chargee": {
+    "basReponseDirecte": 424,
+    "basVerdictUrgence": 595,
+    "basPremiereSituation": 723,
+    "largeurPage": 375
+  },
+  "huile-moteur-320-secours": {
+    "basReponseDirecte": 467,
+    "basVerdictUrgence": 674,
+    "basPremiereSituation": 823,
+    "largeurPage": 320
+  },
+  "huile-moteur-375-secours": {
+    "basReponseDirecte": 424,
+    "basVerdictUrgence": 595,
+    "basPremiereSituation": 723,
+    "largeurPage": 375
+  }
+}

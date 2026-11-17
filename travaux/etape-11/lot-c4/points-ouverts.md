@@ -17,7 +17,7 @@
   (vague A), privée de sa ligne `validation`, fait échouer le contrôle (« encadré sans empreinte de validation ») ; la
   même page renommée en `usure-des-pneus` (vague C) est ignorée. `node --test tests/porte6.test.ts` : 4 sur 4.
 
-## 2. Relus à l'écran le 17/11 vers 15 h 10 (relevé, §15)
+## 2. Relus à l'écran le 17/11 vers 13 h 50 (relevé, §15)
 R314-1 et R323-1 en entier ; arrêté du 18 juillet 2019, article 5, en entier. Les pages les citent désormais tels qu'ils
 sont écrits (voir les paquets, §3).
 

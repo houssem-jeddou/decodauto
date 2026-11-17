@@ -22,7 +22,7 @@ au format 2, sujet « contrôle technique ».
   par Houssem le 14/11) et effet sur le résultat (A, S, R : article 7 relu le 17/11). Contre-visite : deux mois ;
   nouvelle contre-visite dans le même délai ; délai dépassé, contrôle complet (articles 7 et 8).
 
-## 1. Les lignes de l'encadré (arrêté du 18 juin 1991, article 7, relu à l'écran le 17/11 vers 13 h 20)
+## 1. Les lignes de l'encadré (arrêté du 18 juin 1991, article 7, relu à l'écran le 17/11 vers 13 h 15)
 
 | Ligne | Situation | Niveau | Extrait cité | Règle (demande n° 36) |
 |---|---|---|---|---|
@@ -38,7 +38,7 @@ Actions :
 3. « Le contrôle n'est plus valable : ne roulez pas avec la voiture. Il faut repasser un contrôle technique complet, et
    non plus une contre-visite. »
 
-- **Lignes 2 et 3, citation ajoutée** (après la relecture de 15 h 10) : code de la route, article R323-1, « Tout
+- **Lignes 2 et 3, citation ajoutée** (après la relecture de 13 h 50) : code de la route, article R323-1, « Tout
   propriétaire d'un véhicule mentionné au présent chapitre n'est autorisé à le mettre ou le maintenir en circulation
   qu'après un contrôle technique ayant vérifié qu'il est en bon état de marche et en état satisfaisant d'entretien. »
   → Non, ne poursuivez pas votre trajet · tout de suite (règle 1 de la demande n° 36 : l'interdiction elle-même).
@@ -61,10 +61,10 @@ Contrôle de la grille : aucune alerte R3-NIVEAU-A-VERIFIER pour la page.
 - Aucun montant ; le dépannage sur autoroute s'affiche de lui-même (lignes 2 et 3 à l'arrêt).
 
 ## 3. Extraits et faits : relus à l'écran
-- Articles 7 et 8 et annexe I, 5.2.3 : relus à l'écran le 17/11 vers 13 h 20 (relevé, §14). Article 5 (un seul
+- Articles 7 et 8 et annexe I, 5.2.3 : relus à l'écran le 17/11 vers 13 h 15 (relevé, §14). Article 5 (un seul
   contrôleur à la contre-visite) : relu le 17/11 vers 1 h 50. Définitions des défaillances (article 7) : relevé [E8] du
   14/11, lu par Houssem.
-- **R323-1 relu en entier le 17/11 vers 15 h 10** (relevé, §15), et la page changée en conséquence (changements après la
+- **R323-1 relu en entier le 17/11 vers 13 h 50** (relevé, §15), et la page changée en conséquence (changements après la
   recette du 42fea1b, non relus par un relecteur indépendant) : section « Rouler sans contrôle technique valable »
   réécrite sur le texte (autorisation de circuler seulement après un contrôle ; « mettre ou maintenir en circulation un
   véhicule sans avoir satisfait aux obligations de contrôle technique » puni de l'amende prévue pour les contraventions
@@ -88,7 +88,7 @@ Preuves : `recette/` (communes au lot).
 - **Mesures** (`mesures-format2.txt`, 375 × 667, police chargée / de secours) : réponse directe finie à 467 / 492 px ;
   verdict et urgence de la première situation à 599 / 623 (667 au plus) ; première situation entière à 685 / 710 ;
   encadré (3 lignes) fini à 1 342 / 1 367 ; illustration à 1 731 / 1 756 px, dans les trois premiers écrans ; page de
-  8 181 px (recette refaite après la relecture de 15 h 10 : bloc « Notices » plus long avec R323-1). À 320 px : verdict et urgence à 686 ; aucun débordement.
+  8 181 px (recette refaite après la relecture de 13 h 50 : bloc « Notices » plus long avec R323-1). À 320 px : verdict et urgence à 686 ; aucun débordement.
 - **Contrôle** (`controle.txt`) : seules erreurs, attendues, R4-VALIDATION-ABSENTE (pages sans empreinte) ; aucune
   alerte R3-NIVEAU-A-VERIFIER pour les pages du lot. Contrôles du lot (`controles-lot.txt`) : schémas, construction,
   `npm run liens` (1 138 liens, 0 problème), démonstration, indexation durable, modes : verts ; `npm test` : 865 sur 865

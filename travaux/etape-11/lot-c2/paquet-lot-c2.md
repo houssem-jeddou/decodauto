@@ -17,9 +17,9 @@ Page : `exemples/fluide/huile-moteur.md`, adresse `/huile-moteur/` (plan du site
   grade choisi seul ; la vidange, à son échéance. Erreur d'huile : ce que dit Seat. »
 - **Question de l'encadré** (distincte du H1, M4) : « Quelle huile mettre dans mon moteur, et à quel moment faire la
   vidange ? »
-- **Réponse directe** (règle 2c, demande n° 33) : « Celle que demande le plan ou le document d'entretien de votre
-  voiture pour son moteur : les notices lues ne donnent aucun grade valable pour toutes. La vidange se fait à l'échéance
-  de ce plan, que rappelle le combiné. » Sources : Peugeot 208 p. 166 ; Citroën C3 p. 113 ; Renault Clio 5 phase 2
+- **Réponse directe** (règle 2c, demande n° 33 ; M1 appliqué le 17/11 après la revue, 35 mots) : « Celle que demande le
+  plan ou le document d'entretien de votre voiture pour son moteur : les notices lues ne recommandent aucun grade. La
+  vidange se fait à l'échéance de ce plan, que rappelle le combiné. » Sources : Peugeot 208 p. 166 ; Citroën C3 p. 113 ; Renault Clio 5 phase 2
   p. 333 ; Dacia Sandero 3 p. 296 ; Seat Ibiza p. 293 ; ligne de base `entretien-vidange` (rappel au combiné).
 
 ## 0. Corrections après la revue indépendante (17/11, décisions du pilotage)
@@ -30,7 +30,7 @@ Page : `exemples/fluide/huile-moteur.md`, adresse `/huile-moteur/` (plan du site
 | I2 | Ligne « baisse anormale du niveau » retirée (elle ira sur la page « niveau d'huile » à sa prochaine révision, avec sa validation) ; la section « consommation » tient en une phrase avec un lien vers « niveau d'huile » (paire mère-enfant du plan) ; colonne « Consommation d'huile » retirée du tableau ; `structure-grades.md` renvoie vers cette page pour une autre huile versée, sans répéter la ligne. |
 | I3 | Seat p. 295 et son chiffre au §3 ; vidange et usage repris mot à mot : Renault et Dacia « Suivant véhicule, l'autonomie de vidange s'adapte au style de conduite » ; Seat p. 90 (conditions d'utilisation et style de conduite, 2 ans au plus) ; Seat p. 316 : les conditions difficiles visent « certains travaux », la page dit qu'elle ne nomme pas la vidange. |
 | I4 | §5 : raison de l'illustration au-delà de trois écrans, SEO 66 expliqué, sortie de `npm run liens` dans `recette/`. |
-| M1 à M6 | « ne recommandent aucun grade » ; « une fois » et « sur une Seat Ibiza » avant le tableau d'urgence ; attributions (Peugeot : plan d'entretien ; Citroën : recommandations du constructeur ; Renault et Dacia : représentant pour la capacité de vidange ; déduction « Le grade ne suffit donc pas » retirée) ; question de l'encadré distincte du H1 ; section « Vidange : les mises en garde des notices » (le brief exclut le tutoriel de vidange) ; description qui donne la réponse. |
+| M1 à M6 | « ne recommandent aucun grade », dans la section des grades et, depuis la retouche du 17/11 (le pilotage avait relevé que la réponse directe disait encore « ne donnent aucun grade valable pour toutes »), dans la réponse directe ; « une fois » et « sur une Seat Ibiza » avant le tableau d'urgence ; attributions (Peugeot : plan d'entretien ; Citroën : recommandations du constructeur ; Renault et Dacia : représentant pour la capacité de vidange ; déduction « Le grade ne suffit donc pas » retirée) ; question de l'encadré distincte du H1 ; section « Vidange : les mises en garde des notices » (le brief exclut le tutoriel de vidange) ; description qui donne la réponse. |
 
 ## 1. Les lignes de l'encadré
 
@@ -40,7 +40,7 @@ précautions** · **À faire dans les jours qui viennent**. Ligne `entretien-vid
 sa ligne d'écart de la base : « Plus stricts : Renault et Dacia (révision au plus vite, conduite avec ménagement). Moins
 stricts : Peugeot, Seat et Toyota (rappel d'entretien, sans précaution). »
 
-**L'ATTENTION Seat Ibiza p. 294, puce par puce** (relue à l'écran le 17/11 vers 12 h 15 ; relevé des sources, §11). En
+**L'ATTENTION Seat Ibiza p. 294, puce par puce** (relue à l'écran le 17/11 vers 11 h 50 ; relevé des sources, §11). En
 tête : « Si vous avez rempli une huile moteur différente de celles spécifiées dans les normes indiquées plus haut ou par
 votre service technique de SEAT, tenez compte de ce qui suit : »
 
@@ -92,7 +92,7 @@ elle y entrera à sa prochaine révision, avec sa validation.
 - Aucun montant en euros. Le dépannage sur autoroute s'affiche de lui-même (lignes 3 et 4 à l'arrêt).
 
 ## 3. Extraits et faits : relus à l'écran
-- **Relu à l'écran par Claude** le 17/11/2026 vers 12 h 15 (pdf.js dans Chrome) : Seat Ibiza p. 90, 293, 294, 296, 316 ;
+- **Relu à l'écran par Claude** le 17/11/2026 vers 11 h 50 (pdf.js dans Chrome) : Seat Ibiza p. 90, 293, 294, 296, 316 ;
   Peugeot 208 p. 165 (contact de l'huile usagée avec la peau), 166, 168 ; Citroën C3 p. 112, 113, 114 ; Renault Clio 5
   phase 2 p. 122, 330, 333 ; Dacia Sandero 3 p. 99, 294, 296, 297. Textes mot pour mot : relevé des sources, §11.
 - **Seat Ibiza p. 295** (I3), relue à l'écran le 17/11 vers 10 h 50 et 11 h 10 pour la page « niveau d'huile »
@@ -155,6 +155,13 @@ Preuves : `recette/` (`controle.txt`, `liens-production.txt`, `liens-recette.txt
   **SEO 66** (I4) : seul l'audit « is-crawlable » échoue, parce que la construction de recette est non indexable
   (noindex attendu) ; la construction de production n'a pas ce noindex une fois la page publiée.
 - **Captures** (`captures/`) : 320, 375 et 1366 px, deux polices (captures de secours identiques retirées).
+- **Retouche du 17/11 (réponse directe, M1)** : seuls le premier écran et ses mesures sont refaits, à 375 × 667 et
+  320 × 640, police chargée et police de secours (`captures/premier-ecran.cjs`, `captures/mesures-premier-ecran.json`,
+  `captures/huile-moteur-{320,375}-{chargee,secours}-ecran.png`) : à 375 px, réponse directe finie à 424 px, verdict et
+  urgence de la première situation à 595 px, première situation entière à 723 px (inchangés) ; à 320 px, réponse
+  directe à 467 px, verdict et urgence à 674 px (696 avant), aucun débordement. Les autres captures, les mesures de
+  toute la page et Lighthouse datent d'avant la retouche (seul le texte de la réponse directe change). Contrôle de la
+  construction de recette après la retouche : seule erreur, attendue, R4-VALIDATION-ABSENTE.
 
 ## 6. Points à trancher (avec ma recommandation)
 1. **Ligne 3 nouvelle** (doute sur l'huile versée) au niveau le plus prudent (décision du pilotage).
@@ -165,7 +172,8 @@ Preuves : `recette/` (`controle.txt`, `liens-production.txt`, `liens-recette.txt
 4. **Ligne « baisse anormale » retirée** et reportée sur la page « niveau d'huile ». **Recommandation : valider.**
 
 ## 7. Ligne de validation proposée (page « huile moteur »)
-« Je valide la page « huile moteur » : la question de décision, la réponse directe, les quatre lignes (rappel d'entretien
+« Je valide la page « huile moteur » : la question de décision, la réponse directe (« … les notices lues ne
+recommandent aucun grade… »), les quatre lignes (rappel d'entretien
 de la base à Oui, avec précautions et À faire dans les jours qui viennent ; autre huile versée à Oui, avec précautions et
 À faire tout de suite ; doute sur l'huile versée à Non, arrêtez-vous immédiatement et À faire tout de suite ; autre
 liquide versé à Non, arrêtez-vous immédiatement et À faire tout de suite), le coût, la fiche « L'essentiel », les deux

@@ -110,7 +110,7 @@ aux pneus (lot C4 : Seat p. 308, risque d'accident en roulant avec des pneus us�
 - Aucun montant en euros. Le dépannage sur autoroute s'affiche de lui-même (lignes à l'arrêt).
 
 ## 3. Extraits et faits : relus à l'écran
-- **Relu à l'écran** le 17/11/2026 vers 13 h 30 (relevé, §12) : Seat Ibiza p. 297-298 ; Peugeot 208 p. 167 ; Citroën C3
+- **Relu à l'écran** le 17/11/2026 vers 12 h 30 (relevé, §12) : Seat Ibiza p. 297-298 ; Peugeot 208 p. 167 ; Citroën C3
   p. 113 (extrait relu de nouveau le 17/11 par le pilotage, I2) ; Renault Clio 5 phase 2 p. 334-335 et 387 ; Dacia
   Sandero 3 p. 298, 349 (PDF 351 : « Le moteur chauffe », fuites, bouillonnement) et 350 (PDF 352 : radiateur).
 - Toyota Yaris p. 322-323 : extrait de la ligne de base `temperature-rouge` (validée).
