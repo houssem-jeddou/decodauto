@@ -71,18 +71,21 @@ seule à la fois, docs/03, règle 12), contrôlé à la porte de l'étape 11 :
    réservé à la vague A). Ouverture de la vague C (`config/vagues-ouvertes.json`) dans la pull request qui suit la porte
    de l'étape 10.
 
-## 4. Questions à trancher par Houssem
+## 4. Questions : décisions de Claude (règle 6, nuit du 17/11, sur la délégation de Houssem) et ce qui reste à Houssem
 
-1. **Réponse directe des pages fluides** : lever pour le type fluide la restriction de `reponse_directe` (demande n° 30,
-   règle 2c, déjà acceptée) ou passer par une demande de changement de structure ?
-2. **Niveau d'une obligation légale** (pneus usés, contrôle technique défavorable : relevé, §10) : reprendre la logique de
-   la loi montagne, et proposer avec le lot la demande de changement de la grille notée en idée reportée (paquet 6.6c,
-   décision 1) ?
-3. **Signification d'un grade SAE** (pages 5W30, 5W40, 10W40, et le tableau de la page « huile moteur ») : la norme SAE
-   J300 n'est pas achetée ; admettre une source secondaire (document technique d'un constructeur ou d'un équipementier,
-   ACEA) ou écrire des pages qui ne l'expliquent pas ? Les pages des marques d'huile sont exclues (charte §2.2).
-4. **Lignes à une seule notice** : vase d'expansion vide (Seat Ibiza), liquide de frein qui baisse (Seat Leon) : admises
-   par la charte (§2.1) si la page le dit ; à confirmer au paquet après relecture à l'écran.
+1. **Réponse directe des pages fluides** : décidé, aucune demande de changement. La demande n° 30 (acceptée) classe déjà
+   « huiles et liquides » parmi les pages informatives (règle 2c, précision 2a) ; le schéma qui réserve `reponse_directe`
+   aux pages pneus est un oubli de mise en œuvre, réparé par la partie technique du modèle fluide (PR #79).
+2. **Niveau d'une obligation légale** (pneus usés, contrôle technique défavorable : relevé, §10) : **à Houssem**, par la
+   demande de changement de la grille notée en idée reportée (paquet 6.6c, décision 1), proposée avec le lot qui en a
+   besoin (usure des pneus, contre-visite), avec la logique de la loi montagne.
+3. **Signification d'un grade SAE** : décidé (demande n° 31) : un document technique admis (ACEA, ou un constructeur ou
+   un équipementier) peut expliquer ce que veut dire le code, cité, jamais pour un verdict ni un conseil d'achat ; la
+   viscosité à mettre dans une voiture vient toujours de sa notice. Pages des marques d'huile exclues (charte §2.2).
+4. **Lignes à une seule notice** (vase d'expansion vide chez Seat Ibiza, liquide de frein qui baisse chez Seat Leon) :
+   gardées si la page le dit (charte §2.1) ; à confirmer par Houssem au paquet, après relecture à l'écran.
+5. **Requêtes principales** « liquide de refroidissement » et « liquide de frein » (31 600 recherches chacune contre
+   3 160 pour les requêtes actuelles) : demande de changement du plan à proposer avec le lot, comme pour la page fumée.
 
 ## 5. Pour la mémoire du projet
 
