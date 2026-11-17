@@ -8,8 +8,9 @@
 > Étape 11 (vague C), premier livrable de l'étape. Revue indépendante faite (17/11, « à corriger », rien de bloquant),
 > corrections faites avant la validation (§4).
 
-Page : `exemples/fluide/niveau-huile.md`, adresse `/huile-moteur/verifier-niveau/` (plan du site, vague C, page mère
-« huile moteur »), modèle fluide au format 2 (`pageFluideF2`, sur `main` depuis la PR n° 79), format tutoriel.
+Page : `src/content/fluide/niveau-huile.md` depuis le lot C1 (`exemples/fluide/niveau-huile.md` à la validation),
+adresse `/huile-moteur/verifier-niveau/` (plan du site, vague C, page mère « huile moteur »), modèle fluide au format 2
+(`pageFluideF2`, sur `main` depuis la PR n° 79), format tutoriel.
 
 - **Title** : « Niveau d'huile moteur : le vérifier à la jauge et faire l'appoint »
 - **H1** : « Niveau d'huile moteur : comment le vérifier, et que faire s'il est trop bas ou trop haut ? »
@@ -112,7 +113,7 @@ Les PDF des notices sont refusés par le proxy de ma session. **Relu à l'écran
 | Dacia Sandero 3 | p. 295 (PDF 297) | même phrase de l'entonnoir et du risque d'incendie ; « Il ne faut en aucun cas dépasser le niveau maximum de remplissage B : risque d'endommagement du moteur et du système de dépollution. », juste avant « Si le niveau MAXI est dépassé, ne démarrez pas votre véhicule et faites appel à un Représentant de la marque. » ; appoint moteur thermique froid, contact coupé ; capacité de 1,5 à 2 litres ; « attendez 20 minutes environ » | étapes 9, 11 ; ligne 2 (extrait et risque cité) |
 | Seat Ibiza | p. 295 (PDF 297) | stationner à l'horizontale, moteur au ralenti jusqu'à la température de fonctionnement, contact coupé, environ 2 minutes ; retirer, essuyer avec un chiffon propre, enfoncer jusqu'en butée, retirer, vérifier ; zones A, B, C ; consommation jusqu'à 0,5 l/1 000 km, plus élevée durant les 5 000 premiers km, contrôle de préférence après chaque plein et avant les longs trajets ; extrait de la ligne 2 ; appoint par petites quantités, 0,5 l au plus, environ 2 minutes avant de revérifier | étapes 2, 5 à 7, 10, 11 ; lignes 1 et 2 ; sections « fréquence » et « consommation » |
 | Seat Ibiza | p. 294 | « Par mesure de sécurité, il est recommandé de contrôler le niveau d'huile moteur à l'occasion de chaque passage à la pompe. » suit la ligne « Il clignote en jaune : dysfonctionnement du capteur » | remise dans son contexte (capteur défaillant), section du voyant orange |
-| Toyota Yaris | p. 247 | **non lue** (portail inaccessible) | la page le dit (tableau : « Non lu ») |
+| Toyota Yaris | p. 247 | **non lue** : portail inaccessible ; réessayée le 17/11 vers 12 h 15, PDF hébergé sur s3.amazonaws.com refusé par le navigateur | la page garde « Non lu » (tableau) |
 
 Autres faits du texte, conformes au texte extrait des PDF à l'étape 5 (pdf.js, sans retouche) : Peugeot p. 20 (jauge
 électrique ; « sol horizontal, moteur à l'arrêt depuis plus de 30 minutes » ; manque d'huile à confirmer à la jauge
@@ -161,8 +162,11 @@ la marque. »).
 
 ## 5. Recette (construction `AVEC_EXEMPLES=1`, branche à jour de `main` à ca16a7b)
 
-Preuves : `travaux/etape-11/recette-niveau-huile/` (`controle.txt`, `mesures-format2.txt`, `lighthouse.txt`,
-`mesures-captures.json`, `captures/`).
+État au 17/11, avant la validation de 11 h 34 (page encore dans `exemples/`, sans empreinte). Preuves :
+`travaux/etape-11/recette-niveau-huile/` (`controle.txt`, `mesures-format2.txt`, `lighthouse.txt`). Après la revue de la
+PR n° 84 (lot C1), les captures (`captures/`, `mesures-captures.json`) sont refaites avec la paire de liens et la nouvelle
+règle de l'accueil, et la recette est repassée : `controle-apres-revue.txt`, `mesures-format2-apres-revue.txt`,
+`lighthouse-apres-revue.txt`, `recette-etape-9.md`.
 
 - **Contrôle** : une seule erreur, attendue : R4-VALIDATION-ABSENTE (exemple jamais validé). Alerte de la page :
   R7-IMAGE-RECOMMANDEE (dessin du site). Liens : 1 136 liens internes, 0 problème. `npm test` : 864 sur 864 ;
@@ -198,7 +202,8 @@ Preuves : `travaux/etape-11/recette-niveau-huile/` (`controle.txt`, `mesures-for
 - **Paire de liens `niveau-huile` ↔ `moteur-puretech`** (à proposer dans la pull request du lot, à valider avec
   lui) : le dossier PureTech a les deux lignes de la jauge et renvoie au contrôle du niveau ; cette page dit comment le
   faire. Aujourd'hui, le plan ne lie pas les deux pages.
-- **Toyota Yaris p. 247** (contrôle du niveau) : non lue ; à lire avant la mise en ligne si le portail répond.
+- **Toyota Yaris p. 247** (contrôle du niveau) : non lue ; réessayée le 17/11 vers 12 h 15 (PDF hébergé sur
+  s3.amazonaws.com, refusé par le navigateur) ; la page garde « Non lu » ; accès demandé à Houssem.
 
 ## 7. Points à trancher (avec ma recommandation)
 

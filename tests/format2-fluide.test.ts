@@ -2,8 +2,9 @@
 // graphique §4 et de la charte éditoriale §4 : rôle, niveau, appoint, marche à suivre), fiche « L'essentiel » en carte
 // (composant « Fiches » de la charte), fiche du tutoriel, étapes et tableau du texte (élément unique), format 2 exigé (vague
 // C), contrôles d'aujourd'hui et du format 2, cas en échec dans les deux sens.
-// Page : le frontmatter de la page de démonstration tests/demo/format2-remplacees/fluide/niveau-huile.md (rendue par Astro dans la
-// construction DEMO_FORMAT2=1) ; le corps, un fragment HTML écrit pour le test, comme le rend Astro.
+// Page : le frontmatter de la page de démonstration tests/demo/format2-remplacees/fluide/niveau-huile.md (lue seulement par
+// ces tests depuis le lot C1, où la vraie page la remplace dans la construction de démonstration) ; le corps, un fragment
+// HTML écrit pour le test, comme le rend Astro.
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
