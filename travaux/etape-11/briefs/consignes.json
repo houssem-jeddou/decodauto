@@ -1,0 +1,307 @@
+{
+  "huile-moteur": {
+    "question_decision": "Quelle huile moteur mettre dans ma voiture, et quand faire la vidange ?",
+    "angle": "Page organe et page mère des quatre pages huile, informative (réponse directe en tête de l'encadré, demande n° 30) : l'huile à mettre est celle que la notice ou le plan d'entretien de votre voiture préconise pour son moteur (Peugeot 208 et Citroën C3 : « conforme aux recommandations indiquées dans le plan d'entretien »), pas un grade de viscosité choisi seul ; la vidange se fait à l'échéance du plan d'entretien, que rappellent le voyant clé ou un message (ligne de la base `entretien-vidange`, cinq notices). Décision en ligne de l'encadré : `entretien-vidange` (et `huile-niveau` si la page parle de l'appoint). Le texte explique ce qu'un grade (5W30, 15W40, 20W50…) dit et ne dit pas, sans le recommander.",
+    "element_unique": "Tableau des grades cités par les lecteurs (0W40, 5W30, 5W40, 10W40, 10W50, 10W60, 15W40, 20W50, SAE 30, 85W140) : ce que dit le code, et ce qu'il ne dit pas ; la 85W140 signalée comme huile de transmission, pas une huile moteur (docs/09, cas 3). Seulement si une source admise donne la signification des grades (voir « sources à trouver ») ; sinon, tableau « ce que dit chaque notice » (huile préconisée, rappel de vidange, contrôle du niveau).",
+    "a_traiter": [
+      "« Huile moteur diesel », « huile moteur essence » : la norme dépend du moteur, la notice ou le plan d'entretien la donne ; jamais de règle générale « diesel = telle huile » sans source.",
+      "« Quand faire la vidange », « vidange voiture diesel », « huile de vidange » : échéance du plan d'entretien et rappel par le voyant clé ou un message (base `entretien-vidange` : Peugeot 208 p. 19-20, Seat Ibiza p. 90, Renault Clio 5 p. 122 et 136, Dacia Sandero 3 p. 98 et 110, Toyota Yaris p. 300) ; aucune distance générale en km sans source (charte §2.2).",
+      "Entre deux vidanges : appoints normaux, contrôle avec appoint si nécessaire tous les 5 000 km, jamais d'additif dans l'huile moteur (Peugeot 208 p. 166, Citroën C3 p. 112-113, relus à l'écran le 16/11).",
+      "Pages enfants : huile 5W30, 5W40, 10W40 et niveau d'huile (liens calculés) ; pages liées : voyant huile, moteur PureTech.",
+      "Grades « 15W40 », « 20W50 », « SAE 30 », « 0W40 », « 10W50 », « 10W60 » : servis par le tableau, sans conseiller un grade à la place de celui de la notice.",
+      "« Huile 85W140 » : dire que c'est une huile de boîte ou de pont, pas une huile moteur, avec une source (à trouver)."
+    ],
+    "sources_a_trouver": [
+      "Rubrique « Huile moteur » et caractéristiques (norme d'huile par moteur) des notices de référence : Renault Clio 5 p. 330-332, Dacia Sandero 3 p. 294, Seat Ibiza p. 295, Toyota Yaris p. 247 (pages données par les renvois des extraits de l'étape 5), et le plan d'entretien Peugeot 208 et Citroën C3 (non au registre).",
+      "Signification d'un grade SAE (norme SAE J300, payante, non achetée) : une source secondaire admise (document technique, charte §2.2) à choisir ; le document ACEA 2023 renvoie à SAE J300 sans la redonner.",
+      "Huile 85W140 (huile de transmission, norme SAE J306) : document technique d'un constructeur ou d'un équipementier.",
+      "Élimination de l'huile usagée par un particulier : texte du code de l'environnement à identifier (l'article R543-6 lu le 17/11 ne porte que sur la collecte)."
+    ],
+    "hors_perimetre": [
+      "Prix de la vidange, des huiles et des bidons, marques d'huile, « où acheter », enseignes (docs/01, demande n° 6).",
+      "« Vidange opel corsa » : Opel n'est pas une marque de référence lue ; la page renvoie à la notice de la voiture, sans page par modèle.",
+      "« Vidange par aspiration » : aucune source admise lue ; ne rien affirmer, ou dire qu'on ne sait pas.",
+      "Tutoriel de vidange soi-même : non prévu au périmètre (docs/02 : page organe, « sans prix de prestations »)."
+    ],
+    "visuel": "Dessin « où lire l'huile qu'il vous faut » : la notice ou le plan d'entretien de la voiture (norme du constructeur), puis l'étiquette d'un bidon sans marque, avec trois zones repérées (grade de viscosité, classe ACEA, norme du constructeur) ; le bidon doit porter la norme que demande la notice. Signalé « Illustration decodauto. » ; aucune marque d'huile dessinée.",
+    "sources_a_citer": [
+      "Ligne de la base `entretien-vidange` (Peugeot 208 p. 19-20, Seat Ibiza p. 90, Renault Clio 5 p. 122 et 136, Dacia Sandero 3 p. 98 et 110, Toyota Yaris p. 300).",
+      "`notice-peugeot-208` p. 165-166 et `notice-citroen-c3` p. 112-113 [E10] : huile conforme à la motorisation et au plan d'entretien, appoints normaux, contrôle tous les 5 000 km, jamais d'additif.",
+      "`notice-toyota-yaris` p. 300 [E5] : « Entretien d'huile bientôt requis » (vidange à programmer).",
+      "`acea-oil-sequences-2023` (à admettre au registre) : classes C2, C3, C4, renvoi à SAE J300 [WF, à relire]."
+    ],
+    "pieges": [
+      "La page répond à « quelle huile mettre, et que veut dire ce code », jamais à « où l'acheter » : ni prix, ni marque d'huile, ni enseigne, ni lien d'achat (docs/01, demande n° 6).",
+      "Aucune distance de vidange générale (« tous les 15 000 km ») sans source : la notice ou le plan d'entretien de la voiture décide (charte §2.2).",
+      "Aucune règle « diesel = 5W40 » ou « vieux moteur = 10W40 » : ce sont des idées répandues sans source lue.",
+      "Une intention, une page : la question « 5W30 ou 5W40 ? » appartient aux pages de viscosité ; la page mère les présente et renvoie vers elles."
+    ]
+  },
+  "huile-5w30": {
+    "question_decision": "Puis-je mettre de l'huile 5W30 dans ma voiture ?",
+    "angle": "Répondre à « laquelle mettre, et que veut dire ce code », pas à « où l'acheter » : 5W30 est un grade de viscosité qui ne suffit pas à choisir une huile ; ce qui décide, c'est la norme écrite dans la notice ou le plan d'entretien de votre voiture (norme du constructeur, ou classe ACEA comme C2, C3, C4). Réponse directe en tête de l'encadré (page informative) ; la ligne de décision reste celle de la base sur l'alerte de niveau ou l'entretien, si la page en déclare une.",
+    "element_unique": "Tableau « ce qu'on lit sur un bidon de 5W30 » : grade SAE, classe ACEA (C2, C3, C4 : définitions du document ACEA 2023), norme du constructeur (exemples seulement s'ils sont lus dans une notice ou un document du constructeur : Renault RN17, Volkswagen 504 00 et 507 00 « Long Life »), et ce que chaque mention veut dire.",
+    "a_traiter": [
+      "« Huile 5w30 pour quel moteur » (3 160) : il n'y a pas de liste de moteurs ; c'est la notice de la voiture qui le dit. Questions associées relevées (docs/07) : « Quelles voitures utilisent de l'huile 5W30 ? », « Quelle est la différence entre 5W30 et 5W40 ? », « Quand utiliser de l'huile 5W30 ? », « Puis-je mettre de la 5W40 au lieu de la 5W30 ? ».",
+      "« 5w30 essence », « 5w30 diesel » : le grade ne dit pas essence ou diesel ; la classe ACEA et la norme du constructeur, oui (à sourcer).",
+      "« 5w30 c2 », « c3 », « c4 » : classes ACEA (document ACEA 2023, lu le 17/11 par lecture automatique, à relire).",
+      "« 5w30 rn17 », « huile long life 5w30 » : normes de constructeur ; ne les expliquer qu'avec un document du constructeur lu.",
+      "Lien vers la page 5W40 (plan) et la page mère « huile moteur ».",
+      "Aucune consigne d'une notice attribuée à un autre modèle (charte §2.5)."
+    ],
+    "sources_a_trouver": [
+      "Huile préconisée par moteur dans les notices de référence (pages à trouver, voir la page « huile moteur »).",
+      "Document ACEA « Oil Sequences 2023 – Light-duty engines » (acea.auto) : nature `document-technique` à faire admettre au registre (demande n° 31) ; définitions de C2, C3 et C4 à relire.",
+      "Document Renault sur la norme RN17 ; document Volkswagen sur 504 00 et 507 00 (communication ou document technique du constructeur)."
+    ],
+    "hors_perimetre": [
+      "Requêtes d'enseigne ou d'achat relevées par l'autocomplétion (« huile 5w30 leclerc », « action », « 5l ») : jamais visées (docs/01, demande n° 6).",
+      "Classement de marques d'huile, « meilleure huile 5W30 »."
+    ],
+    "visuel": "Dessin d'une étiquette de bidon 5W30 sans marque, avec trois repères : le grade 5W30 (ce qu'il dit, seulement si une source admise le donne), la classe ACEA, la norme du constructeur ; à côté, la notice ouverte à la rubrique de l'huile : « c'est elle qui décide ». Signalé « Illustration decodauto. ».",
+    "sources_a_citer": [
+      "`notice-peugeot-208` p. 166 et `notice-citroen-c3` p. 112-113 [E10] : huile conforme à la motorisation et au plan d'entretien.",
+      "`acea-oil-sequences-2023` (à admettre au registre) : définitions de C2, C3, C4 [WF, à relire].",
+      "Lignes de la base `huile-niveau` et `entretien-vidange` si la page déclare une ligne de décision."
+    ],
+    "pieges": [
+      "La page répond à « quelle huile mettre, et que veut dire ce code », jamais à « où l'acheter » : ni prix, ni marque d'huile, ni enseigne, ni lien d'achat (docs/01, demande n° 6).",
+      "Pas de liste « voitures compatibles 5W30 » : aucune source n'en donne ; renvoyer à la notice (charte §2.5 : aucune consigne transposée à un autre modèle).",
+      "Ne pas expliquer le code (« W » pour winter, viscosité à chaud) sans source admise : question ouverte du relevé (§4).",
+      "Volumes à lire comme des plafonds : surtout des requêtes d'achat (journal, « Pour l'étape 8 et les suivantes »)."
+    ]
+  },
+  "huile-5w40": {
+    "question_decision": "Puis-je mettre de l'huile 5W40 dans ma voiture ?",
+    "angle": "Même angle que la page 5W30 : le grade ne suffit pas, la norme de la notice décide ; dire ce que 5W40 change par rapport à 5W30 seulement avec une source admise ; réponse directe en tête de l'encadré.",
+    "element_unique": "Tableau « ce qu'on lit sur un bidon de 5W40 » (grade, classe ACEA comme C3, norme du constructeur), comme la page 5W30.",
+    "a_traiter": [
+      "« Huile 5w40 pour quel moteur » (3 160) : la notice de la voiture le dit.",
+      "« 5w40 diesel », « 5w40 essence » : la classe ACEA et la norme du constructeur, pas le grade.",
+      "« 5w40 c3 » : classe ACEA C3 (document ACEA 2023).",
+      "Différence avec la 5W30 et « mettre de la 5W40 au lieu de la 5W30 » : traité ici ou sur la page 5W30 (une intention, une page : à trancher au brief, la question vient du relevé de la 5W30) ; lien entre les deux pages (plan).",
+      "Page mère « huile moteur »."
+    ],
+    "sources_a_trouver": [
+      "Huile préconisée par moteur dans les notices de référence (voir la page « huile moteur »).",
+      "Document ACEA 2023 (classe C3), à faire admettre au registre."
+    ],
+    "hors_perimetre": [
+      "Prix, marques, enseignes, « où acheter »."
+    ],
+    "visuel": "Dessin d'une étiquette de bidon 5W40 sans marque, avec trois repères : le grade 5W40 (ce qu'il dit, seulement si une source admise le donne), la classe ACEA, la norme du constructeur ; à côté, la notice ouverte à la rubrique de l'huile : « c'est elle qui décide ». Signalé « Illustration decodauto. ».",
+    "sources_a_citer": [
+      "`notice-peugeot-208` p. 166 et `notice-citroen-c3` p. 112-113 [E10] : huile conforme à la motorisation et au plan d'entretien.",
+      "`acea-oil-sequences-2023` (à admettre au registre) : définitions de C2, C3, C4 [WF, à relire].",
+      "Lignes de la base `huile-niveau` et `entretien-vidange` si la page déclare une ligne de décision."
+    ],
+    "pieges": [
+      "La page répond à « quelle huile mettre, et que veut dire ce code », jamais à « où l'acheter » : ni prix, ni marque d'huile, ni enseigne, ni lien d'achat (docs/01, demande n° 6).",
+      "Pas de liste « voitures compatibles 5W40 » : aucune source n'en donne ; renvoyer à la notice (charte §2.5 : aucune consigne transposée à un autre modèle).",
+      "Ne pas expliquer le code (« W » pour winter, viscosité à chaud) sans source admise : question ouverte du relevé (§4).",
+      "Volumes à lire comme des plafonds : surtout des requêtes d'achat (journal, « Pour l'étape 8 et les suivantes »)."
+    ]
+  },
+  "huile-10w40": {
+    "question_decision": "Puis-je mettre de l'huile 10W40 dans ma voiture ?",
+    "angle": "Même angle que les pages 5W30 et 5W40 ; ne jamais écrire qu'une 10W40 convient « aux moteurs anciens » ou « aux moteurs qui consomment » sans source admise ; réponse directe en tête de l'encadré.",
+    "element_unique": "Tableau « ce qu'on lit sur un bidon de 10W40 » (grade, classe ACEA, norme du constructeur).",
+    "a_traiter": [
+      "« Huile moteur 10w40 essence », « 10w40 diesel » : la classe ACEA et la norme du constructeur, pas le grade.",
+      "Si la notice de votre voiture ne cite pas la 10W40 : suivre la notice (charte §2.4).",
+      "Page mère « huile moteur »."
+    ],
+    "sources_a_trouver": [
+      "Une notice de référence qui cite une 10W40, ou un document technique admis sur le grade ; sinon la page le dit."
+    ],
+    "hors_perimetre": [
+      "Prix, marques, enseignes, « où acheter »."
+    ],
+    "visuel": "Dessin d'une étiquette de bidon 10W40 sans marque, avec trois repères : le grade 10W40 (ce qu'il dit, seulement si une source admise le donne), la classe ACEA, la norme du constructeur ; à côté, la notice ouverte à la rubrique de l'huile : « c'est elle qui décide ». Signalé « Illustration decodauto. ».",
+    "sources_a_citer": [
+      "`notice-peugeot-208` p. 166 et `notice-citroen-c3` p. 112-113 [E10] : huile conforme à la motorisation et au plan d'entretien.",
+      "`acea-oil-sequences-2023` (à admettre au registre) : classes ACEA et renvoi à SAE J300 [WF, à relire].",
+      "Lignes de la base `huile-niveau` et `entretien-vidange` si la page déclare une ligne de décision."
+    ],
+    "pieges": [
+      "La page répond à « quelle huile mettre, et que veut dire ce code », jamais à « où l'acheter » : ni prix, ni marque d'huile, ni enseigne, ni lien d'achat (docs/01, demande n° 6).",
+      "Pas de liste « voitures compatibles 10W40 » : aucune source n'en donne ; renvoyer à la notice (charte §2.5 : aucune consigne transposée à un autre modèle).",
+      "Ne pas expliquer le code (« W » pour winter, viscosité à chaud) sans source admise : question ouverte du relevé (§4).",
+      "Volumes à lire comme des plafonds : surtout des requêtes d'achat (journal, « Pour l'étape 8 et les suivantes »)."
+    ]
+  },
+  "niveau-huile": {
+    "question_decision": "Niveau d'huile moteur : comment le vérifier, et puis-je démarrer s'il est trop bas ou trop haut ?",
+    "angle": "Tutoriel (format tutoriel du modèle fluide) et exemple du modèle fluide (exemples/fluide/niveau-huile.md, brouillon) : vérification sur sol plat, moteur arrêté depuis 30 minutes, à la jauge manuelle ou à l'indicateur du combiné (Peugeot 208 p. 166, Citroën C3 p. 112-113) ; sous le repère mini ou au-dessus du maxi, ne pas démarrer (lignes saisies déjà validées pour le dossier PureTech le 16/11) ; alerte de niveau et voyant de pression rouge repris de la base.",
+    "element_unique": "Tableau « ce que dit chaque notice sur le niveau d'huile » (comment le niveau bas est signalé, ce que demande la notice), en plus des étapes du tutoriel.",
+    "a_traiter": [
+      "« Vérifier le niveau d'huile moteur chaud ou froid » : moteur à l'arrêt depuis 30 minutes, sur un sol plat (Peugeot 208 p. 20 et 166, Citroën C3 p. 112-113).",
+      "« Bon niveau d'huile moteur » : entre les repères mini et maxi de la jauge.",
+      "« Faire le niveau d'huile » : appoint par petites quantités avec l'huile du plan d'entretien, revérifier quelques minutes après ; indicateur du combiné non valable pendant 30 minutes après un appoint ; jamais d'additif (Peugeot 208 p. 166).",
+      "À quelle fréquence : tous les 5 000 km (Peugeot 208, Citroën C3) ; à chaque passage à la pompe (Seat Ibiza p. 294).",
+      "« Pourquoi ma voiture consomme de l'huile » : appoints normaux entre deux vidanges ; baisse importante : faire vérifier le circuit (Peugeot 208 p. 165) ; aucune cause d'une consommation excessive dans les notices lues : le dire, avis d'un professionnel.",
+      "Page mère « huile moteur » ; pages liées : voyant huile, bruit moteur."
+    ],
+    "sources_a_trouver": [
+      "Procédure de la jauge (sortir, essuyer, replonger, lire) mot pour mot : Peugeot 208 p. 166 et Citroën C3 p. 112-113 (relevé du 16/11 incomplet sur ce point), Renault Clio 5 p. 330-332, Dacia Sandero 3 p. 294, Seat Ibiza p. 295, Toyota Yaris p. 247.",
+      "Consigne des autres marques sous le mini ou au-dessus du maxi (aujourd'hui : Peugeot 208 et Citroën C3 seulement, un seul groupe)."
+    ],
+    "hors_perimetre": [
+      "Achat d'huile, prix, marques.",
+      "Méthode pour éteindre l'alerte sans traiter sa cause (charte §2.4)."
+    ],
+    "visuel": "Illustration existante `jauge-huile` (jauge, repères MINI et MAXI, « Sol plat, moteur arrêté depuis 30 min »), reprise dans l'exemple ; à terme, un dessin propre à la page qui ajoute où se trouve la jauge sous le capot et les deux cas où l'on ne démarre pas (sous le mini, au-dessus du maxi), une fois la procédure relue mot pour mot.",
+    "sources_a_citer": [
+      "Lignes de la base `huile-niveau` et `huile-pression-rouge`.",
+      "Lignes saisies de la jauge (sous le mini, au-dessus du maxi) : `notice-peugeot-208` p. 166 et `notice-citroen-c3` p. 112-113 [E10], validées pour le dossier PureTech le 16/11.",
+      "`notice-peugeot-208` p. 20 et 165-166 [E5, E10] ; `notice-seat-ibiza` p. 294 [E5] ; `notice-renault-clio-5` p. 131 et 386 [E5, E10] ; `notice-dacia-sandero-3` p. 105 et 348-349 [E5, E10] ; `notice-toyota-yaris` p. 299 [E5]."
+    ],
+    "pieges": [
+      "Ne pas décrire la manipulation de la jauge (essuyer, replonger) tant qu'elle n'est pas relue mot pour mot dans une notice.",
+      "Ne pas attribuer la consigne Peugeot et Citroën (ne pas démarrer) aux autres marques : la page dit qu'elle vient de ces deux notices.",
+      "« Chaud ou froid » : répondre par ce que dit la notice (moteur arrêté depuis 30 minutes), sans règle générale « moteur froid » non sourcée.",
+      "Achat d'huile : hors objectif (docs/01)."
+    ]
+  },
+  "liquide-de-refroidissement": {
+    "question_decision": "Quel liquide de refroidissement mettre, et puis-je rouler s'il en manque ?",
+    "angle": "Page fluide informative : le liquide préconisé par la notice (Seat Ibiza p. 297 : G12evo, au moins 40 % d'additif, protection jusqu'à -25 °C), le niveau contrôlé moteur froid entre les repères, l'appoint s'il reste du liquide, jamais le bouchon ouvert moteur chaud (Seat p. 298 ; Peugeot 208 p. 167 et Citroën C3 p. 113 : attendre au moins une heure). Lignes : `temperature-rouge` (base) ; saisies proposées : vase d'expansion vide (Seat p. 298 : arrêtez-vous) et niveau proche ou sous le mini, liquide encore présent (Peugeot p. 167, Citroën p. 113 : appoint impératif, moteur froid).",
+    "element_unique": "Tableau « ce que dit chaque notice » : liquide préconisé, couleur (seule Seat la nomme : lilas ; marron = mélange inadapté), quand contrôler, appoint, ce qui est interdit.",
+    "a_traiter": [
+      "« Liquide de refroidissement rose », couleurs : la couleur ne remplace pas la norme ; seule la notice Seat Ibiza nomme une couleur (p. 297).",
+      "« G12 », « liquide de refroidissement g12 » : Seat Ibiza demande l'additif G12evo (p. 297) ; ne rien dire d'autre du G12 sans source.",
+      "« Antigel voiture » : protection jusqu'à -25 °C avec au moins 40 % d'additif (Seat p. 297).",
+      "« Vase d'expansion voiture » (section vase d'expansion et durits, précision de docs/05) : où lire le niveau, moteur froid ; ne jamais l'ouvrir moteur chaud.",
+      "« Durit liquide de refroidissement » : Toyota Yaris p. 322-323 (vérifier durites et radiateur, moteur refroidi) ; pièce `durites-et-colliers`.",
+      "« Pourquoi ma voiture consomme du liquide de refroidissement » : appoint normal entre deux révisions (Peugeot p. 167) ; perte : atelier (Seat p. 298) ; bouillonnement dans le bocal : joint de culasse détérioré, arrêter le moteur (Renault Clio 5 p. 387, Dacia Sandero 3, même tableau, p. 348-350).",
+      "Page liée : moteur qui surchauffe (voyant température : ligne de la base `temperature-rouge`).",
+      "Requête principale à revoir (journal, « Pour l'étape 8 et les suivantes ») : « liquide de refroidissement » (31 600, variante non comptée de « liquide refroid ») contre « liquide de refroidissement voiture » (3 160) : demande de changement du plan à proposer avec le lot, sur le modèle de la page fumée."
+    ],
+    "sources_a_trouver": [
+      "Liquide préconisé par les notices Peugeot 208, Citroën C3, Renault Clio 5, Dacia Sandero 3 et Toyota Yaris (rubrique « Liquide de refroidissement » ou caractéristiques).",
+      "Peugeot et BMW : « liquide de refroidissement peugeot » : notice Peugeot 208 à relire ; BMW n'est pas une marque de référence (renvoyer à la notice)."
+    ],
+    "hors_perimetre": [
+      "Prix, marques de liquide, « où acheter ».",
+      "« Liquide de refroidissement bmw » : aucune notice BMW lue ; pas de consigne attribuée à BMW."
+    ],
+    "visuel": "Dessin du vase d'expansion (bocal translucide, repères MINI et MAXI, bouchon) : « niveau lu moteur froid », « ne jamais ouvrir moteur chaud », et l'appoint seulement s'il reste du liquide. Signalé « Illustration decodauto. ».",
+    "sources_a_citer": [
+      "Ligne de la base `temperature-rouge`.",
+      "`notice-seat-ibiza` p. 297-298 [E10] (G12evo, appoint seulement s'il reste du liquide, arrêt si le vase est vide, bouchon jamais ouvert moteur chaud).",
+      "`notice-peugeot-208` p. 167 et `notice-citroen-c3` p. 113 [E10] (contrôle moteur froid, appoint impératif près du mini, attendre une heure).",
+      "`notice-renault-clio-5` p. 386-387 et `notice-dacia-sandero-3` p. 348-350 [E10] (fuite, bouillonnement, radiateur).",
+      "`notice-toyota-yaris` p. 322-323 (durites et radiateur, ligne `temperature-rouge`).",
+      "`arrete-1991-06-18-controle-technique`, annexe I, 8.4.1 [WF, à relire]."
+    ],
+    "pieges": [
+      "Couleur : ne jamais dire qu'une couleur garantit la compatibilité ; seule Seat nomme une couleur.",
+      "Ne pas transposer le G12evo de Seat aux autres marques.",
+      "Pas de prix, de marque de liquide ni de lien d'achat ; « bmw » : renvoyer à la notice.",
+      "Jamais conseiller d'ouvrir le circuit moteur chaud ; l'eau en dépannage n'est citée que comme le dit Toyota (à relire)."
+    ]
+  },
+  "liquide-de-frein": {
+    "question_decision": "Puis-je rouler si le niveau de liquide de frein baisse, et quand faut-il le changer ?",
+    "angle": "Page fluide : un niveau de liquide de frein bas est une alerte de sécurité (ligne de la base `frein-rouge` : arrêt, cinq notices) ; au réservoir, un niveau sous le repère ou qui baisse vite : faire appel à un spécialiste (Seat Leon p. 370, ligne saisie proposée, une seule notice) ; le contrôle technique classe le niveau sous MIN en défaillance majeure et l'absence de liquide en critique (annexe I, 1.1.10.d) ; le remplacement se fait au garage (Seat Leon : vidange par un service technique).",
+    "element_unique": "Tableau : ce que disent les notices et le contrôle technique (niveau sous le mini, pas de liquide visible, liquide contaminé, témoin), avec le niveau de défaillance.",
+    "a_traiter": [
+      "« DOT 4 », « liquide de frein dot 4 » : la notice de la voiture donne la norme ; la page ne la donne qu'avec une notice lue (à trouver).",
+      "« Remplacement liquide de frein » (intention tutoriel) : Seat Leon recommande de faire faire la vidange par un service technique (p. 370) ; pas de tutoriel de purge ; pièce `liquide-de-frein`.",
+      "Quand le changer : intervalle du plan d'entretien (à sourcer) ; jamais de durée générale sans source.",
+      "Pages liées : voyant frein (base `frein-rouge`), et le contrôle technique (annexe I, points 1.1.10 et 1.8.1).",
+      "Requête principale à revoir (journal) : « liquide de frein » (31 600, variante non comptée de « frein liquide ») contre « liquide de frein voiture » (3 160) : demande de changement du plan à proposer avec le lot."
+    ],
+    "sources_a_trouver": [
+      "Rubrique « Liquide de frein » des notices de référence (Peugeot 208 p. 165-168 lues le 16/11 pour d'autres rubriques, sans relevé de celle-ci ; Seat Ibiza, Renault Clio 5, Dacia Sandero 3, Toyota Yaris) : norme (DOT), contrôle du niveau, intervalle de remplacement.",
+      "Seat Leon p. 370 : relue par extraction du texte du PDF ; à relire à l'écran avant de la citer dans un encadré."
+    ],
+    "hors_perimetre": [
+      "Prix, marques, « où acheter » ; purge des freins soi-même."
+    ],
+    "visuel": "Dessin du réservoir de liquide de frein (repères MIN et MAX) : où lire le niveau, et les deux cas à ne pas laisser passer (sous le MIN, baisse rapide). Signalé « Illustration decodauto. ».",
+    "sources_a_citer": [
+      "Ligne de la base `frein-rouge`.",
+      "`notice-seat-leon` p. 370 [E8, à relire à l'écran].",
+      "`notice-peugeot-208` p. 14 [E5] et p. 165 [E10].",
+      "`arrete-1991-06-18-controle-technique`, annexe I, 1.1.10 et 1.8.1 [WF et E8]."
+    ],
+    "pieges": [
+      "« DOT 4 » : ne pas affirmer qu'un liquide convient à toutes les voitures ; la notice donne la norme.",
+      "Pas de tutoriel de purge ni de remplacement soi-même (Seat Leon : vidange par un service technique).",
+      "Pas d'intervalle de remplacement (« tous les 2 ans ») sans source.",
+      "Achat de liquide, prix : hors objectif."
+    ]
+  },
+  "usure-des-pneus": {
+    "question_decision": "Puis-je rouler avec des pneus usés, et comment savoir s'ils le sont ?",
+    "angle": "Page pneus et obligations, informative (réponse directe : un pneu est usé quand ses rainures principales atteignent 1,6 mm, signalés par les témoins d'usure : arrêté du 18 juillet 2019, art. 5). Texte de référence : arrêté du 18 juillet 2019 relatif aux pneumatiques (Légifrance) ; défaillances du contrôle technique (annexe I, 5.2.3.e : usure anormale mineure, indicateur atteint majeure, profondeur non conforme critique ; d.3 corde visible critique) ; sanction : code de la route R314-1 (quatrième classe, immobilisation possible). Niveau des lignes à trancher (obligation légale : idée reportée sur la grille).",
+    "element_unique": "Tableau « ce que disent les textes » (profondeur légale, témoins d'usure, contrôle technique, sanction) ; ou un outil « lire la date de fabrication » si la partie technique le permet (journal : élément unique en outil quand la réponse tient en un chiffre).",
+    "a_traiter": [
+      "« Témoin d'usure pneu », « témoin pneu » : bossages au fond des rainures (règlement ONU n° 30, § 2.27) qui signalent 1,6 mm (arrêté 2019, art. 5) ; « témoin pneu » peut viser le voyant de pression : lien vers la page voyant pression des pneus (docs/09, cas 2).",
+      "« Pneu usé », « usure pneu » : 1,6 mm dans les rainures principales, pendant toute l'utilisation sur route (art. 5).",
+      "« Date fabrication pneu » : groupe de quatre chiffres, semaine puis année (règlement ONU n° 30, § 3.1.9) ; aucune limite d'âge légale trouvée : la page le dit.",
+      "Usure anormale ou prématurée : le sous-gonflage provoque l'usure prématurée (Peugeot 208 p. 110) : lien vers pression des pneus.",
+      "Contrôle technique : lien vers la page contre-visite ; loi montagne (pneus hiver) : lien.",
+      "Amende : quatrième classe (R314-1) ; montant forfaitaire et décompte par pneu à vérifier avant de l'afficher (journal, points ouverts)."
+    ],
+    "sources_a_trouver": [
+      "Consigne des notices sur les témoins d'usure et le remplacement des pneus (rubrique « Pneumatiques » des six notices, non relevée).",
+      "Règlement ONU n° 30 : version consolidée en vigueur (le texte lu est la révision 3 de 2007) ; à inscrire au registre (catégorie `reglement-onu`, pour le fait, jamais pour un verdict).",
+      "Montant de l'amende forfaitaire de quatrième classe (code de procédure pénale) et application par pneu."
+    ],
+    "hors_perimetre": [
+      "Dimensions de pneus, marques, prix, « où acheter des pneus » (achat générique, docs/02).",
+      "Chaînes et chaussettes (achat, hors périmètre)."
+    ],
+    "visuel": "Dessin d'une bande de roulement vue de dessus et en coupe : une rainure principale avec son témoin d'usure (bossage) à 1,6 mm, et le flanc avec la date de fabrication en quatre chiffres (semaine, année). Signalé « Illustration decodauto. ».",
+    "sources_a_citer": [
+      "`arrete-2019-07-18-pneumatiques`, article 5 [WF, à relire] (texte de référence).",
+      "`code-de-la-route-r314-1` [WF, à relire] (sanction).",
+      "`arrete-1991-06-18-controle-technique`, annexe I, 5.2.3 (d, e) [WF, à relire].",
+      "`reglement-onu-30`, § 2.27, 3.1.9, 6.3.3 [WF, à relire] (fait, jamais un verdict).",
+      "`notice-peugeot-208` p. 110 [E8] (le sous-gonflage use les pneus)."
+    ],
+    "pieges": [
+      "Aucune limite d'âge (« un pneu se change à 5 ans ») sans texte : aucun trouvé.",
+      "Aucun montant d'amende sans texte de Légifrance et sans savoir s'il compte par pneu (journal).",
+      "Dimensions, marques, prix de pneus : achat générique, hors périmètre (docs/02).",
+      "« Témoin pneu » peut désigner le voyant de pression : le dire et lier la page du voyant."
+    ]
+  },
+  "contre-visite-controle-technique": {
+    "question_decision": "Contrôle technique défavorable : puis-je encore rouler, et dans quel délai faire la contre-visite ?",
+    "angle": "Page pneus et obligations (sujet contrôle technique), informative : réponse directe (contre-visite dans les deux mois ; défaillance majeure : contrôle valable deux mois ; critique : valable le jour du contrôle seulement : arrêté du 18 juin 1991, art. 7) ; fiche « Le texte en bref » avec les trois défaillances et la contre-visite ; délai dépassé : nouveau contrôle complet (art. 7) ; nouvelle contre-visite si une défaillance reste (art. 8) ; centre au choix et sanction (Service-public F2878, application du texte). Niveau des lignes à trancher (obligation légale : idée reportée sur la grille).",
+    "element_unique": "Tableau « résultat du contrôle → validité → délai de contre-visite → ce que vous pouvez faire », ou un outil « date limite de ma contre-visite » si la partie technique le permet.",
+    "a_traiter": [
+      "« Délais contre visite », « contre visite dépassée de 1 jour » : deux mois après le contrôle ; au-delà, nouveau contrôle périodique (art. 7).",
+      "« Défaillance critique », « défaillance majeure » : définitions de l'article 7, citées mot pour mot.",
+      "« Peut-on faire plusieurs contre-visites », « contre visite refusée » : nouvelle contre-visite dans la limite de deux mois (art. 8).",
+      "« Points de contrôle technique » : les fonctions de l'annexe I (à relever sur Légifrance, sans nombre de points non sourcé).",
+      "Voyants et contrôle technique : liens vers les pages voyant moteur, airbag, ABS et ESP (points 8.2.12, 7.1.5 et 7.1.6, 1.6.1 relevés à l'étape 8) ; usure des pneus (5.2.3.e).",
+      "Rouler sans contrôle valable : code de la route R323-1 (quatrième classe, immobilisation possible, version du 01/01/2026) ; montant à sourcer avant de l'afficher."
+    ],
+    "sources_a_trouver": [
+      "Fiche Service-public F2878 en français (lue le 17/11 dans sa version anglaise, par lecture automatique) : à relire et à inscrire au registre (nature `administration`).",
+      "Points de contrôle d'un véhicule de collection (règles propres, fiche Service-public dédiée) : à lire avant de traiter ce mot-clé.",
+      "Liste des fonctions de l'annexe I (intitulés des sections 0 à 9) mot pour mot."
+    ],
+    "hors_perimetre": [
+      "Prix du contrôle technique, choix d'un centre, enseignes (docs/02 : « ni prix ni centres »).",
+      "Démarches de carte grise (hors périmètre, docs/02)."
+    ],
+    "visuel": "Frise du temps « jour du contrôle → deux mois » : résultat avec défaillance majeure (contrôle valable deux mois, contre-visite avant la fin), défaillance critique (valable le jour du contrôle), délai dépassé (nouveau contrôle complet). Signalé « Illustration decodauto. ».",
+    "sources_a_citer": [
+      "`arrete-1991-06-18-controle-technique`, articles 5, 7 et 8, annexe I [E8 et WF].",
+      "`code-de-la-route-r323-1` [WF, à relire].",
+      "`service-public-controle-technique` (fiche F2878, nature `administration`) [WF, à relire en français].",
+      "Points de l'annexe I liés aux voyants (relevé de l'étape 8) pour les liens vers les pages voyants."
+    ],
+    "pieges": [
+      "Ni prix, ni centre, ni enseigne (docs/02).",
+      "Ne pas dire qu'on peut rouler pour aller réparer après une défaillance critique : aucun texte lu ne le dit.",
+      "Montant de l'amende : seulement rattaché à un texte de Légifrance (code de procédure pénale), daté (charte §2.3).",
+      "Véhicules de collection : ne rien affirmer avant d'avoir lu leurs règles."
+    ]
+  }
+}
