@@ -1,0 +1,48 @@
+Construction de production de main comparée à celle de la branche etape-11/lot-c1 (revue de la PR n° 84, I1), 17/11/2026.
+main : ca16a7b (origin/main). Branche : f28d014 et la règle CSS de la carte « Un guide indépendant » (commit qui porte ce fichier).
+Commandes : SITE_INDEXABLE=true npx astro build --outDir dist-prod dans chaque copie de travail ; diff -rq ; puis comparaison sans le bloc <style> intégré (travaux/etape-11/recette-niveau-huile/comparer-sans-style.py).
+
+## diff -rq
+Files main/404.html and branche/404.html differ
+Files main/a-propos/index.html and branche/a-propos/index.html differ
+Files main/batterie-voiture/changer/index.html and branche/batterie-voiture/changer/index.html differ
+Files main/batterie-voiture/index.html and branche/batterie-voiture/index.html differ
+Files main/batterie-voiture/recharger/index.html and branche/batterie-voiture/recharger/index.html differ
+Files main/bruit-moteur/index.html and branche/bruit-moteur/index.html differ
+Files main/codes-defaut/p0087/index.html and branche/codes-defaut/p0087/index.html differ
+Files main/codes-defaut/p0299/index.html and branche/codes-defaut/p0299/index.html differ
+Files main/codes-defaut/p0420/index.html and branche/codes-defaut/p0420/index.html differ
+Files main/fumee-echappement/index.html and branche/fumee-echappement/index.html differ
+Only in branche: huile-moteur
+Files main/index.html and branche/index.html differ
+Files main/loi-montagne/index.html and branche/loi-montagne/index.html differ
+Files main/mentions-legales/index.html and branche/mentions-legales/index.html differ
+Files main/moteur-puretech/index.html and branche/moteur-puretech/index.html differ
+Files main/moteur-qui-surchauffe/index.html and branche/moteur-qui-surchauffe/index.html differ
+Files main/nettoyer-fap/index.html and branche/nettoyer-fap/index.html differ
+Files main/perte-de-puissance-voiture/index.html and branche/perte-de-puissance-voiture/index.html differ
+Files main/pression-des-pneus/index.html and branche/pression-des-pneus/index.html differ
+Files main/sitemap.xml and branche/sitemap.xml differ
+Files main/voiture-ne-demarre-pas/index.html and branche/voiture-ne-demarre-pas/index.html differ
+Files main/voiture-qui-broute/index.html and branche/voiture-qui-broute/index.html differ
+Files main/voyants/abs-esp/index.html and branche/voyants/abs-esp/index.html differ
+Files main/voyants/adblue/index.html and branche/voyants/adblue/index.html differ
+Files main/voyants/airbag/index.html and branche/voyants/airbag/index.html differ
+Files main/voyants/batterie/index.html and branche/voyants/batterie/index.html differ
+Files main/voyants/direction/index.html and branche/voyants/direction/index.html differ
+Files main/voyants/fap/index.html and branche/voyants/fap/index.html differ
+Files main/voyants/frein/index.html and branche/voyants/frein/index.html differ
+Files main/voyants/huile/index.html and branche/voyants/huile/index.html differ
+Files main/voyants/index.html and branche/voyants/index.html differ
+Files main/voyants/moteur/index.html and branche/voyants/moteur/index.html differ
+Files main/voyants/prechauffage/index.html and branche/voyants/prechauffage/index.html differ
+Files main/voyants/pression-pneus/index.html and branche/voyants/pression-pneus/index.html differ
+
+## Différences hors feuille de style (premier écart de chaque page, en contexte)
+CONTENU index.html | ></li><li><a href="/moteur-puretech/">Moteur PureTech</a></li></ul></section><section class="theme" data-accueil-theme="niveaux-et-fluides" aria-labelledby="da-accueil-niveaux-et-fluides"><h2 id="da-accueil-niveaux-et-fluides">Niveaux et fluides</h2><ul><li><a href="/huile-moteur/verifier-niveau/">Niveau d’huile</a></li></ul></section><section class="theme" 
+AUTRE sitemap.xml
+NOUVEAU huile-moteur/verifier-niveau/index.html
+CONTENU bruit-moteur/index.html | ="liees" data-pages-liees aria-labelledby="da-a-lire-aussi"><h2 id="da-a-lire-aussi">À lire aussi</h2><ul><li><a href="/huile-moteur/verifier-niveau/"><span>Niveau d’huile</span></a></li><li><a href="/moteur-puretech/"><span>Moteur PureTech</span></a></li></ul></nav><details class="sources" id="da-sources" data-sources><summary>Sources (9)</summary><ol><li d
+CONTENU voyants/huile/index.html | ="liees" data-pages-liees aria-labelledby="da-a-lire-aussi"><h2 id="da-a-lire-aussi">À lire aussi</h2><ul><li><a href="/huile-moteur/verifier-niveau/"><span>Niveau d’huile</span></a></li><li><a href="/moteur-puretech/"><span>Moteur PureTech</span></a></li></ul></nav><details class="sources" id="da-sources" data-sources><summary>Sources (10)</summary><ol><li 
+CONTENU moteur-puretech/index.html | -6h-6z"/><path d="M14 30H8v10h6"/><path d="M24 18h-4M32 18v-4M26 14h12"/></svg> </span><span>Code P0420</span></a></li><li><a href="/huile-moteur/verifier-niveau/"><span>Niveau d’huile</span></a></li></ul></nav><details class="sources" id="da-sources" data-sources><summary>Sources (15)</summary><ol><li data-source-id="notice-peugeot-208"><a href="https://pub
+STYLE SEULEMENT : 28 pages

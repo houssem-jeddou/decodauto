@@ -1,0 +1,110 @@
+{
+  "enligne-375-chargee": {
+    "hauteurPage": 2443,
+    "cartes": 4,
+    "rangees": 4,
+    "largeurPage": 375
+  },
+  "enligne-375-secours": {
+    "hauteurPage": 2476,
+    "cartes": 4,
+    "rangees": 4,
+    "largeurPage": 375
+  },
+  "enligne-768-chargee": {
+    "hauteurPage": 1485,
+    "cartes": 4,
+    "rangees": 2,
+    "largeurPage": 768
+  },
+  "enligne-768-secours": {
+    "hauteurPage": 1485,
+    "cartes": 4,
+    "rangees": 2,
+    "largeurPage": 768
+  },
+  "enligne-1366-chargee": {
+    "hauteurPage": 1415,
+    "cartes": 4,
+    "rangees": 1,
+    "largeurPage": 1366
+  },
+  "enligne-1366-secours": {
+    "hauteurPage": 1415,
+    "cartes": 4,
+    "rangees": 1,
+    "largeurPage": 1366
+  },
+  "apres-375-chargee": {
+    "hauteurPage": 2536,
+    "cartes": 5,
+    "rangees": 5,
+    "largeurPage": 375
+  },
+  "apres-375-secours": {
+    "hauteurPage": 2569,
+    "cartes": 5,
+    "rangees": 5,
+    "largeurPage": 375
+  },
+  "apres-768-chargee": {
+    "hauteurPage": 1561,
+    "cartes": 5,
+    "rangees": 3,
+    "largeurPage": 768
+  },
+  "apres-768-secours": {
+    "hauteurPage": 1561,
+    "cartes": 5,
+    "rangees": 3,
+    "largeurPage": 768
+  },
+  "apres-1366-chargee": {
+    "hauteurPage": 1532,
+    "cartes": 5,
+    "rangees": 2,
+    "largeurPage": 1366
+  },
+  "apres-1366-secours": {
+    "hauteurPage": 1532,
+    "cartes": 5,
+    "rangees": 2,
+    "largeurPage": 1366
+  },
+  "avant-correction-375-chargee": {
+    "hauteurPage": 2536,
+    "cartes": 5,
+    "rangees": 5,
+    "largeurPage": 375
+  },
+  "avant-correction-375-secours": {
+    "hauteurPage": 2569,
+    "cartes": 5,
+    "rangees": 5,
+    "largeurPage": 375
+  },
+  "avant-correction-768-chargee": {
+    "hauteurPage": 1608,
+    "cartes": 5,
+    "rangees": 3,
+    "largeurPage": 768
+  },
+  "avant-correction-768-secours": {
+    "hauteurPage": 1608,
+    "cartes": 5,
+    "rangees": 3,
+    "largeurPage": 768
+  },
+  "avant-correction-1366-chargee": {
+    "hauteurPage": 1648,
+    "cartes": 5,
+    "rangees": 2,
+    "largeurPage": 1366
+  },
+  "avant-correction-1366-secours": {
+    "hauteurPage": 1648,
+    "cartes": 5,
+    "rangees": 2,
+    "largeurPage": 1366
+  }
+}
