@@ -1,6 +1,12 @@
 # Paquet de validation du lot C2 : page « huile moteur » (les pages de grade suivront)
 
-> **Brouillon, jamais validé.** Étape 11 (vague C), lot C2, branche `etape-11/lot-c2` (partie de `etape-11/lot-c1`), sans
+> **Validé par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis)**, en réponse aux messages du pilotage qui portaient
+> les lignes de validation des paquets C2 et C3 (avec les demandes n° 35 et n° 37) et C4 : sa phrase « Donc je valide les lots C2, C3 et C4. » vaut la
+> ligne de validation de ce paquet (§7) telle que le pilotage la lui a envoyée, comme le « Je valide tout ! » du matin
+> (consigne du pilotage). Demande de changement n° 35 acceptée. Empreinte posée et passage de `exemples/` à
+> `src/content` par la pull request des lots C2, C3 et C4.
+
+> **État au 17/11 avant la validation de 15 h 05 (brouillon).** Étape 11 (vague C), lot C2, branche `etape-11/lot-c2` (partie de `etape-11/lot-c1`), sans
 > pull request. Les pages 5W30, 5W40 et 10W40 attendent la notice Toyota Yaris (`structure-grades.md`) ; ce paquet ne
 > porte aujourd'hui que la page mère. Aucun verdict ci-dessous n'est validé pour cette page.
 > **Revue indépendante** du 17/11 sur 5602eff (lancée par le pilotage) : « à corriger », 1 bloquant, 4 importants ; les

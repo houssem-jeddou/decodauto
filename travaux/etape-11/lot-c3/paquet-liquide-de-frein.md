@@ -1,6 +1,11 @@
 # Paquet de validation du lot C3 : page « liquide de frein »
 
-> **Brouillon, jamais validé.** Étape 11 (vague C), lot C3, branche `etape-11/lot-c3`, sans pull request. Aucun verdict
+> **Validé par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis)**, en réponse aux messages du pilotage qui portaient
+> les lignes de validation des paquets C2 et C3 (avec les demandes n° 35 et n° 37) et C4 : sa phrase « Donc je valide les lots C2, C3 et C4. » vaut la
+> ligne de validation de ce paquet (§7) telle que le pilotage la lui a envoyée, comme le « Je valide tout ! » du matin
+> (consigne du pilotage). Empreinte posée et passage par la pull request des lots C2, C3 et C4.
+
+> **État au 17/11 avant la validation de 15 h 05 (brouillon).** Étape 11 (vague C), lot C3, branche `etape-11/lot-c3`, sans pull request. Aucun verdict
 > ci-dessous n'est validé pour cette page. **Revue indépendante** du 17/11 sur 58ccb0e (lancée par le pilotage) :
 > « à corriger », dont le bloquant B1 sur cette page ; corrections faites sur décision du pilotage (règle 6), §0. **Ce
 > qui a changé après la revue n'a pas été relu par un relecteur indépendant.**

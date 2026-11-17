@@ -1,6 +1,10 @@
 # Paquet de validation du lot C4 : page « usure des pneus »
 
-> **Brouillon, jamais validé.** Étape 11 (vague C), lot C4, branche `etape-11/lot-c4`, sans pull request. Aucun verdict
+> **Validé par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis)**, mot pour mot : « Je valide la page « usure des pneus » : la question de décision, la réponse directe, les quatre lignes (pneus usés jusqu'aux témoins à Non, ne poursuivez pas votre trajet et À faire tout de suite, avec son écart ; pneu endommagé à Non, arrêtez-vous immédiatement et À faire tout de suite ; vibrations ou direction qui tire à Non, arrêtez-vous immédiatement et À faire tout de suite ; choc contre un trottoir à Oui, avec précautions et À faire dans les jours qui viennent), le coût, la fiche « Le texte en bref », le tableau, l'illustration, les faits du texte, le title, le H1 et la description ; et j'accepte la demande de changement n° 36. » Avec : « J'accepte la
+> modification du test de la porte de l'étape 6 (limité aux pages de la vague A). Donc je valide les lots C2, C3 et
+> C4. » Demande de changement n° 36 acceptée. Empreinte posée et passage par la pull request des lots C2, C3 et C4.
+
+> **État au 17/11 avant la validation de 15 h 05 (brouillon).** Étape 11 (vague C), lot C4, branche `etape-11/lot-c4`, sans pull request. Aucun verdict
 > ci-dessous n'est validé. **Revue indépendante** du 17/11 sur ec0e962 (lancée par le pilotage) : « à corriger » ;
 > corrections sur décision du pilotage (règle 6), §0. **Ce qui a changé après la revue n'a pas été relu par un relecteur
 > indépendant.** Le niveau de la ligne 1 s'appuie sur la **demande de changement n° 36** (règle 1), proposée.
