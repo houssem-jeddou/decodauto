@@ -1,8 +1,10 @@
 # Paquet de validation de l'exemple « niveau d'huile » (modèle fluide, vague C)
 
-> **Brouillon, jamais validé.** Préparation anticipée de l'étape 11 (docs/03, règle 12, quatrième exception, demande de
-> changement n° 21), branche `preparation/etape-11`, sans pull request. Rien n'en est présenté, fusionné ni publié
-> avant la porte de l'étape en cours. Aucun verdict ci-dessous n'est validé pour cette page.
+> **Brouillon, jamais validé.** Étape 11 (vague C), premier livrable de l'étape : l'étape 10 est fermée (porte validée
+> par Houssem le 17/11/2026 à 10 h 11). Commencé en préparation anticipée, sur la branche `preparation/etape-11`, sans
+> pull request vers `main` : revue indépendante, puis présentation à Houssem ; la page n'est publiée qu'avec la pull
+> request du premier lot de la vague C, qui ouvre la vague sur sa validation. Aucun verdict ci-dessous n'est validé
+> pour cette page.
 
 Page : `exemples/fluide/niveau-huile.md`, adresse `/huile-moteur/verifier-niveau/` (plan du site, vague C, page mère
 « huile moteur »), modèle fluide au format 2 (`pageFluideF2`, sur `main` depuis la PR n° 79), format tutoriel.

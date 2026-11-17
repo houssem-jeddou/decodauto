@@ -1,7 +1,8 @@
 ---
-# Brouillon, jamais validé. Préparation anticipée de l'étape 11 (docs/03, règle 12, quatrième exception, demande de
-# changement n° 21) : exemple du modèle fluide, page « niveau d'huile » de la vague C, au format tutoriel et au format 2.
-# Rien n'en est présenté à la validation, fusionné ni publié avant la fermeture de la porte de l'étape 10. Pas
+# Brouillon, jamais validé. Étape 11 (vague C), premier livrable : exemple du modèle fluide, page « niveau d'huile », au
+# format tutoriel et au format 2. Commencé en préparation anticipée (règle 12, quatrième exception) ; l'étape 10 est
+# fermée (porte validée par Houssem le 17/11/2026 à 10 h 11). Présenté à Houssem après la revue indépendante ; publié
+# seulement avec la PR du premier lot de la vague C, qui ouvre la vague sur sa validation. Pas
 # d'empreinte : jamais validé (la recette des exemples échoue sur R4-VALIDATION-ABSENTE, seule erreur attendue).
 # Paquet : travaux/etape-11/paquet-exemple-niveau-huile.md.
 # - Sources : travaux/etape-11/textes/releve-sources.md, §3. Lignes 1 et 2 reprises mot pour mot des lignes saisies du
