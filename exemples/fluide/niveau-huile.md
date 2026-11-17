@@ -2,7 +2,8 @@
 # Brouillon, jamais validé. Préparation anticipée de l'étape 11 (docs/03, règle 12, quatrième exception, demande de
 # changement n° 21) : exemple du modèle fluide, page « niveau d'huile » de la vague C, au format tutoriel et au format 2.
 # Rien n'en est présenté à la validation, fusionné ni publié avant la fermeture de la porte de l'étape 10. Pas
-# d'empreinte : jamais validé (la recette des exemples échouerait sur R4-VALIDATION-ABSENTE).
+# d'empreinte : jamais validé (la recette des exemples échoue sur R4-VALIDATION-ABSENTE, seule erreur attendue).
+# Paquet : travaux/etape-11/paquet-exemple-niveau-huile.md.
 # - Sources : travaux/etape-11/textes/releve-sources.md, §3. Lignes 1 et 2 reprises mot pour mot des lignes saisies du
 #   dossier PureTech (src/content/dossier/moteur-puretech.md : extraits relus à l'écran le 16/11/2026,
 #   travaux/etape-10/textes/porte10-verification.md, et validés par Houssem avec la porte 10 le 16/11 à 19 h 26) ;
@@ -10,11 +11,12 @@
 # - Deux notices d'un seul groupe (Peugeot 208, Citroën C3) pour les lignes 1 et 2 : les rubriques « huile moteur » des
 #   autres notices (Renault p. 330-332, Dacia p. 294, Seat p. 295, Toyota p. 247) ne sont pas lues. Les étapes ne
 #   décrivent pas la manipulation de la jauge (sortir, essuyer, replonger) : non relevée mot pour mot.
-# - Dépend de la partie technique du modèle fluide (travaux/etape-11/README.md, §3) : modèle fluide au format 2,
-#   marqueurs « {{tableau}} » et « {{etapes}} » permis sur une page fluide, réponse directe d'une page fluide.
-# - Réponse directe proposée (règle 2c ; aujourd'hui refusée par fluidePageSchema, qui la réserve aux pages pneus) :
-#   « Sur un sol plat, moteur arrêté depuis 30 minutes, le niveau doit se situer entre les repères mini et maxi de la
-#   jauge, selon les notices Peugeot 208 et Citroën C3. » (29 mots)
+# - Modèle fluide au format 2 sur main depuis la PR n° 79 (pageFluideF2) ; réponse directe des pages fluides : demande
+#   de changement n° 33, acceptée par Houssem le 17/11/2026 à 7 h 39.
+# - Repris le 17/11/2026 sur les quatre points M4 de la revue de la PR n° 79 : verdict du voyant rouge cité dans une
+#   phrase qui ne le contredit plus ; normes qui disent où trouver la norme (aucune notice lue n'en donne une) ; outils
+#   sans virgule interne (la fiche du tutoriel les joint par des virgules) ; lien vers « huile moteur » (page non
+#   construite) retiré.
 # - Illustration : `jauge-huile`, déjà dessinée pour le dossier PureTech (src/illustrations/jauge-huile.svg).
 id: niveau-huile
 title: "Niveau d'huile moteur : le vérifier à la jauge et faire l'appoint"
@@ -22,6 +24,7 @@ h1: "Niveau d'huile moteur : comment le vérifier, et que faire s'il est trop ba
 description: "Vérifiez le niveau d'huile sur un sol plat, moteur arrêté depuis 30 minutes : il doit se situer entre les repères mini et maxi de la jauge. En dessous ou au-dessus, ne démarrez pas."
 libelle_court: Niveau d'huile
 question_decision: "Niveau d'huile trop bas ou trop haut, voyant d'huile allumé : puis-je démarrer et rouler ?"
+reponse_directe: "Sur un sol plat, moteur arrêté depuis 30 minutes, le niveau doit se situer entre les repères mini et maxi de la jauge, selon les notices Peugeot 208 et Citroën C3."
 situations:
   - situation: "À la jauge, le niveau d'huile est sous le repère mini"
     verdict: non, arrêt immédiat
@@ -66,14 +69,14 @@ illustration:
   legende: "Contrôle du niveau d'huile, selon les notices Peugeot 208 et Citroën C3 : sur un sol plat, moteur à l'arrêt depuis 30 minutes, le niveau se situe entre les repères mini et maxi de la jauge."
 tutoriel:
   outils:
-    - "la jauge manuelle de la voiture, ou l'indicateur de niveau du combiné (jauge électrique)"
-    - "pour un appoint, une huile conforme au plan d'entretien de la voiture"
+    - "la jauge manuelle ou l'indicateur de niveau du combiné (jauge électrique)"
+    - "une huile conforme au plan d'entretien (pour un appoint)"
   duree: "30 minutes d'attente moteur arrêté avant la mesure ; après un appoint, quelques minutes avant de revérifier"
   difficulte: facile
   quand_ne_pas_le_faire_soi_meme: "Niveau au-dessus du repère maxi : faites appel au réseau de la marque ou à un atelier qualifié (notices Peugeot 208 et Citroën C3). Baisse importante du niveau : faites vérifier le circuit (notice Peugeot 208)."
 normes:
-  - "Une huile qui correspond à la motorisation et conforme au plan d'entretien de la voiture (notices Peugeot 208 et Citroën C3)"
-  - "Jamais d'additif dans l'huile moteur (notices Peugeot 208 et Citroën C3)"
+  - "La norme et la viscosité de l'huile sont celles du plan d'entretien de votre voiture : les notices Peugeot 208 et Citroën C3 demandent une huile qui corresponde à la motorisation et soit conforme à ce plan, sans donner de norme commune à tous les moteurs"
+  - "jamais d'additif dans l'huile moteur, selon ces deux notices"
 comment_verifier: "Sur un sol plat, moteur à l'arrêt depuis 30 minutes, avec l'indicateur de niveau du combiné à la mise du contact (jauge électrique) ou avec la jauge manuelle : le niveau correct se situe entre les repères maxi et mini (notices Peugeot 208 et Citroën C3)."
 quand_changer:
   texte: "La vidange se fait à l'échéance du plan d'entretien, que rappellent le voyant clé ou un message de révision ou de vidange. Entre deux vidanges, les notices Peugeot 208 et Citroën C3 préconisent un contrôle du niveau, avec appoint si nécessaire, tous les 5 000 km."
@@ -150,7 +153,7 @@ Ne démarrez pas le moteur et faites appel au réseau de la marque ou à un atel
 
 ## Faire le niveau d'huile : quelle huile, à quelle fréquence ?
 
-L'huile doit correspondre à la motorisation et être conforme au plan d'entretien de votre voiture, selon les notices Peugeot 208 et Citroën C3. La page [huile moteur](/huile-moteur/) explique comment lire ce que demande votre notice. Les notices lues ne donnent pas de quantité d'appoint : versez peu à la fois et revérifiez.
+L'huile doit correspondre à la motorisation et être conforme au plan d'entretien de votre voiture, selon les notices Peugeot 208 et Citroën C3 : c'est ce plan qui donne la norme et la viscosité. Les notices lues ne donnent pas de quantité d'appoint : versez peu à la fois et revérifiez.
 
 Ces deux notices préconisent un contrôle, avec appoint si nécessaire, tous les 5 000 km. La notice {{notice:notice-seat-ibiza}} recommande de contrôler le niveau à chaque passage à la pompe ({{cite:notice-seat-ibiza|p. 294}}).
 
@@ -175,11 +178,11 @@ Le tableau résume les notices lues ({{cite:notice-peugeot-208|p. 20 et 166}} ; 
 
 {{verdict:huile-niveau}}, selon l'encadré : vérifiez sans attendre le niveau à la jauge, voiture à plat et moteur arrêté, puis faites l'appoint. Seat Ibiza et Peugeot 208 demandent de le faire immédiatement ou impérativement ; la notice Toyota Yaris ne donne pas de délai. La page [voyant huile](/voyants/huile/) compare les notices une à une.
 
-## Voyant d'huile rouge : faut-il s'arrêter ?
+## Voyant d'huile rouge : puis-je rouler ?
 
 {{repere:huile-pression-rouge}}
 
-Oui : {{verdict:huile-pression-rouge}}. Ce voyant signale une pression d'huile trop faible : arrêtez-vous dès que vous pouvez le faire sans danger, coupez le moteur et vérifiez le niveau. Même si le niveau est correct, ne repartez pas : faites appel à un garage ou à l'assistance.
+{{verdict:huile-pression-rouge}}, selon l'encadré. Ce voyant signale une pression d'huile trop faible : arrêtez-vous dès que vous pouvez le faire sans danger, coupez le moteur et vérifiez le niveau. Même si le niveau est correct, ne repartez pas : faites appel à un garage ou à l'assistance.
 
 ## Pourquoi ma voiture consomme de l'huile ?
 
