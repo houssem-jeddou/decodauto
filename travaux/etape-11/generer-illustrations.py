@@ -31,6 +31,10 @@ traits clairs, ambre pour « regardez ici »). Brouillon, jamais validé.
   (R), valable le seul jour du contrôle (rouge, couleur de « Non, arrêtez-vous immédiatement ») ; contre-visite
   dans les deux mois ; au-delà, contrôle complet. Arrêté du 18 juin 1991, articles 7 et 8 (relus à l'écran le
   17/11/2026, vers 13 h 15).
+- huile-5w30-bidon, huile-5w40-bidon, huile-10w40-bidon (pages de grade, lot C5) : à gauche, l'étiquette d'un bidon sans
+  marque (grade SAE en ambre, classe ACEA, symbole API, norme du constructeur) ; à droite, ce que dit chaque partie du
+  grade (nombre avant le W : démarrage à froid ; nombre après : viscosité à chaud), selon la notice Toyota Yaris p. 330
+  (lue le 17/11/2026 vers 21 h 35), et « Norme : celle de votre notice » (vert). Aucune marque d'huile dessinée.
 
 Contraintes de `illustrationEnLigne` : un seul <svg> racine avec viewBox ; ni script, ni foreignObject, ni image, ni
 use, ni lien, ni attribut on*, ni href, ni url(), ni @import ; textes de 24 unités au moins (12 px à 375 px).
@@ -207,12 +211,37 @@ def contre_visite_delais() -> str:
     return "".join(p)
 
 
+def huile_grade_bidon(froid: str, chaud: str) -> str:
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340">', FOND]
+    p.append(texte(40, 62, "Sur le bidon", taille=24, poids=600, couleur=DOUX, ancre="start"))
+    # Bidon sans marque : goulot à droite, poignée, étiquette.
+    p.append('<path d="M40 100 L230 100 L230 88 Q230 80 238 80 L262 80 Q270 80 270 88 L270 100 L290 100 L290 300 Q290 310 280 310 L50 310 Q40 310 40 300 Z" fill="#1b222b" stroke="#3a4553" stroke-width="3" stroke-linejoin="round"/>')
+    p.append(f'<rect x="58" y="120" width="214" height="48" rx="10" fill="#232c37" stroke="{AMBRE}" stroke-width="5"/>')
+    p.append(texte(165, 154, f"SAE {froid}-{chaud}", taille=26, poids=800, couleur=AMBRE))
+    for y, mention in ((180, "ACEA"), (222, "API"), (264, "norme")):
+        p.append(f'<rect x="58" y="{y}" width="214" height="34" rx="8" fill="#232c37"/>')
+        p.append(texte(165, y + 25, mention, taille=24, poids=700, couleur="#c9d1db"))
+    # Ce que dit le grade, et la norme.
+    p.append(texte(330, 104, f"{froid} :", taille=26, poids=800, couleur=AMBRE, ancre="start"))
+    p.append(texte(330, 134, "démarrage à froid", taille=24, poids=600, ancre="start"))
+    p.append(texte(330, 180, f"{chaud} :", taille=26, poids=800, couleur=AMBRE, ancre="start"))
+    p.append(texte(330, 210, "viscosité à chaud", taille=24, poids=600, ancre="start"))
+    p.append(texte(330, 262, "Norme : celle", taille=24, poids=700, couleur=VERT, ancre="start"))
+    p.append(texte(330, 292, "de votre notice", taille=24, poids=700, couleur=VERT, ancre="start"))
+    p.append(f'<path d="M276 281 L318 281" stroke="{VERT}" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>')
+    p.append("</svg>")
+    return "".join(p)
+
+
 if __name__ == "__main__":
     for nom, f in (("niveau-huile-jauge", niveau_huile_jauge), ("huile-moteur-choisir", huile_moteur_choisir),
                     ("liquide-refroidissement-vase", liquide_refroidissement_vase),
                     ("liquide-frein-reservoir", liquide_frein_reservoir),
                     ("usure-pneu-temoin", usure_pneu_temoin),
-                    ("contre-visite-delais", contre_visite_delais)):
+                    ("contre-visite-delais", contre_visite_delais),
+                    ("huile-5w30-bidon", lambda: huile_grade_bidon("5W", "30")),
+                    ("huile-5w40-bidon", lambda: huile_grade_bidon("5W", "40")),
+                    ("huile-10w40-bidon", lambda: huile_grade_bidon("10W", "40"))):
         s = f()
         (SORTIE / f"{nom}.svg").write_text(s + "\n", encoding="utf-8")
         print(nom, len(s))
