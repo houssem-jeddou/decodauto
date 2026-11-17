@@ -24,7 +24,16 @@
         "http://localhost/codes-defaut/p0299/index.html",
         "http://localhost/voyants/frein/index.html",
         "http://localhost/voiture-ne-demarre-pas/index.html",
-        "http://localhost/moteur-puretech/index.html"
+        "http://localhost/moteur-puretech/index.html",
+        "http://localhost/batterie-voiture/index.html",
+        "http://localhost/batterie-voiture/recharger/index.html",
+        "http://localhost/batterie-voiture/changer/index.html",
+        "http://localhost/moteur-qui-surchauffe/index.html",
+        "http://localhost/nettoyer-fap/index.html",
+        "http://localhost/perte-de-puissance-voiture/index.html",
+        "http://localhost/voiture-qui-broute/index.html",
+        "http://localhost/bruit-moteur/index.html",
+        "http://localhost/fumee-echappement/index.html"
       ],
       "numberOfRuns": 3,
       "settings": {

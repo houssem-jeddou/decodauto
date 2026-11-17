@@ -86,11 +86,11 @@ describe('briefs de la vague A (6.8)', () => {
       const chemin = await localiserPage(racine, p.type, p.id);
       const exemple = chemin === undefined ? undefined : await readFile(join(racine, chemin), 'utf8');
       if (exemple !== undefined) {
-        // La question validée dans l'exemple n'est jamais recopiée dans les consignes : le brief la lit dans l'exemple.
+        // La question de la page rédigée n'est jamais recopiée dans les consignes : le brief la lit dans l'exemple.
         assert.equal(c.question_decision, undefined, `${p.id} : question à lire dans l'exemple, pas à recopier`);
         const question = questionDeLExemple(exemple);
         assert.ok(question !== undefined, `${p.id} : question absente de l'exemple`);
-        assert.ok(attendus.fichiers.get(`${DOSSIER_BRIEFS}/${p.id}.md`)?.includes(`(validée dans l'exemple) : « ${question} »`), `${p.id} : question de l'exemple absente du brief`);
+        assert.ok(attendus.fichiers.get(`${DOSSIER_BRIEFS}/${p.id}.md`)?.includes(`(celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « ${question} »`), `${p.id} : question de l'exemple absente du brief`);
       } else assert.ok((c.question_decision ?? '').trim() !== '', `${p.id} : question de décision manquante`);
     }
   });
@@ -211,7 +211,9 @@ describe('générateur des briefs', () => {
 
   test("la question d'une page exemple vient de l'exemple", () => {
     const brief = genererBrief(entree(page('p'), { consignes: { angle: 'a', element_unique: 'e', a_traiter: ['b'] }, exemple: 'exemples/voyant/p.md', questionExemple: 'Q ?' }));
-    assert.match(brief, /\(validée dans l'exemple\) : « Q \? »/);
+    assert.match(brief, /\(celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise\) : « Q \? »/);
+    // Revue du lot F3 (m4) : le brief ne dit jamais la question validée ; la question changée d'une page ne l'est pas encore.
+    assert.doesNotMatch(brief, /validée dans l'exemple/);
     assert.doesNotMatch(brief, /Question de décision proposée/);
   });
 });

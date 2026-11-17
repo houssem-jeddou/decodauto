@@ -63,6 +63,7 @@ import { NOTE_SOURCES_OUTIL, modeleOutilVoyants, outilVoyants } from './outil-vo
 import { causesFormat2, pageFormat2, pageVoyantFormat2, pastilleVerdict, sommaireHtml, teteSeule, titresDesSections } from './format2.ts';
 import { pageOutilFormat2 } from './outil-format2.ts';
 import { REPONSES_MIN_ARBRE, fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, modeleFichePanne, modeleFicheTutoriel } from './fiche-panne.ts';
+import { ficheFluideHtml, modeleFicheFluide } from './fiche-fluide.ts';
 
 export { REPONSES_MIN_ARBRE };
 import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
@@ -86,7 +87,7 @@ export type Modele = (page: PageEditoriale, site: DonneesSite, corpsHtml: string
  *    jamais un montant écrit à la main ; livrable 6.6c) ;
  *  - « {{tableau}} », seul dans son paragraphe, juste avant un tableau Markdown : ce tableau est l'élément unique de la
  *    page (data-element-unique="tableau"). Permis seulement si le modèle n'en construit pas (pages pneus et obligations,
- *    panne et dossier) et si la page déclare un tableau comme élément unique ; un seul par page (livrable 6.6c) ;
+ *    panne, dossier et fluide) et si la page déclare un tableau comme élément unique ; un seul par page (livrable 6.6c) ;
  *  - « {{arbre}} », seul dans son paragraphe, juste avant une liste numérotée de questions, chacune suivie de la liste
  *    à puces de ses réponses (au moins deux) : l'arbre de décision, élément unique d'une page panne (étape 10) ;
  *  - « {{etapes}} », seul dans son paragraphe, juste avant une liste numérotée : les étapes d'un tutoriel
@@ -352,12 +353,12 @@ function arbreDuTexte(
 /**
  * Marqueur « {{etapes}} » : la liste numérotée qui le suit reçoit data-tutoriel-etapes (étapes du tutoriel, contrôle
  * R7-TUTORIEL-ETAPES). Refusé sur un type dont le modèle n'affiche pas encore la fiche « Le tutoriel en bref » (permis :
- * panne et dossier), sur une page sans tutoriel, s'il y en a plus d'un, ou s'il ne précède pas une liste numérotée.
+ * panne, dossier et fluide au format 2), sur une page sans tutoriel, s'il y en a plus d'un, ou s'il ne précède pas une liste numérotée.
  */
 function etapesDuTexte(html: string, tutoriel: boolean, permis: boolean, echec: (message: string) => never): string {
   const marqueurs = html.match(MARQUEUR_ETAPES) ?? [];
   if (marqueurs.length === 0) return html;
-  if (!permis) echec('« {{etapes}} » : le modèle de ce type de page n\'affiche pas encore la fiche « Le tutoriel en bref » (permis sur les pages panne et dossier)');
+  if (!permis) echec('« {{etapes}} » : le modèle de ce type de page n\'affiche pas encore la fiche « Le tutoriel en bref » (permis sur les pages panne, dossier et fluide au format 2)');
   if (!tutoriel) echec('« {{etapes}} » : la page n\'est pas un tutoriel (champ tutoriel absent)');
   if (marqueurs.length > 1) echec('« {{etapes}} » : une seule liste d\'étapes par page');
   const resultat = html.replace(/<p>\s*\{\{etapes\}\}\s*<\/p>\s*<ol\b([^>]*)>/, '<ol class="etapes" data-tutoriel-etapes$1>');
@@ -411,6 +412,31 @@ export const pageDossierF2: Modele = (page, site, corpsHtml) => {
     avantTexte: [page.tutoriel !== undefined ? ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel), { format2: true }) : ''],
     apresTexte: [historiqueDossierHtml(page.journal_modifications, { format2: true })],
     tableauElementUnique: false,
+  });
+};
+
+/**
+ * Page fluide au format 2 (étape 11, partie technique du modèle ; vague C, format 2 seul) : ordre de la charte graphique §4
+ * (format2.ts, pageFormat2), puis : fiche « Le tutoriel en bref » (format tutoriel) avant le texte rédigé ; dans le texte, les
+ * étapes ({{etapes}}) et le tableau ({{tableau}}, élément unique du type) ; fiche « L'essentiel » (les trois champs du type :
+ * normes et spécifications, comment vérifier, quand changer) après la partie du texte qui porte les étapes, ou avant le
+ * texte sur une page sans étapes ;
+ * tableau des notices si un voyant de la base est rattaché à la page, affiché sans être l'élément unique. Page informative
+ * (demande de changement n° 30, règle 2c : « huiles et liquides ») : l'encadré commence par la réponse directe, exigée, comme
+ * sur la page de la pression des pneus (sans elle, la construction échoue). Pas de causes : le schéma fluide n'en a pas.
+ */
+export const pageFluideF2: Modele = (page, site, corpsHtml) => {
+  if (!('normes' in page)) throw new Error(`page « ${page.id} » : le modèle fluide s'applique à une page fluide`);
+  if ((page.reponse_directe ?? '').trim() === '') throw new Error(`page « ${page.id} » au format 2 : page informative sans réponse directe (reponse_directe, règle 2c, demande de changement n° 30)`);
+  const fiche = ficheFluideHtml(modeleFicheFluide(page));
+  return pageFormat2(page, site, corpsHtml, (corps) => texteRedige(corps, page, site, { tableauDuTexte: true, etapesDuTexte: true, format2: true }), {
+    // Revue de la PR n° 79 (I2) : sur un tutoriel, la fiche « L'essentiel » suit la partie du texte qui porte les étapes,
+    // comme les causes de la page panne (demande de changement n° 32) ; la fiche du tutoriel reste avant le texte. Sans
+    // étapes, la fiche reste avant le texte (sinon elle irait au bas de la page).
+    avantTexte: page.tutoriel !== undefined ? [ficheTutorielHtml(modeleFicheTutoriel(page.tutoriel), { format2: true })] : [fiche],
+    apresTexte: [],
+    tableauElementUnique: false,
+    ...(page.tutoriel !== undefined && { apresPartieArbre: fiche }),
   });
 };
 
@@ -592,28 +618,33 @@ export function pageSocle(page: Pick<PageSaisie<'socle'>, 'id' | 'title' | 'date
 const methodeFormat2 = (html: string): string =>
   html.replace('<section class="methode"', '<section class="methode encart"').replace(/(<table class="definitions">[\s\S]*?<\/table>)/g, '<div class="tableau">$1</div>');
 
-/** Modèles livrés, par type. La variante outil du type voyant : pageOutilVoyants. Le type fluide (vague C) n'en a pas encore. */
+/** Modèles du format 1, par type. La variante outil du type voyant : pageOutilVoyants. Le type fluide (vague C) n'existe qu'au format 2 (pageFluideF2). */
 export const MODELES: Readonly<Partial<Record<TypePage, Modele>>> = { voyant: pageVoyant, 'code-defaut': pageCodeDefaut, pneus: pagePneus, panne: pagePanne, dossier: pageDossier };
 
 /**
- * Vague B (demande de changement n° 30, revue de F1.3c) : une page panne ou dossier est rédigée au format 2. La route des
- * pages (src/pages/[...adresse].astro) refuse à la construction une telle page au format 1, qu'elle vienne de src/content,
- * de exemples/ ou de la démonstration ; les pages de test (tests/fixtures) gardent le modèle du format 1.
+ * Vagues B et C (demande de changement n° 30, revue de F1.3c ; étape 11) : une page panne ou dossier (vague B) ou fluide
+ * (vague C) est rédigée au format 2. La route des pages (src/pages/[...adresse].astro) refuse à la construction une telle
+ * page au format 1, qu'elle vienne de src/content, de exemples/ ou de la démonstration ; les pages de test (tests/fixtures)
+ * gardent le modèle du format 1 (le type fluide n'en a pas).
  */
-export function refusFormatVagueB(type: TypePage, page: Pick<PageEditoriale, 'id' | 'format'>): string | undefined {
-  return (type === 'panne' || type === 'dossier') && page.format !== 2 ? `page « ${page.id} » : une page « ${type} » est rédigée au format 2 (vague B, demande de changement n° 30) : ajouter « format: 2 »` : undefined;
+export function refusFormat1(type: TypePage, page: Pick<PageEditoriale, 'id' | 'format'>): string | undefined {
+  if (page.format === 2) return undefined;
+  if (type === 'panne' || type === 'dossier') return `page « ${page.id} » : une page « ${type} » est rédigée au format 2 (vague B, demande de changement n° 30) : ajouter « format: 2 »`;
+  if (type === 'fluide') return `page « ${page.id} » : une page « fluide » est rédigée au format 2 (vague C, demande de changement n° 30) : ajouter « format: 2 »`;
+  return undefined;
 }
 
 /** Modèle d'une page, ou la raison pour laquelle il n'existe pas encore (la construction échoue alors). */
 export function modeleDeLaPage(type: TypePage, page: PageEditoriale): { modele: Modele } | { absent: string } {
   // Format 2 (demande de changement n° 30, lot F1) : pages voyants (F1.2), page outil (F1.3a), codes défaut et pneus (F1.3b),
-  // panne et dossier (F1.3c) ; un autre type au format 2 fait échouer la construction tant que son modèle n'est pas dessiné.
+  // panne et dossier (F1.3c), fluide (étape 11) ; un autre type au format 2 fait échouer la construction tant que son modèle n'est pas dessiné.
   if (page.format === 2) {
     if (type === 'voyant') return { modele: 'outil' in page && page.outil === true ? pageOutilVoyantsF2 : pageVoyantF2 };
     if (type === 'panne') return { modele: pagePanneF2 };
     if (type === 'dossier') return { modele: pageDossierF2 };
     if (type === 'code-defaut') return { modele: pageCodeDefautF2 };
     if (type === 'pneus') return { modele: pagePneusF2 };
+    if (type === 'fluide') return { modele: pageFluideF2 };
     return { absent: `le format 2 des pages « ${type} » n'est pas encore livré (lot F1, F1.3 : à dessiner d'abord)` };
   }
   if (type === 'voyant' && 'outil' in page && page.outil === true) return { modele: pageOutilVoyants };

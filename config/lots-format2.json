@@ -12,6 +12,13 @@
     "voyant-airbag",
     "voyant-abs-esp",
     "voyant-pression-pneus",
-    "voyant-direction"
+    "voyant-direction",
+    "mentions-legales",
+    "a-propos",
+    "code-p0420",
+    "code-p0087",
+    "code-p0299",
+    "pression-des-pneus",
+    "loi-montagne"
   ]
 }

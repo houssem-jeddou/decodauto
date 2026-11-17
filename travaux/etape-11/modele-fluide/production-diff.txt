@@ -1,0 +1,7 @@
+Construction de production de main comparée à celle de la branche etape-11/modele-fluide (revue de la PR n° 79, M7), 17/11/2026.
+main : 97be2f3 (origin/main). Branche : les corrections de la revue, sur af613be (commit qui porte ce fichier).
+Commandes, dans chaque copie de travail : SITE_INDEXABLE=true npx astro build --outDir dist-prod ; puis : diff -rq <main>/dist-prod <branche>/dist-prod
+Fichiers construits de chaque côté : 30 / 30 ; construction : 23 page(s) built in 1.57s / 23 page(s) built in 1.50s
+
+Sortie de diff -rq (vide : aucune différence) :
+Code de sortie : 0  (0 : identique)

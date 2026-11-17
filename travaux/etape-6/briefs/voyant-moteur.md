@@ -6,7 +6,7 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/moteur/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0087/` (vague A) ; `/codes-defaut/p0299/` (vague A) ; `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p0420/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/contre-visite-controle-technique/` (vague C : pas de lien dans le texte avant sa publication) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-qui-broute/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/adblue/` (vague A) ; `/voyants/fap/` (vague A) ; `/voyants/prechauffage/` (vague A).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/codes-defaut/p0087/` (vague A) ; `/codes-defaut/p0299/` (vague A) ; `/codes-defaut/p0380/` (vague A) ; `/codes-defaut/p0420/` (vague A) ; `/codes-defaut/p1351/` (vague A) ; `/contre-visite-controle-technique/` (vague C : pas de lien dans le texte avant sa publication) ; `/nettoyer-fap/` (vague B : pas de lien dans le texte avant sa publication) ; `/perte-de-puissance-voiture/` (vague B : pas de lien dans le texte avant sa publication) ; `/voiture-qui-broute/` (vague B : pas de lien dans le texte avant sa publication) ; `/voyants/adblue/` (vague A) ; `/voyants/fap/` (vague A) ; `/voyants/prechauffage/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 - **Page publiée** (sa validation est notée au journal) : `src/content/voyant/voyant-moteur.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 
@@ -96,7 +96,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant moteur allumé ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le voyant moteur allumé ? »
 - **Angle** : Exemple validé en 6.6a : verdict de la base et écart entre marques affiché dès l'encadré, face à l'aperçu IA qui dit le contraire (relevé, constat 2).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque » (demande de changement n° 8), déjà dans l'exemple.
 - **À traiter** :

@@ -77,7 +77,7 @@ Voyants de la base repris dans l'encadré de l'exemple validé (rattachés à un
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant du filtre à particules allumé ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le voyant du filtre à particules allumé ? »
 - **Angle** : La consigne des notices passe par une régénération en roulant avant le garage (ligne de la base et son écart entre marques). Page de référence du FAP (docs/02 : pas de page organe).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

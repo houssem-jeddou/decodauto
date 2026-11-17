@@ -375,7 +375,11 @@ describe("page rédigée « code P0087 » (exemples/ jusqu'au passage, livrable 
     const { brut, contexte, constats, html } = await exempleCode();
     assert.deepEqual(erreurs(constats), []);
     const resultat = controlerPage({ type: 'code-defaut', brut, fichier: EXEMPLE_CODE }, contexte, html);
-    assert.deepEqual(erreurs(resultat.constats), brut['validation'] === undefined ? ['R4-VALIDATION-ABSENTE'] : []);
+    // Page passée au format 2 et validée sous ce format (lot F3, 17/11/2026) : l'empreinte couvre le format
+    // (src/lib/empreinte.ts), sa version au format 1 n'est donc pas validée (R4-EMPREINTE, seule erreur). La page publiée,
+    // au format 2, est contrôlée sans erreur par la construction et par tests/format2-f3.test.ts.
+    const auFormat2 = (await readFile(join(racine, EXEMPLE_CODE), 'utf8')).includes('\nformat: 2\n');
+    assert.deepEqual(erreurs(resultat.constats), brut['validation'] === undefined ? ['R4-VALIDATION-ABSENTE'] : auFormat2 ? ['R4-EMPREINTE'] : []);
   });
 
   test('[CI] composants de la page construite : typographie, identifiants, expressions interdites, texte rédigé, part de texte cité', async () => {
@@ -394,7 +398,11 @@ describe("page rédigée « loi montagne » (exemples/ jusqu'au passage, livrabl
     const { brut, contexte, constats, html } = await exemplePneus();
     assert.deepEqual(erreurs(constats), []);
     const resultat = controlerPage({ type: 'pneus', brut, fichier: EXEMPLE_PNEUS }, contexte, html);
-    assert.deepEqual(erreurs(resultat.constats), brut['validation'] === undefined ? ['R4-VALIDATION-ABSENTE'] : []);
+    // Page passée au format 2 et validée sous ce format (lot F3, 17/11/2026) : l'empreinte couvre le format
+    // (src/lib/empreinte.ts), sa version au format 1 n'est donc pas validée (R4-EMPREINTE, seule erreur). La page publiée,
+    // au format 2, est contrôlée sans erreur par la construction et par tests/format2-f3.test.ts.
+    const auFormat2 = (await readFile(join(racine, EXEMPLE_PNEUS), 'utf8')).includes('\nformat: 2\n');
+    assert.deepEqual(erreurs(resultat.constats), brut['validation'] === undefined ? ['R4-VALIDATION-ABSENTE'] : auFormat2 ? ['R4-EMPREINTE'] : []);
   });
 
   test('[CI] composants de la page construite : typographie, identifiants, expressions interdites, texte rédigé, part de texte cité ; le tableau du texte est l’élément unique', async () => {

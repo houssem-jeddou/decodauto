@@ -11,7 +11,7 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 - **Mots-clés rattachés :** 1167 sur 1167, soit 1009 comptés et 158 variantes, chacun sur une seule page.
 - **Volume indicatif rattaché :** 1 140 760 recherches par mois.
 - **Vagues :** A = 22 pages, B = 11, C = 9, comme dans 02 et 03.
-- **Liens :** 51 paires de pages liées, chacune déclarée une seule fois dans le plan. Le lien retour est calculé.
+- **Liens :** 52 paires de pages liées, chacune déclarée une seule fois dans le plan. Le lien retour est calculé.
 - **Parent :** la page mère, reprise dans l'adresse et dans le fil d'Ariane. Elle affiche aussi la liste de ses pages enfants, par un lien calculé.
 - **Accueil :** il liste toutes les pages publiées, par thème, et cette liste est générée depuis le plan. Aucune page n'est donc orpheline.
 
@@ -20,7 +20,7 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 | Page | Adresse | Type | Vague | Requête principale | Mots-clés (comptés) | Volume / mois | Parent | Liens (aller et retour) |
 |---|---|---|---|---|---|---|---|---|
 | voyants | `/voyants/` | voyant | A | voyant orange voiture | 205 (190) | 142 516 | – | surchauffe-moteur |
-| voyant-moteur | `/voyants/moteur/` | voyant | A | voyant moteur orange | 159 (154) | 119 764 | voyants | code-p0087, code-p0299, code-p0380, code-p0420, code-p1351, contre-visite-controle-technique, perte-de-puissance, voiture-qui-broute, voyant-adblue, voyant-fap, voyant-prechauffage |
+| voyant-moteur | `/voyants/moteur/` | voyant | A | voyant moteur orange | 159 (154) | 119 764 | voyants | code-p0087, code-p0299, code-p0380, code-p0420, code-p1351, contre-visite-controle-technique, nettoyer-fap, perte-de-puissance, voiture-qui-broute, voyant-adblue, voyant-fap, voyant-prechauffage |
 | voyant-huile | `/voyants/huile/` | voyant | A | voyant huile moteur | 29 (28) | 51 508 | voyants | huile-moteur, moteur-puretech, niveau-huile |
 | voyant-batterie | `/voyants/batterie/` | voyant | A | voyant batterie | 5 (5) | 4 424 | voyants | batterie-voiture, voiture-ne-demarre-pas, voyant-direction |
 | voyant-frein | `/voyants/frein/` | voyant | A | voyant frein | 21 (20) | 20 540 | voyants | liquide-de-frein, voyant-abs-esp |
@@ -46,11 +46,11 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 | perte-de-puissance | `/perte-de-puissance-voiture/` | panne | B | perte de puissance voiture | 14 (14) | 7 268 | – | code-p0087, code-p0299, fumee-echappement, voiture-qui-broute, voyant-fap, voyant-moteur, voyant-prechauffage |
 | surchauffe-moteur | `/moteur-qui-surchauffe/` | panne | B | moteur qui surchauffe | 25 (21) | 18 012 | – | fumee-echappement, liquide-de-refroidissement, voyants |
 | bruit-moteur | `/bruit-moteur/` | panne | B | bruit moteur | 24 (24) | 13 272 | – | moteur-puretech, niveau-huile |
-| fumee-echappement | `/fumee-echappement/` | panne | B | fumée blanche échappement | 28 (26) | 13 904 | – | perte-de-puissance, surchauffe-moteur, voyant-fap |
+| fumee-echappement | `/fumee-echappement/` | panne | B | fumée blanche voiture | 28 (26) | 13 904 | – | perte-de-puissance, surchauffe-moteur, voyant-fap |
 | batterie-voiture | `/batterie-voiture/` | panne | B | voltage batterie voiture | 12 (12) | 15 168 | – | voiture-ne-demarre-pas, voyant-batterie |
 | batterie-changer | `/batterie-voiture/changer/` | panne | B | comment changer une batterie de voiture | 15 (15) | 16 116 | batterie-voiture | voiture-ne-demarre-pas |
 | batterie-recharger | `/batterie-voiture/recharger/` | panne | B | recharger une batterie de voiture | 17 (15) | 13 272 | batterie-voiture | voiture-ne-demarre-pas |
-| nettoyer-fap | `/nettoyer-fap/` | panne | B | nettoyer fap | 22 (22) | 43 924 | – | code-p0420, voyant-fap |
+| nettoyer-fap | `/nettoyer-fap/` | panne | B | nettoyer fap | 22 (22) | 43 924 | – | code-p0420, voyant-fap, voyant-moteur |
 | moteur-puretech | `/moteur-puretech/` | dossier | B | moteurs puretech | 79 (65) | 103 016 | – | bruit-moteur, code-p0420, huile-moteur, voyant-huile |
 
 ## 3. Niveaux et fluides

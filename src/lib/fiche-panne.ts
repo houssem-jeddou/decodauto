@@ -160,13 +160,14 @@ export function modeleFicheTutoriel(tutoriel: Tutoriel): LigneDeFiche[] {
 
 /**
  * Format de lecture des fiches (demande de changement n° 30) : au format 2, la liste des lignes est une carte du corps de
- * la charte graphique (`<dl class="fiche">`, comme le pilote) ; au format 1, rien ne change.
+ * la charte graphique (`<dl class="fiche">`, comme le pilote) ; au format 1, rien ne change. `fiche` sert aussi à la fiche
+ * « L'essentiel » (fiche-fluide.ts).
  */
 export interface OptionsFiche {
   format2?: boolean;
 }
 
-function fiche(classe: string, attribut: string, identifiant: string, titre: string, lignes: readonly LigneDeFiche[], options: OptionsFiche = {}): string {
+export function fiche(classe: string, attribut: string, identifiant: string, titre: string, lignes: readonly LigneDeFiche[], options: OptionsFiche = {}): string {
   return [
     `<section class="${classe}" ${attribut} aria-labelledby="${identifiant}">`,
     `<h2 id="${identifiant}">${texteHtml(titre)}</h2>`,

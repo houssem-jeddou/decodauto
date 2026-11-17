@@ -1,0 +1,4 @@
+Brouillon, jamais validé. Lighthouse mobile, 3 passages, médianes (npx lhci autorun sur dist-exemples, 9 pages des lots B2 à B4), 16/11/2026.
+
+/moteur-qui-surchauffe/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 904 ms, TBT 0 ms
+/nettoyer-fap/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 907 ms, TBT 0 ms
