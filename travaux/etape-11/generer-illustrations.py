@@ -11,7 +11,7 @@ traits clairs, ambre pour « regardez ici »). Brouillon, jamais validé.
   l'huile du moteur ; à droite, l'étiquette d'un bidon sans marque, où l'on retrouve la norme demandée (en ambre), la
   classe ACEA et le grade. Le dessin n'explique pas le grade (aucune source admise lue) et ne montre aucune marque
   d'huile. Notices : Peugeot 208 p. 166, Citroën C3 p. 113, Renault Clio 5 phase 2 p. 333, Dacia Sandero 3 p. 296,
-  Seat Ibiza p. 293 (relues à l'écran le 17/11/2026, vers 12 h 15).
+  Seat Ibiza p. 293 (relues à l'écran le 17/11/2026, vers 11 h 50).
 
 Contraintes de `illustrationEnLigne` : un seul <svg> racine avec viewBox ; ni script, ni foreignObject, ni image, ni
 use, ni lien, ni attribut on*, ni href, ni url(), ni @import ; textes de 24 unités au moins (12 px à 375 px).

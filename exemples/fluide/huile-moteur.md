@@ -1,7 +1,7 @@
 ---
 # Brouillon, jamais validé. Étape 11 (vague C), lot C2 : page mère « huile moteur » (modèle fluide, format 2). Pas
 # d'empreinte tant que Houssem n'a pas validé son encadré (paquet du lot C2).
-# - Sources : relevé à l'écran du 17/11/2026 vers 12 h 15 (pdf.js dans Chrome ; travaux/etape-11/textes/releve-sources.md,
+# - Sources : relevé à l'écran du 17/11/2026 vers 11 h 50 (pdf.js dans Chrome ; travaux/etape-11/textes/releve-sources.md,
 #   §7) : Seat Ibiza p. 90, 293, 294, 296, 316 ; Peugeot 208 p. 165, 166, 168 ; Citroën C3 p. 112, 113, 114 ; Renault
 #   Clio 5 phase 2 p. 122, 330, 333 ; Dacia Sandero 3 p. 99, 294, 296, 297. Recherche de « SAE », « viscosit »,
 #   « ACEA », « vidange » dans chaque PDF entier : aucun grade ni viscosité chez Peugeot, Citroën, Renault, Dacia ;
@@ -18,7 +18,7 @@ h1: "Huile moteur : quelle huile mettre dans ma voiture, et quand faire la vidan
 description: "L'huile à mettre est celle du plan d'entretien de votre voiture, pas un grade choisi seul ; la vidange, à son échéance. Erreur d'huile : ce que dit Seat."
 libelle_court: Huile moteur
 question_decision: "Quelle huile mettre dans mon moteur, et à quel moment faire la vidange ?"
-reponse_directe: "Celle que demande le plan ou le document d'entretien de votre voiture pour son moteur : les notices lues ne donnent aucun grade valable pour toutes. La vidange se fait à l'échéance de ce plan, que rappelle le combiné."
+reponse_directe: "Celle que demande le plan ou le document d'entretien de votre voiture pour son moteur : les notices lues ne recommandent aucun grade. La vidange se fait à l'échéance de ce plan, que rappelle le combiné."
 situations:
   - voyant: entretien-vidange
   - situation: "Vous avez versé une huile moteur différente de celle que demande la notice ou le plan d'entretien"
