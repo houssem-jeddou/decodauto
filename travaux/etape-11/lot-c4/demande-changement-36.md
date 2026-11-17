@@ -39,8 +39,11 @@ entre une notice et le texte légal est signalé comme un écart entre marques.
 particulières doivent avoir « dans les rainures principales de leur bande de roulement, une profondeur d'au moins
 1,6 mm », « pendant toute leur utilisation sur route » → règle 1. Annexe I, 5.2.3 (relue le 17/11 vers 13 h 20) : e.2
 « L'indicateur d'usure de la profondeur des sculptures est atteint » : majeure ; e.3 « La profondeur des sculptures n'est
-pas conforme aux exigences » : critique → faits (règle 3). Code de la route, R314-1 : contravention de la quatrième
-classe, immobilisation possible → fait.
+pas conforme aux exigences » : critique → faits (règle 3). Code de la route, R314-1 (relu en entier le 17/11 vers
+15 h 10) : sculptures apparentes sur toute la surface de roulement, aucune toile visible, aucune déchirure profonde sur
+les flancs ; y contrevenir est puni de l'amende prévue pour les contraventions de la quatrième classe, immobilisation
+possible → fait. L'article 5 de l'arrêté de 2019, relu en entier, limite aussi à 5 mm l'écart de profondeur entre deux
+pneus d'un même essieu (fait, dit comme le texte le dit).
 
 Ce que les notices ajoutent (relevé, §13, relu à l'écran le 17/11 vers 14 h 20), classé par la grille actuelle :
 
@@ -64,8 +67,11 @@ seule lecture de Seat (principe 3) ; si Houssem classe autrement la consigne Sea
 - défaillances critiques (R) : « la validité du contrôle est limitée au jour du contrôle » → règle 1, après le jour du
   contrôle : **Non, ne poursuivez pas votre trajet · À faire tout de suite** ;
 - délai de deux mois dépassé : « faute de quoi un nouveau contrôle technique périodique est à réaliser » → règle 1 :
-  **Non, ne poursuivez pas votre trajet · À faire tout de suite**. Code de la route, R323-1 : contravention de la
-  quatrième classe, immobilisation possible → fait.
+  **Non, ne poursuivez pas votre trajet · À faire tout de suite**.
+- Code de la route, R323-1 (relu en entier le 17/11 vers 15 h 10) : « Tout propriétaire d'un véhicule mentionné au
+  présent chapitre n'est autorisé à le mettre ou le maintenir en circulation qu'après un contrôle technique ayant vérifié
+  qu'il est en bon état de marche et en état satisfaisant d'entretien. » → règle 1, cité aux lignes 2 et 3 avec
+  l'article 7 ; la sanction (quatrième classe, immobilisation, fourrière possible) → fait.
 
 ## Raison
 - Les deux pages sont des pages d'obligation : sans règle écrite, leur niveau dépendrait d'une analogie avec la loi
@@ -80,8 +86,7 @@ seule lecture de Seat (principe 3) ; si Houssem classe autrement la consigne Sea
   critiques, ni comment rejoindre un garage ensuite (relevé, §8) : la page ne l'affirme pas.
 - Aucune limite d'âge légale des pneus : l'âge de 6 ans n'est cité que comme consigne de la notice Seat Ibiza.
 - Le montant de l'amende forfaitaire de quatrième classe n'est relevé dans aucun texte : pas de montant affiché.
-- **À relire avant la validation** : la première phrase de R314-1 et de R323-1 (ce qui est puni) ; seules les phrases de
-  sanction ont été relevées mot pour mot (relevé, §7 et §8).
+- R314-1, R323-1 et l'article 5 de l'arrêté de 2019 sont relus en entier (relevé, §15, 17/11 vers 15 h 10).
 
 ## Impact sur ce qui est validé
 - `src/schemas/grille.ts` : trois règles ajoutées aux principes (ou un niveau de consignes « texte légal » par verdict),

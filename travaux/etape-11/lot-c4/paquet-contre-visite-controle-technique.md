@@ -27,8 +27,8 @@ au format 2, sujet « contrôle technique ».
 | Ligne | Situation | Niveau | Extrait cité | Règle (demande n° 36) |
 |---|---|---|---|---|
 | 1 | Résultat défavorable pour défaillances majeures (S), sans défaillance critique | **Oui, avec précautions** · **À prévoir dans les semaines qui viennent** | « un résultat défavorable pour défaillances majeures (S), en l'absence de défaillance critique et lorsqu'il est constaté au moins une défaillance majeure. Dans ce cas, la validité du contrôle est de deux mois à compter de la date du contrôle technique périodique » | règle 2 (délai pour se mettre en conformité) |
-| 2 | Résultat défavorable pour défaillances critiques (R), après le jour du contrôle | **Non, ne poursuivez pas votre trajet** · **À faire tout de suite** | « un résultat défavorable pour défaillances critiques (R) lorsqu'il est constaté au moins une défaillance critique. Dans ce cas, la validité du contrôle est limitée au jour du contrôle. » | règle 1 (plus de contrôle valable) |
-| 3 | Les deux mois sont passés sans contre-visite | **Non, ne poursuivez pas votre trajet** · **À faire tout de suite** | « Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être réalisée que dans le délai de deux mois après le contrôle technique périodique tel que défini à l'article 5, faute de quoi un nouveau contrôle technique périodique est à réaliser. » | règle 1 |
+| 2 | Résultat défavorable pour défaillances critiques (R), après le jour du contrôle | **Non, ne poursuivez pas votre trajet** · **À faire tout de suite** | « un résultat défavorable pour défaillances critiques (R) lorsqu'il est constaté au moins une défaillance critique. Dans ce cas, la validité du contrôle est limitée au jour du contrôle. » | règle 1 (plus de contrôle valable) ; avec R323-1 (ci-dessous) |
+| 3 | Les deux mois sont passés sans contre-visite | **Non, ne poursuivez pas votre trajet** · **À faire tout de suite** | « Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être réalisée que dans le délai de deux mois après le contrôle technique périodique tel que défini à l'article 5, faute de quoi un nouveau contrôle technique périodique est à réaliser. » | règle 1 ; avec R323-1 (ci-dessous) |
 
 Actions :
 1. « Vous pouvez rouler pendant deux mois à compter du contrôle : faites réparer les défaillances, puis passez la
@@ -38,7 +38,11 @@ Actions :
 3. « Le contrôle n'est plus valable : ne roulez pas avec la voiture. Il faut repasser un contrôle technique complet, et
    non plus une contre-visite. »
 
-- Une seule source par ligne (un texte légal) : la ligne n'a pas d'écart. Le jour même d'un résultat R, le contrôle est
+- **Lignes 2 et 3, citation ajoutée** (après la relecture de 15 h 10) : code de la route, article R323-1, « Tout
+  propriétaire d'un véhicule mentionné au présent chapitre n'est autorisé à le mettre ou le maintenir en circulation
+  qu'après un contrôle technique ayant vérifié qu'il est en bon état de marche et en état satisfaisant d'entretien. »
+  → Non, ne poursuivez pas votre trajet · tout de suite (règle 1 de la demande n° 36 : l'interdiction elle-même).
+- Les sources d'une même ligne donnent le même niveau : pas d'écart. Le jour même d'un résultat R, le contrôle est
   encore valable : la ligne 2 vise le lendemain et après, et le texte le dit.
 - **Ce que la page ne dit pas** : comment rejoindre un garage après le jour d'un résultat R (aucun texte relu ne le dit ;
   la page renvoie au centre ou au garage) ; le prix de la contre-visite ; le montant de l'amende.
@@ -60,10 +64,12 @@ Contrôle de la grille : aucune alerte R3-NIVEAU-A-VERIFIER pour la page.
 - Articles 7 et 8 et annexe I, 5.2.3 : relus à l'écran le 17/11 vers 13 h 20 (relevé, §14). Article 5 (un seul
   contrôleur à la contre-visite) : relu le 17/11 vers 1 h 50. Définitions des défaillances (article 7) : relevé [E8] du
   14/11, lu par Houssem.
-- **À relire avant la validation** : R323-1 : seules les phrases de sanction sont relevées (« est puni de l'amende prévue
-  pour les contraventions de la quatrième classe » ; « L'immobilisation peut être prescrite dans les conditions prévues
-  aux articles L. 325-1 à L. 325-3. ») ; la page écrit « Le code de la route en fait [de rouler sans contrôle technique
-  valable] une contravention de la quatrième classe » : la phrase qui dit ce qui est puni est à relire.
+- **R323-1 relu en entier le 17/11 vers 15 h 10** (relevé, §15), et la page changée en conséquence (changements après la
+  recette du 42fea1b, non relus par un relecteur indépendant) : section « Rouler sans contrôle technique valable »
+  réécrite sur le texte (autorisation de circuler seulement après un contrôle ; « mettre ou maintenir en circulation un
+  véhicule sans avoir satisfait aux obligations de contrôle technique » puni de l'amende prévue pour les contraventions
+  de la quatrième classe ; immobilisation ; fourrière possible à défaut de présentation ou si les réparations prescrites
+  ne sont pas faites) ; citation ajoutée aux lignes 2 et 3.
 - **Non cités** (passages « utiles » non relus, décision du pilotage) : fiche F2878 de service-public.fr ; intitulés des
   fonctions de l'annexe I (la page ne liste pas les « points de contrôle »).
 
@@ -81,12 +87,12 @@ Contrôle de la grille : aucune alerte R3-NIVEAU-A-VERIFIER pour la page.
 Preuves : `recette/` (communes au lot).
 - **Mesures** (`mesures-format2.txt`, 375 × 667, police chargée / de secours) : réponse directe finie à 467 / 492 px ;
   verdict et urgence de la première situation à 599 / 623 (667 au plus) ; première situation entière à 685 / 710 ;
-  encadré (3 lignes) fini à 1 342 / 1 367 ; illustration à 1 694 / 1 718 px, dans les trois premiers écrans ; page de
-  7 909 px. À 320 px : verdict et urgence à 686 ; aucun débordement.
+  encadré (3 lignes) fini à 1 342 / 1 367 ; illustration à 1 731 / 1 756 px, dans les trois premiers écrans ; page de
+  8 181 px (recette refaite après la relecture de 15 h 10 : bloc « Notices » plus long avec R323-1). À 320 px : verdict et urgence à 686 ; aucun débordement.
 - **Contrôle** (`controle.txt`) : seules erreurs, attendues, R4-VALIDATION-ABSENTE (pages sans empreinte) ; aucune
   alerte R3-NIVEAU-A-VERIFIER pour les pages du lot. Contrôles du lot (`controles-lot.txt`) : schémas, construction,
-  `npm run liens` (1 138 liens, 0 problème), démonstration, indexation durable, modes : verts ; **`npm test` : 863 sur
-  864**, `tests/porte6.test.ts` rouge, non modifié (`points-ouverts.md`). Liens de la construction de recette
+  `npm run liens` (1 138 liens, 0 problème), démonstration, indexation durable, modes : verts ; `npm test` : 865 sur 865
+  après la correction de `tests/porte6.test.ts` (`points-ouverts.md`, §1 ; 863 sur 864 avant, sur 42fea1b). Liens de la construction de recette
   (`liens-recette.txt`) : 1 336 liens, 0 problème.
 - **Lighthouse mobile** (`lighthouse.txt`), emplacements factices : performance 100, accessibilité 100, bonnes pratiques
   100, CLS 0 ; **SEO 66** : seul l'audit « is-crawlable » échoue (construction de recette non indexable, noindex attendu).
@@ -97,8 +103,8 @@ Preuves : `recette/` (communes au lot).
 1. **Demande n° 36**, règles 1 et 2 appliquées aux trois lignes. **Recommandation : accepter.**
 2. **Ligne 1 à « À prévoir dans les semaines qui viennent »** (deux mois de validité) plutôt que « dans les jours qui
    viennent ». **Recommandation : valider** : le texte donne lui-même le délai.
-3. **R323-1** cité comme fait, à relire. **Recommandation : relire la première phrase avant de valider.**
-4. **Test `porte6.test.ts` rouge** : voir `points-ouverts.md`.
+3. **R323-1 aux lignes 2 et 3** (interdiction de circuler sans contrôle valable). **Recommandation : valider.**
+4. **Changement d'un contrôle** : `tests/porte6.test.ts` (voir `points-ouverts.md`, §1). **À valider avec le lot.**
 
 ## 7. Ligne de validation proposée (page « contre-visite »)
 « Je valide la page « contre-visite du contrôle technique » : la question de décision, la réponse directe, les trois

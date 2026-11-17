@@ -1,4 +1,4 @@
-Brouillon, jamais validé. Contrôles du lot C4, 17/11/2026 (npm test : 863 sur 864, porte6.test.ts rouge, voir points-ouverts.md).
+Brouillon, jamais validé (après la relecture de Légifrance du 17/11 vers 15 h 10 et la correction de tests/porte6.test.ts). Contrôles du lot C4, 17/11/2026.
 
 == schemas
 - 0 hints
@@ -6,10 +6,9 @@ Brouillon, jamais validé. Contrôles du lot C4, 17/11/2026 (npm test : 863 sur 
 FIN 0
 
 == test
-not ok 106 - porte de sortie de l'étape 6
-# tests 864
-# pass 863
-# fail 1
+# tests 865
+# pass 865
+# fail 0
 
 == build
 INFO 20 lien(s) du plan (paires déclarées et liens mère-enfant) en attente de leur page : ils s'afficheront quand les deux pages seront écrites

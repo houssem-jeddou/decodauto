@@ -1,4 +1,4 @@
-Brouillon, jamais validé. FORMAT2-MESURES, construction de recette (AVEC_EXEMPLES=1), lot C4, 17/11/2026.
+Brouillon, jamais validé (après la relecture de Légifrance du 17/11 vers 15 h 10). FORMAT2-MESURES, construction de recette (AVEC_EXEMPLES=1), lot C4, 17/11/2026.
 
 FORMAT2-MESURES : 38 page(s) au format 2 dans dist-exemples
 Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situation | Bas de l’encadré | Illustration | Après « Notices » | Arbre ou étapes | Hauteur | Sommaire | Largeur de page | Débordements
@@ -32,9 +32,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /codes-defaut/p0420/ | 320 | chargée | – | 431 | 621 | 1007 | 1398 | oui | – | 10481 | oui | 320 | 0
 /codes-defaut/p0420/ | 375 | chargée | – | 396 | 545 | 870 | 1202 | oui | – | 9185 | oui | 375 | 0
 /codes-defaut/p0420/ | 1366 | chargée | – | 309 | 375 | 558 | 755 | oui | – | 6018 | oui | 1366 | 0
-/contre-visite-controle-technique/ | 320 | chargée | 535 | 686 | 814 | 1604 | 1995 | oui | – | 9013 | oui | 320 | 0
-/contre-visite-controle-technique/ | 375 | chargée | 467 | 599 | 685 | 1342 | 1694 | oui | – | 7909 | oui | 375 | 0
-/contre-visite-controle-technique/ | 1366 | chargée | 337 | 404 | 450 | 826 | 1023 | oui | – | 5014 | oui | 1366 | 0
+/contre-visite-controle-technique/ | 320 | chargée | 535 | 686 | 814 | 1604 | 2032 | oui | – | 9335 | oui | 320 | 0
+/contre-visite-controle-technique/ | 375 | chargée | 467 | 599 | 685 | 1342 | 1731 | oui | – | 8181 | oui | 375 | 0
+/contre-visite-controle-technique/ | 1366 | chargée | 337 | 404 | 450 | 826 | 1042 | oui | – | 5168 | oui | 1366 | 0
 /fumee-echappement/ | 320 | chargée | – | 442 | 550 | 1506 | 1934 | oui | 3071 | 8742 | oui | 320 | 0
 /fumee-echappement/ | 375 | chargée | – | 377 | 464 | 1324 | 1694 | oui | 2789 | 7640 | oui | 375 | 0
 /fumee-echappement/ | 1366 | chargée | – | 287 | 332 | 826 | 1042 | oui | 1962 | 5232 | oui | 1366 | 0
@@ -71,9 +71,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /pression-des-pneus/ | 320 | chargée | 448 | 674 | 905 | 1291 | 1644 | oui | – | 9051 | oui | 320 | 0
 /pression-des-pneus/ | 375 | chargée | 402 | 573 | 764 | 1088 | 1383 | oui | – | 8118 | oui | 375 | 0
 /pression-des-pneus/ | 1366 | chargée | 293 | 384 | 470 | 653 | 831 | oui | – | 5118 | oui | 1366 | 0
-/usure-des-pneus/ | 320 | chargée | 467 | 636 | 743 | 1926 | 2586 | oui | – | 10361 | oui | 320 | 0
-/usure-des-pneus/ | 375 | chargée | 424 | 557 | 644 | 1636 | 2200 | oui | – | 9195 | oui | 375 | 0
-/usure-des-pneus/ | 1366 | chargée | 315 | 401 | 447 | 1011 | 1308 | oui | – | 5872 | oui | 1366 | 0
+/usure-des-pneus/ | 320 | chargée | 467 | 636 | 743 | 1926 | 2586 | oui | – | 10670 | oui | 320 | 0
+/usure-des-pneus/ | 375 | chargée | 424 | 557 | 644 | 1636 | 2200 | oui | – | 9504 | oui | 375 | 0
+/usure-des-pneus/ | 1366 | chargée | 315 | 401 | 447 | 1011 | 1308 | oui | – | 6008 | oui | 1366 | 0
 /voiture-ne-demarre-pas/ | 320 | chargée | – | 435 | 625 | 2528 | 3144 | oui | 4387 | 15870 | oui | 320 | 0
 /voiture-ne-demarre-pas/ | 375 | chargée | – | 396 | 545 | 2135 | 2656 | oui | 3811 | 13427 | oui | 375 | 0
 /voiture-ne-demarre-pas/ | 1366 | chargée | – | 305 | 371 | 1283 | 1575 | oui | 2526 | 8695 | oui | 1366 | 0
@@ -146,9 +146,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /codes-defaut/p0420/ | 320 | secours | – | 431 | 621 | 1007 | 1398 | oui | – | 10507 | oui | 320 | 0
 /codes-defaut/p0420/ | 375 | secours | – | 396 | 545 | 870 | 1202 | oui | – | 9236 | oui | 375 | 0
 /codes-defaut/p0420/ | 1366 | secours | – | 309 | 375 | 558 | 755 | oui | – | 6069 | oui | 1366 | 0
-/contre-visite-controle-technique/ | 320 | secours | 535 | 686 | 814 | 1604 | 1995 | oui | – | 9013 | oui | 320 | 0
-/contre-visite-controle-technique/ | 375 | secours | 492 | 623 | 710 | 1367 | 1718 | oui | – | 7980 | oui | 375 | 0
-/contre-visite-controle-technique/ | 1366 | secours | 337 | 404 | 450 | 826 | 1023 | oui | – | 5014 | oui | 1366 | 0
+/contre-visite-controle-technique/ | 320 | secours | 535 | 686 | 814 | 1604 | 2032 | oui | – | 9335 | oui | 320 | 0
+/contre-visite-controle-technique/ | 375 | secours | 492 | 623 | 710 | 1367 | 1756 | oui | – | 8252 | oui | 375 | 0
+/contre-visite-controle-technique/ | 1366 | secours | 337 | 404 | 450 | 826 | 1042 | oui | – | 5168 | oui | 1366 | 0
 /fumee-echappement/ | 320 | secours | – | 442 | 550 | 1506 | 1934 | oui | 3071 | 8742 | oui | 320 | 0
 /fumee-echappement/ | 375 | secours | – | 377 | 464 | 1324 | 1694 | oui | 2789 | 7640 | oui | 375 | 0
 /fumee-echappement/ | 1366 | secours | – | 287 | 332 | 826 | 1042 | oui | 1962 | 5232 | oui | 1366 | 0
@@ -185,9 +185,9 @@ Adresse | Largeur | Police | Réponse directe | Verdict et urgence | 1re situati
 /pression-des-pneus/ | 320 | secours | 448 | 674 | 905 | 1291 | 1644 | oui | – | 9101 | oui | 320 | 0
 /pression-des-pneus/ | 375 | secours | 402 | 573 | 764 | 1088 | 1383 | oui | – | 8118 | oui | 375 | 0
 /pression-des-pneus/ | 1366 | secours | 293 | 384 | 470 | 653 | 831 | oui | – | 5143 | oui | 1366 | 0
-/usure-des-pneus/ | 320 | secours | 467 | 636 | 743 | 1926 | 2586 | oui | – | 10412 | oui | 320 | 0
-/usure-des-pneus/ | 375 | secours | 424 | 557 | 644 | 1636 | 2200 | oui | – | 9195 | oui | 375 | 0
-/usure-des-pneus/ | 1366 | secours | 315 | 401 | 447 | 1011 | 1308 | oui | – | 5872 | oui | 1366 | 0
+/usure-des-pneus/ | 320 | secours | 467 | 636 | 743 | 1926 | 2586 | oui | – | 10721 | oui | 320 | 0
+/usure-des-pneus/ | 375 | secours | 424 | 557 | 644 | 1636 | 2200 | oui | – | 9504 | oui | 375 | 0
+/usure-des-pneus/ | 1366 | secours | 315 | 401 | 447 | 1011 | 1308 | oui | – | 6008 | oui | 1366 | 0
 /voiture-ne-demarre-pas/ | 320 | secours | – | 459 | 649 | 2552 | 3169 | oui | 4412 | 15894 | oui | 320 | 0
 /voiture-ne-demarre-pas/ | 375 | secours | – | 396 | 545 | 2135 | 2656 | oui | 3836 | 13477 | oui | 375 | 0
 /voiture-ne-demarre-pas/ | 1366 | secours | – | 305 | 371 | 1283 | 1575 | oui | 2526 | 8695 | oui | 1366 | 0
