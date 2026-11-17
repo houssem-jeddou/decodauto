@@ -1,3 +1,11 @@
+> **Validé par Houssem le 17/11/2026 à 7 h 39 : « Je valide tout ! Fais le necessaire ».** Réponse au message du
+> pilotage du matin, qui portait mot pour mot la ligne de validation de ce paquet (« Ligne de validation proposée »,
+> ci-dessous : « Je valide le lot B4 : perte de puissance … »), demande de changement de la requête principale de la
+> page fumée comprise (n° 34, `demande-changement-fumee.md`). Empreintes des quatre pages (perte de puissance, voiture
+> qui broute, bruit moteur, fumée à l'échappement) posées ensuite par `npm run empreinte`, sur le contenu du paquet
+> (pages de 76a4786 et des commits du 16/11 à 23 h 13, paquet de 52287cf), sans autre changement ; passage dans
+> `src/content` par `npm run passage` (règle de passage).
+
 ## Points à trancher (avec ma recommandation)
 1. **Moteur essence : ratés, à-coups ou perte de puissance, sans voyant moteur** (« perte de puissance », ligne 5 ;
    « voiture qui broute », ligne 3) : **Non, ne poursuivez pas votre trajet** · À faire tout de suite (était « Oui, avec

@@ -46,7 +46,7 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 | perte-de-puissance | `/perte-de-puissance-voiture/` | panne | B | perte de puissance voiture | 14 (14) | 7 268 | – | code-p0087, code-p0299, fumee-echappement, voiture-qui-broute, voyant-fap, voyant-moteur, voyant-prechauffage |
 | surchauffe-moteur | `/moteur-qui-surchauffe/` | panne | B | moteur qui surchauffe | 25 (21) | 18 012 | – | fumee-echappement, liquide-de-refroidissement, voyants |
 | bruit-moteur | `/bruit-moteur/` | panne | B | bruit moteur | 24 (24) | 13 272 | – | moteur-puretech, niveau-huile |
-| fumee-echappement | `/fumee-echappement/` | panne | B | fumée blanche échappement | 28 (26) | 13 904 | – | perte-de-puissance, surchauffe-moteur, voyant-fap |
+| fumee-echappement | `/fumee-echappement/` | panne | B | fumée blanche voiture | 28 (26) | 13 904 | – | perte-de-puissance, surchauffe-moteur, voyant-fap |
 | batterie-voiture | `/batterie-voiture/` | panne | B | voltage batterie voiture | 12 (12) | 15 168 | – | voiture-ne-demarre-pas, voyant-batterie |
 | batterie-changer | `/batterie-voiture/changer/` | panne | B | comment changer une batterie de voiture | 15 (15) | 16 116 | batterie-voiture | voiture-ne-demarre-pas |
 | batterie-recharger | `/batterie-voiture/recharger/` | panne | B | recharger une batterie de voiture | 17 (15) | 13 272 | batterie-voiture | voiture-ne-demarre-pas |

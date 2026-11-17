@@ -1,6 +1,8 @@
 ---
-# BROUILLON, jamais validé. Étape 10, lot B4 (rédaction ouverte par la validation de la porte 10 le 16/11/2026,
-# 19 h 26). Page de la vague B, sans empreinte tant que Houssem n'a pas validé son encadré (paquet du lot B4).
+# Page de la vague B, étape 10, lot B4 (rédaction ouverte par la validation de la porte 10 le 16/11/2026, 19 h 26).
+# Validée par Houssem le 17/11/2026 à 7 h 39 (« Je valide tout ! Fais le necessaire », sur la ligne de validation de
+# travaux/etape-10/paquet-lot-b4-fin.md) ; empreinte posée et passage de exemples/ à src/content par la pull request
+# du lot B4 (règle de passage).
 # - Extraits relus mot pour mot le 16/11/2026 : travaux/etape-10/textes/autres-pannes-verification.md (Renault p. 186
 #   et 386, Dacia p. 160 et 348-349, Peugeot p. 168, Citroën p. 115, Seat p. 213 et 290). Ligne 4 au même niveau que la
 #   ligne 2 de « moteur qui surchauffe », sans la phrase sur le capot (Seat p. 290, citée dans le texte). Contrôle
@@ -107,6 +109,7 @@ date_publication: 2026-11-16
 date_modification: 2026-11-16
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
+validation: d9e1dc2f264f42ae72eeafa5cc37de6c95d5dd7f16e3d3218fa02d55189293f7
 causes:
   - cause: Nettoyage automatique du filtre à particules (diesel)
     explication: "Selon les notices Renault Clio 5 et Dacia Sandero 3, des fumées blanches peuvent exceptionnellement apparaître en roulant pendant le nettoyage automatique du filtre à particules, sans conséquence sur le comportement de la voiture."

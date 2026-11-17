@@ -1,6 +1,8 @@
 ---
-# BROUILLON, jamais validé. Étape 10, lot B4 (rédaction ouverte par la validation de la porte 10 le 16/11/2026,
-# 19 h 26). Page de la vague B, sans empreinte tant que Houssem n'a pas validé son encadré (paquet du lot B4).
+# Page de la vague B, étape 10, lot B4 (rédaction ouverte par la validation de la porte 10 le 16/11/2026, 19 h 26).
+# Validée par Houssem le 17/11/2026 à 7 h 39 (« Je valide tout ! Fais le necessaire », sur la ligne de validation de
+# travaux/etape-10/paquet-lot-b4-fin.md) ; empreinte posée et passage de exemples/ à src/content par la pull request
+# du lot B4 (règle de passage).
 # - Extraits relus mot pour mot le 16/11/2026 : travaux/etape-10/textes/autres-pannes-verification.md (Dacia p. 162,
 #   Renault p. 188, Seat p. 283, 288 et 289, Toyota p. 291 et 322-323). Lignes du voyant moteur et de la température
 #   reprises de la base.
@@ -129,6 +131,7 @@ date_publication: 2026-11-16
 date_modification: 2026-11-16
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
+validation: 5d8140aa5075b6205d70384bb90814512017e937bdb17782c2e62e70a3baaf01
 causes:
   - cause: Allumage défectueux ou bougie débranchée (essence)
     explication: "Selon les notices Dacia Sandero 3 et Renault Clio 5, un système d'allumage défectueux ou une bougie débranchée se traduit par des ratés d'allumage et des à-coups ; ces anomalies, comme une perte de puissance, échauffent le pot catalytique et peuvent amener sa destruction."

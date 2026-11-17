@@ -1,8 +1,8 @@
-# Demande de changement (numéro attribué à la présentation) : requête principale de la page « fumée à l'échappement »
+# Demande de changement n° 34 : requête principale de la page « fumée à l'échappement »
 
-> **Brouillon, jamais validé.** Proposée avec le lot B4 de la vague B (étape 10). Rien n'est appliqué à `main` sans
-> l'accord de Houssem ; le changement est déjà écrit sur la branche `etape-10/lot-b4` pour que la recette du lot se
-> construise.
+> **Acceptée par Houssem le 17/11/2026 (7 h 39) avec le lot B4** (« Je valide tout ! Fais le necessaire »). Proposée
+> avec le lot B4 de la vague B (étape 10) ; le changement est écrit sur la branche `etape-10/lot-b4` et entre dans
+> `main` avec la pull request du lot.
 
 - **Élément** : plan du site (`data/plan-du-site.json`, figé à l'étape 4), page `fumee-echappement`
   (`/fumee-echappement/`, vague B, jamais publiée), champ `requete_principale`.

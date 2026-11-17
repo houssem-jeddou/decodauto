@@ -1,6 +1,8 @@
 ---
-# BROUILLON, jamais validé. Étape 10, lot B4 (rédaction ouverte par la validation de la porte 10 le 16/11/2026,
-# 19 h 26). Page de la vague B, sans empreinte tant que Houssem n'a pas validé son encadré (paquet du lot B4).
+# Page de la vague B, étape 10, lot B4 (rédaction ouverte par la validation de la porte 10 le 16/11/2026, 19 h 26).
+# Validée par Houssem le 17/11/2026 à 7 h 39 (« Je valide tout ! Fais le necessaire », sur la ligne de validation de
+# travaux/etape-10/paquet-lot-b4-fin.md) ; empreinte posée et passage de exemples/ à src/content par la pull request
+# du lot B4 (règle de passage).
 # - Extraits relus mot pour mot le 16/11/2026 : travaux/etape-10/textes/autres-pannes-verification.md (Toyota p. 36,
 #   242, 291 et 335 ; Seat p. 213, 290 et 297-298 ; Peugeot p. 165). Ligne de pression d'huile reprise de la base.
 # - Corrigée après la revue indépendante du 16/11/2026 (non relue depuis) : ligne 2 au niveau « Non, ne poursuivez pas
@@ -103,6 +105,7 @@ date_publication: 2026-11-16
 date_modification: 2026-11-16
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
+validation: 9e0425ec7131c3306be33c028895a7d78610358ffad0cd79cb8b6690e6f2166c
 causes:
   - cause: Bruit normal du moteur froid ou de la régénération
     explication: "Selon la notice Seat Ibiza, le bruit augmente brièvement au démarrage à froid, et la régénération du filtre à particules peut s'accompagner de bruit, d'odeurs et d'un ralenti plus élevé."
