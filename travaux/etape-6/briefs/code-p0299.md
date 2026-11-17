@@ -97,7 +97,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le code P0299 ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le code P0299 ? »
 - **Angle** : Pression de suralimentation (turbo) trop faible ; les lecteurs cherchent les symptômes et la marque. Le reste vient de sources admises (charte §2.2) ; le verdict, de la ligne du voyant qui s'allume avec le code.
 - **Élément unique** : Tableau des cas décrits par marque (modèle 6.6b).
 - **À traiter** :

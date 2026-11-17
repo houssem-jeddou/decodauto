@@ -87,7 +87,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Du 1er novembre au 31 mars, puis-je rouler dans une commune soumise à la loi montagne sans pneus hiver ni chaînes ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Du 1er novembre au 31 mars, puis-je rouler dans une commune soumise à la loi montagne sans pneus hiver ni chaînes ? »
 - **Angle** : Exemple validé en 6.6c : obligation du 1er novembre au 31 mars dans les communes désignées par arrêté préfectoral (code de la route, art. D314-8), avec « Le texte en bref » et le tableau du texte.
 - **Élément unique** : Tableau du texte, déjà dans l'exemple.
 - **À traiter** :

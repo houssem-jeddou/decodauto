@@ -135,12 +135,15 @@ describe('contrôle FORMAT2-VAGUE (demande de changement n° 30, F1.4)', () => {
   const vagueDe = (id: string): string | undefined => vagues[id];
   const regles = (c: readonly { regle: string }[]): string[] => c.map((x) => x.regle);
 
-  test('le fichier du dépôt est lisible et porte le lot F2 : l\'accueil et les pages voyants de la vague A, dans l\'ordre du plan (la page 404, hors du plan, suit l\'accueil)', async () => {
+  test('le fichier du dépôt est lisible et porte les lots F2 puis F3, chacun dans l\'ordre du plan : l\'accueil et les pages voyants de la vague A (la page 404, hors du plan, suit l\'accueil) ; les autres pages en ligne (socle, codes, pneus et obligations)', async () => {
     const plan = JSON.parse(await readFile(join(racineDepot, 'data/plan-du-site.json'), 'utf8')) as { id: string; type: string; vague: string }[];
     const lotF2 = ['accueil', ...plan.filter((l) => l.type === 'voyant' && l.vague === 'A').map((l) => l.id)];
     assert.equal(lotF2.length, 13);
-    assert.deepEqual(await chargerLotsFormat2(racineDepot), lotF2);
-    assert.deepEqual(JSON.parse(await readFile(join(racineDepot, FICHIER_LOTS_FORMAT2), 'utf8')), { pages: lotF2 });
+    const F3 = new Set(['mentions-legales', 'a-propos', 'code-p0087', 'code-p0299', 'code-p0420', 'loi-montagne', 'pression-des-pneus']);
+    const lotF3 = plan.filter((l) => F3.has(l.id)).map((l) => l.id);
+    assert.equal(lotF3.length, 7);
+    assert.deepEqual(await chargerLotsFormat2(racineDepot), [...lotF2, ...lotF3]);
+    assert.deepEqual(JSON.parse(await readFile(join(racineDepot, FICHIER_LOTS_FORMAT2), 'utf8')), { pages: [...lotF2, ...lotF3] });
   });
 
   test('lecture : { "pages": [...] } sans doublon ; autre forme refusée', () => {

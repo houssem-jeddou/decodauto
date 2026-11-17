@@ -265,7 +265,7 @@ export function genererBrief(e: EntreeBrief): string {
   else {
     const c = e.consignes;
     if (page.type === 'socle') l.push("- **Encadré de décision et élément unique** : aucun (page du socle, docs/08 §2).");
-    else if (e.questionExemple !== undefined) l.push(`- **Question de décision** (validée dans l'exemple) : « ${e.questionExemple} »`);
+    else if (e.questionExemple !== undefined) l.push(`- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « ${e.questionExemple} »`);
     else if (c.question_decision !== undefined) l.push(`- **Question de décision proposée** : « ${c.question_decision} »`);
     l.push(`- **Angle** : ${c.angle}`);
     if (c.element_unique !== undefined) l.push(`- **Élément unique** : ${c.element_unique}`);

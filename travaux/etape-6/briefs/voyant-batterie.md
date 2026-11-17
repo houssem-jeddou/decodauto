@@ -79,7 +79,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant de batterie allumé ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le voyant de batterie allumé ? »
 - **Angle** : Une seule ligne de la base, le voyant de charge rouge, avec un écart entre marques à afficher. Les lecteurs cherchent surtout pourquoi il reste allumé avec une batterie neuve ou un alternateur en bon état.
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque ».
 - **À traiter** :

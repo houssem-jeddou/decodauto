@@ -96,7 +96,7 @@ Suggérées par Google pour cette page, sans volume mesuré ou sous 100 recherch
 
 ## Consignes de rédaction (proposées par Claude ; la validation de Houssem est notée au journal)
 
-- **Question de décision** (validée dans l'exemple) : « Puis-je continuer à rouler avec le voyant moteur allumé ? »
+- **Question de décision** (celle de la page rédigée ; sa validation est celle de l'encadré, empreinte comprise) : « Puis-je continuer à rouler avec le voyant moteur allumé ? »
 - **Angle** : Exemple validé en 6.6a : verdict de la base et écart entre marques affiché dès l'encadré, face à l'aperçu IA qui dit le contraire (relevé, constat 2).
 - **Élément unique** : Tableau « Ce que dit la notice de votre marque » (demande de changement n° 8), déjà dans l'exemple.
 - **À traiter** :

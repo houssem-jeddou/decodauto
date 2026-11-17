@@ -384,21 +384,25 @@ describe('format 2 : construction de démonstration', () => {
     const un = { ...brouillon, pages: { 'voyant-moteur': { illustration: { fichier: 'f', alt: 'a', legende: 'l' }, reperes: [{ titre: 'Combien de kilomètres peut-on faire ?', repere: 'moteur-orange-fixe' }] } } };
     assert.equal(corpsAvecReperes('voyant-moteur', '<h2 id="x">Combien de kilomètres peut-on faire&nbsp;?</h2><p>a</p>', un), '<h2 id="x">Combien de kilomètres peut-on faire&nbsp;?</h2><p>{{repere:moteur-orange-fixe}}</p><p>a</p>');
     assert.throws(() => corpsAvecReperes('voyant-moteur', '<h2>Autre</h2>', un), /introuvable/);
-    // Lot F2 : les données du format 2 et les pages du lot sont dans data/voyants.json et src/content ; la démonstration ne
-    // les simule plus (aucune ligne de la base, aucune page du lot, pas l'accueil dans le brouillon).
+    // Lots F2 et F3 : les données du format 2 et les pages des lots sont dans data/voyants.json et src/content ; la
+    // démonstration n'en simule plus aucune (aucune ligne de la base, aucune page, ni l'accueil ni le socle).
     assert.deepEqual(brouillon.voyants, {});
     assert.ok(base.every((v) => (v as { citations: { demande?: string }[] }).citations.every((c) => c.demande !== undefined)));
     assert.equal(brouillon.accueil, undefined);
-    assert.deepEqual(Object.keys(brouillon.pages).sort(), ['code-p0420', 'loi-montagne', 'pression-des-pneus']);
+    assert.deepEqual(brouillon.pages, {});
+    assert.deepEqual(brouillon.socle ?? [], []);
+    for (const f of ['src/content/code-defaut/code-p0420.md', 'src/content/pneus/loi-montagne.md', 'src/content/pneus/pression-des-pneus.md']) assert.ok((await readFile(join(racine, f), 'utf8')).includes('\nformat: 2\n'), f);
     assert.ok((await readFile(join(racine, MOTEUR), 'utf8')).includes('\nformat: 2\n'));
   });
 
-  test('erreurs attendues : l\'empreinte de chaque ligne et de chaque page du brouillon (R4-EMPREINTE), la méthode et les paragraphes des textes non repris, rien d\'autre', () => {
-    const attendus = attendusDemoFormat2(brouillon, (id) => `src/content/voyant/${id}.md`);
-    const aReprendre = Object.values(brouillon.pages).filter((p) => p.texte_a_reprendre === true).length;
-    // F1.4 : paragraphes de plus de trois phrases des textes en ligne non repris (FORMAT2-PARAGRAPHES, pages nommées).
-    assert.equal(attendus.length, Object.keys(brouillon.voyants).length + Object.keys(brouillon.pages).length + aReprendre + PARAGRAPHES_A_REPRENDRE_DEMO.length);
-    assert.deepEqual([...new Set(attendus.map((a) => a.regle))].sort(), ['FORMAT2-METHODE', 'FORMAT2-PARAGRAPHES', 'R4-EMPREINTE']);
+  test('erreurs attendues : aucune depuis le lot F3 ; la fonction donne l\'empreinte de chaque ligne et page simulée (R4-EMPREINTE) et la méthode d\'un texte non repris', () => {
+    // Depuis le lot F3, le brouillon ne simule plus rien et tous les textes sont repris : aucune erreur attendue.
+    assert.deepEqual(attendusDemoFormat2(brouillon, (id) => `src/content/voyant/${id}.md`), []);
+    assert.deepEqual(PARAGRAPHES_A_REPRENDRE_DEMO, []);
+    // La fonction reste vérifiée sur un brouillon qui simulerait une ligne et une page au texte non repris.
+    const simule = { ...brouillon, voyants: { 'moteur-rouge': {} }, pages: { 'voyant-moteur': { illustration: { fichier: 'f', alt: 'a', legende: 'l' }, texte_a_reprendre: true } } };
+    const attendus = attendusDemoFormat2(simule, (id) => `src/content/voyant/${id}.md`);
+    assert.deepEqual(attendus.map((a) => `${a.regle}@${a.fichier}`).sort(), ['FORMAT2-METHODE@src/content/voyant/voyant-moteur.md', 'R4-EMPREINTE@data/voyants.json', 'R4-EMPREINTE@src/content/voyant/voyant-moteur.md']);
   });
 
   test('option --demo-format2 : seulement sur dist-demo-format2 construit avec DEMO_FORMAT2=1 ; garde-fou DEMO-PUBLIEE', () => {
