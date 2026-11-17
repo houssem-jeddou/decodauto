@@ -5,7 +5,7 @@
 > pourrait expliquer un grade. Aucune page de grade n'est écrite dans `exemples/` : un fichier incomplet ferait échouer
 > la construction.
 
-## Ce que les sources permettent aujourd'hui (relevé à l'écran du 17/11 vers 12 h 15, relevé des sources §11)
+## Ce que les sources permettent aujourd'hui (relevé à l'écran du 17/11 vers 11 h 50, relevé des sources §11)
 - Aucune des cinq notices lues (Peugeot 208, Citroën C3, Renault Clio 5, Dacia Sandero 3, Seat Ibiza) n'explique un
   grade ni n'en recommande un ; Peugeot, Citroën, Renault et Dacia n'en citent aucun.
 - Seat Ibiza cite « ACEA C3 », des normes VW (essence : 504 00, 502 00, 508 00 ; diesel : 507 00, 505 01) et API (SN,

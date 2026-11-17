@@ -231,9 +231,9 @@ défaillance critique (la fiche F2878 ne le dit pas : la page ne l'affirmera pas
 3. **Une seule notice** (Seat Leon pour le liquide de frein ; Seat Ibiza pour le vase vide ; Peugeot et Citroën, un seul
    groupe, pour la jauge) : admis pour une ligne saisie (charte §2.1), la page le dit ; à relire à l'écran d'abord.
 
-## 11. Relevé à l'écran du 17/11/2026 vers 12 h 15 (lot C2 : huiles)
+## 11. Relevé à l'écran du 17/11/2026 vers 11 h 50 (lot C2 : huiles)
 
-**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 12 h 15) : page imprimée, page du PDF entre
+**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 11 h 50) : page imprimée, page du PDF entre
 parenthèses. Recherche dans chaque PDF entier de « SAE », « viscosit », « ACEA », « vidange » : aucune viscosité ni grade
 SAE chez Peugeot, Citroën, Renault, Dacia ; chez Seat, seulement « ACEA C3 » (p. 294). **Aucune des cinq notices
 n'explique un grade.** Peugeot PDF 147 : page publicitaire d'une marque d'huile (« 0W-20 ») : ni consigne ni source
@@ -329,9 +329,9 @@ sur la 85W140.
 - p. 99 (PDF 101) : même texte d'autonomie de vidange que Renault ; « Vidange dans 30 000 km/24 mois » y est un exemple
   d'affichage, pas une périodicité : à ne pas citer comme telle.
 
-## 12. Relevé à l'écran du 17/11/2026 vers 13 h 30 (lot C3 : liquide de refroidissement, liquide de frein)
+## 12. Relevé à l'écran du 17/11/2026 vers 12 h 30 (lot C3 : liquide de refroidissement, liquide de frein)
 
-**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 13 h 30) : page imprimée, page du PDF entre
+**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 12 h 30) : page imprimée, page du PDF entre
 parenthèses. Toyota : non lu (même blocage, PDF sur s3.amazonaws.com). Décisions du pilotage du même jour (règle 6) :
 encadrés sur ces citations, le plus prudent l'emporte, écart signalé ; lignes de base `temperature-rouge` et
 `frein-rouge` reprises ; liquide marron (Seat seule) classé par la grille ; DOT 4 dit seulement comme Peugeot, Citroën et

@@ -85,7 +85,7 @@ poursuivez pas votre trajet » ; cité dans le coût (« si vous continuez »).
 - **Base du coût** : inchangée (circuit plus étanche selon Seat ; plaquettes selon Peugeot et Citroën).
 
 ## 3. Extraits et faits : relus à l'écran
-- **Relu à l'écran** le 17/11/2026 vers 13 h 30 (relevé, §12) : Seat Ibiza p. 299 ; Peugeot 208 p. 166 ; Citroën C3
+- **Relu à l'écran** le 17/11/2026 vers 12 h 30 (relevé, §12) : Seat Ibiza p. 299 ; Peugeot 208 p. 166 ; Citroën C3
   p. 113 ; Renault Clio 5 phase 2 p. 336-337 ; Dacia Sandero 3 p. 299. Lignes de base `frein-rouge` (Seat p. 251, Peugeot
   p. 14, Renault p. 137, Dacia p. 110-111, Toyota p. 292) : validées.
 - **DOT 4** : dit seulement comme Peugeot et Citroën (« DOT4 provenant d'un bidon scellé ») et Seat (VW 501 14, sinon DIN
