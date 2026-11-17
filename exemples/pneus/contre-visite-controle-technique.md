@@ -4,7 +4,8 @@
 # - Sources : arrêté du 18 juin 1991, articles 7 et 8 et annexe I, 5.2.3 (Légifrance relu à l'écran le 17/11/2026 vers
 #   13 h 20 ; travaux/etape-11/textes/releve-sources.md, §14) ; définitions des défaillances (article 7) et points de
 #   l'annexe I liés aux voyants : relevé de l'étape 8 (Légifrance lu par Houssem le 14/11, travaux/etape-8/textes/
-#   controle-technique-releve.md) ; code de la route R323-1 (relu à l'écran le 17/11 vers 1 h 50).
+#   controle-technique-releve.md) ; code de la route R323-1 (relu à l'écran le 17/11 vers 1 h 50, puis en entier vers
+#   15 h 10, §15) : cité aux lignes 2 et 3 (règle 1 de la demande n° 36).
 # - Niveaux des lignes : obligation légale, par la demande de changement n° 36 (proposée) : défaillances majeures, contrôle
 #   valable deux mois (règle 2) ; défaillances critiques après le jour du contrôle, et délai dépassé (règle 1).
 # - Aucun texte relu ne dit comment rejoindre un garage après le jour d'un résultat critique : la page ne l'affirme pas.
@@ -37,6 +38,11 @@ situations:
         extrait: "un résultat défavorable pour défaillances critiques (R) lorsqu'il est constaté au moins une défaillance critique. Dans ce cas, la validité du contrôle est limitée au jour du contrôle."
         verdict: non, arrêt dès que possible
         urgence: immédiate
+      - source: code-de-la-route-r323-1
+        emplacement: "article R323-1"
+        extrait: "Tout propriétaire d'un véhicule mentionné au présent chapitre n'est autorisé à le mettre ou le maintenir en circulation qu'après un contrôle technique ayant vérifié qu'il est en bon état de marche et en état satisfaisant d'entretien."
+        verdict: non, arrêt dès que possible
+        urgence: immédiate
   - situation: "Les deux mois sont passés sans contre-visite"
     verdict: non, arrêt dès que possible
     urgence: immédiate
@@ -45,6 +51,11 @@ situations:
       - source: arrete-1991-06-18-controle-technique
         emplacement: "article 7"
         extrait: "Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être réalisée que dans le délai de deux mois après le contrôle technique périodique tel que défini à l'article 5, faute de quoi un nouveau contrôle technique périodique est à réaliser."
+        verdict: non, arrêt dès que possible
+        urgence: immédiate
+      - source: code-de-la-route-r323-1
+        emplacement: "article R323-1"
+        extrait: "Tout propriétaire d'un véhicule mentionné au présent chapitre n'est autorisé à le mettre ou le maintenir en circulation qu'après un contrôle technique ayant vérifié qu'il est en bon état de marche et en état satisfaisant d'entretien."
         verdict: non, arrêt dès que possible
         urgence: immédiate
 element_unique: tableau
@@ -126,7 +137,9 @@ Les points à contrôler lors d'une contre-visite sont définis à l'annexe I de
 
 ## Rouler sans contrôle technique valable
 
-Le code de la route en fait une contravention de la quatrième classe, et l'immobilisation peut être prescrite ({{cite:code-de-la-route-r323-1|article R323-1}}). La page ne donne pas de montant : aucun texte relu ne le fixe pour ce cas.
+Le propriétaire n'est autorisé à mettre ou maintenir sa voiture en circulation qu'après un contrôle technique qui a vérifié son bon état de marche et d'entretien. Le faire sans avoir satisfait aux obligations de contrôle technique est puni de l'amende prévue pour les contraventions de la quatrième classe, et l'immobilisation peut être prescrite ({{cite:code-de-la-route-r323-1|article R323-1}}).
+
+Si la voiture n'est pas présentée aux contrôles obligatoires, ou si les réparations prescrites ne sont pas faites, la mise en fourrière peut aussi être prescrite. La page ne donne pas de montant : aucun texte relu ne le fixe pour ce cas.
 
 ## Voyants allumés et pneus au contrôle technique
 

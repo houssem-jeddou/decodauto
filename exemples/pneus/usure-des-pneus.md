@@ -4,7 +4,8 @@
 # - Sources : notices relues à l'écran le 17/11/2026 vers 14 h 20 (travaux/etape-11/textes/releve-sources.md, §13) :
 #   Peugeot 208 p. 169, Citroën C3 p. 115, Renault Clio 5 phase 2 p. 346, Dacia Sandero 3 p. 307, Seat Ibiza p. 304-306 et
 #   308 ; Toyota Yaris non lue. Légifrance relu à l'écran le 17/11 : arrêté du 18 juillet 2019, article 5, et code de la
-#   route R314-1 (vers 1 h 50) ; annexe I de l'arrêté du 18 juin 1991, 5.2.3 d et e, et article 7 (vers 13 h 20, §14).
+#   route R314-1 (vers 1 h 50) ; annexe I de l'arrêté du 18 juin 1991, 5.2.3 d et e, et article 7 (vers 13 h 20, §14) ;
+#   R314-1 en entier et article 5 de l'arrêté de 2019 en entier (vers 15 h 10, §15).
 # - Décisions du pilotage (règle 6, 17/11) : pneus usés, les cinq notices classées par la grille, niveau de l'obligation
 #   légale par la demande de changement n° 36 (proposée) ; pneu endommagé et vibrations : Seat seule, au niveau de sa
 #   citation ; « 6 ans » : seulement comme consigne Seat, jamais comme règle générale.
@@ -26,7 +27,7 @@ situations:
     citations:
       - source: arrete-2019-07-18-pneumatiques
         emplacement: "article 5"
-        extrait: "dans les rainures principales de leur bande de roulement, une profondeur d'au moins 1,6 mm."
+        extrait: "Les pneumatiques des véhicules des catégories M 1, N 1, O 1 et O 2 doivent présenter, pendant toute leur utilisation sur route, dans les rainures principales de leur bande de roulement, une profondeur d'au moins 1,6 mm."
         verdict: non, arrêt dès que possible
         urgence: immédiate
       - source: notice-seat-ibiza
@@ -148,6 +149,8 @@ La notice Seat Ibiza rappelle que ce danger est plus grand par mauvais temps, so
 
 Au fond des rainures de la bande de roulement. Les notices Renault Clio 5 et Dacia Sandero 3 les décrivent comme des bossages incorporés dans l'épaisseur de la bande ; la notice Seat Ibiza, comme des indicateurs de 1,6 mm de hauteur, placés à intervalles réguliers en travers du sens de roulement ({{cite:notice-renault-clio-5|p. 346}} ; {{cite:notice-dacia-sandero-3|p. 307}} ; {{cite:notice-seat-ibiza|p. 308}}).
 
+L'arrêté du 18 juillet 2019 impose ces indicateurs sur les pneus des voitures particulières : ils signalent que les rainures n'ont plus que 1,6 mm, avec une tolérance de + 0,6/- 0 mm ({{cite:arrete-2019-07-18-pneumatiques|article 5}}).
+
 Pour les trouver, cherchez sur le flanc du pneu les lettres « TWI » ou un petit triangle, selon la notice Seat Ibiza. Tant que le témoin reste en retrait de la bande de roulement, il reste plus de 1,6 mm, selon les notices Peugeot 208 et Citroën C3 ({{cite:notice-peugeot-208|p. 169}} ; {{cite:notice-citroen-c3|p. 115}}).
 
 Le « témoin » allumé au tableau de bord est autre chose : c'est le voyant de pression des pneus, expliqué sur la page [voyant de pression des pneus](/voyants/pression-pneus/).
@@ -158,7 +161,7 @@ Au contrôle technique, un indicateur d'usure atteint est une défaillance majeu
 
 Une défaillance majeure laisse le contrôle valable deux mois ; une défaillance critique, le seul jour du contrôle. Dans les deux cas, la contre-visite se fait dans les deux mois ({{cite:arrete-1991-06-18-controle-technique|article 7}}). La page [contre-visite du contrôle technique](/contre-visite-controle-technique/) détaille les délais.
 
-Sur la route, le code de la route punit d'une contravention de la quatrième classe le non-respect de ses règles sur les pneumatiques, et l'immobilisation du véhicule peut être prescrite ({{cite:code-de-la-route-r314-1|article R314-1}}).
+Sur la route, le code de la route exige des sculptures apparentes sur toute la surface de roulement, aucune toile visible et aucune déchirure profonde sur les flancs. Y contrevenir est puni de l'amende prévue pour les contraventions de la quatrième classe, et l'immobilisation du véhicule peut être prescrite ({{cite:code-de-la-route-r314-1|article R314-1}}).
 
 ## Pneu endommagé : peut-on rouler ?
 
@@ -194,7 +197,7 @@ Parmi les textes relus, aucun ne fixe d'âge limite pour un pneu. La notice Seat
 
 ## Changer deux pneus ou quatre ?
 
-La notice Seat Ibiza demande de ne pas changer un seul pneu, mais au moins les deux d'un même essieu ({{cite:notice-seat-ibiza|p. 305}}). Les autres notices lues ne le précisent pas dans leur rubrique sur les pneus.
+L'arrêté du 18 juillet 2019 dispose que la différence entre la profondeur des rainures principales de deux pneus montés sur un même essieu ne doit pas dépasser 5 mm ({{cite:arrete-2019-07-18-pneumatiques|article 5}}). La notice Seat Ibiza demande de ne pas changer un seul pneu, mais au moins les deux d'un même essieu ({{cite:notice-seat-ibiza|p. 305}}). Les autres notices lues ne le précisent pas dans leur rubrique sur les pneus.
 
 En hiver, dans les communes soumises à la loi montagne, d'autres règles s'ajoutent : voyez la page [loi montagne](/loi-montagne/).
 
