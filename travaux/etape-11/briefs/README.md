@@ -9,7 +9,7 @@
 | [`huile-5w40`](huile-5w40.md) | fluide | huile 5w40 | 14 | 22 752 | proposées |
 | [`huile-10w40`](huile-10w40.md) | fluide | huile 10w40 | 9 | 12 956 | proposées |
 | [`niveau-huile`](niveau-huile.md) | fluide | niveau d huile moteur | 14 | 7 268 | proposées |
-| [`liquide-de-refroidissement`](liquide-de-refroidissement.md) | fluide | liquide de refroidissement voiture | 22 | 35 076 | proposées |
-| [`liquide-de-frein`](liquide-de-frein.md) | fluide | liquide de frein voiture | 10 | 9 796 | proposées |
+| [`liquide-de-refroidissement`](liquide-de-refroidissement.md) | fluide | liquide de refroidissement | 22 | 35 076 | proposées |
+| [`liquide-de-frein`](liquide-de-frein.md) | fluide | liquide de frein | 10 | 9 796 | proposées |
 | [`usure-des-pneus`](usure-des-pneus.md) | pneus | pneu usé | 9 | 16 116 | proposées |
 | [`contre-visite-controle-technique`](contre-visite-controle-technique.md) | pneus | contre visite controle technique | 50 | 14 852 | proposées |

@@ -1472,7 +1472,7 @@
     "theme": "niveaux-et-fluides",
     "vague": "C",
     "adresse": "/liquide-de-refroidissement/",
-    "requete_principale": "liquide de refroidissement voiture",
+    "requete_principale": "liquide de refroidissement",
     "mots_cles": [
       "liquide refroid",
       "liquide refroidissement",
@@ -1504,7 +1504,7 @@
     "theme": "niveaux-et-fluides",
     "vague": "C",
     "adresse": "/liquide-de-frein/",
-    "requete_principale": "liquide de frein voiture",
+    "requete_principale": "liquide de frein",
     "mots_cles": [
       "frein liquide",
       "liquide des freins",

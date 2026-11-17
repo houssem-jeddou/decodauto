@@ -62,8 +62,8 @@ C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison.
 | huile-5w40 | `/huile-moteur/5w40/` | fluide | C | huile 5w40 | 14 (9) | 22 752 | huile-moteur | huile-5w30 |
 | huile-10w40 | `/huile-moteur/10w40/` | fluide | C | huile 10w40 | 9 (5) | 12 956 | huile-moteur | – |
 | niveau-huile | `/huile-moteur/verifier-niveau/` | fluide | C | niveau d huile moteur | 14 (14) | 7 268 | huile-moteur | bruit-moteur, moteur-puretech, voyant-huile |
-| liquide-de-refroidissement | `/liquide-de-refroidissement/` | fluide | C | liquide de refroidissement voiture | 22 (12) | 35 076 | – | surchauffe-moteur |
-| liquide-de-frein | `/liquide-de-frein/` | fluide | C | liquide de frein voiture | 10 (4) | 9 796 | – | voyant-frein |
+| liquide-de-refroidissement | `/liquide-de-refroidissement/` | fluide | C | liquide de refroidissement | 22 (12) | 35 076 | – | surchauffe-moteur |
+| liquide-de-frein | `/liquide-de-frein/` | fluide | C | liquide de frein | 10 (4) | 9 796 | – | voyant-frein |
 
 ## 4. Pneus et obligations
 
