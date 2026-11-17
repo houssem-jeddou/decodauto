@@ -1,6 +1,8 @@
 ---
-# BROUILLON, jamais validé. Étape 10, lot B3 (rédaction ouverte par la validation de la porte 10 le 16/11/2026,
-# 19 h 26). Page de la vague B au format tutoriel, sans empreinte tant que Houssem n'a pas validé son encadré.
+# Page de la vague B, étape 10, lot B3 (rédaction ouverte par la validation de la porte 10 le 16/11/2026, 19 h 26).
+# Validée par Houssem le 17/11/2026 à 7 h 39 (« Je valide tout ! Fais le necessaire », sur la ligne de validation de
+# travaux/etape-10/paquet-lot-b3-fin.md) ; empreinte posée et passage de exemples/ à src/content par la pull request
+# du lot B3 (règle de passage).
 # - Extraits relus mot pour mot : Peugeot p. 15 et p. 13 (relevé de l'étape 5, notices-etape-5/peugeot-208.txt),
 #   Citroën p. 113-115, Seat p. 290, Peugeot p. 168, Dacia p. 162, Renault p. 188 (autres-pannes-verification.md),
 #   Renault p. 186 et Dacia p. 160 (relevés de l'étape 5), Dacia p. 161 (travaux/etape-8/textes/pneus-fap-releve.md).
@@ -73,6 +75,7 @@ date_publication: 2026-11-16
 date_modification: 2026-11-16
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
+validation: d967a22031e5912aba31c2c733980a407ad4b818df04bd6adf7de8e6d7e4a619
 causes:
   - cause: Filtre qui commence à se saturer
     explication: "C'est ce que signale le voyant du filtre à particules : selon les notices lues, la régénération en roulant l'éteint. La notice Seat Ibiza conseille d'éviter les trajets toujours courts, qui réduisent la durée de vie du filtre."

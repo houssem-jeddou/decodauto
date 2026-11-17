@@ -1,6 +1,8 @@
 ---
-# BROUILLON, jamais validé. Étape 10, lot B3 (rédaction ouverte par la validation de la porte 10 le 16/11/2026,
-# 19 h 26). Page de la vague B, sans empreinte tant que Houssem n'a pas validé son encadré (paquet du lot B3).
+# Page de la vague B, étape 10, lot B3 (rédaction ouverte par la validation de la porte 10 le 16/11/2026, 19 h 26).
+# Validée par Houssem le 17/11/2026 à 7 h 39 (« Je valide tout ! Fais le necessaire », sur la ligne de validation de
+# travaux/etape-10/paquet-lot-b3-fin.md) ; empreinte posée et passage de exemples/ à src/content par la pull request
+# du lot B3 (règle de passage).
 # - Extraits relus mot pour mot le 16/11/2026 (pdf.js dans Chrome) : travaux/etape-10/textes/autres-pannes-verification.md
 #   (Renault p. 386-387, Dacia p. 348-349 : même tableau mot pour mot, Seat p. 298 et 290, Peugeot p. 165 et 167,
 #   Citroën p. 113, Toyota p. 242 et 291). Toyota p. 291 : le relevé ne donne la liste des symptômes qu'en résumé ;
@@ -122,6 +124,7 @@ date_publication: 2026-11-16
 date_modification: 2026-11-16
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
+validation: 949bba7c0c0ef41f809bff797235cb9743892660f0c76685f5acb394595c758c
 causes:
   - cause: Niveau de liquide de refroidissement trop bas
     explication: "Un appoint entre deux révisions est normal, selon les notices Peugeot 208 et Citroën C3, mais un niveau insuffisant présente des risques de dommages importants pour le moteur."

@@ -27,7 +27,9 @@
         "http://localhost/moteur-puretech/index.html",
         "http://localhost/batterie-voiture/index.html",
         "http://localhost/batterie-voiture/recharger/index.html",
-        "http://localhost/batterie-voiture/changer/index.html"
+        "http://localhost/batterie-voiture/changer/index.html",
+        "http://localhost/moteur-qui-surchauffe/index.html",
+        "http://localhost/nettoyer-fap/index.html"
       ],
       "numberOfRuns": 3,
       "settings": {

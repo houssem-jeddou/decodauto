@@ -1,3 +1,10 @@
+> **Validé par Houssem le 17/11/2026 à 7 h 39 : « Je valide tout ! Fais le necessaire ».** Réponse au message du
+> pilotage du matin, qui portait mot pour mot la ligne de validation de ce paquet (« Ligne de validation proposée »,
+> ci-dessous : « Je valide le lot B3 : moteur qui surchauffe … »), paire de liens `nettoyer-fap` ↔ `voyant-moteur`
+> comprise. Empreintes des deux pages (moteur qui surchauffe, nettoyer le FAP) posées ensuite par `npm run empreinte`,
+> sur le contenu du paquet (25d1199), sans autre changement ; passage dans `src/content` par `npm run passage` (règle
+> de passage).
+
 ## Points à trancher (avec ma recommandation)
 1. **Fumée ou vapeur sous le capot** (« moteur qui surchauffe », ligne 2) : **Non, arrêtez-vous immédiatement** · À
    faire tout de suite (Renault Clio 5 p. 386, Dacia Sandero 3 p. 348-349 : s'arrêter, couper le contact, s'éloigner du
