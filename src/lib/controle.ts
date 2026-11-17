@@ -859,8 +859,8 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
       renvoisNotices: (() => {
         const auTableau = new Set(modeleTableauNotices(lignes, ctx.voyants, ctx.sources, page.id).map((t) => t.voyant));
         const voisins = indexerPlan(ctx.plan).voisins.get(page.id) ?? new Set<string>();
-        return lignes.map((l) =>
-          l.ecart_marques === undefined ? undefined : renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: ctx.voyants, plan: ctx.plan, voisins, auTableau, construite: (id) => ctx.pagesEcrites?.has(id) === true }),
+        return lignes.map((l, i) =>
+          l.ecart_marques === undefined ? undefined : renvoiNotices({ pageId: page.id, voyant: l.voyant, voyants: ctx.voyants, plan: ctx.plan, voisins, auTableau, construite: (id) => ctx.pagesEcrites?.has(id) === true, ligne: i + 1 }),
         );
       })(),
       notices: {

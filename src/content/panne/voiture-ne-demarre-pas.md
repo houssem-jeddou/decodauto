@@ -1,19 +1,8 @@
 ---
-# BROUILLON de préparation anticipée de l'étape 10 (docs/03, règle 12, quatrième exception, demande de changement n° 21) :
-# exemple du modèle panne, page « voiture ne démarre pas » de la vague B. Rien n'en est présenté à la validation,
-# fusionné ni publié avant la fermeture de la porte de l'étape 8. Pas d'empreinte : jamais validé.
-# - Extraits et pages citées relus mot pour mot le 16/11/2026 : texte des PDF officiels lu par pdf.js dans Chrome
-#   (méthode de travaux/etape-5/REPRISE.md), page imprimée retrouvée sur chaque page (relevés :
-#   travaux/etape-10/textes/demarrage-batterie-verification.md et porte10-verification.md). Les niveaux des
-#   citations sont tirés de la grille (src/schemas/grille.ts), à confirmer au paquet.
-# - Version 2 du 16/11/2026 (après la revue indépendante du paquet de la porte 10) : ligne 2 nouvelle (après un
-#   démarrage avec une autre batterie), ligne 4 appuyée sur trois notices de deux groupes, ligne 5 avec Renault,
-#   arbre repris (cas sans source, panne sèche essence), titre et repère du préchauffage corrigés, marque et modèle
-#   nommés partout.
-# - Pièces à créer dans data/couts.json avec le lot : `pile-de-cle` (geste) et `carburant-et-reamorcage` (geste).
-# - Format 2 (demande n° 30) : repères sous les titres d'une seule ligne, illustration dessinée pour le site
-#   (`batterie-cosses`), références de pages passées dans « Sources » (règle 2d). Se construit quand la base porte la
-#   ligne d'écart courte de `batterie-rouge` (lot F2).
+# Page « voiture ne démarre pas » (modèle panne, arbre de décision) de la vague B, rédigée pour la porte 10 le 15 et le 16/11/2026, sources relues à l'écran
+# (travaux/etape-10/textes/), validée par Houssem le 16/11/2026 à 19 h 26 (« Je valide les exemples de la porte 10 »,
+# journal, PR n° 72) dans la version de preparation/etape-10 à b9b0835. Empreinte posée par la pull request du lot B1,
+# sur la base du lot F2 fusionnée. Passée de exemples/ à src/content par cette pull request (règle de passage).
 id: voiture-ne-demarre-pas
 title: "Voiture ne démarre pas : que faire, cas par cas"
 h1: "Ma voiture ne démarre pas : que vérifier, et quand faire appel à un garage ?"
@@ -153,6 +142,7 @@ date_publication: 2026-11-15
 date_modification: 2026-11-16
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
+validation: 23847e5321ab708e7826a64af70ed68deead02f6671676b646f13e5e426e2318
 causes:
   - cause: Batterie déchargée ou hors d'usage
     explication: "C'est une des causes du tableau des anomalies des notices Renault Clio 5 et Dacia Sandero 3 quand les voyants faiblissent et que le démarreur ne tourne pas ; la notice Toyota Yaris y ajoute un démarreur qui tourne lentement, avec des éclairages et des phares atténués. La notice Seat Ibiza rappelle qu'en hiver, la puissance de démarrage peut être réduite, et que de courts trajets fréquents ou de longues immobilisations demandent de recharger la batterie."

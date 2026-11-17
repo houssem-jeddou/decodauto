@@ -1,24 +1,8 @@
 ---
-# BROUILLON de préparation anticipée de l'étape 10 (docs/03, règle 12, quatrième exception, demande de changement n° 21) :
-# exemple du modèle dossier, page « moteur PureTech » de la vague B (seul dossier du plan). Rien n'en est présenté à la
-# validation, fusionné ni publié avant la fermeture de la porte de l'étape 8. Pas d'empreinte : jamais validé.
-# - Sources relues mot pour mot à l'écran le 16/11/2026 (relevés : travaux/etape-10/textes/puretech-verification.md et
-#   porte10-verification.md) ; aucune n'est encore au registre (data/sources.json), à ajouter avec le lot :
-#   `rappelconso-48835`, `rappelconso-48836`, `rappelconso-48204` (fiches de rappel.conso.gouv.fr),
-#   `peugeot-puretech-solutions` (page « Moteurs PureTech, nos solutions » de peugeot.fr),
-#   `stellantis-puretech-indemnisation-2025` (communiqué de Stellantis du 7 mai 2025, media.stellantis.com, version
-#   belge ; la version française trouvée, du 16 janvier 2025, est périmée et reste hors du registre). Sources
-#   secondaires du constructeur : admises seulement si la demande de changement n° 31 est acceptée.
-# - Prise en charge à créer dans data/couts.json avec le lot, datée et revérifiée tous les 90 jours :
-#   `couverture-speciale-puretech` (source : page du constructeur ; texte validé par Houssem).
-# - Lignes saisies à trancher par Houssem au paquet : « rappel non fait » (« contacter le concessionnaire » n'est pas
-#   dans la grille : niveau le plus prudent, principes 3 et 6) ; niveau d'huile sous le mini ou au-dessus du maxi à la
-#   jauge (« Ne pas démarrer le moteur », absent de la grille : niveau le plus prudent).
-# - Version 2 du 16/11/2026 (après la revue indépendante du paquet de la porte 10) : action du rappel corrigée (la
-#   fiche demande seulement de contacter le concessionnaire), trois fiches citées, deux lignes du niveau d'huile,
-#   formulations ramenées à ce que disent les sources, section de travail retirée.
-# - Format 2 (demande n° 30) : repère sous la section des rappels (ligne 6), illustration dessinée pour le site
-#   (`jauge-huile`).
+# Page « moteur PureTech » (modèle dossier) de la vague B, rédigée pour la porte 10 le 15 et le 16/11/2026, sources relues à l'écran
+# (travaux/etape-10/textes/), validée par Houssem le 16/11/2026 à 19 h 26 (« Je valide les exemples de la porte 10 »,
+# journal, PR n° 72) dans la version de preparation/etape-10 à b9b0835. Empreinte posée par la pull request du lot B1,
+# sur la base du lot F2 fusionnée. Passée de exemples/ à src/content par cette pull request (règle de passage).
 id: moteur-puretech
 title: "Moteurs PureTech : courroie, huile, rappels et prise en charge"
 h1: "Moteur 1.2 PureTech : votre voiture est-elle concernée, et que faire ?"
@@ -121,6 +105,7 @@ date_publication: 2026-11-15
 date_modification: 2026-11-16
 date_revue: 2026-11-16
 prochaine_revue: 2027-02-16
+validation: e663cb5dc67cd375fdb2cc38574590fbedfefd03f5d10f6e0bd7d7b662a7dd31
 ---
 
 ## Le moteur 1.2 PureTech en bref
