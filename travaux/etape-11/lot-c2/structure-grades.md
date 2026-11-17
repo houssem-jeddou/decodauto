@@ -15,15 +15,17 @@
 - Document ACEA « Oil Sequences 2023 » : à admettre au registre (source secondaire, document technique, demande n° 31) ;
   définitions de C2, C3, C4 à relire à l'écran ; traduction à signaler (charte §2.2).
 - Décisions du pilotage : rien sur la signification d'un grade tant que Toyota n'est pas lue ; rien sur la 85W140.
+  Le tableau des viscosités et la 85W140 de `docs/09` (cas 3) sont reportés par la demande de changement n° 35
+  (`demande-changement-35.md`), proposée.
 
 ## Structure commune aux trois pages (modèle fluide, format 2)
 - **Question de décision** (brief) : « Puis-je mettre de l'huile 5W30 (5W40, 10W40) dans ma voiture ? »
 - **Réponse directe** (40 mots au plus) : « Seulement si le plan d'entretien ou la notice de votre voiture le permet : le
   grade ne suffit pas, c'est la norme demandée pour votre moteur qui décide. » (à confirmer après Toyota).
 - **Lignes de l'encadré** candidates (une page informative a au moins une ligne) :
-  1. ligne saisie « Vous avez versé une huile différente de celle que demande la notice » (Seat p. 294), reprise de la
-     page « huile moteur » telle que validée ;
-  2. ligne de la base `huile-niveau`, si la page traite de l'appoint (« faire l'appoint avec quelle huile ? »).
+  1. ligne de la base `huile-niveau`, si la page traite de l'appoint (« faire l'appoint avec quelle huile ? ») ;
+  2. aucune ligne « autre huile versée » : cette intention ne vit que sur la page « huile moteur » (revue du 17/11,
+     I2, une intention, une page) ; les pages de grade y renvoient par le lien vers la page mère.
 - **Élément unique** : tableau « ce qu'on lit sur un bidon de 5W30 » : grade (sens à remplir seulement avec Toyota ou un
   document admis), classe ACEA (C2, C3, C4 avec le document ACEA admis), norme du constructeur (exemples seulement s'ils
   sont lus : les normes VW de la notice Seat). Sinon : tableau « ce que dit chaque notice » (huile à mettre, grade cité
@@ -36,9 +38,9 @@
 ## Sections prévues (H2, d'après les mots-clés et les questions relevées)
 | Page | H2 prévus | Ce qui manque |
 |---|---|---|
-| 5W30 | « Que veut dire 5W30 ? » ; « Huile 5W30 : pour quel moteur ? » ; « 5W30 diesel ou essence ? » ; « 5W30 C2, C3 ou C4 : quelle différence ? » ; « 5W30 RN17, Long Life : ce que veulent dire ces normes » ; « Peut-on mettre de la 5W40 au lieu de la 5W30 ? » (une intention, une page : traitée ici, la page 5W40 y renvoie) ; « J'ai mis une autre huile : que faire ? » | sens du grade (Toyota) ; définitions ACEA (document à admettre) ; RN17 : aucun document Renault lu, la section dira seulement que c'est une norme du constructeur à lire dans le document d'entretien |
-| 5W40 | « Que veut dire 5W40 ? » ; « Huile 5W40 : pour quel moteur ? » ; « 5W40 diesel ou essence ? » ; « 5W40 C3 » ; « J'ai mis une autre huile : que faire ? » | sens du grade (Toyota) ; ACEA C3 (document à admettre) |
-| 10W40 | « Que veut dire 10W40 ? » ; « Huile 10W40 : pour quel moteur ? » ; « 10W40 essence ou diesel ? » ; « Ma notice ne cite pas la 10W40 : que faire ? » ; « J'ai mis une autre huile : que faire ? » | sens du grade (Toyota) ; aucune notice lue ne cite une 10W40 : la page le dira |
+| 5W30 | « Que veut dire 5W30 ? » ; « Huile 5W30 : pour quel moteur ? » ; « 5W30 diesel ou essence ? » ; « 5W30 C2, C3 ou C4 : quelle différence ? » ; « 5W30 RN17, Long Life : ce que veulent dire ces normes » ; « Peut-on mettre de la 5W40 au lieu de la 5W30 ? » (une intention, une page : traitée ici, la page 5W40 y renvoie) ; renvoi vers la page « huile moteur » pour une autre huile versée (sans section ni ligne) | sens du grade (Toyota) ; définitions ACEA (document à admettre) ; RN17 : aucun document Renault lu, la section dira seulement que c'est une norme du constructeur à lire dans le document d'entretien |
+| 5W40 | « Que veut dire 5W40 ? » ; « Huile 5W40 : pour quel moteur ? » ; « 5W40 diesel ou essence ? » ; « 5W40 C3 » ; renvoi vers la page « huile moteur » pour une autre huile versée (sans section ni ligne) | sens du grade (Toyota) ; ACEA C3 (document à admettre) |
+| 10W40 | « Que veut dire 10W40 ? » ; « Huile 10W40 : pour quel moteur ? » ; « 10W40 essence ou diesel ? » ; « Ma notice ne cite pas la 10W40 : que faire ? » ; renvoi vers la page « huile moteur » pour une autre huile versée (sans section ni ligne) | sens du grade (Toyota) ; aucune notice lue ne cite une 10W40 : la page le dira |
 
 ## Pièges rappelés
 - Aucune liste de voitures compatibles, aucune règle « diesel = 5W40 » ou « vieux moteur = 10W40 » : sans source.
