@@ -1,0 +1,5 @@
+Brouillon, jamais validé (après la revue indépendante du lot C5, changements non relus par un relecteur indépendant). Lighthouse mobile, 3 passages, médianes, emplacements factices, lot C5. SEO 66 : seul l'audit « is-crawlable » échoue (construction de recette non indexable).
+
+/huile-moteur/5w30/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 906 ms, TBT 0 ms
+/huile-moteur/5w40/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 905 ms, TBT 0 ms
+/huile-moteur/10w40/index.html (3 passage(s), médianes) : performance 100, accessibilité 100, bonnes pratiques 100, SEO 66 ; CLS 0.000, LCP 903 ms, TBT 0 ms
