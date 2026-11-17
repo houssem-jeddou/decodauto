@@ -434,3 +434,60 @@ le dépasser », « la température de ce liquide est régulée »).
   les Services Techniques et prélevé d'un bidon scellé »), sans la phrase « Il est à contrôler souvent… », non vue chez
   Dacia.
 - p. 349-350 (PDF 351-352) : même tableau « Le moteur chauffe » que Renault.
+
+## 13. Relevé à l'écran du 17/11/2026 vers 14 h 20 (lot C4 : usure des pneus, contre-visite)
+
+**Relu à l'écran par Claude** (pdf.js dans Chrome, 17/11/2026 vers 14 h 20) : page imprimée, page du PDF entre
+parenthèses. Toyota : non lu (même blocage). Décisions du pilotage du même jour (règle 6) : pneus usés : les cinq notices
+donnent maintenant une consigne, classée par la grille ; demande de changement n° 36 (verdict d'une obligation légale :
+1,6 mm de l'arrêté du 18/07/2019, défaillances du contrôle technique), à partir du §10, point 1, avec ce que les notices
+ajoutent ; pneu endommagé, vibrations : Seat seule, au niveau de sa citation ; « 6 ans » : seulement comme consigne Seat,
+jamais comme règle générale. Rédaction après la relecture à l'écran des passages encore marqués [WF].
+
+**Peugeot 208** — p. 169 (PDF 171), « Roues et pneumatiques » : « Une pression de gonflage non-conforme provoque l'usure
+prématurée des pneumatiques et dégrade la tenue de route du véhicule - Risque d'accident ! Rouler avec des pneumatiques
+usés ou endommagés réduit les performances de freinage et de maintien de la direction du véhicule. Vérifier
+régulièrement l'état des pneumatiques (bande de roulement et flancs) et des jantes ainsi que la présence des bouchons de
+valve. Lorsque les témoins d'usure n'apparaissent plus en retrait de la bande de roulement, la profondeur des rainures
+est inférieure à 1,6 mm ; remplacer impérativement les pneumatiques. »
+
+**Citroën C3** — p. 115 (PDF 117) : même texte que Peugeot, sauf « Il est recommandé de vérifier régulièrement l'état des
+pneumatiques (bande de roulement et flancs) et des jantes ainsi que la présence des valves. » et « ; il est impératif de
+remplacer les pneumatiques. »
+
+**Renault Clio 5 phase 2** — p. 346 (PDF 348), « Pneumatiques » : « Les pneumatiques constituent le seul contact entre le
+véhicule et la route, il est donc essentiel de les tenir en bon état. Vous devez impérativement vous conformer aux règles
+locales prévues par le code de la route. » ; « Les pneumatiques doivent être en bon état et leurs sculptures doivent
+présenter un relief suffisant ; les pneumatiques agréés par nos Services Techniques comportent des témoins d'usure qui
+sont constitués de bossages-témoins incorporés dans l'épaisseur de la bande de roulement. Lorsque le relief des
+sculptures a été érodé jusqu'au niveau des bossages-témoins, ceux-ci deviennent visibles : il est alors nécessaire de
+remplacer vos pneumatiques car la profondeur des sculptures n'est, au plus, que de 1,6 mm et ceci entraîne une mauvaise
+adhérence sur les routes mouillées. Un véhicule surchargé, de longs parcours sur autoroute plus particulièrement par
+fortes chaleurs, une conduite habituelle sur de mauvais chemins concourent à des détériorations plus rapides des
+pneumatiques et influent sur la sécurité. Des incidents de conduite, tels que « coups de trottoir », risquent
+d'endommager les pneumatiques et les jantes, ainsi que d'entraîner des déréglages du train avant ou arrière. Dans ce cas,
+faites vérifier leur état par un Représentant de la marque. »
+
+**Dacia Sandero 3** — p. 307 (PDF 309) : même texte que Renault mot pour mot (« bossages témoins » sans trait d'union).
+
+**Seat Ibiza**
+- p. 304 (PDF 306) : « Vérifiez de temps en temps si les pneus ne sont pas endommagés (trous, entailles, déchirures ou
+  boursouflures). […] Faites immédiatement remplacer les roues ou les pneus défectueux. » ; « Si vous supposez qu'une
+  roue est endommagée, réduisez immédiatement votre vitesse. Vérifiez si les pneus sont endommagés. »
+- p. 305 (PDF 307), AVERTISSEMENT : « Ne roulez jamais avec des pneus endommagés. Risque d'accident ! ● Si, en cours de
+  route, vous constatez des vibrations inhabituelles ou un tirage latéral de la direction, arrêtez-vous immédiatement et
+  vérifiez l'état des pneus. » ; « Lors du changement des pneus, ne changez pas qu'un seul pneu ; changez-en au moins
+  deux d'un même essieu. »
+- p. 306 (PDF 308) : « DOT ... 2218 ... signifie par exemple, que le pneu a été fabriqué au cours de la semaine 22 de
+  l'année 2018. » ; AVERTISSEMENT : « Utilisez des pneus de plus de 6 ans uniquement en cas d'urgence et conduisez avec
+  la prudence requise. » ; « N'utilisez pas de pneus d'occasion dont vous ne connaissez pas les « antécédents ». » ;
+  « Contrôlez la pression des pneus au moins une fois par mois et avant tout long trajet. »
+- p. 308 (PDF 310), « Indicateurs d'usure » : « À la base des sculptures des pneus d'origine se trouvent, à intervalles
+  réguliers et perpendiculairement au sens du roulement, des indicateurs d'usure de 1,6 mm de hauteur. Les lettres
+  « TWI » ou des triangles sur le flanc du pneu indiquent la position des indicateurs d'usure. La profondeur minimale de
+  sculpture autorisée est atteinte lorsque les pneus sont usés jusqu'aux indicateurs d'usure. Remplacez les pneus par
+  des nouveaux. » (note 1 : « Observez la réglementation du pays où vous circulez. ») ; AVERTISSEMENT : « Les pneus
+  doivent être changés au plus tard lorsque les indicateurs d'usure sont usés. […] il existe des risques d'accident !
+  ● Cette observation est particulièrement vraie lorsque vous circulez dans de mauvaises conditions météorologiques,
+  notamment en présence de pluie et de verglas. Il est important que la profondeur des sculptures des pneus soit la plus
+  grande possible, et qu'elle soit à peu près égale sur les pneus de l'essieu avant et arrière. »
