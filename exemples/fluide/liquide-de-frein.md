@@ -1,6 +1,5 @@
 ---
-# Brouillon, jamais validé. Étape 11 (vague C), lot C3 : page « liquide de frein » (modèle fluide, format 2). Pas
-# d'empreinte tant que Houssem n'a pas validé son encadré (paquet du lot C3).
+# Validé par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis). Étape 11 (vague C), lot C3 : page « liquide de frein » (modèle fluide, format 2). Empreinte posée après la validation.
 # - Sources : relevé à l'écran du 17/11/2026 vers 12 h 30 (pdf.js dans Chrome ; travaux/etape-11/textes/releve-sources.md,
 #   §12) : Seat Ibiza p. 299 (remplace Seat Leon p. 370, même consigne) ; Peugeot 208 p. 166 ; Citroën C3 p. 113 ;
 #   Renault Clio 5 phase 2 p. 336-337 ; Dacia Sandero 3 p. 299. Toyota Yaris : non lue (PDF refusé par le navigateur).
@@ -126,6 +125,9 @@ date_publication: 2026-11-17
 date_modification: 2026-11-17
 date_revue: 2026-11-17
 prochaine_revue: 2027-11-17
+# Encadré de décision (question, réponse directe, lignes, coût probable) validé par Houssem le 17/11/2026 à 15 h 05
+# (heure de Tunis), avec les faits du texte (lot C3, travaux/etape-11/lot-c3/paquet-liquide-de-frein.md).
+validation: ea121208896ca344481f4d5d9cf8ee9f1617c8bfa023d201f1ec3c3919887b52
 ---
 
 ## Niveau de liquide de frein sous le mini ou qui baisse vite : puis-je rouler ?

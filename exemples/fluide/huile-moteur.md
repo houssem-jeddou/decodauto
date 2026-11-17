@@ -1,6 +1,5 @@
 ---
-# Brouillon, jamais validé. Étape 11 (vague C), lot C2 : page mère « huile moteur » (modèle fluide, format 2). Pas
-# d'empreinte tant que Houssem n'a pas validé son encadré (paquet du lot C2).
+# Validé par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis). Étape 11 (vague C), lot C2 : page mère « huile moteur » (modèle fluide, format 2). Empreinte posée après la validation.
 # - Sources : relevé à l'écran du 17/11/2026 vers 11 h 50 (pdf.js dans Chrome ; travaux/etape-11/textes/releve-sources.md,
 #   §7) : Seat Ibiza p. 90, 293, 294, 296, 316 ; Peugeot 208 p. 165, 166, 168 ; Citroën C3 p. 112, 113, 114 ; Renault
 #   Clio 5 phase 2 p. 122, 330, 333 ; Dacia Sandero 3 p. 99, 294, 296, 297. Recherche de « SAE », « viscosit »,
@@ -107,6 +106,9 @@ date_publication: 2026-11-17
 date_modification: 2026-11-17
 date_revue: 2026-11-17
 prochaine_revue: 2027-11-17
+# Encadré de décision (question, réponse directe, lignes, coût probable) validé par Houssem le 17/11/2026 à 15 h 05
+# (heure de Tunis), avec les faits du texte (lot C2, travaux/etape-11/lot-c2/paquet-lot-c2.md).
+validation: 6e7c085162972fded1bbb9ca2fc2de821ad9b42b12de28c665b77e8ddda2acb4
 ---
 
 ## Quelle huile moteur mettre dans ma voiture ?

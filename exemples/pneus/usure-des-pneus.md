@@ -1,6 +1,6 @@
 ---
-# Brouillon, jamais validé. Étape 11 (vague C), lot C4 : page « usure des pneus » (modèle pneus et obligations, format 2).
-# Pas d'empreinte tant que Houssem n'a pas validé son encadré (paquet du lot C4).
+# Validé par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis). Étape 11 (vague C), lot C4 : page « usure des pneus » (modèle pneus et obligations, format 2).
+# Empreinte posée après la validation.
 # - Sources : notices relues à l'écran le 17/11/2026 vers 12 h 55 (travaux/etape-11/textes/releve-sources.md, §13) :
 #   Peugeot 208 p. 169, Citroën C3 p. 115, Renault Clio 5 phase 2 p. 346, Dacia Sandero 3 p. 307, Seat Ibiza p. 304-306 et
 #   308 ; Toyota Yaris non lue. Légifrance relu à l'écran le 17/11 : arrêté du 18 juillet 2019, article 5, et code de la
@@ -135,6 +135,9 @@ date_publication: 2026-11-17
 date_modification: 2026-11-17
 date_revue: 2026-11-17
 prochaine_revue: 2027-05-17
+# Encadré de décision (question, réponse directe, lignes, coût probable) validé par Houssem le 17/11/2026 à 15 h 05
+# (heure de Tunis), avec les faits du texte (lot C4, travaux/etape-11/lot-c4/paquet-usure-des-pneus.md).
+validation: aac66db10363ddeb7a7ea5778b0abfa6bbb28350104142ee6a6566f5db53ab0c
 ---
 
 ## Pneu usé : à partir de quand faut-il le changer ?

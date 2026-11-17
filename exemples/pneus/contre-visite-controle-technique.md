@@ -1,6 +1,6 @@
 ---
-# Brouillon, jamais validé. Étape 11 (vague C), lot C4 : page « contre-visite du contrôle technique » (modèle pneus et
-# obligations, sujet contrôle technique, format 2). Pas d'empreinte tant que Houssem n'a pas validé son encadré.
+# Validé par Houssem le 17/11/2026 à 15 h 05 (heure de Tunis). Étape 11 (vague C), lot C4 : page « contre-visite du contrôle technique » (modèle pneus et
+# obligations, sujet contrôle technique, format 2). Empreinte posée après la validation.
 # - Sources : arrêté du 18 juin 1991, articles 7 et 8 et annexe I, 5.2.3 (Légifrance relu à l'écran le 17/11/2026 vers
 #   13 h 15 ; travaux/etape-11/textes/releve-sources.md, §14) et « C. Fonctions contrôlées » (vers 14 h 40, §16) ;
 #   définitions des défaillances (article 7) et points de l'annexe I liés aux voyants : relevé de l'étape 8 (Légifrance lu
@@ -104,6 +104,9 @@ date_publication: 2026-11-17
 date_modification: 2026-11-17
 date_revue: 2026-11-17
 prochaine_revue: 2027-05-17
+# Encadré de décision (question, réponse directe, lignes, coût probable) validé par Houssem le 17/11/2026 à 15 h 05
+# (heure de Tunis), avec les faits du texte (lot C4, travaux/etape-11/lot-c4/paquet-contre-visite-controle-technique.md).
+validation: 70cef562289e036bcb503b4c70fb171fb175ecf315603146a3c5a92c914a94ac
 ---
 
 ## Défaillances majeures (S) : peut-on rouler pendant les deux mois ?
