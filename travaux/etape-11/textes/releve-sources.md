@@ -580,3 +580,40 @@ fonctions 10 à 13 s'y ajoutent pour le dépannage, le transport sanitaire, les 
 Heures des relevés corrigées le 17/11 (heure de Tunis rapportée par erreur ; décision du pilotage) : lot C2 vers
 11 h 50 (§11), lot C3 vers 12 h 30 (§12), notices pneus vers 12 h 55 (§13), cinq passages de Légifrance vers 13 h 15
 (§14), R314-1, R323-1 et article 5 vers 13 h 50 (§15).
+
+## 17. Relecture à l'écran du 17/11/2026 vers 15 h 20 : document ACEA (préparation des pages de grade)
+
+**Relu à l'écran** (pdf.js dans Chrome, 17/11/2026 vers 15 h 20). Préparation seulement : aucune page de grade avant la
+notice Toyota Yaris (décision du pilotage). Source proposée au registre : `acea-oil-sequences-2023`, catégorie
+`secondaire`, nature `document-technique` (demande de changement n° 31), **à faire admettre** ; texte en anglais : toute
+reprise sur une page est une traduction, signalée comme telle (charte §2.2). Le §2 le marquait [WF] : les passages
+ci-dessous sont désormais relus à l'écran.
+
+ACEA, « 2023 ACEA Oil Sequences for Light-Duty Engines », Sep. 2023, Revision 0
+(https://www.acea.auto/files/2023_ACEA_oil_sequences_light-duty_engines.pdf) :
+
+- p. 4, CONSUMER LANGUAGE : « C: Catalyst and GPF/DPF compatible engine oils for gasoline and diesel engines – ‘Low
+  SAPS’ Note: These oils will increase the DPF/GPF and TWC life and maintain the vehicle’s fuel economy. Warning: Some of
+  these categories may be unsuitable for use in certain engine types – consult the manufacturer’s owner manual/handbook
+  in case of doubt. C2 Stable, stay-in-grade engine oil with mid-SAPS Level, for aftertreatment system compatibility.
+  Intended for use at extended oil drain intervals in passenger car and light-duty gasoline DI diesel engines designed
+  for low viscosity engine oils with a minimum HTHS Viscosity of 2.9 mPa·s. C3 Stable, stay-in-grade engine oil with
+  mid-SAPS Level, for aftertreatment system compatibility. Intended for use at extended oil drain intervals in passenger
+  car and light-duty gasoline DI diesel engines designed for engine oils with HTHS viscosity of minimum 3.5 mPa·s. C4
+  Stable, stay-in-grade engine oil with low-SAPS Level, for aftertreatment system compatibility. Intended for use at
+  extended oil drain intervals in passenger car and light-duty gasoline DI diesel engines designed for engine oils with
+  HTHS viscosity of minimum 3.5 mPa·s. »
+- p. 7 (séquences C), 1.1 Viscosity Grades : « Viscosity Class according to SAE J300 - Latest active issue. No
+  restriction except as defined by HTHS and Shear Stability requirements. Manufacturers may indicate specific Viscosity
+  requirements related to ambient temperature. » La même ligne figure p. 6 pour les séquences A/B.
+
+**Ce que le document ne dit pas** : il ne définit aucun grade (5W30 ou autre) ; il renvoie à SAE J300 (norme payante, non
+achetée). Il ne permet donc pas, à lui seul, le tableau des viscosités ni la 85W140 (demande de changement n° 35).
+
+**Utilité pour les pages de grade** (5W30, 5W40, 10W40), après la notice Toyota :
+- sens des classes C2, C3 et C4 (« 5w30 c2 », « c3 », « c4 ») : huiles compatibles avec les catalyseurs et les filtres à
+  particules (« Low SAPS ») ; C2 et C3 « mid-SAPS », C4 « low-SAPS » ; HTHS minimale de 2,9 mPa·s (C2) ou 3,5 mPa·s (C3,
+  C4) ; avec l'avertissement du document : certaines de ces catégories peuvent ne pas convenir à certains moteurs,
+  consulter la notice du constructeur en cas de doute ;
+- « le constructeur peut indiquer une viscosité selon la température extérieure » (p. 6 et 7) ;
+- toujours dit comme une traduction d'une source secondaire, jamais comme un verdict (aucun niveau n'en est tiré).
