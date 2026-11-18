@@ -1,5 +1,8 @@
 # Relevé : sources des pages codes P0420 et P0299 (lot 4a), 14/11/2026
 
+> Citations de plus de 25 mots réduites à leurs 20 premiers mots le 18/11/2026 (porte 11, §3 : retrait des extraits de notices du dépôt public) ; texte entier dans le projet Claude, `claude/releves_extraits_longs_etapes_8_10_11.md`, et dans l'historique Git.
+
+
 Relevé de travail, jamais publié. Documents lus le 14/11/2026 (texte extrait des PDF publiés par la NHTSA et des pages
 de Ross-Tech et de Hella, adresses du registre `data/sources.json`). Les extraits sont en anglais, comme dans les
 documents ; les pages ne citent que l'utile, par la source du registre, et ne reprennent aucun paragraphe. Sources
@@ -19,9 +22,7 @@ Hybrid, Ford F-150 PowerBoost) : hors périmètre (docs/02).
   « Oxygen Sensor(s) Control faulty » ; solutions : vérifier les fuites, le catalyseur, les sondes et leur commande,
   « Perform Oxygen Sensor(s) Aging Check » ; notes : « Check the Official Factory Repair Information for any TPI/TSBs
   that apply to dealer level Engine Controller flash updates ». Aucun symptôme listé.
-- **Hella, « Lambda sensor function »** (Tech World, sans date) : « Since the introduction of the EOBD, the function of
-  the catalytic converter must also be monitored. An additional lambda sensor is installed behind the catalytic
-  converter for this. » ; elle sert à mesurer la capacité du catalyseur à stocker l'oxygène ; plus cette capacité
+- **Hella, « Lambda sensor function »** (Tech World, sans date) : « Since the introduction of the EOBD, the function of the catalytic converter must also be monitored. An additional lambda sensor […] » ; elle sert à mesurer la capacité du catalyseur à stocker l'oxygène ; plus cette capacité
   baisse, plus l'amplitude du signal de la sonde aval monte ; « If the voltage amplitudes of both probes are still
   roughly the same, the storage capacity of the catalytic converter has been reached, e.g. through aging. »
 - **Toyota T-SB-0161-13** (31/10/2013, Toyota Motor Sales USA, marché USA) : Tacoma 2010, moteur 2TR-FE ; « Front

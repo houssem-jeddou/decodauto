@@ -1,5 +1,8 @@
 # Loi montagne : sanctions, signalisation et loi Montagne III (relevé du 10/11/2026, livrable 8.3.1a)
 
+> Citations de plus de 25 mots réduites à leurs 20 premiers mots le 18/11/2026 (porte 11, §3 : retrait des extraits de notices du dépôt public) ; texte entier dans le projet Claude, `claude/releves_extraits_longs_etapes_8_10_11.md`, et dans l'historique Git.
+
+
 **Comment ces textes ont été lus.** Le navigateur intégré de Claude est refusé par Légifrance (vérification anti-robot, jamais remplie). Les textes ci-dessous ont d'abord été relevés dans des extraits de recherche web, puis **relus en ligne dans le Chrome de Houssem le 10/11/2026** (vérification de sécurité passée seule, sans clic) : D314-8, chapitre IV, R411-26, arrêté du 23/06/2021 (art. 2 et 7), loi n° 2026-797, recherches dans le Journal officiel, réponse n° 3489 sur le site de l'Assemblée. Reste lu par extrait de recherche seulement : l'arrêté du 24/11/1967 art. 4 (la phrase sur le B26 figure dans l'art. 2 de l'arrêté de 2021, relu en ligne).
 
 ---
@@ -36,13 +39,13 @@ Lien : https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000829916 · extrait de
 
 Lien : https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043775737 · « le texte entre en vigueur le lendemain de sa publication ». Notice : il permet « la signalisation des prescriptions prévues par l'article L. 314-1 du code de la route ».
 
-- Article 7, 2° (article 67-1 de l'arrêté de 1967) : « Pour les véhicules de catégories M1 et N1, M2 et M3, et N2 et N3 sans remorque ni semi-remorque, le port de pneumatiques hiver selon les conditions de l'article D. 314-8 du code de la route est admis pour le respect de cette prescription. » ; « Si l'on entend admettre uniquement la circulation des véhicules équipés de chaînes à neige, ce panneau est complété par un panonceau d'indications diverses M9z portant l'inscription « Chaînes à neige obligatoires. »
-- Article 7, 3° (article 67-4 inséré) : « Une zone d'obligation d'équipements en période hivernale, définie pour un département conformément à l'article D. 314-8 du code de la route, est annoncée par un panneau B58, complété par un panonceau M11b1 portant la mention « du 01/11 au 31/03 », placé à chaque […] » ; « Panneau B59.-Sortie de zone d'obligation d'équipements en période hivernale. » (article 2).
+- Article 7, 2° (article 67-1 de l'arrêté de 1967) : « Pour les véhicules de catégories M1 et N1, M2 et M3, et N2 et N3 sans remorque ni semi-remorque, le […] » ; « Si l'on entend admettre uniquement la circulation des véhicules équipés de chaînes à neige, ce panneau est complété par un […] »
+- Article 7, 3° (article 67-4 inséré) : « Une zone d'obligation d'équipements en période hivernale, définie pour un département conformément à l'article D. 314-8 du code de la […] », placé à chaque […] » ; « Panneau B59.-Sortie de zone d'obligation d'équipements en période hivernale. » (article 2).
 - Numérotation exacte des alinéas à confirmer par Houssem sur la page en ligne.
 
 ## Décret n° 2020-1264 du 16 octobre 2020 (déjà au registre : `decret-2020-1264`)
 
-Références : « pris pour l'application de l'article 27 de la loi n° 2016-1888 du 28 décembre 2016 de modernisation, de développement et de protection des territoires de montagne ». Article 1 : période hivernale du 1er novembre au 31 mars de l'année suivante (D314-8, IV).
+Références : « pris pour l'application de l'article 27 de la loi n° 2016-1888 du 28 décembre 2016 de modernisation, de développement et […] ». Article 1 : période hivernale du 1er novembre au 31 mars de l'année suivante (D314-8, IV).
 
 ## Sanction du défaut d'équipement : où en est le décret ?
 

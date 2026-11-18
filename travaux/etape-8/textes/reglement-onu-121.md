@@ -1,5 +1,8 @@
 # Règlement n° 121 de la CEE-ONU : ce qui a été relevé (symbole et couleur seulement)
 
+> Citations de plus de 25 mots réduites à leurs 20 premiers mots le 18/11/2026 (porte 11, §3 : retrait des extraits de notices du dépôt public) ; texte entier dans le projet Claude, `claude/releves_extraits_longs_etapes_8_10_11.md`, et dans l'historique Git.
+
+
 Texte lu le 04/11/2026 dans le navigateur de Claude, sur EUR-Lex, en français :
 https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:42016X0108(01)
 (Journal officiel de l'Union européenne, L 5 du 08/01/2016, p. 9, publié sous la référence 2016/18).
@@ -8,7 +11,7 @@ Ce règlement ne fixe que le symbole et la couleur : il ne fixe jamais un verdic
 
 ## Paragraphes relevés, mot pour mot
 - « 5.4.1. Tous les témoins énumérés dans le tableau ci-après doivent émettre une lumière de la couleur indiquée à la colonne 5 de ce tableau. »
-- « 5.4.2. Les indicateurs et les témoins ainsi que les moyens d'identification des indicateurs et des commandes non énumérés dans le tableau ci-après peuvent être de n'importe quelle couleur au choix du constructeur, à condition que cette couleur ne modifie ni n'occulte le moyen d'identification d'un autre témoin, d'une autre commande ou d'un autre indicateur visé dans le tableau. La couleur choisie doit être conforme aux directives données au paragraphe 5 de la norme ISO 2575:2004. »
+- « 5.4.2. Les indicateurs et les témoins ainsi que les moyens d'identification des indicateurs et des commandes non énumérés dans le […] »
 - Note 20 du tableau : « Les symboles peuvent être d'une autre couleur pour indiquer un changement de signification, conformément au code figurant au paragraphe 5 de la norme ISO 2575-2004. » (elle porte sur les lignes 3, 9, 10, 11 et 12).
 
 ## Tableau, colonne 5 (Couleur), témoins utiles à la liste des voyants
