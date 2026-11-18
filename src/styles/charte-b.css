@@ -403,7 +403,7 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .illustration{background:var(--panneau);border-radius:20px}
 :root .illustration figcaption{color:var(--nuit-doux)}
 :root .credit{color:var(--nuit-texte)}
-:root .sommaire a{border:1px solid #9aa6b5;border-radius:999px;color:var(--texte);background:#fff}
+:root .sommaire a{border:1px solid #9aa6b5;border-radius:1rem;color:var(--texte);background:#fff}
 :root .repere{background:var(--panneau);color:var(--lr);border-radius:999px;border:1px solid var(--lr);--glyphe:var(--panneau)}
 :root .repere[data-gravite="3"]{--lr:var(--led3)}:root .repere[data-gravite="2"]{--lr:var(--led2)}:root .repere[data-gravite="1"]{--lr:var(--led1)}:root .repere[data-gravite="0"]{--lr:var(--led0)}
 :root .verdict-cite{background:var(--panneau);color:var(--lr);border-radius:999px;border:1px solid var(--lr);--glyphe:var(--panneau)}

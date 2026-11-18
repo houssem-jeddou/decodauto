@@ -15,7 +15,7 @@ import { dateDesDonnees } from './date-des-donnees.ts';
 import { controlerPage } from '../src/lib/controle.ts';
 import { constatsExpressionsInterdites, constatsIdentifiants, constatsPartCitee, constatsTexteRedige, constatsTypographie } from '../scripts/lib/dist.ts';
 import { modeleDeLaPage, pageDossier, pageDossierF2, pagePanne, pagePanneF2, refusFormat1 } from '../src/lib/modeles.ts';
-import { bandeauFormat2, pastilleVerdict, piedFormat2, tableauxDuTexteFormat2 } from '../src/lib/format2.ts';
+import { MOTS_TEXTE_LONG, bandeauFormat2, pastilleVerdict, piedFormat2, tableauxDuTexteFormat2 } from '../src/lib/format2.ts';
 import { fichePanneHtml, ficheTutorielHtml, historiqueDossierHtml, MOTS_ACTION_ARBRE } from '../src/lib/fiche-panne.ts';
 import { decoderEntites } from '../src/lib/html.ts';
 import { normaliserTexte } from '../src/lib/empreinte.ts';
@@ -261,7 +261,7 @@ describe('format 2 : pages panne et dossier (F1.3c et sa revue)', () => {
     for (const r of ['R7-ARBRE-UNIQUE', 'R7-ARBRE-QUESTIONS', 'FORMAT2-ARBRE']) assert.ok(regles.includes(r), `${r} : ${regles.join(', ')}`);
   });
 
-  test('tableaux du texte au format 2 : bloc de la charte, cartes au-delà de trois colonnes, intitulés avec & et < échappés une seule fois', () => {
+  test('tableaux du texte au format 2 : bloc de la charte, cartes au-delà de trois colonnes ou avec un texte long, intitulés avec & et < échappés une seule fois', () => {
     const trois = '<table><thead><tr><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>3</td></tr></tbody></table>';
     assert.equal(tableauxDuTexteFormat2(trois), `<div class="tableau">${trois}</div>`);
     const quatre = '<table><thead><tr><th>Notice</th><th>Pièces &amp; main-d’œuvre</th><th>Âge &lt; 5 ans</th><th>D</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>3</td><td>4</td></tr></tbody></table>';
@@ -271,6 +271,20 @@ describe('format 2 : pages panne et dossier (F1.3c et sa revue)', () => {
     // Rôles du tableau, comme les cas par marque (revue de F1.3b) : le tableau reste annoncé quand il passe en cartes.
     assert.match(rendu, /^<div class="tableau tableau-cartes"><table role="table"><thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Notice<\/th>/);
     assert.match(rendu, /<tbody role="rowgroup"><tr role="row">/);
+    // Texte long (charte §4, seuils MOTS_TEXTE_LONG) : trois colonnes, plus de 10 mots dans une cellule ; deux colonnes, plus de 20.
+    const ligne = (n: number): string => Array.from({ length: n }, (_, i) => `mot${i}`).join(' ');
+    const table = (cols: number, mots: number): string =>
+      `<table><thead><tr>${Array.from({ length: cols }, (_, i) => `<th>T${i}</th>`).join('')}</tr></thead><tbody><tr>${Array.from({ length: cols }, (_, i) => `<td>${i === cols - 1 ? ligne(mots) : 'x'}</td>`).join('')}</tr></tbody></table>`;
+    assert.equal(MOTS_TEXTE_LONG[3], 10);
+    assert.equal(MOTS_TEXTE_LONG[2], 20);
+    assert.ok(!tableauxDuTexteFormat2(table(3, 10)).includes('tableau-cartes'));
+    assert.ok(tableauxDuTexteFormat2(table(3, 11)).startsWith('<div class="tableau tableau-cartes">'));
+    assert.ok(!tableauxDuTexteFormat2(table(2, 20)).includes('tableau-cartes'));
+    assert.ok(tableauxDuTexteFormat2(table(2, 21)).includes('<th scope="row" role="rowheader">x</th><td role="cell" data-libelle="T1">'));
+    // Balises et entités ne comptent pas comme des mots ; la première cellule (titre de la carte) compte.
+    const balises = `<table><thead><tr><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td><a href="/x/">un</a> &amp; <strong>deux</strong></td><td>x</td><td>y</td></tr></tbody></table>`;
+    assert.ok(!tableauxDuTexteFormat2(balises).includes('tableau-cartes'));
+    assert.ok(tableauxDuTexteFormat2(table(3, 0).replace('<td>x</td>', `<td>${ligne(11)}</td>`)).includes('tableau-cartes'));
     const unique = `<div class="tableau-corps" data-element-unique="tableau" role="region" aria-label="X" tabindex="0">${trois}</div>`;
     assert.equal(tableauxDuTexteFormat2(unique), `<div class="tableau tableau-corps" data-element-unique="tableau" role="region" aria-label="X" tabindex="0">${trois}</div>`);
     assert.equal(decoderEntites('a &amp; b &lt; c &#39;d&#x27; &nbsp;&unknown;'), 'a & b < c \'d\'  &unknown;');

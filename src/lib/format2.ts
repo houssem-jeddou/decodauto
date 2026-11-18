@@ -789,14 +789,29 @@ export function pageVoyantFormat2(
 }
 
 /**
+ * Texte long d'un tableau de deux ou trois colonnes (charte graphique §4, « Tableaux du texte » : cartes « quand une colonne
+ * porte un texte long »), en mots, selon le nombre de colonnes : au-delà, une cellule du corps dépasse quatre lignes à 375 px
+ * (mesures du 18/11/2026 sur les pages en ligne : 3 colonnes, environ 2,5 mots par ligne ; 2 colonnes, environ 5 mots par
+ * ligne dans la seconde). Au-delà de trois colonnes, toujours en cartes.
+ */
+export const MOTS_TEXTE_LONG: Readonly<Record<number, number>> = { 2: 20, 3: 10 };
+
+/** Nombre de mots du texte d'un fragment HTML (balises retirées, entités décodées). */
+const motsDuTexte = (html: string): number => decoderEntites(html.replace(/<[^>]+>/g, ' ')).split(/\s+/).filter((m) => m !== '').length;
+
+/**
  * Tableaux du texte rédigé au format 2 (charte graphique §4, « Tableaux ») : dans un bloc `tableau` (en-tête sombre, angles,
- * défilement en largeur) ; au-delà de trois colonnes, en cartes sur téléphone (`tableau-cartes`, chaque cellule portant le
- * libellé de sa colonne). Le tableau élément unique (« {{tableau}} ») garde son bloc et ses repères.
+ * défilement en largeur) ; en cartes sur téléphone (`tableau-cartes`, chaque cellule portant le libellé de sa colonne) au-delà
+ * de trois colonnes, ou quand une cellule du corps porte un texte long (`MOTS_TEXTE_LONG`). Le tableau élément unique
+ * (« {{tableau}} ») garde son bloc et ses repères.
  */
 export function tableauxDuTexteFormat2(html: string): string {
   const enrichir = (table: string): { table: string; cartes: boolean } => {
     const entetes = [...(/<thead\b[\s\S]*?<\/thead>/.exec(table)?.[0] ?? '').matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/g)].map((m) => decoderEntites((m[1] ?? '').replace(/<[^>]+>/g, '')).trim());
-    if (entetes.length <= 3) return { table, cartes: false };
+    const seuil = MOTS_TEXTE_LONG[entetes.length];
+    const cellules = [...(/<tbody\b[\s\S]*?<\/tbody>/.exec(table)?.[0] ?? '').matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/g)].map((m) => m[1] ?? '');
+    const texteLong = seuil !== undefined && cellules.some((c) => motsDuTexte(c) > seuil);
+    if (entetes.length <= 3 && !texteLong) return { table, cartes: false };
     // Cartes (revue de F1.3b) : la première cellule de chaque rangée en devient le titre (th scope="row"), et les rôles du
     // tableau sont écrits, comme pour les cas par marque : un lecteur d'écran garde le tableau quand l'affichage passe en blocs.
     const corps = table
