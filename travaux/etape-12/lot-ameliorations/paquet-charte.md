@@ -1,8 +1,8 @@
 # Étape 12, lot d'améliorations, partie 1 : deux corrections de la charte graphique (tableaux en cartes, sommaire)
 
 Préparé par Claude le 18/11/2026, branche `etape-12/lot-ameliorations` (pull request n° 92). Accord de Houssem pour lancer le
-lot : 18/11 (20 h 14, « Oui, tu peux attaquer le lot d'amélioration »). **À valider par Houssem sur captures (règle 15)** ;
-rien n'est publié avant. Aucun verdict, aucun texte, aucune adresse, aucun title ni H1 ne change ; la date « Mis à jour le »
+lot : 18/11 (20 h 14, « Oui, tu peux attaquer le lot d'amélioration »). **Validé par Houssem le 18/11 à 21 h 43 (§7)** ;
+rien n'est publié avant la fusion. Aucun verdict, aucun texte, aucune adresse, aucun title ni H1 ne change ; la date « Mis à jour le »
 ne bouge pas (règle 14, b : présentation seulement) ; la liste des H2 de chaque page est inchangée.
 
 ## 1. Ce qui change
@@ -118,6 +118,9 @@ Sur ordinateur, hauteurs inchangées (le gras de la première colonne ne crée a
 >   Safari et Firefox ne sont pas essayés (Chrome seulement).
 
 ## 7. Validation de Houssem
+**Validé par Houssem le 18/11/2026 à 21 h 43**, mot pour mot sur la ligne ci-dessous (sur les captures et les comparaisons
+de 29d3dce8, CI verte : contrôles, recette des exemples, démonstration du format 2, Lighthouse).
+
 > « Je valide les deux corrections de la charte : sur téléphone, tableaux du texte en cartes à partir de trois colonnes, ou à
 > deux colonnes quand une cellule porte plus de 20 mots (huit pages), cellule vide sans intitulé dans une carte, coupure des
 > seuls mots trop longs ; sur ordinateur, première colonne de ces tableaux en gras ; pastilles du sommaire à angles de 16 px
