@@ -1,6 +1,6 @@
 // Vérifie le site en ligne : redirections 301 (http → https, www → domaine nu, chemin conservé), accueil en ligne,
 // X-Robots-Tag cohérent avec le mode d'indexation du dépôt, ni script ni cookie sur la page servie, robots.txt identique au
-// dépôt, plan du site servi en XML.
+// dépôt, plan du site servi en XML ; avec un identifiant AdSense, balise d'association et ads.txt en ligne (demande n° 38).
 // Lancé par la CI (job « production ») ; aucun secret, aucune écriture. Usage : npm run production [-- --information]
 //   --information : les écarts sont affichés comme des avertissements et le script réussit ; un seul passage. Pour un
 //                   lancement local ou sur une branche autre que main (la production n'a pas encore ses changements) ;
@@ -12,6 +12,7 @@
 import { appendFile, readFile } from 'node:fs/promises';
 import { argv, env, exit, stdout } from 'node:process';
 import { modeIndexation } from '../src/lib/indexation.ts';
+import { configAdsense } from '../src/lib/adsense.ts';
 import { ENTETES_LECTURE, verifierAvecTentatives, verifierProduction, type Lire } from './lib/production.ts';
 
 const lire: Lire = async (url) => {
@@ -35,7 +36,7 @@ const information = argv.includes('--information');
 // (contrôle du lundi, lancement à la demande sur main, lancement local) : un seul passage.
 const apresDeploiement = argv.includes('--apres-deploiement') && !information;
 const { constats, passages, passagers } = await verifierAvecTentatives(
-  () => verifierProduction({ lire, robotsDepot, indexable: mode.indexable }),
+  () => verifierProduction({ lire, robotsDepot, indexable: mode.indexable, adsense: configAdsense() }),
   {
     passages: apresDeploiement ? 4 : 1,
     delaiMs: 30_000,

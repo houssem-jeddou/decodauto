@@ -3,6 +3,7 @@
 // est injectée, ce qui permet de tester chaque cas sans toucher au site.
 import type { Constat } from '../../src/lib/controle.ts';
 import { ADRESSE_SIGNALEMENT, FICHIER_PLAN_DU_SITE, URL_SITE } from '../../src/lib/site.ts';
+import { ADRESSE_ADS_TXT, NOM_BALISE_ADSENSE, contenusBaliseAdsense, ligneAdsTxt, type ConfigAdsense } from '../../src/lib/adsense.ts';
 
 export interface Reponse {
   statut: number;
@@ -100,6 +101,8 @@ export interface OptionsProduction {
   robotsDepot: string;
   /** Mode d'indexation du dépôt (variable SITE_INDEXABLE + drapeau versionné). */
   indexable: boolean;
+  /** Configuration AdSense du dépôt (demande n° 38) : sans identifiant d'éditeur, ni balise ni ads.txt à vérifier. */
+  adsense?: ConfigAdsense | undefined;
 }
 
 export async function verifierProduction(options: OptionsProduction): Promise<Constat[]> {
@@ -155,6 +158,24 @@ export async function verifierProduction(options: OptionsProduction): Promise<Co
   const normaliser = (t: string): string => t.replace(/\r\n/g, '\n').split('\n').map((l) => l.trimEnd()).join('\n').trim();
   if (robots.statut !== 200) constats.push(erreur('PROD-ROBOTS', `${URL_SITE}/robots.txt répond ${decrireReponse(robots)} au lieu de 200`));
   else if (normaliser(robots.corps) !== normaliser(robotsDepot)) constats.push(erreur('PROD-ROBOTS', 'robots.txt en ligne diffère de public/robots.txt du dépôt'));
+
+  // AdSense (demande de changement n° 38, temps 1) : avec un identifiant d'éditeur, la balise d'association sur l'accueil servi
+  // et ads.txt en ligne, tels que la configuration du dépôt les génère.
+  const configPub = options.adsense;
+  const ligneAds = configPub === undefined ? undefined : ligneAdsTxt(configPub);
+  if (configPub !== undefined && configPub.client !== null && ligneAds !== undefined) {
+    const client = configPub.client;
+    if (accueil.statut === 200) {
+      const vues = contenusBaliseAdsense(accueil.corps);
+      if (vues.length !== 1 || vues[0] !== client) {
+        constats.push(erreur('PROD-ADSENSE-META', `${ACCUEIL} doit servir une seule balise « ${NOM_BALISE_ADSENSE} » de valeur ${client} ; trouvée(s) : ${vues.length === 0 ? 'aucune' : vues.join(', ')}`));
+      }
+    }
+    const ads = await lire(`${URL_SITE}${ADRESSE_ADS_TXT}`);
+    if (ads.statut !== 200) constats.push(erreur('PROD-ADS-TXT', `${URL_SITE}${ADRESSE_ADS_TXT} répond ${decrireReponse(ads)} au lieu de 200`));
+    else if (!/^text\/plain\b/i.test(ads.typeContenu ?? '')) constats.push(erreur('PROD-ADS-TXT', `${URL_SITE}${ADRESSE_ADS_TXT} servi en ${ads.typeContenu ?? 'sans type'} : la spécification de l'IAB exige text/plain`));
+    else if (normaliser(ads.corps) !== ligneAds) constats.push(erreur('PROD-ADS-TXT', `${URL_SITE}${ADRESSE_ADS_TXT} doit contenir exactement « ${ligneAds} »`));
+  }
 
   // Plan du site en ligne.
   const plan = await lire(`${URL_SITE}/${FICHIER_PLAN_DU_SITE}`);

@@ -14,6 +14,7 @@ import { demoFormat2Active } from '../../scripts/lib/demo-format2.ts';
 // Pictogramme du bouton « Trouver mon voyant » du format 2 (pilote : le voyant moteur), tiré de la base des dessins.
 import pictogrammeBouton from '../pictogrammes/moteur.svg?raw';
 import { liensFavicon } from '../lib/marque.ts';
+import { baliseAdsense, configAdsense } from '../lib/adsense.ts';
 
 interface Props {
   titre: string;
@@ -29,6 +30,9 @@ interface Props {
 const { titre, description, sansCanonical = false, donneesStructurees = [], format = 1 } = Astro.props;
 const feuille = `<style>${format === 2 ? cssFormat2 : cssFormat1}</style>`;
 const indexable = estIndexable();
+// Balise d'association AdSense (demande de changement n° 38, temps 1) : générée depuis config/adsense.json, une fois par
+// page ; vide tant qu'il n'y a pas d'identifiant d'éditeur. Ni script ni cookie (contrôles ADSENSE-*).
+const balisePublicite = baliseAdsense(configAdsense());
 // Canonical : l'adresse de la page elle-même, absolue (contrôles CANONICAL-*). Jamais saisie à la main.
 const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.site).href;
 // Composants communs à toutes les pages (livrable 6.3, src/lib/gabarit.ts) : nom du site et mention en tête avant le
@@ -58,6 +62,7 @@ const bas = (format === 2 ? piedFormat2 : pied)(sansCanonical ? undefined : Astr
     {!indexable && <meta name="robots" content="noindex" />}
     {canonical && <link rel="canonical" href={canonical} />}
     <Fragment set:html={liensFavicon()} />
+    {balisePublicite !== '' && <Fragment set:html={balisePublicite} />}
     {donneesStructurees.length > 0 && <Fragment set:html={donneesStructurees.join('')} />}
   </head>
   <body>
