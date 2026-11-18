@@ -102,23 +102,27 @@ Notices déjà au registre (relevés des 16 et 17/11, et base voyants validée l
 - **« Mis à jour le »** : `date_modification` est au 18/11 ; si la mise en ligne a lieu un autre jour, elle passe à ce
   jour-là dans la pull request (la date n'entre pas dans l'empreinte).
 
-## 4. Mesures et captures (construction de recette de la CI, run 44381866307, police Inter)
+## 4. Mesures et captures (construction de recette de la CI, police Inter)
 
-Mesures de la CI (`mesures-format2-avant.txt` : `main`, cfb922d ; `mesures-format2-apres.txt` : ce brouillon), à 375 px :
+Mesures de la CI à 375 px (`mesures-format2-avant.txt` : `main`, cfb922d ; après : run 44381866307 sur le premier
+brouillon, puis job 135093823403 sur 2df897ab, après les corrections de la revue ; elles font foi) :
 
-| Repère | Avant | Après |
-|---|---|---|
-| Bas de la réponse directe | 467 px | 467 px |
-| Bas du verdict et de l'urgence de la première situation | 582 px | 582 px (premier écran : 667 px) |
-| Bas de l'encadré (lignes) | 1 873 px (4) | 2 210 px (5) |
-| Haut de l'illustration (après « Notices / Base du coût ») | 2 513 px | 3 044 px |
-| Haut des étapes | 3 760 px | 4 454 px |
-| Hauteur de la page | 11 930 px | 13 700 px |
+| Repère | Avant | Premier brouillon | Après corrections |
+|---|---|---|---|
+| Bas de la réponse directe | 467 px | 467 px | 467 px |
+| Bas du verdict et de l'urgence de la première situation | 582 px | 582 px | 582 px (premier écran : 667 px) |
+| Bas de l'encadré (lignes) | 1 873 px (4) | 2 210 px (5) | 2 208 px (5) |
+| Haut de l'illustration (après « Notices / Base du coût ») | 2 513 px | 3 044 px | 3 023 px |
+| Haut des étapes | 3 760 px | 4 454 px | 4 433 px |
+| Hauteur de la page | 11 930 px | 13 700 px | 13 983 px |
+
+En police de secours, à 375 px, après corrections : réponse directe 492 px, première situation 607 px (premier écran tenu),
+illustration 3 048 px, étapes 4 458 px.
 
 Signalés par le contrôle des mesures (demande n° 32) :
-- **illustration au-delà de trois écrans** (3 044 px, 2 001 px) : déjà le cas, validé le 17/11 ; raison : encadré de cinq
-  lignes, bas à 2 210 px ;
-- **étapes au-delà de six écrans** (4 454 px, 4 002 px) : **nouveau, décision de Houssem sur captures**. Recommandation de
+- **illustration au-delà de trois écrans** (3 023 px, 2 001 px) : déjà le cas, validé le 17/11 ; raison : encadré de cinq
+  lignes, bas à 2 208 px ;
+- **étapes au-delà de six écrans** (4 433 px, 4 002 px) : **nouveau, décision de Houssem sur captures**. Recommandation de
   Claude : garder la ligne 3 (une décision que cherche le lecteur dont le niveau baisse, et la requête « consommation
   d'huile » qui renvoie ici) ; les étapes restent à un toucher par le sommaire « Sur cette page », et leur résumé est dans la
   fiche « Le tutoriel en bref ».
@@ -131,11 +135,33 @@ Chrome, police chargée et police de secours ; script `captures/capturer.cjs`) :
   notices, section « Le niveau d'huile baisse anormalement », en police chargée (les captures de secours identiques sont
   retirées).
 - Avant : captures du lot C1 (`travaux/etape-11/recette-niveau-huile/captures/`).
+- **À refaire** : ces captures sont celles du premier brouillon. Depuis, la question, la ligne 3, sa section et deux
+  cellules du tableau ont changé de texte ; les nouvelles captures se font sur la construction de recette de 2df897ab
+  (téléchargement à autoriser par Houssem), avant la présentation pour validation.
 
 ## 5. Validation de Houssem
 > « Je valide la révision de la page « niveau d'huile » : les lignes 1 et 2 inchangées avec les citations Toyota et leurs
-> lignes d'écart, la ligne 3 nouvelle (baisse anormale du niveau) à Oui, avec précautions et À faire dans les jours qui
-> viennent, la réponse directe, la fiche du tutoriel, les étapes, le tableau et les faits du texte, et les étapes au-delà
-> de six écrans sur téléphone (captures vues). »
+> lignes d'écart (dont le classement de « contactez un réparateur » de Toyota au niveau le plus prudent), la ligne 3
+> nouvelle (plus de 0,5 litre aux 1 000 km après le rodage, ou baisse anormale) à Oui, avec précautions et À faire dans les
+> jours qui viennent, la question de décision, la réponse directe, la fiche du tutoriel, les étapes, le tableau et les faits
+> du texte, et les étapes au-delà de six écrans sur téléphone (captures vues). »
 
 Après validation : empreinte posée (`npm run empreinte`), CI verte, mise en ligne, vérification en ligne.
+
+## 6. Revue indépendante
+> **Revue indépendante** (agent sans contexte de la rédaction, 18/11, sur la branche à 20f8920d, les notices et les
+> captures ; verdict : à corriger, rien de bloquant ; verdicts justes, extraits Toyota exacts, grille bien appliquée).
+> - **Ce qu'elle a changé** : « agir avant de rouler » attribué aux seules notices qui le disent (I1) ; consigne Toyota de
+>   mesure à chaud citée comme celle de Toyota, et non comme un conseil général qui contredisait quatre notices (I2) ;
+>   ligne 3 recentrée sur le seuil de Renault et Dacia (plus de 0,5 litre aux 1 000 km après le rodage), qui la distingue
+>   des appoints normaux entre deux vidanges, avec deux citations de plus au même niveau (I3) ; action de la ligne 3
+>   appuyée sur Peugeot p. 165 (M1) ; consommation Toyota qui « peut augmenter », sans la dire anormale (M2) ; consigne du
+>   message Toyota p. 299 au tableau (M3) ; liste des H2 (M4) ; mesures de la CI seules retenues, date de mise à jour (M5) ;
+>   question de décision qui couvre la ligne 3 (M6).
+> - **Écarté** : rien.
+> - **Non relu** (ajouté ou réécrit après la revue) : la ligne 3 réécrite et ses deux citations nouvelles, la question de
+>   décision, les phrases corrigées, les cellules du tableau Renault, Dacia et Toyota, ce paquet.
+> - **Reste à vérifier** : Renault p. 330 et Dacia p. 294 lus dans le relevé à l'écran du 17/11 (§11 du relevé), pas
+>   relus dans les PDF (ni par la revue, ni depuis) ; Dacia p. 294 donnée « mot pour mot » par ce relevé ; premier
+>   classement de « contactez » seul (Toyota, ligne 2) au niveau le plus prudent : précédent à valider expressément ;
+>   captures à refaire (§4) ; rendu sur un vrai téléphone.
