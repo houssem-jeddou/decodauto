@@ -24,7 +24,7 @@ h1: "Niveau d'huile moteur : comment le vérifier, et que faire s'il est trop ba
 description: "Vérifier le niveau d'huile à la jauge, faire l'appoint et réagir à un niveau trop bas, trop haut ou qui baisse, selon les notices Peugeot, Citroën, Renault, Dacia, Seat et Toyota."
 libelle_court: Niveau d'huile
 question_decision: "Niveau d'huile trop bas ou trop haut, voyant d'huile allumé : puis-je démarrer et rouler ?"
-reponse_directe: "Entre les repères mini et maxi de la jauge, voiture à plat. Le moment dépend de la notice : moteur arrêté depuis 30 minutes (Peugeot, Citroën), après un arrêt prolongé (Renault, Dacia), ou chaud et coupé depuis environ 2 minutes (Seat) ou 5 minutes (Toyota)."
+reponse_directe: "Entre les repères mini et maxi de la jauge, voiture à plat. Selon la notice : moteur arrêté depuis 30 minutes (Peugeot, Citroën), après un arrêt prolongé (Renault, Dacia), ou chaud, environ 2 minutes (Seat) ou 5 (Toyota) après l'arrêt."
 situations:
   - situation: "À la jauge, le niveau d'huile est sous le repère mini"
     verdict: non, arrêt immédiat

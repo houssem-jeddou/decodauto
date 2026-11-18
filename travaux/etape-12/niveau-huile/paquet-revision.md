@@ -49,11 +49,12 @@ Notices déjà au registre (relevés des 16 et 17/11, et base voyants validée l
 | 3 | **Nouvelle** : « Le niveau d'huile baisse anormalement ou à répétition entre deux vidanges » | – | **Oui, avec précautions · À faire dans les jours qui viennent** ; action : « Vérifiez le niveau à la jauge avant chaque trajet et faites l'appoint si nécessaire (sous le repère mini, ne démarrez pas) ; faites vérifier le moteur par le réseau de la marque ou un atelier qualifié. » ; citations Renault p. 333 (« consultez un Représentant de la marque ») et Peugeot p. 165 (« faire vérifier le circuit »), toutes deux à ce niveau, deux groupes ; pas d'écart |
 | 4, 5 | Voyants de niveau et de pression d'huile | lignes de la base | **Inchangées** |
 
-- **Réponse directe** : « … ou chaud et coupé depuis environ 2 minutes (Seat) ou 5 minutes (Toyota). »
+- **Réponse directe** (40 mots au plus, règle 2c) : « Entre les repères mini et maxi de la jauge, voiture à plat. Selon la notice : moteur arrêté depuis 30 minutes (Peugeot, Citroën), après un arrêt prolongé (Renault, Dacia), ou chaud, environ 2 minutes (Seat) ou 5 (Toyota) après l'arrêt. » (39 mots)
 - **Coût probable** : inchangé (pièces, base de calcul, risque).
 - **Premier écran (règle 2a, page informative)**, mesuré sur la page en ligne à 375 × 667 en remplaçant la réponse
-  directe (navigateur intégré, police du système) : réponse directe complète ; bas du verdict de la première situation à
-  554 px (532 avant), bas de l'urgence à 582 px (560 avant) : verdict et urgence restent dans le premier écran.
+  directe par la nouvelle (navigateur intégré, police du système de Houssem) : même hauteur qu'avant (bas de la réponse
+  directe à 445 px, du verdict de la première situation à 532 px, de l'urgence à 560 px) ; la ligne 3 nouvelle vient
+  après la ligne 2 et ne change pas le premier écran.
 
 ## 3. Changements du reste de la page (faits à valider)
 - **Fiche « Le tutoriel en bref », durée** (revue de la PR #84) : « 30 minutes » au plus ne tenait pas pour Renault et
