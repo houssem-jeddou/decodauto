@@ -79,9 +79,40 @@ Notices déjà au registre (relevés des 16 et 17/11, et base voyants validée l
 - Non fait (choix de Claude) : Dacia n'est pas citée pour la baisse anormale (relevé « comme Renault » sans texte mot pour
   mot) ; espace insécable entre nombre et unité (typographie du gabarit, idée reportée).
 
-## 4. Validation de Houssem
+## 4. Mesures et captures (construction de recette de la CI, run 44381866307, police Inter)
+
+Mesures de la CI (`mesures-format2-avant.txt` : `main`, cfb922d ; `mesures-format2-apres.txt` : ce brouillon), à 375 px :
+
+| Repère | Avant | Après |
+|---|---|---|
+| Bas de la réponse directe | 467 px | 467 px |
+| Bas du verdict et de l'urgence de la première situation | 582 px | 582 px (premier écran : 667 px) |
+| Bas de l'encadré (lignes) | 1 873 px (4) | 2 210 px (5) |
+| Haut de l'illustration (après « Notices / Base du coût ») | 2 513 px | 3 044 px |
+| Haut des étapes | 3 760 px | 4 454 px |
+| Hauteur de la page | 11 930 px | 13 700 px |
+
+Signalés par le contrôle des mesures (demande n° 32) :
+- **illustration au-delà de trois écrans** (3 044 px, 2 001 px) : déjà le cas, validé le 17/11 ; raison : encadré de cinq
+  lignes, bas à 2 210 px ;
+- **étapes au-delà de six écrans** (4 454 px, 4 002 px) : **nouveau, décision de Houssem sur captures**. Recommandation de
+  Claude : garder la ligne 3 (une décision que cherche le lecteur dont le niveau baisse, et la requête « consommation
+  d'huile » qui renvoie ici) ; les étapes restent à un toucher par le sommaire « Sur cette page », et leur résumé est dans la
+  fiche « Le tutoriel en bref ».
+- Aucun débordement (largeur de page 320, 375 et 1366 px).
+
+Captures (`captures/`, construction de recette téléchargée par Claude avec l'accord de Houssem du 18/11, servie en local ;
+Chrome, police chargée et police de secours ; script `captures/capturer.cjs`) :
+- page entière, premier écran et encadré, à 375 × 667 et 1366 × 800, police chargée et police de secours ;
+- lignes 2 (ligne d'écart nouvelle) et 3 (nouvelle), bloc « Notices / Base du coût », fiche du tutoriel, tableau des
+  notices, section « Le niveau d'huile baisse anormalement », en police chargée (les captures de secours identiques sont
+  retirées).
+- Avant : captures du lot C1 (`travaux/etape-11/recette-niveau-huile/captures/`).
+
+## 5. Validation de Houssem
 > « Je valide la révision de la page « niveau d'huile » : les lignes 1 et 2 inchangées avec les citations Toyota et leurs
 > lignes d'écart, la ligne 3 nouvelle (baisse anormale du niveau) à Oui, avec précautions et À faire dans les jours qui
-> viennent, la réponse directe, la fiche du tutoriel, les étapes, le tableau et les faits du texte. »
+> viennent, la réponse directe, la fiche du tutoriel, les étapes, le tableau et les faits du texte, et les étapes au-delà
+> de six écrans sur téléphone (captures vues). »
 
 Après validation : empreinte posée (`npm run empreinte`), CI verte, mise en ligne, vérification en ligne.
