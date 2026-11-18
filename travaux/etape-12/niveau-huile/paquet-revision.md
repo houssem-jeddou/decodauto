@@ -128,16 +128,16 @@ Signalés par le contrôle des mesures (demande n° 32) :
   fiche « Le tutoriel en bref ».
 - Aucun débordement (largeur de page 320, 375 et 1366 px).
 
-Captures (`captures/`, construction de recette téléchargée par Claude avec l'accord de Houssem du 18/11, servie en local ;
-Chrome, police chargée et police de secours ; script `captures/capturer.cjs`) :
+Captures (`captures/`, construction de recette de 630b442a, run 44390856818, téléchargée par Claude avec l'accord de
+Houssem du 18/11 à 21 h 45, servie en local ; Chrome, police Outfit chargée, vérifiée, et police de secours ; script
+`captures/capturer.cjs`) :
 - page entière, premier écran et encadré, à 375 × 667 et 1366 × 800, police chargée et police de secours ;
-- lignes 2 (ligne d'écart nouvelle) et 3 (nouvelle), bloc « Notices / Base du coût », fiche du tutoriel, tableau des
-  notices, section « Le niveau d'huile baisse anormalement », en police chargée (les captures de secours identiques sont
-  retirées).
+- lignes 2 (ligne d'écart nouvelle) et 3 (réécrite après la revue), bloc « Notices / Base du coût », fiche du tutoriel,
+  tableau des notices, section « Le niveau d'huile baisse anormalement », aux deux largeurs et dans les deux polices.
 - Avant : captures du lot C1 (`travaux/etape-11/recette-niveau-huile/captures/`).
-- **À refaire** : ces captures sont celles du premier brouillon. Depuis, la question, la ligne 3, sa section et deux
-  cellules du tableau ont changé de texte ; les nouvelles captures se font sur la construction de recette de 2df897ab
-  (téléchargement à autoriser par Houssem), avant la présentation pour validation.
+- Vérifié sur ces captures : premier écran du téléphone (réponse directe complète, puis la première situation avec son
+  verdict et son urgence) ; aucun débordement (largeur de page égale à l'écran, 375 et 1366 px) ; « Notices » : « Ligne 3 :
+  d'après trois notices de constructeurs (Dacia Sandero 3, Peugeot 208 et Renault Clio 5 phase 2) ».
 
 ## 5. Validation de Houssem
 > « Je valide la révision de la page « niveau d'huile » : les lignes 1 et 2 inchangées avec les citations Toyota et leurs
@@ -160,8 +160,8 @@ Après validation : empreinte posée (`npm run empreinte`), CI verte, mise en li
 >   question de décision qui couvre la ligne 3 (M6).
 > - **Écarté** : rien.
 > - **Non relu** (ajouté ou réécrit après la revue) : la ligne 3 réécrite et ses deux citations nouvelles, la question de
->   décision, les phrases corrigées, les cellules du tableau Renault, Dacia et Toyota, ce paquet.
+>   décision, les phrases corrigées, les cellules du tableau Renault, Dacia et Toyota, les captures refaites, ce paquet.
 > - **Reste à vérifier** : Renault p. 330 et Dacia p. 294 lus dans le relevé à l'écran du 17/11 (§11 du relevé), pas
 >   relus dans les PDF (ni par la revue, ni depuis) ; Dacia p. 294 donnée « mot pour mot » par ce relevé ; premier
 >   classement de « contactez » seul (Toyota, ligne 2) au niveau le plus prudent : précédent à valider expressément ;
->   captures à refaire (§4) ; rendu sur un vrai téléphone.
+>   rendu sur un vrai téléphone.
