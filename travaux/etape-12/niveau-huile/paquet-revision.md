@@ -30,8 +30,17 @@ Notice Toyota Yaris (réf. PZ49X-9A592-FR, PDF officiel transmis par Houssem le 
   l'huile moteur en vérifiant la jauge. »
 - p. 249, AVERTISSEMENT « Lors du remplacement de l'huile moteur » : « Ne dépassez pas le niveau maximum, car cela
   pourrait endommager le moteur. » ; « Vérifiez le niveau d'huile sur la jauge chaque fois que vous faites l'appoint. »
+- p. 248, « Le niveau d'huile moteur augmente » : « Pour vérifier le niveau d'huile moteur, veillez à ce que le moteur soit
+  monté en température. »
+- p. 299, message « Niveau d'huile moteur faible. Ajoutez ou remplacez. » : « Le niveau d'huile moteur est faible.
+  Vérifiez le niveau d'huile moteur et faites l'appoint, si nécessaire. »
 
 Notices déjà au registre (relevés des 16 et 17/11, et base voyants validée le 24/10) :
+- Renault Clio 5 phase 2, p. 330, « Niveau huile moteur », « Généralités » (relevé à l'écran du 17/11, §11) : « Toutefois,
+  si après la période de rodage, les apports étaient supérieurs à 0,5 litre pour 1 000 km, consultez un Représentant de
+  la marque. » La même section dit qu'« il est normal de faire des appoints d'huile entre deux vidanges ».
+- Dacia Sandero 3, p. 294 (même relevé) : même texte que Renault p. 330, « mot pour mot » selon le relevé (seul le début
+  diffère : « Un moteur thermique consomme de l'huile »).
 - Renault Clio 5 phase 2, p. 333 (relevé, §11) : « En cas de baisse anormale ou répétée du niveau, consultez un
   Représentant de la marque. »
 - Peugeot 208, p. 165, « Niveaux » (relevé, §6) : « En cas de baisse importante d'un niveau, faire vérifier le circuit
@@ -46,15 +55,16 @@ Notices déjà au registre (relevés des 16 et 17/11, et base voyants validée l
 |---|---|---|---|
 | 1 | Sous le repère mini | Non, arrêtez-vous immédiatement · À faire tout de suite ; citations Peugeot, Citroën, Seat | **Inchangé** (verdict, urgence, action) ; citation Toyota p. 248 ajoutée, classée **Oui, avec précautions · dans les jours qui viennent** (« ajoutez », sans délai, comme Seat) ; ligne d'écart : « Plus stricts : Peugeot et Citroën (ne pas démarrer, compléter impérativement). Moins stricts : Seat et Toyota (ajouter de l'huile). » |
 | 2 | Au-dessus du repère maxi | Non, arrêtez-vous immédiatement · À faire tout de suite ; cinq notices au même niveau, pas d'écart | **Inchangé** (verdict, urgence, action) ; citation Toyota p. 248 ajoutée, classée **Non, ne poursuivez pas votre trajet · À faire tout de suite** (« contactez un concessionnaire ou un réparateur », absent de la grille ; comme « faire appel au réseau » : niveau le plus prudent qu'il peut signifier, principe 3) ; **ligne d'écart nouvelle** : « Plus stricts : Peugeot, Citroën, Renault, Dacia et Seat (ne pas démarrer). Moins strict : Toyota (contacter un réparateur). » |
-| 3 | **Nouvelle** : « Le niveau d'huile baisse anormalement ou à répétition entre deux vidanges » | – | **Oui, avec précautions · À faire dans les jours qui viennent** ; action : « Vérifiez le niveau à la jauge avant chaque trajet et faites l'appoint si nécessaire (sous le repère mini, ne démarrez pas) ; faites vérifier le moteur par le réseau de la marque ou un atelier qualifié. » ; citations Renault p. 333 (« consultez un Représentant de la marque ») et Peugeot p. 165 (« faire vérifier le circuit »), toutes deux à ce niveau, deux groupes ; pas d'écart |
+| 3 | **Nouvelle** : « Après le rodage, vous ajoutez plus de 0,5 litre d'huile aux 1 000 km, ou le niveau baisse anormalement » | – | **Oui, avec précautions · À faire dans les jours qui viennent** ; action : « Faites vérifier la voiture par le réseau de la marque ou un atelier qualifié ; d'ici là, vérifiez régulièrement le niveau à la jauge et faites l'appoint si nécessaire (sous le repère mini, ne démarrez pas). » ; citations Renault p. 330 et Dacia p. 294 (seuil de 0,5 litre aux 1 000 km, « consultez un Représentant de la marque »), Renault p. 333 (baisse anormale ou répétée, « consultez ») et Peugeot p. 165 (baisse importante, « faire vérifier le circuit ») : toutes à ce niveau (grille : « consultez un représentant », « faites vérifier », sans délai), deux groupes ; pas d'écart. « Vérifiez régulièrement » reprend Peugeot p. 165 (« Vérifier régulièrement tous ces niveaux ») |
 | 4, 5 | Voyants de niveau et de pression d'huile | lignes de la base | **Inchangées** |
 
 - **Réponse directe** (40 mots au plus, règle 2c) : « Entre les repères mini et maxi de la jauge, voiture à plat. Selon la notice : moteur arrêté depuis 30 minutes (Peugeot, Citroën), après un arrêt prolongé (Renault, Dacia), ou chaud, environ 2 minutes (Seat) ou 5 (Toyota) après l'arrêt. » (39 mots)
+- **Question de décision** (revue, M6) : « Niveau d'huile trop bas, trop haut ou qui baisse, voyant d'huile allumé : puis-je
+  démarrer et rouler ? » (avant : « … trop bas ou trop haut, voyant… »), pour couvrir la ligne 3.
 - **Coût probable** : inchangé (pièces, base de calcul, risque).
-- **Premier écran (règle 2a, page informative)**, mesuré sur la page en ligne à 375 × 667 en remplaçant la réponse
-  directe par la nouvelle (navigateur intégré, police du système de Houssem) : même hauteur qu'avant (bas de la réponse
-  directe à 445 px, du verdict de la première situation à 532 px, de l'urgence à 560 px) ; la ligne 3 nouvelle vient
-  après la ligne 2 et ne change pas le premier écran.
+- **Premier écran (règle 2a, page informative)** : mesures de la CI au §4 (elles font foi : construction de recette,
+  police Inter, comme aux portes précédentes). Une première mesure sur la page en ligne (navigateur intégré, police du
+  système de Houssem : 445, 532 et 560 px) n'était qu'indicative ; elle est retirée.
 
 ## 3. Changements du reste de la page (faits à valider)
 - **Fiche « Le tutoriel en bref », durée** (revue de la PR #84) : « 30 minutes » au plus ne tenait pas pour Renault et
@@ -63,21 +73,34 @@ Notices déjà au registre (relevés des 16 et 17/11, et base voyants validée l
   Dacia Sandero 3) ; après un appoint, de quelques minutes à 20 minutes avant de revérifier ».
 - **« Quand ne pas le faire soi-même »** : Toyota (contactez un réparateur qualifié) ; baisse anormale ou répétée :
   consultez le réseau (Renault) ou faites vérifier le circuit (Peugeot).
+- **« Quel est le bon niveau »** : « dans les deux cas, les notices Peugeot 208, Citroën C3, Renault Clio 5 et Dacia
+  Sandero 3 demandent d'agir avant de rouler » (et non plus « ces notices », six : Seat et Toyota n'interdisent pas de
+  démarrer sous le mini ; revue, I1).
+- **« Trop d'huile »** : niveau qui monte quand la voiture roule souvent sans que le moteur ne monte assez en température ;
+  « la notice Toyota Yaris demande de mesurer moteur chaud » (et non plus une consigne à l'impératif, qui contredisait
+  Peugeot, Citroën, Renault et Dacia ; revue, I2).
 - **« Comment vérifier »** (fiche « L'essentiel »), **étapes 2, 5, 10 et 12**, sections « à chaud ou à froid », « bon
   niveau » (six notices), « sous le repère mini », « trop d'huile » (consigne Toyota, risque Toyota, niveau qui monte quand
   le moteur ne chauffe pas assez), « quelle huile » (appoint du même type, Toyota), « fréquence » (Toyota : régulièrement).
-- **Tableau des notices** : ligne Toyota remplie (moment de la mesure, consignes sous le mini et au-dessus du maxi) ;
+- **Tableau des notices** : ligne Toyota remplie (moment de la mesure, consigne du message p. 299, consignes sous le mini
+  et au-dessus du maxi) ;
   phrase « rubrique non lue » retirée ; lignes Renault et Dacia : témoin de pression allumé sur route avec le témoin STOP et
-  un signal sonore, « s'arrêter impérativement et couper le contact » (revue de la PR #84) ; Renault : baisse anormale ou
-  répétée, consulter un représentant ; pages citées complétées.
-- **Section « Pourquoi ma voiture consomme de l'huile ? »** : situations de consommation accrue selon Toyota (p. 247).
+  un signal sonore, « s'arrêter impérativement et couper le contact » (revue de la PR #84) ; Renault et Dacia : plus de
+  0,5 litre aux 1 000 km après le rodage (et, Renault, baisse anormale ou répétée) : consulter un représentant ; pages
+  citées complétées (Renault p. 330).
+- **Section « Pourquoi ma voiture consomme de l'huile ? »** : appoints normaux entre deux vidanges selon Peugeot, Citroën,
+  Renault et Dacia ; situations où la consommation « peut augmenter » selon Toyota (p. 247), sans la dire anormale.
 - **Section nouvelle « Le niveau d'huile baisse anormalement : que faire ? »**, repère de la ligne 3 (une seule ligne
-  de l'encadré) ; phrase « aucune notice ne donne les causes d'une consommation anormale : demandez l'avis d'un
-  professionnel » gardée.
+  de l'encadré) : seuil de Renault et Dacia, baisse anormale ou répétée (Renault), baisse importante (Peugeot) ; phrase
+  « aucune notice ne donne les causes d'une consommation anormale : demandez l'avis d'un professionnel » gardée.
+- **H2** (règle 15, liste du format 2) : 10 avant, 11 après, aucun retiré ; ajouté : « Le niveau d'huile baisse
+  anormalement : que faire ? ».
 - **Description** : « … réagir à un niveau trop bas, trop haut ou qui baisse, selon les notices Peugeot, Citroën, Renault,
   Dacia, Seat et Toyota. »
-- Non fait (choix de Claude) : Dacia n'est pas citée pour la baisse anormale (relevé « comme Renault » sans texte mot pour
-  mot) ; espace insécable entre nombre et unité (typographie du gabarit, idée reportée).
+- Non fait (choix de Claude) : Dacia n'est pas citée pour la « baisse anormale ou répétée » de p. 297 (relevé « comme
+  Renault » sans texte mot pour mot) ; espace insécable entre nombre et unité (typographie du gabarit, idée reportée).
+- **« Mis à jour le »** : `date_modification` est au 18/11 ; si la mise en ligne a lieu un autre jour, elle passe à ce
+  jour-là dans la pull request (la date n'entre pas dans l'empreinte).
 
 ## 4. Mesures et captures (construction de recette de la CI, run 44381866307, police Inter)
 

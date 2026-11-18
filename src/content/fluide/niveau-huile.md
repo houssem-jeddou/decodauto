@@ -16,14 +16,16 @@
 # - Illustration : `niveau-huile-jauge`, dessinée pour cette page (travaux/etape-11/generer-illustrations.py).
 # - Révision du 18/11/2026 (étape 12, travaux/etape-12/niveau-huile/paquet-revision.md ; brouillon, jamais validé tant que
 #   l'empreinte n'est pas posée) : notice Toyota Yaris p. 247-249 lue (PDF officiel transmis par Houssem le 17/11) ;
-#   ligne 3 « baisse anormale du niveau » (Renault p. 333, Peugeot p. 165) ; durée de la fiche du tutoriel ; lignes Renault et
-#   Dacia du tableau (témoin de pression allumé sur route, p. 137-138 et p. 111).
+#   ligne 3 « consommation ou baisse anormale » (Renault p. 330 et 333, Dacia p. 294, Peugeot p. 165 ; Renault p. 330 et
+#   Dacia p. 294 : relevé à l'écran du 17/11, travaux/etape-11/textes/releve-sources.md, §11) ; durée de la fiche du
+#   tutoriel ; lignes Renault et Dacia du tableau (témoin de pression allumé sur route, p. 137-138 et p. 111) ; corrections
+#   de la revue indépendante du 18/11 (paquet, §6).
 id: niveau-huile
 title: "Niveau d'huile moteur : le vérifier à la jauge et faire l'appoint"
 h1: "Niveau d'huile moteur : comment le vérifier, et que faire s'il est trop bas ou trop haut ?"
 description: "Vérifier le niveau d'huile à la jauge, faire l'appoint et réagir à un niveau trop bas, trop haut ou qui baisse, selon les notices Peugeot, Citroën, Renault, Dacia, Seat et Toyota."
 libelle_court: Niveau d'huile
-question_decision: "Niveau d'huile trop bas ou trop haut, voyant d'huile allumé : puis-je démarrer et rouler ?"
+question_decision: "Niveau d'huile trop bas, trop haut ou qui baisse, voyant d'huile allumé : puis-je démarrer et rouler ?"
 reponse_directe: "Entre les repères mini et maxi de la jauge, voiture à plat. Selon la notice : moteur arrêté depuis 30 minutes (Peugeot, Citroën), après un arrêt prolongé (Renault, Dacia), ou chaud, environ 2 minutes (Seat) ou 5 (Toyota) après l'arrêt."
 situations:
   - situation: "À la jauge, le niveau d'huile est sous le repère mini"
@@ -90,11 +92,21 @@ situations:
         extrait: "Si le niveau d'huile moteur dépasse le repère de limite supérieure de remplissage, contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié."
         verdict: non, arrêt dès que possible
         urgence: immédiate
-  - situation: "Le niveau d'huile baisse anormalement ou à répétition entre deux vidanges"
+  - situation: "Après le rodage, vous ajoutez plus de 0,5 litre d'huile aux 1 000 km, ou le niveau baisse anormalement"
     verdict: oui avec précautions
     urgence: sous quelques jours
-    action: "Vérifiez le niveau à la jauge avant chaque trajet et faites l'appoint si nécessaire (sous le repère mini, ne démarrez pas) ; faites vérifier le moteur par le réseau de la marque ou un atelier qualifié."
+    action: "Faites vérifier la voiture par le réseau de la marque ou un atelier qualifié ; d'ici là, vérifiez régulièrement le niveau à la jauge et faites l'appoint si nécessaire (sous le repère mini, ne démarrez pas)."
     citations:
+      - source: notice-renault-clio-5
+        emplacement: "p. 330, « Niveau huile moteur », « Généralités »"
+        extrait: "Toutefois, si après la période de rodage, les apports étaient supérieurs à 0,5 litre pour 1 000 km, consultez un Représentant de la marque."
+        verdict: oui avec précautions
+        urgence: sous quelques jours
+      - source: notice-dacia-sandero-3
+        emplacement: "p. 294, « Niveau huile moteur », « Généralités »"
+        extrait: "Toutefois, si après la période de rodage, les apports étaient supérieurs à 0,5 litre pour 1 000 km, consultez un Représentant de la marque."
+        verdict: oui avec précautions
+        urgence: sous quelques jours
       - source: notice-renault-clio-5
         emplacement: "p. 333, huile moteur, « Vidange moteur »"
         extrait: "En cas de baisse anormale ou répétée du niveau, consultez un Représentant de la marque."
@@ -197,7 +209,7 @@ Le tableau plus bas donne la consigne de chaque notice. Pour une autre voiture, 
 
 ## Quel est le bon niveau d'huile moteur ?
 
-Entre les repères mini et maxi de la jauge, pour les six notices lues. Ni trop bas, ni trop haut : dans les deux cas, ces notices demandent d'agir avant de rouler, comme le disent les deux sections suivantes.
+Entre les repères mini et maxi de la jauge, pour les six notices lues. Ni trop bas, ni trop haut : dans les deux cas, les notices Peugeot 208, Citroën C3, Renault Clio 5 et Dacia Sandero 3 demandent d'agir avant de rouler, comme le disent les deux sections suivantes.
 
 ## Niveau d'huile sous le repère mini : puis-je démarrer ?
 
@@ -213,7 +225,7 @@ Entre les repères mini et maxi de la jauge, pour les six notices lues. Ni trop 
 
 Ces notices disent ce que l'on risque : le moteur et le système de dépollution (Renault Clio 5, Dacia Sandero 3), le moteur et le catalyseur (Seat Ibiza), le moteur (Toyota Yaris, en cas de dépassement lors d'un remplacement d'huile).
 
-Selon la notice Toyota Yaris, le niveau peut monter quand le moteur ne chauffe pas assez : trajets courts, basse vitesse ou temps froid. De l'humidité ou du carburant non brûlé se mêle alors à l'huile ; mesurez le niveau moteur chaud.
+Selon la notice Toyota Yaris, le niveau peut monter quand la voiture roule souvent sans que le moteur ne monte assez en température : trajets courts, basse vitesse ou temps froid. De l'humidité ou du carburant non brûlé se mêle alors à l'huile ; la notice Toyota Yaris demande de mesurer moteur chaud.
 
 ## Faire le niveau d'huile : quelle huile, à quelle fréquence ?
 
@@ -230,11 +242,11 @@ Les notices Peugeot 208 et Citroën C3 préconisent un contrôle, avec appoint s
 | Peugeot 208 | Sol plat, moteur à l'arrêt depuis 30 minutes | Affichage « OIL » ou message « Niveau d'huile incorrect », avec le témoin de service et un signal sonore ; indicateur de niveau au combiné à la mise du contact, avec une jauge électrique | Confirmer à la jauge manuelle ; manque confirmé : compléter impérativement ; sous le mini ou au-dessus du maxi : ne pas démarrer |
 | Citroën C3 | Sol plat, moteur à l'arrêt depuis 30 minutes | Indicateur de niveau au combiné à la mise du contact, avec une jauge électrique ; alerte de niveau bas non relevée | Sous le mini ou au-dessus du maxi : ne pas démarrer |
 | Seat Ibiza | À plat, moteur à température, contact coupé, environ 2 minutes d'attente | Témoin jaune ; s'il clignote, le capteur de niveau est défaillant | Contrôler immédiatement le niveau et faire l'appoint dès que possible ; zone C : ajouter jusqu'à la zone B ; au-dessus de la zone A : ne pas démarrer ; capteur défaillant : atelier spécialisé |
-| Renault Clio 5 phase 2 | Sol horizontal, après un arrêt prolongé ; appoint moteur froid | Alerte de l'afficheur au démarrage, au niveau minimum ; témoin de pression d'huile allumé en virage ou au freinage : niveau trop bas | Ajouter de l'huile moteur ; maxi dépassé : ne pas démarrer ; témoin de pression qui tarde à s'éteindre ou reste allumé à l'accélération : s'arrêter et faire appel à un représentant de la marque ; témoin de pression allumé sur route avec le témoin STOP et un signal sonore : s'arrêter impérativement et couper le contact ; baisse anormale ou répétée du niveau : consulter un représentant de la marque |
-| Dacia Sandero 3 | Sol horizontal, après un arrêt prolongé ; appoint moteur froid | Alerte de l'afficheur au démarrage, au niveau minimum ; témoin de pression d'huile allumé en virage ou au freinage : niveau trop bas | Ajouter de l'huile moteur ; maxi dépassé : ne pas démarrer ; témoin de pression qui tarde à s'éteindre ou reste allumé à l'accélération : s'arrêter et faire appel à un représentant de la marque ; témoin de pression allumé sur route avec le témoin STOP et un signal sonore : s'arrêter impérativement et couper le contact |
-| Toyota Yaris | Sol plat, moteur à température puis arrêté, environ 5 minutes d'attente | Message « Niveau d'huile moteur faible. Ajoutez ou remplacez. » | Sous le repère de bas niveau ou très près : ajouter une huile du même type ; au-dessus du repère maxi : contacter un concessionnaire ou un réparateur qualifié |
+| Renault Clio 5 phase 2 | Sol horizontal, après un arrêt prolongé ; appoint moteur froid | Alerte de l'afficheur au démarrage, au niveau minimum ; témoin de pression d'huile allumé en virage ou au freinage : niveau trop bas | Ajouter de l'huile moteur ; maxi dépassé : ne pas démarrer ; témoin de pression qui tarde à s'éteindre ou reste allumé à l'accélération : s'arrêter et faire appel à un représentant de la marque ; témoin de pression allumé sur route avec le témoin STOP et un signal sonore : s'arrêter impérativement et couper le contact ; après le rodage, plus de 0,5 litre ajouté aux 1 000 km, ou baisse anormale ou répétée du niveau : consulter un représentant de la marque |
+| Dacia Sandero 3 | Sol horizontal, après un arrêt prolongé ; appoint moteur froid | Alerte de l'afficheur au démarrage, au niveau minimum ; témoin de pression d'huile allumé en virage ou au freinage : niveau trop bas | Ajouter de l'huile moteur ; maxi dépassé : ne pas démarrer ; témoin de pression qui tarde à s'éteindre ou reste allumé à l'accélération : s'arrêter et faire appel à un représentant de la marque ; témoin de pression allumé sur route avec le témoin STOP et un signal sonore : s'arrêter impérativement et couper le contact ; après le rodage, plus de 0,5 litre ajouté aux 1 000 km : consulter un représentant de la marque |
+| Toyota Yaris | Sol plat, moteur à température puis arrêté, environ 5 minutes d'attente | Message « Niveau d'huile moteur faible. Ajoutez ou remplacez. » | Message : vérifier le niveau et faire l'appoint si nécessaire ; sous le repère de bas niveau ou très près : ajouter une huile du même type ; au-dessus du repère maxi : contacter un concessionnaire ou un réparateur qualifié |
 
-Le tableau résume les notices lues ({{cite:notice-peugeot-208|p. 20 et 166}} ; {{cite:notice-citroen-c3|p. 112-113}} ; {{cite:notice-seat-ibiza|p. 294-295}} ; {{cite:notice-renault-clio-5|p. 131, 137-138, 331-333 et 386}} ; {{cite:notice-dacia-sandero-3|p. 105, 111, 294-295 et 348-349}} ; {{cite:notice-toyota-yaris|p. 247-248 et 299}}).
+Le tableau résume les notices lues ({{cite:notice-peugeot-208|p. 20 et 166}} ; {{cite:notice-citroen-c3|p. 112-113}} ; {{cite:notice-seat-ibiza|p. 294-295}} ; {{cite:notice-renault-clio-5|p. 131, 137-138, 330-333 et 386}} ; {{cite:notice-dacia-sandero-3|p. 105, 111, 294-295 et 348-349}} ; {{cite:notice-toyota-yaris|p. 247-248 et 299}}).
 
 ## Voyant de niveau d'huile orange : puis-je rouler ?
 
@@ -252,12 +264,12 @@ Si le témoin Seat Ibiza clignote en jaune, c'est le capteur de niveau qui est d
 
 ## Pourquoi ma voiture consomme de l'huile ?
 
-Un peu d'huile est consommée normalement : faire des appoints entre deux vidanges est normal, selon les notices Peugeot 208 et Citroën C3. Selon la notice Seat Ibiza, la consommation peut atteindre 0,5 litre aux 1 000 km selon la conduite, et davantage durant les 5 000 premiers kilomètres.
+Un peu d'huile est consommée normalement : faire des appoints entre deux vidanges est normal, selon les notices Peugeot 208, Citroën C3, Renault Clio 5 et Dacia Sandero 3. Selon la notice Seat Ibiza, la consommation peut atteindre 0,5 litre aux 1 000 km selon la conduite, et davantage durant les 5 000 premiers kilomètres.
 
-La notice Toyota Yaris cite les situations où la consommation augmente : moteur neuf, huile de faible qualité ou de viscosité inadéquate, régimes élevés, charge lourde ou remorque, accélérations fréquentes, ralenti prolongé ou circulation dense ({{cite:notice-toyota-yaris|p. 247}}).
+La notice Toyota Yaris cite les situations où la consommation peut augmenter, sans la dire anormale : moteur neuf, huile de faible qualité ou de viscosité inadéquate, régimes élevés, charge lourde ou remorque, conduite en accélérant et ralentissant fréquemment, ralenti prolongé ou circulation dense ({{cite:notice-toyota-yaris|p. 247}}).
 
 ## Le niveau d'huile baisse anormalement : que faire ?
 
 {{repere:ligne-3}}
 
-{{verdict:ligne-3}}, selon l'encadré. En cas de baisse anormale ou répétée du niveau, la notice Renault Clio 5 demande de consulter un représentant de la marque ; en cas de baisse importante, la notice Peugeot 208 demande de faire vérifier le circuit par le réseau ou par un atelier qualifié. Parmi les notices lues, aucune ne donne les causes d'une consommation anormale : demandez l'avis d'un professionnel.
+{{verdict:ligne-3}}, selon l'encadré. Les notices Renault Clio 5 et Dacia Sandero 3 demandent de consulter un représentant de la marque si, après le rodage, il faut ajouter plus de 0,5 litre aux 1 000 km, et la notice Renault Clio 5 en cas de baisse anormale ou répétée ; en cas de baisse importante, la notice Peugeot 208 demande de faire vérifier le circuit par le réseau ou par un atelier qualifié. Parmi les notices lues, aucune ne donne les causes d'une consommation anormale : demandez l'avis d'un professionnel.
