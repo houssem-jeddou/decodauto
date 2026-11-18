@@ -1,5 +1,8 @@
 # Porte de sortie de l'étape 11 (vague C) : dossier de vérification
 
+> **Porte validée par Houssem le 18/11/2026 à 7 h 21 (heure de Tunis)**, mot pour mot sur la ligne du §4 (texte ci-dessous,
+> reçu dans la conversation du projet). Étape 11 fermée ; étape 12 ouverte.
+
 **État : dossier du 17/11/2026 (vers minuit), après la fusion des cinq lots de la vague C (PR #84 et #86 ; #88 pour le
 lot C5), relevé sur `main` à 97c94ff (fusion de la PR #88), dont le passage de la CI 44188538266 (huit jobs verts,
 déploiement et production compris) sert de preuve.** Relu par une revue indépendante le 17/11 vers 23 h 50 (fin du
@@ -124,6 +127,17 @@ C5 l'étant par leur recette, la CI et la relecture en ligne ; de fermer la port
 que je ferai. Je garde l'exception du lot 4b (demande n° 28) : le site compte comme complet sans ces deux pages. Restent
 à faire : le rendu sur un vrai téléphone (par moi), l'indexation des pages des vagues B et C, la soumission à Bing et le
 retrait des extraits de notices du dépôt (§3). »
+
+**Validation de Houssem, le 18/11/2026 à 7 h 21, mot pour mot** : « Je valide la porte de l'étape 11 sur les 9 pages de
+la vague C en ligne. Je confirme que mes réponses du 17/11 à 15 h 05 et à 22 h 44 couvraient la ligne de validation de chaque
+page des paquets C2, C3 et C5 (révision de « huile moteur » comprise). Je ratifie le passage et la mise en ligne des lots C2
+à C4 (PR #86, commit f4db7ad compris) et C5 (PR #88), faits par Claude. J'accepte : que les revues indépendantes des lots C2
+à C5 aient été faites sur leurs branches avant les pull requests, leurs corrections, l'application de la demande n° 36 et la
+révision de « huile moteur » n'étant pas relues ; que la liste de recette de l'étape 9 n'ait été repassée point par point que
+pour le lot C1, les lots C2 à C5 l'étant par leur recette, la CI et la relecture en ligne ; de fermer la porte sans le rendu
+sur un vrai téléphone, que je ferai. Je garde l'exception du lot 4b (demande n° 28) : le site compte comme complet sans ces
+deux pages. Restent à faire : le rendu sur un vrai téléphone (par moi), l'indexation des pages des vagues B et C, la
+soumission à Bing et le retrait des extraits de notices du dépôt (§3). »
 
 ## Revue indépendante
 Une revue (agent sans contexte de la rédaction, 17/11 vers 23 h 50, sur eb184d1, rapport gardé hors du dépôt) :
