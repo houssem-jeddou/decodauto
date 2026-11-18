@@ -1,0 +1,302 @@
+[
+ {
+  "t": "loi-montagne",
+  "w": 375,
+  "suffixe": "avant",
+  "haut": 991,
+  "large": 343,
+  "visible": 343,
+  "cartes": false
+ },
+ {
+  "t": "loi-montagne",
+  "w": 1366,
+  "suffixe": "avant",
+  "haut": 535,
+  "large": 704,
+  "visible": 704,
+  "cartes": false
+ },
+ {
+  "t": "nettoyer-fap",
+  "w": 375,
+  "suffixe": "avant",
+  "haut": 554,
+  "large": 343,
+  "visible": 343,
+  "cartes": false
+ },
+ {
+  "t": "nettoyer-fap",
+  "w": 1366,
+  "suffixe": "avant",
+  "haut": 272,
+  "large": 704,
+  "visible": 704,
+  "cartes": false
+ },
+ {
+  "t": "huile-5w30",
+  "w": 375,
+  "suffixe": "avant",
+  "haut": 953,
+  "large": 343,
+  "visible": 343,
+  "cartes": false
+ },
+ {
+  "t": "huile-5w30",
+  "w": 1366,
+  "suffixe": "avant",
+  "haut": 476,
+  "large": 704,
+  "visible": 704,
+  "cartes": false
+ },
+ {
+  "t": "contre-visite",
+  "w": 375,
+  "suffixe": "avant",
+  "haut": 1000,
+  "large": 343,
+  "visible": 343,
+  "cartes": false
+ },
+ {
+  "t": "contre-visite",
+  "w": 1366,
+  "suffixe": "avant",
+  "haut": 588,
+  "large": 704,
+  "visible": 704,
+  "cartes": false
+ },
+ {
+  "t": "sommaire-ordinateur",
+  "w": 1366,
+  "suffixe": "avant",
+  "pastilles": 12,
+  "hauteurs": [
+   33,
+   54
+  ],
+  "rayon": "999px"
+ },
+ {
+  "t": "sommaire-telephone",
+  "w": 375,
+  "suffixe": "avant",
+  "pastilles": 5,
+  "hauteurs": [
+   47
+  ],
+  "rayon": "999px"
+ },
+ {
+  "t": "loi-montagne",
+  "w": 375,
+  "suffixe": "avant-secours",
+  "haut": 991,
+  "large": 343,
+  "visible": 343,
+  "cartes": false
+ },
+ {
+  "t": "nettoyer-fap",
+  "w": 375,
+  "suffixe": "avant-secours",
+  "haut": 554,
+  "large": 343,
+  "visible": 343,
+  "cartes": false
+ },
+ {
+  "t": "huile-5w30",
+  "w": 375,
+  "suffixe": "avant-secours",
+  "haut": 953,
+  "large": 343,
+  "visible": 343,
+  "cartes": false
+ },
+ {
+  "t": "contre-visite",
+  "w": 375,
+  "suffixe": "avant-secours",
+  "haut": 1000,
+  "large": 343,
+  "visible": 343,
+  "cartes": false
+ },
+ {
+  "t": "sommaire-ordinateur",
+  "w": 1366,
+  "suffixe": "avant-secours",
+  "pastilles": 12,
+  "hauteurs": [
+   33,
+   54
+  ],
+  "rayon": "999px"
+ },
+ {
+  "t": "sommaire-telephone",
+  "w": 375,
+  "suffixe": "avant-secours",
+  "pastilles": 5,
+  "hauteurs": [
+   47
+  ],
+  "rayon": "999px"
+ },
+ {
+  "t": "loi-montagne",
+  "w": 375,
+  "suffixe": "apres",
+  "haut": 1239,
+  "large": 343,
+  "visible": 343,
+  "cartes": true
+ },
+ {
+  "t": "loi-montagne",
+  "w": 1366,
+  "suffixe": "apres",
+  "haut": 535,
+  "large": 704,
+  "visible": 704,
+  "cartes": true
+ },
+ {
+  "t": "nettoyer-fap",
+  "w": 375,
+  "suffixe": "apres",
+  "haut": 718,
+  "large": 343,
+  "visible": 343,
+  "cartes": true
+ },
+ {
+  "t": "nettoyer-fap",
+  "w": 1366,
+  "suffixe": "apres",
+  "haut": 272,
+  "large": 704,
+  "visible": 704,
+  "cartes": true
+ },
+ {
+  "t": "huile-5w30",
+  "w": 375,
+  "suffixe": "apres",
+  "haut": 1129,
+  "large": 343,
+  "visible": 343,
+  "cartes": true
+ },
+ {
+  "t": "huile-5w30",
+  "w": 1366,
+  "suffixe": "apres",
+  "haut": 476,
+  "large": 704,
+  "visible": 704,
+  "cartes": true
+ },
+ {
+  "t": "contre-visite",
+  "w": 375,
+  "suffixe": "apres",
+  "haut": 970,
+  "large": 343,
+  "visible": 343,
+  "cartes": true
+ },
+ {
+  "t": "contre-visite",
+  "w": 1366,
+  "suffixe": "apres",
+  "haut": 588,
+  "large": 704,
+  "visible": 704,
+  "cartes": true
+ },
+ {
+  "t": "sommaire-ordinateur",
+  "w": 1366,
+  "suffixe": "apres",
+  "pastilles": 12,
+  "hauteurs": [
+   33,
+   54
+  ],
+  "rayon": "16px"
+ },
+ {
+  "t": "sommaire-telephone",
+  "w": 375,
+  "suffixe": "apres",
+  "pastilles": 5,
+  "hauteurs": [
+   47
+  ],
+  "rayon": "999px"
+ },
+ {
+  "t": "loi-montagne",
+  "w": 375,
+  "suffixe": "apres-secours",
+  "haut": 1239,
+  "large": 343,
+  "visible": 343,
+  "cartes": true
+ },
+ {
+  "t": "nettoyer-fap",
+  "w": 375,
+  "suffixe": "apres-secours",
+  "haut": 718,
+  "large": 343,
+  "visible": 343,
+  "cartes": true
+ },
+ {
+  "t": "huile-5w30",
+  "w": 375,
+  "suffixe": "apres-secours",
+  "haut": 1129,
+  "large": 343,
+  "visible": 343,
+  "cartes": true
+ },
+ {
+  "t": "contre-visite",
+  "w": 375,
+  "suffixe": "apres-secours",
+  "haut": 970,
+  "large": 343,
+  "visible": 343,
+  "cartes": true
+ },
+ {
+  "t": "sommaire-ordinateur",
+  "w": 1366,
+  "suffixe": "apres-secours",
+  "pastilles": 12,
+  "hauteurs": [
+   33,
+   54
+  ],
+  "rayon": "16px"
+ },
+ {
+  "t": "sommaire-telephone",
+  "w": 375,
+  "suffixe": "apres-secours",
+  "pastilles": 5,
+  "hauteurs": [
+   47
+  ],
+  "rayon": "999px"
+ }
+]
