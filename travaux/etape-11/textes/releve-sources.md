@@ -1,5 +1,8 @@
 # Relevé des sources de la vague C (préparation anticipée de l'étape 11), 17/11/2026
 
+> Citations de plus de 25 mots réduites à leurs 20 premiers mots le 18/11/2026 (porte 11, §3 : retrait des extraits de notices du dépôt public) ; texte entier dans le projet Claude, `claude/releves_extraits_longs_etapes_8_10_11.md`, et dans l'historique Git.
+
+
 **Brouillon, jamais validé.** Relevé de travail, jamais publié. Préparation anticipée de l'étape 11 (docs/03, règle 12,
 quatrième exception, demande de changement n° 21) : rien n'en est présenté à la validation, fusionné ni publié avant la
 fermeture de la porte de l'étape 10. Aucun niveau ci-dessous n'est validé : les niveaux sont ceux que la grille
@@ -61,25 +64,25 @@ sur l'enregistrement des collecteurs d'huiles usagées, pas sur ce qu'un particu
 | Notice | Emplacement | Extrait (mot pour mot) | Niveau tiré de la consigne | Lu par |
 |---|---|---|---|---|
 | Peugeot 208 | p. 166, « Huile moteur », vérification avec la jauge manuelle | « Ne pas démarrer le moteur si le niveau est : […] – Inférieur au repère B : effectuer impérativement un complément d'huile moteur. » | Non, arrêtez-vous immédiatement ; à faire tout de suite (« ne pas démarrer », absent de la grille : niveau le plus prudent, principes 3 et 6 ; **validé pour le dossier PureTech le 16/11**) | [E10] |
-| Peugeot 208 | p. 166, idem | « Ne pas démarrer le moteur si le niveau est : – Supérieur au repère A : faire appel au réseau PEUGEOT ou à un atelier qualifié. » | Non, arrêtez-vous immédiatement ; à faire tout de suite (même décision, validée le 16/11) | [E10] |
+| Peugeot 208 | p. 166, idem | « Ne pas démarrer le moteur si le niveau est : – Supérieur au repère A : faire appel au réseau […] » | Non, arrêtez-vous immédiatement ; à faire tout de suite (même décision, validée le 16/11) | [E10] |
 | Citroën C3 | p. 112-113, « Huile moteur » | « Ne pas démarrer le moteur, si le niveau est : […] – Inférieur au repère B : effectuer impérativement un complément d'huile moteur. » ; « – Supérieur au repère A : faire appel au réseau CITROËN ou à un atelier qualifié. » | Mêmes niveaux que Peugeot (validés le 16/11) | [E10] |
-| Peugeot 208 | p. 166 | « La vérification du niveau s'effectue sur un sol plat, moteur à l'arrêt depuis 30 minutes, soit avec l'indicateur de niveau d'huile au combiné, à la mise du contact (pour les véhicules équipés d'une jauge électrique), soit avec la jauge manuelle. » | Fait (procédure), sans niveau | [E10] |
-| Peugeot 208 | p. 166 | « Il est normal de faire des appoints d'huile entre deux révisions (ou vidanges). Il est préconisé d'effectuer un contrôle, avec appoint si nécessaire, tous les 5 000 km. » | Fait, sans niveau | [E10] |
+| Peugeot 208 | p. 166 | « La vérification du niveau s'effectue sur un sol plat, moteur à l'arrêt depuis 30 minutes, soit avec l'indicateur de niveau […] » | Fait (procédure), sans niveau | [E10] |
+| Peugeot 208 | p. 166 | « Il est normal de faire des appoints d'huile entre deux révisions (ou vidanges). Il est préconisé d'effectuer un contrôle, avec […] » | Fait, sans niveau | [E10] |
 | Peugeot 208 | p. 166 | « Pour préserver la fiabilité des moteurs et les dispositifs d'antipollution, ne jamais utiliser d'additif dans l'huile moteur. » ; « le niveau correct doit se situer entre les repères A (maxi) et B (mini). » | Fait, sans niveau | [E10] |
-| Peugeot 208 | p. 166 | « Avant d'effectuer un complément d'huile ou une vidange du moteur, vérifier que l'huile corresponde à la motorisation et soit conforme aux recommandations indiquées dans le plan d'entretien » ; « Dans les 30 minutes qui suivent un appoint d'huile, l'indication du niveau d'huile au combiné à la mise du contact n'est pas valable. » ; complément : verser par petites quantités, attendre quelques minutes avant de vérifier à la jauge (**résumé du relevé, pas mot pour mot**) | Fait, sans niveau | [E10] |
+| Peugeot 208 | p. 166 | « Avant d'effectuer un complément d'huile ou une vidange du moteur, vérifier que l'huile corresponde à la motorisation et soit conforme […] » ; « Dans les 30 minutes qui suivent un appoint d'huile, l'indication du niveau d'huile au combiné à la mise du contact n'est pas valable. » ; complément : verser par petites quantités, attendre quelques minutes avant de vérifier à la jauge (**résumé du relevé, pas mot pour mot**) | Fait, sans niveau | [E10] |
 | Citroën C3 | p. 112-113 | Même texte que Peugeot p. 166 (« A = MAXI », « B = MINI », contrôle « tous les 5 000 km », « ne jamais utiliser d'additif dans l'huile moteur ») | Fait | [E10] |
-| Peugeot 208 | p. 165, « Niveaux » | « Vérifier régulièrement tous ces niveaux dans le respect du plan d'entretien du constructeur. Faire l'appoint si nécessaire, sauf indication contraire. En cas de baisse importante d'un niveau, faire vérifier le circuit correspondant par le réseau PEUGEOT ou par un atelier qualifié. » | Oui, avec précautions ; à faire dans les jours qui viennent (« faire vérifier », sans délai) : pour une baisse importante d'un niveau, tous circuits | [E10] |
+| Peugeot 208 | p. 165, « Niveaux » | « Vérifier régulièrement tous ces niveaux dans le respect du plan d'entretien du constructeur. Faire l'appoint si nécessaire, sauf indication contraire. […] » | Oui, avec précautions ; à faire dans les jours qui viennent (« faire vérifier », sans délai) : pour une baisse importante d'un niveau, tous circuits | [E10] |
 | Peugeot 208 | p. 20, « Indicateur de niveau d'huile moteur » | « Toute vérification de ce niveau n'est valable que si le véhicule est sur un sol horizontal, moteur à l'arrêt depuis plus de 30 minutes. » | Fait, sans niveau | [E5] |
 | Peugeot 208 | p. 20, Manque d'huile | « Si le manque d'huile est confirmé par la vérification à la jauge manuelle, compléter impérativement le niveau pour éviter la détérioration du moteur. » | Déjà dans la base (`huile-niveau`) : oui, avec précautions ; tout de suite | [E5] |
 | Seat Ibiza | p. 294, « Huile moteur », témoin | « S'allume en jaune. Contrôlez immédiatement le niveau d'huile du moteur. Faites l'appoint d'huile dès que possible » | Déjà dans la base (`huile-niveau`) | [E5] |
-| Seat Ibiza | p. 294, témoin | « Il clignote en jaune. Dysfonctionnement du capteur de niveau d'huile. Adressez-vous à un atelier spécialisé pour le faire réviser. Par mesure de sécurité, il est recommandé de contrôler le niveau d'huile moteur à l'occasion de chaque passage à la pompe. » | Oui, avec précautions ; à faire dans les jours qui viennent (« adressez-vous à un atelier », sans délai) ; une seule notice | [E5] |
-| Seat Ibiza | p. 294, témoin rouge | « Si le voyant clignote accompagné de trois signaux sonores d'avertissement , arrêtez le moteur et contrôlez le niveau d'huile. » ; « Si le témoin clignote bien que le niveau d'huile soit correct, ne poursuivez pas votre route. Ne faites pas non plus tourner le moteur au ralenti. » | Non, arrêtez-vous immédiatement ; tout de suite (« arrêtez le moteur ») ; cas de la ligne de base `huile-pression-rouge`, déjà la plus stricte | [E5] |
+| Seat Ibiza | p. 294, témoin | « Il clignote en jaune. Dysfonctionnement du capteur de niveau d'huile. Adressez-vous à un atelier spécialisé pour le faire réviser. Par […] » | Oui, avec précautions ; à faire dans les jours qui viennent (« adressez-vous à un atelier », sans délai) ; une seule notice | [E5] |
+| Seat Ibiza | p. 294, témoin rouge | « Si le voyant clignote accompagné de trois signaux sonores d'avertissement , arrêtez le moteur et contrôlez le niveau d'huile. » ; « Si le témoin clignote bien que le niveau d'huile soit correct, ne poursuivez pas votre route. Ne faites pas non […] » | Non, arrêtez-vous immédiatement ; tout de suite (« arrêtez le moteur ») ; cas de la ligne de base `huile-pression-rouge`, déjà la plus stricte | [E5] |
 | Renault Clio 5 phase 2 | p. 386, « Anomalies de fonctionnement », « Sur route » | « Le témoin de pression d'huile s'allume : en virage ou au freinage » → « Le niveau est trop bas. » → « Ajoutez de l'huile moteur 🡺 332. » | Oui, avec précautions ; à faire dans les jours qui viennent (« ajoutez », sans délai) ; l'autre cas du même tableau (« tarde à s'éteindre ou reste allumé à l'accélération » → « Arrêtez-vous ») relève de la ligne de base `huile-pression-rouge` | [E10] |
 | Dacia Sandero 3 | p. 348-349, même tableau | Mêmes lignes que Renault, mot pour mot (relevé du 16/11) | Idem | [E10] |
 | Renault Clio 5 phase 2 | p. 131, « Alerte niveau d'huile moteur minimum » | « Au démarrage moteur, l'afficheur au tableau de bord vous alerte lorsque le niveau d'huile minimum est atteint 🡺 330 . » | Fait (comment l'alerte s'affiche), sans consigne propre | [E5] |
 | Dacia Sandero 3 | p. 105, idem | « Au démarrage moteur, l'afficheur au tableau de bord vous alerte lorsque le niveau d'huile minimum est atteint 🡺 294 . » | Fait, sans consigne propre | [E5] |
 | Toyota Yaris | p. 299, 7.2.5 | « Le niveau d'huile moteur est faible. Vérifiez le niveau d'huile moteur et faites l'appoint, si nécessaire. ( → P. 247) » | Déjà dans la base (`huile-niveau`) | [E5] |
-| Toyota Yaris | p. 300, 7.2.5 | « Si “Entretien d'huile bientôt requis” s'affiche […] Indique qu'une vidange de l'huile moteur doit être programmée. Vérifiez le niveau d'huile moteur et effectuez la vidange si nécessaire. » | Oui, vous pouvez rouler ; à prévoir dans les semaines qui viennent (entretien à programmer, sans anomalie) | [E5] |
+| Toyota Yaris | p. 300, 7.2.5 | « Si “Entretien d'huile bientôt requis” s'affiche […] Indique qu'une vidange de l'huile moteur doit être programmée. Vérifiez le niveau d'huile […] » | Oui, vous pouvez rouler ; à prévoir dans les semaines qui viennent (entretien à programmer, sans anomalie) | [E5] |
 
 Lignes de la base qui servent ces pages : `huile-niveau` (alerte de niveau, Seat p. 294, Peugeot p. 20, Toyota p. 299),
 `huile-pression-rouge` (cinq notices), `entretien-vidange` (cinq notices : Peugeot p. 19-20, Seat p. 90, Renault
@@ -125,19 +128,19 @@ Non trouvé :
 
 | Notice ou texte | Emplacement | Extrait (mot pour mot) | Niveau tiré de la consigne | Lu par |
 |---|---|---|---|---|
-| Seat Ibiza | p. 298, « Liquide de refroidissement », appoint | « Faites l'appoint de liquide de refroidissement uniquement s'il en reste encore dans le vase d'expansion, sinon vous pourriez endommager le moteur. S'il n'y a plus de liquide de refroidissement dans le vase d'expansion, arrêtez-vous. Faites appel à un spécialiste en mesure de vous dépanner » | Non, arrêtez-vous immédiatement ; tout de suite (« arrêtez-vous ») : vase d'expansion vide | [E10] |
-| Seat Ibiza | p. 298, ATTENTION | « Si vous manquez de liquide de refroidissement dans le vase d'expansion, garez la voiture dans un endroit sûr et arrêtez-vous. Demandez de l'aide à un technicien. » | Non, arrêtez-vous immédiatement ; tout de suite | [E10] |
-| Seat Ibiza | p. 298, AVERTISSEMENT | « Le système de refroidissement est sous pression ! N'ouvrez jamais le bouchon du vase d'expansion du liquide de refroidissement tant que le moteur est chaud. Risque de brûlures ! » | Fait de sécurité (geste interdit), sans niveau | [E10] |
+| Seat Ibiza | p. 298, « Liquide de refroidissement », appoint | « Faites l'appoint de liquide de refroidissement uniquement s'il en reste encore dans le vase d'expansion, sinon vous pourriez endommager le […] » | Non, arrêtez-vous immédiatement ; tout de suite (« arrêtez-vous ») : vase d'expansion vide | [E10] |
+| Seat Ibiza | p. 298, ATTENTION | « Si vous manquez de liquide de refroidissement dans le vase d'expansion, garez la voiture dans un endroit sûr et arrêtez-vous. […] » | Non, arrêtez-vous immédiatement ; tout de suite | [E10] |
+| Seat Ibiza | p. 298, AVERTISSEMENT | « Le système de refroidissement est sous pression ! N'ouvrez jamais le bouchon du vase d'expansion du liquide de refroidissement tant […] » | Fait de sécurité (geste interdit), sans niveau | [E10] |
 | Seat Ibiza | p. 298, appoint | « Laissez refroidir le moteur. » ; « Si vous perdez du liquide de refroidissement, rendez-vous dans un atelier spécialisé pour inspecter le système de refroidissement. » | Perte de liquide : oui, avec précautions ; dans les jours qui viennent (« rendez-vous dans un atelier », sans délai) | [E10] |
-| Seat Ibiza | p. 297 | Mélange d'eau traitée et d'au moins 40 % d'additif G12evo, protection antigel jusqu'à -25 °C ; liquide marron au lieu de lilas : mélange inadapté, à remplacer immédiatement (**résumé du relevé, à relire mot pour mot**) ; AVERTISSEMENT : « S'il n'y a pas suffisamment de liquide antigel dans le système de refroidissement, le moteur risque de ne pas fonctionner correctement – risque de blessures graves ! » | Faits (liquide, couleur) ; « marron : à remplacer immédiatement » à classer quand l'extrait sera relu (probablement oui, avec précautions ; tout de suite) | [E10] |
+| Seat Ibiza | p. 297 | Mélange d'eau traitée et d'au moins 40 % d'additif G12evo, protection antigel jusqu'à -25 °C ; liquide marron au lieu de lilas : mélange inadapté, à remplacer immédiatement (**résumé du relevé, à relire mot pour mot**) ; AVERTISSEMENT : « S'il n'y a pas suffisamment de liquide antigel dans le système de refroidissement, le moteur risque de ne pas fonctionner […] » | Faits (liquide, couleur) ; « marron : à remplacer immédiatement » à classer quand l'extrait sera relu (probablement oui, avec précautions ; tout de suite) | [E10] |
 | Seat Ibiza | p. 298, contrôle du niveau | Véhicule à l'horizontale, contact coupé, niveau entre les repères moteur froid (**résumé, à relire**) | Fait | [E10] |
-| Peugeot 208 | p. 167, « Liquide de refroidissement » | « Un appoint de ce liquide entre deux révisions est normal. Le contrôle et l'appoint doivent être faits moteur froid. Un niveau insuffisant présente des risques de dommages importants pour le moteur » | Fait | [E10] |
+| Peugeot 208 | p. 167, « Liquide de refroidissement » | « Un appoint de ce liquide entre deux révisions est normal. Le contrôle et l'appoint doivent être faits moteur froid. Un […] » | Fait | [E10] |
 | Peugeot 208 | p. 167 | « Si le niveau est proche ou en-dessous du repère "MINI", il est impératif de faire un appoint. » | Oui, avec précautions ; tout de suite (« faire un appoint », « impératif ») : niveau bas, liquide encore présent | [E10] |
-| Peugeot 208 | p. 167 | « Le circuit de refroidissement étant sous pression, attendre au moins une heure après l'arrêt du moteur pour intervenir. En cas d'intervention urgente, pour éviter tout risque de brûlure, se munir d'un chiffon et dévisser le bouchon de deux tours pour laisser retomber la pression. » | Fait de sécurité | [E10] |
+| Peugeot 208 | p. 167 | « Le circuit de refroidissement étant sous pression, attendre au moins une heure après l'arrêt du moteur pour intervenir. En cas […] » | Fait de sécurité | [E10] |
 | Citroën C3 | p. 113 | Même texte que Peugeot p. 167 (relevé du 16/11 : « même rédaction ») | Mêmes niveaux | [E10] |
-| Renault Clio 5 phase 2 | p. 387, « Le moteur chauffe » | « Fuites de liquide de refroidissement. » → « Vérifiez le bocal de liquide de refroidissement : il doit contenir du liquide. S'il n'en contient pas, consultez un Représentant de la marque le plus tôt possible. » | Oui, avec précautions ; tout de suite (« le plus tôt possible ») ; **contexte** : le moteur chauffe et le témoin de température s'allume, cas de la ligne de base `temperature-rouge` (arrêt) | [E10] |
+| Renault Clio 5 phase 2 | p. 387, « Le moteur chauffe » | « Fuites de liquide de refroidissement. » → « Vérifiez le bocal de liquide de refroidissement : il doit contenir du liquide. S'il n'en contient pas, consultez un Représentant […] » | Oui, avec précautions ; tout de suite (« le plus tôt possible ») ; **contexte** : le moteur chauffe et le témoin de température s'allume, cas de la ligne de base `temperature-rouge` (arrêt) | [E10] |
 | Renault Clio 5 phase 2 | p. 387 | « Bouillonnement dans le bocal de liquide de refroidissement. » → « Panne mécanique : joint de culasse détérioré. » → « Arrêtez le moteur. Faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement ; tout de suite (« arrêtez le moteur ») | [E10] |
-| Renault Clio 5 phase 2 | p. 387, radiateur | « Radiateur : Dans le cas d'un important manque de liquide de refroidissement n'oubliez pas qu'il ne faut jamais faire le plein avec du liquide de refroidissement froid lorsque le moteur est très chaud. » | Fait de sécurité | [E10] |
+| Renault Clio 5 phase 2 | p. 387, radiateur | « Radiateur : Dans le cas d'un important manque de liquide de refroidissement n'oubliez pas qu'il ne faut jamais faire le […] » | Fait de sécurité | [E10] |
 | Dacia Sandero 3 | p. 348-350, même tableau | Mêmes lignes que Renault, mot pour mot | Mêmes niveaux | [E10] |
 | Renault Clio 5 phase 2 | p. 386 | « Fumée sous capot moteur. » → « Court-circuit ou fuite du circuit de refroidissement. » → « Arrêtez-vous, coupez le contact, éloignez-vous du véhicule et faites appel à un Représentant de la marque. » | Non, arrêtez-vous immédiatement ; tout de suite (cas de la page surchauffe ou fumée) | [E10] |
 | Toyota Yaris | p. 322-323, 7.2.11 | « 3.Après avoir laissé suffisamment refroidir le moteur, vérifiez que les durites et le faisceau de radiateur (radiateur) ne présentent pas de fuites. » (extrait de la base, ligne `temperature-rouge`) ; niveau entre « F » et « L », appoint (de l'eau en cas d'urgence, selon Toyota) (**résumé, à relire**) | Ligne de base `temperature-rouge` | [E5] et [E10] |
@@ -190,7 +193,7 @@ pénale) et son décompte par pneu (point ouvert du journal) ; version consolid�
 |---|---|---|---|---|
 | Arrêté du 18 juin 1991 | article 7 (en vigueur depuis le 20/05/2018) | « les défaillances mineures n'ayant aucune incidence notable sur la sécurité du véhicule ou sur l'environnement » ; « les défaillances majeures susceptibles de compromettre la sécurité du véhicule » ; « les défaillances critiques constituant un danger direct et immédiat pour la sécurité routière » | Fiche « Le texte en bref » (`defaillances`) | [E8] et [WF] |
 | Idem | article 7 | « la validité du contrôle est de deux mois à compter de la date du contrôle technique périodique » (majeure) ; « la validité du contrôle est limitée au jour du contrôle » (critique) | Lignes à trancher (§10) | [WF] (et [E8], 14/11) |
-| Idem | article 7 | « Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être réalisée que dans le délai de deux mois après le contrôle technique périodique [...], faute de quoi un nouveau contrôle technique périodique est à réaliser. » | `contre_visite.delai` et délai dépassé | [E8] (Légifrance, Chrome de Houssem, 14/11) |
+| Idem | article 7 | « Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être réalisée que dans le délai de deux […] » | `contre_visite.delai` et délai dépassé | [E8] (Légifrance, Chrome de Houssem, 14/11) |
 | Idem | article 8 (en vigueur depuis le 27/03/2022) | points de la contre-visite « sont définis à l'annexe I du présent arrêté » ; « une nouvelle contre-visite ou contre-visite complémentaire est à réaliser dans la limite du délai de deux mois » | « Peut-on faire plusieurs contre-visites » | [WF] et [E8] |
 | Idem | article 5 (en vigueur depuis le 07/08/2023) | pour la contre-visite, « les opérations de contrôle sont réalisées par un seul contrôleur » | Fait secondaire | [écran, 17/11 vers 1 h 50, Légifrance dans Chrome] |
 | Code de la route | article R323-1 (en vigueur depuis le 01/01/2026) | « est puni de l'amende prévue pour les contraventions de la quatrième classe » ; « L'immobilisation peut être prescrite dans les conditions prévues aux articles L. 325-1 à L. 325-3. » | Sanction de la circulation sans contrôle valable (point ouvert du journal : version du 01/01/2026 à lire, faite ici par [WF]) | [WF] |
@@ -243,40 +246,14 @@ lue ; ACEA C2, C3, C4 seulement comme source secondaire (document technique, dem
 sur la 85W140.
 
 **Seat Ibiza**
-- p. 293 (PDF 295), « Huile moteur, Généralités » : « Le moteur est lubrifié en usine avec une huile multigrade de
-  qualité, qui peut généralement être utilisée toute l'année. Étant donné qu'utiliser une huile de bonne qualité est
-  indispensable au bon fonctionnement du moteur et à sa longévité, l'huile utilisée lors des vidanges ou dans le cas
-  d'appoint devra toujours être conforme aux normes VW. Nous vous recommandons de confier le changement d'huile à un
-  service technique ou un atelier spécialisé. » ; « Si le niveau d'huile moteur est trop faible : Votre atelier
-  spécialisé pourra vous indiquer l'huile-moteur adaptée à votre véhicule. Si l'huile-moteur recommandée est
-  indisponible, il est autorisé en cas d'urgence de faire l'appoint une fois en rajoutant un maximum 0,5 l de l'huile
-  suivante jusqu'à la prochaine vidange : Moteurs essence : norme VW 504 00, VW 502 00, VW 508 00, ACEA C3 ou API SN.
-  Moteurs diesel : norme VW 507 00, VW 505 01, ACEA C3 ou API CK-4. Faites appel à un atelier spécialisé pour remplacer
-  l'huile. »
+- p. 293 (PDF 295), « Huile moteur, Généralités » : « Le moteur est lubrifié en usine avec une huile multigrade de qualité, qui peut généralement être utilisée toute l'année. Étant […] » ; « Si le niveau d'huile moteur est trop faible : Votre atelier spécialisé pourra vous indiquer l'huile-moteur adaptée à votre véhicule. […] »
 - p. 294 (PDF 296) : « Aucun additif ne doit être mélangé à l'huile moteur. Les dommages produits par ces additifs ne
-  sont pas couverts par la garantie. » ATTENTION : « Si vous avez rempli une huile moteur différente de celles
-  spécifiées dans les normes indiquées plus haut ou par votre service technique de SEAT, tenez compte de ce qui suit :
-  ● Le risque de dégâts sur le moteur et sur le filtre à particules* ne peut pas être totalement exclu. ● Vous pouvez
-  continuer à circuler avec le véhicule si vous avez versé maximum 0,5 l d'huile moteur. Faites changer l'huile dès que
-  possible par un atelier spécialisé. Dans le cas contraire, il existe un danger de dégâts sur le moteur. ● Si vous
-  avez versé plus de 0,5 l d'huile moteur, circulez avec le moteur à faible charge et au maximum dans la fourchette de
-  régime moyen. Ne circulez pas à plus de 80 km/h et ne parcourez pas plus de 300 km (environ). Faites changer l'huile
-  dès que possible par un atelier spécialisé. Dans le cas contraire, il existe un danger de dégâts sur le moteur. ● Le
-  risque d'éventuels dégâts sur le véhicule (moteur, système d'échappement) vous incombe. En cas de doute, évitez de
-  démarrer le moteur et faites appel à l'assistance du service technique. ● Si vous n'avez pas versé de l'huile moteur
-  mais un autre liquide, ne démarrez pas le moteur. Demandez l'assistance du service technique. Risque d'endommagement
-  du moteur ! » Nota : « Avant d'entreprendre un long trajet, nous vous conseillons d'acquérir de l'huile moteur de type
+  sont pas couverts par la garantie. » ATTENTION : « Si vous avez rempli une huile moteur différente de celles spécifiées dans les normes indiquées plus haut ou par votre […] » Nota : « Avant d'entreprendre un long trajet, nous vous conseillons d'acquérir de l'huile moteur de type
   VW et d'en garder un bidon dans votre véhicule. »
 - p. 296 (PDF 298), « Changement d'huile moteur » : « Nous vous recommandons de faire effectuer la vidange d'huile par un
-  Service Technique. » AVERTISSEMENT : « N'effectuez la vidange d'huile moteur vous-même que si vous possédez les
-  connaissances requises pour ce type de travail ! […] ● Laissez d'abord refroidir le moteur. De l'huile chaude peut
-  occasionner des brûlures ! ● Portez des lunettes de protection – risque de brûlures corrosives par projections
-  d'huile. […] ● L'huile est toxique ! Conservez l'huile usagée hors de portée des enfants avant de l'éliminer. » ;
+  Service Technique. » AVERTISSEMENT : « N'effectuez la vidange d'huile moteur vous-même que si vous possédez les connaissances requises pour ce type de travail ! […] […] » ;
   « L'huile usagée ne doit en aucun cas parvenir dans les égouts ou s'infiltrer dans le sol. »
-- p. 90 (PDF 92), « Périodicité d'entretien » : « SEAT distingue les services avec vidange d'huile moteur (par ex.,
-  Service de vidange d'huile) et les services sans vidange d'huile moteur (Service Entretien par exemple). […] Pour
-  calculer cette vidange (maximum 2 ans), les conditions d'utilisation du véhicule et le style de conduite sont pris
-  en compte. »
+- p. 90 (PDF 92), « Périodicité d'entretien » : « SEAT distingue les services avec vidange d'huile moteur (par ex., Service de vidange d'huile) et les services sans vidange d'huile […] »
 - p. 316 (PDF 318), « Service Entretien » : entretien intermédiaire fixe tous les 5 000, 7 500, 10 000 ou 15 000 km ou au
   bout de 1 an selon le numéro PR, ou flexible selon l'indicateur (résumé du relevé) ; « L'entretien flexible se
   caractérise notamment par l'utilisation d'huile longue durée (LongLife) au lieu de l'huile moteur conventionnelle. » ;
@@ -285,13 +262,7 @@ sur la 85W140.
   prochaine date de révision prévue ».
 
 **Peugeot 208**
-- p. 166 (PDF 168) : « Il est normal de faire des appoints d'huile entre deux révisions (ou vidanges). Il est préconisé
-  d'effectuer un contrôle, avec appoint si nécessaire, tous les 5 000 km. Pour préserver la fiabilité des moteurs et les
-  dispositifs d'antipollution, ne jamais utiliser d'additif dans l'huile moteur. » ; « Caractéristiques de l'huile :
-  Avant d'effectuer un complément d'huile ou une vidange du moteur, vérifier que l'huile corresponde à la motorisation
-  et soit conforme aux recommandations indiquées dans le plan d'entretien fourni avec le véhicule (ou disponible auprès
-  du réseau PEUGEOT ou d'un atelier qualifié). L'utilisation d'une huile non recommandée peut entraîner la perte de la
-  garantie contractuelle en cas de défaillance du moteur. » ; « Vider l'huile usagée dans les containers réservés à cet
+- p. 166 (PDF 168) : « Il est normal de faire des appoints d'huile entre deux révisions (ou vidanges). Il est préconisé d'effectuer un contrôle, avec […] » ; « Caractéristiques de l'huile : Avant d'effectuer un complément d'huile ou une vidange du moteur, vérifier que l'huile corresponde à la […] » ; « Vider l'huile usagée dans les containers réservés à cet
   usage dans le réseau PEUGEOT ou dans un atelier qualifié. »
 - p. 165 (PDF 167) : « Éviter tout contact prolongé de l'huile et des liquides usagés avec la peau. »
 - p. 168 (PDF 170) : « Filtre à huile : Changer le filtre à huile à chaque vidange d'huile moteur. »
@@ -300,27 +271,16 @@ sur la 85W140.
 **Citroën C3**
 - p. 112 (PDF 114) : mêmes phrases que Peugeot sur les appoints entre deux révisions, le contrôle tous les 5 000 km et les
   additifs.
-- p. 113 (PDF 115) : « Caractéristiques de l'huile : Avant d'effectuer un complément d'huile ou une vidange du moteur,
-  vérifier que l'huile correspond à la motorisation et est conforme aux recommandations du constructeur. » (sans la
+- p. 113 (PDF 115) : « Caractéristiques de l'huile : Avant d'effectuer un complément d'huile ou une vidange du moteur, vérifier que l'huile correspond à la […] » (sans la
   phrase sur la garantie).
 - p. 114 (PDF 116) : « Filtre à huile : Changer le filtre à huile à chaque vidange d'huile moteur. »
 
 **Renault Clio 5 phase 2**
-- p. 330 (PDF 332), « Niveau huile moteur, Généralités » : « Un moteur consomme de l'huile pour le graissage et le
-  refroidissement des pièces en mouvement et il est normal de faire des appoints d'huile entre deux vidanges. Toutefois,
-  si après la période de rodage, les apports étaient supérieurs à 0,5 litre pour 1 000 km, consultez un Représentant de
-  la marque. Périodicité : vérifiez périodiquement votre niveau d'huile et, en tout cas, avant chaque grand voyage sous
-  peine de risquer de détériorer votre moteur. »
-- p. 333 (PDF 335) : « Vidange moteur. Périodicité : reportez-vous au document d'entretien de votre véhicule. Capacité de
-  vidange : Reportez-vous au document d'entretien de votre véhicule ou consultez un Représentant de la marque. […]
-  Qualité d'huile moteur : Reportez-vous au document d'entretien de votre véhicule. » ; « En cas de baisse anormale ou
+- p. 330 (PDF 332), « Niveau huile moteur, Généralités » : « Un moteur consomme de l'huile pour le graissage et le refroidissement des pièces en mouvement et il est normal de […] »
+- p. 333 (PDF 335) : « Vidange moteur. Périodicité : reportez-vous au document d'entretien de votre véhicule. Capacité de vidange : Reportez-vous au document d'entretien de […] » ; « En cas de baisse anormale ou
   répétée du niveau, consultez un Représentant de la marque. » ; « Vidange moteur : si vous réalisez la vidange moteur
   chaud, attention aux risques de brûlures dues à l'écoulement de l'huile. »
-- p. 122 (PDF 124) : « si une révision est faite sans vidange moteur, alors il faut réinitialiser uniquement l'autonomie
-  de révision. Dans le cas d'une vidange moteur, il faut réinitialiser à la fois l'autonomie de révision et de vidange.
-  Suivant véhicule, l'autonomie de vidange s'adapte au style de conduite (roulage fréquent à des vitesses faibles,
-  porte-à-porte, roulage prolongé au ralenti, traction d'une remorque...). La distance restant à parcourir jusqu'à la
-  prochaine vidange peut donc dans certains cas diminuer plus vite que la distance réellement parcourue. »
+- p. 122 (PDF 124) : « si une révision est faite sans vidange moteur, alors il faut réinitialiser uniquement l'autonomie de révision. Dans le cas d'une […] »
 
 **Dacia Sandero 3**
 - p. 294 (PDF 296) : même texte que Renault p. 330, mot pour mot sauf « Un moteur thermique consomme de l'huile ».
@@ -338,70 +298,16 @@ encadrés sur ces citations, le plus prudent l'emporte, écart signalé ; lignes
 Seat le disent ; aucune périodicité chiffrée ; aucune couleur ni norme générale hors Seat ; une illustration par page.
 
 **Seat Ibiza**
-- p. 297 (PDF 299), « Spécification du liquide de refroidissement » : « Le système de refroidissement du moteur contient un
-  mélange d'eau spécialement traitée à l'usine et d'au moins 40 % d'additif G12evo (TL-VW 774 L) de couleur lilas. Ce
-  mélange offre une protection antigel jusqu'à -25 °C (-13 °F) et protège les pièces en alliage léger du système de
-  refroidissement du moteur contre la corrosion. En outre, il empêche l'entartrage et élève nettement le point
-  d'ébullition du liquide de refroidissement. Pour protéger ce système de refroidissement, le pourcentage d'additif doit
-  toujours être d'au moins 40 %, même lorsque le climat est chaud et que la protection antigel n'est pas nécessaire. Si,
-  pour des raisons climatiques, une protection supplémentaire est nécessaire, il est possible d'augmenter la proportion
-  d'additifs, mais seulement jusqu'à 60 % ; au-delà, la protection antigel diminuerait et cela entraverait le
-  refroidissement. Pour reconstituer le liquide de refroidissement, il faut utiliser un mélange d'eau distillée et d'au
-  moins 40 % d'additif G12evo pour une protection optimale contre la corrosion. Le mélange G12evo avec les liquides de
-  refroidissement du moteur G13 (TL-VW 774 J), G12 plus-plus (TL-VW 774 G), G12 plus (TL-VW 774 F), G12 (rouge) ou G11
-  (bleu verdâtre) dégrade la protection anticorrosion et doit être évité. » AVERTISSEMENT : « S'il n'y a pas suffisamment
-  de liquide antigel dans le système de refroidissement, le moteur risque de ne pas fonctionner correctement – risque de
-  blessures graves ! […] Lorsque la température extérieure est extrêmement basse, le liquide de refroidissement peut geler
-  et le véhicule rester immobilisé. » ATTENTION : « Il ne faut jamais mélanger les additifs d'origine avec des liquides de
-  refroidissement non homologués par SEAT. ● Si le liquide du vase d'expansion n'est pas de couleur lilas mais marron, par
-  exemple, cela signifie que l'additif G12evo a été mélangé avec un liquide de refroidissement inadapté. Dans ce cas, le
-  liquide de refroidissement devra immédiatement être remplacé. »
+- p. 297 (PDF 299), « Spécification du liquide de refroidissement » : « Le système de refroidissement du moteur contient un mélange d'eau spécialement traitée à l'usine et d'au moins 40 % d'additif […] » AVERTISSEMENT : « S'il n'y a pas suffisamment de liquide antigel dans le système de refroidissement, le moteur risque de ne pas fonctionner […] » ATTENTION : « Il ne faut jamais mélanger les additifs d'origine avec des liquides de refroidissement non homologués par SEAT. ● Si le […] »
 - p. 298 (PDF 300) : « Faites l'appoint de liquide de refroidissement lorsque son niveau descend en dessous de la marque
-  [min] (minimum). » ; contrôle : « Stationnez le véhicule en position horizontale. – Coupez le contact d'allumage. –
-  Consultez le niveau de liquide de refroidissement dans le vase d'expansion. Lorsque le moteur est froid, le niveau de
-  liquide de refroidissement doit rester entre les repères. Lorsque le moteur est chaud, il peut se situer légèrement
-  au-dessus de la marque supérieure. » ; appoint : « Laissez refroidir le moteur. – Couvrez le bouchon du vase d'expansion
-  du liquide de refroidissement avec un chiffon et dévissez-le soigneusement vers la gauche. – Faites l'appoint de liquide
-  de refroidissement uniquement s'il en reste encore dans le vase d'expansion, sinon vous pourriez endommager le moteur.
-  S'il n'y a plus de liquide de refroidissement dans le vase d'expansion, arrêtez-vous. Faites appel à un spécialiste en
-  mesure de vous dépanner. – S'il reste encore un peu de liquide de refroidissement dans le vase d'expansion, faites
-  l'appoint jusqu'à la marque supérieure. – Faites l'appoint de liquide de refroidissement jusqu'à obtenir un niveau
-  stable. – Vissez le bouchon correctement. Si vous perdez du liquide de refroidissement, rendez-vous dans un atelier
-  spécialisé pour inspecter le système de refroidissement. » ; AVERTISSEMENT : « Le système de refroidissement est sous
-  pression ! N'ouvrez jamais le bouchon du vase d'expansion du liquide de refroidissement tant que le moteur est chaud.
-  Risque de brûlures ! ● Conservez l'antigel dans son bidon d'origine hors de portée des enfants. » ; ATTENTION : « Si
-  vous manquez de liquide de refroidissement dans le vase d'expansion, garez la voiture dans un endroit sûr et
-  arrêtez-vous. Demandez de l'aide à un technicien. »
-- p. 299 (PDF 301), « Liquide de freins » : « Le niveau de liquide de frein doit être situé entre les repères [MIN] et
-  [MAX]. Si le niveau de liquide de frein diminue sensiblement en peu de temps ou descend en dessous du repère [MIN], il
-  se peut que le système de freinage ne soit plus étanche. Faites appel à un spécialiste en mesure de vous dépanner. Un
-  témoin sur l'écran du combiné d'instruments indique également le niveau de liquide de frein. » ; « Nous vous
-  recommandons de faire effectuer la vidange du liquide de frein par un Service Technique. » ; AVERTISSEMENT : « Si le
-  niveau du liquide de frein est faible, ou si le liquide de frein n'est pas approprié ou ancien, le système de freinage
-  pourrait s'avérer défectueux ou la puissance de freinage pourrait être réduite. ● Vérifiez périodiquement le système de
-  freinage et le niveau du liquide de frein ! ● Si les freins sont trop sollicités et que le liquide de frein est ancien,
-  des bulles de vapeur risquent de se produire. Les bulles de vapeur réduisent la puissance des freins, en augmentant
-  sensiblement la distance de freinage, et peuvent même endommager complètement le système de freinage. ● Assurez-vous de
-  toujours utiliser le liquide de frein adapté. Utilisez uniquement du liquide de frein conforme à la norme VW 501 14. ●
-  […] Si ce liquide de frein n'est pas disponible, utilisez uniquement un liquide de frein de haute qualité conforme aux
-  exigences de la norme DIN ISO 4925 CLASS 4 ou de la norme américaine FMVSS 116 DOT 4. ● Le liquide de frein utilisé doit
-  être neuf. ● Conservez toujours le liquide de frein dans son bidon d'origine fermé et hors de portée des enfants :
-  risque d'intoxication ! » ; ATTENTION : « Le liquide de frein ne doit pas entrer en contact avec la peinture du véhicule
+  [min] (minimum). » ; contrôle : « Stationnez le véhicule en position horizontale. – Coupez le contact d'allumage. – Consultez le niveau de liquide de refroidissement dans […] » ; appoint : « Laissez refroidir le moteur. – Couvrez le bouchon du vase d'expansion du liquide de refroidissement avec un chiffon et dévissez-le […] » ; AVERTISSEMENT : « Le système de refroidissement est sous pression ! N'ouvrez jamais le bouchon du vase d'expansion du liquide de refroidissement tant […] » ; ATTENTION : « Si vous manquez de liquide de refroidissement dans le vase d'expansion, garez la voiture dans un endroit sûr et arrêtez-vous. […] »
+- p. 299 (PDF 301), « Liquide de freins » : « Le niveau de liquide de frein doit être situé entre les repères [MIN] et [MAX]. Si le niveau de liquide […] » ; « Nous vous
+  recommandons de faire effectuer la vidange du liquide de frein par un Service Technique. » ; AVERTISSEMENT : « Si le niveau du liquide de frein est faible, ou si le liquide de frein n'est pas approprié ou ancien, […] » ; ATTENTION : « Le liquide de frein ne doit pas entrer en contact avec la peinture du véhicule
   car il est abrasif. » (Seat Ibiza remplace Seat Leon p. 370 : même consigne, notice de référence.)
 
 **Peugeot 208**
-- p. 166 (PDF 168), « Liquide de freins » : « Le niveau de ce liquide doit se situer proche du repère " MAXI ". Sinon,
-  vérifier l'état d'usure des plaquettes de freins. Pour connaître la périodicité de la vidange du circuit de freinage, se
-  reporter au plan d'entretien du constructeur. Nettoyer le bouchon avant de le retirer pour faire l'appoint. N'employer
-  que du liquide de freins DOT4 provenant d'un bidon scellé. »
-- p. 167 (PDF 169), « Liquide de refroidissement » : « Un appoint de ce liquide entre deux révisions est normal. Le
-  contrôle et l'appoint doivent être faits moteur froid. Un niveau insuffisant présente des risques de dommages
-  importants pour le moteur, il doit se situer proche du repère " MAXI " sans jamais le dépasser. Si le niveau est proche
-  ou en-dessous du repère " MINI ", il est impératif de faire un appoint. Lorsque le moteur est chaud, la température du
-  liquide de refroidissement est régulée par le moto-ventilateur. Le circuit de refroidissement étant sous pression,
-  attendre au moins une heure après l'arrêt du moteur pour intervenir. En cas d'intervention urgente, pour éviter tout
-  risque de brûlure, se munir d'un chiffon et dévisser le bouchon de deux tours pour laisser retomber la pression.
-  Lorsque la pression est retombée, retirer le bouchon et compléter le niveau. »
+- p. 166 (PDF 168), « Liquide de freins » : « Le niveau de ce liquide doit se situer proche du repère " MAXI ". Sinon, vérifier l'état d'usure des plaquettes […] »
+- p. 167 (PDF 169), « Liquide de refroidissement » : « Un appoint de ce liquide entre deux révisions est normal. Le contrôle et l'appoint doivent être faits moteur froid. Un […] »
 
 **Citroën C3** — p. 113 (PDF 115) : liquide de freins, même texte que Peugeot mot pour mot (DOT4 compris) ; liquide de
 refroidissement, même texte que Peugeot (« Le niveau de ce liquide doit se situer proche du repère " MAXI " sans jamais
@@ -414,16 +320,10 @@ le dépasser », « la température de ce liquide est régulée »).
   liquide de refroidissement régulièrement (le moteur thermique est susceptible de subir de graves détériorations par
   manque de liquide de refroidissement). Si un apport est nécessaire, n'utilisez que les produits agréés par nos Services
   Techniques qui vous assurent : – une protection antigel ; – une protection anticorrosion du circuit de
-  refroidissement. » ; « Périodicité de remplacement : Reportez-vous au document d'entretien de votre véhicule. En cas de
-  baisse anormale ou répétée du niveau, consultez un Représentant de la marque. » ; « Aucune intervention ne doit être
+  refroidissement. » ; « Périodicité de remplacement : Reportez-vous au document d'entretien de votre véhicule. En cas de baisse anormale ou répétée du niveau, […] » ; « Aucune intervention ne doit être
   effectuée sur le circuit de refroidissement lorsque le moteur thermique est chaud. Risque de brûlures. »
-- p. 336-337 (PDF 338-339), « Liquide de freins » : « Il est à contrôler souvent, et en tout cas chaque fois que vous sentez
-  une différence même légère de l'efficacité de freinage. Le contrôle du niveau se fait contact coupé et sur sol
-  horizontal. » ; « Le niveau baisse normalement en même temps que l'usure des garnitures, mais il ne doit jamais
-  descendre en dessous de la cote d'alerte « MINI ». » ; « Remplissage : Toute intervention sur le circuit hydraulique doit
-  entraîner le remplacement du liquide par un spécialiste. Utilisez obligatoirement un liquide agréé par nos Services
-  Techniques (et prélevé d'un bidon scellé). Périodicité de remplacement : Reportez-vous au document d'entretien de votre
-  véhicule. » ; « En cas de baisse anormale ou répétée du niveau, consultez un Représentant de la marque. »
+- p. 336-337 (PDF 338-339), « Liquide de freins » : « Il est à contrôler souvent, et en tout cas chaque fois que vous sentez une différence même légère de l'efficacité […] » ; « Le niveau baisse normalement en même temps que l'usure des garnitures, mais il ne doit jamais
+  descendre en dessous de la cote d'alerte « MINI ». » ; « Remplissage : Toute intervention sur le circuit hydraulique doit entraîner le remplacement du liquide par un spécialiste. Utilisez obligatoirement un […] » ; « En cas de baisse anormale ou répétée du niveau, consultez un Représentant de la marque. »
 - p. 387 (PDF 389) : tableau « Le moteur chauffe » (fuites, bocal vide : « consultez un Représentant de la marque le plus
   tôt possible » ; bouillonnement : « Arrêtez le moteur » ; radiateur : jamais de liquide froid dans un moteur très
   chaud) : identique au relevé du 16/11 (`travaux/etape-10/textes/autres-pannes-verification.md`).
@@ -444,53 +344,30 @@ donnent maintenant une consigne, classée par la grille ; demande de changement 
 ajoutent ; pneu endommagé, vibrations : Seat seule, au niveau de sa citation ; « 6 ans » : seulement comme consigne Seat,
 jamais comme règle générale. Rédaction après la relecture à l'écran des passages encore marqués [WF].
 
-**Peugeot 208** — p. 169 (PDF 171), « Roues et pneumatiques » : « Une pression de gonflage non-conforme provoque l'usure
-prématurée des pneumatiques et dégrade la tenue de route du véhicule - Risque d'accident ! Rouler avec des pneumatiques
-usés ou endommagés réduit les performances de freinage et de maintien de la direction du véhicule. Vérifier
-régulièrement l'état des pneumatiques (bande de roulement et flancs) et des jantes ainsi que la présence des bouchons de
-valve. Lorsque les témoins d'usure n'apparaissent plus en retrait de la bande de roulement, la profondeur des rainures
-est inférieure à 1,6 mm ; remplacer impérativement les pneumatiques. »
+**Peugeot 208** — p. 169 (PDF 171), « Roues et pneumatiques » : « Une pression de gonflage non-conforme provoque l'usure prématurée des pneumatiques et dégrade la tenue de route du véhicule - Risque […] »
 
 **Citroën C3** — p. 115 (PDF 117) : même texte que Peugeot, sauf « Il est recommandé de vérifier régulièrement l'état des
 pneumatiques (bande de roulement et flancs) et des jantes ainsi que la présence des valves. » et « ; il est impératif de
 remplacer les pneumatiques. »
 
-**Renault Clio 5 phase 2** — p. 346 (PDF 348), « Pneumatiques » : « Les pneumatiques constituent le seul contact entre le
-véhicule et la route, il est donc essentiel de les tenir en bon état. Vous devez impérativement vous conformer aux règles
-locales prévues par le code de la route. » ; « Les pneumatiques doivent être en bon état et leurs sculptures doivent
-présenter un relief suffisant ; les pneumatiques agréés par nos Services Techniques comportent des témoins d'usure qui
-sont constitués de bossages-témoins incorporés dans l'épaisseur de la bande de roulement. Lorsque le relief des
-sculptures a été érodé jusqu'au niveau des bossages-témoins, ceux-ci deviennent visibles : il est alors nécessaire de
-remplacer vos pneumatiques car la profondeur des sculptures n'est, au plus, que de 1,6 mm et ceci entraîne une mauvaise
-adhérence sur les routes mouillées. Un véhicule surchargé, de longs parcours sur autoroute plus particulièrement par
-fortes chaleurs, une conduite habituelle sur de mauvais chemins concourent à des détériorations plus rapides des
-pneumatiques et influent sur la sécurité. Des incidents de conduite, tels que « coups de trottoir », risquent
+**Renault Clio 5 phase 2** — p. 346 (PDF 348), « Pneumatiques » : « Les pneumatiques constituent le seul contact entre le véhicule et la route, il est donc essentiel de les tenir en […] » ; « Les pneumatiques doivent être en bon état et leurs sculptures doivent présenter un relief suffisant ; les pneumatiques agréés par […] », risquent
 d'endommager les pneumatiques et les jantes, ainsi que d'entraîner des déréglages du train avant ou arrière. Dans ce cas,
 faites vérifier leur état par un Représentant de la marque. »
 
 **Dacia Sandero 3** — p. 307 (PDF 309) : même texte que Renault mot pour mot (« bossages témoins » sans trait d'union).
 
 **Seat Ibiza**
-- p. 304 (PDF 306) : « Vérifiez de temps en temps si les pneus ne sont pas endommagés (trous, entailles, déchirures ou
-  boursouflures). […] Faites immédiatement remplacer les roues ou les pneus défectueux. » ; « Si vous supposez qu'une
+- p. 304 (PDF 306) : « Vérifiez de temps en temps si les pneus ne sont pas endommagés (trous, entailles, déchirures ou boursouflures). […] Faites immédiatement […] » ; « Si vous supposez qu'une
   roue est endommagée, réduisez immédiatement votre vitesse. Vérifiez si les pneus sont endommagés. »
-- p. 305 (PDF 307), AVERTISSEMENT : « Ne roulez jamais avec des pneus endommagés. Risque d'accident ! ● Si, en cours de
-  route, vous constatez des vibrations inhabituelles ou un tirage latéral de la direction, arrêtez-vous immédiatement et
-  vérifiez l'état des pneus. » ; « Lors du changement des pneus, ne changez pas qu'un seul pneu ; changez-en au moins
+- p. 305 (PDF 307), AVERTISSEMENT : « Ne roulez jamais avec des pneus endommagés. Risque d'accident ! ● Si, en cours de route, vous constatez des vibrations […] » ; « Lors du changement des pneus, ne changez pas qu'un seul pneu ; changez-en au moins
   deux d'un même essieu. »
 - p. 306 (PDF 308) : « DOT ... 2218 ... signifie par exemple, que le pneu a été fabriqué au cours de la semaine 22 de
   l'année 2018. » ; AVERTISSEMENT : « Utilisez des pneus de plus de 6 ans uniquement en cas d'urgence et conduisez avec
   la prudence requise. » ; « N'utilisez pas de pneus d'occasion dont vous ne connaissez pas les « antécédents ». » ;
   « Contrôlez la pression des pneus au moins une fois par mois et avant tout long trajet. »
-- p. 308 (PDF 310), « Indicateurs d'usure » : « À la base des sculptures des pneus d'origine se trouvent, à intervalles
-  réguliers et perpendiculairement au sens du roulement, des indicateurs d'usure de 1,6 mm de hauteur. Les lettres
-  « TWI » ou des triangles sur le flanc du pneu indiquent la position des indicateurs d'usure. La profondeur minimale de
+- p. 308 (PDF 310), « Indicateurs d'usure » : « À la base des sculptures des pneus d'origine se trouvent, à intervalles réguliers et perpendiculairement au sens du roulement, des […] » ou des triangles sur le flanc du pneu indiquent la position des indicateurs d'usure. La profondeur minimale de
   sculpture autorisée est atteinte lorsque les pneus sont usés jusqu'aux indicateurs d'usure. Remplacez les pneus par
-  des nouveaux. » (note 1 : « Observez la réglementation du pays où vous circulez. ») ; AVERTISSEMENT : « Les pneus
-  doivent être changés au plus tard lorsque les indicateurs d'usure sont usés. […] il existe des risques d'accident !
-  ● Cette observation est particulièrement vraie lorsque vous circulez dans de mauvaises conditions météorologiques,
-  notamment en présence de pluie et de verglas. Il est important que la profondeur des sculptures des pneus soit la plus
-  grande possible, et qu'elle soit à peu près égale sur les pneus de l'essieu avant et arrière. »
+  des nouveaux. » (note 1 : « Observez la réglementation du pays où vous circulez. ») ; AVERTISSEMENT : « Les pneus doivent être changés au plus tard lorsque les indicateurs d'usure sont usés. […] il existe des risques d'accident […] »
 
 ## 14. Relecture à l'écran du 17/11/2026 vers 13 h 15 (Légifrance, lot C4) : les cinq passages indispensables
 
@@ -510,71 +387,27 @@ fonctions de l'annexe I) ne sont pas relus : les pages s'en passent (décision d
 Les lettres d et e n'ont pas d'intitulé dans cette version : seules les défaillances sont écrites (ne pas en inventer).
 
 **Arrêté du 18 juin 1991, article 7** (https://www.legifrance.gouv.fr/codes/id/LEGISCTA000034159602), en vigueur depuis
-le 20 mai 2018 : « Le contrôle technique périodique et la contre-visite entraînent : - un résultat favorable (A) en
-l'absence de défaillance majeure et critique ; - un résultat défavorable pour défaillances majeures (S), en l'absence de
-défaillance critique et lorsqu'il est constaté au moins une défaillance majeure. Dans ce cas, la validité du contrôle est
-de deux mois à compter de la date du contrôle technique périodique ; - un résultat défavorable pour défaillances
-critiques (R) lorsqu'il est constaté au moins une défaillance critique. Dans ce cas, la validité du contrôle est limitée
-au jour du contrôle. Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être
-réalisée que dans le délai de deux mois après le contrôle technique périodique tel que défini à l'article 5, faute de
-quoi un nouveau contrôle technique périodique est à réaliser. »
+le 20 mai 2018 : « Le contrôle technique périodique et la contre-visite entraînent : - un résultat favorable (A) en l'absence de défaillance majeure et […] »
 
-**Arrêté du 18 juin 1991, article 8** (même adresse), en vigueur depuis le 27 mars 2022 : « Les points à contrôler lors
-des contre-visites et contre-visites complémentaires sont définis à l'annexe I du présent arrêté. A l'issue du contrôle,
-si les points susvisés présentent des défaillances majeures ou critiques, une nouvelle contre-visite ou contre-visite
-complémentaire est à réaliser dans la limite du délai de deux mois à compter du contrôle technique périodique défini à
-l'article 5 du présent arrêté ou du contrôle technique complémentaire défini à l'article 5-1 du présent arrêté. Dans le
-cas où ce délai est dépassé, ou lorsque l'original du procès-verbal de contrôle relatif au contrôle technique périodique
-ou complémentaire ne peut être présenté au contrôleur et que les données informatiques du contrôle technique
-défavorable ne peuvent pas être consultées, le véhicule est soumis à un nouveau contrôle technique périodique tel que
-défini à l'article 5 du présent arrêté […]. Si, à cette occasion, une nouvelle contre-visite ou contre-visite
-complémentaire est prescrite, celle-ci est réalisée dans un nouveau délai de deux mois. Lorsque la contre-visite n'est
-pas réalisée dans le même centre que celui où le contrôle périodique ou complémentaire qui a fait l'objet d'un résultat
-défavorable a été réalisé, une copie du contrôle périodique ou complémentaire est archivée avec le procès-verbal […]. »
+**Arrêté du 18 juin 1991, article 8** (même adresse), en vigueur depuis le 27 mars 2022 : « Les points à contrôler lors des contre-visites et contre-visites complémentaires sont définis à l'annexe I du présent arrêté. A l'issue […] »
 
 ## 15. Relecture à l'écran du 17/11/2026 vers 13 h 50 (Légifrance, lot C4) : R314-1, R323-1, arrêté de 2019 article 5
 
 **Relu à l'écran** (Légifrance dans Chrome, 17/11/2026 vers 13 h 50), à la demande du lot C4
 (`travaux/etape-11/lot-c4/points-ouverts.md`, §2). Ces textes complètent les phrases de sanction relevées au §7 et au §8.
 
-**Code de la route, article R314-1** (en vigueur depuis le 27 août 2020, décret n° 2020-1088) : « Les pneumatiques, à
-l'exception de ceux des matériels de travaux publics, doivent présenter sur toute leur surface de roulement des
-sculptures apparentes. Aucune toile ne doit apparaître ni en surface ni à fond de sculpture des pneumatiques. En outre,
-ceux-ci ne doivent comporter sur leurs flancs aucune déchirure profonde. » ; « Le fait de contrevenir aux dispositions du
-présent article relatives à la nature, la forme, l'état et les conditions d'utilisation des pneumatiques est puni de
-l'amende prévue pour les contraventions de la quatrième classe. L'immobilisation du véhicule peut être prescrite dans les
-conditions prévues aux articles L. 325-1, L. 325-2 et L. 325-3. »
+**Code de la route, article R314-1** (en vigueur depuis le 27 août 2020, décret n° 2020-1088) : « Les pneumatiques, à l'exception de ceux des matériels de travaux publics, doivent présenter sur toute leur surface de roulement des […] » ; « Le fait de contrevenir aux dispositions du présent article relatives à la nature, la forme, l'état et les conditions d'utilisation […] »
 
-**Code de la route, article R323-1** (en vigueur depuis le 1er janvier 2026, décret n° 2025-1180) : « Tout propriétaire
-d'un véhicule mentionné au présent chapitre n'est autorisé à le mettre ou le maintenir en circulation qu'après un
-contrôle technique ayant vérifié qu'il est en bon état de marche et en état satisfaisant d'entretien. » ; « Le fait pour
-tout propriétaire de mettre ou maintenir en circulation un véhicule sans avoir satisfait aux obligations de contrôle
-technique fixées par le présent chapitre est puni de l'amende prévue pour les contraventions de la quatrième classe.
-L'immobilisation peut être prescrite dans les conditions prévues aux articles L. 325-1 à L. 325-3. A défaut de
-présentation aux contrôles techniques obligatoires ou dans le cas où les réparations ou aménagements prescrits par
-l'expert chargé des contrôles techniques ne sont pas exécutés, la mise en fourrière peut également être prescrite. »
+**Code de la route, article R323-1** (en vigueur depuis le 1er janvier 2026, décret n° 2025-1180) : « Tout propriétaire d'un véhicule mentionné au présent chapitre n'est autorisé à le mettre ou le maintenir en circulation qu'après un […] » ; « Le fait pour tout propriétaire de mettre ou maintenir en circulation un véhicule sans avoir satisfait aux obligations de contrôle […] »
 
-**Arrêté du 18 juillet 2019 relatif aux pneumatiques, article 5** (en vigueur depuis le 31 août 2019), en entier : « Les
-pneumatiques des véhicules des catégories M 1, N 1, O 1 et O 2 doivent présenter, pendant toute leur utilisation sur
-route, dans les rainures principales de leur bande de roulement, une profondeur d'au moins 1,6 mm. Les pneumatiques
-destinés aux voitures particulières et à leurs remorques doivent être équipés d'indicateurs d'usure répondant aux
-prescriptions du point 6.3.3.3 du règlement n° 30 et du point 6.6.11.3 du règlement n° 108 susvisés et permettant de
-signaler que les rainures de la bande de roulement n'ont plus qu'une profondeur de 1,6 mm, avec une tolérance de
-+ 0,6/- 0 mm. Sur les véhicules autres que ceux visés au point 1er alinéa ci-dessus, la profondeur de rainures mesurée
-en quatre points répartis uniformément sur la circonférence du pneumatique ne doit pas être inférieure à un millimètre
-pour plus d'un point sur quatre. La différence entre la profondeur des rainures principales de deux pneumatiques montés
-sur un même essieu ne doit pas dépasser 5 mm. » Décision du pilotage : la dernière phrase répond à « changer un seul
+**Arrêté du 18 juillet 2019 relatif aux pneumatiques, article 5** (en vigueur depuis le 31 août 2019), en entier : « Les pneumatiques des véhicules des catégories M 1, N 1, O 1 et O 2 doivent présenter, pendant toute leur […] » Décision du pilotage : la dernière phrase répond à « changer un seul
 pneu » ; à dire seulement comme le texte le dit.
 
 ## 16. Relecture à l'écran du 17/11/2026 vers 14 h 40 (Légifrance, lot C4) : fonctions contrôlées de l'annexe I
 
 **Relu à l'écran** (Légifrance dans Chrome, 17/11/2026 vers 14 h 40), à la demande de la revue indépendante du lot C4
 (constat I3). Arrêté du 18 juin 1991, annexe I en vigueur depuis le 1er janvier 2026
-(https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053003556/2026-04-28), « C. Fonctions contrôlées » : « Au
-cours du contrôle technique périodique et pour toutes les catégories de véhicules légers, le contrôleur vérifie les
-points de contrôle définis dans la présente annexe pour les fonctions suivantes : 0. Identification du véhicule
-1. Equipements de freinage 2. Direction 3. Visibilité 4. Feux, dispositifs réfléchissants et équipements électriques
-5. Essieux, roues, pneus, suspension 6. Châssis et accessoires du châssis 7. Autre matériel 8. Nuisances. » Les
+(https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000053003556/2026-04-28), « C. Fonctions contrôlées » : « Au cours du contrôle technique périodique et pour toutes les catégories de véhicules légers, le contrôleur vérifie les points de […] » Les
 fonctions 10 à 13 s'y ajoutent pour le dépannage, le transport sanitaire, les auto-écoles, les taxis et les VTC.
 
 Heures des relevés corrigées le 17/11 (heure de Tunis rapportée par erreur ; décision du pilotage) : lot C2 vers
@@ -592,20 +425,8 @@ ci-dessous sont désormais relus à l'écran.
 ACEA, « 2023 ACEA Oil Sequences for Light-Duty Engines », Sep. 2023, Revision 0
 (https://www.acea.auto/files/2023_ACEA_oil_sequences_light-duty_engines.pdf) :
 
-- p. 4, CONSUMER LANGUAGE : « C: Catalyst and GPF/DPF compatible engine oils for gasoline and diesel engines – ‘Low
-  SAPS’ Note: These oils will increase the DPF/GPF and TWC life and maintain the vehicle’s fuel economy. Warning: Some of
-  these categories may be unsuitable for use in certain engine types – consult the manufacturer’s owner manual/handbook
-  in case of doubt. C2 Stable, stay-in-grade engine oil with mid-SAPS Level, for aftertreatment system compatibility.
-  Intended for use at extended oil drain intervals in passenger car and light-duty gasoline DI diesel engines designed
-  for low viscosity engine oils with a minimum HTHS Viscosity of 2.9 mPa·s. C3 Stable, stay-in-grade engine oil with
-  mid-SAPS Level, for aftertreatment system compatibility. Intended for use at extended oil drain intervals in passenger
-  car and light-duty gasoline DI diesel engines designed for engine oils with HTHS viscosity of minimum 3.5 mPa·s. C4
-  Stable, stay-in-grade engine oil with low-SAPS Level, for aftertreatment system compatibility. Intended for use at
-  extended oil drain intervals in passenger car and light-duty gasoline DI diesel engines designed for engine oils with
-  HTHS viscosity of minimum 3.5 mPa·s. »
-- p. 7 (séquences C), 1.1 Viscosity Grades : « Viscosity Class according to SAE J300 - Latest active issue. No
-  restriction except as defined by HTHS and Shear Stability requirements. Manufacturers may indicate specific Viscosity
-  requirements related to ambient temperature. » La même ligne figure p. 6 pour les séquences A/B.
+- p. 4, CONSUMER LANGUAGE : « C: Catalyst and GPF/DPF compatible engine oils for gasoline and diesel engines – ‘Low SAPS’ Note: These oils will increase […] »
+- p. 7 (séquences C), 1.1 Viscosity Grades : « Viscosity Class according to SAE J300 - Latest active issue. No restriction except as defined by HTHS and Shear Stability […] » La même ligne figure p. 6 pour les séquences A/B.
 
 **Ce que le document ne dit pas** : il ne définit aucun grade (5W30 ou autre) ; il renvoie à SAE J300 (norme payante, non
 achetée). Il ne permet donc pas, à lui seul, le tableau des viscosités ni la 85W140 (demande de changement n° 35).
@@ -625,46 +446,20 @@ depuis le portail propriétaires de toyota.fr (même référence que `notice-toy
 par un dossier de son ordinateur ; texte extrait par `pdftotext -layout`, page 330 regardée en image pour le graphique.
 Toyota : page PDF = page imprimée. Mot pour mot.
 
-- p. 330, 8.1 « Caractéristiques », « Système de lubrification », « Choix de l'huile moteur » : « Moteur à essence —
-  Votre véhicule Toyota contient de l'huile “Toyota Genuine Motor Oil” (huile moteur d'origine Toyota). Toyota
-  recommande d'utiliser l'huile approuvée “Toyota Genuine Motor Oil” (huile moteur d'origine Toyota). Une huile moteur
-  d'une qualité équivalente peut également être utilisée. Grade d'huile : 0W-16 : Huile moteur multigrade API SN
-  “Resource-Conserving”, SN PLUS “Resource-Conserving” ou SP “Resource-Conserving” ou ILSAC GF-6B 0W-20 et 5W-30 :
-  Huile moteur multigrade API grade SM “Energy-Conserving”, SN “Resource-Conserving”, SN PLUS “Resource-Conserving” or
-  SP “Resource-Conserving” ou ILSAC GF-6A »
-- p. 330, même rubrique : « Votre véhicule Toyota contient de l'huile SAE 0W-16 à sa sortie d'usine, le meilleur choix
-  pour une bonne économie de carburant et pour un bon démarrage par temps froid. Si de l'huile SAE 0W-16 n'est pas
-  disponible, vous pouvez utiliser de l'huile SAE 0W-20. Toutefois, elle doit être remplacée par de la SAE 0W-16 lors
-  de la prochaine vidange d'huile. »
-- p. 330, même rubrique : « Viscosité de l'huile (0W-16 est expliqué ici en guise d'exemple) : • La partie 0W de 0W-16
-  indique la caractéristique de l'huile qui permet un démarrage à froid. Les huiles qui ont une valeur plus petite avant
-  le W facilitent le démarrage du moteur par temps froid. • La partie 16 de 0W-16 indique la caractéristique de la
-  viscosité de l'huile lorsque celle-ci est à température élevée. Une huile dont la viscosité est plus élevée (ayant
-  une valeur plus grande) convient mieux si le véhicule circule à des vitesses élevées ou dans des conditions de charge
-  extrêmes. »
+- p. 330, 8.1 « Caractéristiques », « Système de lubrification », « Choix de l'huile moteur » : « Moteur à essence — Votre véhicule Toyota contient de l'huile “Toyota Genuine Motor Oil” (huile moteur d'origine Toyota). Toyota recommande […] »
+- p. 330, même rubrique : « Votre véhicule Toyota contient de l'huile SAE 0W-16 à sa sortie d'usine, le meilleur choix pour une bonne économie de […] »
+- p. 330, même rubrique : « Viscosité de l'huile (0W-16 est expliqué ici en guise d'exemple) : • La partie 0W de 0W-16 indique la caractéristique […] »
 - p. 330, graphique « Viscosité recommandée (SAE) » (lu en image) : trois flèches, 0W-16 (repère A, « De préférence »),
   0W-20 et 5W-30, chacune sur toute la plage graduée (−18 °C, 4 °C, 27 °C ; 0, 40, 80 °F) et prolongée aux deux
   extrémités ; repère B : « Plage de températures prévues avant la prochaine vidange d'huile ».
 - p. 331, « Comment interpréter les étiquettes sur les récipients d'huile » : « Sur certains récipients d'huile moteur
   figurent soit l'un, soit les deux symboles d'identification API pour vous permettre de sélectionner l'huile à
-  utiliser. » ; « A Symbole service API Partie supérieure : “API SERVICE SP” signifie que la qualité d'huile a été
-  désignée par l'API (American Petroleum Institute). Partie centrale : “SAE 0W-16” indique le grade de viscosité SAE.
-  Partie inférieure : “Resource-Conserving” signifie que l'huile contribue à économiser le carburant et à protéger
-  l'environnement. B Symbole de certification de l'ILSAC Le symbole de certification de l'ILSAC (International
-  Lubricant Specification Advisory Committee) se trouve sur l'avant du récipient. »
-- p. 247, 6.3, « Consommation d'huile moteur » : « Une certaine quantité d'huile moteur sera consommée pendant la
-  conduite. Dans les situations suivantes, la consommation d'huile peut augmenter, et vous pourriez devoir faire
-  l'appoint d'huile moteur entre deux moments prévus pour l'entretien de l'huile. […] • Si une huile de faible qualité ou
-  de viscosité inadéquate est utilisée »
-- p. 248, « Appoint d'huile moteur » : « Si le niveau d'huile est en dessous ou très proche du repère de bas niveau,
-  ajoutez de l'huile moteur du même type que celle qui se trouve déjà dans le moteur. » ; « Vérification du type
+  utiliser. » ; « A Symbole service API Partie supérieure : “API SERVICE SP” signifie que la qualité d'huile a été désignée par l'API […] »
+- p. 247, 6.3, « Consommation d'huile moteur » : « Une certaine quantité d'huile moteur sera consommée pendant la conduite. Dans les situations suivantes, la consommation d'huile peut augmenter, et […] »
+- p. 248, « Appoint d'huile moteur » : « Si le niveau d'huile est en dessous ou très proche du repère de bas niveau, ajoutez de l'huile moteur du […] » ; « Vérification du type
   d'huile et préparation des éléments nécessaires […] • Sélection de l'huile moteur →P. 330 »
-- p. 248, « Le niveau d'huile moteur augmente » : « Si le niveau d'huile moteur dépasse le repère de limite supérieure de
-  remplissage, contactez un concessionnaire ou un réparateur Toyota agréé, ou tout autre réparateur qualifié. »
-- p. 247, « Vérification de l'huile moteur » : « Lorsque le moteur a atteint sa température de fonctionnement et qu'il a
-  été arrêté, vérifiez le niveau d'huile sur la jauge. 1.Garez le véhicule sur un sol plat. Après avoir fait monter en
-  température le moteur et l'avoir arrêté, attendez environ 5 minutes pour que l'huile se stabilise dans le carter du
-  moteur. »
+- p. 248, « Le niveau d'huile moteur augmente » : « Si le niveau d'huile moteur dépasse le repère de limite supérieure de remplissage, contactez un concessionnaire ou un réparateur Toyota […] »
+- p. 247, « Vérification de l'huile moteur » : « Lorsque le moteur a atteint sa température de fonctionnement et qu'il a été arrêté, vérifiez le niveau d'huile sur la […] »
 
 **Ce que cela permet** (pages de grade, lot C5) :
 - **sens d'un grade**, dit par une notice de référence (première main) : le nombre avant le W, démarrage à froid (plus

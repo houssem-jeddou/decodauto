@@ -1,5 +1,8 @@
 # Relevé : arrêté du 18 juin 1991 (contrôle technique des véhicules de 3,5 tonnes au plus)
 
+> Citations de plus de 25 mots réduites à leurs 20 premiers mots le 18/11/2026 (porte 11, §3 : retrait des extraits de notices du dépôt public) ; texte entier dans le projet Claude, `claude/releves_extraits_longs_etapes_8_10_11.md`, et dans l'historique Git.
+
+
 Lu sur Légifrance le 14/11/2026 (Chrome de Houssem, « Version à la date d'aujourd'hui ») :
 https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000171443
 Relevé de travail, jamais publié. Les pages ne citent que les extraits utiles, par la source du registre.
@@ -7,7 +10,7 @@ Relevé de travail, jamais publié. Les pages ne citent que les extraits utiles,
 ## Article 7 (en vigueur depuis le 20/05/2018, modifié par l'arrêté du 2 mars 2017, art. 11)
 - L'annexe I définit les défaillances mineures (« aucune incidence notable sur la sécurité du véhicule ou sur l'environnement »), majeures (« susceptibles de compromettre la sécurité du véhicule, d'avoir une incidence négative sur l'environnement, ou de mettre en danger les autres usagers de la route ») et critiques (« un danger direct et immédiat pour la sécurité routière ou ayant une incidence grave sur l'environnement »).
 - Résultat défavorable pour défaillances majeures (S) : validité du contrôle de deux mois à compter du contrôle périodique. Défaillances critiques (R) : validité limitée au jour du contrôle.
-- « Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être réalisée que dans le délai de deux mois après le contrôle technique périodique [...], faute de quoi un nouveau contrôle technique périodique est à réaliser. »
+- « Tout résultat défavorable entraîne l'obligation de réalisation d'une contre-visite, qui ne peut être réalisée que dans le délai de deux […] »
 
 ## Article 8 (en vigueur depuis le 27/03/2022)
 - Les points contrôlés à la contre-visite sont définis à l'annexe I ; défaillance majeure ou critique à la contre-visite : nouvelle contre-visite dans le délai de deux mois.

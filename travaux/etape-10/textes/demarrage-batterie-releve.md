@@ -1,5 +1,8 @@
 # Relevé : démarrage et batterie 12 V (vague B, préparation anticipée), 15/11/2026
 
+> Citations de plus de 25 mots réduites à leurs 20 premiers mots le 18/11/2026 (porte 11, §3 : retrait des extraits de notices du dépôt public) ; texte entier dans le projet Claude, `claude/releves_extraits_longs_etapes_8_10_11.md`, et dans l'historique Git.
+
+
 Relevé de travail, jamais publié. Préparation anticipée de l'étape 10 (docs/03, règle 12, quatrième exception, demande de changement n° 21) : rien n'en est présenté, fusionné ni publié avant la fermeture de la porte de l'étape 8.
 
 Pages servies : `voiture-ne-demarre-pas` (exemple du modèle panne), `batterie-voiture`, `batterie-recharger`, `batterie-changer`.
@@ -13,7 +16,7 @@ Démarrage (p. 92-95) :
 - p. 93, Diesel : « Attendre l'extinction de ce témoin au combiné, puis actionner le démarreur » (fin à relire) ; « En conditions hivernales, la durée d'allumage du témoin est prolongée. »
 - p. 92 : « Déverrouiller la colonne de direction en tournant simultanément le volant et la clé. »
 - p. 93-94, Accès et Démarrage Mains Libres : « La présence de la clé électronique dans l'habitacle est impérative. » ; « En cas de non-détection de la clé électronique, un message s'affiche. » ; « Dans tous les cas, si l'une des conditions de démarrage n'est pas remplie, un message s'affiche. » ; « Dans certains cas, un message indique qu'il est nécessaire de manœuvrer le volant » (fin à relire) ; renvoi à « Clé non détectée - Démarrage de secours ou Arrêt de secours ».
-- p. 95, Clé non détectée - Démarrage de secours : « Un lecteur de secours est aménagé sur la colonne de direction pour permettre le démarrage du moteur, lorsque la pile de la clé électronique est usée. » (deux morceaux rendus séparément, à relire) ; « Placer la télécommande contre le lecteur de secours et la maintenir. »
+- p. 95, Clé non détectée - Démarrage de secours : « Un lecteur de secours est aménagé sur la colonne de direction pour permettre le démarrage du moteur, lorsque la pile […] » (deux morceaux rendus séparément, à relire) ; « Placer la télécommande contre le lecteur de secours et la maintenir. »
 
 Panne de carburant, Diesel (p. 175-176) :
 - p. 175 : « Avec un moteur Diesel, en cas de panne sèche, il est nécessaire de réamorcer le circuit de carburant. » ; « Avant de commencer le réamorçage, il est impératif de mettre au moins 5 litres de gazole dans le réservoir de carburant. » ; 1.5 BlueHDi : « Si le moteur ne démarre pas du premier coup, ne pas insister et recommencer la procédure. »
