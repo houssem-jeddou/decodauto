@@ -88,6 +88,9 @@ describe('contrôles ADSENSE-* du site construit', () => {
     assert.deepEqual(regles(constatsBaliseAdsense('<meta name="google-adsense-account" content="ca-pub-0000000000000000">', 'a.html', AVEC)), ['ADSENSE-META']);
     assert.deepEqual(regles(constatsBaliseAdsense('<head></head>', 'a.html', SANS)), []);
     assert.deepEqual(regles(constatsBaliseAdsense(META, 'a.html', SANS)), ['ADSENSE-META']);
+    assert.deepEqual(regles(constatsBaliseAdsense(`<head></head><body>${META}</body>`, 'a.html', AVEC)), ['ADSENSE-META']);
+    assert.deepEqual(regles(constatsBaliseAdsense(`<head><!-- ${META} --></head>`, 'a.html', AVEC)), ['ADSENSE-META']);
+    assert.deepEqual(regles(constatsBaliseAdsense(`<head>${META}<!-- ${META} --></head>`, 'a.html', AVEC)), []);
   });
 
   test('ads.txt : la ligne exacte, ou pas de fichier sans identifiant (ADSENSE-ADS-TXT)', () => {
@@ -127,6 +130,13 @@ describe('contrôles ADSENSE-* du site construit', () => {
       assert.deepEqual(await essai(SANS, { 'index.html': page('', '<ins class="adsbygoogle"></ins>') }), ['ADSENSE-ANNONCES']);
       assert.deepEqual(await essai({ ...AVEC, annonces: true }, { 'index.html': page(META) }, `${LIGNE}\n`), ['ADSENSE-CONFIG']);
       assert.deepEqual(await essai('{ client: ', { 'index.html': page('') }), ['ADSENSE-CONFIG']);
+      await mkdir(join(dossier, 'r', 'public'), { recursive: true });
+      await writeFile(join(dossier, 'r', 'public', 'ads.txt'), `${LIGNE}\n`);
+      const dist = join(dossier, 'r', 'dist');
+      await writeFile(join(dist, 'ads.txt'), `${LIGNE}\n`);
+      await writeFile(join(dist, 'index.html'), page(META));
+      await writeFile(join(dossier, 'r', 'config', 'adsense.json'), JSON.stringify(AVEC));
+      assert.deepEqual([...new Set(regles(await controlerAdsense(join(dossier, 'r'), dist)))], ['ADSENSE-ADS-TXT']);
     } finally {
       await rm(dossier, { recursive: true, force: true });
     }
@@ -186,6 +196,8 @@ describe('production : balise d’association et ads.txt en ligne (PROD-ADSENSE-
     assert.deepEqual(await verifier(reseau('', adsOk), AVEC), ['PROD-ADSENSE-META']);
     assert.deepEqual(await verifier(reseau('<meta name="google-adsense-account" content="ca-pub-0000000000000000">', adsOk), AVEC), ['PROD-ADSENSE-META']);
     assert.deepEqual(await verifier(reseau(META, ok('', { statut: 404 })), AVEC), ['PROD-ADS-TXT']);
-    assert.deepEqual(await verifier(reseau(META, ok('google.com, pub-1, DIRECT, f08c47fec0942fa0')), AVEC), ['PROD-ADS-TXT']);
+    assert.deepEqual(await verifier(reseau(META, ok('google.com, pub-1, DIRECT, f08c47fec0942fa0', { typeContenu: 'text/plain' })), AVEC), ['PROD-ADS-TXT']);
+    assert.deepEqual(await verifier(reseau(META, ok(`${LIGNE}\n`, { typeContenu: 'text/html' })), AVEC), ['PROD-ADS-TXT']);
+    assert.deepEqual(await verifier(reseau(META, ok(`${LIGNE}\n`, { typeContenu: 'text/plain; charset=utf-8' })), AVEC), []);
   });
 });

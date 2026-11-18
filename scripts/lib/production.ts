@@ -173,6 +173,7 @@ export async function verifierProduction(options: OptionsProduction): Promise<Co
     }
     const ads = await lire(`${URL_SITE}${ADRESSE_ADS_TXT}`);
     if (ads.statut !== 200) constats.push(erreur('PROD-ADS-TXT', `${URL_SITE}${ADRESSE_ADS_TXT} répond ${decrireReponse(ads)} au lieu de 200`));
+    else if (!/^text\/plain\b/i.test(ads.typeContenu ?? '')) constats.push(erreur('PROD-ADS-TXT', `${URL_SITE}${ADRESSE_ADS_TXT} servi en ${ads.typeContenu ?? 'sans type'} : la spécification de l'IAB exige text/plain`));
     else if (normaliser(ads.corps) !== ligneAds) constats.push(erreur('PROD-ADS-TXT', `${URL_SITE}${ADRESSE_ADS_TXT} doit contenir exactement « ${ligneAds} »`));
   }
 

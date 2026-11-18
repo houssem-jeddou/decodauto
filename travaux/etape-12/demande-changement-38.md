@@ -1,6 +1,9 @@
 # Demande de changement n° 38 : publicité AdSense (demande d'abord, affichage ensuite sur décision de Houssem)
 
-Proposée par Claude le 18/11/2026, étape 12 (boucle mensuelle). **Statut : proposée, rien n'est appliqué.**
+Proposée par Claude le 18/11/2026, étape 12 (boucle mensuelle). **Statut : acceptée par Houssem le 18/11/2026 (18 h 43)** :
+temps 1 (choix T1-a : décision du 11/11 reconfirmée pour la demande) et principe du temps 2 ; représentant pour l'affichage
+(R1 à R4) à choisir à J+30. Temps 1 appliqué par la PR #91 avec `client: null` (pas encore de compte AdSense) : rien ne
+change sur le site avant la PR d'activation (§4, point 6).
 Format de `docs/03` : élément concerné, changement proposé, raison (données), impact sur ce qui est validé, tests à
 relancer. Sources lues le 18/11/2026 ; Claude n'est pas juriste : les points de droit sont des lectures de textes
 officiels, à faire confirmer par un professionnel si Houssem le souhaite. Version 2, corrigée le 18/11 après la revue
@@ -94,7 +97,7 @@ traitement : il ne change pas ce risque, mais il ne doit pas partir sans que Hou
 
 ### Temps 1 — la demande AdSense, sans aucun traitement nouveau
 1. **Une source de vérité** : `config/adsense.json`, `{ "client": "ca-pub-…", "bloc": null, "annonces": false }`, avec son
-   schéma (`client` : « ca-pub- » suivi de 16 chiffres ; `bloc` : identifiant du bloc d'annonces, rempli au temps 2).
+   schéma (`client` : `null` tant qu'il n'y a pas de compte AdSense, puis « ca-pub- » suivi de 16 chiffres ; `bloc` : identifiant du bloc d'annonces, rempli au temps 2).
    L'identifiant d'éditeur est public par nature (publié dans `ads.txt`).
 2. **Généré à la construction, jamais écrit à la main** : la balise `<meta name="google-adsense-account">`, une fois
    dans l'en-tête de chaque page, accueil compris (gabarit), et `ads.txt` à la racine (la ligne de Google). Ni script,
@@ -115,8 +118,11 @@ traitement : il ne change pas ce risque, mais il ne doit pas partir sans que Hou
    faite le 17/11 vers 23 h 55 : aucun résultat, `travaux/etape-11/porte-11.md`) : une copie du site trouvée sur GitHub
    pourrait passer pour du contenu non original à l'examen.
 6. **Ce que fait Houssem** (onglets préparés par Claude, Houssem fait les derniers clics) : créer le compte AdSense,
-   ajouter `decodauto.com`, choisir la méthode « balise meta », donner à Claude l'identifiant `ca-pub-…` ; après la
-   mise en ligne de la PR du temps 1, cliquer « Valider » puis « Demander un examen ».
+   ajouter `decodauto.com`, choisir la méthode « balise meta », donner à Claude l'identifiant `ca-pub-…`. **PR
+   d'activation** (ajoutée le 18/11 après la revue du code) : Claude renseigne l'identifiant dans `config/adsense.json` ;
+   la CI construit alors la balise et `ads.txt` pour la première fois ; Houssem valide la PR (en-tête de toutes les pages
+   modifié, `/ads.txt` publié) ; après la mise en ligne, vérification de la production (PROD-ADSENSE-META,
+   PROD-ADS-TXT) ; puis Houssem clique « Valider » puis « Demander un examen » dans AdSense.
 7. **En cas de refus** : lire la raison donnée par AdSense, la rapporter au journal, corriger par la voie habituelle
    (demande de changement si elle touche ce qui est figé), puis redemander. Point à surveiller : chaque page dit qu'elle
    est rédigée par une IA ; elle dit aussi ses sources de première main et la vérification de Houssem, ce qui la

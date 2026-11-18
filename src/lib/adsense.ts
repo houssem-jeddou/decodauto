@@ -69,9 +69,17 @@ export function contenuAdsTxt(config: ConfigAdsense): string | undefined {
   return ligne === undefined ? undefined : `${ligne}\n`;
 }
 
-/** Valeur (attribut content) de chaque balise meta « google-adsense-account » d'une page, dans l'ordre. */
+/** Page sans ses commentaires HTML (une balise commentée ne compte pas). */
+const sansCommentaires = (html: string): string => html.replace(/<!--[\s\S]*?-->/g, '');
+
+/** En-tête de la page (entre <head> et </head>), sans commentaires ; chaîne vide s'il n'y en a pas. */
+export function enTeteDePage(html: string): string {
+  return /<head\b[^>]*>([\s\S]*?)<\/head>/i.exec(sansCommentaires(html))?.[1] ?? '';
+}
+
+/** Valeur (attribut content) de chaque balise meta « google-adsense-account » d'une page, dans l'ordre (commentaires ignorés). */
 export function contenusBaliseAdsense(html: string): string[] {
-  const balises = [...html.matchAll(/<meta\b[^>]*>/gi)].map((m) => m[0]).filter((b) => new RegExp(`\\bname\\s*=\\s*["']?${NOM_BALISE_ADSENSE}["'\\s>/]`, 'i').test(b));
+  const balises = [...sansCommentaires(html).matchAll(/<meta\b[^>]*>/gi)].map((m) => m[0]).filter((b) => new RegExp(`\\bname\\s*=\\s*["']?${NOM_BALISE_ADSENSE}["'\\s>/]`, 'i').test(b));
   return balises.map((b) => /\bcontent\s*=\s*["']([^"']*)["']/i.exec(b)?.[1] ?? '');
 }
 
