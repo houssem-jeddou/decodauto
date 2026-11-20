@@ -14,7 +14,8 @@ const ENTITES: Readonly<Record<string, string>> = { '&': '&amp;', '<': '&lt;', '
 export const echapper = (texte: string): string => texte.replace(/[&<>"']/g, (c) => ENTITES[c] ?? c);
 
 /** Unités qui suivent un nombre (espace insécable entre les deux, charte §3.3). */
-const UNITES = ['bar', 'km/h', 'km', '°C', '€', '%', 'litres', 'litre', 'l', 'mm', 'cm', 'kg', 't', 'h', 'min', 'ans', 'an', 'mois', 'jours', 'jour', 'semaines', 'semaine', 'V', 'Ah', 'A', 'kW', 'W'];
+// Unités écrites en toutes lettres ajoutées le 20/11/2026 (« 30 minutes » se coupait à 375 px, revue de la PR #84).
+const UNITES = ['bar', 'km/h', 'km', '°C', '€', '%', 'litres', 'litre', 'l', 'mm', 'cm', 'kg', 't', 'h', 'min', 'ans', 'an', 'mois', 'jours', 'jour', 'semaines', 'semaine', 'heures', 'heure', 'minutes', 'minute', 'secondes', 'seconde', 'tours', 'V', 'volts', 'volt', 'Ah', 'A', 'kW', 'W'];
 // L'unité n'est suivie ni d'une lettre ni d'un chiffre ni d'une apostrophe (« 208 l’a » : « l » n'est pas le litre).
 const NOMBRE_UNITE = new RegExp(`(\\d) (?=(?:${UNITES.map((u) => u.replace(/[/.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})(?![\\p{L}\\d’']))`, 'gu');
 

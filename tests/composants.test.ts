@@ -62,6 +62,10 @@ describe('typographie et échappement (charte §3.3)', () => {
     assert.equal(typographier('« Grosse réparation »'), `«${INSECABLE}Grosse réparation${INSECABLE}»`);
     assert.equal(typographier('«Grosse»'), `«${INSECABLE}Grosse${INSECABLE}»`);
     assert.equal(typographier('2,5 bar, 135 €, 90 km/h, 5 litres, 1 000 km'), `2,5${INSECABLE}bar, 135${INSECABLE}€, 90${INSECABLE}km/h, 5${INSECABLE}litres, 1${INSECABLE}000${INSECABLE}km`);
+    // Unités en toutes lettres (20/11/2026) : durées, tension, régime.
+    assert.equal(typographier('30 minutes, 1 minute, 10 secondes, 2 heures, 1 heure, 12,6 volts, 2 000 tours'), `30${INSECABLE}minutes, 1${INSECABLE}minute, 10${INSECABLE}secondes, 2${INSECABLE}heures, 1${INSECABLE}heure, 12,6${INSECABLE}volts, 2${INSECABLE}000${INSECABLE}tours`);
+    // Un mot qui commence comme une unité n'en est pas une.
+    assert.equal(typographier('3 minuteries, 2 heureux, 4 tournevis'), '3 minuteries, 2 heureux, 4 tournevis');
   });
   test('rien n\'est inséré là où il n\'y avait pas d\'espace : adresses, heures, nombres suivis d\'un mot', () => {
     assert.equal(typographier('https://decodauto.com'), 'https://decodauto.com');
