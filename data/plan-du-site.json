@@ -732,7 +732,11 @@
       "voyant rouge volant",
       "voyant volant orange volkswagen"
     ],
-    "parent": "voyants"
+    "parent": "voyants",
+    "liens": [
+      "contre-visite-controle-technique",
+      "batterie-recharger"
+    ]
   },
   {
     "id": "code-p0420",
@@ -1169,7 +1173,10 @@
       "comment changer batterie voiture",
       "comment demonter une batterie de voiture"
     ],
-    "parent": "batterie-voiture"
+    "parent": "batterie-voiture",
+    "liens": [
+      "batterie-recharger"
+    ]
   },
   {
     "id": "batterie-recharger",
@@ -1439,7 +1446,11 @@
       "huile moteur essence 10w40",
       "huile 10w40 diesel"
     ],
-    "parent": "huile-moteur"
+    "parent": "huile-moteur",
+    "liens": [
+      "huile-5w30",
+      "huile-5w40"
+    ]
   },
   {
     "id": "niveau-huile",
@@ -1496,6 +1507,10 @@
       "pourquoi ma voiture consomme du liquide de refroidissement",
       "liquide de refroid",
       "liquide de refroidissement"
+    ],
+    "liens": [
+      "liquide-de-frein",
+      "niveau-huile"
     ]
   },
   {
@@ -1516,6 +1531,9 @@
       "liquide de frein voiture",
       "remplacement liquide de frein",
       "liquide de frein"
+    ],
+    "liens": [
+      "niveau-huile"
     ]
   },
   {
