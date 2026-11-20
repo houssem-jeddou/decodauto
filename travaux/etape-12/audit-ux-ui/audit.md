@@ -141,27 +141,23 @@ Ordre : effet sur le lecteur et sur le SEO, puis effort. Les maquettes sont dans
 construction réelle ; « avant » et « après » sont capturés à 375 × 667 et 1366 × 800, police chargée et police de
 secours.
 
-### P0. Liens du plan pour les pages peu liées (C1). Recommandée, en premier
-- **Changement** : huit paires de liens ajoutées au plan, donc à « À lire aussi » des deux pages :
-
-  | Paire | Justification |
-  |---|---|
-  | Changer la batterie ↔ Recharger la batterie | pages sœurs : le lecteur hésite entre les deux, et aucune ne lie l'autre |
-  | Huile 10W40 ↔ Huile 5W30 | la page 10W40 cite la 5W-30 (notice Toyota Yaris) |
-  | Huile 10W40 ↔ Huile 5W40 | même question, « quelle huile mettre » ; la page 10W40 n'a aujourd'hui aucun lien |
-  | Voyant de direction ↔ Contre-visite | la page du voyant a une section « Voyant de direction assistée au contrôle technique » |
-  | Voyant de direction ↔ Recharger la batterie | une cause que liste la page : charge de la batterie insuffisante |
-  | Liquide de refroidissement ↔ Liquide de frein | même geste : lire un niveau sous le capot, entre MIN et MAX |
-  | Liquide de refroidissement ↔ Niveau d'huile | même geste |
-  | Liquide de frein ↔ Niveau d'huile | même geste |
-
-- **Effet** : liens de « À lire aussi » de huile 10W40 0 → 2 ; 5W30, 5W40 et changer la batterie 1 → 2 ; liquide de
-  frein, liquide de refroidissement, voyant de direction et recharger la batterie 1 → 3.
-- **Laissées à un lien** : voyants AdBlue et airbag. Leur texte ne cite aucune page proche du plan ; le fil d'Ariane
-  mène à l'outil, leur page mère, et le menu (P1) au reste.
+### P0. Liens du plan pour les pages peu liées (C1). Recommandée, en premier : lot U0, PR #99
+- **Changement** : dix paires de liens ajoutées au plan, donc à « À lire aussi » des deux pages de chaque paire. La
+  liste, les justifications et les captures sont dans le paquet du lot (`travaux/etape-12/lot-u0/paquet-u0.md`, PR #99),
+  qui fait foi :
+  - Changer ↔ Recharger la batterie ; Huile 10W40 ↔ 5W30 et ↔ 5W40 ;
+  - Voyant de direction ↔ Contre-visite, ↔ Changer la batterie et ↔ Recharger la batterie ;
+  - Liquide de refroidissement ↔ Liquide de frein ; ces deux pages ↔ Niveau d'huile ;
+  - Voiture qui ne démarre pas ↔ Voyant AdBlue.
+- **Effet** : liens de « À lire aussi » de huile 10W40 0 → 2 ; 5W30, 5W40 et voyant AdBlue 1 → 2 ; liquide de frein,
+  liquide de refroidissement et les deux pages batterie 1 → 3 ; voyant de direction 1 → 4.
+- **Laissée à un lien** : la page du voyant airbag. Son texte ne cite aucune autre page du plan que la contre-visite,
+  déjà liée ; le fil d'Ariane mène à l'outil, sa page mère, et le menu (P1) au reste.
+- **Avec le lot** : la tuile des pastilles « À lire aussi » reste ronde quand le libellé passe à la ligne (écart à la
+  charte relevé par la revue du lot, déjà présent sur 17 pages).
 - **Règles** : procédure existante, sans demande de changement (décision du 23/10) : une paire se propose dans la pull
-  request du lot, avec sa ligne de justification, et Houssem la valide avec le lot. Dix pages en ligne changent de « À
-  lire aussi » : recette de l'étape 9 sur ces pages ; dates « Mis à jour le » inchangées (règle 14 b : ni texte, ni
+  request du lot, avec sa ligne de justification, et Houssem la valide avec le lot. Douze pages en ligne changent de
+  « À lire aussi » : recette de l'étape 9 sur ces pages ; dates « Mis à jour le » inchangées (règle 14 b : ni texte, ni
   conseil, ni source ne changent).
 
 ### P1. Menu du site et pied de page complet (C1). Recommandée
@@ -324,8 +320,8 @@ secours.
 - **Titles et descriptions** : à revoir avec les requêtes de J+30 (C9).
 
 ## 5. Ordre proposé
-1. **Lot U1** : P0 (paires du plan) et P1 (menu et pied de page). C'est le plus utile au lecteur et au maillage, et rien
-   ne bouge dans les encadrés.
+1. **Lot U0** : P0 (paires du plan et tuile ronde), PR #99, prêt à valider seul. **Lot U1** : P1 (menu et pied de
+   page), après la demande n° 40. C'est le plus utile au lecteur et au maillage, et rien ne bouge dans les encadrés.
 2. **Lot U2** : P2 (outil) et P5 (accueil), les deux grilles d'entrée du site.
 3. **Lot U3** : P6 (Open Graph) et P8 (dessins en fichiers), qui partagent la production des images.
 4. **Lot U4** : P4 (photos), seulement si Houssem en accepte.
@@ -340,7 +336,7 @@ Chaque lot suit le même chemin :
 ## 6. Décisions demandées à Houssem
 1. Les propositions retenues, et l'ordre des lots.
 2. Demande n° 40 (P1) : l'accepter, et le libellé « Mon voyant » sous 30 rem, ou un autre libellé court.
-3. P0 : les huit paires, validées avec le lot U1.
+3. P0 : les dix paires et la tuile ronde, validées avec le lot U0 (PR #99).
 4. P4 : accepter des photos sous licence libre, choisies une par une avec son accord.
 
 ## 7. Revue indépendante
@@ -372,7 +368,8 @@ Chaque lot suit le même chemin :
     deux colonnes.
 - **Ajouté ou réécrit après la revue, non relu** :
   - les volets par thème du menu et leur affichage ouvert sur ordinateur ;
-  - P0 et ses huit paires ;
+  - P0 : ses paires ont été relues ensuite par la revue du lot U0 (PR #99), qui en a ajouté deux et changé le côté de
+    déclaration de deux autres ;
   - la maquette et les mesures de P2 en variante légère ;
   - la maquette et les mesures de P3 en volet partiel ;
   - la maquette de P5 dans les cartes ;
