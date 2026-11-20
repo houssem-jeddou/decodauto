@@ -401,6 +401,9 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><p>L'huile : niveau</p>${pied}</body></html>`), ['TYPO-APOSTROPHE', 'TYPO-ESPACE']);
     assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><code>l'huile : x</code>${pied}</body></html>`), []);
     assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><p>Le message "STOP"</p>${pied}</body></html>`), ['TYPO-GUILLEMETS']);
+    // Nombre et unité séparés par une espace ordinaire (TYPO-UNITE, 20/11/2026) ; le texte passé par le gabarit passe.
+    assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><p>Attendez 30 minutes.</p>${pied}</body></html>`), ['TYPO-UNITE']);
+    assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><p>${texteHtml('Attendez 30 minutes, puis 12,6 volts.')}</p>${pied}</body></html>`), []);
     assert.deepEqual(codes(`<html><body>${mention.replace('rédigé par une IA', 'rédigé par un expert')}<h1>Titre</h1>${pied}</body></html>`), ['MENTION-IA-TEXTE']);
     assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1>${pied.replace('Signaler une erreur', 'Contact')}</body></html>`), ['SIGNALER-ERREUR-ABSENT']);
     // Le message de signalement porte l'adresse de la page : un lien vers une autre page est refusé.
