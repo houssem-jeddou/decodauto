@@ -14,8 +14,9 @@
 # - Revue de la PR n° 79 (M4) puis revue indépendante de l'exemple (17/11, « à corriger », rien de bloquant) : corrections
 #   B1 à B10 du pilotage (paquet, §4).
 # - Illustration : `niveau-huile-jauge`, dessinée pour cette page (travaux/etape-11/generer-illustrations.py).
-# - Révision du 18/11/2026 (étape 12, travaux/etape-12/niveau-huile/paquet-revision.md ; brouillon, jamais validé tant que
-#   l'empreinte n'est pas posée) : notice Toyota Yaris p. 247-249 lue (PDF officiel transmis par Houssem le 17/11) ;
+# - Révision du 18/11/2026 (étape 12, travaux/etape-12/niveau-huile/paquet-revision.md), validée par Houssem le 20/11/2026
+#   à 20 h 47 (« je te donne le go pour valider la page « niveau d’huile » (PR #93 ») ; empreinte posée après la
+#   validation : notice Toyota Yaris p. 247-249 lue (PDF officiel transmis par Houssem le 17/11) ;
 #   ligne 3 « consommation ou baisse anormale » (Renault p. 330 et 333, Dacia p. 294, Peugeot p. 165 ; Renault p. 330 et
 #   Dacia p. 294 : relevé à l'écran du 17/11, travaux/etape-11/textes/releve-sources.md, §11) ; durée de la fiche du
 #   tutoriel ; lignes Renault et Dacia du tableau (témoin de pression allumé sur route, p. 137-138 et p. 111) ; corrections
@@ -174,10 +175,10 @@ sources:
   - notice-toyota-yaris
 auteur: houssem-jeddou
 date_publication: 2026-11-17
-date_modification: 2026-11-18
-date_revue: 2026-11-18
-prochaine_revue: 2027-11-18
-validation: 911900d356f3cd0609bdf826a2714439dc0ab81cefa072c72ca7bcb4545979dc
+date_modification: 2026-11-20
+date_revue: 2026-11-20
+prochaine_revue: 2027-11-20
+validation: 9c0f346579788d0ac17dd2a200fed4992360f4e370e5ae5294404cab33339bf5
 ---
 
 ## Vérifier le niveau d'huile moteur, étape par étape

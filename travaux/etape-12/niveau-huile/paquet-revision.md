@@ -140,6 +140,12 @@ Houssem du 18/11 à 21 h 45, servie en local ; Chrome, police Outfit chargée, v
   d'après trois notices de constructeurs (Dacia Sandero 3, Peugeot 208 et Renault Clio 5 phase 2) ».
 
 ## 5. Validation de Houssem
+**Validé par Houssem le 20/11/2026 à 20 h 47** (heure de Tunis), mot pour mot : « je te donne le go pour valider la page
+« niveau d’huile » (PR #93 ». Il valide ainsi la page telle que présentée le 18/11 (captures et ligne ci-dessous,
+envoyées avec le paquet). Empreinte posée ensuite (`9c0f3465…`, calculée par les fonctions de
+`scripts/empreinte.ts`, méthode vérifiée sur cinq empreintes déjà posées) ; « Mis à jour le » au 20/11, jour de la mise
+en ligne.
+
 > « Je valide la révision de la page « niveau d'huile » : les lignes 1 et 2 inchangées avec les citations Toyota et leurs
 > lignes d'écart (dont le classement de « contactez un réparateur » de Toyota au niveau le plus prudent), la ligne 3
 > nouvelle (plus de 0,5 litre aux 1 000 km après le rodage, ou baisse anormale) à Oui, avec précautions et À faire dans les
