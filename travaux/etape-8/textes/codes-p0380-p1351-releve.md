@@ -83,3 +83,30 @@ La piste « page P0380 seule » est abandonnée le 15/11 : faute de document qui
 peut pas avoir sa ligne d'encadré. Demande de changement n° 28 : l'étape 8 se ferme sans le lot 4b, qui rouvre quand un
 document admis cite un voyant avec P0380 (et, pour P1351, quand un document admis donne son sens chez Peugeot ou
 Citroën et le voyant qui s'allume).
+
+## Recherche du 20/11/2026 (nuit, étape 12, cinquième exception)
+Reprise demandée par Houssem le 20/11 (« on réalise toutes les pages de tous les lots »). Mêmes règles (charte §2.2).
+- **P0380** :
+  - bulletins publiés par la NHTSA (recherche `P0380` sur static.nhtsa.gov) : seuls la newsletter Volkswagen déjà lue
+    (P0380 sans témoin) et un bulletin General Motors PIP5094 (2013, liste de codes à vérifier avant tout essai de
+    circuit, sans témoin) citent P0380 ; les autres bulletins de bougies citent le témoin MIL avec d'autres codes
+    (P0671 à P0678, P066A à P066F, P06C5 à P06C8, P24A0 et P26A0), pas avec P0380 ;
+  - bulletin General Motors 07057 (2008, Duramax LB7, « illumination of the MIL ») : trouvé seulement en copie sur des
+    forums et chez TrueDelta (référence NHTSA 10024154) ; copie officielle introuvable sur static.nhtsa.gov et par
+    l'interface de la NHTSA (api.nhtsa.gov, essais du 20/11 sans résultat) : toujours non retenu ;
+  - pages de sites d'aide (obd-codes.com, troublecodes.net, go-parts.com, autodtcs.com) et forums : exclus (charte §2.2).
+- **P1351** : sites de vente, blogs, forums, une réponse générée par une IA (elektroda.com), une base de données de
+  codes (tuningbot.com, « fiabilité 72 % ») et une liste de codes Peugeot en PDF chez un hébergeur tiers : aucun document
+  admis ; un forum cite un bulletin Citroën (C5 X7, « allumage du voyant de diagnostic moteur » avec plusieurs codes),
+  introuvable à la source.
+- **Conclusion du 20/11** : les conditions de reprise de la demande n° 28 ne sont toujours pas remplies ; les deux pages
+  restent non rédigeables. Pistes restantes : copie officielle du bulletin GM 07057 (P0380, voyant MIL, Duramax LB7,
+  États-Unis : faible intérêt pour un lecteur français), documentation publique d'un éditeur d'outil de diagnostic
+  couvrant PSA (P1351).
+
+- **Complément du 20/11 (vers 21 h 40)** : bulletins publiés par la NHTSA (static.nhtsa.gov) sur les bougies de
+  préchauffage avec le voyant MIL allumé, mais pour d'autres codes (GM : P06C5 à P06CC, P066A, P1338 et suivants ;
+  autres marques : P0671 à P0676, P052F) ; aucun ne cite P0380, et la copie officielle du bulletin GM 07057 reste
+  introuvable par la recherche. Un manuel d'atelier Isuzu (moteur 4JA1, véhicule utilitaire) cite le MIL avec P0380,
+  mais seulement chez un hébergeur tiers (manualslib) : provenance non vérifiable, marque hors des marques de
+  référence ; non retenu. Conclusion inchangée.
