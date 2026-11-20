@@ -1,0 +1,320 @@
+[
+ {
+  "chemin": "/batterie-voiture/",
+  "avant": 2505,
+  "apres": 2206,
+  "gain": 299,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-4",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/batterie-voiture/changer/",
+  "avant": 1619,
+  "apres": 1450,
+  "gain": 169,
+  "ancres": []
+ },
+ {
+  "chemin": "/batterie-voiture/recharger/",
+  "avant": 1719,
+  "apres": 1573,
+  "gain": 146,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-3",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/bruit-moteur/",
+  "avant": 2370,
+  "apres": 2165,
+  "gain": 205,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-2",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "avant": 1199,
+  "apres": 1068,
+  "gain": 131,
+  "ancres": []
+ },
+ {
+  "chemin": "/codes-defaut/p0299/",
+  "avant": 1202,
+  "apres": 1071,
+  "gain": 131,
+  "ancres": []
+ },
+ {
+  "chemin": "/codes-defaut/p0420/",
+  "avant": 1202,
+  "apres": 1071,
+  "gain": 131,
+  "ancres": []
+ },
+ {
+  "chemin": "/contre-visite-controle-technique/",
+  "avant": 1715,
+  "apres": 1527,
+  "gain": 188,
+  "ancres": []
+ },
+ {
+  "chemin": "/fumee-echappement/",
+  "avant": 1694,
+  "apres": 1526,
+  "gain": 168,
+  "ancres": []
+ },
+ {
+  "chemin": "/huile-moteur/",
+  "avant": 2153,
+  "apres": 1984,
+  "gain": 169,
+  "ancres": []
+ },
+ {
+  "chemin": "/huile-moteur/10w40/",
+  "avant": 1019,
+  "apres": 944,
+  "gain": 75,
+  "ancres": []
+ },
+ {
+  "chemin": "/huile-moteur/5w30/",
+  "avant": 1327,
+  "apres": 1234,
+  "gain": 93,
+  "ancres": []
+ },
+ {
+  "chemin": "/huile-moteur/5w40/",
+  "avant": 1019,
+  "apres": 944,
+  "gain": 75,
+  "ancres": []
+ },
+ {
+  "chemin": "/huile-moteur/verifier-niveau/",
+  "avant": 3023,
+  "apres": 2624,
+  "gain": 399,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-1",
+    "visible": true
+   },
+   {
+    "id": "da-notices-ligne-2",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/liquide-de-frein/",
+  "avant": 2141,
+  "apres": 1936,
+  "gain": 205,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-1",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/liquide-de-refroidissement/",
+  "avant": 2815,
+  "apres": 2497,
+  "gain": 318,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-1",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/loi-montagne/",
+  "avant": 1624,
+  "apres": 1549,
+  "gain": 75,
+  "ancres": []
+ },
+ {
+  "chemin": "/moteur-puretech/",
+  "avant": 2805,
+  "apres": 2523,
+  "gain": 282,
+  "ancres": []
+ },
+ {
+  "chemin": "/moteur-qui-surchauffe/",
+  "avant": 2448,
+  "apres": 2187,
+  "gain": 261,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-6",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/nettoyer-fap/",
+  "avant": 2364,
+  "apres": 2105,
+  "gain": 259,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-4",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/perte-de-puissance-voiture/",
+  "avant": 3371,
+  "apres": 3037,
+  "gain": 334,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-5",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/pression-des-pneus/",
+  "avant": 1383,
+  "apres": 1290,
+  "gain": 93,
+  "ancres": []
+ },
+ {
+  "chemin": "/usure-des-pneus/",
+  "avant": 2198,
+  "apres": 1975,
+  "gain": 223,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-1",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/voiture-ne-demarre-pas/",
+  "avant": 2656,
+  "apres": 2337,
+  "gain": 319,
+  "ancres": []
+ },
+ {
+  "chemin": "/voiture-qui-broute/",
+  "avant": 2451,
+  "apres": 2171,
+  "gain": 280,
+  "ancres": [
+   {
+    "id": "da-notices-ligne-3",
+    "visible": true
+   }
+  ]
+ },
+ {
+  "chemin": "/voyants/",
+  "avant": 1823,
+  "apres": 1654,
+  "gain": 169,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/abs-esp/",
+  "avant": 2320,
+  "apres": 2095,
+  "gain": 225,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/adblue/",
+  "avant": 2761,
+  "apres": 2479,
+  "gain": 282,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/airbag/",
+  "avant": 1416,
+  "apres": 1228,
+  "gain": 188,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/batterie/",
+  "avant": 1260,
+  "apres": 1110,
+  "gain": 150,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/direction/",
+  "avant": 1670,
+  "apres": 1464,
+  "gain": 206,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/fap/",
+  "avant": 1999,
+  "apres": 1773,
+  "gain": 226,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/frein/",
+  "avant": 1648,
+  "apres": 1516,
+  "gain": 132,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/huile/",
+  "avant": 1979,
+  "apres": 1754,
+  "gain": 225,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "avant": 1961,
+  "apres": 1773,
+  "gain": 188,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/prechauffage/",
+  "avant": 1776,
+  "apres": 1569,
+  "gain": 207,
+  "ancres": []
+ },
+ {
+  "chemin": "/voyants/pression-pneus/",
+  "avant": 1646,
+  "apres": 1477,
+  "gain": 169,
+  "ancres": []
+ }
+]
