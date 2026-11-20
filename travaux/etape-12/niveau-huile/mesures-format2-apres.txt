@@ -1,0 +1,10 @@
+/huile-moteur/verifier-niveau/ | 320 | chargée | 514 | 644 | 772 | 2561 | 3547 | oui | 5089 | 15701 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | chargée | 467 | 582 | 689 | 2210 | 3044 | oui | 4454 | 13700 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 1366 | chargée | 337 | 404 | 470 | 1339 | 1793 | oui | 2907 | 8528 | oui | 1366 | 0
+/huile-moteur/verifier-niveau/ | 320 | secours | 514 | 644 | 772 | 2561 | 3547 | oui | 5089 | 15752 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | secours | 492 | 607 | 714 | 2234 | 3068 | oui | 4478 | 13724 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 1366 | secours | 337 | 404 | 470 | 1339 | 1793 | oui | 2907 | 8528 | oui | 1366 | 0
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police chargée) : illustration à 3044 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 2210 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police chargée) : arbre de décision ou étapes à 4454 px, au-delà de six écrans (4002 px) : décision de Houssem sur captures (demande n° 32)
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police de secours) : illustration à 3068 px, au-delà de trois écrans (2001 px) ; raison : encadré de 5 ligne(s), bas à 2234 px (règle 2i, demande n° 32 : à dire dans le paquet)
+SIGNALÉ [FORMAT2-MESURES] /huile-moteur/verifier-niveau/ (police de secours) : arbre de décision ou étapes à 4478 px, au-delà de six écrans (4002 px) : décision de Houssem sur captures (demande n° 32)

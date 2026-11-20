@@ -1,0 +1,18 @@
+{
+ "375-chargee": {
+  "lignes": 5,
+  "largeur": 375
+ },
+ "375-secours": {
+  "lignes": 5,
+  "largeur": 375
+ },
+ "1366-chargee": {
+  "lignes": 5,
+  "largeur": 1366
+ },
+ "1366-secours": {
+  "lignes": 5,
+  "largeur": 1366
+ }
+}

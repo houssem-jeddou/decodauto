@@ -1,0 +1,6 @@
+/huile-moteur/verifier-niveau/ | 320 | chargée | 514 | 644 | 772 | 2149 | 2903 | oui | 4259 | 13456 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | chargée | 467 | 582 | 689 | 1873 | 2513 | oui | 3760 | 11930 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 1366 | chargée | 337 | 404 | 470 | 1152 | 1505 | oui | 2549 | 7416 | oui | 1366 | 0
+/huile-moteur/verifier-niveau/ | 320 | secours | 514 | 644 | 772 | 2149 | 2903 | oui | 4259 | 13507 | oui | 320 | 0
+/huile-moteur/verifier-niveau/ | 375 | secours | 492 | 607 | 714 | 1897 | 2537 | oui | 3785 | 11955 | oui | 375 | 0
+/huile-moteur/verifier-niveau/ | 1366 | secours | 337 | 404 | 470 | 1152 | 1505 | oui | 2549 | 7416 | oui | 1366 | 0
