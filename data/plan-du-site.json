@@ -734,8 +734,7 @@
     ],
     "parent": "voyants",
     "liens": [
-      "contre-visite-controle-technique",
-      "batterie-recharger"
+      "contre-visite-controle-technique"
     ]
   },
   {
@@ -958,7 +957,8 @@
     "liens": [
       "batterie-voiture",
       "batterie-recharger",
-      "batterie-changer"
+      "batterie-changer",
+      "voyant-adblue"
     ]
   },
   {
@@ -1175,7 +1175,8 @@
     ],
     "parent": "batterie-voiture",
     "liens": [
-      "batterie-recharger"
+      "batterie-recharger",
+      "voyant-direction"
     ]
   },
   {
@@ -1204,7 +1205,10 @@
       "recharger batterie 12v toyota hybride",
       "recharger batterie 12v toyota yaris hybride"
     ],
-    "parent": "batterie-voiture"
+    "parent": "batterie-voiture",
+    "liens": [
+      "voyant-direction"
+    ]
   },
   {
     "id": "nettoyer-fap",
