@@ -125,7 +125,7 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
 1. **Mention en tête** (section 7), avant le H1, sur toutes les pages, socle compris.
 2. **Fil d'Ariane**, tiré du plan du site.
 3. **H1.**
-4. **Encadré de décision** : premier bloc après le H1 ; rien de masqué ; aucune publicité avant ni dedans ; aucun texte, image ni média entre le H1 et l'encadré (R9-ENCADRE-POSITION) ; dedans, une icône ou un pictogramme seulement s'il double un texte écrit (verdict, nom du voyant). Il affiche la question de décision, formulée avec les mots du lecteur (« Puis-je rouler avec le voyant moteur allumé ? »), une ligne par situation (situation, verdict, urgence, action, écart entre marques, nombre de notices) et le coût probable (plage calculée, risque si l'on continue, montants et leurs dates). Sur la seule page outil (demande de changement n° 12), une phrase et un lien vers la liste s'affichent entre la question et les lignes, qui ne sont que des exemples.
+4. **Encadré de décision** : premier bloc après le H1 ; rien de masqué ; aucune publicité avant ni dedans ; aucun texte, image ni média entre le H1 et l'encadré (R9-ENCADRE-POSITION) ; dedans, une icône ou un pictogramme seulement s'il double un texte écrit (verdict, nom du voyant). Il affiche la question de décision, formulée avec les mots du lecteur (« Puis-je rouler avec le voyant moteur allumé ? »), une ligne par situation (situation, verdict, urgence, action, écart entre marques, nombre de notices) et le coût probable (plage calculée, risque si l'on continue, montants et leurs dates). Sur la seule page outil (demande de changement n° 12), une phrase et un lien vers la liste s'affichent entre la question et les lignes, qui ne sont que des exemples. Au format 2 (demande de changement n° 41) : la phrase seule, une seule ligne d'exemple, puis la grille des dessins de toutes les couleurs, avant le coût ; chaque tuile mène à sa carte de la liste et remplace le lien.
 5. **Signature et dates** (section 7) : responsable éditorial, date de modification réelle et date de la dernière revue.
 6. **Ligne de transparence** (section 7), avec le lien « Méthode ».
 7. **Corps**, selon le type de page (08 §2) :
@@ -137,7 +137,7 @@ Dans cet ordre (contrôles R9 pour l'encadré) :
      s'il est dans la deuxième, la première est un seul paragraphe ;
    - pages fluides : rôle, niveau, appoint, marche à suivre ;
    - pages pneus et obligations (modèle validé avec le livrable 6.6c) : fiche « Le texte en bref », en haut de page (texte de référence et où le lire ; selon le sujet, période et zones, ou défaillances et contre-visite), puis texte rédigé : ce qui est exigé (avec l'élément unique quand c'est un tableau du texte, marqué `{{tableau}}`), questions des lecteurs, marche à suivre ;
-   - page outil voyants (modèle validé avec le livrable 8.1) : outil (filtre par couleur, index des dessins, liste par couleur), puis texte rédigé (questions des lecteurs), pages enfants et liées. La liste vient avant le texte : le lecteur cherche d'abord son voyant ;
+   - page outil voyants (modèle validé avec le livrable 8.1) : outil (filtre par couleur, index des dessins, liste par couleur ; au format 2, l'index des dessins est dans l'encadré, demande de changement n° 41), puis texte rédigé (questions des lecteurs), pages enfants et liées. La liste vient avant le texte : le lecteur cherche d'abord son voyant ;
    - dans tous les cas : l'élément unique (arbre de décision, tableau, outil ou photo réelle) et les questions des lecteurs relevées sur Google (« peut-on rouler », « combien de kilomètres », « comment enlever le voyant »…) ; sur les pages qui ont des causes (voyant, code défaut, panne), chaque cause avec sa tranche de coût.
 8. **Sources** : toute source citée sur la page (lignes de la base, lignes saisies, coût, texte de référence), avec son titre, son éditeur, la page ou la section, et sa date de consultation. Sur la page outil, la section liste les sources de toutes les lignes de la liste et dit que les pages citées sont sous chaque ligne.
 9. **Lien « Signaler une erreur »**, puis, dès que la page des mentions légales est construite, le lien « Mentions légales et confidentialité » vers sa section `#confidentialite` (validé avec le livrable 7.2) : en pied de toutes les pages, socle compris.
@@ -146,9 +146,8 @@ Les emplacements publicitaires, quand il y en aura, ne sont jamais avant l'encad
 
 **Au format 2** (demande de changement n° 30, charte graphique §4) : mention en tête, fil d'Ariane, H1, encadré de
 décision, signature, ligne de transparence, bloc « Notices / Base du coût », illustration, sommaire, corps du modèle,
-tableau des notices, emplacement publicitaire, pages liées, « Sources » repliée. Sur la page outil, le renvoi vers la liste est un bouton, sans icône
-(point 4 ci-dessus : une icône seulement si elle double un texte), et l'introduction de l'outil tient en deux paragraphes,
-sans changer un mot.
+tableau des notices, emplacement publicitaire, pages liées, « Sources » repliée. Sur la page outil, la grille des dessins de l'encadré tient lieu de renvoi vers la liste (demande de changement n° 41 ; le
+bouton de la demande n° 30 est retiré), et l'introduction de l'outil tient en deux paragraphes, sans changer un mot.
 
 Repère du verdict : seulement sous un H2 qui pose la question d'une seule ligne de l'encadré ; une section qui mêle
 plusieurs cas n'en a pas. Le texte nomme la marque et le modèle ; ni « Verdict retenu », ni « consigne retenue », ni

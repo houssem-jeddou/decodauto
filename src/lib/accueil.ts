@@ -7,7 +7,7 @@
 import { texteHtml, attributHtml } from './html.ts';
 import { DEVISE_DU_SITE } from './site.ts';
 import { ID_OUTIL_VOYANTS } from './plan.ts';
-import { LIBELLES_PICTOGRAMMES } from './pictogrammes.ts';
+import { LIBELLES_PICTOGRAMMES, libelleCoupable } from './pictogrammes.ts';
 import { ancreLigneOutil } from './outil-voyants.ts';
 import { LIBELLES_THEMES, THEMES, type Theme } from '../schemas/listes.ts';
 
@@ -156,7 +156,7 @@ export function accueilFormat2Html(donnees: DonneesAccueilFormat2): string {
   const [premier, ...suite] = PARAGRAPHES_ACCUEIL;
   const tete = `<div class="tete hero">${donnees.mention}<div class="hero-int"><div class="hero-texte"><h1>${texteHtml(TITRE_ACCUEIL)}</h1><p class="chapo">${texteHtml(premier ?? '')}</p></div>${donnees.illustration ?? ''}</div></div>`;
   const outil = donnees.pages.find((p) => p.id === ID_OUTIL_VOYANTS);
-  const cartes = donnees.grille.map((v) => `<li><a href="${attributHtml(v.adresse)}">${donnees.tuile(v.pictogramme, v.couleur)}<span>${texteHtml(v.libelle)}</span></a></li>`).join('');
+  const cartes = donnees.grille.map((v) => `<li><a href="${attributHtml(v.adresse)}">${donnees.tuile(v.pictogramme, v.couleur)}<span>${texteHtml(libelleCoupable(v.libelle))}</span></a></li>`).join('');
   const voyants =
     donnees.grille.length > 0 || outil !== undefined
       ? [
@@ -174,7 +174,7 @@ export function accueilFormat2Html(donnees: DonneesAccueilFormat2): string {
     const id = ancreThemeAccueil(theme);
     // Lot U2 (P5) : phrase de présentation du thème, puis ses pages en pastilles (charte-b.css, « Accueil »).
     const presentation = `<p class="theme-intro">${texteHtml(PRESENTATIONS_THEMES[theme])}</p>`;
-    return [`<section class="theme" data-accueil-theme="${theme}" aria-labelledby="${id}"><h2 id="${id}">${texteHtml(LIBELLES_THEMES[theme])}</h2>${presentation}<ul class="pages-du-theme">${pages.map((p) => `<li><a href="${attributHtml(p.adresse)}">${texteHtml(p.libelle)}</a></li>`).join('')}</ul></section>`];
+    return [`<section class="theme" data-accueil-theme="${theme}" aria-labelledby="${id}"><h2 id="${id}">${texteHtml(LIBELLES_THEMES[theme])}</h2>${presentation}<ul class="pages-du-theme" role="list">${pages.map((p) => `<li><a href="${attributHtml(p.adresse)}">${texteHtml(p.libelle)}</a></li>`).join('')}</ul></section>`];
   });
   const aPropos = donnees.aPropos !== undefined ? ` <span data-accueil-a-propos><a href="${attributHtml(donnees.aPropos.adresse)}">${texteHtml(`${donnees.aPropos.libelle} : qui édite le site et comment`)}</a></span>` : '';
   const guide = `<section class="theme theme-guide" data-accueil-guide aria-labelledby="da-accueil-guide"><h2 id="da-accueil-guide">${texteHtml(ACCUEIL_FORMAT2.titreGuide)}</h2>${suite.map((p) => `<p>${texteHtml(p)}${aPropos}</p>`).join('')}</section>`;
