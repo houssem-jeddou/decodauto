@@ -11,11 +11,14 @@ import { adresseDepuisFichier } from '../../src/lib/site.ts';
 import { FICHIER_LOTS_FORMAT2, FICHIER_VAGUES_OUVERTES, chargerLotsFormat2, chargerVaguesOuvertes, controlerFormatDesVagues, controlerVaguesOuvertes } from './vagues.ts';
 import { controlerFavicon } from './favicon.ts';
 import { controlerAdsense } from './adsense.ts';
+import { controlerPartage } from './partage.ts';
+import { controlerImagesEnFichiers } from './images-fichiers.ts';
+import { pagesImagesEnFichiers } from '../../src/lib/images-fichiers.ts';
 import { DOSSIER_PAGES_DEMO_FORMAT2, constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
 import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
 import { chargerIllustrations } from './demo-format2.ts';
-import { constatsLibellesPictogrammes } from '../../src/lib/pictogrammes.ts';
-import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
+import { constatsCoupuresLibelles, constatsLibellesPictogrammes } from '../../src/lib/pictogrammes.ts';
+import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerMenuEtPied, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
   constats: Constat[];
@@ -172,6 +175,7 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   }
   // Libellé de chaque pictogramme (grille de l'accueil au format 2) : un par fichier de src/pictogrammes (PICTO-LIBELLE).
   constats.push(...constatsLibellesPictogrammes((await chargerPictogrammes(racine)).map((p) => p.id)));
+  constats.push(...constatsCoupuresLibelles());
   // Garde-fou : une page de la construction de démonstration du format 2 n'est jamais dans un site contrôlé comme réel.
   if (brouillonFormat2 === undefined) {
     for (const chemin of await listerFichiers(dist, '.html')) constats.push(...constatsDemoPubliee(await readFile(chemin, 'utf8'), relative(dist, chemin).split('\\').join('/')));
@@ -180,6 +184,8 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   const adresseOutil = construitesEditoriales.find((p) => p.id === ID_OUTIL_VOYANTS) !== undefined ? contexte.plan.get(ID_OUTIL_VOYANTS)?.adresse : undefined;
   const adresseAPropos = contexte.plan.get(PAGE_METHODE)?.adresse;
   const aProposConstruite = adresseAPropos !== undefined && (await listerFichiers(dist, '.html')).some((c) => adresseDepuisFichier(relative(dist, c).split('\\').join('/')) === adresseAPropos);
+  // Pages éditoriales construites, dans l'ordre du plan : liste de l'accueil et du menu du site.
+  const pagesListeesDuSite = [...contexte.plan.values()].filter((ligne) => construitesEditoriales.some((p) => p.id === ligne.id)).map((ligne) => ({ adresse: ligne.adresse, theme: ligne.theme }));
   constats.push(
     ...(await controlerAccueil(dist, {
       pages: construitesEditoriales.flatMap((p) => {
@@ -190,6 +196,8 @@ export async function controlerSite(options: { racine: string; dist: string; auj
       aPropos: aProposConstruite ? adresseAPropos : undefined,
     })),
   );
+  // Menu du site et liens du pied de page (demande de changement n° 40, lot U1), sur chaque page au format 2.
+  constats.push(...(await controlerMenuEtPied(dist, { pages: pagesListeesDuSite, aPropos: aProposConstruite ? adresseAPropos : undefined })));
   constats.push(...(await controlerFixturesNonPubliees(dist)));
   constats.push(...(await controlerWrangler(racine)));
   // Favicon et icône de la marque (premier lot) : liens de chaque page et fichiers servis (FAVICON-*).
@@ -197,6 +205,12 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   // AdSense, demande de changement n° 38, temps 1 : balise d'association et ads.txt générés depuis config/adsense.json,
   // aucune publicité affichée (ADSENSE-*).
   constats.push(...(await controlerAdsense(racine, dist)));
+  // Balises et images de partage, lot U3 de l'audit UX/UI (PARTAGE-*) : une image par page éditoriale, celle de la marque
+  // ailleurs, aucune sur la 404.
+  const idsParAdresse = new Map([...contexte.plan.values()].map((ligne) => [ligne.adresse, ligne.id]));
+  constats.push(...(await controlerPartage(dist, idsParAdresse)));
+  // Pilote des images en fichiers (demande de changement n° 43) : pages du pilote, rendu, fichiers servis (IMAGES-FICHIERS-*).
+  constats.push(...(await controlerImagesEnFichiers(racine, dist, pagesImagesEnFichiers(), idsParAdresse)));
 
   return { constats, informations, pagesEditoriales: pagesLues.length };
 }

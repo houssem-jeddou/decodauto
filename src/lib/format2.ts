@@ -49,8 +49,10 @@ import {
   type SourceDuRegistre,
 } from './composants.ts';
 import { ADRESSE_SIGNALEMENT, PARTIES_DU_NOM } from './site.ts';
+import { ancreThemeAccueil } from './accueil.ts';
+import { dimensionsDessin, imgIllustration, imgPictogramme } from './images-fichiers.ts';
 import { logoEnLigne } from './marque.ts';
-import { ANCRE_CONFIDENTIALITE, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR } from './charte.ts';
+import { ANCRE_CONFIDENTIALITE, ANCRE_METHODE, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_LIEN_METHODE, LIBELLE_SIGNALER_ERREUR } from './charte.ts';
 import { dateAffichee, datesAffichees, fourchetteAffichee, libelleRisque, trancheDesPieces, type CoutResolu, type DonneesCouts } from './cout.ts';
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import { citation, modeleTableauNotices, CLASSE_CITATION_NOTICE, FIN_TABLEAU_NOTICES, TITRE_TABLEAU_NOTICES, COLONNE_NOTICE, COLONNE_NIVEAU, LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, type RangeeNotice, type TableauVoyant } from './tableau-notices.ts';
@@ -58,7 +60,7 @@ import { emplacementPub } from './emplacements-pub.ts';
 import { ID_OUTIL_VOYANTS, indexerPlan } from './plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { GRILLE_COUTS, LIBELLE_SELON_LE_VOYANT, LIBELLES_FOURCHETTES } from '../schemas/cout.ts';
-import type { TypePage, Verdict } from '../schemas/listes.ts';
+import { LIBELLES_THEMES, THEMES, type Theme, type TypePage, type Verdict } from '../schemas/listes.ts';
 import type { DonneesSite } from './gabarit.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
 import type { CitationDuTexte } from './modeles.ts';
@@ -69,6 +71,12 @@ import type { CitationDuTexte } from './modeles.ts';
  */
 export const FORMAT2 = {
   boutonVoyant: 'Trouver mon voyant',
+  /** Libellé visible du bouton sous 30 rem ; son nom accessible reste `boutonVoyant` (demande de changement n° 40). */
+  boutonVoyantCourt: 'Mon voyant',
+  /** Menu du site (demande de changement n° 40) : libellé visible, nom du bouton, nom de la navigation. */
+  menu: 'Menu',
+  menuNom: 'Menu du site',
+  menuNavigation: 'Toutes les pages',
   lienVotreMarque: 'Votre marque',
   /** Lu par les lecteurs d'écran avant la ligne d'écart, sans être affiché (pilote, règle 2b). */
   selonLaMarque: 'Selon la marque : ',
@@ -123,6 +131,9 @@ export const BALANCE =
 
 /** Tuile ronde d'un voyant « allumé » dans sa couleur de la base (charte graphique §1, point 2). Décorative. */
 export const tuile = (pictogramme: string, couleur: string): string => `<span class="tuile" data-couleur="${attributHtml(couleur)}">${pictogrammeDecoratif(pictogramme)}</span>`;
+/** Tuile d'une page du pilote des images en fichiers (demande de changement n° 43) : image du fichier de la paire, décorative. */
+export const tuileEnFichier = (pictogramme: string, couleur: string): string =>
+  `<span class="tuile" data-couleur="${attributHtml(couleur)}" data-pictogramme="${attributHtml(pictogramme)}">${imgPictogramme(pictogramme, couleur)}</span>`;
 
 // ---- Bandeau, tête de page, pied ---------------------------------------------------------------------
 
@@ -131,13 +142,59 @@ export const tuile = (pictogramme: string, couleur: string): string => `<span cl
  * bouton « Trouver mon voyant » vers la page outil, seulement si elle est construite. La mention en tête n'y est pas :
  * elle ouvre la tête de page, dans `main`.
  */
-export function bandeauFormat2(entree: { adresseOutil?: string | undefined; pictogrammeBouton?: string | undefined }): string {
+export function bandeauFormat2(entree: { adresseOutil?: string | undefined; pictogrammeBouton?: string | undefined; menu?: string | undefined }): string {
   const [premiere, ...suite] = PARTIES_DU_NOM;
   const nom = `${premiere}${suite.map((p) => `<span>${p}</span>`).join('')}`;
   const icone = entree.pictogrammeBouton !== undefined ? pictogrammeDecoratif(entree.pictogrammeBouton).replace('<svg ', '<svg width="18" height="18" ') : '';
-  const bouton = entree.adresseOutil !== undefined ? `<a class="bouton-voyant" href="${attributHtml(entree.adresseOutil)}" data-bouton-voyant>${icone}${texteHtml(FORMAT2.boutonVoyant)}</a>` : '';
-  return `<div class="bandeau-int"><a class="nom-du-site" href="/">${logoEnLigne(32)}<span class="nom-texte">${nom}</span></a>${bouton}</div>`;
+  // Demande de changement n° 40 : sous 30 rem, le libellé visible devient « Mon voyant » (charte-b.css) ; le nom accessible
+  // reste « Trouver mon voyant » (aria-label), qui contient le libellé visible (WCAG 2.5.3).
+  const libelles = `<span class="bouton-libelle-long">${texteHtml(FORMAT2.boutonVoyant)}</span><span class="bouton-libelle-court" aria-hidden="true">${texteHtml(FORMAT2.boutonVoyantCourt)}</span>`;
+  const bouton =
+    entree.adresseOutil !== undefined ? `<a class="bouton-voyant" href="${attributHtml(entree.adresseOutil)}" aria-label="${attributHtml(FORMAT2.boutonVoyant)}" data-bouton-voyant>${icone}${libelles}</a>` : '';
+  // Menu et bouton forment un groupe aligné à droite, sur la ligne du nom ou, avec une police large, sur la suivante (revue du
+  // lot U1, M2).
+  const actions = `${entree.menu ?? ''}${bouton}`;
+  return `<div class="bandeau-int"><a class="nom-du-site" href="/">${logoEnLigne(32)}<span class="nom-texte">${nom}</span></a>${actions !== '' ? `<div class="bandeau-actions">${actions}</div>` : ''}</div>`;
 }
+
+/** Page que listent le menu du site et l'accueil : adresse, libellé court et thème (accueil.ts, pagesListees). */
+export interface PageDuMenu {
+  adresse: string;
+  libelle: string;
+  theme: Theme;
+}
+
+/**
+ * Menu du site (demande de changement n° 40, lot U1) : un `details` du bandeau, sans script, qui ouvre la liste des pages
+ * construites, par thème, dans l'ordre et sous les titres de l'accueil (même liste : `pagesListees`, générée depuis le
+ * plan ; contrôles MENU-*). Au téléphone et sur tablette, un volet (`details`) par thème, avec son nombre de pages ; la
+ * page affichée porte aria-current="page" et son thème est le seul volet ouvert (aucun sur l'accueil, le socle et la 404).
+ * Sur ordinateur, les mêmes listes en quatre colonnes titrées, toujours ouvertes (`data-menu-colonne`) : la feuille de style
+ * n'affiche que l'une des deux formes, si bien qu'un lecteur d'écran n'entend jamais « réduit » pour une liste affichée
+ * (revue du lot U1, I2). Icône du bouton dessinée en `currentColor` (visible avec les couleurs forcées de Windows).
+ * Vide si aucune page n'est construite.
+ */
+export function menuFormat2(entree: { pages: readonly PageDuMenu[]; adressePage?: string | undefined }): string {
+  const themes = THEMES.flatMap((theme) => {
+    const pages = entree.pages.filter((p) => p.theme === theme);
+    if (pages.length === 0) return [];
+    const ouvert = pages.some((p) => p.adresse === entree.adressePage);
+    const liens = pages.map((p) => `<li><a href="${attributHtml(p.adresse)}"${p.adresse === entree.adressePage ? ' aria-current="page"' : ''}>${texteHtml(p.libelle)}</a></li>`).join('');
+    const nombre = `<span class="menu-nombre">${pages.length}<span class="vh">${pages.length > 1 ? ' pages' : ' page'}</span></span>`;
+    const titre = `${texteHtml(LIBELLES_THEMES[theme])} ${nombre}`;
+    const id = `da-menu-${theme}`;
+    return [
+      {
+        volet: `<details class="menu-theme" data-menu-theme="${theme}"${ouvert ? ' open' : ''}><summary>${titre}</summary><ul>${liens}</ul></details>`,
+        colonne: `<div class="menu-colonne" data-menu-colonne="${theme}"><p class="menu-colonne-titre" id="${id}">${titre}</p><ul aria-labelledby="${id}">${liens}</ul></div>`,
+      },
+    ];
+  });
+  if (themes.length === 0) return '';
+  const icone = '<svg class="menu-icone" width="14" height="10" viewBox="0 0 14 10" aria-hidden="true" focusable="false"><path d="M0 1h14M0 5h14M0 9h14" stroke="currentColor" stroke-width="2"/></svg>';
+  return `<details class="menu-site" data-menu><summary aria-label="${attributHtml(FORMAT2.menuNom)}">${icone}<span class="menu-libelle">${texteHtml(FORMAT2.menu)}</span></summary><nav class="menu-panneau" aria-label="${attributHtml(FORMAT2.menuNavigation)}"><div class="menu-volets">${themes.map((t) => t.volet).join('')}</div><div class="menu-colonnes">${themes.map((t) => t.colonne).join('')}</div></nav></details>`;
+}
+
 
 /**
  * Adresse vers laquelle mène le bouton « Trouver mon voyant » du bandeau sur une page : celle de la page outil, sauf sur la
@@ -147,14 +204,28 @@ export function bandeauFormat2(entree: { adresseOutil?: string | undefined; pict
 export const adresseBoutonVoyant = (adresseOutil: string | undefined, adressePage: string | undefined): string | undefined =>
   adresseOutil !== undefined && adressePage !== adresseOutil ? adresseOutil : undefined;
 
-/** Pied du format 2 : « Signaler une erreur » (adresse de la page dans le message) et lien des mentions légales. */
-export function piedFormat2(adressePage?: string, adresseConfidentialite?: string): string {
+/**
+ * Pied du format 2 : liens de navigation (demande de changement n° 40 : « À propos », « Méthode » et les thèmes qui ont des
+ * pages, vers leurs sections de l'accueil ; seulement si « à propos » est construite : PIED-LIENS), « Signaler une erreur »
+ * (adresse de la page dans le message) et lien des mentions légales.
+ */
+export function piedFormat2(adressePage?: string, adresseConfidentialite?: string, navigation?: { aPropos: string; libelleAPropos: string; themes: readonly Theme[] }): string {
+  const nav =
+    navigation !== undefined
+      ? `<ul class="pied-nav" data-pied-nav>${[
+          `<a href="${attributHtml(navigation.aPropos)}">${texteHtml(navigation.libelleAPropos)}</a>`,
+          `<a href="${attributHtml(`${navigation.aPropos}#${ANCRE_METHODE}`)}">${texteHtml(LIBELLE_LIEN_METHODE)}</a>`,
+          ...THEMES.filter((t) => navigation.themes.includes(t)).map((t) => `<a href="/#${ancreThemeAccueil(t)}">${texteHtml(LIBELLES_THEMES[t])}</a>`),
+        ]
+          .map((a) => `<li>${a}</li>`)
+          .join('')}</ul>`
+      : '';
   const signaler = `<span class="signaler-erreur" data-signaler-erreur><!--email_off--><a href="${attributHtml(lienSignalement(adressePage))}">${texteHtml(LIBELLE_SIGNALER_ERREUR)}</a> (${texteHtml(ADRESSE_SIGNALEMENT)})<!--/email_off--></span>`;
   const confidentialite =
     adresseConfidentialite !== undefined
       ? ` · <span class="lien-confidentialite" data-lien-confidentialite><a href="${attributHtml(adresseConfidentialite)}#${ANCRE_CONFIDENTIALITE}">${texteHtml(LIBELLE_LIEN_CONFIDENTIALITE)}</a></span>`
       : '';
-  return `<p>${signaler}${confidentialite}</p>`;
+  return `${nav}<p>${signaler}${confidentialite}</p>`;
 }
 
 /** Tête de page (fond nuit) : mention en tête, fil d'Ariane, H1. */
@@ -180,6 +251,12 @@ export interface LigneFormat2 {
   notices: number;
   pictogramme?: string | undefined;
   couleur?: string | undefined;
+  /**
+   * Page du pilote des images en fichiers (demande de changement n° 43) : la tuile est l'image du fichier de la paire
+   * (`pictogrammeId`, `couleur`) au lieu du dessin posé dans la page.
+   */
+  pictogrammeId?: string | undefined;
+  enFichier?: boolean | undefined;
 }
 
 /** Adresse du renvoi, s'il existe. */
@@ -239,7 +316,12 @@ export function renvoiNotices(entree: {
 /** Une ligne de l'encadré : tuile du voyant et situation, verdict et urgence en pastilles, action, ligne d'écart. */
 export function ligneEncadreFormat2(ligne: LigneFormat2): string {
   const gravite = graviteDuVerdict(ligne.verdict);
-  const picto = ligne.pictogramme !== undefined ? tuile(ligne.pictogramme, ligne.couleur ?? 'neutre') : '';
+  const picto =
+    ligne.enFichier === true && ligne.pictogrammeId !== undefined && ligne.couleur !== undefined
+      ? tuileEnFichier(ligne.pictogrammeId, ligne.couleur)
+      : ligne.pictogramme !== undefined
+        ? tuile(ligne.pictogramme, ligne.couleur ?? 'neutre')
+        : '';
   const lien = ligne.lienNotices !== undefined ? ` <a href="${attributHtml(ligne.lienNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienVotreMarque)}</a>` : '';
   const ecart =
     ligne.ecartCourt !== undefined ? `<p class="ecart" data-ecart-court>${BALANCE}<span class="vh">${texteHtml(FORMAT2.selonLaMarque)}</span>${texteHtml(ligne.ecartCourt)}${lien}</p>` : '';
@@ -656,11 +738,18 @@ export function illustrationAccueil(illustrations: ReadonlyMap<string, string> |
 }
 
 /** Illustration de la page, tirée de `site.illustrations` ; obligatoire au format 2 (règle 2i). */
-export function illustrationDeLaPage(page: Pick<PageEditoriale, 'id' | 'illustration'>, site: Pick<DonneesSite, 'illustrations'>): string {
+export function illustrationDeLaPage(page: Pick<PageEditoriale, 'id' | 'illustration'>, site: Pick<DonneesSite, 'illustrations' | 'imagesEnFichiers'>): string {
   if (page.illustration === undefined) throw new Error(`page « ${page.id} » au format 2 : illustration absente (champ illustration : fichier de ${DOSSIER_ILLUSTRATIONS}, texte alternatif, légende ; règle 2i)`);
   const svg = site.illustrations?.get(page.illustration.fichier);
   if (svg === undefined) throw new Error(`page « ${page.id} » : illustration « ${page.illustration.fichier} » introuvable (${DOSSIER_ILLUSTRATIONS}/${page.illustration.fichier}.svg)`);
-  return figureIllustration(illustrationEnLigne(svg, page.illustration.alt, page.illustration.fichier), page.illustration.legende);
+  // Vérification du dessin dans tous les cas (aucun script, aucune ressource) ; page du pilote des images en fichiers
+  // (demande de changement n° 43) : l'image du fichier servi, nommée par le même texte alternatif.
+  const enLigne = illustrationEnLigne(svg, page.illustration.alt, page.illustration.fichier);
+  const dimensions = dimensionsDessin(svg);
+  if (site.imagesEnFichiers?.has(page.id) === true && dimensions !== undefined) {
+    return figureIllustration(imgIllustration(page.illustration.fichier, page.illustration.alt, dimensions), page.illustration.legende);
+  }
+  return figureIllustration(enLigne, page.illustration.legende);
 }
 
 /**
@@ -726,6 +815,8 @@ export function pageFormat2(
       notices: sourcesDeLaLigne(l.sources, site.sources).notices.length,
       pictogramme: voyant !== undefined ? site.pictogrammes.get(voyant.pictogramme) : undefined,
       couleur: voyant?.couleur,
+      pictogrammeId: voyant?.pictogramme,
+      enFichier: site.imagesEnFichiers?.has(page.id) === true,
     };
   });
   const coutHtml = coutFormat2(cout, site.couts);

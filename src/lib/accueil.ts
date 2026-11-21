@@ -6,11 +6,17 @@
 // Module sans dépendance à l'exécution : tests et construction l'utilisent tel quel.
 import { texteHtml, attributHtml } from './html.ts';
 import { ID_OUTIL_VOYANTS } from './plan.ts';
-import { LIBELLES_PICTOGRAMMES } from './pictogrammes.ts';
+import { LIBELLES_PICTOGRAMMES, libelleCoupable } from './pictogrammes.ts';
 import { ancreLigneOutil } from './outil-voyants.ts';
 import { LIBELLES_THEMES, THEMES, type Theme } from '../schemas/listes.ts';
 
-/** Le positionnement du site (docs/01) : le H1 de l'accueil. */
+/** Ancre de la section d'un thème sur l'accueil : cible des liens du pied de page (format2.ts) ; source unique. */
+export const ancreThemeAccueil = (theme: Theme): string => `da-accueil-${theme}`;
+
+/**
+ * Le positionnement du site (docs/01) : le H1 de l'accueil, et la devise de l'image de partage de la marque (lot U3,
+ * src/lib/partage.ts). Une seule ligne, entre apostrophes droites : scripts/verifier-indexation-durable.ts la lit.
+ */
 export const TITRE_ACCUEIL = 'Votre voiture vous alerte, on vous dit quoi faire.';
 export const TITLE_ACCUEIL = 'decodauto : voyant allumé, code défaut, que faire ?';
 export const DESCRIPTION_ACCUEIL = 'Voyant allumé, code défaut, bruit suspect ou obligation : peut-on rouler, avec quelle urgence, que faire. Un guide indépendant, sans pièces à vendre.';
@@ -63,7 +69,7 @@ export function accueilHtml(donnees: DonneesAccueil): string {
   const themes = THEMES.flatMap((theme) => {
     const pages = donnees.pages.filter((p) => p.theme === theme);
     if (pages.length === 0) return [];
-    const id = `da-accueil-${theme}`;
+    const id = ancreThemeAccueil(theme);
     return [`<section class="accueil-theme" data-accueil-theme="${theme}" aria-labelledby="${id}"><h3 id="${id}">${texteHtml(LIBELLES_THEMES[theme])}</h3><ul>${pages.map((p) => `<li><a href="${attributHtml(p.adresse)}">${texteHtml(p.libelle)}</a></li>`).join('')}</ul></section>`];
   });
   if (themes.length > 0) morceaux.push(`<section class="accueil-pages" data-accueil-pages aria-labelledby="da-accueil-pages-titre"><h2 id="da-accueil-pages-titre">Les pages du site</h2>${themes.join('')}</section>`);
@@ -82,6 +88,17 @@ export function accueilHtml(donnees: DonneesAccueil): string {
 
 /** Illustration du combiné de l'accueil au format 2 (fichier de src/illustrations et texte alternatif), affichée sur ordinateur. */
 export const ILLUSTRATION_ACCUEIL = { fichier: 'accueil-tableau-de-bord', alt: 'Tableau de bord avec plusieurs voyants allumés' } as const;
+
+/**
+ * Phrase de présentation de chaque thème sur l'accueil au format 2 (lot U2 de l'audit UX/UI, proposition P5 ; validée par
+ * Houssem le 21/11/2026 sur la maquette `P5-accueil.png`) : sous le titre de la carte du thème, avant ses pages.
+ */
+export const PRESENTATIONS_THEMES: Readonly<Record<Exclude<Theme, 'socle'>, string>> = {
+  'alertes-et-codes': 'Un voyant ou un code défaut : pouvez-vous rouler ?',
+  'pannes-et-symptomes': 'Démarrage, bruit, fumée, perte de puissance : que vérifier.',
+  'niveaux-et-fluides': 'Huile, liquide de frein, liquide de refroidissement : niveau et choix.',
+  'pneus-et-obligations': 'Pression, usure, contre-visite, loi montagne.',
+};
 
 /** Libellés fixes de l'accueil au format 2, repris du pilote validé ; à relire avec le paquet du lot F2 (docs/03 v20). */
 export const ACCUEIL_FORMAT2 = {
@@ -141,7 +158,7 @@ export function accueilFormat2Html(donnees: DonneesAccueilFormat2): string {
   const [premier, ...suite] = PARAGRAPHES_ACCUEIL;
   const tete = `<div class="tete hero">${donnees.mention}<div class="hero-int"><div class="hero-texte"><h1>${texteHtml(TITRE_ACCUEIL)}</h1><p class="chapo">${texteHtml(premier ?? '')}</p></div>${donnees.illustration ?? ''}</div></div>`;
   const outil = donnees.pages.find((p) => p.id === ID_OUTIL_VOYANTS);
-  const cartes = donnees.grille.map((v) => `<li><a href="${attributHtml(v.adresse)}">${donnees.tuile(v.pictogramme, v.couleur)}<span>${texteHtml(v.libelle)}</span></a></li>`).join('');
+  const cartes = donnees.grille.map((v) => `<li><a href="${attributHtml(v.adresse)}">${donnees.tuile(v.pictogramme, v.couleur)}<span>${texteHtml(libelleCoupable(v.libelle))}</span></a></li>`).join('');
   const voyants =
     donnees.grille.length > 0 || outil !== undefined
       ? [
@@ -156,8 +173,10 @@ export function accueilFormat2Html(donnees: DonneesAccueilFormat2): string {
   const themes = THEMES.flatMap((theme) => {
     const pages = donnees.pages.filter((p) => p.theme === theme);
     if (pages.length === 0) return [];
-    const id = `da-accueil-${theme}`;
-    return [`<section class="theme" data-accueil-theme="${theme}" aria-labelledby="${id}"><h2 id="${id}">${texteHtml(LIBELLES_THEMES[theme])}</h2><ul>${pages.map((p) => `<li><a href="${attributHtml(p.adresse)}">${texteHtml(p.libelle)}</a></li>`).join('')}</ul></section>`];
+    const id = ancreThemeAccueil(theme);
+    // Lot U2 (P5) : phrase de présentation du thème, puis ses pages en pastilles (charte-b.css, « Accueil »).
+    const presentation = `<p class="theme-intro">${texteHtml(PRESENTATIONS_THEMES[theme])}</p>`;
+    return [`<section class="theme" data-accueil-theme="${theme}" aria-labelledby="${id}"><h2 id="${id}">${texteHtml(LIBELLES_THEMES[theme])}</h2>${presentation}<ul class="pages-du-theme" role="list">${pages.map((p) => `<li><a href="${attributHtml(p.adresse)}">${texteHtml(p.libelle)}</a></li>`).join('')}</ul></section>`];
   });
   const aPropos = donnees.aPropos !== undefined ? ` <span data-accueil-a-propos><a href="${attributHtml(donnees.aPropos.adresse)}">${texteHtml(`${donnees.aPropos.libelle} : qui édite le site et comment`)}</a></span>` : '';
   const guide = `<section class="theme theme-guide" data-accueil-guide aria-labelledby="da-accueil-guide"><h2 id="da-accueil-guide">${texteHtml(ACCUEIL_FORMAT2.titreGuide)}</h2>${suite.map((p) => `<p>${texteHtml(p)}${aPropos}</p>`).join('')}</section>`;

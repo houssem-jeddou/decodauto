@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import type { Urgence, Verdict } from '../schemas/listes.ts';
-import { TEXTES_OUTIL } from './outil-textes.ts';
+import { TEXTES_OUTIL, TEXTES_OUTIL_FORMAT2 } from './outil-textes.ts';
 
 // ---------------------------------------------------------------------------------------------
 // Empreinte de validation (docs/08 §1, champ « validation » ; demande de changement n° 3).
@@ -26,6 +26,8 @@ import { TEXTES_OUTIL } from './outil-textes.ts';
  */
 export function normaliserTexte(texte: string): string {
   return texte
+    // Trait d'union conditionnel (U+00AD, coupure des libellés de la grille des dessins) : invisible, sans effet sur le texte.
+    .replace(/\u00ad/g, '')
     .normalize('NFKD')
     .replace(/\p{Diacritic}/gu, '')
     .replace(/œ/g, 'oe')
@@ -250,6 +252,9 @@ export function empreintePage(encadre: EncadreValide, base: ReadonlyMap<string, 
     causes: (encadre.causes ?? []).map((c) => ({ cause: normaliserTexte(c.cause), pieces: Array.isArray(c.pieces) ? [...c.pieces].sort() : null })),
     // Page outil seulement : les autres empreintes ne changent pas (demande de changement n° 12, livrable 8.1).
     ...(encadre.outil === true ? { textes_outil: TEXTES_OUTIL.map(normaliserTexte) } : {}),
+    // Page outil au format 2 (demande de changement n° 41, lot U2) : les textes de son encadré (phrase d'exemple, titre de
+    // la grille des dessins) ; la page outil au format 1 (pages de test) garde son empreinte.
+    ...(encadre.outil === true && encadre.format === 2 ? { textes_outil_format2: TEXTES_OUTIL_FORMAT2.map(normaliserTexte) } : {}),
     // Format 2 seulement (demande de changement n° 30, lot F1) : le format, la réponse directe et la ligne d'écart courte
     // affichée de chaque situation entrent dans l'empreinte ; une page au format 1 garde la sienne. Passer une page au
     // format 2 demande donc toujours une nouvelle validation de son encadré.

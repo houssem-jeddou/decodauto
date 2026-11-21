@@ -29,6 +29,7 @@
 // Les mesures de hauteur (2a, 2i : premier écran, trois écrans) se font à la porte, avec un navigateur (conception, §5).
 // Module sans dépendance à l'exécution autre que cheerio : testé sans installation (tests/format2.test.ts).
 // ---------------------------------------------------------------------------------------------
+import { DOSSIER_ILLUSTRATIONS_SERVIES } from './images-fichiers.ts';
 import * as cheerio from 'cheerio';
 import { normaliserTexte } from './empreinte.ts';
 import { ECART_COURT_MAX_MOTS, FORMAT2, SOMMAIRE_MIN_H2, groupesNotices, motsDe, phraseNotices, type RenvoiNotices } from './format2.ts';
@@ -179,8 +180,13 @@ export function controlerFormat2(
     const figure = figures.first();
     const avant = provenance.length === 1 ? '[data-provenance]' : '[data-ligne-transparence]';
     if (!figure.prev().is(avant)) constats.push(erreur('FORMAT2-ILLUSTRATION', "l'illustration suit immédiatement le bloc « Notices / Base du coût » (règle 2i, précision du 15/11)", fichier));
-    const dessin = figure.children('svg').first();
-    if (dessin.length !== 1 || dessin.attr('role') !== 'img' || (dessin.attr('aria-label') ?? '').trim() === '') constats.push(erreur('FORMAT2-ILLUSTRATION', "le dessin de l'illustration est un SVG nommé (role=\"img\", aria-label : texte alternatif)", fichier));
+    // Dessin posé dans la page, nommé ; ou, sur une page du pilote des images en fichiers (demande de changement n° 43 ;
+    // IMAGES-FICHIERS-RENDU dit quelles pages), image du fichier servi, nommée, largeur et hauteur posées.
+    const dessin = figure.children('svg, img').first();
+    const nomme = dessin.is('svg')
+      ? dessin.attr('role') === 'img' && (dessin.attr('aria-label') ?? '').trim() !== ''
+      : dessin.is('img') && (dessin.attr('alt') ?? '').trim() !== '' && (dessin.attr('src') ?? '').startsWith(DOSSIER_ILLUSTRATIONS_SERVIES) && /^\d+$/.test(dessin.attr('width') ?? '') && /^\d+$/.test(dessin.attr('height') ?? '');
+    if (dessin.length !== 1 || figure.children('svg, img').length !== 1 || !nomme) constats.push(erreur('FORMAT2-ILLUSTRATION', "le dessin de l'illustration est un SVG nommé (role=\"img\", aria-label : texte alternatif), ou, sur une page du pilote, une image de /illustrations/ nommée (alt), largeur et hauteur posées", fichier));
     const legende = texte(figure.find('figcaption'));
     if (!legende.endsWith(FORMAT2.credit)) constats.push(erreur('FORMAT2-ILLUSTRATION', `la légende de l'illustration se termine par « ${FORMAT2.credit} »`, fichier));
   }

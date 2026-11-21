@@ -13,6 +13,7 @@ import {
   ECART_COURT_MAX_MOTS,
   FORMAT2,
   bandeauFormat2,
+  menuFormat2,
   figureIllustration,
   illustrationEnLigne,
   libellesExtraits,
@@ -31,9 +32,10 @@ import {
 } from '../src/lib/format2.ts';
 import { PHRASES_MAX_PARAGRAPHE, constatsParagraphes, controlerFormat2, nombreDePhrases } from '../src/lib/controle-format2.ts';
 import { marqueEtModele, modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
-import { ACCUEIL_FORMAT2, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
+import { ACCUEIL_FORMAT2, PRESENTATIONS_THEMES, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
 import { mentionEnTete } from '../src/lib/composants.ts';
-import { LIBELLES_PICTOGRAMMES, constatsLibellesPictogrammes } from '../src/lib/pictogrammes.ts';
+import { COUPURES_LIBELLES, LIBELLES_PICTOGRAMMES, constatsCoupuresLibelles, constatsLibellesPictogrammes, libelleCoupable } from '../src/lib/pictogrammes.ts';
+import { normaliserTexte } from '../src/lib/empreinte.ts';
 import { chargerPictogrammes } from '../scripts/lib/charger.ts';
 import { typographier } from '../src/lib/html.ts';
 import { controlerPage, type Constat } from '../src/lib/controle.ts';
@@ -54,7 +56,7 @@ import {
   PARAGRAPHES_A_REPRENDRE_DEMO,
   voyantsAvecBrouillon,
 } from '../scripts/lib/demo-format2.ts';
-import { constatsAccueil, constatsHauteurReservee, constatsLienConfidentialite, constatsMentionEtSignalement, constatsPartCitee } from '../scripts/lib/dist.ts';
+import { constatsAccueil, constatsHauteurReservee, constatsLienConfidentialite, constatsMenuEtPied, constatsMentionEtSignalement, constatsPartCitee } from '../scripts/lib/dist.ts';
 import { schemasPage, type PageEditoriale } from '../src/schemas/pages.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -147,11 +149,86 @@ describe('format 2 : briques (lot F1, F1.2)', () => {
   });
 
   test('bandeau : nom du site en deux parties, bouton « Trouver mon voyant » seulement si l\'outil est construit ; pied : signalement et confidentialité', () => {
-    assert.match(bandeauFormat2({ adresseOutil: '/voyants/' }), /<span class="nom-texte">decod<span>auto<\/span><\/span><\/a><a class="bouton-voyant" href="\/voyants\/" data-bouton-voyant>Trouver mon voyant<\/a>/);
-    assert.ok(!bandeauFormat2({}).includes('bouton-voyant'));
+    assert.match(
+      bandeauFormat2({ adresseOutil: '/voyants/' }),
+      /<span class="nom-texte">decod<span>auto<\/span><\/span><\/a><div class="bandeau-actions"><a class="bouton-voyant" href="\/voyants\/" aria-label="Trouver mon voyant" data-bouton-voyant><span class="bouton-libelle-long">Trouver mon voyant<\/span><span class="bouton-libelle-court" aria-hidden="true">Mon voyant<\/span><\/a><\/div><\/div>$/,
+    );
+    // Sans outil ni menu : ni bouton, ni conteneur d'actions vide.
+    assert.ok(!bandeauFormat2({}).includes('bouton-voyant') && !bandeauFormat2({}).includes('bandeau-actions'));
     const html = `<html><body><header>${bandeauFormat2({})}</header><main><div class="tete">${mentionEnTete()}<h1>T</h1></div></main><footer>${piedFormat2('/voyants/moteur/', '/mentions-legales/')}</footer></body></html>`;
     assert.deepEqual(regles(constatsMentionEtSignalement(html, 'x.html', '/voyants/moteur/')), []);
     assert.deepEqual(regles(constatsLienConfidentialite(html, 'x.html', '/mentions-legales/')), []);
+  });
+
+  // Demande de changement n° 40, lot U1 : menu du site, libellé court du bouton, liens du pied de page.
+  const PAGES_MENU = [
+    { adresse: '/voyants/', libelle: 'Outil', theme: 'alertes-et-codes' as const },
+    { adresse: '/voyants/moteur/', libelle: 'Voyant moteur', theme: 'alertes-et-codes' as const },
+    { adresse: '/bruit-moteur/', libelle: 'Bruit moteur', theme: 'pannes-et-symptomes' as const },
+  ];
+  const pageAvecMenu = (adressePage: string | undefined, aPropos?: string): string =>
+    `<html data-format="2"><body><header class="bandeau">${bandeauFormat2({ adresseOutil: '/voyants/', menu: menuFormat2({ pages: PAGES_MENU, adressePage }) })}</header><main><h1>T</h1></main><footer class="pied">${piedFormat2(adressePage, undefined, aPropos !== undefined ? { aPropos, libelleAPropos: 'À propos', themes: ['pannes-et-symptomes', 'alertes-et-codes'] } : undefined)}</footer></body></html>`;
+  const attenduMenu = (aPropos?: string) => ({ pages: PAGES_MENU.map((p) => ({ adresse: p.adresse, theme: p.theme })), aPropos });
+
+  test('menu du site (demande n° 40) : un volet par thème dans l\'ordre de l\'accueil, page affichée marquée et son thème seul ouvert, sans script', () => {
+    const $ = cheerio.load(pageAvecMenu('/voyants/moteur/'));
+    const menu = $('header [data-menu]');
+    assert.equal(menu.length, 1);
+    assert.ok(menu.is('details') && menu.children('summary').attr('aria-label') === 'Menu du site');
+    assert.equal(menu.find('summary .menu-libelle').text(), 'Menu');
+    assert.equal(menu.find('nav').attr('aria-label'), 'Toutes les pages');
+    assert.deepEqual(menu.find('[data-menu-theme]').toArray().map((d) => $(d).attr('data-menu-theme')), ['alertes-et-codes', 'pannes-et-symptomes']);
+    // Deux formes du même contenu (revue du lot U1, I2) : volets au téléphone, colonnes titrées sur ordinateur, chacune
+    // avec toute la liste ; une colonne n'est jamais un volet (aucun état « réduit » pour une liste affichée).
+    for (const forme of ['.menu-volets', '.menu-colonnes']) {
+      assert.deepEqual(menu.find(`${forme} a`).toArray().map((a) => $(a).attr('href')), ['/voyants/', '/voyants/moteur/', '/bruit-moteur/'], forme);
+      assert.equal(menu.find(`${forme} a[aria-current="page"]`).attr('href'), '/voyants/moteur/', forme);
+    }
+    assert.equal(menu.find('a').length, 6);
+    assert.deepEqual(menu.find('[data-menu-colonne]').toArray().map((d) => $(d).attr('data-menu-colonne')), ['alertes-et-codes', 'pannes-et-symptomes']);
+    assert.equal(menu.find('[data-menu-colonne] details, [data-menu-colonne] summary').length, 0);
+    const colonne = menu.find('[data-menu-colonne="pannes-et-symptomes"]');
+    assert.equal(colonne.children('ul').attr('aria-labelledby'), colonne.children('p.menu-colonne-titre').attr('id'));
+    assert.match(colonne.children('p.menu-colonne-titre').text(), /^Pannes et symptômes 1 page$/);
+    assert.deepEqual(menu.find('[data-menu-theme][open]').toArray().map((d) => $(d).attr('data-menu-theme')), ['alertes-et-codes']);
+    assert.match(menu.find('[data-menu-theme="pannes-et-symptomes"] > summary').text(), /^Pannes et symptômes 1 page$/);
+    // Icône du bouton en currentColor, décorative (couleurs forcées de Windows : revue, I3).
+    assert.equal(menu.find('> summary > svg.menu-icone[aria-hidden="true"] path[stroke="currentColor"]').length, 1);
+    assert.equal(menu.find('script').length + $('script').length, 0);
+    // Menu avant le bouton, tous deux dans le groupe des actions (revue, M2) ; sans page construite, pas de menu.
+    const bandeau = $('.bandeau-int').html() ?? '';
+    assert.ok(bandeau.indexOf('data-menu') > 0 && bandeau.indexOf('data-menu') < bandeau.indexOf('data-bouton-voyant'));
+    assert.equal($('.bandeau-int > .bandeau-actions > [data-menu] + [data-bouton-voyant]').length, 1);
+    assert.equal(menuFormat2({ pages: [], adressePage: '/' }), '');
+    assert.equal(FORMAT2.boutonVoyantCourt, 'Mon voyant');
+  });
+
+  test('menu et pied (demande n° 40) : contrôles MENU-* et PIED-LIENS', () => {
+    const regles = (html: string, adresse: string | undefined, aPropos?: string): string[] => constatsMenuEtPied(html, 'x.html', attenduMenu(aPropos), adresse).map((c) => c.regle);
+    assert.deepEqual(regles(pageAvecMenu('/voyants/moteur/', '/a-propos/'), '/voyants/moteur/', '/a-propos/'), []);
+    // Accueil, socle, 404 : aucune page marquée, aucun volet ouvert.
+    assert.deepEqual(regles(pageAvecMenu('/'), '/'), []);
+    assert.deepEqual(regles(pageAvecMenu(undefined), undefined), []);
+    // Pied : « À propos », « Méthode », puis les thèmes dans l'ordre de l'accueil.
+    const $pied = cheerio.load(pageAvecMenu('/', '/a-propos/'));
+    assert.deepEqual($pied('footer [data-pied-nav] a').toArray().map((a) => $pied(a).attr('href')), ['/a-propos/', '/a-propos/#methode', '/#da-accueil-alertes-et-codes', '/#da-accueil-pannes-et-symptomes']);
+    const modifier = (f: ($: cheerio.CheerioAPI) => void, adresse = '/voyants/moteur/'): string => {
+      const $ = cheerio.load(pageAvecMenu(adresse, '/a-propos/'));
+      f($);
+      return $.html();
+    };
+    assert.deepEqual(regles(modifier(($) => $('[data-menu]').remove()), '/voyants/moteur/', '/a-propos/'), ['MENU-PRESENT']);
+    assert.deepEqual(regles(modifier(($) => $('[data-menu] a[href="/bruit-moteur/"]').parent().remove()), '/voyants/moteur/', '/a-propos/'), ['MENU-LISTE', 'MENU-LISTE', 'MENU-LISTE', 'MENU-LISTE']);
+    // Une seule forme touchée : le contrôle la voit (revue du lot U1, I2).
+    assert.deepEqual(regles(modifier(($) => $('.menu-colonnes a[href="/bruit-moteur/"]').parent().remove()), '/voyants/moteur/', '/a-propos/'), ['MENU-LISTE', 'MENU-LISTE']);
+    assert.deepEqual(regles(modifier(($) => $('.menu-colonnes').remove()), '/voyants/moteur/', '/a-propos/'), ['MENU-LISTE']);
+    assert.deepEqual(regles(modifier(($) => $('[data-menu] a[aria-current]').removeAttr('aria-current')), '/voyants/moteur/', '/a-propos/'), ['MENU-ACTUELLE', 'MENU-ACTUELLE']);
+    assert.deepEqual(regles(modifier(($) => $('.menu-colonnes a[aria-current]').removeAttr('aria-current')), '/voyants/moteur/', '/a-propos/'), ['MENU-ACTUELLE']);
+    assert.deepEqual(regles(modifier(($) => $('[data-menu-theme="pannes-et-symptomes"]').attr('open', '')), '/voyants/moteur/', '/a-propos/'), ['MENU-ACTUELLE']);
+    assert.deepEqual(regles(modifier(($) => $('[data-pied-nav] li').last().remove()), '/voyants/moteur/', '/a-propos/'), ['PIED-LIENS']);
+    assert.deepEqual(regles(pageAvecMenu('/voyants/moteur/', '/a-propos/'), '/voyants/moteur/'), ['PIED-LIENS']);
+    // Page au format 1 : hors de ces contrôles.
+    assert.deepEqual(regles(pageAvecMenu('/voyants/moteur/').replace('data-format="2"', 'data-format="1"').replace(/<details class="menu-site"[\s\S]*?<\/nav><\/details>/, ''), '/voyants/moteur/'), []);
   });
 
   test('feuille du format 2 : hauteur réservée à l\'emplacement publicitaire, largeur portée par main>.page (le H1 reste dans main)', async () => {
@@ -318,6 +395,12 @@ describe('format 2 : modèle des pages voyants', () => {
       ['FORMAT2-PROVENANCE', modifie(($) => $('[data-provenance] p').first().remove())],
       ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] .credit').remove())],
       ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration]').insertAfter('[data-sommaire]').first())],
+      // Pilote des images en fichiers (demande n° 43) : une image n'est admise que de /illustrations/, nommée, dimensions
+      // posées, seule dans sa figure (revue du lot U3, partie 2, M4).
+      ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] > svg').replaceWith('<img src="/illustrations/x.svg" alt="" width="640" height="300">'))],
+      ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] > svg').replaceWith('<img src="/autre/x.svg" alt="Dessin" width="640" height="300">'))],
+      ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] > svg').replaceWith('<img src="/illustrations/x.svg" alt="Dessin">'))],
+      ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] > svg').after('<img src="/illustrations/x.svg" alt="Dessin" width="640" height="300">'))],
       ['FORMAT2-REPERE', modifie(($) => $('[data-repere]').first().insertAfter($('[data-corps] p').eq(2)))],
       ['FORMAT2-REPLIE', modifie(($) => $('details[data-sources]').attr('open', ''))],
       ['FORMAT2-REPLIE', modifie(($) => $('[data-tableau-notices] details summary').eq(1).text($('[data-tableau-notices] details summary').eq(0).text()))],
@@ -356,6 +439,24 @@ describe('format 2 : accueil', () => {
     assert.deepEqual(regles(constatsAccueil(html, 'index.html', { pages: adresses, outil: '/voyants/', aPropos: '/a-propos/' })), []);
     const sansOutil = accueilFormat2Html({ pages: pages.filter((p) => p.id !== 'voyants'), aPropos, grille, mention: mentionEnTete(), tuile });
     assert.ok(!sansOutil.includes('data-accueil-outil'));
+    // Lot U2 (P5) : chaque carte de thème présente le thème sous son titre, puis liste ses pages en pastilles ; la carte
+    // « Un guide indépendant » garde son paragraphe et son lien. Toutes les pages du plan construites : les quatre thèmes.
+    const toutes = pagesListees(site.plan, new Map([...site.plan.values()].filter((l) => l.type !== 'socle').map((l) => [l.id, l.id])));
+    const $t = cheerio.load(accueilFormat2Html({ pages: toutes, aPropos, grille, mention: mentionEnTete(), tuile }));
+    const cartes = $t('[data-accueil-theme]').toArray();
+    assert.deepEqual(cartes.map((c) => $t(c).attr('data-accueil-theme')).sort(), Object.keys(PRESENTATIONS_THEMES).sort());
+    for (const carte of cartes) {
+      const theme = $t(carte).attr('data-accueil-theme') as keyof typeof PRESENTATIONS_THEMES;
+      assert.ok($t(carte).children('h2').next().is('p.theme-intro'), theme);
+      assert.equal($t(carte).children('.theme-intro').text(), typographier(PRESENTATIONS_THEMES[theme]));
+      assert.equal($t(carte).children('ul.pages-du-theme').length, 1, theme);
+    }
+    assert.equal($t('[data-accueil-guide] .pages-du-theme, [data-accueil-guide] .theme-intro').length, 0);
+    // Seuls les thèmes qui ont une page construite ont leur carte.
+    assert.deepEqual($('[data-accueil-theme]').toArray().map((c) => $(c).attr('data-accueil-theme')), [...new Set(pages.map((p) => p.theme))]);
+    const css = await readFile(join(racine, 'src/styles/charte-b.css'), 'utf8');
+    // Cible tactile de 44 px pour chaque pastille (WCAG 2.5.8, Lighthouse target-size).
+    assert.match(css, /\.themes \.theme \.pages-du-theme a\{display:flex;[^}]*min-height:2\.75rem;/);
   });
 
   test('PICTO-LIBELLE : chaque fichier de src/pictogrammes a son libellé, aucun libellé sans fichier', async () => {
@@ -363,6 +464,24 @@ describe('format 2 : accueil', () => {
     assert.deepEqual(constatsLibellesPictogrammes(fichiers), []);
     assert.deepEqual(regles(constatsLibellesPictogrammes([...fichiers, 'nouveau'])), ['PICTO-LIBELLE']);
     assert.deepEqual(regles(constatsLibellesPictogrammes(fichiers.filter((f) => f !== 'stop'))), ['PICTO-LIBELLE']);
+  });
+
+  test('PICTO-COUPURE (revue du lot U2) : chaque mot de 9 lettres au moins a sa coupure, qui redonne le mot ; traits d\'union conditionnels dans les tuiles, ignorés par les contrôles', async () => {
+    assert.deepEqual(constatsCoupuresLibelles(), []);
+    assert.equal(libelleCoupable('Préchauffage'), 'Pré\u00adchauf\u00adfage');
+    assert.equal(libelleCoupable('Clé d’entretien'), 'Clé d’entre\u00adtien');
+    assert.equal(libelleCoupable('Frein à main'), 'Frein à main');
+    assert.equal(normaliserTexte(libelleCoupable('Airbag passager désactivé')), normaliserTexte('Airbag passager désactivé'));
+    assert.deepEqual(regles(constatsCoupuresLibelles({ ...LIBELLES_PICTOGRAMMES, essai: 'Stationnement' })), ['PICTO-COUPURE']);
+    assert.deepEqual(regles(constatsCoupuresLibelles(LIBELLES_PICTOGRAMMES, { ...COUPURES_LIBELLES, Direction: 'Direc|tiom' })), ['PICTO-COUPURE']);
+    assert.deepEqual(regles(constatsCoupuresLibelles(LIBELLES_PICTOGRAMMES, { ...COUPURES_LIBELLES, Direction: 'Direction' })), ['PICTO-COUPURE']);
+    assert.deepEqual(regles(constatsCoupuresLibelles(LIBELLES_PICTOGRAMMES, { ...COUPURES_LIBELLES, Moteurs: 'Mo|teurs' })), ['PICTO-COUPURE']);
+    // Grilles de l'accueil et de l'encadré de l'outil : coupures manuelles seulement, trois cases sous 375 px, tuile tenue
+    // dans sa case.
+    const css = await readFile(join(racine, 'src/styles/charte-b.css'), 'utf8');
+    assert.match(css, /\.grille-voyants li\{display:grid;min-width:0\}/);
+    assert.match(css, /\.grille-voyants a\{[^}]*min-width:0;[^}]*hyphens:manual;/);
+    assert.match(css, /@media \(max-width:23\.4rem\)\{\.grille-voyants\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}\}/);
   });
 });
 

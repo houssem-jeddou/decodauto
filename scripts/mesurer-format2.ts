@@ -13,7 +13,7 @@ import { extname, join, normalize, relative, resolve } from 'node:path';
 import { argv, env, exit } from 'node:process';
 import puppeteer, { type Browser } from 'puppeteer-core';
 import { listerFichiers } from './lib/charger.ts';
-import { ENTETE_MESURES, HAUTEURS, LARGEURS, evaluerMesure, ligneMesure, signalerMesure, type MesurePage } from './lib/mesures-format2.ts';
+import { ENTETE_MESURES, HAUTEURS, HAUTEURS_BANDEAU, LARGEURS, LARGEURS_BANDEAU, evaluerBandeau, evaluerMesure, ligneMesure, signalerMesure, type MesureBandeau, type MesurePage } from './lib/mesures-format2.ts';
 
 const option = (nom: string): string | undefined => {
   const i = argv.indexOf(nom);
@@ -57,8 +57,24 @@ function serveur(police: 'chargee' | 'secours'): Promise<{ serveur: Server; base
   return new Promise((ok) => s.listen(0, '127.0.0.1', () => ok({ serveur: s, base: `http://127.0.0.1:${(s.address() as { port: number }).port}` })));
 }
 
+/** Rangées du bandeau (exécuté par le navigateur) : éléments visibles de .bandeau-int, groupés par recouvrement vertical. */
+function rangeesDuBandeau(): number | null {
+  const bandeau = document.querySelector('.bandeau-int');
+  if (bandeau === null) return null;
+  const boites = [...bandeau.children].map((e) => e.getBoundingClientRect()).filter((r) => r.width > 0 && r.height > 0).sort((a, b) => a.top - b.top);
+  let rangees = 0;
+  let basRangee = Number.NEGATIVE_INFINITY;
+  for (const r of boites) {
+    if (r.top >= basRangee - 2) {
+      rangees += 1;
+      basRangee = r.bottom;
+    } else basRangee = Math.max(basRangee, r.bottom);
+  }
+  return rangees;
+}
+
 /** Mesures prises dans la page (exécutées par le navigateur). */
-function mesurerDansLaPage(): Omit<MesurePage, 'adresse' | 'largeur' | 'police'> {
+function mesurerDansLaPage(): Omit<MesurePage, 'adresse' | 'largeur' | 'police' | 'bandeauRangees'> {
   const el = (s: string): Element | null => document.querySelector(s);
   const haut = (e: Element | null): number | null => (e === null ? null : Math.round(e.getBoundingClientRect().top + scrollY));
   const bas = (e: Element | null): number | null => (e === null ? null : Math.round(e.getBoundingClientRect().bottom + scrollY));
@@ -77,12 +93,40 @@ function mesurerDansLaPage(): Omit<MesurePage, 'adresse' | 'largeur' | 'police'>
       return r.width > 0 && r.right > W + 0.5 && !defilant(e);
     })
     .map((e) => `${e.tagName.toLowerCase()}${typeof e.className === 'string' && e.className !== '' ? `.${e.className.split(' ')[0]}` : ''} (${Math.round(e.getBoundingClientRect().right)})`);
+  // Grille des dessins : chaque morceau d'un libellé (mot, ou partie jusqu'à un trait d'union conditionnel, avec son tiret)
+  // tient dans la largeur utile de sa tuile ; sinon il déborde, ou overflow-wrap le coupe sans tiret (revue du lot U2).
+  const tuilesDebordantes: string[] = [];
+  for (const a of document.querySelectorAll('.grille-voyants a')) {
+    const libelle = a.querySelector(':scope > span:not(.tuile):not(.cas)');
+    const style = getComputedStyle(a);
+    const utile = a.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    if (libelle === null || a.getBoundingClientRect().width === 0) continue;
+    const police = getComputedStyle(libelle);
+    const essai = document.createElement('span');
+    essai.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap';
+    essai.style.fontFamily = police.fontFamily;
+    essai.style.fontSize = police.fontSize;
+    essai.style.fontWeight = police.fontWeight;
+    essai.style.fontStyle = police.fontStyle;
+    essai.style.letterSpacing = police.letterSpacing;
+    document.body.appendChild(essai);
+    const morceaux = (libelle.textContent ?? '').split(/\s+/).filter((m) => m !== '').flatMap((mot) => mot.split('\u00ad').map((p, i, t) => (i < t.length - 1 ? `${p}-` : p)));
+    const trop = morceaux.map((m) => {
+      essai.textContent = m;
+      return { m, l: essai.getBoundingClientRect().width };
+    }).filter((x) => x.l > utile + 0.5);
+    essai.remove();
+    if (trop.length > 0 || a.scrollWidth > a.clientWidth + 0.5) {
+      tuilesDebordantes.push(`« ${(libelle.textContent ?? '').replace(/\u00ad/g, '')} » (${trop.map((x) => `${x.m} ${x.l.toFixed(1)}`).join(', ') || `${a.scrollWidth}`} pour ${utile.toFixed(1)})`);
+    }
+  }
   const figure = el('figure[data-illustration]');
   const arbre = el('[data-element-unique="arbre-de-decision"], ol[data-tutoriel-etapes]');
   return {
     policeChargee: [...document.fonts].some((f) => f.status === 'loaded'),
     largeurPage: document.documentElement.scrollWidth,
     debordements,
+    tuilesDebordantes,
     encadre: el('[data-encadre-decision]') !== null,
     basReponse: bas(el('[data-reponse-directe]')),
     basVerdictUrgence: basDe(['.situation', '.verdict', '.urgence']),
@@ -118,7 +162,22 @@ async function mesurer(navigateur: Browser, base: string, adresse: string, large
     if (police === 'chargee') await page.reload({ waitUntil: 'networkidle0' });
     await page.evaluate(() => document.fonts.ready.then(() => undefined));
     const mesure = await page.evaluate(mesurerDansLaPage);
-    return { adresse, largeur, police, ...mesure };
+    const bandeauRangees = await page.evaluate(rangeesDuBandeau);
+    return { adresse, largeur, police, ...mesure, bandeauRangees };
+  } finally {
+    await page.close();
+  }
+}
+
+/** Bandeau seul à une largeur de LARGEURS_BANDEAU (demande de changement n° 40). */
+async function mesurerBandeau(navigateur: Browser, base: string, adresse: string, largeur: (typeof LARGEURS_BANDEAU)[number], police: 'chargee' | 'secours'): Promise<MesureBandeau> {
+  const page = await navigateur.newPage();
+  try {
+    await page.setViewport({ width: largeur, height: HAUTEURS_BANDEAU[largeur], deviceScaleFactor: 1 });
+    await page.goto(base + adresse, { waitUntil: 'networkidle0' });
+    if (police === 'chargee') await page.reload({ waitUntil: 'networkidle0' });
+    await page.evaluate(() => document.fonts.ready.then(() => undefined));
+    return { adresse, largeur, police, bandeauRangees: await page.evaluate(rangeesDuBandeau) };
   } finally {
     await page.close();
   }
@@ -126,13 +185,19 @@ async function mesurer(navigateur: Browser, base: string, adresse: string, large
 
 const adresses = await pagesFormat2();
 console.log(`FORMAT2-MESURES : ${adresses.length} page(s) au format 2 dans ${relative(process.cwd(), dist) || '.'}`);
+// Bandeau aux largeurs de plus : accueil, outil, 404 et une page éditoriale qui porte le bouton « Trouver mon voyant » (la page
+// du voyant moteur, sinon la première autre page ; revue du lot U1, M4 : c'était « à propos »).
+const autres = adresses.filter((a) => a !== '/' && a !== '/voyants/' && a !== '/404.html');
+const pourLeBandeau = [...new Set([...adresses.filter((a) => a === '/' || a === '/voyants/' || a === '/404.html'), ...(autres.includes('/voyants/moteur/') ? ['/voyants/moteur/'] : autres.slice(0, 1))])];
 const navigateur = await puppeteer.launch({ executablePath: chrome, headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage', '--font-render-hinting=none'] });
 const mesures: MesurePage[] = [];
+const bandeaux: MesureBandeau[] = [];
 try {
   for (const police of ['chargee', 'secours'] as const) {
     const { serveur: s, base } = await serveur(police);
     try {
       for (const adresse of adresses) for (const largeur of LARGEURS) mesures.push(await mesurer(navigateur, base, adresse, largeur, police));
+      for (const adresse of pourLeBandeau) for (const largeur of LARGEURS_BANDEAU) bandeaux.push(await mesurerBandeau(navigateur, base, adresse, largeur, police));
     } finally {
       s.close();
     }
@@ -140,12 +205,13 @@ try {
 } finally {
   await navigateur.close();
 }
-const constats = mesures.flatMap(evaluerMesure);
+const constats = [...mesures.flatMap(evaluerMesure), ...bandeaux.flatMap(evaluerBandeau)];
 console.log(ENTETE_MESURES);
 for (const m of mesures) console.log(ligneMesure(m));
+console.log(`Bandeau (demande n° 40) : ${bandeaux.map((b) => `${b.adresse} ${b.largeur} px ${b.police === 'chargee' ? 'chargée' : 'secours'} : ${b.bandeauRangees ?? '–'}`).join(' ; ')}`);
 const signalements = mesures.flatMap(signalerMesure);
 for (const t of signalements) console.log(`SIGNALÉ [FORMAT2-MESURES] ${t}`);
 for (const c of constats) console.log(`ERREUR [${c.regle}] ${c.message}`);
 console.log(`Mesures : ${adresses.length} page(s), ${mesures.length} mesure(s), ${constats.length} erreur(s), ${signalements.length} signalement(s) à reprendre dans le paquet.`);
-if (sortieJson !== undefined) await writeFile(sortieJson, `${JSON.stringify({ mesures, constats, signalements }, null, 2)}\n`);
+if (sortieJson !== undefined) await writeFile(sortieJson, `${JSON.stringify({ mesures, bandeaux, constats, signalements }, null, 2)}\n`);
 exit(constats.length > 0 ? 1 : 0);

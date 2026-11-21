@@ -41,9 +41,48 @@ a:focus-visible,summary:focus-visible,button:focus-visible,[tabindex]:focus-visi
 .barre-pilote button[aria-pressed="true"]{background:#ffd27a;color:#2b2f36;border-color:#ffd27a}
 /* Bandeau : avec une police large (DejaVu Sans, police par défaut d'un poste Linux), le bouton passe sous le nom plutôt que de
    déborder (F1.4, FORMAT2-MESURES dans la CI). */
-.bandeau-int{max-width:72rem;margin:0 auto;padding:.55rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .5rem}
+.bandeau-int{position:relative;max-width:72rem;margin:0 auto;padding:.55rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .5rem}
 .nom-du-site{display:inline-flex;align-items:center;gap:.45rem;color:inherit;text-decoration:none;font-family:var(--police-titre);font-weight:700;font-size:1.3rem;letter-spacing:-.01em;white-space:nowrap}
 .bouton-voyant{margin-left:auto;display:inline-flex;align-items:center;gap:.35rem;font-weight:600;font-size:.8125rem;white-space:nowrap;text-decoration:none;padding:.4rem .7rem}
+.bouton-libelle-court{display:none}
+/* Menu du site (demande de changement n° 40, lot U1) : un « details » du bandeau, sans script ; au téléphone et sur
+   tablette, un volet par thème, celui de la page affichée ouvert ; sur ordinateur, les quatre listes en colonnes titrées
+   (une autre forme du même contenu, l'une ou l'autre affichée : revue du lot U1, I2). Le panneau passe par-dessus la page,
+   sans la pousser. Focus : règle commune (summary:focus-visible, --focus du bandeau). Menu et bouton « Trouver mon voyant »
+   forment un groupe aligné à droite, même passé à la ligne avec une police large (revue, M2). */
+.bandeau-actions{margin-left:auto;display:flex;align-items:center;gap:.4rem}
+.bandeau-actions .bouton-voyant{margin-left:0}
+.menu-site>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:.35rem;font-weight:600;font-size:.8125rem;line-height:1.3;border-radius:999px;padding:.4rem .75rem;min-height:2.05rem;min-width:2.75rem}
+.menu-site>summary::-webkit-details-marker{display:none}
+.menu-icone{display:block;flex:none}
+/* Menu fermé : le panneau n'est pas mis en page (sans cette règle, le contenu replié devient le bloc conteneur du panneau,
+   large de 34 px, dont les liens dépassent : FORMAT2-MESURES ; revue du lot U1, B1). Focus clavier passé dans la page ou le
+   pied : le panneau ouvert s'efface, pour ne pas cacher l'élément qui a le focus (WCAG 2.4.11 ; revue, I1). */
+.menu-site:not([open])>.menu-panneau{display:none}
+body:has(main :focus-visible,footer :focus-visible) .menu-site[open]>.menu-panneau{display:none}
+.menu-panneau{position:absolute;left:.5rem;right:.5rem;top:100%;z-index:20;border-radius:16px;padding:.35rem 1rem 1rem;max-height:calc(100vh - 4.5rem);overflow-y:auto;overscroll-behavior:contain}
+.menu-colonnes{display:none}
+.menu-theme>summary,.menu-colonne-titre{display:flex;align-items:center;gap:.5rem;min-height:2.75rem;margin:0;font-family:var(--police-titre);font-weight:700;font-size:1rem}
+.menu-theme>summary{list-style:none;cursor:pointer}
+.menu-theme>summary::-webkit-details-marker{display:none}
+.menu-theme>summary::after{content:"";margin-left:auto;width:.5rem;height:.5rem;border-right:2px solid;border-bottom:2px solid;transform:rotate(45deg) translateY(-2px)}
+.menu-theme[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+.menu-nombre{font-family:var(--police-texte);font-weight:600;font-size:.75rem}
+.menu-panneau ul{list-style:none;margin:0 0 .5rem;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 .75rem}
+.menu-panneau a{display:flex;align-items:center;min-height:2.25rem;text-decoration:none;font-size:.875rem;line-height:1.25}
+/* Page affichée : en ambre, en gras et soulignée (jamais la couleur seule, WCAG 1.4.1 ; revue, M3). */
+.menu-panneau a[aria-current]{font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media (min-width:64rem){
+  .menu-panneau{left:auto;right:1rem;width:56rem}
+  .menu-volets{display:none}
+  .menu-colonnes{display:grid;grid-template-columns:repeat(4,1fr);gap:0 1.25rem}
+  .menu-panneau ul{grid-template-columns:1fr}
+}
+/* Couleurs forcées (Windows) : le bouton du menu garde un contour (l'ombre qui le dessine est retirée ; revue, I3). */
+@media (forced-colors:active){.menu-site>summary{border:1px solid CanvasText}}
+/* Pied de page (demande de changement n° 40) : « À propos », « Méthode » et les thèmes de l'accueil. */
+.pied-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.25rem 1.1rem;margin:0 0 .6rem;padding:0;list-style:none}
+.pied-nav a{font-weight:600;font-size:.875rem}
 .mention-ia{max-width:72rem;margin:0 auto;padding:.3rem 1rem .05rem;font-size:1rem;line-height:1.35}
 .tete-int{max-width:44rem;margin:0 auto;padding:.15rem 1rem .5rem}
 /* Tête sans fil d'Ariane (socle, 404) : même écart entre la mention et le H1 que les pages éditoriales (revue de F1.3b). */
@@ -67,7 +106,7 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .ligne{counter-increment:situation;font-size:.9375rem;line-height:1.38;padding:.5rem .55rem}
 .ligne-tete{display:flex;gap:.6rem;align-items:center}
 .ligne-tete .tuile{flex:none;width:2.6rem;height:2.6rem}
-.ligne-tete .tuile svg{width:1.85rem;height:1.85rem}
+.ligne-tete .tuile svg,.ligne-tete .tuile img{width:1.85rem;height:1.85rem}
 .situation{margin:0;font-weight:600;line-height:1.26}
 .badges{display:flex;flex-wrap:wrap;gap:.3rem .4rem;margin:.35rem 0 .15rem;align-items:center}
 .verdict,.urgence{display:inline-flex;align-items:center;gap:.3rem;font-size:.875rem;line-height:1.2}
@@ -99,7 +138,7 @@ a[data-lien-notices]{white-space:nowrap}
 .provenance-ecart{display:block;margin:.2rem 0 .15rem}
 .provenance-ecart-libelle{font-weight:700}
 .illustration{margin:.8rem 0 0;padding:.6rem;overflow:hidden}
-.illustration svg{display:block;width:100%;height:auto}
+.illustration svg,.illustration img{display:block;width:100%;height:auto}
 .illustration figcaption{font-size:.875rem;margin:.45rem .2rem 0;line-height:1.4}
 .credit{font-weight:700;white-space:nowrap}
 .sommaire{margin:1.1rem 0 0}
@@ -133,13 +172,21 @@ a[data-lien-notices]{white-space:nowrap}
 /* Très petits écrans (320 px, critère WCAG 1.4.10, F1.4) : le bandeau et les tableaux tiennent sans défilement horizontal ;
    le dessin du bouton « Trouver mon voyant » s'efface (son texte reste), les cellules coupent un mot trop long. */
 @media (max-width:22.5rem){
-  .bandeau-int{padding-left:.75rem;padding-right:.75rem;gap:.4rem}
-  .nom-du-site{font-size:1.15rem;gap:.35rem}
-  .bandeau-int .bouton-voyant{padding:.4rem .6rem}
   .bandeau-int .bouton-voyant svg{display:none}
   .tableau th,.tableau td{padding:.4rem .4rem;hyphens:auto;overflow-wrap:anywhere}
   /* Carte : toute la largeur ; seul un mot trop long se coupe (charte §4 ; revue de la PR n° 92, M7). */
   .tableau-cartes th,.tableau-cartes td{hyphens:manual;overflow-wrap:break-word}
+}
+/* Bandeau sous 30 rem (demande de changement n° 40) : marges serrées et « Mon voyant », pour tenir sur une ligne ; après la
+   règle des très petits écrans, qu'elle prolonge jusqu'à 30 rem. */
+@media (max-width:30rem){
+  .bandeau-int{padding-left:.75rem;padding-right:.75rem;gap:.4rem}
+  .nom-du-site{font-size:1.15rem;gap:.35rem}
+  .bandeau-int .bouton-voyant{padding:.4rem .55rem}
+  .menu-site>summary{padding:.4rem .6rem;gap:0}
+  .menu-libelle{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .bouton-libelle-long{display:none}
+  .bouton-libelle-court{display:inline}
 }
 .mini{display:inline-flex;align-items:center;gap:.25rem;font-size:.8125rem;font-weight:700;padding:.08rem .45rem;line-height:1.3}
 .mini .forme{width:.95rem;height:.95rem}
@@ -192,7 +239,10 @@ a[data-lien-notices]{white-space:nowrap}
 
 /* Tuiles des pictogrammes. */
 .tuile{display:grid;place-items:center;width:3.1rem;height:3.1rem}
-.tuile svg{width:2.25rem;height:2.25rem}
+/* Tuile : dessin posé dans la page, ou, sur une page du pilote des images en fichiers (demande de changement n° 43), image du
+   fichier de la paire, même taille et même lueur. */
+.tuile svg,.tuile img{width:2.25rem;height:2.25rem}
+.tuile img{display:block}
 
 /* Tableau des notices compact (règle 2f). */
 .notices{margin:1.25rem 0 0}
@@ -239,7 +289,7 @@ a[data-lien-notices]{white-space:nowrap}
 }
 .liees ul{list-style:none;padding:0;margin:.5rem 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:.5rem}
 .liees a{display:flex;align-items:center;gap:.5rem;padding:.5rem .6rem;text-decoration:none;color:var(--texte);font-weight:600;font-size:.9375rem;min-height:3.2rem}
-.liees .tuile{flex:none;width:2.2rem;height:2.2rem}.liees .tuile svg{width:1.55rem;height:1.55rem}
+.liees .tuile{flex:none;width:2.2rem;height:2.2rem}.liees .tuile svg,.liees .tuile img{width:1.55rem;height:1.55rem}
 details.sources{margin:1.5rem 0 0;padding:.7rem .9rem}
 details.sources summary{cursor:pointer;font-family:var(--police-titre);font-weight:700;font-size:1.15rem}
 details.sources li{font-size:.875rem;color:var(--texte-doux);margin:.35rem 0}
@@ -255,12 +305,16 @@ main>.accueil-main{max-width:72rem}
 .voyants h2{margin:0 0 .3rem}
 .voyants-chapo{margin:.2rem 0 .6rem;font-size:.9375rem}
 .grille-voyants{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem}
-.grille-voyants li{display:grid}
-/* Libellés de la grille en 12 px (pilote) : les 18 tiennent à 375 px sans coupure, police chargée ou de secours ; sur un écran plus
-   étroit, un mot long se coupe avec un tiret (jamais sans), seulement s'il a 10 lettres au moins (seconde revue de F1.2). */
-.grille-voyants a{display:grid;justify-items:center;align-content:start;gap:.3rem;text-decoration:none;font-size:.75rem;font-weight:600;text-align:center;line-height:1.2;padding:.5rem .3rem;-webkit-hyphens:auto;hyphens:auto;hyphenate-limit-chars:10 4 4}
+/* Une tuile ne s'élargit jamais au-delà de sa case (min-width:0 sur la case et la tuile : revue du lot U2). */
+.grille-voyants li{display:grid;min-width:0}
+/* Libellés de la grille en 12 px (pilote) : un mot de 9 lettres au moins ne se coupe qu'aux endroits prévus, avec un tiret
+   (« Préchauf-fage » : COUPURES_LIBELLES, traits d'union conditionnels), quel que soit le navigateur ; jamais ailleurs
+   (hyphens:manual). Avec 4 cases dès 375 px et 3 en dessous, chaque mot tient dans sa tuile, même dans la police la plus
+   large des navigateurs mesurés (DejaVu Sans, celle de la CI) ; overflow-wrap ne sert que de dernier recours. */
+.grille-voyants a{display:grid;justify-items:center;align-content:start;gap:.3rem;min-width:0;text-decoration:none;font-size:.75rem;font-weight:600;text-align:center;line-height:1.2;padding:.5rem .3rem;-webkit-hyphens:manual;hyphens:manual;overflow-wrap:break-word}
 .grille-voyants .tuile{width:2.9rem;height:2.9rem}
-.grille-voyants .tuile svg{width:2rem;height:2rem}
+.grille-voyants .tuile svg,.grille-voyants .tuile img{width:2rem;height:2rem}
+@media (max-width:23.4rem){.grille-voyants{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .tous{margin:.7rem 0 0;font-size:.9375rem}
 .themes{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.75rem;margin:1.2rem 0}
 .theme{padding:.9rem 1rem}
@@ -272,12 +326,18 @@ main>.accueil-main{max-width:72rem}
 /* Carte « Un guide indépendant » sur toute la largeur de la grille (revue de la PR n° 84, I1) : les thèmes restent sur une
    rangée à 1366 px quel que soit leur nombre (quatre depuis la vague C), sans carte seule sur une rangée. */
 .theme-guide{grid-column:1/-1}
+/* Accueil, pages d'un thème en pastilles (lot U2 de l'audit UX/UI, P5 ; variante de la pastille « À lire aussi », sans tuile :
+   la grille des voyants du haut de l'accueil montre déjà les dessins) : deux colonnes au téléphone, cible de 44 px ; la
+   phrase de présentation du thème en texte doux. */
+.themes .theme .pages-du-theme{list-style:none;padding:0;margin:.6rem 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(9rem,1fr));gap:.45rem}
+.themes .theme .pages-du-theme li+li{margin-top:0}
+.themes .theme .pages-du-theme a{display:flex;align-items:center;gap:.5rem;min-height:2.75rem;padding:.35rem .65rem;border-radius:999px;background:var(--fond-page);color:var(--texte);font-weight:600;font-size:.875rem;line-height:1.2;text-decoration:none}
+.theme .theme-intro{color:var(--texte-doux)}
 
 /* Page outil « Quel voyant est allumé ? » (F1.3a) : renvoi de l'encadré en bouton ambre, filtre en pastilles sans script,
    index des dessins dans la grille de l'accueil, un panneau sombre par groupe de couleur (diode), une cellule de l'encadré
    par ligne de la base. */
 .renvoi{margin:0 0 .5rem;font-size:.9375rem;line-height:1.38}
-.renvoi .bouton-voyant{margin:.35rem 0 0;font-size:.875rem;padding:.4rem .8rem;white-space:normal;min-height:2.25rem}
 .diode{display:inline-block;flex:none;width:.7rem;height:.7rem;border-radius:50%}
 .outil-voyants{margin:1.6rem 0 0}
 .outil-voyants>h2{margin:0 0 .4rem}
@@ -312,22 +372,20 @@ main>.accueil-main{max-width:72rem}
 .outil-references{margin:.2rem 0 0;padding-left:1.1rem}
 .outil-absent{margin:1rem 0 0;font-size:.9375rem}
 .note-sources{font-size:.875rem;color:var(--texte-doux);margin:.4rem 0 0}
-/* Filtre sans script : boutons radio et :has() ; un navigateur sans :has() affiche toute la liste. */
+/* Filtre sans script : boutons radio et :has() ; un navigateur sans :has() affiche toute la liste. Il ne filtre que la
+   liste : la grille des dessins est dans l'encadré, toujours entière (demande de changement n° 41). */
 .outil-voyants:has(#da-filtre-orange:checked) [data-outil-groupe]:not([data-outil-groupe="orange"]),
 .outil-voyants:has(#da-filtre-rouge:checked) [data-outil-groupe]:not([data-outil-groupe="rouge"]),
 .outil-voyants:has(#da-filtre-vert:checked) [data-outil-groupe]:not([data-outil-groupe="vert"]),
 .outil-voyants:has(#da-filtre-bleu:checked) [data-outil-groupe]:not([data-outil-groupe="bleu"]),
-.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-groupe]:not([data-outil-groupe="blanc"]),
-.outil-voyants:has(#da-filtre-orange:checked) [data-outil-index-entree]:not([data-couleur="orange"]),
-.outil-voyants:has(#da-filtre-rouge:checked) [data-outil-index-entree]:not([data-couleur="rouge"]),
-.outil-voyants:has(#da-filtre-vert:checked) [data-outil-index-entree]:not([data-couleur="vert"]),
-.outil-voyants:has(#da-filtre-bleu:checked) [data-outil-index-entree]:not([data-couleur="bleu"]),
-.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-index-entree]:not([data-couleur="blanc"]),
-.outil-voyants:has(#da-filtre-orange:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="orange"]),
-.outil-voyants:has(#da-filtre-rouge:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="rouge"]),
-.outil-voyants:has(#da-filtre-vert:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="vert"]),
-.outil-voyants:has(#da-filtre-bleu:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="bleu"]),
-.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="blanc"]){display:none}
+.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-groupe]:not([data-outil-groupe="blanc"]){display:none}
+/* Une tuile de la grille mène à sa carte même quand le filtre cache le groupe de la carte : ce groupe s'affiche. Le
+   sélecteur l'emporte sur celui du filtre (un identifiant et cinq classes ou attributs, contre un et quatre). */
+#da-outil.outil-voyants [data-outil-groupe][data-outil-groupe]:has([data-outil-ligne]:target){display:block}
+/* Grille des dessins dans l'encadré de la page outil (demande de changement n° 41) : sans panneau propre, sur le fond de
+   l'encadré, son titre écrit comme la phrase d'exemple. */
+.decision .outil-index{margin:.6rem 0 .2rem;padding:0;border-radius:0}
+.decision .outil-index h3{margin:0 0 .5rem;font-family:var(--police-texte);font-weight:400;font-size:.9375rem;line-height:1.38}
 /* Pages du lot F3 au format 2 (F1.3b) : code en chasse fixe dans la fiche du code, définitions des fiches sans rangées
    (mentions légales), rangée « dépannage sur autoroute » du coût, tête de page sans encadré (socle, 404). */
 .fiche-code h2 .code{font-family:var(--mono);font-size:.92em;padding:.05rem .4rem;border-radius:6px}
@@ -385,6 +443,15 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .bandeau,:root .tete,:root .hero,:root .decision,:root .pied,:root .voyants,:root .outil-groupe,:root .illustration{--focus:var(--nuit-lien)}
 :root .nom-texte span{color:var(--ambre)}
 :root .bouton-voyant{background:var(--ambre);color:#1a1300;border-radius:999px}
+:root .menu-site>summary{color:var(--nuit-texte);box-shadow:inset 0 0 0 1px var(--filet-nuit)}
+:root .menu-site[open]>summary{background:var(--cellule)}
+:root .menu-panneau{background:var(--panneau);border:1px solid var(--filet-nuit);box-shadow:0 12px 32px rgba(0,0,0,.45)}
+:root .menu-theme>summary{color:var(--ambre);border-bottom:1px solid var(--filet-nuit)}
+:root .menu-theme>summary::after{color:var(--nuit-doux)}
+:root .menu-nombre{color:var(--nuit-doux)}
+:root .menu-panneau a{color:var(--nuit-texte);border-bottom:1px solid var(--filet-nuit)}
+:root .menu-colonne-titre{color:var(--ambre);border-bottom:1px solid var(--filet-nuit)}
+:root .menu-panneau a[aria-current]{color:var(--ambre)}
 :root .tete,:root .hero{background:var(--nuit);color:#fff}
 :root .mention-ia{color:var(--nuit-doux)}
 :root .fil a{color:var(--nuit-lien)}
@@ -405,7 +472,10 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .decision .tranche{border-color:var(--ambre);color:var(--ambre);background:transparent}
 :root .montant{color:var(--nuit-doux)}
 :root .tuile{border-radius:50%;background:radial-gradient(circle at 50% 40%,#1e2a37,#090d12 70%);box-shadow:inset 0 0 0 1px #2a3644;color:var(--tv)}
-:root .tuile svg{filter:drop-shadow(0 0 5px var(--tv))}
+:root .tuile svg,:root .tuile img{filter:drop-shadow(0 0 5px var(--tv))}
+/* Couleurs forcées (Windows) : une tuile en image (pilote des images en fichiers, demande n° 43) ne prend pas les couleurs du
+   système ; elle garde son rond sombre et son dessin allumé, lisibles (revue du lot U3, partie 2, M2). */
+@media (forced-colors:active){.tuile:has(>img){forced-color-adjust:none}}
 :root .tuile[data-couleur="orange"]{--tv:var(--v-orange)}:root .tuile[data-couleur="rouge"]{--tv:var(--v-rouge)}:root .tuile[data-couleur="vert"]{--tv:var(--v-vert)}:root .tuile[data-couleur="bleu"]{--tv:var(--v-bleu)}
 :root .illustration{background:var(--panneau);border-radius:20px}
 :root .illustration figcaption{color:var(--nuit-doux)}
@@ -438,6 +508,7 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .pied a{color:var(--nuit-lien)}
 :root .chapo{color:var(--nuit-doux)}
 :root .voyants{background:var(--nuit);color:#fff}
+:root .decision .outil-index{background:transparent;color:inherit}
 :root .voyants a{color:var(--nuit-lien)}
 :root .voyants-chapo{color:var(--nuit-doux)}
 :root .grille-voyants a{color:var(--nuit-texte);background:var(--panneau);border:1px solid var(--filet-nuit);border-radius:14px}
