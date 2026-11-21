@@ -1,6 +1,7 @@
 ---
 # Page outil voyants (étape 8, livrable 8.1 ; demande de changement n° 11), variante du type voyant. Texte mis à jour avec
-# la ligne STOP de la base (demande de changement n° 23, lot 3b), encadré inchangé ; passée de exemples/ à src/content par
+# la ligne STOP de la base (demande de changement n° 23, lot 3b), encadré inchangé alors (il l'est depuis par la demande n° 41,
+# plus bas) ; passée de exemples/ à src/content par
 # la pull request du lot 3b (règle de passage, travaux/etape-8/regle-de-passage.md). Les lignes de l'encadré et toute la
 # liste viennent de la base voyants validée.
 id: voyants
