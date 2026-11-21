@@ -50,7 +50,7 @@ import {
 } from './composants.ts';
 import { ADRESSE_SIGNALEMENT, PARTIES_DU_NOM } from './site.ts';
 import { logoEnLigne } from './marque.ts';
-import { ANCRE_CONFIDENTIALITE, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR } from './charte.ts';
+import { ANCRE_CONFIDENTIALITE, ANCRE_METHODE, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_LIEN_METHODE, LIBELLE_SIGNALER_ERREUR } from './charte.ts';
 import { dateAffichee, datesAffichees, fourchetteAffichee, libelleRisque, trancheDesPieces, type CoutResolu, type DonneesCouts } from './cout.ts';
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import { citation, modeleTableauNotices, CLASSE_CITATION_NOTICE, FIN_TABLEAU_NOTICES, TITRE_TABLEAU_NOTICES, COLONNE_NOTICE, COLONNE_NIVEAU, LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, type RangeeNotice, type TableauVoyant } from './tableau-notices.ts';
@@ -58,7 +58,7 @@ import { emplacementPub } from './emplacements-pub.ts';
 import { ID_OUTIL_VOYANTS, indexerPlan } from './plan.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { GRILLE_COUTS, LIBELLE_SELON_LE_VOYANT, LIBELLES_FOURCHETTES } from '../schemas/cout.ts';
-import type { TypePage, Verdict } from '../schemas/listes.ts';
+import { LIBELLES_THEMES, THEMES, type Theme, type TypePage, type Verdict } from '../schemas/listes.ts';
 import type { DonneesSite } from './gabarit.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
 import type { CitationDuTexte } from './modeles.ts';
@@ -69,6 +69,12 @@ import type { CitationDuTexte } from './modeles.ts';
  */
 export const FORMAT2 = {
   boutonVoyant: 'Trouver mon voyant',
+  /** Libellé visible du bouton sous 30 rem ; son nom accessible reste `boutonVoyant` (demande de changement n° 40). */
+  boutonVoyantCourt: 'Mon voyant',
+  /** Menu du site (demande de changement n° 40) : libellé visible, nom du bouton, nom de la navigation. */
+  menu: 'Menu',
+  menuNom: 'Menu du site',
+  menuNavigation: 'Toutes les pages',
   lienVotreMarque: 'Votre marque',
   /** Lu par les lecteurs d'écran avant la ligne d'écart, sans être affiché (pilote, règle 2b). */
   selonLaMarque: 'Selon la marque : ',
@@ -131,13 +137,47 @@ export const tuile = (pictogramme: string, couleur: string): string => `<span cl
  * bouton « Trouver mon voyant » vers la page outil, seulement si elle est construite. La mention en tête n'y est pas :
  * elle ouvre la tête de page, dans `main`.
  */
-export function bandeauFormat2(entree: { adresseOutil?: string | undefined; pictogrammeBouton?: string | undefined }): string {
+export function bandeauFormat2(entree: { adresseOutil?: string | undefined; pictogrammeBouton?: string | undefined; menu?: string | undefined }): string {
   const [premiere, ...suite] = PARTIES_DU_NOM;
   const nom = `${premiere}${suite.map((p) => `<span>${p}</span>`).join('')}`;
   const icone = entree.pictogrammeBouton !== undefined ? pictogrammeDecoratif(entree.pictogrammeBouton).replace('<svg ', '<svg width="18" height="18" ') : '';
-  const bouton = entree.adresseOutil !== undefined ? `<a class="bouton-voyant" href="${attributHtml(entree.adresseOutil)}" data-bouton-voyant>${icone}${texteHtml(FORMAT2.boutonVoyant)}</a>` : '';
-  return `<div class="bandeau-int"><a class="nom-du-site" href="/">${logoEnLigne(32)}<span class="nom-texte">${nom}</span></a>${bouton}</div>`;
+  // Demande de changement n° 40 : sous 30 rem, le libellé visible devient « Mon voyant » (charte-b.css) ; le nom accessible
+  // reste « Trouver mon voyant » (aria-label), qui contient le libellé visible (WCAG 2.5.3).
+  const libelles = `<span class="bouton-libelle-long">${texteHtml(FORMAT2.boutonVoyant)}</span><span class="bouton-libelle-court" aria-hidden="true">${texteHtml(FORMAT2.boutonVoyantCourt)}</span>`;
+  const bouton =
+    entree.adresseOutil !== undefined ? `<a class="bouton-voyant" href="${attributHtml(entree.adresseOutil)}" aria-label="${attributHtml(FORMAT2.boutonVoyant)}" data-bouton-voyant>${icone}${libelles}</a>` : '';
+  return `<div class="bandeau-int"><a class="nom-du-site" href="/">${logoEnLigne(32)}<span class="nom-texte">${nom}</span></a>${entree.menu ?? ''}${bouton}</div>`;
 }
+
+/** Page que listent le menu du site et l'accueil : adresse, libellé court et thème (accueil.ts, pagesListees). */
+export interface PageDuMenu {
+  adresse: string;
+  libelle: string;
+  theme: Theme;
+}
+
+/**
+ * Menu du site (demande de changement n° 40, lot U1) : un `details` du bandeau, sans script, qui ouvre la liste des pages
+ * construites, par thème, dans l'ordre et sous les titres de l'accueil (même liste : `pagesListees`, générée depuis le
+ * plan ; contrôles MENU-*). Un volet (`details`) par thème, avec son nombre de pages ; la page affichée porte
+ * aria-current="page" et son thème est le seul volet ouvert (aucun sur l'accueil, le socle et la 404). Sur ordinateur, la
+ * feuille de style ouvre les quatre volets là où le navigateur connaît ::details-content. Vide si aucune page n'est construite.
+ */
+export function menuFormat2(entree: { pages: readonly PageDuMenu[]; adressePage?: string | undefined }): string {
+  const themes = THEMES.flatMap((theme) => {
+    const pages = entree.pages.filter((p) => p.theme === theme);
+    if (pages.length === 0) return [];
+    const ouvert = pages.some((p) => p.adresse === entree.adressePage);
+    const liens = pages.map((p) => `<li><a href="${attributHtml(p.adresse)}"${p.adresse === entree.adressePage ? ' aria-current="page"' : ''}>${texteHtml(p.libelle)}</a></li>`).join('');
+    const nombre = `<span class="menu-nombre">${pages.length}<span class="vh">${pages.length > 1 ? ' pages' : ' page'}</span></span>`;
+    return [`<details class="menu-theme" data-menu-theme="${theme}"${ouvert ? ' open' : ''}><summary>${texteHtml(LIBELLES_THEMES[theme])} ${nombre}</summary><ul>${liens}</ul></details>`];
+  });
+  if (themes.length === 0) return '';
+  return `<details class="menu-site" data-menu><summary aria-label="${attributHtml(FORMAT2.menuNom)}"><span class="menu-libelle">${texteHtml(FORMAT2.menu)}</span></summary><nav class="menu-panneau" aria-label="${attributHtml(FORMAT2.menuNavigation)}">${themes.join('')}</nav></details>`;
+}
+
+/** Ancre de la section d'un thème sur l'accueil (accueil.ts : `da-accueil-<thème>`), cible des liens du pied de page. */
+export const ancreThemeAccueil = (theme: Theme): string => `da-accueil-${theme}`;
 
 /**
  * Adresse vers laquelle mène le bouton « Trouver mon voyant » du bandeau sur une page : celle de la page outil, sauf sur la
@@ -147,14 +187,28 @@ export function bandeauFormat2(entree: { adresseOutil?: string | undefined; pict
 export const adresseBoutonVoyant = (adresseOutil: string | undefined, adressePage: string | undefined): string | undefined =>
   adresseOutil !== undefined && adressePage !== adresseOutil ? adresseOutil : undefined;
 
-/** Pied du format 2 : « Signaler une erreur » (adresse de la page dans le message) et lien des mentions légales. */
-export function piedFormat2(adressePage?: string, adresseConfidentialite?: string): string {
+/**
+ * Pied du format 2 : liens de navigation (demande de changement n° 40 : « À propos », « Méthode » et les thèmes qui ont des
+ * pages, vers leurs sections de l'accueil ; seulement si « à propos » est construite : PIED-LIENS), « Signaler une erreur »
+ * (adresse de la page dans le message) et lien des mentions légales.
+ */
+export function piedFormat2(adressePage?: string, adresseConfidentialite?: string, navigation?: { aPropos: string; libelleAPropos: string; themes: readonly Theme[] }): string {
+  const nav =
+    navigation !== undefined
+      ? `<ul class="pied-nav" data-pied-nav>${[
+          `<a href="${attributHtml(navigation.aPropos)}">${texteHtml(navigation.libelleAPropos)}</a>`,
+          `<a href="${attributHtml(`${navigation.aPropos}#${ANCRE_METHODE}`)}">${texteHtml(LIBELLE_LIEN_METHODE)}</a>`,
+          ...THEMES.filter((t) => navigation.themes.includes(t)).map((t) => `<a href="/#${ancreThemeAccueil(t)}">${texteHtml(LIBELLES_THEMES[t])}</a>`),
+        ]
+          .map((a) => `<li>${a}</li>`)
+          .join('')}</ul>`
+      : '';
   const signaler = `<span class="signaler-erreur" data-signaler-erreur><!--email_off--><a href="${attributHtml(lienSignalement(adressePage))}">${texteHtml(LIBELLE_SIGNALER_ERREUR)}</a> (${texteHtml(ADRESSE_SIGNALEMENT)})<!--/email_off--></span>`;
   const confidentialite =
     adresseConfidentialite !== undefined
       ? ` · <span class="lien-confidentialite" data-lien-confidentialite><a href="${attributHtml(adresseConfidentialite)}#${ANCRE_CONFIDENTIALITE}">${texteHtml(LIBELLE_LIEN_CONFIDENTIALITE)}</a></span>`
       : '';
-  return `<p>${signaler}${confidentialite}</p>`;
+  return `${nav}<p>${signaler}${confidentialite}</p>`;
 }
 
 /** Tête de page (fond nuit) : mention en tête, fil d'Ariane, H1. */

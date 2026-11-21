@@ -15,7 +15,7 @@ import { DOSSIER_PAGES_DEMO_FORMAT2, constatsDemoPubliee, pageAvecBrouillon, voy
 import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
 import { chargerIllustrations } from './demo-format2.ts';
 import { constatsLibellesPictogrammes } from '../../src/lib/pictogrammes.ts';
-import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
+import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerMenuEtPied, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
   constats: Constat[];
@@ -180,6 +180,8 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   const adresseOutil = construitesEditoriales.find((p) => p.id === ID_OUTIL_VOYANTS) !== undefined ? contexte.plan.get(ID_OUTIL_VOYANTS)?.adresse : undefined;
   const adresseAPropos = contexte.plan.get(PAGE_METHODE)?.adresse;
   const aProposConstruite = adresseAPropos !== undefined && (await listerFichiers(dist, '.html')).some((c) => adresseDepuisFichier(relative(dist, c).split('\\').join('/')) === adresseAPropos);
+  // Pages éditoriales construites, dans l'ordre du plan : liste de l'accueil et du menu du site.
+  const pagesListeesDuSite = [...contexte.plan.values()].filter((ligne) => construitesEditoriales.some((p) => p.id === ligne.id)).map((ligne) => ({ adresse: ligne.adresse, theme: ligne.theme }));
   constats.push(
     ...(await controlerAccueil(dist, {
       pages: construitesEditoriales.flatMap((p) => {
@@ -190,6 +192,8 @@ export async function controlerSite(options: { racine: string; dist: string; auj
       aPropos: aProposConstruite ? adresseAPropos : undefined,
     })),
   );
+  // Menu du site et liens du pied de page (demande de changement n° 40, lot U1), sur chaque page au format 2.
+  constats.push(...(await controlerMenuEtPied(dist, { pages: pagesListeesDuSite, aPropos: aProposConstruite ? adresseAPropos : undefined })));
   constats.push(...(await controlerFixturesNonPubliees(dist)));
   constats.push(...(await controlerWrangler(racine)));
   // Favicon et icône de la marque (premier lot) : liens de chaque page et fichiers servis (FAVICON-*).
