@@ -37,7 +37,10 @@ sous 30 rem et le pied de page complet, sur les maquettes `m1-*` ; captures du l
   droite ; à 520 px et au-delà, une rangée.
 - **Captures de la CI** (police chargée et police de secours) : demande `travaux/captures-ci/demande.json` (essai 4) ;
   menu fermé à 320, 375, 390, 481 et 1366 px, ouvert à 320, 375, 390 et 1366 px, 404 menu ouvert, pied de page.
-- **CI de la version finale** : à compléter (contrôles, mesures FORMAT2-MESURES, Lighthouse).
+- **CI** : sur 18053c26 (corrections de la revue), 881 tests sur 882 ; le test du bandeau attendait l'ancien balisage (sans
+  le groupe du menu et du bouton) : corrigé (13c32452). Recette des exemples et démonstration du format 2 vertes.
+- **CI de la version fusionnée** : celle de la tête de la pull request, après la fusion de `main` (demande n° 39, lot U0) :
+  contrôles, FORMAT2-MESURES et Lighthouse, exigés verts par la protection de `main` avant la fusion.
 
 ## 3. Revue indépendante
 > **Revue indépendante** (agent sans contexte de la rédaction, 21/11, sur 0ce5f585 : diff complet, journaux de la CI,
