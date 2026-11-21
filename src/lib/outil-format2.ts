@@ -40,7 +40,7 @@ import {
 import { coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees } from './calcul.ts';
 import { emplacementPub } from './emplacements-pub.ts';
 import { indexerPlan } from './plan.ts';
-import { LIBELLES_PICTOGRAMMES } from './pictogrammes.ts';
+import { LIBELLES_PICTOGRAMMES, libelleCoupable } from './pictogrammes.ts';
 import {
   BALANCE,
   FORMAT2,
@@ -200,7 +200,7 @@ export function indexFormat2(modele: ModeleOutil, pictogrammes: ReadonlyMap<stri
       .filter((e) => e.couleur === g.couleur)
       .map((e) => {
         const cas = casDeLaTuile(e);
-        return `<li data-outil-index-entree="${attributHtml(e.cle)}" data-couleur="${attributHtml(e.couleur)}"><a href="#${attributHtml(ancreLigneOutil(e.premiere))}">${tuileOutil(pictogrammes.get(e.pictogramme), e.pictogramme, e.couleur)}<span>${texteHtml(e.libelle)}</span>${cas !== undefined ? ` <span class="cas">${texteHtml(cas)}</span>` : ''}</a></li>`;
+        return `<li data-outil-index-entree="${attributHtml(e.cle)}" data-couleur="${attributHtml(e.couleur)}"><a href="#${attributHtml(ancreLigneOutil(e.premiere))}">${tuileOutil(pictogrammes.get(e.pictogramme), e.pictogramme, e.couleur)}<span>${texteHtml(libelleCoupable(e.libelle))}</span>${cas !== undefined ? ` <span class="cas">${texteHtml(cas)}</span>` : ''}</a></li>`;
       });
     const id = `${ANCRE_OUTIL}-index-${g.couleur}`;
     return `<div class="outil-index-couleur" data-outil-index-couleur="${attributHtml(g.couleur)}"><h4 id="${attributHtml(id)}">${diode(g.couleur)}${texteHtml(g.titre)}</h4><ul class="grille-voyants" role="list" aria-labelledby="${attributHtml(id)}">${tuiles.join('')}</ul></div>`;

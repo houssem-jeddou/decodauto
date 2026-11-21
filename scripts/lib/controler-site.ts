@@ -14,7 +14,7 @@ import { controlerAdsense } from './adsense.ts';
 import { DOSSIER_PAGES_DEMO_FORMAT2, constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
 import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
 import { chargerIllustrations } from './demo-format2.ts';
-import { constatsLibellesPictogrammes } from '../../src/lib/pictogrammes.ts';
+import { constatsCoupuresLibelles, constatsLibellesPictogrammes } from '../../src/lib/pictogrammes.ts';
 import { constatsMaillage, controler404, controlerCanonicalEtPlanDuSite, controlerAccueil, controlerComposantsCommuns, controlerFixturesNonPubliees, controlerIndexation, controlerMenuEtPied, controlerPagesDuPlan, controlerWrangler } from './dist.ts';
 
 export interface BilanControle {
@@ -172,6 +172,7 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   }
   // Libellé de chaque pictogramme (grille de l'accueil au format 2) : un par fichier de src/pictogrammes (PICTO-LIBELLE).
   constats.push(...constatsLibellesPictogrammes((await chargerPictogrammes(racine)).map((p) => p.id)));
+  constats.push(...constatsCoupuresLibelles());
   // Garde-fou : une page de la construction de démonstration du format 2 n'est jamais dans un site contrôlé comme réel.
   if (brouillonFormat2 === undefined) {
     for (const chemin of await listerFichiers(dist, '.html')) constats.push(...constatsDemoPubliee(await readFile(chemin, 'utf8'), relative(dist, chemin).split('\\').join('/')));

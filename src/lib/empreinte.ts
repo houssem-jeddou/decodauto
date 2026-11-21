@@ -26,6 +26,8 @@ import { TEXTES_OUTIL, TEXTES_OUTIL_FORMAT2 } from './outil-textes.ts';
  */
 export function normaliserTexte(texte: string): string {
   return texte
+    // Trait d'union conditionnel (U+00AD, coupure des libellés de la grille des dessins) : invisible, sans effet sur le texte.
+    .replace(/\u00ad/g, '')
     .normalize('NFKD')
     .replace(/\p{Diacritic}/gu, '')
     .replace(/œ/g, 'oe')
