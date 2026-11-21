@@ -1,14 +1,51 @@
 {
-  "lot": "U2, outil en variante légère (demande de changement n° 41) et accueil en pastilles (P5)",
-  "essai": 2,
+  "lot": "U2, outil en variante légère (demande de changement n° 41) et accueil en pastilles (P5), avec les corrections du lot U1",
+  "essai": 3,
   "captures": [
+    {
+      "nom": "u2-outil-ecran",
+      "adresse": "/voyants/",
+      "largeurs": [
+        320,
+        375,
+        1366
+      ]
+    },
     {
       "nom": "u2-outil-encadre",
       "adresse": "/voyants/",
       "zone": "[data-encadre-decision]",
       "largeurs": [
         320,
-        375
+        375,
+        1366
+      ]
+    },
+    {
+      "nom": "u2-outil-filtre",
+      "adresse": "/voyants/",
+      "zone": "[data-outil-filtre]",
+      "largeurs": [
+        375,
+        1366
+      ]
+    },
+    {
+      "nom": "u2-accueil-themes",
+      "adresse": "/",
+      "zone": "[data-accueil-pages]",
+      "largeurs": [
+        320,
+        375,
+        1366
+      ]
+    },
+    {
+      "nom": "u2-accueil-ecran",
+      "adresse": "/",
+      "largeurs": [
+        375,
+        1366
       ]
     }
   ]
