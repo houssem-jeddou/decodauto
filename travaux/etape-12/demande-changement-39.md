@@ -2,8 +2,8 @@
 
 Proposée par Claude le 20/11/2026 (nuit), étape 12 (boucle mensuelle), lot d'améliorations, partie 3. Version 2, corrigée
 après la revue indépendante (« à corriger », deux constats bloquants sur le texte de la consigne : voir le paquet de la
-partie 3) ; les corrections n'ont pas été relues. **Statut : proposée, en attente de la décision de Houssem.** Rien n'est
-appliqué avant son accord.
+partie 3) ; les corrections n'ont pas été relues. **Statut : acceptée par Houssem le 21/11/2026 (7 h 11), option A** (§8). Elle s'applique par
+une pull request dédiée.
 
 La note du lot F1 (`travaux/etape-13/f1/a-reporter-f1.4.md`) prévoyait une demande rédigée par Houssem. Claude la propose
 (règle 6) ; Houssem décide. Format de `docs/03` : élément concerné, changement proposé, raison, impact sur ce qui est
@@ -143,3 +143,12 @@ appliquée à la construction réelle : `lot-ameliorations/partie-3/consigne-fap
    ne rien changer.
 2. Valider le texte de la consigne mot pour mot, ou le corriger.
 3. Avancer les dates « Mis à jour le » des 31 pages (recommandé, règle 14 b).
+
+## 8. Décision de Houssem
+**Acceptée par Houssem le 21/11/2026 à 7 h 11** (heure de Tunis), en réponse à la synthèse du matin, qui lui proposait :
+« demande n° 39 acceptée en option A, texte mot pour mot : « Sur l'autoroute ou une route express : allumez les feux de
+détresse et enfilez votre gilet avant de sortir de la voiture. » ; dates des 31 pages avancées ». Sa réponse, mot pour
+mot : « Je valide tout. Et s'il y a un choix, pars avec ta recommandation. […] s'il y a des PR, fusionne. »
+1. Option A ; l'option B n'est pas retenue (elle demanderait d'abord une demande de changement de la charte, §2.2).
+2. Texte de la consigne validé mot pour mot.
+3. Dates « Mis à jour le » avancées sur les pages qui affichent la consigne, le jour de leur mise en ligne.

@@ -1,4 +1,4 @@
-# Étape 12, lot d'améliorations, partie 3 : paquet de décision (brouillon, jamais validé)
+# Étape 12, lot d'améliorations, partie 3 : paquet de décision (validé par Houssem le 21/11/2026, §4)
 
 Préparé par Claude dans la nuit du 20 au 21/11/2026, sur la branche `etape-12/ameliorations-3a` (PR #95, en brouillon).
 Version 2, corrigée après la revue indépendante (encadré en fin de paquet).
@@ -8,7 +8,7 @@ terminé, sauf :
 - le lot 4b (P0380, P1351), toujours sans source admise après la recherche du 20/11 ;
 - les points datés (relevés J+14 et J+30).
 
-Rien n'est fusionné ni publié sans la décision de Houssem.
+Rien n'est fusionné ni publié sans la décision de Houssem : **validé le 21/11/2026 à 7 h 11** (§4).
 
 ## 1. Ce qui est prêt et demande une validation
 
@@ -117,6 +117,27 @@ Voir `travaux/etape-12/demande-changement-39.md`, version 2.
    - l'option A (recommandée), l'option B (avec une demande de changement de la charte), ou rien ;
    - le texte de la consigne, mot pour mot ;
    - les dates des 31 pages.
+
+## 4. Validation de Houssem
+**Validé par Houssem le 21/11/2026 à 7 h 11** (heure de Tunis), en réponse à la synthèse du matin, qui lui proposait la
+ligne de validation ci-dessous (PR #95, contrôles verts sur b4683e69) :
+
+> « OK PR #95 : typographie et contrôle TYPO-UNITE ; les deux phrases du voyant moteur et la date au 20/11 ; demande n° 39
+> acceptée en option A, texte mot pour mot : « Sur l'autoroute ou une route express : allumez les feux de détresse et
+> enfilez votre gilet avant de sortir de la voiture. » ; dates des 31 pages avancées. »
+
+Sa réponse, mot pour mot : « Je valide tout. Et s'il y a un choix, pars avec ta recommandation. […] s'il y a des PR,
+fusionne. S'il y a un travail que tu as préparé avec un plan, fais-le, etc. »
+
+Décisions qui en découlent :
+1. typographie et contrôle TYPO-UNITE (1.1) : fusion ;
+2. page voyant moteur (1.2) : les deux phrases réécrites, date « Mis à jour le » au 20/11 ;
+3. demande n° 39 (1.3) : acceptée en option A, texte de la consigne mot pour mot, dates des 31 pages avancées. Elle
+   s'applique par une pull request dédiée (champ `consigne` du montant, rendu, contrôles, registre, empreinte du montant,
+   captures, revue indépendante), après la fusion de celle-ci.
+
+Après la fusion : vérification en ligne (`/voyants/fap/`, `/voyants/adblue/`, `/voyants/moteur/`) ; l'idée reportée
+« espace insécable » sort du journal.
 
 ## Revue indépendante
 **Verdict de la revue** : « à corriger », avec deux constats bloquants, tous deux sur la demande n° 39. La typographie et
