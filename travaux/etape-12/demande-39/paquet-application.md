@@ -102,7 +102,8 @@ de la demande : consigne sur 3 lignes à 375 px (4 à 320 px), 2 à 1366 px, mê
 - Arbre ou étapes au-delà de six écrans (4 002 px), déjà le cas avant ce lot : `/huile-moteur/verifier-niveau/` 4 497,
   `/nettoyer-fap/` 4 167, `/perte-de-puissance-voiture/` 4 523.
 
-**Lighthouse** : voir la CI de la version finale (§6).
+**Lighthouse** (CI sur e5583f41, corrections de la revue comprises ; 3 passages, médianes) : 40 pages, 100 en
+performance, accessibilité, bonnes pratiques et SEO ; CLS 0 ; LCP de 756 à 1 057 ms.
 
 ## 5. Revue indépendante
 > **Revue indépendante** (agent sans contexte de la rédaction, 21/11, sur fc634850 : diff complet, construction de la CI
@@ -119,7 +120,9 @@ de la demande : consigne sur 3 lignes à 375 px (4 à 320 px), 2 à 1366 px, mê
 >   glissait (M7).
 > - **Écarté** : rien.
 > - **Non relu** (ajouté après la revue) : ces corrections.
-> - **Reste à vérifier** : Lighthouse sur la version finale ; un vrai téléphone ; un lecteur d'écran.
+> - **Reste à vérifier** : un vrai téléphone ; un lecteur d'écran ; les 31 pages en ligne après le déploiement.
 
 ## 6. Validation de Houssem
-Demande acceptée le 21/11/2026 à 7 h 11 (texte de la consigne mot pour mot, dates avancées) : voir la demande, §8.
+Demande acceptée le 21/11/2026 à 7 h 11 (texte de la consigne mot pour mot, dates avancées) : voir la demande, §8. Elle
+a demandé de fusionner les pull requests prêtes : #101 est fusionnée quand sa CI est verte sur la tête de `main`, après #96
+(ordre : #99, #96, #101, #102, #103, #104).
