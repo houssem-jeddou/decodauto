@@ -105,6 +105,19 @@ describe('format 2 : pages code défaut et pneus et obligations (F1.3b)', () => 
     assert.equal(cheerio.load(montagne.html)('[data-depannage]').length, 0);
   });
 
+  test('dépannage sur autoroute : consigne de la demande n° 39 sous le tarif, dans la même rangée, source R416-19 listée dans « Sources »', () => {
+    const $ = cheerio.load(code.html);
+    const consigne = $('[data-encadre-cout] [data-depannage] > [data-depannage-consigne]');
+    assert.equal(consigne.length, 1);
+    assert.equal($('[data-depannage-consigne]').length, 1);
+    const plat = (t: string): string => t.replace(/[\s\u00a0\u202f]+/g, ' ').replace(/’/g, "'").trim();
+    assert.equal(plat(consigne.text()), "Sur l'autoroute ou une route express : allumez les feux de détresse et enfilez votre gilet avant de sortir de la voiture.");
+    // Sous le tarif et ses dates, dernier élément de la rangée.
+    assert.ok(consigne.is(':last-child'));
+    assert.equal($('[data-sources] [data-source-id="code-de-la-route-r416-19"]').length, 1);
+    assert.equal(cheerio.load(montagne.html)('[data-depannage-consigne]').length, 0);
+  });
+
   test('page informative (pression des pneus) : réponse directe en tête de l\'encadré, puis la première situation ; fiche « Le texte en bref » en carte ; tableau en cartes', () => {
     const $ = cheerio.load(pression.html);
     const reponse = $('[data-encadre-decision] > [data-reponse-directe]');
@@ -148,6 +161,9 @@ describe('format 2 : pages code défaut et pneus et obligations (F1.3b)', () => 
       ['CODE-FICHE-INCOMPLETE', code, modifie(code.html, ($) => $('[data-fiche-code] [data-fiche-ligne]').first().remove())],
       ['CODE-CAS-MARQUE-INCOMPLET', code, modifie(code.html, ($) => $('[data-cas-marque]').first().remove())],
       ['R9-ENCADRE-CONTENU', code, modifie(code.html, ($) => $('[data-depannage]').remove())],
+      ['R9-ENCADRE-CONTENU', code, modifie(code.html, ($) => $('[data-depannage-consigne]').remove())],
+      ['DEPANNAGE-CONSIGNE', code, modifie(code.html, ($) => $('[data-depannage-consigne]').appendTo($('[data-encadre-cout]')))],
+      ['DEPANNAGE-CONSIGNE', code, modifie(code.html, ($) => $('[data-depannage-consigne]').clone().appendTo($('[data-depannage]')))],
       ['FORMAT2-ILLUSTRATION', code, modifie(code.html, ($) => $('figure[data-illustration]').remove())],
       ['FICHE-TEXTE-INCOMPLETE', montagne, modifie(montagne.html, ($) => $('[data-texte-reference] [data-fiche-ligne]').last().remove())],
       ['FORMAT2-REPONSE', pression, modifie(pression.html, ($) => $('[data-reponse-directe]').remove())],

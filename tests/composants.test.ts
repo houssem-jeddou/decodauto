@@ -306,6 +306,7 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     parcourir(demo.brut);
     for (const s of demo.page.situations) parcourir(demo.contexte.voyants.get(s.voyant ?? '')?.citations, 'citations');
     for (const id of cout.montants) for (const src of demo.contexte.couts.montants.get(id)?.sources ?? []) ids.add(src);
+    for (const id of cout.montants) for (const src of demo.contexte.couts.montants.get(id)?.consigne?.sources ?? []) ids.add(src);
     assert.deepEqual([...sourcesDeLaPageCitees(demo.page, lignes, demo.contexte.couts, cout).keys()].sort(), [...ids].sort());
   });
 
@@ -315,6 +316,8 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     for (const id of citees.keys()) assert.match(html, new RegExp(`data-source-id="${id}"`));
     // Le dépannage automatique (page d'arrêt) cite ses textes : ils sont dans la liste.
     assert.ok(citees.has('arrete-2025-12-08-depannage-autoroute'));
+    // Sa consigne de sécurité (demande de changement n° 39) aussi : l'article R416-19 du code de la route.
+    assert.ok(citees.has('code-de-la-route-r416-19'));
     assert.match(html, /Consulté le \d{2}\/\d{2}\/\d{4}/);
   });
 

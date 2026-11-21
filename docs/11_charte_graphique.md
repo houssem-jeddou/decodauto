@@ -6,6 +6,8 @@
 
 **Version 3, 18/11/2026.** Deux corrections validées par Houssem le 18/11 à 21 h 43 (étape 12, lot d'améliorations, partie 1, PR n° 92 ; paquet `travaux/etape-12/lot-ameliorations/paquet-charte.md`) : tableaux du texte en cartes sur téléphone à partir de trois colonnes, ou à deux colonnes au-delà de 20 mots dans une cellule ; pastilles du sommaire à angles de 16 px sur ordinateur (§4, « Tableaux », « Sommaire, état long », « Tableaux du texte »).
 
+**Version 4, 21/11/2026.** Consigne de sécurité sous le tarif du dépannage sur autoroute (demande de changement n° 39, acceptée par Houssem le 21/11 à 7 h 11 ; rangée « dépannage sur autoroute », §4).
+
 **Ce qui fait foi** : les styles du dépôt (`src/styles/charte-b.css`, variables et composants), mis en œuvre au lot F1
 (porte du 16/11/2026). Une variante de composant passe par la charte : ce document et les styles. Jamais de style isolé
 dans une page.
@@ -97,7 +99,7 @@ Ordre de la page éditoriale (charte éditoriale §4 et §5.1, puis demande n° 
 | Tableaux du texte | Bloc de la charte. Sur téléphone, en cartes à partir de trois colonnes, ou à deux colonnes quand une cellule porte plus de 20 mots : la première cellule de la rangée est le titre de la carte, l'intitulé de la colonne précède chaque autre valeur, une cellule vide n'affiche rien, rôles du tableau écrits. Sur ordinateur, la première cellule de chaque rangée en gras (en-tête de rangée). Cas décrits par marque : une seule carte, un cas par rangée, un filet entre deux cas, la marque en tête. Sous 360 px, une cellule coupe un mot trop long ; dans une carte, sans césure. |
 | Étapes d'un tutoriel | Cartes numérotées, sans retrait de liste. |
 | Listes sans puces (questions de l'arbre, étapes, historique) | `role="list"`, comme l'encadré. |
-| Rangée « dépannage sur autoroute » | Rangée du coût de l'encadré : cellule sombre, objet du montant en gras, texte validé inchangé ; sans triangle (forme réservée aux verdicts). |
+| Rangée « dépannage sur autoroute » | Rangée du coût de l'encadré : cellule sombre, objet du montant en gras, texte validé inchangé ; sans triangle (forme réservée aux verdicts). Sous le tarif et ses dates, dans la même cellule, la consigne de sécurité en texte courant (`.depannage-consigne`, bloc à 0,35 rem du tarif ; demande de changement n° 39). |
 | Ligne d'écart | Lien « Votre marque » vers la partie du voyant au tableau des notices : sur la page, ou sur la page du voyant que le plan lie à la page ; page outil : vers la page du voyant quand elle est construite, jamais sur la ligne STOP. Ligne saisie (PR #73, 17/11/2026) : vers la phrase de ses notices, dans le bloc « Notices » sous l'encadré ; la phrase ciblée garde une marge de défilement, passe en couleur pleine et affiche dessous « Selon les marques : » puis l'écart entre marques en entier (« Ligne n, selon les marques : » quand plusieurs lignes partagent la phrase). |
 | Page du socle et 404 | Tête de page nuit sans encadré, même écart entre la mention et le H1 que les pages éditoriales ; fiche de l'auteur et « Méthode » en cartes ; 404 : phrase, un seul bouton « Trouver mon voyant » (aucun dans le bandeau), lien vers l'accueil, pied de page en bas de l'écran. |
 | Bandeau sous 360 px | Le dessin du bouton « Trouver mon voyant » s'efface, son texte reste ; nom du site et marges resserrés (aucun défilement horizontal à 320 px). |

@@ -43,6 +43,8 @@ export interface TexteDeCout {
   verifie_le: Date;
   reverifier_apres_jours: number;
   automatique?: AffichageAutomatique | undefined;
+  /** Consigne de sécurité affichée sous le montant (demande de changement n° 39). */
+  consigne?: { texte: string; sources: readonly string[] } | undefined;
   validation?: string | undefined;
 }
 
@@ -211,6 +213,8 @@ export function textesAttendusCout(resolu: CoutResolu, couts: DonneesCouts): str
     const montant = couts.montants.get(id);
     if (montant === undefined) return undefined;
     textes.push(montant.texte, ...datesAffichees(montant));
+    // Demande de changement n° 39 : la consigne s'affiche sous le montant, dans l'encadré (R9-ENCADRE-CONTENU).
+    if (montant.consigne !== undefined) textes.push(montant.consigne.texte);
   }
   for (const id of resolu.prisesEnCharge) {
     const prise = couts.prises_en_charge.get(id);

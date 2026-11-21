@@ -40,7 +40,7 @@ import {
   type Source,
   type VoyantBase,
 } from '../schemas/donnees.ts';
-import { FOURCHETTE_SOURCES_MIN, FOURCHETTE_VALIDITE_JOURS, GRILLE_COUTS, rangTranche, TRANCHE_MIN_PRISE_EN_CHARGE, type TrancheCout, type TrancheGrille } from '../schemas/cout.ts';
+import { CONSIGNE_MOTS_MAX, FOURCHETTE_SOURCES_MIN, FOURCHETTE_VALIDITE_JOURS, GRILLE_COUTS, rangTranche, TRANCHE_MIN_PRISE_EN_CHARGE, type TrancheCout, type TrancheGrille } from '../schemas/cout.ts';
 import { schemasPage, type PageEditoriale } from '../schemas/pages.ts';
 import { plusMois, type Citation } from '../schemas/briques.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS, MOTS_REPERES, urgenceAdmise } from '../schemas/grille.ts';
@@ -473,7 +473,11 @@ export function construireContexte(
  *  - les dates : un montant ou une prise en charge à revérifier (COUT-A-REVERIFIER), une fourchette relevée il y a
  *    plus de FOURCHETTE_VALIDITE_JOURS jours (COUT-FOURCHETTE-A-REVOIR), une date de vérification ou de relevé dans
  *    le futur (COUT-DATE-FUTURE, qui couperait les deux autres). Ce sont des alertes : elles ne bloquent jamais une
- *    construction ; le contrôle du lundi échoue sur les deux premières (--echouer-sur).
+ *    construction ; le contrôle du lundi échoue sur les deux premières (--echouer-sur) ;
+ *  - la consigne de sécurité d'un montant (demande de changement n° 39) : seulement sur un montant affiché de lui-même
+ *    (DEPANNAGE-CONSIGNE-PLACE), sources du registre et toutes de première main (R3-SOURCE-INCONNUE,
+ *    DEPANNAGE-CONSIGNE-SOURCE : charte §2.2, un geste conseillé ne vient jamais d'une source secondaire),
+ *    CONSIGNE_MOTS_MAX mots au plus (DEPANNAGE-CONSIGNE-MOTS).
  */
 function lireCouts(brut: unknown, sources: ReadonlyMap<string, Source>, aujourdhui: Date, constats: Constat[]): DonneesCouts {
   if (brut === undefined) return COUTS_VIDES;
@@ -525,6 +529,21 @@ function lireCouts(brut: unknown, sources: ReadonlyMap<string, Source>, aujourdh
     controlerTexte(montant, 'montant');
     if (!montant.sources.some((id) => sources.get(id)?.categorie === 'legifrance')) {
       constats.push(erreur('COUT-MONTANT-SOURCE', `montant « ${montant.id} » : un montant fixé par un texte cite au moins une source de Légifrance`, fichier));
+    }
+    if (montant.consigne !== undefined) {
+      const etiquette = `montant « ${montant.id} », consigne`;
+      inconnues(montant.consigne.sources, etiquette);
+      if (montant.automatique === undefined) {
+        constats.push(erreur('DEPANNAGE-CONSIGNE-PLACE', `${etiquette} : une consigne n'accompagne qu'un montant affiché de lui-même (tarif du dépannage sur une page à verdict d'arrêt, demande de changement n° 39)`, fichier));
+      }
+      for (const id of montant.consigne.sources) {
+        const source = sources.get(id);
+        if (source !== undefined && !SOURCES_PREMIERE_MAIN.includes(source.categorie)) {
+          constats.push(erreur('DEPANNAGE-CONSIGNE-SOURCE', `${etiquette} : la source « ${id} » (catégorie « ${source.categorie} ») n'est pas de première main ; chaque geste conseillé en vient (charte §2.2)`, fichier));
+        }
+      }
+      const mots = motsDe(montant.consigne.texte);
+      if (mots > CONSIGNE_MOTS_MAX) constats.push(erreur('DEPANNAGE-CONSIGNE-MOTS', `${etiquette} : ${mots} mots ; ${CONSIGNE_MOTS_MAX} au plus`, fichier));
     }
   }
   for (const prise of prises.values()) controlerTexte(prise, 'prise en charge');
@@ -1791,6 +1810,14 @@ export function controlerEncadre(
   const manquants = [page.question_decision, ...textesCout].filter((t) => !texteEncadre.includes(normaliserTexte(t)));
   if (manquants.length > 0) {
     constats.push(erreur('R9-ENCADRE-CONTENU', `l'encadré de décision n'affiche pas : ${manquants.map((t) => `« ${t} »`).join(', ')}`, fichier));
+  }
+  // Demande de changement n° 39 : la consigne de sécurité est dans la rangée du tarif du dépannage de l'encadré, une fois
+  // par rangée ; son texte, attendu avec le montant (textesCout), fait l'objet de R9-ENCADRE-CONTENU.
+  const consignes = $('[data-depannage-consigne]').toArray();
+  const horsRangee = consignes.filter((el) => !$(el).parent().is('[data-depannage]') || $(el).closest('[data-encadre-decision]').length === 0);
+  const rangeesDoublees = encadre.find('[data-depannage]').toArray().filter((el) => $(el).children('[data-depannage-consigne]').length > 1);
+  if (horsRangee.length > 0 || rangeesDoublees.length > 0) {
+    constats.push(erreur('DEPANNAGE-CONSIGNE', "la consigne de sécurité (data-depannage-consigne) s'affiche dans la rangée du tarif du dépannage (data-depannage) de l'encadré, une fois par rangée (demande de changement n° 39)", fichier));
   }
   // Une ligne affichée par situation, dans l'ordre, avec son propre niveau (data-verdict, data-urgence) et ses textes,
   // sans le libellé d'un autre niveau.
