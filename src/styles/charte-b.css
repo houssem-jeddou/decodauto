@@ -305,15 +305,16 @@ main>.accueil-main{max-width:72rem}
 .voyants h2{margin:0 0 .3rem}
 .voyants-chapo{margin:.2rem 0 .6rem;font-size:.9375rem}
 .grille-voyants{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.45rem}
-.grille-voyants li{display:grid}
-/* Libellés de la grille en 12 px (pilote) : les 18 tiennent à 375 px sans coupure, police chargée ou de secours ; sur un écran plus
-   étroit, un mot long se coupe avec un tiret (jamais sans), seulement s'il a 10 lettres au moins (seconde revue de F1.2). */
-/* Coupure des libellés : un mot de 10 lettres au moins se coupe avec un tiret (« Préchauf-fage »), selon le dictionnaire du
-   navigateur (Android, iOS, Firefox, Chrome de bureau). Pas de coupure de repli (overflow-wrap) : elle couperait aussi, à
-   320 px, des mots de 8 ou 9 lettres qui tiennent dans la marge intérieure de la tuile (« Pressio-n » ; lot U2). */
-.grille-voyants a{display:grid;justify-items:center;align-content:start;gap:.3rem;text-decoration:none;font-size:.75rem;font-weight:600;text-align:center;line-height:1.2;padding:.5rem .3rem;-webkit-hyphens:auto;hyphens:auto;hyphenate-limit-chars:10 4 4}
+/* Une tuile ne s'élargit jamais au-delà de sa case (min-width:0 sur la case et la tuile : revue du lot U2). */
+.grille-voyants li{display:grid;min-width:0}
+/* Libellés de la grille en 12 px (pilote) : un mot de 9 lettres au moins ne se coupe qu'aux endroits prévus, avec un tiret
+   (« Préchauf-fage » : COUPURES_LIBELLES, traits d'union conditionnels), quel que soit le navigateur ; jamais ailleurs
+   (hyphens:manual). Avec 4 cases dès 375 px et 3 en dessous, chaque mot tient dans sa tuile, même dans la police la plus
+   large des navigateurs mesurés (DejaVu Sans, celle de la CI) ; overflow-wrap ne sert que de dernier recours. */
+.grille-voyants a{display:grid;justify-items:center;align-content:start;gap:.3rem;min-width:0;text-decoration:none;font-size:.75rem;font-weight:600;text-align:center;line-height:1.2;padding:.5rem .3rem;-webkit-hyphens:manual;hyphens:manual;overflow-wrap:break-word}
 .grille-voyants .tuile{width:2.9rem;height:2.9rem}
-.grille-voyants .tuile :is(svg,img){width:2rem;height:2rem}
+.grille-voyants .tuile svg,.grille-voyants .tuile img{width:2rem;height:2rem}
+@media (max-width:23.4rem){.grille-voyants{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .tous{margin:.7rem 0 0;font-size:.9375rem}
 .themes{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.75rem;margin:1.2rem 0}
 .theme{padding:.9rem 1rem}
@@ -337,7 +338,6 @@ main>.accueil-main{max-width:72rem}
    index des dessins dans la grille de l'accueil, un panneau sombre par groupe de couleur (diode), une cellule de l'encadré
    par ligne de la base. */
 .renvoi{margin:0 0 .5rem;font-size:.9375rem;line-height:1.38}
-.renvoi .bouton-voyant{margin:.35rem 0 0;font-size:.875rem;padding:.4rem .8rem;white-space:normal;min-height:2.25rem}
 .diode{display:inline-block;flex:none;width:.7rem;height:.7rem;border-radius:50%}
 .outil-voyants{margin:1.6rem 0 0}
 .outil-voyants>h2{margin:0 0 .4rem}
@@ -399,6 +399,8 @@ main>.accueil-main{max-width:72rem}
   .tableau-par-marque .cas-sources{margin-top:.3rem;font-size:.8125rem;color:var(--texte-doux)}
 }
 .montant.depannage{margin:.45rem 0 .2rem;padding:.45rem .55rem;font-size:.875rem;line-height:1.4;border-radius:10px}
+/* Consigne de sécurité sous le tarif, dans la même cellule (demande de changement n° 39) */
+.depannage-consigne{display:block;margin-top:.35rem}
 .colonne.socle{padding-top:.2rem}
 .colonne.socle>:is(:first-child,.sommaire-colonne+*)>h2:first-of-type{margin-top:1.1rem}
 .colonne.socle .encart h2,.colonne.socle .encart>h2{margin-top:.2rem}

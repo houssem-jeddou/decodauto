@@ -13,7 +13,7 @@ import * as cheerio from 'cheerio';
 import { dateDesDonnees } from './date-des-donnees.ts';
 import { adresseBoutonVoyant, bandeauFormat2, piedFormat2, renvoiNotices } from '../src/lib/format2.ts';
 import { modeleDeLaPage, pageOutilVoyants, pageOutilVoyantsF2 } from '../src/lib/modeles.ts';
-import { clePaire, entreesIndexFormat2, lienNoticesDeLaCarte, modeleOutilFormat2, outilVoyantsFormat2, paragraphes, texteEntreeIndex } from '../src/lib/outil-format2.ts';
+import { clePaire, entreesIndexFormat2, indexFormat2, lienNoticesDeLaCarte, modeleOutilFormat2, outilVoyantsFormat2, paragraphes, texteEntreeIndex } from '../src/lib/outil-format2.ts';
 import { INTRODUCTION_OUTIL, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, ancreLigneOutil, modeleOutilVoyants, outilVoyants, type ModeleOutil } from '../src/lib/outil-voyants.ts';
 import { ENCADRE_OUTIL_FORMAT2 } from '../src/lib/outil-textes.ts';
 import { LIBELLES_PICTOGRAMMES } from '../src/lib/pictogrammes.ts';
@@ -30,7 +30,8 @@ const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUTIL = 'src/content/voyant/voyants.md';
 const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', OUTIL]);
 /** Texte comparé sans la typographie (espaces insécables, blancs des dessins). */
-const plat = (t: string | undefined): string => (t ?? '').replace(/[\s\u00a0\u202f]+/g, ' ').trim();
+// Texte à plat : espaces réduites, traits d'union conditionnels (coupures des libellés, invisibles) retirés.
+const plat = (t: string | undefined): string => (t ?? '').replace(/\u00ad/g, '').replace(/[\s\u00a0\u202f]+/g, ' ').trim();
 const regles = (constats: readonly { regle: string; gravite: string }[]): string[] => constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle).sort();
 const brouillon = await lireBrouillonFormat2(racine);
 
@@ -302,7 +303,9 @@ describe('format 2 : page outil (F1.3a)', () => {
     const premier = modele.groupes[0];
     assert.ok(premier !== undefined && premier.lignes[0] !== undefined);
     const inconnu: ModeleOutil = { ...modele, groupes: [{ ...premier, lignes: [{ ...premier.lignes[0], pictogramme: 'inconnu' }] }] };
-    assert.throws(() => outilVoyantsFormat2(inconnu, new Map()), /« inconnu » n'a pas de libellé dans LIBELLES_PICTOGRAMMES/);
+    // La grille des dessins est dans l'encadré depuis la demande n° 41 : c'est elle qui lit les libellés.
+    assert.throws(() => indexFormat2(inconnu, new Map()), /« inconnu » n'a pas de libellé dans LIBELLES_PICTOGRAMMES/);
+    assert.throws(() => entreesIndexFormat2(inconnu), /« inconnu » n'a pas de libellé dans LIBELLES_PICTOGRAMMES/);
   });
 
   test('feuille du format 2 : le filtre de chaque couleur de la liste fermée masque les autres groupes, jamais la grille de l\'encadré (demande n° 41) ; le groupe d\'une carte visée s\'affiche', async () => {

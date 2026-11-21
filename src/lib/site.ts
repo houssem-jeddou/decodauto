@@ -39,11 +39,6 @@ const echapperXml = (texte: string): string =>
  */
 export const PARTIES_DU_NOM = ['decod', 'auto'] as const;
 export const NOM_DU_SITE = PARTIES_DU_NOM.join('');
-/**
- * Devise du site, le positionnement de docs/01 : H1 de l'accueil (TITRE_ACCUEIL) et image de partage de la marque
- * (src/lib/partage.ts, lot U3). Source unique.
- */
-export const DEVISE_DU_SITE = 'Votre voiture vous alerte, on vous dit quoi faire.';
 /** Autre nom du site pour Google (propriété alternateName du balisage WebSite) : son nom de domaine, tiré de URL_SITE. */
 export const NOM_ALTERNATIF_DU_SITE = new URL(URL_SITE).host;
 

@@ -17,8 +17,14 @@ relancer.
   contrôle OUTIL-INDEX ; renvoi de l'encadré, contrôle OUTIL-LIEN.
 - **Encadré** : règle 2a (première situation dans le premier écran du téléphone), R9-ENCADRE-CONTENU, R9-ENCADRE-MASQUE
   (rien de masqué dans l'encadré).
-- **Charte graphique** : rangée « Page outil » (`docs/11`).
-- **CLAUDE.md** : ordre de la page outil.
+- **Charte graphique** : rangées « Page outil » et « Accueil, grille des voyants » (`docs/11`).
+- **Structure des contenus** (`docs/08`, règle 9) et **charte éditoriale** (`docs/10`, §4, points 4 et 7, et « Au
+  format 2 ») : renvoi de l'encadré de l'outil vers la liste (phrase et lien, puis bouton au format 2), index des dessins
+  dans l'outil (ajout de la revue indépendante du lot).
+- **Demande n° 30, précision de la règle 2k** (`travaux/etape-13/demande-changement-30.md`) : « le lien "Trouvez votre
+  voyant dans la liste" est déjà dans son encadré » ; ce texte daté reste tel quel, la présente demande le remplace pour
+  la page outil.
+- **CLAUDE.md** : ordre de la page outil, index des dessins.
 
 ## 2. Raison (données)
 - Audit, C2 : au téléphone, la grille des dessins, cœur de la page, commence à 2 421 px (3,6 écrans). Avant elle :
@@ -61,7 +67,14 @@ tests, ne change pas, ni ses empreintes.
 - **Title, H1, adresse, texte rédigé** : inchangés. Date « Mis à jour le » : avancée (l'encadré change, règle 14 b).
 - **Contrôles adaptés** (format 2) : OUTIL-INDEX (la grille est dans l'encadré, après la ligne d'exemple et avant le coût,
   sous son titre ; aucune dans la section) et OUTIL-LIEN (renvoi : la phrase seule, sans bouton).
-- **Documents** : charte graphique (rangée « Page outil »), `CONTROLES.md`, `CLAUDE.md`.
+- **Documents** : charte graphique (rangées « Page outil » et « Accueil, grille des voyants »), `docs/08` (règle 9),
+  `docs/10` (§4), `CONTROLES.md`, `CLAUDE.md`.
+- **Libellés de la grille** (revue indépendante du lot, constat I1) : à 320 et 375 px, sans dictionnaire de coupure (le
+  Chrome de la CI), « Préchauffage » et « Température » sortaient de leur tuile, et des mots de 9 lettres à 320 px avec
+  dictionnaire. Correction : un mot de 9 lettres au moins ne se coupe qu'aux endroits de `COUPURES_LIBELLES`, avec un
+  tiret, dans tous les navigateurs ; trois cases sous 375 px ; une tuile ne s'élargit jamais au-delà de sa case ; une
+  mesure de FORMAT2-MESURES vérifie que chaque morceau de libellé tient dans sa tuile (PICTO-COUPURE pour la liste des
+  coupures). Les libellés eux-mêmes ne changent pas.
 
 ## 5. Contrôles à relancer
 - `npm run schemas`, `npm test`, `npm run build` (contrôle), `npm run liens` ; recette des exemples ; Lighthouse (page

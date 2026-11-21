@@ -26,6 +26,8 @@ import { TEXTES_OUTIL, TEXTES_OUTIL_FORMAT2 } from './outil-textes.ts';
  */
 export function normaliserTexte(texte: string): string {
   return texte
+    // Trait d'union conditionnel (U+00AD, coupure des libellés de la grille des dessins) : invisible, sans effet sur le texte.
+    .replace(/\u00ad/g, '')
     .normalize('NFKD')
     .replace(/\p{Diacritic}/gu, '')
     .replace(/œ/g, 'oe')
@@ -135,6 +137,7 @@ export interface TexteDeCoutValide {
   sources: readonly string[];
   en_vigueur_le?: Date | string | undefined;
   automatique?: string | undefined;
+  consigne?: { texte: string; sources: readonly string[] } | undefined;
 }
 
 /** Plage calculée du coût probable (identifiants des tranches), telle que l'encadré l'affiche. */
@@ -265,7 +268,11 @@ export function empreintePage(encadre: EncadreValide, base: ReadonlyMap<string, 
   });
 }
 
-/** Empreinte d'un montant fixé par un texte, ou d'une prise en charge (data/couts.json) ; les dates n'y entrent pas. */
+/**
+ * Empreinte d'un montant fixé par un texte, ou d'une prise en charge (data/couts.json) ; les dates n'y entrent pas. La
+ * consigne de sécurité (demande de changement n° 39) y entre quand le montant en a une : ajouter une consigne fait
+ * revalider ce seul montant, les autres gardent leur empreinte.
+ */
 export function empreinteTexteDeCout(entree: TexteDeCoutValide): string {
   const enVigueur = entree.en_vigueur_le === undefined ? null : entree.en_vigueur_le instanceof Date ? entree.en_vigueur_le.toISOString().slice(0, 10) : String(entree.en_vigueur_le);
   return hacher({
@@ -274,6 +281,7 @@ export function empreinteTexteDeCout(entree: TexteDeCoutValide): string {
     en_vigueur_le: enVigueur,
     sources: [...entree.sources].sort(),
     automatique: entree.automatique ?? null,
+    ...(entree.consigne !== undefined ? { consigne: { texte: normaliserTexte(entree.consigne.texte), sources: [...entree.consigne.sources].sort() } } : {}),
   });
 }
 

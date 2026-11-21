@@ -132,6 +132,9 @@ export type VoyantBase = z.infer<typeof voyantBaseSchema>;
  *    tirée d'au moins FOURCHETTE_SOURCES_MIN sources d'éditeurs différents, datée (`releve_le`) ;
  *  - `montants` : montants fixés par un texte officiel (au moins une source de Légifrance), datés et revérifiés ;
  *    `automatique` : affiché de lui-même sur les pages concernées (verdict d'arrêt pour le dépannage) ;
+ *    `consigne` : consigne de sécurité affichée sous le montant (demande de changement n° 39 : dépannage sur autoroute),
+ *    chaque geste tiré d'une source de première main, CONSIGNE_MOTS_MAX mots au plus (cout.ts ; contrôles DEPANNAGE-*
+ *    de src/lib/controle.ts, lireCouts) ;
  *  - `prises_en_charge` : mentions de prise en charge possible (garantie légale…), même forme que les montants.
  * `validation` : empreinte du texte validé par Houssem (src/lib/empreinte.ts, empreinteTexteDeCout).
  */
@@ -159,7 +162,9 @@ const champsTexteDeCout = {
   reverifier_apres_jours: z.number().int().min(1).max(366),
   validation: hashHex.optional(),
 };
-export const montantSchema = z.strictObject({ ...champsTexteDeCout, automatique: z.enum(AFFICHAGES_AUTOMATIQUES).optional() });
+/** Consigne de sécurité d'un montant (demande de changement n° 39) : texte affiché sous le montant, et ses sources. */
+export const consigneDeMontantSchema = z.strictObject({ texte, sources: z.array(identifiant).min(1) });
+export const montantSchema = z.strictObject({ ...champsTexteDeCout, automatique: z.enum(AFFICHAGES_AUTOMATIQUES).optional(), consigne: consigneDeMontantSchema.optional() });
 export type Montant = z.infer<typeof montantSchema>;
 export const priseEnChargeSchema = z.strictObject(champsTexteDeCout);
 export type PriseEnCharge = z.infer<typeof priseEnChargeSchema>;

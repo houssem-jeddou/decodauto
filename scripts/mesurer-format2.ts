@@ -93,12 +93,40 @@ function mesurerDansLaPage(): Omit<MesurePage, 'adresse' | 'largeur' | 'police' 
       return r.width > 0 && r.right > W + 0.5 && !defilant(e);
     })
     .map((e) => `${e.tagName.toLowerCase()}${typeof e.className === 'string' && e.className !== '' ? `.${e.className.split(' ')[0]}` : ''} (${Math.round(e.getBoundingClientRect().right)})`);
+  // Grille des dessins : chaque morceau d'un libellé (mot, ou partie jusqu'à un trait d'union conditionnel, avec son tiret)
+  // tient dans la largeur utile de sa tuile ; sinon il déborde, ou overflow-wrap le coupe sans tiret (revue du lot U2).
+  const tuilesDebordantes: string[] = [];
+  for (const a of document.querySelectorAll('.grille-voyants a')) {
+    const libelle = a.querySelector(':scope > span:not(.tuile):not(.cas)');
+    const style = getComputedStyle(a);
+    const utile = a.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    if (libelle === null || a.getBoundingClientRect().width === 0) continue;
+    const police = getComputedStyle(libelle);
+    const essai = document.createElement('span');
+    essai.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap';
+    essai.style.fontFamily = police.fontFamily;
+    essai.style.fontSize = police.fontSize;
+    essai.style.fontWeight = police.fontWeight;
+    essai.style.fontStyle = police.fontStyle;
+    essai.style.letterSpacing = police.letterSpacing;
+    document.body.appendChild(essai);
+    const morceaux = (libelle.textContent ?? '').split(/\s+/).filter((m) => m !== '').flatMap((mot) => mot.split('\u00ad').map((p, i, t) => (i < t.length - 1 ? `${p}-` : p)));
+    const trop = morceaux.map((m) => {
+      essai.textContent = m;
+      return { m, l: essai.getBoundingClientRect().width };
+    }).filter((x) => x.l > utile + 0.5);
+    essai.remove();
+    if (trop.length > 0 || a.scrollWidth > a.clientWidth + 0.5) {
+      tuilesDebordantes.push(`« ${(libelle.textContent ?? '').replace(/\u00ad/g, '')} » (${trop.map((x) => `${x.m} ${x.l.toFixed(1)}`).join(', ') || `${a.scrollWidth}`} pour ${utile.toFixed(1)})`);
+    }
+  }
   const figure = el('figure[data-illustration]');
   const arbre = el('[data-element-unique="arbre-de-decision"], ol[data-tutoriel-etapes]');
   return {
     policeChargee: [...document.fonts].some((f) => f.status === 'loaded'),
     largeurPage: document.documentElement.scrollWidth,
     debordements,
+    tuilesDebordantes,
     encadre: el('[data-encadre-decision]') !== null,
     basReponse: bas(el('[data-reponse-directe]')),
     basVerdictUrgence: basDe(['.situation', '.verdict', '.urgence']),

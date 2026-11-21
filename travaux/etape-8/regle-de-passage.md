@@ -12,7 +12,8 @@ Où vit une page rédigée avant et après sa mise en ligne, et ce qui la suit q
    - la page n'existe pas déjà dans `src/content` (un identifiant, un seul fichier) ;
    - pour une page éditoriale, l'empreinte recalculée par `scripts/empreinte.ts` est celle du champ `validation` : la même assertion que la porte 6, jamais recalculée pour passer ;
    - `src/content/socle/a-propos.md` existe (sauf pour « à propos » elle-même) : sans elle, les liens « Méthode » de la page en ligne sont cassés et `npm run liens` échoue en production, car `--attendu` n'existe que dans la recette ; et elle porte la fiche de l'auteur de la page (champ `auteurs`), sinon R7-AUTEUR-INCONNU échouerait à la construction ;
-   - l'adresse n'est pas déjà dans `lighthouserc.json`.
+   - l'adresse n'est pas déjà dans `lighthouserc.json` ;
+   - pour une page qui a une illustration, son image de partage existe dans `src/partage/` (lot U3 de l'audit UX/UI) : elle est produite pendant la rédaction par `node travaux/partage/generer-images-partage.mjs`, qui couvre aussi `exemples/` ; le passage ne la change pas (les tests vérifient qu'elle est à jour).
 4. **Ce que fait le passage** : le nouveau texte de `lighthouserc.json` est préparé d'abord (rien n'est déplacé si cela échoue), puis `git mv`, adresse ajoutée à la liste de production (elle reste dans `lighthouserc-exemples.json`), briefs régénérés (`node scripts/briefs.ts`, le chemin de l'exemple y est écrit). Restent à la main, dans le même commit : vérifier qu'aucune ligne `--attendu` de `.github/workflows/ci.yml` ne vise la page (la recette n'en a plus depuis le livrable 7.3 : un attendu qui ne se produit plus fait échouer le job); retirer l'indication « exemple » du commentaire d'en-tête de la page s'il y en a une.
 
 ## Ce qui suit la page sans qu'on écrive de chemin
