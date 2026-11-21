@@ -1008,6 +1008,9 @@ describe('coût probable : calcul, données et grille (demande de changement n°
     assert.deepEqual(codes(avec({ montants: [consigneChangee, amendeTest] }).constats, 'erreur'), ['R4-MONTANT-EMPREINTE']);
     const secondaire = montantDe({ ...depannageTest, consigne: { ...consigne, sources: ['fixture-forum'] } });
     assert.deepEqual(codes(avec({ montants: [secondaire, amendeTest] }).constats, 'erreur'), ['DEPANNAGE-CONSIGNE-SOURCE']);
+    // Le règlement ONU est de première main, mais ne fixe que le symbole et la couleur, jamais un geste (revue, M1).
+    const onu = montantDe({ ...depannageTest, consigne: { ...consigne, sources: ['fixture-onu'] } });
+    assert.deepEqual(codes(avec({ montants: [onu, amendeTest] }).constats, 'erreur'), ['DEPANNAGE-CONSIGNE-SOURCE']);
     const inconnue = montantDe({ ...depannageTest, consigne: { ...consigne, sources: ['fixture-introuvable'] } });
     assert.deepEqual(codes(avec({ montants: [inconnue, amendeTest] }).constats, 'erreur'), ['R3-SOURCE-INCONNUE']);
     const longue = montantDe({ ...depannageTest, consigne: { ...consigne, texte: Array.from({ length: 31 }, (_, i) => `mot${i}`).join(' ') } });

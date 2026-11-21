@@ -164,6 +164,10 @@ describe('format 2 : pages code défaut et pneus et obligations (F1.3b)', () => 
       ['R9-ENCADRE-CONTENU', code, modifie(code.html, ($) => $('[data-depannage-consigne]').remove())],
       ['DEPANNAGE-CONSIGNE', code, modifie(code.html, ($) => $('[data-depannage-consigne]').appendTo($('[data-encadre-cout]')))],
       ['DEPANNAGE-CONSIGNE', code, modifie(code.html, ($) => $('[data-depannage-consigne]').clone().appendTo($('[data-depannage]')))],
+      // Revue de la demande n° 39 (M2, M3) : la consigne sous le tarif, avec son texte validé, dans chaque rangée.
+      ['DEPANNAGE-CONSIGNE', code, modifie(code.html, ($) => $('[data-depannage-consigne]').insertAfter($('[data-depannage] strong')))],
+      ['DEPANNAGE-CONSIGNE', code, modifie(code.html, ($) => $('[data-depannage-consigne]').text('Allumez les feux de détresse.'))],
+      ['DEPANNAGE-CONSIGNE', code, modifie(code.html, ($) => $('[data-depannage-consigne]').removeAttr('data-depannage-consigne'))],
       ['FORMAT2-ILLUSTRATION', code, modifie(code.html, ($) => $('figure[data-illustration]').remove())],
       ['FICHE-TEXTE-INCOMPLETE', montagne, modifie(montagne.html, ($) => $('[data-texte-reference] [data-fiche-ligne]').last().remove())],
       ['FORMAT2-REPONSE', pression, modifie(pression.html, ($) => $('[data-reponse-directe]').remove())],

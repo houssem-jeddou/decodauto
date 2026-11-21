@@ -358,7 +358,7 @@ function coutEncadreHtml(cout: CoutEncadre): string {
     // Demande de changement n° 39 : la consigne de sécurité du montant, sous lui, dans sa rangée (data-depannage).
     ...cout.montants.map((m) =>
       m.consigne !== undefined
-        ? `<p class="encadre-montant" data-depannage>${texteHtml(m.texte)} <span class="encadre-date">(${texteHtml(m.dates.join(', '))})</span><span class="encadre-consigne" data-depannage-consigne>${texteHtml(m.consigne)}</span></p>`
+        ? `<p class="encadre-montant" data-depannage>${texteHtml(m.texte)} <span class="encadre-date">(${texteHtml(m.dates.join(', '))})</span> <span class="encadre-consigne" data-depannage-consigne>${texteHtml(m.consigne)}</span></p>`
         : `<p class="encadre-montant">${texteHtml(m.texte)} <span class="encadre-date">(${texteHtml(m.dates.join(', '))})</span></p>`,
     ),
     ...cout.prisesEnCharge.map((p) => `<p class="encadre-prise-en-charge">${texteHtml(p)}</p>`),

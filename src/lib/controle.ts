@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
-import { ANCRE_METHODE, DELAI_REVUE_MOIS, DELAI_REVUE_SOCLE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature } from './charte.ts';
+import { ANCRE_METHODE, DELAI_REVUE_MOIS, DELAI_REVUE_SOCLE_MOIS, LIGNE_TRANSPARENCE, PAGE_METHODE, REVUE_LOI_MONTAGNE, signature, categoriesQuiFixentUnVerdict } from './charte.ts';
 import { IDENTIFIANTS, LIBELLE_LIEN_NOTICES, ancreNotices, graviteDuVerdict, phraseSources, sourcesDeLaLigne } from './composants.ts';
 import { LIBELLE_CONSIGNE_RETENUE, NOTE_SANS_CONSIGNE_RETENUE, modeleTableauNotices, type TableauVoyant } from './tableau-notices.ts';
 import { modeleFicheCode, modeleParMarque, type FicheCode, type RangeeParMarque } from './fiche-code.ts';
@@ -516,7 +516,7 @@ function lireCouts(brut: unknown, sources: ReadonlyMap<string, Source>, aujourdh
     if (entree.validation === undefined) {
       constats.push(alerte('R4-MONTANT-VALIDATION-ABSENTE', `${etiquette} : texte pas encore validé par Houssem (empreinte absente) ; une page qui l'afficherait est bloquée`, fichier));
     } else if (entree.validation !== empreinteTexteDeCout(entree)) {
-      constats.push(erreur('R4-MONTANT-EMPREINTE', `${etiquette} : l'empreinte de validation ne correspond plus au texte, à la date d'entrée en vigueur, aux sources ou à l'affichage. Revalidation par Houssem nécessaire`, fichier));
+      constats.push(erreur('R4-MONTANT-EMPREINTE', `${etiquette} : l'empreinte de validation ne correspond plus au texte, à la date d'entrée en vigueur, aux sources, à l'affichage ou à la consigne. Revalidation par Houssem nécessaire`, fichier));
     }
     if (entree.verifie_le.getTime() > aujourdhui.getTime()) {
       constats.push(alerte('COUT-DATE-FUTURE', `${etiquette} : date de vérification dans le futur (${entree.verifie_le.toISOString().slice(0, 10)})`, fichier));
@@ -536,10 +536,13 @@ function lireCouts(brut: unknown, sources: ReadonlyMap<string, Source>, aujourdh
       if (montant.automatique === undefined) {
         constats.push(erreur('DEPANNAGE-CONSIGNE-PLACE', `${etiquette} : une consigne n'accompagne qu'un montant affiché de lui-même (tarif du dépannage sur une page à verdict d'arrêt, demande de changement n° 39)`, fichier));
       }
+      // Sources qui peuvent fixer un geste : la première main, sauf celles qui ne fixent jamais la conduite à tenir (le
+      // règlement ONU ne sert qu'au symbole et à la couleur ; revue de la demande n° 39, M1).
+      const quiFixent = categoriesQuiFixentUnVerdict();
       for (const id of montant.consigne.sources) {
         const source = sources.get(id);
-        if (source !== undefined && !SOURCES_PREMIERE_MAIN.includes(source.categorie)) {
-          constats.push(erreur('DEPANNAGE-CONSIGNE-SOURCE', `${etiquette} : la source « ${id} » (catégorie « ${source.categorie} ») n'est pas de première main ; chaque geste conseillé en vient (charte §2.2)`, fichier));
+        if (source !== undefined && !quiFixent.includes(source.categorie)) {
+          constats.push(erreur('DEPANNAGE-CONSIGNE-SOURCE', `${etiquette} : la source « ${id} » (catégorie « ${source.categorie} ») ne fixe pas un geste : chaque geste conseillé vient d'une source de première main qui fixe la conduite à tenir (charte §2.2)`, fichier));
         }
       }
       const mots = motsDe(montant.consigne.texte);
@@ -595,7 +598,7 @@ function controlerCout(
   lignes: readonly LigneResolue[],
   ctx: Contexte,
   fichier: string,
-): { constats: Constat[]; resolu: CoutResolu; textes: string[] | undefined } {
+): { constats: Constat[]; resolu: CoutResolu; textes: string[] | undefined; consignes: string[] | undefined } {
   const constats: Constat[] = [];
   const cout = page.cout_probable;
   const outil = 'outil' in page && page.outil === true;
@@ -665,7 +668,12 @@ function controlerCout(
   }
 
   const bloquant = constats.some((c) => c.gravite === 'erreur' && c.regle !== 'R4-MONTANT-NON-VALIDE' && c.regle !== 'COUT-RISQUE' && c.regle !== 'COUT-PRISE-EN-CHARGE');
-  return { constats, resolu, textes: bloquant ? undefined : textesAttendusCout(resolu, ctx.couts) };
+  // Consignes de sécurité des montants affichés (demande de changement n° 39) : leur place se contrôle sur la page construite.
+  const consignes = bloquant ? undefined : resolu.montants.flatMap((id) => {
+    const consigne = ctx.couts.montants.get(id)?.consigne;
+    return consigne === undefined ? [] : [consigne.texte];
+  });
+  return { constats, resolu, textes: bloquant ? undefined : textesAttendusCout(resolu, ctx.couts), consignes };
 }
 
 // ---- Pages --------------------------------------------------------------------------------------
@@ -916,7 +924,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
         }),
       ];
     }
-    constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus));
+    constats.push(...controlerHtml(page, html, fichier, lignes, cout.textes, attendus, cout.consignes));
   }
 
   return { constats, page, id: page.id };
@@ -1114,6 +1122,7 @@ export function controlerHtml(
   lignes: readonly LigneResolue[] = [],
   textesCout?: readonly string[],
   attendus?: AttendusPage,
+  consignes?: readonly string[],
 ): Constat[] {
   const constats: Constat[] = [];
   const $ = cheerio.load(html);
@@ -1192,7 +1201,7 @@ export function controlerHtml(
     constats.push(erreur('R7-TUTORIEL-ETAPES', 'un tutoriel présente ses étapes dans une liste numérotée portant l\'attribut data-tutoriel-etapes (<ol data-tutoriel-etapes>), avec au moins une étape', fichier));
   }
 
-  constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout, attendus?.lignes));
+  constats.push(...controlerEncadre(page, lignes, html, fichier, textesCout, attendus?.lignes, consignes));
   if (attendus !== undefined) constats.push(...controlerComposants(page, html, fichier, attendus));
   if (attendus?.notices !== undefined) constats.push(...controlerTableauNotices(html, fichier, lignes, { ...attendus.notices, format: page.format ?? 1 }));
   // Format 2 (demande de changement n° 30) : règles de format vérifiables par une machine (controle-format2.ts).
@@ -1764,6 +1773,7 @@ export function controlerEncadre(
   fichier: string,
   textesCout: readonly string[] = [],
   sourcesLignes?: readonly SourcesDeLigne[],
+  consignes?: readonly string[],
 ): Constat[] {
   const constats: Constat[] = [];
   const brut = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|template)\b[\s\S]*?<\/\1\s*>/gi, '');
@@ -1811,13 +1821,30 @@ export function controlerEncadre(
   if (manquants.length > 0) {
     constats.push(erreur('R9-ENCADRE-CONTENU', `l'encadré de décision n'affiche pas : ${manquants.map((t) => `« ${t} »`).join(', ')}`, fichier));
   }
-  // Demande de changement n° 39 : la consigne de sécurité est dans la rangée du tarif du dépannage de l'encadré, une fois
-  // par rangée ; son texte, attendu avec le montant (textesCout), fait l'objet de R9-ENCADRE-CONTENU.
-  const consignes = $('[data-depannage-consigne]').toArray();
-  const horsRangee = consignes.filter((el) => !$(el).parent().is('[data-depannage]') || $(el).closest('[data-encadre-decision]').length === 0);
-  const rangeesDoublees = encadre.find('[data-depannage]').toArray().filter((el) => $(el).children('[data-depannage-consigne]').length > 1);
-  if (horsRangee.length > 0 || rangeesDoublees.length > 0) {
-    constats.push(erreur('DEPANNAGE-CONSIGNE', "la consigne de sécurité (data-depannage-consigne) s'affiche dans la rangée du tarif du dépannage (data-depannage) de l'encadré, une fois par rangée (demande de changement n° 39)", fichier));
+  // Demande de changement n° 39 : la consigne de sécurité est dans la rangée du tarif du dépannage de l'encadré, sous le
+  // tarif (rien ne la suit dans la rangée), une fois par rangée ; quand un montant affiché en a une (`consignes`, calculé
+  // avec le coût), chaque rangée la porte, avec son texte validé ; sinon, aucune ne s'affiche. Son texte est aussi attendu
+  // dans l'encadré (R9-ENCADRE-CONTENU).
+  const consignesAffichees = $('[data-depannage-consigne]').toArray();
+  const problemes: string[] = [];
+  for (const el of consignesAffichees) {
+    const rangee = $(el).parent();
+    if (!rangee.is('[data-depannage]') || $(el).closest('[data-encadre-decision]').length === 0) {
+      problemes.push('consigne hors de la rangée du tarif');
+      continue;
+    }
+    const noeuds = rangee.contents().toArray();
+    const suite = noeuds.slice(noeuds.indexOf(el) + 1);
+    if (suite.some((n) => n.type === 'tag' || (n.type === 'text' && ((n as unknown as { data?: string }).data ?? '').trim() !== ''))) problemes.push('consigne pas sous le tarif : du contenu la suit dans la rangée');
+  }
+  for (const rangee of encadre.find('[data-depannage]').toArray()) {
+    const lues = $(rangee).children('[data-depannage-consigne]').toArray().map((c) => normaliserTexte($(c).text()));
+    if (lues.length > 1) problemes.push(`${lues.length} consignes dans une rangée`);
+    if (consignes !== undefined && consignes.length > 0 && (lues.length !== 1 || !consignes.some((t) => normaliserTexte(t) === lues[0]))) problemes.push('rangée sans la consigne validée du montant');
+  }
+  if (consignes !== undefined && consignes.length === 0 && consignesAffichees.length > 0) problemes.push('consigne affichée alors qu\'aucun montant affiché n\'en porte');
+  if (problemes.length > 0) {
+    constats.push(erreur('DEPANNAGE-CONSIGNE', `la consigne de sécurité (data-depannage-consigne) s'affiche sous le tarif du dépannage, dans sa rangée (data-depannage) de l'encadré, une fois par rangée, avec son texte validé (demande de changement n° 39) : ${[...new Set(problemes)].join(' ; ')}`, fichier));
   }
   // Une ligne affichée par situation, dans l'ordre, avec son propre niveau (data-verdict, data-urgence) et ses textes,
   // sans le libellé d'un autre niveau.
