@@ -62,6 +62,10 @@ describe('typographie et échappement (charte §3.3)', () => {
     assert.equal(typographier('« Grosse réparation »'), `«${INSECABLE}Grosse réparation${INSECABLE}»`);
     assert.equal(typographier('«Grosse»'), `«${INSECABLE}Grosse${INSECABLE}»`);
     assert.equal(typographier('2,5 bar, 135 €, 90 km/h, 5 litres, 1 000 km'), `2,5${INSECABLE}bar, 135${INSECABLE}€, 90${INSECABLE}km/h, 5${INSECABLE}litres, 1${INSECABLE}000${INSECABLE}km`);
+    // Unités en toutes lettres (20/11/2026) : durées, tension, régime.
+    assert.equal(typographier('30 minutes, 1 minute, 10 secondes, 2 heures, 1 heure, 12,6 volts, 2 000 tours'), `30${INSECABLE}minutes, 1${INSECABLE}minute, 10${INSECABLE}secondes, 2${INSECABLE}heures, 1${INSECABLE}heure, 12,6${INSECABLE}volts, 2${INSECABLE}000${INSECABLE}tours`);
+    // Un mot qui commence comme une unité n'en est pas une.
+    assert.equal(typographier('3 minuteries, 2 heureux, 4 tournevis'), '3 minuteries, 2 heureux, 4 tournevis');
   });
   test('rien n\'est inséré là où il n\'y avait pas d\'espace : adresses, heures, nombres suivis d\'un mot', () => {
     assert.equal(typographier('https://decodauto.com'), 'https://decodauto.com');
@@ -302,6 +306,7 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     parcourir(demo.brut);
     for (const s of demo.page.situations) parcourir(demo.contexte.voyants.get(s.voyant ?? '')?.citations, 'citations');
     for (const id of cout.montants) for (const src of demo.contexte.couts.montants.get(id)?.sources ?? []) ids.add(src);
+    for (const id of cout.montants) for (const src of demo.contexte.couts.montants.get(id)?.consigne?.sources ?? []) ids.add(src);
     assert.deepEqual([...sourcesDeLaPageCitees(demo.page, lignes, demo.contexte.couts, cout).keys()].sort(), [...ids].sort());
   });
 
@@ -311,6 +316,8 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     for (const id of citees.keys()) assert.match(html, new RegExp(`data-source-id="${id}"`));
     // Le dépannage automatique (page d'arrêt) cite ses textes : ils sont dans la liste.
     assert.ok(citees.has('arrete-2025-12-08-depannage-autoroute'));
+    // Sa consigne de sécurité (demande de changement n° 39) aussi : l'article R416-19 du code de la route.
+    assert.ok(citees.has('code-de-la-route-r416-19'));
     assert.match(html, /Consulté le \d{2}\/\d{2}\/\d{4}/);
   });
 
@@ -397,6 +404,9 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><p>L'huile : niveau</p>${pied}</body></html>`), ['TYPO-APOSTROPHE', 'TYPO-ESPACE']);
     assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><code>l'huile : x</code>${pied}</body></html>`), []);
     assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><p>Le message "STOP"</p>${pied}</body></html>`), ['TYPO-GUILLEMETS']);
+    // Nombre et unité séparés par une espace ordinaire (TYPO-UNITE, 20/11/2026) ; le texte passé par le gabarit passe.
+    assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><p>Attendez 30 minutes.</p>${pied}</body></html>`), ['TYPO-UNITE']);
+    assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1><p>${texteHtml('Attendez 30 minutes, puis 12,6 volts.')}</p>${pied}</body></html>`), []);
     assert.deepEqual(codes(`<html><body>${mention.replace('rédigé par une IA', 'rédigé par un expert')}<h1>Titre</h1>${pied}</body></html>`), ['MENTION-IA-TEXTE']);
     assert.deepEqual(codes(`<html><body>${mention}<h1>Titre</h1>${pied.replace('Signaler une erreur', 'Contact')}</body></html>`), ['SIGNALER-ERREUR-ABSENT']);
     // Le message de signalement porte l'adresse de la page : un lien vers une autre page est refusé.

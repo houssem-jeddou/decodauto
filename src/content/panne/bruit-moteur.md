@@ -102,7 +102,7 @@ sources:
   - notice-peugeot-208
 auteur: houssem-jeddou
 date_publication: 2026-11-16
-date_modification: 2026-11-16
+date_modification: 2026-11-21
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
 validation: 9e0425ec7131c3306be33c028895a7d78610358ffad0cd79cb8b6690e6f2166c

@@ -125,7 +125,8 @@ export function coutDeLaPage(page: PageEditoriale, lignes: readonly LigneResolue
  *  2. citations du risque si l'on continue (une référence à la base garde son emplacement) ;
  *  3. texte de référence (pages pneus et obligations) ;
  *  4. sources de la page, du coût, du libellé d'un code, de « quand changer », des précisions par marque ;
- *  5. sources des montants et prises en charge affichés, et des fourchettes en euros affichées dans les causes.
+ *  5. sources des montants (et de leur consigne, demande de changement n° 39) et des prises en charge affichés, et
+ *     des fourchettes en euros affichées dans les causes.
  */
 export function sourcesDeLaPageCitees(page: PageEditoriale, lignes: readonly LigneResolue[], couts: DonneesCouts, cout: CoutResolu): Map<string, string[]> {
   const sources = new Map<string, string[]>();
@@ -143,6 +144,7 @@ export function sourcesDeLaPageCitees(page: PageEditoriale, lignes: readonly Lig
   if ('quand_changer' in page) for (const id of page.quand_changer.sources) ajouter(id);
   if ('precisions_par_marque' in page) for (const p of page.precisions_par_marque ?? []) for (const id of p.sources) ajouter(id);
   for (const id of cout.montants) for (const s of couts.montants.get(id)?.sources ?? []) ajouter(s);
+  for (const id of cout.montants) for (const s of couts.montants.get(id)?.consigne?.sources ?? []) ajouter(s);
   for (const id of cout.prisesEnCharge) for (const s of couts.prises_en_charge.get(id)?.sources ?? []) ajouter(s);
   if ('causes' in page) for (const cause of page.causes ?? []) for (const s of fourchetteAffichee(cause.pieces, couts.pieces)?.sources ?? []) ajouter(s);
   return sources;

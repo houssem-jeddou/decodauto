@@ -122,7 +122,7 @@ sources:
   - notice-toyota-yaris
 auteur: houssem-jeddou
 date_publication: 2026-11-17
-date_modification: 2026-11-17
+date_modification: 2026-11-21
 date_revue: 2026-11-17
 prochaine_revue: 2027-11-17
 # Encadré de décision (question, réponse directe, lignes, coût probable) validé par Houssem le 17/11/2026 à 15 h 05
