@@ -11,7 +11,7 @@ import { normaliserRecherche } from '../../src/lib/texte.ts';
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
 import { lienSignalement } from '../../src/lib/composants.ts';
-import { ELEMENTS_SANS_TYPOGRAPHIE } from '../../src/lib/html.ts';
+import { ELEMENTS_SANS_TYPOGRAPHIE, NOMBRE_UNITE_SEPARES } from '../../src/lib/html.ts';
 import { ID_MENTIONS_LEGALES, MARQUE_PROVISOIRE, MENTIONS_OBLIGATOIRES } from '../../src/lib/editeur.ts';
 import { CLASSE_CITATION_NOTICE } from '../../src/lib/tableau-notices.ts';
 
@@ -239,8 +239,9 @@ export function constatsMentionEtSignalement(html: string, fichier: string, adre
 
 /**
  * Typographie du texte affiché (charte §3.3), posée par le gabarit : pas d'apostrophe droite, pas de guillemet droit,
- * pas d'espace ordinaire avant « : ; ! ? » ni à l'intérieur des guillemets « … ». Le code, les scripts, les styles et
- * les dessins (SVG) sont ignorés.
+ * pas d'espace ordinaire avant « : ; ! ? » ni à l'intérieur des guillemets « … », ni entre un nombre et son unité
+ * (TYPO-UNITE, 20/11/2026 : la charte demande qu'un test le vérifie sur la page construite). Le code, les scripts, les
+ * styles et les dessins (SVG) sont ignorés.
  */
 export function constatsTypographie(html: string, fichier: string): Constat[] {
   const $ = cheerio.load(html);
@@ -267,6 +268,10 @@ export function constatsTypographie(html: string, fichier: string): Constat[] {
     const espace = /[ \t\n\r]+[:;!?»]|«[ \t\n\r]|\p{L}[:;!?](?=[ \t\n\r]|$)/u.exec(texte);
     if (espace !== null) {
       constats.push(erreur('TYPO-ESPACE', `espace ordinaire avant « : ; ! ? » ou dans des guillemets : « ${extrait(texte, espace.index)} » (le gabarit pose une espace insécable)`, fichier));
+    }
+    const unite = NOMBRE_UNITE_SEPARES.exec(texte);
+    if (unite !== null) {
+      constats.push(erreur('TYPO-UNITE', `espace ordinaire entre un nombre et son unité : « ${extrait(texte, unite.index)} » (le gabarit pose une espace insécable)`, fichier));
     }
   }
   return constats;
