@@ -6,6 +6,7 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { DOSSIER_CONTENU, DOSSIER_EXEMPLES, localiserPage } from './pages-redigees.ts';
 import { FICHIER_VAGUES_OUVERTES, lireVaguesOuvertes, messageVagueNonOuverte } from './vagues.ts';
+import { GENERATEUR_PARTAGE, SOURCE_PARTAGE } from '../../src/lib/partage.ts';
 
 /** Page dont l'accès à « Méthode » (/a-propos/#methode) conditionne la construction de production (R7-LIEN, liens de l'encadré). */
 export const ID_A_PROPOS = 'a-propos';
@@ -93,6 +94,12 @@ export async function verifierPassage(racine: string, id: string, empreinteDe: (
       }
       if (calculee !== undefined && calculee !== validation) erreurs.push(`${source} : l'encadré a changé depuis la validation de Houssem (empreinte différente)`);
     }
+  }
+
+  // Image de partage (lot U3, src/lib/partage.ts) : produite pendant la rédaction (le générateur couvre exemples/) ; sans
+  // elle, la construction échoue (scripts/integration-partage.ts).
+  if (/^illustration:\s*$/m.test(texte) && (await lire(racine, `${SOURCE_PARTAGE}/${id}.png`)) === undefined) {
+    erreurs.push(`${SOURCE_PARTAGE}/${id}.png absente : lancer node ${GENERATEUR_PARTAGE} avant le passage (image de partage de la page)`);
   }
 
   // Une page en ligne renvoie vers « Méthode » : sans la page « à propos », la vérification des liens de production échoue

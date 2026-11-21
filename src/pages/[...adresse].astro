@@ -12,6 +12,7 @@ import { voyantsDesPages } from '../lib/format2.ts';
 import { cheminDAriane, sectionMethodeHtml } from '../lib/composants.ts';
 import { scriptsAPropos, scriptsPageEditoriale, type AuteurDeclare } from '../lib/donnees-structurees.ts';
 import { PAGE_METHODE, sectionMethode } from '../lib/charte.ts';
+import { partageEditorial, partageMarque } from '../lib/partage.ts';
 import { donneesDuSite } from '../../scripts/lib/donnees-site.ts';
 import { corpsAvecReperes, demoFormat2Active, lireBrouillonFormat2, pageAvecBrouillon } from '../../scripts/lib/demo-format2.ts';
 import type { TypePage } from '../schemas/listes.ts';
@@ -69,6 +70,8 @@ export async function getStaticPaths() {
           format: page.format ?? 1,
           html: pageSocle(page, entree.rendered?.html ?? '', page.id === PAGE_METHODE ? sectionMethodeHtml(sectionMethode([...contexte.sources.values()])) : undefined),
           donneesStructurees: page.id === PAGE_METHODE ? scriptsAPropos(auteurs, ligne.adresse) : [],
+          // Partage (lot U3) : l'image de la marque pour les pages du socle.
+          partage: partageMarque(),
         },
       },
     ];
@@ -94,6 +97,8 @@ export async function getStaticPaths() {
           { titre: page.h1, description: page.description, adresse: ligne.adresse, modification: page.date_modification, auteur, adresseAPropos },
           cheminDAriane(page.id, site.plan, site.libelles),
         ),
+        // Partage (lot U3) : l'image tirée de l'illustration de la page (travaux/partage/generer-images-partage.mjs).
+        partage: partageEditorial(page),
       },
     };
   });
@@ -101,9 +106,9 @@ export async function getStaticPaths() {
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-const { titre, description, html, donneesStructurees, format } = Astro.props as Props;
+const { titre, description, html, donneesStructurees, format, partage } = Astro.props as Props;
 ---
 
-<Base titre={titre} description={description} donneesStructurees={donneesStructurees} format={format}>
+<Base titre={titre} description={description} donneesStructurees={donneesStructurees} format={format} partage={partage}>
   <Fragment set:html={html} />
 </Base>

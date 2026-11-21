@@ -12,6 +12,8 @@
 
 **Version 6, 21/11/2026.** Page outil en variante légère : une ligne d'exemple et la grille des dessins dans l'encadré (demande de changement n° 41) ; accueil, pages de chaque thème en pastilles sous une phrase de présentation (lot U2 de l'audit UX/UI, propositions P2 et P5, retenues par Houssem le 21/11 à 7 h 11 ; rangées « Accueil », « Accueil, grille des voyants » et « Page outil », §4).
 
+**Version 7, 21/11/2026.** Images de partage (Open Graph) : une par page illustrée (pages éditoriales, accueil au format 2), son illustration seule, et celle de la marque pour le socle (lot U3 de l'audit UX/UI, proposition P6, retenue par Houssem le 21/11 à 7 h 11 ; mise en page reprise après la revue indépendante du lot : ni marque ni nom sur l'image d'une page, conseil de Google pour og:image ; §2, « Images de partage »).
+
 **Ce qui fait foi** : les styles du dépôt (`src/styles/charte-b.css`, variables et composants), mis en œuvre au lot F1
 (porte du 16/11/2026). Une variante de composant passe par la charte : ce document et les styles. Jamais de style isolé
 dans une page.
@@ -48,6 +50,14 @@ Contour de focus : 3 px, décalé de 2 px ; bleu des liens (`#0b5cad`) sur fond 
 illustration) : au moins 3 pour 1 contre chaque fond (8,6 à 10,1 sur fond sombre ; 5,9 sur le fond de page).
 
 Le logo « Cadran » et le favicon ne changent pas (demande n° 19, règle 14 e).
+
+**Images de partage** (lot U3, `src/lib/partage.ts`, `travaux/partage/generer-images-partage.mjs`) : 1 200 × 630 px, PNG,
+fond nuit (`--nuit`), couleurs lues dans la feuille de la charte. Page illustrée (page éditoriale, accueil au format 2) :
+son illustration seule, entière, centrée dans le panneau de la figure (`--panneau`, angles de 28 px, 1 120 × 558 px à
+40 px du bord et 36 px du haut) ; ni logo ni nom, que Google déconseille sur l'image d'une page ; l'aperçu montre déjà le
+domaine, le titre et la description. Marque (pages du socle sans illustration) : logo de 148 px et nom du site en Outfit
+gras de 124 px, « auto » en ambre, sur une ligne centrée, un filet ambre, puis la devise en Outfit gras de 50 px, en deux
+lignes équilibrées. Adresse versionnée (`?v=`) : une image changée change d'adresse.
 
 ## 3. Typographie
 - **Titres** (nom du site, H1, H2, résumé de « Sources ») : Outfit, en gras. Licence OFL sans nom réservé, licence servie à côté du fichier. Sous-ensemble latin du français, environ 14 Ko en WOFF. Chargement sans décalage (`font-display: optional`) : au premier passage sur réseau lent, la police du système s'affiche, et les règles du premier écran sont vérifiées dans les deux cas.

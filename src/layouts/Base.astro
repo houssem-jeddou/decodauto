@@ -22,6 +22,7 @@ import { demoFormat2Active } from '../../scripts/lib/demo-format2.ts';
 import pictogrammeBouton from '../pictogrammes/moteur.svg?raw';
 import { liensFavicon } from '../lib/marque.ts';
 import { baliseAdsense, configAdsense } from '../lib/adsense.ts';
+import { balisesPartage, type Partage } from '../lib/partage.ts';
 
 interface Props {
   titre: string;
@@ -32,9 +33,14 @@ interface Props {
   donneesStructurees?: readonly string[];
   /** Format de lecture de la page (1 par défaut) : feuille de style, en-tête et pied de page suivent. */
   format?: FormatPage;
+  /**
+   * Image et type de partage de la page (src/lib/partage.ts, lot U3) : balises Open Graph posées avec l'adresse canonique,
+   * le title et la description. Toute page qui a une adresse canonique en a un (contrôles PARTAGE-*).
+   */
+  partage?: Partage;
 }
 
-const { titre, description, sansCanonical = false, donneesStructurees = [], format = 1 } = Astro.props;
+const { titre, description, sansCanonical = false, donneesStructurees = [], format = 1, partage } = Astro.props;
 const feuille = `<style>${format === 2 ? cssFormat2 : cssFormat1}</style>`;
 const indexable = estIndexable();
 // Balise d'association AdSense (demande de changement n° 38, temps 1) : générée depuis config/adsense.json, une fois par
@@ -42,6 +48,8 @@ const indexable = estIndexable();
 const balisePublicite = baliseAdsense(configAdsense());
 // Canonical : l'adresse de la page elle-même, absolue (contrôles CANONICAL-*). Jamais saisie à la main.
 const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.site).href;
+// Balises de partage (Open Graph, lot U3 de l'audit UX/UI) : seulement avec une adresse canonique (jamais sur la 404).
+const partageHtml = canonical !== undefined && partage !== undefined ? balisesPartage({ titre, description, canonical, partage }) : '';
 // Composants communs à toutes les pages (livrable 6.3, src/lib/gabarit.ts) : nom du site et mention en tête avant le
 // H1, lien de signalement en pied de page (contrôles MENTION-IA-* et SIGNALER-ERREUR-ABSENT). Format 2 (src/lib/format2.ts) :
 // bandeau de la piste B, bouton « Trouver mon voyant » vers la page outil si elle est construite ; la mention en tête ouvre
@@ -83,6 +91,7 @@ const bas = format === 2 ? piedFormat2(sansCanonical ? undefined : Astro.url.pat
     <meta name="description" content={description} />
     {!indexable && <meta name="robots" content="noindex" />}
     {canonical && <link rel="canonical" href={canonical} />}
+    {partageHtml !== '' && <Fragment set:html={partageHtml} />}
     <Fragment set:html={liensFavicon()} />
     {balisePublicite !== '' && <Fragment set:html={balisePublicite} />}
     {donneesStructurees.length > 0 && <Fragment set:html={donneesStructurees.join('')} />}
