@@ -308,7 +308,7 @@ main>.accueil-main{max-width:72rem}
    (« Préchauf-fage » : COUPURES_LIBELLES, traits d'union conditionnels), quel que soit le navigateur ; jamais ailleurs
    (hyphens:manual). Avec 4 cases dès 375 px et 3 en dessous, chaque mot tient dans sa tuile, même dans la police la plus
    large des navigateurs mesurés (DejaVu Sans, celle de la CI) ; overflow-wrap ne sert que de dernier recours. */
-.grille-voyants a{display:grid;justify-items:center;align-content:start;gap:.3rem;min-width:0;text-decoration:none;font-size:.75rem;font-weight:600;text-align:center;line-height:1.2;padding:.5rem .15rem;-webkit-hyphens:manual;hyphens:manual;overflow-wrap:break-word}
+.grille-voyants a{display:grid;justify-items:center;align-content:start;gap:.3rem;min-width:0;text-decoration:none;font-size:.75rem;font-weight:600;text-align:center;line-height:1.2;padding:.5rem .3rem;-webkit-hyphens:manual;hyphens:manual;overflow-wrap:break-word}
 .grille-voyants .tuile{width:2.9rem;height:2.9rem}
 .grille-voyants .tuile svg{width:2rem;height:2rem}
 @media (max-width:23.4rem){.grille-voyants{grid-template-columns:repeat(3,minmax(0,1fr))}}

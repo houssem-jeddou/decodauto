@@ -36,7 +36,7 @@ posée ; s'il le refuse, la pull request de retour remet l'encadré et l'emprein
     « désac-tivé », « Direc-tion », « d'entre-tien »), avec un tiret, dans tous les navigateurs (`hyphens: manual`, traits
     d'union conditionnels) ; les libellés ne changent pas ; les contrôles ignorent ces traits invisibles ;
   - trois cases par rangée sous 375 px, quatre au-delà ; une tuile ne s'élargit jamais au-delà de sa case
-    (`min-width: 0`) ; marge intérieure de la tuile de 2,4 px de chaque côté ;
+    (`min-width: 0`) ; marge intérieure de la tuile inchangée (contrôle de F1.4) ;
   - mesure ajoutée à FORMAT2-MESURES : chaque morceau d'un libellé (mot, ou partie jusqu'à une coupure, avec son tiret)
     tient dans sa tuile, à 320, 375 et 1366 px ; PICTO-COUPURE vérifie que chaque mot long a sa coupure.
   - Mesure locale (page outil, 22 tuiles), Inter et DejaVu Sans (la police la plus large, celle de la CI) : aucun
