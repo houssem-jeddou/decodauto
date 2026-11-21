@@ -1,8 +1,10 @@
 // Contrôles PARTAGE-* du site construit (lot U3 de l'audit UX/UI, proposition P6 ; règles dans src/lib/partage.ts) : chaque
 // page, sauf la 404, porte une fois chaque balise de partage, cohérente avec la page (adresse canonique, title, meta
-// description, type), et une image servie de 1 200 × 630 px : celle de la page éditoriale qui a une illustration (une par
-// page, jamais partagée), celle de la marque ailleurs ; la 404 n'en porte aucune. Module sans dépendance (lecture des
-// balises par expressions régulières, comme scripts/lib/favicon.ts) : les tests l'appellent tel quel.
+// description, type), et une image servie de 1 200 × 630 px, à son adresse versionnée : celle de la page qui a une
+// illustration (page éditoriale, accueil au format 2 ; une par page, jamais partagée), celle de la marque ailleurs ; la 404
+// n'en porte aucune. L'image servie est celle du registre des empreintes, au poids maximal. Module sans dépendance (lecture
+// des balises par expressions régulières, comme scripts/lib/favicon.ts) : les tests l'appellent tel quel.
+import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
@@ -12,16 +14,25 @@ import {
   ALT_PARTAGE_MARQUE,
   CARTE_TWITTER,
   DOSSIER_PARTAGE,
+  EMPREINTES_PARTAGE,
   HAUTEUR_PARTAGE,
-  IMAGE_PARTAGE_MARQUE,
+  ID_IMAGE_MARQUE,
   LARGEUR_PARTAGE,
   LOCALE_PARTAGE,
+  POIDS_MAX_PARTAGE,
   PROPRIETES_PARTAGE,
+  SOURCE_PARTAGE,
   imagePartage,
 } from '../../src/lib/partage.ts';
 import { NOM_DU_SITE, URL_SITE, adresseDepuisFichier } from '../../src/lib/site.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, ...(fichier !== undefined && { fichier }) });
+
+/** Adresse versionnée attendue d'une image (sans erreur si l'image manque au registre : PARTAGE-FICHIER le dira). */
+const versionnee = (id: string): string => {
+  const entree = EMPREINTES_PARTAGE[id];
+  return entree === undefined ? imagePartage(id) : `${imagePartage(id)}?v=${entree.image.slice(0, 12)}`;
+};
 
 /** Attributs d'une balise ouvrante (valeurs décodées). */
 function attributs(balise: string): Map<string, string> {
@@ -53,7 +64,7 @@ export function altIllustration(html: string): string | undefined {
 
 /**
  * Balises de partage d'une page construite. `idPage` : identifiant du plan de la page (pour l'adresse de son image) ;
- * undefined pour l'accueil et la 404. Renvoie les constats et l'image lue (pour PARTAGE-UNIQUE et PARTAGE-FICHIER).
+ * undefined pour la 404. Renvoie les constats et l'image lue, sans version (pour PARTAGE-UNIQUE et PARTAGE-FICHIER).
  */
 export function constatsBalisesPartage(html: string, fichier: string, idPage: string | undefined): { constats: Constat[]; image: string | undefined } {
   const constats: Constat[] = [];
@@ -90,44 +101,54 @@ export function constatsBalisesPartage(html: string, fichier: string, idPage: st
     ecarts.push(`og:image:type, og:image:width et og:image:height attendus image/png, ${LARGEUR_PARTAGE} et ${HAUTEUR_PARTAGE}`);
   }
   if (ecarts.length > 0) constats.push(erreur('PARTAGE-COHERENCE', `balises de partage incohérentes avec la page : ${ecarts.join(' ; ')}`, fichier));
-  // Type et image : une page éditoriale (encadré de décision) est un article, avec l'image de son illustration ; l'accueil
-  // et les pages du socle, l'image de la marque.
+  // Type : une page éditoriale (encadré de décision) est un article ; l'accueil et les pages du socle, « website ». Image :
+  // celle de l'illustration de la page quand elle en a une (page éditoriale, accueil au format 2), celle de la marque sinon.
   const editoriale = /\sdata-encadre-decision\b/.test(html);
   const typeAttendu = editoriale ? 'article' : 'website';
   if (v('og:type') !== typeAttendu) constats.push(erreur('PARTAGE-TYPE', `og:type « ${v('og:type')} » au lieu de « ${typeAttendu} » (${editoriale ? 'page éditoriale' : 'accueil ou page du socle'})`, fichier));
-  const alt = editoriale ? altIllustration(html) : undefined;
-  const avecIllustration = editoriale && alt !== undefined;
-  const imageAttendue = avecIllustration && idPage !== undefined ? imagePartage(idPage) : IMAGE_PARTAGE_MARQUE;
+  const alt = altIllustration(html);
+  const avecIllustration = alt !== undefined && idPage !== undefined;
+  const imageAttendue = avecIllustration ? versionnee(idPage) : versionnee(ID_IMAGE_MARQUE);
   const image = v('og:image');
   if (image !== `${URL_SITE}${imageAttendue}`) {
-    constats.push(erreur('PARTAGE-IMAGE', `og:image « ${image} » au lieu de « ${URL_SITE}${imageAttendue} » (${avecIllustration ? 'image tirée de l’illustration de la page' : 'image de la marque'})`, fichier));
+    constats.push(erreur('PARTAGE-IMAGE', `og:image « ${image} » au lieu de « ${URL_SITE}${imageAttendue} » (${avecIllustration ? 'image tirée de l’illustration de la page' : 'image de la marque'}, à son adresse versionnée)`, fichier));
   }
   const altAttendu = avecIllustration ? alt : ALT_PARTAGE_MARQUE;
   if (v('og:image:alt').trim() === '' || v('og:image:alt') !== altAttendu) {
     constats.push(erreur('PARTAGE-ALT', `og:image:alt « ${v('og:image:alt')} » au lieu de « ${altAttendu} » (${avecIllustration ? 'texte alternatif de l’illustration' : 'ce que montre l’image de la marque'})`, fichier));
   }
-  return { constats, image: image.startsWith(URL_SITE) ? image.slice(URL_SITE.length) : image };
+  const lue = image.startsWith(URL_SITE) ? image.slice(URL_SITE.length) : image;
+  return { constats, image: lue.split('?')[0] ?? lue };
 }
 
-/** Image servie : fichier du site construit, PNG de 1 200 × 630 px, dans le dossier des images de partage. */
+/**
+ * Image servie (adresse sans version) : fichier du site construit, dans le dossier des images de partage, PNG de
+ * 1 200 × 630 px, de POIDS_MAX_PARTAGE octets au plus, identique au fichier du registre des empreintes (celui de sa version).
+ */
 export async function constatsFichierPartage(dist: string, image: string): Promise<Constat[]> {
-  if (!image.startsWith(DOSSIER_PARTAGE) || !image.endsWith('.png') || image.includes('..')) return [erreur('PARTAGE-FICHIER', `image de partage « ${image} » hors de ${DOSSIER_PARTAGE}`)];
+  const id = /^\/partage\/([a-z0-9-]+)\.png$/.exec(image)?.[1];
+  if (!image.startsWith(DOSSIER_PARTAGE) || id === undefined) return [erreur('PARTAGE-FICHIER', `image de partage « ${image} » hors de ${DOSSIER_PARTAGE}`)];
   let octets: Uint8Array;
   try {
     octets = new Uint8Array(await readFile(join(dist, image)));
   } catch {
-    return [erreur('PARTAGE-FICHIER', `${image} absente du site construit (public${DOSSIER_PARTAGE} : travaux/partage/generer-images-partage.mjs)`)];
+    return [erreur('PARTAGE-FICHIER', `${image} absente du site construit (${SOURCE_PARTAGE}/, copiée par scripts/integration-partage.ts ; travaux/partage/generer-images-partage.mjs)`)];
   }
   const d = dimensionsPng(octets);
   if (d === undefined) return [erreur('PARTAGE-FICHIER', `${image} n'est pas une image PNG`)];
   if (d.largeur !== LARGEUR_PARTAGE || d.hauteur !== HAUTEUR_PARTAGE) return [erreur('PARTAGE-FICHIER', `${image} mesure ${d.largeur} × ${d.hauteur} px au lieu de ${LARGEUR_PARTAGE} × ${HAUTEUR_PARTAGE}`)];
+  if (octets.length > POIDS_MAX_PARTAGE) return [erreur('PARTAGE-FICHIER', `${image} pèse ${octets.length} octets, au-delà de ${POIDS_MAX_PARTAGE}`)];
+  const attendue = EMPREINTES_PARTAGE[id]?.image;
+  if (attendue === undefined || createHash('sha256').update(octets).digest('hex') !== attendue) {
+    return [erreur('PARTAGE-FICHIER', `${image} n'est pas l'image du registre des empreintes (EMPREINTES_PARTAGE) : régénérée ou remplacée à la main`)];
+  }
   return [];
 }
 
-/** Une image de page n'est portée que par une page (l'image de la marque est commune à l'accueil et au socle). */
+/** Une image de page n'est portée que par une page (l'image de la marque est commune aux pages du socle). */
 export function constatsImagesUniques(images: ReadonlyMap<string, string>): Constat[] {
   const parImage = new Map<string, string[]>();
-  for (const [fichier, image] of images) if (image !== IMAGE_PARTAGE_MARQUE) parImage.set(image, [...(parImage.get(image) ?? []), fichier]);
+  for (const [fichier, image] of images) if (image !== imagePartage(ID_IMAGE_MARQUE)) parImage.set(image, [...(parImage.get(image) ?? []), fichier]);
   return [...parImage].filter(([, fichiers]) => fichiers.length > 1).map(([image, fichiers]) => erreur('PARTAGE-UNIQUE', `${image} est l'image de partage de ${fichiers.length} pages (${fichiers.join(', ')}) : une image par page`));
 }
 

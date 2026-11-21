@@ -5,7 +5,6 @@
 // ligne de transparence (page du socle, charte §6.2) : la mention en tête vient du gabarit commun.
 // Module sans dépendance à l'exécution : tests et construction l'utilisent tel quel.
 import { texteHtml, attributHtml } from './html.ts';
-import { DEVISE_DU_SITE } from './site.ts';
 import { ID_OUTIL_VOYANTS } from './plan.ts';
 import { LIBELLES_PICTOGRAMMES, libelleCoupable } from './pictogrammes.ts';
 import { ancreLigneOutil } from './outil-voyants.ts';
@@ -14,8 +13,11 @@ import { LIBELLES_THEMES, THEMES, type Theme } from '../schemas/listes.ts';
 /** Ancre de la section d'un thème sur l'accueil : cible des liens du pied de page (format2.ts) ; source unique. */
 export const ancreThemeAccueil = (theme: Theme): string => `da-accueil-${theme}`;
 
-/** Le positionnement du site (docs/01) : le H1 de l'accueil. */
-export const TITRE_ACCUEIL = DEVISE_DU_SITE;
+/**
+ * Le positionnement du site (docs/01) : le H1 de l'accueil, et la devise de l'image de partage de la marque (lot U3,
+ * src/lib/partage.ts). Une seule ligne, entre apostrophes droites : scripts/verifier-indexation-durable.ts la lit.
+ */
+export const TITRE_ACCUEIL = 'Votre voiture vous alerte, on vous dit quoi faire.';
 export const TITLE_ACCUEIL = 'decodauto : voyant allumé, code défaut, que faire ?';
 export const DESCRIPTION_ACCUEIL = 'Voyant allumé, code défaut, bruit suspect ou obligation : peut-on rouler, avec quelle urgence, que faire. Un guide indépendant, sans pièces à vendre.';
 
