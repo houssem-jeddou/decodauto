@@ -30,17 +30,21 @@ bord », « logo tableau de bord »…), et les pages voyant huile (« logo huil
 des pneus (« logo pression des pneus »).
 
 **Fichiers servis**, écrits à la construction (jamais dans `public/`, jamais à la main) :
-- `/illustrations/<fichier>.svg` : le dessin de `src/illustrations`, tel quel, après les vérifications d'aujourd'hui
-  (aucun script, aucune ressource d'un autre site) ;
-- `/pictogrammes/<pictogramme>-<couleur>.svg` : le dessin de `src/pictogrammes`, avec la couleur du voyant de la charte
-  (`--v-orange`, `--v-rouge`… de `src/styles/charte-b.css`) à la place de `currentColor`, pour chaque paire de la base.
+- `/illustrations/<fichier>.svg` : le dessin de `src/illustrations` tel que le vérifie la règle 2i (aucun script, aucune
+  ressource d'un autre site ; prologue, commentaires, `title` et `desc` retirés) : le fichier servi est le texte vérifié ;
+- `/pictogrammes/voyant-<pictogramme>-<couleur>.svg` (nom parlant, comme le prévoyait P8 : `voyant-huile-rouge.svg`) : le
+  dessin de `src/pictogrammes`, avec la couleur du voyant de la charte (`--v-orange`, `--v-rouge`… de
+  `src/styles/charte-b.css`) à la place de `currentColor`, pour chaque paire de la base.
+- Exactement les fichiers que les pages construites référencent ; rien d'autre dans ces deux dossiers du site. Le serveur de
+  développement les sert de la même façon.
 
 **Sur les pages du pilote** :
 - l'illustration est une image (`<img>`) qui pointe vers son fichier, avec son texte alternatif, sa largeur et sa hauteur
   (celles du dessin) et un chargement différé, dans la même figure, avec la même légende ;
-- chaque tuile de voyant de l'encadré et de l'outil (grille des dessins, cartes) est une image du fichier de sa paire, au
-  texte alternatif vide : le nom du voyant et sa couleur sont écrits à côté (règle d'accessibilité inchangée) ; la lueur
-  du voyant « allumé » reste, même filtre ;
+- chaque tuile de voyant de l'encadré et de l'outil (grille des dessins, cartes) est une image du fichier de sa paire,
+  décorative (texte alternatif vide et `role="presentation"`, comme l'exige IMAGE-ALT) : le nom du voyant et sa couleur
+  sont écrits à côté ; la lueur du voyant « allumé » reste, même filtre ; en couleurs forcées (Windows), la tuile garde son
+  rond sombre et son dessin allumé ;
 - les pastilles « À lire aussi », le bouton « Trouver mon voyant » et les autres pages ne changent pas.
 
 ## 4. Impact sur ce qui est validé
@@ -57,11 +61,22 @@ des pneus (« logo pression des pneus »).
 ## 5. Contrôles à relancer
 - `npm run schemas`, `npm test`, `npm run build` (contrôle), `npm run liens` ; recette des exemples ; démonstration du
   format 2 (FORMAT2-MESURES) ; Lighthouse sur les quatre pages.
-- **IMAGES-FICHIERS** (nouveau) : chaque page du pilote est une page du plan ; sur une page du pilote, l'illustration et les
-  tuiles sont des images qui pointent vers un fichier servi, au contenu attendu (dessin, couleur), largeur et hauteur posées ;
-  sur les autres pages, aucune.
+- **IMAGES-FICHIERS** (nouveau) : chaque page du pilote est une page du plan, construite au format 2 ; sur une page du
+  pilote, l'illustration et les tuiles sont des images qui pointent vers un fichier servi, au contenu attendu (dessin,
+  couleur), largeur et hauteur posées, les tuiles décoratives ; sur les autres pages, aucune ; aucun fichier servi en trop.
 - Captures à 375 × 667 et 1366 × 800, police chargée et police de secours : premier écran et illustration des quatre pages.
 
-## 6. Suivi
-Search Console, type de recherche « Image », pages du pilote : relevé à J+30 de la mise en ligne. Décision de Houssem :
-généraliser à toutes les pages, garder le pilote, ou revenir au dessin posé dans la page.
+## 6. Suivi, critères et retour arrière
+- **Relevé à J+30** de la mise en ligne : Search Console, type de recherche « Image », les quatre pages du pilote
+  (impressions, clics, requêtes) ; type « Web », les mêmes pages, comparées au relevé de J+14 (clics, position moyenne).
+- **Critères de la décision de Houssem** : des impressions en recherche d'images sur au moins deux des quatre pages, sans
+  baisse des clics « Web » de ces pages → généraliser à toutes les pages ; aucune impression d'image → garder le pilote
+  30 jours de plus, puis revenir au dessin posé dans la page si rien ne change ; baisse des clics « Web » ou de la position
+  → revenir au dessin.
+- **Retour arrière** : retirer une page de `config/images-en-fichiers.json` ; ses images ne sont plus servies (une image
+  n'est pas une page : pas de redirection, Google l'oublie). Rien d'autre à défaire.
+- **Revue indépendante** (21/11, sur 113b3776) : « à corriger » ; changé : tuiles décoratives avec `role="presentation"`
+  (58 erreurs IMAGE-ALT), noms parlants, fichier d'illustration servi = texte vérifié, couleurs forcées, contrôles et tests
+  complétés (format 2, fichiers en trop, cas en échec), serveur de développement, captures de la CI après le chargement
+  des images ; écarté : chargement différé des tuiles du premier écran (règle IMAGE-CHARGEMENT ; Lighthouse à 100, CLS 0,
+  LCP de l'outil 1 138 ms au lieu de 1 053) ; contrôle en production des fichiers, en idée reportée.
