@@ -312,6 +312,13 @@ main>.accueil-main{max-width:72rem}
 /* Carte « Un guide indépendant » sur toute la largeur de la grille (revue de la PR n° 84, I1) : les thèmes restent sur une
    rangée à 1366 px quel que soit leur nombre (quatre depuis la vague C), sans carte seule sur une rangée. */
 .theme-guide{grid-column:1/-1}
+/* Accueil, pages d'un thème en pastilles (lot U2 de l'audit UX/UI, P5 ; variante de la pastille « À lire aussi », sans tuile :
+   la grille des voyants du haut de l'accueil montre déjà les dessins) : deux colonnes au téléphone, cible de 44 px ; la
+   phrase de présentation du thème en texte doux. */
+.themes .theme .pages-du-theme{list-style:none;padding:0;margin:.6rem 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(9rem,1fr));gap:.45rem}
+.themes .theme .pages-du-theme li+li{margin-top:0}
+.themes .theme .pages-du-theme a{display:flex;align-items:center;gap:.5rem;min-height:2.75rem;padding:.35rem .65rem;border-radius:999px;background:var(--fond-page);color:var(--texte);font-weight:600;font-size:.875rem;line-height:1.2;text-decoration:none}
+.theme .theme-intro{color:var(--texte-doux)}
 
 /* Page outil « Quel voyant est allumé ? » (F1.3a) : renvoi de l'encadré en bouton ambre, filtre en pastilles sans script,
    index des dessins dans la grille de l'accueil, un panneau sombre par groupe de couleur (diode), une cellule de l'encadré

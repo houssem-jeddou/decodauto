@@ -32,7 +32,7 @@ import {
 } from '../src/lib/format2.ts';
 import { PHRASES_MAX_PARAGRAPHE, constatsParagraphes, controlerFormat2, nombreDePhrases } from '../src/lib/controle-format2.ts';
 import { marqueEtModele, modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
-import { ACCUEIL_FORMAT2, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
+import { ACCUEIL_FORMAT2, PRESENTATIONS_THEMES, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
 import { mentionEnTete } from '../src/lib/composants.ts';
 import { LIBELLES_PICTOGRAMMES, constatsLibellesPictogrammes } from '../src/lib/pictogrammes.ts';
 import { chargerPictogrammes } from '../scripts/lib/charger.ts';
@@ -414,6 +414,20 @@ describe('format 2 : accueil', () => {
     assert.deepEqual(regles(constatsAccueil(html, 'index.html', { pages: adresses, outil: '/voyants/', aPropos: '/a-propos/' })), []);
     const sansOutil = accueilFormat2Html({ pages: pages.filter((p) => p.id !== 'voyants'), aPropos, grille, mention: mentionEnTete(), tuile });
     assert.ok(!sansOutil.includes('data-accueil-outil'));
+    // Lot U2 (P5) : chaque carte de thème présente le thème sous son titre, puis liste ses pages en pastilles ; la carte
+    // « Un guide indépendant » garde son paragraphe et son lien.
+    const cartes = $('[data-accueil-theme]').toArray();
+    assert.ok(cartes.length >= 4);
+    for (const carte of cartes) {
+      const theme = $(carte).attr('data-accueil-theme') as keyof typeof PRESENTATIONS_THEMES;
+      assert.ok($(carte).children('h2').next().is('p.theme-intro'), theme);
+      assert.equal($(carte).children('.theme-intro').text(), typographier(PRESENTATIONS_THEMES[theme]));
+      assert.equal($(carte).children('ul.pages-du-theme').length, 1, theme);
+    }
+    assert.equal($('[data-accueil-guide] .pages-du-theme, [data-accueil-guide] .theme-intro').length, 0);
+    const css = await readFile(join(racine, 'src/styles/charte-b.css'), 'utf8');
+    // Cible tactile de 44 px pour chaque pastille (WCAG 2.5.8, Lighthouse target-size).
+    assert.match(css, /\.themes \.theme \.pages-du-theme a\{display:flex;[^}]*min-height:2\.75rem;/);
   });
 
   test('PICTO-LIBELLE : chaque fichier de src/pictogrammes a son libellé, aucun libellé sans fichier', async () => {
