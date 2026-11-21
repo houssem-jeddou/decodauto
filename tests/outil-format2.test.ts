@@ -14,6 +14,7 @@ import { adresseBoutonVoyant, bandeauFormat2, piedFormat2, renvoiNotices } from 
 import { modeleDeLaPage, pageOutilVoyants, pageOutilVoyantsF2 } from '../src/lib/modeles.ts';
 import { clePaire, entreesIndexFormat2, lienNoticesDeLaCarte, modeleOutilFormat2, outilVoyantsFormat2, paragraphes, texteEntreeIndex } from '../src/lib/outil-format2.ts';
 import { INTRODUCTION_OUTIL, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, ancreLigneOutil, modeleOutilVoyants, outilVoyants, type ModeleOutil } from '../src/lib/outil-voyants.ts';
+import { ENCADRE_OUTIL_FORMAT2 } from '../src/lib/outil-textes.ts';
 import { LIBELLES_PICTOGRAMMES } from '../src/lib/pictogrammes.ts';
 import { controlerOutilVoyants, controlerPage } from '../src/lib/controle.ts';
 import { donneesDuSite } from '../scripts/lib/donnees-site.ts';
@@ -78,17 +79,23 @@ describe('format 2 : page outil (F1.3a)', () => {
     assert.deepEqual(regles(constatsPartCitee(html, 'x.html')), []);
   });
 
-  test('ordre : encadré (renvoi avant les exemples, coût « Selon le voyant »), signature, transparence, notices, illustration, sommaire, outil, texte, sources', () => {
-    const marques = ['data-encadre-decision', 'data-encadre-renvoi', 'data-encadre-ligne', 'data-encadre-cout', 'data-signature', 'data-ligne-transparence', 'data-provenance', 'data-illustration', 'data-sommaire', 'data-outil-voyants', 'data-corps', 'data-sources'];
+  test('ordre (demande n° 41) : encadré (phrase d\'exemple, une ligne d\'exemple, grille des dessins, coût « Selon le voyant »), signature, transparence, notices, illustration, sommaire, outil, texte, sources', () => {
+    const marques = ['data-encadre-decision', 'data-encadre-renvoi', 'data-encadre-ligne', 'data-outil-index', 'data-encadre-cout', 'data-signature', 'data-ligne-transparence', 'data-provenance', 'data-illustration', 'data-sommaire', 'data-outil-voyants', 'data-corps', 'data-sources'];
     const positions = marques.map((m) => html.indexOf(m));
     assert.ok(positions.every((p) => p >= 0), JSON.stringify(positions));
     assert.deepEqual([...positions].sort((a, b) => a - b), positions);
     const $ = cheerio.load(html);
-    assert.equal($('[data-encadre-renvoi] a.bouton-voyant').attr('href'), '#da-outil');
+    // Phrase d'exemple sans bouton, une seule ligne (le voyant moteur orange fixe), puis la grille sous son titre.
+    assert.equal(plat($('[data-encadre-renvoi]').text()), plat(ENCADRE_OUTIL_FORMAT2.exemple));
+    assert.equal($('[data-encadre-renvoi] a').length, 0);
+    assert.equal($('[data-encadre-decision] [data-encadre-ligne]').length, 1);
+    assert.equal($('[data-encadre-decision] > [data-outil-index] > h3').length, 1);
+    assert.equal(plat($('[data-encadre-decision] > [data-outil-index] > h3').text()), plat(ENCADRE_OUTIL_FORMAT2.grille));
+    assert.equal($('[data-outil-index]').length, 1);
     assert.equal($('[data-encadre-cout] .tranche').text(), 'Selon le voyant');
-    // Dans l'outil : titre, filtre, grille des dessins, introduction, puis les groupes.
+    // Dans l'outil : titre, filtre, introduction, puis les groupes (la grille est dans l'encadré).
     const blocs = $('[data-outil-voyants]').children().toArray().map((el) => $(el).attr('data-outil-filtre') !== undefined ? 'filtre' : $(el).attr('data-outil-index') !== undefined ? 'index' : $(el).attr('data-outil-intro') !== undefined ? 'intro' : $(el).attr('data-outil-groupe') ?? el.tagName);
-    assert.deepEqual(blocs, ['h2', 'filtre', 'index', 'intro', 'orange', 'rouge', 'p']);
+    assert.deepEqual(blocs, ['h2', 'filtre', 'intro', 'orange', 'rouge', 'p']);
     // Sommaire : le titre de l'outil, puis les titres du texte.
     assert.deepEqual($('.sommaire-cote a').toArray().map((a) => $(a).attr('href')), ['#da-outil-titre', '#lire', '#couleur', '#orange']);
     // « Sources » repliée, avec la note de l'outil.
@@ -243,7 +250,13 @@ describe('format 2 : page outil (F1.3a)', () => {
       ['OUTIL-LIBELLES', modifie(($) => $('#da-voyant-abs .action').append(' Phrase ajoutée.'))],
       ['OUTIL-LIBELLES', modifie(($) => $('#da-voyant-abs .tuile').attr('data-couleur', 'rouge'))],
       ['OUTIL-LIEN', modifie(($) => $('#da-voyant-stop .action').append(' <a href="/voyants/">Ici</a>'))],
-      ['OUTIL-LIEN', modifie(($) => $('[data-encadre-renvoi] a').attr('href', '#da-outil-index'))],
+      // Demande n° 41 : plus de bouton de renvoi ; la grille dans l'encadré, entre la ligne d'exemple et le coût.
+      ['OUTIL-LIEN', modifie(($) => $('[data-encadre-renvoi]').append(' <a class="bouton-voyant" href="#da-outil">Trouvez votre voyant dans la liste</a>'))],
+      ['OUTIL-LIEN', modifie(($) => $('[data-encadre-renvoi]').text('Ces lignes sont des exemples : la couleur ne suffit pas à décider.'))],
+      ['OUTIL-INDEX', modifie(($) => $('[data-outil-index]').insertBefore($('[data-encadre-decision] ol.lignes')))],
+      ['OUTIL-INDEX', modifie(($) => $('[data-outil-index]').insertAfter($('[data-encadre-cout]')))],
+      ['OUTIL-INDEX', modifie(($) => $('[data-outil-index]').insertAfter($('[data-outil-filtre]')))],
+      ['OUTIL-INDEX', modifie(($) => $('[data-outil-index] > h3').text('Cherchez le dessin de votre voyant'))],
       ['OUTIL-FILTRE', modifie(($) => $('#da-filtre-tous').removeAttr('checked'))],
       ['OUTIL-SANS-JS', modifie(($) => $('[data-outil-groupe="rouge"]').attr('hidden', ''))],
       ['R9-ENCADRE-CONTENU', modifie(($) => $('[data-encadre-cout]').remove())],
@@ -260,14 +273,17 @@ describe('format 2 : page outil (F1.3a)', () => {
   test('contrôle de l\'outil, dans les deux sens : le rendu du format 1 est refusé au format 2, et le rendu du format 2 au format 1 ; plusieurs clés de l\'index renommées sont toutes signalées', () => {
     const outil1 = outilVoyants(modele, site.pictogrammes);
     const outil2 = cheerio.load(html)('[data-outil-voyants]').toString();
+    // Encadré du format 1 (renvoi et bouton) ; encadré du format 2 (demande n° 41 : phrase d'exemple et grille des dessins).
     const avecEncadre = (outil: string): string => `<section data-encadre-decision><p data-encadre-renvoi>${RENVOI_ENCADRE_OUTIL.texte} <a href="#da-outil">${RENVOI_ENCADRE_OUTIL.lien}</a></p></section>${outil}<div data-sources>${NOTE_SOURCES_OUTIL}</div>`;
+    const encadre2 = cheerio.load(html)('[data-encadre-decision]').toString();
+    const avecEncadre2 = (outil: string): string => `${encadre2}${outil}<div data-sources>${NOTE_SOURCES_OUTIL}</div>`;
     const regles = (h: string, format: 1 | 2): string[] => controlerOutilVoyants(h, 'x', modele, format).map((c) => c.regle).filter((r) => r.startsWith('OUTIL-') || r.startsWith('FORMAT2-'));
     // Chaque rendu passe dans son format.
     assert.deepEqual(regles(avecEncadre(outil1), 1), []);
-    assert.deepEqual(regles(avecEncadre(outil2), 2), []);
+    assert.deepEqual(regles(avecEncadre2(outil2), 2), []);
     // Le rendu du format 1 est refusé au format 2, et inversement.
     assert.ok(regles(avecEncadre(outil1), 2).includes('OUTIL-INDEX'), regles(avecEncadre(outil1), 2).join(', '));
-    assert.ok(regles(avecEncadre(outil2), 1).includes('OUTIL-INDEX'), regles(avecEncadre(outil2), 1).join(', '));
+    assert.ok(regles(avecEncadre2(outil2), 1).includes('OUTIL-INDEX'), regles(avecEncadre2(outil2), 1).join(', '));
     // Trois clés renommées : toutes nommées dans le constat.
     const renommees = modifie(($) => {
       for (const cle of ['moteur@orange', 'abs@rouge', 'frein-stationnement@rouge']) $(`[data-outil-index-entree="${cle}"]`).attr('data-outil-index-entree', `${cle}-x`);
@@ -283,12 +299,15 @@ describe('format 2 : page outil (F1.3a)', () => {
     assert.throws(() => outilVoyantsFormat2(inconnu, new Map()), /« inconnu » n'a pas de libellé dans LIBELLES_PICTOGRAMMES/);
   });
 
-  test('feuille du format 2 : le filtre de chaque couleur de la liste fermée masque les autres groupes et les autres tuiles', async () => {
+  test('feuille du format 2 : le filtre de chaque couleur de la liste fermée masque les autres groupes, jamais la grille de l\'encadré (demande n° 41) ; le groupe d\'une carte visée s\'affiche', async () => {
     const css = await readFile(join(racine, 'src/styles/charte-b.css'), 'utf8');
     for (const c of COULEURS_VOYANT) {
       assert.ok(css.includes(`.outil-voyants:has(#da-filtre-${c}:checked) [data-outil-groupe]:not([data-outil-groupe="${c}"])`), c);
-      assert.ok(css.includes(`.outil-voyants:has(#da-filtre-${c}:checked) [data-outil-index-entree]:not([data-couleur="${c}"])`), c);
-      assert.ok(css.includes(`.outil-voyants:has(#da-filtre-${c}:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="${c}"])`), c);
+      assert.ok(!css.includes(`[data-outil-index-entree]:not([data-couleur="${c}"])`), c);
+      assert.ok(!css.includes(`[data-outil-index-couleur]:not([data-outil-index-couleur="${c}"])`), c);
     }
+    assert.ok(css.includes('#da-outil.outil-voyants [data-outil-groupe][data-outil-groupe]:has([data-outil-ligne]:target){display:block}'));
+    // La grille est hors de la section filtrée : aucune règle du filtre ne l'atteint.
+    assert.equal(cheerio.load(html)('[data-outil-voyants] [data-outil-index]').length, 0);
   });
 });

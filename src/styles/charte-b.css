@@ -352,22 +352,20 @@ main>.accueil-main{max-width:72rem}
 .outil-references{margin:.2rem 0 0;padding-left:1.1rem}
 .outil-absent{margin:1rem 0 0;font-size:.9375rem}
 .note-sources{font-size:.875rem;color:var(--texte-doux);margin:.4rem 0 0}
-/* Filtre sans script : boutons radio et :has() ; un navigateur sans :has() affiche toute la liste. */
+/* Filtre sans script : boutons radio et :has() ; un navigateur sans :has() affiche toute la liste. Il ne filtre que la
+   liste : la grille des dessins est dans l'encadré, toujours entière (demande de changement n° 41). */
 .outil-voyants:has(#da-filtre-orange:checked) [data-outil-groupe]:not([data-outil-groupe="orange"]),
 .outil-voyants:has(#da-filtre-rouge:checked) [data-outil-groupe]:not([data-outil-groupe="rouge"]),
 .outil-voyants:has(#da-filtre-vert:checked) [data-outil-groupe]:not([data-outil-groupe="vert"]),
 .outil-voyants:has(#da-filtre-bleu:checked) [data-outil-groupe]:not([data-outil-groupe="bleu"]),
-.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-groupe]:not([data-outil-groupe="blanc"]),
-.outil-voyants:has(#da-filtre-orange:checked) [data-outil-index-entree]:not([data-couleur="orange"]),
-.outil-voyants:has(#da-filtre-rouge:checked) [data-outil-index-entree]:not([data-couleur="rouge"]),
-.outil-voyants:has(#da-filtre-vert:checked) [data-outil-index-entree]:not([data-couleur="vert"]),
-.outil-voyants:has(#da-filtre-bleu:checked) [data-outil-index-entree]:not([data-couleur="bleu"]),
-.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-index-entree]:not([data-couleur="blanc"]),
-.outil-voyants:has(#da-filtre-orange:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="orange"]),
-.outil-voyants:has(#da-filtre-rouge:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="rouge"]),
-.outil-voyants:has(#da-filtre-vert:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="vert"]),
-.outil-voyants:has(#da-filtre-bleu:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="bleu"]),
-.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-index-couleur]:not([data-outil-index-couleur="blanc"]){display:none}
+.outil-voyants:has(#da-filtre-blanc:checked) [data-outil-groupe]:not([data-outil-groupe="blanc"]){display:none}
+/* Une tuile de la grille mène à sa carte même quand le filtre cache le groupe de la carte : ce groupe s'affiche. Le
+   sélecteur l'emporte sur celui du filtre (un identifiant et cinq classes ou attributs, contre un et quatre). */
+#da-outil.outil-voyants [data-outil-groupe][data-outil-groupe]:has([data-outil-ligne]:target){display:block}
+/* Grille des dessins dans l'encadré de la page outil (demande de changement n° 41) : sans panneau propre, sur le fond de
+   l'encadré, son titre écrit comme la phrase d'exemple. */
+.decision .outil-index{margin:.6rem 0 .2rem;padding:0;border-radius:0}
+.decision .outil-index h3{margin:0 0 .5rem;font-family:var(--police-texte);font-weight:400;font-size:.9375rem;line-height:1.38}
 /* Pages du lot F3 au format 2 (F1.3b) : code en chasse fixe dans la fiche du code, définitions des fiches sans rangées
    (mentions légales), rangée « dépannage sur autoroute » du coût, tête de page sans encadré (socle, 404). */
 .fiche-code h2 .code{font-family:var(--mono);font-size:.92em;padding:.05rem .4rem;border-radius:6px}
@@ -485,6 +483,7 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .pied a{color:var(--nuit-lien)}
 :root .chapo{color:var(--nuit-doux)}
 :root .voyants{background:var(--nuit);color:#fff}
+:root .decision .outil-index{background:transparent;color:inherit}
 :root .voyants a{color:var(--nuit-lien)}
 :root .voyants-chapo{color:var(--nuit-doux)}
 :root .grille-voyants a{color:var(--nuit-texte);background:var(--panneau);border:1px solid var(--filet-nuit);border-radius:14px}

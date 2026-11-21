@@ -9,6 +9,7 @@ import { modeleFicheTexte, type FicheTexte } from './fiche-texte.ts';
 import { modeleFicheFluide } from './fiche-fluide.ts';
 import { MOTS_ACTION_ARBRE, MOTS_VERDICT_ARBRE, REPONSES_MIN_ARBRE, modeleFichePanne, modeleFicheTutoriel, type EntreeDuJournal, type LigneDeFiche } from './fiche-panne.ts';
 import { ABSENT_OUTIL, AIDE_FILTRE, ANCRE_OUTIL, FILTRE_TOUS, INTRODUCTION_OUTIL, LIBELLE_FILTRE_TOUS, NOTE_SOURCES_OUTIL, RENVOI_ENCADRE_OUTIL, TITRE_INDEX_OUTIL, TITRE_OUTIL, ancreLigneOutil, idFiltre, libelleDetail, modeleOutilVoyants, outilVoyants, type ModeleOutil } from './outil-voyants.ts';
+import { ENCADRE_OUTIL_FORMAT2 } from './outil-textes.ts';
 import { calculerChamps, coutDeLaPage, resoudreLignes, sourcesDeLaPageCitees, type LigneResolue } from './calcul.ts';
 import {
   COUTS_VIDES,
@@ -1353,10 +1354,19 @@ export function controlerOutilVoyants(html: string, fichier: string, attenduBase
     if (enTrop.length > 0) constats.push(erreur('OUTIL-LIEN', `ligne « ${l.voyant} » : lien(s) inattendu(s) ${enTrop.join(', ')} : une ligne ne mène qu'à la page construite du voyant`, fichier));
     if (ligne.parents('details').length > 0) constats.push(erreur('OUTIL-SANS-JS', `ligne « ${l.voyant} » dans un bloc dépliable : verdict et action se lisent sans rien ouvrir`, fichier));
   }
-  const blocRenvoi = $('[data-encadre-decision]').first().find('[data-encadre-renvoi]');
-  const renvoi = blocRenvoi.find(`a[href="#${ANCRE_OUTIL}"]`);
-  if (renvoi.length !== 1 || n(blocRenvoi.text()) !== n(`${RENVOI_ENCADRE_OUTIL.texte} ${RENVOI_ENCADRE_OUTIL.lien}`) || outil.attr('id') !== ANCRE_OUTIL) {
-    constats.push(erreur('OUTIL-LIEN', `l'encadré de décision renvoie à la liste (« ${RENVOI_ENCADRE_OUTIL.texte} ${RENVOI_ENCADRE_OUTIL.lien} », #${ANCRE_OUTIL}), et l'outil porte cet identifiant`, fichier));
+  const encadreOutil = $('[data-encadre-decision]').first();
+  const blocRenvoi = encadreOutil.find('[data-encadre-renvoi]');
+  if (format2) {
+    // Demande de changement n° 41 (lot U2) : la phrase d'exemple seule, sans bouton : la grille des dessins de l'encadré
+    // mène aux cartes de la liste (OUTIL-INDEX).
+    if (blocRenvoi.length !== 1 || blocRenvoi.find('a').length > 0 || n(blocRenvoi.text()) !== n(ENCADRE_OUTIL_FORMAT2.exemple) || outil.attr('id') !== ANCRE_OUTIL) {
+      constats.push(erreur('OUTIL-LIEN', `l'encadré de décision porte la phrase d'exemple (« ${ENCADRE_OUTIL_FORMAT2.exemple} »), sans lien, et l'outil porte l'identifiant #${ANCRE_OUTIL}`, fichier));
+    }
+  } else {
+    const renvoi = blocRenvoi.find(`a[href="#${ANCRE_OUTIL}"]`);
+    if (renvoi.length !== 1 || n(blocRenvoi.text()) !== n(`${RENVOI_ENCADRE_OUTIL.texte} ${RENVOI_ENCADRE_OUTIL.lien}`) || outil.attr('id') !== ANCRE_OUTIL) {
+      constats.push(erreur('OUTIL-LIEN', `l'encadré de décision renvoie à la liste (« ${RENVOI_ENCADRE_OUTIL.texte} ${RENVOI_ENCADRE_OUTIL.lien} », #${ANCRE_OUTIL}), et l'outil porte cet identifiant`, fichier));
+    }
   }
 
   if (!n($('[data-sources]').first().text()).includes(n(NOTE_SOURCES_OUTIL))) {
@@ -1364,9 +1374,21 @@ export function controlerOutilVoyants(html: string, fichier: string, attenduBase
   }
 
   // Index des dessins (décision 9 du paquet 8.1) : comparé au modèle. Une ligne absente de la liste relève d'OUTIL-LIGNES.
-  const index = outil.find('[data-outil-index]');
-  if (index.length !== 1) {
-    constats.push(erreur('OUTIL-INDEX', `l'outil a un seul index des dessins (data-outil-index), généré depuis la base ; trouvé : ${index.length}`, fichier));
+  // Format 2 (demande de changement n° 41, lot U2) : dans l'encadré, après la ligne d'exemple et avant le coût, sous son
+  // titre ; aucun dans la section de l'outil.
+  const tousLesIndex = $('[data-outil-index]');
+  const index = format2 ? encadreOutil.find('[data-outil-index]') : outil.find('[data-outil-index]');
+  if (index.length !== 1 || tousLesIndex.length !== 1) {
+    constats.push(erreur('OUTIL-INDEX', `${format2 ? "l'encadré de décision" : "l'outil"} a un seul index des dessins (data-outil-index), généré depuis la base, et la page n'en a pas d'autre ; trouvé : ${index.length} ${format2 ? 'dans l\'encadré' : 'dans l\'outil'}, ${tousLesIndex.length} dans la page`, fichier));
+  } else if (format2) {
+    const blocs = encadreOutil.children().toArray().map((el) => $(el));
+    const rang = (selecteur: string): number => blocs.findIndex((el) => el.is(selecteur));
+    const place = rang('[data-outil-index]');
+    const cout = rang('[data-encadre-cout]');
+    if (place < 0 || place < rang('ol.lignes') || (cout >= 0 && place > cout)) {
+      constats.push(erreur('OUTIL-INDEX', "l'index des dessins se place dans l'encadré, après la ligne d'exemple et avant le coût (demande de changement n° 41)", fichier));
+    }
+    if (n(index.find('h3').first().text()) !== n(ENCADRE_OUTIL_FORMAT2.grille)) constats.push(erreur('OUTIL-INDEX', `le titre de l'index est « ${ENCADRE_OUTIL_FORMAT2.grille} »`, fichier));
   } else {
     const blocs = outil.children().toArray().map((el) => $(el));
     const rang = (selecteur: string): number => blocs.findIndex((el) => el.is(selecteur));
@@ -1376,6 +1398,8 @@ export function controlerOutilVoyants(html: string, fichier: string, attenduBase
       constats.push(erreur('OUTIL-INDEX', "l'index des dessins se place dans l'outil, entre le filtre et le premier groupe", fichier));
     }
     if (n(index.find('h3').first().text()) !== n(TITRE_INDEX_OUTIL)) constats.push(erreur('OUTIL-INDEX', `le titre de l'index est « ${TITRE_INDEX_OUTIL} »`, fichier));
+  }
+  if (index.length === 1 && tousLesIndex.length === 1) {
     const entrees = index.find('[data-outil-index-entree]').toArray().map((el) => $(el));
     const lues = entrees.map((e) => e.attr('data-outil-index-entree') ?? '');
     if (format2) {

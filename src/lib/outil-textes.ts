@@ -26,6 +26,15 @@ export const RENVOI_ENCADRE_OUTIL = {
   ancre: ANCRE_OUTIL,
 } as const;
 
+/**
+ * Encadré de la page outil au format 2 (demande de changement n° 41, lot U2) : une seule ligne d'exemple, présentée par la
+ * phrase `exemple`, puis la grille des dessins sous le titre `grille` (elle mène aux cartes de la liste : plus de bouton).
+ */
+export const ENCADRE_OUTIL_FORMAT2 = {
+  exemple: 'Cette ligne est un exemple : la couleur ne suffit pas à décider.',
+  grille: 'Touchez le dessin qui ressemble à votre voyant :',
+} as const;
+
 /** Note de la section « Sources » de la page outil : les pages citées pour chaque voyant sont sous sa ligne. */
 export const NOTE_SOURCES_OUTIL = 'Les pages citées pour chaque voyant de la liste sont données sous sa ligne.';
 
@@ -43,3 +52,6 @@ export const TEXTES_OUTIL: readonly string[] = [
   RENVOI_ENCADRE_OUTIL.lien,
   NOTE_SOURCES_OUTIL,
 ];
+
+/** Textes de l'encadré de l'outil au format 2 (demande de changement n° 41) : l'empreinte de la page outil au format 2 les verrouille aussi. */
+export const TEXTES_OUTIL_FORMAT2: readonly string[] = [ENCADRE_OUTIL_FORMAT2.exemple, ENCADRE_OUTIL_FORMAT2.grille];

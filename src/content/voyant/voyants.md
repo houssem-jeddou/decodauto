@@ -11,12 +11,8 @@ libelle_court: Identifier un voyant
 question_decision: "Quel voyant s'est allumé, et pouvez-vous continuer à rouler ?"
 situations:
   - voyant: moteur-orange-fixe
-  - voyant: abs
-  - voyant: prechauffage
 voyants:
   - moteur-orange-fixe
-  - abs
-  - prechauffage
 cout_probable:
   base_de_calcul: "Le coût dépend du voyant et de sa cause : chaque page de voyant donne sa plage."
   sources:
@@ -37,13 +33,15 @@ element_unique: outil
 outil: true
 auteur: houssem-jeddou
 date_publication: 2026-11-04
-date_modification: 2026-11-16
+date_modification: 2026-11-21
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, renvoi, lignes, coût probable) et textes fixes de l'outil validés par Houssem le 04/11/2026
 # (13 h 48), avec les faits du texte (paquet travaux/etape-8/paquet-8.1-outil-voyants.md).
 # Texte mis à jour validé par Houssem le 14/11/2026 (15 h 27), avec la demande n° 23 (paquet travaux/etape-8/paquet-lot-3b.md).
-validation: 8bb25348d79fef026a3c3e3d7d6b4ae4b27d4dd4cd3f853dfbd6bea163872b90
+# Encadré au format 2 réduit à une ligne d'exemple, suivie de la grille des dessins (demande de changement n° 41, lot U2) :
+# validé par Houssem le 21/11/2026 (7 h 11) sur la maquette (paquet travaux/etape-12/lot-u2/paquet-u2.md).
+validation: 64132080acc1e0a7429ef9d32bb74bf5d7e4f9134b4d36e85fce8ad6fa0fc629
 format: 2
 illustration:
   fichier: accueil-tableau-de-bord

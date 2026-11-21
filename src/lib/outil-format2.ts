@@ -1,19 +1,21 @@
 // ---------------------------------------------------------------------------------------------
 // Page outil « Quel voyant est allumé ? » au format 2 (demande de changement n° 30, lot F1, tâche F1.3a ; brief
 // travaux/etape-13/f1/taches/F1.3a.md). Piste B de la charte graphique (docs/11 §4), composants existants d'abord :
-//  - encadré de décision du format 2 (format2.ts) : question, renvoi vers la liste (texte validé, demande de changement
-//    n° 12) en bouton ambre comme « Trouver mon voyant », lignes d'exemple, coût « Selon le voyant » en pastille ;
+//  - encadré de décision du format 2 (format2.ts ; demande de changement n° 41, lot U2) : question, phrase d'exemple, une
+//    ligne d'exemple, grille des dessins sous son titre (l'index, qui mène aux cartes de la liste), coût « Selon le voyant »
+//    en pastille ;
 //  - signature, transparence, bloc « Notices / Base du coût », illustration (règle 2i), sommaire : comme une page voyant ;
-//  - outil : titre, filtre par couleur en pastilles sans script (boutons radio et `:has(:checked)`, charte-b.css), index
-//    des dessins en grille de tuiles (la grille de l'accueil, règle 2k), introduction (textes validés, outil-textes.ts),
+//  - outil : titre, filtre par couleur en pastilles sans script (boutons radio et `:has(:checked)`, charte-b.css), qui ne
+//    filtre que la liste (l'index des dessins, grille de tuiles de l'accueil, règle 2k, est dans l'encadré : demande n° 41),
+//    introduction (textes validés, outil-textes.ts),
 //    puis un panneau sombre par groupe de couleur (le panneau de l'encadré), titre avec la diode de la couleur, et une
 //    carte par ligne de la base : la cellule d'une ligne de l'encadré (tuile du voyant allumé, nom et situation, verdict et
 //    urgence en pastilles, action, ligne d'écart), lien vers la page du voyant si elle est construite, sources repliées.
 //  - Index : une tuile par paire (pictogramme, couleur) de la base, ce que le lecteur voit sur son tableau de bord (décision
 //    du 16/11, brief F1.3a) : pictogramme allumé dans sa couleur, libellé de LIBELLES_PICTOGRAMMES (la source de la grille
 //    de l'accueil, jamais recopiée), couleur écrite pour les lecteurs d'écran (LIBELLES_COULEURS) ; elle mène à la
-//    première carte de la paire dans la liste ; le filtre s'y applique comme à la liste. Les états d'une même paire (fixe,
-//    clignotant) se distinguent dans les cartes.
+//    première carte de la paire dans la liste ; dans l'encadré, il montre toujours toutes les couleurs (demande n° 41). Les
+//    états d'une même paire (fixe, clignotant) se distinguent dans les cartes.
 // Tous les repères contrôlés du format 1 sont gardés (data-outil-voyants, data-outil-ligne, data-outil-groupe,
 // data-outil-filtre, data-outil-index, data-outil-index-entree, data-outil-resume, data-outil-intro, data-outil-aide,
 // data-outil-absent, data-encadre-renvoi) ; contrôles OUTIL-* (src/lib/controle.ts) et du format 2 (controle-format2.ts).
@@ -73,7 +75,6 @@ import {
   LIBELLE_FILTRE_TOUS,
   LIBELLE_LIEN_PAGE,
   NOTE_SOURCES_OUTIL,
-  RENVOI_ENCADRE_OUTIL,
   TITRE_INDEX_OUTIL,
   TITRE_OUTIL,
   ancreLigneOutil,
@@ -84,6 +85,7 @@ import {
   type LigneOutil,
   type ModeleOutil,
 } from './outil-voyants.ts';
+import { ENCADRE_OUTIL_FORMAT2 } from './outil-textes.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS } from '../schemas/grille.ts';
 import { rangUrgence, rangVerdict } from '../schemas/listes.ts';
 import type { DonneesSite } from './gabarit.ts';
@@ -187,10 +189,10 @@ export const texteEntreeIndex = (e: Pick<EntreeIndexFormat2, 'libelle' | 'cas'>)
 
 /**
  * Index des dessins : une grille par couleur (revue de F1.3a, critère WCAG 1.4.1 : deux tuiles d'un même dessin ne se
- * distinguent pas par la seule couleur), sous le titre du groupe de cette couleur (texte déjà validé, TITRES_GROUPES) ;
- * le filtre masque les grilles des autres couleurs.
+ * distinguent pas par la seule couleur), sous le titre du groupe de cette couleur (texte déjà validé, TITRES_GROUPES).
+ * Dans l'encadré de la page outil (demande de changement n° 41), sous le titre `titreIndex` ; le filtre ne s'y applique pas.
  */
-function indexFormat2(modele: ModeleOutil, pictogrammes: ReadonlyMap<string, string>): string {
+export function indexFormat2(modele: ModeleOutil, pictogrammes: ReadonlyMap<string, string>, titreIndex: string = TITRE_INDEX_OUTIL): string {
   const titre = `${ANCRE_OUTIL}-index`;
   const entrees = entreesIndexFormat2(modele);
   const grilles = modele.groupes.map((g) => {
@@ -203,7 +205,7 @@ function indexFormat2(modele: ModeleOutil, pictogrammes: ReadonlyMap<string, str
     const id = `${ANCRE_OUTIL}-index-${g.couleur}`;
     return `<div class="outil-index-couleur" data-outil-index-couleur="${attributHtml(g.couleur)}"><h4 id="${attributHtml(id)}">${diode(g.couleur)}${texteHtml(g.titre)}</h4><ul class="grille-voyants" role="list" aria-labelledby="${attributHtml(id)}">${tuiles.join('')}</ul></div>`;
   });
-  return [`<nav class="voyants outil-index" data-outil-index aria-labelledby="${attributHtml(titre)}">`, `<h3 id="${attributHtml(titre)}">${texteHtml(TITRE_INDEX_OUTIL)}</h3>`, ...grilles, '</nav>'].join('');
+  return [`<nav class="voyants outil-index" data-outil-index aria-labelledby="${attributHtml(titre)}">`, `<h3 id="${attributHtml(titre)}">${texteHtml(titreIndex)}</h3>`, ...grilles, '</nav>'].join('');
 }
 
 // ---- Filtre, groupes et cartes ------------------------------------------------------------------------------------
@@ -268,10 +270,9 @@ export function outilVoyantsFormat2(modeleBase: ModeleOutil, pictogrammes: Reado
   return [
     `<section class="outil-voyants" id="${ANCRE_OUTIL}" data-element-unique="outil" data-outil-voyants aria-labelledby="${ANCRE_OUTIL}-titre">`,
     `<h2 id="${ANCRE_OUTIL}-titre">${texteHtml(TITRE_OUTIL)}</h2>`,
-    // Le filtre et la grille des dessins viennent juste sous le titre (là où mène le renvoi de l'encadré) ; l'introduction
-    // suit la grille et précède la liste, qu'elle présente (sa place n'est pas contrôlée, son texte l'est).
+    // Le filtre vient juste sous le titre ; la grille des dessins est dans l'encadré (demande de changement n° 41).
+    // L'introduction suit le filtre et précède la liste, qu'elle présente (sa place n'est pas contrôlée, son texte l'est).
     filtreFormat2(modele),
-    indexFormat2(modele, pictogrammes),
     // Introduction (texte validé, inchangé) en paragraphes de deux phrases au plus (règle 2e).
     `<div class="outil-intro" data-outil-intro>${paragraphes(INTRODUCTION_OUTIL, 2).map((p) => `<p>${texteHtml(p)}</p>`).join('\n')}</div>`,
     ...modele.groupes.map((g) => groupeFormat2(g, pictogrammes)),
@@ -293,14 +294,18 @@ export function paragraphes(texte: string, phrases: number): string[] {
   return resultat;
 }
 
-/** Renvoi de l'encadré vers la liste (texte validé) : bouton ambre de la charte, sans icône (docs/10 §4, point 4). */
+/**
+ * Phrase d'exemple de l'encadré (demande de changement n° 41) : la ligne qui suit n'est qu'un exemple ; la grille des
+ * dessins, plus bas dans l'encadré, mène aux cartes de la liste (plus de bouton de renvoi).
+ */
 function renvoiFormat2(): string {
-  return `<p class="renvoi" data-encadre-renvoi>${texteHtml(RENVOI_ENCADRE_OUTIL.texte)} <a class="bouton-voyant" href="#${attributHtml(RENVOI_ENCADRE_OUTIL.ancre)}">${texteHtml(RENVOI_ENCADRE_OUTIL.lien)}</a></p>`;
+  return `<p class="renvoi" data-encadre-renvoi>${texteHtml(ENCADRE_OUTIL_FORMAT2.exemple)}</p>`;
 }
 
 /**
  * Page outil au format 2. Ordre (CLAUDE.md « Outil voyants », charte graphique §4) : tête de page · encadré (question,
- * renvoi, exemples, coût « Selon le voyant ») · signature · transparence · « Notices / Base du coût » · illustration ·
+ * phrase d'exemple, ligne d'exemple, grille des dessins, coût « Selon le voyant » ; demande de changement n° 41) ·
+ * signature · transparence · « Notices / Base du coût » · illustration ·
  * sommaire · outil · texte rédigé · emplacement · pages enfants et liées · sources (repliées, avec la note de l'outil).
  */
 export function pageOutilFormat2(
@@ -355,6 +360,7 @@ export function pageOutilFormat2(
     `<h2 id="${IDENTIFIANTS.decision}">${texteHtml(page.question_decision)}</h2>`,
     renvoiFormat2(),
     `<ol class="lignes" role="list">${lignesF2.map(ligneEncadreFormat2).join('')}</ol>`,
+    indexFormat2(modeleOutilFormat2(modele), site.pictogrammes, ENCADRE_OUTIL_FORMAT2.grille),
     coutHtml,
     '</section>',
   ].join('');
