@@ -53,7 +53,11 @@ describe('pilote des images en fichiers : configuration et fichiers', () => {
     const couleurs = couleursDesVoyants(await lire('src/styles/charte-b.css'));
     assert.equal(await contenuAttendu(racine, adressePictogramme('huile', 'rouge')), pictogrammeEnCouleur(await lire('src/pictogrammes/huile.svg'), couleurs.get('rouge') ?? ''));
     assert.equal(await contenuAttendu(racine, adresseIllustration('jauge-huile')), illustrationServie(await lire('src/illustrations/jauge-huile.svg')));
-    for (const a of ['/pictogrammes/inconnu-rouge.svg', '/pictogrammes/huile-violet.svg', '/illustrations/inconnue.svg', '/illustrations/../data/voyants.json']) assert.equal(await contenuAttendu(racine, a), undefined, a);
+    for (const a of ['/pictogrammes/voyant-inconnu-rouge.svg', '/pictogrammes/voyant-huile-violet.svg', '/pictogrammes/huile-rouge.svg', '/illustrations/inconnue.svg', '/illustrations/../data/voyants.json']) assert.equal(await contenuAttendu(racine, a), undefined, a);
+    // Nom parlant (revue du lot U3, partie 2, I2) ; fichier d'illustration servi = texte vérifié (M3).
+    assert.equal(adressePictogramme('pression-pneus', 'orange'), '/pictogrammes/voyant-pression-pneus-orange.svg');
+    assert.ok(!illustrationServie('<svg viewBox="0 0 1 1"><title><script>alert(1)</script></title><desc>d</desc><rect/></svg>').includes('<script'));
+    assert.equal(illustrationServie('<?xml version="1.0"?><!-- c --><svg viewBox="0 0 1 1"><title>t</title><rect/></svg>'), '<svg viewBox="0 0 1 1"><rect/></svg>');
   });
 
   test('images : texte alternatif de l\'illustration, largeur et hauteur de son dessin ; tuile décorative', async () => {
@@ -62,7 +66,7 @@ describe('pilote des images en fichiers : configuration et fichiers', () => {
     assert.deepEqual(d, { largeur: 640, hauteur: 300 });
     assert.equal(dimensionsDessin('<svg></svg>'), undefined);
     assert.equal(imgIllustration('jauge-huile', 'La « jauge »', { largeur: 640, hauteur: 300 }), '<img src="/illustrations/jauge-huile.svg" alt="La « jauge »" width="640" height="300" loading="lazy" decoding="async">');
-    assert.equal(imgPictogramme('huile', 'rouge'), `<img class="pictogramme" src="/pictogrammes/huile-rouge.svg" alt="" width="${COTE_PICTOGRAMME}" height="${COTE_PICTOGRAMME}" loading="lazy" decoding="async">`);
+    assert.equal(imgPictogramme('huile', 'rouge'), `<img class="pictogramme" src="/pictogrammes/voyant-huile-rouge.svg" alt="" role="presentation" width="${COTE_PICTOGRAMME}" height="${COTE_PICTOGRAMME}" loading="lazy" decoding="async">`);
   });
 });
 
@@ -96,19 +100,21 @@ describe('pilote des images en fichiers : rendu', () => {
     assert.deepEqual(regles(constatsRenduImages(page({ img: true, tuileImg: false }), 'f', true)), ['IMAGES-FICHIERS-RENDU']);
     assert.deepEqual(regles(constatsRenduImages(page({ img: true, tuileImg: true }), 'f', false)), ['IMAGES-FICHIERS-RENDU']);
     // Une tuile qui ne pointe pas vers le fichier de sa paire, ou qui n'est pas décorative.
-    const autre = page({ img: true, tuileImg: true }).replace('/pictogrammes/huile-rouge.svg', '/pictogrammes/huile-orange.svg');
+    const autre = page({ img: true, tuileImg: true }).replace('/pictogrammes/voyant-huile-rouge.svg', '/pictogrammes/voyant-huile-orange.svg');
     assert.deepEqual(regles(constatsRenduImages(autre, 'f', true)), ['IMAGES-FICHIERS-RENDU']);
     assert.deepEqual(regles(constatsRenduImages(page({ img: true, tuileImg: true }).replace('alt=""', 'alt="Huile"'), 'f', true)), ['IMAGES-FICHIERS-RENDU']);
+    // Décorative : alt vide ET role="presentation" (IMAGE-ALT).
+    assert.deepEqual(regles(constatsRenduImages(page({ img: true, tuileImg: true }).replace(' role="presentation"', ''), 'f', true)), ['IMAGES-FICHIERS-RENDU']);
   });
 
   test('site construit : pages du pilote au plan et construites, fichiers référencés servis au contenu attendu (IMAGES-FICHIERS-PAGE, -SERVI)', async () => {
     const dist = await mkdtemp(join(tmpdir(), 'images-fichiers-'));
     try {
-      const html = `<html><body><main><section data-encadre-decision><span class="tuile" data-couleur="rouge" data-pictogramme="huile">${imgPictogramme('huile', 'rouge')}</span></section><figure class="illustration" data-illustration>${imgIllustration('jauge-huile', 'La jauge', { largeur: 640, hauteur: 300 })}<figcaption>x</figcaption></figure></main></body></html>`;
+      const html = `<html data-format="2"><body><main><section data-encadre-decision><span class="tuile" data-couleur="rouge" data-pictogramme="huile">${imgPictogramme('huile', 'rouge')}</span></section><figure class="illustration" data-illustration>${imgIllustration('jauge-huile', 'La jauge', { largeur: 640, hauteur: 300 })}<figcaption>x</figcaption></figure></main></body></html>`;
       await mkdir(join(dist, 'voyants', 'huile'), { recursive: true });
       await writeFile(join(dist, 'voyants', 'huile', 'index.html'), html);
       const ids = new Map([['/voyants/huile/', 'voyant-huile'], ['/voyants/', 'voyants']]);
-      assert.deepEqual([...(await adressesReferencees(dist))].sort(), ['/illustrations/jauge-huile.svg', '/pictogrammes/huile-rouge.svg']);
+      assert.deepEqual([...(await adressesReferencees(dist))].sort(), ['/illustrations/jauge-huile.svg', '/pictogrammes/voyant-huile-rouge.svg']);
       // Fichiers absents : SERVI ; page du pilote non construite (la page outil) : PAGE ; page inconnue du plan : PAGE.
       assert.deepEqual(regles(await controlerImagesEnFichiers(racine, dist, new Set(['voyant-huile', 'voyants', 'inconnue']), ids)), ['IMAGES-FICHIERS-PAGE', 'IMAGES-FICHIERS-SERVI']);
       for (const adresse of await adressesReferencees(dist)) {
@@ -116,8 +122,16 @@ describe('pilote des images en fichiers : rendu', () => {
         await writeFile(join(dist, adresse), (await contenuAttendu(racine, adresse)) ?? '');
       }
       assert.deepEqual(await controlerImagesEnFichiers(racine, dist, new Set(['voyant-huile']), ids), []);
-      await writeFile(join(dist, '/pictogrammes/huile-rouge.svg'), '<svg/>');
+      // Fichier servi sans page qui le référence (posé dans public/, par exemple) : SERVI.
+      await writeFile(join(dist, '/pictogrammes/voyant-moteur-rouge.svg'), '<svg/>');
+      assert.match((await controlerImagesEnFichiers(racine, dist, new Set(['voyant-huile']), ids)).map((c) => c.message).join(' '), /sans page qui les référence : \/pictogrammes\/voyant-moteur-rouge\.svg/);
+      await rm(join(dist, '/pictogrammes/voyant-moteur-rouge.svg'));
+      await writeFile(join(dist, '/pictogrammes/voyant-huile-rouge.svg'), '<svg/>');
       assert.deepEqual(regles(await controlerImagesEnFichiers(racine, dist, new Set(['voyant-huile']), ids)), ['IMAGES-FICHIERS-SERVI']);
+      // Page du pilote construite hors du format 2 : PAGE.
+      await writeFile(join(dist, '/pictogrammes/voyant-huile-rouge.svg'), (await contenuAttendu(racine, '/pictogrammes/voyant-huile-rouge.svg')) ?? '');
+      await writeFile(join(dist, 'voyants', 'huile', 'index.html'), html.replace(' data-format="2"', ''));
+      assert.deepEqual(regles(await controlerImagesEnFichiers(racine, dist, new Set(['voyant-huile']), ids)), ['IMAGES-FICHIERS-PAGE']);
     } finally {
       await rm(dist, { recursive: true, force: true });
     }

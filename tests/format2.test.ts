@@ -395,6 +395,12 @@ describe('format 2 : modèle des pages voyants', () => {
       ['FORMAT2-PROVENANCE', modifie(($) => $('[data-provenance] p').first().remove())],
       ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] .credit').remove())],
       ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration]').insertAfter('[data-sommaire]').first())],
+      // Pilote des images en fichiers (demande n° 43) : une image n'est admise que de /illustrations/, nommée, dimensions
+      // posées, seule dans sa figure (revue du lot U3, partie 2, M4).
+      ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] > svg').replaceWith('<img src="/illustrations/x.svg" alt="" width="640" height="300">'))],
+      ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] > svg').replaceWith('<img src="/autre/x.svg" alt="Dessin" width="640" height="300">'))],
+      ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] > svg').replaceWith('<img src="/illustrations/x.svg" alt="Dessin">'))],
+      ['FORMAT2-ILLUSTRATION', modifie(($) => $('figure[data-illustration] > svg').after('<img src="/illustrations/x.svg" alt="Dessin" width="640" height="300">'))],
       ['FORMAT2-REPERE', modifie(($) => $('[data-repere]').first().insertAfter($('[data-corps] p').eq(2)))],
       ['FORMAT2-REPLIE', modifie(($) => $('details[data-sources]').attr('open', ''))],
       ['FORMAT2-REPLIE', modifie(($) => $('[data-tableau-notices] details summary').eq(1).text($('[data-tableau-notices] details summary').eq(0).text()))],
