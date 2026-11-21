@@ -1,51 +1,61 @@
 {
-  "lot": "U2, outil en variante légère (demande de changement n° 41) et accueil en pastilles (P5), avec les corrections du lot U1",
-  "essai": 3,
+  "lot": "U3 partie 2, pilote des images en fichiers (demande de changement n° 43)",
+  "essai": 1,
   "captures": [
     {
-      "nom": "u2-outil-ecran",
-      "adresse": "/voyants/",
+      "nom": "u3b-huile-ecran",
+      "adresse": "/voyants/huile/",
       "largeurs": [
-        320,
         375,
         1366
       ]
     },
     {
-      "nom": "u2-outil-encadre",
+      "nom": "u3b-huile-illustration",
+      "adresse": "/voyants/huile/",
+      "zone": "[data-illustration]",
+      "largeurs": [
+        375,
+        1366
+      ]
+    },
+    {
+      "nom": "u3b-abs-illustration",
+      "adresse": "/voyants/abs-esp/",
+      "zone": "[data-illustration]",
+      "largeurs": [
+        375
+      ]
+    },
+    {
+      "nom": "u3b-pneus-ecran",
+      "adresse": "/voyants/pression-pneus/",
+      "largeurs": [
+        375
+      ]
+    },
+    {
+      "nom": "u3b-outil-encadre",
       "adresse": "/voyants/",
       "zone": "[data-encadre-decision]",
       "largeurs": [
-        320,
         375,
         1366
       ]
     },
     {
-      "nom": "u2-outil-filtre",
+      "nom": "u3b-outil-cartes",
       "adresse": "/voyants/",
-      "zone": "[data-outil-filtre]",
+      "zone": "[data-outil-groupe=\"rouge\"]",
       "largeurs": [
-        375,
-        1366
+        375
       ]
     },
     {
-      "nom": "u2-accueil-themes",
-      "adresse": "/",
-      "zone": "[data-accueil-pages]",
+      "nom": "u3b-moteur-ecran",
+      "adresse": "/voyants/moteur/",
       "largeurs": [
-        320,
-        375,
-        1366
-      ]
-    },
-    {
-      "nom": "u2-accueil-ecran",
-      "adresse": "/",
-      "largeurs": [
-        375,
-        1366
+        375
       ]
     }
   ]
