@@ -286,7 +286,7 @@ a[data-lien-notices]{white-space:nowrap}
 }
 .liees ul{list-style:none;padding:0;margin:.5rem 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:.5rem}
 .liees a{display:flex;align-items:center;gap:.5rem;padding:.5rem .6rem;text-decoration:none;color:var(--texte);font-weight:600;font-size:.9375rem;min-height:3.2rem}
-.liees .tuile{width:2.2rem;height:2.2rem}.liees .tuile svg{width:1.55rem;height:1.55rem}
+.liees .tuile{flex:none;width:2.2rem;height:2.2rem}.liees .tuile svg{width:1.55rem;height:1.55rem}
 details.sources{margin:1.5rem 0 0;padding:.7rem .9rem}
 details.sources summary{cursor:pointer;font-family:var(--police-titre);font-weight:700;font-size:1.15rem}
 details.sources li{font-size:.875rem;color:var(--texte-doux);margin:.35rem 0}
@@ -396,6 +396,8 @@ main>.accueil-main{max-width:72rem}
   .tableau-par-marque .cas-sources{margin-top:.3rem;font-size:.8125rem;color:var(--texte-doux)}
 }
 .montant.depannage{margin:.45rem 0 .2rem;padding:.45rem .55rem;font-size:.875rem;line-height:1.4;border-radius:10px}
+/* Consigne de sécurité sous le tarif, dans la même cellule (demande de changement n° 39) */
+.depannage-consigne{display:block;margin-top:.35rem}
 .colonne.socle{padding-top:.2rem}
 .colonne.socle>:is(:first-child,.sommaire-colonne+*)>h2:first-of-type{margin-top:1.1rem}
 .colonne.socle .encart h2,.colonne.socle .encart>h2{margin-top:.2rem}

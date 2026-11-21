@@ -41,7 +41,7 @@ sources:
 element_unique: tableau
 auteur: houssem-jeddou
 date_publication: 2026-11-03
-date_modification: 2026-11-16
+date_modification: 2026-11-21
 date_revue: 2026-11-14
 prochaine_revue: 2027-11-14
 # Encadré de décision (question, lignes, coût probable et pièces des causes) validé par Houssem le 03/11/2026 (17 h 32),
@@ -78,9 +78,9 @@ illustration:
 
 {{repere:moteur-orange-fixe}}
 
-Cette consigne est la plus prudente des notices lues, celle de la Toyota Yaris : arrêter immédiatement le véhicule dans un endroit sûr.
+La plus prudente des notices lues, celle de la Toyota Yaris, demande d'arrêter immédiatement le véhicule dans un endroit sûr.
 
-Une idée répandue veut qu'on puisse continuer à rouler avec le voyant moteur orange fixe, que la notice Seat Ibiza dit jaune ({{cite:notice-seat-ibiza|p. 93-94}}). Les autres notices lues le permettent en effet, pour aller au garage au plus tôt ou rapidement selon la marque. L'encadré dit quand repartir, et quand faire appel à un garage ou à l'assistance.
+Une idée répandue veut qu'on puisse continuer à rouler avec le voyant moteur orange fixe, dit jaune dans la notice Seat Ibiza ({{cite:notice-seat-ibiza|p. 93-94}}). Hormis celle de la Toyota Yaris, les notices citées pour ce cas le permettent en effet, pour aller au garage au plus tôt ou rapidement selon la marque. L'encadré dit quand repartir, et quand faire appel à un garage ou à l'assistance.
 
 Les notices lues pour cette page sont celles de ces modèles ; pour une autre génération ou un autre modèle, c'est la notice de votre voiture qui fait foi :
 

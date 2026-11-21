@@ -112,6 +112,8 @@ export const FOURCHETTE_VALIDITE_JOURS = 365;
 
 /** Montant affiché de lui-même : sur toute page dont le niveau de sécurité est un verdict d'arrêt. */
 export const AFFICHAGES_AUTOMATIQUES = ['verdict-arret'] as const;
+/** Longueur maximale de la consigne de sécurité d'un montant (demande de changement n° 39, §6). */
+export const CONSIGNE_MOTS_MAX = 30;
 export type AffichageAutomatique = (typeof AFFICHAGES_AUTOMATIQUES)[number];
 /** Une prise en charge ne s'affiche que si la plage de la page va au moins jusqu'à cette tranche. */
 export const TRANCHE_MIN_PRISE_EN_CHARGE: TrancheCout = 'reparation';

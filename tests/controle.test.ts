@@ -997,6 +997,37 @@ describe('coût probable : calcul, données et grille (demande de changement n°
     assert.deepEqual(codes(constats, 'alerte'), ['COUT-A-REVERIFIER']);
   });
 
+  test('consigne du dépannage (demande n° 39) : montant affiché de lui-même, sources de première main du registre, 30 mots au plus, dans l\'empreinte', () => {
+    const consigne = { texte: 'Allumez les feux de détresse et enfilez votre gilet avant de sortir.', sources: ['fixture-legifrance'] };
+    const avecConsigne = montantDe({ ...depannageTest, consigne });
+    assert.deepEqual(codes(avec({ montants: [avecConsigne, amendeTest] }).constats, 'erreur'), []);
+    // L'empreinte du montant couvre sa consigne ; un montant sans consigne garde la sienne.
+    assert.notEqual(avecConsigne['validation'], depannageTest['validation']);
+    assert.equal(empreinteTexteDeCout(amendeTest as never), amendeTest['validation']);
+    const consigneChangee = { ...avecConsigne, consigne: { ...consigne, texte: 'Allumez les feux de détresse.' } };
+    assert.deepEqual(codes(avec({ montants: [consigneChangee, amendeTest] }).constats, 'erreur'), ['R4-MONTANT-EMPREINTE']);
+    const secondaire = montantDe({ ...depannageTest, consigne: { ...consigne, sources: ['fixture-forum'] } });
+    assert.deepEqual(codes(avec({ montants: [secondaire, amendeTest] }).constats, 'erreur'), ['DEPANNAGE-CONSIGNE-SOURCE']);
+    // Le règlement ONU est de première main, mais ne fixe que le symbole et la couleur, jamais un geste (revue, M1).
+    const onu = montantDe({ ...depannageTest, consigne: { ...consigne, sources: ['fixture-onu'] } });
+    assert.deepEqual(codes(avec({ montants: [onu, amendeTest] }).constats, 'erreur'), ['DEPANNAGE-CONSIGNE-SOURCE']);
+    const inconnue = montantDe({ ...depannageTest, consigne: { ...consigne, sources: ['fixture-introuvable'] } });
+    assert.deepEqual(codes(avec({ montants: [inconnue, amendeTest] }).constats, 'erreur'), ['R3-SOURCE-INCONNUE']);
+    const longue = montantDe({ ...depannageTest, consigne: { ...consigne, texte: Array.from({ length: 31 }, (_, i) => `mot${i}`).join(' ') } });
+    assert.deepEqual(codes(avec({ montants: [longue, amendeTest] }).constats, 'erreur'), ['DEPANNAGE-CONSIGNE-MOTS']);
+    const trente = montantDe({ ...depannageTest, consigne: { ...consigne, texte: Array.from({ length: 30 }, (_, i) => `mot${i}`).join(' ') } });
+    assert.deepEqual(codes(avec({ montants: [trente, amendeTest] }).constats, 'erreur'), []);
+    const ailleurs = montantDe({ ...amendeTest, consigne });
+    assert.deepEqual(codes(avec({ montants: [depannageTest, ailleurs] }).constats, 'erreur'), ['DEPANNAGE-CONSIGNE-PLACE']);
+  });
+
+  test('consigne du dépannage (demande n° 39) : attendue dans l\'encadré avec le montant', () => {
+    const avecConsigne: TexteDeCout = { id: 'depannage', texte: 'Dépannage réglementé', sources: ['l'], verifie_le: new Date('2026-10-20'), reverifier_apres_jours: 90, automatique: 'verdict-arret', consigne: { texte: 'Allumez les feux de détresse.', sources: ['l'] } };
+    const couts: DonneesCouts = { pieces: new Map(), montants: new Map([['depannage', avecConsigne]]), prises_en_charge: new Map() };
+    const textes = textesAttendusCout({ selonLeVoyant: true, montants: ['depannage'], prisesEnCharge: [], piecesInconnues: [] }, couts) ?? [];
+    assert.ok(textes.includes('Dépannage réglementé') && textes.includes('Allumez les feux de détresse.'), JSON.stringify(textes));
+  });
+
   test('une page ne peut pas afficher un montant dont le texte n\'est pas validé', async () => {
     const { contexte } = avec({ montants: [{ ...depannageTest, validation: undefined }, amendeTest] });
     const brut = lireFrontmatter(await readFile(join(fixtures, 'cas', 'valide-fluide', 'page.md'), 'utf8'));

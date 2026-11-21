@@ -217,7 +217,8 @@ export interface LigneEncadre {
 export interface CoutEncadre {
   plage: string;
   risque?: string | undefined;
-  montants: readonly { texte: string; dates: readonly string[] }[];
+  /** Montants affichés ; `consigne` : consigne de sécurité du montant (demande de changement n° 39), dans sa rangée. */
+  montants: readonly { texte: string; dates: readonly string[]; consigne?: string | undefined }[];
   prisesEnCharge: readonly string[];
   baseDeCalcul: string;
 }
@@ -276,7 +277,7 @@ export function modeleEncadre(entree: {
           risque: entree.cout.risque !== undefined ? libelleRisque(entree.cout.risque) : undefined,
           montants: entree.cout.montants.flatMap((id) => {
             const montant = entree.couts.montants.get(id);
-            return montant === undefined ? [] : [{ texte: montant.texte, dates: datesAffichees(montant) }];
+            return montant === undefined ? [] : [{ texte: montant.texte, dates: datesAffichees(montant), consigne: montant.consigne?.texte }];
           }),
           prisesEnCharge: entree.cout.prisesEnCharge.flatMap((id) => {
             const prise = entree.couts.prises_en_charge.get(id);
@@ -354,7 +355,12 @@ function coutEncadreHtml(cout: CoutEncadre): string {
     '<div class="encadre-cout" data-encadre-cout>',
     `<p class="encadre-plage">${etiquette(LIBELLE_COUT_PROBABLE)}<strong>${texteHtml(cout.plage)}</strong></p>`,
     cout.risque !== undefined ? `<p class="encadre-risque">${texteHtml(cout.risque)}</p>` : '',
-    ...cout.montants.map((m) => `<p class="encadre-montant">${texteHtml(m.texte)} <span class="encadre-date">(${texteHtml(m.dates.join(', '))})</span></p>`),
+    // Demande de changement n° 39 : la consigne de sécurité du montant, sous lui, dans sa rangée (data-depannage).
+    ...cout.montants.map((m) =>
+      m.consigne !== undefined
+        ? `<p class="encadre-montant" data-depannage>${texteHtml(m.texte)} <span class="encadre-date">(${texteHtml(m.dates.join(', '))})</span> <span class="encadre-consigne" data-depannage-consigne>${texteHtml(m.consigne)}</span></p>`
+        : `<p class="encadre-montant">${texteHtml(m.texte)} <span class="encadre-date">(${texteHtml(m.dates.join(', '))})</span></p>`,
+    ),
     ...cout.prisesEnCharge.map((p) => `<p class="encadre-prise-en-charge">${texteHtml(p)}</p>`),
     `<p class="encadre-base">${etiquette('Base de calcul :')}${texteHtml(cout.baseDeCalcul)}</p>`,
     '</div>',
