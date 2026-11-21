@@ -176,14 +176,27 @@ describe('format 2 : briques (lot F1, F1.2)', () => {
     assert.equal(menu.find('summary .menu-libelle').text(), 'Menu');
     assert.equal(menu.find('nav').attr('aria-label'), 'Toutes les pages');
     assert.deepEqual(menu.find('[data-menu-theme]').toArray().map((d) => $(d).attr('data-menu-theme')), ['alertes-et-codes', 'pannes-et-symptomes']);
-    assert.deepEqual(menu.find('a').toArray().map((a) => $(a).attr('href')), ['/voyants/', '/voyants/moteur/', '/bruit-moteur/']);
-    assert.equal(menu.find('a[aria-current="page"]').attr('href'), '/voyants/moteur/');
+    // Deux formes du même contenu (revue du lot U1, I2) : volets au téléphone, colonnes titrées sur ordinateur, chacune
+    // avec toute la liste ; une colonne n'est jamais un volet (aucun état « réduit » pour une liste affichée).
+    for (const forme of ['.menu-volets', '.menu-colonnes']) {
+      assert.deepEqual(menu.find(`${forme} a`).toArray().map((a) => $(a).attr('href')), ['/voyants/', '/voyants/moteur/', '/bruit-moteur/'], forme);
+      assert.equal(menu.find(`${forme} a[aria-current="page"]`).attr('href'), '/voyants/moteur/', forme);
+    }
+    assert.equal(menu.find('a').length, 6);
+    assert.deepEqual(menu.find('[data-menu-colonne]').toArray().map((d) => $(d).attr('data-menu-colonne')), ['alertes-et-codes', 'pannes-et-symptomes']);
+    assert.equal(menu.find('[data-menu-colonne] details, [data-menu-colonne] summary').length, 0);
+    const colonne = menu.find('[data-menu-colonne="pannes-et-symptomes"]');
+    assert.equal(colonne.children('ul').attr('aria-labelledby'), colonne.children('p.menu-colonne-titre').attr('id'));
+    assert.match(colonne.children('p.menu-colonne-titre').text(), /^Pannes et symptômes 1 page$/);
     assert.deepEqual(menu.find('[data-menu-theme][open]').toArray().map((d) => $(d).attr('data-menu-theme')), ['alertes-et-codes']);
     assert.match(menu.find('[data-menu-theme="pannes-et-symptomes"] > summary').text(), /^Pannes et symptômes 1 page$/);
+    // Icône du bouton en currentColor, décorative (couleurs forcées de Windows : revue, I3).
+    assert.equal(menu.find('> summary > svg.menu-icone[aria-hidden="true"] path[stroke="currentColor"]').length, 1);
     assert.equal(menu.find('script').length + $('script').length, 0);
-    // Menu avant le bouton ; sans page construite, pas de menu.
+    // Menu avant le bouton, tous deux dans le groupe des actions (revue, M2) ; sans page construite, pas de menu.
     const bandeau = $('.bandeau-int').html() ?? '';
     assert.ok(bandeau.indexOf('data-menu') > 0 && bandeau.indexOf('data-menu') < bandeau.indexOf('data-bouton-voyant'));
+    assert.equal($('.bandeau-int > .bandeau-actions > [data-menu] + [data-bouton-voyant]').length, 1);
     assert.equal(menuFormat2({ pages: [], adressePage: '/' }), '');
     assert.equal(FORMAT2.boutonVoyantCourt, 'Mon voyant');
   });
@@ -203,8 +216,12 @@ describe('format 2 : briques (lot F1, F1.2)', () => {
       return $.html();
     };
     assert.deepEqual(regles(modifier(($) => $('[data-menu]').remove()), '/voyants/moteur/', '/a-propos/'), ['MENU-PRESENT']);
-    assert.deepEqual(regles(modifier(($) => $('[data-menu] a[href="/bruit-moteur/"]').parent().remove()), '/voyants/moteur/', '/a-propos/'), ['MENU-LISTE', 'MENU-LISTE']);
-    assert.deepEqual(regles(modifier(($) => $('[data-menu] a[aria-current]').removeAttr('aria-current')), '/voyants/moteur/', '/a-propos/'), ['MENU-ACTUELLE']);
+    assert.deepEqual(regles(modifier(($) => $('[data-menu] a[href="/bruit-moteur/"]').parent().remove()), '/voyants/moteur/', '/a-propos/'), ['MENU-LISTE', 'MENU-LISTE', 'MENU-LISTE', 'MENU-LISTE']);
+    // Une seule forme touchée : le contrôle la voit (revue du lot U1, I2).
+    assert.deepEqual(regles(modifier(($) => $('.menu-colonnes a[href="/bruit-moteur/"]').parent().remove()), '/voyants/moteur/', '/a-propos/'), ['MENU-LISTE', 'MENU-LISTE']);
+    assert.deepEqual(regles(modifier(($) => $('.menu-colonnes').remove()), '/voyants/moteur/', '/a-propos/'), ['MENU-LISTE']);
+    assert.deepEqual(regles(modifier(($) => $('[data-menu] a[aria-current]').removeAttr('aria-current')), '/voyants/moteur/', '/a-propos/'), ['MENU-ACTUELLE', 'MENU-ACTUELLE']);
+    assert.deepEqual(regles(modifier(($) => $('.menu-colonnes a[aria-current]').removeAttr('aria-current')), '/voyants/moteur/', '/a-propos/'), ['MENU-ACTUELLE']);
     assert.deepEqual(regles(modifier(($) => $('[data-menu-theme="pannes-et-symptomes"]').attr('open', '')), '/voyants/moteur/', '/a-propos/'), ['MENU-ACTUELLE']);
     assert.deepEqual(regles(modifier(($) => $('[data-pied-nav] li').last().remove()), '/voyants/moteur/', '/a-propos/'), ['PIED-LIENS']);
     assert.deepEqual(regles(pageAvecMenu('/voyants/moteur/', '/a-propos/'), '/voyants/moteur/'), ['PIED-LIENS']);
