@@ -2,8 +2,8 @@
 
 Proposée par Claude le 20/11/2026 (nuit), étape 12, avec l'audit UX/UI (`audit.md`, P1). Version 2 du 21/11 (nuit),
 après la revue indépendante de l'audit : bandeau serré jusqu'à 30 rem, thèmes en volets, chiffres remesurés ; ces
-changements n'ont pas été relus (audit, §7). **Statut : proposée, en attente de la décision de Houssem.** Rien n'est
-appliqué avant son accord. Format de `docs/03` : élément concerné, changement proposé, raison (données), impact sur ce
+changements n'ont pas été relus (audit, §7). **Statut : acceptée par Houssem le 21/11/2026 (7 h 11)** (§7) ; appliquée par le lot U1
+(PR #102). Format de `docs/03` : élément concerné, changement proposé, raison (données), impact sur ce
 qui est validé, contrôles à relancer.
 
 ## 1. Éléments concernés (validés ou figés)
@@ -94,3 +94,11 @@ sections de l'accueil.
 1. Accepter la demande.
 2. Le libellé « Mon voyant » sous 30 rem, ou un autre libellé court.
 3. Le contenu du pied de page : « À propos », « Méthode » et les quatre thèmes (recommandé), ou « À propos » seul.
+
+## 7. Décision de Houssem
+**Acceptée par Houssem le 21/11/2026 à 7 h 11** (heure de Tunis), en réponse à la synthèse du matin (« je retiens U1
+(menu, demande n° 40, libellé « Mon voyant ») »). Sa réponse, mot pour mot : « Je valide tout. Et s'il y a un choix, pars
+avec ta recommandation. »
+1. Demande acceptée.
+2. Libellé « Mon voyant » sous 30 rem.
+3. Pied de page : « À propos », « Méthode » et les quatre thèmes (recommandé).

@@ -1,4 +1,4 @@
-# Audit UX/UI du site : constats, propositions et maquettes (brouillon, jamais validé)
+# Audit UX/UI du site : constats, propositions et maquettes (décisions de Houssem du 21/11/2026, §6)
 
 Fait par Claude dans la nuit du 20 au 21/11/2026, à la demande de Houssem (20/11, 21 h 39). Sa demande, en substance :
 - un audit de la partie visuelle, pour un UX et un UI meilleurs ;
@@ -9,7 +9,8 @@ Fait par Claude dans la nuit du 20 au 21/11/2026, à la demande de Houssem (20/1
 **Version 2** (21/11, nuit), après la revue indépendante : ce qu'elle a changé, ce que j'ai écarté et ce qui n'a pas été
 relu sont au §7.
 
-Rien n'est appliqué au site : ce document propose, Houssem décide. Chaque proposition retenue passera ensuite par son lot :
+Rien n'est appliqué au site par ce document : il propose, Houssem décide (décisions du 21/11, §6). Chaque proposition
+retenue passe ensuite par son lot :
 - demande de changement si une règle validée change ;
 - captures, revue indépendante et validation.
 
@@ -333,11 +334,24 @@ Chaque lot suit le même chemin :
 - la validation de Houssem ;
 - la recette de l'étape 9 et la vérification en ligne.
 
-## 6. Décisions demandées à Houssem
-1. Les propositions retenues, et l'ordre des lots.
-2. Demande n° 40 (P1) : l'accepter, et le libellé « Mon voyant » sous 30 rem, ou un autre libellé court.
-3. P0 : les dix paires et la tuile ronde, validées avec le lot U0 (PR #99).
-4. P4 : accepter des photos sous licence libre, choisies une par une avec son accord.
+## 6. Décisions de Houssem (21/11/2026, 7 h 11)
+La synthèse du matin lui proposait cette ligne : « Audit : je retiens U1 (menu, demande n° 40, libellé « Mon voyant »),
+U2 (outil en variante légère, accueil en pastilles), U3 (image de partage par page, pictogrammes en fichiers images) ;
+photos sous licence libre : oui / non. » Sa réponse, mot pour mot : « Je valide tout. Et s'il y a un choix, pars avec ta
+recommandation. […] s'il y a des PR, fusionne. S'il y a un travail que tu as préparé avec un plan, fais-le, etc. »
+
+Décisions qui en découlent (recommandations de cet audit) :
+1. **Propositions retenues, dans l'ordre du §5** : lot U0 (P0), lot U1 (P1), lot U2 (P2 et P5), lot U3 (P6 et P8), lot U4
+   (P4). P3 et P7 restent écartées.
+2. **Demande n° 40** acceptée, avec le libellé « Mon voyant » sous 30 rem et le pied de page complet (« À propos »,
+   « Méthode » et les quatre thèmes).
+3. **P0** : les dix paires et la tuile ronde, validées avec le lot U0 (PR #99).
+4. **P4** : photos sous licence libre acceptées dans leur principe ; chacune reste choisie une par une et présentée à
+   Houssem avant son téléchargement (décision du 15/11 ; accord demandé photo par photo).
+
+Chaque lot garde son chemin (§5) : demande de changement s'il en faut une, captures, revue indépendante, recette de
+l'étape 9 et vérification en ligne. La validation de Houssem est donnée d'avance par sa réponse ; ses captures lui sont
+présentées avec chaque lot.
 
 ## 7. Revue indépendante
 - **Revue** : un agent sans contexte de la rédaction a relu la version 1 (texte, maquettes, outils, mesures) le 20/11 au
