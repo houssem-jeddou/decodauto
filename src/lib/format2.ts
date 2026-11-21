@@ -50,6 +50,7 @@ import {
 } from './composants.ts';
 import { ADRESSE_SIGNALEMENT, PARTIES_DU_NOM } from './site.ts';
 import { ancreThemeAccueil } from './accueil.ts';
+import { dimensionsDessin, imgIllustration, imgPictogramme } from './images-fichiers.ts';
 import { logoEnLigne } from './marque.ts';
 import { ANCRE_CONFIDENTIALITE, ANCRE_METHODE, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_LIEN_METHODE, LIBELLE_SIGNALER_ERREUR } from './charte.ts';
 import { dateAffichee, datesAffichees, fourchetteAffichee, libelleRisque, trancheDesPieces, type CoutResolu, type DonneesCouts } from './cout.ts';
@@ -130,6 +131,9 @@ export const BALANCE =
 
 /** Tuile ronde d'un voyant « allumé » dans sa couleur de la base (charte graphique §1, point 2). Décorative. */
 export const tuile = (pictogramme: string, couleur: string): string => `<span class="tuile" data-couleur="${attributHtml(couleur)}">${pictogrammeDecoratif(pictogramme)}</span>`;
+/** Tuile d'une page du pilote des images en fichiers (demande de changement n° 43) : image du fichier de la paire, décorative. */
+export const tuileEnFichier = (pictogramme: string, couleur: string): string =>
+  `<span class="tuile" data-couleur="${attributHtml(couleur)}" data-pictogramme="${attributHtml(pictogramme)}">${imgPictogramme(pictogramme, couleur)}</span>`;
 
 // ---- Bandeau, tête de page, pied ---------------------------------------------------------------------
 
@@ -247,6 +251,12 @@ export interface LigneFormat2 {
   notices: number;
   pictogramme?: string | undefined;
   couleur?: string | undefined;
+  /**
+   * Page du pilote des images en fichiers (demande de changement n° 43) : la tuile est l'image du fichier de la paire
+   * (`pictogrammeId`, `couleur`) au lieu du dessin posé dans la page.
+   */
+  pictogrammeId?: string | undefined;
+  enFichier?: boolean | undefined;
 }
 
 /** Adresse du renvoi, s'il existe. */
@@ -306,7 +316,12 @@ export function renvoiNotices(entree: {
 /** Une ligne de l'encadré : tuile du voyant et situation, verdict et urgence en pastilles, action, ligne d'écart. */
 export function ligneEncadreFormat2(ligne: LigneFormat2): string {
   const gravite = graviteDuVerdict(ligne.verdict);
-  const picto = ligne.pictogramme !== undefined ? tuile(ligne.pictogramme, ligne.couleur ?? 'neutre') : '';
+  const picto =
+    ligne.enFichier === true && ligne.pictogrammeId !== undefined && ligne.couleur !== undefined
+      ? tuileEnFichier(ligne.pictogrammeId, ligne.couleur)
+      : ligne.pictogramme !== undefined
+        ? tuile(ligne.pictogramme, ligne.couleur ?? 'neutre')
+        : '';
   const lien = ligne.lienNotices !== undefined ? ` <a href="${attributHtml(ligne.lienNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienVotreMarque)}</a>` : '';
   const ecart =
     ligne.ecartCourt !== undefined ? `<p class="ecart" data-ecart-court>${BALANCE}<span class="vh">${texteHtml(FORMAT2.selonLaMarque)}</span>${texteHtml(ligne.ecartCourt)}${lien}</p>` : '';
@@ -721,11 +736,18 @@ export function illustrationAccueil(illustrations: ReadonlyMap<string, string> |
 }
 
 /** Illustration de la page, tirée de `site.illustrations` ; obligatoire au format 2 (règle 2i). */
-export function illustrationDeLaPage(page: Pick<PageEditoriale, 'id' | 'illustration'>, site: Pick<DonneesSite, 'illustrations'>): string {
+export function illustrationDeLaPage(page: Pick<PageEditoriale, 'id' | 'illustration'>, site: Pick<DonneesSite, 'illustrations' | 'imagesEnFichiers'>): string {
   if (page.illustration === undefined) throw new Error(`page « ${page.id} » au format 2 : illustration absente (champ illustration : fichier de ${DOSSIER_ILLUSTRATIONS}, texte alternatif, légende ; règle 2i)`);
   const svg = site.illustrations?.get(page.illustration.fichier);
   if (svg === undefined) throw new Error(`page « ${page.id} » : illustration « ${page.illustration.fichier} » introuvable (${DOSSIER_ILLUSTRATIONS}/${page.illustration.fichier}.svg)`);
-  return figureIllustration(illustrationEnLigne(svg, page.illustration.alt, page.illustration.fichier), page.illustration.legende);
+  // Vérification du dessin dans tous les cas (aucun script, aucune ressource) ; page du pilote des images en fichiers
+  // (demande de changement n° 43) : l'image du fichier servi, nommée par le même texte alternatif.
+  const enLigne = illustrationEnLigne(svg, page.illustration.alt, page.illustration.fichier);
+  const dimensions = dimensionsDessin(svg);
+  if (site.imagesEnFichiers?.has(page.id) === true && dimensions !== undefined) {
+    return figureIllustration(imgIllustration(page.illustration.fichier, page.illustration.alt, dimensions), page.illustration.legende);
+  }
+  return figureIllustration(enLigne, page.illustration.legende);
 }
 
 /**
@@ -791,6 +813,8 @@ export function pageFormat2(
       notices: sourcesDeLaLigne(l.sources, site.sources).notices.length,
       pictogramme: voyant !== undefined ? site.pictogrammes.get(voyant.pictogramme) : undefined,
       couleur: voyant?.couleur,
+      pictogrammeId: voyant?.pictogramme,
+      enFichier: site.imagesEnFichiers?.has(page.id) === true,
     };
   });
   const coutHtml = coutFormat2(cout, site.couts);

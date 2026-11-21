@@ -54,6 +54,11 @@ export interface DonneesSite {
   illustrations?: ReadonlyMap<string, string>;
   /** Emplacements publicitaires factices (construction de recette seulement, livrable 7.5b) : absents en production. */
   pubFactice?: boolean;
+  /**
+   * Pages du pilote des images en fichiers (demande de changement n° 43, `config/images-en-fichiers.json`) : leur illustration
+   * et leurs tuiles de voyants sont des images de fichiers servis (src/lib/images-fichiers.ts).
+   */
+  imagesEnFichiers?: ReadonlySet<string>;
 }
 
 /**
