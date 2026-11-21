@@ -1,8 +1,8 @@
-# Lot U0 : « À lire aussi », liens du plan pour les pages peu liées et tuile ronde — brouillon, jamais validé
+# Lot U0 : « À lire aussi », liens du plan pour les pages peu liées et tuile ronde — validé par Houssem le 21/11/2026 (§11)
 
 Préparé par Claude dans la nuit du 20 au 21/11/2026, étape 12, PR #99 (brouillon). Proposition P0 de l'audit UX/UI
 (PR #96, `travaux/etape-12/audit-ux-ui/audit.md`), séparée de P1 (menu), qui attend la demande de changement n° 40 :
-ce lot peut ainsi être validé seul. **À la décision de Houssem** : rien n'est fusionné avant sa validation.
+ce lot peut ainsi être validé seul. **Validé par Houssem le 21/11/2026 à 7 h 11** (§11).
 
 ## 1. Règle suivie
 « Ajouter une paire de liens au plan se propose dans la pull request du lot de pages concerné, avec une ligne de
@@ -127,4 +127,14 @@ copie du plan dans le projet Claude (`claude/09_plan_du_site.md`) ; journal.
 - **Reste à vérifier** : le rendu sur un vrai téléphone ; les travaux de la CI sur le commit qui ajoute ce paquet.
 
 ## 11. Validation de Houssem
-À compléter : les dix paires et la tuile ronde.
+**Validé par Houssem le 21/11/2026 à 7 h 11** (heure de Tunis), en réponse à la synthèse du matin, qui lui proposait la
+ligne de validation ci-dessous, avec les planches `a-lire-aussi-375.png` et `tuile-ronde-375.png` (PR #99, contrôles verts,
+Lighthouse à 100 sur les 40 pages, CLS 0) :
+
+> « OK lot U0 : les dix paires de liens et la tuile ronde. »
+
+Sa réponse, mot pour mot : « Je valide tout. Et s'il y a un choix, pars avec ta recommandation. […] s'il y a des PR,
+fusionne. »
+
+Les dix paires du §2 entrent au plan, avec leurs justifications ; la tuile ronde entre dans la charte. Les idées reportées
+du §9 sont proposées au journal. Après la fusion : §8.
