@@ -431,7 +431,7 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .menu-nombre{color:var(--nuit-doux)}
 :root .menu-panneau a{color:var(--nuit-texte);border-bottom:1px solid var(--filet-nuit)}
 :root .menu-panneau a[aria-current]{color:var(--ambre)}
-:root .pied-nav a{color:var(--nuit-texte)}
+:root .pied .pied-nav a{color:var(--nuit-texte)}
 :root .tete,:root .hero{background:var(--nuit);color:#fff}
 :root .mention-ia{color:var(--nuit-doux)}
 :root .fil a{color:var(--nuit-lien)}
