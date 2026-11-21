@@ -5,13 +5,14 @@
 // ligne de transparence (page du socle, charte §6.2) : la mention en tête vient du gabarit commun.
 // Module sans dépendance à l'exécution : tests et construction l'utilisent tel quel.
 import { texteHtml, attributHtml } from './html.ts';
+import { DEVISE_DU_SITE } from './site.ts';
 import { ID_OUTIL_VOYANTS } from './plan.ts';
 import { LIBELLES_PICTOGRAMMES } from './pictogrammes.ts';
 import { ancreLigneOutil } from './outil-voyants.ts';
 import { LIBELLES_THEMES, THEMES, type Theme } from '../schemas/listes.ts';
 
 /** Le positionnement du site (docs/01) : le H1 de l'accueil. */
-export const TITRE_ACCUEIL = 'Votre voiture vous alerte, on vous dit quoi faire.';
+export const TITRE_ACCUEIL = DEVISE_DU_SITE;
 export const TITLE_ACCUEIL = 'decodauto : voyant allumé, code défaut, que faire ?';
 export const DESCRIPTION_ACCUEIL = 'Voyant allumé, code défaut, bruit suspect ou obligation : peut-on rouler, avec quelle urgence, que faire. Un guide indépendant, sans pièces à vendre.';
 
