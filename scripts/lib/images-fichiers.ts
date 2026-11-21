@@ -2,11 +2,12 @@
 // src/lib/images-fichiers.ts) :
 //  - PAGE : chaque page du pilote (config/images-en-fichiers.json) est une page du plan, construite au format 2 ;
 //  - RENDU : sur une page du pilote, l'illustration est une image de /illustrations/ (nommée, largeur et hauteur posées) et
-//    chaque tuile de l'encadré et de l'outil est l'image du fichier de sa paire, décorative (alt vide) ; sur les autres
-//    pages, aucune image de ces deux dossiers ;
-//  - SERVI : chaque image référencée est servie, au contenu attendu (dessin de sa source, couleur de la charte).
+//    chaque tuile de l'encadré et de l'outil est l'image du fichier de sa paire, décorative (alt vide, role="presentation") ;
+//    sur les autres pages, aucune image de ces deux dossiers ;
+//  - SERVI : chaque image référencée est servie, au contenu attendu (dessin de sa source, couleur de la charte), et ces deux
+//    dossiers du site construit ne contiennent rien d'autre (un fichier posé dans public/ passerait sinon sans contrôle).
 import * as cheerio from 'cheerio';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
 import { DOSSIER_ILLUSTRATIONS_SERVIES, DOSSIER_PICTOGRAMMES_SERVIS, FICHIER_IMAGES_EN_FICHIERS, adressePictogramme } from '../../src/lib/images-fichiers.ts';
@@ -34,8 +35,8 @@ export function constatsRenduImages(html: string, fichier: string, pilote: boole
       const tuile = $(el);
       const attendu = adressePictogramme(tuile.attr('data-pictogramme') ?? '?', tuile.attr('data-couleur') ?? '?');
       const img = tuile.children('img');
-      if (tuile.find('svg').length > 0 || img.length !== 1 || img.attr('src') !== attendu || img.attr('alt') !== '' || !/^\d+$/.test(img.attr('width') ?? '') || !/^\d+$/.test(img.attr('height') ?? '')) {
-        problemes.push(`tuile « ${tuile.attr('data-pictogramme') ?? '?'} » (${tuile.attr('data-couleur') ?? '?'}) : une image décorative (alt vide) de ${attendu}, largeur et hauteur posées`);
+      if (tuile.find('svg').length > 0 || img.length !== 1 || img.attr('src') !== attendu || img.attr('alt') !== '' || img.attr('role') !== 'presentation' || !/^\d+$/.test(img.attr('width') ?? '') || !/^\d+$/.test(img.attr('height') ?? '')) {
+        problemes.push(`tuile « ${tuile.attr('data-pictogramme') ?? '?'} » (${tuile.attr('data-couleur') ?? '?'}) : une image décorative (alt vide, role="presentation") de ${attendu}, largeur et hauteur posées`);
       }
     }
   }
@@ -58,12 +59,26 @@ export async function controlerImagesEnFichiers(racine: string, dist: string, pi
     const adresse = adresseDepuisFichier(fichier);
     const id = adresse === undefined ? undefined : idsParAdresse.get(adresse);
     const html = await readFile(chemin, 'utf8');
-    if (id !== undefined && pilote.has(id)) construites.add(id);
+    if (id !== undefined && pilote.has(id)) {
+      construites.add(id);
+      if (!/<html\b[^>]*\sdata-format="2"/.test(html)) constats.push(erreur('IMAGES-FICHIERS-PAGE', `${fichier} : page du pilote construite hors du format 2`, fichier));
+    }
     constats.push(...constatsRenduImages(html, fichier, id !== undefined && pilote.has(id)));
     for (const m of html.matchAll(/\ssrc="(\/(?:illustrations|pictogrammes)\/[^"]+)"/g)) referencees.add(m[1] ?? '');
   }
   const nonConstruites = [...pilote].filter((id) => ids.has(id) && !construites.has(id));
   if (nonConstruites.length > 0) constats.push(erreur('IMAGES-FICHIERS-PAGE', `${FICHIER_IMAGES_EN_FICHIERS} : page(s) du pilote non construite(s) : ${nonConstruites.join(', ')}`));
+  // Rien d'autre dans ces deux dossiers du site construit que les fichiers référencés.
+  for (const dossier of [DOSSIER_ILLUSTRATIONS_SERVIES, DOSSIER_PICTOGRAMMES_SERVIS]) {
+    let presents: string[] = [];
+    try {
+      presents = await readdir(join(dist, dossier));
+    } catch {
+      presents = [];
+    }
+    const enTrop = presents.map((f) => `${dossier}${f}`).filter((a) => !referencees.has(a));
+    if (enTrop.length > 0) constats.push(erreur('IMAGES-FICHIERS-SERVI', `fichier(s) servi(s) sans page qui les référence : ${enTrop.join(', ')}`));
+  }
   for (const adresse of referencees) {
     const attendu = await contenuAttendu(racine, adresse);
     let servi: string | undefined;

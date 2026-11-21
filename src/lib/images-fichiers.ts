@@ -4,8 +4,8 @@
 // des images de fichiers servis par le site ; ailleurs, le dessin reste posé dans la page.
 //  - Pages du pilote : `config/images-en-fichiers.json`, seule source (contrôle IMAGES-FICHIERS-PAGE).
 //  - Fichiers, écrits à la construction par `scripts/integration-images.ts`, jamais dans `public/` ni à la main :
-//    `/illustrations/<fichier>.svg` (le dessin de src/illustrations, tel quel, après les vérifications de `illustrationEnLigne`)
-//    et `/pictogrammes/<pictogramme>-<couleur>.svg` (le dessin de src/pictogrammes, la couleur du voyant de la charte à la
+//    `/illustrations/<fichier>.svg` (le dessin de src/illustrations tel que le vérifie `illustrationEnLigne` : sans prologue, commentaires, title ni desc)
+//    et `/pictogrammes/voyant-<pictogramme>-<couleur>.svg` (le dessin de src/pictogrammes, la couleur du voyant de la charte à la
 //    place de `currentColor` : `--v-<couleur>` de src/styles/charte-b.css), pour chaque paire de la base.
 //  - Texte alternatif : celui de l'illustration de la page ; vide pour une tuile (le nom du voyant et sa couleur sont écrits
 //    à côté : règle d'accessibilité d'aujourd'hui). Largeur et hauteur posées, chargement différé (IMAGE-*).
@@ -29,7 +29,8 @@ export function pagesImagesEnFichiers(brut: unknown = pilote): ReadonlySet<strin
 }
 
 export const adresseIllustration = (fichier: string): string => `${DOSSIER_ILLUSTRATIONS_SERVIES}${fichier}.svg`;
-export const adressePictogramme = (pictogramme: string, couleur: string): string => `${DOSSIER_PICTOGRAMMES_SERVIS}${pictogramme}-${couleur}.svg`;
+/** Nom parlant pour Google Images (proposition P8 : « /pictogrammes/voyant-huile-rouge.svg » ; revue du lot U3, partie 2, I2). */
+export const adressePictogramme = (pictogramme: string, couleur: string): string => `${DOSSIER_PICTOGRAMMES_SERVIS}voyant-${pictogramme}-${couleur}.svg`;
 
 /** Largeur et hauteur d'un dessin, tirées de son viewBox (arrondies) ; undefined sans viewBox lisible. */
 export function dimensionsDessin(svg: string): { largeur: number; hauteur: number } | undefined {
@@ -50,11 +51,17 @@ export function pictogrammeEnCouleur(svg: string, couleur: string): string {
   return svg.replace(/currentColor/g, couleur);
 }
 
-/** Illustration servie : le fichier de src/illustrations, prologue et commentaires retirés (il est vérifié avant). */
+/**
+ * Illustration servie : le dessin de src/illustrations tel que le vérifie `illustrationEnLigne` (format2.ts) : prologue,
+ * commentaires, `title` et `desc` retirés ; le fichier servi est exactement le texte vérifié (revue du lot U3, partie 2,
+ * M3). Le nom de l'image est son texte alternatif, sur la page.
+ */
 export const illustrationServie = (svg: string): string =>
   svg
     .replace(/<\?xml[\s\S]*?\?>/g, '')
     .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<title\b[\s\S]*?<\/title\s*>/gi, '')
+    .replace(/<desc\b[\s\S]*?<\/desc\s*>/gi, '')
     .trim();
 
 /** Image d'une illustration (figure de la règle 2i, page du pilote). */
@@ -62,7 +69,7 @@ export function imgIllustration(fichier: string, alt: string, dimensions: { larg
   return `<img src="${attributHtml(adresseIllustration(fichier))}" alt="${attributHtml(alt)}" width="${dimensions.largeur}" height="${dimensions.hauteur}" loading="lazy" decoding="async">`;
 }
 
-/** Image d'une tuile de voyant (page du pilote) : décorative, le nom du voyant est écrit à côté. */
+/** Image d'une tuile de voyant (page du pilote) : décorative (`alt` vide et `role="presentation"`, IMAGE-ALT), le nom du voyant est écrit à côté. */
 export function imgPictogramme(pictogramme: string, couleur: string): string {
-  return `<img class="pictogramme" src="${attributHtml(adressePictogramme(pictogramme, couleur))}" alt="" width="${COTE_PICTOGRAMME}" height="${COTE_PICTOGRAMME}" loading="lazy" decoding="async">`;
+  return `<img class="pictogramme" src="${attributHtml(adressePictogramme(pictogramme, couleur))}" alt="" role="presentation" width="${COTE_PICTOGRAMME}" height="${COTE_PICTOGRAMME}" loading="lazy" decoding="async">`;
 }

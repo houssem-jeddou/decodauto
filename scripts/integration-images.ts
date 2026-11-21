@@ -34,7 +34,7 @@ export async function contenuAttendu(racine: string, adresse: string): Promise<s
     const svg = await lire(`src/illustrations/${illustration[1]}.svg`);
     return svg === undefined ? undefined : illustrationServie(svg);
   }
-  const pictogramme = new RegExp(`^${DOSSIER_PICTOGRAMMES_SERVIS}([a-z0-9-]+)-([a-z]+)\\.svg$`).exec(adresse);
+  const pictogramme = new RegExp(`^${DOSSIER_PICTOGRAMMES_SERVIS}voyant-([a-z0-9-]+)-([a-z]+)\\.svg$`).exec(adresse);
   if (pictogramme !== null) {
     const svg = await lire(`src/pictogrammes/${pictogramme[1]}.svg`);
     const couleur = couleursDesVoyants((await lire('src/styles/charte-b.css')) ?? '').get(pictogramme[2] ?? '');
@@ -47,6 +47,28 @@ export function imagesEnFichiers(racine: string = process.cwd()): AstroIntegrati
   return {
     name: 'decodauto-images-en-fichiers',
     hooks: {
+      // Serveur de développement (npm run dev) : les mêmes fichiers, tirés de leur source à la demande (revue du lot U3,
+      // partie 2, M5).
+      'astro:server:setup': ({ server }) => {
+        server.middlewares.use((requete, reponse, suite) => {
+          const adresse = (requete.url ?? '').split('?')[0] ?? '';
+          if (!adresse.startsWith(DOSSIER_ILLUSTRATIONS_SERVIES) && !adresse.startsWith(DOSSIER_PICTOGRAMMES_SERVIS)) {
+            suite();
+            return;
+          }
+          contenuAttendu(racine, adresse).then(
+            (contenu) => {
+              if (contenu === undefined) {
+                suite();
+                return;
+              }
+              reponse.setHeader('content-type', 'image/svg+xml');
+              reponse.end(contenu);
+            },
+            () => suite(),
+          );
+        });
+      },
       'astro:build:done': async ({ dir }) => {
         const dist = fileURLToPath(dir);
         for (const adresse of await adressesReferencees(dist)) {
