@@ -29,7 +29,8 @@ const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUTIL = 'src/content/voyant/voyants.md';
 const AUJOURDHUI = await dateDesDonnees(racine, ['data/sources.json', 'data/couts.json', OUTIL]);
 /** Texte comparé sans la typographie (espaces insécables, blancs des dessins). */
-const plat = (t: string | undefined): string => (t ?? '').replace(/[\s\u00a0\u202f]+/g, ' ').trim();
+// Texte à plat : espaces réduites, traits d'union conditionnels (coupures des libellés, invisibles) retirés.
+const plat = (t: string | undefined): string => (t ?? '').replace(/\u00ad/g, '').replace(/[\s\u00a0\u202f]+/g, ' ').trim();
 const regles = (constats: readonly { regle: string; gravite: string }[]): string[] => constats.filter((c) => c.gravite === 'erreur').map((c) => c.regle).sort();
 const brouillon = await lireBrouillonFormat2(racine);
 

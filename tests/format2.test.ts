@@ -34,7 +34,8 @@ import { PHRASES_MAX_PARAGRAPHE, constatsParagraphes, controlerFormat2, nombreDe
 import { marqueEtModele, modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
 import { ACCUEIL_FORMAT2, PRESENTATIONS_THEMES, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
 import { mentionEnTete } from '../src/lib/composants.ts';
-import { LIBELLES_PICTOGRAMMES, constatsLibellesPictogrammes } from '../src/lib/pictogrammes.ts';
+import { COUPURES_LIBELLES, LIBELLES_PICTOGRAMMES, constatsCoupuresLibelles, constatsLibellesPictogrammes, libelleCoupable } from '../src/lib/pictogrammes.ts';
+import { normaliserTexte } from '../src/lib/empreinte.ts';
 import { chargerPictogrammes } from '../scripts/lib/charger.ts';
 import { typographier } from '../src/lib/html.ts';
 import { controlerPage, type Constat } from '../src/lib/controle.ts';
@@ -457,6 +458,24 @@ describe('format 2 : accueil', () => {
     assert.deepEqual(constatsLibellesPictogrammes(fichiers), []);
     assert.deepEqual(regles(constatsLibellesPictogrammes([...fichiers, 'nouveau'])), ['PICTO-LIBELLE']);
     assert.deepEqual(regles(constatsLibellesPictogrammes(fichiers.filter((f) => f !== 'stop'))), ['PICTO-LIBELLE']);
+  });
+
+  test('PICTO-COUPURE (revue du lot U2) : chaque mot de 9 lettres au moins a sa coupure, qui redonne le mot ; traits d\'union conditionnels dans les tuiles, ignorés par les contrôles', async () => {
+    assert.deepEqual(constatsCoupuresLibelles(), []);
+    assert.equal(libelleCoupable('Préchauffage'), 'Pré\u00adchauf\u00adfage');
+    assert.equal(libelleCoupable('Clé d’entretien'), 'Clé d’entre\u00adtien');
+    assert.equal(libelleCoupable('Frein à main'), 'Frein à main');
+    assert.equal(normaliserTexte(libelleCoupable('Airbag passager désactivé')), normaliserTexte('Airbag passager désactivé'));
+    assert.deepEqual(regles(constatsCoupuresLibelles({ ...LIBELLES_PICTOGRAMMES, essai: 'Stationnement' })), ['PICTO-COUPURE']);
+    assert.deepEqual(regles(constatsCoupuresLibelles(LIBELLES_PICTOGRAMMES, { ...COUPURES_LIBELLES, Direction: 'Direc|tiom' })), ['PICTO-COUPURE']);
+    assert.deepEqual(regles(constatsCoupuresLibelles(LIBELLES_PICTOGRAMMES, { ...COUPURES_LIBELLES, Direction: 'Direction' })), ['PICTO-COUPURE']);
+    assert.deepEqual(regles(constatsCoupuresLibelles(LIBELLES_PICTOGRAMMES, { ...COUPURES_LIBELLES, Moteurs: 'Mo|teurs' })), ['PICTO-COUPURE']);
+    // Grilles de l'accueil et de l'encadré de l'outil : coupures manuelles seulement, trois cases sous 375 px, tuile tenue
+    // dans sa case.
+    const css = await readFile(join(racine, 'src/styles/charte-b.css'), 'utf8');
+    assert.match(css, /\.grille-voyants li\{display:grid;min-width:0\}/);
+    assert.match(css, /\.grille-voyants a\{[^}]*min-width:0;[^}]*hyphens:manual;/);
+    assert.match(css, /@media \(max-width:23\.4rem\)\{\.grille-voyants\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}\}/);
   });
 });
 
