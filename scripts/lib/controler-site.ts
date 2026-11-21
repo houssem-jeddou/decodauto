@@ -12,6 +12,8 @@ import { FICHIER_LOTS_FORMAT2, FICHIER_VAGUES_OUVERTES, chargerLotsFormat2, char
 import { controlerFavicon } from './favicon.ts';
 import { controlerAdsense } from './adsense.ts';
 import { controlerPartage } from './partage.ts';
+import { controlerImagesEnFichiers } from './images-fichiers.ts';
+import { pagesImagesEnFichiers } from '../../src/lib/images-fichiers.ts';
 import { DOSSIER_PAGES_DEMO_FORMAT2, constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
 import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
 import { chargerIllustrations } from './demo-format2.ts';
@@ -204,7 +206,10 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   constats.push(...(await controlerAdsense(racine, dist)));
   // Balises et images de partage, lot U3 de l'audit UX/UI (PARTAGE-*) : une image par page éditoriale, celle de la marque
   // ailleurs, aucune sur la 404.
-  constats.push(...(await controlerPartage(dist, new Map([...contexte.plan.values()].map((ligne) => [ligne.adresse, ligne.id])))));
+  const idsParAdresse = new Map([...contexte.plan.values()].map((ligne) => [ligne.adresse, ligne.id]));
+  constats.push(...(await controlerPartage(dist, idsParAdresse)));
+  // Pilote des images en fichiers (demande de changement n° 43) : pages du pilote, rendu, fichiers servis (IMAGES-FICHIERS-*).
+  constats.push(...(await controlerImagesEnFichiers(racine, dist, pagesImagesEnFichiers(), idsParAdresse)));
 
   return { constats, informations, pagesEditoriales: pagesLues.length };
 }

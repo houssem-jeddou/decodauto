@@ -1,3 +1,4 @@
+import { adressePictogramme } from './images-fichiers.ts';
 import * as cheerio from 'cheerio';
 import { z } from 'astro/zod';
 import { empreintePage, empreinteTexteDeCout, empreinteVoyant, normaliserTexte } from './empreinte.ts';
@@ -1324,7 +1325,8 @@ export function controlerOutilVoyants(html: string, fichier: string, attenduBase
     // Format 1 : pictogramme dans un rond (.voyant), icône .icone-gravite ; format 2 : tuile du voyant allumé, forme de la gravité.
     const picto = ligne.find(format2 ? '.tuile[data-pictogramme]' : '.voyant').first();
     if (ligne.find(format2 ? 'svg.forme[data-icone-gravite]' : '.icone-gravite').first().attr('data-icone-gravite') !== String(graviteDuVerdict(l.verdict))) problemes.push(`icône de gravité (attendue : ${graviteDuVerdict(l.verdict)})`);
-    if (picto.find('svg').length === 0) problemes.push('pictogramme absent');
+    // Dessin posé dans la page, ou, sur une page du pilote (demande de changement n° 43), image du fichier de sa paire.
+    if (picto.find('svg').length === 0 && (!format2 || picto.find(`img[src="${adressePictogramme(l.pictogramme, l.couleur)}"]`).length === 0)) problemes.push('pictogramme absent');
     else if (picto.attr('data-pictogramme') !== l.pictogramme || picto.attr('data-couleur') !== l.couleur) problemes.push(`pictogramme (attendu : « ${l.pictogramme} », couleur ${l.couleur})`);
     // Bloc dépliable : le nombre de notices, les notices nommées, chaque page citée.
     const detail = ligne.children('details').first();
@@ -1426,7 +1428,8 @@ export function controlerOutilVoyants(html: string, fichier: string, attenduBase
         if (n(entree.text()) !== n(texteEntreeIndex(p))) problemes.push(`le libellé du dessin et son nombre de cas s'il y en a plusieurs, sans autre texte (« ${texteEntreeIndex(p)} »)`);
         if (entree.closest('[data-outil-index-couleur]').attr('data-outil-index-couleur') !== p.couleur) problemes.push(`dans la grille de sa couleur (${p.couleur})`);
         const tuile = entree.find('.tuile[data-pictogramme]').first();
-        if (tuile.find('svg').length === 0 || tuile.attr('data-pictogramme') !== p.pictogramme || tuile.attr('data-couleur') !== p.couleur) problemes.push(`tuile (attendue : « ${p.pictogramme} », couleur ${p.couleur})`);
+        const dessinTuile = tuile.find('svg').length > 0 || tuile.find(`img[src="${adressePictogramme(p.pictogramme, p.couleur)}"]`).length > 0;
+        if (!dessinTuile || tuile.attr('data-pictogramme') !== p.pictogramme || tuile.attr('data-couleur') !== p.couleur) problemes.push(`tuile (attendue : « ${p.pictogramme} », couleur ${p.couleur})`);
         if (problemes.length > 0) constats.push(erreur('OUTIL-INDEX', `index, entrée « ${cle} » : ${problemes.join(' ; ')}`, fichier));
       }
     } else if (lues.join('|') !== voulus.join('|')) {
