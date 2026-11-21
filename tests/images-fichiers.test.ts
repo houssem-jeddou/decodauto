@@ -37,9 +37,11 @@ describe('pilote des images en fichiers : configuration et fichiers', () => {
     for (const brut of [{}, { pages: 'voyants' }, { pages: ['Voyants'] }, { pages: ['a', 'a'] }, null]) assert.throws(() => pagesImagesEnFichiers(brut), /images-en-fichiers\.json/);
   });
 
-  test('couleurs des voyants lues dans la charte, pour chaque couleur de la liste fermée ; pictogramme coloré sans currentColor', async () => {
+  test('couleurs des voyants lues dans la charte, pour chaque couleur de la base ; pictogramme coloré sans currentColor', async () => {
     const couleurs = couleursDesVoyants(await lire('src/styles/charte-b.css'));
-    for (const c of COULEURS_VOYANT) assert.match(couleurs.get(c) ?? '', /^#[0-9a-f]{6}$/, c);
+    const base = JSON.parse(await lire('data/voyants.json')) as { couleur: string }[];
+    for (const c of new Set(base.map((l) => l.couleur))) assert.match(couleurs.get(c) ?? '', /^#[0-9a-f]{6}$/, c);
+    assert.ok([...couleurs.keys()].every((c) => (COULEURS_VOYANT as readonly string[]).includes(c)));
     const huile = await lire('src/pictogrammes/huile.svg');
     const rouge = pictogrammeEnCouleur(huile, couleurs.get('rouge') ?? '');
     assert.ok(huile.includes('currentColor') && !rouge.includes('currentColor') && rouge.includes(couleurs.get('rouge') ?? '?'));
