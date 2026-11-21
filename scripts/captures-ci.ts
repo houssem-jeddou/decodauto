@@ -92,15 +92,18 @@ try {
               const cible = sel === 'ecran' ? null : sel === 'page' ? document.body : document.querySelector(sel);
               if (cible === null) return;
               const images = [...cible.querySelectorAll('img')];
-              if (sel === 'page') for (const i of images) i.loading = 'eager';
-              else cible.scrollIntoView({ block: 'center' });
-              await Promise.all(
+              // Chargement immédiat des images de la zone (une zone haute dépasse l'écran : ses images du bas ne se chargeraient
+              // jamais), au plus 15 secondes d'attente.
+              for (const i of images) i.loading = 'eager';
+              if (sel !== 'page') cible.scrollIntoView({ block: 'center' });
+              const attente = Promise.all(
                 images.map((i) =>
                   (i.complete ? Promise.resolve() : new Promise((r) => { i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); }))
                     .then(() => i.decode())
                     .catch(() => undefined),
                 ),
               );
+              await Promise.race([attente, new Promise((r) => setTimeout(r, 15_000))]);
               scrollTo(0, 0);
             }, zone);
             let image: Uint8Array;
