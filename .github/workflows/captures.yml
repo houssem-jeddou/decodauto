@@ -1,0 +1,47 @@
+# Captures de recette (outil de travail, étape 12, lot U1 ; scripts/captures-ci.ts) : construit la branche de la pull request
+# (dist, comme en production) et prend les captures demandées par travaux/captures-ci/demande.json, police chargée et police
+# de secours, écrites dans le journal du job (base64 par morceaux) : les artefacts de la CI ne se téléchargent pas depuis le
+# poste de travail de Claude, les journaux se lisent par l'API. Lancé seulement quand la demande change, ou à la main.
+# Jamais de déploiement, aucun secret, lecture seule.
+name: Captures de recette
+
+on:
+  pull_request:
+    paths:
+      - 'travaux/captures-ci/demande.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  captures:
+    runs-on: ${{ github.event.repository.private == true && vars.CI_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 15
+    steps:
+      # Dépôt public (demande de changement n° 29) : aucun exécuteur auto-hébergé, comme chaque job de ci.yml.
+      - name: Exécuteur hébergé par GitHub (dépôt public, demande de changement n° 29)
+        if: ${{ runner.environment != 'github-hosted' && github.event.repository.private != true }}
+        run: |
+          echo "::error title=EXECUTEUR-HEBERGE::Ce job tourne sur un exécuteur auto-hébergé alors que le dépôt est public (demande de changement n° 29) : supprimer la variable CI_RUNNER du dépôt."
+          exit 1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: ${{ vars.CI_RUNNER != 'self-hosted' && 'npm' || '' }}
+      - name: Installer les dépendances
+        run: npm ci
+      - name: Construction (dist)
+        run: npx astro build
+      - name: Police du système des captures (Inter, comme les mesures du format 2)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends fonts-inter
+          mkdir -p ~/.config/fontconfig
+          printf '%s\n' '<?xml version="1.0"?>' '<!DOCTYPE fontconfig SYSTEM "fonts.dtd">' '<fontconfig>' \
+            '<alias binding="strong"><family>system-ui</family><prefer><family>Inter</family></prefer></alias>' \
+            '<alias binding="strong"><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>' \
+            '</fontconfig>' > ~/.config/fontconfig/fonts.conf
+          fc-cache -f && fc-match system-ui && fc-match sans-serif
+      - name: Captures (journal, base64 par morceaux)
+        run: CHROME_PATH="$(command -v google-chrome || command -v chromium)" node scripts/captures-ci.ts --dist dist --demande travaux/captures-ci/demande.json

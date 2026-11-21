@@ -1,5 +1,8 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { cwd } from 'node:process';
 // Feuille de style de la page seule, selon son format (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md,
 // §2) : texte traité et minifié par Vite (?inline), posé en ligne ; jamais les deux feuilles sur une même page.
 import cssFormat1 from '../styles/site.css?inline';
@@ -8,8 +11,12 @@ import type { FormatPage } from '../schemas/pages.ts';
 import { PAGE_CONFIDENTIALITE } from '../lib/charte.ts';
 import { estIndexable } from '../lib/indexation.ts';
 import { bandeau, pied } from '../lib/gabarit.ts';
-import { adresseBoutonVoyant, bandeauFormat2, piedFormat2 } from '../lib/format2.ts';
+import { adresseBoutonVoyant, bandeauFormat2, menuFormat2, piedFormat2 } from '../lib/format2.ts';
 import { ID_OUTIL_VOYANTS } from '../lib/plan.ts';
+import { pagesListees } from '../lib/accueil.ts';
+import { PAGE_METHODE } from '../lib/charte.ts';
+import type { PageEditoriale, PageSaisie } from '../schemas/pages.ts';
+import type { Theme } from '../schemas/listes.ts';
 import { demoFormat2Active } from '../../scripts/lib/demo-format2.ts';
 // Pictogramme du bouton « Trouver mon voyant » du format 2 (pilote : le voyant moteur), tiré de la base des dessins.
 import pictogrammeBouton from '../pictogrammes/moteur.svg?raw';
@@ -41,14 +48,29 @@ const canonical = sansCanonical ? undefined : new URL(Astro.url.pathname, Astro.
 // la tête de page, dans le contenu de la page (main).
 const outilConstruit = format === 2 && (await getCollection('voyant')).some((page) => (page.data as { outil?: boolean }).outil === true);
 const adresseOutil = outilConstruit ? (await getEntry('plan-du-site', ID_OUTIL_VOYANTS))?.data.adresse : undefined;
+// Menu du site et liens du pied de page (demande de changement n° 40, lot U1 ; format 2) : les pages construites par thème,
+// la même liste que l'accueil (pagesListees, depuis le plan et les libellés courts des pages construites) ; la page affichée
+// y est marquée (sauf la 404, dont l'adresse n'est pas connue du site statique). Liens du pied : seulement si « à propos »
+// est construite.
+const editoriales = format === 2 ? (await Promise.all((['voyant', 'code-defaut', 'panne', 'fluide', 'pneus', 'dossier'] as const).map((type) => getCollection(type)))).flat() : [];
+const libelles = new Map(editoriales.map((entree) => [(entree.data as PageEditoriale).id, (entree.data as PageEditoriale).libelle_court]));
+// Le plan dans l'ordre du fichier (data/plan-du-site.json, qui fait foi), comme l'accueil : la collection ne garde pas cet ordre.
+const lignesDuPlan = format === 2 ? (JSON.parse(await readFile(join(cwd(), 'data/plan-du-site.json'), 'utf8')) as { id: string; adresse: string; type: string; theme: Theme }[]) : [];
+const plan = new Map(lignesDuPlan.map((ligne) => [ligne.id, ligne]));
+const pagesDuMenu = format === 2 ? pagesListees(plan, libelles) : [];
+const menu = format === 2 ? menuFormat2({ pages: pagesDuMenu, adressePage: sansCanonical ? undefined : Astro.url.pathname }) : '';
+const aPropos = format === 2 ? (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).find((page) => page.id === PAGE_METHODE) : undefined;
+const adresseAPropos = aPropos !== undefined ? plan.get(PAGE_METHODE)?.adresse : undefined;
+const themesDuMenu = [...new Set(pagesDuMenu.map((p) => p.theme))].filter((t): t is Exclude<Theme, 'socle'> => t !== 'socle');
+const navigationPied = aPropos !== undefined && adresseAPropos !== undefined ? { aPropos: adresseAPropos, libelleAPropos: aPropos.libelle_court ?? aPropos.title, themes: themesDuMenu } : undefined;
 // Sur la page outil elle-même, pas de bouton « Trouver mon voyant » (revue de F1.3a) ; ni sur la page 404 (sans canonical),
 // qui porte le sien sous sa phrase : un seul bouton par page (revue de F1.3b).
-const haut = format === 2 ? bandeauFormat2({ adresseOutil: sansCanonical ? undefined : adresseBoutonVoyant(adresseOutil, Astro.url.pathname), pictogrammeBouton }) : bandeau();
+const haut = format === 2 ? bandeauFormat2({ adresseOutil: sansCanonical ? undefined : adresseBoutonVoyant(adresseOutil, Astro.url.pathname), pictogrammeBouton, menu }) : bandeau();
 // Lien vers la politique de confidentialité : dès que sa page est construite, sur toutes les pages, à son adresse du plan.
 const pageConfidentialite = (await getCollection('socle')).some((page) => (page.data as { id: string }).id === PAGE_CONFIDENTIALITE);
 const adresseConfidentialite = pageConfidentialite ? (await getEntry('plan-du-site', PAGE_CONFIDENTIALITE))?.data.adresse : undefined;
 // Sur la page 404, l'adresse demandée n'est pas connue du site statique : le lecteur la complète dans son courriel.
-const bas = (format === 2 ? piedFormat2 : pied)(sansCanonical ? undefined : Astro.url.pathname, adresseConfidentialite);
+const bas = format === 2 ? piedFormat2(sansCanonical ? undefined : Astro.url.pathname, adresseConfidentialite, navigationPied) : pied(sansCanonical ? undefined : Astro.url.pathname, adresseConfidentialite);
 ---
 
 <!doctype html>

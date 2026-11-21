@@ -14,6 +14,8 @@ import { lienSignalement } from '../../src/lib/composants.ts';
 import { ELEMENTS_SANS_TYPOGRAPHIE, NOMBRE_UNITE_SEPARES } from '../../src/lib/html.ts';
 import { ID_MENTIONS_LEGALES, MARQUE_PROVISOIRE, MENTIONS_OBLIGATOIRES } from '../../src/lib/editeur.ts';
 import { CLASSE_CITATION_NOTICE } from '../../src/lib/tableau-notices.ts';
+import { THEMES } from '../../src/schemas/listes.ts';
+import { ancreThemeAccueil } from '../../src/lib/accueil.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
 
@@ -953,6 +955,110 @@ export function constatsAccueil(html: string, fichier: string, attendu: AccueilA
   const aPropos = $('[data-accueil-a-propos] a[href]');
   if (attendu.aPropos === undefined ? $('[data-accueil-a-propos]').length > 0 : aPropos.length !== 1 || aPropos.attr('href') !== attendu.aPropos) {
     constats.push(erreur('ACCUEIL-LIEN', `le lien vers « à propos » n'existe que si la page est construite, et mène à elle${attendu.aPropos !== undefined ? ` (${attendu.aPropos})` : ''}`, fichier));
+  }
+  return constats;
+}
+
+export interface MenuAttendu {
+  /** Pages éditoriales construites, avec leur thème d'après le plan, dans l'ordre du plan (comme l'accueil). */
+  pages: readonly { adresse: string; theme: string }[];
+  /** Adresse de la page « à propos », si elle est construite : les liens du pied de page en dépendent. */
+  aPropos?: string | undefined;
+}
+
+/**
+ * Menu du site et liens du pied de page (demande de changement n° 40, lot U1), sur une page au format 2 :
+ *  - MENU-PRESENT : un seul menu (`data-menu`) dans le bandeau dès qu'une page est construite, 404 comprise ; aucun sinon ;
+ *  - MENU-LISTE : il porte exactement les pages construites, chacune une fois, dans le volet de son thème
+ *    (`data-menu-theme`), dans l'ordre de l'accueil (thèmes, puis ordre du plan) ;
+ *  - MENU-ACTUELLE : la page affichée y porte aria-current="page", et son thème est le seul volet ouvert ; ailleurs
+ *    (accueil, socle, 404), aucune page marquée et aucun volet ouvert ;
+ *  - PIED-LIENS : le pied de page porte « à propos », sa section « Méthode » et les thèmes qui ont des pages (sections de
+ *    l'accueil), seulement si « à propos » est construite.
+ * `adressePage` : adresse de la page (undefined pour la 404, dont l'adresse n'est pas connue du site statique).
+ */
+export function constatsMenuEtPied(html: string, fichier: string, attendu: MenuAttendu, adressePage: string | undefined): Constat[] {
+  const $ = cheerio.load(html);
+  if ($('html').attr('data-format') !== '2') return [];
+  const constats: Constat[] = [];
+  const menus = $('[data-menu]');
+  const dansLeBandeau = $('header.bandeau [data-menu]');
+  if (attendu.pages.length === 0) {
+    if (menus.length > 0) constats.push(erreur('MENU-PRESENT', 'aucune page n\'est construite : pas de menu du site', fichier));
+  } else if (menus.length !== 1 || dansLeBandeau.length !== 1) {
+    constats.push(erreur('MENU-PRESENT', `un seul menu du site (data-menu), dans le bandeau ; trouvé : ${menus.length}, dont ${dansLeBandeau.length} dans le bandeau`, fichier));
+  } else {
+    // Deux formes du même contenu (revue du lot U1, I2) : les volets (téléphone, tablette) et les colonnes (ordinateur) ;
+    // chacune porte la liste entière, dans l'ordre de l'accueil, et rien d'autre.
+    const voulus = THEMES.flatMap((t) => attendu.pages.filter((p) => p.theme === t).map((p) => p.adresse));
+    const formes = [
+      { nom: 'volets', zone: dansLeBandeau.find('.menu-volets'), groupe: 'data-menu-theme' },
+      { nom: 'colonnes', zone: dansLeBandeau.find('.menu-colonnes'), groupe: 'data-menu-colonne' },
+    ] as const;
+    const horsFormes = dansLeBandeau.find('a[href]').toArray().filter((a) => $(a).closest('.menu-volets, .menu-colonnes').length === 0);
+    if (horsFormes.length > 0 || formes.some((f) => f.zone.length !== 1)) {
+      constats.push(erreur('MENU-LISTE', `le panneau du menu porte une forme en volets (.menu-volets) et une en colonnes (.menu-colonnes), une fois chacune, et aucun lien en dehors ; trouvé : ${formes.map((f) => `${f.nom} ${f.zone.length}`).join(', ')}, ${horsFormes.length} lien(s) en dehors`, fichier));
+    }
+    const actuelle = adressePage !== undefined ? attendu.pages.find((p) => p.adresse === adressePage) : undefined;
+    for (const forme of formes) {
+      if (forme.zone.length !== 1) continue;
+      const liens = forme.zone.find('a[href]').toArray().map((a) => $(a).attr('href') ?? '');
+      if (liens.join('|') !== voulus.join('|')) {
+        const manquantes = voulus.filter((a) => !liens.includes(a));
+        const enTrop = liens.filter((a, i) => !voulus.includes(a) || liens.indexOf(a) !== i);
+        constats.push(erreur('MENU-LISTE', `le menu (${forme.nom}) porte chaque page construite une fois, dans l'ordre de l'accueil ; manquent : ${manquantes.join(', ') || 'aucune'} ; en trop : ${[...new Set(enTrop)].join(', ') || 'aucune'}${manquantes.length === 0 && enTrop.length === 0 ? ' ; ordre différent' : ''}`, fichier));
+      }
+      for (const p of attendu.pages) {
+        if (forme.zone.find(`[${forme.groupe}="${p.theme}"] a[href="${p.adresse}"]`).length !== 1) constats.push(erreur('MENU-LISTE', `${p.adresse} est rangée sous son thème (${p.theme}) du menu (${forme.nom})`, fichier));
+      }
+      const marquees = forme.zone.find('a[aria-current]').toArray().map((a) => $(a).attr('href') ?? '');
+      const marqueeJuste = actuelle === undefined ? marquees.length === 0 : marquees.length === 1 && marquees[0] === actuelle.adresse && forme.zone.find('a[aria-current="page"]').length === 1;
+      if (!marqueeJuste) {
+        constats.push(
+          erreur(
+            'MENU-ACTUELLE',
+            actuelle === undefined
+              ? `page hors du menu : aucune page marquée (aria-current) dans le menu (${forme.nom}) ; trouvé : ${marquees.join(', ')}`
+              : `la page affichée (${actuelle.adresse}) porte aria-current="page" dans le menu (${forme.nom}), une seule fois ; trouvé : ${marquees.join(', ') || 'aucune page marquée'}`,
+            fichier,
+          ),
+        );
+      }
+    }
+    const ouverts = dansLeBandeau.find('[data-menu-theme][open]').toArray().map((d) => $(d).attr('data-menu-theme') ?? '');
+    const ouvertsJustes = actuelle === undefined ? ouverts.length === 0 : ouverts.length === 1 && ouverts[0] === actuelle.theme;
+    if (!ouvertsJustes || dansLeBandeau.find('[data-menu-colonne] details').length > 0) {
+      constats.push(
+        erreur(
+          'MENU-ACTUELLE',
+          actuelle === undefined
+            ? `page hors du menu : aucun volet ouvert ; trouvé : ${ouverts.join(', ') || 'aucun'}`
+            : `le thème de la page affichée (${actuelle.theme}) est le seul volet ouvert ; volets ouverts : ${ouverts.join(', ') || 'aucun'} (les colonnes n'ont pas de volet)`,
+          fichier,
+        ),
+      );
+    }
+  }
+  const pied = $('footer.pied [data-pied-nav]');
+  if (attendu.aPropos === undefined) {
+    if ($('[data-pied-nav]').length > 0) constats.push(erreur('PIED-LIENS', 'les liens du pied de page n\'existent que si la page « à propos » est construite', fichier));
+  } else {
+    const themes = THEMES.filter((t) => attendu.pages.some((p) => p.theme === t));
+    const voulus = [attendu.aPropos, `${attendu.aPropos}#${ANCRE_METHODE}`, ...themes.map((t) => `/#${ancreThemeAccueil(t)}`)];
+    const liens = pied.find('a[href]').toArray().map((a) => $(a).attr('href') ?? '');
+    if (pied.length !== 1 || liens.join('|') !== voulus.join('|')) {
+      constats.push(erreur('PIED-LIENS', `le pied de page porte, dans cet ordre, ${voulus.join(', ')} ; trouvé : ${liens.join(', ') || 'aucun lien'}`, fichier));
+    }
+  }
+  return constats;
+}
+
+/** Menu du site et liens du pied de page sur chaque page construite au format 2 (constatsMenuEtPied). */
+export async function controlerMenuEtPied(dist: string, attendu: MenuAttendu): Promise<Constat[]> {
+  const constats: Constat[] = [];
+  for (const chemin of await listerFichiers(dist, '.html')) {
+    const fichier = relative(dist, chemin).split('\\').join('/');
+    constats.push(...constatsMenuEtPied(await readFile(chemin, 'utf8'), fichier, attendu, adresseDepuisFichier(fichier)));
   }
   return constats;
 }

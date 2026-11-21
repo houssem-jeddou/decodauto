@@ -41,9 +41,48 @@ a:focus-visible,summary:focus-visible,button:focus-visible,[tabindex]:focus-visi
 .barre-pilote button[aria-pressed="true"]{background:#ffd27a;color:#2b2f36;border-color:#ffd27a}
 /* Bandeau : avec une police large (DejaVu Sans, police par défaut d'un poste Linux), le bouton passe sous le nom plutôt que de
    déborder (F1.4, FORMAT2-MESURES dans la CI). */
-.bandeau-int{max-width:72rem;margin:0 auto;padding:.55rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .5rem}
+.bandeau-int{position:relative;max-width:72rem;margin:0 auto;padding:.55rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .5rem}
 .nom-du-site{display:inline-flex;align-items:center;gap:.45rem;color:inherit;text-decoration:none;font-family:var(--police-titre);font-weight:700;font-size:1.3rem;letter-spacing:-.01em;white-space:nowrap}
 .bouton-voyant{margin-left:auto;display:inline-flex;align-items:center;gap:.35rem;font-weight:600;font-size:.8125rem;white-space:nowrap;text-decoration:none;padding:.4rem .7rem}
+.bouton-libelle-court{display:none}
+/* Menu du site (demande de changement n° 40, lot U1) : un « details » du bandeau, sans script ; au téléphone et sur
+   tablette, un volet par thème, celui de la page affichée ouvert ; sur ordinateur, les quatre listes en colonnes titrées
+   (une autre forme du même contenu, l'une ou l'autre affichée : revue du lot U1, I2). Le panneau passe par-dessus la page,
+   sans la pousser. Focus : règle commune (summary:focus-visible, --focus du bandeau). Menu et bouton « Trouver mon voyant »
+   forment un groupe aligné à droite, même passé à la ligne avec une police large (revue, M2). */
+.bandeau-actions{margin-left:auto;display:flex;align-items:center;gap:.4rem}
+.bandeau-actions .bouton-voyant{margin-left:0}
+.menu-site>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:.35rem;font-weight:600;font-size:.8125rem;line-height:1.3;border-radius:999px;padding:.4rem .75rem;min-height:2.05rem;min-width:2.75rem}
+.menu-site>summary::-webkit-details-marker{display:none}
+.menu-icone{display:block;flex:none}
+/* Menu fermé : le panneau n'est pas mis en page (sans cette règle, le contenu replié devient le bloc conteneur du panneau,
+   large de 34 px, dont les liens dépassent : FORMAT2-MESURES ; revue du lot U1, B1). Focus clavier passé dans la page ou le
+   pied : le panneau ouvert s'efface, pour ne pas cacher l'élément qui a le focus (WCAG 2.4.11 ; revue, I1). */
+.menu-site:not([open])>.menu-panneau{display:none}
+body:has(main :focus-visible,footer :focus-visible) .menu-site[open]>.menu-panneau{display:none}
+.menu-panneau{position:absolute;left:.5rem;right:.5rem;top:100%;z-index:20;border-radius:16px;padding:.35rem 1rem 1rem;max-height:calc(100vh - 4.5rem);overflow-y:auto;overscroll-behavior:contain}
+.menu-colonnes{display:none}
+.menu-theme>summary,.menu-colonne-titre{display:flex;align-items:center;gap:.5rem;min-height:2.75rem;margin:0;font-family:var(--police-titre);font-weight:700;font-size:1rem}
+.menu-theme>summary{list-style:none;cursor:pointer}
+.menu-theme>summary::-webkit-details-marker{display:none}
+.menu-theme>summary::after{content:"";margin-left:auto;width:.5rem;height:.5rem;border-right:2px solid;border-bottom:2px solid;transform:rotate(45deg) translateY(-2px)}
+.menu-theme[open]>summary::after{transform:rotate(-135deg) translateY(-2px)}
+.menu-nombre{font-family:var(--police-texte);font-weight:600;font-size:.75rem}
+.menu-panneau ul{list-style:none;margin:0 0 .5rem;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 .75rem}
+.menu-panneau a{display:flex;align-items:center;min-height:2.25rem;text-decoration:none;font-size:.875rem;line-height:1.25}
+/* Page affichée : en ambre, en gras et soulignée (jamais la couleur seule, WCAG 1.4.1 ; revue, M3). */
+.menu-panneau a[aria-current]{font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media (min-width:64rem){
+  .menu-panneau{left:auto;right:1rem;width:56rem}
+  .menu-volets{display:none}
+  .menu-colonnes{display:grid;grid-template-columns:repeat(4,1fr);gap:0 1.25rem}
+  .menu-panneau ul{grid-template-columns:1fr}
+}
+/* Couleurs forcées (Windows) : le bouton du menu garde un contour (l'ombre qui le dessine est retirée ; revue, I3). */
+@media (forced-colors:active){.menu-site>summary{border:1px solid CanvasText}}
+/* Pied de page (demande de changement n° 40) : « À propos », « Méthode » et les thèmes de l'accueil. */
+.pied-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.25rem 1.1rem;margin:0 0 .6rem;padding:0;list-style:none}
+.pied-nav a{font-weight:600;font-size:.875rem}
 .mention-ia{max-width:72rem;margin:0 auto;padding:.3rem 1rem .05rem;font-size:1rem;line-height:1.35}
 .tete-int{max-width:44rem;margin:0 auto;padding:.15rem 1rem .5rem}
 /* Tête sans fil d'Ariane (socle, 404) : même écart entre la mention et le H1 que les pages éditoriales (revue de F1.3b). */
@@ -133,13 +172,21 @@ a[data-lien-notices]{white-space:nowrap}
 /* Très petits écrans (320 px, critère WCAG 1.4.10, F1.4) : le bandeau et les tableaux tiennent sans défilement horizontal ;
    le dessin du bouton « Trouver mon voyant » s'efface (son texte reste), les cellules coupent un mot trop long. */
 @media (max-width:22.5rem){
-  .bandeau-int{padding-left:.75rem;padding-right:.75rem;gap:.4rem}
-  .nom-du-site{font-size:1.15rem;gap:.35rem}
-  .bandeau-int .bouton-voyant{padding:.4rem .6rem}
   .bandeau-int .bouton-voyant svg{display:none}
   .tableau th,.tableau td{padding:.4rem .4rem;hyphens:auto;overflow-wrap:anywhere}
   /* Carte : toute la largeur ; seul un mot trop long se coupe (charte §4 ; revue de la PR n° 92, M7). */
   .tableau-cartes th,.tableau-cartes td{hyphens:manual;overflow-wrap:break-word}
+}
+/* Bandeau sous 30 rem (demande de changement n° 40) : marges serrées et « Mon voyant », pour tenir sur une ligne ; après la
+   règle des très petits écrans, qu'elle prolonge jusqu'à 30 rem. */
+@media (max-width:30rem){
+  .bandeau-int{padding-left:.75rem;padding-right:.75rem;gap:.4rem}
+  .nom-du-site{font-size:1.15rem;gap:.35rem}
+  .bandeau-int .bouton-voyant{padding:.4rem .55rem}
+  .menu-site>summary{padding:.4rem .6rem;gap:0}
+  .menu-libelle{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .bouton-libelle-long{display:none}
+  .bouton-libelle-court{display:inline}
 }
 .mini{display:inline-flex;align-items:center;gap:.25rem;font-size:.8125rem;font-weight:700;padding:.08rem .45rem;line-height:1.3}
 .mini .forme{width:.95rem;height:.95rem}
@@ -385,6 +432,15 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .bandeau,:root .tete,:root .hero,:root .decision,:root .pied,:root .voyants,:root .outil-groupe,:root .illustration{--focus:var(--nuit-lien)}
 :root .nom-texte span{color:var(--ambre)}
 :root .bouton-voyant{background:var(--ambre);color:#1a1300;border-radius:999px}
+:root .menu-site>summary{color:var(--nuit-texte);box-shadow:inset 0 0 0 1px var(--filet-nuit)}
+:root .menu-site[open]>summary{background:var(--cellule)}
+:root .menu-panneau{background:var(--panneau);border:1px solid var(--filet-nuit);box-shadow:0 12px 32px rgba(0,0,0,.45)}
+:root .menu-theme>summary{color:var(--ambre);border-bottom:1px solid var(--filet-nuit)}
+:root .menu-theme>summary::after{color:var(--nuit-doux)}
+:root .menu-nombre{color:var(--nuit-doux)}
+:root .menu-panneau a{color:var(--nuit-texte);border-bottom:1px solid var(--filet-nuit)}
+:root .menu-colonne-titre{color:var(--ambre);border-bottom:1px solid var(--filet-nuit)}
+:root .menu-panneau a[aria-current]{color:var(--ambre)}
 :root .tete,:root .hero{background:var(--nuit);color:#fff}
 :root .mention-ia{color:var(--nuit-doux)}
 :root .fil a{color:var(--nuit-lien)}

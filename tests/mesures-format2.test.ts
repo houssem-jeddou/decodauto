@@ -7,12 +7,12 @@ import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { describe, test } from 'node:test';
 import { fileURLToPath } from 'node:url';
-import { ECRAN_TELEPHONE, SIX_ECRANS, TROIS_ECRANS, evaluerMesure, signalerMesure, type MesurePage } from '../scripts/lib/mesures-format2.ts';
+import { ECRAN_TELEPHONE, LARGEURS_BANDEAU, SIX_ECRANS, TROIS_ECRANS, evaluerBandeau, evaluerMesure, signalerMesure, type MesurePage } from '../scripts/lib/mesures-format2.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const base: MesurePage = {
   adresse: '/voyants/moteur/', largeur: 375, police: 'chargee', policeChargee: true, largeurPage: 375, debordements: [], encadre: true,
-  basReponse: null, basVerdictUrgence: 373, basPremiereSituation: 522, basEncadre: 1593, hautIllustration: 1982, illustrationApresProvenance: true, hautArbre: null, lignesEncadre: 3, hauteurPage: 12685, sommaireAttendu: true, sommaire: true,
+  basReponse: null, basVerdictUrgence: 373, basPremiereSituation: 522, basEncadre: 1593, hautIllustration: 1982, illustrationApresProvenance: true, hautArbre: null, lignesEncadre: 3, hauteurPage: 12685, sommaireAttendu: true, sommaire: true, bandeauRangees: 1,
 };
 const messages = (m: Partial<MesurePage>): string[] => evaluerMesure({ ...base, ...m }).map((c) => c.message);
 
@@ -71,6 +71,16 @@ describe('FORMAT2-MESURES : évaluation', () => {
       assert.match(messages({ largeur, largeurPage: largeur + 22 })[0] ?? '', /défile horizontalement .* WCAG 1\.4\.10/);
       assert.match(messages({ largeur, largeurPage: largeur, debordements: ['a.bouton-voyant (342)'] })[0] ?? '', /a\.bouton-voyant \(342\)/);
     }
+  });
+
+  test('bandeau (demande n° 40) : une seule rangée à toute largeur, pages sans bandeau non concernées', () => {
+    for (const largeur of [320, 375, 1366]) {
+      assert.match(messages({ largeur, largeurPage: largeur, bandeauRangees: 2 })[0] ?? '', /le bandeau passe sur 2 rangées : il tient sur une seule \(demande de changement n° 40\)/);
+    }
+    assert.deepEqual(messages({ bandeauRangees: null }), []);
+    assert.deepEqual([...LARGEURS_BANDEAU], [390, 414, 430, 481, 768]);
+    assert.equal(evaluerBandeau({ adresse: '/', largeur: 414, police: 'secours', bandeauRangees: 2 }).length, 1);
+    assert.deepEqual(evaluerBandeau({ adresse: '/', largeur: 768, police: 'chargee', bandeauRangees: 1 }), []);
   });
 
   test('police chargée exigée pour une mesure « police chargée » ; la police de secours n\'en demande pas', () => {

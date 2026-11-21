@@ -4,6 +4,8 @@ Validé par Houssem le 23/10/2026 (étape 4), avec les demandes de changement n�
 
 C'est `data/plan-du-site.json` qui fait foi : en cas d'écart, le JSON a raison. Les parties entre marqueurs (chiffres clés, tableaux, détail des mots-clés) sont générées par `npm run plan:vue` depuis le JSON et 05, et un test vérifie qu'elles sont à jour. Le reste est écrit à la main. Une modification du plan passe par une demande de changement (03), qui met à jour le JSON puis lance `npm run plan:vue`.
 
+Menu du site (demande de changement n° 40, acceptée par Houssem le 21/11/2026) : chaque page porte, dans le menu du bandeau, la même liste que l'accueil, générée depuis le plan par thème. C'est une liste de navigation du gabarit, pas une paire de liens du plan : les « pages liées » gardent leur rôle (« À lire aussi », liens dans le texte).
+
 <!-- vue-plan:resume:debut (généré par npm run plan:vue : ne pas modifier à la main) -->
 ## Chiffres clés
 
