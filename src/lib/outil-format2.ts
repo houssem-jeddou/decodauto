@@ -62,6 +62,7 @@ import {
   sourcesRepliees,
   teteDePage,
   tuileDeLaPage,
+  tuileEnFichier,
   titresH2,
   type LigneFormat2,
 } from './format2.ts';
@@ -97,9 +98,12 @@ const NOM_FILTRE = 'da-filtre-couleur';
 /** Diode de la couleur d'un groupe (titre du groupe, pastilles du filtre) : décorative, la couleur est écrite à côté. */
 const diode = (couleur: string): string => `<span class="diode" data-couleur="${attributHtml(couleur)}" aria-hidden="true"></span>`;
 
-/** Tuile d'un voyant allumé dans sa couleur de la base, avec son pictogramme (repère data-pictogramme des contrôles). */
-const tuileOutil = (dessin: string | undefined, pictogramme: string, couleur: string): string =>
-  dessin === undefined ? '' : `<span class="tuile" data-couleur="${attributHtml(couleur)}" data-pictogramme="${attributHtml(pictogramme)}">${pictogrammeDecoratif(dessin)}</span>`;
+/**
+ * Tuile d'un voyant allumé dans sa couleur de la base, avec son pictogramme (repère data-pictogramme des contrôles). Page du
+ * pilote des images en fichiers (demande de changement n° 43) : l'image du fichier de la paire au lieu du dessin.
+ */
+const tuileOutil = (dessin: string | undefined, pictogramme: string, couleur: string, enFichier = false): string =>
+  dessin === undefined ? '' : enFichier ? tuileEnFichier(pictogramme, couleur) : `<span class="tuile" data-couleur="${attributHtml(couleur)}" data-pictogramme="${attributHtml(pictogramme)}">${pictogrammeDecoratif(dessin)}</span>`;
 
 /**
  * Écart affiché sur la carte d'une ligne : sa ligne d'écart courte (règle 2b, revue de F1.3a : plus de repli sur l'écart
@@ -192,7 +196,7 @@ export const texteEntreeIndex = (e: Pick<EntreeIndexFormat2, 'libelle' | 'cas'>)
  * distinguent pas par la seule couleur), sous le titre du groupe de cette couleur (texte déjà validé, TITRES_GROUPES).
  * Dans l'encadré de la page outil (demande de changement n° 41), sous le titre `titreIndex` ; le filtre ne s'y applique pas.
  */
-export function indexFormat2(modele: ModeleOutil, pictogrammes: ReadonlyMap<string, string>, titreIndex: string = TITRE_INDEX_OUTIL): string {
+export function indexFormat2(modele: ModeleOutil, pictogrammes: ReadonlyMap<string, string>, titreIndex: string = TITRE_INDEX_OUTIL, enFichier = false): string {
   const titre = `${ANCRE_OUTIL}-index`;
   const entrees = entreesIndexFormat2(modele);
   const grilles = modele.groupes.map((g) => {
@@ -200,7 +204,7 @@ export function indexFormat2(modele: ModeleOutil, pictogrammes: ReadonlyMap<stri
       .filter((e) => e.couleur === g.couleur)
       .map((e) => {
         const cas = casDeLaTuile(e);
-        return `<li data-outil-index-entree="${attributHtml(e.cle)}" data-couleur="${attributHtml(e.couleur)}"><a href="#${attributHtml(ancreLigneOutil(e.premiere))}">${tuileOutil(pictogrammes.get(e.pictogramme), e.pictogramme, e.couleur)}<span>${texteHtml(libelleCoupable(e.libelle))}</span>${cas !== undefined ? ` <span class="cas">${texteHtml(cas)}</span>` : ''}</a></li>`;
+        return `<li data-outil-index-entree="${attributHtml(e.cle)}" data-couleur="${attributHtml(e.couleur)}"><a href="#${attributHtml(ancreLigneOutil(e.premiere))}">${tuileOutil(pictogrammes.get(e.pictogramme), e.pictogramme, e.couleur, enFichier)}<span>${texteHtml(libelleCoupable(e.libelle))}</span>${cas !== undefined ? ` <span class="cas">${texteHtml(cas)}</span>` : ''}</a></li>`;
       });
     const id = `${ANCRE_OUTIL}-index-${g.couleur}`;
     return `<div class="outil-index-couleur" data-outil-index-couleur="${attributHtml(g.couleur)}"><h4 id="${attributHtml(id)}">${diode(g.couleur)}${texteHtml(g.titre)}</h4><ul class="grille-voyants" role="list" aria-labelledby="${attributHtml(id)}">${tuiles.join('')}</ul></div>`;
@@ -229,14 +233,14 @@ function filtreFormat2(modele: ModeleOutil): string {
   ].join('');
 }
 
-function carteFormat2(l: LigneOutil, pictogrammes: ReadonlyMap<string, string>): string {
+function carteFormat2(l: LigneOutil, pictogrammes: ReadonlyMap<string, string>, enFichier = false): string {
   const sources = phraseSources(l);
   const ecart = ecartDeLaCarte(l);
   const lienNotices = lienNoticesDeLaCarte(l);
   const lien = lienNotices !== undefined ? ` <a href="${attributHtml(lienNotices)}" data-lien-notices>${texteHtml(FORMAT2.lienVotreMarque)}</a>` : '';
   return [
     `<li class="ligne outil-ligne" id="${attributHtml(ancreLigneOutil(l.voyant))}" data-outil-ligne data-voyant="${attributHtml(l.voyant)}" data-couleur="${attributHtml(l.couleur)}" data-verdict="${attributHtml(l.verdict)}" data-urgence="${attributHtml(l.urgence)}" data-gravite="${graviteDuVerdict(l.verdict)}" data-notices="${l.notices.length}">`,
-    `<div class="ligne-tete">${tuileOutil(pictogrammes.get(l.pictogramme), l.pictogramme, l.couleur)}<div><h4 class="outil-nom">${texteHtml(l.nom)}</h4><p class="outil-situation">${texteHtml(l.situation)}</p></div></div>`,
+    `<div class="ligne-tete">${tuileOutil(pictogrammes.get(l.pictogramme), l.pictogramme, l.couleur, enFichier)}<div><h4 class="outil-nom">${texteHtml(l.nom)}</h4><p class="outil-situation">${texteHtml(l.situation)}</p></div></div>`,
     `<p class="badges"><span class="verdict">${formeGravite(l.verdict)}${texteHtml(GRILLE_VERDICTS[l.verdict].libelle)}</span><span class="urgence">${HORLOGE}${texteHtml(GRILLE_URGENCES[l.urgence].libelle)}</span></p>`,
     `<p class="action">${texteHtml(l.action)}</p>`,
     ecart !== undefined ? `<p class="ecart" data-ecart-court>${BALANCE}<span class="vh">${texteHtml(FORMAT2.selonLaMarque)}</span>${texteHtml(ecart)}${lien}</p>` : '',
@@ -249,20 +253,20 @@ function carteFormat2(l: LigneOutil, pictogrammes: ReadonlyMap<string, string>):
   ].join('');
 }
 
-function groupeFormat2(g: GroupeOutil, pictogrammes: ReadonlyMap<string, string>): string {
+function groupeFormat2(g: GroupeOutil, pictogrammes: ReadonlyMap<string, string>, enFichier = false): string {
   const titre = `da-outil-${g.couleur}`;
   return [
     `<section class="outil-groupe" data-outil-groupe="${attributHtml(g.couleur)}" aria-labelledby="${attributHtml(titre)}">`,
     `<h3 id="${attributHtml(titre)}">${diode(g.couleur)}<span>${texteHtml(`${g.titre} (${g.lignes.length}\u00a0cas)`)}</span></h3>`,
     `<p class="outil-resume" data-outil-resume>${texteHtml(g.resume)}</p>`,
     // role="list" : une liste sans puces garde sa nature de liste pour VoiceOver (Safari).
-    `<ul class="lignes" role="list">${g.lignes.map((l) => carteFormat2(l, pictogrammes)).join('')}</ul>`,
+    `<ul class="lignes" role="list">${g.lignes.map((l) => carteFormat2(l, pictogrammes, enFichier)).join('')}</ul>`,
     '</section>',
   ].join('');
 }
 
 /** Outil voyants au format 2 : élément unique de la page outil, lisible et filtrable sans JavaScript. */
-export function outilVoyantsFormat2(modeleBase: ModeleOutil, pictogrammes: ReadonlyMap<string, string>): string {
+export function outilVoyantsFormat2(modeleBase: ModeleOutil, pictogrammes: ReadonlyMap<string, string>, enFichier = false): string {
   const modele = modeleOutilFormat2(modeleBase);
   // Ligne d'écart courte obligatoire sur chaque carte dont les marques divergent (règle 2b ; plus de repli sur l'écart entier).
   const sansCourt = modele.groupes.flatMap((g) => g.lignes).filter((l) => l.ecart !== undefined && (l.ecartCourt ?? '').trim() === '').map((l) => l.voyant);
@@ -275,7 +279,7 @@ export function outilVoyantsFormat2(modeleBase: ModeleOutil, pictogrammes: Reado
     filtreFormat2(modele),
     // Introduction (texte validé, inchangé) en paragraphes de deux phrases au plus (règle 2e).
     `<div class="outil-intro" data-outil-intro>${paragraphes(INTRODUCTION_OUTIL, 2).map((p) => `<p>${texteHtml(p)}</p>`).join('\n')}</div>`,
-    ...modele.groupes.map((g) => groupeFormat2(g, pictogrammes)),
+    ...modele.groupes.map((g) => groupeFormat2(g, pictogrammes, enFichier)),
     `<p class="outil-absent" data-outil-absent>${texteHtml(modele.couleursAbsentes !== '' ? `${ABSENT_OUTIL} ${modele.couleursAbsentes}` : ABSENT_OUTIL)}</p>`,
     '</section>',
   ].join('');
@@ -320,6 +324,8 @@ export function pageOutilFormat2(
   const sansEcartCourt = lignes.flatMap((l, i) => (l.ecart_marques !== undefined && (l.ecart_court === undefined || l.ecart_court.trim() === '') ? [`ligne ${i + 1} (${l.voyant ?? l.situation})`] : []));
   if (sansEcartCourt.length > 0) throw new Error(`page « ${page.id} » au format 2 : ligne d'écart courte (ecart_court) absente alors que les marques divergent : ${sansEcartCourt.join(', ')}`);
   const cout = coutDeLaPage(page, lignes, site.couts);
+  // Pilote des images en fichiers (demande de changement n° 43) : tuiles de l'encadré, de la grille et des cartes.
+  const enFichier = site.imagesEnFichiers?.has(page.id) === true;
   // L'outil n'a pas de tableau des notices (demande de changement n° 8) : la ligne d'écart ne renvoie à aucun tableau ;
   // l'encadré renvoie à la liste, où chaque carte mène à la page du voyant.
   const lignesF2: LigneFormat2[] = lignes.map((l, i) => {
@@ -335,12 +341,14 @@ export function pageOutilFormat2(
       notices: sourcesDeLaLigne(l.sources, site.sources).notices.length,
       pictogramme: voyant !== undefined ? site.pictogrammes.get(voyant.pictogramme) : undefined,
       couleur: voyant?.couleur,
+      pictogrammeId: voyant?.pictogramme,
+      enFichier,
     };
   });
   const coutHtml = coutFormat2(cout, site.couts);
   const phrases = lignes.map((l) => phraseSources({ ...sourcesDeLaLigne(l.sources, site.sources), ecart: l.ecart_marques }));
   const modele = modeleOutilVoyants({ voyants: site.voyants.values(), sources: site.sources, plan: site.plan, libelles: site.libelles });
-  const outil = outilVoyantsFormat2(modele, site.pictogrammes);
+  const outil = outilVoyantsFormat2(modele, site.pictogrammes, enFichier);
   // Repères du verdict sous les H2 du texte (règle 2d ; le brouillon F2 met celui du voyant moteur, ligne 1).
   const texte = texteRedige(reperesDuTexte(corpsHtml, page, lignes));
   const avecSommaire = nombreDeH2(texte.html) >= SOMMAIRE_MIN_H2;
@@ -360,7 +368,7 @@ export function pageOutilFormat2(
     `<h2 id="${IDENTIFIANTS.decision}">${texteHtml(page.question_decision)}</h2>`,
     renvoiFormat2(),
     `<ol class="lignes" role="list">${lignesF2.map(ligneEncadreFormat2).join('')}</ol>`,
-    indexFormat2(modeleOutilFormat2(modele), site.pictogrammes, ENCADRE_OUTIL_FORMAT2.grille),
+    indexFormat2(modeleOutilFormat2(modele), site.pictogrammes, ENCADRE_OUTIL_FORMAT2.grille, enFichier),
     coutHtml,
     '</section>',
   ].join('');

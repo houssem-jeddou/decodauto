@@ -106,7 +106,7 @@ main>.page,main>.accueil-main{max-width:44rem;margin:0 auto;padding:0 1rem 2rem}
 .ligne{counter-increment:situation;font-size:.9375rem;line-height:1.38;padding:.5rem .55rem}
 .ligne-tete{display:flex;gap:.6rem;align-items:center}
 .ligne-tete .tuile{flex:none;width:2.6rem;height:2.6rem}
-.ligne-tete .tuile svg{width:1.85rem;height:1.85rem}
+.ligne-tete .tuile svg,.ligne-tete .tuile img{width:1.85rem;height:1.85rem}
 .situation{margin:0;font-weight:600;line-height:1.26}
 .badges{display:flex;flex-wrap:wrap;gap:.3rem .4rem;margin:.35rem 0 .15rem;align-items:center}
 .verdict,.urgence{display:inline-flex;align-items:center;gap:.3rem;font-size:.875rem;line-height:1.2}
@@ -138,7 +138,7 @@ a[data-lien-notices]{white-space:nowrap}
 .provenance-ecart{display:block;margin:.2rem 0 .15rem}
 .provenance-ecart-libelle{font-weight:700}
 .illustration{margin:.8rem 0 0;padding:.6rem;overflow:hidden}
-.illustration svg{display:block;width:100%;height:auto}
+.illustration svg,.illustration img{display:block;width:100%;height:auto}
 .illustration figcaption{font-size:.875rem;margin:.45rem .2rem 0;line-height:1.4}
 .credit{font-weight:700;white-space:nowrap}
 .sommaire{margin:1.1rem 0 0}
@@ -239,7 +239,10 @@ a[data-lien-notices]{white-space:nowrap}
 
 /* Tuiles des pictogrammes. */
 .tuile{display:grid;place-items:center;width:3.1rem;height:3.1rem}
-.tuile svg{width:2.25rem;height:2.25rem}
+/* Tuile : dessin posé dans la page, ou, sur une page du pilote des images en fichiers (demande de changement n° 43), image du
+   fichier de la paire, même taille et même lueur. */
+.tuile svg,.tuile img{width:2.25rem;height:2.25rem}
+.tuile img{display:block}
 
 /* Tableau des notices compact (règle 2f). */
 .notices{margin:1.25rem 0 0}
@@ -286,7 +289,7 @@ a[data-lien-notices]{white-space:nowrap}
 }
 .liees ul{list-style:none;padding:0;margin:.5rem 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:.5rem}
 .liees a{display:flex;align-items:center;gap:.5rem;padding:.5rem .6rem;text-decoration:none;color:var(--texte);font-weight:600;font-size:.9375rem;min-height:3.2rem}
-.liees .tuile{flex:none;width:2.2rem;height:2.2rem}.liees .tuile svg{width:1.55rem;height:1.55rem}
+.liees .tuile{flex:none;width:2.2rem;height:2.2rem}.liees .tuile svg,.liees .tuile img{width:1.55rem;height:1.55rem}
 details.sources{margin:1.5rem 0 0;padding:.7rem .9rem}
 details.sources summary{cursor:pointer;font-family:var(--police-titre);font-weight:700;font-size:1.15rem}
 details.sources li{font-size:.875rem;color:var(--texte-doux);margin:.35rem 0}
@@ -310,7 +313,7 @@ main>.accueil-main{max-width:72rem}
    large des navigateurs mesurés (DejaVu Sans, celle de la CI) ; overflow-wrap ne sert que de dernier recours. */
 .grille-voyants a{display:grid;justify-items:center;align-content:start;gap:.3rem;min-width:0;text-decoration:none;font-size:.75rem;font-weight:600;text-align:center;line-height:1.2;padding:.5rem .3rem;-webkit-hyphens:manual;hyphens:manual;overflow-wrap:break-word}
 .grille-voyants .tuile{width:2.9rem;height:2.9rem}
-.grille-voyants .tuile svg{width:2rem;height:2rem}
+.grille-voyants .tuile svg,.grille-voyants .tuile img{width:2rem;height:2rem}
 @media (max-width:23.4rem){.grille-voyants{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .tous{margin:.7rem 0 0;font-size:.9375rem}
 .themes{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.75rem;margin:1.2rem 0}
@@ -469,7 +472,10 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .decision .tranche{border-color:var(--ambre);color:var(--ambre);background:transparent}
 :root .montant{color:var(--nuit-doux)}
 :root .tuile{border-radius:50%;background:radial-gradient(circle at 50% 40%,#1e2a37,#090d12 70%);box-shadow:inset 0 0 0 1px #2a3644;color:var(--tv)}
-:root .tuile svg{filter:drop-shadow(0 0 5px var(--tv))}
+:root .tuile svg,:root .tuile img{filter:drop-shadow(0 0 5px var(--tv))}
+/* Couleurs forcées (Windows) : une tuile en image (pilote des images en fichiers, demande n° 43) ne prend pas les couleurs du
+   système ; elle garde son rond sombre et son dessin allumé, lisibles (revue du lot U3, partie 2, M2). */
+@media (forced-colors:active){.tuile:has(>img){forced-color-adjust:none}}
 :root .tuile[data-couleur="orange"]{--tv:var(--v-orange)}:root .tuile[data-couleur="rouge"]{--tv:var(--v-rouge)}:root .tuile[data-couleur="vert"]{--tv:var(--v-vert)}:root .tuile[data-couleur="bleu"]{--tv:var(--v-bleu)}
 :root .illustration{background:var(--panneau);border-radius:20px}
 :root .illustration figcaption{color:var(--nuit-doux)}

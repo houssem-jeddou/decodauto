@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import { adsense } from './scripts/integration-adsense.ts';
+import { imagesEnFichiers } from './scripts/integration-images.ts';
 import { indexation } from './scripts/integration-indexation.ts';
 import { partage } from './scripts/integration-partage.ts';
 import { planDuSite } from './scripts/integration-plan-du-site.ts';
@@ -20,5 +21,5 @@ export default defineConfig({
   trailingSlash: 'always',
   build: { format: 'directory' },
   devToolbar: { enabled: false },
-  integrations: [indexation(), planDuSite(), adsense(), partage()],
+  integrations: [indexation(), planDuSite(), adsense(), partage(), imagesEnFichiers()],
 });

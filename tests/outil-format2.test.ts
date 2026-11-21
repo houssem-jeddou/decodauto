@@ -3,6 +3,7 @@
 // filtre), contrôles du format 2, cas en échec de chaque branche nouvelle. Données : base voyants et page outil, avec leurs
 // données du format 2 depuis le lot F2 (lignes d'écart courtes, illustration), lues comme la construction de démonstration
 // (npm run demo:format2). Le corps est un fragment HTML écrit pour le test.
+import { adressePictogramme } from '../src/lib/images-fichiers.ts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -162,7 +163,12 @@ describe('format 2 : page outil (F1.3a)', () => {
     }
     assert.ok(!carte('pression-pneus').text().includes('Renault ne donne pas de consigne pour le témoin seul'));
     // Forme de la gravité et tuile du voyant allumé ; pas de lien vers l'outil lui-même (STOP) ; sources repliées.
-    assert.ok($('[data-outil-ligne]').toArray().every((el) => $(el).find('svg.forme[data-icone-gravite]').length === 1 && $(el).find('.tuile[data-pictogramme] svg').length === 1 && $(el).children('details').length === 1));
+    // La page outil est du pilote des images en fichiers (demande de changement n° 43) : la tuile est l'image du fichier de sa
+    // paire, décorative.
+    assert.ok($('[data-outil-ligne]').toArray().every((el) => $(el).find('svg.forme[data-icone-gravite]').length === 1 && $(el).find(`.tuile[data-pictogramme] img[src="${adressePictogramme($(el).find('.tuile').attr('data-pictogramme') ?? '', $(el).attr('data-couleur') ?? '')}"][alt=""][role="presentation"]`).length === 1 && $(el).children('details').length === 1));
+    // Hors du pilote : le dessin posé dans la page.
+    const horsPilote = cheerio.load(outilVoyantsFormat2(modele, site.pictogrammes, false));
+    assert.ok(horsPilote('[data-outil-ligne]').toArray().every((el) => horsPilote(el).find('.tuile[data-pictogramme] svg').length === 1 && horsPilote(el).find('.tuile img').length === 0));
     assert.equal(carte('stop').find('a').length, 0);
     assert.equal(carte('moteur-rouge').find('a').attr('href'), '/voyants/moteur/');
     // Sans ligne d'écart courte, la construction échoue (plus de repli sur l'écart entier).
@@ -236,6 +242,10 @@ describe('format 2 : page outil (F1.3a)', () => {
   test('cas en échec des branches nouvelles', () => {
     const cas: [string, string][] = [
       ['OUTIL-INDEX', modifie(($) => $('[data-outil-index-entree]').first().remove())],
+      // Page outil du pilote des images en fichiers (demande n° 43) : une tuile en image d'une autre paire, sur l'index ou sur
+      // une carte, est refusée (revue du lot U3, partie 2, M4).
+      ['OUTIL-INDEX', modifie(($) => $('[data-outil-index-entree] .tuile img').first().attr('src', adressePictogramme('frein-stationnement', 'orange')))],
+      ['OUTIL-LIBELLES', modifie(($) => $('[data-outil-ligne] .tuile img').first().attr('src', adressePictogramme('frein-stationnement', 'orange')))],
       ['OUTIL-INDEX', modifie(($) => $('[data-outil-index-entree] a').first().attr('href', '#da-voyant-stop'))],
       ['OUTIL-INDEX', modifie(($) => $('[data-outil-index-entree] a > span:not(.tuile):not(.cas)').first().text('Voyant moteur'))],
       ['OUTIL-INDEX', modifie(($) => $('[data-outil-index-entree="pression-pneus@orange"] .cas').remove())],

@@ -86,6 +86,26 @@ try {
             await page.evaluate(() => document.fonts.ready.then(() => undefined));
             if (c.ouvrir !== undefined) await page.evaluate((sel: string) => document.querySelectorAll(sel).forEach((d) => d.setAttribute('open', '')), c.ouvrir);
             const zone = c.zone ?? 'ecran';
+            // Images à chargement différé (revue du lot U3, partie 2, I1) : la zone est amenée à l'écran, puis ses images (ou, pour
+            // la page entière, toutes) sont attendues, chargées et décodées, avant la capture ; l'écran est ensuite remis en haut.
+            await page.evaluate(async (sel: string) => {
+              const cible = sel === 'ecran' ? null : sel === 'page' ? document.body : document.querySelector(sel);
+              if (cible === null) return;
+              const images = [...cible.querySelectorAll('img')];
+              // Chargement immédiat des images de la zone (une zone haute dépasse l'écran : ses images du bas ne se chargeraient
+              // jamais), au plus 15 secondes d'attente.
+              for (const i of images) i.loading = 'eager';
+              if (sel !== 'page') cible.scrollIntoView({ block: 'center' });
+              const attente = Promise.all(
+                images.map((i) =>
+                  (i.complete ? Promise.resolve() : new Promise((r) => { i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); }))
+                    .then(() => i.decode())
+                    .catch(() => undefined),
+                ),
+              );
+              await Promise.race([attente, new Promise((r) => setTimeout(r, 15_000))]);
+              scrollTo(0, 0);
+            }, zone);
             let image: Uint8Array;
             let mesure = '';
             if (zone === 'ecran') image = await page.screenshot({ type: 'png' });

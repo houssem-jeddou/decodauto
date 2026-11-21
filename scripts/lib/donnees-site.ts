@@ -7,6 +7,7 @@ import type { DonneesSite } from '../../src/lib/gabarit.ts';
 import { emplacementsFactices } from '../../src/lib/emplacements-pub.ts';
 import { chargerDonnees } from './charger.ts';
 import { DOSSIER_ILLUSTRATIONS } from '../../src/lib/format2.ts';
+import { pagesImagesEnFichiers } from '../../src/lib/images-fichiers.ts';
 import { DOSSIER_ILLUSTRATIONS_DEMO, chargerIllustrations, demoFormat2Active, lireBrouillonFormat2, voyantsAvecBrouillon } from './demo-format2.ts';
 
 export interface DonneesDuSite {
@@ -41,6 +42,8 @@ export async function donneesDuSite(racine: string, libelles: ReadonlyMap<string
     // Emplacements publicitaires factices : construction de recette et démonstration du format 2 seulement (livrable 7.5b ;
     // règle 2m), jamais en production.
     pubFactice: emplacementsFactices(process.env) || demo,
+    // Pilote des images en fichiers (demande de changement n° 43).
+    imagesEnFichiers: pagesImagesEnFichiers(),
   };
   return { site, contexte, constats };
 }
