@@ -11,6 +11,9 @@ import { ancreLigneOutil } from './outil-voyants.ts';
 import { LIBELLES_THEMES, THEMES, type Theme } from '../schemas/listes.ts';
 
 /** Le positionnement du site (docs/01) : le H1 de l'accueil. */
+/** Ancre de la section d'un thème sur l'accueil : cible des liens du pied de page (format2.ts) ; source unique. */
+export const ancreThemeAccueil = (theme: Theme): string => `da-accueil-${theme}`;
+
 export const TITRE_ACCUEIL = 'Votre voiture vous alerte, on vous dit quoi faire.';
 export const TITLE_ACCUEIL = 'decodauto : voyant allumé, code défaut, que faire ?';
 export const DESCRIPTION_ACCUEIL = 'Voyant allumé, code défaut, bruit suspect ou obligation : peut-on rouler, avec quelle urgence, que faire. Un guide indépendant, sans pièces à vendre.';
@@ -63,7 +66,7 @@ export function accueilHtml(donnees: DonneesAccueil): string {
   const themes = THEMES.flatMap((theme) => {
     const pages = donnees.pages.filter((p) => p.theme === theme);
     if (pages.length === 0) return [];
-    const id = `da-accueil-${theme}`;
+    const id = ancreThemeAccueil(theme);
     return [`<section class="accueil-theme" data-accueil-theme="${theme}" aria-labelledby="${id}"><h3 id="${id}">${texteHtml(LIBELLES_THEMES[theme])}</h3><ul>${pages.map((p) => `<li><a href="${attributHtml(p.adresse)}">${texteHtml(p.libelle)}</a></li>`).join('')}</ul></section>`];
   });
   if (themes.length > 0) morceaux.push(`<section class="accueil-pages" data-accueil-pages aria-labelledby="da-accueil-pages-titre"><h2 id="da-accueil-pages-titre">Les pages du site</h2>${themes.join('')}</section>`);
@@ -167,7 +170,7 @@ export function accueilFormat2Html(donnees: DonneesAccueilFormat2): string {
   const themes = THEMES.flatMap((theme) => {
     const pages = donnees.pages.filter((p) => p.theme === theme);
     if (pages.length === 0) return [];
-    const id = `da-accueil-${theme}`;
+    const id = ancreThemeAccueil(theme);
     // Lot U2 (P5) : phrase de présentation du thème, puis ses pages en pastilles (charte-b.css, « Accueil »).
     const presentation = `<p class="theme-intro">${texteHtml(PRESENTATIONS_THEMES[theme])}</p>`;
     return [`<section class="theme" data-accueil-theme="${theme}" aria-labelledby="${id}"><h2 id="${id}">${texteHtml(LIBELLES_THEMES[theme])}</h2>${presentation}<ul class="pages-du-theme">${pages.map((p) => `<li><a href="${attributHtml(p.adresse)}">${texteHtml(p.libelle)}</a></li>`).join('')}</ul></section>`];

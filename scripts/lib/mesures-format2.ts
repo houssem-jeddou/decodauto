@@ -14,7 +14,8 @@
 //  - haut de l'arbre de décision ou des étapes (page panne) : donné ; au-delà de six écrans (4 002 px), signalé : la page
 //    passe par une décision de Houssem sur captures (demande de changement n° 32, seuil écrit) ;
 //  - bandeau (demande de changement n° 40, menu du site) : une seule rangée, à 320, 375 et 1366 px sur toutes les pages, et
-//    à 390, 414, 430 et 768 px (LARGEURS_BANDEAU) sur l'accueil, l'outil, une page éditoriale et la 404.
+//    à 390, 414, 430, 481 et 768 px (LARGEURS_BANDEAU) sur l'accueil, l'outil, la page du voyant moteur et la 404 ; 481 px :
+//    la largeur la plus serrée au-dessus de 30 rem, où « Trouver mon voyant » et « Menu » reviennent (revue du lot U1, M4).
 // ---------------------------------------------------------------------------------------------
 
 /** Hauteur visible d'un écran de téléphone (375 × 667, barres du navigateur déduites : demande n° 30, §1). */
@@ -27,8 +28,8 @@ export const SIX_ECRANS = 6 * ECRAN_TELEPHONE;
 export const LARGEURS = [320, 375, 1366] as const;
 export const HAUTEURS: Record<(typeof LARGEURS)[number], number> = { 320: 640, 375: ECRAN_TELEPHONE, 1366: 800 };
 /** Largeurs de plus où le bandeau seul est mesuré (demande de changement n° 40) : téléphones courants et tablette. */
-export const LARGEURS_BANDEAU = [390, 414, 430, 768] as const;
-export const HAUTEURS_BANDEAU: Record<(typeof LARGEURS_BANDEAU)[number], number> = { 390: 844, 414: 896, 430: 932, 768: 1024 };
+export const LARGEURS_BANDEAU = [390, 414, 430, 481, 768] as const;
+export const HAUTEURS_BANDEAU: Record<(typeof LARGEURS_BANDEAU)[number], number> = { 390: 844, 414: 896, 430: 932, 481: 900, 768: 1024 };
 
 /** Mesures d'une page à une largeur et dans une police, en pixels CSS depuis le haut de la page. */
 export interface MesurePage {

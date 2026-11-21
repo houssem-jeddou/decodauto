@@ -157,8 +157,10 @@ async function mesurerBandeau(navigateur: Browser, base: string, adresse: string
 
 const adresses = await pagesFormat2();
 console.log(`FORMAT2-MESURES : ${adresses.length} page(s) au format 2 dans ${relative(process.cwd(), dist) || '.'}`);
-// Bandeau aux largeurs de plus : accueil, outil, 404 et la première autre page (bouton « Trouver mon voyant » présent ou non).
-const pourLeBandeau = [...new Set([...adresses.filter((a) => a === '/' || a === '/voyants/' || a === '/404.html'), ...adresses.filter((a) => a !== '/' && a !== '/voyants/' && a !== '/404.html').slice(0, 1)])];
+// Bandeau aux largeurs de plus : accueil, outil, 404 et une page éditoriale qui porte le bouton « Trouver mon voyant » (la page
+// du voyant moteur, sinon la première autre page ; revue du lot U1, M4 : c'était « à propos »).
+const autres = adresses.filter((a) => a !== '/' && a !== '/voyants/' && a !== '/404.html');
+const pourLeBandeau = [...new Set([...adresses.filter((a) => a === '/' || a === '/voyants/' || a === '/404.html'), ...(autres.includes('/voyants/moteur/') ? ['/voyants/moteur/'] : autres.slice(0, 1))])];
 const navigateur = await puppeteer.launch({ executablePath: chrome, headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage', '--font-render-hinting=none'] });
 const mesures: MesurePage[] = [];
 const bandeaux: MesureBandeau[] = [];

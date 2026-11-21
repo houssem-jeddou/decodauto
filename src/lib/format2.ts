@@ -49,6 +49,7 @@ import {
   type SourceDuRegistre,
 } from './composants.ts';
 import { ADRESSE_SIGNALEMENT, PARTIES_DU_NOM } from './site.ts';
+import { ancreThemeAccueil } from './accueil.ts';
 import { logoEnLigne } from './marque.ts';
 import { ANCRE_CONFIDENTIALITE, ANCRE_METHODE, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_LIEN_METHODE, LIBELLE_SIGNALER_ERREUR } from './charte.ts';
 import { dateAffichee, datesAffichees, fourchetteAffichee, libelleRisque, trancheDesPieces, type CoutResolu, type DonneesCouts } from './cout.ts';
@@ -146,7 +147,10 @@ export function bandeauFormat2(entree: { adresseOutil?: string | undefined; pict
   const libelles = `<span class="bouton-libelle-long">${texteHtml(FORMAT2.boutonVoyant)}</span><span class="bouton-libelle-court" aria-hidden="true">${texteHtml(FORMAT2.boutonVoyantCourt)}</span>`;
   const bouton =
     entree.adresseOutil !== undefined ? `<a class="bouton-voyant" href="${attributHtml(entree.adresseOutil)}" aria-label="${attributHtml(FORMAT2.boutonVoyant)}" data-bouton-voyant>${icone}${libelles}</a>` : '';
-  return `<div class="bandeau-int"><a class="nom-du-site" href="/">${logoEnLigne(32)}<span class="nom-texte">${nom}</span></a>${entree.menu ?? ''}${bouton}</div>`;
+  // Menu et bouton forment un groupe aligné à droite, sur la ligne du nom ou, avec une police large, sur la suivante (revue du
+  // lot U1, M2).
+  const actions = `${entree.menu ?? ''}${bouton}`;
+  return `<div class="bandeau-int"><a class="nom-du-site" href="/">${logoEnLigne(32)}<span class="nom-texte">${nom}</span></a>${actions !== '' ? `<div class="bandeau-actions">${actions}</div>` : ''}</div>`;
 }
 
 /** Page que listent le menu du site et l'accueil : adresse, libellé court et thème (accueil.ts, pagesListees). */
@@ -159,9 +163,12 @@ export interface PageDuMenu {
 /**
  * Menu du site (demande de changement n° 40, lot U1) : un `details` du bandeau, sans script, qui ouvre la liste des pages
  * construites, par thème, dans l'ordre et sous les titres de l'accueil (même liste : `pagesListees`, générée depuis le
- * plan ; contrôles MENU-*). Un volet (`details`) par thème, avec son nombre de pages ; la page affichée porte
- * aria-current="page" et son thème est le seul volet ouvert (aucun sur l'accueil, le socle et la 404). Sur ordinateur, la
- * feuille de style ouvre les quatre volets là où le navigateur connaît ::details-content. Vide si aucune page n'est construite.
+ * plan ; contrôles MENU-*). Au téléphone et sur tablette, un volet (`details`) par thème, avec son nombre de pages ; la
+ * page affichée porte aria-current="page" et son thème est le seul volet ouvert (aucun sur l'accueil, le socle et la 404).
+ * Sur ordinateur, les mêmes listes en quatre colonnes titrées, toujours ouvertes (`data-menu-colonne`) : la feuille de style
+ * n'affiche que l'une des deux formes, si bien qu'un lecteur d'écran n'entend jamais « réduit » pour une liste affichée
+ * (revue du lot U1, I2). Icône du bouton dessinée en `currentColor` (visible avec les couleurs forcées de Windows).
+ * Vide si aucune page n'est construite.
  */
 export function menuFormat2(entree: { pages: readonly PageDuMenu[]; adressePage?: string | undefined }): string {
   const themes = THEMES.flatMap((theme) => {
@@ -170,14 +177,20 @@ export function menuFormat2(entree: { pages: readonly PageDuMenu[]; adressePage?
     const ouvert = pages.some((p) => p.adresse === entree.adressePage);
     const liens = pages.map((p) => `<li><a href="${attributHtml(p.adresse)}"${p.adresse === entree.adressePage ? ' aria-current="page"' : ''}>${texteHtml(p.libelle)}</a></li>`).join('');
     const nombre = `<span class="menu-nombre">${pages.length}<span class="vh">${pages.length > 1 ? ' pages' : ' page'}</span></span>`;
-    return [`<details class="menu-theme" data-menu-theme="${theme}"${ouvert ? ' open' : ''}><summary>${texteHtml(LIBELLES_THEMES[theme])} ${nombre}</summary><ul>${liens}</ul></details>`];
+    const titre = `${texteHtml(LIBELLES_THEMES[theme])} ${nombre}`;
+    const id = `da-menu-${theme}`;
+    return [
+      {
+        volet: `<details class="menu-theme" data-menu-theme="${theme}"${ouvert ? ' open' : ''}><summary>${titre}</summary><ul>${liens}</ul></details>`,
+        colonne: `<div class="menu-colonne" data-menu-colonne="${theme}"><p class="menu-colonne-titre" id="${id}">${titre}</p><ul aria-labelledby="${id}">${liens}</ul></div>`,
+      },
+    ];
   });
   if (themes.length === 0) return '';
-  return `<details class="menu-site" data-menu><summary aria-label="${attributHtml(FORMAT2.menuNom)}"><span class="menu-libelle">${texteHtml(FORMAT2.menu)}</span></summary><nav class="menu-panneau" aria-label="${attributHtml(FORMAT2.menuNavigation)}">${themes.join('')}</nav></details>`;
+  const icone = '<svg class="menu-icone" width="14" height="10" viewBox="0 0 14 10" aria-hidden="true" focusable="false"><path d="M0 1h14M0 5h14M0 9h14" stroke="currentColor" stroke-width="2"/></svg>';
+  return `<details class="menu-site" data-menu><summary aria-label="${attributHtml(FORMAT2.menuNom)}">${icone}<span class="menu-libelle">${texteHtml(FORMAT2.menu)}</span></summary><nav class="menu-panneau" aria-label="${attributHtml(FORMAT2.menuNavigation)}"><div class="menu-volets">${themes.map((t) => t.volet).join('')}</div><div class="menu-colonnes">${themes.map((t) => t.colonne).join('')}</div></nav></details>`;
 }
 
-/** Ancre de la section d'un thème sur l'accueil (accueil.ts : `da-accueil-<thème>`), cible des liens du pied de page. */
-export const ancreThemeAccueil = (theme: Theme): string => `da-accueil-${theme}`;
 
 /**
  * Adresse vers laquelle mène le bouton « Trouver mon voyant » du bandeau sur une page : celle de la page outil, sauf sur la

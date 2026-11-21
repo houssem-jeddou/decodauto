@@ -78,7 +78,7 @@ describe('FORMAT2-MESURES : évaluation', () => {
       assert.match(messages({ largeur, largeurPage: largeur, bandeauRangees: 2 })[0] ?? '', /le bandeau passe sur 2 rangées : il tient sur une seule \(demande de changement n° 40\)/);
     }
     assert.deepEqual(messages({ bandeauRangees: null }), []);
-    assert.deepEqual([...LARGEURS_BANDEAU], [390, 414, 430, 768]);
+    assert.deepEqual([...LARGEURS_BANDEAU], [390, 414, 430, 481, 768]);
     assert.equal(evaluerBandeau({ adresse: '/', largeur: 414, police: 'secours', bandeauRangees: 2 }).length, 1);
     assert.deepEqual(evaluerBandeau({ adresse: '/', largeur: 768, police: 'chargee', bandeauRangees: 1 }), []);
   });
