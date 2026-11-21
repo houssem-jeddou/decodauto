@@ -287,7 +287,9 @@ export function coutFormat2(cout: CoutResolu, couts: DonneesCouts): string {
       if (montant.automatique === 'verdict-arret') {
         const [objet, ...suite] = montant.texte.split(' : ');
         const texte = suite.length > 0 ? `<strong>${texteHtml(objet ?? '')}</strong>${texteHtml(` : ${suite.join(' : ')}`)}` : texteHtml(montant.texte);
-        return [`<p class="montant depannage" data-depannage>${texte} ${dates}</p>`];
+        // Demande de changement n° 39 : la consigne de sécurité sous le tarif, dans la même cellule sombre.
+        const consigne = montant.consigne !== undefined ? `<span class="depannage-consigne" data-depannage-consigne>${texteHtml(montant.consigne.texte)}</span>` : '';
+        return [`<p class="montant depannage" data-depannage>${texte} ${dates}${consigne !== '' ? ` ${consigne}` : ''}</p>`];
       }
       return [`<p class="montant">${texteHtml(montant.texte)} ${dates}</p>`];
     }),
