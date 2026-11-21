@@ -14,9 +14,17 @@ const ENTITES: Readonly<Record<string, string>> = { '&': '&amp;', '<': '&lt;', '
 export const echapper = (texte: string): string => texte.replace(/[&<>"']/g, (c) => ENTITES[c] ?? c);
 
 /** Unités qui suivent un nombre (espace insécable entre les deux, charte §3.3). */
-const UNITES = ['bar', 'km/h', 'km', '°C', '€', '%', 'litres', 'litre', 'l', 'mm', 'cm', 'kg', 't', 'h', 'min', 'ans', 'an', 'mois', 'jours', 'jour', 'semaines', 'semaine', 'V', 'Ah', 'A', 'kW', 'W'];
+// Unités écrites en toutes lettres ajoutées le 20/11/2026 (« 30 minutes » se coupait à 375 px, revue de la PR #84).
+const UNITES = ['bar', 'km/h', 'km', '°C', '€', '%', 'litres', 'litre', 'l', 'mm', 'cm', 'kg', 't', 'h', 'min', 'ans', 'an', 'mois', 'jours', 'jour', 'semaines', 'semaine', 'heures', 'heure', 'minutes', 'minute', 'secondes', 'seconde', 'tours', 'V', 'volts', 'volt', 'Ah', 'A', 'kW', 'W'];
+const ALTERNATIVE_UNITES = UNITES.map((u) => u.replace(/[/.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
 // L'unité n'est suivie ni d'une lettre ni d'un chiffre ni d'une apostrophe (« 208 l’a » : « l » n'est pas le litre).
-const NOMBRE_UNITE = new RegExp(`(\\d) (?=(?:${UNITES.map((u) => u.replace(/[/.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})(?![\\p{L}\\d’']))`, 'gu');
+// Une espace, ou un saut de ligne du Markdown, entre le nombre et l'unité devient une seule espace insécable.
+const NOMBRE_UNITE = new RegExp(`(\\d)[ \\t\\n\\r]+(?=(?:${ALTERNATIVE_UNITES})(?![\\p{L}\\d’']))`, 'gu');
+/**
+ * Espace ordinaire (ou saut de ligne) restée entre un nombre et son unité dans le texte affiché : le gabarit n'en laisse
+ * jamais (contrôle TYPO-UNITE du site construit, charte §3.3).
+ */
+export const NOMBRE_UNITE_SEPARES = new RegExp(`\\d[ \\t\\n\\r]+(?=(?:${ALTERNATIVE_UNITES})(?![\\p{L}\\d’']))`, 'u');
 
 /**
  * Guillemets droits ou anglais d'un texte : « ouvrant, puis » fermant, en alternance (l'état se poursuit d'un morceau
