@@ -72,7 +72,7 @@ sources:
   - notice-seat-ibiza
 auteur: houssem-jeddou
 date_publication: 2026-11-16
-date_modification: 2026-11-16
+date_modification: 2026-11-21
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
 validation: d967a22031e5912aba31c2c733980a407ad4b818df04bd6adf7de8e6d7e4a619

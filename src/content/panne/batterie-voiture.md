@@ -128,7 +128,7 @@ sources:
   - varta-interpretation-tests
 auteur: houssem-jeddou
 date_publication: 2026-11-16
-date_modification: 2026-11-16
+date_modification: 2026-11-21
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
 validation: 7f5936e91a5b9ceabe928bc73dd845dcdc0863927e225b257598432b77daa5ea

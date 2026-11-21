@@ -6,7 +6,7 @@
 
 - **Type** : voyant ; **thème** : alertes-et-codes ; **vague** : A.
 - **Adresse** : `/voyants/direction/` ; page mère : `/voyants/`.
-- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/voyants/batterie/` (vague A).
+- **Pages liées dans le plan** (dans un sens ou dans l'autre) : `/batterie-voiture/changer/` (vague B : pas de lien dans le texte avant sa publication) ; `/batterie-voiture/recharger/` (vague B : pas de lien dans le texte avant sa publication) ; `/contre-visite-controle-technique/` (vague C : pas de lien dans le texte avant sa publication) ; `/voyants/batterie/` (vague A).
 - Un lien écrit dans le texte ne mène qu'à la page mère, à une page enfant ou à une page liée ci-dessus (docs/08 §4).
 - **Page publiée** (sa validation est notée au journal) : `src/content/voyant/voyant-direction.md`. Le site est indexé : toute modification passe par une pull request, et son adresse, sa date « Mis à jour le », son title et son H1 ne changent pas sans raison.
 

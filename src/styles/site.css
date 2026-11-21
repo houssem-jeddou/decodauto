@@ -786,3 +786,5 @@ h3 {
 .emplacement-pub-etiquette {
   font-size: 0.85rem;
 }
+/* Consigne de sécurité sous un montant, dans sa rangée (demande de changement n° 39). */
+.encadre-consigne{display:block;margin-top:.25rem}

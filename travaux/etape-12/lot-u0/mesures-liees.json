@@ -1,0 +1,1390 @@
+[
+ {
+  "chemin": "/huile-moteur/10w40/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [],
+  "hauteur": 0,
+  "hautPage": 6575,
+  "top": 6367,
+  "clipH": 60
+ },
+ {
+  "chemin": "/huile-moteur/10w40/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [],
+  "hauteur": 0,
+  "hautPage": 6626,
+  "top": 6417,
+  "clipH": 60
+ },
+ {
+  "chemin": "/huile-moteur/10w40/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [],
+  "hauteur": 0,
+  "hautPage": 4098,
+  "top": 3911,
+  "clipH": 60
+ },
+ {
+  "chemin": "/huile-moteur/10w40/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [],
+  "hauteur": 0,
+  "hautPage": 4098,
+  "top": 3911,
+  "clipH": 60
+ },
+ {
+  "chemin": "/huile-moteur/10w40/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W30",
+   "Huile 5W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 6693,
+  "top": 6375,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/10w40/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Huile 5W30",
+   "Huile 5W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 6743,
+  "top": 6425,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/10w40/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W30",
+   "Huile 5W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 4215,
+  "top": 3919,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/10w40/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Huile 5W30",
+   "Huile 5W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 4215,
+  "top": 3919,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w30/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 7645,
+  "top": 7327,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w30/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Huile 5W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 7695,
+  "top": 7377,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w30/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 4842,
+  "top": 4546,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w30/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Huile 5W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 4842,
+  "top": 4546,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w30/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W40",
+   "Huile 10W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 7645,
+  "top": 7327,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w30/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Huile 5W40",
+   "Huile 10W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 7695,
+  "top": 7377,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w30/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W40",
+   "Huile 10W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 4842,
+  "top": 4546,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w30/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Huile 5W40",
+   "Huile 10W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 4842,
+  "top": 4546,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w40/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W30"
+  ],
+  "hauteur": 85,
+  "hautPage": 6542,
+  "top": 6224,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w40/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Huile 5W30"
+  ],
+  "hauteur": 85,
+  "hautPage": 6618,
+  "top": 6300,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w40/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W30"
+  ],
+  "hauteur": 85,
+  "hautPage": 4190,
+  "top": 3894,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w40/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Huile 5W30"
+  ],
+  "hauteur": 85,
+  "hautPage": 4190,
+  "top": 3894,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w40/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W30",
+   "Huile 10W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 6542,
+  "top": 6224,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w40/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Huile 5W30",
+   "Huile 10W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 6618,
+  "top": 6300,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w40/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Huile 5W30",
+   "Huile 10W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 4190,
+  "top": 3894,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/5w40/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Huile 5W30",
+   "Huile 10W40"
+  ],
+  "hauteur": 85,
+  "hautPage": 4190,
+  "top": 3894,
+  "clipH": 85
+ },
+ {
+  "chemin": "/huile-moteur/verifier-niveau/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant huile moteur",
+   "Bruit moteur",
+   "Moteur PureTech"
+  ],
+  "hauteur": 156,
+  "hautPage": 13619,
+  "top": 13230,
+  "clipH": 156
+ },
+ {
+  "chemin": "/huile-moteur/verifier-niveau/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant huile moteur",
+   "Bruit moteur",
+   "Moteur PureTech"
+  ],
+  "hauteur": 156,
+  "hautPage": 13643,
+  "top": 13255,
+  "clipH": 156
+ },
+ {
+  "chemin": "/huile-moteur/verifier-niveau/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant huile moteur",
+   "Bruit moteur",
+   "Moteur PureTech"
+  ],
+  "hauteur": 97,
+  "hautPage": 8322,
+  "top": 8015,
+  "clipH": 97
+ },
+ {
+  "chemin": "/huile-moteur/verifier-niveau/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant huile moteur",
+   "Bruit moteur",
+   "Moteur PureTech"
+  ],
+  "hauteur": 97,
+  "hautPage": 8322,
+  "top": 8015,
+  "clipH": 97
+ },
+ {
+  "chemin": "/huile-moteur/verifier-niveau/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant huile moteur",
+   "Bruit moteur",
+   "Moteur PureTech",
+   "Liquide de refroidissement",
+   "Liquide de frein"
+  ],
+  "hauteur": 226,
+  "hautPage": 13689,
+  "top": 13230,
+  "clipH": 226
+ },
+ {
+  "chemin": "/huile-moteur/verifier-niveau/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant huile moteur",
+   "Bruit moteur",
+   "Moteur PureTech",
+   "Liquide de refroidissement",
+   "Liquide de frein"
+  ],
+  "hauteur": 226,
+  "hautPage": 13714,
+  "top": 13255,
+  "clipH": 226
+ },
+ {
+  "chemin": "/huile-moteur/verifier-niveau/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant huile moteur",
+   "Bruit moteur",
+   "Moteur PureTech",
+   "Liquide de refroidissement",
+   "Liquide de frein"
+  ],
+  "hauteur": 156,
+  "hautPage": 8382,
+  "top": 8015,
+  "clipH": 156
+ },
+ {
+  "chemin": "/huile-moteur/verifier-niveau/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant huile moteur",
+   "Bruit moteur",
+   "Moteur PureTech",
+   "Liquide de refroidissement",
+   "Liquide de frein"
+  ],
+  "hauteur": 156,
+  "hautPage": 8382,
+  "top": 8015,
+  "clipH": 156
+ },
+ {
+  "chemin": "/liquide-de-frein/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant de frein"
+  ],
+  "hauteur": 97,
+  "hautPage": 7967,
+  "top": 7638,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-frein/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant de frein"
+  ],
+  "hauteur": 97,
+  "hautPage": 7993,
+  "top": 7663,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-frein/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant de frein"
+  ],
+  "hauteur": 97,
+  "hautPage": 4800,
+  "top": 4493,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-frein/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant de frein"
+  ],
+  "hauteur": 97,
+  "hautPage": 4826,
+  "top": 4518,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-frein/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant de frein",
+   "Liquide de refroidissement",
+   "Niveau d’huile"
+  ],
+  "hauteur": 156,
+  "hautPage": 8026,
+  "top": 7638,
+  "clipH": 156
+ },
+ {
+  "chemin": "/liquide-de-frein/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant de frein",
+   "Liquide de refroidissement",
+   "Niveau d’huile"
+  ],
+  "hauteur": 156,
+  "hautPage": 8052,
+  "top": 7663,
+  "clipH": 156
+ },
+ {
+  "chemin": "/liquide-de-frein/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant de frein",
+   "Liquide de refroidissement",
+   "Niveau d’huile"
+  ],
+  "hauteur": 97,
+  "hautPage": 4800,
+  "top": 4493,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-frein/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant de frein",
+   "Liquide de refroidissement",
+   "Niveau d’huile"
+  ],
+  "hauteur": 97,
+  "hautPage": 4826,
+  "top": 4518,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-refroidissement/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Moteur qui surchauffe"
+  ],
+  "hauteur": 97,
+  "hautPage": 10336,
+  "top": 10007,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-refroidissement/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Moteur qui surchauffe"
+  ],
+  "hauteur": 97,
+  "hautPage": 10386,
+  "top": 10057,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-refroidissement/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Moteur qui surchauffe"
+  ],
+  "hauteur": 97,
+  "hautPage": 6097,
+  "top": 5789,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-refroidissement/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Moteur qui surchauffe"
+  ],
+  "hauteur": 97,
+  "hautPage": 6148,
+  "top": 5840,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-refroidissement/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Moteur qui surchauffe",
+   "Liquide de frein",
+   "Niveau d’huile"
+  ],
+  "hauteur": 156,
+  "hautPage": 10395,
+  "top": 10007,
+  "clipH": 156
+ },
+ {
+  "chemin": "/liquide-de-refroidissement/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Moteur qui surchauffe",
+   "Liquide de frein",
+   "Niveau d’huile"
+  ],
+  "hauteur": 156,
+  "hautPage": 10445,
+  "top": 10057,
+  "clipH": 156
+ },
+ {
+  "chemin": "/liquide-de-refroidissement/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Moteur qui surchauffe",
+   "Liquide de frein",
+   "Niveau d’huile"
+  ],
+  "hauteur": 97,
+  "hautPage": 6097,
+  "top": 5789,
+  "clipH": 97
+ },
+ {
+  "chemin": "/liquide-de-refroidissement/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Moteur qui surchauffe",
+   "Liquide de frein",
+   "Niveau d’huile"
+  ],
+  "hauteur": 97,
+  "hautPage": 6148,
+  "top": 5840,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/direction/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant batterie"
+  ],
+  "hauteur": 97,
+  "hautPage": 9643,
+  "top": 9313,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/direction/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant batterie"
+  ],
+  "hauteur": 97,
+  "hautPage": 9668,
+  "top": 9339,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/direction/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant batterie"
+  ],
+  "hauteur": 97,
+  "hautPage": 6017,
+  "top": 5710,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/direction/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant batterie"
+  ],
+  "hauteur": 97,
+  "hautPage": 6054,
+  "top": 5747,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/direction/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant batterie",
+   "Contre-visite",
+   "Changer la batterie",
+   "Recharger la batterie"
+  ],
+  "hauteur": 167,
+  "hautPage": 9713,
+  "top": 9313,
+  "clipH": 167
+ },
+ {
+  "chemin": "/voyants/direction/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant batterie",
+   "Contre-visite",
+   "Changer la batterie",
+   "Recharger la batterie"
+  ],
+  "hauteur": 167,
+  "hautPage": 9738,
+  "top": 9339,
+  "clipH": 167
+ },
+ {
+  "chemin": "/voyants/direction/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant batterie",
+   "Contre-visite",
+   "Changer la batterie",
+   "Recharger la batterie"
+  ],
+  "hauteur": 97,
+  "hautPage": 6017,
+  "top": 5710,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/direction/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant batterie",
+   "Contre-visite",
+   "Changer la batterie",
+   "Recharger la batterie"
+  ],
+  "hauteur": 97,
+  "hautPage": 6054,
+  "top": 5747,
+  "clipH": 97
+ },
+ {
+  "chemin": "/contre-visite-controle-technique/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant moteur",
+   "Voyant airbag",
+   "Voyants ABS et ESP",
+   "Usure des pneus"
+  ],
+  "hauteur": 167,
+  "hautPage": 9577,
+  "top": 9177,
+  "clipH": 167
+ },
+ {
+  "chemin": "/contre-visite-controle-technique/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant moteur",
+   "Voyant airbag",
+   "Voyants ABS et ESP",
+   "Usure des pneus"
+  ],
+  "hauteur": 167,
+  "hautPage": 9669,
+  "top": 9269,
+  "clipH": 167
+ },
+ {
+  "chemin": "/contre-visite-controle-technique/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant moteur",
+   "Voyant airbag",
+   "Voyants ABS et ESP",
+   "Usure des pneus"
+  ],
+  "hauteur": 97,
+  "hautPage": 5784,
+  "top": 5476,
+  "clipH": 97
+ },
+ {
+  "chemin": "/contre-visite-controle-technique/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant moteur",
+   "Voyant airbag",
+   "Voyants ABS et ESP",
+   "Usure des pneus"
+  ],
+  "hauteur": 97,
+  "hautPage": 5784,
+  "top": 5476,
+  "clipH": 97
+ },
+ {
+  "chemin": "/contre-visite-controle-technique/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant moteur",
+   "Voyant airbag",
+   "Voyants ABS et ESP",
+   "Voyant de direction assistée",
+   "Usure des pneus"
+  ],
+  "hauteur": 250,
+  "hautPage": 9660,
+  "top": 9177,
+  "clipH": 250
+ },
+ {
+  "chemin": "/contre-visite-controle-technique/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant moteur",
+   "Voyant airbag",
+   "Voyants ABS et ESP",
+   "Voyant de direction assistée",
+   "Usure des pneus"
+  ],
+  "hauteur": 250,
+  "hautPage": 9751,
+  "top": 9269,
+  "clipH": 250
+ },
+ {
+  "chemin": "/contre-visite-controle-technique/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant moteur",
+   "Voyant airbag",
+   "Voyants ABS et ESP",
+   "Voyant de direction assistée",
+   "Usure des pneus"
+  ],
+  "hauteur": 179,
+  "hautPage": 5866,
+  "top": 5476,
+  "clipH": 179
+ },
+ {
+  "chemin": "/contre-visite-controle-technique/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant moteur",
+   "Voyant airbag",
+   "Voyants ABS et ESP",
+   "Voyant de direction assistée",
+   "Usure des pneus"
+  ],
+  "hauteur": 179,
+  "hautPage": 5866,
+  "top": 5476,
+  "clipH": 179
+ },
+ {
+  "chemin": "/batterie-voiture/changer/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 8176,
+  "top": 7847,
+  "clipH": 97
+ },
+ {
+  "chemin": "/batterie-voiture/changer/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 8176,
+  "top": 7847,
+  "clipH": 97
+ },
+ {
+  "chemin": "/batterie-voiture/changer/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 5332,
+  "top": 5024,
+  "clipH": 97
+ },
+ {
+  "chemin": "/batterie-voiture/changer/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 5332,
+  "top": 5024,
+  "clipH": 97
+ },
+ {
+  "chemin": "/batterie-voiture/changer/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voiture qui ne démarre pas",
+   "Recharger la batterie",
+   "Voyant de direction assistée"
+  ],
+  "hauteur": 190,
+  "hautPage": 8270,
+  "top": 7847,
+  "clipH": 190
+ },
+ {
+  "chemin": "/batterie-voiture/changer/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voiture qui ne démarre pas",
+   "Recharger la batterie",
+   "Voyant de direction assistée"
+  ],
+  "hauteur": 190,
+  "hautPage": 8270,
+  "top": 7847,
+  "clipH": 190
+ },
+ {
+  "chemin": "/batterie-voiture/changer/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voiture qui ne démarre pas",
+   "Recharger la batterie",
+   "Voyant de direction assistée"
+  ],
+  "hauteur": 120,
+  "hautPage": 5355,
+  "top": 5024,
+  "clipH": 120
+ },
+ {
+  "chemin": "/batterie-voiture/changer/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voiture qui ne démarre pas",
+   "Recharger la batterie",
+   "Voyant de direction assistée"
+  ],
+  "hauteur": 120,
+  "hautPage": 5355,
+  "top": 5024,
+  "clipH": 120
+ },
+ {
+  "chemin": "/batterie-voiture/recharger/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 9631,
+  "top": 9301,
+  "clipH": 97
+ },
+ {
+  "chemin": "/batterie-voiture/recharger/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 9656,
+  "top": 9327,
+  "clipH": 97
+ },
+ {
+  "chemin": "/batterie-voiture/recharger/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 6233,
+  "top": 5926,
+  "clipH": 97
+ },
+ {
+  "chemin": "/batterie-voiture/recharger/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 6233,
+  "top": 5926,
+  "clipH": 97
+ },
+ {
+  "chemin": "/batterie-voiture/recharger/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voiture qui ne démarre pas",
+   "Changer la batterie",
+   "Voyant de direction assistée"
+  ],
+  "hauteur": 190,
+  "hautPage": 9724,
+  "top": 9301,
+  "clipH": 190
+ },
+ {
+  "chemin": "/batterie-voiture/recharger/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voiture qui ne démarre pas",
+   "Changer la batterie",
+   "Voyant de direction assistée"
+  ],
+  "hauteur": 190,
+  "hautPage": 9750,
+  "top": 9327,
+  "clipH": 190
+ },
+ {
+  "chemin": "/batterie-voiture/recharger/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voiture qui ne démarre pas",
+   "Changer la batterie",
+   "Voyant de direction assistée"
+  ],
+  "hauteur": 120,
+  "hautPage": 6257,
+  "top": 5926,
+  "clipH": 120
+ },
+ {
+  "chemin": "/batterie-voiture/recharger/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voiture qui ne démarre pas",
+   "Changer la batterie",
+   "Voyant de direction assistée"
+  ],
+  "hauteur": 120,
+  "hautPage": 6257,
+  "top": 5926,
+  "clipH": 120
+ },
+ {
+  "chemin": "/voiture-ne-demarre-pas/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant batterie",
+   "Voyant de préchauffage",
+   "Batterie de voiture",
+   "Recharger la batterie",
+   "Changer la batterie"
+  ],
+  "hauteur": 226,
+  "hautPage": 13063,
+  "top": 12604,
+  "clipH": 226
+ },
+ {
+  "chemin": "/voiture-ne-demarre-pas/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant batterie",
+   "Voyant de préchauffage",
+   "Batterie de voiture",
+   "Recharger la batterie",
+   "Changer la batterie"
+  ],
+  "hauteur": 226,
+  "hautPage": 13113,
+  "top": 12654,
+  "clipH": 226
+ },
+ {
+  "chemin": "/voiture-ne-demarre-pas/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant batterie",
+   "Voyant de préchauffage",
+   "Batterie de voiture",
+   "Recharger la batterie",
+   "Changer la batterie"
+  ],
+  "hauteur": 156,
+  "hautPage": 8331,
+  "top": 7964,
+  "clipH": 156
+ },
+ {
+  "chemin": "/voiture-ne-demarre-pas/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant batterie",
+   "Voyant de préchauffage",
+   "Batterie de voiture",
+   "Recharger la batterie",
+   "Changer la batterie"
+  ],
+  "hauteur": 156,
+  "hautPage": 8331,
+  "top": 7964,
+  "clipH": 156
+ },
+ {
+  "chemin": "/voiture-ne-demarre-pas/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant batterie",
+   "Voyant de préchauffage",
+   "Batterie de voiture",
+   "Recharger la batterie",
+   "Changer la batterie",
+   "Voyant AdBlue"
+  ],
+  "hauteur": 238,
+  "hautPage": 13074,
+  "top": 12604,
+  "clipH": 238
+ },
+ {
+  "chemin": "/voiture-ne-demarre-pas/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant batterie",
+   "Voyant de préchauffage",
+   "Batterie de voiture",
+   "Recharger la batterie",
+   "Changer la batterie",
+   "Voyant AdBlue"
+  ],
+  "hauteur": 238,
+  "hautPage": 13125,
+  "top": 12654,
+  "clipH": 238
+ },
+ {
+  "chemin": "/voiture-ne-demarre-pas/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant batterie",
+   "Voyant de préchauffage",
+   "Batterie de voiture",
+   "Recharger la batterie",
+   "Changer la batterie",
+   "Voyant AdBlue"
+  ],
+  "hauteur": 156,
+  "hautPage": 8331,
+  "top": 7964,
+  "clipH": 156
+ },
+ {
+  "chemin": "/voiture-ne-demarre-pas/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant batterie",
+   "Voyant de préchauffage",
+   "Batterie de voiture",
+   "Recharger la batterie",
+   "Changer la batterie",
+   "Voyant AdBlue"
+  ],
+  "hauteur": 156,
+  "hautPage": 8331,
+  "top": 7964,
+  "clipH": 156
+ },
+ {
+  "chemin": "/voyants/adblue/",
+  "etat": "avant",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant moteur"
+  ],
+  "hauteur": 97,
+  "hautPage": 13593,
+  "top": 13263,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/adblue/",
+  "etat": "avant",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant moteur"
+  ],
+  "hauteur": 97,
+  "hautPage": 13593,
+  "top": 13263,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/adblue/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant moteur"
+  ],
+  "hauteur": 85,
+  "hautPage": 8129,
+  "top": 7833,
+  "clipH": 85
+ },
+ {
+  "chemin": "/voyants/adblue/",
+  "etat": "avant",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant moteur"
+  ],
+  "hauteur": 85,
+  "hautPage": 8154,
+  "top": 7858,
+  "clipH": 85
+ },
+ {
+  "chemin": "/voyants/adblue/",
+  "etat": "apres",
+  "w": 375,
+  "police": "chargée",
+  "liens": [
+   "Voyant moteur",
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 13593,
+  "top": 13263,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/adblue/",
+  "etat": "apres",
+  "w": 375,
+  "police": "secours",
+  "liens": [
+   "Voyant moteur",
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 13593,
+  "top": 13263,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/adblue/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "chargée",
+  "liens": [
+   "Voyant moteur",
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 8140,
+  "top": 7833,
+  "clipH": 97
+ },
+ {
+  "chemin": "/voyants/adblue/",
+  "etat": "apres",
+  "w": 1366,
+  "police": "secours",
+  "liens": [
+   "Voyant moteur",
+   "Voiture qui ne démarre pas"
+  ],
+  "hauteur": 97,
+  "hautPage": 8166,
+  "top": 7858,
+  "clipH": 97
+ }
+]
