@@ -42,6 +42,11 @@ export interface MesurePage {
   largeurPage: number;
   /** Éléments qui dépassent le bord droit hors d'un bloc qui défile de lui-même (sélecteur court, bord droit). */
   debordements: readonly string[];
+  /**
+   * Libellés de la grille des dessins (accueil, encadré de la page outil) dont un morceau (mot, ou partie d'un mot jusqu'à une
+   * coupure prévue, avec son tiret) est plus large que sa tuile : il déborderait ou serait coupé sans tiret (revue du lot U2).
+   */
+  tuilesDebordantes?: readonly string[] | undefined;
   /** Page avec un encadré de décision (pages éditoriales). */
   encadre: boolean;
   /** Bas de la réponse directe (page informative), sinon null. */
@@ -95,6 +100,8 @@ export function evaluerMesure(m: MesurePage): ConstatMesure[] {
   if (m.police === 'chargee' && !m.policeChargee) constats.push(erreur(m, "la police du site ne s'est pas chargée : mesure « police chargée » impossible"));
   if (m.largeurPage > m.largeur) constats.push(erreur(m, `la page défile horizontalement (${m.largeurPage} px de large pour ${m.largeur}) : critère WCAG 1.4.10`));
   if (m.debordements.length > 0) constats.push(erreur(m, `${m.debordements.length} élément(s) dépassent le bord droit hors d'un bloc qui défile : ${m.debordements.slice(0, 3).join(', ')}`));
+  const tuiles = m.tuilesDebordantes ?? [];
+  if (tuiles.length > 0) constats.push(erreur(m, `${tuiles.length} libellé(s) de la grille des dessins plus large(s) que leur tuile : ${tuiles.slice(0, 3).join(', ')}`));
   constats.push(...evaluerBandeau(m));
   if (m.largeur !== 375) return constats;
   // Règle 2h : sommaire sur les pages de plus de six écrans.
@@ -140,7 +147,7 @@ export function signalerMesure(m: MesurePage): string[] {
 /** Ligne de tableau lisible d'une mesure (journal de la CI et dossier de la porte). */
 export function ligneMesure(m: MesurePage): string {
   const v = (n: number | null): string => (n === null ? '–' : String(n));
-  return [m.adresse, `${m.largeur}`, m.police === 'chargee' ? 'chargée' : 'secours', v(m.basReponse), v(m.basVerdictUrgence), v(m.basPremiereSituation), v(m.basEncadre), v(m.hautIllustration), m.illustrationApresProvenance ? 'oui' : 'non', v(m.hautArbre), `${m.hauteurPage}`, m.sommaire ? 'oui' : 'non', `${m.largeurPage}`, `${m.debordements.length}`, v(m.bandeauRangees)].join(' | ');
+  return [m.adresse, `${m.largeur}`, m.police === 'chargee' ? 'chargée' : 'secours', v(m.basReponse), v(m.basVerdictUrgence), v(m.basPremiereSituation), v(m.basEncadre), v(m.hautIllustration), m.illustrationApresProvenance ? 'oui' : 'non', v(m.hautArbre), `${m.hauteurPage}`, m.sommaire ? 'oui' : 'non', `${m.largeurPage}`, `${m.debordements.length + (m.tuilesDebordantes ?? []).length}`, v(m.bandeauRangees)].join(' | ');
 }
 
 export const ENTETE_MESURES = ['Adresse', 'Largeur', 'Police', 'Réponse directe', 'Verdict et urgence', '1re situation', 'Bas de l’encadré', 'Illustration', 'Après « Notices »', 'Arbre ou étapes', 'Hauteur', 'Sommaire', 'Largeur de page', 'Débordements', 'Rangées du bandeau'].join(' | ');

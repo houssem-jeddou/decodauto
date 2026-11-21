@@ -32,9 +32,10 @@ import {
 } from '../src/lib/format2.ts';
 import { PHRASES_MAX_PARAGRAPHE, constatsParagraphes, controlerFormat2, nombreDePhrases } from '../src/lib/controle-format2.ts';
 import { marqueEtModele, modeleDeLaPage, pageVoyant, pageVoyantF2, texteRedige } from '../src/lib/modeles.ts';
-import { ACCUEIL_FORMAT2, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
+import { ACCUEIL_FORMAT2, PRESENTATIONS_THEMES, accueilFormat2Html, grilleDesVoyants, pagesListees } from '../src/lib/accueil.ts';
 import { mentionEnTete } from '../src/lib/composants.ts';
-import { LIBELLES_PICTOGRAMMES, constatsLibellesPictogrammes } from '../src/lib/pictogrammes.ts';
+import { COUPURES_LIBELLES, LIBELLES_PICTOGRAMMES, constatsCoupuresLibelles, constatsLibellesPictogrammes, libelleCoupable } from '../src/lib/pictogrammes.ts';
+import { normaliserTexte } from '../src/lib/empreinte.ts';
 import { chargerPictogrammes } from '../scripts/lib/charger.ts';
 import { typographier } from '../src/lib/html.ts';
 import { controlerPage, type Constat } from '../src/lib/controle.ts';
@@ -432,6 +433,24 @@ describe('format 2 : accueil', () => {
     assert.deepEqual(regles(constatsAccueil(html, 'index.html', { pages: adresses, outil: '/voyants/', aPropos: '/a-propos/' })), []);
     const sansOutil = accueilFormat2Html({ pages: pages.filter((p) => p.id !== 'voyants'), aPropos, grille, mention: mentionEnTete(), tuile });
     assert.ok(!sansOutil.includes('data-accueil-outil'));
+    // Lot U2 (P5) : chaque carte de thème présente le thème sous son titre, puis liste ses pages en pastilles ; la carte
+    // « Un guide indépendant » garde son paragraphe et son lien. Toutes les pages du plan construites : les quatre thèmes.
+    const toutes = pagesListees(site.plan, new Map([...site.plan.values()].filter((l) => l.type !== 'socle').map((l) => [l.id, l.id])));
+    const $t = cheerio.load(accueilFormat2Html({ pages: toutes, aPropos, grille, mention: mentionEnTete(), tuile }));
+    const cartes = $t('[data-accueil-theme]').toArray();
+    assert.deepEqual(cartes.map((c) => $t(c).attr('data-accueil-theme')).sort(), Object.keys(PRESENTATIONS_THEMES).sort());
+    for (const carte of cartes) {
+      const theme = $t(carte).attr('data-accueil-theme') as keyof typeof PRESENTATIONS_THEMES;
+      assert.ok($t(carte).children('h2').next().is('p.theme-intro'), theme);
+      assert.equal($t(carte).children('.theme-intro').text(), typographier(PRESENTATIONS_THEMES[theme]));
+      assert.equal($t(carte).children('ul.pages-du-theme').length, 1, theme);
+    }
+    assert.equal($t('[data-accueil-guide] .pages-du-theme, [data-accueil-guide] .theme-intro').length, 0);
+    // Seuls les thèmes qui ont une page construite ont leur carte.
+    assert.deepEqual($('[data-accueil-theme]').toArray().map((c) => $(c).attr('data-accueil-theme')), [...new Set(pages.map((p) => p.theme))]);
+    const css = await readFile(join(racine, 'src/styles/charte-b.css'), 'utf8');
+    // Cible tactile de 44 px pour chaque pastille (WCAG 2.5.8, Lighthouse target-size).
+    assert.match(css, /\.themes \.theme \.pages-du-theme a\{display:flex;[^}]*min-height:2\.75rem;/);
   });
 
   test('PICTO-LIBELLE : chaque fichier de src/pictogrammes a son libellé, aucun libellé sans fichier', async () => {
@@ -439,6 +458,24 @@ describe('format 2 : accueil', () => {
     assert.deepEqual(constatsLibellesPictogrammes(fichiers), []);
     assert.deepEqual(regles(constatsLibellesPictogrammes([...fichiers, 'nouveau'])), ['PICTO-LIBELLE']);
     assert.deepEqual(regles(constatsLibellesPictogrammes(fichiers.filter((f) => f !== 'stop'))), ['PICTO-LIBELLE']);
+  });
+
+  test('PICTO-COUPURE (revue du lot U2) : chaque mot de 9 lettres au moins a sa coupure, qui redonne le mot ; traits d\'union conditionnels dans les tuiles, ignorés par les contrôles', async () => {
+    assert.deepEqual(constatsCoupuresLibelles(), []);
+    assert.equal(libelleCoupable('Préchauffage'), 'Pré\u00adchauf\u00adfage');
+    assert.equal(libelleCoupable('Clé d’entretien'), 'Clé d’entre\u00adtien');
+    assert.equal(libelleCoupable('Frein à main'), 'Frein à main');
+    assert.equal(normaliserTexte(libelleCoupable('Airbag passager désactivé')), normaliserTexte('Airbag passager désactivé'));
+    assert.deepEqual(regles(constatsCoupuresLibelles({ ...LIBELLES_PICTOGRAMMES, essai: 'Stationnement' })), ['PICTO-COUPURE']);
+    assert.deepEqual(regles(constatsCoupuresLibelles(LIBELLES_PICTOGRAMMES, { ...COUPURES_LIBELLES, Direction: 'Direc|tiom' })), ['PICTO-COUPURE']);
+    assert.deepEqual(regles(constatsCoupuresLibelles(LIBELLES_PICTOGRAMMES, { ...COUPURES_LIBELLES, Direction: 'Direction' })), ['PICTO-COUPURE']);
+    assert.deepEqual(regles(constatsCoupuresLibelles(LIBELLES_PICTOGRAMMES, { ...COUPURES_LIBELLES, Moteurs: 'Mo|teurs' })), ['PICTO-COUPURE']);
+    // Grilles de l'accueil et de l'encadré de l'outil : coupures manuelles seulement, trois cases sous 375 px, tuile tenue
+    // dans sa case.
+    const css = await readFile(join(racine, 'src/styles/charte-b.css'), 'utf8');
+    assert.match(css, /\.grille-voyants li\{display:grid;min-width:0\}/);
+    assert.match(css, /\.grille-voyants a\{[^}]*min-width:0;[^}]*hyphens:manual;/);
+    assert.match(css, /@media \(max-width:23\.4rem\)\{\.grille-voyants\{grid-template-columns:repeat\(3,minmax\(0,1fr\)\)\}\}/);
   });
 });
 

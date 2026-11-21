@@ -70,6 +70,9 @@ describe('FORMAT2-MESURES : évaluation', () => {
     for (const largeur of [320, 375, 1366]) {
       assert.match(messages({ largeur, largeurPage: largeur + 22 })[0] ?? '', /défile horizontalement .* WCAG 1\.4\.10/);
       assert.match(messages({ largeur, largeurPage: largeur, debordements: ['a.bouton-voyant (342)'] })[0] ?? '', /a\.bouton-voyant \(342\)/);
+      // Revue du lot U2 : un morceau de libellé de la grille plus large que sa tuile.
+      assert.match(messages({ largeur, largeurPage: largeur, tuilesDebordantes: ['« Préchauffage » (Préchauffage 89.7 pour 73.1)'] })[0] ?? '', /1 libellé\(s\) de la grille des dessins plus large\(s\) que leur tuile : « Préchauffage »/);
+      assert.deepEqual(messages({ largeur, largeurPage: largeur, tuilesDebordantes: [] }), []);
     }
   });
 
