@@ -150,9 +150,10 @@ describe('format 2 : briques (lot F1, F1.2)', () => {
   test('bandeau : nom du site en deux parties, bouton « Trouver mon voyant » seulement si l\'outil est construit ; pied : signalement et confidentialité', () => {
     assert.match(
       bandeauFormat2({ adresseOutil: '/voyants/' }),
-      /<span class="nom-texte">decod<span>auto<\/span><\/span><\/a><a class="bouton-voyant" href="\/voyants\/" aria-label="Trouver mon voyant" data-bouton-voyant><span class="bouton-libelle-long">Trouver mon voyant<\/span><span class="bouton-libelle-court" aria-hidden="true">Mon voyant<\/span><\/a>/,
+      /<span class="nom-texte">decod<span>auto<\/span><\/span><\/a><div class="bandeau-actions"><a class="bouton-voyant" href="\/voyants\/" aria-label="Trouver mon voyant" data-bouton-voyant><span class="bouton-libelle-long">Trouver mon voyant<\/span><span class="bouton-libelle-court" aria-hidden="true">Mon voyant<\/span><\/a><\/div><\/div>$/,
     );
-    assert.ok(!bandeauFormat2({}).includes('bouton-voyant'));
+    // Sans outil ni menu : ni bouton, ni conteneur d'actions vide.
+    assert.ok(!bandeauFormat2({}).includes('bouton-voyant') && !bandeauFormat2({}).includes('bandeau-actions'));
     const html = `<html><body><header>${bandeauFormat2({})}</header><main><div class="tete">${mentionEnTete()}<h1>T</h1></div></main><footer>${piedFormat2('/voyants/moteur/', '/mentions-legales/')}</footer></body></html>`;
     assert.deepEqual(regles(constatsMentionEtSignalement(html, 'x.html', '/voyants/moteur/')), []);
     assert.deepEqual(regles(constatsLienConfidentialite(html, 'x.html', '/mentions-legales/')), []);
