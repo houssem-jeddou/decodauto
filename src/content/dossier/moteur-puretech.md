@@ -74,6 +74,8 @@ illustration:
   alt: "La jauge d'huile du moteur, à lire sur un sol plat, moteur arrêté depuis 30 minutes : le niveau doit se situer entre les repères mini et maxi"
   legende: "Contrôle du niveau d'huile, selon les notices Peugeot 208 et Citroën C3 : sur un sol plat, moteur à l'arrêt depuis 30 minutes, le niveau se situe entre les repères mini et maxi de la jauge."
 journal_modifications:
+  - date: 2026-11-21
+    resume: "Consigne de sécurité ajoutée sous le tarif du dépannage sur autoroute : feux de détresse et gilet, selon l'article R416-19 du code de la route."
   - date: 2026-11-16
     resume: "Première version du dossier : rappels publiés par RappelConso en 2020 et 2023, alertes et contrôle du niveau d'huile, couverture spéciale et plateforme d'indemnisation du constructeur."
 cout_probable:
@@ -102,7 +104,7 @@ sources:
   - notice-toyota-yaris
 auteur: houssem-jeddou
 date_publication: 2026-11-15
-date_modification: 2026-11-16
+date_modification: 2026-11-21
 date_revue: 2026-11-16
 prochaine_revue: 2027-02-16
 validation: e663cb5dc67cd375fdb2cc38574590fbedfefd03f5d10f6e0bd7d7b662a7dd31

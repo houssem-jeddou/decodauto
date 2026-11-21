@@ -139,7 +139,7 @@ sources:
   - notice-toyota-yaris
 auteur: houssem-jeddou
 date_publication: 2026-11-15
-date_modification: 2026-11-16
+date_modification: 2026-11-21
 date_revue: 2026-11-16
 prochaine_revue: 2027-11-16
 validation: 23847e5321ab708e7826a64af70ed68deead02f6671676b646f13e5e426e2318
