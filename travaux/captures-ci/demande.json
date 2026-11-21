@@ -1,6 +1,6 @@
 {
-  "lot": "U3 partie 2, pilote des images en fichiers (demande de changement n° 43)",
-  "essai": 1,
+  "lot": "U3 partie 2, pilote des images en fichiers (demande de changement n° 43), après la revue indépendante",
+  "essai": 2,
   "captures": [
     {
       "nom": "u3b-huile-ecran",
@@ -20,18 +20,45 @@
       ]
     },
     {
+      "nom": "u3b-abs-ecran",
+      "adresse": "/voyants/abs-esp/",
+      "largeurs": [
+        375,
+        1366
+      ]
+    },
+    {
       "nom": "u3b-abs-illustration",
       "adresse": "/voyants/abs-esp/",
       "zone": "[data-illustration]",
       "largeurs": [
-        375
+        375,
+        1366
       ]
     },
     {
       "nom": "u3b-pneus-ecran",
       "adresse": "/voyants/pression-pneus/",
       "largeurs": [
-        375
+        375,
+        1366
+      ]
+    },
+    {
+      "nom": "u3b-pneus-illustration",
+      "adresse": "/voyants/pression-pneus/",
+      "zone": "[data-illustration]",
+      "largeurs": [
+        375,
+        1366
+      ]
+    },
+    {
+      "nom": "u3b-outil-ecran",
+      "adresse": "/voyants/",
+      "largeurs": [
+        375,
+        1366
       ]
     },
     {
@@ -49,6 +76,15 @@
       "zone": "[data-outil-groupe=\"rouge\"]",
       "largeurs": [
         375
+      ]
+    },
+    {
+      "nom": "u3b-outil-illustration",
+      "adresse": "/voyants/",
+      "zone": "[data-illustration]",
+      "largeurs": [
+        375,
+        1366
       ]
     },
     {
