@@ -1,5 +1,8 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { cwd } from 'node:process';
 // Feuille de style de la page seule, selon son format (demande de changement n° 30, lot F1 ; travaux/etape-13/f1/conception.md,
 // §2) : texte traité et minifié par Vite (?inline), posé en ligne ; jamais les deux feuilles sur une même page.
 import cssFormat1 from '../styles/site.css?inline';
@@ -51,7 +54,9 @@ const adresseOutil = outilConstruit ? (await getEntry('plan-du-site', ID_OUTIL_V
 // est construite.
 const editoriales = format === 2 ? (await Promise.all((['voyant', 'code-defaut', 'panne', 'fluide', 'pneus', 'dossier'] as const).map((type) => getCollection(type)))).flat() : [];
 const libelles = new Map(editoriales.map((entree) => [(entree.data as PageEditoriale).id, (entree.data as PageEditoriale).libelle_court]));
-const plan = format === 2 ? new Map((await getCollection('plan-du-site')).map((entree) => [entree.id, { ...entree.data, id: entree.id }])) : new Map();
+// Le plan dans l'ordre du fichier (data/plan-du-site.json, qui fait foi), comme l'accueil : la collection ne garde pas cet ordre.
+const lignesDuPlan = format === 2 ? (JSON.parse(await readFile(join(cwd(), 'data/plan-du-site.json'), 'utf8')) as { id: string; adresse: string; type: string; theme: Theme }[]) : [];
+const plan = new Map(lignesDuPlan.map((ligne) => [ligne.id, ligne]));
 const pagesDuMenu = format === 2 ? pagesListees(plan, libelles) : [];
 const menu = format === 2 ? menuFormat2({ pages: pagesDuMenu, adressePage: sansCanonical ? undefined : Astro.url.pathname }) : '';
 const aPropos = format === 2 ? (await getCollection('socle')).map((entree) => entree.data as PageSaisie<'socle'>).find((page) => page.id === PAGE_METHODE) : undefined;
