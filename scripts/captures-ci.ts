@@ -103,7 +103,7 @@ try {
               }
               mesure = ` haut ${r.haut} hauteur ${r.hauteur} page ${r.page}`;
               const y = Math.max(0, r.haut - 16);
-              image = await page.screenshot({ type: 'png', fullPage: true, clip: { x: 0, y, width: largeur, height: Math.min(r.hauteur + 32, r.page - y) } });
+              image = await page.screenshot({ type: 'png', captureBeyondViewport: true, clip: { x: 0, y, width: largeur, height: Math.min(r.hauteur + 32, r.page - y) } });
             }
             const nom = `${c.nom}-${largeur}${police === 'secours' ? '-secours' : ''}.png`;
             const texte = Buffer.from(image).toString('base64');

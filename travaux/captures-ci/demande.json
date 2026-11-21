@@ -1,11 +1,57 @@
 {
   "lot": "U1, menu du site (demande de changement n° 40)",
   "captures": [
-    { "nom": "u1-moteur-ecran", "adresse": "/voyants/moteur/", "largeurs": [320, 375, 390, 1366] },
-    { "nom": "u1-moteur-menu-ouvert", "adresse": "/voyants/moteur/", "ouvrir": "[data-menu]", "largeurs": [375, 1366] },
-    { "nom": "u1-404-menu-ouvert", "adresse": "/404.html", "ouvrir": "[data-menu]", "largeurs": [375] },
-    { "nom": "u1-accueil-ecran", "adresse": "/", "largeurs": [375, 1366] },
-    { "nom": "u1-outil-ecran", "adresse": "/voyants/", "largeurs": [375] },
-    { "nom": "u1-moteur-pied", "adresse": "/voyants/moteur/", "zone": "footer.pied", "largeurs": [375, 1366] }
-  ]
+    {
+      "nom": "u1-moteur-ecran",
+      "adresse": "/voyants/moteur/",
+      "largeurs": [
+        320,
+        375,
+        390,
+        1366
+      ]
+    },
+    {
+      "nom": "u1-moteur-menu-ouvert",
+      "adresse": "/voyants/moteur/",
+      "ouvrir": "[data-menu]",
+      "largeurs": [
+        375,
+        1366
+      ]
+    },
+    {
+      "nom": "u1-404-menu-ouvert",
+      "adresse": "/404.html",
+      "ouvrir": "[data-menu]",
+      "largeurs": [
+        375
+      ]
+    },
+    {
+      "nom": "u1-accueil-ecran",
+      "adresse": "/",
+      "largeurs": [
+        375,
+        1366
+      ]
+    },
+    {
+      "nom": "u1-outil-ecran",
+      "adresse": "/voyants/",
+      "largeurs": [
+        375
+      ]
+    },
+    {
+      "nom": "u1-moteur-pied",
+      "adresse": "/voyants/moteur/",
+      "zone": "footer.pied",
+      "largeurs": [
+        375,
+        1366
+      ]
+    }
+  ],
+  "essai": 2
 }
