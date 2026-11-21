@@ -239,7 +239,7 @@ a[data-lien-notices]{white-space:nowrap}
 }
 .liees ul{list-style:none;padding:0;margin:.5rem 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(10rem,1fr));gap:.5rem}
 .liees a{display:flex;align-items:center;gap:.5rem;padding:.5rem .6rem;text-decoration:none;color:var(--texte);font-weight:600;font-size:.9375rem;min-height:3.2rem}
-.liees .tuile{width:2.2rem;height:2.2rem}.liees .tuile svg{width:1.55rem;height:1.55rem}
+.liees .tuile{flex:none;width:2.2rem;height:2.2rem}.liees .tuile svg{width:1.55rem;height:1.55rem}
 details.sources{margin:1.5rem 0 0;padding:.7rem .9rem}
 details.sources summary{cursor:pointer;font-family:var(--police-titre);font-weight:700;font-size:1.15rem}
 details.sources li{font-size:.875rem;color:var(--texte-doux);margin:.35rem 0}
