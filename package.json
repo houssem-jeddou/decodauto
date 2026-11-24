@@ -26,7 +26,8 @@
     "production": "node scripts/verifier-production.ts",
     "paquet": "node scripts/paquet-validation.ts --pictogrammes-obligatoires",
     "briefs": "node scripts/briefs.ts",
-    "passage": "node scripts/passage.ts"
+    "passage": "node scripts/passage.ts",
+    "photos": "node scripts/photos.ts"
   },
   "dependencies": {
     "astro": "7.4.2"
@@ -36,6 +37,7 @@
     "@lhci/cli": "0.15.1",
     "cheerio": "1.2.0",
     "puppeteer-core": "24.43.1",
+    "sharp": "0.35.5",
     "typescript": "6.0.3",
     "wrangler": "4.152.0",
     "yaml": "2.9.1"
