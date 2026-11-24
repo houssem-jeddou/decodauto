@@ -45,6 +45,7 @@ import {
 import { CONSIGNE_MOTS_MAX, FOURCHETTE_SOURCES_MIN, FOURCHETTE_VALIDITE_JOURS, GRILLE_COUTS, rangTranche, TRANCHE_MIN_PRISE_EN_CHARGE, type TrancheCout, type TrancheGrille } from '../schemas/cout.ts';
 import { schemasPage, type PageEditoriale } from '../schemas/pages.ts';
 import { plusMois, type Citation } from '../schemas/briques.ts';
+import { photosParPage } from './photos.ts';
 import { GRILLE_URGENCES, GRILLE_VERDICTS, MOTS_REPERES, urgenceAdmise } from '../schemas/grille.ts';
 import {
   CHAMPS_CALCULES,
@@ -862,7 +863,8 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   if (!ctx.auteurs.has(page.auteur)) {
     constats.push(erreur('R7-AUTEUR-INCONNU', `auteur « ${page.auteur} » : aucune fiche auteur dans la page « à propos » (socle)`, fichier));
   }
-  if (page.image === undefined) {
+  // Une photo du registre data/photos.json (demande de changement n° 42) est l'image de l'article (propriété image).
+  if (page.image === undefined && !photosParPage().has(page.id)) {
     constats.push(alerte('R7-IMAGE-RECOMMANDEE', "pas d'image : Google la recommande pour les articles", fichier));
   }
 

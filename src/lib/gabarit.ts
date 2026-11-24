@@ -37,6 +37,7 @@ import { indexerPlan } from './plan.ts';
 import type { DonneesCouts } from './cout.ts';
 import type { PlanDuSite, VoyantBase } from '../schemas/donnees.ts';
 import type { PageEditoriale } from '../schemas/pages.ts';
+import type { Photo } from '../schemas/photos.ts';
 
 /** Données du site dont le gabarit a besoin (lues une fois à la construction). */
 export interface DonneesSite {
@@ -59,6 +60,8 @@ export interface DonneesSite {
    * et leurs tuiles de voyants sont des images de fichiers servis (src/lib/images-fichiers.ts).
    */
   imagesEnFichiers?: ReadonlySet<string>;
+  /** Photo sous licence libre de chaque page du registre `data/photos.json` (demande de changement n° 42, src/lib/photos.ts). */
+  photos?: ReadonlyMap<string, Photo>;
 }
 
 /**
