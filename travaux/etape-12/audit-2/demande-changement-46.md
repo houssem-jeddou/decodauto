@@ -12,9 +12,10 @@ maquette V1). **Statut : brouillon, non présenté, non accepté.** Rien n'est a
 - **Contrôle SIGNALER-ERREUR-ABSENT** (`CONTROLES.md`).
 
 ## 2. Raison (données)
-- **Mesure du 25/11** (`audit.md`, C9 ; `mesures/ux.json`) : au téléphone, le seul lien « Signaler une erreur » est en bas
-  de page, après « À lire aussi » et « Sources » : à 7 340 px (11 écrans) sur la page P0087, 11 563 px (17,3 écrans) sur
-  le voyant moteur, 10 151 px (15,2 écrans) sur la surchauffe moteur. Un lecteur qui doute de la décision la lit en haut
+- **Mesure du 25/11** (`audit.md`, C9 ; `mesures/maquettes-avant.json`, `ux.json`) : au téléphone, le seul lien
+  « Signaler une erreur » est dans le pied de page, après « À lire aussi » et « Sources » : le pied commence à 7 576 px
+  (11,4 écrans) sur la page P0087 ; « À lire aussi », au-dessus du pied, est à 17,3 écrans sur le voyant moteur et 15,2
+  sur la surchauffe moteur. Un lecteur qui doute de la décision la lit en haut
   de page et ne voit pas où le dire.
 - Le site n'a pas de relecteur mécanicien (`docs/01`, page « à propos ») : les signalements des lecteurs sont une source de
   correction ; le lien pré-rempli (adresse de la page dans l'objet et le corps) existe déjà.
