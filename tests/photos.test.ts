@@ -27,7 +27,7 @@ import { LARGEUR_SOURCE_MIN, LICENCES_PHOTOS, photoSchema, type Photo } from '..
 import { articleJsonLd, scriptJsonLd } from '../src/lib/donnees-structurees.ts';
 import { constatsFichiersPhotos, constatsPhotoDeLaPage, lireWebp, problemesFichierPhoto } from '../scripts/lib/photos.ts';
 import { copierPhotos, photosReferencees } from '../scripts/integration-photos.ts';
-import { empreinteSource } from '../scripts/photos.ts';
+import { CLIENT, delaiRetryAfter, empreinteSource } from '../scripts/photos.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const lire = (chemin: string): Promise<string> => readFile(join(racine, chemin), 'utf8');
@@ -35,6 +35,18 @@ const regles = (constats: readonly { regle: string }[]): string[] => [...new Set
 const sha256 = (b: Buffer): string => createHash('sha256').update(b).digest('hex');
 
 const photos = registrePhotos();
+
+describe('photos : requêtes vers Commons (scripts/photos.ts)', () => {
+  test('User-Agent conforme à la politique de Wikimedia : client, adresse du site, contact publié', () => {
+    assert.equal(CLIENT, 'decodauto-photos/1.0 (https://decodauto.com/a-propos/; erreur@decodauto.com)');
+  });
+  test('Retry-After lu en secondes ou en date HTTP', () => {
+    assert.equal(delaiRetryAfter('600'), 600_000);
+    assert.equal(delaiRetryAfter(null), undefined);
+    assert.equal(delaiRetryAfter('n’importe quoi'), undefined);
+    assert.equal(delaiRetryAfter('Wed, 25 Nov 2026 10:00:30 GMT', Date.parse('Wed, 25 Nov 2026 10:00:00 GMT')), 30_000);
+  });
+});
 
 describe('photos : registre (data/photos.json)', () => {
   test('les sept photos acceptées par Houssem le 24/11/2026 à 19 h 19, une par page, chaque page au plan et au format 2', async () => {

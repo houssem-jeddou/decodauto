@@ -4,26 +4,34 @@
 //                                         l'adresse de la licence, l'empreinte SHA-1, les dimensions et les adresses de chaque
 //                                         photo du registre ; s'arrête sur le premier écart (rien n'est téléchargé) ;
 //   node scripts/photos.ts --telecharger  vérifie (comme --verifier), puis télécharge chaque original absent dans .cache/photos/
-//                                         (jamais versionné), contrôlé par son empreinte SHA-1 ; respecte la limite de débit de
-//                                         Commons (réponse 429 : attente, puis nouvel essai) ;
+//                                         (jamais versionné), contrôlé par son empreinte SHA-1 ; une requête par fichier, 10 s
+//                                         d'écart ; sur une réponse 429, attend ce que dit Retry-After (10 s au moins), fait un
+//                                         seul nouvel essai, et arrête la série si la 429 persiste (dépôt manuel alors) ;
 //   node scripts/photos.ts                produit, depuis les originaux téléchargés : recadrage du registre (3:2), floutage
 //                                         éventuel, WebP en 480, 800 et 1 200 px de large, sans métadonnées (ni EXIF, ni XMP,
 //                                         ni profil ICC), dans src/photos/ ; réécrit src/photos/empreintes.json ;
 //   node scripts/photos.ts --apercus <dossier>  écrit, pour le paquet, l'original réduit (1 000 px) avec la zone gardée (et
 //                                         floutée) tracée, et le recadrage réduit à la même largeur, sans métadonnées.
-// Les requêtes vers Commons portent un nom de client générique, sans donnée personnelle ni nom du site.
+// Les requêtes vers Commons portent l'en-tête User-Agent que demande la politique de Wikimedia (nom du client, adresse du
+// site et adresse de contact publiée sur le site : ADRESSE_SIGNALEMENT), décision de Houssem du 25/11/2026.
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import sharp, { type Sharp } from 'sharp';
 import { FICHIER_EMPREINTES_PHOTOS, LARGEURS_PHOTOS, SOURCE_PHOTOS, hauteurPhoto, nomFichierPhoto, registrePhotos } from '../src/lib/photos.ts';
 import type { Photo } from '../src/schemas/photos.ts';
+import { ADRESSE_SIGNALEMENT, URL_SITE } from '../src/lib/site.ts';
 import { problemesFichierPhoto } from './lib/photos.ts';
 
 const RACINE = process.cwd();
 /** Originaux téléchargés (jamais versionnés : .gitignore). */
 export const CACHE_ORIGINAUX = '.cache/photos';
-const CLIENT = 'photo-licence-check/1.0 (metadata verification script)';
+/** User-Agent conforme à la politique de Wikimedia : « decodauto-photos/1.0 (https://decodauto.com/a-propos/; erreur@decodauto.com) ». */
+export const CLIENT = `decodauto-photos/1.0 (${URL_SITE}/a-propos/; ${ADRESSE_SIGNALEMENT})`;
+/** Écart entre deux requêtes vers Commons, et attente minimale avant le nouvel essai d'une réponse 429. */
+const ECART_MS = 10_000;
+/** Attente au-delà de laquelle on ne patiente pas : la série s'arrête (Retry-After respecté, aucun essai plus tôt). */
+const ATTENTE_MAX_MS = 600_000;
 const API = 'https://commons.wikimedia.org/w/api.php';
 /** Réglages de l'encodage WebP (entrent dans l'empreinte de la source). */
 const WEBP = { quality: 80, effort: 6, smartSubsample: true } as const;
@@ -40,18 +48,33 @@ export async function empreinteSource(p: Photo, texteDuScript: string): Promise<
   return sha('sha256', JSON.stringify({ sha1: p.sha1, recadrage: p.recadrage, floutage: p.floutage ?? [], largeurs: LARGEURS_PHOTOS, webp: WEBP, flou: FLOU, script: sha('sha256', texteDuScript) }));
 }
 
-/** Essais par requête (réponse 429) : PHOTOS_ESSAIS, 8 par défaut. */
-const ESSAIS = Number(process.env['PHOTOS_ESSAIS'] ?? 8);
+/** Réponse 429 qui persiste après le nouvel essai : la série s'arrête (dépôt manuel dans .cache/photos/). */
+class LimiteDeDebit extends Error {}
 
-async function obtenir(url: string, essais = ESSAIS): Promise<Response> {
-  for (let i = 1; ; i += 1) {
-    const reponse = await fetch(url, { headers: { 'user-agent': CLIENT } });
-    if (reponse.status !== 429 || i >= essais) return reponse;
-    const delai = Math.max(Number(reponse.headers.get('retry-after') ?? 0) * 1000, 30_000 * i);
-    console.log(`  429 (limite de débit de Commons) : nouvel essai dans ${Math.round(delai / 1000)} s`);
-    await reponse.arrayBuffer();
-    await attendre(delai);
+/** Délai demandé par Retry-After (secondes ou date HTTP), en millisecondes ; undefined s'il manque ou ne se lit pas. */
+export function delaiRetryAfter(valeur: string | null, maintenant = Date.now()): number | undefined {
+  if (valeur === null || valeur.trim() === '') return undefined;
+  if (/^\d+$/.test(valeur.trim())) return Number(valeur.trim()) * 1000;
+  const date = Date.parse(valeur);
+  return Number.isNaN(date) ? undefined : Math.max(0, date - maintenant);
+}
+
+/** Une requête ; sur une réponse 429, un seul nouvel essai après Retry-After (10 s au moins) ; 429 encore : arrêt. */
+async function obtenir(url: string): Promise<Response> {
+  const premiere = await fetch(url, { headers: { 'user-agent': CLIENT } });
+  if (premiere.status !== 429) return premiere;
+  await premiere.arrayBuffer();
+  const retryAfter = premiere.headers.get('retry-after');
+  const delai = Math.max(delaiRetryAfter(retryAfter) ?? 0, ECART_MS);
+  if (delai > ATTENTE_MAX_MS) throw new LimiteDeDebit(`429 sur ${url} : Retry-After « ${String(retryAfter)} » (${Math.round(delai / 1000)} s), série arrêtée sans nouvel essai`);
+  console.log(`  429 (Retry-After : ${retryAfter ?? 'absent'}) : un seul nouvel essai dans ${Math.round(delai / 1000)} s`);
+  await attendre(delai);
+  const seconde = await fetch(url, { headers: { 'user-agent': CLIENT } });
+  if (seconde.status === 429) {
+    await seconde.arrayBuffer();
+    throw new LimiteDeDebit(`429 persistante sur ${url} après un nouvel essai (Retry-After : ${seconde.headers.get('retry-after') ?? 'absent'}), série arrêtée`);
   }
+  return seconde;
 }
 
 interface InfoCommons {
@@ -138,6 +161,7 @@ async function telecharger(photos: readonly Photo[]): Promise<string[]> {
       console.log(`déjà là : ${p.id}`);
       continue;
     }
+    await attendre(ECART_MS);
     const reponse = await obtenir(p.fichier_commons);
     const octets = Buffer.from(await reponse.arrayBuffer());
     if (!reponse.ok || sha('sha1', octets) !== p.sha1) {
@@ -146,7 +170,6 @@ async function telecharger(photos: readonly Photo[]): Promise<string[]> {
     }
     await writeFile(cheminOriginal(p), octets);
     console.log(`téléchargé : ${p.id} (${octets.length} octets, SHA-1 conforme)`);
-    await attendre(5_000);
   }
   return manquants;
 }
@@ -222,6 +245,16 @@ async function apercus(photos: readonly Photo[], dossier: string): Promise<void>
 
 async function principal(): Promise<void> {
   const args = process.argv.slice(2);
+  try {
+    await executer(args);
+  } catch (e) {
+    if (!(e instanceof LimiteDeDebit)) throw e;
+    console.error(`Limite de débit de Commons : ${e.message}. Dépôt manuel des originaux dans ${CACHE_ORIGINAUX}/ (contrôle du SHA-1).`);
+    process.exit(2);
+  }
+}
+
+async function executer(args: readonly string[]): Promise<void> {
   const photos = registrePhotos();
   if (args.includes('--verifier') || args.includes('--telecharger')) {
     const ecarts = await verifier(photos);
