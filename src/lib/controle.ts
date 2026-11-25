@@ -123,6 +123,22 @@ const alerte = (regle: string, message: string, fichier?: string): Constat => ({
   fichier,
 });
 
+/**
+ * Image de l'article (R7-IMAGE-RECOMMANDEE) : le champ `image` de la page, ou la photo du registre data/photos.json (demande
+ * de changement n° 42), affichée seulement au format 2. Une page n'a pas les deux : la photo du registre serait l'image du
+ * JSON-LD et le champ `image` resterait sans effet (PHOTO-REGISTRE).
+ */
+export function constatsImageDeLaPage(
+  page: { id: string; image?: string | undefined; format?: 1 | 2 | undefined },
+  photos: ReadonlyMap<string, unknown>,
+  fichier?: string,
+): Constat[] {
+  const photo = photos.has(page.id);
+  if (page.image !== undefined && photo) return [erreur('PHOTO-REGISTRE', "la page a un champ image et une photo au registre data/photos.json : une seule image d'article", fichier)];
+  if (page.image === undefined && !(photo && (page.format ?? 1) === 2)) return [alerte('R7-IMAGE-RECOMMANDEE', "pas d'image : Google la recommande pour les articles", fichier)];
+  return [];
+}
+
 /** Codes d'alerte demandés par --echouer-sur : un code, ou plusieurs séparés par des virgules. */
 export const codesEchec = (echouerSur: string | undefined): string[] =>
   (echouerSur ?? '').split(',').map((code) => code.trim()).filter((code) => code !== '');
@@ -863,10 +879,7 @@ export function controlerPage(entree: EntreePage, ctx: Contexte, html?: string):
   if (!ctx.auteurs.has(page.auteur)) {
     constats.push(erreur('R7-AUTEUR-INCONNU', `auteur « ${page.auteur} » : aucune fiche auteur dans la page « à propos » (socle)`, fichier));
   }
-  // Une photo du registre data/photos.json (demande de changement n° 42) est l'image de l'article (propriété image).
-  if (page.image === undefined && !photosParPage().has(page.id)) {
-    constats.push(alerte('R7-IMAGE-RECOMMANDEE', "pas d'image : Google la recommande pour les articles", fichier));
-  }
+  constats.push(...constatsImageDeLaPage(page, photosParPage(), fichier));
 
   // Champs calculés : impossibles à produire sans plan ou sans situation.
   if (ligneDuPlan !== undefined && ligneDuPlan.type === typeEditorial) {

@@ -50,7 +50,7 @@
     },
     "modifications": "recadrée",
     "alt": "Vase d'expansion du liquide de refroidissement d'une Volkswagen Golf, en plastique translucide, fermé par son bouchon bleu",
-    "legende": "Le vase d'expansion du liquide de refroidissement d'une Volkswagen Golf, fermé par son bouchon : c'est là que le niveau se lit, moteur froid.",
+    "legende": "Le vase d'expansion du liquide de refroidissement d'une Volkswagen Golf, fermé par son bouchon : le niveau se lit sur ce vase, moteur froid.",
     "verification": "Vérifié à pleine résolution le 24/11/2026. Écartés par le recadrage : le marquage « topran 103006 » (marque et référence de la pièce) sous le bouchon, en entier, et l'étiquette de vidange manuscrite d'un garage (date, prix, marque d'huile), à gauche. Restent : le bouchon (pictogramme de mise en garde moulé), la sangle de maintien (flèche et « OPEN » moulés), le dôme d'amortisseur à droite. Aucune plaque, aucun numéro de série, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
     "acceptation": {
       "par": "Houssem",
@@ -118,38 +118,8 @@
     ],
     "modifications": "recadrée, floutée en partie",
     "alt": "Étiquette des pressions de pneus collée sur la carrosserie blanche d'une Honda Accord, avec la dimension des pneus et les pressions de l'avant, de l'arrière et de la roue de secours",
-    "legende": "L'étiquette des pressions de pneus d'une Honda Accord, avec une valeur pour l'avant, l'arrière et la roue de secours. Les valeurs sont propres à chaque voiture.",
+    "legende": "L'étiquette des pressions de pneus d'une Honda Accord, avec une valeur pour l'avant, l'arrière et la roue de secours : ces valeurs ne valent que pour cette voiture, celles de la vôtre sont sur son étiquette.",
     "verification": "Vérifié à pleine résolution le 25/11/2026. Flouté : le code QR de l'étiquette, lisible à pleine résolution, de contenu inconnu. Restent lisibles : la dimension des pneus (235/45R18 94V, T135/90D16), les pressions et la mention « TVL T3 » de l'étiquette, communes à tout un modèle, pas un numéro de série. Écartée par le recadrage : une seconde étiquette, floue, en haut. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
-    "acceptation": {
-      "par": "Houssem",
-      "date": "2026-11-24",
-      "heure": "19:19",
-      "reponse": "OUI pour tout. J'accepte toutes les photos"
-    }
-  },
-  {
-    "id": "temoin-usure-pneu",
-    "page": "usure-des-pneus",
-    "nature": "organe",
-    "page_commons": "https://commons.wikimedia.org/wiki/File:Tread_Wear_Indicators_of_Studless_Tire.jpg",
-    "fichier_commons": "https://upload.wikimedia.org/wikipedia/commons/9/95/Tread_Wear_Indicators_of_Studless_Tire.jpg",
-    "sha1": "aa18dba91c69971ac30570287e4de2cde3f3ec1b",
-    "largeur_originale": 4096,
-    "hauteur_originale": 3024,
-    "auteur": "VVVN",
-    "licence": "CC BY 3.0",
-    "url_licence": "https://creativecommons.org/licenses/by/3.0",
-    "date_releve": "2026-11-24",
-    "recadrage": {
-      "x": 2015,
-      "y": 650,
-      "largeur": 1620,
-      "hauteur": 1080
-    },
-    "modifications": "recadrée",
-    "alt": "Bande de roulement d'un pneu : au fond d'une rainure, une petite bosse, le témoin d'usure ; plus bas, sur le bord du pneu, un petit triangle moulé",
-    "legende": "Le témoin d'usure d'un pneu, petite bosse au fond de la rainure. Sur le flanc, un triangle repère son emplacement.",
-    "verification": "Vérifié à pleine résolution le 25/11/2026. Selon la description de Commons, la photo montre à gauche la barre d'usure (« Wear Bar ») et à droite le témoin d'usure (« Tread Wear Indicator »). Le recadrage garde le seul témoin de droite, au bout de la rainure au-dessus du triangle, et écarte la barre de gauche (elle s'arrête vers 2 004 px, le cadre commence à 2 015 px). Écartés aussi : le nom du fabricant sur le flanc, la jante et la caisse. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
     "acceptation": {
       "par": "Houssem",
       "date": "2026-11-24",
@@ -171,15 +141,15 @@
     "url_licence": "https://creativecommons.org/licenses/by-sa/4.0",
     "date_releve": "2026-11-24",
     "recadrage": {
-      "x": 1750,
+      "x": 2064,
       "y": 0,
-      "largeur": 2250,
-      "hauteur": 1500
+      "largeur": 1932,
+      "hauteur": 1288
     },
     "modifications": "recadrée",
-    "alt": "Panneau B58 au bord d'une route de montagne : « Zone », un coffre à chaînes et un pneu marqué du symbole alpin, avec en dessous le panonceau « du 01/11 au 31/03 » et un second panonceau « sur l'ensemble du département »",
+    "alt": "Panneau B58 au bord d'une route de montagne : « Zone », un coffre à chaînes et un pneu marqué du symbole alpin, avec en dessous le panonceau « du 01/11 au 31/03 »",
     "legende": "Le panneau B58, complété par un panonceau « du 01/11 au 31/03 » : il annonce l'entrée dans une zone où l'équipement est obligatoire.",
-    "verification": "Vérifié à pleine résolution le 25/11/2026. Écartés par le recadrage : la route, un panneau de danger au loin et la vallée habitée (village, chalets), qui pouvaient situer le lieu. Restent : le panneau et ses deux panonceaux, des sapins, le ciel et une crête enneigée sans repère. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
+    "verification": "Vérifié à pleine résolution le 25/11/2026. Écartés par le recadrage : la route, un panneau de danger au loin, la vallée habitée (village, chalets) et la crête enneigée, qui pouvaient situer le lieu, ainsi que le second panonceau (« sur l'ensemble du département »), que la page ne commente pas. Restent : le panneau, le panonceau « du 01/11 au 31/03 », des sapins et le ciel. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
     "acceptation": {
       "par": "Houssem",
       "date": "2026-11-24",
@@ -202,14 +172,14 @@
     "date_releve": "2026-11-24",
     "recadrage": {
       "x": 1170,
-      "y": 290,
-      "largeur": 2480,
-      "hauteur": 1653
+      "y": 250,
+      "largeur": 2700,
+      "hauteur": 1800
     },
     "modifications": "recadrée",
     "alt": "Batterie d'une Škoda Fabia dans son bac : au fond, la borne positive, près de pastilles marquées +, et au premier plan la borne négative avec sa cosse, près d'une pastille marquée −",
     "legende": "La batterie d'une Škoda Fabia et ses deux bornes : la borne (+) au fond, la borne (-) au premier plan.",
-    "verification": "Vérifié à pleine résolution le 25/11/2026. Écartés par le recadrage : la référence de la batterie (« 1J0 915 105 AB ») et ses caractéristiques imprimées, à gauche, et le marquage du câble rouge. Restent : les pastilles + et −, des pictogrammes de sécurité, le bouchon jaune du réservoir de liquide de frein à droite ; le marquage de la cosse négative est illisible, hors de la zone nette. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
+    "verification": "Vérifié à pleine résolution le 25/11/2026. Écartés par le recadrage : la référence de la batterie (« 1J0 915 105 AB ») et ses caractéristiques imprimées, à gauche, et le marquage du câble rouge. Restent : les pastilles + et −, des pictogrammes de sécurité, le bouchon jaune du réservoir de liquide de frein à droite ; le marquage de la cosse négative et celui du câble noir, en bas à droite, sont illisibles, hors de la zone nette. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
     "acceptation": {
       "par": "Houssem",
       "date": "2026-11-24",

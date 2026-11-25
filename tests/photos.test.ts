@@ -28,6 +28,7 @@ import { articleJsonLd, scriptJsonLd } from '../src/lib/donnees-structurees.ts';
 import { constatsFichiersPhotos, constatsPhotoDeLaPage, lireWebp, problemesFichierPhoto } from '../scripts/lib/photos.ts';
 import { copierPhotos, photosReferencees } from '../scripts/integration-photos.ts';
 import { CLIENT, delaiRetryAfter, empreinteSource } from '../scripts/photos.ts';
+import { constatsImageDeLaPage } from '../src/lib/controle.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 const lire = (chemin: string): Promise<string> => readFile(join(racine, chemin), 'utf8');
@@ -48,11 +49,23 @@ describe('photos : requêtes vers Commons (scripts/photos.ts)', () => {
   });
 });
 
+describe('photos : image de l\'article (R7-IMAGE-RECOMMANDEE, PHOTO-REGISTRE)', () => {
+  const avecPhoto = new Map([['p', {}]]);
+  const regles = (page: { id: string; image?: string; format?: 1 | 2 }, registre: ReadonlyMap<string, unknown>): string[] => constatsImageDeLaPage(page, registre).map((c) => `${c.gravite}:${c.regle}`);
+  test('photo du registre affichée (format 2) : pas d\'alerte', () => assert.deepEqual(regles({ id: 'p', format: 2 }, avecPhoto), []));
+  test('photo du registre sur une page au format 1 (non affichée) : alerte maintenue', () => assert.deepEqual(regles({ id: 'p' }, avecPhoto), ['alerte:R7-IMAGE-RECOMMANDEE']));
+  test('ni photo ni image : alerte ; champ image seul : rien', () => {
+    assert.deepEqual(regles({ id: 'q', format: 2 }, avecPhoto), ['alerte:R7-IMAGE-RECOMMANDEE']);
+    assert.deepEqual(regles({ id: 'q', image: 'x.png' }, avecPhoto), []);
+  });
+  test('champ image et photo du registre : refusé (une seule image d\'article)', () => assert.deepEqual(regles({ id: 'p', image: 'x.png', format: 2 }, avecPhoto), ['erreur:PHOTO-REGISTRE']));
+});
+
 describe('photos : registre (data/photos.json)', () => {
-  test('les sept photos acceptées par Houssem le 24/11/2026 à 19 h 19, une par page, chaque page au plan et au format 2', async () => {
+  test('six des sept photos acceptées par Houssem le 24/11/2026 à 19 h 19 (le témoin d\'usure retiré à la revue), une par page, au plan et au format 2', async () => {
     assert.deepEqual(
       photos.map((p) => p.page).sort(),
-      ['batterie-recharger', 'liquide-de-frein', 'liquide-de-refroidissement', 'loi-montagne', 'niveau-huile', 'pression-des-pneus', 'usure-des-pneus'],
+      ['batterie-recharger', 'liquide-de-frein', 'liquide-de-refroidissement', 'loi-montagne', 'niveau-huile', 'pression-des-pneus'],
     );
     const plan = JSON.parse(await lire('data/plan-du-site.json')) as { id: string; type: string }[];
     for (const p of photos) {

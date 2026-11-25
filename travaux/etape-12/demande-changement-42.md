@@ -4,6 +4,9 @@
 - **Principe** : accepté par Houssem le 21/11/2026 (7 h 11), « à condition que chaque photo soit acceptée par lui avant tout
   téléchargement » (audit, §6, décision 4).
 - **Photos** : les sept, acceptées par Houssem le 24/11/2026 à 19 h 19 (« OUI pour tout. J'accepte toutes les photos »).
+  Six sont mises en place. Celle du témoin d'usure est retirée du lot à la revue indépendante : recadrée sur le seul témoin
+  de droite, comme demandé, elle ne le montre pas assez (paquet, §2). La page de l'usure des pneus garde son illustration
+  seule ; une autre photo pourra lui être proposée, à faire accepter par Houssem.
 - **Reste à valider** : ce texte, le composant et les captures, sur la pull request du lot, avant toute fusion.
 
 Format de `docs/03` : élément concerné, changement proposé, raison (données), impact sur ce qui est validé, contrôles à
@@ -20,26 +23,26 @@ relancer.
 - **Politique de confidentialité** (`#confidentialite`) et TIERS-RESSOURCE : aucune ressource d'un autre site.
 - **Charte graphique** (`docs/11`, rangée « Illustration ») et feuille `src/styles/charte-b.css`.
 - **Règle 14** (indexation durable) : date « Mis à jour le » (`date_modification`, `lastmod`).
-- **Sept pages en ligne**, au format 2 : `/huile-moteur/verifier-niveau/`, `/liquide-de-refroidissement/`,
-  `/liquide-de-frein/`, `/pression-des-pneus/`, `/usure-des-pneus/`, `/loi-montagne/`, `/batterie-voiture/recharger/`.
+- **Six pages en ligne**, au format 2 : `/huile-moteur/verifier-niveau/`, `/liquide-de-refroidissement/`,
+  `/liquide-de-frein/`, `/pression-des-pneus/`, `/loi-montagne/`, `/batterie-voiture/recharger/`.
 
 ## 2. Raison (données)
 - **Audit, constat C8** : le site n'a aucune photo réelle. Houssem ne peut pas en fournir (décision du 15/11, 20 h 55).
   Les illustrations dessinées montrent un schéma. Elles ne montrent pas à quoi ressemble la vraie pièce sous un capot, ni
   le vrai panneau.
-- **Règle 2i** : le visuel « montre où regarder ». Sur ces sept pages, le lecteur doit trouver une pièce ou un repère :
-  jauge, vase d'expansion, réservoir, étiquette de pression, témoin d'usure, panneau B58, bornes de la batterie. Une photo
+- **Règle 2i** : le visuel « montre où regarder ». Sur ces six pages, le lecteur doit trouver une pièce ou un repère :
+  jauge, vase d'expansion, réservoir, étiquette de pression, panneau B58, bornes de la batterie. Une photo
   le montre tel qu'il le verra.
 - **Requêtes de ces pages** (`docs/09`, volumes indicatifs par mois) :
   - liquide de refroidissement : 31 600 ;
   - liquide de frein : 31 600 ;
-  - pression des pneus, niveau d'huile, loi montagne, usure des pneus et recharge de la batterie : de quelques centaines à
+  - pression des pneus, niveau d'huile, loi montagne et recharge de la batterie : de quelques centaines à
     quelques milliers chacune.
 - **Google** (« Bonnes pratiques de SEO pour Google Images », mise à jour le 03/03/2026, constat C10 de l'audit) :
   - Google trouve les images dans l'attribut `src` de `<img>` ;
   - il recommande des images originales et de qualité, proches du texte qui en parle ;
   - pour un article, il recommande une `image` dans les données structurées ; c'est aujourd'hui l'alerte
-    R7-IMAGE-RECOMMANDEE, levée sur ces sept pages.
+    R7-IMAGE-RECOMMANDEE, levée sur ces six pages.
 - **Rien ne garantit un gain de trafic** : comme pour la demande n° 43, l'effet se lit dans Search Console (§6).
 
 ## 3. Changement
@@ -112,7 +115,13 @@ plus. Chaque ligne donne :
 - **Titres** : aucun titre de section n'est ajouté. Le petit titre est un paragraphe, et la liste des H2 de chaque page ne
   change pas (paquet, §5).
 
-**Données structurées** : sur ces sept pages seulement, l'Article porte `image`, l'adresse absolue de la version de 1 200 px
+**Étiquette de pression** : la photo montre les valeurs de cette voiture en kPa, bar et psi (« 245 (2.5) 36 », « 420 (4.2)
+60 »), alors que la page ne donne volontairement aucune valeur générale en bars. Retenu : les laisser lisibles, parce que
+c'est ce que le lecteur verra sur sa propre étiquette, avec une légende qui dit qu'elles ne valent que pour cette voiture
+et que les siennes sont sur son étiquette (fait de la page : « c'est sa notice et son étiquette qui font foi »). Variante, à
+la décision de Houssem : flouter les valeurs (le crédit dit déjà « floutée en partie »).
+
+**Données structurées** : sur ces six pages seulement, l'Article porte `image`, l'adresse absolue de la version de 1 200 px
 (`https://decodauto.com/photos/<id>-1200.webp`). C'est la seule exception à « pas d'image » de la règle 7.5a. Les images de
 partage Open Graph ne changent pas : elles restent celles de l'illustration (lot U3).
 
@@ -125,7 +134,7 @@ R7-LIEN-EXTERNE (texte rédigé) ne change pas.
 - Trois photos sont sous CC BY-SA 4.0 (liquide de refroidissement, pression des pneus, loi montagne) : recadrées, elles
   restent sous CC BY-SA 4.0. Le crédit donne cette licence et son lien, et le dit (« recadrée » ; pour la pression des
   pneus, « recadrée, floutée en partie »).
-- Quatre photos sont sous CC BY 3.0 (niveau d'huile, liquide de frein, usure des pneus, batterie) : le crédit donne
+- Trois photos sont sous CC BY 3.0 (niveau d'huile, liquide de frein, batterie) : le crédit donne
   l'auteur, la licence, le lien et la modification.
 - Aucune photo n'est servie depuis Commons : les fichiers sont copiés sur le site (TIERS-RESSOURCE), et la politique de
   confidentialité ne change pas.
@@ -135,28 +144,29 @@ R7-LIEN-EXTERNE (texte rédigé) ne change pas.
   - aucun verdict, encadré, texte rédigé, adresse, title ni H1 ;
   - les empreintes de validation (le rendu n'y entre pas) ;
   - la favicon, le nom du site, les images de partage ;
-  - les fichiers de contenu des sept pages : le registre est à part.
+  - les fichiers de contenu des six pages : le registre est à part.
 - **Date « Mis à jour le »** : inchangée. Position défendue :
   - la règle 14 b ne fait bouger la date que pour une vraie modification du contenu ;
   - la photo et sa légende n'ajoutent ni consigne ni fait (§3) : elles montrent ce que la page dit déjà ;
   - la demande n° 43 a suivi le même principe pour un changement de rendu ;
-  - avancer la date sur sept pages pour un ajout visuel serait un signal de fraîcheur sans contenu nouveau, ce que la règle
+  - avancer la date sur six pages pour un ajout visuel serait un signal de fraîcheur sans contenu nouveau, ce que la règle
     14 b veut éviter ;
   - DATE-SANS-MODIFICATION ne s'applique pas : la date ne bouge pas.
   
-  Si Houssem juge que l'ajout est une modification, la date avance sur les sept pages, dans cette même pull request.
-- **Premier écran du téléphone** : inchangé. Le bloc du visuel est plus bas que le premier écran sur les sept pages, et
+  Si Houssem juge que l'ajout est une modification, la date avance sur les six pages, dans cette même pull request.
+- **Premier écran du téléphone** : inchangé. Le bloc du visuel est plus bas que le premier écran sur les six pages, et
   rien ne bouge au-dessus : le haut de l'illustration et le bas de la première situation sont les mêmes, au pixel près,
   avec les deux polices (paquet, §4). Haut de la photo au téléphone : de 1 793 px (pression des pneus) à 3 421 px (niveau
   d'huile, police de secours).
 - **Ordinateur** : l'illustration passe de toute la colonne (685 px de large) à une demi-colonne (326 px), mesuré sur les
-  sept pages et vérifié sur les captures. C'est la largeur qu'elle a déjà au téléphone (324 px), où ses étiquettes sont
+  six pages et vérifié sur les captures. C'est la largeur qu'elle a déjà au téléphone (324 px), où ses étiquettes sont
   validées.
 - **Page plus longue au téléphone** : de la hauteur de la photo, avec sa légende et son crédit (paquet, §4).
 - **Performances** :
   - trois tailles de photo, chargées en différé : le navigateur prend la plus petite qui suffit ;
   - taille posée (1 200 × 800), donc aucun décalage de mise en page ;
-  - Lighthouse mobile sur les sept pages (3 passages, médiane) : performance 100, accessibilité 100, CLS 0,000, LCP de 0,9
+  - Lighthouse mobile sur les six pages et celle de l'usure des pneus (3 passages, médiane) : performance 100, accessibilité
+    100, CLS 0,000, LCP de 0,9
     à 1,1 s (paquet, §6).
 - **Accessibilité** : la photo est nommée par son texte alternatif ; le crédit est du texte, ses liens ont un nom.
 - **Documents** :
@@ -169,7 +179,7 @@ R7-LIEN-EXTERNE (texte rédigé) ne change pas.
 
 ## 5. Contrôles à relancer
 - `npm run schemas`, `npm test`, `npm run build` (contrôle), `npm run liens` ; recette des exemples ; démonstration du
-  format 2 (FORMAT2-MESURES) ; Lighthouse mobile sur les sept pages (au moins 95, CLS sous 0,1).
+  format 2 (FORMAT2-MESURES) ; Lighthouse mobile sur les six pages (au moins 95, CLS sous 0,1).
 - **PHOTO-*** (nouveaux, `scripts/lib/photos.ts`, `tests/photos.test.ts`) :
   - **REGISTRE** : schéma ; chaque photo rattachée à une page du plan, construite au format 2 ;
   - **LARGEUR** et **RECADRAGE** : zone gardée au rapport 3:2, dans l'original, 1 600 px de large au moins ;
@@ -182,12 +192,12 @@ R7-LIEN-EXTERNE (texte rédigé) ne change pas.
   - **DONNEES** : `image` de l'Article sur ces pages seulement.
 - **FORMAT2-ILLUSTRATION** : l'illustration est seule après le bloc « Notices / Base du coût », ou en tête du bloc du
   visuel qui le suit.
-- Captures à 375 × 667 et 1366 × 800, police chargée et police de secours : zone du visuel des sept pages, avant et
+- Captures à 375 × 667 et 1366 × 800, police chargée et police de secours : zone du visuel des six pages (et de l'usure des pneus, inchangée), avant et
   après ; premier écran du téléphone.
 
 ## 6. Suivi et retour arrière
 - **Relevé à J+30** de la mise en ligne, dans Search Console :
-  - type « Image » : impressions et clics des sept pages ;
+  - type « Image » : impressions et clics des six pages ;
   - type « Web » : clics et position moyenne des mêmes pages, comparés aux 30 jours précédents.
 - **Retour arrière** : retirer la ligne de la page dans `data/photos.json`, puis relancer `npm run photos`. La page revient à
   l'illustration seule. Aucune adresse de page ne change. Une image retirée n'est pas une page : pas de redirection.

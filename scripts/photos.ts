@@ -176,6 +176,12 @@ async function telecharger(photos: readonly Photo[]): Promise<string[]> {
 
 /** Image recadrée (et floutée) à pleine résolution, en pixels bruts sans perte. */
 async function recadree(p: Photo, original: Buffer): Promise<Sharp> {
+  const r = p.recadrage;
+  return sharp(await sharp(await avecFlou(p, original)).extract({ left: r.x, top: r.y, width: r.largeur, height: r.hauteur }).png().toBuffer());
+}
+
+/** Original orienté, zones du registre floutées, en pixels bruts sans perte (PNG). */
+async function avecFlou(p: Photo, original: Buffer): Promise<Buffer> {
   // Orientation appliquée d'abord (les zones du registre sont en pixels de l'original orienté), sans perte (PNG).
   let base = await sharp(original).rotate().png().toBuffer();
   const lue = await sharp(base).metadata();
@@ -187,8 +193,7 @@ async function recadree(p: Photo, original: Buffer): Promise<Sharp> {
     );
     base = await sharp(base).composite(calques).png().toBuffer();
   }
-  const r = p.recadrage;
-  return sharp(await sharp(base).extract({ left: r.x, top: r.y, width: r.largeur, height: r.hauteur }).png().toBuffer());
+  return base;
 }
 
 async function produire(photos: readonly Photo[]): Promise<void> {
@@ -237,7 +242,8 @@ async function apercus(photos: readonly Photo[], dossier: string): Promise<void>
       `<rect x="${Math.round(z.x * k)}" y="${Math.round(z.y * k)}" width="${Math.round(z.largeur * k)}" height="${Math.round(z.hauteur * k)}" fill="none" stroke="${couleur}" stroke-width="5"/>`;
     const h = Math.round(p.hauteur_originale * k);
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${largeur}" height="${h}">${cadre(p.recadrage, '#ffb547')}${(p.floutage ?? []).map((z) => cadre(z, '#ff4d4d')).join('')}</svg>`;
-    await sharp(original).rotate().resize({ width: largeur }).composite([{ input: Buffer.from(svg) }]).jpeg({ quality: 78 }).toFile(join(dossier, `${p.id}-original.jpg`));
+    // L'aperçu de l'original part de l'image floutée : ce que le registre floute ne se republie pas dans le paquet.
+    await sharp(await avecFlou(p, original)).resize({ width: largeur }).composite([{ input: Buffer.from(svg) }]).jpeg({ quality: 78 }).toFile(join(dossier, `${p.id}-original.jpg`));
     await (await recadree(p, original)).resize({ width: largeur }).jpeg({ quality: 82 }).toFile(join(dossier, `${p.id}-recadrage.jpg`));
     console.log(`aperçus : ${p.id}`);
   }
