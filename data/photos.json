@@ -13,15 +13,15 @@
     "url_licence": "https://creativecommons.org/licenses/by/3.0",
     "date_releve": "2026-11-24",
     "recadrage": {
-      "x": 0,
-      "y": 0,
-      "largeur": 3888,
-      "hauteur": 2592
+      "x": 550,
+      "y": 230,
+      "largeur": 2925,
+      "hauteur": 1950
     },
     "modifications": "recadrée",
-    "alt": "À ÉCRIRE",
-    "legende": "À ÉCRIRE",
-    "verification": "À VÉRIFIER : original pas encore téléchargé.",
+    "alt": "Poignée orange de la jauge à huile d'une Škoda Fabia, enfoncée dans son tube, sous le cache du moteur",
+    "legende": "La poignée de la jauge à huile d'une Škoda Fabia : une fois la jauge sortie, le niveau se lit entre ses repères mini et maxi.",
+    "verification": "Vérifié à pleine résolution le 25/11/2026. Aucun marquage lisible, ni sur la poignée, ni sur le cache perforé du moteur, ni sur les pièces du bas, hors de la zone nette. Le recadrage resserre le cadre sur la poignée et le haut du tube. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
     "acceptation": {
       "par": "Houssem",
       "date": "2026-11-24",
@@ -103,15 +103,23 @@
     "url_licence": "https://creativecommons.org/licenses/by-sa/4.0",
     "date_releve": "2026-11-24",
     "recadrage": {
-      "x": 0,
-      "y": 167,
-      "largeur": 3999,
-      "hauteur": 2666
+      "x": 450,
+      "y": 630,
+      "largeur": 3400,
+      "hauteur": 2267
     },
-    "modifications": "recadrée",
-    "alt": "À ÉCRIRE",
-    "legende": "À ÉCRIRE",
-    "verification": "À VÉRIFIER : original pas encore téléchargé.",
+    "floutage": [
+      {
+        "x": 3360,
+        "y": 1710,
+        "largeur": 240,
+        "hauteur": 250
+      }
+    ],
+    "modifications": "recadrée, floutée en partie",
+    "alt": "Étiquette des pressions de pneus collée sur la carrosserie blanche d'une Honda Accord, avec la dimension des pneus et les pressions de l'avant, de l'arrière et de la roue de secours",
+    "legende": "L'étiquette des pressions de pneus d'une Honda Accord, avec une valeur pour l'avant, l'arrière et la roue de secours. Les valeurs sont propres à chaque voiture.",
+    "verification": "Vérifié à pleine résolution le 25/11/2026. Flouté : le code QR de l'étiquette, lisible à pleine résolution, de contenu inconnu. Restent lisibles : la dimension des pneus (235/45R18 94V, T135/90D16), les pressions et la mention « TVL T3 » de l'étiquette, communes à tout un modèle, pas un numéro de série. Écartée par le recadrage : une seconde étiquette, floue, en haut. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
     "acceptation": {
       "par": "Houssem",
       "date": "2026-11-24",
@@ -133,15 +141,15 @@
     "url_licence": "https://creativecommons.org/licenses/by/3.0",
     "date_releve": "2026-11-24",
     "recadrage": {
-      "x": 0,
-      "y": 147,
-      "largeur": 4095,
-      "hauteur": 2730
+      "x": 2015,
+      "y": 650,
+      "largeur": 1620,
+      "hauteur": 1080
     },
     "modifications": "recadrée",
-    "alt": "À ÉCRIRE",
-    "legende": "À ÉCRIRE",
-    "verification": "À VÉRIFIER : original pas encore téléchargé.",
+    "alt": "Bande de roulement d'un pneu : au fond d'une rainure, une petite bosse, le témoin d'usure ; plus bas, sur le bord du pneu, un petit triangle moulé",
+    "legende": "Le témoin d'usure d'un pneu, petite bosse au fond de la rainure. Sur le flanc, un triangle repère son emplacement.",
+    "verification": "Vérifié à pleine résolution le 25/11/2026. Selon la description de Commons, la photo montre à gauche la barre d'usure (« Wear Bar ») et à droite le témoin d'usure (« Tread Wear Indicator »). Le recadrage garde le seul témoin de droite, au bout de la rainure au-dessus du triangle, et écarte la barre de gauche (elle s'arrête vers 2 004 px, le cadre commence à 2 015 px). Écartés aussi : le nom du fabricant sur le flanc, la jante et la caisse. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
     "acceptation": {
       "par": "Houssem",
       "date": "2026-11-24",
@@ -163,15 +171,15 @@
     "url_licence": "https://creativecommons.org/licenses/by-sa/4.0",
     "date_releve": "2026-11-24",
     "recadrage": {
-      "x": 0,
-      "y": 167,
-      "largeur": 3999,
-      "hauteur": 2666
+      "x": 1750,
+      "y": 0,
+      "largeur": 2250,
+      "hauteur": 1500
     },
     "modifications": "recadrée",
-    "alt": "À ÉCRIRE",
-    "legende": "À ÉCRIRE",
-    "verification": "À VÉRIFIER : original pas encore téléchargé.",
+    "alt": "Panneau B58 au bord d'une route de montagne : « Zone », un coffre à chaînes et un pneu marqué du symbole alpin, avec en dessous le panonceau « du 01/11 au 31/03 » et un second panonceau « sur l'ensemble du département »",
+    "legende": "Le panneau B58, complété par un panonceau « du 01/11 au 31/03 » : il annonce l'entrée dans une zone où l'équipement est obligatoire.",
+    "verification": "Vérifié à pleine résolution le 25/11/2026. Écartés par le recadrage : la route, un panneau de danger au loin et la vallée habitée (village, chalets), qui pouvaient situer le lieu. Restent : le panneau et ses deux panonceaux, des sapins, le ciel et une crête enneigée sans repère. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
     "acceptation": {
       "par": "Houssem",
       "date": "2026-11-24",
@@ -193,15 +201,15 @@
     "url_licence": "https://creativecommons.org/licenses/by/3.0",
     "date_releve": "2026-11-24",
     "recadrage": {
-      "x": 0,
-      "y": 0,
-      "largeur": 3888,
-      "hauteur": 2592
+      "x": 1170,
+      "y": 290,
+      "largeur": 2480,
+      "hauteur": 1653
     },
     "modifications": "recadrée",
-    "alt": "À ÉCRIRE",
-    "legende": "À ÉCRIRE",
-    "verification": "À VÉRIFIER : original pas encore téléchargé.",
+    "alt": "Batterie d'une Škoda Fabia dans son bac : au fond, la borne positive, près de pastilles marquées +, et au premier plan la borne négative avec sa cosse, près d'une pastille marquée −",
+    "legende": "La batterie d'une Škoda Fabia et ses deux bornes : la borne (+) au fond, la borne (-) au premier plan.",
+    "verification": "Vérifié à pleine résolution le 25/11/2026. Écartés par le recadrage : la référence de la batterie (« 1J0 915 105 AB ») et ses caractéristiques imprimées, à gauche, et le marquage du câble rouge. Restent : les pastilles + et −, des pictogrammes de sécurité, le bouchon jaune du réservoir de liquide de frein à droite ; le marquage de la cosse négative est illisible, hors de la zone nette. Aucune plaque, aucun numéro de série ni code de fabrication lisible, aucun kilométrage, aucun visage, aucun reflet ni lieu reconnaissable.",
     "acceptation": {
       "par": "Houssem",
       "date": "2026-11-24",
