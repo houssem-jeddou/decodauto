@@ -9,3 +9,4 @@ dist-indexable/
 .env.*
 *.log
 dist-*/
+.cache/

@@ -179,7 +179,10 @@ export function controlerFormat2(
   else {
     const figure = figures.first();
     const avant = provenance.length === 1 ? '[data-provenance]' : '[data-ligne-transparence]';
-    if (!figure.prev().is(avant)) constats.push(erreur('FORMAT2-ILLUSTRATION', "l'illustration suit immédiatement le bloc « Notices / Base du coût » (règle 2i, précision du 15/11)", fichier));
+    // Page du registre des photos (demande de changement n° 42) : l'illustration ouvre le bloc du visuel (data-visuel), qui
+    // suit le bloc « Notices / Base du coût » ; PHOTO-RENDU contrôle la photo qui la suit.
+    const bloc = figure.parent().is('[data-visuel]') && figure.is(':first-child') ? figure.parent() : figure;
+    if (!bloc.prev().is(avant)) constats.push(erreur('FORMAT2-ILLUSTRATION', "l'illustration suit immédiatement le bloc « Notices / Base du coût » (règle 2i, précision du 15/11)", fichier));
     // Dessin posé dans la page, nommé ; ou, sur une page du pilote des images en fichiers (demande de changement n° 43 ;
     // IMAGES-FICHIERS-RENDU dit quelles pages), image du fichier servi, nommée, largeur et hauteur posées.
     const dessin = figure.children('svg, img').first();

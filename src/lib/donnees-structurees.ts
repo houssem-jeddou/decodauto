@@ -10,8 +10,9 @@
 //  - page « à propos » : Person (l'auteur de la fiche affichée) ;
 //  - mentions légales, 404 : rien.
 // Pas de datePublished : la page n'affiche que sa date de mise à jour (signature, charte §4), et le balisage ne dit rien
-// qui ne soit visible ; la date de publication, propre au fichier de contenu, ne sort pas du site. Pas d'Organization ni de publisher (le site n'a pas d'entité à déclarer, l'éditeur est l'auteur), pas d'image (aucune image
-// avant le livrable 7.5b), pas de FAQPage ni de HowTo (extraits de résultats que Google n'affiche plus pour la plupart des
+// qui ne soit visible ; la date de publication, propre au fichier de contenu, ne sort pas du site. Pas d'Organization ni de publisher (le site n'a pas d'entité à déclarer, l'éditeur est l'auteur). Pas d'image, sauf la photo
+// sous licence libre affichée par la page (demande de changement n° 42, lot U4 : propriété `image` de l'Article, adresse
+// absolue de sa version de 1 200 px, sur les seules pages du registre data/photos.json ; ni dessin ni image de partage), pas de FAQPage ni de HowTo (extraits de résultats que Google n'affiche plus pour la plupart des
 // sites ; un balisage sans extrait attendu n'apporte rien).
 
 import { NOM_ALTERNATIF_DU_SITE, NOM_DU_SITE, URL_SITE, urlAbsolue } from './site.ts';
@@ -111,6 +112,8 @@ export interface ArticleDeclare {
   auteur: AuteurDeclare;
   /** Adresse de la page « à propos » (fiche de l'auteur). */
   adresseAPropos: string;
+  /** Adresse absolue de la photo affichée par la page (demande de changement n° 42) ; absente sans photo. */
+  image?: string | undefined;
 }
 
 /** Article : ce que la page affiche (H1, signature « Mis à jour le … »), l'auteur de la fiche de « à propos ». */
@@ -124,6 +127,7 @@ export function articleJsonLd(a: ArticleDeclare): Record<string, unknown> {
     mainEntityOfPage: urlAbsolue(a.adresse),
     dateModified: dateHeureIsoParis(a.modification),
     author: { '@type': 'Person', name: texteVisible(a.auteur.nom), url: `${urlAbsolue(a.adresseAPropos)}#${ancreAuteur(a.auteur.id)}` },
+    ...(a.image !== undefined ? { image: a.image } : {}),
   };
 }
 

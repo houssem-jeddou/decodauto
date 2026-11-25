@@ -26,7 +26,7 @@ describe('charte B : contrastes (F1.4)', () => {
   test('contour de focus : variable --focus, bleu de la charte sur fond clair, bleu clair sur les surfaces sombres ; 3:1 au moins contre chaque fond', () => {
     assert.match(css, /a:focus-visible,summary:focus-visible,button:focus-visible,\[tabindex\]:focus-visible\{outline:3px solid var\(--focus,var\(--accent\)\)/);
     assert.match(css, /\.outil-choix input:focus-visible\+label\{outline:3px solid var\(--focus,var\(--accent\)\)/);
-    const sombres = /:root \.bandeau,:root \.tete,:root \.hero,:root \.decision,:root \.pied,:root \.voyants,:root \.outil-groupe,:root \.illustration\{--focus:var\(--nuit-lien\)\}/;
+    const sombres = /:root \.bandeau,:root \.tete,:root \.hero,:root \.decision,:root \.pied,:root \.voyants,:root \.outil-groupe,:root \.illustration,:root \.photo\{--focus:var\(--nuit-lien\)\}/;
     assert.match(css, sombres);
     for (const fond of ['fond-page', 'surface', 'accent-fond']) assert.ok(rapportContraste(couleur('accent'), couleur(fond)) >= 3, `accent sur ${fond} : ${rapportContraste(couleur('accent'), couleur(fond)).toFixed(2)}`);
     for (const fond of ['nuit', 'panneau', 'cellule']) assert.ok(rapportContraste(couleur('nuit-lien'), couleur(fond)) >= 3, `nuit-lien sur ${fond} : ${rapportContraste(couleur('nuit-lien'), couleur(fond)).toFixed(2)}`);
@@ -39,6 +39,20 @@ describe('charte B : contrastes (F1.4)', () => {
     assert.match(css, /\.signature,\.ligne-transparence\{font-size:\.8125rem;margin:\.45rem 0;color:var\(--texte-doux\)\}/);
     assert.ok(!/(^|[}\s,])\.transparence\b/.test(css), 'aucune règle sur une classe « transparence » que rien n\'écrit');
     for (const fond of ['fond-page', 'surface']) assert.ok(rapportContraste(couleur('texte-doux'), couleur(fond)) >= 4.5, `texte-doux sur ${fond}`);
+  });
+
+  test('photo sous licence libre (demande de changement n° 42) : panneau sombre, textes et liens du crédit lisibles (AA), focus et couleurs forcées', () => {
+    assert.match(css, /:root \.photo\{background:var\(--panneau\);border-radius:20px\}/);
+    assert.match(css, /:root \.photo-titre\{color:var\(--ambre\)\}/);
+    assert.match(css, /:root \.photo figcaption\{color:var\(--nuit-doux\)\}/);
+    assert.match(css, /:root \.photo-credit\{color:var\(--nuit-texte\)\}/);
+    assert.match(css, /:root \.photo a\{color:var\(--nuit-lien\)\}/);
+    assert.match(css, /@media \(forced-colors:active\)\{\.photo\{border:1px solid CanvasText\}\.photo a:focus-visible\{outline-color:Highlight\}\}/);
+    // Le bloc du visuel garde la marge haute de l'illustration seule, et ses figures n'en ont pas : rien ne bouge au-dessus.
+    assert.match(css, /\.illustration\{margin:\.8rem 0 0;/);
+    assert.match(css, /\.visuel\{margin:\.8rem 0 0;display:grid;/);
+    assert.match(css, /\.visuel>figure\{margin:0\}/);
+    for (const nom of ['ambre', 'nuit-doux', 'nuit-texte', 'nuit-lien']) assert.ok(rapportContraste(couleur(nom), couleur('panneau')) >= 4.5, `${nom} sur panneau : ${rapportContraste(couleur(nom), couleur('panneau')).toFixed(2)}`);
   });
 
   test('tuiles de la grille des voyants : marge intérieure des libellés', () => {

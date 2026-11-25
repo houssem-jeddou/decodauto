@@ -8,6 +8,7 @@ import { emplacementsFactices } from '../../src/lib/emplacements-pub.ts';
 import { chargerDonnees } from './charger.ts';
 import { DOSSIER_ILLUSTRATIONS } from '../../src/lib/format2.ts';
 import { pagesImagesEnFichiers } from '../../src/lib/images-fichiers.ts';
+import { photosParPage } from '../../src/lib/photos.ts';
 import { DOSSIER_ILLUSTRATIONS_DEMO, chargerIllustrations, demoFormat2Active, lireBrouillonFormat2, voyantsAvecBrouillon } from './demo-format2.ts';
 
 export interface DonneesDuSite {
@@ -44,6 +45,8 @@ export async function donneesDuSite(racine: string, libelles: ReadonlyMap<string
     pubFactice: emplacementsFactices(process.env) || demo,
     // Pilote des images en fichiers (demande de changement n° 43).
     imagesEnFichiers: pagesImagesEnFichiers(),
+    // Photos sous licence libre (demande de changement n° 42, data/photos.json).
+    photos: photosParPage(),
   };
   return { site, contexte, constats };
 }

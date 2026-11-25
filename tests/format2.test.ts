@@ -409,6 +409,12 @@ describe('format 2 : modèle des pages voyants', () => {
       ['FORMAT2-SOMMAIRE', modifie(($) => $('.sommaire-cote li').first().remove())],
     ];
     for (const [regle, page2] of cas) assert.ok(regles(controlerFormat2(page2, 'p.html', lignes, phrases)).includes(regle), regle);
+    // Bloc du visuel d'une page à photo (demande de changement n° 42) : l'illustration en tête de data-visuel, qui suit le
+    // bloc « Notices / Base du coût », est admise ; le bloc ailleurs, ou l'illustration en second, ne l'est pas.
+    const envelopper = ($: cheerio.CheerioAPI): void => void $('figure[data-illustration]').wrap('<div class="visuel" data-visuel></div>').after('<figure class="photo" data-photo="x"></figure>');
+    assert.ok(!regles(controlerFormat2(modifie(envelopper), 'p.html', lignes, phrases)).includes('FORMAT2-ILLUSTRATION'));
+    assert.ok(regles(controlerFormat2(modifie(($) => { envelopper($); $('[data-visuel]').insertAfter('[data-sommaire]'); }), 'p.html', lignes, phrases)).includes('FORMAT2-ILLUSTRATION'));
+    assert.ok(regles(controlerFormat2(modifie(($) => { envelopper($); $('figure[data-photo]').insertBefore('figure[data-illustration]'); }), 'p.html', lignes, phrases)).includes('FORMAT2-ILLUSTRATION'));
   });
 });
 

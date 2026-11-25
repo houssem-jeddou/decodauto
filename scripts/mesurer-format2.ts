@@ -133,7 +133,9 @@ function mesurerDansLaPage(): Omit<MesurePage, 'adresse' | 'largeur' | 'police' 
     basPremiereSituation: basDe(['.situation', '.verdict', '.urgence', '.action']),
     basEncadre: bas(el('[data-encadre-decision]')),
     hautIllustration: haut(figure),
-    illustrationApresProvenance: figure !== null && figure.previousElementSibling?.matches('[data-provenance]') === true,
+    // Bloc du visuel (demande de changement n° 42) : l'illustration ouvre `data-visuel` quand la page a une photo.
+    illustrationApresProvenance: figure !== null && ((figure.parentElement?.matches('[data-visuel]') === true && figure.previousElementSibling === null ? figure.parentElement : figure).previousElementSibling?.matches('[data-provenance]') === true),
+    hautPhoto: haut(el('figure[data-photo]')),
     hautArbre: haut(arbre),
     lignesEncadre: document.querySelectorAll('[data-encadre-decision] [data-encadre-ligne]').length,
     hauteurPage: document.documentElement.scrollHeight,

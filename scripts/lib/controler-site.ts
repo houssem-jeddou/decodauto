@@ -14,6 +14,8 @@ import { controlerAdsense } from './adsense.ts';
 import { controlerPartage } from './partage.ts';
 import { controlerImagesEnFichiers } from './images-fichiers.ts';
 import { pagesImagesEnFichiers } from '../../src/lib/images-fichiers.ts';
+import { controlerPhotos } from './photos.ts';
+import { registrePhotos } from '../../src/lib/photos.ts';
 import { DOSSIER_PAGES_DEMO_FORMAT2, constatsDemoPubliee, pageAvecBrouillon, voyantsAvecBrouillon, type BrouillonFormat2 } from './demo-format2.ts';
 import { DOSSIER_ILLUSTRATIONS, illustrationEnLigne } from '../../src/lib/format2.ts';
 import { chargerIllustrations } from './demo-format2.ts';
@@ -211,6 +213,9 @@ export async function controlerSite(options: { racine: string; dist: string; auj
   constats.push(...(await controlerPartage(dist, idsParAdresse)));
   // Pilote des images en fichiers (demande de changement n° 43) : pages du pilote, rendu, fichiers servis (IMAGES-FICHIERS-*).
   constats.push(...(await controlerImagesEnFichiers(racine, dist, pagesImagesEnFichiers(), idsParAdresse)));
+  // Photos sous licence libre (demande de changement n° 42, lot U4) : registre, rendu, crédit, données structurées, fichiers
+  // servis (PHOTO-*).
+  constats.push(...(await controlerPhotos(racine, dist, registrePhotos(), idsParAdresse)));
 
   return { constats, informations, pagesEditoriales: pagesLues.length };
 }
