@@ -49,14 +49,16 @@ plus. Chaque ligne donne :
 - la page Commons et l'adresse de l'original, avec son empreinte SHA-1 et ses dimensions ;
 - l'auteur, la licence et l'adresse de la licence, relevés par l'API de Commons (imageinfo, extmetadata) le 24/11/2026 ;
 - la zone gardée (recadrage) et, s'il le faut, les zones floutées ;
-- les modifications (« recadrée ») ;
+- les modifications : « recadrée », ou « recadrée, floutée en partie » (étiquette de pression : son code QR) ;
 - le texte alternatif et la légende ;
 - ce qui a été vérifié à pleine résolution ;
 - l'acceptation de Houssem (24/11/2026, 19 h 19).
 
 **Production** (`scripts/photos.ts`, `npm run photos`) :
 1. Le script relit les métadonnées par l'API de Commons et s'arrête au premier écart.
-2. Il télécharge l'original dans `.cache/photos/`, jamais versionné, et le vérifie par son SHA-1.
+2. Il télécharge l'original dans `.cache/photos/`, jamais versionné, et le vérifie par son SHA-1. Commons a refusé cinq
+   originaux (réponse 429, les 24 et 25/11/2026) : Houssem les a téléchargés depuis Commons et transmis dans une archive le
+   25/11/2026. Leur SHA-1 est celui que donne Commons ; un fichier qui ne l'a pas est refusé.
 3. Il recadre l'original au rapport 3:2 sur ce qui montre où regarder, en gardant au moins 1 600 px de large. Il floute
    seulement si le recadrage ne suffit pas, et le crédit le dit alors.
 4. Il écrit les fichiers dans `src/photos/` : WebP en 480, 800 et 1 200 px de large, aux noms parlants en français
@@ -64,7 +66,10 @@ plus. Chaque ligne donne :
 5. Il écrit les empreintes des fichiers produits (`src/photos/empreintes.json`).
 - **Copie dans le site** : à la construction, `scripts/integration-photos.ts` copie seulement les fichiers que les pages
   référencent (jamais dans `public/`). Le serveur de développement sert les mêmes fichiers.
-- **Client des requêtes** : il porte un nom générique, sans donnée personnelle ni nom du site.
+- **Client des requêtes** (décision de Houssem du 25/11/2026, politique de Wikimedia sur le User-Agent) : « decodauto-photos/1.0
+  (https://decodauto.com/a-propos/; erreur@decodauto.com) », tiré de `URL_SITE` et de l'adresse de contact publiée sur le
+  site. Une requête par fichier, 10 s d'écart ; sur une réponse 429, attente de `Retry-After`, un seul nouvel essai, puis
+  arrêt.
 
 **Composant « Visuel avec photo »** (charte graphique, rangée « Illustration », `src/styles/charte-b.css` ;
 `src/lib/photos.ts`). Dans l'emplacement du visuel, l'illustration reste telle quelle et la photo s'y ajoute :
@@ -118,7 +123,8 @@ R7-LIEN-EXTERNE (texte rédigé) ne change pas.
 
 **Licences** :
 - Trois photos sont sous CC BY-SA 4.0 (liquide de refroidissement, pression des pneus, loi montagne) : recadrées, elles
-  restent sous CC BY-SA 4.0. Le crédit donne cette licence et son lien, et le dit (« recadrée »).
+  restent sous CC BY-SA 4.0. Le crédit donne cette licence et son lien, et le dit (« recadrée » ; pour la pression des
+  pneus, « recadrée, floutée en partie »).
 - Quatre photos sont sous CC BY 3.0 (niveau d'huile, liquide de frein, usure des pneus, batterie) : le crédit donne
   l'auteur, la licence, le lien et la modification.
 - Aucune photo n'est servie depuis Commons : les fichiers sont copiés sur le site (TIERS-RESSOURCE), et la politique de
@@ -140,14 +146,18 @@ R7-LIEN-EXTERNE (texte rédigé) ne change pas.
   
   Si Houssem juge que l'ajout est une modification, la date avance sur les sept pages, dans cette même pull request.
 - **Premier écran du téléphone** : inchangé. Le bloc du visuel est plus bas que le premier écran sur les sept pages, et
-  rien ne bouge au-dessus : le haut de l'illustration est le même, au pixel près (paquet, §4).
-- **Ordinateur** : l'illustration passe de toute la colonne (685 px de large) à une demi-colonne (326 px). C'est la largeur
-  qu'elle a déjà au téléphone (324 px), où ses étiquettes sont validées.
+  rien ne bouge au-dessus : le haut de l'illustration et le bas de la première situation sont les mêmes, au pixel près,
+  avec les deux polices (paquet, §4). Haut de la photo au téléphone : de 1 793 px (pression des pneus) à 3 421 px (niveau
+  d'huile, police de secours).
+- **Ordinateur** : l'illustration passe de toute la colonne (685 px de large) à une demi-colonne (326 px), mesuré sur les
+  sept pages et vérifié sur les captures. C'est la largeur qu'elle a déjà au téléphone (324 px), où ses étiquettes sont
+  validées.
 - **Page plus longue au téléphone** : de la hauteur de la photo, avec sa légende et son crédit (paquet, §4).
 - **Performances** :
   - trois tailles de photo, chargées en différé : le navigateur prend la plus petite qui suffit ;
   - taille posée (1 200 × 800), donc aucun décalage de mise en page ;
-  - Lighthouse mobile, CLS et LCP remesurés sur les sept pages (paquet, §6).
+  - Lighthouse mobile sur les sept pages (3 passages, médiane) : performance 100, accessibilité 100, CLS 0,000, LCP de 0,9
+    à 1,1 s (paquet, §6).
 - **Accessibilité** : la photo est nommée par son texte alternatif ; le crédit est du texte, ses liens ont un nom.
 - **Documents** :
   - charte graphique (`docs/11`, rangée « Illustration » : composant « Visuel avec photo ») ;
