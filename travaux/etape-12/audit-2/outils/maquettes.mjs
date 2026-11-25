@@ -7,7 +7,7 @@
 //   tiré de la signification du code (fiche du code), court pour tenir en deux lignes dans une pastille ;
 // - V4 (proposition N2) : version imprimable (règles @media print seules : l'écran ne change pas) : surfaces sombres
 //   passées en clair, couleurs des voyants et des verdicts gardées, bandeau, menu, sommaire et liens du pied masqués,
-//   adresse de la page et licence en pied d'impression.
+//   « Sources » dépliée à l'impression, tuiles des voyants sur fond clair, adresse de la page en pied d'impression.
 // Usage : node travaux/etape-12/audit-2/outils/maquettes.mjs <dist> <sortie> [v1,v2]
 import { cpSync, readFileSync, writeFileSync, readdirSync, statSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
@@ -34,6 +34,9 @@ body{font-size:10.5pt;background:#fff}
 :root .verdict{color:#111!important;background:#fff!important}
 :root .decision .tranche,:root .decision .cout-libelle{color:#111!important}
 :root main .decision{margin-top:0}
+:root .tuile{background:#fff!important;box-shadow:inset 0 0 0 1px #9aa4b0!important}
+details.sources::details-content{content-visibility:visible;display:block;height:auto}
+details.sources>summary{list-style:none}
 .ligne,figure,tr,[data-outil-ligne],.outil-index li{break-inside:avoid}
 h2,h3{break-after:avoid}
 main::after{content:"decodauto.com, guide indépendant · page imprimée depuis " attr(data-adresse);display:block;margin-top:1rem;font-size:9pt;color:#333}

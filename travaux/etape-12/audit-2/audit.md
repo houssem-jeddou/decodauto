@@ -85,7 +85,8 @@ U4 en ligne) n'est pas refait : on part de l'état de `main` au 25/11 (b489309, 
 - **Indexation** : 14 indexées ; 12 « Explorée, actuellement non indexée » (dont les trois codes, la surchauffe, « ne
   démarre pas », pression des pneus, voyant de pression des pneus, et les trois pages batterie, qui ont pourtant des
   impressions : le rapport est en retard) ; **13 adresses du plan du site dans aucune des deux listes** : Google ne les a
-  pas encore traitées (ou le rapport ne les montre pas encore).
+  pas encore traitées (ou le rapport ne les montre pas encore). 14 + 12 + 13 = 39 pour 40 adresses au plan du site : une
+  adresse n'est pas expliquée par le relevé (à vérifier à J+14 dans la Search Console).
 
 **C1. Les trois pages des grades d'huile sont presque identiques (fort, trafic et lecteur).**
 - Texte propre commun (hors gabarit, `proximite-hors-gabarit.json`) : 10W40 et 5W40, 83 et 85 % ; 10W40 et 5W30, 75 et
@@ -170,8 +171,8 @@ audit).**
   (2.5.5, AAA), sur le lien le plus touché en haut de page.
 
 **C11. Notoriété : un site de deux semaines, sans raison donnée aux autres de le citer (axe f, fort à terme).**
-- 12 pages « Explorée, actuellement non indexée » et 13 adresses encore non traitées (C0) : pour un site neuf, Google
-  explore mais retient peu tant que rien d'extérieur ne signale le site. Les liens entrants ne sont pas mesurés ici (le
+- 12 pages « Explorée, actuellement non indexée » et 13 adresses encore non traitées (C0). Hypothèse, non prouvée : pour
+  un site neuf, des signaux extérieurs (liens, citations) aident Google à retenir les pages qu'il explore. Les liens entrants ne sont pas mesurés ici (le
   rapport « Liens » de la Search Console n'a pas été relevé) : à relever à J+30.
 - Ce que d'autres pourraient citer existe déjà : l'outil voyants (une ligne par voyant, gravité écrite, écart entre
   marques), les tableaux « Ce que dit la notice de votre marque », la page loi montagne en pleine saison, les dessins
@@ -210,10 +211,11 @@ Classement par gain pour le trafic et pour le lecteur, puis par effort. « Règl
 | P11 | Titles et H1 (C6) | ? | ? | faible | moyen | règle 14 c | après J+30 |
 | N1 à N5 | Notoriété : ressources citables et prise de contact par Houssem (C11, axe f, détail plus bas) | moyen à fort, lent | moyen | faible à élevé | faible à moyen | **demande n° 47** pour N3 ; charte (version imprimable) | A5 |
 
-**Les cinq propositions à plus fort impact** (ordre de priorité ; P3 d'abord, la saison se ferme le 31 mars), avec les chiffres du 25/11 : **P3** (loi montagne : seule page à
-impressions nombreuses, saison en cours, requêtes « région », « massif », « panneau ») ; **P1** (grades d'huile : 63 200
+**Les cinq propositions à plus fort impact** (ordre de priorité ; P3 d'abord, la saison se ferme le 31 mars), avec les chiffres du 25/11 : **P3** (loi montagne : la page qui a le plus
+d'impressions, un tiers du site, saison en cours, requêtes « région », « massif », « panneau ») ; **P1** (grades d'huile : 63 200
 recherches par mois, trois pages quasi identiques, aucune impression) ; **P6** (descriptions, en commençant par les sept
-pages déjà entre les positions 7,5 et 18) ; **P2** (paires de liens, une heure de travail, codes et surchauffe sans
+pages déjà entre les positions 7,5 et 18, d'abord le niveau d'huile : 67 impressions en position 12,9, la page la plus
+proche de rapporter des clics) ; **P2** (paires de liens, une heure de travail, codes et surchauffe sans
 impression) ; **N2 avec N3** (outil voyants et loi montagne rendus citables, imprimables et réutilisables : la seule
 façon, sans achat ni annuaire, d'obtenir les signaux extérieurs qui manquent à un site neuf).
 
@@ -253,7 +255,7 @@ Paires proposées pour la pull request du lot, avec leur justification (procédu
   avec l'arrêté en vigueur (source de première main au registre, date) et le lien vers la page de la préfecture ; revue
   avant chaque 1er novembre (charte §8, déjà prévu pour la page).
 - **Pourquoi maintenant** : un tiers des impressions du site (93 sur 255, position 76,8), requêtes « région », « massif
-  central », « zone » ; « departement pneu neige obligatoire » et « zone pneu neige obligatoire » au périmètre (3 160
+  central », « panneau » (relevé du 25/11) et « zone » (relevé J+7) ; « departement pneu neige obligatoire » et « zone pneu neige obligatoire » au périmètre (3 160
   chacune) ; saison en cours, jusqu'au 31 mars.
 - **P3b, avec le lot** : montrer le panneau B26 (« panneau chaine obligatoire » : 8 impressions, position 83,4), là où le
   texte en parle : photo sous licence libre (acceptée par Houssem, demande n° 42) ou dessin du panneau pour le site ;
@@ -338,19 +340,21 @@ fois, par un message de Houssem. Rien d'automatique ; aucun message envoyé par 
 |---|---|---|---|---|---|---|---|
 | N1 | **Loi montagne en saison** : la page avec le tableau des départements (P3), le panneau B26 (P3b) et une version imprimable (N2) | médias locaux des massifs, offices de tourisme et stations, pages d'aide « circuler en hiver » de communes et de départements, écoles de conduite des départements concernés, clubs et associations de montagne | P3, P3b, version imprimable | élevé (P3), puis faible | 2 à 4 semaines ; à faire avant février, la saison finit le 31 mars | moyen : un arrêté remplacé rend une ligne fausse (revue avant chaque 1er novembre, date du relevé affichée) ; silence des destinataires | valider P3 ; choisir les destinataires ; écrire et envoyer chaque message lui-même ; répondre |
 | N2 | **Outil voyants imprimable et dessins réutilisables** : la fiche « voyants du tableau de bord » (grille par couleur, gravité écrite) imprimable en A4, et les pictogrammes redessinés sous licence ouverte avec crédit | écoles de conduite et moniteurs, formations à la sécurité routière (associations, services de prévention de collectivités), enseignants de mécanique, sites d'aide aux automobilistes | version imprimable (maquette V4) ; licence et page de réutilisation (N3) | moyen | 2 à 6 semaines | faible à moyen : un dessin repris hors contexte, sans la gravité ni la notice ; la licence l'encadre (crédit, lien) ; la gravité n'est reprise qu'avec sa page | choisir la licence (décision juridique) ; valider la fiche ; prendre contact |
-| N3 | **Page « Réutiliser et citer decodauto »** (presse et réutilisation) : ce qu'est le site, sa méthode, son auteur, ce qu'on peut reprendre (dessins, images de partage, tableaux cités avec lien), comment citer une page, contact | journalistes (consommation, automobile, presse locale), blogs d'automobilistes, écoles de conduite | une page du socle (nouvelle adresse au plan) ; clause de licence dans les mentions légales | faible à moyen | 1 semaine après l'accord | faible | **demande n° 47** (brouillon) ; licence ; adresse de contact à publier |
+| N3 | **Page « Réutiliser et citer decodauto »** (presse et réutilisation) : ce qu'est le site, sa méthode, son auteur, ce qu'on peut reprendre (dessins, images de partage, tableaux cités avec lien), comment citer une page, contact | journalistes (consommation, automobile, presse locale), blogs d'automobilistes, écoles de conduite | une page du socle (nouvelle adresse au plan) ; clause de licence dans les mentions légales | faible à moyen | 1 semaine après l'accord | faible | **demande n° 47** (brouillon) ; licence ; texte de la page (le contact existe déjà : `{{contact}}`) |
 | N4 | **Données ouvertes** : la base voyants (voyant, couleur, gravité, action, marques et pages de notice citées) publiée comme jeu de données, avec sa méthode et sa date, sous licence ouverte, sur une plateforme publique de données ouvertes ; la page du jeu de données renvoie au site | réutilisateurs de données, développeurs d'applications d'aide à la conduite, chercheurs | un fichier généré depuis `data/voyants.json` (jamais saisi), daté ; la méthode existe (« à propos ») | moyen | 3 à 6 semaines | moyen : un verdict repris sans sa page ni sa date ; mise à jour à suivre à chaque changement de la base ; conditions de la plateforme à lire | créer le compte de publication ; choisir la licence ; décider de publier (demande de changement à écrire avec le lot) |
-| N5 | **Une étude citable** : « 6 notices, 11 voyants : quand les constructeurs ne disent pas la même chose » (les écarts entre marques que le site mesure déjà, ligne par ligne) | presse automobile et consommation, associations d'automobilistes | une page dossier (nouvelle adresse au plan), tirée de la base, avec un tableau | moyen à élevé | 4 à 8 semaines | moyen : chaque écart doit rester exact et sourcé ; pas de jugement sur une marque | valider la page et ses verdicts ; décider de la proposer ; contacter |
+| N5 | **Une étude citable** : « Quand les notices ne disent pas la même chose » : les 16 lignes de la base voyants (sur 26) qui ont un écart entre marques, d'après les notices lues de six marques, ligne par ligne | presse automobile et consommation, associations d'automobilistes | une page dossier (nouvelle adresse au plan), tirée de la base, avec un tableau | moyen à élevé | 4 à 8 semaines | moyen : chaque écart doit rester exact et sourcé ; pas de jugement sur une marque | valider la page et ses verdicts ; décider de la proposer ; contacter |
 
 - **Ordre** : N3 et la version imprimable d'abord (ils servent N1, N2 et N5), puis N1 pendant la saison, N2, N4 et N5.
 - **Mesure** : rapport « Liens » de la Search Console (sites et pages qui lient) à J+30 puis chaque mois ; journal des
   messages envoyés par Houssem (date, type de site, réponse), sans nom de personne dans le dépôt public.
 - **Maquette V4, version imprimable** (`outils/maquettes.mjs`, règles `@media print` seules : l'écran ne change pas) :
-  surfaces sombres en clair, couleurs des voyants et des verdicts gardées, verdicts en noir, bandeau, menu, sommaire,
-  filtre et « À lire aussi » masqués, adresse de la page en fin d'impression. Mesures (`outils/imprimer.cjs`, Chromium, A4,
-  marges de 12 mm) : loi montagne 6 → 5 pages ; outil 13 → 13 pages (la liste des cartes reste longue : une fiche A4
-  dédiée, grille seule, serait à concevoir avec N2). Captures `maquettes/avant-v4-impression-*` et
-  `apres-v4-impression-*` (deux premières pages). Lighthouse inchangé (`lighthouse-maquettes.json`, entrées « v1 à v4 » :
+  surfaces sombres et tuiles des voyants en clair, couleurs des voyants et des verdicts gardées, verdicts en noir,
+  « Sources » dépliée (la liste complète s'imprime : vérifié par `pdftotext` sur la loi montagne), bandeau, menu,
+  sommaire, filtre et « À lire aussi » masqués, adresse de la page en fin d'impression ; aucune licence imprimée tant que
+  la demande n° 47 n'est pas tranchée. Mesures (`outils/imprimer.cjs`, Chromium, A4, marges de 12 mm, police chargée et
+  police de secours) : loi montagne 6 → 6 pages (une de moins sans les sources, regagnée en les imprimant) ; outil 13 →
+  14 pages (la liste des cartes reste longue : une fiche A4 dédiée, grille seule, serait à concevoir avec N2). Captures
+  `maquettes/avant-v4-impression-*` et `apres-v4-impression-*` (deux premières pages, 90 ppp, deux polices). Lighthouse inchangé (`lighthouse-maquettes.json`, entrées « v1 à v4 » :
   loi montagne 100, outil 99 en performance avant comme après, CLS 0).
 - **Règles** : version imprimable = variante de la charte (`docs/11`, `charte-b.css`), sans demande de changement ; N3 et
   N5 ajoutent une adresse au plan, N2 et N4 une licence : demande de changement (n° 47 pour N3 et la licence ; N4 et N5 à
@@ -404,7 +408,37 @@ indépendante, validation de Houssem, recette de l'étape 9 avant la fusion, vé
   des journalistes (risque de liens payants déguisés, gain incertain).
 
 ## 8. Revue indépendante
-À compléter après la revue (une seule revue, par un agent qui n'a pas vu le travail).
+Une seule revue, par un agent qui n'avait pas vu le travail, en deux passages : le premier sur la version du 25/11
+(commit 1661bc0), le second sur les corrections et sur le complément demandé par Houssem le même soir (Search Console du
+25/11, axe f, maquette V4, demande n° 47 ; commit 113d9f4).
+- **Verdicts** : « à corriger » au premier passage (un bloquant, cinq importants) ; « à corriger, corrections légères »
+  au second (aucun bloquant, deux importants).
+- **Reproduit par la revue** : `seo.json` et `proximite-hors-gabarit.json` identiques octet pour octet sur une
+  construction fraîche ; mesures des maquettes V1 à V3 et nombre de pages imprimées de V4 retrouvés ; `npm run schemas`,
+  `npm test` (926 sur 926), `npm run liens` et le contrôle de la construction verts à 1661bc0 ; aucune donnée personnelle
+  non publiée ni secret.
+- **Ce que la revue a changé** :
+  - **Bloquant** : la justification de la paire P0087 ↔ P0299 était fausse (la page P0299 ne décrit aucun cas Peugeot
+    ni Citroën) ; réécrite (même ligne du voyant moteur, perte de puissance dans les deux pages), vérifiée au second
+    passage.
+  - Loi montagne présentée à tort comme « la seule page qui reçoit des impressions » (C4, P3, classement) : « un tiers des
+    impressions » ; le niveau d'huile (67 impressions, position 12,9) passe en tête de P6.
+  - Pages à photo : 6 et non 7 ; alertes d'image : 31 et non 30 (C8, demande n° 45).
+  - P6 présentée comme l'avancement d'une décision du 21/11 (titles et descriptions renvoyés à J+30), à trancher par
+    Houssem.
+  - Demande n° 45 : documentation de Google signalée comme non lue et la raison comme non sourcée ; image de partage
+    1,9:1 face aux rapports d'aspect cités, d'où les trois versions proposées sous condition.
+  - V3 : pastilles de trois lignes dites, P8 placée en dernier ; allongement de l'accueil attribué à V2.
+  - V4 : « Sources » ne s'imprimait pas (liste repliée) : dépliée à l'impression, vérifié par `pdftotext` ; tuiles des
+    voyants en clair ; impression mesurée avec les deux polices ; captures produites par `imprimer.cjs` (90 ppp).
+  - Mineurs : C1 (trois H2 et la section ACEA diffèrent), P4 (marques du H2 de P0299), C3 (angles tirés de `docs/07` et
+    `docs/05` seulement), `lastmod` (32 adresses), « règle 14 b l'impose » retiré, position du lien du pied (7 576 px),
+    cible du lien de V1, marge de 640 px, médiane des liens entrants définie, provenance du relevé du 25/11, écart
+    14 + 12 + 13 = 39 sur 40 signalé, C11 présenté comme hypothèse, titre de N5 (16 lignes sur 26), contact de N3,
+    question des symboles normalisés dans la demande n° 47, commentaire de `maquettes.mjs`.
+- **Écarté** : rien.
+- **Corrigé après le second passage, non relu** : la formulation du classement, P6, C0, C11, N3, N5, la provenance du
+  relevé, la demande n° 47 et la nouvelle version de V4 (sources dépliées, tuiles claires, deux polices).
 
 ## 9. Ce qui n'est pas vérifié
 - Le site en ligne (inaccessible depuis la session) ; Safari iOS et un vrai téléphone.

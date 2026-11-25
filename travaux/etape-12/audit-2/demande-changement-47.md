@@ -35,6 +35,9 @@
    - contact par `{{contact}}`.
 2. **Licence** : recommandée, Creative Commons Attribution 4.0 (CC BY 4.0) pour les dessins du site. Choix juridique de
    Houssem (options : CC BY 4.0 ; CC BY-SA 4.0 ; aucune licence et autorisation au cas par cas).
+   Question à joindre au choix : les pictogrammes sont redessinés par nos soins, mais d'après des symboles normalisés
+   (règlement ONU n° 121, cité pour le symbole et la couleur) ; la licence ne porte que sur notre dessin, pas sur le
+   symbole, ce que la page doit dire.
 3. **Mentions légales** : une clause « Propriété et réutilisation » qui renvoie à la page.
 4. **Version imprimable** (maquette V4, `@media print`) : variante de la charte, livrée avec le lot, sans demande de
    changement ; citée ici parce que la page la présente.

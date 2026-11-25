@@ -1,7 +1,8 @@
 # Search Console : relevé du 25/11/2026 (soir), transmis pour l'audit n° 2
 
-Relevé par Claude le 25/11/2026 au soir, en lecture seule, propriété de domaine `decodauto.com` ; chiffres transmis
-par Houssem le 25/11 au soir pour l'audit n° 2 (`travaux/etape-12/audit-2/audit.md`). Rapport « Pages » en retard de
+Chiffres reçus le 25/11/2026 au soir dans le message de Houssem (relevé fait par Claude dans la Search Console, en lecture
+seule, propriété de domaine `decodauto.com`), recopiés ici tels quels pour l'audit n° 2
+(`travaux/etape-12/audit-2/audit.md`) ; la session de l'audit n'a pas accès à la Search Console. Rapport « Pages » en retard de
 quelques jours sur l'état réel. Règle 14 c : ces chiffres servent à prioriser, pas à réécrire un title ou un H1.
 
 ## Performances, 28 derniers jours (27/10 au 23/11/2026)
