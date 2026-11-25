@@ -57,8 +57,10 @@ export interface MesurePage {
   basPremiereSituation: number | null;
   basEncadre: number | null;
   hautIllustration: number | null;
-  /** L'illustration suit immédiatement le bloc « Notices / Base du coût » (data-provenance). */
+  /** L'illustration suit immédiatement le bloc « Notices / Base du coût » (data-provenance), seule ou en tête du bloc du visuel. */
   illustrationApresProvenance: boolean;
+  /** Haut de la photo sous licence libre (demande de changement n° 42), sinon null. */
+  hautPhoto?: number | null;
   /** Haut de l'arbre de décision ou des étapes d'un tutoriel (page panne ou dossier), sinon null. */
   hautArbre: number | null;
   /** Nombre de lignes (situations) de l'encadré : raison donnée quand l'illustration dépasse trois écrans. */

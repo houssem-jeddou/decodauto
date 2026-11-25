@@ -51,6 +51,7 @@ import {
 import { ADRESSE_SIGNALEMENT, PARTIES_DU_NOM } from './site.ts';
 import { ancreThemeAccueil } from './accueil.ts';
 import { dimensionsDessin, imgIllustration, imgPictogramme } from './images-fichiers.ts';
+import { visuelHtml } from './photos.ts';
 import { logoEnLigne } from './marque.ts';
 import { ANCRE_CONFIDENTIALITE, ANCRE_METHODE, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_LIEN_METHODE, LIBELLE_SIGNALER_ERREUR } from './charte.ts';
 import { dateAffichee, datesAffichees, fourchetteAffichee, libelleRisque, trancheDesPieces, type CoutResolu, type DonneesCouts } from './cout.ts';
@@ -737,8 +738,16 @@ export function illustrationAccueil(illustrations: ReadonlyMap<string, string> |
   return figureIllustration(illustrationEnLigne(dessin, illustration.alt, illustration.fichier), '', 'illustration illustration-accueil');
 }
 
-/** Illustration de la page, tirée de `site.illustrations` ; obligatoire au format 2 (règle 2i). */
-export function illustrationDeLaPage(page: Pick<PageEditoriale, 'id' | 'illustration'>, site: Pick<DonneesSite, 'illustrations' | 'imagesEnFichiers'>): string {
+/**
+ * Illustration de la page, tirée de `site.illustrations` ; obligatoire au format 2 (règle 2i). Sur une page du registre des
+ * photos (demande de changement n° 42, src/lib/photos.ts), la photo s'ajoute après elle, dans le même bloc `data-visuel`.
+ */
+export function illustrationDeLaPage(page: Pick<PageEditoriale, 'id' | 'illustration'>, site: Pick<DonneesSite, 'illustrations' | 'imagesEnFichiers' | 'photos'>): string {
+  return visuelHtml(figureDeLIllustration(page, site), site.photos?.get(page.id));
+}
+
+/** Figure de l'illustration seule (règle 2i). */
+function figureDeLIllustration(page: Pick<PageEditoriale, 'id' | 'illustration'>, site: Pick<DonneesSite, 'illustrations' | 'imagesEnFichiers'>): string {
   if (page.illustration === undefined) throw new Error(`page « ${page.id} » au format 2 : illustration absente (champ illustration : fichier de ${DOSSIER_ILLUSTRATIONS}, texte alternatif, légende ; règle 2i)`);
   const svg = site.illustrations?.get(page.illustration.fichier);
   if (svg === undefined) throw new Error(`page « ${page.id} » : illustration « ${page.illustration.fichier} » introuvable (${DOSSIER_ILLUSTRATIONS}/${page.illustration.fichier}.svg)`);

@@ -141,6 +141,21 @@ a[data-lien-notices]{white-space:nowrap}
 .illustration svg,.illustration img{display:block;width:100%;height:auto}
 .illustration figcaption{font-size:.875rem;margin:.45rem .2rem 0;line-height:1.4}
 .credit{font-weight:700;white-space:nowrap}
+/* Visuel avec photo (demande de changement n° 42, lot U4 de l'audit UX/UI) : l'illustration dessinée puis la photo sous licence
+   libre, dans l'emplacement du visuel (juste après le bloc « Notices / Base du coût ») ; empilées sur téléphone, la photo sous
+   l'illustration ; côte à côte dès 40 rem (illustration puis photo). Le bloc garde la marge haute de l'illustration seule :
+   rien ne bouge au-dessus. Photo : petit titre, image 3:2, légende, crédit (auteur et licence en liens). */
+.visuel{margin:.8rem 0 0;display:grid;gap:.8rem;align-items:start}
+.visuel>figure{margin:0}
+@media (min-width:40rem){.visuel{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.photo{padding:.6rem;overflow:hidden}
+.photo-titre{margin:.15rem .2rem .5rem;font-family:var(--police-titre);font-weight:700;font-size:.9375rem;line-height:1.3}
+.photo img{display:block;width:100%;height:auto;border-radius:12px}
+.photo figcaption{font-size:.875rem;margin:.45rem .2rem 0;line-height:1.4}
+.photo-credit{display:block;margin-top:.3rem;font-size:.8125rem}
+.photo-credit a{text-underline-offset:2px}
+/* Couleurs forcées (Windows) : le cadre de la photo reste visible et le focus de ses liens prend la couleur système. */
+@media (forced-colors:active){.photo{border:1px solid CanvasText}.photo a:focus-visible{outline-color:Highlight}}
 .sommaire{margin:1.1rem 0 0}
 .sommaire p{font-size:.8125rem;font-weight:700;margin:0 0 .35rem;color:var(--texte-doux)}
 .sommaire ul{list-style:none;margin:0;padding:0 0 .25rem;display:flex;flex-wrap:nowrap;overflow-x:auto;gap:.4rem;scrollbar-width:thin}
@@ -440,7 +455,7 @@ body:has(.tete-404)>main{flex:1 0 auto}
 
 /* ================================================================== B « Tableau de bord » */
 :root .bandeau{background:var(--nuit);color:#fff}
-:root .bandeau,:root .tete,:root .hero,:root .decision,:root .pied,:root .voyants,:root .outil-groupe,:root .illustration{--focus:var(--nuit-lien)}
+:root .bandeau,:root .tete,:root .hero,:root .decision,:root .pied,:root .voyants,:root .outil-groupe,:root .illustration,:root .photo{--focus:var(--nuit-lien)}
 :root .nom-texte span{color:var(--ambre)}
 :root .bouton-voyant{background:var(--ambre);color:#1a1300;border-radius:999px}
 :root .menu-site>summary{color:var(--nuit-texte);box-shadow:inset 0 0 0 1px var(--filet-nuit)}
@@ -480,6 +495,11 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .illustration{background:var(--panneau);border-radius:20px}
 :root .illustration figcaption{color:var(--nuit-doux)}
 :root .credit{color:var(--nuit-texte)}
+:root .photo{background:var(--panneau);border-radius:20px}
+:root .photo-titre{color:var(--ambre)}
+:root .photo figcaption{color:var(--nuit-doux)}
+:root .photo-credit{color:var(--nuit-texte)}
+:root .photo a{color:var(--nuit-lien)}
 :root .sommaire a{border:1px solid #9aa6b5;border-radius:999px;color:var(--texte);background:#fff}
 /* Colonne de côté (ordinateur) : une pastille de deux ou trois lignes garde son texte loin de l'arrondi (revue du lot C3) ; une
    pastille d'une ligne (33 px) garde sa forme. Sur téléphone, pastilles de hauteur égale : forme ronde inchangée. */
