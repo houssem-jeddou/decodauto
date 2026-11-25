@@ -1,0 +1,162 @@
+[
+ {
+  "chemin": "/voyants/moteur/",
+  "zone": "liees",
+  "w": 375,
+  "police": "chargée",
+  "hauteurZone": 460,
+  "hauteurPage": 12355,
+  "largeurPage": 375,
+  "basPremiereSituation": 520
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "zone": "liees",
+  "w": 375,
+  "police": "secours",
+  "hauteurZone": 460,
+  "hauteurPage": 12406,
+  "largeurPage": 375,
+  "basPremiereSituation": 520
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "zone": "liees",
+  "w": 1366,
+  "police": "chargée",
+  "hauteurZone": 273,
+  "hauteurPage": 7806,
+  "largeurPage": 1366,
+  "basPremiereSituation": 338
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "zone": "liees",
+  "w": 1366,
+  "police": "secours",
+  "hauteurZone": 273,
+  "hauteurPage": 7806,
+  "largeurPage": 1366,
+  "basPremiereSituation": 338
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "zone": "tete",
+  "w": 375,
+  "police": "chargée",
+  "hauteurZone": 209,
+  "hauteurPage": 7794,
+  "largeurPage": 375,
+  "basPremiereSituation": 544
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "zone": "tete",
+  "w": 375,
+  "police": "secours",
+  "hauteurZone": 233,
+  "hauteurPage": 7844,
+  "largeurPage": 375,
+  "basPremiereSituation": 569
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "zone": "tete",
+  "w": 1366,
+  "police": "chargée",
+  "hauteurZone": 151,
+  "hauteurPage": 5226,
+  "largeurPage": 1366,
+  "basPremiereSituation": 338
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "zone": "tete",
+  "w": 1366,
+  "police": "secours",
+  "hauteurZone": 188,
+  "hauteurPage": 5263,
+  "largeurPage": 1366,
+  "basPremiereSituation": 375
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "zone": "menu",
+  "w": 375,
+  "police": "chargée",
+  "hauteurZone": 513,
+  "hauteurPage": 7794,
+  "largeurPage": 375,
+  "basPremiereSituation": 544
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "zone": "menu",
+  "w": 375,
+  "police": "secours",
+  "hauteurZone": 513,
+  "hauteurPage": 7844,
+  "largeurPage": 375,
+  "basPremiereSituation": 569
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "zone": "menu",
+  "w": 1366,
+  "police": "chargée",
+  "hauteurZone": 616,
+  "hauteurPage": 5226,
+  "largeurPage": 1366,
+  "basPremiereSituation": 338
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "zone": "menu",
+  "w": 1366,
+  "police": "secours",
+  "hauteurZone": 616,
+  "hauteurPage": 5263,
+  "largeurPage": 1366,
+  "basPremiereSituation": 375
+ },
+ {
+  "chemin": "/",
+  "zone": "accueil-codes",
+  "w": 375,
+  "police": "chargée",
+  "hauteurZone": 572,
+  "hauteurPage": 3133,
+  "largeurPage": 375,
+  "basPremiereSituation": null
+ },
+ {
+  "chemin": "/",
+  "zone": "accueil-codes",
+  "w": 375,
+  "police": "secours",
+  "hauteurZone": 572,
+  "hauteurPage": 3165,
+  "largeurPage": 375,
+  "basPremiereSituation": null
+ },
+ {
+  "chemin": "/",
+  "zone": "accueil-codes",
+  "w": 1366,
+  "police": "chargée",
+  "hauteurZone": 877,
+  "hauteurPage": 1967,
+  "largeurPage": 1366,
+  "basPremiereSituation": null
+ },
+ {
+  "chemin": "/",
+  "zone": "accueil-codes",
+  "w": 1366,
+  "police": "secours",
+  "hauteurZone": 877,
+  "hauteurPage": 1967,
+  "largeurPage": 1366,
+  "basPremiereSituation": null
+ }
+]

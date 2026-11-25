@@ -1,0 +1,43 @@
+id | adresse | requête principale | volume requête | somme des volumes | mots-clés | liens déclarés | page mère
+voyants | /voyants/ | voyant orange voiture | 31600 | 142516 | 205 | 1 | 
+voyant-moteur | /voyants/moteur/ | voyant moteur orange | 31600 | 119764 | 159 | 11 | voyants
+moteur-puretech | /moteur-puretech/ | moteurs puretech | 31600 | 103016 | 79 | 3 | 
+loi-montagne | /loi-montagne/ | loi montagne | 31600 | 101752 | 38 | 0 | 
+pression-des-pneus | /pression-des-pneus/ | pression des pneus | 31600 | 88796 | 30 | 2 | 
+voyant-huile | /voyants/huile/ | voyant huile moteur | 31600 | 51508 | 29 | 3 | voyants
+nettoyer-fap | /nettoyer-fap/ | nettoyer fap | 31600 | 43924 | 22 | 0 | 
+voiture-ne-demarre-pas | /voiture-ne-demarre-pas/ | voiture ne demarre pas | 3160 | 38868 | 55 | 4 | 
+liquide-de-refroidissement | /liquide-de-refroidissement/ | liquide de refroidissement | 31600 | 35076 | 22 | 2 | 
+huile-5w30 | /huile-moteur/5w30/ | huile 5w30 | 3160 | 27492 | 20 | 1 | huile-moteur
+huile-moteur | /huile-moteur/ | huile moteur vidange | 3160 | 26228 | 27 | 0 | 
+huile-5w40 | /huile-moteur/5w40/ | huile 5w40 | 3160 | 22752 | 14 | 0 | huile-moteur
+voyant-frein | /voyants/frein/ | voyant frein | 3160 | 20540 | 21 | 2 | voyants
+code-p1351 | /codes-defaut/p1351/ | p1351 | 3160 | 19276 | 17 | 0 | 
+voyant-fap | /voyants/fap/ | voyant fap | 3160 | 18960 | 24 | 4 | voyants
+surchauffe-moteur | /moteur-qui-surchauffe/ | moteur qui surchauffe | 3160 | 18012 | 25 | 2 | 
+code-p0087 | /codes-defaut/p0087/ | p0087 | 3160 | 17380 | 21 | 1 | 
+batterie-changer | /batterie-voiture/changer/ | comment changer une batterie de voiture | 3160 | 16116 | 15 | 2 | batterie-voiture
+usure-des-pneus | /usure-des-pneus/ | pneu usé | 3160 | 16116 | 9 | 3 | 
+code-p0299 | /codes-defaut/p0299/ | p0299 | 3160 | 15168 | 22 | 1 | 
+batterie-voiture | /batterie-voiture/ | voltage batterie voiture | 3160 | 15168 | 12 | 0 | 
+contre-visite-controle-technique | /contre-visite-controle-technique/ | contre visite controle technique | 3160 | 14852 | 50 | 0 | 
+code-p0380 | /codes-defaut/p0380/ | p0380 | 3160 | 13904 | 17 | 0 | 
+fumee-echappement | /fumee-echappement/ | fumée blanche voiture | 3160 | 13904 | 28 | 1 | 
+bruit-moteur | /bruit-moteur/ | bruit moteur | 316 | 13272 | 24 | 2 | 
+batterie-recharger | /batterie-voiture/recharger/ | recharger une batterie de voiture | 3160 | 13272 | 17 | 1 | batterie-voiture
+huile-10w40 | /huile-moteur/10w40/ | huile 10w40 | 3160 | 12956 | 9 | 2 | huile-moteur
+voyant-pression-pneus | /voyants/pression-pneus/ | voyant pression pneu | 3160 | 11060 | 18 | 1 | voyants
+voyant-airbag | /voyants/airbag/ | voyant airbag | 3160 | 10744 | 16 | 1 | voyants
+code-p0420 | /codes-defaut/p0420/ | p0420 | 3160 | 10744 | 17 | 1 | 
+voyant-abs-esp | /voyants/abs-esp/ | voyant abs | 3160 | 10428 | 17 | 1 | voyants
+liquide-de-frein | /liquide-de-frein/ | liquide de frein | 31600 | 9796 | 10 | 1 | 
+voiture-qui-broute | /voiture-qui-broute/ | voiture qui broute | 3160 | 9164 | 11 | 1 | 
+voyant-adblue | /voyants/adblue/ | voyant adblue | 3160 | 7900 | 16 | 0 | voyants
+voyant-prechauffage | /voyants/prechauffage/ | voyant préchauffage | 3160 | 7584 | 15 | 5 | voyants
+perte-de-puissance | /perte-de-puissance-voiture/ | perte de puissance voiture | 3160 | 7268 | 14 | 0 | 
+niveau-huile | /huile-moteur/verifier-niveau/ | niveau d huile moteur | 3160 | 7268 | 14 | 0 | huile-moteur
+voyant-batterie | /voyants/batterie/ | voyant batterie | 3160 | 4424 | 5 | 3 | voyants
+voyant-direction | /voyants/direction/ | voyant volant orange | 3160 | 3792 | 3 | 1 | voyants
+accueil | / |  |  | 0 | 0 | 0 | 
+mentions-legales | /mentions-legales/ |  |  | 0 | 0 | 0 | 
+a-propos | /a-propos/ |  |  | 0 | 0 | 0 | 

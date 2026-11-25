@@ -1,0 +1,85 @@
+{
+ "note": "Lighthouse 12.6.1, mobile (réglages par défaut), médiane de 3 passages ; construction indexable du 25/11 servie en local sans compression ; « apres » = maquettes V1, V2 et V3 appliquées",
+ "resultats": {
+  "apres-accueil": {
+   "performance": 1,
+   "accessibilite": 1,
+   "bonnesPratiques": 1,
+   "seo": 1,
+   "cls": 0,
+   "lcpMs": 1201,
+   "poidsOctets": 85980,
+   "passages": 3
+  },
+  "apres-codes-defaut-p0087": {
+   "performance": 1,
+   "accessibilite": 1,
+   "bonnesPratiques": 1,
+   "seo": 1,
+   "cls": 0,
+   "lcpMs": 1201,
+   "poidsOctets": 93233,
+   "passages": 3
+  },
+  "apres-moteur-qui-surchauffe": {
+   "performance": 1,
+   "accessibilite": 1,
+   "bonnesPratiques": 1,
+   "seo": 1,
+   "cls": 0,
+   "lcpMs": 1351,
+   "poidsOctets": 111661,
+   "passages": 3
+  },
+  "apres-voyants-moteur": {
+   "performance": 1,
+   "accessibilite": 1,
+   "bonnesPratiques": 1,
+   "seo": 1,
+   "cls": 0,
+   "lcpMs": 1201,
+   "poidsOctets": 124841,
+   "passages": 3
+  },
+  "avant-accueil": {
+   "performance": 1,
+   "accessibilite": 1,
+   "bonnesPratiques": 1,
+   "seo": 1,
+   "cls": 0,
+   "lcpMs": 1052,
+   "poidsOctets": 85504,
+   "passages": 3
+  },
+  "avant-codes-defaut-p0087": {
+   "performance": 1,
+   "accessibilite": 1,
+   "bonnesPratiques": 1,
+   "seo": 1,
+   "cls": 0,
+   "lcpMs": 1201,
+   "poidsOctets": 92349,
+   "passages": 3
+  },
+  "avant-moteur-qui-surchauffe": {
+   "performance": 1,
+   "accessibilite": 1,
+   "bonnesPratiques": 1,
+   "seo": 1,
+   "cls": 0,
+   "lcpMs": 1202,
+   "poidsOctets": 110791,
+   "passages": 3
+  },
+  "avant-voyants-moteur": {
+   "performance": 1,
+   "accessibilite": 1,
+   "bonnesPratiques": 1,
+   "seo": 1,
+   "cls": 0,
+   "lcpMs": 1351,
+   "poidsOctets": 123945,
+   "passages": 3
+  }
+ }
+}
