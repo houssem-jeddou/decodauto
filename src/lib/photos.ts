@@ -7,12 +7,12 @@
 // La figure de la photo : petit titre (« Sur une vraie voiture », ou « Sur la route » pour la loi montagne), l'image (WebP en
 // trois largeurs, `srcset` et `sizes`, largeur et hauteur posées, chargement différé), puis la légende (ce que montre la
 // photo, et pour un organe de la voiture « L'emplacement varie selon la voiture : voir votre notice. ») et le crédit
-// (« Photo : auteur, licence, recadrée. », liens vers la page Commons du fichier et vers la licence ; licence exigée par
+// (« Photo : « titre », auteur, licence, recadrée. », liens vers la page Commons du fichier et vers la licence ; licence exigée par
 // CC BY et CC BY-SA). Les fichiers sont servis par le site lui-même (`/photos/`, copiés à la construction depuis src/photos/
 // par scripts/integration-photos.ts), jamais depuis Commons (TIERS-RESSOURCE). Contrôles PHOTO-* (scripts/lib/photos.ts).
 // Module sans dépendance au système de fichiers : tests, construction et script de production l'utilisent tel quel.
 import registre from '../../data/photos.json' with { type: 'json' };
-import { attributHtml, texteHtml } from './html.ts';
+import { INSECABLE, attributHtml, texteHtml } from './html.ts';
 import { urlAbsolue } from './site.ts';
 import { registrePhotosSchema, type Photo } from '../schemas/photos.ts';
 
@@ -71,9 +71,12 @@ export function imgPhoto(photo: Pick<Photo, 'id' | 'alt'>): string {
   return `<img src="${attributHtml(adressePhoto(photo.id, LARGEUR_PHOTO_DEFAUT))}" srcset="${attributHtml(srcset)}" sizes="${attributHtml(TAILLES_PHOTO)}" alt="${attributHtml(photo.alt)}" width="${largeur}" height="${hauteurPhoto(largeur)}" loading="lazy" decoding="async">`;
 }
 
-/** Crédit : « Photo : auteur, licence, modifications. », l'auteur menant à la page Commons du fichier, la licence à son texte. */
-export function creditPhoto(photo: Pick<Photo, 'auteur' | 'licence' | 'url_licence' | 'page_commons' | 'modifications'>): string {
-  return `<span class="photo-credit" data-credit-photo>${texteHtml(TEXTES_PHOTO.credit)} <a href="${attributHtml(photo.page_commons)}" data-credit-auteur>${texteHtml(photo.auteur)}</a>, <a href="${attributHtml(photo.url_licence)}" rel="license" data-credit-licence>${texteHtml(photo.licence)}</a>, ${texteHtml(photo.modifications)}.</span>`;
+/**
+ * Crédit : « Photo : « titre », auteur, licence, modifications. » (titre de l'œuvre : licences CC 3.0, recommandé en 4.0),
+ * l'auteur menant à la page Commons du fichier, la licence à son texte.
+ */
+export function creditPhoto(photo: Pick<Photo, 'titre' | 'auteur' | 'licence' | 'url_licence' | 'page_commons' | 'modifications'>): string {
+  return `<span class="photo-credit" data-credit-photo>${texteHtml(TEXTES_PHOTO.credit)} «${INSECABLE}<span data-credit-titre>${texteHtml(photo.titre)}</span>${INSECABLE}», <a href="${attributHtml(photo.page_commons)}" data-credit-auteur>${texteHtml(photo.auteur)}</a>, <a href="${attributHtml(photo.url_licence)}" rel="license" data-credit-licence>${texteHtml(photo.licence)}</a>, ${texteHtml(photo.modifications)}.</span>`;
 }
 
 /** Figure de la photo : petit titre, image, légende et crédit. */

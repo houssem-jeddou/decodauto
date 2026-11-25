@@ -4,7 +4,8 @@
 //  - PHOTO-RENDU : une page du registre affiche sa photo, et seulement elle, dans le bloc du visuel (`data-visuel`), après
 //    l'illustration : petit titre, image (srcset des trois largeurs, sizes, largeur et hauteur, chargement différé), texte
 //    alternatif et légende du registre ; une page hors du registre n'affiche aucune photo ;
-//  - PHOTO-CREDIT : crédit visible « Photo : auteur, licence, modifications. », lien vers la page Commons du fichier et lien
+//  - PHOTO-CREDIT : crédit visible « Photo : « titre », auteur, licence, modifications. » (titre de l'œuvre : nom du fichier sur
+//    Commons sans extension, vérifié par le schéma), lien vers la page Commons du fichier et lien
 //    vers la licence, ceux du registre ;
 //  - PHOTO-FICHIER : chaque photo référencée est servie sous /photos/, identique à son fichier de src/photos/, en WebP de la
 //    largeur annoncée et de hauteur 2/3, sans métadonnées (ni EXIF, ni XMP, ni profil ICC) ; /photos/ ne contient rien
@@ -145,8 +146,10 @@ export function constatsPhotoDeLaPage(html: string, fichier: string, photo: Phot
   const credit = figure.find('figcaption [data-credit-photo]');
   const auteur = credit.find('a[data-credit-auteur]');
   const licence = credit.find('a[data-credit-licence]');
-  const attendu = affiche(`${TEXTES_PHOTO.credit} ${photo.auteur}, ${photo.licence}, ${photo.modifications}.`);
+  const titre = credit.find('[data-credit-titre]');
+  const attendu = affiche(`${TEXTES_PHOTO.credit} « ${photo.titre} », ${photo.auteur}, ${photo.licence}, ${photo.modifications}.`);
   if (credit.length !== 1 || brut(credit.text()) !== attendu) e('PHOTO-CREDIT', `crédit « ${brut(credit.text())} » au lieu de « ${attendu} »`);
+  if (titre.length !== 1 || brut(titre.text()) !== affiche(photo.titre)) e('PHOTO-CREDIT', `titre de l'œuvre « ${photo.titre} » attendu dans le crédit`);
   if (auteur.length !== 1 || auteur.attr('href') !== photo.page_commons || brut(auteur.text()) !== affiche(photo.auteur)) e('PHOTO-CREDIT', `lien de l'auteur vers ${photo.page_commons} attendu`);
   if (licence.length !== 1 || licence.attr('href') !== photo.url_licence || licence.attr('rel') !== 'license' || brut(licence.text()) !== photo.licence) e('PHOTO-CREDIT', `lien de la licence (${photo.licence}) vers ${photo.url_licence} attendu, rel="license"`);
   if (credit.closest('[hidden], details:not([open]), .vh, [aria-hidden="true"]').length > 0) e('PHOTO-CREDIT', 'le crédit est visible, jamais masqué');

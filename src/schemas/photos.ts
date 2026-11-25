@@ -30,6 +30,12 @@ export const LARGEUR_SOURCE_MIN = 1600;
 /** Rapport largeur / hauteur des photos servies (cadrage horizontal 3:2), tolérance d'un pixel sur la hauteur. */
 export const RAPPORT_PHOTO = 3 / 2;
 
+/** Titre de l'œuvre tiré de la page Commons : nom du fichier, espaces au lieu des « _ », sans extension. */
+export function titreDeLOeuvre(pageCommons: string): string {
+  const fichier = decodeURIComponent(pageCommons.slice(pageCommons.indexOf('/wiki/File:') + '/wiki/File:'.length)).replace(/_/g, ' ');
+  return fichier.replace(/\.[A-Za-z0-9]+$/, '');
+}
+
 const entier = z.number().int().nonnegative();
 const rectangle = z.strictObject({ x: entier, y: entier, largeur: z.number().int().positive(), hauteur: z.number().int().positive() });
 export type Rectangle = z.infer<typeof rectangle>;
@@ -44,6 +50,11 @@ export const photoSchema = z
     nature: z.enum(NATURES_PHOTO),
     /** Page du fichier sur Wikimedia Commons (lien du crédit). */
     page_commons: z.string().regex(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:[^\s]+$/, 'page de fichier de Wikimedia Commons'),
+    /**
+     * Titre de l'œuvre, affiché dans le crédit (licences CC 3.0 : « the title of the Work if supplied » ; recommandé en 4.0) :
+     * le nom du fichier sur Commons, sans son extension (décision de Houssem du 25/11/2026).
+     */
+    titre: texte,
     /** Adresse de l'original sur upload.wikimedia.org (téléchargé par scripts/photos.ts, jamais servi depuis Commons). */
     fichier_commons: z.string().regex(/^https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/[0-9a-f]\/[0-9a-f]{2}\/[^\s?]+$/, 'original sur upload.wikimedia.org'),
     /** Empreinte SHA-1 de l'original, celle que donne Commons : le fichier téléchargé est vérifié contre elle. */
@@ -74,6 +85,7 @@ export const photoSchema = z
   .superRefine((p, ctx) => {
     const probleme = (path: string[], message: string, regle: string): void => ctx.addIssue({ code: 'custom', path, message, params: { regle } });
     if (p.url_licence !== LICENCES_PHOTOS[p.licence]) probleme(['url_licence'], `adresse de la licence ${p.licence} : ${LICENCES_PHOTOS[p.licence]}`, 'PHOTO-LICENCE');
+    if (p.titre !== titreDeLOeuvre(p.page_commons)) probleme(['titre'], `titre de l'œuvre : « ${titreDeLOeuvre(p.page_commons)} » (nom du fichier sur Commons, sans extension)`, 'PHOTO-CREDIT');
     const r = p.recadrage;
     if (r.x + r.largeur > p.largeur_originale || r.y + r.hauteur > p.hauteur_originale) probleme(['recadrage'], "le recadrage sort de l'original", 'PHOTO-RECADRAGE');
     if (r.largeur < LARGEUR_SOURCE_MIN) probleme(['recadrage', 'largeur'], `largeur gardée de ${r.largeur} px : ${LARGEUR_SOURCE_MIN} px au moins`, 'PHOTO-LARGEUR');

@@ -219,11 +219,30 @@ et les captures, le 25/11/2026. **Verdict : « à corriger »**. Constats et sui
 **Non revu** : les corrections faites après la revue (§8, colonne « Suite ») n'ont pas été relues par un second relecteur,
 puisqu'il n'y a qu'une revue par livrable. Elles sont dans le dernier commit de la branche.
 
-## 9. À valider par Houssem
-1. La demande n° 42 : texte, composant, exception `image` du JSON-LD, liens du crédit.
-2. Les six recadrages et le flou du code QR (`apercus/`).
-3. Le retrait de la photo du témoin d'usure, et la recherche d'une autre photo pour cette page dans un lot suivant.
-4. Les valeurs lisibles de l'étiquette de pression, ou leur flou (demande n° 42, §3).
-5. Les légendes et les textes alternatifs (registre).
-6. La date « Mis à jour le » inchangée (demande n° 42, §4), ou son avancée sur les six pages.
-7. Les captures avant et après (§4) et celles des états du composant (§3).
+## 9. Décisions de Houssem
+Validation du 25/11/2026 à 22 h 59, mot pour mot : « Ok pour toutes tes recommandations ».
+
+| Point soumis | Décision |
+|---|---|
+| 1. La demande n° 42 (texte, composant, exception `image` du JSON-LD, liens du crédit) | acceptée |
+| 2. Les six recadrages et le flou du code QR | validés |
+| 3. Le retrait de la photo du témoin d'usure | confirmé ; une autre photo sera proposée dans un lot suivant |
+| 4. Les valeurs de l'étiquette de pression | laissées lisibles, avec la légende actuelle |
+| 5. Les légendes et les textes alternatifs | validés |
+| 6. La date « Mis à jour le » | inchangée |
+| 7. Les captures avant et après, et celles des états du composant | validées |
+
+## 10. Retouche après la validation : titre de l'œuvre dans le crédit (non relue)
+Demandée par Houssem avant la fusion, **sans nouvelle revue indépendante** : elle n'a été relue par personne d'autre que son
+auteur.
+- **Ce que dit la licence** : les licences CC 3.0 exigent le titre de l'œuvre quand il est fourni (« the title of the
+  Work if supplied ») ; la licence 4.0 le recommande.
+- **Le titre** : celui de la page Commons, c'est-à-dire le nom du fichier sans son extension, noté au registre (champ
+  `titre`).
+- **Le crédit** : « Photo : « titre », auteur, licence, recadrée. » (`data-credit-titre`).
+- **Le contrôle PHOTO-CREDIT** vérifie deux choses :
+  - au schéma : le titre est égal au nom du fichier tiré de la page Commons ;
+  - dans la page construite : le titre est présent dans le crédit.
+- **Tests** : `tests/photos.test.ts`.
+- **À noter** : le titre du fichier du panneau, « Panneau B58 au Pas de Morgins 01 », nomme le lieu de la photo. La licence
+  l'exige, et la photo recadrée reste sans repère visible.

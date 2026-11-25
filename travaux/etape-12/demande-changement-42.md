@@ -1,13 +1,19 @@
 # Demande de changement n° 42 : photos sous licence libre dans l'emplacement du visuel (proposition P4, lot U4)
 
-Écrite par Claude le 24/11/2026, étape 12, lot U4 de l'audit UX/UI (`audit-ux-ui/audit.md`, P4). **Statut : proposée.**
+Écrite par Claude le 24/11/2026, étape 12, lot U4 de l'audit UX/UI (`audit-ux-ui/audit.md`, P4). **Statut : acceptée** par Houssem le 25/11/2026 à 22 h 59 : « Ok pour toutes tes recommandations ».
 - **Principe** : accepté par Houssem le 21/11/2026 (7 h 11), « à condition que chaque photo soit acceptée par lui avant tout
   téléchargement » (audit, §6, décision 4).
 - **Photos** : les sept, acceptées par Houssem le 24/11/2026 à 19 h 19 (« OUI pour tout. J'accepte toutes les photos »).
   Six sont mises en place. Celle du témoin d'usure est retirée du lot à la revue indépendante : recadrée sur le seul témoin
   de droite, comme demandé, elle ne le montre pas assez (paquet, §2). La page de l'usure des pneus garde son illustration
   seule ; une autre photo pourra lui être proposée, à faire accepter par Houssem.
-- **Reste à valider** : ce texte, le composant et les captures, sur la pull request du lot, avant toute fusion.
+- **Décision** (25/11/2026, 22 h 59, mot pour mot) : « Ok pour toutes tes recommandations ». Elle vaut pour :
+  - la demande n° 42 ;
+  - les valeurs de l'étiquette de pression, laissées lisibles avec la légende actuelle ;
+  - la date « Mis à jour le », inchangée ;
+  - le retrait de la photo du témoin d'usure (une autre photo sera proposée dans un lot suivant) ;
+  - les recadrages, les légendes et les captures.
+- **Retouche demandée avant la fusion**, sans nouvelle revue : le titre de l'œuvre dans le crédit de chaque photo (§3).
 
 Format de `docs/03` : élément concerné, changement proposé, raison (données), impact sur ce qui est validé, contrôles à
 relancer.
@@ -85,7 +91,7 @@ plus. Chaque ligne donne :
          width="1200" height="800" alt="<ce que montre la photo>" loading="lazy" decoding="async">
     <figcaption>
       <span class="photo-legende"><légende>. L'emplacement varie selon la voiture : voir votre notice.</span>
-      <span class="photo-credit">Photo : <a href="<page Commons>">auteur</a>, <a rel="license" href="<licence>">licence</a>, recadrée.</span>
+      <span class="photo-credit">Photo : « <span data-credit-titre>titre</span> », <a href="<page Commons>">auteur</a>, <a rel="license" href="<licence>">licence</a>, recadrée.</span>
     </figcaption>
   </figure>
 </div>
@@ -124,6 +130,10 @@ la décision de Houssem : flouter les valeurs (le crédit dit déjà « floutée
 **Données structurées** : sur ces six pages seulement, l'Article porte `image`, l'adresse absolue de la version de 1 200 px
 (`https://decodauto.com/photos/<id>-1200.webp`). C'est la seule exception à « pas d'image » de la règle 7.5a. Les images de
 partage Open Graph ne changent pas : elles restent celles de l'illustration (lot U3).
+
+**Titre de l'œuvre** (retouche demandée par Houssem le 25/11/2026) : le crédit donne le titre de l'œuvre, que les licences
+CC 3.0 exigent quand il est fourni (« the title of the Work if supplied ») et que la 4.0 recommande. C'est le nom du fichier
+sur Commons, sans son extension, noté au registre (champ `titre`) et vérifié par le schéma (PHOTO-CREDIT).
 
 **Liens du crédit** : un lien vers la page Commons du fichier, un lien vers le texte de la licence. Ce sont les seuls liens
 vers un autre site qui ne mènent pas à une source citée sur la page. Les licences CC BY et CC BY-SA les exigent : auteur,

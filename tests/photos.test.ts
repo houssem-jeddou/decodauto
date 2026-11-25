@@ -23,7 +23,7 @@ import {
   registrePhotos,
   visuelHtml,
 } from '../src/lib/photos.ts';
-import { LARGEUR_SOURCE_MIN, LICENCES_PHOTOS, photoSchema, type Photo } from '../src/schemas/photos.ts';
+import { LARGEUR_SOURCE_MIN, LICENCES_PHOTOS, photoSchema, titreDeLOeuvre, type Photo } from '../src/schemas/photos.ts';
 import { articleJsonLd, scriptJsonLd } from '../src/lib/donnees-structurees.ts';
 import { constatsFichiersPhotos, constatsPhotoDeLaPage, lireWebp, problemesFichierPhoto } from '../scripts/lib/photos.ts';
 import { copierPhotos, photosReferencees } from '../scripts/integration-photos.ts';
@@ -59,6 +59,16 @@ describe('photos : image de l\'article (R7-IMAGE-RECOMMANDEE, PHOTO-REGISTRE)', 
     assert.deepEqual(regles({ id: 'q', image: 'x.png' }, avecPhoto), []);
   });
   test('champ image et photo du registre : refusé (une seule image d\'article)', () => assert.deepEqual(regles({ id: 'p', image: 'x.png', format: 2 }, avecPhoto), ['erreur:PHOTO-REGISTRE']));
+});
+
+describe('photos : titre de l\'œuvre (crédit, licences CC)', () => {
+  test('nom du fichier sur Commons, espaces au lieu des « _ », sans extension', () => {
+    assert.equal(titreDeLOeuvre('https://commons.wikimedia.org/wiki/File:Brake_fluid_reservoir_in_%C5%A0koda_Fabia_I.jpg'), 'Brake fluid reservoir in Škoda Fabia I');
+    assert.equal(titreDeLOeuvre('https://commons.wikimedia.org/wiki/File:2020_Honda_Accord_1.5_TC-P_57.jpg'), '2020 Honda Accord 1.5 TC-P 57');
+  });
+  test('chaque photo du registre a pour titre celui de sa page Commons', () => {
+    for (const p of photos) assert.equal(p.titre, titreDeLOeuvre(p.page_commons), p.id);
+  });
 });
 
 describe('photos : registre (data/photos.json)', () => {
@@ -97,6 +107,7 @@ describe('photos : registre (data/photos.json)', () => {
     refus({ url_licence: 'https://creativecommons.org/licenses/by-sa/4.0' === base.url_licence ? LICENCES_PHOTOS['CC BY 3.0'] : LICENCES_PHOTOS['CC BY-SA 4.0'] }, 'PHOTO-LICENCE');
     refus({ floutage: [{ x: 0, y: 0, largeur: 10, hauteur: 10 }] }, 'PHOTO-CREDIT');
     refus({ modifications: 'recadrée, floutée en partie' }, 'PHOTO-CREDIT');
+    refus({ titre: 'Un autre titre' }, 'PHOTO-CREDIT');
     assert.throws(() => registrePhotos([base, base]), /une seule photo par page|en double/);
   });
 });
@@ -166,7 +177,8 @@ describe('photos : rendu (bloc du visuel)', () => {
     assert.equal(figure.find('a[data-credit-auteur]').attr('href'), organe.page_commons);
     assert.equal(figure.find('a[data-credit-licence]').attr('href'), organe.url_licence);
     assert.equal(figure.find('a[data-credit-licence]').attr('rel'), 'license');
-    assert.match(figure.find('[data-credit-photo]').text(), new RegExp(`^Photo\\u00a0: ${organe.auteur}, ${organe.licence.replace(/\./g, '\\.')}, recadrée\\.$`));
+    assert.equal(figure.find('[data-credit-titre]').text(), organe.titre);
+    assert.equal(figure.find('[data-credit-photo]').text(), `Photo\u00a0: «\u00a0${organe.titre}\u00a0», ${organe.auteur}, ${organe.licence}, recadrée.`);
     assert.ok(legendePhoto(organe).endsWith(TEXTES_PHOTO.emplacement));
     // Loi montagne : « Sur la route », sans la phrase sur l'emplacement (ce n'est pas un organe de la voiture).
     assert.equal(cheerio.load(figurePhoto(route))('.photo-titre').text(), TEXTES_PHOTO.titreRoute);
@@ -215,6 +227,8 @@ describe('photos : contrôles PHOTO-*', () => {
       ['PHOTO-RENDU', modifie(($) => $('figure[data-photo]').insertBefore('figure[data-illustration]')), p],
       ['PHOTO-RENDU', modifie(($) => $('.photo-titre').remove()), p],
       ['PHOTO-CREDIT', modifie(($) => $('[data-credit-photo]').remove()), p],
+      ['PHOTO-CREDIT', modifie(($) => $('[data-credit-titre]').text('Autre titre')), p],
+      ['PHOTO-CREDIT', modifie(($) => $('[data-credit-titre]').replaceWith('sans balise')), p],
       ['PHOTO-CREDIT', modifie(($) => $('a[data-credit-auteur]').attr('href', 'https://example.org/')), p],
       ['PHOTO-CREDIT', modifie(($) => $('a[data-credit-licence]').removeAttr('rel')), p],
       ['PHOTO-CREDIT', modifie(($) => $('a[data-credit-licence]').replaceWith('CC BY')), p],
