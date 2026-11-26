@@ -5842,8 +5842,8 @@
   "/voyants/adblue/": {
    "title": "Voyant AdBlue allumé : peut-on rouler, que faire ?",
    "titleLong": 50,
-   "description": "Voyant AdBlue : faites l'appoint avant la fin de l'autonomie affichée. Message de défaut : garage au plus tôt ; avec le voyant moteur, arrêtez-vous.",
-   "descriptionLong": 148,
+   "description": "Voyant AdBlue : faites l'appoint sans attendre, avant la fin de l'autonomie affichée. Défaut : garage au plus tôt ; avec le voyant moteur, arrêtez-vous.",
+   "descriptionLong": 152,
    "h1": "Voyant AdBlue : réserve basse, défaut antipollution ou démarrage impossible",
    "canonical": "https://decodauto.com/voyants/adblue/",
    "robots": null,
@@ -6188,8 +6188,8 @@
   "/voyants/batterie/": {
    "title": "Voyant batterie allumé : peut-on rouler, que faire ?",
    "titleLong": 52,
-   "description": "Voyant de batterie allumé moteur tournant : arrêtez-vous dès que c'est sans danger, la batterie n'est plus rechargée. Ce que dit chaque notice, causes.",
-   "descriptionLong": 151,
+   "description": "Voyant de batterie allumé moteur tournant : arrêtez-vous immédiatement, dès que c'est sans danger : la batterie n'est plus rechargée. Notices et causes.",
+   "descriptionLong": 152,
    "h1": "Voyant de batterie rouge : que faire quand il s’allume en roulant ?",
    "canonical": "https://decodauto.com/voyants/batterie/",
    "robots": null,
@@ -6982,8 +6982,8 @@
   "/voyants/huile/": {
    "title": "Voyant huile moteur allumé : rouge ou orange, peut-on rouler ?",
    "titleLong": 62,
-   "description": "Voyant d'huile rouge : arrêtez-vous dès que c'est sans danger, coupez le moteur, même si le niveau est correct. Orange : vérifiez le niveau sans attendre.",
-   "descriptionLong": 154,
+   "description": "Voyant d'huile rouge : arrêt immédiat dès que c'est sans danger, moteur coupé, même si le niveau est correct. Orange : vérifiez le niveau sans attendre.",
+   "descriptionLong": 152,
    "h1": "Voyant d’huile moteur rouge, orange ou clé : que faire ?",
    "canonical": "https://decodauto.com/voyants/huile/",
    "robots": null,

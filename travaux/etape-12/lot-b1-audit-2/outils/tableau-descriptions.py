@@ -2,7 +2,8 @@
 """Lot B1 de l'audit n° 2 (P6) : tableau des 33 descriptions, page par page : ancienne et nouvelle description, nombre de
 caractères, et ligne(s) de l'encadré de décision dont elle vient (situation, verdict et urgence lus dans la page construite).
 Le choix des lignes est fait à la main (SOURCES ci-dessous) ; « R » = réponse directe en tête de l'encadré (page
-informative). Usage : python3 tableau-descriptions.py <seo-avant.json> <seo-apres.json> <dist> > tableau.md"""
+informative) ; TEXTE : éléments qui viennent du texte de la page et non de l'encadré (jamais un verdict, une urgence ni
+un coût). Usage : python3 tableau-descriptions.py <seo-avant.json> <seo-apres.json> <dist> > tableau.md"""
 import html, json, re, sys
 avant = json.load(open(sys.argv[1]))['pages']; apres = json.load(open(sys.argv[2]))['pages']; dist = sys.argv[3]
 SOURCES = {
@@ -12,9 +13,14 @@ SOURCES = {
  '/perte-de-puissance-voiture/': [1, 2, 3, 5, 6], '/voiture-ne-demarre-pas/': [1, 4, 5], '/voyants/airbag/': [1, 2],
  '/fumee-echappement/': [1, 2, 4], '/voyants/huile/': [1, 2], '/voyants/frein/': [1, 2, 3], '/huile-moteur/5w40/': ['R', 1],
  '/loi-montagne/': [1, 2, 3, 4], '/usure-des-pneus/': ['R', 1], '/voyants/fap/': [1], '/voyants/batterie/': [1], '/voyants/direction/': [1, 2],
- '/voyants/': [1], '/voiture-qui-broute/': [1, 3, 4], '/contre-visite-controle-technique/': ['R', 1, 2], '/liquide-de-refroidissement/': ['R', 2],
+ '/voyants/': [1], '/voiture-qui-broute/': [1, 3, 4], '/contre-visite-controle-technique/': ['R', 1, 2], '/liquide-de-refroidissement/': ['R', 1, 2],
  '/voyants/prechauffage/': [1, 2], '/codes-defaut/p0299/': [1], '/huile-moteur/5w30/': ['R', 1, 2], '/huile-moteur/10w40/': ['R', 1],
  '/codes-defaut/p0420/': [1], '/nettoyer-fap/': [1, 4],
+}
+TEXTE = {
+ '/pression-des-pneus/': '« au moins une fois par mois », « comment gonfler »', '/batterie-voiture/changer/': '« plusieurs notices le réservent à un professionnel », « batterie équivalente », « ordre des bornes »',
+ '/voiture-ne-demarre-pas/': '« carburant », « clé non reconnue »', '/batterie-voiture/': '« tension de 12 volts »', '/moteur-puretech/': '« courroie », « rappels publiés par RappelConso », « couverture du constructeur »',
+ '/bruit-moteur/': '« claquement »', '/fumee-echappement/': '« fumée noire », « fumée bleue »', '/voyants/pression-pneus/': '« réinitialisez »',
 }
 SEPT = ['/huile-moteur/verifier-niveau/', '/batterie-voiture/recharger/', '/batterie-voiture/changer/', '/voyants/adblue/', '/moteur-puretech/', '/pression-des-pneus/', '/batterie-voiture/']
 txt = lambda x: ' '.join(html.unescape(re.sub(r'<[^>]+>', ' ', x)).split())
@@ -39,5 +45,6 @@ for u in pages:
             v = txt(re.search(r'<span class="verdict">(.*?)</span>', l, re.S).group(1))
             ur = txt(re.search(r'<span class="urgence">(.*?)</span>', l, re.S).group(1))
             srcs.append(f'l. {s} : {sit[:90]}{"…" if len(sit) > 90 else ""} → {v} ; {ur}')
+    if u in TEXTE: srcs.append('texte de la page : ' + TEXTE[u])
     nom = f'`{u}`' + (' (positions 7,5 à 18)' if u in SEPT else '')
     print(f"| {nom} | {cel(avant[u]['description'])} ({avant[u]['descriptionLong']}) | {cel(apres[u]['description'])} ({apres[u]['descriptionLong']}) | {'<br>'.join(cel(x) for x in srcs)} |")
