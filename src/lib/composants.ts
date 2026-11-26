@@ -394,8 +394,18 @@ export function adresseMethode(plan: ReadonlyMap<string, LigneDuPlan>): string {
   return `${page.adresse}#${ANCRE_METHODE}`;
 }
 
-export const ligneTransparence = (lienMethode: string): string =>
-  `<p class="ligne-transparence" data-ligne-transparence>${texteHtml(LIGNE_TRANSPARENCE.texte)} <a href="${attributHtml(lienMethode)}">${texteHtml(LIGNE_TRANSPARENCE.libelleLien)}</a></p>`;
+/**
+ * Ligne de transparence (charte §5.1), texte de la charte puis lien « Méthode ». Avec l'adresse de la page, un second lien
+ * « Signaler une erreur », le même que celui du pied de page, la termine (demande de changement n° 46, acceptée le
+ * 26/11/2026 : le lecteur qui doute de la décision trouve où le dire sans descendre en bas de page ; contrôle
+ * SIGNALER-ERREUR-TRANSPARENCE).
+ */
+export const ligneTransparence = (lienMethode: string, adressePage?: string): string =>
+  `<p class="ligne-transparence" data-ligne-transparence>${texteHtml(LIGNE_TRANSPARENCE.texte)} <a href="${attributHtml(lienMethode)}">${texteHtml(LIGNE_TRANSPARENCE.libelleLien)}</a>${
+    adressePage === undefined
+      ? ''
+      : `<span class="signaler-ici" data-signaler-erreur-transparence> · <!--email_off--><a href="${attributHtml(lienSignalement(adressePage))}">${texteHtml(LIBELLE_SIGNALER_ERREUR)}</a><!--/email_off--></span>`
+  }</p>`;
 
 // ---- Causes et leur coût -----------------------------------------------------------------------------
 

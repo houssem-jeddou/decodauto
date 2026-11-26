@@ -15,7 +15,7 @@
 id: voiture-qui-broute
 title: "Voiture qui broute : causes, et peut-on encore rouler ?"
 h1: "Ma voiture broute ou donne des à-coups : que faire ?"
-description: "Voiture qui broute ou donne des à-coups, essence ou diesel : ce que veut dire le voyant moteur qui clignote, quand s'arrêter, et les causes citées par les notices."
+description: "Voiture qui broute ou donne des à-coups, essence ou diesel : le voyant moteur qui clignote, quand s'arrêter, et les causes citées par les notices."
 libelle_court: Voiture qui broute
 question_decision: "Ma voiture broute : puis-je continuer à rouler ?"
 situations:

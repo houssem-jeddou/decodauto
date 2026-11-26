@@ -212,6 +212,8 @@ plusieurs cas n'en a pas. Le texte nomme la marque et le modèle ; ni « Verdict
 | Ligne de transparence | Pages éditoriales, sous la signature | Texte rédigé par une IA. Verdicts tirés des notices des constructeurs ou de sources officielles, citées sur cette page ; verdicts et décision en haut de page vérifiés par Houssem Jeddou. [Méthode] |
 <!-- vue-charte:transparence:fin -->
 
+Depuis la demande de changement n° 46 (acceptée le 26/11/2026, lot B1 de l'audit n° 2), la ligne de transparence se termine par « Méthode · Signaler une erreur » : le même lien de signalement que le pied de page, pré-rempli avec l'adresse de la page, pour qu'un lecteur qui doute de la décision trouve où le dire sans descendre en bas de page ; le texte de la ligne ne change pas (contrôle SIGNALER-ERREUR-TRANSPARENCE).
+
 Le lien « Méthode » mène à l'ancre `#methode` de la page « à propos ». Ces liens (« Méthode », « Signaler une erreur ») sont posés par le gabarit, pas écrits dans le texte des pages : R7-LIEN-HORS-PLAN ne les concerne pas ; `npm run liens` vérifie que l'ancre existe (LIEN-ANCRE).
 
 ### 7.2 Section « Méthode » de la page « à propos »

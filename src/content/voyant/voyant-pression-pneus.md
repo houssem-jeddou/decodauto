@@ -5,7 +5,7 @@
 id: voyant-pression-pneus
 title: "Voyant pression pneu allumé : peut-on rouler, que faire ?"
 h1: "Voyant de pression des pneus : que faire quand il s'allume ?"
-description: "Voyant de pression des pneus allumé : ralentissez et arrêtez-vous immédiatement, dès que c'est sans danger, pour contrôler les pneus. Puis regonflez et réinitialisez, notice par notice."
+description: "Voyant de pression des pneus allumé : arrêtez-vous immédiatement, dès que c'est sans danger, pour contrôler les pneus. Puis regonflez et réinitialisez."
 libelle_court: Voyant pression des pneus
 question_decision: Puis-je continuer à rouler avec le voyant de pression des pneus allumé ?
 situations:

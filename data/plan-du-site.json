@@ -798,7 +798,9 @@
       "p0087 vw"
     ],
     "liens": [
-      "perte-de-puissance"
+      "perte-de-puissance",
+      "code-p0299",
+      "voiture-ne-demarre-pas"
     ]
   },
   {
@@ -1007,6 +1009,9 @@
       "voyant epc perte de puissance",
       "perte de puissance",
       "perte de puissance 1.6 hdi 110 sans voyant"
+    ],
+    "liens": [
+      "surchauffe-moteur"
     ]
   },
   {

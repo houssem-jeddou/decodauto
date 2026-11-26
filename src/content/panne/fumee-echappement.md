@@ -19,7 +19,7 @@
 id: fumee-echappement
 title: "Fumée blanche voiture, fumée noire diesel : que faire ?"
 h1: "Fumée blanche à l'échappement, fumée noire ou bleue : faut-il s'inquiéter ?"
-description: "Fumée blanche au démarrage ou en roulant, vapeur d'eau, fumée noire d'un diesel, fumée bleue, fumée sous le capot : ce qui est normal selon les notices, et quand s'arrêter."
+description: "Fumée blanche, vapeur d'eau, fumée noire d'un diesel, fumée bleue, fumée sous le capot : ce qui est normal selon les notices, et quand s'arrêter."
 libelle_court: Fumée à l'échappement
 question_decision: "Ma voiture fume à l'échappement : puis-je continuer à rouler ?"
 situations:

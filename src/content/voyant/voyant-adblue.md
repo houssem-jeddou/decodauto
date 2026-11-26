@@ -4,7 +4,7 @@
 id: voyant-adblue
 title: "Voyant AdBlue allumé : peut-on rouler, que faire ?"
 h1: "Voyant AdBlue : réserve basse, défaut antipollution ou démarrage impossible"
-description: "Voyant AdBlue allumé : faites l'appoint avant la fin de l'autonomie affichée. Message de défaut : garage au plus tôt ; avec le voyant moteur, arrêtez-vous d'abord. Messages de chaque notice."
+description: "Voyant AdBlue : faites l'appoint avant la fin de l'autonomie affichée. Message de défaut : garage au plus tôt ; avec le voyant moteur, arrêtez-vous."
 libelle_court: Voyant AdBlue
 question_decision: Puis-je continuer à rouler avec le voyant AdBlue allumé ?
 situations:

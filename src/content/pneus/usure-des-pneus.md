@@ -15,7 +15,7 @@
 id: usure-des-pneus
 title: "Pneu usé : témoin d'usure, 1,6 mm et quand changer ses pneus"
 h1: "Pneus usés : peut-on encore rouler, et comment lire le témoin d'usure ?"
-description: "Un pneu est usé quand ses témoins d'usure affleurent la bande de roulement : ne repartez pas sans le changer. Ce que disent les notices, le contrôle technique et la loi."
+description: "Un pneu est usé quand ses témoins d'usure affleurent la bande de roulement : ne repartez pas sans le changer. Notices, contrôle technique et loi."
 libelle_court: Usure des pneus
 question_decision: "Puis-je rouler avec des pneus usés, et comment savoir s'ils le sont ?"
 reponse_directe: "Regardez les témoins d'usure au fond des rainures : s'ils affleurent la bande de roulement, le pneu est à sa limite d'usure. Ne poursuivez pas votre trajet avec ces pneus : faites-les remplacer."

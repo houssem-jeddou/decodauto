@@ -6,7 +6,7 @@ import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_ALTERNATIF_DU_SITE, NOM_DU_SIT
 import { CLASSE_EMPLACEMENT_PUB, EMPLACEMENTS_PUB, HAUTEUR_RESERVEE_PX } from '../../src/lib/emplacements-pub.ts';
 import { CONTEXTE_SCHEMA, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, estDateHeureDuJour, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
 import { listerFichiers } from './charger.ts';
-import { ANCRE_CONFIDENTIALITE, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, ANCRE_METHODE, PAGE_CONFIDENTIALITE, PAGE_METHODE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
+import { ANCRE_CONFIDENTIALITE, DESCRIPTION_LONGUEUR_MAX, EXPRESSIONS_INTERDITES, LIBELLE_LIEN_CONFIDENTIALITE, LIBELLE_SIGNALER_ERREUR, MENTION_EN_TETE, ANCRE_METHODE, PAGE_CONFIDENTIALITE, PAGE_METHODE, PART_CITEE_MAX } from '../../src/lib/charte.ts';
 import { normaliserRecherche } from '../../src/lib/texte.ts';
 import { normaliserTexte } from '../../src/lib/empreinte.ts';
 import { ADRESSE_SIGNALEMENT } from '../../src/lib/site.ts';
@@ -18,6 +18,7 @@ import { THEMES } from '../../src/schemas/listes.ts';
 import { ancreThemeAccueil } from '../../src/lib/accueil.ts';
 
 const erreur = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'erreur', message, fichier });
+const alerte = (regle: string, message: string, fichier?: string): Constat => ({ regle, gravite: 'alerte', message, fichier });
 
 async function lire(chemin: string): Promise<string | undefined> {
   try {
@@ -234,6 +235,16 @@ export function constatsMentionEtSignalement(html: string, fichier: string, adre
     const attendu = lienSignalement(adressePage);
     if (normaliserTexte(lien.text()) !== normaliserTexte(LIBELLE_SIGNALER_ERREUR) || lien.attr('href') !== attendu) {
       constats.push(erreur('SIGNALER-ERREUR-ABSENT', `le lien de signalement a le texte « ${LIBELLE_SIGNALER_ERREUR} » et l'adresse de la page dans son message (attendu : ${attendu})`, fichier));
+    }
+  }
+  // Demande de changement n° 46 : sur une page qui a une ligne de transparence, elle se termine par le même lien.
+  if ($('[data-ligne-transparence]').length > 0) {
+    const ici = $('[data-ligne-transparence] [data-signaler-erreur-transparence] a');
+    const attendu = lienSignalement(adressePage);
+    if (ici.length !== 1 || normaliserTexte(ici.text()) !== normaliserTexte(LIBELLE_SIGNALER_ERREUR) || ici.attr('href') !== attendu) {
+      constats.push(erreur('SIGNALER-ERREUR-TRANSPARENCE', `la ligne de transparence se termine par un seul lien « ${LIBELLE_SIGNALER_ERREUR} », à l'adresse du lien du pied de page (attendu : ${attendu} ; trouvé : ${ici.length})`, fichier));
+    } else if ($('[data-ligne-transparence] [data-signaler-erreur-transparence]').next().length > 0 || $('[data-ligne-transparence]').children().last().attr('data-signaler-erreur-transparence') === undefined) {
+      constats.push(erreur('SIGNALER-ERREUR-TRANSPARENCE', 'le lien « Signaler une erreur » termine la ligne de transparence, après « Méthode » (demande de changement n° 46)', fichier));
     }
   }
   return constats;
@@ -523,11 +534,14 @@ export function constatsPartCitee(html: string, fichier: string, partMax: number
 /**
  * Title et meta description présents sur toutes les pages du site construit (accueil, 404, socle et pages
  * éditoriales ; charte §3.4) : sans eux, Google les compose lui-même et le doublon n'est plus contrôlable.
+ * Meta description de plus de DESCRIPTION_LONGUEUR_MAX caractères : alerte DESCRIPTION-LONGUE (audit n° 2, P6).
  */
 export function constatsEnTetesPresents(enTetes: EnTetesDePage): Constat[] {
   const constats: Constat[] = [];
   if (enTetes.title === '') constats.push(erreur('TITLE-ABSENT', 'la page construite n\'a pas de title', enTetes.fichier));
   if (enTetes.description === '') constats.push(erreur('DESCRIPTION-ABSENTE', 'la page construite n\'a pas de meta description (charte §3.4 : la description dit la réponse en une phrase)', enTetes.fichier));
+  const longueur = [...enTetes.description].length;
+  if (longueur > DESCRIPTION_LONGUEUR_MAX) constats.push(alerte('DESCRIPTION-LONGUE', `meta description de ${longueur} caractères, au-delà de ${DESCRIPTION_LONGUEUR_MAX} : elle sera coupée dans les résultats de recherche`, enTetes.fichier));
   return constats;
 }
 

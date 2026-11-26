@@ -4,7 +4,7 @@
 id: voyant-batterie
 title: "Voyant batterie allumé : peut-on rouler, que faire ?"
 h1: "Voyant de batterie rouge : que faire quand il s'allume en roulant ?"
-description: "Voyant de batterie allumé moteur tournant : arrêtez-vous dès que c'est sans danger, la batterie n'est plus rechargée. Ce que dit chaque notice, causes et coût probable."
+description: "Voyant de batterie allumé moteur tournant : arrêtez-vous dès que c'est sans danger, la batterie n'est plus rechargée. Ce que dit chaque notice, causes."
 libelle_court: Voyant batterie
 question_decision: Puis-je continuer à rouler avec le voyant de batterie allumé ?
 situations:

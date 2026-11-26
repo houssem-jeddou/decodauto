@@ -13,7 +13,7 @@
 id: batterie-recharger
 title: "Recharger une batterie de voiture : chargeur, câbles, étapes"
 h1: "Recharger la batterie de sa voiture : comment faire, et quand rouler ?"
-description: "Recharger une batterie de voiture avec un chargeur de 12 volts, sans la débrancher, ou démarrer avec une autre voiture : les étapes des notices, et ce qu'il ne faut jamais faire."
+description: "Recharger une batterie de voiture avec un chargeur de 12 volts, ou démarrer avec une autre voiture : les étapes des notices, et ce qu'il ne faut pas faire."
 libelle_court: Recharger la batterie
 question_decision: "Comment recharger la batterie de ma voiture, et puis-je rouler ensuite ?"
 situations:

@@ -13,7 +13,7 @@
 id: batterie-voiture
 title: "Voltage batterie voiture : batterie faible, que faire ?"
 h1: "Batterie de voiture faible : comment le savoir, et que faire ?"
-description: "Batterie de voiture faible ? Tension de 12 volts, message « Batterie faible », indicateur coloré, batterie gelée, voyant rouge : ce que disent les notices, et quand la faire contrôler."
+description: "Batterie faible ? Tension de 12 volts, message « Batterie faible », œil magique, batterie gelée, voyant rouge : ce que disent les notices, et que faire."
 libelle_court: Batterie de voiture
 question_decision: "Ma batterie de voiture est-elle faible, et faut-il la changer ?"
 situations:

@@ -81,8 +81,11 @@ body:has(main :focus-visible,footer :focus-visible) .menu-site[open]>.menu-panne
 /* Couleurs forcées (Windows) : le bouton du menu garde un contour (l'ombre qui le dessine est retirée ; revue, I3). */
 @media (forced-colors:active){.menu-site>summary{border:1px solid CanvasText}}
 /* Pied de page (demande de changement n° 40) : « À propos », « Méthode » et les thèmes de l'accueil. */
-.pied-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.25rem 1.1rem;margin:0 0 .6rem;padding:0;list-style:none}
-.pied-nav a{font-weight:600;font-size:.875rem}
+/* Cibles de 44 px (audit n° 2, P10, lot B1, 26/11/2026 ; variante d'espacement, sans nouvelle demande de changement) :
+   chaque lien du pied est un bloc de 44 px de haut, l'écart entre eux passe dans leur marge intérieure. */
+.pied-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .35rem;margin:0 0 .6rem;padding:0;list-style:none}
+.pied-nav a{display:inline-block;font-weight:600;font-size:.875rem;line-height:1.2;padding:.85rem .4rem}
+.pied .signaler-erreur a,.pied .lien-confidentialite a{display:inline-block;padding:.8rem 0;margin:-.55rem 0}
 .mention-ia{max-width:72rem;margin:0 auto;padding:.3rem 1rem .05rem;font-size:1rem;line-height:1.35}
 .tete-int{max-width:44rem;margin:0 auto;padding:.15rem 1rem .5rem}
 /* Tête sans fil d'Ariane (socle, 404) : même écart entre la mention et le H1 que les pages éditoriales (revue de F1.3b). */
@@ -90,6 +93,9 @@ body:has(main :focus-visible,footer :focus-visible) .menu-site[open]>.menu-panne
 .fil{font-size:.8125rem;margin:.1rem 0 .3rem}
 .fil ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.25rem}
 .fil li+li::before{content:"›";margin:0 .3rem;opacity:.7}
+/* Zone tactile de 44 px autour des liens du fil d'Ariane, par marges négatives : la mise en page ne bouge pas (audit n° 2,
+   P10, lot B1). */
+.fil a{display:inline-block;padding:.85rem .3rem;margin:-.85rem -.3rem}
 /* H1 à 1,4 rem sur téléphone (1,45 au pilote) : en police de secours, celui du voyant de pression des pneus tient sur deux
    lignes et la première situation dans le premier écran (règle 2a, lot F2) ; sur ordinateur, 2,1 rem (ci-dessous). */
 h1{font-family:var(--police-titre);font-weight:700;font-size:1.4rem;line-height:1.1;margin:.05rem 0 0}
@@ -126,6 +132,8 @@ a[data-lien-notices]{white-space:nowrap}
 .borne{white-space:nowrap}
 .montant{font-size:.8125rem}
 .signature,.ligne-transparence{font-size:.8125rem;margin:.45rem 0;color:var(--texte-doux)}
+/* « Signaler une erreur » au bout de la ligne de transparence (demande de changement n° 46) : jamais séparé de son point. */
+.ligne-transparence .signaler-ici{white-space:nowrap}
 .signature{margin-top:.7rem}
 .provenance{font-size:.8125rem;color:var(--texte-doux);margin:.4rem 0 0;line-height:1.45}
 .provenance p{margin:.25rem 0}

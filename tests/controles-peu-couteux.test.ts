@@ -12,7 +12,7 @@ import { constatsDoublons, constatsEnTetesPresents, constatsExpressionsInterdite
 import { chargerDonnees } from '../scripts/lib/charger.ts';
 import { construireDemo } from '../scripts/lib/demo.ts';
 import { construireContexte, dansLeFutur, limiteProchaineRevue, plusMois } from '../src/lib/controle.ts';
-import { DELAI_REVUE_MOIS, MENTION_EN_TETE } from '../src/lib/charte.ts';
+import { DELAI_REVUE_MOIS, DESCRIPTION_LONGUEUR_MAX, MENTION_EN_TETE } from '../src/lib/charte.ts';
 
 const racine = join(dirname(fileURLToPath(import.meta.url)), '..');
 // Données réelles : la date du contrôle est la plus récente des données (tests/date-des-donnees.ts, DATES-FUTUR).
@@ -106,6 +106,11 @@ describe('title et meta description présents sur toutes les pages (charte §3.4
     const codes = (p: EnTetesDePage): string[] => constatsEnTetesPresents(p).map((c) => c.regle);
     assert.deepEqual(codes(page('a', 'Titre', 'H1', 'Description.')), []);
     assert.deepEqual(codes(page('a', '', 'H1', '')), ['TITLE-ABSENT', 'DESCRIPTION-ABSENTE']);
+  });
+  test(`meta description de plus de ${DESCRIPTION_LONGUEUR_MAX} caractères : alerte DESCRIPTION-LONGUE (audit n° 2, P6)`, () => {
+    const constats = (d: string) => constatsEnTetesPresents(page('a', 'Titre', 'H1', d)).map((c) => `${c.gravite}:${c.regle}`);
+    assert.deepEqual(constats('é'.repeat(DESCRIPTION_LONGUEUR_MAX)), []);
+    assert.deepEqual(constats('é'.repeat(DESCRIPTION_LONGUEUR_MAX + 1)), ['alerte:DESCRIPTION-LONGUE']);
   });
 });
 

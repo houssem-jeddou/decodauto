@@ -6,7 +6,7 @@
 id: moteur-puretech
 title: "Moteurs PureTech : courroie, huile, rappels et prise en charge"
 h1: "Moteur 1.2 PureTech : votre voiture est-elle concernée, et que faire ?"
-description: "Courroie qui se dégrade, consommation d'huile, pompe à vide : les rappels publiés par RappelConso, les alertes à ne pas ignorer et la couverture spéciale du constructeur, datée."
+description: "Courroie, consommation d'huile, pompe à vide : les rappels publiés par RappelConso, les alertes à ne pas ignorer et la couverture du constructeur, datée."
 libelle_court: Moteur PureTech
 question_decision: "Moteur PureTech : puis-je continuer à rouler si une alerte s'allume ou si un rappel me concerne ?"
 situations:

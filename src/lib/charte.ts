@@ -182,6 +182,12 @@ export const DELAI_REVUE_MOIS = { voyant: 12, 'code-defaut': 12, panne: 12, flui
 export const REVUE_LOI_MONTAGNE = { moisDebutFenetre: 9, jourLimite: 31, moisLimite: 10 } as const;
 
 /**
+ * Longueur maximale d'une meta description, en caractères (audit n° 2, proposition P6, lot B1, décision du 26/11/2026) :
+ * au-delà, le texte est coupé dans les résultats de recherche. Contrôle d'alerte DESCRIPTION-LONGUE (`scripts/lib/dist.ts`).
+ */
+export const DESCRIPTION_LONGUEUR_MAX = 155;
+
+/**
  * Part maximale de texte cité sur une page éditoriale (charte §2.6, livrable 6.6) : mots des extraits de notices, des
  * citations sourcées (`blockquote`, `q`) et du texte entre guillemets « … », sur les mots du texte affiché hors fil
  * d'Ariane, « Sources », renvois de page et liens de navigation (contrôle CITATIONS-PART). La loi ne fixe aucun seuil

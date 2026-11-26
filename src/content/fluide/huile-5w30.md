@@ -17,7 +17,7 @@
 id: huile-5w30
 title: "Huile 5W30 : que veut dire ce grade, et pour quel moteur ?"
 h1: "Huile 5W30 : que veut dire 5W30, et puis-je en mettre dans ma voiture ?"
-description: "Une 5W30 ne convient que si la notice de votre voiture la cite, avec la norme qu'elle demande. Ce que veulent dire 5W et 30, C2, C3, C4 et l'étiquette du bidon."
+description: "Une 5W30 ne convient que si la notice de votre voiture la cite, avec sa norme. Ce que veulent dire 5W et 30, les classes C2, C3 et C4, le bidon."
 libelle_court: Huile 5W30
 question_decision: "Puis-je mettre de l'huile 5W30 dans ma voiture ?"
 reponse_directe: "Oui, si la notice ou le plan d'entretien de votre voiture la cite : la Toyota Yaris non hybride l'admet, à côté de la 0W-16 qu'elle recommande. Sinon, n'en versez pas. Le bidon doit aussi porter la norme demandée."

@@ -16,7 +16,7 @@
 id: contre-visite-controle-technique
 title: "Contre-visite contrôle technique : délai de deux mois, validité"
 h1: "Contrôle technique défavorable : peut-on rouler, et quel délai pour la contre-visite ?"
-description: "Défaillance majeure ou critique : faites réparer avant de rouler. La contre-visite se passe dans les deux mois ; ce délai n'autorise pas à rouler avec le défaut."
+description: "Défaillance majeure ou critique : faites réparer avant de rouler. La contre-visite se passe dans les deux mois ; ce délai n'autorise pas à rouler."
 libelle_court: Contre-visite
 question_decision: "Contrôle technique défavorable : puis-je encore rouler, et dans quel délai faire la contre-visite ?"
 reponse_directe: "La loi laisse deux mois pour réparer et repasser si les défaillances sont majeures (S), et ne valide le contrôle que le jour même si l'une est critique (R). Ce délai n'est pas une autorisation de rouler avec le défaut."

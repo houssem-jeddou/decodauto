@@ -15,7 +15,7 @@
 id: bruit-moteur
 title: "Bruit moteur anormal : claquement, cliquetis, que faire ?"
 h1: "Mon moteur fait un bruit : normal, ou faut-il s'arrêter ?"
-description: "Bruit moteur au démarrage, cliquetis à l'accélération, claquement, bruit d'échappement qui change : ce que les notices jugent normal, et quand faire vérifier la voiture sans attendre."
+description: "Bruit moteur au démarrage, cliquetis, claquement, échappement qui change : ce que les notices jugent normal, et quand faire vérifier la voiture."
 libelle_court: Bruit moteur
 question_decision: "Mon moteur fait un bruit anormal : puis-je continuer à rouler ?"
 situations:
