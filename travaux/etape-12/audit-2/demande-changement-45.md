@@ -1,7 +1,7 @@
 # Demande de changement n° 45 : image de l'Article et aperçu d'image en grand (proposition P7 de l'audit n° 2) — brouillon
 
 Écrite par Claude dans la nuit du 25 au 26/11/2026, étape 12, audit n° 2 (`audit.md`, constat C8 et proposition P7).
-**Statut : acceptée le 26/11/2026 vers 2 h 30 (heure de Tunis), option A, par Claude (chat de pilotage) sur la délégation de Houssem du 25/11 à 23 h 58** ; appliquée par le lot B2. Décisions recopiées en fin de document. Rien n'est appliqué. Format de `docs/03` : élément concerné, changement
+**Statut : acceptée le 26/11/2026 vers 2 h 30 (heure de Tunis), option A, par Claude (chat de pilotage) sur la délégation de Houssem du 25/11 à 23 h 58** ; appliquée par le lot B2 (branche `etape-12/lot-b2-audit-2`, paquet `travaux/etape-12/lot-b2-audit-2/paquet-b2.md`) : images dans `src/images-article/` (module `src/lib/images-article.ts`), contrôles ARTICLE-IMAGE-*, IDX-META-APERCU et PROD-APERCU-IMAGE. Décisions recopiées en fin de document. Rien n'est appliqué. Format de `docs/03` : élément concerné, changement
 proposé, raison (données), impact sur ce qui est validé, contrôles à relancer. Le n° 44 est réservé (demande de Houssem du 25/11).
 
 ## 1. Éléments concernés (validés ou figés)

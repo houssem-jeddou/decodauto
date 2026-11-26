@@ -10,9 +10,11 @@
 //  - page « à propos » : Person (l'auteur de la fiche affichée) ;
 //  - mentions légales, 404 : rien.
 // Pas de datePublished : la page n'affiche que sa date de mise à jour (signature, charte §4), et le balisage ne dit rien
-// qui ne soit visible ; la date de publication, propre au fichier de contenu, ne sort pas du site. Pas d'Organization ni de publisher (le site n'a pas d'entité à déclarer, l'éditeur est l'auteur). Pas d'image, sauf la photo
-// sous licence libre affichée par la page (demande de changement n° 42, lot U4 : propriété `image` de l'Article, adresse
-// absolue de sa version de 1 200 px, sur les seules pages du registre data/photos.json ; ni dessin ni image de partage), pas de FAQPage ni de HowTo (extraits de résultats que Google n'affiche plus pour la plupart des
+// qui ne soit visible ; la date de publication, propre au fichier de contenu, ne sort pas du site. Pas d'Organization ni de publisher (le site n'a pas d'entité à déclarer, l'éditeur est l'auteur). Image de l'Article : la photo
+// sous licence libre affichée par la page (demande de changement n° 42, lot U4 : adresse absolue de sa version de 1 200 px,
+// sur les seules pages du registre data/photos.json) ; sur une autre page illustrée, les trois images tirées de sa seule
+// illustration, 16:9, 4:3 et 1:1 (demande de changement n° 45, acceptée le 26/11/2026 : src/lib/images-article.ts ; ni
+// l'image de partage, ni les pictogrammes). Pas de FAQPage ni de HowTo (extraits de résultats que Google n'affiche plus pour la plupart des
 // sites ; un balisage sans extrait attendu n'apporte rien).
 
 import { NOM_ALTERNATIF_DU_SITE, NOM_DU_SITE, URL_SITE, urlAbsolue } from './site.ts';
@@ -112,8 +114,11 @@ export interface ArticleDeclare {
   auteur: AuteurDeclare;
   /** Adresse de la page « à propos » (fiche de l'auteur). */
   adresseAPropos: string;
-  /** Adresse absolue de la photo affichée par la page (demande de changement n° 42) ; absente sans photo. */
-  image?: string | undefined;
+  /**
+   * Adresse absolue de la photo affichée par la page (demande de changement n° 42) ; sans photo, adresses des trois images
+   * tirées de son illustration, 16:9, 4:3 et 1:1 (demande de changement n° 45, src/lib/images-article.ts) ; absente sinon.
+   */
+  image?: string | readonly string[] | undefined;
 }
 
 /** Article : ce que la page affiche (H1, signature « Mis à jour le … »), l'auteur de la fiche de « à propos ». */

@@ -566,3 +566,26 @@ body:has(.tete-404)>main{flex:1 0 auto}
 :root .depannage{background:var(--cellule);border:1px solid var(--filet-nuit);color:var(--nuit-texte)}
 :root .depannage strong{color:#fff}
 :root .lien-accueil{color:var(--nuit-lien);font-weight:600}
+/* Version imprimable (audit n° 2, maquette V4, lot B2, décision du 26/11/2026 ; variante de la charte, sans licence imprimée) :
+   règles d'impression seules, l'écran ne change pas. Surfaces sombres et tuiles en clair, couleurs des voyants et des verdicts
+   gardées (verdicts en noir dans leur contour de couleur), « Sources » dépliée, navigation masquée, adresse de la page en fin
+   d'impression. Ce bloc reste en fin de feuille : couleursPartage (src/lib/partage.ts) lit la première définition des
+   variables, celle de l'écran, pour les images de partage et de l'Article. */
+@media print{
+  :root{--nuit:#fff;--panneau:#fff;--cellule:#fff;--filet-nuit:#9aa4b0;--nuit-texte:#111;--nuit-doux:#333;--nuit-lien:#111;--fond-page:#fff}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{font-size:10.5pt;background:#fff}
+  .bandeau,.menu-site,[data-sommaire],.pied-nav,[data-pages-liees],[data-emplacement-pub],[data-outil-filtre]{display:none!important}
+  .tete,.decision,.ligne,[data-outil-groupe]{box-shadow:none!important}
+  .decision,.ligne{border:1px solid #9aa4b0}
+  :root .tete,:root .hero,:root .voyants,:root .depannage strong{color:#111!important}
+  :root .verdict{color:#111!important;background:#fff!important}
+  :root .decision .tranche{color:#111!important}
+  :root main .decision{margin-top:0}
+  :root .tuile{background:#fff!important;box-shadow:inset 0 0 0 1px #9aa4b0!important}
+  details.sources::details-content{content-visibility:visible;display:block;height:auto}
+  details.sources>summary{list-style:none}
+  .ligne,figure,tr,[data-outil-ligne],.outil-index li{break-inside:avoid}
+  h2,h3{break-after:avoid}
+  main[data-adresse-imprimee]::after{content:"Page imprimée depuis " attr(data-adresse-imprimee);display:block;margin-top:1rem;font-size:9pt;color:#333}
+}

@@ -124,18 +124,19 @@ const alerte = (regle: string, message: string, fichier?: string): Constat => ({
 });
 
 /**
- * Image de l'article (R7-IMAGE-RECOMMANDEE) : le champ `image` de la page, ou la photo du registre data/photos.json (demande
- * de changement n° 42), affichée seulement au format 2. Une page n'a pas les deux : la photo du registre serait l'image du
+ * Image de l'article (R7-IMAGE-RECOMMANDEE) : le champ `image` de la page, la photo du registre data/photos.json (demande
+ * de changement n° 42), affichée seulement au format 2, ou les images tirées de l'illustration de la page (demande de
+ * changement n° 45, src/lib/images-article.ts ; contrôlées dans le site construit par ARTICLE-IMAGE-*). Une page n'a pas les deux : la photo du registre serait l'image du
  * JSON-LD et le champ `image` resterait sans effet (PHOTO-REGISTRE).
  */
 export function constatsImageDeLaPage(
-  page: { id: string; image?: string | undefined; format?: 1 | 2 | undefined },
+  page: { id: string; image?: string | undefined; format?: 1 | 2 | undefined; illustration?: unknown },
   photos: ReadonlyMap<string, unknown>,
   fichier?: string,
 ): Constat[] {
   const photo = photos.has(page.id);
   if (page.image !== undefined && photo) return [erreur('PHOTO-REGISTRE', "la page a un champ image et une photo au registre data/photos.json : une seule image d'article", fichier)];
-  if (page.image === undefined && !(photo && (page.format ?? 1) === 2)) return [alerte('R7-IMAGE-RECOMMANDEE', "pas d'image : Google la recommande pour les articles", fichier)];
+  if (page.image === undefined && !(photo && (page.format ?? 1) === 2) && page.illustration === undefined) return [alerte('R7-IMAGE-RECOMMANDEE', "pas d'image : Google la recommande pour les articles", fichier)];
   return [];
 }
 

@@ -167,7 +167,8 @@ describe('production : balise d’association et ads.txt en ligne (PROD-ADSENSE-
       'https://www.decodauto.com/': redirection('https://decodauto.com/'),
       'https://www.decodauto.com/voyants/?verification=1': redirection('https://decodauto.com/voyants/?verification=1'),
       'http://www.decodauto.com/': redirection('https://decodauto.com/'),
-      'https://decodauto.com/': ok(`<html><head>${accueil}</head><a href="mailto:erreur@decodauto.com?subject=x">Signaler une erreur</a></html>`),
+      // Mode indexable : l'accueil porte aussi max-image-preview:large (demande de changement n° 45, PROD-APERCU-IMAGE).
+      'https://decodauto.com/': ok(`<html><head><meta name="robots" content="max-image-preview:large">${accueil}</head><a href="mailto:erreur@decodauto.com?subject=x">Signaler une erreur</a></html>`),
       'https://decodauto.com/robots.txt': ok(ROBOTS, { typeContenu: 'text/plain' }),
       'https://decodauto.com/sitemap.xml': ok('<?xml version="1.0"?>', { typeContenu: 'application/xml' }),
       'https://decodauto.com/ads.txt': adsTxt,

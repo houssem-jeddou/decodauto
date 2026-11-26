@@ -747,6 +747,22 @@ describe('cohérence de non-indexation', () => {
   test('indexable : en-tête noindex resté → échec', async () => {
     assert.deepEqual(codes(await controlerIndexation(await fabriquerSite({ meta: false, entete: true }), true), 'erreur'), ['IDX-ENTETE-PRESENT']);
   });
+  // Demande de changement n° 45 : max-image-preview:large, en mode indexable seulement, sur les pages à adresse canonique.
+  test('indexable : page à adresse canonique sans max-image-preview:large → IDX-META-APERCU ; avec → cohérent', async () => {
+    const site = await fabriquerSite({ meta: false, entete: false });
+    const avec = (robots: string): string => `<!doctype html><html lang="fr"><head><title>a</title><link rel="canonical" href="https://decodauto.com/">${robots}</head><body><h1>a</h1></body></html>`;
+    await writeFile(join(site, 'index.html'), avec(''));
+    assert.deepEqual(codes(await controlerIndexation(site, true), 'erreur'), ['IDX-META-APERCU']);
+    await writeFile(join(site, 'index.html'), avec('<meta name="robots" content="max-image-preview:large">'));
+    assert.deepEqual(await controlerIndexation(site, true), []);
+    await writeFile(join(site, 'index.html'), avec('<meta name="robots" content="max-image-preview:standard">'));
+    assert.deepEqual(codes(await controlerIndexation(site, true), 'erreur'), ['IDX-META-APERCU']);
+  });
+  test('non indexable : max-image-preview à côté de noindex → IDX-META-APERCU', async () => {
+    const site = await fabriquerSite({ meta: true, entete: true });
+    await writeFile(join(site, 'index.html'), '<!doctype html><html lang="fr"><head><title>a</title><meta name="robots" content="noindex"><meta name="robots" content="max-image-preview:large"></head><body><h1>a</h1></body></html>');
+    assert.deepEqual(codes(await controlerIndexation(site, false), 'erreur'), ['IDX-META-APERCU']);
+  });
   test('robots.txt avec un Disallow → échec, quel que soit le mode', async () => {
     const site = await fabriquerSite({ meta: true, entete: true, robots: 'User-agent: *\nDisallow: /prive/\n' });
     assert.deepEqual(codes(await controlerIndexation(site, false), 'erreur'), ['IDX-ROBOTS-DISALLOW']);
