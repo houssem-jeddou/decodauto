@@ -5,7 +5,7 @@
 id: code-p0299
 title: "Code P0299 : pression de turbo trop faible, peut-on rouler ?"
 h1: "Code défaut P0299 : pression de suralimentation du turbo trop faible"
-description: "Code P0299 : le turbo ne donne pas la pression que demande le calculateur. Avec le voyant moteur allumé, arrêtez-vous d'abord. Causes, cas par marque."
+description: "Code P0299 : le turbo ne donne pas la pression que demande le calculateur. Voyant moteur allumé : arrêtez-vous immédiatement. Causes, cas par marque."
 libelle_court: Code P0299
 question_decision: Puis-je continuer à rouler avec le code P0299 ?
 situations:
