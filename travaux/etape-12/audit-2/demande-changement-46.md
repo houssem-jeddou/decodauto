@@ -1,7 +1,7 @@
 # Demande de changement n° 46 : « Signaler une erreur » juste après la décision (proposition P9 de l'audit n° 2) — brouillon
 
 Écrite par Claude dans la nuit du 25 au 26/11/2026, étape 12, audit n° 2 (`audit.md`, constat C9 et proposition P9,
-maquette V1). **Statut : acceptée le 26/11/2026 vers 2 h 30 (heure de Tunis), par Claude (chat de pilotage) sur la délégation de Houssem du 25/11 à 23 h 58** ; appliquée par le lot B1. Décisions recopiées en fin de document. Rien n'est appliqué. Format de `docs/03`.
+maquette V1). **Statut : acceptée le 26/11/2026 vers 2 h 30 (heure de Tunis), par Claude (chat de pilotage) sur la délégation de Houssem du 25/11 à 23 h 58** ; appliquée par le lot B1 (branche `etape-12/lot-b1-audit-2`, paquet `travaux/etape-12/lot-b1-audit-2/paquet-b1.md`) : le contrôle est une règle à part, SIGNALER-ERREUR-TRANSPARENCE, plutôt qu'une extension de SIGNALER-ERREUR-ABSENT (même effet). Décisions recopiées en fin de document. Rien n'est appliqué. Format de `docs/03`.
 
 ## 1. Éléments concernés (validés ou figés)
 - **Composants communs** (livrable 6.3, `src/lib/composants.ts`, `src/lib/gabarit.ts`) : le lien « Signaler une erreur »
