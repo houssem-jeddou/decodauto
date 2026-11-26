@@ -8,7 +8,7 @@
    "descriptionLong": 125,
    "h1": "À propos de decodauto.com",
    "canonical": "https://decodauto.com/a-propos/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/decodauto.png?v=64b69dc5b434",
    "jsonld": [
     "Person"
@@ -170,7 +170,7 @@
    "descriptionLong": 153,
    "h1": "Changer la batterie de sa voiture : soi-même ou au garage ?",
    "canonical": "https://decodauto.com/batterie-voiture/changer/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/batterie-changer.png?v=ab4f8f68226e",
    "jsonld": [
     "Article",
@@ -349,7 +349,7 @@
    "descriptionLong": 152,
    "h1": "Batterie de voiture faible : comment le savoir, et que faire ?",
    "canonical": "https://decodauto.com/batterie-voiture/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/batterie-voiture.png?v=e7827bf130c9",
    "jsonld": [
     "Article",
@@ -559,7 +559,7 @@
    "descriptionLong": 155,
    "h1": "Recharger la batterie de sa voiture : comment faire, et quand rouler ?",
    "canonical": "https://decodauto.com/batterie-voiture/recharger/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/batterie-recharger.png?v=7e026a178013",
    "jsonld": [
     "Article",
@@ -752,7 +752,7 @@
    "descriptionLong": 144,
    "h1": "Mon moteur fait un bruit : normal, ou faut-il s’arrêter ?",
    "canonical": "https://decodauto.com/bruit-moteur/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/bruit-moteur.png?v=108beee8c759",
    "jsonld": [
     "Article",
@@ -923,7 +923,7 @@
    "descriptionLong": 144,
    "h1": "Code défaut P0087 : pression de la rampe de carburant trop basse",
    "canonical": "https://decodauto.com/codes-defaut/p0087/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/code-p0087.png?v=69d0b42572a3",
    "jsonld": [
     "Article",
@@ -1106,11 +1106,11 @@
   "/codes-defaut/p0299/": {
    "title": "Code P0299 : pression de turbo trop faible, peut-on rouler ?",
    "titleLong": 60,
-   "description": "Code P0299 : le turbo ne donne pas la pression que demande le calculateur. Avec le voyant moteur allumé, arrêtez-vous d'abord. Causes, cas par marque.",
-   "descriptionLong": 150,
+   "description": "Code P0299 : le turbo ne donne pas la pression que demande le calculateur. Voyant moteur allumé : arrêtez-vous immédiatement. Causes, cas par marque.",
+   "descriptionLong": 149,
    "h1": "Code défaut P0299 : pression de suralimentation du turbo trop faible",
    "canonical": "https://decodauto.com/codes-defaut/p0299/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/code-p0299.png?v=128242356b81",
    "jsonld": [
     "Article",
@@ -1292,11 +1292,11 @@
   "/codes-defaut/p0420/": {
    "title": "Code P0420 : rendement du catalyseur trop bas, peut-on rouler ?",
    "titleLong": 63,
-   "description": "Code P0420 : rendement du catalyseur sous le seuil. Avec le voyant moteur allumé, arrêtez-vous d'abord. Causes, cas par marque, contrôle technique.",
-   "descriptionLong": 147,
+   "description": "Code P0420 : rendement du catalyseur sous le seuil. Avec le voyant moteur allumé, arrêtez-vous immédiatement. Causes, cas par marque, contrôle technique.",
+   "descriptionLong": 153,
    "h1": "Code défaut P0420 : rendement du catalyseur inférieur au seuil (ligne 1)",
    "canonical": "https://decodauto.com/codes-defaut/p0420/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/code-p0420.png?v=3d7ade005dc2",
    "jsonld": [
     "Article",
@@ -1493,7 +1493,7 @@
    "descriptionLong": 149,
    "h1": "Contrôle technique défavorable : peut-on rouler, et quel délai pour la contre-visite ?",
    "canonical": "https://decodauto.com/contre-visite-controle-technique/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/contre-visite-controle-technique.png?v=40d3e698c234",
    "jsonld": [
     "Article",
@@ -1705,7 +1705,7 @@
    "descriptionLong": 145,
    "h1": "Fumée blanche à l’échappement, fumée noire ou bleue : faut-il s’inquiéter ?",
    "canonical": "https://decodauto.com/fumee-echappement/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/fumee-echappement.png?v=4e8a955272a4",
    "jsonld": [
     "Article",
@@ -1882,7 +1882,7 @@
    "descriptionLong": 153,
    "h1": "Huile 10W40 : que veut dire 10W40, et puis-je en mettre dans ma voiture ?",
    "canonical": "https://decodauto.com/huile-moteur/10w40/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/huile-10w40.png?v=e280ddff484c",
    "jsonld": [
     "Article",
@@ -2064,7 +2064,7 @@
    "descriptionLong": 154,
    "h1": "Huile 5W30 : que veut dire 5W30, et puis-je en mettre dans ma voiture ?",
    "canonical": "https://decodauto.com/huile-moteur/5w30/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/huile-5w30.png?v=14243cfd7b31",
    "jsonld": [
     "Article",
@@ -2256,7 +2256,7 @@
    "descriptionLong": 150,
    "h1": "Huile 5W40 : que veut dire 5W40, et puis-je en mettre dans ma voiture ?",
    "canonical": "https://decodauto.com/huile-moteur/5w40/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/huile-5w40.png?v=25800467ef00",
    "jsonld": [
     "Article",
@@ -2446,7 +2446,7 @@
    "descriptionLong": 153,
    "h1": "Huile moteur : quelle huile mettre dans ma voiture, et quand faire la vidange ?",
    "canonical": "https://decodauto.com/huile-moteur/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/huile-moteur.png?v=2299abfdf35e",
    "jsonld": [
     "Article",
@@ -2673,7 +2673,7 @@
    "descriptionLong": 152,
    "h1": "Niveau d’huile moteur : comment le vérifier, et que faire s’il est trop bas ou trop haut ?",
    "canonical": "https://decodauto.com/huile-moteur/verifier-niveau/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/niveau-huile.png?v=e73dfe5520dd",
    "jsonld": [
     "Article",
@@ -2890,7 +2890,7 @@
    "descriptionLong": 149,
    "h1": "Votre voiture vous alerte, on vous dit quoi faire.",
    "canonical": "https://decodauto.com/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/accueil.png?v=4d6d7865ac9e",
    "jsonld": [
     "WebSite"
@@ -3377,7 +3377,7 @@
    "descriptionLong": 143,
    "h1": "Liquide de frein : niveau bas, quel liquide mettre et quand le remplacer ?",
    "canonical": "https://decodauto.com/liquide-de-frein/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/liquide-de-frein.png?v=1552745d2ef0",
    "jsonld": [
     "Article",
@@ -3560,7 +3560,7 @@
    "descriptionLong": 146,
    "h1": "Liquide de refroidissement : quel liquide mettre, comment lire le niveau, que faire s’il baisse ?",
    "canonical": "https://decodauto.com/liquide-de-refroidissement/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/liquide-de-refroidissement.png?v=680c1456339e",
    "jsonld": [
     "Article",
@@ -3751,7 +3751,7 @@
    "descriptionLong": 155,
    "h1": "Loi montagne : pneus hiver ou chaînes obligatoires du 1er novembre au 31 mars",
    "canonical": "https://decodauto.com/loi-montagne/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/loi-montagne.png?v=be5d573010dd",
    "jsonld": [
     "Article",
@@ -3923,7 +3923,7 @@
    "descriptionLong": 132,
    "h1": "Mentions légales et confidentialité",
    "canonical": "https://decodauto.com/mentions-legales/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/decodauto.png?v=64b69dc5b434",
    "jsonld": [],
    "h2": [
@@ -4041,7 +4041,7 @@
    "descriptionLong": 153,
    "h1": "Moteur 1.2 PureTech : votre voiture est-elle concernée, et que faire ?",
    "canonical": "https://decodauto.com/moteur-puretech/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/moteur-puretech.png?v=11a223f3a8c7",
    "jsonld": [
     "Article",
@@ -4238,7 +4238,7 @@
    "descriptionLong": 152,
    "h1": "Mon moteur surchauffe : faut-il s’arrêter, et que vérifier ?",
    "canonical": "https://decodauto.com/moteur-qui-surchauffe/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/surchauffe-moteur.png?v=005af0eabe6b",
    "jsonld": [
     "Article",
@@ -4420,7 +4420,7 @@
    "descriptionLong": 151,
    "h1": "Nettoyer le filtre à particules (FAP) : que faire soi-même ?",
    "canonical": "https://decodauto.com/nettoyer-fap/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/nettoyer-fap.png?v=7bbeb569f83a",
    "jsonld": [
     "Article",
@@ -4610,7 +4610,7 @@
    "descriptionLong": 147,
    "h1": "Ma voiture perd de la puissance : que vérifier, et quand s’arrêter ?",
    "canonical": "https://decodauto.com/perte-de-puissance-voiture/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/perte-de-puissance.png?v=716367a0d803",
    "jsonld": [
     "Article",
@@ -4850,7 +4850,7 @@
    "descriptionLong": 150,
    "h1": "Pression des pneus : la valeur du constructeur, pneus froids, au moins une fois par mois",
    "canonical": "https://decodauto.com/pression-des-pneus/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/pression-des-pneus.png?v=cb8589c0160f",
    "jsonld": [
     "Article",
@@ -5049,7 +5049,7 @@
    "descriptionLong": 145,
    "h1": "Pneus usés : peut-on encore rouler, et comment lire le témoin d’usure ?",
    "canonical": "https://decodauto.com/usure-des-pneus/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/usure-des-pneus.png?v=8297328d031d",
    "jsonld": [
     "Article",
@@ -5255,7 +5255,7 @@
    "descriptionLong": 148,
    "h1": "Ma voiture ne démarre pas : que vérifier, et quand faire appel à un garage ?",
    "canonical": "https://decodauto.com/voiture-ne-demarre-pas/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voiture-ne-demarre-pas.png?v=47e810dab40d",
    "jsonld": [
     "Article",
@@ -5464,7 +5464,7 @@
    "descriptionLong": 146,
    "h1": "Ma voiture broute ou donne des à-coups : que faire ?",
    "canonical": "https://decodauto.com/voiture-qui-broute/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voiture-qui-broute.png?v=14c0f1d0a569",
    "jsonld": [
     "Article",
@@ -5647,7 +5647,7 @@
    "descriptionLong": 151,
    "h1": "Voyants ABS et ESP : que faire quand ils s’allument ?",
    "canonical": "https://decodauto.com/voyants/abs-esp/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-abs-esp.png?v=5501980d4e1f",
    "jsonld": [
     "Article",
@@ -5846,7 +5846,7 @@
    "descriptionLong": 152,
    "h1": "Voyant AdBlue : réserve basse, défaut antipollution ou démarrage impossible",
    "canonical": "https://decodauto.com/voyants/adblue/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-adblue.png?v=28beacdcc5a9",
    "jsonld": [
     "Article",
@@ -6029,7 +6029,7 @@
    "descriptionLong": 155,
    "h1": "Voyant airbag allumé ou « airbag OFF » : que faire ?",
    "canonical": "https://decodauto.com/voyants/airbag/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-airbag.png?v=e5e62f1e70b4",
    "jsonld": [
     "Article",
@@ -6192,7 +6192,7 @@
    "descriptionLong": 152,
    "h1": "Voyant de batterie rouge : que faire quand il s’allume en roulant ?",
    "canonical": "https://decodauto.com/voyants/batterie/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-batterie.png?v=417f2ed14a4f",
    "jsonld": [
     "Article",
@@ -6382,7 +6382,7 @@
    "descriptionLong": 133,
    "h1": "Voyant de direction assistée (volant) : que faire quand il s’allume ?",
    "canonical": "https://decodauto.com/voyants/direction/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-direction.png?v=e617fbfcb482",
    "jsonld": [
     "Article",
@@ -6580,7 +6580,7 @@
    "descriptionLong": 154,
    "h1": "Voyant du filtre à particules (FAP) : que faire quand il s’allume ?",
    "canonical": "https://decodauto.com/voyants/fap/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-fap.png?v=87663b58aa4e",
    "jsonld": [
     "Article",
@@ -6790,7 +6790,7 @@
    "descriptionLong": 152,
    "h1": "Voyant frein : liquide de frein bas, plaquettes usées ou frein à main serré ?",
    "canonical": "https://decodauto.com/voyants/frein/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-frein.png?v=93492b88ba84",
    "jsonld": [
     "Article",
@@ -6986,7 +6986,7 @@
    "descriptionLong": 152,
    "h1": "Voyant d’huile moteur rouge, orange ou clé : que faire ?",
    "canonical": "https://decodauto.com/voyants/huile/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-huile.png?v=147c194db4fc",
    "jsonld": [
     "Article",
@@ -7193,7 +7193,7 @@
    "descriptionLong": 146,
    "h1": "Voyants du tableau de bord : lequel est allumé, et pouvez-vous rouler ?",
    "canonical": "https://decodauto.com/voyants/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyants.png?v=4d6d7865ac9e",
    "jsonld": [
     "Article",
@@ -7902,7 +7902,7 @@
    "descriptionLong": 145,
    "h1": "Voyant moteur orange, fixe ou clignotant : que faire ?",
    "canonical": "https://decodauto.com/voyants/moteur/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-moteur.png?v=217f04daba54",
    "jsonld": [
     "Article",
@@ -8152,7 +8152,7 @@
    "descriptionLong": 148,
    "h1": "Voyant de préchauffage (diesel) : normal au démarrage, défaut s’il clignote",
    "canonical": "https://decodauto.com/voyants/prechauffage/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-prechauffage.png?v=159fc82e0eb3",
    "jsonld": [
     "Article",
@@ -8346,7 +8346,7 @@
    "descriptionLong": 151,
    "h1": "Voyant de pression des pneus : que faire quand il s’allume ?",
    "canonical": "https://decodauto.com/voyants/pression-pneus/",
-   "robots": null,
+   "robots": "max-image-preview:large",
    "ogImage": "https://decodauto.com/partage/voyant-pression-pneus.png?v=44e071044a9c",
    "jsonld": [
     "Article",
