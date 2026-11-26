@@ -1,0 +1,173 @@
+{
+ "seuil": "suite de 5 mots présente sur 6 pages ou plus = gabarit",
+ "partGabaritParPage": {
+  "/a-propos/": 0.03,
+  "/batterie-voiture/changer/": 0.18,
+  "/batterie-voiture/": 0.14,
+  "/batterie-voiture/recharger/": 0.12,
+  "/bruit-moteur/": 0.18,
+  "/codes-defaut/p0087/": 0.18,
+  "/codes-defaut/p0299/": 0.15,
+  "/codes-defaut/p0420/": 0.16,
+  "/contre-visite-controle-technique/": 0.08,
+  "/fumee-echappement/": 0.18,
+  "/huile-moteur/10w40/": 0.08,
+  "/huile-moteur/5w30/": 0.07,
+  "/huile-moteur/5w40/": 0.08,
+  "/huile-moteur/": 0.12,
+  "/huile-moteur/verifier-niveau/": 0.11,
+  "/": 0,
+  "/liquide-de-frein/": 0.16,
+  "/liquide-de-refroidissement/": 0.14,
+  "/loi-montagne/": 0.03,
+  "/mentions-legales/": 0,
+  "/moteur-puretech/": 0.15,
+  "/moteur-qui-surchauffe/": 0.17,
+  "/nettoyer-fap/": 0.23,
+  "/perte-de-puissance-voiture/": 0.18,
+  "/pression-des-pneus/": 0.11,
+  "/usure-des-pneus/": 0.12,
+  "/voiture-ne-demarre-pas/": 0.12,
+  "/voiture-qui-broute/": 0.26,
+  "/voyants/abs-esp/": 0.13,
+  "/voyants/adblue/": 0.14,
+  "/voyants/airbag/": 0.13,
+  "/voyants/batterie/": 0.21,
+  "/voyants/direction/": 0.18,
+  "/voyants/fap/": 0.19,
+  "/voyants/frein/": 0.15,
+  "/voyants/huile/": 0.15,
+  "/voyants/": 0.06,
+  "/voyants/moteur/": 0.19,
+  "/voyants/prechauffage/": 0.31,
+  "/voyants/pression-pneus/": 0.13
+ },
+ "pairesProches": [
+  {
+   "a": "/huile-moteur/10w40/",
+   "b": "/huile-moteur/5w40/",
+   "partDeA": 0.83,
+   "partDeB": 0.85
+  },
+  {
+   "a": "/huile-moteur/10w40/",
+   "b": "/huile-moteur/5w30/",
+   "partDeA": 0.75,
+   "partDeB": 0.66
+  },
+  {
+   "a": "/huile-moteur/5w30/",
+   "b": "/huile-moteur/5w40/",
+   "partDeA": 0.64,
+   "partDeB": 0.75
+  },
+  {
+   "a": "/perte-de-puissance-voiture/",
+   "b": "/voiture-qui-broute/",
+   "partDeA": 0.32,
+   "partDeB": 0.52
+  },
+  {
+   "a": "/nettoyer-fap/",
+   "b": "/voyants/fap/",
+   "partDeA": 0.23,
+   "partDeB": 0.15
+  },
+  {
+   "a": "/codes-defaut/p0087/",
+   "b": "/codes-defaut/p0420/",
+   "partDeA": 0.19,
+   "partDeB": 0.16
+  },
+  {
+   "a": "/codes-defaut/p0299/",
+   "b": "/codes-defaut/p0420/",
+   "partDeA": 0.18,
+   "partDeB": 0.19
+  },
+  {
+   "a": "/codes-defaut/p0087/",
+   "b": "/codes-defaut/p0299/",
+   "partDeA": 0.18,
+   "partDeB": 0.14
+  },
+  {
+   "a": "/huile-moteur/verifier-niveau/",
+   "b": "/moteur-puretech/",
+   "partDeA": 0.09,
+   "partDeB": 0.16
+  },
+  {
+   "a": "/moteur-puretech/",
+   "b": "/voyants/huile/",
+   "partDeA": 0.16,
+   "partDeB": 0.09
+  },
+  {
+   "a": "/batterie-voiture/",
+   "b": "/batterie-voiture/recharger/",
+   "partDeA": 0.13,
+   "partDeB": 0.14
+  },
+  {
+   "a": "/batterie-voiture/",
+   "b": "/voiture-ne-demarre-pas/",
+   "partDeA": 0.14,
+   "partDeB": 0.11
+  },
+  {
+   "a": "/moteur-puretech/",
+   "b": "/voyants/",
+   "partDeA": 0.14,
+   "partDeB": 0.04
+  },
+  {
+   "a": "/voyants/abs-esp/",
+   "b": "/voyants/",
+   "partDeA": 0.14,
+   "partDeB": 0.08
+  },
+  {
+   "a": "/nettoyer-fap/",
+   "b": "/voyants/",
+   "partDeA": 0.12,
+   "partDeB": 0.03
+  },
+  {
+   "a": "/voyants/adblue/",
+   "b": "/voyants/",
+   "partDeA": 0.12,
+   "partDeB": 0.07
+  },
+  {
+   "a": "/voyants/direction/",
+   "b": "/voyants/",
+   "partDeA": 0.12,
+   "partDeB": 0.05
+  },
+  {
+   "a": "/voyants/huile/",
+   "b": "/voyants/",
+   "partDeA": 0.12,
+   "partDeB": 0.06
+  },
+  {
+   "a": "/pression-des-pneus/",
+   "b": "/voyants/pression-pneus/",
+   "partDeA": 0.11,
+   "partDeB": 0.07
+  },
+  {
+   "a": "/voyants/airbag/",
+   "b": "/voyants/",
+   "partDeA": 0.11,
+   "partDeB": 0.04
+  },
+  {
+   "a": "/voyants/",
+   "b": "/voyants/pression-pneus/",
+   "partDeA": 0.05,
+   "partDeB": 0.11
+  }
+ ]
+}
