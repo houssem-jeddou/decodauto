@@ -17,7 +17,7 @@
 id: liquide-de-refroidissement
 title: "Liquide de refroidissement : lequel mettre, niveau et appoint"
 h1: "Liquide de refroidissement : quel liquide mettre, comment lire le niveau, que faire s'il baisse ?"
-description: "Mettez le liquide que demande votre notice et lisez le niveau moteur froid. Vase vide : arrêtez-vous. Selon les notices de cinq marques."
+description: "Mettez le liquide que demande votre notice et lisez le niveau moteur froid. Vase vide : arrêtez-vous. Ce que disent les notices des constructeurs."
 libelle_court: Liquide de refroidissement
 question_decision: "Quel liquide de refroidissement mettre, et puis-je rouler s'il en manque ?"
 reponse_directe: "Celui que demande la notice ou le réseau de votre marque : parmi les notices lues, seule Seat Ibiza le nomme (G12evo). S'il en manque, faites l'appoint moteur froid ; si le vase d'expansion est vide, arrêtez-vous."
