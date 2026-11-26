@@ -86,6 +86,8 @@ body:has(main :focus-visible,footer :focus-visible) .menu-site[open]>.menu-panne
 .pied-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .35rem;margin:0 0 .6rem;padding:0;list-style:none}
 .pied-nav a{display:inline-block;font-weight:600;font-size:.875rem;line-height:1.2;padding:.85rem .4rem}
 .pied .signaler-erreur a,.pied .lien-confidentialite a{display:inline-block;padding:.8rem 0}
+/* Le point médian du pied reste avec le lien qui le suit (retouche du 26/11 : il ne finit jamais seul une ligne). */
+.pied-suite{white-space:nowrap}
 .mention-ia{max-width:72rem;margin:0 auto;padding:.3rem 1rem .05rem;font-size:1rem;line-height:1.35}
 .tete-int{max-width:44rem;margin:0 auto;padding:.15rem 1rem .5rem}
 /* Tête sans fil d'Ariane (socle, 404) : même écart entre la mention et le H1 que les pages éditoriales (revue de F1.3b). */

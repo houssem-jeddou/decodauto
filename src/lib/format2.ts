@@ -224,7 +224,8 @@ export function piedFormat2(adressePage?: string, adresseConfidentialite?: strin
   const signaler = `<span class="signaler-erreur" data-signaler-erreur><!--email_off--><a href="${attributHtml(lienSignalement(adressePage))}">${texteHtml(LIBELLE_SIGNALER_ERREUR)}</a> (${texteHtml(ADRESSE_SIGNALEMENT)})<!--/email_off--></span>`;
   const confidentialite =
     adresseConfidentialite !== undefined
-      ? ` · <span class="lien-confidentialite" data-lien-confidentialite><a href="${attributHtml(adresseConfidentialite)}#${ANCRE_CONFIDENTIALITE}">${texteHtml(LIBELLE_LIEN_CONFIDENTIALITE)}</a></span>`
+      ? // Le point médian passe à la ligne avec le lien qui le suit, jamais seul en fin de ligne (retouche du 26/11).
+        ` <span class="pied-suite">· <span class="lien-confidentialite" data-lien-confidentialite><a href="${attributHtml(adresseConfidentialite)}#${ANCRE_CONFIDENTIALITE}">${texteHtml(LIBELLE_LIEN_CONFIDENTIALITE)}</a></span></span>`
       : '';
   return `${nav}<p>${signaler}${confidentialite}</p>`;
 }
