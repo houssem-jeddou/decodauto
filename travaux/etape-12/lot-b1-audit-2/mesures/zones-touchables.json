@@ -4,8 +4,8 @@
   "w": 320,
   "lien": "Accueil",
   "zone": "fil",
-  "boite": "55×47",
-  "touchable": 49
+  "boite": "55×49",
+  "touchable": 50
  },
  {
   "chemin": "/codes-defaut/p0087/",
@@ -92,8 +92,8 @@
   "w": 375,
   "lien": "Accueil",
   "zone": "fil",
-  "boite": "55×47",
-  "touchable": 49
+  "boite": "55×49",
+  "touchable": 50
  },
  {
   "chemin": "/codes-defaut/p0087/",
@@ -180,8 +180,8 @@
   "w": 1366,
   "lien": "Accueil",
   "zone": "fil",
-  "boite": "55×47",
-  "touchable": 48
+  "boite": "55×49",
+  "touchable": 50
  },
  {
   "chemin": "/codes-defaut/p0087/",
@@ -268,16 +268,16 @@
   "w": 320,
   "lien": "Accueil",
   "zone": "fil",
-  "boite": "55×47",
-  "touchable": 49
+  "boite": "55×49",
+  "touchable": 50
  },
  {
   "chemin": "/voyants/moteur/",
   "w": 320,
   "lien": "Identifier un voyant",
   "zone": "fil",
-  "boite": "128×47",
-  "touchable": 49
+  "boite": "128×49",
+  "touchable": 50
  },
  {
   "chemin": "/voyants/moteur/",
@@ -364,16 +364,16 @@
   "w": 375,
   "lien": "Accueil",
   "zone": "fil",
-  "boite": "55×47",
-  "touchable": 49
+  "boite": "55×49",
+  "touchable": 50
  },
  {
   "chemin": "/voyants/moteur/",
   "w": 375,
   "lien": "Identifier un voyant",
   "zone": "fil",
-  "boite": "128×47",
-  "touchable": 49
+  "boite": "128×49",
+  "touchable": 50
  },
  {
   "chemin": "/voyants/moteur/",
@@ -460,16 +460,16 @@
   "w": 1366,
   "lien": "Accueil",
   "zone": "fil",
-  "boite": "55×47",
-  "touchable": 48
+  "boite": "55×49",
+  "touchable": 50
  },
  {
   "chemin": "/voyants/moteur/",
   "w": 1366,
   "lien": "Identifier un voyant",
   "zone": "fil",
-  "boite": "128×47",
-  "touchable": 48
+  "boite": "128×49",
+  "touchable": 50
  },
  {
   "chemin": "/voyants/moteur/",
