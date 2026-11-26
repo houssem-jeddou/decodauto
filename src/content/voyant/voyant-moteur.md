@@ -5,7 +5,7 @@
 id: voyant-moteur
 title: "Voyant moteur orange allumé : peut-on rouler ? Que faire ?"
 h1: "Voyant moteur orange, fixe ou clignotant : que faire ?"
-description: "Voyant moteur orange, fixe ou clignotant, ou rouge : la consigne la plus prudente des notices lues est de vous arrêter immédiatement, dès que c'est sans danger. Ce que dit chaque marque."
+description: "Voyant moteur orange, fixe ou clignotant, ou rouge : la notice la plus prudente demande de vous arrêter immédiatement, dès que c'est sans danger."
 libelle_court: Voyant moteur
 question_decision: Puis-je continuer à rouler avec le voyant moteur allumé ?
 situations:

@@ -5,7 +5,7 @@
 id: voyant-fap
 title: "Voyant FAP (filtre à particules) allumé : peut-on rouler ?"
 h1: "Voyant du filtre à particules (FAP) : que faire quand il s'allume ?"
-description: "Voyant FAP allumé : vous pouvez rouler, mais régénérez le filtre sans attendre, à allure soutenue. Ce que dit chaque notice, causes, contrôle technique et coût probable."
+description: "Voyant FAP allumé : vous pouvez rouler, mais régénérez le filtre sans attendre, à allure soutenue. Ce que dit chaque notice, causes et contrôle technique."
 libelle_court: Voyant FAP
 question_decision: Puis-je continuer à rouler avec le voyant du filtre à particules allumé ?
 situations:

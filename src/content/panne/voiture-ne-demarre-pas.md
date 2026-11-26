@@ -6,7 +6,7 @@
 id: voiture-ne-demarre-pas
 title: "Voiture ne démarre pas : que faire, cas par cas"
 h1: "Ma voiture ne démarre pas : que vérifier, et quand faire appel à un garage ?"
-description: "Votre voiture ne démarre pas ? Regardez d'abord les voyants et le démarreur : batterie à plat, carburant, clé non reconnue. Ce que disent les notices, et quand appeler un garage."
+description: "Voiture qui ne démarre pas ? Regardez d'abord les voyants et le démarreur : batterie à plat, carburant, clé non reconnue. Ce que disent les notices."
 libelle_court: Voiture qui ne démarre pas
 question_decision: "Ma voiture ne démarre pas : que faire, et puis-je repartir ensuite ?"
 situations:

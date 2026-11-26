@@ -376,7 +376,7 @@ export function pageOutilFormat2(
   const colonne = [
     encadre,
     signaturePage({ modification: page.date_modification, revue: page.date_revue }),
-    ligneTransparence(adresseMethode(site.plan)),
+    ligneTransparence(adresseMethode(site.plan), site.plan.get(page.id)?.adresse),
     provenanceHtml({ phrases, baseDeCalcul: page.cout_probable.base_de_calcul, ancres: lignesSaisiesAvecEcart(lignes) }),
     illustrationDeLaPage(page, site),
     avecSommaire ? sommaireHtml(entrees, 'sommaire-colonne') : '',

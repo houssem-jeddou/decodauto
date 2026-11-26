@@ -13,7 +13,7 @@ Menu du site (demande de changement n° 40, acceptée par Houssem le 21/11/2026)
 - **Mots-clés rattachés :** 1167 sur 1167, soit 1009 comptés et 158 variantes, chacun sur une seule page.
 - **Volume indicatif rattaché :** 1 140 760 recherches par mois.
 - **Vagues :** A = 22 pages, B = 11, C = 9, comme dans 02 et 03.
-- **Liens :** 63 paires de pages liées, chacune déclarée une seule fois dans le plan. Le lien retour est calculé.
+- **Liens :** 66 paires de pages liées, chacune déclarée une seule fois dans le plan. Le lien retour est calculé.
 - **Parent :** la page mère, reprise dans l'adresse et dans le fil d'Ariane. Elle affiche aussi la liste de ses pages enfants, par un lien calculé.
 - **Accueil :** il liste toutes les pages publiées, par thème, et cette liste est générée depuis le plan. Aucune page n'est donc orpheline.
 
@@ -34,8 +34,8 @@ Menu du site (demande de changement n° 40, acceptée par Houssem le 21/11/2026)
 | voyant-pression-pneus | `/voyants/pression-pneus/` | voyant | A | voyant pression pneu | 18 (17) | 11 060 | voyants | pression-des-pneus, usure-des-pneus |
 | voyant-direction | `/voyants/direction/` | voyant | A | voyant volant orange | 3 (3) | 3 792 | voyants | batterie-changer, batterie-recharger, contre-visite-controle-technique, voyant-batterie |
 | code-p0420 | `/codes-defaut/p0420/` | code-defaut | A | p0420 | 17 (16) | 10 744 | – | moteur-puretech, nettoyer-fap, voyant-fap, voyant-moteur |
-| code-p0087 | `/codes-defaut/p0087/` | code-defaut | A | p0087 | 21 (19) | 17 380 | – | perte-de-puissance, voyant-moteur |
-| code-p0299 | `/codes-defaut/p0299/` | code-defaut | A | p0299 | 22 (21) | 15 168 | – | perte-de-puissance, voyant-moteur |
+| code-p0087 | `/codes-defaut/p0087/` | code-defaut | A | p0087 | 21 (19) | 17 380 | – | code-p0299, perte-de-puissance, voiture-ne-demarre-pas, voyant-moteur |
+| code-p0299 | `/codes-defaut/p0299/` | code-defaut | A | p0299 | 22 (21) | 15 168 | – | code-p0087, perte-de-puissance, voyant-moteur |
 | code-p0380 | `/codes-defaut/p0380/` | code-defaut | A | p0380 | 17 (17) | 13 904 | – | voyant-moteur, voyant-prechauffage |
 | code-p1351 | `/codes-defaut/p1351/` | code-defaut | A | p1351 | 17 (16) | 19 276 | – | voyant-moteur, voyant-prechauffage |
 
@@ -43,10 +43,10 @@ Menu du site (demande de changement n° 40, acceptée par Houssem le 21/11/2026)
 
 | Page | Adresse | Type | Vague | Requête principale | Mots-clés (comptés) | Volume / mois | Parent | Liens (aller et retour) |
 |---|---|---|---|---|---|---|---|---|
-| voiture-ne-demarre-pas | `/voiture-ne-demarre-pas/` | panne | B | voiture ne demarre pas | 55 (42) | 38 868 | – | batterie-changer, batterie-recharger, batterie-voiture, voyant-adblue, voyant-batterie, voyant-prechauffage |
+| voiture-ne-demarre-pas | `/voiture-ne-demarre-pas/` | panne | B | voiture ne demarre pas | 55 (42) | 38 868 | – | batterie-changer, batterie-recharger, batterie-voiture, code-p0087, voyant-adblue, voyant-batterie, voyant-prechauffage |
 | voiture-qui-broute | `/voiture-qui-broute/` | panne | B | voiture qui broute | 11 (11) | 9 164 | – | perte-de-puissance, voyant-moteur |
-| perte-de-puissance | `/perte-de-puissance-voiture/` | panne | B | perte de puissance voiture | 14 (14) | 7 268 | – | code-p0087, code-p0299, fumee-echappement, voiture-qui-broute, voyant-fap, voyant-moteur, voyant-prechauffage |
-| surchauffe-moteur | `/moteur-qui-surchauffe/` | panne | B | moteur qui surchauffe | 25 (21) | 18 012 | – | fumee-echappement, liquide-de-refroidissement, voyants |
+| perte-de-puissance | `/perte-de-puissance-voiture/` | panne | B | perte de puissance voiture | 14 (14) | 7 268 | – | code-p0087, code-p0299, fumee-echappement, surchauffe-moteur, voiture-qui-broute, voyant-fap, voyant-moteur, voyant-prechauffage |
+| surchauffe-moteur | `/moteur-qui-surchauffe/` | panne | B | moteur qui surchauffe | 25 (21) | 18 012 | – | fumee-echappement, liquide-de-refroidissement, perte-de-puissance, voyants |
 | bruit-moteur | `/bruit-moteur/` | panne | B | bruit moteur | 24 (24) | 13 272 | – | moteur-puretech, niveau-huile |
 | fumee-echappement | `/fumee-echappement/` | panne | B | fumée blanche voiture | 28 (26) | 13 904 | – | perte-de-puissance, surchauffe-moteur, voyant-fap |
 | batterie-voiture | `/batterie-voiture/` | panne | B | voltage batterie voiture | 12 (12) | 15 168 | – | voiture-ne-demarre-pas, voyant-batterie |

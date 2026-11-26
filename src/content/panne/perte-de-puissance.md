@@ -15,7 +15,7 @@
 id: perte-de-puissance
 title: "Perte de puissance voiture : que faire, et peut-on rouler ?"
 h1: "Ma voiture perd de la puissance : que vérifier, et quand s'arrêter ?"
-description: "Perte de puissance d'une voiture essence ou diesel, avec ou sans voyant, à-coups : quand s'arrêter, quand aller au garage, et les causes citées par les notices des constructeurs."
+description: "Perte de puissance, essence ou diesel, avec ou sans voyant, à-coups : quand s'arrêter, quand aller au garage, et les causes citées par les notices."
 libelle_court: Perte de puissance
 question_decision: "Ma voiture perd de la puissance : puis-je continuer à rouler ?"
 situations:

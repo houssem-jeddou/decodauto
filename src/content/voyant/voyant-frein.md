@@ -4,7 +4,7 @@
 id: voyant-frein
 title: "Voyant frein : liquide, plaquettes, frein à main, peut-on rouler ?"
 h1: "Voyant frein : liquide de frein bas, plaquettes usées ou frein à main serré ?"
-description: "Voyant de freinage rouge (liquide de frein), frein à main desserré : arrêtez-vous. Témoin d'usure des plaquettes : garage sans attendre. Frein à main serré : desserrez-le."
+description: "Voyant de freinage rouge, frein à main desserré : arrêtez-vous. Témoin d'usure des plaquettes : garage sans attendre. Frein à main serré : desserrez-le."
 libelle_court: Voyant de frein
 question_decision: Puis-je continuer à rouler avec le voyant de frein allumé ?
 situations:

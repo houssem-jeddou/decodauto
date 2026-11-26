@@ -5,7 +5,7 @@
 id: voyant-huile
 title: "Voyant huile moteur allumé : rouge ou orange, peut-on rouler ?"
 h1: "Voyant d'huile moteur rouge, orange ou clé : que faire ?"
-description: "Voyant d'huile rouge : arrêtez-vous immédiatement, dès que c'est sans danger, et coupez le moteur, même si le niveau est correct. Orange : vérifiez le niveau sans attendre."
+description: "Voyant d'huile rouge : arrêt immédiat dès que c'est sans danger, moteur coupé, même si le niveau est correct. Orange : vérifiez le niveau sans attendre."
 libelle_court: Voyant huile moteur
 question_decision: Puis-je continuer à rouler avec le voyant d'huile allumé ?
 situations:

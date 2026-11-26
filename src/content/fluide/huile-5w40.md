@@ -17,7 +17,7 @@
 id: huile-5w40
 title: "Huile 5W40 : que veut dire ce grade, et pour quel moteur ?"
 h1: "Huile 5W40 : que veut dire 5W40, et puis-je en mettre dans ma voiture ?"
-description: "Une 5W40 ne convient que si la notice de votre voiture la cite, et aucune des notices lues ne la cite. Ce que veulent dire 5W et 40, la classe C3 et l'étiquette du bidon."
+description: "Une 5W40 ne convient que si la notice de votre voiture la cite ; aucune des notices lues ne la cite. Sens de 5W et 40, classe C3, ce que dit le bidon."
 libelle_court: Huile 5W40
 question_decision: "Puis-je mettre de l'huile 5W40 dans ma voiture ?"
 reponse_directe: "Seulement si la notice ou le plan d'entretien de votre voiture la cite. Aucune notice lue ne la cite : la Toyota Yaris non hybride ne cite que les 0W-16, 0W-20 et 5W-30. Le bidon doit aussi porter la norme demandée."

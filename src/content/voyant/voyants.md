@@ -7,7 +7,7 @@
 id: voyants
 title: "Voyant orange voiture : signification et liste des voyants"
 h1: "Voyants du tableau de bord : lequel est allumé, et pouvez-vous rouler ?"
-description: "Un voyant orange peut imposer l'arrêt : trouvez le vôtre par couleur et lisez si vous pouvez rouler, quand agir et que faire, d'après les notices des constructeurs."
+description: "Un voyant orange peut imposer l'arrêt : trouvez le vôtre par couleur et lisez si vous pouvez rouler, quand agir et que faire, d'après les notices."
 libelle_court: Identifier un voyant
 question_decision: "Quel voyant s'est allumé, et pouvez-vous continuer à rouler ?"
 situations:

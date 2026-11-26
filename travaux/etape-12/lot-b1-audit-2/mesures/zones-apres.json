@@ -1,0 +1,362 @@
+[
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "police": "chargée",
+  "cls": 0.0287,
+  "hautH1": 128,
+  "basPremiereSituation": 520,
+  "hautIllustration": 1264,
+  "basTransparence": 1070,
+  "hauteurPage": 7875,
+  "largeurPage": 375,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 7596
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "police": "secours",
+  "cls": 0,
+  "hautH1": 128,
+  "basPremiereSituation": 545,
+  "hautIllustration": 1288,
+  "basTransparence": 1095,
+  "hauteurPage": 7925,
+  "largeurPage": 375,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 7646
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "police": "chargée",
+  "cls": 0.0184,
+  "hautH1": 107,
+  "basPremiereSituation": 338,
+  "hautIllustration": 763,
+  "basTransparence": 645,
+  "hauteurPage": 5255,
+  "largeurPage": 1366,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 5111
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "police": "secours",
+  "cls": 0,
+  "hautH1": 107,
+  "basPremiereSituation": 375,
+  "hautIllustration": 800,
+  "basTransparence": 681,
+  "hauteurPage": 5292,
+  "largeurPage": 1366,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 5148
+ },
+ {
+  "chemin": "/perte-de-puissance-voiture/",
+  "w": 375,
+  "police": "chargée",
+  "cls": 0.0287,
+  "hautH1": 128,
+  "basPremiereSituation": 558,
+  "hautIllustration": 3435,
+  "basTransparence": 2918,
+  "hauteurPage": 10757,
+  "largeurPage": 375,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 10478
+ },
+ {
+  "chemin": "/perte-de-puissance-voiture/",
+  "w": 375,
+  "police": "secours",
+  "cls": 0,
+  "hautH1": 128,
+  "basPremiereSituation": 583,
+  "hautIllustration": 3460,
+  "basTransparence": 2943,
+  "hauteurPage": 10807,
+  "largeurPage": 375,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 10528
+ },
+ {
+  "chemin": "/perte-de-puissance-voiture/",
+  "w": 1366,
+  "police": "chargée",
+  "cls": 0.0184,
+  "hautH1": 107,
+  "basPremiereSituation": 338,
+  "hautIllustration": 1904,
+  "basTransparence": 1651,
+  "hauteurPage": 6813,
+  "largeurPage": 1366,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 6669
+ },
+ {
+  "chemin": "/perte-de-puissance-voiture/",
+  "w": 1366,
+  "police": "secours",
+  "cls": 0,
+  "hautH1": 107,
+  "basPremiereSituation": 375,
+  "hautIllustration": 1941,
+  "basTransparence": 1688,
+  "hauteurPage": 6850,
+  "largeurPage": 1366,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 6705
+ },
+ {
+  "chemin": "/moteur-qui-surchauffe/",
+  "w": 375,
+  "police": "chargée",
+  "cls": 0,
+  "hautH1": 128,
+  "basPremiereSituation": 641,
+  "hautIllustration": 2513,
+  "basTransparence": 2087,
+  "hauteurPage": 10711,
+  "largeurPage": 375,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 10432
+ },
+ {
+  "chemin": "/moteur-qui-surchauffe/",
+  "w": 375,
+  "police": "secours",
+  "cls": 0,
+  "hautH1": 128,
+  "basPremiereSituation": 641,
+  "hautIllustration": 2513,
+  "basTransparence": 2087,
+  "hauteurPage": 10737,
+  "largeurPage": 375,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 10457
+ },
+ {
+  "chemin": "/moteur-qui-surchauffe/",
+  "w": 1366,
+  "police": "chargée",
+  "cls": 0,
+  "hautH1": 107,
+  "basPremiereSituation": 380,
+  "hautIllustration": 1539,
+  "basTransparence": 1283,
+  "hauteurPage": 6969,
+  "largeurPage": 1366,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 6825
+ },
+ {
+  "chemin": "/moteur-qui-surchauffe/",
+  "w": 1366,
+  "police": "secours",
+  "cls": 0,
+  "hautH1": 107,
+  "basPremiereSituation": 380,
+  "hautIllustration": 1539,
+  "basTransparence": 1283,
+  "hauteurPage": 6969,
+  "largeurPage": 1366,
+  "ciblesFil": [
+   "Accueil 55×49"
+  ],
+  "ciblesPied": [
+   "À propos 74×44",
+   "Méthode 73×44",
+   "Alertes et codes 123×44",
+   "Pannes et symptôme 162×44",
+   "Niveaux et fluides 134×44",
+   "Pneus et obligatio 150×44",
+   "Signaler une erreu 127×47",
+   "Mentions légales e 226×47"
+  ],
+  "ciblesTransparence": [
+   "Méthode 55×16",
+   "Signaler une erreu 118×16"
+  ],
+  "hautPied": 6825
+ }
+]

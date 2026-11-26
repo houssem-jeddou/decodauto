@@ -4,7 +4,7 @@
 id: voyant-direction
 title: "Voyant volant orange ou rouge : peut-on rouler, que faire ?"
 h1: "Voyant de direction assistée (volant) : que faire quand il s'allume ?"
-description: "Voyant volant orange : roulez prudemment et faites vérifier la direction sans attendre. Rouge, ou avec le témoin STOP : arrêtez-vous, la direction n'est plus assistée."
+description: "Voyant volant orange : roulez prudemment et faites vérifier la direction sans attendre. Rouge, ou avec le témoin STOP : arrêtez-vous."
 libelle_court: Voyant de direction assistée
 question_decision: Puis-je continuer à rouler avec le voyant de direction assistée allumé ?
 situations:

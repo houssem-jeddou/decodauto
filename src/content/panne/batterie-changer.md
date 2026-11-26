@@ -15,7 +15,7 @@
 id: batterie-changer
 title: "Comment changer une batterie de voiture : ce que disent les notices"
 h1: "Changer la batterie de sa voiture : soi-même ou au garage ?"
-description: "Changer une batterie de voiture soi-même ? Plusieurs notices le réservent à un professionnel. Batterie équivalente, ordre des bornes, réglages à refaire : ce que dit la notice de chaque marque."
+description: "Changer sa batterie soi-même ? Plusieurs notices le réservent à un professionnel. Batterie équivalente, ordre des bornes, réglages à refaire, par marque."
 libelle_court: Changer la batterie
 question_decision: "Puis-je changer moi-même la batterie de ma voiture ?"
 situations:

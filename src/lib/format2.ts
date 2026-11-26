@@ -854,7 +854,7 @@ export function pageFormat2(
   const colonne = [
     encadreFormat2({ question: page.question_decision, reponseDirecte: page.reponse_directe, lignes: lignesF2, coutHtml }),
     signaturePage({ modification: page.date_modification, revue: page.date_revue }),
-    ligneTransparence(adresseMethode(site.plan)),
+    ligneTransparence(adresseMethode(site.plan), site.plan.get(page.id)?.adresse),
     provenanceHtml({ phrases, baseDeCalcul: coutHtml !== '' ? page.cout_probable.base_de_calcul : undefined, lienNotices: tableau !== '' ? IDENTIFIANTS.notices : undefined, ancres: lignesSaisiesAvecEcart(lignes) }),
     illustrationDeLaPage(page, site),
     avecSommaire ? sommaireHtml(entrees, 'sommaire-colonne') : '',

@@ -104,7 +104,7 @@ export function hautDePage(page: PageEditoriale, site: DonneesSite): string {
     `<h1>${texteHtml(page.h1)}</h1>`,
     encadreDecision({ ...modele, renvoi }),
     signaturePage({ modification: page.date_modification, revue: page.date_revue }),
-    ligneTransparence(adresseMethode(site.plan)),
+    ligneTransparence(adresseMethode(site.plan), site.plan.get(page.id)?.adresse),
   ].join('');
 }
 

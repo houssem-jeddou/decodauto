@@ -5,7 +5,7 @@
 id: code-p0420
 title: "Code P0420 : rendement du catalyseur trop bas, peut-on rouler ?"
 h1: "Code défaut P0420 : rendement du catalyseur inférieur au seuil (ligne 1)"
-description: "Code P0420 : rendement du catalyseur sous le seuil. Avec le voyant moteur allumé, arrêtez-vous d'abord. Causes, cas décrits par marque et contrôle technique."
+description: "Code P0420 : rendement du catalyseur sous le seuil. Avec le voyant moteur allumé, arrêtez-vous d'abord. Causes, cas par marque, contrôle technique."
 libelle_court: Code P0420
 question_decision: Puis-je continuer à rouler avec le code P0420 ?
 situations:

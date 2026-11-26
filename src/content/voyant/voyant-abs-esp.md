@@ -4,7 +4,7 @@
 id: voyant-abs-esp
 title: "Voyant ABS ou ESP allumé : peut-on rouler, que faire ?"
 h1: "Voyants ABS et ESP : que faire quand ils s'allument ?"
-description: "Voyant ABS seul : roulez prudemment et faites vérifier sans attendre ; avec le voyant de freinage rouge, arrêtez-vous. Voyant ESP fixe ou qui clignote : ce que disent les notices."
+description: "Voyant ABS seul : roulez prudemment et faites vérifier sans attendre ; avec le voyant de freinage rouge, arrêtez-vous. Voyant ESP fixe ou qui clignote."
 libelle_court: Voyants ABS et ESP
 question_decision: Puis-je continuer à rouler avec le voyant ABS ou ESP allumé ?
 situations:

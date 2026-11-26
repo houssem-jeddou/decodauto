@@ -4,7 +4,7 @@
 id: voyant-prechauffage
 title: "Voyant préchauffage allumé ou qui clignote : peut-on rouler ?"
 h1: "Voyant de préchauffage (diesel) : normal au démarrage, défaut s'il clignote"
-description: "Voyant de préchauffage allumé à la mise du contact d'un diesel : c'est normal, attendez qu'il s'éteigne. S'il clignote, faites contrôler le moteur sans attendre."
+description: "Voyant de préchauffage à la mise du contact d'un diesel : normal, attendez qu'il s'éteigne. S'il clignote, faites contrôler le moteur sans attendre."
 libelle_court: Voyant de préchauffage
 question_decision: Puis-je continuer à rouler avec le voyant de préchauffage allumé ou qui clignote ?
 situations:

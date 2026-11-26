@@ -4,7 +4,7 @@
 id: voyant-airbag
 title: "Voyant airbag allumé : peut-on rouler, que faire ?"
 h1: "Voyant airbag allumé ou « airbag OFF » : que faire ?"
-description: "Voyant airbag allumé : vous pouvez rouler, mais faites contrôler les airbags sans attendre et ne mettez pas de siège enfant à l'avant. Témoin OFF, contrôle technique, notices."
+description: "Voyant airbag allumé : vous pouvez rouler, mais faites contrôler les airbags sans attendre et ne mettez pas de siège enfant à l'avant. Témoin OFF, notices."
 libelle_court: Voyant airbag
 question_decision: Puis-je continuer à rouler avec le voyant airbag allumé ?
 situations:
