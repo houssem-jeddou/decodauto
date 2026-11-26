@@ -105,7 +105,7 @@ Précisions validées avec la porte F1 (16/11/2026, 18 h 55) : structure d'une p
 ### 3.4 Titres et description
 - Le title ou le H1 contient la requête principale du plan (contrôle R7-REQUETE-ABSENTE) ; le H1 est la question ou le sujet du lecteur, pas un slogan.
 - Title, H1 et description ne sont jamais repris d'une autre page, et le title d'une page n'est pas le H1 d'une autre ; title et description sont toujours présents (contrôlés depuis 6.5 : TITLE-, H1-, DESCRIPTION-, TITLE-H1-DOUBLON, TITLE-ABSENT, DESCRIPTION-ABSENTE).
-- La description dit la réponse en une phrase ; elle ne promet rien que la page ne donne pas.
+- La description dit la réponse en une phrase ; elle ne promet rien que la page ne donne pas. Elle reflète l'encadré de décision : jamais un verdict, une urgence ou un coût qui n'y soit pas, ni plus permissif ni plus strict. 155 caractères au plus, au-delà elle est coupée dans les résultats (alerte DESCRIPTION-LONGUE ; audit n° 2, P6, lot B1, décision du 26/11/2026 sur délégation).
 
 ### 3.5 Longueur
 - La réponse tient dans l'encadré de décision. Le texte qui suit sert à vérifier, comprendre et agir : il s'arrête quand il n'aide plus.
@@ -212,7 +212,7 @@ plusieurs cas n'en a pas. Le texte nomme la marque et le modèle ; ni « Verdict
 | Ligne de transparence | Pages éditoriales, sous la signature | Texte rédigé par une IA. Verdicts tirés des notices des constructeurs ou de sources officielles, citées sur cette page ; verdicts et décision en haut de page vérifiés par Houssem Jeddou. [Méthode] |
 <!-- vue-charte:transparence:fin -->
 
-Depuis la demande de changement n° 46 (acceptée le 26/11/2026, lot B1 de l'audit n° 2), la ligne de transparence se termine par « Méthode · Signaler une erreur » : le même lien de signalement que le pied de page, pré-rempli avec l'adresse de la page, pour qu'un lecteur qui doute de la décision trouve où le dire sans descendre en bas de page ; le texte de la ligne ne change pas (contrôle SIGNALER-ERREUR-TRANSPARENCE).
+Depuis la demande de changement n° 46 (acceptée le 26/11/2026 par Claude (chat de pilotage) sur la délégation de Houssem du 25/11 à 23 h 58, lot B1 de l'audit n° 2), la ligne de transparence se termine par « Méthode · Signaler une erreur » : le même lien de signalement que le pied de page, pré-rempli avec l'adresse de la page, pour qu'un lecteur qui doute de la décision trouve où le dire sans descendre en bas de page ; le texte de la ligne ne change pas (contrôle SIGNALER-ERREUR-TRANSPARENCE).
 
 Le lien « Méthode » mène à l'ancre `#methode` de la page « à propos ». Ces liens (« Méthode », « Signaler une erreur ») sont posés par le gabarit, pas écrits dans le texte des pages : R7-LIEN-HORS-PLAN ne les concerne pas ; `npm run liens` vérifie que l'ancre existe (LIEN-ANCRE).
 

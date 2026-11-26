@@ -14,7 +14,7 @@
 id: nettoyer-fap
 title: "Nettoyer FAP : régénérer le filtre à particules en roulant"
 h1: "Nettoyer le filtre à particules (FAP) : que faire soi-même ?"
-description: "Nettoyer un FAP soi-même ? Les notices ne décrivent qu'une méthode, la régénération en roulant : vitesse, durée, additif, et si le voyant persiste."
+description: "Nettoyer un FAP soi-même ? Les notices ne décrivent qu'une méthode, la régénération en roulant : vitesse, durée, additif, que faire si le voyant reste."
 libelle_court: Nettoyer le FAP
 question_decision: "Puis-je nettoyer moi-même le filtre à particules, et comment ?"
 situations:

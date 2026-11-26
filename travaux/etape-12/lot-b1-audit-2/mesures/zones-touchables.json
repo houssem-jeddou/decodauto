@@ -1,0 +1,554 @@
+[
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Accueil",
+  "zone": "fil",
+  "boite": "55×47",
+  "touchable": 49
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Méthode",
+  "zone": "transparence",
+  "boite": "55×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Signaler une erreur",
+  "zone": "transparence",
+  "boite": "118×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "À propos",
+  "zone": "pied",
+  "boite": "74×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Méthode",
+  "zone": "pied",
+  "boite": "73×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Alertes et codes",
+  "zone": "pied",
+  "boite": "123×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Pannes et symptômes",
+  "zone": "pied",
+  "boite": "162×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Niveaux et fluides",
+  "zone": "pied",
+  "boite": "134×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Pneus et obligations",
+  "zone": "pied",
+  "boite": "150×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Signaler une erreur",
+  "zone": "pied",
+  "boite": "127×47",
+  "touchable": 47
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 320,
+  "lien": "Mentions légales et confidenti",
+  "zone": "pied",
+  "boite": "226×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Accueil",
+  "zone": "fil",
+  "boite": "55×47",
+  "touchable": 49
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Méthode",
+  "zone": "transparence",
+  "boite": "55×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Signaler une erreur",
+  "zone": "transparence",
+  "boite": "118×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "À propos",
+  "zone": "pied",
+  "boite": "74×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Méthode",
+  "zone": "pied",
+  "boite": "73×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Alertes et codes",
+  "zone": "pied",
+  "boite": "123×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Pannes et symptômes",
+  "zone": "pied",
+  "boite": "162×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Niveaux et fluides",
+  "zone": "pied",
+  "boite": "134×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Pneus et obligations",
+  "zone": "pied",
+  "boite": "150×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Signaler une erreur",
+  "zone": "pied",
+  "boite": "127×47",
+  "touchable": 47
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 375,
+  "lien": "Mentions légales et confidenti",
+  "zone": "pied",
+  "boite": "226×47",
+  "touchable": 49
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Accueil",
+  "zone": "fil",
+  "boite": "55×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Méthode",
+  "zone": "transparence",
+  "boite": "55×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Signaler une erreur",
+  "zone": "transparence",
+  "boite": "118×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "À propos",
+  "zone": "pied",
+  "boite": "74×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Méthode",
+  "zone": "pied",
+  "boite": "73×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Alertes et codes",
+  "zone": "pied",
+  "boite": "123×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Pannes et symptômes",
+  "zone": "pied",
+  "boite": "162×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Niveaux et fluides",
+  "zone": "pied",
+  "boite": "134×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Pneus et obligations",
+  "zone": "pied",
+  "boite": "150×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Signaler une erreur",
+  "zone": "pied",
+  "boite": "127×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/codes-defaut/p0087/",
+  "w": 1366,
+  "lien": "Mentions légales et confidenti",
+  "zone": "pied",
+  "boite": "226×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Accueil",
+  "zone": "fil",
+  "boite": "55×47",
+  "touchable": 49
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Identifier un voyant",
+  "zone": "fil",
+  "boite": "128×47",
+  "touchable": 49
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Méthode",
+  "zone": "transparence",
+  "boite": "55×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Signaler une erreur",
+  "zone": "transparence",
+  "boite": "118×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "À propos",
+  "zone": "pied",
+  "boite": "74×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Méthode",
+  "zone": "pied",
+  "boite": "73×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Alertes et codes",
+  "zone": "pied",
+  "boite": "123×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Pannes et symptômes",
+  "zone": "pied",
+  "boite": "162×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Niveaux et fluides",
+  "zone": "pied",
+  "boite": "134×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Pneus et obligations",
+  "zone": "pied",
+  "boite": "150×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Signaler une erreur",
+  "zone": "pied",
+  "boite": "127×47",
+  "touchable": 47
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 320,
+  "lien": "Mentions légales et confidenti",
+  "zone": "pied",
+  "boite": "226×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Accueil",
+  "zone": "fil",
+  "boite": "55×47",
+  "touchable": 49
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Identifier un voyant",
+  "zone": "fil",
+  "boite": "128×47",
+  "touchable": 49
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Méthode",
+  "zone": "transparence",
+  "boite": "55×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Signaler une erreur",
+  "zone": "transparence",
+  "boite": "118×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "À propos",
+  "zone": "pied",
+  "boite": "74×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Méthode",
+  "zone": "pied",
+  "boite": "73×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Alertes et codes",
+  "zone": "pied",
+  "boite": "123×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Pannes et symptômes",
+  "zone": "pied",
+  "boite": "162×44",
+  "touchable": 44
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Niveaux et fluides",
+  "zone": "pied",
+  "boite": "134×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Pneus et obligations",
+  "zone": "pied",
+  "boite": "150×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Signaler une erreur",
+  "zone": "pied",
+  "boite": "127×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 375,
+  "lien": "Mentions légales et confidenti",
+  "zone": "pied",
+  "boite": "226×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Accueil",
+  "zone": "fil",
+  "boite": "55×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Identifier un voyant",
+  "zone": "fil",
+  "boite": "128×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Méthode",
+  "zone": "transparence",
+  "boite": "55×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Signaler une erreur",
+  "zone": "transparence",
+  "boite": "118×16",
+  "touchable": 17
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "À propos",
+  "zone": "pied",
+  "boite": "74×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Méthode",
+  "zone": "pied",
+  "boite": "73×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Alertes et codes",
+  "zone": "pied",
+  "boite": "123×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Pannes et symptômes",
+  "zone": "pied",
+  "boite": "162×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Niveaux et fluides",
+  "zone": "pied",
+  "boite": "134×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Pneus et obligations",
+  "zone": "pied",
+  "boite": "150×44",
+  "touchable": 45
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Signaler une erreur",
+  "zone": "pied",
+  "boite": "127×47",
+  "touchable": 48
+ },
+ {
+  "chemin": "/voyants/moteur/",
+  "w": 1366,
+  "lien": "Mentions légales et confidenti",
+  "zone": "pied",
+  "boite": "226×47",
+  "touchable": 48
+ }
+]

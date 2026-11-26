@@ -16,7 +16,7 @@
 
 **Version 8, 21/11/2026.** Pilote des images en fichiers : sur la page outil et les pages voyant huile, ABS et ESP, pression des pneus, l'illustration et les tuiles des voyants sont des images de fichiers servis, au même rendu (demande de changement n° 43, lot U3 de l'audit UX/UI, proposition P8 ; rangées « Illustration » et « Tuile d'un voyant », §4).
 
-**Version 9, 26/11/2026.** Lot B1 de l'audit n° 2 : « Signaler une erreur » au bout de la ligne de transparence (demande de changement n° 46) ; cibles de 44 px des liens du fil d'Ariane (marges négatives, mise en page inchangée) et du pied de page (variante d'espacement, sans nouvelle demande de changement au-delà de la n° 40 : décision du 26/11/2026 ; rangées « Tête de page » et « Pied de page », §4).
+**Version 9, 26/11/2026.** Lot B1 de l'audit n° 2 : « Signaler une erreur » au bout de la ligne de transparence (demande de changement n° 46, acceptée le 26/11/2026 par Claude (chat de pilotage) sur la délégation de Houssem du 25/11 à 23 h 58) ; cibles de 44 px des liens du fil d'Ariane (marges négatives, mise en page inchangée) et du pied de page (variante d'espacement, sans nouvelle demande de changement au-delà de la n° 40 : décision du 26/11/2026 de Claude, chat de pilotage, sur la délégation de Houssem du 25/11 à 23 h 58 ; rangées « Tête de page » et « Pied de page », §4).
 
 **Ce qui fait foi** : les styles du dépôt (`src/styles/charte-b.css`, variables et composants), mis en œuvre au lot F1
 (porte du 16/11/2026). Une variante de composant passe par la charte : ce document et les styles. Jamais de style isolé

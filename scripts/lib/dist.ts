@@ -243,7 +243,10 @@ export function constatsMentionEtSignalement(html: string, fichier: string, adre
     const attendu = lienSignalement(adressePage);
     if (ici.length !== 1 || normaliserTexte(ici.text()) !== normaliserTexte(LIBELLE_SIGNALER_ERREUR) || ici.attr('href') !== attendu) {
       constats.push(erreur('SIGNALER-ERREUR-TRANSPARENCE', `la ligne de transparence se termine par un seul lien « ${LIBELLE_SIGNALER_ERREUR} », à l'adresse du lien du pied de page (attendu : ${attendu} ; trouvé : ${ici.length})`, fichier));
-    } else if ($('[data-ligne-transparence] [data-signaler-erreur-transparence]').next().length > 0 || $('[data-ligne-transparence]').children().last().attr('data-signaler-erreur-transparence') === undefined) {
+    } else if (
+      // Dernier nœud de la ligne, textes compris (un texte après le lien est refusé, comme un élément).
+      $('[data-ligne-transparence]').contents().toArray().filter((n) => !(n.type === 'text' && (n.data ?? '').trim() === '')).at(-1) !== $('[data-ligne-transparence] [data-signaler-erreur-transparence]').get(0)
+    ) {
       constats.push(erreur('SIGNALER-ERREUR-TRANSPARENCE', 'le lien « Signaler une erreur » termine la ligne de transparence, après « Méthode » (demande de changement n° 46)', fichier));
     }
   }

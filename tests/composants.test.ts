@@ -412,11 +412,16 @@ describe('page de démonstration (tests/demo/voyant-huile.md, vraies données)',
     // Le message de signalement porte l'adresse de la page : un lien vers une autre page est refusé.
     const avecAdresse = (html: string): string[] => constatsMentionEtSignalement(html, 'f', '/voyants/huile/').map((c) => c.regle);
     assert.deepEqual(avecAdresse(`<html><body>${mention}<h1>T</h1>${signalerErreur('/voyants/huile/')}</body></html>`), []);
-    assert.deepEqual(avecAdresse(`<html><body>${mention}<h1>T</h1>${signalerErreur('/autre/')}</body></html>`), ['SIGNALER-ERREUR-ABSENT']);    // Demande de changement n° 46 : la ligne de transparence se termine par le même lien que le pied de page.
+    assert.deepEqual(avecAdresse(`<html><body>${mention}<h1>T</h1>${signalerErreur('/autre/')}</body></html>`), ['SIGNALER-ERREUR-ABSENT']);
+    // Demande de changement n° 46 : la ligne de transparence se termine par le même lien que le pied de page.
     const pageAvec = (ligne: string): string => `<html><body>${mention}<h1>T</h1>${ligne}${signalerErreur('/voyants/huile/')}</body></html>`;
     assert.deepEqual(avecAdresse(pageAvec(ligneTransparence('/a-propos/#methode', '/voyants/huile/'))), []);
     assert.deepEqual(avecAdresse(pageAvec(ligneTransparence('/a-propos/#methode'))), ['SIGNALER-ERREUR-TRANSPARENCE']);
     assert.deepEqual(avecAdresse(pageAvec(ligneTransparence('/a-propos/#methode', '/autre/'))), ['SIGNALER-ERREUR-TRANSPARENCE']);
+    // Le lien termine la ligne : un texte ou un élément après lui est refusé.
+    const fin = ligneTransparence('/a-propos/#methode', '/voyants/huile/');
+    assert.deepEqual(avecAdresse(pageAvec(fin.replace('</span></p>', '</span> et un texte ajouté après</p>'))), ['SIGNALER-ERREUR-TRANSPARENCE']);
+    assert.deepEqual(avecAdresse(pageAvec(fin.replace('</span></p>', '</span><a href="/">autre</a></p>'))), ['SIGNALER-ERREUR-TRANSPARENCE']);
     const ligne = ligneTransparence('/a-propos/#methode', '/voyants/huile/');
     assert.match(ligne, /Méthode<\/a><span class="signaler-ici" data-signaler-erreur-transparence> · <!--email_off--><a href="mailto:[^"]+">Signaler une erreur<\/a><!--\/email_off--><\/span><\/p>$/);
   });

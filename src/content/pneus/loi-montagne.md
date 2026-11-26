@@ -6,7 +6,7 @@
 id: loi-montagne
 title: "Loi montagne : pneus hiver ou chaînes, où et quand c'est obligatoire"
 h1: "Loi montagne : pneus hiver ou chaînes obligatoires du 1er novembre au 31 mars"
-description: "Loi montagne : du 1er novembre au 31 mars, pneus hiver (alpin et M+S) ou chaînes à bord dans les communes listées par le préfet. Équipements, zones."
+description: "Loi montagne : du 1er novembre au 31 mars, pneus hiver (symbole alpin et M+S) ou chaînes à bord dans les communes listées par le préfet. Équipements admis."
 libelle_court: Loi montagne
 question_decision: Du 1er novembre au 31 mars, puis-je rouler dans une commune soumise à la loi montagne sans pneus hiver ni chaînes ?
 situations:
