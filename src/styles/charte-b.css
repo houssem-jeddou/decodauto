@@ -569,7 +569,8 @@ body:has(.tete-404)>main{flex:1 0 auto}
 /* Version imprimable (audit n° 2, maquette V4, lot B2, décision du 26/11/2026 ; variante de la charte, sans licence imprimée) :
    règles d'impression seules, l'écran ne change pas. Surfaces sombres et tuiles en clair, couleurs des voyants et des verdicts
    gardées (verdicts en noir dans leur contour de couleur), « Sources » dépliée, navigation masquée, adresse de la page en fin
-   d'impression. */
+   d'impression. Ce bloc reste en fin de feuille : couleursPartage (src/lib/partage.ts) lit la première définition des
+   variables, celle de l'écran, pour les images de partage et de l'Article. */
 @media print{
   :root{--nuit:#fff;--panneau:#fff;--cellule:#fff;--filet-nuit:#9aa4b0;--nuit-texte:#111;--nuit-doux:#333;--nuit-lien:#111;--fond-page:#fff}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
