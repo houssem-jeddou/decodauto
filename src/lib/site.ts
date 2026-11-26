@@ -106,3 +106,11 @@ export function planDuSiteBienForme(xml: string): boolean {
 export function robotsAnnoncePlanDuSite(robots: string): boolean {
   return robots.split(/\r?\n/).some((ligne) => ligne.trim() === LIGNE_SITEMAP);
 }
+
+/**
+ * Directive robots des pages qui ont une adresse canonique, en mode indexable seulement (demande de changement n° 45,
+ * acceptée le 26/11/2026) : Google peut montrer un grand aperçu de leurs images (Discover : « Enabled by the
+ * max-image-preview:large setting »). En mode non indexable, la balise noindex reste seule (double clé inchangée).
+ * Contrôles IDX-META-APERCU et PROD-APERCU-IMAGE.
+ */
+export const APERCU_IMAGE = 'max-image-preview:large';

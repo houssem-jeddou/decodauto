@@ -2,7 +2,7 @@
 // identique à celui du dépôt, en-tête X-Robots-Tag vérifié en production). Fonctions pures : la lecture du réseau
 // est injectée, ce qui permet de tester chaque cas sans toucher au site.
 import type { Constat } from '../../src/lib/controle.ts';
-import { ADRESSE_SIGNALEMENT, FICHIER_PLAN_DU_SITE, URL_SITE } from '../../src/lib/site.ts';
+import { ADRESSE_SIGNALEMENT, APERCU_IMAGE, FICHIER_PLAN_DU_SITE, URL_SITE } from '../../src/lib/site.ts';
 import { ADRESSE_ADS_TXT, NOM_BALISE_ADSENSE, contenusBaliseAdsense, ligneAdsTxt, type ConfigAdsense } from '../../src/lib/adsense.ts';
 
 export interface Reponse {
@@ -137,6 +137,9 @@ export async function verifierProduction(options: OptionsProduction): Promise<Co
     const noindex = /\bnoindex\b/i.test(accueil.robotsTag ?? '');
     if (!indexable && !noindex) constats.push(erreur('PROD-NOINDEX-ABSENT', `le site n'est pas indexable mais ${ACCUEIL} n'envoie pas « X-Robots-Tag: noindex »`));
     if (indexable && noindex) constats.push(erreur('PROD-NOINDEX-PRESENT', `le site est indexable mais ${ACCUEIL} envoie encore « X-Robots-Tag: noindex »`));
+    // Demande de changement n° 45 : en mode indexable, la page servie porte la meta robots max-image-preview:large, seule.
+    const robots = [...accueil.corps.matchAll(/<meta name="robots" content="([^"]*)"/gi)].map((m) => m[1] ?? '');
+    if (indexable && JSON.stringify(robots) !== JSON.stringify([APERCU_IMAGE])) constats.push(erreur('PROD-APERCU-IMAGE', `${ACCUEIL} doit servir la meta robots « ${APERCU_IMAGE} », seule ; trouvée(s) : ${robots.length === 0 ? 'aucune' : robots.join(', ')}`));
     // Lien de signalement servi tel quel : le masquage des adresses de Cloudflare le réécrirait et ajouterait un script.
     if (!accueil.corps.includes(`mailto:${ADRESSE_SIGNALEMENT}`) || accueil.corps.includes('/cdn-cgi/l/email-protection')) {
       constats.push(erreur('PROD-SIGNALEMENT', `${ACCUEIL} doit servir le lien « Signaler une erreur » vers mailto:${ADRESSE_SIGNALEMENT}, sans masquage d'adresse par Cloudflare (/cdn-cgi/l/email-protection)`));

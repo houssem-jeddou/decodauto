@@ -11,6 +11,7 @@ import { modeleDeLaPage, pageSocle, refusFormat1 } from '../lib/modeles.ts';
 import { voyantsDesPages } from '../lib/format2.ts';
 import { cheminDAriane, sectionMethodeHtml } from '../lib/composants.ts';
 import { scriptsAPropos, scriptsPageEditoriale, type AuteurDeclare } from '../lib/donnees-structurees.ts';
+import { imagesArticle } from '../lib/images-article.ts';
 import { PAGE_METHODE, sectionMethode } from '../lib/charte.ts';
 import { partageEditorial, partageMarque } from '../lib/partage.ts';
 import { imageDonneesStructurees } from '../lib/photos.ts';
@@ -97,8 +98,9 @@ export async function getStaticPaths() {
         format: page.format ?? 1,
         html: choix.modele(page, site, corps),
         donneesStructurees: scriptsPageEditoriale(
-          // Photo sous licence libre (demande de changement n° 42) : propriété `image` de l'Article, sur les pages du registre.
-          { titre: page.h1, description: page.description, adresse: ligne.adresse, modification: page.date_modification, auteur, adresseAPropos, image: photoDeLaPage !== undefined ? imageDonneesStructurees(photoDeLaPage) : undefined },
+          // Photo sous licence libre (demande de changement n° 42) : propriété `image` de l'Article, sur les pages du registre ;
+          // ailleurs, les trois images tirées de l'illustration (demande de changement n° 45).
+          { titre: page.h1, description: page.description, adresse: ligne.adresse, modification: page.date_modification, auteur, adresseAPropos, image: photoDeLaPage !== undefined ? imageDonneesStructurees(photoDeLaPage) : page.illustration !== undefined ? imagesArticle(page.id) : undefined },
           cheminDAriane(page.id, site.plan, site.libelles),
         ),
         // Partage (lot U3) : l'image tirée de l'illustration de la page (travaux/partage/generer-images-partage.mjs).

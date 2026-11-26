@@ -18,6 +18,8 @@
 
 **Version 9, 26/11/2026.** Lot B1 de l'audit n° 2 : « Signaler une erreur » au bout de la ligne de transparence (demande de changement n° 46) ; cibles de 44 px des liens du fil d'Ariane (marges négatives, mise en page inchangée) et du pied de page (variante d'espacement, sans nouvelle demande de changement au-delà de la n° 40 : décision du 26/11/2026 ; rangées « Tête de page » et « Pied de page », §4).
 
+**Version 10, 26/11/2026.** Lot B2 de l'audit n° 2 : version imprimable (maquette V4 ; règles `@media print` seules, l'écran ne change pas) : surfaces sombres et tuiles en clair, couleurs des voyants et des verdicts gardées, verdicts en noir dans leur contour, « Sources » dépliée, bandeau, menu, sommaire, filtre, « À lire aussi » et liens du pied masqués, adresse de la page en fin d'impression ; aucune licence imprimée (demande de changement n° 47 non tranchée). Variante de la charte, décision du 26/11/2026. Images de l'Article (demande de changement n° 45) : l'illustration seule dans le panneau de la charte, sur le fond nuit, comme l'image de partage, en 16:9, 4:3 et 1:1.
+
 **Ce qui fait foi** : les styles du dépôt (`src/styles/charte-b.css`, variables et composants), mis en œuvre au lot F1
 (porte du 16/11/2026). Une variante de composant passe par la charte : ce document et les styles. Jamais de style isolé
 dans une page.

@@ -190,10 +190,18 @@ describe('vérification de la production (redirections, noindex, robots.txt, pla
   });
 
   test('noindex cohérent avec le mode du dépôt, dans les deux sens', async () => {
-    const sansNoindex = reseauConforme({ 'https://decodauto.com/': ok('<html><a href="mailto:erreur@decodauto.com">Signaler une erreur</a></html>', { robotsTag: null }) });
+    const apercu = '<meta name="robots" content="max-image-preview:large">';
+    const sansNoindex = reseauConforme({ 'https://decodauto.com/': ok(`<html>${apercu}<a href="mailto:erreur@decodauto.com">Signaler une erreur</a></html>`, { robotsTag: null }) });
     assert.deepEqual(await regles(sansNoindex, false), ['PROD-NOINDEX-ABSENT']);
     assert.deepEqual(await regles(sansNoindex, true), []);
-    assert.deepEqual(await regles(reseauConforme(), true), ['PROD-NOINDEX-PRESENT']);
+    assert.deepEqual(await regles(reseauConforme(), true), ['PROD-APERCU-IMAGE', 'PROD-NOINDEX-PRESENT']);
+  });
+
+  test('mode indexable : l’accueil servi porte max-image-preview:large, seule (PROD-APERCU-IMAGE, demande n° 45)', async () => {
+    const avec = (tete: string): Lire => reseauConforme({ 'https://decodauto.com/': ok(`<html>${tete}<a href="mailto:erreur@decodauto.com">Signaler une erreur</a></html>`, { robotsTag: null }) });
+    assert.deepEqual(await regles(avec(''), true), ['PROD-APERCU-IMAGE']);
+    assert.deepEqual(await regles(avec('<meta name="robots" content="max-image-preview:large"><meta name="robots" content="noindex">'), true), ['PROD-APERCU-IMAGE']);
+    assert.deepEqual(await regles(avec('<meta name="robots" content="max-image-preview:large">'), true), []);
   });
 
   test('robots.txt différent du dépôt, plan du site absent : PROD-ROBOTS et PROD-SITEMAP', async () => {

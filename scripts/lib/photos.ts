@@ -11,7 +11,7 @@
 //    largeur annoncée et de hauteur 2/3, sans métadonnées (ni EXIF, ni XMP, ni profil ICC) ; /photos/ ne contient rien
 //    d'autre ;
 //  - PHOTO-DONNEES : l'Article d'une page du registre déclare `image` = l'adresse absolue de sa version de 1 200 px ; aucune
-//    autre page n'en déclare.
+//    autre page ne déclare une photo (les images tirées de l'illustration : demande n° 45, ARTICLE-IMAGE-DONNEES).
 import * as cheerio from 'cheerio';
 import { readFile, readdir } from 'node:fs/promises';
 import { join, relative } from 'node:path';
@@ -117,7 +117,8 @@ export function constatsPhotoDeLaPage(html: string, fichier: string, photo: Phot
     });
   if (photo === undefined) {
     if (figures.length > 0 || images.length > 0 || $('[data-visuel]').length > 0) e('PHOTO-RENDU', 'photo affichée sur une page absente du registre data/photos.json');
-    for (const a of articles) if ('image' in a) e('PHOTO-DONNEES', "Article : image déclarée sur une page sans photo du registre (règle 7.5a ; demande de changement n° 42)");
+    // Sans photo, l'Article peut déclarer les images tirées de l'illustration (demande n° 45, ARTICLE-IMAGE-DONNEES), jamais une photo.
+    for (const a of articles) if (JSON.stringify(a['image'] ?? '').includes(DOSSIER_PHOTOS)) e('PHOTO-DONNEES', "Article : photo déclarée sur une page sans photo du registre (règle 7.5a ; demandes de changement n° 42 et 45)");
     return constats;
   }
   if (figures.length !== 1 || images.length !== 1) {

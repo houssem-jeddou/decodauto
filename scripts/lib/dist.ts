@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import { readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import type { Constat } from '../../src/lib/controle.ts';
-import { FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_ALTERNATIF_DU_SITE, NOM_DU_SITE, URL_SITE, adresseDepuisFichier, dateDansTexte, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
+import { APERCU_IMAGE, FICHIER_PLAN_DU_SITE, LIGNE_SITEMAP, NOM_ALTERNATIF_DU_SITE, NOM_DU_SITE, URL_SITE, adresseDepuisFichier, dateDansTexte, lireLastmodDuPlanDuSite, lireUrlsDuPlanDuSite, planDuSiteBienForme, robotsAnnoncePlanDuSite, urlAbsolue } from '../../src/lib/site.ts';
 import { CLASSE_EMPLACEMENT_PUB, EMPLACEMENTS_PUB, HAUTEUR_RESERVEE_PX } from '../../src/lib/emplacements-pub.ts';
 import { CONTEXTE_SCHEMA, TYPES_ATTENDUS, TYPE_SCRIPT_JSON_LD, ancreAuteur, estDateHeureDuJour, type NatureDePage } from '../../src/lib/donnees-structurees.ts';
 import { listerFichiers } from './charger.ts';
@@ -65,6 +65,19 @@ export async function controlerIndexation(dist: string, indexable: boolean): Pro
     }
     if (indexable && noindex) {
       constats.push(erreur('IDX-META-PRESENTE', 'SITE_INDEXABLE vaut "true" mais la page a une meta robots noindex', fichier));
+    }
+    // Demande de changement n° 45 : en mode indexable, `max-image-preview:large` seul sur chaque page qui a une adresse
+    // canonique, aucune meta robots ailleurs ; en mode non indexable, `noindex` seul.
+    // (noindex absent ou en trop : IDX-META-ABSENTE et IDX-META-PRESENTE ci-dessus).
+    const robots = $('meta[name="robots"]').toArray().map((m) => ($(m).attr('content') ?? '').trim());
+    if (indexable && !noindex) {
+      const attendu = $('link[rel="canonical"]').length > 0 ? [APERCU_IMAGE] : [];
+      if (JSON.stringify(robots) !== JSON.stringify(attendu)) {
+        constats.push(erreur('IDX-META-APERCU', `mode indexable : meta robots attendue(s) : ${attendu.length === 0 ? 'aucune (page sans adresse canonique)' : attendu.join(', ')} ; trouvée(s) : ${robots.length === 0 ? 'aucune' : robots.join(', ')}`, fichier));
+      }
+    }
+    if (!indexable && robots.some((r) => r !== 'noindex')) {
+      constats.push(erreur('IDX-META-APERCU', `mode non indexable : la meta robots noindex reste seule ; trouvée(s) : ${robots.join(', ')}`, fichier));
     }
   }
 
