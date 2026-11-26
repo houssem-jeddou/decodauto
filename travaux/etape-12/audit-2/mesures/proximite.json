@@ -1,0 +1,446 @@
+{
+ "paires": [
+  {
+   "a": "/huile-moteur/10w40/",
+   "b": "/huile-moteur/5w40/",
+   "jaccard": 0.738,
+   "partA": 0.84,
+   "partB": 0.86
+  },
+  {
+   "a": "/huile-moteur/10w40/",
+   "b": "/huile-moteur/5w30/",
+   "jaccard": 0.559,
+   "partA": 0.76,
+   "partB": 0.68
+  },
+  {
+   "a": "/huile-moteur/5w30/",
+   "b": "/huile-moteur/5w40/",
+   "jaccard": 0.545,
+   "partA": 0.66,
+   "partB": 0.76
+  },
+  {
+   "a": "/perte-de-puissance-voiture/",
+   "b": "/voiture-qui-broute/",
+   "jaccard": 0.347,
+   "partA": 0.43,
+   "partB": 0.64
+  },
+  {
+   "a": "/codes-defaut/p0299/",
+   "b": "/codes-defaut/p0420/",
+   "jaccard": 0.184,
+   "partA": 0.31,
+   "partB": 0.32
+  },
+  {
+   "a": "/codes-defaut/p0087/",
+   "b": "/codes-defaut/p0420/",
+   "jaccard": 0.181,
+   "partA": 0.33,
+   "partB": 0.28
+  },
+  {
+   "a": "/nettoyer-fap/",
+   "b": "/voyants/fap/",
+   "jaccard": 0.174,
+   "partA": 0.37,
+   "partB": 0.25
+  },
+  {
+   "a": "/codes-defaut/p0087/",
+   "b": "/codes-defaut/p0299/",
+   "jaccard": 0.172,
+   "partA": 0.33,
+   "partB": 0.27
+  },
+  {
+   "a": "/batterie-voiture/",
+   "b": "/voiture-ne-demarre-pas/",
+   "jaccard": 0.121,
+   "partA": 0.24,
+   "partB": 0.19
+  },
+  {
+   "a": "/batterie-voiture/",
+   "b": "/batterie-voiture/recharger/",
+   "jaccard": 0.12,
+   "partA": 0.21,
+   "partB": 0.22
+  },
+  {
+   "a": "/voiture-qui-broute/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.115,
+   "partA": 0.2,
+   "partB": 0.21
+  },
+  {
+   "a": "/voyants/batterie/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.114,
+   "partA": 0.18,
+   "partB": 0.24
+  },
+  {
+   "a": "/voyants/fap/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.111,
+   "partA": 0.16,
+   "partB": 0.28
+  },
+  {
+   "a": "/huile-moteur/verifier-niveau/",
+   "b": "/moteur-puretech/",
+   "jaccard": 0.109,
+   "partA": 0.16,
+   "partB": 0.26
+  },
+  {
+   "a": "/voyants/batterie/",
+   "b": "/voyants/direction/",
+   "jaccard": 0.107,
+   "partA": 0.22,
+   "partB": 0.17
+  },
+  {
+   "a": "/liquide-de-frein/",
+   "b": "/liquide-de-refroidissement/",
+   "jaccard": 0.105,
+   "partA": 0.22,
+   "partB": 0.17
+  },
+  {
+   "a": "/bruit-moteur/",
+   "b": "/voiture-qui-broute/",
+   "jaccard": 0.104,
+   "partA": 0.19,
+   "partB": 0.19
+  },
+  {
+   "a": "/nettoyer-fap/",
+   "b": "/voiture-qui-broute/",
+   "jaccard": 0.103,
+   "partA": 0.17,
+   "partB": 0.2
+  },
+  {
+   "a": "/voiture-qui-broute/",
+   "b": "/voyants/moteur/",
+   "jaccard": 0.103,
+   "partA": 0.27,
+   "partB": 0.14
+  },
+  {
+   "a": "/perte-de-puissance-voiture/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.102,
+   "partA": 0.15,
+   "partB": 0.23
+  },
+  {
+   "a": "/voyants/moteur/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.102,
+   "partA": 0.14,
+   "partB": 0.27
+  },
+  {
+   "a": "/fumee-echappement/",
+   "b": "/moteur-qui-surchauffe/",
+   "jaccard": 0.101,
+   "partA": 0.24,
+   "partB": 0.15
+  },
+  {
+   "a": "/moteur-puretech/",
+   "b": "/voyants/huile/",
+   "jaccard": 0.101,
+   "partA": 0.25,
+   "partB": 0.14
+  },
+  {
+   "a": "/voyants/fap/",
+   "b": "/voyants/moteur/",
+   "jaccard": 0.101,
+   "partA": 0.19,
+   "partB": 0.18
+  },
+  {
+   "a": "/voyants/huile/",
+   "b": "/voyants/moteur/",
+   "jaccard": 0.101,
+   "partA": 0.17,
+   "partB": 0.19
+  },
+  {
+   "a": "/nettoyer-fap/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.1,
+   "partA": 0.17,
+   "partB": 0.2
+  },
+  {
+   "a": "/voyants/batterie/",
+   "b": "/voyants/huile/",
+   "jaccard": 0.1,
+   "partA": 0.24,
+   "partB": 0.15
+  },
+  {
+   "a": "/voyants/batterie/",
+   "b": "/voyants/frein/",
+   "jaccard": 0.099,
+   "partA": 0.22,
+   "partB": 0.15
+  },
+  {
+   "a": "/voyants/batterie/",
+   "b": "/voyants/moteur/",
+   "jaccard": 0.099,
+   "partA": 0.22,
+   "partB": 0.15
+  },
+  {
+   "a": "/voyants/direction/",
+   "b": "/voyants/moteur/",
+   "jaccard": 0.099,
+   "partA": 0.19,
+   "partB": 0.17
+  },
+  {
+   "a": "/voyants/adblue/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.098,
+   "partA": 0.12,
+   "partB": 0.32
+  },
+  {
+   "a": "/batterie-voiture/changer/",
+   "b": "/batterie-voiture/",
+   "jaccard": 0.096,
+   "partA": 0.22,
+   "partB": 0.15
+  },
+  {
+   "a": "/voyants/direction/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.096,
+   "partA": 0.14,
+   "partB": 0.24
+  },
+  {
+   "a": "/liquide-de-refroidissement/",
+   "b": "/moteur-qui-surchauffe/",
+   "jaccard": 0.095,
+   "partA": 0.18,
+   "partB": 0.17
+  },
+  {
+   "a": "/codes-defaut/p0087/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.094,
+   "partA": 0.16,
+   "partB": 0.19
+  },
+  {
+   "a": "/voyants/frein/",
+   "b": "/voyants/prechauffage/",
+   "jaccard": 0.094,
+   "partA": 0.13,
+   "partB": 0.25
+  },
+  {
+   "a": "/voyants/abs-esp/",
+   "b": "/voyants/direction/",
+   "jaccard": 0.093,
+   "partA": 0.14,
+   "partB": 0.21
+  },
+  {
+   "a": "/codes-defaut/p0087/",
+   "b": "/voiture-qui-broute/",
+   "jaccard": 0.092,
+   "partA": 0.16,
+   "partB": 0.18
+  },
+  {
+   "a": "/batterie-voiture/changer/",
+   "b": "/batterie-voiture/recharger/",
+   "jaccard": 0.091,
+   "partA": 0.2,
+   "partB": 0.14
+  },
+  {
+   "a": "/bruit-moteur/",
+   "b": "/perte-de-puissance-voiture/",
+   "jaccard": 0.091,
+   "partA": 0.2,
+   "partB": 0.14
+  }
+ ],
+ "parPage": {
+  "/a-propos/": {
+   "mots": 1621,
+   "partPartagee": 0.06
+  },
+  "/batterie-voiture/changer/": {
+   "mots": 1401,
+   "partPartagee": 0.31
+  },
+  "/batterie-voiture/": {
+   "mots": 2204,
+   "partPartagee": 0.42
+  },
+  "/batterie-voiture/recharger/": {
+   "mots": 1965,
+   "partPartagee": 0.33
+  },
+  "/bruit-moteur/": {
+   "mots": 1481,
+   "partPartagee": 0.31
+  },
+  "/codes-defaut/p0087/": {
+   "mots": 1502,
+   "partPartagee": 0.35
+  },
+  "/codes-defaut/p0299/": {
+   "mots": 1858,
+   "partPartagee": 0.32
+  },
+  "/codes-defaut/p0420/": {
+   "mots": 1757,
+   "partPartagee": 0.38
+  },
+  "/contre-visite-controle-technique/": {
+   "mots": 1800,
+   "partPartagee": 0.15
+  },
+  "/fumee-echappement/": {
+   "mots": 1398,
+   "partPartagee": 0.34
+  },
+  "/huile-moteur/10w40/": {
+   "mots": 1354,
+   "partPartagee": 0.88
+  },
+  "/huile-moteur/5w30/": {
+   "mots": 1569,
+   "partPartagee": 0.73
+  },
+  "/huile-moteur/5w40/": {
+   "mots": 1319,
+   "partPartagee": 0.88
+  },
+  "/huile-moteur/": {
+   "mots": 2090,
+   "partPartagee": 0.29
+  },
+  "/huile-moteur/verifier-niveau/": {
+   "mots": 3035,
+   "partPartagee": 0.3
+  },
+  "/": {
+   "mots": 257,
+   "partPartagee": 0.1
+  },
+  "/liquide-de-frein/": {
+   "mots": 1658,
+   "partPartagee": 0.34
+  },
+  "/liquide-de-refroidissement/": {
+   "mots": 2221,
+   "partPartagee": 0.32
+  },
+  "/loi-montagne/": {
+   "mots": 1667,
+   "partPartagee": 0.04
+  },
+  "/mentions-legales/": {
+   "mots": 835,
+   "partPartagee": 0
+  },
+  "/moteur-puretech/": {
+   "mots": 1698,
+   "partPartagee": 0.36
+  },
+  "/moteur-qui-surchauffe/": {
+   "mots": 2377,
+   "partPartagee": 0.41
+  },
+  "/nettoyer-fap/": {
+   "mots": 1588,
+   "partPartagee": 0.46
+  },
+  "/perte-de-puissance-voiture/": {
+   "mots": 2140,
+   "partPartagee": 0.55
+  },
+  "/pression-des-pneus/": {
+   "mots": 1575,
+   "partPartagee": 0.29
+  },
+  "/usure-des-pneus/": {
+   "mots": 1952,
+   "partPartagee": 0.21
+  },
+  "/voiture-ne-demarre-pas/": {
+   "mots": 2708,
+   "partPartagee": 0.31
+  },
+  "/voiture-qui-broute/": {
+   "mots": 1442,
+   "partPartagee": 0.68
+  },
+  "/voyants/abs-esp/": {
+   "mots": 3797,
+   "partPartagee": 0.37
+  },
+  "/voyants/adblue/": {
+   "mots": 3830,
+   "partPartagee": 0.29
+  },
+  "/voyants/airbag/": {
+   "mots": 2233,
+   "partPartagee": 0.35
+  },
+  "/voyants/batterie/": {
+   "mots": 1844,
+   "partPartagee": 0.42
+  },
+  "/voyants/direction/": {
+   "mots": 2494,
+   "partPartagee": 0.43
+  },
+  "/voyants/fap/": {
+   "mots": 2493,
+   "partPartagee": 0.37
+  },
+  "/voyants/frein/": {
+   "mots": 2677,
+   "partPartagee": 0.32
+  },
+  "/voyants/huile/": {
+   "mots": 3131,
+   "partPartagee": 0.39
+  },
+  "/voyants/": {
+   "mots": 6856,
+   "partPartagee": 0.53
+  },
+  "/voyants/moteur/": {
+   "mots": 2926,
+   "partPartagee": 0.44
+  },
+  "/voyants/prechauffage/": {
+   "mots": 1376,
+   "partPartagee": 0.51
+  },
+  "/voyants/pression-pneus/": {
+   "mots": 2691,
+   "partPartagee": 0.32
+  }
+ }
+}
